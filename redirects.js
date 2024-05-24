@@ -298,16 +298,18 @@ const redirects = [
       "/testkube-cloud/installing-agent",
       "/testkube-cloud/articles/installing-agent",
       "/testkube-pro/installing-agent",
+      "/testkube-pro/articles/installing-agent",
     ],
-    to: "/testkube-pro/articles/installing-agent",
+    to: "/articles/install/advanced-multi-cluster",
   },
   {
     from: [
       "/testkube-cloud/transition-from-oss",
       "/testkube-cloud/articles/transition-from-oss",
       "/testkube-pro/transition-from-oss",
+      "/testkube-pro/articles/transition-from-oss",
     ],
-    to: "/testkube-pro/articles/transition-from-oss",
+    to: "/articles/install/advanced-multi-cluster",
   },
   {
     from: [
@@ -409,26 +411,6 @@ const redirects = [
     to: "/articles/upgrade",
   },
   {
-    from: "/testkube-enterprise/articles/testkube-enterprise",
-    to: "/testkube-pro-on-prem/articles/testkube-pro-on-prem",
-  },
-  {
-    from: "/testkube-enterprise/articles/usage-guide",
-    to: "/testkube-pro-on-prem/articles/usage-guide",
-  },
-  {
-    from: "/testkube-enterprise/articles/migrating-from-oss-to-pro",
-    to: "/testkube-pro-on-prem/articles/migrating-from-oss-to-pro",
-  },
-  {
-    from: "/testkube-pro/articles/installing-agent",
-    to: "/articles/install/advanced-multi-cluster",
-  },
-  {
-    from: "/testkube-pro/articles/transition-from-oss",
-    to: "/articles/install/advanced-multi-cluster",
-  },
-  {
     from: [
       "/testkube-enterprise/articles/auth",
       "/testkube-pro-on-prem/articles/auth",
@@ -436,15 +418,24 @@ const redirects = [
     to: "/articles/install/auth",
   },
   {
-    from: "/testkube-pro-on-prem/articles/testkube-pro-on-prem",
+    from: [
+      "/testkube-enterprise/articles/testkube-enterprise",
+      "/testkube-pro-on-prem/articles/testkube-pro-on-prem",
+    ],
     to: "/articles/install/quickstart-install",
   },
   {
-    from: "/testkube-pro-on-prem/articles/usage-guide",
+    from: [
+      "/testkube-enterprise/articles/usage-guide",
+      "/testkube-pro-on-prem/articles/usage-guide",
+    ],
     to: "/articles/install/install-with-helm",
   },
   {
-    from: "/testkube-pro-on-prem/articles/migrating-from-oss-to-pro",
+    from: [
+      "/testkube-pro-on-prem/articles/migrating-from-oss-to-pro",
+      "/testkube-enterprise/articles/migrating-from-oss-to-pro",
+    ],
     to: "/articles/migrate-from-oss",
   },
   {
