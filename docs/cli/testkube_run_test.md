@@ -24,10 +24,12 @@ testkube run test <testName> [flags]
       --artifact-storage-class-name string         artifact storage class name for container executor
       --artifact-use-default-storage-class-name    whether to use default storage class name
       --artifact-volume-mount-path string          artifact volume mount path for container executor
+      --attach-debugger                            attach simple debugger for job, need KUBECONFIG for the agent to be active
       --command stringArray                        command passed to image in executor
       --concurrency int                            concurrency level for multiple test execution (default 10)
       --context string                             running context description for test execution
       --copy-files stringArray                     file path mappings from host to pod of form source:destination
+      --debugger-file string                       store debug info into file, stdout by default
   -d, --download-artifacts                         download artifacts automatically
       --download-dir string                        download dir (default "artifacts")
       --execute-postrun-script-before-scraping     whether to execute postrun scipt before scraping or not (prebuilt executor only)
@@ -73,18 +75,6 @@ testkube run test <testName> [flags]
       --variable-secret stringArray                secret name used to map all keys to secret variables
       --variables-file string                      variables file path, e.g. postman env file - will be passed to executor if supported
   -f, --watch                                      watch for changes after start
-```
-
-### Options inherited from parent commands
-
-```
-  -a, --api-uri string          api uri, default value read from config if set (default "http://localhost:8088")
-  -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
-      --header stringToString   headers for direct client key value pair: --header name=value (default [])
-      --insecure                insecure connection for direct client
-      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
-      --oauth-enabled           enable oauth
-      --verbose                 show additional debug messages
 ```
 
 ### SEE ALSO

@@ -9,21 +9,13 @@ testkube [flags]
 ### Options
 
 ```
-  -a, --api-uri string          api uri, default value read from config if set (default "http://localhost:8088")
-  -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
-      --header stringToString   headers for direct client key value pair: --header name=value (default [])
-  -h, --help                    help for testkube
-      --insecure                insecure connection for direct client
-      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
-      --oauth-enabled           enable oauth
-      --verbose                 show additional debug messages
+  -h, --help   help for testkube
 ```
 
 ### SEE ALSO
 
 * [testkube abort](testkube_abort.md)	 - Abort tests or test suites
 * [testkube agent](testkube_agent.md)	 - Testkube Pro Agent related commands
-* [testkube completion](testkube_completion.md)	 - Generate the autocompletion script for the specified shell
 * [testkube config](testkube_config.md)	 - Set feature configuration value
 * [testkube create](testkube_create.md)	 - Create resource
 * [testkube create-ticket](testkube_create-ticket.md)	 - Create bug ticket
