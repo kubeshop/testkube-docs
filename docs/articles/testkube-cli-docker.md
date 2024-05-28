@@ -4,7 +4,7 @@ Starting with Testkube version 1.13, the easiest way to start managing your team
 
 ## Prerequisites
 
-Before using the Testkube CLI Docker image, ensure that you have Docker installed and running on your system. You can download and install Docker from the official Docker website (<https://www.docker.com/>).
+Before using the Testkube CLI Docker image, ensure that you have Docker installed and running on your system. You can download and install Docker from the official [Docker website](https://www.docker.com/).
 
 To pull the image, run:
 
