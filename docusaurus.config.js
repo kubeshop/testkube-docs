@@ -60,21 +60,6 @@ const config = {
         },
       },
     ],
-    [
-      "redocusaurus",
-      {
-        // Plugin Options for loading OpenAPI files
-        specs: [
-          {
-            spec: "https://raw.githubusercontent.com/kubeshop/testkube/main/api/v1/testkube.yaml",
-            route: "/openapi",
-          },
-        ],
-        theme: {
-          primaryColor: "#818cf8",
-        },
-      },
-    ],
   ],
 
   themeConfig:
