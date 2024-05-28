@@ -2,7 +2,7 @@
 
 ## Running with CRDs on a Kubernetes Cluster
 
-The minimal component which must be deployed on your local Kubernetes cluster is testkube-operator with project CRDs (<https://github.com/kubeshop/testkube-operator>).
+The minimal component which must be deployed on your local Kubernetes cluster is the [Testkube Operator](https://github.com/kubeshop/testkube-operator) with project CRDs.
 
 To install CRDs into your local cluster, checkout the testkube-operator project and run:
 
@@ -12,7 +12,7 @@ make install
 
 ## Running on a Local Machine
 
-The next critical components are the Testkube API (<https://github.com/kubeshop/testkube>) and an executor. You can use your own tests' executor or an existing one from Testkube.
+The next critical components are the [Testkube API](https://github.com/kubeshop/testkube) and an executor. You can use your own tests' executor or an existing one from Testkube.
 
 Checkout the Testkube project and run a local API server:
 
@@ -20,7 +20,7 @@ Checkout the Testkube project and run a local API server:
 make run-mongo-dev run-api
 ```
 
-Next, run the Testkube Postman executor (<https://github.com/kubeshop/testkube-executor-postman>). The postman executor is MongoDB based so it will launch MongoDB with the API server step:
+Next, run the [Testkube Postman executor](https://github.com/kubeshop/testkube-executor-postman). The postman executor is MongoDB based so it will launch MongoDB with the API server step:
 
 ```sh
 make run-executor
@@ -39,7 +39,7 @@ And when calling any of `kubectl testkube` subcommands, pass the direct client f
 
 ### Installing Local Executors
 
-Install development executors by running them from the Testkube project (<https://github.com/kubeshop/testkube>):
+Install development executors by running them from the [Testkube project](https://github.com/kubeshop/testkube):
 
 ```sh
 make dev-install-local-executors

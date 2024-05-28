@@ -2,8 +2,7 @@
 
 ## Info
 
-These diagrams were made with the C4 diagram technique
-(<https://c4model.com/>). They describe the structure of Testkube Core OSS.
+These diagrams were made with the [C4 diagram technique](https://c4model.com/). They describe the structure of Testkube Core OSS.
 
 ## Diagrams
 

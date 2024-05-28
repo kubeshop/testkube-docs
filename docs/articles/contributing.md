@@ -1,7 +1,8 @@
 # Contributing to Testkube Core Open Source
 
-If you are new to the open source community, use this guide to start contributing to projects:
-<https://github.com/firstcontributions/first-contributions>.
+If you are new to the open source community, 
+use [this guide](https://github.com/firstcontributions/first-contributions) to start contributing 
+to projects.
 
 Checkout the [development document](./development.md) for more details about how to develop and run testkube on your machine.
 
