@@ -16,22 +16,22 @@ const sidebars = {
   // By default, Docusaurus generates a sidebar from the docs folder structure
   tutorialSidebar: [
     {
+      type: "doc",
+      id: "index",
+    },
+    {
       type: "category",
-      label: "Overview",
-      link: {
-        type: "doc",
-        id: "index",
-      },
+      label: "Getting Started",
       items: [
-        "articles/supported-tests",
-        "articles/testkube-benefits",
-        "articles/open-source-or-pro",
+        { type: "doc", id: "articles/tutorial/welcome" },
+        { type: "doc", id: "articles/tutorial/installing" },
+        { type: "doc", id: "articles/tutorial/using-workflows" },
+        { type: "doc", id: "articles/tutorial/managing-executions" },
       ],
     },
     {
       type: "doc",
-      label: "Getting Started",
-      id: "articles/getting-started",
+      id: "articles/tutorial/getting-started",
     },
     {
       type: "category",

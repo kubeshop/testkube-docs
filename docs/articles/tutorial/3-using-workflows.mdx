@@ -1,0 +1,91 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Using workflows
+
+## Creating your first test workflow
+
+Let's take a look at a K6 load test to familiarize ourselves with Testkube's workflows:
+
+```yaml
+# The workflow is a Kubernetes CRD with the usual apiVersion, kind and metadata
+# It configures the steps for your test automation pipeline.
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  # The workflow will have a name that you define here
+  name: my-test
+  # By default, workflows should be within the namespace of the Testkube agent
+  namespace: testkube
+  # Labels allow you to search and group
+  labels:
+    team: blue
+    app.kubernetes.io/name: my-api
+    app.kubernetes.io/part-of: my-cms
+    testkube.io/test-tool: k6s
+    testkube.io/test-category: load-test
+spec:
+  # The content property allows you to fetch your test cases and source code.
+  # You can check out content from git or create specific files from strings.
+  content:
+    files:
+      - path: k6.js
+        content: |
+          import http from 'k6/http';
+          export const options = {
+              thresholds: {
+              http_req_failed: ['rate<0.01'],
+              }
+          };
+          export default function () {
+              http.get('https://testkube.io/');
+          }
+          export function handleSummary(data) {
+            console.log('Preparing the end-of-test summary...');
+
+            return {
+              'junit.xml': jUnit(data), // Transform summary and save it as a JUnit XML...
+            };
+          }
+  # Steps are the main building blocks in workflows. Each step is executed in specific order.
+  # You can use multiple images to setup or tear down your tests.
+  steps:
+    - name: Run k6 tests
+      run:
+        image: grafana/k6:latest
+        shell: k6 run k6.js --iterations 100
+    # Logs of steps are automatically stored whereas artifacts will require an explicit step.
+    # You can give us the location of the artifacts and Testkube takes care of the rest.
+    - name: Saving artifacts
+      artifacts:
+        paths: ["junit.xml"]
+```
+
+For now this will suffice to continue the tutorial.
+Though the surface of workflows has only been scratched.
+You can view more examples [here][workflow-examples] or dive deeper into [advanced concepts][workflow-advanced] such as containerized services, parallezation, etc.
+
+## Run your test workflow
+
+<Tabs groupId="tutorial-run-test">
+
+<TabItem value="dashboard" label="Using the Dashboard">
+
+1. Choose import from YAML.
+2. Copy and paste the TestWorkflow above.
+3. Click the `Create` button.
+
+</TabItem>
+
+<TabItem value="cli" label="Using the CLI">
+
+1. Copy and paste the workflow to a file.
+2. Save the file named my-workflow.yaml.
+3. Execute the following command:
+
+```bash
+kubectl apply -f my-workflow.yaml && kubectl testkube run tw my-test
+```
+
+</TabItem>
+</Tabs>
