@@ -127,14 +127,14 @@ parallel:
 
 Will instantiate 6 copies:
 
-| `index` | `matrix.image` | `matrix.memory` |
-|---------|----------------|-----------------|
-| `0`     | `"node:20"`    | `"1Gi"`         |
-| `1`     | `"node:20"`    | `"2Gi"`         |
-| `2`     | `"node:21"`    | `"1Gi"`         |
-| `3`     | `"node:21"`    | `"2Gi"`         |
-| `4`     | `"node:22"`    | `"1Gi"`         |
-| `5`     | `"node:22"`    | `"2Gi"`         |
+| `index` | `matrixIndex` | `matrix.image` | `matrix.memory` | `shardIndex` |
+|---------|---------------|----------------|-----------------|--------------|
+| `0`     | `0`           | `"node:20"`    | `"1Gi"`         | `0`          |
+| `1`     | `1`           | `"node:20"`    | `"2Gi"`         | `0`          |
+| `2`     | `2`           | `"node:21"`    | `"1Gi"`         | `0`          |
+| `3`     | `3`           | `"node:21"`    | `"2Gi"`         | `0`          |
+| `4`     | `4`           | `"node:22"`    | `"1Gi"`         | `0`          |
+| `5`     | `5`           | `"node:22"`    | `"2Gi"`         | `0`          |
 
 The matrix properties can be a static list of values, like:
 
@@ -226,13 +226,13 @@ shards:
 
 Will start 8 instances:
 
-| `index` | `matrix.browser` | `matrix.memory` | `shard.url`                                           |
-|---------|------------------|-----------------|-------------------------------------------------------|
-| `0`     | `"chrome"`       | `"1Gi"`         | `["https://testkube.io", "https://docs.testkube.io"]` |
-| `1`     | `"chrome"`       | `"1Gi"`         | `["https://app.testkube.io"]`                         |
-| `2`     | `"chrome"`       | `"2Gi"`         | `["https://testkube.io", "https://docs.testkube.io"]` |
-| `3`     | `"chrome"`       | `"2Gi"`         | `["https://app.testkube.io"]`                         |
-| `4`     | `"firefox"`      | `"1Gi"`         | `["https://testkube.io", "https://docs.testkube.io"]` |
-| `5`     | `"firefox"`      | `"1Gi"`         | `["https://app.testkube.io"]`                         |
-| `6`     | `"firefox"`      | `"2Gi"`         | `["https://testkube.io", "https://docs.testkube.io"]` |
-| `7`     | `"firefox"`      | `"2Gi"`         | `["https://app.testkube.io"]`                         |
+| `index` | `matrixIndex` | `matrix.browser` | `matrix.memory` | `shardIndex` | `shard.url`                                           |
+|---------|---------------|------------------|-----------------|--------------|-------------------------------------------------------|
+| `0`     | `0`           | `"chrome"`       | `"1Gi"`         | `0`          | `["https://testkube.io", "https://docs.testkube.io"]` |
+| `1`     | `0`           | `"chrome"`       | `"1Gi"`         | `1`          | `["https://app.testkube.io"]`                         |
+| `2`     | `1`           | `"chrome"`       | `"2Gi"`         | `0`          | `["https://testkube.io", "https://docs.testkube.io"]` |
+| `3`     | `1`           | `"chrome"`       | `"2Gi"`         | `1`          | `["https://app.testkube.io"]`                         |
+| `4`     | `2`           | `"firefox"`      | `"1Gi"`         | `0`          | `["https://testkube.io", "https://docs.testkube.io"]` |
+| `5`     | `2`           | `"firefox"`      | `"1Gi"`         | `1`          | `["https://app.testkube.io"]`                         |
+| `6`     | `3`           | `"firefox"`      | `"2Gi"`         | `0`          | `["https://testkube.io", "https://docs.testkube.io"]` |
+| `7`     | `3`           | `"firefox"`      | `"2Gi"`         | `1`          | `["https://app.testkube.io"]`                         |
