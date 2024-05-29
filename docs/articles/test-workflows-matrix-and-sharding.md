@@ -140,7 +140,7 @@ matrix:
   browser: [ 'chrome', 'firefox', '{{ config.another }}' ]
 ```
 
-or could be dynamic one, using [**Test Workflow's expressions**](test-workflows-examples-expressions.md):
+or could be dynamic one, using [**Test Workflow's expressions**](test-workflows-expressions.md):
 
 ```yaml
 matrix:
@@ -198,7 +198,7 @@ parallel:
 </TabItem>
 </Tabs>
 
-Similarly to `matrix`, the `shards` may contain a static list, or [**Test Workflow's expression**](test-workflows-examples-expressions.md).
+Similarly to `matrix`, the `shards` may contain a static list, or [**Test Workflow's expression**](test-workflows-expressions.md).
 
 ### Counters
 
