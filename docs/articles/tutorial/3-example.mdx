@@ -13,10 +13,34 @@ The technologies and testing tools are a detail as the goal is to go over workfl
 
 - Learn how to run unit, black-box and end-to-end tests using TestWorkflows.
 
-## Run unit tests for the API
-
 ## Run black-box tests for the API
 
+TODO explanation etc…
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: test-api-blackbox
+  namespace: testkube
+spec:
+  content:
+    git:
+      uri: https://github.com/kubeshop/testkube-samples
+      revision: main
+      paths: ["api"]
+  container:
+    image: node:alpine
+    workingDir: /data/repo/api
+  steps:
+    - name: Install dependencies
+      shell: npm install --ci
+    - name: Run test
+      shell: npm run test
+```
+
 ## Run E2E tests with Cypress
+
+TODO run in services etc
 
 [sample-repo]: https://github.com/kubeshop/testkube-samples
