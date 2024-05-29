@@ -113,7 +113,7 @@ You will now see the dashboard with most recent executions.
 
 </TabItem>
 
-<TabItem value="demo" label="Cloud Demo without install">
+<TabItem value="demo" label="Demo without Install">
 
 1. Login to Testkube.
 2. Click the `Get access to a demo environment` button.
@@ -197,7 +197,7 @@ different workflows in the next steps.
 1. Choose import from YAML.
 2. Copy and paste the test workflow above.
 3. Click the `Create` button.
-4. View the logs of the workflow as it is executing.
+4. View the status and logs of the workflow as it is executing.
 
 </TabItem>
 
@@ -206,39 +206,10 @@ different workflows in the next steps.
 2. Create a file named _my-workflow.yaml_.
 1. Copy and paste the test workflow above.
 1. Execute the command below.
-1. View the logs of the workflow as it is executing.
+1. View the status and logs of the workflow as it is executing.
 
 ```bash
 kubectl apply -f my-workflow.yaml && kubectl testkube run tw my-test --watch
-```
-
-</TabItem>
-</Tabs>
-
-## Integrate within your pipeline
-
-<Tabs groupId="tutorial-run-test">
-<TabItem value="dashboard" label="Dashboard">
-
-1. Browse to your test workflow within the dashboard
-2. Click `CI/CD Integrations` tab
-3. You can see the instructions where all variables have been prefilled for you.
-4. Follow these instructions to run it on your favourite provider.
-
-Testkube currently comes with instructions for GitHub Actions, GitLab CI, CircleCI, Jenkins and Azure DevOps.
-
-</TabItem>
-
-<TabItem value="other" label="">
-
-Testkube can be integrated
-
-1. Copy and paste the workflow to a file.
-2. Save the file named my-workflow.yaml.
-3. Execute the following command:
-
-```bash
-kubectl apply -f my-workflow.yaml && kubectl testkube run tw my-test
 ```
 
 </TabItem>
@@ -275,6 +246,35 @@ kubectl testkube get twe 664dbae9924211bb076bd58e --logs-only
 
 # Browse this execution in the dashboard (not yet implemented)
 kubectl testkube get twe 664dbae9924211bb076bd58e --browse
+```
+
+</TabItem>
+</Tabs>
+
+## Integrate within your pipeline
+
+<Tabs groupId="tutorial-run-test">
+<TabItem value="dashboard" label="Dashboard">
+
+1. Browse to your test workflow within the dashboard
+2. Click `CI/CD Integrations` tab
+3. You can see the instructions where all variables have been prefilled for you.
+4. Follow these instructions to run it on your favourite provider.
+
+Testkube currently comes with instructions for GitHub Actions, GitLab CI, CircleCI, Jenkins and Azure DevOps.
+
+</TabItem>
+
+<TabItem value="other" label="">
+
+Testkube can be integrated
+
+1. Copy and paste the workflow to a file.
+2. Save the file named my-workflow.yaml.
+3. Execute the following command:
+
+```bash
+kubectl apply -f my-workflow.yaml && kubectl testkube run tw my-test
 ```
 
 </TabItem>
