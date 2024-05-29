@@ -126,12 +126,15 @@ parallel:
 ```
 
 Will instantiate 6 copies:
-* `image=node:20` and `memory=1Gi`
-* `image=node:20` and `memory=2Gi`
-* `image=node:21` and `memory=1Gi`
-* `image=node:21` and `memory=2Gi`
-* `image=node:22` and `memory=1Gi`
-* `image=node:22` and `memory=2Gi`
+
+| `index` | `matrix.image` | `matrix.memory` |
+|---------|----------------|-----------------|
+| `0`     | `"node:20"`    | `"1Gi"`         |
+| `1`     | `"node:20"`    | `"2Gi"`         |
+| `2`     | `"node:21"`    | `"1Gi"`         |
+| `3`     | `"node:21"`    | `"2Gi"`         |
+| `4`     | `"node:22"`    | `"1Gi"`         |
+| `5`     | `"node:22"`    | `"2Gi"`         |
 
 The matrix properties can be a static list of values, like:
 
@@ -223,11 +226,13 @@ shards:
 
 Will start 8 instances:
 
-* `matrix.browser=chrome`, `matrix.memory=1Gi`, `shard.url=["https://testkube.io", "https://docs.testkube.io"]`
-* `matrix.browser=chrome`, `matrix.memory=1Gi`, `shard.url=["https://app.testkube.io"]`
-* `matrix.browser=chrome`, `matrix.memory=2Gi`, `shard.url=["https://testkube.io", "https://docs.testkube.io"]`
-* `matrix.browser=chrome`, `matrix.memory=2Gi`, `shard.url=["https://app.testkube.io"]`
-* `matrix.browser=firefox`, `matrix.memory=1Gi`, `shard.url=["https://testkube.io", "https://docs.testkube.io"]`
-* `matrix.browser=firefox`, `matrix.memory=1Gi`, `shard.url=["https://app.testkube.io"]`
-* `matrix.browser=firefox`, `matrix.memory=2Gi`, `shard.url=["https://testkube.io", "https://docs.testkube.io"]`
-* `matrix.browser=firefox`, `matrix.memory=2Gi`, `shard.url=["https://app.testkube.io"]`
+| `index` | `matrix.browser` | `matrix.memory` | `shard.url`                                           |
+|---------|------------------|-----------------|-------------------------------------------------------|
+| `0`     | `"chrome"`       | `"1Gi"`         | `["https://testkube.io", "https://docs.testkube.io"]` |
+| `1`     | `"chrome"`       | `"1Gi"`         | `["https://app.testkube.io"]`                         |
+| `2`     | `"chrome"`       | `"2Gi"`         | `["https://testkube.io", "https://docs.testkube.io"]` |
+| `3`     | `"chrome"`       | `"2Gi"`         | `["https://app.testkube.io"]`                         |
+| `4`     | `"firefox"`      | `"1Gi"`         | `["https://testkube.io", "https://docs.testkube.io"]` |
+| `5`     | `"firefox"`      | `"1Gi"`         | `["https://app.testkube.io"]`                         |
+| `6`     | `"firefox"`      | `"2Gi"`         | `["https://testkube.io", "https://docs.testkube.io"]` |
+| `7`     | `"firefox"`      | `"2Gi"`         | `["https://app.testkube.io"]`                         |
