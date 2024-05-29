@@ -23,15 +23,10 @@ const sidebars = {
       type: "category",
       label: "Getting Started",
       items: [
-        { type: "doc", id: "articles/tutorial/welcome" },
-        { type: "doc", id: "articles/tutorial/installing" },
-        { type: "doc", id: "articles/tutorial/using-workflows" },
-        { type: "doc", id: "articles/tutorial/managing-executions" },
+        "articles/tutorial/introduction",
+        "articles/tutorial/quickstart",
+        "articles/tutorial/example",
       ],
-    },
-    {
-      type: "doc",
-      id: "articles/tutorial/getting-started",
     },
     {
       type: "category",

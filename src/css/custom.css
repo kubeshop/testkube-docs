@@ -13,7 +13,7 @@
   --ifm-font-size-base: 16px;
   --ifm-color-primary: #818cf8;
   --ifm-color-secondary: #c8cdff;
-  --ifm-color-third: #EFEDFF;
+  --ifm-color-third: #efedff;
   --ifm-color-primary-dark: #29784c;
   --ifm-color-primary-darker: #277148;
   --ifm-color-primary-darkest: #205d3b;
@@ -35,7 +35,7 @@
   /* --ifm-menu-link-sublist-icon:  */
   --ifm-code-font-size: 90%; /*95%;*/
   --ifm-line-height-base: 1.45; /* Instead of 1.5 */
-  --ifm-leading-desktop: 1.85; /* Instead of 1.5 */
+  --ifm-leading-desktop: 1.2; /* Instead of 1.5 */
   --ifm-list-margin: var(--ifm-leading); /* Keep consistent with the leading */
 
   --ifm-menu-color-background-active: transparent;
@@ -57,8 +57,8 @@
   --ifm-color-primary-light: #29d5b0;
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
-  --ifm-color-badge-border: #0EA5E9;
-  --ifm-color-badge: #0C4A6E;
+  --ifm-color-badge-border: #0ea5e9;
+  --ifm-color-badge: #0c4a6e;
   --docusaurus-highlighted-code-line-bg: var(var(--ifm-color-gray-1000));
 }
 
@@ -312,7 +312,6 @@ ul:hover {
   position: relative;
   top: 15%;
   width: 100%;
-
 }
 .tools__card::before {
   position: absolute;
