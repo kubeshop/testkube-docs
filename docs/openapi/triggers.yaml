@@ -1,0 +1,275 @@
+openapi: 3.0.1
+info:
+  title: Testkube API
+  description: >-
+    Testkube provides a Kubernetes-native framework for test definition,
+    execution and results
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 1.0.0
+paths:
+  /triggers:
+    get:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/Namespace'
+        - $ref: './components.yaml#/components/parameters/Selector'
+      summary: List test triggers
+      description: List test triggers from the kubernetes cluster
+      operationId: listTestTriggers
+      responses:
+        '200':
+          description: successful list operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/TestTrigger'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    post:
+      summary: Create new test trigger
+      description: Create new test trigger CRD inside a Kubernetes cluster
+      operationId: createTestTrigger
+      requestBody:
+        description: test trigger body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/TestTriggerUpsertRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/TestTrigger'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: >-
+            problem with test trigger definition - probably some bad input
+            occurs (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    patch:
+      summary: Bulk update test triggers
+      description: Updates test triggers provided as an array in the request body
+      operationId: bulkUpdateTestTriggers
+      requestBody:
+        description: array of test trigger upsert requests
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: './components.yaml#/components/schemas/TestTriggerUpsertRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/TestTrigger'
+        '400':
+          description: >-
+            problem with test trigger definition - probably some bad input
+            occurs (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    delete:
+      summary: Delete test triggers
+      description: Deletes all or labeled test triggers
+      operationId: deleteTestTriggers
+      parameters:
+        - $ref: './components.yaml#/components/parameters/Namespace'
+        - $ref: './components.yaml#/components/parameters/Selector'
+      responses:
+        '204':
+          description: no content
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '404':
+          description: test trigger not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+  /triggers/{id}:
+    get:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: './components.yaml#/components/parameters/Namespace'
+      summary: Get test trigger by ID
+      description: Get test trigger by ID from CRD in kubernetes cluster
+      operationId: getTestTriggerByID
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/TestTrigger'
+            text/yaml:
+              schema:
+                type: string
+        '404':
+          description: test trigger not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    patch:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: './components.yaml#/components/parameters/Namespace'
+      summary: Update test trigger
+      description: Update test trigger
+      operationId: updateTestTrigger
+      requestBody:
+        description: test trigger upsert request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/TestTriggerUpsertRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/TestTrigger'
+        '400':
+          description: >-
+            problem with test trigger definition - probably some bad input
+            occurs (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '404':
+          description: test trigger not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    delete:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: './components.yaml#/components/parameters/Namespace'
+      summary: Delete test trigger
+      description: Deletes a test trigger
+      operationId: deleteTestTrigger
+      responses:
+        '204':
+          description: no content
+        '404':
+          description: test trigger not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'

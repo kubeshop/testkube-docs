@@ -1,0 +1,233 @@
+openapi: 3.0.1
+info:
+  title: Testkube API
+  description: >-
+    Testkube provides a Kubernetes-native framework for test definition,
+    execution and results
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 1.0.0
+paths:
+  /webhooks:
+    get:
+      summary: List webhooks
+      description: List webhooks available in cluster
+      operationId: listWebhooks
+      parameters:
+        - $ref: './components.yaml#/components/parameters/Selector'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Webhook'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input for CRD generation
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    post:
+      summary: Create new webhook
+      description: Create new webhook based on variables passed in request
+      operationId: createWebhook
+      requestBody:
+        description: webhook request body data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/WebhookCreateRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/yaml:
+              schema:
+                type: string
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Webhook'
+        '400':
+          description: >-
+            problem with webhook definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    delete:
+      summary: Delete webhooks
+      description: Deletes labeled webhooks
+      operationId: deleteWebhooks
+      parameters:
+        - $ref: './components.yaml#/components/parameters/Selector'
+      responses:
+        '204':
+          description: no content
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+  /webhooks/{id}:
+    delete:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      summary: Delete webhook
+      description: Deletes webhook by its name
+      operationId: deleteWebhook
+      responses:
+        '204':
+          description: webhook deleted successfuly
+        '404':
+          description: webhook not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    get:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      summary: Get webhook details
+      description: Returns webhook
+      operationId: getWebhook
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Webhook'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input for CRD generation
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '404':
+          description: webhook not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '500':
+          description: problem with getting webhook data
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    patch:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      summary: Update new webhook
+      description: Update new webhook based on variables passed in request
+      operationId: updateWebhook
+      requestBody:
+        description: webhook request body data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/WebhookUpdateRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Webhook'
+        '400':
+          description: >-
+            problem with webhook definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '404':
+          description: webhook not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'

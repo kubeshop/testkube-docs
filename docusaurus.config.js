@@ -4,6 +4,7 @@
 const lightCodeTheme = require("./src/themes/prism-testkube-light");
 const darkCodeTheme = require("./src/themes/prism-testkube-dark");
 const redirects = require("./redirects");
+const redocSpecs = require('./docs/openapi/redoc-specs');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -64,13 +65,7 @@ const config = {
     [
       'redocusaurus',
       {
-        // Plugin Options for loading OpenAPI files
-        specs: [
-          {
-            spec: "https://raw.githubusercontent.com/kubeshop/testkube/main/api/v1/testkube.yaml",
-            route: "/openapi",
-          },
-        ],
+        specs: redocSpecs,
         theme: {
           primaryColor: "#818cf8",
         },

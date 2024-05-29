@@ -11,6 +11,9 @@
 
 // @ts-check
 
+const redocSidebar = require('./docs/openapi/redoc-sidebar');
+
+
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   // By default, Docusaurus generates a sidebar from the docs folder structure
@@ -268,7 +271,11 @@ const sidebars = {
             },
           ],
         },
-        "openapi",
+        {
+          type: "category",
+          label: "OpenAPI Reference",
+          items: redocSidebar
+        },
         "articles/metrics",
         "articles/artifacts",
         "articles/testkube-dependencies",

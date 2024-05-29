@@ -1,0 +1,233 @@
+openapi: 3.0.1
+info:
+  title: Testkube API
+  description: >-
+    Testkube provides a Kubernetes-native framework for test definition,
+    execution and results
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 1.0.0
+paths:
+  /templates:
+    get:
+      summary: List templates
+      description: List templates available in cluster
+      operationId: listTemplates
+      parameters:
+        - $ref: './components.yaml#/components/parameters/Selector'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Template'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input for CRD generation
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    post:
+      summary: Create new template
+      description: Create new template based on variables passed in request
+      operationId: createTemplate
+      requestBody:
+        description: template request body data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/TemplateCreateRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/yaml:
+              schema:
+                type: string
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Template'
+        '400':
+          description: >-
+            problem with template definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    delete:
+      summary: Delete templates
+      description: Deletes labeled templates
+      operationId: deleteTemplates
+      parameters:
+        - $ref: './components.yaml#/components/parameters/Selector'
+      responses:
+        '204':
+          description: no content
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+  /templates/{id}:
+    delete:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      summary: Delete template
+      description: Deletes template by its name
+      operationId: deleteTemplate
+      responses:
+        '204':
+          description: template deleted successfuly
+        '404':
+          description: template not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    get:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      summary: Get template details
+      description: Returns template
+      operationId: getTemplate
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Template'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input for CRD generation
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '404':
+          description: template not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '500':
+          description: problem with getting template data
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    patch:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      summary: Update new template
+      description: Update new template based on variables passed in request
+      operationId: updateTemplate
+      requestBody:
+        description: template request body data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/TemplateUpdateRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Template'
+        '400':
+          description: >-
+            problem with template definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '404':
+          description: template not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
