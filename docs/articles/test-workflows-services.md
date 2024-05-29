@@ -33,6 +33,10 @@ You may want to use services in [Test Workflow Template](./test-workflows-exampl
 
 :::
 
+
+<Tabs>
+<TabItem value="yaml" label="YAML" default>
+
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
@@ -61,7 +65,13 @@ spec:
         mongosh -u root -p p4ssw0rd {{ services.db.0.ip }} --eval 'db.serverStatus().localTime'
 ```
 
+</TabItem>
+<TabItem value="log" label="Log Output">
+
 ![example-workflow-with-mongo-service workflow](../img/example-workflow-with-mongo-service.png)
+
+</TabItem>
+</Tabs>
 
 ### Connecting to the services
 
