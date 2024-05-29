@@ -41,4 +41,4 @@ You can choose from one of the following roles for a user:
 - `Write`: Has Run access and can make changes to environment tests, triggers, webhooks, etc...
 - `Admin`: Has Write access and is allowed to invite and change other collaborator roles.
 
-[installing]: /articles/install/advanced-multi-cluster
+[installing]: /articles/install/multi-cluster

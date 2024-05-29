@@ -1,12 +1,11 @@
-# Install Testkube OSS
+# Standalone agent
 
-Welcome to the Open Source version of Testkube!
+Testkube standalone agent includes our full test execution and orchestration engine.
+This means that all CRDs are available, you can apply triggers and run test workflows, then afterwards view the resulting status, logs and artifacts.
 
-Testkube OSS includes our full test execution and orchestration engine. It is deployed as a standalone agent.
-
-Designed to integrate seamlessly with your Kubernetes clusters, Testkube offers flexibility and power. For those searching for a quicker and streamlined experience, we suggest [signing up for Testkube Pro](https://app.testkube.io/). However, for those that prefer to dip their toes in the water before diving into the deep, then the open source version is the better choice.
-
-Visit [Open Source or Pro][oss-vs-pro] to see a comparison of features to help you with your choice. Also, take a look at our [Quick Setup Video](https://www.youtube.com/watch?v=ynzEkOUhxKk).
+Overal there are few reasons to run the agent without the control plane.
+The latter comes with a dashboard and many other features.
+The main benefit is that this works better in resource constrained environments and that it is 100% open-source.
 
 You can install with the CLI or Helm. The following components will be installed into your Kubernetes cluster:
 
@@ -17,12 +16,6 @@ You can install with the CLI or Helm. The following components will be installed
 
 Once installed you can verify your installation and check that Testkube is up and running with
 `kubectl get all -n testkube`. Once validated, you're ready to unleash the full potential of Testkube in your environment. Testkube OSS is here to help you to powering your development and testing workflows seamlessly.
-
-## Minimum Resource Requirements
-
-To ensure optimal performance, the initial setup requires a minimum of **2 CPU cores** and **8 GB of RAM**. This configuration is suitable for basic operations.
-
-For environments with higher demands or fluctuating workloads, we recommend implementing an **autoscaler**. This allows for dynamic scaling of resources based on actual usage, ensuring both efficient performance and cost-effectiveness. Users can configure the autoscaler according to their specific needs, adapting to varying workloads seamlessly.
 
 ## Install with CLI
 
@@ -117,11 +110,9 @@ The following Helm defaults are used in the `testkube` chart:
 | testkube-api.defaultStorageClassName   | yes         | ""                                   |
 | testkube-api.enableK8sEvents           | yes         | true                                 |
 
-> For more configuration parameters of a `MongoDB` chart please visit:
-> <https://github.com/bitnami/charts/tree/master/bitnami/mongodb#parameters>
+> For more configuration parameters of a `MongoDB` chart please visit [the MongoDB docs][mongo-config].
 
-> For more configuration parameters of an `NATS` chart please visit:
-> <https://docs.nats.io/running-a-nats-service/nats-kubernetes/helm-charts>
+> For more configuration parameters of an `NATS` chart please visit [the NATS docs][nats-config].
 
 :::note
 
@@ -139,11 +130,13 @@ They override all sub-chart values for the image parameters if specified.
 
 :::
 
-## Upgrade Testkube OSS
+## Upgrading
 
-See [upgrade][upgrade] for instructions on how to upgrade your Testkube Core Open Source components.
+See [upgrade][upgrade] for instructions on how to upgrade the standalone agent.
 
 [secrets-endpoint]: /articles/secrets-enable-endpoint
 [secrets-creation]: /articles/secrets-disable-creation
 [oss-vs-pro]: /articles/open-source-or-pro
 [upgrade]: /articles/upgrade
+[mongo-config]: https://github.com/bitnami/charts/tree/master/bitnami/mongodb#parameters
+[nats-config]: https://docs.nats.io/running-a-nats-service/nats-kubernetes/helm-charts

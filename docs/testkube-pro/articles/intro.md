@@ -18,4 +18,4 @@ You can start using Testkube Pro by either:
 - [**Migrating Testkube Core Open Source**][migrate] from your existing Testkube Core Open Source instance to a Pro instance.
 - Creating a fresh installation, using [app.testkube.io](https://app.testkube.io).
 
-[migrate]: /articles/install/advanced-multi-cluster
+[migrate]: /articles/install/multi-cluster

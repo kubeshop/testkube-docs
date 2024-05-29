@@ -39,8 +39,7 @@ const sidebars = {
       items: [
         "articles/install/overview",
         "articles/install/cli",
-        "articles/install/quickstart-install",
-        "articles/install/reference-architectures",
+        "articles/install/install-with-cli",
         {
           type: "category",
           label: "Install with Helm",
@@ -48,17 +47,20 @@ const sidebars = {
             "articles/install/install-with-helm",
             "articles/install/advanced-install",
             "articles/install/auth",
-            "articles/install/advanced-multi-cluster",
           ],
         },
-        {
-          type: "doc",
-          label: "Install Testkube OSS",
-          id: "articles/install/install-oss",
-        },
-        "articles/install/quickstart-no-k8s",
-        "articles/install/uninstall",
+        "articles/install/reference-architectures",
         "articles/install/faq",
+        {
+          type: "category",
+          label: "More guides",
+          items: [
+            "articles/install/uninstall",
+            "articles/install/multi-cluster",
+            "articles/install/standalone-agent",
+            "articles/install/quickstart-no-k8s",
+          ],
+        },
       ],
     },
     {

@@ -59,6 +59,6 @@ testkube-cloud-api:
 
 Once started, you can [deploy agents that will join your control plane as described above][deploy-agent].
 
-[deploy-agent]: /articles/install/advanced-multi-cluster#deploy-an-agent-that-will-join-your-control-plane
+[deploy-agent]: /articles/install/multi-cluster#deploy-an-agent-that-will-join-your-control-plane
 [contact]: https://testkube.io/contact
 [cli-context]: /testkube-pro/articles/managing-cli-context

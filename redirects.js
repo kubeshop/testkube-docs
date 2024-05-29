@@ -299,17 +299,13 @@ const redirects = [
       "/testkube-cloud/articles/installing-agent",
       "/testkube-pro/installing-agent",
       "/testkube-pro/articles/installing-agent",
-    ],
-    to: "/articles/install/advanced-multi-cluster",
-  },
-  {
-    from: [
+      "/articles/install/advanced-multi-cluster",
       "/testkube-cloud/transition-from-oss",
       "/testkube-cloud/articles/transition-from-oss",
       "/testkube-pro/transition-from-oss",
       "/testkube-pro/articles/transition-from-oss",
     ],
-    to: "/articles/install/advanced-multi-cluster",
+    to: "/articles/install/multi-cluster",
   },
   {
     from: [
@@ -421,8 +417,9 @@ const redirects = [
     from: [
       "/testkube-enterprise/articles/testkube-enterprise",
       "/testkube-pro-on-prem/articles/testkube-pro-on-prem",
+      "/articles/install/quickstart-install",
     ],
-    to: "/articles/install/quickstart-install",
+    to: "/articles/install/install-with-cli",
   },
   {
     from: [
@@ -439,8 +436,8 @@ const redirects = [
     to: "/articles/migrate-from-oss",
   },
   {
-    from: "/articles/testkube-oss",
-    to: "/articles/install/install-oss",
+    from: ["/articles/testkube-oss", "/articles/install/install-oss"],
+    to: "/articles/install/standalone-agent",
   },
 ];
 

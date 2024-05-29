@@ -25,4 +25,4 @@ Please refer to the table below to determine which version of Testkube best fits
 
 \*Roadmap feature.
 
-[testkube-oss]: /articles/install/install-oss
+[testkube-oss]: /articles/install/standalone-agent
