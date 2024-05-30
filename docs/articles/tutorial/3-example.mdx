@@ -6,16 +6,19 @@ import TabItem from "@theme/TabItem";
 In this getting started tutorial you will learn how to run tests on a sample application that resembles a real-life three-tier architecture.
 
 You can find the application on GitHub in [this repository][sample-repo].
-It consists of a small React web app with a NodeJS backend and PostgreSQL database.
 The technologies and testing tools are a detail as the goal is to go over workflow features that you will likely run into while getting started yourself.
+It consists of a small React web app with a NodeJS backend and PostgreSQL database.
 
 ## Objectives
 
 - Learn how to run unit, black-box and end-to-end tests using TestWorkflows.
+- Learn about TestWorkflow configuration, sharding and services.
+- Learn
 
-## Run black-box tests for the API
+## Running blackbox tests
 
-TODO explanation etc…
+To run our blackbox tests, we are going to git clone, install dependencies and run our testing tool.
+You can use [TestWorkflow configuration][tw-config] to set the git ref dynamically and run the workflow for any given commit.
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -24,23 +27,114 @@ metadata:
   name: test-api-blackbox
   namespace: testkube
 spec:
+  # Defines parameters that can be used within your workflows
+  # You can interpolate the variable with an expression: {{ config.your_variable }}.
+  config:
+    ref:
+      type: string
+      default: "main"
   content:
     git:
       uri: https://github.com/kubeshop/testkube-samples
-      revision: main
+      # The revision is the branch, tag or commit sha of your git repository.
+      # in this case, it's a configuration variable that defaults to the 'main' branch.
+      revision: "{{ config.ref }}"
+      # (optionally) You can limit fetching specific paths to increase cloning performance.
       paths: ["api"]
   container:
+    # The default image for your steps. You can choose to override the image within each step.
     image: node:alpine
+    # The default working directory for your steps. Git content will be checked out in `/data/repo`.
     workingDir: /data/repo/api
   steps:
+    # The `shell` keyword is a shorthand over `run` which makes it convenient to execute commands
+    # In this case we first install all dependencies and afterwards run the tests.
+    # Each of these steps runs in its own container while sharing the file system.
     - name: Install dependencies
-      shell: npm install --ci
+      shell: npm ci
     - name: Run test
       shell: npm run test
 ```
 
-## Run E2E tests with Cypress
+You would afterwards call this in your continuous integration with the `--config` flag as seen below:
 
-TODO run in services etc
+```sh
+testkube run testworkflow test-api-blackbox --config ref=${CI_COMMIT_SHA} --watch
+```
+
+## Running tests on a private git repository
+
+When running your own test workflows, you likely use a private git repository.
+You can use `config` to authenticate. While it will depend a bit on the git provider,
+it will likely look similar to this example with Github fine-grained access tokens:
+
+```diff
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata: ...
+spec:
++  config:
++    accessToken:
++      type: string
+  content:
+    git:
+-      uri: https://github.com/your-org/public-repo.git
++      uri: https://oauth2:{{ config.accessToken }}@github.com/your-org/private-repo.git
+```
+
+## Run E2E tests
+
+There are various ways to run your end-to-end tests:
+
+- You can create preview environments outside of Testkube.
+- You can use [TestWorkflow services][tw-services] to spawn your test dependencies.
+
+<Tabs groupId="tutorial-example-e2e">
+<TabItem value="external-preview" label="With external previews">
+
+```yaml
+kind: TestWorkflow
+apiVersion: testworkflows.testkube.io/v1
+metadata:
+  name: test-e2e
+  namespace: testkube
+spec:
+  config:
+    # Define the base URL on which the application under test will be available
+    baseUrl:
+      type: string
+  content:
+    git:
+      uri: https://github.com/kubeshop/testkube-samples
+      revision: main
+      paths: ["app"]
+  container:
+    workingDir: /data/repo/app
+    # You have full control over the resource requests and limits. In this case,
+    # let's increase Cypress requests as it's quite a big tool to run.
+    resources:
+      requests:
+        cpu: 2
+        memory: 2Gi
+  steps:
+    - name: Run e2e tests
+      container:
+        image: cypress/included:13.10.0
+        env:
+          - name: CYPRESS_baseUrl
+            value: "{{ config.baseUrl }}"
+      shell: cypress run
+```
+
+</TabItem>
+
+<TabItem value="services" label="With workflow services">
+
+Coming soon…
+
+</TabItem>
+</Tabs>
 
 [sample-repo]: https://github.com/kubeshop/testkube-samples
+[tw-config]: /articles/test-workflows-examples-configuration
+[tw-services]: /articles/test-workflows-examples-services
