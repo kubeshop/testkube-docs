@@ -4,13 +4,16 @@ Testkube can federate multiple clusters.
 Conceptually, each cluster maps to an environment within Testkube.
 You will require a pro plan to deploy multiple Testkube agents.
 
+:::info
+The commands below that connect to on-prem will likely need to add
+an `--agent-uri` flag or they will instead by default connect to Testkube Cloud.
+:::
+
 ## Deploy an agent that will join Testkube
 
 You can add another agent to an existing Testkube deployment within a couple of minutes. Get started by going to the dashboard and create a new environment. Afterwards it will show you a command that can be used to bootstrap the agent in another cluster. The command looks as follows:
 
-```
-testkube pro init
-```
+![Command that deploys an agent that joins Testkube](./images/agent-that-joins-testkube.png)
 
 #### Multiple agents within the same cluster
 
@@ -22,11 +25,9 @@ testkube-operator:
 +  enabled: false
 ```
 
-## Migrating a standalone agent that will join Testkube
+## Connecting a standalone agent to join Testkube
 
-You can also migrate from the open-source Testkube standalone agent to a federated agent.
-The following command will walk you through the migration process. Once completed, data will
-be send Testkube's unified control plane.
+If you started Testkube as a standalone agent and you decided to connect it to a control plane, you can connect is by running the following command which will guide you through the migration process. All test definitions will stay the same, however, historical test results data or artifacts wont be copied to the control plane.
 
 ```
 testkube pro connect
@@ -34,14 +35,11 @@ testkube pro connect
 
 To complete the procedure, you will finally have to [set your CLI Context to talk to Testkube][cli-context].
 
-:::danger
-Currently historical logs and artifacts are not uploaded to the control plane.
-We plan to add this in the near future. Please [contact us][contact] if this is important to you.
-:::
-
 ## Deploy a control plane without an agent
 
-By default, Testkube will create an environment within the same namespace as the control plane. You can choose to
+By default, Testkube will create an environment within the same namespace as the control plane.
+You can choose for a minimal deployment without a control plane.
+Once started, you can [deploy agents that will join your control plane as described above][deploy-agent].
 
 Within the Helm values.yaml make the following changes:
 
@@ -56,8 +54,6 @@ testkube-cloud-api:
 -      bootstrapEnv: "my-first-environment"
 -      bootstrapAgentTokenSecretRef: "testkube-default-agent-token"
 ```
-
-Once started, you can [deploy agents that will join your control plane as described above][deploy-agent].
 
 [deploy-agent]: /articles/install/multi-cluster#deploy-an-agent-that-will-join-your-control-plane
 [contact]: https://testkube.io/contact

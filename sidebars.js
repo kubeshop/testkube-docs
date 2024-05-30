@@ -55,10 +55,10 @@ const sidebars = {
           type: "category",
           label: "More guides",
           items: [
-            "articles/install/uninstall",
             "articles/install/multi-cluster",
             "articles/install/standalone-agent",
             "articles/install/quickstart-no-k8s",
+            "articles/install/uninstall",
           ],
         },
       ],
