@@ -77,5 +77,5 @@ async function splitOpenAPIByPaths(url: string, outputDir: string): Promise<void
 
 
 const url = 'https://raw.githubusercontent.com/kubeshop/testkube/main/api/v1/testkube.yaml';
-const outputDir = 'docs/openapi';
+const outputDir = 'src/openapi';
 splitOpenAPIByPaths(url, outputDir);

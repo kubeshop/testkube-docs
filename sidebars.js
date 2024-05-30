@@ -11,7 +11,7 @@
 
 // @ts-check
 
-const redocSidebar = require('./docs/openapi/redoc-sidebar');
+const redocSidebar = require('./src/openapi/redoc-sidebar');
 
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
