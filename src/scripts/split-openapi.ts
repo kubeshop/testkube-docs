@@ -16,7 +16,7 @@ async function fetchOpenAPI(url: string): Promise<OpenAPI> {
     return yaml.load(response.data) as OpenAPI;
 }
 
-async function splitOpenAPIByPaths(url: string, outputDir: string): Promise<void> {
+async function splitOpenAPIByPaths(url: string, outputDir: string, docsDir: string): Promise<void> {
     const openapi = await fetchOpenAPI(url);
     const paths = openapi.paths;
     const components = openapi.components;
@@ -62,16 +62,26 @@ async function splitOpenAPIByPaths(url: string, outputDir: string): Promise<void
             newOpenAPI.paths[key] = value;
         });
 
-        // generate YAML and replace component references
+        // generate YAML and replace component references to point to external file
         let openApiYaml = yaml.dump(newOpenAPI, {sortKeys: false})
         openApiYaml = openApiYaml.replace(/#\/components/g, './components.yaml#/components');
 
         fs.writeFileSync(outputFile, openApiYaml);
         console.log("written " + outputFile + ", " + paths.size + " paths");
 
+        // create mdx placeholder
+        fs.writeFileSync( path.join( docsDir, "openapi", rootPath + ".mdx"),
+            "---\n" +
+            "title: Testkube /" + rootPath + " operations\n" +
+            "---\n" +
+            "\n" +
+            "import ApiDocMdx from '@theme/ApiDocMdx';\n" +
+            "\n" +
+            "<ApiDocMdx id=\"" + rootPath  + "\" />\n");
+
         // add generated file to redoc config and sidebar
-        redocSpecs.push({spec: outputFile, route: "openapi/testkube-" + rootPath});
-        redocSidebar.push({type: "link", label: rootPath, href: "/openapi/testkube-" + rootPath});
+        redocSpecs.push({spec: outputFile, url: openApiUrl, id: rootPath});
+        redocSidebar.push({type: "doc", label: "/" + rootPath, id: "openapi/" + rootPath});
     });
 
     // write generated redoc specs and sidebar
@@ -79,6 +89,7 @@ async function splitOpenAPIByPaths(url: string, outputDir: string): Promise<void
     fs.writeFileSync(path.join(outputDir, "redoc-sidebar.js"), "module.exports = " + JSON.stringify(redocSidebar));
 }
 
-const url = 'https://raw.githubusercontent.com/kubeshop/testkube/main/api/v1/testkube.yaml';
+const openApiUrl = 'https://raw.githubusercontent.com/kubeshop/testkube/main/api/v1/testkube.yaml';
 const outputDir = 'src/openapi';
-splitOpenAPIByPaths(url, outputDir);
+const docsDir = 'docs'
+splitOpenAPIByPaths(openApiUrl, outputDir, docsDir);

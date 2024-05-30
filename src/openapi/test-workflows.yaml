@@ -183,6 +183,7 @@ paths:
     post:
       parameters:
         - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: './components.yaml#/components/parameters/TestWorkflowExecutionName'
       summary: Execute test workflow
       description: Execute test workflow in the kubernetes cluster
       operationId: executeTestWorkflow
