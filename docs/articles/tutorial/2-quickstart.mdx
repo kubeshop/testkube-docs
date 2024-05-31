@@ -5,7 +5,7 @@ import TabItem from "@theme/TabItem";
 
 In this tutorial you will learn how to install Testkube, run your first test workflow and inspect its artifacts and logs.
 
-## Installing the CLI
+## 1. Installing the CLI
 
 The Testkube CLI can be used to conveniently install Testkube and manage your tests.
 
@@ -80,7 +80,7 @@ If you use a package manager that we don\'t support, please let us know here [#1
 </TabItem>
 </Tabs>
 
-## Installing Testkube
+## 2. Installing Testkube
 
 Testkube has flexible in its deployments.
 The Testkube agents are our test runners and always run in your cluster.
@@ -93,11 +93,14 @@ Whether the control plane is self-hosted or managed by Testkube Cloud is up to y
 1. Request a free license on https://testkube.io/download.
 2. Run the `testkube init demo` command in your terminal.
 3. Run the `testkube dashboard` command to open Testkube without configuring ingress.
+4. Log in to Testkube with the credentials from the second step.
 
-You will now see the dashboard with most recent executions.
+You will now see the dashboard:
+
+![The dashboard](./img/dashboard.png)
 
 :::info
-Need more details? You can find a thorough quickstart [here][testkube-quickstart]. For production-ready installations you will need more configuration. For instructions, see [the installing section][testkube-installing].
+Need more details or customization? You can learn more in [our installating documentation][testkube-installing].
 :::
 
 </TabItem>
@@ -109,7 +112,9 @@ Need more details? You can find a thorough quickstart [here][testkube-quickstart
 3. Enter an environment name and click `Create environment`.
 4. Run the generated `testkube pro init` command in your terminal.
 
-You will now see the dashboard with most recent executions.
+You will now see the dashboard:
+
+![The dashboard](./img/dashboard.png)
 
 </TabItem>
 
@@ -118,12 +123,14 @@ You will now see the dashboard with most recent executions.
 1. Login to Testkube.
 2. Click the `Get access to a demo environment` button.
 
-You will now see the dashboard with most recent executions without having to install an agent.
+You will now see the dashboard without having to install an agent.
+
+![The dashboard](./img/dashboard.png)
 
 </TabItem>
 </Tabs>
 
-## Creating your first test workflow
+## 3. Defining your first test workflow
 
 Let's take a look at a K6 load test to familiarize ourselves with Testkube's workflows:
 
@@ -135,11 +142,10 @@ kind: TestWorkflow
 metadata:
   # The workflow will have a name that you define here
   name: my-test
-  # By default, workflows should be within the namespace of the Testkube agent
+  # By default, workflows should be applied to the namespace of the Testkube agent
   namespace: testkube
-  # Labels allow you to search and group
+  # Labels allow you to filter and group within the dashboard and CLI
   labels:
-    team: blue
     app.kubernetes.io/name: my-api
     app.kubernetes.io/part-of: my-cms
     testkube.io/test-tool: k6s
@@ -147,29 +153,35 @@ metadata:
 spec:
   # The content property allows you to fetch your test cases and source code.
   # You can check out content from git or create specific files from strings.
+  # In this case, we'll go for an inline test for simplicity.
   content:
-    # An inline test is used for simplicity, generally you'd checkout a git repository.
     files:
       - path: k6.js
         content: |
-          import http from 'k6/http';
+          import http from "k6/http";
+          import {
+            textSummary,
+            jUnit,
+          } from "https://jslib.k6.io/k6-summary/0.0.2/index.js";
+
           export const options = {
-              thresholds: {
-              http_req_failed: ['rate<0.01'],
-              }
+            thresholds: {
+              http_req_failed: ["rate<0.01"],
+            },
           };
           export default function () {
-              http.get('https://testkube.io/');
+            http.get("http://test.k6.io");
           }
           export function handleSummary(data) {
-            console.log('Preparing the end-of-test summary...');
-
             return {
-              'junit.xml': jUnit(data), // Transform summary and save it as a JUnit XML...
+              stdout: textSummary(data, { indent: " ", enableColors: true }),
+              "junit.xml": jUnit(data),
             };
           }
-  # Steps are the main building blocks in workflows. Each step is executed in specific order.
-  # You can use multiple images to setup or tear down your tests.
+  container:
+    workingDir: /data
+  # Steps are the main building blocks in workflows. Each step is executed in sequential order.
+  # All steps share the file system and can run a specific images.
   steps:
     # Each step can have its own image and shares the file system. You can use steps
     # to setup or teardown your testing tool and any test dependencies.
@@ -184,13 +196,13 @@ spec:
         paths: ["junit.xml"]
 ```
 
-The surface of workflows has only been scratched with this example,
-though it's sufficient for our quickstart. You can later learn more about
-different workflows in the next steps.
+While this only scratches the surface of workflows,
+we can already go ahead and try to run this workflow.
+You can learn more about workflows in the next steps.
 
-## Run your test workflow
+## 4. Run your test workflow
 
-<Tabs groupId="tutorial-run-test">
+<Tabs groupId="tutorial-cli">
 
 <TabItem value="dashboard" label="Using the Dashboard">
 
@@ -198,6 +210,10 @@ different workflows in the next steps.
 2. Copy and paste the test workflow above.
 3. Click the `Create` button.
 4. View the status and logs of the workflow as it is executing.
+
+:::info
+Alternatively, you can use the test workflow wizard to create your own test workflow from scratch leveraging test workflow templates for a variety of tools such as Postman, Artillery, Cypress, Playwright and more.
+:::
 
 </TabItem>
 
@@ -215,21 +231,21 @@ kubectl apply -f my-workflow.yaml && kubectl testkube run tw my-test --watch
 </TabItem>
 </Tabs>
 
-## Looking at past executions
+## 5. Looking at past executions
 
-About Logs and artifacts
-
-<Tabs groupId="tutorial-past">
-<TabItem value="dashboard" label="Dashboard" default>
+<Tabs groupId="tutorial-cli">
+<TabItem value="dashboard" label="Using the dashboard" default>
 
 1. Go to the dashboard and open your recent execution
 2. You can see this execution's logs right away
 3. You can see this execution's artifacts by going to the `Artifacts` tab.
 4. Click the download icon to download it.
 
+![A past execution](./img/past-execution.png)
+
 </TabItem>
 
-<TabItem value="cli" label="CLI">
+<TabItem value="cli" label="Using the CLI">
 
 ```bash
 # List recent executions
@@ -251,10 +267,23 @@ kubectl testkube get twe 664dbae9924211bb076bd58e --browse
 </TabItem>
 </Tabs>
 
-## Integrate within your pipeline
+## 6. Integrate within your pipeline
 
-<Tabs groupId="tutorial-run-test">
-<TabItem value="dashboard" label="Dashboard">
+Tests can be integrated in your CI workflow, run on a cron schedule or trigger on a Kubernetes event.
+For example, I want to run this test every time my deployment's image updates.
+
+<Tabs groupId="tutorial-integrate">
+<TabItem value="kubernetes" label="Trigger on a Kubernetes event">
+
+1. Browse to your triggers within the left sidebar
+2. Click the `Create a new trigger` button.
+3. Follow the instructions on the form.
+
+![create-trigger](./img/create-trigger.png)
+
+</TabItem>
+
+<TabItem value="ci" label="Trigger in CI">
 
 1. Browse to your test workflow within the dashboard
 2. Click `CI/CD Integrations` tab
@@ -265,16 +294,22 @@ Testkube currently comes with instructions for GitHub Actions, GitLab CI, Circle
 
 </TabItem>
 
-<TabItem value="other" label="">
+<TabItem value="cron" label="Trigger on a schedule">
 
-Testkube can be integrated
+1. Browse to your test workflow
+2. Click "Edit Workflow" in the dotted menu top-right.
+3. Make the following changes and save the workflow:
 
-1. Copy and paste the workflow to a file.
-2. Save the file named my-workflow.yaml.
-3. Execute the following command:
-
-```bash
-kubectl apply -f my-workflow.yaml && kubectl testkube run tw my-test
+```diff
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata: …
+spec:
++  events:
++  - cronjob:
++      crob: '*/5 * * * *'
+  content: …
+  steps: …
 ```
 
 </TabItem>
@@ -283,17 +318,16 @@ kubectl apply -f my-workflow.yaml && kubectl testkube run tw my-test
 ## Next steps
 
 Congratulations on running your first test workflow!
+At this point you should have installed Testkube, run a sample test and integrated that within your pipeline.
+Our recommended next step is to write run one of your own tests within Testkube.
 
-Our recommended next steps is to get started on your own test workflows.
-To help you learn how to do this we recommend you to:
+To learn how to do this we recommend you to either:
 
-- [Follow a step by step tutorial which adds tests to a sample application.][upnext-tutorial]
-- [Explore a variety of Test Workflow examples.][upnext-examples]
-- [Dive deeper into the Test Workflow documentation.][upnext-docs]
+- [Follow a tutorial which adds tests to a sample application.][upnext-tutorial]
+- [Create your test based on one of our workflow examples.][upnext-examples]
+- [Dive deeper into the workflow documentation.][upnext-docs]
 
-[troubleshoot-agent]: http://www.example.com
-[testkube-quickstart]: http://www.example.com
-[testkube-installing]: http://www.example.com
+[testkube-installing]: /articles/install/overview
 [upnext-tutorial]: /articles/tutorial/example
-[upnext-examples]: https://github.com/argoproj/argo-events/tree/master/examples/sensors
+[upnext-examples]: https://github.com/kubeshop/testkube/tree/develop/test
 [upnext-docs]: /articles/test-workflows
