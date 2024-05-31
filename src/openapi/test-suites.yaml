@@ -1,0 +1,509 @@
+openapi: 3.0.1
+info:
+  title: Testkube API
+  description: >-
+    Testkube provides a Kubernetes-native framework for test definition,
+    execution and results
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 1.0.0
+paths:
+  /test-suites:
+    post:
+      summary: Create new test suite
+      description: Create new test suite action
+      operationId: createTestSuite
+      requestBody:
+        description: test details body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/TestSuiteUpsertRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/yaml:
+              schema:
+                type: string
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/TestSuite'
+        '400':
+          description: >-
+            problem with test suite definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    get:
+      summary: Get all test suites
+      description: Returns array of test suites
+      operationId: listTestSuites
+      parameters:
+        - $ref: './components.yaml#/components/parameters/Selector'
+        - $ref: './components.yaml#/components/parameters/TextSearch'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/TestSuite'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input for CRD generation
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with listing test suites from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    delete:
+      summary: Delete test suites
+      description: Deletes all or labeled test suites
+      operationId: deleteTestSuites
+      parameters:
+        - $ref: './components.yaml#/components/parameters/Selector'
+      responses:
+        '204':
+          description: no content
+        '404':
+          description: test suite not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+  /test-suites/{id}:
+    get:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      summary: Get test suite by ID
+      description: Returns test suite with given name
+      operationId: getTestSuiteByID
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/TestSuite'
+            text/yaml:
+              schema:
+                type: string
+        '404':
+          description: test suite not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '500':
+          description: could not get execution result from the database
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    patch:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      summary: Update test suite
+      description: Update test based on test suite content or git based data
+      operationId: updateTestSuite
+      requestBody:
+        description: test suite details body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/TestSuiteUpdateRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/TestSuite'
+        '400':
+          description: >-
+            problem with test suite definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '404':
+          description: test suite not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    delete:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      summary: Delete test suite
+      description: Deletes a test suite
+      operationId: deleteTestSuite
+      responses:
+        '204':
+          description: no content
+        '404':
+          description: test suite not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+  /test-suites/{id}/metrics:
+    get:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: './components.yaml#/components/parameters/LastNDays'
+        - $ref: './components.yaml#/components/parameters/Limit'
+      summary: Get test suite metrics
+      description: >-
+        Gets test suite metrics for given tests executions, with particular
+        execution status and timings
+      operationId: getTestSuiteMetrics
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/ExecutionsMetrics'
+        '500':
+          description: problem with read information from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+  /test-suites/{id}/tests:
+    get:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      summary: List tests for test suite
+      description: List available tests for test suite
+      operationId: listTestSuiteTests
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Test'
+            text/yaml:
+              schema:
+                type: string
+        '404':
+          description: test suite not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+  /test-suites/{id}/abort:
+    post:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      summary: Abort all executions of a test suite
+      description: Abort all test executions of a test suite
+      operationId: abortTestSuiteExecutions
+      responses:
+        '204':
+          description: no content
+        '404':
+          description: no execution found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '500':
+          description: problem with aborting test suite execution
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+  /test-suites/{id}/executions:
+    post:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: './components.yaml#/components/parameters/Namespace'
+        - $ref: './components.yaml#/components/parameters/LastNDays'
+        - $ref: './components.yaml#/components/parameters/TestSuiteExecutionName'
+      summary: Starts new test suite execution
+      description: >-
+        New test suite execution returns new execution details on successful
+        execution start
+      operationId: executeTestSuite
+      requestBody:
+        description: body passed to configure execution
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/TestSuiteExecutionRequest'
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/TestSuiteExecutionsResult'
+        '400':
+          description: problem with request body
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '404':
+          description: test suite not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '500':
+          description: problem with test suite execution
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    get:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: './components.yaml#/components/parameters/PageSize'
+        - $ref: './components.yaml#/components/parameters/PageIndex'
+        - $ref: './components.yaml#/components/parameters/TestExecutionsStatusFilter'
+        - $ref: './components.yaml#/components/parameters/StartDateFilter'
+        - $ref: './components.yaml#/components/parameters/EndDateFilter'
+      summary: Get all test suite executions
+      description: Returns array of all available test suite executions
+      operationId: listTestSuiteExecutions
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/TestSuiteExecutionsResult'
+        '500':
+          description: problem with getting test suite executions from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+  /test-suites/{id}/executions/{executionID}:
+    get:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: './components.yaml#/components/parameters/executionID'
+      summary: Get test suite execution
+      description: Returns test suite execution with given executionID
+      operationId: getTestSuiteExecution
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/TestSuiteExecution'
+        '404':
+          description: test not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '500':
+          description: problem with getting test suite executions from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with Kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    patch:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: './components.yaml#/components/parameters/executionID'
+      summary: Aborts testsuite execution
+      description: Aborts testsuite execution with given executionID
+      operationId: abortTestSuiteExecution
+      responses:
+        '204':
+          description: no content
+        '404':
+          description: test suite not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '500':
+          description: problem with read information from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+  /test-suites/{id}/executions/{executionID}/artifacts:
+    get:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: './components.yaml#/components/parameters/executionID'
+      summary: Get test suite execution artifacts
+      description: Returns test suite execution artifacts with given executionID
+      operationId: getTestSuiteExecutionArtifactsByTestsuite
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Artifact'
+        '404':
+          description: test suite not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '500':
+          description: problem with getting test suite executions from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'

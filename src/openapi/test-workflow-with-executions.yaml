@@ -1,0 +1,99 @@
+openapi: 3.0.1
+info:
+  title: Testkube API
+  description: >-
+    Testkube provides a Kubernetes-native framework for test definition,
+    execution and results
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 1.0.0
+paths:
+  /test-workflow-with-executions:
+    get:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/Selector'
+      summary: List test workflows with latest execution
+      description: List test workflows from the kubernetes cluster with latest execution
+      operationId: listTestWorkflowWithExecutions
+      responses:
+        '200':
+          description: successful list operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/TestWorkflowWithExecutionSummary'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+  /test-workflow-with-executions/{id}:
+    get:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      summary: Get test workflow details with latest execution
+      description: >-
+        Get test workflow details from the kubernetes cluster with latest
+        execution
+      operationId: getTestWorkflowWithExecution
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/TestWorkflowWithExecution'
+            text/yaml:
+              schema:
+                type: string
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '404':
+          description: the resource has not been found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'

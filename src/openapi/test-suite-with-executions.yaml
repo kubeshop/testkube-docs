@@ -1,0 +1,85 @@
+openapi: 3.0.1
+info:
+  title: Testkube API
+  description: >-
+    Testkube provides a Kubernetes-native framework for test definition,
+    execution and results
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 1.0.0
+paths:
+  /test-suite-with-executions:
+    get:
+      summary: Get all test suite with executions
+      description: Returns array of test suite with executions
+      operationId: listTestSuiteWithExecutions
+      parameters:
+        - $ref: './components.yaml#/components/parameters/Selector'
+        - $ref: './components.yaml#/components/parameters/TextSearch'
+        - $ref: './components.yaml#/components/parameters/TestExecutionsStatusFilter'
+        - $ref: './components.yaml#/components/parameters/PageSize'
+        - $ref: './components.yaml#/components/parameters/PageIndex'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/TestSuiteWithExecutionSummary'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '500':
+          description: problem with getting test suite with executions from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with getting test suite from Kubernetes clusteer
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+  /test-suite-with-executions/{id}:
+    get:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      summary: Get test suite by ID with execution
+      description: Returns test suite with given name with execution
+      operationId: getTestSuiteByIDWithExecution
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/TestSuiteWithExecution'
+            text/yaml:
+              schema:
+                type: string
+        '500':
+          description: problem with getting test suite with execution from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'

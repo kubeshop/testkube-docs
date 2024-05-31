@@ -4,6 +4,7 @@
 const lightCodeTheme = require("./src/themes/prism-testkube-light");
 const darkCodeTheme = require("./src/themes/prism-testkube-dark");
 const redirects = require("./redirects");
+const redocSpecs = require('./src/openapi/redoc-specs');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -60,6 +61,16 @@ const config = {
         },
       },
     ],
+    // Redocusaurus config
+    [
+      'redocusaurus',
+      {
+        specs: redocSpecs,
+        theme: {
+          primaryColor: "#818cf8",
+        },
+      },
+    ]
   ],
 
   themeConfig:

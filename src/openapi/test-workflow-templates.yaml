@@ -1,0 +1,263 @@
+openapi: 3.0.1
+info:
+  title: Testkube API
+  description: >-
+    Testkube provides a Kubernetes-native framework for test definition,
+    execution and results
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 1.0.0
+paths:
+  /test-workflow-templates:
+    get:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/Selector'
+      summary: List test workflow templates
+      description: List test workflow templates from the kubernetes cluster
+      operationId: listTestWorkflowTemplates
+      responses:
+        '200':
+          description: successful list operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/TestWorkflowTemplate'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    delete:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/Selector'
+      summary: Delete test workflow templates
+      description: Delete test workflow templates from the kubernetes cluster
+      operationId: deleteTestWorkflowTemplates
+      responses:
+        '204':
+          description: no content
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    post:
+      summary: Create test workflow template
+      description: Create test workflow template in the kubernetes cluster
+      operationId: createTestWorkflowTemplate
+      requestBody:
+        description: test workflow template body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/TestWorkflowTemplate'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful creation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/TestWorkflowTemplate'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with body parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+  /test-workflow-templates/{id}:
+    get:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      summary: Get test workflow template details
+      description: Get test workflow template details from the kubernetes cluster
+      operationId: getTestWorkflowTemplate
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/TestWorkflowTemplate'
+            text/yaml:
+              schema:
+                type: string
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '404':
+          description: the resource has not been found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    put:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      summary: Update test workflow template details
+      description: Update test workflow template details in the kubernetes cluster
+      operationId: updateTestWorkflowTemplate
+      requestBody:
+        description: test workflow template body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/TestWorkflowTemplate'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/TestWorkflowTemplate'
+            text/yaml:
+              schema:
+                type: string
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '404':
+          description: the resource has not been found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    delete:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      summary: Delete test workflow template
+      description: Delete test workflow template from the kubernetes cluster
+      operationId: deleteTestWorkflowTemplate
+      responses:
+        '204':
+          description: no content
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '404':
+          description: the resource has not been found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'

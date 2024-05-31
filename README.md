@@ -70,3 +70,24 @@ content
 ```
 ````
 
+## Updating the OpenAPI Docs
+
+These docs use [redocusaurus](https://redocusaurus.vercel.app/) to generate OpenAPI documentation, but
+since the Testkube OpenAPI definition is too large (resulting in _very_ long build/rendering times), there is a 
+small script at `src/scripts/split-openapi.ts` that:
+
+- retrieves the OpenAPI definition from https://raw.githubusercontent.com/kubeshop/testkube/main/api/v1/testkube.yaml
+- splits it into smaller definitions into the `src/openapi` folder (one for each root path segment)
+- generates corresponding mdx files into the `docs/openapi` folder
+- generates a `src/opeanpi/redoc-sidebar.js` file that is included into the main `sidebar.js` config to add the 
+  generated mdx files to the sidebar navigation 
+- generates a `src/openapi/redoc-specs.js` file that is included into the `docusaurus.config.js` config to 
+  add the generated specs to the redocusaurs configuration
+
+This script needs to be run every time the openapi definition is updated to regenerate the docs accordingly:
+
+```
+npm run split-openapi
+```
+
+Once run, the generated/updated files need to be committed back to the repo for the automated build to publish them.
