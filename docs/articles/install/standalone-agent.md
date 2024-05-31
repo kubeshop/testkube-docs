@@ -1,6 +1,35 @@
-# Testkube Helm Charts
+# Standalone agent
 
-## 1. Add the Kubeshop Helm repository.
+Testkube standalone agent includes our full test execution and orchestration engine.
+This means that all CRDs are available, you can apply triggers and run test workflows, then afterwards view the resulting status, logs and artifacts.
+
+Overal there are few reasons to run the agent without the control plane.
+The latter comes with a dashboard and many other features.
+The main benefit is that this works better in resource constrained environments and that it is 100% open-source.
+
+You can install with the CLI or Helm. The following components will be installed into your Kubernetes cluster:
+
+- Create a Testkube namespace.
+- Deploy the Testkube API.
+- Use MongoDB for test results and Minio for artifact storage (optional; disable with --no-minio).
+- Testkube will listen and manage all the CRDs for Tests, TestSuites, Executors, etc… inside the Testkube namespace.
+
+Once installed you can verify your installation and check that Testkube is up and running with
+`kubectl get all -n testkube`. Once validated, you're ready to unleash the full potential of Testkube in your environment. Testkube OSS is here to help you to powering your development and testing workflows seamlessly.
+
+## Install with CLI
+
+You can install the standalone agent by executing the following command.
+By default it will install within the `testkube` namespace for your
+current Kubernetes context.
+
+```
+testkube init
+```
+
+## Install with Helm
+
+### 1. Add the Kubeshop Helm repository.
 
 ```sh
 helm repo add kubeshop https://kubeshop.github.io/helm-charts
@@ -10,7 +39,7 @@ If this repo already exists, run `helm repo update` to retrieve
 the `latest` versions of the packages. You can then run `helm search repo
 testkube` to see the charts.
 
-## 2. Install the `testkube` chart.
+### 2. Install the `testkube` chart.
 
 ```sh
 helm install --create-namespace my-testkube kubeshop/testkube
@@ -39,56 +68,12 @@ helm delete --namespace namespace_name my-testkube kubeshop/testkube
 
 :::
 
-## Testkube Multi-namespace Feature
-
-It is possible to deploy multiple Testkube instances into the same Kubernetes cluster. Please follow these installation commands.
-
-**1. For new installations:**
-
-```sh
-helm repo add kubeshop https://kubeshop.github.io/helm-charts
-
-helm install testkube kubeshop/testkube --namespace testkube --create-namespace --set testkube-api.multinamespace.enabled=true
-
-helm install testkube1 kubeshop/testkube -n testkube1 --create-namespace --set testkube-api.multinamespace.enabled=true --set testkube-operator.enabled=false
-```
-
-These commands will deploy Testkube components into two namespaces: testkube and testkube1 and will create a watcher role to watch k8s resources in each namespace respectively. If you need to watch resources besides the installation namespace, please add them to the **_additionalNamespaces_** variable in **_testkube-api_** section:
-
-```sh
-testkube-api:
-  additionalNamespaces:
-  - namespace2
-  - namespace3
-```
-
-Additionally, It is possible to change the namespace for **_testkube-operator_** by setting a value for **_namespace_** variable in the **_testkube-operator_** section:
-
-```sh
-testkube-operator:
-  namespace: testkube-system
-```
-
-:::note
-Please note that the **Testkube Operator** creates **ClusterRoles**, so for the second deployment of Testkube, we need to disable the Operator, because it will fail with a `resources already exist` error. Be aware that the Operator is deployed once with the first chart installation of Testkube. Therefore, if you uninstall the first release, it will uninstall the Operator as well.
-:::
-
-**2. For the users who already have Testkube installed**
-
-Run the following commands to deploy Testkube in another namespace:
-
-```sh
-helm repo update kubeshop
-
-helm install testkube1 kubeshop/testkube --namespace testkube1 --set testkube-api.multinamespace.enabled=true --set testkube-operator.enabled=false
-```
-
 #### Helm Properties
 
 The following Helm defaults are used in the `testkube` chart:
 
-| Parameter                              | Is optional | Default                              | Additional details                          |
-| -------------------------------------- | ----------- | ------------------------------------ | ------------------------------------------- |
+| Parameter                              | Is optional | Default                              | Additional details             |
+| -------------------------------------- | ----------- | ------------------------------------ | ------------------------------ |
 | mongodb.auth.enabled                   | yes         | false                                |
 | mongodb.service.port                   | yes         | "27017"                              |
 | mongodb.service.portName               | yes         | "mongodb"                            |
@@ -118,18 +103,16 @@ The following Helm defaults are used in the `testkube` chart:
 | testkube-api.dashboardUri              | yes         | ""                                   |
 | testkube-api.clusterName               | yes         | ""                                   |
 | testkube-api.storage.compressArtifacts | yes         | true                                 |
-| testkube-api.enableSecretsEndpoint     | yes         | false                                | [Learn more](./secrets-enable-endpoint.md)  |
+| testkube-api.enableSecretsEndpoint     | yes         | false                                | [Learn more][secrets-endpoint] |
 | testkube-api.disableMongoMigrations    | yes         | false                                |
 | testkube-api.enabledExecutors          | yes         | ""                                   |
-| testkube-api.disableSecretCreation     | yes         | false                                | [Learn more](./secrets-disable-creation.md) |
+| testkube-api.disableSecretCreation     | yes         | false                                | [Learn more][secrets-creation] |
 | testkube-api.defaultStorageClassName   | yes         | ""                                   |
 | testkube-api.enableK8sEvents           | yes         | true                                 |
 
-> For more configuration parameters of a `MongoDB` chart please visit:
-> [MongoDB Parameters](https://github.com/bitnami/charts/tree/master/bitnami/mongodb#parameters)
+> For more configuration parameters of a `MongoDB` chart please visit [the MongoDB docs][mongo-config].
 
-> For more configuration parameters of an `NATS` chart please visit:
-> [NATS Helm Chart](https://docs.nats.io/running-a-nats-service/nats-kubernetes/helm-charts)
+> For more configuration parameters of an `NATS` chart please visit [the NATS docs][nats-config].
 
 :::note
 
@@ -146,3 +129,14 @@ global:
 They override all sub-chart values for the image parameters if specified.
 
 :::
+
+## Upgrading
+
+See [upgrade][upgrade] for instructions on how to upgrade the standalone agent.
+
+[secrets-endpoint]: /articles/secrets-enable-endpoint
+[secrets-creation]: /articles/secrets-disable-creation
+[oss-vs-pro]: /articles/open-source-or-pro
+[upgrade]: /articles/upgrade
+[mongo-config]: https://github.com/bitnami/charts/tree/master/bitnami/mongodb#parameters
+[nats-config]: https://docs.nats.io/running-a-nats-service/nats-kubernetes/helm-charts

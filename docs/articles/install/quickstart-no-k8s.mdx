@@ -4,6 +4,7 @@ Local evaluation of Testkube requires you to have access to a Kubernetes cluster
 remotely in some cloud provider like AWS, Google, Azure, etc.
 
 If you don't have access to a Kubernetes cluster for evaluating Testkube you have two options:
+
 1. Evaluate Testkube using the Saas Version available at [app.testkube.io](https://app.testkube.io), this includes a demo environment that contains sample resources to help you get started.
 2. Install a lightweight Kubernetes cluster locally for evaluation purposes (not as hard as you might think)
 
@@ -27,6 +28,7 @@ There are a number of lightweight Kubernetes distributions that you can install 
 so make sure that is up and running before moving on (download from https://www.docker.com/products/docker-desktop/).
 
 Recommended Kubernetes distributions for local Testkube evaluation are:
+
 - kind - https://kind.sigs.k8s.io/
 - minikube - https://minikube.sigs.k8s.io/
 - k3s - https://k3s.io/
@@ -60,5 +62,6 @@ Then create a default cluster just as on MacOS above:
 kind create cluster
 ```
 
-That's it! Now you can go to the [Testkube Quickstart](quickstart-install.mdx) and pick up from there!
+That's it! Now you can go to the [Testkube Quickstart][install-with-cli] and pick up from there!
 
+[install-with-cli]: /articles/install/install-with-cli
