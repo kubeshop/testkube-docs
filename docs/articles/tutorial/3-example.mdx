@@ -12,6 +12,7 @@ It consists of a small React web app with a NodeJS backend and PostgreSQL databa
 ## Objectives
 
 - Learn how to run unit, black-box and end-to-end tests using TestWorkflows.
+- Learn how to use private repositories.
 - Learn about TestWorkflow configuration, sharding and services.
 
 ## Running blackbox tests
@@ -64,22 +65,85 @@ testkube run testworkflow test-api-blackbox --config ref=${CI_COMMIT_SHA} --watc
 ## Running tests on a private git repository
 
 When running your own test workflows, you likely use a private git repository.
-You can use `config` to authenticate. While it will depend a bit on the git provider,
-it will likely look similar to this example with Github fine-grained access tokens:
+You can use a Kubernetes Secret to store your git credentials.
+Afterwards, you can use them to configure your username and password.
+
+<Tabs groupId="example-auth">
+<TabItem value="https" label="With HTTP">
+
+To authenticate with basic authentication:
 
 ```diff
 apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata: ...
 spec:
-+  config:
-+    accessToken:
-+      type: string
   content:
     git:
--      uri: https://github.com/your-org/public-repo.git
-+      uri: https://oauth2:{{ config.accessToken }}@github.com/your-org/private-repo.git
+      uri: gitlab.example.com/tanuki/awesome_project.git
++      username: <username>
++      tokenFrom:
++        secretKeyRef:
++          name: gitlab-credentials
++          key: token
 ```
+
+</TabItem>
+
+<TabItem value="https-header" label="With HTTP Header">
+
+To authenticate with `Authorization: Bearer <token>` header:
+
+```diff
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata: ...
+spec:
+  content:
+    git:
+      uri: gitlab.example.com/tanuki/awesome_project.git
++      authType: header
++      tokenFrom:
++        secretKeyRef:
++          name: gitlab-credentials
++          key: token
+```
+
+</TabItem>
+
+<TabItem value="ssh" label="With SSH">
+
+To authenticate with SSH you will need to add the relevant files:
+
+```diff
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata: ...
+spec:
+  content:
+    git:
+      uri: gitlab.example.com/tanuki/awesome_project.git
++    content:
++      files:
++      - path: /root/.ssh/id_rsa
++        contentFrom:
++          secretKeyRef:
++            name: repo-creds
++            key: id_rsa
++      - path: /root/.ssh/id_rsa.pub
++        contentFrom:
++          secretKeyRef:
++            name: repo-creds
++            key: id_rsa.pub
++      - path: /root/.ssh/config
++        contentFrom:
++          secretKeyRef:
++            name: repo-creds
++            key: config
+```
+
+</TabItem>
+</Tabs>
 
 ## Run E2E tests
 
