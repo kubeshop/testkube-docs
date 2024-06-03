@@ -73,7 +73,7 @@ Afterwards, you can use them to configure your username and password.
 
 To authenticate with basic authentication:
 
-```diff
+```yaml {8-12}
 apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata: ...
@@ -81,11 +81,11 @@ spec:
   content:
     git:
       uri: gitlab.example.com/tanuki/awesome_project.git
-+      username: <username>
-+      tokenFrom:
-+        secretKeyRef:
-+          name: gitlab-credentials
-+          key: token
+      username: <username>
+      tokenFrom:
+        secretKeyRef:
+          name: gitlab-credentials
+          key: token
 ```
 
 </TabItem>
@@ -94,7 +94,7 @@ spec:
 
 To authenticate with `Authorization: Bearer <token>` header:
 
-```diff
+```yaml {8-12}
 apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata: ...
@@ -102,11 +102,11 @@ spec:
   content:
     git:
       uri: gitlab.example.com/tanuki/awesome_project.git
-+      authType: header
-+      tokenFrom:
-+        secretKeyRef:
-+          name: gitlab-credentials
-+          key: token
+      authType: header
+      tokenFrom:
+        secretKeyRef:
+          name: gitlab-credentials
+          key: token
 ```
 
 </TabItem>
@@ -115,7 +115,7 @@ spec:
 
 To authenticate with SSH you will need to add the relevant files:
 
-```diff
+```yaml {8-24}
 apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata: ...
@@ -123,23 +123,23 @@ spec:
   content:
     git:
       uri: gitlab.example.com/tanuki/awesome_project.git
-+    content:
-+      files:
-+      - path: /root/.ssh/id_rsa
-+        contentFrom:
-+          secretKeyRef:
-+            name: repo-creds
-+            key: id_rsa
-+      - path: /root/.ssh/id_rsa.pub
-+        contentFrom:
-+          secretKeyRef:
-+            name: repo-creds
-+            key: id_rsa.pub
-+      - path: /root/.ssh/config
-+        contentFrom:
-+          secretKeyRef:
-+            name: repo-creds
-+            key: config
+    content:
+      files:
+        - path: /root/.ssh/id_rsa
+          contentFrom:
+            secretKeyRef:
+              name: repo-creds
+              key: id_rsa
+        - path: /root/.ssh/id_rsa.pub
+          contentFrom:
+            secretKeyRef:
+              name: repo-creds
+              key: id_rsa.pub
+        - path: /root/.ssh/config
+          contentFrom:
+            secretKeyRef:
+              name: repo-creds
+              key: config
 ```
 
 </TabItem>

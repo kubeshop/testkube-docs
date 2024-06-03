@@ -59,7 +59,7 @@
   --ifm-color-primary-lightest: #4fddbf;
   --ifm-color-badge-border: #0ea5e9;
   --ifm-color-badge: #0c4a6e;
-  --docusaurus-highlighted-code-line-bg: var(var(--ifm-color-gray-1000));
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.2);
 }
 
 html[data-theme="dark"] {
