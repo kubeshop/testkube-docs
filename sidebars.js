@@ -14,7 +14,7 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   // By default, Docusaurus generates a sidebar from the docs folder structure
-  tutorialSidebar: [
+  testkubeSidebar: [
     {
       type: "category",
       label: "Getting Started",
@@ -68,7 +68,7 @@ const sidebars = {
       items: [
             "articles/test-workflows",
             "articles/test-workflows-creating",
-            "articles/test-workflow-templates",
+            "articles/test-workflows-templates",
             "articles/test-workflows-examples-basics",
             "articles/test-workflows-examples-configuration",
             "articles/test-workflows-examples-expressions",
@@ -114,7 +114,7 @@ const sidebars = {
               items: [
                 { type: "doc", label: "Overview", id: "articles/test-workflows-templates" },
                 { type: "doc", label: "Defining", id: "articles/test-workflows" },
-                { type: "doc", label: "Using", id: "articles/test-workflows-examples-template" },
+                { type: "doc", label: "Using", id: "articles/test-workflows-examples-templates" },
               //  { type: "doc", label: "Official Templates", id: "" },
               ],
             },
@@ -133,7 +133,7 @@ const sidebars = {
               label: "Test Insights",
               items: [
                 { type: "doc", label: "Operational Insights", id: "testkube-pro/articles/AI-test-insights" },
-                { type: "doc", label: "Quality Metrics", id: "/articles/metrics" },
+                { type: "doc", label: "Quality Metrics", id: "articles/metrics" },
                 { type: "doc", label: "Status Pages", id: "testkube-pro/articles/status-pages" },
               ],
             },
@@ -152,7 +152,7 @@ const sidebars = {
               label: "Testkube CLI",
               items: [
                 { type: "doc", label: "Install the Testkube CLI", id: "articles/install/cli" },
-                { type: "doc", label: "Install Testkube with the CLI", id: "/articles/install/install-with-cli" },
+                { type: "doc", label: "Install Testkube with the CLI", id: "articles/install/install-with-cli" },
                 { type: "doc", label: "Managing CLI Context", id: "testkube-pro/articles/managing-cli-context" },
                 { type: "doc", label: "Docker CLI", id: "articles/testkube-cli-docker" },
                 { type: "doc", label: "OAuth for CLI", id: "articles/oauth-cli" },
@@ -163,7 +163,7 @@ const sidebars = {
               label: "Advanced Features",
               items: [
                 { type: "doc", label: "Cached Test Results", id: "testkube-pro/articles/cached-results" },
-                { type: "doc", label: "Templates", id: "/articles/templates" },
+                { type: "doc", label: "Templates", id: "articles/templates" },
                 { type: "doc", label: "CDEvents", id: "articles/cd-events" },
                 { type: "doc", label: "Generating Test CRDs", id: "articles/generate-test-crds" },
               ],
@@ -181,9 +181,9 @@ const sidebars = {
           type: "category",
           label: "User Management & RBAC",
           items: [
-            { type: "doc", label: "Organization Members", id: "testkube-pro/articles/organization-management/#members" },
-            { type: "doc", label: "Environment Members", id: "testkube-pro/articles/environment-management/#managing-environment-member-roles" },
-            { type: "doc", label: "API Tokens", id: "testkube-pro/articles/organization-management/api-tokens" },
+            { type: "doc", label: "Organization Members", id: "testkube-pro/articles/organization-management" },
+            { type: "doc", label: "Environment Members", id: "testkube-pro/articles/environment-management" },
+            { type: "doc", label: "API Tokens", id: "testkube-pro/articles/organization-management" },
           ],
         },
         {
@@ -191,7 +191,7 @@ const sidebars = {
           label: "SSO",
           items: [
            // { type: "doc", label: "Default User Mapping", id: "" },
-            { type: "doc", label: "OAuth for CLI", id: "/articles/oauth-cli" },
+            { type: "doc", label: "OAuth for CLI", id: "articles/oauth-cli" },
           ],
         },
       ],
@@ -260,7 +260,7 @@ const sidebars = {
         { type: "doc", label: "Flux", id: "articles/flux-integration" },
         // { type: "doc", label: "Argo Rollouts", id: "" },
         // { type: "doc", label: "Flagger", id: "" },
-        { type: "doc", label: "CDEvents", id: "articles/cdevents" },
+        { type: "doc", label: "CDEvents", id: "articles/cd-events" },
         { type: "doc", label: "Slack Integration", id: "articles/slack-integration" },
         { type: "doc", label: "Prometheus Metrics", id: "articles/metrics" },
       ],
@@ -275,7 +275,7 @@ const sidebars = {
           label: "CRDs",
           items: [
             { type: "doc", label: "TestWorkflow", id: "articles/test-workflows" },
-            { type: "doc", label: "Trigger", id: "articles/crd-reference" },
+            { type: "doc", label: "Trigger", id: "articles/crds-reference" },
           ],
         },
         {
@@ -287,8 +287,8 @@ const sidebars = {
           type: "category",
           label: "OpenAPI Definition",
           items: [
-            { type: "doc", label: "OSS", id: "articles/openapi" },
-            { type: "doc", label: "PRO", id: "articles/openapi" },
+            { type: "doc", label: "OSS", id: "openapi" },
+            { type: "doc", label: "PRO", id: "openapi" },
           ],
         },
         {
@@ -309,7 +309,7 @@ const sidebars = {
       type: "html",
       value: "<hr />",
     },
-    
+
     "articles/testkube-oss",
     {
       type: "category",

@@ -2,7 +2,7 @@
 
 The Testkube CLI includes installation commands to help you set up Testkube for your environment. You can choose from one of our built-in configuration profiles (see below) and the CLI will help you with the last-mile configuration to finalise your setup. You can find instructions on how to install the CLI [here][install-cli].
 
-## Deploy an on-prem demo
+## Deploy an On-prem Demo
 
 Our demo profile bootstraps Testkube’s control plane (dashboard) and agent within the same namespace. It will also create an admin user, organisation and environment.
 

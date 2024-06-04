@@ -447,7 +447,7 @@ spec:
         - '**/*'
 ```
 ## `template` - Executing from a Test Workflow Template
-`template` allows executing from - [Test Workflow Template](./test-workflow-templates.md):
+`template` allows executing from - [Test Workflow Template](./test-workflows-templates.md):
 ```yaml
   steps:
   - name: Run from template
