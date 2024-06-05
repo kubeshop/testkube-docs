@@ -9,7 +9,7 @@ or some fixtures.
 :::note
 
 All the examples here that are using `content` are using it directly under the `spec`.
-Please note, that you can also use it under specific step - this way, such files won't be available in different steps.
+Please note, that you can also use it under a specific step - this way, such files won't be available in different steps.
 
 :::
 
@@ -17,7 +17,7 @@ Please note, that you can also use it under specific step - this way, such files
 
 ### /data
 
-By default, `/data` directory has an empty volume mounted, that can be shared across the steps.
+By default, the `/data` directory has an empty volume mounted that can be shared across the steps.
 
 :::info
 
@@ -28,7 +28,7 @@ Please note, that this directory is shared across steps of a single execution. T
 ### Custom Volumes
 
 You may create different directories that will share data across steps using Kubernetes. To do so, create and mount [**Empty Dir**](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) volume.
-This may be useful for i.e. sharing a dependencies across steps.
+This may be useful for sharing a dependencies across steps, for example.
 
 ```yaml
 spec:
@@ -49,11 +49,11 @@ spec:
 
 :::info
 
-We are planning to prepare built-in caching mechanism, that will allow you to share data more easily.
+We are planning to prepare a built-in caching mechanism that will allow you to share data more easily.
 
 :::
 
-If you want to cache some data between executions, i.e. to speed up execution, you may consider mounting [**Host's file system**](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) with `hostPath`.
+If you want to cache some data between executions, i.e., to speed up execution, you may consider mounting [**Host's file system**](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) with `hostPath`.
 
 ```yaml
 spec:
@@ -75,10 +75,10 @@ This way, you will have a cache for each execution of the Test Workflow on the s
 
 :::tip
 
-If you want to cache data across multiple nodes, you may consider to:
-* use Object Storage API like [**Minio**](https://min.io/), [**AWS S3**](https://aws.amazon.com/s3/) or [**GCP Cloud Storage**](https://cloud.google.com/storage),
+If you want to cache data across multiple nodes, you may consider:
+* using an Object Storage API like [**Minio**](https://min.io/), [**AWS S3**](https://aws.amazon.com/s3/) or [**GCP Cloud Storage**](https://cloud.google.com/storage),
   and save/read files using it, or
-* create [**Persistent Volume**](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) and attach it with `pod.volumes` and `container.volumeMounts`.
+* creating a [**Persistent Volume**](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) and attaching it with `pod.volumes` and `container.volumeMounts`.
 
 :::
 
@@ -160,7 +160,7 @@ Testkube allows you to easily fetch the Git repository using `content.git`.
 ### Custom Mount Path
 
 By default, the Git repository contents are mounted at `/data/repo` directory.
-If you want to mount it in different directory, you can use `mountPath` property:
+If you want to mount it in a different directory, you can use `mountPath` property:
 
 ```yaml
 spec:
@@ -234,7 +234,7 @@ spec:
 
 ### Using SSH Key
 
-You can use private SSH key to access your repository, using either plain-text `sshKey` property,
+You can use a private SSH key to access your repository, using either plain-text `sshKey` property,
 or `sshKeyFrom` that has the same interface as `valueFrom` in [**native EnvVar**](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#envvarsource-v1-core).
 
 ```yaml
@@ -258,7 +258,7 @@ spec:
 
 ### Pulling Selected Files
 
-You may pass file patterns ([**cone pattern set**](https://git-scm.com/docs/git-sparse-checkout#_internalscone_pattern_set)) in `content.git.paths` that should be fetched from the Git repository.
+You may pass file patterns ([**cone pattern set**](https://git-scm.com/docs/git-sparse-checkout#_internalscone_pattern_set)) in `content.git.paths` which should be fetched from the Git repository.
 It will use [**sparse checkout**](https://git-scm.com/docs/git-sparse-checkout), so you will avoid transferring unnecessary files.
 
 ```yaml
@@ -307,7 +307,7 @@ spec:
 Sometimes, especially in air-gapped environment, you may want to provide the test data via OCI Registries.
 
 You may use [**ORAS**](https://oras.land/) to fetch artifacts from the OCI registry.
-To do so, run a step with Docker image that has ORAS installed, and pull the artifact into `/data` (or other known volume):
+To do so, run a step with Docker image that has ORAS installed and pull the artifact into `/data` (or other known volume):
 
 ```yaml
 spec:
@@ -322,8 +322,8 @@ spec:
 
 ### OCI Images
 
-Sometimes the registry won't support the OCI Artifacts, and instead they are available as regular images.
-To fetch the data from such image, simply run a step using that image,
+Sometimes the registry won't support the OCI Artifacts, and, instead, they are available as regular images.
+To fetch the data from such an image, simply run a step using that image,
 and copy all the expected contents into `/data` (or other known volume):
 
 ```yaml
