@@ -1,7 +1,7 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Testing a sample application
+# Testing a Sample Application
 
 In this getting started tutorial you will learn how to run tests on a sample application that resembles a real-life three-tier architecture.
 
@@ -15,7 +15,7 @@ It consists of a small React web app with a NodeJS backend and PostgreSQL databa
 - Learn how to use private repositories.
 - Learn about TestWorkflow configuration, sharding and services.
 
-## Running blackbox tests
+## Running Blackbox Tests
 
 To run our blackbox tests, we are going to git clone, install dependencies and run our testing tool.
 You can use [TestWorkflow configuration][tw-config] to set the git ref dynamically and run the workflow for any given commit.
@@ -27,7 +27,7 @@ metadata:
   name: test-api-blackbox
   namespace: testkube
 spec:
-  # Defines parameters that can be used within your workflows
+  # Defines parameters that can be used within your workflows.
   # You can interpolate the variable with an expression: {{ config.your_variable }}.
   config:
     ref:
@@ -37,7 +37,7 @@ spec:
     git:
       uri: https://github.com/kubeshop/testkube-samples
       # The revision is the branch, tag or commit sha of your git repository.
-      # in this case, it's a configuration variable that defaults to the 'main' branch.
+      # In this case, it's a configuration variable that defaults to the 'main' branch.
       revision: "{{ config.ref }}"
       # (optionally) You can limit fetching specific paths to increase cloning performance.
       paths: ["api"]
@@ -47,8 +47,8 @@ spec:
     # The default working directory for your steps. Git content will be checked out in `/data/repo`.
     workingDir: /data/repo/api
   steps:
-    # The `shell` keyword is a shorthand over `run` which makes it convenient to execute commands
-    # In this case we first install all dependencies and afterwards run the tests.
+    # The `shell` keyword is a shorthand over `run` which makes it convenient to execute commands.
+    # In this case, we first install all dependencies and afterwards run the tests.
     # Each of these steps runs in its own container while sharing the file system.
     - name: Install dependencies
       shell: npm ci
@@ -56,16 +56,16 @@ spec:
       shell: npm run test
 ```
 
-You would afterwards call this in your continuous integration with the `--config` flag as seen below:
+Then you would call this in your continuous integration with the `--config` flag as seen below:
 
 ```sh
 testkube run testworkflow test-api-blackbox --config ref=${CI_COMMIT_SHA} --watch
 ```
 
-## Running tests on a private git repository
+## Running Tests on a Private Git Repository
 
-When running your own test workflows, you likely use a private git repository.
-You can use a Kubernetes Secret to store your git credentials.
+When running your own test workflows, you likely use a private Git repository.
+You can use a Kubernetes Secret to store your Git credentials.
 Afterwards, you can use them to configure your username and password.
 
 <Tabs groupId="example-auth">
@@ -145,9 +145,9 @@ spec:
 </TabItem>
 </Tabs>
 
-## Run E2E tests
+## Run E2E Tests
 
-There are various ways to run your end-to-end tests. In this example we will rely on an externally created preview environments.
+There are various ways to run your end-to-end tests. In this example we will rely on an externally created preview environment.
 
 <Tabs groupId="tutorial-example-e2e">
 <TabItem value="external-preview" label="With external previews">
@@ -160,7 +160,7 @@ metadata:
   namespace: testkube
 spec:
   config:
-    # Define the base URL on which the application under test will be available
+    # Define the base URL on which the application under test will be available.
     baseUrl:
       type: string
   content:
@@ -171,7 +171,7 @@ spec:
   container:
     workingDir: /data/repo/app
     # You have full control over the resource requests and limits. In this case,
-    # let's increase Cypress requests as it's quite a big tool to run.
+    # let's increase Cypress requests as it's a large tool to run.
     resources:
       requests:
         cpu: 2
