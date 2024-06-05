@@ -313,6 +313,16 @@ const sidebars = {
     "articles/testkube-oss",
     {
       type: "category",
+      label: "Legacy Tests",
+      items: [
+        { type: "doc", label: "Zap", id: "test-types/executor-zap" },
+        { type: "doc", label: "Distributed JMeter", id: "test-types/executor-distributed-jmeter" },
+        { type: "doc", label: "Container Executor", id: "test-types/container-executor" },
+        { type: "doc", label: "Pre-built Executor", id: "test-types/prebuilt-executor" },
+      ],
+    },
+    {
+      type: "category",
       label: "Contributing",
       items: [
         "articles/contributing",
