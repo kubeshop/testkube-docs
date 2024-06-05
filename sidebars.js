@@ -20,21 +20,15 @@ const sidebars = {
   tutorialSidebar: [
     {
       type: "category",
-      label: "Overview",
-      link: {
-        type: "doc",
-        id: "index",
-      },
+      label: "Introduction",
+      collapsed: false,
+      collapsible: false,
       items: [
-        "articles/supported-tests",
+        "index",
         "articles/testkube-benefits",
-        "articles/open-source-or-pro",
+        "articles/tutorial/quickstart",
+        "articles/tutorial/example",
       ],
-    },
-    {
-      type: "doc",
-      label: "Getting Started",
-      id: "articles/getting-started",
     },
     {
       type: "category",

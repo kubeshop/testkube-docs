@@ -422,6 +422,8 @@ const redirects = [
     to: "/articles/install/install-with-cli",
   },
   {
+    from: "/testkube-enterprise/articles/migrating-from-oss-to-pro",
+    to: "/testkube-pro-on-prem/articles/migrating-from-oss-to-pro",
     from: [
       "/testkube-enterprise/articles/usage-guide",
       "/testkube-pro-on-prem/articles/usage-guide",
@@ -430,6 +432,9 @@ const redirects = [
   },
   {
     from: [
+      "/articles/supported-tests",
+      "/articles/testkube-benefits",
+      "/articles/open-source-or-pro",
       "/testkube-pro-on-prem/articles/migrating-from-oss-to-pro",
       "/testkube-enterprise/articles/migrating-from-oss-to-pro",
     ],

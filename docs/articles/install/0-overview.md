@@ -1,4 +1,4 @@
-# About Installing Testkube
+# Overview
 
 :::info
 **Testkube** has flexibility in its deployments.
