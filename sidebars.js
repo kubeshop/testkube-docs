@@ -90,7 +90,8 @@ const sidebars = {
                  { type: "doc", label: "Overview", id: "articles/testkube-dashboard-explore" },
                  { type: "doc", label: "Settings", id: "articles/testkube-dashboard-general-settings" },
               ],
-            },  
+            }, 
+            { type: "doc", label: "Creating Your First Test", id: "articles/creating-first-test" }, 
             {
               type: "category",
               label: "Test Workflows",
@@ -147,6 +148,8 @@ const sidebars = {
               ],
             },
             { type: "doc", label: "Webhooks", id: "articles/webhooks" },
+            { type: "doc", label: "Source", id: "articles/test-sources" },
+            { type: "doc", label: "Executions", id: "articles/test-executions" },
             {
               type: "category",
               label: "Testkube CLI",
@@ -164,11 +167,39 @@ const sidebars = {
               items: [
                 { type: "doc", label: "Cached Test Results", id: "testkube-pro/articles/cached-results" },
                 { type: "doc", label: "Templates", id: "articles/templates" },
-                { type: "doc", label: "CDEvents", id: "articles/cd-events" },
+                { type: "doc", label: "Emitting Standard CDEvents", id: "articles/cd-events" },
+                { type: "doc", label: "Emitting Kubernetes Events", id: "articles/k8s-events" },
                 { type: "doc", label: "Generating Test CRDs", id: "articles/generate-test-crds" },
               ],
             },
-            // { type: "doc", label: "Deprecated Features", id: "" },
+            {
+              type: "category",
+              label: "Legacy Features",
+              items: [
+                {
+                  type: "category",
+                  label: "Tests",
+                  items: [
+                    "articles/creating-tests",
+                    "articles/running-tests",
+                    "articles/getting-tests-results",
+                    "articles/adding-tests-variables",
+                    "articles/adding-timeout",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "Test Suites",
+                  items: [
+                    "articles/creating-test-suites",
+                    "articles/running-test-suites",
+                    "articles/getting-test-suites-results",
+                  ],
+                },
+                { type: "doc", label: "Deprecations", id: "articles/deprecations" },
+                { type: "doc", label: "Sources", id: "articles/test-sources" },
+              ],
+            },
           ]  
     },
     {
@@ -267,6 +298,66 @@ const sidebars = {
     },
     {
       type: "category",
+      label: "Guides",
+      items: [
+        {
+          type: "category",
+          label: "CI/CD Integration",
+          link: {
+            type: "doc",
+            id: "articles/cicd-overview",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Github Actions",
+              link: {
+                type: "doc",
+                id: "articles/github-actions",
+              },
+              items: [
+                {
+                  type: "doc",
+                  id: "articles/run-tests-with-github-actions",
+                  label: "Migrate from testkube-run-action",
+                },
+              ],
+            },
+            { type: "doc", label: "Testkube GitLab CI", id: "articles/gitlab" },
+            { type: "doc", label: "Testkube Jenkins Pipelines", id: "articles/jenkins" },
+            { type: "doc", label: "Testkube Jenkins UI", id: "articles/jenkins-ui" },
+            { type: "doc", label: "Testkube Azure DevOps Pipelines", id: "articles/azure" },
+            { type: "doc", label: "Testkube CircleCI", id: "articles/circleci" },
+            { type: "doc", label: "Testkube Docker CLI", id: "articles/testkube-cli-docker" },
+            { type: "doc", label: "Using a Private Certificate Authority (CA)", id: "articles/private-ca" },
+            { type: "doc", label: "Using Vault", id: "articles/vault" },
+            { type: "doc", label: "Upgrade Testkube", id: "articles/upgrade" },
+            {
+              type: "category",
+              label: "GitOps",
+              link: {
+                type: "doc",
+                id: "articles/gitops-overview",
+              },
+              items: [
+                {
+                  type: "doc",
+                  id: "articles/flux-integration",
+                  label: "Flux",
+                },
+                {
+                  type: "doc",
+                  id: "articles/argocd-integration",
+                  label: "ArgoCD",
+                },
+              ],
+            },
+          ]  
+        },
+      ]  
+    },      
+    {
+      type: "category",
       label: "Reference",
       items: [
         "articles/architecture",
@@ -304,6 +395,7 @@ const sidebars = {
       ],
     },
     "articles/telemetry",
+    "articles/common-issues",
 
     {
       type: "html",
