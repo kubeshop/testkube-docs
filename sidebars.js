@@ -258,9 +258,18 @@ const sidebars = {
           items: [
             { type: "doc", label: "Postman", id: "test-types/executor-postman" },
             { type: "doc", label: "SoapUI", id: "test-types/executor-soapui" },
+            { type: "doc", label: "cURL", id: "test-types/executor-curl" },
+            { type: "doc", label: "Tracetest", id: "test-types/executor-tracetest" },
           ],
         },
-        // { type: "doc", label: "Unit Testing", id: "" },
+        {
+          type: "category",
+          label: "Unit Testing",
+          items: [
+            { type: "doc", label: "Ginkgo", id: "test-types/executor-ginkgo" },
+            { type: "doc", label: "pytest", id: "test-types/executor-pytest" },
+          ],
+        },
         {
           type: "category",
           label: "Automation Framework",
@@ -274,6 +283,8 @@ const sidebars = {
           label: "Compliance Testing",
           items: [
             { type: "doc", label: "Kubent", id: "test-types/executor-kubent" },
+            { type: "doc", label: "Kubepug", id: "test-types/executor-kubepug" },
+            { type: "doc", label: "Zap", id: "test-types/executor-zap" },
           ],
         },
       ],
@@ -407,7 +418,6 @@ const sidebars = {
       type: "category",
       label: "Legacy Tests",
       items: [
-        { type: "doc", label: "Zap", id: "test-types/executor-zap" },
         { type: "doc", label: "Distributed JMeter", id: "test-types/executor-distributed-jmeter" },
         { type: "doc", label: "Container Executor", id: "test-types/container-executor" },
         { type: "doc", label: "Pre-built Executor", id: "test-types/prebuilt-executor" },
