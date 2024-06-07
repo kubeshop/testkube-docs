@@ -328,6 +328,11 @@ spec:
 </TabItem>
 </Tabs>
 
+### Pod and Job configuration
+
+Each of the parallel workers have own Job and Pod created.
+To configure them, use `job` and `pod` properties, similarly to the [**Test Workflow's Job and Pod**](./test-workflows-job-and-pod.md) configuration.
+
 ## Examples
 
 ### Sharded Playwright with single report
