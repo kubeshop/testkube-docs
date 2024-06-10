@@ -98,7 +98,7 @@ It takes an expression condition, so you can dynamically choose whether it shoul
 
 ### Pod configuration
 
-The service is started as a separate job/pod, so you can configure `pod` and `job` similarly to general Test Workflow.
+The service is started as a separate pod, so you can configure `pod` similarly to the [**Test Workflow's configuration**](./test-workflows-job-and-pod.md).
 
 ### Lifecycle
 

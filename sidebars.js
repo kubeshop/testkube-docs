@@ -130,13 +130,18 @@ const sidebars = {
             //  { type: "doc", label: "Modularizing", id: "" },
             {
               type: "doc",
-              label: "Paramterization",
+              label: "Parameterization",
               id: "articles/test-workflows-examples-configuration",
             },
             {
               type: "doc",
               label: "Expression Language",
               id: "articles/test-workflows-expressions",
+            },
+            {
+              type: "doc",
+              label: "Pod & Job",
+              id: "articles/test-workflows-job-and-pod",
             },
             //  { type: "doc", label: "Recipes", id: "articles/test-workflows-creating" },
             {
