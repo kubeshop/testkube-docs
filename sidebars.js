@@ -593,12 +593,12 @@ const sidebars = {
             },
             {
               type: "category",
-              label: "Agent OpenAPI",
+              label: "Agent API",
               items: agentRedocSidebar
             },
             {
               type: "category",
-              label: "Control Plane OpenAPI",
+              label: "Control Plane API",
               items: cloudRedocSidebar
             }
           ]
