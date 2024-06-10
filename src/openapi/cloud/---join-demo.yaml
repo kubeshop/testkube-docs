@@ -1,0 +1,25 @@
+openapi: 3.0.1
+info:
+  title: Testkube Pro API
+  description: API for Testkube Pro
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: COMMERICAL
+    url: https://opensource.org/licenses/MIT
+  version: enterprise-api/1.10.7
+paths:
+  /organizations/join-demo:
+    post:
+      summary: Join demo organization request
+      description: Request to join demo organization in given environment
+      operationId: joinDemoOrganization
+      responses:
+        '201':
+          $ref: './components.yaml#/components/responses/JoinOrganization'
+        '409':
+          $ref: './components.yaml#/components/responses/AlreadyJoinedOrganization'
+        '500':
+          $ref: './components.yaml#/components/responses/InternalServerError'
+      security:
+        - BearerAuth: []

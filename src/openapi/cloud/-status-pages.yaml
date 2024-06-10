@@ -1,0 +1,51 @@
+openapi: 3.0.1
+info:
+  title: Testkube Pro API
+  description: API for Testkube Pro
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: COMMERICAL
+    url: https://opensource.org/licenses/MIT
+  version: enterprise-api/1.10.7
+paths:
+  /status-pages/{statusPageID}:
+    get:
+      summary: Get status pages by ID
+      description: Returns a status page for the given statusPageID
+      operationId: getPublicStatusPageByID
+      parameters:
+        - name: statusPageID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/StatusPage'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+        '500':
+          $ref: './components.yaml#/components/responses/InternalServerError'
+  /status-pages/{statusPageID}/incidents:
+    get:
+      summary: Get incidents for status page
+      description: Returns the list of incidents for the given statusPageID
+      operationId: getPublicIncidentsByStatusPageID
+      parameters:
+        - $ref: './components.yaml#/components/parameters/StatusPageID'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/Incidents'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+        '500':
+          $ref: './components.yaml#/components/responses/InternalServerError'

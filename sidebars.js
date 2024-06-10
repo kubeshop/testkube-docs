@@ -11,8 +11,8 @@
 
 // @ts-check
 
-const redocSidebar = require('./src/openapi/redoc-sidebar');
-
+const agentRedocSidebar = require('./src/openapi/agent/redoc-sidebar');
+const cloudRedocSidebar = require('./src/openapi/cloud/redoc-sidebar');
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
@@ -271,11 +271,22 @@ const sidebars = {
               dirName: "cli",
             },
           ],
-        },
-        {
-          type: "category",
-          label: "OpenAPI Reference",
-          items: redocSidebar
+        },{
+        type: "category",
+          label: "OpenAPI References",
+          items:[
+            "openapi/overview",
+            {
+              type: "category",
+              label: "Agent OpenAPI",
+              items: agentRedocSidebar
+            },
+            {
+              type: "category",
+              label: "Control Plane OpenAPI",
+              items: cloudRedocSidebar
+            }
+          ]
         },
         "articles/metrics",
         "articles/artifacts",

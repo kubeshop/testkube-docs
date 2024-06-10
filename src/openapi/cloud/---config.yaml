@@ -1,0 +1,94 @@
+openapi: 3.0.1
+info:
+  title: Testkube Pro API
+  description: API for Testkube Pro
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: COMMERICAL
+    url: https://opensource.org/licenses/MIT
+  version: enterprise-api/1.10.7
+paths:
+  /organizations/{id}/environments/{environmentId}/agent/config:
+    get:
+      summary: Get config
+      description: Get config from cluster storage state
+      operationId: getConfig
+      responses:
+        '200':
+          description: get successful
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Config'
+        '404':
+          description: config not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '500':
+          description: problem with getting config from cluster storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    patch:
+      summary: Update config
+      description: Updates config in cluster storage state
+      operationId: updateConfigKey
+      requestBody:
+        description: config request body data
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/Config'
+        required: true
+      responses:
+        '200':
+          description: update successful
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Config'
+        '400':
+          description: problem with input
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '404':
+          description: config not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '500':
+          description: problem with updating key in cluster storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    parameters:
+      - name: id
+        in: path
+        description: organizationId
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        description: environmentID
+        required: true
+        schema:
+          type: string
