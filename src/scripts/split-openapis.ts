@@ -191,7 +191,8 @@ splitOpenAPIByPaths(
       return {basePath: "../" + p.split('/')[0], submenu: "Environment Operations"};
     }
 
-    // operations at the organization level
+    // filter operations at the organization level - this is ultimately a hack, should be controlled in the API
+    // definition itself which operations that should be made public
     if (opPath.toLowerCase().startsWith("/organizations/")) {
       // org-level ops
       if( !segments[2].startsWith('{')){

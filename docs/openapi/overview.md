@@ -25,5 +25,7 @@ authenticated calls to connected agents. The operations are divided into the fol
 - **Organisation Operations**: Operations for a specific organisation in the Control Plane.
 - **Environment Operations**: Operations for a specific environment within an organisation.
 
-
+These API calls all require an API token specified using `Bearer Token` authentication. 
+- API Tokens can be created as described at [Organization Management](../testkube-pro/articles/organization-management#api-tokens).
+- Add an `Authorization` HTTP header to your API requests with the value `Bearer: <API token>`
 
