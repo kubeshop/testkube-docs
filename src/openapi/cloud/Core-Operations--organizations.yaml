@@ -38,3 +38,49 @@ paths:
           $ref: './components.yaml#/components/responses/UnauthorizedError'
       security:
         - BearerAuth: []
+  /organizations/{id}:
+    get:
+      summary: Get organization by ID
+      description: Get organization by ID
+      operationId: getOrganization
+      responses:
+        '200':
+          description: get organization response body
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Organization'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    delete:
+      summary: Delete organization
+      description: Deletes organization
+      operationId: deleteOrganization
+      responses:
+        '204':
+          $ref: './components.yaml#/components/responses/NoContent'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+      security:
+        - BearerAuth: []
+    patch:
+      summary: Update organization
+      description: Update organization with given request body
+      operationId: updateOrganization
+      requestBody:
+        $ref: './components.yaml#/components/requestBodies/Organization'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/Organization'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'

@@ -202,7 +202,12 @@ splitOpenAPIByPaths(
 
       // org-level ops
       if (!segments[2].startsWith('{')) {
-        return {basePath: "../" + segments[2], submenu: "Organisation Operations"};
+        return {basePath: "/" + segments[2], submenu: "Core Operations"};
+      }
+
+      // org-mgmt ops go to core category
+      if (segments[2].startsWith('{') && segments.length === 3) {
+        return {basePath: '/' + segments[1], submenu: "Core Operations"};
       }
 
       // org-level ops
