@@ -584,8 +584,20 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "OpenAPI Reference",
-          items: redocSidebar,
+          label: "OpenAPI References",
+          items:[
+            "openapi/overview",
+            {
+              type: "category",
+              label: "Agent OpenAPI",
+              items: agentRedocSidebar
+            },
+            {
+              type: "category",
+              label: "Control Plane OpenAPI",
+              items: cloudRedocSidebar
+            }
+          ]
         },
 
         {
