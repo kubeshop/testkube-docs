@@ -584,9 +584,13 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "OpenAPI References",
+          label: "OpenAPI Definitions",
           items:[
-            "openapi/overview",
+            {
+              type: "doc",
+              label: "Overview",
+              id: "openapi/overview",
+            },
             {
               type: "category",
               label: "Agent OpenAPI",
