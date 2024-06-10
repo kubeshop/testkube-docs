@@ -1,0 +1,82 @@
+openapi: 3.0.1
+info:
+  title: Testkube Pro API
+  description: API for Testkube Pro
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: COMMERICAL
+    url: https://opensource.org/licenses/MIT
+  version: enterprise-api/1.10.7
+paths:
+  /organizations/{id}/members:
+    get:
+      summary: Get organization members
+      description: Get organizations members
+      operationId: getOrganizationMembers
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/Members'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '402':
+          $ref: './components.yaml#/components/responses/PaymentRequiredError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    patch:
+      summary: Update org members
+      description: Update all organization members
+      operationId: addOrganizationMembers
+      requestBody:
+        $ref: './components.yaml#/components/requestBodies/Members'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/Members'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '402':
+          $ref: './components.yaml#/components/responses/PaymentRequiredError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+  /organizations/{id}/members/{memberEmail}:
+    delete:
+      summary: Remove user from organization
+      description: Remove user from organization
+      operationId: deleteOrganizationMember
+      responses:
+        '204':
+          $ref: './components.yaml#/components/responses/NoContent'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+      security:
+        - BearerAuth: []
+    patch:
+      summary: Update org member role
+      description: Update all organization members
+      operationId: updateOrganizationMemberRole
+      requestBody:
+        $ref: './components.yaml#/components/requestBodies/MemberRoleChange'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/Member'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '402':
+          $ref: './components.yaml#/components/responses/PaymentRequiredError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/MemberEmail'

@@ -68,29 +68,31 @@ async function splitOpenAPIByPaths(openApiUrl: string, outputDir: string, docsDi
       {basePath: '/' + pathKey.substring(1).split('/')[0]};
 
     if (mapping?.basePath && mapping.basePath.length > 1) {
+      const submenu = mapping.submenu || "default";
+      const mappingKey = submenu + ":" + mapping.basePath
+
       // add to corresponding mapping
-      if (!openapis.has(mapping.basePath)) {
-        openapis.set(mapping.basePath, new Map());
+      if (!openapis.has(mappingKey)) {
+        openapis.set(mappingKey, new Map());
       }
       // @ts-ignore
-      openapis.get(mapping.basePath).set(pathKey, paths[pathKey])
+      openapis.get(mappingKey).set(pathKey, paths[pathKey])
 
       // add to submenu
-      const submenu = mapping.submenu || "default";
       if (!sidebars.has(submenu)) {
         sidebars.set(submenu, []);
       }
 
       let sidebar = sidebars.get(submenu);
-      if (sidebar && sidebar.indexOf(mapping.basePath) == -1) {
-        sidebar.push(mapping.basePath);
+      if (sidebar && sidebar.indexOf(mappingKey) == -1) {
+        sidebar.push(mappingKey);
       }
     }
   }
 
   // now create new openapi file for each mapping
   openapis.forEach((paths, rootPath) => {
-    const fileName = rootPath.replace(/[\/{}\.]/g, '-');
+    const fileName = rootPath.replace(/[\/\s{}:\.]/g, '-');
     const outputFile = path.join(outputDir, `${fileName}.yaml`);
     const newOpenAPI: OpenAPI = {
       openapi: openapi.openapi || '3.0.0',
@@ -118,7 +120,7 @@ async function splitOpenAPIByPaths(openApiUrl: string, outputDir: string, docsDi
     let mdxFilePath = path.join(docsDir, fileName + ".mdx");
     fs.writeFileSync(mdxFilePath,
       "---\n" +
-      "title: Testkube " + title + " " + rootPath + " operations\n" +
+      "title: Testkube " + title + " " + rootPath.split(':')[1] + " operations\n" +
       "---\n" +
       "\n" +
       "import ApiDocMdx from '@theme/ApiDocMdx';\n" +
@@ -138,8 +140,8 @@ async function splitOpenAPIByPaths(openApiUrl: string, outputDir: string, docsDi
       v.forEach(basePath => {
         redocSidebar.push({
           type: "doc",
-          label: basePath,
-          id: docsDir.substring(docsDir.indexOf('/') + 1) + "/" + basePath.replace(/[\/{}\.]/g, '-')
+          label: basePath.split(':')[1],
+          id: docsDir.substring(docsDir.indexOf('/') + 1) + "/" + basePath.replace(/[\/\s{}:\.]/g, '-')
         });
       });
     } else {
@@ -147,8 +149,8 @@ async function splitOpenAPIByPaths(openApiUrl: string, outputDir: string, docsDi
       v.forEach(basePath => {
         subbar.push({
           type: "doc",
-          label: basePath,
-          id: docsDir.substring(docsDir.indexOf('/') + 1) + "/" + basePath.replace(/[\/{}\.]/g, '-')
+          label: basePath.split(':')[1],
+          id: docsDir.substring(docsDir.indexOf('/') + 1) + "/" + basePath.replace(/[\/\s{}:\.]/g, '-')
         });
       });
 
@@ -194,18 +196,20 @@ splitOpenAPIByPaths(
     // filter operations at the organization level - this is ultimately a hack, should be controlled in the API
     // definition itself which operations that should be made public
     if (opPath.toLowerCase().startsWith("/organizations/")) {
+
+      if (["/join-demo", "/limits", "/usage", "/payments", "/features-usage"]
+        .filter(str => opPath.includes(str)).length > 0) return null;
+
       // org-level ops
-      if( !segments[2].startsWith('{')){
+      if (!segments[2].startsWith('{')) {
         return {basePath: "../" + segments[2], submenu: "Organisation Operations"};
       }
 
       // org-level ops
-      if( segments.length === 3 ){
+      if (segments.length === 3) {
         return {basePath: "/" + segments[1], submenu: "Organisation Operations"};
       }
 
-      // hide these operations as they are internal
-      if (["limits", "features-usage", "usage", "payments"].includes(segments[3])) return null;
       return {basePath: "../" + segments[3], submenu: "Organisation Operations"};
     }
 
