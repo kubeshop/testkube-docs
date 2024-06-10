@@ -48,7 +48,7 @@ To learn more you can visit [deploying the standalone agent][deploy-standalone].
 [cloud]: https://app.testkube.io/
 [install-cli]: /articles/install/install-with-cli
 [install-helm]: /articles/install/install-with-helm
-[deploy-standalone]: /articles/install/install-with-cli#deploy-the-open-source-standalone-agent
+[deploy-standalone]: /articles/install/standalone-agent
 [deploy-minimal]: /articles/install/multi-cluster#deploy-a-control-plane-without-an-agent
 [deploy-agent]: /articles/install/multi-cluster#deploy-an-agent-that-will-join-testkube
 [deploy-demo]: /articles/install/install-with-cli#deploy-an-on-prem-demo
