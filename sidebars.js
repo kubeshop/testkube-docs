@@ -11,9 +11,10 @@
 
 // @ts-check
 
-const redocSidebar = require("./src/openapi/redoc-sidebar");
+const agentRedocSidebar = require('./src/openapi/agent/redoc-sidebar');
+const cloudRedocSidebar = require('./src/openapi/cloud/redoc-sidebar');
 
-// @type {import('@docusaurus/plugin-content-docs').SidebarsConfig}
+/** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   // By default, Docusaurus generates a sidebar from the docs folder structure
   tutorialSidebar: [
@@ -588,8 +589,24 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "OpenAPI Reference",
-          items: redocSidebar,
+          label: "OpenAPI Definitions",
+          items:[
+            {
+              type: "doc",
+              label: "Overview",
+              id: "openapi/overview",
+            },
+            {
+              type: "category",
+              label: "Agent API",
+              items: agentRedocSidebar
+            },
+            {
+              type: "category",
+              label: "Control Plane API",
+              items: cloudRedocSidebar
+            }
+          ]
         },
 
         {

@@ -1,0 +1,88 @@
+openapi: 3.0.1
+info:
+  title: Testkube Pro API
+  description: API for Testkube Pro
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: COMMERICAL
+    url: https://opensource.org/licenses/MIT
+  version: enterprise-api/1.10.7
+paths:
+  /organizations/{id}/environments/{environmentID}/test-workflow-executions/{executionID}/artifacts/{artifactID}:
+    get:
+      summary: Get Test Workflow artifact
+      description: Get Test Workflow artifact
+      operationId: getTestWorkflowArtifact
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/ArtifactURL'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/EnvironmentID'
+      - $ref: './components.yaml#/components/parameters/ExecutionID'
+      - $ref: './components.yaml#/components/parameters/ArtifactID'
+  /organizations/{id}/environments/{environmentID}/test-workflow-executions/{executionID}/download-artifact/{artifactID}:
+    get:
+      summary: Download test workflow artifact
+      description: Download test workflow artifact
+      operationId: downloadTestWorkflowArtifact
+      responses:
+        '307':
+          description: Redirection to download artifact
+          headers:
+            Location:
+              description: artifact presigned url
+              schema:
+                type: string
+                format: uri
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+        '500':
+          $ref: './components.yaml#/components/responses/InternalServerError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/EnvironmentID'
+      - $ref: './components.yaml#/components/parameters/ExecutionID'
+      - $ref: './components.yaml#/components/parameters/ArtifactID'
+  /organizations/{id}/environments/{environmentID}/test-workflow-executions/{executionID}/serve-artifact/{artifactID}:
+    get:
+      summary: Serve Test Workflow artifact
+      description: Serve Test workflow artifact
+      operationId: serveTestWorkflowArtifact
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/ArtifactURL'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/EnvironmentID'
+      - $ref: './components.yaml#/components/parameters/ExecutionID'
+      - $ref: './components.yaml#/components/parameters/ArtifactID'

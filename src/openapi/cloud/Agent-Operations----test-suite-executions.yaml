@@ -1,0 +1,192 @@
+openapi: 3.0.1
+info:
+  title: Testkube Pro API
+  description: API for Testkube Pro
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: COMMERICAL
+    url: https://opensource.org/licenses/MIT
+  version: enterprise-api/1.10.7
+paths:
+  /organizations/{id}/environments/{environmentId}/agent/test-suite-executions:
+    get:
+      summary: Get all test suite executions
+      description: Returns array of test suite executions
+      operationId: listAllTestSuiteExecutions
+      parameters:
+        - $ref: './components.yaml#/components/parameters/LastNDays'
+        - $ref: './components.yaml#/components/parameters/TestName'
+        - $ref: './components.yaml#/components/parameters/TextSearch'
+        - $ref: './components.yaml#/components/parameters/PageSize'
+        - $ref: './components.yaml#/components/parameters/PageIndex'
+        - $ref: './components.yaml#/components/parameters/TestExecutionsStatusFilter'
+        - $ref: './components.yaml#/components/parameters/StartDateFilter'
+        - $ref: './components.yaml#/components/parameters/EndDateFilter'
+        - $ref: './components.yaml#/components/parameters/Selector'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/TestSuiteExecutionsResult'
+        '500':
+          description: problem with getting test suite executions from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    post:
+      summary: Starts new test suite executions
+      description: >-
+        New test suite executions returns new executions details on successful
+        executions start
+      operationId: executeTestSuites
+      parameters:
+        - $ref: './components.yaml#/components/parameters/Namespace'
+        - $ref: './components.yaml#/components/parameters/Selector'
+        - $ref: './components.yaml#/components/parameters/ConcurrencyLevel'
+      requestBody:
+        description: body passed to configure executions
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/TestSuiteExecutionRequest'
+        required: true
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/TestSuiteExecutionsResult'
+        '400':
+          description: problem with request body
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '500':
+          description: problem with test suites executions
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    parameters:
+      - name: id
+        in: path
+        description: organizationId
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        description: environmentID
+        required: true
+        schema:
+          type: string
+  /organizations/{id}/environments/{environmentId}/agent/test-suite-executions/{executionID}:
+    get:
+      summary: Get test suite execution by ID
+      description: Returns test suite execution with given executionID
+      operationId: getTestSuiteExecutionByID
+      parameters:
+        - $ref: './components.yaml#/components/parameters/executionID'
+        - $ref: './components.yaml#/components/parameters/LastNDays'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/TestSuiteExecution'
+        '500':
+          description: problem with getting test suite execution from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    patch:
+      summary: Aborts testsuite execution
+      description: Aborts testsuite execution with given executionID
+      operationId: abortTestSuiteExecutionByID
+      parameters:
+        - $ref: './components.yaml#/components/parameters/executionID'
+      responses:
+        '204':
+          description: no content
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    parameters:
+      - name: id
+        in: path
+        description: organizationId
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        description: environmentID
+        required: true
+        schema:
+          type: string
+  /organizations/{id}/environments/{environmentId}/agent/test-suite-executions/{executionID}/artifacts:
+    get:
+      summary: Get test suite execution artifacts
+      description: Returns test suite execution artifacts with given executionID
+      operationId: getTestSuiteExecutionArtifacts
+      parameters:
+        - $ref: './components.yaml#/components/parameters/executionID'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Artifact'
+        '500':
+          description: problem with getting test suite executions from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    parameters:
+      - name: id
+        in: path
+        description: organizationId
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        description: environmentID
+        required: true
+        schema:
+          type: string
