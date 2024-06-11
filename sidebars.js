@@ -49,6 +49,11 @@ const sidebars = {
             "articles/install/multi-cluster",
             "articles/install/standalone-agent",
             "articles/install/quickstart-no-k8s",
+            {
+              type: "doc",
+              label: "Migrating from OSS",
+              id: "testkube-pro/articles/transition-from-oss"
+            },
             "articles/install/uninstall",
             "testkube-pro-on-prem/articles/auth",
             {
@@ -427,8 +432,24 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "OpenAPI Reference",
-          items: redocSidebar,
+          label: "OpenAPI Definitions",
+          items:[
+            {
+              type: "doc",
+              label: "Overview",
+              id: "openapi/overview",
+            },
+            {
+              type: "category",
+              label: "Agent API",
+              items: agentRedocSidebar
+            },
+            {
+              type: "category",
+              label: "Control Plane API",
+              items: cloudRedocSidebar
+            }
+          ]
         },
         {
           type: "category",
@@ -477,11 +498,6 @@ const sidebars = {
         },
         "articles/development",
         "articles/crds",
-        {
-          type: "doc",
-          label: "Migrating to Pro",
-          id: "testkube-pro-on-prem/articles/migrating-from-oss-to-pro"
-        },
       ],
     },
     {
@@ -533,29 +549,11 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "OpenAPI Definitions",
-          items:[
-            {
-              type: "doc",
-              label: "Overview",
-              id: "openapi/overview",
-            },
-            {
-              type: "category",
-              label: "Agent API",
-              items: agentRedocSidebar
-            },
-            {
-              type: "category",
-              label: "Control Plane API",
-              items: cloudRedocSidebar
-            }
-          ]
-        },
-
-        {
-          type: "category",
-          label: "CLI",
+          label: "Test Types",
+          link: {
+            type: "generated-index",
+            description: "Supported Test Types / Executors within Testkube",
+          },
           items: [
             "test-types/executor-artillery",
             "test-types/executor-curl",

@@ -1,12 +1,17 @@
-# Migrating from Testkube Core Open Source
+# Migrating from the Open Source Agent
 
-If you have started using Testkube using the Open Source installation, you can migrate this instance to be managed using Testkube Pro.
+If you have started using Testkube using the standalone Open Source Agent, you can migrate this instance to be managed 
+by the Testkube Control Plane instead.
 
-To connect your Testkube Core Open Source instance, you will need to modify your Testkube installation to be in Pro Agent mode. Testkube Pro Agent is the Testkube engine for controlling your Testkube instance using the managed solution. It sends data to Testkube's Pro Servers.
+To connect your Testkube Agent, you will need to modify your Testkube installation to be in Pro Agent mode. 
+Testkube Pro Agent is the Testkube engine for controlling your Testkube instance using the Testkube Control Plane.
 
-::: note
+See [Reference Architectures](../../articles/install/6-reference-architectures) for more details.
 
-Currently, we do not support uploading existing test logs and artifacts from your Testkube Core Open Source instance. This is planned for coming releases.
+:::info
+
+Currently, we do not support uploading existing test logs and artifacts from your Testkube Core Open Source instance. 
+This is planned for coming releases.
 
 ::: 
 
