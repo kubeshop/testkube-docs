@@ -1,0 +1,65 @@
+openapi: 3.0.1
+info:
+  title: Testkube Pro API
+  description: API for Testkube Pro
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: COMMERICAL
+    url: https://opensource.org/licenses/MIT
+  version: enterprise-api/1.10.7
+paths:
+  /organizations/{id}/tokens:
+    get:
+      summary: List API Tokens
+      description: Lists API Tokens for an Organization
+      operationId: listAPITokens
+      parameters:
+        - $ref: './components.yaml#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/Tokens'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    post:
+      summary: Create API Token
+      description: Creates an API Token for an Organization
+      operationId: createAPIToken
+      requestBody:
+        $ref: './components.yaml#/components/requestBodies/Token'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/Token'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '402':
+          $ref: './components.yaml#/components/responses/PaymentRequiredError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+  /organizations/{id}/tokens/{tokenID}:
+    delete:
+      summary: Delete API Token
+      description: Deletes an API Token for an Organization
+      operationId: deleteAPIToken
+      responses:
+        '204':
+          $ref: './components.yaml#/components/responses/NoContent'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/TokenID'

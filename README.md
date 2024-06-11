@@ -73,21 +73,24 @@ content
 ## Updating the OpenAPI Docs
 
 These docs use [redocusaurus](https://redocusaurus.vercel.app/) to generate OpenAPI documentation, but
-since the Testkube OpenAPI definition is too large (resulting in _very_ long build/rendering times), there is a 
-small script at `src/scripts/split-openapi.ts` that:
+since the Testkube OpenAPI definitions are too large (resulting in _very_ long build/rendering times), there is a 
+small script at `src/scripts/split-openapis.ts` that:
 
-- retrieves the OpenAPI definition from https://raw.githubusercontent.com/kubeshop/testkube/main/api/v1/testkube.yaml
-- splits it into smaller definitions into the `src/openapi` folder (one for each root path segment)
+- retrieves the OpenAPI definitions for both the agent and control plane APIs
+- splits them into smaller definitions into the `src/openapi` folder 
 - generates corresponding mdx files into the `docs/openapi` folder
-- generates a `src/opeanpi/redoc-sidebar.js` file that is included into the main `sidebar.js` config to add the 
+- generates `src/opeanpi/../redoc-sidebar.js` files that are included into the main `sidebar.js` config to add the 
   generated mdx files to the sidebar navigation 
-- generates a `src/openapi/redoc-specs.js` file that is included into the `docusaurus.config.js` config to 
+- generates `src/openapi/../redoc-specs.js` files that are included into the `docusaurus.config.js` config to 
   add the generated specs to the redocusaurs configuration
+
+The script requires a GitHub Access Token to be provided in a TESTKUBE_OPENAPI_GITHUB_ACCESS_TOKEN environment variable
+for retrieving the Control Plane OpenAPI definition from its private repo.
 
 This script needs to be run every time the openapi definition is updated to regenerate the docs accordingly:
 
 ```
-npm run split-openapi
+npm run split-openapis
 ```
 
 Once run, the generated/updated files need to be committed back to the repo for the automated build to publish them.

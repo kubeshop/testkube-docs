@@ -1,0 +1,108 @@
+openapi: 3.0.1
+info:
+  title: Testkube Pro API
+  description: API for Testkube Pro
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: COMMERICAL
+    url: https://opensource.org/licenses/MIT
+  version: enterprise-api/1.10.7
+paths:
+  /organizations/{id}/environments:
+    get:
+      summary: List environments
+      description: List environments from the active organization
+      operationId: listEnvironments
+      parameters:
+        - $ref: './components.yaml#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/Environments'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    post:
+      summary: Create new environment
+      description: Create test environment
+      operationId: createEnvironment
+      requestBody:
+        $ref: './components.yaml#/components/requestBodies/Environment'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/Environment'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+      security:
+        - BearerAuth: []
+    delete:
+      summary: Delete environments
+      description: Deletes all or labeled environments
+      operationId: deleteEnvironments
+      parameters:
+        - $ref: './components.yaml#/components/parameters/Name'
+      responses:
+        '204':
+          $ref: './components.yaml#/components/responses/NoContent'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+  /organizations/{id}/environments/{environmentID}:
+    get:
+      summary: Get environment by ID
+      description: Get test environment by ID from CRD in kubernetes cluster
+      operationId: getEnvironment
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/Environment'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    delete:
+      summary: Delete test environment
+      description: Deletes a test environment
+      operationId: deleteEnvironment
+      responses:
+        '204':
+          $ref: './components.yaml#/components/responses/NoContent'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    patch:
+      summary: Update environment
+      description: Update environment with given request body
+      operationId: updateEnvironment
+      requestBody:
+        $ref: './components.yaml#/components/requestBodies/Environment'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/Environment'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/EnvironmentID'

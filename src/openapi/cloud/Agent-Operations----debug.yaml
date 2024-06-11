@@ -1,0 +1,54 @@
+openapi: 3.0.1
+info:
+  title: Testkube Pro API
+  description: API for Testkube Pro
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: COMMERICAL
+    url: https://opensource.org/licenses/MIT
+  version: enterprise-api/1.10.7
+paths:
+  /organizations/{id}/environments/{environmentId}/agent/debug:
+    get:
+      summary: Get debug information
+      description: >-
+        Gets information that is needed for debugging and opening Testkube bug
+        reports
+      operationId: getDebugInfo
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/DebugInfo'
+        '500':
+          description: problem with getting execution logs from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem with getting debug information from the Kuberenetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    parameters:
+      - name: id
+        in: path
+        description: organizationId
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        description: environmentID
+        required: true
+        schema:
+          type: string

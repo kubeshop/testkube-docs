@@ -11,9 +11,10 @@
 
 // @ts-check
 
-const redocSidebar = require("./src/openapi/redoc-sidebar");
+const agentRedocSidebar = require('./src/openapi/agent/redoc-sidebar');
+const cloudRedocSidebar = require('./src/openapi/cloud/redoc-sidebar');
 
-// @type {import('@docusaurus/plugin-content-docs').SidebarsConfig}
+/** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   main: [
     "index",
@@ -532,11 +533,29 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Test Types",
-          link: {
-            type: "generated-index",
-            description: "Supported Test Types / Executors within Testkube",
-          },
+          label: "OpenAPI Definitions",
+          items:[
+            {
+              type: "doc",
+              label: "Overview",
+              id: "openapi/overview",
+            },
+            {
+              type: "category",
+              label: "Agent API",
+              items: agentRedocSidebar
+            },
+            {
+              type: "category",
+              label: "Control Plane API",
+              items: cloudRedocSidebar
+            }
+          ]
+        },
+
+        {
+          type: "category",
+          label: "CLI",
           items: [
             "test-types/executor-artillery",
             "test-types/executor-curl",
