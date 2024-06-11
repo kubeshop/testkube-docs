@@ -1,1 +1,1 @@
-# Core OpenAPI Reference
+# OpenAPI placeholder
