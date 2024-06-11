@@ -1,4 +1,4 @@
-# Testkube Core Open Source or Testkube Pro?
+# Testkube Open Source
 
 Designed to integrate seamlessly with your Kubernetes clusters, Testkube offers flexibility and power. For those searching for a quicker and streamlined experience, we suggest signing up for [Testkube Pro](https://app.testkube.io/). However, for organizations that prefer the hands-on approach, diving deep into the [Open Source][testkube-oss] version could be the ideal choice.
 
@@ -25,4 +25,4 @@ Please refer to the table below to determine which version of Testkube best fits
 
 \*Roadmap feature.
 
-[testkube-oss]: /articles/install/standalone-agent
+[testkube-oss](install/standalone-agent)

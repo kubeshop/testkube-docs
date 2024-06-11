@@ -16,24 +16,18 @@ const redocSidebar = require("./src/openapi/redoc-sidebar");
 // @type {import('@docusaurus/plugin-content-docs').SidebarsConfig}
 const sidebars = {
   main: [
+    "index",
+    "articles/tutorial/quickstart",
+    "articles/tutorial/example",
     {
-      type: "category",
-      label: "Introduction",
-      collapsed: false,
-      collapsible: false,
-      items: [
-        "index",
-        "articles/testkube-benefits",
-        "articles/tutorial/quickstart",
-        "articles/tutorial/example",
-      ],
+      type: "html",
+      value: "<hr />",
     },
     {
       type: "category",
       label: "Installing",
       items: [
         "articles/install/overview",
-        "articles/install/cli",
         "articles/install/install-with-cli",
         {
           type: "category",
@@ -55,6 +49,7 @@ const sidebars = {
             "articles/install/standalone-agent",
             "articles/install/quickstart-no-k8s",
             "articles/install/uninstall",
+            "testkube-pro-on-prem/articles/auth",
             {
               type: "doc",
               label: "OpenShift on GCP",
@@ -74,7 +69,7 @@ const sidebars = {
               type: "doc",
               label: "Using a Private CA",
               id: "articles/private-ca",
-            },
+            }
           ],
         },
       ],
@@ -174,6 +169,7 @@ const sidebars = {
         {
           type: "category",
           label: "Triggering Workflows",
+          collapsible: true,
           link: {
             type: "doc",
             id: "articles/triggering-overview",
@@ -199,7 +195,7 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Test Results",
+          label: "Working with Results",
           items: [
             {
               type: "doc",
@@ -398,6 +394,7 @@ const sidebars = {
       label: "Reference",
       items: [
         "articles/architecture",
+        "articles/testkube-dependencies",
         {type: "doc", label: "Log Collection", id: "articles/logging"},
         {
           type: "category",
@@ -412,9 +409,20 @@ const sidebars = {
           ],
         },
         {
-          type: "doc",
-          id: "articles/helm-chart",
+          type: "category",
           label: "Helm Chart",
+          items: [
+            {
+              type: "doc",
+              id: "articles/helm-chart",
+              label: "Installation",
+            },
+            {
+              type: "doc",
+              id: "testkube-pro-on-prem/articles/usage-guide",
+              label: "Usage",
+            },
+          ]
         },
         {
           type: "category",
@@ -455,6 +463,30 @@ const sidebars = {
         },
         "articles/telemetry",
       ],
+    },
+    {
+      type: "category",
+      label: "Open Source",
+      items: [
+        "articles/open-source-or-pro",
+        {
+          type: "doc",
+          label: "Contributing",
+          id: "articles/contributing"
+        },
+        "articles/development",
+        "articles/crds",
+        {
+          type: "doc",
+          label: "Migrating to Pro",
+          id: "testkube-pro-on-prem/articles/migrating-from-oss-to-pro"
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "FAQs",
+      items: ["articles/testkube-licensing-FAQ"],
     },
     {
       type: "html",
@@ -619,28 +651,7 @@ const sidebars = {
 
         {type: "doc", label: "Templates", id: "articles/templates"},
       ],
-    },
-    {
-      type: "category",
-      label: "Contributing",
-      items: [
-        "articles/contributing",
-        {
-          type: "category",
-          label: "Development",
-          link: {
-            type: "doc",
-            id: "articles/development",
-          },
-          items: ["articles/crds"],
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "FAQs",
-      items: ["articles/testkube-licensing-FAQ"],
-    },
+    }
   ],
 
   /*
