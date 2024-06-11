@@ -46,7 +46,6 @@ const sidebars = {
         },
         {type: "doc", label: "Upgrading", id: "articles/upgrade"},
         "articles/install/reference-architectures",
-        "articles/common-issues",
         "articles/install/faq",
         {
           type: "category",
@@ -56,6 +55,21 @@ const sidebars = {
             "articles/install/standalone-agent",
             "articles/install/quickstart-no-k8s",
             "articles/install/uninstall",
+            {
+              type: "doc",
+              label: "OpenShift on GCP",
+              id: "articles/install/openshift",
+            },
+            {
+              type: "doc",
+              label: "S3 with IAM Authentication",
+              id: "articles/install/s3-storage",
+            },
+            {
+              type: "doc",
+              label: "Deploying on AWS",
+              id: "articles/deploying-in-aws",
+            },
             {
               type: "doc",
               label: "Using a Private CA",

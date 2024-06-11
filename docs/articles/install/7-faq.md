@@ -29,5 +29,16 @@ If that doesn't work for you please [get in touch](https://testkube.io/contact),
 Yes, you can use Testkube to test any applications or components as long as the cluster the Testkube agent is running in has network access to the applications
 or components to be tested.
 
+## How do I expose Testkube to the Internet?
+
+To expose Testkube to the Internet, you will need to create an Ingress for both the Testkube API and the Testkube dashboard.
+
+Check the guides [here](../going-to-production.md) for different configurations.
+
+## Access the Service Under Test (SUT) Using Testkube
+
+- Services inside the same Kubernetes cluster can be accessed using the address `\<service-name\>.\<service-namespace\>.svc.cluster.local:\<port-number\>`. If there are network restrictions configured, Testkube will need permissions to access the SUT over the local network of the cluster.
+- If Testkube and the SUT are not in the same cluster, SUT will have to be exposed to Testkube using an Ingress or a Load Balancer.
+
 [reference-architectures]: /articles/install/reference-architectures
 [migrate-oss]: /articles/migrate-from-oss
