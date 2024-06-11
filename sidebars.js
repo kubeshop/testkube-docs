@@ -89,7 +89,6 @@ const sidebars = {
     {
       type: "category",
       label: "Using Testkube",
-
       items: [
         {
           type: "category",
@@ -175,7 +174,16 @@ const sidebars = {
         {
           type: "category",
           label: "Triggering Workflows",
+          link: {
+            type: "doc",
+            id: "articles/triggering-overview",
+          },
           items: [
+            {
+              type: "doc",
+              label: "From CI/CD",
+              id: "articles/cicd-overview",
+            },
             {
               type: "doc",
               label: "K8s Event Triggers",
