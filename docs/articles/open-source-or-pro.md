@@ -16,7 +16,7 @@ and an underlying management layer for multiple agents ("Environments"), Org/Use
 That being said, many of the core features of Testkube are available directly in the agent via the aforementioned CLI or API:
 
 - **Test Workflows** : Manage Workflows and Templates, Run/Schedule executions (see below for limitations).
-- **Logs/Artifacts** : Retrieve Workflow executions, logs, artifacts
+- **Logs/Artifacts** : Retrieve Workflow executions, logs, artifacts.
 - **Webhooks** : Manage Webhooks that the Agent executes
 - **Event Triggers** : Manage Event Triggers that the Agent reacts to
 - **Tests, TestSuites, Sources, Executors** : Deprecated - but still available during a transition period.
