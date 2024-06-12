@@ -5,7 +5,7 @@ The Testkube Agent described in the [Reference Architectures](install/reference-
 by the commercial Control Plane.
 
 Once deployed, you can interact with the agent through the [Testkube CLI](install/cli) or directly via the
-[Agent API](/openapi/overview#agent-api)
+[Agent API](/openapi/overview#agent-api).
 
 ## Agent Functionality
 
