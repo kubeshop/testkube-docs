@@ -32,7 +32,7 @@ The following Workflow features are not available when running a Workflow via th
 - `matrix` (and `count`, `shards`, `maxCount`) - see [Sharding & Matrix Params](test-workflows-matrix-and-sharding)
 - `services` - see [Services](test-workflows-services)
 
-## Feature Comparison Open Source vs Commercial
+## Feature Comparison - Open Source vs Commercial
 
 This table shows a more complete feature comparison between the Agent Standalone and the 
 Testkube Orchestration Platform (Agent + Control Plane). 
