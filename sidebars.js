@@ -75,6 +75,11 @@ const sidebars = {
               type: "doc",
               label: "Using a Private CA",
               id: "articles/private-ca",
+            },
+            {
+              type: "doc",
+              label: "Configure Identity Providers",
+              id: "articles/auth",
             }
           ],
         },
