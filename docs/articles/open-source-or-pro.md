@@ -1,6 +1,6 @@
 # The Testkube Open Source Agent
 
-The Testkube Agent described in [Reference Architectures](install/reference-architectures) is
+The Testkube Agent described in the [Reference Architectures](install/reference-architectures) is
 100% Open Source and can be [deployed in standalone mode](install/standalone-agent) without being managed
 by the commercial Control Plane.
 
