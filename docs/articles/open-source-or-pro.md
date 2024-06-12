@@ -59,4 +59,4 @@ Testkube Orchestration Platform (Agent + Control Plane).
 
 The source-code for the agent is available in the [testkube GitHub repo](https://github.com/kubeshop/testkube)
 and is dual-licensed under the MIT license and the Testkube Community License (TCL).
-read more in our [Licensing FAQ](testkube-licensing-FAQ).
+Read more in our [Licensing FAQ](testkube-licensing-FAQ).
