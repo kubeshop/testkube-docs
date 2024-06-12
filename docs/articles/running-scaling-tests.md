@@ -18,3 +18,5 @@ Testkube leverages Kubernetes to run your tests, resulting in several run-time b
 - Since tests run inside your clusters, you generally don’t need to give external network access to your testing tools, ensuring that tests are run both securely and aligned with the configuration of a production environment.
 
 ![Paralleliztion](../img/concepts-parallelization.png)
+
+Read on about [Troubleshooting Tests](../articles/troubleshooting-tests.md).

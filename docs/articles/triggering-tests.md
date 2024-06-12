@@ -21,3 +21,5 @@ The decoupling of test definition and execution from your CI/CD is one of the mo
 - From any other tool using the Testkube REST API.
 
 ![CI/CD Integrations](../img/concepts-cicd-integrations.png)
+
+Read on about [Running Tests](../articles/running-tests.md).

@@ -27,3 +27,5 @@ Testkube has multiple features to help with consistent troubleshooting of failed
 - Testkube includes an AI Insights module that will use GPT to analyze and understand test logs.
 
 ![Logs & Artifacts](../img/concepts-logs-artifacts.png)
+
+Read on about [Analyzing Test Results](../articles/analyzing-results.md).

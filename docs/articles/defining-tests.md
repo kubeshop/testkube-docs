@@ -35,3 +35,5 @@ Testkube allows you to label your Test Workflows however needed, for example by 
 
 See our [Examples](../articles/test-workflows-examples-basics.md) section for details on how to run specific types of tests using common tools available today.
 
+Read on about [Triggering Tests](../articles/triggering-tests.md).
+
