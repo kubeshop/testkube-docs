@@ -21,7 +21,7 @@ That being said, many of the core features of Testkube are available directly in
 - **Event Triggers** : Manage Event Triggers that the Agent reacts to.
 - **Tests, TestSuites, Sources, Executors** : Deprecated - but still available during a transition period.
 
-See a complete feature-comparison table between OSS and Commercial below
+See a complete feature-comparison table between OSS and Commercial below.
 
 ### Workflow Limitations
 
