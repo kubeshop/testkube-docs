@@ -409,9 +409,9 @@ const redirects = [
   {
     from: [
       "/testkube-enterprise/articles/auth",
-      "/testkube-pro-on-prem/articles/auth",
+      "/articles/install/auth",
     ],
-    to: "/articles/install/auth",
+    to: "/testkube-pro-on-prem/articles/auth",
   },
   {
     from: [
