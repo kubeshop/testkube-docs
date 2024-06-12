@@ -78,7 +78,7 @@ const sidebars = {
               type: "doc",
               label: "Using a Private CA",
               id: "articles/private-ca",
-            },
+            }
           ],
         },
       ],
