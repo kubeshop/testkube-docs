@@ -22,4 +22,4 @@ The decoupling of test definition and execution from your CI/CD is one of the mo
 
 ![CI/CD Integrations](../img/concepts-cicd-integrations.png)
 
-Read on about [Running Tests](../articles/running-tests.md).
+Read on about [Running Tests](../articles/running-scaling-tests.md).
