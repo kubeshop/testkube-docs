@@ -84,7 +84,12 @@ const sidebars = {
       type: "category",
       label: "Core Concepts",
       items: [
-        "articles/core-concepts",
+        "articles/testing-pipeline",
+        "articles/defining-tests",
+        "articles/triggering-tests",
+        "articles/running-scaling-tests",
+        "articles/troubleshooting-tests",
+        "articles/analyzing-results",
       ],
     },
     {
