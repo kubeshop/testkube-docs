@@ -17,8 +17,8 @@ That being said, many of the core features of Testkube are available directly in
 
 - **Test Workflows** : Manage Workflows and Templates, Run/Schedule executions (see below for limitations)
 - **Logs/Artifacts** : Retrieve Workflow executions, logs, artifacts
-- **Webhooks** : Manage Webhooks that the
-- **Event Triggers** : Manage Event Triggers
+- **Webhooks** : Manage Webhooks that Agent triggers
+- **Event Triggers** : Manage Event Triggers that the Agent reacts to
 - **Tests, TestSuites, Sources** : Deprecated - but still available during a transition period.
 
 ### Workflow Limitations
