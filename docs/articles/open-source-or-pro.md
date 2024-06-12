@@ -1,28 +1,62 @@
-# Testkube Open Source
+# The Testkube Open Source Agent
 
-Designed to integrate seamlessly with your Kubernetes clusters, Testkube offers flexibility and power. For those searching for a quicker and streamlined experience, we suggest signing up for [Testkube Pro](https://app.testkube.io/). However, for organizations that prefer the hands-on approach, diving deep into the [Open Source][testkube-oss] version could be the ideal choice.
+The Testkube Agent described in the [Reference Architectures](install/reference-architectures) is
+100% Open Source and can be [deployed in standalone mode](install/standalone-agent) without being managed
+by the commercial Control Plane.
 
-Please refer to the table below to determine which version of Testkube best fits your needs.
+Once deployed, you can interact with the agent through the [Testkube CLI](install/cli) or directly via the
+[Agent API](/openapi/overview#agent-api).
 
-## Testkube Core OSS vs. Testkube Pro: At a Glance
+## Agent Functionality
 
-| Features                                                                                                                                                                                   |             Testkube Core OSS             |               Testkube Pro                |
-| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------: | :---------------------------------------: |
-| **Executors** (Run any of your testing tools out of the box with Testkube, or create your own custom container executor.)                                                                  | Tests always run inside your K8s cluster. | Tests always run inside your K8s cluster. |
-| **Test Artifacts** (Retrieve all your tests files e.g., Cypress videos or JUnit reports generated from your tests.)                                                                        |                     X                     |                     X                     |
-| **Webhooks** (Configure Slack alerts, integrate with Grafana or integrate with any external tool.)                                                                                         |                     X                     |                     X                     |
-| **Test Triggers** (Listen for Kubernetes events such as deployments and then trigger tests.)                                                                                               |                     X                     |                     X                     |
-| **Testkube Command Line** (Manage all of your tests from your terminal or CI/CD.)                                                                                                          |                     X                     |                     X                     |
-| **Dashboard** (Centralised control plane and dashboard to manage all of your tests across all your testing environments.)                                                                  |                                           |                     X                     |
-| **Support**                                                                                                                                                                                |                                           |                     X                     |
-| **Roles and Permissions** (Control who has access to your test environments and which level of access.)                                                                                    |                                           |                     X                     |
-| **Cached Test Results** (Regardless if your cluster is down or not, Testkube caches all of your tests results which is helpful with Ephemeral environments.)                               |                                           |                     X                     |
-| **Status Pages** (Create a test based status page of your services to share internally or externally with your stakeholders.)                                                              |                                           |                     X                     |
-| **TestWorkflows** (Make your tests more efficient with Testworkflows.)                                                                                                                     |                                           |                     X                     |
-| **Advanced Logs** (Quickly find the root cause of issues in your logs by using Testkube's advanced functionalities.)                                                                       |                                           |                     X                     |
-| **Advanced Test Debugging** (Compare different executions of your tests and analyze the logs of the Microservices being tested to find the issues.)                                        |                                           |                     X                     |
-| **Flaky Test Detection\*** (With the flaky test warnings from Testkube, your team can quickly pinpoint and isolate ambiguous tests, ensuring that you can rely on your testing processes.) |                                           |                     X                     |
+As shown in [Reference Architectures](install/reference-architectures), the main difference between a commercial deployment of
+Testkube and the standalone Agent is the Testkube Control Plane, which adds a User Interface (the [Testkube Dashboard](testkube-dashboard-explore))
+and an underlying management layer for multiple agents ("Environments"), Org/User Mgmt, Insights/Reporting, etc.
 
-\*Roadmap feature.
+That being said, many of the core features of Testkube are available directly in the agent via the aforementioned CLI or API:
 
-[testkube-oss](install/standalone-agent)
+- **Test Workflows** : Manage Workflows and Templates, Run/Schedule executions (see below for limitations).
+- **Logs/Artifacts** : Retrieve Workflow executions, logs, artifacts.
+- **Webhooks** : Manage Webhooks that the Agent executes.
+- **Event Triggers** : Manage Event Triggers that the Agent reacts to.
+- **Tests, TestSuites, Sources, Executors** : Deprecated - but still available during a transition period.
+
+See a complete feature-comparison table between OSS and Commercial below.
+
+### Workflow Limitations
+
+The following Workflow features are not available when running a Workflow via the Standalone Agent:
+
+- `execute` - see [Test Suites](test-workflows-test-suites)
+- `parallel` - see [Parallelization](test-workflows-parallel)
+- `matrix` (and `count`, `shards`, `maxCount`) - see [Sharding & Matrix Params](test-workflows-matrix-and-sharding)
+- `services` - see [Services](test-workflows-services)
+
+## Feature Comparison - Open Source vs Commercial
+
+This table shows a more complete feature comparison between the Agent Standalone and the 
+Testkube Orchestration Platform (Agent + Control Plane). 
+
+| Features                             |                Testkube Agent                 |                              Testkube Orchestration Platform                               | Read More                                              |
+|:-------------------------------------|:---------------------------------------------:|:------------------------------------------------------------------------------------------:|:-------------------------------------------------------|
+| **TestWorkflows**                    | X (with [limitations](#workflow-limitations)) |                                             X                                              | [Docs](test-workflows)                                 |
+| **Test Logs/Artifacts**              |                       X                       |                                             X                                              | [Docs](logs-and-artifacts)                             |
+| **Webhooks**                         |                       X                       |                                             X                                              | [Docs](webhooks)                                       |
+| **Test Triggers**                    |                       X                       |                                             X                                              | [Docs](triggering-overview)                            |
+| **Test, Suites, Sources, Executors** |                       X                       |                                             X                                              | Deprecated - [Read More](legacy-features)              |
+| **Testkube CLI**                     |                       X                       |                                             X                                              | [Docs](install/cli)                                    |
+| **REST API**                         |                Unauthenticated                | Authenticated with [API Tokens](/testkube-pro/articles/organization-management#api-tokens) | [Docs](/openapi/overview)                              |
+| **Dashboard / Control Plane**        |                                               |                   X  ([Hosted/On-Prem](install/reference-architectures))                   | [Docs](testkube-dashboard-explore)                     |
+| **Multi-environment Mgmt**           |                                               |                                             X                                              | [Docs](/testkube-pro/articles/environment-management)  |
+| **RBAC / User Mgmt**                 |                                               |                                             X                                              | [Docs](/testkube-pro/articles/organization-management) |
+| **Reporting / Insights**             |                                               |                                             X                                              |                                                        |
+| **Status Pages**                     |                                               |                                             X                                              | [Docs](/testkube-pro/articles/status-pages)            |
+| **AI Troubleshooting**               |                                               |                                             X                                              | [Docs](/testkube-pro/articles/AI-test-insights)        |
+| **Advanced Log/Results Debugging**   |                                               |                                             X                                              | [Docs](/testkube-pro/articles/log-highlighting)        |
+| **Cached Test Results**              |                                               |                                             X                                              | [Docs](/testkube-pro/articles/cached-results)          |
+
+## Source Code and Licensing
+
+The source-code for the agent is available in the [testkube GitHub repo](https://github.com/kubeshop/testkube)
+and is dual-licensed under the MIT license and the Testkube Community License (TCL).
+Read more in our [Licensing FAQ](testkube-licensing-FAQ).

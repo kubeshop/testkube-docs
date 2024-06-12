@@ -206,9 +206,10 @@ const sidebars = {
           type: "category",
           label: "Working with Results",
           items: [
+            "articles/logs-and-artifacts",
             {
               type: "doc",
-              label: "Highlighting & Comparing",
+              label: "Log Highlighting",
               id: "testkube-pro/articles/log-highlighting",
             },
             {
@@ -403,8 +404,13 @@ const sidebars = {
       label: "Reference",
       items: [
         "articles/architecture",
-        "articles/testkube-dependencies",
         {type: "doc", label: "Log Collection", id: "articles/logging"},
+        "articles/telemetry",
+        {
+          type: "doc",
+          label: "Dependencies",
+          id: "articles/testkube-dependencies"
+        },
         {
           type: "category",
           label: "CRDs",
@@ -436,7 +442,7 @@ const sidebars = {
         {
           type: "category",
           label: "OpenAPI Definitions",
-          items:[
+          items: [
             {
               type: "doc",
               label: "Overview",
@@ -486,27 +492,39 @@ const sidebars = {
             },
           ],
         },
-        "articles/telemetry",
       ],
     },
     {
       type: "category",
       label: "Open Source",
       items: [
-        "articles/open-source-or-pro",
         {
           type: "doc",
-          label: "Contributing",
-          id: "articles/contributing"
+          label: "Overview",
+          id: "articles/open-source-or-pro"
         },
-        "articles/development",
-        "articles/crds",
+        {
+          type: "doc",
+          label: "Licensing FAQ",
+          id: "articles/testkube-licensing-FAQ"
+        },
+        {
+          type: "category",
+          label: "Contributing",
+          link: {
+            type: "doc",
+            id: "articles/contributing"
+          },
+          items: [
+            "articles/development",
+            {
+              type: "doc",
+              label: "Testkube CRDs",
+              id: "articles/crds"
+            }
+          ]
+        }
       ],
-    },
-    {
-      type: "category",
-      label: "FAQs",
-      items: ["articles/testkube-licensing-FAQ"],
     },
     {
       type: "html",
@@ -514,7 +532,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Legacy Docs",
+      label: "Legacy Documentation",
       link: {
         type: "doc",
         id: "articles/legacy-features",
@@ -673,24 +691,6 @@ const sidebars = {
       ],
     }
   ],
-
-  /*
-   {
-      type: "html",
-      value: "<hr />",
-    },
-   */
-
-  // But you can create a sidebar manually
-  /*
-  tutorialSidebar: [
-    {
-      type: 'category',
-      label: 'Tutorial',
-      items: ['hello'],
-    },
-  ],
-   */
 };
 
 module.exports = sidebars;
