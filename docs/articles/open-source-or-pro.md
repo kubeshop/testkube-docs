@@ -19,7 +19,9 @@ That being said, many of the core features of Testkube are available directly in
 - **Logs/Artifacts** : Retrieve Workflow executions, logs, artifacts
 - **Webhooks** : Manage Webhooks that the Agent executes
 - **Event Triggers** : Manage Event Triggers that the Agent reacts to
-- **Tests, TestSuites, Sources** : Deprecated - but still available during a transition period.
+- **Tests, TestSuites, Sources, Executors** : Deprecated - but still available during a transition period.
+
+See a complete feature-comparison table between OSS and Commercial below
 
 ### Workflow Limitations
 
@@ -29,6 +31,29 @@ The following Workflow features are not available when running a Workflow via th
 - `parallel` - see [Parallelization](test-workflows-parallel)
 - `matrix` (and `count`, `shards`, `maxCount`) - see [Sharding & Matrix Params](test-workflows-matrix-and-sharding)
 - `services` - see [Services](test-workflows-services)
+
+## Feature Comparison Open Source vs Commercial
+
+This table shows a more complete feature comparison between the Agent Standalone and the 
+Testkube Orchestration Platform (Agent + Control Plane). 
+
+| Features                             |                Testkube Agent                 |                              Testkube Orchestration Platform                               | Read More                                              |
+|:-------------------------------------|:---------------------------------------------:|:------------------------------------------------------------------------------------------:|:-------------------------------------------------------|
+| **TestWorkflows**                    | X (with [limitations](#workflow-limitations)) |                                             X                                              | [Docs](test-workflows)                                 |
+| **Test Logs/Artifacts**              |                       X                       |                                             X                                              | [Docs](logs-and-artifacts)                             |
+| **Webhooks**                         |                       X                       |                                             X                                              | [Docs](webhooks)                                       |
+| **Test Triggers**                    |                       X                       |                                             X                                              | [Docs](triggering-overview)                            |
+| **Test, Suites, Sources, Executors** |                       X                       |                                             X                                              | Deprecated - [Read More](legacy-features)              |
+| **Testkube CLI**                     |                       X                       |                                             X                                              | [Docs](install/cli)                                    |
+| **REST API**                         |                Unauthenticated                | Authenticated with [API Tokens](/testkube-pro/articles/organization-management#api-tokens) | [Docs](/openapi/overview)                              |
+| **Dashboard / Control Plane**        |                                               |                   X  ([Hosted/On-Prem](install/reference-architectures))                   | [Docs](testkube-dashboard-explore)                     |
+| **Multi-environment Mgmt**           |                                               |                                             X                                              | [Docs](/testkube-pro/articles/environment-management)  |
+| **RBAC / User Mgmt**                 |                                               |                                             X                                              | [Docs](/testkube-pro/articles/organization-management) |
+| **Reporting / Insights**             |                                               |                                             X                                              |                                                        |
+| **Status Pages**                     |                                               |                                             X                                              | [Docs](/testkube-pro/articles/status-pages)            |
+| **AI Troubleshooting**               |                                               |                                             X                                              | [Docs](/testkube-pro/articles/AI-test-insights)        |
+| **Advanced Log/Results Debugging**   |                                               |                                             X                                              | [Docs](/testkube-pro/articles/log-highlighting)        |
+| **Cached Test Results**              |                                               |                                             X                                              | [Docs](/testkube-pro/articles/cached-results)          |
 
 ## Source Code and Licensing
 

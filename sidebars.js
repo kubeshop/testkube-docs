@@ -203,6 +203,7 @@ const sidebars = {
           type: "category",
           label: "Working with Results",
           items: [
+            "articles/logs-and-artifacts",
             {
               type: "doc",
               label: "Highlighting & Comparing",
