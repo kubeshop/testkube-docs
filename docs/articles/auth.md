@@ -27,20 +27,27 @@ the actual values for your user(s).
 
 ### OIDC
 
-Examples of OIDC providers include: Okta, Google, Salesforce, and Azure AD v2.
-
 To configure an OIDC provider, set the appropriate values in the
 `testkube-enterprise` chart as shown in the Google example below.
 
-A secret containing credentials for the identity provider may need to be
-created. Replace the `<oidc-credentials-secret-name>`, `<client-id-key`,
-and `<client-secret-key>` placeholders with the corresponding values from the
-secret.
+:::info
 
-Additionally, you need to replace the `<dex endpoint>` placeholder with the URI
-of exposed Dex endpoint. You should be able to see information about your Dex
-OpenID configuration by performing a GET request to `<dex
-endpoint>/.well-known/openid-configuration`.
+Examples of OIDC providers include: Okta, Google, Salesforce, and Azure AD v2.
+
+:::
+
+A secret containing credentials for the identity provider may need to be
+created. Replace the `<oidc-credentials-secret-name>`, `<client-id-key`, and
+`<client-secret-key>` placeholders with the corresponding values from the
+secret. Additionally, you need to replace the `<dex endpoint>` placeholder with
+the URI of exposed Dex endpoint.
+
+:::tip
+
+You should be able to see information about your Dex OpenID configuration by
+performing a GET request to `<dex endpoint>/.well-known/openid-configuration`.
+
+:::
 
 ```yaml
 dex:
