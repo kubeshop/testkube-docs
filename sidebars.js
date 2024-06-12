@@ -206,7 +206,7 @@ const sidebars = {
             "articles/logs-and-artifacts",
             {
               type: "doc",
-              label: "Highlighting & Comparing",
+              label: "Log Highlighting",
               id: "testkube-pro/articles/log-highlighting",
             },
             {
