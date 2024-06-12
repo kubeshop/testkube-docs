@@ -36,7 +36,6 @@ const sidebars = {
           items: [
             "articles/install/install-with-helm",
             "articles/install/advanced-install",
-            "articles/install/auth",
           ],
         },
         {type: "doc", label: "Upgrading", id: "articles/upgrade"},
@@ -55,7 +54,11 @@ const sidebars = {
               id: "testkube-pro/articles/transition-from-oss"
             },
             "articles/install/uninstall",
-            "testkube-pro-on-prem/articles/auth",
+            {
+              type: "doc",
+              label: "Configure Identity Providers",
+              id: "testkube-pro-on-prem/articles/auth",
+            },
             {
               type: "doc",
               label: "OpenShift on GCP",
@@ -76,11 +79,6 @@ const sidebars = {
               label: "Using a Private CA",
               id: "articles/private-ca",
             },
-            {
-              type: "doc",
-              label: "Configure Identity Providers",
-              id: "articles/auth",
-            }
           ],
         },
       ],
