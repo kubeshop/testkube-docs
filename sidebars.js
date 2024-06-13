@@ -434,14 +434,9 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "CRDs",
+          label: "Testkube CRD",
           items: [
-            {
-              type: "doc",
-              label: "TestWorkflow",
-              id: "articles/test-workflows",
-            },
-            {type: "doc", label: "Trigger", id: "articles/crds-reference"},
+            {type: "doc", label: "CRDs Reference", id: "articles/crds-reference"},
           ],
         },
         {

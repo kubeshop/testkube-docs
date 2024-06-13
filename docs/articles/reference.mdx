@@ -1,0 +1,77 @@
+import DocCard from "../../src/theme/DocCard";
+import clsx from "clsx";
+
+# Reference Documentation
+
+Reference documentation for Testkube components and configurations.
+
+export const DocCardList = (input) => (<>
+    <section className={clsx("row indent--min")}>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Testkube CLI",
+          description:
+            "Overview of how to use the Testkube CLI and reference for all its commands",
+          href: "/articles/install/cli",
+          type: "intro",
+        }}/>
+      </article>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Helm Chart",
+          description:
+            "Usage guide and reference docs for the Testkube Helm Chart",
+          href: "/articles/helm-chart",
+          type: "intro",
+        }}/>
+      </article>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Testkube APIs",
+          description:
+            "Agent and Control Plane OpenAPI definitions",
+          href: "/openapi/overview",
+          type: "intro",
+        }}/>
+      </article>
+    </section>
+    <section className={clsx("row indent--min")}>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Testkube Architecture",
+          description:
+            "Get an overview of Testkube Architecture",
+          href: "/articles/architecture",
+          type: "intro",
+        }}/>
+      </article>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Dependencies",
+          description:
+            "Dependencies on other components",
+          href: "/articles/testkube-dependencies",
+          type: "intro",
+        }}/>
+      </article>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Testkube CRDs",
+          description:
+            "An overview and reference for the Testkube Custome Resource Definitions",
+          href: "/articles/crds-reference",
+          type: "intro",
+        }}/>
+      </article>
+    </section>
+  </>
+);
+
+<DocCardList/>
+
