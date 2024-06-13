@@ -217,7 +217,6 @@ const sidebars = {
               label: "AI Analysis",
               id: "testkube-pro/articles/AI-test-insights",
             },
-            {type: "doc", label: "Artifacts", id: "articles/artifacts"},
             {
               type: "doc",
               label: "Cached Test Results",
@@ -404,7 +403,6 @@ const sidebars = {
       label: "Reference",
       items: [
         "articles/architecture",
-        {type: "doc", label: "Log Collection", id: "articles/logging"},
         "articles/telemetry",
         {
           type: "doc",
@@ -435,8 +433,10 @@ const sidebars = {
             {
               type: "doc",
               id: "testkube-pro-on-prem/articles/usage-guide",
-              label: "Usage",
+              label: "Usage Guide",
             },
+            {type: "doc", label: "Log Collection", id: "articles/logging"},
+            {type: "doc", label: "Artifact Storage", id: "articles/artifact-storage"},
           ]
         },
         {
@@ -547,6 +547,11 @@ const sidebars = {
           type: "doc",
           label: "Test Sources",
           id: "articles/test-sources"
+        },
+        {
+          type: "doc",
+          label: "Artifact Mgmt",
+          id: "articles/artifacts"
         },
         {
           type: "category",
