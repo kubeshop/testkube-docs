@@ -13,6 +13,20 @@ Please note, that you can also use it under a specific step - this way, such fil
 
 :::
 
+:::tip
+
+Remember, that the working directory won't be affected by any of these settings.
+If you want to change default working directory, i.e. to the cloned repository,
+you can use `workingDir`:
+
+```yaml
+spec:
+  container:
+    workingDir: /data/repo
+```
+
+:::
+
 ## Shared Directories
 
 ### /data
@@ -156,6 +170,20 @@ spec:
 ## Git Repository
 
 Testkube allows you to easily fetch the Git repository using `content.git`.
+
+:::tip
+
+Remember, that the working directory won't be affected by any of these settings.
+If you want to change default working directory, i.e. to the cloned repository,
+you can use `workingDir`:
+
+```yaml
+spec:
+  container:
+    workingDir: /data/repo
+```
+
+:::
 
 ### Custom Mount Path
 
