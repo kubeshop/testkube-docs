@@ -185,7 +185,7 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Triggering Workflows",
+          label: "Triggering Test Workflows",
           collapsible: true,
           link: {
             type: "doc",
@@ -237,6 +237,11 @@ const sidebars = {
           type: "category",
           label: "Reporting & Analysis",
           items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/reporting-overview",
+            },
             {
               type: "doc",
               label: "Status Pages",
