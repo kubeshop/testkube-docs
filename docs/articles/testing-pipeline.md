@@ -1,6 +1,4 @@
-# Testkube Testing Pipeline
-
-## Testkube in the STLC
+# Testkube in the STLC
 
 The [Software Testing Lifecycle](https://www.geeksforgeeks.org/software-testing-life-cycle-stlc/) (STLC) is a well-established approach for testing software applications to ensure that they meet the requirements of their stakeholders and are free from defects. The STLC follows a series of steps or phases, each phase with its specific objectives and deliverables. These phases are:
 
