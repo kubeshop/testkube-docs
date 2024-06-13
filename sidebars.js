@@ -17,7 +17,11 @@ const cloudRedocSidebar = require('./src/openapi/cloud/redoc-sidebar');
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   main: [
-    "index",
+    {
+      type: "doc",
+      label: "Welcome!",
+      id: "index"
+    },
     "articles/tutorial/quickstart",
     "articles/tutorial/example",
     {
@@ -93,6 +97,10 @@ const sidebars = {
     {
       type: "category",
       label: "Using Testkube",
+      link: {
+        type: "doc",
+        id: "articles/using-testkube",
+      },
       items: [
         {
           type: "category",
@@ -263,6 +271,10 @@ const sidebars = {
     {
       type: "category",
       label: "Examples & Use Cases",
+      link: {
+        type: "doc",
+        id: "articles/examples",
+      },
       items: [
         {
           type: "category",
@@ -402,6 +414,10 @@ const sidebars = {
     {
       type: "category",
       label: "Reference",
+      link: {
+        type: "doc",
+        id: "articles/reference",
+      },
       items: [
         "articles/architecture",
         {type: "doc", label: "Log Collection", id: "articles/logging"},
