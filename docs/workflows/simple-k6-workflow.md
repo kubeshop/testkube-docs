@@ -1,10 +1,11 @@
-```yaml
+```yaml showLineNumbers title="Simple K6 Example"
 kind: TestWorkflow
 apiVersion: testworkflows.testkube.io/v1
 metadata:
   name: k6-sample
   namespace: testkube
 spec:
+  // highlight-next-line
   content:
     files:
     - path: /data/example.js
@@ -15,6 +16,7 @@ spec:
             http.get('https://test.k6.io');
             sleep(1);
         };
+  // highlight-next-line
   steps:
     - name: Run Tests
       workingDir: /data
