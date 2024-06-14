@@ -11,23 +11,23 @@ sure to update the `name` and `namespace` for your environment if needed.
 - The `spec.content` property defines the location of the GitHub project
 - the `spec.steps` property defines a single step that runs the test and uploads the created reports.
 
-<SimpleJMeterFramework/>
+<SimpleJMeter/>
 
 After execution, you can see the output from the test executions under the executions panel tabs:
 
 <Tabs>
 <TabItem value="logs" label="Log Output" default>
 
-The log output from the JMeter Framework execution:
+The log output from the JMeter execution:
 
-![JMeter Framework Log Output](images/basic-jmeter-framework-log-output.png)
+![JMeter Framework Log Output](images/basic-jmeter-log-output.png)
 
 </TabItem>
 <TabItem value="artifacts" label="Artifacts" default>
 
 The uploaded report is available in the Artifacts tab:
 
-![JMeter Framework Artifacts](images/basic-jmeter-framework-artifacts.png)
+![JMeter Framework Artifacts](images/basic-jmeter-artifacts.png)
 
 </TabItem>
 </Tabs>
