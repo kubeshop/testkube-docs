@@ -24,12 +24,16 @@ testkube run test <testName> [flags]
       --artifact-storage-class-name string         artifact storage class name for container executor
       --artifact-use-default-storage-class-name    whether to use default storage class name
       --artifact-volume-mount-path string          artifact volume mount path for container executor
+      --attach-debugger                            attach simple debugger for job, need KUBECONFIG for the agent to be active
       --command stringArray                        command passed to image in executor
       --concurrency int                            concurrency level for multiple test execution (default 10)
       --context string                             running context description for test execution
       --copy-files stringArray                     file path mappings from host to pod of form source:destination
+      --debugger-file string                       store debug info into file, stdout by default
+      --disable-webhooks                           disable webhooks
   -d, --download-artifacts                         download artifacts automatically
       --download-dir string                        download dir (default "artifacts")
+      --enable-webhooks                            enable webhooks
       --execute-postrun-script-before-scraping     whether to execute postrun scipt before scraping or not (prebuilt executor only)
       --execution-label stringToString             execution-label key value pair: --execution-label key1=value1 (default [])
       --execution-namespace string                 namespace for test execution (Pro edition only)
@@ -80,10 +84,12 @@ testkube run test <testName> [flags]
 ```
   -a, --api-uri string          api uri, default value read from config if set (default "http://localhost:8088")
   -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
+      --go-template string      go template to render (default "{{.}}")
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
       --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
       --oauth-enabled           enable oauth
+  -o, --output string           output type can be one of json|yaml|pretty|go (default "pretty")
       --verbose                 show additional debug messages
 ```
 
