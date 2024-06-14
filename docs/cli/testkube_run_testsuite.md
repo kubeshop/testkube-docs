@@ -15,8 +15,10 @@ testkube run testsuite <testSuiteName> [flags]
 ```
       --concurrency int                            concurrency level for multiple test suite execution (default 10)
       --context string                             running context description for test suite execution
+      --disable-webhooks                           disable webhooks
   -d, --download-artifacts                         download artifacts automatically
       --download-dir string                        download dir (default "artifacts")
+      --enable-webhooks                            enable webhooks
       --execution-label stringToString             execution-label adds a label to execution in form of key value pair: --execution-label key1=value1 (default [])
       --format string                              data format for storing files, one of folder|archive (default "folder")
       --git-branch string                          if uri is git repository we can set additional branch parameter
@@ -47,10 +49,12 @@ testkube run testsuite <testSuiteName> [flags]
 ```
   -a, --api-uri string          api uri, default value read from config if set (default "http://localhost:8088")
   -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
+      --go-template string      go template to render (default "{{.}}")
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
       --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
       --oauth-enabled           enable oauth
+  -o, --output string           output type can be one of json|yaml|pretty|go (default "pretty")
       --verbose                 show additional debug messages
 ```
 
