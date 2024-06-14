@@ -33,6 +33,12 @@ If you're editing the docs, follow this workflow:
 }
 ```
 
+Also make sure the documentation builds ok locally before opening a PR - this will check for broken links, etc. 
+
+```
+npm run build
+```
+
 5. You can preview the changes locally in your browser: http://localhost:3000
 
 ### How to style the docs

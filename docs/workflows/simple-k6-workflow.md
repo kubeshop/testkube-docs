@@ -1,4 +1,4 @@
-```yaml showLineNumbers title="Simple K6 Example"
+```yaml showLineNumbers title="Basic K6 Workflow"
 kind: TestWorkflow
 apiVersion: testworkflows.testkube.io/v1
 metadata:
