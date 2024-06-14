@@ -1,5 +1,6 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import SimpleK6 from "../../workflows/simple-k6-workflow.md"
 
 # Basic K6 Example
 
@@ -9,40 +10,7 @@ sure to update the `name` and `namespace` for your environment if needed.
 - The `spec.content` property defines a simple k6 script which gets written to `/data/example.js`
 - the `spec.steps` property defines a single step that runs the test and uploads the created report.
 
-```yaml
-kind: TestWorkflow
-apiVersion: testworkflows.testkube.io/v1
-metadata:
-  name: k6-sample
-  namespace: testkube
-spec:
-  content:
-    files:
-    - path: /data/example.js
-      content: |-
-        import http from 'k6/http';
-        import { sleep } from 'k6';
-        export default function () {
-            http.get('https://test.k6.io');
-            sleep(1);
-        };
-  steps:
-    - name: Run Tests
-      workingDir: /data
-      run:
-        image: grafana/k6:0.49.0
-        env:
-          - name: K6_WEB_DASHBOARD
-            value: "true"
-          - name: K6_WEB_DASHBOARD_EXPORT
-            value: k6-test-report.html
-        args:
-          - run
-          - example.js
-      artifacts:
-        paths:
-          - k6-test-report.html
-```
+<SimpleK6/>
 
 After execution, you can see the output from the test executions under the executions panel tabs:
 
