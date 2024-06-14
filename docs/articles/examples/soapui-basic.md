@@ -16,5 +16,5 @@ sure to update the `name` and `namespace` for your environment if needed.
 
 After execution, you can see the log output from the SoapUI runner under the executions panel Log Output tab:
 
-![img.png](images/soapui-basic-log-output.png)
+![SoapUI Log Output](images/soapui-basic-log-output.png)
 

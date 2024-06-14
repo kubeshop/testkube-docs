@@ -33,14 +33,14 @@ number of nodes
 
 The k6 log output from one of the workers: 
 
-![img.png](images/distributed-k6-log-output.png)
+![Distributed K6 Log Output](images/distributed-k6-log-output.png)
 
 </TabItem>
 <TabItem value="artifacts" label="Artifacts" default>
 
 The uploaded HTML reports for each of the Workers is available in the Artifacts tab
 
-![img_1.png](images/distributed-k6-artifacts.png)
+![Distributed K6 HTLM Report](images/distributed-k6-artifacts.png)
 
 </TabItem>
 

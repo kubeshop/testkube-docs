@@ -21,14 +21,14 @@ After execution, you can see the output from the test executions under the execu
 
 The log output from the Selenium execution:
 
-![Log Output](images/basic-selenium-log-output.png)
+![Selenium Log Output](images/basic-selenium-log-output.png)
 
 </TabItem>
 <TabItem value="artifacts" label="Artifacts" default>
 
 The uploaded report is available in the Artifacts tab:
 
-![Artifacts Tab](images/basic-selenium-artifacts-tab.png)
+![Selenium Artifacts Tab](images/basic-selenium-artifacts-tab.png)
 
 </TabItem>
 
@@ -36,7 +36,7 @@ The uploaded report is available in the Artifacts tab:
 
 Clicking the HTLM report opens it in your browser:
 
-![HTML Report](images/basic-selenium-html-report.png)
+![Selenium HTML Report](images/basic-selenium-html-report.png)
 
 </TabItem>
 </Tabs>
