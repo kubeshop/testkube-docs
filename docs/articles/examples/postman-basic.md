@@ -1,5 +1,3 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
 import SimplePostman from "../../workflows/simple-postman-workflow.md"
 
 # Basic Postman Example
