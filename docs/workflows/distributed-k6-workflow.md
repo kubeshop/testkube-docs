@@ -4,6 +4,8 @@ apiVersion: testworkflows.testkube.io/v1
 metadata:
   name: distributed-k6
   namespace: testkube
+  labels:
+    docs: example
 spec:
   config:
     duration:

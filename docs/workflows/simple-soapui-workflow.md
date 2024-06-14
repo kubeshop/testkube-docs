@@ -4,6 +4,8 @@ apiVersion: testworkflows.testkube.io/v1
 metadata:
   name: soapui-sample
   namespace: testkube
+  labels:
+    docs: example
 spec:
   content:
     git:

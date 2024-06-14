@@ -4,6 +4,8 @@ apiVersion: testworkflows.testkube.io/v1
 metadata:
   name: postman-sample
   namespace: testkube
+  labels:
+    docs: example
 spec:
   // highlight-next-line
   content:

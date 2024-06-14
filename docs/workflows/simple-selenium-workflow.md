@@ -4,6 +4,8 @@ apiVersion: testworkflows.testkube.io/v1
 metadata:
   name: selenium-test
   namespace: testkube
+  labels:
+    docs: example
 spec:
   content:
     git:
