@@ -262,8 +262,87 @@ const sidebars = {
     {
       type: "category",
       label: "Examples & Use Cases",
-      items : [
-        "articles/examples/k6-basic"
+      items: [
+        {
+          type: "category",
+          label: "K6",
+          items: [{
+            type: "doc",
+            label: "Basic",
+            id: "articles/examples/k6-basic"
+          },
+            {
+              type: "doc",
+              label: "Distributed",
+              id: "articles/examples/k6-distributed"
+            },
+          ]
+        },
+        {
+          type: "doc",
+          label: "Cypress - Basic",
+          id: "articles/examples/cypress-basic"
+        },
+        {
+          type: "doc",
+          label: "Playwright - Basic",
+          id: "articles/examples/playwright-basic"
+        },
+        {
+          type: "doc",
+          label: "Selenium",
+          id: "articles/examples/selenium-basic"
+        },
+        {
+          type: "doc",
+          label: "Postman",
+          id: "articles/examples/postman-basic"
+        },
+        {
+          type: "doc",
+          label: "SoapUI",
+          id: "articles/examples/soapui-basic"
+        },
+        {
+          type: "doc",
+          label: "Ginko",
+          id: "articles/examples/ginko-basic"
+        },
+        {
+          type: "doc",
+          label: "Maven",
+          id: "articles/examples/maven-basic"
+        },
+        {
+          type: "doc",
+          label: "Gradle",
+          id: "articles/examples/gradle-basic"
+        },
+        {
+          type: "doc",
+          label: "Pytest",
+          id: "articles/examples/pytest-basic"
+        },
+        {
+          type: "doc",
+          label: "JMeter",
+          id: "articles/examples/jmeter-basic"
+        },
+        {
+          type: "doc",
+          label: "Robot Framework",
+          id: "articles/examples/robot-framework-basic"
+        },
+        {
+          type: "doc",
+          label: "Artillery",
+          id: "articles/examples/artillery-basic"
+        },
+        {
+          type: "doc",
+          label: "cURL",
+          id: "articles/examples/curl-basic"
+        },
       ]
     },
     {
