@@ -4,6 +4,8 @@ kind: TestWorkflow
 metadata:
   name: cypress-sample
   namespace: testkube
+  labels:
+    docs: example
 spec:
   content:
     git:
