@@ -1,11 +1,11 @@
 import DocCard from "../src/theme/DocCard";
 import clsx from "clsx";
 
-# Welcome to Testkube!
+# Welcome to the Testkube Documentation!
 
-Testkube is a Kubernetes-native testing framework for Testers, Developers, and DevOps practitioners that allows you to
-automate the executions of your existing testing tools inside your Kubernetes cluster, removing all the complexity
-from your CI/CD pipelines.
+We're happy you're here to become a Testkube aficionado!
+
+### Getting Started
 
 export const DocCardList = (input) => (
   <section className={clsx("row indent--min")}>
@@ -30,7 +30,7 @@ export const DocCardList = (input) => (
         icon: "🚀",
         label: "Connect to your CI/CD",
         description:
-          "Incorporate Testkube into your CI/CD environment with the tools you already use.",
+          "Incorporate the execution of your Workflow into your existing CI/CD environment.",
         href: "/articles/tutorial/quickstart#6-integrate-within-your-pipeline",
         type: "intro",
       },
@@ -44,33 +44,97 @@ export const DocCardList = (input) => (
 
 <DocCardList />
 
-## Advantages of Using Testkube
+## What is Testkube?
 
-Whether you want to simplify your company's DevOps workflows or empower your QA and Testing teams, Testkube provides your teams the power to:
+Testkube is a Test Orchestration and Execution Framework powered by Kubernetes. It provides a single
+platform for defining, running and analyzing test executions, using your existing testing tools/scripts,
+running in your existing infrastructure.
 
-#### Run Your Tests Inside Your Cluster
+Testkube consists of a **Control Plane** and any number of **Testkube Agents**. The Control Plane exposes a **Dashboard** for easy
+and centralized access to most Testkube features.
 
-Testkube runs your tests inside your Kubernetes cluster and not from a CI pipeline. This is a huge networking security benefit because you don't need to expose your cluster to the world to be able to test its application.
+The Testkube Agent runs your tests and is *always* running in your own infrastructure. Depending on your requirements,
+the Control Plane can be running either in the cloud or on-prem - [Read more](articles/install/reference-architectures). The Agent
+is 100% Open Source and can also be run standalone without the Control Plane - [Read more](articles/open-source-or-pro).
 
-#### Execute your tests from any CI/CD tool
+## Learn More About Testkube
 
-We decouple test orchestration from your CI/CD pipelines by triggering Testkube’s testing orchestration and execution engine right from within your CI/CD workflow regardless of the tools you use, giving you vendor neutrality and a plethora of options amongst GitLab, GitHub Actions, CircleCI, or a GitOps approach.
+Once you're up to speed and running your first tests, dive in and learn more about Testkube!
 
-#### GitOps Friendly Testing Strategy
+export const LearnCardList = (input) => (
+  <section className={clsx("row indent--min")}>
+    {[
+      {
+        icon: "🛠",
+        label: "Core Concepts",
+        description:
+          "Learn about Testkube Core Concepts and how it fits into the Software Testing Lifecycel (STLC).",
+        href: "/articles/core-concepts",
+        type: "intro",
+      },
+      {
+        icon: "🏎💨",
+        label: "Using Testkube",
+        description:
+          "Learn about Workflows, Templates, Triggers, Results and Reporting to get the most of Testkubes features.",
+        href: "/articles/using-testkube",
+        type: "intro",
+      },
+      {
+        icon: "🚀",
+        label: "Examples & Use Cases",
+        description:
+          "See example Workflows for your favorite testing tools and learn how to integrate Testkube into your infrastructure.",
+        href: "/articles/examples",
+        type: "intro",
+      },
+    ].map((item, i) => (
+      <article key={i} className="col padding--sm intro__card">
+        <DocCard item={item} />
+      </article>
+    ))}
+  </section>
+);
 
-Testkube is Kubernetes-native, meaning all your tests are defined using Kubernetes Custom Resources. This allows your tests to be part of your Infrastructure as Code. With Testkube you can use GitOps tools like ArgoCD and Flux to create and manage your tests.
+<LearnCardList />
 
-#### Make Your Tests Kubernetes Native
 
-Your tests are native to Kubernetes as Testkube uses Custom Resources to manage the definitions and execution of your tests.
+export const LearnMoreCardList = (input) => (
+  <section className={clsx("row indent--min")}>
+    {[
+      {
+        icon: "🚀",
+        label: "Integrations",
+        description:
+          "Learn how Testkube integrates into your existing infrastructure via dedicate Plugins, " +
+          "Kubernetes Events, Webhooks, CDEvents, etc.",
+        href: "/category/integrations",
+        type: "intro",
+      },
+      {
+        icon: "🛠",
+        label: "Reference Docs",
+        description:
+          "Get into the nitty-gritty of Helm Charts, OpenAPI definitions and CLI commands",
+        href: "/articles/reference",
+        type: "intro",
+      },
+      {
+        icon: "🏎💨",
+        label: "Open Source",
+        description:
+          "Learn about the Testkube Agent which is 100% Open Source and can run Standalone.",
+        href: "/articles/open-source-or-pro",
+        type: "intro",
+      },
+    ].map((item, i) => (
+      <article key={i} className="col padding--sm intro__card">
+        <DocCard item={item} />
+      </article>
+    ))}
+  </section>
+);
 
-#### Centralized Reporting and Storage of Test Artifacts
+<LearnMoreCardList />
 
-Testkube can run any test tool that you're using. The primary advantages of this feature are:
 
-- Test results will not be spread around multiple systems.
-- You can have a single place inside **your** cluster where all test results are saved and reported with a common format.
-
-### Run Tests on Demand
-
-Currently, if you want to re-run a test, you'll probably be re-triggering your entire CI/CD pipeline, and you'll probably spend 10 minutes of your life doing it.
