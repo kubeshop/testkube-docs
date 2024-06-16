@@ -2,6 +2,11 @@ import Admonition from "@theme/Admonition";
 
 # SoapUI
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
+
 [SoapUI](https://www.soapui.org) is an open-source tool used for the end-to-end testing of REST, SOAP and GraphQL APIs, as well as JMS, JDBC and other web services. Testkube supports the SoapUI executor implementation.
 
 * Default command for this executor: `/bin/sh` `/usr/local/SmartBear/EntryPoint.sh`

@@ -1,5 +1,9 @@
 # Deprecations
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
 Software deprecation refers to the process of phasing out or discontinuing support for a particular software feature. This decision is typically made by software developers or vendors due to various reasons such as security concerns, outdated technology, or the introduction of more efficient alternatives.
 
 Usually if possible and reasonable we try to keep the backward compatibility.

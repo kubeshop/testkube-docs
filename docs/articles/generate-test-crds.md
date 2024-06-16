@@ -1,5 +1,9 @@
 # Test CRD Generation
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
 ## File Naming Convention for Test CRD Generation
 
 We support the following file naming convention for Postman files to support multiple environment files:

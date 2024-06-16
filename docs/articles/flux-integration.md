@@ -1,5 +1,9 @@
 # GitOps Testing with Flux
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
 ## Tutorial
 
 The following is a step-by-step walkthrough to test the automated application deployment and execution of Postman collections in a local Kind cluster.

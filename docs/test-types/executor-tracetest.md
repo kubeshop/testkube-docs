@@ -2,6 +2,11 @@ import Admonition from "@theme/Admonition";
 
 # Tracetest
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
+
 Testkube supports running trace-based tests with Tracetest.
 
 <iframe width="100%" height="250" src="https://www.youtube.com/embed/nAp3zYgykok" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

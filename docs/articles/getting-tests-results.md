@@ -1,5 +1,9 @@
 # Getting Results
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
 We saw how simple it is to create and run Testkube tests executions. Obtaining test results is also simple.
 
 ## Getting Test Executions After Test is Executed

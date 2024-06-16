@@ -1,5 +1,9 @@
 # Distributed JMeter Executor
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
 The Distributed JMeter Executor is an extension of JMeter Executor which can run the JMeter Tests in distributed mode by creating slave pods and distributing the test among them.
 
 ## What is an Executor?

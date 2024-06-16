@@ -2,6 +2,11 @@ import Admonition from "@theme/Admonition";
 
 # Ginkgo
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
+
 Our dedicated Ginkgo executor allows running Ginkgo tests with Testkube - directly from your Git repository.
 
 * Default command for this executor: `ginkgo`

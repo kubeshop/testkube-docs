@@ -1,5 +1,9 @@
 # Testkube Jenkins UI
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
 The Testkube Jenkins integration streamlines the installation of Testkube, enabling the execution of any [Testkube CLI](https://docs.testkube.io/cli/testkube) command within Jenkins Pipelines or Freestyle Projects.  
 
 If you're looking to use Pipelines and Groovy scripts, then look at examples from [Testkube Jenkins Pipelines](./jenkins.md).

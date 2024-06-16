@@ -1,5 +1,9 @@
 # Running Tests
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
 Tests are stored in Kubernetes clusters as Custom Resources. Testkube tests are reusable and can get results with the use of kubectl testkube plugin or with an API.
 
 ## Running

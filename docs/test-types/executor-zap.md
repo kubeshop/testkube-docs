@@ -2,6 +2,11 @@ import Admonition from "@theme/Admonition";
 
 # OWASP Zed Attack Proxy Executor
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
+
 Starting from version 1.12, Testkube has a dedicated executor for running ZAP tests. All you need to do is populate a file with the necessary parameters and create a Testkube test.
 
 Default command for this executor is `<pythonScriptPath>`, which will be calculated based on the test type.

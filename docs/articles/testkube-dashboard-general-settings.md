@@ -1,5 +1,9 @@
 # General Settings
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
 Clicking the **General** box under the **Settings** tab displays the **Test name & description** and **Labels** for the Test or Test Suite:
 
 ![Settings General](../img/settings-general-1.14.png)

@@ -1,5 +1,9 @@
 # Creating Tests
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
 Tests are single executor oriented objects. Tests can have different types, depending on which executors are installed in your cluster.
 
 Testkube includes `postman/collection`, `cypress/project`, `curl/test`, `k6/script` and `soapui/xml` test types which are auto registered during the Testkube install by default.

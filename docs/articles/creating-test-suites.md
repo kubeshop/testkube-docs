@@ -1,5 +1,10 @@
 # Creating Test Suites
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
+
 A large IT department has a frontend team and a backend team, everything is
 deployed on Kubernetes clusters, and each team is responsible for its part of the work. The frontend engineers test their code using the Cypress testing framework, but the backend engineers prefer simpler tools like Postman. They have many Postman collections defined and want to run them against a Kubernetes cluster but some of their services are not exposed externally.
 

@@ -1,5 +1,9 @@
 # Secret Variables
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
 Testkube now offers many ways to pass secrets to the test and to the executors. Here are following types:
 
 ## Secret Variables

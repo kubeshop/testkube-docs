@@ -1,5 +1,10 @@
 # KubePug
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
+
 [KubePug](https://github.com/kubepug/kubepug) is a kubectl plugin checking for deprecated Kubernetes clusters or deprecated versions of Kubernetes manifests. It can connect to both your cluster directly and it can run on input files.
 For security, Testkube only supports scanning input files via the KubePug executor.
 

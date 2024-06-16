@@ -1,5 +1,10 @@
 # Gradle
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
+
 Testkube allows running Gradle based tasks that could also be tests. For example, we can easily run JUnit tests in Testkube. 
 
 * Default command for this executor: `gradle`

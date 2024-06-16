@@ -3,6 +3,11 @@
 
 # Migrate from testkube-run-action to setup-testkube
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
+
 1. Change the `uses` property from `kubeshop/testkube-run-action@v1` to `kubeshop/setuo-testkube@v1`.
 
 ```yaml

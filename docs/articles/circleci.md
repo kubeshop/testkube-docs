@@ -1,5 +1,9 @@
 # Testkube CircleCI
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
 The Testkube CircleCI integration facilitates the installation of Testkube and allows the execution of any [Testkube CLI](https://docs.testkube.io/cli/testkube) command within a CircleCI pipeline. This integration can be seamlessly incorporated into your CircleCI repositories to enhance your CI/CD workflows.
 The integration offers a versatile approach to align with your pipeline requirements and is compatible with Testkube Pro, Testkube Pro On-Prem, and the open-source Testkube platform. It enables CircleCI users to leverage the powerful features of Testkube directly within their CI/CD pipelines, ensuring efficient and flexible test execution.
 

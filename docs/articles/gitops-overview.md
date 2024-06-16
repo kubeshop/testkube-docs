@@ -1,5 +1,9 @@
 # GitOps Cloud Native Testing
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
 One of the major trends in contemporary cloud native application development is the adoption of GitOps; managing the state of your Kubernetes cluster(s) in Git - with all the bells and whistles provided by modern Git platforms like GitHub and GitLab in regard to workflows, auditing, security, tooling, etc. Tools like ArgoCD or Flux are used to do the heavy lifting of keeping your Kubernetes cluster in sync with your Git repository; as soon as a difference is detected between Git and your cluster, it is deployed to ensure that your repository is the source-of-truth for your runtime environment.
 
 Testkube is the first GitOps-friendly Cloud-native test orchestration/execution framework to ensure that your QA efforts align with this new approach to application configuration and cluster configuration management. Combined with the GitOps approach described above, Testkube will include your test artifacts and application configuration in the state of your cluster and make Git the source of truth for these test artifacts.

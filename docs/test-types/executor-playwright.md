@@ -3,6 +3,11 @@ import Admonition from "@theme/Admonition";
 
 # Playwright
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
+
 Starting from the Testkube Helm chart version 1.9.5, it is possible to use Testkube to manage your Playwright tests inside your Kubernetes cluster.
 
 * Default command for this executor: `<depManager>`

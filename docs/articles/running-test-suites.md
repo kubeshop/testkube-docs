@@ -1,5 +1,10 @@
 # Running Test Suites
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
+
 To run your Tests Suites, pass the `testsuites run` command with the test name to your `kubectl testkube` plugin. Test Suites are started asynchronously by default.
 
 ```sh

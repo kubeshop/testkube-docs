@@ -1,5 +1,10 @@
 # Testkube GitHub Action
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
+
 The Testkube GitHub Action installs Testkube and enables running any [Testkube CLI](https://docs.testkube.io/cli/testkube) command in a GitHub workflow. It is available on [Github Marketplace](https://github.com/marketplace/actions/testkube-action).
 The action provides a flexible way to work with your pipeline and can be used with Testkube Pro, Testkube Pro On-Prem and the open source Testkube platform.
 

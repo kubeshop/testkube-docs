@@ -2,6 +2,11 @@ import Admonition from "@theme/Admonition";
 
 # JMeter
 
+:::warning
+The features described in this document are being deprecated. You can find more details about the current Testkube features to perform these functions [here](../articles/legacy-features.md).
+:::
+
+
 [JMeter](https://jmeter.apache.org/) is an integral part of Testkube. The Testkube JMeter executor is installed by default during the Testkube installation.
 
 * Default command for this executor: `<entryPoint>`
