@@ -13,7 +13,7 @@ spec:
         - Pytest-Test-Workflow
   container:
     workingDir: /data/repo/Pytest-Test-Workflow
-    image: kubeshop/testkube-pytest:latest
+    image: kubeshop/testkube-pytest:3.8.17-alpine3.18
   steps:
     - name: Run test
       shell: pytest test-api-endpoint.py

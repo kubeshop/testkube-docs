@@ -305,11 +305,6 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "Ginko",
-          id: "articles/examples/ginko-basic"
-        },
-        {
-          type: "doc",
           label: "Maven",
           id: "articles/examples/maven-basic"
         },
