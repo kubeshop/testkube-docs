@@ -17,7 +17,11 @@ const cloudRedocSidebar = require('./src/openapi/cloud/redoc-sidebar');
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   main: [
-    "index",
+    {
+      type: "doc",
+      label: "Welcome!",
+      id: "index"
+    },
     "articles/tutorial/quickstart",
     "articles/tutorial/example",
     {
@@ -87,12 +91,21 @@ const sidebars = {
       type: "category",
       label: "Core Concepts",
       items: [
-        "articles/core-concepts",
+        "articles/testing-pipeline",
+        "articles/defining-tests",
+        "articles/triggering-tests",
+        "articles/running-scaling-tests",
+        "articles/troubleshooting-tests",
+        "articles/analyzing-results",
       ],
     },
     {
       type: "category",
       label: "Using Testkube",
+      link: {
+        type: "doc",
+        id: "articles/using-testkube",
+      },
       items: [
         {
           type: "category",
@@ -177,7 +190,7 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Triggering Workflows",
+          label: "Triggering Test Workflows",
           collapsible: true,
           link: {
             type: "doc",
@@ -230,6 +243,11 @@ const sidebars = {
           items: [
             {
               type: "doc",
+              label: "Overview",
+              id: "articles/reporting-overview",
+            },
+            {
+              type: "doc",
               label: "Status Pages",
               id: "testkube-pro/articles/status-pages",
             },
@@ -262,6 +280,10 @@ const sidebars = {
     {
       type: "category",
       label: "Examples & Use Cases",
+      link: {
+        type: "doc",
+        id: "articles/examples",
+      },
       items: [
         {
           type: "category",
@@ -422,6 +444,10 @@ const sidebars = {
     {
       type: "category",
       label: "Reference",
+      link: {
+        type: "doc",
+        id: "articles/reference",
+      },
       items: [
         "articles/architecture",
         "articles/telemetry",
@@ -432,14 +458,9 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "CRDs",
+          label: "Testkube CRD",
           items: [
-            {
-              type: "doc",
-              label: "TestWorkflow",
-              id: "articles/test-workflows",
-            },
-            {type: "doc", label: "Trigger", id: "articles/crds-reference"},
+            {type: "doc", label: "CRDs Reference", id: "articles/crds-reference"},
           ],
         },
         {

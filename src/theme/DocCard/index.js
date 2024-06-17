@@ -20,7 +20,8 @@ function CardContainer({ href, children }) {
     </Link>
   );
 }
-function CardLayout({ href, icon, logo, title, description }) {
+
+export function CardLayout({ href, icon, logo, title, description }) {
   return (
     <CardContainer href={href}>
       <h2 className={clsx("text--truncate", styles.cardTitle)} title={title}>

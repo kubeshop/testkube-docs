@@ -1,0 +1,86 @@
+import DocCard from "../../src/theme/DocCard";
+import clsx from "clsx";
+
+# Using Testkube
+
+This part of the documentation shows how to use the major features of Testkube.
+
+export const DocCardList = (input) => (<>
+    <section className={clsx("row indent--min")}>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Testkube Dashboard",
+          description:
+            "Learn about the high-level structure and functionality available in the Testkube Dashboard.",
+          href: "/articles/testkube-dashboard-explore",
+          type: "intro",
+        }}/>
+      </article>
+    </section>
+    <section className={clsx("row indent--min")}>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Workflows and Templates",
+          description:
+            "Learn about the rich syntax of Test Workflows and Workflow Templates for defining how to run your tests, including support for " +
+            "parallelization, sharding, parameterization, modularization, etc.",
+          href: "/articles/test-workflows",
+          type: "intro",
+        }}/>
+      </article>
+    </section>
+    <section className={clsx("row indent--min")}>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Triggering Tests",
+          description:
+            "Learn about how Testkube allows you to trigger your Test Workflows from CI/CD, on Kubernetes Events, Cron-styled scheduling, etc.",
+          href: "/articles/triggering-overview",
+          type: "intro",
+        }}/>
+      </article>
+    </section>
+    <section className={clsx("row indent--min")}>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Working with Results",
+          description:
+            "Learn about how you can work with the test execution Logs and Artifacts collected by Testkube to troubleshoot failing tests",
+          href: "/articles/logs-and-artifacts",
+          type: "intro",
+        }}/>
+      </article>
+    </section>
+    <section className={clsx("row indent--min")}>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Reporting and Analysis",
+          description:
+            "Learn about Testkubes Reporting and Analysis features to help you make strategic decisions for your testing efforts.",
+          href: "/articles/reporting-overview",
+          type: "intro",
+        }}/>
+      </article>
+    </section>
+    <section className={clsx("row indent--min")}>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Administration",
+          description:
+            "Learn how to manage organisations, environments, users, etc. in the Testkube Dashboard.",
+          href: "/testkube-pro/articles/organization-management",
+          type: "intro",
+        }}/>
+      </article>
+    </section>
+  </>
+);
+
+<DocCardList/>
+

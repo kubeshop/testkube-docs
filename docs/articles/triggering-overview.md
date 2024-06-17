@@ -1,4 +1,4 @@
-# Triggering Workflow Executions
+# Triggering Test Workflows
 
 Workflows defined in Testkube can be triggered by a number of mechanisms:
 
