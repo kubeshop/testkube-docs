@@ -279,14 +279,36 @@ const sidebars = {
           ]
         },
         {
-          type: "doc",
-          label: "Cypress - Basic",
-          id: "articles/examples/cypress-basic"
+          type: "category",
+          label: "Cypress",
+          items: [
+            {
+              type: "doc",
+              label: "Basic",
+              id: "articles/examples/cypress-basic"
+            },
+            {
+              type: "doc",
+              label: "Sharded",
+              id: "articles/examples/cypress-sharded"
+            },
+          ]
         },
         {
-          type: "doc",
-          label: "Playwright - Basic",
-          id: "articles/examples/playwright-basic"
+          type: "category",
+          label: "Playwright",
+          items: [
+            {
+              type: "doc",
+              label: "Basic",
+              id: "articles/examples/playwright-basic"
+            },
+            {
+              type: "doc",
+              label: "Sharded",
+              id: "articles/examples/playwright-sharded"
+            },
+          ]
         },
         {
           type: "doc",

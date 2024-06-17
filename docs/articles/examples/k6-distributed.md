@@ -5,9 +5,9 @@ import DistributedK6 from "../../workflows/distributed-k6-workflow.md"
 # Distributed K6 Example
 
 Testkube has built-in support for parallelising any testing tool - check out the
-[Parallelization](../test-workflows-parallel) documentation for details and many examples. 
+[Parallelization](../test-workflows-parallel) documentation for details and examples. 
 
-The below example shows how to distribute a K6 tests across a configurable
+The below example shows how to distribute a K6 test across a configurable
 number of nodes
 
 * Takes optional run configuration parameters (`config`)
