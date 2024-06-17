@@ -1,4 +1,4 @@
-```yaml showLineNumbers title="Artillery Workflow"
+```yaml showLineNumbers title="Basic Artillery Workflow"
 kind: TestWorkflow
 apiVersion: testworkflows.testkube.io/v1
 metadata:

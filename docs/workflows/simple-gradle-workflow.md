@@ -1,4 +1,4 @@
-```yaml showLineNumbers title="Basic Maven Workflow"
+```yaml showLineNumbers title="Basic Gradle Workflow"
 kind: TestWorkflow
 apiVersion: testworkflows.testkube.io/v1
 metadata:
