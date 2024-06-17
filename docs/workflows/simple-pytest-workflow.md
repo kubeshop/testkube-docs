@@ -2,7 +2,7 @@
 kind: TestWorkflow
 apiVersion: testworkflows.testkube.io/v1
 metadata:
-  name: sample-pytest
+  name: pytest
   namespace: testkube
 spec:
   content:
@@ -13,8 +13,8 @@ spec:
         - Pytest-Test-Workflow
   container:
     workingDir: /data/repo/Pytest-Test-Workflow
-    image: kubeshop/testkube-pytest:3.8.17-alpine3.18
+    image: python:3.8.17-alpine3.18
   steps:
     - name: Run test
-      shell: pytest test-api-endpoint.py
+      shell: pip install pipenv requests pytest && pytest test-api-endpoint.py
 ```
