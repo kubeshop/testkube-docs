@@ -8,8 +8,8 @@ Below is a basic workflow for executing a Cypress project which is available
 on GitHub. You can paste this directly into the YAML of an existing or new test, just make
 sure to update the `name` and `namespace` for your environment if needed.
 
-- The `spec.content` property defines the location of the GitHub project
-- the `spec.steps` property defines a single step that runs the test and uploads the created reports.
+- The `spec.content` property defines the location of the GitHub project.
+- The `spec.steps` property defines a single step that runs the test and uploads the created reports.
 
 <SimpleCypress/>
 
