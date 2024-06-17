@@ -341,9 +341,21 @@ const sidebars = {
           id: "articles/examples/pytest-basic"
         },
         {
-          type: "doc",
+          type: "category",
           label: "JMeter",
-          id: "articles/examples/jmeter-basic"
+          items: [
+
+            {
+              type: "doc",
+              label: "Basic",
+              id: "articles/examples/jmeter-basic"
+            },
+            {
+              type: "doc",
+              label: "Distributed",
+              id: "articles/examples/jmeter-distributed"
+            },
+          ]
         },
         {
           type: "doc",
