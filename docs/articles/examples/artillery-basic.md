@@ -7,8 +7,8 @@ import SimpleArtillery from "../../workflows/simple-artillery-workflow.md"
 Below is a basic workflow for executing an Artillery test. You can paste this directly into the YAML of an existing or new test, just make
 sure to update the `name` and `namespace` for your environment if needed.
 
-- The `spec.content` property defines the location of the GitHub project
-- the `spec.steps` property defines a single step that runs the `artillery` command.
+- The `spec.content` property defines the location of the GitHub project.
+- The `spec.steps` property defines a single step that runs the `artillery` command.
 
 <SimpleArtillery/>
 
