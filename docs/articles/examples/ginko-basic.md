@@ -1,1 +1,0 @@
-# Basic Ginko Example

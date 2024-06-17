@@ -279,14 +279,36 @@ const sidebars = {
           ]
         },
         {
-          type: "doc",
-          label: "Cypress - Basic",
-          id: "articles/examples/cypress-basic"
+          type: "category",
+          label: "Cypress",
+          items: [
+            {
+              type: "doc",
+              label: "Basic",
+              id: "articles/examples/cypress-basic"
+            },
+            {
+              type: "doc",
+              label: "Sharded",
+              id: "articles/examples/cypress-sharded"
+            },
+          ]
         },
         {
-          type: "doc",
-          label: "Playwright - Basic",
-          id: "articles/examples/playwright-basic"
+          type: "category",
+          label: "Playwright",
+          items: [
+            {
+              type: "doc",
+              label: "Basic",
+              id: "articles/examples/playwright-basic"
+            },
+            {
+              type: "doc",
+              label: "Sharded",
+              id: "articles/examples/playwright-sharded"
+            },
+          ]
         },
         {
           type: "doc",
@@ -305,11 +327,6 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "Ginko",
-          id: "articles/examples/ginko-basic"
-        },
-        {
-          type: "doc",
           label: "Maven",
           id: "articles/examples/maven-basic"
         },
@@ -324,9 +341,21 @@ const sidebars = {
           id: "articles/examples/pytest-basic"
         },
         {
-          type: "doc",
+          type: "category",
           label: "JMeter",
-          id: "articles/examples/jmeter-basic"
+          items: [
+
+            {
+              type: "doc",
+              label: "Basic",
+              id: "articles/examples/jmeter-basic"
+            },
+            {
+              type: "doc",
+              label: "Distributed",
+              id: "articles/examples/jmeter-distributed"
+            },
+          ]
         },
         {
           type: "doc",
