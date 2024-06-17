@@ -2,11 +2,12 @@ import SimpleMaven from "../../workflows/simple-maven-workflow.md"
 
 # Basic Maven Example
 
-Below is a simple workflow for executing tests in a maven project stored on GitHub. You can paste this directly into the
+Below is a simple workflow for executing tests in a Maven project stored on GitHub. You can paste this directly into the
 YAML of an existing or new test, just make sure to update the `name` and `namespace` for your environment as needed.
 
-- The `spec.content` property defines the path to the maven project on GitHub
-- the `spec.steps` property defines a single step that runs the mvn:test
+- The `spec.content` property defines the path to the Maven project on GitHub
+- the `spec.container` property defines default constraints for any container created in this workflow
+- the `spec.steps` property defines a single step that runs the `mvn:test`
 
 <SimpleMaven/>
 
