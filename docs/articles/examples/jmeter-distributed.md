@@ -7,9 +7,8 @@ import DistributedJMeter from "../../workflows/distributed-jmeter-workflow.md"
 Testkube has built-in support for parallelising any testing tool - check out the
 [Parallelization](../test-workflows-parallel) documentation for details and examples. 
 
-The below example shows how to distribute a K6 test across a configurable
+The below example shows how to distribute a JMeter test across a configurable
 number of nodes
-
 
 * Read JMX configuration from Git repository (`spec.content.git`)
 * Start 5 remote workers (`spec.services.slave.count`)

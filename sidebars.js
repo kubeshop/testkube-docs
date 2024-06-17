@@ -276,13 +276,12 @@ const sidebars = {
         },
       ],
     },
-
     {
       type: "category",
       label: "Examples & Use Cases",
       link: {
         type: "doc",
-        id: "articles/examples",
+        id: "articles/examples/overview"
       },
       items: [
         {
@@ -366,7 +365,6 @@ const sidebars = {
           type: "category",
           label: "JMeter",
           items: [
-
             {
               type: "doc",
               label: "Basic",
