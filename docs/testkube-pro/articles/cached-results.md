@@ -1,15 +1,5 @@
 # Cached Test & Test Suite Results
 
-export const ProBadge = () => {
-  return (
-    <span>
-      <p class="pro-badge">PRO FEATURE</p>
-    </span>
-  );
-}
-
-<ProBadge />
-
 Testkube cached test results allows you to see and inspect test execution results even when your Testkube agent is offline.
 
 ## Overview

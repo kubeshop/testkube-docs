@@ -251,6 +251,11 @@ const sidebars = {
               label: "Status Pages",
               id: "testkube-pro/articles/status-pages",
             },
+            {
+              type: "doc",
+              label: "Data Driven Insights",
+              id: "articles/data-driven-insights",
+            },
           ],
         },
         {
