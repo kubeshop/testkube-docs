@@ -2,6 +2,14 @@
 
 The Testkube Test Insights feature is tailored to empower DevOps, testers, and QA managers with deep analytical capabilities. This feature provides valuable insights into your tests, enabling data-driven decisions that optimize your testing strategies and improve the quality of your applications.
 
+## The Value of Test Insights
+
+By integrating Test Insights into your testing workflow, your team can leverage several benefits:
+
+- **Enhanced Visibility:** Gain a clear overview of testing activities and outcomes, helping you manage and prioritize testing resources more effectively.
+- **Data-Driven Decisions:** Make informed decisions about where to allocate efforts for improving test efficiency and reliability.
+- **Improved Test Efficiency:** Identify and address inefficiencies in your testing process, leading to faster development cycles and higher quality software releases.
+
 ## Understanding Test Insights
 
 Test Insights is an analytics tool integrated into Testkube, that provides detailed metrics about the execution of your tests. This feature allows teams to track key performance indicators including the number of test executions, pass/fail rates, execution durations, and more, all within a user-friendly dashboard.
