@@ -41,14 +41,3 @@ By integrating Test Insights into your testing workflow, your team can leverage 
 - **Data-Driven Decisions:** Make informed decisions about where to allocate efforts for improving test efficiency and reliability.
 - **Improved Test Efficiency:** Identify and address inefficiencies in your testing process, leading to faster development cycles and higher quality software releases.
 
-## Getting Started with Test Insights
-
-To start exploring the capabilities of Test Insights:
-
-- Update your Testkube installation to the latest version to ensure access to this new feature.
-- Navigate to the Test Insights dashboard within Testkube to begin analyzing your test execution data.
-
-## Give it a go!
-
-Go to [app.testkube.io](https://app.testkube.io/) and sign up to play around with our demo of Test Insights! You can also watch our webinar, "Improve your team's testing strategy with Test Insights," on [YouTube](https://www.youtube.com/watch?v=U0M_JykO0Rg).
-
