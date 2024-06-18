@@ -28,4 +28,4 @@ Testkube has multiple features to help with consistent troubleshooting of failed
 
 ![Logs & Artifacts](../img/concepts-logs-artifacts.png)
 
-Read on about [Analyzing Test Results](../articles/analyzing-results.md).
+Read on about [Analyzing Test Results](../articles/analyzing-results.mdx).

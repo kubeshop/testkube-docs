@@ -10,7 +10,7 @@ The Testkube Container Executor allows you to run your own container images for 
 
 The Test execution fails if the container exits with an error and succeeds when the container command successfully executes.
 
-That's the new and recommended way of running custom images. Docs about the prebuilt custom executors can be found [here](prebuilt-executor.md).
+That's the new and recommended way of running custom images. Docs about the prebuilt custom executors can be found [here](prebuilt-executor.mdx).
 
 ## Creating and Configuring the Container Executor: cURL
 
@@ -158,7 +158,7 @@ You can provide the image, args, command, and image pull secrets in the HTTP Req
 </Tabs>
 
 ## Creating and Configuring a Container Executor: Playwright
-Despite having the dedicated [Playwright executor](executor-playwright.md), you may want to use a version that isn't supported. That's where you can use the Container executor. It allows you to use any Playwright image you may need.
+Despite having the dedicated [Playwright executor](executor-playwright.mdx), you may want to use a version that isn't supported. That's where you can use the Container executor. It allows you to use any Playwright image you may need.
 
 The example Playwright project uses Playwright `1.31.1`: https://github.com/kubeshop/testkube/tree/main/test/playwright/executor-tests/playwright-project
 That is the specific version that is needed to run the tests. So, in this example the container executor will be created with `mcr.microsoft.com/playwright:v1.31.1-focal` Playwright official image. If you need another image you can find specific image tags in the Playwright Docs: https://playwright.dev/docs/docker#image-tags.
