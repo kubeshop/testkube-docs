@@ -169,6 +169,11 @@ const sidebars = {
               label: "Test Suites",
               id: "articles/test-workflows-test-suites",
             },
+            {
+              type: "doc",
+              label: "Tests and Test Suites Migration",
+              id: "articles/test-workflow-migration",
+            },
           ],
         },
         {
