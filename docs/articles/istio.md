@@ -42,7 +42,7 @@ enable native sidecars:
 
 All the values mentioned will be from the top of the specified chart.
 
-#### Disable Istio for test executions of prebuilt/container executors
+#### Disable Istio for Test Executions of Prebuilt/Container Executors
 
 Chart `testkube`:
 
