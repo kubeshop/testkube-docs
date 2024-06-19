@@ -13,7 +13,7 @@ their usage with Vault, please migrate to workflows.
 
 :::
 
-## Sidecar injector
+## Sidecar Injector
 
 Vault's sidecar injector injects an init container to fetch secrets on
 initialization and a sidecar container to periodically update that secret.
@@ -54,11 +54,11 @@ This workflow template:
 sequence within init containers.
 - Configures the agent server running within the sidecar.
 - Calls the agent's quit endpoint after all steps of the workflow have
-  completed. Otherwise, the sidecar container would never exit keeping the
-workflow running indefinitely.
+  completed. Otherwise, the sidecar container would never exit and the
+workflow would run indefinitely.
 
 One can then reuse this workflow template in workflows requiring secret
-injection (example builds on Vault's great tutorial
+injections (the example builds on Vault's great tutorial
 [here](https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-sidecar)):
 
 ```yaml
@@ -102,7 +102,7 @@ gives it read access to the requested secret.
 
 ### Troubleshooting
 
-#### Port conflict
+#### Port Conflict
 
 By default, the agent listens on port `8200`. If your workflow happens to listen
 on the same port, you can specify a different port number (i.e. `8201`) for the
@@ -138,9 +138,9 @@ spec:
           fi
 ```
 
-#### Istio compatibility
+#### Istio Compatibility
 
-In setups, utilizing a combination of Vault and Istio we recommend explicitly
+In setups utilizing a combination of Vault and Istio, we recommend explicitly
 excluding outgoing traffic to Vault's agent from being routed through Istio's
 proxy. Otherwise, the workload could be put in a dead-locked state where one
 init container is waiting on another which cannot start till the latter

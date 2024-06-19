@@ -38,7 +38,7 @@ Installations that do not currently support native sidecars should apply the
 configurations below to utilize Testkube until they can upgrade their cluster to
 enable native sidecars:
 
-### Configurations for Istio installations without native sidecars
+### Configurations for Istio Installations Without Native Sidecars
 
 All the values mentioned will be from the top of the specified chart.
 
@@ -52,7 +52,7 @@ testkube-api:
         sidecar.istio.io/inject: "false"
 ```
 
-#### Disable Istio for agent hooks
+#### Disable Istio for Agent Hooks
 
 Chart `testkube`:
 
@@ -65,7 +65,7 @@ preUpgradeHookNATS:
         sidecar.istio.io/inject: "false"
 ```
 
-#### Disable Istio for operator hooks
+#### Disable Istio for Operator Hooks
 
 Chart `testkube`:
 
@@ -95,7 +95,7 @@ global:
                         sidecar.istio.io/inject: "false"
 ```
 
-#### Hold the API server till Istio's proxy is ready
+#### Hold the API Server Until Istio's Proxy Is Ready
 
 This should avoid the issues with the enterprise API pods failing on restart.
 
@@ -107,7 +107,7 @@ testkube-cloud-api:
         proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
 ```
 
-#### Hold worker service till Istio's proxy is ready
+#### Hold the Worker Service Until Istio's Proxy Is Ready
 
 This should avoid the issues with the worker service pods failing on restart.
 
