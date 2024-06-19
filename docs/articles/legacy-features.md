@@ -1,13 +1,32 @@
-# Legacy Documentation
+# Legacy Feature Deprecation & Documentation
 
-The following functionality is being deprecated in Testkube in favor of [Test Workflows](test-workflows) and [Workflow Templates](test-workflow-templates), as 
-these provide a much more powerful and flexible solution for defining how to run tests with Testkube.
+This section contains the old documentation for deprecated/legacy Testkube functionality.
 
-- Tests
-- Test Suites
-- Executors
-- Sources
-- Templates
+## The move to Test Workflows
 
-The documentation for these will be available under this Legacy section for the time being, including old examples, tutorials, etc.
+While the initial constructs with Tests/Executors/TestSuites made it easy to get basic tests running with Testkube, they often fell
+short when users needed to run different version/commands/configurations for their tests than those provided out-of-the-box, resulting
+in the need to either create/manage custom executors or use the more generic Container Executor. Furthermore, supporting
+more advanced test execution like parallelization and sharding was not possible.
+
+Read more about this transition and on how to get started with Test Workflows 
+on [the Testkube blog](https://testkube.io/learn/getting-started-with-test-workflows-for-kubernetes-testing).
+
+## Replacing Tests/Executors/Suites with Test Workflows
+
+[Test Workflows](test-workflows) is Testkubes replacement for Tests/Executors/TestSuites, as it provides both a 
+smooth initial onboarding experience for quickly running basic tests/suites, while allowing for customization 
+for real-life scenarios without extensive overhead. Workflows also provides advanced features like
+[parallelization](test-workflows-parallel), [sharding](test-workflows-matrix-and-sharding.md), 
+[services](test-workflows-services.md), etc. that were not possible with the legacy approach.
+
+## Replacing Sources/Templates with Workflow Templates
+
+[Workflow Templates](test-workflow-templates) provide a generic approach to building configurations that can be 
+shared/re-used across workflows, which allows them to replace both Sources and Templates. 
+
+## Migrating to Test Workflows
+
+The Testkube CLI contains a migration command to help you migrate existing Tests to their Test Workflow counterpart - 
+[Test Workflow Migration](test-workflow-migration).
 
