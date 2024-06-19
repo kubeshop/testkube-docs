@@ -9,7 +9,8 @@ the CSI provider.
 :::warning
 
 Prebuilt and container executors are deprecated so we do not officially support
-their usage with Vault, please migrate to workflows.
+their usage with Vault, please [migrate to
+workflows](./test-workflow-migration).
 
 :::
 
