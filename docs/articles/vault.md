@@ -42,8 +42,6 @@ spec:
       vault.hashicorp.com/agent-cache-listener-port: "{{ config.port }}"
   after:
   - name: 'Send quit signal to Vault agent'
-    container:
-      image: busybox
     condition: always
     shell: 'while ! wget --post-data "" -O - http://localhost:{{ config.port }}/agent/v1/quit; do sleep 1; done'
 ```
@@ -84,8 +82,6 @@ spec:
   steps:
     - name: Check secret injection
       condition: always
-      container:
-        image: alpine:latest
       run:
         shell: |
           if [ -f /vault/secrets/database-config.txt ]; then
@@ -132,8 +128,6 @@ spec:
   steps:
     - name: Check secret injection
       condition: always
-      container:
-        image: alpine:latest
       run:
         shell: |
           if [ -f /vault/secrets/database-config.txt ]; then
@@ -182,8 +176,6 @@ spec:
       traffic.sidecar.istio.io/excludeOutboundPorts: "{{ config.port }}"
   after:
   - name: 'Send quit signal to Vault agent'
-    container:
-      image: busybox
     condition: always
     shell: 'while ! wget --post-data "" -O - http://localhost:{{ config.port }}/agent/v1/quit; do sleep 1; done'
 ```
