@@ -1,7 +1,10 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import LegacyWarning from '../articles/_legacy-warning.mdx';
 
 # Templates
+
+<LegacyWarning />
 
 Templates allow you to store templates for other resources used in Testkube. We support a list of templates job | container | cronjob | scraper | pvc | webhook | pod. To define templates in Testkube, you'll need to provide a template body (in Golang template format) and a type of the template.
 

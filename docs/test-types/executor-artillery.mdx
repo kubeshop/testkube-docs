@@ -1,8 +1,11 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import Admonition from "@theme/Admonition";
+import LegacyWarning from '../articles/_legacy-warning.mdx';
 
 # Artillery.io
+
+<LegacyWarning />
 
 The Artillery executor allows you to run Artillery tests with Testkube.
 
@@ -15,7 +18,7 @@ Parameters in `<>` are calculated at test execution:
 - `<envFile>` - `.env` file location, will be built from variables.
 - `<reportFile>` - The path to the generated report called `test-report.json`.
 
-[See more at "Redefining the Prebuilt Executor Command and Arguments" on the Creating Test page.](../articles/creating-tests.md#redefining-the-prebuilt-executor-command-and-arguments)
+[See more at "Redefining the Prebuilt Executor Command and Arguments" on the Creating Test page.](../articles/creating-tests.mdx#redefining-the-prebuilt-executor-command-and-arguments)
 
 export const ExecutorInfo = () => {
   return (

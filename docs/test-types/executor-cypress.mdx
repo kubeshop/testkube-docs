@@ -1,8 +1,11 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import Admonition from "@theme/Admonition";
+import LegacyWarning from '../articles/_legacy-warning.mdx';
 
 # Cypress
+
+<LegacyWarning />
 
 Our dedicated Cypress executor allows running Cypress tests with Testkube - directly from your Git repository.
 
@@ -15,7 +18,7 @@ Parameters in &lt;&gt; are calculated at test execution:
 - `<projectPath>` - path to where the project was placed
 - `<envVars>` - list of environment variable keys and values, separated by comma
 
-[See more at "Redefining the Prebuilt Executor Command and Arguments" on the Creating Test page.](../articles/creating-tests.md#redefining-the-prebuilt-executor-command-and-arguments)
+[See more at "Redefining the Prebuilt Executor Command and Arguments" on the Creating Test page.](../articles/creating-tests.mdx#redefining-the-prebuilt-executor-command-and-arguments)
 
 export const ExecutorInfo = () => {
   return (

@@ -1,8 +1,11 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import Admonition from "@theme/Admonition";
+import LegacyWarning from '../articles/_legacy-warning.mdx';
 
 # Postman
+
+<LegacyWarning />
 
 Testkube is able to run Postman collections inside your Kubernetes cluster so it can be used to test internal or external services.
 
@@ -15,7 +18,7 @@ Parameters in &lt;&gt; are calculated at test execution:
 - `<envFile>` - path to the environment file set by `--variables-file`
 - `<reportFile>` - path to the generated report json file
 
-[See more at "Redefining the Prebuilt Executor Command and Arguments" on the Creating Test page.](../articles/creating-tests.md#redefining-the-prebuilt-executor-command-and-arguments)
+[See more at "Redefining the Prebuilt Executor Command and Arguments" on the Creating Test page.](../articles/creating-tests.mdx#redefining-the-prebuilt-executor-command-and-arguments)
 
 export const ExecutorInfo = () => {
   return (

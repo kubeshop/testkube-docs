@@ -1,15 +1,5 @@
 # Log Highlighting
 
-export const ProBadge = () => {
-  return (
-    <span>
-      <p class="pro-badge">PRO FEATURE</p>
-    </span>
-  );
-}
-
-<ProBadge />
-
 ## Overview
 
 In Testkube Pro, we highlight relevant keywords in logs for faster debugging. To use this feature, open execution details.

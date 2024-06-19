@@ -28,7 +28,7 @@ To get started, you can follow the instructions in Testkube Pro, or watch this v
 
 ## Step 3: Create Your First Test 
 
-Visit [Creating Your First Test](./creating-first-test.md) for our easy to follow guide.
+Visit [Creating Your First Test](./creating-first-test.mdx) for our easy to follow guide.
 
 With Testkube you can run any kind of test in Kubernetes. Check out our [native integrations](https://docs.testkube.io/category/test-types/) or use the container executor to create your own.
 
