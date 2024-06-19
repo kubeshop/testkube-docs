@@ -48,7 +48,7 @@ spec:
     shell: 'while ! wget --post-data "" -O - http://localhost:{{ config.port }}/agent/v1/quit; do sleep 1; done'
 ```
 
-This worklow:
+This worklow template:
 
 - Enables the sidecar injection.
 - Makes sure that the init container ahead of other init containers. This is
@@ -110,9 +110,9 @@ gives it read access to the requested secret.
 
 #### Port conflict
 
-By default, the sidecar agent listens on port `8200`. If your workflow happens
-to listen on the same port you can specify a different port number (i.e. `8201`
-for the agent with the following:
+By default, the agent listens on port `8200`. If your workflow happens to listen
+on the same port you can specify a different port number (i.e. `8201`) for the
+agent by adding the highlighted lines:
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -154,7 +154,8 @@ spec:
 In setups, utilizing a combination of Vault and Istio we recommend explicitly
 excluding outgoing traffic to Vault's agent from being routed through Istio's
 proxy. Otherwise, the workload could be put in a dead-locked state where one
-init container is waiting on another which cannot start till it completes.
+init container is waiting on another which cannot start till the latter
+completes.
 
 :::info
 
