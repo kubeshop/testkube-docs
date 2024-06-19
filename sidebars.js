@@ -433,6 +433,7 @@ const sidebars = {
         {type: "doc", label: "ArgoCD", id: "articles/argocd-integration"},
         {type: "doc", label: "Flux", id: "articles/flux-integration"},
         {type: "doc", label: "Vault", id: "articles/vault"},
+        {type: "doc", label: "Istio", id: "articles/istio"},
         {type: "doc", label: "CDEvents", id: "articles/cd-events"},
         {
           type: "doc",
