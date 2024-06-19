@@ -146,7 +146,6 @@ spec:
             echo "Secret file not found."
             exit 1
           fi
-
 ```
 
 #### Istio compatibility
