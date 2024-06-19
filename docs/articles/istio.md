@@ -80,7 +80,7 @@ testkube-operator:
                 sidecar.istio.io/inject: "false"
 ```
 
-#### Define a global test workflows template
+#### Define a Global Test Workflows Template
 
 Chart `testkube`:
 
