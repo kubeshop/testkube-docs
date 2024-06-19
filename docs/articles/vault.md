@@ -72,8 +72,6 @@ spec:
   pod:
     # highlight-next-line
     serviceAccountName: test-vault
-    labels:
-      app: workflow-vault
     annotations:
       # highlight-start
       vault.hashicorp.com/agent-inject-secret-database-config.txt: internal/data/database/config
@@ -122,8 +120,6 @@ metadata:
 spec:
   pod:
     serviceAccountName: test-vault
-    labels:
-      app: workflow-vault
     annotations:
       vault.hashicorp.com/agent-inject-secret-database-config.txt: internal/data/database/config
       vault.hashicorp.com/role: internal-app
