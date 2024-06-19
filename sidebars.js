@@ -412,6 +412,12 @@ const sidebars = {
           label: "cURL",
           id: "articles/examples/curl-basic"
         },
+        {
+          type: "link",
+          label: "Hardware Testing",
+          href: "https://testkube.io/blog/implementing-kubernetes-native-hardware-testing-with-testkube",
+          description: "Test for hardware components and infrastructure."
+        },
       ]
     },
     {
@@ -455,6 +461,18 @@ const sidebars = {
           id: "articles/k8s-events",
         },
         {type: "doc", label: "Webhooks", id: "articles/webhooks"},
+        {
+          type: "link",
+          label: "PagerDuty",
+          href: "https://testkube.io/learn/critical-test-based-alerting-with-pagerduty-and-testkube",
+          description: "Critical Test Based Alerting with PagerDuty and Testkube"
+        },
+        {
+          type: "link",
+          label: "Zapier",
+          href: "https://testkube.io/learn/integrating-testkube-and-zapier-for-instant-email-alerts",
+          description: "Integrating Testkube and Zapier for Instant Email Alerts"
+        }
 
       ],
     },
