@@ -30,3 +30,17 @@ shared/re-used across workflows, which allows them to replace both Sources and T
 The Testkube CLI contains a migration command to help you migrate existing Tests to their Test Workflow counterpart - 
 [Test Workflow Migration](test-workflow-migration).
 
+## Enabling Legacy Tests Dashboard functionality
+
+The Testkube Dashboard will by default hide functionality related to legacy Tests/Executors/etc, unless if 
+your current environment contains legacy Test/TestSuite resources, in which case the corresponding functionality 
+will be made available.
+
+Legacy Test functionality can also be toggled manually in the Environment Settings / Product Features tab. Below 
+we see Legacy Test Support disabled for the current environment:
+
+![Legacy Tests Disabled](../img/legacy-tests-disabled.png)
+
+Enabling Legacy Test Support makes the corresponding tabs/panels available in the left navigation toolbar:
+
+![Legacy Tests Enabled](../img/legacy-tests-enabled.png)
