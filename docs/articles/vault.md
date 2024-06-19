@@ -16,7 +16,7 @@ their usage with Vault, please migrate to workflows.
 ## Sidecar injector
 
 Vault's sidecar injector injects an init container to fetch secrets on
-initializiation and a sidecar container to periodically update that secret.
+initialization and a sidecar container to periodically update that secret.
 Either container can be disabled, but we will focus on the configuration which
 enables both.
 
@@ -48,16 +48,16 @@ spec:
     shell: 'while ! wget --post-data "" -O - http://localhost:{{ config.port }}/agent/v1/quit; do sleep 1; done'
 ```
 
-This worklow template:
+This workflow template:
 
 - Enables the sidecar injection.
-- Makes sure that the init container ahead of other init containers. This is
+- Makes sure that the Vault init container is ahead of other init containers. This is
   required to have access to secrets within workflow steps as workflows run in
 sequence within init containers.
 - Configures the agent server running within the sidecar.
-- Calls the agent's quit endpoint after the all steps of the worklow have
+- Calls the agent's quit endpoint after all steps of the workflow have
   completed. Otherwise, the sidecar container would never exit keeping the
-worklow running indefinetly.
+workflow running indefinitely.
 
 One can then reuse this workflow template in workflows requiring secret
 injection (example builds on Vault's great tutorial
@@ -101,7 +101,7 @@ spec:
 :::info
 
 The service account and namespace utilized here should be associated with the
-specified Vault role, and the Vault role should have an attached policy that
+specified Vault role and the Vault role should have an attached policy that
 gives it read access to the requested secret.
 
 :::
@@ -111,7 +111,7 @@ gives it read access to the requested secret.
 #### Port conflict
 
 By default, the agent listens on port `8200`. If your workflow happens to listen
-on the same port you can specify a different port number (i.e. `8201`) for the
+on the same port, you can specify a different port number (i.e. `8201`) for the
 agent by adding the highlighted lines:
 
 ```yaml
