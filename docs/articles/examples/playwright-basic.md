@@ -9,7 +9,8 @@ on GitHub. You can paste this directly into the YAML of an existing or new test,
 sure to update the `name` and `namespace` for your environment if needed.
 
 - The `spec.content` property defines the location of the GitHub project
-- the `spec.steps` property defines a single step that runs the test and uploads the created reports.
+- The `spec.steps` property defines a single step that runs the test and uploads the created reports, including
+  the generated trace report.
 
 <SimplePlaywright/>
 
@@ -31,11 +32,27 @@ The uploaded report is available in the Artifacts tab:
 
 </TabItem>
 
-<TabItem value="htlm-report" label="HTLM Report" default>
+<TabItem value="html-overview-report" label="Overview Report" default>
 
-Clicking the HTLM report opens it in your browser:
+Clicking the HTML report opens it in your browser:
 
-![Playwright Framework HTLM Report](images/basic-playwright-html-report.png)
+![Playwright Framework Overview Report](images/basic-playwright-overview-report.png)
+
+</TabItem>
+
+<TabItem value="html-test-report" label="Test Report" default>
+
+Clicking a specific test shows that tests details, including a link to the trace report.
+
+![Playwright Framework Test Report](images/basic-playwright-test-report.png)
+
+</TabItem>
+
+<TabItem value="html-trace-report" label="Trace UI" default>
+
+Clicking the trace opens the Playwright Trace UI
+
+![Playwright Framework Trace Viewer](images/basic-playwright-trace-ui.png)
 
 </TabItem>
 </Tabs>

@@ -15,24 +15,17 @@ spec:
       - test/playwright/executor-tests/playwright-project
   container:
     workingDir: /data/repo/test/playwright/executor-tests/playwright-project
+    image: mcr.microsoft.com/playwright:v1.32.3-focal
+    resources:
+      requests:
+        cpu: 2
+        memory: 2Gi
   steps:
-  - name: Install dependencies
-    run:
-      image: mcr.microsoft.com/playwright:v1.32.3-focal
-      command:
-      - npm
-      args:
-      - ci
-  - name: Run tests
-    run:
-      image: mcr.microsoft.com/playwright:v1.32.3-focal
-      command:
-      - "npx"
-      args:
-      - "--yes"
-      - "playwright@1.32.3"
-      - "test"
-    artifacts:
-      paths:
-      - playwright-report/**/*
+    - name: Install dependencies
+      shell: npm ci
+    - name: Run tests
+      shell: npx --yes playwright@1.32.3 test --trace on
+      artifacts:
+        paths:
+          - playwright-report/**/*
 ```
