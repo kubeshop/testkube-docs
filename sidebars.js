@@ -281,104 +281,123 @@ const sidebars = {
         },
       ],
     },
-
     {
       type: "category",
       label: "Examples & Use Cases",
       link: {
         type: "doc",
-        id: "articles/examples",
+        id: "articles/examples/overview"
       },
       items: [
         {
           type: "category",
-          label: "Load Testing",
-          items: [
-            {type: "doc", label: "k6", id: "test-types/executor-k6"},
-            {type: "doc", label: "JMeter", id: "test-types/executor-jmeter"},
+          label: "K6",
+          items: [{
+            type: "doc",
+            label: "Basic",
+            id: "articles/examples/k6-basic"
+          },
             {
               type: "doc",
-              label: "Artillery",
-              id: "test-types/executor-artillery",
+              label: "Distributed",
+              id: "articles/examples/k6-distributed"
             },
-            {
-              type: "doc",
-              label: "Parallelization for Massive Load",
-              id: "articles/test-workflows-examples-basics",
-            },
-          ],
+          ]
         },
         {
           type: "category",
-          label: "E2E/FE Testing",
+          label: "Cypress",
           items: [
             {
               type: "doc",
-              label: "Cypress",
-              id: "test-types/executor-cypress",
+              label: "Basic",
+              id: "articles/examples/cypress-basic"
             },
             {
               type: "doc",
-              label: "Playwright",
-              id: "test-types/executor-playwright",
+              label: "Sharded",
+              id: "articles/examples/cypress-sharded"
             },
-            // { type: "doc", label: "Robot Framework", id: "" },
-            // { type: "doc", label: "Selenium", id: "" },
-            {
-              type: "doc",
-              label: "Parallelized Execution",
-              id: "articles/test-workflows-examples-basics",
-            },
-          ],
+          ]
         },
         {
           type: "category",
-          label: "API Testing",
+          label: "Playwright",
           items: [
             {
               type: "doc",
-              label: "Postman",
-              id: "test-types/executor-postman",
+              label: "Basic",
+              id: "articles/examples/playwright-basic"
             },
-            {type: "doc", label: "SoapUI", id: "test-types/executor-soapui"},
-            {type: "doc", label: "cURL", id: "test-types/executor-curl"},
             {
               type: "doc",
-              label: "Tracetest",
-              id: "test-types/executor-tracetest",
+              label: "Sharded",
+              id: "articles/examples/playwright-sharded"
             },
-          ],
+          ]
+        },
+        {
+          type: "doc",
+          label: "Selenium",
+          id: "articles/examples/selenium-basic"
+        },
+        {
+          type: "doc",
+          label: "Postman",
+          id: "articles/examples/postman-basic"
+        },
+        {
+          type: "doc",
+          label: "SoapUI",
+          id: "articles/examples/soapui-basic"
+        },
+        {
+          type: "doc",
+          label: "Maven",
+          id: "articles/examples/maven-basic"
+        },
+        {
+          type: "doc",
+          label: "Gradle",
+          id: "articles/examples/gradle-basic"
+        },
+        {
+          type: "doc",
+          label: "Pytest",
+          id: "articles/examples/pytest-basic"
         },
         {
           type: "category",
-          label: "Unit Testing",
+          label: "JMeter",
           items: [
-            {type: "doc", label: "Ginkgo", id: "test-types/executor-ginkgo"},
-            {type: "doc", label: "pytest", id: "test-types/executor-pytest"},
-          ],
-        },
-        {
-          type: "category",
-          label: "Automation Framework",
-          items: [
-            {type: "doc", label: "Maven", id: "test-types/executor-maven"},
-            {type: "doc", label: "Gradle", id: "test-types/executor-gradle"},
-          ],
-        },
-        {
-          type: "category",
-          label: "Compliance Testing",
-          items: [
-            {type: "doc", label: "Kubent", id: "test-types/executor-kubent"},
             {
               type: "doc",
-              label: "Kubepug",
-              id: "test-types/executor-kubepug",
+              label: "Basic",
+              id: "articles/examples/jmeter-basic"
             },
-            {type: "doc", label: "Zap", id: "test-types/executor-zap"},
-          ],
+            {
+              type: "doc",
+              label: "Distributed",
+              id: "articles/examples/jmeter-distributed"
+            },
+          ]
         },
-      ],
+        {
+          type: "doc",
+          label: "Robot Framework",
+          id: "articles/examples/robot-framework-basic"
+        },
+        {
+          type: "doc",
+          label: "Artillery",
+          id: "articles/examples/artillery-basic"
+        },
+        {
+          type: "doc",
+          label: "cURL",
+          id: "articles/examples/curl-basic"
+        },
+      ]
     },
     {
       type: "category",

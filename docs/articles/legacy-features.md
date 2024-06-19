@@ -1,6 +1,6 @@
 # Legacy Documentation
 
-The following functionality is being deprecated in Testkube in favor of Test Workflows and Workflow Templates, as 
+The following functionality is being deprecated in Testkube in favor of [Test Workflows](test-workflows) and [Workflow Templates](test-workflow-templates), as 
 these provide a much more powerful and flexible solution for defining how to run tests with Testkube.
 
 - Tests
