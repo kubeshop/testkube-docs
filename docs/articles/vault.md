@@ -81,11 +81,11 @@ spec:
   use:
     - name: 'vault-secret-injection'
   # highlight-end
-  container:
-    image: alpine:latest
   steps:
     - name: Check secret injection
       condition: always
+      container:
+        image: alpine:latest
       run:
         shell: |
           if [ -f /vault/secrets/database-config.txt ]; then
@@ -129,11 +129,11 @@ spec:
       config:
         port: "8201"
   # highlight-end
-  container:
-    image: alpine:latest
   steps:
     - name: Check secret injection
       condition: always
+      container:
+        image: alpine:latest
       run:
         shell: |
           if [ -f /vault/secrets/database-config.txt ]; then
