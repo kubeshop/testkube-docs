@@ -29,7 +29,7 @@ To use S3 as storage, the steps are as follows:
   ```  
 Replace `testkube-test-irsa` with the name of your own bucket.
 
-3. A Trust Relationship needs to be established in the IAM role to allow the EKS cluster to assume it:
+3. A Trust Relationship needs to be established in the IAM role to allow the Testkube Enterprise API's ServiceAccount to assume it:
 
 ```yaml
 {
