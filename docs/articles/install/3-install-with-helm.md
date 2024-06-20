@@ -26,8 +26,11 @@ helm repo add testkubeenterprise https://kubeshop.github.io/testkube-cloud-chart
 
 ```bash
 helm show values testkubeenterprise/testkube-enterprise > values.yaml
+```
 
-# Alternatively, export one of our profiles
+Alternatively, export one of our profiles:
+
+```
 testkube init <profile> --export > values.yaml
 ```
 
@@ -45,22 +48,22 @@ helm upgrade --install \
 
 ### License
 
-You will have to set a license key to get started with Testkube. You can also opt to use a shared secret for your license. You can request a free license, no up-front credit card required.
+You will have to set a license key to get started with Testkube. You can also opt to use [a shared secret for your license][secret-license]. You can request a free license, no up-front credit card required.
 
-```diff
+```yaml {2}
 global:
-+  enterpriseLicense: XXXXXX-XXXXXX-XXXXXX-XXXXXX-XXXXXX-V3
+  enterpriseLicenseKey: XXXXXX-XXXXXX-XXXXXX-XXXXXX-XXXXXX-V3
 ```
 
 ### Domain
 
 You should enable ingress and configure your domain to access Testkube services:
 
-```diff
+```yaml {3,4}
 global:
   ingress:
-+    enabled: true
-+  domain: "example.com"
+    enabled: true
+  domain: "example.com"
 ```
 
 By default, the following services will be exposed. You can also choose to override the subdomain for each service.
@@ -139,6 +142,24 @@ Testkube requires a variety of secrets to operate. Any required secret that is n
 - testkube-minio-credentials
 - testkube-license
 
+### Testkube License
+
+Enter your license key which can be either an offline or online license. Replace «license» with your license.
+
+For an online license, the format is `XXXXXX-XXXXXX-XXXXXX-XXXXXX-XXXXXX-V3`.
+
+```
+kubectl create secret generic testkube-license --from-literal=LICENSE_KEY=«license»
+```
+
+For an offline license, the format is a long string prefixed with `key/`. You will also need a license file which starts with `-----BEGIN LICENSE FILE-----`.
+
+```
+kubectl create secret generic testkube-license --from-file=LICENSE_KEY=«license key» --from-file=license.lic=license file»
+```
+
+This secret is referenced by the `global.enterpriseLicenseRef` setting. For offline licences, you will also have to set `global.enterpriseOfflineAccess: true`.
+
 [license]: https://testkube.io/download
 
 ## Advanced Settings
@@ -146,3 +167,4 @@ Testkube requires a variety of secrets to operate. Any required secret that is n
 Check out [this article][advanced] to learn more about our advanced settings. You can learn about organization management, custom ingress controllers, production environments and more.
 
 [advanced]: /articles/install/advanced-install
+[secret-license]: /articles/install/install-with-helm#testkube-license

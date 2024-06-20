@@ -19,10 +19,9 @@ You can add another agent to an existing Testkube deployment within a couple of 
 
 It's possible to install multiple agents within the same cluster. This requires modified values for the second agent to prevent creating cluster-wide objects twice which is disallowed by Kubernetes. Make the following changes to the values of **the second agent**:
 
-```diff
+```yaml {2}
 testkube-operator:
--  enabled: true
-+  enabled: false
+  enabled: false
 ```
 
 ## Connecting a standalone agent to join Testkube

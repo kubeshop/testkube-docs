@@ -112,22 +112,22 @@ To use your own ingress controller, reach out to our support team and we’ll gl
 
 These commands will deploy Testkube components into two namespaces: testkube and testkube1 and will create a watcher role to watch k8s resources in each namespace respectively. If you need to watch resources besides the installation namespace, please add them to the **_additionalNamespaces_** variable in **_testkube-api_** section:
 
-```diff
+```yaml {3,7}
 testkube-agent:
   testkube-api:
-+    multinamespace:
-+      enable: true
-+    additionalNamespaces:
-+    - namespace2
-+    - namespace3
+    multinamespace:
+      enable: true
+    additionalNamespaces:
+      - namespace2
+      - namespace3
 ```
 
 Additionally, It is possible to change the namespace for **_testkube-operator_** by setting a value for **_namespace_** variable in the **_testkube-operator_** section:
 
-```diff
+```yaml {3}
 testkube-agent:
   testkube-operator:
-+    namespace: testkube-system
+    namespace: testkube-system
 ```
 
 :::note
