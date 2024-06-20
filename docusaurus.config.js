@@ -86,6 +86,21 @@ const config = {
         },
         items: [
           {
+            label: "Get Started",
+            position: "right",
+            href: "https://testkube.io/get-started",
+          },
+          {
+            label: "Contact",
+            position: "right",
+            href: "https://testkube.io/contact",
+          },
+          {
+            label: "Slack",
+            position: "right",
+            href: "https://join.slack.com/t/testkubeworkspace/shared_invite/zt-2arhz5vmu-U2r3WZ69iPya5Fw0hMhRDg",
+          },
+          {
             type: "html",
             position: "right",
             value: `<iframe src="https://ghbtns.com/github-btn.html?user=kubeshop&repo=testkube&type=star&count=true&color=dark" style='margin-top: 6px' frameborder="0" scrolling="0" width="110" height="20" title="GitHub"></iframe>`,
