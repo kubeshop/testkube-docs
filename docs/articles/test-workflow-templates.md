@@ -92,3 +92,16 @@ Example Test Workflow Templates can be found in the Testkube repository:
 - [Cypress](https://github.com/kubeshop/testkube/blob/develop/test/test-workflow-templates/cypress.yaml)
 - [k6](https://github.com/kubeshop/testkube/blob/develop/test/test-workflow-templates/k6.yaml)
 - [postman](https://github.com/kubeshop/testkube/blob/develop/test/test-workflow-templates/cypress.yaml)
+
+# Official Test Workflow Templates
+Testkube provides a set of official, ready to use Test Workflow Templates, which simplify running tests using various popular tools:
+- Artillery
+- Cypress
+- Gradle
+- JMeter
+- K6
+- Maven
+- Playwright
+- Postman
+
+You can find examples of how to use them in [Examples & Use Cases](examples/overview) section.
