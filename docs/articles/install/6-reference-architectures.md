@@ -5,7 +5,10 @@ Testkube contains two sub-systems:
 - A Control Plane which includes the Dashboard, Storage for Results/Artifacts, Cluster Federation, etc
 - An Agent running in your cluster that manages Testkube resources, runs tests, gathers results, etc.
 
-The two sub-systems can be deployed in variety of ways to give flexibility into where your tests are executed and where test logs and artifacts are stored.
+The two sub-systems can be deployed in variety of ways to give flexibility into where your tests 
+are executed and where test logs and artifacts are stored.
+
+A more detailed architectural overview is available in the [Architecture Reference](../architecture).
 
 ## Testkube On-Prem
 

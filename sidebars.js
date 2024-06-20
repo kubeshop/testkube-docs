@@ -484,7 +484,11 @@ const sidebars = {
         id: "articles/reference",
       },
       items: [
-        "articles/architecture",
+        {
+          type: "doc",
+          label: "Architecture",
+          id: "articles/architecture",
+        },
         "articles/telemetry",
         {
           type: "doc",
@@ -770,6 +774,8 @@ const sidebars = {
         },
 
         {type: "doc", label: "Templates", id: "articles/templates"},
+        "articles/legacy-architecture",
+
       ],
     }
   ],
