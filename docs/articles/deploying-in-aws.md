@@ -68,7 +68,7 @@ After the installation command is complete, you will see the following resources
 
 ![AWS Console2](../img/aws-resource-console-2.png)
 
-Please note that the annotations may vary, depending on your Load Balancer schema type, backend-protocols (you may use http only), target-type, etc. However, this is the bare minimum that should be applied to your configuration.
+Please note that the annotations may vary, depending on your Load Balancer schema type, backend-protocols, target-type, etc. However, this is the bare minimum that should be applied to your configuration.
 
 Except for the Ingress annotation, you need to update the Service manifests with a healthcheck configuration as well. Include the lines below into your `values.yaml` file.
 
