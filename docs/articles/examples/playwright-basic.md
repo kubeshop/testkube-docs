@@ -1,6 +1,7 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import SimplePlaywright from "../../workflows/simple-playwright-workflow.md"
+import SimplePlaywrightFromTemplate from "../../workflows/simple-playwright-workflow-from-template.md"
 
 # Basic Playwright Framework Example
 
@@ -57,3 +58,7 @@ Clicking the trace opens the Playwright Trace UI
 </TabItem>
 </Tabs>
 
+## Basic Playwright from Template
+Below is an example workflow for executing the Playwright project using an official Testkube Template.
+
+<SimplePlaywrightFromTemplate/>

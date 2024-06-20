@@ -1,4 +1,5 @@
 import SimplePostman from "../../workflows/simple-postman-workflow.md"
+import SimplePostmanFromTemplate from "../../workflows/simple-cypress-workflow-from-template.md"
 
 # Basic Postman Example
 
@@ -13,3 +14,8 @@ YAML of an existing or new test, just make sure to update the `name` and `namesp
 After execution, you can see the log output from the test executions under the executions panel tabs:
 
 ![Postman Log Output](images/postman-basic-log-output.png)
+
+## Basic Postman from Template
+Below is an example workflow for executing the Postman collection using an official Testkube Template.
+
+<SimplePostmanFromTemplate/>
