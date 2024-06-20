@@ -41,7 +41,7 @@ helm upgrade --install \
   --create-namespace \
   --namespace testkube \
    -f values.yaml \
-  testkube kubeshop/testkube-enterprise
+  testkube testkubeenterprise/testkube-enterprise
 ```
 
 ## General Settings
@@ -152,10 +152,10 @@ For an online license, the format is `XXXXXX-XXXXXX-XXXXXX-XXXXXX-XXXXXX-V3`.
 kubectl create secret generic testkube-license --from-literal=LICENSE_KEY=«license»
 ```
 
-For an offline license, the format is a long string prefixed with `key/`.
+For an offline license, the format is a long string prefixed with `key/`. You will also need a license file which starts with `-----BEGIN LICENSE FILE-----`.
 
 ```
-kubectl create secret generic testkube-license --from-literal=license.lic=«license»
+kubectl create secret generic testkube-license --from-file=LICENSE_KEY=«license key» --from-file=license.lic=license file»
 ```
 
 This secret is referenced by the `global.enterpriseLicenseRef` setting. For offline licences, you will also have to set `global.enterpriseOfflineAccess: true`.
