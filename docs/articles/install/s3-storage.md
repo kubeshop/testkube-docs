@@ -14,7 +14,7 @@ To use S3 as storage, the steps are as follows:
           "s3:ListBucket",
           "s3:GetBucketLocation"
       ],
-      "Resource": "arn:aws:s3:::testkube-test-irsa"
+      "Resource": "arn:aws:s3:::<BUCKET>"
     },
     {
       "Effect": "Allow",
@@ -22,12 +22,11 @@ To use S3 as storage, the steps are as follows:
           "s3:GetObject",
           "s3:PutObject"
       ],
-      "Resource": "arn:aws:s3:::testkube-test-irsa/*"
+      "Resource": "arn:aws:s3:::<BUCKET>/*"
     }
   ]
 }
   ```  
-Replace `testkube-test-irsa` with the name of your own bucket.
 
 3. A Trust Relationship needs to be established in the IAM role to allow the Testkube Enterprise API's ServiceAccount to assume it:
 
