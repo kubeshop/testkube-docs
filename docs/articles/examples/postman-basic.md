@@ -1,5 +1,5 @@
 import SimplePostman from "../../workflows/simple-postman-workflow.md"
-import SimplePostmanFromTemplate from "../../workflows/simple-cypress-workflow-from-template.md"
+import SimplePostmanFromTemplate from "../../workflows/simple-postman-workflow-from-template.md"
 
 # Basic Postman Example
 

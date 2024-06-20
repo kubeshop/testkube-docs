@@ -16,7 +16,7 @@ spec:
   container:
     workingDir: /data/repo/test/postman/executor-tests
   steps:
-  - name: Run from 
+  - name: Run from
     template:
       name: official/postman/v1
       config:
