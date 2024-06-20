@@ -1,6 +1,6 @@
 # Guide to Deploying Testkube on AWS
 
-If you are using **Amazon Web Services**, this tutorial will show you how to deploy Testkube in EKS and expose it to the Internet with the AWS Load Balancer Controller.
+If you are using **Amazon Web Services**, this tutorial will show you how to deploy Testkube OSS in EKS and expose its API to the Internet with the AWS Load Balancer Controller.
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ Please mind that is it necessary to install [EBS CSI driver](https://docs.aws.am
 
 ## Ingress and Service Resources Configuration
 
-To deploy and expose Testkube to the outside world, you will need to create an ingress for Testkube's API server. In this tutorial, we will be updating `values.yaml` that later will be passed to the `helm install` command.
+To deploy and expose Testkube API to the outside world, you will need to create an ingress for Testkube's API server. In this tutorial, we will be updating `values.yaml` that later will be passed to the `helm install` command.
 
 In order to use the AWS Load Balancer Controller we need to create a `values.yaml` file and add the following annotation to the Ingress resources:
 
@@ -66,68 +66,11 @@ helm install --create-namespace testkube kubeshop/testkube --namespace testkube 
 
 After the installation command is complete, you will see the following resources created into your AWS Console.
 
-![AWS Console](../img/aws-resource-console.png)
-
 ![AWS Console2](../img/aws-resource-console-2.png)
-
-![AWS Console3](../img/aws-resource-console-3.png)
 
 Please note that the annotations may vary, depending on your Load Balancer schema type, backend-protocols (you may use http only), target-type, etc. However, this is the bare minimum that should be applied to your configuration.
 
-## Expose Testkube with Only One Load Balancer
-
-The above configuration creates two Load Balancers - one for the Dashboard, another is for the API. However, it is possible to save costs and use only 1 Balancer, thus you need to create only one Ingress manifest that will comprise configuration for both services:
-
-```yaml
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: testkube-ingress
-  annotations:
-    kubernetes.io/ingress.class: alb
-    alb.ingress.kubernetes.io/load-balancer-name: testkube
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/backend-protocol: HTTP
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80},{"HTTPS": 443}]'
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/ssl-redirect: "443"
-    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-east-1:*****:certificate/******"
-spec:
-  rules:
-    - host: test-dash.aws.testkube.io
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: testkube-dashboard
-                port:
-                  number: 8080
-    - host: test-api.aws.testkube.io
-      http:
-        paths:
-          - path: /v1
-            pathType: Prefix
-            backend:
-              service:
-                name: testkube-api-server
-                port:
-                  number: 8088
-```
-
 Except for the Ingress annotation, you need to update the Service manifests with a healthcheck configuration as well. Include the lines below into your `values.yaml` file.
-
-**Testkube Dashboard Service:**
-
-```yaml
-service:
-  type: ClusterIP
-  port: 8080
-  annotations:
-    alb.ingress.kubernetes.io/healthcheck-path: "/"
-    alb.ingress.kubernetes.io/healthcheck-port: "8080"
-```
 
 **Testkube API Service:**
 
@@ -139,16 +82,6 @@ service:
     alb.ingress.kubernetes.io/healthcheck-path: "/health"
     alb.ingress.kubernetes.io/healthcheck-port: "8088"
 ```
-
-:::caution
-
-Do not forget to add `apiServerEndpoint` to the values.yaml for `testkube-dashboard`, e.g.: `apiServerEndpoint: "test-api.aws.testkube.io/v1"`.
-
-:::
-
-This way we will have 1 Load Balancer with a listener rule pointing to the corresponding path:
-
-![One Load Balancer](../img/one-load-balancer.png)
 
 ## Examples of AWS S3 Bucket configuration
 
