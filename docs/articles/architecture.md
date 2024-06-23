@@ -1,9 +1,14 @@
 # Testkube Architecture
 
-The below diagrams explain the Testkube architecture using [C4 diagrams](https://c4model.com/) - please
+Testkube contains two sub-systems:
+
+- A **Control Plane** which includes the Dashboard, Storage for Results/Artifacts, Cluster Federation, etc
+- An **Agent** running in your cluster that manages Testkube resources, runs tests, gathers results, etc.
+
+The below diagrams explain this architecture using [C4 diagrams](https://c4model.com/) - please
 don't hesitate to reach out on our Slack if you have questions.
 
-Also check out the [Reference Architectures](install/reference-architectures) document for more details on
+Also check out the [Deployment Architectures](install/deployment-architectures) document for more details on
 how Testkube can be deployed.
 
 ## Context
@@ -13,10 +18,23 @@ Cloud the dashboard and control-plane are hosted and entitlement is done interna
 
 ![Testkube Context Diagram](../img/testkube-context-diagram.png)
 
-## Containers
+## Testkube Containers
 
-Breakdown of Testkube containers and their network connections/dependencies when running Testkube entirely on-prem.
-(As in the previous diagram, the License Server does not apply when using Testkube Cloud)
+The diagram below shows a breakdown of Testkube components and their network connections/dependencies
+when running Testkube entirely on-prem. As in the previous diagram, the License Server does not 
+apply when using Testkube Cloud.
+
+The Testkube Dashboard connects to the Control Plane API via an L7 Load Balancer that needs to 
+expose ports for both HTTPS and WSS endpoints.
+
+The main 3rd party dependencies that are required by the Control Plane are:
+
+- NATS
+- MongoDB - [Read more](testkube-dependencies)
+- S3 (via Minio)
+- Dex for federated authentication
+
+These are all installed by the Testkube Helm Chart and configured accordingly.
 
 ![Testkube Containers Diagram](../img/testkube-containers-diagram.png)
 
