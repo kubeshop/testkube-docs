@@ -13,8 +13,15 @@ From a security perspective, executing your tests will require that your tests h
 ## Running Tests with Testkube
 
 Testkube leverages Kubernetes to run your tests, resulting in several run-time benefits:
-- Scaling test execution to any number of individual tests executing in parallel is managed by the Kubernetes job scheduler, ensuring efficient resource allocation and test execution (provided that Kubernetes has sufficient resources itself).
-- Scaling the same test for the sake of generating massive load or running multiple permutations in parallel is managed automatically by Testkube in concert with underlying Kubernetes scheduling.
+
+- Scaling test execution to any number of individual tests executing in parallel is managed by the Kubernetes 
+  job scheduler, ensuring efficient resource allocation and test execution (provided that Kubernetes has sufficient resources itself).
+- Scaling the same test for the sake of generating massive load or running multiple permutations in parallel 
+  is available through corresponding [parallelization](test-workflows-parallel) and [sharding](test-workflows-matrix-and-sharding)
+  functionality in Test Workflows. 
+- To ensure your test executions make optimal usage of your underlying Kubernetes infrastructure you can 
+  configure Test Workflow Pods in regard to [Pod Affinity](test-workflows-job-and-pod#example-single-execution-per-node) 
+  and [Topology Spread Constraints](test-workflows-job-and-pod#example-distribute-evenly-across-nodes) 
 - Since tests run inside your clusters, you generally don’t need to give external network access to your testing tools, ensuring that tests are run both securely and aligned with the configuration of a production environment.
 
 ![Paralleliztion](../img/concepts-parallelization.png)

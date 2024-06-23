@@ -1,8 +1,4 @@
-# Dependencies for Testkube
-
-Installing Testkube runs a Nats.io, Minio and MongoDB instance in your Kubernetes cluster. There is an option to replace some of these with your own instances.
-
-## MongoDB
+# Using an external MongoDB instance
 
 MongoDB is used for storage of Testkube Test results and various Testkube configurations as telemetry settings and cluster ID.
 
@@ -11,7 +7,7 @@ In order to use an external MongoDB instance, follow these steps:
 1. Make sure you have access to the MongoDB you want to connect to - note: newest versions of MongoDB might not work optimally with Testkube, for the best experience, use MongoDB v4.4.12
 2. Install Testkube with --set mongo.enabled=false:
 `kubectl testkube install --set mongo.enabled=false`
-3. [Update MongoDB details for the api-server in the Helm values with valid connection string](https://github.com/kubeshop/helm-charts/blob/main/charts/testkube/values.yaml).
+3. [Update MongoDB details for the api-server in the Helm values with valid connection string](../testkube-pro-on-prem/articles/usage-guide#mongodb).
 
 ### SSL Connections
 
@@ -43,7 +39,9 @@ The keys of the fields can be modified. To set these variables on helm-charts le
 
 ### Amazon DocumentDB
 
-Warning: DocumentDB will not be supported in future releases. This is compatible with older releases of Testkube. 
+:::warning
+Amazon DocumentDB support ended with version 1.16.X of Testkube - the current version does NOT support DocumentDB.
+:::
 
 Testkube supports using [Amazon DocumentDB](https://aws.amazon.com/documentdb/), the managed version on MongoDB on AWS, as its database. Configuring it without TLS enabled is straightforward: add the connection string, and make sure the features that are not supported by DocumentDB are disabled. The parameters in the [helm-charts](https://github.com/kubeshop/helm-charts/blob/main/charts/testkube-api/values.yaml) are:
 

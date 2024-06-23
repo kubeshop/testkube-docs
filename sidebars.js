@@ -92,7 +92,12 @@ const sidebars = {
               type: "doc",
               label: "Using a Private CA",
               id: "articles/private-ca",
-            }
+            },
+            {
+              type: "doc",
+              label: "Using an external MongoDB",
+              id: "articles/testkube-dependencies"
+            },
           ],
         },
       ],
@@ -500,11 +505,6 @@ const sidebars = {
           id: "articles/architecture",
         },
         "articles/telemetry",
-        {
-          type: "doc",
-          label: "Dependencies",
-          id: "articles/testkube-dependencies"
-        },
         {
           type: "category",
           label: "Testkube CRD",
