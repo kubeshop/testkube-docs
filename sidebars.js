@@ -43,7 +43,7 @@ const sidebars = {
           ],
         },
         {type: "doc", label: "Upgrading", id: "articles/upgrade"},
-        "articles/install/reference-architectures",
+        "articles/install/deployment-architectures",
         "articles/install/faq",
         {
           type: "category",
@@ -200,18 +200,18 @@ const sidebars = {
               label: "Examples",
               id: "articles/test-workflows-examples-templates",
             },
-            //  { type: "doc", label: "Official Templates", id: "" },
           ],
         },
         {
           type: "category",
           label: "Triggering Test Workflows",
           collapsible: true,
-          link: {
-            type: "doc",
-            id: "articles/triggering-overview",
-          },
           items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/triggering-overview",
+            },
             {
               type: "doc",
               label: "From CI/CD",
@@ -234,6 +234,11 @@ const sidebars = {
           type: "category",
           label: "Working with Results",
           items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/results-overview",
+            },
             "articles/logs-and-artifacts",
             {
               type: "doc",
@@ -268,8 +273,8 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Data Driven Insights",
-              id: "articles/data-driven-insights",
+              label: "Test Insights",
+              id: "articles/test-insights",
             },
           ],
         },
@@ -277,6 +282,11 @@ const sidebars = {
           type: "category",
           label: "Administration",
           items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/administration-overview",
+            },
             {
               type: "doc",
               label: "Organizations",
@@ -290,7 +300,7 @@ const sidebars = {
             {
               type: "doc",
               label: "API Tokens",
-              id: "testkube-pro/articles/organization-management",
+              id: "testkube-pro/articles/api-token-management",
             },
           ],
         },

@@ -4,9 +4,10 @@ If you have started using Testkube using the standalone Open Source Agent, you c
 by the Testkube Control Plane instead.
 
 To connect your Testkube Agent, you will need to modify your Testkube installation to be in Pro Agent mode. 
-Testkube Pro Agent is the Testkube engine for controlling your Testkube instance using the Testkube Control Plane.
+Testkube Pro Agent is the Testkube engine for controlling your Testkube instance using the 
+Testkube Control Plane.
 
-See [Reference Architectures](../../articles/install/reference-architectures) for more details.
+See [Deployment Architectures](../../articles/install/deployment-architectures) for more details.
 
 :::info
 
