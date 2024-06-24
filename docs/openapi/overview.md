@@ -3,7 +3,7 @@
 Testkube exposes two REST APIs that can be consumed accordingly:
 
 - The Agent API exposed by the [Standalone Agent](../articles/install/deployment-architectures#testkube-standalone-agent)
-- The Control Plane API exposed by the [Testkube Control-Plane](../articles/install/6-deployment-architectures) (both cloud and on-prem)
+- The Control Plane API exposed by the [Testkube Control-Plane](../articles/install/deployment-architectures) (both cloud and on-prem)
 
 ## Agent API
 
@@ -29,6 +29,6 @@ The operations exposed by the control plane are here divided into the following 
 - **Environment Operations**: Operations for a specific environment defined within an organisation.
 
 These API calls all require an API token specified using `Bearer Token` authentication. 
-- API Tokens can be created as described at [Organization Management](../testkube-pro/articles/organization-management#api-tokens).
+- API Tokens can be created as described at [Organization Management](../testkube-pro/articles/api-token-management).
 - Add an `Authorization` HTTP header to your API requests with the value `Bearer: <API token>`
 
