@@ -1,4 +1,4 @@
-# Data Driven Insights
+# Test Insights
 
 The Testkube Test Insights feature is tailored to empower DevOps, testers, and QA managers with deep analytical capabilities. This feature provides valuable insights into your tests, enabling data-driven decisions that optimize your testing strategies and improve the quality of your applications.
 
