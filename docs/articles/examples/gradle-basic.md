@@ -1,4 +1,5 @@
 import SimpleGradle from "../../workflows/simple-gradle-workflow.md"
+import SimpleGradleFromTemplate from "../../workflows/simple-gradle-workflow-from-template.md"
 
 # Basic Gradle Example
 
@@ -14,3 +15,8 @@ YAML of an existing or new test, just make sure to update the `name` and `namesp
 After execution, you can see the log output from the test executions under the executions panel tabs:
 
 ![Gradle Log Output](images/basic-gradle-log-output.png)
+
+## Basic Gradle from Template
+Below is an example workflow for executing the Gradle project using an official Testkube Template.
+
+<SimpleGradleFromTemplate/>

@@ -86,9 +86,20 @@ spec:
         params: "k6-smoke-test-without-envs.js"
 ```
 
-# Example Test Workflow Templates
+<!-- # Example Test Workflow Templates // TODO: update (official templates are moved to helm-charts repository with helm-specific escaping)
 Example Test Workflow Templates can be found in the Testkube repository:
 
 - [Cypress](https://github.com/kubeshop/testkube/blob/develop/test/test-workflow-templates/cypress.yaml)
 - [k6](https://github.com/kubeshop/testkube/blob/develop/test/test-workflow-templates/k6.yaml)
-- [postman](https://github.com/kubeshop/testkube/blob/develop/test/test-workflow-templates/cypress.yaml)
+- [postman](https://github.com/kubeshop/testkube/blob/develop/test/test-workflow-templates/cypress.yaml) -->
+
+## Official Test Workflow Templates
+Testkube provides a set of official, ready to use Test Workflow Templates, which simplify running tests using various popular tools. Below you can find a list of official Test Workflow Templates along with example Test Workflows using them:
+- Artillery [See Example](examples/artillery-basic.md#basic-artillery-from-template)
+- Cypress [See Example](examples/cypress-basic.md#basic-cypress-from-template)
+- Gradle [See Example](examples/gradle-basic.md#basic-gradle-from-template)
+- JMeter
+- K6 [See Example](examples/k6-basic.md#basic-k6-from-template)
+- Maven [See Example](examples/maven-basic.md#basic-maven-from-template)
+- Playwright [See Example](examples/playwright-basic.md#basic-playwright-from-template)
+- Postman [See Example](examples/postman-basic.md#basic-postman-from-template)
