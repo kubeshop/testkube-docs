@@ -442,6 +442,10 @@ const redirects = [
     from: ["/articles/testkube-oss", "/articles/install/install-oss"],
     to: "/articles/install/standalone-agent",
   },
+  {
+    from: "/articles/install/reference-architectures",
+    to: "/articles/install/deployment-architectures",
+  }
 ];
 
 module.exports = redirects;
