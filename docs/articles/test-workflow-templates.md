@@ -103,5 +103,3 @@ Testkube provides a set of official, ready to use Test Workflow Templates, which
 - Maven [See Example](examples/maven-basic.md#basic-maven-from-template)
 - Playwright [See Example](examples/playwright-basic.md#basic-playwright-from-template)
 - Postman [See Example](examples/postman-basic.md#basic-postman-from-template)
-
-You can find examples of how to use them in [Examples & Use Cases](examples/overview) section.
