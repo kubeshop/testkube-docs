@@ -51,31 +51,12 @@ There are 4 types of organization members:
 
 ### Usage & Billing
 
-#### Upgrading Testkube to the `PRO` Plan
+This section shows your current usage against the limits of your current plan.
 
-![PRO Plan Billing](../../img/pro-plan-billing.png)
+![Usage Limits](../../img/usage-billing.png)
 
-#### `Free` Plan Usage 
+If you are using the cloud version of Testkube you can also upgrade your plan here and purchase 
+extra environments and users - see [Pricing](https://testkube.io/pricing) for the current pricing model
 
-All limits are calculated monthly. On the 'Free' plan, you have: 
-- 600 executions 
-- 2 environments
-- 2GB artifacts storage
-- 3 Users
-
-![Free Plan](../../img/free-plan.png)
-
-#### `PRO` Plan Usage
-
-Subscribing to the `PRO` plan provides: 
-- 5000 test executions
-- **Unlimited** environments
-- **128GB** of artifacts storage
-- **25** users
-
-If you need more - just use Testkube - and you'll be charged for additional usage.
-For pricing details, visit your subscription by clicking the "Manage subscription" button. 
-
-![Manage Subcriptions](../../img/manage-subscriptions.png)
-
+![Upgrade plan](../../img/upgrade-plan.png)
 

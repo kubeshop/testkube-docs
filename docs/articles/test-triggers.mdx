@@ -1,7 +1,7 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Triggers
+# K8s Event Triggers
 
 <Tabs>
 <TabItem value="dashboard" label="Dashboard" default>
@@ -130,7 +130,7 @@ probeSpec:
 
 - **Resource** - pod, deployment, statefulset, daemonset, service, ingress, event, configmap
 - **Action** - run
-- **Event** - created, modified, deleted 
+- **Event** - created, modified, deleted
 - **Cause** (can be used instead of **Event**)
   - For deployments - deployment-scale-update, deployment-image-update, deployment-env-update, deployment-containers-modified
   - For Testkube events - event-start-test, event-end-test-success, event-end-test-failed, event-end-test-aborted, event-end-test-timeout, event-start-testsuite, event-end-testsuite-success, event-end-testsuite-failed, event-end-testsuite-aborted, event-end-testsuite-timeout, event-queue-testworkflow, event-start-testworkflow, event-end-testworkflow-success, event-end-testworkflow-failed, event-end-testworkflow-aborted, event-created, event-updated, event-deleted
@@ -186,10 +186,10 @@ spec:
   disabled: false
 ```
 
-You can define **Test Trigger** for Testkube cluster events. 
+You can define **Test Trigger** for Testkube cluster events.
 In below example, if **Test** `k6-executor-smoke` is completed succesfully, then we run **TestSuite** `container-executor-postman-smoke-tests`
 
-```yaml                                     
+```yaml
 apiVersion: tests.testkube.io/v1
 kind: TestTrigger
 metadata:
@@ -227,9 +227,9 @@ Testkube exposes CRUD operations on test triggers in the REST API. Check out the
 
 The following environment variables are automatically injected into each triggered test pod:
 
-WATCHER_EVENT_RESOURCE: resource type  
-WATCHER_EVENT_NAME: resource name  
-WATCHER_EVENT_NAMESPACE: resource namespace  
+WATCHER_EVENT_RESOURCE: resource type
+WATCHER_EVENT_NAME: resource name
+WATCHER_EVENT_NAMESPACE: resource namespace
 WATCHER_EVENT_EVENT_TYPE: event type
 
 ## Video Tutorial
