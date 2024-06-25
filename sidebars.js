@@ -189,21 +189,10 @@ const sidebars = {
               label: "Tests and Test Suites Migration",
               id: "articles/test-workflow-migration",
             },
-          ],
-        },
-        {
-          type: "category",
-          label: "Workflow Templates",
-          items: [
             {
               type: "doc",
-              label: "Overview",
+              label: "Test Workflow Templates",
               id: "articles/test-workflow-templates",
-            },
-            {
-              type: "doc",
-              label: "Examples",
-              id: "articles/test-workflows-examples-templates",
             },
           ],
         },
