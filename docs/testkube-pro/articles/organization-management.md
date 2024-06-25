@@ -55,8 +55,9 @@ This section shows your current usage against the limits of your current plan.
 
 ![Usage Limits](../../img/usage-billing.png)
 
-If you are using the cloud version of Testkube you can also upgrade your plan here and purchase 
-extra environments and users - see [Pricing](https://testkube.io/pricing) for the current pricing model
+If you are using the cloud version of Testkube you can upgrade your plan here. 
+Once on the commercial plan, you will automatically be charged for additional 
+users and environments in line with the current [Pricing Model](https://testkube.io/pricing).
 
 ![Upgrade plan](../../img/upgrade-plan.png)
 
