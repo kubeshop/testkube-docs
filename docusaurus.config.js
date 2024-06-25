@@ -75,7 +75,7 @@ const config = {
   ],
 
   themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+  /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
       navbar: {
         logo: {
@@ -123,21 +123,28 @@ const config = {
         style: "dark",
         links: [
           {
-            title: "Community",
-            items: [
-              {
-                label: "Slack",
-                href: "https://bit.ly/testkube-slack",
-              },
-              {
-                label: "Twitter",
-                href: "https://twitter.com/Testkube_io",
-              },
-              {
-                label: "GitHub",
-                href: "https://github.com/kubeshop/testkube",
-              },
-            ],
+            label: "Website",
+            href: "https://testkube.io",
+          },
+          {
+            label: "Getting Started",
+            href: "https://testkube.io/get-started?utm_source=docs",
+          },
+          {
+            label: "Learn",
+            href: "https://testkube.io/learn",
+          },
+          {
+            label: "Slack",
+            href: "https://bit.ly/testkube-slack",
+          },
+          {
+            label: "Twitter",
+            href: "https://twitter.com/Testkube_io",
+          },
+          {
+            label: "GitHub",
+            href: "https://github.com/kubeshop/testkube",
           },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Kubeshop.`,
