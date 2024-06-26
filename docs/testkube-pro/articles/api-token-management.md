@@ -22,6 +22,6 @@ environment:
 ![Environment Role](../../img/environment-role.png)
 
 We have 3 available roles for environment access: 
-* `Read` - Read only, you can only call get and list endpoints which not mutate data in any way.
+* `Read` - Read only, you can only call get and list endpoints which do not mutate data in any way.
 * `Run` - Access to Read and Run but no changes to the environment.
 * `Write` - You can change environments and run tests. 
