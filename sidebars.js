@@ -423,14 +423,14 @@ const sidebars = {
             {
               type: "doc",
               label: "Basic",
-              id: "articles/examples/robot-framework-basic"
+              id: "articles/examples/robot-framework-basic",
             },
             {
               type: "doc",
               label: "Parallelized",
-              id: "articles/examples/robot-framework-parallel"
+              id: "articles/examples/robot-framework-parallel",
             },
-          ]
+          ],
         },
         {
           type: "doc",
@@ -713,57 +713,6 @@ const sidebars = {
               type: "doc",
               label: "Pre-built Executor",
               id: "test-types/prebuilt-executor",
-            },
-          ],
-        },
-        {
-          type: "category",
-          label: "CI/CD Integration",
-          link: {
-            type: "doc",
-            id: "articles/cicd-overview",
-          },
-          items: [
-            {
-              type: "category",
-              label: "Github Actions",
-              link: {
-                type: "doc",
-                id: "articles/github-actions",
-              },
-              items: [
-                {
-                  type: "doc",
-                  id: "articles/run-tests-with-github-actions",
-                  label: "Migrate from testkube-run-action",
-                },
-              ],
-            },
-            "articles/gitlab",
-            "articles/jenkins",
-            "articles/jenkins-ui",
-            "articles/azure",
-            "articles/circleci",
-            "articles/testkube-cli-docker",
-            {
-              type: "category",
-              label: "GitOps",
-              link: {
-                type: "doc",
-                id: "articles/gitops-overview",
-              },
-              items: [
-                {
-                  type: "doc",
-                  id: "articles/flux-integration",
-                  label: "Flux",
-                },
-                {
-                  type: "doc",
-                  id: "articles/argocd-integration",
-                  label: "ArgoCD",
-                },
-              ],
             },
           ],
         },
