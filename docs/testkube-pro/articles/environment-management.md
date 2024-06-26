@@ -1,6 +1,8 @@
 # Environment Management
 
-A Testkube environment is managed by a Testkube Agent running in your Kubernetes Cluster - read more [here](../articles/architecture.md).
+:::note
+An environment is a grouping of users, workflows, results, triggers, and webhooks. A Testkube environment is managed by a Testkube Agent running in your Kubernetes Cluster - read more [here](../articles/architecture.md).
+:::
 
 
 ## Creating a New Environment
