@@ -1,20 +1,16 @@
-import LegacyWarning from '../articles/_legacy-warning.mdx';
-
 # Testkube CircleCI
-
-<LegacyWarning />
 
 The Testkube CircleCI integration facilitates the installation of Testkube and allows the execution of any [Testkube CLI](https://docs.testkube.io/cli/testkube) command within a CircleCI pipeline. This integration can be seamlessly incorporated into your CircleCI repositories to enhance your CI/CD workflows.
 The integration offers a versatile approach to align with your pipeline requirements and is compatible with Testkube Pro, Testkube Pro On-Prem, and the open-source Testkube platform. It enables CircleCI users to leverage the powerful features of Testkube directly within their CI/CD pipelines, ensuring efficient and flexible test execution.
 
 ## Testkube Pro
 
-### How to configure Testkube CLI action for Testkube Pro and run a test
+### How to configure Testkube CLI action for Testkube Pro and run a test workflow
 
 To use CircleCI for [Testkube Pro](https://app.testkube.io/), you need to create an [API token](https://docs.testkube.io/testkube-pro/articles/organization-management/#api-tokens).
 Then, pass the **organization** and **environment** IDs, along with the **token** and other parameters specific for your use case.
 
-If a test is already created, you can run it using the command `testkube run test test-name -f` . However, if you need to create a test in this workflow, please add a creation command, e.g.: `testkube create test --name test-name --file path_to_file.json`.
+If a test is already created, you can run it using the command `testkube run testworkflow TEST_WORKFLOW_NAME -f` . However, if you need to create a test in this workflow, please add a creation command, e.g.: `testkube create testworkflow -f EXAMPLE_FILE.yaml`.
 
 ```yaml
 version: 2.1
@@ -31,10 +27,10 @@ jobs:
     steps:
       - run:
           name: "Set Testkube Context"
-          command: "testkube set context --api-key $TESTKUBE_API_KEY --org $TESTKUBE_ORG_ID --env $TESTKUBE_ENV_ID --cloud-root-domain testkube.dev"
+          command: "testkube set context --org-id $TESTKUBE_ORG_ID --env-id $TESTKUBE_ENV_ID -c cloud -k $TESTKUBE_API_KEY"
       - run:
-          name: "Trigger testkube test"
-          command: "testkube run test test-name -f"
+          name: "Trigger testkube test workflow"
+          command: "testkube run testworkflow TEST_WORKFLOW_NAME -f"
 
 workflows:
   run-tests-workflow:
@@ -55,10 +51,10 @@ jobs:
     steps:
       - run:
           name: "Set Testkube Context"
-          command: "testkube set context --api-key $TESTKUBE_API_KEY --org $TESTKUBE_ORG_ID --env $TESTKUBE_ENV_ID --cloud-root-domain testkube.dev"
+          command: "testkube set context --org-id $TESTKUBE_ORG_ID --env-id $TESTKUBE_ENV_ID -c cloud -k $TESTKUBE_API_KEY"
       - run:
           name: "Trigger testkube test"
-          command: "testkube run test test-name -f"
+          command: "testkube run testworkflow TEST_WORKFLOW_NAME -f"
 
 workflows:
   run-tests-workflow:
@@ -67,11 +63,11 @@ workflows:
 ```
 ## Testkube Core OSS
 
-### How to configure Testkube CLI action for TK OSS and run a test
+### How to configure Testkube CLI action for TK OSS and run a test workflow
 
 To connect to the self-hosted instance, you need to have **kubectl** configured for accessing your Kubernetes cluster and pass an optional namespace, if Testkube is not deployed in the default **testkube** namespace. 
 
-If a test is already created, you can run it using the command `testkube run test test-name -f` . However, if you need to create a test in this workflow, please add a creation command, e.g.: `testkube create test --name test-name --file path_to_file.json`.
+If a test workflow is already created, you can run it using the command `testkube run testworkflow TEST_WORKFLOW_NAME -f`. However, if you need to create a test in this workflow, please add a creation command, e.g.: `testkube create testworkflow -f EXAMPLE_FILE.yaml`.
 
 In order to connect to your own cluster, you can put your kubeconfig file into CircleCI variable named KUBECONFIGFILE.
 
@@ -91,10 +87,10 @@ jobs:
             export KUBECONFIG=/.testkube/tmp/kubeconfig/config
       - run:
           name: "Set Testkube Context"
-          command: "testkube set context --api-key $TESTKUBE_API_KEY --org $TESTKUBE_ORG_ID --env $TESTKUBE_ENV_ID --cloud-root-domain testkube.dev"
+          command: "testkube set context --org-id $TESTKUBE_ORG_ID --env-id $TESTKUBE_ENV_ID -c cloud -k $TESTKUBE_API_KEY"
       - run:
-          name: "Trigger testkube test"
-          command: "testkube run test test-name -f"
+          name: "Trigger testkube test workflow"
+          command: "testkube run testworkflow TEST_WORKFLOW_NAME -f"
 
 workflows:
   run-tests-workflow:
@@ -104,7 +100,7 @@ workflows:
 
 The steps to connect to your Kubernetes cluster differ for each provider. You should check the docs of your Cloud provider for how to connect to the Kubernetes cluster from CircleCI.
 
-### How to configure Testkube CLI action for TK OSS and run a test
+### How to configure Testkube CLI action for TK OSS and run a test workflow
 
 This workflow establishes a connection to the EKS cluster and creates and runs a test using TK CLI. In this example we also use CircleCI variables not to reveal sensitive data. Please make sure that the following points are satisfied:
 - The **_AwsAccessKeyId_**, **_AwsSecretAccessKeyId_** secrets should contain your AWS IAM keys with proper permissions to connect to EKS cluster.
@@ -136,12 +132,12 @@ jobs:
         NAMESPACE: custom-testkube
     steps:
       - run:
-          name: "Run Testkube Test on EKS"
+          name: "Run Testkube Test Workflow on EKS"
           command: |
             export KUBECONFIG=/.testkube/tmp/kubeconfig/config
             testkube set context --kubeconfig --namespace $NAMESPACE
-            echo "Running Testkube test..."
-            testkube run test test-name -f
+            echo "Running Testkube test workflow..."
+            testkube run testworkflow TEST_WORKFLOW_NAME -f
 
 workflows:
   aws-testkube-workflow:
@@ -152,7 +148,7 @@ workflows:
             - setup-aws
 ```
 
-### How to connect to GKE (Google Kubernetes Engine) cluster and run a test 
+### How to connect to GKE (Google Kubernetes Engine) cluster and run a test workflow
 
 This example connects to a k8s cluster in Google Cloud then creates and runs a test using Testkube CircleCI. Please make sure that the following points are satisfied:
 - The **_GKE Sevice Account_** should already be created in Google Cloud and added to CircleCI variables along with **_GKE Project_** value.
@@ -185,11 +181,11 @@ jobs:
     working_directory: /.testkube
     steps:
       - run:
-          name: "Run Testkube Test on GKE"
+          name: "Run Testkube Test Workflow on GKE"
           command: |
             export KUBECONFIG=/.testkube/tmp/kubeconfig/config
             testkube set context --kubeconfig --namespace $NAMESPACE
-            testkube run test test-name -f
+            testkube run testworkflow TEST_WORKFLOW_NAME -f
 
 workflows:
   gke-testkube-workflow:

@@ -19,27 +19,19 @@ helm upgrade \
 
 ## Step 2 - Test Emmiting Kubernetes Events
 
-To test emitting Kubernetes Events, create a sample test with Testkube and run it.
+To test emitting Kubernetes Events, create a sample test workflow with Testkube and run it.
 
-```sh
-cat << EOF | > curl-test.json
-{
-  "command": [
-    "curl",
-    "https://example.com"
-  ],
-  "expected_status": "200"
-}
-EOF
+```
+testkube create testworkflow -f EXAMPLE_FILE.yaml
 
-testkube create test --name test-k8sevents --type curl/test -f curl-test.json
-
-testkube run test test-k8sevents
+testkube run testworkflow TEST_WORKFLOW_NAME -f
 
 kubectl describe events -n testkube
 ```
 
-Check your kubernetes event list. An event like the following should have been emmitted: 
+Check your kubernetes event list.
+
+<!-- An event like the following should have been emmitted: 
 
 ```yaml
 Name:             testkube-event-0b54d591-f496-4980-bd69-ab6d093617e2
@@ -70,6 +62,7 @@ Source:
 Type:    Normal
 Events:  <none>
 ```
+Commented as this will require update. -->
 
 ## Reference
 

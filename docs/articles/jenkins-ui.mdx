@@ -1,8 +1,4 @@
-import LegacyWarning from '../articles/_legacy-warning.mdx';
-
 # Testkube Jenkins UI
-
-<LegacyWarning />
 
 The Testkube Jenkins integration streamlines the installation of Testkube, enabling the execution of any [Testkube CLI](https://docs.testkube.io/cli/testkube) command within Jenkins Pipelines or Freestyle Projects.  
 
@@ -29,9 +25,15 @@ To use Jenkins CI/CD for [Testkube Pro](https://app.testkube.io/), you need to c
 ![jenkins environment variables configuration](../img/jenkins-environment.png)
 
 3. Click on "Add Build Step" and select "Testkube Setup".
+
 ![jenkins testkube setup build step](../img/jenkins-build-step.png)
 
 4. Specify a Testkube CLI version or leave it empty to use the latest version.
 
-5. Add a new "Execute Shell" Build Step and run one or multiple Testkube CLI commands.
-![jenkins execute shell](../img/jenkins-execute-shell.png)
+5. Add a new "Execute Shell" Build Step and run one or multiple Testkube CLI commands such as:
+<!-- ![jenkins execute shell](../img/jenkins-execute-shell.png) Commented this because image shows deprecated commands. Please take updated screenshots.
+Adding updated command as code block for now-->
+
+```yaml
+testkube run testworkflow TEST_WORKFLOW_NAME -f
+```
