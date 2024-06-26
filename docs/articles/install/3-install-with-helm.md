@@ -34,6 +34,8 @@ Alternatively, export one of our profiles:
 testkube init <profile> --export > values.yaml
 ```
 
+Currently available profiles are: `demo`.
+
 3. Install the Testkube Helm Chart:
 
 ```bash
@@ -110,17 +112,37 @@ If certificate-based authentication is required, the custom certificates need to
 
 ### Auth
 
-You will have to choose which users can access Testkube. Testkube uses Dex which providers the following identity providers:
+You will have to configure how your users can access Testkube. Testkube uses Dex which supports [the most popular identity providers](https://dexidp.io/docs/connectors/). You can find a OIDC example for Google below:
 
-- [Google](https://docs.testkube.io/testkube-pro-on-prem/articles/auth/#google)
-- [Okta](https://docs.testkube.io/testkube-pro-on-prem/articles/auth/#azure-ad)
-- [OIDC](https://docs.testkube.io/testkube-pro-on-prem/articles/auth/#okta)
-- [Azure AD](https://docs.testkube.io/testkube-pro-on-prem/articles/auth/#azure-ad)
-- [Other Dex connectors](https://dexidp.io/docs/connectors/), such as LDAP, BitBucket, OpenShift, etc…
+```yaml
+dex:
+  envVars:
+    - name: GOOGLE_CLIENT_ID
+      valueFrom:
+        secretKeyRef:
+          name: <oidc-credentials-secret-name>
+          key: <client-id-key>
+    - name: GOOGLE_CLIENT_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: <oidc-credentials-secret-name>
+          key: <client-secret-key>
+  configTemplate:
+    additionalConfig: |
+    connectors:
+      - type: oidc
+        id: google
+        name: Google
+        config:
+          issuer: https://accounts.google.com
+          clientID: $GOOGLE_CLIENT_ID
+          clientSecret: $GOOGLE_CLIENT_SECRET
+          redirectURI: <dex endpoint>/callback
+```
 
-Alternatively, you can use [a local database with static users](https://docs.testkube.io/testkube-pro-on-prem/articles/auth/#static-users) which acts as a virtual identity provider for initial evaluations.
+Alternatively, you can use [a local database with static users](/testkube-pro-on-prem/articles/auth/#static-users) which acts as a virtual identity provider for evaluations.
 
-Once authenticated, users will also need to be invited to org. By default, new users will automatically join the default organization. You can change this behaviour by changing the bootstrap and invitation configuration.
+Once authenticated, users will also need to be invited to org. By default, new users will automatically join the default organization. You can change this behaviour by changing [the bootstrap and invitation configuration][advanced-bootstrap].
 
 ### Telemetry
 
@@ -128,7 +150,7 @@ Testkube exposes Prometheus metrics on the `/metrics` endpoint and uses a `Servi
 
 Use the following configuration to enable metrics:
 
-```helm
+```yaml
 testkube-cloud-api:
   prometheus:
     enabled: true
@@ -136,11 +158,11 @@ testkube-cloud-api:
 
 ## Shared Secrets
 
-Testkube requires a variety of secrets to operate. Any required secret that is not provided manually will be automatically generated. You can optionally choose to specify your own secrets. For the current shared secrets, it’s recommended to use the autogeneration.
+Testkube requires a variety of secrets to operate. Any required secret that is not provided manually will be automatically generated. You can optionally choose to specify your own secrets. For shared secrets without additional info, it’s recommended to use auto generation.
 
+- [testkube-license][ss-license]
 - testkube-default-agent-token
 - testkube-minio-credentials
-- testkube-license
 
 ### Testkube License
 
@@ -168,3 +190,5 @@ Check out [this article][advanced] to learn more about our advanced settings. Yo
 
 [advanced]: /articles/install/advanced-install
 [secret-license]: /articles/install/install-with-helm#testkube-license
+[advanced-bootstrap]: /articles/install/advanced-install#organization-management
+[ss-license]: /articles/install/install-with-helm#testkube-license

@@ -89,7 +89,7 @@ If you plan to use AWS S3 Bucket for storing test artifacts, you can follow belo
 
 **Terraform aws iam policy:**
 
-```json
+```yaml
 data "aws_iam_policy_document" "testkube" {
   statement {
     sid    = "S3Buckets"
@@ -124,32 +124,33 @@ data "aws_iam_policy_document" "testkube" {
       "arn:aws:s3:::*-testkube-${terraform.workspace}/*",
     ]
   }
+}
 ```
 
 **Teskube helm values:**
 
 ```yaml
-  testkube-api:
-    jobServiceAccountName: testkube-api-server # reuse the service-account from testkube-api
-    minio:
-      enabled: true # required to be able to access AWS S3 (minio is used as a proxy)
-      minioRootUser: ""
-      minioRootPassword: ""
-      serviceAccountName: testkube-api-server # reuse the service-account from testkube-api
-    serviceAccount:
-      annotations:
-        eks.amazonaws.com/role-arn: arn:aws:iam::111111111111:role/my-dev-testkube
-    storage:
-      endpoint: s3.amazonaws.com
-      accessKeyId: ""
-      accessKey: ""
-      location: eu-central-1
-      bucket: my-testkube-dev
-      SSL: true
-      endpoint_port: ""
-    logs:
-      storage: "minio"
-      bucket: my-testkube-dev
+testkube-api:
+  jobServiceAccountName: testkube-api-server # reuse the service-account from testkube-api
+  minio:
+    enabled: true # required to be able to access AWS S3 (minio is used as a proxy)
+    minioRootUser: ""
+    minioRootPassword: ""
+    serviceAccountName: testkube-api-server # reuse the service-account from testkube-api
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::111111111111:role/my-dev-testkube
+  storage:
+    endpoint: s3.amazonaws.com
+    accessKeyId: ""
+    accessKey: ""
+    location: eu-central-1
+    bucket: my-testkube-dev
+    SSL: true
+    endpoint_port: ""
+  logs:
+    storage: "minio"
+    bucket: my-testkube-dev
 ```
 
 ## Give it a go!

@@ -8,9 +8,9 @@ A variety of advanced topics to further customize your deployment.
 
 By default, Testkube will automatically add users to the default organizations when they get invited. You can change the bootstrap configuration to change this behaviour programmatically.
 
-The simplest configuration is as follows. It creates a default org and environment and users will automatically join as admin:
+The simplified configuration is as follows. It creates a default org and environment and users will automatically join as admin:
 
-```bash
+```yaml
 testkube-cloud-api:
   api:
     features:
@@ -19,27 +19,13 @@ testkube-cloud-api:
       bootstrapAdmin: <you@example.com>
 ```
 
-You can use the full bootstrapConfig for more advanced settings:
+Alternatively, you can use the full advanced configuration for more options. The following example creates an organization with two environments. New users will automatically join the
+default organizations / environments with the specified roles.
 
-```helm
+```yaml
 testkube-cloud-api:
   api:
     features:
-      bootstrapConfig:
-        enabled: true
-        config:
-          organizations:
-            - name: prod_organization
-              environments:
-                - name: production_1
-                - name: production_2
-```
-
-On startup, the `prod_organization` organization with two environments, `production_1` and `production_2` will be created.
-
-Next, you can enhance the configuration to automatically add new users to organizations and environments with predefined roles. For example, the following config makes new users join `prod_organization` as a member role and use `production_1` environment as a run role:
-
-```helm
       bootstrapConfig:
         enabled: true
         config:
@@ -56,11 +42,13 @@ Next, you can enhance the configuration to automatically add new users to organi
                 - name: production_2
 ```
 
-Note: The default organization and environment mapping only apply on first sign in. After, you can remove users from environments or change roles through the Testkube UI.
+Note: The default organization and environment mapping only apply on first sign in. After, you can remove users from environments or change roles through Testkube's dashboard.
 
-Additionally, by default, Testkube Pro creates a personal organization for every new user. When using the default organization and environment configuration, you can turn off personal organizations using the following config:
+**Disabling personal organisations**
 
-```helm
+Testkube creates an organization for every new user which acts as a personal workspace. When using the default organization and environment configuration, it makes sense to turn off personal organizations using the following config:
+
+```yaml
 testkube-cloud-api:
   api:
     features:
@@ -71,7 +59,7 @@ testkube-cloud-api:
 
 Users will now have to be invited within the dashboard. You can configure the SMTP server and Testkube will send e-mail invitations, alternatively new users will join the organisation without explicitly accepting the invitation.
 
-```bash
+```yaml
 testkube-cloud-api:
   inviteMode: `email`
   api:
@@ -84,7 +72,7 @@ testkube-cloud-api:
       port: <smtp port>
       username: <smtp username>
       password: <smtp password>
-			# passwordSecretRef: <secret name>
+      # passwordSecretRef: <secret name>
 ```
 
 ## Custom Ingress Controller
@@ -93,7 +81,7 @@ By default, Testkube uses the NGINX Ingress Controller to ensure the reliable fu
 
 More specifically, these annotations are added to configre NGINX and should not be changed:
 
-```bash
+```yaml
 # gRPC Ingress:
 annotations:
   nginx.ingress.kubernetes.io/proxy-body-size: 8m
@@ -108,11 +96,23 @@ annotations:
 
 To use your own ingress controller, reach out to our support team and we’ll gladly investigate your ingress of choice. Alternatively, you can give it a try yourself by deploying Testkube and seeing whether gRPC and WebSockets are working properly.
 
-## Multi-namespaces
+## Kubernetes Namespaces
 
-These commands will deploy Testkube components into two namespaces: testkube and testkube1 and will create a watcher role to watch k8s resources in each namespace respectively. If you need to watch resources besides the installation namespace, please add them to the **_additionalNamespaces_** variable in **_testkube-api_** section:
+#### Namespaces for Test Execution
 
-```yaml {3,7}
+The Testkube agent creates Kubernetes jobs when executing a test workflow. By default, the job will be spawned within the namespace where Testkube is installed. You can opt to [run tests in a different namespace][/articles/creating-tests/#run-the-test-in-a-different-execution-namespace], in which case you will have to allow this by configuring these namespaces in `executionNamespaces`.
+
+```yaml {3}
+testkube-agent:
+  testkube-api:
+    executionNamespaces: ["my-namespace"]
+```
+
+#### Namespaces for Kubernetes Trigger Events
+
+Testkube's Kubernetes triggers allow you to execute a test workflow. By default, Testkube watches events across the whole cluster. You might want to limit the namespaces that Testkube observes due to security restrictions, in which case you can use the multinamespace configuration:
+
+```yaml {3-7}
 testkube-agent:
   testkube-api:
     multinamespace:
@@ -122,17 +122,11 @@ testkube-agent:
       - namespace3
 ```
 
-Additionally, It is possible to change the namespace for **_testkube-operator_** by setting a value for **_namespace_** variable in the **_testkube-operator_** section:
+Note: The naming is a bit counterintuitive but this instructs Testkube to stop watching all namespaces and to only observe the namespaces listed on top of the namespace where Testkube is installed. No ClusterRole will be created, instead you will have Roles for each specified namespace.
 
-```yaml {3}
-testkube-agent:
-  testkube-operator:
-    namespace: testkube-system
-```
+#### Namespaces for Testkube Custom Resources
 
-:::note
-Please note that the **Testkube Operator** creates **ClusterRoles**, so for the second deployment of Testkube, we need to disable the Operator, because it will fail with a `resources already exist` error. Be aware that the Operator is deployed once with the first chart installation of Testkube. Therefore, if you uninstall the first release, it will uninstall the Operator as well.
-:::
+Testkube enables GitOps practices by storing configuration within custom resources, such as the TestWorkflow CRD. By default, Testkube will only watch for custom Testkube resources within the namespace where it is installed. It is currently unsupported to change this behaviour.
 
 ## Bring Your Own Infra
 
@@ -145,7 +139,7 @@ By default, it will install a MongoDB instance using the Bitnami MongoDB Helm ch
 
 If you wish to use an existing MongoDB instance, you can configure the following values:
 
-```helm
+```yaml
 mongodb:
   enabled: false
 
@@ -155,13 +149,15 @@ testkube-cloud-api:
       dsn: <mongodb dsn (mongodb://...)>
 ```
 
+You can follow [these instructions][guide-mongo-ssl] in case you want to work with SSL Connections.
+
 #### NATS
 
 Testkube Enterprise uses NATS as a message broker for communication between API and Agents.
 
 If you wish to use an existing NATS instance, you can configure the following values:
 
-```helm
+```yaml
 nats:
   enabled: false
 
@@ -177,7 +173,7 @@ Testkube Enterprise uses MinIO as a storage backend for storing artifacts.
 
 If you wish to use an existing MinIO instance, you can configure the following values:
 
-```helm
+```yaml
 testkube-cloud-api:
   minio:
     enabled: false
@@ -191,7 +187,7 @@ Testkube Enterprise uses Dex as an identity provider.
 
 If you wish to use an existing Dex instance, you can configure the following values:
 
-```helm
+```yaml
 global:
   dex:
     issuer: <dex issuer url>
@@ -212,7 +208,7 @@ By default, Testkube will work with licenses that require internet connectivity.
 
 Once you obtained an offline license, you should create a Shared Secret and afterwards
 
-```bash
+```yaml
 global:
   enterpriseOfflineAccess: true
   enterpriseLicenseSecretRef: testkube-enterprise-license
@@ -223,3 +219,4 @@ global:
 By default, Testkube will pull images from the [docker.io](https://docker.io) registry. You can override the image of each individual service.
 
 [contact]: https://testkube.io/contact
+[guide-mongo-ssl]: /articles/testkube-dependencies

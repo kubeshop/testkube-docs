@@ -100,7 +100,7 @@ You will now see the dashboard:
 ![The dashboard](./img/dashboard.png)
 
 :::info
-Need more details or customization? You can learn more in [our installation documentation][testkube-installing].
+Looking for more details or customization? You can learn more in [our installation documentation][testkube-installing].
 :::
 
 </TabItem>
@@ -182,13 +182,17 @@ spec:
               "junit.xml": jUnit(data),
             };
           }
+  # Workflows default to the container image's working directory. Often you will want
+  # to update this to the directory of your content, but be mindful as some testing
+  # tools might malfunction when their container's working directory is changed.
+  # Git content is put in `/data/repo`, whereas relative file content in `/data`.
   container:
     workingDir: /data
   # Steps are the main building blocks in workflows. Each step is executed in sequential order.
-  # All steps share the file system and can run a specific images.
+  # You can use steps to setup or teardown your testing tool and test dependencies.
   steps:
-    # Each step can have its own image and shares the file system. You can use steps
-    # to setup or teardown your testing tool and any test dependencies.
+    # Each step can run with their own image, yet the file system is shared across steps.
+    # In this case, we'll run K6 on our test defined above.
     - name: Run k6 tests
       run:
         image: grafana/k6:latest
