@@ -18,7 +18,7 @@ The decoupling of test definition and execution from your CI/CD is one of the mo
 - In response to Kubernetes events using [Triggers](../articles/test-triggers.mdx).
 - Manually via the [CLI](../articles/install/1-cli.mdx) or the [Testkube Dashboard](../articles/testkube-dashboard.md).
 - At a recurring schedule using [Test Workflow Scheduling](../articles/test-workflows.md).
-- From any other tool using the Testkube REST API.
+- From any other tool using the [Testkube REST API](/openapi/overview).
 
 ![CI/CD Integrations](../img/concepts-cicd-integrations.png)
 

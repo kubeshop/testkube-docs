@@ -53,12 +53,20 @@ API tokens allows running tests without linking the run to a specific account.
 
 ![API Tokens](../../img/api-tokens.png)
 
-### Usage
+### Usage & Billing
 
-See the details of the current organization usage and the available plans and features.
+This section shows your current usage against the limits of your current plan.
 
 ![Usage](../../img/usage.png)
 
 For more details about the Testkube offerings, check our [pricing page](https://testkube.io/pricing).
 
+![Usage Limits](../../img/usage-billing.png)
+
+If you are using the cloud version of Testkube you can upgrade your plan here. 
+Once on the commercial plan, you will automatically be charged for additional 
+users and environments in line with the current [Pricing Model](https://testkube.io/pricing).
+
+
+![Upgrade plan](../../img/upgrade-plan.png)
 
