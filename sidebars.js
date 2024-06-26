@@ -402,9 +402,20 @@ const sidebars = {
           ]
         },
         {
-          type: "doc",
+          type: "category",
           label: "Robot Framework",
-          id: "articles/examples/robot-framework-basic"
+          items: [
+            {
+              type: "doc",
+              label: "Basic",
+              id: "articles/examples/robot-framework-basic"
+            },
+            {
+              type: "doc",
+              label: "Parallelized",
+              id: "articles/examples/robot-framework-parallel"
+            },
+          ]
         },
         {
           type: "doc",

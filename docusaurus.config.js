@@ -75,7 +75,7 @@ const config = {
   ],
 
   themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+  /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
       navbar: {
         logo: {
@@ -98,7 +98,7 @@ const config = {
           {
             label: "Slack",
             position: "right",
-            href: "https://join.slack.com/t/testkubeworkspace/shared_invite/zt-2arhz5vmu-U2r3WZ69iPya5Fw0hMhRDg",
+            href: "https://bit.ly/testkube-slack",
           },
           {
             type: "html",
@@ -114,7 +114,7 @@ const config = {
 
       announcementBar: {
         id: "join-testkube-pro",
-        content: '<strong>New to Testkube?</strong> Unleash the power of cloud native testing in Kubernetes with Testkube. <a id="sign_cloud_docs" href="https://app.testkube.io/?utm_source=docs" target="_blank">Get Started ></a>',
+        content: '<strong>New to Testkube?</strong> Unleash the power of cloud native testing in Kubernetes with Testkube. <a id="get_started_docs" href="https://www.testkube.io/get-started?utm_source=docs" target="_blank">Get Started ></a>',
         backgroundColor: "#8951ff",
         textColor: "#fff",
       },
@@ -123,21 +123,28 @@ const config = {
         style: "dark",
         links: [
           {
-            title: "Community",
-            items: [
-              {
-                label: "Slack",
-                href: "https://testkubeworkspace.slack.com/join/shared_invite/zt-2arhz5vmu-U2r3WZ69iPya5Fw0hMhRDg#/shared-invite/email",
-              },
-              {
-                label: "Twitter",
-                href: "https://twitter.com/Testkube_io",
-              },
-              {
-                label: "GitHub",
-                href: "https://github.com/kubeshop/testkube",
-              },
-            ],
+            label: "Website",
+            href: "https://testkube.io",
+          },
+          {
+            label: "Getting Started",
+            href: "https://testkube.io/get-started?utm_source=docs",
+          },
+          {
+            label: "Learn",
+            href: "https://testkube.io/learn",
+          },
+          {
+            label: "Slack",
+            href: "https://bit.ly/testkube-slack",
+          },
+          {
+            label: "Twitter",
+            href: "https://twitter.com/Testkube_io",
+          },
+          {
+            label: "GitHub",
+            href: "https://github.com/kubeshop/testkube",
           },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Kubeshop.`,
