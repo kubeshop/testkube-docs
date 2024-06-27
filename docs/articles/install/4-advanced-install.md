@@ -100,7 +100,7 @@ To use your own ingress controller, reach out to our support team and we’ll gl
 
 #### Namespaces for Test Execution
 
-The Testkube agent creates Kubernetes jobs when executing a test workflow. By default, the job will be spawned within the namespace where Testkube is installed. You can opt to [run tests in a different namespace][/articles/creating-tests/#run-the-test-in-a-different-execution-namespace], in which case you will have to allow this by configuring these namespaces in `executionNamespaces`.
+The Testkube agent creates Kubernetes jobs when executing a test workflow. By default, the job will be spawned within the namespace where Testkube is installed. You can opt to [run tests in a different namespace](/articles/creating-tests/#run-the-test-in-a-different-execution-namespace), in which case you will have to allow this by configuring these namespaces in `executionNamespaces`.
 
 ```yaml {3}
 testkube-agent:
