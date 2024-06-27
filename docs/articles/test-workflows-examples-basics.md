@@ -15,17 +15,17 @@ metadata:
   name: overview--example-1
 spec:
   steps:
-  - run:
-      image: 'curlimages/curl:7.78.0'
-      args:
-      - 'https://testkube.io'
+    - run:
+        image: "curlimages/curl:7.78.0"
+        args:
+          - "https://testkube.io"
 ```
+
 ### Running the Image
 
 Use a run instruction that has similar syntax to the native Kubernetes’ container. A command exiting with code > 0 is considered a failure.
 
 ![Running the Image](../img/running-image.png)
-
 
 ## Using Shell
 
@@ -41,18 +41,17 @@ metadata:
   name: overview--example-2
 spec:
   steps:
-  - run:
-      image: 'curlimages/curl:7.78.0'
-      shell: |
-        curl https://testkube.io
-```        
+    - run:
+        image: "curlimages/curl:7.78.0"
+        shell: |
+          curl https://testkube.io
+```
 
 ### Alternative Syntax
 
 Alternatively, you can use **shell** directly as an instruction and a default image will be used.
 
 ![Using Shell](../img/using-shell.png)
-
 
 ## Fetching the Git Repository
 
@@ -70,14 +69,14 @@ metadata:
 spec:
   content:
     git:
-      uri: 'https://github.com/kubeshop/testkube'
-      revision: 'main'
+      uri: "https://github.com/kubeshop/testkube"
+      revision: "main"
       paths:
-      - 'test/cypress/executor-tests/cypress-12'
+        - "test/cypress/executor-tests/cypress-12"
 
   steps:
-  - shell: 'tree /data/repo'
-```  
+    - shell: "tree /data/repo"
+```
 
 ### Mounting
 
@@ -87,9 +86,9 @@ By default the repository is mounted to /data/repo directory. You can control it
 
 ## Fetching a Secured Git Repository
 
-### Usinga Token from A Secret
+### Using a Token from a Secret
 
-You may provide the Git token and username either as plain-text, or via the tokenFrom and usernameFrom clauses that are the same as native Kubernetes env.*.valueFrom.
+You may provide the Git token and username either as plain-text, or via the tokenFrom and usernameFrom clauses that are the same as native Kubernetes env.\*.valueFrom.
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -99,14 +98,14 @@ metadata:
 spec:
   content:
     git:
-      uri: 'https://github.com/kubeshop/testkube'
+      uri: "https://github.com/kubeshop/testkube"
       tokenFrom:
         secretKeyRef:
-          name: 'private-repo-secret-token'
-          key: 'token'
+          name: "private-repo-secret-token"
+          key: "token"
 
   steps:
-  - shell: 'tree /data/repo'
+    - shell: "tree /data/repo"
 ```
 
 ## Using Multiple Steps
@@ -123,22 +122,22 @@ metadata:
 spec:
   content:
     git:
-      uri: 'https://github.com/kubeshop/testkube'
-      revision: 'main'
+      uri: "https://github.com/kubeshop/testkube"
+      revision: "main"
       paths:
-      - 'test/cypress/executor-tests/cypress-12'
+        - "test/cypress/executor-tests/cypress-12"
 
   steps:
-  - name: 'Install dependencies'
-    run:
-      image: 'cypress/included:13.6.4'
-      workingDir: '/data/repo/test/cypress/executor-tests/cypress-12'
-      shell: 'npm install'
-  - name: 'Run test'
-    run:
-      image: 'cypress/included:13.6.4'
-      workingDir: '/data/repo/test/cypress/executor-tests/cypress-12'
-      shell: 'cypress run'
+    - name: "Install dependencies"
+      run:
+        image: "cypress/included:13.6.4"
+        workingDir: "/data/repo/test/cypress/executor-tests/cypress-12"
+        shell: "npm install"
+    - name: "Run test"
+      run:
+        image: "cypress/included:13.6.4"
+        workingDir: "/data/repo/test/cypress/executor-tests/cypress-12"
+        shell: "cypress run"
 ```
 
 ![Running Multiple Steps](../img/running-multiple-steps.png)
@@ -158,26 +157,25 @@ metadata:
 spec:
   content:
     git:
-      uri: 'https://github.com/kubeshop/testkube'
-      revision: 'main'
+      uri: "https://github.com/kubeshop/testkube"
+      revision: "main"
       paths:
-      - 'test/cypress/executor-tests/cypress-12'
+        - "test/cypress/executor-tests/cypress-12"
 
   container:
-    image: 'cypress/included:13.6.4'
-    workingDir: '/data/repo/test/cypress/executor-tests/cypress-12'
+    image: "cypress/included:13.6.4"
+    workingDir: "/data/repo/test/cypress/executor-tests/cypress-12"
     resources:
       requests:
-        memory: '2Gi'
+        memory: "2Gi"
         cpu: 2
 
   steps:
-  - name: 'Install dependencies'
-    shell: 'npm install'
-  - name: 'Run test'
-    shell: 'cypress run'
-```    
-
+    - name: "Install dependencies"
+      shell: "npm install"
+    - name: "Run test"
+      shell: "cypress run"
+```
 
 ### Notable Nuances
 
@@ -198,20 +196,20 @@ metadata:
   name: overview--example-7
 spec:
   steps:
-  - name: 'Run test'
-    content:
-      git:
-        uri: 'https://github.com/kubeshop/testkube'
-        revision: 'main'
-        paths:
-        - 'test/cypress/executor-tests/cypress-12'
-    container:
-      image: 'cypress/included:13.6.4'
-      workingDir: '/data/repo/test/cypress/executor-tests/cypress-12'
-    steps:
-    - name: 'Install dependencies'
-      shell: 'npm install'
-    - shell: 'cypress run'
+    - name: "Run test"
+      content:
+        git:
+          uri: "https://github.com/kubeshop/testkube"
+          revision: "main"
+          paths:
+            - "test/cypress/executor-tests/cypress-12"
+      container:
+        image: "cypress/included:13.6.4"
+        workingDir: "/data/repo/test/cypress/executor-tests/cypress-12"
+      steps:
+        - name: "Install dependencies"
+          shell: "npm install"
+        - shell: "cypress run"
 ```
 
 ### Content and Defaults
@@ -224,32 +222,33 @@ Defaults configured in the step will work similarly to top-level defaults but wi
 
 ### Optional Steps
 
-You can add **optional:true** for the step, so that step will not effect the outcome of the orchestration.
+You can add `optional: true` for the step, so that step will not effect the outcome of the orchestration.
 
-```yaml
+```yaml {8}
 apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata:
   name: overview--example-8
 spec:
   steps:
-  - name: 'Step 1'
-    optional: true
-    shell: exit 1
-  - name: 'Step 2'
-    negative: true
-    shell: exit 1
-  - name: 'Step 3'
-    negative: true
-    shell: exit 0
-  - name: 'Step 4'
-    shell: echo hello
-  - name: 'Step 5'
-    condition: always
-    retry:
-      count: 3
-    shell: echo foo; exit 1
-```    
+    - name: "Step 1"
+      optional: true
+      shell: exit 1
+    - name: "Step 2"
+      negative: true
+      shell: exit 1
+    - name: "Step 3"
+      negative: true
+      shell: exit 0
+    - name: "Step 4"
+      shell: echo hello
+    - name: "Step 5"
+      condition: always
+      retry:
+        count: 3
+      shell: echo foo; exit 1
+```
+
 ### Conditional Steps
 
 By default, the next step will run only when the previous steps have succeeded. This can be controlled with the **condition** property.
@@ -268,9 +267,9 @@ It’s possible to automatically retry the step on a failure (or any other condi
 
 A part of the Git repository and regular commands, the Test Workflow can use some static files directly from the spec.
 
-These files are mounted from a ConfigMap automatically (unless, instead of content, there is **contentFrom** used with a similar schema as Kubernetes’ **env.*.valueFrom**).
+These files are mounted from a ConfigMap automatically (unless, instead of content, there is **contentFrom** used with a similar schema as Kubernetes’ **env.\*.valueFrom**).
 
-*When the path is relative, it will be mounted in the container’s working directory.*
+_When the path is relative, it will be mounted in the container’s working directory._
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -280,21 +279,22 @@ metadata:
 spec:
   content:
     files:
-    - path: /some/path
-      content: |
-        there is some content file
-        provided.
-    - path: another-file.txt
-      content: |
-        another content
+      - path: /some/path
+        content: |
+          there is some content file
+          provided.
+      - path: another-file.txt
+        content: |
+          another content
   steps:
-  - workingDir: /foo/bar
-    shell: |
-      echo "file 1:"
-      cat /some/path
-      echo "file 2:"
-      cat another-file.txt
+    - workingDir: /foo/bar
+      shell: |
+        echo "file 1:"
+        cat /some/path
+        echo "file 2:"
+        cat another-file.txt
 ```
+
 ![Static Files](../img/static-files.png)
 
 ## Artifacts
@@ -311,27 +311,28 @@ metadata:
 spec:
   content:
     git:
-      uri: 'https://github.com/kubeshop/testkube'
+      uri: "https://github.com/kubeshop/testkube"
       paths:
-      - 'test/playwright/executor-tests/playwright-project'
+        - "test/playwright/executor-tests/playwright-project"
 
   container:
-    image: 'mcr.microsoft.com/playwright:v1.32.3'
-    workingDir: '/data/repo/test/playwright/executor-tests/playwright-project'
+    image: "mcr.microsoft.com/playwright:v1.32.3"
+    workingDir: "/data/repo/test/playwright/executor-tests/playwright-project"
     resources:
       requests:
-        memory: '2Gi'
+        memory: "2Gi"
         cpu: 2
 
   steps:
-  - shell: 'npm ci'
-  - shell: 'npx playwright test --workers 2 --reporter html'
-  - condition: always
-    artifacts:
-      paths:
-      - 'playwright-report/**/*'
+    - shell: "npm ci"
+    - shell: "npx playwright test --workers 2 --reporter html"
+    - condition: always
+      artifacts:
+        paths:
+          - "playwright-report/**/*"
 ```
-![Artifacts](../img/artifacts.png)  
+
+![Artifacts](../img/artifacts.png)
 
 ## Test Suite Like Runs
 
@@ -348,16 +349,16 @@ metadata:
   name: overview--example-11
 spec:
   steps:
-  - execute:
-      tests:
-      - name: 'example-test'
-      workflows:
-      - name: 'overview--example-3'
-      - name: 'overview--example-5'
-      - name: 'overview--example-8'
+    - execute:
+        tests:
+          - name: "example-test"
+        workflows:
+          - name: "overview--example-3"
+          - name: "overview--example-5"
+          - name: "overview--example-8"
 ```
 
-![Dependent Tests](../img/dependent-tests.png) 
+![Dependent Tests](../img/dependent-tests.png)
 
 ## Job/Pod Configuration
 
@@ -374,9 +375,9 @@ metadata:
 spec:
   job:
     labels:
-      job-label: 'foobar'
+      job-label: "foobar"
     annotations:
-      this.is.important: false    
+      this.is.important: false
     namespace: "default"
 ```
 
@@ -392,36 +393,11 @@ metadata:
 spec:
   job:
     labels:
-      job-label: 'foobar'
+      job-label: "foobar"
   pod:
     labels:
-      pod-label: 'barfoo'
-    serviceAccountName: 'testkube-api-server'
+      pod-label: "barfoo"
+    serviceAccountName: "testkube-api-server"
     imagePullSecrets:
-    - name: 'dockerhub-secret'
+      - name: "dockerhub-secret"
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

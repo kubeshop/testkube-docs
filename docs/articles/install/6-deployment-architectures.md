@@ -5,7 +5,7 @@ Testkube contains two sub-systems:
 - A **Control Plane** which includes the Dashboard, Storage for Results/Artifacts, Cluster Federation, etc
 - An **Agent** running in your cluster that manages Testkube resources, runs tests, gathers results, etc.
 
-The two sub-systems can be deployed in variety of ways to give flexibility into where your tests 
+The two sub-systems can be deployed in variety of ways to give flexibility into where your tests
 are executed and where test logs and artifacts are stored.
 
 A more detailed overview is available in the [Architecture Reference](../architecture) document.
@@ -34,7 +34,7 @@ Your proprietory code never touches our servers, only test logs and artifacts wi
 
 A Testkube On-Prem variant which has the control plane in one namespace with multiple agents in other namespaces or clusters. You will create an environment for each of your clusters.
 
-To deploy this you will first want to [deploy a control plane without an agent][deploy-minimal] and afterwards [deploy an agent that will join Testkube][deploy-agent].
+To deploy this you will first want to [deploy a control plane without an agent][deploy-minimal] and afterwards [deploy an agent that joins Testkube][deploy-agent].
 
 ![Deployment with federated agents](../../img/architecture-federated.jpeg)
 

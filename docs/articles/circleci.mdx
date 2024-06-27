@@ -1,8 +1,4 @@
-import LegacyWarning from '../articles/_legacy-warning.mdx';
-
 # Testkube CircleCI
-
-<LegacyWarning />
 
 The Testkube CircleCI integration facilitates the installation of Testkube and allows the execution of any [Testkube CLI](https://docs.testkube.io/cli/testkube) command within a CircleCI pipeline. This integration can be seamlessly incorporated into your CircleCI repositories to enhance your CI/CD workflows.
 The integration offers a versatile approach to align with your pipeline requirements and is compatible with Testkube Pro, Testkube Pro On-Prem, and the open-source Testkube platform. It enables CircleCI users to leverage the powerful features of Testkube directly within their CI/CD pipelines, ensuring efficient and flexible test execution.
@@ -42,7 +38,7 @@ workflows:
       - run-tests
 ```
 
-It is recommended that sensitive values should never be stored as plaintext in workflow files, but rather as [project variables](https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project).  Secrets can be configured at the organization or project level and allow you to store sensitive information in CircleCI.
+It is recommended that sensitive values should never be stored as plaintext in workflow files, but rather as [project variables](https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project). Secrets can be configured at the organization or project level and allow you to store sensitive information in CircleCI.
 
 ```yaml
 version: 2.1
@@ -65,11 +61,12 @@ workflows:
     jobs:
       - run-tests
 ```
+
 ## Testkube Core OSS
 
 ### How to configure Testkube CLI action for TK OSS and run a test
 
-To connect to the self-hosted instance, you need to have **kubectl** configured for accessing your Kubernetes cluster and pass an optional namespace, if Testkube is not deployed in the default **testkube** namespace. 
+To connect to the self-hosted instance, you need to have **kubectl** configured for accessing your Kubernetes cluster and pass an optional namespace, if Testkube is not deployed in the default **testkube** namespace.
 
 If a test is already created, you can run it using the command `testkube run test test-name -f` . However, if you need to create a test in this workflow, please add a creation command, e.g.: `testkube create test --name test-name --file path_to_file.json`.
 
@@ -84,7 +81,7 @@ jobs:
       - image: kubeshop/testkube-cli
     working_directory: /.testkube
     steps:
-      - run: 
+      - run:
           name: "Export kubeconfig"
           command: |
             echo $KUBECONFIGFILE > /.testkube/tmp/kubeconfig/config
@@ -107,6 +104,7 @@ The steps to connect to your Kubernetes cluster differ for each provider. You sh
 ### How to configure Testkube CLI action for TK OSS and run a test
 
 This workflow establishes a connection to the EKS cluster and creates and runs a test using TK CLI. In this example we also use CircleCI variables not to reveal sensitive data. Please make sure that the following points are satisfied:
+
 - The **_AwsAccessKeyId_**, **_AwsSecretAccessKeyId_** secrets should contain your AWS IAM keys with proper permissions to connect to EKS cluster.
 - The **_AwsRegion_** secret should contain the AWS region where EKS is.
 - Tke **EksClusterName** secret points to the name of the EKS cluster you want to connect.
@@ -133,7 +131,7 @@ jobs:
       - image: kubeshop/testkube-cli
     working_directory: /.testkube
     environment:
-        NAMESPACE: custom-testkube
+      NAMESPACE: custom-testkube
     steps:
       - run:
           name: "Run Testkube Test on EKS"
@@ -152,12 +150,12 @@ workflows:
             - setup-aws
 ```
 
-### How to connect to GKE (Google Kubernetes Engine) cluster and run a test 
+### How to connect to GKE (Google Kubernetes Engine) cluster and run a test
 
 This example connects to a k8s cluster in Google Cloud then creates and runs a test using Testkube CircleCI. Please make sure that the following points are satisfied:
+
 - The **_GKE Sevice Account_** should already be created in Google Cloud and added to CircleCI variables along with **_GKE Project_** value.
 - The **_GKE Cluster Name_** and **_GKE Zone_** can be added as environment variables in the workflow.
-
 
 ```yaml
 version: 2.1

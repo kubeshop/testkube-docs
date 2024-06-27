@@ -24,16 +24,6 @@ testkube-operator:
   enabled: false
 ```
 
-## Connecting a standalone agent to join Testkube
-
-If you started Testkube as a standalone agent and you decided to connect it to a control plane, you can connect is by running the following command which will guide you through the migration process. All test definitions will stay the same, however, historical test results data or artifacts wont be copied to the control plane.
-
-```
-testkube pro connect
-```
-
-To complete the procedure, you will finally have to [set your CLI Context to talk to Testkube][cli-context].
-
 ## Deploy a control plane without an agent
 
 By default, Testkube will create an environment within the same namespace as the control plane.

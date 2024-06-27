@@ -3,7 +3,7 @@ import TabItem from "@theme/TabItem";
 
 # Testing a Sample Application
 
-In this getting started tutorial you will learn how to run tests on a sample application that resembles a real-life three-tier architecture.
+In this getting started tutorial you will learn how to run tests on a sample application with a three-tier architecture.
 
 You can find the application on GitHub in [this repository][sample-repo].
 The technologies and testing tools are a detail as the goal is to go over workflow features that you will likely run into while getting started yourself.
@@ -80,7 +80,7 @@ metadata: ...
 spec:
   content:
     git:
-      uri: gitlab.example.com/tanuki/awesome_project.git
+      uri: gitlab.example.com/kubeshop/awesome_project.git
       username: <username>
       tokenFrom:
         secretKeyRef:
@@ -101,7 +101,7 @@ metadata: ...
 spec:
   content:
     git:
-      uri: gitlab.example.com/tanuki/awesome_project.git
+      uri: gitlab.example.com/kubeshop/awesome_project.git
       authType: header
       tokenFrom:
         secretKeyRef:
@@ -122,24 +122,19 @@ metadata: ...
 spec:
   content:
     git:
-      uri: gitlab.example.com/tanuki/awesome_project.git
-    content:
-      files:
-        - path: /root/.ssh/id_rsa
-          contentFrom:
-            secretKeyRef:
-              name: repo-creds
-              key: id_rsa
-        - path: /root/.ssh/id_rsa.pub
-          contentFrom:
-            secretKeyRef:
-              name: repo-creds
-              key: id_rsa.pub
-        - path: /root/.ssh/config
-          contentFrom:
-            secretKeyRef:
-              name: repo-creds
-              key: config
+      uri: gitlab.example.com/kubeshop/awesome_project.git
+      sshKeyFrom:
+        secretKeyRef:
+          name: git-credentials
+          key: ssh-key
+      # sshKey: |
+      #   -----BEGIN OPENSSH PRIVATE KEY-----
+      #   b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+      #   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+      #   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+      #   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+      #   Py55nRNObUBBaG/XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX=
+      #   -----END OPENSSH PRIVATE KEY-----
 ```
 
 </TabItem>

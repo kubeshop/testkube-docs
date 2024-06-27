@@ -1,8 +1,4 @@
-import LegacyWarning from '../articles/_legacy-warning.mdx';
-
 # Gitops Testing with ArgoCD
-
-<LegacyWarning />
 
 The following is a step-by-step walkthrough to test the automated application deployment and execution of Postman collections in a local Minikube cluster.
 
@@ -14,6 +10,7 @@ Let’s start with setting things up for our GitOps-powered testing machine!
 
 If you haven't installed Testkube in your cluster yet, visit the [Getting Started guide](./getting-started) for a walkthrough on installing Testkube.
 ‍
+
 ### 2. Install ArgoCD.
 
 Follow the [ArgoCD Installation Guide](https://argo-cd.readthedocs.io/en/stable/getting_started/).
@@ -126,7 +123,7 @@ You can see an example of how the repository should look [here](https://github.c
 
 ### 5. Configure ArgoCD to use the Testkube plugin.
 
-To get ArgoCD to use Testkube, we need to write a Config Management [plugin](https://argo-cd.readthedocs.io/en/stable/operator-manual/config-management-plugins/#configmap-plugin). 
+To get ArgoCD to use Testkube, we need to write a Config Management [plugin](https://argo-cd.readthedocs.io/en/stable/operator-manual/config-management-plugins/#configmap-plugin).
 To do so, please nest the plugin config file in a `ConfigMap` manifest under the `plugin.yaml` key.
 
 ```yaml title="argocd-plugins.yaml
@@ -155,7 +152,8 @@ And apply it with the following command:
 ```sh
 kubectl apply -f argocd-plugins.yaml
 ```
-As you can see here, we’re using the command `testkube generate tests-crds` which creates the Custom Resources (manifests) that ArgoCD will then add to our cluster. 
+
+As you can see here, we’re using the command `testkube generate tests-crds` which creates the Custom Resources (manifests) that ArgoCD will then add to our cluster.
 
 ### 6. Patch ArgoCD's deployment
 
@@ -170,22 +168,22 @@ spec:
   template:
     spec:
       containers:
-      - name: testkube
-        command: [/var/run/argocd/argocd-cmp-server]
-        image: kubeshop/testkube-argocd:latest
-        securityContext:
-          runAsNonRoot: true
-          runAsUser: 999
-        volumeMounts:
-          - mountPath: /var/run/argocd
-            name: var-files
-          - mountPath: /home/argocd/cmp-server/plugins
-            name: plugins
-          - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-            subPath: plugin.yaml
-            name: argocd-cm-plugin
-          - mountPath: /tmp
-            name: cmp-tmp
+        - name: testkube
+          command: [/var/run/argocd/argocd-cmp-server]
+          image: kubeshop/testkube-argocd:latest
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 999
+          volumeMounts:
+            - mountPath: /var/run/argocd
+              name: var-files
+            - mountPath: /home/argocd/cmp-server/plugins
+              name: plugins
+            - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+              subPath: plugin.yaml
+              name: argocd-cm-plugin
+            - mountPath: /tmp
+              name: cmp-tmp
       volumes:
         - configMap:
             name: argocd-cm-plugin
@@ -208,19 +206,19 @@ Create the file that will contain the ArgoCD application.
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
- name: testkube-tests
- namespace: argocd
+  name: testkube-tests
+  namespace: argocd
 spec:
- project: default
- source:
-   repoURL: https://github.com/USERNAME/testkube-argocd.git
-   targetRevision: HEAD
-   path: postman-collections
-   plugin:
-     name: "testkube-v1.0"
- destination:
-   server: https://kubernetes.default.svc
-   namespace: testkube
+  project: default
+  source:
+    repoURL: https://github.com/USERNAME/testkube-argocd.git
+    targetRevision: HEAD
+    path: postman-collections
+    plugin:
+      name: "testkube-v1.0"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: testkube
 ```
 
 Notice that we have defined the path `postman-collections` which is the test folder with our Postman collections from the steps earlier. With Testkube you can use multiple test executors like `curl`, for example, so it is convenient to have a folder for each. We have also defined the `.destination.namespace` to be `testkube`, which is where the tests should be deployed in our cluster.
@@ -238,17 +236,13 @@ On ArgoCD’s dashboard, we will now see the newly created application. Let’s 
 
 ![ArgoCD Testkube Tests](../img/argocd-dashbord.png)
 
-
 And now click on `Sync` to see your tests created.
 
-
 ![Sync Testing](../img/argocd-sync.png)
-
 
 Voilà! Our test collection is created and managed by ArgoCD with every new test created and updated in the GitHub repository containing the tests!
 
 ![Test Management with ArgoCD](../img/argocd-synced-tests.png)
-
 
 ### 9. Run ad-hoc tests from the CLI.
 
@@ -260,16 +254,13 @@ testkube get tests
 
 You should see your deployed test artifacts:
 
-
 ![Deployed Artifacts](../img/list-tests-cli.png)
-
 
 To run those tests execute the following command:
 
 ```sh
 testkube run test hello-kubernetes
 ```
-
 
 ‍
 The test execution will start in the background. Copy the command from the image below to check the result of the execution of the test:
@@ -282,7 +273,6 @@ $ testkube get execution EXECUTION_ID
 
 ‍You should see that the tests have run successfully, as in the image below.
 
-
 ![Viewing Executed Tests](../img/cli-tests-results.png)
 
 ### 10. See test results in the Testkube Pro dashboard.
@@ -293,11 +283,9 @@ You can also see the results of your tests in a nice dashboard. Open the Testkub
 testkube dashboard
 ```
 
-
 And you will be able to see the results of the execution in the Executions tab as seen in the image below:
 
 ![Test Execution Dashboard](../img/test-executions-ui.png)
-
 
 We now have an automated test deployment and execution pipeline based on GitOps principles!
 
