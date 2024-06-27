@@ -7,7 +7,7 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: enterprise-api/1.10.7
+  version: enterprise-api/1.10.14
 paths:
   /organizations/{id}/environments/{environmentID}/features:
     get:
@@ -17,6 +17,23 @@ paths:
       responses:
         '200':
           $ref: './components.yaml#/components/responses/EnvironmentFeatures'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    patch:
+      summary: Patch environment features
+      description: Endpoint for updating environment features
+      operationId: patchEnvironmentFeatures
+      requestBody:
+        $ref: './components.yaml#/components/requestBodies/EnvironmentFeatures'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/NoBody'
         '400':
           $ref: './components.yaml#/components/responses/BadRequestError'
         '401':

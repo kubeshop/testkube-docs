@@ -7,7 +7,7 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: enterprise-api/1.10.7
+  version: enterprise-api/1.10.14
 paths:
   /organizations/{id}/environments/{environmentId}/agent/test-workflow-with-executions:
     get:
