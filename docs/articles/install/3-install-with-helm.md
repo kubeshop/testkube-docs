@@ -1,6 +1,7 @@
 # Helm configuration
 
-The Testkube Helm Chart lets you set up a customized Testkube for your environment.
+The Testkube Helm Chart lets you set up a customized Testkube tailored to your environment.
+The Chart will deploy a control plane and agent. You can learn more about the deployment architectures [here][deployment-architecture].
 
 ## Prerequisites
 
@@ -95,7 +96,7 @@ In order to use custom certificates, first a secret needs to be created with the
 
 If certificate-based authentication is required, the custom certificates need to be configured in the following places:
 
-- Enterprise API
+- Control Plane API
   - If `MINIO_ENDPOINT` is set to an exposed URL, then the following Helm values need to be configured:
     - The following Helm parameter needs to be enabled to inject the custom certificate into MinIO `testkube-cloud-api.minio.certSecret.enabled: true`.
     - If the certificate is not self-signed, the CA cert needs to be injected also by enabling the Helm parameter `testkube-cloud-api.minio.mountCACertificate: true`.
@@ -103,7 +104,7 @@ If certificate-based authentication is required, the custom certificates need to
   - If `MINIO_ENDPOINT` uses the Kubernetes DNS record (`testkube-enterprise-minio.<namespace>.svc.cluster.local:9000`), `AGENT_STORAGE_HOSTNAME` should be set to point to the exposed storage URL.
 - Agent
   - Agent API
-    - If the Enterprise API is configured to use certificate-based authentication or is using a certificate signed by a custom CA, the Agent API needs to be configured to use the same certificates by pointing `testkube-api.cloud.tls.certificate.secretRef` to the Kubernetes secret which contains the certificates.
+    - If the Control Plane's API is configured to use certificate-based authentication or is using a certificate signed by a custom CA, the Agent API needs to be configured to use the same certificates by pointing `testkube-api.cloud.tls.certificate.secretRef` to the Kubernetes secret which contains the certificates.
     - Custom certificate verification can also be skipped by setting `testkube-api.cloud.tls.skipVerify: true`.
   - Storage
     - The following Helm parameter needs to be enabled to inject the custom certificate into MinIO `testkube-api.storage.certSecret.enabled: true`.
@@ -192,3 +193,4 @@ Check out [this article][advanced] to learn more about our advanced settings. Yo
 [secret-license]: /articles/install/install-with-helm#testkube-license
 [advanced-bootstrap]: /articles/install/advanced-install#organization-management
 [ss-license]: /articles/install/install-with-helm#testkube-license
+[deployment-architecture]: /articles/install/deployment-architectures
