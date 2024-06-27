@@ -273,8 +273,8 @@ const redirects = [
     to: "/articles/generate-test-crds",
   },
   {
-    from: "/guides/logging",
-    to: "/articles/logging",
+    from: ["/guides/logging", "/articles/logging"],
+    to: "/articles/install/standalone-agent",
   },
   {
     from: "/guides/uninstall",
@@ -407,10 +407,7 @@ const redirects = [
     to: "/articles/upgrade",
   },
   {
-    from: [
-      "/testkube-enterprise/articles/auth",
-      "/articles/install/auth",
-    ],
+    from: ["/testkube-enterprise/articles/auth", "/articles/install/auth"],
     to: "/testkube-pro-on-prem/articles/auth",
   },
   {
@@ -445,7 +442,11 @@ const redirects = [
   {
     from: "/articles/install/reference-architectures",
     to: "/articles/install/deployment-architectures",
-  }
+  },
+  {
+    from: "/articles/artifact-storage",
+    to: "/articles/install/standalone-agent",
+  },
 ];
 
 module.exports = redirects;

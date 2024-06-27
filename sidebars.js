@@ -98,12 +98,6 @@ const sidebars = {
               label: "Using an external MongoDB",
               id: "articles/testkube-dependencies",
             },
-            { type: "doc", label: "Log Collection", id: "articles/logging" },
-            {
-              type: "doc",
-              label: "Artifact Storage",
-              id: "articles/artifact-storage",
-            },
           ],
         },
       ],
