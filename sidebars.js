@@ -52,11 +52,6 @@ const sidebars = {
             "articles/install/multi-cluster",
             "articles/install/standalone-agent",
             "articles/install/quickstart-no-k8s",
-            {
-              type: "doc",
-              label: "Migrating from OSS",
-              id: "testkube-pro/articles/transition-from-oss",
-            },
             "articles/install/uninstall",
             {
               type: "doc",
@@ -65,18 +60,8 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "OpenShift on GCP",
-              id: "articles/install/openshift",
-            },
-            {
-              type: "doc",
               label: "S3 with IAM Authentication",
               id: "articles/install/s3-storage",
-            },
-            {
-              type: "doc",
-              label: "Deploying on AWS",
-              id: "articles/deploying-in-aws",
             },
             {
               type: "doc",

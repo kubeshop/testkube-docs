@@ -237,10 +237,6 @@ const redirects = [
     to: "/articles/testkube-dashboard",
   },
   {
-    from: "/guides/going-to-production/aws",
-    to: "/articles/deploying-in-aws",
-  },
-  {
     from: "/guides/cicd",
     to: "/articles/cicd-overview",
   },
@@ -444,7 +440,12 @@ const redirects = [
     to: "/articles/install/deployment-architectures",
   },
   {
-    from: "/articles/artifact-storage",
+    from: [
+      "/articles/artifact-storage",
+      "/articles/install/openshift",
+      "/articles/deploying-in-aws",
+      "/guides/going-to-production/aws",
+    ],
     to: "/articles/install/standalone-agent",
   },
 ];

@@ -90,6 +90,18 @@ testkube uninstall
 helm delete --namespace testkube testkube kubeshop/testkube
 ```
 
+### Connecting to a control plane
+
+In case you decide that you want to go beyond a standalone agent, you can connect it to a Testkube control plane.
+The following command which will guide you through the migration process.
+All test definitions will stay the same, however, historical test results data or artifacts wont be copied to the control plane.
+
+```
+testkube pro connect
+```
+
+To complete the procedure, you will finally have to [set your CLI Context to talk to Testkube][cli-context].
+
 ## Advanced
 
 ### Log Storage
