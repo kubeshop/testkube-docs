@@ -84,7 +84,7 @@ See [upgrade][upgrade] for instructions on how to upgrade the standalone agent.
 testkube uninstall
 ```
 
-### With Helm
+#### With Helm
 
 ```sh
 helm delete --namespace testkube testkube kubeshop/testkube
