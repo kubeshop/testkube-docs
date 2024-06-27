@@ -231,7 +231,7 @@ Once the cluster is up and running we need to deploy the AWS Load Balancer Contr
 
 Another important point is [ExternalDNS](https://github.com/kubernetes-sigs/external-dns). It is not compulsory to deploy it into your cluster, but it helps you dynamically manage your DNS records via k8s resources.
 
-And last, but not least - install the Testkube CLI. You can download a binary file from our [installation](./install-cli) page. For how to deploy Testkube to your cluster with all the necessary changes, please see the next section.
+And last, but not least - install the Testkube CLI. You can download a binary file from our [installation][install-cli] page. For how to deploy Testkube to your cluster with all the necessary changes, please see the next section.
 
 :::caution
 
@@ -380,3 +380,4 @@ testkube-api:
 [upgrade]: /articles/upgrade
 [mongo-config]: https://github.com/bitnami/charts/tree/master/bitnami/mongodb#parameters
 [nats-config]: https://docs.nats.io/running-a-nats-service/nats-kubernetes/helm-charts
+[install-cli]: /articles/install/cli

@@ -86,7 +86,7 @@ const redirects = [
   },
   {
     from: "/FAQ",
-    to: "/articles/common-issues",
+    to: "/articles/install/faq",
   },
   {
     from: ["/integrations/testkube-automation", "/testkube-automation"],
@@ -140,7 +140,7 @@ const redirects = [
       "/articles/step1-installing-cli",
       "/getting-started/step1-installing-cli",
     ],
-    to: "/articles/install-cli",
+    to: "/articles/install/cli",
   },
   {
     from: "/concepts/tests/tests-running",
@@ -193,10 +193,6 @@ const redirects = [
   {
     from: "/concepts/dependencies",
     to: "/articles/testkube-dependencies",
-  },
-  {
-    from: "/concepts/common-issues",
-    to: "/articles/common-issues",
   },
   {
     from: "/concepts/test-sources",

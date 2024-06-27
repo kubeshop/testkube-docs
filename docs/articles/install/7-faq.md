@@ -16,7 +16,7 @@ Testkube without having a Kubernetes cluster at [Quickstart without Kubernetes](
 ## Do I have to have my own Kubernetes cluster to run Testkube in production
 
 Yes, the Testkube Agent always runs in your own cluster(s)/infrastructure for managing and executing your tests.
-The Control Plane containing the Dashboard can be hosted either by us or by you. Read more about the 
+The Control Plane containing the Dashboard can be hosted either by us or by you. Read more about the
 Testkube deployment architectures at [Deployment Architectures][deployment-architectures].
 
 ## Can I run Testkube in an air-gapped environment
@@ -31,9 +31,7 @@ or components to be tested.
 
 ## How do I expose Testkube to the Internet?
 
-To expose Testkube to the Internet, you will need to create an Ingress for both the Testkube API and the Testkube dashboard.
-
-Check the guides [here](../going-to-production.md) for different configurations.
+To expose Testkube to the Internet, you will need to create an Ingress for both the Testkube API and the Testkube dashboard. Check the installation instructions [here][install-ingress] for different configurations.
 
 ## Access the Service Under Test (SUT) Using Testkube
 
@@ -42,3 +40,4 @@ Check the guides [here](../going-to-production.md) for different configurations.
 
 [deployment-architectures]: /articles/install/deployment-architectures
 [migrate-oss]: /articles/migrate-from-oss
+[install-ingress]: /articles/install/install-with-helm#domain
