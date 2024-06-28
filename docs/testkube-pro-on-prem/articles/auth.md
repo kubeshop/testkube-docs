@@ -13,17 +13,23 @@ Testkube to use static users.
 
 ```yaml
 dex:
-    configTemplate:
-        additionalConfig: |
-            enablePasswordDB: true
-            staticPasswords:
-              - email: <user email>
-                hash: <bcrypt hash of user password>
-                username: <username>
+  configTemplate:
+    additionalConfig: |
+      enablePasswordDB: true
+      staticPasswords:
+        - email: <user email>
+          hash: <bcrypt hash of user password>
+          username: <username>
 ```
 
 Replace `<user email>`, `<bcrypt hash of user password>`, and `<username>` with
 the actual values for your user(s).
+
+The hash for your password can be optained as follows:
+
+```
+echo password | htpasswd -BinC 10 admin | cut -d: -f2
+```
 
 ### OIDC
 
@@ -51,34 +57,34 @@ performing a GET request to `<dex endpoint>/.well-known/openid-configuration`.
 
 ```yaml
 dex:
-    envVars:
-        - name: GOOGLE_CLIENT_ID
-          valueFrom:
-              secretKeyRef:
-                  name: <oidc-credentials-secret-name>
-                  key: <client-id-key>
-        - name: GOOGLE_CLIENT_SECRET
-          valueFrom:
-              secretKeyRef:
-                  name: <oidc-credentials-secret-name>
-                  key: <client-secret-key>
-    configTemplate:
-        additionalConfig: |
-        connectors:
-            - type: oidc
-              id: google
-              name: Google
-              config:
-                  # Canonical URL of the provider, also used for configuration discovery.
-                  # This value MUST match the value returned in the provider config discovery.
-                  #
-                  # See: https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig
-                  issuer: https://accounts.google.com
+  envVars:
+    - name: GOOGLE_CLIENT_ID
+      valueFrom:
+        secretKeyRef:
+          name: <oidc-credentials-secret-name>
+          key: <client-id-key>
+    - name: GOOGLE_CLIENT_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: <oidc-credentials-secret-name>
+          key: <client-secret-key>
+  configTemplate:
+    additionalConfig: |
+    connectors:
+      - type: oidc
+        id: google
+        name: Google
+        config:
+          # Canonical URL of the provider, also used for configuration discovery.
+          # This value MUST match the value returned in the provider config discovery.
+          #
+          # See: https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig
+          issuer: https://accounts.google.com
 
-                  # Connector config values starting with a "$" will read from the environment.
-                  clientID: $GOOGLE_CLIENT_ID
-                  clientSecret: $GOOGLE_CLIENT_SECRET
+          # Connector config values starting with a "$" will read from the environment.
+          clientID: $GOOGLE_CLIENT_ID
+          clientSecret: $GOOGLE_CLIENT_SECRET
 
-                  # Dex's issuer URL + "/callback"
-                  redirectURI: <dex endpoint>/callback
+          # Dex's issuer URL + "/callback"
+          redirectURI: <dex endpoint>/callback
 ```

@@ -1,6 +1,7 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import SimpleArtillery from "../../workflows/simple-artillery-workflow.md"
+import SimpleArtilleryFromTemplate from "../../workflows/simple-artillery-workflow-from-template.md"
 
 # Basic Artillery Example
 
@@ -23,3 +24,8 @@ The log output from the Artillery execution:
 
 </TabItem>
 </Tabs>
+
+## Basic Artillery from Template
+Below is an example workflow for executing the Artillery test using an official Testkube Template.
+
+<SimpleArtilleryFromTemplate/>

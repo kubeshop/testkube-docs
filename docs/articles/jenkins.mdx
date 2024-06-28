@@ -47,7 +47,7 @@ pipeline {
 
 ### How to configure Testkube CLI action for TK OSS and run a test workflow
 
-To connect to the self-hosted instance, you need to have **kubectl** configured for accessing your Kubernetes cluster, and pass an optional namespace, if Testkube is not deployed in the default **testkube** namespace. 
+To connect to the self-hosted instance, you need to have **kubectl** configured for accessing your Kubernetes cluster, and pass an optional namespace, if Testkube is not deployed in the default **testkube** namespace.
 
 If a test is already created, you can run it using the command `testkube run testworkflow TEST_WORKFLOW_NAME -f` . However, if you need to create a test in this workflow, please add a creation command, e.g.: `testkube create testworkflow -f EXAMPLE_FILE.yaml`.
 
@@ -125,9 +125,10 @@ pipeline {
 ### How to connect to GKE (Google Kubernetes Engine) cluster and run a test workflow
 
 This example connects to a k8s cluster in Google Cloud, creates and runs a test using Testkube Jenkins workflow. Please make sure that the following points are satisfied:
+
 - The **_GKE Sevice Account_** should be created prior in Google Cloud and added to Jenkins variables along with **_GKE Project_** value;
 - The **_GKE Cluster Name_** and **_GKE Zone_** can be added as environmental variables in the workflow.
-you'll need to create a Jenkinsfile. This Jenkinsfile should define the stages and steps necessary to execute the workflow
+  you'll need to create a Jenkinsfile. This Jenkinsfile should define the stages and steps necessary to execute the workflow
 
 ```groovy
 pipeline {

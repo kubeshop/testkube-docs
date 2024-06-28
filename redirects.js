@@ -86,7 +86,7 @@ const redirects = [
   },
   {
     from: "/FAQ",
-    to: "/articles/common-issues",
+    to: "/articles/install/faq",
   },
   {
     from: ["/integrations/testkube-automation", "/testkube-automation"],
@@ -140,7 +140,7 @@ const redirects = [
       "/articles/step1-installing-cli",
       "/getting-started/step1-installing-cli",
     ],
-    to: "/articles/install-cli",
+    to: "/articles/install/cli",
   },
   {
     from: "/concepts/tests/tests-running",
@@ -195,10 +195,6 @@ const redirects = [
     to: "/articles/testkube-dependencies",
   },
   {
-    from: "/concepts/common-issues",
-    to: "/articles/common-issues",
-  },
-  {
     from: "/concepts/test-sources",
     to: "/articles/test-sources",
   },
@@ -237,10 +233,6 @@ const redirects = [
     to: "/articles/testkube-dashboard",
   },
   {
-    from: "/guides/going-to-production/aws",
-    to: "/articles/deploying-in-aws",
-  },
-  {
     from: "/guides/cicd",
     to: "/articles/cicd-overview",
   },
@@ -273,8 +265,8 @@ const redirects = [
     to: "/articles/generate-test-crds",
   },
   {
-    from: "/guides/logging",
-    to: "/articles/logging",
+    from: ["/guides/logging", "/articles/logging"],
+    to: "/articles/install/standalone-agent",
   },
   {
     from: "/guides/uninstall",
@@ -407,10 +399,7 @@ const redirects = [
     to: "/articles/upgrade",
   },
   {
-    from: [
-      "/testkube-enterprise/articles/auth",
-      "/articles/install/auth",
-    ],
+    from: ["/testkube-enterprise/articles/auth", "/articles/install/auth"],
     to: "/testkube-pro-on-prem/articles/auth",
   },
   {
@@ -445,7 +434,16 @@ const redirects = [
   {
     from: "/articles/install/reference-architectures",
     to: "/articles/install/deployment-architectures",
-  }
+  },
+  {
+    from: [
+      "/articles/artifact-storage",
+      "/articles/install/openshift",
+      "/articles/deploying-in-aws",
+      "/guides/going-to-production/aws",
+    ],
+    to: "/articles/install/standalone-agent",
+  },
 ];
 
 module.exports = redirects;

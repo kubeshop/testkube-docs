@@ -22,12 +22,11 @@ spec:
       args:
       - --env
       - NON_CYPRESS_ENV=NON_CYPRESS_ENV_value
-      - --config
-      - video=true # video recording emabled
       env:
       - name: CYPRESS_CUSTOM_ENV
         value: CYPRESS_CUSTOM_ENV_value
     artifacts:
       paths:
         - 'cypress/videos/**/*'
+        - 'cypress/screenshots/**/*'
 ```

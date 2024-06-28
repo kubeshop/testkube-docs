@@ -1,29 +1,44 @@
 # Explore the Testkube Dashboard
 
-The Testkube Dashboard displays the current status of Tests and Test Suites executed in your environment.
+The Testkube Dashboard displays the current status of Tests executed in your environment.
 
-![Test List](../img/test-list-1.14.png)
+![Test Workflows Dashboard](../img/test-workflows-dashboard.png)
 
-![Test Suites List](../img/test-suite-list-1.14.png)
+Select any Test to see the recent executions and their details.
 
-After selecting Tests or Test Suites in the left bar, the list of recent runs is displayed. At the top of the list, a Search field and filters for Labels and Status make finding tests in a large list easier:
+The modal that opens has the following tabs:
 
-![Search & Filter](../img/search-filter-1.14.png)
+**Log Output:**
 
-Select any Test or Test Suite to see the recent executions and their statuses.
+![Workflows Log Output](../img/workflows-log-output.png)
 
-![Execution Status](../img/execution-status-1.14.png)
+**Artifacts:**
 
-The execution statistics of the chosen Test or Test Suite are at the top of the screen, along with a graph of success or failure for the executions.
+![Workflows Artifacts](../img/workflows-artifacts-tab.png)
 
-The **Recent executions** tab has the list of executions. A green checkmark denotes a successful execution, a red 'x' denotes a failed execution and circling dots denotes a current run of a Test or Test Suite.
+**Workflow:**
 
-![Recent executions](../img/recent-executions-1.14.png)
+![Workflows Code](../img/workflows-code.png)
+
+Closing the modal reveals additional details about the workflow.
+
+The **Overview** tab outlines the steps of the selected workflow.
+
+![Workflows Overview](../img/workflows-overview.png)
+
+
+The **Executions** tab has the list of executions. A green checkmark denotes a successful execution, a red 'x' denotes a failed execution and circling dots denotes a current run.
+
+![Executions](../img/workflows-execution.png)
+
+The **CI/CD Integration** tab shows any integrations used in the workflow.
+
+![CI/CD Integration](../img/workflows-cicd-integrations.png)
 
 The **CLI Commands** tab shows the commands used to perform the selected test:
 
-![CLI Commands](../img/CLI-commands-1.14.png)
+![CLI Commands](../img/workflows-cli-commands.png)
 
-Use the **Settings** to view or change the local settings of the Test or Test Suite.
+Use the **Settings** tab to view or change the local settings of the workflow.
 
-![Setting](../img/settings-1.14.png)
+![Workflows Settings](../img/workflows-settings.png)

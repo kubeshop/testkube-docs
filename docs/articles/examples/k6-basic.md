@@ -1,6 +1,7 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import SimpleK6 from "../../workflows/simple-k6-workflow.md"
+import SimpleK6FromTemplate from "../../workflows/simple-k6-workflow-from-template.md"
 
 # Basic K6 Example
 
@@ -39,3 +40,7 @@ Clicking the HTLM report opens it in your browser:
 </TabItem>
 </Tabs>
 
+## Basic K6 from Template
+Below is an example workflow for executing the K6 test using an official Testkube Template.
+
+<SimpleK6FromTemplate/>

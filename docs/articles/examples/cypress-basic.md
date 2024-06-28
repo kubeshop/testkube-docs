@@ -1,6 +1,7 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import SimpleCypress from "../../workflows/simple-cypress-workflow.md"
+import SimpleCypressFromTemplate from "../../workflows/simple-cypress-workflow-from-template.md"
 
 # Basic Cypress Framework Example
 
@@ -33,3 +34,7 @@ The uploaded report is available in the Artifacts tab:
 
 </Tabs>
 
+## Basic Cypress from Template
+Below is an example workflow for executing the Cypress project using an official Testkube Template.
+
+<SimpleCypressFromTemplate/>

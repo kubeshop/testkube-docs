@@ -1,20 +1,18 @@
 # Organization Management
 
-To manage your organization settings click "Manage Organization" from organizations drop-down menu:
+To manage your organization settings click "Organization Management" from organizations drop-down menu:
 
-![Organization Settings](../../img/org-settings.png)
+![Organization Management](../../img/organization-management.png)
 
-You can also create new organization. 
+You can also create new organizations from this menu. 
 
 ## Organization Settings
 
-To edit your organization settings, click an organization from the available options from menu on the left.
-
 ### Environments
 
-In the environments section you can see the list of your existing environments.
+In the environments section, you can see the list of your existing environments.
 
-![Existing Environments](../../img/existing-environments.png)
+![Existing Environments](../../img/existing-environments-062024.png)
 
 GREEN status means that your agent is connected successfully. 
 
@@ -26,56 +24,49 @@ testkube agent debug
 
 Run this on your cluster where the given agent is installed.
 
-Read more about [Environment Management](environment-management)
+Read more about [Environment Management](../articles/environment-management.md).
 
 ### Settings
 
-In settings you can remove your organization. Keep in mind that this operation can't be rolled back!
+In settings, you can update the name of the organization, set artifacts limits, or enable or disable AI Hints and Webhooks URL Masking.
 
-![Delete Organization](../../img/delete-org.png)
+![Organization Setting](../../img/organization-settings.png)
 
 
 ### Members
 
-For each organization you can define who has access and what kind of actions each member can use. 
+For each organization you can define who has access and which actions each member can use. 
 
-![Organization Members](../../img/org-members.png)
+![Organization Members](../../img/organization-members.png)
 
 
 There are 4 types of organization members: 
 
-* `owner` - Has access to all environments and organization settings, also can access billing details.
-* `admin` - Has access to all environments and organization settings.
-* `biller` - Has access to billing details only.
-* `member` - Has limited access to environments, access is defined by the roles assigned to given member. Member by default doesn't have any access, you need to [explicitly set it in the given environment](environment-management.md).
+* `Owner` - Has access to all environments and organization settings, also can access billing details.
+* `Admin` - Has access to all environments and organization settings.
+* `Member` - Has limited access to environments, access is defined by the roles assigned to given member. Member by default doesn't have any access, you need to [explicitly set it in the given environment](environment-management.md).
+* `Biller` - Has access to billing details only.
+
+### API Tokens
+
+API tokens allows running tests without linking the run to a specific account.
+
+![API Tokens](../../img/api-tokens.png)
 
 ### Usage & Billing
 
-#### Upgrading Testkube to the `PRO` Plan
+This section shows your current usage against the limits of your current plan.
 
-![PRO Plan Billing](../../img/pro-plan-billing.png)
+![Usage](../../img/usage.png)
 
-#### `Free` Plan Usage 
+For more details about the Testkube offerings, check our [pricing page](https://testkube.io/pricing).
 
-All limits are calculated monthly. On the 'Free' plan, you have: 
-- 600 executions 
-- 2 environments
-- 2GB artifacts storage
-- 3 Users
+![Usage Limits](../../img/usage-billing.png)
 
-![Free Plan](../../img/free-plan.png)
+If you are using the cloud version of Testkube you can upgrade your plan here. 
+Once on the commercial plan, you will automatically be charged for additional 
+users and environments in line with the current [Pricing Model](https://testkube.io/pricing).
 
-#### `PRO` Plan Usage
 
-Subscribing to the `PRO` plan provides: 
-- 5000 test executions
-- **Unlimited** environments
-- **128GB** of artifacts storage
-- **25** users
-
-If you need more - just use Testkube - and you'll be charged for additional usage.
-For pricing details, visit your subscription by clicking the "Manage subscription" button. 
-
-![Manage Subcriptions](../../img/manage-subscriptions.png)
-
+![Upgrade plan](../../img/upgrade-plan.png)
 

@@ -1,5 +1,7 @@
 # Standalone agent
 
+## Overview
+
 Testkube standalone agent includes our full test execution and orchestration engine.
 This means that all CRDs are available, you can apply triggers and run test workflows, then afterwards view the resulting status, logs and artifacts.
 
@@ -17,19 +19,23 @@ You can install with the CLI or Helm. The following components will be installed
 Once installed you can verify your installation and check that Testkube is up and running with
 `kubectl get all -n testkube`. Once validated, you're ready to unleash the full potential of Testkube in your environment. Testkube OSS is here to help you to powering your development and testing workflows seamlessly.
 
-## Install with CLI
+## Basics
+
+### Installing
+
+#### With the CLI
 
 You can install the standalone agent by executing the following command.
 By default it will install within the `testkube` namespace for your
 current Kubernetes context.
 
-```
+```sh
 testkube init
 ```
 
-## Install with Helm
+#### With Helm
 
-### 1. Add the Kubeshop Helm repository.
+Add the Kubeshop Helm repository:
 
 ```sh
 helm repo add kubeshop https://kubeshop.github.io/helm-charts
@@ -39,100 +45,334 @@ If this repo already exists, run `helm repo update` to retrieve
 the `latest` versions of the packages. You can then run `helm search repo
 testkube` to see the charts.
 
-### 2. Install the `testkube` chart.
+Install the Helm Chart with defaults:
 
 ```sh
-helm install --create-namespace my-testkube kubeshop/testkube
+helm upgrade --install \
+  --create-namespace \
+  --namespace testkube \
+  testkube kubeshop/testkube
 ```
 
-:::note
 By default, the namespace for the installation will be `testkube`. If the `testkube` namespace does not exist, it will be created for you.
 
-If you wish to install into a different namespace, please use following command:
+Alternatively, you can customize by fetching the default values.yaml and modifying it afterwards:
 
 ```sh
-helm install --namespace namespace_name my-testkube kubeshop/testkube
+helm show values kubeshop/testkube > values.yaml
 ```
 
-To uninstall the `testkube` chart if it was installed into the default namespace:
+In this case you can install the Helm Chart as follows:
 
 ```sh
-helm delete my-testkube kubeshop/testkube
+helm upgrade --install \
+  --create-namespace \
+  --namespace testkube \
+  -f values.yaml \
+  testkube kubeshop/testkube
 ```
 
-And from a namespace other than `testkube`:
-
-```sh
-helm delete --namespace namespace_name my-testkube kubeshop/testkube
-```
-
-:::
-
-#### Helm Properties
-
-The following Helm defaults are used in the `testkube` chart:
-
-| Parameter                              | Is optional | Default                              | Additional details             |
-| -------------------------------------- | ----------- | ------------------------------------ | ------------------------------ |
-| mongodb.auth.enabled                   | yes         | false                                |
-| mongodb.service.port                   | yes         | "27017"                              |
-| mongodb.service.portName               | yes         | "mongodb"                            |
-| mongodb.service.nodePort               | yes         | true                                 |
-| mongodb.service.clusterIP              | yes         | ""                                   |
-| mongodb.nameOverride                   | yes         | "mongodb"                            |
-| mongodb.fullnameOverride               | yes         | "testkube-mongodb"                   |
-| testkube-api.image.repository          | yes         | "kubeshop/testkube-api-server"       |
-| testkube-api.image.pullPolicy          | yes         | "Always"                             |
-| testkube-api.image.tag                 | yes         | "latest"                             |
-| testkube-api.service.type              | yes         | "NodePort"                           |
-| testkube-api.service.port              | yes         | 8088                                 |
-| testkube-api.mongodb.dsn               | yes         | "mongodb://testkube-mongodb:27017"   |
-| testkube-api.nats.uri                  | yes         | "nats://testkube-nats"               |
-| testkube-api.telemetryEnabled          | yes         | true                                 |
-| testkube-api.storage.endpoint          | yes         | testkube-minio-service-testkube:9000 |
-| testkube-api.storage.accessKeyId       | yes         | minio                                |
-| testkube-api.storage.accessKey         | yes         | minio123                             |
-| testkube-api.storage.scrapperEnabled   | yes         | true                                 |
-| testkube-api.slackToken                | yes         | ""                                   |
-| testkube-api.slackSecret               | yes         | ""                                   |
-| testkube-api.slackConfig               | yes         | ""                                   |
-| testkube-api.jobServiceAccountName     | yes         | ""                                   |
-| testkube-api.logs.storage              | no          | "minio"                              |
-| testkube-api.logs.bucket               | no          | "testkube-logs"                      |
-| testkube-api.cdeventsTarget            | yes         | ""                                   |
-| testkube-api.dashboardUri              | yes         | ""                                   |
-| testkube-api.clusterName               | yes         | ""                                   |
-| testkube-api.storage.compressArtifacts | yes         | true                                 |
-| testkube-api.enableSecretsEndpoint     | yes         | false                                | [Learn more][secrets-endpoint] |
-| testkube-api.disableMongoMigrations    | yes         | false                                |
-| testkube-api.enabledExecutors          | yes         | ""                                   |
-| testkube-api.disableSecretCreation     | yes         | false                                | [Learn more][secrets-creation] |
-| testkube-api.defaultStorageClassName   | yes         | ""                                   |
-| testkube-api.enableK8sEvents           | yes         | true                                 |
-
-> For more configuration parameters of a `MongoDB` chart please visit [the MongoDB docs][mongo-config].
-
-> For more configuration parameters of an `NATS` chart please visit [the NATS docs][nats-config].
-
-:::note
-
-Please note that we use **global** parameters in our `values.yaml`:
-
-```
-global:
-  imageRegistry: ""
-  imagePullSecrets: []
-  labels: {}
-  annotations: {}
-```
-
-They override all sub-chart values for the image parameters if specified.
-
-:::
-
-## Upgrading
+### Upgrading
 
 See [upgrade][upgrade] for instructions on how to upgrade the standalone agent.
+
+### Uninstalling
+
+#### With the CLI
+
+```sh
+testkube uninstall
+```
+
+#### With Helm
+
+```sh
+helm delete --namespace testkube testkube kubeshop/testkube
+```
+
+### Connecting to a control plane
+
+In case you decide that you want to go beyond a standalone agent, you can connect it to a Testkube control plane.
+The following command which will guide you through the migration process.
+All test definitions will stay the same, however, historical test results data or artifacts wont be copied to the control plane.
+
+```
+testkube pro connect
+```
+
+To complete the procedure, you will finally have to [set your CLI Context to talk to Testkube][cli-context].
+
+## Advanced
+
+### Log Storage
+
+Testkube can be configured to use different storage for test logs output that can be specified in the Helm values.
+
+```yaml
+## Logs storage for Testkube API.
+logs:
+  ## where the logs should be stored there are 2 possible valuse : minio|mongo
+  storage: "minio"
+  ## if storage is set to minio then the bucket must be specified, if minio with s3 is used make sure to use a unique name
+  bucket: "testkube-logs"
+```
+
+When [mongo](https://www.mongodb.com/kubernetes) is specified, logs will be stored in a separate collection so the execution handling performance is not affected.
+
+When [minio](https://min.io/) is specified, logs will be stored as separate files in the configured bucket of the MinIO instance or the S3 bucket if MinIO is configured to work with S3.
+
+### Artifact Storage
+
+Testkube allows you to save supported files generated by your tests, which we call **Artifacts**.
+
+The engine will scrape the files and store them in [Minio](https://min.io/) in a bucket named by execution ID and collect all files
+that are stored in the location specific to each workflow.
+
+The available configuration parameters in Helm charts are:
+
+| Parameter                        | Is optional | Default                              | Default                                               |
+| -------------------------------- | ----------- | ------------------------------------ | ----------------------------------------------------- |
+| testkube-api.storage.endpoint    | yes         | testkube-minio-service-testkube:9000 | URL of the S3 bucket                                  |
+| testkube-api.storage.accessKeyId | yes         | minio                                | Access Key ID                                         |
+| testkube-api.storage.accessKey   | yes         | minio123                             | Access Key                                            |
+| testkube-api.storage.location    | yes         |                                      | Region                                                |
+| testkube-api.storage.token       | yes         |                                      | S3 Token                                              |
+| testkube-api.storage.SSL         | yes         | false                                | Indicates whether SSL communication is to be enabled. |
+
+The API Server accepts the following environment variables:
+
+```sh
+STORAGE_ENDPOINT
+STORAGE_BUCKET
+STORAGE_ACCESSKEYID
+STORAGE_SECRETACCESSKEY
+STORAGE_LOCATION
+STORAGE_REGION
+STORAGE_TOKEN
+STORAGE_SSL
+```
+
+Which can be set while installing with Helm:
+
+```sh
+helm install --create-namespace my-testkube kubeshop/testkube --set STORAGE_ENDPOINT=custom_value
+```
+
+Alternatively, these values can be read from Kubernetes secrets and set:
+
+```yaml
+- env:
+ - name: STORAGE_ENDPOINT
+   secret:
+  secretName: test-secret
+```
+
+### Deploying on OpenShift
+
+To install the standalone agent Testkube on an Openshift cluster you will need to include the following configuration:
+
+1. Add security context for MongoDB to `values.yaml`:
+
+```yaml
+mongodb:
+  securityContext:
+    enabled: true
+    fsGroup: 1000650001
+    runAsUser: 1000650001
+  podSecurityContext:
+    enabled: false
+  containerSecurityContext:
+    enabled: true
+    runAsUser: 1000650001
+    runAsNonRoot: true
+  volumePermissions:
+    enabled: false
+  auth:
+    enabled: false
+```
+
+2. Add security context for `Patch` and `Migrate` jobs that are a part of Testkube Operator configuration to `values.yaml`:
+
+```yaml
+testkube-operator:
+  webhook:
+    migrate:
+      enabled: true
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop: ["ALL"]
+
+    patch:
+      enabled: true
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000650000
+        fsGroup: 1000650000
+```
+
+3. Install Testkube specifying the path to the new `values.yaml` file
+
+```
+helm install testkube kubeshop/testkube --create-namespace --namespace testkube --values values.yaml
+```
+
+Please notice that since we've just installed MongoDB with a `testkube-mongodb` Helm release name, you are not required to reconfigure the Testkube API MongoDB connection URI. If you've installed with a different name/namespace, please adjust `--set testkube-api.mongodb.dsn: "mongodb://testkube-mongodb:27017"` to your MongoDB service.
+
+### Deploying on AWS
+
+If you are using **Amazon Web Services**, this tutorial will show you how to deploy Testkube OSS in EKS and expose its API to the Internet with the AWS Load Balancer Controller.
+
+#### Prerequisites
+
+First, we will need an existing Kubernetes cluster. Please see the official documentation on how to get started with an Amazon EKS cluster [here](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html).
+
+Once the cluster is up and running we need to deploy the AWS Load Balancer Controller. For more information, see [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).
+
+Another important point is [ExternalDNS](https://github.com/kubernetes-sigs/external-dns). It is not compulsory to deploy it into your cluster, but it helps you dynamically manage your DNS records via k8s resources.
+
+And last, but not least - install the Testkube CLI. You can download a binary file from our [installation][install-cli] page. For how to deploy Testkube to your cluster with all the necessary changes, please see the next section.
+
+:::caution
+
+Please mind that is it necessary to install [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) to mount PV into your k8s cluster.
+
+:::
+
+#### Ingress and Service Resources Configuration
+
+To deploy and expose Testkube API to the outside world, you will need to create an Ingress resource for Testkube's API server. In this tutorial, we will be updating `values.yaml` that later will be passed to the `helm install` command.
+
+In order to use the AWS Load Balancer Controller we need to create a `values.yaml` file and add the following annotation to the Ingress resources:
+
+```yaml
+annotations:
+  kubernetes.io/ingress.class: alb
+```
+
+Once this annotation is added, Controller creates an ALB and the necessary supporting AWS resources.
+
+The example configuration using HTTPS protocol might look like the following:
+
+**Testkube API Ingress:**
+
+```yaml
+uiIngress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/load-balancer-name: testkube-api
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80},{"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/healthcheck-path: "/health"
+    alb.ingress.kubernetes.io/healthcheck-port: "8088"
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-east-1:*******:certificate/*****"
+  path: /v1
+  hosts:
+    - test-api.aws.testkube.io
+```
+
+Once we are ready with the `values.yaml` file, we can deploy Testkube into our cluster:
+
+```sh
+helm repo add kubeshop https://kubeshop.github.io/helm-chart
+
+helm repo update
+
+helm install --create-namespace testkube kubeshop/testkube --namespace testkube --values values.yaml
+```
+
+After the installation command is complete, you will see the following resources created into your AWS Console.
+
+![AWS Console2](../../img/aws-resource-console-2.png)
+
+Please note that the annotations may vary, depending on your Load Balancer schema type, backend-protocols, target-type, etc. However, this is the bare minimum that should be applied to your configuration.
+
+Except for the Ingress annotation, you need to update the Service manifests with a healthcheck configuration as well. Include the lines below into your `values.yaml` file.
+
+**Testkube API Service:**
+
+```yaml
+service:
+  type: ClusterIP
+  port: 8088
+  annotations:
+    alb.ingress.kubernetes.io/healthcheck-path: "/health"
+    alb.ingress.kubernetes.io/healthcheck-port: "8088"
+```
+
+#### Examples of AWS S3 Bucket configuration
+
+If you plan to use AWS S3 Bucket for storing test artifacts, you can follow below examples
+
+**Terraform aws iam policy:**
+
+```yaml
+data "aws_iam_policy_document" "testkube" {
+  statement {
+    sid    = "S3Buckets"
+    effect = "Allow"
+    actions = [
+      "s3:ListAllMyBuckets", # see https://github.com/kubeshop/testkube/issues/3965
+    ]
+    resources = [
+      "arn:aws:s3:::*",
+    ]
+  }
+  statement {
+    sid    = "S3Bucket"
+    effect = "Allow"
+    actions = [
+      "s3:ListBucket",
+      "s3:GetBucketLocation",
+    ]
+    resources = [
+      "arn:aws:s3:::*-testkube-${terraform.workspace}",
+    ]
+  }
+  statement {
+    sid    = "S3Object"
+    effect = "Allow"
+    actions = [
+      "s3:GetObject*",
+      "s3:PutObject*",
+      "s3:DeleteObject",
+    ]
+    resources = [
+      "arn:aws:s3:::*-testkube-${terraform.workspace}/*",
+    ]
+  }
+}
+```
+
+**Teskube helm values:**
+
+```yaml
+testkube-api:
+  jobServiceAccountName: testkube-api-server # reuse the service-account from testkube-api
+  minio:
+    enabled: true # required to be able to access AWS S3 (minio is used as a proxy)
+    minioRootUser: ""
+    minioRootPassword: ""
+    serviceAccountName: testkube-api-server # reuse the service-account from testkube-api
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::111111111111:role/my-dev-testkube
+  storage:
+    endpoint: s3.amazonaws.com
+    accessKeyId: ""
+    accessKey: ""
+    location: eu-central-1
+    bucket: my-testkube-dev
+    SSL: true
+    endpoint_port: ""
+  logs:
+    storage: "minio"
+    bucket: my-testkube-dev
+```
 
 [secrets-endpoint]: /articles/secrets-enable-endpoint
 [secrets-creation]: /articles/secrets-disable-creation
@@ -140,3 +380,4 @@ See [upgrade][upgrade] for instructions on how to upgrade the standalone agent.
 [upgrade]: /articles/upgrade
 [mongo-config]: https://github.com/bitnami/charts/tree/master/bitnami/mongodb#parameters
 [nats-config]: https://docs.nats.io/running-a-nats-service/nats-kubernetes/helm-charts
+[install-cli]: /articles/install/cli

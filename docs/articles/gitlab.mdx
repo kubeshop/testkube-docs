@@ -1,6 +1,5 @@
 # Testkube Gitlab CI
 
-
 The Testkube GitLab CI/CD integration facilitates the installation of Testkube and allows the execution of any [Testkube CLI](https://docs.testkube.io/cli/testkube) command within a GitLab CI/CD pipeline. This integration can be seamlessly incorporated into your GitLab repositories to enhance your CI/CD workflows.
 The integration offers a versatile approach to align with your pipeline requirements and is compatible with Testkube Pro, Testkube Pro On-Prem, and the open-source Testkube platform. It enables GitLab users to leverage the powerful features of Testkube directly within their CI/CD pipelines, ensuring efficient and
  flexible test workflow execution.
@@ -26,7 +25,7 @@ variables:
 
 setup-testkube:
   stage: setup
-  image: 
+  image:
     name: kubeshop/testkube-cli
     entrypoint: ["/bin/sh", "-c"]
   script:
@@ -34,7 +33,7 @@ setup-testkube:
     - testkube run testworkflow TEST_WORKFLOW_NAME -f
 ```
 
-It is recommended that sensitive values should never be stored as plaintext in workflow files, but rather as [variables](https://docs.gitlab.com/ee/ci/variables/).  Secrets can be configured at the organization, repository, or environment level, and allow you to store sensitive information in Gitlab.
+It is recommended that sensitive values should never be stored as plaintext in workflow files, but rather as [variables](https://docs.gitlab.com/ee/ci/variables/). Secrets can be configured at the organization, repository, or environment level, and allow you to store sensitive information in Gitlab.
 
 ```yaml
 stages:
@@ -42,7 +41,7 @@ stages:
 
 setup-testkube:
   stage: setup
-  image: 
+  image:
     name: kubeshop/testkube-cli
     entrypoint: ["/bin/sh", "-c"]
   script:
@@ -53,7 +52,7 @@ setup-testkube:
 
 ### How to configure Testkube CLI action for TK OSS and run a test workflow
 
-To connect to the self-hosted instance, you need to have **kubectl** configured for accessing your Kubernetes cluster, and pass an optional namespace, if Testkube is not deployed in the default **testkube** namespace. 
+To connect to the self-hosted instance, you need to have **kubectl** configured for accessing your Kubernetes cluster, and pass an optional namespace, if Testkube is not deployed in the default **testkube** namespace.
 
 If a test is already created, you can run it using the command `testkube run testworkflow TEST_WORKFLOW_NAME -f` . However, if you need to create a test in this workflow, please add a creation command, e.g.: `testkube create testworkflow -f EXAMPLE_FILE.yaml`.
 
@@ -68,7 +67,7 @@ variables:
 
 setup-testkube:
   stage: setup
-  image: 
+  image:
     name: kubeshop/testkube-cli
     entrypoint: ["/bin/sh", "-c"]
   script:
@@ -97,7 +96,7 @@ variables:
 
 setup-aws:
   stage: setup
-  image: 
+  image:
     name: amazon/aws-cli
     entrypoint: ["/bin/sh", "-c"]
   script:
@@ -113,7 +112,7 @@ setup-aws:
 
 run-testkube:
   stage: test
-  image: 
+  image:
     name: kubeshop/testkube-cli
     entrypoint: ["/bin/sh", "-c"]
   script:
@@ -123,11 +122,11 @@ run-testkube:
     - testkube run testworkflow TEST_WORKFLOW_NAME -f
   dependencies:
     - setup-aws
-
 ```
 ### How to connect to GKE (Google Kubernetes Engine) cluster and run a test workflow
 
 This example connects to a k8s cluster in Google Cloud, creates and runs a test using Testkube Gitlab CI. Please make sure that the following points are satisfied:
+
 - The **_GKE Sevice Account_** should be created prior in Google Cloud and added to Gitlab CI variables along with **_GKE Project_** value;
 - The **_GKE Cluster Name_** and **_GKE Zone_** can be added as [environmental variables](https://docs.gitlab.com/ee/ci/variables/) in the workflow.
 
@@ -157,7 +156,7 @@ setup-gcp:
 
 run-testkube:
   stage: test
-  image: 
+  image:
     name: kubeshop/testkube-cli
     entrypoint: ["/bin/sh", "-c"]
   script:
