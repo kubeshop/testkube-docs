@@ -23,26 +23,16 @@ For testing purposes you can use [webhook.site](https://webhook.site/) to get a 
 
 ## Step 2 - Test Emmiting CDEvents
 
-To test emitting CDEvents, create a sample test with Testkube and run it.
+To test emitting CDEvents, create a sample Test Workflow with Testkube and run it.
 
-```sh
-cat << EOF | > curl-test.json
-{
-  "command": [
-    "curl",
-    "https://example.com"
-  ],
-  "expected_status": "200"
-}
-EOF
+```
+testkube create testworkflow -f EXAMPLE_FILE.yaml
 
-testkube create test --name test-cdevents --type curl/test -f curl-test.json
-
-testkube run test test-cdevents
+testkube run testworkflow TEST_WORKFLOW_NAME -f
 ```
 
 Check the webhook sink to see the CDEvent emitted by Testkube. An event like the following should have been emmitted: 
-
+<!-- Please check the code outputs. This may require update -->
 ```json 
 {
   "context": {

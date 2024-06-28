@@ -1,6 +1,6 @@
 # Testkube Jenkins UI
 
-The Testkube Jenkins integration streamlines the installation of Testkube, enabling the execution of any [Testkube CLI](https://docs.testkube.io/cli/testkube) command within Jenkins Pipelines or Freestyle Projects.
+The Testkube Jenkins integration streamlines the installation of Testkube, enabling the execution of any [Testkube CLI](https://docs.testkube.io/cli/testkube) command within Jenkins Pipelines or Freestyle Projects.  
 
 If you're looking to use Pipelines and Groovy scripts, then look at examples from [Testkube Jenkins Pipelines](./jenkins.mdx).
 
@@ -13,7 +13,7 @@ Install the Testkube CLI plugin by searching for it in the "Available Plugins" s
 
 To use Jenkins CI/CD for [Testkube Pro](https://app.testkube.io/), you need to create an [API token](https://docs.testkube.io/testkube-pro/articles/organization-management/#api-tokens).
 
-### How to set up a Freestyle Project to run tests on Testkube Pro
+### How to set up a Freestyle Project to run Test Workflow on Testkube Pro
 
 1. Create a new Freestyle Project.
 2. In General settings, configure the environment variables:
@@ -24,9 +24,15 @@ To use Jenkins CI/CD for [Testkube Pro](https://app.testkube.io/), you need to c
 ![jenkins environment variables configuration](../img/jenkins-environment.png)
 
 3. Click on "Add Build Step" and select "Testkube Setup".
-   ![jenkins testkube setup build step](../img/jenkins-build-step.png)
+
+![jenkins testkube setup build step](../img/jenkins-build-step.png)
 
 4. Specify a Testkube CLI version or leave it empty to use the latest version.
 
-5. Add a new "Execute Shell" Build Step and run one or multiple Testkube CLI commands.
-   ![jenkins execute shell](../img/jenkins-execute-shell.png)
+5. Add a new "Execute Shell" Build Step and run one or multiple Testkube CLI commands such as:
+<!-- ![jenkins execute shell](../img/jenkins-execute-shell.png) Commented this because image shows deprecated commands. Please take updated screenshots.
+Adding updated command as code block for now-->
+
+```yaml
+testkube run testworkflow TEST_WORKFLOW_NAME -f
+```
