@@ -4,6 +4,10 @@ import DistributedJMeter from "../../workflows/distributed-jmeter-workflow.md"
 
 # Distributed JMeter Example
 
+import RequiresCommercialWorkflows from "../_commercial-workflows-note.mdx"
+
+<RequiresCommercialWorkflows/>
+
 Testkube has built-in support for parallelising any testing tool - check out the
 [Parallelization](../test-workflows-parallel) documentation for details and examples. 
 
@@ -17,7 +21,6 @@ number of nodes
   * Wait until they will accept connection at port 1099 (`spec.services.slave.readinessProbe`)
 * Run JMeter controller against all the remote workers (`spec.services.steps[0].run`)
   * It uses `{{ services.slave.*.ip }}` as an argument - `services.slave.*.ip` will return list of IPs, and they will be joined by comma (`,`) to convert to text
-
 
 <DistributedJMeter/>
 

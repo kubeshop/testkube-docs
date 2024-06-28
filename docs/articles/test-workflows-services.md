@@ -3,6 +3,10 @@ import TabItem from "@theme/TabItem";
 
 # Test Workflows - Services
 
+import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx"
+
+<RequiresCommercialWorkflows/>
+
 Often if your use-case is more complex, you may need additional services for the Tests you are running. Common use cases are:
 * Database, i.e. [**MongoDB**](https://hub.docker.com/_/mongo) or [**PostgreSQL**](https://hub.docker.com/r/bitnami/postgresql)
 * Workers, i.e. [**remote JMeter workers**](https://hub.docker.com/r/justb4/jmeter) or [**Selenium Grid's remote browsers**](https://hub.docker.com/r/selenium/standalone-firefox)

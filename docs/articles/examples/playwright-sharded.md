@@ -4,6 +4,10 @@ import ShardedPlaywright from "../../workflows/sharded-playwright-workflow.md"
 
 # Sharded Playwright Example
 
+import RequiresCommercialWorkflows from "../_commercial-workflows-note.mdx"
+
+<RequiresCommercialWorkflows/>
+
 Testkube has built-in support for parallelizing any testing tool - check out the
 [Parallelization](../test-workflows-parallel) documentation for details and examples.
 

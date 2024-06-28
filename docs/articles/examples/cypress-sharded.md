@@ -1,8 +1,11 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import ShardedCypress from "../../workflows/sharded-cypress-workflow.md"
+import RequiresCommercialWorkflows from "../_commercial-workflows-note.mdx"
 
 # Sharded Cypress Example
+
+<RequiresCommercialWorkflows/>
 
 Testkube has built-in support for parallelizing any testing tool - check out the
 [Parallelization](../test-workflows-parallel) documentation for details and examples.

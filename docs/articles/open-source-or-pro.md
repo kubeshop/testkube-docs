@@ -19,13 +19,14 @@ That being said, many of the core features of Testkube are available directly in
 - **Logs/Artifacts** : Retrieve Workflow executions, logs, artifacts.
 - **Webhooks** : Manage Webhooks that the Agent executes.
 - **Event Triggers** : Manage Event Triggers that the Agent reacts to.
-- **Tests, TestSuites, Sources, Executors** : Deprecated - but still available during a transition period.
+- **Tests, TestSuites, Sources, Executors** : Deprecated - but still available during a transition period - [Read More](legacy-features).
 
 See a complete feature-comparison table between OSS and Commercial below.
 
-### Workflow Limitations
+### Workflow Limitations in Standalone Mode
 
-The following Workflow features are not available when running a Workflow via the Standalone Agent:
+The following Workflow features are not available when using the Standalone Agent, they require
+the Agent to be connected to the Testkube Control Plane, either on-prem or in the cloud.
 
 - `execute` - see [Test Suites](test-workflows-test-suites)
 - `parallel` - see [Parallelization](test-workflows-parallel)
