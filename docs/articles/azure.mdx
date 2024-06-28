@@ -14,12 +14,12 @@ For solutions to common issues, such as the `--git` flags causing timeouts, plea
 
 ## Testkube Pro
 
-### How to configure Testkube CLI action for Testkube Pro and run a test workflow
+### How to configure Testkube CLI action for Testkube Pro and run a Test Workflow
 
 To use Azure DevOps Pipelines for [Testkube Pro](https://app.testkube.io/), you need to create an [API token](https://docs.testkube.io/testkube-pro/articles/organization-management/#api-tokens).
 Then, pass the **organization** and **environment** IDs, along with the **token** and other parameters specific for your use case.
 
-If a test workflow is already created, you can run it using the command `testkube run testworkflow TEST_WORKFLOW_NAME -f`. However, if you need to create a test in this workflow, you need to add a creation command, e.g.: `testkube create testworkflow -f EXAMPLE_FILE.yaml`.
+If a Test Workflow is already created, you can run it using the command `testkube run testworkflow TEST_WORKFLOW_NAME -f`. However, if you need to create a test in this workflow, you need to add a creation command, e.g.: `testkube create testworkflow -f EXAMPLE_FILE.yaml`.
 
 You'll need to create a `azure-pipelines.yml`` file. This will include the stages, jobs and tasks necessary to execute the workflow
 
@@ -46,7 +46,7 @@ stages:
 
 ## Testkube Core OSS
 
-### How to configure the Testkube CLI action for TK OSS and run a test workflow
+### How to configure the Testkube CLI action for TK OSS and run a Test Workflow
 
 To connect to the self-hosted instance, you need to have **kubectl** configured for accessing your Kubernetes cluster, and pass an optional namespace, if Testkube is not deployed in the default **testkube** namespace.
 
@@ -74,7 +74,7 @@ stages:
 
 The steps to connect to your Kubernetes cluster differ for each provider. You should check the docs of your Cloud provider for how to connect to the Kubernetes cluster from Azure DevOps Pipelines
 
-### How to configure Testkube CLI action for TK OSS and run a test workflow
+### How to configure Testkube CLI action for TK OSS and run a Test Workflow
 
 This workflow establishes a connection to the EKS cluster and creates and runs a test using TK CLI. In this example we also use variables not
 to reveal sensitive data. Please make sure that the following points are satisfied:
@@ -159,5 +159,5 @@ stages:
               token: "$(TK_API_TOKEN)"
           - script: |
               testkube run testworkflow TEST_WORKFLOW_NAME -f
-            displayName: "Run Testkube Test Workflow'"
+            displayName: "Run Testkube Test Workflow"
 ```

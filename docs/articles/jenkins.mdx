@@ -10,7 +10,7 @@ Install the Testkube CLI plugin by searching it in the "Available Plugins" secti
 
 ## Testkube Pro
 
-### How to configure Testkube CLI action for Testkube Pro and run a test workflow
+### How to configure Testkube CLI action for Testkube Pro and run a Test Workflow
 
 To use Jenkins CI/CD for [Testkube Pro](https://app.testkube.io/), you need to create an [API token](https://docs.testkube.io/testkube-pro/articles/organization-management/#api-tokens).
 Then, pass the **organization** and **environment** IDs, along with the **token** and other parameters specific for your use case.
@@ -45,7 +45,7 @@ pipeline {
 
 ## Testkube Core OSS
 
-### How to configure Testkube CLI action for TK OSS and run a test workflow
+### How to configure Testkube CLI action for TK OSS and run a Test Workflow
 
 To connect to the self-hosted instance, you need to have **kubectl** configured for accessing your Kubernetes cluster, and pass an optional namespace, if Testkube is not deployed in the default **testkube** namespace.
 
@@ -75,7 +75,7 @@ pipeline {
 
 The steps to connect to your Kubernetes cluster differ for each provider. You should check the docs of your Cloud provider for how to connect to the Kubernetes cluster from Jenkins CI/CD
 
-### How to configure Testkube CLI action for TK OSS and run a test workflow
+### How to configure Testkube CLI action for TK OSS and run a Test Workflow
 
 This workflow establishes a connection to EKS cluster and creates and runs a test using TK CLI. In this example we also use variables not
  to reveal sensitive data. Please make sure that the following points are satisfied:
@@ -122,7 +122,7 @@ pipeline {
 }
 ```
 
-### How to connect to GKE (Google Kubernetes Engine) cluster and run a test workflow
+### How to connect to GKE (Google Kubernetes Engine) cluster and run a Test Workflow
 
 This example connects to a k8s cluster in Google Cloud, creates and runs a test using Testkube Jenkins workflow. Please make sure that the following points are satisfied:
 

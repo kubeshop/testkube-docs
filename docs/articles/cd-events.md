@@ -23,7 +23,7 @@ For testing purposes you can use [webhook.site](https://webhook.site/) to get a 
 
 ## Step 2 - Test Emmiting CDEvents
 
-To test emitting CDEvents, create a sample test workflow with Testkube and run it.
+To test emitting CDEvents, create a sample Test Workflow with Testkube and run it.
 
 ```
 testkube create testworkflow -f EXAMPLE_FILE.yaml

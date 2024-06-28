@@ -19,7 +19,7 @@ helm upgrade \
 
 ## Step 2 - Test Emmiting Kubernetes Events
 
-To test emitting Kubernetes Events, create a sample test workflow with Testkube and run it.
+To test emitting Kubernetes Events, create a sample Test Workflow with Testkube and run it.
 
 ```
 testkube create testworkflow -f EXAMPLE_FILE.yaml
