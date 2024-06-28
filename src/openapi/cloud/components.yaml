@@ -704,6 +704,10 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/EnvironmentMember'
+            features:
+              type: array
+              items:
+                $ref: '#/components/schemas/EnvironmentFeature'
           required:
             - connected
     EnvironmentDurationStats:
@@ -735,14 +739,41 @@ components:
         - ratioStats
         - totalStats
         - failedStats
+    EnvironmentFeature:
+      type: object
+      properties:
+        name:
+          description: feature name
+          type: string
+        displayName:
+          description: feature name
+          type: string
+        description:
+          description: feature description
+          type: string
+        learnMoreUrl:
+          description: URL to learn more about the feature
+          type: string
+          format: uri
+        enabled:
+          description: is feature enabled?
+          type: boolean
+      required:
+        - name
+        - displayName
+        - description
+        - enabled
     EnvironmentFeatures:
       type: object
       properties:
         role:
           $ref: '#/components/schemas/EnvironmentRole'
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnvironmentFeature'
       required:
         - role
-        - resource
         - features
     EnvironmentMember:
       type: object
@@ -1144,6 +1175,13 @@ components:
         executionNamespace:
           description: namespace for test execution (Pro edition only)
           type: string
+        disableWebhooks:
+          description: whether webhooks on this execution are disabled
+          type: boolean
+          default: false
+          example:
+            - true
+            - false
     ExecutionCore:
       description: test execution core
       type: object
@@ -1443,6 +1481,13 @@ components:
         executionNamespace:
           description: namespace for test execution (Pro edition only)
           type: string
+        disableWebhooks:
+          description: whether webhooks on this execution are disabled
+          type: boolean
+          default: false
+          example:
+            - true
+            - false
     ExecutionResult:
       description: execution result returned from executor
       type: object
@@ -2231,6 +2276,8 @@ components:
     License:
       type: object
       properties:
+        id:
+          type: string
         type:
           type: string
           example: licenses
@@ -3305,6 +3352,7 @@ components:
           enum:
             - test
             - test-suite
+            - workflow
         status:
           description: the status of the executions
           type: string
@@ -3370,7 +3418,9 @@ components:
           type: string
           example: API Services
         contents:
-          description: Collection of Tests and Test Suites that are relevant to the service
+          description: >-
+            Collection of Test Workflows, Tests and Test Suites that are
+            relevant to the service
           type: array
           items:
             $ref: '#/components/schemas/StatusObservable'
@@ -3379,7 +3429,7 @@ components:
           type: number
           example: 99.999
         status:
-          description: The aggregated status of the Tests and Test Suites
+          description: The aggregated status of the Test Workflows, Tests and Test Suites
           type: string
           enum:
             - unknown
@@ -3403,7 +3453,7 @@ components:
         endTime:
           type: string
         status:
-          description: The aggregated status of the Tests and Test Suites
+          description: The aggregated status of the Test Workflows, Tests and Test Suites
           type: string
           enum:
             - unknown
@@ -3412,8 +3462,8 @@ components:
             - major_outage
         observables:
           description: >-
-            Collection of Tests and Test Suites that are relevant to the service
-            with their status
+            Collection of Test Workflows, Tests and Test Suites that are
+            relevant to the service with their status
           type: object
           additionalProperties:
             type: string
@@ -3955,6 +4005,13 @@ components:
         testSuiteExecutionName:
           description: test suite execution name started the test suite execution
           type: string
+        disableWebhooks:
+          description: whether webhooks on this execution are disabled
+          type: boolean
+          default: false
+          example:
+            - true
+            - false
       required:
         - id
         - name
@@ -4084,6 +4141,13 @@ components:
         testSuiteExecutionName:
           description: test suite execution name started the test suite execution
           type: string
+        disableWebhooks:
+          description: whether webhooks on the executions of this test suite are disabled
+          type: boolean
+          default: false
+          example:
+            - true
+            - false
     TestSuiteExecutionStatus:
       type: string
       enum:
@@ -4289,6 +4353,13 @@ components:
         runningContext:
           $ref: '#/components/schemas/RunningContext'
           description: running context for the test execution
+        disableWebhooks:
+          description: whether webhooks on the executions of this step are disabled
+          type: boolean
+          default: false
+          example:
+            - true
+            - false
     TestSuiteStepExecutionResult:
       description: execution result returned from executor
       type: object
@@ -4823,6 +4894,8 @@ components:
         readOnly:
           description: if test workflow is offline and cannot be executed
           type: boolean
+        status:
+          $ref: '#/components/schemas/TestWorkflowStatusSummary'
     TestWorkflowConfigSchema:
       description: configuration definition
       type: object
@@ -4913,6 +4986,11 @@ components:
           description: plain text token to fetch with
           type: string
         tokenFrom:
+          $ref: '#/components/schemas/EnvVarSource'
+        sshKey:
+          description: plain text SSH private key to fetch with
+          type: string
+        sshKeyFrom:
           $ref: '#/components/schemas/EnvVarSource'
         authType:
           $ref: '#/components/schemas/ContentGitAuthType'
@@ -5020,6 +5098,15 @@ components:
         testWorkflowExecutionName:
           description: test workflow execution name started the test workflow execution
           type: string
+        disableWebhooks:
+          description: >-
+            whether webhooks on the executions of this test workflow are
+            disabled
+          type: boolean
+          default: false
+          example:
+            - true
+            - false
       required:
         - id
         - name
@@ -5036,6 +5123,10 @@ components:
         status:
           $ref: '#/components/schemas/TestWorkflowExecutionStatusCR'
           description: test workflow execution status
+        disableWebhooks:
+          description: disable webhooks for this execution
+          type: boolean
+          default: false
       required:
         - testWorkflow
     TestWorkflowExecutionNotification:
@@ -5068,6 +5159,12 @@ components:
         testWorkflowExecutionName:
           description: test workflow execution name started the test workflow execution
           type: string
+        disableWebhooks:
+          description: >-
+            whether webhooks on the executions of this test workflow are
+            disabled
+          type: boolean
+          default: false
     TestWorkflowExecutionStatusCR:
       description: test workflow execution status
       type: object
@@ -5262,6 +5359,13 @@ components:
           type: string
         activeDeadlineSeconds:
           $ref: '#/components/schemas/BoxedInteger'
+    TestWorkflowNotificationsConfig:
+      type: object
+      properties:
+        disableWebhooks:
+          description: disable webhooks for this test workflow
+          type: boolean
+          default: false
     TestWorkflowOutput:
       type: object
       properties:
@@ -5659,6 +5763,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TestWorkflowEvent'
+        notifications:
+          $ref: '#/components/schemas/TestWorkflowNotificationsConfig'
     TestWorkflowStatus:
       type: string
       enum:
@@ -5668,6 +5774,12 @@ components:
         - passed
         - failed
         - aborted
+    TestWorkflowStatusSummary:
+      description: test workflow status
+      type: object
+      properties:
+        latestExecution:
+          $ref: '#/components/schemas/TestWorkflowExecutionSummary'
     TestWorkflowStep:
       type: object
       properties:
@@ -6852,6 +6964,8 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/Problem'
+    NoBody:
+      description: Empty body response
     NoContent:
       description: No content after resource created
     NotFoundError:
@@ -7295,6 +7409,13 @@ components:
       required: true
       schema:
         type: string
+    TestWorkflowNames:
+      name: testWorkflowNames
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
     TextSearch:
       name: textSearch
       in: query
@@ -7326,6 +7447,13 @@ components:
           - draft
           - published
           - archived
+    Workflow:
+      name: workflow
+      in: query
+      description: The workflow for which the time series should be created.
+      schema:
+        type: string
+      example: my-workflow
     executionID:
       name: executionID
       in: path
@@ -7340,6 +7468,15 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Environment'
+      required: true
+    EnvironmentFeatures:
+      description: environment features body
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/EnvironmentFeature'
       required: true
     EnvironmentMemberRoleChange:
       description: environment details body
