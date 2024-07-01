@@ -1,0 +1,126 @@
+# Testkube Tekton
+
+The Testkube Tekton integration facilitates the installation of Testkube and allows the execution of any [Testkube CLI](https://docs.testkube.io/cli/testkube) 
+command within a Tekton pipeline.The integration offers a versatile approach to align with your pipeline requirements and is compatible with Testkube, 
+Testkube On-Prem, and the open-source Testkube platform. It enables Tekton users to leverage the powerful features of Testkube directly within their
+  CI/CD pipelines, ensuring efficient and flexible Test Workflow execution.
+
+## Pre-requisites
+
+* [Testkube](https://app.testkube.io/)
+* Kubernetes cluster
+* Configure [Testkube Agent](./install/multi-cluster.md) on the cluster
+* Install [Tekton Pipeline](https://tekton.dev/docs/installation/pipelines/#installation) on the cluster
+
+## How to configure Testkube CLI for Testkube and run a Test Workflow
+
+To use the below Tekton Task with [Testkube](https://app.testkube.io/), you need to create an [API token](../../testkube-pro/articles/organization-management/#api-tokens).
+Then, pass the **organization** and **environment** IDs, along with the **token** and other parameters specific for your use case.
+
+## How to setup Tekton CI/CD Pipeline and run a Testkube Test Workflow
+
+To integrate Testkube with Tekton, please take a look at the example that runs a Test Workflow. If a Test Workflow is already created, you can run it using the command `testkube run testworkflow TEST_WORKFLOW_NAME -f` .
+However, if you need to create a Test Workflow in this workflow, please add a creation command, e.g.: `testkube create testworkflow -f EXAMPLE_FILE.yaml`.
+This will include the spec, steps and script necessary to execute the workflow.
+
+### Create a Tekton Task
+
+This Tekton Task creates `testkube` Task on a Kubernetes cluster and integrates Testkube CLI. To connect to the self-hosted instance, you need to have **kubectl** 
+configured for accessing your Kubernetes cluster, and pass an optional namespace, if Testkube is not deployed in the default **testkube** namespace. You can run
+all Testkube CLI commands using this Task.
+
+```yaml
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: testkube
+spec:
+  description: >-
+    Run testkube cli commands with tekton
+  params:
+  - name: tkc-env
+    description: testkube cloud environment name
+    type: string
+  - name: tkc-org
+    description: testkube cloud org name
+    type: string
+  - name: api-key
+    description: api key for testkube account
+    type: string
+  - name: tkc-command
+    description: Command to run with testkube
+    type: string
+  steps:
+  - name: run-testkube-cli
+    image: "kubeshop/testkube-cli:latest"
+    script: |
+      #!/bin/sh
+      testkube set context -c cloud --env-id $(params.tkc-env) --org-id $(params.tkc-org) -k $(params.api-key)
+      testkube $(params.tkc-command)
+```
+
+### Create Tekton Pipeline
+
+This Tekton Pipelibe configures the CI/CD pipeline.
+
+```yaml
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: testkube-pipeline  # Name of the Pipeline
+spec:
+  params:                  # Parameters that the Pipeline expects
+  - name: tkc-env
+    description: testkube cloud environment name
+    type: string
+  - name: tkc-org
+    description: testkube cloud org name
+    type: string
+  - name: api-key
+    description: "The API key for Testkube"
+    type: string
+  - name: tkc-command
+    description: Command to run with testkube
+    type: string
+  tasks:                   # Tasks to be executed as part of this Pipeline
+    - name: testkube-cli
+      taskRef:             # Reference to a previously defined Task
+        name: testkube     # Name of the Task being referenced is 'testkube'
+      params:
+      - name: tkc-env
+        value: $(params.tkc-env)
+      - name: tkc-org
+        value: $(params.tkc-org)
+      - name: api-key
+        value: $(params.api-key)
+      - name: tkc-command
+        value: $(params.tkc-command)
+```
+### Create a Tekton PipelineRun
+
+This Tekton PipelineRun instantiate the `Pipeline`. The Testkube CLI command can be added to `tkc-command` parameter. This example runs a Test Workflow.
+
+```
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: testkube-pipeline-run
+spec:
+  pipelineRef:
+    name: testkube-pipeline
+  params:
+  - name: tkc-env
+    value: "tkcenv_34xxxxxxxxxxxxx"
+  - name: tkc-org
+    value: "tkcorg_b8xxxxxxxxxxxxxx"
+  - name: api-key
+    value: "tkcapi_58xxxxxxxxxxxxxxx"
+  - name: tkc-command
+    value: "run testworkflow TEST_WORKFLOW_NAME --watch"
+```
+
+It is recommended that sensitive values should never be stored as plaintext in workflow files, but rather as Secrets.
+Secrets can be configured at the organization, repository, or environment level, and allow you to store sensitive information in Tekton.
+
+
+
