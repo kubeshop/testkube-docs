@@ -1,20 +1,20 @@
 # Testkube Tekton
 
 The Testkube Tekton integration facilitates the installation of Testkube and allows the execution of any [Testkube CLI](https://docs.testkube.io/cli/testkube) 
-command within a Tekton pipeline.The integration offers a versatile approach to align with your pipeline requirements and is compatible with Testkube Pro, 
-Testkube Pro On-Prem, and the open-source Testkube platform. It enables Tekton users to leverage the powerful features of Testkube directly within their
+command within a Tekton pipeline.The integration offers a versatile approach to align with your pipeline requirements and is compatible with Testkube, 
+Testkube On-Prem, and the open-source Testkube platform. It enables Tekton users to leverage the powerful features of Testkube directly within their
   CI/CD pipelines, ensuring efficient and flexible Test Workflow execution.
 
 ## Pre-requisites
 
-* [Testkube Pro](https://app.testkube.io/)
+* [Testkube](https://app.testkube.io/)
 * Kubernetes cluster
-* Configure [Testkube Agent](http://docs.testkube.io/testkube-cloud/articles/installing-agent) on the cluster
+* Configure [Testkube Agent](./install/multi-cluster.md) on the cluster
 * Install [Tekton Pipeline](https://tekton.dev/docs/installation/pipelines/#installation) on the cluster
 
-## How to configure Testkube CLI for Testkube Pro and run a Test Workflow
+## How to configure Testkube CLI for Testkube and run a Test Workflow
 
-To use this Tekton for [Testkube Pro](https://app.testkube.io/), you need to create an [API token](https://docs.testkube.io/testkube-pro/articles/organization-management/#api-tokens).
+To use the below Tekton Task with [Testkube](https://app.testkube.io/), you need to create an [API token](../../testkube-pro/articles/organization-management/#api-tokens).
 Then, pass the **organization** and **environment** IDs, along with the **token** and other parameters specific for your use case.
 
 ## How to setup Tekton CI/CD Pipeline and run a Testkube Test Workflow
