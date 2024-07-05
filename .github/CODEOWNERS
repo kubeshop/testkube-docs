@@ -1,1 +1,17 @@
-* @exu @nicufk @vsukhin @vLia @povilasv @dejanzele @haneabogdan @rangoo94 @emil2k @WitoDelnat @olensmar
+* @kubeshop/testkube-backend
+* @kubeshop/testkube-frontend
+
+/assets/ @kubeshop/testkube-docs
+/docs/ @kubeshop/testkube-docs
+/licenses/ @kubeshop/testkube-docs
+LICENSE @kubeshop/testkube-docs
+*.md @kubeshop/testkube-docs
+
+/test/ @kubeshop/testkube-qa
+
+/.github/ @kubeshop/testkube-devops
+/goreleaser_files/ @kubeshop/testkube-devops
+.goreleaser.yml @kubeshop/testkube-devops
+.goreleaser-dev.yml @kubeshop/testkube-devops
+.golangci.yml @kubeshop/testkube-devops
+.builds-* @kubeshop/testkube-devops
