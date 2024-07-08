@@ -70,9 +70,20 @@ const sidebars = {
               id: "articles/istio",
             },
             {
-              type: "doc",
+              type: "category",
               label: "Using Vault",
-              id: "articles/vault",
+              items: [
+                {
+                  type: "doc",
+                  label: "During installation",
+                  id: "articles/vault-install",
+                },
+                {
+                  type: "doc",
+                  label: "Within executions",
+                  id: "articles/vault",
+                },
+              ]
             },
             {
               type: "doc",
