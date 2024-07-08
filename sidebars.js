@@ -48,7 +48,7 @@ const sidebars = {
         "articles/install/faq",
         {
           type: "category",
-          label: "More guides",
+          label: "More Guides",
           items: [
             "articles/install/multi-cluster",
             "articles/install/standalone-agent",
@@ -70,20 +70,9 @@ const sidebars = {
               id: "articles/istio",
             },
             {
-              type: "category",
+              type: "doc",
               label: "Using Vault",
-              items: [
-                {
-                  type: "doc",
-                  label: "During installation",
-                  id: "articles/vault-install",
-                },
-                {
-                  type: "doc",
-                  label: "Within executions",
-                  id: "articles/vault",
-                },
-              ]
+              id: "articles/vault-install",
             },
             {
               type: "doc",
@@ -194,6 +183,17 @@ const sidebars = {
               type: "doc",
               label: "Test Workflow Templates",
               id: "articles/test-workflow-templates",
+            },
+            {
+              type: "category",
+              label: "More Guides",
+              items: [
+                {
+                  type: "doc",
+                  label: "Using Vault",
+                  id: "articles/vault",
+                },
+              ]
             },
           ],
         },
