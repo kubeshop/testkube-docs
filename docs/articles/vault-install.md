@@ -1,4 +1,4 @@
-# Using Vault during installation
+# Using Vault during Installation
 
 Testkube should be able to integrate with the various ways Vault integrates into
 a Kuberentes cluster. This guide specifically covers the use of the [sidecar
