@@ -365,7 +365,7 @@ const redirects = [
   },
   {
     from: "/reference/openapi",
-    to: "/openapi",
+    to: "/openapi/overview",
   },
   {
     from: "/reference/architecture",
@@ -443,6 +443,10 @@ const redirects = [
       "/guides/going-to-production/aws",
     ],
     to: "/articles/install/standalone-agent",
+  },
+  {
+    from: "/openapi",
+    to: "/openapi/overview",
   },
 ];
 
