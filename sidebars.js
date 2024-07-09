@@ -459,6 +459,7 @@ const sidebars = {
         { type: "doc", label: "ArgoCD", id: "articles/argocd-integration" },
         { type: "doc", label: "Flux", id: "articles/flux-integration" },
         { type: "doc", label: "CDEvents", id: "articles/cd-events" },
+        { type: "doc", label: "Tekton", id: "articles/tekton" },
         {
           type: "doc",
           label: "Slack Integration",
