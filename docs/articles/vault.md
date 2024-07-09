@@ -73,8 +73,10 @@ spec:
     serviceAccountName: test-vault
     annotations:
       # highlight-start
-      vault.hashicorp.com/agent-inject-secret-database-config.txt: internal/data/database/config
       vault.hashicorp.com/role: internal-app
+      vault.hashicorp.com/agent-inject-secret-database-config.txt: internal/data/database/config
+      # NOTE: These templates need to be double escaped as workflows will run this through a template engine.
+      vault.hashicorp.com/agent-inject-template-database-config.txt.pem: '{{`{{"{{- with secret \"internal/database/config\" -}}postgresql://{{ .Data.data.username }}:{{ .Data.data.password }}@postgres:5432/wizard{{- end -}}"}}`}}'
       # highlight-end
   # highlight-start
   use:
