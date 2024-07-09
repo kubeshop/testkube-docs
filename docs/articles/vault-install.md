@@ -14,6 +14,7 @@ key-value secrets engine mounted at `kv/`.
 - The specified Helm values will be from the root of the specified chart.
 - Configurations which will need to be replaced with actual values can be
   identified by the use of `<>`.
+- Secret values are masked with `*` characters.
 
 :::
 
@@ -136,30 +137,200 @@ minio:
 
 ## Control Plane
 
-- Create service account and bind it to role and policy.
+The control plane, aka enterprise API, exposes central API for the agents and
+the dashboard. The worker service is a part of the control plane which performs
+long running tasks such as processing artifacts.
 
-### License
+Depending on your needs the control plane might need the following secrets to be
+injected from a Vault:
+
+- License key
+- License file, only for offline licenses
+- Minio credentials
+- Private certificate authority (CA) certificate
+
+To keep this guide simple we will have one service account for both
+components of the control plane, enterprise API and worker service, which will
+need to have access to the Vault secrets, but to enforce least privilege one
+could create individual service accounts and policies for each component.
+
+Start by creating a service account, `vault-control-plane`, for the control
+plane. Bind the service account to a Vault role, `control_plane`.
+
+### Online license
+
+Create a secret `kv/control-plane/license` with the license key:
+
+```json
+{
+  "key": "********",
+}
+```
+
+To the `control_plane` role add a policy that allows reading the above secret:
+
+```hcl
+path "kv/data/control-plane/license" {
+  capabilities = ["read"]
+}
+```
+
+In the `testkube-enterprise` chart configure the following values to properly
+inject and consume the secret license key:
+
+```yaml
+testkube-cloud-api:
+  enterpriseLicenseKeyPath: /etc/testkube/secrets/license.key
+  serviceAccount:
+    name: vault-control-plane
+  podAnnotations:
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/role: 'control_plane'
+    vault.hashicorp.com/secret-volume-path-license.key: /etc/testkube/secrets
+    vault.hashicorp.com/agent-inject-secret-license.key: kv/control-plane/license
+    vault.hashicorp.com/agent-inject-template-license.key: |
+      {{`{{- with secret "kv/control-plane/license" }}{{ .Data.data.key }}{{ end -}}`}}
+```
+
+### Offline license
+
+Create a secret `kv/control-plane/license` with the license key and license
+file:
+
+```json
+{
+  "key": "********",
+  "license": "********"
+}
+```
+
+To the `control_plane` role add a policy that allows reading the above secret:
+
+```hcl
+path "kv/data/control-plane/license" {
+  capabilities = ["read"]
+}
+```
+
+In the `testkube-enterprise` chart configure the following values to properly
+inject and consume the secret license key:
+
+```yaml
+testkube-cloud-api:
+  enterpriseLicenseKeyPath: /etc/testkube/secrets/license.key
+  enterpriseLicenseFilePath: /etc/testkube/secrets/license.lic
+  serviceAccount:
+    name: vault-control-plane
+  podAnnotations:
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/role: 'control_plane'
+    vault.hashicorp.com/secret-volume-path-license.key: /etc/testkube/secrets
+    vault.hashicorp.com/agent-inject-secret-license.key: kv/control-plane/license
+    vault.hashicorp.com/agent-inject-template-license.key: |
+      {{`{{- with secret "kv/control-plane/license" }}{{ .Data.data.key }}{{ end -}}`}}
+    vault.hashicorp.com/secret-volume-path-license.lic: /etc/testkube/secrets
+    vault.hashicorp.com/agent-inject-secret-license.lic: kv/control-plane/license
+    vault.hashicorp.com/agent-inject-template-license.lic: |
+      {{`{{- with secret "kv/control-plane/license" }}{{ .Data.data.license }}{{ end -}}`}}
+```
+
+### Minio credentials
+
+To the `control_plane` role add a policy that allows reading the previously
+created secret containing the password and username for the root Minio user:
+
+```hcl
+path "kv/data/minio/credentials" {
+  capabilities = ["read"]
+}
+```
+
+In the `testkube-enterprise` chart configure the following values to properly
+inject and consume the Minio credentials:
+
+```yaml
+testkube-cloud-api:
+  serviceAccount:
+    name: vault-control-plane
+  podAnnotations:
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/role: 'control_plane'
+    vault.hashicorp.com/secret-volume-path-minio-config.json: /etc/testkube/secrets
+    vault.hashicorp.com/agent-inject-secret-minio-config.json: kv/minio/credentials
+    vault.hashicorp.com/agent-inject-secret-minio-config.json: kv/minio/credentials
+    vault.hashicorp.com/agent-inject-template-minio-config.json: |
+      {{`{{- with secret "kv/minio/credentials" }}{"aliases":{"s3":{"accessKey":"{{ .Data.data.root_user }}","secretKey":"{{ .Data.data.root_password }}","api":"S3v4"}},"version":"10"}{{ end -}}`}}
+  api:
+    minio:
+      credsFilePath: /etc/testkube/secrets/minio-config.json
+testkube-worker-service:
+  serviceAccount:
+    name: vault-control-plane
+  podAnnotations:
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/role: 'control_plane'
+    vault.hashicorp.com/secret-volume-path-minio-config.json: /etc/testkube/secrets
+    vault.hashicorp.com/agent-inject-secret-minio-config.json: kv/minio/credentials
+    vault.hashicorp.com/agent-inject-secret-minio-config.json: kv/minio/credentials
+    vault.hashicorp.com/agent-inject-template-minio-config.json: |
+      {{`{{- with secret "kv/minio/credentials" }}{"aliases":{"s3":{"accessKey":"{{ .Data.data.root_user }}","secretKey":"{{ .Data.data.root_password }}","api":"S3v4"}},"version":"10"}{{ end -}}`}}
+  api:
+    minio:
+      credsFilePath: /etc/testkube/secrets/minio-config.json
+```
+
+### Private certificate authority (CA)
+
+Create a secret `kv/certs/ca` with the `ca` field holding the PEM-encoded
+certificate for the private certificate authority (CA) signing the certificates
+for the various Testkube components:
+
+```json
+{
+  "ca": "********"
+}
+```
 
 :::warning
 
-TODO(emil)
+For simplicity this guide is using the same key-value secrets engine to hold the
+CA certificate, but in all likelyhood CA certificate would come from a PKI
+secrets engine in Vault.
 
 :::
 
-### Private CA
+To the `control_plane` role add a policy that allows reading the above created
+secret.
 
-:::warning
 
-TODO(emil)
+```hcl
+path "kv/data/certs/ca" {
+  capabilities = ["read"]
+}
+```
 
-:::
+In the `testkube-enterprise` chart configure the following values to properly
+inject the private CA certificate:
 
+```yaml
+testkube-cloud-api:
+  customCaDirPath: /etc/testkube/certs
+  serviceAccount:
+    name: vault-control-plane
+  podAnnotations:
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/role: 'control_plane'
+    vault.hashicorp.com/secret-volume-path-ca.pem: /etc/testkube/certs
+    vault.hashicorp.com/agent-inject-secret-ca.pem: kv/certs/ca
+    vault.hashicorp.com/agent-inject-template-ca.pem: |
+      {{`{{- with secret "kv/certs/ca" }}{{ .Data.data.ca }}{{ end -}}`}}
+```
 
 ## Agent
 
 - Create service account and bind it to role and policy.
 
-### Private CA
+### Private certificate authority (CA)
 
 :::warning
 
