@@ -12,7 +12,7 @@ Throughout this guide:
 - The examples will assume that your Vault has a v2
 key-value secrets engine mounted at `kv/`.
 - The specified Helm values will be from the root of the specified chart.
-- Configurations which will need to be replaced with actual values can be
+- Configurations that will need to be replaced with actual values can be
   identified by the use of `<>`.
 - Secret values are masked with `*` characters.
 
@@ -20,7 +20,7 @@ key-value secrets engine mounted at `kv/`.
 
 ## Dex
 
-Dex is the identity provider for Testkube and it's configuration could contain
+Dex is the identity provider for Testkube and its configuration could contain
 sensitive information.
 
 Start by storing the Dex config at `kv/dex/config`:
@@ -60,7 +60,7 @@ path "kv/data/dex/config" {
 }
 ```
 
-Create service account, `vault-dex`, then bind it to a Vault role, `dex`, which
+Create a service account, `vault-dex`, then bind it to a Vault role, `dex`, which
 has the above policy attached to it.
 
 In the `testkube-enterprise` chart configure the following values to properly
@@ -107,7 +107,7 @@ path "kv/data/minio/credentials" {
 }
 ```
 
-Create service account, `vault-minio`, then bind it to a Vault role, `minio`, which
+Create a service account, `vault-minio`, then bind it to a Vault role, `minio`, which
 has the above policy attached to it.
 
 In the `testkube-enterprise` chart configure the following values to properly
@@ -137,9 +137,9 @@ minio:
 
 ## Control Plane
 
-The control plane, aka enterprise API, exposes central API for the agents and
+The control plane, aka enterprise API, exposes the central API for the agents and
 the dashboard. The worker service is a part of the control plane which performs
-long running tasks such as processing artifacts.
+long-running tasks such as processing artifacts.
 
 Depending on your needs the control plane might need the following secrets to be
 injected from a Vault:
@@ -150,7 +150,7 @@ injected from a Vault:
 - Private certificate authority (CA) certificate
 
 To keep this guide simple we will have one service account for both
-components of the control plane, enterprise API and worker service, which will
+components of the control plane (enterprise API and worker service) which will
 need to have access to the Vault secrets, but to enforce least privilege one
 could create individual service accounts and policies for each component.
 
@@ -293,8 +293,8 @@ for the various Testkube components:
 
 :::warning
 
-For simplicity this guide is using the same key-value secrets engine to hold the
-CA certificate, but in all likelyhood CA certificate would come from a PKI
+For simplicity, this guide uses the same key-value secrets engine to hold the
+CA certificate, but in all likelihood CA certificate would come from a PKI
 secrets engine in Vault.
 
 :::
@@ -331,8 +331,8 @@ testkube-cloud-api:
 ### Private Certificate Authority (CA)
 
 Assuming the agent has access to the same Vault as the control plane, building
-on the above direction for injection the private CA into the control plane one
-would similarly need to create service account, `vault-agent`, bound to a Vault
+on the above direction for injection of the private CA into the control plane one
+would similarly need to create a service account, `vault-agent`, bound to a Vault
 role, `agent` with a policy that allows reading the CA secret.
 
 In the `testkube` chart configure the following values to properly inject the
