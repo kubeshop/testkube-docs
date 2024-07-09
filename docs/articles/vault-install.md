@@ -391,6 +391,14 @@ global:
           shell: 'while ! wget --post-data "" -O - http://localhost:8200/agent/v1/quit; do sleep 1; done'
 ```
 
+:::warning
+
+Prebuilt and container executors are deprecated so we do not officially support
+their usage with Vault, please [migrate to
+workflows](./test-workflow-migration).
+
+:::
+
 ### Troubleshooting
 
 #### Istio Compatibility
