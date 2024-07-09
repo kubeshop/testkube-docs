@@ -151,7 +151,7 @@ injected from a Vault:
 
 To keep this guide simple we will have one service account for both
 components of the control plane (enterprise API and worker service) which will
-need to have access to the Vault secrets, but to enforce least privilege one
+need to have access to the Vault secrets, but to enforce the principle of least privilege one
 could create individual service accounts and policies for each component.
 
 Start by creating a service account, `vault-control-plane`, for the control
