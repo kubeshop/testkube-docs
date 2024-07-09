@@ -157,7 +157,7 @@ could create individual service accounts and policies for each component.
 Start by creating a service account, `vault-control-plane`, for the control
 plane. Bind the service account to a Vault role, `control_plane`.
 
-### Online license
+### Online License
 
 Create a secret `kv/control-plane/license` with the license key:
 
@@ -192,7 +192,7 @@ testkube-cloud-api:
       {{`{{- with secret "kv/control-plane/license" }}{{ .Data.data.key }}{{ end -}}`}}
 ```
 
-### Offline license
+### Offline License
 
 Create a secret `kv/control-plane/license` with the license key and license
 file:
@@ -234,7 +234,7 @@ testkube-cloud-api:
       {{`{{- with secret "kv/control-plane/license" }}{{ .Data.data.license }}{{ end -}}`}}
 ```
 
-### Minio credentials
+### Minio Credentials
 
 To the `control_plane` role add a policy that allows reading the previously
 created secret containing the password and username for the root Minio user:
@@ -279,7 +279,7 @@ testkube-worker-service:
       credsFilePath: /etc/testkube/secrets/minio-config.json
 ```
 
-### Private certificate authority (CA)
+### Private Certificate Authority (CA)
 
 Create a secret `kv/certs/ca` with the `ca` field holding the PEM-encoded
 certificate for the private certificate authority (CA) signing the certificates
@@ -328,7 +328,7 @@ testkube-cloud-api:
 
 ## Agent
 
-### Private certificate authority (CA)
+### Private Certificate Authority (CA)
 
 Assuming the agent has access to the same Vault as the control plane, building
 on the above direction for injection the private CA into the control plane one
