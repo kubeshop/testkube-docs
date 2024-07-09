@@ -86,13 +86,53 @@ dex:
 
 ## Minio
 
-:::warning
+Minio is the default object storage for Testkube used to store logs and
+artifacts.
 
-TODO(emil)
+Store the root username and password to `kv/minio/credentials`:
 
-:::
+```json
+{
+  "root_password": "********",
+  "root_user": "********"
+}
+```
 
-- Create service account and bind it to role and policy.
+Create a Vault policy to allow reading of the Minio credentials:
+
+```hcl
+path "kv/data/minio/credentials" {
+  capabilities = ["read"]
+}
+```
+
+Create service account, `vault-minio`, then bind it to a Vault role, `minio`, which
+has the above policy attached to it.
+
+In the `testkube-enterprise` chart configure the following values to properly
+inject and consume the secret Minio credentials:
+
+```yaml
+minio:
+  auth:
+    useCredentialsFiles: true
+    useSecret: false
+  serviceAccount:
+    create: false
+    name: "vault-minio"
+  automountServiceAccountToken: true
+  podAnnotations:
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/secret-volume-path: /opt/bitnami/minio/secrets
+    vault.hashicorp.com/role: 'minio'
+    vault.hashicorp.com/agent-inject-secret-root-user: kv/minio/credentials
+    vault.hashicorp.com/agent-inject-secret-root-password: kv/minio/credentials
+    # NOTE: These templates need to be double escaped as Minio runs this through tpl.
+    vault.hashicorp.com/agent-inject-template-root-user: |
+      {{"{{"}}"{{"{{"}}"}}- with secret "kv/minio/credentials" }}{{"{{"}}"{{"{{"}}"}} .Data.data.root_user }}{{"{{"}}"{{"{{"}}"}} end -}}
+    vault.hashicorp.com/agent-inject-template-root-password: |
+      {{"{{"}}"{{"{{"}}"}}- with secret "kv/minio/credentials" }}{{"{{"}}"{{"{{"}}"}} .Data.data.root_password }}{{"{{"}}"{{"{{"}}"}} end -}}
+```
 
 ## Control Plane
 
