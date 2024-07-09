@@ -20,6 +20,9 @@ for real-life scenarios without extensive overhead. Workflows also provides adva
 [parallelization](test-workflows-parallel), [sharding](test-workflows-matrix-and-sharding.md), 
 [services](test-workflows-services.md), etc. that were not possible with the legacy approach.
 
+Test Workflows also provide a powerful replacement for [Test Suites](test-workflows-test-suites), with 
+far greater flexibility in regard to orchestrating multiple tests.
+
 ## Replacing Sources/Templates with Workflow Templates
 
 [Workflow Templates](test-workflow-templates) provide a generic approach to building configurations that can be 

@@ -4,6 +4,10 @@ import DistributedK6 from "../../workflows/distributed-k6-workflow.md"
 
 # Distributed K6 Example
 
+import RequiresCommercialWorkflows from "../_commercial-workflows-note.mdx"
+
+<RequiresCommercialWorkflows/>
+
 Testkube has built-in support for parallelising any testing tool - check out the
 [Parallelization](../test-workflows-parallel) documentation for details and examples. 
 

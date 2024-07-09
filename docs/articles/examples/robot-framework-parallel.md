@@ -4,6 +4,10 @@ import ParallelRobotFramework from "../../workflows/parallel-robot-framework-wor
 
 # Parallelized Robot Framework Example
 
+import RequiresCommercialWorkflows from "../_commercial-workflows-note.mdx"
+
+<RequiresCommercialWorkflows/>
+
 Below is a simple workflow for executing a Robot Framework test on three browsers running 
 in parallel instead of sequentially. You can paste this directly into the YAML of an existing or new test, just make
 sure to update the `name` and `namespace` for your environment if needed.

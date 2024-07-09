@@ -3,6 +3,10 @@ import TabItem from "@theme/TabItem";
 
 # Test Workflows - Matrix and Sharding
 
+import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx"
+
+<RequiresCommercialWorkflows/>
+
 Often you want to run a test with multiple scenarios or environments,
 either to distribute the load or to verify it on different setup.
 

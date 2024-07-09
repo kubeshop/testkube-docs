@@ -3,6 +3,10 @@ import TabItem from "@theme/TabItem";
 
 # Test Workflows - Parallel Steps
 
+import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx"
+
+<RequiresCommercialWorkflows/>
+
 Often you would like to speed up the test execution, by distributing the load across multiple runs.
 
 Test Workflows have `parallel` steps, that allow you to distribute your test even dynamically, and among multiple cluster nodes.

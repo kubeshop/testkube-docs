@@ -65,15 +65,15 @@ MIT license, contributions can be made freely.
 
 The table below shows how certain Agent features in the [Testkube GitHub repository](https://github.com/kubeshop/testkube) are licensed:
 
-| Feature            | Core/MIT |                                 Pro/TCL                                 |
-|:-------------------|:--------:|:-----------------------------------------------------------------------:|
-| Tests *            |    x     |                                                                         |
-| Basic Testsuites * |    x     |                                                                         |
-| Triggers           |    x     |                                                                         |
-| Executors *        |    x     |                                                                         |
-| Webhooks           |    x     |                                                                         |
-| Sources *          |    x     |                                                                         |
-| Test Workflows     |    x     | x - see [Workflow Limitations](open-source-or-pro#Workflow-Limitations) |
-| Adv Testsuites *   |          |                                    x                                    |
+| Feature            | Core/MIT |                                          Pro/TCL                                           |
+|:-------------------|:--------:|:------------------------------------------------------------------------------------------:|
+| Tests *            |    x     |                                                                                            |
+| Basic Testsuites * |    x     |                                                                                            |
+| Triggers           |    x     |                                                                                            |
+| Executors *        |    x     |                                                                                            |
+| Webhooks           |    x     |                                                                                            |
+| Sources *          |    x     |                                                                                            |
+| Test Workflows     |    x     | x - see [Workflow Limitations](open-source-or-pro#workflow-limitations-in-standalone-mode) |
+| Adv Testsuites *   |          |                                             x                                              |
 
-* = deprecated functionality.
+* = deprecated functionality - [Read More](legacy-features)

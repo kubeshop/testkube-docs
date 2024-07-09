@@ -3,6 +3,10 @@ import TabItem from "@theme/TabItem";
 
 # Test Workflows - Test Suites
 
+import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx"
+
+<RequiresCommercialWorkflows/>
+
 With Test Workflows it is possible to run downstream Test Workflows and Tests with `execute` operation,
 similarly to what you can do in Test Suites.
 
