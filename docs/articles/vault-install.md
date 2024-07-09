@@ -399,12 +399,34 @@ workflows](./test-workflow-migration).
 
 :::
 
-### Troubleshooting
+## Troubleshooting
 
-#### Istio Compatibility
+### Istio Compatibility
+
+In setups utilizing a combination of Vault and Istio, we recommend explicitly
+excluding outgoing traffic to Vault's agent from being routed through Istio's
+proxy. Otherwise, the workload could be put in a dead-locked state where one
+init container is waiting on another which cannot start till the latter
+completes.
+
+:::info
+
+To read more about Istio's compatibility with Testkube please read the following
+[guide](./istio).
+
+:::
+
+This can be configured by adding the following annotation to any workloads that
+have Vault injection enabled:
+
+```yaml
+traffic.sidecar.istio.io/excludeOutboundPorts: "8200"
+```
 
 :::warning
 
-TODO(emil)
+The default Vault agent cache listener port is 8200, make sure to modify the
+annotation above if you have configured the Vault agent to listen on a different
+port.
 
 :::
