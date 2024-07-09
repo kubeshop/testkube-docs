@@ -328,15 +328,68 @@ testkube-cloud-api:
 
 ## Agent
 
-- Create service account and bind it to role and policy.
-
 ### Private certificate authority (CA)
 
-:::warning
+Assuming the agent has access to the same Vault as the control plane, building
+on the above direction for injection the private CA into the control plane one
+would similarly need to create service account, `vault-agent`, bound to a Vault
+role, `agent` with a policy that allows reading the CA secret.
 
-TODO(emil)
+In the `testkube` chart configure the following values to properly inject the
+private CA certificate into the agent workload:
 
-:::
+```yaml
+testkube-api:
+  cloud:
+    tls:
+      customCaDirPath: /etc/testkube/certs
+  serviceAccount:
+    name: vault-agent
+  podAnnotations:
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/role: 'agent'
+    vault.hashicorp.com/secret-volume-path-ca.pem: /etc/testkube/certs
+    vault.hashicorp.com/agent-inject-secret-ca.pem: kv/certs/ca
+    vault.hashicorp.com/agent-inject-template-ca.pem: |
+      {{`{{- with secret "kv/certs/ca" }}{{ .Data.data.ca }}{{ end -}}`}}
+```
+
+Test workflow executions will need to trust the private CA storage endpoint to
+send logs and artifacts to the object store. The global template can be
+configured to inject the CA certificate and have these processes trust it by
+setting the following values in the `testkube` chart:
+
+```yaml
+global:
+  testWorkflows:
+    globalTemplate:
+      enabled: true
+      spec:
+        pod:
+          serviceAccountName: vault-agent
+          annotations:
+            vault.hashicorp.com/agent-inject: "true"
+            vault.hashicorp.com/agent-init-first: "true"
+            vault.hashicorp.com/agent-enable-quit: "true"
+            vault.hashicorp.com/agent-cache-listener-port: "8200"
+            vault.hashicorp.com/role: 'agent'
+            vault.hashicorp.com/secret-volume-path-ca.pem: /etc/testkube/certs
+            vault.hashicorp.com/agent-inject-secret-ca.pem: kv/certs/ca
+            # NOTE: These templates need to be double escaped as workflows will run this through a template engine.
+            vault.hashicorp.com/agent-inject-template-ca.pem: '{{`{{"{{- with secret \"kv/certs/ca\" -}}{{ .Data.data.ca }}{{- end -}}"}}`}}'
+        container:
+          env:
+          - name: SSL_CERT_DIR
+            value: /etc/testkube/certs/
+          # If your Git repositories are also served using certificates from the same private CA
+          # then include the following environment variable also.
+          - name: GIT_SSL_CAINFO
+            value: /etc/testkube/certs/ca.pem
+        after:
+        - name: 'Send quit signal to Vault agent'
+          condition: always
+          shell: 'while ! wget --post-data "" -O - http://localhost:8200/agent/v1/quit; do sleep 1; done'
+```
 
 ### Troubleshooting
 
