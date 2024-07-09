@@ -1,8 +1,8 @@
 # Installation Using Vault
 
-This guide specifically covers an installation of Testkube utilizing [Vault's sidecar
+This guide covers an installation of Testkube utilizing [Vault's sidecar
 injector](https://developer.hashicorp.com/vault/docs/platform/k8s/injector), but
-we are ready to support enterprise customers utilizing the secrets operator or
+we also support enterprise customers utilizing the secrets operator or
 the CSI provider.
 
 :::info
@@ -32,7 +32,7 @@ Start by storing the Dex config at `kv/dex/config`:
 ```
 
 The value of the `config` field would be a [Dex
-config](https://dexidp.io/docs/configuration/), such as below, but customized for your needs:
+config](https://dexidp.io/docs/configuration/) as shown below, but customized for your needs:
 
 ```yaml
 logger:
@@ -137,7 +137,7 @@ minio:
 
 ## Control Plane
 
-The control plane, aka enterprise API, exposes the central API for the agents and
+The control plane, AKA enterprise API, exposes the central API for the agents and
 the dashboard. The worker service is a part of the control plane which performs
 long-running tasks such as processing artifacts.
 
@@ -145,7 +145,7 @@ Depending on your needs the control plane might need the following secrets to be
 injected from a Vault:
 
 - License key
-- License file, only for offline licenses
+- License file (only for offline licenses)
 - Minio credentials
 - Private certificate authority (CA) certificate
 
@@ -167,7 +167,7 @@ Create a secret `kv/control-plane/license` with the license key:
 }
 ```
 
-To the `control_plane` role add a policy that allows reading the above secret:
+To the `control_plane` role, add a policy that allows reading the above secret:
 
 ```hcl
 path "kv/data/control-plane/license" {
@@ -204,7 +204,7 @@ file:
 }
 ```
 
-To the `control_plane` role add a policy that allows reading the above secret:
+To the `control_plane` role, add a policy that allows reading the above secret:
 
 ```hcl
 path "kv/data/control-plane/license" {
@@ -236,7 +236,7 @@ testkube-cloud-api:
 
 ### Minio Credentials
 
-To the `control_plane` role add a policy that allows reading the previously
+To the `control_plane` role, add a policy that allows reading the previously
 created secret containing the password and username for the root Minio user:
 
 ```hcl
@@ -245,7 +245,7 @@ path "kv/data/minio/credentials" {
 }
 ```
 
-In the `testkube-enterprise` chart configure the following values to properly
+In the `testkube-enterprise` chart, configure the following values to properly
 inject and consume the Minio credentials:
 
 ```yaml
@@ -294,12 +294,12 @@ for the various Testkube components:
 :::warning
 
 For simplicity, this guide uses the same key-value secrets engine to hold the
-CA certificate, but in all likelihood CA certificate would come from a PKI
+CA certificate, but in all likelihood the CA certificate would come from a PKI
 secrets engine in Vault.
 
 :::
 
-To the `control_plane` role add a policy that allows reading the above created
+To the `control_plane` role, add a policy that allows reading the above created
 secret.
 
 
@@ -309,7 +309,7 @@ path "kv/data/certs/ca" {
 }
 ```
 
-In the `testkube-enterprise` chart configure the following values to properly
+In the `testkube-enterprise` chart, configure the following values to properly
 inject the private CA certificate:
 
 ```yaml
@@ -330,12 +330,12 @@ testkube-cloud-api:
 
 ### Private Certificate Authority (CA)
 
-Assuming the agent has access to the same Vault as the control plane, building
-on the above direction for injection of the private CA into the control plane one
-would similarly need to create a service account, `vault-agent`, bound to a Vault
-role, `agent` with a policy that allows reading the CA secret.
+Assuming the agent has access to the same Vault as the control plane, to build
+on the above direction for injection of the private CA into the control plane,
+create a service account, `vault-agent`, bound to a Vault
+role, and `agent` with a policy that allows reading the CA secret.
 
-In the `testkube` chart configure the following values to properly inject the
+In the `testkube` chart, configure the following values to properly inject the
 private CA certificate into the agent workload:
 
 ```yaml
