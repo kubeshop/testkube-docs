@@ -1,4 +1,4 @@
-# Using Vault within Test Workflows
+# Test Workflows Using Vault
 
 Testkube should be able to integrate with the various ways Vault integrates into
 a Kuberentes cluster. This guide specifically covers the use of the [sidecar
