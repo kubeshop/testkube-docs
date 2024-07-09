@@ -109,7 +109,7 @@ spec:
   content:
     files:
     - path: k6.js # created in working dir
-        content: |
+      content: |
         import http from 'k6/http';
         export const options = {
             thresholds: {
@@ -120,12 +120,12 @@ spec:
             http.get('https://testkube.io/');
         }
     - path: /example-file.js # created in root directory
-        content: another file contents
+      content: another file contents
     steps:
     - name: Run test
-    shell: k6 run k6.js --iterations 100
+      shell: k6 run k6.js --iterations 100
     container:
-        image: grafana/k6:latest
+      image: grafana/k6:latest
 ```
 ## events
 ### cronjob
