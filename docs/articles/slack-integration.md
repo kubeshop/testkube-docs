@@ -28,7 +28,7 @@ helm upgrade \
   kubeshop/testkube
 ```
 
-To see all the values that can be configured, check the Helm chart documentation [here](./helm-chart.md). 
+To see all the values that can be configured, check the Helm chart documentation [here](/articles/install/install-with-helm). 
 
 ## Step 3 - Add the Testkube bot to the Slack Channel
 

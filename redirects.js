@@ -69,8 +69,8 @@ const redirects = [
     to: "/articles/creating-test-suites",
   },
   {
-    from: "/helm-charts",
-    to: "/articles/helm-chart",
+    from: ["/helm-charts", "/helm"],
+    to: "/articles/install/install-with-helm",
   },
   {
     from: "/telemetry",
@@ -131,7 +131,7 @@ const redirects = [
       "/getting-started/step3-creating-first-test",
       "/articles/step3-creating-first-test",
     ],
-    to: "/articles/getting-started",
+    to: "/articles/tutorial/quickstart",
   },
   {
     from: [
@@ -361,7 +361,7 @@ const redirects = [
   },
   {
     from: "/reference/helm-chart",
-    to: "/articles/helm-chart",
+    to: "/articles/install/install-with-helm",
   },
   {
     from: "/reference/openapi",
@@ -447,6 +447,94 @@ const redirects = [
   {
     from: "/openapi",
     to: "/openapi/overview",
+  },
+  {
+    from: "/articles/getting-started",
+    to: "/articles/tutorial/quickstart",
+  },
+  {
+    from: "/articles/helm-chart",
+    to: "/articles/install/install-with-helm",
+  },
+  {
+    from: "/k6",
+    to: "/articles/examples/k6-basic",
+  },
+  {
+    from: "/playwright",
+    to: "/articles/examples/playwright-basic",
+  },
+  {
+    from: "/cypress",
+    to: "/articles/examples/cypress-basic",
+  },
+  {
+    from: "/postman",
+    to: "/articles/examples/postman-basic",
+  },
+  {
+    from: "/soapui",
+    to: "/articles/examples/soapui-basic",
+  },
+  {
+    from: "/pytest",
+    to: "/articles/examples/pytest-basic",
+  },
+  {
+    from: "/selenium",
+    to: "/articles/examples/selenium-basic",
+  },
+  {
+    from: "/artillery",
+    to: "/articles/examples/artillery-basic",
+  },
+  {
+    from: "/gradle",
+    to: "/articles/examples/gradle-basic",
+  },
+  {
+    from: "/maven",
+    to: "/articles/examples/maven-basic",
+  },
+  {
+    from: "/github",
+    to: "/articles/github-actions",
+  },
+  {
+    from: "/gitlab",
+    to: "/articles/gitlab",
+  },
+  {
+    from: "/jenkins",
+    to: "/articles/jenkins",
+  },
+  {
+    from: "/azure",
+    to: "/articles/azure",
+  },
+  {
+    from: "/circleci",
+    to: "/articles/circleci",
+  },
+  {
+    from: ["/argocd","/argo"],
+    to: "/articles/argocd-integration",
+  },
+  {
+    from: "/flux",
+    to: "/articles/flux-integration",
+  },
+  {
+    from: "/tekton",
+    to: "/articles/tekton",
+  },
+  {
+    from: "/slack",
+    to: "/articles/slack-integration",
+  },
+  {
+    from: "/prometheus",
+    to: "/articles/metrics",
   },
 ];
 

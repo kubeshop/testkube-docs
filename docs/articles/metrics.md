@@ -1,4 +1,4 @@
-# Metrics
+# Prometheus Metrics
 
 The Testkube API Server exposes a `/metrics` endpoint that can be consumed by Prometheus, Grafana, etc. Currently, the following metrics are exposed:
 
