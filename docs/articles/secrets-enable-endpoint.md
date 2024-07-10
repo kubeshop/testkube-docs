@@ -9,4 +9,4 @@ For example, in the Settings panel of a Test:
 
 ![Secrets Autocomplete](../img/secrets-autocomplete.png)
 
-[Back to Helm Chart reference](./helm-chart.md)
+[Back to Helm Chart reference](/articles/install/install-with-helm)
