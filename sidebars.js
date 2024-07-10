@@ -48,7 +48,7 @@ const sidebars = {
         "articles/install/faq",
         {
           type: "category",
-          label: "More guides",
+          label: "More Guides",
           items: [
             "articles/install/multi-cluster",
             "articles/install/standalone-agent",
@@ -72,7 +72,7 @@ const sidebars = {
             {
               type: "doc",
               label: "Using Vault",
-              id: "articles/vault",
+              id: "articles/vault-install",
             },
             {
               type: "doc",
@@ -183,6 +183,17 @@ const sidebars = {
               type: "doc",
               label: "Test Workflow Templates",
               id: "articles/test-workflow-templates",
+            },
+            {
+              type: "category",
+              label: "More Guides",
+              items: [
+                {
+                  type: "doc",
+                  label: "Using Vault",
+                  id: "articles/vault",
+                },
+              ]
             },
           ],
         },
