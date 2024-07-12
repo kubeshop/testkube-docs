@@ -5,7 +5,7 @@ that were actually being tested, as opposed to just the logs of the testing tool
 you're running API or E2E tests against a microservice-based application, troubleshooting a failed test 
 could entail looking into the logs of included services/pods to find correlated stack traces or error messages.
 
-This is easilty achievable with Workflows, here is a simple example that just collects the logs from the Testkube API Server itself:
+This is easily achievable with Workflows, here is a simple example that just collects the logs from the Testkube API Server itself:
 
 ```yaml 
 kind: TestWorkflow
