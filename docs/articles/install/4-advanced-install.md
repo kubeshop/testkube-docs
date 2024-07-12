@@ -2,6 +2,36 @@
 
 A variety of advanced topics to further customize your deployment.
 
+## TLS
+
+### Self-signed certificates
+
+If the Testkube On-Prem Control Plane components are behind a Load Balancer utilizing self-signed certificates, additional configuration must be provided to the Agent Helm chart during installation.
+Use one of the following methods to configure the Agent Helm chart to trust the self-signed certificates:
+1. Inject the custom CA certificate
+    ```helm
+    # testkube chart
+    global:
+      tls:
+        caCertPath: /etc/testkube/certs
+      volumes:
+        additionalVolumes:
+          - name: custom-ca
+            secret:
+              secretName: custom-cert
+        additionalVolumeMounts:
+          - name: custom-ca
+            mountPath: /etc/testkube/certs
+            readOnly: true
+    ```
+2. Skip TLS verification (not recommended in a production setup)
+    ```helm
+    # testkube chart
+    global:
+      tls:
+        skipVerify: true
+    ```
+
 ## Organization Management
 
 ### Bootstrap Configuration
@@ -79,7 +109,7 @@ testkube-cloud-api:
 
 By default, Testkube uses the NGINX Ingress Controller to ensure the reliable functioning of gRPC and Websockets protocols.
 
-More specifically, these annotations are added to configre NGINX and should not be changed:
+More specifically, these annotations are added to configure NGINX and should not be changed:
 
 ```yaml
 # gRPC Ingress:

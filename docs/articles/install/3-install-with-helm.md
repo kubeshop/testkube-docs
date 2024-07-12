@@ -3,14 +3,31 @@
 The Testkube Helm Chart lets you set up a customized Testkube tailored to your environment.
 The Chart will deploy a control plane and agent. You can learn more about the deployment architectures [here][deployment-architecture].
 
+## Components
+
+Testkube On-Prem consists of the following components:
+* Testkube Control Plane - The central component that manages connected Agents.
+  * API - A service which runs the REST, Agent gRPC and Websocket APIs for interacting with the Control Plane.
+    * Helm chart - Bundled as a subchart in the [testkube-enterprise](https://github.com/kubeshop/testkube-cloud-charts/tree/main/charts/testkube-enterprise) Helm chart.
+    * Docker image - [kubeshop/testkube-enterprise-api](https://hub.docker.com/r/kubeshop/testkube-enterprise-api)
+  * Dashboard - The web-based UI for managing tests, environments, and users.
+    * Helm chart - Bundled as a subchart in the [testkube-enterprise](https://github.com/kubeshop/testkube-cloud-charts/tree/main/charts/testkube-enterprise) Helm chart.
+    * Docker image - [kubeshop/testkube-enterprise-ui](https://hub.docker.com/r/kubeshop/testkube-enterprise-ui)
+  * Worker Service - A service which handles async operations for artifacts and test executions.
+    * Helm chart - Bundled as a subchart in the [testkube-enterprise](https://github.com/kubeshop/testkube-cloud-charts/tree/main/charts/testkube-enterprise) Helm chart.
+    * Docker image - [kubeshop/testkube-enterprise-worker-service](https://hub.docker.com/r/kubeshop/testkube-enterprise-worker-service)
+* Testkube Agent - A lightweight component that connects to the Control Plane and executes test runs.
+  * Helm chart - [kubeshop/testkube](https://github.com/kubeshop/helm-charts/tree/main/charts/testkube)
+  * Docker image - [kubeshop/testkube-api-server](https://hub.docker.com/r/kubeshop/testkube-api-server)
+
 ## Prerequisites
 
 Before you proceed with the installation, please ensure that you have the following prerequisites in place:
 
 - Kubernetes cluster (version 1.21+)
 - [Helm](https://helm.sh/docs/intro/quickstart/) (version 3+)
-- [cert-manager](https://cert-manager.io/docs/installation/) (version 1.11+) - Used for TLS certificate management.
-- [NGINX Controller](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/) (version v1.8+) - Used for Ingress configuration.
+- (RECOMMENDED) [cert-manager](https://cert-manager.io/docs/installation/) (version 1.11+) - Used for TLS certificate management.
+- (RECOMMENDED) [NGINX Controller](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/) (version v1.8+) - Used for Ingress configuration.
 - (OPTIONAL) [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator) (version 0.49+) - used for metrics collection
 - Own a public/private domain for creating Ingress rules.
 - License Key and/or License File, if offline access is required.
@@ -72,12 +89,12 @@ global:
 By default, the following services will be exposed. You can also choose to override the subdomain for each service.
 
 | Service          | Default            | Override                       |
-| ---------------- | ------------------ | ------------------------------ |
+| ---------------- |--------------------| ------------------------------ |
 | Dashboard        | dashboard.$domain  | global.uiSubdomain             |
 | REST API         | api.$domain        | global.restApiSubdomain        |
+| Dex              | api.$domain/idp    | global.restApiSubdomain        |
 | gRPC API         | agent.$domain      | global.grpcApiSubdomain        |
 | WebSockets API   | websockets.$domain | global.websocketsApiSubdomain  |
-| Status Pages API | status.$domain     | global.statusPagesApiSubdomain |
 | Storage API      | storage.$domain    | global.storageApiSubdomain     |
 
 TLS can either be handled through cert-manager or a manually defined secret. While custom TLS certificates are possible, we strongly recommend using `cert-manager` for simplified certificate manager.
@@ -85,31 +102,6 @@ TLS can either be handled through cert-manager or a manually defined secret. Whi
 :::info
 TLS should be terminated at the application-level instead of the ingress-level as it will drastically enhance the performance of the gRPC and Websocket protocols. Be mindful that NGINX defaults to a downgrade from HTTP2 to HTTP1.1 when the backend service is using an insecure port.
 :::
-
-#### Custom Certificates
-
-In order to use custom certificates, first a secret needs to be created with the following entries:
-
-- `tls.crt` - the certificate
-- `tls.key` - the private key
-- `ca.crt` - the CA certificate (if the certificate is not self-signed)
-
-If certificate-based authentication is required, the custom certificates need to be configured in the following places:
-
-- Control Plane API
-  - If `MINIO_ENDPOINT` is set to an exposed URL, then the following Helm values need to be configured:
-    - The following Helm parameter needs to be enabled to inject the custom certificate into MinIO `testkube-cloud-api.minio.certSecret.enabled: true`.
-    - If the certificate is not self-signed, the CA cert needs to be injected also by enabling the Helm parameter `testkube-cloud-api.minio.mountCACertificate: true`.
-    - Custom certificate verification can also be skipped by setting `testkube-cloud-api.minio.skipVerify: true`.
-  - If `MINIO_ENDPOINT` uses the Kubernetes DNS record (`testkube-enterprise-minio.<namespace>.svc.cluster.local:9000`), `AGENT_STORAGE_HOSTNAME` should be set to point to the exposed storage URL.
-- Agent
-  - Agent API
-    - If the Control Plane's API is configured to use certificate-based authentication or is using a certificate signed by a custom CA, the Agent API needs to be configured to use the same certificates by pointing `testkube-api.cloud.tls.certificate.secretRef` to the Kubernetes secret which contains the certificates.
-    - Custom certificate verification can also be skipped by setting `testkube-api.cloud.tls.skipVerify: true`.
-  - Storage
-    - The following Helm parameter needs to be enabled to inject the custom certificate into MinIO `testkube-api.storage.certSecret.enabled: true`.
-    - If the certificate is not self-signed, the CA cert needs to be injected also by enabling the Helm parameter `testkube-cloud-api.minio.mountCACertificate: true`.
-    - Custom certificate verification can also be skipped by setting `testkube-api.storage.skipVerify: true`.
 
 ### Auth
 
