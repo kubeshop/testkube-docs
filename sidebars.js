@@ -193,6 +193,11 @@ const sidebars = {
                   label: "Using Vault",
                   id: "articles/vault",
                 },
+                {
+                  type: "doc",
+                  label: "Capturing Application Logs",
+                  id: "articles/tw-capture-logs",
+                },
               ]
             },
           ],
