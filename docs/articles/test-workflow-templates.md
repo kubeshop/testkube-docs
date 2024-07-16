@@ -1,6 +1,6 @@
 # Test Workflow Templates
 
-Test Workflow Templates allow you to define building blocks which you can reuse across your workflows.
+Test Workflow Templates allow you to define building blocks which you can reuse across your Workflows.
 Strategically, templates can bring standardization across your organization. You can define a tool chain which is easy to discover across teams.
 At a more tactical level, templates avoid repetition and can be used to hide implementation details.
 
@@ -12,6 +12,8 @@ Templates are flexible and can be used is various ways:
 - Template common labels: Attach labels per company department.
 - Template technical details: Define an abstraction which handles closing Istio sidecar.
 - Template integrations: Run anything after tests fail.
+- Template log collection: Collect logs from tested components to help with troubleshooting [read more][capture-logs].
+- Template application-under-test: Start the actual components to be tested (and/or their dependencies) instead of relying those to be running
 
 ## Basics
 
@@ -392,3 +394,4 @@ spec:
 ```
 
 [inlining]: /articles/test-workflow-templates#understand-template-inlining
+[capture-logs]: /articles/tw-capture-logs
