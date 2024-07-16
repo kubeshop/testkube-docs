@@ -62,14 +62,14 @@ spec:
         mem: 2Gb
 ```
 
-### Using a template
+### Using a Template
 
 Your workflows can use one or multiple templates.
 You can use a template within the workflow as a whole or within a step.
 When you run a workflow with templates, then our workflow engine will first inline the templates before executing.
 To learn how templates are inlined, you can [see this advanced section][inlining].
 
-#### `use` at the top-level
+#### `use` at the Top-level
 
 A template can be included with the top-level use (array) clause - this way it will be included in the TestWorkflow, and all its defaults will be available in the whole TestWorkflow.
 
@@ -239,7 +239,7 @@ spec:
         - shell: echo 1
 ```
 
-### Isolate templates
+### Isolate Templates
 
 Template details are hidden which might cause unexpected trouble for the steps that run after it.
 Let's take a look at the following example:
