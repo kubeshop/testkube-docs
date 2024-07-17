@@ -9,6 +9,6 @@ Usually if possible and reasonable we try to keep the backward compatibility.
 ### Since `v1.16.16` internal `/results` route 
 
 Reason of deprecation was that after Fiber (https://gofiber.io/) security update disallowing of using `Mount` in simple way. 
-Also route is not used by the Testkube internally anymore.
+Also route is not used by Testkube internally anymore.
 
 As a workaround users who want's to configure own ingresses should use `/` route instead.

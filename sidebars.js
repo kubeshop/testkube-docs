@@ -33,7 +33,6 @@ const sidebars = {
       label: "Installing",
       items: [
         "articles/install/overview",
-        "articles/install/cli",
         "articles/install/install-with-cli",
         {
           type: "category",
@@ -554,6 +553,11 @@ const sidebars = {
           type: "category",
           label: "Testkube CLI",
           items: [
+            {
+              type: "doc",
+              label: "Installing the CLI",
+              id: "articles/install/cli",
+            },
             {
               type: "doc",
               label: "Managing CLI Context",
