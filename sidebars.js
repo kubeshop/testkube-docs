@@ -117,6 +117,31 @@ const sidebars = {
               label: "Overview",
               id: "articles/testkube-dashboard-explore",
             },
+            {
+              type: "doc",
+              label: "Workflows",
+              id: "articles/workflows-dashboard-explore",
+            },
+            {
+              type: "doc",
+              label: "Integrations",
+              id: "articles/integrations-dashboard-explore",
+            },
+            {
+              type: "doc",
+              label: "Insights",
+              id: "articles/insights-dashboard-explore",
+            },
+            {
+              type: "doc",
+              label: "Status Page",
+              id: "articles/status-page-dashboard-explore",
+            },
+            {
+              type: "doc",
+              label: "Settings",
+              id: "articles/settings-dashboard-explore",
+            },
           ],
         },
         {
