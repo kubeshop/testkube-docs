@@ -457,6 +457,10 @@ const redirects = [
     to: "/articles/install/install-with-helm",
   },
   {
+    from: "/testkube-pro-on-prem/articles/usage-guide",
+    to: "/articles/install/install-with-helm",
+  },
+  {
     from: "/k6",
     to: "/articles/examples/k6-basic",
   },
