@@ -465,6 +465,10 @@ const redirects = [
     to: "/articles/examples/k6-basic",
   },
   {
+    from: "/jmeter",
+    to: "/articles/examples/jmeter-basic",
+  },
+  {
     from: "/playwright",
     to: "/articles/examples/playwright-basic",
   },
