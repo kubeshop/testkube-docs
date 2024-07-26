@@ -296,7 +296,7 @@ steps:
 
 Please keep into account that the image should be stored in Docker registry, public or private one. In case of local images, 
 you can use [Docker one] (https://www.docker.com/blog/how-to-use-your-own-registry-2/) or something similar.
-At the moment we get the image metadata only from the Docker registry, not container storage or docker-daemon.
+Currently, we receive the image metadata only from the Docker registry, not the container storage or docker-daemon.
 
 ### resources
 Resources can be configured for a specific container.
