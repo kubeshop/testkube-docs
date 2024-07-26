@@ -295,7 +295,7 @@ steps:
 ```
 
 Please remember that the image should be stored in a Docker registry, which can be public or private. In the case of local images, 
-you can use [Docker one] (https://www.docker.com/blog/how-to-use-your-own-registry-2/) or something similar.
+you can use this [Docker one] (https://www.docker.com/blog/how-to-use-your-own-registry-2/) or something similar.
 Currently, we receive the image metadata only from the Docker registry, not the container storage or docker-daemon.
 
 ### resources
