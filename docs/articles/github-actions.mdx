@@ -50,6 +50,8 @@ steps:
 
 To connect to the self-hosted instance, you need to have **kubectl** configured for accessing your Kubernetes cluster, and simply passing optional namespace,
  if Testkube is not deployed in the default **testkube** namespace. 
+You can also specify a particular Testkube CLI or API version (don't confuse it with the Helm chart one), if it's omitted, then latest version is used.
+The list of [releases] (https://github.com/kubeshop/testkube/releases) can be found in Testkube Github repository.
 
 If a Test Workflow is already created, you may run it using the command `testkube run testworkflow TEST_WORKFLOW_NAME -f`.
  However, if you need to create a Test Workflow in this workflow, please add a creation command, e.g.: `testkube create testworkflow -f EXAMPLE_FILE.yaml`.
@@ -59,6 +61,7 @@ steps:
   - uses: kubeshop/setup-testkube@v1
     with:
       namespace: custom-testkube
+      version: 2.0.11
 
   - run: |
       testkube run testworkflow TEST_WORKFLOW_NAME -f 
