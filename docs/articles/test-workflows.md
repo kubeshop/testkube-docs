@@ -294,7 +294,7 @@ steps:
       image: anasoid/jmeter:5.6-plugins-21-jre
 ```
 
-Please keep into account that the image should be stored in Docker registry, public or private one. In case of local images, 
+Please remember that the image should be stored in a Docker registry, which can be public or private. In the case of local images, 
 you can use [Docker one] (https://www.docker.com/blog/how-to-use-your-own-registry-2/) or something similar.
 Currently, we receive the image metadata only from the Docker registry, not the container storage or docker-daemon.
 
