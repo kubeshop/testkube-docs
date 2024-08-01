@@ -328,12 +328,12 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              label: "Basic Example",
+              label: "Basic",
               id: "articles/examples/k6-basic",
             },
             {
               type: "doc",
-              label: "Distributed Testing",
+              label: "Distributed",
               id: "articles/examples/k6-distributed",
             },
             {
@@ -396,7 +396,7 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              label: "Selenium",
+              label: "Basic",
               id: "articles/examples/selenium-basic",
             },
             {
@@ -412,7 +412,7 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              label: "Postman",
+              label: "Basic",
               id: "articles/examples/postman-basic",
             },
             {
@@ -443,7 +443,7 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              label: "Pytest",
+              label: "Basic",
               id: "articles/examples/pytest-basic",
             },
             {
