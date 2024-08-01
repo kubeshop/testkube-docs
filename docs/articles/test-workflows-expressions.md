@@ -77,7 +77,7 @@ while the others may be accessible only dynamically in the container.
 | `cloud.api.key`                                            | ✅                    | Cloud API key for using in Cloud and On Prem editions                             |
 | `cloud.ui.url`                                             | ✅                    | Cloud UI URL for using in Cloud and On Prem editions                              |
 | `cloud.api.orgId`                                          | ✅                    | Cloud API organization ID for using in Cloud and On Prem editions                 |
-| `cloud.api.envId`                                          | ✅                    | Cloud api environment ID for using in Cloud and On Prem editions                  |
+| `cloud.api.envId`                                          | ✅                    | Cloud API environment ID for using in Cloud and On Prem editions                  |
 | `env` variables (like `env.SOME_VARIABLE`)                 | ❌                    | Environment variable value                                                        |
 | `failed`                                                   | ❌                    | Is the TestWorkflow Execution failed already at this point?                       |
 | `passed`                                                   | ❌                    | Is the TestWorkflow Execution still not failed at this point?                     |
