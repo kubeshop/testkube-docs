@@ -133,6 +133,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "Workflow Editor",
+                  id: "articles/testkube-dashboard-workflow-editor",
+                },
+                {
+                  type: "doc",
                   label: "Execution Details",
                   id: "articles/testkube-dashboard-execution-details",
                 },
@@ -141,7 +146,6 @@ const sidebars = {
                   label: "Workflow Templates",
                   id: "articles/testkube-dashboard-workflows-templates",
                 },
-
               ]
             },
             {
