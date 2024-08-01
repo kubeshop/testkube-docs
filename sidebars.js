@@ -120,6 +120,7 @@ const sidebars = {
             {
               type: "category",
               label: "Workflows",
+              collapsed: false,
               items : [
                 {
                   type: "doc",
@@ -152,16 +153,6 @@ const sidebars = {
               type: "doc",
               label: "Integrations",
               id: "articles/integrations-dashboard-explore",
-            },
-            {
-              type: "doc",
-              label: "Test Insights",
-              id: "articles/insights-dashboard-explore",
-            },
-            {
-              type: "doc",
-              label: "Status Page",
-              id: "articles/status-page-dashboard-explore",
             },
             {
               type: "doc",

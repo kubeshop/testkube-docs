@@ -21,8 +21,8 @@ The navigation on the left (2) of the screen contains buttons for (in top-to-bot
 - Environment Overview - see below.
 - Test Workflows - [Read More](/articles/testkube-dashboard-workflows-overview)
 - Integrations - [Read More](/articles/integrations-dashboard-explore)
-- Test Insights - [Read More](/articles/insights-dashboard-explore)
-- Status Pages - [Read More](/articles/status-page-dashboard-explore)
+- Test Insights - [Read More](/articles/test-insights)
+- Status Pages - [Read More](/testkube-pro/articles/status-pages)
 - Tests *
 - Test Suites *
 - Executors *
