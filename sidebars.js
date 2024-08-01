@@ -42,7 +42,7 @@ const sidebars = {
             "articles/install/advanced-install",
           ],
         },
-        { type: "doc", label: "Upgrading", id: "articles/upgrade" },
+        {type: "doc", label: "Upgrading", id: "articles/upgrade"},
         "articles/install/deployment-architectures",
         "articles/install/faq",
         {
@@ -83,6 +83,11 @@ const sidebars = {
               label: "Using an external MongoDB",
               id: "articles/testkube-dependencies",
             },
+            {
+              type: "link",
+              label: "Testkube with Kind",
+              href: "https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker"
+            }
           ],
         },
       ],
@@ -122,7 +127,7 @@ const sidebars = {
           type: "category",
           label: "Test Workflows",
           items: [
-            { type: "doc", label: "Overview", id: "articles/test-workflows" },
+            {type: "doc", label: "Overview", id: "articles/test-workflows"},
             {
               type: "doc",
               label: "Basic Examples",
@@ -311,7 +316,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Examples & Use Cases",
+      label: "Examples & Guides",
       link: {
         type: "doc",
         id: "articles/examples/overview",
@@ -331,6 +336,21 @@ const sidebars = {
               label: "Distributed",
               id: "articles/examples/k6-distributed",
             },
+            {
+              type: "link",
+              label: "Testkube K6 Introduction",
+              href: "https://testkube.io/blog/load-testing-in-kubernetes-with-k6-and-testkube"
+            },
+            {
+              type: "link",
+              label: "Testkube vs K6-operator",
+              href: "https://testkube.io/learn/comparing-the-k6-operator-vs-testkube-for-load-testing"
+            },
+            {
+              type: "link",
+              label: "Generating Massive Load",
+              href: "https://testkube.io/learn/a-guide-to-scalable-and-heavy-load-testing-with-k6-and-testkube"
+            }
           ],
         },
         {
@@ -347,6 +367,11 @@ const sidebars = {
               label: "Sharded",
               id: "articles/examples/cypress-sharded",
             },
+            {
+              type: "link",
+              label: "Scaling Cypress Tests",
+              href: "https://testkube.io/learn/scaling-cypress-tests-parallelise-your-end-to-end-tests-with-testkube"
+            }
           ],
         },
         {
@@ -366,14 +391,36 @@ const sidebars = {
           ],
         },
         {
-          type: "doc",
+          type: "category",
           label: "Selenium",
-          id: "articles/examples/selenium-basic",
+          items: [
+            {
+              type: "doc",
+              label: "Basic",
+              id: "articles/examples/selenium-basic",
+            },
+            {
+              type: "link",
+              label: "Functional Testing with Selenium",
+              href: "https://testkube.io/learn/functional-testing-with-selenium-in-testkube"
+            }
+          ]
         },
         {
-          type: "doc",
+          type: "category",
           label: "Postman",
-          id: "articles/examples/postman-basic",
+          items: [
+            {
+              type: "doc",
+              label: "Basic",
+              id: "articles/examples/postman-basic",
+            },
+            {
+              type: "link",
+              label: "API Test Automation with Postman",
+              href: "https://testkube.io/learn/functional-testing-with-selenium-in-testkube"
+            }
+          ]
         },
         {
           type: "doc",
@@ -391,9 +438,30 @@ const sidebars = {
           id: "articles/examples/gradle-basic",
         },
         {
-          type: "doc",
+          type: "category",
           label: "Pytest",
-          id: "articles/examples/pytest-basic",
+          items: [
+            {
+              type: "doc",
+              label: "Basic",
+              id: "articles/examples/pytest-basic",
+            },
+            {
+              type: "link",
+              label: "Pytest and Testkube",
+              href: "https://testkube.io/learn/testing-kubernetes-applications-with-pytest-and-testkube-a-complete-guide"
+            },
+          ]
+        },
+        {
+          type: "link",
+          label: "REST Assured",
+          href: "https://testkube.io/learn/api-testing-using-restassured-and-testkube"
+        },
+        {
+          type: "link",
+          label: "Cucumber",
+          href: "https://testkube.io/learn/simplify-bdd-testing-for-distributed-java-applications-with-testkube"
         },
         {
           type: "category",
@@ -425,6 +493,11 @@ const sidebars = {
               label: "Parallelized",
               id: "articles/examples/robot-framework-parallel",
             },
+            {
+              type: "link",
+              label: "Automated Acceptance Testing",
+              href: "https://testkube.io/learn/automated-acceptance-testing-with-robot-framework-and-testkube"
+            }
           ],
         },
         {
@@ -453,8 +526,8 @@ const sidebars = {
         description: "Testkube Integrations",
       },
       items: [
-        { type: "doc", label: "GitHub", id: "articles/github-actions" },
-        { type: "doc", label: "GitLab", id: "articles/gitlab" },
+        {type: "doc", label: "GitHub", id: "articles/github-actions"},
+        {type: "doc", label: "GitLab", id: "articles/gitlab"},
         {
           type: "doc",
           label: "Jenkins Pipelines",
@@ -465,28 +538,28 @@ const sidebars = {
           label: "Jenkins UI",
           id: "articles/jenkins-ui",
         },
-        { type: "doc", label: "Azure DevOps", id: "articles/azure" },
+        {type: "doc", label: "Azure DevOps", id: "articles/azure"},
         {
           type: "doc",
           label: "CircleCI",
           id: "articles/circleci",
         },
-        { type: "doc", label: "ArgoCD", id: "articles/argocd-integration" },
-        { type: "doc", label: "Flux", id: "articles/flux-integration" },
-        { type: "doc", label: "CDEvents", id: "articles/cd-events" },
-        { type: "doc", label: "Tekton", id: "articles/tekton" },
+        {type: "doc", label: "ArgoCD", id: "articles/argocd-integration"},
+        {type: "doc", label: "Flux", id: "articles/flux-integration"},
+        {type: "doc", label: "CDEvents", id: "articles/cd-events"},
+        {type: "doc", label: "Tekton", id: "articles/tekton"},
         {
           type: "doc",
           label: "Slack Integration",
           id: "articles/slack-integration",
         },
-        { type: "doc", label: "Prometheus", id: "articles/metrics" },
+        {type: "doc", label: "Prometheus", id: "articles/metrics"},
         {
           type: "doc",
           label: "Kubernetes Events",
           id: "articles/k8s-events",
         },
-        { type: "doc", label: "Webhooks", id: "articles/webhooks" },
+        {type: "doc", label: "Webhooks", id: "articles/webhooks"},
         {
           type: "link",
           label: "PagerDuty",
@@ -568,7 +641,7 @@ const sidebars = {
               label: "Docker CLI",
               id: "articles/testkube-cli-docker",
             },
-            { type: "doc", label: "OAuth for CLI", id: "articles/oauth-cli" },
+            {type: "doc", label: "OAuth for CLI", id: "articles/oauth-cli"},
             {
               type: "category",
               label: "Command Reference",
@@ -712,7 +785,7 @@ const sidebars = {
             },
           ],
         },
-        { type: "doc", label: "Deprecations", id: "articles/deprecations" },
+        {type: "doc", label: "Deprecations", id: "articles/deprecations"},
         {
           type: "doc",
           label: "Generating Test CRDs",
@@ -730,7 +803,7 @@ const sidebars = {
           id: "articles/testkube-dashboard-general-settings",
         },
 
-        { type: "doc", label: "Templates", id: "articles/templates" },
+        {type: "doc", label: "Templates", id: "articles/templates"},
         "articles/legacy-architecture",
       ],
     },
