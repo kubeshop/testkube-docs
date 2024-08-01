@@ -74,7 +74,7 @@ while the others may be accessible only dynamically in the container.
 | `resource.root`                                            | ✅                    | Either execution ID, or nested resource ID, of the resource that has scheduled it |
 | `namespace`                                                | ✅                    | Namespace where the execution will be scheduled                                   |
 | `workflow.name`                                            | ✅                    | Name of the executed TestWorkflow                                                 |
-| `cloud.api.key`                                            | ✅                    | Cloud api key for using in Cloud and On Prem editions                             |
+| `cloud.api.key`                                            | ✅                    | Cloud API key for using in Cloud and On Prem editions                             |
 | `cloud.ui.url`                                             | ✅                    | Cloud ui url for using in Cloud and On Prem editions                              |
 | `cloud.api.orgId`                                          | ✅                    | Cloud api organization ID for using in Cloud and On Prem editions                 |
 | `cloud.api.envId`                                          | ✅                    | Cloud api environment ID for using in Cloud and On Prem editions                  |
