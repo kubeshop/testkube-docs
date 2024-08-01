@@ -10,7 +10,7 @@ You can find the docs here: https://docs.testkube.io
 If you're editing the docs, follow this workflow:
 
 1. Install dependencies with `npm install`
-2. Spin up local development with `npm run start`
+2. Spin up local development with `npm run start`, add `-- --port XXXX` if you need to change the default port (3000)
 3. Update the docs inside the `/docs` folder
 4. Make sure to add the new document in the `sidebar.json` file:
 

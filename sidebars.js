@@ -118,9 +118,31 @@ const sidebars = {
               id: "articles/testkube-dashboard-explore",
             },
             {
-              type: "doc",
+              type: "category",
               label: "Workflows",
-              id: "articles/workflows-dashboard-explore",
+              items : [
+                {
+                  type: "doc",
+                  label: "Workflows Overview",
+                  id: "articles/testkube-dashboard-workflows-overview",
+                },
+                {
+                  type: "doc",
+                  label: "Workflow Details",
+                  id: "articles/testkube-dashboard-workflow-details",
+                },
+                {
+                  type: "doc",
+                  label: "Execution Details",
+                  id: "articles/testkube-dashboard-execution-details",
+                },
+                {
+                  type: "doc",
+                  label: "Workflow Templates",
+                  id: "articles/testkube-dashboard-workflows-templates",
+                },
+
+              ]
             },
             {
               type: "doc",
@@ -129,7 +151,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Insights",
+              label: "Test Insights",
               id: "articles/insights-dashboard-explore",
             },
             {

@@ -1,66 +1,44 @@
-# Explore the Testkube Dashboard
+# The Testkube Dashboard
 
-The Testkube Dashboard displays the current status of tests workflows executed in your environment.
+The Testkube Dashboard provides a centralized user interface for managing your Testkube Installation. The Dashboard
+is included with the Testkube Control Plane and can be accessed after installation either via local port-forwarding using the 
+`testkube dashboard` command or via the NGINX Ingress Controller - [Read More](/articles/install/install-with-helm). 
+
+When opening the Dashboard you will be presented with the following layout:
 
 ![Testkube Dashboard](../img/dashboard-072024.png)
 
-The toggles a the top of the screen (1) make it easy to choose the Organization and Environment you are working in.
+The toggles at the top of the screen (1) allow you to choose the Organization and Environment 
+currently shown in the Dashboard.
 
-The navigation on the left (2) of the screen includes links to toggle between:
+:::info
+See the documentation on [Organizations](/testkube-pro/articles/organization-management) and [Environments](/testkube-pro/articles/environment-management)
+for more information on how to manage your Testkube Instance.
+:::
 
-- Home
-- Test Workflows
-- Integrations
-- Insights
-- Status Page
-- Tests
-- Test Suites
-- Executors
-- Sources
-- Settings
+The navigation on the left (2) of the screen contains buttons for (in top-to-bottom order):
 
-Each of these will be described further in other pages.
+- Environment Overview - see below.
+- Test Workflows - [Read More](/articles/testkube-dashboard-workflows-overview)
+- Integrations - [Read More](/articles/integrations-dashboard-explore)
+- Test Insights - [Read More](/articles/insights-dashboard-explore)
+- Status Pages - [Read More](/articles/status-page-dashboard-explore)
+- Tests *
+- Test Suites *
+- Executors *
+- Sources *
+- Settings - [Read More](/articles/settings-dashboard-explore)
 
-You will see an overview of the Pass/Fail Ratio (3), the number of Failed Executions and the Total Executions.
+(* are deprecated and not shown if you have them disabled, [Read More](/articles/legacy-features#enabling-legacy-tests-dashboard-functionality))
 
-Scroll to see the list of most recent executions (4).
+## Environment Overview
 
-These can be filtered by Test Workflow, Test and Test Suite (5).
+The top left icon takes you to an overview of the currently selected environment, as shown above. 
 
-Select a test from the list to see its details.
+It contains:
 
-The modal that opens has the following tabs:
+- An overview of the Pass/Fail Ratio, the number of Failed Executions and the Total Executions (3).
+- A scrollable list of most recent executions (4).
+- Filters for narrowing down on specific types of executions (5).
 
-**Log Output:**
-
-![Log Output](../img/workflows-log-output-072024.png)
-
-**Artifacts:**
-
-![Artifacts](../img/workflows-artifacts-tab-072024.png)
-
-**Workflow:**
-
-![Code](../img/workflows-code-072024.png)
-
-Closing the modal reveals additional details about the workflow.
-
-The **Overview** tab outlines the steps of the selected workflow.
-
-![Overview](../img/workflows-overview-072024.png)
-
-The **Executions** tab has the list of executions. A green checkmark denotes a successful execution, a red 'x' denotes a failed execution and circling dots denotes a current run.
-
-![Executions](../img/workflows-execution-072024.png)
-
-The **CI/CD Integration** tab shows any integrations used in the workflow.
-
-![CI/CD Integration](../img/workflows-cicd-integrations-072024.png)
-
-The **CLI Commands** tab shows the commands used to perform the selected test:
-
-![CLI Commands](../img/workflows-cli-commands-072024.png)
-
-Use the **Settings** tab to view or change the local settings of the workflow.
-
-![Settings](../img/workflows-settings-072024.png)
+Selecting an execution opens the corresponding [Execution Details](testkube-dashboard-execution-details)

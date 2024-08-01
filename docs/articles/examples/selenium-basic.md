@@ -4,6 +4,10 @@ import SimpleSelenium from "../../workflows/simple-selenium-workflow.md"
 
 # Basic Selenium Example
 
+import RequiresCommercialWorkflows from "../_commercial-workflows-note.mdx"
+
+<RequiresCommercialWorkflows/>
+
 Below is a basic workflow for executing a Selenium test with maven - the test itself is written in Java and available
 on GitHub. You can paste this directly into the YAML of an existing or new test, just make
 sure to update the `name` and `namespace` for your environment if needed.
