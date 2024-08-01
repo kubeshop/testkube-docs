@@ -1840,7 +1840,7 @@ components:
           description: running context for the test execution
         disableWebhooks:
           type: boolean
-          description: whether webhooks on the executions of this step are disabled
+          description: whether webhooks on the execution of this step are disabled
           default: false
           example:
             - true
@@ -1946,7 +1946,7 @@ components:
           description: test suite execution name started the test suite execution
         disableWebhooks:
           type: boolean
-          description: whether webhooks on the executions of this test suite are disabled
+          description: whether webhooks on the execution of this test suite are disabled
           default: false
           example:
             - true
@@ -2319,13 +2319,6 @@ components:
           example:
             - true
             - false
-        onStateChange:
-          type: boolean
-          description: whether webhook is triggered on state change only
-          default: false
-          example:
-            - true
-            - false
     Event:
       description: Event data
       type: object
@@ -2385,16 +2378,30 @@ components:
         - end-test-failed
         - end-test-aborted
         - end-test-timeout
+        - become-test-up
+        - become-test-down
+        - become-test-failed
+        - become-test-aborted
+        - become-test-timeout
         - start-testsuite
         - end-testsuite-success
         - end-testsuite-failed
         - end-testsuite-aborted
         - end-testsuite-timeout
+        - become-testsuite-up
+        - become-testsuite-down
+        - become-testsuite-failed
+        - become-testsuite-aborted
+        - become-testsuite-timeout
         - queue-testworkflow
         - start-testworkflow
         - end-testworkflow-success
         - end-testworkflow-failed
         - end-testworkflow-aborted
+        - become-testworkflow-up
+        - become-testworkflow-down
+        - become-testworkflow-failed
+        - become-testworkflow-aborted
         - created
         - updated
         - deleted
@@ -3099,9 +3106,7 @@ components:
           description: test workflow execution name started the test workflow execution
         disableWebhooks:
           type: boolean
-          description: >-
-            whether webhooks on the executions of this test workflow are
-            disabled
+          description: whether webhooks on the execution of this test workflow are disabled
           default: false
     TestWorkflowWithExecution:
       type: object
@@ -3189,9 +3194,7 @@ components:
           description: test workflow execution name started the test workflow execution
         disableWebhooks:
           type: boolean
-          description: >-
-            whether webhooks on the executions of this test workflow are
-            disabled
+          description: whether webhooks on the execution of this test workflow are disabled
           default: false
           example:
             - true
@@ -3712,8 +3715,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TestWorkflowEvent'
-        notifications:
-          $ref: '#/components/schemas/TestWorkflowNotificationsConfig'
     TestWorkflowTemplateSpec:
       type: object
       properties:
@@ -4384,13 +4385,6 @@ components:
           description: volumes to mount to the container
           items:
             $ref: '#/components/schemas/VolumeMount'
-    TestWorkflowNotificationsConfig:
-      type: object
-      properties:
-        disableWebhooks:
-          type: boolean
-          description: disable webhooks for this test workflow
-          default: false
     TestWorkflowStepRun:
       type: object
       properties:
@@ -4549,10 +4543,6 @@ components:
         status:
           $ref: '#/components/schemas/TestWorkflowExecutionStatusCR'
           description: test workflow execution status
-        disableWebhooks:
-          type: boolean
-          description: disable webhooks for this execution
-          default: false
     TestWorkflowExecutionStatusCR:
       type: object
       description: test workflow execution status
