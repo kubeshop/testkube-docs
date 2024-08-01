@@ -1,13 +1,28 @@
-# Explore the Integrations Dashboard
+# Integrations Overview
 
-React to incoming Kubernetes events or trigger other integrations and webhooks.
+The Integrations Overview provides access to Testkube functionality for integrating with your
+existing tooling and infrastructure.
 
-![Integrations Dashboard](../img/integrations-dashboard-072024.png)
+## Kubernetes Triggers 
 
-See the existing Kubernetes Triggers available for create a a new trigger.
+Integrate Testkube with Kubernetes for triggering Workflows based on Kubernetes Events - [Read More](/articles/test-triggers)
 
-The same functionality is available on the **Webhooks** tab.
+![Kubernetes Triggers](images/trigger-integrations-overview.png)
 
-![Integrations Webhooks Dashboard](../img/integrations-webhooks-dashboard-072024.png)
+## Webhooks
 
-Read more information on [Triggering Tests](/docs/articles/triggering-tests.md) and [Webhooks](/docs/articles/webhooks.mdx).
+Integrate with external tools (Slack, Zapier, etc) based on internal events in Testkube - [Read More](/articles/webhooks)
+
+![Webhooks Integrations](images/webhooks-integrations-overview.png)
+
+## CI/CD Tools
+
+Shows how to integrate Testkube with most popuple CI/CD tools.
+
+![CI/CD Integrations](images/cicd-integrations-overview.png)
+
+## Notifications & Alerts
+
+Shows how to integrate Testkube with your existing infrastructure processes and workflows.
+
+![Notifications Integrations](images/notifications-integrations-overview.png)
