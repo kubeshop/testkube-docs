@@ -6,14 +6,15 @@ At a more tactical level, templates avoid repetition and can be used to hide imp
 
 Templates are flexible and can be used is various ways:
 
-- Template testing tools: Define a common usage of Cypress across your organization.
+- Template testing tools: Define a common usage of Cypress (or any other tool) across your organization.
 - Template setup: Run scripts before your tests or tear down steps.
 - Template test sources: Define credentials once to make it easy to update them.
 - Template common labels: Attach labels per company department.
 - Template technical details: Define an abstraction which handles closing Istio sidecar.
 - Template integrations: Run anything after tests fail.
+- Template resource constraints: Define common container resource limits for all your tests.
 - Template log collection: Collect logs from tested components to help with troubleshooting [read more][capture-logs].
-- Template application-under-test: Start the actual components to be tested (and/or their dependencies) instead of relying those to be running
+- Template application-under-test: Start the actual components to be tested (and/or their dependencies) instead of relying those to be running.
 
 ## Basics
 
