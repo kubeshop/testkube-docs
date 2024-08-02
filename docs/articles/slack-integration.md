@@ -2,6 +2,8 @@
 
 In order to receive notifications in Slack about the status of the testing process, Testkube provides integration with Slack. Below are the configuration steps. Click [here](#video-tutorial) for a video tutorial.
 
+Testkube also offers an integration with Slack using webhooks. Please visit [Empowering Kubernetes Tests with Webhooks](https://testkube.io/blog/empowering-kubernetes-tests-with-webhooks) for the details.
+
 ## Step 1 - Install the Testkube bot to Your Slack Workspace
 
 Testkube bot:

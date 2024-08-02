@@ -7,7 +7,7 @@ In order to use an external MongoDB instance, follow these steps:
 1. Make sure you have access to the MongoDB you want to connect to - note: newest versions of MongoDB might not work optimally with Testkube, for the best experience, use MongoDB v4.4.12
 2. Install Testkube with --set mongo.enabled=false:
 `kubectl testkube install --set mongo.enabled=false`
-3. [Update MongoDB details for the api-server in the Helm values with valid connection string](../testkube-pro-on-prem/articles/usage-guide#mongodb).
+3. [Update MongoDB details for the api-server in the Helm values with valid connection string](/articles/install/advanced-install#mongodb).
 
 ### SSL Connections
 

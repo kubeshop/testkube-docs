@@ -128,7 +128,7 @@ To use your own ingress controller, reach out to our support team and we’ll gl
 
 ## Kubernetes Namespaces
 
-#### Namespaces for Test Execution
+### Namespaces for Test Execution
 
 The Testkube agent creates Kubernetes jobs when executing a test workflow. By default, the job will be spawned within the namespace where Testkube is installed. You can opt to [run tests in a different namespace](/articles/creating-tests/#run-the-test-in-a-different-execution-namespace), in which case you will have to allow this by configuring these namespaces in `executionNamespaces`.
 
@@ -138,7 +138,7 @@ testkube-agent:
     executionNamespaces: ["my-namespace"]
 ```
 
-#### Namespaces for Kubernetes Trigger Events
+### Namespaces for Kubernetes Trigger Events
 
 Testkube's Kubernetes triggers allow you to execute a test workflow. By default, Testkube watches events across the whole cluster. You might want to limit the namespaces that Testkube observes due to security restrictions, in which case you can use the multinamespace configuration:
 
@@ -154,7 +154,7 @@ testkube-agent:
 
 Note: The naming is a bit counterintuitive but this instructs Testkube to stop watching all namespaces and to only observe the namespaces listed on top of the namespace where Testkube is installed. No ClusterRole will be created, instead you will have Roles for each specified namespace.
 
-#### Namespaces for Testkube Custom Resources
+### Namespaces for Testkube Custom Resources
 
 Testkube enables GitOps practices by storing configuration within custom resources, such as the TestWorkflow CRD. By default, Testkube will only watch for custom Testkube resources within the namespace where it is installed. It is currently unsupported to change this behaviour.
 
@@ -162,7 +162,7 @@ Testkube enables GitOps practices by storing configuration within custom resourc
 
 Testkube Enterprise supports integrating with existing infrastructure components such as MongoDB, NATS, Dex, etc. For production environments, it's recommended to use your own infra or to harden the sub-charts.
 
-#### MongoDB
+### MongoDB
 
 Testkube Enterprise uses MongoDB as a database for storing all the data.
 By default, it will install a MongoDB instance using the Bitnami MongoDB Helm chart.
@@ -181,7 +181,7 @@ testkube-cloud-api:
 
 You can follow [these instructions][guide-mongo-ssl] in case you want to work with SSL Connections.
 
-#### NATS
+### NATS
 
 Testkube Enterprise uses NATS as a message broker for communication between API and Agents.
 
@@ -197,7 +197,7 @@ testkube-cloud-api:
       uri: <nats uri (nats://...)>
 ```
 
-#### MinIO
+### MinIO
 
 Testkube Enterprise uses MinIO as a storage backend for storing artifacts.
 
@@ -211,7 +211,7 @@ testkube-cloud-api:
     minio: {} # check out the `testkube-cloud-api.api.minio` block in the values.yaml for all available settings
 ```
 
-#### Dex
+### Dex
 
 Testkube Enterprise uses Dex as an identity provider.
 
