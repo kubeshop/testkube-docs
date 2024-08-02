@@ -7,7 +7,7 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: enterprise-api/1.10.14
+  version: cloud-api/1.10.38
 paths:
   /users:
     get:
@@ -86,5 +86,32 @@ paths:
           $ref: './components.yaml#/components/responses/ForbiddenError'
       security:
         - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+  /users/{id}/settings:
+    get:
+      summary: User settings, global for Testkube Pro or Enterprise
+      description: Get API info like current version
+      operationId: getUserSettings
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/Settings'
+        '500':
+          $ref: './components.yaml#/components/responses/InternalServerError'
+    patch:
+      summary: Update setting for given parameter
+      description: Update setting for given user
+      operationId: updateUserSettings
+      requestBody:
+        $ref: './components.yaml#/components/requestBodies/SettingUpsert'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/Setting'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '405':
+          $ref: './components.yaml#/components/responses/MethodNotAllowedError'
+        '500':
+          $ref: './components.yaml#/components/responses/InternalServerError'
     parameters:
       - $ref: './components.yaml#/components/parameters/ID'

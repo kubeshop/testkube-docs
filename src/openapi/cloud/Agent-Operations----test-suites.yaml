@@ -7,7 +7,7 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: enterprise-api/1.10.14
+  version: cloud-api/1.10.38
 paths:
   /organizations/{id}/environments/{environmentId}/agent/test-suites:
     get:
