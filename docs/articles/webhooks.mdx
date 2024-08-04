@@ -310,16 +310,30 @@ Webhooks can be triggered on any of the following events:
 - end-test-failed
 - end-test-aborted
 - end-test-timeout
+- become-test-up
+- become-test-down
+- become-test-failed
+- become-test-aborted
+- become-test-timeout
 - start-testsuite
 - end-testsuite-success
 - end-testsuite-failed
 - end-testsuite-aborted
 - end-testsuite-timeout
+- become-testsuite-up
+- become-testsuite-down
+- become-testsuite-failed
+- become-testsuite-aborted
+- become-testsuite-timeout
 - queue-testworkflow
 - start-testworkflow
 - end-testworkflow-success
 - end-testworkflow-failed
 - end-testworkflow-aborted
+- become-testworkflow-up
+- become-testworkflow-down
+- become-testworkflow-failed
+- become-testworkflow-aborted 
 - created
 - updated
 - deleted
@@ -499,7 +513,7 @@ testkube create webhook --disable --name "${WEBHOOK_NAME}" ...
 To enable it explicitly:
 
 ```bash
-testkube create webhook --enable --name "${WEBHOOK_NAME}" ...
+testkube create webhook --disable=false --name "${WEBHOOK_NAME}" ...
 ```
 
 #### Set on Update
@@ -513,7 +527,7 @@ testkube update webhook --disable --name "${WEBHOOK_NAME}"
 To enable:
 
 ```bash
-testkube update webhook --enable --name "${WEBHOOK_NAME}"
+testkube update webhook --disable=false --name "${WEBHOOK_NAME}"
 ```
 
 </TabItem>
@@ -560,7 +574,7 @@ To enable a webhook again, you can either set the field `disabled` to `"false"` 
 
 ### Disabling Webhooks on Other Resources
 
-Disabling webhooks can also be done directly on an execution, a test, a test suite and a test workflow. This way the notifications can be disabled temporarily during creation or when they need to be fixed or updated. The CLI offers the flag `--disable-webhooks`, the API the parameter `disableWebhooks`, and the CRDs `disableWebhooks`. When not set explicitly, webhooks will be enabled by default.
+Disabling webhooks can also be done directly on an execution of a test, a test suite and a test workflow. This way the notifications can be disabled temporarily during running the execution. The CLI offers the flag `--disable-webhooks`, the API the parameter `disableWebhooks`. When not set explicitly, webhooks will be enabled by default.
 
 #### Disabling Webhooks on Tests
 
@@ -571,38 +585,7 @@ Disabling webhooks can also be done directly on an execution, a test, a test sui
 Use the flag `--disable-webhooks` on the CLI:
 
 ```bash
-testkube create test --name k6-test --type k6/script --test-content-type file-uri --file k6-test.js --disable-webhooks
-```
-
-</TabItem>
-
-<TabItem value="crd" label="CRD">
-
-Use the attribute `disableWebhooks` in the `executionRequest` on CRD level.
-
-```yaml
-apiVersion: tests.testkube.io/v3
-kind: Test
-metadata:
-  name: k6-test
-  namespace: testkube
-spec:
-  content:
-    data: |
-      import http from 'k6/http';
-      import { check } from 'k6';
-
-      export default function () {
-        const baseURI = `${__ENV.API_URI || 'http://google.com'}`;
-
-        check(http.get(`${baseURI}/joke`), {
-          'joke should be about Chuck': r => r.body.includes("Chuck") // this should fail
-        });
-      }
-    type: file-uri
-  executionRequest:
-    disableWebhooks: true
-  type: k6/script
+testkube run test k6-test --disable-webhooks
 ```
 
 </TabItem>
@@ -612,47 +595,9 @@ spec:
 The API expects a boolean value of the form:
 
 ```json
-  "executionRequest": {
+  {
     "disableWebhooks": true
   }
-```
-
-Inside a test this would look like the following:
-
-```json
-{
-  "name": "test-from-api",
-  "namespace": "testkube",
-  "type": "k6/script",
-  "content": {
-    "type": "string",
-    "data": "import http from 'k6/http';\n import { sleep } from 'k6';\n export default function () {\n const res = http.get(`http://${__ENV.MY_HOSTNAME}/`);\n sleep(1);\n}"
-  },
-  "labels": {
-    "env": "prod",
-    "app": "backend"
-  },
-  "variables": {
-    "var1": {
-      "name": "var1",
-      "value": "1",
-      "type": "basic"
-    },
-    "var2": {
-      "name": "var2",
-      "value": "2",
-      "type": "secret",
-      "secretRef": {
-        "namespace": "testkube",
-        "name": "var2name",
-        "key": "var2key"
-      }
-    }
-  },
-  "executionRequest": {
-    "disableWebhooks": true
-  }
-}
 ```
 
 </TabItem>
@@ -670,44 +615,7 @@ The examples show only the `create` operations, however these instructions work 
 Use the flag `--disable-webhooks` on the CLI:
 
 ```bash
-cat ts.json | /Users/lilla/bin/kubectl-testkube create testsuite --disable-webhooks
-```
-
-</TabItem>
-
-<TabItem value="crd" label="CRD">
-
-Use the attribute `disableWebhooks` in the `executionRequest` on CRD level:
-
-```yaml
-apiVersion: tests.testkube.io/v3
-kind: TestSuite
-metadata:
-  name: testkube-suite
-  namespace: testkube
-spec:
-  description: Testkube test suite, api, dashboard and performance
-  executionRequest: { disableWebhooks: true }
-  steps:
-    - execute:
-        - delay: 0s
-          test: testkube-api
-        - delay: 0s
-          test: testkube-dashboard
-      stopOnFailure: false
-    - execute:
-        - delay: 1s
-      stopOnFailure: false
-    - downloadArtifacts:
-        previousTestNames:
-          - testkube-api
-      execute:
-        - delay: 0s
-          test: testkube-dashboard
-        - delay: 1s
-        - delay: 0s
-          test: testkube-homepage
-      stopOnFailure: false
+testkube run testsuite test-suite-1 --disable-webhooks
 ```
 
 </TabItem>
@@ -717,33 +625,9 @@ spec:
 The API expects a boolean value of the form:
 
 ```json
-  "executionRequest": {
+  {
     "disableWebhooks": true
   }
-```
-
-Inside a test suite this would look like the following:
-
-```json
-{
-  "name": "test-suite-1",
-  "namespace": "testkube",
-  "description": "Example Test Suite",
-  "steps": [
-    {
-      "stopOnFailure": false,
-      "execute": [
-        {
-          "test": "existing-test"
-        }
-      ]
-    }
-  ],
-  "created": "2024-06-03T10:40:44Z",
-  "executionRequest": {
-    "disableWebhooks": true
-  }
-}
 ```
 
 </TabItem>
@@ -761,66 +645,7 @@ The examples show only the `create` operations, however these instructions work 
 Use the flag `--disable-webhooks` on the CLI:
 
 ```bash
-testkube create testworkflow --file wf.yaml --name test-workflow --disable-webhooks
-```
-
-</TabItem>
-
-<TabItem value="crd" label="CRD">
-
-For disabling webhooks on the test workflows, set the following on the workflow spec:
-
-```yaml
-notifications:
-  disableWebhooks: true
-```
-
-Example usage:
-
-```yaml
-apiVersion: testworkflows.testkube.io/v1
-kind: TestWorkflow
-metadata:
-  name: test-workflow
-  namespace: testkube
-spec:
-  container:
-    resources:
-      requests:
-        cpu: 128m
-        memory: 128Mi
-    workingDir: /data/repo/test/k6/executor-tests
-  content:
-    git:
-      paths:
-        - test/k6/executor-tests/k6-smoke-test.js
-      revision: main
-      uri: https://github.com/kubeshop/testkube
-  notifications:
-    disableWebhooks: true
-  steps:
-    - artifacts:
-        paths:
-          - "*"
-        workingDir: /data/artifacts
-      container:
-        image: grafana/k6:0.49.0
-      name: Run test
-      run:
-        args:
-          - run
-          - k6-smoke-test.js
-          - -e
-          - K6_ENV_FROM_PARAM=K6_ENV_FROM_PARAM_value
-        env:
-          - name: K6_SYSTEM_ENV
-            value: K6_SYSTEM_ENV_value
-          - name: K6_WEB_DASHBOARD
-            value: "true"
-          - name: K6_WEB_DASHBOARD_EXPORT
-            value: /data/artifacts/k6-test-report.html
-      setup:
-        - shell: mkdir /data/artifacts
+testkube run testworkflow test-workflow --disable-webhooks
 ```
 
 </TabItem>
@@ -830,80 +655,9 @@ spec:
 The API expects the following object set under the `spec` attribute:
 
 ```json
-        "notifications": {
+        {
             "disableWebhooks": true
         }
-```
-
-Example usage:
-
-```json
-{
-  "name": "wf1",
-  "namespace": "testkube",
-  "created": "2024-04-04T09:15:12Z",
-  "spec": {
-    "content": {
-      "git": {
-        "uri": "https://github.com/kubeshop/testkube",
-        "revision": "main",
-        "paths": ["test/k6/executor-tests/k6-smoke-test.js"]
-      }
-    },
-    "container": {
-      "workingDir": {
-        "value": "/data/repo/test/k6/executor-tests"
-      },
-      "resources": {
-        "requests": {
-          "cpu": "128m",
-          "memory": "128Mi"
-        }
-      }
-    },
-    "steps": [
-      {
-        "name": "Run test",
-        "run": {
-          "env": [
-            {
-              "name": "K6_SYSTEM_ENV",
-              "value": "K6_SYSTEM_ENV_value"
-            },
-            {
-              "name": "K6_WEB_DASHBOARD",
-              "value": "true"
-            },
-            {
-              "name": "K6_WEB_DASHBOARD_EXPORT",
-              "value": "/data/artifacts/k6-test-report.html"
-            }
-          ],
-          "args": {
-            "value": ["run", "k6-smoke-test.js", "-e", "K6_ENV_FROM_PARAM=K6_ENV_FROM_PARAM_value"]
-          }
-        },
-        "container": {
-          "image": "grafana/k6:0.49.0"
-        },
-        "artifacts": {
-          "workingDir": {
-            "value": "/data/artifacts"
-          },
-          "paths": ["*"]
-        },
-        "setup": [
-          {
-            "shell": "mkdir /data/artifacts"
-          }
-        ]
-      }
-    ],
-    "notifications": {
-      "disableWebhooks": true
-    }
-  }
-}
 ```
 
 </TabItem>
@@ -914,14 +668,34 @@ The examples show only the `create` operations, however, these instructions work
 
 ## Enable Webhooks on State Changes
 
-It is possible to get notified by webhooks only when the latest execution's outcome differs from the previous one. This way you can see instantly when one of your scheduled tests was healed or when they got broken. It could also help prevent alert fatigue by deduplicating the alerts and therefore decreasing the load on your monitoring systems. Enable this by setting `onStateChange` to true directly on the webhook.
+It is possible to get notified by webhooks only when the latest execution's outcome differs from the previous one. This way you can see instantly when one of your scheduled tests was healed or when they got broken. It could also help prevent alert fatigue by deduplicating the alerts and therefore decreasing the load on your monitoring systems.
+Testkube suppots special webhook event types to track changes between current and previous execution states.
+For Tests:
+- become-test-up (from any error state to succeed one)
+- become-test-down (from succeed state to any error one)
+- become-test-failed (from any state to failed one)
+- become-test-aborted (from any state to aborted one)
+- become-test-timeout (from any state to timeout one)
+
+For Test Suites:
+- become-testsuite-up (from any error state to succeed one)
+- become-testsuite-down (from succeed state to any error one)
+- become-testsuite-failed (from any state to failed one)
+- become-testsuite-aborted (from any state to aborted one)
+- become-testsuite-timeout (from any state to timeout one)
+
+For Test Workflows:
+- become-testworkflow-up (from any error state to succeed one)
+- become-testworkflow-down (from succeed state to any error one)
+- become-testworkflow-failed (from any state to failed one)
+- become-testworkflow-aborted (from any state to aborted one)
 
 <Tabs>
 
 <TabItem value="cli" label="CLI">
 
 ```bash
-testkube update webhook --name example-webhook --on-state-change
+testkube update webhook --name example-webhook
 ```
 
 </TabItem>
@@ -939,7 +713,6 @@ testkube update webhook --name example-webhook --on-state-change
         "end-test-failed"
     ],
     "disabled": false,
-    "onStateChange": true,
 }
 ```
 
@@ -958,7 +731,6 @@ spec:
   - start-test
   - end-test-success
   - end-test-failed
-  onStateChange: true
   uri: https://webhook.url/
 ```
 

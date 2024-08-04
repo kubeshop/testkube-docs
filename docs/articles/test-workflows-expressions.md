@@ -74,6 +74,10 @@ while the others may be accessible only dynamically in the container.
 | `resource.root`                                            | ✅                    | Either execution ID, or nested resource ID, of the resource that has scheduled it |
 | `namespace`                                                | ✅                    | Namespace where the execution will be scheduled                                   |
 | `workflow.name`                                            | ✅                    | Name of the executed TestWorkflow                                                 |
+| `cloud.api.key`                                            | ✅                    | Cloud API key for using in Cloud and On Prem editions                             |
+| `cloud.ui.url`                                             | ✅                    | Cloud UI URL for using in Cloud and On Prem editions                              |
+| `cloud.api.orgId`                                          | ✅                    | Cloud API organization ID for using in Cloud and On Prem editions                 |
+| `cloud.api.envId`                                          | ✅                    | Cloud API environment ID for using in Cloud and On Prem editions                  |
 | `env` variables (like `env.SOME_VARIABLE`)                 | ❌                    | Environment variable value                                                        |
 | `failed`                                                   | ❌                    | Is the TestWorkflow Execution failed already at this point?                       |
 | `passed`                                                   | ❌                    | Is the TestWorkflow Execution still not failed at this point?                     |

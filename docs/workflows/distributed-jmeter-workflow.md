@@ -19,7 +19,7 @@ spec:
       count: 5
       logs: always
       timeout: 30s
-      image: justb4/jmeter:5.5
+      image: anasoid/jmeter:5.6-plugins-21-jre
       command:
         - jmeter-server
         - -Dserver.rmi.localport=60000
@@ -37,7 +37,7 @@ spec:
   steps:
     - name: Run tests
       run:
-        image: justb4/jmeter:5.5
+        image: anasoid/jmeter:5.6-plugins-21-jre
         shell: |
           jmeter -n \
             -X -Jserver.rmi.ssl.disable=true -Jclient.rmi.localport=7000 \
