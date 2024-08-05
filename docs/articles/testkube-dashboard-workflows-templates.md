@@ -12,20 +12,23 @@ Under the **Workflow Templates** tab, you will find a list of available Workflow
 
 Just like with Workflow - you can toggle between grid and list layouts:
 
-TODO: screenshot of Workflow Templates list layout
+![Workflow Templates List](../img/workflow-templates-list.png)
+
 
 ## Workflow Template Settings
 
 Selecting a Workflow Template opens the Settings tab for the Template:
 
-TODO: screenshot of Workflow Template Settings
+![Workflow Templates Settings](../img/workflow-templates-settings.png)
+
 
 The General settings shown above allow you to specify the name and description of the template, and below that
 shows an example of how to use this template in a workflow.
 
 The Definition pane allows you to edit the Workflow Template.
 
-TODO: screenshot of Workflow Template Definition panel 
+![Workflow Template Definition](../img/workflow-template-definition.png)
+
 
 :::warn
 
@@ -33,7 +36,7 @@ Remember that changing your templates will affect all Workflows that use them - 
 
 :::
 
-## Adding a new Workflow Template
+## Adding a New Workflow Template
 
 Click the **Add a new template** button in the Workflows Template overview (shown above) to create a new Workflow Template. 
 The options are:
@@ -51,24 +54,28 @@ container/runnable testing tool across to base your test workflows on.
 The Git Content template wizard helps you create a Workflow Template that you can use across your workflows to ensure
 they are all using the same Git Source as their content.
 
-TODO: screenshot of the Git Content Template wizard
+![Git Workflow Template](../img/git-content-template-wizard.png)
+
 
 ### Creating a Static Content Template
 
 The Static content template wizard helps you create a Workflow Template that you can use across your workflows to ensure 
 they are all using the same static content in corresponding scenarios.
 
-TODO: screenshot of the Static Content Template wizard
+![Static Content Template Wizard](../img/static-content-template-wizard.png)
+
 
 ### Creating a Testing Tool Template
 
 The Testing Tool template wizard helps you create a Workflow Template that you can use across your workflows to ensure
 they are all using a specific testing tool or script in a consistent way.
 
-TODO: screenshot of the Testing Tool Template wizard
+![Testing Tool Template Wizard](../img/testing-tool-template-wizard.png)
+
 
 ### Creating a Template from YAML Content 
 
 This wizard allows you to paste or create any Workflow Template from YAML.
 
-TODO: screenshot of the Import from YAML Template wizard
+![Import from YAML Template Wizard](../img/import-from-yaml-template-wizard.png)
+

@@ -17,15 +17,16 @@ You can also switch from the Grid view to a Table view of all workflows in the s
 
 ![Workflow Search Filter](../img/workflow-table-view-072024.png)
 
-## Creating a new Workflow
+## Creating a New Workflow
 
 Selecting the "Add new test workflow" button on the top right opens the following dialog:
 
-TODO: screenshot of the "Create Test Workflow" dialog
+![Create Test Workflow](../img/create-test-workflow.png)
+
 
 The different options are described below.
 
-### Creating a Workflow using the Wizard
+### Creating a Workflow Using the Wizard
 
 This wizard will walk you through creating a Workflow to run your tests, broken down into the following 4 steps:
 
@@ -42,7 +43,7 @@ The first page shown below prompts you for:
 - **Labels**: optional labels you want to add to your workflow, helpful for searching/filtering/reporting
 - **Template**: which testing tool to use in this workflow 
 
-TODO: Screenshot of the "Create a Test Workflow" wizard
+![Create Test Workflow Wizard](../img/create-test-workflow-wizard.png)
 
 The options below this will depend on which Testing Tool you select, default values are shown in grey - override
 if you need to (for example the default Artillery version is 2.0.9 in the screenshot above)
@@ -55,11 +56,12 @@ This page allows you to optionally specify the testing script/content that will 
 selected in the first step. Selecting one of the options will show its corresponding settings, for example in 
 the screenshot below the Git option has been selected, prompting for the corresponding Git properties.
 
-TODO: Screenshot of the Content page with the Git option selected
+![Workflow Git Option](../img/workflow-git-option.png)
+
 
 Selecting Next moves you to the next page of the Wizard.
 
-#### Workflow Run command and Artifacts
+#### Workflow Run Command and Artifacts
 
 This page specifies which command to use to actually run your tests with the specified testing tool
 and test content.
@@ -95,12 +97,13 @@ affect other workflows using the same template.
 When you're happy with the created Workflow select either "Create & Run" or just "Create" from the button in the bottom 
 right to create your Workflow.
 
-### Creating a Workflow from an example
+### Creating a Workflow from an Example
 
 Use this option if you want to start from one of Testkubes many example Workflows which you can then further modify
 for your specific needs.
 
-TODO: Screenshot of the Create From Example wizard
+![Workflow from Example](../img/workflow-from-example.png)
+
 
 - The selector at the top allows you to filter which examples are shown
 - The list in the middle shows the available examples
@@ -115,12 +118,12 @@ You will most likely want to change the name of the created workflow, do this by
 
 :::
 
-### Creating a Workflow by combining existing Workflows
+### Creating a Workflow by Combining Existing Workflows
 
-This Wizard allows you to create a Workflow that orchestrates multiple existing Workflows to run either
-in sequence or parallel. 
+This Wizard allows you to create a Workflow that orchestrates multiple existing Workflows to run either in sequence or parallel. 
 
-TODO: Screenshot of the wizard
+![Combine Existing Workflows](../img/combine-existing-workflows.png)
+
 
 Start by specifying the name and optional labels that you want to add to this workflow, then select the 
 "Add the first workflow" button to select an initial workflow. Once added you can add more existing Workflows
@@ -138,6 +141,6 @@ Select either the Create or Create & Run option to create your workflow accordin
 
 This final option allows you to paste/edit your Workflow YAML from scratch:
 
-TODO: Screenshot of YAML wizard
+![Import from YAML Template Wizard](../img/import-from-yaml-template-wizard.png)
 
 Once done, select either the Create or Create & Run option to create your workflow accordingly.

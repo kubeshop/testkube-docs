@@ -72,10 +72,9 @@ other constructs in your Workflow
 
 :::
 
-The execution settings allow you to define which Docker image/tag, corresponding command and working directory
-to use to run your tests.
+The execution settings allow you to define which Docker image/tag, corresponding command and working directory to use to run your tests.
 
-TODO: Screenshot of the Execution Settings panel
+![Execution Settings](../img/execution-settings.png)
 
 ### Test Content Settings
 
@@ -87,7 +86,7 @@ edit the Workflow YAML directly if your Workflow uses more than one source for i
 :::
 
 
-TODO: Screenshot of the Test Content Settings panel
+![Test Content Settings](../img/test-content-settings.png)
 
 ### Resource Usage Settings
 
@@ -98,13 +97,13 @@ limits per image or Workflow step you can do this directly in the Workflow YAML 
 
 :::
 
-TODO: Screenshot of the Resource Usage Settings panel
+![Resource Usage Settings](../img/resource-usage-settings.png)
 
 ### Variables and Secrets
 
 This panel allows you to configure global variables and secrets used by your Workflow.
 
-TODO: Screenshot of the Variables and Secrets Settings panel
+![Variables & Secrets Settings](../img/variables-and-secrets-settings.png)
 
 ### Scheduling
 
@@ -117,7 +116,7 @@ multiple schedules you can do this directly in the Workflow YAML under the Defin
 
 Use this panel to define a single execution schedule for your Workflow.
 
-TODO: Screenshot of the Scheduling Settings panel
+![Scheduling Settings](../img/scheduling-settings.png)
 
 ### Definition
 
