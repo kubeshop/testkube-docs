@@ -100,3 +100,50 @@ npm run split-openapis
 ```
 
 Once run, the generated/updated files need to be committed back to the repo for the automated build to publish them.
+
+## Updating the CRD Reference Docs
+
+CRD references docs at [docs.testkube.io](https://docs.testkube.io/articles/crds) are generated from the 
+underlying GoLang types using a fork of the
+https://github.com/elastic/crd-ref-docs project, available at https://github.com/kubeshop/crd-ref-docs.
+
+- Clone/update the [testkube-operator](https://github.com/kubeshop/testkube-operator) to make sure you have the latest types
+- Clone the https://github.com/kubeshop/crd-ref-docs repo, make sure you have go tooling installed and run `go build`
+- Create a `docs` folder in the cloned repo and now run the following command using the generated `crd-ref-docs` tool:
+
+```shell
+./crd-ref-docs  
+  --source-path=<path to testestkube-operator project> 
+  --config=config.yaml 
+  --renderer=markdown 
+  --output-path=./docs 
+  --output-mode=group
+```
+
+For example:
+
+```shell
+ ./crd-ref-docs --source-path=/Users/olensmar/GolandProjects/testkube-operator --config=config.yaml --renderer=markdown --output-path=./docs --output-mode=group
+2024-08-05T11:44:21.019+0200    INFO    crd-ref-docs    Loading configuration   {"path": "config.yaml"}
+2024-08-05T11:44:21.020+0200    INFO    crd-ref-docs    Processing source directory     {"directory": "/Users/olensmar/GolandProjects/testkube-operator", "depth": 10}
+2024-08-05T11:44:22.717+0200    INFO    crd-ref-docs    Rendering output        {"path": "./docs"}
+2024-08-05T11:44:22.790+0200    INFO    crd-ref-docs    CRD reference documentation generated
+2024-08-05T11:44:22.790+0200    INFO    crd-ref-docs    Execution time: 1.770360541s
+```
+
+The `docs` folder should now contain the generated files:
+
+```shell
+➜  crd-ref-docs git:(master) ✗ ls -l docs
+total 152
+-rw-r--r-- 1 olensmar  8737 Aug  5 11:44 executor.testkube.io-v1.md
+-rw-r--r-- 1 olensmar 45172 Aug  5 11:44 tests.testkube.io-v1.md
+-rw-r--r-- 1 olensmar 10369 Aug  5 11:44 tests.testkube.io-v2.md
+-rw-r--r-- 1 olensmar 19695 Aug  5 11:44 tests.testkube.io-v3.md
+-rw-r--r-- 1 olensmar 60601 Aug  5 11:44 testworkflows.testkube.io-v1.md
+```
+
+Now:
+- Copy these files to the `/docs/articles/crds` folder in this repo
+- Make sure the info in `/docs/articles/crds.md` is correct/up-to-date
+- Create a branch, commit and create a PR
