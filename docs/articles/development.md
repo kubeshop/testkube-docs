@@ -2,9 +2,11 @@
 
 ## Running with CRDs on a Kubernetes Cluster
 
-The minimal component which must be deployed on your local Kubernetes cluster is the [Testkube Operator](https://github.com/kubeshop/testkube-operator) with project CRDs.
+The minimal component which must be deployed on your local
+Kubernetes cluster is the [Testkube Operator](https://github.com/kubeshop/testkube-operator) with 
+[Testkube CRDs](crds).
 
-To install CRDs into your local cluster, checkout the testkube-operator project and run:
+To install Testkube CRDs into your local cluster, checkout the testkube-operator project and run:
 
 ```sh
 make install 
