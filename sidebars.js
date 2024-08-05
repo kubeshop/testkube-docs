@@ -121,6 +121,48 @@ const sidebars = {
               label: "Overview",
               id: "articles/testkube-dashboard-explore",
             },
+            {
+              type: "category",
+              label: "Workflows",
+              collapsed: false,
+              items : [
+                {
+                  type: "doc",
+                  label: "Workflows Overview",
+                  id: "articles/testkube-dashboard-workflows-overview",
+                },
+                {
+                  type: "doc",
+                  label: "Workflow Details",
+                  id: "articles/testkube-dashboard-workflow-details",
+                },
+                {
+                  type: "doc",
+                  label: "Workflow Editor",
+                  id: "articles/testkube-dashboard-workflow-editor",
+                },
+                {
+                  type: "doc",
+                  label: "Execution Details",
+                  id: "articles/testkube-dashboard-execution-details",
+                },
+                {
+                  type: "doc",
+                  label: "Workflow Templates",
+                  id: "articles/testkube-dashboard-workflows-templates",
+                },
+              ]
+            },
+            {
+              type: "doc",
+              label: "Integrations",
+              id: "articles/integrations-dashboard-explore",
+            },
+            {
+              type: "doc",
+              label: "Settings",
+              id: "articles/settings-dashboard-explore",
+            },
           ],
         },
         {
