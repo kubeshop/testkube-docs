@@ -66,7 +66,7 @@ Selecting Next moves you to the next page of the Wizard.
 This page specifies which command to use to actually run your tests with the specified testing tool
 and test content.
 
-TODO: Screenshot of the Run page
+![Test Workflow Wizard Run Page](images/testworkflow-wizard-run-page.png)
 
 Here you can also specify: 
 
@@ -81,11 +81,11 @@ Selecting Next moves you to the last page of the Wizard.
 This shows the generated Workflow YAML based on all the input provided in the previous steps. You can 
 make adjustments to the YAML as needed, or go back to the previous steps to update accordingly.
 
-TODO: Screenshot of the Summary page
+![Test Workflow Wizard Summary](images/testworkflow-wizard-summary-page.png)
 
-Use the "Inline Template Definitions" checkbox in the bottom left to expand any used Templates into the generated YAML
+Use the "Inline Template Definitions" checkbox in the bottom left to inline any used Templates into the generated YAML
 
-TODO: Screenshot of the above Workflow with exanded template
+![Test Workflow Wizard Summary with inline Template](images/testworkflow-wizard-summary-expanded-template.png)
 
 :::tip
 
@@ -124,16 +124,15 @@ This Wizard allows you to create a Workflow that orchestrates multiple existing 
 
 ![Combine Existing Workflows](../img/combine-existing-workflows.png)
 
-
 Start by specifying the name and optional labels that you want to add to this workflow, then select the 
 "Add the first workflow" button to select an initial workflow. Once added you can add more existing Workflows
 and organize them to execute in any desired order/combination:
 
-TODO: Screenshot of multiple workflows orchestrated both in parallel and sequence
+![Test Workflow Composite Workflow Wizard](images/testworkflow-composite-wizard.png)
 
 Once done, select the Next button to see the corresponding YAML for your Workflow.
 
-TODO: Screenshot for generated YAML for the above shown configuration
+![Test Workflow Composite Workflow Wizard Summary](images/testworkflow-composite-wizard-summary.png)
 
 Select either the Create or Create & Run option to create your workflow accordingly.
 

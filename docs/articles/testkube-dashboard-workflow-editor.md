@@ -28,9 +28,11 @@ after saving, the corresponding Execution Details will be opened automatically.
 
 ## Template Inlining
 
-The below screenshot shows the Inline-Templates view in Full-screen mode
+The below screenshot shows the Inline-Templates view in Full-screen mode:
+- the left panel shows the actual workflow with the `use` clause
+- the right part shows the steps inlined by the `official--artillery--v1` template
 
-TODO: screenshot of inline templates in full-screen mode
+![Test Workflow editor in fullscreen with inline diff](images/workflows-fullscreen-inline-diff.png)
 
 ## Workflow Specific Editor Intelligence
 
@@ -51,19 +53,20 @@ Helps you craft valid Workflow YAMLs
 
 ### Error Indicators for Invalid Properties
 
-Helps you find and correct Workflow YAML errors
+Helps you find and correct Workflow YAML errors, in the below screenshot the `service` property is marked
+(it should be `services`)
 
-TODO: corresponding screenshot
+![Workflow Editor Error Marker](images/workflow-editor-error-marker.png)
 
 ### Autocomplete for Template Names
 
-Helps you select valid template(s) used in your Workflows.
+Helps you select valid template(s) used in your Workflows wherever a template name is expected:
 
-TODO: screenshot for template autocomplete
+![Workflow Editor Template Auto-complete](images/workflow-editor-template-autocomplete.png)
 
 ### Clickable Template References
 
-Helps you navigate/open used templates for editing
+Helps you navigate/open used templates for editing:
 
-TODO: corresponding screenshot
+![Workflow Editor Clickable Template References](images/workflow-editor-click-template-reference.png)
 
