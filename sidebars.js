@@ -597,7 +597,7 @@ const sidebars = {
             {
               type: "doc",
               label: "Overview",
-              id: "articles/crds-reference",
+              id: "articles/crds",
             },
             {
               type: "doc",
