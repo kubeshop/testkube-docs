@@ -148,6 +148,14 @@ total 152
 ```
 
 5. Copy these files to the `/docs/articles/crds` folder in this repo
-6. Make sure the info in `/docs/articles/crds.md` is correct/up-to-date 
-7. Create a branch, commit and create a PR
+6. Make sure the links and info in `/docs/articles/crds.md` is correct/up-to-date
+7. Add the deprecation warning at the top of all files containing deprecated APIs:
+
+```markdown
+import LegacyWarning from '../_legacy-warning.mdx';
+
+<LegacyWarning />
+```
+
+8. Create a branch, commit and create a PR
 
