@@ -592,12 +592,37 @@ const sidebars = {
         "articles/telemetry",
         {
           type: "category",
-          label: "Testkube CRD",
+          label: "Testkube CRDs",
           items: [
             {
               type: "doc",
-              label: "CRDs Reference",
+              label: "Overview",
               id: "articles/crds-reference",
+            },
+            {
+              type: "doc",
+              label: "testworkflows.testkube.io/v1",
+              id: "articles/crds/testworkflows.testkube.io-v1",
+            },
+            {
+              type: "doc",
+              label: "tests.testkube.io/v1",
+              id: "articles/crds/tests.testkube.io-v1",
+            },
+            {
+              type: "doc",
+              label: "tests.testkube.io/v2",
+              id: "articles/crds/tests.testkube.io-v2",
+            },
+            {
+              type: "doc",
+              label: "tests.testkube.io/v3",
+              id: "articles/crds/tests.testkube.io-v3",
+            },
+            {
+              type: "doc",
+              label: "executor.testkube.io/v1",
+              id: "articles/crds/executor.testkube.io-v1",
             },
           ],
         },
@@ -679,11 +704,6 @@ const sidebars = {
           },
           items: [
             "articles/development",
-            {
-              type: "doc",
-              label: "Testkube CRDs",
-              id: "articles/crds",
-            },
           ],
         },
       ],
