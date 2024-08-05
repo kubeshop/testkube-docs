@@ -103,13 +103,17 @@ Once run, the generated/updated files need to be committed back to the repo for 
 
 ## Updating the CRD Reference Docs
 
-CRD references docs at [docs.testkube.io](https://docs.testkube.io/articles/crds) are generated from the 
-underlying GoLang types using a fork of the
+CRD references docs at are generated from the corresponding GoLang types using a fork of the
 https://github.com/elastic/crd-ref-docs project, available at https://github.com/kubeshop/crd-ref-docs.
 
-- Clone/update the [testkube-operator](https://github.com/kubeshop/testkube-operator) to make sure you have the latest types
-- Clone the https://github.com/kubeshop/crd-ref-docs repo, make sure you have go tooling installed and run `go build`
-- Create a `docs` folder in the cloned repo and now run the following command using the generated `crd-ref-docs` tool:
+Follow these steps:
+
+1. Clone/update the [testkube-operator](https://github.com/kubeshop/testkube-operator) to make sure you have the latest 
+   types available locally.
+2. Clone the https://github.com/kubeshop/crd-ref-docs repo
+3. Make sure you have go tooling installed and run `go build` in this repo, this
+   should create a `crd-ref-docs` binary in the roof folder of the repo.
+4. Create a `docs` folder in the cloned repo and now run the following command (using the `crd-ref-docs` tool):
 
 ```shell
 ./crd-ref-docs  
@@ -143,7 +147,7 @@ total 152
 -rw-r--r-- 1 olensmar 60601 Aug  5 11:44 testworkflows.testkube.io-v1.md
 ```
 
-Now:
-- Copy these files to the `/docs/articles/crds` folder in this repo
-- Make sure the info in `/docs/articles/crds.md` is correct/up-to-date
-- Create a branch, commit and create a PR
+5. Copy these files to the `/docs/articles/crds` folder in this repo
+6. Make sure the info in `/docs/articles/crds.md` is correct/up-to-date 
+7. Create a branch, commit and create a PR
+
