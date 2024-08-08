@@ -177,7 +177,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Creating",
+              label: "Working with Workflows",
               id: "articles/test-workflows-creating",
             },
             {
@@ -468,6 +468,11 @@ const sidebars = {
           type: "doc",
           label: "SoapUI",
           id: "articles/examples/soapui-basic",
+        },
+        {
+          type: "doc",
+          label: "Gatling",
+          id: "articles/examples/gatling-basic",
         },
         {
           type: "doc",
