@@ -1,7 +1,3 @@
-import LegacyWarning from '../_legacy-warning.mdx';
-
-<LegacyWarning />
-
 # API Reference
 
 ## Packages
@@ -20,7 +16,7 @@ Package v1 contains API Schema definitions for the executor v1 API group
 
 
 
-#### EventType
+### EventType
 
 _Underlying type:_ _string_
 
@@ -65,7 +61,7 @@ _Appears in:_
 | `become-testworkflow-aborted` |  |
 
 
-#### Executor
+### Executor
 
 
 
@@ -84,7 +80,7 @@ _Appears in:_
 | `spec` _[ExecutorSpec](#executorspec)_ |  |  |  |
 
 
-#### ExecutorList
+### ExecutorList
 
 
 
@@ -102,7 +98,7 @@ ExecutorList contains a list of Executor
 | `items` _[Executor](#executor) array_ |  |  |  |
 
 
-#### ExecutorMeta
+### ExecutorMeta
 
 
 
@@ -120,7 +116,7 @@ _Appears in:_
 | `tooltips` _object (keys:string, values:string)_ | executor tooltips |  |  |
 
 
-#### ExecutorSpec
+### ExecutorSpec
 
 
 
@@ -151,7 +147,7 @@ _Appears in:_
 
 
 
-#### ExecutorType
+### ExecutorType
 
 _Underlying type:_ _string_
 
@@ -169,7 +165,7 @@ _Appears in:_
 | `container` |  |
 
 
-#### Feature
+### Feature
 
 _Underlying type:_ _string_
 
@@ -189,7 +185,7 @@ _Appears in:_
 
 
 
-#### ScriptContentType
+### ScriptContentType
 
 _Underlying type:_ _string_
 
@@ -210,7 +206,7 @@ _Appears in:_
 | `git` |  |
 
 
-#### SlavesMeta
+### SlavesMeta
 
 
 
@@ -226,7 +222,7 @@ _Appears in:_
 | `image` _string_ |  |  |  |
 
 
-#### Webhook
+### Webhook
 
 
 
@@ -245,7 +241,7 @@ _Appears in:_
 | `spec` _[WebhookSpec](#webhookspec)_ |  |  |  |
 
 
-#### WebhookList
+### WebhookList
 
 
 
@@ -263,7 +259,7 @@ WebhookList contains a list of Webhook
 | `items` _[Webhook](#webhook) array_ |  |  |  |
 
 
-#### WebhookSpec
+### WebhookSpec
 
 
 

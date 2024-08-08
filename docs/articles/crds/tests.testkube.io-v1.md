@@ -1,7 +1,3 @@
-import LegacyWarning from '../_legacy-warning.mdx';
-
-<LegacyWarning />
-
 # API Reference
 
 ## Packages
@@ -32,7 +28,7 @@ Package v1 contains API Schema definitions for the testkube v1 API group
 
 
 
-#### ArgsModeType
+### ArgsModeType
 
 _Underlying type:_ _string_
 
@@ -51,7 +47,7 @@ _Appears in:_
 | `replace` | ArgsModeTypeReplace for replace args mode<br /> |
 
 
-#### ArtifactRequest
+### ArtifactRequest
 
 
 
@@ -77,7 +73,7 @@ _Appears in:_
 
 
 
-#### EnvReference
+### EnvReference
 
 
 
@@ -96,7 +92,7 @@ _Appears in:_
 | `mapToVariables` _boolean_ | whether we shoud map to variables from resource |  |  |
 
 
-#### Execution
+### Execution
 
 
 
@@ -148,7 +144,7 @@ _Appears in:_
 | `disableWebhooks` _boolean_ | whether webhooks should be disabled for this execution |  |  |
 
 
-#### ExecutionRequest
+### ExecutionRequest
 
 
 
@@ -199,7 +195,7 @@ _Appears in:_
 | `disableWebhooks` _boolean_ | whether webhooks should be called on execution |  |  |
 
 
-#### ExecutionResult
+### ExecutionResult
 
 
 
@@ -217,7 +213,7 @@ _Appears in:_
 | `reports` _[ExecutionResultReports](#executionresultreports)_ |  |  |  |
 
 
-#### ExecutionResultReports
+### ExecutionResultReports
 
 _Underlying type:_ _[struct\{Junit string "json:\"junit,omitempty\""}](#struct{junit-string-"json:\"junit,omitempty\""})_
 
@@ -232,7 +228,7 @@ _Appears in:_
 
 
 
-#### ExecutionStepResult
+### ExecutionStepResult
 
 _Underlying type:_ _[struct\{Name string "json:\"name\""; Duration string "json:\"duration,omitempty\""; Status string "json:\"status\""; AssertionResults []AssertionResult "json:\"assertionResults,omitempty\""}](#struct{name-string-"json:\"name\"";-duration-string-"json:\"duration,omitempty\"";-status-string-"json:\"status\"";-assertionresults-[]assertionresult-"json:\"assertionresults,omitempty\""})_
 
@@ -247,7 +243,7 @@ _Appears in:_
 
 
 
-#### ObjectRef
+### ObjectRef
 
 
 
@@ -267,7 +263,7 @@ _Appears in:_
 | `name` _string_ | object name |  |  |
 
 
-#### PodRequest
+### PodRequest
 
 
 
@@ -285,7 +281,7 @@ _Appears in:_
 | `podTemplateReference` _string_ | name of the template resource |  |  |
 
 
-#### PodResourcesRequest
+### PodResourcesRequest
 
 _Underlying type:_ _[struct\{Requests *ResourceRequest "json:\"requests,omitempty\""; Limits *ResourceRequest "json:\"limits,omitempty\""}](#struct{requests-*resourcerequest-"json:\"requests,omitempty\"";-limits-*resourcerequest-"json:\"limits,omitempty\""})_
 
@@ -298,7 +294,7 @@ _Appears in:_
 
 
 
-#### Repository
+### Repository
 
 _Underlying type:_ _[struct\{Type_ string "json:\"type,omitempty\""; Uri string "json:\"uri,omitempty\""; Branch string "json:\"branch,omitempty\""; Commit string "json:\"commit,omitempty\""; Path string "json:\"path,omitempty\""; UsernameSecret *SecretRef "json:\"usernameSecret,omitempty\""; TokenSecret *SecretRef "json:\"tokenSecret,omitempty\""; CertificateSecret string "json:\"certificateSecret,omitempty\""; WorkingDir string "json:\"workingDir,omitempty\""; AuthType GitAuthType "json:\"authType,omitempty\""}](#struct{type_-string-"json:\"type,omitempty\"";-uri-string-"json:\"uri,omitempty\"";-branch-string-"json:\"branch,omitempty\"";-commit-string-"json:\"commit,omitempty\"";-path-string-"json:\"path,omitempty\"";-usernamesecret-*secretref-"json:\"usernamesecret,omitempty\"";-tokensecret-*secretref-"json:\"tokensecret,omitempty\"";-certificatesecret-string-"json:\"certificatesecret,omitempty\"";-workingdir-string-"json:\"workingdir,omitempty\"";-authtype-gitauthtype-"json:\"authtype,omitempty\""})_
 
@@ -311,7 +307,7 @@ _Appears in:_
 
 
 
-#### RepositoryParameters
+### RepositoryParameters
 
 
 
@@ -332,7 +328,7 @@ _Appears in:_
 
 
 
-#### RunningContext
+### RunningContext
 
 
 
@@ -351,7 +347,7 @@ _Appears in:_
 | `context` _string_ | Context value depending from its type |  |  |
 
 
-#### RunningContextType
+### RunningContextType
 
 _Underlying type:_ _string_
 
@@ -375,7 +371,7 @@ _Appears in:_
 | `` |  |
 
 
-#### Script
+### Script
 
 
 
@@ -394,7 +390,7 @@ _Appears in:_
 | `spec` _[ScriptSpec](#scriptspec)_ |  |  |  |
 
 
-#### ScriptList
+### ScriptList
 
 
 
@@ -412,7 +408,7 @@ ScriptList contains a list of Script
 | `items` _[Script](#script) array_ |  |  |  |
 
 
-#### ScriptSpec
+### ScriptSpec
 
 
 
@@ -438,7 +434,7 @@ _Appears in:_
 
 
 
-#### SuiteExecution
+### SuiteExecution
 
 
 
@@ -471,7 +467,7 @@ _Appears in:_
 
 
 
-#### Template
+### Template
 
 
 
@@ -490,7 +486,7 @@ _Appears in:_
 | `spec` _[TemplateSpec](#templatespec)_ |  |  |  |
 
 
-#### TemplateList
+### TemplateList
 
 
 
@@ -508,7 +504,7 @@ TemplateList contains a list of Template
 | `items` _[Template](#template) array_ |  |  |  |
 
 
-#### TemplateSpec
+### TemplateSpec
 
 
 
@@ -527,7 +523,7 @@ _Appears in:_
 
 
 
-#### TemplateType
+### TemplateType
 
 _Underlying type:_ _string_
 
@@ -550,7 +546,7 @@ _Appears in:_
 | `pod` |  |
 
 
-#### Test
+### Test
 
 
 
@@ -569,7 +565,7 @@ _Appears in:_
 | `spec` _[TestSpec](#testspec)_ |  |  |  |
 
 
-#### TestContent
+### TestContent
 
 
 
@@ -588,7 +584,7 @@ _Appears in:_
 | `uri` _string_ | uri of test content |  |  |
 
 
-#### TestContentRequest
+### TestContentRequest
 
 
 
@@ -604,7 +600,7 @@ _Appears in:_
 | `repository` _[RepositoryParameters](#repositoryparameters)_ |  |  |  |
 
 
-#### TestContentType
+### TestContentType
 
 _Underlying type:_ _string_
 
@@ -625,7 +621,7 @@ _Appears in:_
 | `git` |  |
 
 
-#### TestExecution
+### TestExecution
 
 
 
@@ -644,7 +640,7 @@ _Appears in:_
 | `spec` _[TestExecutionSpec](#testexecutionspec)_ |  |  |  |
 
 
-#### TestExecutionList
+### TestExecutionList
 
 
 
@@ -662,7 +658,7 @@ TestExecutionList contains a list of TestExecution
 | `items` _[TestExecution](#testexecution) array_ |  |  |  |
 
 
-#### TestExecutionSpec
+### TestExecutionSpec
 
 
 
@@ -681,7 +677,7 @@ _Appears in:_
 
 
 
-#### TestList
+### TestList
 
 
 
@@ -699,7 +695,7 @@ TestList contains a list of Test
 | `items` _[Test](#test) array_ |  |  |  |
 
 
-#### TestSource
+### TestSource
 
 
 
@@ -718,7 +714,7 @@ _Appears in:_
 | `spec` _[TestSourceSpec](#testsourcespec)_ |  |  |  |
 
 
-#### TestSourceList
+### TestSourceList
 
 
 
@@ -736,7 +732,7 @@ TestSourceList contains a list of TestSource
 | `items` _[TestSource](#testsource) array_ |  |  |  |
 
 
-#### TestSourceSpec
+### TestSourceSpec
 
 
 
@@ -757,7 +753,7 @@ _Appears in:_
 
 
 
-#### TestSourceType
+### TestSourceType
 
 _Underlying type:_ _string_
 
@@ -778,7 +774,7 @@ _Appears in:_
 | `git` |  |
 
 
-#### TestSpec
+### TestSpec
 
 
 
@@ -801,7 +797,7 @@ _Appears in:_
 
 
 
-#### TestStepDelay
+### TestStepDelay
 
 
 
@@ -817,7 +813,7 @@ _Appears in:_
 | `duration` _integer_ | Duration in ms |  |  |
 
 
-#### TestStepExecute
+### TestStepExecute
 
 
 
@@ -835,7 +831,7 @@ _Appears in:_
 | `stopOnFailure` _boolean_ |  |  |  |
 
 
-#### TestStepSpec
+### TestStepSpec
 
 
 
@@ -855,7 +851,7 @@ _Appears in:_
 
 
 
-#### TestSuite
+### TestSuite
 
 
 
@@ -874,7 +870,7 @@ _Appears in:_
 | `spec` _[TestSuiteSpec](#testsuitespec)_ |  |  |  |
 
 
-#### TestSuiteBatchStep
+### TestSuiteBatchStep
 
 
 
@@ -891,7 +887,7 @@ _Appears in:_
 | `execute` _[TestSuiteStep](#testsuitestep) array_ |  |  |  |
 
 
-#### TestSuiteBatchStepExecutionResult
+### TestSuiteBatchStepExecutionResult
 
 
 
@@ -911,7 +907,7 @@ _Appears in:_
 | `duration` _string_ | step duration |  |  |
 
 
-#### TestSuiteExecution
+### TestSuiteExecution
 
 
 
@@ -930,7 +926,7 @@ _Appears in:_
 | `spec` _[TestSuiteExecutionSpec](#testsuiteexecutionspec)_ |  |  |  |
 
 
-#### TestSuiteExecutionList
+### TestSuiteExecutionList
 
 
 
@@ -948,7 +944,7 @@ TestSuiteExecutionList contains a list of TestSuiteExecution
 | `items` _[TestSuiteExecution](#testsuiteexecution) array_ |  |  |  |
 
 
-#### TestSuiteExecutionRequest
+### TestSuiteExecutionRequest
 
 
 
@@ -980,7 +976,7 @@ _Appears in:_
 | `disableWebhooks` _boolean_ | whether webhooks should be disabled for this execution |  |  |
 
 
-#### TestSuiteExecutionSpec
+### TestSuiteExecutionSpec
 
 
 
@@ -999,7 +995,7 @@ _Appears in:_
 
 
 
-#### TestSuiteList
+### TestSuiteList
 
 
 
@@ -1017,7 +1013,7 @@ TestSuiteList contains a list of TestSuite
 | `items` _[TestSuite](#testsuite) array_ |  |  |  |
 
 
-#### TestSuiteSpec
+### TestSuiteSpec
 
 
 
@@ -1042,7 +1038,7 @@ _Appears in:_
 
 
 
-#### TestSuiteStep
+### TestSuiteStep
 
 
 
@@ -1060,7 +1056,7 @@ _Appears in:_
 | `delay` _string_ | delay duration in time units |  |  |
 
 
-#### TestSuiteStepDelay
+### TestSuiteStepDelay
 
 
 
@@ -1076,7 +1072,7 @@ _Appears in:_
 | `duration` _integer_ | Duration in ms |  |  |
 
 
-#### TestSuiteStepDelayV2
+### TestSuiteStepDelayV2
 
 
 
@@ -1092,7 +1088,7 @@ _Appears in:_
 | `duration` _integer_ | delay duration in milliseconds |  |  |
 
 
-#### TestSuiteStepExecute
+### TestSuiteStepExecute
 
 
 
@@ -1110,7 +1106,7 @@ _Appears in:_
 | `stopOnFailure` _boolean_ |  |  |  |
 
 
-#### TestSuiteStepExecuteTestV2
+### TestSuiteStepExecuteTestV2
 
 
 
@@ -1127,7 +1123,7 @@ _Appears in:_
 | `name` _string_ | object name |  |  |
 
 
-#### TestSuiteStepExecutionResult
+### TestSuiteStepExecutionResult
 
 
 
@@ -1145,7 +1141,7 @@ _Appears in:_
 | `execution` _[Execution](#execution)_ |  |  |  |
 
 
-#### TestSuiteStepExecutionResultV2
+### TestSuiteStepExecutionResultV2
 
 
 
@@ -1163,7 +1159,7 @@ _Appears in:_
 | `execution` _[Execution](#execution)_ |  |  |  |
 
 
-#### TestSuiteStepSpec
+### TestSuiteStepSpec
 
 
 
@@ -1183,7 +1179,7 @@ _Appears in:_
 
 
 
-#### TestSuiteStepV2
+### TestSuiteStepV2
 
 
 
@@ -1201,7 +1197,7 @@ _Appears in:_
 | `delay` _[TestSuiteStepDelayV2](#testsuitestepdelayv2)_ |  |  |  |
 
 
-#### TestTrigger
+### TestTrigger
 
 
 
@@ -1220,7 +1216,7 @@ _Appears in:_
 | `spec` _[TestTriggerSpec](#testtriggerspec)_ |  |  |  |
 
 
-#### TestTriggerAction
+### TestTriggerAction
 
 _Underlying type:_ _string_
 
@@ -1237,7 +1233,7 @@ _Appears in:_
 | `run` |  |
 
 
-#### TestTriggerConcurrencyPolicy
+### TestTriggerConcurrencyPolicy
 
 _Underlying type:_ _string_
 
@@ -1256,7 +1252,7 @@ _Appears in:_
 | `replace` |  |
 
 
-#### TestTriggerCondition
+### TestTriggerCondition
 
 
 
@@ -1274,7 +1270,7 @@ _Appears in:_
 | `ttl` _integer_ | duration in seconds in the past from current time when the condition is still valid |  |  |
 
 
-#### TestTriggerConditionSpec
+### TestTriggerConditionSpec
 
 
 
@@ -1294,7 +1290,7 @@ _Appears in:_
 
 
 
-#### TestTriggerEvent
+### TestTriggerEvent
 
 _Underlying type:_ _string_
 
@@ -1335,7 +1331,7 @@ _Appears in:_
 | `event-deleted` |  |
 
 
-#### TestTriggerExecution
+### TestTriggerExecution
 
 _Underlying type:_ _string_
 
@@ -1354,7 +1350,7 @@ _Appears in:_
 | `testworkflow` |  |
 
 
-#### TestTriggerList
+### TestTriggerList
 
 
 
@@ -1372,7 +1368,7 @@ TestTriggerList contains a list of TestTrigger
 | `items` _[TestTrigger](#testtrigger) array_ |  |  |  |
 
 
-#### TestTriggerProbe
+### TestTriggerProbe
 
 
 
@@ -1392,7 +1388,7 @@ _Appears in:_
 | `headers` _object (keys:string, values:string)_ | test trigger condition probe headers to submit |  |  |
 
 
-#### TestTriggerProbeSpec
+### TestTriggerProbeSpec
 
 
 
@@ -1410,7 +1406,7 @@ _Appears in:_
 | `delay` _integer_ | duration in seconds the test trigger waits between probes |  |  |
 
 
-#### TestTriggerResource
+### TestTriggerResource
 
 _Underlying type:_ _string_
 
@@ -1434,7 +1430,7 @@ _Appears in:_
 | `configmap` |  |
 
 
-#### TestTriggerSelector
+### TestTriggerSelector
 
 
 
@@ -1453,7 +1449,7 @@ _Appears in:_
 | `labelSelector` _[LabelSelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#labelselector-v1-meta)_ | LabelSelector is used to identify a group of Kubernetes Objects based on their metadata labels |  |  |
 
 
-#### TestTriggerSpec
+### TestTriggerSpec
 
 
 
@@ -1483,7 +1479,7 @@ _Appears in:_
 
 
 
-#### Variable
+### Variable
 
 _Underlying type:_ _Variable_
 

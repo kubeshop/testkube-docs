@@ -18,7 +18,7 @@ Package v1 contains API Schema definitions for the Test Workflows v1 API group
 
 
 
-#### ArtifactCompression
+### ArtifactCompression
 
 
 
@@ -34,7 +34,7 @@ _Appears in:_
 | `name` _string_ | artifact name |  | MinLength: 1 <br />Required: \{\} <br /> |
 
 
-#### ContainerConfig
+### ContainerConfig
 
 
 
@@ -67,7 +67,7 @@ _Appears in:_
 | `volumeMounts` _[VolumeMount](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#volumemount-v1-core) array_ | volume mounts to append to the container |  |  |
 
 
-#### Content
+### Content
 
 
 
@@ -92,7 +92,7 @@ _Appears in:_
 | `tarball` _[ContentTarball](#contenttarball) array_ | tarballs to unpack |  |  |
 
 
-#### ContentFile
+### ContentFile
 
 
 
@@ -111,7 +111,7 @@ _Appears in:_
 | `mode` _integer_ | mode to use for the file |  |  |
 
 
-#### ContentGit
+### ContentGit
 
 
 
@@ -137,7 +137,7 @@ _Appears in:_
 | `paths` _string array_ | paths to fetch for the sparse checkout |  |  |
 
 
-#### ContentTarball
+### ContentTarball
 
 
 
@@ -155,7 +155,7 @@ _Appears in:_
 | `mount` _boolean_ | should it mount a new volume there |  |  |
 
 
-#### CronJobConfig
+### CronJobConfig
 
 
 
@@ -173,7 +173,7 @@ _Appears in:_
 | `annotations` _object (keys:string, values:string)_ | annotations to attach to the cron job |  |  |
 
 
-#### DynamicList
+### DynamicList
 
 
 
@@ -200,7 +200,7 @@ _Appears in:_
 | `Expression` _string_ |  |  |  |
 
 
-#### Event
+### Event
 
 
 
@@ -218,7 +218,7 @@ _Appears in:_
 | `cronjob` _[CronJobConfig](#cronjobconfig)_ |  |  |  |
 
 
-#### IndependentServiceSpec
+### IndependentServiceSpec
 
 
 
@@ -258,7 +258,7 @@ _Appears in:_
 | `readinessProbe` _[Probe](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#probe-v1-core)_ | Probe to check if the service has started correctly |  |  |
 
 
-#### IndependentStep
+### IndependentStep
 
 
 
@@ -293,7 +293,7 @@ _Appears in:_
 | `steps` _[IndependentStep](#independentstep) array_ | sub-steps to run |  | Schemaless: \{\} <br /> |
 
 
-#### IndependentStepParallel
+### IndependentStepParallel
 
 _Underlying type:_ _[struct\{Parallelism int32 "json:\"parallelism,omitempty\""; StepExecuteStrategy "json:\",inline\" expr:\"include\""; Description string "json:\"description,omitempty\" expr:\"template\""; Logs *string "json:\"logs,omitempty\" expr:\"expression\""; Transfer []StepParallelTransfer "json:\"transfer,omitempty\" expr:\"include\""; Fetch []StepParallelFetch "json:\"fetch,omitempty\" expr:\"include\""; TestWorkflowTemplateSpec "json:\",inline\" expr:\"include\""; StepControl "json:\",inline\" expr:\"include\""; StepOperations "json:\",inline\" expr:\"include\""}](#struct{parallelism-int32-"json:\"parallelism,omitempty\"";-stepexecutestrategy-"json:\",inline\"-expr:\"include\"";-description-string-"json:\"description,omitempty\"-expr:\"template\"";-logs-*string-"json:\"logs,omitempty\"-expr:\"expression\"";-transfer-[]stepparalleltransfer-"json:\"transfer,omitempty\"-expr:\"include\"";-fetch-[]stepparallelfetch-"json:\"fetch,omitempty\"-expr:\"include\"";-testworkflowtemplatespec-"json:\",inline\"-expr:\"include\"";-stepcontrol-"json:\",inline\"-expr:\"include\"";-stepoperations-"json:\",inline\"-expr:\"include\""})_
 
@@ -306,7 +306,7 @@ _Appears in:_
 
 
 
-#### JobConfig
+### JobConfig
 
 
 
@@ -327,7 +327,7 @@ _Appears in:_
 | `activeDeadlineSeconds` _integer_ | duration in seconds the job may be active on the node |  |  |
 
 
-#### NotificationsConfig
+### NotificationsConfig
 
 
 
@@ -345,7 +345,7 @@ _Appears in:_
 | `disableWebhooks` _boolean_ |  |  |  |
 
 
-#### ParameterNumberSchema
+### ParameterNumberSchema
 
 
 
@@ -365,7 +365,7 @@ _Appears in:_
 | `multipleOf` _integer_ | the number needs to be multiple of this value |  |  |
 
 
-#### ParameterSchema
+### ParameterSchema
 
 
 
@@ -396,7 +396,7 @@ _Appears in:_
 | `multipleOf` _integer_ | the number needs to be multiple of this value |  |  |
 
 
-#### ParameterStringSchema
+### ParameterStringSchema
 
 
 
@@ -415,7 +415,7 @@ _Appears in:_
 | `maxLength` _integer_ | maximum length for the string |  |  |
 
 
-#### ParameterType
+### ParameterType
 
 _Underlying type:_ _string_
 
@@ -435,7 +435,7 @@ _Appears in:_
 | `boolean` |  |
 
 
-#### PodConfig
+### PodConfig
 
 
 
@@ -476,7 +476,7 @@ _Appears in:_
 | `resourceClaims` _[PodResourceClaim](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podresourceclaim-v1-core) array_ | ResourceClaims defines which ResourceClaims must be allocated and reserved before the Pod is allowed to start. |  |  |
 
 
-#### Resources
+### Resources
 
 
 
@@ -496,7 +496,7 @@ _Appears in:_
 | `requests` _object (keys:[ResourceName](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#resourcename-v1-core), values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util))_ | resource requests for the container |  |  |
 
 
-#### RetryPolicy
+### RetryPolicy
 
 
 
@@ -515,7 +515,7 @@ _Appears in:_
 | `until` _string_ | until when it should retry (defaults to: "passed") |  |  |
 
 
-#### ServiceRestartPolicy
+### ServiceRestartPolicy
 
 _Underlying type:_ _string_
 
@@ -533,7 +533,7 @@ _Appears in:_
 | `Never` |  |
 
 
-#### ServiceSpec
+### ServiceSpec
 
 
 
@@ -573,7 +573,7 @@ _Appears in:_
 | `readinessProbe` _[Probe](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#probe-v1-core)_ | Probe to check if the service has started correctly |  |  |
 
 
-#### Step
+### Step
 
 
 
@@ -610,7 +610,7 @@ _Appears in:_
 | `steps` _[Step](#step) array_ | sub-steps to run |  | Schemaless: \{\} <br /> |
 
 
-#### StepArtifacts
+### StepArtifacts
 
 
 
@@ -630,7 +630,7 @@ _Appears in:_
 | `paths` _string array_ | paths to fetch from the container |  |  |
 
 
-#### StepControl
+### StepControl
 
 
 
@@ -651,7 +651,7 @@ _Appears in:_
 | `timeout` _string_ | maximum time this step may take |  | Pattern: `^((0\|[1-9][0-9]*)h)?((0\|[1-9][0-9]*)m)?((0\|[1-9][0-9]*)s)?((0\|[1-9][0-9]*)ms)?$` <br /> |
 
 
-#### StepDefaults
+### StepDefaults
 
 
 
@@ -669,7 +669,7 @@ _Appears in:_
 | `workingDir` _string_ | working directory to use for this step |  |  |
 
 
-#### StepExecute
+### StepExecute
 
 
 
@@ -690,7 +690,7 @@ _Appears in:_
 | `workflows` _[StepExecuteWorkflow](#stepexecuteworkflow) array_ | workflows to run |  |  |
 
 
-#### StepExecuteStrategy
+### StepExecuteStrategy
 
 
 
@@ -712,7 +712,7 @@ _Appears in:_
 | `shards` _object (keys:string, values:[DynamicList](#dynamiclist))_ | parameters that should be distributed across sharded instances |  |  |
 
 
-#### StepExecuteTest
+### StepExecuteTest
 
 
 
@@ -735,7 +735,7 @@ _Appears in:_
 | `executionRequest` _[TestExecutionRequest](#testexecutionrequest)_ | pass the execution request overrides |  |  |
 
 
-#### StepExecuteWorkflow
+### StepExecuteWorkflow
 
 
 
@@ -759,7 +759,7 @@ _Appears in:_
 | `config` _object (keys:string, values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util))_ | configuration to pass for the workflow |  |  |
 
 
-#### StepMeta
+### StepMeta
 
 
 
@@ -777,7 +777,7 @@ _Appears in:_
 | `condition` _string_ | expression to declare under which conditions the step should be run<br />defaults to: "passed", except artifacts where it defaults to "always" |  |  |
 
 
-#### StepOperations
+### StepOperations
 
 
 
@@ -798,7 +798,7 @@ _Appears in:_
 | `artifacts` _[StepArtifacts](#stepartifacts)_ | scrape artifacts from the volumes |  |  |
 
 
-#### StepParallel
+### StepParallel
 
 _Underlying type:_ _[struct\{Parallelism int32 "json:\"parallelism,omitempty\""; StepExecuteStrategy "json:\",inline\" expr:\"include\""; Description string "json:\"description,omitempty\" expr:\"template\""; Logs *string "json:\"logs,omitempty\" expr:\"expression\""; Transfer []StepParallelTransfer "json:\"transfer,omitempty\" expr:\"include\""; Fetch []StepParallelFetch "json:\"fetch,omitempty\" expr:\"include\""; TestWorkflowSpec "json:\",inline\" expr:\"include\""; StepControl "json:\",inline\" expr:\"include\""; StepOperations "json:\",inline\" expr:\"include\""; Template *TemplateRef "json:\"template,omitempty\" expr:\"include\""}](#struct{parallelism-int32-"json:\"parallelism,omitempty\"";-stepexecutestrategy-"json:\",inline\"-expr:\"include\"";-description-string-"json:\"description,omitempty\"-expr:\"template\"";-logs-*string-"json:\"logs,omitempty\"-expr:\"expression\"";-transfer-[]stepparalleltransfer-"json:\"transfer,omitempty\"-expr:\"include\"";-fetch-[]stepparallelfetch-"json:\"fetch,omitempty\"-expr:\"include\"";-testworkflowspec-"json:\",inline\"-expr:\"include\"";-stepcontrol-"json:\",inline\"-expr:\"include\"";-stepoperations-"json:\",inline\"-expr:\"include\"";-template-*templateref-"json:\"template,omitempty\"-expr:\"include\""})_
 
@@ -813,7 +813,7 @@ _Appears in:_
 
 
 
-#### StepParallelTransfer
+### StepParallelTransfer
 
 
 
@@ -833,7 +833,7 @@ _Appears in:_
 | `mount` _boolean_ | should it mount a new volume there |  |  |
 
 
-#### StepRun
+### StepRun
 
 
 
@@ -863,7 +863,7 @@ _Appears in:_
 | `shell` _string_ | script to run in a default shell for the container |  |  |
 
 
-#### StepSource
+### StepSource
 
 
 
@@ -880,7 +880,7 @@ _Appears in:_
 | `content` _[Content](#content)_ | content that should be fetched for this step |  |  |
 
 
-#### TarballRequest
+### TarballRequest
 
 
 
@@ -898,7 +898,7 @@ _Appears in:_
 | `files` _[DynamicList](#dynamiclist)_ | file patterns to pack |  | Type: dynamicList <br /> |
 
 
-#### TemplateRef
+### TemplateRef
 
 
 
@@ -917,7 +917,7 @@ _Appears in:_
 | `config` _object (keys:string, values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util))_ | trait configuration values if needed |  |  |
 
 
-#### TestExecutionRequest
+### TestExecutionRequest
 
 
 
@@ -959,7 +959,7 @@ _Appears in:_
 | `executionNamespace` _string_ | namespace for test execution (Pro edition only) |  |  |
 
 
-#### TestWorkflow
+### TestWorkflow
 
 
 
@@ -980,7 +980,7 @@ _Appears in:_
 | `spec` _[TestWorkflowSpec](#testworkflowspec)_ | TestWorkflow specification |  |  |
 
 
-#### TestWorkflowExecution
+### TestWorkflowExecution
 
 
 
@@ -999,7 +999,7 @@ _Appears in:_
 | `spec` _[TestWorkflowExecutionSpec](#testworkflowexecutionspec)_ | TestWorkflowExecution specification |  |  |
 
 
-#### TestWorkflowExecutionDetails
+### TestWorkflowExecutionDetails
 
 
 
@@ -1028,7 +1028,7 @@ _Appears in:_
 | `disableWebhooks` _boolean_ | whether webhooks should be disabled for this execution |  |  |
 
 
-#### TestWorkflowExecutionList
+### TestWorkflowExecutionList
 
 
 
@@ -1046,7 +1046,7 @@ TestWorkflowExecutionList contains a list of TestWorkflowExecutiom
 | `items` _[TestWorkflowExecution](#testworkflowexecution) array_ |  |  |  |
 
 
-#### TestWorkflowExecutionRequest
+### TestWorkflowExecutionRequest
 
 
 
@@ -1065,7 +1065,7 @@ _Appears in:_
 | `disableWebhooks` _boolean_ | whether webhooks should be disabled for this execution |  |  |
 
 
-#### TestWorkflowExecutionSpec
+### TestWorkflowExecutionSpec
 
 
 
@@ -1084,7 +1084,7 @@ _Appears in:_
 
 
 
-#### TestWorkflowExecutionSummary
+### TestWorkflowExecutionSummary
 
 
 
@@ -1106,7 +1106,7 @@ _Appears in:_
 | `workflow` _[TestWorkflowSummary](#testworkflowsummary)_ |  |  |  |
 
 
-#### TestWorkflowList
+### TestWorkflowList
 
 
 
@@ -1124,7 +1124,7 @@ TestWorkflowList contains a list of TestWorkflow
 | `items` _[TestWorkflow](#testworkflow) array_ |  |  |  |
 
 
-#### TestWorkflowOutput
+### TestWorkflowOutput
 
 
 
@@ -1142,7 +1142,7 @@ _Appears in:_
 | `value` _object (keys:string, values:[DynamicList](#dynamiclist))_ | value returned |  |  |
 
 
-#### TestWorkflowPause
+### TestWorkflowPause
 
 
 
@@ -1160,7 +1160,7 @@ _Appears in:_
 | `resumedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | when the pause has ended |  |  |
 
 
-#### TestWorkflowReport
+### TestWorkflowReport
 
 
 
@@ -1179,7 +1179,7 @@ _Appears in:_
 | `summary` _[TestWorkflowReportSummary](#testworkflowreportsummary)_ |  |  |  |
 
 
-#### TestWorkflowReportSummary
+### TestWorkflowReportSummary
 
 
 
@@ -1200,7 +1200,7 @@ _Appears in:_
 | `duration` _integer_ | total duration of all test cases in milliseconds |  |  |
 
 
-#### TestWorkflowResult
+### TestWorkflowResult
 
 
 
@@ -1227,7 +1227,7 @@ _Appears in:_
 | `steps` _object (keys:string, values:[TestWorkflowStepResult](#testworkflowstepresult))_ |  |  |  |
 
 
-#### TestWorkflowResultSummary
+### TestWorkflowResultSummary
 
 
 
@@ -1251,7 +1251,7 @@ _Appears in:_
 | `pausedMs` _integer_ | Pause duration in milliseconds |  |  |
 
 
-#### TestWorkflowSignature
+### TestWorkflowSignature
 
 
 
@@ -1273,7 +1273,7 @@ _Appears in:_
 | `children` _[TestWorkflowSignature](#testworkflowsignature) array_ |  |  | Schemaless: \{\} <br /> |
 
 
-#### TestWorkflowSpec
+### TestWorkflowSpec
 
 
 
@@ -1300,7 +1300,7 @@ _Appears in:_
 | `after` _[Step](#step) array_ | steps to run at the end of the workflow |  |  |
 
 
-#### TestWorkflowSpecBase
+### TestWorkflowSpecBase
 
 
 
@@ -1323,7 +1323,7 @@ _Appears in:_
 | `notifications` _[NotificationsConfig](#notificationsconfig)_ | configuration for notifications<br />Deprecated: field is not used |  |  |
 
 
-#### TestWorkflowStatus
+### TestWorkflowStatus
 
 _Underlying type:_ _string_
 
@@ -1348,7 +1348,7 @@ _Appears in:_
 
 
 
-#### TestWorkflowStepResult
+### TestWorkflowStepResult
 
 
 
@@ -1370,7 +1370,7 @@ _Appears in:_
 
 
 
-#### TestWorkflowSummary
+### TestWorkflowSummary
 
 
 
@@ -1389,7 +1389,7 @@ _Appears in:_
 | `annotations` _object (keys:string, values:string)_ |  |  |  |
 
 
-#### TestWorkflowTemplate
+### TestWorkflowTemplate
 
 
 
@@ -1409,7 +1409,7 @@ _Appears in:_
 | `spec` _[TestWorkflowTemplateSpec](#testworkflowtemplatespec)_ | TestWorkflowTemplate specification |  |  |
 
 
-#### TestWorkflowTemplateList
+### TestWorkflowTemplateList
 
 
 
@@ -1427,7 +1427,7 @@ TestWorkflowTemplateList contains a list of TestWorkflowTemplate
 | `items` _[TestWorkflowTemplate](#testworkflowtemplate) array_ |  |  |  |
 
 
-#### TestWorkflowTemplateSpec
+### TestWorkflowTemplateSpec
 
 
 
