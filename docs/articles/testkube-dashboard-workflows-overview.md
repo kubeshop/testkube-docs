@@ -34,6 +34,14 @@ This wizard will walk you through creating a Workflow to run your tests, broken 
 3) The actual command to run your test and from where Testkube should scrape the generated artifacts
 4) A Summary showing the creating Workflow YAML
 
+:::tip
+
+The wizard uses Workflow Templates to do its magic - you can see the offical templates used by the Wizard 
+in the [Workflow Templates Overview](/articles/testkube-dashboard-workflows-templates).
+
+:::
+
+
 #### Workflow Name & Type
 
 The first page shown below prompts you for:
@@ -141,7 +149,7 @@ Select either the Create or Create & Run option to create your workflow accordin
 
 :::tip
 
-Read more about how to create Composite Workflows at [Test Workflows - Test Suites](articles/test-workflows-test-suites)
+Read more about how to create Composite Workflows at [Test Workflows - Test Suites](/articles/test-workflows-test-suites)
 
 :::
 
