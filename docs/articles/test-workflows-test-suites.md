@@ -31,6 +31,13 @@ Test Workflows is our long-term solution, so keep in mind that the original Test
 
 You have to use `execute` operation in the step, and provide definition of the Test Workflows and Tests to run.
 
+:::tip
+
+The Testkube Dashboard contains a visual builder for creating Composite Workflows -
+[Read More](/articles/testkube-dashboard-workflows-overview#creating-a-workflow-by-combining-existing-workflows)
+
+:::
+
 <Tabs>
 <TabItem value="yaml" label="YAML" default>
 
@@ -77,13 +84,6 @@ spec:
 To run Test Workflow as part of the `execute` step, you have to add its reference in the `workflows` list.
 
 You need to provide `name`, along with optional `config` values for parametrization.
-
-:::tip
-
-The Testkube Dashboard contains a visual builder for creating Composite Workflows - 
-[Read More](/articles/testkube-dashboard-workflows-overview#creating-a-workflow-by-combining-existing-workflows)
-
-:::
 
 ### Running Tests
 
