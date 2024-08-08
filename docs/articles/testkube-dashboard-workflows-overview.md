@@ -23,7 +23,6 @@ Selecting the "Add new test workflow" button on the top right opens the followin
 
 ![Create Test Workflow](../img/create-test-workflow.png)
 
-
 The different options are described below.
 
 ### Creating a Workflow Using the Wizard
@@ -34,6 +33,14 @@ This wizard will walk you through creating a Workflow to run your tests, broken 
 2) The Content of the test to run
 3) The actual command to run your test and from where Testkube should scrape the generated artifacts
 4) A Summary showing the creating Workflow YAML
+
+:::tip
+
+The wizard uses Workflow Templates to do its magic - you can see the offical templates used by the Wizard 
+in the [Workflow Templates Overview](/articles/testkube-dashboard-workflows-templates).
+
+:::
+
 
 #### Workflow Name & Type
 
@@ -58,6 +65,10 @@ the screenshot below the Git option has been selected, prompting for the corresp
 
 ![Workflow Git Option](../img/workflow-git-option.png)
 
+:::tip
+
+Read more about how to work with content in your Workflows at [Test Workflows - Content](/articles/test-workflows-content)
+:::
 
 Selecting Next moves you to the next page of the Wizard.
 
@@ -136,6 +147,12 @@ Once done, select the Next button to see the corresponding YAML for your Workflo
 
 Select either the Create or Create & Run option to create your workflow accordingly.
 
+:::tip
+
+Read more about how to create Composite Workflows at [Test Workflows - Test Suites](/articles/test-workflows-test-suites)
+
+:::
+
 ### Creating a Workflow from YAML
 
 This final option allows you to paste/edit your Workflow YAML from scratch:
@@ -143,3 +160,10 @@ This final option allows you to paste/edit your Workflow YAML from scratch:
 ![Import from YAML Template Wizard](../img/import-from-yaml-template-wizard.png)
 
 Once done, select either the Create or Create & Run option to create your workflow accordingly.
+
+:::tip
+
+The [Examples and Guides](/articles/examples/overview) section in the documentation contains many 
+Workflow examples that you can paste here to try out and refine.
+
+:::

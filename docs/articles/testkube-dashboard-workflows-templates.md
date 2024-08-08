@@ -1,6 +1,6 @@
 # Workflow Templates
 
-:::info
+:::tip
 
 Workflow Templates provide a powerful mechanism for defining shared / reusable Workflow configurations - [Read More](/articles/test-workflow-templates)
 
@@ -9,6 +9,13 @@ Workflow Templates provide a powerful mechanism for defining shared / reusable W
 Under the **Workflow Templates** tab, you will find a list of available Workflow Templates in your environment.
 
 ![Workflow Templates](../img/workflow-templates-072024.png)
+
+:::info
+
+Templates named `offical/...` are used by the [Workflow Wizard](/articles/testkube-dashboard-workflows-overview#creating-a-workflow-using-the-wizard) to help you create Workflows for the corresponding
+testing tools.
+
+:::
 
 Just like with Workflow - you can toggle between grid and list layouts:
 
