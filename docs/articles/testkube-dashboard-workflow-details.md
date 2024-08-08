@@ -30,6 +30,12 @@ ready-to-use examples for each tool.
 
 ![CI/CD Integration](../img/workflows-cicd-integrations-072024.png)
 
+:::tip
+
+Read more about these and other available integrations under the [Integrations](/category/integrations) section.
+
+:::
+
 ## CLI Commands Tab
 
 The **CLI Commands** tab shows commands you can run to interact with the Workflow using the [Testkube CLI](/articles/install/cli):

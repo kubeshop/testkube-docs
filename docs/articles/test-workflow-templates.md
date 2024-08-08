@@ -346,9 +346,7 @@ spec:
   - shell: echo w2
 ```
 
-## Examples
-
-### Official Templates
+## Official Workflow Templates
 
 Testkube provides a set of official, ready to use Test Workflow Templates, which simplify running tests
 using various popular tools. Below you can find a list of official Test Workflow Templates along with
@@ -362,6 +360,11 @@ example Test Workflows using them:
 - Maven [See Example](examples/maven-basic.md#basic-maven-from-template)
 - Playwright [See Example](examples/playwright-basic.md#basic-playwright-from-template)
 - Postman [See Example](examples/postman-basic.md#basic-postman-from-template)
+
+You can also see these in the Testkube Dashboard under the [Workflow Templates](/articles/testkube-dashboard-workflows-templates) 
+tab.
+
+## Examples
 
 ### Close Istio Sidecar
 

@@ -182,6 +182,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Expression Language",
+              id: "articles/test-workflows-expressions",
+            },
+            {
+              type: "doc",
               label: "Content",
               id: "articles/test-workflows-content",
             },
@@ -204,11 +209,6 @@ const sidebars = {
               type: "doc",
               label: "Parameterization",
               id: "articles/test-workflows-examples-configuration",
-            },
-            {
-              type: "doc",
-              label: "Expression Language",
-              id: "articles/test-workflows-expressions",
             },
             {
               type: "doc",
