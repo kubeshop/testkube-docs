@@ -231,6 +231,11 @@ const sidebars = {
               id: "articles/test-workflow-templates",
             },
             {
+              type: "doc",
+              label: "High-level Architecture",
+              id: "articles/test-workflows-high-level-architecture",
+            },
+            {
               type: "category",
               label: "More Guides",
               items: [
