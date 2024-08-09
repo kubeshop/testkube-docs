@@ -50,7 +50,7 @@ so to achieve a sequential execution we are using [**Init Containers**](https://
 Using Init Containers has a flaw - often, in your cluster, there may be an Operator that is adding some container to every Pod.
 That container (i.e. in [**Istio**](https://istio.io/)), may be required for the routing.
 
-Such container often are added in `containers` section, so they would be started **after** Init Containers.
+Such containers are often added in the `containers` section, so they would be started **after** the Init Containers are completed.
 
 :::note
 
@@ -80,7 +80,7 @@ To avoid issues with the reduced isolation, by default we are merging together o
 
 ### Pure Steps
 
-If you want to some of your `shell` or `run` steps to allow merging with other `shell`/`run` steps, you have to specify `pure: true` for them.
+If you want part of your `shell` or `run` steps to allow merging with other `shell`/`run` steps, you have to specify `pure: true` for them.
 This way, they will be acknowledged as free of side effects, and will be merged with next or previous step when it is possible.
 
 ```yaml
@@ -120,7 +120,7 @@ Whenever you run container with some command, like `command: [ "curl", "http://t
 we are actually doing something similar to `command: [ "/init", "curl", "http://testkube.io" ]`.
 The `/init` process is responsible for all the preparation, execution of actual command, and cleanup.
 
-### Fetching Image Metadata from the Container Registry
+## Fetching Image Metadata from the Container Registry
 
 To build the proper Pod and Init Process, we need to know the most important details of the image, like:
 * **Working Directory (`workingDir` / [`WORKDIR`](https://docs.docker.com/reference/dockerfile/#workdir)):** to change current working directory between operations in a single container
@@ -129,11 +129,11 @@ To build the proper Pod and Init Process, we need to know the most important det
 
 Kubernetes doesn't have a direct mechanism to get these metadata. To obtain it, we need to fetch the data from Container Registry when we need.
 
-#### Private Container Registries
+### Private Container Registries
 
 When the image you are using is stored in the private registry, you may need to add [`pod.imagePullSecrets`](https://docs.testkube.io/articles/test-workflows-examples-basics#configuring-the-pod) to the specific Test Workflow or [**Global Template**](https://docs.testkube.io/articles/test-workflows-job-and-pod#global-template).
 
-#### Avoid Fetching Image Metadata
+### Avoid Fetching Image Metadata
 
 Companies may have a strict policy of not storing the credentials for the Container Registry in the Kubernetes' Secret, or disallow Secrets at all.
 
