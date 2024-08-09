@@ -274,6 +274,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `name` _string_ | readable name for the step |  |  |
 | `condition` _string_ | expression to declare under which conditions the step should be run<br />defaults to: "passed", except artifacts where it defaults to "always" |  |  |
+| `pure` _boolean_ | mark the step as pure, applying optimizations to merge the containers together |  |  |
 | `negative` _boolean_ | is the step expected to fail |  |  |
 | `optional` _boolean_ | is the step optional, so its failure won't affect the TestWorkflow result |  |  |
 | `paused` _boolean_ | pause the step initially |  |  |
@@ -589,6 +590,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `name` _string_ | readable name for the step |  |  |
 | `condition` _string_ | expression to declare under which conditions the step should be run<br />defaults to: "passed", except artifacts where it defaults to "always" |  |  |
+| `pure` _boolean_ | mark the step as pure, applying optimizations to merge the containers together |  |  |
 | `negative` _boolean_ | is the step expected to fail |  |  |
 | `optional` _boolean_ | is the step optional, so its failure won't affect the TestWorkflow result |  |  |
 | `paused` _boolean_ | pause the step initially |  |  |
@@ -775,6 +777,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `name` _string_ | readable name for the step |  |  |
 | `condition` _string_ | expression to declare under which conditions the step should be run<br />defaults to: "passed", except artifacts where it defaults to "always" |  |  |
+| `pure` _boolean_ | mark the step as pure, applying optimizations to merge the containers together |  |  |
 
 
 ### StepOperations
@@ -1288,6 +1291,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `use` _[TemplateRef](#templateref) array_ | templates to include at a top-level of workflow |  |  |
 | `events` _[Event](#event) array_ | events triggering execution of the test workflow |  |  |
+| `system` _[TestWorkflowSystem](#testworkflowsystem)_ | system configuration to define the orchestration behavior |  |  |
 | `config` _object (keys:string, values:[ParameterSchema](#parameterschema))_ | make the instance configurable with some input data for scheduling it |  |  |
 | `content` _[Content](#content)_ | global content that should be fetched into all containers |  |  |
 | `container` _[ContainerConfig](#containerconfig)_ | defaults for the containers for all the TestWorkflow steps |  |  |
@@ -1315,6 +1319,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `events` _[Event](#event) array_ | events triggering execution of the test workflow |  |  |
+| `system` _[TestWorkflowSystem](#testworkflowsystem)_ | system configuration to define the orchestration behavior |  |  |
 | `config` _object (keys:string, values:[ParameterSchema](#parameterschema))_ | make the instance configurable with some input data for scheduling it |  |  |
 | `content` _[Content](#content)_ | global content that should be fetched into all containers |  |  |
 | `container` _[ContainerConfig](#containerconfig)_ | defaults for the containers for all the TestWorkflow steps |  |  |
@@ -1389,6 +1394,25 @@ _Appears in:_
 | `annotations` _object (keys:string, values:string)_ |  |  |  |
 
 
+### TestWorkflowSystem
+
+
+
+
+
+
+
+_Appears in:_
+- [TestWorkflowSpec](#testworkflowspec)
+- [TestWorkflowSpecBase](#testworkflowspecbase)
+- [TestWorkflowTemplateSpec](#testworkflowtemplatespec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `pureByDefault` _boolean_ | assume all the steps are pure by default |  |  |
+| `isolatedContainers` _boolean_ | disable the behavior of merging multiple operations in a single container |  |  |
+
+
 ### TestWorkflowTemplate
 
 
@@ -1441,6 +1465,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `events` _[Event](#event) array_ | events triggering execution of the test workflow |  |  |
+| `system` _[TestWorkflowSystem](#testworkflowsystem)_ | system configuration to define the orchestration behavior |  |  |
 | `config` _object (keys:string, values:[ParameterSchema](#parameterschema))_ | make the instance configurable with some input data for scheduling it |  |  |
 | `content` _[Content](#content)_ | global content that should be fetched into all containers |  |  |
 | `container` _[ContainerConfig](#containerconfig)_ | defaults for the containers for all the TestWorkflow steps |  |  |
