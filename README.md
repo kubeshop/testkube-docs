@@ -130,7 +130,7 @@ Follow these steps:
 For example:
 
 ```shell
- ./crd-ref-docs --source-path=/Users/olensmar/GolandProjects/testkube-operator --config=config.yaml --renderer=markdown --output-path=./docs --output-mode=group
+ ./crd-ref-docs --source-path=/Users/olensmar/GolandProjects/testkube-operator --config=config.yaml --renderer=markdown --output-path=./docs --output-mode=group --templates-dir=/Users/olensmar/WebstormProjects/testkube-docs/src/crd-templates
 2024-08-05T11:44:21.019+0200    INFO    crd-ref-docs    Loading configuration   {"path": "config.yaml"}
 2024-08-05T11:44:21.020+0200    INFO    crd-ref-docs    Processing source directory     {"directory": "/Users/olensmar/GolandProjects/testkube-operator", "depth": 10}
 2024-08-05T11:44:22.717+0200    INFO    crd-ref-docs    Rendering output        {"path": "./docs"}
