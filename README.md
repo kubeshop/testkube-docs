@@ -106,6 +106,8 @@ Once run, the generated/updated files need to be committed back to the repo for 
 CRD references docs at are generated from the corresponding GoLang types using a fork of the
 https://github.com/elastic/crd-ref-docs project, available at https://github.com/kubeshop/crd-ref-docs.
 
+The customized markdown templates are in this repositories [src/crd-templates](src/crd-templates) folder
+
 Follow these steps:
 
 1. Clone/update the [testkube-operator](https://github.com/kubeshop/testkube-operator) to make sure you have the latest 
@@ -122,6 +124,7 @@ Follow these steps:
   --renderer=markdown 
   --output-path=./docs 
   --output-mode=group
+  --templates-dir=<testkube-docs-root>/src/crd-templates
 ```
 
 For example:
