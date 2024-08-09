@@ -5,7 +5,7 @@ metadata:
   name: gatling-sample
   namespace: testkube
 spec:
-  template:
+  use:
     - name: official--gradle--v1
       config:
         run: ./gradlew gatlingRun
@@ -15,7 +15,7 @@ spec:
       uri: https://github.com/techmaharaj/Gatling-Gradle-Sample.git
       revision: main
   container:
-    workingDir: /data/repo
+    workingDir: /data/repo/
   steps:
     - condition: always
       workingDir: /data/repo/build/reports
