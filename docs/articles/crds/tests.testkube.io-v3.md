@@ -1,8 +1,3 @@
-import LegacyWarning from '../_legacy-warning.mdx';
-
-<LegacyWarning />
-
-
 # API Reference
 
 ## Packages
@@ -21,7 +16,7 @@ Package v3 contains API Schema definitions for the tests v3 API group
 
 
 
-#### ArgsModeType
+### ArgsModeType
 
 _Underlying type:_ _ArgsModeType_
 
@@ -34,7 +29,7 @@ _Appears in:_
 
 
 
-#### ArtifactRequest
+### ArtifactRequest
 
 
 
@@ -59,7 +54,7 @@ _Appears in:_
 | `sidecarScraper` _boolean_ | run scraper as pod sidecar container |  |  |
 
 
-#### DownloadArtifactOptions
+### DownloadArtifactOptions
 
 
 
@@ -77,7 +72,7 @@ _Appears in:_
 | `previousTestNames` _string array_ | previous test names |  |  |
 
 
-#### EnvReference
+### EnvReference
 
 
 
@@ -97,7 +92,7 @@ _Appears in:_
 | `mapToVariables` _boolean_ | whether we shoud map to variables from resource |  |  |
 
 
-#### ExecutionCore
+### ExecutionCore
 
 
 
@@ -116,7 +111,7 @@ _Appears in:_
 | `endTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | test end time |  |  |
 
 
-#### ExecutionRequest
+### ExecutionRequest
 
 
 
@@ -173,7 +168,7 @@ _Appears in:_
 
 
 
-#### GitAuthType
+### GitAuthType
 
 _Underlying type:_ _string_
 
@@ -192,7 +187,7 @@ _Appears in:_
 | `header` | GitAuthTypeHeader for git header auth requests<br /> |
 
 
-#### PodRequest
+### PodRequest
 
 
 
@@ -210,7 +205,7 @@ _Appears in:_
 | `podTemplateReference` _string_ | name of the template resource |  |  |
 
 
-#### PodResourcesRequest
+### PodResourcesRequest
 
 
 
@@ -227,7 +222,7 @@ _Appears in:_
 | `limits` _[ResourceRequest](#resourcerequest)_ |  |  |  |
 
 
-#### Repository
+### Repository
 
 
 
@@ -252,7 +247,7 @@ _Appears in:_
 | `authType` _[GitAuthType](#gitauthtype)_ | auth type for git requests |  | Enum: [basic header] <br /> |
 
 
-#### ResourceRequest
+### ResourceRequest
 
 
 
@@ -271,7 +266,7 @@ _Appears in:_
 
 
 
-#### RunningContextType
+### RunningContextType
 
 _Underlying type:_ _string_
 
@@ -292,7 +287,7 @@ _Appears in:_
 | `` |  |
 
 
-#### SecretRef
+### SecretRef
 
 
 
@@ -309,7 +304,7 @@ _Appears in:_
 | `key` _string_ | object key |  |  |
 
 
-#### Test
+### Test
 
 
 
@@ -328,7 +323,7 @@ _Appears in:_
 | `spec` _[TestSpec](#testspec)_ |  |  |  |
 
 
-#### TestContent
+### TestContent
 
 
 
@@ -347,7 +342,7 @@ _Appears in:_
 | `uri` _string_ | uri of test content |  |  |
 
 
-#### TestContentType
+### TestContentType
 
 _Underlying type:_ _string_
 
@@ -368,7 +363,7 @@ _Appears in:_
 | `git` |  |
 
 
-#### TestList
+### TestList
 
 
 
@@ -386,7 +381,7 @@ TestList contains a list of Test
 | `items` _[Test](#test) array_ |  |  |  |
 
 
-#### TestSpec
+### TestSpec
 
 
 
@@ -411,7 +406,7 @@ _Appears in:_
 
 
 
-#### TestSuite
+### TestSuite
 
 
 
@@ -430,7 +425,7 @@ _Appears in:_
 | `spec` _[TestSuiteSpec](#testsuitespec)_ |  |  |  |
 
 
-#### TestSuiteBatchStep
+### TestSuiteBatchStep
 
 
 
@@ -448,7 +443,7 @@ _Appears in:_
 | `execute` _[TestSuiteStepSpec](#testsuitestepspec) array_ |  |  |  |
 
 
-#### TestSuiteExecutionCore
+### TestSuiteExecutionCore
 
 
 
@@ -466,7 +461,7 @@ _Appears in:_
 | `endTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | test suite execution end time |  |  |
 
 
-#### TestSuiteExecutionRequest
+### TestSuiteExecutionRequest
 
 
 
@@ -502,7 +497,7 @@ _Appears in:_
 
 
 
-#### TestSuiteList
+### TestSuiteList
 
 
 
@@ -520,7 +515,7 @@ TestSuiteList contains a list of TestSuite
 | `items` _[TestSuite](#testsuite) array_ |  |  |  |
 
 
-#### TestSuiteSpec
+### TestSuiteSpec
 
 
 
@@ -544,7 +539,7 @@ _Appears in:_
 
 
 
-#### TestSuiteStepExecutionRequest
+### TestSuiteStepExecutionRequest
 
 
 
@@ -581,7 +576,7 @@ _Appears in:_
 | `disableWebhooks` _boolean_ | whether webhooks should be called on execution<br />Deprecated: field is not used |  |  |
 
 
-#### TestSuiteStepSpec
+### TestSuiteStepSpec
 
 
 
@@ -599,7 +594,7 @@ _Appears in:_
 | `executionRequest` _[TestSuiteStepExecutionRequest](#testsuitestepexecutionrequest)_ |  |  |  |
 
 
-#### Variable
+### Variable
 
 _Underlying type:_ _Variable_
 

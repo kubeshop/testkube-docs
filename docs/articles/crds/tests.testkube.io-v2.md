@@ -1,7 +1,3 @@
-import LegacyWarning from '../_legacy-warning.mdx';
-
-<LegacyWarning />
-
 # API Reference
 
 ## Packages
@@ -22,7 +18,7 @@ Package v2 contains API Schema definitions for the testkube v2 API group
 
 
 
-#### Repository
+### Repository
 
 
 
@@ -46,7 +42,7 @@ _Appears in:_
 
 
 
-#### RunningContextType
+### RunningContextType
 
 _Underlying type:_ _string_
 
@@ -67,7 +63,7 @@ _Appears in:_
 | `` |  |
 
 
-#### Script
+### Script
 
 
 
@@ -86,7 +82,7 @@ _Appears in:_
 | `spec` _[ScriptSpec](#scriptspec)_ |  |  |  |
 
 
-#### ScriptContent
+### ScriptContent
 
 
 
@@ -105,7 +101,7 @@ _Appears in:_
 | `uri` _string_ | uri of script content |  |  |
 
 
-#### ScriptList
+### ScriptList
 
 
 
@@ -123,7 +119,7 @@ ScriptList contains a list of Script
 | `items` _[Script](#script) array_ |  |  |  |
 
 
-#### ScriptSpec
+### ScriptSpec
 
 
 
@@ -145,7 +141,7 @@ _Appears in:_
 
 
 
-#### Test
+### Test
 
 
 
@@ -164,7 +160,7 @@ _Appears in:_
 | `spec` _[TestSpec](#testspec)_ |  |  |  |
 
 
-#### TestContent
+### TestContent
 
 
 
@@ -183,7 +179,7 @@ _Appears in:_
 | `uri` _string_ | uri of test content |  |  |
 
 
-#### TestList
+### TestList
 
 
 
@@ -201,7 +197,7 @@ TestList contains a list of Test
 | `items` _[Test](#test) array_ |  |  |  |
 
 
-#### TestSpec
+### TestSpec
 
 
 
@@ -225,7 +221,7 @@ _Appears in:_
 
 
 
-#### TestSuite
+### TestSuite
 
 
 
@@ -244,7 +240,7 @@ _Appears in:_
 | `spec` _[TestSuiteSpec](#testsuitespec)_ |  |  |  |
 
 
-#### TestSuiteExecutionCore
+### TestSuiteExecutionCore
 
 
 
@@ -262,7 +258,7 @@ _Appears in:_
 | `endTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | test suite execution end time |  |  |
 
 
-#### TestSuiteExecutionRequest
+### TestSuiteExecutionRequest
 
 
 
@@ -290,7 +286,7 @@ _Appears in:_
 
 
 
-#### TestSuiteList
+### TestSuiteList
 
 
 
@@ -308,7 +304,7 @@ TestSuiteList contains a list of TestSuite
 | `items` _[TestSuite](#testsuite) array_ |  |  |  |
 
 
-#### TestSuiteSpec
+### TestSuiteSpec
 
 
 
@@ -332,7 +328,7 @@ _Appears in:_
 
 
 
-#### TestSuiteStepDelay
+### TestSuiteStepDelay
 
 
 
@@ -348,7 +344,7 @@ _Appears in:_
 | `duration` _integer_ | Duration in ms |  |  |
 
 
-#### TestSuiteStepExecute
+### TestSuiteStepExecute
 
 
 
@@ -366,7 +362,7 @@ _Appears in:_
 | `stopOnFailure` _boolean_ |  |  |  |
 
 
-#### TestSuiteStepSpec
+### TestSuiteStepSpec
 
 
 
@@ -384,7 +380,7 @@ _Appears in:_
 | `delay` _[TestSuiteStepDelay](#testsuitestepdelay)_ |  |  |  |
 
 
-#### TestSuiteStepType
+### TestSuiteStepType
 
 _Underlying type:_ _string_
 
@@ -402,7 +398,7 @@ _Appears in:_
 | `delay` |  |
 
 
-#### Variable
+### Variable
 
 _Underlying type:_ _Variable_
 

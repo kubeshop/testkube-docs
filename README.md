@@ -106,6 +106,8 @@ Once run, the generated/updated files need to be committed back to the repo for 
 CRD references docs at are generated from the corresponding GoLang types using a fork of the
 https://github.com/elastic/crd-ref-docs project, available at https://github.com/kubeshop/crd-ref-docs.
 
+The customized markdown templates are in this repositories [src/crd-templates](src/crd-templates) folder
+
 Follow these steps:
 
 1. Clone/update the [testkube-operator](https://github.com/kubeshop/testkube-operator) to make sure you have the latest 
@@ -122,12 +124,13 @@ Follow these steps:
   --renderer=markdown 
   --output-path=./docs 
   --output-mode=group
+  --templates-dir=<testkube-docs-root>/src/crd-templates
 ```
 
 For example:
 
 ```shell
- ./crd-ref-docs --source-path=/Users/olensmar/GolandProjects/testkube-operator --config=config.yaml --renderer=markdown --output-path=./docs --output-mode=group
+ ./crd-ref-docs --source-path=/Users/olensmar/GolandProjects/testkube-operator --config=config.yaml --renderer=markdown --output-path=./docs --output-mode=group --templates-dir=/Users/olensmar/WebstormProjects/testkube-docs/src/crd-templates
 2024-08-05T11:44:21.019+0200    INFO    crd-ref-docs    Loading configuration   {"path": "config.yaml"}
 2024-08-05T11:44:21.020+0200    INFO    crd-ref-docs    Processing source directory     {"directory": "/Users/olensmar/GolandProjects/testkube-operator", "depth": 10}
 2024-08-05T11:44:22.717+0200    INFO    crd-ref-docs    Rendering output        {"path": "./docs"}

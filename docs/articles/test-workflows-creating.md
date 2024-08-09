@@ -1,21 +1,12 @@
-# Creating Test Workflows
+# Working with Test Workflows
 
-Test Workflows can be created/managed either through the [Testkube CLI](/articles/install/cli) or from the 
+Test Workflows can be created and managed either through the [Testkube CLI](/articles/install/cli) or from the 
 [Dashboard](/articles/testkube-dashboard-explore).
-
-## CLI
-
-The Testkube CLI allows managing Test Workflows in the similar way as Test and TestSuites.
-
-### Create
-
-```shell
-testkube create testworkflow -f EXAMPLE_FILE.yaml
-```
 
 :::tip
 
-You can also manipulate Workflow CRDs directly using `kubectl`, for example `kubectl apply` can be used 
+Since Workflows are ultimately stored as custom resources in your clusters ([Read More](/articles/crds)), you can
+also manipulate them directly using `kubectl`, for example `kubectl apply` can be used
 to create a Workflow:
 
 ```shell
@@ -23,6 +14,15 @@ kubectl apply -f EXAMPLE_FILE.yaml
 ```
 :::
 
+## Using the CLI
+
+The Testkube CLI allows managing Test Workflows in the similar way as was previously possible for Tests and TestSuites.
+
+### Create
+
+```shell
+testkube create testworkflow -f EXAMPLE_FILE.yaml
+```
 
 ### Get
 The Test Workflow details can be displayed using `testkube get testworkflow` command using the Test Workflow name:
@@ -72,8 +72,10 @@ Test Workflows icon in the left toolbar:
 
 ![menu test workflow icon](../img/dashboard-menu-workflows.png)
 
-which takes you to the [Test Workflows Overview](/articles/testkube-dashboard-workflows-overview), which has a 
-dedicated wizard for creating Workflows: 
+which takes you to the [Test Workflows Overview](/articles/testkube-dashboard-workflows-overview) which allows you to browse, run and manage
+your available Workflows.
+
+There is also a dedicated wizard for creating Workflows: 
 
 ![Workflow Creation Wizard](../img/create-test-workflow.png)
 
