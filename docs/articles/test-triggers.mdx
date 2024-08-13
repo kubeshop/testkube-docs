@@ -1,64 +1,41 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 # K8s Event Triggers
-
-<Tabs>
-<TabItem value="dashboard" label="Dashboard" default>
 
 Testkube allows you to automate running tests and test suites by defining triggers on certain events for various Kubernetes resources.
 
-## What is a Testkube Test Trigger?
+## What is a Testkube Event Trigger?
 
-In generic terms, a _Trigger_ defines an _action_ which will be executed for a given _execution_ when a certain _event_ on a specific _resource_ occurs. For example, we could define a _TestTrigger_ which _runs_ a _Test_ when a _ConfigMap_ gets _modified_.
+In generic terms, a _Trigger_ defines an _action_ which will be executed for a given _execution_ when a certain _event_ on a specific _resource_ occurs.
+For example, we could define a _TestTrigger_ which _runs_ a _Test_ when a _ConfigMap_ gets _modified_.
+
+In Testkube, Event Triggers allow you to trigger the execution of a Workflow based on Kubernetes Events - for example when a Deployment is updated
+or an Ingress gets deleted.
 
 Watch our [video guide](#video-tutorial) on using Testkube Test Triggers to perform **Asynchronous Testing in Kubernetes**.
+
+You can currently create/manage Event Triggers in the Testkube Dashboard or by interacting with corresponding Trigger custom resources
+via `kubectl`.
 
 ## Creating Test Triggers in the Testkube Dashboard
 
 Click on the lightening bolt icon on the left of the Testkube Dashboard to open the dialog to create test triggers. Any current test triggers will be listed and the `Create a new trigger` button is at the top right of the screen.
 
-![Trigger Screen](../img/trigger-screen-1.14.png)
+![Trigger Screen](../img/trigger-screen-082024.png)
 
 The `Create new trigger` dialog opens:
 
-![Create Trigger](../img/create-trigger-1.14.png)
+![Create Trigger](../img/create-trigger-082024.png)
 
 Input the condition that will cause the trigger and click `Next`.
 
 Input the action that will be the result of the trigger condition happening and click `Create`.
 
-![Create Trigger Action](../img/create-trigger-action-1.14.png)
-
-Get all the details in the video below!
-
-## Video Tutorial
-
-<iframe
-  width="100%"
-  height="350px"
-  src="https://www.youtube.com/embed/t4V6E9rQ5W4"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen
-></iframe>
-
-</TabItem>
-
-<TabItem value="cli" label="CLI">
-
-Testkube allows you to automate running tests and test suites by defining triggers on certain events for various Kubernetes resources.
-
-## What is a Testkube Test Trigger?
-
-In generic terms, a _Trigger_ defines an _action_ which will be executed for a given _execution_ when a certain _event_ on a specific _resource_ occurs having a given _concurrencyPolicy_. For example, we could define a _TestTrigger_ which _runs_ a _Test_ when a _ConfigMap_ gets _modified_.
-
-Watch our [video guide](#video-tutorial) on using Testkube Test Triggers to perform **Asynchronous Testing in Kubernetes**.
+![Create Trigger Action](../img/create-trigger-action-082024.png)
 
 ## Custom Resource Definition Model
 
 ### Selectors
+
+Triggers use Selectors to specify which events to listen for.
 
 The `resourceSelector` and `testSelector` fields support selecting resources either by name or using
 the Kubernetes [Label Selector](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements).
@@ -227,22 +204,9 @@ Testkube exposes CRUD operations on test triggers in the REST API. Check out the
 
 The following environment variables are automatically injected into each triggered test pod:
 
-WATCHER_EVENT_RESOURCE: resource type
-WATCHER_EVENT_NAME: resource name
-WATCHER_EVENT_NAMESPACE: resource namespace
-WATCHER_EVENT_EVENT_TYPE: event type
+- `WATCHER_EVENT_RESOURCE`: resource type
+- `WATCHER_EVENT_NAME`: resource name
+- `WATCHER_EVENT_NAMESPACE`: resource namespace
+- `WATCHER_EVENT_EVENT_TYPE`: event type
 
-## Video Tutorial
 
-<iframe
-  width="100%"
-  height="350px"
-  src="https://www.youtube.com/embed/t4V6E9rQ5W4"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen
-></iframe>
-
-</TabItem>
-</Tabs>

@@ -387,12 +387,10 @@ const redirects = [
     from: [
       "/contributing/development/crds",
       "/contributing/development/development-crds/",
+      "/articles/operator-api-reference",
+      "/articles/crds-reference"
     ],
     to: "/articles/crds",
-  },
-  {
-    from: "/articles/operator-api-reference",
-    to: "/articles/crds-reference",
   },
   {
     from: "/guides/upgrade",
@@ -447,6 +445,10 @@ const redirects = [
   {
     from: "/openapi",
     to: "/openapi/overview",
+  },
+  {
+    from: "/articles/install-cli",
+    to: "/articles/install/cli",
   },
   {
     from: "/articles/getting-started",

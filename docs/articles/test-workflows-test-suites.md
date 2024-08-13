@@ -12,12 +12,6 @@ similarly to what you can do in Test Suites.
 
 ## Advantages over original Test Suite
 
-:::tip
-
-We consider Test Workflows as a long-term solution, so keep in mind that the original Test Suites will [**become deprecated**](https://testkube.io/blog/the-future-of-testkube-with-test-workflows).
-
-:::
-
 As it is regular Test Workflow, where a single step is dispatching downstream Test Workflows and Tests,
 the execution is very flexible. You can:
 
@@ -25,10 +19,24 @@ the execution is very flexible. You can:
 * Run setup operations (i.e. start shared instance of database, or generate API key)
 * Process the results (i.e. by notifying about the status)
 * Run other tests based on the previous results
+* Trigger Workflows in other environments
+
+:::warning
+
+Test Workflows is our long-term solution, so keep in mind that the original Test Suites are being deprecated - [Read More   ](/articles/legacy-features).
+
+:::
 
 ## Syntax
 
 You have to use `execute` operation in the step, and provide definition of the Test Workflows and Tests to run.
+
+:::tip
+
+The Testkube Dashboard contains a visual builder for creating Composite Workflows -
+[Read More](/articles/testkube-dashboard-workflows-overview#creating-a-workflow-by-combining-existing-workflows)
+
+:::
 
 <Tabs>
 <TabItem value="yaml" label="YAML" default>
@@ -78,12 +86,6 @@ To run Test Workflow as part of the `execute` step, you have to add its referenc
 You need to provide `name`, along with optional `config` values for parametrization.
 
 ### Running Tests
-
-:::tip
-
-We consider Test Workflows as a long-term solution, so keep in mind that the Tests will [**become deprecated**](https://testkube.io/blog/the-future-of-testkube-with-test-workflows).
-
-:::
 
 To run Tests as part of the `execute` step, you have to add its reference in the `tests` list.
 

@@ -2,6 +2,12 @@
 
 Starting with Testkube version 1.13, the easiest way to start managing your team's tests on a remote Testkube server is to run the Testkube CLI using the official Docker image. The Testkube CLI Docker image is a self-contained environment that allows you to run Testkube commands in a consistent and isolated manner.
 
+:::info
+
+The Testkube CLI is available on [Dockerhub](https://hub.docker.com/repository/docker/kubeshop/testkube-cli)
+
+:::
+
 ## Prerequisites
 
 Before using the Testkube CLI Docker image, ensure that you have Docker installed and running on your system. You can download and install Docker from the official [Docker website](https://www.docker.com/).

@@ -22,6 +22,7 @@ Configure the following value in the `testkube-enterprise` chart:
 ```yaml
 global:
     customCaSecretRef: <secret name>
+    certificateProvider: ""
 ```
 
 Configure the following values in the `testkube` chart:
@@ -49,10 +50,36 @@ global:
                           mountPath: /etc/testkube/certs/testkube-custom-ca.pem
                           subPath: ca.crt
 testkube-api:
-    cloud:
-        tls:
-            customCaSecretRef: <secret name>
+  cloud:
+    tls:
+      customCaSecretRef: <secret name>
 ```
+
+If you create Ingress configurations, add a secret with the certificate that was signed by the CA to each Ingress manifest.
+```shell
+testkube-cloud-api:
+  api:
+    tls:
+      serveHTTPS: false
+      tlsSecret:  <another secret name>
+
+testkube-cloud-ui:
+  ingress:
+    tlsSecretName: <another secret name>
+
+dex:
+  ingress:
+    - secretName: <another secret name>
+      hosts:
+        - <hostname>
+        
+minio:
+  customIngress:
+    tls:
+      tlsSecret: <another secret name>
+```
+##
+If you create an Istio Gateway, you need to deploy a certificate for all required domains there.
 
 ## Pulling from Git repositories
 
