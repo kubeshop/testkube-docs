@@ -42,31 +42,43 @@ To use S3 as storage, the steps are as follows:
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
         "StringEquals": {
-          "oidc.eks.us-east-1.amazonaws.com/id/<CLUSTER_ID>:sub": "system:serviceaccount:testkube-enterprise:testkube-enterprise-api"
+          "oidc.eks.us-east-1.amazonaws.com/id/<CLUSTER_ID>:sub": [
+              "system:serviceaccount:testkube-enterprise:testkube-enterprise-api",
+              "system:serviceaccount:testkube-enterprise:testkube-worker-service"
+          ]
         }
       }
     }
   ]
 }
 ```
-This will grant the Enterprise API’s Service Account (testkube-enterprise-api Service Account in the namespace testkube-enterprise) to assume the created Role which grants access to AWS S3.
+This will grant the Enterprise API’s and Worker Service Accounts (testkube-enterprise-api and testkube-worker-service Service Account in the namespace testkube-enterprise) to assume the created Role which grants access to AWS S3.
 
-4. The following configuration should be provided to the testkube-enterprise Helm chart to configure Enterprise API to use AWS S3 for storage:
+4. The following configuration should be provided to the testkube-enterprise Helm chart to configure Enterprise API and Worker service to use AWS S3 for storage:
 
 ```yaml
+global:
+  storage:
+    endpoint: s3.amazonaws.com
+    region: <AWS_REGION>
+    outputsBucket: <BUCKET>
+    secure: true
+    accessKeyId: ""
+    secretAccessKey: ""
+    
 testkube-cloud-api:
-  api:
-    minio:
-      endpoint: s3.amazonaws.com
-      region: <AWS_REGION>
-      accessKeyId: ""
-      secretAccessKey: ""
-      secure: true
   serviceAccount:
     create: true
     name: testkube-enterprise-api
     annotations:
       eks.amazonaws.com/role-arn: arn:aws:iam::<ACCOUNT_ID>:role/<ROLE_NAME>
+
+testkube-worker-service:
+  serviceAccount:
+  create: true
+  name: testkube-worker-service
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::<ACCOUNT_ID>:role/<ROLE_NAME>
 
 minio:
   enabled: false
