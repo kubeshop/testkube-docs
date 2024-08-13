@@ -129,7 +129,7 @@ spec:
 ```
 ## events
 ### cronjob
-`spec.events.cronjob` allows to run the workflow on specified schedule(s) :
+`spec.events.cronjob` allows to run the Test Workflow on specified schedule(s):
 
 ```yaml
 spec:
@@ -146,6 +146,17 @@ spec:
         key3: value3
       annotations:
         key4: value4
+```
+## execution
+### tags
+`spec.execution.tags` allows to add tags for Test workflow executions:
+
+```yaml
+spec:
+  execution:
+    tags:
+      name1: value1
+      name2: value2
 ```
 ## steps
 Steps are the main building blocks in Test Workflows. They describe actions that should be executed in specific order.
