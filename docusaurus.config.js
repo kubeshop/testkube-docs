@@ -60,6 +60,22 @@ const config = {
         googleTagManager: {
           containerId: "GTM-PQK4DKN",
         },
+        sitemap: {
+          createSitemapItems: async (params) => {
+            const lowPrioPaths = ["/openapi/agent/","/openapi/cloud/","/articles/crds/","/cli/"]
+
+            const {defaultCreateSitemapItems, ...rest} = params;
+            const items = await defaultCreateSitemapItems(rest);
+            items.forEach((item) => {
+              lowPrioPaths.forEach( path => {
+                if( item.url.includes(path)) {
+                  item.priority = 0.1;
+                }
+              })
+            });
+            return items;
+          },
+        },
       },
     ],
     // Redocusaurus config

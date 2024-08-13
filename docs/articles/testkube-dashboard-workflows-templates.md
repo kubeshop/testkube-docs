@@ -37,7 +37,7 @@ The Definition pane allows you to edit the Workflow Template.
 ![Workflow Template Definition](../img/workflow-template-definition.png)
 
 
-:::warn
+:::warning
 
 Remember that changing your templates will affect all Workflows that use them - be sure to not break any usage!
 

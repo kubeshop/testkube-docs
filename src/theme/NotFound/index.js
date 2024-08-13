@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import posthog from "posthog-js";
 import algoliasearch from "algoliasearch";
 import Layout from "@theme/Layout";
 import { useLocation } from "@docusaurus/router";
@@ -17,16 +16,6 @@ export default function NotFound() {
   );
   const index = client.initIndex("testkube");
   const location = useLocation();
-
-  useEffect(() => {
-    posthog.init("phc_iir7nEWDoXebZj2fxKs8ukJlgroN7bnKBTcT8deIuJb", {
-      api_host: "https://app.posthog.com",
-      autocapture: false,
-      capture_pageview: false,
-    });
-
-    posthog.capture("page-not-found");
-  }, []);
 
   useEffect(() => {
     const getSearchResults = async () => {
