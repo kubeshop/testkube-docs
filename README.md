@@ -76,6 +76,13 @@ content
 ```
 ````
 
+### Using Tabs
+
+You can create tabs for structuring your content, for example as in the [CLI Installation](https://docs.testkube.io/articles/install/cli) page.
+
+Please note that headlines inside tab content will be shown in the navigation menu to the right, but will not 
+work as direct links from external sources unless they are under the default/first tab.
+
 ## Updating the OpenAPI Docs
 
 These docs use [redocusaurus](https://redocusaurus.vercel.app/) to generate OpenAPI documentation, but

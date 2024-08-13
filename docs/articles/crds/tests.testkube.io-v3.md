@@ -1,3 +1,7 @@
+import LegacyWarning from '../_legacy-warning.mdx';
+
+<LegacyWarning />
+
 # API Reference
 
 ## Packages
