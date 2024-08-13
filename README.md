@@ -169,3 +169,16 @@ import LegacyWarning from '../_legacy-warning.mdx';
 
 8. Create a branch, commit and create a PR
 
+## Updating the CLI Reference docs
+
+The CLI docs are generated in the [Testkube Repo](https://github.com/kubeshop/testkube) by running
+
+```
+make docs
+```
+
+in the root folder and copying the generated files from the `gen/docs/cli` folder to the `/cli` folder in this repo.
+
+:::tip
+Make sure the generated docs build with `npm run build` ok before committing, and fix any errors manually as applicable.
+:::
