@@ -114,7 +114,7 @@ spec:
 ## Init Process
 
 To perform advanced orchestration, Test Workflows are using their own [**Init Process**](https://en.wikipedia.org/wiki/Init).
-That process is an actual command run in the container, that is preparing the environment, and executing the actual command to run.
+That process is an actual command run in the container, where the environment is prepared, and executing the actual command to run.
 
 Whenever you run a container with some command, like `command: [ "curl", "http://testkube.io" ]`,
 we are actually doing something similar to `command: [ "/init", "curl", "http://testkube.io" ]`.
