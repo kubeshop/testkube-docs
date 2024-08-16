@@ -1,4 +1,4 @@
-# Helm configuration
+# Install with Helm
 
 The Testkube Helm Chart lets you set up a customized Testkube tailored to your environment.
 The Chart will deploy a control plane and agent. You can learn more about the deployment architectures [here][deployment-architecture].

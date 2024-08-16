@@ -22,8 +22,11 @@ const sidebars = {
       label: "Welcome!",
       id: "index",
     },
-    "articles/tutorial/quickstart",
-    "articles/tutorial/example",
+    {
+      type: "doc",
+      label: "Quickstart",
+      id: "articles/tutorial/quickstart",
+    },
     {
       type: "html",
       value: "<hr />",
@@ -38,7 +41,11 @@ const sidebars = {
           type: "category",
           label: "Install with Helm",
           items: [
-            "articles/install/install-with-helm",
+            {
+              type:"doc",
+              label: "Overview",
+              id: "articles/install/install-with-helm",
+            },
             "articles/install/advanced-install",
           ],
         },
