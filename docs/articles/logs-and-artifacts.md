@@ -28,7 +28,7 @@ For example, below shows the HTML report available in the screenshot above:
 
 :::tip
 
-You can retrieve logs and artifacts using the Testkube CLI also using the [get testworkflowexecution](/cli/testkube_get_testworkflowexecution)
+You can retrieve logs and artifacts using the Testkube CLI also using the [get testworkflowexecution](/cli/testkube_get_testworkflowexecution).
 and [get artifact](/cli/testkube_get_artifact) commands.
 :::
 
