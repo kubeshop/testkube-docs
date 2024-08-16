@@ -150,7 +150,7 @@ spec:
 
 :::info
 Testkube's schedule data format is the same that is used to define Kubernetes Cron jobs, 
-check [Wikipedia Cron format](https://en.wikipedia.org/wiki/Cron) for details.
+visit [Wikipedia Cron format](https://en.wikipedia.org/wiki/Cron) for details.
 :::
 
 ## steps
