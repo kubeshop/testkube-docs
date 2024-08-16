@@ -2,12 +2,16 @@ import LegacyWarning from "../articles/_legacy-warning.mdx";
 
 # Using Testkube from CI/CD
 
-You can trigger tests in Testkube from your CI/CD pipeline. This practice decouples running your tests from the CI/CD, removes all the complexity of, and speeds up your CI.
+Triggering Workflows from your CI/CD pipeline can be done in several ways:
+- Using one of Testkubes native integrations (see below)
+- Automating the [Testkube CLI](/articles/install/cli) in your CI/CD tool
+- Directly calling the [Testkube API](/openapi/overview)
 
-We have different tutorials for the options of being CI driven or using GitOps approaches. Check out the following tutorials:
+## CI/CD Integration Tutorials
 
-- [Github Actions - running Testkube CLI commands with setup-testkube-action](./github-actions.mdx)
-- [Testkube Docker CLI](./testkube-cli-docker.md)
+The following tutorials are available for integrating Testkube with common CI/CD tools:
+
+- [Github Actions](./github-actions.mdx)
 - [Gitlab CI](./gitlab.mdx)
 - [Jenkins Pipelines](./jenkins.mdx)
 - [Jenkins UI](./jenkins-ui.mdx)
@@ -15,3 +19,61 @@ We have different tutorials for the options of being CI driven or using GitOps a
 - [Azure DevOps](./azure.mdx)
 - [Flux](./flux-integration.mdx)
 - [ArgoCD](./argocd-integration.mdx)
+
+## Native CI/CD Integrations
+
+Native Integrations are available for
+- Jenkins - https://plugins.jenkins.io/testkube-cli
+- GitHub - https://github.com/marketplace/actions/testkube-action
+- Azure Devops - https://marketplace.visualstudio.com/items?itemName=Testkube.testkubecli
+
+:::tip
+
+The Workflow Details tab in the Testkube Dashboard shows you preconfigured configurations for popular CI/CD tools
+to run the selected Workflow - [Read More](/articles/testkube-dashboard-workflow-details#cicd-integrations-tab)
+
+:::
+
+## General Steps for CI/CD Integration
+
+### 1. Utilize the Testkube CLI Docker Image
+
+In your CI/CD pipeline configuration, specify the use of the `kubeshop/testkube-cli` Docker image.
+
+This image contains the necessary Testkube CLI for interacting with Testkube services - [Read More](/articles/testkube-cli-docker)
+
+### 2. Set Required Environment Variables
+
+Define the following environment variables in your pipeline configuration:
+
+```
+TESTKUBE_API_KEY: Your Testkube API key (tkcapi_...).
+TESTKUBE_ORG_ID: The organization ID for Testkube (tkcorg_...).
+TESTKUBE_ENV_ID: The environment ID for Testkube (tkcenv_...).
+```
+
+These variables are crucial for authenticating and directing your tests to the correct Testkube environment.
+
+### 3. Initialize Testkube Context
+
+Within your pipeline script, execute a command to set the Testkube context using the environment variables. For instance:
+
+```
+testkube set context --api-key $TESTKUBE_API_KEY --org $TESTKUBE_ORG_ID --env $TESTKUBE_ENV_ID
+```
+
+This step configures the Testkube CLI with the correct parameters for your specific Testkube environment.
+
+### 4. Trigger Testkube Tests
+
+Finally, add a script step to trigger the desired Workflow in Testkube. For example:
+
+```
+testkube run testworkflow <workflow-name> -f
+```
+
+Replace `<workflow-name>` with the specific name of the Test Workflow you wish to execute.
+
+:::tip
+You can run any Testkube CLI command using the approach described above, check out the [CLI Command Reference](/cli/testkube)
+:::
