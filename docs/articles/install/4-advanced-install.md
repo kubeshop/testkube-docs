@@ -1,4 +1,4 @@
-# Advanced Install
+# Advanced Helm Install
 
 A variety of advanced topics to further customize your deployment.
 

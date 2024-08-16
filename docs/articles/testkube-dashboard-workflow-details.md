@@ -118,6 +118,7 @@ This panel allows you to configure global variables and secrets used by your Wor
 This panel allows you to configure a single schedule for your Workflow - if you want to define
 multiple schedules you can do this directly in the Workflow YAML under the Definition panel.
 
+Read more about Workflow Scheduling in the [Scheduling Workflows](/articles/scheduling-tests) article.
 :::
 
 Use this panel to define a single execution schedule for your Workflow.

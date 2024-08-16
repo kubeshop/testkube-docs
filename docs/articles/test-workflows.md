@@ -147,6 +147,12 @@ spec:
       annotations:
         key4: value4
 ```
+
+:::info
+Testkube's schedule data format is the same that is used to define Kubernetes Cron jobs, 
+visit [Wikipedia Cron format](https://en.wikipedia.org/wiki/Cron) for details.
+:::
+
 ## steps
 Steps are the main building blocks in Test Workflows. They describe actions that should be executed in specific order.
 ```yaml
