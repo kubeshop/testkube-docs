@@ -1,43 +1,81 @@
 # Test Insights
 
-The Testkube Test Insights feature is tailored to empower DevOps, testers, and QA managers with deep analytical capabilities. This feature provides valuable insights into your tests, enabling data-driven decisions that optimize your testing strategies and improve the quality of your applications.
+Test Insights is an analytics tool integrated into Testkube, that provides detailed metrics about the
+execution of your tests. This feature allows teams to track key performance indicators including the number
+of test executions, pass/fail rates, execution durations, and more, all within a user-friendly dashboard.
 
-## The Value of Test Insights
-
-By integrating Test Insights into your testing workflow, your team can leverage several benefits:
-
-- **Enhanced Visibility:** Gain a clear overview of testing activities and outcomes, helping you manage and prioritize testing resources more effectively.
-- **Data-Driven Decisions:** Make informed decisions about where to allocate efforts for improving test efficiency and reliability.
-- **Improved Test Efficiency:** Identify and address inefficiencies in your testing process, leading to faster development cycles and higher quality software releases.
-
-## Understanding Test Insights
-
-Test Insights is an analytics tool integrated into Testkube, that provides detailed metrics about the execution of your tests. This feature allows teams to track key performance indicators including the number of test executions, pass/fail rates, execution durations, and more, all within a user-friendly dashboard.
-
-![Test Insights Dashboard](../img/test-insights-dashboard.png)
-
-With Test Insights, DevOps and QA managers can quickly answer crucial questions that impact the testing cycle and overall software quality, such as:
+With Test Insights, DevOps and QA managers can quickly answer crucial questions that impact the testing 
+cycle and overall software quality, such as:
 
 - Which tests take the longest to execute, and why?
 - Which tests have the highest failure rates?
 - How do test performance metrics vary by type of test or by the tools used?
 - How do key test execution metrics change over time?
 
-## Testing Strategy 
+By integrating Test Insights into your testing workflow, your team can leverage several benefits:
 
-**Efficiency Quadrant Analysis:** Utilize a quadrant chart to visualize tests by execution time and frequency. Tests that frequently run and take longer to execute appear in the top right quadrant, highlighting them as prime candidates for optimization to reduce testing bottlenecks, improve cycle times and optimize infrastructure costs.
+- **Enhanced Visibility:** Gain a clear overview of testing activities and outcomes, helping 
+  you manage and prioritize testing resources more effectively.
+- **Data-Driven Decisions:** Make informed decisions about where to allocate efforts for improving 
+  test efficiency and reliability.
+- **Improved Test Efficiency:** Identify and address inefficiencies in your testing process, leading 
+  to faster development cycles and higher quality software releases.
 
-![Efficient Quadrant Analysis](../img/efficient-quadrant-analysis.png)
+## Using Test Insights
 
-### Key Metrics and Groupings
+Test Insights is available in the left menu and provides two modules as shown in the screenshot below:
 
-**Execution Metrics:** View the total number of test executions over a given period, along with their status outcomes (passed and failed), helping teams understand the impact of their applications evolution on quality and where they should focus their testing and bug-fixing efforts going forward.
+- **Execution Analysis** - for operational metrics of your test executions
+- **Test Reports** - for strategic reporting of test results over time
 
-![Execution Metrics](../img/execution-metrics.png)
+![Test Insights Tab](images/test-insights-tab.png)
 
-**Performance Analysis:** Assess the execution duration of tests to identify which tests take the longest and may need optimization to reduce application delivery times and infrastructure costs.
+## Execution Analysis
 
-![Performance Analysis](../img/performance-analysis.png)
+The top part of the Execution Analysis module shows high-level execution metrics for the time frame
+selected on the top right (see screenshot above).
 
-**Test Categorization:** Filter insights by test types (load, API, end-to-end) or by testing tools, enabling teams to pinpoint specific areas for improvement.
+The drop-down on the middle right allows you to select grouping of execution metrics either by status (as shown
+in the screenshot) or by Workflow:
+
+![Test Insights Execution Analysis by Workflows](images/test-insights-execution-analysis-by-workflow.png)
+
+### Efficiency Quadrant Analysis
+
+Scrolling down reveals a quadrant chart to visualize tests by execution time and frequency. Tests that 
+frequently run and take longer to execute appear in the top right quadrant, highlighting them as prime 
+candidates for optimization to reduce testing bottlenecks, improve cycle times and optimize infrastructure costs:
+
+![Test Insights - Efficiency Quadrant Analysis](images/test-insights-quadrant-analysis.png)
+
+Hovering a marker in the chart reveals the corresponding Workflow. 
+
+The table below the chart shows plotted Workflows sortable by a number of attributes.
+
+## Test Reports
+
+This module shows the total number of test executions over a given period, along with their status 
+outcomes (passed and failed), helping teams understand the impact of their applications evolution on quality 
+and where they should focus their testing and bug-fixing efforts going forward.
+
+![Test Reports Module](images/test-insights-report-module.png)
+
+The selector on the top right allows for narrowing down which timeframe to visualise.
+
+There are a number of reports available:
+
+![Test Reports Module Reports](images/test-insights-reports-list.png)
+
+### Advanced Report Filtering
+
+The "Advanced filters" option in the screenshot above allows you to specify specifically which aggregate 
+you want to apply to which measurement and segment of the underlying data.
+
+![Test Reports Advanced Filtering](images/test-insights-advanced-filtering.png)
+
+### JUnit Report analysis
+
+As seen in the screenshots above, Testkube parses JUnit Reports found in 
+[Workflow artifacts](/articles/test-workflows-artifacts) and makes their specific Testcase counts and 
+statuses available for analysis also.
 
