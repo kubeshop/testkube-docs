@@ -6,7 +6,7 @@ a Test Workflow. Collected artifacts are then retrievable either via the API/CLI
 
 :::note
 
-Testkube stores Artifacts in the backend using Minio - [Read More](/articles/install/advanced-install#minio)
+Testkube stores Artifacts in the backend using Minio - [Read More](/articles/install/advanced-install#minio).
 
 :::
 
