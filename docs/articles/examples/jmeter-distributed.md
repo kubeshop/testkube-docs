@@ -31,21 +31,21 @@ After execution, you can see the output from the test executions under the execu
 
 The log output from the JMeter execution:
 
-![JMeter Framework Log Output](images/)
+![JMeter Framework Log Output](images/jmeter-distributed-log-output.png)
 
 </TabItem>
 <TabItem value="artifacts" label="Artifacts" default>
 
 The uploaded report is available in the Artifacts tab:
 
-![JMeter Framework Artifacts](images/)
+![JMeter Framework Artifacts](images/jmeter-distributed-artifact.png)
 
 </TabItem>
-<TabItem value="htlm-report" label="HTLM Report" default>
+<TabItem value="html-report" label="HTML Report" default>
 
-Clicking the <...> opens it in your browser:
+Clicking on Open Report in the artifacts or selecting index.html loads complete report live in your browser:
 
-![JMeter HTML Report](images/)
+![JMeter HTML Report](images/jmeter-distributed-ui.png)
 
 </TabItem>
 </Tabs>
