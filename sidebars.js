@@ -199,6 +199,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Artifacts",
+              id: "articles/test-workflows-artifacts",
+            },
+            {
+              type: "doc",
               label: "Services",
               id: "articles/test-workflows-services",
             },
