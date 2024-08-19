@@ -10,7 +10,8 @@ Testkube stores Artifacts in the backend using Minio - [Read More](/articles/ins
 
 :::
 
-Specify which artifacts to collect by adding an `artifacts` property to the corresponding Test steps, for example
+Specify which artifacts to collect by adding an `artifacts` property to the corresponding Test steps
+(see [reference](/articles/crds/testworkflows.testkube.io-v1#stepartifacts)), for example
 
 ```yaml
 - name: Example step with artifacts
@@ -39,6 +40,19 @@ will collect all files in the `../videos` folder.
 Testkube supports Glob patterns for path matching as provided by the [doublestar library](https://github.com/bmatcuk/doublestar?tab=readme-ov-file#patterns)
 
 :::
+
+## Compressing Artifacts
+
+If you want to compress specific artifacts you can add a compress property specifying the name of a target archive:
+
+```yaml
+- name: Saving compressed logs
+  artifacts:
+    compress: 
+      name: 'logs.tar.gz'
+    paths:
+    - 'logs/*.log'
+```
 
 ## Artifacts from Parallel executions
 
@@ -82,5 +96,4 @@ above to ensure that artifacts are collected, otherwise this step could be skipp
 
 Testkube automatically identifies [JUnit XML reports](https://github.com/testmoapp/junitxml) in found artifacts and parses 
 their contents to be available under the [Test Insights Reporting](/articles/test-insights#test-reports) feature.
-
 
