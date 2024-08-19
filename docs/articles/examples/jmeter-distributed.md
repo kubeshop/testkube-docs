@@ -31,7 +31,7 @@ After execution, you can see the output from the test executions under the execu
 
 The log output from the JMeter execution:
 
-![JMeter Framework Log Output](images/jmeter-distributed-log-output.png)
+![JMeter Framework Log Output](./images/jmeter-distributed-logoutput.png)
 
 </TabItem>
 <TabItem value="artifacts" label="Artifacts" default>
