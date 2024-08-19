@@ -7,7 +7,7 @@ of test executions, pass/fail rates, execution durations, and more, all within a
 With Test Insights, DevOps and QA managers can quickly answer crucial questions that impact the testing 
 cycle and overall software quality, such as:
 
-- Which tests take the longest to execute, and why?
+- Which tests take the longest to execute and why?
 - Which tests have the highest failure rates?
 - How do test performance metrics vary by type of test or by the tools used?
 - How do key test execution metrics change over time?
