@@ -24,6 +24,28 @@ number of nodes
 
 <DistributedJMeter/>
 
-The Log Output from this test:
+After execution, you can see the output from the test executions under the executions panel tabs:
 
-![Distributed JMeter Log Output](images/distributed-jmeter-log-output.png)
+<Tabs>
+<TabItem value="logs" label="Log Output" default>
+
+The log output from the JMeter execution:
+
+![JMeter Framework Log Output](images/)
+
+</TabItem>
+<TabItem value="artifacts" label="Artifacts" default>
+
+The uploaded report is available in the Artifacts tab:
+
+![JMeter Framework Artifacts](images/)
+
+</TabItem>
+<TabItem value="htlm-report" label="HTLM Report" default>
+
+Clicking the <...> opens it in your browser:
+
+![JMeter HTML Report](images/)
+
+</TabItem>
+</Tabs>
