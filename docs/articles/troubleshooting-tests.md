@@ -22,7 +22,7 @@ Once you have collected the necessary artifacts, there is usually some “diggin
 Testkube has multiple features to help with consistent troubleshooting of failed tests:
 
 - Testkube automatically collects [logs and artifacts](logs-and-artifacts) from your test executions and makes these available in the Testkube Dashboard.
-- If your testing tool outputs standard JUnit reports, Testkube will capture those and further help you analyze their contents.
+- If your testing tool outputs standard JUnit reports, Testkube will [capture those](/articles/test-workflows-artifacts#junit-report-extraction) and further help you analyze their contents.
 - To further help users identify relevant content in test logs the dashboard has functionality for [Keyword Highlighting](../testkube-pro/articles/log-highlighting) and Log Comparison.
 - Testkube includes an [AI Insights](../testkube-pro/articles/AI-test-insights) module that will use GPT to analyze and understand test logs.
 

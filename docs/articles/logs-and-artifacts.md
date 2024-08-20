@@ -13,7 +13,7 @@ Logs are collected individually for each executed container within a workflow, a
 
 ## Artifact Collection
 
-Workflows that produce artifacts can be configured to upload those to Testkubes Artifact storage - [see example](test-workflows-examples-basics#artifacts). These 
+Workflows that produce artifacts can be configured to upload those to Testkubes Artifact storage - [Read More](test-workflows-artifacts). These 
 could be, for example, videos, logs, html-reports, JUnit XML reports, etc. - anything that you want to make available
 for inspecting or troubleshooting a test execution. 
 
