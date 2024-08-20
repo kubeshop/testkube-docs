@@ -1,5 +1,9 @@
 # Test Workflows Examples - Basics
 
+:::tip
+The [CRD Reference for Test Workflows](/articles/crds/testworkflows.testkube.io-v1#testworkflow) describes all available properties and constructs
+:::
+
 ## Running the Image
 
 The Test Workflows spec allows you to provide instructions in setup, steps and after properties.
