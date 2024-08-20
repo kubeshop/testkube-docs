@@ -2,15 +2,14 @@
 
 The [Software Testing Lifecycle](https://www.geeksforgeeks.org/software-testing-life-cycle-stlc/) (STLC) is a well-established approach for testing software applications to ensure that they meet the requirements of their stakeholders and are free from defects. The STLC follows a series of steps or phases, each phase with its specific objectives and deliverables. These phases are:
 
-- Requirements Analysis - Understanding what needs to be tested.
-- Test Planning - Plan how the requirements will be tested.
-- Test Case Development - Authoring of actual test cases.
-- Test Environment Setup - Preparing the test environment.
-- Test Execution - Executing your tests in your test environment.
-- Test Closure - Ensure that all testing activities are completed.
+- **Requirements Analysis** - Understanding what needs to be tested.
+- **Test Planning** - Plan how the requirements will be tested.
+- **Test Case Development** - Authoring of actual test cases.
+- **Test Environment Setup** - Preparing the test environment.
+- **Test Execution** - Executing your tests in your test environment.
+- **Test Closure** - Ensure that all testing activities are completed.
 
-![STLC](../img/STLC.png)
-
+![Testkube in the STLC](images/testkube-in-stlc.png)
 
 ## Testkube for Test Execution
 

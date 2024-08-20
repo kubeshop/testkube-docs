@@ -1,5 +1,11 @@
 # AI Test Insights
 
+:::info
+
+AI Test Insights is currently being migrated to support Workflows - the below functionality is only available
+for legace Tests and TestSuites - [Read More](/articles/legacy-features)
+:::
+
 :::note
 The AI Insights feature on Testkube utilizes artificial intelligence to help you debug your failed tests faster. It collects relevant bits of the failed logs and sends them to OpenAI which processes them and gives an assessment on why the test failed.
 :::

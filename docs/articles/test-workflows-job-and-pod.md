@@ -2,7 +2,16 @@
 
 You may need to configure the Job and Pod used for execution. It can be also used for [**parallel workers**](./test-workflows-parallel.md) and [**services**](./test-workflows-services.md).
 
+:::tip
+
+Read more about the [Workflow Architecture](test-workflows-high-level-architecture.md) to understand how Testkube
+executes your Workflows.
+
+:::
+
 ## Job
+
+Allows you to configure the underlying Kubernetes Job generated for a Workflow - [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#jobconfig).
 
 ### Labels & Annotations
 

@@ -29,7 +29,7 @@ Test Workflows is our long-term solution, so keep in mind that the original Test
 
 ## Syntax
 
-You have to use `execute` operation in the step, and provide definition of the Test Workflows and Tests to run.
+You have to use `execute` operation in the step, and provide definition of the Test Workflows to run - [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#stepexecute).
 
 :::tip
 
@@ -86,6 +86,11 @@ To run Test Workflow as part of the `execute` step, you have to add its referenc
 You need to provide `name`, along with optional `config` values for parametrization.
 
 ### Running Tests
+
+:::warning
+Tests are being deprecated from Testkube - so only use this possibility if/while transitioning to Workflows
+- [Read More](legacy-features.md).
+:::
 
 To run Tests as part of the `execute` step, you have to add its reference in the `tests` list.
 

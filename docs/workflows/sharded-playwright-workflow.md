@@ -29,7 +29,7 @@ spec:
               cpu: 1
               memory: 1Gi
         shell: |
-          npx playwright test --reporter blob --shard {{ index + 1 }}/{{ count }}
+          npx playwright test --reporter blob --shard {{ index + 1 }}/{{ count }} --trace on
     - name: Merge reports
       condition: always
       shell: 'npx playwright merge-reports --reporter=html /data/reports'

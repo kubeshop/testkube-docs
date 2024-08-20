@@ -43,6 +43,10 @@ spec:
 
 The different properties are described with examples and in more detail below.
 
+:::tip
+The [Schema Reference for Test Workflows](/articles/crds/testworkflows.testkube.io-v1#testworkflow) describes all available properties and constructs
+:::
+
 ## Example - Test Workflow for Postman
 Example Test Workflow for running Postman collection from Testkube repository: [/test/postman/executor-tests/postman-executor-smoke-without-envs.postman_collection.json](https://raw.githubusercontent.com/kubeshop/testkube/develop/test/postman/executor-tests/postman-executor-smoke-without-envs.postman_collection.json).
 
@@ -73,10 +77,13 @@ spec:
       - postman-executor-smoke-without-envs.postman_collection.json
 ```
 
-## metadata
-### name
+## `metadata`
+
+This is the standard Kubernetes Object metadata - [Read More](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#objectmeta-v1-meta)
+
+### `name`
 `metadata.name` is mandatory - it's a name of the Test Workflow (for example `postman-workflow-example`)
-### labels
+### `labels`
 Labels can be set to allow easier filtering of Test Workflows.
 ```yaml
 metadata:
@@ -86,8 +93,11 @@ metadata:
     another: one
     one: more
 ```
-## content
-### git
+## `content`
+
+Specifies the actual testing scripts/files to use for your tests - [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#content)
+
+### `git`
 `spec.content.git` allows checking out from the Git repository:
 
 ```yaml
@@ -101,7 +111,7 @@ spec:
 ```
 
 `path` can be a directory, or a single file
-### files
+### `files`
 `spec.content.files` allow creating specific files from strings.
 
 ```yaml
@@ -127,8 +137,11 @@ spec:
     container:
       image: grafana/k6:latest
 ```
-## events
-### cronjob
+## `events`
+
+Specifies events that trigger this Workflow - [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#event)
+
+### `cronjob`
 `spec.events.cronjob` allows to run the workflow on specified schedule(s) :
 
 ```yaml
@@ -153,8 +166,11 @@ Testkube's schedule data format is the same that is used to define Kubernetes Cr
 visit [Wikipedia Cron format](https://en.wikipedia.org/wiki/Cron) for details.
 :::
 
-## steps
-Steps are the main building blocks in Test Workflows. They describe actions that should be executed in specific order.
+## `steps`
+
+Steps are the main building blocks in Test Workflows. They describe actions that should be executed in 
+specific order - [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#step)
+
 ```yaml
 spec:
   ...
@@ -187,8 +203,11 @@ spec:
       ...
 ```
 
-### run
-#### command
+### `run`
+
+Specifies what to run within a step - [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#steprun)
+
+#### `command`
 `command` allows to set the command, or override the default one:
 
 ```yaml
@@ -201,7 +220,7 @@ spec:
       - gradle
 ```
 
-#### args
+#### `args`
 Arguments can be passed to container using `args`:
 ```yaml
   steps:
@@ -262,7 +281,8 @@ spec:
       value: "example-env-value"
 ```
 
-#### shell
+#### `shell`
+
 `shell` provides an ability to run a command, or multiple commands inside the shell.
 
 ```yaml
@@ -286,10 +306,12 @@ steps:
         - ~/some-directory
 ```
 
-## container
-`container` defines container-related settings.
+## `container`
 
-### image
+`container` defines container-related settings - [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#containerconfig)
+
+### `image`
+
 `container.image` defines an image which will be used for executing steps.
 
 ```yaml
@@ -304,8 +326,8 @@ Please remember that the image should be stored in a Docker registry, which can 
 you can use this [Docker one] (https://www.docker.com/blog/how-to-use-your-own-registry-2/) or something similar.
 Currently, we receive the image metadata only from the Docker registry, not the container storage or docker-daemon.
 
-### resources
-Resources can be configured for a specific container.
+### `resources`
+Resources can be configured for a specific container - [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#resources).
 
 #### resource requests
 ```yaml
@@ -327,7 +349,8 @@ spec:
         cpu: 4
         memory: 4Gi
 ```
-## workingDir
+## `workingDir`
+
 By default, everything will be executed in the context of `workingDir` from specific container.
 
 `workingDir` can be set globally:
@@ -347,8 +370,12 @@ steps:
 
 Or on the Step level:
 
-## artifacts
+## `artifacts`
+
+Workflows can collect any artifact produced by your executions - [Read More](test-workflows-artifacts.md)
+
 Files directly in `workingDir`
+
 ```yaml
 - name: Saving artifacts
   workingDir: /data/artifacts
@@ -470,6 +497,8 @@ spec:
 ```
 
 ## `status` - Getting status of latest test workflow execution
+
+Use the Testkube CLI [status command](/cli/testkube_status) to get the status of a named Workflow:
 
 ```sh
 kubectl describe testworkflow k6-workflow -n testkube
