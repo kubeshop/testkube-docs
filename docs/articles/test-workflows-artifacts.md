@@ -92,7 +92,7 @@ above to ensure that artifacts are collected, otherwise this step could be skipp
 
 :::
 
-## JUnit report extraction
+## JUnit Report Extraction
 
 Testkube automatically identifies [JUnit XML reports](https://github.com/testmoapp/junitxml) in found artifacts and parses 
 their contents to be available under the [Test Insights Reporting](/articles/test-insights#test-reports) feature.
