@@ -283,7 +283,7 @@ const redirects = [
       "/testkube-cloud/articles/intro",
       "/testkube-pro/intro",
     ],
-    to: "/testkube-pro/articles/intro",
+    to: "/articles/using-testkube",
   },
   {
     from: [
