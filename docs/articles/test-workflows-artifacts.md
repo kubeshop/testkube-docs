@@ -37,7 +37,7 @@ will collect all files in the `../videos` folder.
 
 :::info
 
-Testkube supports Glob patterns for path matching as provided by the [doublestar library](https://github.com/bmatcuk/doublestar?tab=readme-ov-file#patterns)
+Testkube supports Glob patterns for path matching as provided by the [doublestar library](https://github.com/bmatcuk/doublestar?tab=readme-ov-file#patterns).
 
 :::
 
