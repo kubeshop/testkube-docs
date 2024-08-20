@@ -54,7 +54,7 @@ If you want to compress specific artifacts, you can add a compress property spec
     - 'logs/*.log'
 ```
 
-## Artifacts from Parallel executions
+## Artifacts from Parallel Executions
 
 Collecting artifacts from [parallel executions](/articles/test-workflows-parallel) works the same; specify 
 an `artifacts` property as shown above for parallel nodes, collected artifacts will be placed under a folder 
