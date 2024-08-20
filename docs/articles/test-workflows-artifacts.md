@@ -43,7 +43,7 @@ Testkube supports Glob patterns for path matching as provided by the [doublestar
 
 ## Compressing Artifacts
 
-If you want to compress specific artifacts you can add a compress property specifying the name of a target archive:
+If you want to compress specific artifacts, you can add a compress property specifying the name of a target archive:
 
 ```yaml
 - name: Saving compressed logs
