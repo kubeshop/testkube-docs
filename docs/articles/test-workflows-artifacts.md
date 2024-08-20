@@ -94,6 +94,13 @@ above to ensure that artifacts are collected, otherwise this step could be skipp
 
 ## JUnit Report Extraction
 
-Testkube automatically identifies [JUnit XML reports](https://github.com/testmoapp/junitxml) in found artifacts and parses 
-their contents to be available under the [Test Insights Reporting](/articles/test-insights#test-reports) feature.
+Testkube automatically scans all artifacts for `.xml` files that are valid [JUnit XML reports](https://github.com/testmoapp/junitxml) and parses 
+their contents to be available under the [Test Insights Reporting](/articles/test-insights#test-reports) feature. 
+
+More specifically, Testkube extracts:
+
+- The number of JUnit Testcases executed per Workflow
+- Their individual pass/fails statuses
+
+This allows for aggregate reporting on JUnit testcase executions and corresponding statuses per Workflow.
 
