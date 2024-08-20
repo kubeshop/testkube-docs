@@ -9,7 +9,8 @@ or some fixtures.
 :::note
 
 All the examples here that are using `content` are using it directly under the `spec`.
-Please note, that you can also use it under a specific step - this way, such files won't be available in different steps.
+Please note, that you can also use it under a specific step - this way, such files won't be available 
+in different steps - see [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#content).
 
 :::
 

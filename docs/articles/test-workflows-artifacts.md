@@ -11,7 +11,7 @@ Testkube stores Artifacts in the backend using Minio - [Read More](/articles/ins
 :::
 
 Specify which artifacts to collect by adding an `artifacts` property to the corresponding Test steps
-(see [reference](/articles/crds/testworkflows.testkube.io-v1#stepartifacts)), for example
+(see [schema reference](/articles/crds/testworkflows.testkube.io-v1#stepartifacts)), for example
 
 ```yaml
 - name: Example step with artifacts

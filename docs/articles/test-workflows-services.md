@@ -29,7 +29,8 @@ There are multiple ways to share data with them - either using [**one of techniq
 ## Syntax
 
 To add some services, you need to specify the `services` clause.
-It can be either directly on the `spec` level (to be available for the whole execution), or on specific step (to isolate it).
+It can be either directly on the `spec` level (to be available for the whole execution), or on specific step 
+(to isolate it) - see [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#servicespec).
 
 :::tip
 
