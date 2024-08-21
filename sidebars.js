@@ -586,8 +586,8 @@ const sidebars = {
       type: "category",
       label: "Integrations",
       link: {
-        type: "generated-index",
-        description: "Testkube Integrations",
+        type: "doc",
+        id: "articles/integrations",
       },
       items: [
         {type: "doc", label: "GitHub", id: "articles/github-actions"},
@@ -613,26 +613,21 @@ const sidebars = {
         {type: "doc", label: "CDEvents", id: "articles/cd-events"},
         {type: "doc", label: "Tekton", id: "articles/tekton"},
         {
-          type: "doc",
-          label: "Slack Integration",
-          id: "articles/slack-integration",
-        },
-        {
           type: "category",
           label: "Slack Integration",
           items: [
             {
               type: "doc",
-              label: "With Helm",
-              id: "articles/slack-integration",
-            },
-            {
-              type: "doc",
               label: "With Webhooks",
               id: "articles/slack-integration-webhooks",
             },
+            {
+              type: "doc",
+              label: "With Helm",
+              id: "articles/slack-integration",
+            },
           ],
-        },    
+        },
         {type: "doc", label: "Prometheus", id: "articles/metrics"},
         {
           type: "doc",
