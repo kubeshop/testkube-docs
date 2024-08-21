@@ -617,6 +617,22 @@ const sidebars = {
           label: "Slack Integration",
           id: "articles/slack-integration",
         },
+        {
+          type: "category",
+          label: "Slack Integration",
+          items: [
+            {
+              type: "doc",
+              label: "With Helm",
+              id: "articles/slack-integration",
+            },
+            {
+              type: "doc",
+              label: "With Webhooks",
+              id: "articles/slack-integration-webhooks",
+            },
+          ],
+        },    
         {type: "doc", label: "Prometheus", id: "articles/metrics"},
         {
           type: "doc",
@@ -638,6 +654,7 @@ const sidebars = {
           description:
             "Integrating Testkube and Zapier for Instant Email Alerts",
         },
+        {type: "doc", label: "Grafana", id: "articles/grafana"},
       ],
     },
     {
