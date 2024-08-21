@@ -164,11 +164,11 @@ html[data-theme="dark"] {
 }
 .menu__link {
   color: var(--ifm-color-content-secondary);
-  padding: 8px 12px 8px 12px;
+  padding: 6px 12px 6px 12px;
 }
 .theme-doc-sidebar-item-link-level-2 .menu__link,
 .theme-doc-sidebar-item-category-level-2 .menu__link {
-  padding: 4px 0 4px 4px;
+  padding: 3px 0 3px 4px;
 }
 .menu__link:hover,
 .menu__link--active,
@@ -204,7 +204,7 @@ html[data-theme="dark"] {
 .theme-doc-sidebar-item-category-level-1,
 .theme-doc-sidebar-item-link-level-1 {
   border-bottom: 1px solid var(--ifm-background-surface-color);
-  padding-bottom: 8px;
+  padding-bottom: 4px;
 }
 
 .theme-doc-sidebar-item-category-level-1 .menu__list {
@@ -219,10 +219,16 @@ html[data-theme="dark"] {
 .markdown > h2 {
   --ifm-h2-font-size: 1.5rem;
   margin: 1rem 0 1rem 0;
+  padding-top: 0.2rem;
 }
 
 .markdown > h3 {
-  --ifm-h2-font-size: 1.25rem;
+  --ifm-h3-font-size: 1.25rem;
+  margin: 1rem 0 1rem 0;
+}
+
+.markdown > h4 {
+  --ifm-h4-font-size: 1.15rem;
   margin: 1rem 0 1rem 0;
 }
 
