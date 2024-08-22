@@ -370,6 +370,9 @@ ul:hover {
 
 .sidebar-hr {
   margin: 12px 0px 5px 12px;
+  border: none;
+  height: 1px;
+  background-color: var(--ifm-color-gray-400);
 }
 
 @media screen and (max-width: 996px) {
