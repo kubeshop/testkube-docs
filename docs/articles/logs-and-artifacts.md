@@ -11,6 +11,11 @@ Logs are collected individually for each executed container within a workflow, a
 
 ![Workflow Multi-log output](../img/workflows-multilog-output.png)
 
+:::tip
+You can also use Workflows to collect logs from services/components under test to help you get
+a more complete picture of why a test failed - [Read More](/articles/tw-capture-logs)
+:::
+
 ## Artifact Collection
 
 Workflows that produce artifacts can be configured to upload those to Testkubes Artifact storage - [Read More](test-workflows-artifacts). These 
