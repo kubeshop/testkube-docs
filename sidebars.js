@@ -29,7 +29,7 @@ const sidebars = {
     },
     {
       type: "html",
-      value: "<hr />",
+      value: "<hr class='sidebar-hr'/>",
     },
     {
       type: "category",
@@ -791,7 +791,7 @@ const sidebars = {
     },
     {
       type: "html",
-      value: "<hr />",
+      value: "<hr class='sidebar-hr'/>",
     },
     {
       type: "category",

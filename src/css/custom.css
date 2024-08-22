@@ -368,6 +368,10 @@ ul:hover {
   margin-top: -10px;
 }
 
+.sidebar-hr {
+  margin: 12px 0px 5px 12px;
+}
+
 @media screen and (max-width: 996px) {
   :root {
     --ifm-font-size-base: 18px;
