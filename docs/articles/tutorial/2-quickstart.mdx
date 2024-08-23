@@ -282,30 +282,19 @@ Workflow execution can be integrated in your CI pipelines, run on a cron schedul
 For example, I want to run this test every time my deployment's image updates.
 
 <Tabs groupId="tutorial-integrate">
-<TabItem value="kubernetes" label="Trigger on a Kubernetes event">
-
-1. Use the sidebar on the left to browse to your triggers.
-2. Click the `Create a new trigger` button.
-3. Follow the instructions on the form.
-
-![create-trigger](./img/create-trigger.png)
-
-:::tip
-Learn more about [Kubernetes Event Triggers](/articles/test-triggers) in the documentation.
-:::
-
-</TabItem>
 
 <TabItem value="ci" label="Trigger from CI/CD">
 
-1. Browse to your Test Workflow within the dashboard.
-2. Click the `CI/CD Integrations` tab.
+1. Browse to your Test Workflow within the dashboard - [Read More](/articles/testkube-dashboard-workflows-overview).
+2. Click the `CI/CD Integrations` tab under your [Workflow Details](/articles/testkube-dashboard-workflow-details).
 3. You can see the instructions where all variables have been prefilled for you.
 4. Follow these instructions to run it on your favourite provider.
 
 :::tip
 Testkube currently shows instructions for GitHub Actions, GitLab CI, CircleCI, Jenkins and Azure DevOps, but can
   be integrated into any CI/CD pipeline by automating the [Testkube CLI](/articles/cli) or the [Testkube API](/openapi/overview).
+
+  Read more about [Testkube Integrations](/articles/integrations)
 :::
 
 </TabItem>
@@ -333,6 +322,21 @@ Learn more about [Scheduled Execution](/articles/scheduling-tests) in the docume
 :::
 
 </TabItem>
+
+<TabItem value="kubernetes" label="Trigger on a Kubernetes event">
+
+  1. Use the sidebar on the left to browse to your triggers.
+  2. Click the `Create a new trigger` button.
+  3. Follow the instructions on the form.
+
+  ![create-trigger](./img/create-trigger.png)
+
+  :::tip
+  Learn more about [Kubernetes Event Triggers](/articles/test-triggers) in the documentation.
+  :::
+
+</TabItem>
+
 </Tabs>
 
 ## Next steps
