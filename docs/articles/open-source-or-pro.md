@@ -38,23 +38,23 @@ the Agent to be connected to the Testkube Control Plane, either on-prem or in th
 This table shows a more complete feature comparison between the Agent Standalone and the 
 Testkube Orchestration Platform (Agent + Control Plane). 
 
-| Features                             |      Testkube Agent       |                              Testkube Orchestration Platform                               | Read More                                              |
-|:-------------------------------------|:-------------------------:|:------------------------------------------------------------------------------------------:|:-------------------------------------------------------|
-| **TestWorkflows**                    | X (see limitations above) |                                             X                                              | [Docs](test-workflows)                                 |
-| **Test Logs/Artifacts**              |             X             |                                             X                                              | [Docs](logs-and-artifacts)                             |
-| **Webhooks**                         |             X             |                                             X                                              | [Docs](webhooks)                                       |
-| **Test Triggers**                    |             X             |                                             X                                              | [Docs](triggering-overview)                            |
-| **Test, Suites, Sources, Executors** |             X             |                                             X                                              | Deprecated - [Read More](legacy-features)              |
-| **Testkube CLI**                     |             X             |                                             X                                              | [Docs](install/cli)                                    |
-| **REST API**                         |      Unauthenticated      | Authenticated with [API Tokens](/testkube-pro/articles/organization-management#api-tokens) | [Docs](/openapi/overview)                              |
-| **Dashboard / Control Plane**        |                           |                  X  ([Hosted/On-Prem](install/deployment-architectures))                   | [Docs](testkube-dashboard-explore)                     |
-| **Multi-environment Mgmt**           |                           |                                             X                                              | [Docs](/testkube-pro/articles/environment-management)  |
-| **RBAC / User Mgmt**                 |                           |                                             X                                              | [Docs](/testkube-pro/articles/organization-management) |
-| **Reporting / Insights**             |                           |                                             X                                              |                                                        |
-| **Status Pages**                     |                           |                                             X                                              | [Docs](/testkube-pro/articles/status-pages)            |
-| **AI Troubleshooting**               |                           |                                             X                                              | [Docs](/testkube-pro/articles/AI-test-insights)        |
-| **Advanced Log/Results Debugging**   |                           |                                             X                                              | [Docs](/testkube-pro/articles/log-highlighting)        |
-| **Cached Test Results**              |                           |                                             X                                              | [Docs](/testkube-pro/articles/cached-results)          |
+| Features                             |                Testkube Agent                 |                              Testkube Orchestration Platform                               | Read More                                              |
+|:-------------------------------------|:---------------------------------------------:|:------------------------------------------------------------------------------------------:|:-------------------------------------------------------|
+| **TestWorkflows**                    | X (with [limitations](#workflow-limitations)) |                                             X                                              | [Docs](test-workflows)                                 |
+| **Test Logs/Artifacts**              |                       X                       |                                             X                                              | [Docs](logs-and-artifacts)                             |
+| **Webhooks**                         |                       X                       |                                             X                                              | [Docs](webhooks)                                       |
+| **Test Triggers**                    |                       X                       |                                             X                                              | [Docs](triggering-overview)                            |
+| **Test, Suites, Sources, Executors** |                       X                       |                                             X                                              | Deprecated - [Read More](legacy-features)              |
+| **Testkube CLI**                     |                       X                       |                                             X                                              | [Docs](cli)                                            |
+| **REST API**                         |                Unauthenticated                | Authenticated with [API Tokens](/testkube-pro/articles/organization-management#api-tokens) | [Docs](/openapi/overview)                              |
+| **Dashboard / Control Plane**        |                                               |                  X  ([Hosted/On-Prem](install/deployment-architectures))                   | [Docs](testkube-dashboard-explore)                     |
+| **Multi-environment Mgmt**           |                                               |                                             X                                              | [Docs](/testkube-pro/articles/environment-management)  |
+| **RBAC / User Mgmt**                 |                                               |                                             X                                              | [Docs](/testkube-pro/articles/organization-management) |
+| **Reporting / Insights**             |                                               |                                             X                                              | [Docs](test-insights)                                  |
+| **Status Pages**                     |                                               |                                             X                                              | [Docs](/testkube-pro/articles/status-pages)            |
+| **AI Troubleshooting**               |                                               |                                             X                                              | [Docs](/testkube-pro/articles/AI-test-insights)        |
+| **Advanced Log/Results Debugging**   |                                               |                                             X                                              | [Docs](/testkube-pro/articles/log-highlighting)        |
+| **Cached Test Results**              |                                               |                                             X                                              | [Docs](/testkube-pro/articles/cached-results)          |
 
 ## Source Code and Licensing
 

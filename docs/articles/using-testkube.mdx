@@ -79,6 +79,18 @@ export const DocCardList = (input) => (<>
         }}/>
       </article>
     </section>
+    <section className={clsx("row indent--min")}>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Testkube CLI",
+          description:
+            "Learn how to use the Testkube CLI to interact with your Testkube environments.",
+          href: "/articles/cli",
+          type: "intro",
+        }}/>
+      </article>
+    </section>
   </>
 );
 

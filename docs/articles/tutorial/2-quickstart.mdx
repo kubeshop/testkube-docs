@@ -3,7 +3,7 @@ import TabItem from "@theme/TabItem";
 
 # Testkube Quickstart
 
-In this tutorial you will learn how to install Testkube, run your first test workflow and inspect its artifacts and logs.
+In this tutorial you will learn how to install Testkube, run your first Test Workflow and inspect its artifacts and logs.
 
 ## 1. Installing the CLI
 
@@ -136,7 +136,7 @@ You will now see the dashboard without having to install an agent.
 
 ## 3. Defining your First Test Workflow
 
-Let's take a look at a K6 load test to familiarize ourselves with Testkube's workflows:
+Let's take a look at a K6 load test to familiarize ourselves with Testkube's Workflows:
 
 ```yaml
 # The workflow is a Kubernetes CRD with the usual apiVersion, kind and metadata.
@@ -204,9 +204,12 @@ spec:
         paths: ["junit.xml"]
 ```
 
-While this only scratches the surface of workflows,
-we can now attempt to run this workflow.
-You can learn more about workflows in the next steps.
+While this only scratches the surface of Workflows, we can now attempt to run this Workflow.
+You can learn more about how to create and run you Workflows in the next steps.
+
+:::info
+Learn more about Workflows functionality and configuration in the [Workflow Documentation](/articles/test-workflows).
+:::
 
 ## 4. Run your Test Workflow
 
@@ -214,13 +217,14 @@ You can learn more about workflows in the next steps.
 
 <TabItem value="dashboard" label="Using the Dashboard">
 
-1. Choose import from YAML.
-2. Copy and paste the test workflow above.
+1. Choose "Import from YAML" in the [Workflow Wizard](/articles/testkube-dashboard-workflows-overview#creating-a-new-workflow)
+2. Copy and paste the Test Workflow above.
 3. Click the `Create` button.
-4. View the status and logs of the workflow as it is executing.
+4. View the status and logs of the Workflow as it is executing.
 
-:::info
-Alternatively, you can use the test workflow wizard to create your own test workflow from scratch leveraging test workflow templates for a variety of tools such as Postman, Artillery, Cypress, Playwright and more.
+:::tip
+Alternatively, you can use the "Create from Wizard" option in the Workflow Wizard to create your own Test Workflow from
+scratch leveraging Test Workflow Templates for a variety of tools such as K6, Postman, Artillery, Cypress, Playwright and more.
 :::
 
 </TabItem>
@@ -228,9 +232,9 @@ Alternatively, you can use the test workflow wizard to create your own test work
 <TabItem value="cli" label="Using the CLI">
 
 1. Create a file named _my-workflow.yaml_.
-2. Copy and paste the test workflow above.
+2. Copy and paste the Test Workflow above.
 3. Execute the command below.
-4. View the status and logs of the workflow as it is executing.
+4. View the status and logs of the Workflow as it is executing.
 
 ```bash
 kubectl apply -f my-workflow.yaml && kubectl testkube run tw my-test --watch
@@ -274,7 +278,7 @@ kubectl testkube get twe 664dbae9924211bb076bd58e --logs-only
 
 ## 6. Integrate within your Pipeline
 
-Tests can be integrated in your CI workflow, run on a cron schedule or trigger on a Kubernetes event.
+Workflow execution can be integrated in your CI pipelines, run on a cron schedule or trigger on a Kubernetes event.
 For example, I want to run this test every time my deployment's image updates.
 
 <Tabs groupId="tutorial-integrate">
@@ -286,26 +290,33 @@ For example, I want to run this test every time my deployment's image updates.
 
 ![create-trigger](./img/create-trigger.png)
 
+:::tip
+Learn more about [Kubernetes Event Triggers](/articles/test-triggers) in the documentation.
+:::
+
 </TabItem>
 
-<TabItem value="ci" label="Trigger in CI">
+<TabItem value="ci" label="Trigger from CI/CD">
 
-1. Browse to your test workflow within the dashboard.
+1. Browse to your Test Workflow within the dashboard.
 2. Click the `CI/CD Integrations` tab.
 3. You can see the instructions where all variables have been prefilled for you.
 4. Follow these instructions to run it on your favourite provider.
 
-Testkube currently comes with instructions for GitHub Actions, GitLab CI, CircleCI, Jenkins and Azure DevOps.
+:::tip
+Testkube currently shows instructions for GitHub Actions, GitLab CI, CircleCI, Jenkins and Azure DevOps, but can
+  be integrated into any CI/CD pipeline by automating the [Testkube CLI](/articles/cli) or the [Testkube API](/openapi/overview).
+:::
 
 </TabItem>
 
 <TabItem value="cron" label="Trigger on a schedule">
 
-1. Browse to your test workflow.
+1. Browse to your Test Workflow.
 2. Click "Edit Workflow" in the dotted menu top-right.
-3. Make the following changes and save the workflow:
+3. Make the following changes and save the Workflow:
 
-```diff
+```yaml
 apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata: …
@@ -317,12 +328,17 @@ spec:
   steps: …
 ```
 
+:::tip
+Learn more about [Scheduled Execution](/articles/scheduling-tests) in the documentation.
+:::
+
 </TabItem>
 </Tabs>
 
 ## Next steps
 
-Congratulations on running your first test workflow!
+_Congratulations on running your first Test Workflow!_
+
 At this point you should have installed Testkube, run a sample test and integrated that within your pipeline.
 Our recommended next step is to write run one of your own tests within Testkube.
 
