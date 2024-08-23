@@ -8,6 +8,12 @@ Testkube can be integrated into existing workflows and infrastructure in several
 
 All these are described/used as applicable in the articles below.
 
+:::tip
+If your favorite tool isn't covered here, have a look
+at [General Steps for CI/CD Integration](/articles/cicd-overview#general-steps-for-cicd-integration) or let
+us know on our Slack channel so we can add it!
+:::
+
 ## CI/CD Solutions
 
 - [GitHub](/articles/github-actions) - Learn to integrate Testkube with GitHub Workflows
