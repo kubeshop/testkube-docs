@@ -4,11 +4,11 @@ To manage your organization settings click "Organization Management" from organi
 
 ![Organization Management](../../img/organization-management.png)
 
-You can also create new organizations from this menu. 
+(You can also create new organizations from this menu).
 
-## Organization Settings
+The following tabs are available for managing an Organisation.
 
-### Environments
+## Environments
 
 In the environments section, you can see the list of your existing environments.
 
@@ -26,34 +26,45 @@ Run this on your cluster where the given agent is installed.
 
 Read more about [Environment Management](../articles/environment-management.md).
 
-### Settings
+## Settings
 
 In settings, you can update the name of the organization, set artifacts limits, or enable or disable AI Hints and Webhooks URL Masking.
 
 ![Organization Setting](../../img/organization-settings.png)
 
 
-### Members
+## Members
 
-For each organization you can define who has access and which actions each member can use. 
+Invite and manage your organisation members here. 
 
-![Organization Members](../../img/organization-members.png)
+### Inviting Members
 
+Invite new members by specifying their email and role and selecting  the Invite button in the bottom right.
 
-There are 4 types of organization members: 
+There are 4 roles for organization members:
 
 * `Owner` - Has access to all environments and organization settings, also can access billing details.
 * `Admin` - Has access to all environments and organization settings.
 * `Member` - Has limited access to environments, access is defined by the roles assigned to given member. Member by default doesn't have any access, you need to [explicitly set it in the given environment](environment-management.md).
 * `Biller` - Has access to billing details only.
 
-### API Tokens
+![Organization Member Invite](../../img/organization-members.png)
 
-API tokens allows running tests without linking the run to a specific account.
+### Manage existing Members
+
+Manage existing members/invites in the lists of members and pending invitations. Use the menu to the right for 
+each member to delete them or change their role.
+
+![Organisation Members](../../img/org-members-list.png)
+
+## API Tokens
+
+API tokens allows running tests without linking the run to a specific account - see [API Token Management](api-token-management) 
+for more details on how to create and use API Tokens.
 
 ![API Tokens](../../img/api-tokens.png)
 
-### Usage & Billing
+## Usage & Billing
 
 This section shows your current usage against the limits of your current plan.
 
