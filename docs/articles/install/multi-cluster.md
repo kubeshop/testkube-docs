@@ -44,6 +44,6 @@ testkube-cloud-api:
 -      bootstrapAgentTokenSecretRef: "testkube-default-agent-token"
 ```
 
-[deploy-agent]: /articles/install/multi-cluster#deploy-an-agent-that-will-join-your-control-plane
+[deploy-agent]: /articles/install/multi-cluster#deploy-an-agent-that-will-join-testkube
 [contact]: https://testkube.io/contact
 [cli-context]: /testkube-pro/articles/managing-cli-context

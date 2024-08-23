@@ -10,7 +10,7 @@ All these are described/used as applicable in the articles below.
 
 ## CI/CD Solutions
 
-- [GitHub](articles/github-actions) - Learn to integrate Testkube with GitHub Workflows
+- [GitHub](/articles/github-actions) - Learn to integrate Testkube with GitHub Workflows
 - [GitLab](/articles/gitlab) - Learn how to integrate Testkube with GitLab CI
 - Jenkins
   - [Using Jenkins Pipelines](/articles/jenkins) - Learn how to integrate Testkube with Jenkins Pipelines
