@@ -11,6 +11,10 @@ Each token has a role and an expiration date
 
 If token is not needed anymore you can delete it from the tokens list. 
 
+:::info
+Check out [Connecting from the CLI](/testkube-pro/articles/managing-cli-context) to learn how to use an API token with the CLI.
+:::
+
 ## API Token Roles
 
 API Tokens can have 2 roles: 
