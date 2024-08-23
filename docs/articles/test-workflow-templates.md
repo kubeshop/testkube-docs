@@ -116,7 +116,7 @@ spec:
 
 Our workflow engine will inline all the workflow templates before moving on to execution.
 
-**Inlining a template**
+#### Inlining a template
 
 The previously shown `use` example would look like this:
 
@@ -139,6 +139,7 @@ spec:
 ```
 
 **Inlining the same property will cause it to be overriden.**
+
 To illustrate, the `serviceAccountName` within workflow will always be `test-restricted`.
 Since the template is fully merged before executions starts, its not that the service account name
 would update halfway throughout the execution.
@@ -172,6 +173,7 @@ spec:
 ```
 
 **Inlining the same list will cause items to be added.**
+
 To illustrate, the `serviceAccountName` within workflow will always be `test-restricted`.
 Note that the workflow is the base on which templates gets added.
 This implicates that items on the workflow are always located before those of templates.
@@ -397,5 +399,5 @@ spec:
     - shell: "tree /usr/bin"
 ```
 
-[inlining]: /articles/test-workflow-templates#understand-template-inlining
+[inlining]: /articles/test-workflow-templates#understand-inlining
 [capture-logs]: /articles/tw-capture-logs

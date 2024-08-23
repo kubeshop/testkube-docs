@@ -12,7 +12,27 @@ It is built on JSON, so every JSON syntax is a valid expression value as well, l
 
 You can do basic math easily, like **config.workers * 5**.
 
-![Expressions](../img/expressions.png) 
+**Defining a Condition:**
+```yaml
+condition: 'config.workers > 1 || config.force'
+```
+
+**Dynamic Image Tag:**
+```yaml
+image: 'mcr.microsoft.com/playwright:v{{ config.version }}'
+```
+
+**Configurable K6 Script:**
+```yaml
+content:
+  files:
+  - path: /k6-script.js
+    content: |
+      export const options = {
+        thresholds: {{ json(config.thresholds) }}
+      };
+      {{ config.script }}
+``` 
 
 ### Operators
 
@@ -175,4 +195,22 @@ These functions are only executed during the execution.
 | `file` | `string`   | File contents         | `file("/etc/some/path")` may be `"some\ncontent"`                                                                |
 | `glob` | `[]string` | Find files by pattern | `glob("/etc/**/*", "./x/**/*.js")` may be `["/etc/some/file", "/etc/other/file", "/some/working/dir/x/file.js"]` |
 
-![Built-in Functions](../img/built-in-functions.png)
+```yaml
+condition: 'len(glob("/data/repo/**/*.spec.js")) > 0'
+```
+
+```yaml
+- shell: 'generate-api-key.sh > /data/api-key'
+- execute:
+    workflows:
+    - name: example
+      config: 
+        entries: '{{ tojson(split(file("/data/list*), "\n")) }}'
+        script: '{{ file("/data/api-key") }}'
+``` 
+
+```yaml
+shell: |
+  /bin {{ shellquote("--", config.args ...) }}
+```
+

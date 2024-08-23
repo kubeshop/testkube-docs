@@ -447,6 +447,10 @@ const redirects = [
     to: "/openapi/overview",
   },
   {
+    from: "/category/integrations",
+    to: "/articles/integrations",
+  },
+  {
     from: "/articles/install-cli",
     to: "/articles/install/cli",
   },

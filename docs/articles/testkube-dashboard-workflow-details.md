@@ -32,7 +32,7 @@ ready-to-use examples for each tool.
 
 :::tip
 
-Read more about these and other available integrations under the [Integrations](/category/integrations) section.
+Read more about these and other available integrations under the [Integrations](/articles/integrations) section.
 
 :::
 
