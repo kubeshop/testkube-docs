@@ -35,7 +35,11 @@ const sidebars = {
       type: "category",
       label: "Installing",
       items: [
-        "articles/install/overview",
+        {
+          type: "doc",
+          label: "Installation Overview",
+          id: "articles/install/overview",
+        },
         "articles/install/install-with-cli",
         {
           type: "category",
