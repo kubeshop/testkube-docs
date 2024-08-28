@@ -10,7 +10,7 @@ A Testkube environment is managed by a Testkube Agent running in your Kubernetes
 
 You can create a new environment from the "Environments" drop down in the header section of the Testkube Dashboard.
 
-![Environment dropdown](../../img/env-drop-down.png)
+![Create Environment](../../img/create-environment.png)
 
 ### Cloud Options
 
