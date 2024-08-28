@@ -612,6 +612,11 @@ const sidebars = {
           href: "https://testkube.io/blog/implementing-kubernetes-native-hardware-testing-with-testkube",
           description: "Test for hardware components and infrastructure.",
         },
+        {
+          type: "doc",
+          label: "Testing a Sample Application",
+          id: "articles/tutorial/example",
+        },
       ],
     },
     {
