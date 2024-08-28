@@ -288,7 +288,7 @@ metadata:
   namespace: testkube
 spec:
   # ...
-  uri: { { index .Envs "SLACK_WEBHOOK_URI" } }
+  uri: "{{ index .Envs "SLACK_WEBHOOK_URI" }}"
   # ...
 ```
 
