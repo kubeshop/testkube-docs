@@ -907,6 +907,7 @@ const sidebars = {
 
         {type: "doc", label: "Templates", id: "articles/templates"},
         "articles/legacy-architecture",
+        {type: "doc", label: "Integrating with Slack Using Helm", id: "articles/slack-integration-helm"},
       ],
     },
   ],
