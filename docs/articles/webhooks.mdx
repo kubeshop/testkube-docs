@@ -228,19 +228,6 @@ will result in:
 {"text": "Event end-test-success - Test 'postman-executor-smoke' execution (948) finished with 'passed' status"}
 ```
 
-#### testkube-api-server ENV variables
-
-In addition to event-specific variables, it's also possible to pass testkube-api-server ENV variables:
-
-```sh title="template.txt"
-TESTKUBE_PRO_URL: {{ index .Envs "TESTKUBE_PRO_URL" }}
-```
-
-### URI and HTTP Headers
-
-You can add additional HTTP headers like `Authorization` or `x-api-key` to have a secret token.
-It's possible to use golang based template string as header or uri value.
-
 ### Helper methods
 
 We also provide special helper methods to use in the webhook template:
@@ -252,8 +239,63 @@ Usage example:
 
 ```yaml
   - name: TEXT_COLOUR
-    value: {{ if eq (.TestSuiteExecution.Status | testsuiteexecutionstatustostring ) "passed" }}"00FF00"{{ else }}"FF0000"{{ end }}
+    value: {{ if eq (.TestWorkflowExecution.Status | testworkflowstatustostring ) "passed" }}"00FF00"{{ else }}"FF0000"{{ end }}
 ```
+
+#### Using API Server Environment Variables in Webhooks
+
+In addition to event-specific variables, it's possible to use environment variables from the Testkube API server in your webhook payloads and configurations.  
+This feature is particularly useful for including sensitive information like API keys or URIs without exposing them in your webhook definitions.
+
+##### Configuring API Server Environment Variables
+
+To set up extra environment variables for the API Server, you can use the `testkube-api.extraEnvVars` field in your Helm chart configuration.  
+This allows you to define environment variables, including those that reference Kubernetes secrets:
+
+```yaml
+testkube-api:
+  extraEnvVars:
+    - name: "SLACK_WEBHOOK_URI"
+      valueFrom:
+        secretKeyRef:
+          name: my-secret
+          key: slack-uri
+```
+
+##### Using Environment Variables in Webhook Payloads
+
+Once configured, you can access these environment variables in your webhook payload templates using the `.Envs` object:
+
+```
+{{ index .Envs "SLACK_WEBHOOK_URI" }}
+```
+
+For example:
+
+```sh title="template.txt"
+TESTKUBE_PRO_URL: {{ index .Envs "TESTKUBE_PRO_URL" }}
+```
+
+#### Using Environment Variables in Webhook URIs
+
+You can also use environment variables to set the webhook URI itself, allowing you to keep sensitive URIs out of your version control:
+
+```yaml
+apiVersion: executor.testkube.io/v1
+kind: Webhook
+metadata:
+  name: slack-notification
+  namespace: testkube
+spec:
+  # ...
+  uri: "{{ index .Envs "SLACK_WEBHOOK_URI" }}"
+  # ...
+```
+
+### URI and HTTP Headers
+
+You can add additional HTTP headers like `Authorization` or `x-api-key` to have a secret token.
+It's possible to use a Golang based template string as the header or URI value.
 
 <Tabs>
 <TabItem value="dash" label="Dashboard">
@@ -333,7 +375,7 @@ Webhooks can be triggered on any of the following events:
 - become-testworkflow-up
 - become-testworkflow-down
 - become-testworkflow-failed
-- become-testworkflow-aborted 
+- become-testworkflow-aborted
 - created
 - updated
 - deleted
@@ -595,9 +637,9 @@ testkube run test k6-test --disable-webhooks
 The API expects a boolean value of the form:
 
 ```json
-  {
-    "disableWebhooks": true
-  }
+{
+  "disableWebhooks": true
+}
 ```
 
 </TabItem>
@@ -625,9 +667,9 @@ testkube run testsuite test-suite-1 --disable-webhooks
 The API expects a boolean value of the form:
 
 ```json
-  {
-    "disableWebhooks": true
-  }
+{
+  "disableWebhooks": true
+}
 ```
 
 </TabItem>
@@ -655,9 +697,9 @@ testkube run testworkflow test-workflow --disable-webhooks
 The API expects the following object set under the `spec` attribute:
 
 ```json
-        {
-            "disableWebhooks": true
-        }
+{
+  "disableWebhooks": true
+}
 ```
 
 </TabItem>
@@ -671,6 +713,7 @@ The examples show only the `create` operations, however, these instructions work
 It is possible to get notified by webhooks only when the latest execution's outcome differs from the previous one. This way you can see instantly when one of your scheduled tests was healed or when they got broken. It could also help prevent alert fatigue by deduplicating the alerts and therefore decreasing the load on your monitoring systems.
 Testkube suppots special webhook event types to track changes between current and previous execution states.
 For Tests:
+
 - become-test-up (from any error state to succeed one)
 - become-test-down (from succeed state to any error one)
 - become-test-failed (from any state to failed one)
@@ -678,6 +721,7 @@ For Tests:
 - become-test-timeout (from any state to timeout one)
 
 For Test Suites:
+
 - become-testsuite-up (from any error state to succeed one)
 - become-testsuite-down (from succeed state to any error one)
 - become-testsuite-failed (from any state to failed one)
@@ -685,6 +729,7 @@ For Test Suites:
 - become-testsuite-timeout (from any state to timeout one)
 
 For Test Workflows:
+
 - become-testworkflow-up (from any error state to succeed one)
 - become-testworkflow-down (from succeed state to any error one)
 - become-testworkflow-failed (from any state to failed one)
@@ -704,15 +749,11 @@ testkube update webhook --name example-webhook
 
 ```json
 {
-    "name": "example-webhook",
-    "namespace": "testkube",
-    "uri": "https://webhook.url/",
-    "events": [
-        "start-test",
-        "end-test-success",
-        "end-test-failed"
-    ],
-    "disabled": false,
+  "name": "example-webhook",
+  "namespace": "testkube",
+  "uri": "https://webhook.url/",
+  "events": ["start-test", "end-test-success", "end-test-failed"],
+  "disabled": false
 }
 ```
 
@@ -728,9 +769,9 @@ metadata:
   namespace: testkube
 spec:
   events:
-  - start-test
-  - end-test-success
-  - end-test-failed
+    - start-test
+    - end-test-success
+    - end-test-failed
   uri: https://webhook.url/
 ```
 
