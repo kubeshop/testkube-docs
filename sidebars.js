@@ -61,6 +61,11 @@ const sidebars = {
           label: "More Guides",
           items: [
             "articles/install/multi-cluster",
+            {
+              type: "doc",
+              label: "Ephemeral Clusters",
+              id: "articles/ephemeral-clusters",
+            },
             "articles/install/standalone-agent",
             "articles/install/quickstart-no-k8s",
             "articles/install/uninstall",
