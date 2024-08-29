@@ -644,22 +644,7 @@ const sidebars = {
         {type: "doc", label: "Flux", id: "articles/flux-integration"},
         {type: "doc", label: "CDEvents", id: "articles/cd-events"},
         {type: "doc", label: "Tekton", id: "articles/tekton"},
-        {
-          type: "category",
-          label: "Slack Integration",
-          items: [
-            {
-              type: "doc",
-              label: "With Webhooks",
-              id: "articles/slack-integration-webhooks",
-            },
-            {
-              type: "doc",
-              label: "With Helm",
-              id: "articles/slack-integration",
-            },
-          ],
-        },
+        {type: "doc", label: "Slack Integration", id: "articles/slack-integration-webhooks"},
         {type: "doc", label: "Prometheus", id: "articles/metrics"},
         {
           type: "doc",
