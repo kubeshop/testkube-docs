@@ -546,6 +546,10 @@ const redirects = [
     from: "/prometheus",
     to: "/articles/metrics",
   },
+  {
+    from: "/articles/slack-integration-webhooks",
+    to: "/articles/slack-integration",
+  },
 ];
 
 module.exports = redirects;
