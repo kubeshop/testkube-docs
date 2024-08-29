@@ -1,8 +1,7 @@
 # Integrating with Slack
 
 :::tip
-Using Webhooks is the preferred way to integrate Testkube with Slack - [Read More](/articles/slack-integration-webhooks).
-The below approach will be deprecated at some point in time.
+Using Webhooks is the preferred way to integrate Testkube with Slack - [Read More](/articles/slack-integration-webhooks). This approach has been depricated.
 :::
 
 In order to receive notifications in Slack about the status of the testing process, Testkube provides integration with Slack. Below are the configuration steps. Click [here](#video-tutorial) for a video tutorial.
