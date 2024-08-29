@@ -61,9 +61,7 @@ Running the provided Testkube CLI command in your terminal will install the agen
 ![Environment CLI Agent Installation](../../img/environment-cli-agent-install.png)
 
 Once connected, you should see a corresponding status update in the dialog above to indicate that the installation
-was successful:
-
--missing image-
+was successful.
 
 ## Environment Settings
 
