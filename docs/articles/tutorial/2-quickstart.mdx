@@ -207,10 +207,10 @@ kubectl testkube get twe 664dbae9924211bb076bd58e --logs-only
 </TabItem>
 </Tabs>
 
-## 5. Integrate within your CI/CD Pipelines
+## 5. Integrate with your CI/CD Pipelines
 
-Workflow execution can be integrated in your CI pipelines, run on a cron schedule or trigger on a Kubernetes event.
-For example, I want to run this test every time my deployment's image updates.
+Testkube Workflow execution can easily be integrated in your CI pipelines, run on a cron schedule or trigger on a Kubernetes event.
+For example, if I want to run this test every time my deployment's image updates.
 
 <Tabs groupId="tutorial-integrate">
 
@@ -268,6 +268,18 @@ Learn more about [Scheduled Execution](/articles/scheduling-tests) in the docume
 
 </TabItem>
 
+<TabItem value="more-triggers" label="More Triggers..">
+
+Other ways to trigger a Test Workflow in Testkube include:
+
+- By creating an [Execution CRD](/articles/test-executions)
+- Via the [Testkube CLI](/cli/testkube_run)
+- Via the [REST API](/openapi/overview)
+- From another Workflow - as described in [Test Workflows - Test Suites](/articles/test-workflows-test-suites)
+
+</TabItem>
+
+
 </Tabs>
 
 ## Next steps
@@ -282,6 +294,10 @@ To learn how to do this we recommend you either:
 - [Follow a tutorial which adds tests to a sample application.][upnext-tutorial]
 - [Create your test based on one of our workflow examples.][upnext-examples]
 - [Dive deeper into the workflow documentation.][upnext-docs]
+
+:::tip
+Don't hesitate to reach out for help on our [Slack Community](https://bit.ly/testkube-slack) or by [Getting in touch](https://testkube.io/contact).
+:::
 
 [testkube-installing]: /articles/install/overview
 [upnext-tutorial]: /articles/tutorial/example
