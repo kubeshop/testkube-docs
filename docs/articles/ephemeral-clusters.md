@@ -159,6 +159,6 @@ to Workflow management, scheduling, etc. Please don't hesitate to reach out on o
 by [Getting in touch](https://testkube.io/contact) if you have a specific scenario that Testkube should solve for!
 
 :::info
-We are in the process of adding true multi-agent support to Testkube Environments - let us know if you have
+The Testkube team is looking into adding true multi-agent support to Testkube Environments - let us know if you have
 any specific requirements in this regard so we can make sure to cover them also.
 :::
