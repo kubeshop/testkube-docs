@@ -270,6 +270,11 @@ const sidebars = {
                   label: "Capturing Application Logs",
                   id: "articles/tw-capture-logs",
                 },
+                {
+                  type: "doc",
+                  label: "Remote Workflow Execution",
+                  id: "articles/remote-workflow-execution",
+                },
               ]
             },
           ],

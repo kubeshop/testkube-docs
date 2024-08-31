@@ -9,4 +9,4 @@ Workflows defined in Testkube can be triggered by a number of mechanisms:
 5. By creating an [Execution CRD](test-executions)
 6. Via the [Testkube CLI](../cli/testkube_run)
 7. Via the [REST API](/openapi/overview)
-8. From another Workflow - as described in [Test Workflows - Test Suites](/articles/test-workflows-test-suites)
+8. From another Workflow - as described in [Test Workflows - Test Suites](/articles/test-workflows-test-suites) and [Remote Workflow Execution](/articles/remote-workflow-execution)
