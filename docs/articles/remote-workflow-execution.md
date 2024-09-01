@@ -12,8 +12,8 @@ environments in a single "Controller Environment".
 
 To trigger a Workflow in another Environment using the Testkube CLI we need at least the following:
 
-- `apiToken` - an API Token generated for the remote Environment under its containing Organisation - [Read More](/testkube-pro/articles/api-token-management)
-- `environmentId` - the Testkube ID of the target environment
+- `apiToken` - an API Token generated for the remote Environment under its containing Organisation - [Read More](/testkube-pro/articles/api-token-management).
+- `environmentId` - the Testkube ID of the target Environment.
 - `organizationId` - the Testkube ID of the organization containing the target Environment.
 - `rootDomain` - the domain where the Testkube Control Plane is running - this will be `testkube.io` when using Testkube Cloud.
 - `workflowName` - the name of the target workflow to run.
@@ -57,7 +57,7 @@ status: {}
 ```
 
 :::tip
-Check out all available `testkube run tw` parameters in the [CLI Reference](/cli/testkube_run_testworkflow)
+Check out all available `testkube run tw` parameters in the [CLI Reference](/cli/testkube_run_testworkflow).
 :::
 
 ### Passing Configuration Parameters
@@ -83,7 +83,7 @@ and the subsequent call to `testkube run tw`.
 
 ### Artifacts from Remote Workflows
 
-If the target Workflow generates Artifacts, we can modify the shell command above as follows:
+If the target Workflow generates artifacts, we can modify the shell command above as follows:
 
 ```yaml
 ...
@@ -102,9 +102,9 @@ If the target Workflow generates Artifacts, we can modify the shell command abov
 ```
 
 The following changes were made:
-- a `mkdir /data/artifacts` command to create a folder for artifacts
-- additional `-d --download-dir /data/artifacts` arguments to the `testkube run tw` command 
-- an `artifacts` property telling Testkube where to find the downloaded artifacts [Learn More](/articles/test-workflows-artifacts)
+- a `mkdir /data/artifacts` command to create a folder for artifacts.
+- additional `-d --download-dir /data/artifacts` arguments to the `testkube run tw` command.
+- an `artifacts` property telling Testkube where to find the downloaded artifacts [Learn More](/articles/test-workflows-artifacts).
 
 The following example output is from a remote Playwright test that was configured to generate both reports and traces:
 
@@ -155,7 +155,11 @@ spec:
 The above example executes
 
 - a local `e2e-test` Workflow that runs an end-to-end test against an application to be tested.
-- two `basic-load` tests in separate Testkube environments, each putting load on the same application to be tested
+- two `basic-load` tests in separate Testkube Environments, each putting load on the same application to be tested.
 
-The purpose of this setup is to validate that our application is fully functional when under load from two
-external sources.
+The purpose of this specific setup is to validate that our application is fully functional when under load from two
+external sources, but you could for example create similar scenarios where multiple tests can be combined both 
+in sequence and in parallel to ensure that your target applications and services perform in line with their requirements
+under complex usage scenarios.
+
+ 
