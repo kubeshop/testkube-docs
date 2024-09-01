@@ -1,7 +1,8 @@
 # Remote Workflow Execution
 
-In a complex Testkube installation it might be desired to schedule and synchronize the execution 
-of Workflows across multiple Environments. Let's look at how the Testkube CLI can be used to achieve this.
+In a complex Testkube installation it might be desirable to schedule and synchronize the execution 
+of Workflows across multiple Environments. Let's look at how Test Workflows can use 
+the Testkube CLI to achieve this.
 
 ## Using the CLI to trigger remote Workflows
 
