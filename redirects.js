@@ -546,6 +546,14 @@ const redirects = [
     from: "/prometheus",
     to: "/articles/metrics",
   },
+  {
+    from: "/cli",
+    to: "/articles/cli",
+  },
+  {
+    from: "/workflows",
+    to: "/articles/examples/overview",
+  },
 ];
 
 module.exports = redirects;
