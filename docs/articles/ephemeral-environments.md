@@ -20,14 +20,14 @@ the contained Test Execution results are required, potentially resulting in a la
 which becomes both costly and difficult to manage over time.
 
 A preferred solution would be a single Testkube Environment to which any number of Testkube Agents (deployed
-in ephemeral clusters) can connect and report test execution results as they come and go. Unfortunately though,
+in ephemeral clusters) can connect and report test execution results as they come and go. Unfortunately,
 this approach is currently constrained by how Testkube works today:
 
 - Testkube Environments can currently only handle a single connected agent at a time. 
 - Testkube resources (Workflows, Triggers, etc.) are stored in the clusters themselves and not in the Control Plane, 
   so that when a new agent in an ephemeral cluster connects, it won't contain any tests/triggers/etc to run.
 
-Given these constraints let's look at one can "re-use" a single Agent across multiple ephemeral clusters.
+Given these constraints, let's look at one can "re-use" a single Agent across multiple ephemeral clusters.
 
 ### Re-using agents within an Environment
 
@@ -73,7 +73,7 @@ across all your environments, they will be aggregated and shown in the Dashboard
 
 ## 2. Ephemeral Namespaces
 
-Instead of provisioning ephemeral clusters it is not uncommon to use ephemeral namespaces within an existing cluster
+Instead of provisioning ephemeral clusters, it is not uncommon to use ephemeral namespaces within an existing cluster
 for the same purpose. Combined with Testkubes `executionNamespace` functionality you can in this scenario avoid
 having to install the Testkube Agent in each ephemeral namespace;
 
@@ -87,7 +87,7 @@ having to install the Testkube Agent in each ephemeral namespace;
 ### Runtime `executionNamespace` configuration
 
 To reuse a Workflow across any number of ephemeral namespaces, you can specify a corresponding 
-configuration parameter in your Workflow:
+[configuration parameter](/articles/test-workflows-examples-configuration) in your Workflow:
 
 ```yaml
 kind: TestWorkflow
@@ -116,6 +116,6 @@ our [Slack Community](https://bit.ly/testkube-slack) or by [Getting in touch](ht
 discuss how Testkube can fit into your infrastructure.
 
 :::info
-The Testkube team is looking into adding true multi-agent support to Testkube Environments - let us know if you have
+The Testkube team is looking into adding true multi-agent support to Testkube Environments, let us know if you have
 any specific requirements in this regard so we can make sure to cover them also.
 :::
