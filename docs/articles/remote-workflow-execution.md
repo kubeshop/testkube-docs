@@ -158,7 +158,7 @@ The above example executes
 - two `basic-load` tests in separate Testkube Environments, each putting load on the same application to be tested.
 
 The purpose of this specific setup is to validate that our application is fully functional when under load from two
-external sources, but you could for example create similar scenarios where multiple tests can be combined both 
+external sources, but you could for example create similar scenarios where multiple tests are combined both 
 in sequence and in parallel to ensure that your target applications and services perform in line with their requirements
 under complex usage scenarios.
 
