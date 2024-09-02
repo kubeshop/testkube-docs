@@ -61,11 +61,6 @@ const sidebars = {
           label: "More Guides",
           items: [
             "articles/install/multi-cluster",
-            {
-              type: "doc",
-              label: "Ephemeral Clusters",
-              id: "articles/ephemeral-clusters",
-            },
             "articles/install/standalone-agent",
             "articles/install/quickstart-no-k8s",
             "articles/install/uninstall",
@@ -98,6 +93,11 @@ const sidebars = {
               type: "doc",
               label: "Using an external MongoDB",
               id: "articles/testkube-dependencies",
+            },
+            {
+              type: "doc",
+              label: "Ephemeral Environments",
+              id: "articles/ephemeral-environments",
             },
             {
               type: "link",
