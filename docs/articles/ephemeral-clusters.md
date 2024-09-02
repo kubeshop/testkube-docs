@@ -160,7 +160,7 @@ for more details on the above approach.
 
 The above suggested approaches can of course be combined or expanded on depending on your specific needs in regard
 to Workflow management, scheduling, etc. Please don't hesitate to reach out on our [Slack Community](https://bit.ly/testkube-slack) or 
-by [Getting in touch](https://testkube.io/contact) if you have a specific scenario that Testkube should solve for!
+by [Getting in touch](https://testkube.io/contact) if you have a specific scenario that Testkube should solve for.
 
 :::info
 The Testkube team is looking into adding true multi-agent support to Testkube Environments - let us know if you have
