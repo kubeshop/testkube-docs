@@ -95,6 +95,11 @@ const sidebars = {
               id: "articles/testkube-dependencies",
             },
             {
+              type: "doc",
+              label: "Ephemeral Environments",
+              id: "articles/ephemeral-environments",
+            },
+            {
               type: "link",
               label: "Testkube with Kind",
               href: "https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker"
@@ -264,6 +269,11 @@ const sidebars = {
                   type: "doc",
                   label: "Capturing Application Logs",
                   id: "articles/tw-capture-logs",
+                },
+                {
+                  type: "doc",
+                  label: "Remote Workflow Execution",
+                  id: "articles/remote-workflow-execution",
                 },
               ]
             },
