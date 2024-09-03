@@ -77,12 +77,13 @@ Instead of provisioning ephemeral clusters, it is not uncommon to use ephemeral 
 for the same purpose. Combined with Testkubes `executionNamespace` functionality you can in this scenario avoid
 having to install the Testkube Agent in each ephemeral namespace;
 
-- Install the Agent and all required Testkube resources in a dedicated namespace (`testkube` by default).
-- Use the `executionNamespace` property to execute your Workflow in other (ephemeral) namespaces.
+- Install the Testkube Agent in a dedicated namespace (`testkube` by default).
+- Deploy Testkube Resources (Workflows, etc.) to the same namespace, possibly dynamically as part of your CI/CD Pipelines
+- Use the `executionNamespace` property in your Workflows to configure in which namespace they should execute,  
+  either statically or dynamically as shown below.
 - Trigger the execution of these Workflows as you would normally from CI/CD, Kubernetes Events, etc. 
 
 ![Ephemeral Namespaces](images/ephemeral-namespaces.png)
-
 
 ### Runtime `executionNamespace` configuration
 
