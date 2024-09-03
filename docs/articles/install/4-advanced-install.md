@@ -186,6 +186,7 @@ If you want to use mongodb with replicaset the below configuration is needed:
 ```yaml
 mongodb:
    architecture: replicaset
+   
 testkube-api:
    mongodb:
       dsn: <mongodb dsn (mongodb://...)>
