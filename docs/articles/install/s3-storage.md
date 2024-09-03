@@ -2,7 +2,9 @@
 
 To use S3 as storage, the steps are as follows:
 
-1. Configure IAM role with the following permissions:
+## 1. Configure IAM role
+
+Configure IAM role with the following permissions:
 
   ```yaml
 {
@@ -28,7 +30,9 @@ To use S3 as storage, the steps are as follows:
 }
   ```  
 
-3. A Trust Relationship needs to be established in the IAM role to allow the Testkube Enterprise API's ServiceAccount to assume it:
+## 2. Establish Trust Relationship
+
+A Trust Relationship needs to be established in the IAM role to allow the Testkube API's ServiceAccount to assume it:
 
 ```yaml
 {
@@ -52,9 +56,13 @@ To use S3 as storage, the steps are as follows:
   ]
 }
 ```
-This will grant the Enterprise API’s and Worker Service Accounts (testkube-enterprise-api and testkube-worker-service Service Account in the namespace testkube-enterprise) to assume the created Role which grants access to AWS S3.
 
-4. The following configuration should be provided to the testkube-enterprise Helm chart to configure Enterprise API and Worker service to use AWS S3 for storage:
+This will grant the Testkube API’s and Worker Service Accounts (testkube-enterprise-api and testkube-worker-service Service Account in the namespace testkube-enterprise) to assume the created Role which grants access to AWS S3.
+
+## 3. Configure for AWS S3
+
+The following configuration should be provided to the testkube-enterprise Helm chart to configure 
+the Testkube API and Worker service to use AWS S3 for storage:
 
 ```yaml
 global:
@@ -86,4 +94,6 @@ minio:
 
 You may also provide your own Service Account and in that case `testkube-cloud-api.serviceAccount.create` should be set to `false` and `testkube-cloud-api.serviceAccount.name` should be set to the name of the external Service Account.
 
-NOTE: `accessKeyId` and `secretAccessKey` must be set to `""` in order auth to be defaulted to IAM-based.
+:::note
+`accessKeyId` and `secretAccessKey` must be set to `""` in order auth to be defaulted to IAM-based.
+:::
