@@ -181,7 +181,7 @@ testkube-cloud-api:
 
 You can follow [these instructions][guide-mongo-ssl] in case you want to work with SSL Connections.
 
-If you want to use mongodb with replicaset the below configuration is needed:
+If you want to use MongoDB with ReplicaSet, the below configuration is needed:
 
 ```yaml
 mongodb:
