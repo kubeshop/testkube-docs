@@ -13,7 +13,7 @@ you can join it with a control plane as described [here][migrate-oss].
 
 ## Do I have to have my own Kubernetes Cluster to evaluate Testkube
 
-No, for evaluation you can use our SaaS offering at app.testkube.io which includes a Demo environment for you to play with. 
+No, for evaluation you can use our Cloud offering at app.testkube.io which includes a Demo environment for you to play with. 
 Read more about evaluating Testkube without having a Kubernetes cluster at [Quickstart without Kubernetes](quickstart-no-k8s.mdx)
 
 ## Do I have to have my own Kubernetes cluster to run Testkube in production
