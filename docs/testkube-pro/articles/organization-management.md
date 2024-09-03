@@ -39,7 +39,7 @@ Invite and manage your organisation members here.
 
 ### Inviting Members
 
-Invite new members by specifying their email and role and selecting  the Invite button in the bottom right.
+Invite new members by specifying their email and role and selecting the Invite button in the bottom right.
 
 There are 4 roles for organization members:
 
@@ -49,6 +49,11 @@ There are 4 roles for organization members:
 * `Biller` - Has access to billing details only.
 
 ![Organization Member Invite](../../img/organization-members.png)
+
+:::tip
+For Testkube On-Prem deployments you can configure default organizations, environments and roles for users - see 
+[Bootstrap Configuration](/articles/install/advanced-install#bootstrap-configuration).
+:::
 
 ### Manage existing Members
 
