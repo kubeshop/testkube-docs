@@ -447,6 +447,10 @@ const redirects = [
     to: "/openapi/overview",
   },
   {
+    from: "/category/integrations",
+    to: "/articles/integrations",
+  },
+  {
     from: "/articles/install-cli",
     to: "/articles/install/cli",
   },
@@ -456,10 +460,6 @@ const redirects = [
   },
   {
     from: "/articles/helm-chart",
-    to: "/articles/install/install-with-helm",
-  },
-  {
-    from: "/testkube-pro-on-prem/articles/usage-guide",
     to: "/articles/install/install-with-helm",
   },
   {
@@ -545,6 +545,10 @@ const redirects = [
   {
     from: "/prometheus",
     to: "/articles/metrics",
+  },
+  {
+    from: "/articles/slack-integration-webhooks",
+    to: "/articles/slack-integration",
   },
 ];
 

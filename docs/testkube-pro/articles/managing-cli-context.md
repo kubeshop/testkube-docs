@@ -1,26 +1,12 @@
 # Connecting from the CLI
 
-To use Testkube CLI to connect to your Testkube Pro install you will need to set the CLI Context. For that you will need a Testkube Pro token.
+To use Testkube CLI to connect to your Testkube Pro install you will need to set the CLI Context. 
 
-:::tip
-The Testkube CLI stores its configuration in a `~/.testkube/config.json` file - [Read More](/articles/cli-config-reference)
-:::
+Creating tokens is done at the Organisation level - [Read More](/testkube-pro/articles/api-token-management).
 
-## Creating an API Token
-
-Creating tokens is done at the Organisation level - [Read More](/testkube-pro/articles/organization-management#api-tokens).
-
-The token you create can have different roles associated with it for fine-grained control:
-
-* **Admin** access rights (access to all environments):
-
-![Admin Token](../../img/admin-token.png)
-
-* Specific role for selected environments:
-
-![Roles for Token](../../img/roles-for-token.png)
-
-When the token is created, you're ready to change the Testkube CLI context: 
+When the token is created, you're ready to change the Testkube CLI context using the 
+[`testkube set context`](/cli/testkube_set_context) command, which is shown for your environments 
+under the Environment General Settings tab:
 
 ![Setting Context](../../img/setting-context.png)
 

@@ -17,6 +17,8 @@ You can also switch from the Grid view to a Table view of all workflows in the s
 
 ![Workflow Search Filter](../img/workflow-table-view-072024.png)
 
+Selecting a Workflow in either of these views takes you to the [Workflow Details](/articles/testkube-dashboard-workflow-details)
+
 ## Creating a New Workflow
 
 Selecting the "Add new test workflow" button on the top right opens the following dialog:

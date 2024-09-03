@@ -73,7 +73,7 @@ The table below shows how certain Agent features in the [Testkube GitHub reposit
 | Executors *        |    x     |                                                                                            |
 | Webhooks           |    x     |                                                                                            |
 | Sources *          |    x     |                                                                                            |
-| Test Workflows     |    x     | x - see [Workflow Limitations](open-source-or-pro#workflow-limitations-in-standalone-mode) |
+| Test Workflows     |    x     | x - see [Workflow Limitations](open-source-or-pro.md#workflow-limitations-in-standalone-mode) |
 | Adv Testsuites *   |          |                                             x                                              |
 
 * = deprecated functionality - [Read More](legacy-features)

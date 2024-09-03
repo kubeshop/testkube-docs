@@ -1,7 +1,7 @@
 # The Testkube Dashboard
 
 The Testkube Dashboard provides a centralized user interface for managing your Testkube Installation. The Dashboard
-is included with the Testkube Control Plane and can be accessed after installation either via local port-forwarding using the 
+is included can be accessed after installation either via local port-forwarding using the 
 `testkube dashboard` command or via the NGINX Ingress Controller - [Read More](/articles/install/install-with-helm). 
 
 When opening the Dashboard you will be presented with the following layout:

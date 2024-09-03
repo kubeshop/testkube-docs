@@ -32,13 +32,13 @@ ready-to-use examples for each tool.
 
 :::tip
 
-Read more about these and other available integrations under the [Integrations](/category/integrations) section.
+Read more about these and other available integrations under the [Integrations](/articles/integrations) section.
 
 :::
 
 ## CLI Commands Tab
 
-The **CLI Commands** tab shows commands you can run to interact with the Workflow using the [Testkube CLI](/articles/install/cli):
+The **CLI Commands** tab shows commands you can run to interact with the Workflow using the [Testkube CLI](/articles/cli):
 
 ![CLI Commands](../img/workflows-cli-commands-072024.png)
 

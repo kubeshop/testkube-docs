@@ -1,6 +1,6 @@
 # Working with Test Workflows
 
-Test Workflows can be created and managed either through the [Testkube CLI](/articles/install/cli) or from the 
+Test Workflows can be created and managed either through the [Testkube CLI](/articles/cli) or from the 
 [Dashboard](/articles/testkube-dashboard-explore).
 
 :::tip

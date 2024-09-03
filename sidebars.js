@@ -35,7 +35,11 @@ const sidebars = {
       type: "category",
       label: "Installing",
       items: [
-        "articles/install/overview",
+        {
+          type: "doc",
+          label: "Installation Overview",
+          id: "articles/install/overview",
+        },
         "articles/install/install-with-cli",
         {
           type: "category",
@@ -608,14 +612,19 @@ const sidebars = {
           href: "https://testkube.io/blog/implementing-kubernetes-native-hardware-testing-with-testkube",
           description: "Test for hardware components and infrastructure.",
         },
+        {
+          type: "doc",
+          label: "Testing a Sample Application",
+          id: "articles/tutorial/example",
+        },
       ],
     },
     {
       type: "category",
       label: "Integrations",
       link: {
-        type: "generated-index",
-        description: "Testkube Integrations",
+        type: "doc",
+        id: "articles/integrations",
       },
       items: [
         {type: "doc", label: "GitHub", id: "articles/github-actions"},
@@ -640,11 +649,7 @@ const sidebars = {
         {type: "doc", label: "Flux", id: "articles/flux-integration"},
         {type: "doc", label: "CDEvents", id: "articles/cd-events"},
         {type: "doc", label: "Tekton", id: "articles/tekton"},
-        {
-          type: "doc",
-          label: "Slack Integration",
-          id: "articles/slack-integration",
-        },
+        {type: "doc", label: "Slack Integration", id: "articles/slack-integration"},
         {type: "doc", label: "Prometheus", id: "articles/metrics"},
         {
           type: "doc",
@@ -666,6 +671,7 @@ const sidebars = {
           description:
             "Integrating Testkube and Zapier for Instant Email Alerts",
         },
+        {type: "doc", label: "Grafana", id: "articles/grafana"},
       ],
     },
     {
@@ -906,6 +912,7 @@ const sidebars = {
 
         {type: "doc", label: "Templates", id: "articles/templates"},
         "articles/legacy-architecture",
+        {type: "doc", label: "Integrating with Slack Using Helm", id: "articles/slack-integration-helm"},
       ],
     },
   ],
