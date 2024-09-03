@@ -1,6 +1,6 @@
 # Win a Testkube Plushie!
 
-![Testkube Plushies 2023](../img/testkube-kubecon-23.jpg)
+![Testkube Plushies 2023](../../img/testkube-kubecon-23.jpg)
 
 Read on to learn how you can win a Testkube plushy!
 
@@ -40,19 +40,19 @@ Go to https://app.testkube.io/ and create an account on Testkube Pro using your 
 
 Create an environment (e.g: dev, staging, prod...): 
 
-![Create env](../img/kubecon-contest-create-env.png)
+![Create env](../../img/kubecon-contest-create-env.png)
 
 Install Testkube in your K8s cluster: 
 
-![Copy helm command](../img/conference-kubecon-copy-help.png)
+![Copy helm command](../../img/conference-kubecon-copy-help.png)
 
-![Install Testkube on CLI](../img/conference-kubecon-helm-install.png)
+![Install Testkube on CLI](../../img/conference-kubecon-helm-install.png)
 
 ### 5. Create a test
 
 Let's create a quick `curl` test, but this can be any testing tool you're using like Postman, Cypress, K6, etc. 
 
-![Create test with Testkube Pro](../img/conference-kubecon-create-test.png)
+![Create test with Testkube Pro](../../img/conference-kubecon-create-test.png)
 
 Use the following `curl` test that checks if the hello-world app returns a status `200`: 
 
@@ -68,7 +68,7 @@ Use the following `curl` test that checks if the hello-world app returns a statu
 }
 ```
 
-![Create Test Form](../img/conference-kubecon-create-form.png)
+![Create Test Form](../../img/conference-kubecon-create-form.png)
 
 ### 6. Run your test!
 

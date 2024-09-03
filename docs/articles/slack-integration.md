@@ -1,165 +1,97 @@
-# Integrating with Slack
+# Integrating with Slack Using Webhooks
 
-:::tip
-Using Webhooks is the preferred way to integrate Testkube with Slack - [Read More](/articles/slack-integration-webhooks).
-The below approach will be deprecated at some point in time.
-:::
+# Using Slack with Testkube
 
-In order to receive notifications in Slack about the status of the testing process, Testkube provides integration with Slack. Below are the configuration steps. Click [here](#video-tutorial) for a video tutorial.
+When creating webhooks to integrate Testkube with external systems, you can send a notification to a **Slack channel** when a test passes. Please visit the [Webhooks](..//articles/webhooks.mdx) page for the details for using Webhooks with Testkube.
 
-## Step 1 - Install the Testkube bot to Your Slack Workspace
+## Setting Up Slack Integration
 
-Testkube bot:
-<a href="https://slack.com/oauth/v2/authorize?client_id=1943550956369.3416932538629&scope=chat:write,chat:write.public,groups:read,channels:read&user_scope="><img alt="Add Testkube bot to your Slack workspace" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
+Testkube provides a Slack integration where you can configure a Testkube bot in your Slack workspace. If your Slack workspace doesn’t allow you to install a bot, you can follow the steps below.
 
-Once you add Slack bot to your workspace, note the bot token, you will need it in the next step.
+You can configure Slack to receive notifications either in a channel or via direct message. We’ll configure a private channel for this example. You can refer to this article to create a private Slack channel.
 
-```
-Authentification was succesfull!
-Please use the following token in the Helm values for slackToken:
-xoxb-123456789012-1234567890123-123456789012345678901234
-```
+Then, create a Slack app for a workspace that will receive the incoming events via webhook. To do that, navigate to https://api.slack.com/apps and **Create a New App**. In the modal that opens, choose **From Scratch**, provide the name, and choose the workspace where you want to create this app.
 
-## Step 2 - Configure Testkube to Use the Slack bot Token
+![Slack Integration 1](../img/slack-integration-1.png)
 
-Populate `slackToken` in the Helm values or apply it directly with:
+Create the app and navigate to the **Add Features and Functionality** section and click on **Incoming Webhooks**. By default, this is turned off, so you need to turn it on.
 
-```sh
-helm upgrade \
-  --install \
-  --namespace testkube \
-  --create-namespace \
-  --set testkube-api.slackToken="YOUR_SLACK_TOKEN" \
-  kubeshop/testkube
-```
+![Slack Integration 2](../img/slack-integration-2.png)
 
-To see all the values that can be configured, check the Helm chart documentation [here](/articles/install/install-with-helm). 
+Click **And New Webhook to Workspace** and choose the private channel that we created earlier on the next screen.
 
-## Step 3 - Add the Testkube bot to the Slack Channel
+![Slack Integration 3](../img/slack-integration-3.png)
 
-Add the Testkube bot to the Slack channel where you want to receive notifications. Do this by inviting the bot to a specific channel. By default, the Testkube bot will send to the first channel that the Testkube bot is member of. You can update the config in the next step.
+Copy the webhook URL from the next screen and keep it handy, as we’ll need it while creating a webhook in Testkube.
 
-![Add Testkube bot to Slack channel](../img/slack-running-example.png)
 
-## Step 4 - (Optional) Adjust Slack Config File
+## Creating a Webhook For Slack
 
-By default, the configuration [/charts/testkube-api/slack-config.json](https://github.com/kubeshop/helm-charts/blob/704c71fa3b8f0138f983ea9a2fa598ecbe3868ae/charts/testkube-api/slack-config.json) looks like below; it will send notifications for all events and all test or test suite names with any labels.
-If the channel is left empty, it will send to the first channel that the Testkube bot is member of.
+Testkube allows you to create Webhooks using the dashboard as well as the CLI. 
 
-It is an array of config objects and can use any config combinations:
+### Using the Testkube Dashboard
 
-```yaml title="config.yaml"
-- ChannelID: C058AGQ25D2
-  selector: {}
-  testName: []
-  testSuiteName: []
-  testWorkflowName: []
-  events:
-    - start-test
-    - end-test-success
-    - end-test-failed
-    - end-test-aborted
-    - end-test-timeout
-    - start-testsuite
-    - end-testsuite-success
-    - end-testsuite-failed
-    - end-testsuite-aborted
-    - end-testsuite-timeout
-    - start-testworkflow
-    - queue-testworkflow    
-    - end-testworkflow-success
-    - end-testworkflow-failed
-    - end-testworkflow-aborted
-```
+Navigate to the Webhooks section and **Create a new webhook**. Provide a name and choose the **Resource Identifier** as test-type: curl-test which refers to the cURL test. For **Triggered events**,choose **end-test-success**.
 
-To apply, pass the file to the Helm values:
+![Slack Webhook 1](../img/slack-webhook-1.png)
 
-```sh
-helm upgrade \
-  --install \
-  --create-namespace \
-  --namespace testkube \
-  testkube \
-  kubeshop/testkube \
-  --set testkube-api.slackToken="$SLACK_BOT_TOKEN" \
-  --set testkube-api.slackConfig="$(cat config.yaml)"
-```
+On the next screen, provide the Slack incoming webhook URL that you generated while setting up Slack integration.
 
-For example:
+![Slack Webhook 2](../img/slack-webhook-2.png)
 
-```yaml title="config.yaml"
-- ChannelID: C01234567
-  selector:
-    label1: value1
-  testName:
-    - sanity
-    - testName2
-  testSuiteName:
-    - test-suite1
-    - test-suite2
-  tesrWorkflowName:
-    - test-workflow1
-    - test-workflow2  
-  events:
-    - end-test-failed
-    - end-test-timeout
-    - end-testsuite-failed
-    - end-testsuite-timeout
-    - end-testworkflow-failed
-- ChannelID: C07654342
-  selector:
-    label3: value4
-  testName:
-    - integration-test1
-    - integration-test2
-  testSuiteName:
-    - integration-test-suite1
-    - integration-test-suite2
-   testWorkflowName:
-    - integration-test-workflow1
-    - integration-test-workflow2 
-  events:
-    - start-test
-    - end-test-success
-    - end-test-failed
-    - end-test-aborted
-    - end-test-timeout
-    - start-testsuite
-    - end-testsuite-success
-    - end-testsuite-failed
-    - end-testsuite-aborted
-    - end-testsuite-timeout
-    - start-testworkflow
-    - queue-testworkflow    
-    - end-testworkflow-success
-    - end-testworkflow-failed
-    - end-testworkflow-aborted
-```
+The last step is to configure the payload that will be sent to the Slack Webhook. After creating the webhook, you can navigate to **Integrations -> Webhooks** and click **Slack**. Navigate to the **Action** tab, and under **Custom Payload** add the following text:
 
-This will send notifications to the channel with the id `C01234567` for the test, test suites and test workflows with labels `label1:value1` as well as tests with the names "sanity" and "testName2", test suites with the names "test-suite1" and "test-suite2" and test workflows with the names "test-workflow1" and "test-workflow2", on events with the labels "end-test-failed", "end-test-timeout", "end-testsuite-failed", "end-testsuite-timeout" and "end-testworkflow-failed", and to the channel with the id `C07654342` for tests with labels `label3:value4`, tests with the names "integration-test1" and "integration-test2", test suites with the names "integration-test-suite1" and "integration-test-suite2" and test workflows with the names "integration-test-workflow1" and "integration-test-workflow2" on all events.
-
-### Configure the Message Template
-
-The default message is [/charts/testkube-api/slack-template.json](https://github.com/kubeshop/helm-charts/blob/311ff9f6fc38dfb5196b91a6f63ee7d3f59f7f4b/charts/testkube-api/slack-template.json) and is written using [Slack block kit builder](https://app.slack.com/block-kit-builder) and Golang templates. You can customize the message depending on your needs. The following structure is referenced in the template to show where the data to show is coming from:
-
-```go
-type MessageArgs struct {
-	ExecutionID   string
-	ExecutionName string
-	EventType     string
-	Namespace     string
-	Labels        string
-	TestName      string
-	TestType      string
-	Status        string
-	FailedSteps   int
-	TotalSteps    int
-	StartTime     string
-	EndTime       string
-	Duration      string
+```json
+{
+	"text": ":alert: Testkube Test Status \n *TestWorkflowName*: {{.TestWorkflowExecution.Name}} \n *Status*: {{ .Type_ }} \n *Logs*: https://app.testkube.io/organization/{{ index .Envs "TESTKUBE_PRO_ORG_ID" }}/environment/{{ index .Envs "TESTKUBE_PRO_ENV_ID" }}/dashboard/test-workflows/{{ .TestWorkflowExecution.Workflow.Name }}/executions/{{ .TestWorkflowExecution.Id }}
+"
 }
 ```
+Here, we’re adding custom text that includes:
 
-## Video Tutorial
+- The name of the test workflow.
+- The status.
+- A link to the execution log of that particular test workflow. 
 
-<iframe width="100%" height="315" src="https://www.youtube.com/embed/iaiiDilAyMY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+To build the URL, we access the environment variables **TESTKUBE_PRO_ORG_ID** and **TESTKUBE_PRO_ENV_ID**, which are your organization and environment variables that you get when you create an environment in Testkube.
+
+We have successfully configured the Slack webhook and will now receive events in the Slack channel when any event is sent to this endpoint.
+
+## Using the CLI
+
+We’ll create a webhook for the Slack integration using the Testkube CLI. Open a terminal and use the `testkube create webhook` command to create a webhook.
+
+```sh
+testkube create webhook --name slack-cli --events end-test-success --selector test-type=curl-test --header Content-Type=application/json --uri  https://hooks.slack.com/services/ABCDEFGHJKL/MNOPQRSTUVW
+```
+
+Below are the parameters used in the create webhook command:
+
+- **name**: Name of the webhook.
+- **events**: The event(s) that will trigger the webhook. We’ve provided ‘start-test’ and ‘end-test-success’ which means this will trigger every time a test starts and test finishes successfully.
+- **selector**: The resource for which the webhook will be configured. In this case, it’s the curl-test that we’ve created.
+- **header**: The header parameters for the request, **application/json** in this case.
+- **URI**: Slack endpoint URL.
+
+The webhook is created after executing the command.
+
+```sh
+$ testkube create webhook --name slack-cli --events end-test-success --selector test-type=curl-test --header Content-Type=application/json --uri  https://hooks.slack.com/services/ABCDEFGHJKL/MNOPQRSTUVW
+
+Context: cloud (2.0.8)   Namespace: testkube   Org: Atulpriya Sharma-personal-org   Env: local-kind
+---------------------------------------------------------------------------------------------------
+Webhook created slack-cli 🥇
+
+```
+
+
+# Testing the Webhook
+
+When the test passes, you’ll get a notification in the Slack channel with the message **Test succeeded**.
+
+![Slack Webhook Success](../img/slack-webhook-success.png)
+
+Watch the following video to see these steps in action:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MSyZNGDsnLE" title="Configure Slack webhooks for Kubernetes Tests Notifications" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+

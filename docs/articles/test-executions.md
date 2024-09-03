@@ -1,10 +1,17 @@
-# Test, Test Suite and Test Workflow Execution CRDs
+# Testkube Execution CRDs
 
-Testkube allows you to automatically run tests, test suites and test workflows by creating or updating Test, Test Suite or Test Workflow Execution CRDs.
+Testkube allows you to automatically trigger the execution of Test, Suites and Test Workflows by creating or 
+updating corresponding Test, Test Suite or Test Workflow Execution CRDs.
+
+:::info
+Please note that Tests and Test Suites are being deprecated - [Read more](/articles/legacy-features)
+:::
 
 ## What are Testkube Execution CRDs?
 
-In generic terms, an _Execution_ defines a _test_, _testsuite_ or _testworkflow_ which will be executed when CRD is created or updated. For example, we could define a _TestExecution_ which _runs_ a _Test_ when a _TestExecution_ gets _modified_.
+In generic terms, an _Execution_ defines a _test_, _testsuite_ or _testworkflow_ which will be executed when 
+CRD is created or updated. For example, we could define a _TestExecution_ which _runs_ a _Test_ when 
+a _TestExecution_ gets _modified_.
 
 #### Selecting Resource
 
@@ -36,10 +43,27 @@ An Execution Request defines execution parameters for each specific resource.
 ## Example
 
 Here are examples for a **Test Execution** *testexecution-example* which runs the **Test** *test-example*
-when a **Test Execution** is created or updated, a **Test Suite Execution** *testsuiteexecution-example* 
-which runs the **Test Suite** *testsuite-example* when a **Test Suite Execution** is created or updated
-and **Test Workflow Execution** *testworkflowexecution-example* which runs the **Test Workflow** *testworkflow-example*
-when a **Test Workflow Execution** is created or updated
+when the **Test Execution** is created or updated, a **Test Suite Execution** *testsuiteexecution-example* 
+which runs the **Test Suite** *testsuite-example* when the **Test Suite Execution** is created or updated
+and a **Test Workflow Execution** *testworkflowexecution-example* which runs the **Test Workflow** *testworkflow-example*
+when the **Test Workflow Execution** is created or updated
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflowExecution
+metadata:
+  name: testworkflowexecution-example
+spec:
+  testWorkflow:
+    name: testworkflow-example
+  executionRequest:
+    config:
+      browser: "chrome"
+```
+
+:::tip
+Check out the [TestWorkflowExecution CRD Reference](/articles/crds/testworkflows.testkube.io-v1#testworkflowexecution)
+:::
 
 ```yaml
 apiVersion: tests.testkube.io/v1
@@ -73,18 +97,6 @@ spec:
         type: basic
 ```
 
-```yaml
-apiVersion: testworkflows.testkube.io/v1
-kind: TestWorkflowExecution
-metadata:
-  name: testworkflowexecution-example
-spec:
-  testWorkflow:
-    name: testworkflow-example
-  executionRequest:
-    config:
-      browser: "chrome"
-```
 
 ## Architecture
 
