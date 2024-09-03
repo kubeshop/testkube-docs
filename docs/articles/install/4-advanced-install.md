@@ -181,6 +181,16 @@ testkube-cloud-api:
 
 You can follow [these instructions][guide-mongo-ssl] in case you want to work with SSL Connections.
 
+If you want to use mongodb with replicaset the below configuration is needed:
+
+```yaml
+mongodb:
+   architecture: replicaset
+testkube-api:
+   mongodb:
+      dsn: "mongodb://testkube-mongodb-headless:27017"
+```
+
 ### NATS
 
 Testkube Enterprise uses NATS as a message broker for communication between API and Agents.
