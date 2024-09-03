@@ -38,9 +38,7 @@ us know on our Slack channel so we can add it!
 
 ## Process/Workflows
 
-- Slack
-  - [WebHooks](/articles/slack-integration-webhooks) - Learn about how to configure Slack Integration with WebHooks
-  - [Helm Chart](/articles/slack-integration) - Learn about how to configure Slack Integration with Helm
+- [Slack](/articles/slack-integration) - Learn about how to configure Slack integration with Testkube.
 - [PagerDuty](https://testkube.io/learn/critical-test-based-alerting-with-pagerduty-and-testkube) - Learn about how to integrate Testkube with PagerDuty for alerting
 - [Zapier](https://testkube.io/learn/integrating-testkube-and-zapier-for-instant-email-alerts) - Learn about how to integrate Testkube with Zapier
 
