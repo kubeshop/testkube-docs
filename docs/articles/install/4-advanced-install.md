@@ -188,7 +188,7 @@ mongodb:
    architecture: replicaset
 testkube-api:
    mongodb:
-      dsn: "mongodb://testkube-mongodb-headless:27017"
+      dsn: <mongodb dsn (mongodb://...)>
 ```
 
 ### NATS
