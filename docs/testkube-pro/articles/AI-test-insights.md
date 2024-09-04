@@ -1,12 +1,18 @@
 # AI Test Insights
 
+:::info
+
+AI Test Insights is currently being migrated to support Workflows - the below functionality is only available
+for legace Tests and TestSuites - [Read More](/articles/legacy-features)
+:::
+
 :::note
 The AI Insights feature on Testkube utilizes artificial intelligence to help you debug your failed tests faster. It collects relevant bits of the failed logs and sends them to OpenAI which processes them and gives an assessment on why the test failed.
 :::
 
 ## Example of Creating a cURL Test
 
-Login to your Testkube pro account and create a test. The test in this example will send an HTTP GET request to an endpoint and validate that the response - an IP address - is received.
+Sign in to your Testkube account and create a test. The test in this example will send an HTTP GET request to an endpoint and validate that the response - an IP address - is received.
 
 Provide the following details: 
 Name: `curl-url-test`

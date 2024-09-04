@@ -1,8 +1,9 @@
-# TestKube Examples and Guides
+# Testkube Examples and Guides
 
-## Testing Tools
+This section gives examples on how to create Workflows for the most common Testing tools - if you're missing
+something please let us know on our [Slack Channel](https://bit.ly/testkube-slack)!
 
-This section gives examples on how to create Workflows for the most common Testing tools.
+## Load & Performance Testing
 
 - K6
   - [Basic](k6-basic) - Shows how to run a simple k6 test.
@@ -10,36 +11,48 @@ This section gives examples on how to create Workflows for the most common Testi
   - [Testkube K6 Introduction](https://testkube.io/blog/load-testing-in-kubernetes-with-k6-and-testkube) (external)
   - [Testkube vs K6 Operator](https://testkube.io/learn/comparing-the-k6-operator-vs-testkube-for-load-testing) (external)
   - [Generating Massive Load](https://testkube.io/learn/a-guide-to-scalable-and-heavy-load-testing-with-k6-and-testkube) (external)
+- JMeter
+  - [Basic](jmeter-basic) - Show how to run a simple JMeter test.
+  - [Distributed](jmeter-distributed) - Shows how to run a JMeter test with remote workers.
+- [Gatling](gatling-basic) - Shows how to run a basic Gatling load-test.
+- [Artillery](artillery-basic) - Shows how to run a basic Artillery test.
+
+## E2E / UI / Acceptance Testing
+
+- Playwright
+  - [Basic](playwright-basic) - Shows how to run a Playwright test.
+  - [Sharded](playwright-sharded) - Shows how to distribute a Playwright test across multiple nodes for sharded test execution.
 - Cypress
   - [Basic](cypress-basic) - Shows how to run a Cypress test.
   - [Sharded](cypress-sharded) - Shows how to distribute a Cypress test across multiple nodes for sharded test execution.
   - [Scaling Cypress Tests](https://testkube.io/learn/scaling-cypress-tests-parallelise-your-end-to-end-tests-with-testkube) (external)
-- Playwright
-  - [Basic](playwright-basic) - Shows how to run a Playwright test.
-  - [Sharded](playwright-sharded) - Shows how to distribute a Playwright test across multiple nodes for sharded test execution.
 - Selenium
   - [Basic](selenium-basic) - Shows how to run a Selenium test with Maven against the Chrome WebDriver Engine.
   - [Function Testing with Selenium](https://testkube.io/learn/functional-testing-with-selenium-in-testkube) (external)
+- Robot Framework
+  - [Basic](robot-framework-basic) - Shows how to run a basic Robot Framework test.
+  - [Parallelized](robot-framework-parallel) - shows how to run a Robot Framework test in parallel for 3 browsers.
+  - [Automated Acceptance Testing](https://testkube.io/learn/automated-acceptance-testing-with-robot-framework-and-testkube) (external)
+
+## API Testing
+
 - Postman
   - [Basic](postman-basic) - Shows how to run API tests in a Postman Collection.
   - [API Test Automation with Postman](https://testkube.io/learn/functional-testing-with-selenium-in-testkube) (external)
 - [SoapUI](soapui-basic) - Shows how to run API tests in a SoapUI Project.
-- [Gatling](gatling-basic) - Shows how to run a basic Gatling load-test.
+- [REST Assured](https://testkube.io/learn/api-testing-using-restassured-and-testkube) (external)
+- [cURL](curl-basic) - Shows how to run cURL commands as tests.
+
+## Testing Frameworks
+
 - [Maven](maven-basic) - Shows how run Maven tests.
 - [Gradle](gradle-basic) - Shows how run Gradle tests.
 - Pytest
   - [Basic](pytest-basic) - Shows how to run tests with the Pytest framework.
   - [Pytest and Testkube](https://testkube.io/learn/testing-kubernetes-applications-with-pytest-and-testkube-a-complete-guide) (external)
-- [REST Assured](https://testkube.io/learn/api-testing-using-restassured-and-testkube) (external)
 - [Cucumber](https://testkube.io/learn/simplify-bdd-testing-for-distributed-java-applications-with-testkube) (external)
-- JMeter
-  - [Basic](jmeter-basic) - Show how to run a simple JMeter test.
-  - [Distributed](jmeter-distributed) - Shows how to run a JMeter test with remote workers.
-- Robot Framework
-  - [Basic](robot-framework-basic) - Shows how to run a basic Robot Framework test.
-  - [Parallelized](robot-framework-parallel) - shows how to run a Robot Framework test in parallel for 3 browsers.
-  - [Automated Acceptance Testing](https://testkube.io/learn/automated-acceptance-testing-with-robot-framework-and-testkube) (external)
-- [Artillery](artillery-basic) - Shows how to run a basic Artillery test.
-- [cURL](curl-basic) - Shows how to run cURL commands as tests.
-- [Hardware Testing](https://testkube.io/blog/implementing-kubernetes-native-hardware-testing-with-testkube) - Shows how to test hardware infrastructure in your Kubernetes Cluster
 
+## Miscellaneous
+
+- [Hardware Testing](https://testkube.io/blog/implementing-kubernetes-native-hardware-testing-with-testkube) - Shows how to test hardware infrastructure in your Kubernetes Cluster.
+- [Testing a Sample Application](/articles/tutorial/example) - Shows how to run tests on a sample application with a three-tier architecture.

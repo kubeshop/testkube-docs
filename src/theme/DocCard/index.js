@@ -3,7 +3,6 @@ import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import {
   findFirstCategoryLink,
-  useDocById,
 } from "@docusaurus/theme-common/internal";
 import isInternalUrl from "@docusaurus/isInternalUrl";
 import { translate } from "@docusaurus/Translate";
@@ -139,14 +138,12 @@ function CardLink({ item }) {
     : isInternalUrl(item.href)
     ? "📄️"
     : "🔗";
-  const doc = useDocById(item.docId ?? undefined);
   return (
     <CardLayout
       href={item.href}
       icon={icon}
       logo={executorLogo}
       title={item.label}
-      description={doc?.description}
     />
   );
 }

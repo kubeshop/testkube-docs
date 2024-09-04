@@ -2,16 +2,19 @@
 
 ## Can Testkube be deployed on OpenShift?
 
-Yes, OpenShift is supported. You might need to tweak the configuration a bit to fit the security requirements. Feel free to contact us if it does not work out, and we’ll gladly hot fix it.
+Yes, OpenShift is supported - [Read More](/articles/install/standalone-agent#deploying-on-openshift). 
+You might need to tweak the configuration a bit to fit the security requirements. 
+Feel free to contact us on Slack if it does not work out so we can help.
 
 ## Can Testkube OSS be migrated to join a control plane?
 
-Yes, you can choose to get started with just the standalone agent. Once you are ready to use a control plane, you can join it with a control plane by following [this tutorial][migrate-oss].
+Yes, you can choose to get started with just the standalone agent. Once you are ready to use a control plane, 
+you can join it with a control plane as described [here][migrate-oss].
 
 ## Do I have to have my own Kubernetes Cluster to evaluate Testkube
 
-No, for evaluation you can use our SaaS offering at app.testkube.io which includes a Demo environment for you to play with. Read more about evaluating
-Testkube without having a Kubernetes cluster at [Quickstart without Kubernetes](quickstart-no-k8s.mdx)
+No, for evaluation you can use our Cloud offering at app.testkube.io which includes a Demo environment for you to play with. 
+Read more about evaluating Testkube without having a Kubernetes cluster at [Quickstart without Kubernetes](quickstart-no-k8s.mdx)
 
 ## Do I have to have my own Kubernetes cluster to run Testkube in production
 
@@ -26,12 +29,13 @@ If that doesn't work for you please [get in touch](https://testkube.io/contact),
 
 ## Can I use Testkube to test applications or services that are not running in Kubernetes
 
-Yes, you can use Testkube to test any applications or components as long as the cluster the Testkube agent is running in has network access to the applications
-or components to be tested.
+Yes, you can use Testkube to test any applications or components as long as the cluster the Testkube agent 
+is running in has network access to the applications or components to be tested.
 
 ## How do I expose Testkube to the Internet?
 
-To expose Testkube to the Internet, you will need to create an Ingress for both the Testkube API and the Testkube dashboard. Check the installation instructions [here][install-ingress] for different configurations.
+To expose Testkube to the Internet, you will need to create an Ingress for both the Testkube API and the 
+Testkube dashboard. Check the installation instructions [here][install-ingress] for different configurations.
 
 ## Access the Service Under Test (SUT) Using Testkube
 
@@ -39,5 +43,5 @@ To expose Testkube to the Internet, you will need to create an Ingress for both 
 - If Testkube and the SUT are not in the same cluster, SUT will have to be exposed to Testkube using an Ingress or a Load Balancer.
 
 [deployment-architectures]: /articles/install/deployment-architectures
-[migrate-oss]: /articles/migrate-from-oss
+[migrate-oss]: /articles/install/standalone-agent#connecting-to-a-control-plane
 [install-ingress]: /articles/install/install-with-helm#domain

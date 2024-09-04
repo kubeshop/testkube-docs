@@ -22,23 +22,34 @@ const sidebars = {
       label: "Welcome!",
       id: "index",
     },
-    "articles/tutorial/quickstart",
-    "articles/tutorial/example",
+    {
+      type: "doc",
+      label: "Quickstart",
+      id: "articles/tutorial/quickstart",
+    },
     {
       type: "html",
-      value: "<hr />",
+      value: "<hr class='sidebar-hr'/>",
     },
     {
       type: "category",
       label: "Installing",
       items: [
-        "articles/install/overview",
+        {
+          type: "doc",
+          label: "Installation Overview",
+          id: "articles/install/overview",
+        },
         "articles/install/install-with-cli",
         {
           type: "category",
           label: "Install with Helm",
           items: [
-            "articles/install/install-with-helm",
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/install/install-with-helm",
+            },
             "articles/install/advanced-install",
           ],
         },
@@ -84,6 +95,11 @@ const sidebars = {
               id: "articles/testkube-dependencies",
             },
             {
+              type: "doc",
+              label: "Ephemeral Environments",
+              id: "articles/ephemeral-environments",
+            },
+            {
               type: "link",
               label: "Testkube with Kind",
               href: "https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker"
@@ -125,7 +141,7 @@ const sidebars = {
               type: "category",
               label: "Workflows",
               collapsed: false,
-              items : [
+              items: [
                 {
                   type: "doc",
                   label: "Workflows Overview",
@@ -192,6 +208,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Artifacts",
+              id: "articles/test-workflows-artifacts",
+            },
+            {
+              type: "doc",
               label: "Services",
               id: "articles/test-workflows-services",
             },
@@ -231,6 +252,11 @@ const sidebars = {
               id: "articles/test-workflow-templates",
             },
             {
+              type: "doc",
+              label: "High-level Architecture",
+              id: "articles/test-workflows-high-level-architecture",
+            },
+            {
               type: "category",
               label: "More Guides",
               items: [
@@ -243,6 +269,11 @@ const sidebars = {
                   type: "doc",
                   label: "Capturing Application Logs",
                   id: "articles/tw-capture-logs",
+                },
+                {
+                  type: "doc",
+                  label: "Remote Workflow Execution",
+                  id: "articles/remote-workflow-execution",
                 },
               ]
             },
@@ -352,6 +383,34 @@ const sidebars = {
               label: "API Tokens",
               id: "testkube-pro/articles/api-token-management",
             },
+          ],
+        },
+        ,
+        {
+          type: "category",
+          label: "Testkube CLI",
+          items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/cli",
+            },
+            {
+              type: "doc",
+              label: "Installing the CLI",
+              id: "articles/install/cli",
+            },
+            {
+              type: "doc",
+              label: "Managing CLI Context",
+              id: "testkube-pro/articles/managing-cli-context",
+            },
+            {
+              type: "doc",
+              label: "Docker CLI",
+              id: "articles/testkube-cli-docker",
+            },
+            {type: "doc", label: "OAuth for CLI", id: "articles/oauth-cli"},
           ],
         },
       ],
@@ -563,14 +622,19 @@ const sidebars = {
           href: "https://testkube.io/blog/implementing-kubernetes-native-hardware-testing-with-testkube",
           description: "Test for hardware components and infrastructure.",
         },
+        {
+          type: "doc",
+          label: "Testing a Sample Application",
+          id: "articles/tutorial/example",
+        },
       ],
     },
     {
       type: "category",
       label: "Integrations",
       link: {
-        type: "generated-index",
-        description: "Testkube Integrations",
+        type: "doc",
+        id: "articles/integrations",
       },
       items: [
         {type: "doc", label: "GitHub", id: "articles/github-actions"},
@@ -595,11 +659,7 @@ const sidebars = {
         {type: "doc", label: "Flux", id: "articles/flux-integration"},
         {type: "doc", label: "CDEvents", id: "articles/cd-events"},
         {type: "doc", label: "Tekton", id: "articles/tekton"},
-        {
-          type: "doc",
-          label: "Slack Integration",
-          id: "articles/slack-integration",
-        },
+        {type: "doc", label: "Slack Integration", id: "articles/slack-integration"},
         {type: "doc", label: "Prometheus", id: "articles/metrics"},
         {
           type: "doc",
@@ -621,6 +681,7 @@ const sidebars = {
           description:
             "Integrating Testkube and Zapier for Instant Email Alerts",
         },
+        {type: "doc", label: "Grafana", id: "articles/grafana"},
       ],
     },
     {
@@ -700,23 +761,12 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              label: "Installing the CLI",
-              id: "articles/install/cli",
+              label: "Configuration",
+              id: "articles/cli-config-reference",
             },
-            {
-              type: "doc",
-              label: "Managing CLI Context",
-              id: "testkube-pro/articles/managing-cli-context",
-            },
-            {
-              type: "doc",
-              label: "Docker CLI",
-              id: "articles/testkube-cli-docker",
-            },
-            {type: "doc", label: "OAuth for CLI", id: "articles/oauth-cli"},
             {
               type: "category",
-              label: "Command Reference",
+              label: "CLI Commands",
               items: [
                 {
                   type: "autogenerated",
@@ -757,7 +807,7 @@ const sidebars = {
     },
     {
       type: "html",
-      value: "<hr />",
+      value: "<hr class='sidebar-hr'/>",
     },
     {
       type: "category",
@@ -872,6 +922,7 @@ const sidebars = {
 
         {type: "doc", label: "Templates", id: "articles/templates"},
         "articles/legacy-architecture",
+        {type: "doc", label: "Integrating with Slack Using Helm", id: "articles/slack-integration-helm"},
       ],
     },
   ],

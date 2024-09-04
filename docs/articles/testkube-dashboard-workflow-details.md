@@ -32,13 +32,13 @@ ready-to-use examples for each tool.
 
 :::tip
 
-Read more about these and other available integrations under the [Integrations](/category/integrations) section.
+Read more about these and other available integrations under the [Integrations](/articles/integrations) section.
 
 :::
 
 ## CLI Commands Tab
 
-The **CLI Commands** tab shows commands you can run to interact with the Workflow using the [Testkube CLI](/articles/install/cli):
+The **CLI Commands** tab shows commands you can run to interact with the Workflow using the [Testkube CLI](/articles/cli):
 
 ![CLI Commands](../img/workflows-cli-commands-072024.png)
 
@@ -118,6 +118,7 @@ This panel allows you to configure global variables and secrets used by your Wor
 This panel allows you to configure a single schedule for your Workflow - if you want to define
 multiple schedules you can do this directly in the Workflow YAML under the Definition panel.
 
+Read more about Workflow Scheduling in the [Scheduling Workflows](/articles/scheduling-tests) article.
 :::
 
 Use this panel to define a single execution schedule for your Workflow.

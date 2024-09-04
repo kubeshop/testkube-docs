@@ -6,17 +6,17 @@ When selecting a specific Workflow Execution the modal that opens has the follow
 
 This tab shows the log output for each executed step - [Read More](/articles/logs-and-artifacts#log-collection).
 
-![Log Output](../img/workflows-log-output-072024.png)
+![Log Output](../img/workflows-log-output-2.1.png)
 
-**Artifacts:**
+## Artifacts
 
 This tab shows artifacts created by your test executions - [Read More](/articles/logs-and-artifacts#artifact-collection)
 
-![Artifacts](../img/workflows-artifacts-tab-072024.png)
+![Artifacts](../img/workflows-artifacts-tab-2.1.png)
 
-**Workflow:**
+## Executed Workflow
 
 This tab shows the actual Workflow that was executed, selecting the "Inline templates" option will expand any 
-used Workflow Templates also.
+used Workflow Templates and specified configuration properties also.
 
-![Code](../img/workflows-code-072024.png)
+![Code](../img/workflows-code-2.1.png)

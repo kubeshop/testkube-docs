@@ -2,7 +2,8 @@
 
 ## Overview
 
-In Testkube Pro, we highlight relevant keywords in logs for faster debugging. To use this feature, open execution details.
+Testkube can automatically highlight relevant keywords in your logs to help you with faster debugging. 
+To use this feature, open execution details.
 
 On this screen, all the lines that may be relevant will be highlighted in the interface.
 
@@ -18,24 +19,10 @@ By default, all the categories are active.
 
 ![log-highlighting-filtering.png](../../img/log-highlighting-filtering.png)
 
-
-
-## Configuring Keyword Categories
-
-There are 4 default categories, represented with a few keywords each:
-
-| Category                   | Keywords                                                            |
-|----------------------------|---------------------------------------------------------------------|
-| **Error Keywords**         | Error, Exception, Fail, Critical, Fatal                             |
-| **Connection**             | Connection, Disconnect, Lost, Timeout, Refused, Handshake, Retrying |
-| **Resource Issues**        | OutOfMemory, MemoryLeak, ResourceExhausted, LimitExceeded, Quota    |
-| **Access & Authorization** | Denied, Unauthorized, Forbidden, Invalid, Invalid Token, Expired    |
-
-To configure keyword categories for highlighting:
-
-1. Navigate to the Environment settings -> Keyword handling.
-2. Add a new category by providing a color, a group name, and an array of keywords.
-3. Save the changes.
+:::tip
+You can manage filter Categories and Keywords under the corresponding 
+[Environment Keyword Handling](/testkube-pro/articles/environment-management#keyword-handling) tab.
+:::
 
 ## Example Configuration
 

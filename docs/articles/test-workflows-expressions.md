@@ -12,7 +12,27 @@ It is built on JSON, so every JSON syntax is a valid expression value as well, l
 
 You can do basic math easily, like **config.workers * 5**.
 
-![Expressions](../img/expressions.png) 
+**Defining a Condition:**
+```yaml
+condition: 'config.workers > 1 || config.force'
+```
+
+**Dynamic Image Tag:**
+```yaml
+image: 'mcr.microsoft.com/playwright:v{{ config.version }}'
+```
+
+**Configurable K6 Script:**
+```yaml
+content:
+  files:
+  - path: /k6-script.js
+    content: |
+      export const options = {
+        thresholds: {{ json(config.thresholds) }}
+      };
+      {{ config.script }}
+``` 
 
 ### Operators
 
@@ -74,10 +94,9 @@ while the others may be accessible only dynamically in the container.
 | `resource.root`                                            | ✅                    | Either execution ID, or nested resource ID, of the resource that has scheduled it |
 | `namespace`                                                | ✅                    | Namespace where the execution will be scheduled                                   |
 | `workflow.name`                                            | ✅                    | Name of the executed TestWorkflow                                                 |
-| `cloud.api.key`                                            | ✅                    | Cloud API key for using in Cloud and On Prem editions                             |
-| `cloud.ui.url`                                             | ✅                    | Cloud UI URL for using in Cloud and On Prem editions                              |
-| `cloud.api.orgId`                                          | ✅                    | Cloud API organization ID for using in Cloud and On Prem editions                 |
-| `cloud.api.envId`                                          | ✅                    | Cloud API environment ID for using in Cloud and On Prem editions                  |
+| `organization.id`                                          | ✅                    | Organization ID (when running with Control Plane)                                 |
+| `environment.id`                                           | ✅                    | Environment ID (when running with Control Plane)                                  |
+| `dashboard.url`                                            | ✅                    | URL of the environment's dashboard                                                |
 | `env` variables (like `env.SOME_VARIABLE`)                 | ❌                    | Environment variable value                                                        |
 | `failed`                                                   | ❌                    | Is the TestWorkflow Execution failed already at this point?                       |
 | `passed`                                                   | ❌                    | Is the TestWorkflow Execution still not failed at this point?                     |
@@ -176,4 +195,22 @@ These functions are only executed during the execution.
 | `file` | `string`   | File contents         | `file("/etc/some/path")` may be `"some\ncontent"`                                                                |
 | `glob` | `[]string` | Find files by pattern | `glob("/etc/**/*", "./x/**/*.js")` may be `["/etc/some/file", "/etc/other/file", "/some/working/dir/x/file.js"]` |
 
-![Built-in Functions](../img/built-in-functions.png)
+```yaml
+condition: 'len(glob("/data/repo/**/*.spec.js")) > 0'
+```
+
+```yaml
+- shell: 'generate-api-key.sh > /data/api-key'
+- execute:
+    workflows:
+    - name: example
+      config: 
+        entries: '{{ tojson(split(file("/data/list*), "\n")) }}'
+        script: '{{ file("/data/api-key") }}'
+``` 
+
+```yaml
+shell: |
+  /bin {{ shellquote("--", config.args ...) }}
+```
+

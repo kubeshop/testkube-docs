@@ -51,7 +51,7 @@ To connect to the self-hosted instance, you need to have **kubectl** configured 
 
 If a test is already created, you can run it using the command `testkube run testworkflow TEST_WORKFLOW_NAME -f` . However, if you need to create a test in this workflow, please add a creation command, e.g.: `testkube create testworkflow -f EXAMPLE_FILE.yaml`.
 
-you'll need to create a Jenkinsfile. This Jenkinsfile should define the stages and steps necessary to execute the workflow
+You'll need to create a Jenkinsfile. This Jenkinsfile should define the stages and steps necessary to execute the workflow
 
 ```groovy
 pipeline {
@@ -83,7 +83,7 @@ This workflow establishes a connection to EKS cluster and creates and runs a tes
 - The **_AwsRegion_** secret should contain AWS region where EKS is
 - Tke **EksClusterName** secret points to the name of EKS cluster you want to connect.
 
-you'll need to create a Jenkinsfile. This Jenkinsfile should define the stages and steps necessary to execute the workflow
+You'll need to create a Jenkinsfile. This Jenkinsfile should define the stages and steps necessary to execute the workflow
 
 ```groovy
 pipeline {

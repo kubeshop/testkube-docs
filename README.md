@@ -76,6 +76,13 @@ content
 ```
 ````
 
+### Using Tabs
+
+You can create tabs for structuring your content, for example as in the [CLI Installation](https://docs.testkube.io/articles/install/cli) page.
+
+Please note that headlines inside tab content will be shown in the navigation menu to the right, but will not 
+work as direct links from external sources unless they are under the default/first tab.
+
 ## Updating the OpenAPI Docs
 
 These docs use [redocusaurus](https://redocusaurus.vercel.app/) to generate OpenAPI documentation, but
@@ -115,7 +122,8 @@ Follow these steps:
 2. Clone the https://github.com/kubeshop/crd-ref-docs repo
 3. Make sure you have go tooling installed and run `go build` in this repo, this
    should create a `crd-ref-docs` binary in the roof folder of the repo.
-4. Create a `docs` folder in the cloned repo and now run the following command (using the `crd-ref-docs` tool):
+4. Set the desired Kubernetes Version to use for outgoing links to reference docs in the `config.yaml` file (at least v1.28)
+5. Create a `docs` folder in the cloned repo and now run the following command (using the `crd-ref-docs` tool):
 
 ```shell
 ./crd-ref-docs  
@@ -150,9 +158,9 @@ total 152
 -rw-r--r-- 1 olensmar 60601 Aug  5 11:44 testworkflows.testkube.io-v1.md
 ```
 
-5. Copy these files to the `/docs/articles/crds` folder in this repo
-6. Make sure the links and info in `/docs/articles/crds.md` is correct/up-to-date
-7. Add the deprecation warning at the top of all files containing deprecated APIs:
+6. Copy these files to the `/docs/articles/crds` folder in this repo
+7. Make sure the links and info in `/docs/articles/crds.md` is correct/up-to-date
+8. Add the deprecation warning at the top of all files containing deprecated APIs:
 
 ```markdown
 import LegacyWarning from '../_legacy-warning.mdx';
@@ -160,5 +168,18 @@ import LegacyWarning from '../_legacy-warning.mdx';
 <LegacyWarning />
 ```
 
-8. Create a branch, commit and create a PR
+9. Create a branch, commit and create a PR
 
+## Updating the CLI Reference docs
+
+The CLI docs are generated in the [Testkube Repo](https://github.com/kubeshop/testkube) by running
+
+```
+make docs
+```
+
+in the root folder and copying the generated files from the `gen/docs/cli` folder to the `/cli` folder in this repo.
+
+:::tip
+Make sure the generated docs build with `npm run build` ok before committing, and fix any errors manually as applicable.
+:::

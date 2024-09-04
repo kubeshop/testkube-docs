@@ -57,14 +57,14 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `workingDir` _string_ | override default working directory in the image (empty string to default WORKDIR for the image) |  |  |
 | `image` _string_ | image to be used for the container |  |  |
-| `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#pullpolicy-v1-core)_ | pulling policy for the image |  |  |
-| `env` _[EnvVar](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#envvar-v1-core) array_ | environment variables to append to the container |  |  |
-| `envFrom` _[EnvFromSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#envfromsource-v1-core) array_ | external environment variables to append to the container |  |  |
+| `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#pullpolicy-v1-core)_ | pulling policy for the image |  |  |
+| `env` _[EnvVar](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvar-v1-core) array_ | environment variables to append to the container |  |  |
+| `envFrom` _[EnvFromSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envfromsource-v1-core) array_ | external environment variables to append to the container |  |  |
 | `command` _string_ | override default command in the image (empty string to default ENTRYPOINT of the image) |  |  |
 | `args` _string_ | override default command in the image (empty string to default CMD of the image) |  |  |
 | `resources` _[Resources](#resources)_ | expected resources for the container |  |  |
-| `securityContext` _[SecurityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#securitycontext-v1-core)_ | security context for the container |  |  |
-| `volumeMounts` _[VolumeMount](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#volumemount-v1-core) array_ | volume mounts to append to the container |  |  |
+| `securityContext` _[SecurityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#securitycontext-v1-core)_ | security context for the container |  |  |
+| `volumeMounts` _[VolumeMount](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#volumemount-v1-core) array_ | volume mounts to append to the container |  |  |
 
 
 ### Content
@@ -107,7 +107,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `path` _string_ | path where the file should be accessible at |  | MinLength: 1 <br /> |
 | `content` _string_ | plain-text content to put inside |  |  |
-| `contentFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#envvarsource-v1-core)_ | external source to use |  |  |
+| `contentFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_ | external source to use |  |  |
 | `mode` _integer_ | mode to use for the file |  |  |
 
 
@@ -127,11 +127,11 @@ _Appears in:_
 | `uri` _string_ | uri for the Git repository |  |  |
 | `revision` _string_ | branch, commit or a tag name to fetch |  |  |
 | `username` _string_ | plain text username to fetch with |  |  |
-| `usernameFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#envvarsource-v1-core)_ | external username to fetch with |  |  |
+| `usernameFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_ | external username to fetch with |  |  |
 | `token` _string_ | plain text token to fetch with |  |  |
-| `tokenFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#envvarsource-v1-core)_ | external token to fetch with |  |  |
+| `tokenFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_ | external token to fetch with |  |  |
 | `sshKey` _string_ | plain text SSH private key to fetch with |  |  |
-| `sshKeyFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#envvarsource-v1-core)_ | external SSH private key to fetch with |  |  |
+| `sshKeyFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_ | external SSH private key to fetch with |  |  |
 | `authType` _[GitAuthType](#gitauthtype)_ | authorization type for the credentials |  | Enum: [basic header] <br /> |
 | `mountPath` _string_ | where to mount the fetched repository contents (defaults to "repo" directory in the data volume) |  |  |
 | `paths` _string array_ | paths to fetch for the sparse checkout |  |  |
@@ -234,8 +234,8 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `matrix` _object (keys:string, values:[DynamicList](#dynamiclist))_ | matrix of parameters to spawn instances (static) |  |  |
-| `count` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util)_ | static number of sharded instances to spawn |  |  |
-| `maxCount` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util)_ | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |  |  |
+| `count` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_ | static number of sharded instances to spawn |  |  |
+| `maxCount` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_ | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |  |  |
 | `shards` _object (keys:string, values:[DynamicList](#dynamiclist))_ | parameters that should be distributed across sharded instances |  |  |
 | `description` _string_ | service description to display |  |  |
 | `logs` _string_ | should save logs for the service (false if not specified) |  |  |
@@ -245,17 +245,17 @@ _Appears in:_
 | `pod` _[PodConfig](#podconfig)_ | configuration for the scheduled pod |  |  |
 | `workingDir` _string_ | override default working directory in the image (empty string to default WORKDIR for the image) |  |  |
 | `image` _string_ | image to be used for the container |  |  |
-| `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#pullpolicy-v1-core)_ | pulling policy for the image |  |  |
-| `env` _[EnvVar](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#envvar-v1-core) array_ | environment variables to append to the container |  |  |
-| `envFrom` _[EnvFromSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#envfromsource-v1-core) array_ | external environment variables to append to the container |  |  |
+| `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#pullpolicy-v1-core)_ | pulling policy for the image |  |  |
+| `env` _[EnvVar](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvar-v1-core) array_ | environment variables to append to the container |  |  |
+| `envFrom` _[EnvFromSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envfromsource-v1-core) array_ | external environment variables to append to the container |  |  |
 | `command` _string_ | override default command in the image (empty string to default ENTRYPOINT of the image) |  |  |
 | `args` _string_ | override default command in the image (empty string to default CMD of the image) |  |  |
 | `resources` _[Resources](#resources)_ | expected resources for the container |  |  |
-| `securityContext` _[SecurityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#securitycontext-v1-core)_ | security context for the container |  |  |
-| `volumeMounts` _[VolumeMount](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#volumemount-v1-core) array_ | volume mounts to append to the container |  |  |
+| `securityContext` _[SecurityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#securitycontext-v1-core)_ | security context for the container |  |  |
+| `volumeMounts` _[VolumeMount](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#volumemount-v1-core) array_ | volume mounts to append to the container |  |  |
 | `shell` _string_ | script to run in a default shell for the container |  |  |
 | `restartPolicy` _[ServiceRestartPolicy](#servicerestartpolicy)_ | Restart policy for the main container in the pod. One of OnFailure or Never. |  |  |
-| `readinessProbe` _[Probe](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#probe-v1-core)_ | Probe to check if the service has started correctly |  |  |
+| `readinessProbe` _[Probe](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#probe-v1-core)_ | Probe to check if the service has started correctly |  |  |
 
 
 ### IndependentStep
@@ -384,8 +384,8 @@ _Appears in:_
 | `description` _string_ | parameter description |  |  |
 | `type` _[ParameterType](#parametertype)_ | type of the parameter | string | Enum: [string integer number boolean] <br /> |
 | `enum` _string array_ | the list of allowed values, when limited |  |  |
-| `example` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util)_ | exemplary value |  |  |
-| `default` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util)_ | default value - if not provided, the parameter is required |  | XIntOrString: \{\} <br /> |
+| `example` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_ | exemplary value |  |  |
+| `default` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_ | default value - if not provided, the parameter is required |  | XIntOrString: \{\} <br /> |
 | `format` _string_ | predefined format for the string |  |  |
 | `pattern` _string_ | regular expression to match |  |  |
 | `minLength` _integer_ | minimum length for the string |  |  |
@@ -454,27 +454,27 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `serviceAccountName` _string_ | default service account name for the scheduled pod |  |  |
-| `imagePullSecrets` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#localobjectreference-v1-core) array_ | references to secrets with credentials for pulling the images from registry |  |  |
+| `imagePullSecrets` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#localobjectreference-v1-core) array_ | references to secrets with credentials for pulling the images from registry |  |  |
 | `nodeSelector` _object (keys:string, values:string)_ | node selector to define on which node the pod should land |  |  |
 | `labels` _object (keys:string, values:string)_ | labels added to the scheduled pod |  |  |
 | `annotations` _object (keys:string, values:string)_ | annotations added to the scheduled pod |  |  |
-| `volumes` _[Volume](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#volume-v1-core) array_ | volumes to include in the pod |  | Schemaless: \{\} <br /> |
+| `volumes` _[Volume](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#volume-v1-core) array_ | volumes to include in the pod |  | Schemaless: \{\} <br /> |
 | `activeDeadlineSeconds` _integer_ | duration in seconds the pod may be active on the node |  |  |
-| `dnsPolicy` _[DNSPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#dnspolicy-v1-core)_ | DNS parameters given in DNSConfig will be merged with the policy selected with DNSPolicy. |  |  |
+| `dnsPolicy` _[DNSPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#dnspolicy-v1-core)_ | DNS parameters given in DNSConfig will be merged with the policy selected with DNSPolicy. |  |  |
 | `nodeName` _string_ | NodeName is a request to schedule this pod onto a specific node. |  |  |
-| `securityContext` _[PodSecurityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core)_ | SecurityContext holds pod-level security attributes and common container settings. |  |  |
+| `securityContext` _[PodSecurityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#podsecuritycontext-v1-core)_ | SecurityContext holds pod-level security attributes and common container settings. |  |  |
 | `hostname` _string_ | Specifies the hostname of the Pod |  |  |
 | `subdomain` _string_ | If specified, the fully qualified Pod hostname will be "&lt;hostname&gt;.&lt;subdomain&gt;.&lt;pod namespace&gt;.svc.&lt;cluster domain&gt;". |  |  |
-| `affinity` _[Affinity](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#affinity-v1-core)_ | If specified, the pod's scheduling constraints |  | Schemaless: \{\} <br /> |
-| `tolerations` _[Toleration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#toleration-v1-core) array_ | If specified, the pod's tolerations. |  |  |
-| `hostAliases` _[HostAlias](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#hostalias-v1-core) array_ | HostAliases is an optional list of hosts and IPs that will be injected into the pod's hosts file if specified |  |  |
+| `affinity` _[Affinity](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#affinity-v1-core)_ | If specified, the pod's scheduling constraints |  | Schemaless: \{\} <br /> |
+| `tolerations` _[Toleration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#toleration-v1-core) array_ | If specified, the pod's tolerations. |  |  |
+| `hostAliases` _[HostAlias](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#hostalias-v1-core) array_ | HostAliases is an optional list of hosts and IPs that will be injected into the pod's hosts file if specified |  |  |
 | `priorityClassName` _string_ | If specified, indicates the pod's priority. |  |  |
 | `priority` _integer_ | The priority value. Various system components use this field to find the priority of the pod. |  |  |
-| `dnsConfig` _[PodDNSConfig](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#poddnsconfig-v1-core)_ | Specifies the DNS parameters of a pod. |  |  |
-| `preemptionPolicy` _[PreemptionPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#preemptionpolicy-v1-core)_ | PreemptionPolicy is the Policy for preempting pods with lower priority. |  |  |
-| `topologySpreadConstraints` _[TopologySpreadConstraint](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#topologyspreadconstraint-v1-core) array_ | TopologySpreadConstraints describes how a group of pods ought to spread across topology domains. |  | Schemaless: \{\} <br /> |
-| `schedulingGates` _[PodSchedulingGate](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podschedulinggate-v1-core) array_ | SchedulingGates is an opaque list of values that if specified will block scheduling the pod. |  |  |
-| `resourceClaims` _[PodResourceClaim](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podresourceclaim-v1-core) array_ | ResourceClaims defines which ResourceClaims must be allocated and reserved before the Pod is allowed to start. |  |  |
+| `dnsConfig` _[PodDNSConfig](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#poddnsconfig-v1-core)_ | Specifies the DNS parameters of a pod. |  |  |
+| `preemptionPolicy` _[PreemptionPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#preemptionpolicy-v1-core)_ | PreemptionPolicy is the Policy for preempting pods with lower priority. |  |  |
+| `topologySpreadConstraints` _[TopologySpreadConstraint](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#topologyspreadconstraint-v1-core) array_ | TopologySpreadConstraints describes how a group of pods ought to spread across topology domains. |  | Schemaless: \{\} <br /> |
+| `schedulingGates` _[PodSchedulingGate](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#podschedulinggate-v1-core) array_ | SchedulingGates is an opaque list of values that if specified will block scheduling the pod. |  |  |
+| `resourceClaims` _[PodResourceClaim](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#podresourceclaim-v1-core) array_ | ResourceClaims defines which ResourceClaims must be allocated and reserved before the Pod is allowed to start. |  |  |
 
 
 ### Resources
@@ -493,8 +493,8 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `limits` _object (keys:[ResourceName](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#resourcename-v1-core), values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util))_ | resource limits for the container |  |  |
-| `requests` _object (keys:[ResourceName](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#resourcename-v1-core), values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util))_ | resource requests for the container |  |  |
+| `limits` _object (keys:[ResourceName](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#resourcename-v1-core), values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util))_ | resource limits for the container |  |  |
+| `requests` _object (keys:[ResourceName](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#resourcename-v1-core), values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util))_ | resource requests for the container |  |  |
 
 
 ### RetryPolicy
@@ -550,8 +550,8 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `use` _[TemplateRef](#templateref) array_ | multiple templates to include in this step |  |  |
 | `matrix` _object (keys:string, values:[DynamicList](#dynamiclist))_ | matrix of parameters to spawn instances (static) |  |  |
-| `count` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util)_ | static number of sharded instances to spawn |  |  |
-| `maxCount` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util)_ | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |  |  |
+| `count` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_ | static number of sharded instances to spawn |  |  |
+| `maxCount` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_ | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |  |  |
 | `shards` _object (keys:string, values:[DynamicList](#dynamiclist))_ | parameters that should be distributed across sharded instances |  |  |
 | `description` _string_ | service description to display |  |  |
 | `logs` _string_ | should save logs for the service (false if not specified) |  |  |
@@ -561,17 +561,17 @@ _Appears in:_
 | `pod` _[PodConfig](#podconfig)_ | configuration for the scheduled pod |  |  |
 | `workingDir` _string_ | override default working directory in the image (empty string to default WORKDIR for the image) |  |  |
 | `image` _string_ | image to be used for the container |  |  |
-| `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#pullpolicy-v1-core)_ | pulling policy for the image |  |  |
-| `env` _[EnvVar](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#envvar-v1-core) array_ | environment variables to append to the container |  |  |
-| `envFrom` _[EnvFromSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#envfromsource-v1-core) array_ | external environment variables to append to the container |  |  |
+| `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#pullpolicy-v1-core)_ | pulling policy for the image |  |  |
+| `env` _[EnvVar](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvar-v1-core) array_ | environment variables to append to the container |  |  |
+| `envFrom` _[EnvFromSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envfromsource-v1-core) array_ | external environment variables to append to the container |  |  |
 | `command` _string_ | override default command in the image (empty string to default ENTRYPOINT of the image) |  |  |
 | `args` _string_ | override default command in the image (empty string to default CMD of the image) |  |  |
 | `resources` _[Resources](#resources)_ | expected resources for the container |  |  |
-| `securityContext` _[SecurityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#securitycontext-v1-core)_ | security context for the container |  |  |
-| `volumeMounts` _[VolumeMount](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#volumemount-v1-core) array_ | volume mounts to append to the container |  |  |
+| `securityContext` _[SecurityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#securitycontext-v1-core)_ | security context for the container |  |  |
+| `volumeMounts` _[VolumeMount](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#volumemount-v1-core) array_ | volume mounts to append to the container |  |  |
 | `shell` _string_ | script to run in a default shell for the container |  |  |
 | `restartPolicy` _[ServiceRestartPolicy](#servicerestartpolicy)_ | Restart policy for the main container in the pod. One of OnFailure or Never. |  |  |
-| `readinessProbe` _[Probe](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#probe-v1-core)_ | Probe to check if the service has started correctly |  |  |
+| `readinessProbe` _[Probe](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#probe-v1-core)_ | Probe to check if the service has started correctly |  |  |
 
 
 ### Step
@@ -709,8 +709,8 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `matrix` _object (keys:string, values:[DynamicList](#dynamiclist))_ | matrix of parameters to spawn instances (static) |  |  |
-| `count` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util)_ | static number of sharded instances to spawn |  |  |
-| `maxCount` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util)_ | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |  |  |
+| `count` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_ | static number of sharded instances to spawn |  |  |
+| `maxCount` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_ | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |  |  |
 | `shards` _object (keys:string, values:[DynamicList](#dynamiclist))_ | parameters that should be distributed across sharded instances |  |  |
 
 
@@ -730,8 +730,8 @@ _Appears in:_
 | `name` _string_ | test name to run |  |  |
 | `description` _string_ | test execution description to display |  |  |
 | `matrix` _object (keys:string, values:[DynamicList](#dynamiclist))_ | matrix of parameters to spawn instances (static) |  |  |
-| `count` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util)_ | static number of sharded instances to spawn |  |  |
-| `maxCount` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util)_ | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |  |  |
+| `count` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_ | static number of sharded instances to spawn |  |  |
+| `maxCount` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_ | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |  |  |
 | `shards` _object (keys:string, values:[DynamicList](#dynamiclist))_ | parameters that should be distributed across sharded instances |  |  |
 | `tarball` _object (keys:string, values:[TarballRequest](#tarballrequest))_ | pack some data from the original file system to serve them down |  |  |
 | `executionRequest` _[TestExecutionRequest](#testexecutionrequest)_ | pass the execution request overrides |  |  |
@@ -753,12 +753,12 @@ _Appears in:_
 | `name` _string_ | workflow name to run |  |  |
 | `description` _string_ | test workflow execution description to display |  |  |
 | `matrix` _object (keys:string, values:[DynamicList](#dynamiclist))_ | matrix of parameters to spawn instances (static) |  |  |
-| `count` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util)_ | static number of sharded instances to spawn |  |  |
-| `maxCount` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util)_ | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |  |  |
+| `count` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_ | static number of sharded instances to spawn |  |  |
+| `maxCount` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_ | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |  |  |
 | `shards` _object (keys:string, values:[DynamicList](#dynamiclist))_ | parameters that should be distributed across sharded instances |  |  |
 | `executionName` _string_ | unique execution name to use |  |  |
 | `tarball` _object (keys:string, values:[TarballRequest](#tarballrequest))_ | pack some data from the original file system to serve them down |  |  |
-| `config` _object (keys:string, values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util))_ | configuration to pass for the workflow |  |  |
+| `config` _object (keys:string, values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util))_ | configuration to pass for the workflow |  |  |
 
 
 ### StepMeta
@@ -855,14 +855,14 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `workingDir` _string_ | override default working directory in the image (empty string to default WORKDIR for the image) |  |  |
 | `image` _string_ | image to be used for the container |  |  |
-| `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#pullpolicy-v1-core)_ | pulling policy for the image |  |  |
-| `env` _[EnvVar](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#envvar-v1-core) array_ | environment variables to append to the container |  |  |
-| `envFrom` _[EnvFromSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#envfromsource-v1-core) array_ | external environment variables to append to the container |  |  |
+| `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#pullpolicy-v1-core)_ | pulling policy for the image |  |  |
+| `env` _[EnvVar](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvar-v1-core) array_ | environment variables to append to the container |  |  |
+| `envFrom` _[EnvFromSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envfromsource-v1-core) array_ | external environment variables to append to the container |  |  |
 | `command` _string_ | override default command in the image (empty string to default ENTRYPOINT of the image) |  |  |
 | `args` _string_ | override default command in the image (empty string to default CMD of the image) |  |  |
 | `resources` _[Resources](#resources)_ | expected resources for the container |  |  |
-| `securityContext` _[SecurityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#securitycontext-v1-core)_ | security context for the container |  |  |
-| `volumeMounts` _[VolumeMount](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#volumemount-v1-core) array_ | volume mounts to append to the container |  |  |
+| `securityContext` _[SecurityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#securitycontext-v1-core)_ | security context for the container |  |  |
+| `volumeMounts` _[VolumeMount](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#volumemount-v1-core) array_ | volume mounts to append to the container |  |  |
 | `shell` _string_ | script to run in a default shell for the container |  |  |
 
 
@@ -917,7 +917,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `name` _string_ | name of the template to include |  |  |
-| `config` _object (keys:string, values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util))_ | trait configuration values if needed |  |  |
+| `config` _object (keys:string, values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util))_ | trait configuration values if needed |  |  |
 
 
 ### TestExecutionRequest
@@ -943,7 +943,7 @@ _Appears in:_
 | `argsMode` _[ArgsModeType](#argsmodetype)_ | usage mode for arguments |  |  |
 | `command` _string array_ | executor binary command |  |  |
 | `image` _string_ | container executor image |  |  |
-| `imagePullSecrets` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#localobjectreference-v1-core) array_ | container executor image pull secrets |  |  |
+| `imagePullSecrets` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#localobjectreference-v1-core) array_ | container executor image pull secrets |  |  |
 | `sync` _boolean_ | whether to start execution sync or async |  |  |
 | `httpProxy` _string_ | http proxy for executor containers |  |  |
 | `httpsProxy` _string_ | https proxy for executor containers |  |  |
@@ -978,7 +978,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `testworkflows.testkube.io/v1` | | |
 | `kind` _string_ | `TestWorkflow` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `description` _string_ | TestWorkflow readable description |  |  |
 | `spec` _[TestWorkflowSpec](#testworkflowspec)_ | TestWorkflow specification |  |  |
 
@@ -998,7 +998,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `testworkflows.testkube.io/v1` | | |
 | `kind` _string_ | `TestWorkflowExecution` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[TestWorkflowExecutionSpec](#testworkflowexecutionspec)_ | TestWorkflowExecution specification |  |  |
 
 
@@ -1019,8 +1019,8 @@ _Appears in:_
 | `name` _string_ | execution name |  |  |
 | `namespace` _string_ | execution namespace |  |  |
 | `number` _integer_ | sequence number for the execution |  |  |
-| `scheduledAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | when the execution has been scheduled to run |  |  |
-| `statusAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | when the execution result's status has changed last time (queued, passed, failed) |  |  |
+| `scheduledAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the execution has been scheduled to run |  |  |
+| `statusAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the execution result's status has changed last time (queued, passed, failed) |  |  |
 | `signature` _[TestWorkflowSignature](#testworkflowsignature) array_ | structured tree of steps |  |  |
 | `result` _[TestWorkflowResult](#testworkflowresult)_ |  |  |  |
 | `output` _[TestWorkflowOutput](#testworkflowoutput) array_ | additional information from the steps, like referenced executed tests or artifacts |  |  |
@@ -1045,7 +1045,7 @@ TestWorkflowExecutionList contains a list of TestWorkflowExecutiom
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `testworkflows.testkube.io/v1` | | |
 | `kind` _string_ | `TestWorkflowExecutionList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `items` _[TestWorkflowExecution](#testworkflowexecution) array_ |  |  |  |
 
 
@@ -1063,7 +1063,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `name` _string_ | custom execution name |  |  |
-| `config` _object (keys:string, values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#intorstring-intstr-util))_ |  |  |  |
+| `config` _object (keys:string, values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util))_ |  |  |  |
 | `testWorkflowExecutionName` _string_ | test workflow execution name started the test workflow execution |  |  |
 | `disableWebhooks` _boolean_ | whether webhooks should be disabled for this execution |  |  |
 
@@ -1081,7 +1081,7 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `testWorkflow` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#localobjectreference-v1-core)_ |  |  |  |
+| `testWorkflow` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#localobjectreference-v1-core)_ |  |  |  |
 | `executionRequest` _[TestWorkflowExecutionRequest](#testworkflowexecutionrequest)_ |  |  |  |
 
 
@@ -1103,8 +1103,8 @@ _Appears in:_
 | `id` _string_ | unique execution identifier |  |  |
 | `name` _string_ | execution name |  |  |
 | `number` _integer_ | sequence number for the execution |  |  |
-| `scheduledAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | when the execution has been scheduled to run |  |  |
-| `statusAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | when the execution result's status has changed last time (queued, passed, failed) |  |  |
+| `scheduledAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the execution has been scheduled to run |  |  |
+| `statusAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the execution result's status has changed last time (queued, passed, failed) |  |  |
 | `result` _[TestWorkflowResultSummary](#testworkflowresultsummary)_ |  |  |  |
 | `workflow` _[TestWorkflowSummary](#testworkflowsummary)_ |  |  |  |
 
@@ -1123,7 +1123,7 @@ TestWorkflowList contains a list of TestWorkflow
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `testworkflows.testkube.io/v1` | | |
 | `kind` _string_ | `TestWorkflowList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `items` _[TestWorkflow](#testworkflow) array_ |  |  |  |
 
 
@@ -1159,8 +1159,8 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `ref` _string_ | step at which it was paused |  |  |
-| `pausedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | when the pause has started |  |  |
-| `resumedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | when the pause has ended |  |  |
+| `pausedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the pause has started |  |  |
+| `resumedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the pause has ended |  |  |
 
 
 ### TestWorkflowReport
@@ -1217,9 +1217,9 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `predictedStatus` _[TestWorkflowStatus](#testworkflowstatus)_ |  |  | Enum: [queued running paused passed failed aborted] <br /> |
-| `queuedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | when the pod was created |  |  |
-| `startedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | when the pod has been successfully assigned |  |  |
-| `finishedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | when the pod has been completed |  |  |
+| `queuedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the pod was created |  |  |
+| `startedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the pod has been successfully assigned |  |  |
+| `finishedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the pod has been completed |  |  |
 | `duration` _string_ | Go-formatted (human-readable) duration |  |  |
 | `totalDuration` _string_ | Go-formatted (human-readable) total duration (incl. pause) |  |  |
 | `durationMs` _integer_ | Duration in milliseconds |  |  |
@@ -1244,9 +1244,9 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `predictedStatus` _[TestWorkflowStatus](#testworkflowstatus)_ |  |  | Enum: [queued running paused passed failed aborted] <br /> |
-| `queuedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | when the pod was created |  |  |
-| `startedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | when the pod has been successfully assigned |  |  |
-| `finishedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | when the pod has been completed |  |  |
+| `queuedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the pod was created |  |  |
+| `startedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the pod has been successfully assigned |  |  |
+| `finishedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the pod has been completed |  |  |
 | `duration` _string_ | Go-formatted (human-readable) duration |  |  |
 | `totalDuration` _string_ | Go-formatted (human-readable) duration (incl. pause) |  |  |
 | `durationMs` _integer_ | Duration in milliseconds |  |  |
@@ -1368,9 +1368,9 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `errorMessage` _string_ |  |  |  |
 | `exitCode` _integer_ |  |  |  |
-| `queuedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | when the container was created |  |  |
-| `startedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | when the container was started |  |  |
-| `finishedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | when the container was finished |  |  |
+| `queuedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the container was created |  |  |
+| `startedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the container was started |  |  |
+| `finishedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the container was finished |  |  |
 
 
 
@@ -1428,7 +1428,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `testworkflows.testkube.io/v1` | | |
 | `kind` _string_ | `TestWorkflowTemplate` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `description` _string_ | TestWorkflowTemplate readable description |  |  |
 | `spec` _[TestWorkflowTemplateSpec](#testworkflowtemplatespec)_ | TestWorkflowTemplate specification |  |  |
 
@@ -1447,7 +1447,7 @@ TestWorkflowTemplateList contains a list of TestWorkflowTemplate
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `testworkflows.testkube.io/v1` | | |
 | `kind` _string_ | `TestWorkflowTemplateList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `items` _[TestWorkflowTemplate](#testworkflowtemplate) array_ |  |  |  |
 
 

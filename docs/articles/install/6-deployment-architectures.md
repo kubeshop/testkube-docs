@@ -40,11 +40,11 @@ To deploy this you will first want to [deploy a control plane without an agent][
 
 ## Testkube Standalone Agent
 
-Testkube standalone agent works without a control plane.
-The standalone agent includes the full test orchestration engine: you can apply Tests, TestWorkflows, etc and execute them with your CLI.
-Overal there are few reasons to run the agent without the control plane.
+The Testkube standalone agent includes the core Testkube engine and can be deployed without a 
+control plane or dashboard, all management and test execution is done through the [Testkube CLI](/articles/cli). 
 
-To learn more you can visit [deploying the standalone agent][deploy-standalone].
+- Learn more about how the [Standalone Agent compares](/articles/open-source-or-pro)
+- Learn more about how to [deploy the standalong agent][deploy-standalone].
 
 ![Deployment with standalone agent](../../img/architecture-standalone.jpeg)
 

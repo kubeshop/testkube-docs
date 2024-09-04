@@ -13,7 +13,7 @@ Test Workflows have `parallel` steps, that allow you to distribute your test eve
 
 ## Syntax
 
-To declare the parallel step, you need to specify the step with `parallel` clause.
+To declare the parallel step, you need to specify the step with `parallel` clause - see [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#stepparallel).
 
 ### Basic configuration
 
