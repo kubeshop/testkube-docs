@@ -166,6 +166,17 @@ Testkube's schedule data format is the same that is used to define Kubernetes Cr
 visit [Wikipedia Cron format](https://en.wikipedia.org/wiki/Cron) for details.
 :::
 
+## tags
+`spec.execution.tags` allows to add tags for Test workflow executions:
+
+```yaml
+spec:
+  execution:
+    tags:
+      name1: value1
+      name2: value2
+```
+
 ## `steps`
 
 Steps are the main building blocks in Test Workflows. They describe actions that should be executed in 
