@@ -10,7 +10,7 @@ The Test Workflows spec allows you to provide instructions in setup, steps and a
 
 ### Syntax
 
-Both setup, steps and after have the same syntax - they are a list of steps. The step is an object that has execution instructions.
+Both setup, steps and after have the same syntax - they are a list of steps. The `step` is an object that has execution instructions.
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -27,7 +27,7 @@ spec:
 
 ### Running the Image
 
-Use a run instruction that has similar syntax to the native Kubernetes’ container. A command exiting with code > 0 is considered a failure.
+Use a `run` instruction that has similar syntax to the native Kubernetes’ container. A command exiting with code > 0 is considered a failure.
 
 ![Running the Image](../img/running-image.png)
 
@@ -35,8 +35,8 @@ Use a run instruction that has similar syntax to the native Kubernetes’ contai
 
 ### Running Shell Commands
 
-For simplicity, you can also run shell commands with the **run** instruction and the **shell** property.
-The script is automatically prepended with **set -e**, so, by default, it will fail the step on any error.
+For simplicity, you can also run shell commands with the **`run`** instruction and the **`shell`** property.
+The script is automatically prepended with **`set -e`**, so, by default, it will fail the step on any error.
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -53,17 +53,21 @@ spec:
 
 ### Alternative Syntax
 
-Alternatively, you can use **shell** directly as an instruction and a default image will be used.
+Alternatively, you can use **`shell`** directly as an instruction and a default image will be used.
 
 ![Using Shell](../img/using-shell.png)
 
 ## Fetching the Git Repository
 
+:::info
+Read more about content from Git repositories at [Git Repository](/articles/test-workflows-content#git-repository).
+:::
+
 ### Fetching Data from Git
 
-To fetch data from the Git, use the git property of content. You may provide the address, revision (commit, branch or tag), along with i.e. token.
+To fetch data from the Git, use the `git` property of `content`. You may provide the address, revision (commit, branch or tag), along with i.e. token.
 
-To avoid fetching all files in mono-repository, you can use paths for sparse checkout.
+To avoid fetching all files in mono-repository, you can use `paths` for sparse checkout.
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -84,7 +88,7 @@ spec:
 
 ### Mounting
 
-By default the repository is mounted to /data/repo directory. You can control it with mountPath property though.
+By default, the repository is mounted to /data/repo directory. You can control it with `mountPath` property though.
 
 ![Mounting](../img/mounting.png)
 
@@ -92,7 +96,7 @@ By default the repository is mounted to /data/repo directory. You can control it
 
 ### Using a Token from a Secret
 
-You may provide the Git token and username either as plain-text, or via the tokenFrom and usernameFrom clauses that are the same as native Kubernetes env.\*.valueFrom.
+You may provide the Git `token` and `username` either as plain-text, or via the `tokenFrom` and `usernameFrom` clauses that are the same as native Kubernetes env.\*.valueFrom.
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -116,7 +120,7 @@ spec:
 
 ### Running Multiple Steps
 
-To run multiple steps, simply add another step with next instructions.
+To run multiple steps, add another step with the next instructions.
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -150,7 +154,7 @@ spec:
 
 ### Setting Up Defaults
 
-To configure default container settings, you may use the container property.
+To configure default container settings, you may use the `container` property.
 It has a similar syntax to the Kubernetes’ native [Container](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#container-v1-core) spec.
 
 ```yaml
@@ -183,7 +187,7 @@ spec:
 
 ### Notable Nuances
 
-Thanks to the container and run instructions being similar to native Kubernetes’ container specs, you can easily set the required resources for running.
+Thanks to the `container` and `run` instructions being similar to native Kubernetes’ container specs, you can easily set the required resources for running.
 
 ![Default Settings](../img/default-settings.png)
 
@@ -226,7 +230,7 @@ Defaults configured in the step will work similarly to top-level defaults but wi
 
 ### Optional Steps
 
-You can add `optional: true` for the step, so that step will not effect the outcome of the orchestration.
+You can add `optional: true` for a step, so that it will not affect the outcome of the orchestration.
 
 ```yaml {8}
 apiVersion: testworkflows.testkube.io/v1
@@ -255,9 +259,9 @@ spec:
 
 ### Conditional Steps
 
-By default, the next step will run only when the previous steps have succeeded. This can be controlled with the **condition** property.
+By default, the next step will run only when the previous steps have succeeded. This can be controlled with the **`condition`** property.
 
-As an example, **condition: always** will cause the step to always be executed, even if the previous step has failed.
+As an example, **`condition: always`** will cause the step to always be executed, even if the previous step has failed.
 
 ### Retry Mechanism
 
@@ -269,9 +273,11 @@ It’s possible to automatically retry the step on a failure (or any other condi
 
 ### Provide Static Files
 
-A part of the Git repository and regular commands, the Test Workflow can use some static files directly from the spec.
+Apart from the Git repository and regular commands, a Test Workflow can use static files directly from the 
+spec - [Read More](/articles/test-workflows-content#static-files).
 
-These files are mounted from a ConfigMap automatically (unless, instead of content, there is **contentFrom** used with a similar schema as Kubernetes’ **env.\*.valueFrom**).
+These files are mounted from a ConfigMap automatically (unless, instead of content, there is **`contentFrom`** used 
+with a similar schema as Kubernetes’ **`env.\*.valueFrom`**).
 
 _When the path is relative, it will be mounted in the container’s working directory._
 
@@ -305,7 +311,8 @@ spec:
 
 ### Saving the Artifacts
 
-Saving the artifacts is as simple as defining the artifacts instruction and providing the file masks to fetch. There is no need to create additional volumes, the artifacts step has access to all the files.
+Saving the artifacts is as simple as defining the `artifacts` instruction and providing the file masks to fetch.
+There is no need to create additional volumes, the `artifacts` step has access to all the files - [Read More](/articles/test-workflows-artifacts).
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -342,9 +349,9 @@ spec:
 
 ### Run Dependent Test Workflows or Tests
 
-To run other Test Workflows or Tests, you can use the **execute** instruction.
+To run other Test Workflows or Tests, you can use the **`execute`** instruction.
 
-You can define the number of concurrent executions with **parallelism** as well.
+You can define the number of concurrent executions with **`parallelism`** as well.
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -364,12 +371,17 @@ spec:
 
 ![Dependent Tests](../img/dependent-tests.png)
 
+:::tip
+Read more about Workflow orchestration at [Test Suites](/articles/test-workflows-test-suites).
+:::
+
 ## Job/Pod Configuration
 
 ### Configuring the Job
 
-By using the **job** property, you can configure labels, annotations and execution namespace of the Job.
-In case of supplying namespace you will need to setup execution namespaces in your helm chart values. It's possible to generate all required RBAC or just manually supply them.
+By using the **`job`** property, you can configure labels, annotations and execution namespace of the Job.
+In case of supplying a namespace, you will need to define execution namespaces in your Helm chart values - [Read More](/articles/install/advanced-install#namespaces-for-test-execution). 
+It's possible to generate all required RBAC or just manually supply them.
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -387,7 +399,7 @@ spec:
 
 ### Configuring the Pod
 
-By using the **pod** property, you can configure labels, annotations, serviceAccountName, imagePullSecrets, volumes, or other properties of a [PodSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#podspec-v1-core).
+By using the **`pod`** property, you can configure labels, annotations, serviceAccountName, imagePullSecrets, volumes, or other properties of a [PodSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#podspec-v1-core).
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -405,6 +417,10 @@ spec:
     imagePullSecrets:
       - name: "dockerhub-secret"
 ```
+
+:::tip
+Read more about Job and Pod configurations at [Pod & Job](/articles/test-workflows-job-and-pod)
+:::
 
 ## Additional Test Workflow Examples
 Additional Test Workflow examples can be found under the [Examples and Guides](/articles/examples/overview) 

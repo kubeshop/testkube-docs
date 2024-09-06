@@ -8,14 +8,20 @@ Testkube software is distributed under two primary licenses:
 - **MIT License (MIT)**: A permissive open-source license that allows for broad freedom in usage and modification.
 - **Testkube Community License (TCL)**: A custom license designed to protect the Testkube community and ecosystem, covering specific advanced features.
 
-## Testkube Agent
+## The Testkube Agent
 
-The Testkube Agent is free to use in standalone mode. Most Agent features are licensed under the MIT license, 
-but some agent features are subject to the TCL.
+The Testkube Agent is open-source and free to use in standalone mode. Free agent features are licensed under the 
+MIT license, but some agent features are subject to the TCL. 
+
+:::tip
+See [The Testkube Open Source Agent](/articles/open-source-or-pro) for
+more information on the differences between Open Source and Commercial features.
+:::
 
 ## Testkube Pro
 
-Testkube Pro features require a paid license from Testkube (see [pricing](https://testkube.io/pricing)) and are licensed under the Testkube Community License.
+Testkube Pro-specific functionality requires a paid license from Testkube (see [pricing](https://testkube.io/pricing)) and is licensed 
+under the TCL.
 
 :::note
 You can find any feature's license by checking the code's file header in the Testkube repository.
