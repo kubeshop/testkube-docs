@@ -9,7 +9,6 @@ kind: TestWorkflow
 apiVersion: testworkflows.testkube.io/v1
 metadata:
   name: execution-tags-sample
-  namespace: testkube-agent
   labels:
     docs: example
 spec:
