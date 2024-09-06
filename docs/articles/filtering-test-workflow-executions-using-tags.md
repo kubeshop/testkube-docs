@@ -1,4 +1,4 @@
-# Filtering Test Workflow Executions using Tags
+# Filtering Test Workflow Executions Using Tags
 
 Test Workflows allow you to add execution tags, which can be used for filtering and organizing your test executions. These tags are especially useful when you want to categorize your tests based on specific attributes. Here are two common examples:
 
