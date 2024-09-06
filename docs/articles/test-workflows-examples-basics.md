@@ -408,7 +408,7 @@ spec:
 
 ## Filtering Test Workflow Executions using Tags
 
-This example demonstrates how to use execution tags in your test workflows to easily filter and view executions.
+This example shows how to use execution tags in your test workflows to easily filter and view executions.
 
 ### Example Workflow
 
@@ -446,7 +446,6 @@ spec:
 
    - `service`: Set to the value of `serviceUnderTest`
    - `url`: Set to the value of `targetUrl`
-
 
 3. Each execution of this workflow will be tagged with these values.
 4. Importantly, you can change the config values on each run, allowing you to use the same workflow definition for testing different services and URLs.
