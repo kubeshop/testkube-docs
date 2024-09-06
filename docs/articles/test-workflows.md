@@ -177,6 +177,8 @@ spec:
       name2: value2
 ```
 
+See an example of how to use tags [here](/articles/filtering-test-workflow-executions-using-tags).
+
 ## `steps`
 
 Steps are the main building blocks in Test Workflows. They describe actions that should be executed in 
