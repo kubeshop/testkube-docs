@@ -177,7 +177,7 @@ spec:
       name2: value2
 ```
 
-See an example of how to use tags [here](/articles/filtering-test-workflow-executions-using-tags)
+See an example of how to use tags [here](/articles/filtering-test-workflow-executions-using-tags).
 
 ## `steps`
 
