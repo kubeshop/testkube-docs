@@ -53,7 +53,7 @@ const sidebars = {
             "articles/install/advanced-install",
           ],
         },
-        {type: "doc", label: "Upgrading", id: "articles/upgrade"},
+        { type: "doc", label: "Upgrading", id: "articles/upgrade" },
         "articles/install/deployment-architectures",
         "articles/install/faq",
         {
@@ -102,8 +102,8 @@ const sidebars = {
             {
               type: "link",
               label: "Testkube with Kind",
-              href: "https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker"
-            }
+              href: "https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker",
+            },
           ],
         },
       ],
@@ -167,7 +167,7 @@ const sidebars = {
                   label: "Workflow Templates",
                   id: "articles/testkube-dashboard-workflows-templates",
                 },
-              ]
+              ],
             },
             {
               type: "doc",
@@ -185,7 +185,7 @@ const sidebars = {
           type: "category",
           label: "Test Workflows",
           items: [
-            {type: "doc", label: "Overview", id: "articles/test-workflows"},
+            { type: "doc", label: "Overview", id: "articles/test-workflows" },
             {
               type: "doc",
               label: "Basic Examples",
@@ -275,7 +275,12 @@ const sidebars = {
                   label: "Remote Workflow Execution",
                   id: "articles/remote-workflow-execution",
                 },
-              ]
+                {
+                  type: "doc",
+                  label: "Filtering Executions using Tags",
+                  id: "articles/filtering-test-workflow-executions-using-tags",
+                },
+              ],
             },
           ],
         },
@@ -410,7 +415,7 @@ const sidebars = {
               label: "Docker CLI",
               id: "articles/testkube-cli-docker",
             },
-            {type: "doc", label: "OAuth for CLI", id: "articles/oauth-cli"},
+            { type: "doc", label: "OAuth for CLI", id: "articles/oauth-cli" },
           ],
         },
       ],
@@ -440,18 +445,18 @@ const sidebars = {
             {
               type: "link",
               label: "Testkube K6 Introduction",
-              href: "https://testkube.io/blog/load-testing-in-kubernetes-with-k6-and-testkube"
+              href: "https://testkube.io/blog/load-testing-in-kubernetes-with-k6-and-testkube",
             },
             {
               type: "link",
               label: "Testkube vs K6-operator",
-              href: "https://testkube.io/learn/comparing-the-k6-operator-vs-testkube-for-load-testing"
+              href: "https://testkube.io/learn/comparing-the-k6-operator-vs-testkube-for-load-testing",
             },
             {
               type: "link",
               label: "Generating Massive Load",
-              href: "https://testkube.io/learn/a-guide-to-scalable-and-heavy-load-testing-with-k6-and-testkube"
-            }
+              href: "https://testkube.io/learn/a-guide-to-scalable-and-heavy-load-testing-with-k6-and-testkube",
+            },
           ],
         },
         {
@@ -471,8 +476,8 @@ const sidebars = {
             {
               type: "link",
               label: "Scaling Cypress Tests",
-              href: "https://testkube.io/learn/scaling-cypress-tests-parallelise-your-end-to-end-tests-with-testkube"
-            }
+              href: "https://testkube.io/learn/scaling-cypress-tests-parallelise-your-end-to-end-tests-with-testkube",
+            },
           ],
         },
         {
@@ -503,9 +508,9 @@ const sidebars = {
             {
               type: "link",
               label: "Functional Testing with Selenium",
-              href: "https://testkube.io/learn/functional-testing-with-selenium-in-testkube"
-            }
-          ]
+              href: "https://testkube.io/learn/functional-testing-with-selenium-in-testkube",
+            },
+          ],
         },
         {
           type: "category",
@@ -519,9 +524,9 @@ const sidebars = {
             {
               type: "link",
               label: "API Test Automation with Postman",
-              href: "https://testkube.io/learn/functional-testing-with-selenium-in-testkube"
-            }
-          ]
+              href: "https://testkube.io/learn/functional-testing-with-selenium-in-testkube",
+            },
+          ],
         },
         {
           type: "doc",
@@ -555,19 +560,19 @@ const sidebars = {
             {
               type: "link",
               label: "Pytest and Testkube",
-              href: "https://testkube.io/learn/testing-kubernetes-applications-with-pytest-and-testkube-a-complete-guide"
+              href: "https://testkube.io/learn/testing-kubernetes-applications-with-pytest-and-testkube-a-complete-guide",
             },
-          ]
+          ],
         },
         {
           type: "link",
           label: "REST Assured",
-          href: "https://testkube.io/learn/api-testing-using-restassured-and-testkube"
+          href: "https://testkube.io/learn/api-testing-using-restassured-and-testkube",
         },
         {
           type: "link",
           label: "Cucumber",
-          href: "https://testkube.io/learn/simplify-bdd-testing-for-distributed-java-applications-with-testkube"
+          href: "https://testkube.io/learn/simplify-bdd-testing-for-distributed-java-applications-with-testkube",
         },
         {
           type: "category",
@@ -602,8 +607,8 @@ const sidebars = {
             {
               type: "link",
               label: "Automated Acceptance Testing",
-              href: "https://testkube.io/learn/automated-acceptance-testing-with-robot-framework-and-testkube"
-            }
+              href: "https://testkube.io/learn/automated-acceptance-testing-with-robot-framework-and-testkube",
+            },
           ],
         },
         {
@@ -637,8 +642,8 @@ const sidebars = {
         id: "articles/integrations",
       },
       items: [
-        {type: "doc", label: "GitHub", id: "articles/github-actions"},
-        {type: "doc", label: "GitLab", id: "articles/gitlab"},
+        { type: "doc", label: "GitHub", id: "articles/github-actions" },
+        { type: "doc", label: "GitLab", id: "articles/gitlab" },
         {
           type: "doc",
           label: "Jenkins Pipelines",
@@ -649,24 +654,28 @@ const sidebars = {
           label: "Jenkins UI",
           id: "articles/jenkins-ui",
         },
-        {type: "doc", label: "Azure DevOps", id: "articles/azure"},
+        { type: "doc", label: "Azure DevOps", id: "articles/azure" },
         {
           type: "doc",
           label: "CircleCI",
           id: "articles/circleci",
         },
-        {type: "doc", label: "ArgoCD", id: "articles/argocd-integration"},
-        {type: "doc", label: "Flux", id: "articles/flux-integration"},
-        {type: "doc", label: "CDEvents", id: "articles/cd-events"},
-        {type: "doc", label: "Tekton", id: "articles/tekton"},
-        {type: "doc", label: "Slack Integration", id: "articles/slack-integration"},
-        {type: "doc", label: "Prometheus", id: "articles/metrics"},
+        { type: "doc", label: "ArgoCD", id: "articles/argocd-integration" },
+        { type: "doc", label: "Flux", id: "articles/flux-integration" },
+        { type: "doc", label: "CDEvents", id: "articles/cd-events" },
+        { type: "doc", label: "Tekton", id: "articles/tekton" },
+        {
+          type: "doc",
+          label: "Slack Integration",
+          id: "articles/slack-integration",
+        },
+        { type: "doc", label: "Prometheus", id: "articles/metrics" },
         {
           type: "doc",
           label: "Kubernetes Events",
           id: "articles/k8s-events",
         },
-        {type: "doc", label: "Webhooks", id: "articles/webhooks"},
+        { type: "doc", label: "Webhooks", id: "articles/webhooks" },
         {
           type: "link",
           label: "PagerDuty",
@@ -681,7 +690,7 @@ const sidebars = {
           description:
             "Integrating Testkube and Zapier for Instant Email Alerts",
         },
-        {type: "doc", label: "Grafana", id: "articles/grafana"},
+        { type: "doc", label: "Grafana", id: "articles/grafana" },
       ],
     },
     {
@@ -799,9 +808,7 @@ const sidebars = {
             type: "doc",
             id: "articles/contributing",
           },
-          items: [
-            "articles/development",
-          ],
+          items: ["articles/development"],
         },
       ],
     },
@@ -902,7 +909,7 @@ const sidebars = {
             },
           ],
         },
-        {type: "doc", label: "Deprecations", id: "articles/deprecations"},
+        { type: "doc", label: "Deprecations", id: "articles/deprecations" },
         {
           type: "doc",
           label: "Generating Test CRDs",
@@ -920,9 +927,13 @@ const sidebars = {
           id: "articles/testkube-dashboard-general-settings",
         },
 
-        {type: "doc", label: "Templates", id: "articles/templates"},
+        { type: "doc", label: "Templates", id: "articles/templates" },
         "articles/legacy-architecture",
-        {type: "doc", label: "Integrating with Slack Using Helm", id: "articles/slack-integration-helm"},
+        {
+          type: "doc",
+          label: "Integrating with Slack Using Helm",
+          id: "articles/slack-integration-helm",
+        },
       ],
     },
   ],
