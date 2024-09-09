@@ -20,6 +20,7 @@ the execution is very flexible. You can:
 * Process the results (i.e. by notifying about the status)
 * Run other tests based on the previous results
 * Trigger Workflows in other environments
+* Nest workflows - workflow triggering workflow(s), triggering other workflow(s)
 
 :::warning
 
@@ -136,6 +137,52 @@ spec:
 
 </TabItem>
 </Tabs>
+
+## Nesting workflows
+Workflows can be nested - workflow can execute workflow(s) executing other workflow(s). [**Parallelism**](#controlling-the-concurrency-level) can then be used to control the execution flow.
+
+Example:
+
+Tool-specific workflow (in this case k6 - executing multiple workflows for different cases)
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: k6-workflow-suite
+spec:
+  steps:
+  - execute:
+      parallelism: 2
+      workflows:
+      - name: k6-workflow-smoke
+      - name: k6-workflow-smoke-template
+      - name: k6-workflow-smoke-template-without-checkout-step
+      - name: k6-workflow-smoke-artifacts
+      - name: distributed-k6-workflow-smoke
+      - name: distributed-k6-workflow-smoke-artifacts
+```
+
+That can be part executed from another workflow
+```yaml
+kind: TestWorkflow
+apiVersion: testworkflows.testkube.io/v1
+metadata:
+  name: tw-suite-full
+spec:
+  steps:
+  - execute:
+      parallelism: 2
+      workflows:
+      - name: artillery-workflow-suite
+      - name: cypress-workflow-suite
+      - name: gradle-workflow-suite
+      - name: jmeter-workflow-suite
+      - name: k6-workflow-suite # workflow from the example
+      - name: maven-workflow-suite
+      - name: playwright-workflow-suite
+      - name: postman-workflow-suite
+      - name: soapui-workflow-suite
+```
 
 ## Passing input from files
 
