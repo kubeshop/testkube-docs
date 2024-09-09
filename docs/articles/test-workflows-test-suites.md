@@ -162,7 +162,7 @@ spec:
       - name: distributed-k6-workflow-smoke-artifacts
 ```
 
-That can be part executed from another workflow
+That can be executed from another workflow
 ```yaml
 kind: TestWorkflow
 apiVersion: testworkflows.testkube.io/v1
