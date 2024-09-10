@@ -5,16 +5,26 @@
 Testkube automatically collects logs from containers running tests within a Workflow and makes these available in
 the Dashboard when opening an execution and selecting the "Log Output" tab (which is the default):
 
-![Workflow Log output](../img/workflows-log-output-2.1.png)
+![Workflow Log output](../img/workflows-log-output-multi-step-092024.png)
 
 Logs are collected individually for each executed container within a workflow and can thus be inspected separately:
 
-![Workflow Multi-log output](../img/workflows-multilog-output-2.1.png)
+![Workflow Multi-log output](../img/workflows-multilog-output-092024.png)
 
 :::tip
 You can also use Workflows to collect logs from services/components under test to help you get
 a more complete picture of why a test failed - [Read More](/articles/tw-capture-logs)
 :::
+
+## Compare Log Execution Steps
+
+Select from the **Compare to another execution step** drop down to compare two steps from the selected workflow.
+
+![Compare Steps](../img/compare-steps-092024.png)
+
+The next screen will show the differences between the two steps:
+
+![Comparison Screen](../img/comparison-screen-092024.png)
 
 ## Artifact Collection
 
