@@ -6,7 +6,15 @@ When selecting a specific Workflow Execution the modal that opens has the follow
 
 This tab shows the log output for each executed step - [Read More](/articles/logs-and-artifacts#log-collection).
 
-![Log Output](../img/workflows-log-output-2.1.png)
+![Log Output](../img/workflows-log-output-092024.png)
+
+Select from the **Compare to another execution step** drop down to compare two steps from the selected workflow.
+
+![Compare Steps](../img/compare-steps-092024.png)
+
+The next screen will show the differences between the two steps:
+
+![Comparison Screen](../img/comparison-screen-092024.png)
 
 ## Artifacts
 
