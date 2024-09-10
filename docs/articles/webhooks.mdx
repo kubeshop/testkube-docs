@@ -244,12 +244,12 @@ Usage example:
 
 #### Using API Server Environment Variables in Webhooks
 
-In addition to event-specific variables, it's possible to use environment variables from the Testkube API server in your webhook payloads and configurations.  
+In addition to event-specific variables, it's possible to use environment variables from the Testkube API server in your webhook payloads and configurations.
 This feature is particularly useful for including sensitive information like API keys or URIs without exposing them in your webhook definitions.
 
 ##### Configuring API Server Environment Variables
 
-To set up extra environment variables for the API Server, you can use the `testkube-api.extraEnvVars` field in your Helm chart configuration.  
+To set up extra environment variables for the API Server, you can use the `testkube-api.extraEnvVars` field in your Helm chart configuration.
 This allows you to define environment variables, including those that reference Kubernetes secrets:
 
 ```yaml
@@ -288,9 +288,13 @@ metadata:
   namespace: testkube
 spec:
   # ...
-  uri: "{{ index .Envs "SLACK_WEBHOOK_URI" }}"
+  uri: '{{ "{{" }} index .Envs "SLACK_WEBHOOK_URI" {{ "}}" }}'
   # ...
 ```
+
+:::info
+Make sure to double-escape brackets when specifying values that themselves specify template syntax.
+:::
 
 ### URI and HTTP Headers
 
@@ -530,7 +534,7 @@ By using these services, you can quickly set up an HTTP endpoint to receive webh
 
 ## URL Masking
 
-In the “Organization Management” section, under the “Settings” tab, there is an option called “Webhooks URL Masking.”  
+In the “Organization Management” section, under the “Settings” tab, there is an option called “Webhooks URL Masking.”
 When this toggle is enabled, it will mask the URLs of all webhooks displayed in the user interface.
 
 ![Settings - webhook url masking](../img/webhook-url-masking.png)
