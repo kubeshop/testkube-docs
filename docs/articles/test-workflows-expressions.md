@@ -97,6 +97,7 @@ while the others may be accessible only dynamically in the container.
 | `organization.id`                                          | ✅                    | Organization ID (when running with Control Plane)                                 |
 | `environment.id`                                           | ✅                    | Environment ID (when running with Control Plane)                                  |
 | `dashboard.url`                                            | ✅                    | URL of the environment's dashboard                                                |
+| `labels` variables (like `labels.some_label_key`)          | ✅                    | Labels of the executed Test Workflow (`.`, `-`, `/` are replaced by `_`)                                                     |
 | `env` variables (like `env.SOME_VARIABLE`)                 | ❌                    | Environment variable value                                                        |
 | `failed`                                                   | ❌                    | Is the TestWorkflow Execution failed already at this point?                       |
 | `passed`                                                   | ❌                    | Is the TestWorkflow Execution still not failed at this point?                     |
