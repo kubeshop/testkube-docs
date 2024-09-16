@@ -46,20 +46,33 @@ export const DocCardList = (input) => (
 
 ## What is Testkube?
 
-Testkube is a Test Orchestration and Execution Framework for Cloud-Native Applications. It provides a single
-platform for defining, running and analyzing test executions, using your existing testing tools/scripts,
-running in your existing infrastructure.
+import TwoColumns from '@site/src/components/TwoColumns';
 
-Testkube consists of a **Control Plane** and any number of **Testkube Agents**. The Control Plane exposes
-a **Dashboard** for easy and centralized access to most Testkube features.
+<TwoColumns
+  left={<>
+<p>
+    Testkube is a Test Orchestration and Execution Framework for Cloud-Native Applications. It provides a single
+    platform for defining, running and analyzing test executions, using your existing testing tools/scripts,
+    running in your existing infrastructure.
+  </p>
+  <p>
+
+    Testkube consists of a <b>Control Plane</b> and any number of <b>Testkube Agents</b>. The Control Plane exposes
+    a <b>Dashboard</b> for easy and centralized access to most Testkube features.
+
+  </p>
+
+  </>}
+  right={<p>
+    <iframe width="400" height="200" src="https://youtube.com/embed/7q0wR-skW8M" title="Getting Started with Testkube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </p>}
+/>
 
 - The Control Plane can be running either in the cloud or on-prem - [Read more](articles/install/deployment-architectures).
 - The Agents run your tests and are _always_ running in your own infrastructure.
 - The Agent is 100% Open Source and can also be run standalone without the Control Plane - [Read more](articles/open-source-or-pro).
 
-<p align="center">
-  <iframe width="560" height="315" src="https://youtube.com/embed/7q0wR-skW8M" title="Getting Started with Testkube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-</p>
+
 
 ## Learn More About Testkube
 
