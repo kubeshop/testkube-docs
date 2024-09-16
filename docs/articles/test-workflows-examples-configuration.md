@@ -6,12 +6,14 @@ Test Workflows may define some configuration variables that should be used.
 The configuration schema is OpenAPI-like.
 
 When the configuration variable doesn’t already have a default clause, it’s required.
+Values of configuration variables with sensitive flag will be stored in test workflow execution secret.
 
 ### Using the Variables
 
 The configuration variables can be used in the specification as an expression, i.e. `cypress run {{config.args}}`.
 
 You can use the variables in most of the places - commands, paths, images, static files, or even conditions.
+
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -26,6 +28,7 @@ spec:
     workers:
       type: integer
       default: 2
+      sensitive: true
     printTree:
       type: boolean
       default: "false"
