@@ -6,7 +6,7 @@ Test Workflows may define some configuration variables that should be used.
 The configuration schema is OpenAPI-like.
 
 When the configuration variable doesn’t already have a default clause, it’s required.
-Values of configuration variables with sensitive flag will be stored in test workflow execution secret.
+Values of configuration variables with sensitive flags will be stored in test workflow execution secret.
 
 ### Using the Variables
 
