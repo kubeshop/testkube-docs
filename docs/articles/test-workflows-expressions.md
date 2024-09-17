@@ -186,6 +186,7 @@ There are some functions that help to cast values to a different type. Additiona
 | `abspath`    | `string`        | Build absolute path                                                                                                                             | `abspath("/a/b/c")` is `/a/b/c`<br />`abspath("b/c")` may be `/some/working/dir/b/c`                     |
 | `chunk`      | `[]list`        | Split list to chunks of specified maximum size                                                                                                  | `chunk([1,2,3,4,5], 2)` is `[[1,2], [3,4], [5]]`                                                         |
 | `date`       | `string`        | Return current date (either `2006-01-02T15:04:05.000Z07:00` format or custom argument ([**Go syntax**](https://go.dev/src/time/format.go#L101)) | `date()` may be `"2024-06-04T11:59:32.308Z"`<br />`date("2006-01-02")` may be `2024-06-04`               |
+| `secret`     | `string`        | Creates an environment variable with a reference to the secret. First parameter is a secret name, second parameter is a key name                | `secret("name". "key")` is `"env.S_N_name_K_key"`<br />`secret("name". "key")` is `"env.S_N_name_K_key"` |
 
 ### File System
 
