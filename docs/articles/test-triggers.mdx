@@ -48,7 +48,7 @@ Name selectors are used when we want to select a specific resource in a specific
 ```yaml
 selector:
   name: Kubernetes object name
-  nameRegex: Kubernetes object name regex (for example, "test.*")
+  nameRegex: Kubernetes object name regex (for example, "testworkflow.*")
   namespace: Kubernetes object namespace (default is **testkube**)
 ```
 
@@ -159,7 +159,7 @@ spec:
 ```
 
 You can define **Test Trigger** for Testkube cluster events.
-In below example, if **Test** `k6-executor-smoke` is completed succesfully, then we run **TestWorkflow** `postman-smoke-tests`
+In below example, if **TestWorkflow** `k6-smoke-test` is completed succesfully, then we run **TestWorkflow** `postman-smoke-tests`
 
 ```yaml
 apiVersion: tests.testkube.io/v1
@@ -170,7 +170,7 @@ metadata:
 spec:
   resource: event
   resourceSelector:
-    name: k6-executor-smoke
+    name: k6-smoke-test
   event: event-end-test-success
   action: run
   execution: testworkflow
