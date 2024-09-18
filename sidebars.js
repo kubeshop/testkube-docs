@@ -385,6 +385,16 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Teams",
+              id: "articles/teams",
+            },
+            {
+              type: "doc",
+              label: "Resource Groups",
+              id: "articles/resource-groups",
+            },
+            {
+              type: "doc",
               label: "API Tokens",
               id: "testkube-pro/articles/api-token-management",
             },

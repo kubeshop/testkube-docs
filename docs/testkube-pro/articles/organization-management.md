@@ -26,6 +26,20 @@ Run this on your cluster where the given agent is installed.
 
 Read more about [Environment Management](../articles/environment-management.md).
 
+## Resource Groups
+
+Resource Groups allow you to group Testkube Resources across all your environments and assign
+member access - [Read More](/articles/resource-groups).
+
+![Resource Groups Overview](../../img/resource-groups-overview.png)
+
+## Teams
+
+Teams allow you to group Organization members to simplify access control management for Environments
+and Resource Groups - [Read More](/articles/teams).
+
+![Teams Overview](../../img/teams-overview.png)
+
 ## Settings
 
 In settings, you can update the name of the organization, set artifacts limits, or enable or disable AI Hints and Webhooks URL Masking.
