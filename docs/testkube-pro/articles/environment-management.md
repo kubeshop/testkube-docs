@@ -87,10 +87,13 @@ You can also delete a given environment (be careful, this action can't be rolled
 
 ### Environment Members
 
-You can assign environment-specific roles to your organisation members to control which actions a member
-can perform in a specific environment. Keep in mind that all organisation `admin` users can access all environments.
+You can assign environment-specific roles to [Teams](/articles/teams) or individual [Members](/testkube-pro/articles/organization-management#members) of your organization to control which 
+actions a member can perform in a specific environment.
 
-To add new organization members use the "Members" tab and select "organization members" under the "Add collaborators" section.
+To add new members to an Environment, select the Members tab under the Environment settings and use the "Add Collaborators"
+section to search for and add individual members or teams from your organization.
+
+![Add Environment Members](../../img/add-environment-members.png)
 
 You can choose from one of the following roles for a member:
 
@@ -99,7 +102,21 @@ You can choose from one of the following roles for a member:
 - `Write`: Has Run access and can make changes to environment tests, triggers, webhooks, etc...
 - `Admin`: Has Write access and is allowed to invite and change other collaborator roles.
 
-![Add Environment Members](../../img/add-environment-members.png)
+:::info
+Keep in mind that all organization `admin` users can always access all environments.
+:::
+
+:::tip
+For more fine-grained access control to Resources in your Environments, check out [Resource Groups](/articles/resource-groups)
+:::
+
+You can see a list of existing Environment members at the bottom of this panel, and change their role or remove them
+using the popup menu on the right:
+
+![Environment Members](../../img/environment-members.png)
+
+
+
 
 ### Keyword Handling
 
