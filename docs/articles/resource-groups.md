@@ -5,6 +5,13 @@ Resource Groups allow you to group resources across all your Environments, by wh
 with a specific Role, resulting in those members having corresponding permissions for the resources in that Resource
 Group.
 
+The following types of Testkube Resources can currently be added to a Resource Group
+
+- Workflows - from the Collaboration Tab under Workflow Settings
+- Workflow Templates - from the Collaboration Tab under Workflow Template Settings
+- Triggers - from the Collaboration Tab under Trigger Settings  
+- Webhooks - from the Collaboration Tab under Webhook Settings
+
 Selecting "Resource groups" from the Organization Management panel shows a list of all existing Resource Groups:
 
 ![Resource Groups Overview](../img/resource-groups-overview.png)
