@@ -301,7 +301,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "K8s Event Triggers",
+              label: "Kubernetes Triggers",
               id: "articles/test-triggers",
             },
             {

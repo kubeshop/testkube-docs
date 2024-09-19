@@ -1,33 +1,30 @@
-# K8s Event Triggers
+# Kubernetes Event Triggers
 
-Testkube allows you to automate running tests and test suites by defining triggers on certain events for various Kubernetes resources.
+Testkube allows you to automate running test workflows by defining triggers on certain events for various Kubernetes resources.
 
 ## What is a Testkube Event Trigger?
 
-In generic terms, a _Trigger_ defines an _action_ which will be executed for a given _execution_ when a certain _event_ on a specific _resource_ occurs.
-For example, we could define a _TestTrigger_ which _runs_ a _Test_ when a _ConfigMap_ gets _modified_.
+In generic terms, a _trigger_ defines an _action_ which will be executed for a given _execution_ when a certain _event_ on a specific _resource_ occurs.
 
-In Testkube, Event Triggers allow you to trigger the execution of a Workflow based on Kubernetes Events - for example when a Deployment is updated
-or an Ingress gets deleted.
+In Testkube, event triggers allow you to trigger the execution of a workflow based on Kubernetes events - for example when a `Deployment` is updated
+or an `Ingress` gets deleted.
 
-You can currently create/manage Event Triggers in the Testkube Dashboard or by interacting with corresponding Trigger custom resources
+You can currently manage event triggers in the Testkube Dashboard or by interacting with corresponding `TestTrigger` custom resources
 via `kubectl`.
 
 ## Creating Test Triggers in the Testkube Dashboard
 
-Click on the lightening bolt icon on the left of the Testkube Dashboard to open the dialog to create test triggers. Any current test triggers will be listed and the `Create a new trigger` button is at the top right of the screen.
+Click on the lightening bolt icon on the left of the Testkube Dashboard and then click on the `Create my first trigger` button.
 
-![Trigger Screen](../img/trigger-screen-082024.png)
+![Trigger Screen](../img/create-trigger.png)
 
-The `Create new trigger` dialog opens:
+The `Create a new trigger` dialog opens, where one can configure the condition for the trigger:
 
-![Create Trigger](../img/create-trigger-082024.png)
+![Create Trigger Condition](../img/create-trigger-form.png)
 
-Input the condition that will cause the trigger and click `Next`.
+After clicking `Next`, then one can configure the action to execute on the trigger and then click `Create` to create it.
 
-Input the action that will be the result of the trigger condition happening and click `Create`.
-
-![Create Trigger Action](../img/create-trigger-action-082024.png)
+![Create Trigger Action](../img/create-trigger-form-action.png)
 
 ## Custom Resource Definition Model
 
@@ -51,7 +48,7 @@ Name selectors are used when we want to select a specific resource in a specific
 ```yaml
 selector:
   name: Kubernetes object name
-  nameRegex: Kubernetes object name regex (for example, "test.*")
+  nameRegex: Kubernetes object name regex (for example, "testworkflow.*")
   namespace: Kubernetes object namespace (default is **testkube**)
 ```
 
@@ -108,8 +105,8 @@ probeSpec:
 - **Event** - created, modified, deleted
 - **Cause** (can be used instead of **Event**)
   - For deployments - deployment-scale-update, deployment-image-update, deployment-env-update, deployment-containers-modified
-  - For Testkube events - event-start-test, event-end-test-success, event-end-test-failed, event-end-test-aborted, event-end-test-timeout, event-start-testsuite, event-end-testsuite-success, event-end-testsuite-failed, event-end-testsuite-aborted, event-end-testsuite-timeout, event-queue-testworkflow, event-start-testworkflow, event-end-testworkflow-success, event-end-testworkflow-failed, event-end-testworkflow-aborted, event-created, event-updated, event-deleted
-- **Execution** - test, testsuite, testworkflow
+  - For Testkube events - event-queue-testworkflow, event-start-testworkflow, event-end-testworkflow-success, event-end-testworkflow-failed, event-end-testworkflow-aborted, event-created, event-updated, event-deleted
+- **Execution** - testworkflow
 - **ConcurrencyPolicy** - allow, forbid, replace
 
 ## Example
@@ -153,7 +150,7 @@ spec:
       - host: testkube-dashboard
         port: 8080
   action: run
-  execution: testsuite
+  execution: testworkflow
   concurrencyPolicy: allow
   testSelector:
     name: sanity-test
@@ -162,7 +159,7 @@ spec:
 ```
 
 You can define **Test Trigger** for Testkube cluster events.
-In below example, if **Test** `k6-executor-smoke` is completed succesfully, then we run **TestSuite** `container-executor-postman-smoke-tests`
+In below example, if **TestWorkflow** `k6-smoke-test` is completed succesfully, then we run **TestWorkflow** `postman-smoke-tests`
 
 ```yaml
 apiVersion: tests.testkube.io/v1
@@ -173,12 +170,12 @@ metadata:
 spec:
   resource: event
   resourceSelector:
-    name: k6-executor-smoke
+    name: k6-smoke-test
   event: event-end-test-success
   action: run
-  execution: testsuite
+  execution: testworkflow
   testSelector:
-    name: container-executor-postman-smoke-tests
+    name: postman-smoke-tests
     namespace: testkube
 ```
 
@@ -206,5 +203,3 @@ The following environment variables are automatically injected into each trigger
 - `WATCHER_EVENT_NAME`: resource name
 - `WATCHER_EVENT_NAMESPACE`: resource namespace
 - `WATCHER_EVENT_EVENT_TYPE`: event type
-
-
