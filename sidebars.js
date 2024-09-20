@@ -375,6 +375,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Access Management",
+              id: "articles/access-management",
+            },
+            {
+              type: "doc",
               label: "Organizations",
               id: "testkube-pro/articles/organization-management",
             },
