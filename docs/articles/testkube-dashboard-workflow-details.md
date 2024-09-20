@@ -34,9 +34,8 @@ The **CLI Commands** tab shows commands you can run to interact with the Workflo
 The **Settings** tab contains a number of panels for configuring your Workflow.
 
 :::info
-Almost all the settings in these panels can be configured directly in the Workflow YAML under the Definition panel (see below). 
+Most of the settings in these panels can be configured directly in the Workflow YAML under the Definition panel (see below). 
 :::
-
 
 ### General Settings
 
@@ -95,6 +94,12 @@ limits per image or Workflow step you can do this directly in the Workflow YAML 
 This panel allows you to configure global variables and secrets used by your Workflow.
 
 ![Variables & Secrets Settings](../img/variables-and-secrets-settings-092024.png)
+
+### Resource Group
+
+This panel allows you to assign this Workflow to a Resource Group - [Read More](/articles/resource-groups#managing-resources-in-a-resource-group)
+
+![Workflow Resource Group](images/workflow-resource-group.png)
 
 ### Scheduling
 

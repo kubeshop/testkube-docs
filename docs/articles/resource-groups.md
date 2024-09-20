@@ -7,10 +7,17 @@ Group.
 
 The following types of Testkube Resources can currently be added to a Resource Group
 
-- Workflows - from the Collaboration Tab under Workflow Settings
-- Workflow Templates - from the Collaboration Tab under Workflow Template Settings
-- Triggers - from the Collaboration Tab under Trigger Settings  
-- Webhooks - from the Collaboration Tab under Webhook Settings
+- Workflows - from the "Resource Group" Tab under [Workflow Settings](/articles/testkube-dashboard-workflow-details#workflow-settings-tabs)
+- Workflow Templates - from the "Resource Group" Tab under [Workflow Template Settings](/articles/testkube-dashboard-workflows-templates#workflow-template-settings)
+- Triggers - from the "Resource Group" Tab under Trigger Settings - [Read More](/articles/test-triggers)  
+- Webhooks - from the "Resource Group" Tab under Webhook Settings - [Read More](/articles/webhooks)
+
+:::info
+When deciding on the permission for a specific User and resource, Testkube takes the intersection of
+that Users [Environment role](/testkube-pro/articles/environment-management#environment-members) and
+Resource Group role for the resource (if any), and applies the lowest privileged role. This makes
+it easy to control resource access across both Environments as a whole, and specific Resources using Resource Groups.
+:::
 
 Selecting "Resource groups" from the Organization Management panel shows a list of all existing Resource Groups:
 
@@ -21,7 +28,7 @@ Selecting "Resource groups" from the Organization Management panel shows a list 
 Select the [Create a new group] button in the overview above, you will be prompted for the name, 
 slug and description (The slug is a human-friendly identifier used in URLs):
 
-![img.png](images/create-resource-group.png)
+![Create Resource Group](images/create-resource-group.png)
 
 ## Resource Group Settings
 
@@ -29,35 +36,34 @@ Selecting an existing Resource Group or creating a new one takes you to the Reso
 allows you to configure the name, description and Collaborators for the Resource Group (the slug cannot be changed).
 There is also an option to delete the Resource Group at the bottom.
 
-![img_1.png](images/resource-group-details.png)
+![Resource Group Settings](images/resource-group-details.png)
 
 ## Managing Resource Group Collaborators
 
 Add collaborators to a Resource Group with the "Add collaborators" button, which will prompt for 
 which Members and/or Teams to add as collaborators, and which Role they should have for this Resource Group
 
-![img_2.png](images/add-resource-group-collaborators.png)
+![Resource Group Collaborators](images/add-resource-group-collaborators.png)
 
 Once added, you can manage Members in the list at the bottom of this page, use the menu on the right to
 change their Role or remove them:
 
-![img_3.png](images/resource-group-collaborators.png)
+![Managing Resources in a Resource Group](images/resource-group-collaborators.png)
 
 ## Managing Resources in a Resource Group
 
 Adding or removing a Testkube resource to/from a Resource Group is done from that Resources' Settings page. For 
-example, to assign a Workflow to a Resource Group, go to the Collaboration Tab of the Workflow Settings and select
-which Resource Group the Workflow belongs to ("Backend Workflows" in the below screenshot).
+example, to assign a Workflow to a Resource Group, go to the "Resource Group" Tab of the Workflow Settings and select
+which Resource Group the Workflow belongs to ("Accounting Tests" in the below screenshot).
 
-:::info
-When deciding on the permission for a specific User and resource, Testkube takes the intersection of
-that Users [Environment role](/testkube-pro/articles/environment-management#environment-members) and
-Resource Group role for the resource (if any), and applies the lowest privileged role. This makes
-it easy to control resource access across both Environments as a whole, and specific Resources using Resource Groups.
-:::
+![Workflows Resource Group](images/workflow-collaboration-tab.png)
 
+## Listing Resources in a Resource Group
 
-![img_4.png](images/workflow-collaboration-tab.png)
+There is currently no single view that shows all resources in a Resource Group, but you can filter both 
+Workflows and Workflow Templates on a Resource Group in the Workflows Overview:
+
+![Workflows Resource Group Filter](images/workflows-resource-group-filter.png)
 
 
 

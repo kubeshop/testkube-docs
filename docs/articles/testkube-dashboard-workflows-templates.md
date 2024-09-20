@@ -24,13 +24,22 @@ Just like with Workflow - you can toggle between grid and list layouts:
 
 ## Workflow Template Settings
 
-Selecting a Workflow Template opens the Settings tab for the Template:
+Selecting a Workflow Template opens the Settings tab for the Template.
 
-![Workflow Templates Settings](../img/workflow-templates-settings.png)
-
+### General Settings
 
 The General settings shown above allow you to specify the name and description of the template, and below that
 shows an example of how to use this template in a workflow.
+
+![Workflow Templates Settings](../img/workflow-templates-settings.png)
+
+### Resource Group
+
+This panel allows you to assign this Workflow Template to a Resource Group - [Read More](/articles/resource-groups#managing-resources-in-a-resource-group)
+
+![Workflow Template Resource Group](install/workflow-template-resource-group.png)
+
+### Definition
 
 The Definition pane allows you to edit the Workflow Template.
 
