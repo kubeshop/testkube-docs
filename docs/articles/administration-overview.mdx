@@ -15,8 +15,6 @@ export const DocCardList = (input) => (<>
           type: "intro",
         }}/>
       </article>
-    </section>
-    <section className={clsx("row indent--min")}>
       <article key="1" className="col padding--sm intro__card">
         <DocCard item={        {
           icon: "🛠",
@@ -24,6 +22,28 @@ export const DocCardList = (input) => (<>
           description:
             "Learn about managing your Environments, including Member access and custom Keyword handling",
           href: "../testkube-pro/articles/environment-management",
+          type: "intro",
+        }}/>
+      </article>
+    </section>
+    <section className={clsx("row indent--min")}>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Teams",
+          description:
+            "Learn how to manage Teams for your Organisation Members",
+          href: "/articles/teams",
+          type: "intro",
+        }}/>
+      </article>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Resource Groups",
+          description:
+            "Learn about Resource Groups for managing fine-grained access to your Testkube Resources",
+          href: "/articles/resource-groups",
           type: "intro",
         }}/>
       </article>
