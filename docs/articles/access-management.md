@@ -28,7 +28,7 @@ For example, if Organisation Member A has the `write` Role in Env B, but is also
 ## Resource Group Access
 
 As the number of Resources and Environments grows, it can become desirable to limit which Resources specific
-Members can work with across your Environments, both from a security and usability perspective. [Resource Groups](/artilces/resource-groups) solve for this by 
+Members can work with across your Environments, both from a security and usability perspective. [Resource Groups](/articles/resource-groups) solve for this by 
 allowing you to group Resources across Environments and assign Members and Teams to them with a specific Role. 
 
 :::note
