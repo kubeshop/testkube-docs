@@ -66,7 +66,7 @@ There are 4 roles for organization members:
 
 :::tip
 For Testkube On-Prem deployments you can configure default organizations, environments and roles for users - see 
-[Bootstrap Configuration](/articles/install/advanced-install#bootstrap-configuration).
+[Bootstrap User Mapping](/articles/install/advanced-install#bootstrap-user-mapping).
 :::
 
 ### Manage existing Members
