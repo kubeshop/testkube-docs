@@ -34,7 +34,7 @@ Use one of the following methods to configure the Agent Helm chart to trust the 
 
 ## Organization Management
 
-### Bootstrap Configuration
+### Bootstrap User Mapping
 
 By default, Testkube will automatically add users to the default organizations when they get invited. You can change the bootstrap configuration to change this behaviour programmatically.
 
