@@ -1,7 +1,7 @@
 # Resource Access Management
 
-Testkube provides flexible access-control to help you enforce how members of an Organisation have
-access to Environments and Resources (Workflows, Workflow Templates, Triggers and Webhooks).
+Testkube provides a flexible access-control mechanism to help you enforce how members of an Organisation have
+access to Environments and their Resources (Workflows, Workflow Templates, Triggers and Webhooks).
 
 ## Organisation Members and Teams
 
