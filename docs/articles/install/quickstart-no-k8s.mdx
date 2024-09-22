@@ -6,31 +6,16 @@ import TabItem from "@theme/TabItem";
 The Testkube Agent uses Kubernetes as its runtime environment, which requires you to have access to a Kubernetes cluster either
 running locally on your machine or remotely in some cloud provider like AWS, Google, Azure, etc.
 
-If you don't have access to a Kubernetes cluster for installing the Testkube Agent you have two options:
+If you don't have access to a Kubernetes cluster for installing the Testkube Agent you can either install a lightweight
+Kubernetes distribution under Docker, or use the Kubernetes version included with Docker Desktop.
 
-1. Evaluate Testkube using the Cloud Version available at [app.testkube.io](https://app.testkube.io), this includes a demo environment that contains sample resources to help you get started.
-2. Install Kubernetes cluster locally under Docker for evaluation purposes (not as hard as you might think, see below!)
+Let's look at both of these options below.
 
-Let's have a quick look at how to get started with these two options.
+:::info
+The Testkube Team is actively working on providing a packaged Docker Testkube Agent - check back soon!
+:::
 
-## Testkube Cloud Evaluation
-
-- Go to [app.testkube.io](https://app.testkube.io)
-- Sign up to the trial plan with either a GitHub or Gitlab account (no credit-card details required).
-- After signing in the first time, make sure to select the "Get access to a Demo Environment" option:
-
-![Get Access to Demo Environment](images/get-access-to-demo-env.png)
-
-- Now you can select the Demo Cluster (it will be preselected) from the Environment Selector in the top right, and see/play with the predefined Tests/Workflows/etc. in it:
-
-![Demo Environment Dashboard](images/demo-env-dashboard.png)
-
-## Installing the Testkube Agent under Docker
-
-To run the Testkube Agent under Docker you either need to install a lightweight Kubernetes distribution under Docker, or use
-the Kubernetes version included with Docker Desktop. Let's look at both of these options.
-
-### Installing a lightweight Kubernetes distribution under Docker
+## Installing a lightweight Kubernetes distribution under Docker
 
 There are a number of lightweight Kubernetes distributions that you can install under Docker, all of them require
 Docker Desktop to be installed, so make sure that is up and running before moving on (download from https://www.docker.com/products/docker-desktop/).
@@ -45,9 +30,9 @@ Recommended Kubernetes distributions for local Testkube evaluation are:
 A detailed tutorial on how to run Testkube with Kind is available at [Testing in KinD: Using Testkube with Kubernetes in Docker](https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker)
 :::
 
-Let's have a quick look at how easy it is to install Kind for running the Testkube Agent.
+Let's have a quick look at how easy it is to install Kind for deploying the Testkube Agent.
 
-#### Installing Kind under MacOS or Windows
+### Installing Kind under MacOS or Windows
 
 kind is a tool for running local Kubernetes clusters using Docker container “nodes”. Read all about how to quickly get
 started with kind at https://kind.sigs.k8s.io/docs/user/quick-start/.
@@ -94,9 +79,10 @@ That's it! Now you can go to the [Testkube Quickstart][install-with-cli] and pic
 
 [install-with-cli]: /articles/install/install-with-cli
 
-### Using the Kubernetes distribution included with Docker Desktop
+## Using the Kubernetes distribution included with Docker Desktop
 
 Docker Desktop comes with a built-in version of Kubernetes - [Read More](https://docs.docker.com/desktop/kubernetes/).
-If you enable this feature you will have a local Kubernetes cluster and should be all set - go to the [Testkube Quickstart][install-with-cli] and pick up from there!
+If you enable this feature you will have a local Kubernetes cluster available and should be all set -
+go to the [Testkube Quickstart][install-with-cli] and pick up from there!
 
 
