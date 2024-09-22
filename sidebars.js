@@ -375,11 +375,6 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Access Management",
-              id: "articles/access-management",
-            },
-            {
-              type: "doc",
               label: "Organizations",
               id: "testkube-pro/articles/organization-management",
             },
@@ -397,6 +392,11 @@ const sidebars = {
               type: "doc",
               label: "Resource Groups",
               id: "articles/resource-groups",
+            },
+            {
+              type: "doc",
+              label: "Resource Access Mgmt",
+              id: "articles/resource-access-management",
             },
             {
               type: "doc",

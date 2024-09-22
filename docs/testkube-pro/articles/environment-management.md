@@ -107,7 +107,8 @@ Keep in mind that all organization `admin` users can always access all environme
 :::
 
 :::tip
-For more fine-grained access control to Resources in your Environments, check out [Resource Groups](/articles/resource-groups)
+Have a look at  [Resource Access Management](/articles/resource-access-management) to get an overview of how Testkube
+allows you to manage and apply Resource Access controls.
 :::
 
 You can see a list of existing Environment members at the bottom of this panel, and change their role or remove them

@@ -51,6 +51,11 @@ In settings, you can update the name of the organization, set artifacts limits, 
 
 Invite and manage your organisation members here. 
 
+:::info
+Please read [Resource Access Management](/articles/resource-access-management) to get an overview of how Testkube
+allows you to manage and apply Resource Access controls for Organization Members.
+:::
+
 ### Inviting Members
 
 Invite new members by specifying their email and role and selecting the Invite button in the bottom right.

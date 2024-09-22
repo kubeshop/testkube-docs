@@ -13,10 +13,8 @@ The following types of Testkube Resources can currently be added to a Resource G
 - Webhooks - from the "Resource Group" Tab under Webhook Settings - [Read More](/articles/webhooks)
 
 :::info
-When deciding on the permission for a specific User and resource, Testkube takes the intersection of
-that Users [Environment role](/testkube-pro/articles/environment-management#environment-members) and
-Resource Group role for the resource (if any), and applies the lowest privileged role. This makes
-it easy to control resource access across both Environments as a whole, and specific Resources using Resource Groups.
+Please read [Resource Access Management](/articles/resource-access-management) to get an overview of how Testkube
+allows you to manage and apply Resource Access controls.
 :::
 
 Selecting "Resource groups" from the Organization Management panel shows a list of all existing Resource Groups:
