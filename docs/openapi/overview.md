@@ -24,9 +24,9 @@ The operations exposed by the control plane are here divided into the following 
 
 - **Core Operations**: High-level control plane operations. 
 - **Agent Operations**: Proxied Agent operations for a specific environment, these are the same as the Core Agent operations, 
-  but with organisation and environment identifiers.
-- **Organisation Operations**: Operations for a specific organisation defined in the Control Plane.
-- **Environment Operations**: Operations for a specific environment defined within an organisation.
+  but with organization and environment identifiers.
+- **Organization Operations**: Operations for a specific organization defined in the Control Plane.
+- **Environment Operations**: Operations for a specific environment defined within an organization.
 
 These API calls all require an API token specified using `Bearer Token` authentication. 
 - API Tokens can be created as described at [Organization Management](../testkube-pro/articles/api-token-management).

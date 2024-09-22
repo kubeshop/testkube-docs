@@ -6,7 +6,7 @@ To manage your organization settings click "Organization Management" from organi
 
 (You can also create new organizations from this menu).
 
-The following tabs are available for managing an Organisation.
+The following tabs are available for managing an Organization.
 
 ## Environments
 
@@ -49,7 +49,7 @@ In settings, you can update the name of the organization, set artifacts limits, 
 
 ## Members
 
-Invite and manage your organisation members here. 
+Invite and manage your organization members here. 
 
 :::info
 Please read [Resource Access Management](/articles/resource-access-management) to get an overview of how Testkube
@@ -79,7 +79,7 @@ For Testkube On-Prem deployments you can configure default organizations, enviro
 Manage existing members/invites in the lists of members and pending invitations. Use the menu to the right for 
 each member to delete them or change their role.
 
-![Organisation Members](../../img/org-members-list.png)
+![Organization Members](../../img/org-members-list.png)
 
 ## API Tokens
 

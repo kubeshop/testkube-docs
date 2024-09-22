@@ -1,11 +1,11 @@
 # Resource Access Management
 
-Testkube provides a flexible access-control mechanism to help you enforce how members of an Organisation have
+Testkube provides a flexible access-control mechanism to help you enforce how members of an Organization have
 access to Environments and their Resources (Workflows, Workflow Templates, Triggers and Webhooks).
 
-## Organisation Members and Teams
+## Organization Members and Teams
 
-There are four roles for organisation members - [Read More](/testkube-pro/articles/organization-management#members). For 
+There are four roles for organization members - [Read More](/testkube-pro/articles/organization-management#members). For 
 the sake of this document:
 - `Owner` / `Admin` - Always have access to all resources in all environments.
 - `Member` - Resource access is controlled at the Environment and Resource Group level.
@@ -21,7 +21,7 @@ There are currently two "levels" of providing access to Testkube Resources:
 
 ## Environment Access
 
-To have access to resources in a Testkube Environment, organisation Members and Teams _must_ be added to 
+To have access to resources in a Testkube Environment, organization Members and Teams _must_ be added to 
 an Environment with a specific role - [Read More](/testkube-pro/articles/environment-management#environment-members). 
 The given role applies to all Resources in that Environment. 
 
@@ -29,7 +29,7 @@ If a member has access to an Environment via multiple Teams and/or as a direct M
 _most permissive_ role for a given Resource (unless that Resource is in a Resource Group - see below).
 
 :::note
-For example, if Organisation Member A has the `write` Role in Env B, but is also a member of Team C which has the 
+For example, if Organization Member A has the `write` Role in Env B, but is also a member of Team C which has the 
 `read` role in that Environment, Testkube will enforce the `write` role as it is the more permissive of the two roles.
 :::
 
@@ -40,9 +40,9 @@ Members can work with across your Environments, both from a security and usabili
 allowing you to group Resources across Environments and assign Members and Teams to them with a specific Role. 
 
 :::note
-For example, you might have defined a number of Workflows for testing your frontend application, but only want certain Organisation
+For example, you might have defined a number of Workflows for testing your frontend application, but only want certain Organization
 Members to be able to work with these. In this case you could 
-- Create a "FE Testers" Team under your Organisation and add the corresponding Members to it.
+- Create a "FE Testers" Team under your Organization and add the corresponding Members to it.
 - Create a "FE Tests" Resource Group and assign all your frontend Workflows to that Resource Group. These could be spread across multiple Environments, for example "Staging" and "Production".
 - Finally, add the "FE Testers" Team to the "FE Tests" Resource Group with the "Write" role, which would allow them to manage and run
   all your FE Workflows. Members not in this Team will no longer have access to the Workflows in your "FE Tests" Resource Group when working with the Testkube Dashboard or CLI.
