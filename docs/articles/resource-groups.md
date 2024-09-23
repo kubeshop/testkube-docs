@@ -39,7 +39,7 @@ There is also an option to delete the Resource Group at the bottom.
 ## Managing Resource Group Collaborators
 
 Add collaborators to a Resource Group with the "Add collaborators" button, which will prompt for 
-which Members and/or Teams to add as collaborators, and which Role they should have for this Resource Group
+which Members and/or Teams to add as collaborators, and which Role they should have for this Resource Group.
 
 ![Resource Group Collaborators](images/add-resource-group-collaborators.png)
 
