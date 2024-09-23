@@ -5,7 +5,7 @@ Resource Groups allow you to group resources across all your Environments, by wh
 with a specific Role, resulting in those members having corresponding permissions for the resources in that Resource
 Group.
 
-The following types of Testkube Resources can currently be added to a Resource Group
+The following types of Testkube Resources can currently be added to a Resource Group:
 
 - Workflows - from the "Resource Group" Tab under [Workflow Settings](/articles/testkube-dashboard-workflow-details#workflow-settings-tabs)
 - Workflow Templates - from the "Resource Group" Tab under [Workflow Template Settings](/articles/testkube-dashboard-workflows-templates#workflow-template-settings)
