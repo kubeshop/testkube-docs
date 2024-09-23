@@ -39,12 +39,15 @@ As the number of Resources and Environments grows, it can become desirable to li
 Members can work with across your Environments, both from a security and usability perspective. [Resource Groups](/articles/resource-groups) solve for this by 
 allowing you to group Resources across Environments and assign Members and Teams to them with a specific Role. 
 
+Similarly as for Environments, if an Organization Member has access to a Resource Group via multiple Teams and/or as a direct Member,
+Testkube will enforce the _most permissive_ role for a given Resource.
+
 :::note
 For example, you might have defined a number of Workflows for testing your frontend application, but only want certain Organization
 Members to be able to work with these. In this case you could 
 - Create a "FE Testers" Team under your Organization and add the corresponding Members to it.
 - Create a "FE Tests" Resource Group and assign all your frontend Workflows to that Resource Group. These could be spread across multiple Environments, for example "Staging" and "Production".
-- Finally, add the "FE Testers" Team to the "FE Tests" Resource Group with the "Write" role, which would allow them to manage and run
+- Finally, add the "FE Testers" Team to the "FE Tests" Resource Group with the `write` role, which would allow them to manage and run
   all your FE Workflows. Members not in this Team will no longer have access to the Workflows in your "FE Tests" Resource Group when working with the Testkube Dashboard or CLI.
 :::
 
@@ -52,21 +55,22 @@ As mentioned above, Resource Groups work "on top" of Environment Access - read o
 
 ## The intersection of Environment and Resource Access
 
-As mentioned above, for a Member to have access to a Resource in an Environment, they first need to have a
-corresponding access role in that Environment. For the above example to work, the Members of the "FE Testers" team therefore also need
+As mentioned above, for a Member to have access to a Resource in an Environment, they always need to have a
+corresponding access role in that Environment. Therefore, for the above Resource Group example to work, the Members of the "FE Testers" team also need
 to have a role in the Environments that contain "FE Tests" Resources. When resolving the final permission, Testkube will enforce
 the _less_ permissive of the Environment and Resource Group roles. 
 
-This might be confusing, but there is a reason - let's play it out:
+This might be confusing, let's play it out:
 
 - If the "FE Testers" team has the `read` role in an Environment containing FE Tests, that will be the preceding role since it
   is less permissive.
-- If the "FE Testers" team has the `write` or `admin` role in another Environment containing FE Tests, the preceding role will be 
-  `write`, allowing them to work with the FE Tests Resources as specified by the Resource Group.
+- If the "FE Testers" team has the `admin` role in another Environment containing FE Tests, the preceding role will be 
+  `write` since that is role given for the Resource Group, allowing them to work with the FE Tests Resources as specified by 
+  the Resource Group.
 
-The rationale for the less permissive role taking precedence is that this allows you to always ensure/enforce Resource 
+The reason for the less permissive role taking precedence is to allow you to ensure/enforce Resource 
 access at the Environment level for critical Environments (for example Production), vs individual Resource Groups providing a 
-"back door" into an environment for unintended access.
+"back door" into an Environment for unintended access.
 
 ## Recommendations
 
