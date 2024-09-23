@@ -9,11 +9,11 @@ info:
     url: https://opensource.org/licenses/MIT
   version: cloud-api/1.10.51
 paths:
-  /organizations/{id}/environments/{environmentId}/agent/labels:
+  /organizations/{id}/environments/{environmentId}/agent/tags:
     get:
-      summary: List labels
-      description: list all available labels
-      operationId: listLabels
+      summary: List tags
+      description: list all available tags
+      operationId: listTags
       responses:
         '200':
           description: successful operation

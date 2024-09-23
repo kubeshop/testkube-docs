@@ -7,7 +7,7 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: cloud-api/1.10.38
+  version: cloud-api/1.10.51
 paths:
   /organizations/{id}/environments/{environmentID}/members:
     get:
@@ -21,6 +21,7 @@ paths:
           $ref: './components.yaml#/components/responses/UnauthorizedError'
         '403':
           $ref: './components.yaml#/components/responses/ForbiddenError'
+      deprecated: true
       security:
         - BearerAuth: []
     patch:
@@ -40,6 +41,7 @@ paths:
           $ref: './components.yaml#/components/responses/PaymentRequiredError'
         '403':
           $ref: './components.yaml#/components/responses/ForbiddenError'
+      deprecated: true
       security:
         - BearerAuth: []
     parameters:
@@ -59,6 +61,7 @@ paths:
           $ref: './components.yaml#/components/responses/UnauthorizedError'
         '403':
           $ref: './components.yaml#/components/responses/ForbiddenError'
+      deprecated: true
       security:
         - BearerAuth: []
     patch:
@@ -78,6 +81,7 @@ paths:
           $ref: './components.yaml#/components/responses/PaymentRequiredError'
         '403':
           $ref: './components.yaml#/components/responses/ForbiddenError'
+      deprecated: true
       security:
         - BearerAuth: []
     parameters:

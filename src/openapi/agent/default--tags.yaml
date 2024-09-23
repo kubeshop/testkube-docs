@@ -1,19 +1,21 @@
 openapi: 3.0.1
 info:
-  title: Testkube Pro API
-  description: API for Testkube Pro
+  title: Testkube API
+  description: >-
+    Testkube provides a Kubernetes-native framework for test definition,
+    execution and results
   contact:
     email: testkube@kubeshop.io
   license:
-    name: COMMERICAL
+    name: MIT
     url: https://opensource.org/licenses/MIT
-  version: cloud-api/1.10.51
+  version: 1.0.0
 paths:
-  /organizations/{id}/environments/{environmentId}/agent/labels:
+  /tags:
     get:
-      summary: List labels
-      description: list all available labels
-      operationId: listLabels
+      summary: List tags
+      description: list all available tags
+      operationId: listTags
       responses:
         '200':
           description: successful operation
@@ -40,16 +42,3 @@ paths:
                 type: array
                 items:
                   $ref: './components.yaml#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string

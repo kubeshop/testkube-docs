@@ -1,0 +1,229 @@
+openapi: 3.0.1
+info:
+  title: Testkube Pro API
+  description: API for Testkube Pro
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: COMMERICAL
+    url: https://opensource.org/licenses/MIT
+  version: cloud-api/1.10.51
+paths:
+  /organizations/{id}/invites:
+    get:
+      summary: List organization invites
+      description: Lists all invites for an organization.
+      operationId: listInvites
+      parameters:
+        - name: status
+          in: query
+          description: The status of the invites.
+          schema:
+            type: string
+            enum:
+              - pending
+              - revoked
+              - accepted
+              - declined
+              - failed
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Invite'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    post:
+      summary: Invite users to the organization
+      description: Invites one or more users to this organization.
+      operationId: createInvites
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                emails:
+                  description: Email of the invitee.
+                  type: array
+                  items:
+                    type: string
+                role:
+                  description: >-
+                    The role that will be assigned to the person after
+                    accepting.
+                  type: string
+                teams:
+                  description: >-
+                    Teams which the person will get access to after accepting
+                    the invite.
+                  type: array
+                  items:
+                    type: string
+                envs:
+                  description: >-
+                    Environments which the person will get access to after
+                    accepting the invite.
+                  type: array
+                  items:
+                    type: string
+                envRole:
+                  description: >-
+                    The role that will be assigned to the person's environments
+                    after accepting.
+                  type: string
+              required:
+                - emails
+        required: true
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invites:
+                    type: array
+                    items:
+                      $ref: './components.yaml#/components/schemas/Invite'
+                  failed:
+                    type: array
+                    items:
+                      type: string
+                required:
+                  - invites
+                  - failed
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+  /organizations/{id}/invites/{inviteID}:
+    get:
+      summary: Get organization invite
+      description: Get an invite for an organization with given id.
+      operationId: getInvite
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Invite'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    patch:
+      summary: Updates an organization invite
+      description: Updates an organization invite.
+      operationId: updateInvite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  description: >-
+                    The role that will be assigned to the person after
+                    accepting.
+                  type: string
+                teams:
+                  description: >-
+                    Teams which the person will get access to after accepting
+                    the invite.
+                  type: array
+                  items:
+                    type: string
+                envs:
+                  description: >-
+                    Environments which the person will get access to after
+                    accepting the invite.
+                  type: array
+                  items:
+                    type: string
+                envRole:
+                  description: >-
+                    The role that will be assigned to the person's environments
+                    after accepting.
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Invite'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/InviteID'
+  /organizations/{id}/invites/{inviteID}/resend:
+    post:
+      summary: Resend organization invite
+      description: Resend an invite for an organization with given id.
+      operationId: resendInvite
+      responses:
+        '201':
+          $ref: './components.yaml#/components/responses/NoContent'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/InviteID'
+  /organizations/{id}/invites/{inviteID}/revoke:
+    post:
+      summary: Revoke organization invite
+      description: Revoke an invite for an organization with given id.
+      operationId: revokeInvite
+      responses:
+        '201':
+          $ref: './components.yaml#/components/responses/NoContent'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/InviteID'

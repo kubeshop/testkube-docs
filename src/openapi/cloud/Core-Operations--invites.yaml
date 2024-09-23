@@ -7,7 +7,7 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: cloud-api/1.10.38
+  version: cloud-api/1.10.51
 paths:
   /organizations/invites/{inviteID}/accept:
     get:
@@ -15,50 +15,24 @@ paths:
       description: accept email invite
       operationId: acceptOrganizationEmailInvite
       responses:
-        '201':
-          $ref: './components.yaml#/components/responses/NoContent'
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  org:
+                    type: string
+                required:
+                  - org
         '400':
           $ref: './components.yaml#/components/responses/BadRequestError'
         '401':
           $ref: './components.yaml#/components/responses/UnauthorizedError'
         '404':
           $ref: './components.yaml#/components/responses/NotFoundError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: './components.yaml#/components/parameters/InviteID'
-  /organizations/invites/{inviteID}/resend:
-    post:
-      summary: Resend email invite
-      description: resend email invite
-      operationId: resendOrganizationEmailInvite
-      responses:
-        '201':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: './components.yaml#/components/parameters/InviteID'
-  /organizations/invites/{inviteID}/revoke:
-    post:
-      summary: Revoke pending email invite
-      description: revoke pending email invite
-      operationId: revokeOrganizationEmailInvite
-      responses:
-        '201':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
+      deprecated: true
       security:
         - BearerAuth: []
     parameters:
