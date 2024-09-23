@@ -53,7 +53,7 @@ Members to be able to work with these. In this case you could
 
 As mentioned above, Resource Groups work "on top" of Environment Access - read on!
 
-## The intersection of Environment and Resource Access
+## The Intersection of Environment and Resource Access
 
 As mentioned above, for a Member to have access to a Resource in an Environment, they always need to have a
 corresponding access role in that Environment. Therefore, for the above Resource Group example to work, the Members of the "FE Testers" team also need
