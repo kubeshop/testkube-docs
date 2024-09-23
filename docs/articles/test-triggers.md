@@ -15,7 +15,8 @@ via `kubectl`.
 
 ## Creating Test Triggers in the Testkube Dashboard
 
-Click on the lightening bolt icon on the left of the Testkube Dashboard to open the dialog to create test triggers. Any current test triggers will be listed and the `Create a new trigger` button is at the top right of the screen.
+Click on the lightening bolt icon on the left of the Testkube Dashboard to open the dialog to create test triggers.
+Any current test triggers will be listed and the `Create a new trigger` button is at the top right of the screen.
 
 ![Trigger Screen](../img/trigger-screen-082024.png)
 
@@ -30,6 +31,8 @@ Input the action that will be the result of the trigger condition happening and 
 ![Create Trigger Action](../img/create-trigger-action-082024.png)
 
 ## Custom Resource Definition Model
+
+Triggers are ultimately defined as Customer Resources in your cluster - [TestTrigger Reference](/articles/crds/tests.testkube.io-v1#testtrigger)
 
 ### Selectors
 
@@ -103,16 +106,25 @@ probeSpec:
 
 ### Supported Values
 
-- **Resource** - pod, deployment, statefulset, daemonset, service, ingress, event, configmap
-- **Action** - run
-- **Event** - created, modified, deleted
+- **Resource** - `pod`, `deployment`, `statefulset`, `daemonset`, `service`, `ingress`, `event`, `configmap`
+- **Action** - `run`
+- **Event** - `created`, `modified`, `deleted`
 - **Cause** (can be used instead of **Event**)
-  - For deployments - deployment-scale-update, deployment-image-update, deployment-env-update, deployment-containers-modified
-  - For Testkube events - event-start-test, event-end-test-success, event-end-test-failed, event-end-test-aborted, event-end-test-timeout, event-start-testsuite, event-end-testsuite-success, event-end-testsuite-failed, event-end-testsuite-aborted, event-end-testsuite-timeout, event-queue-testworkflow, event-start-testworkflow, event-end-testworkflow-success, event-end-testworkflow-failed, event-end-testworkflow-aborted, event-created, event-updated, event-deleted
-- **Execution** - test, testsuite, testworkflow
-- **ConcurrencyPolicy** - allow, forbid, replace
+  - For deployments - `deployment-scale-update`, `deployment-image-update`, `deployment-env-update`, `deployment-containers-modified`
+  - For Testkube events - `event-start-test`, `event-end-test-success`, `event-end-test-failed`, `event-end-test-aborted`, `event-end-test-timeout`, 
+    `event-start-testsuite`, `event-end-testsuite-success`, `event-end-testsuite-failed`, `event-end-testsuite-aborted`, `event-end-testsuite-timeout`, 
+    `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`, `event-end-testworkflow-failed`, `event-end-testworkflow-aborted`, 
+    `event-created`, `event-updated`, `event-deleted`
+- **Execution** - `test`, `testsuite`, `testworkflow`
+- **ConcurrencyPolicy** - `allow`, `forbid`, `replace`
 
-## Example
+:::info
+Events and values related to Tests and Test Suites have been deprecated and will be removed - [Read More](/articles/legacy-features)
+:::
+
+## Examples
+
+### On Deployment Update
 
 Here is an example for a **Test Trigger** _default/testtrigger-example_ which runs the **TestSuite** _frontend/sanity-test_
 when a **deployment** containing the label **testkube.io/tier: backend** gets **modified** and also has the conditions **Progressing: True: NewReplicaSetAvailable** and **Available: True**.
@@ -153,16 +165,17 @@ spec:
       - host: testkube-dashboard
         port: 8080
   action: run
-  execution: testsuite
+  execution: testworkflow
   concurrencyPolicy: allow
   testSelector:
     name: sanity-test
     namespace: frontend
   disabled: false
 ```
+### On Testkube Cluster Event
 
 You can define **Test Trigger** for Testkube cluster events.
-In below example, if **Test** `k6-executor-smoke` is completed succesfully, then we run **TestSuite** `container-executor-postman-smoke-tests`
+In below example, if **TestWorkflow** `k6-executor-smoke` is completed succesfully, then we run **TestWorkflow** `postman-smoke-tests`
 
 ```yaml
 apiVersion: tests.testkube.io/v1
@@ -176,15 +189,18 @@ spec:
     name: k6-executor-smoke
   event: event-end-test-success
   action: run
-  execution: testsuite
+  execution: testworkflow
   testSelector:
-    name: container-executor-postman-smoke-tests
+    name: postman-smoke-tests
     namespace: testkube
 ```
 
 ## Disabling Test Triggers
 
-Disabling test triggers can be helpful to test your configuration during the development. Testkube lets you disable them via the API or modifying the CRD directly specifying `disabled` field value as `true`. By default, test triggers are enabled on creation.
+Disabling test triggers can be helpful to test your configuration during the development. Testkube lets you disable them via
+the API or modifying the CRD directly specifying `disabled` field value as `true`.
+
+By default, test triggers are enabled on creation.
 
 ## Architecture
 
@@ -196,7 +212,7 @@ Kubernetes API and gets notified by Kubernetes on each event on the watched reso
 
 ## API
 
-Testkube exposes CRUD operations on test triggers in the REST API. Check out the [Open API](../openapi/overview) docs for more info.
+Testkube exposes CRUD operations on test triggers in the REST API. Check out the [OpenAPI docs](../openapi/overview) for more info.
 
 ## Injected Environment Variables
 
