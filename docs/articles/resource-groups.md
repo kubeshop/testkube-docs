@@ -50,7 +50,7 @@ change their Role or remove them:
 
 ## Managing Resources in a Resource Group
 
-Adding or removing a Testkube resource to/from a Resource Group is done from that Resources' Settings page. For 
+Adding or removing a Testkube resource to/from a Resource Group is done from that Resource's Settings page. For 
 example, to assign a Workflow to a Resource Group, go to the "Resource Group" Tab of the Workflow Settings and select
 which Resource Group the Workflow belongs to ("Accounting Tests" in the below screenshot).
 
