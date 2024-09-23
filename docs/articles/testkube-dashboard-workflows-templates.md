@@ -35,7 +35,7 @@ shows an example of how to use this template in a workflow.
 
 ### Resource Group
 
-This panel allows you to assign this Workflow Template to a Resource Group - [Read More](/articles/resource-groups#managing-resources-in-a-resource-group)
+This panel allows you to assign this Workflow Template to a Resource Group - [Read More](/articles/resource-groups#managing-resources-in-a-resource-group).
 
 ![Workflow Template Resource Group](install/workflow-template-resource-group.png)
 
