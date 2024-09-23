@@ -12,7 +12,7 @@ Selecting "Teams" from the Organization Management panel shows a list of all exi
 
 ![Teams Overview](../img/teams-overview.png)
 
-## Creating a new Team
+## Creating a New Team
 
 Select the [Create a new team] button in the overview above, you will be prompted for the name, slug and description
 (The slug is a human-friendly identifier used in URLs):
