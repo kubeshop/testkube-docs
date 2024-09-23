@@ -180,7 +180,9 @@ splitOpenAPIByPaths(
     // only show these in the docs
     let segments = opPath.split('/');
     if (!['status-pages', 'users', 'health', 'organizations', 'environments'].includes(segments[1])) return null;
-    if( segments[segments.length-1] === 'suggestions' || segments[segments.length-1].includes('slug')) return null;
+
+    let lastSegment = segments[segments.length-1];
+    if( lastSegment === 'suggestions' || lastSegment === 'environments-versions' || lastSegment.includes('slug')) return null;
 
     // mapped agent operations
     if (opPath.toLowerCase().startsWith("/organizations/{id}/environments/{environmentid}/agent/")) {
