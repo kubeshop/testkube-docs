@@ -23,7 +23,7 @@ Selecting "Resource groups" from the Organization Management panel shows a list 
 
 ## Creating a New Resource Group
 
-Select the [Create a new group] button in the overview above, you will be prompted for the name, 
+Select the [Create a new group] button in the overview above and you will be prompted for the name, 
 slug and description (The slug is a human-friendly identifier used in URLs):
 
 ![Create Resource Group](images/create-resource-group.png)
