@@ -46,7 +46,7 @@ Testkube will enforce the _most permissive_ role for a given Resource.
 For example, you might have defined a number of Workflows for testing your frontend application, but only want certain Organization
 Members to be able to work with these. In this case you could 
 - Create an "FE Testers" Team under your Organization and add the corresponding Members to it.
-- Create a "FE Tests" Resource Group and assign all your frontend Workflows to that Resource Group. These could be spread across multiple Environments, for example "Staging" and "Production".
+- Create an "FE Tests" Resource Group and assign all your frontend Workflows to that Resource Group. These could be spread across multiple Environments, for example "Staging" and "Production".
 - Finally, add the "FE Testers" Team to the "FE Tests" Resource Group with the `write` role, which would allow them to manage and run
   all your FE Workflows. Members not in this Team will no longer have access to the Workflows in your "FE Tests" Resource Group when working with the Testkube Dashboard or CLI.
 :::
