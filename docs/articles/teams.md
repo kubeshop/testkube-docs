@@ -15,7 +15,7 @@ Selecting "Teams" from the Organization Management panel shows a list of all exi
 ## Creating a New Team
 
 Select the [Create a new team] button in the overview above, you will be prompted for the name, slug and description
-(The slug is a human-friendly identifier used in URLs):
+(the slug is a human-friendly identifier used in URLs):
 
 ![Create Team](images/create-team.png)
 
