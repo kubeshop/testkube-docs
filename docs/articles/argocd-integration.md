@@ -28,6 +28,26 @@ source of truth for the state of your cluster). Therefore, make sure to make des
 in your Git repo instead. 
 :::
 
+### Avoiding pruning of intermediate Testkube Resources
+
+When running your Workflows Testkube generates intermediate Job and Pod resources as described in [Workflows Architecture](/articles/test-workflows-high-level-architecture).
+If ArgoCD is performing a sync with pruning enabled while Testkube is executing Workflows, there is a high likelihood 
+that these intermediate resources will be deleted by Argo, resulting in aborted/distrupted Workflow executions.
+
+To avoid this you will need to add the below annotations to the generated Job and Pod resources as described in 
+[Test Workflows - Job and Pod](/articles/test-workflows-job-and-pod).
+
+```yaml
+annotations:
+  argocd.argoproj.io/compare-options: IgnoreExtraneous
+  argocd.argoproj.io/sync-options: Prune=false
+```
+
+:::tip
+You can create a [Workflow Template](/articles/test-workflow-templates) that adds these annotations to all your Workflows, instead of adding 
+them manually. 
+:::
+
 ## Using the Testkube Agent with ArgoCD
 
 Since the Testkube Agent needs to be installed in the target namespace for your Argo Application(s), you will need to either
