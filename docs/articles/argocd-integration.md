@@ -48,7 +48,7 @@ Same applies to manual synchronization - do NOT select the `prune` option:
 
 ![ArgoCD disable prune manual sync](images/argocd-disable-prune-manual-sync.png)
 
-### Include Agent in your GitOps Repo
+### Include the Agent in your GitOps Repo
 
 For ephemeral namespaces it can be more convenient to include the Agent manifests in your GitOps repo so the Agent 
 gets installed and synced together with any other resources you are managing with ArgoCD. You can simply use `helm template` 
@@ -182,3 +182,9 @@ spec:
 This will trigger the execution of the "frontend-sanity-tests" Test Workflow when any Kubernetes deployment with the 
 label `testkube.io/tier: backend` has been modified in the default namespace, which includes updates performed by ArgoCD 
 during resource synchronization.
+
+:::tip
+Since Triggers are dependent on the target Workflows they execute, be sure to assign them an [ArgoCD Sync Wave](https://argo-cd.readthedocs.io/en/stable/user-guide/sync-waves/) 
+accordingly; you probably want them to be synced _after_ their target Workflows are synced, but _before_ the actual resources
+they trigger on are available.
+:::
