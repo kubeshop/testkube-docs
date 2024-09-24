@@ -1,3 +1,5 @@
+import Admonition from "@theme/Admonition";
+
 # Integrating with Slack Using Webhooks
 
 # Using Slack with Testkube
@@ -31,7 +33,15 @@ Testkube allows you to create Webhooks using the dashboard as well as the CLI.
 
 ### Using the Testkube Dashboard
 
-Navigate to the Webhooks section and **Create a new webhook**. Provide a name and choose the **Resource Identifier** as test-type: curl-test which refers to the cURL test. For **Triggered events**,choose **end-test-success**.
+Navigate to the Webhooks section and **Create a new webhook**. Provide a name and choose the **Resource Identifier** as test-type: curl-test which refers to the cURL test. For **Triggered events**,choose **end-testworkflow-success**.
+
+<Admonition type="tip" title="Failed Tests">
+    If you want to be notified about failures as well, don't forget adding events like `end-testworkflow-failed` or `end-testworkflow-aborted`.
+</Admonition>
+
+<Admonition type="info" title="Legacy Tests and Test Suites">
+    If you need support for legacy Tests and Test Suites too, you should consider also `end-test-success` and `end-testsuite-success` events.
+</Admonition>
 
 ![Slack Webhook 1](../img/slack-webhook-1.png)
 
@@ -57,36 +67,34 @@ To build the URL, we access the environment variables **TESTKUBE_PRO_ORG_ID** an
 
 We have successfully configured the Slack webhook and will now receive events in the Slack channel when any event is sent to this endpoint.
 
-:::info
+<Admonition type="info" title="Legacy Tests and Test Suites">
+    If you need support for legacy Tests and Test Suites too, you can use more complex generic payload to obtain their information.
+    <details>
+        <summary>Custom Payload</summary>
 
-If you need support for legacy Tests and Test Suites too, you can use more complex generic payload to obtain their information.
-
-<details>
-    <summary>Custom Payload</summary>
-```
-{{ $dashboardUrl := print "https://app.testkube.io/organization/" (index .Envs "TESTKUBE_PRO_ORG_ID") "/environment/" (index .Envs "TESTKUBE_PRO_ENV_ID") "/dashboard" }}
-{{ $name := "" }}
-{{ $logsUrl := "" }}
-{{ if .TestWorkflowExecution }}
-  {{ $name = .TestWorkflowExecution.Name }}
-  {{ $logsUrl = print $dashboardUrl "/test-workflows/" .TestWorkflowExecution.Workflow.Name "/executions/" .TestWorkflowExecution.Id }}
-{{ end }}
-{{ if .TestExecution }}
-  {{ $name = .TestExecution.Name }}
-  {{ $logsUrl = print $dashboardUrl "/tests/" .TestExecution.TestName "/executions/" .TestExecution.Id }}
-{{ end }}
-{{ if .TestSuiteExecution }}
-  {{ $name = .TestSuiteExecution.Name }}
-  {{ $logsUrl = print $dashboardUrl "/test-suites/" .TestSuiteExecution.TestSuite.Name "/executions/" .TestSuiteExecution.Id }}
-{{ end }}
-{
-	"text": ":alert: Testkube Test Status \n *Name*: {{$name}} \n *Status*: {{ .Type_ }} \n *Logs*: {{$logsUrl}}"
-}
-```
-
-</details>
-
-:::
+        ```
+        {{ $dashboardUrl := print "https://app.testkube.io/organization/" (index .Envs "TESTKUBE_PRO_ORG_ID") "/environment/" (index .Envs "TESTKUBE_PRO_ENV_ID") "/dashboard" }}
+        {{ $name := "" }}
+        {{ $logsUrl := "" }}
+        {{ if .TestWorkflowExecution }}
+          {{ $name = .TestWorkflowExecution.Name }}
+          {{ $logsUrl = print $dashboardUrl "/test-workflows/" .TestWorkflowExecution.Workflow.Name "/executions/" .TestWorkflowExecution.Id }}
+        {{ end }}
+        {{ if .TestExecution }}
+          {{ $name = .TestExecution.Name }}
+          {{ $logsUrl = print $dashboardUrl "/tests/" .TestExecution.TestName "/executions/" .TestExecution.Id }}
+        {{ end }}
+        {{ if .TestSuiteExecution }}
+          {{ $name = .TestSuiteExecution.Name }}
+          {{ $logsUrl = print $dashboardUrl "/test-suites/" .TestSuiteExecution.TestSuite.Name "/executions/" .TestSuiteExecution.Id }}
+        {{ end }}
+        {
+            "text": ":alert: Testkube Test Status \n *Name*: {{$name}} \n *Status*: {{ .Type_ }} \n *Logs*: {{$logsUrl}}"
+        }
+        ```
+    
+    </details>
+</Admonition>
 
 ## Using the CLI
 
