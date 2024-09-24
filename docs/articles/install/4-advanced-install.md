@@ -74,6 +74,10 @@ testkube-cloud-api:
 
 Note: The default organization and environment mapping only apply on first sign in. After, you can remove users from environments or change roles through Testkube's dashboard.
 
+:::tip
+For advanced automated User onboarding you can use the [REST API](/openapi/overview) to assign Users to Teams, Environments, Resource-Groups, etc.
+:::
+
 **Disabling personal organizations**
 
 Testkube creates an organization for every new user which acts as a personal workspace. When using the default organization and environment configuration, it makes sense to turn off personal organizations using the following config:
