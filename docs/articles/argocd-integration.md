@@ -1,6 +1,6 @@
 # Using Testkube with ArgoCD
 
-This document will describe different ways you can use Testkube with ArgoCD. As a prerequisite you should have good understanding
+This document describes how you can use Testkube with ArgoCD. As a prerequisite you should have good understanding
 of both Testkube, ArgoCD and GitOps principles. 
 
 :::tip
@@ -14,11 +14,25 @@ Testkube stores its core resources (Workflows, Triggers, etc.) as Custom Resourc
 [Read More about Testkube CRDs](/articles/crds). This makes it straight forward to manage them using a GitOps approach with a tool
 like ArgoCD.
 
-To use your Testkube Resources in the synced cluster, the target namespace will need to have the Testkube Agent installed since 
-the Agent can currently only work with Testkube Resources in its own namespace. There are two approaches to making this
-work with ArgoCD:
+To use Testkube Resources in the synced cluster, the target namespace will need to have the Testkube Agent installed (since 
+the Agent can currently only work with Testkube Resources in its own namespace). 
 
-1. Preinstall the Agent in the target namespace and disable pruning in ArgoCD.
+If the Testkube Agent is connected to an Environment in the Testkube Control Plane (either on-prem or in Testkube Cloud), 
+you will see corresponding Testkube Resources in the Testkube Dashboard as soon as they are synced into your cluster by ArgoCD, 
+and be able to trigger/manage them. 
+
+:::note
+In line with GitOps principles, any changes that you make to Testkube Resources in your cluster via the Testkube CLI or 
+Dashboard will be overwritten by ArgoCD when it syncs these resources against your Git repo (since the Git repo is the 
+source of truth for the state of your cluster). Therefore, make sure to make desired modifications to your Testkube Resources 
+in your Git repo instead. 
+:::
+
+## Using the Testkube Agent with ArgoCD
+
+Since the Testkube Agent needs to be installed in the target namespace for your Argo Application(s), you will need to either
+
+1. Preinstall the Agent in the target namespace and disable pruning in ArgoCD. 
 2. Include the Testkube Agent manifests or Helm Chart in your ArgoCD Application.
 
 ### Pre-install the Agent and disable Pruning
@@ -67,14 +81,14 @@ in this repository is used to configure the Helm installation of the Agent.
 
 ## Triggering Test Executions 
 
-Once any Testkube Workflows have been synced to your cluster(s) it is likely that you will want to trigger these to execute
+Once any Testkube Test Workflows have been synced to your cluster(s) it is likely that you will want to trigger these to execute
 corresponding Tests. You can of course trigger them manually through the CLI or Dashboard, it will probably make more 
 sense to trigger them either using an ArgoCD Resource Hook or a Testkube Kubernetes Trigger. 
 
-- Using a Kubernetes Trigger has the advantage of being disconnected from ArgoCD; however a resource gets updated in your Cluster, by it by ArgoCD or
-  some other process (possibly manual), your tests will always execute. The downside is that they will execute even if your resources are part
+- Using a **Kubernetes Trigger** has the advantage of being disconnected from ArgoCD; whenever a resource gets updated in your cluster, be it by ArgoCD or
+  some other process (`kubectl`, etc.), your tests will always execute. The downside is that they will execute even if your resources are part
   of a larger application, which might fail synchronizing or not be initialized correctly when the test is triggered.
-- Using a Resource Hook handles the downside of Kubernetes Triggers by being more attune to the overall ArgoCD sync status; if ArgoCD for some reason 
+- Using an **ArgoCD Resource Hook** handles the downside of Kubernetes Triggers by being more attune to the overall ArgoCD sync status; if ArgoCD for some reason 
   fails to sync your application resources with your cluster, it won't run your tests unnecessarily (unless you want it to).
 
 Let's have a quick look on how to set up these two approaches.
