@@ -79,7 +79,10 @@ This example installs the Testkube Agent Helm Chart version `2.1.22` together wi
 `https://git.example.com/org/test-repository.git` repository. A values file at `/charts/testkube-agent/values.yaml`
 in this repository is used to configure the Helm installation of the Agent.
 
-If you want to connect the Agent to a Testkube Control Plane, your values file will require at least the following properties:
+#### Connecting the Agent to a Control Plane
+
+If you want to connect the Agent to a Testkube Control Plane (for storing results, troubleshooting, etc),
+your values file will require at least the following properties:
 
 ```yaml
 testkube-api:
