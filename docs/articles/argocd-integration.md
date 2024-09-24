@@ -14,15 +14,56 @@ Testkube stores its core resources (Workflows, Triggers, etc.) as Custom Resourc
 [Read More about Testkube CRDs](/articles/crds). This makes it straight forward to manage them using a GitOps approach with a tool
 like ArgoCD.
 
-When creating an Argo Application for a repo that contains Workflows, there are a couple of things to keep in mind:
+To use your Testkube Resources in the synced cluster, the target namespace will need to have the Testkube Agent installed since 
+the Agent can currently only work with Testkube Resources in its own namespace. There are two approaches to making this
+work with ArgoCD:
 
-- The target namespace has to have the Testkube Agent installed if you want to be able to use the synced resources accordingly
-  (the Testkube Agent can currently only work with Testkube resource in its own namespace).
-- Since the target namespace needs to have the Agent installed, it is important to NOT select the `prune` option when syncing your
-  Application with Argo, otherwise Argo will remove the Agent from your namespace when syncing.
-- If you need to use the `prune` option for other reasons you will need to include the Testkube Agent resource in your GitOps repo, so these
-  can be synced safely together with other resources. Use `helm template` with the [Testkube Helm Chart](/articles/install/install-with-helm) to generate the 
-  manifests to be added to your repository.
+1. Preinstall the Agent in the target namespace and disable pruning in ArgoCD.
+2. Include the Testkube Agent manifests or Helm Chart in your ArgoCD Application.
+
+### Pre-install the Agent and disable Pruning
+
+This option is more suited for long-lived namespaces - for example a dedicated namespace for a staging or development environment.
+
+When pre-installing the Testkube Agent in your target namespace, it is important to NOT select the `prune` option when auto-syncing your
+Application with Argo, otherwise Argo will remove the Agent from your namespace when syncing.
+
+![ArgoCD disable prune auto-syncing](images/argocd-disable-prune-autosync.png)
+
+Same applies to manual synchronization - do NOT select the `prune` option:
+
+![ArgoCD disable prune manual sync](images/argocd-disable-prune-manual-sync.png)
+
+### Include Agent in your GitOps Repo
+
+For ephemeral namespaces it can be more convenient to include the Agent manifests in your GitOps repo so the Agent 
+gets installed and synced together with any other resources you are managing with ArgoCD. You can simply use `helm template` 
+with the [Testkube Helm Chart](/articles/install/standalone-agent) to generate 
+the manifests to be added to your repository.
+
+In this case you can either make use
+of the [Multiple Source for an Application](https://argo-cd.readthedocs.io/en/stable/user-guide/multiple_sources/#helm-value-files-from-external-git-repository)
+feature of ArgoCD, including the Testkube Helm chart as an external source
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+spec:
+  sources:
+  - repoURL: 'https://kubeshop.github.io/helm-charts'
+    chart: testkube
+    targetRevision: 2.1.22
+    helm:
+      valueFiles:
+      - $values/charts/testkube-agent/values.yaml
+  - repoURL: 'https://git.example.com/org/test-repository.git'
+    targetRevision: dev
+    ref: values
+```
+
+This example installs the Testkube Agent Helm Chart version `2.1.22` together with Kubernetes resources defined in the
+`https://git.example.com/org/test-repository.git` repository. A values file at `/charts/testkube-agent/values.yaml`
+in this repository is used to configure the Helm installation of the Agent.
 
 ## Triggering Test Executions 
 
