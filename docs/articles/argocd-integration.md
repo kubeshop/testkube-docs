@@ -72,12 +72,10 @@ Same applies to manual synchronization - do NOT select the `prune` option:
 
 For ephemeral namespaces it can be more convenient to include the Agent manifests in your GitOps repo so the Agent 
 gets installed and synced together with any other resources you are managing with ArgoCD. You can simply use `helm template` 
-with the [Testkube Helm Chart](/articles/install/standalone-agent) to generate 
-the manifests to be added to your repository.
+with the [Testkube Helm Chart](/articles/install/standalone-agent) to generate the manifests to be added to your repository.
 
-In this case you can either make use
-of the [Multiple Source for an Application](https://argo-cd.readthedocs.io/en/stable/user-guide/multiple_sources/#helm-value-files-from-external-git-repository)
-feature of ArgoCD, including the Testkube Helm chart as an external source
+Alternatively you can make use of the [Multiple Source for an Application](https://argo-cd.readthedocs.io/en/stable/user-guide/multiple_sources/#helm-value-files-from-external-git-repository) feature of ArgoCD, including the 
+Testkube Helm chart as an external source:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
