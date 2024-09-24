@@ -11,7 +11,7 @@ our [GitOps blogpost](https://testkube.io/blog/a-gitops-powered-kubernetes-testi
 ## Managing Testkube CRDs with ArgoCD
 
 Testkube stores its core resources (Workflows, Triggers, etc.) as Custom Resources in your Kubernetes Cluster -
-[Read More about Testkube CRDs](/articles/crds). This makes it straight forward to manage them using a GitOps approach with a tool
+[Read More about Testkube CRDs](/articles/crds). This makes it straightforward to manage them using a GitOps approach with a tool
 like ArgoCD.
 
 To use Testkube Resources in the synced cluster, the target namespace will need to have the Testkube Agent installed (since 
@@ -124,7 +124,7 @@ Let's have a quick look on how to set up these two approaches.
 
 Post-sync Resource hooks are executed by Argo after it has successfully synced resources within an Application - [Read More](https://argo-cd.readthedocs.io/en/stable/user-guide/resource_hooks/). 
 
-Creating a Post-sync hook as a Kubernetes Job that runs Testkube Tests using the Testkube CLI is straight-forward; the Job would be 
+Creating a Post-sync hook as a Kubernetes Job that runs Testkube Tests using the Testkube CLI is straightforward; the Job would be 
 defined together with your Testkube Resource in your Git repo and ArgoCD will execute it if the synchronization of Git Resources 
 to your Cluster is successful. 
 
