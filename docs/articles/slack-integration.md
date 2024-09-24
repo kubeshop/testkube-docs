@@ -43,10 +43,10 @@ The last step is to configure the payload that will be sent to the Slack Webhook
 
 ```json
 {
-	"text": ":alert: Testkube Test Status \n *TestWorkflowName*: {{.TestWorkflowExecution.Name}} \n *Status*: {{ .Type_ }} \n *Logs*: https://app.testkube.io/organization/{{ index .Envs "TESTKUBE_PRO_ORG_ID" }}/environment/{{ index .Envs "TESTKUBE_PRO_ENV_ID" }}/dashboard/test-workflows/{{ .TestWorkflowExecution.Workflow.Name }}/executions/{{ .TestWorkflowExecution.Id }}
-"
+	"text": ":alert: Testkube Test Status \n *Name*: {{.TestWorkflowExecution.Name}} \n *Status*: {{ .Type_ }} \n *Logs*: https://app.testkube.io/organization/{{ index .Envs "TESTKUBE_PRO_ORG_ID" }}/environment/{{ index .Envs "TESTKUBE_PRO_ENV_ID" }}/dashboard/test-workflows/{{ .TestWorkflowExecution.Workflow.Name }}/executions/{{ .TestWorkflowExecution.Id }}"
 }
 ```
+
 Here, we’re adding custom text that includes:
 
 - The name of the test workflow.
@@ -56,6 +56,37 @@ Here, we’re adding custom text that includes:
 To build the URL, we access the environment variables **TESTKUBE_PRO_ORG_ID** and **TESTKUBE_PRO_ENV_ID**, which are your organization and environment variables that you get when you create an environment in Testkube.
 
 We have successfully configured the Slack webhook and will now receive events in the Slack channel when any event is sent to this endpoint.
+
+:::info
+
+If you need support for legacy Tests and Test Suites too, you can use more complex generic payload to obtain their information.
+
+<details>
+    <summary>Custom Payload</summary>
+```
+{{ $dashboardUrl := print "https://app.testkube.io/organization/" (index .Envs "TESTKUBE_PRO_ORG_ID") "/environment/" (index .Envs "TESTKUBE_PRO_ENV_ID") "/dashboard" }}
+{{ $name := "" }}
+{{ $logsUrl := "" }}
+{{ if .TestWorkflowExecution }}
+  {{ $name = .TestWorkflowExecution.Name }}
+  {{ $logsUrl = print $dashboardUrl "/test-workflows/" .TestWorkflowExecution.Workflow.Name "/executions/" .TestWorkflowExecution.Id }}
+{{ end }}
+{{ if .TestExecution }}
+  {{ $name = .TestExecution.Name }}
+  {{ $logsUrl = print $dashboardUrl "/tests/" .TestExecution.TestName "/executions/" .TestExecution.Id }}
+{{ end }}
+{{ if .TestSuiteExecution }}
+  {{ $name = .TestSuiteExecution.Name }}
+  {{ $logsUrl = print $dashboardUrl "/test-suites/" .TestSuiteExecution.TestSuite.Name "/executions/" .TestSuiteExecution.Id }}
+{{ end }}
+{
+	"text": ":alert: Testkube Test Status \n *Name*: {{$name}} \n *Status*: {{ .Type_ }} \n *Logs*: {{$logsUrl}}"
+}
+```
+
+</details>
+
+:::
 
 ## Using the CLI
 
