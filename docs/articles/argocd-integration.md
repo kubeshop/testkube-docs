@@ -79,6 +79,30 @@ This example installs the Testkube Agent Helm Chart version `2.1.22` together wi
 `https://git.example.com/org/test-repository.git` repository. A values file at `/charts/testkube-agent/values.yaml`
 in this repository is used to configure the Helm installation of the Agent.
 
+If you want to connect the Agent to a Testkube Control Plane, your values file will require at least the following properties:
+
+```yaml
+testkube-api:
+  cloud:
+    key: tkcagnt_XXX 
+    orgId: tkcorg_ZZZ 
+    envId: tkcenv_YYY
+    url: <url>
+  minio:
+    enabled: false
+    
+mongodb:
+  enabled: false 
+  
+testkube-dashboard:
+  enabled: false
+```
+
+You can find the corresponding values in the [Environment Settings](/testkube-pro/articles/environment-management#general) for the Testkube Environment that the Agent should connect
+to:
+
+![Agent Helm Chart Values](images/agent-helm-chart-values.png)
+
 ## Triggering Test Executions 
 
 Once any Testkube Test Workflows have been synced to your cluster(s) it is likely that you will want to trigger these to execute
