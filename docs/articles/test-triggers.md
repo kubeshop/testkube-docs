@@ -4,17 +4,19 @@ Testkube allows you to automate running test workflows by defining triggers on c
 
 ## What is a Testkube Event Trigger?
 
-In generic terms, a _trigger_ defines an _action_ which will be executed for a given _execution_ when a certain _event_ on a specific _resource_ occurs.
+In generic terms, a _Trigger_ defines an _action_ which will be executed for a given _execution_ when a certain _event_ on a specific _resource_ occurs.
+For example, we could define a _TestTrigger_ which _runs_ a _Test_ when a _ConfigMap_ gets _modified_.
 
-In Testkube, event triggers allow you to trigger the execution of a workflow based on Kubernetes events - for example when a `Deployment` is updated
-or an `Ingress` gets deleted.
+In Testkube, Event Triggers allow you to trigger the execution of a Workflow based on Kubernetes Events - for example when a Deployment is updated
+or an Ingress gets deleted.
 
-You can currently manage event triggers in the Testkube Dashboard or by interacting with corresponding `TestTrigger` custom resources
+You can currently create/manage Event Triggers in the Testkube Dashboard or by interacting with corresponding Trigger custom resources
 via `kubectl`.
 
 ## Creating Test Triggers in the Testkube Dashboard
 
-Click on the lightening bolt icon on the left of the Testkube Dashboard and then click on the `Create my first trigger` button.
+Click on the lightening bolt icon on the left of the Testkube Dashboard to open the dialog to create test triggers.
+Any current test triggers will be listed and the `Create a new trigger` button is at the top right of the screen.
 
 ![Trigger Screen](../img/create-trigger.png)
 
@@ -27,6 +29,8 @@ After clicking `Next`, then one can configure the action to execute on the trigg
 ![Create Trigger Action](../img/create-trigger-form-action.png)
 
 ## Custom Resource Definition Model
+
+Triggers are ultimately defined as Customer Resources in your cluster - [TestTrigger Reference](/articles/crds/tests.testkube.io-v1#testtrigger)
 
 ### Selectors
 
@@ -100,16 +104,25 @@ probeSpec:
 
 ### Supported Values
 
-- **Resource** - pod, deployment, statefulset, daemonset, service, ingress, event, configmap
-- **Action** - run
-- **Event** - created, modified, deleted
+- **Resource** - `pod`, `deployment`, `statefulset`, `daemonset`, `service`, `ingress`, `event`, `configmap`
+- **Action** - `run`
+- **Event** - `created`, `modified`, `deleted`
 - **Cause** (can be used instead of **Event**)
-  - For deployments - deployment-scale-update, deployment-image-update, deployment-env-update, deployment-containers-modified
-  - For Testkube events - event-queue-testworkflow, event-start-testworkflow, event-end-testworkflow-success, event-end-testworkflow-failed, event-end-testworkflow-aborted, event-created, event-updated, event-deleted
-- **Execution** - testworkflow
-- **ConcurrencyPolicy** - allow, forbid, replace
+  - For deployments - `deployment-scale-update`, `deployment-image-update`, `deployment-env-update`, `deployment-containers-modified`
+  - For Testkube events - `event-start-test`, `event-end-test-success`, `event-end-test-failed`, `event-end-test-aborted`, `event-end-test-timeout`, 
+    `event-start-testsuite`, `event-end-testsuite-success`, `event-end-testsuite-failed`, `event-end-testsuite-aborted`, `event-end-testsuite-timeout`, 
+    `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`, `event-end-testworkflow-failed`, `event-end-testworkflow-aborted`, 
+    `event-created`, `event-updated`, `event-deleted`
+- **Execution** - `test`, `testsuite`, `testworkflow`
+- **ConcurrencyPolicy** - `allow`, `forbid`, `replace`
 
-## Example
+:::info
+Events and values related to Tests and Test Suites have been deprecated and will be removed - [Read More](/articles/legacy-features)
+:::
+
+## Examples
+
+### On Deployment Update
 
 Here is an example for a **Test Trigger** _default/testtrigger-example_ which runs the **TestSuite** _frontend/sanity-test_
 when a **deployment** containing the label **testkube.io/tier: backend** gets **modified** and also has the conditions **Progressing: True: NewReplicaSetAvailable** and **Available: True**.
@@ -157,9 +170,10 @@ spec:
     namespace: frontend
   disabled: false
 ```
+### On Testkube Cluster Event
 
 You can define **Test Trigger** for Testkube cluster events.
-In below example, if **TestWorkflow** `k6-smoke-test` is completed succesfully, then we run **TestWorkflow** `postman-smoke-tests`
+In below example, if **TestWorkflow** `k6-executor-smoke` is completed succesfully, then we run **TestWorkflow** `postman-smoke-tests`
 
 ```yaml
 apiVersion: tests.testkube.io/v1
@@ -181,7 +195,10 @@ spec:
 
 ## Disabling Test Triggers
 
-Disabling test triggers can be helpful to test your configuration during the development. Testkube lets you disable them via the API or modifying the CRD directly specifying `disabled` field value as `true`. By default, test triggers are enabled on creation.
+Disabling test triggers can be helpful to test your configuration during the development. Testkube lets you disable them via
+the API or modifying the CRD directly specifying `disabled` field value as `true`.
+
+By default, test triggers are enabled on creation.
 
 ## Architecture
 
@@ -193,7 +210,7 @@ Kubernetes API and gets notified by Kubernetes on each event on the watched reso
 
 ## API
 
-Testkube exposes CRUD operations on test triggers in the REST API. Check out the [Open API](../openapi/overview) docs for more info.
+Testkube exposes CRUD operations on test triggers in the REST API. Check out the [OpenAPI docs](../openapi/overview) for more info.
 
 ## Injected Environment Variables
 
