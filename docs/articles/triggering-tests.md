@@ -15,7 +15,7 @@ Triggering tests is either automated or done manually by either DevOps (for exam
 
 The decoupling of test definition and execution from your CI/CD is one of the most important and powerful aspects of Testkube, as this allows you to trigger your tests in any way needed:
 - From your CI/CD workflows using one of our [CI/CD integrations](../articles/cicd-overview.mdx).
-- In response to Kubernetes events using [Triggers](../articles/test-triggers.mdx).
+- In response to Kubernetes events using [Triggers](../articles/test-triggers).
 - Manually via the [CLI](../articles/install/1-cli.mdx) or the [Testkube Dashboard](../articles/testkube-dashboard.md).
 - At a recurring schedule using [Test Workflow Scheduling](../articles/test-workflows.md).
 - From any other tool using the [Testkube REST API](/openapi/overview).
