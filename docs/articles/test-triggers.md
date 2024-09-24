@@ -1,6 +1,6 @@
-# K8s Event Triggers
+# Kubernetes Event Triggers
 
-Testkube allows you to automate running tests and test suites by defining triggers on certain events for various Kubernetes resources.
+Testkube allows you to automate running test workflows by defining triggers on certain events for various Kubernetes resources.
 
 ## What is a Testkube Event Trigger?
 
@@ -18,17 +18,15 @@ via `kubectl`.
 Click on the lightening bolt icon on the left of the Testkube Dashboard to open the dialog to create test triggers.
 Any current test triggers will be listed and the `Create a new trigger` button is at the top right of the screen.
 
-![Trigger Screen](../img/trigger-screen-082024.png)
+![Trigger Screen](../img/create-trigger.png)
 
-The `Create new trigger` dialog opens:
+The `Create a new trigger` dialog opens, where one can configure the condition for the trigger:
 
-![Create Trigger](../img/create-trigger-082024.png)
+![Create Trigger Condition](../img/create-trigger-form.png)
 
-Input the condition that will cause the trigger and click `Next`.
+After clicking `Next`, then one can configure the action to execute on the trigger and then click `Create` to create it.
 
-Input the action that will be the result of the trigger condition happening and click `Create`.
-
-![Create Trigger Action](../img/create-trigger-action-082024.png)
+![Create Trigger Action](../img/create-trigger-form-action.png)
 
 ## Custom Resource Definition Model
 
@@ -54,7 +52,7 @@ Name selectors are used when we want to select a specific resource in a specific
 ```yaml
 selector:
   name: Kubernetes object name
-  nameRegex: Kubernetes object name regex (for example, "test.*")
+  nameRegex: Kubernetes object name regex (for example, "testworkflow.*")
   namespace: Kubernetes object namespace (default is **testkube**)
 ```
 
@@ -186,7 +184,7 @@ metadata:
 spec:
   resource: event
   resourceSelector:
-    name: k6-executor-smoke
+    name: k6-smoke-test
   event: event-end-test-success
   action: run
   execution: testworkflow
@@ -222,5 +220,3 @@ The following environment variables are automatically injected into each trigger
 - `WATCHER_EVENT_NAME`: resource name
 - `WATCHER_EVENT_NAMESPACE`: resource namespace
 - `WATCHER_EVENT_EVENT_TYPE`: event type
-
-
