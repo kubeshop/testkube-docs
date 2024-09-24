@@ -30,7 +30,7 @@ in your Git repo instead.
 
 ### Avoiding pruning of intermediate Testkube Resources
 
-When running your Workflows Testkube generates intermediate Job and Pod resources as described in [Workflows Architecture](/articles/test-workflows-high-level-architecture).
+When running your Workflows, Testkube generates intermediate Job and Pod resources as described in [Workflows Architecture](/articles/test-workflows-high-level-architecture).
 If ArgoCD is performing a sync with pruning enabled while Testkube is executing Workflows, there is a high likelihood 
 that these intermediate resources will be deleted by Argo, resulting in aborted/distrupted Workflow executions.
 
