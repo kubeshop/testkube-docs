@@ -59,7 +59,7 @@ which Resource Group the Workflow belongs to ("Accounting Tests" in the below sc
 ## Listing Resources in a Resource Group
 
 There is currently no single view that shows all resources in a Resource Group, but you can filter both 
-Workflows and Workflow Templates on a Resource Group in the Workflows Overview:
+Workflows and Workflow Templates on a Resource Group in their respective Overview panels:
 
 ![Workflows Resource Group Filter](images/workflows-resource-group-filter.png)
 
