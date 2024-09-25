@@ -1,7 +1,10 @@
-# Testkube Tekton
+# Testkube Tekton Integration
 
-The Testkube Tekton integration facilitates the installation of Testkube and allows the execution of any [Testkube CLI](https://docs.testkube.io/cli/testkube) 
-command within a Tekton pipeline.The integration offers a versatile approach to align with your pipeline requirements and is compatible with Testkube, 
+[Tekton](https://tekton.dev) is a powerful and flexible open-source framework for creating CI/CD systems, allowing
+developers to build, test, and deploy across cloud providers and on-premise systems.
+
+The Testkube Tekton integration facilitates the installation of Testkube and allows the execution of any [Testkube CLI](https://docs.testkube.io/cli/testkube)
+command within a Tekton pipeline.The integration offers a versatile approach to align with your pipeline requirements and is compatible with Testkube,
 Testkube On-Prem, and the open-source Testkube platform. It enables Tekton users to leverage the powerful features of Testkube directly within their
   CI/CD pipelines, ensuring efficient and flexible Test Workflow execution.
 
@@ -25,7 +28,7 @@ This will include the spec, steps and script necessary to execute the workflow.
 
 ### Create a Tekton Task
 
-This Tekton Task creates `testkube` Task on a Kubernetes cluster and integrates Testkube CLI. To connect to the self-hosted instance, you need to have **kubectl** 
+This Tekton Task creates `testkube` Task on a Kubernetes cluster and integrates Testkube CLI. To connect to the self-hosted instance, you need to have **kubectl**
 configured for accessing your Kubernetes cluster, and pass an optional namespace, if Testkube is not deployed in the default **testkube** namespace. You can run
 all Testkube CLI commands using this Task.
 
