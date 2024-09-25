@@ -5,7 +5,7 @@ You may need to configure the Job and Pod used for execution. It can be also use
 :::tip
 
 Read more about the [Workflow Architecture](test-workflows-high-level-architecture.md) to understand how Testkube
-executes your Workflows.
+creates Jobs and Pods to execute your Workflows.
 
 :::
 

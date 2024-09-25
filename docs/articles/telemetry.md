@@ -8,7 +8,7 @@ The data collected is always anonymous, not traceable to the source, and only us
 
 ## Dashboard telemetry
 
-The webui dashboard collects user consent and then sends telemetry to the following services:
+The Testkube Dashboard collects user consent and then sends telemetry to the following services:
 * app.posthog.com
 * api.segment.io
 * google analytics

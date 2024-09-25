@@ -18,7 +18,7 @@ When creating a new environment in Testkube Cloud, you will first be prompted wi
 
 1. **I have a K8s Cluster** - select this if you have a cluster where you can install the Testkube Agent for your 
   environment. 
-2. **No Cluster at hand** - setting up a local cluster for evaluation purposes is straight-forward, for example using [kind](https://kind.sigs.k8s.io/) 
+2. **No Cluster at hand** - setting up a local cluster for evaluation purposes is straightforward, for example using [kind](https://kind.sigs.k8s.io/) 
   or [minikube](https://minikube.sigs.k8s.io/docs/). Alternatively, you can use our demo environment for exploring Testkube functionality with having to install anything.
 3. **I don't use Kubernetes** - if you're not familiar with Kubernetes and don't want to install a local cluster, you can use
    our demo environment for exploring Testkube functionality with having to install anything. 

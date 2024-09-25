@@ -18,7 +18,7 @@ Our aim is to let everyone contribute to assuring quality instead of putting all
 
 #### Centralized & Actionable
 
-Growing products make it challenging to keep up with the sheer amount of tests and test data generated. We built a centralised dashboard that acts as a single pane of glass for everything test related.
+Growing products make it challenging to keep up with the sheer amount of tests and test data generated. We built a centralised Dashboard that acts as a single pane of glass for everything test related.
 
 Our analysis tools facilitate developers and testers with troubleshooting failed tests
 and gives engineering managers strategic insights into their current testing practices.

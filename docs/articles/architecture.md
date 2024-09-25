@@ -15,7 +15,7 @@ document for an overview of how the Workflow engine works.
 ## Context
 
 High level overview of Testkube components when running Testkube entirely on-prem. When using Testkube 
-Cloud the dashboard and control-plane are hosted and entitlement is done internally (without a License Server).
+Cloud, the Dashboard and control-plane are hosted and entitlement is done internally (without a License Server).
 
 ![Testkube Context Diagram](../img/testkube-context-diagram.png)
 

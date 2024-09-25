@@ -1,31 +1,24 @@
-# Quickstart without Kubernetes
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
-Local evaluation of Testkube requires you to have access to a Kubernetes cluster, either running locally on your machine or
-remotely in some cloud provider like AWS, Google, Azure, etc.
+# Testkube Agent with Docker
 
-If you don't have access to a Kubernetes cluster for evaluating Testkube you have two options:
+The Testkube Agent uses Kubernetes as its runtime environment, which requires you to have access to a Kubernetes cluster either
+running locally on your machine or remotely in some cloud provider like AWS, Google, Azure, etc.
 
-1. Evaluate Testkube using the Cloud Version available at [app.testkube.io](https://app.testkube.io), this includes a demo environment that contains sample resources to help you get started.
-2. Install a lightweight Kubernetes cluster locally for evaluation purposes (not as hard as you might think)
+If you don't have access to a Kubernetes cluster for installing the Testkube Agent you can either install a lightweight
+Kubernetes distribution under Docker, or use the Kubernetes version included with Docker Desktop.
 
-Let's have a quick look at how to get started with these two options.
+Let's look at both of these options below.
 
-## Testkube Cloud Evaluation
+:::info
+The Testkube Team is actively working on providing a packaged Docker Testkube Agent - check back soon!
+:::
 
-- Go to [app.testkube.io](https://app.testkube.io)
-- Sign up to the trial plan with either a GitHub or Gitlab account (no credit-card details required).
-- After signing in the first time, make sure to select the "Get access to a Demo Environment" option:
+## Installing a Lightweight Kubernetes Distribution Under Docker
 
-![Get Access to Demo Environment](images/get-access-to-demo-env.png)
-
-- Now you can select the Demo Cluster (it will be preselected) from the Environment Selector in the top right, and see/play with the predefined Tests/Workflows/etc. in it:
-
-![Demo Environment Dashboard](images/demo-env-dashboard.png)
-
-## Installing a Lightweight Kubernetes Cluster
-
-There are a number of lightweight Kubernetes distributions that you can install locally on your machine. All of them require Docker Desktop to be installed,
-so make sure that is up and running before moving on (download from https://www.docker.com/products/docker-desktop/).
+There are a number of lightweight Kubernetes distributions that you can install under Docker, all of them require
+Docker Desktop to be installed, so make sure that is up and running before moving on (download from https://www.docker.com/products/docker-desktop/).
 
 Recommended Kubernetes distributions for local Testkube evaluation are:
 
@@ -33,35 +26,61 @@ Recommended Kubernetes distributions for local Testkube evaluation are:
 - minikube - https://minikube.sigs.k8s.io/
 - k3s - https://k3s.io/
 
-### Installing Kind on MacOS or Windows
+:::tip
+A detailed tutorial on how to run Testkube with kind is available at [Testing in KinD: Using Testkube with Kubernetes in Docker](https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker)
+:::
 
-Read all about how to quickly get started with kind at https://kind.sigs.k8s.io/docs/user/quick-start/,
-let's have a look how to install kind on macOS using brew:
+### Installing kind under MacOS or Windows
 
-1. First install kind itself:
+kind is a tool for running local Kubernetes clusters using Docker container “nodes”. Read all about how to quickly get
+started with kind at https://kind.sigs.k8s.io/docs/user/quick-start/.
 
-```
-brew install kind
-```
+Installation of kind is straight-forward, instructions for MacOS and Windows are shown below.
 
-2. Then create a default cluster:
+  <Tabs groupId="dashboard-cli">
+    <TabItem value="macos" label="Install Kind on MacOS" default>
 
-```
-kind create cluster
-```
 
-Or if you're on Windows and have Chocolatey (https://chocolatey.org/) installed
+      First install kind using [brew](https://brew.sh/):
 
-```
-choco install kind
-```
+      ```
+      brew install kind
+      ```
 
-Then create a default cluster just as on MacOS above:
+      Then create a default cluster where you will install the Testkube Agent:
 
-```
-kind create cluster
-```
+      ```
+      kind create cluster
+      ```
+
+    </TabItem>
+
+    <TabItem value="windows" label="Install Kind on Windows">
+
+      Make sure you have [Chocolatey](https://chocolatey.org/) installed, then run
+
+      ```
+      choco install kind
+      ```
+
+      Then create a default cluster where you will install the Testkube Agent:
+
+      ```
+      kind create cluster
+      ```
+
+    </TabItem>
+  </Tabs>
+
 
 That's it! Now you can go to the [Testkube Quickstart][install-with-cli] and pick up from there!
 
 [install-with-cli]: /articles/install/install-with-cli
+
+## Using the Kubernetes Distribution Included with Docker Desktop
+
+Docker Desktop comes with a built-in version of Kubernetes - [Read More](https://docs.docker.com/desktop/kubernetes/).
+If you enable this feature you will have a local Kubernetes cluster available and should be all set -
+go to the [Testkube Quickstart][install-with-cli] and pick up from there!
+
+

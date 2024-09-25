@@ -6,7 +6,7 @@ Testkube standalone agent includes our full test execution and orchestration eng
 This means that all CRDs are available, you can apply triggers and run test workflows, then afterwards view the resulting status, logs and artifacts.
 
 Overal there are few reasons to run the agent without the control plane.
-The latter comes with a dashboard and many other features.
+The latter comes with a Dashboard and many other features.
 The main benefit is that this works better in resource constrained environments and that it is 100% open-source.
 
 You can install with the CLI or Helm. The following components will be installed into your Kubernetes cluster:
@@ -17,13 +17,12 @@ You can install with the CLI or Helm. The following components will be installed
 - Testkube will listen and manage all the CRDs for Tests, TestSuites, Executors, etc… inside the Testkube namespace.
 
 Once installed you can verify your installation and check that Testkube is up and running with
-`kubectl get all -n testkube`. Once validated, you're ready to unleash the full potential of Testkube in your environment. Testkube OSS is here to help you to powering your development and testing workflows seamlessly.
+`kubectl get all -n testkube`. Once validated, you're ready to unleash the full potential of Testkube in your environment. 
+Testkube OSS is here to help you to powering your development and testing workflows seamlessly.
 
-## Basics
+## Installing
 
-### Installing
-
-#### With the CLI
+### With the CLI
 
 You can install the standalone agent by executing the following command.
 By default it will install within the `testkube` namespace for your
@@ -33,7 +32,7 @@ current Kubernetes context.
 testkube init
 ```
 
-#### With Helm
+### With Helm
 
 Add the Kubeshop Helm repository:
 
@@ -56,7 +55,7 @@ helm upgrade --install \
 
 By default, the namespace for the installation will be `testkube`. If the `testkube` namespace does not exist, it will be created for you.
 
-Alternatively, you can customize by fetching the default values.yaml and modifying it afterwards:
+Alternatively, you can customize by fetching the default values.yaml and modifying it afterward:
 
 ```sh
 helm show values kubeshop/testkube > values.yaml
@@ -72,29 +71,34 @@ helm upgrade --install \
   testkube kubeshop/testkube
 ```
 
-### Upgrading
+:::tip
+The [Helm Chart Docs](https://github.com/kubeshop/helm-charts/tree/main/charts/testkube#testkube) include a list of all available
+[values properties](https://github.com/kubeshop/helm-charts/tree/main/charts/testkube#values).
+:::
+
+## Upgrading
 
 See [upgrade][upgrade] for instructions on how to upgrade the standalone agent.
 
-### Uninstalling
+## Uninstalling
 
-#### With the CLI
+### With the CLI
 
 ```sh
 testkube uninstall
 ```
 
-#### With Helm
+### With Helm
 
 ```sh
 helm delete --namespace testkube testkube kubeshop/testkube
 ```
 
-### Connecting to a control plane
+## Connecting to a control plane
 
 In case you decide that you want to go beyond a standalone agent, you can connect it to a Testkube control plane.
 The following command which will guide you through the migration process.
-All test definitions will stay the same, however, historical test results data or artifacts wont be copied to the control plane.
+All test definitions will stay the same, however, historical test results data or artifacts won't be copied to the control plane.
 
 ```
 testkube pro connect
@@ -381,3 +385,4 @@ testkube-api:
 [mongo-config]: https://github.com/bitnami/charts/tree/master/bitnami/mongodb#parameters
 [nats-config]: https://docs.nats.io/running-a-nats-service/nats-kubernetes/helm-charts
 [install-cli]: /articles/install/cli
+[cli-context]: /cli/testkube_set_context
