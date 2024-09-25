@@ -11,7 +11,7 @@ an `--agent-uri` flag or they will instead by default connect to Testkube Cloud.
 
 ## Deploy an agent that will join Testkube
 
-You can add another agent to an existing Testkube deployment within a couple of minutes. Get started by going to the dashboard and create a new environment. Afterwards it will show you a command that can be used to bootstrap the agent in another cluster. The command looks as follows:
+You can add another agent to an existing Testkube deployment within a couple of minutes. Get started by going to the Dashboard and create a new environment. Afterwards it will show you a command that can be used to bootstrap the agent in another cluster. The command looks as follows:
 
 ![Command that deploys an agent that joins Testkube](./images/agent-that-joins-testkube.png)
 

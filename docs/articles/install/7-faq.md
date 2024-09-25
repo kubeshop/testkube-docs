@@ -35,7 +35,7 @@ is running in has network access to the applications or components to be tested.
 ## How do I expose Testkube to the Internet?
 
 To expose Testkube to the Internet, you will need to create an Ingress for both the Testkube API and the 
-Testkube dashboard. Check the installation instructions [here][install-ingress] for different configurations.
+Testkube Dashboard. Check the installation instructions [here][install-ingress] for different configurations.
 
 ## Access the Service Under Test (SUT) Using Testkube
 

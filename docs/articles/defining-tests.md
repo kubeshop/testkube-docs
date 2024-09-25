@@ -29,7 +29,7 @@ generate massive load.
 
 Testkube also provides [Workflow Templates](../articles/test-workflow-templates.md) that can be used to define common traits for any of the above mentioned features, which can then be shared across multiple workflows, allowing you to ensure consistent usage of these features. For example you might define templates for accessing Git repositories, setting resource allocations or defining Docker images for your tests.
 
-Testkube allows you to label your Test Workflows however needed, for example by target release, application or tool, allowing for flexible management of Workflows via a single dashboard where all workflows and their executions are available.
+Testkube allows you to label your Test Workflows however needed, for example by target release, application or tool, allowing for flexible management of Workflows via a single Dashboard where all workflows and their executions are available.
 
 ![Dashboard](../img/concepts-dashboard.png)
 

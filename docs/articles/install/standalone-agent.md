@@ -6,7 +6,7 @@ Testkube standalone agent includes our full test execution and orchestration eng
 This means that all CRDs are available, you can apply triggers and run test workflows, then afterwards view the resulting status, logs and artifacts.
 
 Overal there are few reasons to run the agent without the control plane.
-The latter comes with a dashboard and many other features.
+The latter comes with a Dashboard and many other features.
 The main benefit is that this works better in resource constrained environments and that it is 100% open-source.
 
 You can install with the CLI or Helm. The following components will be installed into your Kubernetes cluster:

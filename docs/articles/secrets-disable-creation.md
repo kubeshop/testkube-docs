@@ -1,6 +1,6 @@
 # Disable Secret Creation
 
-Setting `testkube-api.disableSecretCreation` to `true` will prevent the creation of new secrets from the dashboard and the API.  
+Setting `testkube-api.disableSecretCreation` to `true` will prevent the creation of new secrets from the Dashboard and the API.  
 This setting hides the options for creating secrets, allowing only references to existing secrets to be used.
 
 For instance, in areas where git credentials (such as username and token) would typically be entered, these inputs will also be hidden. 

@@ -29,7 +29,7 @@ Copy the webhook URL from the next screen and keep it handy, as we’ll need it 
 
 ## Creating a Webhook For Slack
 
-Testkube allows you to create Webhooks using the dashboard as well as the CLI. 
+Testkube allows you to create Webhooks using the Dashboard as well as the CLI. 
 
 ### Using the Testkube Dashboard
 
