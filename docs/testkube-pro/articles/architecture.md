@@ -3,7 +3,7 @@
 ## Multiple Testkube Agents
 
 The main Testkube Pro feature is to have insights into multiple Testkube Pro Agents. 
-You can look at your Kubernetes clusters from a single dashboard and easily switch between different Testkube clusters. 
+You can look at your Kubernetes clusters from a single Dashboard and easily switch between different Testkube clusters. 
 
 ![multiple clusters](../../img/multiple-clusters.jpeg)
 

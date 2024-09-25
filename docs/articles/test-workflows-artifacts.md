@@ -2,7 +2,7 @@
 
 Testkube can be configured to retrieve any file artifacts that are produced by tools and scripts executed in 
 a Test Workflow. Collected artifacts are then retrievable either via the API/CLI 
-(see [CLI Reference](/cli/testkube_download)) or via the dashboard in the [Artifacts Tab](/articles/logs-and-artifacts#artifact-collection).
+(see [CLI Reference](/cli/testkube_download)) or via the Dashboard in the [Artifacts Tab](/articles/logs-and-artifacts#artifact-collection).
 
 :::note
 

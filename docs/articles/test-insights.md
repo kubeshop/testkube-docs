@@ -2,7 +2,7 @@
 
 Test Insights is an analytics tool integrated into Testkube that provides detailed metrics about the
 execution of your tests. This feature allows teams to track key performance indicators including the number
-of test executions, pass/fail rates, execution durations, and more, all within a user-friendly dashboard.
+of test executions, pass/fail rates, execution durations, and more, all within a user-friendly Dashboard.
 
 With Test Insights, DevOps and QA managers can quickly answer crucial questions that impact the testing 
 cycle and overall software quality, such as:

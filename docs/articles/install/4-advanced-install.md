@@ -72,7 +72,7 @@ testkube-cloud-api:
                 - name: production_2
 ```
 
-Note: The default organization and environment mapping only apply on first sign in. After, you can remove users from environments or change roles through Testkube's dashboard.
+Note: The default organization and environment mapping only apply on first sign in. After, you can remove users from environments or change roles through Testkube's Dashboard.
 
 **Disabling personal organisations**
 
@@ -87,7 +87,7 @@ testkube-cloud-api:
 
 ### Invitations
 
-Users will now have to be invited within the dashboard. You can configure the SMTP server and Testkube will send e-mail invitations, alternatively new users will join the organisation without explicitly accepting the invitation.
+Users will now have to be invited within the Dashboard. You can configure the SMTP server and Testkube will send e-mail invitations, alternatively new users will join the organisation without explicitly accepting the invitation.
 
 ```yaml
 testkube-cloud-api:

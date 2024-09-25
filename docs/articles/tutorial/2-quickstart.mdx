@@ -53,7 +53,7 @@ those steps require your own environment.
 2. Once authenticated, [go to the demo environment.](https://app.testkube.io/demo-environment) - (there are multiple in-app
   prompts for this also).
 
-You will now see the dashboard without having to install an agent, and are free to explore/run existing Workflows,
+You will now see the Dashboard without having to install an agent, and are free to explore/run existing Workflows,
 look at execution results, etc.
 
 ![The dashboard](./img/demo-environment-dashboard.png)
@@ -79,7 +79,7 @@ metadata:
   name: my-test
   # By default, workflows should be applied to the namespace of the Testkube agent.
   namespace: testkube
-  # Labels allow you to filter and group within the dashboard and CLI.
+  # Labels allow you to filter and group within the Dashboard and CLI.
   labels:
     app.kubernetes.io/name: my-api
     app.kubernetes.io/part-of: my-cms
@@ -179,7 +179,7 @@ kubectl apply -f my-workflow.yaml && kubectl testkube run tw my-test --watch
 <Tabs groupId="tutorial-cli">
 <TabItem value="dashboard" label="Using the dashboard" default>
 
-1. Go to the dashboard and open your recent execution.
+1. Go to the Dashboard and open your recent execution.
 2. You can see this execution's logs right away.
 3. View the execution's artifacts by going to the `Artifacts` tab.
 4. Click the download icon to download it.
@@ -216,7 +216,7 @@ For example, if I want to run this test every time my deployment's image updates
 
 <TabItem value="ci" label="Trigger from CI/CD">
 
-1. Browse to your Test Workflow within the dashboard - [Read More](/articles/testkube-dashboard-workflows-overview).
+1. Browse to your Test Workflow within the Dashboard - [Read More](/articles/testkube-dashboard-workflows-overview).
 2. Click the `CI/CD Integrations` tab under your [Workflow Details](/articles/testkube-dashboard-workflow-details).
 3. You can see the instructions where all variables have been prefilled for you.
 4. Follow these instructions to run it on your favourite provider.
