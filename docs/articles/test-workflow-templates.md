@@ -20,7 +20,10 @@ Templates are flexible and can be used is various ways:
 
 ### Create a Template
 
-You can manage your templates under _Workflows > Workflow Templates_ within the dashboard or apply a TestWorkflowTemplate Custom Resource to your Kubernetes cluster with the CLI. This custom resources follows the same structure as a Test Workflow, with the additional ability to define configuration parameters that can be specified when the template is used.
+You can manage your templates under _Workflows > Workflow Templates_ within the Dashboard ([Read More](/articles/testkube-dashboard-workflows-templates))
+or create a TestWorkflowTemplate Custom Resource in your Kubernetes cluster using the [Testkube CLI](/cli/testkube_create_testworkflowtemplate). 
+This custom resources follows the same structure as a Test Workflow, with the additional ability to define configuration parameters that 
+can be specified when the template is used.
 
 The example below templates a testing tool. More specifically, it defines a k6 test with parameters for the
 k6 version to use and the parameters to pass to k6.
@@ -348,7 +351,41 @@ spec:
   - shell: echo w2
 ```
 
-## Official Workflow Templates
+## Global Templates
+
+Sometimes, you may want to prepare company-wide configuration that will be applied to all Test Workflows.
+In example, it may be used to add proper labels, security, or other infrastructure setup.
+
+To configure global template, you need to adjust [**Helm Chart values**](https://github.com/kubeshop/helm-charts/blob/main/charts/testkube/values.yaml#L36-L46) of Agent installation, specifically `global.testWorkflows.globalTemplate`:
+
+```yaml
+global:
+  testWorkflows:
+    globalTemplate:
+      enabled: true
+      spec:
+        pod:
+          labels:
+            key: value
+          securityContext:
+            runAsNonRoot: true
+```
+
+If you want to provide your global template separately from the Helm Chart you can use
+
+```yaml
+global:
+  testWorkflows:
+    globalTemplate:
+      enabled: true
+      external: true
+      name: my-external-global-template
+```
+
+This example will result in Testkube looking for a TestWorkflowTemplate named `my-external-global-template` in the
+Testkube namespace when executing your Test Workflows.
+
+## Official Templates
 
 Testkube provides a set of official, ready to use Test Workflow Templates, which simplify running tests
 using various popular tools. Below you can find a list of official Test Workflow Templates along with
