@@ -166,3 +166,17 @@ global:
           securityContext:
             runAsNonRoot: true
 ```
+
+If you want to provide your global template separately from the Helm Chart you can use
+
+```yaml
+global:
+  testWorkflows:
+    globalTemplate:
+      enabled: true
+      external: true
+      name: my-external-global-template
+```
+
+This example will result in Testkube looking for a TestWorkflowTemplate named `my-external-global-template` in the
+Testkube namespace when executing your Test Workflows.
