@@ -147,36 +147,3 @@ container:
     mountPath: /mnt/some/name
 ```
 
-## Global Template
-
-Sometimes, you may want to prepare company-wide configuration that will be applied to all Test Workflows.
-In example, it may be used to add proper labels, security, or other infrastructure setup.
-
-To configure global template, you need to adjust [**Helm Chart values**](https://github.com/kubeshop/helm-charts/blob/main/charts/testkube/values.yaml#L36-L46) of Agent installation, specifically `global.testWorkflows.globalTemplate`:
-
-```yaml
-global:
-  testWorkflows:
-    globalTemplate:
-      enabled: true
-      spec:
-        pod:
-          labels:
-            key: value
-          securityContext:
-            runAsNonRoot: true
-```
-
-If you want to provide your global template separately from the Helm Chart you can use
-
-```yaml
-global:
-  testWorkflows:
-    globalTemplate:
-      enabled: true
-      external: true
-      name: my-external-global-template
-```
-
-This example will result in Testkube looking for a TestWorkflowTemplate named `my-external-global-template` in the
-Testkube namespace when executing your Test Workflows.
