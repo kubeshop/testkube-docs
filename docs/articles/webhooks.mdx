@@ -239,7 +239,7 @@ Usage example:
 
 ```yaml
   - name: TEXT_COLOUR
-    value: {{ if eq (.TestWorkflowExecution.Status | testworkflowstatustostring ) "passed" }}"00FF00"{{ else }}"FF0000"{{ end }}
+    value: {{ if eq (.TestWorkflowExecution.Result.Status | testworkflowstatustostring ) "passed" }}"00FF00"{{ else }}"FF0000"{{ end }}
 ```
 
 #### Using API Server Environment Variables in Webhooks
