@@ -15,6 +15,7 @@ paths:
     get:
       parameters:
         - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: './components.yaml#/components/parameters/TagSelector'
       summary: List test workflow executions
       description: List test workflow executions
       operationId: listTestWorkflowExecutions

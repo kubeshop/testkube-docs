@@ -7,7 +7,7 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: cloud-api/1.10.38
+  version: cloud-api/1.10.51
 paths:
   /organizations/{id}/environments/{environmentId}/agent/test-workflow-templates:
     get:

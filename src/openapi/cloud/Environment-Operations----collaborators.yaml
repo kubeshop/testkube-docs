@@ -1,0 +1,124 @@
+openapi: 3.0.1
+info:
+  title: Testkube Pro API
+  description: API for Testkube Pro
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: COMMERICAL
+    url: https://opensource.org/licenses/MIT
+  version: cloud-api/1.10.51
+paths:
+  /organizations/{id}/environments/{environmentID}/collaborators:
+    get:
+      summary: Lists all collaborators for this environment
+      description: Lists all collaborators for this environment.
+      operationId: listEnvironmentCollaborators
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Collaborator'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    post:
+      summary: Adds many collaborators to this environment
+      description: Adds many collaborators to this environment.
+      operationId: addManyEnvironmentCollaborators
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                collaborators:
+                  description: The collaborators to add to this environment.
+                  type: array
+                  items:
+                    type: string
+                role:
+                  description: The role to assign to all collaborators.
+                  type: string
+              required:
+                - collaborators
+                - role
+        required: true
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collaborators:
+                    type: array
+                    items:
+                      $ref: './components.yaml#/components/schemas/Collaborator'
+                  failed:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    delete:
+      summary: Remove many collaborators from this environment
+      description: Remove many collaborators from this environment.
+      operationId: removeManyEnvironmentCollaborators
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                collaborators:
+                  description: The collaborators to remove from this environment.
+                  type: array
+                  items:
+                    type: string
+              required:
+                - collaborators
+        required: true
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  failed:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/EnvironmentID'

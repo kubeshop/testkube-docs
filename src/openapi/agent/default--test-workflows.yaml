@@ -142,6 +142,7 @@ paths:
     get:
       parameters:
         - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: './components.yaml#/components/parameters/TagSelector'
       summary: List test workflow executions
       description: List test workflow executions
       operationId: listTestWorkflowExecutionsByTestWorkflow
@@ -220,6 +221,39 @@ paths:
                 type: array
                 items:
                   $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+  /test-workflows/{id}/tags:
+    get:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      summary: List test workflow execution tags
+      description: List test workflow execution tags for all executed test workflows
+      operationId: listTestWorkflowTagsByTestWorkflow
+      responses:
+        '200':
+          description: successful list operation
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    type: string
+                example:
+                  app:
+                    - backend
+                  env:
+                    - prod
+                  toDelete:
+                    - 'yes'
         '502':
           description: problem communicating with kubernetes cluster
           content:
@@ -475,6 +509,7 @@ paths:
       parameters:
         - $ref: './components.yaml#/components/parameters/ID'
         - $ref: './components.yaml#/components/parameters/SkipDeleteExecutions'
+        - $ref: './components.yaml#/components/parameters/SkipDeleteCRD'
       summary: Delete test workflow
       description: Delete test workflow from the kubernetes cluster
       operationId: deleteTestWorkflow

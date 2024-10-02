@@ -8,15 +8,13 @@ export const DocCardList = (input) => (<>
       <article key="1" className="col padding--sm intro__card">
         <DocCard item={        {
           icon: "🛠",
-          label: "Organisation Management",
+          label: "Organization Management",
           description:
-            "Learn about managing your Organisations, including Members and API Tokens",
+            "Learn about managing your Organizations, including Members and API Tokens",
           href: "../testkube-pro/articles/organization-management",
           type: "intro",
         }}/>
       </article>
-    </section>
-    <section className={clsx("row indent--min")}>
       <article key="1" className="col padding--sm intro__card">
         <DocCard item={        {
           icon: "🛠",
@@ -29,6 +27,38 @@ export const DocCardList = (input) => (<>
       </article>
     </section>
     <section className={clsx("row indent--min")}>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Teams",
+          description:
+            "Learn how to manage Teams for your Organization Members",
+          href: "/articles/teams",
+          type: "intro",
+        }}/>
+      </article>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Resource Groups",
+          description:
+            "Learn about Resource Groups for managing fine-grained access to your Testkube Resources",
+          href: "/articles/resource-groups",
+          type: "intro",
+        }}/>
+      </article>
+    </section>
+    <section className={clsx("row indent--min")}>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Resource Access Management",
+          description:
+            "Learn about how to control access to Testkube Resources in your Environments",
+          href: "/articles/resource-access-management",
+          type: "intro",
+        }}/>
+      </article>
       <article key="1" className="col padding--sm intro__card">
         <DocCard item={        {
           icon: "🛠",

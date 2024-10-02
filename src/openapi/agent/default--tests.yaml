@@ -219,6 +219,7 @@ paths:
       parameters:
         - $ref: './components.yaml#/components/parameters/ID'
         - $ref: './components.yaml#/components/parameters/SkipDeleteExecutions'
+        - $ref: './components.yaml#/components/parameters/SkipDeleteCRD'
       summary: Delete test
       description: Deletes a test
       operationId: deleteTest

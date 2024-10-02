@@ -6,7 +6,7 @@ To manage your organization settings click "Organization Management" from organi
 
 (You can also create new organizations from this menu).
 
-The following tabs are available for managing an Organisation.
+The following tabs are available for managing an Organization.
 
 ## Environments
 
@@ -26,6 +26,20 @@ Run this on your cluster where the given agent is installed.
 
 Read more about [Environment Management](../articles/environment-management.md).
 
+## Resource Groups
+
+Resource Groups allow you to group Testkube Resources across all your environments and assign
+member access - [Read More](/articles/resource-groups).
+
+![Resource Groups Overview](../../img/resource-groups-overview.png)
+
+## Teams
+
+Teams allow you to group Organization members to simplify access control management for Environments
+and Resource Groups - [Read More](/articles/teams).
+
+![Teams Overview](../../img/teams-overview.png)
+
 ## Settings
 
 In settings, you can update the name of the organization, set artifacts limits, or enable or disable AI Hints and Webhooks URL Masking.
@@ -35,7 +49,12 @@ In settings, you can update the name of the organization, set artifacts limits, 
 
 ## Members
 
-Invite and manage your organisation members here. 
+Invite and manage your organization members here. 
+
+:::info
+Please read [Resource Access Management](/articles/resource-access-management) to get an overview of how Testkube
+allows you to manage and apply Resource Access controls for Organization Members.
+:::
 
 ### Inviting Members
 
@@ -52,7 +71,7 @@ There are 4 roles for organization members:
 
 :::tip
 For Testkube On-Prem deployments you can configure default organizations, environments and roles for users - see 
-[Bootstrap Configuration](/articles/install/advanced-install#bootstrap-configuration).
+[Bootstrap User Mapping](/articles/install/advanced-install#bootstrap-user-mapping).
 :::
 
 ### Manage existing Members
@@ -60,7 +79,7 @@ For Testkube On-Prem deployments you can configure default organizations, enviro
 Manage existing members/invites in the lists of members and pending invitations. Use the menu to the right for 
 each member to delete them or change their role.
 
-![Organisation Members](../../img/org-members-list.png)
+![Organization Members](../../img/org-members-list.png)
 
 ## API Tokens
 

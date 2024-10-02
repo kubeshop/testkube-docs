@@ -40,6 +40,13 @@ components:
           type: string
       required:
         - volumeID
+    AccessGroupRole:
+      type: string
+      enum:
+        - read
+        - run
+        - write
+        - admin
     Affinity:
       type: object
       properties:
@@ -363,6 +370,41 @@ components:
           $ref: '#/components/schemas/BoxedString'
         resourceClaimTemplateName:
           $ref: '#/components/schemas/BoxedString'
+    Collaborator:
+      type: object
+      properties:
+        kind:
+          description: Either user or team.
+          type: string
+        id:
+          description: The identifier of this collaborator.
+          type: string
+        name:
+          description: The display name of this collaborator.
+          type: string
+        createdAt:
+          description: The timestamp at which this collaborator was added.
+          type: string
+          format: date-time
+        role:
+          description: The role of this collaborator
+          type: string
+        email:
+          description: The email of this user. Null in case of a team.
+          type: string
+        slug:
+          description: The slug of this team. Null in case of a user.
+          type: string
+        memberCount:
+          description: The number of members in this team. Null in case of a user.
+          type: integer
+      required:
+        - id
+        - name
+        - createdAt
+        - updatedAt
+        - kind
+        - role
     Config:
       description: Testkube API config data structure
       type: object
@@ -704,10 +746,6 @@ components:
                 testkube context set --api-url https://api.testkube.xyz
                 --api-key <api-key> --agent-url https://agent.testkube.xyz
                 --agent-key <agent-key>
-            members:
-              type: array
-              items:
-                $ref: '#/components/schemas/EnvironmentMember'
             features:
               type: array
               items:
@@ -979,16 +1017,30 @@ components:
         - end-test-failed
         - end-test-aborted
         - end-test-timeout
+        - become-test-up
+        - become-test-down
+        - become-test-failed
+        - become-test-aborted
+        - become-test-timeout
         - start-testsuite
         - end-testsuite-success
         - end-testsuite-failed
         - end-testsuite-aborted
         - end-testsuite-timeout
+        - become-testsuite-up
+        - become-testsuite-down
+        - become-testsuite-failed
+        - become-testsuite-aborted
+        - become-testsuite-timeout
         - queue-testworkflow
         - start-testworkflow
         - end-testworkflow-success
         - end-testworkflow-failed
         - end-testworkflow-aborted
+        - become-testworkflow-up
+        - become-testworkflow-down
+        - become-testworkflow-failed
+        - become-testworkflow-aborted
         - created
         - updated
         - deleted
@@ -2181,6 +2233,87 @@ components:
             $ref: '#/components/schemas/Incident'
       required:
         - elements
+    Invite:
+      type: object
+      properties:
+        id:
+          description: The identifier of this invite.
+          type: string
+        organization:
+          description: The organization to which the invitee is invited.
+          type: string
+        status:
+          description: The status of this invite.
+          type: string
+          enum:
+            - pending
+            - revoked
+            - accepted
+            - declined
+            - failed
+        email:
+          description: The email of the invitee.
+          type: string
+        inviter:
+          description: The email of the inviter.
+          type: string
+        token:
+          description: >-
+            The invite token that allows you to accept this invite. This will
+            only be present when the invite email is an exact match with your
+            user account.
+          type: string
+        role:
+          description: >-
+            The role that will be assigned to the user when he accepts the
+            meeting.
+          type: string
+        envRole:
+          description: >-
+            The role that will be assigned to the user's envs when he accepts
+            the meeting.
+          type: string
+        envs:
+          description: >-
+            The environments that will be assigned to the user when he accepts
+            the meeting.
+          type: array
+          items:
+            type: string
+        teams:
+          description: >-
+            The teams that will be assigned to the user when he accepts the
+            meeting.
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+        revokedAt:
+          type: string
+          format: date-time
+        acceptedAt:
+          type: string
+          format: date-time
+        declinedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - organization
+        - email
+        - status
+        - inviter
+        - role
+        - createdAt
+        - updatedAt
     InvoiceDetails:
       type: object
       properties:
@@ -2472,6 +2605,8 @@ components:
     Member:
       type: object
       properties:
+        id:
+          type: string
         email:
           description: user email
           type: string
@@ -2764,6 +2899,9 @@ components:
         ssoAllowed:
           description: Is custom SSO allowed
           type: boolean
+        rbacAllowed:
+          description: Is custom RBAC allowed
+          type: boolean
     PlanName:
       type: string
       enum:
@@ -3054,6 +3192,41 @@ components:
       nullable: true
       allOf:
         - $ref: '#/components/schemas/RepositoryParameters'
+    ResourceGroup:
+      type: object
+      properties:
+        id:
+          description: The identifier of this group.
+          type: string
+        slug:
+          description: A human- and url-friendly identifier of this group.
+          type: string
+        name:
+          description: The name of this group.
+          type: string
+        description:
+          description: The description of this group
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        role:
+          description: >-
+            The role of the current user. This considers indirect memberships
+            such as teams and superuser privileges when being an organization
+            owner.
+          type: string
+      required:
+        - id
+        - slug
+        - name
+        - createdAt
+        - updatedAt
+        - collaboratorCount
+        - role
     ResourceRequest:
       description: resource request specification
       type: object
@@ -3123,6 +3296,7 @@ components:
           enum:
             - org
             - env
+            - grp
             - artifact
           example: org
         identifier:
@@ -3653,6 +3827,49 @@ components:
           type: string
         host:
           type: string
+    Team:
+      type: object
+      properties:
+        id:
+          description: The identifier of this group.
+          type: string
+        slug:
+          description: A human- and url-friendly identifier of this group.
+          type: string
+        name:
+          description: The name of this group.
+          type: string
+        description:
+          description: The description of this group
+          type: string
+        memberCount:
+          description: The number of members in this group.
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - slug
+        - name
+        - createdAt
+        - updatedAt
+        - memberCount
+    TeamMember:
+      type: object
+      properties:
+        id:
+          description: The identifier of this collaborator.
+          type: string
+        email:
+          description: The email of this collaborator, or empty in case of a team.
+          type: string
+      required:
+        - id
+        - email
     Template:
       description: Golang based template
       type: object
@@ -4282,7 +4499,7 @@ components:
           description: test suite execution name started the test suite execution
           type: string
         disableWebhooks:
-          description: whether webhooks on the executions of this test suite are disabled
+          description: whether webhooks on the execution of this test suite are disabled
           type: boolean
           default: false
           example:
@@ -4494,7 +4711,7 @@ components:
           $ref: '#/components/schemas/RunningContext'
           description: running context for the test execution
         disableWebhooks:
-          description: whether webhooks on the executions of this step are disabled
+          description: whether webhooks on the execution of this step are disabled
           type: boolean
           default: false
           example:
@@ -4707,6 +4924,14 @@ components:
           example:
             app: backend
             env: prod
+        annotations:
+          description: test trigger annotations
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            app: backend
+            group: teamA
         resource:
           $ref: '#/components/schemas/TestTriggerResources'
         resourceSelector:
@@ -5246,14 +5471,14 @@ components:
           description: test workflow execution name started the test workflow execution
           type: string
         disableWebhooks:
-          description: >-
-            whether webhooks on the executions of this test workflow are
-            disabled
+          description: whether webhooks on the execution of this test workflow are disabled
           type: boolean
           default: false
           example:
             - true
             - false
+        tags:
+          $ref: '#/components/schemas/TestWorkflowTagValue'
       required:
         - id
         - name
@@ -5270,10 +5495,6 @@ components:
         status:
           $ref: '#/components/schemas/TestWorkflowExecutionStatusCR'
           description: test workflow execution status
-        disableWebhooks:
-          description: disable webhooks for this execution
-          type: boolean
-          default: false
       required:
         - testWorkflow
     TestWorkflowExecutionNotification:
@@ -5310,11 +5531,11 @@ components:
           description: test workflow execution name started the test workflow execution
           type: string
         disableWebhooks:
-          description: >-
-            whether webhooks on the executions of this test workflow are
-            disabled
+          description: whether webhooks on the execution of this test workflow are disabled
           type: boolean
           default: false
+        tags:
+          $ref: '#/components/schemas/TestWorkflowTagValue'
     TestWorkflowExecutionStatusCR:
       description: test workflow execution status
       type: object
@@ -5354,10 +5575,17 @@ components:
           $ref: '#/components/schemas/TestWorkflowResultSummary'
         workflow:
           $ref: '#/components/schemas/TestWorkflowSummary'
+        tags:
+          $ref: '#/components/schemas/TestWorkflowTagValue'
       required:
         - id
         - name
         - workflow
+    TestWorkflowExecutionTags:
+      type: object
+      properties:
+        tags:
+          $ref: '#/components/schemas/TestWorkflowTagValue'
     TestWorkflowExecutionsResult:
       type: object
       properties:
@@ -5411,6 +5639,8 @@ components:
             expression to declare under which conditions the step should be run;
             defaults to "passed", except artifacts where it defaults to "always"
           type: string
+        pure:
+          $ref: '#/components/schemas/BoxedBoolean'
         paused:
           description: should the step be paused initially
           type: boolean
@@ -5509,13 +5739,6 @@ components:
           type: string
         activeDeadlineSeconds:
           $ref: '#/components/schemas/BoxedInteger'
-    TestWorkflowNotificationsConfig:
-      type: object
-      properties:
-        disableWebhooks:
-          description: disable webhooks for this test workflow
-          type: boolean
-          default: false
     TestWorkflowOutput:
       type: object
       properties:
@@ -5885,6 +6108,8 @@ components:
             $ref: '#/components/schemas/TestWorkflowTemplateRef'
         config:
           $ref: '#/components/schemas/TestWorkflowConfigSchema'
+        system:
+          $ref: '#/components/schemas/TestWorkflowSystem'
         content:
           $ref: '#/components/schemas/TestWorkflowContent'
         services:
@@ -5913,8 +6138,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TestWorkflowEvent'
-        notifications:
-          $ref: '#/components/schemas/TestWorkflowNotificationsConfig'
+        execution:
+          $ref: '#/components/schemas/TestWorkflowTagSchema'
     TestWorkflowStatus:
       type: string
       enum:
@@ -5941,6 +6166,8 @@ components:
             expression to declare under which conditions the step should be run;
             defaults to "passed", except artifacts where it defaults to "always"
           type: string
+        pure:
+          $ref: '#/components/schemas/BoxedBoolean'
         paused:
           description: should the step be paused initially
           type: boolean
@@ -6412,6 +6639,24 @@ components:
           type: object
           additionalProperties:
             type: string
+    TestWorkflowSystem:
+      type: object
+      properties:
+        pureByDefault:
+          $ref: '#/components/schemas/BoxedBoolean'
+        isolatedContainers:
+          $ref: '#/components/schemas/BoxedBoolean'
+    TestWorkflowTagSchema:
+      description: test workflow execution tag definition
+      type: object
+      properties:
+        tags:
+          $ref: '#/components/schemas/TestWorkflowTagValue'
+    TestWorkflowTagValue:
+      description: tag values to pass to the test workflow execution
+      type: object
+      additionalProperties:
+        type: string
     TestWorkflowTarballFilePattern:
       description: dynamic expression or static list of file patterns to pack
       type: object
@@ -6477,6 +6722,8 @@ components:
       properties:
         config:
           $ref: '#/components/schemas/TestWorkflowConfigSchema'
+        system:
+          $ref: '#/components/schemas/TestWorkflowSystem'
         content:
           $ref: '#/components/schemas/TestWorkflowContent'
         services:
@@ -6505,6 +6752,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TestWorkflowEvent'
+        execution:
+          $ref: '#/components/schemas/TestWorkflowTagSchema'
     TestWorkflowWithExecution:
       type: object
       properties:
@@ -6905,15 +7154,16 @@ components:
           example:
             app: backend
             env: prod
+        annotations:
+          description: webhook annotations
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            app: backend
+            env: prod
         disabled:
           description: whether webhook is disabled
-          type: boolean
-          default: false
-          example:
-            - true
-            - false
-        onStateChange:
-          description: whether webhook is triggered on state change only
           type: boolean
           default: false
           example:
@@ -7197,6 +7447,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Settings'
+    SlugAvailability:
+      description: Generic response which indicates success.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              available:
+                description: Whether the slug is still available.
+                type: boolean
+            required:
+              - available
     StatusPages:
       description: list of status pages
       content:
@@ -7346,6 +7608,13 @@ components:
       description: group by field
       schema:
         type: string
+    GroupID:
+      name: groupID
+      in: path
+      description: The identifier of this resource group
+      required: true
+      schema:
+        type: string
     ID:
       name: id
       in: path
@@ -7458,6 +7727,13 @@ components:
       description: The desired page size for this list, or a default page size when absent.
       schema:
         type: integer
+    Query:
+      name: q
+      in: query
+      description: The query for this operation.
+      required: true
+      schema:
+        type: string
     Segment:
       name: segment
       in: query
@@ -7476,6 +7752,13 @@ components:
       schema:
         type: string
       example: kubernetes.io/app=demo
+    SkipDeleteCRD:
+      name: skipDeleteCRD
+      in: query
+      description: dont delete CRD
+      schema:
+        type: boolean
+        default: false
     SkipDeleteExecutions:
       name: skipDeleteExecutions
       in: query
@@ -7511,6 +7794,19 @@ components:
       name: statusPageID
       in: path
       description: unique id of the status page
+      required: true
+      schema:
+        type: string
+    TagSelector:
+      name: tagSelector
+      in: query
+      schema:
+        description: Test workflow execution tags
+        type: string
+    TeamID:
+      name: teamID
+      in: path
+      description: The identifier of this team
       required: true
       schema:
         type: string
@@ -7594,6 +7890,13 @@ components:
       schema:
         type: string
         default: ''
+    UserID:
+      name: userID
+      in: path
+      description: The identifier of this user
+      required: true
+      schema:
+        type: string
     Visibility:
       name: visibility
       in: query

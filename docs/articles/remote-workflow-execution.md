@@ -12,7 +12,7 @@ environments in a single "Controller Environment".
 
 To trigger a Workflow in another Environment using the Testkube CLI we need at least the following:
 
-- `apiToken` - an API Token generated for the remote Environment under its containing Organisation - [Read More](/testkube-pro/articles/api-token-management).
+- `apiToken` - an API Token generated for the remote Environment under its containing Organization - [Read More](/testkube-pro/articles/api-token-management).
 - `environmentId` - the Testkube ID of the target Environment.
 - `organizationId` - the Testkube ID of the organization containing the target Environment.
 - `rootDomain` - the domain where the Testkube Control Plane is running - this will be `testkube.io` when using Testkube Cloud.

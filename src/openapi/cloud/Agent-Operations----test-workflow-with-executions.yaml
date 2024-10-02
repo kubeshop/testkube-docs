@@ -7,7 +7,7 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: cloud-api/1.10.38
+  version: cloud-api/1.10.51
 paths:
   /organizations/{id}/environments/{environmentId}/agent/test-workflow-with-executions:
     get:
@@ -100,6 +100,52 @@ paths:
                 type: array
                 items:
                   $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    parameters:
+      - name: id
+        in: path
+        description: organizationId
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        description: environmentID
+        required: true
+        schema:
+          type: string
+  /organizations/{id}/environments/{environmentId}/agent/test-workflow-with-executions/{id}/tags:
+    get:
+      summary: List test workflow execution tags
+      description: List test workflow execution tags for all executed test workflows
+      operationId: listTestWorkflowWithExecutionTags
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    type: string
+                example:
+                  app:
+                    - backend
+                  env:
+                    - prod
+                  toDelete:
+                    - 'yes'
         '502':
           description: problem communicating with kubernetes cluster
           content:

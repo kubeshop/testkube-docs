@@ -34,7 +34,7 @@ Given these constraints, let's look at one can "re-use" a single Agent across mu
 If you can comply with the constraint of only one agent connected to a Testkube Environment at a time, you 
 can simply re-use the agent installation command across multiple clusters in your development pipelines:
 
-1. [Create a Testkube Environment](/testkube-pro/articles/environment-management#operation/updateEnvironment) as usual via the Dashboard
+1. [Create a Testkube Environment](/testkube-pro/articles/environment-management#creating-a-new-environment) as usual via the Dashboard
 2. Reuse the generated command for connecting an agent for all clusters that should connect to this Environment. 
 
 ### Provisioning and execution of Testkube resources

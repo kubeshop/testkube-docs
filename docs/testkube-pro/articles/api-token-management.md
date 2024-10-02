@@ -3,7 +3,7 @@
 Sometimes you need machine-to-machine authorization to run tests in CI pipelines or call particular actions from your services. 
 Testkube offers API Tokens to resolve this issue. API Tokens have very similar roles like members. 
 
-API Tokens are created under the Organisation Settings [API Tokens tab](/testkube-pro/articles/organization-management#api-tokens)
+API Tokens are created under the Organization Settings [API Tokens tab](/testkube-pro/articles/organization-management#api-tokens)
 
 Each token has a role and an expiration date
 - Role specifies the scope (see below)
@@ -21,7 +21,7 @@ API Tokens can have 2 roles:
 
 ### "admin" Tokens
 
-Admin tokens have access to all Environments in the organisation.
+Admin tokens have access to all Environments in the organization.
 
 ![Admin Role](../../img/admin-roles.png)
 

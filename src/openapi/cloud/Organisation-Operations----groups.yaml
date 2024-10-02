@@ -1,0 +1,253 @@
+openapi: 3.0.1
+info:
+  title: Testkube Pro API
+  description: API for Testkube Pro
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: COMMERICAL
+    url: https://opensource.org/licenses/MIT
+  version: cloud-api/1.10.51
+paths:
+  /organizations/{id}/groups:
+    get:
+      summary: List organization groups
+      description: Lists the projects in an organization.
+      operationId: listResourceGroups
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/ResourceGroup'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    post:
+      summary: Create a resource group
+      description: Creates a resource group.
+      operationId: createResourceGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: Display name of the resource group
+                  type: string
+                slug:
+                  description: Human- and URL friendly identifier.
+                  type: string
+                description:
+                  description: Description of the resource group
+                  type: string
+              required:
+                - name
+        required: true
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/ResourceGroup'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+  /organizations/{id}/groups/{groupID}:
+    get:
+      summary: Get a resource group
+      description: Get a resource group by its `id`.
+      operationId: getResourceGroup
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/ResourceGroup'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    delete:
+      summary: Delete a resource group
+      description: Deletes a resource group.
+      operationId: deleteResourceGroup
+      responses:
+        '204':
+          description: Delete Success
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    patch:
+      summary: Update a resource group
+      description: Updates a resource groups information.
+      operationId: updateResourceGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: Name of the resource group
+                  type: string
+                description:
+                  description: Description of the resource group
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/ResourceGroup'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/GroupID'
+  /organizations/{id}/groups/{groupID}/collaborators:
+    get:
+      summary: Lists all collaborators for this resource group
+      description: Lists all collaborators for this resource group.
+      operationId: listResourceGroupCollaborators
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Collaborator'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    post:
+      summary: Adds all collaborators to this resource group
+      description: Adds all collaborators to this resource group.
+      operationId: addManyResourceGroupCollaborators
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                collaborators:
+                  description: The collaborators to add to this resource group.
+                  type: array
+                  items:
+                    type: string
+                role:
+                  description: The role to assign to all collaborators.
+                  type: string
+              required:
+                - collaborators
+                - role
+        required: true
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collaborators:
+                    type: array
+                    items:
+                      $ref: './components.yaml#/components/schemas/Collaborator'
+                  failed:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    delete:
+      summary: Remove many members from this group
+      description: Remove many members from this access group.
+      operationId: removeManyResourceGroupCollaborators
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                collaborators:
+                  description: The collaborators to remove from this group.
+                  type: array
+                  items:
+                    type: string
+              required:
+                - collaborators
+        required: true
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  failed:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/GroupID'
