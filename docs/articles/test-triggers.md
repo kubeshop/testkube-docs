@@ -1,6 +1,6 @@
 # Kubernetes Event Triggers
 
-Testkube allows you to automate running test workflows by defining triggers on certain events for various Kubernetes resources.
+Testkube allows you to automate running Test Workflows by defining triggers on certain events for various Kubernetes resources.
 
 ## What is a Testkube Event Trigger?
 

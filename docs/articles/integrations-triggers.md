@@ -4,7 +4,8 @@ The Testkube Dashboard allows you to create and manage the Kubernetes Triggers a
 Environments.
 
 :::tip
-Check out the [Kubernetes Event Triggers](/articles/test-triggers) document to learn how Triggers work. 
+Check out the [Kubernetes Event Triggers](/articles/test-triggers) document to learn how Event Triggers work
+in Testkube. 
 :::
 
 Triggers are defined at the Environment level and are managed from the "Kubernetes Triggers" tab in the Integrations 
