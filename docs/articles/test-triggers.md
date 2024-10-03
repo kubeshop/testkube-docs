@@ -15,18 +15,13 @@ via `kubectl`.
 
 ## Creating Test Triggers in the Testkube Dashboard
 
-Click on the lightening bolt icon on the left of the Testkube Dashboard to open the dialog to create test triggers.
-Any current test triggers will be listed and the `Create a new trigger` button is at the top right of the screen.
+Select the Integrations tab (lightning bolt icon) on the left on the Testkube Dashboard to access the "Triggers"
+panel which shows a list of Triggers in your Environment. 
 
-![Trigger Screen](../img/create-trigger.png)
+The "Create a new trigger" on the right allows you create a new 
+trigger as described at [create Test Triggers](/articles/integrations-triggers#creating-a-new-trigger).
 
-The `Create a new trigger` dialog opens, where one can configure the condition for the trigger:
-
-![Create Trigger Condition](../img/create-trigger-form.png)
-
-After clicking `Next`, then one can configure the action to execute on the trigger and then click `Create` to create it.
-
-![Create Trigger Action](../img/create-trigger-form-action.png)
+![Triggers](../img/integrations-triggers.png)
 
 ## Custom Resource Definition Model
 
