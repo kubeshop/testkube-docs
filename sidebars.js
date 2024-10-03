@@ -170,9 +170,16 @@ const sidebars = {
               ],
             },
             {
-              type: "doc",
+              type: "category",
               label: "Integrations",
-              id: "articles/integrations-dashboard-explore",
+              link: {
+                type: "doc",
+                id: "articles/integrations-dashboard-explore",
+              },
+              items: [
+                { type: "doc", label: "Triggers", id: "articles/integrations-triggers" },
+                { type: "doc", label: "Webhooks", id: "articles/integrations-webhooks" },
+              ],
             },
             {
               type: "doc",
