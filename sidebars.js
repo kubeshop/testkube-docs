@@ -546,7 +546,7 @@ const sidebars = {
             {
               type: "link",
               label: "API Test Automation with Postman",
-              href: "https://testkube.io/learn/functional-testing-with-selenium-in-testkube",
+              href: "https://testkube.io/blog/api-testing-in-kubernetes-with-postman",
             },
           ],
         },
