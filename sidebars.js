@@ -213,11 +213,6 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "JUnit Reports",
-              id: "articles/test-workflows-reports",
-            },
-            {
-              type: "doc",
               label: "Services",
               id: "articles/test-workflows-services",
             },
@@ -345,6 +340,11 @@ const sidebars = {
               type: "doc",
               label: "Cached Test Results",
               id: "testkube-pro/articles/cached-results",
+            },
+            {
+              type: "doc",
+              label: "JUnit Reports",
+              id: "articles/test-workflows-reports",
             },
           ],
         },

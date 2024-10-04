@@ -1,4 +1,4 @@
-# Test Workflows Reports: JUnit Processing and Visualization
+# JUnit Processing and Visualization
 
 Testkube provides comprehensive support for processing and visualizing JUnit XML reports generated during Test Workflows.  
 This page explains how Testkube handles these reports and presents the information to users.
@@ -6,7 +6,7 @@ This page explains how Testkube handles these reports and presents the informati
 ## JUnit Report Extraction
 
 Testkube automatically scans all artifacts for `.xml` files that are valid [JUnit XML reports](https://github.com/testmoapp/junitxml).  
-It then parses their contents to make them available for various reporting and visualization features.
+It then parses their contents to make them available for various reporting and visualization features. [Read more](/articles/test-workflows-artifacts#junit-report-extraction).
 
 ## Artifact Collection
 
