@@ -214,7 +214,7 @@ const sidebars = {
             {
               type: "doc",
               label: "JUnit Reports",
-              id: "articles/test-workflows-artifacts",
+              id: "articles/test-workflows-reports",
             },
             {
               type: "doc",
