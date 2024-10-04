@@ -8,7 +8,7 @@ Check out the [Kubernetes Event Triggers](/articles/test-triggers) document to l
 in Testkube. 
 :::
 
-Triggers are defined at the Environment level and are managed from the "Kubernetes Triggers" tab in the Integrations 
+Triggers are defined under an Environment and are managed from the "Kubernetes Triggers" tab in the Integrations 
 panel: 
 
 ![Triggers](../img/integrations-triggers.png)
@@ -31,7 +31,7 @@ configuration](/articles/test-triggers#custom-resource-definition-model) you can
 
 You will initially be prompted for
 
-- the **Name** of the trigger - must be a valid Kubernetes name as Triggers are stored as CRDs in your cluster.
+- the **Name** of the Trigger - must be a valid Kubernetes name as Triggers are stored as CRDs in your cluster.
 - the **K8s Resource** kind to monitor for events
 - the **Resources Identifier** for which resources to monitor, can either be a list of Kubernetes Labels or a specific resource name.
 - the **Triggered event** to listen for.
@@ -52,7 +52,7 @@ Once the condition has been specified you need to specified what action to take 
 Selecting a Trigger from the list of Triggers shows its Settings.
 
 :::note
-As with the wizard above to create a Trigger, the Settings tab only expose basic rigger configurations, for more 
+As with the wizard above to create a Trigger, the Settings tab only expose basic Trigger configurations, for more 
 advanced [condition and action configuration](/articles/test-triggers#custom-resource-definition-model) you can modify the 
 generated YAML directly in the [Definition tab](/articles/integrations-triggers#definition) for your Trigger.
 :::
@@ -77,7 +77,7 @@ The **General** tab allows you to modify the name of the Trigger and delete it i
 
 ### Resource Group
 
-**Resource Group** defines the Resource Group this resource belongs to - [Read More about Resource Groups](/articles/resource-groups)
+**Resource Group** defines the Resource Group this Trigger belongs to - [Read More about Resource Groups](/articles/resource-groups)
 
 ![Trigger Resource Group](../img/existing-trigger-resource-group.png)
 
@@ -89,5 +89,5 @@ previous tabs.
 ![Trigger Definition](../img/existing-trigger-definition.png)
 
 :::tip
-As mentioned above, Triggers are stored as CRDs in your cluster - [Read More about the Trigger CRD](/articles/test-triggers#custom-resource-definition-model) 
+Triggers are stored as CRDs in your cluster - [Read More about the Trigger CRD](/articles/test-triggers#custom-resource-definition-model) 
 :::
