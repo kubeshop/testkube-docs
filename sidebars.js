@@ -213,6 +213,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "JUnit Reports",
+              id: "articles/test-workflows-artifacts",
+            },
+            {
+              type: "doc",
               label: "Services",
               id: "articles/test-workflows-services",
             },
@@ -695,15 +700,13 @@ const sidebars = {
           type: "link",
           label: "PagerDuty",
           href: "https://testkube.io/learn/critical-test-based-alerting-with-pagerduty-and-testkube",
-          description:
-            "Critical Test Based Alerting with PagerDuty and Testkube",
+          description: "Critical Test Based Alerting with PagerDuty and Testkube",
         },
         {
           type: "link",
           label: "Zapier",
           href: "https://testkube.io/learn/integrating-testkube-and-zapier-for-instant-email-alerts",
-          description:
-            "Integrating Testkube and Zapier for Instant Email Alerts",
+          description: "Integrating Testkube and Zapier for Instant Email Alerts",
         },
         { type: "doc", label: "Grafana", id: "articles/grafana" },
       ],
