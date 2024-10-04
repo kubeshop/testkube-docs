@@ -95,7 +95,7 @@ for more details on how to create and use API Tokens.
 
 This tab allows you to configure Organization-level Product Features:
 
-- **Resource Groups & Advanced RBAC** - enables [Resource Groups](/articles/resource-groups) functionality if you have it in your plan.
+- **Resource Groups & Advanced RBAC** - not toggleable, this just indicates if [Resource Groups](/articles/resource-groups) functionality is available (included with SSO).
 - **AI Troubleshooting** - available for legacy Tests only - [Read More](/testkube-pro/articles/AI-test-insights).
 - **Webhooks URL Masking** - [Read More](/articles/webhooks#url-masking)
 

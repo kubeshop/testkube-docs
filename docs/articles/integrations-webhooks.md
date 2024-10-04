@@ -76,4 +76,10 @@ modify the payload to be sent - [Read More](/articles/webhooks#webhook-payload).
 **Definition** shows the underlying YAML for your Webhook, allowing you to manually configure your Webhook vs using the
 previous tabs.
 
-* add screenshot *
+:::tip
+If you want to hide the Webhook YAML definition in the Dashboard because it contains sensitive information you can 
+enable Webhooks URL Masking under the [Organization Product Features](/testkube-pro/articles/organization-management#product-features), 
+which will hide the Definition tab under the Webhook Settings.
+:::
+
+![Webhook Definition](images/webhook-definition.png)
