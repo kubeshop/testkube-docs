@@ -6,7 +6,7 @@ Testkube standalone agent includes our full test execution and orchestration eng
 This means that all CRDs are available, you can apply triggers and run test workflows, then afterward view 
 the resulting status, logs and artifacts.
 
-Overall there are few reasons to run the agent without the control plane, which comes with a Dashboard and many other features.
+Overall, there are few reasons to run the agent without the control plane, which comes with a Dashboard and many other features.
 The main benefit is that this works better in resource constrained environments and that it is 100% open-source.
 
 :::tip
