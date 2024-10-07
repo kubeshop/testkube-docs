@@ -54,16 +54,16 @@ const sidebars = {
           ],
         },
         { type: "doc", label: "Testkube Docker Agent", id: "articles/install/docker-agent" },
+        "articles/install/deployment-architectures",
         "articles/install/faq",
         {
           type: "category",
           label: "More Guides",
           items: [
-            { type: "doc", label: "Upgrading", id: "articles/upgrade" },
-            "articles/install/deployment-architectures",
             "articles/install/multi-cluster",
-            "articles/install/standalone-agent",
-            "articles/install/quickstart-no-k8s",
+            { type: "doc", label: "Standalone Agent", id: "articles/install/standalone-agent" },
+            { type: "doc", label: "Agent with Local Kubernetes", id: "articles/install/quickstart-no-k8s" },
+            { type: "doc", label: "Upgrading", id: "articles/upgrade" },
             "articles/install/uninstall",
             {
               type: "doc",
