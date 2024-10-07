@@ -1,3 +1,7 @@
+import LegacyWarning from '../_legacy-warning.mdx';
+
+<LegacyWarning />
+
 <head>
   <meta name="og:type" content="reference-doc" />
 </head>
