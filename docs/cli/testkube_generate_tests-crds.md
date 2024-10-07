@@ -1,3 +1,8 @@
+
+<head>
+  <meta name="og:type" content="reference-doc" />
+</head>
+
 ## testkube generate tests-crds
 
 Generate tests CRD file based on directory

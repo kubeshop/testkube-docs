@@ -1,3 +1,8 @@
+
+<head>
+  <meta name="og:type" content="reference-doc" />
+</head>
+
 ## testkube abort testsuiteexecutions
 
 Abort all test suite executions

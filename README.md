@@ -117,8 +117,7 @@ The customized markdown templates are in this repositories [src/crd-templates](s
 
 Follow these steps:
 
-1. Clone/update the [testkube-operator](https://github.com/kubeshop/testkube-operator) to make sure you have the latest 
-   types available locally.
+1. Clone/update the [testkube-operator](https://github.com/kubeshop/testkube-operator) `main` branch to make sure you have the latest types available locally.
 2. Clone the https://github.com/kubeshop/crd-ref-docs repo
 3. Make sure you have go tooling installed and run `go build` in this repo, this
    should create a `crd-ref-docs` binary in the roof folder of the repo.
@@ -159,7 +158,7 @@ total 152
 ```
 
 6. Copy these files to the `/docs/articles/crds` folder in this repo
-7. Make sure the links and info in `/docs/articles/crds.md` is correct/up-to-date
+7. Make sure the links and info in `/docs/articles/crds.md` is correct and up to date
 8. Add the deprecation warning at the top of all files containing deprecated APIs:
 
 ```markdown
@@ -178,7 +177,7 @@ The CLI docs are generated in the [Testkube Repo](https://github.com/kubeshop/te
 make docs
 ```
 
-in the root folder and copying the generated files from the `gen/docs/cli` folder to the `/cli` folder in this repo.
+in the root folder and copying the generated files from the `gen/docs/cli` folder to the `/cli` folder in this repo (clear the folder first so old files are removed).
 
 :::tip
 Make sure the generated docs build with `npm run build` ok before committing, and fix any errors manually as applicable.

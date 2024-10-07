@@ -1,6 +1,6 @@
-import LegacyWarning from '../_legacy-warning.mdx';
-
-<LegacyWarning />
+<head>
+  <meta name="og:type" content="legacy-doc" />
+</head>
 
 # API Reference
 
@@ -90,7 +90,7 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `reference` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#localobjectreference-v1-core)_ |  |  |  |
+| `reference` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#localobjectreference-v1-core)_ |  |  |  |
 | `mount` _boolean_ | whether we shoud mount resource |  |  |
 | `mountPath` _string_ | where we shoud mount resource |  |  |
 | `mapToVariables` _boolean_ | whether we shoud map to variables from resource |  |  |
@@ -127,8 +127,8 @@ _Appears in:_
 | `testSecretUUID` _string_ | test secret uuid |  |  |
 | `testSuiteSecretUUID` _string_ | test suite secret uuid, if it's run as a part of test suite |  |  |
 | `content` _[TestContent](#testcontent)_ |  |  |  |
-| `startTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | test start time |  |  |
-| `endTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | test end time |  |  |
+| `startTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | test start time |  |  |
+| `endTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | test end time |  |  |
 | `duration` _string_ | test duration |  |  |
 | `durationMs` _integer_ | test duration in milliseconds |  |  |
 | `executionResult` _[ExecutionResult](#executionresult)_ |  |  |  |
@@ -175,7 +175,7 @@ _Appears in:_
 | `argsMode` _[ArgsModeType](#argsmodetype)_ | usage mode for arguments |  | Enum: [append override replace] <br /> |
 | `command` _string array_ | executor binary command |  |  |
 | `image` _string_ | container executor image |  |  |
-| `imagePullSecrets` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#localobjectreference-v1-core) array_ | container executor image pull secrets |  |  |
+| `imagePullSecrets` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#localobjectreference-v1-core) array_ | container executor image pull secrets |  |  |
 | `envs` _object (keys:string, values:string)_ | Environment variables passed to executor.<br />Deprecated: use Basic Variables instead |  |  |
 | `secretEnvs` _object (keys:string, values:string)_ | Execution variables passed to executor from secrets.<br />Deprecated: use Secret Variables instead |  |  |
 | `sync` _boolean_ | whether to start execution sync or async |  |  |
@@ -390,7 +390,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v1` | | |
 | `kind` _string_ | `Script` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[ScriptSpec](#scriptspec)_ |  |  |  |
 
 
@@ -408,7 +408,7 @@ ScriptList contains a list of Script
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v1` | | |
 | `kind` _string_ | `ScriptList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `items` _[Script](#script) array_ |  |  |  |
 
 
@@ -457,8 +457,8 @@ _Appears in:_
 | `envs` _object (keys:string, values:string)_ | Environment variables passed to executor.<br />Deprecated: use Basic Variables instead |  |  |
 | `variables` _object (keys:string, values:[Variable](#variable))_ |  |  |  |
 | `secretUUID` _string_ | secret uuid |  |  |
-| `startTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | test start time |  |  |
-| `endTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | test end time |  |  |
+| `startTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | test start time |  |  |
+| `endTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | test end time |  |  |
 | `duration` _string_ | test duration |  |  |
 | `durationMs` _integer_ | test duration in ms |  |  |
 | `stepResults` _[TestSuiteStepExecutionResultV2](#testsuitestepexecutionresultv2) array_ | steps execution results |  |  |
@@ -486,7 +486,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v1` | | |
 | `kind` _string_ | `Template` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[TemplateSpec](#templatespec)_ |  |  |  |
 
 
@@ -504,7 +504,7 @@ TemplateList contains a list of Template
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v1` | | |
 | `kind` _string_ | `TemplateList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `items` _[Template](#template) array_ |  |  |  |
 
 
@@ -565,7 +565,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v1` | | |
 | `kind` _string_ | `Test` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[TestSpec](#testspec)_ |  |  |  |
 
 
@@ -640,7 +640,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v1` | | |
 | `kind` _string_ | `TestExecution` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[TestExecutionSpec](#testexecutionspec)_ |  |  |  |
 
 
@@ -658,7 +658,7 @@ TestExecutionList contains a list of TestExecution
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v1` | | |
 | `kind` _string_ | `TestExecutionList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `items` _[TestExecution](#testexecution) array_ |  |  |  |
 
 
@@ -695,7 +695,7 @@ TestList contains a list of Test
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v1` | | |
 | `kind` _string_ | `TestList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `items` _[Test](#test) array_ |  |  |  |
 
 
@@ -714,7 +714,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v1` | | |
 | `kind` _string_ | `TestSource` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[TestSourceSpec](#testsourcespec)_ |  |  |  |
 
 
@@ -732,7 +732,7 @@ TestSourceList contains a list of TestSource
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v1` | | |
 | `kind` _string_ | `TestSourceList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `items` _[TestSource](#testsource) array_ |  |  |  |
 
 
@@ -870,7 +870,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v1` | | |
 | `kind` _string_ | `TestSuite` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[TestSuiteSpec](#testsuitespec)_ |  |  |  |
 
 
@@ -906,8 +906,8 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `step` _[TestSuiteBatchStep](#testsuitebatchstep)_ |  |  |  |
 | `execute` _[TestSuiteStepExecutionResult](#testsuitestepexecutionresult) array_ |  |  |  |
-| `startTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | step start time |  |  |
-| `endTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | step end time |  |  |
+| `startTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | step start time |  |  |
+| `endTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | step end time |  |  |
 | `duration` _string_ | step duration |  |  |
 
 
@@ -926,7 +926,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v1` | | |
 | `kind` _string_ | `TestSuiteExecution` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[TestSuiteExecutionSpec](#testsuiteexecutionspec)_ |  |  |  |
 
 
@@ -944,7 +944,7 @@ TestSuiteExecutionList contains a list of TestSuiteExecution
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v1` | | |
 | `kind` _string_ | `TestSuiteExecutionList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `items` _[TestSuiteExecution](#testsuiteexecution) array_ |  |  |  |
 
 
@@ -1013,7 +1013,7 @@ TestSuiteList contains a list of TestSuite
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v1` | | |
 | `kind` _string_ | `TestSuiteList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `items` _[TestSuite](#testsuite) array_ |  |  |  |
 
 
@@ -1216,7 +1216,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v1` | | |
 | `kind` _string_ | `TestTrigger` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[TestTriggerSpec](#testtriggerspec)_ |  |  |  |
 
 
@@ -1368,7 +1368,7 @@ TestTriggerList contains a list of TestTrigger
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v1` | | |
 | `kind` _string_ | `TestTriggerList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `items` _[TestTrigger](#testtrigger) array_ |  |  |  |
 
 
@@ -1450,7 +1450,7 @@ _Appears in:_
 | `name` _string_ | Name selector is used to identify a Kubernetes Object based on the metadata name |  |  |
 | `nameRegex` _string_ | kubernetes resource name regex |  |  |
 | `namespace` _string_ | Namespace of the Kubernetes object |  |  |
-| `labelSelector` _[LabelSelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#labelselector-v1-meta)_ | LabelSelector is used to identify a group of Kubernetes Objects based on their metadata labels |  |  |
+| `labelSelector` _[LabelSelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#labelselector-v1-meta)_ | LabelSelector is used to identify a group of Kubernetes Objects based on their metadata labels |  |  |
 
 
 ### TestTriggerSpec
@@ -1475,7 +1475,7 @@ _Appears in:_
 | `execution` _[TestTriggerExecution](#testtriggerexecution)_ | Execution identifies for which test execution should an Action be executed |  | Enum: [test testsuite testworkflow] <br /> |
 | `testSelector` _[TestTriggerSelector](#testtriggerselector)_ | TestSelector identifies on which Testkube Kubernetes Objects an Action should be taken |  |  |
 | `concurrencyPolicy` _[TestTriggerConcurrencyPolicy](#testtriggerconcurrencypolicy)_ | ConcurrencyPolicy defines concurrency policy for selected Execution |  | Enum: [allow forbid replace] <br /> |
-| `delay` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#duration-v1-meta)_ | Delay is a duration string which specifies how long should the test be delayed after a trigger is matched |  | Format: duration <br />Type: string <br /> |
+| `delay` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#duration-v1-meta)_ | Delay is a duration string which specifies how long should the test be delayed after a trigger is matched |  | Format: duration <br />Type: string <br /> |
 | `disabled` _boolean_ | whether test trigger is disabled |  |  |
 
 
@@ -1501,6 +1501,6 @@ _Appears in:_
 | `type` _string_ | variable type |  |  |
 | `name` _string_ | variable name |  |  |
 | `value` _string_ | variable string value |  |  |
-| `valueFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_ | or load it from var source |  |  |
+| `valueFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#envvarsource-v1-core)_ | or load it from var source |  |  |
 
 

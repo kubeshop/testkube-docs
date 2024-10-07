@@ -1,3 +1,8 @@
+
+<head>
+  <meta name="og:type" content="reference-doc" />
+</head>
+
 ## testkube upgrade
 
 Upgrade Helm chart, install dependencies and run migrations
