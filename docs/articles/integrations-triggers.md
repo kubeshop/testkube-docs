@@ -40,7 +40,7 @@ You will initially be prompted for
 
 ### New Trigger Action
 
-Once the condition has been specified you need to specified what action to take when the trigger occurs:
+Once the condition has been specified, you need to specify what action to take when the trigger occurs:
 
 - select the **Testkube action** to perform.
 - select the target **Testkube Resource** for the action, either by Labels or by Name.
