@@ -1,7 +1,7 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Testkube Agent with Docker
+# Testkube Agent with local Kubernetes
 
 The Testkube Agent uses Kubernetes as its runtime environment, which requires you to have access to a Kubernetes cluster either
 running locally on your machine or remotely in some cloud provider like AWS, Google, Azure, etc.
@@ -11,14 +11,10 @@ Kubernetes distribution under Docker, or use the Kubernetes version included wit
 
 Let's look at both of these options below.
 
-:::info
-The Testkube Team is actively working on providing a packaged Docker Testkube Agent - check back soon!
-:::
-
-## Installing a Lightweight Kubernetes Distribution Under Docker
+### Installing a Lightweight Kubernetes Distribution Under Docker
 
 There are a number of lightweight Kubernetes distributions that you can install under Docker, all of them require
-Docker Desktop to be installed, so make sure that is up and running before moving on (download from https://www.docker.com/products/docker-desktop/).
+Docker to be installed, so make sure that is up and running before moving on (download Docker Desktop from https://www.docker.com/products/docker-desktop/).
 
 Recommended Kubernetes distributions for local Testkube evaluation are:
 
@@ -30,7 +26,7 @@ Recommended Kubernetes distributions for local Testkube evaluation are:
 A detailed tutorial on how to run Testkube with kind is available at [Testing in KinD: Using Testkube with Kubernetes in Docker](https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker)
 :::
 
-### Installing kind under MacOS or Windows
+#### Installing kind under MacOS or Windows
 
 kind is a tool for running local Kubernetes clusters using Docker container “nodes”. Read all about how to quickly get
 started with kind at https://kind.sigs.k8s.io/docs/user/quick-start/.
@@ -77,7 +73,7 @@ That's it! Now you can go to the [Testkube Quickstart][install-with-cli] and pic
 
 [install-with-cli]: /articles/install/install-with-cli
 
-## Using the Kubernetes Distribution Included with Docker Desktop
+### Using the Kubernetes Distribution Included with Docker Desktop
 
 Docker Desktop comes with a built-in version of Kubernetes - [Read More](https://docs.docker.com/desktop/kubernetes/).
 If you enable this feature you will have a local Kubernetes cluster available and should be all set -

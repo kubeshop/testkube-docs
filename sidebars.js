@@ -53,13 +53,14 @@ const sidebars = {
             "articles/install/advanced-install",
           ],
         },
-        { type: "doc", label: "Upgrading", id: "articles/upgrade" },
-        "articles/install/deployment-architectures",
+        { type: "doc", label: "Testkube Docker Agent", id: "articles/install/docker-agent" },
         "articles/install/faq",
         {
           type: "category",
           label: "More Guides",
           items: [
+            { type: "doc", label: "Upgrading", id: "articles/upgrade" },
+            "articles/install/deployment-architectures",
             "articles/install/multi-cluster",
             "articles/install/standalone-agent",
             "articles/install/quickstart-no-k8s",

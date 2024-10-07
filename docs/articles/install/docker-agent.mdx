@@ -1,0 +1,90 @@
+# Testkube Docker Agent
+
+The Testkube Docker Agent provides a convenient way to evaluate Testkube Cloud and can be run directly under
+Docker without having to install or manage your own Kubernetes distribution.
+
+:::info
+The Testkube Docker Agent is not recommended for production usage - [Read More](#not-for-production-usage)
+:::
+
+## Resource Allocation
+
+While the Testkube Agent itself does not consume a lot of resources, you should make sure you have allocated the
+right amount of resources to your Docker Engine for the kinds of Tests you plan to run. We recommend at least
+8GB and 2 CPUs for "simple" test executions (Postman, K6, etc.), and at least 16 GB and 4 CPUs for more
+high-volume/distributed performance tests and E2E tests using Playwright, Cypress or Selenium
+since these require a fair amount of resources themselves.
+
+:::tip
+If you prefer to use your own local Kubernetes cluster for the Testkube Agent, have a look at
+[Testkube Agent with local Kubernetes](/articles/install/quickstart-no-k8s).
+:::
+
+## Installation
+
+Install the Testkube Agent using `docker run` with arguments provided in the Testkube Dashboard:
+
+```shell
+docker run --name=docker-testkube-agent --privileged -e AGENT_KEY=tkcagnt_XXX -e CLOUD_URL=agent.testkube.io:443 kubeshop/testkube-agent
+```
+
+(Starting the Agent the first time can take a couple of minutes)
+
+:::note
+The `--privileged` flag is required for the Agent Docker Image to provision its own Kubernetes runtime environment.
+:::
+
+Once running, the Agent will connect to the Testkube Control Plane and be available for running your Workflows.
+
+### Checking Agent Status
+
+You can use `docker ps` to check the Agents Docker status:
+
+```shell
+➜  ~ docker ps
+CONTAINER ID   IMAGE                     COMMAND                  CREATED         STATUS         PORTS           NAMES
+5c9f8f1eae58   kubeshop/testkube-agent   "tini -- /usr/local/…"   6 minutes ago   Up 6 minutes   2375-2376/tcp   docker-testkube-agent
+➜  ~
+```
+
+### Accessing the terminal inside the Docker Agent
+
+If you want to run `kubectl` (or any other) commands inside the Docker Agent you can use
+
+```shell
+docker exec -it <name> sh
+```
+
+for creating a corresponding prompt inside your Docker Agent.
+
+### Starting and stopping the Agent
+
+Use regular docker commands to stop and start the agent:
+
+```shell
+docker stop <name>
+docker start <name>
+```
+
+## Docker Agent internals
+
+The Testkube Docker Agent provisions its own [Kind cluster](https://kind.sigs.k8s.io/) inside Docker and then uses an
+[entrypoint.sh script](https://github.com/kubeshop/testkube/blob/main/build/kind/entrypoint.sh) to set up its environment and install the Agent using Helm.
+
+The Docker Image itself is available on [DockerHub](https://hub.docker.com/r/kubeshop/testkube-agent).
+
+### Pod errors due to "too many open files"
+
+If you encounter this error inside your Docker Agent you will need to increase the corresponding default settings
+in your environment - [Read More](https://kind.sigs.k8s.io/docs/user/known-issues/#pod-errors-due-to-too-many-open-files).
+
+## Not for Production Usage!
+
+:::info
+Although the Testkuber Docker Agent is a great way to run Testkube tests in your infrastructure, it is **not** meant
+for production or large-scale deployments as it is (very) constrained by the Docker runtime environment itself.
+
+When deploying the Testkube Agent production or advanced evaluation purposes, please run the agent directly under a
+Kubernetes instance, either locally as described below, or in a remote/hosted Kubernetes provider in line with the
+[Installation Overview](/articles/install/overview).
+:::
