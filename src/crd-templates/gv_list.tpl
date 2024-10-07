@@ -2,7 +2,7 @@
 {{- $groupVersions := . -}}
 
 <head>
-  <meta name="og:type" content="legacy-doc" />
+  <meta name="og:type" content="reference-doc" />
 </head>
 
 # API Reference

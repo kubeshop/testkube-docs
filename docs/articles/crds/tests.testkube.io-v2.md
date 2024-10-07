@@ -1,5 +1,5 @@
-<head>
-  <meta name="og:type" content="legacy-doc" />
+reference<head>
+  <meta name="og:type" content="reference-doc" />
 </head>
 
 # API Reference
