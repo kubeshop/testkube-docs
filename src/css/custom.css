@@ -204,11 +204,11 @@ html[data-theme="dark"] {
 .theme-doc-sidebar-item-category-level-1,
 .theme-doc-sidebar-item-link-level-1 {
   border-bottom: 1px solid var(--ifm-background-surface-color);
-  padding-bottom: 4px;
+  padding-bottom: 0px;
 }
 
 .theme-doc-sidebar-item-category-level-1 .menu__list {
-  margin-bottom: 18px;
+  margin-bottom: 10px;
 }
 
 .markdown h1:first-child {

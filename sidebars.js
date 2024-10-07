@@ -172,18 +172,16 @@ const sidebars = {
             {
               type: "category",
               label: "Integrations",
-              link: {
-                type: "doc",
-                id: "articles/integrations-dashboard-explore",
-              },
+              collapsed: false,
               items: [
+                { type: "doc", label: "Overview", id: "articles/integrations-dashboard-explore" },
                 { type: "doc", label: "Triggers", id: "articles/integrations-triggers" },
                 { type: "doc", label: "Webhooks", id: "articles/integrations-webhooks" },
               ],
             },
             {
               type: "doc",
-              label: "Settings",
+              label: "Global Settings",
               id: "articles/settings-dashboard-explore",
             },
           ],

@@ -1,32 +1,18 @@
-# Explore the Settings Dashboard
+#  Global Settings 
 
-Control everything related to your environment in the Settings Dashboard.
+The Testkube Dashboard allows you to configure settings for both your Organizations and Environments.
 
-![Settings Dashboard](../img/settings-dashboard-072024.png)
+## Organization Settings
 
-## General Settings
-
-Find the general settings for your environment on the **General** tab. You can also delete the environment here, but, be aware, this action cannot be undone.
-
-![General Settings Dashboard](../img/general-settings-dashboard-072024.png)
-
-## Members
-
-See all members with access to the environment and add new members on the **Members** tab.
-
-![Members Settings Dashboard](../img/members-settings-dashboard-072024.png)
-
-## Keyword Highlighting
-
-Define the keywords Testkube should highlight in the logs on the **Keyword highlighting** tab.
-
-![Keyword Highlighting Settings Dashboard](../img/keyword-highlighting-settings-dashboard-072024.png)
-
-## Product Features
-
-Manage how you want this environment to handle available Testkube features on the **Product Features** tab.
-
-![product Features Settings Dashboard](../img/product-features-settings-dashboard-072024.png)
+Configure your Organization by selecting the "Organization Management" menu action from the 
+Organization drop-down at the top of the Dashboard - [Read More about Organization Management](/testkube-pro/articles/organization-management).
 
 
+![Organization Settings Dashboard](images/organization-settings-overview.png)
 
+## Environment Settings
+
+Configure your Environments by selecting either the bottom icon in the left toolbar or by selecting
+the "Environment Settings" menu action from the Environment drop-down at the top of the Dashboard - [Read More about Environment Management](/testkube-pro/articles/environment-management).
+
+![Environment Settings Dashboard](../img/settings-dashboard-072024.png)
