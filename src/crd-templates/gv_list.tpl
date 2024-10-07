@@ -1,6 +1,10 @@
 {{- define "gvList" -}}
 {{- $groupVersions := . -}}
 
+<head>
+  <meta name="og:type" content="reference-doc" />
+</head>
+
 # API Reference
 
 ## Packages

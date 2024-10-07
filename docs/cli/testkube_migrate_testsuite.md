@@ -1,3 +1,8 @@
+
+<head>
+  <meta name="og:type" content="reference-doc" />
+</head>
+
 ## testkube migrate testsuite
 
 Migrate all available test suites to test workflows
