@@ -17,11 +17,11 @@ To leverage webhooks, you need to ensure that the platform that you want to send
 
 You can create a webhook from the dashboard, use the CLI, or create it as a custom resource. Before we show how it’s done, let’s understand a few scenarios where Webhooks in Testkube shine:
 
-- Incident Management & Response: Webhooks can be used to create incidents and alert on-call teams when a critical test fails. This ensures a timely response and avoids any potential disruption due to failures and bugs. With Testkube, you can configure incident management tools like PagerDuty and OpsGenie to receive alerts based on critical events for your tests.
+- **Incident Management & Response**: Webhooks can be used to create incidents and alert on-call teams when a critical test fails. This ensures a timely response and avoids any potential disruption due to failures and bugs. With Testkube, you can configure incident management tools like PagerDuty and OpsGenie to receive alerts based on critical events for your tests.
 
-- Communication and Collaboration: You can configure Webhooks in Testkube to send alerts to your teams in your communication tool. This will notify your team of any critical event that needs attention and attend to it before the issue escalates. Some of the popular communications tools like Slack and MS Teams can be configured to receive alerts from Testkube.
+- **Communication and Collaboration**: You can configure Webhooks in Testkube to send alerts to your teams in your communication tool. This will notify your team of any critical event that needs attention and attend to it before the issue escalates. Some of the popular communications tools like Slack and MS Teams can be configured to receive alerts from Testkube.
 
-- Monitoring and Observability: Webhooks can also be used to send alerts and notifications to your monitoring and observability tools like Prometheus and Grafana. This provides visibility into your tests, alerts you, and ensures that timely corrective actions can be taken.
+- **Monitoring and Observability**: Webhooks can also be used to send alerts and notifications to your monitoring and observability tools like Prometheus and Grafana. This provides visibility into your tests, alerts you, and ensures that timely corrective actions can be taken.
 
 ## Creating a Webhook
 
@@ -29,25 +29,9 @@ The webhook can be created using the Dashboard, CLI, or a Custom Resource.
 
 <Tabs>
 <TabItem value="dash" label="Dashboard">
-If you prefer to use the Dashboard, you can view existing webhooks by going to the Webhooks tab.
+The Testkube Dashboard allows you to create Webhooks interactively from the Integrations / Webhooks tab - [Read More](/articles/integrations-webhooks#creating-a-new-webhook):
 
-![Dashboard menu - webhooks icon](../img/dashboard-webhooks-icon.png)
-
-Here you can also create a new webhook by clicking the `Create a new webhook` button.
-
-Then, fill in the webhook details:
-
-![Dashboard webhook - create dialog 1](../img/dashboard-create-webhook-1.png)
-
-- Name - your webhook name (in this case `example-webhook`)
-- Resource identifier - the resource (or resources) selected by `label` for which the webhook can be triggered (in the example: `test-type:postman-collection` - any postman test)
-- Triggered events - events that will trigger the webhook (in this case `start-test`, `end-test-success`, and `end-test-failed`). All available trigger events can be found in the [Supported Event types](#supported-event-types) section.
-
-![Dashboard webhook - create dialog 2](../img/dashboard-create-webhook-2.png)
-
-Set your webhook URI - the HTTPS endpoint where you want to receive the webhook events.
-After the webhook is created, the custom payload and headers can be set in Settings->Action.
-
+  ![Create New Webhook](../img/create-new-webhook.png)
 </TabItem>
 
 <TabItem value="cli" label="CLI">
@@ -99,6 +83,8 @@ In order to limit webhook triggers to a specific resource, or resources, the Res
 <Tabs>
 <TabItem value="dash" label="Dashboard">
 
+In the Dashboard - [Read More](/articles/integrations-webhooks#condition).
+
 ![Dashboard webhook - resource identifier](../img/dashboard-create-webhook-resource-identifier.png)
 
 </TabItem>
@@ -147,11 +133,9 @@ Webhook payload can be configured - in this example, `event id`:
 
 <Tabs>
 <TabItem value="dash" label="Dashboard">
-When you have selected an existing Webhook, its payload can be configured in Webhook Settings->Action.
+When you have selected an existing Webhook, its payload can be configured in Webhook Settings/Action tab - [Read More](/articles/integrations-webhooks#action--payload)
 
-![Dashboard webhook - webhook settings action`](../img/dashboard-webhook-settings-action.png)
-
-![Dashboard webhook - webhook payload](../img/dashboard-webhook-payload.png)
+  ![Webhook Action](../img/existing-webhook-action.png)
 
 </TabItem>
 
@@ -535,7 +519,7 @@ By using these services, you can quickly set up an HTTP endpoint to receive webh
 ## URL Masking
 
 In the “Organization Management” section, under the “Settings” tab, there is an option called “Webhooks URL Masking.”
-When this toggle is enabled, it will mask the URLs of all webhooks displayed in the user interface.
+When this toggle is enabled, the Testkube Dashboard will no longer display any settings/configuration related to Webhook URLs.
 
 ![Settings - webhook url masking](../img/webhook-url-masking.png)
 

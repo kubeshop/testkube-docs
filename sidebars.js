@@ -170,13 +170,18 @@ const sidebars = {
               ],
             },
             {
-              type: "doc",
+              type: "category",
               label: "Integrations",
-              id: "articles/integrations-dashboard-explore",
+              collapsed: false,
+              items: [
+                { type: "doc", label: "Overview", id: "articles/integrations-dashboard-explore" },
+                { type: "doc", label: "Triggers", id: "articles/integrations-triggers" },
+                { type: "doc", label: "Webhooks", id: "articles/integrations-webhooks" },
+              ],
             },
             {
               type: "doc",
-              label: "Settings",
+              label: "Global Settings",
               id: "articles/settings-dashboard-explore",
             },
           ],
@@ -539,7 +544,7 @@ const sidebars = {
             {
               type: "link",
               label: "API Test Automation with Postman",
-              href: "https://testkube.io/learn/functional-testing-with-selenium-in-testkube",
+              href: "https://testkube.io/blog/api-testing-in-kubernetes-with-postman",
             },
           ],
         },
