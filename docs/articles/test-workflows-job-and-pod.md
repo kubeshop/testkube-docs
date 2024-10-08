@@ -73,8 +73,9 @@ You may configure [**PodSecurityContext**](https://kubernetes.io/docs/tasks/conf
 
 ```yaml
 pod:
-  runAsNonRoot: true
-  runAsUser: 100690000
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 100690000
 ```
 
 ### Service Account
