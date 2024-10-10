@@ -51,8 +51,8 @@ spec:
 ```
 
 This AnalysisTemplate uses a Kubernetes Job to run the Analysis ([Read More](https://argo-rollouts.readthedocs.io/en/stable/analysis/job/)) 
-and also defines that actual Test Workflow to run as an argument, allowing you to use [Analysis Template Arguments](https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-template-arguments) to
-reuse the template for different Rollouts with different Tests.
+and also defines the actual Test Workflow to run as an argument, allowing you to use [Analysis Template Arguments](https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-template-arguments) to
+reuse this template for different Rollouts with different Tests (as shown in the examples below).
 
 ## Canary Deployments
 
@@ -96,7 +96,7 @@ spec:
      etc...
 ```
 
-As you can see, the Analysis overrides the `workflow-name` argument to run a different Test Workflow (`playwright-e2e-test`) than 
+This Analysis overrides the `workflow-name` argument to run a different Test Workflow (`playwright-e2e-test`) than 
 the default one defined in the AnalysisTemplate above.
 
 ## Blue-Green Deployments
@@ -131,4 +131,4 @@ spec:
 ```
 
 In this case the Analysis is not providing a specific `worfklow-name` argument, so the default Test Workflow
-`basic-k6-workflow` will be run to validate our BlueGreen deployment.
+`basic-k6-workflow` will be run to validate the BlueGreen deployment.
