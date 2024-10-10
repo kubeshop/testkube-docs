@@ -50,7 +50,11 @@ const redirects = [
   },
   {
     from: "/UI",
-    to: "/articles/testkube-dashboard",
+    to: "/articles/testkube-dashboard-explore",
+  },
+  {
+    from: "/articles/testkube-dashboard",
+    to: "/articles/testkube-dashboard-explore",
   },
   {
     from: "/tests-running",
@@ -82,7 +86,7 @@ const redirects = [
   },
   {
     from: "/using-testkube/UI",
-    to: "/articles/testkube-dashboard",
+    to: "/articles/testkube-dashboard-explore",
   },
   {
     from: "/FAQ",
@@ -168,7 +172,7 @@ const redirects = [
   },
   {
     from: "/concepts/dashboard",
-    to: "/articles/testkube-dashboard",
+    to: "/articles/testkube-dashboard-explore",
   },
   {
     from: "/concepts/secrets",
@@ -208,15 +212,7 @@ const redirects = [
       "/guides/exposing-testkube/overview",
       "/articles/exposing-testkube",
     ],
-    to: "/articles/testkube-dashboard",
-  },
-  {
-    from: [
-      "/guides/going-to-production/exposing-testkube/ingress-nginx",
-      "/guides/exposing-testkube/ingress-nginx",
-      "/articles/exposing-testkube-with-ingress-nginx",
-    ],
-    to: "/articles/testkube-dashboard",
+    to: "/articles/testkube-dashboard-explore",
   },
   {
     from: [
@@ -230,7 +226,7 @@ const redirects = [
       "/guides/going-to-production/authentication/oauth-ui",
       "/articles/oauth-dashboard",
     ],
-    to: "/articles/testkube-dashboard",
+    to: "/articles/testkube-dashboard-explore",
   },
   {
     from: "/guides/cicd",

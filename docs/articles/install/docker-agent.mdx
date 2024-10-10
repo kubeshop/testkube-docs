@@ -66,6 +66,104 @@ docker stop <name>
 docker start <name>
 ```
 
+## Using the Testkube CLI with the Docker Agent
+
+To connect the Testkube CLI to the Testkube Agent running in Docker you will need to create an API Key
+and then use that with the `testkube set context` command provided in the
+[Environment Settings](/testkube-pro/articles/environment-management#agent-information) panel.
+
+## Upgrading Testkube Docker Agent
+
+There are two ways to upgrade the Docker Agent to the latest version:
+
+1. By upgrading the Agent inside an existing Docker Container
+2. By replacing the entire Testkube Agent Docker Image with a new version
+
+### Upgrading the Agent inside the Container
+
+Use `docker exec` to run the Helm upgrade command provided in the
+[Environment Settings](/testkube-pro/articles/environment-management#agent-information) tab, for example
+
+```shell
+➜  ~ docker exec <container id> helm repo add kubeshop https://kubeshop.github.io/helm-charts ; helm repo update && helm upgrade --install --create-namespace testkube kubeshop/testkube --set testkube-api.cloud.key=tkcagnt_XXX -set testkube-api.cloud.orgId=tkcorg_YYY --set testkube-api.cloud.envId=tkcenv_ZZZ --set testkube-api.minio.enabled=false --set mongodb.enabled=false --set testkube-dashboard.enabled=false --set testkube-api.cloud.url=agent.testkube.io:443 --namespace testkube
+"kubeshop" has been added to your repositories
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "kubeshop" chart repository
+...Successfully got an update from the "testkube" chart repository
+Update Complete. ⎈Happy Helming!⎈
+Release "testkube" has been upgraded. Happy Helming!
+NAME: testkube
+LAST DEPLOYED: Tue Oct  8 12:53:14 2024
+NAMESPACE: testkube
+STATUS: deployed
+REVISION: 2
+TEST SUITE: None
+NOTES:
+Testkube agent installed successfully. We're initialising your connection to Testkube Cloud. This can take up to 5 minutes.
+Enjoy testing with Testkube!
+➜  ~
+```
+
+### Replacing the Agent Docker Image
+
+This is the easiest upgrade but comes with the drawback that you will lose any Testkube resources (Workflows, etc.)
+that were created in the Environment using the Agent (since these are stored as CRDs in your Agents cluster).
+
+1. Use `docker ps` to find the existing container id:
+
+```shell
+➜  ~ docker ps
+CONTAINER ID   IMAGE                     COMMAND                  CREATED        STATUS        PORTS           NAMES
+5c9f8f1eae58   kubeshop/testkube-agent   "tini -- /usr/local/…"   31 hours ago   Up 31 hours   2375-2376/tcp   docker-testkube-agent
+➜  ~
+```
+
+2. Stop the image using the container id:
+
+```shell
+➜  ~ docker stop 5c9f8f1eae58
+5c9f8f1eae58
+➜  ~
+```
+
+3. Remove the image from the Docker engine:
+
+```shell
+➜  ~ docker rm 5c9f8f1eae58
+5c9f8f1eae58
+➜  ~
+```
+
+4. Pull the latest version of the Testkube Docker Agent:
+
+```shell
+➜  ~ docker pull kubeshop/testkube-agent
+Using default tag: latest
+latest: Pulling from kubeshop/testkube-agent
+2c38280daa69: Download complete
+92ce1bafa8af: Download complete
+ae522ceee3b1: Download complete
+7f7cb6e453ec: Download complete
+24640e644361: Download complete
+d56b148afd3b: Download complete
+6b40d2b477b4: Download complete
+724c71e6ea6c: Download complete
+Digest: sha256:38292da6ced7b9abfd1c6b481bb61186ab7cbf442fd0de4f8adba0a202bc4dfb
+Status: Downloaded newer image for kubeshop/testkube-agent:latest
+docker.io/kubeshop/testkube-agent:latest
+```
+
+5. Now you're ready to reinstall the latest version of the Testkube Agent using the installation command [shown above](#installation).
+
+### Exporting and re-importing Testkube Resources
+
+If you're using the second method above and want to preserve any Testkube Resources you might have created in the Environment
+your Docker Agent was connected to, you can export these using kubectl before replacing the Testkube Agent image.
+
+```shell
+docker exec
+```
+
 ## Docker Agent internals
 
 The Testkube Docker Agent provisions its own [Kind cluster](https://kind.sigs.k8s.io/) inside Docker and then uses an
