@@ -8,7 +8,7 @@ of both Testkube, Argo Rollouts and Progressive Delivery principles.
 Testkube can be used to perform analysis to drive both Canary and BlueGreen Deployments in Argo Rollouts by
 creating a corresponding AnalysisTemplate that calls Testkube to validate an ongoing progressive delivery strategy.
 
-## Testkube Analysis Template
+## Testkube AnalysisTemplate
 
 A sample AnalysisTemplate that uses the Testkube CLI to run a Test Workflow is shown below:
 
@@ -101,7 +101,8 @@ the default one defined in the AnalysisTemplate above.
 
 ## Blue-Green Deployments
 
-For a [BlueGreen Rollout](https://argo-rollouts.readthedocs.io/en/stable/features/bluegreen/), the Analysis could be configured as follows:
+For a [BlueGreen Rollout](https://argo-rollouts.readthedocs.io/en/stable/features/bluegreen/), the Analysis 
+could be configured as follows, using the Testkube AnalysisTemplate for [Pre-Promotion Analysis](https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#bluegreen-pre-promotion-analysis):
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -112,8 +113,8 @@ spec:
   replicas: 2
   strategy:
     blueGreen:
-      activeService: <some service name>
-      previewService: <another service name>
+      activeService: <the current service>
+      previewService: <the service to be rolled out>
       autoPromotionEnabled: false
       prePromotionAnalysis:
         templates:
@@ -130,5 +131,5 @@ spec:
       etc...
 ```
 
-In this case the Analysis is not providing a specific `worfklow-name` argument, so the default Test Workflow
-`basic-k6-workflow` will be run to validate the BlueGreen deployment.
+In this case the Analysis is not providing a specific `worfklow-name` argument for the `testkube-experiment-analysis` AnalysisTemplate, 
+so the default Test Workflow `basic-k6-workflow` will be run to validate the BlueGreen deployment.
