@@ -3,14 +3,19 @@
 This document describes how you can use Testkube with [Argo Rollouts](https://argo-rollouts.readthedocs.io/en/stable/). As a prerequisite, you should have a good understanding
 of both Testkube, Argo Rollouts and Progressive Delivery principles.
 
+:::tip
+Have a look at the [Automate Progressive Delivery with Testkube](https://testkube.io/learn/automate-progressive-delivery-with-testkube-for-risk-free-application-rollouts)
+blog-post for an overview of Progress Delivery with Argo Rollouts and Testkube.
+:::
+
 ## Overview
 
-Testkube can be used to perform analysis to drive both Canary and BlueGreen Deployments in Argo Rollouts by
+Testkube can be used to perform analysis to drive both [Canary](https://argo-rollouts.readthedocs.io/en/stable/features/canary/) and [BlueGreen](https://argo-rollouts.readthedocs.io/en/stable/features/bluegreen/) Deployments in Argo Rollouts by
 creating a corresponding AnalysisTemplate that calls Testkube to validate an ongoing progressive delivery strategy.
 
 ## Testkube AnalysisTemplate
 
-A sample AnalysisTemplate that uses the Testkube CLI to run a Test Workflow is shown below:
+A sample AnalysisTemplate that uses the [Testkube CLI](/articles/cli) to run a Test Workflow is shown below:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -51,8 +56,16 @@ spec:
 ```
 
 This AnalysisTemplate uses a Kubernetes Job to run the Analysis ([Read More](https://argo-rollouts.readthedocs.io/en/stable/analysis/job/)) 
-and also defines the actual Test Workflow to run as an argument, allowing you to use [Analysis Template Arguments](https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-template-arguments) to
+and also defines the actual Test Workflow to run as an argument, which allows you to use [Analysis Template Arguments](https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-template-arguments) to
 reuse this template for different Rollouts with different Tests (as shown in the examples below).
+
+The defined Job uses the Testkube CLI to run the specified Workflow, you will need set the following arguments for the preceding
+`testkube set context` command:
+
+- `api-key` : An API Token required to call the Testkube API through the CLI - [Read More](/testkube-pro/articles/api-token-management).
+- `org-id`, `env-id` : Organization and Environment IDs for the Environment containing the Workflow to run, you can get these from 
+  the Agent Information section of the Environment Settings - [Read More](/testkube-pro/articles/environment-management#agent-information).
+- `root-domain` : Where you are hosting the Testkube Control Plane - use `testkube.io` for Testkube Cloud or your internal hostname for on-prem installations.
 
 ## Canary Deployments
 
