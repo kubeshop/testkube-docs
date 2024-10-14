@@ -1,3 +1,8 @@
+
+<head>
+  <meta name="og:type" content="reference-doc" />
+</head>
+
 ## testkube get artifact
 
 List artifacts of the given test, test suite or test workflow execution name

@@ -2,6 +2,10 @@ import LegacyWarning from '../_legacy-warning.mdx';
 
 <LegacyWarning />
 
+<head>
+  <meta name="og:type" content="reference-doc" />
+</head>
+
 # API Reference
 
 ## Packages
@@ -80,7 +84,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `executor.testkube.io/v1` | | |
 | `kind` _string_ | `Executor` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[ExecutorSpec](#executorspec)_ |  |  |  |
 
 
@@ -98,7 +102,7 @@ ExecutorList contains a list of Executor
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `executor.testkube.io/v1` | | |
 | `kind` _string_ | `ExecutorList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `items` _[Executor](#executor) array_ |  |  |  |
 
 
@@ -139,7 +143,7 @@ _Appears in:_
 | `image` _string_ | Image for kube-job |  |  |
 | `args` _string array_ | executor binary arguments |  |  |
 | `command` _string array_ | executor default binary command |  |  |
-| `imagePullSecrets` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#localobjectreference-v1-core) array_ | container executor default image pull secrets |  |  |
+| `imagePullSecrets` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#localobjectreference-v1-core) array_ | container executor default image pull secrets |  |  |
 | `features` _[Feature](#feature) array_ | Features list of possible features which executor handles |  | Enum: [artifacts junit-report] <br /> |
 | `content_types` _[ScriptContentType](#scriptcontenttype) array_ | ContentTypes list of handled content types |  | Enum: [string file-uri git-file git-dir git] <br /> |
 | `job_template` _string_ | Job template to launch executor |  |  |
@@ -241,7 +245,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `executor.testkube.io/v1` | | |
 | `kind` _string_ | `Webhook` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[WebhookSpec](#webhookspec)_ |  |  |  |
 
 
@@ -259,7 +263,7 @@ WebhookList contains a list of Webhook
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `executor.testkube.io/v1` | | |
 | `kind` _string_ | `WebhookList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `items` _[Webhook](#webhook) array_ |  |  |  |
 
 

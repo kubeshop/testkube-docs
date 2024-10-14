@@ -1,6 +1,6 @@
 # Using Testkube with ArgoCD
 
-This document describes how you can use Testkube with ArgoCD. As a prerequisite you should have good understanding
+This document describes how you can use Testkube with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/). As a prerequisite, you should have good understanding
 of both Testkube, ArgoCD and GitOps principles. 
 
 :::tip

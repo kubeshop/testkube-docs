@@ -189,7 +189,7 @@ spec:
 
 # my-template-b
 spec:
-  pod:
+  steps:
   - shell: echo 2
 
 # my-workflow-w

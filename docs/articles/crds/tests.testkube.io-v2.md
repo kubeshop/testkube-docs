@@ -2,6 +2,10 @@ import LegacyWarning from '../_legacy-warning.mdx';
 
 <LegacyWarning />
 
+<head>
+  <meta name="og:type" content="reference-doc" />
+</head>
+
 # API Reference
 
 ## Packages
@@ -82,7 +86,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v2` | | |
 | `kind` _string_ | `Script` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[ScriptSpec](#scriptspec)_ |  |  |  |
 
 
@@ -119,7 +123,7 @@ ScriptList contains a list of Script
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v2` | | |
 | `kind` _string_ | `ScriptList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `items` _[Script](#script) array_ |  |  |  |
 
 
@@ -160,7 +164,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v2` | | |
 | `kind` _string_ | `Test` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[TestSpec](#testspec)_ |  |  |  |
 
 
@@ -197,7 +201,7 @@ TestList contains a list of Test
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v2` | | |
 | `kind` _string_ | `TestList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `items` _[Test](#test) array_ |  |  |  |
 
 
@@ -240,7 +244,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v2` | | |
 | `kind` _string_ | `TestSuite` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[TestSuiteSpec](#testsuitespec)_ |  |  |  |
 
 
@@ -258,8 +262,8 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `id` _string_ | execution id |  |  |
-| `startTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | test suite execution start time |  |  |
-| `endTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | test suite execution end time |  |  |
+| `startTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | test suite execution start time |  |  |
+| `endTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#time-v1-meta)_ | test suite execution end time |  |  |
 
 
 ### TestSuiteExecutionRequest
@@ -304,7 +308,7 @@ TestSuiteList contains a list of TestSuite
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `tests.testkube.io/v2` | | |
 | `kind` _string_ | `TestSuiteList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `items` _[TestSuite](#testsuite) array_ |  |  |  |
 
 
@@ -418,6 +422,6 @@ _Appears in:_
 | `type` _string_ | variable type |  |  |
 | `name` _string_ | variable name |  |  |
 | `value` _string_ | variable string value |  |  |
-| `valueFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_ | or load it from var source |  |  |
+| `valueFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#envvarsource-v1-core)_ | or load it from var source |  |  |
 
 

@@ -1,3 +1,8 @@
+
+<head>
+  <meta name="og:type" content="reference-doc" />
+</head>
+
 ## testkube init agent
 
 Install Testkube Pro Agent and connect to Testkube Pro environment
