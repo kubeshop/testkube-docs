@@ -20,14 +20,14 @@ testkube pro docker [flags]
       --api-prefix string               usually don't need to be changed [required for custom cloud mode] (default "api")
       --docker-container string         Docker container name for Testkube Docker Agent (default "testkube-agent")
       --docker-image string             Docker image for Testkube Docker Agent (default "kubeshop/testkube-agent:2.1.39")
-      --env-id string                   Testkube Pro environment id [required for centralized mode]
+      --env-id string                   Testkube Pro environment id [required for centralized mode]. It can be skipped for no login mode
       --feature-logs-v2                 Logs v2 feature flag
   -h, --help                            help for docker
       --logs-prefix string              usually don't need to be changed [required for custom cloud mode] (default "logs")
       --logs-uri string                 Testkube Pro logs URI [required for centralized mode]
       --master-insecure                 should client connect in insecure mode (will use http instead of https)
       --no-login testkube set context   Ignore login prompt, set existing token later by testkube set context
-      --org-id string                   Testkube Pro organization id [required for centralized mode]
+      --org-id string                   Testkube Pro organization id [required for centralized mode]. It can be skipped for no login mode
       --root-domain string              usually don't need to be changed [required for custom cloud mode] (default "testkube.io")
       --ui-prefix string                usually don't need to be changed [required for custom cloud mode] (default "app")
 ```
