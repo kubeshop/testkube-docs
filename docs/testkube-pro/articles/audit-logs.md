@@ -32,7 +32,7 @@ This makes it easy to integrate the audit log events with other reporting or ana
 
 ![Export Audit Logs](../../img/audit-log-export.png "Export Audit Logs")
 
-## Retention period
+## Retention Period
 
 By default, audit log events are retained for **180 days**. After this period, the logs are automatically cleaned up to optimize storage.
 
