@@ -8,7 +8,7 @@ Events in the **Audit Log** can be filtered by date range of recorded events, by
 
 In addition to querying, **Audit Log** can also be exported into **CSV** or **JSON** format.
 
-Default retention period for **Audit Log** events is **180 days**.
+The default retention period for **Audit Log** events is **180 days**.
 
 ## Configuration
 
