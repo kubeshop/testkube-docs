@@ -1,6 +1,6 @@
 # Audit Logs
 
-**Testkube** records events into its internal Audit Log so **Organization Owners** and **Admins** can have insights how are the **Organization Members** using the product.
+**Testkube** records events into its internal Audit Log so **Organization Owners** and **Admins** can have insights into how the **Organization Members** are using the product.
 
 **Audit Logs** can be accessed via the **Audit log** menu item in the **Organization Management** page.
 
