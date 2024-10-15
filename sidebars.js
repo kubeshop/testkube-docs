@@ -413,6 +413,11 @@ const sidebars = {
               label: "API Tokens",
               id: "testkube-pro/articles/api-token-management",
             },
+            {
+              type: "doc",
+              label: "Audit log",
+              id: "testkube-pro/articles/audit-logs",
+            },
           ],
         },
         ,
