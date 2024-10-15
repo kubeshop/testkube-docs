@@ -12,7 +12,7 @@ The default retention period for **Audit Log** events is **180 days**.
 
 ## Configuration
 
-In **Testkube On-Prem**, following settings can be configured during installation via Helm parameters:
+In **Testkube On-Prem**, the following settings can be configured during installation via Helm parameters:
 * retention period of Audit Log events - `audit.cleanup.retentionPeriod` (default: `30`)
 * enable/disable Audit Log cleanup - `audit.cleanup.enabled` (default: `true`)
 * cleanup interval of Audit Log events - `audit.cleanup.cronInterval` (default: `0 3 * * *`)
