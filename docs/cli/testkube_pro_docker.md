@@ -3,7 +3,7 @@
   <meta name="og:type" content="reference-doc" />
 </head>
 
-## testkube pro docker
+## testkube pro docker (Beta)
 
 Run Testkube Docker Agent and connect to Testkube Pro environment
 
