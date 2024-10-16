@@ -74,16 +74,21 @@ There are 4 tabs for managing your Environment.
 
 ### General
 
-On the "General" tab, you can see environment information:
+Find the general settings for your environment on the **General** tab. You can also delete the environment here, but, be aware, this action cannot be undone.
 
-- Connection state
-- Agent name
-- Agent version - If a new Testkube Agent version is available, you'll be prompted to upgrade.
-- Testkube CLI context command - To configure your Testkube CLI with pro context - [Read More](managing-cli-context)
+![General Settings Dashboard](../../img/general-settings-dashboard-072024.png)
 
-You can also delete a given environment (be careful, this action can't be rolled-back!)
+### Agent Information
 
-![Environment Information](../../img/environment-information.png)
+The middle section of the General tab presents information about the agent connected to this Environment, showing you:
+
+- The connection status and name of the agent.
+- Which Testkube version the Agent is running, and the latest available version (so you know if an upgrade is available).
+- CLI and Helm commands to install or update the Agent to the latest version.
+- The `testkube set context` CLI command to configure the Testkube CLI for this agent - [Read More](/testkube-pro/articles/managing-cli-context).
+
+![Agent Information](../../img/agent-information.png)
+
 
 ### Environment Members
 

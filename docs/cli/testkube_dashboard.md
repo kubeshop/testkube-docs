@@ -1,3 +1,8 @@
+
+<head>
+  <meta name="og:type" content="reference-doc" />
+</head>
+
 ## testkube dashboard
 
 Open Testkube dashboard
@@ -15,6 +20,7 @@ testkube dashboard [flags]
 ```
   -h, --help               help for dashboard
   -n, --namespace string   Namespace to install Testkube On-Prem demo
+      --skip-browser       skip opening dashboard in the browser, only for on-premise installation
       --verbose            show additional debug messages
 ```
 

@@ -1,3 +1,8 @@
+
+<head>
+  <meta name="og:type" content="reference-doc" />
+</head>
+
 ## testkube watch testworkflowexecution
 
 Watch output from test workflow execution

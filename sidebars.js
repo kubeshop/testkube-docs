@@ -170,13 +170,18 @@ const sidebars = {
               ],
             },
             {
-              type: "doc",
+              type: "category",
               label: "Integrations",
-              id: "articles/integrations-dashboard-explore",
+              collapsed: false,
+              items: [
+                { type: "doc", label: "Overview", id: "articles/integrations-dashboard-explore" },
+                { type: "doc", label: "Triggers", id: "articles/integrations-triggers" },
+                { type: "doc", label: "Webhooks", id: "articles/integrations-webhooks" },
+              ],
             },
             {
               type: "doc",
-              label: "Settings",
+              label: "Global Settings",
               id: "articles/settings-dashboard-explore",
             },
           ],
@@ -341,6 +346,11 @@ const sidebars = {
               label: "Cached Test Results",
               id: "testkube-pro/articles/cached-results",
             },
+            {
+              type: "doc",
+              label: "JUnit Reports",
+              id: "articles/test-workflows-reports",
+            },
           ],
         },
         {
@@ -402,6 +412,11 @@ const sidebars = {
               type: "doc",
               label: "API Tokens",
               id: "testkube-pro/articles/api-token-management",
+            },
+            {
+              type: "doc",
+              label: "Audit log",
+              id: "testkube-pro/articles/audit-logs",
             },
           ],
         },
@@ -539,7 +554,7 @@ const sidebars = {
             {
               type: "link",
               label: "API Test Automation with Postman",
-              href: "https://testkube.io/learn/functional-testing-with-selenium-in-testkube",
+              href: "https://testkube.io/blog/api-testing-in-kubernetes-with-postman",
             },
           ],
         },
@@ -676,6 +691,7 @@ const sidebars = {
           id: "articles/circleci",
         },
         { type: "doc", label: "ArgoCD", id: "articles/argocd-integration" },
+        { type: "doc", label: "Argo Rollouts", id: "articles/argorollouts-integration" },
         { type: "doc", label: "Flux", id: "articles/flux-integration" },
         { type: "doc", label: "CDEvents", id: "articles/cd-events" },
         { type: "doc", label: "Tekton", id: "articles/tekton" },
@@ -695,15 +711,13 @@ const sidebars = {
           type: "link",
           label: "PagerDuty",
           href: "https://testkube.io/learn/critical-test-based-alerting-with-pagerduty-and-testkube",
-          description:
-            "Critical Test Based Alerting with PagerDuty and Testkube",
+          description: "Critical Test Based Alerting with PagerDuty and Testkube",
         },
         {
           type: "link",
           label: "Zapier",
           href: "https://testkube.io/learn/integrating-testkube-and-zapier-for-instant-email-alerts",
-          description:
-            "Integrating Testkube and Zapier for Instant Email Alerts",
+          description: "Integrating Testkube and Zapier for Instant Email Alerts",
         },
         { type: "doc", label: "Grafana", id: "articles/grafana" },
       ],

@@ -1,3 +1,8 @@
+
+<head>
+  <meta name="og:type" content="reference-doc" />
+</head>
+
 ## testkube pro disconnect
 
 Switch back to Testkube Core OSS mode, based on active .kube/config file

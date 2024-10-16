@@ -122,6 +122,9 @@ async function splitOpenAPIByPaths(openApiUrl: string, outputDir: string, docsDi
       "---\n" +
       "title: Testkube " + title + " " + rootPath.split(':')[1] + " operations\n" +
       "---\n" +
+      "<head>\n" +
+      "  <meta name=\"og:type\" content=\"reference-doc\" />\n" +
+      "</head>\n" +
       "\n" +
       "import ApiDocMdx from '@theme/ApiDocMdx';\n" +
       "\n" +

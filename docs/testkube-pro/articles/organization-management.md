@@ -26,27 +26,6 @@ Run this on your cluster where the given agent is installed.
 
 Read more about [Environment Management](../articles/environment-management.md).
 
-## Resource Groups
-
-Resource Groups allow you to group Testkube Resources across all your environments and assign
-member access - [Read More](/articles/resource-groups).
-
-![Resource Groups Overview](../../img/resource-groups-overview.png)
-
-## Teams
-
-Teams allow you to group Organization members to simplify access control management for Environments
-and Resource Groups - [Read More](/articles/teams).
-
-![Teams Overview](../../img/teams-overview.png)
-
-## Settings
-
-In settings, you can update the name of the organization, set artifacts limits, or enable or disable AI Hints and Webhooks URL Masking.
-
-![Organization Setting](../../img/organization-settings.png)
-
-
 ## Members
 
 Invite and manage your organization members here. 
@@ -58,14 +37,17 @@ allows you to manage and apply Resource Access controls for Organization Members
 
 ### Inviting Members
 
-Invite new members by specifying their email and role and selecting the Invite button in the bottom right.
+Invite new members by specifying 
+- Emails - a comma-separated list of emails to invite.
+- Role - there are 4 roles for organization members:
+  - `Owner` - Has access to all environments and organization settings, also can access billing details.
+  - `Admin` - Has access to all environments and organization settings.
+  - `Member` - Has limited access to environments, access is defined by the roles assigned to given member. Member by default doesn't have any access, you need to [explicitly set it in the given environment](environment-management.md).
+  - `Biller` - Has access to billing details only.
+- Teams - which Teams the invited members should belong to.
+- Environments - which Environments the invited members should be added to, with their corresponding Environment Role
 
-There are 4 roles for organization members:
-
-* `Owner` - Has access to all environments and organization settings, also can access billing details.
-* `Admin` - Has access to all environments and organization settings.
-* `Member` - Has limited access to environments, access is defined by the roles assigned to given member. Member by default doesn't have any access, you need to [explicitly set it in the given environment](environment-management.md).
-* `Biller` - Has access to billing details only.
+Once all specified, select the Invite button in the bottom right.
 
 ![Organization Member Invite](../../img/organization-members.png)
 
@@ -76,10 +58,31 @@ For Testkube On-Prem deployments you can configure default organizations, enviro
 
 ### Manage existing Members
 
-Manage existing members/invites in the lists of members and pending invitations. Use the menu to the right for 
+Manage existing members in the list of members at the bottom of the tab. Use the menu to the right for 
 each member to delete them or change their role.
 
 ![Organization Members](../../img/org-members-list.png)
+
+### Manage pending Invites
+
+Manage pending member invites in the lists at the bottom of the tab. Use the menu to the right for
+each invite to update, revoke or resent the invite.
+
+![Organization Invites](../../img/organization-invites.png)
+
+## Teams
+
+Teams allow you to group Organization members to simplify access control management for Environments
+and Resource Groups - [Read More](/articles/teams).
+
+![Teams Overview](../../img/teams-overview.png)
+
+## Resource Groups
+
+Resource Groups allow you to group Testkube Resources across all your environments and assign
+member access - [Read More](/articles/resource-groups).
+
+![Resource Groups Overview](../../img/resource-groups-overview.png)
 
 ## API Tokens
 
@@ -87,6 +90,16 @@ API tokens allows running tests without linking the run to a specific account - 
 for more details on how to create and use API Tokens.
 
 ![API Tokens](../../img/api-tokens.png)
+
+## Product Features
+
+This tab allows you to configure Organization-level Product Features:
+
+- **Resource Groups & Advanced RBAC** - not toggleable, this just indicates if [Resource Groups](/articles/resource-groups) functionality is available (included with SSO).
+- **AI Troubleshooting** - available for legacy Tests only - [Read More](/testkube-pro/articles/AI-test-insights).
+- **Webhooks URL Masking** - [Read More](/articles/webhooks#url-masking)
+
+![Organization Product Features](../../img/organization-product-features.png)
 
 ## Usage & Billing
 
@@ -96,12 +109,13 @@ This section shows your current usage against the limits of your current plan.
 
 For more details about the Testkube offerings, check our [pricing page](https://testkube.io/pricing).
 
-![Usage Limits](../../img/usage-billing.png)
-
 If you are using the cloud version of Testkube you can upgrade your plan here. 
 Once on the commercial plan, you will automatically be charged for additional 
 users and environments in line with the current [Pricing Model](https://testkube.io/pricing).
 
+## Settings
 
-![Upgrade plan](../../img/upgrade-plan.png)
+In settings, you can update the name of the organization, set artifacts limits, or enable or disable AI Hints and Webhooks URL Masking.
+
+![Organization Setting](../../img/organization-settings.png)
 
