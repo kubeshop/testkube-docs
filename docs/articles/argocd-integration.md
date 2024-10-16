@@ -1,11 +1,11 @@
 # Using Testkube with ArgoCD
 
-This document describes how you can use Testkube with ArgoCD. As a prerequisite you should have good understanding
+This document describes how you can use Testkube with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/). As a prerequisite, you should have good understanding 
 of both Testkube, ArgoCD and GitOps principles. 
 
 :::tip
 For a high-level introduction to using Testkube with ArgoCD including a step-by-step tutorial, please check out
-our [GitOps blogpost](https://testkube.io/blog/a-gitops-powered-kubernetes-testing-machine-with-argocd-and-testkube).
+our [GitOps blogpost](https://testkube.io/blog/a-gitops-powered-kubernetes-testing-machine-with-argocd-and-testkube) and watch our YouTube video <iframe width="350" height="200" src="https://www.youtube.com/embed/jvWPMUpOePE" title="GitOps-Powered Testing with Testkube and ArgoCD" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 :::
 
 ## Managing Testkube CRDs with ArgoCD

@@ -1,9 +1,30 @@
 # Test Workflows
 
 ## Introduction
+
+import TwoColumns from '@site/src/components/TwoColumns';
+
+<TwoColumns
+  left={<>
+
+ <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p> 
+
+<p>
 Test Workflows are an easy and extremely powerful way to define and run your tests in 
-your Kubernetes clusters. Thanks to their flexibility, Test Workflows solve many of the 
+your Kubernetes clusters. 
+</p>
+
+
+
+<p>Thanks to their flexibility, Test Workflows solve many of the 
 problems that can occur with standard Tests, including:
+</p>
+
+  </>}
+  right={<p>
+    <iframe width="350" height="170" src="https://www.youtube.com/embed/iHUTYT6L2Ns" title="Testkube 2.0: A New Era for Cloud Native Testing with Test Workflows" frameborder="0" allow="accelerometer; autoplay; clboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </p>}
+/>
 
 - Running Tests using different testing tool versions and dependencies.
 - Defining multiple steps for the execution of the tests.
@@ -578,3 +599,4 @@ Status:
       Name:            k6-workflow
       Namespace:       testkube
 ```
+
