@@ -17,8 +17,6 @@ import TabItem from "@theme/TabItem";
 
     ```sh
     choco source add --name=kubeshop_repo --source=https://chocolatey.kubeshop.io/chocolatey
-    ```
-    ```sh
     choco install testkube -y
     ```
 
@@ -29,14 +27,8 @@ import TabItem from "@theme/TabItem";
 
     ```sh
     wget -qO - https://repo.testkube.io/key.pub | sudo apt-key add -
-    ```
-    ```sh
     echo "deb https://repo.testkube.io/linux linux main" | sudo tee -a /etc/apt/sources.list
-    ```
-    ```sh
     sudo apt-get update
-    ```
-    ```sh
     sudo apt-get install -y testkube
     ```
 
