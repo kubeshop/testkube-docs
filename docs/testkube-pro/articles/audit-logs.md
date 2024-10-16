@@ -1,4 +1,4 @@
-# Audit Logs
+# Testkube Audit Logs
 
 **Testkube** records significant events in its internal **Audit Log**, 
 providing **Organization Owners** and **Admins** with valuable insights into 

@@ -415,7 +415,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Audit log",
+              label: "Audit Logs",
               id: "testkube-pro/articles/audit-logs",
             },
           ],
