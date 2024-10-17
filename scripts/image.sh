@@ -1,6 +1,10 @@
 #!/bin/bash
 
 INPUT_FILE="images.txt"
+
+# Get images from the enterprise chart
+helm template test testkubeenterprise/testkube-enterprise --skip-crds --set global.certificateProvider="" --set global.testWorkflows.createOfficialTemplates=false | grep "image:" | grep -v "{" | sed 's/"//g' | sed 's/docker.io\///g' | awk '{ print $2 }' | awk 'NF && !seen[$0]++' | sort > "$INPUT_FILE"
+
 OUTPUT_DIR="../docs/articles/inventory/generated/"
 INDEX_FILE="${OUTPUT_DIR}images.md"
 
