@@ -88,6 +88,9 @@ helm template test testkubeenterprise/testkube-enterprise --skip-crds --set glob
 # Get images for the agent chart
 helm template test kubeshop/testkube --skip-crds --set mongodb.enabled=false --set testkube-api.minio.enabled=false --set testkube-dashboard.enabled=false --set global.testWorkflows.createOfficialTemplates=false | grep "image:" | grep -v "{" | sed 's/"//g' | sed 's/docker.io\///g' | awk '{ print $2 }' | awk 'NF && !seen[$0]++' | sort > "$AGENT_IMAGES"
 
+# Get the images for the workflows
+helm template test kubeshop/testkube --skip-crds --set mongodb.enabled=false --set testkube-api.minio.enabled=false --set testkube-dashboard.enabled=false --set global.testWorkflows.createOfficialTemplates=false | grep "testkube-tw" | sed 's/"//g' | sed 's/docker.io\///g' | awk '{ print $2 }' | awk 'NF && !seen[$0]++' | sort >> "$AGENT_IMAGES"
+
 generate_reports "testkubeenterprise/testkube-enterprise" "cp_images"
 generate_reports "kubeshop/testkube" "agent_images"
 

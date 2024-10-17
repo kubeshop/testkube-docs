@@ -14,3 +14,5 @@ Based on chart `testkube` as of version `2.1.54`
 | nats:2.10.9-alpine | N/A | [View Report](./nats-2.10.9-alpine_linux_amd64.md) | [View Report](./nats-2.10.9-alpine_linux_arm64.md) |
 | natsio/nats-server-config-reloader:0.14.1 | N/A | [View Report](./nats-server-config-reloader-0.14.1_linux_amd64.md) | [View Report](./nats-server-config-reloader-0.14.1_linux_arm64.md) |
 | rancher/kubectl:v1.23.7 | N/A | [View Report](./kubectl-v1.23.7_linux_amd64.md) | [View Report](./kubectl-v1.23.7_linux_arm64.md) |
+| kubeshop/testkube-tw-init:2.1.42 | N/A | [View Report](./testkube-tw-init-2.1.42_linux_amd64.md) | [View Report](./testkube-tw-init-2.1.42_linux_arm64.md) |
+| kubeshop/testkube-tw-toolkit:2.1.42 | N/A | [View Report](./testkube-tw-toolkit-2.1.42_linux_amd64.md) | [View Report](./testkube-tw-toolkit-2.1.42_linux_arm64.md) |

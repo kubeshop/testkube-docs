@@ -6,3 +6,5 @@ kubeshop/testkube-operator:2.1.20
 nats:2.10.9-alpine
 natsio/nats-server-config-reloader:0.14.1
 rancher/kubectl:v1.23.7
+kubeshop/testkube-tw-init:2.1.42
+kubeshop/testkube-tw-toolkit:2.1.42
