@@ -3,12 +3,12 @@
   <meta name="og:type" content="reference-doc" />
 </head>
 
-## testkube pro docker (Beta)
+## testkube docker init
 
 Run Testkube Docker Agent and connect to Testkube Pro environment
 
 ```
-testkube pro docker [flags]
+testkube docker init [flags]
 ```
 
 ### Options
@@ -19,10 +19,10 @@ testkube pro docker [flags]
       --agent-uri string                Testkube Pro agent URI [required for centralized mode]
       --api-prefix string               usually don't need to be changed [required for custom cloud mode] (default "api")
       --docker-container string         Docker container name for Testkube Docker Agent (default "testkube-agent")
-      --docker-image string             Docker image for Testkube Docker Agent (default "kubeshop/testkube-agent:2.1.39")
+      --docker-image string             Docker image for Testkube Docker Agent (default "kubeshop/testkube-agent:2.1.41")
       --env-id string                   Testkube Pro environment id [required for centralized mode]. It can be skipped for no login mode
       --feature-logs-v2                 Logs v2 feature flag
-  -h, --help                            help for docker
+  -h, --help                            help for init
       --logs-prefix string              usually don't need to be changed [required for custom cloud mode] (default "logs")
       --logs-uri string                 Testkube Pro logs URI [required for centralized mode]
       --master-insecure                 should client connect in insecure mode (will use http instead of https)
@@ -46,5 +46,5 @@ testkube pro docker [flags]
 
 ### SEE ALSO
 
-* [testkube pro](testkube_pro.md)	 - Testkube Pro commands
+* [testkube docker](testkube_docker.md)	 - Testkube Docker commands
 

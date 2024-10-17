@@ -36,6 +36,7 @@ testkube [flags]
 * [testkube debug](testkube_debug.md)	 - Print debugging info
 * [testkube delete](testkube_delete.md)	 - Delete resources
 * [testkube disable](testkube_disable.md)	 - Disable feature
+* [testkube docker](testkube_docker.md)	 - Testkube Docker commands
 * [testkube download](testkube_download.md)	 - Artifacts management commands
 * [testkube enable](testkube_enable.md)	 - Enable feature
 * [testkube generate](testkube_generate.md)	 - Generate resources commands
