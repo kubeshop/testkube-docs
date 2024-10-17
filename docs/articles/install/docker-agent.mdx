@@ -41,7 +41,7 @@ You can get the required tokens from the [Agent Information tab](/testkube-pro/a
 Install the Testkube Agent using `docker run` with arguments provided in the Testkube Dashboard:
 
 ```shell
-docker run --name=docker-testkube-agent --privileged -e AGENT_KEY=tkcagnt_XXX -e CLOUD_URL=agent.testkube.io:443 kubeshop/testkube-agent
+docker run --name=docker-testkube-agent -d --privileged -e AGENT_KEY=tkcagnt_XXX -e CLOUD_URL=agent.testkube.io:443 kubeshop/testkube-agent
 ```
 
 (Starting the Agent the first time can take a couple of minutes)
@@ -98,13 +98,24 @@ There are two ways to upgrade the Docker Agent to the latest version
 
 ### Upgrading with the Testkube CLI
 
-The preferred way to upgrade the Docker Agent is by using the Testkube CLI:
+The preferred way to upgrade the Docker Agent is by using the Testkube CLI - this requires you to have installed the agent
+with the CLI as described above:
 
 ```
 testkube upgrade
 ```
 
 This will update the Testkube version inside your running Docker Agent (the Agent needs to be running for this command to work).
+
+:::info
+Under the hood this runs a helm upgrade in your Docker Agent:
+
+```
+docker exec testkube-agent helm upgrade testkube testkube/testkube --namespace testkube \
+  --set testkube-api.minio.enabled=false --set mongodb.enabled=false --set testkube-api.cloud.key=tkcagnt_XXX \
+  --set testkube-api.cloud.url=api.testkube.io:999 --set testkube-api.dockerImageVersion=1.2.3
+```
+:::
 
 ### Replacing the Agent Docker Image
 
@@ -156,15 +167,6 @@ docker.io/kubeshop/testkube-agent:latest
 ```
 
 5. Now you're ready to reinstall the latest version of the Testkube Agent using the installation command [shown above](#installation).
-
-### Exporting and re-importing Testkube Resources
-
-If you're using the second method above and want to preserve any Testkube Resources you might have created in the Environment
-your Docker Agent was connected to, you can export these using kubectl before replacing the Testkube Agent image.
-
-```shell
-docker exec
-```
 
 ## Docker Agent internals
 
