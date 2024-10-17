@@ -91,6 +91,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Image Inventory",
+              id: "articles/inventory/images",
+            },
+            {
+              type: "doc",
               label: "Using an external MongoDB",
               id: "articles/testkube-dependencies",
             },
