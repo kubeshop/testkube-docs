@@ -18,7 +18,7 @@ hide_table_of_contents: true
 <a href="https://scout.docker.com/v/CVE-2023-28434?s=gitlab&n=minio&ns=github.com%2Fminio&t=golang&vr=%3Cv2023-03-20t20-16-18z"><img alt="high 8.8: CVE--2023--28434" src="https://img.shields.io/badge/CVE--2023--28434-lightgrey?label=high%208.8&labelColor=e25d68"/></a> <i>OWASP Top Ten 2017 Category A9 - Using Components with Known Vulnerabilities</i>
 
 <table>
-<tr><td>Affected range</td><td><code><v2023-03-20t20-16-18z</code></td></tr>
+<tr><td>Affected range</td><td><code>v2023-03-20t20-16-18z</code></td></tr>
 <tr><td>Fixed version</td><td><code>v2023-03-20t20-16-18z</code></td></tr>
 <tr><td>CVSS Score</td><td><code>8.8</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H</code></td></tr>
@@ -37,7 +37,7 @@ Minio is a Multi-Cloud Object Storage framework. Prior to RELEASE.2023-03-20T20-
 <a href="https://scout.docker.com/v/CVE-2023-28433?s=gitlab&n=minio&ns=github.com%2Fminio&t=golang&vr=%3Cv2023-03-20t20-16-18z"><img alt="high 8.8: CVE--2023--28433" src="https://img.shields.io/badge/CVE--2023--28433-lightgrey?label=high%208.8&labelColor=e25d68"/></a> <i>OWASP Top Ten 2017 Category A9 - Using Components with Known Vulnerabilities</i>
 
 <table>
-<tr><td>Affected range</td><td><code><v2023-03-20t20-16-18z</code></td></tr>
+<tr><td>Affected range</td><td><code>v2023-03-20t20-16-18z</code></td></tr>
 <tr><td>Fixed version</td><td><code>v2023-03-20t20-16-18z</code></td></tr>
 <tr><td>CVSS Score</td><td><code>8.8</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H</code></td></tr>
@@ -94,7 +94,7 @@ Minio a Allocation of Memory Without Limits or Throttling vulnerability in write
 <a href="https://scout.docker.com/v/CVE-2021-21362?s=gitlab&n=minio&ns=github.com%2Fminio&t=golang&vr=%3Cv2021-03-04t00-53-13z"><img alt="medium 6.5: CVE--2021--21362" src="https://img.shields.io/badge/CVE--2021--21362-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>OWASP Top Ten 2017 Category A9 - Using Components with Known Vulnerabilities</i>
 
 <table>
-<tr><td>Affected range</td><td><code><v2021-03-04t00-53-13z</code></td></tr>
+<tr><td>Affected range</td><td><code>v2021-03-04t00-53-13z</code></td></tr>
 <tr><td>Fixed version</td><td><code>v2021-03-04t00-53-13z</code></td></tr>
 <tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:N</code></td></tr>
@@ -113,7 +113,7 @@ MinIO is an open-source high performance object storage service and it is API co
 <a href="https://scout.docker.com/v/CVE-2022-35919?s=gitlab&n=minio&ns=github.com%2Fminio&t=golang&vr=%3Cv2022-07-29t19-40-48z"><img alt="low 2.7: CVE--2022--35919" src="https://img.shields.io/badge/CVE--2022--35919-lightgrey?label=low%202.7&labelColor=fce1a9"/></a> <i>OWASP Top Ten 2017 Category A9 - Using Components with Known Vulnerabilities</i>
 
 <table>
-<tr><td>Affected range</td><td><code><v2022-07-29t19-40-48z</code></td></tr>
+<tr><td>Affected range</td><td><code>v2022-07-29t19-40-48z</code></td></tr>
 <tr><td>Fixed version</td><td><code>v2022-07-29t19-40-48z</code></td></tr>
 <tr><td>CVSS Score</td><td><code>2.7</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:L/I:N/A:N</code></td></tr>
