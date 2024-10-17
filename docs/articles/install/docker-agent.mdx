@@ -22,6 +22,22 @@ If you prefer to use your own local Kubernetes cluster for the Testkube Agent, h
 
 ## Installation
 
+### With Testkube CLI
+
+Installing the Docker Agent with the Testkube CLI has the advantage of automatically configuring the CLI to work
+with the Docker Agent, which would otherwise have to be done with the testkube set context command.
+
+1. Install the Testkube CLI as described at [Installing the CLI](/articles/install/cli)
+2. Run the below command:
+
+```shell
+testkube docker --agent-token=tkcagnt_XXX --org-id=tkcorg_YYY --env-id=tkcenv_ZZZ
+```
+
+You can get the required tokens from the [Agent Information tab](/testkube-pro/articles/environment-management/#agent-information).
+
+### With Docker
+
 Install the Testkube Agent using `docker run` with arguments provided in the Testkube Dashboard:
 
 ```shell
@@ -72,41 +88,27 @@ To connect the Testkube CLI to the Testkube Agent running in Docker you will nee
 and then use that with the `testkube set context` command provided in the
 [Environment Settings](/testkube-pro/articles/environment-management#agent-information) panel.
 
+:::note
+This is not necessary if you used the Testkube CLI to install the Docker Agent as described above.
+:::
+
 ## Upgrading Testkube Docker Agent
 
-There are two ways to upgrade the Docker Agent to the latest version:
+There are two ways to upgrade the Docker Agent to the latest version
 
-1. By upgrading the Agent inside an existing Docker Container
-2. By replacing the entire Testkube Agent Docker Image with a new version
+### Upgrading with the Testkube CLI
 
-### Upgrading the Agent inside the Container
+The preferred way to upgrade the Docker Agent is by using the Testkube CLI:
 
-Use `docker exec` to run the Helm upgrade command provided in the
-[Environment Settings](/testkube-pro/articles/environment-management#agent-information) tab, for example
-
-```shell
-➜  ~ docker exec <container id> helm repo add kubeshop https://kubeshop.github.io/helm-charts ; helm repo update && helm upgrade --install --create-namespace testkube kubeshop/testkube --set testkube-api.cloud.key=tkcagnt_XXX -set testkube-api.cloud.orgId=tkcorg_YYY --set testkube-api.cloud.envId=tkcenv_ZZZ --set testkube-api.minio.enabled=false --set mongodb.enabled=false --set testkube-dashboard.enabled=false --set testkube-api.cloud.url=agent.testkube.io:443 --namespace testkube
-"kubeshop" has been added to your repositories
-Hang tight while we grab the latest from your chart repositories...
-...Successfully got an update from the "kubeshop" chart repository
-...Successfully got an update from the "testkube" chart repository
-Update Complete. ⎈Happy Helming!⎈
-Release "testkube" has been upgraded. Happy Helming!
-NAME: testkube
-LAST DEPLOYED: Tue Oct  8 12:53:14 2024
-NAMESPACE: testkube
-STATUS: deployed
-REVISION: 2
-TEST SUITE: None
-NOTES:
-Testkube agent installed successfully. We're initialising your connection to Testkube Cloud. This can take up to 5 minutes.
-Enjoy testing with Testkube!
-➜  ~
 ```
+testkube upgrade
+```
+
+This will update the Testkube version inside your running Docker Agent (the Agent needs to be running for this command to work).
 
 ### Replacing the Agent Docker Image
 
-This is the easiest upgrade but comes with the drawback that you will lose any Testkube resources (Workflows, etc.)
+This option comes with the drawback that you will lose any Testkube resources (Workflows, etc.)
 that were created in the Environment using the Agent (since these are stored as CRDs in your Agents cluster).
 
 1. Use `docker ps` to find the existing container id:
