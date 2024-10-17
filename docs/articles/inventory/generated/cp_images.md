@@ -1,5 +1,11 @@
-| Image | Description | Vulnerability Report (linux/amd64) | Vulnerability Report (linux/arm64) |
-|-------|-------------|------------------------------------|------------------------------------|
+:::info
+
+Based on chart `testkube-enterprise` as of version `1.178.0`
+
+:::
+
+| Image | Description | Vulnerability Report (`linux/amd64`) | Vulnerability Report (`linux/arm64`) |
+|-------|-------------|--------------------------------------|--------------------------------------|
 | alpine/mongosh:2.0.2 | N/A | [View Report](./mongosh-2.0.2_linux_amd64.md) | [View Report](./mongosh-2.0.2_linux_arm64.md) |
 | bitnami/minio:2024.8.3-debian-12-r1 | Application packaged by Broadcom, Inc. | [View Report](./minio-2024.8.3-debian-12-r1_linux_amd64.md) | [View Report](./minio-2024.8.3-debian-12-r1_linux_arm64.md) |
 | ghcr.io/dexidp/dex:v2.40.0 | OpenID Connect (OIDC) identity and OAuth 2.0 provider with pluggable connectors | [View Report](./dex-v2.40.0_linux_amd64.md) | [View Report](./dex-v2.40.0_linux_arm64.md) |

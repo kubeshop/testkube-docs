@@ -1,6 +1,7 @@
-<h2>:mag: Vulnerabilities of <code>ghcr.io/dexidp/dex:v2.40.0</code></h2>
+---
+hide_table_of_contents: true
+---
 
-<details open="true"><summary>:package: Image Reference</strong> <code>ghcr.io/dexidp/dex:v2.40.0</code></summary>
 <table>
 <tr><td>digest</td><td><code>sha256:3e35d5d0f7dbd33fbadc36a71ff58cf4097ab98d73d22f6cb9a6471a32e028af</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 2" src="https://img.shields.io/badge/critical-2-8b1924"/> <img alt="high: 6" src="https://img.shields.io/badge/high-6-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/medium-6-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/low-2-fce1a9"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
 <tr><td>size</td><td>32 MB</td></tr>
@@ -191,6 +192,7 @@ Calling any of the Parse functions on Go source code which contains deeply neste
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/dexidp/dex</strong> <code>2.40.0</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/dexidp/dex@2.40.0</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2024-23656?s=golang&n=dex&ns=github.com%2Fdexidp&t=golang&vr=%3E%3D0"><img alt="high : CVE--2024--23656" src="https://img.shields.io/badge/CVE--2024--23656-lightgrey?label=high%20&labelColor=e25d68"/></a> 
@@ -218,6 +220,7 @@ The additional affected modules and versions are: github.com/dexidp/dex from v2.
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>busybox</strong> <code>1.36.1-r28</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/busybox@1.36.1-r28?os_name=alpine&os_version=3.20</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2023-42365?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C1.36.1-r29"><img alt="medium : CVE--2023--42365" src="https://img.shields.io/badge/CVE--2023--42365-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
@@ -256,6 +259,7 @@ The additional affected modules and versions are: github.com/dexidp/dex from v2.
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/aws/aws-sdk-go</strong> <code>1.44.206</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/aws/aws-sdk-go@1.44.206</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2020-8911?s=golang&n=aws-sdk-go&ns=github.com%2Faws&t=golang&vr=%3E%3D0"><img alt="medium : CVE--2020--8911" src="https://img.shields.io/badge/CVE--2020--8911-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
@@ -298,6 +302,31 @@ Files encrypted by the V1 EncryptionClient using either the AES-CBC content ciph
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/hashicorp/go-retryablehttp</strong> <code>0.7.1</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/hashicorp/go-retryablehttp@0.7.1</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-6104?s=github&n=go-retryablehttp&ns=github.com%2Fhashicorp&t=golang&vr=%3C0.7.7"><img alt="medium 6.0: CVE--2024--6104" src="https://img.shields.io/badge/CVE--2024--6104-lightgrey?label=medium%206.0&labelColor=fbb552"/></a> <i>Insertion of Sensitive Information into Log File</i>
+
+<table>
+<tr><td>Affected range</td><td><code><0.7.7</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.7.7</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:H/UI:N/S:C/C:H/I:N/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+go-retryablehttp prior to 0.7.7 did not sanitize urls when writing them to its log file. This could lead to go-retryablehttp writing sensitive HTTP basic auth credentials to its log file. This vulnerability, CVE-2024-6104, was fixed in go-retryablehttp 0.7.7.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>gopkg.in/square/go-jose.v2</strong> <code>2.6.0</code> (golang)</summary>
 
 <small><code>pkg:golang/gopkg.in/square/go-jose.v2@2.6.0</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2024-28180?s=github&n=go-jose.v2&ns=gopkg.in%2Fsquare&t=golang&vr=%3C%3D2.6.0"><img alt="medium 4.3: CVE--2024--28180" src="https://img.shields.io/badge/CVE--2024--28180-lightgrey?label=medium%204.3&labelColor=fbb552"/></a> <i>Improper Handling of Highly Compressed Data (Data Amplification)</i>
@@ -331,29 +360,7 @@ The problem will not be fixed in the following package because the package is ar
 </details></td></tr>
 
 <tr><td valign="top">
-
-<small><code>pkg:golang/github.com/hashicorp/go-retryablehttp@0.7.1</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-6104?s=github&n=go-retryablehttp&ns=github.com%2Fhashicorp&t=golang&vr=%3C0.7.7"><img alt="medium 6.0: CVE--2024--6104" src="https://img.shields.io/badge/CVE--2024--6104-lightgrey?label=medium%206.0&labelColor=fbb552"/></a> <i>Insertion of Sensitive Information into Log File</i>
-
-<table>
-<tr><td>Affected range</td><td><code><0.7.7</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.7.7</code></td></tr>
-<tr><td>CVSS Score</td><td><code>6</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:H/UI:N/S:C/C:H/I:N/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-go-retryablehttp prior to 0.7.7 did not sanitize urls when writing them to its log file. This could lead to go-retryablehttp writing sensitive HTTP basic auth credentials to its log file. This vulnerability, CVE-2024-6104, was fixed in go-retryablehttp 0.7.7.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>google.golang.org/grpc</strong> <code>1.64.0</code> (golang)</summary>
 
 <small><code>pkg:golang/google.golang.org/grpc@1.64.0</code></small><br/>
 <a href="https://scout.docker.com/v/GHSA-xr7q-jx4m-x55m?s=github&n=grpc&ns=google.golang.org&t=golang&vr=%3E%3D1.64.0%2C%3C1.64.1"><img alt="low : GHSA--xr7q--jx4m--x55m" src="https://img.shields.io/badge/GHSA--xr7q--jx4m--x55m-lightgrey?label=low%20&labelColor=fce1a9"/></a> <i>Exposure of Sensitive Information to an Unauthorized Actor</i>

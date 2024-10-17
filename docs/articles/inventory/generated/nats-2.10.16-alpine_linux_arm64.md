@@ -1,6 +1,7 @@
-<h2>:mag: Vulnerabilities of <code>nats:2.10.16-alpine</code></h2>
+---
+hide_table_of_contents: true
+---
 
-<details open="true"><summary>:package: Image Reference</strong> <code>nats:2.10.16-alpine</code></summary>
 <table>
 <tr><td>digest</td><td><code>sha256:c82559e4476289481a8a5196e675ebfe67eea81d95e5161e3e78eccfe766608e</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 2" src="https://img.shields.io/badge/critical-2-8b1924"/> <img alt="high: 5" src="https://img.shields.io/badge/high-5-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/medium-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
 <tr><td>size</td><td>9.2 MB</td></tr>

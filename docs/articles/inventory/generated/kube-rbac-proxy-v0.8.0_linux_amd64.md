@@ -1,6 +1,7 @@
-<h2>:mag: Vulnerabilities of <code>gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0</code></h2>
+---
+hide_table_of_contents: true
+---
 
-<details open="true"><summary>:package: Image Reference</strong> <code>gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0</code></summary>
 <table>
 <tr><td>digest</td><td><code>sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 4" src="https://img.shields.io/badge/critical-4-8b1924"/> <img alt="high: 61" src="https://img.shields.io/badge/high-61-e25d68"/> <img alt="medium: 27" src="https://img.shields.io/badge/medium-27-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 5" src="https://img.shields.io/badge/unspecified-5-lightgrey"/></td></tr>
 <tr><td>size</td><td>19 MB</td></tr>
@@ -1468,6 +1469,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/H-4-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.0.0-20200622213623-75b288015ac9</code> (golang)</summary>
 
 <small><code>pkg:golang/golang.org/x/crypto@0.0.0-20200622213623-75b288015ac9</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2022-30636?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.0.0-20220525230936-793ad666bf5e"><img alt="high : CVE--2022--30636" src="https://img.shields.io/badge/CVE--2022--30636-lightgrey?label=high%20&labelColor=e25d68"/></a> 
@@ -1548,6 +1550,7 @@ A nil pointer dereference in the golang.org/x/crypto/ssh component through v0.0.
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 3" src="https://img.shields.io/badge/H-3-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.0.0-20200707034311-ab3426394381</code> (golang)</summary>
 
 <small><code>pkg:golang/golang.org/x/net@0.0.0-20200707034311-ab3426394381</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2022-27664?s=github&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.0.0-20220906165146-f3363e06e74c"><img alt="high 7.5: CVE--2022--27664" src="https://img.shields.io/badge/CVE--2022--27664-lightgrey?label=high%207.5&labelColor=e25d68"/></a> 
@@ -1626,6 +1629,7 @@ golang.org/x/net/http/httpguts in Go before 1.15.12 and 1.16.x before 1.16.4 all
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 3" src="https://img.shields.io/badge/H-3-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/prometheus/client_golang</strong> <code>1.7.1</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/prometheus/client_golang@1.7.1</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2023-45142?s=golang&n=client_golang&ns=github.com%2Fprometheus&t=golang&vr=%3C1.11.1"><img alt="high : CVE--2023--45142" src="https://img.shields.io/badge/CVE--2023--45142-lightgrey?label=high%20&labelColor=e25d68"/></a> 
@@ -1722,6 +1726,7 @@ If you have any questions or comments about this advisory:
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/text</strong> <code>0.3.3</code> (golang)</summary>
 
 <small><code>pkg:golang/golang.org/x/text@0.3.3</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2022-32149?s=github&n=text&ns=golang.org%2Fx&t=golang&vr=%3C0.3.8"><img alt="high 7.5: CVE--2022--32149" src="https://img.shields.io/badge/CVE--2022--32149-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Missing Release of Resource after Effective Lifetime</i>
@@ -1767,6 +1772,7 @@ golang.org/x/text/language in golang.org/x/text before 0.3.7 can panic with an o
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/grpc</strong> <code>1.27.0</code> (golang)</summary>
 
 <small><code>pkg:golang/google.golang.org/grpc@1.27.0</code></small><br/>
 <a href="https://scout.docker.com/v/GHSA-m425-mq94-257g?s=github&n=grpc&ns=google.golang.org&t=golang&vr=%3C1.56.3"><img alt="high 7.5: GHSA--m425--mq94--257g" src="https://img.shields.io/badge/GHSA--m425--mq94--257g-lightgrey?label=high%207.5&labelColor=e25d68"/></a> 
@@ -1836,6 +1842,7 @@ swift-nio-http2 1.28 contains a remediation for this issue that applies reset co
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/gogo/protobuf</strong> <code>1.3.1</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/gogo/protobuf@1.3.1</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2021-3121?s=github&n=protobuf&ns=github.com%2Fgogo&t=golang&vr=%3C1.3.2"><img alt="high 8.6: CVE--2021--3121" src="https://img.shields.io/badge/CVE--2021--3121-lightgrey?label=high%208.6&labelColor=e25d68"/></a> <i>Improper Validation of Array Index</i>
@@ -1859,6 +1866,82 @@ An issue was discovered in GoGo Protobuf before 1.3.2. plugin/unmarshal/unmarsha
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>k8s.io/apiserver</strong> <code>0.19.2</code> (golang)</summary>
+
+<small><code>pkg:golang/k8s.io/apiserver@0.19.2</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2020-8552?s=gitlab&n=apiserver&ns=k8s.io&t=golang&vr=%3C1.15.10"><img alt="medium 4.3: CVE--2020--8552" src="https://img.shields.io/badge/CVE--2020--8552-lightgrey?label=medium%204.3&labelColor=fbb552"/></a> <i>OWASP Top Ten 2017 Category A9 - Using Components with Known Vulnerabilities</i>
+
+<table>
+<tr><td>Affected range</td><td><code><1.15.10</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.15.10, 1.16.7, 1.17.3</code></td></tr>
+<tr><td>CVSS Score</td><td><code>4.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.17%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The Kubernetes API server component has been found to be vulnerable to a denial of service attack via successful API requests.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.0.0-20200622214017-ed371f2e16b4</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/sys@0.0.0-20200622214017-ed371f2e16b4</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2022-29526?s=github&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.0.0-20220412211240-33da011f77ad"><img alt="medium 5.3: CVE--2022--29526" src="https://img.shields.io/badge/CVE--2022--29526-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Improper Privilege Management</i>
+
+<table>
+<tr><td>Affected range</td><td><code><0.0.0-20220412211240-33da011f77ad</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.0.0-20220412211240-33da011f77ad</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.24%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>65th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Go before 1.17.10 and 1.18.x before 1.18.2 has Incorrect Privilege Reporting in syscall. When called with a non-zero flags parameter, the Faccessat function could incorrectly report that a file is accessible.
+
+### Specific Go Packages Affected
+golang.org/x/sys/unix
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>k8s.io/client-go</strong> <code>0.19.2</code> (golang)</summary>
+
+<small><code>pkg:golang/k8s.io/client-go@0.19.2</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2020-8565?s=github&n=client-go&ns=k8s.io&t=golang&vr=%3E%3D0.19.0%2C%3C0.19.6"><img alt="medium 4.7: CVE--2020--8565" src="https://img.shields.io/badge/CVE--2020--8565-lightgrey?label=medium%204.7&labelColor=fbb552"/></a> <i>Insertion of Sensitive Information into Log File</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=0.19.0<br/><0.19.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.20.0-alpha.2</code></td></tr>
+<tr><td>CVSS Score</td><td><code>4.7</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+In Kubernetes, if the logging level is set to at least 9, authorization and bearer tokens will be written to log files. This can occur both in API server logs and client tool output like kubectl. This affects <= v1.19.5, <= v1.18.13, <= v1.17.15, < v1.20.0-alpha2.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>gopkg.in/square/go-jose.v2</strong> <code>2.2.2</code> (golang)</summary>
 
 <small><code>pkg:golang/gopkg.in/square/go-jose.v2@2.2.2</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2024-28180?s=github&n=go-jose.v2&ns=gopkg.in%2Fsquare&t=golang&vr=%3C%3D2.6.0"><img alt="medium 4.3: CVE--2024--28180" src="https://img.shields.io/badge/CVE--2024--28180-lightgrey?label=medium%204.3&labelColor=fbb552"/></a> <i>Improper Handling of Highly Compressed Data (Data Amplification)</i>
@@ -1892,78 +1975,7 @@ The problem will not be fixed in the following package because the package is ar
 </details></td></tr>
 
 <tr><td valign="top">
-
-<small><code>pkg:golang/k8s.io/client-go@0.19.2</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2020-8565?s=github&n=client-go&ns=k8s.io&t=golang&vr=%3E%3D0.19.0%2C%3C0.19.6"><img alt="medium 4.7: CVE--2020--8565" src="https://img.shields.io/badge/CVE--2020--8565-lightgrey?label=medium%204.7&labelColor=fbb552"/></a> <i>Insertion of Sensitive Information into Log File</i>
-
-<table>
-<tr><td>Affected range</td><td><code>>=0.19.0<br/><0.19.6</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.20.0-alpha.2</code></td></tr>
-<tr><td>CVSS Score</td><td><code>4.7</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-In Kubernetes, if the logging level is set to at least 9, authorization and bearer tokens will be written to log files. This can occur both in API server logs and client tool output like kubectl. This affects <= v1.19.5, <= v1.18.13, <= v1.17.15, < v1.20.0-alpha2.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-
-<small><code>pkg:golang/k8s.io/apiserver@0.19.2</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2020-8552?s=gitlab&n=apiserver&ns=k8s.io&t=golang&vr=%3C1.15.10"><img alt="medium 4.3: CVE--2020--8552" src="https://img.shields.io/badge/CVE--2020--8552-lightgrey?label=medium%204.3&labelColor=fbb552"/></a> <i>OWASP Top Ten 2017 Category A9 - Using Components with Known Vulnerabilities</i>
-
-<table>
-<tr><td>Affected range</td><td><code><1.15.10</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.15.10, 1.16.7, 1.17.3</code></td></tr>
-<tr><td>CVSS Score</td><td><code>4.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.17%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-The Kubernetes API server component has been found to be vulnerable to a denial of service attack via successful API requests.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-
-<small><code>pkg:golang/golang.org/x/sys@0.0.0-20200622214017-ed371f2e16b4</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2022-29526?s=github&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.0.0-20220412211240-33da011f77ad"><img alt="medium 5.3: CVE--2022--29526" src="https://img.shields.io/badge/CVE--2022--29526-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Improper Privilege Management</i>
-
-<table>
-<tr><td>Affected range</td><td><code><0.0.0-20220412211240-33da011f77ad</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.0.0-20220412211240-33da011f77ad</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.24%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>65th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Go before 1.17.10 and 1.18.x before 1.18.2 has Incorrect Privilege Reporting in syscall. When called with a non-zero flags parameter, the Faccessat function could incorrectly report that a file is accessible.
-
-### Specific Go Packages Affected
-golang.org/x/sys/unix
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/protobuf</strong> <code>1.24.0</code> (golang)</summary>
 
 <small><code>pkg:golang/google.golang.org/protobuf@1.24.0</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2024-24786?s=github&n=protobuf&ns=google.golang.org&t=golang&vr=%3C1.33.0"><img alt="medium : CVE--2024--24786" src="https://img.shields.io/badge/CVE--2024--24786-lightgrey?label=medium%20&labelColor=fbb552"/></a> <i>Loop with Unreachable Exit Condition ('Infinite Loop')</i>

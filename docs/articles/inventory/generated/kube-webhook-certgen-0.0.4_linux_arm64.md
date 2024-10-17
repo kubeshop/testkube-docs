@@ -1,7 +1,9 @@
-<h2>:mag: Vulnerabilities of <code>kubeshop/kube-webhook-certgen:0.0.4</code></h2>
+---
+hide_table_of_contents: true
+---
 
-<details open="true"><summary>:package: Image Reference</strong> <code>kubeshop/kube-webhook-certgen:0.0.4</code></summary>
 <table>
+<tr><td>digest</td><td><code>sha256:594b3db82b39819b017090dabe0fc91b048337caad0c9f4a8cb0d852821137d7</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 3" src="https://img.shields.io/badge/high-3-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/medium-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
 <tr><td>size</td><td>9.7 MB</td></tr>
 <tr><td>packages</td><td>48</td></tr>
 </table>
@@ -10,6 +12,7 @@
 
 <table>
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.0.0-20220722155237-a158d28d115b</code> (golang)</summary>
 
 <small><code>pkg:golang/golang.org/x/net@0.0.0-20220722155237-a158d28d115b</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2022-41721?s=github&n=net&ns=golang.org%2Fx&t=golang&vr=%3E%3D0.0.0-20220524220425-1d687d428aca%2C%3C0.1.1-0.20221104162952-702349b0e862"><img alt="high 7.5: CVE--2022--41721" src="https://img.shields.io/badge/CVE--2022--41721-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Inconsistent Interpretation of HTTP Requests ('HTTP Request/Response Smuggling')</i>
@@ -55,6 +58,7 @@ In net/http in Go before 1.18.6 and 1.19.x before 1.19.1, attackers can cause a 
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/text</strong> <code>0.3.7</code> (golang)</summary>
 
 <small><code>pkg:golang/golang.org/x/text@0.3.7</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2022-32149?s=github&n=text&ns=golang.org%2Fx&t=golang&vr=%3C0.3.8"><img alt="high 7.5: CVE--2022--32149" src="https://img.shields.io/badge/CVE--2022--32149-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Missing Release of Resource after Effective Lifetime</i>
@@ -81,6 +85,7 @@ golang.org/x/text/language
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/protobuf</strong> <code>1.28.0</code> (golang)</summary>
 
 <small><code>pkg:golang/google.golang.org/protobuf@1.28.0</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2024-24786?s=github&n=protobuf&ns=google.golang.org&t=golang&vr=%3C1.33.0"><img alt="medium : CVE--2024--24786" src="https://img.shields.io/badge/CVE--2024--24786-lightgrey?label=medium%20&labelColor=fbb552"/></a> <i>Loop with Unreachable Exit Condition ('Infinite Loop')</i>

@@ -1,6 +1,7 @@
-<h2>:mag: Vulnerabilities of <code>natsio/nats-server-config-reloader:0.14.3</code></h2>
+---
+hide_table_of_contents: true
+---
 
-<details open="true"><summary>:package: Image Reference</strong> <code>natsio/nats-server-config-reloader:0.14.3</code></summary>
 <table>
 <tr><td>digest</td><td><code>sha256:61eb61fa4a0283caaca51cc08c0495969c426c0bc3d5e0292ef8601ad9a3eecf</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 2" src="https://img.shields.io/badge/critical-2-8b1924"/> <img alt="high: 5" src="https://img.shields.io/badge/high-5-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/medium-3-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
 <tr><td>size</td><td>4.6 MB</td></tr>
@@ -234,6 +235,7 @@ FROM alpine:3.20.0
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>busybox</strong> <code>1.36.1-r28</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/busybox@1.36.1-r28?os_name=alpine&os_version=3.20</code></small><br/>
 

@@ -1,6 +1,7 @@
-<h2>:mag: Vulnerabilities of <code>natsio/prometheus-nats-exporter:0.15.0</code></h2>
+---
+hide_table_of_contents: true
+---
 
-<details open="true"><summary>:package: Image Reference</strong> <code>natsio/prometheus-nats-exporter:0.15.0</code></summary>
 <table>
 <tr><td>digest</td><td><code>sha256:1f6787754b8b083f271adea4bb699b9c9e21279c89d903f1710f7647c604f145</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 2" src="https://img.shields.io/badge/critical-2-8b1924"/> <img alt="high: 5" src="https://img.shields.io/badge/high-5-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/medium-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 4" src="https://img.shields.io/badge/unspecified-4-lightgrey"/></td></tr>
 <tr><td>size</td><td>6.9 MB</td></tr>
@@ -242,6 +243,7 @@ A malformed DNS message in response to a query can cause the Lookup functions to
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 4" src="https://img.shields.io/badge/M-4-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>busybox</strong> <code>1.36.1-r15</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/busybox@1.36.1-r15?os_name=alpine&os_version=3.19</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2023-42366?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.19&vr=%3C1.36.1-r16"><img alt="medium : CVE--2023--42366" src="https://img.shields.io/badge/CVE--2023--42366-lightgrey?label=medium%20&labelColor=fbb552"/></a> 

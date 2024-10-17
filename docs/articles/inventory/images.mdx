@@ -1,8 +1,15 @@
-import Images from './generated/images.md'
+import ControlPlaneImages from './generated/cp_images.md'
+import AgentImages from './generated/agent_images.md'
 
 # Image Inventory
 
-List of images used within our Helm charts along with vulnerability reports for
-each platform:
+List of images used for the on-premise installations along with corresponding
+vulnerability reports.
 
-<Images components={props.components} />
+## Agent Chart
+
+<AgentImages components={props.components} />
+
+## Control Plane Chart
+
+<ControlPlaneImages components={props.components} />
