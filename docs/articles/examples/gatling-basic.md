@@ -28,3 +28,7 @@ The uploaded report is available in the Artifacts tab:
 
 </TabItem>
 </Tabs>
+
+See how to effortlessly perform load testing in Kubernetes using Gatling and Testkube from the Testkube UI here:
+
+<center><iframe width="500" height="300" src="https://youtube.com/embed/mgnwhg9KZ2I" title="Create & Run Gatling Tests with Testkube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></center>

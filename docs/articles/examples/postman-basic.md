@@ -19,3 +19,8 @@ After execution, you can see the log output from the test executions under the e
 Below is an example workflow for executing the Postman collection using an official Testkube Template.
 
 <SimplePostmanFromTemplate/>
+
+ :::note
+Please visit YouTube to watch our video on how to Simplify API Testing in Kubernetes with Postman and Testkube:
+<center><iframe width="500" height="300" src="https://www.youtube.com/embed/7HAwEtFDwvU" title="Simplify API Testing in Kubernetes with Postman and Testkube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></center>
+:::

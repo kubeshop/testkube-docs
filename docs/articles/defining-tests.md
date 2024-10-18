@@ -13,7 +13,7 @@ Defining test executions is most commonly done by DevOps/Build engineers, based 
 
 ## Defining Test Execution in Testkube
 
-Testkube uses [Test Workflows](../articles/test-workflows.md) as a generic abstraction for defining how your tests are executed. Test Workflows uses a declarative YAML vocabulary specifically designed for executing tests, with built-in functionality for: 
+Testkube uses [Test Workflows](../articles/test-workflows.mdx) as a generic abstraction for defining how your tests are executed. Test Workflows uses a declarative YAML vocabulary specifically designed for executing tests, with built-in functionality for: 
 
 - Retrieving tests from Git repositories, inline files and external volumes.
 - Executing any test or testing tool available as a Docker image.
