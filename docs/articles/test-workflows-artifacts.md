@@ -1,7 +1,7 @@
 # Test Workflows Artifacts
 
-Testkube can be configured to retrieve any file artifacts that are produced by tools and scripts executed in 
-a Test Workflow. Collected artifacts are then retrievable either via the API/CLI 
+Testkube can be configured to retrieve any file artifacts that are produced by tools and scripts executed in
+a Test Workflow. Collected artifacts are then retrievable either via the API/CLI
 (see [CLI Reference](/cli/testkube_download)) or via the Dashboard in the [Artifacts Tab](/articles/logs-and-artifacts#artifact-collection).
 
 :::note
@@ -18,19 +18,19 @@ Specify which artifacts to collect by adding an `artifacts` property to the corr
   shell: example-command
   artifacts:
     paths:
-    - 'output/**/*'
-   ```
+      - "output/**/*"
+```
 
-will collect all files/folders produced by the `example-command` under the `output` folder. 
+will collect all files/folders produced by the `example-command` under the `output` folder.
 
-Artifacts are resolved relatively to the workingDir, so for example 
+Artifacts are resolved relatively to the workingDir, so for example
 
 ```yaml
 - name: Saving artifacts
   workingDir: /data/repo/test/cypress/executor-tests/cypress-13/cypress/videos
   artifacts:
     paths:
-    - '**/*'
+      - "**/*"
 ```
 
 will collect all files in the `../videos` folder.
@@ -48,59 +48,65 @@ If you want to compress specific artifacts, you can add a compress property spec
 ```yaml
 - name: Saving compressed logs
   artifacts:
-    compress: 
-      name: 'logs.tar.gz'
+    compress:
+      name: "logs.tar.gz"
     paths:
-    - 'logs/*.log'
+      - "logs/*.log"
 ```
 
 ## Artifacts from Parallel Executions
 
-Collecting artifacts from [parallel executions](/articles/test-workflows-parallel) works the same; specify 
-an `artifacts` property as shown above for parallel nodes, collected artifacts will be placed under a folder 
+Collecting artifacts from [parallel executions](/articles/test-workflows-parallel) works the same; specify
+an `artifacts` property as shown above for parallel nodes, collected artifacts will be placed under a folder
 named after the node index.
 
 You could also use the fetch property to copy files back from parallel nodes and then using a separate
 artifacts step to save them:
 
 ```yaml
-  - name: Run tests
-    parallel:
-      count: 2
-      transfer:
+- name: Run tests
+  parallel:
+    count: 2
+    transfer:
       - from: /data/repo
-      fetch:
+    fetch:
       - from: /data/out
         to: /data/artifacts/instance-{{ index }}
-      container:
-        env:
+    container:
+      env:
         - name: PLAYWRIGHT_HTML_REPORT
           value: /data/out/playwright-report
-      shell: 'npx playwright test --output /data/out --shard {{ index + 1 }}/{{ count }}'
+    shell: "npx playwright test --output /data/out --shard {{ index + 1 }}/{{ count }}"
 
-  - condition: always
-    artifacts:
-      workingDir: /data/artifacts
-      paths:
-      - '**/*'
+- condition: always
+  artifacts:
+    workingDir: /data/artifacts
+    paths:
+      - "**/*"
 ```
 
 :::tip
 
-If you have a step specifically for artifact collections, be sure to use `condition: always` as shown in the example 
+If you have a step specifically for artifact collections, be sure to use `condition: always` as shown in the example
 above to ensure that artifacts are collected, otherwise this step could be skipped if a previous step fails.
 
 :::
 
 ## JUnit Report Extraction
 
-Testkube automatically scans all artifacts for `.xml` files that are valid [JUnit XML reports](https://github.com/testmoapp/junitxml) and parses 
-their contents to be available under the [Test Insights Reporting](/articles/test-insights#test-reports) feature. 
+Testkube automatically scans all artifacts for `.xml` files that are valid [JUnit XML reports](https://github.com/testmoapp/junitxml) and parses
+their contents. This parsed data is then made available through multiple features:
+
+1. [Test Insights Reporting](/articles/test-insights#test-reports) for aggregate analysis
+2. [JUnit Reports Visualization](/articles/test-workflows-reports) for detailed inspection and filtering of results
 
 More specifically, Testkube extracts:
 
 - The number of JUnit Testcases executed per Workflow
-- Their individual pass/fails statuses
+- Their individual pass/fail statuses
+- Detailed test case information including error messages and stack traces (where applicable)
 
-This allows for aggregate reporting on JUnit testcase executions and corresponding statuses per Workflow.
+This extraction enables comprehensive reporting and visualization of JUnit testcase executions and their corresponding statuses per Workflow.  
+You can view summarized results on the Execution Overview tab and access detailed, filterable reports on the dedicated Reports tab.
 
+For a deep dive into how Testkube processes and visualizes JUnit reports, including screenshots and usage tips, please refer to our [JUnit Reports Processing and Visualization](/articles/test-workflows-reports) documentation.

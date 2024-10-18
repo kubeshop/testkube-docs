@@ -1,3 +1,8 @@
+
+<head>
+  <meta name="og:type" content="reference-doc" />
+</head>
+
 ## testkube init standalone-agent
 
 Install Testkube OSS in your current context

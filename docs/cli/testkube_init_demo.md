@@ -1,3 +1,8 @@
+
+<head>
+  <meta name="og:type" content="reference-doc" />
+</head>
+
 ## testkube init demo
 
 Install Testkube On-Prem demo in your current context

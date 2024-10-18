@@ -1,3 +1,8 @@
+
+<head>
+  <meta name="og:type" content="reference-doc" />
+</head>
+
 ## testkube pro login
 
 Login to Testkube Pro

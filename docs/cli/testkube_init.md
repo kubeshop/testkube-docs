@@ -1,3 +1,8 @@
+
+<head>
+  <meta name="og:type" content="reference-doc" />
+</head>
+
 ## testkube init
 
 Init Testkube profiles(standalone-agent|demo|agent)
