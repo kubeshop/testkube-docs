@@ -180,8 +180,8 @@ The default stream concurrency limit is 250 streams (requests) per HTTP/2 connec
 <table>
 <tr><td>Affected range</td><td><code><1.20.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.25%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>65th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.42%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>75th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:0dadb8bb2e5a386c5881bc632f185733946d696b398d613861bb549da9043192</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 6" src="https://img.shields.io/badge/critical-6-8b1924"/> <img alt="high: 28" src="https://img.shields.io/badge/high-28-e25d68"/> <img alt="medium: 14" src="https://img.shields.io/badge/medium-14-fbb552"/> <img alt="low: 29" src="https://img.shields.io/badge/low-29-fce1a9"/> <img alt="unspecified: 10" src="https://img.shields.io/badge/unspecified-10-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:0dadb8bb2e5a386c5881bc632f185733946d696b398d613861bb549da9043192</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 5" src="https://img.shields.io/badge/critical-5-8b1924"/> <img alt="high: 29" src="https://img.shields.io/badge/high-29-e25d68"/> <img alt="medium: 14" src="https://img.shields.io/badge/medium-14-fbb552"/> <img alt="low: 29" src="https://img.shields.io/badge/low-29-fce1a9"/> <img alt="unspecified: 10" src="https://img.shields.io/badge/unspecified-10-lightgrey"/></td></tr>
 <tr><td>size</td><td>78 MB</td></tr>
 <tr><td>packages</td><td>272</td></tr>
 </table>
@@ -12,7 +12,7 @@ hide_table_of_contents: true
 
 <table>
 <tr><td valign="top">
-<details><summary><img alt="critical: 3" src="https://img.shields.io/badge/C-3-8b1924"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 3" src="https://img.shields.io/badge/L-3-fce1a9"/> <!-- unspecified: 0 --><strong>expat</strong> <code>2.2.10-2+deb11u5</code> (deb)</summary>
+<details><summary><img alt="critical: 2" src="https://img.shields.io/badge/C-2-8b1924"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 3" src="https://img.shields.io/badge/L-3-fce1a9"/> <!-- unspecified: 0 --><strong>expat</strong> <code>2.2.10-2+deb11u5</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/expat@2.2.10-2%2Bdeb11u5?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2024-45492?s=debian&n=expat&ns=debian&t=deb&osn=debian&osv=11&vr=%3C2.2.10-2%2Bdeb11u6"><img alt="critical : CVE--2024--45492" src="https://img.shields.io/badge/CVE--2024--45492-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
@@ -49,7 +49,7 @@ An issue was discovered in libexpat before 2.6.3. dtdCopy in xmlparse.c can have
 </blockquote>
 </details>
 
-<a href="https://scout.docker.com/v/CVE-2024-45490?s=debian&n=expat&ns=debian&t=deb&osn=debian&osv=11&vr=%3C2.2.10-2%2Bdeb11u6"><img alt="critical : CVE--2024--45490" src="https://img.shields.io/badge/CVE--2024--45490-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
+<a href="https://scout.docker.com/v/CVE-2024-45490?s=debian&n=expat&ns=debian&t=deb&osn=debian&osv=11&vr=%3C2.2.10-2%2Bdeb11u6"><img alt="high : CVE--2024--45490" src="https://img.shields.io/badge/CVE--2024--45490-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
 <tr><td>Affected range</td><td><code><2.2.10-2+deb11u6</code></td></tr>
@@ -304,8 +304,8 @@ The default stream concurrency limit is 250 streams (requests) per HTTP/2 connec
 <table>
 <tr><td>Affected range</td><td><code><1.20.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.25%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>65th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.42%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>75th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -951,8 +951,8 @@ This flaw allows a malicious HTTP server to set "super cookies" in curl that are
 <tr><td>Fixed version</td><td><code>0.17.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.25%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>65th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.42%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>75th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1167,28 +1167,6 @@ An issue was discovered in function _libssh2_packet_add in libssh2 1.10.0 allows
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>perl</strong> <code>5.32.1-4+deb11u2</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/perl@5.32.1-4%2Bdeb11u2?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2023-47038?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=11&vr=%3C5.32.1-4%2Bdeb11u3"><img alt="high : CVE--2023--47038" src="https://img.shields.io/badge/CVE--2023--47038-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code><5.32.1-4+deb11u3</code></td></tr>
-<tr><td>Fixed version</td><td><code>5.32.1-4+deb11u3</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A vulnerability was found in perl 5.30.0 through 5.38.0. This issue occurs when a crafted regular expression is compiled by perl, which can allow an attacker controlled byte buffer overflow in a heap allocated buffer.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>e2fsprogs</strong> <code>1.46.2-2</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/e2fsprogs@1.46.2-2?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
@@ -1205,6 +1183,28 @@ A vulnerability was found in perl 5.30.0 through 5.38.0. This issue occurs when 
 <blockquote>
 
 An out-of-bounds read/write vulnerability was found in e2fsprogs 1.46.5. This issue leads to a segmentation fault and possibly arbitrary code execution via a specially crafted filesystem.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>perl</strong> <code>5.32.1-4+deb11u2</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/perl@5.32.1-4%2Bdeb11u2?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2023-47038?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=11&vr=%3C5.32.1-4%2Bdeb11u3"><img alt="high : CVE--2023--47038" src="https://img.shields.io/badge/CVE--2023--47038-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code><5.32.1-4+deb11u3</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.32.1-4+deb11u3</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A vulnerability was found in perl 5.30.0 through 5.38.0. This issue occurs when a crafted regular expression is compiled by perl, which can allow an attacker controlled byte buffer overflow in a heap allocated buffer.
 
 </blockquote>
 </details>
@@ -1516,6 +1516,8 @@ OpenSSL 0.9.8i on the Gaisler Research LEON3 SoC on the Xilinx Virtex-II Pro FPG
 <table>
 <tr><td>Affected range</td><td><code>>=1.1.1w-0+deb11u1</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1567,14 +1569,14 @@ In GNU tar before 1.35, mishandled extension attributes in a PAX archive can lea
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gnupg2</strong> <code>2.2.27-2+deb11u2</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>util-linux</strong> <code>2.36.1-8+deb11u1</code> (deb)</summary>
 
-<small><code>pkg:deb/debian/gnupg2@2.2.27-2%2Bdeb11u2?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2022-3219?s=debian&n=gnupg2&ns=debian&t=deb&osn=debian&osv=11&vr=%3E%3D2.2.27-2%2Bdeb11u2"><img alt="low : CVE--2022--3219" src="https://img.shields.io/badge/CVE--2022--3219-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<small><code>pkg:deb/debian/util-linux@2.36.1-8%2Bdeb11u1?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-28085?s=debian&n=util-linux&ns=debian&t=deb&osn=debian&osv=11&vr=%3C2.36.1-8%2Bdeb11u2"><img alt="low : CVE--2024--28085" src="https://img.shields.io/badge/CVE--2024--28085-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>>=2.2.27-2+deb11u2</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>Affected range</td><td><code><2.36.1-8+deb11u2</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.36.1-8+deb11u2</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
@@ -1582,7 +1584,29 @@ In GNU tar before 1.35, mishandled extension attributes in a PAX archive can lea
 <details><summary>Description</summary>
 <blockquote>
 
-GnuPG can be made to spin on a relatively small input by (for example) crafting a public key with thousands of signatures attached, compressed down to just a few KB.
+wall in util-linux through 2.40, often installed with setgid tty permissions, allows escape sequences to be sent to other users' terminals through argv. (Specifically, escape sequences received from stdin are blocked, but escape sequences received from argv are not blocked.) There may be plausible scenarios where this leads to account takeover.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>libgcrypt20</strong> <code>1.8.7-6</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/libgcrypt20@1.8.7-6?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2018-6829?s=debian&n=libgcrypt20&ns=debian&t=deb&osn=debian&osv=11&vr=%3E%3D1.8.7-6"><img alt="low : CVE--2018--6829" src="https://img.shields.io/badge/CVE--2018--6829-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.8.7-6</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.19%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+cipher/elgamal.c in Libgcrypt through 1.8.2, when used to encrypt messages directly, improperly encodes plaintexts, which allows attackers to obtain sensitive information by reading ciphertext data (i.e., it does not have semantic security in face of a ciphertext-only attack). The Decisional Diffie-Hellman (DDH) assumption does not hold for Libgcrypt's ElGamal implementation.
 
 </blockquote>
 </details>
@@ -1611,36 +1635,14 @@ In GNU Coreutils through 8.29, chown-core.c in chown and chgrp does not prevent 
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>apt</strong> <code>2.2.4</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gnupg2</strong> <code>2.2.27-2+deb11u2</code> (deb)</summary>
 
-<small><code>pkg:deb/debian/apt@2.2.4?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2011-3374?s=debian&n=apt&ns=debian&t=deb&osn=debian&osv=11&vr=%3E%3D2.2.4"><img alt="low : CVE--2011--3374" src="https://img.shields.io/badge/CVE--2011--3374-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<small><code>pkg:deb/debian/gnupg2@2.2.27-2%2Bdeb11u2?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2022-3219?s=debian&n=gnupg2&ns=debian&t=deb&osn=debian&osv=11&vr=%3E%3D2.2.27-2%2Bdeb11u2"><img alt="low : CVE--2022--3219" src="https://img.shields.io/badge/CVE--2022--3219-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>>=2.2.4</code></td></tr>
+<tr><td>Affected range</td><td><code>>=2.2.27-2+deb11u2</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.16%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-It was found that apt-key in apt, all versions, do not correctly validate gpg keys with the master keyring, leading to a potential man-in-the-middle attack.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>util-linux</strong> <code>2.36.1-8+deb11u1</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/util-linux@2.36.1-8%2Bdeb11u1?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-28085?s=debian&n=util-linux&ns=debian&t=deb&osn=debian&osv=11&vr=%3C2.36.1-8%2Bdeb11u2"><img alt="low : CVE--2024--28085" src="https://img.shields.io/badge/CVE--2024--28085-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code><2.36.1-8+deb11u2</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.36.1-8+deb11u2</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
@@ -1648,7 +1650,7 @@ It was found that apt-key in apt, all versions, do not correctly validate gpg ke
 <details><summary>Description</summary>
 <blockquote>
 
-wall in util-linux through 2.40, often installed with setgid tty permissions, allows escape sequences to be sent to other users' terminals through argv. (Specifically, escape sequences received from stdin are blocked, but escape sequences received from argv are not blocked.) There may be plausible scenarios where this leads to account takeover.
+GnuPG can be made to spin on a relatively small input by (for example) crafting a public key with thousands of signatures attached, compressed down to just a few KB.
 
 </blockquote>
 </details>
@@ -1677,22 +1679,22 @@ Integer overflow vulnerability in pcre2test before 10.41 allows attackers to cau
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>libgcrypt20</strong> <code>1.8.7-6</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>apt</strong> <code>2.2.4</code> (deb)</summary>
 
-<small><code>pkg:deb/debian/libgcrypt20@1.8.7-6?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2018-6829?s=debian&n=libgcrypt20&ns=debian&t=deb&osn=debian&osv=11&vr=%3E%3D1.8.7-6"><img alt="low : CVE--2018--6829" src="https://img.shields.io/badge/CVE--2018--6829-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<small><code>pkg:deb/debian/apt@2.2.4?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2011-3374?s=debian&n=apt&ns=debian&t=deb&osn=debian&osv=11&vr=%3E%3D2.2.4"><img alt="low : CVE--2011--3374" src="https://img.shields.io/badge/CVE--2011--3374-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>>=1.8.7-6</code></td></tr>
+<tr><td>Affected range</td><td><code>>=2.2.4</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.19%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.16%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-cipher/elgamal.c in Libgcrypt through 1.8.2, when used to encrypt messages directly, improperly encodes plaintexts, which allows attackers to obtain sensitive information by reading ciphertext data (i.e., it does not have semantic security in face of a ciphertext-only attack). The Decisional Diffie-Hellman (DDH) assumption does not hold for Libgcrypt's ElGamal implementation.
+It was found that apt-key in apt, all versions, do not correctly validate gpg keys with the master keyring, leading to a potential man-in-the-middle attack.
 
 </blockquote>
 </details>

@@ -294,8 +294,8 @@ The default stream concurrency limit is 250 streams (requests) per HTTP/2 connec
 <table>
 <tr><td>Affected range</td><td><code><1.20.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.25%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>65th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.42%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>75th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1363,7 +1363,7 @@ For users who cannot immediately update to the new release, the bug can be mitig
 <tr><td>Affected range</td><td><code><1.17.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.17.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.14%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1866,24 +1866,24 @@ An issue was discovered in GoGo Protobuf before 1.3.2. plugin/unmarshal/unmarsha
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>k8s.io/apiserver</strong> <code>0.19.2</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>k8s.io/client-go</strong> <code>0.19.2</code> (golang)</summary>
 
-<small><code>pkg:golang/k8s.io/apiserver@0.19.2</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2020-8552?s=gitlab&n=apiserver&ns=k8s.io&t=golang&vr=%3C1.15.10"><img alt="medium 4.3: CVE--2020--8552" src="https://img.shields.io/badge/CVE--2020--8552-lightgrey?label=medium%204.3&labelColor=fbb552"/></a> <i>OWASP Top Ten 2017 Category A9 - Using Components with Known Vulnerabilities</i>
+<small><code>pkg:golang/k8s.io/client-go@0.19.2</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2020-8565?s=github&n=client-go&ns=k8s.io&t=golang&vr=%3E%3D0.19.0%2C%3C0.19.6"><img alt="medium 4.7: CVE--2020--8565" src="https://img.shields.io/badge/CVE--2020--8565-lightgrey?label=medium%204.7&labelColor=fbb552"/></a> <i>Insertion of Sensitive Information into Log File</i>
 
 <table>
-<tr><td>Affected range</td><td><code><1.15.10</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.15.10, 1.16.7, 1.17.3</code></td></tr>
-<tr><td>CVSS Score</td><td><code>4.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.17%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>>=0.19.0<br/><0.19.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.20.0-alpha.2</code></td></tr>
+<tr><td>CVSS Score</td><td><code>4.7</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-The Kubernetes API server component has been found to be vulnerable to a denial of service attack via successful API requests.
+In Kubernetes, if the logging level is set to at least 9, authorization and bearer tokens will be written to log files. This can occur both in API server logs and client tool output like kubectl. This affects <= v1.19.5, <= v1.18.13, <= v1.17.15, < v1.20.0-alpha2.
 
 </blockquote>
 </details>
@@ -1973,24 +1973,24 @@ The protojson.Unmarshal function can enter an infinite loop when unmarshaling ce
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>k8s.io/client-go</strong> <code>0.19.2</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>k8s.io/apiserver</strong> <code>0.19.2</code> (golang)</summary>
 
-<small><code>pkg:golang/k8s.io/client-go@0.19.2</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2020-8565?s=github&n=client-go&ns=k8s.io&t=golang&vr=%3E%3D0.19.0%2C%3C0.19.6"><img alt="medium 4.7: CVE--2020--8565" src="https://img.shields.io/badge/CVE--2020--8565-lightgrey?label=medium%204.7&labelColor=fbb552"/></a> <i>Insertion of Sensitive Information into Log File</i>
+<small><code>pkg:golang/k8s.io/apiserver@0.19.2</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2020-8552?s=gitlab&n=apiserver&ns=k8s.io&t=golang&vr=%3C1.15.10"><img alt="medium 4.3: CVE--2020--8552" src="https://img.shields.io/badge/CVE--2020--8552-lightgrey?label=medium%204.3&labelColor=fbb552"/></a> <i>OWASP Top Ten 2017 Category A9 - Using Components with Known Vulnerabilities</i>
 
 <table>
-<tr><td>Affected range</td><td><code>>=0.19.0<br/><0.19.6</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.20.0-alpha.2</code></td></tr>
-<tr><td>CVSS Score</td><td><code>4.7</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code><1.15.10</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.15.10, 1.16.7, 1.17.3</code></td></tr>
+<tr><td>CVSS Score</td><td><code>4.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.17%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-In Kubernetes, if the logging level is set to at least 9, authorization and bearer tokens will be written to log files. This can occur both in API server logs and client tool output like kubectl. This affects <= v1.19.5, <= v1.18.13, <= v1.17.15, < v1.20.0-alpha2.
+The Kubernetes API server component has been found to be vulnerable to a denial of service attack via successful API requests.
 
 </blockquote>
 </details>

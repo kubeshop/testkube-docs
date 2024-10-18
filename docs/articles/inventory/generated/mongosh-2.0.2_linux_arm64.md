@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:2d7a9cb13f433ae72c13019db935e74831359a022f0a89282e5294cf578db3bc</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 6" src="https://img.shields.io/badge/critical-6-8b1924"/> <img alt="high: 18" src="https://img.shields.io/badge/high-18-e25d68"/> <img alt="medium: 28" src="https://img.shields.io/badge/medium-28-fbb552"/> <img alt="low: 5" src="https://img.shields.io/badge/low-5-fce1a9"/> <img alt="unspecified: 10" src="https://img.shields.io/badge/unspecified-10-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:2d7a9cb13f433ae72c13019db935e74831359a022f0a89282e5294cf578db3bc</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 5" src="https://img.shields.io/badge/critical-5-8b1924"/> <img alt="high: 19" src="https://img.shields.io/badge/high-19-e25d68"/> <img alt="medium: 28" src="https://img.shields.io/badge/medium-28-fbb552"/> <img alt="low: 5" src="https://img.shields.io/badge/low-5-fce1a9"/> <img alt="unspecified: 10" src="https://img.shields.io/badge/unspecified-10-lightgrey"/></td></tr>
 <tr><td>size</td><td>124 MB</td></tr>
 <tr><td>packages</td><td>675</td></tr>
 </table>
@@ -12,7 +12,7 @@ hide_table_of_contents: true
 
 <table>
 <tr><td valign="top">
-<details><summary><img alt="critical: 3" src="https://img.shields.io/badge/C-3-8b1924"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>expat</strong> <code>2.5.0-r1</code> (apk)</summary>
+<details><summary><img alt="critical: 2" src="https://img.shields.io/badge/C-2-8b1924"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>expat</strong> <code>2.5.0-r1</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/expat@2.5.0-r1?os_name=alpine&os_version=3.18</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2024-45492?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C2.6.3-r0"><img alt="critical : CVE--2024--45492" src="https://img.shields.io/badge/CVE--2024--45492-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
@@ -49,7 +49,7 @@ hide_table_of_contents: true
 </blockquote>
 </details>
 
-<a href="https://scout.docker.com/v/CVE-2024-45490?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C2.6.3-r0"><img alt="critical : CVE--2024--45490" src="https://img.shields.io/badge/CVE--2024--45490-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
+<a href="https://scout.docker.com/v/CVE-2024-45490?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C2.6.3-r0"><img alt="high : CVE--2024--45490" src="https://img.shields.io/badge/CVE--2024--45490-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
 <tr><td>Affected range</td><td><code><2.6.3-r0</code></td></tr>
@@ -1081,87 +1081,6 @@ Because JavaScript is single threaded and regex matching runs on the main thread
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>follow-redirects</strong> <code>1.15.3</code> (npm)</summary>
-
-<small><code>pkg:npm/follow-redirects@1.15.3</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-28849?s=github&n=follow-redirects&t=npm&vr=%3C%3D1.15.5"><img alt="medium 6.5: CVE--2024--28849" src="https://img.shields.io/badge/CVE--2024--28849-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Exposure of Sensitive Information to an Unauthorized Actor</i>
-
-<table>
-<tr><td>Affected range</td><td><code><=1.15.5</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.15.6</code></td></tr>
-<tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-When using [axios](https://github.com/axios/axios), its dependency follow-redirects only clears authorization header during cross-domain redirect, but allows the proxy-authentication header which contains credentials too.
-
-## Steps To Reproduce & PoC
-
-Test code:
-
-```js
-const axios = require('axios');
-
-axios.get('http://127.0.0.1:10081/', {
- headers: {
- 'AuThorization': 'Rear Test',
- 'ProXy-AuthoriZation': 'Rear Test',
- 'coOkie': 't=1'
- }
-})
- .then((response) => {
- console.log(response);
- })
-```
-
-When I meet the cross-domain redirect, the sensitive headers like authorization and cookie are cleared, but proxy-authentication header is kept.
-
-## Impact
-
-This vulnerability may lead to credentials leak.
-
-## Recommendations
-
-Remove proxy-authentication header during cross-domain redirect
-
-### Recommended Patch
-
-[follow-redirects/index.js:464](https://github.com/follow-redirects/follow-redirects/commit/c4f847f85176991f95ab9c88af63b1294de8649b)
-
-```diff
-- removeMatchingHeaders(/^(?:authorization|cookie)$/i, this._options.headers);
-+ removeMatchingHeaders(/^(?:authorization|proxy-authorization|cookie)$/i, this._options.headers);
-```
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2023-26159?s=github&n=follow-redirects&t=npm&vr=%3C1.15.4"><img alt="medium 6.1: CVE--2023--26159" src="https://img.shields.io/badge/CVE--2023--26159-lightgrey?label=medium%206.1&labelColor=fbb552"/></a> <i>Improper Input Validation</i>
-
-<table>
-<tr><td>Affected range</td><td><code><1.15.4</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.15.4</code></td></tr>
-<tr><td>CVSS Score</td><td><code>6.1</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Versions of the package follow-redirects before 1.15.4 are vulnerable to Improper Input Validation due to the improper handling of URLs by the url.parse() function. When new URL() throws an error, it can be manipulated to misinterpret the hostname. An attacker could exploit this weakness to redirect traffic to a malicious site, potentially leading to information disclosure, phishing attacks, or other security breaches.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>express</strong> <code>4.18.2</code> (npm)</summary>
 
 <small><code>pkg:npm/express@4.18.2</code></small><br/>
@@ -1248,9 +1167,112 @@ successful exploitation of this vector requires the following:
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>tar</strong> <code>6.1.15</code> (npm)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>follow-redirects</strong> <code>1.15.3</code> (npm)</summary>
 
-<small><code>pkg:npm/tar@6.1.15</code></small><br/>
+<small><code>pkg:npm/follow-redirects@1.15.3</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-28849?s=github&n=follow-redirects&t=npm&vr=%3C%3D1.15.5"><img alt="medium 6.5: CVE--2024--28849" src="https://img.shields.io/badge/CVE--2024--28849-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Exposure of Sensitive Information to an Unauthorized Actor</i>
+
+<table>
+<tr><td>Affected range</td><td><code><=1.15.5</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.15.6</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+When using [axios](https://github.com/axios/axios), its dependency follow-redirects only clears authorization header during cross-domain redirect, but allows the proxy-authentication header which contains credentials too.
+
+## Steps To Reproduce & PoC
+
+Test code:
+
+```js
+const axios = require('axios');
+
+axios.get('http://127.0.0.1:10081/', {
+ headers: {
+ 'AuThorization': 'Rear Test',
+ 'ProXy-AuthoriZation': 'Rear Test',
+ 'coOkie': 't=1'
+ }
+})
+ .then((response) => {
+ console.log(response);
+ })
+```
+
+When I meet the cross-domain redirect, the sensitive headers like authorization and cookie are cleared, but proxy-authentication header is kept.
+
+## Impact
+
+This vulnerability may lead to credentials leak.
+
+## Recommendations
+
+Remove proxy-authentication header during cross-domain redirect
+
+### Recommended Patch
+
+[follow-redirects/index.js:464](https://github.com/follow-redirects/follow-redirects/commit/c4f847f85176991f95ab9c88af63b1294de8649b)
+
+```diff
+- removeMatchingHeaders(/^(?:authorization|cookie)$/i, this._options.headers);
++ removeMatchingHeaders(/^(?:authorization|proxy-authorization|cookie)$/i, this._options.headers);
+```
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2023-26159?s=github&n=follow-redirects&t=npm&vr=%3C1.15.4"><img alt="medium 6.1: CVE--2023--26159" src="https://img.shields.io/badge/CVE--2023--26159-lightgrey?label=medium%206.1&labelColor=fbb552"/></a> <i>Improper Input Validation</i>
+
+<table>
+<tr><td>Affected range</td><td><code><1.15.4</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.15.4</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.1</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Versions of the package follow-redirects before 1.15.4 are vulnerable to Improper Input Validation due to the improper handling of URLs by the url.parse() function. When new URL() throws an error, it can be manipulated to misinterpret the hostname. An attacker could exploit this weakness to redirect traffic to a malicious site, potentially leading to information disclosure, phishing attacks, or other security breaches.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>krb5</strong> <code>1.20.1-r1</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/krb5@1.20.1-r1?os_name=alpine&os_version=3.18</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2023-36054?s=alpine&n=krb5&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C1.20.2-r0"><img alt="medium : CVE--2023--36054" src="https://img.shields.io/badge/CVE--2023--36054-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code><1.20.2-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.20.2-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.43%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>75th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>tar</strong> <code>6.2.0</code> (npm)</summary>
+
+<small><code>pkg:npm/tar@6.2.0</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2024-28863?s=github&n=tar&t=npm&vr=%3C6.2.1"><img alt="medium 6.5: CVE--2024--28863" src="https://img.shields.io/badge/CVE--2024--28863-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Uncontrolled Resource Consumption</i>
 
 <table>
@@ -1290,45 +1312,43 @@ This report was originally reported to GitHub bug bounty program, they asked me 
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>axios</strong> <code>0.21.4</code> (npm)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>serve-static</strong> <code>1.15.0</code> (npm)</summary>
 
-<small><code>pkg:npm/axios@0.21.4</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2023-45857?s=github&n=axios&t=npm&vr=%3E%3D0.8.1%2C%3C0.28.0"><img alt="medium 6.5: CVE--2023--45857" src="https://img.shields.io/badge/CVE--2023--45857-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Cross-Site Request Forgery (CSRF)</i>
+<small><code>pkg:npm/serve-static@1.15.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-43800?s=github&n=serve-static&t=npm&vr=%3C1.16.0"><img alt="medium 5.0: CVE--2024--43800" src="https://img.shields.io/badge/CVE--2024--43800-lightgrey?label=medium%205.0&labelColor=fbb552"/></a> <i>Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</i>
 
 <table>
-<tr><td>Affected range</td><td><code>>=0.8.1<br/><0.28.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.6.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.06%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code><1.16.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.16.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-An issue discovered in Axios 0.8.1 through 1.5.1 inadvertently reveals the confidential XSRF-TOKEN stored in cookies by including it in the HTTP header X-XSRF-TOKEN for every request made to any host allowing attackers to view sensitive information.
+### Impact
 
-</blockquote>
-</details>
-</details></td></tr>
+passing untrusted user input - even after sanitizing it - to `redirect()` may execute untrusted code
 
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>krb5</strong> <code>1.20.1-r1</code> (apk)</summary>
+### Patches
 
-<small><code>pkg:apk/alpine/krb5@1.20.1-r1?os_name=alpine&os_version=3.18</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2023-36054?s=alpine&n=krb5&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C1.20.2-r0"><img alt="medium : CVE--2023--36054" src="https://img.shields.io/badge/CVE--2023--36054-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+this issue is patched in serve-static 1.16.0
 
-<table>
-<tr><td>Affected range</td><td><code><1.20.2-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.20.2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.43%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>75th percentile</code></td></tr>
-</table>
+### Workarounds
 
-<details><summary>Description</summary>
-<blockquote>
+users are encouraged to upgrade to the patched version of express, but otherwise can workaround this issue by making sure any untrusted inputs are safe, ideally by validating them against an explicit allowlist
 
+### Details
+
+successful exploitation of this vector requires the following:
+
+1. The attacker MUST control the input to response.redirect()
+1. express MUST NOT redirect before the template appears
+1. the browser MUST NOT complete redirection before:
+1. the user MUST click on the link in the template
 
 
 </blockquote>
@@ -1397,53 +1417,33 @@ If you have any questions or comments about this advisory please open a discussi
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>serve-static</strong> <code>1.15.0</code> (npm)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>axios</strong> <code>0.21.4</code> (npm)</summary>
 
-<small><code>pkg:npm/serve-static@1.15.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-43800?s=github&n=serve-static&t=npm&vr=%3C1.16.0"><img alt="medium 5.0: CVE--2024--43800" src="https://img.shields.io/badge/CVE--2024--43800-lightgrey?label=medium%205.0&labelColor=fbb552"/></a> <i>Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</i>
+<small><code>pkg:npm/axios@0.21.4</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2023-45857?s=github&n=axios&t=npm&vr=%3E%3D0.8.1%2C%3C0.28.0"><img alt="medium 6.5: CVE--2023--45857" src="https://img.shields.io/badge/CVE--2023--45857-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Cross-Site Request Forgery (CSRF)</i>
 
 <table>
-<tr><td>Affected range</td><td><code><1.16.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.16.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>>=0.8.1<br/><0.28.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.6.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.06%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-### Impact
-
-passing untrusted user input - even after sanitizing it - to `redirect()` may execute untrusted code
-
-### Patches
-
-this issue is patched in serve-static 1.16.0
-
-### Workarounds
-
-users are encouraged to upgrade to the patched version of express, but otherwise can workaround this issue by making sure any untrusted inputs are safe, ideally by validating them against an explicit allowlist
-
-### Details
-
-successful exploitation of this vector requires the following:
-
-1. The attacker MUST control the input to response.redirect()
-1. express MUST NOT redirect before the template appears
-1. the browser MUST NOT complete redirection before:
-1. the user MUST click on the link in the template
-
+An issue discovered in Axios 0.8.1 through 1.5.1 inadvertently reveals the confidential XSRF-TOKEN stored in cookies by including it in the HTTP header X-XSRF-TOKEN for every request made to any host allowing attackers to view sensitive information.
 
 </blockquote>
 </details>
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>tar</strong> <code>6.2.0</code> (npm)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>tar</strong> <code>6.1.15</code> (npm)</summary>
 
-<small><code>pkg:npm/tar@6.2.0</code></small><br/>
+<small><code>pkg:npm/tar@6.1.15</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2024-28863?s=github&n=tar&t=npm&vr=%3C6.2.1"><img alt="medium 6.5: CVE--2024--28863" src="https://img.shields.io/badge/CVE--2024--28863-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Uncontrolled Resource Consumption</i>
 
 <table>

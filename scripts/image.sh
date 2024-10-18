@@ -4,6 +4,25 @@ OUTPUT_DIR="../docs/articles/inventory/generated/"
 CP_IMAGES="cp_images.txt"
 AGENT_IMAGES="agent_images.txt"
 
+declare -A desc_map
+
+add_image_desc() {
+  local key="$1"
+  local value="$2"
+  desc_map["$key"]="$value"
+}
+
+get_image_name() {
+  local image="$1"
+  local image_name="${image%%:*}"
+  echo "$image_name"
+}
+
+get_image_desc() {
+  local key="$1"
+  echo "${desc_map[$key]:-n/a}"
+}
+
 get_latest_helm_version() {
   local CHART_NAME=$1
   local LATEST_VERSION=$(helm search repo $CHART_NAME | awk 'NR==2 {print $2}')
@@ -37,18 +56,15 @@ generate_reports() {
     # Loop through each image in the input file
     while IFS= read -r image; do
         # Extract image name without the registry prefix
-        image_name=$(echo "$image" | awk -F/ '{print $NF}' | tr ':' '-')
+        image_slug=$(echo "$image" | awk -F/ '{print $NF}' | tr ':' '-')
 
         # Fetch the image and the description metadata for the image
-        docker pull "$image"
-        description=$(docker inspect "$image" --format '{{ index .Config.Labels "org.opencontainers.image.description" }}' 2>/dev/null)
-        if [ -z "$description" ]; then
-            description="N/A"
-        fi
+        image_name=$(get_image_name "$image")
+        image_desc=$(get_image_desc "$image_name")
 
         # File names for the vulnerability reports
-        report_amd64="${image_name}_linux_amd64.md"
-        report_arm64="${image_name}_linux_arm64.md"
+        report_amd64="${image_slug}_linux_amd64.md"
+        report_arm64="${image_slug}_linux_arm64.md"
 
         # Metadata for Markdown
         echo "---" > "${OUTPUT_DIR}$report_amd64"
@@ -69,7 +85,7 @@ generate_reports() {
         sed -i '/:package: /d' "${OUTPUT_DIR}$report_arm64"
 
         # Add entry to the index file
-        echo "| $image | $description | [View Report](./$report_amd64) | [View Report](./$report_arm64) |" >> "$INDEX_FILE"
+        echo "| $image | $image_desc | [View Report](./$report_amd64) | [View Report](./$report_arm64) |" >> "$INDEX_FILE"
     done < "$IMAGE_SET.txt"
 }
 
@@ -91,6 +107,31 @@ helm template test kubeshop/testkube --skip-crds --set mongodb.enabled=false --s
 # Get the images for the workflows
 helm template test kubeshop/testkube --skip-crds --set mongodb.enabled=false --set testkube-api.minio.enabled=false --set testkube-dashboard.enabled=false --set global.testWorkflows.createOfficialTemplates=false | grep "testkube-tw" | sed 's/"//g' | sed 's/docker.io\///g' | awk '{ print $2 }' | awk 'NF && !seen[$0]++' | sort >> "$AGENT_IMAGES"
 
+# Sort these agent images
+sort -o "$AGENT_IMAGES" "$AGENT_IMAGES"
+
+# Specify image descriptions
+add_image_desc "bitnami/kubectl" "Image containing the \`kubectl\` binary used in upgrade hooks."
+add_image_desc "gcr.io/kubebuilder/kube-rbac-proxy" "Small HTTP proxy used by the Testkube operator to perform RBAC authorization against the Kubernetes API."
+# Source: https://github.com/kubeshop/kube-webhook-certgen
+add_image_desc "kubeshop/kube-webhook-certgen" "Used to generate certificates for the Testkube operator admission webhook."
+add_image_desc "kubeshop/testkube-api-server" "API server for the Testkube agent."
+add_image_desc "kubeshop/testkube-operator" "Controller for the Testkube operator."
+add_image_desc "nats" "NATS message broker."
+add_image_desc "natsio/nats-server-config-reloader" "NATS config reloader."
+add_image_desc "natsio/nats-server-config-reloader" "NATS config reloader."
+add_image_desc "rancher/kubectl" "Image containing the \`kubectl\` binary used in the admission webhooks of the Testkube operator."
+add_image_desc "kubeshop/testkube-tw-init" "Image used to initialize a Workflow execution."
+add_image_desc "kubeshop/testkube-tw-toolkit" "Image used within a Workflow execution."
+add_image_desc "natsio/prometheus-nats-exporter" "NATS metrics exporter."
+add_image_desc "bitnami/minio" "Object store used by the Testkube control plane to store logs and artifacts."
+add_image_desc "ghcr.io/dexidp/dex" "Identity provider used by the Testkube control plane."
+add_image_desc "kubeshop/bitnami-mongodb" "Database used by the Testkube control plane."
+add_image_desc "kubeshop/testkube-enterprise-api" "API server for the Testkube control plane."
+add_image_desc "kubeshop/testkube-enterprise-ui" "Testkube dashboard."
+add_image_desc "kubeshop/testkube-enterprise-worker-service" "Testkube worker service used for background processing."
+
+# Generate reports
 generate_reports "testkubeenterprise/testkube-enterprise" "cp_images"
 generate_reports "kubeshop/testkube" "agent_images"
 
