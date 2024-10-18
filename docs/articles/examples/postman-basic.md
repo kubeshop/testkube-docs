@@ -22,5 +22,5 @@ Below is an example workflow for executing the Postman collection using an offic
 
  :::note
 Please visit YouTube to watch our video on how to Simplify API Testing in Kubernetes with Postman and Testkube:
-<iframe width="600" height="400" src="https://www.youtube.com/embed/7HAwEtFDwvU" title="Simplify API Testing in Kubernetes with Postman and Testkube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<center><iframe width="500" height="300" src="https://www.youtube.com/embed/7HAwEtFDwvU" title="Simplify API Testing in Kubernetes with Postman and Testkube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></center>
 :::

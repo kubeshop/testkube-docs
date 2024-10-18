@@ -12,7 +12,7 @@ similarly to what you can do in Test Suites.
 
 Watch Test Workflows in action to create comprehensive system tests:
 
-<iframe width="400" height="200" src="https://youtube.com/embed/kvcq-J_ZhVA" title="Creating System Test Workflows using Testkube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<center><iframe width="400" height="200" src="https://youtube.com/embed/kvcq-J_ZhVA" title="Creating System Test Workflows using Testkube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></center>
 
 ## Advantages Over Original Test Suites
 
