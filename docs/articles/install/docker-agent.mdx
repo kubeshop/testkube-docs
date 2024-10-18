@@ -1,0 +1,192 @@
+# Testkube Docker Agent
+
+The Testkube Docker Agent provides a convenient way to evaluate Testkube Cloud and can be run directly under
+Docker without having to install or manage your own Kubernetes distribution.
+
+:::info
+The Testkube Docker Agent is not recommended for production usage - [Read More](#not-for-production-usage)
+:::
+
+## Resource Allocation
+
+While the Testkube Agent itself does not consume a lot of resources, you should make sure you have allocated the
+right amount of resources to your Docker Engine for the kinds of Tests you plan to run. We recommend to allocate at least
+8GB and 2 CPUs for "simple" test executions (Postman, K6, etc.), and at least 16 GB and 4 CPUs for more
+high-volume/distributed performance tests and E2E tests using Playwright, Cypress or Selenium
+since these require a fair amount of resources themselves.
+
+:::tip
+If you prefer to use your own local Kubernetes cluster for the Testkube Agent, have a look at
+[Testkube Agent with local Kubernetes](/articles/install/quickstart-no-k8s).
+:::
+
+## Installation
+
+### With Testkube CLI
+
+Installing the Docker Agent with the Testkube CLI has the advantage of automatically configuring the CLI to work
+with the Docker Agent, which would otherwise have to be done with the testkube set context command.
+
+1. Install the Testkube CLI as described at [Installing the CLI](/articles/install/cli)
+2. Run the below command:
+
+```shell
+testkube docker --agent-token=tkcagnt_XXX --org-id=tkcorg_YYY --env-id=tkcenv_ZZZ
+```
+
+You can get the required tokens from the [Agent Information tab](/testkube-pro/articles/environment-management/#agent-information).
+
+### With Docker
+
+Install the Testkube Agent using `docker run` with arguments provided in the Testkube Dashboard:
+
+```shell
+docker run --name=docker-testkube-agent -d --privileged -e AGENT_KEY=tkcagnt_XXX -e CLOUD_URL=agent.testkube.io:443 kubeshop/testkube-agent
+```
+
+(Starting the Agent the first time can take a couple of minutes)
+
+:::note
+The `--privileged` flag is required for the Agent Docker Image to provision its own Kubernetes runtime environment.
+:::
+
+Once running, the Agent will connect to the Testkube Control Plane and be available for running your Workflows.
+
+### Checking Agent Status
+
+You can use `docker ps` to check the Agents Docker status:
+
+```shell
+➜  ~ docker ps
+CONTAINER ID   IMAGE                     COMMAND                  CREATED         STATUS         PORTS           NAMES
+5c9f8f1eae58   kubeshop/testkube-agent   "tini -- /usr/local/…"   6 minutes ago   Up 6 minutes   2375-2376/tcp   docker-testkube-agent
+➜  ~
+```
+
+### Accessing the terminal inside the Docker Agent
+
+If you want to run `kubectl` (or any other) commands inside the Docker Agent you can use
+
+```shell
+docker exec -it <name> sh
+```
+
+for creating a corresponding prompt inside your Docker Agent.
+
+### Starting and stopping the Agent
+
+Use regular docker commands to stop and start the agent:
+
+```shell
+docker stop <name>
+docker start <name>
+```
+
+## Using the Testkube CLI with the Docker Agent
+
+To connect the Testkube CLI to the Testkube Agent running in Docker you will need to create an API Key
+and then use that with the `testkube set context` command provided in the
+[Environment Settings](/testkube-pro/articles/environment-management#agent-information) panel.
+
+:::note
+This is not necessary if you used the Testkube CLI to install the Docker Agent as described above.
+:::
+
+## Upgrading Testkube Docker Agent
+
+There are two ways to upgrade the Docker Agent to the latest version
+
+### Upgrading with the Testkube CLI
+
+The preferred way to upgrade the Docker Agent is by using the Testkube CLI - this requires you to have installed the agent
+with the CLI as described above:
+
+```
+testkube upgrade
+```
+
+This will update the Testkube version inside your running Docker Agent (the Agent needs to be running for this command to work).
+
+:::info
+Under the hood this runs a helm upgrade in your Docker Agent:
+
+```
+docker exec testkube-agent helm upgrade testkube testkube/testkube --namespace testkube \
+  --set testkube-api.minio.enabled=false --set mongodb.enabled=false --set testkube-api.cloud.key=tkcagnt_XXX \
+  --set testkube-api.cloud.url=api.testkube.io:999 --set testkube-api.dockerImageVersion=1.2.3
+```
+:::
+
+### Replacing the Agent Docker Image
+
+This option comes with the drawback that you will lose any Testkube resources (Workflows, etc.)
+that were created in the Environment using the Agent (since these are stored as CRDs in your Agents cluster).
+
+1. Use `docker ps` to find the existing container id:
+
+```shell
+➜  ~ docker ps
+CONTAINER ID   IMAGE                     COMMAND                  CREATED        STATUS        PORTS           NAMES
+5c9f8f1eae58   kubeshop/testkube-agent   "tini -- /usr/local/…"   31 hours ago   Up 31 hours   2375-2376/tcp   docker-testkube-agent
+➜  ~
+```
+
+2. Stop the image using the container id:
+
+```shell
+➜  ~ docker stop 5c9f8f1eae58
+5c9f8f1eae58
+➜  ~
+```
+
+3. Remove the image from the Docker engine:
+
+```shell
+➜  ~ docker rm 5c9f8f1eae58
+5c9f8f1eae58
+➜  ~
+```
+
+4. Pull the latest version of the Testkube Docker Agent:
+
+```shell
+➜  ~ docker pull kubeshop/testkube-agent
+Using default tag: latest
+latest: Pulling from kubeshop/testkube-agent
+2c38280daa69: Download complete
+92ce1bafa8af: Download complete
+ae522ceee3b1: Download complete
+7f7cb6e453ec: Download complete
+24640e644361: Download complete
+d56b148afd3b: Download complete
+6b40d2b477b4: Download complete
+724c71e6ea6c: Download complete
+Digest: sha256:38292da6ced7b9abfd1c6b481bb61186ab7cbf442fd0de4f8adba0a202bc4dfb
+Status: Downloaded newer image for kubeshop/testkube-agent:latest
+docker.io/kubeshop/testkube-agent:latest
+```
+
+5. Now you're ready to reinstall the latest version of the Testkube Agent using the installation command [shown above](#installation).
+
+## Docker Agent internals
+
+The Testkube Docker Agent provisions its own [Kind cluster](https://kind.sigs.k8s.io/) inside Docker and then uses an
+[entrypoint.sh script](https://github.com/kubeshop/testkube/blob/main/build/kind/entrypoint.sh) to set up its environment and install the Agent using Helm.
+
+The Docker Image itself is available on [DockerHub](https://hub.docker.com/r/kubeshop/testkube-agent).
+
+### Pod errors due to "too many open files"
+
+If you encounter this error inside your Docker Agent you will need to increase the corresponding default settings
+in your environment - [Read More](https://kind.sigs.k8s.io/docs/user/known-issues/#pod-errors-due-to-too-many-open-files).
+
+## Not for Production Usage!
+
+:::info
+Although the Testkuber Docker Agent is a great way to run Testkube tests in your infrastructure, it is **not** meant
+for production or large-scale deployments as it is (very) constrained by the Docker runtime environment itself.
+
+When deploying the Testkube Agent production or advanced evaluation purposes, please run the agent directly under a
+Kubernetes instance, either locally or in a remote/hosted Kubernetes provider in line with the
+[Installation Overview](/articles/install/overview).
+:::

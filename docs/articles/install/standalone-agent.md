@@ -1,13 +1,20 @@
-# Standalone agent
+# Standalone Testkube Agent
 
 ## Overview
 
 Testkube standalone agent includes our full test execution and orchestration engine.
-This means that all CRDs are available, you can apply triggers and run test workflows, then afterwards view the resulting status, logs and artifacts.
+This means that all CRDs are available, you can apply triggers and run test workflows, then afterward view 
+the resulting status, logs and artifacts.
 
-Overal there are few reasons to run the agent without the control plane.
-The latter comes with a Dashboard and many other features.
+Overall, there are few reasons to run the agent without the control plane, which comes with a Dashboard and many other features.
 The main benefit is that this works better in resource constrained environments and that it is 100% open-source.
+
+:::tip
+Read more about the [Testkube Open Source Agent](/articles/open-source-or-pro) to learn how it compares to the
+commercial Testkube offering.
+:::
+
+## Installing the standalone Agent
 
 You can install with the CLI or Helm. The following components will be installed into your Kubernetes cluster:
 
@@ -17,10 +24,8 @@ You can install with the CLI or Helm. The following components will be installed
 - Testkube will listen and manage all the CRDs for Tests, TestSuites, Executors, etc… inside the Testkube namespace.
 
 Once installed you can verify your installation and check that Testkube is up and running with
-`kubectl get all -n testkube`. Once validated, you're ready to unleash the full potential of Testkube in your environment. 
+`kubectl get all -n testkube`. Once validated, you're ready to unleash the full potential of Testkube in your environment.
 Testkube OSS is here to help you to powering your development and testing workflows seamlessly.
-
-## Installing
 
 ### With the CLI
 

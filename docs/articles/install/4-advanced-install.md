@@ -2,35 +2,44 @@
 
 A variety of advanced topics to further customize your deployment.
 
+:::tip
+See [Components](/articles/install/install-with-helm#components) for a list of all included components and links to their corresponding
+Helm Charts with a list of their available properties.
+:::
+
 ## TLS
 
 ### Self-signed certificates
 
 If the Testkube On-Prem Control Plane components are behind a Load Balancer utilizing self-signed certificates, additional configuration must be provided to the Agent Helm chart during installation.
 Use one of the following methods to configure the Agent Helm chart to trust the self-signed certificates:
+
 1. Inject the custom CA certificate
-    ```helm
-    # testkube chart
-    global:
-      tls:
-        caCertPath: /etc/testkube/certs
-      volumes:
-        additionalVolumes:
-          - name: custom-ca
-            secret:
-              secretName: custom-cert
-        additionalVolumeMounts:
-          - name: custom-ca
-            mountPath: /etc/testkube/certs
-            readOnly: true
-    ```
+
+```helm
+# testkube chart
+global:
+  tls:
+    caCertPath: /etc/testkube/certs
+  volumes:
+    additionalVolumes:
+      - name: custom-ca
+        secret:
+          secretName: custom-cert
+    additionalVolumeMounts:
+      - name: custom-ca
+        mountPath: /etc/testkube/certs
+        readOnly: true
+```
+
 2. Skip TLS verification (not recommended in a production setup)
-    ```helm
-    # testkube chart
-    global:
-      tls:
-        skipVerify: true
-    ```
+
+```helm
+# testkube chart
+global:
+  tls:
+    skipVerify: true
+```
 
 ## Organization Management
 
@@ -49,8 +58,9 @@ testkube-cloud-api:
       bootstrapAdmin: <you@example.com>
 ```
 
-Alternatively, you can use the full advanced configuration for more options. The following example creates an organization with two environments. New users will automatically join the
-default organizations / environments with the specified roles.
+Alternatively, you can use the full advanced configuration for more options. The following example creates an organization with two environments.
+New users will automatically join default organizations, environments and teams.
+Note that this will only happen on the first sign in. Afterwards, you can manage users through Testkube's dashboard.
 
 ```yaml
 testkube-cloud-api:
@@ -59,20 +69,33 @@ testkube-cloud-api:
       bootstrapConfig:
         enabled: true
         config:
+          # New users will automatically be added to these organizations
           default_organizations:
             - prod_organization
+          # These organizations will be created when Testkube boots.
           organizations:
             - name: prod_organization
+              # New users added will automatically receive this organization role
               default_role: member
+              # New users will automatically be added to these environments
               default_environments:
                 - production_1
+              # These environments will be created when Testkube boots.
               environments:
                 - name: production_1
+                  # New users added will automatically receive this environment role
                   default_role: run
                 - name: production_2
+              # These teams will be created when Testkube boots.
+              teams:
+                - name: Frontend
+                  # New users will conditionally join teams based on a groups claim found within the JWT
+                  # You will be added if the claim contains at least one of the groups you configure here.
+                  groups_claim: ["my-org:group-1", "my-org:group-2"]
 ```
 
-Note: The default organization and environment mapping only apply on first sign in. After, you can remove users from environments or change roles through Testkube's Dashboard.
+The team's groups claim works well with Dex. Dex includes a non-standard `groups` claim which is widely supported by its upstream providers.
+Check out [Dex's connector documentation](https://dexidp.io/docs/connectors/) to learn how to configure it for your identity provider.
 
 :::tip
 For advanced automated User onboarding you can use the [REST API](/openapi/overview) to assign Users to Teams, Environments, Resource-Groups, etc.
@@ -189,11 +212,11 @@ If you want to use MongoDB with ReplicaSet, the below configuration is needed:
 
 ```yaml
 mongodb:
-   architecture: replicaset
-   
+  architecture: replicaset
+
 testkube-api:
-   mongodb:
-      dsn: <mongodb dsn (mongodb://...)>
+  mongodb:
+    dsn: <mongodb dsn (mongodb://...)>
 ```
 
 ### NATS
