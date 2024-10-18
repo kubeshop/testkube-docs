@@ -15,20 +15,9 @@ global:
 However, NATS chart that is part of Testkube belongs to a third party and as of now it requires passing image registry and image pull secret parameters separately. The snippet from the `values.yaml` file for NATS chart:
 ```aidl
 nats:
-    imagePullSecrets: 
-       - name: your-secret-name
-    nats:
-        image:
-            registry: REGISTRY_NAME 
-    natsbox:
-        image:
-            registry: REGISTRY_NAME  
-    reloader:
-        image:
-            registry: REGISTRY_NAME  
-    exporter:
-        image:
-            registry: REGISTRY_NAME
+  global:
+    image:
+      registry: registry-name
 ```
 
 :::caution
