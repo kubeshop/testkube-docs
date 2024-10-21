@@ -35,6 +35,11 @@ get_latest_helm_version() {
   fi
 }
 
+fix_less_than_usage() {
+  local file="$1"
+  sed -i 's/<code><\([^<]*\)</<code>\&lt;\1</g' "$file"
+}
+
 generate_reports() {
     local CHART_NAME=$1
     local IMAGE_SET=$2
@@ -77,6 +82,10 @@ generate_reports() {
         # Run docker scout
         docker scout cves "$image" --format markdown --platform linux/amd64 >> "${OUTPUT_DIR}$report_amd64"
         docker scout cves "$image" --format markdown --platform linux/arm64 >> "${OUTPUT_DIR}$report_arm64"
+
+        # Fix issues with usage of "<" in the generated markdown
+        fix_less_than_usage "${OUTPUT_DIR}$report_amd64"
+        fix_less_than_usage "${OUTPUT_DIR}$report_arm64"
 
         # Remove emojis
         sed -i '/:mag: /d' "${OUTPUT_DIR}$report_amd64"
@@ -130,6 +139,7 @@ add_image_desc "kubeshop/bitnami-mongodb" "Database used by the Testkube control
 add_image_desc "kubeshop/testkube-enterprise-api" "API server for the Testkube control plane."
 add_image_desc "kubeshop/testkube-enterprise-ui" "Testkube dashboard."
 add_image_desc "kubeshop/testkube-enterprise-worker-service" "Testkube worker service used for background processing."
+add_image_desc "alpine/mongosh" "Used as an init container to check whether MongoDB is ready before starting dependent services."
 
 # Generate reports
 generate_reports "testkubeenterprise/testkube-enterprise" "cp_images"

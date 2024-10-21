@@ -35,7 +35,7 @@ The various Is methods (IsPrivate, IsLoopback, etc) did not work as expected for
 <a href="https://scout.docker.com/v/CVE-2024-34158?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="high : CVE--2024--34158" src="https://img.shields.io/badge/CVE--2024--34158-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -52,7 +52,7 @@ Calling Parse on a "// +build" build tag line with deeply nested expressions can
 <a href="https://scout.docker.com/v/CVE-2024-34156?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="high : CVE--2024--34156" src="https://img.shields.io/badge/CVE--2024--34156-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -88,7 +88,7 @@ An attacker sending a request to a net/http/httputil.ReverseProxy proxy can expl
 <a href="https://scout.docker.com/v/CVE-2022-30635?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="high : CVE--2022--30635" src="https://img.shields.io/badge/CVE--2022--30635-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.19%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>56th percentile</code></td></tr>
@@ -122,7 +122,7 @@ The archive/zip package's handling of certain types of invalid zip files differs
 <a href="https://scout.docker.com/v/CVE-2024-34155?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="unspecified : CVE--2024--34155" src="https://img.shields.io/badge/CVE--2024--34155-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -144,7 +144,7 @@ Calling any of the Parse functions on Go source code which contains deeply neste
 <a href="https://scout.docker.com/v/CVE-2024-28180?s=github&n=go-jose.v2&ns=gopkg.in%2Fsquare&t=golang&vr=%3C%3D2.6.0"><img alt="medium 4.3: CVE--2024--28180" src="https://img.shields.io/badge/CVE--2024--28180-lightgrey?label=medium%204.3&labelColor=fbb552"/></a> <i>Improper Handling of Highly Compressed Data (Data Amplification)</i>
 
 <table>
-<tr><td>Affected range</td><td><code><=2.6.0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;=2.6.0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>CVSS Score</td><td><code>4.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L</code></td></tr>

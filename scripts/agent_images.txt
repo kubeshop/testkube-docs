@@ -1,10 +1,10 @@
 bitnami/kubectl:1.28.2
 gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
 kubeshop/kube-webhook-certgen:0.0.4
-kubeshop/testkube-api-server:2.1.43
+kubeshop/testkube-api-server:2.1.44
 kubeshop/testkube-operator:2.1.20
-kubeshop/testkube-tw-init:2.1.43
-kubeshop/testkube-tw-toolkit:2.1.43
+kubeshop/testkube-tw-init:2.1.44
+kubeshop/testkube-tw-toolkit:2.1.44
 nats:2.10.9-alpine
 natsio/nats-server-config-reloader:0.14.1
 rancher/kubectl:v1.23.7

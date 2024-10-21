@@ -40,7 +40,7 @@ golang.org/x/net/http2/h2c
 <a href="https://scout.docker.com/v/CVE-2022-27664?s=github&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.0.0-20220906165146-f3363e06e74c"><img alt="high 7.5: CVE--2022--27664" src="https://img.shields.io/badge/CVE--2022--27664-lightgrey?label=high%207.5&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><0.0.0-20220906165146-f3363e06e74c</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.0.0-20220906165146-f3363e06e74c</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.0.0-20220906165146-f3363e06e74c</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
@@ -64,7 +64,7 @@ In net/http in Go before 1.18.6 and 1.19.x before 1.19.1, attackers can cause a 
 <a href="https://scout.docker.com/v/CVE-2022-32149?s=github&n=text&ns=golang.org%2Fx&t=golang&vr=%3C0.3.8"><img alt="high 7.5: CVE--2022--32149" src="https://img.shields.io/badge/CVE--2022--32149-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Missing Release of Resource after Effective Lifetime</i>
 
 <table>
-<tr><td>Affected range</td><td><code><0.3.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.3.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.3.8</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
@@ -91,7 +91,7 @@ golang.org/x/text/language
 <a href="https://scout.docker.com/v/CVE-2024-24786?s=github&n=protobuf&ns=google.golang.org&t=golang&vr=%3C1.33.0"><img alt="medium : CVE--2024--24786" src="https://img.shields.io/badge/CVE--2024--24786-lightgrey?label=medium%20&labelColor=fbb552"/></a> <i>Loop with Unreachable Exit Condition ('Infinite Loop')</i>
 
 <table>
-<tr><td>Affected range</td><td><code><1.33.0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.33.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.33.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>

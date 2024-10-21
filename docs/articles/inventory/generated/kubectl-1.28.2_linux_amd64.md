@@ -18,7 +18,7 @@ hide_table_of_contents: true
 <a href="https://scout.docker.com/v/CVE-2024-45492?s=debian&n=expat&ns=debian&t=deb&osn=debian&osv=11&vr=%3C2.2.10-2%2Bdeb11u6"><img alt="critical : CVE--2024--45492" src="https://img.shields.io/badge/CVE--2024--45492-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.2.10-2+deb11u6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.2.10-2+deb11u6</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.2.10-2+deb11u6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.09%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
@@ -35,7 +35,7 @@ An issue was discovered in libexpat before 2.6.3. nextScaffoldPart in xmlparse.c
 <a href="https://scout.docker.com/v/CVE-2024-45491?s=debian&n=expat&ns=debian&t=deb&osn=debian&osv=11&vr=%3C2.2.10-2%2Bdeb11u6"><img alt="critical : CVE--2024--45491" src="https://img.shields.io/badge/CVE--2024--45491-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.2.10-2+deb11u6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.2.10-2+deb11u6</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.2.10-2+deb11u6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.09%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
@@ -52,10 +52,10 @@ An issue was discovered in libexpat before 2.6.3. dtdCopy in xmlparse.c can have
 <a href="https://scout.docker.com/v/CVE-2024-45490?s=debian&n=expat&ns=debian&t=deb&osn=debian&osv=11&vr=%3C2.2.10-2%2Bdeb11u6"><img alt="high : CVE--2024--45490" src="https://img.shields.io/badge/CVE--2024--45490-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.2.10-2+deb11u6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.2.10-2+deb11u6</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.2.10-2+deb11u6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.09%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -69,7 +69,7 @@ An issue was discovered in libexpat before 2.6.3. xmlparse.c does not reject a n
 <a href="https://scout.docker.com/v/CVE-2023-52425?s=debian&n=expat&ns=debian&t=deb&osn=debian&osv=11&vr=%3C2.2.10-2%2Bdeb11u6"><img alt="high : CVE--2023--52425" src="https://img.shields.io/badge/CVE--2023--52425-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.2.10-2+deb11u6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.2.10-2+deb11u6</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.2.10-2+deb11u6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.09%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
@@ -142,7 +142,7 @@ expat 2.1.0 and earlier does not properly handle entities expansion unless an ap
 <a href="https://scout.docker.com/v/CVE-2024-24790?s=golang&n=stdlib&t=golang&vr=%3C1.21.11"><img alt="critical : CVE--2024--24790" src="https://img.shields.io/badge/CVE--2024--24790-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.06%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
@@ -159,7 +159,7 @@ The various Is methods (IsPrivate, IsLoopback, etc) did not work as expected for
 <a href="https://scout.docker.com/v/CVE-2024-34158?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="high : CVE--2024--34158" src="https://img.shields.io/badge/CVE--2024--34158-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -176,7 +176,7 @@ Calling Parse on a "// +build" build tag line with deeply nested expressions can
 <a href="https://scout.docker.com/v/CVE-2024-34156?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="high : CVE--2024--34156" src="https://img.shields.io/badge/CVE--2024--34156-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -193,7 +193,7 @@ Calling Decoder.Decode on a message which contains deeply nested structures can 
 <a href="https://scout.docker.com/v/CVE-2024-24791?s=golang&n=stdlib&t=golang&vr=%3C1.21.12"><img alt="high : CVE--2024--24791" src="https://img.shields.io/badge/CVE--2024--24791-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.12</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.12</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -212,7 +212,7 @@ An attacker sending a request to a net/http/httputil.ReverseProxy proxy can expl
 <a href="https://scout.docker.com/v/CVE-2024-24784?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="high : CVE--2024--24784" src="https://img.shields.io/badge/CVE--2024--24784-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
@@ -229,7 +229,7 @@ The ParseAddressList function incorrectly handles comments (text within parenthe
 <a href="https://scout.docker.com/v/CVE-2023-45288?s=golang&n=stdlib&t=golang&vr=%3C1.21.9"><img alt="high : CVE--2023--45288" src="https://img.shields.io/badge/CVE--2023--45288-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.9</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
@@ -252,7 +252,7 @@ The fix sets a limit on the amount of excess header frames we will process befor
 <a href="https://scout.docker.com/v/CVE-2023-45283?s=golang&n=stdlib&t=golang&vr=%3C1.20.11"><img alt="high : CVE--2023--45283" src="https://img.shields.io/badge/CVE--2023--45283-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.11%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
@@ -279,7 +279,7 @@ UPDATE: Go 1.20.11 and Go 1.21.4 inadvertently changed the definition of the vol
 <a href="https://scout.docker.com/v/CVE-2023-44487?s=golang&n=stdlib&t=golang&vr=%3C1.20.10"><img alt="high : CVE--2023--44487" src="https://img.shields.io/badge/CVE--2023--44487-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.10</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>83.78%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>99th percentile</code></td></tr>
@@ -302,7 +302,7 @@ The default stream concurrency limit is 250 streams (requests) per HTTP/2 connec
 <a href="https://scout.docker.com/v/CVE-2023-39325?s=golang&n=stdlib&t=golang&vr=%3C1.20.10"><img alt="high : CVE--2023--39325" src="https://img.shields.io/badge/CVE--2023--39325-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.10</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.42%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>75th percentile</code></td></tr>
@@ -325,7 +325,7 @@ The default stream concurrency limit is 250 streams (requests) per HTTP/2 connec
 <a href="https://scout.docker.com/v/CVE-2022-30635?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="high : CVE--2022--30635" src="https://img.shields.io/badge/CVE--2022--30635-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.19%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>56th percentile</code></td></tr>
@@ -342,7 +342,7 @@ Calling Decoder.Decode on a message which contains deeply nested structures can 
 <a href="https://scout.docker.com/v/CVE-2024-24789?s=golang&n=stdlib&t=golang&vr=%3C1.21.11"><img alt="medium : CVE--2024--24789" src="https://img.shields.io/badge/CVE--2024--24789-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
@@ -359,7 +359,7 @@ The archive/zip package's handling of certain types of invalid zip files differs
 <a href="https://scout.docker.com/v/CVE-2023-45284?s=golang&n=stdlib&t=golang&vr=%3C1.20.11"><img alt="medium : CVE--2023--45284" src="https://img.shields.io/badge/CVE--2023--45284-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.06%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>26th percentile</code></td></tr>
@@ -380,7 +380,7 @@ With fix, IsLocal now correctly reports these names as non-local.
 <a href="https://scout.docker.com/v/CVE-2023-39326?s=golang&n=stdlib&t=golang&vr=%3C1.20.12"><img alt="medium : CVE--2023--39326" src="https://img.shields.io/badge/CVE--2023--39326-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.12</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.12</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
@@ -401,7 +401,7 @@ Chunk extensions are a little-used HTTP feature which permit including additiona
 <a href="https://scout.docker.com/v/CVE-2024-34155?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="unspecified : CVE--2024--34155" src="https://img.shields.io/badge/CVE--2024--34155-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -418,7 +418,7 @@ Calling any of the Parse functions on Go source code which contains deeply neste
 <a href="https://scout.docker.com/v/CVE-2024-24785?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="unspecified : CVE--2024--24785" src="https://img.shields.io/badge/CVE--2024--24785-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
@@ -435,7 +435,7 @@ If errors returned from MarshalJSON methods contain user controlled data, they m
 <a href="https://scout.docker.com/v/CVE-2024-24783?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="unspecified : CVE--2024--24783" src="https://img.shields.io/badge/CVE--2024--24783-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
@@ -454,7 +454,7 @@ This affects all crypto/tls clients, and servers that set Config.ClientAuth to V
 <a href="https://scout.docker.com/v/CVE-2023-45290?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="unspecified : CVE--2023--45290" src="https://img.shields.io/badge/CVE--2023--45290-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
@@ -473,7 +473,7 @@ With fix, the ParseMultipartForm function now correctly limits the maximum size 
 <a href="https://scout.docker.com/v/CVE-2023-45289?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="unspecified : CVE--2023--45289" src="https://img.shields.io/badge/CVE--2023--45289-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
@@ -497,7 +497,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2024-32002?s=debian&n=git&ns=debian&t=deb&osn=debian&osv=11&vr=%3C1%3A2.30.2-1%2Bdeb11u3"><img alt="critical : CVE--2024--32002" src="https://img.shields.io/badge/CVE--2024--32002-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1:2.30.2-1+deb11u3</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1:2.30.2-1+deb11u3</code></td></tr>
 <tr><td>Fixed version</td><td><code>1:2.30.2-1+deb11u3</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.15%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
@@ -514,7 +514,7 @@ Git is a revision control system. Prior to versions 2.45.1, 2.44.1, 2.43.4, 2.42
 <a href="https://scout.docker.com/v/CVE-2019-1387?s=debian&n=git&ns=debian&t=deb&osn=debian&osv=11&vr=%3C1%3A2.30.2-1%2Bdeb11u3"><img alt="high : CVE--2019--1387" src="https://img.shields.io/badge/CVE--2019--1387-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1:2.30.2-1+deb11u3</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1:2.30.2-1+deb11u3</code></td></tr>
 <tr><td>Fixed version</td><td><code>1:2.30.2-1+deb11u3</code></td></tr>
 <tr><td>EPSS Score</td><td><code>8.69%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>95th percentile</code></td></tr>
@@ -531,7 +531,7 @@ An issue was found in Git before v2.24.1, v2.23.1, v2.22.2, v2.21.1, v2.20.2, v2
 <a href="https://scout.docker.com/v/CVE-2024-32004?s=debian&n=git&ns=debian&t=deb&osn=debian&osv=11&vr=%3C1%3A2.30.2-1%2Bdeb11u3"><img alt="high : CVE--2024--32004" src="https://img.shields.io/badge/CVE--2024--32004-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1:2.30.2-1+deb11u3</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1:2.30.2-1+deb11u3</code></td></tr>
 <tr><td>Fixed version</td><td><code>1:2.30.2-1+deb11u3</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
@@ -548,7 +548,7 @@ Git is a revision control system. Prior to versions 2.45.1, 2.44.1, 2.43.4, 2.42
 <a href="https://scout.docker.com/v/CVE-2023-29007?s=debian&n=git&ns=debian&t=deb&osn=debian&osv=11&vr=%3C1%3A2.30.2-1%2Bdeb11u3"><img alt="high : CVE--2023--29007" src="https://img.shields.io/badge/CVE--2023--29007-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1:2.30.2-1+deb11u3</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1:2.30.2-1+deb11u3</code></td></tr>
 <tr><td>Fixed version</td><td><code>1:2.30.2-1+deb11u3</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.52%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>77th percentile</code></td></tr>
@@ -565,7 +565,7 @@ Git is a revision control system. Prior to versions 2.30.9, 2.31.8, 2.32.7, 2.33
 <a href="https://scout.docker.com/v/CVE-2023-25652?s=debian&n=git&ns=debian&t=deb&osn=debian&osv=11&vr=%3C1%3A2.30.2-1%2Bdeb11u3"><img alt="high : CVE--2023--25652" src="https://img.shields.io/badge/CVE--2023--25652-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1:2.30.2-1+deb11u3</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1:2.30.2-1+deb11u3</code></td></tr>
 <tr><td>Fixed version</td><td><code>1:2.30.2-1+deb11u3</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.30%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>70th percentile</code></td></tr>
@@ -582,7 +582,7 @@ Git is a revision control system. Prior to versions 2.30.9, 2.31.8, 2.32.7, 2.33
 <a href="https://scout.docker.com/v/CVE-2024-32465?s=debian&n=git&ns=debian&t=deb&osn=debian&osv=11&vr=%3C1%3A2.30.2-1%2Bdeb11u3"><img alt="high : CVE--2024--32465" src="https://img.shields.io/badge/CVE--2024--32465-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1:2.30.2-1+deb11u3</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1:2.30.2-1+deb11u3</code></td></tr>
 <tr><td>Fixed version</td><td><code>1:2.30.2-1+deb11u3</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
@@ -599,7 +599,7 @@ Git is a revision control system. The Git project recommends to avoid working in
 <a href="https://scout.docker.com/v/CVE-2024-32021?s=debian&n=git&ns=debian&t=deb&osn=debian&osv=11&vr=%3C1%3A2.30.2-1%2Bdeb11u3"><img alt="low : CVE--2024--32021" src="https://img.shields.io/badge/CVE--2024--32021-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1:2.30.2-1+deb11u3</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1:2.30.2-1+deb11u3</code></td></tr>
 <tr><td>Fixed version</td><td><code>1:2.30.2-1+deb11u3</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -616,7 +616,7 @@ Git is a revision control system. Prior to versions 2.45.1, 2.44.1, 2.43.4, 2.42
 <a href="https://scout.docker.com/v/CVE-2023-25815?s=debian&n=git&ns=debian&t=deb&osn=debian&osv=11&vr=%3C1%3A2.30.2-1%2Bdeb11u3"><img alt="low : CVE--2023--25815" src="https://img.shields.io/badge/CVE--2023--25815-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1:2.30.2-1+deb11u3</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1:2.30.2-1+deb11u3</code></td></tr>
 <tr><td>Fixed version</td><td><code>1:2.30.2-1+deb11u3</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
@@ -672,7 +672,7 @@ GIT version 2.15.1 and earlier contains a Input Validation Error vulnerability i
 <a href="https://scout.docker.com/v/CVE-2024-37371?s=debian&n=krb5&ns=debian&t=deb&osn=debian&osv=11&vr=%3C1.18.3-6%2Bdeb11u5"><img alt="critical : CVE--2024--37371" src="https://img.shields.io/badge/CVE--2024--37371-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.18.3-6+deb11u5</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.18.3-6+deb11u5</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.18.3-6+deb11u5</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.09%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
@@ -689,7 +689,7 @@ In MIT Kerberos 5 (aka krb5) before 1.21.3, an attacker can cause invalid memory
 <a href="https://scout.docker.com/v/CVE-2024-37370?s=debian&n=krb5&ns=debian&t=deb&osn=debian&osv=11&vr=%3C1.18.3-6%2Bdeb11u5"><img alt="high : CVE--2024--37370" src="https://img.shields.io/badge/CVE--2024--37370-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.18.3-6+deb11u5</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.18.3-6+deb11u5</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.18.3-6+deb11u5</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.09%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
@@ -711,7 +711,7 @@ In MIT Kerberos 5 (aka krb5) before 1.21.3, an attacker can modify the plaintext
 <a href="https://scout.docker.com/v/CVE-2024-33602?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=11&vr=%3C2.31-13%2Bdeb11u10"><img alt="high : CVE--2024--33602" src="https://img.shields.io/badge/CVE--2024--33602-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.31-13+deb11u10</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.31-13+deb11u10</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.31-13+deb11u10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -728,7 +728,7 @@ nscd: netgroup cache assumes NSS callback uses in-buffer strings  The Name Servi
 <a href="https://scout.docker.com/v/CVE-2024-33601?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=11&vr=%3C2.31-13%2Bdeb11u10"><img alt="high : CVE--2024--33601" src="https://img.shields.io/badge/CVE--2024--33601-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.31-13+deb11u10</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.31-13+deb11u10</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.31-13+deb11u10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -745,7 +745,7 @@ nscd: netgroup cache may terminate daemon on memory allocation failure  The Name
 <a href="https://scout.docker.com/v/CVE-2024-2961?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=11&vr=%3C2.31-13%2Bdeb11u9"><img alt="high : CVE--2024--2961" src="https://img.shields.io/badge/CVE--2024--2961-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.31-13+deb11u9</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.31-13+deb11u9</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.31-13+deb11u9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
@@ -762,7 +762,7 @@ The iconv() function in the GNU C Library versions 2.39 and older may overflow t
 <a href="https://scout.docker.com/v/CVE-2024-33600?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=11&vr=%3C2.31-13%2Bdeb11u10"><img alt="unspecified : CVE--2024--33600" src="https://img.shields.io/badge/CVE--2024--33600-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.31-13+deb11u10</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.31-13+deb11u10</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.31-13+deb11u10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -779,7 +779,7 @@ nscd: Null pointer crashes after notfound response  If the Name Service Cache Da
 <a href="https://scout.docker.com/v/CVE-2024-33599?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=11&vr=%3C2.31-13%2Bdeb11u10"><img alt="unspecified : CVE--2024--33599" src="https://img.shields.io/badge/CVE--2024--33599-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.31-13+deb11u10</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.31-13+deb11u10</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.31-13+deb11u10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -801,7 +801,7 @@ nscd: Stack-based buffer overflow in netgroup cache  If the Name Service Cache D
 <a href="https://scout.docker.com/v/CVE-2024-0567?s=debian&n=gnutls28&ns=debian&t=deb&osn=debian&osv=11&vr=%3C3.7.1-5%2Bdeb11u5"><img alt="high : CVE--2024--0567" src="https://img.shields.io/badge/CVE--2024--0567-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><3.7.1-5+deb11u5</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;3.7.1-5+deb11u5</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.7.1-5+deb11u5</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.09%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>37th percentile</code></td></tr>
@@ -818,7 +818,7 @@ A vulnerability was found in GnuTLS, where a cockpit (which uses gnuTLS) rejects
 <a href="https://scout.docker.com/v/CVE-2024-0553?s=debian&n=gnutls28&ns=debian&t=deb&osn=debian&osv=11&vr=%3C3.7.1-5%2Bdeb11u5"><img alt="high : CVE--2024--0553" src="https://img.shields.io/badge/CVE--2024--0553-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><3.7.1-5+deb11u5</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;3.7.1-5+deb11u5</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.7.1-5+deb11u5</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.24%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>62nd percentile</code></td></tr>
@@ -835,7 +835,7 @@ A vulnerability was found in GnuTLS. The response times to malformed ciphertexts
 <a href="https://scout.docker.com/v/CVE-2023-5981?s=debian&n=gnutls28&ns=debian&t=deb&osn=debian&osv=11&vr=%3C3.7.1-5%2Bdeb11u4"><img alt="medium : CVE--2023--5981" src="https://img.shields.io/badge/CVE--2023--5981-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><3.7.1-5+deb11u4</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;3.7.1-5+deb11u4</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.7.1-5+deb11u4</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.10%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
@@ -852,7 +852,7 @@ A vulnerability was found that the response times to malformed ciphertexts in RS
 <a href="https://scout.docker.com/v/CVE-2024-28834?s=debian&n=gnutls28&ns=debian&t=deb&osn=debian&osv=11&vr=%3C3.7.1-5%2Bdeb11u6"><img alt="medium : CVE--2024--28834" src="https://img.shields.io/badge/CVE--2024--28834-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><3.7.1-5+deb11u6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;3.7.1-5+deb11u6</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.7.1-5+deb11u6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
@@ -869,7 +869,7 @@ A flaw was found in GnuTLS. The Minerva attack is a cryptographic vulnerability 
 <a href="https://scout.docker.com/v/CVE-2024-28835?s=debian&n=gnutls28&ns=debian&t=deb&osn=debian&osv=11&vr=%3C3.7.1-5%2Bdeb11u6"><img alt="medium : CVE--2024--28835" src="https://img.shields.io/badge/CVE--2024--28835-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><3.7.1-5+deb11u6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;3.7.1-5+deb11u6</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.7.1-5+deb11u6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
@@ -891,7 +891,7 @@ A flaw has been discovered in GnuTLS where an application crash can be induced w
 <a href="https://scout.docker.com/v/CVE-2024-2398?s=debian&n=curl&ns=debian&t=deb&osn=debian&osv=11&vr=%3C7.74.0-1.3%2Bdeb11u12"><img alt="high : CVE--2024--2398" src="https://img.shields.io/badge/CVE--2024--2398-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><7.74.0-1.3+deb11u12</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;7.74.0-1.3+deb11u12</code></td></tr>
 <tr><td>Fixed version</td><td><code>7.74.0-1.3+deb11u12</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
@@ -908,7 +908,7 @@ When an application tells libcurl it wants to allow HTTP/2 server push, and the 
 <a href="https://scout.docker.com/v/CVE-2024-7264?s=debian&n=curl&ns=debian&t=deb&osn=debian&osv=11&vr=%3C7.74.0-1.3%2Bdeb11u13"><img alt="medium : CVE--2024--7264" src="https://img.shields.io/badge/CVE--2024--7264-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><7.74.0-1.3+deb11u13</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;7.74.0-1.3+deb11u13</code></td></tr>
 <tr><td>Fixed version</td><td><code>7.74.0-1.3+deb11u13</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.06%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
@@ -925,7 +925,7 @@ libcurl's ASN1 parser code has the `GTime2str()` function, used for parsing an A
 <a href="https://scout.docker.com/v/CVE-2023-46218?s=debian&n=curl&ns=debian&t=deb&osn=debian&osv=11&vr=%3C7.74.0-1.3%2Bdeb11u11"><img alt="medium : CVE--2023--46218" src="https://img.shields.io/badge/CVE--2023--46218-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><7.74.0-1.3+deb11u11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;7.74.0-1.3+deb11u11</code></td></tr>
 <tr><td>Fixed version</td><td><code>7.74.0-1.3+deb11u11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.07%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
@@ -947,7 +947,7 @@ This flaw allows a malicious HTTP server to set "super cookies" in curl that are
 <a href="https://scout.docker.com/v/CVE-2023-39325?s=github&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.17.0"><img alt="high 7.5: CVE--2023--39325" src="https://img.shields.io/badge/CVE--2023--39325-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Uncontrolled Resource Consumption</i>
 
 <table>
-<tr><td>Affected range</td><td><code><0.17.0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.17.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.17.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
@@ -972,7 +972,7 @@ The default stream concurrency limit is 250 streams (requests) per HTTP/2 connec
 <a href="https://scout.docker.com/v/CVE-2023-45288?s=github&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.23.0"><img alt="medium 5.3: CVE--2023--45288" src="https://img.shields.io/badge/CVE--2023--45288-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Uncontrolled Resource Consumption</i>
 
 <table>
-<tr><td>Affected range</td><td><code><0.23.0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.23.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.23.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
@@ -991,7 +991,7 @@ An attacker may cause an HTTP/2 endpoint to read arbitrary amounts of header dat
 <a href="https://scout.docker.com/v/CVE-2023-44487?s=github&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.17.0"><img alt="medium 5.3: CVE--2023--44487" src="https://img.shields.io/badge/CVE--2023--44487-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Uncontrolled Resource Consumption</i>
 
 <table>
-<tr><td>Affected range</td><td><code><0.17.0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.17.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.17.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
@@ -1095,7 +1095,7 @@ A security issue was discovered in Kubernetes where users may be able to launch 
 <a href="https://scout.docker.com/v/CVE-2023-50387?s=debian&n=systemd&ns=debian&t=deb&osn=debian&osv=11&vr=%3C247.3-7%2Bdeb11u6"><img alt="high : CVE--2023--50387" src="https://img.shields.io/badge/CVE--2023--50387-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><247.3-7+deb11u6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;247.3-7+deb11u6</code></td></tr>
 <tr><td>Fixed version</td><td><code>247.3-7+deb11u6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>5.00%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>93rd percentile</code></td></tr>
@@ -1112,7 +1112,7 @@ Certain DNSSEC aspects of the DNS protocol (in RFC 4033, 4034, 4035, 6840, and r
 <a href="https://scout.docker.com/v/CVE-2023-7008?s=debian&n=systemd&ns=debian&t=deb&osn=debian&osv=11&vr=%3C247.3-7%2Bdeb11u6"><img alt="medium : CVE--2023--7008" src="https://img.shields.io/badge/CVE--2023--7008-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><247.3-7+deb11u6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;247.3-7+deb11u6</code></td></tr>
 <tr><td>Fixed version</td><td><code>247.3-7+deb11u6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.06%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
@@ -1129,7 +1129,7 @@ A vulnerability was found in systemd-resolved. This issue may allow systemd-reso
 <a href="https://scout.docker.com/v/CVE-2023-50868?s=debian&n=systemd&ns=debian&t=deb&osn=debian&osv=11&vr=%3C247.3-7%2Bdeb11u6"><img alt="unspecified : CVE--2023--50868" src="https://img.shields.io/badge/CVE--2023--50868-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><247.3-7+deb11u6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;247.3-7+deb11u6</code></td></tr>
 <tr><td>Fixed version</td><td><code>247.3-7+deb11u6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
@@ -1151,7 +1151,7 @@ The Closest Encloser Proof aspect of the DNS protocol (in RFC 5155 when RFC 9276
 <a href="https://scout.docker.com/v/CVE-2023-47038?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=11&vr=%3C5.32.1-4%2Bdeb11u3"><img alt="high : CVE--2023--47038" src="https://img.shields.io/badge/CVE--2023--47038-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><5.32.1-4+deb11u3</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;5.32.1-4+deb11u3</code></td></tr>
 <tr><td>Fixed version</td><td><code>5.32.1-4+deb11u3</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
@@ -1173,7 +1173,7 @@ A vulnerability was found in perl 5.30.0 through 5.38.0. This issue occurs when 
 <a href="https://scout.docker.com/v/CVE-2020-22218?s=debian&n=libssh2&ns=debian&t=deb&osn=debian&osv=11&vr=%3C1.9.0-2%2Bdeb11u1"><img alt="high : CVE--2020--22218" src="https://img.shields.io/badge/CVE--2020--22218-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.9.0-2+deb11u1</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.9.0-2+deb11u1</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.9.0-2+deb11u1</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.08%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>36th percentile</code></td></tr>
@@ -1195,7 +1195,7 @@ An issue was discovered in function _libssh2_packet_add in libssh2 1.10.0 allows
 <a href="https://scout.docker.com/v/CVE-2022-1304?s=debian&n=e2fsprogs&ns=debian&t=deb&osn=debian&osv=11&vr=%3C1.46.2-2%2Bdeb11u1"><img alt="high : CVE--2022--1304" src="https://img.shields.io/badge/CVE--2022--1304-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.46.2-2+deb11u1</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.46.2-2+deb11u1</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.46.2-2+deb11u1</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.06%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>30th percentile</code></td></tr>
@@ -1217,7 +1217,7 @@ An out-of-bounds read/write vulnerability was found in e2fsprogs 1.46.5. This is
 <a href="https://scout.docker.com/v/CVE-2024-28182?s=debian&n=nghttp2&ns=debian&t=deb&osn=debian&osv=11&vr=%3C1.43.0-1%2Bdeb11u2"><img alt="medium : CVE--2024--28182" src="https://img.shields.io/badge/CVE--2024--28182-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.43.0-1+deb11u2</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.43.0-1+deb11u2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.43.0-1+deb11u2</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
@@ -1234,7 +1234,7 @@ nghttp2 is an implementation of the Hypertext Transfer Protocol version 2 in C. 
 <a href="https://scout.docker.com/v/CVE-2023-44487?s=debian&n=nghttp2&ns=debian&t=deb&osn=debian&osv=11&vr=%3C1.43.0-1%2Bdeb11u1"><img alt="low : CVE--2023--44487" src="https://img.shields.io/badge/CVE--2023--44487-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.43.0-1+deb11u1</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.43.0-1+deb11u1</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.43.0-1+deb11u1</code></td></tr>
 <tr><td>EPSS Score</td><td><code>83.78%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>99th percentile</code></td></tr>
@@ -1256,7 +1256,7 @@ The HTTP/2 protocol allows a denial of service (server resource consumption) bec
 <a href="https://scout.docker.com/v/CVE-2024-24786?s=github&n=protobuf&ns=google.golang.org&t=golang&vr=%3C1.33.0"><img alt="medium : CVE--2024--24786" src="https://img.shields.io/badge/CVE--2024--24786-lightgrey?label=medium%20&labelColor=fbb552"/></a> <i>Loop with Unreachable Exit Condition ('Infinite Loop')</i>
 
 <table>
-<tr><td>Affected range</td><td><code><1.33.0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.33.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.33.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -1491,6 +1491,45 @@ initscripts in rPath Linux 1 sets insecure permissions for the /var/log/btmp fil
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>tar</strong> <code>1.34+dfsg-1</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/tar@1.34%2Bdfsg-1?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2022-48303?s=debian&n=tar&ns=debian&t=deb&osn=debian&osv=11&vr=%3C1.34%2Bdfsg-1%2Bdeb11u1"><img alt="low : CVE--2022--48303" src="https://img.shields.io/badge/CVE--2022--48303-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.34+dfsg-1+deb11u1</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.34+dfsg-1+deb11u1</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.07%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+GNU Tar through 1.34 has a one-byte out-of-bounds read that results in use of uninitialized memory for a conditional jump. Exploitation to change the flow of control has not been demonstrated. The issue occurs in from_header in list.c via a V7 archive in which mtime has approximately 11 whitespace characters.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2023-39804?s=debian&n=tar&ns=debian&t=deb&osn=debian&osv=11&vr=%3C1.34%2Bdfsg-1%2Bdeb11u1"><img alt="unspecified : CVE--2023--39804" src="https://img.shields.io/badge/CVE--2023--39804-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.34+dfsg-1+deb11u1</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.34+dfsg-1+deb11u1</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+In GNU tar before 1.35, mishandled extension attributes in a PAX archive can lead to an application crash in xheader.c.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>openssl</strong> <code>1.1.1w-0+deb11u1</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/openssl@1.1.1w-0%2Bdeb11u1?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
@@ -1530,45 +1569,6 @@ Issue summary: Use of the low-level GF(2^m) elliptic curve APIs with untrusted e
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>tar</strong> <code>1.34+dfsg-1</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/tar@1.34%2Bdfsg-1?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2022-48303?s=debian&n=tar&ns=debian&t=deb&osn=debian&osv=11&vr=%3C1.34%2Bdfsg-1%2Bdeb11u1"><img alt="low : CVE--2022--48303" src="https://img.shields.io/badge/CVE--2022--48303-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code><1.34+dfsg-1+deb11u1</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.34+dfsg-1+deb11u1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.07%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-GNU Tar through 1.34 has a one-byte out-of-bounds read that results in use of uninitialized memory for a conditional jump. Exploitation to change the flow of control has not been demonstrated. The issue occurs in from_header in list.c via a V7 archive in which mtime has approximately 11 whitespace characters.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2023-39804?s=debian&n=tar&ns=debian&t=deb&osn=debian&osv=11&vr=%3C1.34%2Bdfsg-1%2Bdeb11u1"><img alt="unspecified : CVE--2023--39804" src="https://img.shields.io/badge/CVE--2023--39804-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code><1.34+dfsg-1+deb11u1</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.34+dfsg-1+deb11u1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-In GNU tar before 1.35, mishandled extension attributes in a PAX archive can lead to an application crash in xheader.c.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>libgcrypt20</strong> <code>1.8.7-6</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/libgcrypt20@1.8.7-6?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
@@ -1585,28 +1585,6 @@ In GNU tar before 1.35, mishandled extension attributes in a PAX archive can lea
 <blockquote>
 
 cipher/elgamal.c in Libgcrypt through 1.8.2, when used to encrypt messages directly, improperly encodes plaintexts, which allows attackers to obtain sensitive information by reading ciphertext data (i.e., it does not have semantic security in face of a ciphertext-only attack). The Decisional Diffie-Hellman (DDH) assumption does not hold for Libgcrypt's ElGamal implementation.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gnupg2</strong> <code>2.2.27-2+deb11u2</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/gnupg2@2.2.27-2%2Bdeb11u2?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2022-3219?s=debian&n=gnupg2&ns=debian&t=deb&osn=debian&osv=11&vr=%3E%3D2.2.27-2%2Bdeb11u2"><img alt="low : CVE--2022--3219" src="https://img.shields.io/badge/CVE--2022--3219-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=2.2.27-2+deb11u2</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-GnuPG can be made to spin on a relatively small input by (for example) crafting a public key with thousands of signatures attached, compressed down to just a few KB.
 
 </blockquote>
 </details>
@@ -1635,22 +1613,22 @@ Integer overflow vulnerability in pcre2test before 10.41 allows attackers to cau
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>util-linux</strong> <code>2.36.1-8+deb11u1</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>coreutils</strong> <code>8.32-4+b1</code> (deb)</summary>
 
-<small><code>pkg:deb/debian/util-linux@2.36.1-8%2Bdeb11u1?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-28085?s=debian&n=util-linux&ns=debian&t=deb&osn=debian&osv=11&vr=%3C2.36.1-8%2Bdeb11u2"><img alt="low : CVE--2024--28085" src="https://img.shields.io/badge/CVE--2024--28085-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<small><code>pkg:deb/debian/coreutils@8.32-4%2Bb1?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2017-18018?s=debian&n=coreutils&ns=debian&t=deb&osn=debian&osv=11&vr=%3E%3D8.32-4"><img alt="low : CVE--2017--18018" src="https://img.shields.io/badge/CVE--2017--18018-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.36.1-8+deb11u2</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.36.1-8+deb11u2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>>=8.32-4</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-wall in util-linux through 2.40, often installed with setgid tty permissions, allows escape sequences to be sent to other users' terminals through argv. (Specifically, escape sequences received from stdin are blocked, but escape sequences received from argv are not blocked.) There may be plausible scenarios where this leads to account takeover.
+In GNU Coreutils through 8.29, chown-core.c in chown and chgrp does not prevent replacement of a plain file with a symlink during use of the POSIX "-R -L" options, which allows local users to modify the ownership of arbitrary files by leveraging a race condition.
 
 </blockquote>
 </details>
@@ -1679,22 +1657,44 @@ It was found that apt-key in apt, all versions, do not correctly validate gpg ke
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>coreutils</strong> <code>8.32-4+b1</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gnupg2</strong> <code>2.2.27-2+deb11u2</code> (deb)</summary>
 
-<small><code>pkg:deb/debian/coreutils@8.32-4%2Bb1?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2017-18018?s=debian&n=coreutils&ns=debian&t=deb&osn=debian&osv=11&vr=%3E%3D8.32-4"><img alt="low : CVE--2017--18018" src="https://img.shields.io/badge/CVE--2017--18018-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<small><code>pkg:deb/debian/gnupg2@2.2.27-2%2Bdeb11u2?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2022-3219?s=debian&n=gnupg2&ns=debian&t=deb&osn=debian&osv=11&vr=%3E%3D2.2.27-2%2Bdeb11u2"><img alt="low : CVE--2022--3219" src="https://img.shields.io/badge/CVE--2022--3219-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>>=8.32-4</code></td></tr>
+<tr><td>Affected range</td><td><code>>=2.2.27-2+deb11u2</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-In GNU Coreutils through 8.29, chown-core.c in chown and chgrp does not prevent replacement of a plain file with a symlink during use of the POSIX "-R -L" options, which allows local users to modify the ownership of arbitrary files by leveraging a race condition.
+GnuPG can be made to spin on a relatively small input by (for example) crafting a public key with thousands of signatures attached, compressed down to just a few KB.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>util-linux</strong> <code>2.36.1-8+deb11u1</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/util-linux@2.36.1-8%2Bdeb11u1?os_distro=bullseye&os_name=debian&os_version=11</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-28085?s=debian&n=util-linux&ns=debian&t=deb&osn=debian&osv=11&vr=%3C2.36.1-8%2Bdeb11u2"><img alt="low : CVE--2024--28085" src="https://img.shields.io/badge/CVE--2024--28085-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.36.1-8+deb11u2</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.36.1-8+deb11u2</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+wall in util-linux through 2.40, often installed with setgid tty permissions, allows escape sequences to be sent to other users' terminals through argv. (Specifically, escape sequences received from stdin are blocked, but escape sequences received from argv are not blocked.) There may be plausible scenarios where this leads to account takeover.
 
 </blockquote>
 </details>

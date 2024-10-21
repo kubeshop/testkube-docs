@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:2d7a9cb13f433ae72c13019db935e74831359a022f0a89282e5294cf578db3bc</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 5" src="https://img.shields.io/badge/critical-5-8b1924"/> <img alt="high: 19" src="https://img.shields.io/badge/high-19-e25d68"/> <img alt="medium: 28" src="https://img.shields.io/badge/medium-28-fbb552"/> <img alt="low: 5" src="https://img.shields.io/badge/low-5-fce1a9"/> <img alt="unspecified: 10" src="https://img.shields.io/badge/unspecified-10-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:eea80a12c78e31c2fdc3daa5c4dc9ca2b91e904e94d219b0e95e3f1eba301ab0</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 5" src="https://img.shields.io/badge/critical-5-8b1924"/> <img alt="high: 19" src="https://img.shields.io/badge/high-19-e25d68"/> <img alt="medium: 28" src="https://img.shields.io/badge/medium-28-fbb552"/> <img alt="low: 5" src="https://img.shields.io/badge/low-5-fce1a9"/> <img alt="unspecified: 11" src="https://img.shields.io/badge/unspecified-11-lightgrey"/></td></tr>
 <tr><td>size</td><td>124 MB</td></tr>
 <tr><td>packages</td><td>675</td></tr>
 </table>
@@ -18,7 +18,7 @@ hide_table_of_contents: true
 <a href="https://scout.docker.com/v/CVE-2024-45492?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C2.6.3-r0"><img alt="critical : CVE--2024--45492" src="https://img.shields.io/badge/CVE--2024--45492-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.6.3-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.6.3-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.6.3-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.09%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
@@ -35,7 +35,7 @@ hide_table_of_contents: true
 <a href="https://scout.docker.com/v/CVE-2024-45491?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C2.6.3-r0"><img alt="critical : CVE--2024--45491" src="https://img.shields.io/badge/CVE--2024--45491-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.6.3-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.6.3-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.6.3-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.09%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
@@ -52,10 +52,10 @@ hide_table_of_contents: true
 <a href="https://scout.docker.com/v/CVE-2024-45490?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C2.6.3-r0"><img alt="high : CVE--2024--45490" src="https://img.shields.io/badge/CVE--2024--45490-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.6.3-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.6.3-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.6.3-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.09%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -69,7 +69,7 @@ hide_table_of_contents: true
 <a href="https://scout.docker.com/v/CVE-2023-52425?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C2.6.0-r0"><img alt="high : CVE--2023--52425" src="https://img.shields.io/badge/CVE--2023--52425-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.6.0-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.6.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.6.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.09%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
@@ -86,7 +86,7 @@ hide_table_of_contents: true
 <a href="https://scout.docker.com/v/CVE-2023-52426?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C2.6.0-r0"><img alt="medium : CVE--2023--52426" src="https://img.shields.io/badge/CVE--2023--52426-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.6.0-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.6.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.6.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
@@ -103,7 +103,7 @@ hide_table_of_contents: true
 <a href="https://scout.docker.com/v/CVE-2024-28757?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C2.6.2-r0"><img alt="unspecified : CVE--2024--28757" src="https://img.shields.io/badge/CVE--2024--28757-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.6.2-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.6.2-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.6.2-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
@@ -125,7 +125,7 @@ hide_table_of_contents: true
 <a href="https://scout.docker.com/v/CVE-2024-24790?s=golang&n=stdlib&t=golang&vr=%3C1.21.11"><img alt="critical : CVE--2024--24790" src="https://img.shields.io/badge/CVE--2024--24790-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.06%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
@@ -142,7 +142,7 @@ The various Is methods (IsPrivate, IsLoopback, etc) did not work as expected for
 <a href="https://scout.docker.com/v/CVE-2024-34158?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="high : CVE--2024--34158" src="https://img.shields.io/badge/CVE--2024--34158-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -159,7 +159,7 @@ Calling Parse on a "// +build" build tag line with deeply nested expressions can
 <a href="https://scout.docker.com/v/CVE-2024-34156?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="high : CVE--2024--34156" src="https://img.shields.io/badge/CVE--2024--34156-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -176,7 +176,7 @@ Calling Decoder.Decode on a message which contains deeply nested structures can 
 <a href="https://scout.docker.com/v/CVE-2024-24791?s=golang&n=stdlib&t=golang&vr=%3C1.21.12"><img alt="high : CVE--2024--24791" src="https://img.shields.io/badge/CVE--2024--24791-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.12</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.12</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -195,7 +195,7 @@ An attacker sending a request to a net/http/httputil.ReverseProxy proxy can expl
 <a href="https://scout.docker.com/v/CVE-2024-24784?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="high : CVE--2024--24784" src="https://img.shields.io/badge/CVE--2024--24784-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
@@ -212,7 +212,7 @@ The ParseAddressList function incorrectly handles comments (text within parenthe
 <a href="https://scout.docker.com/v/CVE-2023-45288?s=golang&n=stdlib&t=golang&vr=%3C1.21.9"><img alt="high : CVE--2023--45288" src="https://img.shields.io/badge/CVE--2023--45288-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.9</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
@@ -235,7 +235,7 @@ The fix sets a limit on the amount of excess header frames we will process befor
 <a href="https://scout.docker.com/v/CVE-2023-45283?s=golang&n=stdlib&t=golang&vr=%3C1.20.11"><img alt="high : CVE--2023--45283" src="https://img.shields.io/badge/CVE--2023--45283-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.11%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
@@ -262,7 +262,7 @@ UPDATE: Go 1.20.11 and Go 1.21.4 inadvertently changed the definition of the vol
 <a href="https://scout.docker.com/v/CVE-2022-30635?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="high : CVE--2022--30635" src="https://img.shields.io/badge/CVE--2022--30635-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.19%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>56th percentile</code></td></tr>
@@ -279,7 +279,7 @@ Calling Decoder.Decode on a message which contains deeply nested structures can 
 <a href="https://scout.docker.com/v/CVE-2024-24789?s=golang&n=stdlib&t=golang&vr=%3C1.21.11"><img alt="medium : CVE--2024--24789" src="https://img.shields.io/badge/CVE--2024--24789-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
@@ -296,7 +296,7 @@ The archive/zip package's handling of certain types of invalid zip files differs
 <a href="https://scout.docker.com/v/CVE-2023-45284?s=golang&n=stdlib&t=golang&vr=%3C1.20.11"><img alt="medium : CVE--2023--45284" src="https://img.shields.io/badge/CVE--2023--45284-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.06%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>26th percentile</code></td></tr>
@@ -317,7 +317,7 @@ With fix, IsLocal now correctly reports these names as non-local.
 <a href="https://scout.docker.com/v/CVE-2023-39326?s=golang&n=stdlib&t=golang&vr=%3C1.20.12"><img alt="medium : CVE--2023--39326" src="https://img.shields.io/badge/CVE--2023--39326-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.12</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.12</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
@@ -338,7 +338,7 @@ Chunk extensions are a little-used HTTP feature which permit including additiona
 <a href="https://scout.docker.com/v/CVE-2024-34155?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="unspecified : CVE--2024--34155" src="https://img.shields.io/badge/CVE--2024--34155-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -355,7 +355,7 @@ Calling any of the Parse functions on Go source code which contains deeply neste
 <a href="https://scout.docker.com/v/CVE-2024-24785?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="unspecified : CVE--2024--24785" src="https://img.shields.io/badge/CVE--2024--24785-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
@@ -372,7 +372,7 @@ If errors returned from MarshalJSON methods contain user controlled data, they m
 <a href="https://scout.docker.com/v/CVE-2024-24783?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="unspecified : CVE--2024--24783" src="https://img.shields.io/badge/CVE--2024--24783-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
@@ -391,7 +391,7 @@ This affects all crypto/tls clients, and servers that set Config.ClientAuth to V
 <a href="https://scout.docker.com/v/CVE-2023-45290?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="unspecified : CVE--2023--45290" src="https://img.shields.io/badge/CVE--2023--45290-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
@@ -410,7 +410,7 @@ With fix, the ParseMultipartForm function now correctly limits the maximum size 
 <a href="https://scout.docker.com/v/CVE-2023-45289?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="unspecified : CVE--2023--45289" src="https://img.shields.io/badge/CVE--2023--45289-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
@@ -428,13 +428,13 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/M-4-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 3" src="https://img.shields.io/badge/U-3-lightgrey"/><strong>openssl</strong> <code>3.1.3-r0</code> (apk)</summary>
+<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/M-4-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 4" src="https://img.shields.io/badge/U-4-lightgrey"/><strong>openssl</strong> <code>3.1.3-r0</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/openssl@3.1.3-r0?os_name=alpine&os_version=3.18</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2024-5535?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C3.1.6-r0"><img alt="critical : CVE--2024--5535" src="https://img.shields.io/badge/CVE--2024--5535-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><3.1.6-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;3.1.6-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.1.6-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
@@ -451,7 +451,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2024-6119?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C3.1.7-r0"><img alt="high : CVE--2024--6119" src="https://img.shields.io/badge/CVE--2024--6119-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><3.1.7-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;3.1.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.1.7-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -468,7 +468,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2023-5363?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C3.1.4-r0"><img alt="high : CVE--2023--5363" src="https://img.shields.io/badge/CVE--2023--5363-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><3.1.4-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;3.1.4-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.1.4-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.06%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
@@ -485,7 +485,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2023-6129?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C3.1.4-r3"><img alt="medium : CVE--2023--6129" src="https://img.shields.io/badge/CVE--2023--6129-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><3.1.4-r3</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;3.1.4-r3</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.1.4-r3</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.06%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
@@ -502,7 +502,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2024-0727?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C3.1.4-r5"><img alt="medium : CVE--2024--0727" src="https://img.shields.io/badge/CVE--2024--0727-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><3.1.4-r5</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;3.1.4-r5</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.1.4-r5</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.23%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>61st percentile</code></td></tr>
@@ -519,7 +519,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2024-4603?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C3.1.5-r0"><img alt="medium : CVE--2024--4603" src="https://img.shields.io/badge/CVE--2024--4603-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><3.1.5-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;3.1.5-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.1.5-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -536,7 +536,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2023-5678?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C3.1.4-r1"><img alt="medium : CVE--2023--5678" src="https://img.shields.io/badge/CVE--2023--5678-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><3.1.4-r1</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;3.1.4-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.1.4-r1</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.08%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
@@ -550,10 +550,27 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 </blockquote>
 </details>
 
+<a href="https://scout.docker.com/v/CVE-2024-9143?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C3.1.7-r1"><img alt="unspecified : CVE--2024--9143" src="https://img.shields.io/badge/CVE--2024--9143-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;3.1.7-r1</code></td></tr>
+<tr><td>Fixed version</td><td><code>3.1.7-r1</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
 <a href="https://scout.docker.com/v/CVE-2024-4741?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C3.1.6-r0"><img alt="unspecified : CVE--2024--4741" src="https://img.shields.io/badge/CVE--2024--4741-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><3.1.6-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;3.1.6-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.1.6-r0</code></td></tr>
 </table>
 
@@ -568,7 +585,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2024-2511?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C3.1.4-r6"><img alt="unspecified : CVE--2024--2511" src="https://img.shields.io/badge/CVE--2024--2511-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><3.1.4-r6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;3.1.4-r6</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.1.4-r6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -585,7 +602,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2023-6237?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C3.1.4-r4"><img alt="unspecified : CVE--2023--6237" src="https://img.shields.io/badge/CVE--2023--6237-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><3.1.4-r4</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;3.1.4-r4</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.1.4-r4</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -607,7 +624,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2024-32002?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C2.40.3-r0"><img alt="critical : CVE--2024--32002" src="https://img.shields.io/badge/CVE--2024--32002-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.40.3-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.40.3-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.40.3-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.15%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
@@ -624,7 +641,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2024-32004?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C2.40.3-r0"><img alt="high : CVE--2024--32004" src="https://img.shields.io/badge/CVE--2024--32004-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.40.3-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.40.3-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.40.3-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
@@ -641,7 +658,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2024-32465?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C2.40.3-r0"><img alt="high : CVE--2024--32465" src="https://img.shields.io/badge/CVE--2024--32465-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.40.3-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.40.3-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.40.3-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
@@ -658,7 +675,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2024-32021?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C2.40.3-r0"><img alt="low : CVE--2024--32021" src="https://img.shields.io/badge/CVE--2024--32021-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.40.3-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.40.3-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.40.3-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -675,7 +692,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2024-32020?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C2.40.3-r0"><img alt="low : CVE--2024--32020" src="https://img.shields.io/badge/CVE--2024--32020-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><2.40.3-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.40.3-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.40.3-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
@@ -697,7 +714,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2024-2398?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C8.7.1-r0"><img alt="high : CVE--2024--2398" src="https://img.shields.io/badge/CVE--2024--2398-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><8.7.1-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;8.7.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.7.1-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
@@ -714,7 +731,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2024-6197?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C8.9.0-r0"><img alt="high : CVE--2024--6197" src="https://img.shields.io/badge/CVE--2024--6197-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><8.9.0-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;8.9.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.9.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.07%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
@@ -731,7 +748,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2024-2466?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C8.7.1-r0"><img alt="medium : CVE--2024--2466" src="https://img.shields.io/badge/CVE--2024--2466-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><8.7.1-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;8.7.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.7.1-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
@@ -748,7 +765,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2023-46218?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C8.5.0-r0"><img alt="medium : CVE--2023--46218" src="https://img.shields.io/badge/CVE--2023--46218-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><8.5.0-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;8.5.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.5.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.07%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
@@ -765,7 +782,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2024-0853?s=docker&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C8.6.0-r0"><img alt="medium : CVE--2024--0853" src="https://img.shields.io/badge/CVE--2024--0853-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><8.6.0-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;8.6.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.06%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
@@ -782,7 +799,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2023-46219?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C8.5.0-r0"><img alt="medium : CVE--2023--46219" src="https://img.shields.io/badge/CVE--2023--46219-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><8.5.0-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;8.5.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.5.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
@@ -799,7 +816,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2024-6874?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C8.9.0-r0"><img alt="medium : CVE--2024--6874" src="https://img.shields.io/badge/CVE--2024--6874-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><8.9.0-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;8.9.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.9.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.08%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
@@ -816,7 +833,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2024-2004?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C8.7.1-r0"><img alt="low : CVE--2024--2004" src="https://img.shields.io/badge/CVE--2024--2004-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><8.7.1-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;8.7.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.7.1-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
@@ -833,7 +850,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2024-2379?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C8.7.1-r0"><img alt="unspecified : CVE--2024--2379" src="https://img.shields.io/badge/CVE--2024--2379-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><8.7.1-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;8.7.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.7.1-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
@@ -855,7 +872,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2024-29415?s=github&n=ip&t=npm&vr=%3C%3D2.0.1"><img alt="high 8.1: CVE--2024--29415" src="https://img.shields.io/badge/CVE--2024--29415-lightgrey?label=high%208.1&labelColor=e25d68"/></a> <i>Server-Side Request Forgery (SSRF)</i>
 
 <table>
-<tr><td>Affected range</td><td><code><=2.0.1</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;=2.0.1</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>CVSS Score</td><td><code>8.1</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H</code></td></tr>
@@ -894,7 +911,7 @@ The `isPublic()` function in the NPM package `ip` doesn't correctly identify cer
 <a href="https://scout.docker.com/v/CVE-2022-32149?s=github&n=text&ns=golang.org%2Fx&t=golang&vr=%3C0.3.8"><img alt="high 7.5: CVE--2022--32149" src="https://img.shields.io/badge/CVE--2022--32149-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Missing Release of Resource after Effective Lifetime</i>
 
 <table>
-<tr><td>Affected range</td><td><code><0.3.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.3.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.3.8</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
@@ -915,46 +932,13 @@ golang.org/x/text/language
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>body-parser</strong> <code>1.20.1</code> (npm)</summary>
-
-<small><code>pkg:npm/body-parser@1.20.1</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-45590?s=github&n=body-parser&t=npm&vr=%3C1.20.3"><img alt="high 7.5: CVE--2024--45590" src="https://img.shields.io/badge/CVE--2024--45590-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Asymmetric Resource Consumption (Amplification)</i>
-
-<table>
-<tr><td>Affected range</td><td><code><1.20.3</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.20.3</code></td></tr>
-<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-### Impact
-
-body-parser <1.20.3 is vulnerable to denial of service when url encoding is enabled. A malicious actor using a specially crafted payload could flood the server with a large number of requests, resulting in denial of service.
-
-### Patches
-
-this issue is patched in 1.20.3
-
-### References
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>path-to-regexp</strong> <code>0.1.7</code> (npm)</summary>
 
 <small><code>pkg:npm/path-to-regexp@0.1.7</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2024-45296?s=github&n=path-to-regexp&t=npm&vr=%3C0.1.10"><img alt="high 7.5: CVE--2024--45296" src="https://img.shields.io/badge/CVE--2024--45296-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Inefficient Regular Expression Complexity</i>
 
 <table>
-<tr><td>Affected range</td><td><code><0.1.10</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.1.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.1.10</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
@@ -1008,13 +992,46 @@ Because JavaScript is single threaded and regex matching runs on the main thread
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>body-parser</strong> <code>1.20.1</code> (npm)</summary>
+
+<small><code>pkg:npm/body-parser@1.20.1</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-45590?s=github&n=body-parser&t=npm&vr=%3C1.20.3"><img alt="high 7.5: CVE--2024--45590" src="https://img.shields.io/badge/CVE--2024--45590-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Asymmetric Resource Consumption (Amplification)</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.20.3</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.20.3</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+
+body-parser <1.20.3 is vulnerable to denial of service when url encoding is enabled. A malicious actor using a specially crafted payload could flood the server with a large number of requests, resulting in denial of service.
+
+### Patches
+
+this issue is patched in 1.20.3
+
+### References
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 4" src="https://img.shields.io/badge/M-4-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>busybox</strong> <code>1.36.1-r2</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/busybox@1.36.1-r2?os_name=alpine&os_version=3.18</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2023-42366?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C1.36.1-r6"><img alt="medium : CVE--2023--42366" src="https://img.shields.io/badge/CVE--2023--42366-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.36.1-r6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.36.1-r6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.36.1-r6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
@@ -1031,7 +1048,7 @@ Because JavaScript is single threaded and regex matching runs on the main thread
 <a href="https://scout.docker.com/v/CVE-2023-42365?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C1.36.1-r7"><img alt="medium : CVE--2023--42365" src="https://img.shields.io/badge/CVE--2023--42365-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.36.1-r7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.36.1-r7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.36.1-r7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
@@ -1048,7 +1065,7 @@ Because JavaScript is single threaded and regex matching runs on the main thread
 <a href="https://scout.docker.com/v/CVE-2023-42364?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C1.36.1-r7"><img alt="medium : CVE--2023--42364" src="https://img.shields.io/badge/CVE--2023--42364-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.36.1-r7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.36.1-r7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.36.1-r7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
@@ -1065,7 +1082,7 @@ Because JavaScript is single threaded and regex matching runs on the main thread
 <a href="https://scout.docker.com/v/CVE-2023-42363?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C1.36.1-r7"><img alt="medium : CVE--2023--42363" src="https://img.shields.io/badge/CVE--2023--42363-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.36.1-r7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.36.1-r7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.36.1-r7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
@@ -1087,7 +1104,7 @@ Because JavaScript is single threaded and regex matching runs on the main thread
 <a href="https://scout.docker.com/v/CVE-2024-29041?s=github&n=express&t=npm&vr=%3C4.19.2"><img alt="medium 6.1: CVE--2024--29041" src="https://img.shields.io/badge/CVE--2024--29041-lightgrey?label=medium%206.1&labelColor=fbb552"/></a> <i>Improper Validation of Syntactic Correctness of Input</i>
 
 <table>
-<tr><td>Affected range</td><td><code><4.19.2</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;4.19.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>4.19.2</code></td></tr>
 <tr><td>CVSS Score</td><td><code>6.1</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N</code></td></tr>
@@ -1129,7 +1146,7 @@ https://expressjs.com/en/4x/api.html#res.location
 <a href="https://scout.docker.com/v/CVE-2024-43796?s=github&n=express&t=npm&vr=%3C4.20.0"><img alt="medium 5.0: CVE--2024--43796" src="https://img.shields.io/badge/CVE--2024--43796-lightgrey?label=medium%205.0&labelColor=fbb552"/></a> <i>Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</i>
 
 <table>
-<tr><td>Affected range</td><td><code><4.20.0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;4.20.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>4.20.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:L</code></td></tr>
@@ -1173,7 +1190,7 @@ successful exploitation of this vector requires the following:
 <a href="https://scout.docker.com/v/CVE-2024-28849?s=github&n=follow-redirects&t=npm&vr=%3C%3D1.15.5"><img alt="medium 6.5: CVE--2024--28849" src="https://img.shields.io/badge/CVE--2024--28849-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Exposure of Sensitive Information to an Unauthorized Actor</i>
 
 <table>
-<tr><td>Affected range</td><td><code><=1.15.5</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;=1.15.5</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.15.6</code></td></tr>
 <tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N</code></td></tr>
@@ -1230,7 +1247,7 @@ Remove proxy-authentication header during cross-domain redirect
 <a href="https://scout.docker.com/v/CVE-2023-26159?s=github&n=follow-redirects&t=npm&vr=%3C1.15.4"><img alt="medium 6.1: CVE--2023--26159" src="https://img.shields.io/badge/CVE--2023--26159-lightgrey?label=medium%206.1&labelColor=fbb552"/></a> <i>Improper Input Validation</i>
 
 <table>
-<tr><td>Affected range</td><td><code><1.15.4</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.15.4</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.15.4</code></td></tr>
 <tr><td>CVSS Score</td><td><code>6.1</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N</code></td></tr>
@@ -1254,7 +1271,7 @@ Versions of the package follow-redirects before 1.15.4 are vulnerable to Imprope
 <a href="https://scout.docker.com/v/CVE-2023-36054?s=alpine&n=krb5&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C1.20.2-r0"><img alt="medium : CVE--2023--36054" src="https://img.shields.io/badge/CVE--2023--36054-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.2-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.2-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.2-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.43%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>75th percentile</code></td></tr>
@@ -1263,92 +1280,6 @@ Versions of the package follow-redirects before 1.15.4 are vulnerable to Imprope
 <details><summary>Description</summary>
 <blockquote>
 
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>tar</strong> <code>6.2.0</code> (npm)</summary>
-
-<small><code>pkg:npm/tar@6.2.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-28863?s=github&n=tar&t=npm&vr=%3C6.2.1"><img alt="medium 6.5: CVE--2024--28863" src="https://img.shields.io/badge/CVE--2024--28863-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Uncontrolled Resource Consumption</i>
-
-<table>
-<tr><td>Affected range</td><td><code><6.2.1</code></td></tr>
-<tr><td>Fixed version</td><td><code>6.2.1</code></td></tr>
-<tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-## Description: 
-During some analysis today on npm's `node-tar` package I came across the folder creation process, Basicly if you provide node-tar with a path like this `./a/b/c/foo.txt` it would create every folder and sub-folder here a, b and c until it reaches the last folder to create `foo.txt`, In-this case I noticed that there's no validation at all on the amount of folders being created, that said we're actually able to CPU and memory consume the system running node-tar and even crash the nodejs client within few seconds of running it using a path with too many sub-folders inside
-
-## Steps To Reproduce:
-You can reproduce this issue by downloading the tar file I provided in the resources and using node-tar to extract it, you should get the same behavior as the video
-
-## Proof Of Concept:
-Here's a [video](https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/3i7uojw8s52psar6pg8zkdo4h9io?response-content-disposition=attachment%3B%20filename%3D%22tar-dos-poc.webm%22%3B%20filename%2A%3DUTF-8%27%27tar-dos-poc.webm&response-content-type=video%2Fwebm&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQSWWGDXHA%2F20240312%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240312T080103Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDcaCXVzLXdlc3QtMiJHMEUCID3xYDc6emXVPOg8iVR5dVk0u3gguTPIDJ0OIE%2BKxj17AiEAi%2BGiay1gGMWhH%2F031fvMYnSsa8U7CnpZpxvFAYqNRwgqsQUIQBADGgwwMTM2MTkyNzQ4NDkiDAaj6OgUL3gg4hhLLCqOBUUrOgWSqaK%2FmxN6nKRvB4Who3LIyzswFKm9LV94GiSVFP3zXYA480voCmAHTg7eBL7%2BrYgV2RtXbhF4aCFMCN3qu7GeXkIdH7xwVMi9zXHkekviSKZ%2FsZtVVjn7RFqOCKhJl%2FCoiLQJuDuju%2FtfdTGZbEbGsPgKHoILYbRp81K51zeRL21okjsOehmypkZzq%2BoGrXIX0ynPOKujxw27uqdF4T%2BF9ynodq01vGgwgVBEjHojc4OKOfr1oW5b%2FtGVV59%2BOBVI1hqIKHRG0Ed4SWmp%2BLd1hazGuZPvp52szmegnOj5qr3ubppnKL242bX%2FuAnQKzKK0HpwolqXjsuEeFeM85lxhqHV%2B1BJqaqSHHDa0HUMLZistMRshRlntuchcFQCR6HBa2c8PSnhpVC31zMzvYMfKsI12h4HB6l%2FudrmNrvmH4LmNpi4dZFcio21DzKj%2FRjWmxjH7l8egDyG%2FIgPMY6Ls4IiN7aR1jijYTrBCgPUUHets3BFvqLzHtPFnG3B7%2FYRPnhCLu%2FgzvKN3F8l38KqeTNMHJaxkuhCvEjpFB2SJbi2QZqZZbLj3xASqXoogzbsyPp0Tzp0tH7EKDhPA7H6wwiZukXfFhhlYzP8on9fO2Ajz%2F%2BTDkDjbfWw4KNJ0cFeDsGrUspqQZb5TAKlUge7iOZEc2TZ5uagatSy9Mg08E4nImBSE5QUHDc7Daya1gyqrETMDZBBUHH2RFkGA9qMpEtNrtJ9G%2BPedz%2FpPY1hh9OCp9Pg1BrX97l3SfVzlAMRfNibhywq6qnE35rVnZi%2BEQ1UgBjs9jD%2FQrW49%2FaD0oUDojVeuFFryzRnQxDbKtYgonRcItTvLT5Y0xaK9P0u6H1197%2FMk3XxmjD9%2Fb%2BvBjqxAQWWkKiIxpC1oHEWK9Jt8UdJ39xszDBGpBqjB6Tvt5ePAXSyX8np%2FrBi%2BAPx06O0%2Ba7pU4NmH800EVXxxhgfj9nMw3CeoUIdxorVKtU2Mxw%2FLaAiPgxPS4rqkt65NF7eQYfegcSYDTm2Z%2BHPbz9HfCaVZ28Zqeko6sR%2F29ML4bguqVvHAM4mWPLNDXH33mjG%2BuzLi8e1BF7tNveg2X9G%2FRdcMkojwKYbu6xN3M6aX2alQg%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=1e8235d885f1d61529b7d6b23ea3a0780c300c91d86e925dd8310d5b661ddbe2) show-casing the exploit: 
-
-## Impact
-
-Denial of service by crashing the nodejs client when attempting to parse a tar archive, make it run out of heap memory and consuming server CPU and memory resources
-
-## Report resources
-[payload.txt](https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/1e83ayb5dd3350fvj3gst0mqixwk?response-content-disposition=attachment%3B%20filename%3D%22payload.txt%22%3B%20filename%2A%3DUTF-8%27%27payload.txt&response-content-type=text%2Fplain&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQSWWGDXHA%2F20240312%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240312T080103Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDcaCXVzLXdlc3QtMiJHMEUCID3xYDc6emXVPOg8iVR5dVk0u3gguTPIDJ0OIE%2BKxj17AiEAi%2BGiay1gGMWhH%2F031fvMYnSsa8U7CnpZpxvFAYqNRwgqsQUIQBADGgwwMTM2MTkyNzQ4NDkiDAaj6OgUL3gg4hhLLCqOBUUrOgWSqaK%2FmxN6nKRvB4Who3LIyzswFKm9LV94GiSVFP3zXYA480voCmAHTg7eBL7%2BrYgV2RtXbhF4aCFMCN3qu7GeXkIdH7xwVMi9zXHkekviSKZ%2FsZtVVjn7RFqOCKhJl%2FCoiLQJuDuju%2FtfdTGZbEbGsPgKHoILYbRp81K51zeRL21okjsOehmypkZzq%2BoGrXIX0ynPOKujxw27uqdF4T%2BF9ynodq01vGgwgVBEjHojc4OKOfr1oW5b%2FtGVV59%2BOBVI1hqIKHRG0Ed4SWmp%2BLd1hazGuZPvp52szmegnOj5qr3ubppnKL242bX%2FuAnQKzKK0HpwolqXjsuEeFeM85lxhqHV%2B1BJqaqSHHDa0HUMLZistMRshRlntuchcFQCR6HBa2c8PSnhpVC31zMzvYMfKsI12h4HB6l%2FudrmNrvmH4LmNpi4dZFcio21DzKj%2FRjWmxjH7l8egDyG%2FIgPMY6Ls4IiN7aR1jijYTrBCgPUUHets3BFvqLzHtPFnG3B7%2FYRPnhCLu%2FgzvKN3F8l38KqeTNMHJaxkuhCvEjpFB2SJbi2QZqZZbLj3xASqXoogzbsyPp0Tzp0tH7EKDhPA7H6wwiZukXfFhhlYzP8on9fO2Ajz%2F%2BTDkDjbfWw4KNJ0cFeDsGrUspqQZb5TAKlUge7iOZEc2TZ5uagatSy9Mg08E4nImBSE5QUHDc7Daya1gyqrETMDZBBUHH2RFkGA9qMpEtNrtJ9G%2BPedz%2FpPY1hh9OCp9Pg1BrX97l3SfVzlAMRfNibhywq6qnE35rVnZi%2BEQ1UgBjs9jD%2FQrW49%2FaD0oUDojVeuFFryzRnQxDbKtYgonRcItTvLT5Y0xaK9P0u6H1197%2FMk3XxmjD9%2Fb%2BvBjqxAQWWkKiIxpC1oHEWK9Jt8UdJ39xszDBGpBqjB6Tvt5ePAXSyX8np%2FrBi%2BAPx06O0%2Ba7pU4NmH800EVXxxhgfj9nMw3CeoUIdxorVKtU2Mxw%2FLaAiPgxPS4rqkt65NF7eQYfegcSYDTm2Z%2BHPbz9HfCaVZ28Zqeko6sR%2F29ML4bguqVvHAM4mWPLNDXH33mjG%2BuzLi8e1BF7tNveg2X9G%2FRdcMkojwKYbu6xN3M6aX2alQg%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=bad9fe731f05a63a950f99828125653a8c1254750fe0ca7be882e89ecdd449ae)
-[archeive.tar.gz](https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/ymkuh4xnfdcf1soeyi7jc2x4yt2i?response-content-disposition=attachment%3B%20filename%3D%22archive.tar.gz%22%3B%20filename%2A%3DUTF-8%27%27archive.tar.gz&response-content-type=application%2Fx-tar&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQSWWGDXHA%2F20240312%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240312T080103Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDcaCXVzLXdlc3QtMiJHMEUCID3xYDc6emXVPOg8iVR5dVk0u3gguTPIDJ0OIE%2BKxj17AiEAi%2BGiay1gGMWhH%2F031fvMYnSsa8U7CnpZpxvFAYqNRwgqsQUIQBADGgwwMTM2MTkyNzQ4NDkiDAaj6OgUL3gg4hhLLCqOBUUrOgWSqaK%2FmxN6nKRvB4Who3LIyzswFKm9LV94GiSVFP3zXYA480voCmAHTg7eBL7%2BrYgV2RtXbhF4aCFMCN3qu7GeXkIdH7xwVMi9zXHkekviSKZ%2FsZtVVjn7RFqOCKhJl%2FCoiLQJuDuju%2FtfdTGZbEbGsPgKHoILYbRp81K51zeRL21okjsOehmypkZzq%2BoGrXIX0ynPOKujxw27uqdF4T%2BF9ynodq01vGgwgVBEjHojc4OKOfr1oW5b%2FtGVV59%2BOBVI1hqIKHRG0Ed4SWmp%2BLd1hazGuZPvp52szmegnOj5qr3ubppnKL242bX%2FuAnQKzKK0HpwolqXjsuEeFeM85lxhqHV%2B1BJqaqSHHDa0HUMLZistMRshRlntuchcFQCR6HBa2c8PSnhpVC31zMzvYMfKsI12h4HB6l%2FudrmNrvmH4LmNpi4dZFcio21DzKj%2FRjWmxjH7l8egDyG%2FIgPMY6Ls4IiN7aR1jijYTrBCgPUUHets3BFvqLzHtPFnG3B7%2FYRPnhCLu%2FgzvKN3F8l38KqeTNMHJaxkuhCvEjpFB2SJbi2QZqZZbLj3xASqXoogzbsyPp0Tzp0tH7EKDhPA7H6wwiZukXfFhhlYzP8on9fO2Ajz%2F%2BTDkDjbfWw4KNJ0cFeDsGrUspqQZb5TAKlUge7iOZEc2TZ5uagatSy9Mg08E4nImBSE5QUHDc7Daya1gyqrETMDZBBUHH2RFkGA9qMpEtNrtJ9G%2BPedz%2FpPY1hh9OCp9Pg1BrX97l3SfVzlAMRfNibhywq6qnE35rVnZi%2BEQ1UgBjs9jD%2FQrW49%2FaD0oUDojVeuFFryzRnQxDbKtYgonRcItTvLT5Y0xaK9P0u6H1197%2FMk3XxmjD9%2Fb%2BvBjqxAQWWkKiIxpC1oHEWK9Jt8UdJ39xszDBGpBqjB6Tvt5ePAXSyX8np%2FrBi%2BAPx06O0%2Ba7pU4NmH800EVXxxhgfj9nMw3CeoUIdxorVKtU2Mxw%2FLaAiPgxPS4rqkt65NF7eQYfegcSYDTm2Z%2BHPbz9HfCaVZ28Zqeko6sR%2F29ML4bguqVvHAM4mWPLNDXH33mjG%2BuzLi8e1BF7tNveg2X9G%2FRdcMkojwKYbu6xN3M6aX2alQg%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=5e2c0d4b4de40373ac0fe91908c2659141a6dd4ab850271cc26042a3885c82ea)
-
-## Note
-This report was originally reported to GitHub bug bounty program, they asked me to report it to you a month ago
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>serve-static</strong> <code>1.15.0</code> (npm)</summary>
-
-<small><code>pkg:npm/serve-static@1.15.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-43800?s=github&n=serve-static&t=npm&vr=%3C1.16.0"><img alt="medium 5.0: CVE--2024--43800" src="https://img.shields.io/badge/CVE--2024--43800-lightgrey?label=medium%205.0&labelColor=fbb552"/></a> <i>Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</i>
-
-<table>
-<tr><td>Affected range</td><td><code><1.16.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.16.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-### Impact
-
-passing untrusted user input - even after sanitizing it - to `redirect()` may execute untrusted code
-
-### Patches
-
-this issue is patched in serve-static 1.16.0
-
-### Workarounds
-
-users are encouraged to upgrade to the patched version of express, but otherwise can workaround this issue by making sure any untrusted inputs are safe, ideally by validating them against an explicit allowlist
-
-### Details
-
-successful exploitation of this vector requires the following:
-
-1. The attacker MUST control the input to response.redirect()
-1. express MUST NOT redirect before the template appears
-1. the browser MUST NOT complete redirection before:
-1. the user MUST click on the link in the template
 
 
 </blockquote>
@@ -1417,24 +1348,44 @@ If you have any questions or comments about this advisory please open a discussi
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>axios</strong> <code>0.21.4</code> (npm)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>serve-static</strong> <code>1.15.0</code> (npm)</summary>
 
-<small><code>pkg:npm/axios@0.21.4</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2023-45857?s=github&n=axios&t=npm&vr=%3E%3D0.8.1%2C%3C0.28.0"><img alt="medium 6.5: CVE--2023--45857" src="https://img.shields.io/badge/CVE--2023--45857-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Cross-Site Request Forgery (CSRF)</i>
+<small><code>pkg:npm/serve-static@1.15.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-43800?s=github&n=serve-static&t=npm&vr=%3C1.16.0"><img alt="medium 5.0: CVE--2024--43800" src="https://img.shields.io/badge/CVE--2024--43800-lightgrey?label=medium%205.0&labelColor=fbb552"/></a> <i>Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</i>
 
 <table>
-<tr><td>Affected range</td><td><code>>=0.8.1<br/><0.28.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.6.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.06%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.16.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.16.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-An issue discovered in Axios 0.8.1 through 1.5.1 inadvertently reveals the confidential XSRF-TOKEN stored in cookies by including it in the HTTP header X-XSRF-TOKEN for every request made to any host allowing attackers to view sensitive information.
+### Impact
+
+passing untrusted user input - even after sanitizing it - to `redirect()` may execute untrusted code
+
+### Patches
+
+this issue is patched in serve-static 1.16.0
+
+### Workarounds
+
+users are encouraged to upgrade to the patched version of express, but otherwise can workaround this issue by making sure any untrusted inputs are safe, ideally by validating them against an explicit allowlist
+
+### Details
+
+successful exploitation of this vector requires the following:
+
+1. The attacker MUST control the input to response.redirect()
+1. express MUST NOT redirect before the template appears
+1. the browser MUST NOT complete redirection before:
+1. the user MUST click on the link in the template
+
 
 </blockquote>
 </details>
@@ -1447,7 +1398,7 @@ An issue discovered in Axios 0.8.1 through 1.5.1 inadvertently reveals the confi
 <a href="https://scout.docker.com/v/CVE-2024-28863?s=github&n=tar&t=npm&vr=%3C6.2.1"><img alt="medium 6.5: CVE--2024--28863" src="https://img.shields.io/badge/CVE--2024--28863-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Uncontrolled Resource Consumption</i>
 
 <table>
-<tr><td>Affected range</td><td><code><6.2.1</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;6.2.1</code></td></tr>
 <tr><td>Fixed version</td><td><code>6.2.1</code></td></tr>
 <tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H</code></td></tr>
@@ -1483,13 +1434,37 @@ This report was originally reported to GitHub bug bounty program, they asked me 
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>axios</strong> <code>0.21.4</code> (npm)</summary>
+
+<small><code>pkg:npm/axios@0.21.4</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2023-45857?s=github&n=axios&t=npm&vr=%3E%3D0.8.1%2C%3C0.28.0"><img alt="medium 6.5: CVE--2023--45857" src="https://img.shields.io/badge/CVE--2023--45857-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Cross-Site Request Forgery (CSRF)</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=0.8.1<br/><0.28.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.6.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.06%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+An issue discovered in Axios 0.8.1 through 1.5.1 inadvertently reveals the confidential XSRF-TOKEN stored in cookies by including it in the HTTP header X-XSRF-TOKEN for every request made to any host allowing attackers to view sensitive information.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>send</strong> <code>0.18.0</code> (npm)</summary>
 
 <small><code>pkg:npm/send@0.18.0</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2024-43799?s=github&n=send&t=npm&vr=%3C0.19.0"><img alt="medium 5.0: CVE--2024--43799" src="https://img.shields.io/badge/CVE--2024--43799-lightgrey?label=medium%205.0&labelColor=fbb552"/></a> <i>Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</i>
 
 <table>
-<tr><td>Affected range</td><td><code><0.19.0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.19.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.19.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:L</code></td></tr>
@@ -1527,13 +1502,55 @@ successful exploitation of this vector requires the following:
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>tar</strong> <code>6.2.0</code> (npm)</summary>
+
+<small><code>pkg:npm/tar@6.2.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-28863?s=github&n=tar&t=npm&vr=%3C6.2.1"><img alt="medium 6.5: CVE--2024--28863" src="https://img.shields.io/badge/CVE--2024--28863-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Uncontrolled Resource Consumption</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;6.2.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>6.2.1</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+## Description: 
+During some analysis today on npm's `node-tar` package I came across the folder creation process, Basicly if you provide node-tar with a path like this `./a/b/c/foo.txt` it would create every folder and sub-folder here a, b and c until it reaches the last folder to create `foo.txt`, In-this case I noticed that there's no validation at all on the amount of folders being created, that said we're actually able to CPU and memory consume the system running node-tar and even crash the nodejs client within few seconds of running it using a path with too many sub-folders inside
+
+## Steps To Reproduce:
+You can reproduce this issue by downloading the tar file I provided in the resources and using node-tar to extract it, you should get the same behavior as the video
+
+## Proof Of Concept:
+Here's a [video](https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/3i7uojw8s52psar6pg8zkdo4h9io?response-content-disposition=attachment%3B%20filename%3D%22tar-dos-poc.webm%22%3B%20filename%2A%3DUTF-8%27%27tar-dos-poc.webm&response-content-type=video%2Fwebm&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQSWWGDXHA%2F20240312%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240312T080103Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDcaCXVzLXdlc3QtMiJHMEUCID3xYDc6emXVPOg8iVR5dVk0u3gguTPIDJ0OIE%2BKxj17AiEAi%2BGiay1gGMWhH%2F031fvMYnSsa8U7CnpZpxvFAYqNRwgqsQUIQBADGgwwMTM2MTkyNzQ4NDkiDAaj6OgUL3gg4hhLLCqOBUUrOgWSqaK%2FmxN6nKRvB4Who3LIyzswFKm9LV94GiSVFP3zXYA480voCmAHTg7eBL7%2BrYgV2RtXbhF4aCFMCN3qu7GeXkIdH7xwVMi9zXHkekviSKZ%2FsZtVVjn7RFqOCKhJl%2FCoiLQJuDuju%2FtfdTGZbEbGsPgKHoILYbRp81K51zeRL21okjsOehmypkZzq%2BoGrXIX0ynPOKujxw27uqdF4T%2BF9ynodq01vGgwgVBEjHojc4OKOfr1oW5b%2FtGVV59%2BOBVI1hqIKHRG0Ed4SWmp%2BLd1hazGuZPvp52szmegnOj5qr3ubppnKL242bX%2FuAnQKzKK0HpwolqXjsuEeFeM85lxhqHV%2B1BJqaqSHHDa0HUMLZistMRshRlntuchcFQCR6HBa2c8PSnhpVC31zMzvYMfKsI12h4HB6l%2FudrmNrvmH4LmNpi4dZFcio21DzKj%2FRjWmxjH7l8egDyG%2FIgPMY6Ls4IiN7aR1jijYTrBCgPUUHets3BFvqLzHtPFnG3B7%2FYRPnhCLu%2FgzvKN3F8l38KqeTNMHJaxkuhCvEjpFB2SJbi2QZqZZbLj3xASqXoogzbsyPp0Tzp0tH7EKDhPA7H6wwiZukXfFhhlYzP8on9fO2Ajz%2F%2BTDkDjbfWw4KNJ0cFeDsGrUspqQZb5TAKlUge7iOZEc2TZ5uagatSy9Mg08E4nImBSE5QUHDc7Daya1gyqrETMDZBBUHH2RFkGA9qMpEtNrtJ9G%2BPedz%2FpPY1hh9OCp9Pg1BrX97l3SfVzlAMRfNibhywq6qnE35rVnZi%2BEQ1UgBjs9jD%2FQrW49%2FaD0oUDojVeuFFryzRnQxDbKtYgonRcItTvLT5Y0xaK9P0u6H1197%2FMk3XxmjD9%2Fb%2BvBjqxAQWWkKiIxpC1oHEWK9Jt8UdJ39xszDBGpBqjB6Tvt5ePAXSyX8np%2FrBi%2BAPx06O0%2Ba7pU4NmH800EVXxxhgfj9nMw3CeoUIdxorVKtU2Mxw%2FLaAiPgxPS4rqkt65NF7eQYfegcSYDTm2Z%2BHPbz9HfCaVZ28Zqeko6sR%2F29ML4bguqVvHAM4mWPLNDXH33mjG%2BuzLi8e1BF7tNveg2X9G%2FRdcMkojwKYbu6xN3M6aX2alQg%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=1e8235d885f1d61529b7d6b23ea3a0780c300c91d86e925dd8310d5b661ddbe2) show-casing the exploit: 
+
+## Impact
+
+Denial of service by crashing the nodejs client when attempting to parse a tar archive, make it run out of heap memory and consuming server CPU and memory resources
+
+## Report resources
+[payload.txt](https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/1e83ayb5dd3350fvj3gst0mqixwk?response-content-disposition=attachment%3B%20filename%3D%22payload.txt%22%3B%20filename%2A%3DUTF-8%27%27payload.txt&response-content-type=text%2Fplain&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQSWWGDXHA%2F20240312%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240312T080103Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDcaCXVzLXdlc3QtMiJHMEUCID3xYDc6emXVPOg8iVR5dVk0u3gguTPIDJ0OIE%2BKxj17AiEAi%2BGiay1gGMWhH%2F031fvMYnSsa8U7CnpZpxvFAYqNRwgqsQUIQBADGgwwMTM2MTkyNzQ4NDkiDAaj6OgUL3gg4hhLLCqOBUUrOgWSqaK%2FmxN6nKRvB4Who3LIyzswFKm9LV94GiSVFP3zXYA480voCmAHTg7eBL7%2BrYgV2RtXbhF4aCFMCN3qu7GeXkIdH7xwVMi9zXHkekviSKZ%2FsZtVVjn7RFqOCKhJl%2FCoiLQJuDuju%2FtfdTGZbEbGsPgKHoILYbRp81K51zeRL21okjsOehmypkZzq%2BoGrXIX0ynPOKujxw27uqdF4T%2BF9ynodq01vGgwgVBEjHojc4OKOfr1oW5b%2FtGVV59%2BOBVI1hqIKHRG0Ed4SWmp%2BLd1hazGuZPvp52szmegnOj5qr3ubppnKL242bX%2FuAnQKzKK0HpwolqXjsuEeFeM85lxhqHV%2B1BJqaqSHHDa0HUMLZistMRshRlntuchcFQCR6HBa2c8PSnhpVC31zMzvYMfKsI12h4HB6l%2FudrmNrvmH4LmNpi4dZFcio21DzKj%2FRjWmxjH7l8egDyG%2FIgPMY6Ls4IiN7aR1jijYTrBCgPUUHets3BFvqLzHtPFnG3B7%2FYRPnhCLu%2FgzvKN3F8l38KqeTNMHJaxkuhCvEjpFB2SJbi2QZqZZbLj3xASqXoogzbsyPp0Tzp0tH7EKDhPA7H6wwiZukXfFhhlYzP8on9fO2Ajz%2F%2BTDkDjbfWw4KNJ0cFeDsGrUspqQZb5TAKlUge7iOZEc2TZ5uagatSy9Mg08E4nImBSE5QUHDc7Daya1gyqrETMDZBBUHH2RFkGA9qMpEtNrtJ9G%2BPedz%2FpPY1hh9OCp9Pg1BrX97l3SfVzlAMRfNibhywq6qnE35rVnZi%2BEQ1UgBjs9jD%2FQrW49%2FaD0oUDojVeuFFryzRnQxDbKtYgonRcItTvLT5Y0xaK9P0u6H1197%2FMk3XxmjD9%2Fb%2BvBjqxAQWWkKiIxpC1oHEWK9Jt8UdJ39xszDBGpBqjB6Tvt5ePAXSyX8np%2FrBi%2BAPx06O0%2Ba7pU4NmH800EVXxxhgfj9nMw3CeoUIdxorVKtU2Mxw%2FLaAiPgxPS4rqkt65NF7eQYfegcSYDTm2Z%2BHPbz9HfCaVZ28Zqeko6sR%2F29ML4bguqVvHAM4mWPLNDXH33mjG%2BuzLi8e1BF7tNveg2X9G%2FRdcMkojwKYbu6xN3M6aX2alQg%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=bad9fe731f05a63a950f99828125653a8c1254750fe0ca7be882e89ecdd449ae)
+[archeive.tar.gz](https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/ymkuh4xnfdcf1soeyi7jc2x4yt2i?response-content-disposition=attachment%3B%20filename%3D%22archive.tar.gz%22%3B%20filename%2A%3DUTF-8%27%27archive.tar.gz&response-content-type=application%2Fx-tar&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQSWWGDXHA%2F20240312%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240312T080103Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDcaCXVzLXdlc3QtMiJHMEUCID3xYDc6emXVPOg8iVR5dVk0u3gguTPIDJ0OIE%2BKxj17AiEAi%2BGiay1gGMWhH%2F031fvMYnSsa8U7CnpZpxvFAYqNRwgqsQUIQBADGgwwMTM2MTkyNzQ4NDkiDAaj6OgUL3gg4hhLLCqOBUUrOgWSqaK%2FmxN6nKRvB4Who3LIyzswFKm9LV94GiSVFP3zXYA480voCmAHTg7eBL7%2BrYgV2RtXbhF4aCFMCN3qu7GeXkIdH7xwVMi9zXHkekviSKZ%2FsZtVVjn7RFqOCKhJl%2FCoiLQJuDuju%2FtfdTGZbEbGsPgKHoILYbRp81K51zeRL21okjsOehmypkZzq%2BoGrXIX0ynPOKujxw27uqdF4T%2BF9ynodq01vGgwgVBEjHojc4OKOfr1oW5b%2FtGVV59%2BOBVI1hqIKHRG0Ed4SWmp%2BLd1hazGuZPvp52szmegnOj5qr3ubppnKL242bX%2FuAnQKzKK0HpwolqXjsuEeFeM85lxhqHV%2B1BJqaqSHHDa0HUMLZistMRshRlntuchcFQCR6HBa2c8PSnhpVC31zMzvYMfKsI12h4HB6l%2FudrmNrvmH4LmNpi4dZFcio21DzKj%2FRjWmxjH7l8egDyG%2FIgPMY6Ls4IiN7aR1jijYTrBCgPUUHets3BFvqLzHtPFnG3B7%2FYRPnhCLu%2FgzvKN3F8l38KqeTNMHJaxkuhCvEjpFB2SJbi2QZqZZbLj3xASqXoogzbsyPp0Tzp0tH7EKDhPA7H6wwiZukXfFhhlYzP8on9fO2Ajz%2F%2BTDkDjbfWw4KNJ0cFeDsGrUspqQZb5TAKlUge7iOZEc2TZ5uagatSy9Mg08E4nImBSE5QUHDc7Daya1gyqrETMDZBBUHH2RFkGA9qMpEtNrtJ9G%2BPedz%2FpPY1hh9OCp9Pg1BrX97l3SfVzlAMRfNibhywq6qnE35rVnZi%2BEQ1UgBjs9jD%2FQrW49%2FaD0oUDojVeuFFryzRnQxDbKtYgonRcItTvLT5Y0xaK9P0u6H1197%2FMk3XxmjD9%2Fb%2BvBjqxAQWWkKiIxpC1oHEWK9Jt8UdJ39xszDBGpBqjB6Tvt5ePAXSyX8np%2FrBi%2BAPx06O0%2Ba7pU4NmH800EVXxxhgfj9nMw3CeoUIdxorVKtU2Mxw%2FLaAiPgxPS4rqkt65NF7eQYfegcSYDTm2Z%2BHPbz9HfCaVZ28Zqeko6sR%2F29ML4bguqVvHAM4mWPLNDXH33mjG%2BuzLi8e1BF7tNveg2X9G%2FRdcMkojwKYbu6xN3M6aX2alQg%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=5e2c0d4b4de40373ac0fe91908c2659141a6dd4ab850271cc26042a3885c82ea)
+
+## Note
+This report was originally reported to GitHub bug bounty program, they asked me to report it to you a month ago
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>cookie</strong> <code>0.5.0</code> (npm)</summary>
 
 <small><code>pkg:npm/cookie@0.5.0</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2024-47764?s=github&n=cookie&t=npm&vr=%3C0.7.0"><img alt="low : CVE--2024--47764" src="https://img.shields.io/badge/CVE--2024--47764-lightgrey?label=low%20&labelColor=fce1a9"/></a> <i>Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')</i>
 
 <table>
-<tr><td>Affected range</td><td><code><0.7.0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.7.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.7.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
