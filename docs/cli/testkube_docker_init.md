@@ -16,10 +16,10 @@ testkube docker init [flags]
 ```
       --agent-prefix string             usually don't need to be changed [required for custom cloud mode] (default "agent")
       --agent-token string              Testkube Pro agent key [required for centralized mode]
-      --agent-uri string                Testkube Pro agent URI [required for centralized mode]
+      --agent-uri string                Testkube Pro agent URI [required for centralized mode] (default "agent.testkube.io:443")
       --api-prefix string               usually don't need to be changed [required for custom cloud mode] (default "api")
       --docker-container string         Docker container name for Testkube Docker Agent (default "testkube-agent")
-      --docker-image string             Docker image for Testkube Docker Agent (default "kubeshop/testkube-agent:2.1.41")
+      --docker-image string             Docker image for Testkube Docker Agent (default "kubeshop/testkube-agent:2.1.44")
       --env-id string                   Testkube Pro environment id [required for centralized mode]. It can be skipped for no login mode
       --feature-logs-v2                 Logs v2 feature flag
   -h, --help                            help for init
