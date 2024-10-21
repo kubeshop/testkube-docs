@@ -17,6 +17,9 @@ const config = {
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/logo.svg",
+  markdown: {
+    format: 'detect',
+  },
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
