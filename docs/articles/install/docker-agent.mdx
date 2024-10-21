@@ -1,6 +1,6 @@
 # Testkube Docker Agent
 
-The Testkube Docker Agent provides a convenient way to evaluate Testkube Cloud and can be run directly under
+The Testkube Docker Agent provides a convenient way to evaluate Testkube as it allows you to run the Testkube Agent directly under
 Docker without having to install or manage your own Kubernetes distribution.
 
 :::info
@@ -22,10 +22,13 @@ If you prefer to use your own local Kubernetes cluster for the Testkube Agent, h
 
 ## Installation
 
+You can install the Docker Agent either using the Testkube CLI or directly with docker. Please note that both approaches can
+take some time during the initial installation.
+
 ### With Testkube CLI
 
 Installing the Docker Agent with the Testkube CLI has the advantage of automatically configuring the CLI to work
-with the Docker Agent, which would otherwise have to be done with the testkube set context command.
+with the Docker Agent, which would otherwise have to be done with the `testkube set context` command as [shown below](#using-the-testkube-cli-with-the-docker-agent).
 
 1. Install the Testkube CLI as described at [Installing the CLI](/articles/install/cli)
 2. Run the below command:
@@ -44,13 +47,14 @@ Install the Testkube Agent using `docker run` with arguments provided in the Tes
 docker run --name=docker-testkube-agent -d --privileged -e AGENT_KEY=tkcagnt_XXX -e CLOUD_URL=agent.testkube.io:443 kubeshop/testkube-agent
 ```
 
-(Starting the Agent the first time can take a couple of minutes)
-
-:::note
-The `--privileged` flag is required for the Agent Docker Image to provision its own Kubernetes runtime environment.
+:::info
+- The `--privileged` flag is required for the Agent to provision its own Kubernetes runtime environment.
+- The `-d` flag is optional and runs the Agent in the detached mode - [Read More](https://docs.docker.com/reference/cli/docker/container/run/#detach).
 :::
 
 Once running, the Agent will connect to the Testkube Control Plane and be available for running your Workflows.
+
+## Working with the Docker Agent
 
 ### Checking Agent Status
 
@@ -82,7 +86,7 @@ docker stop <name>
 docker start <name>
 ```
 
-## Using the Testkube CLI with the Docker Agent
+### Using the Testkube CLI with the Docker Agent
 
 To connect the Testkube CLI to the Testkube Agent running in Docker you will need to create an API Key
 and then use that with the `testkube set context` command provided in the

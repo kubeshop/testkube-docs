@@ -8,7 +8,7 @@ You can install Testkube in your own infrastructure by using one of the followin
 
 - Use [the Testkube CLI][testkube-cli] for an out-of-the-box experience.
 - Use [the Testkube Helm Chart][testkube-helm] to further customize deployment.
-- Use [the Testkibe Docker Agent][docker-agent] for a quick way to install the Testkube Agent for usage with Testkube Cloud.
+- Use [the Testkube Docker Agent][docker-agent] for a quick way to install the Testkube Agent for usage with Testkube Cloud.
 
 :::tip
 If you're just interested in getting an initial overview of Testkube, please check out the 
