@@ -56,9 +56,84 @@ The enhanced visualization of JUnit reports in Testkube offers several advantage
 
 By leveraging these visualization features, teams can more effectively monitor test outcomes, identify issues, and maintain the quality of their software throughout the development lifecycle.
 
+## Creating JUnit Reports
+
+See the examples below for how to create JUnit reports with some of the most common functional testing tools. 
+
+:::info
+Always make sure that the generated reports are also included in the corresponding [`artifacts`](/articles/test-workflows-artifacts) property for Testkube to find and process
+them as described above.
+:::
+
+### Playwright
+
+Add the `--reporter=junit` argument:
+
+```
+npx playwright test --reporter=junit
+```
+
+Read more in the [Playwright Docs](https://playwright.dev/docs/test-reporters#junit-reporter).
+
+### Postman
+
+Add the `junit` reporter to the `-r` argument and specify the output file with `--reporter-junit-export`: 
+
+```
+newman run my-collection.json -r cli,junit --reporter-junit-export /data/artifacts/junit-report.xml
+```
+
+Read more in the [Newman Docs](https://learning.postman.com/docs/collections/using-newman-cli/newman-built-in-reporters/)
+
+### Cypress
+
+Add the `--reporter` and `--reporter-options` arguments:
+
+```
+cypress run --reporter junit --reporter-options "mochaFile=results/my-test-output-[hash].xml"
+```
+
+Read more in the [Cypress Docs](https://docs.cypress.io/guides/tooling/reporters).
+
+### Pytest
+
+Add the `--junit-xml` argument:
+
+```
+pytest tests --junit-xml=/data/artifacts/pytest-report.xml
+```
+
+Read more in the [Pytest docs](https://docs.pytest.org/en/stable/how-to/output.html#creating-junitxml-format-files).
+
+### JUnit / TestNG with Maven
+
+Make sure you have the surefire plugin added to your pom.xml file: 
+
+```xml
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.0</version>
+            </plugin>
+
+            ...
+        </plugins>
+    </build>
+```
+
+When you run the test goal the corresponding junit xml files will be generated into the target/surefire-reports folder:
+
+```
+mvn test
+```
+
+Read more in the [Surefire Plugin docs](https://maven.apache.org/surefire/maven-surefire-plugin/)
+
 ## Conclusion
 
-Testkube's JUnit report processing and visualization features provide a powerful toolset for managing and analyzing test results.  
-By automatically extracting data from JUnit XML reports and presenting it in both summary and detailed views, Testkube enables teams to gain valuable insights into their test workflows quickly and efficiently.
+Testkubes JUnit report processing and visualization features provide a powerful toolset for managing and analyzing test 
+results. By automatically extracting data from JUnit XML reports and presenting it in both summary and detailed views, Testkube enables teams to gain valuable insights into their test workflows quickly and efficiently.
 
 For more information on related features, check out our [Test Insights Reporting](/articles/test-insights#test-reports) documentation.
