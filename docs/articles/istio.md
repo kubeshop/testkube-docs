@@ -52,28 +52,12 @@ testkube-api:
         sidecar.istio.io/inject: "false"
 ```
 
-#### Disable Istio for Agent Hooks
-
-Chart `testkube`:
-
-```yaml
-preUpgradeHook:
-    podAnnotations:
-        sidecar.istio.io/inject: "false"
-preUpgradeHookNATS:
-    podAnnotations:
-        sidecar.istio.io/inject: "false"
-```
-
 #### Disable Istio for Operator Hooks
 
 Chart `testkube`:
 
 ```yaml
 testkube-operator:
-    preUpgrade:
-        podAnnotations:
-            sidecar.istio.io/inject: "false"
     webhook:
         patch:
             podAnnotations:
