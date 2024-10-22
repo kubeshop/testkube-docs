@@ -58,7 +58,7 @@ By leveraging these visualization features, teams can more effectively monitor t
 
 ## Creating JUnit Reports
 
-See the examples below for how to create JUnit reports with some of the most common functional testing tools. 
+See the examples below for how to create JUnit reports with some of the most common functional testing tools.
 
 :::info
 Always make sure that the generated reports are also included in the corresponding [`artifacts`](/articles/test-workflows-artifacts) property for Testkube to find and process
@@ -77,7 +77,7 @@ Read more in the [Playwright Docs](https://playwright.dev/docs/test-reporters#ju
 
 ### Postman
 
-Add the `junit` reporter to the `-r` argument and specify the output file with `--reporter-junit-export`: 
+Add the `junit` reporter to the `-r` argument and specify the output file with `--reporter-junit-export`:
 
 ```
 newman run my-collection.json -r cli,junit --reporter-junit-export /data/artifacts/junit-report.xml
@@ -107,7 +107,7 @@ Read more in the [Pytest docs](https://docs.pytest.org/en/stable/how-to/output.h
 
 ### JUnit / TestNG with Maven
 
-Make sure you have the surefire plugin added to your pom.xml file: 
+Make sure you have the surefire plugin added to your pom.xml file:
 
 ```xml
     <build>
@@ -131,9 +131,108 @@ mvn test
 
 Read more in the [Surefire Plugin docs](https://maven.apache.org/surefire/maven-surefire-plugin/)
 
+### Go
+
+Install the `go-junit-report` tool to convert Go test output to JUnit format:
+
+```
+go install github.com/jstemmer/go-junit-report/v2@latest
+```
+
+Run your tests and pipe the output through `go-junit-report` to generate the JUnit XML file:
+
+```
+go test -v 2>&1 ./... | go-junit-report -iocopy -set-exit-code -out /data/artifacts/junit-report.xml
+```
+
+The flags used above:
+
+- `-iocopy`: Copies stdin to stdout, useful for seeing test output in real-time
+- `-set-exit-code`: Exits with non-zero code if tests fail
+- `-out`: Specifies the output file location
+
+Read more in the [go-junit-report docs](https://github.com/jstemmer/go-junit-report).
+
+### Jest
+
+Add the `jest-junit` reporter package to your project:
+
+```
+npm install --save-dev jest-junit
+```
+
+Configure the reporter in your Jest config:
+
+```
+{
+  "reporters": [ "default", "jest-junit" ]
+}
+```
+
+Then run Jest normally to generate the report:
+
+```
+jest
+```
+
+For CI environments, you can explicitly specify the reporters:
+
+```
+jest --ci --reporters=default --reporters=jest-junit
+```
+
+Read more in the [jest-junit docs](https://www.npmjs.com/package/jest-junit).
+
+### Mocha
+
+Install the Mocha JUnit reporter either locally:
+
+```
+npm install mocha-junit-reporter --save-dev
+```
+
+or globally:
+
+```
+npm install -g mocha-junit-reporter
+```
+
+Run Mocha with the JUnit reporter:
+
+```
+mocha test --reporter mocha-junit-reporter
+```
+
+By default, this creates `test-results.xml` in the current directory. You can specify a custom location for the report file in several ways:
+
+Using an environment variable:
+
+```
+MOCHA_FILE=./path_to_your/file.xml mocha test --reporter mocha-junit-reporter
+```
+
+Using reporter options:
+
+```
+mocha test --reporter mocha-junit-reporter --reporter-options mochaFile=./path_to_your/file.xml
+```
+
+Or programmatically:
+
+```javascript
+var mocha = new Mocha({
+  reporter: "mocha-junit-reporter",
+  reporterOptions: {
+    mochaFile: "./path_to_your/file.xml",
+  },
+});
+```
+
+Read more in the [mocha-junit-reporter docs](https://www.npmjs.com/package/mocha-junit-reporter).
+
 ## Conclusion
 
-Testkubes JUnit report processing and visualization features provide a powerful toolset for managing and analyzing test 
+Testkubes JUnit report processing and visualization features provide a powerful toolset for managing and analyzing test
 results. By automatically extracting data from JUnit XML reports and presenting it in both summary and detailed views, Testkube enables teams to gain valuable insights into their test workflows quickly and efficiently.
 
 For more information on related features, check out our [Test Insights Reporting](/articles/test-insights#test-reports) documentation.
