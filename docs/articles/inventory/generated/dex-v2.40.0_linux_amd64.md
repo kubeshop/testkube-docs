@@ -46,7 +46,7 @@ The various Is methods (IsPrivate, IsLoopback, etc) did not work as expected for
 <tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -63,7 +63,7 @@ Calling Parse on a "// +build" build tag line with deeply nested expressions can
 <tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -80,7 +80,7 @@ Calling Decoder.Decode on a message which contains deeply nested structures can 
 <tr><td>Affected range</td><td><code>>=1.22.0-0<br/><1.22.5</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.5</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -133,7 +133,7 @@ The archive/zip package's handling of certain types of invalid zip files differs
 <tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -199,7 +199,7 @@ FROM alpine:3.20.0@sha256:77726ef6b57ddf65bb551896826ec38bc3e53f75cdde31354fbffb
 <tr><td>Affected range</td><td><code>&lt;3.3.2-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.3.2-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
