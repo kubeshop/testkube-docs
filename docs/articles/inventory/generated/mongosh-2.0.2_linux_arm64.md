@@ -905,39 +905,6 @@ The `isPublic()` function in the NPM package `ip` doesn't correctly identify cer
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>body-parser</strong> <code>1.20.1</code> (npm)</summary>
-
-<small><code>pkg:npm/body-parser@1.20.1</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-45590?s=github&n=body-parser&t=npm&vr=%3C1.20.3"><img alt="high 7.5: CVE--2024--45590" src="https://img.shields.io/badge/CVE--2024--45590-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Asymmetric Resource Consumption (Amplification)</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.20.3</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.20.3</code></td></tr>
-<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-### Impact
-
-body-parser <1.20.3 is vulnerable to denial of service when url encoding is enabled. A malicious actor using a specially crafted payload could flood the server with a large number of requests, resulting in denial of service.
-
-### Patches
-
-this issue is patched in 1.20.3
-
-### References
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>path-to-regexp</strong> <code>0.1.7</code> (npm)</summary>
 
 <small><code>pkg:npm/path-to-regexp@0.1.7</code></small><br/>
@@ -992,6 +959,39 @@ Because JavaScript is single threaded and regex matching runs on the main thread
 
 * [OWASP](https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS)
 * [Detailed blog post](https://blakeembrey.com/posts/2024-09-web-redos/)
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>body-parser</strong> <code>1.20.1</code> (npm)</summary>
+
+<small><code>pkg:npm/body-parser@1.20.1</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-45590?s=github&n=body-parser&t=npm&vr=%3C1.20.3"><img alt="high 7.5: CVE--2024--45590" src="https://img.shields.io/badge/CVE--2024--45590-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Asymmetric Resource Consumption (Amplification)</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.20.3</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.20.3</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+
+body-parser <1.20.3 is vulnerable to denial of service when url encoding is enabled. A malicious actor using a specially crafted payload could flood the server with a large number of requests, resulting in denial of service.
+
+### Patches
+
+this issue is patched in 1.20.3
+
+### References
+
 
 </blockquote>
 </details>
@@ -1265,33 +1265,70 @@ Versions of the package follow-redirects before 1.15.4 are vulnerable to Imprope
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>axios</strong> <code>0.21.4</code> (npm)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>jose</strong> <code>4.15.4</code> (npm)</summary>
 
-<small><code>pkg:npm/axios@0.21.4</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2023-45857?s=github&n=axios&t=npm&vr=%3E%3D0.8.1%2C%3C0.28.0"><img alt="medium 6.5: CVE--2023--45857" src="https://img.shields.io/badge/CVE--2023--45857-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Cross-Site Request Forgery (CSRF)</i>
+<small><code>pkg:npm/jose@4.15.4</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-28176?s=github&n=jose&t=npm&vr=%3E%3D3.0.0%2C%3C%3D4.15.4"><img alt="medium 5.3: CVE--2024--28176" src="https://img.shields.io/badge/CVE--2024--28176-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Uncontrolled Resource Consumption</i>
 
 <table>
-<tr><td>Affected range</td><td><code>>=0.8.1<br/><0.28.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.6.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.06%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>>=3.0.0<br/><=4.15.4</code></td></tr>
+<tr><td>Fixed version</td><td><code>4.15.5</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-An issue discovered in Axios 0.8.1 through 1.5.1 inadvertently reveals the confidential XSRF-TOKEN stored in cookies by including it in the HTTP header X-XSRF-TOKEN for every request made to any host allowing attackers to view sensitive information.
+A vulnerability has been identified in the JSON Web Encryption (JWE) decryption interfaces, specifically related to the [support for decompressing plaintext after its decryption](https://www.rfc-editor.org/rfc/rfc7516.html#section-4.1.3). This allows an adversary to exploit specific scenarios where the compression ratio becomes exceptionally high. As a result, the length of the JWE token, which is determined by the compressed content's size, can land below application-defined limits. In such cases, other existing application level mechanisms for preventing resource exhaustion may be rendered ineffective.
+
+Note that as per [RFC 8725](https://www.rfc-editor.org/rfc/rfc8725.html#name-avoid-compression-of-encryp) compression of data SHOULD NOT be done before encryption, because such compressed data often reveals information about the plaintext. For this reason the v5.x major version of `jose` removed support for compressed payloads entirely and is therefore NOT affected by this advisory.
+
+### Impact
+
+Under certain conditions it is possible to have the user's environment consume unreasonable amount of CPU time or memory during JWE Decryption operations.
+
+### Affected users
+
+The impact is limited only to Node.js users utilizing the JWE decryption APIs to decrypt JWEs from untrusted sources.
+
+You are NOT affected if any of the following applies to you
+
+- Your code uses jose version v5.x where JWE Compression is not supported anymore
+- Your code runs in an environment other than Node.js (e.g. Deno, CF Workers), which is the only runtime where JWE Compression is implemented out of the box
+- Your code does not use the JWE decryption APIs
+- Your code only accepts JWEs produced by trusted sources
+
+### Patches
+
+`v2.0.7` and `v4.15.5` releases limit the decompression routine to only allow decompressing up to 250 kB of plaintext. In v4.x it is possible to further adjust this limit via the `inflateRaw` decryption option implementation. In v2.x it is possible to further adjust this limit via the `inflateRawSyncLimit` decryption option.
+
+### Workarounds
+
+If you cannot upgrade and do not want to support compressed JWEs you may detect and reject these tokens early by checking the token's protected header
+
+```js
+const { zip } = jose.decodeProtectedHeader(token)
+if (zip !== undefined) {
+  throw new Error('JWE Compression is not supported')
+}
+```
+
+If you wish to continue supporting JWEs with compressed payloads in these legacy release lines you must upgrade (v1.x and v2.x to version v2.0.7, v3.x and v4.x to version v4.15.5) and review the limits put forth by the patched releases.
+
+### For more information
+If you have any questions or comments about this advisory please open a discussion in the project's [repository](https://github.com/panva/jose/discussions/new?category=q-a&title=GHSA-hhhv-q57g-882q%20advisory%20question)
 
 </blockquote>
 </details>
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>tar</strong> <code>6.2.0</code> (npm)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>tar</strong> <code>6.1.15</code> (npm)</summary>
 
-<small><code>pkg:npm/tar@6.2.0</code></small><br/>
+<small><code>pkg:npm/tar@6.1.15</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2024-28863?s=github&n=tar&t=npm&vr=%3C6.2.1"><img alt="medium 6.5: CVE--2024--28863" src="https://img.shields.io/badge/CVE--2024--28863-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Uncontrolled Resource Consumption</i>
 
 <table>
@@ -1331,9 +1368,97 @@ This report was originally reported to GitHub bug bounty program, they asked me 
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>tar</strong> <code>6.1.15</code> (npm)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>serve-static</strong> <code>1.15.0</code> (npm)</summary>
 
-<small><code>pkg:npm/tar@6.1.15</code></small><br/>
+<small><code>pkg:npm/serve-static@1.15.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-43800?s=github&n=serve-static&t=npm&vr=%3C1.16.0"><img alt="medium 5.0: CVE--2024--43800" src="https://img.shields.io/badge/CVE--2024--43800-lightgrey?label=medium%205.0&labelColor=fbb552"/></a> <i>Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.16.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.16.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:N/VI:N/VA:N/SC:L/SI:L/SA:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+
+passing untrusted user input - even after sanitizing it - to `redirect()` may execute untrusted code
+
+### Patches
+
+this issue is patched in serve-static 1.16.0
+
+### Workarounds
+
+users are encouraged to upgrade to the patched version of express, but otherwise can workaround this issue by making sure any untrusted inputs are safe, ideally by validating them against an explicit allowlist
+
+### Details
+
+successful exploitation of this vector requires the following:
+
+1. The attacker MUST control the input to response.redirect()
+1. express MUST NOT redirect before the template appears
+1. the browser MUST NOT complete redirection before:
+1. the user MUST click on the link in the template
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>send</strong> <code>0.18.0</code> (npm)</summary>
+
+<small><code>pkg:npm/send@0.18.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-43799?s=github&n=send&t=npm&vr=%3C0.19.0"><img alt="medium 5.0: CVE--2024--43799" src="https://img.shields.io/badge/CVE--2024--43799-lightgrey?label=medium%205.0&labelColor=fbb552"/></a> <i>Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.19.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.19.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:N/VI:N/VA:N/SC:L/SI:L/SA:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+
+passing untrusted user input - even after sanitizing it - to `SendStream.redirect()` may execute untrusted code
+
+### Patches
+
+this issue is patched in send 0.19.0
+
+### Workarounds
+
+users are encouraged to upgrade to the patched version of express, but otherwise can workaround this issue by making sure any untrusted inputs are safe, ideally by validating them against an explicit allowlist
+
+### Details
+
+successful exploitation of this vector requires the following:
+
+1. The attacker MUST control the input to response.redirect()
+1. express MUST NOT redirect before the template appears
+1. the browser MUST NOT complete redirection before:
+1. the user MUST click on the link in the template
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>tar</strong> <code>6.2.0</code> (npm)</summary>
+
+<small><code>pkg:npm/tar@6.2.0</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2024-28863?s=github&n=tar&t=npm&vr=%3C6.2.1"><img alt="medium 6.5: CVE--2024--28863" src="https://img.shields.io/badge/CVE--2024--28863-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Uncontrolled Resource Consumption</i>
 
 <table>
@@ -1395,149 +1520,24 @@ This report was originally reported to GitHub bug bounty program, they asked me 
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>send</strong> <code>0.18.0</code> (npm)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>axios</strong> <code>0.21.4</code> (npm)</summary>
 
-<small><code>pkg:npm/send@0.18.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-43799?s=github&n=send&t=npm&vr=%3C0.19.0"><img alt="medium 5.0: CVE--2024--43799" src="https://img.shields.io/badge/CVE--2024--43799-lightgrey?label=medium%205.0&labelColor=fbb552"/></a> <i>Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</i>
+<small><code>pkg:npm/axios@0.21.4</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2023-45857?s=github&n=axios&t=npm&vr=%3E%3D0.8.1%2C%3C0.28.0"><img alt="medium 6.5: CVE--2023--45857" src="https://img.shields.io/badge/CVE--2023--45857-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Cross-Site Request Forgery (CSRF)</i>
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;0.19.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.19.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:N/VI:N/VA:N/SC:L/SI:L/SA:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>>=0.8.1<br/><0.28.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.6.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.06%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-### Impact
-
-passing untrusted user input - even after sanitizing it - to `SendStream.redirect()` may execute untrusted code
-
-### Patches
-
-this issue is patched in send 0.19.0
-
-### Workarounds
-
-users are encouraged to upgrade to the patched version of express, but otherwise can workaround this issue by making sure any untrusted inputs are safe, ideally by validating them against an explicit allowlist
-
-### Details
-
-successful exploitation of this vector requires the following:
-
-1. The attacker MUST control the input to response.redirect()
-1. express MUST NOT redirect before the template appears
-1. the browser MUST NOT complete redirection before:
-1. the user MUST click on the link in the template
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>serve-static</strong> <code>1.15.0</code> (npm)</summary>
-
-<small><code>pkg:npm/serve-static@1.15.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-43800?s=github&n=serve-static&t=npm&vr=%3C1.16.0"><img alt="medium 5.0: CVE--2024--43800" src="https://img.shields.io/badge/CVE--2024--43800-lightgrey?label=medium%205.0&labelColor=fbb552"/></a> <i>Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.16.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.16.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:N/VI:N/VA:N/SC:L/SI:L/SA:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.05%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-### Impact
-
-passing untrusted user input - even after sanitizing it - to `redirect()` may execute untrusted code
-
-### Patches
-
-this issue is patched in serve-static 1.16.0
-
-### Workarounds
-
-users are encouraged to upgrade to the patched version of express, but otherwise can workaround this issue by making sure any untrusted inputs are safe, ideally by validating them against an explicit allowlist
-
-### Details
-
-successful exploitation of this vector requires the following:
-
-1. The attacker MUST control the input to response.redirect()
-1. express MUST NOT redirect before the template appears
-1. the browser MUST NOT complete redirection before:
-1. the user MUST click on the link in the template
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>jose</strong> <code>4.15.4</code> (npm)</summary>
-
-<small><code>pkg:npm/jose@4.15.4</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-28176?s=github&n=jose&t=npm&vr=%3E%3D3.0.0%2C%3C%3D4.15.4"><img alt="medium 5.3: CVE--2024--28176" src="https://img.shields.io/badge/CVE--2024--28176-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Uncontrolled Resource Consumption</i>
-
-<table>
-<tr><td>Affected range</td><td><code>>=3.0.0<br/><=4.15.4</code></td></tr>
-<tr><td>Fixed version</td><td><code>4.15.5</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A vulnerability has been identified in the JSON Web Encryption (JWE) decryption interfaces, specifically related to the [support for decompressing plaintext after its decryption](https://www.rfc-editor.org/rfc/rfc7516.html#section-4.1.3). This allows an adversary to exploit specific scenarios where the compression ratio becomes exceptionally high. As a result, the length of the JWE token, which is determined by the compressed content's size, can land below application-defined limits. In such cases, other existing application level mechanisms for preventing resource exhaustion may be rendered ineffective.
-
-Note that as per [RFC 8725](https://www.rfc-editor.org/rfc/rfc8725.html#name-avoid-compression-of-encryp) compression of data SHOULD NOT be done before encryption, because such compressed data often reveals information about the plaintext. For this reason the v5.x major version of `jose` removed support for compressed payloads entirely and is therefore NOT affected by this advisory.
-
-### Impact
-
-Under certain conditions it is possible to have the user's environment consume unreasonable amount of CPU time or memory during JWE Decryption operations.
-
-### Affected users
-
-The impact is limited only to Node.js users utilizing the JWE decryption APIs to decrypt JWEs from untrusted sources.
-
-You are NOT affected if any of the following applies to you
-
-- Your code uses jose version v5.x where JWE Compression is not supported anymore
-- Your code runs in an environment other than Node.js (e.g. Deno, CF Workers), which is the only runtime where JWE Compression is implemented out of the box
-- Your code does not use the JWE decryption APIs
-- Your code only accepts JWEs produced by trusted sources
-
-### Patches
-
-`v2.0.7` and `v4.15.5` releases limit the decompression routine to only allow decompressing up to 250 kB of plaintext. In v4.x it is possible to further adjust this limit via the `inflateRaw` decryption option implementation. In v2.x it is possible to further adjust this limit via the `inflateRawSyncLimit` decryption option.
-
-### Workarounds
-
-If you cannot upgrade and do not want to support compressed JWEs you may detect and reject these tokens early by checking the token's protected header
-
-```js
-const { zip } = jose.decodeProtectedHeader(token)
-if (zip !== undefined) {
-  throw new Error('JWE Compression is not supported')
-}
-```
-
-If you wish to continue supporting JWEs with compressed payloads in these legacy release lines you must upgrade (v1.x and v2.x to version v2.0.7, v3.x and v4.x to version v4.15.5) and review the limits put forth by the patched releases.
-
-### For more information
-If you have any questions or comments about this advisory please open a discussion in the project's [repository](https://github.com/panva/jose/discussions/new?category=q-a&title=GHSA-hhhv-q57g-882q%20advisory%20question)
+An issue discovered in Axios 0.8.1 through 1.5.1 inadvertently reveals the confidential XSRF-TOKEN stored in cookies by including it in the HTTP header X-XSRF-TOKEN for every request made to any host allowing attackers to view sensitive information.
 
 </blockquote>
 </details>
