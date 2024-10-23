@@ -13,5 +13,5 @@ Based on chart `testkube` as of version `2.1.61`
 | kubeshop/testkube-tw-toolkit:2.1.47 | Image used within a Workflow execution. | [View Report](./testkube-tw-toolkit-2.1.47_linux_amd64.md) | [View Report](./testkube-tw-toolkit-2.1.47_linux_arm64.md) |
 | nats:2.10.9-alpine | NATS message broker. | [View Report](./nats-2.10.9-alpine_linux_amd64.md) | [View Report](./nats-2.10.9-alpine_linux_arm64.md) |
 | natsio/nats-server-config-reloader:0.14.1 | NATS config reloader. | [View Report](./nats-server-config-reloader-0.14.1_linux_amd64.md) | [View Report](./nats-server-config-reloader-0.14.1_linux_arm64.md) |
-| quay.io/brancz/kube-rbac-proxy:v0.18.1 | n/a | [View Report](./kube-rbac-proxy-v0.18.1_linux_amd64.md) | [View Report](./kube-rbac-proxy-v0.18.1_linux_arm64.md) |
+| quay.io/brancz/kube-rbac-proxy:v0.18.1 | Small HTTP proxy used by the Testkube operator to perform RBAC authorization against the Kubernetes API. | [View Report](./kube-rbac-proxy-v0.18.1_linux_amd64.md) | [View Report](./kube-rbac-proxy-v0.18.1_linux_arm64.md) |
 | rancher/kubectl:v1.23.7 | Image containing the `kubectl` binary used in the admission webhooks of the Testkube operator. | [View Report](./kubectl-v1.23.7_linux_amd64.md) | [View Report](./kubectl-v1.23.7_linux_arm64.md) |
