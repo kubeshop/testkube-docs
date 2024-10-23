@@ -21,7 +21,7 @@ hide_table_of_contents: true
 <tr><td>Affected range</td><td><code>>=1.23.0-0<br/><1.23.1</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.1</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -38,7 +38,7 @@ Calling Parse on a "// +build" build tag line with deeply nested expressions can
 <tr><td>Affected range</td><td><code>>=1.23.0-0<br/><1.23.1</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.1</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -72,7 +72,7 @@ Calling Decoder.Decode on a message which contains deeply nested structures can 
 <tr><td>Affected range</td><td><code>>=1.23.0-0<br/><1.23.1</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.1</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

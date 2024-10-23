@@ -94,7 +94,7 @@ golang.org/x/text/language
 <tr><td>Affected range</td><td><code>&lt;1.33.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.33.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

@@ -3,9 +3,9 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:6f99ff5f8a3fc6f4cb5cd893fb1834926ffe5dfc7fd13df2ebd0ea5004582876</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 1" src="https://img.shields.io/badge/high-1-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/medium-4-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
-<tr><td>size</td><td>58 MB</td></tr>
-<tr><td>packages</td><td>205</td></tr>
+<tr><td>digest</td><td><code>sha256:4eaaff071414e589220ce0b051d7fa5d20d32fef206fec273912ffbe0e36e093</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 1" src="https://img.shields.io/badge/high-1-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/medium-4-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
+<tr><td>size</td><td>56 MB</td></tr>
+<tr><td>packages</td><td>204</td></tr>
 </table>
 </details></table>
 </details>
@@ -38,7 +38,7 @@ hide_table_of_contents: true
 <tr><td>Affected range</td><td><code>&lt;3.3.2-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.3.2-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
