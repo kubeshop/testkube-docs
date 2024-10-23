@@ -20,7 +20,7 @@ To declare the parallel step, you need to specify the step with `parallel` claus
 It allows to provide:
 * similar properties as any other kind of step, i.e. `container`, `run`, `shell` or `steps`
 * general Test Workflow properties, like `job`, `pod` or `content`
-* [**matrix and sharding**](./test-workflows-matrix-and-sharding.md) properties
+* [**matrix and sharding**](./test-workflows-matrix-and-sharding.mdx) properties
 * `parallelism` to define maximum number of instances to run at once
 * `description` that may provide human-readable information for each instance separately
 
@@ -47,7 +47,7 @@ Similarly to regular steps, you can configure things like `timeout` (`timeout: 3
 The parallel steps are meant to support matrix and sharding, to run multiple replicas and/or distribute the load across multiple instances.
 It is supported by regular matrix/sharding properties (`matrix`, `shards`, `count` and `maxCount`).
 
-You can read more about it in the general [**Matrix and Sharding**](./test-workflows-matrix-and-sharding.md) documentation.
+You can read more about it in the general [**Matrix and Sharding**](./test-workflows-matrix-and-sharding.mdx) documentation.
 
 ## Providing content
 
@@ -127,7 +127,7 @@ spec:
 For distributed testing, it's better to avoid cloning repository in each step.
 Instead, that could be run on sequential step, and then transferred to parallel steps with [`transfer`](#copying-content-inside).
 
-This way you will spare the resources, as the computation and transferring over internet will happen only once. 
+This way you will spare the resources, as the computation and transferring over internet will happen only once.
 
 :::
 
@@ -422,7 +422,7 @@ spec:
 
 ### Automatically sharded Cypress tests
 
-Cypress doesn't have any built-in way for sharding, but Test Workflow's [**matrix and sharding**](./test-workflows-matrix-and-sharding.md)
+Cypress doesn't have any built-in way for sharding, but Test Workflow's [**matrix and sharding**](./test-workflows-matrix-and-sharding.mdx)
 works well with all kinds of tests.
 
 While the example here is not a perfect solution, it's sharding the Cypress tests based on the available test files.

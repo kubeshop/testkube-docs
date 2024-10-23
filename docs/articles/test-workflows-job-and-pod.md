@@ -1,6 +1,6 @@
 # Test Workflows - Job and Pod
 
-You may need to configure the Job and Pod used for execution. It can be also used for [**parallel workers**](./test-workflows-parallel.md) and [**services**](./test-workflows-services.md).
+You may need to configure the Job and Pod used for execution. It can be also used for [**parallel workers**](./test-workflows-parallel.mdx) and [**services**](./test-workflows-services.mdx).
 
 :::tip
 

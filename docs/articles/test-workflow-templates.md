@@ -391,14 +391,14 @@ Testkube provides a set of official, ready to use Test Workflow Templates, which
 using various popular tools. Below you can find a list of official Test Workflow Templates along with
 example Test Workflows using them:
 
-- Artillery [See Example](examples/artillery-basic.md#basic-artillery-from-template)
-- Cypress [See Example](examples/cypress-basic.md#basic-cypress-from-template)
-- Gradle [See Example](examples/gradle-basic.md#basic-gradle-from-template)
+- Artillery [See Example](examples/artillery-basic.mdx#basic-artillery-from-template)
+- Cypress [See Example](examples/cypress-basic.mdx#basic-cypress-from-template)
+- Gradle [See Example](examples/gradle-basic.mdx#basic-gradle-from-template)
 - JMeter
-- K6 [See Example](examples/k6-basic.md#basic-k6-from-template)
-- Maven [See Example](examples/maven-basic.md#basic-maven-from-template)
-- Playwright [See Example](examples/playwright-basic.md#basic-playwright-from-template)
-- Postman [See Example](examples/postman-basic.md#basic-postman-from-template)
+- K6 [See Example](examples/k6-basic.mdx#basic-k6-from-template)
+- Maven [See Example](examples/maven-basic.mdx#basic-maven-from-template)
+- Playwright [See Example](examples/playwright-basic.mdx#basic-playwright-from-template)
+- Postman [See Example](examples/postman-basic.mdx#basic-postman-from-template)
 
 You can also see these in the Testkube Dashboard under the [Workflow Templates](/articles/testkube-dashboard-workflows-templates) 
 tab.

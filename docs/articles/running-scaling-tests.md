@@ -17,7 +17,7 @@ Testkube leverages Kubernetes to run your tests, resulting in several run-time b
 - Scaling test execution to any number of individual tests executing in parallel is managed by the Kubernetes 
   job scheduler, ensuring efficient resource allocation and test execution (provided that Kubernetes has sufficient resources itself).
 - Scaling the same test for the sake of generating massive load or running multiple permutations in parallel 
-  is available through corresponding [parallelization](test-workflows-parallel) and [sharding](test-workflows-matrix-and-sharding)
+  is available through corresponding [parallelization](test-workflows-parallel.mdx) and [sharding](test-workflows-matrix-and-sharding.mdx)
   functionality in Test Workflows. 
 - To ensure your test executions make optimal usage of your underlying Kubernetes infrastructure you can 
   configure Test Workflow Pods in regard to [Pod Affinity](test-workflows-job-and-pod#example-single-execution-per-node) 

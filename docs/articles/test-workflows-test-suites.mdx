@@ -103,7 +103,7 @@ that are similar to the regular Test execution request.
 You can use `parallelism` property to control how many Test Workflows and Tests will be running at once.
 
 In example, to run all the downstream jobs sequentially, you can use `parallelism: 1`.
-It affects jobs instantiated by [**matrix and sharding**](./test-workflows-matrix-and-sharding.md) properties (like `count`) too.
+It affects jobs instantiated by [**matrix and sharding**](./test-workflows-matrix-and-sharding.mdx) properties (like `count`) too.
 
 <Tabs>
 <TabItem value="yaml" label="YAML" default>
@@ -217,7 +217,7 @@ spec:
 
 ### Multiple files transfer
 
-To transfer multiple files, similarly to `transfer` in [**Parallel Steps**](./test-workflows-parallel.md#copying-content-inside),
+To transfer multiple files, similarly to `transfer` in [**Parallel Steps**](./test-workflows-parallel.mdx#copying-content-inside),
 you can use a `tarball` syntax that will pack selected files and return the URL to download them:
 
 ```yaml
@@ -266,4 +266,4 @@ spec:
 The `execute` operation supports matrix and sharding, to run multiple replicas and/or distribute the load across multiple runs.
 It is supported by regular matrix/sharding properties (`matrix`, `shards`, `count` and `maxCount`) for each Test Workflow or Test reference.
 
-You can read more about it in the general [**Matrix and Sharding**](./test-workflows-matrix-and-sharding.md) documentation.
+You can read more about it in the general [**Matrix and Sharding**](./test-workflows-matrix-and-sharding.mdx) documentation.

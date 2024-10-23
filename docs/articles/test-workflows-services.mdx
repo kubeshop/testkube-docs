@@ -22,14 +22,14 @@ read its status and logs, and provides its information (like IP) for use in furt
 :::info
 
 As the services are started in a separate pod, they don't share the file system with the Test Workflow execution.
-There are multiple ways to share data with them - either using [**one of techniques described below**](#providing-content), or advanced Kubernetes' native ways like [**ReadWriteMany volumes**](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes). 
+There are multiple ways to share data with them - either using [**one of techniques described below**](#providing-content), or advanced Kubernetes' native ways like [**ReadWriteMany volumes**](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes).
 
 :::
 
 ## Syntax
 
 To add some services, you need to specify the `services` clause.
-It can be either directly on the `spec` level (to be available for the whole execution), or on specific step 
+It can be either directly on the `spec` level (to be available for the whole execution), or on specific step
 (to isolate it) - see [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#servicespec).
 
 :::tip
@@ -117,7 +117,7 @@ so it will fail if the service is not ready after that time.
 The services are meant to support matrix and sharding, to run multiple replicas and/or distribute the load across multiple instances.
 It is supported by regular matrix/sharding properties (`matrix`, `shards`, `count` and `maxCount`).
 
-You can read more about it in the general [**Matrix and Sharding**](./test-workflows-matrix-and-sharding.md) documentation.
+You can read more about it in the general [**Matrix and Sharding**](./test-workflows-matrix-and-sharding.mdx) documentation.
 
 ## Providing content
 
@@ -306,7 +306,7 @@ spec:
 
 ### Selenium tests with multiple remote browsers
 
-You can initialize multiple remote browsers, and then [**run tests against them in parallel**](./test-workflows-parallel.md).
+You can initialize multiple remote browsers, and then [**run tests against them in parallel**](./test-workflows-parallel.mdx).
 
 The example below:
 
