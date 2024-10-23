@@ -28,10 +28,10 @@ See a complete feature-comparison table between OSS and Commercial below.
 The following Workflow features are not available when using the Standalone Agent, they require
 the Agent to be connected to the Testkube Control Plane, either on-prem or in the cloud.
 
-- `execute` - see [Test Suites](test-workflows-test-suites)
-- `parallel` - see [Parallelization](test-workflows-parallel)
-- `matrix` (and `count`, `shards`, `maxCount`) - see [Sharding & Matrix Params](test-workflows-matrix-and-sharding)
-- `services` - see [Services](test-workflows-services)
+- `execute` - see [Test Suites](test-workflows-test-suites.mdx)
+- `parallel` - see [Parallelization](test-workflows-parallel.mdx)
+- `matrix` (and `count`, `shards`, `maxCount`) - see [Sharding & Matrix Params](test-workflows-matrix-and-sharding.mdx)
+- `services` - see [Services](test-workflows-services.mdx)
 
 ## Feature Comparison - Open Source vs Commercial
 

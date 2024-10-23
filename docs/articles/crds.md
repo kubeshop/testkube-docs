@@ -7,10 +7,10 @@ and stored in the cluster where your Agents are installed.
 The following Resource Group/Versions are available (click for documentation)
 
 - [testworkflows.test.io/v1](crds/testworkflows.testkube.io-v1)
-- [tests.testkube.io/v1](crds/tests.testkube.io-v1.md) (Partially deprecated)
-- [tests.testkube.io/v2](crds/tests.testkube.io-v2.md) (Deprecated)
-- [tests.testkube.io/v3](crds/tests.testkube.io-v3.md) (Deprecated)
-- [executor.testkube.io/v1](crds/executor.testkube.io-v1.md) (Partially deprecated)
+- [tests.testkube.io/v1](crds/tests.testkube.io-v1.mdx) (Partially deprecated)
+- [tests.testkube.io/v2](crds/tests.testkube.io-v2.mdx) (Deprecated)
+- [tests.testkube.io/v3](crds/tests.testkube.io-v3.mdx) (Deprecated)
+- [executor.testkube.io/v1](crds/executor.testkube.io-v1.mdx) (Partially deprecated)
 
 :::tip
 More detailed schema docs are also available at https://doc.crds.dev/github.com/kubeshop/testkube-operator
