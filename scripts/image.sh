@@ -120,8 +120,7 @@ helm template test kubeshop/testkube --skip-crds --set mongodb.enabled=false --s
 sort -o "$AGENT_IMAGES" "$AGENT_IMAGES"
 
 # Specify image descriptions
-add_image_desc "bitnami/kubectl" "Image containing the \`kubectl\` binary used in upgrade hooks."
-add_image_desc "gcr.io/kubebuilder/kube-rbac-proxy" "Small HTTP proxy used by the Testkube operator to perform RBAC authorization against the Kubernetes API."
+add_image_desc "quay.io/brancz/kube-rbac-proxy" "Small HTTP proxy used by the Testkube operator to perform RBAC authorization against the Kubernetes API."
 # Source: https://github.com/kubeshop/kube-webhook-certgen
 add_image_desc "kubeshop/kube-webhook-certgen" "Used to generate certificates for the Testkube operator admission webhook."
 add_image_desc "kubeshop/testkube-api-server" "API server for the Testkube agent."
@@ -135,6 +134,7 @@ add_image_desc "kubeshop/testkube-tw-toolkit" "Image used within a Workflow exec
 add_image_desc "natsio/prometheus-nats-exporter" "NATS metrics exporter."
 add_image_desc "bitnami/minio" "Object store used by the Testkube control plane to store logs and artifacts."
 add_image_desc "ghcr.io/dexidp/dex" "Identity provider used by the Testkube control plane."
+# Source: https://github.com/kubeshop/bitnami-containers
 add_image_desc "kubeshop/bitnami-mongodb" "Database used by the Testkube control plane."
 add_image_desc "kubeshop/testkube-enterprise-api" "API server for the Testkube control plane."
 add_image_desc "kubeshop/testkube-enterprise-ui" "Testkube dashboard."
