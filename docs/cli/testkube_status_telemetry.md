@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube status telemetry
@@ -31,5 +30,4 @@ testkube status telemetry [flags]
 
 ### SEE ALSO
 
-* [testkube status](testkube_status.md)	 - Show status of feature or resource
-
+- [testkube status](testkube_status.md) - Show status of feature or resource

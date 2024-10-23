@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube migrate test
@@ -36,5 +35,4 @@ testkube migrate test <testName> [flags]
 
 ### SEE ALSO
 
-* [testkube migrate](testkube_migrate.md)	 - Migrate resources
-
+- [testkube migrate](testkube_migrate.md) - Migrate resources

@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube run testsuite
@@ -64,5 +63,4 @@ testkube run testsuite <testSuiteName> [flags]
 
 ### SEE ALSO
 
-* [testkube run](testkube_run.md)	 - Runs tests, test suites or test workflows
-
+- [testkube run](testkube_run.md) - Runs tests, test suites or test workflows

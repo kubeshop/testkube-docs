@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube update testsuite
@@ -9,7 +8,7 @@ Update Test Suite
 
 ### Synopsis
 
-Update Test Custom Resource Definitions, 
+Update Test Custom Resource Definitions,
 
 ```
 testkube update testsuite [flags]
@@ -54,5 +53,4 @@ testkube update testsuite [flags]
 
 ### SEE ALSO
 
-* [testkube update](testkube_update.md)	 - Update resource
-
+- [testkube update](testkube_update.md) - Update resource

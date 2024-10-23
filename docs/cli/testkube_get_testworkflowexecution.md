@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube get testworkflowexecution
@@ -42,5 +41,4 @@ testkube get testworkflowexecution [executionID] [flags]
 
 ### SEE ALSO
 
-* [testkube get](testkube_get.md)	 - Get resources
-
+- [testkube get](testkube_get.md) - Get resources

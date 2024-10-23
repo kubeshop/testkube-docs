@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube watch testworkflowexecution
@@ -35,5 +34,4 @@ testkube watch testworkflowexecution <executionName> [flags]
 
 ### SEE ALSO
 
-* [testkube watch](testkube_watch.md)	 - Watch tests or test suites
-
+- [testkube watch](testkube_watch.md) - Watch tests or test suites

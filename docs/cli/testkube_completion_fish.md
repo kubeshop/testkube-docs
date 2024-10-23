@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube completion fish
@@ -24,7 +23,6 @@ To load completions for every new session, execute once:
 ```
 
 You will need to start a new shell for this setup to take effect.
-
 
 ```
 testkube completion fish [flags]
@@ -51,5 +49,4 @@ testkube completion fish [flags]
 
 ### SEE ALSO
 
-* [testkube completion](testkube_completion.md)	 - Generate the autocompletion script for the specified shell
-
+- [testkube completion](testkube_completion.md) - Generate the autocompletion script for the specified shell

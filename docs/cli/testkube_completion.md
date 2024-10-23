@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube completion
@@ -11,7 +10,6 @@ Generate the autocompletion script for the specified shell
 
 Generate the autocompletion script for testkube for the specified shell.
 See each sub-command's help for details on how to use the generated script.
-
 
 ### Options
 
@@ -33,9 +31,8 @@ See each sub-command's help for details on how to use the generated script.
 
 ### SEE ALSO
 
-* [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
-* [testkube completion bash](testkube_completion_bash.md)	 - Generate the autocompletion script for bash
-* [testkube completion fish](testkube_completion_fish.md)	 - Generate the autocompletion script for fish
-* [testkube completion powershell](testkube_completion_powershell.md)	 - Generate the autocompletion script for powershell
-* [testkube completion zsh](testkube_completion_zsh.md)	 - Generate the autocompletion script for zsh
-
+- [testkube](testkube.md) - Testkube entrypoint for kubectl plugin
+- [testkube completion bash](testkube_completion_bash.md) - Generate the autocompletion script for bash
+- [testkube completion fish](testkube_completion_fish.md) - Generate the autocompletion script for fish
+- [testkube completion powershell](testkube_completion_powershell.md) - Generate the autocompletion script for powershell
+- [testkube completion zsh](testkube_completion_zsh.md) - Generate the autocompletion script for zsh

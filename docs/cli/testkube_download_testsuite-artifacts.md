@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube download testsuite-artifacts
@@ -35,5 +34,4 @@ testkube download testsuite-artifacts <executionName> [flags]
 
 ### SEE ALSO
 
-* [testkube download](testkube_download.md)	 - Artifacts management commands
-
+- [testkube download](testkube_download.md) - Artifacts management commands
