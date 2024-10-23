@@ -14,7 +14,7 @@ Test Workflows have a built-in mechanism for all these cases - both static and d
 
 ## Usage
 
-Matrix and sharding features are supported in [**Services (`services`)**](./test-workflows-services.md), and both [**Test Suite (`execute`)**](./test-workflows-test-suites.md) and [**Parallel Steps (`parallel`)**](./test-workflows-parallel.md) operations.
+Matrix and sharding features are supported in [**Services (`services`)**](./test-workflows-services), and both [**Test Suite (`execute`)**](./test-workflows-test-suites) and [**Parallel Steps (`parallel`)**](./test-workflows-parallel) operations.
 
 <Tabs>
 <TabItem value="services" label={<span>Services (<code>services</code>)</span>} default>
@@ -147,7 +147,7 @@ matrix:
   browser: [ 'chrome', 'firefox', '{{ config.another }}' ]
 ```
 
-or could be dynamic one, using [**Test Workflow's expressions**](test-workflows-expressions.md):
+or could be dynamic one, using [**Test Workflow's expressions**](test-workflows-expressions):
 
 ```yaml
 matrix:
@@ -205,7 +205,7 @@ parallel:
 </TabItem>
 </Tabs>
 
-Similarly to `matrix`, the `shards` may contain a static list, or [**Test Workflow's expression**](test-workflows-expressions.md).
+Similarly to `matrix`, the `shards` may contain a static list, or [**Test Workflow's expression**](test-workflows-expressions).
 
 ### Counters
 
