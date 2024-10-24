@@ -1,12 +1,19 @@
-# Resource Access Management
+# Resource Access Management 
 
 Testkube provides a flexible access-control mechanism to help you enforce how members of an Organization have
 access to Environments and their Resources (Workflows, Workflow Templates, Triggers and Webhooks).
 
+:::info
+Testkube enforces resource access described in this document in the Control Plane, meaning that it is possible
+to bypass these controls by directly interacting with Testkube resources in your cluster(s) using kubectl or 
+similar tooling.
+
+More rigorous RBAC functionality enforced across the entire Testkube stack is on the roadmap.
+:::
+
 ## Organization Members and Teams
 
-There are four roles for organization members - [Read More](/testkube-pro/articles/organization-management#members). For 
-the sake of this document:
+There are four roles for organization members - [Read More](/testkube-pro/articles/organization-management#members). For the sake of this document:
 - `Owner` / `Admin` - Always have access to all resources in all environments.
 - `Member` - Resource access is controlled at the Environment and Resource Group level.
 - `Biller` - No Resource access.
