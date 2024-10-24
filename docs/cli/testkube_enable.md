@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube enable
@@ -31,7 +30,6 @@ testkube enable <feature> [flags]
 
 ### SEE ALSO
 
-* [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
-* [testkube enable oauth](testkube_enable_oauth.md)	 - enable oauth authentication for direct api
-* [testkube enable telemetry](testkube_enable_telemetry.md)	 - Enable collecting of anonymous telemetry data
-
+- [testkube](testkube.md) - Testkube entrypoint for kubectl plugin
+- [testkube enable oauth](testkube_enable_oauth.md) - enable oauth authentication for direct api
+- [testkube enable telemetry](testkube_enable_telemetry.md) - Enable collecting of anonymous telemetry data

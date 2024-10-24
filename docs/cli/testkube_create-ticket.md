@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube create-ticket
@@ -35,5 +34,4 @@ testkube create-ticket [flags]
 
 ### SEE ALSO
 
-* [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
-
+- [testkube](testkube.md) - Testkube entrypoint for kubectl plugin

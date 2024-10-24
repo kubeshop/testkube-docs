@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube disable oauth
@@ -31,5 +30,4 @@ testkube disable oauth [flags]
 
 ### SEE ALSO
 
-* [testkube disable](testkube_disable.md)	 - Disable feature
-
+- [testkube disable](testkube_disable.md) - Disable feature

@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube migrate
@@ -35,8 +34,7 @@ testkube migrate <resourceName> [flags]
 
 ### SEE ALSO
 
-* [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
-* [testkube migrate agent](testkube_migrate_agent.md)	 - manual migrate agent command
-* [testkube migrate test](testkube_migrate_test.md)	 - Migrate all available tests to test workflows
-* [testkube migrate testsuite](testkube_migrate_testsuite.md)	 - Migrate all available test suites to test workflows
-
+- [testkube](testkube.md) - Testkube entrypoint for kubectl plugin
+- [testkube migrate agent](testkube_migrate_agent.md) - manual migrate agent command
+- [testkube migrate test](testkube_migrate_test.md) - Migrate all available tests to test workflows
+- [testkube migrate testsuite](testkube_migrate_testsuite.md) - Migrate all available test suites to test workflows

@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube watch
@@ -31,8 +30,7 @@ testkube watch <resourceName> [flags]
 
 ### SEE ALSO
 
-* [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
-* [testkube watch execution](testkube_watch_execution.md)	 - Watch logs output from executor pod
-* [testkube watch testsuiteexecution](testkube_watch_testsuiteexecution.md)	 - Watch test suite
-* [testkube watch testworkflowexecution](testkube_watch_testworkflowexecution.md)	 - Watch output from test workflow execution
-
+- [testkube](testkube.md) - Testkube entrypoint for kubectl plugin
+- [testkube watch execution](testkube_watch_execution.md) - Watch logs output from executor pod
+- [testkube watch testsuiteexecution](testkube_watch_testsuiteexecution.md) - Watch test suite
+- [testkube watch testworkflowexecution](testkube_watch_testworkflowexecution.md) - Watch output from test workflow execution

@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube debug controlplane
@@ -36,5 +35,4 @@ testkube debug controlplane [flags]
 
 ### SEE ALSO
 
-* [testkube debug](testkube_debug.md)	 - Print debugging info
-
+- [testkube debug](testkube_debug.md) - Print debugging info

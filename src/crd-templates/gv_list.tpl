@@ -2,7 +2,7 @@
 {{- $groupVersions := . -}}
 
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 # API Reference

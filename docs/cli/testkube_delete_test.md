@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube delete test
@@ -33,5 +32,4 @@ testkube delete test [testName] [flags]
 
 ### SEE ALSO
 
-* [testkube delete](testkube_delete.md)	 - Delete resources
-
+- [testkube delete](testkube_delete.md) - Delete resources

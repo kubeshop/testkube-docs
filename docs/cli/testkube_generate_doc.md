@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube generate doc
@@ -35,5 +34,4 @@ testkube generate doc [flags]
 
 ### SEE ALSO
 
-* [testkube generate](testkube_generate.md)	 - Generate resources commands
-
+- [testkube generate](testkube_generate.md) - Generate resources commands

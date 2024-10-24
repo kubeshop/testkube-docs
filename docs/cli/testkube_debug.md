@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube debug
@@ -27,8 +26,7 @@ Print debugging info
 
 ### SEE ALSO
 
-* [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
-* [testkube debug agent](testkube_debug_agent.md)	 - Show Agent debug information
-* [testkube debug controlplane](testkube_debug_controlplane.md)	 - Show Control Plane debug information
-* [testkube debug oss](testkube_debug_oss.md)	 - Show OSS installation debug info
-
+- [testkube](testkube.md) - Testkube entrypoint for kubectl plugin
+- [testkube debug agent](testkube_debug_agent.md) - Show Agent debug information
+- [testkube debug controlplane](testkube_debug_controlplane.md) - Show Control Plane debug information
+- [testkube debug oss](testkube_debug_oss.md) - Show OSS installation debug info
