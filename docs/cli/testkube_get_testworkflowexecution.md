@@ -18,8 +18,8 @@ testkube get testworkflowexecution [executionID] [flags]
 ### Options
 
 ```
-      --actor-name string      test workflow running context actor name
-      --actor-type string      test workflow running context actor type one of cron|testtrigger|user|testworkfow|testworkflowexecution|program
+      --actor-name string     test workflow running context actor name
+      --actor-type string     test workflow running context actor type one of cron|testtrigger|user|testworkfow|testworkflowexecution|program
   -h, --help                  help for testworkflowexecution
   -l, --label strings         label key value pair: --label key1=value1
       --limit int             max number of records to return (default 1000)
