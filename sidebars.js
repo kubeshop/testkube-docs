@@ -67,6 +67,10 @@ const sidebars = {
             "articles/install/uninstall",
             {
               type: "doc",
+              label: "Using Private Registries",
+              id: "articles/deploying-from-private-registries",
+            },            {
+              type: "doc",
               label: "Configure Identity Providers",
               id: "testkube-pro-on-prem/articles/auth",
             },
