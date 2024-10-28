@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 
 export default function SearchBarFilter({
   computedFacetFilters,
@@ -30,6 +30,9 @@ export default function SearchBarFilter({
           gap: 8,
         }}
       >
+        <div style={{ fontSize: 18, lineHeight: "34px" }}>
+          Select where to search?
+        </div>
         <SearchOption
           label="Reference"
           optionKey="indexPrefix: reference-doc"
@@ -81,8 +84,6 @@ export default function SearchBarFilter({
 }
 
 function SearchOption({ label, onClick, optionKey, currentIndexPrefix }) {
-  console.log("currentIndexPrefix", currentIndexPrefix);
-  console.log("key", optionKey);
   return (
     <div
       style={{
