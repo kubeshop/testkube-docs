@@ -25,8 +25,8 @@ export default function SearchBarFilter({
   return (
     <div className="SearchFilterContainer">
       <div className="SearchFilter">
-        <div style={{ fontSize: 18, lineHeight: "34px" }}>
-          Select where to search?
+        <div style={{ fontSize: 16, lineHeight: "32px" }}>
+          Select documentation:
         </div>
         <SearchOption
           label="Main"
