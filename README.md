@@ -5,6 +5,7 @@ You can find the docs here: https://docs.testkube.io
 ## How to edit the docs
 
 **System requirements:**
+
 - [npm](https://nodejs.org/en/download)
 
 If you're editing the docs, follow this workflow:
@@ -33,7 +34,7 @@ If you're editing the docs, follow this workflow:
 }
 ```
 
-Also make sure the documentation builds ok locally before opening a PR - this will check for broken links, etc. 
+Also make sure the documentation builds ok locally before opening a PR - this will check for broken links, etc.
 
 ```
 npm run build
@@ -49,7 +50,6 @@ If you want to add a warning/info message like the below, use [Docusuarus Admoni
 
 ![Warning signs](./docs/img/docusaurus-admonitions.png)
 
-
 #### Code blocks title
 
 If the content of the code blocks refers to a file, use Docusaurus [Code Block title](https://docusaurus.io/docs/markdown-features/code-blocks#code-title).
@@ -62,8 +62,8 @@ If the content of the code blocks refers to a file, use Docusaurus [Code Block t
 file.js
 
 ```js
-file
-content
+file;
+content;
 ```
 ````
 
@@ -71,8 +71,8 @@ content
 
 ````md
 ```js title="file.js"
-file
-content
+file;
+content;
 ```
 ````
 
@@ -80,21 +80,33 @@ content
 
 You can create tabs for structuring your content, for example as in the [CLI Installation](https://docs.testkube.io/articles/install/cli) page.
 
-Please note that headlines inside tab content will be shown in the navigation menu to the right, but will not 
+Please note that headlines inside tab content will be shown in the navigation menu to the right, but will not
 work as direct links from external sources unless they are under the default/first tab.
+
+## Search Indexing
+
+For search, we've indexed all the pages into 3 distinct categories `Main`, `Reference` and `Legacy`.
+By default the `Main` index is used which contains all the results which haven't been included in the other 2 indexes.
+The user can switch between indexes by clicking one of the 3 options at the top for the search bar.
+
+### Add Docs to specific index
+
+All docs pages which haven't been explicitly included in the other indexes, are part of the `Main` index.
+To add a page to a specific index, add the following meta tag in the head of the page. e.g:
+`<meta name="docsearch:indexPrefix" content="YOUR_INDEX" />`
 
 ## Updating the OpenAPI Docs
 
 These docs use [redocusaurus](https://redocusaurus.vercel.app/) to generate OpenAPI documentation, but
-since the Testkube OpenAPI definitions are too large (resulting in _very_ long build/rendering times), there is a 
+since the Testkube OpenAPI definitions are too large (resulting in _very_ long build/rendering times), there is a
 small script at `src/scripts/split-openapis.ts` that:
 
 - retrieves the OpenAPI definitions for both the agent and control plane APIs
-- splits them into smaller definitions into the `src/openapi` folder 
+- splits them into smaller definitions into the `src/openapi` folder
 - generates corresponding mdx files into the `docs/openapi` folder
-- generates `src/opeanpi/../redoc-sidebar.js` files that are included into the main `sidebar.js` config to add the 
-  generated mdx files to the sidebar navigation 
-- generates `src/openapi/../redoc-specs.js` files that are included into the `docusaurus.config.js` config to 
+- generates `src/opeanpi/../redoc-sidebar.js` files that are included into the main `sidebar.js` config to add the
+  generated mdx files to the sidebar navigation
+- generates `src/openapi/../redoc-specs.js` files that are included into the `docusaurus.config.js` config to
   add the generated specs to the redocusaurs configuration
 
 The script requires a GitHub Access Token to be provided in a TESTKUBE_OPENAPI_GITHUB_ACCESS_TOKEN environment variable
@@ -125,11 +137,11 @@ Follow these steps:
 5. Create a `docs` folder in the cloned repo and now run the following command (using the `crd-ref-docs` tool):
 
 ```shell
-./crd-ref-docs  
-  --source-path=<path to testestkube-operator project> 
-  --config=config.yaml 
-  --renderer=markdown 
-  --output-path=./docs 
+./crd-ref-docs
+  --source-path=<path to testestkube-operator project>
+  --config=config.yaml
+  --renderer=markdown
+  --output-path=./docs
   --output-mode=group
   --templates-dir=<testkube-docs-root>/src/crd-templates
 ```
@@ -162,7 +174,7 @@ total 152
 8. Add the deprecation warning at the top of all files containing deprecated APIs:
 
 ```markdown
-import LegacyWarning from '../_legacy-warning.mdx';
+import LegacyWarning from '../\_legacy-warning.mdx';
 
 <LegacyWarning />
 ```
