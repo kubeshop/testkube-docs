@@ -1,0 +1,28 @@
+.SearchFilterContainer {
+  height: 60px;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 202;
+}
+
+.SearchFilter {
+  margin: 16px auto auto;
+  max-width: 560px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.SearchOption {
+  border: 1px solid;
+  border-color: transparent;
+  color: rgb(226, 232, 240);
+  border-radius: 4px;
+  min-width: 50px;
+  display: flex;
+  justify-content: center;
+  padding: 4px 8px;
+  cursor: pointer;
+}

@@ -401,4 +401,12 @@ ul:hover {
     width: 36px;
     min-width: 36px;
   }
+  .DocSearch-Container {
+    margin-top: 50px;
+  }
+
+  .SearchFilterContainer {
+    background-color: #0f172a;
+    left: 0px;
+  }
 }

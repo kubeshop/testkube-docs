@@ -54,7 +54,6 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
     ...props.searchParameters,
     facetFilters: computedFacetFilters,
   };
-  console.log(JSON.stringify(searchParameters));
   const history = useHistory();
   const searchContainer = useRef(null);
   const searchButtonRef = useRef(null);

@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import "./SearchbarFilter.css";
 
 export default function SearchBarFilter({
   computedFacetFilters,
@@ -10,73 +11,46 @@ export default function SearchBarFilter({
     );
   }, [computedFacetFilters]);
 
+  const onOptionClick = (value) => {
+    setComputedFacetFilters((prev) => {
+      return prev.map((filter) => {
+        if (filter[0].startsWith("indexPrefix")) {
+          return value;
+        }
+        return filter;
+      });
+    });
+  };
+
   return (
-    <div
-      style={{
-        height: "60px",
-        width: "100vw",
-        top: 0,
-        left: 0,
-        position: "fixed",
-        zIndex: 202,
-      }}
-    >
-      <div
-        style={{
-          margin: "16px auto auto",
-          maxWidth: 560,
-          display: "flex",
-          flexDirection: "row",
-          gap: 8,
-        }}
-      >
+    <div className="SearchFilterContainer">
+      <div className="SearchFilter">
         <div style={{ fontSize: 18, lineHeight: "34px" }}>
           Select where to search?
         </div>
         <SearchOption
+          label="Main"
+          optionKey="indexPrefix: -reference-doc"
+          currentIndexPrefix={currentIndexPrefix}
+          onClick={() =>
+            onOptionClick([
+              "indexPrefix: -reference-doc",
+              "indexPrefix: -legacy-doc",
+            ])
+          }
+        />
+        <SearchOption
           label="Reference"
           optionKey="indexPrefix: reference-doc"
           currentIndexPrefix={currentIndexPrefix}
-          onClick={() => {
-            setComputedFacetFilters((prev) => {
-              return prev.map((filter) => {
-                if (filter[0].startsWith("indexPrefix")) {
-                  return ["indexPrefix: reference-doc"];
-                }
-                return filter;
-              });
-            });
-          }}
+          onClick={() => onOptionClick(["indexPrefix: reference-doc"])}
         />
-        <SearchOption
-          label="Workflows"
-          optionKey="indexPrefix: workflows-doc"
-          currentIndexPrefix={currentIndexPrefix}
-          onClick={() => {
-            setComputedFacetFilters((prev) => {
-              return prev.map((filter) => {
-                if (filter[0].startsWith("indexPrefix")) {
-                  return ["indexPrefix: workflows-doc"];
-                }
-                return filter;
-              });
-            });
-          }}
-        />
+
         <SearchOption
           label="Legacy"
           optionKey="indexPrefix: legacy-doc"
           currentIndexPrefix={currentIndexPrefix}
-          onClick={() => {
-            setComputedFacetFilters((prev) => {
-              return prev.map((filter) => {
-                if (filter[0].startsWith("indexPrefix")) {
-                  return ["indexPrefix: legacy-doc"];
-                }
-                return filter;
-              });
-            });
-          }}
+          onClick={() => onOptionClick(["indexPrefix: legacy-doc"])}
         />
       </div>
     </div>
@@ -86,21 +60,13 @@ export default function SearchBarFilter({
 function SearchOption({ label, onClick, optionKey, currentIndexPrefix }) {
   return (
     <div
+      className="SearchOption"
       style={{
-        border: "1px solid",
-        borderColor: "transparent",
-        color: "rgb(226, 232, 240)",
         background: `${
           currentIndexPrefix[0] === optionKey
             ? "rgb(129, 140, 248)"
             : "rgb(30, 41, 59)"
         }`,
-        borderRadius: 4,
-        minWidth: 50,
-        display: "flex",
-        justifyContent: "center",
-        padding: "4px 8px",
-        cursor: "pointer",
       }}
       onClick={onClick}
     >
