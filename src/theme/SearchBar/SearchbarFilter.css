@@ -9,16 +9,20 @@
 
 .SearchFilter {
   margin: 16px auto auto;
-  max-width: 560px;
   display: flex;
   flex-direction: row;
   gap: 8px;
+  background: var(--docsearch-modal-background);
+  border-radius: 6px 6px 0 0;
+  box-shadow: 0 var(--docsearch-modal-shadow);
+  max-width: var(--docsearch-modal-width);
+  padding: 8px;
 }
 
 .SearchOption {
   border: 1px solid;
   border-color: transparent;
-  color: rgb(226, 232, 240);
+  color: var(--ifm-font-color-base);
   border-radius: 4px;
   min-width: 50px;
   display: flex;

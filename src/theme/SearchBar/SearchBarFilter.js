@@ -64,8 +64,8 @@ function SearchOption({ label, onClick, optionKey, currentIndexPrefix }) {
       style={{
         background: `${
           currentIndexPrefix[0] === optionKey
-            ? "rgb(129, 140, 248)"
-            : "rgb(30, 41, 59)"
+            ? "var(--ifm-color-primary)"
+            : "var(--ifm-color-third)"
         }`,
       }}
       onClick={onClick}
