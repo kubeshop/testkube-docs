@@ -195,7 +195,8 @@ const config = {
         facets: ["indexPrefix"],
         searchParameters: {
           facetFilters: [
-            ["indexPrefix: -reference-doc", "indexPrefix: -legacy-doc"],
+            "indexPrefix: -reference-doc",
+            "indexPrefix: -legacy-doc",
           ],
         },
 

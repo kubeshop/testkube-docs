@@ -48,12 +48,16 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
     : // ... or use config facetFilters
       configFacetFilters;
   // We let user override default searchParameters if she wants to
-  const [computedFacetFilters, setComputedFacetFilters] =
-    useState(facetFilters);
+  const [computedFacetFilters, setComputedFacetFilters] = useState([
+    "indexPrefix: -reference-doc",
+    "indexPrefix: -legacy-doc",
+  ]);
   const searchParameters = {
     ...props.searchParameters,
     facetFilters: computedFacetFilters,
   };
+
+  console.log("computedFacetFilters: ", computedFacetFilters);
   const history = useHistory();
   const searchContainer = useRef(null);
   const searchButtonRef = useRef(null);

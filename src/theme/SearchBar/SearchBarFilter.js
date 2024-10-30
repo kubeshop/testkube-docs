@@ -6,20 +6,14 @@ export default function SearchBarFilter({
   setComputedFacetFilters,
 }) {
   const currentIndexPrefix = useMemo(() => {
-    return computedFacetFilters.find((filter) =>
-      filter[0].startsWith("indexPrefix")
-    );
+    return computedFacetFilters.find((filter) => {
+      console.log("filter: ", filter);
+      return filter.startsWith("indexPrefix");
+    });
   }, [computedFacetFilters]);
 
-  const onOptionClick = (value) => {
-    setComputedFacetFilters((prev) => {
-      return prev.map((filter) => {
-        if (filter[0].startsWith("indexPrefix")) {
-          return value;
-        }
-        return filter;
-      });
-    });
+  const onOptionClick = (...values) => {
+    setComputedFacetFilters(values);
   };
 
   return (
@@ -31,24 +25,24 @@ export default function SearchBarFilter({
           optionKey="indexPrefix: -reference-doc"
           currentIndexPrefix={currentIndexPrefix}
           onClick={() =>
-            onOptionClick([
+            onOptionClick(
               "indexPrefix: -reference-doc",
-              "indexPrefix: -legacy-doc",
-            ])
+              "indexPrefix: -legacy-doc"
+            )
           }
         />
         <SearchOption
           label="API Reference"
           optionKey="indexPrefix: reference-doc"
           currentIndexPrefix={currentIndexPrefix}
-          onClick={() => onOptionClick(["indexPrefix: reference-doc"])}
+          onClick={() => onOptionClick("indexPrefix: reference-doc")}
         />
 
         <SearchOption
           label="v1"
           optionKey="indexPrefix: legacy-doc"
           currentIndexPrefix={currentIndexPrefix}
-          onClick={() => onOptionClick(["indexPrefix: legacy-doc"])}
+          onClick={() => onOptionClick("indexPrefix: legacy-doc")}
         />
       </div>
     </div>
@@ -61,7 +55,7 @@ function SearchOption({ label, onClick, optionKey, currentIndexPrefix }) {
       className="SearchOption"
       style={{
         background: `${
-          currentIndexPrefix[0] === optionKey
+          currentIndexPrefix === optionKey
             ? "var(--ifm-color-primary)"
             : "var(--ifm-color-third)"
         }`,
