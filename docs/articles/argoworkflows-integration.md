@@ -11,7 +11,7 @@ blog-post for an overview of Argo Workflows and how to integrate it with Testkub
 ## Creating a WorkflowTemplate for Testkube
 
 Argo Workflows provides the concept of [WorkflowTemplates](https://argo-workflows.readthedocs.io/en/latest/workflow-templates/) to define reusable templates 
-that you can reuse across your other workflows. 
+that you can use in Argo Workflows. 
 
 The below WorkflowTemplate can be used to trigger any [Testkube CLI](/articles/cli) command:
 
@@ -35,20 +35,19 @@ spec:
 In this WorkflowTemplate, we have defined:
 
 - `templates.container.image`: the Testkube CLI image that will allow the execution of the Testkube command.
-- `templates.container.args`: runs 2 commands:
-  - `testkube set context` to set the correct Testkube context.
+- `templates.container.args`: runs two commands:
+  - `testkube set context` to set the correct Testkube context for your organization and environment.
   - `testkube <testkube-cli-command>` : runs a provided Testkube CLI command. 
 
-The WorkflowTemplate expects the following parameters to be provided when invoking:
+The WorkflowTemplate expects the following parameters to be provided (see example below):
 - `org-id`, `env-id` : Organization and Environment IDs for the Environment containing the Workflow to run, you can get these from
   the Agent Information section of the Environment Settings - [Read More](/testkube-pro/articles/environment-management#agent-information).
 - `api-key` : An API Token required to call the Testkube API through the CLI - [Read More](/testkube-pro/articles/api-token-management).
 - `testkube-cli-command` : the Testkube CLI command you want to run.
 
+## Using the WorkflowTemplate
 
-## Using the Workflow Template
-
-The below ArgoWorkflows Workflow uses the above defined template with corresponding parameters:
+The below Argo Workflows Workflow uses the WorkflowTemplate defined above with corresponding parameters:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
