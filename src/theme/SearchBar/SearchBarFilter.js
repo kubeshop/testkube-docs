@@ -4,10 +4,10 @@ import "./SearchbarFilter.css";
 export default function SearchBarFilter({
   computedFacetFilters,
   setComputedFacetFilters,
+  setCurrentOption,
 }) {
   const currentIndexPrefix = useMemo(() => {
     return computedFacetFilters.find((filter) => {
-      console.log("filter: ", filter);
       return filter.startsWith("indexPrefix");
     });
   }, [computedFacetFilters]);
@@ -24,25 +24,32 @@ export default function SearchBarFilter({
           label="Latest"
           optionKey="indexPrefix: -reference-doc"
           currentIndexPrefix={currentIndexPrefix}
-          onClick={() =>
+          onClick={(label) => {
+            setCurrentOption(label);
             onOptionClick(
               "indexPrefix: -reference-doc",
               "indexPrefix: -legacy-doc"
-            )
-          }
+            );
+          }}
         />
         <SearchOption
           label="API Reference"
           optionKey="indexPrefix: reference-doc"
           currentIndexPrefix={currentIndexPrefix}
-          onClick={() => onOptionClick("indexPrefix: reference-doc")}
+          onClick={(label) => {
+            setCurrentOption(label);
+            onOptionClick("indexPrefix: reference-doc");
+          }}
         />
 
         <SearchOption
           label="v1"
           optionKey="indexPrefix: legacy-doc"
           currentIndexPrefix={currentIndexPrefix}
-          onClick={() => onOptionClick("indexPrefix: legacy-doc")}
+          onClick={(label) => {
+            setCurrentOption(label);
+            onOptionClick("indexPrefix: legacy-doc");
+          }}
         />
       </div>
     </div>
@@ -60,7 +67,9 @@ function SearchOption({ label, onClick, optionKey, currentIndexPrefix }) {
             : "var(--ifm-color-third)"
         }`,
       }}
-      onClick={onClick}
+      onClick={() => {
+        onClick(label);
+      }}
     >
       {label}
     </div>

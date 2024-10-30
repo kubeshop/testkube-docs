@@ -57,7 +57,8 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
     facetFilters: computedFacetFilters,
   };
 
-  console.log("computedFacetFilters: ", computedFacetFilters);
+  const [currentOption, setCurrentOption] = useState("Latest");
+
   const history = useHistory();
   const searchContainer = useRef(null);
   const searchButtonRef = useRef(null);
@@ -172,6 +173,7 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
             <SearchBarFilter
               computedFacetFilters={computedFacetFilters}
               setComputedFacetFilters={setComputedFacetFilters}
+              setCurrentOption={setCurrentOption}
             />
             <DocSearchModal
               onClose={closeModal}
@@ -186,7 +188,7 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
               })}
               {...props}
               searchParameters={searchParameters}
-              placeholder={translations.placeholder}
+              placeholder={`Search in ${currentOption} Docs`}
               translations={translations.modal}
             />
           </div>,
