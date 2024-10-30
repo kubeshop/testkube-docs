@@ -17,6 +17,7 @@
   box-shadow: 0 var(--docsearch-modal-shadow);
   max-width: var(--docsearch-modal-width);
   padding: 8px;
+  padding-bottom: 16px;
 }
 
 .SearchFitlerTitle {
