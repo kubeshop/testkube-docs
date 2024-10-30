@@ -702,6 +702,7 @@ const sidebars = {
         },
         { type: "doc", label: "ArgoCD", id: "articles/argocd-integration" },
         { type: "doc", label: "Argo Rollouts", id: "articles/argorollouts-integration" },
+        { type: "doc", label: "Argo Workflows", id: "articles/argoworkflows-integration" },
         { type: "doc", label: "Flux", id: "articles/flux-integration" },
         { type: "doc", label: "CDEvents", id: "articles/cd-events" },
         { type: "doc", label: "Tekton", id: "articles/tekton" },
