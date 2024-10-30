@@ -589,6 +589,11 @@ const sidebars = {
           id: "articles/examples/gradle-basic",
         },
         {
+          type: "doc",
+          label: "NUnit",
+          id: "articles/examples/nunit-basic",
+        },
+        {
           type: "category",
           label: "Pytest",
           items: [
