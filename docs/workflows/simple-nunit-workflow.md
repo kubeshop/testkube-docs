@@ -24,5 +24,4 @@ spec:
       artifacts:
         paths:
           - nunit-report/*
-status: {}
 ```
