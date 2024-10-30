@@ -25,11 +25,9 @@ export default function SearchBarFilter({
   return (
     <div className="SearchFilterContainer">
       <div className="SearchFilter">
-        <div style={{ fontSize: 16, lineHeight: "32px" }}>
-          Select documentation:
-        </div>
+        <div className="SearchFitlerTitle">Select documentation:</div>
         <SearchOption
-          label="Main"
+          label="Latest"
           optionKey="indexPrefix: -reference-doc"
           currentIndexPrefix={currentIndexPrefix}
           onClick={() =>
@@ -40,14 +38,14 @@ export default function SearchBarFilter({
           }
         />
         <SearchOption
-          label="Reference"
+          label="API Reference"
           optionKey="indexPrefix: reference-doc"
           currentIndexPrefix={currentIndexPrefix}
           onClick={() => onOptionClick(["indexPrefix: reference-doc"])}
         />
 
         <SearchOption
-          label="Legacy"
+          label="v1"
           optionKey="indexPrefix: legacy-doc"
           currentIndexPrefix={currentIndexPrefix}
           onClick={() => onOptionClick(["indexPrefix: legacy-doc"])}

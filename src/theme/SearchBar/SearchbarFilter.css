@@ -19,15 +19,20 @@
   padding: 8px;
 }
 
+.SearchFitlerTitle {
+  font-size: 14px;
+  line-height: 24px;
+  color: #94a3b8;
+}
+
 .SearchOption {
-  font-size: 16px;
+  font-size: 12px;
   border: 1px solid;
   border-color: transparent;
   color: var(--ifm-font-color-base);
   border-radius: 4px;
-  min-width: 50px;
   display: flex;
   justify-content: center;
-  padding: 4px 8px;
+  padding: 2px 8px;
   cursor: pointer;
 }
