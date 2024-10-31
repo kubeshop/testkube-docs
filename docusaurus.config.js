@@ -25,6 +25,14 @@ const config = {
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "kubeshop", // Usually your GitHub org/user name.
   projectName: "testkube", // Usually your repo name.
+
+  // Even if you don't use internalization, you can use this field to set useful
+  // metadata like html lang. For example, if your site is Chinese, you may want
+  // to replace "en" with "zh-Hans".
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en"],
+  },
   scripts: [
     {
       src: "https://app.usercentrics.eu/browser-ui/latest/loader.js",
