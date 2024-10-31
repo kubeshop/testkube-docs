@@ -52,6 +52,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl: "https://github.com/kubeshop/testkube/tree/develop/docs",
+          breadcrumbs: false,
         },
         blog: false,
         theme: {
@@ -216,12 +217,6 @@ const config = {
 
           return undefined; // Return a falsy value: no redirect created
         },
-      },
-    ],
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        breadcrumbs: false,
       },
     ],
   ],
