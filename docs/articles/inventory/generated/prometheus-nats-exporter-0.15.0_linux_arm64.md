@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:48d5c127c0ac19a80888f37ab1d42911e9d18852cdf4beb3127d0c583e703b03</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 2" src="https://img.shields.io/badge/critical-2-8b1924"/> <img alt="high: 5" src="https://img.shields.io/badge/high-5-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/medium-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 5" src="https://img.shields.io/badge/unspecified-5-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:1f6787754b8b083f271adea4bb699b9c9e21279c89d903f1710f7647c604f145</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 2" src="https://img.shields.io/badge/critical-2-8b1924"/> <img alt="high: 5" src="https://img.shields.io/badge/high-5-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/medium-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 5" src="https://img.shields.io/badge/unspecified-5-lightgrey"/></td></tr>
 <tr><td>size</td><td>6.9 MB</td></tr>
 <tr><td>packages</td><td>40</td></tr>
 </table>
@@ -15,14 +15,6 @@ hide_table_of_contents: true
 <details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 4" src="https://img.shields.io/badge/H-4-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/U-2-lightgrey"/><strong>stdlib</strong> <code>1.22.2</code> (golang)</summary>
 
 <small><code>pkg:golang/stdlib@1.22.2</code></small><br/>
-
-```dockerfile
-# Dockerfile (38:38)
-COPY --from=deps /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-```
-
-<br/>
-
 <a href="https://scout.docker.com/v/CVE-2024-24790?s=golang&n=stdlib&t=golang&vr=%3E%3D1.22.0-0%2C%3C1.22.4"><img alt="critical : CVE--2024--24790" src="https://img.shields.io/badge/CVE--2024--24790-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
@@ -99,7 +91,7 @@ An attacker sending a request to a net/http/httputil.ReverseProxy proxy can expl
 <tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.19%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>56th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -166,41 +158,6 @@ A malformed DNS message in response to a query can cause the Lookup functions to
 <details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 3" src="https://img.shields.io/badge/U-3-lightgrey"/><strong>openssl</strong> <code>3.1.4-r5</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/openssl@3.1.4-r5?os_name=alpine&os_version=3.19</code></small><br/>
-
-```dockerfile
-# Dockerfile (4:31)
-FROM alpine:3.19.1 as deps
-
-ARG GO_APP
-ARG GORELEASER_DIST_DIR=/go/src/dist
-
-ARG TARGETOS
-ARG TARGETARCH
-ARG TARGETVARIANT
-
-RUN mkdir -p /go/bin /go/src ${GORELEASER_DIST_DIR}
-
-COPY --from=build ${GORELEASER_DIST_DIR}/ ${GORELEASER_DIST_DIR}
-
-RUN <<EOT
-  set -e 
-  apk add --no-cache ca-certificates jq
-  cd ${GORELEASER_DIST_DIR}/..
-
-  if [[ ${TARGETARCH} == "arm" ]]; then VARIANT=$(echo ${TARGETVARIANT} | sed 's/^v//'); fi
-  BIN_PATH=$(jq -r ".[] |select(.type   == \"Binary\" and \
-                                .name   == \"${GO_APP}\" and \
-                                .goos   == \"${TARGETOS}\" and \
-                                .goarch == \"${TARGETARCH}\" and \
-                                (.goarm == \"${VARIANT}\" or .goarm == null)) | .path" < /go/src/dist/artifacts.json)
-  cp ${BIN_PATH} /go/bin
-EOT
-
-FROM alpine:3.19.1
-```
-
-<br/>
-
 <a href="https://scout.docker.com/v/CVE-2024-5535?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.19&vr=%3C3.1.6-r0"><img alt="critical : CVE--2024--5535" src="https://img.shields.io/badge/CVE--2024--5535-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
@@ -306,41 +263,6 @@ FROM alpine:3.19.1
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 4" src="https://img.shields.io/badge/M-4-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>busybox</strong> <code>1.36.1-r15</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/busybox@1.36.1-r15?os_name=alpine&os_version=3.19</code></small><br/>
-
-```dockerfile
-# Dockerfile (4:31)
-FROM alpine:3.19.1 as deps
-
-ARG GO_APP
-ARG GORELEASER_DIST_DIR=/go/src/dist
-
-ARG TARGETOS
-ARG TARGETARCH
-ARG TARGETVARIANT
-
-RUN mkdir -p /go/bin /go/src ${GORELEASER_DIST_DIR}
-
-COPY --from=build ${GORELEASER_DIST_DIR}/ ${GORELEASER_DIST_DIR}
-
-RUN <<EOT
-  set -e 
-  apk add --no-cache ca-certificates jq
-  cd ${GORELEASER_DIST_DIR}/..
-
-  if [[ ${TARGETARCH} == "arm" ]]; then VARIANT=$(echo ${TARGETVARIANT} | sed 's/^v//'); fi
-  BIN_PATH=$(jq -r ".[] |select(.type   == \"Binary\" and \
-                                .name   == \"${GO_APP}\" and \
-                                .goos   == \"${TARGETOS}\" and \
-                                .goarch == \"${TARGETARCH}\" and \
-                                (.goarm == \"${VARIANT}\" or .goarm == null)) | .path" < /go/src/dist/artifacts.json)
-  cp ${BIN_PATH} /go/bin
-EOT
-
-FROM alpine:3.19.1
-```
-
-<br/>
-
 <a href="https://scout.docker.com/v/CVE-2023-42366?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.19&vr=%3C1.36.1-r16"><img alt="medium : CVE--2023--42366" src="https://img.shields.io/badge/CVE--2023--42366-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>

@@ -3,9 +3,9 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:837bc6c638e1274c4d93f42ed6ce4a095aa4aa967f8b8b957b74b39f353924f2</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 3" src="https://img.shields.io/badge/high-3-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/medium-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
-<tr><td>size</td><td>20 MB</td></tr>
-<tr><td>packages</td><td>208</td></tr>
+<tr><td>digest</td><td><code>sha256:5aad4f783fe6f1e3f73c8b8c7c52fca99f9987d5a3a67cea440d642ca7823004</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 3" src="https://img.shields.io/badge/high-3-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/medium-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
+<tr><td>size</td><td>18 MB</td></tr>
+<tr><td>packages</td><td>198</td></tr>
 </table>
 </details></table>
 </details>
@@ -55,7 +55,7 @@ Calling Decoder.Decode on a message which contains deeply nested structures can 
 <tr><td>Affected range</td><td><code>>=1.23.0-0<br/><1.23.1</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.1</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.19%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>56th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

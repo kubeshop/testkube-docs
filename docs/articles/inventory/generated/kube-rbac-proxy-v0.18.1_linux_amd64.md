@@ -55,7 +55,7 @@ Calling Decoder.Decode on a message which contains deeply nested structures can 
 <tr><td>Affected range</td><td><code>>=1.23.0-0<br/><1.23.1</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.1</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.19%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>56th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

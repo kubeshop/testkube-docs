@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:81c6853afd64fbcd914080a236328fafe24a0ae19d97fcab9cbf143f031272fd</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 2" src="https://img.shields.io/badge/critical-2-8b1924"/> <img alt="high: 10" src="https://img.shields.io/badge/high-10-e25d68"/> <img alt="medium: 14" src="https://img.shields.io/badge/medium-14-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 9" src="https://img.shields.io/badge/unspecified-9-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:0d50270fa374580c3cb46bc12bfa2b082263c6f90bbcd219f8cfbe14e8708292</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 2" src="https://img.shields.io/badge/critical-2-8b1924"/> <img alt="high: 10" src="https://img.shields.io/badge/high-10-e25d68"/> <img alt="medium: 15" src="https://img.shields.io/badge/medium-15-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 8" src="https://img.shields.io/badge/unspecified-8-lightgrey"/></td></tr>
 <tr><td>size</td><td>4.2 MB</td></tr>
 <tr><td>packages</td><td>24</td></tr>
 </table>
@@ -15,14 +15,6 @@ hide_table_of_contents: true
 <details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 9" src="https://img.shields.io/badge/H-9-e25d68"/> <img alt="medium: 7" src="https://img.shields.io/badge/M-7-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 5" src="https://img.shields.io/badge/U-5-lightgrey"/><strong>stdlib</strong> <code>1.20.5</code> (golang)</summary>
 
 <small><code>pkg:golang/stdlib@1.20.5</code></small><br/>
-
-```dockerfile
-# Dockerfile (38:38)
-COPY --from=deps /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-```
-
-<br/>
-
 <a href="https://scout.docker.com/v/CVE-2024-24790?s=golang&n=stdlib&t=golang&vr=%3C1.21.11"><img alt="critical : CVE--2024--24790" src="https://img.shields.io/badge/CVE--2024--24790-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
@@ -212,7 +204,7 @@ The default stream concurrency limit is 250 streams (requests) per HTTP/2 connec
 <tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.19%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>56th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -299,7 +291,7 @@ The archive/zip package's handling of certain types of invalid zip files differs
 <tr><td>Affected range</td><td><code>&lt;1.20.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.06%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>26th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -449,44 +441,9 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/M-3-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 4" src="https://img.shields.io/badge/U-4-lightgrey"/><strong>openssl</strong> <code>3.1.4-r2</code> (apk)</summary>
+<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/M-4-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 3" src="https://img.shields.io/badge/U-3-lightgrey"/><strong>openssl</strong> <code>3.1.4-r2</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/openssl@3.1.4-r2?os_name=alpine&os_version=3.19</code></small><br/>
-
-```dockerfile
-# Dockerfile (4:31)
-FROM alpine:3.19 as deps
-
-ARG GO_APP
-ARG GORELEASER_DIST_DIR=/go/src/dist
-
-ARG TARGETOS
-ARG TARGETARCH
-ARG TARGETVARIANT
-
-RUN mkdir -p /go/bin /go/src ${GORELEASER_DIST_DIR}
-
-COPY --from=build ${GORELEASER_DIST_DIR}/ ${GORELEASER_DIST_DIR}
-
-RUN <<EOT
-  set -e 
-  apk add --no-cache ca-certificates jq
-  cd ${GORELEASER_DIST_DIR}/..
-
-  if [[ ${TARGETARCH} == "arm" ]]; then VARIANT=$(echo ${TARGETVARIANT} | sed 's/^v//'); fi
-  BIN_PATH=$(jq -r ".[] |select(.type   == \"Binary\" and \
-                                .name   == \"${GO_APP}\" and \
-                                .goos   == \"${TARGETOS}\" and \
-                                .goarch == \"${TARGETARCH}\" and \
-                                (.goarm == \"${VARIANT}\" or .goarm == null)) | .path" < /go/src/dist/artifacts.json)
-  cp ${BIN_PATH} /go/bin
-EOT
-
-FROM alpine:3.19
-```
-
-<br/>
-
 <a href="https://scout.docker.com/v/CVE-2024-5535?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.19&vr=%3C3.1.6-r0"><img alt="critical : CVE--2024--5535" src="https://img.shields.io/badge/CVE--2024--5535-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
@@ -528,6 +485,23 @@ FROM alpine:3.19
 <tr><td>Fixed version</td><td><code>3.1.4-r3</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.06%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2023-6237?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.19&vr=%3C3.1.4-r4"><img alt="medium : CVE--2023--6237" src="https://img.shields.io/badge/CVE--2023--6237-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;3.1.4-r4</code></td></tr>
+<tr><td>Fixed version</td><td><code>3.1.4-r4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -620,64 +594,12 @@ FROM alpine:3.19
 
 </blockquote>
 </details>
-
-<a href="https://scout.docker.com/v/CVE-2023-6237?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.19&vr=%3C3.1.4-r4"><img alt="unspecified : CVE--2023--6237" src="https://img.shields.io/badge/CVE--2023--6237-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;3.1.4-r4</code></td></tr>
-<tr><td>Fixed version</td><td><code>3.1.4-r4</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
 </details></td></tr>
 
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 4" src="https://img.shields.io/badge/M-4-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>busybox</strong> <code>1.36.1-r15</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/busybox@1.36.1-r15?os_name=alpine&os_version=3.19</code></small><br/>
-
-```dockerfile
-# Dockerfile (4:31)
-FROM alpine:3.19 as deps
-
-ARG GO_APP
-ARG GORELEASER_DIST_DIR=/go/src/dist
-
-ARG TARGETOS
-ARG TARGETARCH
-ARG TARGETVARIANT
-
-RUN mkdir -p /go/bin /go/src ${GORELEASER_DIST_DIR}
-
-COPY --from=build ${GORELEASER_DIST_DIR}/ ${GORELEASER_DIST_DIR}
-
-RUN <<EOT
-  set -e 
-  apk add --no-cache ca-certificates jq
-  cd ${GORELEASER_DIST_DIR}/..
-
-  if [[ ${TARGETARCH} == "arm" ]]; then VARIANT=$(echo ${TARGETVARIANT} | sed 's/^v//'); fi
-  BIN_PATH=$(jq -r ".[] |select(.type   == \"Binary\" and \
-                                .name   == \"${GO_APP}\" and \
-                                .goos   == \"${TARGETOS}\" and \
-                                .goarch == \"${TARGETARCH}\" and \
-                                (.goarm == \"${VARIANT}\" or .goarm == null)) | .path" < /go/src/dist/artifacts.json)
-  cp ${BIN_PATH} /go/bin
-EOT
-
-FROM alpine:3.19
-```
-
-<br/>
-
 <a href="https://scout.docker.com/v/CVE-2023-42366?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.19&vr=%3C1.36.1-r16"><img alt="medium : CVE--2023--42366" src="https://img.shields.io/badge/CVE--2023--42366-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
