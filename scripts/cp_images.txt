@@ -1,10 +1,9 @@
-alpine/mongosh:2.0.2
 bitnami/minio:2024.8.3-debian-12-r1
-ghcr.io/dexidp/dex:v2.40.0
+ghcr.io/dexidp/dex:v2.41.1
 kubeshop/bitnami-mongodb:7.0.12
-kubeshop/testkube-enterprise-api:1.10.67
-kubeshop/testkube-enterprise-ui:2.6.2
-kubeshop/testkube-enterprise-worker-service:1.10.41
-nats:2.10.16-alpine
-natsio/nats-server-config-reloader:0.14.3
+kubeshop/testkube-enterprise-api:1.10.74
+kubeshop/testkube-enterprise-ui:2.7.0
+kubeshop/testkube-enterprise-worker-service:1.10.74
+nats:2.10.22-alpine
+natsio/nats-server-config-reloader:0.16.0
 natsio/prometheus-nats-exporter:0.15.0
