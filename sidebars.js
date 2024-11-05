@@ -40,82 +40,100 @@ const sidebars = {
           label: "Installation Overview",
           id: "articles/install/overview",
         },
-        "articles/install/install-with-cli",
-        {
-          type: "category",
-          label: "Install with Helm",
-          items: [
-            {
-              type: "doc",
-              label: "Overview",
-              id: "articles/install/install-with-helm",
-            },
-            "articles/install/advanced-install",
-          ],
-        },
-        { type: "doc", label: "Testkube Docker Agent", id: "articles/install/docker-agent" },
         "articles/install/deployment-architectures",
-        "articles/install/faq",
         {
           type: "category",
-          label: "More Guides",
+          label: "Testkube On Premise",
           items: [
-            "articles/install/multi-cluster",
-            { type: "doc", label: "Standalone Agent", id: "articles/install/standalone-agent" },
-            { type: "doc", label: "Agent with Local Kubernetes", id: "articles/install/quickstart-no-k8s" },
-            { type: "doc", label: "Upgrading", id: "articles/upgrade" },
-            "articles/install/uninstall",
             {
-              type: "doc",
-              label: "Using Private Registries",
-              id: "articles/deploying-from-private-registries",
-            },            {
-              type: "doc",
-              label: "Configure Identity Providers",
-              id: "testkube-pro-on-prem/articles/auth",
+              type: "category",
+              label: "Evaluation",
+              items: [
+                "articles/install/install-with-cli",
+              ]
             },
             {
-              type: "doc",
-              label: "S3 with IAM Authentication",
-              id: "articles/install/s3-storage",
+              type: "category",
+              label: "Production",
+              items: [
+                {
+                  type: "doc",
+                  label: "Overview",
+                  id: "articles/install/install-with-helm",
+                },
+                "articles/install/advanced-install",
+              ]
             },
             {
-              type: "doc",
-              label: "Using Istio",
-              id: "articles/istio",
+              type: "category",
+              label: "Advanced",
+              items: [
+                "articles/install/multi-cluster",
+                { type: "doc", label: "Agent with Local Kubernetes", id: "articles/install/quickstart-no-k8s" },
+                {
+                  type: "doc",
+                  label: "Using Private Registries",
+                  id: "articles/deploying-from-private-registries",
+                },            {
+                  type: "doc",
+                  label: "Configure Identity Providers",
+                  id: "testkube-pro-on-prem/articles/auth",
+                },
+                {
+                  type: "doc",
+                  label: "S3 with IAM Authentication",
+                  id: "articles/install/s3-storage",
+                },
+                {
+                  type: "doc",
+                  label: "Using Istio",
+                  id: "articles/istio",
+                },
+                {
+                  type: "doc",
+                  label: "Using Vault",
+                  id: "articles/vault-install",
+                },
+                {
+                  type: "doc",
+                  label: "Using a Private CA",
+                  id: "articles/private-ca",
+                },
+                {
+                  type: "doc",
+                  label: "Image Inventory",
+                  id: "articles/inventory/images",
+                },
+                {
+                  type: "doc",
+                  label: "Using an external MongoDB",
+                  id: "articles/testkube-dependencies",
+                },
+                {
+                  type: "doc",
+                  label: "Ephemeral Environments",
+                  id: "articles/ephemeral-environments",
+                },
+                {
+                  type: "link",
+                  label: "Testkube with Kind",
+                  href: "https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker",
+                },
+              ],
             },
-            {
-              type: "doc",
-              label: "Using Vault",
-              id: "articles/vault-install",
-            },
-            {
-              type: "doc",
-              label: "Using a Private CA",
-              id: "articles/private-ca",
-            },
-            {
-              type: "doc",
-              label: "Image Inventory",
-              id: "articles/inventory/images",
-            },
-            {
-              type: "doc",
-              label: "Using an external MongoDB",
-              id: "articles/testkube-dependencies",
-            },
-            {
-              type: "doc",
-              label: "Ephemeral Environments",
-              id: "articles/ephemeral-environments",
-            },
-            {
-              type: "link",
-              label: "Testkube with Kind",
-              href: "https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker",
-            },
-          ],
+          ]
         },
+        {
+           type: "category",
+          label: "Testkube Cloud",
+          items:[
+            { type: "doc", label: "Testkube Docker Agent", id: "articles/install/docker-agent" },
+          ]
+        },
+        { type: "doc", label: "Open Source / Standalone Agent", id: "articles/install/standalone-agent" },
+        "articles/install/faq",
+        { type: "doc", label: "Upgrading", id: "articles/upgrade" },
+        "articles/install/uninstall",
       ],
     },
     {
@@ -360,17 +378,6 @@ const sidebars = {
               type: "doc",
               label: "JUnit Reports",
               id: "articles/test-workflows-reports",
-            },
-          ],
-        },
-        {
-          type: "category",
-          label: "Reporting & Analysis",
-          items: [
-            {
-              type: "doc",
-              label: "Overview",
-              id: "articles/reporting-overview",
             },
             {
               type: "doc",

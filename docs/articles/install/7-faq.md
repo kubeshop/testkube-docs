@@ -1,4 +1,4 @@
-# Install FAQ
+# Installation FAQ
 
 ## Can Testkube be deployed on OpenShift?
 

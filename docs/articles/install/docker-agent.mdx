@@ -1,10 +1,10 @@
 # Testkube Docker Agent
 
-The Testkube Docker Agent provides a convenient way to evaluate Testkube as it allows you to run the Testkube Agent directly under
+The Testkube Docker Agent provides a convenient way to evaluate Testkube Cloud as it allows you to run the Testkube Agent directly under
 Docker without having to install or manage your own Kubernetes distribution.
 
 :::info
-The Testkube Docker Agent is not recommended for production usage - [Read More](#not-for-production-usage)
+You can, of course, use the Docker Agent with On Premise installations also, but it is not recommended for production usage - [Read More](#not-for-production-usage)
 :::
 
 ## Resource Allocation
@@ -188,7 +188,7 @@ in your environment - [Read More](https://kind.sigs.k8s.io/docs/user/known-issue
 
 :::info
 Although the Testkuber Docker Agent is a great way to run Testkube tests in your infrastructure, it is **not** meant
-for production or large-scale deployments as it is (very) constrained by the Docker runtime environment itself.
+for production or large-scale deployments as it is potentially (very) constrained by the Docker runtime environment itself.
 
 When deploying the Testkube Agent production or advanced evaluation purposes, please run the agent directly under a
 Kubernetes instance, either locally or in a remote/hosted Kubernetes provider in line with the
