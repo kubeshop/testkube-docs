@@ -31,7 +31,6 @@ testkube delete executor [executorName] [flags]
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
       --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
-      --oauth-enabled           enable oauth
       --verbose                 should I show additional debug messages
 ```
 
