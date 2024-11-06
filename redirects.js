@@ -218,8 +218,9 @@ const redirects = [
     from: [
       "/guides/going-to-production/authentication/oauth-cli",
       "/guides/authentication/oauth-cli",
+      "/articles/oauth-cli",
     ],
-    to: "/articles/oauth-cli",
+    to: "/articles/cli",
   },
   {
     from: [
