@@ -455,7 +455,6 @@ const sidebars = {
               label: "Docker CLI",
               id: "articles/testkube-cli-docker",
             },
-            { type: "doc", label: "OAuth for CLI", id: "articles/oauth-cli" },
           ],
         },
       ],
