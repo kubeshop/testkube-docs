@@ -12,7 +12,6 @@ by the agent itself when it is running in standalone mode. This is the same API 
 the Testkube CLI for most of its commands. 
 
 By default this API does not require any authentication for any of its operations - so be careful in giving access.
-Adding CLI-compatible OAUth Authentication to the Agent API is described in [this document](../articles/oauth-cli.md).
 
 ## Control Plane API
 
