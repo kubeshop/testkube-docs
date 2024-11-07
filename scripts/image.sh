@@ -104,6 +104,10 @@ rm -rfv "$OUTPUT_DIR"
 # Ensure the directory exists
 mkdir -p "$OUTPUT_DIR"
 
+# Add repos
+helm repo add testkubeenterprise https://kubeshop.github.io/testkube-cloud-charts
+helm repo add kubeshop https://kubeshop.github.io/helm-charts
+
 # Update the charts to get the latest versions
 helm repo update
 
