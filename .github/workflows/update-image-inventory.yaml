@@ -41,3 +41,4 @@ jobs:
           commit_message: "docs: upate image inventory"
           branch: update-image-inventory
           create_branch: true
+          push_options: '--force'
