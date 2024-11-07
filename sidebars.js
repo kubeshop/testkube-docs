@@ -56,10 +56,14 @@ const sidebars = {
               items: [
                 {
                   type: "doc",
-                  label: "Installation",
+                  label: "Base Install",
                   id: "articles/install/install-with-helm",
                 },
-                "articles/install/advanced-install",
+                {
+                  type: "doc",
+                  label: "Custom Installation",
+                 id: "articles/install/advanced-install",
+                }
               ]
             },
             {
