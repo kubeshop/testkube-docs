@@ -46,11 +46,12 @@ generate_reports() {
 
     INDEX_FILE="${OUTPUT_DIR}${IMAGE_SET}.md"
     VERSION=$(get_latest_helm_version "$1")
+    DATE=$(date +"%d-%m-%Y")
 
     # Create the header for the index file
     echo ":::info" >> "$INDEX_FILE"
     echo "" >> "$INDEX_FILE"
-    echo "Based on chart \`$(basename $CHART_NAME)\` as of version \`${VERSION}\`" >> "$INDEX_FILE"
+    echo "Based on chart \`$(basename $CHART_NAME)\` as of version \`${VERSION}\` on ${DATE}" >> "$INDEX_FILE"
     echo "" >> "$INDEX_FILE"
     echo ":::" >> "$INDEX_FILE"
     echo "" >> "$INDEX_FILE"
