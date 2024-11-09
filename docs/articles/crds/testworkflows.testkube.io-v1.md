@@ -936,35 +936,35 @@ _Appears in:_
 _Appears in:_
 - [StepExecuteTest](#stepexecutetest)
 
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `name` _string_ | test execution custom name |  |  |
-| `executionLabels` _object (keys:string, values:string)_ | test execution labels |  |  |
-| `variablesFile` _string_ | variables file content - need to be in format for particular executor (e.g. postman envs file) |  |  |
-| `isVariablesFileUploaded` _boolean_ |  |  |  |
-| `variables` _object (keys:string, values:[Variable](#variable))_ |  |  |  |
-| `testSecretUUID` _string_ | test secret uuid |  |  |
-| `args` _string array_ | additional executor binary arguments |  |  |
-| `argsMode` _[ArgsModeType](#argsmodetype)_ | usage mode for arguments |  |  |
-| `command` _string array_ | executor binary command |  |  |
-| `image` _string_ | container executor image |  |  |
-| `imagePullSecrets` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#localobjectreference-v1-core) array_ | container executor image pull secrets |  |  |
-| `sync` _boolean_ | whether to start execution sync or async |  |  |
-| `httpProxy` _string_ | http proxy for executor containers |  |  |
-| `httpsProxy` _string_ | https proxy for executor containers |  |  |
-| `negativeTest` _boolean_ | negative test will fail the execution if it is a success and it will succeed if it is a failure |  |  |
+| Field | Description                                                                                                                                                                                                            | Default | Validation |
+| --- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- | --- |
+| `name` _string_ | test execution custom name                                                                                                                                                                                             |  |  |
+| `executionLabels` _object (keys:string, values:string)_ | test execution labels                                                                                                                                                                                                  |  |  |
+| `variablesFile` _string_ | variables file content - need to be in format for particular executor (e.g. postman envs file)                                                                                                                         |  |  |
+| `isVariablesFileUploaded` _boolean_ |                                                                                                                                                                                                                        |  |  |
+| `variables` _object (keys:string, values:[Variable](#variable))_ |                                                                                                                                                                                                                        |  |  |
+| `testSecretUUID` _string_ | test secret uuid                                                                                                                                                                                                       |  |  |
+| `args` _string array_ | additional executor binary arguments                                                                                                                                                                                   |  |  |
+| `argsMode` _[ArgsModeType](#argsmodetype)_ | usage mode for arguments                                                                                                                                                                                               |  |  |
+| `command` _string array_ | executor binary command                                                                                                                                                                                                |  |  |
+| `image` _string_ | container executor image                                                                                                                                                                                               |  |  |
+| `imagePullSecrets` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#localobjectreference-v1-core) array_ | container executor image pull secrets                                                                                                                                                                                  |  |  |
+| `sync` _boolean_ | whether to start execution sync or async                                                                                                                                                                               |  |  |
+| `httpProxy` _string_ | http proxy for executor containers                                                                                                                                                                                     |  |  |
+| `httpsProxy` _string_ | https proxy for executor containers                                                                                                                                                                                    |  |  |
+| `negativeTest` _boolean_ | negative test will fail the execution if it is a success and it will succeed if it is a failure                                                                                                                        |  |  |
 | `activeDeadlineSeconds` _integer_ | Optional duration in seconds the pod may be active on the node relative to<br />StartTime before the system will actively try to mark it failed and kill associated containers.<br />Value must be a positive integer. |  |  |
-| `artifactRequest` _[ArtifactRequest](#artifactrequest)_ |  |  |  |
-| `jobTemplate` _string_ | job template extensions |  |  |
-| `cronJobTemplate` _string_ | cron job template extensions |  |  |
-| `preRunScript` _string_ | script to run before test execution |  |  |
-| `postRunScript` _string_ | script to run after test execution |  |  |
-| `executePostRunScriptBeforeScraping` _boolean_ | execute post run script before scraping (prebuilt executor only) |  |  |
-| `sourceScripts` _boolean_ | run scripts using source command (container executor only) |  |  |
-| `scraperTemplate` _string_ | scraper template extensions |  |  |
-| `envConfigMaps` _[EnvReference](#envreference) array_ | config map references |  |  |
-| `envSecrets` _[EnvReference](#envreference) array_ | secret references |  |  |
-| `executionNamespace` _string_ | namespace for test execution (Pro edition only) |  |  |
+| `artifactRequest` _[ArtifactRequest](#artifactrequest)_ |                                                                                                                                                                                                                        |  |  |
+| `jobTemplate` _string_ | job template extensions                                                                                                                                                                                                |  |  |
+| `cronJobTemplate` _string_ | cron job template extensions                                                                                                                                                                                           |  |  |
+| `preRunScript` _string_ | script to run before test execution                                                                                                                                                                                    |  |  |
+| `postRunScript` _string_ | script to run after test execution                                                                                                                                                                                     |  |  |
+| `executePostRunScriptBeforeScraping` _boolean_ | execute post run script before scraping (prebuilt executor only)                                                                                                                                                       |  |  |
+| `sourceScripts` _boolean_ | run scripts using source command (container executor only)                                                                                                                                                             |  |  |
+| `scraperTemplate` _string_ | scraper template extensions                                                                                                                                                                                            |  |  |
+| `envConfigMaps` _[EnvReference](#envreference) array_ | config map references                                                                                                                                                                                                  |  |  |
+| `envSecrets` _[EnvReference](#envreference) array_ | secret references                                                                                                                                                                                                      |  |  |
+| `executionNamespace` _string_ | namespace for test execution                                                                                                                                                                                           |  |  |
 
 
 ### TestWorkflow

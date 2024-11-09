@@ -40,7 +40,6 @@ const sidebars = {
           label: "Installation Overview",
           id: "articles/install/overview",
         },
-        "articles/install/deployment-architectures",
         {
           type: "category",
           label: "Testkube On Premise",
@@ -68,7 +67,7 @@ const sidebars = {
             },
             {
               type: "category",
-              label: "Advanced",
+              label: "Advanced Guides",
               items: [
                 "articles/install/multi-cluster",
                 {
