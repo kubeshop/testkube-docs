@@ -2,9 +2,13 @@
 
 Testkube contains two main components:
 
-- A **Control Plane** which includes the Dashboard, Storage for Results/Artifacts, Cluster Federation, etc.
-- An **Agent** that _always_ runs in your own infrastructure that executes your tests and gathers results. You
-  can install as many agents as needed, they can all be managed from a single instance of the Control Plane.
+- The **Testkube Control Plane** which includes the Dashboard, Storage for Results/Artifacts, User/Role mgmt, Insights, etc.
+- The **Testkube Agent** which executes your tests, collects test execution logs/results and listens for Kubernetes Events. The agent is _always_ 
+  deployed in your own infrastructure. 
+
+:::note
+You can install as many agents as needed, they can all be managed from a single instance of the Control Plane.
+:::
 
 You can deploy Testkube in one of the following ways:
 
@@ -12,11 +16,11 @@ You can deploy Testkube in one of the following ways:
 - **Testkube Cloud** - the Control Plane runs in the cloud and managed by the Testkube Team.
 - **Testkube Agent Standalone** - the Agent runs without a Control Plane or Dashboard for single cluster usage scenarios.
 
+High-level deployment architecture and how to get started with each of these is described below.
+
 :::note
 An architectural overview of Testkube and its components is available in the [Architecture Reference](../architecture).
 :::
-
-Installation for each of these is described below.
 
 ## Testkube On-Prem 
 
@@ -25,6 +29,11 @@ The default installation deploys both the Control Plane and a single Testkube Ag
 
 You can install a preconfigured version of Testkube On-Prem [with the CLI][install-cli] for an out-of-the-box experience
 or install [with Helm][install-helm] for more configurability in production scenarios.
+
+In either case, you will need to [request a trial license](https://testkube.io/download) that will be required 
+during the installation process.
+
+A high-level deployment architecture for Testkube On-Prem is shown below.
 
 ![Deployment with single agent](../../img/architecture-default.jpeg)
 
@@ -44,20 +53,23 @@ Read more about Multi-cluster deployments at [Multicluster](/articles/install/mu
 When using Testkube Cloud, the Control Plane is managed by the Testkube team, you only have to install the 
 Testkube Agent in your infrastructure wherever you want to run your tests.
 
-To get started, visit https://app.testkube.io and sign up for an account. During the onboarding you will be 
+To get started, visit https://app.testkube.io and sign up for a trial account. During the onboarding you will be 
 prompted to create an initial Testkube Environment, which will provide you with the required CLI/Helm commands to 
 deploy the corresponding Testkube Agent in your infrastructure - [Read More](/testkube-pro/articles/environment-management#creating-a-new-environment)
 
-:::info
-Your proprietary tests are never run or stored on our servers, only test logs and artifacts will be stored.
-:::
+A high-level deployment architecture for Testkube Cloud is shown below.
 
 ![Deployment with managed control plane](../../img/architecture-managed.jpeg)
 
-## Testkube Agent Standalone (Open Source)
+:::info
+Even when using Testkube Cloud, your actual tests are never run or stored on our servers, only test 
+logs and artifacts will be stored.
+:::
+
+## Testkube Agent Standalone 
 
 The Testkube Agent is in itself Open Source and can be deployed without a
-control plane or Dashboard. All interactions and test execution is done through the [Testkube CLI](/articles/cli).
+control plane or Dashboard. All management and test execution is done through the [Testkube CLI](/articles/cli).
 
 - Learn more about how the [Standalone Agent compares](/articles/open-source-or-pro)
 - Learn more about how to [deploy the standalong agent][deploy-standalone].

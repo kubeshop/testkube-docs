@@ -39,6 +39,11 @@ testkube docker --agent-token=tkcagnt_XXX --org-id=tkcorg_YYY --env-id=tkcenv_ZZ
 
 You can get the required tokens from the [Agent Information tab](/testkube-pro/articles/environment-management/#agent-information).
 
+:::tip
+When creating a new Environment in the Testkube Dashboard you will be shown the above command with the correct
+parameters automatically - see [Creating Environments](/testkube-pro/articles/environment-management#creating-a-new-environment).
+:::
+
 ### With Docker
 
 Install the Testkube Agent using `docker run` with arguments provided in the Testkube Dashboard:
@@ -96,7 +101,7 @@ and then use that with the `testkube set context` command provided in the
 This is not necessary if you used the Testkube CLI to install the Docker Agent as described above.
 :::
 
-## Upgrading Testkube Docker Agent
+## Upgrading the Testkube Docker Agent
 
 There are two ways to upgrade the Docker Agent to the latest version
 

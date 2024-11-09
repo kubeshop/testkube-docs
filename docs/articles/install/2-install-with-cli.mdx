@@ -1,26 +1,26 @@
 import CliInstallation from '../_cli_installation.mdx';
 
-# Testkube Evaluation with CLI
+# Testkube On-Prem with CLI
 
-Following this quickstart tutorial provides you with a simplified On Prem installation that deploys both the control plane and agent within the same namespace. It does not create Ingress configuration as its mainly designed for local installations that allow you to quickly try out and evaluate the solution. It comes with a preconfigured admin, organization and environment.
+This step-by-step tutorial provides you with a simplified Testkube On Prem installation that deploys both the Testkube Control Plane and Agent
+within the same namespace. It does not create Ingress configuration as it is mainly designed for local installations that allow
+you to quickly try out and evaluate the solution. It comes with a preconfigured admin account, Organization and Environment for running your tests.
 
 ## 1. Prerequisites
 
-Before you can get started with our quickstart deployment, you will need the following:
+Before you can get started with the quickstart deployment, you will need the following:
 
-- Access to a Kubernetes cluster - If you don't have one we provide instructions on how to run the [Testkube Agent with Docker](quickstart-no-k8s.mdx).
+- Access to a Kubernetes cluster.
 - [The helm CLI][install-helm] to generate the required Kubernetes YAML configurations.
 - [The kubectl CLI][install-kubectl] to run commands against Kubernetes clusters.
 - The Testkube CLI for the quickstarter. For instructions, see the next section.
 
-For the complete Testkube experience including the Dashboard and all related functionality, you will need
-to [request your free trial license](https://testkube.io/download) that will be necessary during the installation process.
-
-Alternatively, you can get started with just [the standalone agent][install-oss] which is fully open-sourced and does not require a license.
+You will need to [request a trial license](https://testkube.io/download) that will be required during the installation process.
 
 :::info
-Why is a license required? Using a license helps us ensure you have an optimal installation and product experience with Testkube.
-Don’t worry, you won’t have to talk to a sales rep or enter any credit-card details to get going, but if you need our help we’ll be much better prepared!
+Using a license helps us ensure you have an optimal installation and product experience with Testkube.
+Don’t worry, you won’t have to talk to a sales rep or enter any credit-card details to get going, but
+if you need our help we’ll be much better prepared!
 :::
 
 ## 2. Install the Testkube CLI
@@ -34,8 +34,8 @@ You can choose one of the following methods to install the CLI:
 The installer will complete these steps:
 
 - Check if you have chosen the right Kubernetes environment.
-- Ask for some information, such as the previously requested license.
-- Install Testkube’s control plane and agent, both within the same namespace.
+- Ask for some information, such as the trial license requested as noted above.
+- Install Testkubes Control Plane and Agent, both within the same namespace.
 
 The whole process takes 3-5 minutes and can be started with the following command:
 
@@ -43,7 +43,9 @@ The whole process takes 3-5 minutes and can be started with the following comman
 testkube init demo
 ```
 
-Once installed, you will be asked if you want to `testkube dashboard` to conveniently access all relevant services on your localhost. You can always execute this yourself afterwards should you close this terminal after installation. The admin in this demo has the following e-mail and password: `admin@example.com/password`.
+Once installed, you will be asked if you want to `testkube dashboard` to conveniently access all relevant services on your localhost.
+You can always execute this yourself afterward should you close this terminal after installation. The admin in this demo has
+the following e-mail and password: `admin@example.com/password`.
 
 Happy testing!
 

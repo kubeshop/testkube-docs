@@ -1,6 +1,7 @@
 # Multicluster
 
-Testkube can federate multiple clusters. Conceptually, each cluster maps to an Environment within Testkube.
+The Testkube Control Plane can manage Testkube Agents in multiple clusters allowing you run your tests wherever needed. 
+Conceptually, each cluster maps to an Environment within Testkube.
 
 :::info
 The commands below that connect to on-prem will likely need to add

@@ -133,7 +133,7 @@ const sidebars = {
             {type: "doc", label: "Agent with Local Kubernetes", id: "articles/install/quickstart-no-k8s"},
           ]
         },
-        {type: "doc", label: "Testkube Open Source", id: "articles/install/standalone-agent"},
+        {type: "doc", label: "Testkube Agent Standalone", id: "articles/install/standalone-agent"},
         "articles/install/faq",
         {type: "doc", label: "Upgrade & Uninstall", id: "articles/upgrade"},
       ],
@@ -760,6 +760,7 @@ const sidebars = {
           label: "Architecture",
           id: "articles/architecture",
         },
+        "articles/helm-components",
         "articles/telemetry",
         {
           type: "category",
