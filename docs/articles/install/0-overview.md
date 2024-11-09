@@ -37,6 +37,10 @@ A high-level deployment architecture for Testkube On-Prem is shown below.
 
 ![Deployment with single agent](../../img/architecture-default.jpeg)
 
+:::tip
+Check out [Helm Components](/articles/helm-components) to see all the actual components used by Testkube.
+:::
+
 ### Testkube On-Prem Multicluster
 
 If you want to install Testkube On-Prem with the Control Plane in one namespace and multiple agents in any number of 
