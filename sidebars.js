@@ -46,6 +46,11 @@ const sidebars = {
           items: [
             {
               type: "doc",
+              label: "Overview",
+              id: "articles/install/onprem-overview",
+            },
+            {
+              type: "doc",
               label: "Evaluation",
               id: "articles/install/install-with-cli",
             },
