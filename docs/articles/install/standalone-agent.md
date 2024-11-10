@@ -11,7 +11,7 @@ Read more about the [Testkube Open Source Agent](/articles/open-source-or-pro) t
 commercial Testkube offering.
 :::
 
-## Installing the standalone Agent
+## Installing the Standalone Agent
 
 The following steps are required to install the Standalone Agent into a Kubernetes Cluster:
 
@@ -96,7 +96,7 @@ testkube uninstall
 helm delete --namespace testkube testkube kubeshop/testkube
 ```
 
-## Connecting a Standalone Agent to the Testkube Control Plane
+## Connecting to the Testkube Control Plane
 
 In case you decide that you want to go beyond a standalone agent, you can connect it to a Testkube Control Plane.
 The following command which will guide you through the migration process.
@@ -384,7 +384,7 @@ testkube-api:
 [secrets-endpoint]: /articles/secrets-enable-endpoint
 [secrets-creation]: /articles/secrets-disable-creation
 [oss-vs-pro]: /articles/open-source-or-pro
-[upgrade]: /articles/upgrade
+[upgrade]: /articles/upgrade-uninstall
 [mongo-config]: https://github.com/bitnami/charts/tree/master/bitnami/mongodb#parameters
 [nats-config]: https://docs.nats.io/running-a-nats-service/nats-kubernetes/helm-charts
 [install-cli]: /articles/install/cli

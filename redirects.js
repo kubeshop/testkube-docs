@@ -390,7 +390,7 @@ const redirects = [
   },
   {
     from: "/guides/upgrade",
-    to: "/articles/upgrade",
+    to: "/articles/upgrade-uninstall",
   },
   {
     from: ["/testkube-enterprise/articles/auth", "/articles/install/auth"],

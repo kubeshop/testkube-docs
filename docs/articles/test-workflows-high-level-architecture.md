@@ -64,7 +64,7 @@ to reduce the scope where it's not accessible. It reduces the isolation a bit, b
 
 :::info
 
-Merging containers is a default behavior. To opt-out, you can use system flag in the Test Workflow or [**Global Template**](./test-workflows-job-and-pod.md#global-template):
+Merging containers is a default behavior. To opt-out, you can use system flag in the Test Workflow or [**Global Template**](./test-workflow-templates#global-templates):
 
 ```yaml
 spec:
@@ -99,7 +99,7 @@ spec:
 
 :::info
 
-If you wish to have that behavior by default for all steps, you can use a system flag in the Test Workflow or [**Global Template**](./test-workflows-job-and-pod.md#global-template):
+If you wish to have that behavior by default for all steps, you can use a system flag in the Test Workflow or [**Global Template**](./test-workflow-templates#global-templates):
 
 ```yaml
 spec:
@@ -131,7 +131,7 @@ Kubernetes doesn't have a direct mechanism to get this metadata. To obtain it, w
 
 ### Private Container Registries
 
-When the image you are using is stored in the private registry, you may need to add [`pod.imagePullSecrets`](https://docs.testkube.io/articles/test-workflows-examples-basics#configuring-the-pod) to the specific Test Workflow or [**Global Template**](https://docs.testkube.io/articles/test-workflows-job-and-pod#global-template).
+When the image you are using is stored in the private registry, you may need to add [`pod.imagePullSecrets`](https://docs.testkube.io/articles/test-workflows-examples-basics#configuring-the-pod) to the specific Test Workflow or [**Global Template**](./test-workflow-templates#global-templates).
 
 ### Avoid Fetching Image Metadata
 
@@ -151,7 +151,7 @@ spec:
       runAsGroup: 1001
 ```
 
-It can be added as part of specific Test Workflow, or globally in the [**Global Template**](https://docs.testkube.io/articles/test-workflows-job-and-pod#global-template).
+It can be added as part of specific Test Workflow, or globally in the [**Global Template**](./test-workflow-templates#global-templates).
 
 :::note
 

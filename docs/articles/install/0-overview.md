@@ -78,7 +78,7 @@ The Testkube Agent is in itself Open Source and can be deployed without a
 control plane or Dashboard. All management and test execution tasks are done through the [Testkube CLI](/articles/cli).
 
 - Learn more about how the [Standalone Agent compares](/articles/open-source-or-pro)
-- Learn more about how to [deploy the standalong agent][deploy-standalone].
+- Learn more about how to [deploy the Standalone Agent][deploy-standalone].
 
 ![Deployment with standalone agent](../../img/architecture-standalone.jpeg)
 

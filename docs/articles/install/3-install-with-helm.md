@@ -1,11 +1,11 @@
 # Install with Helm
 
-The Testkube Helm Charts contain both the Testkube Control Plane and Testkube Agent charts and 
+The main Testkube Helm Charts includes both the Testkube Control Plane and Testkube Agent charts and 
 let you set up a customized Testkube instance tailored to your environment. See the list of 
-included [components](#components).
+included [components](/articles/helm-components).
 
 :::info
-You can learn more about the deployment architectures [here][deployment-architecture].
+You can learn more about Testkube deployment options in the [Installation Overview](/articles/install/overview).
 :::
 
 ## Prerequisites
@@ -177,5 +177,4 @@ organization management, custom ingress controllers, production environments, an
 [secret-license]: /articles/install/install-with-helm#testkube-license
 [advanced-bootstrap]: /articles/install/advanced-install#organization-management
 [ss-license]: /articles/install/install-with-helm#testkube-license
-[deployment-architecture]: /articles/install/deployment-architectures
 
