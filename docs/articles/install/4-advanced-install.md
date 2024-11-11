@@ -1,9 +1,9 @@
-# Advanced Helm Install
+# Customized Installation
 
-A variety of advanced topics to further customize your deployment.
+A variety of advanced topics to further customize your Testkube On Prem deployment.
 
 :::tip
-See [Components](/articles/install/install-with-helm#components) for a list of all included components and links to their corresponding
+See [Components](/articles/helm-components) for a list of all included components and links to their corresponding
 Helm Charts with a list of their available properties.
 :::
 
