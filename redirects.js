@@ -393,6 +393,10 @@ const redirects = [
     to: "/articles/upgrade-uninstall",
   },
   {
+    from: "/articles/install/deployment-architectures",
+    to: "/articles/install/overview",
+  },
+  {
     from: ["/testkube-enterprise/articles/auth", "/articles/install/auth"],
     to: "/testkube-pro-on-prem/articles/auth",
   },
