@@ -2,8 +2,8 @@
 
 Testkube exposes two REST APIs that can be consumed accordingly:
 
-- The Agent API exposed by the [Standalone Agent](../articles/install/deployment-architectures#testkube-standalone-agent)
-- The Control Plane API exposed by the [Testkube Control-Plane](../articles/install/deployment-architectures) (both cloud and on-prem)
+- The Agent API exposed by the [Standalone Agent](/articles/install/standalone-agent)
+- The Control Plane API exposed by the [Testkube Control-Plane](/articles/install/overview) (both cloud and on-prem)
 
 ## Agent API
 

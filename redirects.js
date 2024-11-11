@@ -431,7 +431,7 @@ const redirects = [
   },
   {
     from: "/articles/install/reference-architectures",
-    to: "/articles/install/deployment-architectures",
+    to: "/articles/install/overview",
   },
   {
     from: [
