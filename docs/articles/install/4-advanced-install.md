@@ -91,6 +91,7 @@ testkube-cloud-api:
                 - name: Frontend
                   # New users will conditionally join teams based on a groups claim found within the JWT
                   # You will be added if the claim contains at least one of the groups you configure here.
+                  # IMPORTANT: You must opt-in for groups by setting the OAUTH_GROUPS_SCOPE env to "true" in the testkube-cloud-api chart.
                   groups_claim: ["my-org:group-1", "my-org:group-2"]
 ```
 
