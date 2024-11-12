@@ -2,8 +2,8 @@
 
 Testkube exposes two REST APIs that can be consumed accordingly:
 
-- The Agent API exposed by the [Standalone Agent](../articles/install/deployment-architectures#testkube-standalone-agent)
-- The Control Plane API exposed by the [Testkube Control-Plane](../articles/install/deployment-architectures) (both cloud and on-prem)
+- The Agent API exposed by the [Standalone Agent](/articles/install/standalone-agent)
+- The Control Plane API exposed by the [Testkube Control-Plane](/articles/install/overview) (both cloud and on-prem)
 
 ## Agent API
 
@@ -12,7 +12,6 @@ by the agent itself when it is running in standalone mode. This is the same API 
 the Testkube CLI for most of its commands. 
 
 By default this API does not require any authentication for any of its operations - so be careful in giving access.
-Adding CLI-compatible OAUth Authentication to the Agent API is described in [this document](../articles/oauth-cli.md).
 
 ## Control Plane API
 

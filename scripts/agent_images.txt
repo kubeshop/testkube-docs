@@ -1,9 +1,9 @@
 kubeshop/kube-webhook-certgen:0.0.4
-kubeshop/testkube-api-server:2.1.47
-kubeshop/testkube-operator:2.1.20
-kubeshop/testkube-tw-init:2.1.47
-kubeshop/testkube-tw-toolkit:2.1.47
-nats:2.10.9-alpine
-natsio/nats-server-config-reloader:0.14.1
+kubeshop/testkube-api-server:2.1.60
+kubeshop/testkube-operator:2.1.22
+kubeshop/testkube-tw-init:2.1.60
+kubeshop/testkube-tw-toolkit:2.1.60
+nats:2.10.22-alpine
+natsio/nats-server-config-reloader:0.16.0
 quay.io/brancz/kube-rbac-proxy:v0.18.1
 rancher/kubectl:v1.23.7

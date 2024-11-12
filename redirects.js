@@ -218,8 +218,9 @@ const redirects = [
     from: [
       "/guides/going-to-production/authentication/oauth-cli",
       "/guides/authentication/oauth-cli",
+      "/articles/oauth-cli",
     ],
-    to: "/articles/oauth-cli",
+    to: "/articles/cli",
   },
   {
     from: [
@@ -390,7 +391,11 @@ const redirects = [
   },
   {
     from: "/guides/upgrade",
-    to: "/articles/upgrade",
+    to: "/articles/upgrade-uninstall",
+  },
+  {
+    from: "/articles/install/deployment-architectures",
+    to: "/articles/install/overview",
   },
   {
     from: ["/testkube-enterprise/articles/auth", "/articles/install/auth"],
@@ -427,7 +432,7 @@ const redirects = [
   },
   {
     from: "/articles/install/reference-architectures",
-    to: "/articles/install/deployment-architectures",
+    to: "/articles/install/overview",
   },
   {
     from: [

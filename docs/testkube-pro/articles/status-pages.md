@@ -19,7 +19,7 @@ Monitoring Kubernetes applications in a cloud-native environment is critical to 
 
 To access Testkube Status Pages from the Testkube dashboard, follow the steps below:
 
-1. Log in to your [Testkube Pro account](https://app.testkube.io/).  
+1. Log in to your [Testkube account](https://app.testkube.io/).  
 2. Go to the Dashboard.  
 3. Click on "Status Pages" in the left navigation panel.
 
