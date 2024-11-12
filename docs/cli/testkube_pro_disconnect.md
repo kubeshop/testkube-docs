@@ -34,7 +34,6 @@ testkube pro disconnect [flags]
   -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
-      --oauth-enabled           enable oauth
       --verbose                 show additional debug messages
 ```
 

@@ -7,7 +7,7 @@ To connect your Testkube Agent, you will need to modify your Testkube installati
 Testkube Pro Agent is the Testkube engine for controlling your Testkube instance using the 
 Testkube Control Plane.
 
-See [Deployment Architectures](../../articles/install/deployment-architectures) for more details.
+See [Deployment Architectures](/articles/install/overview) for more details.
 
 :::info
 

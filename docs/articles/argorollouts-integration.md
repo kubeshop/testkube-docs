@@ -69,6 +69,11 @@ The defined Job uses the Testkube CLI to run the specified Workflow, you will ne
 
 ## Canary Deployments
 
+:::tip
+Have a look at the [Automate Canary Deployments with Argo Rollouts and Testkube](https://testkube.io/learn/automate-canary-deployments-with-argo-rollouts-and-testkube)
+blog-post for an overview of how to do Canary Deployments with Argo Rollouts and Testkube.
+:::
+
 A sample [Canary Rollout](https://argo-rollouts.readthedocs.io/en/stable/features/canary/) using the above template could look as follows:
 
 ```yaml
@@ -114,6 +119,11 @@ the default one defined in the AnalysisTemplate above.
 
 ## Blue-Green Deployments
 
+:::tip
+Have a look at the [Automating Blue-Green Deployments with Argo Rollouts and Testkube](https://testkube.io/learn/automating-blue-green-deployments-with-argo-rollouts-and-testkube)
+blog-post for an overview of how to do Blue-Green Deployments with Argo Rollouts and Testkube.
+:::
+
 For a [BlueGreen Rollout](https://argo-rollouts.readthedocs.io/en/stable/features/bluegreen/), the Analysis 
 could be configured as follows, using the Testkube AnalysisTemplate for [Pre-Promotion Analysis](https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#bluegreen-pre-promotion-analysis):
 
@@ -146,3 +156,6 @@ spec:
 
 In this case the Analysis is not providing a specific `worfklow-name` argument for the `testkube-experiment-analysis` AnalysisTemplate, 
 so the default Test Workflow `basic-k6-workflow` will be run to validate the BlueGreen deployment.
+
+
+

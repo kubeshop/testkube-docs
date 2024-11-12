@@ -2,20 +2,20 @@
 title: Migrate Testkube OSS
 ---
 
-# How to Migrate from Testkube Core OSS to Testkube Pro On-Prem
+# How to Migrate from Testkube OSS to Testkube On-Prem
 
-It is possible to deploy Testkube Pro On-Prem within the same k8s cluster where Testkube Core OSS is already running. To achieve this, you should install Testkube Pro On-Prem in a different namespace and connect Testkube Core OSS as an Agent.
+It is possible to deploy Testkube On-Prem within the same k8s cluster where Testkube Core OSS is already running. To achieve this, you should install Testkube On-Prem in a different namespace and connect Testkube OSS as an Agent.
 
 :::note
-Please note that your test executions will not be migrated to Testkube Pro On-Prem, only Test definitions.
+Please note that your test executions will not be migrated to Testkube On-Prem, only Test definitions.
 :::
 
 ## License
 
-To start with Testkube Pro On-Prem you need to request a license. Depending on your environment requirements it can be either an offline or an online license. Read more about these types of licenses [here](https://docs.testkube.io/testkube-pro-on-prem/articles/usage-guide#license). If you require an online license, it can be acquired [here](https://testkube.io/download). If you need an offline license, please contact us using this [form](https://testkube.io/contact).
-There are multiple ways to integrate Testkube Core OSS into your Testkube Pro On-Prem setup. We highly recommend creating a k8s secret, as it provides a more secure way to store sensitive data.
+To start with Testkube On-Prem you need to request a license. Depending on your environment requirements, it can be either an offline or an online license. Read more about these types of licenses [here](https://docs.testkube.io/testkube-pro-on-prem/articles/usage-guide#license). If you require an online license, it can be acquired [here](https://testkube.io/download). If you need an offline license, please contact us using this [form](https://testkube.io/contact).
+There are multiple ways to integrate Testkube Core OSS into your Testkube On-Prem setup. We highly recommend creating a k8s secret, as it provides a more secure way to store sensitive data.
 
-At this point there are two options to deploy Testkube Pro On-Prem:
+At this point there are two options to deploy Testkube On-Prem:
 
 **Multi-cluster Installation:**
 
@@ -43,8 +43,8 @@ If you decide to go with multiple-cluster installation, please ensure that you h
 
 ### Ingress
 
-To make a central Testkube Pro On-Prem cluster reachable for multiple Agents we need to expose [endpoints](https://docs.testkube.io/testkube-pro-on-prem/articles/usage-guide#domain) and create certificates.
-Testkube Pro On-Prem requires the NGINX Controller and it is the only supported Ingress Controller for now. By default, Testkube Pro On-Prem integrates with cert-manager. However, if you choose to use your own certificates, provide them as specified [here](https://docs.testkube.io/testkube-pro-on-prem/articles/usage-guide#tls).
+To make a central Testkube On-Prem cluster reachable for multiple Agents we need to expose [endpoints](https://docs.testkube.io/testkube-pro-on-prem/articles/usage-guide#domain) and create certificates.
+Testkube On-Prem requires the NGINX Controller and it is the only supported Ingress Controller for now. By default, Testkube On-Prem integrates with cert-manager. However, if you choose to use your own certificates, provide them as specified [here](https://docs.testkube.io/testkube-pro-on-prem/articles/usage-guide#tls).
 Create a `values.yaml` with your domain and certificate configuration. Additionally include a secretRef to the secret with the license that was created earlier:
 
 `values.yaml`
@@ -61,7 +61,7 @@ global:
 
 ### Auth
 
-Testkube Pro On-Prem utilizes [Dex](https://dexidp.io/) for authentication and authorization. For detailed instruction on configuring Dex, please refer to the [Identity Provider](https://docs.testkube.io/testkube-pro-on-prem/articles/auth) document. You may start with creating static users if you do not have any Identity Provider. Here is an example of usage:
+Testkube On-Prem utilizes [Dex](https://dexidp.io/) for authentication and authorization. For detailed instruction on configuring Dex, please refer to the [Identity Provider](https://docs.testkube.io/testkube-pro-on-prem/articles/auth) document. You may start with creating static users if you do not have any Identity Provider. Here is an example of usage:
 
 `values.yaml`
 
@@ -80,7 +80,7 @@ dex:
 
 ### Deployment
 
-Now, let’s deploy Testkube Pro On-Prem. Please refer to the installation commands [here](https://docs.testkube.io/testkube-pro-on-prem/articles/usage-guide/#installation). Do not forget to pass your customized `values.yaml` file.
+Now, let’s deploy Testkube On-Prem. Please refer to the installation commands [here](https://docs.testkube.io/testkube-pro-on-prem/articles/usage-guide/#installation). Do not forget to pass your customized `values.yaml` file.
 
 It may take a few minutes for the certificates to be issued and for the pods to reach `Ready` status. Once everything is up and running, you may go to dashboard.your-domain.it.com and log in.
 
@@ -90,6 +90,6 @@ After running the command, navigate to the Dashboard and you will see all your t
 
 ## One-cluster Installation
 
-It is possible to deploy Testkube Pro On-Prem and connect an Agent to it in the same k8s cluster without exposing endpoints to the outside world. You can find all the instructions at [the Testkube Quickstart][quickstart].
+It is possible to deploy Testkube On-Prem and connect an Agent to it in the same k8s cluster without exposing endpoints to the outside world. You can find all the instructions at [the Testkube Quickstart][quickstart].
 
 [quickstart]: /articles/install/install-with-cli

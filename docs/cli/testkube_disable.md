@@ -24,12 +24,10 @@ testkube disable <feature> [flags]
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
       --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
-      --oauth-enabled           enable oauth
       --verbose                 show additional debug messages
 ```
 
 ### SEE ALSO
 
 - [testkube](testkube.md) - Testkube entrypoint for kubectl plugin
-- [testkube disable oauth](testkube_disable_oauth.md) - disable oauth authentication for direct api
 - [testkube disable telemetry](testkube_disable_telemetry.md) - disable collecting of anonymous telemetry data

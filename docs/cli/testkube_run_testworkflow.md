@@ -34,7 +34,6 @@ testkube run testworkflow [name] [flags]
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
       --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
-      --oauth-enabled           enable oauth
   -o, --output string           output type can be one of json|yaml|pretty|go (default "pretty")
       --verbose                 show additional debug messages
 ```

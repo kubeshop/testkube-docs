@@ -46,11 +46,12 @@ generate_reports() {
 
     INDEX_FILE="${OUTPUT_DIR}${IMAGE_SET}.md"
     VERSION=$(get_latest_helm_version "$1")
+    DATE=$(date +"%d-%m-%Y")
 
     # Create the header for the index file
     echo ":::info" >> "$INDEX_FILE"
     echo "" >> "$INDEX_FILE"
-    echo "Based on chart \`$(basename $CHART_NAME)\` as of version \`${VERSION}\`" >> "$INDEX_FILE"
+    echo "Based on chart \`$(basename $CHART_NAME)\` as of version \`${VERSION}\` on ${DATE}" >> "$INDEX_FILE"
     echo "" >> "$INDEX_FILE"
     echo ":::" >> "$INDEX_FILE"
     echo "" >> "$INDEX_FILE"
@@ -104,6 +105,10 @@ rm -rfv "$OUTPUT_DIR"
 # Ensure the directory exists
 mkdir -p "$OUTPUT_DIR"
 
+# Add repos
+helm repo add testkubeenterprise https://kubeshop.github.io/testkube-cloud-charts
+helm repo add kubeshop https://kubeshop.github.io/helm-charts
+
 # Update the charts to get the latest versions
 helm repo update
 
@@ -120,8 +125,7 @@ helm template test kubeshop/testkube --skip-crds --set mongodb.enabled=false --s
 sort -o "$AGENT_IMAGES" "$AGENT_IMAGES"
 
 # Specify image descriptions
-add_image_desc "bitnami/kubectl" "Image containing the \`kubectl\` binary used in upgrade hooks."
-add_image_desc "gcr.io/kubebuilder/kube-rbac-proxy" "Small HTTP proxy used by the Testkube operator to perform RBAC authorization against the Kubernetes API."
+add_image_desc "quay.io/brancz/kube-rbac-proxy" "Small HTTP proxy used by the Testkube operator to perform RBAC authorization against the Kubernetes API."
 # Source: https://github.com/kubeshop/kube-webhook-certgen
 add_image_desc "kubeshop/kube-webhook-certgen" "Used to generate certificates for the Testkube operator admission webhook."
 add_image_desc "kubeshop/testkube-api-server" "API server for the Testkube agent."
@@ -135,6 +139,7 @@ add_image_desc "kubeshop/testkube-tw-toolkit" "Image used within a Workflow exec
 add_image_desc "natsio/prometheus-nats-exporter" "NATS metrics exporter."
 add_image_desc "bitnami/minio" "Object store used by the Testkube control plane to store logs and artifacts."
 add_image_desc "ghcr.io/dexidp/dex" "Identity provider used by the Testkube control plane."
+# Source: https://github.com/kubeshop/bitnami-containers
 add_image_desc "kubeshop/bitnami-mongodb" "Database used by the Testkube control plane."
 add_image_desc "kubeshop/testkube-enterprise-api" "API server for the Testkube control plane."
 add_image_desc "kubeshop/testkube-enterprise-ui" "Testkube dashboard."

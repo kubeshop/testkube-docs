@@ -1,8 +1,7 @@
 # Multicluster
 
-Testkube can federate multiple clusters.
-Conceptually, each cluster maps to an environment within Testkube.
-You will require a pro plan to deploy multiple Testkube agents.
+The Testkube Control Plane can manage Testkube Agents in multiple clusters allowing you run your tests wherever needed. 
+Conceptually, each cluster maps to an Environment within Testkube.
 
 :::info
 The commands below that connect to on-prem will likely need to add
@@ -11,7 +10,9 @@ an `--agent-uri` flag or they will instead by default connect to Testkube Cloud.
 
 ## Deploy an agent that will join Testkube
 
-You can add another agent to an existing Testkube deployment within a couple of minutes. Get started by going to the Dashboard and create a new environment. Afterwards it will show you a command that can be used to bootstrap the agent in another cluster. The command looks as follows:
+You can add another agent to an existing Testkube deployment within a couple of minutes. 
+Get started by going to the Dashboard and [creating a new Environment](/testkube-pro/articles/environment-management#creating-a-new-environment), which
+will provide you with the command to deploy the corresponding Testkube Agent:
 
 ![Command that deploys an agent that joins Testkube](./images/agent-that-joins-testkube.png)
 

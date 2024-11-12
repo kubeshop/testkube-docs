@@ -153,12 +153,16 @@ spec:
         key1: value1
       annotations:
         key2: value2
+      config:
+        myParameter: param1
   - cronjob:
       cron: "*/5 * * * *"
       labels:
         key3: value3
       annotations:
         key4: value4
+      config:
+        myParameter: param2
 ```
 
 :::info

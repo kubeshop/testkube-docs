@@ -39,7 +39,6 @@ testkube create webhook [flags]
       --crd-only           generate only crd
       --insecure           insecure connection for direct client
       --namespace string   Kubernetes namespace, default value read from config if set (default "testkube")
-      --oauth-enabled      enable oauth
       --verbose            show additional debug messages
 ```
 
