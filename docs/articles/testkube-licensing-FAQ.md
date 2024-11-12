@@ -1,6 +1,7 @@
 # Testkube Licensing FAQ
 
-Testkube's software licensing is designed to be transparent and to support both open source and commercial use cases. This document aims to address common questions related to our licensing model.
+Testkube's software licensing is designed to be transparent and to support both open source and commercial use cases. 
+This document aims to address common questions related to our licensing model.
 
 ## Licenses
 
@@ -10,18 +11,15 @@ Testkube software is distributed under two primary licenses:
 
 ## The Testkube Agent
 
-The Testkube Agent is open-source and free to use in standalone mode. Free agent features are licensed under the 
-MIT license, but some agent features are subject to the TCL. 
-
-:::tip
-See [The Testkube Open Source Agent](/articles/open-source-or-pro) for
+The Testkube Agent is open-source and free to use in [standalone mode](/articles/install/standalone-agent). Free agent features are
+licensed under the MIT license, but some agent features are subject to the TCL - see [The Testkube Open Source Agent](/articles/open-source-or-pro) for
 more information on the differences between Open Source and Commercial features.
-:::
 
-## Testkube Pro
+## Testkube Commercial
 
-Testkube Pro-specific functionality requires a paid license from Testkube (see [pricing](https://testkube.io/pricing)) and is licensed 
-under the TCL.
+All functionality provided by the Testkube Control Plane and specific functionality provided by the Testkube Agent 
+([Read More](/articles/open-source-or-pro)) require a paid license from Testkube (see [pricing](https://testkube.io/pricing)).
+Commercial functionality included in the Testkube Agent is licensed under the TCL.
 
 :::note
 You can find any feature's license by checking the code's file header in the Testkube repository.

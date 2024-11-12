@@ -1,10 +1,10 @@
 # Testkube Docker Agent
 
-The Testkube Docker Agent provides a convenient way to evaluate Testkube as it allows you to run the Testkube Agent directly under
+The Testkube Docker Agent provides a convenient way to evaluate Testkube Cloud as it allows you to run the Testkube Agent directly under
 Docker without having to install or manage your own Kubernetes distribution.
 
 :::info
-The Testkube Docker Agent is not recommended for production usage - [Read More](#not-for-production-usage)
+You can, of course, use the Docker Agent with On Premise installations also, but it is not recommended for production usage - [Read More](#not-for-production-usage)
 :::
 
 ## Resource Allocation
@@ -38,6 +38,11 @@ testkube docker --agent-token=tkcagnt_XXX --org-id=tkcorg_YYY --env-id=tkcenv_ZZ
 ```
 
 You can get the required tokens from the [Agent Information tab](/testkube-pro/articles/environment-management/#agent-information).
+
+:::tip
+When creating a new Environment in the Testkube Dashboard you will be shown the above command with the correct
+parameters automatically - see [Creating Environments](/testkube-pro/articles/environment-management#creating-a-new-environment).
+:::
 
 ### With Docker
 
@@ -96,7 +101,7 @@ and then use that with the `testkube set context` command provided in the
 This is not necessary if you used the Testkube CLI to install the Docker Agent as described above.
 :::
 
-## Upgrading Testkube Docker Agent
+## Upgrading the Testkube Docker Agent
 
 There are two ways to upgrade the Docker Agent to the latest version
 
@@ -188,7 +193,7 @@ in your environment - [Read More](https://kind.sigs.k8s.io/docs/user/known-issue
 
 :::info
 Although the Testkuber Docker Agent is a great way to run Testkube tests in your infrastructure, it is **not** meant
-for production or large-scale deployments as it is (very) constrained by the Docker runtime environment itself.
+for production or large-scale deployments as it is potentially (very) constrained by the Docker runtime environment itself.
 
 When deploying the Testkube Agent production or advanced evaluation purposes, please run the agent directly under a
 Kubernetes instance, either locally or in a remote/hosted Kubernetes provider in line with the

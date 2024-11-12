@@ -8,7 +8,7 @@ Testkube contains two sub-systems:
 The below diagrams explain this architecture using [C4 diagrams](https://c4model.com/) - please
 don't hesitate to reach out on our Slack if you have questions.
 
-Also check out the [Deployment Architectures](install/deployment-architectures) document for more details on
+Also check out the [Installation Overview](/articles/install/overview) document for more details on
 how Testkube can be deployed, and the [Workflow Architecture](/articles/test-workflows-high-level-architecture) 
 document for an overview of how the Workflow engine works.
 

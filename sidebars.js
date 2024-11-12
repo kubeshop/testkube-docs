@@ -40,82 +40,107 @@ const sidebars = {
           label: "Installation Overview",
           id: "articles/install/overview",
         },
-        "articles/install/install-with-cli",
         {
           type: "category",
-          label: "Install with Helm",
+          label: "Testkube On Premise",
           items: [
             {
               type: "doc",
               label: "Overview",
-              id: "articles/install/install-with-helm",
+              id: "articles/install/onprem-overview",
             },
-            "articles/install/advanced-install",
-          ],
+            {
+              type: "doc",
+              label: "Evaluation",
+              id: "articles/install/install-with-cli",
+            },
+            {
+              type: "category",
+              label: "Production",
+              items: [
+                {
+                  type: "doc",
+                  label: "Base Install",
+                  id: "articles/install/install-with-helm",
+                },
+                {
+                  type: "doc",
+                  label: "Custom Installation",
+                 id: "articles/install/advanced-install",
+                }
+              ]
+            },
+            {
+              type: "category",
+              label: "Advanced Guides",
+              items: [
+                "articles/install/multi-cluster",
+                {
+                  type: "doc",
+                  label: "Using Private Registries",
+                  id: "articles/deploying-from-private-registries",
+                }, {
+                  type: "doc",
+                  label: "Configure Identity Providers",
+                  id: "testkube-pro-on-prem/articles/auth",
+                },
+                {
+                  type: "doc",
+                  label: "S3 with IAM Authentication",
+                  id: "articles/install/s3-storage",
+                },
+                {
+                  type: "doc",
+                  label: "Using Istio",
+                  id: "articles/istio",
+                },
+                {
+                  type: "doc",
+                  label: "Using Vault",
+                  id: "articles/vault-install",
+                },
+                {
+                  type: "doc",
+                  label: "Using a Private CA",
+                  id: "articles/private-ca",
+                },
+                {
+                  type: "doc",
+                  label: "Image Inventory",
+                  id: "articles/inventory/images",
+                },
+                {
+                  type: "doc",
+                  label: "Using an external MongoDB",
+                  id: "articles/testkube-dependencies",
+                },
+                {
+                  type: "doc",
+                  label: "Ephemeral Environments",
+                  id: "articles/ephemeral-environments",
+                },
+                {
+                  type: "link",
+                  label: "Testkube with Kind",
+                  href: "https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker",
+                },
+              ],
+            },
+          ]
         },
-        { type: "doc", label: "Testkube Docker Agent", id: "articles/install/docker-agent" },
-        "articles/install/deployment-architectures",
-        "articles/install/faq",
         {
           type: "category",
-          label: "More Guides",
+          label: "Testkube Cloud",
           items: [
-            "articles/install/multi-cluster",
-            { type: "doc", label: "Standalone Agent", id: "articles/install/standalone-agent" },
-            { type: "doc", label: "Agent with Local Kubernetes", id: "articles/install/quickstart-no-k8s" },
-            { type: "doc", label: "Upgrading", id: "articles/upgrade" },
-            "articles/install/uninstall",
-            {
-              type: "doc",
-              label: "Using Private Registries",
-              id: "articles/deploying-from-private-registries",
-            },            {
-              type: "doc",
-              label: "Configure Identity Providers",
-              id: "testkube-pro-on-prem/articles/auth",
-            },
-            {
-              type: "doc",
-              label: "S3 with IAM Authentication",
-              id: "articles/install/s3-storage",
-            },
-            {
-              type: "doc",
-              label: "Using Istio",
-              id: "articles/istio",
-            },
-            {
-              type: "doc",
-              label: "Using Vault",
-              id: "articles/vault-install",
-            },
-            {
-              type: "doc",
-              label: "Using a Private CA",
-              id: "articles/private-ca",
-            },
-            {
-              type: "doc",
-              label: "Image Inventory",
-              id: "articles/inventory/images",
-            },
-            {
-              type: "doc",
-              label: "Using an external MongoDB",
-              id: "articles/testkube-dependencies",
-            },
-            {
-              type: "doc",
-              label: "Ephemeral Environments",
-              id: "articles/ephemeral-environments",
-            },
-            {
-              type: "link",
-              label: "Testkube with Kind",
-              href: "https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker",
-            },
-          ],
+            {type: "doc", label: "Overview", id: "articles/install/cloud-overview"},
+
+            {type: "doc", label: "Testkube Docker Agent", id: "articles/install/docker-agent"},
+            {type: "doc", label: "Agent with Local Kubernetes", id: "articles/install/quickstart-no-k8s"},
+          ]
         },
+        {type: "doc", label: "Testkube Open Source", id: "articles/install/standalone-agent"},
+        "articles/install/faq",
+        {type: "doc", label: "Upgrade & Uninstall", id: "articles/upgrade-uninstall"},
       ],
     },
     {
@@ -184,9 +209,9 @@ const sidebars = {
               label: "Integrations",
               collapsed: false,
               items: [
-                { type: "doc", label: "Overview", id: "articles/integrations-dashboard-explore" },
-                { type: "doc", label: "Triggers", id: "articles/integrations-triggers" },
-                { type: "doc", label: "Webhooks", id: "articles/integrations-webhooks" },
+                {type: "doc", label: "Overview", id: "articles/integrations-dashboard-explore"},
+                {type: "doc", label: "Triggers", id: "articles/integrations-triggers"},
+                {type: "doc", label: "Webhooks", id: "articles/integrations-webhooks"},
               ],
             },
             {
@@ -200,7 +225,7 @@ const sidebars = {
           type: "category",
           label: "Test Workflows",
           items: [
-            { type: "doc", label: "Overview", id: "articles/test-workflows" },
+            {type: "doc", label: "Overview", id: "articles/test-workflows"},
             {
               type: "doc",
               label: "Basic Examples",
@@ -361,17 +386,6 @@ const sidebars = {
               label: "JUnit Reports",
               id: "articles/test-workflows-reports",
             },
-          ],
-        },
-        {
-          type: "category",
-          label: "Reporting & Analysis",
-          items: [
-            {
-              type: "doc",
-              label: "Overview",
-              id: "articles/reporting-overview",
-            },
             {
               type: "doc",
               label: "Status Pages",
@@ -455,7 +469,6 @@ const sidebars = {
               label: "Docker CLI",
               id: "articles/testkube-cli-docker",
             },
-            { type: "doc", label: "OAuth for CLI", id: "articles/oauth-cli" },
           ],
         },
       ],
@@ -687,8 +700,8 @@ const sidebars = {
         id: "articles/integrations",
       },
       items: [
-        { type: "doc", label: "GitHub", id: "articles/github-actions" },
-        { type: "doc", label: "GitLab", id: "articles/gitlab" },
+        {type: "doc", label: "GitHub", id: "articles/github-actions"},
+        {type: "doc", label: "GitLab", id: "articles/gitlab"},
         {
           type: "doc",
           label: "Jenkins Pipelines",
@@ -699,30 +712,30 @@ const sidebars = {
           label: "Jenkins UI",
           id: "articles/jenkins-ui",
         },
-        { type: "doc", label: "Azure DevOps", id: "articles/azure" },
+        {type: "doc", label: "Azure DevOps", id: "articles/azure"},
         {
           type: "doc",
           label: "CircleCI",
           id: "articles/circleci",
         },
-        { type: "doc", label: "ArgoCD", id: "articles/argocd-integration" },
-        { type: "doc", label: "Argo Rollouts", id: "articles/argorollouts-integration" },
-        { type: "doc", label: "Argo Workflows", id: "articles/argoworkflows-integration" },
-        { type: "doc", label: "Flux", id: "articles/flux-integration" },
-        { type: "doc", label: "CDEvents", id: "articles/cd-events" },
-        { type: "doc", label: "Tekton", id: "articles/tekton" },
+        {type: "doc", label: "ArgoCD", id: "articles/argocd-integration"},
+        {type: "doc", label: "Argo Rollouts", id: "articles/argorollouts-integration"},
+        {type: "doc", label: "Argo Workflows", id: "articles/argoworkflows-integration"},
+        {type: "doc", label: "Flux", id: "articles/flux-integration"},
+        {type: "doc", label: "CDEvents", id: "articles/cd-events"},
+        {type: "doc", label: "Tekton", id: "articles/tekton"},
         {
           type: "doc",
           label: "Slack Integration",
           id: "articles/slack-integration",
         },
-        { type: "doc", label: "Prometheus", id: "articles/metrics" },
+        {type: "doc", label: "Prometheus", id: "articles/metrics"},
         {
           type: "doc",
           label: "Kubernetes Events",
           id: "articles/k8s-events",
         },
-        { type: "doc", label: "Webhooks", id: "articles/webhooks" },
+        {type: "doc", label: "Webhooks", id: "articles/webhooks"},
         {
           type: "link",
           label: "PagerDuty",
@@ -735,7 +748,7 @@ const sidebars = {
           href: "https://testkube.io/learn/integrating-testkube-and-zapier-for-instant-email-alerts",
           description: "Integrating Testkube and Zapier for Instant Email Alerts",
         },
-        { type: "doc", label: "Grafana", id: "articles/grafana" },
+        {type: "doc", label: "Grafana", id: "articles/grafana"},
       ],
     },
     {
@@ -751,6 +764,7 @@ const sidebars = {
           label: "Architecture",
           id: "articles/architecture",
         },
+        "articles/helm-components",
         "articles/telemetry",
         {
           type: "category",
@@ -954,7 +968,7 @@ const sidebars = {
             },
           ],
         },
-        { type: "doc", label: "Deprecations", id: "articles/deprecations" },
+        {type: "doc", label: "Deprecations", id: "articles/deprecations"},
         {
           type: "doc",
           label: "Generating Test CRDs",
@@ -972,7 +986,7 @@ const sidebars = {
           id: "articles/testkube-dashboard-general-settings",
         },
 
-        { type: "doc", label: "Templates", id: "articles/templates" },
+        {type: "doc", label: "Templates", id: "articles/templates"},
         "articles/legacy-architecture",
         {
           type: "doc",

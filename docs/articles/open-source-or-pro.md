@@ -1,6 +1,6 @@
 # The Testkube Open Source Agent
 
-The Testkube Agent described in the [Deployment Architectures](install/deployment-architectures) is
+The Testkube Agent is
 100% Open Source and can be [deployed in standalone mode](install/standalone-agent) without being managed
 by the commercial Control Plane.
 
@@ -9,7 +9,7 @@ Once deployed, you can interact with the agent through the [Testkube CLI](instal
 
 ## Agent Functionality
 
-As shown in [Deployment Architectures](install/deployment-architectures), the main difference between a commercial deployment of
+As described in the [Installation Overview](/articles/install/overview), the main difference between a commercial deployment of
 Testkube and the standalone Agent is the Testkube Control Plane, which adds a User Interface (the [Testkube Dashboard](testkube-dashboard-explore))
 and an underlying management layer for multiple agents ("Environments"), Org/User Mgmt, Insights/Reporting, etc.
 
@@ -47,7 +47,7 @@ Testkube Orchestration Platform (Agent + Control Plane).
 | **Test, Suites, Sources, Executors** |             X             |                                             X                                              | Deprecated - [Read More](legacy-features)              |
 | **Testkube CLI**                     |             X             |                                             X                                              | [Docs](cli)                                            |
 | **REST API**                         |      Unauthenticated      | Authenticated with [API Tokens](/testkube-pro/articles/organization-management#api-tokens) | [Docs](/openapi/overview)                              |
-| **Dashboard / Control Plane**        |                           |                  X  ([Hosted/On-Prem](install/deployment-architectures))                   | [Docs](testkube-dashboard-explore)                     |
+| **Dashboard / Control Plane**        |                           |                  X  ([Hosted/On-Prem](/articles/install/overview))                   | [Docs](testkube-dashboard-explore)                     |
 | **Multi-environment Mgmt**           |                           |                                             X                                              | [Docs](/testkube-pro/articles/environment-management)  |
 | **RBAC / User Mgmt**                 |                           |                                             X                                              | [Docs](/testkube-pro/articles/organization-management) |
 | **Reporting / Insights**             |                           |                                             X                                              | [Docs](test-insights)                                  |
