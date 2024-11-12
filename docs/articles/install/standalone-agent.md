@@ -1,25 +1,26 @@
-# Standalone Testkube Agent
+# Standalone Testkube Agent 
 
 ## Overview
 
-Testkube standalone agent includes our full test execution and orchestration engine.
-This means that all CRDs are available, you can apply triggers and run test workflows, then afterward view 
-the resulting status, logs and artifacts.
+The Testkube Agent is Open Source and includes the full test execution and orchestration engine. It can 
+be deployed and used without connecting it to a Testkube Control Plane, in which case there is no Dashboard and 
+the Agent has to be managed entirely through the [Testkube CLI](/articles/cli). 
 
-Overall, there are few reasons to run the agent without the control plane, which comes with a Dashboard and many other features.
-The main benefit is that this works better in resource constrained environments and that it is 100% open-source.
+- Learn more about how the [Standalone Agent compares](/articles/open-source-or-pro)
+- Learn more about how to install the Standalone Agent [below](#installing-the-standalone-agent)
 
-:::tip
-Read more about the [Testkube Open Source Agent](/articles/open-source-or-pro) to learn how it compares to the
-commercial Testkube offering.
-:::
+## Deployment Architecture
 
-## Installing the standalone Agent
+A high-level deployment architecture for Standalone Agent is shown below.
 
-You can install with the CLI or Helm. The following components will be installed into your Kubernetes cluster:
+![Deployment with standalone agent](../../img/architecture-standalone.jpeg)
+
+## Installing the Standalone Agent
+
+The following steps are required to install the Standalone Agent into a Kubernetes Cluster:
 
 - Create a Testkube namespace.
-- Deploy the Testkube API.
+- Deploy the Testkube API (see below).
 - Use MongoDB for test results and Minio for artifact storage (optional; disable with --no-minio).
 - Testkube will listen and manage all the CRDs for Tests, TestSuites, Executors, etc… inside the Testkube namespace.
 
@@ -99,10 +100,11 @@ testkube uninstall
 helm delete --namespace testkube testkube kubeshop/testkube
 ```
 
-## Connecting to a control plane
+## Connecting to the Testkube Control Plane
 
-In case you decide that you want to go beyond a standalone agent, you can connect it to a Testkube control plane.
+In case you decide that you want to go beyond a standalone agent, you can connect it to a Testkube Control Plane.
 The following command which will guide you through the migration process.
+
 All test definitions will stay the same, however, historical test results data or artifacts won't be copied to the control plane.
 
 ```
@@ -386,7 +388,7 @@ testkube-api:
 [secrets-endpoint]: /articles/secrets-enable-endpoint
 [secrets-creation]: /articles/secrets-disable-creation
 [oss-vs-pro]: /articles/open-source-or-pro
-[upgrade]: /articles/upgrade
+[upgrade]: /articles/upgrade-uninstall
 [mongo-config]: https://github.com/bitnami/charts/tree/master/bitnami/mongodb#parameters
 [nats-config]: https://docs.nats.io/running-a-nats-service/nats-kubernetes/helm-charts
 [install-cli]: /articles/install/cli

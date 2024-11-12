@@ -13,7 +13,7 @@ If your favorite tool isn't covered here, have a look at [General Steps for CI/C
 us know on our Slack channel so we can add it!
 :::
 
-## CI/CD Solutions
+## CI/CD Tooling
 
 - [GitHub](/articles/github-actions) - Learn to integrate Testkube with GitHub Workflows.
 - [GitLab](/articles/gitlab) - Learn how to integrate Testkube with GitLab CI.
@@ -38,6 +38,7 @@ us know on our Slack channel so we can add it!
 
 ## Process/Workflows
 
+- [Argo Workflows](/articles/argoworkflows-integration) - Learn how to run Testkube CLI commands from Argo Workflows
 - [Slack](/articles/slack-integration) - Learn about how to configure Slack integration with Testkube.
 - [PagerDuty](https://testkube.io/learn/critical-test-based-alerting-with-pagerduty-and-testkube) - Learn about how to integrate Testkube with PagerDuty for alerting.
 - [Zapier](https://testkube.io/learn/integrating-testkube-and-zapier-for-instant-email-alerts) - Learn about how to integrate Testkube with Zapier.

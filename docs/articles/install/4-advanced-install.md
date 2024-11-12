@@ -1,9 +1,9 @@
-# Advanced Helm Install
+# Customized Installation
 
-A variety of advanced topics to further customize your deployment.
+A variety of advanced topics to further customize your Testkube On Prem deployment.
 
 :::tip
-See [Components](/articles/install/install-with-helm#components) for a list of all included components and links to their corresponding
+See [Components](/articles/helm-components) for a list of all included components and links to their corresponding
 Helm Charts with a list of their available properties.
 :::
 
@@ -91,6 +91,7 @@ testkube-cloud-api:
                 - name: Frontend
                   # New users will conditionally join teams based on a groups claim found within the JWT
                   # You will be added if the claim contains at least one of the groups you configure here.
+                  # IMPORTANT: You must opt-in for groups by setting the OAUTH_GROUPS_SCOPE env to "true" in the testkube-cloud-api chart.
                   groups_claim: ["my-org:group-1", "my-org:group-2"]
 ```
 

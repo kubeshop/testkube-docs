@@ -54,4 +54,5 @@ Testkube uses the scheduling engine from Kubernetes Cron jobs for scheduling you
 For each schedule, a special cron job is created from this [template](https://github.com/kubeshop/helm-charts/tree/main/charts/testkube-operator/cronjob-template.yml).
 
 Technically, it is a callback to the Testkube API server method, launching the corresponding Workflow execution.
+The call is executed using curl command from the image `curlimages/curl`, please make sure it's available in your Kubernetes cluster.
 

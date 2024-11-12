@@ -1,4 +1,4 @@
-# Install FAQ
+# Installation FAQ
 
 ## Can Testkube be deployed on OpenShift?
 
@@ -19,13 +19,13 @@ install your own [Kubernetes Cluster](quickstart-no-k8s.mdx).
 
 ## Do I have to provide any infrastructure of my own to run Testkube in production
 
-Yes, the Testkube Agent always runs in your own cluster(s)/infrastructure for managing and executing your tests.
+Yes, the Testkube Agent _always_ runs in your own cluster(s)/infrastructure for managing and executing your tests.
 The Control Plane containing the Dashboard can be hosted either by us or by you. Read more about the
-Testkube deployment architectures at [Deployment Architectures][deployment-architectures].
+Testkube deployment options at [Installation Overview](/articles/install/overview)
 
 ## Can I run Testkube in an air-gapped environment
 
-Yes, you can download and install Testkube in your airgapped environment as long as it has access to dockerhub (for example via artifactory) to retrieve the Testkube images.
+Yes, you can download and install Testkube in your air-gapped environment as long as it has access to dockerhub (for example via artifactory) to retrieve the Testkube images.
 If that doesn't work for you please [get in touch](https://testkube.io/contact), and we will help you install Testkube as required.
 
 ## Can I use Testkube to test applications or services that are not running in Kubernetes
@@ -43,6 +43,5 @@ Testkube Dashboard. Check the installation instructions [here][install-ingress] 
 - Services inside the same Kubernetes cluster can be accessed using the address `\<service-name\>.\<service-namespace\>.svc.cluster.local:\<port-number\>`. If there are network restrictions configured, Testkube will need permissions to access the SUT over the local network of the cluster.
 - If Testkube and the SUT are not in the same cluster, SUT will have to be exposed to Testkube using an Ingress or a Load Balancer.
 
-[deployment-architectures]: /articles/install/deployment-architectures
-[migrate-oss]: /articles/install/standalone-agent#connecting-to-a-control-plane
+[migrate-oss]: /articles/install/standalone-agent#connecting-to-the-testkube-control-plane
 [install-ingress]: /articles/install/install-with-helm#domain
