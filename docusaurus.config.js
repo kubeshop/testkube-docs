@@ -4,8 +4,8 @@
 const lightCodeTheme = require("./src/themes/prism-testkube-light");
 const darkCodeTheme = require("./src/themes/prism-testkube-dark");
 const redirects = require("./redirects");
-const agentRedocSpecs = require('./src/openapi/agent/redoc-specs');
-const cloudRedocSpecs = require('./src/openapi/cloud/redoc-specs');
+const agentRedocSpecs = require("./src/openapi/agent/redoc-specs");
+const cloudRedocSpecs = require("./src/openapi/cloud/redoc-specs");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -18,7 +18,7 @@ const config = {
   onBrokenMarkdownLinks: "warn",
   favicon: "img/logo.svg",
   markdown: {
-    format: 'detect',
+    format: "detect",
   },
 
   // GitHub pages deployment config.
@@ -26,13 +26,6 @@ const config = {
   organizationName: "kubeshop", // Usually your GitHub org/user name.
   projectName: "testkube", // Usually your repo name.
 
-  // Even if you don't use internalization, you can use this field to set useful
-  // metadata like html lang. For example, if your site is Chinese, you may want
-  // to replace "en" with "zh-Hans".
-  i18n: {
-    defaultLocale: "en",
-    locales: ["en"],
-  },
   scripts: [
     {
       src: "https://app.usercentrics.eu/browser-ui/latest/loader.js",
@@ -52,6 +45,8 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl: "https://github.com/kubeshop/testkube/tree/develop/docs",
+          // Generating BreadCrumbs for the docs
+          breadcrumbs: false,
         },
         blog: false,
         theme: {
@@ -65,16 +60,21 @@ const config = {
         },
         sitemap: {
           createSitemapItems: async (params) => {
-            const lowPrioPaths = ["/openapi/agent/","/openapi/cloud/","/articles/crds/","/cli/"]
+            const lowPrioPaths = [
+              "/openapi/agent/",
+              "/openapi/cloud/",
+              "/articles/crds/",
+              "/cli/",
+            ];
 
-            const {defaultCreateSitemapItems, ...rest} = params;
+            const { defaultCreateSitemapItems, ...rest } = params;
             const items = await defaultCreateSitemapItems(rest);
             items.forEach((item) => {
-              lowPrioPaths.forEach( path => {
-                if( item.url.includes(path)) {
+              lowPrioPaths.forEach((path) => {
+                if (item.url.includes(path)) {
                   item.priority = 0.1;
                 }
-              })
+              });
             });
             return items;
           },
@@ -83,18 +83,18 @@ const config = {
     ],
     // Redocusaurus config
     [
-      'redocusaurus',
+      "redocusaurus",
       {
         specs: [...agentRedocSpecs, ...cloudRedocSpecs],
         theme: {
           primaryColor: "#818cf8",
         },
       },
-    ]
+    ],
   ],
 
   themeConfig:
-  /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
       navbar: {
         logo: {
@@ -133,7 +133,8 @@ const config = {
 
       announcementBar: {
         id: "join-testkube-pro",
-        content: '<strong>New to Testkube?</strong> Unleash the power of cloud native testing in Kubernetes with Testkube. <a id="get_started_docs" href="https://www.testkube.io/get-started?utm_source=docs" target="_blank">Get Started ></a>',
+        content:
+          '<strong>New to Testkube?</strong> Unleash the power of cloud native testing in Kubernetes with Testkube. <a id="get_started_docs" href="https://www.testkube.io/get-started?utm_source=docs" target="_blank">Get Started ></a>',
         backgroundColor: "#8951ff",
         textColor: "#fff",
       },
@@ -202,7 +203,10 @@ const config = {
         createRedirects(existingPath) {
           if (existingPath.includes("/cli")) {
             // Redirect from /cli-reference and /reference/cli (old links) to /cli
-            return [existingPath.replace('/cli', "/cli-reference"), existingPath.replace('/cli', "/reference/cli")];
+            return [
+              existingPath.replace("/cli", "/cli-reference"),
+              existingPath.replace("/cli", "/reference/cli"),
+            ];
           }
 
           return undefined; // Return a falsy value: no redirect created

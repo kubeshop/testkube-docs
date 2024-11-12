@@ -1,6 +1,6 @@
-import LegacyWarning from '../articles/_legacy-warning.mdx';
+import LegacyWarning from "../articles/_legacy-warning.mdx";
 
-# Getting Results
+# Getting Test Suite Results
 
 <LegacyWarning />
 
@@ -12,12 +12,12 @@ testkube get tse
 
 ```sh title="Expected output:"
 
-  ID                       | TEST SUITE NAME                | EXECUTION NAME                        | STATUS  | STEPS | LABELS        
+  ID                       | TEST SUITE NAME                | EXECUTION NAME                        | STATUS  | STEPS | LABELS
 ---------------------------+--------------------------------+---------------------------------------+---------+-------+---------------
-  63d401e5fed6933f342ccc67 | executor-maven-smoke-tests     | ts-executor-maven-smoke-tests-680     | failed  |     3 | app=testkube  
-  63d401a9fed6933f342ccc61 | executor-artillery-smoke-tests | ts-executor-artillery-smoke-tests-682 | passed  |     2 | app=testkube  
-  63d3fed9fed6933f342ccc5b | executor-jmeter-smoke-tests    | ts-executor-jmeter-smoke-tests-500    | passed  |     2 | app=testkube  
-  63d3fd35fed6933f342ccc51 | executor-postman-smoke-tests   | ts-executor-postman-smoke-tests-671   | passed  |     4 | app=testkube  
+  63d401e5fed6933f342ccc67 | executor-maven-smoke-tests     | ts-executor-maven-smoke-tests-680     | failed  |     3 | app=testkube
+  63d401a9fed6933f342ccc61 | executor-artillery-smoke-tests | ts-executor-artillery-smoke-tests-682 | passed  |     2 | app=testkube
+  63d3fed9fed6933f342ccc5b | executor-jmeter-smoke-tests    | ts-executor-jmeter-smoke-tests-500    | passed  |     2 | app=testkube
+  63d3fd35fed6933f342ccc51 | executor-postman-smoke-tests   | ts-executor-postman-smoke-tests-671   | passed  |     4 | app=testkube
   63d3fb91fed6933f342ccc4b | executor-container-smoke-tests | ts-executor-container-smoke-tests-683 | failed  |     2 | app=testkube
 
 ```
@@ -36,13 +36,13 @@ Name:     ts-testsuite-parallel-19
 Status:   passed
 Duration: 22.138s
 
-Labels:   
-  STATUSES               | STEP                           | IDS                            | ERRORS      
+Labels:
+  STATUSES               | STEP                           | IDS                            | ERRORS
 -------------------------+--------------------------------+--------------------------------+-------------
-  passed, passed, passed | run:testkube/cli-test,         | 63d3cd05c6768fc8b574e2e9,      | "", "", ""  
-                         | run:testkube/demo-test, delay  | 63d3cd05c6768fc8b574e2ea, ""   |             
-                         | 1000ms                         |                                |             
-  passed                 | delay 5000ms                   | ""                             | ""          
+  passed, passed, passed | run:testkube/cli-test,         | 63d3cd05c6768fc8b574e2e9,      | "", "", ""
+                         | run:testkube/demo-test, delay  | 63d3cd05c6768fc8b574e2ea, ""   |
+                         | 1000ms                         |                                |
+  passed                 | delay 5000ms                   | ""                             | ""
 
 
 Use the following command to get test suite execution details:
@@ -51,7 +51,7 @@ $ kubectl testkube get tse 61e1136165e59a3183465125
 
 Test Suite steps that are running workflows based on `Test` Custom Resources have a Test Execution ID. You can get the details of each in a separate command:
 
-```sh 
+```sh
 kubectl testkube get execution 63d3cd05c6768fc8b574e2e9
 
 ID:         63d3cd05c6768fc8b574e2e9
@@ -129,11 +129,11 @@ metadata:
   namespace: testkube
 spec:
   steps:
-  - stopOnFailure: false
-    execute:
-    - test: testkube-dashboard
-    - delay: 1s
-    - test: testkube-homepage
+    - stopOnFailure: false
+      execute:
+        - test: testkube-dashboard
+        - delay: 1s
+        - test: testkube-homepage
 
 status:
   latestExecution:
