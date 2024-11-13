@@ -184,6 +184,45 @@ spec:
       - name: soapui-workflow-suite
 ```
 
+## Dynamic workflow selection
+In case you don't know an exact list of workflows to be excuted inside of the suite, you can define it dynamically using test workflow labels.
+This list will be generated during test workflow execution. You have 2 options to choose:
+
+Either using labels themselves
+```yaml
+kind: TestWorkflow
+apiVersion: testworkflows.testkube.io/v1
+metadata:
+  name: tw-suite-dynamic-labels
+spec:
+  steps:
+  - execute:
+      parallelism: 2
+      workflows:
+        - selector:
+            matchLabels:
+              core-tests: workflows
+```
+
+Or using Kubernetes label expressions 
+```yaml
+kind: TestWorkflow
+apiVersion: testworkflows.testkube.io/v1
+metadata:
+  name: tw-suite-dynamic-labels
+spec:
+  steps:
+  - execute:
+      parallelism: 2
+      workflows:
+        - selector:
+            matchExpressions:
+            - key: core-tests
+              operator: In
+              values:
+              - workflows
+```
+
 ## Passing input from files
 
 It may happen that you will need to pass information from the file system. You can either pass the files using Test Workflow expressions (like `file("./file-content.txt")`) or using a `tarball` syntax.
