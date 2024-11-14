@@ -14,7 +14,6 @@ testkube run testworkflow [name] [flags]
 ### Options
 
 ```
-      --concurrency int         concurrency level for multiple test workflow executions (default 10)
       --config stringToString   configuration variables in a form of name1=val1 passed to executor (default [])
       --disable-webhooks        disable webhooks for this execution
   -d, --download-artifacts      download artifacts automatically
