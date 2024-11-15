@@ -1,25 +1,24 @@
-# Using Testkube with Private Registries  
+# Using Global Parameters in Testkube Helm Charts  
 
-This guide shows how to deploy and use Testkube with images from private registries. 
+Currently it is possible to use `global` setting for `imageRegistry`, `imagePullSecrets`, `labels`, `containerSecurityContext`, `podSecurityContext` for both Control Plane and Agent charts. The list may extend so please check `global` section of  `values.yaml` file in the charts.
 
-To start with, we need to update `values.yaml` file, populating `registry` and `pullSecret` parameters with a value of your private registry and a k8s secret respectively. (Please note that the [k8s secret](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) should be created prior to Testkube installation.) 
-The easiest solution would be to update `global` parameters, which will set a new value for **all** Testkube components, including MongoDB images:
+### Caveats
 
+Please note that currently there is a discrepancy in providing `imagePullSecrets` for Testkube Control Plane and Agent charts.
+
+Example of using `imagePullSecrets` for Testkube Control Plane helm chart:
 ```yaml
 global:
-  imageRegistry: ""
-  imagePullSecrets: []
-  labels: {}
-  annotations: {}
+  imagePullSecrets: 
+    - name: secret1
+    - name: secret2
 ```
-
-However, NATS chart that is part of Testkube belongs to a third party and as of now it requires passing image registry and image pull secret parameters separately. The snippet from the `values.yaml` file for NATS chart:
-
+Example for Agent chart:
 ```yaml
-nats:
-  global:
-    image:
-      registry: registry-name
+global:
+  imagePullSecrets: 
+    - secret1
+    - secret2
 ```
 
 :::caution
@@ -37,10 +36,3 @@ testkube-api:
 
 ```
 :::
-
-Once the `values.yaml` is ready we may deploy Testkube to the k8s cluster:
-
-```shell
-helm repo add kubeshop https://kubeshop.github.io/helm-charts
-helm install --create-namespace testkube kubeshop/testkube --namespace testkube --values ./path-to-values.yaml
-```
