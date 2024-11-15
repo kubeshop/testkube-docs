@@ -77,8 +77,8 @@ const sidebars = {
                 "articles/install/multi-cluster",
                 {
                   type: "doc",
-                  label: "Using Private Registries",
-                  id: "articles/deploying-from-private-registries",
+                  label: "Using Global Parameters in Testkube Helm Charts",
+                  id: "articles/global-parameters-in-testkube-helm-charts",
                 }, {
                   type: "doc",
                   label: "Configure Identity Providers",
