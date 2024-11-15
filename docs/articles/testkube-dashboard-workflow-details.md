@@ -41,9 +41,14 @@ Most of the settings in these panels can be configured directly in the Workflow 
 
 The General Settings allow you to update the following for your Workflow:
 
-- **Test Workflow name**: Update the description (the name can only be changed in the YAML Definition panel).
+- **Test Workflow name**: Update the description for this Workflow.
 - **Labels**: Labels that you want to add to this Workflow for filtering/searching/etc.
 - **Timeout**: The execution timeout for this Workflow.
+
+:::info
+Due to Kubernetes constraints, it is not possible to change the name of a Workflow.
+You need to create a copy of the Workflow with the new name and delete the old Workflow instead.
+:::
 
 Below these settings there are actions to:
 
