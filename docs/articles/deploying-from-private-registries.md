@@ -6,7 +6,7 @@ Currently it is possible to use `global` setting for `imageRegistry`, `imagePull
 
 Please note that currently there is a discrepancy in providing `imagePullSecrets` for Testkube Enterprise and Agent charts.
 
-Example of usage of `imagePullSecrets` for Testkube Enterprise helm chart:
+Example of using `imagePullSecrets` for Testkube Enterprise helm chart:
 ```yaml
 global:
   imagePullSecrets: 
