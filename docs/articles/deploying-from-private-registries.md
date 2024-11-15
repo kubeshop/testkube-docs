@@ -2,6 +2,24 @@
 
 Currently it is possible to use `global` setting for `imageRegistry`, `imagePullSecrets`, `labels`, `containerSecurityContext`, `podSecurityContext` for both Enterprise (Control Plane) and Agent charts. The list may extend so please check `global` section of  `values.yaml` file in the charts.
 
+###Caveats
+Please note that currently there is a discrepancy in providing `imagePullSecrets` for Testkube Enterprise and Agent charts.
+
+Example of usage of `imagePullSecrets` for Testkube Enterprise helm chart:
+```yaml
+global:
+  imagePullSecrets: 
+    - name: secret1
+    - name: secret2
+```
+Example for Agent chart:
+```yaml
+global:
+  imagePullSecrets: 
+    - secret1
+    - secret2
+```
+
 :::caution
 
 Please mind that `global` parameters override all local values, so if it is required to set different registries or secret names, please use `registry` and `pullSecret` parameter for each Testkube service. For example `testkube-api`:
