@@ -28,7 +28,21 @@ A high-level deployment architecture for Testkube Cloud is shown below.
 
 ## Network traffic control
 
-:::info
-When using Testkube Cloud, all network traffic is initiated from the Agent to the Control Plane, so you don't have to 
-open for any inbound traffic in your firewall.  
-:::
+### Egress
+
+To allow the agent to connect to the control plane, you will need to allow
+egress connections to the `agent.testkube.io` host on port `443`. If this
+connection is proxied, make sure the proxy supports HTTP/2 as the agent uses
+a bidirectional gRPC connection to communicate with the control plane and that
+works best over HTTP/2.
+
+Test executions will need to send artifacts and logs to a Cloud Storage bucket
+on GCP so egress traffic to the `storage.googleapis.com` host on port `443`
+should also be allowed.
+
+### Ingress
+
+When using Testkube Cloud, all network traffic is initiated from the Agent to
+the Control Plane. If you are utilizing a stateful firewall you will not need
+to add any additional ingress rules, but if not then you will need to allow
+ingres connections on the ephemeral ports for your particular OS.

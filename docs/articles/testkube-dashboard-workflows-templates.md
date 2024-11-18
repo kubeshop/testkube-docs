@@ -28,8 +28,13 @@ Selecting a Workflow Template opens the Settings tab for the Template.
 
 ### General Settings
 
-The General settings shown above allow you to specify the name and description of the template, and below that
+The General settings shown above allow you to specify the description of the template, and below that
 shows an example of how to use this template in a workflow.
+
+:::info
+Due to Kubernetes constraints, it is not possible to change the name of a Workflow Template.
+You need to create a copy of the Workflow Template with the new name and delete the old Workflow Template instead.
+::: 
 
 ![Workflow Templates Settings](../img/workflow-templates-settings.png)
 

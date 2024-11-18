@@ -449,7 +449,7 @@ The full TestSuiteExecution data model can be found [here](https://github.com/ku
 ### TestWorkflowExecution:
 
 - `Id` - TestWorkflowExecution ID (for example, `64f8d5b2712890925aea51dc`)
-- `Name` - TestWorkflow name (for example, `wf-postman-smoke-tests`)
+- `Name` - TestWorkflow execution name (for example, `wf-postman-smoke-tests-1`)
 - `Namepace` - TestWorkflowExecution namespace (for example, `my-testkube`)
 - `Number` - TestWorkflowExecution sequence number
 - `ScheduledAt` - TestWorkflow scheduled time (for example, `2023-09-06 19:23:34.543433547 +0000 UTC`)
@@ -461,6 +461,21 @@ The full TestSuiteExecution data model can be found [here](https://github.com/ku
 - `ResolvedWorkflow` - TestWorkflow definition with resolved fields
 
 The full TestWorkflowExecution data model can be found [here](https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_test_workflow_execution.go).
+
+#### TestWorkflow for TestWorkflowExecution Workflow and ResolvedWorkflow fields:
+
+- `Workflow.Name` - TestWorkflow name (for example, `wf-postman-smoke-tests`)
+- `Workflow.Description` - TestWorkflow description (for example, `postman smoke tests to run after application deployment`)
+
+The full TestWorkflow data model can be found [here](https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_test_workflow.go).
+
+#### TestWorkflowResult for TestWorkflowExecution Result field:
+
+- `Reslut.FinishedAt` - TestWorkflow execution finished time(for example, `2024-11-15 11:24:37.129 +0000 UTC`)
+- `Reslut.Duration` - TestWorkflow execution duration (for example, `8.504s`)
+- `Reslut.Status` - TestWorkflow execution status (for example, `passed`)
+
+The full TestWorkflowResult data model can be found [here](https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_test_workflow_result.go).
 
 ### Additional Top-level Variables:
 

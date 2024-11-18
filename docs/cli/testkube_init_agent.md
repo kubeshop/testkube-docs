@@ -28,6 +28,8 @@ testkube init agent [flags]
       --env-id string                   Testkube Pro environment id [required for centralized mode]
       --export                          Export the values.yaml
       --feature-logs-v2                 Logs v2 feature flag
+      --helm-arg stringToString         helm arg option in form of key=value (default [])
+      --helm-set stringToString         helm set option in form of key=value (default [])
   -h, --help                            help for agent
       --logs-prefix string              usually don't need to be changed [required for custom cloud mode] (default "logs")
       --logs-uri string                 Testkube Pro logs URI [required for centralized mode]
