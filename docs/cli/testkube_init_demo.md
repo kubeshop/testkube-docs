@@ -14,12 +14,14 @@ testkube init demo [flags]
 ### Options
 
 ```
-      --dry-run            Dry run
-      --export             Export the values.yaml
-  -h, --help               help for demo
-  -l, --license string     License key
-  -n, --namespace string   Namespace to install Testkube On-Prem demo
-  -y, --no-confirm         Skip confirmation
+      --dry-run                   Dry run
+      --export                    Export the values.yaml
+      --helm-arg stringToString   helm arg option in form of key=value (default [])
+      --helm-set stringToString   helm set option in form of key=value (default [])
+  -h, --help                      help for demo
+  -l, --license string            License key
+  -n, --namespace string          Namespace to install Testkube On-Prem demo
+  -y, --no-confirm                Skip confirmation
 ```
 
 ### Options inherited from parent commands
