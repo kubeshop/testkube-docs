@@ -17,8 +17,12 @@ testkube pro agent [flags]
       --agent-prefix string             usually don't need to be changed [required for custom cloud mode] (default "agent")
       --agent-token string              Testkube Pro agent key [required for centralized mode]
       --agent-uri string                Testkube Pro agent URI [required for centralized mode]
+      --agent-uri-override string       agent uri override
       --api-prefix string               usually don't need to be changed [required for custom cloud mode] (default "api")
+      --api-uri-override string         api uri override
+      --auth-uri-override string        auth uri override
       --chart string                    chart name (usually you don't need to change it) (default "kubeshop/testkube")
+      --custom-auth                     usually don't need to be changed [required for custom cloud mode]
       --dry-run                         dry run mode - only print commands that would be executed
       --embedded-nats                   embedded NATS server in agent
       --env-id string                   Testkube Pro environment id [required for centralized mode]
@@ -29,6 +33,7 @@ testkube pro agent [flags]
   -h, --help                            help for agent
       --logs-prefix string              usually don't need to be changed [required for custom cloud mode] (default "logs")
       --logs-uri string                 Testkube Pro logs URI [required for centralized mode]
+      --logs-uri-override string        logs service uri override
       --master-insecure                 should client connect in insecure mode (will use http instead of https)
       --multi-namespace                 multi namespace mode
       --name string                     installation name (usually you don't need to change it) (default "testkube")
@@ -41,6 +46,7 @@ testkube pro agent [flags]
       --org-id string                   Testkube Pro organization id [required for centralized mode]
       --root-domain string              usually don't need to be changed [required for custom cloud mode] (default "testkube.io")
       --ui-prefix string                usually don't need to be changed [required for custom cloud mode] (default "app")
+      --ui-uri-override string          ui uri override
       --values string                   path to Helm values file
 ```
 

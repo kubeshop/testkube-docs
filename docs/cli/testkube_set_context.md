@@ -17,10 +17,12 @@ testkube set context <value> [flags]
       --agent-prefix string         usually don't need to be changed [required for custom cloud mode] (default "agent")
       --agent-token string          Testkube Pro agent key [required for centralized mode]
       --agent-uri string            Testkube Pro agent URI [required for centralized mode]
-      --agent-uri-override string   agnet uri override
+      --agent-uri-override string   agent uri override
   -k, --api-key string              API Key for Testkube Pro
       --api-prefix string           usually don't need to be changed [required for custom cloud mode] (default "api")
       --api-uri-override string     api uri override
+      --auth-uri-override string    auth uri override
+      --custom-auth                 usually don't need to be changed [required for custom cloud mode]
       --docker-container string     Docker container name for Testkube Docker Agent (default "testkube-agent")
       --env-id string               Testkube Pro environment id [required for centralized mode]
       --feature-logs-v2             Logs v2 feature flag
