@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube disable
@@ -30,6 +29,5 @@ testkube disable <feature> [flags]
 
 ### SEE ALSO
 
-* [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
-* [testkube disable telemetry](testkube_disable_telemetry.md)	 - disable collecting of anonymous telemetry data
-
+- [testkube](testkube.md) - Testkube entrypoint for kubectl plugin
+- [testkube disable telemetry](testkube_disable_telemetry.md) - disable collecting of anonymous telemetry data

@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube docker init
@@ -51,5 +50,4 @@ testkube docker init [flags]
 
 ### SEE ALSO
 
-* [testkube docker](testkube_docker.md)	 - Testkube Docker commands
-
+- [testkube docker](testkube_docker.md) - Testkube Docker commands

@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube completion zsh
@@ -12,7 +11,7 @@ Generate the autocompletion script for zsh
 Generate the autocompletion script for the zsh shell.
 
 If shell completion is not already enabled in your environment you will need
-to enable it.  You can execute the following once:
+to enable it. You can execute the following once:
 
 ```
 	echo "autoload -U compinit; compinit" >> ~/.zshrc
@@ -40,7 +39,6 @@ To load completions for every new session, execute once:
 
 You will need to start a new shell for this setup to take effect.
 
-
 ```
 testkube completion zsh [flags]
 ```
@@ -65,5 +63,4 @@ testkube completion zsh [flags]
 
 ### SEE ALSO
 
-* [testkube completion](testkube_completion.md)	 - Generate the autocompletion script for the specified shell
-
+- [testkube completion](testkube_completion.md) - Generate the autocompletion script for the specified shell

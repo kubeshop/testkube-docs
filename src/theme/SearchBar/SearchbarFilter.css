@@ -1,0 +1,86 @@
+.SearchFilterContainer {
+  height: 60px;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 202;
+}
+
+.SearchFilter {
+  margin: 16px auto auto;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  background: var(--docsearch-modal-background);
+  border-radius: 6px 6px 0 0;
+  box-shadow: 0 var(--docsearch-modal-shadow);
+  max-width: var(--docsearch-modal-width);
+  padding: 16px;
+}
+
+.SearchFitlerTitle {
+  font-size: 14px;
+  line-height: 24px;
+  color: #94a3b8;
+}
+
+.TooltipContainer {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.TooltipContainer .Tooltip {
+  visibility: hidden;
+  color: var(--ifm-font-color-base);
+  background: var(--docsearch-footer-background);
+  box-shadow: var(--docsearch-modal-shadow);
+  width: 400px;
+  text-align: center;
+  border-radius: 4px;
+  padding: 12px;
+  position: absolute;
+  z-index: 225;
+  top: 125%;
+  right: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 14px;
+}
+
+.TooltipContainer:hover .Tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.TooltipContainer .Circle {
+  width: 20px;
+  height: 20px;
+  background-color: var(--ifm-color-third);
+  color: #94a3b8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.Circle:hover {
+  background-color: var(--ifm-color-primary);
+  color: var(--ifm-font-color-base);
+}
+
+.SearchOption {
+  font-size: 12px;
+  border: 1px solid;
+  border-color: transparent;
+  color: var(--ifm-font-color-base);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  padding: 2px 8px;
+  cursor: pointer;
+}

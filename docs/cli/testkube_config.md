@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube config
@@ -30,10 +29,9 @@ testkube config <feature> <value> [flags]
 
 ### SEE ALSO
 
-* [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
-* [testkube config api-server-name](testkube_config_api-server-name.md)	 - Set api server name for testkube client
-* [testkube config api-server-port](testkube_config_api-server-port.md)	 - Set api server port for testkube client
-* [testkube config api-uri](testkube_config_api-uri.md)	 - Set api uri for testkube client
-* [testkube config headers](testkube_config_headers.md)	 - Set headers for testkube client
-* [testkube config namespace](testkube_config_namespace.md)	 - Set namespace for testkube client
-
+- [testkube](testkube.md) - Testkube entrypoint for kubectl plugin
+- [testkube config api-server-name](testkube_config_api-server-name.md) - Set api server name for testkube client
+- [testkube config api-server-port](testkube_config_api-server-port.md) - Set api server port for testkube client
+- [testkube config api-uri](testkube_config_api-uri.md) - Set api uri for testkube client
+- [testkube config headers](testkube_config_headers.md) - Set headers for testkube client
+- [testkube config namespace](testkube_config_namespace.md) - Set namespace for testkube client

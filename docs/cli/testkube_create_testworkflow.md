@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube create testworkflow
@@ -34,5 +33,4 @@ testkube create testworkflow [flags]
 
 ### SEE ALSO
 
-* [testkube create](testkube_create.md)	 - Create resource
-
+- [testkube create](testkube_create.md) - Create resource

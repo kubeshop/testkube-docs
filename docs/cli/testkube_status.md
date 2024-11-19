@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube status
@@ -30,6 +29,5 @@ testkube status [feature|resource] [flags]
 
 ### SEE ALSO
 
-* [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
-* [testkube status telemetry](testkube_status_telemetry.md)	 - Get telemetry status
-
+- [testkube](testkube.md) - Testkube entrypoint for kubectl plugin
+- [testkube status telemetry](testkube_status_telemetry.md) - Get telemetry status

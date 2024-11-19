@@ -401,4 +401,25 @@ ul:hover {
     width: 36px;
     min-width: 36px;
   }
+  .DocSearch-Container {
+    margin-top: 60px;
+  }
+
+  .SearchFilterContainer {
+    background-color: var(--docsearch-modal-background);
+    left: 0px;
+  }
+
+  .SearchFilter {
+    box-shadow: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    max-width: 100vw !important;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .SearchFitlerTitle {
+    display: none;
+  }
 }

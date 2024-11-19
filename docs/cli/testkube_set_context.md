@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube set context
@@ -51,5 +50,4 @@ testkube set context <value> [flags]
 
 ### SEE ALSO
 
-* [testkube set](testkube_set.md)	 - Set resources
-
+- [testkube set](testkube_set.md) - Set resources

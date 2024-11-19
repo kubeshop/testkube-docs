@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube config api-server-port
@@ -30,5 +29,4 @@ testkube config api-server-port <value> [flags]
 
 ### SEE ALSO
 
-* [testkube config](testkube_config.md)	 - Set feature configuration value
-
+- [testkube config](testkube_config.md) - Set feature configuration value

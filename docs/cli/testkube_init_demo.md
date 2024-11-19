@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube init demo
@@ -36,5 +35,4 @@ testkube init demo [flags]
 
 ### SEE ALSO
 
-* [testkube init](testkube_init.md)	 - Init Testkube profiles(standalone-agent|demo|agent)
-
+- [testkube init](testkube_init.md) - Init Testkube profiles(standalone-agent|demo|agent)

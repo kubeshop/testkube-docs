@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube create test
@@ -106,5 +105,4 @@ testkube create test [flags]
 
 ### SEE ALSO
 
-* [testkube create](testkube_create.md)	 - Create resource
-
+- [testkube create](testkube_create.md) - Create resource

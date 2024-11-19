@@ -182,10 +182,18 @@ const config = {
         indexName: "testkube",
 
         // Optional: see doc section below
-        contextualSearch: false,
+        contextualSearch: true,
 
         // Optional: path for search page that enabled by default (`false` to disable it)
         searchPagePath: false,
+
+        facets: ["indexPrefix"],
+        searchParameters: {
+          facetFilters: [
+            "indexPrefix: -reference-doc",
+            "indexPrefix: -legacy-doc",
+          ],
+        },
 
         //... other Algolia params
       },

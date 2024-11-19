@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube enable telemetry
@@ -30,5 +29,4 @@ testkube enable telemetry [flags]
 
 ### SEE ALSO
 
-* [testkube enable](testkube_enable.md)	 - Enable feature
-
+- [testkube enable](testkube_enable.md) - Enable feature

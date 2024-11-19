@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube delete executor
@@ -36,5 +35,4 @@ testkube delete executor [executorName] [flags]
 
 ### SEE ALSO
 
-* [testkube delete](testkube_delete.md)	 - Delete resources
-
+- [testkube delete](testkube_delete.md) - Delete resources

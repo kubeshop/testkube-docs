@@ -1,6 +1,5 @@
-
 <head>
-  <meta name="og:type" content="reference-doc" />
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
 ## testkube abort testsuiteexecution
@@ -30,5 +29,4 @@ testkube abort testsuiteexecution <executionName> [flags]
 
 ### SEE ALSO
 
-* [testkube abort](testkube_abort.md)	 - Abort tests or test suites
-
+- [testkube abort](testkube_abort.md) - Abort tests or test suites

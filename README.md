@@ -83,6 +83,18 @@ You can create tabs for structuring your content, for example as in the [CLI Ins
 Please note that headlines inside tab content will be shown in the navigation menu to the right, but will not
 work as direct links from external sources unless they are under the default/first tab.
 
+## Search Indexing
+
+For search, we've indexed all the pages into 3 distinct categories `Main`, `Reference` and `Legacy`.
+By default the `Main` index is used which contains all the results which haven't been included in the other 2 indexes.
+The user can switch between indexes by clicking one of the 3 options at the top for the search bar.
+
+### Add Docs to specific index
+
+All docs pages which haven't been explicitly included in the other indexes, are part of the `Main` index.
+To add a page to a specific index, add the following meta tag in the head of the page. e.g:
+`<meta name="docsearch:indexPrefix" content="YOUR_INDEX" />`
+
 ## Updating the OpenAPI Docs
 
 These docs use [redocusaurus](https://redocusaurus.vercel.app/) to generate OpenAPI documentation, but
