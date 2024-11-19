@@ -417,9 +417,3 @@ ul:hover {
     max-width: 100vw !important;
   }
 }
-
-@media screen and (max-width: 425px) {
-  .SearchFitlerTitle {
-    display: none;
-  }
-}
