@@ -183,8 +183,8 @@ const config = {
         appId: "QRREOKFLDE",
 
         // Public API key: it is safe to commit it
-        apiKey: "41d831d722bfab3550c1069e93a1dc36",
-        indexName: "testkube-bogdan",
+        apiKey: "97a76158bf582346aa0c2605cbc593f6",
+        indexName: "testkube",
 
         // Optional: see doc section below
         contextualSearch: true,
