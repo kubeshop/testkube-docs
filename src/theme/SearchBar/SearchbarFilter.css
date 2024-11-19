@@ -19,12 +19,6 @@
   padding: 16px;
 }
 
-.SearchFitlerTitle {
-  font-size: 14px;
-  line-height: 24px;
-  color: #94a3b8;
-}
-
 .TooltipContainer {
   position: relative;
   display: inline-block;

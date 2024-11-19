@@ -19,7 +19,6 @@ export default function SearchBarFilter({
   return (
     <div className="SearchFilterContainer">
       <div className="SearchFilter">
-        <div className="SearchFitlerTitle">Select documentation:</div>
         <SearchOption
           label="Docs"
           optionKey="indexPrefix: -reference-doc"

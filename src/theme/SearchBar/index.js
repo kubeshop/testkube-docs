@@ -57,7 +57,7 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
     facetFilters: computedFacetFilters,
   };
 
-  const [currentOption, setCurrentOption] = useState("Latest");
+  const [currentOption, setCurrentOption] = useState("Docs");
 
   const history = useHistory();
   const searchContainer = useRef(null);
