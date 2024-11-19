@@ -21,7 +21,7 @@ export default function SearchBarFilter({
       <div className="SearchFilter">
         <div className="SearchFitlerTitle">Select documentation:</div>
         <SearchOption
-          label="Latest"
+          label="Docs"
           optionKey="indexPrefix: -reference-doc"
           currentIndexPrefix={currentIndexPrefix}
           onClick={(label) => {
@@ -33,7 +33,7 @@ export default function SearchBarFilter({
           }}
         />
         <SearchOption
-          label="API Reference"
+          label="Reference"
           optionKey="indexPrefix: reference-doc"
           currentIndexPrefix={currentIndexPrefix}
           onClick={(label) => {
@@ -43,7 +43,7 @@ export default function SearchBarFilter({
         />
 
         <SearchOption
-          label="v1"
+          label="Legacy"
           optionKey="indexPrefix: legacy-doc"
           currentIndexPrefix={currentIndexPrefix}
           onClick={(label) => {
@@ -51,6 +51,7 @@ export default function SearchBarFilter({
             onOptionClick("indexPrefix: legacy-doc");
           }}
         />
+        <Tooltip />
       </div>
     </div>
   );
@@ -72,6 +73,25 @@ function SearchOption({ label, onClick, optionKey, currentIndexPrefix }) {
       }}
     >
       {label}
+    </div>
+  );
+}
+
+function Tooltip() {
+  return (
+    <div className="TooltipContainer">
+      <div className="Circle">?</div>
+      <div className="Tooltip">
+        <div>
+          <b>Docs</b> - Usage and Installation documentation.
+        </div>
+        <div>
+          <b>Reference</b> - CRD, CLI and OpenAPI reference documentation.
+        </div>
+        <div>
+          <b>Legacy</b> - Legacy Test/Suite/Executor documentation.
+        </div>
+      </div>
     </div>
   );
 }
