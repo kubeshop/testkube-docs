@@ -19,7 +19,7 @@
   padding: 16px;
 
   /* align last child to flex end */
-  & > :last-child {
+  & > *:last-child {
     margin-left: auto;
   }
 }
