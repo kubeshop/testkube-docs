@@ -188,7 +188,7 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
               })}
               {...props}
               searchParameters={searchParameters}
-              placeholder={`Search in ${currentOption} Docs`}
+              placeholder={`Search in ${currentOption}`}
               translations={translations.modal}
             />
           </div>,
