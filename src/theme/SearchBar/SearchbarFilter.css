@@ -64,17 +64,23 @@
 
 .Circle:hover {
   background-color: var(--ifm-color-primary);
-  color: var(--ifm-font-color-base);
+  color: var(--ifm-color-white);
 }
 
 .SearchOption {
   font-size: 12px;
   border: 1px solid;
   border-color: transparent;
-  color: var(--ifm-font-color-base);
   border-radius: 4px;
   display: flex;
   justify-content: center;
   padding: 2px 8px;
   cursor: pointer;
+  background: var(--ifm-color-third);
+  color: var(--ifm-font-color-base);
+}
+
+.SearchOptionActive {
+  background: var(--ifm-color-primary);
+  color: var(--ifm-color-white);
 }

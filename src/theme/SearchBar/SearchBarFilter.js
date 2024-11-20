@@ -59,14 +59,9 @@ export default function SearchBarFilter({
 function SearchOption({ label, onClick, optionKey, currentIndexPrefix }) {
   return (
     <div
-      className="SearchOption"
-      style={{
-        background: `${
-          currentIndexPrefix === optionKey
-            ? "var(--ifm-color-primary)"
-            : "var(--ifm-color-third)"
-        }`,
-      }}
+      className={`SearchOption ${
+        currentIndexPrefix === optionKey ? "SearchOptionActive" : ""
+      }`}
       onClick={() => {
         onClick(label);
       }}
