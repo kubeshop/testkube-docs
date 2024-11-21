@@ -154,7 +154,7 @@ dex:
         "*": <email of a Google Workspace user>
       
 ```
-Please note that it is required to create a k8s secret with a service account JSON key file and mount it to Dex pod. Follow this documentation to see full configuration: https://dexidp.io/docs/connectors/google/
+Please note that it is required to create a k8s secret with a service account JSON key file and mount it to Dex pod. Follow official [documentation](https://dexidp.io/docs/connectors/google/) to see full configuration.
 
 
 Alternatively, you can use [a local database with static users](/testkube-pro-on-prem/articles/auth/#static-users) which acts as a virtual identity provider for evaluations.
