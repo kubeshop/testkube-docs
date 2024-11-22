@@ -1,4 +1,6 @@
-# Using an external MongoDB instance
+# MongoDB administration
+
+## Using an external MongoDB instance
 
 MongoDB is used for storage of Testkube Test results and various Testkube configurations as telemetry settings and cluster ID.
 
@@ -7,21 +9,23 @@ In order to use an external MongoDB instance, follow these steps:
 1. Make sure you have access to the MongoDB you want to connect to - note: newest versions of MongoDB might not work optimally with Testkube,
    for the best experience, use MongoDB v6.0.16.
 2. Install Testkube with `--set mongo.enabled=false`:
+
 ```shell
 kubectl testkube install --set mongo.enabled=false
 ```
+
 3. [Update MongoDB details for the api-server in the Helm values with valid connection string](/articles/install/advanced-install#mongodb).
 
 ### SSL Connections
 
 Inspecting the Testkube API-server manifest shows the following MongoDB-related environment variables:
 
-* _"API_MONGO_DSN"_ (default:"mongodb://localhost:27017") - connection string
-* _"API_MONGO_DB"_ (default:"testkube") - database name
-* _"API_MONGO_SSL_CERT"_ (no default value) - reference to Kubernetes secret for MongoDB instances with SSL enabled
-* _"API_MONGO_SSL_CA_FILE_KEY"_ (default:"sslCertificateAuthorityFile") - the key in the secret that marks the CA file
-* _"API_MONGO_SSL_CLIENT_FILE_KEY"_ (default:"sslClientCertificateKeyFile") - the key in the secret that marks the client certificate file
-* _"API_MONGO_SSL_CLIENT_FILE_PASS_KEY"_ (default:"sslClientCertificateKeyFilePassword") - the key in the secret that marks the client certificate file password
+- _"API_MONGO_DSN"_ (default:"mongodb://localhost:27017") - connection string
+- _"API_MONGO_DB"_ (default:"testkube") - database name
+- _"API_MONGO_SSL_CERT"_ (no default value) - reference to Kubernetes secret for MongoDB instances with SSL enabled
+- _"API_MONGO_SSL_CA_FILE_KEY"_ (default:"sslCertificateAuthorityFile") - the key in the secret that marks the CA file
+- _"API_MONGO_SSL_CLIENT_FILE_KEY"_ (default:"sslClientCertificateKeyFile") - the key in the secret that marks the client certificate file
+- _"API_MONGO_SSL_CLIENT_FILE_PASS_KEY"_ (default:"sslClientCertificateKeyFilePassword") - the key in the secret that marks the client certificate file password
 
 _API_MONGO_SSL_CERT_ expects the name of a Kubernetes secret containing all the necessary information to establish an SSL connection to the MongoDB instance. This secret has to be in the `testkube` namespace and should have the following structure:
 
@@ -67,3 +71,8 @@ mongodb:
 ```
 
 Testkube will download and use the CA certificates provided by AWS from https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem.
+
+## Purging Indexes
+
+In case of having large amounts of legacy data, which is no longer needed and can be purged, we recommend using [MongoDB TTL Indexes](https://www.mongodb.com/docs/manual/core/index-ttl/).
+These are useful for cases such as deleting big logs, documents that only needs to be persisted in the database for a finite amount of time.

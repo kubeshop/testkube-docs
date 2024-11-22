@@ -195,10 +195,6 @@ const redirects = [
     to: "/articles/test-triggers",
   },
   {
-    from: "/concepts/dependencies",
-    to: "/articles/testkube-dependencies",
-  },
-  {
     from: "/concepts/test-sources",
     to: "/articles/test-sources",
   },
@@ -385,7 +381,7 @@ const redirects = [
       "/contributing/development/crds",
       "/contributing/development/development-crds/",
       "/articles/operator-api-reference",
-      "/articles/crds-reference"
+      "/articles/crds-reference",
     ],
     to: "/articles/crds",
   },
@@ -528,7 +524,7 @@ const redirects = [
     to: "/articles/circleci",
   },
   {
-    from: ["/argocd","/argo"],
+    from: ["/argocd", "/argo"],
     to: "/articles/argocd-integration",
   },
   {
@@ -562,6 +558,10 @@ const redirects = [
   {
     from: "/articles/deploying-from-private-registries",
     to: "/articles/global-parameters-in-testkube-helm-charts",
+  },
+  {
+    from: ["/articles/testkube-dependencies", "/concepts/dependencies"],
+    to: "/articles/mongodb-administration",
   },
 ];
 

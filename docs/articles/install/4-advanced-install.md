@@ -288,4 +288,4 @@ global:
 By default, Testkube will pull images from the [docker.io](https://docker.io) registry. You can override the image of each individual service.
 
 [contact]: https://testkube.io/contact
-[guide-mongo-ssl]: /articles/testkube-dependencies
+[guide-mongo-ssl]: /articles/mongodb-administration
