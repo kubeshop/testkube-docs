@@ -1,4 +1,6 @@
-# Using an external MongoDB instance
+# MongoDB administration
+
+## Using an external MongoDB instance
 
 MongoDB is used for storage of Testkube Test results and various Testkube configurations as telemetry settings and cluster ID.
 
