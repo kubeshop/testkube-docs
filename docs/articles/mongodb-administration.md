@@ -1,4 +1,4 @@
-# MongoDB administration
+# Using an external MongoDB instance
 
 MongoDB is used for storage of Testkube Test results and various Testkube configurations as telemetry settings and cluster ID.
 
@@ -70,7 +70,7 @@ mongodb:
 
 Testkube will download and use the CA certificates provided by AWS from https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem.
 
-### Purging Indexes
+## Purging Indexes
 
 In case of having large amounts of legacy data, which is no longer needed and can be purged, we recommend using [MongoDB TTL Indexes](https://www.mongodb.com/docs/manual/core/index-ttl/).
 These are useful for cases such as deleting big logs, documents that only needs to be persisted in the database for a finite amount of time.
