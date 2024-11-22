@@ -559,6 +559,10 @@ const redirects = [
     from: "/workflows",
     to: "/articles/examples/overview",
   },
+  {
+    from: "/articles/deploying-from-private-registries",
+    to: "/articles/global-parameters-in-testkube-helm-charts",
+  },
 ];
 
 module.exports = redirects;
