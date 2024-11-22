@@ -119,8 +119,43 @@ dex:
           issuer: https://accounts.google.com
           clientID: $GOOGLE_CLIENT_ID
           clientSecret: $GOOGLE_CLIENT_SECRET
-          redirectURI: <dex endpoint>/callback
+          redirectURI: <dex endpoint>/idp/callback
 ```
+
+Another example of using Google’s OpenID Connect provider that performs authorization based on groups membership:
+```yaml
+testkube-cloud-api:
+  additionalEnv:
+    OAUTH_GROUPS_SCOPE: "true"
+  
+dex:
+  volumes:
+  - name: google-auth-volume
+    secret:
+      secretName: google-auth-secret #secret with the SA JSON key file
+  volumeMounts:
+    - name: google-auth-volume
+      readOnly: true
+      mountPath: /home
+  configTemplate:
+    additionalConfig: |
+    connectors:
+    - type: google
+      id: google
+      name: Google
+      config:
+      clientID: $GOOGLE_CLIENT_ID
+      clientSecret: $GOOGLE_CLIENT_SECRET
+      redirectURI: <dex endpoint>/idp/callback
+      serviceAccountFilePath: /home/googleAuth.json #path from volumeMount
+      groups:
+        - <group-name>
+      domainToAdminEmail:
+        "*": <email of a Google Workspace user>
+      
+```
+Please note that it is required to create a k8s secret with a service account JSON key file and mount it to Dex pod. Follow official [documentation](https://dexidp.io/docs/connectors/google/) to see full configuration.
+
 
 Alternatively, you can use [a local database with static users](/testkube-pro-on-prem/articles/auth/#static-users) which acts as a virtual identity provider for evaluations.
 
