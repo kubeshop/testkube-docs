@@ -7,6 +7,25 @@ See [Components](/articles/helm-components) for a list of all included component
 Helm Charts with a list of their available properties.
 :::
 
+## Artifact storage & cleanup
+
+Testkube uses MinIO or any S3-compatible storage to store test artifacts by default.
+Over time, as the number of test executions increases, storage space may become filled with artifacts that are no longer required.
+
+To manage storage efficiently, Testkube provides an automatic cleanup feature.
+You can configure the cleanup policy using the following Helm parameters:
+```yaml
+testkube-cloud-api:
+  api:
+    storage:
+      cleanup:
+        retentionDays: 90
+        maxStorageSizeGb: 10
+```
+
+* `retentionDays`: Defines the number of days to retain artifacts. Artifacts older than this period will be automatically deleted.
+* `maxStorageSizeGb`: Sets the maximum allowable storage size in gigabytes. When the storage exceeds this limit, the oldest artifacts will be removed until the storage size is within the specified limit.
+
 ## TLS
 
 ### Self-signed certificates
