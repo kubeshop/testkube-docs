@@ -17,6 +17,10 @@ There are multiple ways to integrate Testkube Core OSS into your Testkube On-Pre
 
 At this point there are two options to deploy Testkube On-Prem:
 
+:::note
+In case of issues with license please try `testkube diag license` command for license validation.
+:::
+
 **Multi-cluster Installation:**
 
 - _Description:_ This option enables the connection of multiple Agents from different Kubernetes clusters. It allows you to consolidate all tests in a unified Dashboard, organized by Environments.
