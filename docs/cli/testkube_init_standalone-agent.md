@@ -20,6 +20,7 @@ testkube init standalone-agent [flags]
       --api-prefix string           usually don't need to be changed [required for custom cloud mode] (default "api")
       --api-uri-override string     api uri override
       --auth-uri-override string    auth uri override
+      --callback-port int           usually don't need to be changed [required for custom cloud mode] (default 8090)
       --chart string                chart name (usually you don't need to change it) (default "kubeshop/testkube")
       --custom-auth                 usually don't need to be changed [required for custom cloud mode]
       --dry-run                     dry run mode - only print commands that would be executed
@@ -27,6 +28,8 @@ testkube init standalone-agent [flags]
       --env-id string               Testkube Pro environment id [required for centralized mode]
       --export                      Export the values.yaml
       --feature-logs-v2             Logs v2 feature flag
+      --helm-arg stringToString     helm arg option in form of key=value (default [])
+      --helm-set stringToString     helm set option in form of key=value (default [])
   -h, --help                        help for standalone-agent
       --logs-prefix string          usually don't need to be changed [required for custom cloud mode] (default "logs")
       --logs-uri string             Testkube Pro logs URI [required for centralized mode]
