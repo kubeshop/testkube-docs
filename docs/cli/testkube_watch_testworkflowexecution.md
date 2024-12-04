@@ -1,6 +1,6 @@
 <head>
   <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
+</head
 
 ## testkube watch testworkflowexecution
 
@@ -17,7 +17,11 @@ testkube watch testworkflowexecution <executionName> [flags]
 ### Options
 
 ```
-  -h, --help   help for testworkflowexecution
+  -h, --help                        help for testworkflowexecution
+      --parallel-step-index int     test workflow parallel step index starting from 0
+      --parallel-step-name string   test workflow parallel step name or reference
+      --service-index int           test workflow service index starting from 0
+      --service-name string         test workflow service name
 ```
 
 ### Options inherited from parent commands
