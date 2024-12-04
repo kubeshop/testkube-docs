@@ -3,7 +3,7 @@
 An environment is a grouping Workflows, Execution Results, Triggers and Webhooks.
 
 :::info
-A Testkube environment is managed by a Testkube Agent running in your Kubernetes Cluster - read more [here](../articles/architecture.md).
+A Testkube environment is managed by a Testkube Agent running in your Kubernetes Cluster - read more [here](../../articles/architecture.md).
 :::
 
 ## Creating a New Environment
@@ -16,25 +16,25 @@ You can create a new environment from the "Environments" drop down in the header
 
 When creating a new environment in Testkube Cloud, you will first be prompted with the following options:
 
-1. **I have a K8s Cluster** - select this if you have a cluster where you can install the Testkube Agent for your 
-  environment. 
-2. **No Cluster at hand** - setting up a local cluster for evaluation purposes is straightforward, for example using [kind](https://kind.sigs.k8s.io/) 
-  or [minikube](https://minikube.sigs.k8s.io/docs/). Alternatively, you can use our demo environment for exploring Testkube functionality with having to install anything.
+1. **I have a K8s Cluster** - select this if you have a cluster where you can install the Testkube Agent for your
+   environment.
+2. **No Cluster at hand** - setting up a local cluster for evaluation purposes is straightforward, for example using [kind](https://kind.sigs.k8s.io/)
+   or [minikube](https://minikube.sigs.k8s.io/docs/). Alternatively, you can use our demo environment for exploring Testkube functionality with having to install anything.
 3. **I don't use Kubernetes** - if you're not familiar with Kubernetes and don't want to install a local cluster, you can use
-   our demo environment for exploring Testkube functionality with having to install anything. 
+   our demo environment for exploring Testkube functionality with having to install anything.
 
 ![Cloud Environment Creation](../../img/cloud-create-environment.png)
 
-
 :::tip
+
 ### Testkube Demo Environment
 
-The Testkube Demo environment available in Testkube Cloud is a great way to explore the functionality provided by Testkube. 
+The Testkube Demo environment available in Testkube Cloud is a great way to explore the functionality provided by Testkube.
 It contains a large collection of Workflows for different testing tools, with corresponding execution results and
-Test Insights. 
+Test Insights.
 
-You are added as a member with the Run role (see [below](/testkube-pro/articles/environment-management#environment-members)), 
-which gives you read-only access to explore and run these workflows and their results, as well as read-only access to 
+You are added as a member with the Run role (see [below](/testkube-pro/articles/environment-management#environment-members)),
+which gives you read-only access to explore and run these workflows and their results, as well as read-only access to
 all other major features of Testkube.
 
 ![Demo Environment](../../img/demo-environment.png)
@@ -50,8 +50,8 @@ a prompt for a unique environment name:
 
 ### Environment connection
 
-After providing the environment name you will be prompted as shown below to [Install the CLI](/articles/install/cli) 
-(do this only if you haven't already done so) and then run a CLI command to install the 
+After providing the environment name you will be prompted as shown below to [Install the CLI](/articles/install/cli)
+(do this only if you haven't already done so) and then run a CLI command to install the
 Testkube Agent for your environment, see [Testkube Agent Installation][installing] for more details.
 
 ![New Environment Connection](../../img/new-environment-connection.png)
@@ -89,10 +89,9 @@ The middle section of the General tab presents information about the agent conne
 
 ![Agent Information](../../img/agent-information.png)
 
-
 ### Environment Members
 
-You can assign environment-specific roles to [Teams](/articles/teams) or individual [Members](/testkube-pro/articles/organization-management#members) of your organization to control which 
+You can assign environment-specific roles to [Teams](/articles/teams) or individual [Members](/testkube-pro/articles/organization-management#members) of your organization to control which
 actions a member can perform in a specific environment.
 
 To add new members to an Environment, select the Members tab under the Environment settings and use the "Add Collaborators"
@@ -112,7 +111,7 @@ Keep in mind that all organization `admin` users can always access all environme
 :::
 
 :::tip
-Have a look at  [Resource Access Management](/articles/resource-access-management) to get an overview of how Testkube
+Have a look at [Resource Access Management](/articles/resource-access-management) to get an overview of how Testkube
 allows you to manage and apply Resource Access controls.
 :::
 
@@ -120,9 +119,6 @@ You can see a list of existing Environment members at the bottom of this panel, 
 using the popup menu on the right:
 
 ![Environment Members](../../img/environment-members.png)
-
-
-
 
 ### Keyword Handling
 
@@ -133,7 +129,7 @@ This tab allows you to manage the Filtering categories available for [Log Highli
 There are 4 default categories, represented with a few keywords each:
 
 | Category                   | Keywords                                                            |
-|----------------------------|---------------------------------------------------------------------|
+| -------------------------- | ------------------------------------------------------------------- |
 | **Error Keywords**         | Error, Exception, Fail, Critical, Fatal                             |
 | **Connection**             | Connection, Disconnect, Lost, Timeout, Refused, Handshake, Retrying |
 | **Resource Issues**        | OutOfMemory, MemoryLeak, ResourceExhausted, LimitExceeded, Quota    |
