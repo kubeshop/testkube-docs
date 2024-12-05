@@ -220,6 +220,7 @@ splitOpenAPIByPaths(
   (opPath) => {
     // only show these in the docs
     let segments = opPath.split("/");
+    segments[0] = "https://api.testkube.io";
     if (
       ![
         "status-pages",
