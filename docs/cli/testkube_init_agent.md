@@ -20,6 +20,7 @@ testkube init agent [flags]
       --api-prefix string               usually don't need to be changed [required for custom cloud mode] (default "api")
       --api-uri-override string         api uri override
       --auth-uri-override string        auth uri override
+      --callback-port int               usually don't need to be changed [required for custom cloud mode] (default 8090)
       --chart string                    chart name (usually you don't need to change it) (default "kubeshop/testkube")
       --custom-auth                     usually don't need to be changed [required for custom cloud mode]
       --dry-run                         dry run mode - only print commands that would be executed
