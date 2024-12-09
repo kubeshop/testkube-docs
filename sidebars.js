@@ -121,6 +121,11 @@ const sidebars = {
                   id: "articles/ephemeral-environments",
                 },
                 {
+                  type: "doc",
+                  label: "High Availability Configuration",
+                  id: "articles/ha",
+                },
+                {
                   type: "link",
                   label: "Testkube with Kind",
                   href: "https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker",
