@@ -129,9 +129,9 @@ nats:
 
 ## Caveats
 
-- The agent under the current architeture can only run as a single instance.
+- The agent under the current architecture can only run as a single instance.
   Coordinating multiple replicas would require implementing leader election, but
-electing a new leader would mostly likely take longer then spawning a new pod on
+electing a new leader would mostly likely take longer than spawning a new pod on
 a different node and reconnecting.
 - The operator can only run as a single instance, but it is responsible for
   running a periodic reconciliation process which at most could be delayed while
