@@ -51,6 +51,12 @@ get_dockerhub_image_url() {
         return
     fi
 
+    # Check if the image is ghcr.io/dexidp/dex
+    if [[ "$image_with_tag" =~ ^ghcr.io/dexidp/dex: ]]; then
+        echo "https://github.com/dexidp/dex/pkgs/container/dex"
+        return
+    fi
+
     local image_name=$(echo "$image_with_tag" | cut -d':' -f1)
     local tag=$(echo "$image_with_tag" | cut -d':' -f2)
     local namespace="library" # Default namespace if a custom one is not provided
@@ -94,7 +100,7 @@ generate_reports() {
     echo ":::" >> "$INDEX_FILE"
     echo "" >> "$INDEX_FILE"
 
-    echo "| Image | Description | Vulnerability Report (\`linux/amd64\`) | Vulnerability Report (\`linux/arm64\`) | Docker Image|" >> "$INDEX_FILE"
+    echo "| Image | Description | Vulnerability Report (\`linux/amd64\`) | Vulnerability Report (\`linux/arm64\`) | Docker Image |" >> "$INDEX_FILE"
     echo "|-------|-------------|----------------------------------------|----------------------------------------|-------------|" >> "$INDEX_FILE"
 
     # Loop through each image in the input file
@@ -136,7 +142,7 @@ generate_reports() {
         sed -i '/:package: /d' "${OUTPUT_DIR}$report_arm64"
 
         # Add entry to the index file
-        echo "| $image | $image_desc | [View Report](./$report_amd64) | [View Report](./$report_arm64) | [View Image]($dockerhub_url)" >> "$INDEX_FILE"
+        echo "| $image | $image_desc | [View Report](./$report_amd64) | [View Report](./$report_arm64) | [View Image]($dockerhub_url) |" >> "$INDEX_FILE"
     done < "$IMAGE_SET.txt"
 }
 
@@ -186,6 +192,7 @@ add_image_desc "kubeshop/testkube-enterprise-api" "API server for the Testkube c
 add_image_desc "kubeshop/testkube-enterprise-ui" "Testkube dashboard."
 add_image_desc "kubeshop/testkube-enterprise-worker-service" "Testkube worker service used for background processing."
 add_image_desc "alpine/mongosh" "Used as an init container to check whether MongoDB is ready before starting dependent services."
+add_image_desc "kubeshop/testkube-migration" "Used to run migrations for MongoDB."
 
 # Generate reports
 generate_reports "testkubeenterprise/testkube-enterprise" "cp_images"
