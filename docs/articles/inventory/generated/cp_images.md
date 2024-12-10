@@ -5,7 +5,7 @@ Based on chart `testkube-enterprise` as of version `2.63.0` on 10-12-2024
 :::
 
 | Image | Description | Vulnerability Report (`linux/amd64`) | Vulnerability Report (`linux/arm64`) | Docker Image |
-|-------|-------------|----------------------------------------|----------------------------------------|-------------|
+|-------|-------------|----------------------------------------|----------------------------------------|--------------|
 | bitnami/minio:2024.11.7-debian-12-r1 | Object store used by the Testkube control plane to store logs and artifacts. | [View Report](./minio-2024.11.7-debian-12-r1_linux_amd64.md) | [View Report](./minio-2024.11.7-debian-12-r1_linux_arm64.md) | [View Image](https://hub.docker.com/layers/bitnami/minio/2024.11.7-debian-12-r1/images/sha256-6cc8d265464eb9e45fa1f2b186a326552c9a5c4ea373c26edf84c2ea18b39aed?context=explore) |
 | ghcr.io/dexidp/dex:v2.41.1 | Identity provider used by the Testkube control plane. | [View Report](./dex-v2.41.1_linux_amd64.md) | [View Report](./dex-v2.41.1_linux_arm64.md) | [View Image](https://github.com/dexidp/dex/pkgs/container/dex) |
 | kubeshop/bitnami-mongodb:7.0.12 | Database used by the Testkube control plane. | [View Report](./bitnami-mongodb-7.0.12_linux_amd64.md) | [View Report](./bitnami-mongodb-7.0.12_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/bitnami-mongodb/7.0.12/images/sha256-43aa0e5c2e3eff47a9d82ab89e3d0bdde515b9b64628d328a18342e1facba8aa?context=explore) |
