@@ -101,7 +101,7 @@ generate_reports() {
     echo "" >> "$INDEX_FILE"
 
     echo "| Image | Description | Vulnerability Report (\`linux/amd64\`) | Vulnerability Report (\`linux/arm64\`) | Docker Image |" >> "$INDEX_FILE"
-    echo "|-------|-------------|----------------------------------------|----------------------------------------|-------------|" >> "$INDEX_FILE"
+    echo "|-------|-------------|----------------------------------------|----------------------------------------|--------------|" >> "$INDEX_FILE"
 
     # Loop through each image in the input file
     while IFS= read -r image; do
