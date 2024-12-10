@@ -5,7 +5,7 @@ Based on chart `testkube` as of version `2.1.102` on 10-12-2024
 :::
 
 | Image | Description | Vulnerability Report (`linux/amd64`) | Vulnerability Report (`linux/arm64`) | Docker Image |
-|-------|-------------|----------------------------------------|----------------------------------------|-------------|
+|-------|-------------|----------------------------------------|----------------------------------------|--------------|
 | kubeshop/kube-webhook-certgen:0.0.4 | Used to generate certificates for the Testkube operator admission webhook. | [View Report](./kube-webhook-certgen-0.0.4_linux_amd64.md) | [View Report](./kube-webhook-certgen-0.0.4_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/kube-webhook-certgen/0.0.4/images/sha256-321e434a68754a8449e0b856f0fc5d1f7012933c9ea00a2268b2333ba0e41f3c?context=explore) |
 | kubeshop/testkube-api-server:2.1.74 | API server for the Testkube agent. | [View Report](./testkube-api-server-2.1.74_linux_amd64.md) | [View Report](./testkube-api-server-2.1.74_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-api-server/2.1.74/images/sha256-0a152ed21df2df4db80f855ffd382a31c8d738bc0b2465c2ed7ea1145e44621f?context=explore) |
 | kubeshop/testkube-operator:2.1.67 | Controller for the Testkube operator. | [View Report](./testkube-operator-2.1.67_linux_amd64.md) | [View Report](./testkube-operator-2.1.67_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-operator/2.1.67/images/sha256-bdb3372de099a261a7ca5c9f3063cad4b476facb5f18795b065c2c7dfca78365?context=explore) |
