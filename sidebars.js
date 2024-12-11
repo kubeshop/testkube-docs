@@ -688,6 +688,22 @@ const sidebars = {
         },
         {
           type: "category",
+          label: "Locust",
+          items: [
+            {
+              type: "doc",
+              label: "Basic",
+              id: "articles/examples/locust-basic",
+            },
+            {
+              type: "doc",
+              label: "Distributed",
+              id: "articles/examples/locust-distributed",
+            },
+          ],
+        },
+        {
+          type: "category",
           label: "Robot Framework",
           items: [
             {
