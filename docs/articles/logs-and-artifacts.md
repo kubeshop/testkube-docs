@@ -39,7 +39,7 @@ Uploaded artifacts are available under the "Artifacts" folder:
 Clicking an individual artifact will either display that artifact inline or download it - depending on its content type.
 For example, below shows the HTML report available in the screenshot above:
 
-![Rendered Workflow HTLM Artifact](../img/workflows-html-artifact-2.1.png)
+![Rendered Workflow HTML Artifact](../img/workflows-html-artifact-2.1.png)
 
 :::tip
 

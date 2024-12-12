@@ -4,6 +4,8 @@ apiVersion: testworkflows.testkube.io/v1
 metadata:
   name: distributed-jmeter-example-config-artifacts
   namespace: testkube
+  labels:
+    docs: example
 spec:
   config:
     slavecount:
