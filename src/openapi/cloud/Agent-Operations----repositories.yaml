@@ -8,6 +8,11 @@ info:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
   version: cloud-api/1.10.51
+servers:
+  - url: https://api.testkube.io
+    description: Testkube Cloud API Endpoint
+  - url: https://<your-testkube-api-host>
+    description: Testkube On-Prem API Endpoint
 paths:
   /organizations/{id}/environments/{environmentId}/agent/repositories:
     post:
