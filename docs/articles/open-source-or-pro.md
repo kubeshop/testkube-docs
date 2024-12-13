@@ -16,7 +16,7 @@ and an underlying management layer for multiple agents ("Environments"), Org/Use
 That being said, many of the core features of Testkube are available directly in the agent via the aforementioned CLI or API:
 
 - **Test Workflows** : Manage Workflows and Templates, Run/Schedule executions (see below for limitations).
-- **Logs/Artifacts** : Retrieve Workflow executions, logs, artifacts.
+- **Logs/Artifacts** : Retrieve Workflow executions, logs, artifacts via CLI or API.
 - **Webhooks** : Manage Webhooks that the Agent executes.
 - **Event Triggers** : Manage Event Triggers that the Agent reacts to.
 - **Tests, TestSuites, Sources, Executors** : Deprecated - but still available during a transition period - [Read More](legacy-features).
@@ -41,7 +41,7 @@ Testkube Orchestration Platform (Agent + Control Plane).
 | Features                             | Testkube Standalone Agent |                              Testkube Orchestration Platform                               | Read More                                              |
 |:-------------------------------------|:-------------------------:|:------------------------------------------------------------------------------------------:|:-------------------------------------------------------|
 | **TestWorkflows**                    | X (see limitations above) |                                             X                                              | [Docs](test-workflows)                                 |
-| **Test Logs/Artifacts**              |             X             |                                             X                                              | [Docs](logs-and-artifacts)                             |
+| **Test Logs/Artifacts**              |   X (via CLI/API only)    |                                             X                                              | [Docs](logs-and-artifacts)                             |
 | **Webhooks**                         |             X             |                                             X                                              | [Docs](webhooks)                                       |
 | **Test Triggers**                    |             X             |                                             X                                              | [Docs](triggering-overview)                            |
 | **Test, Suites, Sources, Executors** |             X             |                                             X                                              | Deprecated - [Read More](legacy-features)              |
@@ -52,12 +52,15 @@ Testkube Orchestration Platform (Agent + Control Plane).
 | **RBAC / User Mgmt**                 |                           |                                             X                                              | [Docs](/testkube-pro/articles/organization-management) |
 | **Reporting / Insights**             |                           |                                             X                                              | [Docs](test-insights)                                  |
 | **Status Pages**                     |                           |                                             X                                              | [Docs](/testkube-pro/articles/status-pages)            |
-| **AI Troubleshooting**               |                           |                                             X                                              | [Docs](/testkube-pro/articles/AI-test-insights)        |
 | **Advanced Log/Results Debugging**   |                           |                                             X                                              | [Docs](/testkube-pro/articles/log-highlighting)        |
 | **Cached Test Results**              |                           |                                             X                                              | [Docs](/testkube-pro/articles/cached-results)          |
+| **Teams**                            |                           |                                             X                                              | [Docs](/articles/teams)          |
+| **Resource Groups**                  |                           |                                             X                                              | [Docs](/articles/resource-groups)          |
+| **JUnit Reports**                    |                           |                                             X                                              | [Docs](/articles/test-workflows-reports)          |
+| **Audit Logs**                       |                           |                                             X                                              | [Docs](/testkube-pro/articles/audit-logs)          |
 
 ## Source Code and Licensing
 
-The source-code for the agent is available in the [testkube GitHub repo](https://github.com/kubeshop/testkube)
+The source-code for the agent is available in the [Testkube GitHub repo](https://github.com/kubeshop/testkube)
 and is dual-licensed under the MIT license and the Testkube Community License (TCL).
 Read more in our [Licensing FAQ](testkube-licensing-FAQ).
