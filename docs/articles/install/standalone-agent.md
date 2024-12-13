@@ -2,18 +2,15 @@
 
 ## Overview
 
-The Testkube Agent is Open Source and includes the full test execution and orchestration engine. It can 
-be deployed and used without connecting it to a Testkube Control Plane, in which case there is no Dashboard and 
-the Agent has to be managed entirely through the [Testkube CLI](/articles/cli). 
+The Testkube Agent is Open Source and includes the full test execution and orchestration engine 
+(with some [limitations](/articles/open-source-or-pro#workflow-limitations-in-standalone-mode)). It can 
+be deployed and used without connecting it to a Testkube Control Plane, in which case there is no 
+[Dashboard](/articles/testkube-dashboard-explore) and the Agent has to be managed entirely through the [Testkube CLI](/articles/cli). 
 
-- Learn more about how the [Standalone Agent compares](/articles/open-source-or-pro)
-- Learn more about how to install the Standalone Agent [below](#installing-the-standalone-agent)
-
-## Deployment Architecture
-
-A high-level deployment architecture for Standalone Agent is shown below.
-
-![Deployment with standalone agent](../../img/architecture-standalone.jpeg)
+:::tip
+Check out the [Open Source Overview](/articles/open-source-or-pro) to learn how the Standalone Agent compares to the 
+commercial offering.
+:::
 
 ## Installing the Standalone Agent
 
@@ -99,6 +96,14 @@ testkube uninstall
 ```sh
 helm delete --namespace testkube testkube kubeshop/testkube
 ```
+
+## Deployment Architecture
+
+A high-level deployment architecture for Standalone Agent is shown below. 
+
+![Deployment with standalone agent](../../img/architecture-standalone.jpeg)
+
+The Testkube CRDs managed by the Operator are described in [Testkube Custom Resources](/articles/crds).
 
 ## Connecting to the Testkube Control Plane
 
