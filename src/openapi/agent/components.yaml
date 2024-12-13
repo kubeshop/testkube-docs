@@ -1341,6 +1341,10 @@ components:
           items:
             type: string
             example: my-namespace
+        dockerImageVersion:
+          type: string
+          description: docker image version
+          example: 2.1.2
     Repository:
       description: repository representation for tests in git repositories
       type: object
@@ -2262,9 +2266,71 @@ components:
             - testsuite
             - testtrigger
             - scheduler
+            - testworkflow
         context:
           type: string
           description: Context value depending from its type
+    TestWorkflowRunningContext:
+      description: running context for test workflow execution
+      type: object
+      required:
+        - interface
+        - actor
+      properties:
+        interface:
+          $ref: '#/components/schemas/TestWorkflowRunningContextInterface'
+        actor:
+          $ref: '#/components/schemas/TestWorkflowRunningContextActor'
+    TestWorkflowRunningContextInterface:
+      description: running context interface for test workflow execution
+      type: object
+      required:
+        - type
+      properties:
+        name:
+          type: string
+          description: interface name
+        type:
+          $ref: '#/components/schemas/TestWorkflowRunningContextInterfaceType'
+    TestWorkflowRunningContextActor:
+      description: running context actor for test workflow execution
+      type: object
+      required:
+        - type
+      properties:
+        name:
+          type: string
+          description: actor name
+        email:
+          type: string
+          description: actor email
+        executionId:
+          type: string
+          description: test workflow execution id
+        executionPath:
+          type: string
+          description: all test workflow execution ids starting from the root
+        type:
+          $ref: '#/components/schemas/TestWorkflowRunningContextActorType'
+    TestWorkflowRunningContextInterfaceType:
+      description: supported interfaces for test workflow running context
+      type: string
+      enum:
+        - cli
+        - ui
+        - api
+        - ci/cd
+        - internal
+    TestWorkflowRunningContextActorType:
+      description: supported actors for test workflow running context
+      type: string
+      enum:
+        - cron
+        - testtrigger
+        - user
+        - testworkflow
+        - testworkflowexecution
+        - program
     Webhook:
       description: CRD based webhook data
       type: object
@@ -2512,16 +2578,6 @@ components:
             - logline1
             - logline2
             - logline3
-        executionLogs:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-            example:
-              - logline1
-              - logline2
-              - logline3
     Features:
       type: object
       required:
@@ -3126,6 +3182,14 @@ components:
           default: false
         tags:
           $ref: '#/components/schemas/TestWorkflowTagValue'
+        runningContext:
+          description: running context for the test workflow execution (Pro edition only)
+          $ref: '#/components/schemas/TestWorkflowRunningContext'
+        parentExecutionIds:
+          type: array
+          description: parent execution ids
+          items:
+            type: string
     TestWorkflowWithExecution:
       type: object
       properties:
@@ -3161,6 +3225,11 @@ components:
         id:
           type: string
           description: unique execution identifier
+          format: bson objectId
+          example: 62f395e004109209b50edfc1
+        groupId:
+          type: string
+          description: identifier for group of correlated executions
           format: bson objectId
           example: 62f395e004109209b50edfc1
         name:
@@ -3219,6 +3288,11 @@ components:
             - false
         tags:
           $ref: '#/components/schemas/TestWorkflowTagValue'
+        runningContext:
+          description: running context for the test workflow execution (Pro edition only)
+          $ref: '#/components/schemas/TestWorkflowRunningContext'
+        config:
+          $ref: '#/components/schemas/TestWorkflowConfigValue'
       required:
         - id
         - name
@@ -3254,6 +3328,9 @@ components:
           $ref: '#/components/schemas/TestWorkflowSummary'
         tags:
           $ref: '#/components/schemas/TestWorkflowTagValue'
+        runningContext:
+          description: running context for the test workflow execution (Pro edition only)
+          $ref: '#/components/schemas/TestWorkflowRunningContext'
       required:
         - id
         - name
@@ -4005,6 +4082,9 @@ components:
                 $ref: '#/components/schemas/TestWorkflowTarballRequest'
             config:
               $ref: '#/components/schemas/TestWorkflowConfigValue'
+            selector:
+              $ref: '#/components/schemas/LabelSelector'
+              description: label selector for test workflow
     TestWorkflowStepExecuteTestRef:
       type: object
       allOf:
@@ -4574,6 +4654,8 @@ components:
           description: annotations to attach to the cron job
           additionalProperties:
             type: string
+        config:
+          $ref: '#/components/schemas/TestWorkflowConfigValue'
     TestWorkflowExecutionCR:
       type: object
       required:
@@ -4718,6 +4800,8 @@ components:
           $ref: '#/components/schemas/BoxedInteger'
         runAsNonRoot:
           $ref: '#/components/schemas/BoxedBoolean'
+        fsGroup:
+          $ref: '#/components/schemas/BoxedInteger'
     Toleration:
       type: object
       properties:
@@ -5363,6 +5447,29 @@ components:
         - diskName
         - diskURI
       type: object
+    CSIVolumeSource:
+      type: object
+      description: >-
+        Represents a source location of a volume to mount, managed by an
+        external CSI driver
+      properties:
+        driver:
+          type: string
+          description: driver is the name of the CSI driver that handles this volume.
+        readOnly:
+          $ref: '#/components/schemas/BoxedBoolean'
+        fsType:
+          $ref: '#/components/schemas/BoxedString'
+        volumeAttributes:
+          type: object
+          description: >-
+            volumeAttributes stores driver-specific properties that are passed
+            to the CSI driver. Consult your driver's documentation for supported
+            values.
+          additionalProperties:
+            type: string
+        nodePublishSecretRef:
+          $ref: '#/components/schemas/LocalObjectReference'
     Volume:
       type: object
       description: >-
@@ -5393,6 +5500,8 @@ components:
           $ref: '#/components/schemas/AzureDiskVolumeSource'
         configMap:
           $ref: '#/components/schemas/ConfigMapVolumeSource'
+        csi:
+          $ref: '#/components/schemas/CSIVolumeSource'
       required:
         - name
     VolumeSource:
@@ -5723,6 +5832,18 @@ components:
       schema:
         type: string
         description: Test workflow execution tags
+    ActorName:
+      in: query
+      name: actorName
+      schema:
+        type: string
+        description: Test workflow running conntext actor name
+    ActorType:
+      in: query
+      name: actorType
+      schema:
+        type: string
+        description: Test workflow running conntext actor type
   requestBodies:
     UploadsBody:
       description: Upload files request body data
