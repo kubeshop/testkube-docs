@@ -33,31 +33,31 @@ the Agent to be connected to the Testkube Control Plane, either on-prem or in th
 - `matrix` (and `count`, `shards`, `maxCount`) - see [Sharding & Matrix Params](test-workflows-matrix-and-sharding.mdx)
 - `services` - see [Services](test-workflows-services.mdx)
 
-## Feature Comparison - Open Source vs Commercial
+## Testkube Feature Comparison - Open Source vs Commercial
 
-This table shows a more complete feature comparison between the Agent Standalone and the 
-Testkube Orchestration Platform (Agent + Control Plane). 
+This table shows a more complete feature comparison between using just the Standalone Agent and the 
+complete Testkube Orchestration Platform (Agent + Control Plane). 
 
-| Features                             | Testkube Standalone Agent |                              Testkube Orchestration Platform                               | Read More                                              |
-|:-------------------------------------|:-------------------------:|:------------------------------------------------------------------------------------------:|:-------------------------------------------------------|
-| **TestWorkflows**                    | X (see limitations above) |                                             X                                              | [Docs](test-workflows)                                 |
-| **Test Logs/Artifacts**              |   X (via CLI/API only)    |                                             X                                              | [Docs](logs-and-artifacts)                             |
-| **Webhooks**                         |             X             |                                             X                                              | [Docs](webhooks)                                       |
-| **Test Triggers**                    |             X             |                                             X                                              | [Docs](triggering-overview)                            |
-| **Test, Suites, Sources, Executors** |             X             |                                             X                                              | Deprecated - [Read More](legacy-features)              |
-| **Testkube CLI**                     |             X             |                                             X                                              | [Docs](cli)                                            |
-| **REST API**                         |      Unauthenticated      | Authenticated with [API Tokens](/testkube-pro/articles/organization-management#api-tokens) | [Docs](/openapi/overview)                              |
-| **Dashboard / Control Plane**        |                           |                  X  ([Hosted/On-Prem](/articles/install/overview))                   | [Docs](testkube-dashboard-explore)                     |
-| **Multi-environment Mgmt**           |                           |                                             X                                              | [Docs](/testkube-pro/articles/environment-management)  |
-| **RBAC / User Mgmt**                 |                           |                                             X                                              | [Docs](/testkube-pro/articles/organization-management) |
-| **Reporting / Insights**             |                           |                                             X                                              | [Docs](test-insights)                                  |
-| **Status Pages**                     |                           |                                             X                                              | [Docs](/testkube-pro/articles/status-pages)            |
-| **Advanced Log/Results Debugging**   |                           |                                             X                                              | [Docs](/testkube-pro/articles/log-highlighting)        |
-| **Cached Test Results**              |                           |                                             X                                              | [Docs](/testkube-pro/articles/cached-results)          |
-| **Teams**                            |                           |                                             X                                              | [Docs](/articles/teams)          |
-| **Resource Groups**                  |                           |                                             X                                              | [Docs](/articles/resource-groups)          |
-| **JUnit Reports**                    |                           |                                             X                                              | [Docs](/articles/test-workflows-reports)          |
-| **Audit Logs**                       |                           |                                             X                                              | [Docs](/testkube-pro/articles/audit-logs)          |
+| Features                             |                 Open Source                 |                                          Cloud / On-Prem                                           |                       Read More                        |
+|:-------------------------------------|:----------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:------------------------------------------------------:|
+| **TestWorkflows**                    | :white_check_mark: - :warning: see limitations above |                                         :white_check_mark:                                         |                 [Docs](test-workflows)                 |
+| **Test Logs/Artifacts**              |   :white_check_mark: -  :warning: via CLI/API only   |                                         :white_check_mark:                                         |               [Docs](logs-and-artifacts)               |
+| **Webhooks**                         |                  :white_check_mark:                  |                                         :white_check_mark:                                         |                    [Docs](webhooks)                    |
+| **Test Triggers**                    |                  :white_check_mark:                  |                                         :white_check_mark:                                         |              [Docs](triggering-overview)               |
+| **Test, Suites, Sources, Executors** |                  :white_check_mark:                  |                                         :white_check_mark:                                         |       Deprecated - [Read More](legacy-features)        |
+| **Testkube CLI**                     |                  :white_check_mark:                  |                                         :white_check_mark:                                         |                      [Docs](cli)                       |
+| **REST API**                         |    :white_check_mark: -:warning: Unauthenticated     |                                         :white_check_mark:                                         |               [Docs](/openapi/overview)                |
+| **Dashboard / Control Plane**        |                         :x:                          |                 :white_check_mark:  ([Hosted/On-Prem](/articles/install/overview))                 |           [Docs](testkube-dashboard-explore)           |
+| **Multi-environment Mgmt**           |                         :x:                          |                                         :white_check_mark:                                         | [Docs](/testkube-pro/articles/environment-management)  |
+| **RBAC / User Mgmt**                 |                         :x:                          |                                         :white_check_mark:                                         | [Docs](/testkube-pro/articles/organization-management) |
+| **Reporting / Insights**             |                         :x:                          |                                         :white_check_mark:                                         |                 [Docs](test-insights)                  |
+| **Status Pages**                     |                         :x:                          |                                         :white_check_mark:                                         |      [Docs](/testkube-pro/articles/status-pages)       |
+| **Advanced Log/Results Debugging**   |                         :x:                          |                                         :white_check_mark:                                         |    [Docs](/testkube-pro/articles/log-highlighting)     |
+| **Cached Test Results**              |                         :x:                          |                                         :white_check_mark:                                         |     [Docs](/testkube-pro/articles/cached-results)      |
+| **Teams**                            |                         :x:                          |                                         :white_check_mark:                                         |                [Docs](/articles/teams)                 |
+| **Resource Groups**                  |                         :x:                          |                                         :white_check_mark:                                         |           [Docs](/articles/resource-groups)            |
+| **JUnit Reports**                    |                         :x:                          |                                         :white_check_mark:                                         |        [Docs](/articles/test-workflows-reports)        |
+| **Audit Logs**                       |                         :x:                          |                                         :white_check_mark:                                         |       [Docs](/testkube-pro/articles/audit-logs)        |
 
 ## Source Code and Licensing
 
