@@ -173,6 +173,29 @@ annotations:
 
 To use your own ingress controller, reach out to our support team and we’ll gladly investigate your ingress of choice. Alternatively, you can give it a try yourself by deploying Testkube and seeing whether gRPC and WebSockets are working properly.
 
+## Multi-namespace Agent Installation 
+It is possible to deploy multiple Testkube Agent instances into the same Kubernetes cluster. Please put the following configuration to your `values.yaml` when deploying another agent:
+```yaml
+testkube-api:
+  multinamespace:
+     enabled: true
+
+testkube-operator:
+  enabled: false
+```
+
+By default, Testkube monitors events across the entire Kubernetes cluster to trigger the execution of a test workflow. You might want to limit the namespaces that Testkube observes due to security restrictions, in which case you can use the multinamespace configuration:
+```yaml {3-7}
+testkube-agent:
+  testkube-api:
+    multinamespace:
+      enable: true
+    additionalNamespaces:
+      - namespace2
+      - namespace3
+```
+Note: The naming is a bit counterintuitive but this instructs Testkube to stop watching all namespaces and to only observe the namespaces listed on top of the namespace where Testkube is installed. No ClusterRole will be created, instead you will have Roles for each specified namespace.
+
 ## Kubernetes Namespaces
 
 ### Namespaces for Test Execution
@@ -184,22 +207,6 @@ testkube-agent:
   testkube-api:
     executionNamespaces: ["my-namespace"]
 ```
-
-### Namespaces for Kubernetes Trigger Events
-
-Testkube's Kubernetes triggers allow you to execute a test workflow. By default, Testkube watches events across the whole cluster. You might want to limit the namespaces that Testkube observes due to security restrictions, in which case you can use the multinamespace configuration:
-
-```yaml {3-7}
-testkube-agent:
-  testkube-api:
-    multinamespace:
-      enable: true
-    additionalNamespaces:
-      - namespace2
-      - namespace3
-```
-
-Note: The naming is a bit counterintuitive but this instructs Testkube to stop watching all namespaces and to only observe the namespaces listed on top of the namespace where Testkube is installed. No ClusterRole will be created, instead you will have Roles for each specified namespace.
 
 ### Namespaces for Testkube Custom Resources
 
