@@ -150,7 +150,7 @@ container:
 
 ### Example: Use PersistentVolumeClaim
 
-You can create [**PersistentVolumeClaims**](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims), add them to the Pod and mount them to Containers and they will automatically be deleted after execution is completed.
+You can create [**PersistentVolumeClaims**](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims), add them to the Pod and mount them to Containers and they will be automatically cleaned after execution is completed.
 
 ```yaml
 pvcs:
