@@ -4,6 +4,7 @@ hide_table_of_contents: true
 
 <table>
 <tr><td>digest</td><td><code>sha256:bdb3372de099a261a7ca5c9f3063cad4b476facb5f18795b065c2c7dfca78365</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/high-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/medium-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>14 MB</td></tr>
 <tr><td>packages</td><td>67</td></tr>
 </table>
@@ -22,7 +23,7 @@ hide_table_of_contents: true
 <tr><td>Fixed version</td><td><code>0.23.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.044%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
 </table>
 
@@ -46,7 +47,7 @@ An attacker may cause an HTTP/2 endpoint to read arbitrary amounts of header dat
 <tr><td>Fixed version</td><td><code>1.33.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>6.6</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:U</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.045%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
