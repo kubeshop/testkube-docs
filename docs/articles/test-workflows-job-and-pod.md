@@ -148,3 +148,29 @@ container:
     mountPath: /mnt/some/name
 ```
 
+### Example: Use PersistentVolumeClaim
+
+You can create [**PersistentVolumeClaims**](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims), add them to the Pod and mount them to Containers and they will be automatically cleaned after execution is completed.
+
+```yaml
+pvcs:
+  someName:
+    storageClassName: standard
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 10Mi
+
+pod:
+  volumes:
+  - name: some-name
+    persistentVolumeClaim:
+      claimName: "{{ pvcs.someName.name }}"
+
+container:
+  volumeMounts:
+  - name: some-name
+    mountPath: /mnt/some/name
+```
+
