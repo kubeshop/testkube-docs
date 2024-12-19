@@ -287,14 +287,20 @@ spec:
 
 ### Pulling Selected Files
 
-You may pass file patterns ([**cone pattern set**](https://git-scm.com/docs/git-sparse-checkout#_internalscone_pattern_set)) in `content.git.paths` which should be fetched from the Git repository.
+In conten
+You may pass file patterns in `content.git.paths` which should be fetched from the Git repository.
 It will use [**sparse checkout**](https://git-scm.com/docs/git-sparse-checkout), so you will avoid transferring unnecessary files.
+
+By default it uses no-cone mode (so file paths needs to be passed as [**full pattern**](https://git-scm.com/docs/git-sparse-checkout#_internalsfull_pattern_set)).
+To use cone mode and interpret file patterns as a [**cone pattern**](https://git-scm.com/docs/git-sparse-checkout#_internalscone_pattern_set) (which became default in Git since v2.37),
+add `cone: true` property under `content.git`.
 
 ```yaml
 spec:
   content:
     git:
       uri: https://github.com/kubeshop/testkube.git
+      # cone: true # if you want to enable cone patterns
       paths:
       - test/cypress/executor-tests/cypress-12
 ```
