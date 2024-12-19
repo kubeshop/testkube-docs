@@ -4,6 +4,7 @@ hide_table_of_contents: true
 
 <table>
 <tr><td>digest</td><td><code>sha256:316555536aa1676a0c1c1a646464a574216cc69f58e0db116d39970115dcb487</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 3" src="https://img.shields.io/badge/high-3-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/medium-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>platform</td><td>linux/arm64</td></tr>
 <tr><td>size</td><td>9.7 MB</td></tr>
 <tr><td>packages</td><td>48</td></tr>
 </table>
@@ -22,8 +23,8 @@ hide_table_of_contents: true
 <tr><td>Fixed version</td><td><code>0.1.1-0.20221104162952-702349b0e862</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.17%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>56th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.173%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>55th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -44,8 +45,8 @@ golang.org/x/net/http2/h2c
 <tr><td>Fixed version</td><td><code>0.0.0-20220906165146-f3363e06e74c</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.24%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>63rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.271%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>67th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -68,8 +69,8 @@ In net/http in Go before 1.18.6 and 1.19.x before 1.19.1, attackers can cause a 
 <tr><td>Fixed version</td><td><code>0.3.8</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.24%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>63rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.168%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -88,14 +89,14 @@ golang.org/x/text/language
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/protobuf</strong> <code>1.28.0</code> (golang)</summary>
 
 <small><code>pkg:golang/google.golang.org/protobuf@1.28.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-24786?s=github&n=protobuf&ns=google.golang.org&t=golang&vr=%3C1.33.0"><img alt="medium 7.5: CVE--2024--24786" src="https://img.shields.io/badge/CVE--2024--24786-lightgrey?label=medium%207.5&labelColor=fbb552"/></a> <i>Loop with Unreachable Exit Condition ('Infinite Loop')</i>
+<a href="https://scout.docker.com/v/CVE-2024-24786?s=github&n=protobuf&ns=google.golang.org&t=golang&vr=%3C1.33.0"><img alt="medium 6.6: CVE--2024--24786" src="https://img.shields.io/badge/CVE--2024--24786-lightgrey?label=medium%206.6&labelColor=fbb552"/></a> <i>Loop with Unreachable Exit Condition ('Infinite Loop')</i>
 
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.33.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.33.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.6</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:U</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.045%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 

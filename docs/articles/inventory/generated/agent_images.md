@@ -1,17 +1,17 @@
 :::info
 
-Based on chart `testkube` as of version `2.1.98` on 26-11-2024
+Based on chart `testkube` as of version `2.1.106` on 18-12-2024
 
 :::
 
-| Image | Description | Vulnerability Report (`linux/amd64`) | Vulnerability Report (`linux/arm64`) |
-|-------|-------------|--------------------------------------|--------------------------------------|
-| kubeshop/kube-webhook-certgen:0.0.4 | Used to generate certificates for the Testkube operator admission webhook. | [View Report](./kube-webhook-certgen-0.0.4_linux_amd64.md) | [View Report](./kube-webhook-certgen-0.0.4_linux_arm64.md) |
-| kubeshop/testkube-api-server:2.1.70 | API server for the Testkube agent. | [View Report](./testkube-api-server-2.1.70_linux_amd64.md) | [View Report](./testkube-api-server-2.1.70_linux_arm64.md) |
-| kubeshop/testkube-operator:2.1.67 | Controller for the Testkube operator. | [View Report](./testkube-operator-2.1.67_linux_amd64.md) | [View Report](./testkube-operator-2.1.67_linux_arm64.md) |
-| kubeshop/testkube-tw-init:2.1.70 | Image used to initialize a Workflow execution. | [View Report](./testkube-tw-init-2.1.70_linux_amd64.md) | [View Report](./testkube-tw-init-2.1.70_linux_arm64.md) |
-| kubeshop/testkube-tw-toolkit:2.1.70 | Image used within a Workflow execution. | [View Report](./testkube-tw-toolkit-2.1.70_linux_amd64.md) | [View Report](./testkube-tw-toolkit-2.1.70_linux_arm64.md) |
-| nats:2.10.22-alpine | NATS message broker. | [View Report](./nats-2.10.22-alpine_linux_amd64.md) | [View Report](./nats-2.10.22-alpine_linux_arm64.md) |
-| natsio/nats-server-config-reloader:0.16.0 | NATS config reloader. | [View Report](./nats-server-config-reloader-0.16.0_linux_amd64.md) | [View Report](./nats-server-config-reloader-0.16.0_linux_arm64.md) |
-| quay.io/brancz/kube-rbac-proxy:v0.18.1 | Small HTTP proxy used by the Testkube operator to perform RBAC authorization against the Kubernetes API. | [View Report](./kube-rbac-proxy-v0.18.1_linux_amd64.md) | [View Report](./kube-rbac-proxy-v0.18.1_linux_arm64.md) |
-| rancher/kubectl:v1.23.7 | Image containing the `kubectl` binary used in the admission webhooks of the Testkube operator. | [View Report](./kubectl-v1.23.7_linux_amd64.md) | [View Report](./kubectl-v1.23.7_linux_arm64.md) |
+| Image | Description | Vulnerability Report (`linux/amd64`) | Vulnerability Report (`linux/arm64`) | Docker Image |
+|-------|-------------|----------------------------------------|----------------------------------------|--------------|
+| kubeshop/kube-webhook-certgen:0.0.4 | Used to generate certificates for the Testkube operator admission webhook. | [View Report](./kube-webhook-certgen-0.0.4_linux_amd64.md) | [View Report](./kube-webhook-certgen-0.0.4_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/kube-webhook-certgen/0.0.4/images/sha256-321e434a68754a8449e0b856f0fc5d1f7012933c9ea00a2268b2333ba0e41f3c?context=explore) |
+| kubeshop/testkube-api-server:2.1.79 | API server for the Testkube agent. | [View Report](./testkube-api-server-2.1.79_linux_amd64.md) | [View Report](./testkube-api-server-2.1.79_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-api-server/2.1.79/images/sha256-e5afbd80e7b9870dd51849ca649e3bd27af0af66d82c522d72ba4c1c70647477?context=explore) |
+| kubeshop/testkube-operator:2.1.67 | Controller for the Testkube operator. | [View Report](./testkube-operator-2.1.67_linux_amd64.md) | [View Report](./testkube-operator-2.1.67_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-operator/2.1.67/images/sha256-bdb3372de099a261a7ca5c9f3063cad4b476facb5f18795b065c2c7dfca78365?context=explore) |
+| kubeshop/testkube-tw-init:2.1.79 | Image used to initialize a Workflow execution. | [View Report](./testkube-tw-init-2.1.79_linux_amd64.md) | [View Report](./testkube-tw-init-2.1.79_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-tw-init/2.1.79/images/sha256-2a6cc3823d7f2f9f039e2837d804234d95f3eaaaf7ecfda8e7417320f6b57234?context=explore) |
+| kubeshop/testkube-tw-toolkit:2.1.79 | Image used within a Workflow execution. | [View Report](./testkube-tw-toolkit-2.1.79_linux_amd64.md) | [View Report](./testkube-tw-toolkit-2.1.79_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-tw-toolkit/2.1.79/images/sha256-2d1d8eab1cc09fc3b16dcd7694bf202193fbf4afe52d57fe49eb58e4d9258d42?context=explore) |
+| nats:2.10.22-alpine | NATS message broker. | [View Report](./nats-2.10.22-alpine_linux_amd64.md) | [View Report](./nats-2.10.22-alpine_linux_arm64.md) | [View Image](https://hub.docker.com/layers/library/nats/2.10.22-alpine/images/sha256-aa536352f09b109b909e8bfbf9859a40601481bb3742ebc7a09cfaf638622407?context=explore) |
+| natsio/nats-server-config-reloader:0.16.0 | NATS config reloader. | [View Report](./nats-server-config-reloader-0.16.0_linux_amd64.md) | [View Report](./nats-server-config-reloader-0.16.0_linux_arm64.md) | [View Image](https://hub.docker.com/layers/natsio/nats-server-config-reloader/0.16.0/images/sha256-6e1f185d0f39fdf6032872bd20f1ce134d4e18c923d55f7cf93d40afcf6a8ffe?context=explore) |
+| quay.io/brancz/kube-rbac-proxy:v0.18.1 | Small HTTP proxy used by the Testkube operator to perform RBAC authorization against the Kubernetes API. | [View Report](./kube-rbac-proxy-v0.18.1_linux_amd64.md) | [View Report](./kube-rbac-proxy-v0.18.1_linux_arm64.md) | [View Image](https://quay.io/repository/brancz/kube-rbac-proxy?tab=tags) |
+| rancher/kubectl:v1.23.7 | Image containing the `kubectl` binary used in the admission webhooks of the Testkube operator. | [View Report](./kubectl-v1.23.7_linux_amd64.md) | [View Report](./kubectl-v1.23.7_linux_arm64.md) | [View Image](https://hub.docker.com/layers/rancher/kubectl/v1.23.7/images/sha256-139cffe27d95d9b3cdeb782a7456cf5eb6a2d18b7a90b85a2c0bde4ff295bae8?context=explore) |

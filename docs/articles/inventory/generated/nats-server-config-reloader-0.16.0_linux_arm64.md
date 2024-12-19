@@ -4,6 +4,7 @@ hide_table_of_contents: true
 
 <table>
 <tr><td>digest</td><td><code>sha256:e6ece35cac9b8ccc1d3ccaf381e888ff0a3f092b292677b7422527839a824123</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/high-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/medium-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>platform</td><td>linux/arm64</td></tr>
 <tr><td>size</td><td>5.2 MB</td></tr>
 <tr><td>packages</td><td>22</td></tr>
 </table>
@@ -55,7 +56,7 @@ FROM alpine:3.20.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.3.2-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.3.2-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.04%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.044%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
 </table>
 

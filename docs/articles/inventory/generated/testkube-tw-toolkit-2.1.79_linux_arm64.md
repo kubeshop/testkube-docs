@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:a7f055eca1521c7f5a89ba5f3dcbff015d57b7a929f8653829c4e6f84164ff2b</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/high-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/medium-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
-<tr><td>platform</td><td>linux/arm64/v8</td></tr>
-<tr><td>size</td><td>9.9 MB</td></tr>
-<tr><td>packages</td><td>30</td></tr>
+<tr><td>digest</td><td><code>sha256:0596c9321127aeb1ae6a00280694e0b6890a3b07c3d748044df609eb41508db0</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/high-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/medium-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>platform</td><td>linux/arm64</td></tr>
+<tr><td>size</td><td>33 MB</td></tr>
+<tr><td>packages</td><td>176</td></tr>
 </table>
 </details></table>
 </details>
@@ -16,35 +16,6 @@ hide_table_of_contents: true
 <details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.28.0</code> (golang)</summary>
 
 <small><code>pkg:golang/golang.org/x/crypto@0.28.0</code></small><br/>
-
-```dockerfile
-# 2.10.x/alpine3.20/Dockerfile (5:26)
-RUN set -eux; \
-	apkArch="$(apk --print-arch)"; \
-	case "$apkArch" in \
-		aarch64) natsArch='arm64'; sha256='b4da77b2b194dc5fcf13a1df0dad59ba7e87ae4423f254c50534015b7c8a2369' ;; \
-		armhf) natsArch='arm6'; sha256='93517bace32ca5a3f11ac7d2e2583b8400d97d5b2d1568de118046471704785a' ;; \
-		armv7) natsArch='arm7'; sha256='031933280a989142845a99bc381de160404322b7910c154dbad1b171b5c7eeaa' ;; \
-		x86_64) natsArch='amd64'; sha256='db0b3ccbe4cbdd3872ae7486ec4f6b0f85824632a0789f4da2e0a8518390483e' ;; \
-		x86) natsArch='386'; sha256='222c2a1069793768ab79812f01eea2497e0fbf3bcc5bcb9638f5be41177c73b3' ;; \
-		s390x) natsArch='s390x'; sha256='8a3701c677287146e92aab75d037b7655b602a0071872f38d901b63011f6ead9' ;; \
-		ppc64le) natsArch='ppc64le'; sha256='c03c1186439c7960b99c721a8461c613bea727654582808fd51c773b08a975d0' ;; \
-		*) echo >&2 "error: $apkArch is not supported!"; exit 1 ;; \
-	esac; \
-	\
-	wget -O nats-server.tar.gz "https://github.com/nats-io/nats-server/releases/download/v${NATS_SERVER}/nats-server-v${NATS_SERVER}-linux-${natsArch}.tar.gz"; \
-	echo "${sha256} *nats-server.tar.gz" | sha256sum -c -; \
-	\
-	apk add --no-cache ca-certificates tzdata; \
-	\
-	tar -xf nats-server.tar.gz; \
-	rm nats-server.tar.gz; \
-	mv "nats-server-v${NATS_SERVER}-linux-${natsArch}/nats-server" /usr/local/bin; \
-	rm -rf "nats-server-v${NATS_SERVER}-linux-${natsArch}";
-```
-
-<br/>
-
 <a href="https://scout.docker.com/v/CVE-2024-45337?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.31.0"><img alt="critical 9.1: CVE--2024--45337" src="https://img.shields.io/badge/CVE--2024--45337-lightgrey?label=critical%209.1&labelColor=8b1924"/></a> <i>Improper Authorization</i>
 
 <table>
@@ -77,14 +48,6 @@ Users should be using the Extensions field of the Permissions return value from 
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>openssl</strong> <code>3.3.2-r0</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/openssl@3.3.2-r0?os_name=alpine&os_version=3.20</code></small><br/>
-
-```dockerfile
-# 2.10.x/alpine3.20/Dockerfile (0:0)
-
-```
-
-<br/>
-
 <a href="https://scout.docker.com/v/CVE-2024-9143?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C3.3.2-r1"><img alt="medium : CVE--2024--9143" src="https://img.shields.io/badge/CVE--2024--9143-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
