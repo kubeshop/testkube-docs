@@ -645,6 +645,11 @@ const sidebars = {
           id: "articles/examples/nunit-basic",
         },
         {
+          type: "doc",
+          label: "TestContainers",
+          id: "articles/examples/test-containers-basic",
+        },
+        {
           type: "category",
           label: "Pytest",
           items: [
