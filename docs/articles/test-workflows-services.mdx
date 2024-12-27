@@ -14,6 +14,11 @@ Often if your use-case is more complex, you may need additional services for the
 
 Testkube allows you to run such services for the Test Workflow, communicate with them and debug smoothly.
 
+:::tip
+If you are using TestContainers to manage dependencies for your tests, check out [this example](examples/test-containers-basic) for how to use TestContainers from your
+TestWorkflows.
+:::
+
 ## How it works
 
 When you define the service, the Test Workflow is creating a new pod and any other require resources for each of instances,
