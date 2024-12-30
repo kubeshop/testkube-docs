@@ -773,6 +773,13 @@ const sidebars = {
         },
         { type: "doc", label: "Azure DevOps", id: "articles/azure" },
         {
+          type: "link",
+          label: "BitBucket",
+          href: "https://testkube.io/learn/unleashing-the-power-of-ci-cd-testing-with-bitbucket-and-testkube",
+          description:
+            "Integrate Testkube with Bitbucket Pipelines",
+        },
+        {
           type: "doc",
           label: "CircleCI",
           id: "articles/circleci",
