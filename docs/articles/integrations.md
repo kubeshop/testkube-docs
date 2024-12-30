@@ -21,6 +21,7 @@ us know on our Slack channel so we can add it!
   - [Using Jenkins Pipelines](/articles/jenkins) - Learn how to integrate Testkube with Jenkins Pipelines.
   - [Using the Jenkins UI](/articles/jenkins-ui) - Learn how to integrate Testkube from the Jenkins UI.
 - [Azure DevOps](/articles/azure) - Learn how to integrate Testkube with Azure DevOps.
+- [BitBucket](https://testkube.io/learn/unleashing-the-power-of-ci-cd-testing-with-bitbucket-and-testkube) - Learn how to integrate Testkube with BitBucket.
 - [CircleCI](/articles/circleci) - Learn how to integrate Testkube with CircleCI.
 - [Tekton](/articles/tekton) - Learn how to integrate Testkube with Tekton.
 - [Argo Rollouts](argorollouts-integration) - Learn how to use Testkube with Progressive Delivery in Argo Rollouts.
