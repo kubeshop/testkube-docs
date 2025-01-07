@@ -87,6 +87,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "SCIM Integration",
+                  id: "testkube-pro-on-prem/articles/scim",
+                },
+                {
+                  type: "doc",
                   label: "S3 with IAM Authentication",
                   id: "articles/install/s3-storage",
                 },
