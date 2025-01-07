@@ -38,7 +38,7 @@ testkube run test <testName> [flags]
   -d, --download-artifacts                         download artifacts automatically
       --download-dir string                        download dir (default "artifacts")
       --execute-postrun-script-before-scraping     whether to execute postrun scipt before scraping or not (prebuilt executor only)
-      --execution-label stringToString             execution-label key value pair: --execution-label key1=value1 (default [])
+      --execution-label stringToString             execution-label adds a label to execution in form of key value pair: --execution-label key1=value1 (default [])
       --execution-namespace string                 namespace for test execution (Pro edition only)
       --format string                              data format for storing files, one of folder|archive (default "folder")
       --git-branch string                          if uri is git repository we can set additional branch parameter
@@ -52,7 +52,7 @@ testkube run test <testName> [flags]
       --iterations int                             how many times to run the test (default 1)
       --job-template string                        job template file path for extensions to job template
       --job-template-reference string              reference to job template to use for the test
-  -l, --label strings                              label key value pair: --label key1=value1
+  -l, --label strings                              label is used to select tests to run using key value pair: --label key1=value1 or label expression
       --mask stringArray                           regexp to filter downloaded files, single or comma separated, like report/.* or .*\.json,.*\.js$
       --mount-configmap stringToString             config map value pair for mounting it to executor pod: --mount-configmap configmap_name=configmap_mountpath (default [])
       --mount-secret stringToString                secret value pair for mounting it to executor pod: --mount-secret secret_name=secret_mountpath (default [])
