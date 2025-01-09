@@ -158,7 +158,7 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "Testkube Open Source",
+          label: "Testkube Open Source Agent",
           id: "articles/install/standalone-agent",
         },
         "articles/install/faq",
