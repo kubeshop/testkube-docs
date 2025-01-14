@@ -3,7 +3,7 @@ kubeshop/testkube-api-server:2.1.85
 kubeshop/testkube-operator:2.1.80
 kubeshop/testkube-tw-init:2.1.85
 kubeshop/testkube-tw-toolkit:2.1.85
-nats:2.10.22-alpine
+nats:2.10.24-alpine
 natsio/nats-server-config-reloader:0.16.0
-quay.io/brancz/kube-rbac-proxy:master-2024-12-13-af1a90b6
+quay.io/brancz/kube-rbac-proxy:v0.18.1
 rancher/kubectl:v1.23.7
