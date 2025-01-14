@@ -1,6 +1,6 @@
 :::info
 
-Based on chart `testkube` as of version `2.1.120` on 14-01-2025
+Based on chart `testkube` as of version `2.1.122` on 14-01-2025
 
 :::
 
@@ -11,7 +11,7 @@ Based on chart `testkube` as of version `2.1.120` on 14-01-2025
 | kubeshop/testkube-operator:2.1.80 | Controller for the Testkube operator. | [View Report](./testkube-operator-2.1.80_linux_amd64.md) | [View Report](./testkube-operator-2.1.80_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-operator/2.1.80/images/sha256-230122315dec97912719db0d7084bfda011c7817bb8b906e8b3eae4dab63bda1?context=explore) |
 | kubeshop/testkube-tw-init:2.1.85 | Image used to initialize a Workflow execution. | [View Report](./testkube-tw-init-2.1.85_linux_amd64.md) | [View Report](./testkube-tw-init-2.1.85_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-tw-init/2.1.85/images/sha256-05c8f552b41ad6a67541dab7956f0197745249cc262798c567f379004f772a2f?context=explore) |
 | kubeshop/testkube-tw-toolkit:2.1.85 | Image used within a Workflow execution. | [View Report](./testkube-tw-toolkit-2.1.85_linux_amd64.md) | [View Report](./testkube-tw-toolkit-2.1.85_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-tw-toolkit/2.1.85/images/sha256-61e4b25907c4b74d0f93d5a413df9143c61026184bbd305b9cf286ca64f97d02?context=explore) |
-| nats:2.10.22-alpine | NATS message broker. | [View Report](./nats-2.10.22-alpine_linux_amd64.md) | [View Report](./nats-2.10.22-alpine_linux_arm64.md) | [View Image](https://hub.docker.com/layers/library/nats/2.10.22-alpine/images/sha256-aa536352f09b109b909e8bfbf9859a40601481bb3742ebc7a09cfaf638622407?context=explore) |
+| nats:2.10.24-alpine | NATS message broker. | [View Report](./nats-2.10.24-alpine_linux_amd64.md) | [View Report](./nats-2.10.24-alpine_linux_arm64.md) | [View Image](https://hub.docker.com/layers/library/nats/2.10.24-alpine/images/sha256-d13ec5ce79a02e1be937820dd36db611e25bd0c08cd9947fa9a5d52a56bf91fc?context=explore) |
 | natsio/nats-server-config-reloader:0.16.0 | NATS config reloader. | [View Report](./nats-server-config-reloader-0.16.0_linux_amd64.md) | [View Report](./nats-server-config-reloader-0.16.0_linux_arm64.md) | [View Image](https://hub.docker.com/layers/natsio/nats-server-config-reloader/0.16.0/images/sha256-6e1f185d0f39fdf6032872bd20f1ce134d4e18c923d55f7cf93d40afcf6a8ffe?context=explore) |
-| quay.io/brancz/kube-rbac-proxy:master-2024-12-13-af1a90b6 | Small HTTP proxy used by the Testkube operator to perform RBAC authorization against the Kubernetes API. | [View Report](./kube-rbac-proxy-master-2024-12-13-af1a90b6_linux_amd64.md) | [View Report](./kube-rbac-proxy-master-2024-12-13-af1a90b6_linux_arm64.md) | [View Image](https://quay.io/repository/brancz/kube-rbac-proxy?tab=tags) |
+| quay.io/brancz/kube-rbac-proxy:v0.18.1 | Small HTTP proxy used by the Testkube operator to perform RBAC authorization against the Kubernetes API. | [View Report](./kube-rbac-proxy-v0.18.1_linux_amd64.md) | [View Report](./kube-rbac-proxy-v0.18.1_linux_arm64.md) | [View Image](https://quay.io/repository/brancz/kube-rbac-proxy?tab=tags) |
 | rancher/kubectl:v1.23.7 | Image containing the `kubectl` binary used in the admission webhooks of the Testkube operator. | [View Report](./kubectl-v1.23.7_linux_amd64.md) | [View Report](./kubectl-v1.23.7_linux_arm64.md) | [View Image](https://hub.docker.com/layers/rancher/kubectl/v1.23.7/images/sha256-139cffe27d95d9b3cdeb782a7456cf5eb6a2d18b7a90b85a2c0bde4ff295bae8?context=explore) |
