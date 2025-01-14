@@ -21,3 +21,5 @@ yarn-error.log*
 
 dist
 .idea
+
+/docs/combined-docs.mdx
