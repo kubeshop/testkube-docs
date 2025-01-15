@@ -38,3 +38,4 @@ testkube delete <resourceName> [flags]
 - [testkube delete testworkflow](testkube_delete_testworkflow.md) - Delete test workflows
 - [testkube delete testworkflowtemplate](testkube_delete_testworkflowtemplate.md) - Delete test workflow templates
 - [testkube delete webhook](testkube_delete_webhook.md) - Delete webhook
+- [testkube delete webhooktemplate](testkube_delete_webhooktemplate.md) - Delete webhook template

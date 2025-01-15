@@ -49,3 +49,4 @@ testkube get <resourceName> [flags]
 - [testkube get testworkflowexecution](testkube_get_testworkflowexecution.md) - Gets TestWorkflow execution details
 - [testkube get testworkflowtemplate](testkube_get_testworkflowtemplate.md) - Get all available test workflow templates
 - [testkube get webhook](testkube_get_webhook.md) - Get webhook details
+- [testkube get webhooktemplate](testkube_get_webhooktemplate.md) - Get webhook template details
