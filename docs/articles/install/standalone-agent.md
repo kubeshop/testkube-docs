@@ -1,4 +1,4 @@
-# Standalone Testkube Agent 
+# Testkube Open Source Agent 
 
 ## Overview
 
@@ -8,13 +8,13 @@ be deployed and used without connecting it to a Testkube Control Plane, in which
 [Dashboard](/articles/testkube-dashboard-explore) and the Agent has to be managed entirely through the [Testkube CLI](/articles/cli). 
 
 :::tip
-Check out the [Open Source Overview](/articles/open-source-or-pro) to learn how the Standalone Agent compares to the 
+Check out the [Open Source Overview](/articles/open-source-or-pro) to learn how the Open Source Agent compares to the 
 commercial offering.
 :::
 
-## Installing the Standalone Agent
+## Installing the Open Source Agent
 
-The following steps are required to install the Standalone Agent into a Kubernetes Cluster:
+The following steps are required to install the Open Source Agent into a Kubernetes Cluster:
 
 - Create a Testkube namespace.
 - Deploy the Testkube API (see below).
@@ -107,10 +107,11 @@ The Testkube CRDs managed by the Operator are described in [Testkube Custom Reso
 
 ## Connecting to the Testkube Control Plane
 
-In case you decide that you want to go beyond a standalone agent, you can connect it to a Testkube Control Plane.
-The following command which will guide you through the migration process.
+You can connect the Open Source Agent to a Testkube Control Plane to leverage 
+corresponding functionality (see [Feature Comparison](/articles/open-source-or-pro#testkube-feature-comparison---open-source-vs-commercial)).
+All test definitions will stay in place, but historical test results data or artifacts won't be copied to the control plane.
 
-All test definitions will stay the same, however, historical test results data or artifacts won't be copied to the control plane.
+The following command which will guide you through the migration process:
 
 ```
 testkube pro connect
