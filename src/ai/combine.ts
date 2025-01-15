@@ -1,10 +1,12 @@
+// combine.ts
+
 import { readFileSync, writeFileSync, appendFileSync } from "fs";
-import { resolve, dirname, relative, join } from "path";
+import { resolve, relative, dirname, join } from "path";
 import { globSync } from "glob";
 
-const PROJECT_ROOT = resolve(__dirname, "../..");
+export const PROJECT_ROOT = resolve(__dirname, "../..");
 
-const CONFIG = {
+export const CONFIG = {
   docsRootPath: resolve(PROJECT_ROOT, "docs"),
   ignorePaths: [
     "articles/crds",
@@ -41,7 +43,7 @@ const CONFIG = {
 
 const processedFiles = new Set<string>();
 
-function getAllMarkdownFiles(): string[] {
+export function getAllMarkdownFiles(): string[] {
   const docsRelativePath = relative(PROJECT_ROOT, CONFIG.docsRootPath);
   const mainGlobPattern = `${docsRelativePath}/**/*.{md,mdx}`;
   const ignorePatterns = CONFIG.ignorePaths.map((path) => {
@@ -59,7 +61,7 @@ function getAllMarkdownFiles(): string[] {
   });
 }
 
-function sortFilesByPriority(files: string[]): string[] {
+export function sortFilesByPriority(files: string[]): string[] {
   return files.sort((a, b) => {
     const aHasPriority = CONFIG.priorityPaths.some((p) => a.startsWith(resolve(CONFIG.docsRootPath, p)));
     const bHasPriority = CONFIG.priorityPaths.some((p) => b.startsWith(resolve(CONFIG.docsRootPath, p)));
@@ -80,7 +82,7 @@ function sortFilesByPriority(files: string[]): string[] {
   });
 }
 
-function shouldSkipFile(filePath: string): boolean {
+export function shouldSkipFile(filePath: string): boolean {
   try {
     const content = readFileSync(filePath, "utf-8");
     return CONFIG.skipContentPatterns.some((pattern) => content.includes(pattern));
@@ -90,7 +92,7 @@ function shouldSkipFile(filePath: string): boolean {
   }
 }
 
-function processImports(content: string, filePath: string, depth = 0): string {
+export function processImports(content: string, filePath: string, depth = 0): string {
   if (depth > 10) {
     console.warn(`Maximum import depth reached for file: ${filePath}`);
     return content;
@@ -111,6 +113,7 @@ function processImports(content: string, filePath: string, depth = 0): string {
       return "";
     }
 
+    // If the import path doesn't end with .md or .mdx, remove the import line.
     if (!importPath.match(/\.(md|mdx)$/)) {
       return "";
     }
@@ -140,119 +143,16 @@ function processImports(content: string, filePath: string, depth = 0): string {
   });
 }
 
-type Pattern = RegExp | string;
-type PatternProcessor = [Pattern, ((match: string, ...groups: string[]) => string) | string];
-type LineProcessor = (line: string) => string;
-type Processor = PatternProcessor | LineProcessor;
-
-function isPatternProcessor(processor: Processor): processor is PatternProcessor {
-  return Array.isArray(processor) && (processor[0] instanceof RegExp || typeof processor[0] === "string");
-}
-
-function escapeRegExp(string: string): string {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
-function replaceAll(str: string, find: string, replace: string): string {
-  return str.replace(new RegExp(escapeRegExp(find), "g"), replace);
-}
-
-function processContent(content: string, processors: Processor[]): string {
-  return processors.reduce((processedContent, processor) => {
-    if (!isPatternProcessor(processor)) {
-      return processedContent.split("\n").map(processor).join("\n");
-    }
-
-    const [pattern, transform] = processor;
-
-    if (typeof pattern === "string" && typeof transform === "string") {
-      return replaceAll(processedContent, pattern, transform);
-    }
-
-    if (pattern instanceof RegExp && typeof transform === "function") {
-      return processedContent.replace(pattern, (...args) => transform(...args));
-    }
-
-    if (pattern instanceof RegExp && typeof transform === "string") {
-      return processedContent.replace(pattern, transform);
-    }
-
-    return processedContent;
-  }, content);
-}
-
-function processFile(filePath: string): string {
+export function processFile(filePath: string): string {
   const content = readFileSync(filePath, "utf-8");
   processedFiles.clear();
   return processImports(content, filePath);
 }
 
-function postProcessOutput(outputPath: string): void {
-  const content = readFileSync(outputPath, "utf-8");
-
-  const processors: Processor[] = [
-    (line) => (line.includes("<TabItem") ? "" : line),
-    (line) => (line.includes("</TabItem>") ? "" : line),
-    (line) => (line.includes("<Tabs") ? "" : line),
-    (line) => (line.includes("</Tabs>") ? "" : line),
-    [/!\[.*?\]\(.*?\)/g, ""],
-    [/<iframe[\s\S]*?<\/iframe>/g, ""],
-    [/<Admonition[\s\S]*?<\/Admonition>/g, ""],
-    (line) => (line.trim() ? line : ""),
-    [/\n\s*\n/g, "\n"],
-  ];
-
-  const processedContent = processContent(content, processors);
-  writeFileSync(outputPath, processedContent);
-}
-
-function initializeOutputFile(outputPath: string) {
+export function initializeOutputFile(outputPath: string) {
   writeFileSync(outputPath, "");
 }
 
-function appendToOutput(outputPath: string, content: string) {
+export function appendToOutput(outputPath: string, content: string) {
   appendFileSync(outputPath, content + "\n\n");
 }
-
-function main() {
-  const outputPath = resolve(CONFIG.docsRootPath, "combined-docs.mdx");
-  const originalOutputLength = readFileSync(outputPath, "utf-8").length;
-  initializeOutputFile(outputPath);
-
-  const files = getAllMarkdownFiles();
-  const sortedFiles = sortFilesByPriority(files);
-  let processedCount = 0;
-  let skippedCount = 0;
-  let skippedImportsCount = 0;
-
-  for (const file of sortedFiles) {
-    if (shouldSkipFile(file)) {
-      console.log(`Skipping file due to content pattern match: ${file}`);
-      skippedCount++;
-      continue;
-    }
-
-    const processedContent = processFile(file);
-    appendToOutput(outputPath, processedContent);
-    processedCount++;
-
-    if (processedCount % 10 === 0) {
-      console.log(`Processed ${processedCount}/${sortedFiles.length} files`);
-    }
-  }
-
-  console.log("Applying post-processing rules...");
-  postProcessOutput(outputPath);
-
-  const finalOutputLength = readFileSync(outputPath, "utf-8").length;
-
-  console.log(`Completed processing ${processedCount} files`);
-  console.log(`Skipped ${skippedCount} files due to content patterns`);
-  console.log(`Skipped ${skippedImportsCount} imports due to patterns`);
-  console.log(`Output written to: ${outputPath}`);
-  console.log(`Original output length: ${originalOutputLength} characters`);
-  console.log(`Final output length after post-processing: ${finalOutputLength} characters`);
-  console.log(`Removed ${originalOutputLength - finalOutputLength} characters`);
-}
-
-main();

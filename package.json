@@ -14,7 +14,7 @@
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
     "split-openapis": "tsc && npx tsx src/scripts/split-openapis.ts",
-    "ai:process": "ts-node src/ai/process.ts"
+    "ai:process": "ts-node src/ai/main.ts"
   },
   "dependencies": {
     "@docusaurus/core": "^3.6.3",
