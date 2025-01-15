@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync, appendFileSync } from "fs";
-import { resolve, dirname, relative } from "path";
+import { resolve, dirname, relative, join } from "path";
 import { globSync } from "glob";
 
 const PROJECT_ROOT = resolve(__dirname, "../..");
@@ -15,6 +15,13 @@ const CONFIG = {
     "old",
     "openapi",
     "test-types",
+    "cli",
+    "index.mdx",
+    "articles/administration-overview.mdx",
+    "articles/cli.mdx",
+    "articles/reference.mdx",
+    "articles/supported-tests.mdx",
+    "articles/using-testkube.mdx",
   ],
   priorityPaths: ["getting-started", "index.mdx"],
   skippedImports: [
@@ -29,13 +36,26 @@ const CONFIG = {
     "@theme/Layout",
     "@theme/SearchTranslations",
   ],
+  skipContentPatterns: ["legacy-warning.mdx"],
 };
 
 function getAllMarkdownFiles(): string[] {
-  const files = globSync("**/*.{md,mdx}", {
-    cwd: CONFIG.docsRootPath,
+  const docsRelativePath = relative(PROJECT_ROOT, CONFIG.docsRootPath);
+
+  const mainGlobPattern = `${docsRelativePath}/**/*.{md,mdx}`;
+
+  const ignorePatterns = CONFIG.ignorePaths.map((path) => {
+    if (path.endsWith(".md") || path.endsWith(".mdx")) {
+      return join(docsRelativePath, path);
+    } else {
+      return join(docsRelativePath, path, "**/*.{md,mdx}");
+    }
+  });
+
+  const files = globSync(mainGlobPattern, {
+    cwd: PROJECT_ROOT,
     absolute: true,
-    ignore: CONFIG.ignorePaths.map((path) => resolve(CONFIG.docsRootPath, path)),
+    ignore: ignorePatterns,
   });
 
   return files;
@@ -60,6 +80,16 @@ function sortFilesByPriority(files: string[]): string[] {
 
     return aName.localeCompare(bName);
   });
+}
+
+function shouldSkipFile(filePath: string): boolean {
+  try {
+    const content = readFileSync(filePath, "utf-8");
+    return CONFIG.skipContentPatterns.some((pattern) => content.includes(pattern));
+  } catch (error) {
+    console.error(`Error reading file for content check: ${filePath}`);
+    return false;
+  }
 }
 
 function processImports(content: string, filePath: string): string {
@@ -108,13 +138,21 @@ function appendToOutput(outputPath: string, content: string) {
 
 function main() {
   const outputPath = resolve(CONFIG.docsRootPath, "combined-docs.mdx");
+  const originalOutputLength = readFileSync(outputPath, "utf-8").length;
   initializeOutputFile(outputPath);
 
   const files = getAllMarkdownFiles();
   const sortedFiles = sortFilesByPriority(files);
   let processedCount = 0;
+  let skippedCount = 0;
 
   for (const file of sortedFiles) {
+    if (shouldSkipFile(file)) {
+      console.log(`Skipping file due to content pattern match: ${file}`);
+      skippedCount++;
+      continue;
+    }
+
     const processedContent = processFile(file);
     appendToOutput(outputPath, processedContent);
     processedCount++;
@@ -125,7 +163,12 @@ function main() {
   }
 
   console.log(`Completed processing ${processedCount} files`);
+  console.log(`Skipped ${skippedCount} files due to content patterns`);
   console.log(`Output written to: ${outputPath}`);
+  console.log(`Original output length: ${originalOutputLength} characters`);
+  const newOutputLength = readFileSync(outputPath, "utf-8").length;
+  console.log(`New Output length: ${newOutputLength} characters`);
+  console.log(`Removed ${originalOutputLength - newOutputLength} characters`);
 }
 
 main();
