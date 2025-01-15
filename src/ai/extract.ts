@@ -71,12 +71,12 @@ async function saveProcessedFiles(files: ProcessedFile[]): Promise<void> {
   await fs.writeFile(CONFIG.historyFile, JSON.stringify(files, null, 2));
 }
 
-async function appendToOutput(qaPairs: QAPair[], filePath: string): Promise<void> {
-  const newPairs = qaPairs
-    .map((pair) => `question: ${pair.question}\nanswer: ${pair.answer}\n${QA_DELIMITER}\n`)
-    .join("\n");
+async function saveQAPairs(qaPairs: QAPair[]): Promise<void> {
+  const content = qaPairs
+    .map((pair) => `question: ${pair.question}\nanswer: ${pair.answer}\n${QA_DELIMITER}`)
+    .join("\n\n");
 
-  await fs.appendFile(CONFIG.outputFile, newPairs);
+  await fs.writeFile(CONFIG.outputFile, content + "\n");
 }
 
 function buildSystemPrompt(existingQuestions: string[]) {
@@ -85,56 +85,74 @@ function buildSystemPrompt(existingQuestions: string[]) {
     : "(No existing questions yet)";
 
   return `
-You are an AI assistant with deep knowledge of Testkube. You have access to Testkube documentation in Markdown format.
+You are an AI assistant developing a comprehensive knowledge base about Testkube, a Kubernetes-native testing framework. Your goal is to create high-quality Q&A pairs that help users understand Testkube holistically.
 
 Your objectives:
-1. Read and analyze any provided documentation content carefully.
-2. **Generate potential user questions** that someone might realistically ask about the content. (The documentation typically does not contain direct questions.)
-3. **Answer these questions** by synthesizing the relevant information from the documentation. 
-4. When you find at least one relevant question–answer pair:
-   - Call "addQAPair" with "question" (the inferred question) and "answer" (the synthesized answer).
-5. If you see an existing question that already matches one you would create, but you have a better or more thorough answer, call "updateQAPair" with the improved answer.
-6. If you need to look up an existing Q&A pair, use "readAnswer".
-7. **If you do not find any relevant or worthwhile Q&A** that can be formed from the text, return only "No usable info.".
+1. Analyze the provided documentation content in the context of your existing knowledge about Testkube.
+2. Generate valuable questions that:
+   - Focus on practical use cases and real-world scenarios
+   - Address core Testkube concepts and functionality
+   - Help users understand how different Testkube components work together
+   - Cover common implementation challenges and solutions
+   - Avoid questions that require excessive context from a specific document
+3. Craft clear, self-contained answers that:
+   - Synthesize information from across the documentation
+   - Include relevant examples (YAML, CLI commands, etc.)
+   - Explain concepts in a way that builds on fundamental Testkube knowledge
+   - Link related concepts together to show the bigger picture
 
-**Critical instructions**:
-- Use only these three function calls to manage the Q&A pairs (create, retrieve, or update).
-- Each potential Q&A pair **must** be grounded in the provided documentation. Do not fabricate info that isn't supported by the text.
-- Provide relevant code snippets (YAML, CLI commands, etc.) in your answers if helpful.
-- If the user has not provided enough content or the content is irrelevant, output "No usable info."
-- Return short, clear answers for each Q&A, but be as specific as the documentation allows.
-- If the input doc is large, we may chunk it in multiple calls so it fits within limits.
+Q&A Quality Guidelines:
+Good questions:
+- "How do I set up automated test execution in Testkube?"
+- "What's the difference between TestSuites and Tests in Testkube?"
+- "How can I integrate Testkube with my CI/CD pipeline?"
+- "What testing frameworks does Testkube support?"
 
-Existing questions (if any) are listed below:
+Avoid questions that:
+- Require specific document context to understand
+- Focus on minor implementation details
+- Don't contribute to overall Testkube understanding
+
+Functions available:
+- addQAPair(question, answer): Add a new Q&A pair
+- updateQAPair(question, newAnswer): Update an existing answer
+- readAnswer(question): Look up an existing answer
+
+Instructions:
+1. If you find opportunities for valuable Q&A pairs:
+   - Create new pairs that build on existing knowledge
+   - Update existing answers if you can add more context
+   - Connect related concepts across documentation
+2. If you can't form valuable Q&A pairs from the content:
+   - Return "No usable info."
+3. Always ground answers in the documentation
+4. Build progressively deeper understanding
+
+Current knowledge base questions:
 ${list}
 `;
 }
 
 function buildUserPrompt(fileContent: string) {
   return `
-Markdown content to analyze:
+Analyze this documentation content and integrate it with your existing understanding of Testkube:
 ${fileContent}
 `;
 }
 
-async function extractQandAFromContent(
-  content: string,
-  filePath: string,
-  chunkIndex: number,
-  totalChunks: number
-): Promise<boolean> {
+async function extractQandAFromContent(content: string, chunkIndex: number, totalChunks: number): Promise<boolean> {
   const openai = new OpenAI({ apiKey: CONFIG.openaiApiKey });
   if (!content || content.length < 50) return false;
 
   async function readAnswer(args: { question: string }) {
     const answer = existingQAPairs.find((qa) => qa.question.toLowerCase() === args.question.toLowerCase())?.answer;
-    console.log(`Read answer for question: ${args.question}`);
+    console.log(`Read answer for question: ${args.question}\n`);
     return `Answer: ${answer ?? "No answer found."}`;
   }
 
   async function addQAPair(args: { question: string; answer: string }) {
     existingQAPairs.push({ question: args.question, answer: args.answer });
-    console.log(`Added Q&A pair: ${args.question}\n Answer: ${args.answer}`);
+    console.log(`Added new Q&A pair: ${args.question}\n`);
     return "Q&A pair added.";
   }
 
@@ -142,7 +160,7 @@ async function extractQandAFromContent(
     const existing = existingQAPairs.find((qa) => qa.question.toLowerCase() === args.question.toLowerCase());
     if (!existing) return "No matching question found to update.";
     existing.answer = args.newAnswer;
-    console.log(`Updated Q&A pair: ${args.question}\n New answer: ${args.newAnswer}`);
+    console.log(`Updated Q&A pair: ${args.question}\n`);
     return "Q&A pair updated.";
   }
 
@@ -208,35 +226,13 @@ async function extractQandAFromContent(
       temperature: CONFIG.temperature ?? 0,
     });
 
-    let success = false;
-
-    runner
-      .on("connect", () => {
-        console.log("Connected to OpenAI");
-      })
-      .on("message", (message) => {
-        console.log("Message received:", message);
-        success = true;
-      })
-      .on("content", (content) => {
-        console.log("Content received:", content);
-      })
-      .on("functionCall", (props) => {
-        console.log(`Function ${props.name} called with arguments:`, props.arguments);
-        success = true;
-      })
-      .on("error", (error) => {
-        console.error("Error:", error);
-        success = false;
-      });
-
     await runner.done();
 
     if (chunkIndex === totalChunks - 1) {
-      await appendToOutput(existingQAPairs, filePath);
+      await saveQAPairs(existingQAPairs);
     }
 
-    return success;
+    return true;
   } catch (error) {
     console.error("Error running tools:", error);
     return false;
@@ -266,7 +262,7 @@ export async function extractQandAFromFile(filePath: string, fileContent: string
 
   let allChunksProcessed = true;
   for (let i = 0; i < chunks.length; i++) {
-    const success = await extractQandAFromContent(chunks[i].text, filePath, i, totalChunks);
+    const success = await extractQandAFromContent(chunks[i].text, i, totalChunks);
 
     if (!success) {
       allChunksProcessed = false;
