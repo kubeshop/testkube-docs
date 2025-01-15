@@ -50,11 +50,7 @@ export async function runDocsProcessor() {
   const topLevelFiles = allFiles.filter((file) => !importedFiles.has(file));
   const processableFiles = topLevelFiles.filter((file) => !shouldSkipFile(file));
 
-  let i = 0;
-
   for (const file of processableFiles) {
-    i += 1;
-    if (i === 5) break;
     const resolvedContent = processFile(file);
 
     await handleResolvedContent(file, resolvedContent);
