@@ -1,9 +1,8 @@
 import { readFileSync } from "fs";
 import { dirname, join, relative, resolve } from "path";
 import { globSync } from "glob";
-import { extractQandAFromContent } from "./extract";
+import { extractQandAFromFile } from "./extract";
 import { QAPair } from "./types";
-import { chunkifyText } from "./utils";
 
 const PROJECT_ROOT = resolve(__dirname, "../..");
 
@@ -188,12 +187,9 @@ function parseImports(content: string): {
   return { updatedContent: updated, imports: results };
 }
 
-async function handleResolvedContent(filePath: string, content: string) {
-  const qaPairs: QAPair[] = [];
+async function handleResolvedContent(filePath: string, fileContent: string) {
   console.log("Processing file:", filePath);
-  for (const chunk of chunkifyText(content)) {
-    await extractQandAFromContent(chunk.text, qaPairs);
-  }
+  await extractQandAFromFile(filePath, fileContent);
 }
 
 runDocsProcessor();

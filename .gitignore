@@ -25,3 +25,5 @@ dist
 /docs/combined-docs.mdx
 
 .env
+ai_processed_files.json
+ai_qa_output.txt

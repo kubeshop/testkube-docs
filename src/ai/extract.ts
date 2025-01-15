@@ -1,12 +1,83 @@
 import "dotenv/config";
-import OpenAI from "openai";
+import { OpenAI } from "openai";
 import { QAPair } from "./types";
+import { chunkifyText } from "./utils";
+import { promises as fs } from "fs";
 
-const CONFIG = {
+interface Config {
+  openaiApiKey: string | undefined;
+  model: string;
+  temperature: number;
+  outputFile: string;
+  historyFile: string;
+}
+
+const CONFIG: Config = {
   openaiApiKey: process.env.OPENAI_API_KEY,
   model: "gpt-4o-mini",
   temperature: 0,
+  outputFile: "ai_qa_output.txt",
+  historyFile: "ai_processed_files.json",
 };
+
+const QA_DELIMITER = "----------";
+
+interface ProcessedFile {
+  filePath: string;
+  timestamp: string;
+  chunks: number;
+  processedChunks: number;
+}
+
+let existingQAPairs: QAPair[] = [];
+
+async function loadQAPairs(): Promise<QAPair[]> {
+  try {
+    const content = await fs.readFile(CONFIG.outputFile, "utf-8");
+    const pairs = content
+      .split(QA_DELIMITER)
+      .map((block) => {
+        const lines = block.trim().split("\n");
+        if (lines.length < 2) return null;
+
+        const question = lines[0].replace("question:", "").trim();
+        const answer = lines.slice(1).join("\n").replace("answer:", "").trim();
+
+        if (!question || !answer) return null;
+        return { question, answer };
+      })
+      .filter((pair): pair is QAPair => pair !== null);
+
+    return pairs;
+  } catch (error) {
+    return [];
+  }
+}
+
+async function initializeQAPairs(): Promise<void> {
+  existingQAPairs = await loadQAPairs();
+}
+
+async function loadProcessedFiles(): Promise<ProcessedFile[]> {
+  try {
+    const content = await fs.readFile(CONFIG.historyFile, "utf-8");
+    return JSON.parse(content);
+  } catch (error) {
+    return [];
+  }
+}
+
+async function saveProcessedFiles(files: ProcessedFile[]): Promise<void> {
+  await fs.writeFile(CONFIG.historyFile, JSON.stringify(files, null, 2));
+}
+
+async function appendToOutput(qaPairs: QAPair[], filePath: string): Promise<void> {
+  const newPairs = qaPairs
+    .map((pair) => `question: ${pair.question}\nanswer: ${pair.answer}\n${QA_DELIMITER}\n`)
+    .join("\n");
+
+  await fs.appendFile(CONFIG.outputFile, newPairs);
+}
 
 function buildSystemPrompt(existingQuestions: string[]) {
   const list = existingQuestions.length
@@ -28,7 +99,7 @@ Your objectives:
 
 **Critical instructions**:
 - Use only these three function calls to manage the Q&A pairs (create, retrieve, or update).
-- Each potential Q&A pair **must** be grounded in the provided documentation. Do not fabricate info that isn’t supported by the text.
+- Each potential Q&A pair **must** be grounded in the provided documentation. Do not fabricate info that isn't supported by the text.
 - Provide relevant code snippets (YAML, CLI commands, etc.) in your answers if helpful.
 - If the user has not provided enough content or the content is irrelevant, output "No usable info."
 - Return short, clear answers for each Q&A, but be as specific as the documentation allows.
@@ -46,9 +117,14 @@ ${fileContent}
 `;
 }
 
-export async function extractQandAFromContent(content: string, existingQAPairs: QAPair[]): Promise<void> {
+async function extractQandAFromContent(
+  content: string,
+  filePath: string,
+  chunkIndex: number,
+  totalChunks: number
+): Promise<boolean> {
   const openai = new OpenAI({ apiKey: CONFIG.openaiApiKey });
-  if (!content || content.length < 50) return;
+  if (!content || content.length < 50) return false;
 
   async function readAnswer(args: { question: string }) {
     const answer = existingQAPairs.find((qa) => qa.question.toLowerCase() === args.question.toLowerCase())?.answer;
@@ -132,25 +208,81 @@ export async function extractQandAFromContent(content: string, existingQAPairs: 
       temperature: CONFIG.temperature ?? 0,
     });
 
+    let success = false;
+
     runner
       .on("connect", () => {
         console.log("Connected to OpenAI");
       })
       .on("message", (message) => {
         console.log("Message received:", message);
+        success = true;
       })
       .on("content", (content) => {
         console.log("Content received:", content);
       })
       .on("functionCall", (props) => {
         console.log(`Function ${props.name} called with arguments:`, props.arguments);
+        success = true;
       })
       .on("error", (error) => {
         console.error("Error:", error);
+        success = false;
       });
 
     await runner.done();
+
+    if (chunkIndex === totalChunks - 1) {
+      await appendToOutput(existingQAPairs, filePath);
+    }
+
+    return success;
   } catch (error) {
     console.error("Error running tools:", error);
+    return false;
+  }
+}
+
+export async function extractQandAFromFile(filePath: string, fileContent: string) {
+  await initializeQAPairs();
+
+  const processedFiles = await loadProcessedFiles();
+
+  const existingFile = processedFiles.find((f) => f.filePath === filePath);
+  if (existingFile && existingFile.processedChunks === existingFile.chunks) {
+    console.log(`Skipping already processed file: ${filePath}`);
+    return;
+  }
+
+  const chunks = chunkifyText(fileContent);
+  const totalChunks = chunks.length;
+
+  const fileRecord: ProcessedFile = {
+    filePath,
+    timestamp: new Date().toISOString(),
+    chunks: totalChunks,
+    processedChunks: 0,
+  };
+
+  let allChunksProcessed = true;
+  for (let i = 0; i < chunks.length; i++) {
+    const success = await extractQandAFromContent(chunks[i].text, filePath, i, totalChunks);
+
+    if (!success) {
+      allChunksProcessed = false;
+      break;
+    }
+
+    fileRecord.processedChunks = i + 1;
+  }
+
+  if (allChunksProcessed) {
+    const index = processedFiles.findIndex((f) => f.filePath === filePath);
+    if (index >= 0) {
+      processedFiles[index] = fileRecord;
+    } else {
+      processedFiles.push(fileRecord);
+    }
+    await saveProcessedFiles(processedFiles);
   }
 }
