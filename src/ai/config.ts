@@ -15,12 +15,6 @@ export const CONFIG = {
     "openapi",
     "test-types",
     "cli",
-    "index.mdx",
-    "articles/administration-overview.mdx",
-    "articles/cli.mdx",
-    "articles/reference.mdx",
-    "articles/supported-tests.mdx",
-    "articles/using-testkube.mdx",
   ],
   skippedImports: [
     "../articles/_legacy-warning.mdx",

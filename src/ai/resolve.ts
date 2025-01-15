@@ -1,7 +1,5 @@
 import { dirname, relative, resolve } from "path";
 import { CONFIG } from "./config";
-import { shouldSkipFile } from "./walk";
-import { parseImports } from "./import";
 import { ImportStatement } from "./types";
 import { readFile } from "./file";
 
@@ -32,7 +30,6 @@ function getImportReplacements(imports: ImportStatement[], filePath: string): Re
 
     const resolvedPath = resolve(CONFIG.docsRootPath, fileDir, imp.importPath);
     if (!resolvedPath.startsWith(CONFIG.projectRoot)) continue;
-    if (shouldSkipFile(resolvedPath)) continue;
 
     const importedContent = readFile(resolvedPath);
     if (!importedContent) continue;
@@ -49,5 +46,40 @@ function replaceImportTags(content: string, replacements: Record<string, string>
     const tagRegex = new RegExp(`<${name}\\s*/>`, "g");
     result = result.replace(tagRegex, importedContent);
   }
+  return result;
+}
+
+function parseImports(content: string): {
+  updatedContent: string;
+  imports: ImportStatement[];
+} {
+  const imports: ImportStatement[] = [];
+  let updatedContent = content;
+
+  updatedContent = parseDefaultImports(updatedContent, imports);
+  updatedContent = parseNamedImports(updatedContent, imports);
+
+  return { updatedContent, imports };
+}
+
+function parseDefaultImports(content: string, imports: ImportStatement[]): string {
+  const defaultImportRegex = /^import\s+(\w+)\s+from\s+['"]([^'"]+)['"]/gm;
+  return parseImportsWithRegex(content, imports, defaultImportRegex);
+}
+
+function parseNamedImports(content: string, imports: ImportStatement[]): string {
+  const namedImportRegex = /^import\s+{\s*(\w+)\s*}\s+from\s+['"]([^'"]+)['"]/gm;
+  return parseImportsWithRegex(content, imports, namedImportRegex);
+}
+
+function parseImportsWithRegex(content: string, imports: ImportStatement[], regex: RegExp): string {
+  let result = content;
+  let match: RegExpExecArray | null;
+
+  while ((match = regex.exec(result)) !== null) {
+    imports.push({ importedName: match[1], importPath: match[2] });
+    result = result.replace(match[0], "");
+  }
+
   return result;
 }
