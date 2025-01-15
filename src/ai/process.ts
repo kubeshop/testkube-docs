@@ -39,6 +39,8 @@ const CONFIG = {
   skipContentPatterns: ["legacy-warning.mdx"],
 };
 
+const processedFiles = new Set<string>();
+
 function getAllMarkdownFiles(): string[] {
   const docsRelativePath = relative(PROJECT_ROOT, CONFIG.docsRootPath);
 
@@ -92,39 +94,60 @@ function shouldSkipFile(filePath: string): boolean {
   }
 }
 
-function processImports(content: string, filePath: string): string {
-  const importRegex = /^import\s+\w+\s+from\s+'([^']+)';?\s*$/gm;
+function processImports(content: string, filePath: string, depth = 0): string {
+  if (depth > 10) {
+    console.warn(`Maximum import depth reached for file: ${filePath}`);
+    return content;
+  }
 
-  return content.replace(importRegex, (match, importPath) => {
+  if (processedFiles.has(filePath)) {
+    console.warn(`Circular import detected: ${filePath}`);
+    return content;
+  }
+
+  processedFiles.add(filePath);
+
+  const importRegex = /^import\s+(?:{\s*[^}]*\s*}|[^;\n]+)\s+from\s+["']([^"']+)["'];?\s*$/gm;
+
+  return content.replace(importRegex, (_, importPath) => {
     if (CONFIG.skippedImports.includes(importPath)) {
-      return match;
+      console.log(`Removing skipped import: ${importPath} in ${filePath}`);
+      return "";
     }
 
-    // Get the relative path from the docs root to the current file
+    if (!importPath.match(/\.(md|mdx)$/)) {
+      return "";
+    }
+
     const relativeFilePath = relative(CONFIG.docsRootPath, filePath);
     const currentFileDir = dirname(relativeFilePath);
-
-    // Resolve the import path relative to the docs root
     const resolvedImportPath = resolve(CONFIG.docsRootPath, currentFileDir, importPath);
 
     try {
-      // Ensure the resolved path is within the docs directory
-      if (!resolvedImportPath.startsWith(CONFIG.docsRootPath)) {
-        console.warn(`Import path ${importPath} in ${filePath} resolves outside docs directory`);
-        return match;
+      if (!resolvedImportPath.startsWith(PROJECT_ROOT)) {
+        console.warn(`Import path ${importPath} in ${filePath} resolves outside of the project root`);
+        return "";
       }
 
-      return readFileSync(resolvedImportPath, "utf-8");
+      if (shouldSkipFile(resolvedImportPath)) {
+        console.log(`Skipping import due to content pattern match: ${resolvedImportPath}`);
+        return "";
+      }
+
+      const importedContent = readFileSync(resolvedImportPath, "utf-8");
+
+      return processImports(importedContent, resolvedImportPath, depth + 1);
     } catch (error) {
       console.error(`Failed to process import at ${filePath}: ${importPath}`);
       console.error(`Resolved path: ${resolvedImportPath}`);
-      return match;
+      return "";
     }
   });
 }
 
 function processFile(filePath: string): string {
   const content = readFileSync(filePath, "utf-8");
+  processedFiles.clear();
   return processImports(content, filePath);
 }
 
@@ -145,6 +168,7 @@ function main() {
   const sortedFiles = sortFilesByPriority(files);
   let processedCount = 0;
   let skippedCount = 0;
+  let skippedImportsCount = 0;
 
   for (const file of sortedFiles) {
     if (shouldSkipFile(file)) {
@@ -164,6 +188,7 @@ function main() {
 
   console.log(`Completed processing ${processedCount} files`);
   console.log(`Skipped ${skippedCount} files due to content patterns`);
+  console.log(`Skipped ${skippedImportsCount} imports due to patterns`);
   console.log(`Output written to: ${outputPath}`);
   console.log(`Original output length: ${originalOutputLength} characters`);
   const newOutputLength = readFileSync(outputPath, "utf-8").length;
