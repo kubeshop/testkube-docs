@@ -1,5 +1,6 @@
 import { extractQandAFromFile } from "./extract";
-import { buildImportsMap, resolveFileContent } from "./resolve";
+import { buildImportsMap } from "./import";
+import { resolveFileContent } from "./resolve";
 import { getAllMarkdownFiles, shouldSkipFile } from "./walk";
 
 export async function runDocsProcessor() {

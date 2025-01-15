@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { OpenAI } from "openai";
 import { QAPair } from "./types";
-import { chunkifyText } from "./utils";
+import { chunkifyText } from "./chunk";
 import { promises as fs } from "fs";
 
 interface Config {
