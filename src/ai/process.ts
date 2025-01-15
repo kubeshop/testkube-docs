@@ -43,9 +43,7 @@ const processedFiles = new Set<string>();
 
 function getAllMarkdownFiles(): string[] {
   const docsRelativePath = relative(PROJECT_ROOT, CONFIG.docsRootPath);
-
   const mainGlobPattern = `${docsRelativePath}/**/*.{md,mdx}`;
-
   const ignorePatterns = CONFIG.ignorePaths.map((path) => {
     if (path.endsWith(".md") || path.endsWith(".mdx")) {
       return join(docsRelativePath, path);
@@ -54,13 +52,11 @@ function getAllMarkdownFiles(): string[] {
     }
   });
 
-  const files = globSync(mainGlobPattern, {
+  return globSync(mainGlobPattern, {
     cwd: PROJECT_ROOT,
     absolute: true,
     ignore: ignorePatterns,
   });
-
-  return files;
 }
 
 function sortFilesByPriority(files: string[]): string[] {
@@ -135,7 +131,6 @@ function processImports(content: string, filePath: string, depth = 0): string {
       }
 
       const importedContent = readFileSync(resolvedImportPath, "utf-8");
-
       return processImports(importedContent, resolvedImportPath, depth + 1);
     } catch (error) {
       console.error(`Failed to process import at ${filePath}: ${importPath}`);
@@ -145,10 +140,70 @@ function processImports(content: string, filePath: string, depth = 0): string {
   });
 }
 
+type Pattern = RegExp | string;
+type PatternProcessor = [Pattern, ((match: string, ...groups: string[]) => string) | string];
+type LineProcessor = (line: string) => string;
+type Processor = PatternProcessor | LineProcessor;
+
+function isPatternProcessor(processor: Processor): processor is PatternProcessor {
+  return Array.isArray(processor) && (processor[0] instanceof RegExp || typeof processor[0] === "string");
+}
+
+function escapeRegExp(string: string): string {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function replaceAll(str: string, find: string, replace: string): string {
+  return str.replace(new RegExp(escapeRegExp(find), "g"), replace);
+}
+
+function processContent(content: string, processors: Processor[]): string {
+  return processors.reduce((processedContent, processor) => {
+    if (!isPatternProcessor(processor)) {
+      return processedContent.split("\n").map(processor).join("\n");
+    }
+
+    const [pattern, transform] = processor;
+
+    if (typeof pattern === "string" && typeof transform === "string") {
+      return replaceAll(processedContent, pattern, transform);
+    }
+
+    if (pattern instanceof RegExp && typeof transform === "function") {
+      return processedContent.replace(pattern, (...args) => transform(...args));
+    }
+
+    if (pattern instanceof RegExp && typeof transform === "string") {
+      return processedContent.replace(pattern, transform);
+    }
+
+    return processedContent;
+  }, content);
+}
+
 function processFile(filePath: string): string {
   const content = readFileSync(filePath, "utf-8");
   processedFiles.clear();
   return processImports(content, filePath);
+}
+
+function postProcessOutput(outputPath: string): void {
+  const content = readFileSync(outputPath, "utf-8");
+
+  const processors: Processor[] = [
+    (line) => (line.includes("<TabItem") ? "" : line),
+    (line) => (line.includes("</TabItem>") ? "" : line),
+    (line) => (line.includes("<Tabs") ? "" : line),
+    (line) => (line.includes("</Tabs>") ? "" : line),
+    [/!\[.*?\]\(.*?\)/g, ""],
+    [/<iframe[\s\S]*?<\/iframe>/g, ""],
+    [/<Admonition[\s\S]*?<\/Admonition>/g, ""],
+    (line) => (line.trim() ? line : ""),
+    [/\n\s*\n/g, "\n"],
+  ];
+
+  const processedContent = processContent(content, processors);
+  writeFileSync(outputPath, processedContent);
 }
 
 function initializeOutputFile(outputPath: string) {
@@ -186,14 +241,18 @@ function main() {
     }
   }
 
+  console.log("Applying post-processing rules...");
+  postProcessOutput(outputPath);
+
+  const finalOutputLength = readFileSync(outputPath, "utf-8").length;
+
   console.log(`Completed processing ${processedCount} files`);
   console.log(`Skipped ${skippedCount} files due to content patterns`);
   console.log(`Skipped ${skippedImportsCount} imports due to patterns`);
   console.log(`Output written to: ${outputPath}`);
   console.log(`Original output length: ${originalOutputLength} characters`);
-  const newOutputLength = readFileSync(outputPath, "utf-8").length;
-  console.log(`New Output length: ${newOutputLength} characters`);
-  console.log(`Removed ${originalOutputLength - newOutputLength} characters`);
+  console.log(`Final output length after post-processing: ${finalOutputLength} characters`);
+  console.log(`Removed ${originalOutputLength - finalOutputLength} characters`);
 }
 
 main();
