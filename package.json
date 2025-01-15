@@ -14,7 +14,7 @@
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
     "split-openapis": "tsc && npx tsx src/scripts/split-openapis.ts",
-    "ai:process": "ts-node src/ai/main.ts"
+    "ai:process": "ts-node src/ai/process.ts"
   },
   "dependencies": {
     "@docusaurus/core": "^3.6.3",
@@ -35,8 +35,10 @@
     "@docusaurus/module-type-aliases": "^3.6.3",
     "@docusaurus/tsconfig": "^3.6.3",
     "@types/js-yaml": "^4.0.9",
+    "dotenv": "^16.4.7",
     "glob": "^11.0.1",
     "js-yaml": "^4.1.0",
+    "openai": "^4.78.1",
     "ts-node": "^10.9.2",
     "tsx": "^4.11.0",
     "typescript": "^5.4.5"
