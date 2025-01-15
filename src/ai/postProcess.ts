@@ -62,6 +62,17 @@ export function postProcessOutput(outputPath: string): void {
     // Remove <Admonition>...</Admonition> content
     [/<Admonition[\s\S]*?<\/Admonition>/g, ""],
 
+    // Remove testkube ASCII art
+    [
+      `████████ ███████ ███████ ████████ ██   ██ ██    ██ ██████  ███████
+   ██    ██      ██         ██    ██  ██  ██    ██ ██   ██ ██
+   ██    █████   ███████    ██    █████   ██    ██ ██████  █████
+   ██    ██           ██    ██    ██  ██  ██    ██ ██   ██ ██
+   ██    ███████ ███████    ██    ██   ██  ██████  ██████  ███████
+                                           /tɛst kjub/ by Kubeshop`,
+      "",
+    ],
+
     // Remove empty lines
     (line) => (line.trim() ? line : ""),
     [/\n\s*\n/g, "\n"],
