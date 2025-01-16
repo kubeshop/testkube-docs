@@ -280,6 +280,33 @@ spec:
 Make sure to double-escape brackets when specifying values that themselves specify template syntax.
 :::
 
+#### Using Config and Parameters to specify Webhook variables
+
+If you want to specify variables to use inside of Webhook fields, you can specify `Config` section.
+They can be defined in the Webhook specification or taken from the Kubernetes secret. 
+You can reference them using builtin `Config` dictionary and golang template expression:
+
+```yaml
+apiVersion: executor.testkube.io/v1
+kind: Webhook
+metadata:
+  name: webhook-jira
+  namespace: testkube
+spec:
+  config:
+    priority:
+      value: "High"
+    token:
+      secret:
+        name: somevars
+        key: apitoken
+  events:
+  - end-testworkflow-success
+  uri: https://webhook.site
+  payloadTemplate: "Priority: {{ index .Config "priority" }}"
+  headers:
+    Authorization: "Basic {{ index .Config \"apitoken\" }}"
+```
 
 
 ### URI and HTTP Headers
@@ -498,7 +525,7 @@ WebhookTemplate can be used only as a part of the calling Webhook. It's content 
 
 Webhook:
 
-```
+```yaml
 apiVersion: executor.testkube.io/v1
 kind: Webhook
 metadata:
@@ -511,7 +538,7 @@ spec:
 
 Webhook template:
 
-```
+```yaml
 apiVersion: executor.testkube.io/v1
 kind: WebhookTemplate
 metadata:
@@ -566,7 +593,7 @@ In order to send the message when a test workflow execution finishes, the follow
 
 Webhook:
 
-```
+```yaml
 apiVersion: executor.testkube.io/v1
 kind: Webhook
 metadata:
@@ -590,7 +617,7 @@ spec:
 
 Webhook template:
 
-```
+```yaml
 apiVersion: executor.testkube.io/v1
 kind: WebhookTemplate
 metadata:
@@ -667,7 +694,7 @@ spec:
 
 Secret:
 
-```
+```yaml
 apiVersion: v1
 kind: Secret
 metadata:
