@@ -280,6 +280,8 @@ spec:
 Make sure to double-escape brackets when specifying values that themselves specify template syntax.
 :::
 
+
+
 ### URI and HTTP Headers
 
 You can add additional HTTP headers like `Authorization` or `x-api-key` to have a secret token.
@@ -488,6 +490,39 @@ The full TestWorkflowResult data model can be found [here](https://github.com/ku
 
 Make sure that the value `testkube-api.dashboardUri` in the helm-charts is set to `app.testkube.io`, or your remote Dashboard URL, so that the variables above can be populated with the correct values.
 
+## Webhook templates
+
+In order to re-use Webhook specification, you can define a special Testkube resource - WebhookTemplate.
+It contains all the same fields as Webhook resource, except `webhookTemplateRef` one, which is used for referencing template in webhook.
+WebhookTemplate can be used only as part of the calling Webhook. It's content is merged into Webhook specification.
+
+Webhook:
+
+```
+apiVersion: executor.testkube.io/v1
+kind: Webhook
+metadata:
+  name: example-webhook
+  namespace: testkube
+spec:
+  webhookTemplateRef:
+    name: example-template
+```
+
+Webhook template:
+
+```
+apiVersion: executor.testkube.io/v1
+kind: WebhookTemplate
+metadata:
+  name: example-template
+  namespace: testkube
+spec:
+  events:
+  - end-testworkflow-success
+  uri: https://webhook.site
+```
+
 ## Additional Examples
 
 ### Microsoft Teams
@@ -521,6 +556,127 @@ It will result in:
 
 and the message:
 `Test 'postman-executor-smoke' execution (949) finished with 'passed' status"` being displayed.
+
+### Atlassian Jira
+
+You can use Webhooks to create issues in Atlassian Jira projects.
+Please check the Jira API Spec for additional details [here](https://developer.atlassian.com/cloud/jira/platform/rest/v3/). 
+
+In order to send the message when test workflow execution finishes, the following Webhook and Webhook template can be used:
+
+Webhook:
+
+```
+apiVersion: executor.testkube.io/v1
+kind: Webhook
+metadata:
+  name: jira
+  namespace: testkube
+spec:
+  config:
+    duedate:
+      value: "2025-02-01"
+    issuetype:
+      value: "10004"
+    project:
+      value: "10019"
+    token:
+      secret:
+        name: webhook-vars
+        key: token
+  webhookTemplateRef:
+    name: template-jira
+```
+
+Webhook template:
+
+```
+apiVersion: executor.testkube.io/v1
+kind: WebhookTemplate
+metadata:
+  name: template-jira
+  namespace: testkube
+spec:
+  parameters:
+    duedate:
+      description: due date
+      required: true
+      example: "2025-02-01"
+    issuetype:
+      description: issue type id
+      required: true
+      example: "10004"
+    priority:
+      description: priority id
+      required: false
+      example: "3"
+      default: "3"
+      pattern: "^[0-9]*$"
+    project:
+      description: project id
+      required: true
+      example: "10019"
+    token:
+      description: token
+      required: true
+      example: "ABCDE"
+  events:
+  - end-testworkflow-failed
+  uri: https://kubeshop.atlassian.net/rest/api/3/issue
+  payloadTemplate: |
+    {
+      "fields": {
+        "duedate": "{{ index .Config "duedate" }}",
+        "labels": [
+           "bugfix",
+           "blitz_test"
+        ],
+        "issuetype": {
+          "id": "{{ index .Config "issuetype" }}"
+        },
+        "priority": {
+          "id": "{{ index .Config "priority" }}"
+        },
+        "project": {
+          "id": "{{ index .Config "project" }}"
+        },
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "text": "Please check details at {{ .ExecutionURL }}",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        },
+        "summary": "{{ .TestWorkflowExecution.Name }}"
+      },
+      "update": {}
+    }
+  headers:
+    Accept: application/json
+    Content-Type: application/json
+    Authorization: "Basic {{ index .Config \"token\" }}"
+```
+
+Secret:
+
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: webhook-vars
+  namespace: testkube
+type: Opaque
+data:
+  token: <your_data>
+```
 
 ## Testing Webhooks
 
