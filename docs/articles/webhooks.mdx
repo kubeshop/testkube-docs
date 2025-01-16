@@ -492,9 +492,9 @@ Make sure that the value `testkube-api.dashboardUri` in the helm-charts is set t
 
 ## Webhook templates
 
-In order to re-use Webhook specification, you can define a special Testkube resource - WebhookTemplate.
-It contains all the same fields as Webhook resource, except `webhookTemplateRef` one, which is used for referencing template in webhook.
-WebhookTemplate can be used only as part of the calling Webhook. It's content is merged into Webhook specification.
+In order to re-use the Webhook specification, you can define a special Testkube resource - WebhookTemplate.
+It contains all the same fields as the Webhook resource, except `webhookTemplateRef` one, which is used for referencing a template in the webhook.
+WebhookTemplate can be used only as a part of the calling Webhook. It's content is merged into the Webhook specification.
 
 Webhook:
 
@@ -562,7 +562,7 @@ and the message:
 You can use Webhooks to create issues in Atlassian Jira projects.
 Please check the Jira API Spec for additional details [here](https://developer.atlassian.com/cloud/jira/platform/rest/v3/). 
 
-In order to send the message when test workflow execution finishes, the following Webhook and Webhook template can be used:
+In order to send the message when a test workflow execution finishes, the following Webhook and Webhook template can be used:
 
 Webhook:
 
