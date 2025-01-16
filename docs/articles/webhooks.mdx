@@ -282,7 +282,7 @@ Make sure to double-escape brackets when specifying values that themselves speci
 
 #### Using Config and Parameters to specify Webhook variables
 
-If you want to specify variables to use inside of Webhook fields, you can specify `Config` section.
+If you want to specify variables to use inside of Webhook fields, you can specify `config` section.
 They can be defined in the Webhook specification or taken from the Kubernetes secret. 
 You can reference them using builtin `Config` dictionary and golang template expression:
 
@@ -308,6 +308,18 @@ spec:
     Authorization: "Basic {{ index .Config \"apitoken\" }}"
 ```
 
+If you want to validate your config variables before executing a webhook, you can specify `parameters` section.
+
+```yaml
+spec:
+  parameters:
+    priority:
+      description: priority id variable
+      required: false
+      example: "3"
+      default: "3"
+      pattern: "^[0-9]*$"
+```
 
 ### URI and HTTP Headers
 
