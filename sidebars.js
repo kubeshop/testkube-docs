@@ -838,7 +838,7 @@ const sidebars = {
         {
           type: "doc",
           label: "Microsoft Teams",
-          id: "articles/temas-integration",
+          id: "articles/teams-integration",
         },
       ],
     },
