@@ -2,11 +2,26 @@
 
 ## Overview
 
-The Testkube Agent is 100% Open Source and includes the full test execution and orchestration engine 
-(with some [limitations](#agent-limitations-in-standalone-mode)). It can be deployed and used without connecting it to a Testkube Control Plane, 
-in which case there is no [Dashboard](/articles/testkube-dashboard-explore) and the Agent has to be managed entirely through the [Testkube CLI](/articles/cli). 
+The Testkube Agent is 100% Open Source and includes the Testkube execution and orchestration engine 
+(with some [limitations](#agent-limitations-in-standalone-mode)). It is _always_ hosted in your infrastructure and 
+can be deployed in two modes:
 
-The following functionality is available directly in the agent via the aforementioned CLI or API:
+- **Standalone Mode** - not connected to a Testkube Control Plane.
+- **Connected Mode** - connected to a Control Plane.
+
+This document shows how to use the Agent in Standalone mode, see the corresponding documentation for 
+[On Prem](/articles/install/onprem-overview) and [Cloud](/articles/install/cloud-overview)
+deployment of the Testkube Control Plane to learn how to use the Agent in Connected Mode.
+
+:::tip
+See the [Feature Comparison](feature-comparison) to understand the differences in functionality between these two modes.
+:::
+
+## Running in Standalone Mode
+
+When running the Agent in Standalone Mode there is no [Dashboard](/articles/testkube-dashboard-explore) and is has to be managed entirely through the [Testkube CLI](/articles/cli). 
+
+The following functionality is available directly in the agent in Standalone Mode
 
 - **Test Workflows** : Manage Workflows and Templates, Run/Schedule executions (see below for limitations).
 - **Logs/Artifacts** : Retrieve Workflow executions, logs, artifacts via CLI or API.
@@ -23,11 +38,6 @@ Testkube Control Plane:
 - **Parallel execution** with `parallel` - see [Parallelization](/articles/test-workflows-parallel.mdx)
 - **Parameterization** with `matrix` (and `count`, `shards`, `maxCount`) - see [Sharding & Matrix Params](/articles/test-workflows-matrix-and-sharding.mdx)
 - **Spawning dependencies** for your tests with `services` - see [Services](/articles/test-workflows-services.mdx)
-
-:::tip
-See a complete feature-comparison between running the Agent standalone vs connected to the Control Plane at [Feature Comparison](feature-comparison)
-:::
-
 
 ## Installing the Standalone Agent
 
@@ -411,7 +421,6 @@ testkube-api:
 
 [secrets-endpoint]: /articles/secrets-enable-endpoint
 [secrets-creation]: /articles/secrets-disable-creation
-[oss-vs-pro]: /articles/open-source-or-pro
 [upgrade]: /articles/upgrade-uninstall
 [mongo-config]: https://github.com/bitnami/charts/tree/master/bitnami/mongodb#parameters
 [nats-config]: https://docs.nats.io/running-a-nats-service/nats-kubernetes/helm-charts

@@ -18,7 +18,7 @@ more information on the differences between Open Source and Commercial features.
 ## Testkube Commercial
 
 All functionality provided by the Testkube Control Plane and specific functionality provided by the Testkube Agent 
-([Read More](/articles/open-source-or-pro)) require a paid license from Testkube (see [pricing](https://testkube.io/pricing)).
+ require a paid license from Testkube (see [pricing](https://testkube.io/pricing)).
 Commercial functionality included in the Testkube Agent is licensed under the TCL.
 
 :::note

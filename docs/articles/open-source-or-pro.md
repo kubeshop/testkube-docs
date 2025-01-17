@@ -6,11 +6,6 @@ by the commercial Control Plane.
 Once deployed, you can interact with the agent through the [Testkube CLI](install/cli) or directly via the
 [Agent API](/openapi/overview#agent-api).
 
-## Getting Started with Open Source
-
-- Start by [Installing the Standalone Agent](/articles/install/standalone-agent#installing-the-standalone-agent)
-- Use the Testkube CLI to create your first Workflow 
-
 ## Migrating from OSS to Commercial
 
 Migrating from a Standalone Agent deployment to utilizing the Testkube Control plane is described 
