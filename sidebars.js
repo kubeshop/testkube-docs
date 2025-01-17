@@ -830,6 +830,16 @@ const sidebars = {
             "Integrating Testkube and Zapier for Instant Email Alerts",
         },
         { type: "doc", label: "Grafana", id: "articles/grafana" },
+        {
+          type: "doc",
+          label: "Atlassian Jira",
+          id: "articles/jira-integration",
+        },
+        {
+          type: "doc",
+          label: "Microsoft Teams",
+          id: "articles/temas-integration",
+        },
       ],
     },
     {
