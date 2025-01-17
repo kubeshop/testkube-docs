@@ -7,7 +7,7 @@ The Testkube Agent is 100% Open Source and includes the Testkube execution and o
 can be deployed in two modes:
 
 - **Standalone Mode** - not connected to a Testkube Control Plane.
-- **Connected Mode** - connected to a Control Plane.
+- **Connected Mode** - connected to a Testkube Control Plane.
 
 This document shows how to use the Agent in Standalone mode, see the corresponding documentation for 
 [On Prem](/articles/install/onprem-overview) and [Cloud](/articles/install/cloud-overview)
