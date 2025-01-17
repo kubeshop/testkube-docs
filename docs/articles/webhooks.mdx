@@ -313,7 +313,7 @@ If you want to validate your config variables before executing a webhook, you ca
 ```yaml
 spec:
   parameters:
-    priority:
+    - name: priority
       description: priority id variable
       required: false
       example: "3"
@@ -637,25 +637,25 @@ metadata:
   namespace: testkube
 spec:
   parameters:
-    duedate:
+    - name: duedate
       description: due date
       required: true
       example: "2025-02-01"
-    issuetype:
+    - name: issuetype
       description: issue type id
       required: true
       example: "10004"
-    priority:
+    - name: priority
       description: priority id
       required: false
       example: "3"
       default: "3"
       pattern: "^[0-9]*$"
-    project:
+    - name: project
       description: project id
       required: true
       example: "10019"
-    token:
+    - name: token
       description: token
       required: true
       example: "ABCDE"
