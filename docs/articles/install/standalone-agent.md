@@ -1,20 +1,37 @@
-# Testkube Open Source Agent 
+# Testkube Standalone Agent 
 
 ## Overview
 
-The Testkube Agent is Open Source and includes the full test execution and orchestration engine 
-(with some [limitations](/articles/open-source-or-pro#workflow-limitations-in-standalone-mode)). It can 
-be deployed and used without connecting it to a Testkube Control Plane, in which case there is no 
-[Dashboard](/articles/testkube-dashboard-explore) and the Agent has to be managed entirely through the [Testkube CLI](/articles/cli). 
+The Testkube Agent is 100% Open Source and includes the full test execution and orchestration engine 
+(with some [limitations](#agent-limitations-in-standalone-mode)). It can be deployed and used without connecting it to a Testkube Control Plane, 
+in which case there is no [Dashboard](/articles/testkube-dashboard-explore) and the Agent has to be managed entirely through the [Testkube CLI](/articles/cli). 
+
+The following functionality is available directly in the agent via the aforementioned CLI or API:
+
+- **Test Workflows** : Manage Workflows and Templates, Run/Schedule executions (see below for limitations).
+- **Logs/Artifacts** : Retrieve Workflow executions, logs, artifacts via CLI or API.
+- **Webhooks** : Manage Webhooks that the Agent executes.
+- **Event Triggers** : Manage Event Triggers that the Agent reacts to.
+- **Tests, TestSuites, Sources, Executors** : Deprecated - but still available during a transition period - [Read More](/articles/legacy-features).
+
+### Agent Limitations in Standalone Mode
+
+The following Workflow features are _not_ available when using the Open Source Agent without connecting it to a
+Testkube Control Plane:
+
+- **Complex Test Orchestration** with `execute` - see [Test Suites](/articles/test-workflows-test-suites.mdx)
+- **Parallel execution** with `parallel` - see [Parallelization](/articles/test-workflows-parallel.mdx)
+- **Parameterization** with `matrix` (and `count`, `shards`, `maxCount`) - see [Sharding & Matrix Params](/articles/test-workflows-matrix-and-sharding.mdx)
+- **Spawning dependencies** for your tests with `services` - see [Services](/articles/test-workflows-services.mdx)
 
 :::tip
-Check out the [Open Source Overview](/articles/open-source-or-pro) to learn how the Open Source Agent compares to the 
-commercial offering.
+See a complete feature-comparison between running the Agent standalone vs connected to the Control Plane at [Feature Comparison](feature-comparison)
 :::
 
-## Installing the Open Source Agent
 
-The following steps are required to install the Open Source Agent into a Kubernetes Cluster:
+## Installing the Standalone Agent
+
+The following steps are required to install the Standalone Agent into a Kubernetes Cluster:
 
 - Create a Testkube namespace.
 - Deploy the Testkube API (see below).
@@ -107,9 +124,10 @@ The Testkube CRDs managed by the Operator are described in [Testkube Custom Reso
 
 ## Connecting to the Testkube Control Plane
 
-You can connect the Open Source Agent to a Testkube Control Plane to leverage 
-corresponding functionality (see [Feature Comparison](/articles/open-source-or-pro#testkube-feature-comparison---open-source-vs-commercial)).
-All test definitions will stay in place, but historical test results data or artifacts won't be copied to the control plane.
+You can connect a standalone Agent to an instance of the Testkube Control Plane to leverage 
+corresponding functionality (see [Feature Comparison](feature-comparison)).
+All Workflow/Trigger/Webhook definitions will be preserved, but historical test execution results and 
+artifacts won't be copied to the control plane.
 
 The following command which will guide you through the migration process:
 

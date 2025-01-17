@@ -116,11 +116,11 @@ const redirects = [
   },
   {
     from: "/overview/supported-tests",
-    to: "/articles/supported-tests",
+    to: "/articles/examples/overview",
   },
   {
     from: "/overview/testkube-benefits",
-    to: "/articles/testkube-benefits",
+    to: "/articles/testing-pipeline",
   },
   {
     from: [
@@ -420,11 +420,11 @@ const redirects = [
     from: [
       "/articles/supported-tests",
       "/articles/testkube-benefits",
-      "/articles/open-source-or-pro",
+      "/articles/migrate-from-oss",
       "/testkube-pro-on-prem/articles/migrating-from-oss-to-pro",
       "/testkube-enterprise/articles/migrating-from-oss-to-pro",
     ],
-    to: "/articles/migrate-from-oss",
+    to: "/articles/open-source-or-pro",
   },
   {
     from: ["/articles/testkube-oss", "/articles/install/install-oss"],

@@ -16,7 +16,7 @@ You can deploy Testkube in one of the following ways:
 
 - **Testkube On-Prem** - the Control Plane is installed and managed by you in your own infrastructure.
 - **Testkube Cloud** - the Control Plane runs in the cloud and managed by the Testkube Team.
-- **Testkube Open Source** - the Agent runs without a Control Plane for single cluster usage scenarios.
+- **Testkube Standalone Agent** - the Agent runs without a Control Plane for single cluster usage scenarios.
 
 High-level deployment architecture and how to get started with each of these is described below.
 
@@ -72,10 +72,10 @@ Even when using Testkube Cloud, your actual tests are never run or stored on our
 logs and artifacts will be stored.
 :::
 
-## Testkube Open Source
+## Testkube Standalone Agent
 
-The Testkube Agent is in itself Open Source and can be deployed without a
-control plane or Dashboard. All management and test execution tasks are done through the [Testkube CLI](/articles/cli).
+The Testkube Agent is Open Source and can be deployed without being connect to the Testkube
+Control Plane. All management and test execution tasks are done through the [Testkube CLI](/articles/cli).
 
 - Learn more about how the [Standalone Agent compares](/articles/open-source-or-pro)
 - Learn more about how to [deploy the Standalone Agent][deploy-standalone].

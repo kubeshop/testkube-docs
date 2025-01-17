@@ -12,7 +12,7 @@ Testkube software is distributed under two primary licenses:
 ## The Testkube Agent
 
 The Testkube Agent is open-source and free to use in [standalone mode](/articles/install/standalone-agent). Free agent features are
-licensed under the MIT license, but some agent features are subject to the TCL - see [The Testkube Open Source Agent](/articles/open-source-or-pro) for
+licensed under the MIT license, but some agent features are subject to the TCL - see the [Agent Overview](/articles/install/standalone-agent#overview) for
 more information on the differences between Open Source and Commercial features.
 
 ## Testkube Commercial
@@ -69,15 +69,14 @@ MIT license, contributions can be made freely.
 
 The table below shows how certain Agent features in the [Testkube GitHub repository](https://github.com/kubeshop/testkube) are licensed:
 
-| Feature            | Core/MIT |                                          Pro/TCL                                           |
-|:-------------------|:--------:|:------------------------------------------------------------------------------------------:|
-| Tests *            |    x     |                                                                                            |
-| Basic Testsuites * |    x     |                                                                                            |
-| Triggers           |    x     |                                                                                            |
-| Executors *        |    x     |                                                                                            |
-| Webhooks           |    x     |                                                                                            |
-| Sources *          |    x     |                                                                                            |
-| Test Workflows     |    x     | x - see [Workflow Limitations](open-source-or-pro.md#workflow-limitations-in-standalone-mode) |
-| Adv Testsuites *   |          |                                             x                                              |
+| Feature            |                                                     Core/MIT                                                     |      Pro/TCL       |
+|:-------------------|:----------------------------------------------------------------------------------------------------------------:|:------------------:|
+| Tests *            |                                                :white_check_mark:                                                |                    |
+| Basic Testsuites * |                                                :white_check_mark:                                                |                    |
+| Triggers           |                                                :white_check_mark:                                                |                    |
+| Executors *        |                                                :white_check_mark:                                                |                    |
+| Webhooks           |                                                :white_check_mark:                                                |                    |
+| Sources *          |                                                :white_check_mark:                                                |                    |
+| Test Workflows     | :white_check_mark: - with [Limitations](/articles/install/standalone-agent#agent-limitations-in-standalone-mode) | :white_check_mark: |
 
 * = deprecated functionality - [Read More](legacy-features)
