@@ -42,7 +42,7 @@ spec:
           image: busybox
           command: ["sh", "-c"]
           args:
-            - chown -R 1001:1001 /data
+            - chown -vR 1001:1001 /data
           volumeMounts:
             - name: nats-enterprise-pvc
               mountPath: /data
@@ -76,7 +76,7 @@ spec:
           image: busybox
           command: ["sh", "-c"]
           args:
-            - chown -R 1001:1001 /data
+            - chown -vR 1001:1001 /data
           volumeMounts:
             - name: nats-pvc
               mountPath: /data
