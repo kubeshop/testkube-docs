@@ -15,7 +15,7 @@ into compliance with the most restrictive profile:
 ## Updating an Existing Installation
 
 In restricted mode, the pod containers must not run as root so to avoid downtime
-and preserve our old state we should run a few jobs to change ownership of some
+and preserve the old state we should run a few jobs to change ownership of some
 files in the existing persistent volumes.
 
 ### Control Plane
