@@ -39,3 +39,4 @@ testkube create <resourceName> [flags]
 - [testkube create testworkflow](testkube_create_testworkflow.md) - Create test workflow
 - [testkube create testworkflowtemplate](testkube_create_testworkflowtemplate.md) - Create test workflow template
 - [testkube create webhook](testkube_create_webhook.md) - Create new Webhook
+- [testkube create webhooktemplate](testkube_create_webhooktemplate.md) - Create new Webhook Template

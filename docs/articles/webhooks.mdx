@@ -280,6 +280,47 @@ spec:
 Make sure to double-escape brackets when specifying values that themselves specify template syntax.
 :::
 
+#### Using Config and Parameters to specify Webhook variables
+
+If you want to specify variables to use inside of Webhook fields, you can specify `config` section.
+They can be defined in the Webhook specification or taken from the Kubernetes secret. 
+You can reference them using builtin `Config` dictionary and golang template expression:
+
+```yaml
+apiVersion: executor.testkube.io/v1
+kind: Webhook
+metadata:
+  name: webhook-jira
+  namespace: testkube
+spec:
+  config:
+    priority:
+      value: "5"
+    token:
+      secret:
+        name: somevars
+        key: apitoken
+  events:
+  - end-testworkflow-success
+  uri: https://webhook.site
+  payloadTemplate: "Priority: {{ index .Config "priority" }}"
+  headers:
+    Authorization: "Basic {{ index .Config \"apitoken\" }}"
+```
+
+If you want to validate your config variables before executing a webhook, you can specify `parameters` section.
+
+```yaml
+spec:
+  parameters:
+    - name: priority
+      description: priority id variable
+      required: false
+      example: "3"
+      default: "3"
+      pattern: "^[0-9]*$"
+```
+
 ### URI and HTTP Headers
 
 You can add additional HTTP headers like `Authorization` or `x-api-key` to have a secret token.
@@ -488,39 +529,38 @@ The full TestWorkflowResult data model can be found [here](https://github.com/ku
 
 Make sure that the value `testkube-api.dashboardUri` in the helm-charts is set to `app.testkube.io`, or your remote Dashboard URL, so that the variables above can be populated with the correct values.
 
-## Additional Examples
+## Webhook templates
 
-### Microsoft Teams
+In order to re-use the Webhook specification, you can define a special Testkube resource - WebhookTemplate.
+It contains all the same fields as the Webhook resource, except `webhookTemplateRef` one, which is used for referencing a template in the webhook.
+WebhookTemplate can be used only as a part of the calling Webhook. It's content is merged into the Webhook specification.
 
-Webhooks can also be used to send messages to Microsoft Teams channels.
-First, you need to create an incoming webhook in Teams for a specific channel. You can see how to do it in the Teams Docs [here](https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook?tabs=dotnet#create-incoming-webhooks-1). After your Teams incoming webhook is created, you can use it with Testkube webhooks - just use the URL provided (it will probably look like this: `https://xxxxx.webhook.office.com/xxxxxxxxx`).
+Webhook:
 
-In order to send the message when test execution finishes, the following Webhook can be used:
-
-```
+```yaml
 apiVersion: executor.testkube.io/v1
 kind: Webhook
 metadata:
-  name: example-webhook-teams
+  name: example-webhook
+  namespace: testkube
+spec:
+  webhookTemplateRef:
+    name: example-template
+```
+
+Webhook template:
+
+```yaml
+apiVersion: executor.testkube.io/v1
+kind: WebhookTemplate
+metadata:
+  name: example-template
   namespace: testkube
 spec:
   events:
-  - end-test-success
-  - end-test-failed
-  - end-test-aborted
-  - end-test-timeout
-  uri: https://xxxxx.webhook.office.com/xxxxxxxxx
-  payloadTemplate: "{\"text\": \"Test '{{ .TestExecution.TestName }}' execution ({{ .TestExecution.Number }}) finished with '{{ .TestExecution.ExecutionResult.Status }}' status\"}\n"
+  - end-testworkflow-success
+  uri: https://webhook.site
 ```
-
-It will result in:
-
-```
-{"text": "Test 'postman-executor-smoke' execution (949) finished with 'passed' status"}
-```
-
-and the message:
-`Test 'postman-executor-smoke' execution (949) finished with 'passed' status"` being displayed.
 
 ## Testing Webhooks
 
