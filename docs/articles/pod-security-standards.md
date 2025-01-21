@@ -18,6 +18,16 @@ In restricted mode, the pod containers must not run as root so to avoid downtime
 and preserve the old state we should run a few jobs to change ownership of some
 files in the existing persistent volumes.
 
+:::warning
+
+To make sure the existing persistent volumes can be mounted in the containers of
+these jobs, depending on your storage provider you might need to ensure that the
+pod is scheduled to a specific set of nodes (i.e. same AZ or host) by possibly
+specifying a `nodeSelector`.
+
+:::
+
+
 ### Control Plane
 
 In the namespace hosting your Testkube control plane installation `kubectl apply`
