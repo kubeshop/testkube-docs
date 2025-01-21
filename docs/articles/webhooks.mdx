@@ -305,7 +305,7 @@ spec:
   uri: https://webhook.site
   payloadTemplate: "Priority: {{ index .Config "priority" }}"
   headers:
-    Authorization: "Basic {{ index .Config \"apitoken\" }}"
+    Authorization: "Basic {{ index .Config \"token\" }}"
 ```
 
 If you want to validate your config variables before executing a webhook, you can specify `parameters` section.
