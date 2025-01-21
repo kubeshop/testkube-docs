@@ -131,6 +131,11 @@ const sidebars = {
                   id: "articles/ha",
                 },
                 {
+                  type: "doc",
+                  label: "Pod Security Standards",
+                  id: "articles/pod-security-standards",
+                },
+                {
                   type: "link",
                   label: "Testkube with Kind",
                   href: "https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker",
