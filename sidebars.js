@@ -149,12 +149,12 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Testkube Docker Agent",
+              label: "Docker Install",
               id: "articles/install/docker-agent",
             },
             {
               type: "doc",
-              label: "Agent with Local Kubernetes",
+              label: "Local Kubernetes Install",
               id: "articles/install/quickstart-no-k8s",
             },
           ],
