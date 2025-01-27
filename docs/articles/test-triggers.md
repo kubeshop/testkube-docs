@@ -116,7 +116,9 @@ for example:
 actionParameters:
   config:
     environment: production
+    datavalue: jsonpath={.data.test} # if the resource is a configmap with key `test`
   tags:
+    workflow: core
     trigger: jsonpath={.metadata.name}
 ```
 
