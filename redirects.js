@@ -508,7 +508,7 @@ const redirects = [
     to: "/articles/examples/maven-basic",
   },
   {
-    from: "/github",
+    from: ["/github","/articles/run-tests-with-github-actions"],
     to: "/articles/github-actions",
   },
   {
