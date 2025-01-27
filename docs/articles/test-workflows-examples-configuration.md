@@ -1,6 +1,6 @@
-# Test Workflows Examples - Configuration
+# Test Workflows Parameterization 
 
-## Declaring the Configuration
+## Overview
 
 Test Workflows may define some configuration variables that should be used.
 The configuration schema is OpenAPI-like.
@@ -8,7 +8,7 @@ The configuration schema is OpenAPI-like.
 When the configuration variable doesn’t already have a default clause, it’s required.
 Values of configuration variables with sensitive flags will be stored in test workflow execution secret.
 
-### Using the Variables
+## Using the Variables
 
 The configuration variables can be used in the specification as an expression, i.e. `cypress run {{config.args}}`.
 
@@ -49,7 +49,7 @@ spec:
       shell: "tree /data/repo"
 ```
 
-### Using Secrets or ConfigMaps
+## Using Secrets or ConfigMaps
 
 You can also use Secrets and ConfigMaps to define variables. In this case, you would
 set the parameter as an environment variable and use the `valueFrom` property. You
@@ -81,7 +81,7 @@ spec:
         echo {{ shellquote(env.MY_SUPER_SECRET) }}
 ```
 
-## UI
+## Specifying parameter values
 
 ### Running in the UI
 
@@ -89,9 +89,7 @@ After clicking “Run now” in the UI, if the Test Workflow has additional conf
 
 ![Running in the UI](../img/run-in-the-ui.png)
 
-## CLI
-
-#### Running with the CLI
+### Running with the CLI
 
 With the CLI, you can provide the variables with **--config** arguments.
 
@@ -99,8 +97,6 @@ With the CLI, you can provide the variables with **--config** arguments.
 
 To use secrets, you'd have to use the `--env-var` or `--global-var` option instead as
 they are environment variables.
-
-## Test Suite (Execute)
 
 ### Running with Execute (Test Suite Like)
 
