@@ -87,6 +87,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "SCIM Integration",
+                  id: "testkube-pro-on-prem/articles/scim",
+                },
+                {
+                  type: "doc",
                   label: "S3 with IAM Authentication",
                   id: "articles/install/s3-storage",
                 },
@@ -124,6 +129,11 @@ const sidebars = {
                   type: "doc",
                   label: "High Availability Configuration",
                   id: "articles/ha",
+                },
+                {
+                  type: "doc",
+                  label: "Pod Security Standards",
+                  id: "articles/pod-security-standards",
                 },
                 {
                   type: "link",
@@ -830,6 +840,16 @@ const sidebars = {
             "Integrating Testkube and Zapier for Instant Email Alerts",
         },
         { type: "doc", label: "Grafana", id: "articles/grafana" },
+        {
+          type: "doc",
+          label: "Atlassian Jira",
+          id: "articles/jira-integration",
+        },
+        {
+          type: "doc",
+          label: "Microsoft Teams",
+          id: "articles/teams-integration",
+        },
       ],
     },
     {

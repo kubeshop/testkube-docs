@@ -43,6 +43,8 @@ us know on our Slack channel so we can add it!
 - [Slack](/articles/slack-integration) - Learn about how to configure Slack integration with Testkube.
 - [PagerDuty](https://testkube.io/learn/critical-test-based-alerting-with-pagerduty-and-testkube) - Learn about how to integrate Testkube with PagerDuty for alerting.
 - [Zapier](https://testkube.io/learn/integrating-testkube-and-zapier-for-instant-email-alerts) - Learn about how to integrate Testkube with Zapier.
+- [Microsoft Teams](/articles/teams-integration) - Learn about how to integrate with Microsoft Teams.
+- [Atlassian Jira](/articles/jira-integration) - Learn about how to integrate with Atlassian Jira.
 
 ## Miscellaneous
  
