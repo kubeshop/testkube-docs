@@ -49,6 +49,7 @@ selector:
   name: Kubernetes object name
   nameRegex: Kubernetes object name regex (for example, "testworkflow.*")
   namespace: Kubernetes object namespace (default is **testkube**)
+  namespaceRegex: Kubernetes object namespace regex( for example, "test.*")
 ```
 
 #### Label Selector
@@ -95,6 +96,28 @@ probeSpec:
       path: test trigger condition probe path to check, default is /
       port: test trigger condition probe port to connect
       headers: test trigger condition probe headers to submit
+```
+
+#### Action Parameters
+
+Action parameters are used to pass config and tag values to the test execution workflow. You can specify either text values or 
+jsonpath expression in a form of `jsonpath={.metadata.name}`. The data will be taken from the resource object of the trigger event. 
+Check the kubernets docs [JsonPath Expression](https://kubernetes.io/docs/reference/kubectl/jsonpath/).
+
+```yaml
+actionParameters:
+  config: map of key-value pairs
+  tags: map of key-value pairs 
+```
+
+for example:
+
+```yaml
+actionParameters:
+  config:
+    environment: production
+  tags:
+    trigger: jsonpath={.metadata.name}
 ```
 
 ### Supported Values
@@ -183,7 +206,12 @@ spec:
     name: k6-smoke-test
   event: event-end-test-success
   action: run
-  execution: testworkflow
+  actionParameters:
+     config:
+      environment: production
+    tags:
+      trigger: jsonpath={.metadata.name}
+ execution: testworkflow
   testSelector:
     name: postman-smoke-tests
     namespace: testkube
