@@ -1,4 +1,4 @@
-# Testkube Standalone Agent 
+# Testkube Agent 
 
 ## Overview
 

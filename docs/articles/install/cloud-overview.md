@@ -1,11 +1,5 @@
 # Testkube Cloud Installation Overview
 
-Testkube contains two main components:
-
-- The **Testkube Control Plane** which includes the [Dashboard](/articles/testkube-dashboard-explore), Storage for Results/Artifacts, User/Role mgmt, Insights, etc.
-- The **Testkube Agent** which executes your tests, collects test execution logs/results and listens for Kubernetes Events. The agent is _always_
-  deployed in your own infrastructure.
-
 When using Testkube Cloud, the Testkube Control Plane is managed by the Testkube team, you only have to install the
 Testkube Agent in your infrastructure wherever you want to run your tests.
 

@@ -2,6 +2,8 @@
 
 The below table shows a feature comparison between deploying the Testkube Agent in Standalone Mode vs Connected Mode - [Read More](/articles/install/standalone-agent).
 
+The Control Plane column applies to both On-Prem and Cloud deployments of the Control Plane.
+
 | Features                             |       Testkube Agent <br/> in standalone mode        | Testkube Agent(s) <br/>connected to Control Plane |                       Read More                        |
 |:-------------------------------------|:----------------------------------------------------:|:-------------------------------------------------:|:------------------------------------------------------:|
 | **TestWorkflows**                    | :white_check_mark: - :warning: see limitations above |                :white_check_mark:                 |            [Docs](/articles/test-workflows)            |
