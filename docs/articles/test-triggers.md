@@ -116,10 +116,10 @@ for example:
 actionParameters:
   config:
     environment: production
-    datavalue: jsonpath={.data.test} # if the resource is a configmap with key `test`
+    datavalue: jsonpath={.data.test} # if the resource object is a configmap with key `test`
   tags:
     workflow: core
-    trigger: jsonpath={.metadata.name}
+    trigger: jsonpath={.metadata.namespace} # namespace of the resource object
 ```
 
 ### Supported Values
