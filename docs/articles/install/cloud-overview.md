@@ -1,6 +1,6 @@
-# Testkube Cloud Installation Overview
+# Testkube Cloud 
 
-When using Testkube Cloud, the Testkube Control Plane is managed by the Testkube team, you only have to install the
+When using Testkube Cloud, the Testkube team manages the Testkube Control Plane, you only have to install the
 Testkube Agent in your infrastructure wherever you want to run your tests.
 
 ## Getting Started

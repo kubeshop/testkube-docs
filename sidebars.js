@@ -33,11 +33,11 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Installing",
+      label: "Installation",
       items: [
         {
           type: "doc",
-          label: "Installation Overview",
+          label: "Overview",
           id: "articles/install/overview",
         },
         {

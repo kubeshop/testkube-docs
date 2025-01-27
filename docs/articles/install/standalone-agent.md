@@ -17,7 +17,7 @@ deployment of the Testkube Control Plane to learn how to use the Agent in Connec
 See the [Feature Comparison](feature-comparison) to understand the differences in functionality between these two modes.
 :::
 
-### Running in Standalone Mode
+## Running in Standalone Mode
 
 When running the Agent in Standalone Mode there is no [Dashboard](/articles/testkube-dashboard-explore) and is has to be managed entirely through the [Testkube CLI](/articles/cli). 
 

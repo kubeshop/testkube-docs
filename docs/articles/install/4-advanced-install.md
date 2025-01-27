@@ -1,4 +1,4 @@
-# Customized Installation
+# Customized Testkube Installation
 
 A variety of advanced topics to further customize your Testkube On Prem deployment.
 
