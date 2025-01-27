@@ -283,7 +283,7 @@ Make sure to double-escape brackets when specifying values that themselves speci
 #### Using Config and Parameters to specify Webhook variables
 
 If you want to specify variables to use inside of Webhook fields, you can specify `config` section.
-They can be defined in the Webhook specification or taken from the Kubernetes secret. 
+They can be defined in the Webhook specification or taken from the Kubernetes secret.
 You can reference them using builtin `Config` dictionary and golang template expression:
 
 ```yaml
@@ -619,7 +619,9 @@ testkube update webhook --disable=false --name "${WEBHOOK_NAME}"
 
 <TabItem value="api" label="API">
 
-When automating your operations on webhooks, you can also use the API. For more details, please consult the "Core OSS OpenAPI Definion" page, respectively the "OpenAPI Specification" for Testkube Pro and Enterprise, under the Reference tab on the left. The field specifying this on the webhooks is called `disabled` and is expecting a value of type `boolean`.
+When automating your operations on webhooks, you can also use the Testkube REST API. For more details, please consult the [Testkube OpenAPI Definitions](/openapi/overview) page.
+
+The field specifying this on the webhooks is called `disabled` and is expecting a value of type `boolean`.
 
 Keep in mind, that enabling the webhook again from the API will require specifying `"disabled":false`, simply deleting the field from the object is interpreted as not setting any value on it.
 

@@ -1,9 +1,8 @@
 # Configure Identity Providers
 
-You can configure Testkube Pro On-Prem to authenticate users using different
-identity providers.
+You can configure Testkube On-Prem to authenticate users using different identity providers.
 
-For a list of all supported identity providers and example configurations
+For a list of all supported identity providers and example configurations,
 see the [Dex connectors guide](https://dexidp.io/docs/connectors/).
 
 ### Static Users
