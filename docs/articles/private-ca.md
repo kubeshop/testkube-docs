@@ -11,7 +11,7 @@ would like the installation to trust.
 
 After that you will need to create a secret with the CA bundle under the
 `ca.crt` key in the namespace(s) with the Helm releases both for the agent and
-the enterprise control plane.
+the control plane.
 
 ```sh
 kubectl -n <namespace> create secret generic <secret name> --from-file=ca.crt=<path to the file with the ca bundle>

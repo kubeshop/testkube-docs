@@ -1,7 +1,7 @@
 # Testkube Cloud Control Plane
 
 If you don't want to host the Testkube Control Plane in your infrastructure, you can use the Cloud Control Plane provided
-by the Testkube team at https://app.testkube.ui. In this scenario, you only have to install Testkube Agent(s) in 
+by the Testkube team at https://app.testkube.io. In this scenario, you only have to install Testkube Agent(s) in 
 your infrastructure wherever you want to run your tests. 
 
 ## Getting Started
