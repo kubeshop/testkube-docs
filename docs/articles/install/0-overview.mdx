@@ -25,11 +25,13 @@
 
 You can deploy Testkube in one of the following ways:
 
-- **Testkube On-Prem** - the Control Plane is installed and managed by you in your own infrastructure.
-- **Testkube Standalone Agent** - the Agent runs without a Control Plane for single cluster usage scenarios.
-- **Testkube Cloud Control Plane** - the Control Plane runs in the cloud and is managed by the Testkube Team.
+|                                  | Testkube Agent | Testkube Control Plane | Testkube Dashboard | Testkube CLI |
+|----------------------------------|:--------------:|:----------------------:|:------------------:|:------------:|
+| **Testkube On-Prem**             | Hosted by you  |     Hosted by you      |         ✅          |      ✅       |
+| **Testkube Cloud Control Plane** | Hosted by you  |   Hosted by Testkube   |         ✅          |      ✅       |
+| **Testkube Standalone Agent**    | Hosted by you  |           ❌            |         ❌          |      ✅       |
 
-High-level deployment architecture and how to get started with each of these is described below.
+The high-level deployment architecture and how to get started with each of these is described below.
 
 :::note
 An architectural overview of Testkube and its components is available in the [Architecture Reference](../architecture).

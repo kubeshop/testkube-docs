@@ -98,9 +98,9 @@ With the CLI, you can provide the variables with **--config** arguments.
 To use secrets, you'd have to use the `--env-var` or `--global-var` option instead as
 they are environment variables.
 
-### Running with Execute (Test Suite Like)
+### Running with `Execute` 
 
-Configurable Test Workflows may also be parameterized in the **execute** step. Use this for passing dynamic data.
+Configurable Test Workflows may also be parameterized in `execute` steps ([Read More](test-workflows-test-suites)). Use this for passing dynamic data.
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1

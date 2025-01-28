@@ -324,7 +324,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Test Suites",
+              label: "Workflow Orchestration",
               id: "articles/test-workflows-test-suites",
             },
             {

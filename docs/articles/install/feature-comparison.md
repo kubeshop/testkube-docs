@@ -1,4 +1,4 @@
-# Testkube Feature Comparison
+# Testkube Agent Feature Comparison
 
 The below table shows a feature comparison between deploying the Testkube Agent in Standalone Mode vs Connected Mode - [Read More](/articles/install/standalone-agent).
 
