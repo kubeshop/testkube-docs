@@ -3,9 +3,9 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:317d0d151575c96e6a9563692e17d173c47ae227c844c8ffb348323df21b38b9</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/high-1-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/medium-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
-<tr><td>platform</td><td>linux/arm64</td></tr>
-<tr><td>size</td><td>12 MB</td></tr>
+<tr><td>digest</td><td><code>sha256:5d55bcc20db209efb1fa0a866d4d000e4620f1b8831da40ab4d0293e3a1d1524</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/high-1-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/medium-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
+<tr><td>platform</td><td>linux/amd64</td></tr>
+<tr><td>size</td><td>14 MB</td></tr>
 <tr><td>packages</td><td>67</td></tr>
 </table>
 </details></table>
@@ -74,6 +74,45 @@ An attacker may cause an HTTP/2 endpoint to read arbitrary amounts of header dat
 <blockquote>
 
 The protojson.Unmarshal function can enter an infinite loop when unmarshaling certain forms of invalid JSON. This condition can occur when unmarshaling into a message which contains a google.protobuf.Any value, or when the UnmarshalOptions.DiscardUnknown option is set.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/U-2-lightgrey"/><strong>stdlib</strong> <code>1.23.4</code> (golang)</summary>
+
+<small><code>pkg:golang/stdlib@1.23.4</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-45341?s=golang&n=stdlib&t=golang&vr=%3E%3D1.23.0-0%2C%3C1.23.5"><img alt="unspecified : CVE--2024--45341" src="https://img.shields.io/badge/CVE--2024--45341-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.23.0-0<br/><1.23.5</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.23.5</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A certificate with a URI which has a IPv6 address with a zone ID may incorrectly satisfy a URI name constraint that applies to the certificate chain.
+
+Certificates containing URIs are not permitted in the web PKI, so this only affects users of private PKIs which make use of URIs.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2024-45336?s=golang&n=stdlib&t=golang&vr=%3E%3D1.23.0-0%2C%3C1.23.5"><img alt="unspecified : CVE--2024--45336" src="https://img.shields.io/badge/CVE--2024--45336-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.23.0-0<br/><1.23.5</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.23.5</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The HTTP client drops sensitive headers after following a cross-domain redirect. For example, a request to a.com/ containing an Authorization header which is redirected to b.com/ will not send that header to b.com.
+
+In the event that the client received a subsequent same-domain redirect, however, the sensitive headers would be restored. For example, a chain of redirects from a.com/, to b.com/1, and finally to b.com/2 would incorrectly send the Authorization header to b.com/2.
 
 </blockquote>
 </details>
