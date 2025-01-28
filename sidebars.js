@@ -41,7 +41,7 @@ const sidebars = {
           id: "articles/install/overview",
         }, {
           type: "category",
-          label: "Testkube On-Prem",
+          label: "On-Prem Control Plane",
           items: [
             {
               type: "doc",
@@ -140,7 +140,7 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Testkube Standalone Agent",
+          label: "Standalone Agent",
           items: [
             {
               type: "doc",
@@ -166,7 +166,7 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "Testkube Cloud Control Plane",
+          label: "Cloud Control Plane",
           id: "articles/install/cloud-overview",
         },
         "articles/install/faq",
