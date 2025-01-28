@@ -14,7 +14,7 @@ You can create a new environment from the "Environments" drop down in the header
 
 ### Cloud Options
 
-When creating a new environment in Testkube Cloud, you will first be prompted with the following options:
+When creating a new environment in the Testkube Cloud Control Plane, you will first be prompted with the following options:
 
 1. **I have a K8s Cluster** - select this if you have a cluster where you can install the Testkube Agent for your
    environment.
@@ -29,7 +29,7 @@ When creating a new environment in Testkube Cloud, you will first be prompted wi
 
 ### Testkube Demo Environment
 
-The Testkube Demo environment available in Testkube Cloud is a great way to explore the functionality provided by Testkube.
+The Testkube Demo environment available in the Testkube Cloud Control Plane is a great way to explore the functionality provided by Testkube.
 It contains a large collection of Workflows for different testing tools, with corresponding execution results and
 Test Insights.
 

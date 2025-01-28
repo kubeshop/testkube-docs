@@ -23,7 +23,7 @@ Cloud, the Dashboard and control-plane are hosted and entitlement is done intern
 
 The diagram below shows a breakdown of Testkube components and their network connections/dependencies
 when running Testkube entirely on-prem. As in the previous diagram, the License Server does not
-apply when using Testkube Cloud.
+apply when using the Testkube Cloud Control Plane.
 
 The Testkube Dashboard connects to the Control Plane API via an L7 Load Balancer that needs to
 expose ports for both HTTPS and WSS endpoints.

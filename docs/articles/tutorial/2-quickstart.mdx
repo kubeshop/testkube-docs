@@ -10,7 +10,7 @@ integrate it with your CI/CD pipeline(s).
 
 Testkube has flexibility in its deployments (learn more in the [Installation Overview](/articles/install/overview)).
 - **Testkube On-Prem** runs both the Control Plane and Test Execution Agents in your infrastructure.
-- **Testkube Cloud** runs the Control Plane in our cloud and the Test Execution Agents in your infrastructure.
+- **Testkube Cloud Control Plane** runs the Control Plane in our cloud and the Test Execution Agents in your infrastructure.
 
 <Tabs groupId="tutorial-install-cli">
 <TabItem value="on-prem" label="Testkube On-Prem" default>
@@ -26,9 +26,9 @@ You will now see the Testkube Dashboard for the default environment created in y
 ![The dashboard](./img/new-environment-dashboard.png)
 
 </TabItem>
-<TabItem value="cloud" label="Testkube Cloud">
+<TabItem value="cloud" label="Testkube Cloud Control Plane">
 
-  1. Sign in to [Testkube Cloud](https://app.testkube.io).
+  1. Sign in to the [Testkube Cloud Control Plane](https://app.testkube.io).
   2. Click on the `Let's get started` button.
   3. Enter an environment name and click `Create environment`.
   4. Run the generated `testkube pro init` command in your terminal to install the Testkube Agent.
@@ -40,7 +40,7 @@ You will now see the Testkube Dashboard for the default environment created in y
 </TabItem>
 <TabItem value="demo" label="Testkube Demo Environment (no install)">
 
-The Testkube Demo environment available in Testkube Cloud is a great way to explore the functionality provided by
+The Testkube Demo environment available in the Testkube Cloud Control Plane is a great way to explore the functionality provided by
 Testkube without having to install anything in your infrastructure. It contains a large collection of Workflows for
 different testing tools, with corresponding execution results and Test Insights for you to explore.
 
@@ -49,7 +49,7 @@ The Demo Environment won't allow you to follow the steps further down in the qui
 those steps require your own environment.
 :::
 
-1. Sign in to [Testkube Cloud](https://app.testkube.io).
+1. Sign in to the [Testkube Cloud Control Plane](https://app.testkube.io).
 2. Once authenticated, [go to the demo environment.](https://app.testkube.io/demo-environment) - (there are multiple in-app
   prompts for this also).
 

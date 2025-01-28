@@ -39,103 +39,108 @@ const sidebars = {
           type: "doc",
           label: "Overview",
           id: "articles/install/overview",
-        },
-        {
-          type: "doc",
-          label: "Evaluation",
-          id: "articles/install/install-with-cli",
-        },
-        {
+        }, {
           type: "category",
-          label: "Production",
+          label: "Testkube On-Prem",
           items: [
             {
               type: "doc",
-              label: "Base Install",
-              id: "articles/install/install-with-helm",
+              label: "Evaluation",
+              id: "articles/install/install-with-cli",
             },
             {
-              type: "doc",
-              label: "Custom Installation",
-              id: "articles/install/advanced-install",
+              type: "category",
+              label: "Production",
+              items: [
+                {
+                  type: "doc",
+                  label: "Base Install",
+                  id: "articles/install/install-with-helm",
+                },
+                {
+                  type: "doc",
+                  label: "Custom Installation",
+                  id: "articles/install/advanced-install",
+                },
+              ],
+            },
+            {
+              type: "category",
+              label: "Advanced Guides",
+              items: [
+                "articles/install/multi-cluster",
+                {
+                  type: "doc",
+                  label: "Using Global Parameters in Testkube Helm Charts",
+                  id: "articles/global-parameters-in-testkube-helm-charts",
+                },
+                {
+                  type: "doc",
+                  label: "Configure Identity Providers",
+                  id: "testkube-pro-on-prem/articles/auth",
+                },
+                {
+                  type: "doc",
+                  label: "SCIM Integration",
+                  id: "testkube-pro-on-prem/articles/scim",
+                },
+                {
+                  type: "doc",
+                  label: "S3 with IAM Authentication",
+                  id: "articles/install/s3-storage",
+                },
+                {
+                  type: "doc",
+                  label: "Using Istio",
+                  id: "articles/istio",
+                },
+                {
+                  type: "doc",
+                  label: "Using Vault",
+                  id: "articles/vault-install",
+                },
+                {
+                  type: "doc",
+                  label: "Using a Private CA",
+                  id: "articles/private-ca",
+                },
+                {
+                  type: "doc",
+                  label: "Image Inventory",
+                  id: "articles/inventory/images",
+                },
+                {
+                  type: "doc",
+                  label: "Using an external MongoDB",
+                  id: "articles/mongodb-administration",
+                },
+                {
+                  type: "doc",
+                  label: "Ephemeral Environments",
+                  id: "articles/ephemeral-environments",
+                },
+                {
+                  type: "doc",
+                  label: "High Availability Configuration",
+                  id: "articles/ha",
+                },
+                {
+                  type: "doc",
+                  label: "Pod Security Standards",
+                  id: "articles/pod-security-standards",
+                },
+                {
+                  type: "link",
+                  label: "Testkube with Kind",
+                  href: "https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker",
+                },
+              ],
             },
           ],
         },
         {
           type: "category",
-          label: "Advanced Guides",
-          items: [
-            "articles/install/multi-cluster",
-            {
-              type: "doc",
-              label: "Using Global Parameters in Testkube Helm Charts",
-              id: "articles/global-parameters-in-testkube-helm-charts",
-            },
-            {
-              type: "doc",
-              label: "Configure Identity Providers",
-              id: "testkube-pro-on-prem/articles/auth",
-            },
-            {
-              type: "doc",
-              label: "SCIM Integration",
-              id: "testkube-pro-on-prem/articles/scim",
-            },
-            {
-              type: "doc",
-              label: "S3 with IAM Authentication",
-              id: "articles/install/s3-storage",
-            },
-            {
-              type: "doc",
-              label: "Using Istio",
-              id: "articles/istio",
-            },
-            {
-              type: "doc",
-              label: "Using Vault",
-              id: "articles/vault-install",
-            },
-            {
-              type: "doc",
-              label: "Using a Private CA",
-              id: "articles/private-ca",
-            },
-            {
-              type: "doc",
-              label: "Image Inventory",
-              id: "articles/inventory/images",
-            },
-            {
-              type: "doc",
-              label: "Using an external MongoDB",
-              id: "articles/mongodb-administration",
-            },
-            {
-              type: "doc",
-              label: "Ephemeral Environments",
-              id: "articles/ephemeral-environments",
-            },
-            {
-              type: "doc",
-              label: "High Availability Configuration",
-              id: "articles/ha",
-            },
-            {
-              type: "doc",
-              label: "Pod Security Standards",
-              id: "articles/pod-security-standards",
-            },
-            {
-              type: "link",
-              label: "Testkube with Kind",
-              href: "https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker",
-            },
-          ],
-        },
-        {
-          type: "category",
-          label: "Testkube Agent",
+          label: "Testkube Standalone Agent",
           items: [
             {
               type: "doc",
@@ -161,7 +166,7 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "Cloud Control Plane",
+          label: "Testkube Cloud Control Plane",
           id: "articles/install/cloud-overview",
         },
         "articles/install/faq",

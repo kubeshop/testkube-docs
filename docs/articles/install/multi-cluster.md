@@ -5,7 +5,7 @@ Conceptually, each cluster maps to an Environment within Testkube.
 
 :::info
 The commands below that connect to on-prem will likely need to add
-an `--agent-uri` flag or they will instead by default connect to Testkube Cloud.
+an `--agent-uri` flag or they will instead by default connect to the Testkube Cloud Control Plane.
 :::
 
 ## Deploy an agent that will join Testkube
@@ -18,7 +18,8 @@ will provide you with the command to deploy the corresponding Testkube Agent:
 
 #### Multiple agents within the same cluster
 
-It's possible to install multiple agents within the same cluster. This requires modified values for the second agent to prevent creating cluster-wide objects twice which is disallowed by Kubernetes. Make the following changes to the values of **the second agent**:
+It's possible to install multiple agents within the same cluster. This requires modified values for the second agent to 
+prevent creating cluster-wide objects twice which is disallowed by Kubernetes. Make the following changes to the values of **the second agent**:
 
 ```yaml {2}
 testkube-operator:
