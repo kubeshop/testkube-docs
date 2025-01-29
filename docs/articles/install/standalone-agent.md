@@ -10,7 +10,7 @@ can be deployed in two modes:
 - **Connected Mode** - connected to a Testkube Control Plane.
 
 This document shows how to use the Agent in Standalone mode, see the corresponding documentation for 
-[On Prem](/articles/install/onprem-overview) and [Cloud](/articles/install/cloud-overview)
+[On Prem](/articles/install/overview#on-prem-control-plane) and [Cloud](/articles/install/cloud-overview)
 deployment of the Testkube Control Plane to learn how to use the Agent in Connected Mode.
 
 :::tip

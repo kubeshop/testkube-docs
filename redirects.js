@@ -274,6 +274,10 @@ const redirects = [
     to: "/articles/templates",
   },
   {
+    from: "/articles/install/onprem-overview",
+    to: "/articles/install/overview"
+  },
+  {
     from: [
       "/testkube-cloud/intro",
       "/testkube-cloud",
@@ -424,7 +428,7 @@ const redirects = [
       "/testkube-pro-on-prem/articles/migrating-from-oss-to-pro",
       "/testkube-enterprise/articles/migrating-from-oss-to-pro",
     ],
-    to: "/articles/open-source-or-pro",
+    to: "/articles/open-source",
   },
   {
     from: ["/articles/testkube-oss", "/articles/install/install-oss"],

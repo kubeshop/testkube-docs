@@ -947,7 +947,7 @@ const sidebars = {
         {
           type: "doc",
           label: "Overview",
-          id: "articles/open-source-or-pro",
+          id: "articles/open-source",
         },
         {
           type: "doc",

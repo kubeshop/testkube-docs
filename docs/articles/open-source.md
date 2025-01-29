@@ -1,7 +1,7 @@
 # Testkube Open Source 
 
-The Testkube Agent is 100% Open Source and can be [deployed in standalone mode](install/standalone-agent) without being managed
-by the commercial Control Plane.
+The Testkube Agent is 100% Open Source and can be [deployed in standalone mode](install/standalone-agent) without being connected
+to the commercial Control Plane.
 
 Once deployed, you can interact with the agent through the [Testkube CLI](install/cli) or directly via the
 [Agent API](/openapi/overview#agent-api).
