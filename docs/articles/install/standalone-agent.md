@@ -39,6 +39,11 @@ Testkube Control Plane:
 - **Parameterization** with `matrix` (and `count`, `shards`, `maxCount`) - see [Sharding & Matrix Params](/articles/test-workflows-matrix-and-sharding.mdx)
 - **Spawning dependencies** for your tests with `services` - see [Services](/articles/test-workflows-services.mdx)
 
+:::tip
+The Open Source Agent provides **extensive** test execution capabilities even without these features available,
+check out the [Test Workflows Overview](/articles/test-workflows) to get started.
+:::
+
 ## Installing the Standalone Agent
 
 The following steps are required to install the Standalone Agent into a Kubernetes Cluster:
