@@ -33,22 +33,16 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Installing",
+      label: "Installation",
       items: [
         {
           type: "doc",
-          label: "Installation Overview",
+          label: "Overview",
           id: "articles/install/overview",
-        },
-        {
+        }, {
           type: "category",
-          label: "Testkube On Premise",
+          label: "On-Prem Control Plane",
           items: [
-            {
-              type: "doc",
-              label: "Overview",
-              id: "articles/install/onprem-overview",
-            },
             {
               type: "doc",
               label: "Evaluation",
@@ -146,30 +140,34 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Testkube Cloud",
+          label: "Standalone Agent",
           items: [
             {
               type: "doc",
               label: "Overview",
-              id: "articles/install/cloud-overview",
+              id: "articles/install/standalone-agent",
             },
-
             {
               type: "doc",
-              label: "Testkube Docker Agent",
+              label: "Feature Comparison",
+              id: "articles/install/feature-comparison",
+            },
+            {
+              type: "doc",
+              label: "Docker Install",
               id: "articles/install/docker-agent",
             },
             {
               type: "doc",
-              label: "Agent with Local Kubernetes",
+              label: "Local Kubernetes Install",
               id: "articles/install/quickstart-no-k8s",
             },
           ],
         },
         {
           type: "doc",
-          label: "Testkube Open Source",
-          id: "articles/install/standalone-agent",
+          label: "Cloud Control Plane",
+          id: "articles/install/cloud-overview",
         },
         "articles/install/faq",
         {
@@ -273,7 +271,7 @@ const sidebars = {
           type: "category",
           label: "Test Workflows",
           items: [
-            { type: "doc", label: "Overview", id: "articles/test-workflows" },
+            {type: "doc", label: "Overview", id: "articles/test-workflows"},
             {
               type: "doc",
               label: "Basic Examples",
@@ -326,7 +324,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Test Suites",
+              label: "Workflow Orchestration",
               id: "articles/test-workflows-test-suites",
             },
             {
@@ -769,8 +767,8 @@ const sidebars = {
         id: "articles/integrations",
       },
       items: [
-        { type: "doc", label: "GitHub", id: "articles/github-actions" },
-        { type: "doc", label: "GitLab", id: "articles/gitlab" },
+        {type: "doc", label: "GitHub", id: "articles/github-actions"},
+        {type: "doc", label: "GitLab", id: "articles/gitlab"},
         {
           type: "doc",
           label: "Jenkins Pipelines",
@@ -781,7 +779,7 @@ const sidebars = {
           label: "Jenkins UI",
           id: "articles/jenkins-ui",
         },
-        { type: "doc", label: "Azure DevOps", id: "articles/azure" },
+        {type: "doc", label: "Azure DevOps", id: "articles/azure"},
         {
           type: "link",
           label: "BitBucket",
@@ -794,7 +792,7 @@ const sidebars = {
           label: "CircleCI",
           id: "articles/circleci",
         },
-        { type: "doc", label: "ArgoCD", id: "articles/argocd-integration" },
+        {type: "doc", label: "ArgoCD", id: "articles/argocd-integration"},
         {
           type: "doc",
           label: "Argo Rollouts",
@@ -805,21 +803,21 @@ const sidebars = {
           label: "Argo Workflows",
           id: "articles/argoworkflows-integration",
         },
-        { type: "doc", label: "Flux", id: "articles/flux-integration" },
-        { type: "doc", label: "CDEvents", id: "articles/cd-events" },
-        { type: "doc", label: "Tekton", id: "articles/tekton" },
+        {type: "doc", label: "Flux", id: "articles/flux-integration"},
+        {type: "doc", label: "CDEvents", id: "articles/cd-events"},
+        {type: "doc", label: "Tekton", id: "articles/tekton"},
         {
           type: "doc",
           label: "Slack Integration",
           id: "articles/slack-integration",
         },
-        { type: "doc", label: "Prometheus", id: "articles/metrics" },
+        {type: "doc", label: "Prometheus", id: "articles/metrics"},
         {
           type: "doc",
           label: "Kubernetes Events",
           id: "articles/k8s-events",
         },
-        { type: "doc", label: "Webhooks", id: "articles/webhooks" },
+        {type: "doc", label: "Webhooks", id: "articles/webhooks"},
         {
           type: "link",
           label: "PagerDuty",
@@ -834,7 +832,7 @@ const sidebars = {
           description:
             "Integrating Testkube and Zapier for Instant Email Alerts",
         },
-        { type: "doc", label: "Grafana", id: "articles/grafana" },
+        {type: "doc", label: "Grafana", id: "articles/grafana"},
         {
           type: "doc",
           label: "Atlassian Jira",
@@ -949,7 +947,7 @@ const sidebars = {
         {
           type: "doc",
           label: "Overview",
-          id: "articles/open-source-or-pro",
+          id: "articles/open-source",
         },
         {
           type: "doc",
@@ -1064,7 +1062,7 @@ const sidebars = {
             },
           ],
         },
-        { type: "doc", label: "Deprecations", id: "articles/deprecations" },
+        {type: "doc", label: "Deprecations", id: "articles/deprecations"},
         {
           type: "doc",
           label: "Generating Test CRDs",
@@ -1082,7 +1080,7 @@ const sidebars = {
           id: "articles/testkube-dashboard-general-settings",
         },
 
-        { type: "doc", label: "Templates", id: "articles/templates" },
+        {type: "doc", label: "Templates", id: "articles/templates"},
         "articles/legacy-architecture",
         {
           type: "doc",

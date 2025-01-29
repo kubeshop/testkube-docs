@@ -1,31 +1,31 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Test Workflows - Test Suites
+# Advanced Workflow Orchestration
 
 import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx"
 
 <RequiresCommercialWorkflows/>
 
-With Test Workflows it is possible to run downstream Test Workflows and Tests with `execute` operation,
-similarly to what you can do in Test Suites.
+With Test Workflows it is possible to run downstream Test Workflows and Tests with `execute` operation, allowing you
+to create a Workflow that orchestrates the execution of other Workflows, both in sequence and parallel.
 
 ## Advantages over original Test Suite
 
-As it is regular Test Workflow, where a single step is dispatching downstream Test Workflows and Tests,
+As it is a regular Test Workflow, where a single step is dispatching downstream Test Workflows and Tests,
 the execution is very flexible. You can:
 
-* Fetch input data before (i.e. by using `curl`/`wget` to download data, or fetching Git repository)
-* Run setup operations (i.e. start shared instance of database, or generate API key)
-* Process the results (i.e. by notifying about the status)
-* Run other tests based on the previous results
-* Trigger Workflows in other environments
-* Nest workflows - workflow triggering workflow(s), triggering other workflow(s)
+* Fetch input data before (i.e. by using `curl`/`wget` to download data, or fetching Git repository).
+* Run setup operations (i.e. start shared instance of database, or generate API key).
+* Process the results (i.e. by notifying about the status).
+* Run other tests based on the previous results.
+* Trigger Workflows in other environments.
+* Nest Workflows - Workflow triggering Workflow(s), triggering other Workflow(s).
+* Run any number of Workflows both in sequence or parallel.
+* Run Workflows based on labels - for dynamic selection of which Workflows to run.
 
 :::warning
-
-Test Workflows is our long-term solution, so keep in mind that the original Test Suites are being deprecated - [Read More   ](/articles/legacy-features).
-
+Test Workflows are our long-term solution, so keep in mind that the original Test Suites are being deprecated - [Read More   ](/articles/legacy-features).
 :::
 
 ## Syntax
@@ -80,13 +80,13 @@ spec:
 </TabItem>
 </Tabs>
 
-### Running Test Workflows
+### Running Test Workflows with `execute`
 
 To run Test Workflow as part of the `execute` step, you have to add its reference in the `workflows` list.
 
 You need to provide `name`, along with optional `config` values for parametrization.
 
-### Running Tests
+### Running Tests with `execute`
 
 :::warning
 Tests are being deprecated from Testkube - so only use this possibility if/while transitioning to Workflows
@@ -138,8 +138,33 @@ spec:
 </TabItem>
 </Tabs>
 
+## Parallel / Sequential Execution
+
+Using multiple `execute` steps in your Workflow allows you to orchestrate the execution of other Workflows both in parallel and in sequence. For example,
+the below Workflow first runs the `cure-with-nginx-service` and `junit5-junit` Workflows in parallel, then the `cypress-browsers-matrix` and
+`nunit-junit-report` workflows in sequence.
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: composite-workflow
+spec:
+  steps:
+    - execute:
+        workflows:
+          - name: curl-with-nginx-service
+          - name: junit5-junit
+    - execute:
+        workflows:
+          - name: cypress-browsers-matrix
+    - execute:
+        workflows:
+          - name: nunit-junit-report
+```
+
 ## Nesting workflows
-Workflows can be nested - workflow can execute workflow(s) executing other workflow(s). [**Parallelism**](#controlling-the-concurrency-level) can then be used to control the execution flow.
+Workflows can be nested, a Workflow can execute other Workflow(s) executing other Workflow(s). [**Parallelism**](#controlling-the-concurrency-level) can then be used to control the execution flow.
 
 Example:
 
@@ -204,7 +229,7 @@ spec:
               core-tests: workflows
 ```
 
-Or using Kubernetes label expressions 
+Or using Kubernetes label expressions
 ```yaml
 kind: TestWorkflow
 apiVersion: testworkflows.testkube.io/v1

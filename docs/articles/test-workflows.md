@@ -1,6 +1,7 @@
 # Test Workflows
 
 ## Introduction
+
 Test Workflows are an easy and extremely powerful way to define and run your tests in 
 your Kubernetes clusters. Thanks to their flexibility, Test Workflows solve many of the 
 problems that can occur with standard Tests, including:
@@ -9,6 +10,11 @@ problems that can occur with standard Tests, including:
 - Defining multiple steps for the execution of the tests.
 - Having more control over how your tests are executed, including resource consumption and setup/tearDown processes.
 - Being able to configure tool-specific commands and arguments.
+
+:::note
+Most of the test execution functionality provided by the Test Workflows engine is available for free using the 
+Open Source Testkube Agent in Standalone Mode - [Read More](/articles/install/standalone-agent).      
+:::
 
 ## Test Workflow Structure
 

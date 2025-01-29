@@ -1,15 +1,47 @@
-# Standalone Testkube Agent 
+# Testkube Agent 
 
 ## Overview
 
-The Testkube Agent is Open Source and includes the full test execution and orchestration engine 
-(with some [limitations](/articles/open-source-or-pro#workflow-limitations-in-standalone-mode)). It can 
-be deployed and used without connecting it to a Testkube Control Plane, in which case there is no 
-[Dashboard](/articles/testkube-dashboard-explore) and the Agent has to be managed entirely through the [Testkube CLI](/articles/cli). 
+The Testkube Agent is 100% Open Source and includes the Testkube execution and orchestration engine 
+(with some [limitations](#agent-limitations-in-standalone-mode)). It is _always_ hosted in your infrastructure and 
+can be deployed in two modes:
+
+- **Standalone Mode** - not connected to a Testkube Control Plane.
+- **Connected Mode** - connected to a Testkube Control Plane.
+
+This document shows how to use the Agent in Standalone mode, see the corresponding documentation for 
+[On Prem](/articles/install/overview#on-prem-control-plane) and [Cloud](/articles/install/cloud-overview)
+deployment of the Testkube Control Plane to learn how to use the Agent in Connected Mode.
 
 :::tip
-Check out the [Open Source Overview](/articles/open-source-or-pro) to learn how the Standalone Agent compares to the 
-commercial offering.
+See the [Feature Comparison](feature-comparison) to understand the differences in functionality between these two modes.
+:::
+
+## Running in Standalone Mode
+
+When running the Agent in Standalone Mode there is no [Dashboard](/articles/testkube-dashboard-explore) and is has to be managed entirely through the [Testkube CLI](/articles/cli). 
+
+The following functionality is available directly in the agent in Standalone Mode
+
+- **Test Workflows** : Manage Workflows and Templates, Run/Schedule executions (see below for limitations).
+- **Logs/Artifacts** : Retrieve Workflow executions, logs, artifacts via CLI or API.
+- **Webhooks** : Manage Webhooks that the Agent executes.
+- **Event Triggers** : Manage Event Triggers that the Agent reacts to.
+- **Tests, TestSuites, Sources, Executors** : Deprecated - but still available during a transition period - [Read More](/articles/legacy-features).
+
+### Agent Limitations in Standalone Mode
+
+The following Workflow features are _not_ available when using the Open Source Agent without connecting it to a
+Testkube Control Plane:
+
+- **Complex Test Orchestration** with `execute` - see [Test Suites](/articles/test-workflows-test-suites.mdx)
+- **Parallel execution** with `parallel` - see [Parallelization](/articles/test-workflows-parallel.mdx)
+- **Parameterization** with `matrix` (and `count`, `shards`, `maxCount`) - see [Sharding & Matrix Params](/articles/test-workflows-matrix-and-sharding.mdx)
+- **Spawning dependencies** for your tests with `services` - see [Services](/articles/test-workflows-services.mdx)
+
+:::tip
+The Open Source Agent provides **extensive** test execution capabilities even without these features available,
+check out the [Test Workflows Overview](/articles/test-workflows) to get started.
 :::
 
 ## Installing the Standalone Agent
@@ -19,7 +51,7 @@ The following steps are required to install the Standalone Agent into a Kubernet
 - Create a Testkube namespace.
 - Deploy the Testkube API (see below).
 - Use MongoDB for test results and Minio for artifact storage (optional; disable with --no-minio).
-- Testkube will listen and manage all the CRDs for Tests, TestSuites, Executors, etc… inside the Testkube namespace.
+- Testkube will listen and manage all the CRDs for TestWorkflows, Triggers, Webhooks, etc… inside the Testkube namespace.
 
 Once installed you can verify your installation and check that Testkube is up and running with
 `kubectl get all -n testkube`. Once validated, you're ready to unleash the full potential of Testkube in your environment.
@@ -107,10 +139,12 @@ The Testkube CRDs managed by the Operator are described in [Testkube Custom Reso
 
 ## Connecting to the Testkube Control Plane
 
-In case you decide that you want to go beyond a standalone agent, you can connect it to a Testkube Control Plane.
-The following command which will guide you through the migration process.
+You can connect a standalone Agent to an instance of the Testkube Control Plane to leverage 
+corresponding functionality (see [Feature Comparison](feature-comparison)).
+All Workflow/Trigger/Webhook definitions will be preserved, but historical test execution results and 
+artifacts won't be copied to the control plane.
 
-All test definitions will stay the same, however, historical test results data or artifacts won't be copied to the control plane.
+The following command which will guide you through the migration process:
 
 ```
 testkube pro connect
@@ -392,7 +426,6 @@ testkube-api:
 
 [secrets-endpoint]: /articles/secrets-enable-endpoint
 [secrets-creation]: /articles/secrets-disable-creation
-[oss-vs-pro]: /articles/open-source-or-pro
 [upgrade]: /articles/upgrade-uninstall
 [mongo-config]: https://github.com/bitnami/charts/tree/master/bitnami/mongodb#parameters
 [nats-config]: https://docs.nats.io/running-a-nats-service/nats-kubernetes/helm-charts

@@ -116,11 +116,11 @@ const redirects = [
   },
   {
     from: "/overview/supported-tests",
-    to: "/articles/supported-tests",
+    to: "/articles/examples/overview",
   },
   {
     from: "/overview/testkube-benefits",
-    to: "/articles/testkube-benefits",
+    to: "/articles/testing-pipeline",
   },
   {
     from: [
@@ -274,6 +274,10 @@ const redirects = [
     to: "/articles/templates",
   },
   {
+    from: "/articles/install/onprem-overview",
+    to: "/articles/install/overview"
+  },
+  {
     from: [
       "/testkube-cloud/intro",
       "/testkube-cloud",
@@ -420,11 +424,12 @@ const redirects = [
     from: [
       "/articles/supported-tests",
       "/articles/testkube-benefits",
+      "/articles/migrate-from-oss",
       "/articles/open-source-or-pro",
       "/testkube-pro-on-prem/articles/migrating-from-oss-to-pro",
       "/testkube-enterprise/articles/migrating-from-oss-to-pro",
     ],
-    to: "/articles/migrate-from-oss",
+    to: "/articles/open-source",
   },
   {
     from: ["/articles/testkube-oss", "/articles/install/install-oss"],
@@ -508,7 +513,7 @@ const redirects = [
     to: "/articles/examples/maven-basic",
   },
   {
-    from: "/github",
+    from: ["/github","/articles/run-tests-with-github-actions"],
     to: "/articles/github-actions",
   },
   {

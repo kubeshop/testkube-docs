@@ -1,4 +1,4 @@
-# Customized Installation
+# Customizing your Testkube On-Prem Installation
 
 A variety of advanced topics to further customize your Testkube On Prem deployment.
 
@@ -214,11 +214,11 @@ Testkube enables GitOps practices by storing configuration within custom resourc
 
 ## Bring Your Own Infra
 
-Testkube Enterprise supports integrating with existing infrastructure components such as MongoDB, NATS, Dex, etc. For production environments, it's recommended to use your own infra or to harden the sub-charts.
+Testkube supports integrating with existing infrastructure components such as MongoDB, NATS, Dex, etc. For production environments, it's recommended to use your own infra or to harden the sub-charts.
 
 ### MongoDB
 
-Testkube Enterprise uses MongoDB as a database for storing all the data.
+Testkube uses [MongoDB](https://www.mongodb.com/) as a database for storing all the data.
 By default, it will install a MongoDB instance using the Bitnami MongoDB Helm chart.
 
 If you wish to use an existing MongoDB instance, you can configure the following values:
@@ -248,7 +248,7 @@ testkube-api:
 
 ### NATS
 
-Testkube Enterprise uses NATS as a message broker for communication between API and Agents.
+Testkube uses [NATS](https://nats.io/) as a message broker for communication between API and Agents.
 
 If you wish to use an existing NATS instance, you can configure the following values:
 
@@ -264,7 +264,7 @@ testkube-cloud-api:
 
 ### MinIO
 
-Testkube Enterprise uses MinIO as a storage backend for storing artifacts.
+Testkube uses [MinIO](https://min.io/) as a storage backend for storing artifacts.
 
 If you wish to use an existing MinIO instance, you can configure the following values:
 
@@ -278,7 +278,7 @@ testkube-cloud-api:
 
 ### Dex
 
-Testkube Enterprise uses Dex as an identity provider.
+Testkube uses [Dex](https://dexidp.io/) as an identity provider.
 
 If you wish to use an existing Dex instance, you can configure the following values:
 
@@ -301,7 +301,7 @@ By default, Testkube will work with licenses that require internet connectivity.
 
 [Contact support][contact] if you need an offline license.
 
-Once you obtained an offline license, you should create a Shared Secret and afterwards
+Once you have obtained an offline license, you should create a Shared Secret and afterwards
 
 ```yaml
 global:

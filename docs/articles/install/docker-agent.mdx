@@ -1,10 +1,11 @@
 # Testkube Docker Agent
 
-The Testkube Docker Agent provides a convenient way to evaluate Testkube Cloud as it allows you to run the Testkube Agent directly under
+The Testkube Docker Agent provides a convenient way to evaluate Testkube as it allows you to run the Testkube Agent directly under
 Docker without having to install or manage your own Kubernetes distribution.
 
 :::info
-You can, of course, use the Docker Agent with On Premise installations also, but it is not recommended for production usage - [Read More](#not-for-production-usage)
+You can use the Docker Agent with both Cloud and On Premise deployments of the Control Plane, but it is not recommended
+for production usage - [Read More](#not-for-production-usage)
 :::
 
 ## Resource Allocation
@@ -40,7 +41,7 @@ testkube docker --agent-token=tkcagnt_XXX --org-id=tkcorg_YYY --env-id=tkcenv_ZZ
 You can get the required tokens from the [Agent Information tab](/testkube-pro/articles/environment-management/#agent-information).
 
 :::tip
-When creating a new Environment in the Testkube Dashboard you will be shown the above command with the correct
+When creating a new Environment in the Testkube Dashboard, you will be shown the above command with the correct
 parameters automatically - see [Creating Environments](/testkube-pro/articles/environment-management#creating-a-new-environment).
 :::
 

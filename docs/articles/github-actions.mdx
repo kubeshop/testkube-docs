@@ -2,14 +2,13 @@
 
 The Testkube GitHub Action installs Testkube and enables running any [Testkube CLI](https://docs.testkube.io/cli/testkube) command in a GitHub workflow.
  It is available on [Github Marketplace](https://github.com/marketplace/actions/testkube-action).
-The action provides a flexible way to work with your pipeline and can be used with Testkube Pro, Testkube Pro On-Prem and the open source Testkube platform.
+The action provides a flexible way to work with your pipeline and can be used with both commercial and open source deployments of Testkube.
 
-## Testkube Pro
+## Testkube
 
-### How to configure Testkube CLI action for Testkube Pro and Run a Test Workflow
+### How to configure Testkube CLI action for Testkube and Run a Test Workflow
 
-To use this GitHub Action for the [Testkube Pro](https://app.testkube.io/), you need to create
- an [API token](https://docs.testkube.io/testkube-pro/articles/organization-management/#api-tokens).
+To use this GitHub Action for [Testkube](https://app.testkube.io/), you need to create an [API token](https://docs.testkube.io/testkube-pro/articles/organization-management/#api-tokens).
 Then, pass the **organization** and **environment** IDs, along with the **token** and other parameters specific for your use case.
 
 If a Test Workflow is already created, you may directly run it using the command `testkube run testworkflow TEST_WORKFLOW_NAME -f`.
@@ -25,7 +24,7 @@ steps:
       token: tkcapi_0123456789abcdef0123456789abcd
 
   - run: |
-      testkube run testworkflow TEST_WORKFLOW_NAME -f 
+      testkube run testworkflow TEST_WORKFLOW_NAME -f
 
 ```
 It is recommended that sensitive values should never be stored as plaintext in workflow files, but rather
@@ -41,15 +40,15 @@ steps:
       token: ${{ secrets.TkToken }}
 
   - run: |
-      testkube run testworkflow TEST_WORKFLOW_NAME -f 
+      testkube run testworkflow TEST_WORKFLOW_NAME -f
 ```
 
-## Testkube Core OSS
+## Testkube Open Source
 
 ### How to Configure Testkube CLI Actions for Testkube Core OSS and Run a Test Workflow
 
 To connect to the self-hosted instance, you need to have **kubectl** configured for accessing your Kubernetes cluster, and simply passing optional namespace,
- if Testkube is not deployed in the default **testkube** namespace. 
+ if Testkube is not deployed in the default **testkube** namespace.
 You can also specify a particular Testkube CLI or API version (not to be confused with the Helm chart one). If the version is omitted, then the latest version is used.
 The list of [releases] (https://github.com/kubeshop/testkube/releases) can be found in the Testkube Github repository.
 
@@ -64,7 +63,7 @@ steps:
       version: 2.0.11
 
   - run: |
-      testkube run testworkflow TEST_WORKFLOW_NAME -f 
+      testkube run testworkflow TEST_WORKFLOW_NAME -f
 
 ```
 
@@ -96,7 +95,7 @@ steps:
   - uses: kubeshop/setup-testkube@v1
     -
   - run: |
-      testkube run testworkflow TEST_WORKFLOW_NAME -f 
+      testkube run testworkflow TEST_WORKFLOW_NAME -f
 ```
 
 ### How to Connect to GKE (Google Kubernetes Engine) Cluster and Run a Test Workflow
@@ -128,7 +127,7 @@ steps:
 
   - uses: kubeshop/setup-testkube@v1
   - run: |
-      testkube run testworkflow TEST_WORKFLOW_NAME -f 
+      testkube run testworkflow TEST_WORKFLOW_NAME -f
 ```
 Please consult the official documentation from GitHub on how to connect to GKE for more information
  [here](https://docs.github.com/en/actions/deployment/deploying-to-google-kubernetes-engine).
@@ -174,5 +173,5 @@ jobs:
 
       - uses: kubeshop/setup-testkube@v1
       - run: |
-          testkube run testworkflow TEST_WORKFLOW_NAME -f 
+          testkube run testworkflow TEST_WORKFLOW_NAME -f
 ```
