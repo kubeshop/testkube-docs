@@ -6,7 +6,7 @@
 
     Testkube contains two main components:
 
-    1. The **Testkube Control Plane**, which includes the [Dashboard](/articles/testkube-dashboard-explore), Storage for Results/Artifacts, User/Role mgmt, Insights, 3rd party integrations, etc.
+    1. The **Testkube Control Plane**, which includes the [Dashboard](/articles/testkube-dashboard-explore), Storage for Results/Logs/Artifacts, User/Role mgmt, Insights, 3rd party integrations, etc.
 
     2. The **Testkube Agent**, which executes your tests, collects test execution logs/results and listens for Kubernetes Events.
 
@@ -25,11 +25,11 @@
 
 You can deploy Testkube in one of the following ways:
 
-| Deployment Option         |     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Agent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     |   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Control Plane&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
-|---------------------------|:-------------:|:------------------:|:---------:|:---:|
-| **On-Prem Control Plane** | Hosted by you |   Hosted by you    |     ✅     |  ✅  |
-| **Cloud Control Plane**   | Hosted by you | Hosted by Testkube |     ✅     |  ✅  |
-| **Standalone Agent**      | Hosted by you |         ❌          |     ❌     |  ✅  |
+| Deployment Option         | &nbsp;&nbsp;&nbsp;Licensing&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Agent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Control&nbsp;Plane&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+|---------------------------|:---------------------------------------------:|:-----------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------:|:---------------------------------------------------------------:|
+| **On-Prem Control Plane** |                  Commercial                   |                                             Hosted by you                                             |                                                   Hosted by you                                                    |                                   ✅                                   |                                ✅                                |
+| **Cloud Control Plane**   |                  Commercial                   |                                             Hosted by you                                             |                                                 Hosted by Testkube                                                 |                                   ✅                                   |                                ✅                                |
+| **Standalone Agent**      |                  Open Source                  |                                             Hosted by you                                             |                                                         ❌                                                          |                                   ❌                                   |                                ✅                                |
 
 The high-level deployment architecture and how to get started with each of these is described below.
 
