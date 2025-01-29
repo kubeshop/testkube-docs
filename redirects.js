@@ -425,6 +425,7 @@ const redirects = [
       "/articles/supported-tests",
       "/articles/testkube-benefits",
       "/articles/migrate-from-oss",
+      "/articles/open-source-or-pro",
       "/testkube-pro-on-prem/articles/migrating-from-oss-to-pro",
       "/testkube-enterprise/articles/migrating-from-oss-to-pro",
     ],
