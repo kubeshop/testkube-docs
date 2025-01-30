@@ -226,6 +226,9 @@ Usage example:
     value: {{ if eq (.TestWorkflowExecution.Result.Status | testworkflowstatustostring ) "passed" }}"00FF00"{{ else }}"FF0000"{{ end }}
 ```
 
+You can use Sprig golang template functions if you need to have some special logic in your templates. 
+You can find a full list of them [here](https://masterminds.github.io/sprig/)
+
 #### Using API Server Environment Variables in Webhooks
 
 In addition to event-specific variables, it's possible to use environment variables from the Testkube API server in your webhook payloads and configurations.
