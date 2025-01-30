@@ -26,7 +26,7 @@ spec:
       count: config.slavecount
       logs: always
       timeout: 30s
-      image: anasoid/jmeter:5.6-plugins-21-jre
+      image: alpine/jmeter:5.6
       command:
       - jmeter-server
       - -Dserver.rmi.localport=60000
@@ -39,7 +39,7 @@ spec:
   steps:
   - name: Run tests
     run:
-      image: anasoid/jmeter:5.6-plugins-21-jre
+      image: alpine/jmeter:5.6
       shell: |
         jmeter -n \
           -X -Jserver.rmi.ssl.disable=true -Jclient.rmi.localport=7000 \
