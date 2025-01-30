@@ -19,7 +19,7 @@ spec:
   - name: Run tests
     shell: jmeter -n -t jmeter-executor-smoke.jmx -j /data/artifacts/jmeter.log -o /data/artifacts/report -l /data/artifacts/jtl-report.jtl -e
     container:
-      image: anasoid/jmeter:5.6-plugins-21-jre
+      image: alpine/jmeter:5.6
     artifacts:
       paths:
       - '/data/artifacts/**/*'
