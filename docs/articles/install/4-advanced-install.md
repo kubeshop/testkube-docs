@@ -205,7 +205,9 @@ The Testkube agent creates Kubernetes jobs when executing a test workflow. By de
 ```yaml {3}
 testkube-agent:
   testkube-api:
-    executionNamespaces: ["my-namespace"]
+    executionNamespaces:
+      - namespace: ns1 
+      - namespace: ns2 
 ```
 
 ### Namespaces for Testkube Custom Resources
