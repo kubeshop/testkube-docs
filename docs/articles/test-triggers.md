@@ -103,6 +103,7 @@ probeSpec:
 Action parameters are used to pass config and tag values to the test execution workflow. You can specify either text values or 
 jsonpath expression in a form of `jsonpath={.metadata.name}`. The data will be taken from the resource object of the trigger event. 
 Check the kubernets docs [JsonPath Expression](https://kubernetes.io/docs/reference/kubectl/jsonpath/).
+Also you can use Golang template syntax we support for Webhook processing and take data from Golang object fields.
 
 ```yaml
 actionParameters:
@@ -117,9 +118,11 @@ actionParameters:
   config:
     environment: production
     datavalue: jsonpath={.data.test} # if the resource object is a configmap with key `test`
+    labels: "{{ .ObjectMeta.Labels }}"
   tags:
     workflow: core
     trigger: jsonpath={.metadata.namespace} # namespace of the resource object
+    name: "{{ .ObjectMeta.Name }}"
 ```
 
 ### Supported Values
