@@ -1,11 +1,45 @@
 # Workflow Wizard
 
-Selecting the "Add a new test workflow" button on the top right of the [Workflows Overview](testkube-dashboard-workflows-overview) 
+Selecting the "Add a new Test Workflow" button on the top right of the [Workflows Overview](testkube-dashboard-workflows-overview) 
 opens the following dialog:
 
 ![Create Test Workflow](../img/create-test-workflow.png)
 
 The different options are described below.
+
+## Automatic Test Discovery
+
+Selecting the "Scan my repository for tests" option for Git Sources on the [first page of the Workflow wizard](#git-source) will result in
+Testkube automatically scanning for supported tests in the specific repo/branch/folder.
+
+Testkube currently attempts to identify the following test types:
+
+- K6 scripts
+- Postman Collections
+- Playwright Projects
+- Cypress Projects
+- JMeter Projects
+- Maven Projects
+- Gradle Projects
+
+:::tip
+Is Testkube not finding your tests? Or are you missing a common testing tool in this list? Let us know on [Slack](https://bit.ly/testkube-slack) so we can improve our algorithms!
+:::
+
+You will see the below panel while Testkube is scanning your repository:
+
+![Workflow Wizard - Scanning Repo](images/workflow-wizard-scanning.png)
+
+Once finished, Testkube will show the number of found tests for each type of test in the next step of the wizard, together
+with a selector for a test.
+
+Selecting the "Skip this" button will abort the ongoing Test Discovery process and take you straight to the Type step
+in the Wizard.
+
+:::note
+Testkube will cache the Test Discovery result for your repository as long as you stay within the Wizard. If you want to rescan
+the repository (for example if you have updated its contents), you will need to close the Wizard entirely and start over.
+:::
 
 ## Create with Wizard
 
@@ -17,7 +51,7 @@ This option will walk you through 5 steps for creating a Workflow to run your te
 4) The **Collaboration** settings for the generated Workflow
 5) A **Summary** showing the underlying Workflow YAML for your test.
 
-### Workflow Name & Source
+### Step 1 - Name & Source
 
 The first page of the wizard will ask you for the name, labels (optional) and source of the test you want to run with Testkube. 
 
@@ -67,41 +101,8 @@ Selecting String as the source for your test will prompt as follows:
 - **File Path**: The path where the file content will be mounted in the container. You can use either relative or absolute paths.
 - **File Content**: the actual test script that will be written to the file.
 
-### Automatic Test Discovery
 
-Selecting the "Scan my repository for tests" option for Git Sources on the [first page of the Workflow wizard](#git-source) will result in
-Testkube automatically scanning for supported tests in the specific repo/branch/folder.
-
-Testkube currently attempts to identify the following test types:
-
-- K6 scripts
-- Postman Collections
-- Playwright Projects
-- Cypress Projects
-- JMeter Projects
-- Maven Projects
-- Gradle Projects
-
-:::tip
-Is Testkube not finding your tests? Or are you missing a common testing tool in this list? Let us know on [Slack](https://bit.ly/testkube-slack) so we can improve our algorithms!
-:::
-
-You will see the below panel while Testkube is scanning your repository:
-
-![Workflow Wizard - Scanning Repo](images/workflow-wizard-scanning.png)
-
-Once finished, Testkube will show the number of found tests for each type of test in the next step of the wizard, together
-with a selector for a test.
-
-Selecting the "Skip this" button will abort the ongoing Test Discovery process and take you straight to the Type step
-in the Wizard.
-
-:::note
-Testkube will cache the Test Discovery result for your repository as long as you stay within the Wizard. If you want to rescan
-the repository (for example if you have updated its contents), you will need to close the Wizard entirely and start over.
-:::
-
-### Workflow Type
+### Step 2 - Type
 
 The second page prompts you for the type of Test you want to run:
 
@@ -124,7 +125,7 @@ for example for Artillery below:
 
 ![Workflow Wizard - Select Type](images/workflow-wizard-select-type.png)
 
-### Run 
+### Step 3 - Run 
 
 This page allows you to specify/modify the run command and execution working directory for the selected testing tool. 
 If your test was discovered with Test Discovery, these values will be pre-filled accordingly, otherwise you will have
@@ -144,13 +145,13 @@ Here you can also specify:
 - **Artifacts**: Where Testkube can find artifacts created by your testing tool (reports, videos, etc.). [Read More about Artifacts](/articles/test-workflows-artifacts)
 - **Environment Variables**: Any environment variables that need to be passed to your testing tool for test execution
 
-### Collaboration
+### Step 4 - Collaboration
 
 This page allows you to add the Workflow to a [Resource Group](/articles/resource-groups) for further collaboration and access control:
 
 ![Workflow Wizard - Collaboration Step](images/workflow-wixard-collaboration-step.png)
 
-### Summary
+### Step 5 - Summary
 
 This shows the generated Workflow YAML based on all the input provided in the previous steps. You can
 make adjustments to the YAML as needed, or go back to the previous steps to update accordingly.
@@ -171,7 +172,7 @@ affect other workflows using the same template.
 When you're happy with the created Workflow select either "Create & Run" or just "Create" from the button in the bottom
 right to create your Workflow.
 
-## Creating a Workflow from an Example
+## Start from an Example
 
 Use the "Start from Example" option if you want to start from one of Testkubes many example Workflows which you can then further modify
 for your specific needs.
@@ -192,7 +193,7 @@ You will most likely want to change the name of the created workflow, do this by
 
 :::
 
-## Creating a Workflow by Combining Existing Workflows
+## Combine Existing Workflows
 
 The "Combine existing Workflows" option allows you to create a Workflow that orchestrates multiple existing Workflows to run either in sequence or parallel.
 
@@ -212,11 +213,11 @@ Select either the Create or Create & Run option to create your workflow accordin
 
 :::tip
 
-Read more about how to create Composite Workflows at [Test Workflows - Test Suites](/articles/test-workflows-test-suites)
+Read more about how to create Composite Workflows at [Workflow Orchestration](/articles/test-workflows-test-suites)
 
 :::
 
-## Creating a Workflow from YAML
+## Import from YAML
 
 This final "Import from YAML" option allows you to paste/edit your Workflow YAML from scratch:
 
