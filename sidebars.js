@@ -344,7 +344,7 @@ const sidebars = {
             },
             {
               type: "category",
-              label: "More Guides",
+              label: "Cookbook",
               items: [
                 {
                   type: "doc",
@@ -366,6 +366,11 @@ const sidebars = {
                   label: "Filtering Executions using Tags",
                   id: "articles/filtering-test-workflow-executions-using-tags",
                 },
+                {
+                  type: "doc",
+                  label: "Uploading Artifacts to Custom S3 Bucket",
+                  id: "articles/custom-minio-artifact-upload",
+                }
               ],
             },
           ],
