@@ -218,6 +218,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "Workflow Wizard",
+                  id: "articles/test-workflows-create-wizard",
+                },
+                {
+                  type: "doc",
                   label: "Workflow Details",
                   id: "articles/testkube-dashboard-workflow-details",
                 },

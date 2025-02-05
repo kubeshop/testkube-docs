@@ -124,7 +124,7 @@ using the popup menu on the right:
 
 This tab allows you to manage the Filtering categories available for [Log Highlighting](/testkube-pro/articles/log-highlighting)
 
-![img.png](../../img/environment-keyword-handling.png)
+![Keyword Handling](../../img/environment-keyword-handling.png)
 
 There are 4 default categories, represented with a few keywords each:
 
@@ -141,6 +141,6 @@ You can add/edit/remove categories using the corresponding actions in the interf
 
 There is currently only one product feature that can be toggled on or off; Legacy Test Support - [Read More](/articles/legacy-features)
 
-![img_1.png](../../img/environment-product-features.png)
+![Product Features](../../img/environment-product-features.png)
 
 [installing]: ../../articles/install/multi-cluster.md
