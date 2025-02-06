@@ -1,4 +1,4 @@
-#### Atlassian Jira
+# Atlassian Jira
 
 You can use Webhooks to create issues in Atlassian Jira projects.
 Please check the Jira API Spec for additional details [here](https://developer.atlassian.com/cloud/jira/platform/rest/v3/). 
@@ -118,3 +118,6 @@ type: Opaque
 data:
   token: <your_data>
 ```
+
+## Using Labels to limit which Workflows that generate issues
+
