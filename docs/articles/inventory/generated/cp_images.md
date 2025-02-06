@@ -1,6 +1,6 @@
 :::info
 
-Based on chart `testkube-enterprise` as of version `2.127.0` on 28-01-2025
+Based on chart `testkube-enterprise` as of version `2.139.0` on 06-02-2025
 
 :::
 
@@ -10,7 +10,7 @@ Based on chart `testkube-enterprise` as of version `2.127.0` on 28-01-2025
 | ghcr.io/dexidp/dex:v2.41.1 | Identity provider used by the Testkube control plane. | [View Report](./dex-v2.41.1_linux_amd64.md) | [View Report](./dex-v2.41.1_linux_arm64.md) | [View Image](https://github.com/dexidp/dex/pkgs/container/dex) |
 | kubeshop/bitnami-mongodb:7.0.12 | Database used by the Testkube control plane. | [View Report](./bitnami-mongodb-7.0.12_linux_amd64.md) | [View Report](./bitnami-mongodb-7.0.12_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/bitnami-mongodb/7.0.12/images/sha256-43aa0e5c2e3eff47a9d82ab89e3d0bdde515b9b64628d328a18342e1facba8aa?context=explore) |
 | kubeshop/testkube-enterprise-api:1.11.8 | API server for the Testkube control plane. | [View Report](./testkube-enterprise-api-1.11.8_linux_amd64.md) | [View Report](./testkube-enterprise-api-1.11.8_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-enterprise-api/1.11.8/images/sha256-8734ec13f116c31db395b3745157844b26d5938afdf5efd0e468f15ef1463ae6?context=explore) |
-| kubeshop/testkube-enterprise-ui:2.8.6 | Testkube dashboard. | [View Report](./testkube-enterprise-ui-2.8.6_linux_amd64.md) | [View Report](./testkube-enterprise-ui-2.8.6_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-enterprise-ui/2.8.6/images/sha256-25ea15de9b562497844d4d7f7250fb4e075b33ad8c00e867e023ce1af6fe4bcc?context=explore) |
+| kubeshop/testkube-enterprise-ui:2.9.1 | Testkube dashboard. | [View Report](./testkube-enterprise-ui-2.9.1_linux_amd64.md) | [View Report](./testkube-enterprise-ui-2.9.1_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-enterprise-ui/2.9.1/images/sha256-73e7a136a9767ef0d558c1653836ef4fb3fa3fcf66c4f222296ca8d0413e8188?context=explore) |
 | kubeshop/testkube-enterprise-worker-service:1.11.8 | Testkube worker service used for background processing. | [View Report](./testkube-enterprise-worker-service-1.11.8_linux_amd64.md) | [View Report](./testkube-enterprise-worker-service-1.11.8_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-enterprise-worker-service/1.11.8/images/sha256-586b98773ae61eca5e09b297942766d7fdf28835f5db44d98aee1e72f38b5c6e?context=explore) |
 | kubeshop/testkube-migration:1.11.8 | Used to run migrations for MongoDB. | [View Report](./testkube-migration-1.11.8_linux_amd64.md) | [View Report](./testkube-migration-1.11.8_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-migration/1.11.8/images/sha256-12b3a452d0d454fa6c2c35c9ad331f0053b2af08b7e14fdf76ca39f33b43fc5d?context=explore) |
 | nats:2.10.24-alpine | NATS message broker. | [View Report](./nats-2.10.24-alpine_linux_amd64.md) | [View Report](./nats-2.10.24-alpine_linux_arm64.md) | [View Image](https://hub.docker.com/layers/library/nats/2.10.24-alpine/images/sha256-d13ec5ce79a02e1be937820dd36db611e25bd0c08cd9947fa9a5d52a56bf91fc?context=explore) |
