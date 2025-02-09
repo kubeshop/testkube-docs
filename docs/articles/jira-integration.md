@@ -1,20 +1,20 @@
 # Atlassian Jira
 
-You can use Webhooks to create issues in Atlassian Jira projects, but to do so you will first need to look up
-the corresponding issuetype and project for your target JIRA Project using the [JIRA REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v3/).
+You can use Webhooks to create issues in Atlassian JIRA projects, but you will first need to use the [JIRA REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v3/) 
+to look up the project id and issuetype id for your target JIRA Project and type of issue you want to create.
 
-## Look up JIRA Project and IssueType ids
+## Looking up JIRA Project and IssueType ids
 
-Follow these steps to take:
+Follow these steps:
 
-1. Create a JIRA API Token that you can use for your API calls - [Read More](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/)
-2. Use the [Get All Projects](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-projects/#api-rest-api-3-project-get) operation to find the `id` of the target project
+1. Create a JIRA API Token that you can use for your API calls - [Read More](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/).
+2. Use the [Get All Projects](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-projects/#api-rest-api-3-project-get) operation to find the `id` of the target project.
 3. Use the [Get Project Issue Type](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-projects/#api-rest-api-3-project-projectid-hierarchy-get) operation to find the
-   `id` of the type of issue that you want to create
+   `id` of the type of issue that you want to create with the Webhook.
 
 ## Create a Webhook Template for creating Issues 
 
-The actual Webhook configuration will be in a [Webhook Template](/articles/webhooks#webhook-templates) so we can reuse it for multiple Webhooks. 
+The actual Webhook configuration will be in a [Webhook Template](/articles/webhooks#webhook-templates) so it can be reused for multiple Webhooks. 
 
 In this example we will add parameters for
 
@@ -123,8 +123,8 @@ data:
 
 ## Create Webhook(s) for creating issues
 
-We can now create any number of Webhooks that use the above template, with corresponding input values to override the default parameter values:
-
+We can now create any number of Webhooks that use the above WebhookTemplate, with corresponding input values to override the default values as needed:
+ 
 ```yaml
 apiVersion: executor.testkube.io/v1
 kind: Webhook
@@ -152,8 +152,8 @@ spec:
 In the above example, you might not want to create JIRA Issues for all `end-testworkflow-failed` events in your Testkube Environment, in
 which case you can use [Resource Selectors](/articles/webhooks#resource-selector-labels) to narrow this down.
 
-For example, adding the below selector will result in only failed executions for Workflows labeled with `priority: p0` triggering this Webhook and 
-creating a corresponding JIRA issue.
+For example, adding the below selector will result in only failed executions for Workflows labeled with `priority: p0` to trigger this Webhook and 
+creating a corresponding JIRA.
 
 ```
 apiVersion: executor.testkube.io/v1
