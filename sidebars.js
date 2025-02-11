@@ -39,7 +39,8 @@ const sidebars = {
           type: "doc",
           label: "Overview",
           id: "articles/install/overview",
-        }, {
+        },
+        {
           type: "category",
           label: "On-Prem Control Plane",
           items: [
@@ -271,7 +272,7 @@ const sidebars = {
           type: "category",
           label: "Test Workflows",
           items: [
-            {type: "doc", label: "Overview", id: "articles/test-workflows"},
+            { type: "doc", label: "Overview", id: "articles/test-workflows" },
             {
               type: "doc",
               label: "Basic Examples",
@@ -370,7 +371,7 @@ const sidebars = {
                   type: "doc",
                   label: "Uploading Artifacts to Custom S3 Bucket",
                   id: "articles/custom-minio-artifact-upload",
-                }
+                },
               ],
             },
           ],
@@ -519,6 +520,32 @@ const sidebars = {
               type: "doc",
               label: "Docker CLI",
               id: "articles/testkube-cli-docker",
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Testkube Copilot",
+          items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/copilot-overview",
+            },
+            {
+              type: "doc",
+              label: "On-Prem Installation",
+              id: "articles/copilot-on-prem-install",
+            },
+            {
+              type: "doc",
+              label: "How Copilot can help",
+              id: "articles/copilot-can-help",
+            },
+            {
+              type: "doc",
+              label: "How Copilot is different",
+              id: "articles/copilot-is-different",
             },
           ],
         },
@@ -772,8 +799,8 @@ const sidebars = {
         id: "articles/integrations",
       },
       items: [
-        {type: "doc", label: "GitHub", id: "articles/github-actions"},
-        {type: "doc", label: "GitLab", id: "articles/gitlab"},
+        { type: "doc", label: "GitHub", id: "articles/github-actions" },
+        { type: "doc", label: "GitLab", id: "articles/gitlab" },
         {
           type: "doc",
           label: "Jenkins Pipelines",
@@ -784,20 +811,19 @@ const sidebars = {
           label: "Jenkins UI",
           id: "articles/jenkins-ui",
         },
-        {type: "doc", label: "Azure DevOps", id: "articles/azure"},
+        { type: "doc", label: "Azure DevOps", id: "articles/azure" },
         {
           type: "link",
           label: "BitBucket",
           href: "https://testkube.io/learn/unleashing-the-power-of-ci-cd-testing-with-bitbucket-and-testkube",
-          description:
-            "Integrate Testkube with Bitbucket Pipelines",
+          description: "Integrate Testkube with Bitbucket Pipelines",
         },
         {
           type: "doc",
           label: "CircleCI",
           id: "articles/circleci",
         },
-        {type: "doc", label: "ArgoCD", id: "articles/argocd-integration"},
+        { type: "doc", label: "ArgoCD", id: "articles/argocd-integration" },
         {
           type: "doc",
           label: "Argo Rollouts",
@@ -808,36 +834,34 @@ const sidebars = {
           label: "Argo Workflows",
           id: "articles/argoworkflows-integration",
         },
-        {type: "doc", label: "Flux", id: "articles/flux-integration"},
-        {type: "doc", label: "CDEvents", id: "articles/cd-events"},
-        {type: "doc", label: "Tekton", id: "articles/tekton"},
+        { type: "doc", label: "Flux", id: "articles/flux-integration" },
+        { type: "doc", label: "CDEvents", id: "articles/cd-events" },
+        { type: "doc", label: "Tekton", id: "articles/tekton" },
         {
           type: "doc",
           label: "Slack Integration",
           id: "articles/slack-integration",
         },
-        {type: "doc", label: "Prometheus", id: "articles/metrics"},
+        { type: "doc", label: "Prometheus", id: "articles/metrics" },
         {
           type: "doc",
           label: "Kubernetes Events",
           id: "articles/k8s-events",
         },
-        {type: "doc", label: "Webhooks", id: "articles/webhooks"},
+        { type: "doc", label: "Webhooks", id: "articles/webhooks" },
         {
           type: "link",
           label: "PagerDuty",
           href: "https://testkube.io/learn/critical-test-based-alerting-with-pagerduty-and-testkube",
-          description:
-            "Critical Test Based Alerting with PagerDuty and Testkube",
+          description: "Critical Test Based Alerting with PagerDuty and Testkube",
         },
         {
           type: "link",
           label: "Zapier",
           href: "https://testkube.io/learn/integrating-testkube-and-zapier-for-instant-email-alerts",
-          description:
-            "Integrating Testkube and Zapier for Instant Email Alerts",
+          description: "Integrating Testkube and Zapier for Instant Email Alerts",
         },
-        {type: "doc", label: "Grafana", id: "articles/grafana"},
+        { type: "doc", label: "Grafana", id: "articles/grafana" },
         {
           type: "doc",
           label: "Atlassian Jira",
@@ -1067,7 +1091,7 @@ const sidebars = {
             },
           ],
         },
-        {type: "doc", label: "Deprecations", id: "articles/deprecations"},
+        { type: "doc", label: "Deprecations", id: "articles/deprecations" },
         {
           type: "doc",
           label: "Generating Test CRDs",
@@ -1085,7 +1109,7 @@ const sidebars = {
           id: "articles/testkube-dashboard-general-settings",
         },
 
-        {type: "doc", label: "Templates", id: "articles/templates"},
+        { type: "doc", label: "Templates", id: "articles/templates" },
         "articles/legacy-architecture",
         {
           type: "doc",

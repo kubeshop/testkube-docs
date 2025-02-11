@@ -23,9 +23,7 @@ Copilot is designed to help you streamline your test orchestration by providing 
 - **General Testkube Guidance:**  
   Ask questions about the Testkube Control Plane, Agents, and Dashboard, with answers referencing our detailed documentation.
 
-## Documentation Structure
-
-This documentation is organized into the following sections:
+## Learn more about Copilot
 
 - [On-Prem Installation](./copilot-on-prem-install.md)
 - [Enable Copilot](./copilot-enable.md)
