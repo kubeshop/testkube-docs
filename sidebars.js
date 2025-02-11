@@ -131,6 +131,11 @@ const sidebars = {
                   id: "articles/pod-security-standards",
                 },
                 {
+                  type: "doc",
+                  label: "Testkube Copilot",
+                  id: "articles/copilot-on-prem-install",
+                },
+                {
                   type: "link",
                   label: "Testkube with Kind",
                   href: "https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker",
@@ -531,11 +536,6 @@ const sidebars = {
               type: "doc",
               label: "Overview",
               id: "articles/copilot-overview",
-            },
-            {
-              type: "doc",
-              label: "On-Prem Installation",
-              id: "articles/copilot-on-prem-install",
             },
             {
               type: "doc",

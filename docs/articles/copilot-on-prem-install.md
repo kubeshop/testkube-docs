@@ -1,15 +1,30 @@
-# On-Prem Installation
+# Testkube Copilot On-Prem Installation
 
-This section covers the installation and configuration steps required to enable the AI service on Enterprise/On-Prem Testkube installations.
+[Testkube Copilot](./copilot-overview) relies on the [OpenAI
+API](https://openai.com/index/openai-api/), so to get started one needs to
+create account there and obtain an API key.
 
-> **Note:** This section applies only to Enterprise/On-Prem users. Cloud users can skip these steps.
+## Configurations
 
-## Installation Steps
+:::tip
 
-- **Install the Helm Chart for the AI Service:**  
-  Deploy the AI service by installing its Helm chart into your Testkube environment.
+Make sure to allow traffic to the OpenAI API within your firewall
+configurations.
 
-- **Configure the Secret for OPENAI API KEY:**  
-  Set up the required secret with your OpenAI API key to enable communication with the Copilot backend.
+:::
 
-TODO: add more information
+Create a secret containing that API key in the namespace with the Testkube
+control plane release:
+
+```sh
+kubectl -n <namespace> create secret generic <secret name> --from-literal=OPENAI_API_KEY=<openai api key>
+```
+
+Configure the following value in the `testkube-enterprise` chart:
+
+```yaml
+testkube-ai-service:
+  enabled: true
+  openAi:
+    secretRef: <secret name>
+```
