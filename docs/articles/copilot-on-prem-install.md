@@ -13,14 +13,14 @@ configurations.
 
 :::
 
-Create a secret containing that API key in the namespace with the Testkube
+Create a secret containing the API key in the namespace with the Testkube
 control plane release:
 
 ```sh
 kubectl -n <namespace> create secret generic <secret name> --from-literal=OPENAI_API_KEY=<openai api key>
 ```
 
-Configure the following value in the `testkube-enterprise` chart:
+Configure the following values in the `testkube-enterprise` chart:
 
 ```yaml
 testkube-ai-service:
