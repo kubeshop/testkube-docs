@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube migrate agent
 
 manual migrate agent command
@@ -33,4 +29,5 @@ testkube migrate agent [flags]
 
 ### SEE ALSO
 
-- [testkube migrate](testkube_migrate.md) - Migrate resources
+* [testkube migrate](testkube_migrate.md)	 - Migrate resources
+

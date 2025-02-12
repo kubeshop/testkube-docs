@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube delete template
 
 Delete a template.
@@ -35,4 +31,5 @@ testkube delete template <templateName> [flags]
 
 ### SEE ALSO
 
-- [testkube delete](testkube_delete.md) - Delete resources
+* [testkube delete](testkube_delete.md)	 - Delete resources
+

@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube docker init
 
 Run Testkube Docker Agent and connect to Testkube Pro environment
@@ -50,4 +46,5 @@ testkube docker init [flags]
 
 ### SEE ALSO
 
-- [testkube docker](testkube_docker.md) - Testkube Docker commands
+* [testkube docker](testkube_docker.md)	 - Testkube Docker commands
+

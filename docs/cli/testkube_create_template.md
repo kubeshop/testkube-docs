@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube create template
 
 Create a new Template.
@@ -39,4 +35,5 @@ testkube create template [flags]
 
 ### SEE ALSO
 
-- [testkube create](testkube_create.md) - Create resource
+* [testkube create](testkube_create.md)	 - Create resource
+

@@ -171,9 +171,11 @@ total 152
 
 6. Copy these files to the `/docs/articles/crds` folder in this repo
 7. Make sure the links and info in `/docs/articles/crds.md` is correct and up to date
-8. Add the deprecation warning at the top of all files containing deprecated APIs:
+8. Add the deprecation warning after the main headline in all files containing deprecated APIs:
 
 ```markdown
+# Testkube API Reference
+
 import LegacyWarning from '../\_legacy-warning.mdx';
 
 <LegacyWarning />
@@ -189,7 +191,7 @@ The CLI docs are generated in the [Testkube Repo](https://github.com/kubeshop/te
 make docs
 ```
 
-in the root folder and copying the generated files from the `gen/docs/cli` folder to the `/cli` folder in this repo (clear the folder first so old files are removed).
+in the root folder and copying the generated files from the `gen/docs/cli` folder to the `/docs/cli` folder in this repo (clear the folder first so old files are removed).
 
 :::tip
 Make sure the generated docs build with `npm run build` ok before committing, and fix any errors manually as applicable.

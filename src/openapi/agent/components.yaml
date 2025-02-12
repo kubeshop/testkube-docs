@@ -2045,6 +2045,17 @@ components:
       nullable: true
       allOf:
         - $ref: '#/components/schemas/Webhook'
+    WebhookTemplateCreateRequest:
+      description: webhook template create request body
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/WebhookTemplate'
+    WebhookTemplateUpdateRequest:
+      description: webhook template update request body
+      type: object
+      nullable: true
+      allOf:
+        - $ref: '#/components/schemas/WebhookTemplate'
     Executor:
       description: CRD based executor data
       type: object
@@ -2335,8 +2346,7 @@ components:
       description: CRD based webhook data
       type: object
       required:
-        - uri
-        - events
+        - name
       properties:
         name:
           type: string
@@ -2393,6 +2403,81 @@ components:
           example:
             - true
             - false
+        config:
+          $ref: '#/components/schemas/WebhookConfig'
+        parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookParameterSchema'
+        webhookTemplateRef:
+          $ref: '#/components/schemas/WebhookTemplateRef'
+    WebhookTemplate:
+      description: CRD based webhook data template
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          example: webhook1
+        namespace:
+          type: string
+          example: testkube
+        uri:
+          type: string
+          example: https://hooks.app.com/services/1
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventType'
+        selector:
+          type: string
+          description: Labels to filter for tests and test suites
+        payloadObjectField:
+          type: string
+          description: will load the generated payload for notification inside the object
+        payloadTemplate:
+          type: string
+          description: golang based template for notification payload
+        payloadTemplateReference:
+          type: string
+          description: name of the template resource
+        headers:
+          type: object
+          description: webhook headers (golang template supported)
+          additionalProperties:
+            type: string
+          example:
+            Content-Type: application/xml
+        labels:
+          type: object
+          description: webhook labels
+          additionalProperties:
+            type: string
+          example:
+            env: prod
+            app: backend
+        annotations:
+          type: object
+          description: webhook annotations
+          additionalProperties:
+            type: string
+          example:
+            env: prod
+            app: backend
+        disabled:
+          type: boolean
+          description: whether webhook is disabled
+          default: false
+          example:
+            - true
+            - false
+        config:
+          $ref: '#/components/schemas/WebhookConfig'
+        parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookParameterSchema'
     Event:
       description: Event data
       type: object
@@ -2431,6 +2516,8 @@ components:
             type: string
           example:
             WEBHOOK_PARAMETER: any value
+        external:
+          type: boolean
     EventResource:
       type: string
       enum:
@@ -2439,6 +2526,7 @@ components:
         - executor
         - trigger
         - webhook
+        - webhooktemplate
         - testexecution
         - testsuiteexecution
         - testsource
@@ -3158,6 +3246,10 @@ components:
           type: string
           format: date-time
           example: '2022-07-30T06:54:15Z'
+        updated:
+          type: string
+          format: date-time
+          example: '2022-07-30T06:54:15Z'
         spec:
           $ref: '#/components/schemas/TestWorkflowSpec'
         readOnly:
@@ -3182,12 +3274,36 @@ components:
           default: false
         tags:
           $ref: '#/components/schemas/TestWorkflowTagValue'
+        target:
+          $ref: '#/components/schemas/ExecutionTarget'
         runningContext:
           description: running context for the test workflow execution (Pro edition only)
           $ref: '#/components/schemas/TestWorkflowRunningContext'
         parentExecutionIds:
           type: array
           description: parent execution ids
+          items:
+            type: string
+    ExecutionTarget:
+      type: object
+      properties:
+        match:
+          type: object
+          description: runner labels to match
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        not:
+          type: object
+          description: runner labels to NOT match
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        replicate:
+          type: array
+          description: list of runner labels to replicate the executions
           items:
             type: string
     TestWorkflowWithExecution:
@@ -3232,6 +3348,13 @@ components:
           description: identifier for group of correlated executions
           format: bson objectId
           example: 62f395e004109209b50edfc1
+        runnerId:
+          type: string
+          description: identifier of the runner where it has been executed
+        runnerTarget:
+          $ref: '#/components/schemas/ExecutionTarget'
+        runnerOriginalTarget:
+          $ref: '#/components/schemas/ExecutionTarget'
         name:
           type: string
           description: execution name
@@ -3291,8 +3414,8 @@ components:
         runningContext:
           description: running context for the test workflow execution (Pro edition only)
           $ref: '#/components/schemas/TestWorkflowRunningContext'
-        config:
-          $ref: '#/components/schemas/TestWorkflowConfigValue'
+        configParams:
+          $ref: '#/components/schemas/TestWorkflowExecutionConfig'
       required:
         - id
         - name
@@ -3303,6 +3426,11 @@ components:
         id:
           type: string
           description: unique execution identifier
+          format: bson objectId
+          example: 62f395e004109209b50edfc1
+        groupId:
+          type: string
+          description: identifier for group of correlated executions
           format: bson objectId
           example: 62f395e004109209b50edfc1
         name:
@@ -3331,6 +3459,8 @@ components:
         runningContext:
           description: running context for the test workflow execution (Pro edition only)
           $ref: '#/components/schemas/TestWorkflowRunningContext'
+        configParams:
+          $ref: '#/components/schemas/TestWorkflowExecutionConfig'
       required:
         - id
         - name
@@ -3629,6 +3759,10 @@ components:
           type: string
           format: date-time
           example: '2022-07-30T06:54:15Z'
+        updated:
+          type: string
+          format: date-time
+          example: '2022-07-30T06:54:15Z'
         spec:
           $ref: '#/components/schemas/TestWorkflowTemplateSpec'
     TestWorkflowStepParallel:
@@ -3712,6 +3846,10 @@ components:
               type: string
             readinessProbe:
               $ref: '#/components/schemas/Probe'
+            pvcs:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/TestWorkflowPvcConfig'
     TestWorkflowServiceSpec:
       type: object
       allOf:
@@ -3825,6 +3963,10 @@ components:
             $ref: '#/components/schemas/TestWorkflowEvent'
         execution:
           $ref: '#/components/schemas/TestWorkflowTagSchema'
+        pvcs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TestWorkflowPvcConfig'
     TestWorkflowTemplateSpec:
       type: object
       properties:
@@ -3862,6 +4004,10 @@ components:
             $ref: '#/components/schemas/TestWorkflowEvent'
         execution:
           $ref: '#/components/schemas/TestWorkflowTagSchema'
+        pvcs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TestWorkflowPvcConfig'
     TestWorkflowStepControl:
       type: object
       properties:
@@ -4327,6 +4473,9 @@ components:
           description: >-
             where to mount the fetched repository contents (defaults to "repo"
             directory in the data volume)
+        cone:
+          type: boolean
+          description: enable cone mode for sparse checkout with paths
         paths:
           type: array
           description: paths to fetch for the sparse checkout
@@ -4541,6 +4690,24 @@ components:
           description: volumes to mount to the container
           items:
             $ref: '#/components/schemas/VolumeMount'
+    TestWorkflowExecutionConfig:
+      type: object
+      description: map of configuration values used in the test workflow execution
+      additionalProperties:
+        $ref: '#/components/schemas/TestWorkflowExecutionConfigValue'
+    TestWorkflowExecutionConfigValue:
+      type: object
+      description: configuration values used in the test workflow execution
+      properties:
+        value:
+          type: string
+          description: configuration value
+        defaultValue:
+          type: string
+          description: configuration value default
+        truncated:
+          type: boolean
+          description: indicates if the value is truncated
     TestWorkflowConfigValue:
       type: object
       description: configuration values to pass to the template
@@ -5585,6 +5752,128 @@ components:
             optional:
               description: Specify whether the Secret or its key must be defined
               type: boolean
+    TestWorkflowPvcConfig:
+      type: object
+      properties:
+        accessModes:
+          description: >-
+            Access mode for claim storage. More info:
+            https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes
+          type: array
+          items:
+            type: string
+        volumeMode:
+          description: >-
+            Volume mode indicates the consumption of the volume as either a
+            filesystem or block device. More info:
+            https://kubernetes.io/docs/concepts/storage/persistent-volumes/#volume-mode
+          $ref: '#/components/schemas/BoxedString'
+        resources:
+          description: Resources required for pvc
+          $ref: '#/components/schemas/TestWorkflowResources'
+        storageClassName:
+          description: >-
+            Storage class name specifies the name of a StorageClass. More info:
+            https://kubernetes.io/docs/concepts/storage/storage-classes/
+          $ref: '#/components/schemas/BoxedString'
+        volumeName:
+          description: Volume name is used to identify the volume
+          type: string
+        selector:
+          description: >-
+            Only the volumes whose labels match the selector can be bound to the
+            claim
+          $ref: '#/components/schemas/LabelSelector'
+        dataSource:
+          description: >-
+            Data source field can be used to specify either: * An existing
+            VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot) * An
+            existing PVC (PersistentVolumeClaim)
+          $ref: '#/components/schemas/TypedLocalObjectReference'
+        dataSourceRef:
+          description: >-
+            Data source reference specifies the object from which to populate
+            the volume with data, if a non-empty volume is desired
+          $ref: '#/components/schemas/TypedObjectReference'
+        volumeAttributesClassName:
+          description: >-
+            Volume attributes class name may be used to set the
+            VolumeAttributesClass used by this claim. More info:
+            https://kubernetes.io/docs/concepts/storage/persistent-volumes#volumeattributesclass
+          $ref: '#/components/schemas/BoxedString'
+    TypedLocalObjectReference:
+      description: >-
+        TypedLocalObjectReference contains enough information to let you locate
+        the typed referenced object inside the same namespace
+      type: object
+      properties:
+        apiGroup:
+          description: api group is the group for the resource being referenced
+          $ref: '#/components/schemas/BoxedString'
+        kind:
+          description: kind is the type of resource being referenced
+          type: string
+        name:
+          description: name is the name of resource being referenced
+          type: string
+    TypedObjectReference:
+      description: >-
+        TypedObjectReference contains enough information to let you locate the
+        typed referenced object inside the specified namespace
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/TypedLocalObjectReference'
+      properties:
+        namespace:
+          description: Namespace is the namespace of resource being referenced
+          $ref: '#/components/schemas/BoxedString'
+    WebhookParameterSchema:
+      type: object
+      description: parameter definition
+      properties:
+        name:
+          description: unique parameter name
+          type: string
+        description:
+          description: description for the parameter
+          type: string
+        required:
+          description: whether parameter is required
+          type: boolean
+          default: false
+        example:
+          description: example value for the parameter
+          type: string
+        default:
+          $ref: '#/components/schemas/BoxedString'
+        pattern:
+          type: string
+          description: regular expression to match
+      required:
+        - name
+    WebhookConfigValue:
+      type: object
+      description: configuration value
+      properties:
+        value:
+          description: public value to use in webhook template
+          $ref: '#/components/schemas/BoxedString'
+        secret:
+          description: private value stored in secret to use in webhook template
+          $ref: '#/components/schemas/SecretRef'
+    WebhookConfig:
+      type: object
+      description: configuration values
+      additionalProperties:
+        $ref: '#/components/schemas/WebhookConfigValue'
+    WebhookTemplateRef:
+      type: object
+      properties:
+        name:
+          description: webhook template name to use
+          type: string
+      required:
+        - name
     Problem:
       description: problem response in case of error
       type: object

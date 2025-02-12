@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube delete webhook
 
 Delete webhook
@@ -35,4 +31,5 @@ testkube delete webhook <webhookName> [flags]
 
 ### SEE ALSO
 
-- [testkube delete](testkube_delete.md) - Delete resources
+* [testkube delete](testkube_delete.md)	 - Delete resources
+

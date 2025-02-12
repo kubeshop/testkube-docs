@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube status
 
 Show status of feature or resource
@@ -29,5 +25,6 @@ testkube status [feature|resource] [flags]
 
 ### SEE ALSO
 
-- [testkube](testkube.md) - Testkube entrypoint for kubectl plugin
-- [testkube status telemetry](testkube_status_telemetry.md) - Get telemetry status
+* [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
+* [testkube status telemetry](testkube_status_telemetry.md)	 - Get telemetry status
+

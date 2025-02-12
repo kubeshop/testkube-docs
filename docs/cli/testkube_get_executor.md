@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube get executor
 
 Gets executor details
@@ -17,7 +13,7 @@ testkube get executor [executorName] [flags]
 ### Options
 
 ```
-      --crd-only        show only test crd
+      --crd-only        show only test crd 
   -h, --help            help for executor
   -l, --label strings   label key value pair: --label key1=value1
 ```
@@ -37,4 +33,5 @@ testkube get executor [executorName] [flags]
 
 ### SEE ALSO
 
-- [testkube get](testkube_get.md) - Get resources
+* [testkube get](testkube_get.md)	 - Get resources
+

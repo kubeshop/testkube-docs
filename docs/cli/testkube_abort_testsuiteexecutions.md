@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube abort testsuiteexecutions
 
 Abort all test suite executions
@@ -29,4 +25,5 @@ testkube abort testsuiteexecutions <testSuiteName> [flags]
 
 ### SEE ALSO
 
-- [testkube abort](testkube_abort.md) - Abort tests or test suites
+* [testkube abort](testkube_abort.md)	 - Abort tests or test suites
+

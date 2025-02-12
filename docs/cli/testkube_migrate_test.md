@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube migrate test
 
 Migrate all available tests to test workflows
@@ -34,4 +30,5 @@ testkube migrate test <testName> [flags]
 
 ### SEE ALSO
 
-- [testkube migrate](testkube_migrate.md) - Migrate resources
+* [testkube migrate](testkube_migrate.md)	 - Migrate resources
+

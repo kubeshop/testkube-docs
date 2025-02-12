@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube download artifact
 
 download artifact
@@ -32,4 +28,5 @@ testkube download artifact <executionName> <fileName> <destinationDir> [flags]
 
 ### SEE ALSO
 
-- [testkube download](testkube_download.md) - Artifacts management commands
+* [testkube download](testkube_download.md)	 - Artifacts management commands
+

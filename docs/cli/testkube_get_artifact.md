@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube get artifact
 
 List artifacts of the given test, test suite or test workflow execution name
@@ -32,4 +28,5 @@ testkube get artifact <executionName> [flags]
 
 ### SEE ALSO
 
-- [testkube get](testkube_get.md) - Get resources
+* [testkube get](testkube_get.md)	 - Get resources
+

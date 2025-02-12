@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube abort testworkflowexecutions
 
 Abort all test workflow executions
@@ -29,4 +25,5 @@ testkube abort testworkflowexecutions <testWorkflowName> [flags]
 
 ### SEE ALSO
 
-- [testkube abort](testkube_abort.md) - Abort tests or test suites
+* [testkube abort](testkube_abort.md)	 - Abort tests or test suites
+

@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube generate tests-crds
 
 Generate tests CRD file based on directory
@@ -87,4 +83,5 @@ testkube generate tests-crds <manifestDirectory> [flags]
 
 ### SEE ALSO
 
-- [testkube generate](testkube_generate.md) - Generate resources commands
+* [testkube generate](testkube_generate.md)	 - Generate resources commands
+

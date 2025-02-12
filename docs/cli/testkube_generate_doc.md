@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube generate doc
 
 Generate docs for kubectl testkube
@@ -33,4 +29,5 @@ testkube generate doc [flags]
 
 ### SEE ALSO
 
-- [testkube generate](testkube_generate.md) - Generate resources commands
+* [testkube generate](testkube_generate.md)	 - Generate resources commands
+

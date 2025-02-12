@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube pro login
 
 Login to Testkube Pro
@@ -47,4 +43,5 @@ testkube pro login [flags]
 
 ### SEE ALSO
 
-- [testkube pro](testkube_pro.md) - Testkube Pro commands
+* [testkube pro](testkube_pro.md)	 - Testkube Pro commands
+
