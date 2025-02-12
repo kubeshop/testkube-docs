@@ -53,37 +53,6 @@ The different properties are described with examples and in more detail below.
 The [Schema Reference for Test Workflows](/articles/crds/testworkflows.testkube.io-v1#testworkflow) describes all available properties and constructs
 :::
 
-## Example - Test Workflow for Postman
-
-Example Test Workflow for running Postman collection from Testkube repository: [/test/postman/executor-tests/postman-executor-smoke-without-envs.postman_collection.json](https://raw.githubusercontent.com/kubeshop/testkube/develop/test/postman/executor-tests/postman-executor-smoke-without-envs.postman_collection.json).
-
-```yaml title="postman-example.yaml"
-apiVersion: testworkflows.testkube.io/v1
-kind: TestWorkflow
-metadata:
-  name: postman-workflow-example # name of the Test Workflow
-spec:
-  content:
-    git: # checking out from git repository
-      uri: https://github.com/kubeshop/testkube
-      revision: main
-      paths:
-        - test/postman/executor-tests/postman-executor-smoke-without-envs.postman_collection.json
-  container: # container settings
-    resources: # resource settings (optional)
-      requests: # resource requests
-        cpu: 256m
-        memory: 128Mi
-    workingDir: /data/repo/test/postman/executor-tests # default workingDir
-  steps: # steps that will be executed by this Test Workflow
-    - name: Run test
-      run:
-        image: postman/newman:6-alpine # image used while running specific step
-        args: # args passed to the container
-          - run
-          - postman-executor-smoke-without-envs.postman_collection.json
-```
-
 ## Metadata
 
 The **metadata** section follows [standard Kubernetes convention.](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#objectmeta-v1-meta)
