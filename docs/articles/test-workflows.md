@@ -76,9 +76,9 @@ metadata:
 
 ## Content Sources
 
-The **content** section specifies the test scripts or files to run.
-
 [Content Schema Reference](/articles/crds/testworkflows.testkube.io-v1#content)
+
+The **content** section specifies the test scripts or files to run.
 
 ### Git Repositories
 
@@ -118,6 +118,7 @@ spec:
 ## Container Configuration
 
 [Container Schema Reference](/articles/crds/testworkflows.testkube.io-v1#containerconfig)
+
 The **container** section sets up the environment where steps run. These settings can be applied globally or overridden on a per-step basis.
 
 ### Container Image
@@ -142,6 +143,8 @@ steps:
 
 ### Resources
 
+[Resources Schema Reference](/articles/crds/testworkflows.testkube.io-v1#resources).
+
 Define resource requests and limits:
 
 ```yaml
@@ -155,8 +158,6 @@ spec:
         cpu: 512m
         memory: 256Mi
 ```
-
-[Resources Schema Reference](/articles/crds/testworkflows.testkube.io-v1#resources).
 
 ### Working Directory
 
