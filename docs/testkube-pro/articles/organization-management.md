@@ -95,9 +95,10 @@ for more details on how to create and use API Tokens.
 
 This tab allows you to configure Organization-level Product Features:
 
-- **Resource Groups & Advanced RBAC** - not toggleable, this just indicates if [Resource Groups](/articles/resource-groups) functionality is available (included with SSO).
-- **AI Troubleshooting** - available for legacy Tests only - [Read More](/testkube-pro/articles/AI-test-insights).
-- **Webhooks URL Masking** - [Read More](/articles/webhooks#url-masking)
+- **Resource Groups & Advanced RBAC** - Not toggleable, this just indicates if [Resource Groups](/articles/resource-groups) functionality is available (included with SSO).
+- **Global Insights** - Toggle Global Insights of your Workflow executions - [Read More](/articles/test-insights).
+- **AI Copilot** - Toggle the AI Copilot feature for your organization [Read More](/articles/copilot-overview).
+- **Webhooks URL Masking** - Toggle Webhooks URL masking - [Read More](/articles/webhooks#url-masking).
 
 ![Organization Product Features](../../img/organization-product-features.png)
 

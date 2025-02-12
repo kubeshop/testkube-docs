@@ -51,6 +51,10 @@ selector:
   namespace: Kubernetes object namespace (default is **testkube**)
 ```
 
+:::note
+The `namespace` property is only supported for resourceSelectors, and not for testSelectors.
+:::
+
 #### Label Selector
 
 Label selectors are used when we want to select a group of resources in a specific namespace.
