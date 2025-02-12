@@ -1,14 +1,14 @@
 :::info
 
-Based on chart `testkube-enterprise` as of version `2.146.0` on 12-02-2025
+Based on chart `testkube-enterprise` as of version `2.149.0` on 12-02-2025
 
 :::
 
 | Image | Description | Vulnerability Report (`linux/amd64`) | Vulnerability Report (`linux/arm64`) | Docker Image |
 |-------|-------------|----------------------------------------|----------------------------------------|--------------|
-| bitnami/minio:2024.11.7-debian-12-r1 | Object store used by the Testkube control plane to store logs and artifacts. | [View Report](./minio-2024.11.7-debian-12-r1_linux_amd64.md) | [View Report](./minio-2024.11.7-debian-12-r1_linux_arm64.md) | [View Image](https://hub.docker.com/layers/bitnami/minio/2024.11.7-debian-12-r1/images/sha256-6cc8d265464eb9e45fa1f2b186a326552c9a5c4ea373c26edf84c2ea18b39aed?context=explore) |
-| ghcr.io/dexidp/dex:v2.41.1 | Identity provider used by the Testkube control plane. | [View Report](./dex-v2.41.1_linux_amd64.md) | [View Report](./dex-v2.41.1_linux_arm64.md) | [View Image](https://github.com/dexidp/dex/pkgs/container/dex) |
+| bitnami/minio:2025.2.7-debian-12-r1 | Object store used by the Testkube control plane to store logs and artifacts. | [View Report](./minio-2025.2.7-debian-12-r1_linux_amd64.md) | [View Report](./minio-2025.2.7-debian-12-r1_linux_arm64.md) | [View Image](https://hub.docker.com/layers/bitnami/minio/2025.2.7-debian-12-r1/images/sha256-6200cedfbe0d340913f74f16f93dcd203ec89702c7f120abf45b4bbbea3689cf?context=explore) |
 | kubeshop/bitnami-mongodb:7.0.12 | Database used by the Testkube control plane. | [View Report](./bitnami-mongodb-7.0.12_linux_amd64.md) | [View Report](./bitnami-mongodb-7.0.12_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/bitnami-mongodb/7.0.12/images/sha256-43aa0e5c2e3eff47a9d82ab89e3d0bdde515b9b64628d328a18342e1facba8aa?context=explore) |
+| kubeshop/dex:v2.42.0 | n/a | [View Report](./dex-v2.42.0_linux_amd64.md) | [View Report](./dex-v2.42.0_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/dex/v2.42.0/images/sha256-10dc393947e2d04dd8c0972ccf405e6f47aba0b694af059c94aa9d249d69ae1b?context=explore) |
 | kubeshop/testkube-enterprise-api:1.11.9 | API server for the Testkube control plane. | [View Report](./testkube-enterprise-api-1.11.9_linux_amd64.md) | [View Report](./testkube-enterprise-api-1.11.9_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-enterprise-api/1.11.9/images/sha256-0510a7b2763f5bd3fd70829590b56d21337f8e6001ff7f4c2ead77f4492af8d1?context=explore) |
 | kubeshop/testkube-enterprise-ui:2.10.1 | Testkube dashboard. | [View Report](./testkube-enterprise-ui-2.10.1_linux_amd64.md) | [View Report](./testkube-enterprise-ui-2.10.1_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-enterprise-ui/2.10.1/images/sha256-dd41cd64ccd9161aef06c964b7df5b46af8d3176e449a7fa5530cf0e6b7507d8?context=explore) |
 | kubeshop/testkube-enterprise-worker-service:1.11.9 | Testkube worker service used for background processing. | [View Report](./testkube-enterprise-worker-service-1.11.9_linux_amd64.md) | [View Report](./testkube-enterprise-worker-service-1.11.9_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-enterprise-worker-service/1.11.9/images/sha256-7e1165a60d640c75f7a0cede070c213a8eb5c69b63706f89619c2122ffa59ff9?context=explore) |

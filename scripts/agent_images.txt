@@ -1,4 +1,4 @@
-kubeshop/kube-webhook-certgen:0.0.4
+kubeshop/kube-webhook-certgen:0.0.7
 kubeshop/testkube-api-server:2.1.88
 kubeshop/testkube-operator:2.1.89
 kubeshop/testkube-tw-init:2.1.88

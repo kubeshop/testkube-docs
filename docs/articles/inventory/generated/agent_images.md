@@ -1,12 +1,12 @@
 :::info
 
-Based on chart `testkube` as of version `2.1.143` on 12-02-2025
+Based on chart `testkube` as of version `2.1.144` on 12-02-2025
 
 :::
 
 | Image | Description | Vulnerability Report (`linux/amd64`) | Vulnerability Report (`linux/arm64`) | Docker Image |
 |-------|-------------|----------------------------------------|----------------------------------------|--------------|
-| kubeshop/kube-webhook-certgen:0.0.4 | Used to generate certificates for the Testkube operator admission webhook. | [View Report](./kube-webhook-certgen-0.0.4_linux_amd64.md) | [View Report](./kube-webhook-certgen-0.0.4_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/kube-webhook-certgen/0.0.4/images/sha256-321e434a68754a8449e0b856f0fc5d1f7012933c9ea00a2268b2333ba0e41f3c?context=explore) |
+| kubeshop/kube-webhook-certgen:0.0.7 | Used to generate certificates for the Testkube operator admission webhook. | [View Report](./kube-webhook-certgen-0.0.7_linux_amd64.md) | [View Report](./kube-webhook-certgen-0.0.7_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/kube-webhook-certgen/0.0.7/images/sha256-99c5ac7ef7cf17b180a3ae9d11144120ff203017d6bd805dc95ab2648a5a6e7e?context=explore) |
 | kubeshop/testkube-api-server:2.1.88 | API server for the Testkube agent. | [View Report](./testkube-api-server-2.1.88_linux_amd64.md) | [View Report](./testkube-api-server-2.1.88_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-api-server/2.1.88/images/sha256-2f860511b683786b21230a0dd120ece5966710bf3bbc535bc4a4fcb8518fdba5?context=explore) |
 | kubeshop/testkube-operator:2.1.89 | Controller for the Testkube operator. | [View Report](./testkube-operator-2.1.89_linux_amd64.md) | [View Report](./testkube-operator-2.1.89_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-operator/2.1.89/images/sha256-06c36b1d9dcd4dddfec8e86931579a633642ffb86431e276d5df57ed9509e354?context=explore) |
 | kubeshop/testkube-tw-init:2.1.88 | Image used to initialize a Workflow execution. | [View Report](./testkube-tw-init-2.1.88_linux_amd64.md) | [View Report](./testkube-tw-init-2.1.88_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-tw-init/2.1.88/images/sha256-e29247043372d567fbf8bffde80e8defb56b0ab80c36f217930b74a10f6528cd?context=explore) |
