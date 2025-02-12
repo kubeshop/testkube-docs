@@ -539,6 +539,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Enable Copilot",
+              id: "articles/copilot-enable",
+            },
+            {
+              type: "doc",
               label: "How Copilot can help",
               id: "articles/copilot-can-help",
             },
