@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube docker
 
 Testkube Docker commands
@@ -29,5 +25,6 @@ testkube docker [flags]
 
 ### SEE ALSO
 
-- [testkube](testkube.md) - Testkube entrypoint for kubectl plugin
-- [testkube docker init](testkube_docker_init.md) - Run Testkube Docker Agent and connect to Testkube Pro environment
+* [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
+* [testkube docker init](testkube_docker_init.md)	 - Run Testkube Docker Agent and connect to Testkube Pro environment
+

@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head
-
 ## testkube watch testworkflowexecution
 
 Watch output from test workflow execution
@@ -37,4 +33,5 @@ testkube watch testworkflowexecution <executionName> [flags]
 
 ### SEE ALSO
 
-- [testkube watch](testkube_watch.md) - Watch tests or test suites
+* [testkube watch](testkube_watch.md)	 - Watch tests or test suites
+

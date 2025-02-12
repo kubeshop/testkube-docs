@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube set
 
 Set resources
@@ -33,5 +29,6 @@ testkube set <resourceName> [flags]
 
 ### SEE ALSO
 
-- [testkube](testkube.md) - Testkube entrypoint for kubectl plugin
-- [testkube set context](testkube_set_context.md) - Set context data for Testkube Pro
+* [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
+* [testkube set context](testkube_set_context.md)	 - Set context data for Testkube Pro
+

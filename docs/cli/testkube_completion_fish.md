@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube completion fish
 
 Generate the autocompletion script for fish
@@ -12,17 +8,14 @@ Generate the autocompletion script for the fish shell.
 
 To load completions in your current shell session:
 
-```
 	testkube completion fish | source
-```
 
 To load completions for every new session, execute once:
 
-```
 	testkube completion fish > ~/.config/fish/completions/testkube.fish
-```
 
 You will need to start a new shell for this setup to take effect.
+
 
 ```
 testkube completion fish [flags]
@@ -48,4 +41,5 @@ testkube completion fish [flags]
 
 ### SEE ALSO
 
-- [testkube completion](testkube_completion.md) - Generate the autocompletion script for the specified shell
+* [testkube completion](testkube_completion.md)	 - Generate the autocompletion script for the specified shell
+
