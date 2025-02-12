@@ -117,7 +117,8 @@ spec:
 
 ## Container Configuration
 
-The **container** section sets up the environment where steps run. These settings can be applied globally or overridden on a per-step basis. For additional details, refer to the [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#containerconfig).
+[Container Schema Reference](/articles/crds/testworkflows.testkube.io-v1#containerconfig)
+The **container** section sets up the environment where steps run. These settings can be applied globally or overridden on a per-step basis.
 
 ### Container Image
 
@@ -199,6 +200,8 @@ steps:
 
 ## Steps
 
+[Steps Schema Reference](/articles/crds/testworkflows.testkube.io-v1#step)
+
 Steps are the individual actions that make up a Test Workflow.  
 They run in order and can be nested.
 
@@ -230,9 +233,9 @@ steps:
         shell: echo "Running sub-step 2"
 ```
 
-[Steps Schema Reference](/articles/crds/testworkflows.testkube.io-v1#step)
-
 ### Running Commands and Shell Scripts
+
+[Run Schema Reference](https://github.com/kubeshop/testkube-docs/blob/main/articles/crds/testworkflows.testkube.io-v1#steprun)
 
 There are multiple ways to execute commands:
 
@@ -259,11 +262,10 @@ There are multiple ways to execute commands:
     - shell: mkdir ~/some-directory && echo "Directory created"
   ```
 
-TODO: workdir for steps needed?
-
 ## Artifacts
 
 Workflows can capture artifacts (such as logs or reports) generated during execution.
+[Learn more about artifacts.](https://github.com/kubeshop/testkube-docs/blob/main/docs/articles/test-workflows-artifacts.md)
 
 ### Saving Artifacts from the Working Directory
 
@@ -337,8 +339,9 @@ spec:
 
 ## Events and Scheduling
 
-Test Workflows can be triggered automatically using events such as cronjobs.
 [Events Schema Reference](/articles/crds/testworkflows.testkube.io-v1#event)
+
+Test Workflows can be triggered automatically using events such as cronjobs.
 
 ### CronJob Trigger
 
