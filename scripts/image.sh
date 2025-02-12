@@ -185,7 +185,7 @@ add_image_desc "kubeshop/testkube-tw-init" "Image used to initialize a Workflow 
 add_image_desc "kubeshop/testkube-tw-toolkit" "Image used within a Workflow execution."
 add_image_desc "natsio/prometheus-nats-exporter" "NATS metrics exporter."
 add_image_desc "bitnami/minio" "Object store used by the Testkube control plane to store logs and artifacts."
-add_image_desc "ghcr.io/dexidp/dex" "Identity provider used by the Testkube control plane."
+add_image_desc "kubeshop/dex" "Identity provider used by the Testkube control plane."
 # Source: https://github.com/kubeshop/bitnami-containers
 add_image_desc "kubeshop/bitnami-mongodb" "Database used by the Testkube control plane."
 add_image_desc "kubeshop/testkube-enterprise-api" "API server for the Testkube control plane."
