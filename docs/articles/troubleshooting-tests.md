@@ -47,4 +47,4 @@ Testkube simplifies the troubleshooting process with several built-in features:
 
 ## Further Reading
 
-For more details on analyzing your test results, read about [Analyzing Test Results](../articles/analyzing-results.mdx).
+For more details on analyzing your test results, read about [Analyzing Test Results](../articles/analyzing-results).
