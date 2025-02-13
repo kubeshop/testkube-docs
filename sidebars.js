@@ -295,6 +295,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Parameterization",
+              id: "articles/test-workflows-examples-configuration",
+            },
+            {
+              type: "doc",
               label: "Expression Language",
               id: "articles/test-workflows-expressions",
             },
@@ -322,11 +327,6 @@ const sidebars = {
               type: "doc",
               label: "Sharding & Matrix Params",
               id: "articles/test-workflows-matrix-and-sharding",
-            },
-            {
-              type: "doc",
-              label: "Parameterization",
-              id: "articles/test-workflows-examples-configuration",
             },
             {
               type: "doc",

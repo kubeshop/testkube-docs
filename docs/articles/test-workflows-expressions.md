@@ -1,143 +1,183 @@
-# Test Workflows - Expressions
+# Test Workflows – Expressions
 
-## Expressions Language
+Our Test Workflows system uses a simple, yet powerful, expressions language to dynamically evaluate and transform values at runtime. This language is built on JSON and supports basic arithmetic, logical operations, and many useful built-in functions, enabling you to customize your workflows flexibly.
 
-We have designed a simple expressions language, that allows dynamic evaluation of different values.
+## Overview
 
-## JSON-Native
+- **JSON-Native:**  
+  Since the language is based on JSON, every valid JSON value is also a valid expression. For example, `[ "a", "b", "c" ]` is a valid expression.
 
-It is built on JSON, so every JSON syntax is a valid expression value as well, like `[ "a", "b", "c" ]`.
+- **Mathematical Operations:**  
+  You can perform arithmetic calculations directly within expressions. For instance, you can multiply a configuration parameter by a number like so:
 
-## Math
+  ```yaml
+  config.workers * 5
+  ```
 
-You can do basic math easily, like **config.workers * 5**.
+- **Dynamic Evaluation:**  
+  Expressions are used to evaluate conditions, dynamically set image tags, generate scripts, and more. They allow you to manipulate values on the fly during workflow execution.
 
-**Defining a Condition:**
+## Examples
+
+### Defining a Condition
+
+You can define conditions using logical and arithmetic operators. For example, this condition checks if there is more than one worker or if a force flag is set:
+
 ```yaml
-condition: 'config.workers > 1 || config.force'
+condition: "config.workers > 1 || config.force"
 ```
 
-**Dynamic Image Tag:**
+### Dynamic Image Tag
+
+By embedding expressions within double curly brackets `{{ }}`, you can dynamically generate values. In the example below, the container image tag is determined by the configuration parameter `version`:
+
 ```yaml
-image: 'mcr.microsoft.com/playwright:v{{ config.version }}'
+image: "mcr.microsoft.com/playwright:v{{ config.version }}"
 ```
 
-**Configurable K6 Script:**
+### Configurable K6 Script
+
+Expressions can also be used to build dynamic content files. For example, you can create a K6 script that uses JSON-parsed thresholds and additional script content from your configuration:
+
 ```yaml
 content:
   files:
-  - path: /k6-script.js
-    content: |
-      export const options = {
-        thresholds: {{ json(config.thresholds) }}
-      };
-      {{ config.script }}
-``` 
+    - path: /k6-script.js
+      content: |
+        export const options = {
+          thresholds: {{ json(config.thresholds) }}
+        };
+        {{ config.script }}
+```
 
-### Operators
+## Operators
 
-#### Arithmetic
+The expressions language supports a variety of operators. They follow standard mathematical rules for precedence.
 
-The operators have the precedence defined so the order will follow math rules. Examples:
+### Arithmetic Operators
 
-* `1 + 2 * 3` will result in `7`
-* `(1 + 2) * 3` will result in `9`
-* `2 * 3 ** 2` will result in `18`
+- **Addition (`+`) and Subtraction (`-`):**  
+  Perform addition or subtraction on numbers. They also allow string concatenation.
 
-| Operator                  | Returns                              | Description                                    | Example                                                                                                                                                                                                      |
-|---------------------------|--------------------------------------|------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `==` (or `=`)             | `bool`                               | Is equal?                                      | `3 == 5` is `false`                                                                                                                                                                                          |
-| `!=` (or `<>`)            | `bool`                               | Is not equal?                                  | `3 != 5` is `true`                                                                                                                                                                                           |
-| `>`                       | `bool`                               | Is greater than?                               | `3 > 5` is `false`                                                                                                                                                                                           |
-| `<`                       | `bool`                               | Is lower than?                                 | `3 < 5` is `true`                                                                                                                                                                                            |
-| `>=`                      | `bool`                               | Is greater than or equal?                      | `3 >= 5` is `false`                                                                                                                                                                                          |
-| `<=`                      | `bool`                               | Is lower than or equal?                        | `3 <= 5` is `true`                                                                                                                                                                                           |
-| `&&`                      | the last value or the falsy one      | Are both truthy?                               | `true && false` is `false`<br/>`5 && 0 && 3` is `0`<br/>`5 && 3 && 2` is `2`                                                                                                                                 |
-| <code>&#124;&#124;</code> | first truthy value or the last value | Is any truthy?                                 | <code>true &#124;&#124; false</code> is <code>true</code><br/><code>5 &#124;&#124; 3 &#124;&#124; 0</code> is `5`<br/><code>0 &#124;&#124; 5</code> is `5`<br/><code>"" &#124;&#124; "foo"</code> is `"foo"` |
-| `!`                       | `bool`                               | Is the value falsy?                            | `!0` is `true`                                                                                                                                                                                               |
-| `?` and `:`               | any of the values inside             | Ternary operator - if/else                     | `true ? 5 : 3` is `5`                                                                                                                                                                                        |
-| `+`                       | `string` or `float`                  | Add numbers together or concatenate text       | `1 + 3` is `4`<br />`"foo" + "bar"` is `"foobar"`<br />`"foo" + 5` is `"foo5"`                                                                                                                               |
-| `-`                       | `float`                              | Subtract one number from another               | `5 - 3` is `2`                                                                                                                                                                                               |
-| `%`                       | `float`                              | Divides numbers and returns the remainder      | `5 % 3` is `2`                                                                                                                                                                                               |
-| `/`                       | `float`                              | Divides two numbers                            | `6 / 3` is `2`<br />`10 / 4` is `2.5`<br />**Edge case:** `10 / 0` is `0` (for simplicity)                                                                                                                   |
-| `*`                       | `float`                              | Multiplies one number by the other             | `4 * 2` is `8`                                                                                                                                                                                               |
-| `**`                      | `float`                              | Exponentiation - power one number to the other | `2 ** 5` is `32`                                                                                                                                                                                             |
-| `(` and `)`               | the inner type                       | Compute the expression altogether              | `(2 + 3) * 5` is `20`                                                                                                                                                                                        |
+  **Examples:**
 
-#### Access
+  - `1 + 2 * 3` evaluates to `7`
+  - `(1 + 2) * 3` evaluates to `9`
+  - `"foo" + "bar"` evaluates to `"foobar"`
 
-| Operator | Description               | Example                                                                             |
-|----------|---------------------------|-------------------------------------------------------------------------------------|
-| `.`      | Access inner value        | `{"id": 10}.id` is `10`<br />`["a", "b"].1` is `"b"`                                |
-| `.*.`    | Wildcard mapping          | `[{"id": 5}, {"id": 3}].*.id` is `[5, 3]`                                           |
-| `...`    | Spread arguments operator | `shellquote(["foo", "bar baz"]...)` is equivalent of `shellquote("foo", "bar baz")` |
+- **Multiplication (`*`), Division (`/`), and Modulo (`%`):**  
+  Multiply, divide, or find the remainder between numbers.
+
+  **Examples:**
+
+  - `4 * 2` evaluates to `8`
+  - `10 / 4` evaluates to `2.5`
+  - `5 % 3` evaluates to `2`
+
+- **Exponentiation (`**`):\*\*  
+  Raise a number to the power of another.
+
+  **Example:**
+
+  - `2 ** 5` evaluates to `32`
+
+- **Parentheses (`(` and `)`):**  
+  Group expressions to control the order of evaluation.
+
+  **Example:**
+
+  - `(2 + 3) * 5` evaluates to `20`
+
+### Comparison and Logical Operators
+
+| Operator     | Returns | Description                                                | Example                    |
+| ------------ | ------- | ---------------------------------------------------------- | -------------------------- | --------------------------------------------------- | --- | --- | ------- |
+| `==` or `=`  | `bool`  | Checks equality                                            | `3 == 5` is `false`        |
+| `!=` or `<>` | `bool`  | Checks inequality                                          | `3 != 5` is `true`         |
+| `>`          | `bool`  | Greater than                                               | `3 > 5` is `false`         |
+| `<`          | `bool`  | Less than                                                  | `3 < 5` is `true`          |
+| `>=`         | `bool`  | Greater than or equal to                                   | `3 >= 5` is `false`        |
+| `<=`         | `bool`  | Less than or equal to                                      | `3 <= 5` is `true`         |
+| `&&`         | `bool`  | Logical AND (returns the last truthy or first falsy value) | `true && false` is `false` |
+| `            |         | `                                                          | `bool`                     | Logical OR (returns the first truthy or last value) | `0  |     | 5`is`5` |
+| `!`          | `bool`  | Logical NOT                                                | `!0` is `true`             |
+| `? :`        | any     | Ternary operator (if/else)                                 | `true ? 5 : 3` is `5`      |
+
+### Access Operators
+
+These operators allow you to access elements within data structures:
+
+| Operator | Description                  | Example                                                                             |
+| -------- | ---------------------------- | ----------------------------------------------------------------------------------- |
+| `.`      | Access a property or element | `{"id": 10}.id` returns `10`                                                        |
+| `.*.`    | Wildcard mapping             | `[{"id": 5}, {"id": 3}].*.id` returns `[5, 3]`                                      |
+| `...`    | Spread arguments             | `shellquote(["foo", "bar baz"]...)` is equivalent to `shellquote("foo", "bar baz")` |
 
 ## Built-in Variables
 
+The expressions language provides several built-in variables. Some of these are resolved before execution (and can be used in Pod settings), while others are available only dynamically within the container.
+
 ### General Variables
 
-There are some built-in variables available. Part of them may be resolved before execution (and therefore used for Pod settings),
-while the others may be accessible only dynamically in the container.
-
-#### Selected variables
-
-| Name                                                       | Resolved immediately | Description                                                                       |
-|------------------------------------------------------------|----------------------|-----------------------------------------------------------------------------------|
-| `always`                                                   | ✅                    | Alias for `true`                                                                  |
-| `never`                                                    | ✅                    | Alias for `false`                                                                 |
-| `config` variables (like `config.abc`)                     | ✅                    | Values provided for the configuration                                             |
-| `execution.id`                                             | ✅                    | TestWorkflow Execution's ID                                                       |
-| `execution.name`                                           | ✅                    | TestWorkflow Execution's name                                                     |
-| `execution.number`                                         | ✅                    | TestWorkflow Execution's sequence number                                          |
-| `execution.scheduledAt`                                    | ✅                    | TestWorkflow Execution's scheduled at date                                        |
-| `resource.id`                                              | ✅                    | Either execution ID, or unique ID for parallel steps and services                 |
-| `resource.root`                                            | ✅                    | Either execution ID, or nested resource ID, of the resource that has scheduled it |
-| `namespace`                                                | ✅                    | Namespace where the execution will be scheduled                                   |
-| `workflow.name`                                            | ✅                    | Name of the executed TestWorkflow                                                 |
-| `organization.id`                                          | ✅                    | Organization ID (when running with Control Plane)                                 |
-| `environment.id`                                           | ✅                    | Environment ID (when running with Control Plane)                                  |
-| `dashboard.url`                                            | ✅                    | URL of the environment's Dashboard                                                |
-| `labels` variables (like `labels.some_label_key`)          | ✅                    | Labels of the executed Test Workflow (`.`, `-`, `/` are replaced by `_`)                                             |
-| `env` variables (like `env.SOME_VARIABLE`)                 | ❌                    | Environment variable value                                                        |
-| `failed`                                                   | ❌                    | Is the TestWorkflow Execution failed already at this point?                       |
-| `passed`                                                   | ❌                    | Is the TestWorkflow Execution still not failed at this point?                     |
-| `services` (like `services.db.0.ip` or `services.db.*.ip`) | ❌                    | Get the IPs of initialized services                                               |
+| Name                                     | Resolved Immediately | Description                                                             |
+| ---------------------------------------- | -------------------- | ----------------------------------------------------------------------- |
+| `always`                                 | ✅                   | Alias for `true`                                                        |
+| `never`                                  | ✅                   | Alias for `false`                                                       |
+| `config` (e.g., `config.abc`)            | ✅                   | User-provided configuration values                                      |
+| `execution.id`                           | ✅                   | ID of the current TestWorkflow execution                                |
+| `execution.name`                         | ✅                   | Name of the current TestWorkflow execution                              |
+| `execution.number`                       | ✅                   | Sequence number of the execution                                        |
+| `execution.scheduledAt`                  | ✅                   | Scheduled execution date/time                                           |
+| `resource.id`                            | ✅                   | Unique ID for parallel steps or services                                |
+| `resource.root`                          | ✅                   | Resource ID of the parent resource                                      |
+| `namespace`                              | ✅                   | Namespace where the execution runs                                      |
+| `workflow.name`                          | ✅                   | Name of the executed TestWorkflow                                       |
+| `organization.id`                        | ✅                   | Organization ID (when using Control Plane)                              |
+| `environment.id`                         | ✅                   | Environment ID (when using Control Plane)                               |
+| `dashboard.url`                          | ✅                   | URL of the environment’s Dashboard                                      |
+| `labels` (e.g., `labels.some_label_key`) | ✅                   | Labels assigned to the TestWorkflow (special characters are normalized) |
+| `env` (e.g., `env.SOME_VARIABLE`)        | ❌                   | Environment variable values (resolved at runtime)                       |
+| `failed`                                 | ❌                   | Indicates if the execution has already failed                           |
+| `passed`                                 | ❌                   | Indicates if the execution has not yet failed                           |
+| `services` (e.g., `services.db.0.ip`)    | ❌                   | IP addresses of initialized services                                    |
 
 ### Contextual Variables
 
-In some contexts, there are additional variables available.
+Additional variables are available in specific contexts:
 
 #### Retry Conditions
 
-When using custom `retry` condition, you can use `self.passed` and `self.failed` for determining the status based on the step status.
+When defining a custom retry condition, you can use `self.passed` and `self.failed` to determine the step status:
 
 ```yaml
 spec:
   steps:
-  - shell: exit 0
-    # ensure that the step won't fail for 5 executions
-    retry:
-      count: 5
-      until: 'self.failed' 
+    - shell: exit 0
+      # Retry until the step has failed, for up to 5 executions
+      retry:
+        count: 5
+        until: "self.failed"
 ```
 
 #### Matrix and Shard
 
-When using `services` (service pods), `parallel` (parallel workers), or `execute` (test suite) steps:
+When running steps in parallel (via services, parallel, or execute steps), you can access:
 
-* You can use `matrix.<name>` and `shard.<name>` to access parameters for each copy.
-* You can access `index` and `count` that will differ for each copy.
-* Also, you may use `matrixIndex`, `matrixCount`, `shardIndex` and `shardCount` to get specific indexes/numbers for combinations and shards. 
+- `matrix.<name>` and `shard.<name>` for custom parameters
+- `index` and `count` for each copy
+- `matrixIndex`, `matrixCount`, `shardIndex`, and `shardCount` for detailed indexing
+
+Example using matrix values:
 
 ```yaml
 spec:
   services:
-    # Start two workers and label them with index information
+    # Deploy two workers with index information
     db:
       count: 2
       description: "Instance {{ index + 1 }} of {{ count }}" # "Instance 1 of 2" and "Instance 2 of 2"
       image: mongo:latest
-    # Run 2 servers with different node versions
+    # Deploy two servers with different Node.js versions
     api:
       matrix:
         node: [20, 21]
@@ -145,74 +185,83 @@ spec:
       image: "node:{{ matrix.node }}"
 ```
 
+---
+
 ## Built-in Functions
 
-### Casting
+The expressions language includes many functions that help manipulate and cast values.
 
-There are some functions that help to cast values to a different type. Additionally, when using wrong types in different places, the engine tries to cast them automatically.
+### Casting Functions
 
-| Name     | Returns                 | Description              | Example                                                                                                                   |
-|----------|-------------------------|--------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| `string` | `string`                | Cast value to a string   | `string(5)` is `"5"`<br />`string([10, 15, 20])` is `"10,15,20"`<br />`string({ "foo": "bar" })` is `"{\"foo\":\"bar\"}"` |
-| `list`   | list of provided values | Build a list of values   | `list(10, 20)` is `[ 10, 20 ]`                                                                                            |
-| `int`    | `int`                   | Maps to integer          | `int(10.5)` is `10`<br />`int("300.50")` is `300`                                                                         |
-| `bool`   | `bool`                  | Maps value to boolean    | `bool("")` is `false`<br />`bool("1239")` is `true`                                                                       |
-| `float`  | `float`                 | Maps value to decimal    | `float("300.50")` is `300.5`                                                                                              |
-| `eval`   | anything                | Evaluates the expression | `eval("4 * 5")` is `20`                                                                                                   |
+| Function | Returns | Description                                 | Example                           |
+| -------- | ------- | ------------------------------------------- | --------------------------------- |
+| `string` | string  | Casts a value to a string                   | `string(5)` returns `"5"`         |
+| `list`   | list    | Creates a list from provided values         | `list(10, 20)` returns `[10, 20]` |
+| `int`    | int     | Converts a value to an integer              | `int(10.5)` returns `10`          |
+| `bool`   | bool    | Converts a value to a boolean               | `bool("")` returns `false`        |
+| `float`  | float   | Converts a value to a floating-point number | `float("300.50")` returns `300.5` |
+| `eval`   | any     | Evaluates an expression                     | `eval("4 * 5")` returns `20`      |
 
-### General
+### General Functions
 
-| Name         | Returns         | Description                                                                                                                                     | Example                                                                                                  |
-|--------------|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| `join`       | `string`        | Join list elements                                                                                                                              | `join(["a", "b"])` is `"a,b"`<br />`join(["a", "b"], " - ")` is `"a - b"`                                |
-| `split`      | `list`          | Split string to list                                                                                                                            | `split("a,b,c")` is `["a", "b", "c"]`<br />`split("a - b - c", " - ")` is `["a", "b", "c"]`              |
-| `trim`       | `string`        | Trim whitespaces from the string                                                                                                                | `trim("   \nabc  d  ")` is `"abc  d"`                                                                    |
-| `len`        | `int`           | Length of array, map or string                                                                                                                  | `len([ "a", "b" ])` is `2`<br />`len("foobar")` is `6`<br />`len({ "foo": "bar" })` is `1`               |
-| `floor`      | `int`           | Round value down                                                                                                                                | `floor(10.5)` is `10`                                                                                    |
-| `ceil`       | `int`           | Round value up                                                                                                                                  | `ceil(10.5)` is `11`                                                                                     |
-| `round`      | `int`           | Round value to nearest integer                                                                                                                  | `round(10.5)` is `11`                                                                                    |
-| `at`         | anything        | Get value of the element                                                                                                                        | `at([10, 2], 1)` is `2`<br />`at({"foo": "bar"}, "foo")` is `"bar"`                                      |
-| `tojson`     | `string`        | Serialize value to JSON                                                                                                                         | `tojson({ "foo": "bar" })` is `"{\"foo\":\"bar\"}"`                                                      |
-| `json`       | anything        | Parse the JSON                                                                                                                                  | `json("{\"foo\":\"bar\"}")` is `{ "foo": "bar" }`                                                        |
-| `toyaml`     | `string`        | Serialize value to YAML                                                                                                                         | `toyaml({ "foo": "bar" })` is `"foo: bar\n`                                                              |
-| `yaml`       | anything        | Parse the YAML                                                                                                                                  | `yaml("foo: bar")` is `{ "foo": "bar" }`                                                                 |
-| `shellquote` | `string`        | Sanitize arguments for shell                                                                                                                    | `shellquote("foo bar")` is `"\"foo bar\""`<br />`shellquote("foo", "bar baz")` is `"foo \"bar baz\""`    |
-| `shellparse` | `[]string`      | Parse shell arguments                                                                                                                           | `shellparse("foo bar")` is `["foo", "bar"]`<br />`shellparse("foo \"bar baz\"")` is `["foo", "bar baz"]` |
-| `map`        | `list` or `map` | Map list or map values with expression; `_.value` and `_.index`/`_.key` are available                                                           | `map([1,2,3,4,5], "_.value * 2")` is `[2,4,6,8,10]`                                                      |
-| `filter`     | `list`          | Filter list values with expression; `_.value` and `_.index` are available                                                                       | `filter([1,2,3,4,5], "_.value > 2")` is `[3,4,5]`                                                        |
-| `jq`         | anything        | Execute [**jq**](https://en.wikipedia.org/wiki/Jq_(programming_language)) against value                                                         | <code>jq([1,2,3,4,5], ". &#124; max")</code> is `[5]`                                                    |
-| `range`      | `[]int`         | Build range of numbers                                                                                                                          | `range(5, 10)` is `[5, 6, 7, 8, 9]`<br />`range(5)` is `[0, 1, 2, 3, 4]`                                 |
-| `relpath`    | `string`        | Build relative path                                                                                                                             | `relpath("/a/b/c")` may be `./b/c`<br />`relpath("/a/b/c", "/a/b")` is `"./c"`                           |
-| `abspath`    | `string`        | Build absolute path                                                                                                                             | `abspath("/a/b/c")` is `/a/b/c`<br />`abspath("b/c")` may be `/some/working/dir/b/c`                     |
-| `chunk`      | `[]list`        | Split list to chunks of specified maximum size                                                                                                  | `chunk([1,2,3,4,5], 2)` is `[[1,2], [3,4], [5]]`                                                         |
-| `date`       | `string`        | Return current date (either `2006-01-02T15:04:05.000Z07:00` format or custom argument ([**Go syntax**](https://go.dev/src/time/format.go#L101)) | `date()` may be `"2024-06-04T11:59:32.308Z"`<br />`date("2006-01-02")` may be `2024-06-04`               |
-| `secret`     | `string`        | Creates an environment variable with a reference to the secret. First parameter is a secret name, second parameter is a key name                | `secret("name", "key")` is `"env.S_N_name_K_key"`<br />`secret("name", "key")` is `"env.S_N_name_K_key"` |
+| Function     | Returns     | Description                                                | Example                                                                                              |
+| ------------ | ----------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------ |
+| `join`       | string      | Joins list elements into a single string                   | `join(["a", "b"])` returns `"a,b"`; `join(["a", "b"], " - ")` returns `"a - b"`                      |
+| `split`      | list        | Splits a string into a list based on a delimiter           | `split("a,b,c")` returns `["a", "b", "c"]`                                                           |
+| `trim`       | string      | Removes whitespace from both ends of a string              | `trim("   \nabc  d  ")` returns `"abc  d"`                                                           |
+| `len`        | int         | Returns the length of an array, map, or string             | `len(["a", "b"])` returns `2`                                                                        |
+| `floor`      | int         | Rounds a number down to the nearest integer                | `floor(10.5)` returns `10`                                                                           |
+| `ceil`       | int         | Rounds a number up to the nearest integer                  | `ceil(10.5)` returns `11`                                                                            |
+| `round`      | int         | Rounds a number to the nearest integer                     | `round(10.5)` returns `11`                                                                           |
+| `at`         | any         | Retrieves an element from a list or map by index/key       | `at([10, 2], 1)` returns `2`; `at({"foo": "bar"}, "foo")` returns `"bar"`                            |
+| `tojson`     | string      | Serializes a value to JSON format                          | `tojson({ "foo": "bar" })` returns `"{\"foo\":\"bar\"}"`                                             |
+| `json`       | any         | Parses a JSON string into an object                        | `json("{\"foo\":\"bar\"}")` returns `{ "foo": "bar" }`                                               |
+| `toyaml`     | string      | Serializes a value to YAML format                          | `toyaml({ "foo": "bar" })` returns a YAML string                                                     |
+| `yaml`       | any         | Parses a YAML string into an object                        | `yaml("foo: bar")` returns `{ "foo": "bar" }`                                                        |
+| `shellquote` | string      | Sanitizes and quotes arguments for safe shell usage        | `shellquote("foo bar")` returns `"\"foo bar\""`                                                      |
+| `shellparse` | list        | Parses a shell command string into an array of arguments   | `shellparse("foo bar")` returns `["foo", "bar"]`                                                     |
+| `map`        | list or map | Applies an expression to each element in a list or map     | `map([1,2,3,4,5], "_.value * 2")` returns `[2,4,6,8,10]`                                             |
+| `filter`     | list        | Filters a list using an expression predicate               | `filter([1,2,3,4,5], "_.value > 2")` returns `[3,4,5]`                                               |
+| `jq`         | any         | Executes a jq expression on a value                        | `jq([1,2,3,4,5], ".                                                                                  | max")`returns`[5]` |
+| `range`      | list        | Generates a range of numbers                               | `range(5, 10)` returns `[5, 6, 7, 8, 9]`; `range(5)` returns `[0, 1, 2, 3, 4]`                       |
+| `relpath`    | string      | Computes a relative file path                              | `relpath("/a/b/c")` might return `./b/c`                                                             |
+| `abspath`    | string      | Computes an absolute file path                             | `abspath("b/c")` might return `/some/working/dir/b/c`                                                |
+| `chunk`      | list        | Splits a list into chunks of a specified maximum size      | `chunk([1,2,3,4,5], 2)` returns `[[1,2], [3,4], [5]]`                                                |
+| `date`       | string      | Returns the current date in a specified format             | `date()` might return `"2024-06-04T11:59:32.308Z"`; `date("2006-01-02")` might return `"2024-06-04"` |
+| `secret`     | string      | Creates a reference to a secret as an environment variable | `secret("name", "key")` returns a reference like `"env.S_N_name_K_key"`                              |
 
-### File System
+### File System Functions
 
-These functions are only executed during the execution.
+These functions are executed during workflow runtime to interact with the file system.
 
-| Name   | Returns    | Description           | Example                                                                                                          |
-|--------|------------|-----------------------|------------------------------------------------------------------------------------------------------------------|
-| `file` | `string`   | File contents         | `file("/etc/some/path")` may be `"some\ncontent"`                                                                |
-| `glob` | `[]string` | Find files by pattern | `glob("/etc/**/*", "./x/**/*.js")` may be `["/etc/some/file", "/etc/other/file", "/some/working/dir/x/file.js"]` |
+| Function | Returns | Description                    | Example                                                                                                                |
+| -------- | ------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| `file`   | string  | Returns the contents of a file | `file("/etc/some/path")` might return `"some\ncontent"`                                                                |
+| `glob`   | list    | Finds files matching a pattern | `glob("/etc/**/*", "./x/**/*.js")` might return `["/etc/some/file", "/etc/other/file", "/some/working/dir/x/file.js"]` |
+
+Example using file and glob functions:
 
 ```yaml
 condition: 'len(glob("/data/repo/**/*.spec.js")) > 0'
 ```
 
+Another example combining file reading and command generation:
+
 ```yaml
-- shell: 'generate-api-key.sh > /data/api-key'
+- shell: "generate-api-key.sh > /data/api-key"
 - execute:
     workflows:
-    - name: example
-      config: 
-        entries: '{{ tojson(split(file("/data/list*), "\n")) }}'
-        script: '{{ file("/data/api-key") }}'
-``` 
+      - name: example
+        config:
+          entries: '{{ tojson(split(file("/data/list*"), "\n")) }}'
+          script: '{{ file("/data/api-key") }}'
+```
+
+You can also use functions like `shellquote` to safely pass arguments to shell commands:
 
 ```yaml
 shell: |
   /bin {{ shellquote("--", config.args ...) }}
 ```
 
+By leveraging the Test Workflows expressions language, you can build dynamic, configurable workflows that perform complex evaluations and manipulations at runtime. For additional details on operators, built-in functions, and contextual variables, please refer back to this document whenever needed.
