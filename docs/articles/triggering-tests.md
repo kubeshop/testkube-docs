@@ -1,25 +1,51 @@
 # Triggering Tests
 
-Once your test execution has been defined, you’re tasked with triggering your tests:
+## Overview
 
-- If you’ve defined them as part of a workflow/pipeline in CI/CD, your test executions will be triggered accordingly by your CI/CD solution(s).
-- If you’re using a GitOps approach you might want to trigger tests after certain Kubernetes events occur in your clusters, for example, when a pod has been updated.
-- If you’re running non-functional tests (load, security, compliance, etc), you might want to trigger these either manually (when your infrastructure is ready) or on a regular basis - decoupled from CI/CD - for example, run security tests on a daily basis.
-- Finally, you might want to trigger any test execution manually, for example to run acceptance tests, or rerun failed automated tests to see if they are working properly after a system update, without having to run the entire CI/CD pipeline.
+Once your test execution is defined, the next step is to trigger your tests. This can be done in various ways—automatically or manually—depending on your process and infrastructure.
 
-In reality, any combination of the above applies in most cases - both automated and manual triggering of tests is required for a successful testing process.
+## General Test Triggering Scenarios
 
-Triggering tests is either automated or done manually by either DevOps (for example non-functional tests) or Dev/QA as needed.
+Consider the following methods to trigger tests:
+
+- **CI/CD Pipelines:**  
+  If tests are part of a workflow or pipeline, your CI/CD solution will trigger them automatically.
+
+- **GitOps Approach:**  
+  Trigger tests in response to Kubernetes events (e.g., when a pod is updated).
+
+- **Non-Functional Tests:**  
+  For load, security, or compliance tests, you might:
+
+  - Run tests manually when your infrastructure is ready.
+  - Schedule tests to run on a regular basis (e.g., daily security scans), decoupled from your CI/CD.
+
+- **Manual Execution:**  
+  You may also trigger tests manually to run acceptance tests or to rerun failed automated tests after system updates, without executing the entire CI/CD pipeline.
+
+_Note:_ In many cases, a combination of automated and manual triggering is required. DevOps teams typically handle automated triggers (like non-functional tests), while Dev/QA might trigger tests as needed.
 
 ## Triggering Tests with Testkube
 
-The decoupling of test definition and execution from your CI/CD is one of the most important and powerful aspects of Testkube, as this allows you to trigger your tests in any way needed:
-- From your CI/CD workflows using one of our [CI/CD integrations](../articles/cicd-overview.mdx).
-- In response to Kubernetes events using [Triggers](../articles/test-triggers).
-- Manually via the [CLI](../articles/install/1-cli.mdx) or the [Testkube Dashboard](../articles/testkube-dashboard-explore.md).
-- At a recurring schedule using [Test Workflow Scheduling](../articles/test-workflows.md).
-- From any other tool using the [Testkube REST API](/openapi/overview).
+Testkube decouples test definition from execution, providing flexibility to trigger tests in multiple ways:
+
+- **From CI/CD Workflows:**  
+  Utilize one of our [CI/CD integrations](../articles/cicd-overview.mdx).
+
+- **Kubernetes Event Triggers:**  
+  React to Kubernetes events using [Triggers](../articles/test-triggers).
+
+- **Manual Execution:**  
+  Run tests manually via the [CLI](../articles/install/1-cli.mdx) or the [Testkube Dashboard](../articles/testkube-dashboard-explore.md).
+
+- **Recurring Schedules:**  
+  Execute tests at set intervals using [Test Workflow Scheduling](../articles/test-workflows.md).
+
+- **Via the REST API:**  
+  Trigger tests from any tool using the [Testkube REST API](/openapi/overview).
 
 ![CI/CD Integrations](../img/concepts-cicd-integrations.png)
 
-Read on about [Running Tests](../articles/running-scaling-tests.md).
+## Further Reading
+
+For more details on running and scaling tests, see our article on [Running Tests](../articles/running-scaling-tests.md).

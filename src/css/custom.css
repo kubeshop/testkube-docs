@@ -74,8 +74,8 @@ html[data-theme="dark"] {
   --ifm-color-content: #cbd5e1;
   --ifm-color-content-secondary: #94a3b8;
 
-  --ifm-breadcrumb-separator-filter: invert(64%) sepia(11%) saturate(0%)
-    hue-rotate(149deg) brightness(99%) contrast(95%);
+  --ifm-breadcrumb-separator-filter: invert(64%) sepia(11%) saturate(0%) hue-rotate(149deg) brightness(99%)
+    contrast(95%);
 
   --ifm-code-background: #1e293b;
 
@@ -376,9 +376,6 @@ ul:hover {
 }
 
 @media screen and (max-width: 996px) {
-  :root {
-    --ifm-font-size-base: 18px;
-  }
   article header h1 {
     font-size: 1.5rem !important;
   }
@@ -388,9 +385,6 @@ ul:hover {
 }
 
 @media screen and (min-width: 997px) {
-  :root {
-    --ifm-font-size-base: 17px;
-  }
   header h1 {
     font-size: 2rem !important;
   }

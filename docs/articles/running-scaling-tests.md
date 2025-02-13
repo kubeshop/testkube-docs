@@ -1,29 +1,59 @@
 # Running and Scaling Tests
 
-## Scale 
+## Scaling Test Executions
 
-The actual scaling of test executions is done using corresponding infrastructure either provided by your CI/CD tooling or yourself (or a combination thereof..). Depending on the complexity of your teams and testing activities, this will require you to ensure that your infrastructure has the capacity and resilience to run:
+Scaling test executions involves leveraging your CI/CD infrastructure, your own resources, or a combination of both. Key aspects include:
 
-- Multiple tests triggered separately in parallel, if multiple teams/components are building at the same time.
-- The same test at scale. For example, if you’re scaling out a load-test to generate massive load, or scaling out an E2E test to run against multiple browsers at the same time.
-- Collision: avoid that tests impact each other (load or state) in regard to shared resources (unless you want them to..). 
+### Infrastructure Considerations
 
-From a security perspective, executing your tests will require that your tests have network/component access to the components/applications being tested, which could impose a challenge if tests are run from “outside” the infrastructure where the target applications are running.
+- **Parallel Execution:**  
+  Support for multiple tests running concurrently—especially useful when different teams or components are building at the same time.
+
+- **Scaling Individual Tests:**  
+  Ability to scale a single test:
+  - **Load Testing:** Generate massive load.
+  - **E2E Testing:** Run tests across multiple browsers concurrently.
+
+### Avoiding Resource Collisions
+
+- Ensure that concurrently running tests do not impact each other in terms of load or state on shared resources (unless intentionally desired).
+
+### Security Considerations
+
+- Tests must have network/component access to the applications being tested.
+- Running tests from outside the infrastructure may pose challenges, so ensure secure access paths are in place.
 
 ## Running Tests with Testkube
 
-Testkube leverages Kubernetes to run your tests, resulting in several run-time benefits:
+Testkube leverages Kubernetes to execute your tests, offering several run-time benefits:
 
-- Scaling test execution to any number of individual tests executing in parallel is managed by the Kubernetes 
-  job scheduler, ensuring efficient resource allocation and test execution (provided that Kubernetes has sufficient resources itself).
-- Scaling the same test for the sake of generating massive load or running multiple permutations in parallel 
-  is available through corresponding [parallelization](test-workflows-parallel.mdx) and [sharding](test-workflows-matrix-and-sharding.mdx)
-  functionality in Test Workflows. 
-- To ensure your test executions make optimal usage of your underlying Kubernetes infrastructure you can 
-  configure Test Workflow Pods in regard to [Pod Affinity](test-workflows-job-and-pod#example-single-execution-per-node) 
-  and [Topology Spread Constraints](test-workflows-job-and-pod#example-distribute-evenly-across-nodes) 
-- Since tests run inside your clusters, you generally don’t need to give external network access to your testing tools, ensuring that tests are run both securely and aligned with the configuration of a production environment.
+### Kubernetes-Based Execution
+
+- **Automated Scaling:**  
+  The Kubernetes job scheduler manages scaling, enabling efficient resource allocation as long as Kubernetes itself has sufficient capacity.
+
+### Parallelization & Sharding
+
+- **Parallel Execution:**  
+  Use Test Workflows' built-in [parallelization](test-workflows-parallel.mdx) capabilities to run multiple tests simultaneously.
+- **Sharding:**  
+  Scale the same test across multiple instances using [sharding](test-workflows-matrix-and-sharding.mdx) to generate massive load or test multiple permutations.
+
+### Optimizing Pod Usage
+
+- Configure Test Workflow Pods for optimal performance using:
+  - **[Pod Affinity](test-workflows-job-and-pod#example-single-execution-per-node):**  
+    Control where your tests run.
+  - **[Topology Spread Constraints](test-workflows-job-and-pod#example-distribute-evenly-across-nodes):**  
+    Evenly distribute workloads across nodes.
+
+### Security Benefits
+
+- Since tests run inside your clusters, external network access for testing tools is generally unnecessary.
+- This setup enhances security and mirrors a production-like environment.
 
 ![Paralleliztion](../img/concepts-parallelization.png)
 
-Read on about [Troubleshooting Tests](../articles/troubleshooting-tests.md).
+## Further Reading
+
+Learn more about resolving issues by reading our article on [Troubleshooting Tests](../articles/troubleshooting-tests.md).
