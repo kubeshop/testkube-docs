@@ -12,9 +12,9 @@ Follow these steps:
 3. Use the [Get Project Issue Type](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-projects/#api-rest-api-3-project-projectid-hierarchy-get) operation to find the
    `id` of the type of issue that you want to create with the Webhook.
 
-## Create a Webhook Template for creating Issues 
+## Create a WebhookTemplate for creating Issues 
 
-The actual Webhook configuration will be in a [Webhook Template](/articles/webhooks#webhook-templates) so it can be reused for multiple Webhooks. 
+The actual Webhook configuration will be in a [WebhookTemplate](/articles/webhooks#webhook-templates) so it can be reused for multiple Webhooks. 
 
 In this example we will add parameters for
 

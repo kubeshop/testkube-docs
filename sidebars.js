@@ -853,6 +853,12 @@ const sidebars = {
         { type: "doc", label: "CDEvents", id: "articles/cd-events" },
         { type: "doc", label: "Tekton", id: "articles/tekton" },
         {
+          type: "link",
+          label: "Keptn",
+          href: "https://testkube.io/learn/leveraging-testkube-as-a-quality-gate-in-multi-stage-deployments-with-keptn",
+          description: "Leveraging Testkube as a Quality Gate in Multi-Stage Deployments with Keptn",
+        },
+        {
           type: "doc",
           label: "Slack Integration",
           id: "articles/slack-integration",
