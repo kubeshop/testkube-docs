@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube delete testworkflow
 
 Delete test workflows
@@ -31,4 +27,5 @@ testkube delete testworkflow [name] [flags]
 
 ### SEE ALSO
 
-- [testkube delete](testkube_delete.md) - Delete resources
+* [testkube delete](testkube_delete.md)	 - Delete resources
+

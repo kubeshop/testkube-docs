@@ -12,8 +12,8 @@ Under the **Workflow Templates** tab, you will find a list of available Workflow
 
 :::info
 
-Templates named `offical/...` are used by the [Workflow Wizard](/articles/testkube-dashboard-workflows-overview#creating-a-workflow-using-the-wizard) to help you create Workflows for the corresponding
-testing tools.
+Templates named `offical/...` are used by the [Workflow Wizard](/articles/test-workflows-create-wizard#create-with-wizard) to help 
+you create Workflows for the corresponding testing tools.
 
 :::
 

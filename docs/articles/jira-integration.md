@@ -1,35 +1,35 @@
-#### Atlassian Jira
+# Atlassian Jira
 
-You can use Webhooks to create issues in Atlassian Jira projects.
-Please check the Jira API Spec for additional details [here](https://developer.atlassian.com/cloud/jira/platform/rest/v3/). 
+You can use Webhooks to create issues in Atlassian JIRA projects, but you will first need to use the [JIRA REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v3/) 
+to look up the project id and issuetype id for your target JIRA Project and type of issue you want to create.
 
-In order to send the message when a test workflow execution finishes, the following Webhook and Webhook template can be used:
+## Looking up JIRA Project and IssueType ids
 
-Webhook:
+Follow these steps:
 
-```yaml
-apiVersion: executor.testkube.io/v1
-kind: Webhook
-metadata:
-  name: jira
-  namespace: testkube
-spec:
-  config:
-    duedate:
-      value: "2025-02-01"
-    issuetype:
-      value: "10004"
-    project:
-      value: "10019"
-    token:
-      secret:
-        name: webhook-vars
-        key: token
-  webhookTemplateRef:
-    name: template-jira
-```
+1. Create a JIRA API Token that you can use for your API calls - [Read More](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/).
+2. Use the [Get All Projects](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-projects/#api-rest-api-3-project-get) operation to find the `id` of the target project.
+3. Use the [Get Project Issue Type](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-projects/#api-rest-api-3-project-projectid-hierarchy-get) operation to find the
+   `id` of the type of issue that you want to create with the Webhook.
 
-Webhook template:
+## Create a WebhookTemplate for creating Issues 
+
+The actual Webhook configuration will be in a [WebhookTemplate](/articles/webhooks#webhook-templates) so it can be reused for multiple Webhooks. 
+
+In this example we will add parameters for
+
+- `duedate` - the due date for the created issue.
+- `issuetype` - the id of the default issue type to create (as looked up with the API above).
+- `priority` the priority id of the created issue - use [Get Priorities](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-priorities/#api-rest-api-3-priority-get) to look this up.
+- `project` - the id of the default project to create issues in (as looked up with the API above).
+- `token` - JIRA API token
+
+Any Webhook using this WebhookTemplate will be able to override these values as needed.
+
+- The `payloadTemplate` specifies the content to send to the [Create Issue](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/#api-rest-api-3-issue-post) operation, 
+  read more about [Webhook Payloads](/articles/webhooks#webhook-payload) to see how you can configure this.
+- Specify the `uri` for your JIRA instance (you could even put this in a parameter if you want to create issues in different JIRA instances).
+- The template will trigger on the `end-testworkflow-failed` event, you can of course change this to whatever suits your needs, or even make it configurable via a corresponding parameter.
 
 ```yaml
 apiVersion: executor.testkube.io/v1
@@ -106,7 +106,9 @@ spec:
     Authorization: "Basic {{ index .Config \"token\" }}"
 ```
 
-Secret:
+## Save the JIRA API Token to a Secret
+
+To ensure confidential handling of your JIRA API Token it is recommende to store it in a Secret:
 
 ```yaml
 apiVersion: v1
@@ -116,5 +118,46 @@ metadata:
   namespace: testkube
 type: Opaque
 data:
-  token: <your_data>
+  jiraApiToken: <your_jira_api_token>
+```
+
+## Create Webhook(s) for creating issues
+
+We can now create any number of Webhooks that use the above WebhookTemplate, with corresponding input values to override the default values as needed:
+ 
+```yaml
+apiVersion: executor.testkube.io/v1
+kind: Webhook
+metadata:
+  name: jira-webhook
+  namespace: testkube
+spec:
+  config:
+    duedate:
+      value: "2025-02-01"
+    issuetype:
+      value: "10004"
+    project:
+      value: "10019"
+    token:
+      secret:
+        name: webhook-vars
+        key: jiraApiToken
+  webhookTemplateRef:
+    name: template-jira
+```
+
+### Use Labels to control which Workflows that generate issues
+
+In the above example, you might not want to create JIRA Issues for all `end-testworkflow-failed` events in your Testkube Environment, in
+which case you can use [Resource Selectors](/articles/webhooks#resource-selector-labels) to narrow this down.
+
+For example, adding the below selector will result in only failed executions for Workflows labeled with `priority: p0` to trigger this Webhook and 
+creating a corresponding JIRA.
+
+```
+apiVersion: executor.testkube.io/v1
+kind: Webhook
+...
+  selector: priority=p0
 ```

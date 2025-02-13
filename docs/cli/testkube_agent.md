@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube agent
 
 Testkube Pro Agent related commands
@@ -29,4 +25,5 @@ testkube agent [flags]
 
 ### SEE ALSO
 
-- [testkube](testkube.md) - Testkube entrypoint for kubectl plugin
+* [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
+

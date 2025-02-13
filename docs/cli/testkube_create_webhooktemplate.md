@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube create webhooktemplate
 
 Create new Webhook Template
@@ -46,4 +42,5 @@ testkube create webhooktemplate [flags]
 
 ### SEE ALSO
 
-- [testkube create](testkube_create.md) - Create resource
+* [testkube create](testkube_create.md)	 - Create resource
+

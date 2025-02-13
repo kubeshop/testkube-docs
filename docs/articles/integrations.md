@@ -24,6 +24,7 @@ us know on our Slack channel so we can add it!
 - [BitBucket](https://testkube.io/learn/unleashing-the-power-of-ci-cd-testing-with-bitbucket-and-testkube) - Learn how to integrate Testkube with BitBucket.
 - [CircleCI](/articles/circleci) - Learn how to integrate Testkube with CircleCI.
 - [Tekton](/articles/tekton) - Learn how to integrate Testkube with Tekton.
+- [Keptn](https://testkube.io/learn/leveraging-testkube-as-a-quality-gate-in-multi-stage-deployments-with-keptn) - Leveraging Testkube as a Quality Gate in Multi-Stage Deployments with Keptn.
 - [Argo Rollouts](argorollouts-integration) - Learn how to use Testkube with Progressive Delivery in Argo Rollouts.
 
 ## GitOps Tooling

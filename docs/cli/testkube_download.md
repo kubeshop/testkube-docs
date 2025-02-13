@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube download
 
 Artifacts management commands
@@ -29,7 +25,8 @@ testkube download <resource> [flags]
 
 ### SEE ALSO
 
-- [testkube](testkube.md) - Testkube entrypoint for kubectl plugin
-- [testkube download artifact](testkube_download_artifact.md) - download artifact
-- [testkube download artifacts](testkube_download_artifacts.md) - download artifacts
-- [testkube download testsuite-artifacts](testkube_download_testsuite-artifacts.md) - download test suite artifacts
+* [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
+* [testkube download artifact](testkube_download_artifact.md)	 - download artifact
+* [testkube download artifacts](testkube_download_artifacts.md)	 - download artifacts
+* [testkube download testsuite-artifacts](testkube_download_testsuite-artifacts.md)	 - download test suite artifacts
+

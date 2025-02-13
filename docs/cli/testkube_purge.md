@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube purge
 
 Uninstall Testkube from your current kubectl context
@@ -34,4 +30,5 @@ testkube purge [flags]
 
 ### SEE ALSO
 
-- [testkube](testkube.md) - Testkube entrypoint for kubectl plugin
+* [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
+

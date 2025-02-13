@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube delete test
 
 Delete Test
@@ -31,4 +27,5 @@ testkube delete test [testName] [flags]
 
 ### SEE ALSO
 
-- [testkube delete](testkube_delete.md) - Delete resources
+* [testkube delete](testkube_delete.md)	 - Delete resources
+

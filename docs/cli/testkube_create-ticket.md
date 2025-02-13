@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube create-ticket
 
 Create bug ticket
@@ -33,4 +29,5 @@ testkube create-ticket [flags]
 
 ### SEE ALSO
 
-- [testkube](testkube.md) - Testkube entrypoint for kubectl plugin
+* [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
+

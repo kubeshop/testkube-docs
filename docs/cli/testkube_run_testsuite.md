@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube run testsuite
 
 Starts new test suite
@@ -62,4 +58,5 @@ testkube run testsuite <testSuiteName> [flags]
 
 ### SEE ALSO
 
-- [testkube run](testkube_run.md) - Runs tests, test suites or test workflows
+* [testkube run](testkube_run.md)	 - Runs tests, test suites or test workflows
+

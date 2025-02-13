@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube update executor
 
 Update Executor
@@ -50,4 +46,5 @@ testkube update executor [flags]
 
 ### SEE ALSO
 
-- [testkube update](testkube_update.md) - Update resource
+* [testkube update](testkube_update.md)	 - Update resource
+

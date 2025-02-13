@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube upgrade
 
 Upgrade Helm chart, install dependencies and run migrations
@@ -56,4 +52,5 @@ testkube upgrade [flags]
 
 ### SEE ALSO
 
-- [testkube](testkube.md) - Testkube entrypoint for kubectl plugin
+* [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
+

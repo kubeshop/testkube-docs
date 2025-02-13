@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube config api-server-port
 
 Set api server port for testkube client
@@ -29,4 +25,5 @@ testkube config api-server-port <value> [flags]
 
 ### SEE ALSO
 
-- [testkube config](testkube_config.md) - Set feature configuration value
+* [testkube config](testkube_config.md)	 - Set feature configuration value
+

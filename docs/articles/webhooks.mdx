@@ -226,7 +226,7 @@ Usage example:
     value: {{ if eq (.TestWorkflowExecution.Result.Status | testworkflowstatustostring ) "passed" }}"00FF00"{{ else }}"FF0000"{{ end }}
 ```
 
-You can use Sprig golang template functions if you need to have some special logic in your templates. 
+You can use Sprig golang template functions if you need to have some special logic in your templates.
 You can find a full list of them [here](https://masterminds.github.io/sprig/)
 
 #### Using API Server Environment Variables in Webhooks
@@ -536,22 +536,15 @@ Make sure that the value `testkube-api.dashboardUri` in the helm-charts is set t
 
 In order to re-use the Webhook specification, you can define a special Testkube resource - WebhookTemplate.
 It contains all the same fields as the Webhook resource, except `webhookTemplateRef` one, which is used for referencing a template in the webhook.
-WebhookTemplate can be used only as a part of the calling Webhook. It's content is merged into the Webhook specification.
+WebhookTemplate can be used only as a part of the calling Webhook. Its content is merged into the Webhook specification.
 
-Webhook:
+:::tip
+Check out the [JIRA Integration](jira-integration) document for a complete example of how to use WebhookTemplates with your Webhooks.
+:::
 
-```yaml
-apiVersion: executor.testkube.io/v1
-kind: Webhook
-metadata:
-  name: example-webhook
-  namespace: testkube
-spec:
-  webhookTemplateRef:
-    name: example-template
-```
+### Simlple WebhookTemplate example
 
-Webhook template:
+Here is a simple WebhookTemplate
 
 ```yaml
 apiVersion: executor.testkube.io/v1
@@ -564,6 +557,20 @@ spec:
   - end-testworkflow-success
   uri: https://webhook.site
 ```
+
+And here comes a Webhook that uses ´webhookTemplateRef´ to refer to this template.
+
+```yaml
+apiVersion: executor.testkube.io/v1
+kind: Webhook
+metadata:
+  name: example-webhook
+  namespace: testkube
+spec:
+  webhookTemplateRef:
+    name: example-template
+```
+
 
 ## Testing Webhooks
 
