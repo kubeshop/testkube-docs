@@ -90,28 +90,91 @@ The expressions language supports a variety of operators. They follow standard m
 
 ### Comparison and Logical Operators
 
-| Operator     | Returns | Description                                                | Example                    |
-| ------------ | ------- | ---------------------------------------------------------- | -------------------------- | --------------------------------------------------- | --- | --- | ------- |
-| `==` or `=`  | `bool`  | Checks equality                                            | `3 == 5` is `false`        |
-| `!=` or `<>` | `bool`  | Checks inequality                                          | `3 != 5` is `true`         |
-| `>`          | `bool`  | Greater than                                               | `3 > 5` is `false`         |
-| `<`          | `bool`  | Less than                                                  | `3 < 5` is `true`          |
-| `>=`         | `bool`  | Greater than or equal to                                   | `3 >= 5` is `false`        |
-| `<=`         | `bool`  | Less than or equal to                                      | `3 <= 5` is `true`         |
-| `&&`         | `bool`  | Logical AND (returns the last truthy or first falsy value) | `true && false` is `false` |
-| `            |         | `                                                          | `bool`                     | Logical OR (returns the first truthy or last value) | `0  |     | 5`is`5` |
-| `!`          | `bool`  | Logical NOT                                                | `!0` is `true`             |
-| `? :`        | any     | Ternary operator (if/else)                                 | `true ? 5 : 3` is `5`      |
+<table>
+  <thead>
+    <tr>
+      <th>Operator</th>
+      <th>Returns</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>==</code> or <code>=</code></td>
+      <td><code>bool</code></td>
+      <td>Checks equality</td>
+      <td><code>3 == 5</code> is <code>false</code></td>
+    </tr>
+    <tr>
+      <td><code>!=</code> or <code>&lt;&gt;</code></td>
+      <td><code>bool</code></td>
+      <td>Checks inequality</td>
+      <td><code>3 != 5</code> is <code>true</code></td>
+    </tr>
+    <tr>
+      <td><code>&gt;</code></td>
+      <td><code>bool</code></td>
+      <td>Greater than</td>
+      <td><code>3 &gt; 5</code> is <code>false</code></td>
+    </tr>
+    <tr>
+      <td><code>&lt;</code></td>
+      <td><code>bool</code></td>
+      <td>Less than</td>
+      <td><code>3 &lt; 5</code> is <code>true</code></td>
+    </tr>
+    <tr>
+      <td><code>&gt;=</code></td>
+      <td><code>bool</code></td>
+      <td>Greater than or equal to</td>
+      <td><code>3 &gt;= 5</code> is <code>false</code></td>
+    </tr>
+    <tr>
+      <td><code>&lt;=</code></td>
+      <td><code>bool</code></td>
+      <td>Less than or equal to</td>
+      <td><code>3 &lt;= 5</code> is <code>true</code></td>
+    </tr>
+    <tr>
+      <td><code>&amp;&amp;</code></td>
+      <td><code>bool</code></td>
+      <td>Logical AND (returns the last truthy or first falsy value)</td>
+      <td><code>true && false</code> is <code>false</code></td>
+    </tr>
+    <tr>
+      <td><code>||</code></td>
+      <td><code>bool</code></td>
+      <td>Logical OR (returns the first truthy or last value)</td>
+      <td><code>0 || 5</code> is <code>5</code></td>
+    </tr>
+    <tr>
+      <td><code>!</code></td>
+      <td><code>bool</code></td>
+      <td>Logical NOT</td>
+      <td><code>!0</code> is <code>true</code></td>
+    </tr>
+    <tr>
+      <td><code>? :</code></td>
+      <td>any</td>
+      <td>Ternary operator (if/else)</td>
+      <td><code>true ? 5 : 3</code> is <code>5</code></td>
+    </tr>
+  </tbody>
+</table>
 
 ### Access Operators
 
 These operators allow you to access elements within data structures:
 
-| Operator | Description                  | Example                                                                             |
-| -------- | ---------------------------- | ----------------------------------------------------------------------------------- |
-| `.`      | Access a property or element | `{"id": 10}.id` returns `10`                                                        |
-| `.*.`    | Wildcard mapping             | `[{"id": 5}, {"id": 3}].*.id` returns `[5, 3]`                                      |
-| `...`    | Spread arguments             | `shellquote(["foo", "bar baz"]...)` is equivalent to `shellquote("foo", "bar baz")` |
+- **`.`**: Access a property or element  
+  Example: `{"id": 10}.id` returns `10`
+
+- **`.*.`**: Wildcard mapping  
+  Example: `[{"id": 5}, {"id": 3}].*.id` returns `[5, 3]`
+
+- **`...`**: Spread arguments  
+  Example: `shellquote(["foo", "bar baz"]...)` is equivalent to `shellquote("foo", "bar baz")`
 
 ## Built-in Variables
 
@@ -119,27 +182,112 @@ The expressions language provides several built-in variables. Some of these are 
 
 ### General Variables
 
-| Name                                     | Resolved Immediately | Description                                                             |
-| ---------------------------------------- | -------------------- | ----------------------------------------------------------------------- |
-| `always`                                 | ✅                   | Alias for `true`                                                        |
-| `never`                                  | ✅                   | Alias for `false`                                                       |
-| `config` (e.g., `config.abc`)            | ✅                   | User-provided configuration values                                      |
-| `execution.id`                           | ✅                   | ID of the current TestWorkflow execution                                |
-| `execution.name`                         | ✅                   | Name of the current TestWorkflow execution                              |
-| `execution.number`                       | ✅                   | Sequence number of the execution                                        |
-| `execution.scheduledAt`                  | ✅                   | Scheduled execution date/time                                           |
-| `resource.id`                            | ✅                   | Unique ID for parallel steps or services                                |
-| `resource.root`                          | ✅                   | Resource ID of the parent resource                                      |
-| `namespace`                              | ✅                   | Namespace where the execution runs                                      |
-| `workflow.name`                          | ✅                   | Name of the executed TestWorkflow                                       |
-| `organization.id`                        | ✅                   | Organization ID (when using Control Plane)                              |
-| `environment.id`                         | ✅                   | Environment ID (when using Control Plane)                               |
-| `dashboard.url`                          | ✅                   | URL of the environment’s Dashboard                                      |
-| `labels` (e.g., `labels.some_label_key`) | ✅                   | Labels assigned to the TestWorkflow (special characters are normalized) |
-| `env` (e.g., `env.SOME_VARIABLE`)        | ❌                   | Environment variable values (resolved at runtime)                       |
-| `failed`                                 | ❌                   | Indicates if the execution has already failed                           |
-| `passed`                                 | ❌                   | Indicates if the execution has not yet failed                           |
-| `services` (e.g., `services.db.0.ip`)    | ❌                   | IP addresses of initialized services                                    |
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Resolved Immediately</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>always</code></td>
+      <td>✅</td>
+      <td>Alias for <code>true</code></td>
+    </tr>
+    <tr>
+      <td><code>never</code></td>
+      <td>✅</td>
+      <td>Alias for <code>false</code></td>
+    </tr>
+    <tr>
+      <td><code>config</code> (e.g., <code>config.abc</code>)</td>
+      <td>✅</td>
+      <td>User-provided configuration values</td>
+    </tr>
+    <tr>
+      <td><code>execution.id</code></td>
+      <td>✅</td>
+      <td>ID of the current TestWorkflow execution</td>
+    </tr>
+    <tr>
+      <td><code>execution.name</code></td>
+      <td>✅</td>
+      <td>Name of the current TestWorkflow execution</td>
+    </tr>
+    <tr>
+      <td><code>execution.number</code></td>
+      <td>✅</td>
+      <td>Sequence number of the execution</td>
+    </tr>
+    <tr>
+      <td><code>execution.scheduledAt</code></td>
+      <td>✅</td>
+      <td>Scheduled execution date/time</td>
+    </tr>
+    <tr>
+      <td><code>resource.id</code></td>
+      <td>✅</td>
+      <td>Unique ID for parallel steps or services</td>
+    </tr>
+    <tr>
+      <td><code>resource.root</code></td>
+      <td>✅</td>
+      <td>Resource ID of the parent resource</td>
+    </tr>
+    <tr>
+      <td><code>namespace</code></td>
+      <td>✅</td>
+      <td>Namespace where the execution runs</td>
+    </tr>
+    <tr>
+      <td><code>workflow.name</code></td>
+      <td>✅</td>
+      <td>Name of the executed TestWorkflow</td>
+    </tr>
+    <tr>
+      <td><code>organization.id</code></td>
+      <td>✅</td>
+      <td>Organization ID (when using Control Plane)</td>
+    </tr>
+    <tr>
+      <td><code>environment.id</code></td>
+      <td>✅</td>
+      <td>Environment ID (when using Control Plane)</td>
+    </tr>
+    <tr>
+      <td><code>dashboard.url</code></td>
+      <td>✅</td>
+      <td>URL of the environment’s Dashboard</td>
+    </tr>
+    <tr>
+      <td><code>labels</code> (e.g., <code>labels.some_label_key</code>)</td>
+      <td>✅</td>
+      <td>Labels assigned to the TestWorkflow (special characters are normalized)</td>
+    </tr>
+    <tr>
+      <td><code>env</code> (e.g., <code>env.SOME_VARIABLE</code>)</td>
+      <td>❌</td>
+      <td>Environment variable values (resolved at runtime)</td>
+    </tr>
+    <tr>
+      <td><code>failed</code></td>
+      <td>❌</td>
+      <td>Indicates if the execution has already failed</td>
+    </tr>
+    <tr>
+      <td><code>passed</code></td>
+      <td>❌</td>
+      <td>Indicates if the execution has not yet failed</td>
+    </tr>
+    <tr>
+      <td><code>services</code> (e.g., <code>services.db.0.ip</code>)</td>
+      <td>❌</td>
+      <td>IP addresses of initialized services</td>
+    </tr>
+  </tbody>
+</table>
 
 ### Contextual Variables
 
@@ -147,7 +295,7 @@ Additional variables are available in specific contexts:
 
 #### Retry Conditions
 
-When defining a custom retry condition, you can use `self.passed` and `self.failed` to determine the step status:
+When defining a custom retry condition, you can use <code>self.passed</code> and <code>self.failed</code> to determine the step status:
 
 ```yaml
 spec:
@@ -163,9 +311,9 @@ spec:
 
 When running steps in parallel (via services, parallel, or execute steps), you can access:
 
-- `matrix.<name>` and `shard.<name>` for custom parameters
-- `index` and `count` for each copy
-- `matrixIndex`, `matrixCount`, `shardIndex`, and `shardCount` for detailed indexing
+- <code>matrix.&lt;name&gt;</code> and <code>shard.&lt;name&gt;</code> for custom parameters
+- <code>index</code> and <code>count</code> for each copy
+- <code>matrixIndex</code>, <code>matrixCount</code>, <code>shardIndex</code>, and <code>shardCount</code> for detailed indexing
 
 Example using matrix values:
 
@@ -185,59 +333,240 @@ spec:
       image: "node:{{ matrix.node }}"
 ```
 
----
-
 ## Built-in Functions
 
 The expressions language includes many functions that help manipulate and cast values.
 
 ### Casting Functions
 
-| Function | Returns | Description                                 | Example                           |
-| -------- | ------- | ------------------------------------------- | --------------------------------- |
-| `string` | string  | Casts a value to a string                   | `string(5)` returns `"5"`         |
-| `list`   | list    | Creates a list from provided values         | `list(10, 20)` returns `[10, 20]` |
-| `int`    | int     | Converts a value to an integer              | `int(10.5)` returns `10`          |
-| `bool`   | bool    | Converts a value to a boolean               | `bool("")` returns `false`        |
-| `float`  | float   | Converts a value to a floating-point number | `float("300.50")` returns `300.5` |
-| `eval`   | any     | Evaluates an expression                     | `eval("4 * 5")` returns `20`      |
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Returns</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>string</code></td>
+      <td>string</td>
+      <td>Casts a value to a string</td>
+      <td><code>string(5)</code> returns <code>"5"</code></td>
+    </tr>
+    <tr>
+      <td><code>list</code></td>
+      <td>list</td>
+      <td>Creates a list from provided values</td>
+      <td><code>list(10, 20)</code> returns <code>[10, 20]</code></td>
+    </tr>
+    <tr>
+      <td><code>int</code></td>
+      <td>int</td>
+      <td>Converts a value to an integer</td>
+      <td><code>int(10.5)</code> returns <code>10</code></td>
+    </tr>
+    <tr>
+      <td><code>bool</code></td>
+      <td>bool</td>
+      <td>Converts a value to a boolean</td>
+      <td><code>bool("")</code> returns <code>false</code></td>
+    </tr>
+    <tr>
+      <td><code>float</code></td>
+      <td>float</td>
+      <td>Converts a value to a floating-point number</td>
+      <td><code>float("300.50")</code> returns <code>300.5</code></td>
+    </tr>
+    <tr>
+      <td><code>eval</code></td>
+      <td>any</td>
+      <td>Evaluates an expression</td>
+      <td><code>eval("4 * 5")</code> returns <code>20</code></td>
+    </tr>
+  </tbody>
+</table>
 
 ### General Functions
 
-| Function     | Returns     | Description                                                | Example                                                                                              |
-| ------------ | ----------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------ |
-| `join`       | string      | Joins list elements into a single string                   | `join(["a", "b"])` returns `"a,b"`; `join(["a", "b"], " - ")` returns `"a - b"`                      |
-| `split`      | list        | Splits a string into a list based on a delimiter           | `split("a,b,c")` returns `["a", "b", "c"]`                                                           |
-| `trim`       | string      | Removes whitespace from both ends of a string              | `trim("   \nabc  d  ")` returns `"abc  d"`                                                           |
-| `len`        | int         | Returns the length of an array, map, or string             | `len(["a", "b"])` returns `2`                                                                        |
-| `floor`      | int         | Rounds a number down to the nearest integer                | `floor(10.5)` returns `10`                                                                           |
-| `ceil`       | int         | Rounds a number up to the nearest integer                  | `ceil(10.5)` returns `11`                                                                            |
-| `round`      | int         | Rounds a number to the nearest integer                     | `round(10.5)` returns `11`                                                                           |
-| `at`         | any         | Retrieves an element from a list or map by index/key       | `at([10, 2], 1)` returns `2`; `at({"foo": "bar"}, "foo")` returns `"bar"`                            |
-| `tojson`     | string      | Serializes a value to JSON format                          | `tojson({ "foo": "bar" })` returns `"{\"foo\":\"bar\"}"`                                             |
-| `json`       | any         | Parses a JSON string into an object                        | `json("{\"foo\":\"bar\"}")` returns `{ "foo": "bar" }`                                               |
-| `toyaml`     | string      | Serializes a value to YAML format                          | `toyaml({ "foo": "bar" })` returns a YAML string                                                     |
-| `yaml`       | any         | Parses a YAML string into an object                        | `yaml("foo: bar")` returns `{ "foo": "bar" }`                                                        |
-| `shellquote` | string      | Sanitizes and quotes arguments for safe shell usage        | `shellquote("foo bar")` returns `"\"foo bar\""`                                                      |
-| `shellparse` | list        | Parses a shell command string into an array of arguments   | `shellparse("foo bar")` returns `["foo", "bar"]`                                                     |
-| `map`        | list or map | Applies an expression to each element in a list or map     | `map([1,2,3,4,5], "_.value * 2")` returns `[2,4,6,8,10]`                                             |
-| `filter`     | list        | Filters a list using an expression predicate               | `filter([1,2,3,4,5], "_.value > 2")` returns `[3,4,5]`                                               |
-| `jq`         | any         | Executes a jq expression on a value                        | `jq([1,2,3,4,5], ".                                                                                  | max")`returns`[5]` |
-| `range`      | list        | Generates a range of numbers                               | `range(5, 10)` returns `[5, 6, 7, 8, 9]`; `range(5)` returns `[0, 1, 2, 3, 4]`                       |
-| `relpath`    | string      | Computes a relative file path                              | `relpath("/a/b/c")` might return `./b/c`                                                             |
-| `abspath`    | string      | Computes an absolute file path                             | `abspath("b/c")` might return `/some/working/dir/b/c`                                                |
-| `chunk`      | list        | Splits a list into chunks of a specified maximum size      | `chunk([1,2,3,4,5], 2)` returns `[[1,2], [3,4], [5]]`                                                |
-| `date`       | string      | Returns the current date in a specified format             | `date()` might return `"2024-06-04T11:59:32.308Z"`; `date("2006-01-02")` might return `"2024-06-04"` |
-| `secret`     | string      | Creates a reference to a secret as an environment variable | `secret("name", "key")` returns a reference like `"env.S_N_name_K_key"`                              |
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Returns</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>join</code></td>
+      <td>string</td>
+      <td>Joins list elements into a single string</td>
+      <td><code>join(["a", "b"])</code> returns <code>"a,b"</code>; <code>join(["a", "b"], " - ")</code> returns <code>"a - b"</code></td>
+    </tr>
+    <tr>
+      <td><code>split</code></td>
+      <td>list</td>
+      <td>Splits a string into a list based on a delimiter</td>
+      <td><code>split("a,b,c")</code> returns <code>["a", "b", "c"]</code></td>
+    </tr>
+    <tr>
+      <td><code>trim</code></td>
+      <td>string</td>
+      <td>Removes whitespace from both ends of a string</td>
+      <td><code>trim("   \nabc  d  ")</code> returns <code>"abc  d"</code></td>
+    </tr>
+    <tr>
+      <td><code>len</code></td>
+      <td>int</td>
+      <td>Returns the length of an array, map, or string</td>
+      <td><code>len(["a", "b"])</code> returns <code>2</code></td>
+    </tr>
+    <tr>
+      <td><code>floor</code></td>
+      <td>int</td>
+      <td>Rounds a number down to the nearest integer</td>
+      <td><code>floor(10.5)</code> returns <code>10</code></td>
+    </tr>
+    <tr>
+      <td><code>ceil</code></td>
+      <td>int</td>
+      <td>Rounds a number up to the nearest integer</td>
+      <td><code>ceil(10.5)</code> returns <code>11</code></td>
+    </tr>
+    <tr>
+      <td><code>round</code></td>
+      <td>int</td>
+      <td>Rounds a number to the nearest integer</td>
+      <td><code>round(10.5)</code> returns <code>11</code></td>
+    </tr>
+    <tr>
+      <td><code>at</code></td>
+      <td>any</td>
+      <td>Retrieves an element from a list or map by index/key</td>
+      <td><code>at([10, 2], 1)</code> returns <code>2</code>; <code>at({"foo": "bar"}, "foo")</code> returns <code>"bar"</code></td>
+    </tr>
+    <tr>
+      <td><code>tojson</code></td>
+      <td>string</td>
+      <td>Serializes a value to JSON format</td>
+      <td><code>tojson({ "foo": "bar" })</code> returns <code>"{\"foo\":\"bar\"}"</code></td>
+    </tr>
+    <tr>
+      <td><code>json</code></td>
+      <td>any</td>
+      <td>Parses a JSON string into an object</td>
+      <td><code>json("{\"foo\":\"bar\"}")</code> returns <code>{ "foo": "bar" }</code></td>
+    </tr>
+    <tr>
+      <td><code>toyaml</code></td>
+      <td>string</td>
+      <td>Serializes a value to YAML format</td>
+      <td><code>toyaml({ "foo": "bar" })</code> returns a YAML string</td>
+    </tr>
+    <tr>
+      <td><code>yaml</code></td>
+      <td>any</td>
+      <td>Parses a YAML string into an object</td>
+      <td><code>yaml("foo: bar")</code> returns <code>{ "foo": "bar" }</code></td>
+    </tr>
+    <tr>
+      <td><code>shellquote</code></td>
+      <td>string</td>
+      <td>Sanitizes and quotes arguments for safe shell usage</td>
+      <td><code>shellquote("foo bar")</code> returns <code>"\"foo bar\""</code></td>
+    </tr>
+    <tr>
+      <td><code>shellparse</code></td>
+      <td>list</td>
+      <td>Parses a shell command string into an array of arguments</td>
+      <td><code>shellparse("foo bar")</code> returns <code>["foo", "bar"]</code></td>
+    </tr>
+    <tr>
+      <td><code>map</code></td>
+      <td>list or map</td>
+      <td>Applies an expression to each element in a list or map</td>
+      <td><code>map([1,2,3,4,5], "_.value * 2")</code> returns <code>[2,4,6,8,10]</code></td>
+    </tr>
+    <tr>
+      <td><code>filter</code></td>
+      <td>list</td>
+      <td>Filters a list using an expression predicate</td>
+      <td><code>filter([1,2,3,4,5], "_.value > 2")</code> returns <code>[3,4,5]</code></td>
+    </tr>
+    <tr>
+      <td><code>jq</code></td>
+      <td>any</td>
+      <td>Executes a jq expression on a value</td>
+      <td><code>jq([1,2,3,4,5], ". | max")</code> returns <code>5</code></td>
+    </tr>
+    <tr>
+      <td><code>range</code></td>
+      <td>list</td>
+      <td>Generates a range of numbers</td>
+      <td><code>range(5, 10)</code> returns <code>[5, 6, 7, 8, 9]</code>; <code>range(5)</code> returns <code>[0, 1, 2, 3, 4]</code></td>
+    </tr>
+    <tr>
+      <td><code>relpath</code></td>
+      <td>string</td>
+      <td>Computes a relative file path</td>
+      <td><code>relpath("/a/b/c")</code> might return <code>./b/c</code></td>
+    </tr>
+    <tr>
+      <td><code>abspath</code></td>
+      <td>string</td>
+      <td>Computes an absolute file path</td>
+      <td><code>abspath("b/c")</code> might return <code>/some/working/dir/b/c</code></td>
+    </tr>
+    <tr>
+      <td><code>chunk</code></td>
+      <td>list</td>
+      <td>Splits a list into chunks of a specified maximum size</td>
+      <td><code>chunk([1,2,3,4,5], 2)</code> returns <code>[[1,2], [3,4], [5]]</code></td>
+    </tr>
+    <tr>
+      <td><code>date</code></td>
+      <td>string</td>
+      <td>Returns the current date in a specified format</td>
+      <td><code>date()</code> might return <code>"2024-06-04T11:59:32.308Z"</code>; <code>date("2006-01-02")</code> might return <code>"2024-06-04"</code></td>
+    </tr>
+    <tr>
+      <td><code>secret</code></td>
+      <td>string</td>
+      <td>Creates a reference to a secret as an environment variable</td>
+      <td><code>secret("name", "key")</code> returns a reference like <code>"env.S_N_name_K_key"</code></td>
+    </tr>
+  </tbody>
+</table>
 
 ### File System Functions
 
-These functions are executed during workflow runtime to interact with the file system.
-
-| Function | Returns | Description                    | Example                                                                                                                |
-| -------- | ------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
-| `file`   | string  | Returns the contents of a file | `file("/etc/some/path")` might return `"some\ncontent"`                                                                |
-| `glob`   | list    | Finds files matching a pattern | `glob("/etc/**/*", "./x/**/*.js")` might return `["/etc/some/file", "/etc/other/file", "/some/working/dir/x/file.js"]` |
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Returns</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>file</code></td>
+      <td>string</td>
+      <td>Returns the contents of a file</td>
+      <td><code>file("/etc/some/path")</code> might return <code>"some\ncontent"</code></td>
+    </tr>
+    <tr>
+      <td><code>glob</code></td>
+      <td>list</td>
+      <td>Finds files matching a pattern</td>
+      <td><code>glob("/etc/**/*", "./x/**/*.js")</code> might return <code>["/etc/some/file", "/etc/other/file", "/some/working/dir/x/file.js"]</code></td>
+    </tr>
+  </tbody>
+</table>
 
 Example using file and glob functions:
 
