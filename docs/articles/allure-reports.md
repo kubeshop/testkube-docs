@@ -13,9 +13,9 @@ kind: TestWorkflow
 apiVersion: testworkflows.testkube.io/v1
 metadata:
   name: pytest-workflow-with-allure
-  namespace: testkube-agent
+  namespace: testkube
   labels:
-    core-tests: workflows
+    docs: examples
 spec:
   content:
     git:

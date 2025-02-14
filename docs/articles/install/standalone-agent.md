@@ -19,7 +19,7 @@ See the [Feature Comparison](feature-comparison) to understand the differences i
 
 ## Running in Standalone Mode
 
-When running the Agent in Standalone Mode there is no [Dashboard](/articles/testkube-dashboard-explore) and is has to be managed entirely through the [Testkube CLI](/articles/cli). 
+When running the Agent in Standalone Mode there is no [Dashboard](/articles/testkube-dashboard-explore) and it has to be managed entirely through the [Testkube CLI](/articles/cli). 
 
 The following functionality is available directly in the agent in Standalone Mode
 
