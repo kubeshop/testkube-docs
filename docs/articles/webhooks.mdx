@@ -379,35 +379,16 @@ spec:
 
 Webhooks can be triggered on any of the following events:
 
-- start-test
-- end-test-success
-- end-test-failed
-- end-test-aborted
-- end-test-timeout
-- become-test-up
-- become-test-down
-- become-test-failed
-- become-test-aborted
-- become-test-timeout
-- start-testsuite
-- end-testsuite-success
-- end-testsuite-failed
-- end-testsuite-aborted
-- end-testsuite-timeout
-- become-testsuite-up
-- become-testsuite-down
-- become-testsuite-failed
-- become-testsuite-aborted
-- become-testsuite-timeout
+### Workflow Events
+
 - queue-testworkflow
 - start-testworkflow
 - end-testworkflow-success
 - end-testworkflow-failed
 - end-testworkflow-aborted
-- become-testworkflow-up
-- become-testworkflow-down
-- become-testworkflow-failed
-- become-testworkflow-aborted
+
+### Create/Update/Delete Events
+
 - created
 - updated
 - deleted
@@ -422,6 +403,52 @@ They can be triggered by the following resources:
 - webhook
 - testexecution
 - testsuiteexecution
+
+### Test / Test Suite Events
+
+:::warning
+Test and Test Suites are being deprecated from Testkube. [Read More](../articles/legacy-features.md).
+:::
+
+- start-test
+- end-test-success
+- end-test-failed
+- end-test-aborted
+- end-test-timeout
+- start-testsuite
+- end-testsuite-success
+- end-testsuite-failed
+- end-testsuite-aborted
+- end-testsuite-timeout
+
+### Events for State Changes
+
+It is possible to get notified by webhooks only when the latest execution's outcome differs from the previous one. This way you can see instantly when one of your scheduled tests was healed or when they got broken. It could also help prevent alert fatigue by deduplicating the alerts and therefore decreasing the load on your monitoring systems.
+Testkube supports special webhook event types to track changes between current and previous execution states.
+
+For Test Workflows:
+
+- become-testworkflow-up (from any error state to succeed one)
+- become-testworkflow-down (from succeed state to any error one)
+- become-testworkflow-failed (from any state to failed one)
+- become-testworkflow-aborted (from any state to aborted one)
+
+For Tests (deprecated - [Read More](/articles/legacy-features)):
+
+- become-test-up (from any error state to succeed one)
+- become-test-down (from succeed state to any error one)
+- become-test-failed (from any state to failed one)
+- become-test-aborted (from any state to aborted one)
+- become-test-timeout (from any state to timeout one)
+
+For Test Suites (deprecated - [Read More](/articles/legacy-features)):
+
+- become-testsuite-up (from any error state to succeed one)
+- become-testsuite-down (from succeed state to any error one)
+- become-testsuite-failed (from any state to failed one)
+- become-testsuite-aborted (from any state to aborted one)
+- become-testsuite-timeout (from any state to timeout one)
+
 
 ## Supported Event Variables
 
@@ -439,7 +466,7 @@ They can be triggered by the following resources:
 
 The full Event Data Model can be found [here](https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_event.go).
 
-### TestExecution (Execution):
+### TestExecution (Execution)
 
 :::warning
 Test and Test Suite webhooks are being deprecated from Testkube. [Read More](../articles/legacy-features.md).
@@ -762,33 +789,6 @@ The API expects the following object set under the `spec` attribute:
 </Tabs>
 
 The examples show only the `create` operations, however, these instructions work the same for `update` and `run` as well.
-
-## Enable Webhooks on State Changes
-
-It is possible to get notified by webhooks only when the latest execution's outcome differs from the previous one. This way you can see instantly when one of your scheduled tests was healed or when they got broken. It could also help prevent alert fatigue by deduplicating the alerts and therefore decreasing the load on your monitoring systems.
-Testkube suppots special webhook event types to track changes between current and previous execution states.
-For Tests:
-
-- become-test-up (from any error state to succeed one)
-- become-test-down (from succeed state to any error one)
-- become-test-failed (from any state to failed one)
-- become-test-aborted (from any state to aborted one)
-- become-test-timeout (from any state to timeout one)
-
-For Test Suites:
-
-- become-testsuite-up (from any error state to succeed one)
-- become-testsuite-down (from succeed state to any error one)
-- become-testsuite-failed (from any state to failed one)
-- become-testsuite-aborted (from any state to aborted one)
-- become-testsuite-timeout (from any state to timeout one)
-
-For Test Workflows:
-
-- become-testworkflow-up (from any error state to succeed one)
-- become-testworkflow-down (from succeed state to any error one)
-- become-testworkflow-failed (from any state to failed one)
-- become-testworkflow-aborted (from any state to aborted one)
 
 <Tabs>
 
