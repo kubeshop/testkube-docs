@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube dashboard
 
 Open Testkube dashboard
@@ -34,4 +30,5 @@ testkube dashboard [flags]
 
 ### SEE ALSO
 
-- [testkube](testkube.md) - Testkube entrypoint for kubectl plugin
+* [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
+

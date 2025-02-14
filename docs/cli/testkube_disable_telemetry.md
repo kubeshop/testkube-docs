@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube disable telemetry
 
 disable collecting of anonymous telemetry data
@@ -29,4 +25,5 @@ testkube disable telemetry [flags]
 
 ### SEE ALSO
 
-- [testkube disable](testkube_disable.md) - Disable feature
+* [testkube disable](testkube_disable.md)	 - Disable feature
+

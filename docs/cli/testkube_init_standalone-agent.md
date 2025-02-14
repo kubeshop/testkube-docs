@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube init standalone-agent
 
 Install Testkube OSS in your current context
@@ -58,4 +54,5 @@ testkube init standalone-agent [flags]
 
 ### SEE ALSO
 
-- [testkube init](testkube_init.md) - Init Testkube profiles(standalone-agent|demo|agent)
+* [testkube init](testkube_init.md)	 - Init Testkube profiles(standalone-agent|demo|agent)
+

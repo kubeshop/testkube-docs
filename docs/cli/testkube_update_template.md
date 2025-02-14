@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube update template
 
 Update Template
@@ -37,4 +33,5 @@ testkube update template [flags]
 
 ### SEE ALSO
 
-- [testkube update](testkube_update.md) - Update resource
+* [testkube update](testkube_update.md)	 - Update resource
+

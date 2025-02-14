@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube update webhook
 
 Update Webhook
@@ -45,4 +41,5 @@ testkube update webhook [flags]
 
 ### SEE ALSO
 
-- [testkube update](testkube_update.md) - Update resource
+* [testkube update](testkube_update.md)	 - Update resource
+

@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube get testworkflow
 
 Get all available test workflows
@@ -37,4 +33,5 @@ testkube get testworkflow [name] [flags]
 
 ### SEE ALSO
 
-- [testkube get](testkube_get.md) - Get resources
+* [testkube get](testkube_get.md)	 - Get resources
+

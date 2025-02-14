@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube get test
 
 Get all available tests
@@ -38,4 +34,5 @@ testkube get test <testName> [flags]
 
 ### SEE ALSO
 
-- [testkube get](testkube_get.md) - Get resources
+* [testkube get](testkube_get.md)	 - Get resources
+

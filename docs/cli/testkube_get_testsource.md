@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube get testsource
 
 Get test source details
@@ -38,4 +34,5 @@ testkube get testsource <testSourceName> [flags]
 
 ### SEE ALSO
 
-- [testkube get](testkube_get.md) - Get resources
+* [testkube get](testkube_get.md)	 - Get resources
+

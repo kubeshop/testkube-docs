@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube get context
 
 Set context for Testkube Pro
@@ -31,4 +27,5 @@ testkube get context <value> [flags]
 
 ### SEE ALSO
 
-- [testkube get](testkube_get.md) - Get resources
+* [testkube get](testkube_get.md)	 - Get resources
+

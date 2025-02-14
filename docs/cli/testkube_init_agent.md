@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube init agent
 
 Install Testkube Pro Agent and connect to Testkube Pro environment
@@ -61,4 +57,5 @@ testkube init agent [flags]
 
 ### SEE ALSO
 
-- [testkube init](testkube_init.md) - Init Testkube profiles(standalone-agent|demo|agent)
+* [testkube init](testkube_init.md)	 - Init Testkube profiles(standalone-agent|demo|agent)
+

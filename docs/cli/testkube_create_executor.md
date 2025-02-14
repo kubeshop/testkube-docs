@@ -1,7 +1,3 @@
-<head>
-  <meta name="docsearch:indexPrefix" content="reference-doc" />
-</head>
-
 ## testkube create executor
 
 Create new Executor
@@ -52,4 +48,5 @@ testkube create executor [flags]
 
 ### SEE ALSO
 
-- [testkube create](testkube_create.md) - Create resource
+* [testkube create](testkube_create.md)	 - Create resource
+
