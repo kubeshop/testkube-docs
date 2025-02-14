@@ -133,7 +133,7 @@ Clicking on the "12" in the table will show those 12 executions in a table:
 
 ![Test Insights Drilldown Table](images/insights-drilldown-table.png)
 
-- Selecting an execution will open the corresponding [Workflow Execution Details](/testkube-dashboard-execution-details) panel.
+- Selecting an execution will open the corresponding [Workflow Execution Details](/articles/testkube-dashboard-execution-details) panel.
 - Selecting the "Back to overview" link on the top right of the table will take you back to the metric view above.
 
 ### Executions Bar Chart
