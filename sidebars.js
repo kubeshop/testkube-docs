@@ -866,6 +866,12 @@ const sidebars = {
         { type: "doc", label: "Prometheus", id: "articles/metrics" },
         {
           type: "doc",
+          label: "Allure Reports",
+          id: "articles/allure-reports",
+        },
+
+        {
+          type: "doc",
           label: "Kubernetes Events",
           id: "articles/k8s-events",
         },
