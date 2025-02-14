@@ -45,6 +45,16 @@ This detailed view allows for in-depth analysis of test results and easy navigat
 
 ![Example of filtering options in the Reports tab](../img/junit-detailed-failure.png)
 
+### 3. Test Insights
+
+The [Test Insights](/articles/test-insights) functionality allows you to analyse JUnit Case count over time, for example:
+
+![JUnit results in Test Insights](images/test-insights-junit.png)
+
+This shows the JUnit Case count per day over the last month, broken down by test status. The table at the bottom 
+shows the individual numbers for each day, clicking on one of these numbers will list the corresponding Workflow 
+executions, allowing you to further drill down into each segment - [Read More](/articles/test-insights#executions-table-and-drill-down).
+
 ## Benefits of JUnit Report Visualization
 
 The enhanced visualization of JUnit reports in Testkube offers several advantages:

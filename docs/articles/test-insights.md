@@ -96,21 +96,43 @@ select **Executions Bar Chart**, **Efficieny Quadrant Analysis** and **Pass/Fail
 ![Test Insights Select Analysis](images/insights-select-analysis.png)
 
 Under the period and analysis selector, you will find your selected chart with its controls on the right side.
-The controls vary depending on the selected chart and include the ability to filter executions on workflow name, environment, status and labels.
-The workflow names support regexes, so you could perfectly filter all workflows prefixed with `performance` by adding a `performancy.*` filter.
+The controls vary depending on the selected chart and include the ability to filter executions on **Workflow name**, 
+**environment**, **status** and **labels** (both existence or specific label values).
+
+![Test Insights Executions Filter](images/insights-executions-filter.png)
+
+:::tip
+Filtering on workflow name support regexes, so you could perfectly filter all workflows prefixed with `performance` 
+by adding a `performancy.*` filter.
+:::
+
 One limitation is that you currently cannot negate a filter literal yet.
 
 ## Executions Time Series
 
 The execution time series allows you to analyse your executions over time.
 
-The x-axis will always be the time, whereas the y-axis is defined by your **Measure**. Currently, you can measure the execution count, duration or the JUnit case count.
+### Executions Measure
 
-You can use the **Aggregate** to decide how to treat multiple executions of the same workflow within each interval. For example, for the duration you can take the sum, average, minimum or maximum.
+The x-axis will always be the time, whereas the y-axis is defined by your **Measure**. Currently, 
+you can measure the execution **count**, **duration** or the **JUnit Case count**.
+
+![Test Insights Executions Measure](images/insights-executions-measure.png)
+
+### Executions Aggregate
+
+You can use the **Aggregate** to decide how to treat multiple executions of the same workflow within 
+each interval. For example, for the **Execution duration** you can aggregate on **sum**, **average**, **minimum** or **maximum**.
+
+![Test Insights Executions Aggregate](images/insights-executions-aggregate.png)
+
+### Executions Segment
 
 Lastly, you can set a **Segment** which will break down your executions.
-You can do this by the status to see which executions passed or failed,
-by workflow name or by any of the labels found on the executions.
+You can do this by the **status** to see which executions passed or failed,
+by **workflow name** or by any of the **labels** found on the executions.
+
+![Test Insights Executions Segment](images/insights-executions-segment.png)
 
 ### Executions Table and Drill Down
 
