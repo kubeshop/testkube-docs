@@ -100,7 +100,7 @@ The controls vary depending on the selected chart and include the ability to fil
 The workflow names support regexes, so you could perfectly filter all workflows prefixed with `performance` by adding a `performancy.*` filter.
 One limitation is that you currently cannot negate a filter literal yet.
 
-### Executions Time Series
+## Executions Time Series
 
 The execution time series allows you to analyse your executions over time.
 
@@ -134,16 +134,16 @@ Clicking on the "12" in the table will show those 12 executions in a table:
 ![Test Insights Drilldown Table](images/insights-drilldown-table.png)
 
 - Selecting an execution will open the corresponding [Workflow Execution Details](/articles/testkube-dashboard-execution-details) panel.
-- Selecting the "Back to overview" link on the top right of the table will take you back to the metric view above.
+- Selecting the "Back to overview" link on the top right of the table will take you back to the table view above.
 
-### Executions Bar Chart
+## Executions Bar Chart
 
 This shows a bar chart with the number of executions for each selected segment. For example, the below Analysis
 shows the top failing Workflows over the last week:
 
 ![Test Insights Bar Chart](images/insights-executions-bar-chart.png)
 
-### Efficiency Quadrant Analysis
+## Efficiency Quadrant Analysis
 
 The execution efficiency analysis shows tests by execution time and frequency. Tests that
 frequently run and take longer to execute appear in the top right quadrant, highlighting them as prime
@@ -155,7 +155,7 @@ Hovering a marker in the chart reveals the corresponding Workflow.
 
 The table below the chart shows plotted Workflows sortable by a number of attributes.
 
-### Pass/Fail Stats
+## Pass/Fail Stats
 
 The pass/fail stats shows details about workflow executions that failed or passed.
 These analysis are useful to quickly understand if certain workflows need attention.
