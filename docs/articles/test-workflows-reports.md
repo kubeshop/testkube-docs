@@ -54,7 +54,8 @@ The enhanced visualization of JUnit reports in Testkube offers several advantage
 3. **Efficient Troubleshooting**: Quickly identify and focus on failed tests or error messages.
 4. **Improved Workflow**: Seamlessly integrate JUnit report analysis into your testing and development process.
 
-By leveraging these visualization features, teams can more effectively monitor test outcomes, identify issues, and maintain the quality of their software throughout the development lifecycle.
+By leveraging these visualization features, teams can more effectively monitor test outcomes, identify issues, 
+and maintain the quality of their software throughout the development lifecycle.
 
 ## Creating JUnit Reports
 
@@ -233,6 +234,9 @@ Read more in the [mocha-junit-reporter docs](https://www.npmjs.com/package/mocha
 ## Conclusion
 
 Testkubes JUnit report processing and visualization features provide a powerful toolset for managing and analyzing test
-results. By automatically extracting data from JUnit XML reports and presenting it in both summary and detailed views, Testkube enables teams to gain valuable insights into their test workflows quickly and efficiently.
+results. By automatically extracting data from JUnit XML reports and presenting it in both summary and detailed views, 
+Testkube enables teams to gain valuable insights into their test workflows quickly and efficiently.
 
-For more information on related features, check out our [Test Insights Reporting](/articles/test-insights#test-reports) documentation.
+:::tip
+For more information on Testkubes reporting features, check out [Test Insights](/articles/test-insights).
+:::
