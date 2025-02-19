@@ -51,6 +51,13 @@ Optionally, the follow option can be used to watch execution and get the log sum
 testkube run testworkflow TEST_WORKFLOW_NAME -f
 ```
 
+### ReRun 
+The Test Workflow can be rerun using the `testkube rerun twe` command providing Test Workflow execution id:
+
+```shell
+testkube rerun twe EXECUTION_ID
+```
+
 ### Delete
 The Test Workflow can be deleted using the `testkube delete testworkflow` command using the Test Workflow name:
 
