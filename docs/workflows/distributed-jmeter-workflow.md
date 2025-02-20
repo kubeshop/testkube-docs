@@ -51,5 +51,4 @@ spec:
     artifacts:
       paths:
       - /data/artifacts/**/*
-status: {}
 ```
