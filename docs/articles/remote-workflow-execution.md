@@ -53,7 +53,6 @@ spec:
           --env-id {{ shellquote(config.environmentId) }}
 
         testkube run tw {{ shellquote(config.workflowToRun) }} -f
-status: {}
 ```
 
 :::tip

@@ -102,7 +102,7 @@ probeSpec:
       headers: test trigger condition probe headers to submit
 ```
 
-#### Action Parameters
+### Action Parameters
 
 Action parameters are used to pass config and tag values to the test execution workflow. You can specify either text values or 
 jsonpath expression in a form of `jsonpath={.metadata.name}`. The data will be taken from the resource object of the trigger event. 

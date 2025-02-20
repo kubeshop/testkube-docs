@@ -652,6 +652,11 @@ const sidebars = {
               id: "articles/examples/selenium-basic",
             },
             {
+              type: "doc",
+              label: "Advanced",
+              id: "articles/examples/selenium-advanced",
+            },
+            {
               type: "link",
               label: "Functional Testing with Selenium",
               href: "https://testkube.io/learn/functional-testing-with-selenium-in-testkube",
