@@ -9,7 +9,7 @@ or some fixtures.
 :::note
 
 All the examples here that are using `content` are using it directly under the `spec`.
-Please note, that you can also use it under a specific step - this way, such files won't be available 
+Please note, that you can also use it under a specific step - this way, such files won't be available
 in different steps - see [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#content).
 
 :::
@@ -49,15 +49,15 @@ This may be useful for sharing a dependencies across steps, for example.
 spec:
   pod:
     volumes:
-    - name: golang-deps
-      emptyDir: {}
+      - name: golang-deps
+        emptyDir: {}
   container:
     env:
-    - name: GOCACHE
-      value: /go-cache
+      - name: GOCACHE
+        value: /go-cache
     volumeMounts:
-    - name: golang-deps
-      mountPath: /go-cache
+      - name: golang-deps
+        mountPath: /go-cache
 ```
 
 ### Shared Directory Between Executions
@@ -74,16 +74,16 @@ If you want to cache some data between executions, i.e., to speed up execution, 
 spec:
   pod:
     volumes:
-    - name: golang-deps
-      hostPath:
-        path: '/tmp/go-cache-{{ workflow.name }}'
+      - name: golang-deps
+        hostPath:
+          path: "/tmp/go-cache-{{ workflow.name }}"
   container:
     env:
-    - name: GOCACHE
-      value: /go-cache
+      - name: GOCACHE
+        value: /go-cache
     volumeMounts:
-    - name: golang-deps
-      mountPath: /go-cache
+      - name: golang-deps
+        mountPath: /go-cache
 ```
 
 This way, you will have a cache for each execution of the Test Workflow on the same node.
@@ -91,9 +91,10 @@ This way, you will have a cache for each execution of the Test Workflow on the s
 :::tip
 
 If you want to cache data across multiple nodes, you may consider:
-* using an Object Storage API like [**Minio**](https://min.io/), [**AWS S3**](https://aws.amazon.com/s3/) or [**GCP Cloud Storage**](https://cloud.google.com/storage),
+
+- using an Object Storage API like [**Minio**](https://min.io/), [**AWS S3**](https://aws.amazon.com/s3/) or [**GCP Cloud Storage**](https://cloud.google.com/storage),
   and save/read files using it, or
-* creating a [**Persistent Volume**](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) and attaching it with `pod.volumes` and `container.volumeMounts`.
+- creating a [**Persistent Volume**](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) and attaching it with `pod.volumes` and `container.volumeMounts`.
 
 :::
 
@@ -105,21 +106,21 @@ To mount a static file, you can use `content.files`.
 spec:
   content:
     files:
-    - path: /etc/nginx/nginx.conf
-      content: |
-        events {
-          worker_connections 1024;
-        }
-        http {
-          server {
-            listen 8888;
-            location / {
-              root /www;
+      - path: /etc/nginx/nginx.conf
+        content: |
+          events {
+            worker_connections 1024;
+          }
+          http {
+            server {
+              listen 8888;
+              location / {
+                root /www;
+              }
             }
           }
-        }
-    - path: /www/index.html
-      content: "hello-there"
+      - path: /www/index.html
+        content: "hello-there"
 ```
 
 ### Mounting From a Secret or ConfigMap
@@ -130,16 +131,16 @@ If you need to mount the secret as a file, you can use `contentFrom` clause in `
 spec:
   content:
     files:
-    - path: /some/path/secret.key
-      contentFrom:
-        secretKeyRef: # Mount from Secret
-          name: secret-name
-          key: key-name-in-secret
-    - path: /some/path/nginx.conf
-      contentFrom:
-        configMapKeyRef: # Mount from ConfigMap
-          name: secret-name
-          key: key-name-in-secret
+      - path: /some/path/secret.key
+        contentFrom:
+          secretKeyRef: # Mount from Secret
+            name: secret-name
+            key: key-name-in-secret
+      - path: /some/path/nginx.conf
+        contentFrom:
+          configMapKeyRef: # Mount from ConfigMap
+            name: secret-name
+            key: key-name-in-secret
 ```
 
 ### Mounting Secret or ConfigMap as a Directory
@@ -150,22 +151,22 @@ As an alternative, you may use native Kubernetes volumes for mounting [**Secrets
 spec:
   pod:
     volumes:
-    # Create volume from the Secret
-    - name: example-secret-volume
-      secret:
-        secretName: secret-name
-    # Create volume from the ConfigMap
-    - name: example-configmap-volume
-      configMap:
-        name: configmap-name
+      # Create volume from the Secret
+      - name: example-secret-volume
+        secret:
+          secretName: secret-name
+      # Create volume from the ConfigMap
+      - name: example-configmap-volume
+        configMap:
+          name: configmap-name
   container:
     volumeMounts:
-    # Mount files from the Secret
-    - name: example-secret-volume
-      mountPath: /some/secret
-    # Mount files from the ConfigMap
-    - name: example-configmap-volume
-      mountPath: /some/config
+      # Mount files from the Secret
+      - name: example-secret-volume
+        mountPath: /some/secret
+      # Mount files from the ConfigMap
+      - name: example-configmap-volume
+        mountPath: /some/config
 ```
 
 ## Git Repository
@@ -198,12 +199,12 @@ spec:
       uri: https://github.com/kubeshop/testkube.git
       mountPath: /custom/mount/path
   steps:
-  - shell: tree /custom/mount/path
+    - shell: tree /custom/mount/path
 ```
 
 ### Public Repositories
 
-To use a public repository, simply pass the URL of the repository and it will be automatically mounted in `/data/repo`. 
+To use a public repository, simply pass the URL of the repository and it will be automatically mounted in `/data/repo`.
 
 ```yaml
 spec:
@@ -215,7 +216,7 @@ spec:
       # revision: v1.7.30
       # revision: 2457ba80c1e0ade682b202fbec7062d82107e12f
   steps:
-  - shell: tree /data/repo
+    - shell: tree /data/repo
 ```
 
 ### Using Username and Password/Token
@@ -261,6 +262,21 @@ spec:
       #     key: token
 ```
 
+### Using GitHub App
+
+GitHub allows authentication through [GitHub Apps][github-app].
+The benefit is a single point where you can control to which repositories Testkube has access
+which simplifies your workflows and security auditing.
+You will need to [install a GitHub App to Testkube][github-app-install] to use this authentication strategy.
+
+```yaml
+spec:
+  content:
+    git:
+      uri: https://github.com/kubeshop/testkube.git
+      authType: github
+```
+
 ### Using SSH Key
 
 You can use a private SSH key to access your repository, using either plain-text `sshKey` property,
@@ -301,7 +317,7 @@ spec:
       uri: https://github.com/kubeshop/testkube.git
       # cone: true # if you want to enable cone patterns
       paths:
-      - test/cypress/executor-tests/cypress-12
+        - test/cypress/executor-tests/cypress-12
 ```
 
 ### Customizable Git Branch
@@ -319,7 +335,7 @@ spec:
   content:
     git:
       uri: https://github.com/kubeshop/testkube.git
-      revision: '{{ config.branch }}'
+      revision: "{{ config.branch }}"
 ```
 
 ## Fetching Tarballs
@@ -330,10 +346,10 @@ Testkube have a simple built-in way to fetch tarball archives for your tests. Yo
 spec:
   content:
     tarball:
-    - url: https://github.com/kubeshop/testkube/releases/download/v1.17.53/testkube_1.17.53_Linux_arm64.tar.gz
-      path: /data/bin
+      - url: https://github.com/kubeshop/testkube/releases/download/v1.17.53/testkube_1.17.53_Linux_arm64.tar.gz
+        path: /data/bin
   steps:
-  - shell: tree /data/bin
+    - shell: tree /data/bin
 ```
 
 ## Fetching OCI Artifacts
@@ -346,12 +362,12 @@ To do so, run a step with Docker image that has ORAS installed and pull the arti
 ```yaml
 spec:
   steps:
-  - run:
-      image: bitnami/oras:latest
-      workingDir: /data
-      shell: |
-        oras pull 12345678901234.dkr.ecr.us-west-2.amazonaws.com/some/artifact:latest
-  - shell: tree /data
+    - run:
+        image: bitnami/oras:latest
+        workingDir: /data
+        shell: |
+          oras pull 12345678901234.dkr.ecr.us-west-2.amazonaws.com/some/artifact:latest
+    - shell: tree /data
 ```
 
 ### OCI Images
@@ -363,10 +379,10 @@ and copy all the expected contents into `/data` (or other known volume):
 ```yaml
 spec:
   steps:
-  - run:
-      image: '12345678901234.dkr.ecr.us-west-2.amazonaws.com/some/image:latest'
-      shell: 'cp -rf /some/test/content /data'
-  - shell: tree /data
+    - run:
+        image: "12345678901234.dkr.ecr.us-west-2.amazonaws.com/some/image:latest"
+        shell: "cp -rf /some/test/content /data"
+    - shell: tree /data
 ```
 
 :::tip
@@ -384,23 +400,23 @@ and fetch the data.
 ```yaml
 spec:
   steps:
-  - run:
-      image: minio/mc:latest
-      env:
-      - name: STORAGE_URL
-        value: https://s3.us-south.cloud-object-storage.appdomain.cloud
-      - name: STORAGE_ACCESS_KEY
-        value: AKIAIOSFODNN7EXAMPLE
-      - name: STORAGE_SECRET_KEY
-        value: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
-      - name: STORAGE_BUCKET
-        value: artifacts
-      shell: |
-        /usr/bin/mc config host add storage "$STORAGE_URL" "$STORAGE_ACCESS_KEY" "$STORAGE_SECRET_KEY"
-        /usr/bin/mc cp "storage/$STORAGE_BUCKET/some-artifact.tar.gz" /data/some-artifact.tar.gz
-        tar -zxf /data/some-artifact.tar.gz
-        rm /data/some-artifact.tar.gz
-  - shell: tree /data
+    - run:
+        image: minio/mc:latest
+        env:
+          - name: STORAGE_URL
+            value: https://s3.us-south.cloud-object-storage.appdomain.cloud
+          - name: STORAGE_ACCESS_KEY
+            value: AKIAIOSFODNN7EXAMPLE
+          - name: STORAGE_SECRET_KEY
+            value: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+          - name: STORAGE_BUCKET
+            value: artifacts
+        shell: |
+          /usr/bin/mc config host add storage "$STORAGE_URL" "$STORAGE_ACCESS_KEY" "$STORAGE_SECRET_KEY"
+          /usr/bin/mc cp "storage/$STORAGE_BUCKET/some-artifact.tar.gz" /data/some-artifact.tar.gz
+          tar -zxf /data/some-artifact.tar.gz
+          rm /data/some-artifact.tar.gz
+    - shell: tree /data
 ```
 
 ## Custom Sources
@@ -428,7 +444,7 @@ spec:
   content:
     git:
       uri: https://github.com/kubeshop/testkube.git
-      revision: '{{ config.revision }}'
+      revision: "{{ config.revision }}"
       sshKeyFrom:
         secretKeyRef:
           name: git-credentials
@@ -445,12 +461,15 @@ metadata:
   name: example-workflow
 spec:
   use:
-  - name: git-testkube
-    config:
-      revision: develop
+    - name: git-testkube
+      config:
+        revision: develop
   steps:
-  - shell: tree /data/repo
+    - shell: tree /data/repo
 ```
 
 </TabItem>
 </Tabs>
+
+[github-app]: https://docs.github.com/en/apps
+[github-app-install]: /articles/github-actions#using-github-apps-with-testkube

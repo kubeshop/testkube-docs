@@ -178,3 +178,53 @@ jobs:
       - run: |
           testkube run testworkflow TEST_WORKFLOW_NAME -f
 ```
+
+## Using GitHub Apps with Testkube
+
+With GitHub Apps you can simplify authentication to cloning your GitHub repositories and more.
+
+### Configuration for single-tenant
+
+A GitHub App will be installed on the Testkube Deployment.
+This keeps configuration simple for most On Prem users which use a single organization.
+
+#### Step-by-step Instructions
+
+First you create and install the GitHub App:
+
+1. Create a GitHub Apps using https://github.com/settings/apps/new. You could name it "Testkube for $YourOrg" if you are uncertain how to call it.
+2. Change repository permissions to enable read-access to "Content" and "Metadata".
+3. Generate a private key and download it.
+4. Install the GitHub App to your account through the GitHub website.
+5. Take the installation identifier from the URL.
+
+Afterwards you configure Testkube during the Helm deployment:
+
+1. Create a Kubernetes Secret which contains your private key. You should check that you are in the correct namespace.
+
+```bash
+kubectl create secret generic testkube-github --from-file=key.pem=testkube-for-your-org.2025-02-03.private-key.pem
+```
+
+2. Update your values.yaml with your GitHub App details. Please make sure that your application and installation identifiers are strings or Helm's YAML parser might inadvertently change them to incorrect values.
+
+```yaml
+testkube-cloud-api:
+  api:
+    github:
+      appId: "your_application_id"
+      privateKeyRef: "testkube-github"
+      installationId: "your_installation_id"
+```
+
+3. (Re)-Deploy Testkube
+4. You are now ready to [use your GitHub App to clone your content][workflow-content-github-app]!
+
+### Configuration for multi-tenancy
+
+This approach would install GitHub Apps on individual Testkube Organizations.
+The benefit is strict isolation across tenants.
+
+This is not yet supported. Please reach out to us should you be interested in this functionality on Testkube Cloud Control Plane or should you need to separate installations within your On Prem deployment.
+
+[workflow-content-github-app]: /articles/test-workflows-content#using-github-app

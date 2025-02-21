@@ -7,7 +7,6 @@ With the integration of Flux into Testkube, it ensures automated and streamlined
 added to the GitOps process, automated testing is added to the deployment lifecycle. This approach cuts down on the time and effort needed for manual
 work and speeds up the testing and deployment process, giving faster feedback and better application delivery.
 
-
 ## Flux Integration
 
 Testkube can be integrated into a Flux-managed CI/CD pipeline, with Flux managing continuous application delivery and Testkube ensuring thorough
@@ -15,12 +14,11 @@ testing at all stages. Here is how to integrate Flux with Testkube for automated
 
 ### Prerequisites
 
-* [Testkube](https://app.testkube.io/)
-* Kubernetes cluser
-* [Testkube Agent](./install/multi-cluster.md) configured on the cluster
-* [Flux](https://fluxcd.io/flux/get-started/) is configured on the cluster
-* Install the [Flux CLI](https://fluxcd.io/flux/installation/)
-
+- [Testkube](https://app.testkube.io/)
+- Kubernetes cluser
+- [Testkube Agent](./install/multi-cluster.md) configured on the cluster
+- [Flux](https://fluxcd.io/flux/get-started/) is configured on the cluster
+- Install the [Flux CLI](https://fluxcd.io/flux/installation/)
 
 #### 1. Configure the GitHub repo on Flux
 
@@ -29,18 +27,17 @@ on a Kubernetes cluster and link them to a GitHub repo for synchronization of th
 Additionally, this command simplifies the process of pushing the Flux manifests to the designated GitHub repo.
 
 **Note:** Before using Flux, create a GitHub [personal access token](https://fluxcd.io/flux/installation/bootstrap/github/#github-pat) (PAT) to be used later
-for authentication. 
+for authentication.
 
 #### 2. Export PAT
 
 After the PAT is created, export it as an environment variable using the following command:
 
-
 ```sh
 export GITHB_TOKEN=<gh-token>
 ```
 
-#### 3. Configure Flux 
+#### 3. Configure Flux
 
 Install the [Flux CLI](https://fluxcd.io/flux/installation/) and run the following command to sync with the repo:
 
@@ -55,6 +52,7 @@ flux bootstrap github \
 #### 4. Set up Git source in Flux
 
 Add a Git source that specifies the repo and branch to be monitored for changes by executing the following command:
+
 ```sh
 flux create source git testkube-tests \
 --url=https://github.com/techmaharaj/testkube-flux \
@@ -78,7 +76,7 @@ flux create kustomization testkube-test \
 
 #### 6. Verify Kustomization status
 
-To verify if the sync was successful, use the following command to monitor Flux's progress and see if it 
+To verify if the sync was successful, use the following command to monitor Flux's progress and see if it
 successfully synced the resources.
 
 ```sh
@@ -91,7 +89,7 @@ This command shows the status of the Kustomizations and continuously updates as 
 | NAME                    | REVISION           | SUSPENDED   |  READY     |  MESSAGE                              |
 | ----------------------- | ------------------ | ----------- | ---------- | ------------------------------------- |
 | flux-system             | main@sha1:a72cbbd4 | False       | True       | Applied revision: main@sha1:a72cbbd4  |
-| testkube-test           | main@sha1:a72cbbd4 | False       | True       | Applied revision: main@sha1:a72cbbd4  | 
+| testkube-test           | main@sha1:a72cbbd4 | False       | True       | Applied revision: main@sha1:a72cbbd4  |
 ```
 
 #### 7. Verify Testkube Test Workflow creation
@@ -99,12 +97,12 @@ This command shows the status of the Kustomizations and continuously updates as 
 After confirming that the synchronization is successful with Flux, verify if the Test Workflow has been created in the testkube
 namespace by using the following command:
 
-```kubectl get testworkflows -n testkube```
+`kubectl get testworkflows -n testkube`
 
 ```sh title="Expected output:"
-| NAME                    | AGE       | 
+| NAME                    | AGE       |
 | ----------------------- | --------- |
-| basic-k6-workflow       | 3m38s     | 
+| basic-k6-workflow       | 3m38s     |
 ```
 
 ## GitOps Takeaways
