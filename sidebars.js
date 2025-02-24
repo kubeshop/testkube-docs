@@ -136,6 +136,11 @@ const sidebars = {
                   id: "articles/copilot-on-prem-install",
                 },
                 {
+                  type: "doc",
+                  label: "Deploying on OpenShift",
+                  id: "articles/deploying-on-openshift",
+                },
+                {
                   type: "link",
                   label: "Testkube with Kind",
                   href: "https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker",
