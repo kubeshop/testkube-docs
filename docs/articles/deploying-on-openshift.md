@@ -1,4 +1,4 @@
-# Exposing Testkube on OpenShift Routes with a Private CA and HAProxy (Including Intermediate Certificate)
+## Deploying on OpenShift
 
 When deploying Testkube in an OpenShift cluster, you can expose its public endpoints using OpenShift Routes while securing them with custom certificates.
 
@@ -127,7 +127,7 @@ oc create route passthrough testkube-enterprise-grpc --service=testkube-enterpri
 
 **_API_**
 
-As Tetskube uses the same hostname for the Dex and the API, therefore, we need to use the reencrypt route to avoid _HostAlreadyClaimed_ error.
+As Testkube uses the same hostname for the Dex and the API, therefore, we need to use the reencrypt route to avoid _HostAlreadyClaimed_ error.
 ```yaml
 oc create route reencrypt testkube-enterprise-api --service=testkube-enterprise-api --port=https --cert=tls.crt --key=tls.key --ca-cert=ca-chain.crt --dest-ca-cert=ca-chain.crt --hostname=api.openshift.testkube.dev --namespace testkube-control-plane
 ```
