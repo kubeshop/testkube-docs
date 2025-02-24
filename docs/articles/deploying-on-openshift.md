@@ -4,7 +4,7 @@ When deploying Testkube in an OpenShift cluster, you can expose its public endpo
 
 ## Prerequisites
 - OpenShift cluster (version 4.5 and later)
-- OpenShift CLI installed with the same version of the cluster (or later).
+- OpenShift CLI installed with the same version of the cluster (or later)
 - HAProxy router
 - A valid certificate chain, including a leaf certificate, an intermediate certificate, and a CA certificate
 - [HTTP/2](https://docs.openshift.com/container-platform/4.17/networking/networking_operators/ingress-operator.html#nw-enable-http2_configuring-ingress) enabled on the Ingress Controller (required for GRPC connections)
@@ -49,7 +49,7 @@ The secret must be created in the namespace where the **Control Plane** is deplo
 In addition to the leaf certificate, we need a certificate bundle that includes both the **intermediate** and **root CA** certificates. This bundle is required for validating the chain of trust.
 :::note
 
-When creating the bundle, ensure that the intermediate CA is listed **first**, followed by the root CA:
+When creating the bundle, ensure that the intermediate CA is listed **first**, followed by the root CA.
 
 :::
 
