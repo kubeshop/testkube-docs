@@ -1,4 +1,4 @@
-## Deploying on OpenShift
+# Deploying on OpenShift
 
 When deploying Testkube in an OpenShift cluster, you can expose its public endpoints using OpenShift Routes while securing them with custom certificates.
 
