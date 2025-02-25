@@ -84,9 +84,6 @@ Add this configuration to your Control Plane `values.yaml` file:
 global:
   ingress:
     enabled: false
-dex:
-  ingress:
-    enabled: false #dex has to be disabled separately for now
 
 ## Enable https for the API
 testkube-cloud-api:
