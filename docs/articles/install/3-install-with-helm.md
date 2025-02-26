@@ -92,6 +92,9 @@ TLS can either be handled through cert-manager or a manually defined secret. Whi
 TLS should be terminated at the application-level instead of the ingress-level as it will drastically enhance the performance of the gRPC and Websocket protocols. Be mindful that NGINX defaults to a downgrade from HTTP2 to HTTP1.1 when the backend service is using an insecure port.
 :::
 
+Ensure that your gateway or proxy fully supports HTTP/2, as this is a fundamental requirement for enabling gRPC endpoints. Without HTTP/2 support, gRPC communication will not function properly.
+If you are deploying Testkube in an Azure environment, it is essential to use [Application Gateway for Containers](https://learn.microsoft.com/en-us/azure/application-gateway/for-containers/overview#load-balancing-features) rather than the standard Azure Application Gateway, as the latter [does not support gRPC protocol](https://github.com/Azure/application-gateway-kubernetes-ingress/issues/1015#issuecomment-2379609889).
+
 ### Auth
 
 You will have to configure how your users can access Testkube. Testkube uses Dex which supports [the most popular identity providers](https://dexidp.io/docs/connectors/). You can find a OIDC example for Google below:
