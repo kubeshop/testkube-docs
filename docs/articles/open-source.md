@@ -161,7 +161,9 @@ For retrieving artifacts you can use
 testkube download artifacts <execution_id>
 ```
 
-## Next Steps
+### Next Steps
+
+Congrats on getting up and running with Testkube, now you can
 
 - Read more about [Test Workflows](/articles/test-workflows) to learn how to run any type of test with Testkube.
 - Head over to the [Examples & Guides](/articles/examples/overview) for sample Test Workflows with popular testing tools.
