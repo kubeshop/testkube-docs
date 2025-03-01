@@ -40,8 +40,8 @@ Testkube Control Plane:
 - **Spawning dependencies** for your tests with `services` - see [Services](/articles/test-workflows-services.mdx)
 
 :::tip
-The Open Source Agent provides **extensive** test execution capabilities even without these features available,
-check out the [Open Source Overview](/articles/open-source) to get started.
+Deploying the Testkube Agent in Standalone Mode provides **extensive** test execution capabilities even 
+without these features available, check out the [Open Source Overview](/articles/open-source) to get started.
 :::
 
 ## Installing the Standalone Agent
