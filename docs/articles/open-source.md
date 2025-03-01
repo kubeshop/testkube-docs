@@ -7,16 +7,12 @@ Once deployed, you can interact with the agent through the [Testkube CLI](instal
 [Agent API](/openapi/overview#agent-api). This section explains and guides you through the installation, setup, 
 running and verifying tests with the Testkube Agent in Standalone Mode.
 
-## Prerequisites
+## Getting Started with the Testkube Agent 
 
-* A Kubernetes or OpenShift cluster. [Docker  version](https://docs.testkube.io/articles/install/docker-agent) is also available as an alternative 
-* [Testkube CLI](https://docs.testkube.io/articles/install/cli) installed on your machine  
-* kubectl installed and configured to interact with the Kubernetes cluster 
-* Helm installed on your machine
+### 1. Install the Testkube Agent in Standalone Mode 
 
-## Installing the Testkube Agent in Standalone Mode
-
-Testkube Standalone Agent can be installed using Testkube CLI or Helm. [Refer to installing the Standalone Agent](./install/standalone-agent#installing-the-standalone-agent) to perform installation on a Kubernetes cluster.
+The Testkube Standalone Agent can be installed using Testkube CLI or 
+Helm - [Installation Instructions](./install/standalone-agent#installing-the-standalone-agent).
 
 After installation, you can check the status of the deployed components to ensure everything is running correctly.
    
@@ -24,13 +20,11 @@ After installation, you can check the status of the deployed components to ensur
 kubectl get all -n testkube
 ```
 
-## Running Tests with the Testkube Agent
+### 2. Create a Test Workflow
 
-### Create a Test Workflow
+Testkube uses [Test Workflows](/articles/test-workflows) to define how to run your tests, here is an example using a k6 test:
 
-Here is a test workflow that defines the test execution. Here is an example using a k6 test:
-
-```
+```yaml
 kind: TestWorkflow
 apiVersion: testworkflows.testkube.io/v1
 metadata:
@@ -67,12 +61,20 @@ testkube create testworkflow -f testworkflow.yaml
 ```
 
 Alternatively, you can use kubectl to apply the Test Workflow:
+
 ```
 kubectl apply -f testworkflow.yaml
 ```
 
-### Verifying the Deployment of Test Workflow
+:::tip
+Testkube uses Kubernetes CRDs to define its core resources - [Read More](/articles/crds).
+:::
+
+
+### 3. Verify the Deployment of Test Workflow
+
 Run the following command to verify:
+
 ```
 testkube get testworkflows
 ```
@@ -85,8 +87,10 @@ NAME           | DESCRIPTION | CREATED                       | LABELS  | STATUS 
 ephemeral-test |             | 2025-02-17 14:51:10 +0000 UTC | test=k6 |
 ```
 
-### Execute Test Workflow
-Testkube CLI provide `run` command to execute a Test Workflow. Let us go ahead and execute the `ephemeral-test` Test Workflow.
+### 4. Execute your Test Workflow
+
+The [Testkube CLI](/articles/cli) provides a `run` command to execute a Test Workflow. 
+Let us go ahead and execute the `ephemeral-test` Test Workflow.
 
 ```
 testkube run testworkflow ephemeral-test
@@ -114,7 +118,11 @@ $ Use following command to get test workflow execution details \
     kubectl testkube get twe 67b34e1e29a84abec76e0a14
 ```
 
-### View Test Workflow Status
+:::tip
+Use the `-f` flag to immediately follow an execution when creating it - [Read More](/cli/testkube_run_testworkflow).
+:::
+
+### 5. View Test Workflow execution status
 
 You can monitor the test execution process by watching the status:
 ```	
@@ -145,19 +153,28 @@ The Test Workflow has been successfully executed.  Testkube performs the followi
 * Uploads the artifacts if found.
 
 
-### View Test Logs
+### 6. View Test Logs & Artifacts
 
-Testkube manages the logs and makes them available via CLI. To access extensive logs of Test Workflow execution, you can use the below command with the EXECUTION ID.
+Testkube manages the logs and artifacts produced by your tests and makes them available via CLI. 
+To access extensive logs of Test Workflow execution, you can use the below command with the EXECUTION ID.
 
 ```
 testkube get twe <execution_id>
 ```
 
-In this document, we have discussed the process of deploying Testkube Agent in Standalone Mode on a Kubernetes cluster and perform manage tests via an open source solution. You can automate the execution of a test via GitHub Actions using the Testkube Open Source solution.
+For retrieving artifacts you can use 
 
-:::tip
-Check out the [Getting Started with Testkube Open Source](https://testkube.io/blog/getting-started-with-testkube-open-source) blogpost to further see how you can use the Standalone Agent with GitHub Actions
-:::  
+```
+testkube download artifacts <execution_id>
+```
+
+## Next Steps
+
+- Read more about [Test Workflows](/articles/test-workflows) to learn how to run any type of test with Testkube.
+- Head over to the [Examples & Guides](/articles/examples/overview) for sample Test Workflows with popular testing tools.
+- Check out the [Getting Started with Testkube Open Source](https://testkube.io/blog/getting-started-with-testkube-open-source) blogpost to further see how you can use the Standalone Agent with GitHub Actions
+- Go through the [CLI Reference](/cli/testkube) to see available CLI commands.
+- Head over to the [Testkube Slack](https://bit.ly/testkube-slack) to ask questions and get answers.
 
 ## Migrating from OSS to Commercial
 
