@@ -12,7 +12,7 @@ Please note that your test executions will not be migrated to Testkube On-Prem, 
 
 ## License
 
-To start with Testkube On-Prem you need to request a license. Depending on your environment requirements, it can be either an offline or an online license. Read more about these types of licenses [here](https://docs.testkube.io/testkube-pro-on-prem/articles/usage-guide#license). If you require an online license, it can be acquired [here](https://testkube.io/download). If you need an offline license, please contact us using this [form](https://testkube.io/contact).
+To start with Testkube On-Prem you need to request a license. Depending on your environment requirements, it can be either an offline or an online license. Read more about these types of licenses [here](https://docs.testkube.io/testkube-pro-on-prem/articles/usage-guide#license). If you require an online license, it can be acquired [here](https://testkube.io/get-started). If you need an offline license, please contact us using this [form](https://testkube.io/contact).
 There are multiple ways to integrate Testkube Core OSS into your Testkube On-Prem setup. We highly recommend creating a k8s secret, as it provides a more secure way to store sensitive data.
 
 At this point there are two options to deploy Testkube On-Prem:
