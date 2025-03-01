@@ -28,29 +28,22 @@ Testkube uses [Test Workflows](/articles/test-workflows) to define how to run yo
 kind: TestWorkflow
 apiVersion: testworkflows.testkube.io/v1
 metadata:
-name: ephemeral-test
-namespace: testkube
-labels:
-    test: k6
+  name: ephemeral-test
+  namespace: testkube
 spec:
-content:
+  content:
     git:
-    uri: https://github.com/cerebro1/testkube-ephemeral
-    revision: main
-    paths:
-        - k6/testkube.js
-container:
+      uri: https://github.com/cerebro1/testkube-ephemeral
+      revision: main
+      paths:
+      - k6/testkube.js
+  container:
     workingDir: /data/repo/k6/
-steps:
+    image: grafana/k6:0.49.0
+  steps:
     - name: Run test
-    container:
-        image: grafana/k6:0.49.0
-    shell: |
+      shell: |
         k6 run testkube.js
-    artifacts:
-        workingDir: /data
-        paths:
-        - '*.html’
 ```
 
 Save the above manifest in `testworkflow.yaml`. 

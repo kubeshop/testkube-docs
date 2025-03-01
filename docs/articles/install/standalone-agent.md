@@ -41,7 +41,7 @@ Testkube Control Plane:
 
 :::tip
 The Open Source Agent provides **extensive** test execution capabilities even without these features available,
-check out the [Test Workflows Overview](/articles/test-workflows) to get started.
+check out the [Open Source Overview](/articles/open-source) to get started.
 :::
 
 ## Installing the Standalone Agent
