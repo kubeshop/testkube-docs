@@ -2,14 +2,15 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import SimpleRestAssured from "../../workflows/simple-restassured-workflow.md"
 
-# Basic RestAssured Example
+# Basic REST Assured Example
 
-Below is a simple workflow for executing RestAssured tests in a Gradle project stored on GitHub. You can paste this directly into the
+Below is a simple workflow for executing REST Assured tests in a Gradle project stored on GitHub. You can paste this directly into the
 YAML of an existing or new test, just make sure to update the `name` and `namespace` for your environment as needed.
 
 - The `spec.content` property defines the path to the Gradle project on GitHub.
 - The `spec.container` property defines default constraints for any container created in this workflow.
 - The `spec.steps` property defines a single step that runs the `gradle --no-daemon` test command.
+- The `spec.steps[0].artifacts` property defines from where to upload junit and html reports.
 
 <SimpleRestAssured/>
 
@@ -50,5 +51,5 @@ After execution, you can see the output from the test executions under the execu
 
 
 :::tip
-Read more about running RestAssured Tests with Testkube at https://testkube.io/learn/api-testing-using-restassured-and-testkube
+Read more about running REST Assured Tests with Testkube at https://testkube.io/learn/api-testing-using-restassured-and-testkube
 :::
