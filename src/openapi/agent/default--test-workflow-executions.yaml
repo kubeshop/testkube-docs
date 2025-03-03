@@ -306,3 +306,40 @@ paths:
                 type: array
                 items:
                   $ref: './components.yaml#/components/schemas/Problem'
+  /test-workflow-executions/{executionID}/rerun:
+    post:
+      parameters:
+        - $ref: './components.yaml#/components/parameters/executionID'
+      summary: Rerun test workflow execution
+      description: Rerun test workflow execution
+      operationId: rerunTestWorkflowExecution
+      requestBody:
+        description: test workflow running context
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/TestWorkflowRunningContext'
+      responses:
+        '200':
+          description: successful execution
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/TestWorkflowExecution'
+        '400':
+          description: problem with body parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
