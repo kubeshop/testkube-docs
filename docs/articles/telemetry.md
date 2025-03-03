@@ -59,6 +59,8 @@ It is sent to https://analytics.testkube.io and https://www.google-analytics.com
 
 ## How to Opt Out?
 
+### Testkube CLI and Agent
+
 To opt out of the Testkube telemetry collection:
 
 ```sh
@@ -75,4 +77,22 @@ To check the current *status*:
 
 ```sh
 testkube status telemetry
+```
+
+### Testkube Control Plane API
+
+Add to the `values.yaml` file the reference of the environment variable `DO_NOT_TRACK`:
+
+```yml
+testkube-cloud-api:
+  additionalEnv:
+    DO_NOT_TRACK: true
+```
+
+To ensure this configuration was applied, check the log of the Control Plane API and search for the record:
+
+```json
+(...)
+{ ... ,"msg":"Note: Telemetry is disabled, analytics will not be available. For more information, please visit https://docs.testkube.io/articles/telemetry.", ... }
+(...)
 ```
