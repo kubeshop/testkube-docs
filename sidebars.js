@@ -731,9 +731,9 @@ const sidebars = {
           ],
         },
         {
-          type: "link",
+          type: "doc",
           label: "REST Assured",
-          href: "https://testkube.io/learn/api-testing-using-restassured-and-testkube",
+          id: "articles/examples/rest-assured-basic",
         },
         {
           type: "link",
