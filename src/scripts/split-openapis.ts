@@ -77,6 +77,11 @@ async function splitOpenAPIByPaths(
       ? pathFilter(pathKey)
       : {basePath: "/" + pathKey.substring(1).split("/")[0]};
 
+    // set to default basePath if no basePath was provided by mapping function
+    if( pathFilter && mapping && !mapping.basePath ){
+      mapping.basePath = "/" + pathKey.substring(1).split("/")[0];
+    }
+
     if (mapping?.basePath && mapping.basePath.length > 1) {
       const submenu = mapping.submenu || "default";
       const mappingKey = submenu + ":" + mapping.basePath;
@@ -216,7 +221,10 @@ splitOpenAPIByPaths(
   "https://raw.githubusercontent.com/kubeshop/testkube/main/api/v1/testkube.yaml",
   "src/openapi/agent",
   "docs/openapi/agent",
-  "Agent"
+  "Agent",
+   (opPath) => {
+    return opPath.split("/").indexOf("uploads") >= 0 ? null : {};
+   }
 );
 
 // Control-plane OpenAPI definition goes into cloud folder
@@ -243,6 +251,7 @@ splitOpenAPIByPaths(
     if (
       lastSegment === "suggestions" ||
       lastSegment === "environments-versions" ||
+      lastSegment === "uploads" ||
       lastSegment.includes("slug")
     )
       return null;

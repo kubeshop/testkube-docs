@@ -2321,6 +2321,9 @@ components:
         executionPath:
           type: string
           description: all test workflow execution ids starting from the root
+        executionReference:
+          type: string
+          description: reference test workflow execution id
         type:
           $ref: '#/components/schemas/TestWorkflowRunningContextActorType'
     TestWorkflowRunningContextInterfaceType:
@@ -2722,6 +2725,8 @@ components:
           $ref: '#/components/schemas/TestTriggerProbeSpec'
         action:
           $ref: '#/components/schemas/TestTriggerActions'
+        actionParameters:
+          $ref: '#/components/schemas/TestTriggerActionParameters'
         execution:
           $ref: '#/components/schemas/TestTriggerExecutions'
         testSelector:
@@ -2775,6 +2780,10 @@ components:
           type: string
           description: resource namespace
           example: testkube
+        namespaceRegex:
+          type: string
+          description: kubernetes resource namespace regex
+          example: test*
         labelSelector:
           $ref: >-
             https://raw.githubusercontent.com/garethr/kubernetes-json-schema/master/v1.7.8/_definitions.json#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector
@@ -2803,6 +2812,14 @@ components:
       type: string
       enum:
         - run
+    TestTriggerActionParameters:
+      description: supported action parameters for test triggers
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/TestWorkflowConfigValue'
+        tags:
+          $ref: '#/components/schemas/TestWorkflowTagValue'
     TestTriggerConditionSpec:
       type: object
       properties:
@@ -3370,6 +3387,10 @@ components:
           type: string
           format: date-time
           description: when the execution has been scheduled to run
+        assignedAt:
+          type: string
+          format: date-time
+          description: when the execution has been assigned to some runner
         statusAt:
           type: string
           format: date-time
@@ -3433,6 +3454,9 @@ components:
           description: identifier for group of correlated executions
           format: bson objectId
           example: 62f395e004109209b50edfc1
+        runnerId:
+          type: string
+          description: identifier of the runner where it has been executed
         name:
           type: string
           description: execution name
@@ -4026,8 +4050,6 @@ components:
           $ref: '#/components/schemas/TestWorkflowRetryPolicy'
         timeout:
           type: string
-          pattern: >-
-            ^((0|[1-9][0-9]*)h)?((0|[1-9][0-9]*)m)?((0|[1-9][0-9]*)s)?((0|[1-9][0-9]*)ms)?$
           description: maximum time this step may take
     TestWorkflowStepOperations:
       type: object
@@ -4074,8 +4096,6 @@ components:
           $ref: '#/components/schemas/TestWorkflowRetryPolicy'
         timeout:
           type: string
-          pattern: >-
-            ^((0|[1-9][0-9]*)h)?((0|[1-9][0-9]*)m)?((0|[1-9][0-9]*)s)?((0|[1-9][0-9]*)ms)?$
           description: maximum time this step may take
         delay:
           type: string
@@ -4148,8 +4168,6 @@ components:
           $ref: '#/components/schemas/TestWorkflowRetryPolicy'
         timeout:
           type: string
-          pattern: >-
-            ^((0|[1-9][0-9]*)h)?((0|[1-9][0-9]*)m)?((0|[1-9][0-9]*)s)?((0|[1-9][0-9]*)ms)?$
           description: maximum time this step may take
         delay:
           type: string
@@ -4702,12 +4720,21 @@ components:
         value:
           type: string
           description: configuration value
+        emptyValue:
+          type: boolean
+          description: configuration value is empty
         defaultValue:
           type: string
           description: configuration value default
+        emptyDefaultValue:
+          type: boolean
+          description: configuration value default is empty
         truncated:
           type: boolean
           description: indicates if the value is truncated
+        sensitive:
+          type: boolean
+          description: marks value as sensitive
     TestWorkflowConfigValue:
       type: object
       description: configuration values to pass to the template
