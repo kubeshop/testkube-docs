@@ -39,24 +39,6 @@ The collected data looks like this.
 }
 ```
 
-### What We Collect
-
-The telemetry data we use in our metrics is limited to:
-
- - The number of CLI installations.
- - The number of unique CLI usages in a day.
- - The number of installations to a cluster.
- - The number of unique active cluster installations.
- - The number of people who disable telemetry.
- - The number of created test suites and the number of steps.
- - The number of tests, their types and their sources.
- - The number of test suite runs and their durations.
- - The number of workflows created and run.
- - The number of workflow templates created and used.
- - Error details resulting from CLI commands.
-
-It is sent to https://analytics.testkube.io and https://www.google-analytics.com
-
 ## How to Opt Out?
 
 ### Testkube CLI and Agent
