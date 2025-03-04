@@ -39,25 +39,9 @@ The collected data looks like this.
 }
 ```
 
-### What We Collect
-
-The telemetry data we use in our metrics is limited to:
-
- - The number of CLI installations.
- - The number of unique CLI usages in a day.
- - The number of installations to a cluster.
- - The number of unique active cluster installations.
- - The number of people who disable telemetry.
- - The number of created test suites and the number of steps.
- - The number of tests, their types and their sources.
- - The number of test suite runs and their durations.
- - The number of workflows created and run.
- - The number of workflow templates created and used.
- - Error details resulting from CLI commands.
-
-It is sent to https://analytics.testkube.io and https://www.google-analytics.com
-
 ## How to Opt Out?
+
+### Testkube CLI and Agent
 
 To opt out of the Testkube telemetry collection:
 
@@ -75,4 +59,22 @@ To check the current *status*:
 
 ```sh
 testkube status telemetry
+```
+
+### Testkube Control Plane API
+
+Add to the `values.yaml` file the reference of the environment variable `DO_NOT_TRACK`:
+
+```yml
+testkube-cloud-api:
+  additionalEnv:
+    DO_NOT_TRACK: true
+```
+
+To ensure this configuration was applied, check the log of the Control Plane API and search for the record:
+
+```json
+(...)
+{ ... ,"msg":"Note: Telemetry is disabled, analytics will not be available. For more information, please visit https://docs.testkube.io/articles/telemetry.", ... }
+(...)
 ```
