@@ -14,7 +14,7 @@ Testkube samples the following metrics every second for each Workflow Step that 
 - CPU
   - milicores used
 - Memory
-  - bytes used (plus requests and limits)
+  - bytes used 
 - Disk
   - bytes read total (not currently displayed)
   - bytes read per second
@@ -40,7 +40,7 @@ There are four charts:
 - **CPU** - shows CPU usage over time for each pod/node, with CPU requests and limits as orange and red lines respectively.
 - **Memory** - shows memory usage over time for each pod/node, with Memory requests and limits as orange and red lines respectively.
 - **Network Traffic** - shows ingoing/outgoing network traffic over time.
-- **Disk Usage** - shows data read/writtee over time.
+- **Disk Usage** - shows data read/written over time.
 
 The x-axis is logarithmic for the CPU and Memory charts, linear for Network and Disk Usage.
 
@@ -88,8 +88,7 @@ which shows the following charts:
 
 ## Visualisation of multiple-step Workflows
 
-The Workflow above had only one step that ran a pytest test, which starts at the vertical purple line in the charts. For 
-a Workflow with multiple steps these are separated by purple lines, for example:
+For Workflows with multiple steps, these are separated by purple lines, for example:
 
 ![Multi-Step Resource Usage](images/multi-step-resource-usage.png)
 
