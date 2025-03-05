@@ -9,7 +9,7 @@ resource usage and optimize accordingly. This functionality allows you to identi
 
 ## Metrics Collected
 
-Testkube samples the following metrics every second for each Workflow Step that runs a container command:
+Testkube samples the following metrics for each Workflow Step that runs a container command:
 
 - CPU
   - milicores used
@@ -26,13 +26,12 @@ Testkube samples the following metrics every second for each Workflow Step that 
   - bytes written (not currently displayed)
   - bytes written per second
 
-:::note
-The sampling frequency of 1 second can result in misleading/insufficient output for short-running tests (less than 5 seconds).
-:::
+The default sampling frequency is 1 second, please note that for short running tests (less than 3 seconds), this
+can lead to misleading/insufficient data for performing an accurate metrics analysis.
 
 ## Metrics Visualisation
 
-Collected metrics and related metadata is visualised in the "Resource Usage" tab for a Workflow execution:
+Collected metrics and related metadata is visualized in the "Resource Usage" tab for a Workflow execution:
 
 ![Basic Resource Usage](images/basic-resource-usage.png)
 
