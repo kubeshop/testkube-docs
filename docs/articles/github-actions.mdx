@@ -200,7 +200,7 @@ First you create and install the GitHub App:
 
 Afterwards you configure Testkube during the Helm deployment:
 
-1. Create a Kubernetes Secret which contains your private key. You should check that you are in the correct namespace.
+1. Create a Kubernetes Secret within the namespace of your Testkube Control Plane which contains your private key. You should check that you are in the correct namespace.
 
 ```bash
 kubectl create secret generic testkube-github --from-file=key.pem=testkube-for-your-org.2025-02-03.private-key.pem
