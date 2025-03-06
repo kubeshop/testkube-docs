@@ -440,18 +440,18 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "AI Analysis",
-              id: "testkube-pro/articles/AI-test-insights",
-            },
-            {
-              type: "doc",
-              label: "Cached Test Results",
-              id: "testkube-pro/articles/cached-results",
-            },
-            {
-              type: "doc",
               label: "JUnit Reports",
               id: "articles/test-workflows-reports",
+            },
+            {
+              type: "doc",
+              label: "Resource Metrics",
+              id: "articles/resource-metrics",
+            },
+            {
+              type: "doc",
+              label: "Test Insights",
+              id: "articles/test-insights",
             },
             {
               type: "doc",
@@ -460,8 +460,13 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Test Insights",
-              id: "articles/test-insights",
+              label: "AI Analysis",
+              id: "testkube-pro/articles/AI-test-insights",
+            },
+            {
+              type: "doc",
+              label: "Cached Test Results",
+              id: "testkube-pro/articles/cached-results",
             },
           ],
         },
