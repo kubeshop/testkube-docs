@@ -41,7 +41,7 @@ There are four charts:
 - **Network Traffic** - shows ingoing/outgoing network traffic over time.
 - **Disk Usage** - shows data read/written over time.
 
-The x-axis is logarithmic for the CPU and Memory charts, linear for Network and Disk Usage.
+The y-axis is logarithmic for the CPU and Memory charts, linear for Network and Disk Usage.
 
 Moving the pointer over the chart will automatically highlight and show details for the corresponding data-point, as shown 
 for the selected 11:01:15 timestamp above. 
