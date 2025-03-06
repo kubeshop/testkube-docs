@@ -432,42 +432,54 @@ const sidebars = {
               label: "Overview",
               id: "articles/results-overview",
             },
-            "articles/logs-and-artifacts",
             {
-              type: "doc",
-              label: "Log Highlighting",
-              id: "testkube-pro/articles/log-highlighting",
+              type: "category",
+              label: "Individual Execution Results",
+              items : [
+                "articles/logs-and-artifacts",
+                {
+                  type: "doc",
+                  label: "Log Highlighting",
+                  id: "testkube-pro/articles/log-highlighting",
+                },
+                {
+                  type: "doc",
+                  label: "JUnit Reports",
+                  id: "articles/test-workflows-reports",
+                },
+                {
+                  type: "doc",
+                  label: "Resource Metrics",
+                  id: "articles/resource-metrics",
+                },
+                {
+                  type: "doc",
+                  label: "AI Analysis",
+                  id: "testkube-pro/articles/AI-test-insights",
+                },
+                {
+                  type: "doc",
+                  label: "Cached Test Results",
+                  id: "testkube-pro/articles/cached-results",
+                },
+              ]
             },
             {
-              type: "doc",
-              label: "JUnit Reports",
-              id: "articles/test-workflows-reports",
-            },
-            {
-              type: "doc",
-              label: "Resource Metrics",
-              id: "articles/resource-metrics",
-            },
-            {
-              type: "doc",
-              label: "Test Insights",
-              id: "articles/test-insights",
-            },
-            {
-              type: "doc",
-              label: "Status Pages",
-              id: "testkube-pro/articles/status-pages",
-            },
-            {
-              type: "doc",
-              label: "AI Analysis",
-              id: "testkube-pro/articles/AI-test-insights",
-            },
-            {
-              type: "doc",
-              label: "Cached Test Results",
-              id: "testkube-pro/articles/cached-results",
-            },
+              type: "category",
+              label: "Aggregated Results Analysis",
+              items : [
+                {
+                  type: "doc",
+                  label: "Test Insights",
+                  id: "articles/test-insights",
+                },
+                {
+                  type: "doc",
+                  label: "Status Pages",
+                  id: "testkube-pro/articles/status-pages",
+                },
+              ]
+            }
           ],
         },
         {
