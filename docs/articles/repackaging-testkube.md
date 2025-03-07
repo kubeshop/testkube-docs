@@ -104,6 +104,7 @@ EXPOSE 8080
 Testkube has some dependencies on other components such as:
 
 - MongoDB
+- Minio
 - NATS
 - Dex
 
