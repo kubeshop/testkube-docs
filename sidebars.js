@@ -141,6 +141,11 @@ const sidebars = {
                   id: "articles/deploying-on-openshift",
                 },
                 {
+                  type: "doc",
+                  label: "Repackaging Testkube",
+                  id: "articles/repackaging-testkube",
+                },
+                {
                   type: "link",
                   label: "Testkube with Kind",
                   href: "https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker",
