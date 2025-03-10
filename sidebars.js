@@ -440,6 +440,7 @@ const sidebars = {
             {
               type: "category",
               label: "Individual Execution Results",
+              collapsed: false,
               items : [
                 "articles/logs-and-artifacts",
                 {
@@ -472,6 +473,7 @@ const sidebars = {
             {
               type: "category",
               label: "Aggregated Results Analysis",
+              collapsed: false,
               items : [
                 {
                   type: "doc",
