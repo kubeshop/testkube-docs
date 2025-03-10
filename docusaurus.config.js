@@ -134,7 +134,7 @@ const config = {
       announcementBar: {
         id: "join-testkube-pro",
         content:
-          '<strong>New to Testkube?</strong> Unleash the power of cloud native testing in Kubernetes with Testkube. <a id="get_started_docs" href="https://www.testkube.io/get-started?utm_source=docs" target="_blank">Get Started ></a>',
+          '<strong>New to Testkube?</strong> Unleash the power of cloud native testing in Kubernetes with Testkube. <a id="get_started_docs" href="https://testkube.io/get-started?utm_source=docs" target="_blank">Get Started ></a>',
         backgroundColor: "#8951ff",
         textColor: "#fff",
       },
