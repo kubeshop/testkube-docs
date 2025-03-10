@@ -160,7 +160,7 @@ dex:
 Please note that it is required to create a k8s secret with a service account JSON key file and mount it to Dex pod. Follow official [documentation](https://dexidp.io/docs/connectors/google/) to see full configuration.
 
 
-Alternatively, you can use [a local database with static users](/testkube-pro-on-prem/articles/auth/#static-users) which acts as a virtual identity provider for evaluations.
+Alternatively, you can use [a local database with static users](/testkube-pro-on-prem/articles/auth#static-users) which acts as a virtual identity provider for evaluations.
 
 Once authenticated, users will also need to be invited to org. By default, new users will automatically join the default organization. You can change this behaviour by changing [the bootstrap and invitation configuration][advanced-bootstrap].
 
