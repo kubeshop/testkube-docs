@@ -10,8 +10,7 @@ const cloudRedocSpecs = require("./src/openapi/cloud/redoc-specs");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Testkube Documentation",
-  tagline:
-    "Your somewhat opinionated and friendly Kubernetes testing framework",
+  tagline: "Your somewhat opinionated and friendly Kubernetes testing framework",
   url: "https://docs.testkube.io",
   baseUrl: "/",
   onBrokenLinks: "throw",
@@ -60,12 +59,7 @@ const config = {
         },
         sitemap: {
           createSitemapItems: async (params) => {
-            const lowPrioPaths = [
-              "/openapi/agent/",
-              "/openapi/cloud/",
-              "/articles/crds/",
-              "/cli/",
-            ];
+            const lowPrioPaths = ["/openapi/agent/", "/openapi/cloud/", "/articles/crds/", "/cli/"];
 
             const { defaultCreateSitemapItems, ...rest } = params;
             const items = await defaultCreateSitemapItems(rest);
@@ -185,14 +179,11 @@ const config = {
         contextualSearch: true,
 
         // Optional: path for search page that enabled by default (`false` to disable it)
-        searchPagePath: false,
+        searchPagePath: "search",
 
         facets: ["indexPrefix"],
         searchParameters: {
-          facetFilters: [
-            "indexPrefix: -reference-doc",
-            "indexPrefix: -legacy-doc",
-          ],
+          facetFilters: ["indexPrefix: -reference-doc", "indexPrefix: -legacy-doc"],
         },
 
         //... other Algolia params
@@ -211,10 +202,7 @@ const config = {
         createRedirects(existingPath) {
           if (existingPath.includes("/cli")) {
             // Redirect from /cli-reference and /reference/cli (old links) to /cli
-            return [
-              existingPath.replace("/cli", "/cli-reference"),
-              existingPath.replace("/cli", "/reference/cli"),
-            ];
+            return [existingPath.replace("/cli", "/cli-reference"), existingPath.replace("/cli", "/reference/cli")];
           }
 
           return undefined; // Return a falsy value: no redirect created
