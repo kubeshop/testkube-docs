@@ -40,7 +40,7 @@ spec:
 
 ### Execution Namespace
 
-You may select a different namespace for execution, if Testkube is [**configured to work with it**](https://docs.testkube.io/articles/helm-chart/#testkube-multi-namespace-feature).
+You may select a different namespace for execution, if Testkube is [**configured to work with it**](https://docs.testkube.io/articles/helm-chart#testkube-multi-namespace-feature).
 
 ```yaml
 spec:

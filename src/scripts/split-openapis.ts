@@ -143,14 +143,15 @@ async function splitOpenAPIByPaths(
 
     // create mdx placeholder
     let mdxFilePath = path.join(docsDir, fileName + ".mdx");
+
+    let pageTitle = title + " " +
+      ((rootPath.split(":")[0] === "default") ? "Operations" : rootPath.split(":")[0]) + ": "
+      + rootPath.split(":")[1]
+
     fs.writeFileSync(
       mdxFilePath,
       "---\n" +
-      "title: Testkube " +
-      title +
-      " " +
-      rootPath.split(":")[1] +
-      " operations\n" +
+      "title: '" + pageTitle + "'\n" +
       "---\n" +
       "<head>\n" +
       '  <meta name="docsearch:indexPrefix" content="reference-doc" />\n' +
@@ -221,7 +222,7 @@ splitOpenAPIByPaths(
   "https://raw.githubusercontent.com/kubeshop/testkube/main/api/v1/testkube.yaml",
   "src/openapi/agent",
   "docs/openapi/agent",
-  "Agent",
+  "Standalone Agent",
    (opPath) => {
     return opPath.split("/").indexOf("uploads") >= 0 ? null : {};
    }
