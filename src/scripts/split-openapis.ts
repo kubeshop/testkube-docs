@@ -146,11 +146,9 @@ async function splitOpenAPIByPaths(
     fs.writeFileSync(
       mdxFilePath,
       "---\n" +
-      "title: Testkube " +
-      title +
-      " " +
-      rootPath.split(":")[1] +
-      " operations\n" +
+      "title: " + title  + " " +
+      rootPath.split(":")[1] + " "
+      + rootPath.split(":")[0] + "\n" +
       "---\n" +
       "<head>\n" +
       '  <meta name="docsearch:indexPrefix" content="reference-doc" />\n' +
