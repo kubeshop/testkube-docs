@@ -206,7 +206,7 @@ Afterwards you configure Testkube during the Helm deployment:
 kubectl create secret generic testkube-github --from-file=key.pem=testkube-for-your-org.2025-02-03.private-key.pem
 ```
 
-2. Update your values.yaml with your GitHub App details. Please make sure that your application and installation identifiers are strings or Helm's YAML parser might inadvertently change them to incorrect values.
+2. Update your values.yaml to update the Control Plane's `testkube-cloud-api` sub-chart with your GitHub App details. Please make sure that your application and installation identifiers are strings or Helm's YAML parser might inadvertently change them to incorrect values.
 
 ```yaml
 testkube-cloud-api:

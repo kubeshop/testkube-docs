@@ -265,8 +265,9 @@ spec:
 ### Using GitHub App
 
 GitHub allows authentication through [GitHub Apps][github-app].
-The benefit is a single point where you can control to which repositories Testkube has access
-which simplifies your workflows and security auditing.
+Using a GitHub App simplifies managing tokens and auditing which repositories Testkube has access to.
+The execution pod will now also receive short-lived tokens from the control plane which further improves security.
+
 You will need to [install a GitHub App to Testkube][github-app-install] to use this authentication strategy.
 
 ```yaml
