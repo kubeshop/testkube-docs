@@ -510,6 +510,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Members",
+              id: "testkube-pro/articles/member-management",
+            },
+            {
+              type: "doc",
               label: "Teams",
               id: "articles/teams",
             },
