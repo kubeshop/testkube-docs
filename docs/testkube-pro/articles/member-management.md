@@ -4,6 +4,12 @@ Manage your organization members from the [Members] option in the Organization m
 
 ![Organisation Member Management](images/org-members.png)
 
+:::note
+This document describes high-level member management within an Organisation, please 
+check out [Resource Access Management](/articles/resource-access-management) to get an overview of how Testkube
+allows you to manage and apply Resource Access controls for Organisation Members.
+:::
+
 ## Member Types
 
 Testkube allows you to license for two type types of members; **full** and **read-only**. A members' type 
@@ -11,12 +17,9 @@ is implicit and based on if that member has been given write-access to any resou
 - A member that has been given write-access automatically counts as a full member.
 - A member that does not have any write-access counts as read-only.
 
-You can see the number of used/available seats of each type in the members page.
+You can see the number of used/available seats of each type in the members page:
 
-:::note
-Please read [Resource Access Management](/articles/resource-access-management) to get an overview of how Testkube
-allows you to manage and apply Resource Access controls for Organization Members.
-:::
+![Fixed Member Limits](images/fixed-member-limits.png)
 
 ### Constraints 
 
@@ -24,6 +27,8 @@ This model imposes some constraints related to member types and permissions:
 
 - It is not possible to give a read-only member write-access to any resource or environment if no 
   full-member seats are available.
+- When giving a read-only member write access to any resource or environment (and full-member seats are available), 
+  that member will automatically count to the full member quota instead.
 - It is not possible for a user to join an organisation if all seats are occupied. For on-prem/SSO-enabled
   deployments, this could result in users not being able to sign in at all.
 - Members who are read-only will count to the full-member limit if there aren't enough read-only seats available.
