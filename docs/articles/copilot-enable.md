@@ -3,7 +3,7 @@
 This section explains how to enable or activate the Copilot feature for both Cloud and On-Prem installations of Testkube.
 
 :::info
-The Testkube Copilot is _always_ disabled by default for new organisations.
+The Testkube Copilot is _always_ disabled by default for new Organizations.
 :::
 
 

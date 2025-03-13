@@ -28,10 +28,10 @@ premade charts.
 
 ![Test Insights Overview](images/insights-overview.png)
 
-The "Your Boards" section contains all Boards created within your organisation. 
+The "Your Boards" section contains all Boards created within your Organization. 
 
 :::note
-There is currently no way to limit access to individual boards for organisation members; everyone has access
+There is currently no way to limit access to individual boards for Organization members; everyone has access
 to all boards and can thus see all data within (which is read-only). 
 
 If this is a concern you can disable Insights entirely for from the [Product Features Panel](/testkube-pro/articles/organization-management#product-features).
@@ -56,7 +56,7 @@ candidates for optimization to reduce testing bottlenecks, improve cycle times a
 
 ### Managing Custom Boards
 
-You can add as many boards as you need to Insights under an Organisation and each board can in turn contain
+You can add as many boards as you need to Insights under an Organization and each board can in turn contain
 as many analysis charts as needed, allowing you to group your analysis in any way that aligns
 with your testing activities.
 

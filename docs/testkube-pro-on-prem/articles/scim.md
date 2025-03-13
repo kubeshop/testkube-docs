@@ -111,7 +111,10 @@ Example:
 This example would assign a User or Group to the `my-env` environment and the `my-rg` resource group.
 If an Environment with the specified name does not exist, it will be created.
 
----
+:::info
+When SCIM is enabled all member roles/permissions are managed through the mechanism described above, and the 
+corresponding role/permission management is disabled in the Testkube Dashboard.
+:::
 
 ## Not supported
 - `PATCH` operations are currently not supported

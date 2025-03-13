@@ -62,11 +62,12 @@ global:
 
 ## Organization Management
 
-### Bootstrap User Mapping
+### Bootstrap Member Mapping
 
-By default, Testkube will automatically add users to the default organizations when they get invited. You can change the bootstrap configuration to change this behaviour programmatically.
+By default, Testkube will automatically add new users as members to the default Organizations when they get invited. 
+You can change the bootstrap configuration to change this behavior programmatically.
 
-The simplified configuration is as follows. It creates a default org and environment and users will automatically join as admin:
+The simplified configuration is as follows. It creates a default org and environment and new users will automatically join as admin members:
 
 ```yaml
 testkube-cloud-api:
@@ -77,9 +78,10 @@ testkube-cloud-api:
       bootstrapAdmin: <you@example.com>
 ```
 
-Alternatively, you can use the full advanced configuration for more options. The following example creates an organization with two environments.
-New users will automatically join default organizations, environments and teams.
-Note that this will only happen on the first sign in. Afterwards, you can manage users through Testkube's dashboard.
+Alternatively, you can use the full advanced configuration for more options. The following example creates an organization with 
+two environments. New users will automatically join as members of the default organizations and be added to specified environments 
+and teams. Note that this will only happen on the first sign in. Afterwards, you can manage users through Testkube's dashboard, unless
+you use SCIM to manage your SSO integration - [Read More](/testkube-pro-on-prem/articles/scim).
 
 ```yaml
 testkube-cloud-api:
@@ -114,7 +116,7 @@ testkube-cloud-api:
                   groups_claim: ["my-org:group-1", "my-org:group-2"]
 ```
 
-The team's groups claim works well with Dex. Dex includes a non-standard `groups` claim which is widely supported by its upstream providers.
+The teams' groups claim works well with Dex. Dex includes a non-standard `groups` claim which is widely supported by its upstream providers.
 Check out [Dex's connector documentation](https://dexidp.io/docs/connectors/) to learn how to configure it for your identity provider.
 
 :::tip

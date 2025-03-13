@@ -2,12 +2,12 @@
 
 Manage your organization members from the [Members] option in the Organization management panel:
 
-![Organisation Member Management](images/org-members.png)
+![Organization Member Management](images/org-members.png)
 
 :::note
-This document describes high-level member management within an Organisation, please 
+This document describes high-level member management within an Organization, please 
 check out [Resource Access Management](/articles/resource-access-management) to get an overview of how Testkube
-allows you to manage and apply Resource Access controls for Organisation Members.
+allows you to manage and apply Resource Access controls for Organization Members.
 :::
 
 ## Member Types
@@ -21,16 +21,16 @@ You can see the number of used/available seats of each type in the members page:
 
 ![Fixed Member Limits](images/fixed-member-limits.png)
 
-### Constraints 
+### Rules / Constraints 
 
 This model imposes some constraints related to member types and permissions:
 
-- It is not possible to give a read-only member write-access to any resource or environment if no 
-  full-member seats are available.
-- When giving a read-only member write access to any resource or environment (and full-member seats are available), 
+- It is not possible to give an existing read-only member write-access to any resource or environment, 
+  either directly or indirectly, if no full-member seats are available.
+- When giving a read-only member write access to any resource or environment, and full-member seats are available, 
   that member will automatically count to the full member quota instead.
-- It is not possible for a user to join an organisation if all seats are occupied. For on-prem/SSO-enabled
-  deployments, this could result in users not being able to sign in at all.
+- It is not possible to invite a user (or accept an invitation) if all member seats are occupied. 
+- For on-prem/SSO-enabled deployments, new users will not be able to sign in if no seats are available.
 - Members who are read-only will count to the full-member limit if there aren't enough read-only seats available.
 
 ### Member licensing with the Testkube Cloud Control Plane
@@ -58,11 +58,19 @@ Invite new members from the Members page by specifying:
 - Role - there are 4 roles for organization members:
   - `Owner` - Has access to all environments and organization settings, also can access billing details.
   - `Admin` - Has access to all environments and organization settings.
-  - `Member` - Access to Resource Groups and Envvironmnents is defined by the roles assigned to given member. 
-     Member by default doesn't have any access, you need to [explicitly set it in the given environment](environment-management.md). 
+  - `Member` - Access to Resource Groups and Environments is defined by the roles assigned to given member. 
   - `Biller` - Has access to billing details only.
 - Teams - which Teams the invited members should belong to.
 - Environments - which Environments the invited members should be added to, with their corresponding Environment Role
+
+:::note
+A new member will not have access to any resources or environments and will initially count as a read-only
+member (see above) unless default permissions have been assigned via [SCIM](/testkube-pro-on-prem/articles/scim) 
+or [bootstrap member mapping](/articles/install/advanced-install#bootstrap-member-mapping). 
+
+See [Resource Access Management](/articles/resource-access-management) to learn how to give members access to 
+environments and resources.
+::::
 
 Once all specified, select the Invite button in the bottom right.
 
@@ -70,7 +78,7 @@ Once all specified, select the Invite button in the bottom right.
 
 :::tip
 For Testkube On-Prem deployments you can configure default organizations, environments and roles for users - see 
-[Bootstrap User Mapping](/articles/install/advanced-install#bootstrap-user-mapping).
+[Bootstrap User Mapping](/articles/install/advanced-install#bootstrap-member-mapping).
 :::
 
 ## Manage existing Members

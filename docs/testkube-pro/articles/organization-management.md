@@ -28,7 +28,7 @@ Read more about [Environment Management](../articles/environment-management.md).
 
 The members section allows you to invite and manage your organizations' members and their roles - [Read More](member-management) 
 
-![Organisation Member Management](images/org-members.png)
+![Organization Member Management](images/org-members.png)
 
 ## Teams
 
