@@ -87,3 +87,8 @@ dex:
           # Dex's issuer URL + "/callback"
           redirectURI: <dex endpoint>/callback
 ```
+
+:::tip
+Once SSO is configured, you can further configure default user permission mapping using either [SCIM](scim) or 
+[Bootstrap Member Mapping](/articles/install/advanced-install#bootstrap-member-mapping).
+:::
