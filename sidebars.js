@@ -72,12 +72,7 @@ const sidebars = {
                 "articles/install/multi-cluster",
                 {
                   type: "doc",
-                  label: "Using Global Parameters in Testkube Helm Charts",
-                  id: "articles/global-parameters-in-testkube-helm-charts",
-                },
-                {
-                  type: "doc",
-                  label: "Configure Identity Providers",
+                  label: "SSO / Identity Provides",
                   id: "testkube-pro-on-prem/articles/auth",
                 },
                 {
@@ -144,6 +139,11 @@ const sidebars = {
                   type: "doc",
                   label: "Repackaging Testkube",
                   id: "articles/repackaging-testkube",
+                },
+                {
+                  type: "doc",
+                  label: "Using Global Parameters in Testkube Helm Charts",
+                  id: "articles/global-parameters-in-testkube-helm-charts",
                 },
                 {
                   type: "link",
