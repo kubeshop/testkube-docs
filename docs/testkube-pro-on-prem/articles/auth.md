@@ -1,9 +1,11 @@
-# Configure Identity Providers
+# Configuring SSO / Identity Providers
 
-You can configure Testkube On-Prem to authenticate users using different identity providers.
+You can configure Testkube On-Prem to authenticate users for SSO using different identity providers.
 
-For a list of all supported identity providers and example configurations,
+:::info
+Testkube uses [Dex](https://dexidp.io/) for SSO, for a list of all supported identity providers and example configurations,
 see the [Dex connectors guide](https://dexidp.io/docs/connectors/).
+:::
 
 ### Static Users
 
@@ -36,9 +38,7 @@ To configure an OIDC provider, set the appropriate values in the
 `testkube-enterprise` chart as shown in the Google example below.
 
 :::info
-
 Examples of OIDC providers include: Okta, Google, Salesforce, and Azure AD v2.
-
 :::
 
 A secret containing credentials for the identity provider may need to be
@@ -87,3 +87,8 @@ dex:
           # Dex's issuer URL + "/callback"
           redirectURI: <dex endpoint>/callback
 ```
+
+:::tip
+Once SSO is configured, you can further configure default user permission mapping using either [SCIM](scim) or 
+[Bootstrap Member Mapping](/articles/install/advanced-install#bootstrap-member-mapping).
+:::

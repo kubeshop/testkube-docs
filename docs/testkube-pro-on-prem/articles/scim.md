@@ -78,6 +78,10 @@ If SCIM server is enabled, users cannot log in to Testkube before they are provi
 4. Set the `SCIM_SERVER_AUTH_TOKEN` environment variable or `testkube-cloud-api.scim.auth.token` if installing the `testkube-enterprise` Helm chart to a secure token that will be used to authenticate SCIM requests or create a Kubernetes secret with a key named `SCIM_AUTH_TOKEN` and set the `testkube-cloud-api.scim.auth.secretRef` to point to that secret. If token is not set, SCIM server will run without auth.
 5. Configure the SCIM client in your IdP (e.g., Okta, Azure AD) to point to the Testkube SCIM endpoints.
 
+:::tip
+SCIM can be used as a complent to using a custom [Identity Provider for SSO](auth). 
+:::
+
 ### Roles and Entitlements
 
 For assigning roles to Users and Groups, Testkube SCIM server checks does the resource (User or Group) have the `roles` field and assigns the roles to the User or Group based on the value of the `roles` field.
@@ -111,7 +115,10 @@ Example:
 This example would assign a User or Group to the `my-env` environment and the `my-rg` resource group.
 If an Environment with the specified name does not exist, it will be created.
 
----
+:::info
+When SCIM is enabled all member roles/permissions are managed through the mechanism described above, and the 
+corresponding role/permission management is disabled in the Testkube Dashboard.
+:::
 
 ## Not supported
 - `PATCH` operations are currently not supported
