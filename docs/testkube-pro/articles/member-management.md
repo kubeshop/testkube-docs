@@ -41,9 +41,9 @@ licensed either within a fixed limit, or based on active member count at the end
 - **Fixed** members licensing allocates a fixed number of full and read-only members to your organization, for which
   you will be billed in your billing cycle.
 - **Pay-as-you-go** member licensing counts the number of active (logged in) members at the end of each 
-  billing cycle and bills you for that number of members. Pay-as-you-go licensing always invoices all members as full
-  members even if there might a certain number of read-only members at a given point in time. Pay-as-you-go licensing
-  is indicated by an infinity-sign in the number of members count:
+  billing cycle and bills you for that number of members. Please note that Pay-as-you-go licensing always invoices 
+  all members as full members even if there might a certain number of read-only members at a given point in time. 
+  Pay-as-you-go licensing is indicated by an infinity-sign in the number of members count:
 
 ![Pay-as-you-go Member Count](images/infinite-org-members.png)
 
