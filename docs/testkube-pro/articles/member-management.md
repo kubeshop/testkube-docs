@@ -29,8 +29,8 @@ This model imposes some constraints related to member types and permissions:
   either directly or indirectly, if no full-member seats are available.
 - When giving a read-only member write access to any resource or environment, and full-member seats are available, 
   that member will automatically count to the full member quota instead.
-- It is not possible to invite a user (or accept an invitation) if all member seats are occupied. 
-- For on-prem/SSO-enabled deployments, new users will not be able to sign in if no seats are available.
+- It is not possible to invite a member (or accept an invitation) if all member seats are occupied. 
+- For on-prem/SSO-enabled deployments, new members will not be able to sign in if no seats are available.
 - Members who are read-only will count to the full-member limit if there aren't enough read-only seats available.
 
 ### Member licensing with the Testkube Cloud Control Plane
