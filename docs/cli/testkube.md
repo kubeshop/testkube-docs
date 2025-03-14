@@ -28,7 +28,6 @@ testkube [flags]
 * [testkube completion](testkube_completion.md)	 - Generate the autocompletion script for the specified shell
 * [testkube config](testkube_config.md)	 - Set feature configuration value
 * [testkube create](testkube_create.md)	 - Create resource
-* [testkube create-ticket](testkube_create-ticket.md)	 - Create bug ticket
 * [testkube dashboard](testkube_dashboard.md)	 - Open Testkube dashboard
 * [testkube debug](testkube_debug.md)	 - Print debugging info
 * [testkube delete](testkube_delete.md)	 - Delete resources
