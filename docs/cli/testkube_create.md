@@ -1,3 +1,6 @@
+---
+title: "testkube create"
+---
 ## testkube create
 
 Create resource

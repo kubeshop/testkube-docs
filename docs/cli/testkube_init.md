@@ -1,3 +1,6 @@
+---
+title: "testkube init"
+---
 ## testkube init
 
 Init Testkube profiles(standalone-agent|demo|agent)

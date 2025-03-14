@@ -1,3 +1,6 @@
+---
+title: "testkube enable"
+---
 ## testkube enable
 
 Enable feature

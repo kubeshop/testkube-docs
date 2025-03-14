@@ -1,3 +1,6 @@
+---
+title: "testkube status"
+---
 ## testkube status
 
 Show status of feature or resource

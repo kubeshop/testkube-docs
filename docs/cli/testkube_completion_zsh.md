@@ -1,3 +1,6 @@
+---
+title: "testkube completion zsh"
+---
 ## testkube completion zsh
 
 Generate the autocompletion script for zsh

@@ -1,3 +1,6 @@
+---
+title: "testkube diagnostics license"
+---
 ## testkube diagnostics license
 
 Diagnose license errors

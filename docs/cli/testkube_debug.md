@@ -1,3 +1,6 @@
+---
+title: "testkube debug"
+---
 ## testkube debug
 
 Print debugging info

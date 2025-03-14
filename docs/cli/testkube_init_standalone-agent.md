@@ -1,3 +1,6 @@
+---
+title: "testkube init standalone-agent"
+---
 ## testkube init standalone-agent
 
 Install Testkube OSS in your current context

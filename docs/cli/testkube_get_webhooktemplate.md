@@ -1,3 +1,6 @@
+---
+title: "testkube get webhooktemplate"
+---
 ## testkube get webhooktemplate
 
 Get webhook template details

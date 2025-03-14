@@ -1,3 +1,6 @@
+---
+title: "testkube get template"
+---
 ## testkube get template
 
 Get template details.

@@ -1,3 +1,6 @@
+---
+title: "testkube init agent"
+---
 ## testkube init agent
 
 Install Testkube Pro Agent and connect to Testkube Pro environment

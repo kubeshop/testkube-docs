@@ -1,3 +1,6 @@
+---
+title: "testkube config api-server-name"
+---
 ## testkube config api-server-name
 
 Set api server name for testkube client

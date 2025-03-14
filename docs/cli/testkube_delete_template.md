@@ -1,3 +1,6 @@
+---
+title: "testkube delete template"
+---
 ## testkube delete template
 
 Delete a template.

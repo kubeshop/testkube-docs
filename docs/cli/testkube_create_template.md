@@ -1,3 +1,6 @@
+---
+title: "testkube create template"
+---
 ## testkube create template
 
 Create a new Template.

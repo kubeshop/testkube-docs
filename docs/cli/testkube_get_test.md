@@ -1,3 +1,6 @@
+---
+title: "testkube get test"
+---
 ## testkube get test
 
 Get all available tests

@@ -1,3 +1,6 @@
+---
+title: "testkube diagnostics"
+---
 ## testkube diagnostics
 
 Diagnoze testkube issues with ease

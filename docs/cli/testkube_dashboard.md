@@ -1,3 +1,6 @@
+---
+title: "testkube dashboard"
+---
 ## testkube dashboard
 
 Open Testkube dashboard

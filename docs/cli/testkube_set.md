@@ -1,3 +1,6 @@
+---
+title: "testkube set"
+---
 ## testkube set
 
 Set resources

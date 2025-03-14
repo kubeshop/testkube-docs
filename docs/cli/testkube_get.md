@@ -1,3 +1,6 @@
+---
+title: "testkube get"
+---
 ## testkube get
 
 Get resources

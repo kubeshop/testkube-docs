@@ -1,3 +1,6 @@
+---
+title: "testkube create webhooktemplate"
+---
 ## testkube create webhooktemplate
 
 Create new Webhook Template

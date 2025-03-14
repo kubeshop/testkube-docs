@@ -1,3 +1,6 @@
+---
+title: "testkube debug controlplane"
+---
 ## testkube debug controlplane
 
 Show Control Plane debug information

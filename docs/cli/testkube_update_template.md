@@ -1,3 +1,6 @@
+---
+title: "testkube update template"
+---
 ## testkube update template
 
 Update Template

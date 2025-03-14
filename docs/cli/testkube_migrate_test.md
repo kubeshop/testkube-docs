@@ -1,3 +1,6 @@
+---
+title: "testkube migrate test"
+---
 ## testkube migrate test
 
 Migrate all available tests to test workflows

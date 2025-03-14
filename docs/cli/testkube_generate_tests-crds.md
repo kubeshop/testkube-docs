@@ -1,3 +1,6 @@
+---
+title: "testkube generate tests-crds"
+---
 ## testkube generate tests-crds
 
 Generate tests CRD file based on directory

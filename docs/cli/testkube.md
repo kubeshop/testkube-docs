@@ -1,3 +1,6 @@
+---
+title: "testkube"
+---
 ## testkube
 
 Testkube entrypoint for kubectl plugin
@@ -41,7 +44,7 @@ testkube [flags]
 * [testkube migrate](testkube_migrate.md)	 - Migrate resources
 * [testkube pro](testkube_pro.md)	 - Testkube Pro commands
 * [testkube purge](testkube_purge.md)	 - Uninstall Testkube from your current kubectl context
-* [testkube run](testkube_run.md)	 - Runs tests, test suites or test workflows
+* [testkube run](testkube_run.md)	 - Runs tests, test suites, test workflows or test workflow executions
 * [testkube set](testkube_set.md)	 - Set resources
 * [testkube status](testkube_status.md)	 - Show status of feature or resource
 * [testkube update](testkube_update.md)	 - Update resource

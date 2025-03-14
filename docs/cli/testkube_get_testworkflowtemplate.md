@@ -1,3 +1,6 @@
+---
+title: "testkube get testworkflowtemplate"
+---
 ## testkube get testworkflowtemplate
 
 Get all available test workflow templates

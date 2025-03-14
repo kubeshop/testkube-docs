@@ -1,3 +1,6 @@
+---
+title: "testkube update webhooktemplate"
+---
 ## testkube update webhooktemplate
 
 Update Webhook Template

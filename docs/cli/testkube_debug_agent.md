@@ -1,3 +1,6 @@
+---
+title: "testkube debug agent"
+---
 ## testkube debug agent
 
 Show Agent debug information

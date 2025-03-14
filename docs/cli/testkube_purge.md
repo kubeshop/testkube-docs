@@ -1,3 +1,6 @@
+---
+title: "testkube purge"
+---
 ## testkube purge
 
 Uninstall Testkube from your current kubectl context

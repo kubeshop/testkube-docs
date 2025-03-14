@@ -1,3 +1,6 @@
+---
+title: "testkube completion powershell"
+---
 ## testkube completion powershell
 
 Generate the autocompletion script for powershell

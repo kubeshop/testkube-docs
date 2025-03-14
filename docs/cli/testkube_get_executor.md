@@ -1,3 +1,6 @@
+---
+title: "testkube get executor"
+---
 ## testkube get executor
 
 Gets executor details

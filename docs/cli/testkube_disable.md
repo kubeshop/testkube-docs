@@ -1,3 +1,6 @@
+---
+title: "testkube disable"
+---
 ## testkube disable
 
 Disable feature

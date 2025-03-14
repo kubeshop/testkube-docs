@@ -1,3 +1,6 @@
+---
+title: "testkube delete testsuite"
+---
 ## testkube delete testsuite
 
 Delete test suite

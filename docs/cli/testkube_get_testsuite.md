@@ -1,3 +1,6 @@
+---
+title: "testkube get testsuite"
+---
 ## testkube get testsuite
 
 Get test suite by name

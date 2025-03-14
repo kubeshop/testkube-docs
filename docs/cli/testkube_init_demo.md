@@ -1,3 +1,6 @@
+---
+title: "testkube init demo"
+---
 ## testkube init demo
 
 Install Testkube On-Prem demo in your current context

@@ -1,3 +1,6 @@
+---
+title: "testkube config namespace"
+---
 ## testkube config namespace
 
 Set namespace for testkube client

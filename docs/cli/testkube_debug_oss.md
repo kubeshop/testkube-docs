@@ -1,3 +1,6 @@
+---
+title: "testkube debug oss"
+---
 ## testkube debug oss
 
 Show OSS installation debug info

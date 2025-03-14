@@ -1,3 +1,6 @@
+---
+title: "testkube run test"
+---
 ## testkube run test
 
 Starts new test
@@ -93,5 +96,5 @@ testkube run test <testName> [flags]
 
 ### SEE ALSO
 
-* [testkube run](testkube_run.md)	 - Runs tests, test suites or test workflows
+* [testkube run](testkube_run.md)	 - Runs tests, test suites, test workflows or test workflow executions
 

@@ -1,3 +1,6 @@
+---
+title: "testkube disable telemetry"
+---
 ## testkube disable telemetry
 
 disable collecting of anonymous telemetry data

@@ -1,3 +1,6 @@
+---
+title: "testkube migrate agent"
+---
 ## testkube migrate agent
 
 manual migrate agent command

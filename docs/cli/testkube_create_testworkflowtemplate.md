@@ -1,3 +1,6 @@
+---
+title: "testkube create testworkflowtemplate"
+---
 ## testkube create testworkflowtemplate
 
 Create test workflow template

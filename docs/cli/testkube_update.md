@@ -1,3 +1,6 @@
+---
+title: "testkube update"
+---
 ## testkube update
 
 Update resource

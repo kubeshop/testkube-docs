@@ -1,3 +1,6 @@
+---
+title: "testkube delete"
+---
 ## testkube delete
 
 Delete resources

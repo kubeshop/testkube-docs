@@ -1,3 +1,6 @@
+---
+title: "testkube delete webhooktemplate"
+---
 ## testkube delete webhooktemplate
 
 Delete webhook template

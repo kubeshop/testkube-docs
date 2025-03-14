@@ -1,3 +1,6 @@
+---
+title: "testkube delete testworkflowtemplate"
+---
 ## testkube delete testworkflowtemplate
 
 Delete test workflow templates

@@ -1,3 +1,6 @@
+---
+title: "testkube watch"
+---
 ## testkube watch
 
 Watch tests or test suites

@@ -1,3 +1,6 @@
+---
+title: "testkube generate"
+---
 ## testkube generate
 
 Generate resources commands

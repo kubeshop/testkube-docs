@@ -1,3 +1,6 @@
+---
+title: "testkube diagnostics install"
+---
 ## testkube diagnostics install
 
 Diagnose pre-installation dependencies
