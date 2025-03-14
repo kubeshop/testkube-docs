@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:d399b58059d6ebfb3ad2a553c8675862bac2db073d8b01cfcfcf7080064ff60f</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/medium-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
-<tr><td>platform</td><td>linux/amd64</td></tr>
-<tr><td>size</td><td>18 MB</td></tr>
-<tr><td>packages</td><td>133</td></tr>
+<tr><td>digest</td><td><code>sha256:b54794f7cd6feb59bf6526b1e173218078ed0876d5e0fdfc418637aac9e72344</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/medium-1-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/low-2-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>platform</td><td>linux/arm64</td></tr>
+<tr><td>size</td><td>45 MB</td></tr>
+<tr><td>packages</td><td>170</td></tr>
 </table>
 </details></table>
 </details>
@@ -18,7 +18,7 @@ hide_table_of_contents: true
 <small><code>pkg:golang/golang.org/x/crypto@0.32.0</code></small><br/>
 
 ```dockerfile
-# tw-init.Dockerfile (18:18)
+# tw-toolkit.Dockerfile (28:28)
 COPY --from=build /app/testworkflow-init /init
 ```
 
@@ -48,7 +48,7 @@ SSH servers which implement file transfer protocols are vulnerable to a denial o
 <small><code>pkg:golang/golang.org/x/oauth2@0.26.0</code></small><br/>
 
 ```dockerfile
-# tw-init.Dockerfile (18:18)
+# tw-toolkit.Dockerfile (28:28)
 COPY --from=build /app/testworkflow-init /init
 ```
 
@@ -73,18 +73,18 @@ An attacker can pass a malicious malformed token which causes unexpected memory 
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/net</strong> <code>0.34.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.34.0</code> (golang)</summary>
 
 <small><code>pkg:golang/golang.org/x/net@0.34.0</code></small><br/>
 
 ```dockerfile
-# tw-init.Dockerfile (18:18)
+# tw-toolkit.Dockerfile (28:28)
 COPY --from=build /app/testworkflow-init /init
 ```
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2025-22870?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.36.0"><img alt="unspecified : CVE--2025--22870" src="https://img.shields.io/badge/CVE--2025--22870-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+<a href="https://scout.docker.com/v/CVE-2025-22870?s=github&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.36.0"><img alt="medium : CVE--2025--22870" src="https://img.shields.io/badge/CVE--2025--22870-lightgrey?label=medium%20&labelColor=fbb552"/></a> <i>Improper Input Validation</i>
 
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.36.0</code></td></tr>
@@ -95,6 +95,53 @@ COPY --from=build /app/testworkflow-init /init
 <blockquote>
 
 Matching of hosts against proxy patterns can improperly treat an IPv6 zone ID as a hostname component. For example, when the NO_PROXY environment variable is set to "*.example.com", a request to "[::1%25.example.com]:80` will incorrectly match and not be proxied.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>git-init-template</strong> <code>2.47.2-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/git-init-template@2.47.2-r0?arch=aarch64&distro=alpine-3.21.3&upstream=git</code></small><br/>
+
+```dockerfile
+# tw-toolkit.Dockerfile (25:25)
+RUN apk --no-cache add ca-certificates libssl3 git openssh-client
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2024-52006?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.21&vr=%3C2.48.1-r0"><img alt="low : CVE--2024--52006" src="https://img.shields.io/badge/CVE--2024--52006-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.48.1-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.48.1-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.045%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2024-50349?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.21&vr=%3C2.48.1-r0"><img alt="low : CVE--2024--50349" src="https://img.shields.io/badge/CVE--2024--50349-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.48.1-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.48.1-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.045%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
 
 </blockquote>
 </details>
