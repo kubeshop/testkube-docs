@@ -43,6 +43,8 @@ An attacker can pass a malicious malformed token which causes unexpected memory 
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.36.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.36.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.045%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
