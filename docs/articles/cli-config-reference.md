@@ -26,7 +26,7 @@ The Testkube CLI stores its configuration in a `~/.testkube/config.json` file wi
 }
 ```
 
-You can use the [`testkube config`](/cli/testkube_config) command to modify the CLI configuration programmatically.
+You can use the [`testkube config`](/cli/testkube-config) command to modify the CLI configuration programmatically.
 
 :::tip
 See [Managing CLI Context](/testkube-pro/articles/managing-cli-context) to get

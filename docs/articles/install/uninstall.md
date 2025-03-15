@@ -7,13 +7,13 @@ You can follow one of the two procedures below to uninstall Testkube. You might 
 You can use the CLI to uninstall Testkube:
 
 ```bash
-testkube uninstall
+testkube purge
 ```
 
-If you installed testkube in another namespace than the default `testkube` namespace, make sure to pass that namespace as an argument to the `uninstall` command. Learn more [here](https://docs.testkube.io/cli/testkube_uninstall) or execute `testkube uninstall --help`.
+If you installed testkube in another namespace than the default `testkube` namespace, make sure to pass that namespace as an argument to the `purge` command. Learn more [here](/cli/testkube-purge) or execute `testkube purge --help`.
 
 ```go
-testkube uninstall --namespace my-testkube-namespace
+testkube purge --namespace my-testkube-namespace
 ```
 
 ### Uninstalling with Helm

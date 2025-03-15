@@ -120,7 +120,7 @@ See [upgrade][upgrade] for instructions on how to upgrade the standalone agent.
 ### With the CLI
 
 ```sh
-testkube uninstall
+testkube purge
 ```
 
 ### With Helm
@@ -430,4 +430,4 @@ testkube-api:
 [mongo-config]: https://github.com/bitnami/charts/tree/master/bitnami/mongodb#parameters
 [nats-config]: https://docs.nats.io/running-a-nats-service/nats-kubernetes/helm-charts
 [install-cli]: /articles/install/cli
-[cli-context]: /cli/testkube_set_context
+[cli-context]: /cli/testkube-set-context
