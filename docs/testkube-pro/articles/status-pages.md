@@ -1,174 +1,183 @@
-# Status Pages
+# Introduction to the Testkube Status Page
 
-The Testkube status pages are designed to help both technical and non-technical users understand and utilize the results of tests run on Testkube effectively. Whether you're a developer, project manager, or simply a stakeholder interested in monitoring software project status via running tests, Testkube has you covered.
+Status Pages provides a centralized platform for visualizing the health and performance of your software in real-time. You can use this feature to keep track of the status of your services, communicate issues to stakeholders (customers, internal teams, etc.), and ensure everyone’s on the same page.
 
-You can see a live example of a Status Page [here](https://app.testkube.io/status/testkube).
+For more information on how to use the Testkube Status Page, see the blog  
+[Leveraging Kubernetes Test Results for Application Monitoring](https://testkube.io/learn/leveraging-kubernetes-test-results-for-application-monitoring).
 
-## Overview
+## Status Pages for Monitoring Kubernetes Applications
 
-![status-page-main](../../img/status-page-main.png)
-
-Testkube Status Pages is a feature within the Testkube software that allows you to create and manage dedicated status pages for your software projects. These pages provide real-time information about the health and availability of your project components, making it easier for both internal teams and external stakeholders to stay informed.
-
-### Key Benefits
+Monitoring Kubernetes applications in a cloud-native environment is critical to ensuring their performance, reliability, and overall health. A status page can improve the performance and reliability of Kubernetes applications, optimize resource utilization, and reduce downtime costs. Here are a few key reasons why monitoring Kubernetes applications with status pages is important:
 
 * Transparency: Keep all stakeholders informed about the status of your software.
-* Efficiency: Quickly detect and respond to issues, minimizing downtime.
-* Customization: Tailor your status page to match your brand and information needs.
+* Efficiency: Quickly detect and respond to issues, minimizing downtime.  
+* Customization: Tailor your status page to match your brand and information needs.  
+* Real-time monitoring: Updates teams on the health and performance of services, allowing them to monitor their systems and testing in real-time.  
+* Cross-team collaboration: Allows technical and non-technical teams to stay up to date on the current state of services, hence enhancing communication and collaboration.
 
-## Getting Started
+## Accessing Status Pages in Testkube
 
-To access Testkube Status Pages:
+To access Testkube Status Pages from the Testkube dashboard, follow the steps below:
 
-1. Log in to your Testkube account.
-2. Go to the dashboard.
+1. Log in to your [Testkube account](https://app.testkube.io/).  
+2. Go to the Dashboard.  
 3. Click on "Status Pages" in the left navigation panel.
 
-### Creating Your First Status Checker Test
+![1](../../img/status_pages/1.png)
 
-The very first thing you have to consider, even before thinking about your status page, is the type of tests you are creating. You have to make sure that there are tests that are monitoring not just the behavior of a service, but also the availability. For this, Kubernetes is using liveness probes, which checks periodically if your service is still responsive on a user-configured endpoint. In case your application is already running in Kubernetes, consider reusing this endpoint in Testkube.
+This will take you to the Status Page section, where you can create, view, and manage your status pages.
 
-Let's create a scheduled cURL test. In order to do this, you should define a cURL command. For the sake of simplicity, we will be checking on the Testkube website `https://testkube.io`.
+## Creating a Status Page Using Testkube
 
-![sp-create-test](../../img/sp-create-test.png)
+Creating a status page with Testkube simplifies the process of monitoring and communicating application health. Testkube's status page is dedicated to tracking the real-time performance, availability, and incident history of Kubernetes applications, ensuring that both technical and non-technical stakeholders are kept up to date on any issues that arise.
 
-The cURL Test input we want to use is the following:
+On the Status Page in the Testkube dashboard, you will see the following three tabs: 
 
-```bash
-{
-    "command": [
-      "curl",
-      "https://testkube.io"
-    ],
-    "expected_status": "200"
-}
-```
+* General  
+* Services  
+* Incidents
 
-Make sure to add a Custom schedule in the Test settings to run it every minute:
+![2](../../img/status_pages/2.png)
 
-![sp-schedule](../../img/sp-schedule.png)
+To configure the Status Page, you will have to add relevant details to all these sections as shown below.
 
-After a few minutes, you will have a nice history of executions:
+### General {#general}
 
-![sp-test-ran](../../img/sp-test-ran.png)
+1. In General, provide your status page with a unique name and description, and then save it. Testkube will create an endpoint that allows your Status Page to be accessed securely.  
 
-You can also use `kubectl apply -f testcrd.yaml` on the CLI to port your test from one machine to the other. An example test definition would look like:
+   ![3](../../img/status_pages/3.png) 
 
-```bash
-apiVersion: tests.testkube.io/v3
-kind: Test
-metadata:
-  labels:
-    executor: curl-executor
-    test-type: curl-test
-  name: testkube-heartbeat
-  namespace: testkube
-spec:
-  content:
-    data: |
-      {
-          "command": [
-            "curl",
-            "https://testkube.io"
-          ],
-          "expected_status": "200"
-      }
-    type: string
-  executionRequest: {}
-  schedule: '* * * * *'
-  type: curl/test
-```
+2. Next, update the URL and accessibility sections of the status page and save it.  
 
-Now, you are properly equipped to start creating a status page that always has relevant data.
+   ![4](../../img/status_pages/4.png)  
 
-### Creating Your First Status Page
+   Slug is the part of the URL that comes after the main domain and makes it easier to access the page. Additionally, based on who you wish to share incident updates with, you can manage who can view the status page by selecting the Visibility drop-down menu.  
 
-![status-page-edit](../../img/status-page-edit.png)
+3. In the “Time Scale” section, select “Hours” or “Days” from the drop-down menu.  
 
-1. Provide a unique name and description for your status page.
-2. Choose a time scale for the status page. This will define the aggregation period of the test execution results.
-3. Add services with tests.
-4. Configure visibility. Public status pages will be available without any kind of authentication.
-5. Save changes by clicking the "Save" button on top.
+   ![5](../../img/status_pages/5.png)  
 
-## Managing Services
+   This section allows you to specify the time scale in hours or days when viewing incident history or uptime details.  
 
-Services represent the different parts of your software project that you want to monitor, such as servers or databases. In Testkube, you can define them by adding the appropriate tests to one Service in your Status Page.
+4. After selecting your preferred time scale, click “Save” to apply the changes to the status page.
 
-![status-page-edit-services](../../img/status-page-edit-services.png)
+### Services {#services}
 
-To add and configure a service:
+1. Select Services. Click the "Add" button and add the name to your service.   
 
-1. In the services section of the status page, type the chosen name of your service into the "Add a service" field.
-2. Choose the relevant tests from the dropdown.
-3. Drag and drop to order them.
+   ![6](../../img/status_pages/6.png)
 
-## Visualising Service Statuses
+2. Select the relevant Test Workflows from the dropdown menu.
 
-The Status Page rendered is unique for each Testkube environment. You can only have one Status Page per environment, so make sure the tests added offer an accurate representation of the status of the services. On the very top of the screen you will see the name of your Status Page and the given description. No details of your Testkube environment or organization will be published on this page, so this is where they need to be pointed out for efficient communication with your users.
+   ![7](../../img/status_pages/7.png)
 
-![status-page-service](../../img/status-page-service.png)
+3. Save your changes and access the Status Page URL to see if it's reporting data about your services.   
 
-Below that you will see a list of the services with multiple ways to represent their state. On the top left is the name of the service. Top right is current status - this is calculated based on the last bar of the chart below. The possible values are:
+   ![8](../../img/status_pages/8.png)
 
-* Operational (green): All tests passed in the last instance of the configured time scale.
-* Partial Outage (orange): At least one test failed and one test succeeded in the last instance of the configured time scale.
-* Major Outage (red): All tests failed in the last instance of the configured time scale.
-* Unknown (grey): No data at all or some tests were not executed in the last instance of the configured time scale.
+   If there is an issue with one of the services, you can easily create and manage incidents to keep users informed.
 
-Another value is Operability. This is the percentage of successful test executions compared to all test executions in the timeline covered. Tests aborted or still running are not considered successful tests.
+### Incidents {#incidents}
 
-Below this, there is a color-coded visualization of the test execution results. The time covered by each bar is defined by the configured time scale. On hover you will see each bar and the test execution results in that time frame. The end date for this chart is the current date. The start date is either three months or three days before the current date, depending on the time scale. The time scale is not configurable in this view, only in the management view. The colors are similar to the service status colors:
+1. Select Incidents. Click the “Add a New Incident” button. A "Create a new incident" dialog box will appear.
 
-* Red: All tests failed in the time range of the bar.
-* Orange: At least one test failed and one test passed in the time range of the bar.
-* Green: All tests succeeded in the time range of the bar.
-* Grey: At least one of the tests configured in the service didn't run in the time range of the bar.
+   ![9](../../img/status_pages/9.png)  
+     
+2. Fill out the required fields:  
+   * Incident Name   
+   * Severity  
+   * Visibility  
+   * Incident description  
+   * Start and End Dates
 
-On hover, you will see exactly which tests failed, passed or did not run, with the same colors:
+	![10](../../img/status_pages/10.png)
 
-* Red: All executions failed.
-* Orange: At least one execution failed and one execution succeeded.
-* Green: All executions succeeded.
-* Grey: No executions.
+3. To create an incident, click the “Create Incident” button.
 
-Make sure the names of the tests are easily understood by your users, as they will be public once you publish this page. To ensure that the status of your service will be always reflected, set up scheduled runs of your tests.
+The incident(s) created will be displayed on the Status page.
 
-## Incidents
+![11](../../img/status_pages/11.png)
+  
+You can include details about outages, maintenance, and other information relevant to the status of your application. You can easily manage the incidents by clicking the three vertical dots next to them.
 
-Testkube Status Pages streamlines the incident management processes by providing a central platform for incident tracking, communication, and documentation. This is a critical aspect of Testkube Status Pages and involves the communication processes and procedures for detecting, reporting, and resolving issues or incidents that affect the availability or performance of your software or services. This helps teams respond to incidents more efficiently, maintain transparency with stakeholders, and continuously improve their incident response procedures to ensure the reliability of their software or services.
+Here is how the Status Page looks for us:
 
-Incidents are simple objects responsible for communication between the service providers and their users. Managing them is as easy as creating them via the Status Pages management page.
+![12](../../img/status_pages/12.png)
 
-![incidents-edit](../../img/incidents-edit.png)
+## Managing Status Pages
 
-They will be shown at the bottom, similar to a news feed.
+After you've created the Status page, you can begin monitoring your services and communicating with multiple stakeholders to stay informed about them, ensuring smooth operations and a prompt response to any issues that may arise.
 
-![incidents-main](../../img/incidents-main.png)
+### Sharing Status Pages
 
-On the top of each individual incident there is the start date. The incidents are ordered by this, with the latest incident on top. The other relevant dates, for example, when it was created, updated and resolved are shown at the very bottom. The end date can be left intentionally empty, signifying that this incident has not been resolved.
+The Status Page URL will appear at the top of this page. If your status page is public, simply share its URL with stakeholders. For private pages, make sure the intended users have access to your organization's services. To choose between Public and Private visibility, refer to the General tab.
 
-The title of the incident will be colored based on the configured severity:
+![13](../../img/status_pages/13.png)
 
-* critical: red
-* major: red
-* minor: orange
-* low: yellow
-* info: white
+### Understanding Service Statuses
 
-The interpretation of the severity is up to the decision of the team, just make sure everyone is well-informed and has agreed to it.
+The Status Page displayed is unique to each Testkube environment. You can only have one Status Page per environment, so make sure the tests you add accurately reflect the status of the services. On the very top of the screen, you will see the name of your Status Page and its description.   
+![14](../../img/status_pages/14.png)
 
-Incidents can have three different states depending on the visibility: draft, published and archived. Only published incidents are visible in this view.
+Below that, you will see a list of the services with multiple ways to represent their state. On the top left is the name of the service. The top right is the current status \- this is calculated based on the last bar of the chart below. The possible values are:
 
-## Collaboration and Access Control
+* Operational (Green): All tests passed in the last instance of the configured time scale.  
+* Partial Outage (Orange): At least one test failed and one test succeeded in the last instance of the configured time scale.  
+* Major Outage (Red): All tests failed in the last instance of the configured time scale.  
+* Unknown (Grey): No data at all or some tests were not executed in the last instance of the configured time scale.
 
-Status Pages can be either private or public. Public status pages are published to the internet. Private pages can be shared with anyone in the same organization having read access to the environment.
+The colors are similar to the service status colors. When you hover over the colors, you can clearly see which tests failed, passed, or did not run:
 
-## Best Practices
+* Red: All tests failed in the time range of the bar.  
+* Orange: At least one test failed, and one test passed in the time range of the bar.  
+* Green: All tests succeeded in the time range of the bar.  
+* No executions.
+
+Make sure the test names are easy to understand for your users, as they will be made public once you publish this page. Schedule your tests to ensure that the status of your service is always reflected.
+
+### Managing Environment Incidents
+
+Testkube Status Pages simplify incident management processes by providing a single platform for all recorded incidents related to environment status, allowing users to effectively manage, log, and track incidents. This allows teams to view and respond to incidents more efficiently, maintain transparency with stakeholders, and constantly improve incident response procedures to ensure the reliability of their software or services.
+
+Incidents are a process for communicating between service providers and their customers. You can create and manage incidents from the Status Pages management page.
+
+![15](../../img/status_pages/15.png)
+
+The incident tab displays several incidents that have been logged for tracking purposes. It displays the following information in each column:
+
+![16](../../img/status_pages/16.png)
+
+* **Name**: This column contains the titles or brief descriptions of each incident, allowing for quick reference to understand the nature of each incident.
+
+* **Severity**: The incident's title will be colored based on the configured severity.
+
+* **Critical**: The most urgent level, where the problem could seriously impair system performance or availability. It is indicated by the color red.  
+* **Major**: Identifies high-impact issues that may affect a larger portion of the system. It is indicated by the color red.  
+* **Minor**: Identifies low-impact issues that may cause minimal disruption. It's orange in color.  
+* **Low**: Used to describe non-critical incidents that do not require immediate attention. It's yellow in color.  
+* **Info**: Displays informational updates without making a significant impact. It's blue in color.
+
+The severity of the situation is up to the team's discretion; simply ensure that everyone is informed and has agreed to it. 
+
+* **Status**: Incidents have two statuses based on their visibility: 
+
+  * Draft: The incident is still being prepared and has not been published yet.  
+  * Published: The incident has been published, making it visible on the status page and easily available for the users to view and understand.
+
+* **Start and End Date**: These columns specify the date and time when the incident began and when the incident ended or is expected to end.
+
+
+Click the [Incident](#incidents) to learn how to create a new incident. 
+
+## Collaboration and Access Control[​](https://docs.testkube.io/testkube-pro/articles/status-pages#collaboration-and-access-control)
+
+Status Pages can be either private or public. Public status pages are published on the internet. Any individual within the same organization with read access to the environment can share private pages.
+
+## Best Practices for Using Testkube Status Pages
 
 Best practices are essential for effectively using Testkube Status Pages to communicate the status of your software projects. These practices help ensure that your status pages are informative, reliable, and serve their intended purpose. Here are some best practices for Testkube Status Pages:
 
-### Designing Effective Status Pages
+### **Designing Effective Status Pages**
 
 Clear and Concise Information: Keep the information on your status page clear, concise, and relevant. Avoid technical jargon that might confuse non-technical stakeholders.
 
@@ -180,11 +189,11 @@ Real-Time Updates: Ensure that incident updates are added in real-time to reflec
 
 Incident History: Maintain a visible incident history or log so users can review past incidents and resolutions.
 
-### Incident Response Guidelines
+### **Incident Response Guidelines**
 
 Defined Roles and Responsibilities: Clearly define the roles and responsibilities of team members involved in incident response. This includes incident commanders, communicators, and technical responders.
 
-Incident Severity Levels: Establish a clear and consistent system for categorizing incident severity levels. This helps prioritize response efforts. The levels provided by Testkube are: critical, major, minor, low, and info.
+Incident Severity Levels: Establish a clear and consistent system for categorizing incident severity levels. This helps prioritize response efforts. Testkube provides six levels: critical, major, minor, low, and information.
 
 Communication Plan: Develop a communication plan that outlines how and when to communicate with stakeholders during incidents. Ensure that communication is timely, transparent, and accurate.
 
@@ -192,7 +201,7 @@ Escalation Procedures: Define procedures for escalating incidents when they cann
 
 Post-Incident Reviews: Conduct post-incident reviews (post-mortems) after each incident to analyze what went well and what could be improved. Use these reviews to update incident response procedures.
 
-### Regular Maintenance
+### **Regular Maintenance**
 
 Scheduled Updates: Regularly update the status page, even during periods of normal operation. This demonstrates that the page is actively maintained and reliable.
 
@@ -200,15 +209,15 @@ Test Alerting: Periodically test your alerting and incident response mechanisms 
 
 Documentation Updates: Keep documentation related to your status pages up-to-date, including service descriptions, contact information, and incident response procedures.
 
-Training: Ensure that team members involved in incident response are adequately trained and up-to-date with best practices.
+Training: Ensure that team members participating in incident response receive sufficient training and stay current with best practices.
 
-### User Engagement
+### **User Engagement**
 
 Stakeholder Awareness: Promote awareness of the status page among your stakeholders, including both internal teams and external users.
 
 Feedback Loop: Encourage your users to provide feedback on the status page's usefulness and clarity. Use this feedback to make improvements.
 
-### Custom Slugs Configuration
+### **Custom Slug Configuration**
 
 Custom Slugs: If applicable, configure custom slugs for your status pages to match your brand and make them more accessible to users.
 
