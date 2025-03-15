@@ -57,7 +57,7 @@ Once your Testkube resources have been created in your ephemeral cluster and the
 Testkube Environment, you can trigger/use them in any way supported by Testkube. In case of Workflows, you 
 might use a GitOps approach to deploy [Execution CRDs](/articles/test-executions) to trigger their execution, 
 trigger Test Executions [from CI/CD](/articles/cicd-overview), or simply use/automate the 
-Testkube CLI [run command](/cli/testkube_run) in your CI/CD pipeline.
+Testkube CLI [run command](/cli/testkube-run) in your CI/CD pipeline.
 
 If your Testkube resources contain [Kubernetes Event Triggers](/articles/test-triggers), these will be triggered accordingly.
 

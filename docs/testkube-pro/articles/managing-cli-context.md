@@ -5,7 +5,7 @@ Testkube Dashboard ([Read More](/testkube-pro/articles/api-token-management)) an
 use this token to authenticate and gain access to corresponding Testkube resources and commands.
 
 When the token is created, you're ready to change the Testkube CLI context using the 
-[`testkube set context`](/cli/testkube_set_context) command, which is shown for your environments 
+[`testkube set context`](/cli/testkube-set-context) command, which is shown for your environments 
 under the Environment General Settings tab:
 
 ![Setting Context](../../img/setting-context.png)

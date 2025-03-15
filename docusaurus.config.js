@@ -67,7 +67,7 @@ const config = {
               "/cli/",
             ];
 
-            const { defaultCreateSitemapItems, ...rest } = params;
+            const {defaultCreateSitemapItems, ...rest} = params;
             const items = await defaultCreateSitemapItems(rest);
             items.forEach((item) => {
               lowPrioPaths.forEach((path) => {
@@ -94,7 +94,7 @@ const config = {
   ],
 
   themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+  /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
       navbar: {
         logo: {
@@ -207,6 +207,7 @@ const config = {
     [
       "@docusaurus/plugin-client-redirects",
       {
+        id: "redirects",
         redirects: redirects,
         createRedirects(existingPath) {
           if (existingPath.includes("/cli")) {
@@ -219,8 +220,8 @@ const config = {
 
           return undefined; // Return a falsy value: no redirect created
         },
-      },
-    ],
+      }
+    ]
   ],
 };
 

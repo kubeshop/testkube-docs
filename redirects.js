@@ -267,7 +267,7 @@ const redirects = [
   },
   {
     from: "/cli/testkube_uninstall",
-    to: "/cli/testkube_purge",
+    to: "/cli/testkube-purge",
   },
   {
     from: "/guides/templates",

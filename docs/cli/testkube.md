@@ -1,5 +1,6 @@
 ---
 title: "testkube"
+sidebar_position: 1
 ---
 ## testkube
 
@@ -23,31 +24,31 @@ testkube [flags]
 
 ### SEE ALSO
 
-* [testkube abort](testkube_abort.md)	 - Abort tests or test suites
-* [testkube agent](testkube_agent.md)	 - Testkube Pro Agent related commands
-* [testkube completion](testkube_completion.md)	 - Generate the autocompletion script for the specified shell
-* [testkube config](testkube_config.md)	 - Set feature configuration value
-* [testkube create](testkube_create.md)	 - Create resource
-* [testkube dashboard](testkube_dashboard.md)	 - Open Testkube dashboard
-* [testkube debug](testkube_debug.md)	 - Print debugging info
-* [testkube delete](testkube_delete.md)	 - Delete resources
-* [testkube diagnostics](testkube_diagnostics.md)	 - Diagnoze testkube issues with ease
-* [testkube disable](testkube_disable.md)	 - Disable feature
-* [testkube docker](testkube_docker.md)	 - Testkube Docker commands
-* [testkube download](testkube_download.md)	 - Artifacts management commands
-* [testkube enable](testkube_enable.md)	 - Enable feature
-* [testkube generate](testkube_generate.md)	 - Generate resources commands
-* [testkube get](testkube_get.md)	 - Get resources
-* [testkube init](testkube_init.md)	 - Init Testkube profiles(standalone-agent|demo|agent)
-* [testkube login](testkube_login.md)	 - Login to Testkube Pro
-* [testkube migrate](testkube_migrate.md)	 - Migrate resources
-* [testkube pro](testkube_pro.md)	 - Testkube Pro commands
-* [testkube purge](testkube_purge.md)	 - Uninstall Testkube from your current kubectl context
-* [testkube run](testkube_run.md)	 - Runs tests, test suites, test workflows or test workflow executions
-* [testkube set](testkube_set.md)	 - Set resources
-* [testkube status](testkube_status.md)	 - Show status of feature or resource
-* [testkube update](testkube_update.md)	 - Update resource
-* [testkube upgrade](testkube_upgrade.md)	 - Upgrade Helm chart, install dependencies and run migrations
-* [testkube version](testkube_version.md)	 - Shows version and build info
-* [testkube watch](testkube_watch.md)	 - Watch tests or test suites
+* [testkube abort](testkube-abort.md)	 - Abort tests or test suites
+* [testkube agent](testkube-agent.md)	 - Testkube Pro Agent related commands
+* [testkube completion](testkube-completion.md)	 - Generate the autocompletion script for the specified shell
+* [testkube config](testkube-config.md)	 - Set feature configuration value
+* [testkube create](testkube-create.md)	 - Create resource
+* [testkube dashboard](testkube-dashboard.md)	 - Open Testkube dashboard
+* [testkube debug](testkube-debug.md)	 - Print debugging info
+* [testkube delete](testkube-delete.md)	 - Delete resources
+* [testkube diagnostics](testkube-diagnostics.md)	 - Diagnoze testkube issues with ease
+* [testkube disable](testkube-disable.md)	 - Disable feature
+* [testkube docker](testkube-docker.md)	 - Testkube Docker commands
+* [testkube download](testkube-download.md)	 - Artifacts management commands
+* [testkube enable](testkube-enable.md)	 - Enable feature
+* [testkube generate](testkube-generate.md)	 - Generate resources commands
+* [testkube get](testkube-get.md)	 - Get resources
+* [testkube init](testkube-init.md)	 - Init Testkube profiles(standalone-agent|demo|agent)
+* [testkube login](testkube-login.md)	 - Login to Testkube Pro
+* [testkube migrate](testkube-migrate.md)	 - Migrate resources
+* [testkube pro](testkube-pro.md)	 - Testkube Pro commands
+* [testkube purge](testkube-purge.md)	 - Uninstall Testkube from your current kubectl context
+* [testkube run](testkube-run.md)	 - Runs tests, test suites, test workflows or test workflow executions
+* [testkube set](testkube-set.md)	 - Set resources
+* [testkube status](testkube-status.md)	 - Show status of feature or resource
+* [testkube update](testkube-update.md)	 - Update resource
+* [testkube upgrade](testkube-upgrade.md)	 - Upgrade Helm chart, install dependencies and run migrations
+* [testkube version](testkube-version.md)	 - Shows version and build info
+* [testkube watch](testkube-watch.md)	 - Watch tests or test suites
 

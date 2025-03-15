@@ -112,7 +112,7 @@ $ Use following command to get test workflow execution details \
 ```
 
 :::tip
-Use the `-f` flag to immediately follow an execution when creating it - [Read More](/cli/testkube_run_testworkflow).
+Use the `-f` flag to immediately follow an execution when creating it - [Read More](/cli/testkube-run-testworkflow).
 :::
 
 ### 5. View Test Workflow execution status
