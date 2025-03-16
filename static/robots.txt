@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /articles/crds/
+Disallow: /openapi/agent/
+Disallow: /openapi/cloud/
+Sitemap: https://docs.testkube.io/sitemap.xml
