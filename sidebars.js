@@ -384,8 +384,8 @@ const sidebars = {
                 },
                 {
                   type: "doc",
-                  label: "Enforcing Policies",
-                  id: "articles/enforce-policy",
+                  label: "Enforcing Workflow Policies",
+                  id: "articles/enforcing-workflow-policies",
                 },
               ],
             },

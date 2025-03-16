@@ -21,6 +21,10 @@ In our demo, we'll showcase two practical policy implementation scenarios that a
 
 We will dig deeper into what these demonstrations are once we have met the requirements and have a cluster ready.
 
+:::note
+For a more in depth overview of Workflow Policy Enforcement with Kyverno please check out [Enforce Kubernetes Policies to Standardize Test Workflows](https://testkube.io/learn/enforce-kubernetes-policies-to-standardize-test-workflows)
+:::
+
 ## Prerequisites
 
 * Kubernetes cluster \- we’ll be using Minikube.  
@@ -60,7 +64,7 @@ Validate Policy allows us to check for non-compliant resources with the `latest`
 
 In this policy, we have defined that for a Test Workflow, check the usage of `latest` image tag and warn in case of violation.
 
-```  
+```yaml  
 apiVersion: kyverno.io/v1  
 kind: ClusterPolicy  
 metadata:  
@@ -124,7 +128,7 @@ We have taken a sample Test Workflow and created two versions of it. Let us go a
 
 * [tw-image-run-versioned.yaml](https://github.com/cerebro1/testkube-policies/blob/main/validate-all-image-tags/tw-image-run-versioned.yaml): Uses a version as an image tag in `spec.steps.run.image`  
     
-  ```  
+  ```yaml  
    steps:  
       - name: Run k6 tests  
         run:  
@@ -142,7 +146,7 @@ We have taken a sample Test Workflow and created two versions of it. Let us go a
     
 * [tw-image-run-latest.yaml](https://github.com/cerebro1/testkube-policies/blob/main/validate-all-image-tags/tw-image-run-latest.yaml): Uses latest as an image tag in `spec.steps.run.image`
 
-  ```
+  ```yaml
    steps:
       - name: Run k6 tests
         run:
@@ -189,8 +193,9 @@ In this use case, we are going to discuss another common real-world example wher
 
 ### Create Mutate Policy
 
-In this policy, we have defined that for a Test Workflow, add a specific label if it does not exist in the resource configuration.  
-```  
+In this policy, we have defined that for a Test Workflow, add a specific label if it does not exist in the resource configuration.
+
+```yaml  
 apiVersion: kyverno.io/v1  
 kind: ClusterPolicy  
 metadata:  
@@ -231,7 +236,7 @@ The policy is successfully deployed on a Kubernetes cluster. Kyverno Reports Con
 
 We have taken a sample Test Workflow: [tw-without-label.yaml](https://github.com/cerebro1/testkube-policies/blob/main/mutate-custom-labels/tw-without-label.yaml), which does not contain the expected label. Let us go ahead and apply these on the cluster.
 
-```
+```yaml
 apiVersion: testworkflows.testkube.io/v1  
 kind: TestWorkflow  
 metadata:  
