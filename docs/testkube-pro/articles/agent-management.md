@@ -1,6 +1,6 @@
 # Agent Management
 
-With the introduction of [Multi-Agent support](/articles/multi-agent), Testkube Environments can now contain
+With the introduction of [Multi-Agent support](/articles/install/multi-agent), Testkube Environments can now contain
 two types of agents:
 
 - Lightweight **Runner Agents**, of which there can be as many as needed. 
