@@ -21,35 +21,9 @@ In our demo, we'll showcase two practical policy implementation scenarios that a
 
 We will dig deeper into what these demonstrations are once we have met the requirements and have a cluster ready.
 
-:::note
+:::tip
 For a more in depth overview of Workflow Policy Enforcement with Kyverno please check out [Enforce Kubernetes Policies to Standardize Test Workflows](https://testkube.io/learn/enforce-kubernetes-policies-to-standardize-test-workflows)
 :::
-
-## Prerequisites
-
-* Kubernetes cluster \- we’ll be using Minikube.  
-* [Testkube account](https://testkube.io/get-started) and a Testkube Environment configured with [Testkube Agent](https://docs.testkube.io/testkube-cloud/articles/installing-agent).  
-* [Testkube CLI](https://docs.testkube.io/articles/install/cli) and [kubectl](https://kubernetes.io/docs/reference/kubectl/), [Helm](https://helm.sh/docs/intro/install/) configured on your system.  
-* The latest version of [Kyverno](https://kyverno.io/docs/installation/methods/) is installed.
-
-Validate the status of Kyverno and Testkube installation.
-
-```
-$ kubectl get pods -n testkube  
-NAME                                                    READY   STATUS    RESTARTS        AGE  
-testkube-api-server-6b577fd8f6-gdlxz                    1/1     Running   2 (53s ago)     9d  
-testkube-nats-0                                         2/2     Running   4 (53s ago)     9d  
-testkube-operator-controller-manager-68868cc99b-tnlf6   2/2     Running     5 (25s ago)   9d
-
-$ kubectl get pods -n kyverno  
-NAME                                             READY   STATUS    RESTARTS        AGE  
-kyverno-admission-controller-5fcbd69f8-2mggh     1/1     Running   2 (3m43s ago)   9d  
-kyverno-background-controller-7fc586c8c5-27tb4   1/1     Running   2 (3m43s ago)   9d  
-kyverno-cleanup-controller-8ffdc5bb8-x99mf       1/1     Running   2 (3m43s ago)   9d  
-kyverno-reports-controller-7848888fdd-s5zf2      1/1     Running   2 (3m43s ago)   9d  
-```
-
-This should return the `Running` status for all relevant pods.
 
 ## Use Case1: Validate Image Tags in Test Workflows
 
