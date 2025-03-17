@@ -102,18 +102,8 @@ const sidebars = {
                 },
                 {
                   type: "doc",
-                  label: "Image Inventory",
-                  id: "articles/inventory/images",
-                },
-                {
-                  type: "doc",
                   label: "Using an external MongoDB",
                   id: "articles/mongodb-administration",
-                },
-                {
-                  type: "doc",
-                  label: "Ephemeral Environments",
-                  id: "articles/ephemeral-environments",
                 },
                 {
                   type: "doc",
@@ -142,13 +132,13 @@ const sidebars = {
                 },
                 {
                   type: "doc",
-                  label: "Using Global Parameters in Testkube Helm Charts",
+                  label: "Using Global Parameters",
                   id: "articles/global-parameters-in-testkube-helm-charts",
                 },
                 {
-                  type: "link",
-                  label: "Testkube with Kind",
-                  href: "https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker",
+                  type: "doc",
+                  label: "Image Inventory",
+                  id: "articles/inventory/images",
                 },
               ],
             },
@@ -184,6 +174,12 @@ const sidebars = {
           type: "doc",
           label: "Cloud Control Plane",
           id: "articles/install/cloud-overview",
+        },
+        "articles/install/multi-agent",
+        {
+          type: "doc",
+          label: "Ephemeral Environments",
+          id: "articles/ephemeral-environments",
         },
         "articles/install/faq",
         {
@@ -507,6 +503,11 @@ const sidebars = {
               type: "doc",
               label: "Environments",
               id: "testkube-pro/articles/environment-management",
+            },
+            {
+              type: "doc",
+              label: "Agents",
+              id: "testkube-pro/articles/agent-management",
             },
             {
               type: "doc",
