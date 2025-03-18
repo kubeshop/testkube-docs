@@ -40,6 +40,50 @@ fix_less_than_usage() {
   sed -i 's/<code><\([^<]*\)</<code>\&lt;\1</g' "$file"
 }
 
+get_dockerhub_image_url() {
+    local image_with_tag=$1
+    local architecture=${2:-amd64}
+    local os=${3:-linux}
+
+    # Check for the special quay.io image
+    if [[ "$image_with_tag" =~ ^quay.io/brancz/kube-rbac-proxy: ]]; then
+        echo "https://quay.io/repository/brancz/kube-rbac-proxy?tab=tags"
+        return
+    fi
+
+    # Check if the image is ghcr.io/dexidp/dex
+    if [[ "$image_with_tag" =~ ^ghcr.io/dexidp/dex: ]]; then
+        echo "https://github.com/dexidp/dex/pkgs/container/dex"
+        return
+    fi
+
+    local image_name=$(echo "$image_with_tag" | cut -d':' -f1)
+    local tag=$(echo "$image_with_tag" | cut -d':' -f2)
+    local namespace="library" # Default namespace if a custom one is not provided
+    local repo="$image_name"
+
+    if [[ "$image_name" == */* ]]; then
+        namespace=$(echo "$image_name" | cut -d'/' -f1)
+        repo=$(echo "$image_name" | cut -d'/' -f2)
+    fi
+    # Docker Registry API URLs
+    local token_url="https://auth.docker.io/token?service=registry.docker.io&scope=repository:${namespace}/${repo}:pull"
+    local registry_url="https://registry-1.docker.io/v2/${namespace}/${repo}/manifests/${tag}"
+
+    # Fetch Bearer token
+    local token_response=$(curl -s "$token_url")
+    local token=$(echo "$token_response" | jq -r '.token')
+
+    # Fetch image manifest list
+    local manifest_list=$(curl -s -H "Authorization: Bearer $token" -H "Accept: application/vnd.docker.distribution.manifest.list.v2+json" "$registry_url")
+    local platform_manifest_digest=$(echo "$manifest_list" | jq -r --arg arch "$architecture" --arg os "$os" '.manifests[] | select(.platform.architecture == $arch and .platform.os == $os) | .digest')
+
+    # Construct the Hub Docker URL
+    local base_url="https://hub.docker.com/layers"
+    local url="${base_url}/${namespace}/${repo}/${tag}/images/${platform_manifest_digest//:/-}?context=explore"
+    echo "$url"
+}
+
 generate_reports() {
     local CHART_NAME=$1
     local IMAGE_SET=$2
@@ -56,8 +100,8 @@ generate_reports() {
     echo ":::" >> "$INDEX_FILE"
     echo "" >> "$INDEX_FILE"
 
-    echo "| Image | Description | Vulnerability Report (\`linux/amd64\`) | Vulnerability Report (\`linux/arm64\`) |" >> "$INDEX_FILE"
-    echo "|-------|-------------|--------------------------------------|--------------------------------------|" >> "$INDEX_FILE"
+    echo "| Image | Description | Vulnerability Report (\`linux/amd64\`) | Vulnerability Report (\`linux/arm64\`) | Docker Image |" >> "$INDEX_FILE"
+    echo "|-------|-------------|----------------------------------------|----------------------------------------|--------------|" >> "$INDEX_FILE"
 
     # Loop through each image in the input file
     while IFS= read -r image; do
@@ -67,6 +111,9 @@ generate_reports() {
         # Fetch the image and the description metadata for the image
         image_name=$(get_image_name "$image")
         image_desc=$(get_image_desc "$image_name")
+
+        # Fetch DockerHub URL for the image
+        dockerhub_url=$(get_dockerhub_image_url "$image")
 
         # File names for the vulnerability reports
         report_amd64="${image_slug}_linux_amd64.md"
@@ -95,7 +142,7 @@ generate_reports() {
         sed -i '/:package: /d' "${OUTPUT_DIR}$report_arm64"
 
         # Add entry to the index file
-        echo "| $image | $image_desc | [View Report](./$report_amd64) | [View Report](./$report_arm64) |" >> "$INDEX_FILE"
+        echo "| $image | $image_desc | [View Report](./$report_amd64) | [View Report](./$report_arm64) | [View Image]($dockerhub_url) |" >> "$INDEX_FILE"
     done < "$IMAGE_SET.txt"
 }
 
@@ -138,13 +185,14 @@ add_image_desc "kubeshop/testkube-tw-init" "Image used to initialize a Workflow 
 add_image_desc "kubeshop/testkube-tw-toolkit" "Image used within a Workflow execution."
 add_image_desc "natsio/prometheus-nats-exporter" "NATS metrics exporter."
 add_image_desc "bitnami/minio" "Object store used by the Testkube control plane to store logs and artifacts."
-add_image_desc "ghcr.io/dexidp/dex" "Identity provider used by the Testkube control plane."
+add_image_desc "kubeshop/dex" "Identity provider used by the Testkube control plane."
 # Source: https://github.com/kubeshop/bitnami-containers
 add_image_desc "kubeshop/bitnami-mongodb" "Database used by the Testkube control plane."
 add_image_desc "kubeshop/testkube-enterprise-api" "API server for the Testkube control plane."
 add_image_desc "kubeshop/testkube-enterprise-ui" "Testkube dashboard."
 add_image_desc "kubeshop/testkube-enterprise-worker-service" "Testkube worker service used for background processing."
 add_image_desc "alpine/mongosh" "Used as an init container to check whether MongoDB is ready before starting dependent services."
+add_image_desc "kubeshop/testkube-migration" "Used to run migrations for MongoDB."
 
 # Generate reports
 generate_reports "testkubeenterprise/testkube-enterprise" "cp_images"

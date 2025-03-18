@@ -16,27 +16,27 @@
     "split-openapis": "tsc && npx tsx src/scripts/split-openapis.ts"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.6.1",
-    "@docusaurus/plugin-client-redirects": "^3.6.1",
-    "@docusaurus/preset-classic": "^3.6.1",
-    "@docusaurus/theme-search-algolia": "^3.6.1",
+    "@docusaurus/core": "3.6.3",
+    "@docusaurus/plugin-client-redirects": "3.6.3",
+    "@docusaurus/preset-classic": "3.6.3",
+    "@docusaurus/theme-search-algolia": "3.6.3",
     "@mdx-js/react": "3.0.1",
     "algoliasearch": "4.24.0",
-    "axios": "^1.7.2",
+    "axios": "1.7.2",
     "clsx": "1.2.1",
     "prism-react-renderer": "2.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hotkeys-hook": "3.2.1",
-    "redocusaurus": "^2.0.2"
+    "redocusaurus": "2.2.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^3.6.1",
-    "@docusaurus/tsconfig": "^3.6.1",
-    "@types/js-yaml": "^4.0.9",
-    "js-yaml": "^4.1.0",
-    "tsx": "^4.11.0",
-    "typescript": "^5.4.5"
+    "@docusaurus/module-type-aliases": "3.6.3",
+    "@docusaurus/tsconfig": "3.6.3",
+    "@types/js-yaml": "4.0.9",
+    "js-yaml": "4.1.0",
+    "tsx": "4.11.0",
+    "typescript": "5.4.5"
   },
   "browserslist": {
     "production": [

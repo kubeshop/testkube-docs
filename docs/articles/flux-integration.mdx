@@ -1,161 +1,114 @@
 # GitOps Testing with Flux
 
-## Tutorial
+[Flux](https://fluxcd.io), a Kubernetes-native continuous delivery solution, is a leading tool for facilitating the GitOps process. It streamlines
+application deployment management by continuously syncing the Git repository with the Kubernetes cluster.
 
-The following is a step-by-step walkthrough to test the automated application deployment and execution of Postman collections in a local Kind cluster.
+With the integration of Flux into Testkube, it ensures automated and streamlined workflows for Kubernetes deployments and testing. When Testkube is
+added to the GitOps process, automated testing is added to the deployment lifecycle. This approach cuts down on the time and effort needed for manual
+work and speeds up the testing and deployment process, giving faster feedback and better application delivery.
 
-Let’s start with setting things up for our GitOps-powered testing machine!
+## Flux Integration
 
-### 1. [Fork the example repository](https://github.com/kubeshop/testkube-flux/fork) and clone it locally.
+Testkube can be integrated into a Flux-managed CI/CD pipeline, with Flux managing continuous application delivery and Testkube ensuring thorough
+testing at all stages. Here is how to integrate Flux with Testkube for automated GitOps testing.
+
+### Prerequisites
+
+- [Testkube](https://app.testkube.io/)
+- Kubernetes cluser
+- [Testkube Agent](./install/multi-cluster.md) configured on the cluster
+- [Flux](https://fluxcd.io/flux/get-started/) is configured on the cluster
+- Install the [Flux CLI](https://fluxcd.io/flux/installation/)
+
+#### 1. Configure the GitHub repo on Flux
+
+Run the [flux bootstrap github](https://fluxcd.io/flux/cmd/flux_bootstrap_github/) command to deploy and configure the Flux controllers
+on a Kubernetes cluster and link them to a GitHub repo for synchronization of the cluster's state.
+Additionally, this command simplifies the process of pushing the Flux manifests to the designated GitHub repo.
+
+**Note:** Before using Flux, create a GitHub [personal access token](https://fluxcd.io/flux/installation/bootstrap/github/#github-pat) (PAT) to be used later
+for authentication.
+
+#### 2. Export PAT
+
+After the PAT is created, export it as an environment variable using the following command:
 
 ```sh
-git clone https://github.com/$GITHUB_USER/testkube-flux.git
+export GITHB_TOKEN=<gh-token>
 ```
 
-### 2. Start a Kubernetes cluster.
+#### 3. Configure Flux
 
-You can use Minikube, Kind or any managed cluster with a cloud provider (EKS, GKE, etc). In this example we're using [Kind](https://kind.sigs.k8s.io/).
-
-```sh
-kind create cluster
-```
-
-### 3. Create a Github Classic Token.
-
-Must be of type [Classic](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-personal-access-token-classic) (i.e. starts with ghp\_).
-
-```sh
-GITHUB_TOKEN=<ghp_>
-GITHUB_USER=<username>
-```
-
-And export the environment variables in your terminal.
-
-### 4. Install Flux in the cluster and connect it to the repository.
-
-Install the [Flux CLI](https://fluxcd.io/flux/installation/) and run:
+Install the [Flux CLI](https://fluxcd.io/flux/installation/) and run the following command to sync with the repo:
 
 ```sh
 flux bootstrap github \
---owner=$GITHUB_USER \
+--owner=techmaharaj \
 --repository=testkube-flux \
 --path=cluster \
 --personal
 ```
 
-### 5. Create a Flux Source and a Kustomize Controller.
+#### 4. Set up Git source in Flux
 
-The following command will create a Flux source to tell Flux to apply changes that are created in your repository:
+Add a Git source that specifies the repo and branch to be monitored for changes by executing the following command:
 
 ```sh
 flux create source git testkube-tests \
---url=https://github.com/$GITHUB_USER/testkube-flux \
+--url=https://github.com/techmaharaj/testkube-flux \
 --branch=main \
---interval=30s \
---export > ./cluster/flux-system/sources/testkube-tests/test-source.yaml
+--interval=30s
 ```
 
-And now create a Flux Kustomize Controller to apply the Testkube Test CRDs in the cluser using [Kustomize](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/):
+#### 5. Create a Kustomization
+
+Create [Kustomization](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/) that instructs the Flux controller
+to monitor the Git repo at regular intervals and sync the resources to the Kubernetes cluster:
 
 ```sh
 flux create kustomization testkube-test \
 --target-namespace=testkube \
 --source=testkube-tests \
---path="cluster/testkube" \
+--path="cluster" \
 --prune=true \
---interval=30s \
---export > ./cluster/flux-system/sources/testkube-tests/testkube-kustomization.yaml
+--interval=30s
 ```
 
-### 6. Install Testkube in the cluster.
+#### 6. Verify Kustomization status
 
-If you don't have the Testkube CLI, follow the instructions [here][install-cli] to install it.
-
-Run the following command to install Testkube and its components in the cluster:
-
-```sh
-testkube install
-```
-
-### 7. Create a Test CRD with Testkube CLI.
-
-In this example, the test being used is a Postman test, which you can find in **/img/server/tests/postman-collection.json**.
-
-To create a Kubernetes CRD for the test, run:
-
-```sh
-testkube generate tests-crds img/server/tests/postman-collection.json > cluster/testkube/server-postman-test.yaml
-```
-
-Note: You can [run Testkube from your CI/CD pipeline](./cicd-overview.mdx) if you want to automate the creation of the Test CRDs.
-
-### 8. Add the generated test to the Kustomize file.
-
-The name of the test file created in the previous step is **server-postman-test.yaml**. Add that to the Kustomize file located in `cluster/testkube/kustomization.yaml`:
-
-```diff
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-+ - server-postman-test.yaml
-```
-
-### 9. Push all the changes to your repository.
-
-```sh
-git pull origin main
-git add -A &amp;&amp; git commit -m "Configure Testkube tests"
-git push
-```
-
-### 10. Your tests should be applied in the cluster.
-
-To see if Flux detected your changes run:
+To verify if the sync was successful, use the following command to monitor Flux's progress and see if it
+successfully synced the resources.
 
 ```sh
 flux get kustomizations --watch
 ```
 
-And to ensure that the test has been created run:
-
-```sh
-testkube get test
-```
+This command shows the status of the Kustomizations and continuously updates as changes are applied.
 
 ```sh title="Expected output:"
-| NAME                    | TYPE               | CREATED                       | LABELS                                         |
-| ----------------------- | ------------------ | ----------------------------- | ---------------------------------------------- |
-| postman-collection-test | postman/collection | 2023-01-30 18:04:13 +0000 UTC | kustomize.toolkit.fluxcd.io/name=testkube-test |
-|                         |                    |                               | kustomize.toolkit.fluxcd.io/name=testkube-test |
+| NAME                    | REVISION           | SUSPENDED   |  READY     |  MESSAGE                              |
+| ----------------------- | ------------------ | ----------- | ---------- | ------------------------------------- |
+| flux-system             | main@sha1:a72cbbd4 | False       | True       | Applied revision: main@sha1:a72cbbd4  |
+| testkube-test           | main@sha1:a72cbbd4 | False       | True       | Applied revision: main@sha1:a72cbbd4  |
 ```
 
-### 11. Run your tests.
+#### 7. Verify Testkube Test Workflow creation
 
-Now that you have deployed your tests in a GitOps fashion to the cluster, you can use Testkube to run the tests for you through multiple ways:
+After confirming that the synchronization is successful with Flux, verify if the Test Workflow has been created in the testkube
+namespace by using the following command:
 
-- Using the Testkube CLI.
-- Using the Testkube Pro Dashboard.
-- Running Testkube CLI from a CI/CD pipeline.
-
-We'll use the Testkube CLI for brevity. Run the following command to run the recently created test:
-
-```sh
-testkube run test postman-collection-test
-```
-
-‍
-And see the test result with:
-
-```sh
-testkube get execution postman-collection-test-1
-```
+`kubectl get testworkflows -n testkube`
 
 ```sh title="Expected output:"
-Test execution completed with success in 13.345s
+| NAME                    | AGE       |
+| ----------------------- | --------- |
+| basic-k6-workflow       | 3m38s     |
 ```
 
 ## GitOps Takeaways
 
-Once fully realized - using GitOps for testing of Kubernetes applications as described above provides a powerful alternative to the more traditional approach where orchestration is tied to your current CI/CD tooling and not closely aligned with the lifecycle of Kubernetes applications.
+Once fully realized, leveraging GitOps for Kubernetes application testing as outlined above provides a powerful alternative to the more
+traditional approach where orchestration is tied to your current CI/CD tooling and not closely aligned with the lifecycle of Kubernetes
+applications.
 
 [install-cli]: /articles/install/cli

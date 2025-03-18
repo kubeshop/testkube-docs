@@ -70,9 +70,7 @@ import TwoColumns from '@site/src/components/TwoColumns';
 
 - The Control Plane can be running either in the Cloud or On-Prem - [Read more](/articles/install/overview).
 - The Agents run your tests and are _always_ running in your own infrastructure.
-- The Agent is 100% Open Source and can also be run standalone without the Control Plane - [Read more](articles/open-source-or-pro).
-
-
+- The Agent is 100% Open Source and can also be run standalone without the Control Plane - [Read more](/articles/install/standalone-agent).
 
 ## Learn More About Testkube
 
@@ -101,7 +99,7 @@ export const LearnCardList = (input) => (
         icon: "🛠",
         label: "Examples & Guides",
         description:
-          "See example Workflows for your favorite testing tools and learn how to integrate Testkube into your infrastructure.",
+          "See example Workflows for your favorite testing tools, including k6, playwright, cypress, jmeter, and postman.",
         href: "/articles/examples/overview",
         type: "intro",
       },
@@ -122,7 +120,7 @@ export const LearnMoreCardList = (input) => (
         icon: "🛠",
         label: "Integrations",
         description:
-          "Learn how Testkube integrates into your existing infrastructure via dedicate Plugins, " +
+          "Integrate Testkube into your existing CI/CD pipelines and infrastructure via dedicated plugins, " +
           "Kubernetes Events, Webhooks, CDEvents, etc.",
         href: "/articles/integrations",
         type: "intro",
@@ -131,16 +129,16 @@ export const LearnMoreCardList = (input) => (
         icon: "🛠",
         label: "Reference Docs",
         description:
-          "Get into the nitty-gritty of Helm Charts, OpenAPI definitions and CLI commands",
+          "Get into the nitty-gritty of Testkube CRDs, Helm Charts, OpenAPI definitions and CLI commands",
         href: "/articles/reference",
         type: "intro",
       },
       {
         icon: "🛠",
-        label: "Open Source",
+        label: "Open Source Agent",
         description:
-          "Learn about the Testkube Agent which is 100% Open Source and can run Standalone.",
-        href: "/articles/open-source-or-pro",
+          "Learn about the Testkube Agent which is 100% Open Source.",
+        href: "/articles/install/standalone-agent",
         type: "intro",
       },
     ].map((item, i) => (

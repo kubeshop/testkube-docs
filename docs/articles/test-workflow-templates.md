@@ -21,7 +21,7 @@ Templates are flexible and can be used is various ways:
 ### Create a Template
 
 You can manage your templates under _Workflows > Workflow Templates_ within the Dashboard ([Read More](/articles/testkube-dashboard-workflows-templates))
-or create a TestWorkflowTemplate Custom Resource in your Kubernetes cluster using the [Testkube CLI](/cli/testkube_create_testworkflowtemplate). 
+or create a TestWorkflowTemplate Custom Resource in your Kubernetes cluster using the [Testkube CLI](/cli/testkube-create-testworkflowtemplate). 
 This custom resources follows the same structure as a Test Workflow, with the additional ability to define configuration parameters that 
 can be specified when the template is used.
 

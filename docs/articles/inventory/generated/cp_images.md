@@ -1,16 +1,17 @@
 :::info
 
-Based on chart `testkube-enterprise` as of version `2.27.0` on 15-11-2024
+Based on chart `testkube-enterprise` as of version `2.220.0` on 18-03-2025
 
 :::
 
-| Image | Description | Vulnerability Report (`linux/amd64`) | Vulnerability Report (`linux/arm64`) |
-|-------|-------------|--------------------------------------|--------------------------------------|
-| bitnami/minio:2024.11.7-debian-12-r1 | Object store used by the Testkube control plane to store logs and artifacts. | [View Report](./minio-2024.11.7-debian-12-r1_linux_amd64.md) | [View Report](./minio-2024.11.7-debian-12-r1_linux_arm64.md) |
-| ghcr.io/dexidp/dex:v2.41.1 | Identity provider used by the Testkube control plane. | [View Report](./dex-v2.41.1_linux_amd64.md) | [View Report](./dex-v2.41.1_linux_arm64.md) |
-| kubeshop/bitnami-mongodb:7.0.12 | Database used by the Testkube control plane. | [View Report](./bitnami-mongodb-7.0.12_linux_amd64.md) | [View Report](./bitnami-mongodb-7.0.12_linux_arm64.md) |
-| kubeshop/testkube-enterprise-api:1.10.81 | API server for the Testkube control plane. | [View Report](./testkube-enterprise-api-1.10.81_linux_amd64.md) | [View Report](./testkube-enterprise-api-1.10.81_linux_arm64.md) |
-| kubeshop/testkube-enterprise-ui:2.7.3 | Testkube dashboard. | [View Report](./testkube-enterprise-ui-2.7.3_linux_amd64.md) | [View Report](./testkube-enterprise-ui-2.7.3_linux_arm64.md) |
-| kubeshop/testkube-enterprise-worker-service:1.10.74 | Testkube worker service used for background processing. | [View Report](./testkube-enterprise-worker-service-1.10.74_linux_amd64.md) | [View Report](./testkube-enterprise-worker-service-1.10.74_linux_arm64.md) |
-| nats:2.10.22-alpine | NATS message broker. | [View Report](./nats-2.10.22-alpine_linux_amd64.md) | [View Report](./nats-2.10.22-alpine_linux_arm64.md) |
-| natsio/nats-server-config-reloader:0.16.0 | NATS config reloader. | [View Report](./nats-server-config-reloader-0.16.0_linux_amd64.md) | [View Report](./nats-server-config-reloader-0.16.0_linux_arm64.md) |
+| Image | Description | Vulnerability Report (`linux/amd64`) | Vulnerability Report (`linux/arm64`) | Docker Image |
+|-------|-------------|----------------------------------------|----------------------------------------|--------------|
+| bitnami/minio:2025.2.7-debian-12-r1 | Object store used by the Testkube control plane to store logs and artifacts. | [View Report](./minio-2025.2.7-debian-12-r1_linux_amd64.md) | [View Report](./minio-2025.2.7-debian-12-r1_linux_arm64.md) | [View Image](https://hub.docker.com/layers/bitnami/minio/2025.2.7-debian-12-r1/images/sha256-6200cedfbe0d340913f74f16f93dcd203ec89702c7f120abf45b4bbbea3689cf?context=explore) |
+| kubeshop/bitnami-mongodb:7.0.12 | Database used by the Testkube control plane. | [View Report](./bitnami-mongodb-7.0.12_linux_amd64.md) | [View Report](./bitnami-mongodb-7.0.12_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/bitnami-mongodb/7.0.12/images/sha256-43aa0e5c2e3eff47a9d82ab89e3d0bdde515b9b64628d328a18342e1facba8aa?context=explore) |
+| kubeshop/dex:v2.42.0 | Identity provider used by the Testkube control plane. | [View Report](./dex-v2.42.0_linux_amd64.md) | [View Report](./dex-v2.42.0_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/dex/v2.42.0/images/sha256-10dc393947e2d04dd8c0972ccf405e6f47aba0b694af059c94aa9d249d69ae1b?context=explore) |
+| kubeshop/testkube-enterprise-api:1.11.17 | API server for the Testkube control plane. | [View Report](./testkube-enterprise-api-1.11.17_linux_amd64.md) | [View Report](./testkube-enterprise-api-1.11.17_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-enterprise-api/1.11.17/images/sha256-7ec10cfe3a7b2b2c41f4e83a95720b27cf4700ba37c6548a8ad9945c3e56510b?context=explore) |
+| kubeshop/testkube-enterprise-ui:2.11.0 | Testkube dashboard. | [View Report](./testkube-enterprise-ui-2.11.0_linux_amd64.md) | [View Report](./testkube-enterprise-ui-2.11.0_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-enterprise-ui/2.11.0/images/sha256-8ffc8b4f85046b16f45963df7658bf3590c279714c1e8cf9f6483e5359083ea4?context=explore) |
+| kubeshop/testkube-enterprise-worker-service:1.11.17 | Testkube worker service used for background processing. | [View Report](./testkube-enterprise-worker-service-1.11.17_linux_amd64.md) | [View Report](./testkube-enterprise-worker-service-1.11.17_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-enterprise-worker-service/1.11.17/images/sha256-89936818067d801b39ba38dab70de3f44035e446d88a0e7aa2fb60233f630a14?context=explore) |
+| kubeshop/testkube-migration:1.11.17 | Used to run migrations for MongoDB. | [View Report](./testkube-migration-1.11.17_linux_amd64.md) | [View Report](./testkube-migration-1.11.17_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-migration/1.11.17/images/sha256-d387799ce7feb758b7a1e10d988709176954de382672b030b1aa7d661ef18e62?context=explore) |
+| nats:2.10.24-alpine | NATS message broker. | [View Report](./nats-2.10.24-alpine_linux_amd64.md) | [View Report](./nats-2.10.24-alpine_linux_arm64.md) | [View Image](https://hub.docker.com/layers/library/nats/2.10.24-alpine/images/sha256-d13ec5ce79a02e1be937820dd36db611e25bd0c08cd9947fa9a5d52a56bf91fc?context=explore) |
+| natsio/nats-server-config-reloader:0.16.0 | NATS config reloader. | [View Report](./nats-server-config-reloader-0.16.0_linux_amd64.md) | [View Report](./nats-server-config-reloader-0.16.0_linux_arm64.md) | [View Image](https://hub.docker.com/layers/natsio/nats-server-config-reloader/0.16.0/images/sha256-6e1f185d0f39fdf6032872bd20f1ce134d4e18c923d55f7cf93d40afcf6a8ffe?context=explore) |

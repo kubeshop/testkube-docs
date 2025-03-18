@@ -33,22 +33,17 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Installing",
+      label: "Installation",
       items: [
         {
           type: "doc",
-          label: "Installation Overview",
+          label: "Overview",
           id: "articles/install/overview",
         },
         {
           type: "category",
-          label: "Testkube On Premise",
+          label: "On-Prem Control Plane",
           items: [
-            {
-              type: "doc",
-              label: "Overview",
-              id: "articles/install/onprem-overview",
-            },
             {
               type: "doc",
               label: "Evaluation",
@@ -66,9 +61,9 @@ const sidebars = {
                 {
                   type: "doc",
                   label: "Custom Installation",
-                 id: "articles/install/advanced-install",
-                }
-              ]
+                  id: "articles/install/advanced-install",
+                },
+              ],
             },
             {
               type: "category",
@@ -77,12 +72,13 @@ const sidebars = {
                 "articles/install/multi-cluster",
                 {
                   type: "doc",
-                  label: "Using Private Registries",
-                  id: "articles/deploying-from-private-registries",
-                }, {
-                  type: "doc",
-                  label: "Configure Identity Providers",
+                  label: "SSO / Identity Provides",
                   id: "testkube-pro-on-prem/articles/auth",
+                },
+                {
+                  type: "doc",
+                  label: "SCIM Integration",
+                  id: "testkube-pro-on-prem/articles/scim",
                 },
                 {
                   type: "doc",
@@ -112,12 +108,42 @@ const sidebars = {
                 {
                   type: "doc",
                   label: "Using an external MongoDB",
-                  id: "articles/testkube-dependencies",
+                  id: "articles/mongodb-administration",
                 },
                 {
                   type: "doc",
                   label: "Ephemeral Environments",
                   id: "articles/ephemeral-environments",
+                },
+                {
+                  type: "doc",
+                  label: "High Availability Configuration",
+                  id: "articles/ha",
+                },
+                {
+                  type: "doc",
+                  label: "Pod Security Standards",
+                  id: "articles/pod-security-standards",
+                },
+                {
+                  type: "doc",
+                  label: "Testkube Copilot",
+                  id: "articles/copilot-on-prem-install",
+                },
+                {
+                  type: "doc",
+                  label: "Deploying on OpenShift",
+                  id: "articles/deploying-on-openshift",
+                },
+                {
+                  type: "doc",
+                  label: "Repackaging Testkube",
+                  id: "articles/repackaging-testkube",
+                },
+                {
+                  type: "doc",
+                  label: "Using Global Parameters in Testkube Helm Charts",
+                  id: "articles/global-parameters-in-testkube-helm-charts",
                 },
                 {
                   type: "link",
@@ -126,21 +152,45 @@ const sidebars = {
                 },
               ],
             },
-          ]
+          ],
         },
         {
           type: "category",
-          label: "Testkube Cloud",
+          label: "Standalone Agent",
           items: [
-            {type: "doc", label: "Overview", id: "articles/install/cloud-overview"},
-
-            {type: "doc", label: "Testkube Docker Agent", id: "articles/install/docker-agent"},
-            {type: "doc", label: "Agent with Local Kubernetes", id: "articles/install/quickstart-no-k8s"},
-          ]
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/install/standalone-agent",
+            },
+            {
+              type: "doc",
+              label: "Feature Comparison",
+              id: "articles/install/feature-comparison",
+            },
+            {
+              type: "doc",
+              label: "Docker Install",
+              id: "articles/install/docker-agent",
+            },
+            {
+              type: "doc",
+              label: "Local Kubernetes Install",
+              id: "articles/install/quickstart-no-k8s",
+            },
+          ],
         },
-        {type: "doc", label: "Testkube Open Source", id: "articles/install/standalone-agent"},
+        {
+          type: "doc",
+          label: "Cloud Control Plane",
+          id: "articles/install/cloud-overview",
+        },
         "articles/install/faq",
-        {type: "doc", label: "Upgrade & Uninstall", id: "articles/upgrade-uninstall"},
+        {
+          type: "doc",
+          label: "Upgrade & Uninstall",
+          id: "articles/upgrade-uninstall",
+        },
       ],
     },
     {
@@ -184,6 +234,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "Workflow Wizard",
+                  id: "articles/test-workflows-create-wizard",
+                },
+                {
+                  type: "doc",
                   label: "Workflow Details",
                   id: "articles/testkube-dashboard-workflow-details",
                 },
@@ -209,9 +264,21 @@ const sidebars = {
               label: "Integrations",
               collapsed: false,
               items: [
-                {type: "doc", label: "Overview", id: "articles/integrations-dashboard-explore"},
-                {type: "doc", label: "Triggers", id: "articles/integrations-triggers"},
-                {type: "doc", label: "Webhooks", id: "articles/integrations-webhooks"},
+                {
+                  type: "doc",
+                  label: "Overview",
+                  id: "articles/integrations-dashboard-explore",
+                },
+                {
+                  type: "doc",
+                  label: "Triggers",
+                  id: "articles/integrations-triggers",
+                },
+                {
+                  type: "doc",
+                  label: "Webhooks",
+                  id: "articles/integrations-webhooks",
+                },
               ],
             },
             {
@@ -225,7 +292,7 @@ const sidebars = {
           type: "category",
           label: "Test Workflows",
           items: [
-            {type: "doc", label: "Overview", id: "articles/test-workflows"},
+            { type: "doc", label: "Overview", id: "articles/test-workflows" },
             {
               type: "doc",
               label: "Basic Examples",
@@ -235,6 +302,11 @@ const sidebars = {
               type: "doc",
               label: "Working with Workflows",
               id: "articles/test-workflows-creating",
+            },
+            {
+              type: "doc",
+              label: "Parameterization",
+              id: "articles/test-workflows-examples-configuration",
             },
             {
               type: "doc",
@@ -268,17 +340,12 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Parameterization",
-              id: "articles/test-workflows-examples-configuration",
-            },
-            {
-              type: "doc",
               label: "Pod & Job",
               id: "articles/test-workflows-job-and-pod",
             },
             {
               type: "doc",
-              label: "Test Suites",
+              label: "Workflow Orchestration",
               id: "articles/test-workflows-test-suites",
             },
             {
@@ -298,7 +365,7 @@ const sidebars = {
             },
             {
               type: "category",
-              label: "More Guides",
+              label: "Cookbook",
               items: [
                 {
                   type: "doc",
@@ -319,6 +386,16 @@ const sidebars = {
                   type: "doc",
                   label: "Filtering Executions using Tags",
                   id: "articles/filtering-test-workflow-executions-using-tags",
+                },
+                {
+                  type: "doc",
+                  label: "Uploading Artifacts to Custom S3 Bucket",
+                  id: "articles/custom-minio-artifact-upload",
+                },
+                {
+                  type: "doc",
+                  label: "Enforcing Workflow Policies",
+                  id: "articles/enforcing-workflow-policies",
                 },
               ],
             },
@@ -365,37 +442,56 @@ const sidebars = {
               label: "Overview",
               id: "articles/results-overview",
             },
-            "articles/logs-and-artifacts",
             {
-              type: "doc",
-              label: "Log Highlighting",
-              id: "testkube-pro/articles/log-highlighting",
+              type: "category",
+              label: "Individual Execution Results",
+              collapsed: false,
+              items : [
+                "articles/logs-and-artifacts",
+                {
+                  type: "doc",
+                  label: "Log Highlighting",
+                  id: "testkube-pro/articles/log-highlighting",
+                },
+                {
+                  type: "doc",
+                  label: "JUnit Reports",
+                  id: "articles/test-workflows-reports",
+                },
+                {
+                  type: "doc",
+                  label: "Resource Metrics",
+                  id: "articles/resource-metrics",
+                },
+                {
+                  type: "doc",
+                  label: "AI Analysis",
+                  id: "testkube-pro/articles/AI-test-insights",
+                },
+                {
+                  type: "doc",
+                  label: "Cached Test Results",
+                  id: "testkube-pro/articles/cached-results",
+                },
+              ]
             },
             {
-              type: "doc",
-              label: "AI Analysis",
-              id: "testkube-pro/articles/AI-test-insights",
-            },
-            {
-              type: "doc",
-              label: "Cached Test Results",
-              id: "testkube-pro/articles/cached-results",
-            },
-            {
-              type: "doc",
-              label: "JUnit Reports",
-              id: "articles/test-workflows-reports",
-            },
-            {
-              type: "doc",
-              label: "Status Pages",
-              id: "testkube-pro/articles/status-pages",
-            },
-            {
-              type: "doc",
-              label: "Test Insights",
-              id: "articles/test-insights",
-            },
+              type: "category",
+              label: "Aggregated Results Analysis",
+              collapsed: false,
+              items : [
+                {
+                  type: "doc",
+                  label: "Test Insights",
+                  id: "articles/test-insights",
+                },
+                {
+                  type: "doc",
+                  label: "Status Pages",
+                  id: "testkube-pro/articles/status-pages",
+                },
+              ]
+            }
           ],
         },
         {
@@ -416,6 +512,11 @@ const sidebars = {
               type: "doc",
               label: "Environments",
               id: "testkube-pro/articles/environment-management",
+            },
+            {
+              type: "doc",
+              label: "Members",
+              id: "testkube-pro/articles/member-management",
             },
             {
               type: "doc",
@@ -468,6 +569,37 @@ const sidebars = {
               type: "doc",
               label: "Docker CLI",
               id: "articles/testkube-cli-docker",
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Testkube Copilot",
+          items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/copilot-overview",
+            },
+            {
+              type: "doc",
+              label: "On-Prem Installation",
+              id: "articles/copilot-on-prem-install",
+            },
+            {
+              type: "doc",
+              label: "Enable Copilot",
+              id: "articles/copilot-enable",
+            },
+            {
+              type: "doc",
+              label: "How Copilot can help",
+              id: "articles/copilot-can-help",
+            },
+            {
+              type: "doc",
+              label: "How Copilot is different",
+              id: "articles/copilot-is-different",
             },
           ],
         },
@@ -559,6 +691,11 @@ const sidebars = {
               id: "articles/examples/selenium-basic",
             },
             {
+              type: "doc",
+              label: "Advanced",
+              id: "articles/examples/selenium-advanced",
+            },
+            {
               type: "link",
               label: "Functional Testing with Selenium",
               href: "https://testkube.io/learn/functional-testing-with-selenium-in-testkube",
@@ -607,6 +744,11 @@ const sidebars = {
           id: "articles/examples/nunit-basic",
         },
         {
+          type: "doc",
+          label: "TestContainers",
+          id: "articles/examples/test-containers-basic",
+        },
+        {
           type: "category",
           label: "Pytest",
           items: [
@@ -623,9 +765,9 @@ const sidebars = {
           ],
         },
         {
-          type: "link",
+          type: "doc",
           label: "REST Assured",
-          href: "https://testkube.io/learn/api-testing-using-restassured-and-testkube",
+          id: "articles/examples/rest-assured-basic",
         },
         {
           type: "link",
@@ -645,6 +787,22 @@ const sidebars = {
               type: "doc",
               label: "Distributed",
               id: "articles/examples/jmeter-distributed",
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Locust",
+          items: [
+            {
+              type: "doc",
+              label: "Basic",
+              id: "articles/examples/locust-basic",
+            },
+            {
+              type: "doc",
+              label: "Distributed",
+              id: "articles/examples/locust-distributed",
             },
           ],
         },
@@ -700,8 +858,8 @@ const sidebars = {
         id: "articles/integrations",
       },
       items: [
-        {type: "doc", label: "GitHub", id: "articles/github-actions"},
-        {type: "doc", label: "GitLab", id: "articles/gitlab"},
+        { type: "doc", label: "GitHub", id: "articles/github-actions" },
+        { type: "doc", label: "GitLab", id: "articles/gitlab" },
         {
           type: "doc",
           label: "Jenkins Pipelines",
@@ -712,30 +870,56 @@ const sidebars = {
           label: "Jenkins UI",
           id: "articles/jenkins-ui",
         },
-        {type: "doc", label: "Azure DevOps", id: "articles/azure"},
+        { type: "doc", label: "Azure DevOps", id: "articles/azure" },
+        {
+          type: "link",
+          label: "BitBucket",
+          href: "https://testkube.io/learn/unleashing-the-power-of-ci-cd-testing-with-bitbucket-and-testkube",
+          description: "Integrate Testkube with Bitbucket Pipelines",
+        },
         {
           type: "doc",
           label: "CircleCI",
           id: "articles/circleci",
         },
-        {type: "doc", label: "ArgoCD", id: "articles/argocd-integration"},
-        {type: "doc", label: "Argo Rollouts", id: "articles/argorollouts-integration"},
-        {type: "doc", label: "Argo Workflows", id: "articles/argoworkflows-integration"},
-        {type: "doc", label: "Flux", id: "articles/flux-integration"},
-        {type: "doc", label: "CDEvents", id: "articles/cd-events"},
-        {type: "doc", label: "Tekton", id: "articles/tekton"},
+        { type: "doc", label: "ArgoCD", id: "articles/argocd-integration" },
+        {
+          type: "doc",
+          label: "Argo Rollouts",
+          id: "articles/argorollouts-integration",
+        },
+        {
+          type: "doc",
+          label: "Argo Workflows",
+          id: "articles/argoworkflows-integration",
+        },
+        { type: "doc", label: "Flux", id: "articles/flux-integration" },
+        { type: "doc", label: "CDEvents", id: "articles/cd-events" },
+        { type: "doc", label: "Tekton", id: "articles/tekton" },
+        {
+          type: "link",
+          label: "Keptn",
+          href: "https://testkube.io/learn/leveraging-testkube-as-a-quality-gate-in-multi-stage-deployments-with-keptn",
+          description: "Leveraging Testkube as a Quality Gate in Multi-Stage Deployments with Keptn",
+        },
         {
           type: "doc",
           label: "Slack Integration",
           id: "articles/slack-integration",
         },
-        {type: "doc", label: "Prometheus", id: "articles/metrics"},
+        { type: "doc", label: "Prometheus", id: "articles/metrics" },
+        {
+          type: "doc",
+          label: "Allure Reports",
+          id: "articles/allure-reports",
+        },
+
         {
           type: "doc",
           label: "Kubernetes Events",
           id: "articles/k8s-events",
         },
-        {type: "doc", label: "Webhooks", id: "articles/webhooks"},
+        { type: "doc", label: "Webhooks", id: "articles/webhooks" },
         {
           type: "link",
           label: "PagerDuty",
@@ -748,7 +932,17 @@ const sidebars = {
           href: "https://testkube.io/learn/integrating-testkube-and-zapier-for-instant-email-alerts",
           description: "Integrating Testkube and Zapier for Instant Email Alerts",
         },
-        {type: "doc", label: "Grafana", id: "articles/grafana"},
+        { type: "doc", label: "Grafana", id: "articles/grafana" },
+        {
+          type: "doc",
+          label: "Atlassian Jira",
+          id: "articles/jira-integration",
+        },
+        {
+          type: "doc",
+          label: "Microsoft Teams",
+          id: "articles/teams-integration",
+        },
       ],
     },
     {
@@ -853,7 +1047,7 @@ const sidebars = {
         {
           type: "doc",
           label: "Overview",
-          id: "articles/open-source-or-pro",
+          id: "articles/open-source",
         },
         {
           type: "doc",
@@ -968,7 +1162,7 @@ const sidebars = {
             },
           ],
         },
-        {type: "doc", label: "Deprecations", id: "articles/deprecations"},
+        { type: "doc", label: "Deprecations", id: "articles/deprecations" },
         {
           type: "doc",
           label: "Generating Test CRDs",
@@ -986,7 +1180,7 @@ const sidebars = {
           id: "articles/testkube-dashboard-general-settings",
         },
 
-        {type: "doc", label: "Templates", id: "articles/templates"},
+        { type: "doc", label: "Templates", id: "articles/templates" },
         "articles/legacy-architecture",
         {
           type: "doc",

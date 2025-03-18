@@ -21,8 +21,10 @@ us know on our Slack channel so we can add it!
   - [Using Jenkins Pipelines](/articles/jenkins) - Learn how to integrate Testkube with Jenkins Pipelines.
   - [Using the Jenkins UI](/articles/jenkins-ui) - Learn how to integrate Testkube from the Jenkins UI.
 - [Azure DevOps](/articles/azure) - Learn how to integrate Testkube with Azure DevOps.
+- [BitBucket](https://testkube.io/learn/unleashing-the-power-of-ci-cd-testing-with-bitbucket-and-testkube) - Learn how to integrate Testkube with BitBucket.
 - [CircleCI](/articles/circleci) - Learn how to integrate Testkube with CircleCI.
 - [Tekton](/articles/tekton) - Learn how to integrate Testkube with Tekton.
+- [Keptn](https://testkube.io/learn/leveraging-testkube-as-a-quality-gate-in-multi-stage-deployments-with-keptn) - Leveraging Testkube as a Quality Gate in Multi-Stage Deployments with Keptn.
 - [Argo Rollouts](argorollouts-integration) - Learn how to use Testkube with Progressive Delivery in Argo Rollouts.
 
 ## GitOps Tooling
@@ -42,7 +44,10 @@ us know on our Slack channel so we can add it!
 - [Slack](/articles/slack-integration) - Learn about how to configure Slack integration with Testkube.
 - [PagerDuty](https://testkube.io/learn/critical-test-based-alerting-with-pagerduty-and-testkube) - Learn about how to integrate Testkube with PagerDuty for alerting.
 - [Zapier](https://testkube.io/learn/integrating-testkube-and-zapier-for-instant-email-alerts) - Learn about how to integrate Testkube with Zapier.
+- [Microsoft Teams](/articles/teams-integration) - Learn about how to integrate with Microsoft Teams.
+- [Atlassian Jira](/articles/jira-integration) - Learn about how to integrate with Atlassian Jira.
 
 ## Miscellaneous
  
 - [CDEvents](/articles/cd-events) - Learn about CDEvents emitted by Testkube.
+- [Allure Reports](allure-reports) - Learn how to generate Allure Reports as artifacts in your Workflows

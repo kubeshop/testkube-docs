@@ -1,7 +1,7 @@
 # Working with Test Workflows
 
 Test Workflows can be created and managed either through the [Testkube CLI](/articles/cli) or from the 
-[Dashboard](/articles/testkube-dashboard-explore).
+[Dashboard](/articles/testkube-dashboard-workflows-overview).
 
 :::tip
 
@@ -51,6 +51,13 @@ Optionally, the follow option can be used to watch execution and get the log sum
 testkube run testworkflow TEST_WORKFLOW_NAME -f
 ```
 
+### ReRun 
+The Test Workflow can be rerun using the `testkube rerun twe` command providing Test Workflow execution id:
+
+```shell
+testkube rerun twe EXECUTION_ID
+```
+
 ### Delete
 The Test Workflow can be deleted using the `testkube delete testworkflow` command using the Test Workflow name:
 
@@ -65,18 +72,7 @@ testkube delete testworkflow TEST_WORKFLOW_NAME
 testkube get tw
 ```
 
-## Testkube Dashboard
-
-The Testkube Dashboard provides an easy management interface for your Workflows; select 
-Test Workflows icon in the left toolbar:
-
-![menu test workflow icon](../img/dashboard-menu-workflows.png)
-
-which takes you to the [Test Workflows Overview](/articles/testkube-dashboard-workflows-overview) which allows you to browse, run and manage
-your available Workflows.
-
-There is also a dedicated wizard for creating Workflows: 
-
-![Workflow Creation Wizard](../img/create-test-workflow.png)
-
-The wizard is described in detail in the [Dashboard Documentation](/articles/testkube-dashboard-workflows-overview#creating-a-new-workflow)
+:::tip
+Check out the [Create Workflow Wizard](/articles/test-workflows-create-wizard) to help you create new Workflows
+for your existing tests using in your Git Repositories.
+:::

@@ -1,0 +1,55 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import SimpleRestAssured from "../../workflows/simple-restassured-workflow.md"
+
+# Basic REST Assured Example
+
+Below is a simple workflow for executing REST Assured tests in a Gradle project stored on GitHub. You can paste this directly into the
+YAML of an existing or new test, just make sure to update the `name` and `namespace` for your environment as needed.
+
+- The `spec.content` property defines the path to the Gradle project on GitHub.
+- The `spec.container` property defines default constraints for any container created in this workflow.
+- The `spec.steps` property defines a single step that runs the `gradle --no-daemon` test command.
+- The `spec.steps[0].artifacts` property defines from where to upload junit and html reports.
+
+<SimpleRestAssured/>
+
+After execution, you can see the output from the test executions under the executions panel tabs:
+
+<Tabs>
+  <TabItem value="logs" label="Log Output" default>
+
+    The log output from the REST Assured execution:
+
+   ![REST Assured Log Output](images/basic-rest-assured-log-output.png)
+
+  </TabItem>
+  <TabItem value="junit" label="JUnit Report" default>
+
+    The uploaded report is available in the Artifacts tab:
+
+    ![REST Assured JUnit Report](images/basic-rest-assured-junit-report.png)
+
+  </TabItem>
+  <TabItem value="artifacts" label="Artifacts" default>
+
+    The uploaded report is available in the Artifacts tab:
+
+    ![REST Assured Artifacts](images/basic-rest-assured-artifacts.png)
+
+  </TabItem>
+
+  <TabItem value="html-report" label="HTML Report" default>
+
+    Clicking the HTML report opens it in your browser:
+
+    ![REST Assured HTML Report](images/basic-rest-assured-html-report.png)
+
+  </TabItem>
+</Tabs>
+
+
+
+:::tip
+Read more about running REST Assured Tests with Testkube at https://testkube.io/learn/api-testing-using-restassured-and-testkube
+:::

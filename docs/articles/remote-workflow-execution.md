@@ -53,11 +53,10 @@ spec:
           --env-id {{ shellquote(config.environmentId) }}
 
         testkube run tw {{ shellquote(config.workflowToRun) }} -f
-status: {}
 ```
 
 :::tip
-Check out all available `testkube run tw` parameters in the [CLI Reference](/cli/testkube_run_testworkflow).
+Check out all available `testkube run tw` parameters in the [CLI Reference](/cli/testkube-run-testworkflow).
 :::
 
 ### Passing Configuration Parameters

@@ -31,7 +31,7 @@ be put in the following buckets:
 
 Testkube has been verified to work with Istio installations utilizing native
 sidecars. Compatibility with ambient mode or the CNI plugin has not been
-verified, but we are ready to support enterprise customers using these
+verified, but we are ready to support customers using these
 particular configurations.
 
 Installations that do not currently support native sidecars should apply the

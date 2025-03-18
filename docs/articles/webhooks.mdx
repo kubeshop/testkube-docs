@@ -226,6 +226,9 @@ Usage example:
     value: {{ if eq (.TestWorkflowExecution.Result.Status | testworkflowstatustostring ) "passed" }}"00FF00"{{ else }}"FF0000"{{ end }}
 ```
 
+You can use Sprig golang template functions if you need to have some special logic in your templates.
+You can find a full list of them [here](https://masterminds.github.io/sprig/)
+
 #### Using API Server Environment Variables in Webhooks
 
 In addition to event-specific variables, it's possible to use environment variables from the Testkube API server in your webhook payloads and configurations.
@@ -272,13 +275,54 @@ metadata:
   namespace: testkube
 spec:
   # ...
-  uri: '{{ "{{" }} index .Envs "SLACK_WEBHOOK_URI" {{ "}}" }}'
+  uri: '{{ index .Envs "SLACK_WEBHOOK_URI" }}'
   # ...
 ```
 
 :::info
 Make sure to double-escape brackets when specifying values that themselves specify template syntax.
 :::
+
+#### Using Config and Parameters to specify Webhook variables
+
+If you want to specify variables to use inside of Webhook fields, you can specify `config` section.
+They can be defined in the Webhook specification or taken from the Kubernetes secret.
+You can reference them using builtin `Config` dictionary and golang template expression:
+
+```yaml
+apiVersion: executor.testkube.io/v1
+kind: Webhook
+metadata:
+  name: webhook-jira
+  namespace: testkube
+spec:
+  config:
+    priority:
+      value: "5"
+    token:
+      secret:
+        name: somevars
+        key: apitoken
+  events:
+  - end-testworkflow-success
+  uri: https://webhook.site
+  payloadTemplate: "Priority: {{ index .Config "priority" }}"
+  headers:
+    Authorization: "Basic {{ index .Config \"token\" }}"
+```
+
+If you want to validate your config variables before executing a webhook, you can specify `parameters` section.
+
+```yaml
+spec:
+  parameters:
+    - name: priority
+      description: priority id variable
+      required: false
+      example: "3"
+      default: "3"
+      pattern: "^[0-9]*$"
+```
 
 ### URI and HTTP Headers
 
@@ -335,35 +379,16 @@ spec:
 
 Webhooks can be triggered on any of the following events:
 
-- start-test
-- end-test-success
-- end-test-failed
-- end-test-aborted
-- end-test-timeout
-- become-test-up
-- become-test-down
-- become-test-failed
-- become-test-aborted
-- become-test-timeout
-- start-testsuite
-- end-testsuite-success
-- end-testsuite-failed
-- end-testsuite-aborted
-- end-testsuite-timeout
-- become-testsuite-up
-- become-testsuite-down
-- become-testsuite-failed
-- become-testsuite-aborted
-- become-testsuite-timeout
+### Workflow Events
+
 - queue-testworkflow
 - start-testworkflow
 - end-testworkflow-success
 - end-testworkflow-failed
 - end-testworkflow-aborted
-- become-testworkflow-up
-- become-testworkflow-down
-- become-testworkflow-failed
-- become-testworkflow-aborted
+
+### Create/Update/Delete Events
+
 - created
 - updated
 - deleted
@@ -378,6 +403,52 @@ They can be triggered by the following resources:
 - webhook
 - testexecution
 - testsuiteexecution
+
+### Test / Test Suite Events
+
+:::warning
+Test and Test Suites are being deprecated from Testkube. [Read More](../articles/legacy-features.md).
+:::
+
+- start-test
+- end-test-success
+- end-test-failed
+- end-test-aborted
+- end-test-timeout
+- start-testsuite
+- end-testsuite-success
+- end-testsuite-failed
+- end-testsuite-aborted
+- end-testsuite-timeout
+
+### Events for State Changes
+
+It is possible to get notified by webhooks only when the latest execution's outcome differs from the previous one. This way you can see instantly when one of your scheduled tests was healed or when they got broken. It could also help prevent alert fatigue by deduplicating the alerts and therefore decreasing the load on your monitoring systems.
+Testkube supports special webhook event types to track changes between current and previous execution states.
+
+For Test Workflows:
+
+- become-testworkflow-up (from any error state to succeed one)
+- become-testworkflow-down (from succeed state to any error one)
+- become-testworkflow-failed (from any state to failed one)
+- become-testworkflow-aborted (from any state to aborted one)
+
+For Tests (deprecated - [Read More](/articles/legacy-features)):
+
+- become-test-up (from any error state to succeed one)
+- become-test-down (from succeed state to any error one)
+- become-test-failed (from any state to failed one)
+- become-test-aborted (from any state to aborted one)
+- become-test-timeout (from any state to timeout one)
+
+For Test Suites (deprecated - [Read More](/articles/legacy-features)):
+
+- become-testsuite-up (from any error state to succeed one)
+- become-testsuite-down (from succeed state to any error one)
+- become-testsuite-failed (from any state to failed one)
+- become-testsuite-aborted (from any state to aborted one)
+- become-testsuite-timeout (from any state to timeout one)
+
 
 ## Supported Event Variables
 
@@ -395,7 +466,7 @@ They can be triggered by the following resources:
 
 The full Event Data Model can be found [here](https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_event.go).
 
-### TestExecution (Execution):
+### TestExecution (Execution)
 
 :::warning
 Test and Test Suite webhooks are being deprecated from Testkube. [Read More](../articles/legacy-features.md).
@@ -471,9 +542,9 @@ The full TestWorkflow data model can be found [here](https://github.com/kubeshop
 
 #### TestWorkflowResult for TestWorkflowExecution Result field:
 
-- `Reslut.FinishedAt` - TestWorkflow execution finished time(for example, `2024-11-15 11:24:37.129 +0000 UTC`)
-- `Reslut.Duration` - TestWorkflow execution duration (for example, `8.504s`)
-- `Reslut.Status` - TestWorkflow execution status (for example, `passed`)
+- `Result.FinishedAt` - TestWorkflow execution finished time(for example, `2024-11-15 11:24:37.129 +0000 UTC`)
+- `Result.Duration` - TestWorkflow execution duration (for example, `8.504s`)
+- `Result.Status` - TestWorkflow execution status (for example, `passed`)
 
 The full TestWorkflowResult data model can be found [here](https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_test_workflow_result.go).
 
@@ -488,39 +559,45 @@ The full TestWorkflowResult data model can be found [here](https://github.com/ku
 
 Make sure that the value `testkube-api.dashboardUri` in the helm-charts is set to `app.testkube.io`, or your remote Dashboard URL, so that the variables above can be populated with the correct values.
 
-## Additional Examples
+## Webhook templates
 
-### Microsoft Teams
+In order to re-use the Webhook specification, you can define a special Testkube resource - WebhookTemplate.
+It contains all the same fields as the Webhook resource, except `webhookTemplateRef` one, which is used for referencing a template in the webhook.
+WebhookTemplate can be used only as a part of the calling Webhook. Its content is merged into the Webhook specification.
 
-Webhooks can also be used to send messages to Microsoft Teams channels.
-First, you need to create an incoming webhook in Teams for a specific channel. You can see how to do it in the Teams Docs [here](https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook?tabs=dotnet#create-incoming-webhooks-1). After your Teams incoming webhook is created, you can use it with Testkube webhooks - just use the URL provided (it will probably look like this: `https://xxxxx.webhook.office.com/xxxxxxxxx`).
+:::tip
+Check out the [JIRA Integration](jira-integration) document for a complete example of how to use WebhookTemplates with your Webhooks.
+:::
 
-In order to send the message when test execution finishes, the following Webhook can be used:
+### Simple WebhookTemplate example
 
-```
+Here is a simple WebhookTemplate
+
+```yaml
 apiVersion: executor.testkube.io/v1
-kind: Webhook
+kind: WebhookTemplate
 metadata:
-  name: example-webhook-teams
+  name: example-template
   namespace: testkube
 spec:
   events:
-  - end-test-success
-  - end-test-failed
-  - end-test-aborted
-  - end-test-timeout
-  uri: https://xxxxx.webhook.office.com/xxxxxxxxx
-  payloadTemplate: "{\"text\": \"Test '{{ .TestExecution.TestName }}' execution ({{ .TestExecution.Number }}) finished with '{{ .TestExecution.ExecutionResult.Status }}' status\"}\n"
+  - end-testworkflow-success
+  uri: https://webhook.site
 ```
 
-It will result in:
+And here comes a Webhook that uses ´webhookTemplateRef´ to refer to this template.
 
-```
-{"text": "Test 'postman-executor-smoke' execution (949) finished with 'passed' status"}
+```yaml
+apiVersion: executor.testkube.io/v1
+kind: Webhook
+metadata:
+  name: example-webhook
+  namespace: testkube
+spec:
+  webhookTemplateRef:
+    name: example-template
 ```
 
-and the message:
-`Test 'postman-executor-smoke' execution (949) finished with 'passed' status"` being displayed.
 
 ## Testing Webhooks
 
@@ -579,7 +656,9 @@ testkube update webhook --disable=false --name "${WEBHOOK_NAME}"
 
 <TabItem value="api" label="API">
 
-When automating your operations on webhooks, you can also use the API. For more details, please consult the "Core OSS OpenAPI Definion" page, respectively the "OpenAPI Specification" for Testkube Pro and Enterprise, under the Reference tab on the left. The field specifying this on the webhooks is called `disabled` and is expecting a value of type `boolean`.
+When automating your operations on webhooks, you can also use the Testkube REST API. For more details, please consult the [Testkube OpenAPI Definitions](/openapi/overview) page.
+
+The field specifying this on the webhooks is called `disabled` and is expecting a value of type `boolean`.
 
 Keep in mind, that enabling the webhook again from the API will require specifying `"disabled":false`, simply deleting the field from the object is interpreted as not setting any value on it.
 
@@ -710,33 +789,6 @@ The API expects the following object set under the `spec` attribute:
 </Tabs>
 
 The examples show only the `create` operations, however, these instructions work the same for `update` and `run` as well.
-
-## Enable Webhooks on State Changes
-
-It is possible to get notified by webhooks only when the latest execution's outcome differs from the previous one. This way you can see instantly when one of your scheduled tests was healed or when they got broken. It could also help prevent alert fatigue by deduplicating the alerts and therefore decreasing the load on your monitoring systems.
-Testkube suppots special webhook event types to track changes between current and previous execution states.
-For Tests:
-
-- become-test-up (from any error state to succeed one)
-- become-test-down (from succeed state to any error one)
-- become-test-failed (from any state to failed one)
-- become-test-aborted (from any state to aborted one)
-- become-test-timeout (from any state to timeout one)
-
-For Test Suites:
-
-- become-testsuite-up (from any error state to succeed one)
-- become-testsuite-down (from succeed state to any error one)
-- become-testsuite-failed (from any state to failed one)
-- become-testsuite-aborted (from any state to aborted one)
-- become-testsuite-timeout (from any state to timeout one)
-
-For Test Workflows:
-
-- become-testworkflow-up (from any error state to succeed one)
-- become-testworkflow-down (from succeed state to any error one)
-- become-testworkflow-failed (from any state to failed one)
-- become-testworkflow-aborted (from any state to aborted one)
 
 <Tabs>
 

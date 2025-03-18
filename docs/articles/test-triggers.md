@@ -49,7 +49,12 @@ selector:
   name: Kubernetes object name
   nameRegex: Kubernetes object name regex (for example, "testworkflow.*")
   namespace: Kubernetes object namespace (default is **testkube**)
+  namespaceRegex: Kubernetes object namespace regex( for example, "test.*")
 ```
+
+:::note
+The `namespace` property is only supported for resourceSelectors, and not for testSelectors.
+:::
 
 #### Label Selector
 
@@ -97,13 +102,41 @@ probeSpec:
       headers: test trigger condition probe headers to submit
 ```
 
+### Action Parameters
+
+Action parameters are used to pass config and tag values to the test execution workflow. You can specify either text values or 
+jsonpath expression in a form of `jsonpath={.metadata.name}`. The data will be taken from the resource object of the trigger event. 
+Check the kubernets docs [JsonPath Expression](https://kubernetes.io/docs/reference/kubectl/jsonpath/).
+Also you can use Golang template syntax we support for Webhook processing and take data from Golang object fields.
+
+```yaml
+actionParameters:
+  config: map of key-value pairs
+  tags: map of key-value pairs 
+```
+
+for example:
+
+```yaml
+actionParameters:
+  config:
+    environment: production
+    datavalue: jsonpath={.data.test} # if the resource object is a configmap with key `test`
+    labels: "{{ .ObjectMeta.Labels }}"
+  tags:
+    workflow: core
+    trigger: jsonpath={.metadata.namespace} # namespace of the resource object
+    name: "{{ .ObjectMeta.Name }}"
+```
+
 ### Supported Values
 
 - **Resource** - `pod`, `deployment`, `statefulset`, `daemonset`, `service`, `ingress`, `event`, `configmap`
 - **Action** - `run`
 - **Event** - `created`, `modified`, `deleted`
 - **Cause** (can be used instead of **Event**)
-  - For deployments - `deployment-scale-update`, `deployment-image-update`, `deployment-env-update`, `deployment-containers-modified`
+  - For deployments - `deployment-scale-update`, `deployment-image-update`, `deployment-env-update`, `deployment-containers-modified`,
+    `deployment-generation-modified`, `deployment-resource-modified`
   - For Testkube events - `event-start-test`, `event-end-test-success`, `event-end-test-failed`, `event-end-test-aborted`, `event-end-test-timeout`, 
     `event-start-testsuite`, `event-end-testsuite-success`, `event-end-testsuite-failed`, `event-end-testsuite-aborted`, `event-end-testsuite-timeout`, 
     `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`, `event-end-testworkflow-failed`, `event-end-testworkflow-aborted`, 
@@ -182,7 +215,12 @@ spec:
     name: k6-smoke-test
   event: event-end-test-success
   action: run
-  execution: testworkflow
+  actionParameters:
+     config:
+      environment: production
+    tags:
+      trigger: jsonpath={.metadata.name}
+ execution: testworkflow
   testSelector:
     name: postman-smoke-tests
     namespace: testkube

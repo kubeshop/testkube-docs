@@ -67,7 +67,7 @@ const config = {
               "/cli/",
             ];
 
-            const { defaultCreateSitemapItems, ...rest } = params;
+            const {defaultCreateSitemapItems, ...rest} = params;
             const items = await defaultCreateSitemapItems(rest);
             items.forEach((item) => {
               lowPrioPaths.forEach((path) => {
@@ -94,7 +94,7 @@ const config = {
   ],
 
   themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+  /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
       navbar: {
         logo: {
@@ -134,7 +134,7 @@ const config = {
       announcementBar: {
         id: "join-testkube-pro",
         content:
-          '<strong>New to Testkube?</strong> Unleash the power of cloud native testing in Kubernetes with Testkube. <a id="get_started_docs" href="https://www.testkube.io/get-started?utm_source=docs" target="_blank">Get Started ></a>',
+          '<strong>New to Testkube?</strong> Unleash the power of cloud native testing in Kubernetes with Testkube. <a id="get_started_docs" href="https://testkube.io/get-started?utm_source=docs" target="_blank">Get Started ></a>',
         backgroundColor: "#8951ff",
         textColor: "#fff",
       },
@@ -207,6 +207,7 @@ const config = {
     [
       "@docusaurus/plugin-client-redirects",
       {
+        id: "redirects",
         redirects: redirects,
         createRedirects(existingPath) {
           if (existingPath.includes("/cli")) {
@@ -219,8 +220,8 @@ const config = {
 
           return undefined; // Return a falsy value: no redirect created
         },
-      },
-    ],
+      }
+    ]
   ],
 };
 

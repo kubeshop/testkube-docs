@@ -40,7 +40,7 @@ spec:
 
 ### Execution Namespace
 
-You may select a different namespace for execution, if Testkube is [**configured to work with it**](https://docs.testkube.io/articles/helm-chart/#testkube-multi-namespace-feature).
+You may select a different namespace for execution, if Testkube is [**configured to work with it**](/articles/install/advanced-install#namespaces-for-test-execution).
 
 ```yaml
 spec:
@@ -142,6 +142,32 @@ pod:
         resources:
           requests:
             storage: 1Gi
+container:
+  volumeMounts:
+  - name: some-name
+    mountPath: /mnt/some/name
+```
+
+### Example: Use PersistentVolumeClaim
+
+You can create [**PersistentVolumeClaims**](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims), add them to the Pod and mount them to Containers and they will be automatically cleaned after execution is completed.
+
+```yaml
+pvcs:
+  someName:
+    storageClassName: standard
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 10Mi
+
+pod:
+  volumes:
+  - name: some-name
+    persistentVolumeClaim:
+      claimName: "{{ pvcs.someName.name }}"
+
 container:
   volumeMounts:
   - name: some-name

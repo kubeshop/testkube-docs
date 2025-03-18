@@ -1,4 +1,4 @@
-# Customized Installation
+# Customizing your Testkube On-Prem Installation
 
 A variety of advanced topics to further customize your Testkube On Prem deployment.
 
@@ -6,6 +6,25 @@ A variety of advanced topics to further customize your Testkube On Prem deployme
 See [Components](/articles/helm-components) for a list of all included components and links to their corresponding
 Helm Charts with a list of their available properties.
 :::
+
+## Artifact storage & cleanup
+
+Testkube uses MinIO or any S3-compatible storage to store test artifacts by default.
+Over time, as the number of test executions increases, storage space may become filled with artifacts that are no longer required.
+
+To manage storage efficiently, Testkube provides an automatic cleanup feature.
+You can configure the cleanup policy using the following Helm parameters:
+```yaml
+testkube-cloud-api:
+  api:
+    storage:
+      cleanup:
+        retentionDays: 90
+        maxStorageSizeGb: 10
+```
+
+* `retentionDays`: Defines the number of days to retain artifacts. Artifacts older than this period will be automatically deleted.
+* `maxStorageSizeGb`: Sets the maximum allowable storage size in gigabytes. When the storage exceeds this limit, the oldest artifacts will be removed until the storage size is within the specified limit.
 
 ## TLS
 
@@ -43,11 +62,12 @@ global:
 
 ## Organization Management
 
-### Bootstrap User Mapping
+### Bootstrap Member Mapping
 
-By default, Testkube will automatically add users to the default organizations when they get invited. You can change the bootstrap configuration to change this behaviour programmatically.
+By default, Testkube will automatically add new users as members to the default Organizations when they get invited. 
+You can change the bootstrap configuration to change this behavior programmatically.
 
-The simplified configuration is as follows. It creates a default org and environment and users will automatically join as admin:
+The simplified configuration is as follows. It creates a default org and environment and new users will automatically join as admin members:
 
 ```yaml
 testkube-cloud-api:
@@ -58,9 +78,10 @@ testkube-cloud-api:
       bootstrapAdmin: <you@example.com>
 ```
 
-Alternatively, you can use the full advanced configuration for more options. The following example creates an organization with two environments.
-New users will automatically join default organizations, environments and teams.
-Note that this will only happen on the first sign in. Afterwards, you can manage users through Testkube's dashboard.
+Alternatively, you can use the full advanced configuration for more options. The following example creates an organization with 
+two environments. New users will automatically join as members of the default organizations and be added to specified environments 
+and teams. Note that this will only happen on the first sign in. Afterwards, you can manage users through Testkube's dashboard, unless
+you use SCIM to manage your SSO integration - [Read More](/testkube-pro-on-prem/articles/scim).
 
 ```yaml
 testkube-cloud-api:
@@ -95,7 +116,7 @@ testkube-cloud-api:
                   groups_claim: ["my-org:group-1", "my-org:group-2"]
 ```
 
-The team's groups claim works well with Dex. Dex includes a non-standard `groups` claim which is widely supported by its upstream providers.
+The teams' groups claim works well with Dex. Dex includes a non-standard `groups` claim which is widely supported by its upstream providers.
 Check out [Dex's connector documentation](https://dexidp.io/docs/connectors/) to learn how to configure it for your identity provider.
 
 :::tip
@@ -154,22 +175,18 @@ annotations:
 
 To use your own ingress controller, reach out to our support team and we’ll gladly investigate your ingress of choice. Alternatively, you can give it a try yourself by deploying Testkube and seeing whether gRPC and WebSockets are working properly.
 
-## Kubernetes Namespaces
+## Multi-namespace Agent Installation 
+It is possible to deploy multiple Testkube Agent instances into the same Kubernetes cluster. Please put the following configuration to your `values.yaml` when deploying another agent:
+```yaml
+testkube-api:
+  multinamespace:
+     enabled: true
 
-### Namespaces for Test Execution
-
-The Testkube agent creates Kubernetes jobs when executing a test workflow. By default, the job will be spawned within the namespace where Testkube is installed. You can opt to [run tests in a different namespace](/articles/creating-tests/#run-the-test-in-a-different-execution-namespace), in which case you will have to allow this by configuring these namespaces in `executionNamespaces`.
-
-```yaml {3}
-testkube-agent:
-  testkube-api:
-    executionNamespaces: ["my-namespace"]
+testkube-operator:
+  enabled: false
 ```
 
-### Namespaces for Kubernetes Trigger Events
-
-Testkube's Kubernetes triggers allow you to execute a test workflow. By default, Testkube watches events across the whole cluster. You might want to limit the namespaces that Testkube observes due to security restrictions, in which case you can use the multinamespace configuration:
-
+By default, Testkube monitors events across the entire Kubernetes cluster to trigger the execution of a test workflow. You might want to limit the namespaces that Testkube observes due to security restrictions, in which case you can use the multinamespace configuration:
 ```yaml {3-7}
 testkube-agent:
   testkube-api:
@@ -179,8 +196,21 @@ testkube-agent:
       - namespace2
       - namespace3
 ```
+Note: The naming is a bit counterintuitive, but this instructs Testkube to stop watching all namespaces and to only observe the namespaces listed on top of the namespace where Testkube is installed. No ClusterRole will be created, instead you will have Roles for each specified namespace.
 
-Note: The naming is a bit counterintuitive but this instructs Testkube to stop watching all namespaces and to only observe the namespaces listed on top of the namespace where Testkube is installed. No ClusterRole will be created, instead you will have Roles for each specified namespace.
+## Kubernetes Namespaces
+
+### Namespaces for Test Execution
+
+The Testkube agent creates Kubernetes jobs when executing a test workflow. By default, the job will be spawned within the namespace where Testkube is installed. You can opt to [run tests in a different namespace](/articles/creating-tests#run-the-test-in-a-different-execution-namespace), in which case you will have to allow this by configuring these namespaces in `executionNamespaces`.
+
+```yaml {3}
+testkube-agent:
+  testkube-api:
+    executionNamespaces:
+      - namespace: ns1 
+      - namespace: ns2 
+```
 
 ### Namespaces for Testkube Custom Resources
 
@@ -188,11 +218,11 @@ Testkube enables GitOps practices by storing configuration within custom resourc
 
 ## Bring Your Own Infra
 
-Testkube Enterprise supports integrating with existing infrastructure components such as MongoDB, NATS, Dex, etc. For production environments, it's recommended to use your own infra or to harden the sub-charts.
+Testkube supports integrating with existing infrastructure components such as MongoDB, NATS, Dex, etc. For production environments, it's recommended to use your own infra or to harden the sub-charts.
 
 ### MongoDB
 
-Testkube Enterprise uses MongoDB as a database for storing all the data.
+Testkube uses [MongoDB](https://www.mongodb.com/) as a database for storing all the data.
 By default, it will install a MongoDB instance using the Bitnami MongoDB Helm chart.
 
 If you wish to use an existing MongoDB instance, you can configure the following values:
@@ -222,7 +252,7 @@ testkube-api:
 
 ### NATS
 
-Testkube Enterprise uses NATS as a message broker for communication between API and Agents.
+Testkube uses [NATS](https://nats.io/) as a message broker for communication between API and Agents.
 
 If you wish to use an existing NATS instance, you can configure the following values:
 
@@ -238,7 +268,7 @@ testkube-cloud-api:
 
 ### MinIO
 
-Testkube Enterprise uses MinIO as a storage backend for storing artifacts.
+Testkube uses [MinIO](https://min.io/) as a storage backend for storing artifacts.
 
 If you wish to use an existing MinIO instance, you can configure the following values:
 
@@ -252,7 +282,7 @@ testkube-cloud-api:
 
 ### Dex
 
-Testkube Enterprise uses Dex as an identity provider.
+Testkube uses [Dex](https://dexidp.io/) as an identity provider.
 
 If you wish to use an existing Dex instance, you can configure the following values:
 
@@ -275,7 +305,7 @@ By default, Testkube will work with licenses that require internet connectivity.
 
 [Contact support][contact] if you need an offline license.
 
-Once you obtained an offline license, you should create a Shared Secret and afterwards
+Once you have obtained an offline license, you should create a Shared Secret and afterwards
 
 ```yaml
 global:
@@ -288,4 +318,4 @@ global:
 By default, Testkube will pull images from the [docker.io](https://docker.io) registry. You can override the image of each individual service.
 
 [contact]: https://testkube.io/contact
-[guide-mongo-ssl]: /articles/testkube-dependencies
+[guide-mongo-ssl]: /articles/mongodb-administration

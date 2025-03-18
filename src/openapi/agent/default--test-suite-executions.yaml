@@ -10,6 +10,11 @@ info:
     name: MIT
     url: https://opensource.org/licenses/MIT
   version: 1.0.0
+servers:
+  - url: https://api.testkube.io
+    description: Testkube Cloud API Endpoint
+  - url: https://<your-testkube-api-host>
+    description: Testkube On-Prem API Endpoint
 paths:
   /test-suite-executions:
     post:

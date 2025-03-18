@@ -1,4 +1,4 @@
-# Install with Helm
+# Testkube Production Install with Helm
 
 The main Testkube Helm Charts includes both the Testkube Control Plane and Testkube Agent charts and 
 let you set up a customized Testkube instance tailored to your environment. See the list of 
@@ -57,7 +57,7 @@ helm upgrade --install \
 ### License
 
 You will have to set a license key to get started with Testkube. You can also opt to use [a shared secret for your license][secret-license]. 
-You can request a trial license on the [Testkube website](https://testkube.io/download), no up-front credit card required.
+You can request a trial license on the [Testkube website](https://testkube.io/get-started).
 
 ```yaml {2}
 global:
@@ -92,6 +92,9 @@ TLS can either be handled through cert-manager or a manually defined secret. Whi
 TLS should be terminated at the application-level instead of the ingress-level as it will drastically enhance the performance of the gRPC and Websocket protocols. Be mindful that NGINX defaults to a downgrade from HTTP2 to HTTP1.1 when the backend service is using an insecure port.
 :::
 
+Ensure that your gateway or proxy fully supports HTTP/2, as this is a fundamental requirement for enabling gRPC endpoints. Without HTTP/2 support, gRPC communication will not function properly.
+If you are deploying Testkube in an Azure environment, it is essential to use [Application Gateway for Containers](https://learn.microsoft.com/en-us/azure/application-gateway/for-containers/overview#load-balancing-features) rather than the standard Azure Application Gateway, as the latter [does not support gRPC protocol](https://github.com/Azure/application-gateway-kubernetes-ingress/issues/1015#issuecomment-2379609889).
+
 ### Auth
 
 You will have to configure how your users can access Testkube. Testkube uses Dex which supports [the most popular identity providers](https://dexidp.io/docs/connectors/). You can find a OIDC example for Google below:
@@ -119,10 +122,45 @@ dex:
           issuer: https://accounts.google.com
           clientID: $GOOGLE_CLIENT_ID
           clientSecret: $GOOGLE_CLIENT_SECRET
-          redirectURI: <dex endpoint>/callback
+          redirectURI: <dex endpoint>/idp/callback
 ```
 
-Alternatively, you can use [a local database with static users](/testkube-pro-on-prem/articles/auth/#static-users) which acts as a virtual identity provider for evaluations.
+Another example of using Google’s OpenID Connect provider that performs authorization based on groups membership:
+```yaml
+testkube-cloud-api:
+  additionalEnv:
+    OAUTH_GROUPS_SCOPE: "true"
+  
+dex:
+  volumes:
+  - name: google-auth-volume
+    secret:
+      secretName: google-auth-secret #secret with the SA JSON key file
+  volumeMounts:
+    - name: google-auth-volume
+      readOnly: true
+      mountPath: /home
+  configTemplate:
+    additionalConfig: |
+    connectors:
+    - type: google
+      id: google
+      name: Google
+      config:
+      clientID: $GOOGLE_CLIENT_ID
+      clientSecret: $GOOGLE_CLIENT_SECRET
+      redirectURI: <dex endpoint>/idp/callback
+      serviceAccountFilePath: /home/googleAuth.json #path from volumeMount
+      groups:
+        - <group-name>
+      domainToAdminEmail:
+        "*": <email of a Google Workspace user>
+      
+```
+Please note that it is required to create a k8s secret with a service account JSON key file and mount it to Dex pod. Follow official [documentation](https://dexidp.io/docs/connectors/google/) to see full configuration.
+
+
+Alternatively, you can use [a local database with static users](/testkube-pro-on-prem/articles/auth#static-users) which acts as a virtual identity provider for evaluations.
 
 Once authenticated, users will also need to be invited to org. By default, new users will automatically join the default organization. You can change this behaviour by changing [the bootstrap and invitation configuration][advanced-bootstrap].
 
@@ -166,7 +204,7 @@ kubectl create secret generic testkube-license --from-file=LICENSE_KEY=«license
 
 This secret is referenced by the `global.enterpriseLicenseRef` setting. For offline licences, you will also have to set `global.enterpriseOfflineAccess: true`.
 
-[license]: https://testkube.io/download
+[license]: https://testkube.io/get-started
 
 ## Advanced Settings
 

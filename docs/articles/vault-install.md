@@ -2,7 +2,7 @@
 
 This guide covers an installation of Testkube utilizing [Vault's sidecar
 injector](https://developer.hashicorp.com/vault/docs/platform/k8s/injector), but
-we also support enterprise customers utilizing the secrets operator or
+we also support customers utilizing the secrets operator or
 the CSI provider.
 
 :::info
@@ -137,7 +137,7 @@ minio:
 
 ## Control Plane
 
-The control plane, AKA enterprise API, exposes the central API for the agents and
+The control plane exposes the central API for the agents and
 the dashboard. The worker service is a part of the control plane which performs
 long-running tasks such as processing artifacts.
 
@@ -150,7 +150,7 @@ injected from a Vault:
 - Private certificate authority (CA) certificate
 
 To keep this guide simple we will have one service account for both
-components of the control plane (enterprise API and worker service) which will
+components of the control plane (API and worker service) which will
 need to have access to the Vault secrets, but to enforce the principle of least privilege one
 could create individual service accounts and policies for each component.
 

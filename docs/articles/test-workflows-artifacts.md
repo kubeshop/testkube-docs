@@ -2,7 +2,7 @@
 
 Testkube can be configured to retrieve any file artifacts that are produced by tools and scripts executed in
 a Test Workflow. Collected artifacts are then retrievable either via the API/CLI
-(see [CLI Reference](/cli/testkube_download)) or via the Dashboard in the [Artifacts Tab](/articles/logs-and-artifacts#artifact-collection).
+(see [CLI Reference](/cli/testkube-download)) or via the Dashboard in the [Artifacts Tab](/articles/logs-and-artifacts#artifact-collection).
 
 :::note
 
@@ -95,10 +95,8 @@ above to ensure that artifacts are collected, otherwise this step could be skipp
 ## JUnit Report Extraction
 
 Testkube automatically scans all artifacts for `.xml` files that are valid [JUnit XML reports](https://github.com/testmoapp/junitxml) and parses
-their contents. This parsed data is then made available through multiple features:
-
-1. [Test Insights Reporting](/articles/test-insights#test-reports) for aggregate analysis
-2. [JUnit Reports Visualization](/articles/test-workflows-reports) for detailed inspection and filtering of results
+their contents. This parsed data is then made available via [JUnit Reports Visualization](/articles/test-workflows-reports) for detailed inspection 
+and filtering of results.
 
 More specifically, Testkube extracts:
 

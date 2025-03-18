@@ -59,7 +59,7 @@ Execution number:  1
 Status:            running
 Start time:        2023-02-14 09:50:00.924165379 +0000 UTC
 End time:          0001-01-01 00:00:00 +0000 UTC
-Duration:          
+Duration:
 
 
 
@@ -81,9 +81,9 @@ To get a list of the created artifacts, use the following command:
 
 ```bash
 $ testkube get artifact playwright-test-demo-1
-  EXECUTION | NAME                  | SIZE (KB)  
+  EXECUTION | NAME                  | SIZE (KB)
 ------------+-----------------------+------------
-            | playwright-report.zip |    180527  
+            | playwright-report.zip |    180527
 ```
 
 These files were created and uploaded to the previously configured object storage. To download them, use the `testkube download artifact` command.
@@ -99,7 +99,7 @@ Running tests in a containerized environment is convenient: it's simple, portabl
 
 ### Reports
 
-Similarly to many other testing tools, Playwright provides the option to open a browser window for reports. It is important to make sure reporters are not opening additional windows. 
+Similarly to many other testing tools, Playwright provides the option to open a browser window for reports. It is important to make sure reporters are not opening additional windows.
 
 The following environment variables are set on a Dockerfile-level, but it is still important to be mindful of these differences.
 
@@ -110,4 +110,4 @@ ENV PWTEST_SKIP_TEST_OUTPUT=1
 
 ### Using Different Playwright Versions
 
-The Testkube Playwright executor supports only one version for now: 1.30.0. In case this does not suffice, the [container executor docs](http://docs.testkube.io/test-types/container-executor/#creating-and-configuring-a-container-executor-playwright) contains instructions on how to set up your own executor with a different version of Playwright.
+The Testkube Playwright executor supports only one version for now: 1.30.0. In case this does not suffice, the [container executor docs](/test-types/container-executor#creating-and-configuring-a-container-executor-playwright) contains instructions on how to set up your own executor with a different version of Playwright.

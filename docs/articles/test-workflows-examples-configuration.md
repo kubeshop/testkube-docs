@@ -1,25 +1,25 @@
-# Test Workflows Examples - Configuration
+# Test Workflows Parameterization
 
-## Declaring the Configuration
+Test Workflows parameterization allows you to supply runtime **parameters** that make your workflows flexible and reusable. You can provide these parameters in two primary ways:
 
-Test Workflows may define some configuration variables that should be used.
-The configuration schema is OpenAPI-like.
+1. **Configuration Parameters (`config`)**: Define parameters in your workflow schema that are available via the `{{ config.<parameter> }}` syntax.
+2. **Environment Parameters (`env`)**: Pass parameters as environment variables to your container. These variables are injected at runtime and can be referenced dynamically (for example, in shell commands) using the `{{ env.<parameter> }}` syntax.
 
-When the configuration variable doesn’t already have a default clause, it’s required.
-Values of configuration variables with sensitive flags will be stored in test workflow execution secret.
+For detailed information on our expression language—including operators, built-in functions, and variables—please see [Test Workflows - Expressions](./test-workflows-expressions).
 
-### Using the Variables
+## Overview
 
-The configuration variables can be used in the specification as an expression, i.e. `cypress run {{config.args}}`.
+Test Workflows support parameterization by allowing you to provide runtime parameters that control various aspects of your workflow. These parameters can be defined as **configuration parameters** (`config`) or supplied as **environment parameters** (`env`). By referencing these parameters using the `{{ }}` syntax, you can customize commands, paths, and more—without hardcoding values.
 
-You can use the variables in most of the places - commands, paths, images, static files, or even conditions.
+> **Important:** Environment parameters are injected into the container at runtime. They are accessible dynamically (e.g., in shell commands) but cannot be used in static fields such as the container’s `image`.
 
+## Using Configuration Parameters (`config`)
+
+### Defining Configuration Parameters
+
+Configuration parameters are declared in the `spec.config` section of your Test Workflow using an OpenAPI-like schema. They specify the type, default values, and whether a parameter is sensitive. Parameters without default values are required.
 
 ```yaml
-apiVersion: testworkflows.testkube.io/v1
-kind: TestWorkflow
-metadata:
-  name: overview--example-13
 spec:
   config:
     version:
@@ -28,11 +28,17 @@ spec:
     workers:
       type: integer
       default: 2
-      sensitive: true
+      sensitive: true # <- Marked as sensitive
     printTree:
-      type: boolean
-      default: "false"
+      type: boolean # <- No default, marked as required
+```
 
+### Example: Parametrized Container Image and Commands
+
+In the example below, configuration parameters are used to set the container image version and determine the number of workers for a shell command:
+
+```yaml
+spec:
   content:
     git:
       uri: "https://github.com/kubeshop/testkube"
@@ -40,88 +46,141 @@ spec:
         - "test/playwright/executor-tests/playwright-project"
 
   container:
-    image: "mcr.microsoft.com/playwright:v{{ config.version }}"
+    image: "mcr.microsoft.com/playwright:v{{ config.version }}" # <- Using config parameter for version
     workingDir: "/data/repo/test/playwright/executor-tests/playwright-project"
 
   steps:
-    - shell: "npm ci && npx playwright test --workers {{ config.workers }}"
+    - shell: "npm ci && npx playwright test --workers {{ config.workers }}" # <- Using config parameter for workers
     - condition: "config.printTree"
       shell: "tree /data/repo"
 ```
 
-### Using Secrets or ConfigMaps
+## Using Environment Parameters (`env`)
 
-You can also use Secrets and ConfigMaps to define variables. In this case, you would
-set the parameter as an environment variable and use the `valueFrom` property. You
-can read the value through a shell or expression.
+Environment parameters are passed to your container at runtime. They are injected dynamically and can be referenced in commands (e.g., `shell`) using the `{{ env.<parameter> }}` syntax.
+
+### Static Environment Parameters
+
+Below is an example of a statically defined environment variable. In this case, the variable is used within a shell command:
 
 ```yaml
-apiVersion: testworkflows.testkube.io/v1
-kind: TestWorkflow
-metadata:
-  name: example-with-secrets
 spec:
-  # Declare the environment variable from secret
+  container:
+    env:
+      - name: MY_STATIC_VAR
+        value: "staticValue" # <- Hardcoded static environment variable
+  steps:
+    - shell: "echo The static value is {{ env.MY_STATIC_VAR }}" # <- Referencing the env variable in a shell command
+```
+
+### Using ConfigMaps with Environment Parameters
+
+You can source environment parameters from Kubernetes ConfigMaps using standard Kubernetes syntax:
+
+```yaml
+spec:
+  container:
+    env:
+      - name: MY_CONFIG_VAR
+        valueFrom:
+          configMapKeyRef:
+            name: your-configmap-name # <- Name of the ConfigMap
+            key: key-in-configmap # <- Key within the ConfigMap
+
+  steps:
+    - shell: "echo The ConfigMap value is {{ env.MY_CONFIG_VAR }}" # <- Referencing the ConfigMap value
+```
+
+### Using Secrets with Environment Parameters
+
+Similarly, environment parameters can be sourced from Kubernetes Secrets:
+
+```yaml
+spec:
   container:
     env:
       - name: MY_SUPER_SECRET
         valueFrom:
           secretKeyRef:
-            name: your-secret-name
-            key: key-in-the-secret
+            name: your-secret-name # <- Name of the Kubernetes Secret
+            key: key-in-secret # <- Key within the Secret
 
-  # Run the step using it
   steps:
     - shell: |
-        # Shell way
-        echo "$MY_SUPER_SECRET"
-        # Expression way
-        echo "{{ env.MY_SUPER_SECRET }}"
-        # Sanitized expression
-        echo {{ shellquote(env.MY_SUPER_SECRET) }}
+        echo "Secret value: {{ env.MY_SUPER_SECRET }}"  # <- Referencing the secret in a shell command
+        echo "Sanitized secret: {{ shellquote(env.MY_SUPER_SECRET) }}"  # <- Using the shellquote function to sanitize output
 ```
 
-## UI
+## Combining `config` and `env`
+
+For enhanced flexibility, you can combine configuration parameters with environment parameters. This allows you to define parameters in `config` and then inject them into your container as environment variables.
+
+```yaml
+spec:
+  config:
+    databaseURL:
+      type: string
+      default: "https://default.database.url" # <- Default database URL
+
+  container:
+    env:
+      - name: DB_URL
+        value: "{{ config.databaseURL }}" # <- Passing config parameter to an env variable
+
+  steps:
+    - shell: "echo Database URL is {{ env.DB_URL }}" # <- Using the env variable in a shell command
+```
+
+## Using Expressions with Parameters
+
+Our expression language allows you to create dynamic expressions using both configuration and environment parameters. You can perform arithmetic, logic, string operations, and more. For example:
+
+```yaml
+# Example: Using math in a condition
+condition: 'config.workers > 1 || config.force'  # <- Evaluates condition based on config parameters
+
+# Example: Using a built-in function to sanitize output in a shell command
+- shell: "echo {{ shellquote(env.MY_SUPER_SECRET) }}"  # <- Sanitizes secret before output
+```
+
+You can also build more complex expressions—leveraging JSON-native syntax, arithmetic operators, ternary conditions, and built-in functions such as `string`, `join`, `split`, etc. For a comprehensive overview of available operators, functions, and built-in variables, please refer to [Test Workflows - Expressions](./test-workflows-expressions).
+
+## Specifying Parameter Values at Runtime
+
+When executing Test Workflows, you can supply parameter values in several ways:
 
 ### Running in the UI
 
-After clicking “Run now” in the UI, if the Test Workflow has additional configuration parameters, you will be prompted to enter them.
+When you click **Run now** in the UI, you will be prompted to enter values for any required configuration parameters.
 
 ![Running in the UI](../img/run-in-the-ui.png)
 
-## CLI
+### Running with the CLI
 
-#### Running with the CLI
-
-With the CLI, you can provide the variables with **--config** arguments.
+You can also pass parameter values via the CLI using the `--config` flag. For environment or secret parameters, use the `--env-var` or `--global-var` options.
 
 ![Running with CLI](../img/running-with-cli.png)
 
-To use secrets, you'd have to use the `--env-var` or `--global-var` option instead as
-they are environment variables.
+### Providing Parameters to Referenced Workflows
 
-## Test Suite (Execute)
-
-### Running with Execute (Test Suite Like)
-
-Configurable Test Workflows may also be parameterized in the **execute** step. Use this for passing dynamic data.
+Test Workflows can reference other workflows using the `execute` step. This feature allows you to trigger a referenced workflow run with specific configuration parameter values. For example, you can provide different values (like the number of workers or version) when triggering each referenced workflow:
 
 ```yaml
-apiVersion: testworkflows.testkube.io/v1
-kind: TestWorkflow
-metadata:
-  name: overview--example-14
 spec:
   steps:
     - execute:
         workflows:
           - name: "overview--example-13"
             config:
-              workers: 2
+              workers: 2 # <- Providing workers parameter for the referenced workflow
           - name: "overview--example-13"
             config:
-              workers: 4
+              workers: 4 # <- Different workers parameter
           - name: "overview--example-13"
             config:
-              version: "1.23.4"
+              version: "1.23.4" # <- Providing version parameter
 ```
+
+In this setup, the `execute` step triggers multiple runs of the referenced workflow with the specified configuration parameters. Learn more about [Advanced Workflow Orchestration](./test-workflows-test-suites).
+
+By using Test Workflows parameterization, you can easily manage and supply runtime parameters—whether through configuration parameters (`config`), environment parameters (`env`), or a combination of both. This approach allows you to build flexible, secure, and maintainable workflows that adapt to your runtime needs. For more details on the expression language features available for constructing these parameters, please visit [Test Workflows - Expressions](./test-workflows-expressions).

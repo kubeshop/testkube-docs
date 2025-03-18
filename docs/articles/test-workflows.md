@@ -1,8 +1,9 @@
 # Test Workflows
 
 ## Introduction
-Test Workflows are an easy and extremely powerful way to define and run your tests in 
-your Kubernetes clusters. Thanks to their flexibility, Test Workflows solve many of the 
+
+Test Workflows are an easy and extremely powerful way to define and run your tests in
+your Kubernetes clusters. Thanks to their flexibility, Test Workflows solve many of the
 problems that can occur with standard Tests, including:
 
 - Running Tests using different testing tool versions and dependencies.
@@ -10,35 +11,40 @@ problems that can occur with standard Tests, including:
 - Having more control over how your tests are executed, including resource consumption and setup/tearDown processes.
 - Being able to configure tool-specific commands and arguments.
 
-## Test Workflow Structure
+:::note
+Most of the test execution functionality provided by the Test Workflows engine is available for free using the
+Open Source Testkube Agent in Standalone Mode - [Read More](/articles/install/standalone-agent).  
+:::
 
-Test Workflows are defined using a specific workflow language wrapped in a CRD. The high-level structure
-of a Test Workflow is as follows:
+## Test Workflow Structure Overview
+
+Test Workflows are defined via a Kubernetes Custom Resource Definition (CRD) that uses a custom workflow language.
+Below is a high-level outline of a Test Workflow definition:
 
 ```yaml title="testworkflows-outline.yaml"
 apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata:
-  name: ... # name of the Test Workflow
+  name: ... # Name of the Test Workflow
 spec:
-  content: # content specifies where to find the actual test definition(s) to run 
-    git: # checking out from git repository - see below
+  content: # Where to find the test definitions
+    git: # Checkout from a Git repository
       ...
-    files: # defines files to create containing the actual tests - see below
+    files: # Inline file definitions
       ...
-  container: # settings applied to all images used in the workflow, can be overridden
-    resources: # resource settings
-      requests: # resource requests
-        ...
-      limits: # resource limits
-        ...
-    workingDir: # default workingDir in the containers
-    env: # global env variables
+  container: # Global container settings (can be overridden)
+    resources: # Resource requests and limits
+      requests: ...
+      limits: ...
+    workingDir: # Default working directory
+    env: # Global environment variables
       ...
-  steps: # steps that will be executed by this Test Workflow, can be nested
-  - name: ... # name of step
-    run: # action to perform for this step - see below for possible values
-      ...
+  steps: # Ordered steps for execution (supports nesting)
+    - name: ... # name of step
+      run:
+        image: ...
+        command: [...]
+        args: [...]
 ```
 
 The different properties are described with examples and in more detail below.
@@ -47,44 +53,18 @@ The different properties are described with examples and in more detail below.
 The [Schema Reference for Test Workflows](/articles/crds/testworkflows.testkube.io-v1#testworkflow) describes all available properties and constructs
 :::
 
-## Example - Test Workflow for Postman
-Example Test Workflow for running Postman collection from Testkube repository: [/test/postman/executor-tests/postman-executor-smoke-without-envs.postman_collection.json](https://raw.githubusercontent.com/kubeshop/testkube/develop/test/postman/executor-tests/postman-executor-smoke-without-envs.postman_collection.json).
+## Metadata
 
-```yaml title="postman-example.yaml"
-apiVersion: testworkflows.testkube.io/v1
-kind: TestWorkflow
-metadata:
-  name: postman-workflow-example # name of the Test Workflow
-spec:
-  content:
-    git: # checking out from git repository
-      uri: https://github.com/kubeshop/testkube
-      revision: main
-      paths:
-      - test/postman/executor-tests/postman-executor-smoke-without-envs.postman_collection.json
-  container: # container settings
-    resources: # resource settings (optional)
-      requests: # resource requests
-        cpu: 256m
-        memory: 128Mi
-    workingDir: /data/repo/test/postman/executor-tests # default workingDir
-  steps: # steps that will be executed by this Test Workflow
-  - name: Run test
-    run:
-      image: postman/newman:6-alpine # image used while running specific step
-      args: # args passed to the container
-      - run
-      - postman-executor-smoke-without-envs.postman_collection.json
-```
+The **metadata** section follows [standard Kubernetes convention.](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#objectmeta-v1-meta)
 
-## `metadata`
+### Name
 
-This is the standard Kubernetes Object metadata - [Read More](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#objectmeta-v1-meta)
+- **`metadata.name`**: _(Required)_ The name of the Test Workflow (e.g. `example-workflow`).
 
-### `name`
-`metadata.name` is mandatory - it's a name of the Test Workflow (for example `postman-workflow-example`)
-### `labels`
-Labels can be set to allow easier filtering of Test Workflows.
+### Labels
+
+- **`metadata.labels`**: _(Optional)_ Labels help with filtering and organizing workflows.
+
 ```yaml
 metadata:
   name: example-workflow
@@ -93,373 +73,230 @@ metadata:
     another: one
     one: more
 ```
-## `content`
 
-Specifies the actual testing scripts/files to use for your tests - [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#content)
+## Content Sources
 
-### `git`
-`spec.content.git` allows checking out from the Git repository:
+[Content Schema Reference](/articles/crds/testworkflows.testkube.io-v1#content)
+
+The **content** section specifies the test scripts or files to run.
+
+### Git Repositories
+
+You can check out tests from a Git repository:
 
 ```yaml
 spec:
   content:
     git:
-      uri: https://github.com/kubeshop/testkube # repository URI
-      revision: main # branch/revision
+      uri: https://github.com/kubeshop/testkube
+      revision: main
       paths:
-      - test/cypress/executor-tests/cypress-13 # path to check out
+        - test/cypress/executor-tests/cypress-13
 ```
 
-`path` can be a directory, or a single file
-### `files`
-`spec.content.files` allow creating specific files from strings.
+### Files
+
+Alternatively, you can define test files directly:
 
 ```yaml
 spec:
   content:
     files:
-    - path: k6.js # created in working dir
-      content: |
-        import http from 'k6/http';
-        export const options = {
-            thresholds: {
-            http_req_failed: ['rate<0.01'],
-            }
-        };
-        export default function () {
+      - path: k6.js # File created in the working directory
+        content: |
+          import http from 'k6/http';
+          export const options = {
+            thresholds: { http_req_failed: ['rate<0.01'] },
+          };
+          export default function () {
             http.get('https://testkube.io/');
-        }
-    - path: /example-file.js # created in root directory
-      content: another file contents
-    steps:
-    - name: Run test
-      shell: k6 run k6.js --iterations 100
-    container:
-      image: grafana/k6:latest
-```
-## `events`
-
-Specifies events that trigger this Workflow - [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#event)
-
-### `cronjob`
-`spec.events.cronjob` allows to run the workflow on specified schedule(s) :
-
-```yaml
-spec:
-  events:
-  - cronjob:
-      cron: "*/20 * * * *"
-      labels:
-        key1: value1
-      annotations:
-        key2: value2
-      config:
-        myParameter: param1
-  - cronjob:
-      cron: "*/5 * * * *"
-      labels:
-        key3: value3
-      annotations:
-        key4: value4
-      config:
-        myParameter: param2
+          }
+      - path: /example-file.js # File created in the root directory
+        content: Another file content
 ```
 
-:::info
-Testkube's schedule data format is the same that is used to define Kubernetes Cron jobs, 
-visit [Wikipedia Cron format](https://en.wikipedia.org/wiki/Cron) for details.
-:::
+## Container Configuration
 
-## tags
-`spec.execution.tags` allows to add tags for Test workflow executions:
+[Container Schema Reference](/articles/crds/testworkflows.testkube.io-v1#containerconfig)
 
-```yaml
-spec:
-  execution:
-    tags:
-      name1: value1
-      name2: value2
-```
+The **container** section sets up the environment where steps run. These settings can be applied globally or overridden on a per-step basis.
 
-See an example of how to use tags [here](/articles/filtering-test-workflow-executions-using-tags).
+### Container Image
 
-## `steps`
+The `container.image` field specifies the Docker image that will execute your step. **Important:**
 
-Steps are the main building blocks in Test Workflows. They describe actions that should be executed in 
-specific order - [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#step)
+- The image **must** be stored in a Docker registry (public or private).
+- Local images are not supported unless they are hosted in a registry.
+- For guidance on setting up a private registry, see [this Docker guide](https://www.docker.com/blog/how-to-use-your-own-registry-2/).
 
-```yaml
-spec:
-  ...
-  steps:
-  - name: Example step 1
-    ...
-  - name: Example step 2
-    ...
-  - name: Example step 3
-    ...
-```
-### sub-steps
-Steps can also be nested:
-```yaml
-spec:
-  steps:
-  - name: Step 1
-    ...
-    steps:
-    - name: Sub-step 1-1
-      ...
-    - name: Sub-step 1-2
-      ...
-  - name: Step 2
-    ...
-    steps:
-    - name: Sub-step 2-1
-      ...
-    - name: Sub-step 2-2
-      ...
-```
-
-### `run`
-
-Specifies what to run within a step - [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#steprun)
-
-#### `command`
-`command` allows to set the command, or override the default one:
-
-```yaml
-spec:
-  steps:
-  - name: Run tests
-    run:
-      image: gradle:8.5.0-jdk11
-      command:
-      - gradle
-```
-
-#### `args`
-Arguments can be passed to container using `args`:
-```yaml
-  steps:
-  - name: Run tests
-    run:
-      image: cypress/included:13.6.4
-      args:
-      - --env
-      - NON_CYPRESS_ENV=NON_CYPRESS_ENV_value
-      - --config
-      - video=true
-```
-#### command + args
-Command can be combined with args:
-```yaml
-  - name: Run tests
-    run:
-      image: mcr.microsoft.com/playwright:v1.32.3-focal
-      command:
-      - "npx"
-      args:
-      - "--yes"
-      - "playwright@1.32.3"
-      - "test"
-```
-
-Args can be also set directly with command:
-```yaml
-  - name: Run tests
-    run:
-      image: mcr.microsoft.com/playwright:v1.32.3-focal
-      command:
-      - "npx"
-      - "--yes"
-      - "playwright@1.32.3"
-      - "test"
-```
-
-#### ENVs
-ENVs can be defined with `env` keyword on the step level:
-```yaml
-steps:
-  - name: Run tests
-    run:
-      ...
-      env:
-      - name: EXAMPLE_ENV_NAME
-        value: "example-env-value"
-```
-
-or "globally":
-```yaml
-spec:
-  container:
-    ...
-    env:
-    - name: EXAMPLE_ENV_NAME
-      value: "example-env-value"
-```
-
-#### `shell`
-
-`shell` provides an ability to run a command, or multiple commands inside the shell.
-
-```yaml
-steps:
-  - shell: command1 && command2
-```
-
-The same can be achieved with command and args, but `shell` may be more convenient.
-```yaml
-steps:
-  - shell: mkdir ~/some-directory
-```
-is an equivalent of:
-
-```yaml
-steps:
-  - run:
-      comand: [/bin/sh, -c]
-      args:
-        - mkdir
-        - ~/some-directory
-```
-
-## `container`
-
-`container` defines container-related settings - [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#containerconfig)
-
-### `image`
-
-`container.image` defines an image which will be used for executing steps.
+#### Example
 
 ```yaml
 steps:
   - name: Run tests
     shell: jmeter -n -t jmeter-executor-smoke.jmx -j /data/artifacts/jmeter.log -o /data/artifacts/report -l /data/artifacts/jtl-report.jtl -e
     container:
-      image: anasoid/jmeter:5.6-plugins-21-jre
+      image: alpine/jmeter:5.6
 ```
 
-Please remember that the image should be stored in a Docker registry, which can be public or private. In the case of local images, 
-you can use this [Docker one] (https://www.docker.com/blog/how-to-use-your-own-registry-2/) or something similar.
-Currently, we receive the image metadata only from the Docker registry, not the container storage or docker-daemon.
+**Note:** Our system retrieves image metadata exclusively from the Docker registry. It does not access metadata from local container storage or the Docker daemon.
 
-### `resources`
-Resources can be configured for a specific container - [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#resources).
+### Resources
 
-#### resource requests
+[Resources Schema Reference](/articles/crds/testworkflows.testkube.io-v1#resources).
+
+Define resource requests and limits:
+
 ```yaml
 spec:
-  ...
   container:
     resources:
       requests:
-        cpu: 2
-        memory: 2Gi
-```
-#### resource limits
-```yaml
-spec:
-  ...
-  container:
-    resources:
+        cpu: 256m
+        memory: 128Mi
       limits:
-        cpu: 4
-        memory: 4Gi
+        cpu: 512m
+        memory: 256Mi
 ```
-## `workingDir`
 
-By default, everything will be executed in the context of `workingDir` from specific container.
+### Working Directory
 
-`workingDir` can be set globally:
+Set the default working directory:
+
 ```yaml
 spec:
-  ...
   container:
     workingDir: /data/repo/test/cypress/executor-tests/cypress-13
 ```
 
-Or, for a specific step:
+## Environment Variables
+
+Environment variables can be defined at different levels to tailor your test execution.
+
+### Global Environment Variables
+
+Set environment variables globally for all steps:
+
+```yaml
+spec:
+  container:
+    env:
+      - name: GLOBAL_ENV
+        value: global_value
+```
+
+### Step-Level Environment Variables
+
+Override or add environment variables for a specific step:
+
 ```yaml
 steps:
-- name: Saving artifacts
-  workingDir: /data/repo/test/cypress/executor-tests/cypress-13/cypress/videos
+  - name: Run tests
+    run:
+      image: cypress/included:13.6.4
+      env:
+        - name: CYPRESS_CUSTOM_ENV
+          value: custom_value
 ```
 
-Or on the Step level:
+## Steps
 
-## `artifacts`
+[Steps Schema Reference](/articles/crds/testworkflows.testkube.io-v1#step)
 
-Workflows can collect any artifact produced by your executions - [Read More](test-workflows-artifacts.md)
+Steps are the individual actions that make up a Test Workflow.  
+They run in order and can be nested.
 
-Files directly in `workingDir`
+### Defining Steps
+
+A basic step that runs a command:
 
 ```yaml
-- name: Saving artifacts
-  workingDir: /data/artifacts
-  artifacts:
-    paths:
-    - '*'
+steps:
+  - name: Run test
+    run:
+      image: postman/newman:6-alpine
+      args:
+        - run
+        - collection.json
 ```
 
-Files in directories inside `workingDir`
+For nested steps:
+
 ```yaml
-- name: Saving artifacts
-  workingDir: /data/artifacts
-  artifacts:
-    paths:
-    - '**/*'
+steps:
+  - name: Parent Step
+    run:
+      image: some-image
+    steps:
+      - name: Sub-step 1
+        shell: echo "Running sub-step 1"
+      - name: Sub-step 2
+        shell: echo "Running sub-step 2"
 ```
 
-Artifacts can also be configured for project directories (inside `/data/repo`):
+### Running Commands and Shell Scripts
 
-```yaml
-- name: Saving artifacts
-  workingDir: /data/repo/test/cypress/executor-tests/cypress-13/cypress/videos
-  artifacts:
-    paths:
-    - '**/*'
-```
+[Run Schema Reference](https://github.com/kubeshop/testkube-docs/blob/main/articles/crds/testworkflows.testkube.io-v1#steprun)
 
-### condition: always
-It is common to save artifacts in case of failure. By default the `artifacts` have `condition: always` set if added directly on a step. They will be always scraped - even if the step fails:
+There are multiple ways to execute commands:
 
-```yaml
-- name: Example step with artifacts
-  shell: example-command
-  artifacts:
-    paths:
-    - '**/*'
-```
+- **Using `command` and `args`:**
 
-If artifacts are saved in a separate step, or in a sub-step, they won't be scraped by default in the event of an earlier failure. In that case, setting `condition: always` specifically would be needed.
-
-Separate step:
-
-```yaml
-- name: Step 1
-  shell: example-command
-- name: Step 2 - Saving artifacts
-  condition: always
-  artifacts:
-    paths:
-    - '**/*'
-```
-
-Sub-step:
-```yaml
-- name: Step 1
-  shell: example-command
+  ```yaml
   steps:
-  - name: Sub-step - Saving artifacts
-    condition: always
+    - name: Run tests
+      run:
+        image: mcr.microsoft.com/playwright:v1.32.3-focal
+        command:
+          - "npx"
+        args:
+          - "--yes"
+          - "playwright@1.32.3"
+          - "test"
+  ```
+
+- **Using `shell`:**  
+  For convenience, you can run shell commands directly:
+
+  ```yaml
+  steps:
+    - shell: mkdir ~/some-directory && echo "Directory created"
+  ```
+
+## Artifacts
+
+Workflows can capture artifacts (such as logs or reports) generated during execution.
+[Learn more about artifacts.](https://github.com/kubeshop/testkube-docs/blob/main/docs/articles/test-workflows-artifacts.md)
+
+### Saving Artifacts from the Working Directory
+
+Example for saving files from a specific directory:
+
+```yaml
+steps:
+  - name: Save artifacts
+    workingDir: /data/artifacts
     artifacts:
       paths:
-      - '**/*'
+        - "*"
 ```
 
+### Recursive Artifact Saving
 
-### Example - Cypress Project
-Example Cypress project with artifacts (video recordings):
+To save all files in nested directories:
+
+```yaml
+steps:
+  - name: Save artifacts
+    workingDir: /data/artifacts
+    artifacts:
+      paths:
+        - "**/*"
+```
+
+> **Tip:** When artifacts are added directly to a step, they are scraped even if that step fails (the default is `condition: always`). When using separate or nested steps, you may need to set `condition: always` explicitly.
+
+#### Cypress Example with Artifacts
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -474,7 +311,7 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-      - test/cypress/executor-tests/cypress-13
+        - test/cypress/executor-tests/cypress-13
   container:
     resources:
       requests:
@@ -482,46 +319,97 @@ spec:
         memory: 2Gi
     workingDir: /data/repo/test/cypress/executor-tests/cypress-13
   steps:
-  - name: Run tests
-    run:
-      image: cypress/included:13.6.4
-      args:
-      - --env
-      - NON_CYPRESS_ENV=NON_CYPRESS_ENV_value
-      - --config
-      - video=true
-      env:
-      - name: CYPRESS_CUSTOM_ENV
-        value: CYPRESS_CUSTOM_ENV_value
-    steps:
-    - name: Saving artifacts
-      workingDir: /data/repo/test/cypress/executor-tests/cypress-13/cypress/videos
-      artifacts:
-        paths:
-        - '**/*'
+    - name: Run tests
+      run:
+        image: cypress/included:13.6.4
+        args:
+          - --env
+          - NON_CYPRESS_ENV=NON_CYPRESS_ENV_value
+          - --config
+          - video=true
+        env:
+          - name: CYPRESS_CUSTOM_ENV
+            value: CYPRESS_CUSTOM_ENV_value
+      steps:
+        - name: Save artifacts
+          workingDir: /data/repo/test/cypress/executor-tests/cypress-13/cypress/videos
+          artifacts:
+            paths:
+              - "**/*"
 ```
-## `template` - Executing from a Test Workflow Template
-`template` allows executing from - [Test Workflow Template](./test-workflow-templates.md):
+
+## Events and Scheduling
+
+[Events Schema Reference](/articles/crds/testworkflows.testkube.io-v1#event)
+
+Test Workflows can be triggered automatically using events such as cronjobs.
+
+### CronJob Trigger
+
+Define one or more cron schedules for your workflow:
+
 ```yaml
-  steps:
+spec:
+  events:
+    - cronjob:
+        cron: "*/20 * * * *"
+        labels:
+          key1: value1
+        annotations:
+          key2: value2
+        config:
+          myParameter: param1
+    - cronjob:
+        cron: "*/5 * * * *"
+        labels:
+          key3: value3
+        annotations:
+          key4: value4
+        config:
+          myParameter: param2
+```
+
+> **Info:** Testkube uses the standard Kubernetes Cron format. See [Cron Format on Wikipedia](https://en.wikipedia.org/wiki/Cron) for details.
+
+## Tags
+
+Tags help in filtering and organizing workflow executions. Add tags as follows:
+
+```yaml
+spec:
+  execution:
+    tags:
+      name1: value1
+      name2: value2
+```
+
+For more details, see our guide on [Filtering Test Workflow Executions Using Tags](/articles/filtering-test-workflow-executions-using-tags).
+
+## Templates
+
+You can run a Test Workflow from a predefined [Test Workflow Template](./test-workflow-templates.md):
+
+```yaml
+steps:
   - name: Run from template
-    ...
     template:
       name: example-template/cypress
       config:
         version: 13.5.0
-        params: "--env NON_CYPRESS_ENV=NON_CYPRESS_ENV_value --config '{\"screenshotsFolder\":\"/data/artifacts/screenshots\",\"videosFolder\":\"/data/artifacts/videos\"}'"
+        params: '--env NON_CYPRESS_ENV=NON_CYPRESS_ENV_value --config ''{"screenshotsFolder":"/data/artifacts/screenshots","videosFolder":"/data/artifacts/videos"}'''
 ```
 
-## `status` - Getting status of latest test workflow execution
+## Workflow Execution Status
 
-Use the Testkube CLI [status command](/cli/testkube_status) to get the status of a named Workflow:
+Check the status of your Test Workflow execution using the Testkube CLI. For example:
 
 ```sh
 kubectl describe testworkflow k6-workflow -n testkube
 ```
 
-```yaml
+A sample output might look like this:
+
+```
 Name:         k6-workflow
 Namespace:    testkube
 Labels:       core-tests=workflows

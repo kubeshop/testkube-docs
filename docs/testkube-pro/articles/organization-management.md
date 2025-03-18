@@ -6,8 +6,6 @@ To manage your organization settings click "Organization Management" from organi
 
 (You can also create new organizations from this menu).
 
-The following tabs are available for managing an Organization.
-
 ## Environments
 
 In the environments section, you can see the list of your existing environments.
@@ -28,47 +26,9 @@ Read more about [Environment Management](../articles/environment-management.md).
 
 ## Members
 
-Invite and manage your organization members here. 
+The members section allows you to invite and manage your organizations' members and their roles - [Read More](member-management) 
 
-:::info
-Please read [Resource Access Management](/articles/resource-access-management) to get an overview of how Testkube
-allows you to manage and apply Resource Access controls for Organization Members.
-:::
-
-### Inviting Members
-
-Invite new members by specifying 
-- Emails - a comma-separated list of emails to invite.
-- Role - there are 4 roles for organization members:
-  - `Owner` - Has access to all environments and organization settings, also can access billing details.
-  - `Admin` - Has access to all environments and organization settings.
-  - `Member` - Has limited access to environments, access is defined by the roles assigned to given member. Member by default doesn't have any access, you need to [explicitly set it in the given environment](environment-management.md).
-  - `Biller` - Has access to billing details only.
-- Teams - which Teams the invited members should belong to.
-- Environments - which Environments the invited members should be added to, with their corresponding Environment Role
-
-Once all specified, select the Invite button in the bottom right.
-
-![Organization Member Invite](../../img/organization-members.png)
-
-:::tip
-For Testkube On-Prem deployments you can configure default organizations, environments and roles for users - see 
-[Bootstrap User Mapping](/articles/install/advanced-install#bootstrap-user-mapping).
-:::
-
-### Manage existing Members
-
-Manage existing members in the list of members at the bottom of the tab. Use the menu to the right for 
-each member to delete them or change their role.
-
-![Organization Members](../../img/org-members-list.png)
-
-### Manage pending Invites
-
-Manage pending member invites in the lists at the bottom of the tab. Use the menu to the right for
-each invite to update, revoke or resent the invite.
-
-![Organization Invites](../../img/organization-invites.png)
+![Organization Member Management](images/org-members.png)
 
 ## Teams
 
@@ -95,9 +55,10 @@ for more details on how to create and use API Tokens.
 
 This tab allows you to configure Organization-level Product Features:
 
-- **Resource Groups & Advanced RBAC** - not toggleable, this just indicates if [Resource Groups](/articles/resource-groups) functionality is available (included with SSO).
-- **AI Troubleshooting** - available for legacy Tests only - [Read More](/testkube-pro/articles/AI-test-insights).
-- **Webhooks URL Masking** - [Read More](/articles/webhooks#url-masking)
+- **Resource Groups & Advanced RBAC** - Not toggleable, this just indicates if [Resource Groups](/articles/resource-groups) functionality is available (included with SSO).
+- **Global Insights** - Toggle Global Insights of your Workflow executions - [Read More](/articles/test-insights).
+- **AI Copilot** - Toggle the AI Copilot feature for your organization [Read More](/articles/copilot-overview).
+- **Webhooks URL Masking** - Toggle Webhooks URL masking - [Read More](/articles/webhooks#url-masking).
 
 ![Organization Product Features](../../img/organization-product-features.png)
 

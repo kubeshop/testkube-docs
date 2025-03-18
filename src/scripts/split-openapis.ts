@@ -8,6 +8,7 @@ interface OpenAPI {
   info: object;
   tags?: object;
   paths: { [key: string]: object };
+  servers?: object[];
   components?: object;
 }
 
@@ -26,7 +27,7 @@ async function fetchOpenAPI(url: string): Promise<OpenAPI> {
 
 function prepareOutputFolder(outputDir: string) {
   // make sure folder exists
-  fs.mkdirSync(outputDir, { recursive: true });
+  fs.mkdirSync(outputDir, {recursive: true});
 
   // delete old files that might not be needed anymore
   const files = fs.readdirSync(outputDir);
@@ -65,7 +66,7 @@ async function splitOpenAPIByPaths(
     const componentsFile = path.join(outputDir, "components.yaml");
     fs.writeFileSync(
       componentsFile,
-      yaml.dump({ components: components }, { sortKeys: false })
+      yaml.dump({components: components}, {sortKeys: false})
     );
   }
 
@@ -74,7 +75,12 @@ async function splitOpenAPIByPaths(
     // use provided function or root path segment to determine menu entry
     const mapping = pathFilter
       ? pathFilter(pathKey)
-      : { basePath: "/" + pathKey.substring(1).split("/")[0] };
+      : {basePath: "/" + pathKey.substring(1).split("/")[0]};
+
+    // set to default basePath if no basePath was provided by mapping function
+    if( pathFilter && mapping && !mapping.basePath ){
+      mapping.basePath = "/" + pathKey.substring(1).split("/")[0];
+    }
 
     if (mapping?.basePath && mapping.basePath.length > 1) {
       const submenu = mapping.submenu || "default";
@@ -106,6 +112,13 @@ async function splitOpenAPIByPaths(
     const newOpenAPI: OpenAPI = {
       openapi: openapi.openapi || "3.0.0",
       info: openapi.info,
+      servers: [{
+        url: "https://api.testkube.io",
+        description: "Testkube Cloud API Endpoint"
+      }, {
+        url: "https://<your-testkube-api-host>",
+        description: "Testkube On-Prem API Endpoint"
+      }],
       paths: {},
     };
 
@@ -119,7 +132,7 @@ async function splitOpenAPIByPaths(
     });
 
     // generate YAML and replace component references to point to external file
-    let openApiYaml = yaml.dump(newOpenAPI, { sortKeys: false });
+    let openApiYaml = yaml.dump(newOpenAPI, {sortKeys: false});
     openApiYaml = openApiYaml.replace(
       /#\/components/g,
       "./components.yaml#/components"
@@ -130,30 +143,31 @@ async function splitOpenAPIByPaths(
 
     // create mdx placeholder
     let mdxFilePath = path.join(docsDir, fileName + ".mdx");
+
+    let pageTitle = title + " " +
+      ((rootPath.split(":")[0] === "default") ? "Operations" : rootPath.split(":")[0]) + ": "
+      + rootPath.split(":")[1]
+
     fs.writeFileSync(
       mdxFilePath,
       "---\n" +
-        "title: Testkube " +
-        title +
-        " " +
-        rootPath.split(":")[1] +
-        " operations\n" +
-        "---\n" +
-        "<head>\n" +
-        '  <meta name="docsearch:indexPrefix" content="reference-doc" />\n' +
-        "</head>\n" +
-        "\n" +
-        "import ApiDocMdx from '@theme/ApiDocMdx';\n" +
-        "\n" +
-        '<ApiDocMdx id="' +
-        fileName +
-        '" />\n'
+      "title: '" + pageTitle + "'\n" +
+      "---\n" +
+      "<head>\n" +
+      '  <meta name="docsearch:indexPrefix" content="reference-doc" />\n' +
+      "</head>\n" +
+      "\n" +
+      "import ApiDocMdx from '@theme/ApiDocMdx';\n" +
+      "\n" +
+      '<ApiDocMdx id="' +
+      fileName +
+      '" />\n'
     );
 
     console.log("written " + mdxFilePath);
 
     // add generated file to redoc config and sidebar
-    redocSpecs.push({ spec: outputFile, url: openApiUrl, id: fileName });
+    redocSpecs.push({spec: outputFile, url: openApiUrl, id: fileName});
   });
 
   // build sidebars
@@ -208,7 +222,10 @@ splitOpenAPIByPaths(
   "https://raw.githubusercontent.com/kubeshop/testkube/main/api/v1/testkube.yaml",
   "src/openapi/agent",
   "docs/openapi/agent",
-  "Agent"
+  "Standalone Agent",
+   (opPath) => {
+    return opPath.split("/").indexOf("uploads") >= 0 ? null : {};
+   }
 );
 
 // Control-plane OpenAPI definition goes into cloud folder
@@ -235,6 +252,7 @@ splitOpenAPIByPaths(
     if (
       lastSegment === "suggestions" ||
       lastSegment === "environments-versions" ||
+      lastSegment === "uploads" ||
       lastSegment.includes("slug")
     )
       return null;
@@ -248,7 +266,7 @@ splitOpenAPIByPaths(
       const p = opPath.substring(
         "/organizations/{id}/environments/{environmentID}/agent/".length
       );
-      return { basePath: "../" + p.split("/")[0], submenu: "Agent Operations" };
+      return {basePath: "../" + p.split("/")[0], submenu: "Agent Operations"};
     }
 
     // environment-specific operations
@@ -282,12 +300,12 @@ splitOpenAPIByPaths(
 
       // org-level ops
       if (!segments[2].startsWith("{")) {
-        return { basePath: "/" + segments[2], submenu: "Core Operations" };
+        return {basePath: "/" + segments[2], submenu: "Core Operations"};
       }
 
       // org-mgmt ops go to core category
       if (segments[2].startsWith("{") && segments.length === 3) {
-        return { basePath: "/" + segments[1], submenu: "Core Operations" };
+        return {basePath: "/" + segments[1], submenu: "Core Operations"};
       }
 
       // org-level ops
@@ -306,9 +324,9 @@ splitOpenAPIByPaths(
 
     return segments.length > 1
       ? {
-          basePath: segments.slice(0, 2).join("/"),
-          submenu: "Core Operations",
-        }
-      : { basePath: opPath, submenu: "Core Operations" };
+        basePath: segments.slice(0, 2).join("/"),
+        submenu: "Core Operations",
+      }
+      : {basePath: opPath, submenu: "Core Operations"};
   }
 );

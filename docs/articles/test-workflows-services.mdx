@@ -9,10 +9,15 @@ import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx"
 
 Often if your use-case is more complex, you may need additional services for the Tests you are running. Common use cases are:
 * Database, i.e. [**MongoDB**](https://hub.docker.com/_/mongo) or [**PostgreSQL**](https://hub.docker.com/r/bitnami/postgresql)
-* Workers, i.e. [**remote JMeter workers**](https://hub.docker.com/r/justb4/jmeter) or [**Selenium Grid's remote browsers**](https://hub.docker.com/r/selenium/standalone-firefox)
+* Workers, i.e. [**remote JMeter workers**](https://hub.docker.com/r/alpine/jmeter) or [**Selenium Grid's remote browsers**](https://hub.docker.com/r/selenium/standalone-firefox)
 * Service under test, i.e. your API to run E2E tests against it
 
 Testkube allows you to run such services for the Test Workflow, communicate with them and debug smoothly.
+
+:::tip
+If you are using TestContainers to manage dependencies for your tests, check out [this example](examples/test-containers-basic) for how to use TestContainers from your
+TestWorkflows.
+:::
 
 ## How it works
 
@@ -278,7 +283,7 @@ spec:
       - name: distribute/evenly
       count: 5
       timeout: 30s
-      image: anasoid/jmeter:5.6-plugins-21-jre
+      image: alpine/jmeter:5.6
       command:
       - jmeter-server
       - -Dserver.rmi.localport=60000
@@ -296,7 +301,7 @@ spec:
   steps:
   - name: Run tests
     run:
-      image: anasoid/jmeter:5.6-plugins-21-jre
+      image: alpine/jmeter:5.6
       shell: |
         jmeter -n \
           -X -Jserver.rmi.ssl.disable=true -Jclient.rmi.localport=7000 \

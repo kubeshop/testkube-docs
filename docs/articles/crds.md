@@ -6,7 +6,7 @@ and stored in the cluster where your Agents are installed.
 
 The following Resource Group/Versions are available (click for documentation)
 
-- [testworkflows.test.io/v1](crds/testworkflows.testkube.io-v1)
+- [testworkflows.test.io/v1](crds/testworkflows.testkube.io-v1.mdx)
 - [tests.testkube.io/v1](crds/tests.testkube.io-v1.mdx) (Partially deprecated)
 - [tests.testkube.io/v2](crds/tests.testkube.io-v2.mdx) (Deprecated)
 - [tests.testkube.io/v3](crds/tests.testkube.io-v3.mdx) (Deprecated)

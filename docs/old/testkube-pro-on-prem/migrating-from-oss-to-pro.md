@@ -8,7 +8,7 @@ Please note that your test executions will not be migrated to Testkube Pro On-Pr
 
 ## License
 
-To start with Testkube Pro On-Prem you need to request a license. Depending on your environment requirements it can be either an offline or an online license. Read more about these types of licenses [here](https://docs.testkube.io/testkube-pro-on-prem/articles/usage-guide#license). If you require an online license, it can be acquired [here](https://testkube.io/download). If you need an offline license, please contact us using this [form](https://testkube.io/contact).
+To start with Testkube Pro On-Prem you need to request a license. Depending on your environment requirements it can be either an offline or an online license. Read more about these types of licenses [here](https://docs.testkube.io/testkube-pro-on-prem/articles/usage-guide#license). If you require an online license, it can be acquired [here](https://testkube.io/get-started). If you need an offline license, please contact us using this [form](https://testkube.io/contact).
 There are multiple ways to integrate Testkube Core OSS into your Testkube Pro On-Prem setup. We highly recommend creating a k8s secret, as it provides a more secure way to store sensitive data.
 
 At this point there are two options to deploy Testkube Pro On-Prem:
@@ -76,11 +76,11 @@ dex:
 
 ### Deployment
 
-Now, let’s deploy Testkube Pro On-Prem. Please refer to the installation commands [here](https://docs.testkube.io/testkube-pro-on-prem/articles/usage-guide/#installation). Do not forget to pass your customized `values.yaml` file.
+Now, let’s deploy Testkube Pro On-Prem. Please refer to the installation commands [here](https://docs.testkube.io/testkube-pro-on-prem/articles/usage-guide#installation). Do not forget to pass your customized `values.yaml` file.
 
 It may take a few minutes for the certificates to be issued and for the pods to reach `Ready` status. Once everything is up and running, you may go to dashboard.your-domain.it.com and log in.
 
-The only thing that is remaining is to connect Testkube Core OSS as an Agent. [Create a new environment](https://docs.testkube.io/testkube-pro/articles/environment-management/#creating-a-new-environment) and duplicate the installation command. Execute this command in the cluster where Testkube Core OSS is deployed to seamlessly upgrade the existing installation to Agent mode. Pay attention to the namespace name, ensuring it aligns with the namespace of Testkube Core OSS.
+The only thing that is remaining is to connect Testkube Core OSS as an Agent. [Create a new environment](https://docs.testkube.io/testkube-pro/articles/environment-management#creating-a-new-environment) and duplicate the installation command. Execute this command in the cluster where Testkube Core OSS is deployed to seamlessly upgrade the existing installation to Agent mode. Pay attention to the namespace name, ensuring it aligns with the namespace of Testkube Core OSS.
 
 After running the command, navigate to the Dashboard and you will see all your tests available.
 
