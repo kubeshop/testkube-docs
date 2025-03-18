@@ -11,6 +11,11 @@ before releasing new functionality.
 These environments can be backed by either a (temporary) cluster or namespace, let's have a look at how Testkube
 currently supports these two cases.
 
+:::tip
+Testkube has now launched [Multi-Agent Environments](/articles/install/multi-agent) that make the ephemeral 
+environment use-case much easier to implement, please refer to that document for more information.
+:::
+
 ## 1. Ephemeral Clusters
  
 Ephemeral clusters would potentially require you to define a new Testkube Environment, install the Agent, 

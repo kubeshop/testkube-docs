@@ -175,7 +175,11 @@ const sidebars = {
           label: "Cloud Control Plane",
           id: "articles/install/cloud-overview",
         },
-        "articles/install/multi-agent",
+        {
+          type: "doc",
+          label: "Multi-Agent Environments",
+          id: "articles/install/multi-agent",
+        },
         {
           type: "doc",
           label: "Ephemeral Environments",

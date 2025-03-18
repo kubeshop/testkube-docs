@@ -4,7 +4,7 @@ With the introduction of [Multi-Agent support](/articles/install/multi-agent), T
 two types of agents:
 
 - Lightweight **Runner Agents**, of which there can be as many as needed. 
-- A single **Environment Agent**, of which there needs to exactly one in every Environment.
+- A single **Environment Agent**, of which there needs to be exactly one in every Environment.
 
 :::note
 The Environment Agent will over time be replaced with separate lightweight agents for different functionality.
