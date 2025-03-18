@@ -118,7 +118,6 @@ when creating a runner for an ephemeral use-case, you might label it with some i
 instance which you can then use to target your Workflow Executions to that runner.
 
 ```sh
-# update agents labels
 $ testkube update runner my-runner -l myReadiness=true # add label
 $ testkube update runner my-runner -L myReadiness      # delete label
 ```
