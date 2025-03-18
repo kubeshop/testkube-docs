@@ -145,3 +145,14 @@ needed.
 The Standalone Agent is by default labeled with `runnertype: superagent` in the list of agents 
 (as you can see int the screenshot and cli output above).
 
+## Licensing and implications
+
+Runner Agents are licensed by concurrently active Runners, allowing you to add as many Runners as you want but only 
+run tests concurrently on as many Runners as you have licensed. Tests that cannot be executed because of unavailable 
+Runners due to licensing constraints will be queued and executed as soon as a concurrent runner seat "frees up" to execute 
+the queued Test.
+
+Furthermore: 
+- The concurrent runner limit is counted and enforced at the organization level, i.e., across all your environments.
+- By default, you are given the same number of concurrent active runner seats as you have environments, please get in touch
+  if you need more to evaluate this functionality.
