@@ -2,7 +2,7 @@
 
 Testube 2.X introduces the concept of Multi-Agent Environments, which adds two major new capabilities:
 
-1. The ability to **run the same Workflow in multiple locations**, (possibly at the same time!).
+1. The ability to **run the same Workflow in multiple namespaces/clusters**, (possibly at the same time!).
 2. The ability to **add ephemeral Runners** to an Environment and run tests with them 
 
 Both of these scenarios where previously hard to achieve efficiently, and required elaborate scripting as 
@@ -17,10 +17,6 @@ To provide this capability, Testkube now supports two types of Agents for an Env
 
 - Lightweight **Runner Agents** for running your tests wherever needed.
 - The existing **Standalone Agent** which is required as before.
-
-:::note
-Runner Agents do **not** support execution of legacy Tests and TestSuites.
-:::
 
 ##  Runner Agents
 
@@ -47,6 +43,10 @@ Once Runner Agents have been added to an Environment, they can be used to execut
 
 When a Workflow has been executed on multiple runners, the Dashboard provides an expandable section for the corresponding 
 executions, see [Multi-agent Executions](/articles/testkube-dashboard-workflow-details#multi-agent-executions).
+
+:::warning
+Runner Agents do **not** support execution of legacy Tests and TestSuites.
+:::
 
 ## Runner Agent CLI commands
 
