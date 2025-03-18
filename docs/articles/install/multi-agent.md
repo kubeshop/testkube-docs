@@ -1,30 +1,50 @@
 # Multi-Agent Environments
 
-Testube 2.X introduces multi-agent support, which enables an Environment to contain two types of agents:
+Testube 2.X introduces the concept of Multi-Agent Environments, which adds two major new capabilities:
 
-- A single **Environment Agent**, of which there needs to be exactly one in every Environment.
-- Lightweight **Runner Agents**, of which there can be as many as needed.
-
-The introduction of Multi-Agent Environments in Testkube adds two major new capabilities:
-
-1. The possibility to **run the same Workflow in multiple locations**, (possibly at the same time!).
+1. The ability to **run the same Workflow in multiple locations**, (possibly at the same time!).
    - Previously, this would have required you to create separate Environments with dedicated Agents and manually 
      copy/sync/schedule your Workflows and their executions across these, 
      as described in [Remote Workflow Execution](/articles/remote-workflow-execution).
-2. The possibility to **add ephemeral Runners** to an Environment and run tests with them
+2. The ability to **add ephemeral Runners** to an Environment and run tests with them
    - Previously you would have had to manually create/manage Testkube Environments for your ephemeral Agents, or use
      a non-ephemeral Agent to run tests against ephemeral applications, with possible security implications - see
      [Ephemeral Environments](/articles/ephemeral-environments).
 
-## Runner Agents
+The Multi-Agent functionality is available to any existing and new Testkube Environment, provided it has been
+upgraded to the latest version of the Testkube Control Plane and Testkube Agent.
 
-Runner Agents are lightweight agents that can be installed in any namespace/cluster where you need to 
-run your Testkube Workflows. Upon installation, Agents are identified by name, id and an optional number of labels that
-can be used to select them when running your Workflows. Runner Agents are added in the 
-[Agent Management](/testkube-pro/articles/agent-management) section of your Environment Settings and managed via the 
-CLI. 
+## Two Types of Agents
 
-![Multi-Agent Management](images/multi-agent-management.png) 
+To provide this capability, Testkube now supports two types of Agents for an Environment:
+
+- Lightweight **Runner Agents** for running your tests wherever needed.
+- The existing **Standalone Agent** which is required as before.
+
+The Multi-Agent functionality is available to any existing and new Testkube Environment, provided it has been
+upgraded to the latest version of the Testkube Control Plane and Testkube Agent
+
+##  Runner Agents
+
+Testkube now allows you to add an arbitrary number of **Runner Agents** to an environment from 
+the [Agent Management](/testkube-pro/articles/agent-management) section of your Environment Settings.
+
+Runner Agents are lightweight agents that can be installed in any namespace/cluster where you need to
+run your Testkube Workflows. Each Runner Agent has a name, an id, and an optional list of labels which
+can be used to select Agents for execution (see below).
+
+Runner Agents are managed via the testkube CLI, as described below.
+
+![Multi-Agent Management](images/multi-agent-management.png)
+
+## Running Workflows on Runner Agents
+
+Once Runner Agents have been added to an Environment, they can be used to execute your Workflows:
+
+- Via the Dashboard as described at [Running a Workflow](/articles/testkube-dashboard-workflow-details#running-a-workflow).
+- Via the CLI by using the `-target` argument on `testkube run testworkflow` (see below), either
+    - specifying the name(s) of the runner(s) to run on
+    - specifying label(s) applied to any number of Agents
 
 :::note
 Runner Agents do not support execution of legacy Tests and TestSuites.
@@ -32,7 +52,7 @@ Runner Agents do not support execution of legacy Tests and TestSuites.
 
 ## Runner Agent CLI commands
 
-The Testkube CLI provides a number of commands to work with Runner Agents:
+The Testkube CLI provides a number of commands to work with Runner Agents.
 
 ### List Agents
 
@@ -130,11 +150,12 @@ Once additional Runner agents have been added to an Environment you can run your
 The Dashboard provides an expandable section for executions that run across multiple runners,
 see [Multi-agent Executions](/articles/testkube-dashboard-workflow-details#multi-agent-executions).
 
-## The Environment Agent
+## The Standalone Agent
 
-The original Testkube Agent is in the context of Multi-Agent Environments called an "Environment Agent" and
-by default labeled with `runnertype: superagent` in the list of agents (as you can see above).
-
-The Environment Agent is still required for your Environment to work as before, as it manages Triggers and Webhooks defined in
+The original Standalone Agent is still required for your Environment to work as before, as it manages Triggers and Webhooks defined in
 your Environment and also makes it possible to distribute Workflows in that Environment to the other Runner Agents when
 needed.
+
+The Standalone Agent is by default labeled with `runnertype: superagent` in the list of agents 
+(as you can see int the screenshot and cli output above).
+

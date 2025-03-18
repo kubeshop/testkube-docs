@@ -4,16 +4,16 @@ With the introduction of [Multi-Agent support](/articles/install/multi-agent), T
 two types of agents:
 
 - Lightweight **Runner Agents**, of which there can be as many as needed. 
-- A single **Environment Agent**, of which there needs to be exactly one in every Environment.
+- A single Standalone Agent (as before), of which there needs to be exactly one in every Environment.
 
 :::note
-The Environment Agent will over time be replaced with separate lightweight agents for different functionality.
+The Standalone Agent will over time be replaced with separate lightweight agents for different functionality.
 :::
 
 The Agent Management panel shows a graph of concurrent Runner Agent usage over time and below that a 
 table of currently registered Agents, with columns for their different attributes.
 
-The Environment Agent is always shown last in this table with the label "superagent":
+The Standalone Agent is always shown last in this table with the label "superagent":
 
 ![Agents Management Panel](images/agents-list.png)
 
