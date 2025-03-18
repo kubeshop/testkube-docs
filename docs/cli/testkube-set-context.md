@@ -20,6 +20,7 @@ testkube set context <value> [flags]
       --api-prefix string           usually don't need to be changed [required for custom cloud mode] (default "api")
       --api-uri-override string     api uri override
       --auth-uri-override string    auth uri override
+      --callback-port int           usually don't need to be changed [required for custom cloud mode] (default 8090)
       --custom-auth                 usually don't need to be changed [required for custom cloud mode]
       --docker-container string     Docker container name for Testkube Docker Agent (default "testkube-agent")
       --env-id string               Testkube Pro environment id [required for centralized mode]
