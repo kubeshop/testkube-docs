@@ -3,13 +3,10 @@
 Testube 2.X introduces the concept of Multi-Agent Environments, which adds two major new capabilities:
 
 1. The ability to **run the same Workflow in multiple locations**, (possibly at the same time!).
-   - Previously, this would have required you to create separate Environments with dedicated Agents and manually 
-     copy/sync/schedule your Workflows and their executions across these, 
-     as described in [Remote Workflow Execution](/articles/remote-workflow-execution).
-2. The ability to **add ephemeral Runners** to an Environment and run tests with them
-   - Previously you would have had to manually create/manage Testkube Environments for your ephemeral Agents, or use
-     a non-ephemeral Agent to run tests against ephemeral applications, with possible security implications - see
-     [Ephemeral Environments](/articles/ephemeral-environments).
+2. The ability to **add ephemeral Runners** to an Environment and run tests with them 
+
+Both of these scenarios where previously hard to achieve efficiently, and required elaborate scripting as 
+described in [Remote Workflow Execution](/articles/remote-workflow-execution) and [Ephemeral Environments](/articles/ephemeral-environments).
 
 The Multi-Agent functionality is available to any existing and new Testkube Environment, provided it has been
 upgraded to the latest version of the Testkube Control Plane and Testkube Agent.
@@ -21,13 +18,15 @@ To provide this capability, Testkube now supports two types of Agents for an Env
 - Lightweight **Runner Agents** for running your tests wherever needed.
 - The existing **Standalone Agent** which is required as before.
 
-The Multi-Agent functionality is available to any existing and new Testkube Environment, provided it has been
-upgraded to the latest version of the Testkube Control Plane and Testkube Agent
+:::note
+Runner Agents do **not** support execution of legacy Tests and TestSuites.
+:::
 
 ##  Runner Agents
 
 Testkube now allows you to add an arbitrary number of **Runner Agents** to an environment from 
-the [Agent Management](/testkube-pro/articles/agent-management) section of your Environment Settings.
+the [Agent Management](/testkube-pro/articles/agent-management) section of your Environment Settings or 
+directly with the CLI (see below).
 
 Runner Agents are lightweight agents that can be installed in any namespace/cluster where you need to
 run your Testkube Workflows. Each Runner Agent has a name, an id, and an optional list of labels which
@@ -42,13 +41,12 @@ Runner Agents are managed via the testkube CLI, as described below.
 Once Runner Agents have been added to an Environment, they can be used to execute your Workflows:
 
 - Via the Dashboard as described at [Running a Workflow](/articles/testkube-dashboard-workflow-details#running-a-workflow).
-- Via the CLI by using the `-target` argument on `testkube run testworkflow` (see below), either
-    - specifying the name(s) of the runner(s) to run on
-    - specifying label(s) applied to any number of Agents
+- Via the CLI by using the `--target` argument for the `testkube run testworkflow` command (see below), either
+    - specifying the name(s) of the runner(s) to run on.
+    - specifying label(s) to select which Runner Agents to run on.
 
-:::note
-Runner Agents do not support execution of legacy Tests and TestSuites.
-:::
+When a Workflow has been executed on multiple runners, the Dashboard provides an expandable section for the corresponding 
+executions, see [Multi-agent Executions](/articles/testkube-dashboard-workflow-details#multi-agent-executions).
 
 ## Runner Agent CLI commands
 
@@ -137,18 +135,6 @@ $ testkube run testworkflow k6-workflow-smoke --target name=staging-runner
 # run on all runners with myReadyness=true label
 $ testkube run testworkflow k6-workflow-smoke --target myReadiness=true
 ```
-
-### Running Workflows across multiple Agents
-
-Once additional Runner agents have been added to an Environment you can run your Workflows on these:
-
-- Via the Dashboard as described at [Running a Workflow](/articles/testkube-dashboard-workflow-details#running-a-workflow).
-- Via the CLI by using the `-target` argument on `testkube run testworkflow`, either 
-  - specifying the name(s) of the runner(s) to run on
-  - specifying label(s) applied to any number of Agents 
-
-The Dashboard provides an expandable section for executions that run across multiple runners,
-see [Multi-agent Executions](/articles/testkube-dashboard-workflow-details#multi-agent-executions).
 
 ## The Standalone Agent
 
