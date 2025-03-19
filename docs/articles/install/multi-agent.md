@@ -26,11 +26,11 @@ directly with the CLI (see below).
 
 Runner Agents are lightweight agents that can be installed in any namespace/cluster where you need to
 run your Testkube Workflows. Each Runner Agent has a name, an id, and an optional list of labels which
-can be used to select Agents for execution (see below).
-
-Runner Agents are managed via the testkube CLI, as described below.
+can be used to select Agents for execution:
 
 ![Multi-Agent Management](images/multi-agent-management.png)
+
+Runner Agents are managed via the Testkube CLI as described below.
 
 ## Running Workflows on Runner Agents
 
@@ -48,9 +48,41 @@ executions, see [Multi-agent Executions](/articles/testkube-dashboard-workflow-d
 Runner Agents do **not** support execution of legacy Tests and TestSuites.
 :::
 
+### Queuing of Workflow Executions
+
+When requesting to run a Workflow on a specific Runner Agent, either by name or label(s), and no
+matching Agent is available, Testkube will queue the execution of the Workflow indefinitely; once a corresponding
+Runner is available (barring licensing restrictions [described below](#licensing-and-implications)) the queued
+Workflow will be executed accordingly.
+
+You can abort queued executions as before using the corresponding [CLI Command](/cli/testkube-abort-testworkflowexecution) or
+from the Dashboard as before.
+
+### Working with Existing Environments
+
+If you have an existing Environment that already has Workflows being executed by CI/CD, Kubernetes Event Triggers,
+etc., these will continue to be executed on _any_ Runner Agent connected to your Environment unless you update the 
+corresponding triggering commands to target a specific Runner Agent, either by name or label as described above.
+
+:::note
+Workflow Executions that are triggered by a CronJob or Kubernetes Trigger can currently not be targeted to a 
+specific Runner and will run on available Runner in the corresponding Environment.
+:::
+
 ## Runner Agent CLI commands
 
 The Testkube CLI provides a number of commands to work with Runner Agents.
+
+### Create Runner Agents
+
+Add new Runner Agents to your current Environment with `testkube install runner <name> --create`, for example
+
+```sh
+$ testkube install runner staging-runner --create -l env=staging
+```
+
+This creates a new runner named `staging-runner` with the label `env=staging`, both which can be used when
+selecting a target when scheduling a Workflow Execution (see below).
 
 ### List Agents
 
@@ -79,17 +111,6 @@ Unknown agents in current cluster
   -    |      | -       | •:testkube | -            | -
 ➜  ~
 ```
-
-### Create Runner Agents
-
-Add new Runner Agents to your current Environment with `testkube install runner <name> --create`, for example 
-
-```sh
-$ testkube install runner staging-runner --create -l env=staging
-```
-
-This creates a new runner named `staging-runner` with the label `env=staging`, both which can be used when 
-selecting a target when scheduling a Workflow Execution (see below).
 
 ### Delete a Runner Agent
 
@@ -134,6 +155,11 @@ $ testkube run testworkflow k6-workflow-smoke --target name=staging-runner
 # run on all runners with myReadyness=true label
 $ testkube run testworkflow k6-workflow-smoke --target myReadiness=true
 ```
+
+:::tip
+You can target the existing Standalone Agent in your Environment by specifying `--target runnertype=superagent`
+in your `testkube run testworkflow` command.
+:::
 
 ## The Standalone Agent
 
