@@ -3,7 +3,7 @@
 Testube 2.X introduces the concept of Multi-Agent Environments, which adds two major new capabilities:
 
 1. The ability to **run the same Workflow in multiple namespaces/clusters**, (possibly at the same time!).
-2. The ability to **add ephemeral Runners** to an Environment and run tests with them 
+2. The ability to **add ephemeral Runners** to an Environment and run your Test Workflows on them 
 
 Both of these scenarios were previously hard to achieve efficiently, and required elaborate scripting as 
 described in [Remote Workflow Execution](/articles/remote-workflow-execution) and [Ephemeral Environments](/articles/ephemeral-environments).
@@ -147,7 +147,7 @@ The Standalone Agent is by default labeled with `runnertype: superagent` in the 
 ## Licensing and implications
 
 Runner Agents are licensed by concurrently active Runners, allowing you to add as many Runners as you want but only 
-run tests concurrently on as many Runners as you have licensed. Workflows that cannot be executed because of unavailable 
+run Workflows concurrently on as many Runners as you have licensed. Workflows that cannot be executed because of unavailable 
 Runners due to licensing constraints will be queued and executed as soon as a concurrent runner seat "frees up" to execute 
 the queued Workflow.
 
