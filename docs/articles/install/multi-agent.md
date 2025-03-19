@@ -69,6 +69,46 @@ Workflow Executions that are triggered by a CronJob or Kubernetes Trigger can cu
 specific Runner and will run on available Runner in the corresponding Environment.
 :::
 
+## Runner Agent Quickstart
+
+### 1. Install your first Runner
+
+You can either create your first Runner with the [Connect new Runner Agent] button in the top-right of the
+Agent Management Panel shown above, or you can use the [Testkube CLI](/articles/cli) with
+the `testkube install runner` command.
+
+For example:
+
+```sh
+$ testkube install runner staging-runner --create -l env=staging
+```
+
+creates runner named `staging-runner` and give that a corresponding `env=staging` label.
+
+### 2. Run your Workflows on the Runner
+
+Once created, you can now run your Workflows on this Runner:
+
+```sh
+testkube run testworkflow my-k6-test --target name=staging-runner
+```
+
+### 3. Add another Runner
+
+Let's say you have two staging environments, you could create another Runner in that environment with:
+
+```sh
+$ testkube install runner staging-runner-2 --create -l env=staging
+```
+
+### 4. Run your Workflows on multiple Runners
+
+And now run your Workflow on both staging Runners at the same time:
+
+```sh
+testkube run testworkflow my-k6-test --target env=staging
+```
+
 ## Runner Agent CLI commands
 
 The Testkube CLI provides a number of commands to work with Runner Agents.
