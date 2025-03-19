@@ -49,6 +49,11 @@ spec:
     namespace: another-testkube-zone
 ```
 
+:::tip
+Check out [Ephemeral Namespaces](/articles/ephemeral-environments#2-ephemeral-namespaces) for an example of how to 
+use the `namespace` property in an ephemeral environment scenario.
+:::
+
 ## Pod
 
 To pass custom Pod configuration, you may pass it in the `pod` property. It supports most of the native Kubernetes' [**PodSpec**](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/#podspec-v1-core) configuration.

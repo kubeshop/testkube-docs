@@ -2,6 +2,22 @@
 
 Selecting a Workflow in the Workflows Overview reveals a number of tabs to work with the selected Workflow.
 
+## Running a Workflow
+
+The "**Run Now**" button in the top right has two modes of operation:
+
+- Clicking on the "Run Now" label will immediately schedule an execution of the workflow on a global runner.
+- Clicking on the down-arrow will open a list of available Runners where one can select on which Runner(s) to run.
+
+In the below screenshot the Workflow will run on the two selected runner when the "Run on 2 selected runners" button
+is pressed.
+
+![Run Workflow Button](images/run-workflow-button.png)
+
+:::tip
+Check out the [Multi-agent functionality](/articles/install/multi-agent) to learn how to use multiple Runner Agents in your Environments. 
+:::
+
 ## Overview Tab
 
 Shows details for the latest execution of the Workflow, selecting an item will open the corresponding log tab in 
@@ -22,6 +38,15 @@ A green checkmark denotes a successful execution, a red 'x' denotes a failed exe
 
 Selecting a specific execution will open the corresponding [Execution Details](testkube-dashboard-execution-details)
 panels.
+
+### Multi-Agent Executions
+
+For executions run on multiple agents using the [Multi-Agent functionality](/articles/install/multi-agent),
+the table will show an expandable section that includes all those executions:
+
+![Multi-agent Executions List](images/mulit-agent-executions-list.png)
+
+Use the arrow at the top left of this section to expand/collapse the contained executions. 
 
 ## CLI Commands Tab
 
