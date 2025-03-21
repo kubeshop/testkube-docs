@@ -80,8 +80,8 @@ SSH servers which implement file transfer protocols are vulnerable to a denial o
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.2.5-r9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.2.5-r9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.024%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.041%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -150,8 +150,8 @@ Certificates containing URIs are not permitted in the web PKI, so this only affe
 <table>
 <tr><td>Affected range</td><td><code>>=1.23.0-0<br/><1.23.5</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.5</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.076%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.245%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -169,8 +169,8 @@ In the event that the client received a subsequent same-domain redirect, however
 <table>
 <tr><td>Affected range</td><td><code>>=1.23.0-0<br/><1.23.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.023%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.029%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -199,8 +199,8 @@ Due to the usage of a variable time instruction in the assembly implementation o
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.3.3-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.3.3-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.274%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>2.480%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>84th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -216,8 +216,8 @@ Due to the usage of a variable time instruction in the assembly implementation o
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.3.2-r5</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.3.2-r5</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.087%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.064%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
