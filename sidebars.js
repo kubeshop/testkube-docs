@@ -570,6 +570,11 @@ const sidebars = {
               label: "Docker CLI",
               id: "articles/testkube-cli-docker",
             },
+            {
+              type: "doc",
+              label: "Multi-Agent CLI Commands",
+              id: "articles/multi-agent-cli",
+            },
           ],
         },
         {

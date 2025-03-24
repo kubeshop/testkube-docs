@@ -1,4 +1,4 @@
-# Multi-Agent Environments
+# Multi-Agent Environments 
 
 Testube 2.X introduces the concept of Multi-Agent Environments, which adds two major new capabilities:
 
@@ -73,142 +73,115 @@ specific Runner and will run on available Runner in the corresponding Environmen
 
 ### 1. Install your first Runner
 
-You can either create your first Runner with the [Connect new Runner Agent] button in the top-right of the
-Agent Management Panel shown above, or you can use the [Testkube CLI](/articles/cli) with
-the `testkube install runner` command.
-
-For example:
+After installing the [Testkube CLI](/articles/cli) and using `testkube login` to log in to your 
+Testkube Environment, use `testkube install runner <name>` command to install your first Runner Agent:
 
 ```sh
-$ testkube install runner staging-runner --create -l env=staging
+$ testkube install runner staging-runner --create 
 ```
 
-creates runner named `staging-runner` and give that a corresponding `env=staging` label.
+This will create a Runner named `staging-runner` that can now be used to run your Workflows. 
 
-### 2. Run your Workflows on the Runner
+### 2. Run your Workflows 
 
-Once created, you can now run your Workflows on this Runner:
+Run your Workflows on a specific runner by specifying the name of the runner with the `--target` argument:
 
 ```sh
 testkube run testworkflow my-k6-test --target name=staging-runner
 ```
 
-### 3. Add another Runner
+This schedules the `my-k6-test` Workflow to run on the `staging-runner` Runner we created above.
 
-Let's say you have two staging environments, you could create another Runner in that environment with:
+:::tip
+Check out the [Multi-Agent CLI Overview](/articles/multi-agent-cli) for an overview of all available CLI 
+commands related to Multi-Agent Environments.
+:::
 
-```sh
-$ testkube install runner staging-runner-2 --create -l env=staging
-```
+## Runner Modes
 
-### 4. Run your Workflows on multiple Runners
+Runner Agents can be added in one of three different targeting modes, influencing how they are selected for execution:
 
-And now run your Workflow on both staging Runners at the same time:
+- **Independent Runners** (default) need to be targeted explicitly by name to run a Workflow (as in the example above).
+- **Grouped Runners** can be targeted/filtered by labels/groups - allowing you to run a Workflow on either a single available 
+  Runner (of multiple) or on multiple Runners at once.
+- **Global Runners** will be used when no target is specified and can be filtered by labels; the default Standalone Agent is a global runner.
 
-```sh
-testkube run testworkflow my-k6-test --target env=staging
-```
+Let's dive into these a little more.
 
-## Runner Agent CLI commands
+### Independent Runners
 
-The Testkube CLI provides a number of commands to work with Runner Agents.
-
-### Create Runner Agents
-
-Add new Runner Agents to your current Environment with `testkube install runner <name> --create`, for example
-
-```sh
-$ testkube install runner staging-runner --create -l env=staging
-```
-
-This creates a new runner named `staging-runner` with the label `env=staging`, both which can be used when
-selecting a target when scheduling a Workflow Execution (see below).
-
-### List Agents
-
-Use `testkube get agents` to get a list of all Agents installed in your organization, including existing Environment Agents 
-which are shown with the label `runnertype=superagent`.
-
-```shell
-➜  ~ testkube get agents
-
-Context: cloud (2.1.117)   Namespace: testkube   Org: Testkube   Env: ole-kind
-------------------------------------------------------------------------------
-server version not set
-
-Recognized agents in current cluster
-None
-
-Agents outside of current cluster
-  TYPE       | NAME                    | VERSION | NAMESPACE | ENVIRONMENTS                 | LABELS
--------------+-------------------------+---------+-----------+------------------------------+------------------------
-  SuperAgent | tkcenv_a7a9f692d2248d3e |         |           | ole-kind                     | runnertype=superagent
-  SuperAgent | tkcenv_84019fff03aac934 |         |           | testkube-cloud-basic         | runnertype=superagent
-
-Unknown agents in current cluster
-  TYPE | NAME | VERSION | NAMESPACE  | ENVIRONMENTS | LABELS
--------+------+---------+------------+--------------+---------
-  -    |      | -       | •:testkube | -            | -
-➜  ~
-```
-
-### Delete a Runner Agent
-
-Delete an existing Runner Agent by name using `testkube delete runner <name>`:
+As indicated above, when not defining a Runner as either grouped or global, it works as an "independent Runner" and 
+_needs_ to be targeted explicitly by name to for Workflow execution.
 
 ```sh
-$ testkube delete runner staging-runner
+testkube run testworkflow my-k6-test --target name=staging-runner
 ```
 
-### Change Runner Agent Status
+### Grouped Runners
 
-It is possible to temporarily disable/enable a runner, for example when there are maintenance windows. Any executions
-scheduled for that specific runner will be queued until it becomes available again. 
-
-Use `testkube disable/enable runner <name>` for this:
+Grouped Runners are defined by a `--group` argument when creating/installing:
 
 ```sh
-$ testkube disable runner staging-runner
-$ testkube enable runner my-runner
+# install grouped runner
+$ testkube install runner staging-runner --create --group staging-runners
 ```
 
-### Update Runner Agent Labels
-
-You can add as many labels as you want to your runners to help you target them for your executions, for example
-when creating a runner for an ephemeral use-case, you might label it with some identifier of that ephemeral 
-instance which you can then use to target your Workflow Executions to that runner.
+Grouped runners _need_ to be either targeted by name (as independent runners above), or by group, which will 
+use any available Runner in that group for execution:
 
 ```sh
-$ testkube update runner my-runner -l myReadiness=true # add label
-$ testkube update runner my-runner -L myReadiness      # delete label
+# run Workflow on an available Runner in the staging-runners group
+testkube run testworkflow my-k6-test --target group=staging-runners
 ```
 
-### Running Test Workflows on specific Runners
-
-Add the `--target` argument to your `testkube run testworkflow` command to target runners with specific names or labels. 
-Note that if you specify a label that is available on multiple runners, the Workflow will run on all of them. 
+If you want to run on _all_ runners in a group, use the `--target-replicate name` argument:
 
 ```sh
-# run on runner named staging-runner
-$ testkube run testworkflow k6-workflow-smoke --target name=staging-runner
-
-# run on all runners with myReadyness=true label
-$ testkube run testworkflow k6-workflow-smoke --target myReadiness=true
+# run Workflow on all runners in the staging-runners group
+testkube run testworkflow my-k6-test --target group=staging-runners --target-replicate name
 ```
 
 :::tip
-You can target the existing Standalone Agent in your Environment by specifying `--target runnertype=superagent`
-in your `testkube run testworkflow` command.
+You can use --target-replicate to enable execution across multiple runners as described here 
 :::
+
+### Global Runners
+
+```sh
+# install global runner
+$ testkube install runner global-runner --create --global 
+```
+
+Global runners will be used when no target is specified to the run command:
+
+```sh
+# Run workflow on any available global runner
+testkube run testworkflow my-k6-test 
+```
+
+## Using labels for filtering runners
+
+Labels can be added to any type of Runner with the `-l <name=value>` argument when creating them, 
+which can then be used to filter out which runners that are considered for execution:
+
+```sh
+# run Workflow on a runner in the staging-runners group with the region=europe label
+testkube run testworkflow my-k6-test --target group=staging-runners --target region=europe
+```
+
+```sh
+# run Workflow on all global runners with the region=europe label
+testkube run testworkflow my-k6-test --target region=europe
+```
 
 ## The Standalone Agent
 
-The original Standalone Agent is still required for your Environment to work as before, as it manages Triggers and Webhooks defined in
-your Environment and also makes it possible to distribute Workflows in that Environment to the other Runner Agents when
-needed.
+The Testkube [Standalone Agent](/articles/install/standalone-agent) is required for your Environment to work, 
+as it manages Triggers and Webhooks defined in your Environment and also makes it possible to distribute Workflows 
+in that Environment to the other Runner Agents when needed.
 
-The Standalone Agent is by default labeled with `runnertype: superagent` in the list of agents 
-(as you can see int the screenshot and cli output above).
+The Standalone Agent is by default labeled with `runnertype: superagent` in the list of agents, as you can see in the 
+screenshot above.
 
 ## Licensing and implications
 
