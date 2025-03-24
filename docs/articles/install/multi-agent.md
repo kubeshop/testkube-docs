@@ -11,18 +11,16 @@ described in [Remote Workflow Execution](/articles/remote-workflow-execution) an
 The Multi-Agent functionality is available to any existing and new Testkube Environment, provided it has been
 upgraded to the latest version of the Testkube Control Plane and Testkube Agent.
 
-## Two Types of Agents
+## Runner Agents
 
-To provide this capability, Testkube now supports two types of Agents for an Environment:
-
-- Lightweight **Runner Agents** for running your tests wherever needed.
-- The existing **Standalone Agent** which is required as before.
-
-##  Runner Agents
-
-Testkube now allows you to add an arbitrary number of **Runner Agents** to an environment from 
+To provide this capability, Testkube now allows you to add an arbitrary number of **Runner Agents** to an environment from 
 the [Agent Management](/testkube-pro/articles/agent-management) section of your Environment Settings or 
 directly with the CLI (see below).
+
+:::note
+Each Testkube Environment also requires a **[Standalone Agent](standalone-agent)** (as before) which
+provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
+:::
 
 Runner Agents are lightweight agents that can be installed in any namespace/cluster where you need to
 run your Testkube Workflows. Each Runner Agent has a name, an id, and an optional list of labels which
@@ -30,18 +28,14 @@ can be used to select Agents for execution:
 
 ![Multi-Agent Management](images/multi-agent-management.png)
 
-Runner Agents are managed via the Testkube CLI as described below.
-
 ## Running Workflows on Runner Agents
 
 Once Runner Agents have been added to an Environment, they can be used to execute your Workflows:
 
 - Via the Dashboard as described at [Running a Workflow](/articles/testkube-dashboard-workflow-details#running-a-workflow).
-- Via the CLI by using the `--target` argument for the `testkube run testworkflow` command (see below), either
-    - specifying the name(s) of the runner(s) to run on.
-    - specifying label(s) to select which Runner Agents to run on.
+- Via the CLI by using the `--target` argument for the `testkube run testworkflow` command (see below).
 
-When a Workflow has been executed on multiple runners, the Dashboard provides an expandable section for the corresponding 
+When a Workflow has been executed on multiple Runners, the Dashboard provides an expandable section for the corresponding 
 executions, see [Multi-agent Executions](/articles/testkube-dashboard-workflow-details#multi-agent-executions).
 
 :::warning
@@ -55,14 +49,15 @@ matching Agent is available, Testkube will queue the execution of the Workflow i
 Runner is available (barring licensing restrictions [described below](#licensing-and-implications)) the queued
 Workflow will be executed accordingly.
 
-You can abort queued executions as before using the corresponding [CLI Command](/cli/testkube-abort-testworkflowexecution) or
+You can abort queued executions using the corresponding [CLI Command](/cli/testkube-abort-testworkflowexecution) or
 from the Dashboard as before.
 
 ### Working with Existing Environments
 
 If you have an existing Environment that already has Workflows being executed by CI/CD, Kubernetes Event Triggers,
-etc., these will continue to be executed on _any_ Runner Agent connected to your Environment unless you update the 
-corresponding triggering commands to target a specific Runner Agent, either by name or label as described above.
+etc., these will continue to be executed on _any_ [Global Runner Agent](#global-runners) (including the required
+Standalone Agent) connected to your Environment unless you update the corresponding triggering commands to target 
+a specific Runner Agent, either by name, group or label as described below.
 
 :::note
 Workflow Executions that are triggered by a CronJob or Kubernetes Trigger can currently not be targeted to a 
@@ -97,20 +92,22 @@ Check out the [Multi-Agent CLI Overview](/articles/multi-agent-cli) for an overv
 commands related to Multi-Agent Environments.
 :::
 
-## Runner Modes
+## Runner Agent types
 
-Runner Agents can be added in one of three different targeting modes, influencing how they are selected for execution:
+Runner Agents can be added as one of three different types, impacting how they are selected for execution:
 
 - **Independent Runners** (default) need to be targeted explicitly by name to run a Workflow (as in the example above).
 - **Grouped Runners** can be targeted/filtered by labels/groups - allowing you to run a Workflow on either a single available 
   Runner (of multiple) or on multiple Runners at once.
-- **Global Runners** will be used when no target is specified and can be filtered by labels; the default Standalone Agent is a global runner.
+- **Global Runners** do not need to be targeted by name but can be filtered by labels, the default Standalone Agent is a global runner.
 
-Let's dive into these a little more.
+:::note
+If you need to change the type of Runner Agent, you'll need to remove it first and re-add with the new type.
+:::
 
 ### Independent Runners
 
-As indicated above, when not defining a Runner as either grouped or global, it works as an "independent Runner" and 
+A Runner not defined as either grouped or global as described below, will work as an "independent Runner" and thus
 _needs_ to be targeted explicitly by name to for Workflow execution.
 
 ```sh
@@ -142,12 +139,12 @@ testkube run testworkflow my-k6-test --target group=staging-runners --target-rep
 ```
 
 :::tip
-You can use --target-replicate to enable execution across multiple runners as described here 
+You can use `--target-replicate` to enable execution across multiple runners as described here 
 :::
 
 ### Global Runners
 
-```sh
+```shell
 # install global runner
 $ testkube install runner global-runner --create --global 
 ```
@@ -181,7 +178,7 @@ as it manages Triggers and Webhooks defined in your Environment and also makes i
 in that Environment to the other Runner Agents when needed.
 
 The Standalone Agent is by default labeled with `runnertype: superagent` in the list of agents, as you can see in the 
-screenshot above.
+screenshot above, and works like a Global Runner in regard to targeting.
 
 ## Licensing and implications
 
