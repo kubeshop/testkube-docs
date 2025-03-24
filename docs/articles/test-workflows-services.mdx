@@ -117,7 +117,7 @@ You can apply [**readinessProbe**](https://kubernetes.io/docs/tasks/configure-po
 The Test Workflow won't continue until the container will be ready then. To ensure that the execution won't get stuck, you can add `timeout` property (like `timeout: 1h30m20s`),
 so it will fail if the service is not ready after that time.
 
-Please take into account that timeout includes all time periods starting from creation of the kubernetes pod, scheduling it on the node, pulling the image, waiting for its readiness and executing the test request against it.
+Please take into account that timeout includes all time periods starting from creation of the kubernetes pod, scheduling it on the node, pulling the image, waiting for its readiness and executing the test request against the service.
 
 ### Matrix and sharding
 
