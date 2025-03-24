@@ -17,16 +17,18 @@ To provide this capability, Testkube now allows you to add an arbitrary number o
 the [Agent Management](/testkube-pro/articles/agent-management) section of your Environment Settings or 
 directly with the CLI (see below).
 
-:::note
-Each Testkube Environment also requires a **[Standalone Agent](standalone-agent)** (as before) which
-provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
-:::
-
 Runner Agents are lightweight agents that can be installed in any namespace/cluster where you need to
 run your Testkube Workflows. Each Runner Agent has a name, an id, and an optional list of labels which
 can be used to select Agents for execution:
 
 ![Multi-Agent Management](images/multi-agent-management.png)
+
+:::note
+Each Testkube Environment also requires a **[Standalone Agent](standalone-agent)** (as before) which
+provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
+
+Standalone Agents are shown on the bottom of the list of Agents with the label `runnertype: superagent`.
+:::
 
 ## Running Workflows on Runner Agents
 
@@ -42,27 +44,6 @@ executions, see [Multi-agent Executions](/articles/testkube-dashboard-workflow-d
 Runner Agents do **not** support execution of legacy Tests and TestSuites.
 :::
 
-### Queuing of Workflow Executions
-
-When requesting to run a Workflow on a specific Runner Agent, either by name or label(s), and no
-matching Agent is available, Testkube will queue the execution of the Workflow indefinitely; once a corresponding
-Runner is available (barring licensing restrictions [described below](#licensing-and-implications)) the queued
-Workflow will be executed accordingly.
-
-You can abort queued executions using the corresponding [CLI Command](/cli/testkube-abort-testworkflowexecution) or
-from the Dashboard as before.
-
-### Working with Existing Environments
-
-If you have an existing Environment that already has Workflows being executed by CI/CD, Kubernetes Event Triggers,
-etc., these will continue to be executed on _any_ [Global Runner Agent](#global-runners) (including the required
-Standalone Agent) connected to your Environment unless you update the corresponding triggering commands to target 
-a specific Runner Agent, either by name, group or label as described below.
-
-:::note
-Workflow Executions that are triggered by a CronJob or Kubernetes Trigger can currently not be targeted to a 
-specific Runner and will run on available Runner in the corresponding Environment.
-:::
 
 ## Runner Agent Quickstart
 
@@ -171,14 +152,27 @@ testkube run testworkflow my-k6-test --target group=staging-runners --target reg
 testkube run testworkflow my-k6-test --target region=europe
 ```
 
-## The Standalone Agent
+## Queuing of Workflow Executions
 
-The Testkube [Standalone Agent](/articles/install/standalone-agent) is required for your Environment to work, 
-as it manages Triggers and Webhooks defined in your Environment and also makes it possible to distribute Workflows 
-in that Environment to the other Runner Agents when needed.
+When requesting to run a Workflow on a specific Runner Agent, either by name or label(s), and no
+matching Agent is available, Testkube will queue the execution of the Workflow indefinitely; once a corresponding
+Runner is available (barring licensing restrictions [described below](#licensing-and-implications)) the queued
+Workflow will be executed accordingly.
 
-The Standalone Agent is by default labeled with `runnertype: superagent` in the list of agents, as you can see in the 
-screenshot above, and works like a Global Runner in regard to targeting.
+You can abort queued executions using the corresponding [CLI Command](/cli/testkube-abort-testworkflowexecution) or
+from the Dashboard as before.
+
+## Working with Existing Environments
+
+If you have an existing Environment that already has Workflows being executed by CI/CD, Kubernetes Event Triggers,
+etc., these will continue to be executed on _any_ [Global Runner Agent](#global-runners) (including the required
+Standalone Agent) connected to your Environment unless you update the corresponding triggering commands to target
+a specific Runner Agent, either by name, group or label as described below.
+
+:::note
+Workflow Executions that are triggered by a CronJob or Kubernetes Trigger can currently not be targeted to a
+specific Runner and will run on available Runner in the corresponding Environment.
+:::
 
 ## Licensing and implications
 
