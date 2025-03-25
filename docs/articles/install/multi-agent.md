@@ -44,13 +44,12 @@ executions, see [Multi-agent Executions](/articles/testkube-dashboard-workflow-d
 Runner Agents do **not** support execution of legacy Tests and TestSuites.
 :::
 
-
 ## Runner Agent Quickstart
 
 ### 1. Install your first Runner
 
 After installing the [Testkube CLI](/articles/cli) and using `testkube login` to log in to your 
-Testkube Environment, use `testkube install runner <name>` command to install your first Runner Agent:
+Testkube Environment, use `testkube install runner <name>` command to install your first Independent Runner:
 
 ```sh
 $ testkube install runner staging-runner --create 
@@ -80,7 +79,7 @@ Runner Agents can be added as one of three different types, impacting how they a
 - **Independent Runners** (default) need to be targeted explicitly by name to run a Workflow (as in the example above).
 - **Grouped Runners** can be targeted/filtered by labels/groups - allowing you to run a Workflow on either a single available 
   Runner (of multiple) or on multiple Runners at once.
-- **Global Runners** do not need to be targeted by name but can be filtered by labels, the default Standalone Agent is a global runner.
+- **Global Runners** do not need to be targeted by name but can be filtered by labels, the default Standalone Agent works as a global runner.
 
 :::note
 If you need to change the type of Runner Agent, you'll need to remove it first and re-add with the new type.
