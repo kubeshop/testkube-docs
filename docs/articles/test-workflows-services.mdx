@@ -117,6 +117,9 @@ You can apply [**readinessProbe**](https://kubernetes.io/docs/tasks/configure-po
 The Test Workflow won't continue until the container will be ready then. To ensure that the execution won't get stuck, you can add `timeout` property (like `timeout: 1h30m20s`),
 so it will fail if the service is not ready after that time.
 
+The timeout duration encompasses all stages from the creation of the Kubernetes pod to executing the test request against the service. This includes scheduling the pod on a node, pulling the required image, waiting for the pod to become ready, and ultimately sending the test request.
+When starting your service for the first time, consider the time needed to pull the Docker image, which depends on its size. Additionally, if the necessary Kubernetes resources are unavailable and a new node needs to be spun up, this will further increase the startup time. Be sure to account for these factors when setting the timeout value.
+
 ### Matrix and sharding
 
 The services are meant to support matrix and sharding, to run multiple replicas and/or distribute the load across multiple instances.
