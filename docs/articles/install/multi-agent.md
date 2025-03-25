@@ -124,6 +124,8 @@ You can use `--target-replicate` to enable execution across multiple runners as 
 
 ### Global Runners
 
+Global Runners are created with the `--global` argument:
+
 ```shell
 # install global runner
 $ testkube install runner global-runner --create --global 
@@ -135,6 +137,8 @@ Global runners will be used when no target is specified to the run command:
 # Run workflow on any available global runner
 testkube run testworkflow my-k6-test 
 ```
+
+You can still use labels for filtering/targeting specific Global Runners as described below.
 
 ## Using labels for filtering runners
 
@@ -151,6 +155,11 @@ testkube run testworkflow my-k6-test --target group=staging-runners --target reg
 testkube run testworkflow my-k6-test --target region=europe
 ```
 
+:::note
+Since Independent Runners always need to be targeted by name, adding labels to them provides no added benefit
+in regard to targeting/execution.
+:::
+
 ## Queuing of Workflow Executions
 
 When requesting to run a Workflow on a specific Runner Agent, either by name or label(s), and no
@@ -166,7 +175,7 @@ from the Dashboard as before.
 If you have an existing Environment that already has Workflows being executed by CI/CD, Kubernetes Event Triggers,
 etc., these will continue to be executed on _any_ [Global Runner Agent](#global-runners) (including the required
 Standalone Agent) connected to your Environment unless you update the corresponding triggering commands to target
-a specific Runner Agent, either by name, group or label as described below.
+a specific Runner Agent, either by name, group or label as described above.
 
 :::note
 Workflow Executions that are triggered by a CronJob or Kubernetes Trigger can currently not be targeted to a
