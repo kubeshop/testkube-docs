@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:ec00f5630de89cff8e829248e74a85267037b2467d0303561a37624a1250b8bc</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/medium-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>digest</td><td><code>sha256:8b8333f94511fe5c76b5d8862fd6df4f7ea09338815f788115df8e9f407af483</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/medium-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
 <tr><td>platform</td><td>linux/arm64</td></tr>
 <tr><td>size</td><td>62 MB</td></tr>
 <tr><td>packages</td><td>204</td></tr>
@@ -12,6 +12,36 @@ hide_table_of_contents: true
 </details>
 
 <table>
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>musl-utils</strong> <code>1.2.5-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/musl-utils@1.2.5-r0?arch=aarch64&distro=alpine-3.20.3&upstream=musl</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (33:33)
+FROM ${ALPINE_IMAGE}
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-26519?s=alpine&n=musl&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C1.2.5-r1"><img alt="high : CVE--2025--26519" src="https://img.shields.io/badge/CVE--2025--26519-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.2.5-r1</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.2.5-r1</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.024%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libexpat</strong> <code>2.6.4-r0</code> (apk)</summary>
 
@@ -103,36 +133,6 @@ An attacker can pass a malicious malformed token which causes unexpected memory 
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>musl-utils</strong> <code>1.2.5-r0</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/musl-utils@1.2.5-r0?arch=aarch64&distro=alpine-3.20.3&upstream=musl</code></small><br/>
-
-```dockerfile
-# api-server.Dockerfile (33:33)
-FROM ${ALPINE_IMAGE}
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2025-26519?s=alpine&n=musl&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C1.2.5-r1"><img alt="high : CVE--2025--26519" src="https://img.shields.io/badge/CVE--2025--26519-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.2.5-r1</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.2.5-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.024%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 3" src="https://img.shields.io/badge/M-3-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libssl3</strong> <code>3.3.2-r0</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/libssl3@3.3.2-r0?arch=aarch64&distro=alpine-3.20.3&upstream=openssl</code></small><br/>
@@ -166,8 +166,8 @@ FROM ${ALPINE_IMAGE}
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.3.2-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.3.2-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.357%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>55th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.469%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>62nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
