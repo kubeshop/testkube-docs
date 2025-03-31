@@ -220,9 +220,9 @@ Because of that, the execution will be run twice:
 There are several situations where you might want to target specific Runners in your actual Testkube Resource
 definitions:
 
-- **Workflows** - you might want to ensure that a Workflow always runs on a Runner with a specific name or label.
-- **Workflow CronJobs** - you might want to target scheduled Workflow Executions to specific Runner(s).
-- **Triggers** - you might want Kubernetes Event Triggers to trigger Workflow Executions on specific Runner(s).
+- **Workflows** - you might want to ensure that a Workflow always runs on a Runner with a specific name or label - [Read More](/articles/test-workflows#runner-target).
+- **Workflow CronJobs** - you might want to target scheduled Workflow Executions to specific Runner(s) - [Read More](/articles/test-workflows#targeting-specific-runners-in-cronjobs).
+- **Triggers** - you might want Kubernetes Event Triggers to trigger Workflow Executions on specific Runner(s) - [Read More](/articles/test-triggers#targeting-specific-runners).
 
 Each of these definitions supports a corresponding `target` property:
 
