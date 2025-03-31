@@ -300,18 +300,8 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Working with Workflows",
+              label: "CLI Commands",
               id: "articles/test-workflows-creating",
-            },
-            {
-              type: "doc",
-              label: "Parameterization",
-              id: "articles/test-workflows-examples-configuration",
-            },
-            {
-              type: "doc",
-              label: "Expression Language",
-              id: "articles/test-workflows-expressions",
             },
             {
               type: "doc",
@@ -322,6 +312,16 @@ const sidebars = {
               type: "doc",
               label: "Artifacts",
               id: "articles/test-workflows-artifacts",
+            },
+            {
+              type: "doc",
+              label: "Expression Language",
+              id: "articles/test-workflows-expressions",
+            },
+            {
+              type: "doc",
+              label: "Parameterization",
+              id: "articles/test-workflows-examples-configuration",
             },
             {
               type: "doc",

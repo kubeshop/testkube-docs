@@ -223,6 +223,7 @@ definitions:
 - **Workflows** - you might want to ensure that a Workflow always runs on a Runner with a specific name or label - [Read More](/articles/test-workflows#runner-target).
 - **Workflow CronJobs** - you might want to target scheduled Workflow Executions to specific Runner(s) - [Read More](/articles/test-workflows#targeting-specific-runners-in-cronjobs).
 - **Triggers** - you might want Kubernetes Event Triggers to trigger Workflow Executions on specific Runner(s) - [Read More](/articles/test-triggers#targeting-specific-runners).
+- **Execution CRDs** - you might want an `WorkflowExecution` CR to trigger Workflow Executions on specific Runner(s) - [Read More](/articles/test-executions#targeting-specific-runners).
 
 Each of these definitions supports a corresponding `target` property:
 

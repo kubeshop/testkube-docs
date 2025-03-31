@@ -44,7 +44,7 @@ Testkube decouples test definition from execution, providing flexibility to trig
 - **Via the REST API:**  
   Trigger tests from any tool using the [Testkube REST API](/openapi/overview).
 
-- **Using Execution CRDs**
+- **Using Execution CRDs:**
   Trigger tests by creating corresponding [Execution CRDs](/articles/test-executions).
 
 ![CI/CD Integrations](../img/concepts-cicd-integrations.png)
