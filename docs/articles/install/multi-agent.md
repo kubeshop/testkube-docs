@@ -237,6 +237,62 @@ Workflow Executions that are triggered by a CronJob or Kubernetes Trigger can cu
 specific Runner and will run on available Runner in the corresponding Environment.
 :::
 
+## Targeting Runners in Testkube Resources
+
+There are several situations where you might want to target specific Runners in your actual Testkube Resource
+definitions:
+
+- **Workflows** - you might want to ensure that a Workflow always runs on a Runner with a specific name or label.
+- **Workflow CronJobs** - you might want to target scheduled Workflow Executions to specific Runner(s).
+- **Triggers** - you might want Kubernetes Event Triggers to trigger Workflow Executions on specific Runner(s).
+
+Each of these definitions supports a corresponding `target` property:
+
+```yaml
+...
+    target:
+      match: [ <label>: <values> ]
+      not: [ <label>: <values> ]
+      replicate: [<labels>]
+...
+```
+
+The following targets a specific Runner by name:
+
+```yaml
+...
+    target:
+      match: 
+       - name: staging-runner
+...
+```
+
+or run on a Grouped Runner:
+
+```yaml
+...
+    target:
+      match: 
+       - group: region-us
+...
+```
+
+Add `replicate` to mimic `--target-replicate` behavior described above, and `not` to exclude specific Runners, for example:
+
+Run on all Runners in the `region-us` group, except the `k8s-1.21-spain` Runner:
+
+```yaml
+...
+    target:
+      match: 
+        - group: region-eu
+      not:
+        - name: k8s-1.21-spain 
+      replicate: 
+        - name
+...
+```
+
 ## Licensing and implications
 
 Runner Agents are licensed by concurrently active Runners, allowing you to add as many Runners as you want but only 
