@@ -215,28 +215,6 @@ Because of that, the execution will be run twice:
 - any (1) of: `name=1 group=my-group team=users` and `name=2 group=my-group team=users`
 - any (1) of: `name=3 group=my-group team=something`
 
-## Queuing of Workflow Executions
-
-When requesting to run a Workflow on a specific Runner, either by name or label(s), and no
-matching Agent is available, Testkube will queue the execution of the Workflow indefinitely; once a corresponding
-Runner is available (barring licensing restrictions [described below](#licensing-and-implications)) the queued
-Workflow will be executed accordingly.
-
-You can abort queued executions using the corresponding [CLI Command](/cli/testkube-abort-testworkflowexecution) or
-from the Dashboard as before.
-
-## Migrating existing Environments 
-
-If you have an existing Environment that already has Workflows being executed by CI/CD, Kubernetes Event Triggers,
-etc., these will continue to be executed on _any_ [Global Runner Agent](#global-runners) (including the required
-Standalone Agent) connected to your Environment unless you update the corresponding triggering commands to target
-a specific Runner Agent, either by name, group or label as described above.
-
-:::note
-Workflow Executions that are triggered by a CronJob or Kubernetes Trigger can currently not be targeted to a
-specific Runner and will run on available Runner in the corresponding Environment.
-:::
-
 ## Targeting Runners in Testkube Resources
 
 There are several situations where you might want to target specific Runners in your actual Testkube Resource
@@ -292,6 +270,28 @@ Run on all Runners in the `region-us` group, except the `k8s-1.21-spain` Runner:
         - name
 ...
 ```
+
+## Queuing of Workflow Executions
+
+When requesting to run a Workflow on a specific Runner, either by name or label(s), and no
+matching Agent is available, Testkube will queue the execution of the Workflow indefinitely; once a corresponding
+Runner is available (barring licensing restrictions [described below](#licensing-and-implications)) the queued
+Workflow will be executed accordingly.
+
+You can abort queued executions using the corresponding [CLI Command](/cli/testkube-abort-testworkflowexecution) or
+from the Dashboard as before.
+
+## Migrating existing Environments
+
+If you have an existing Environment that already has Workflows being executed by CI/CD, Kubernetes Event Triggers,
+etc., these will continue to be executed on _any_ [Global Runner Agent](#global-runners) (including the required
+Standalone Agent) connected to your Environment unless you update the corresponding triggering commands to target
+a specific Runner Agent, either by name, group or label as described above.
+
+:::note
+Workflow Executions that are triggered by a CronJob or Kubernetes Trigger can currently not be targeted to a
+specific Runner and will run on available Runner in the corresponding Environment.
+:::
 
 ## Licensing and implications
 

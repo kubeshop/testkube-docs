@@ -39,6 +39,11 @@ spec:
     workingDir: # Default working directory
     env: # Global environment variables
       ...
+  execution: # Optional execution properties
+    tags: # execution tags
+      ...
+    target: # target specific Runners
+      ...
   steps: # Ordered steps for execution (supports nesting)
     - name: ... # name of step
       run:
@@ -371,6 +376,30 @@ spec:
 
 > **Info:** Testkube uses the standard Kubernetes Cron format. See [Cron Format on Wikipedia](https://en.wikipedia.org/wiki/Cron) for details.
 
+### Targeting specific Runners in CronJobs
+
+With the introduction of [Multi-Agent Environments](/articles/install/multi-agent) you can optionally specify
+which Runner(s) a CronJob execution should run on. For example
+
+```yaml
+...
+- cronjob:
+    cron: "*/5 * * * *"
+    labels:
+      key3: value3
+    annotations:
+      key4: value4
+    config:
+      myParameter: param2
+    target:
+      match: 
+       - application: accounting
+...
+```
+
+Will run this CronJob on any Global Runner with the `application: accounting` label, For more details,
+see our guide on [Runner Targeting](/articles/install/multi-agent#targeting-runners-in-testkube-resources).
+
 ## Tags
 
 Tags help in filtering and organizing workflow executions. Add tags as follows:
@@ -382,8 +411,25 @@ spec:
       name1: value1
       name2: value2
 ```
-
 For more details, see our guide on [Filtering Test Workflow Executions Using Tags](/articles/filtering-test-workflow-executions-using-tags).
+
+## Runner Target
+
+With the introduction of [Multi-Agent Environments](/articles/install/multi-agent) you can optionally specify 
+which Runner(s) this Workflow should run on. For example
+
+```yaml
+...
+spec:
+  execution:
+    target:
+      match: 
+       - application: accounting
+...
+```
+
+Will run on any Global Runner with the `application: accounting` label, For more details, 
+see our guide on [Runner Targeting](/articles/install/multi-agent#targeting-runners-in-testkube-resources).
 
 ## Templates
 

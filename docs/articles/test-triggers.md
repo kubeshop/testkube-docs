@@ -61,14 +61,15 @@ The `namespace` property is only supported for resourceSelectors, and not for te
 Label selectors are used when we want to select a group of resources in a specific namespace.
 
 ```yaml
-selector:
-  namespace: Kubernetes object namespace (default is **testkube**)
-  labelSelector:
-    matchLabels: map of key-value pairs
-    matchExpressions:
-      - key: label name
-        operator: [In | NotIn | Exists | DoesNotExist
-        values: list of values
+spec:
+  selector:
+    namespace: Kubernetes object namespace (default is **testkube**)
+    labelSelector:
+      matchLabels: map of key-value pairs
+      matchExpressions:
+        - key: label name
+          operator: [In | NotIn | Exists | DoesNotExist
+          values: list of values
 ```
 
 ### Resource Conditions
@@ -76,14 +77,15 @@ selector:
 Resource Conditions allows triggers to be defined based on the status conditions for a specific resource.
 
 ```yaml
-conditionSpec:
-  timeout: Duration in seconds the test trigger waits for conditions, until its stopped.
-  delay: Duration in seconds the test trigger waits between condition checks.
-  conditions:
-    - type: test trigger condition type
-      status: test trigger condition status, supported values - True, False, Unknown
-      reason: test trigger condition reason
-      ttl: test trigger condition ttl
+spec:
+  conditionSpec:
+    timeout: Duration in seconds the test trigger waits for conditions, until its stopped.
+    delay: Duration in seconds the test trigger waits between condition checks.
+    conditions:
+      - type: test trigger condition type
+        status: test trigger condition status, supported values - True, False, Unknown
+        reason: test trigger condition reason
+        ttl: test trigger condition ttl
 ```
 
 ### Resource Probes
@@ -91,16 +93,34 @@ conditionSpec:
 Resource Probes allows triggers to be defined based on the probe status.
 
 ```yaml
-probeSpec:
-  timeout: Duration in seconds the test trigger waits for probes, until its stopped.
-  delay: Duration in seconds the test trigger waits between probes.
-  probes:
-    - scheme: test trigger condition probe scheme to connect to host, default is http
-      host: test trigger condition probe host, default is pod ip or service name
-      path: test trigger condition probe path to check, default is /
-      port: test trigger condition probe port to connect
-      headers: test trigger condition probe headers to submit
+spec:
+  probeSpec:
+    timeout: Duration in seconds the test trigger waits for probes, until its stopped.
+    delay: Duration in seconds the test trigger waits between probes.
+    probes:
+      - scheme: test trigger condition probe scheme to connect to host, default is http
+        host: test trigger condition probe host, default is pod ip or service name
+        path: test trigger condition probe path to check, default is /
+        port: test trigger condition probe port to connect
+        headers: test trigger condition probe headers to submit
 ```
+
+### Targeting specific Runners 
+
+With the introduction of [Multi-Agent Environments](/articles/install/multi-agent) you can optionally specify
+which Runner(s) a Triggered execution should run on. For example
+
+```yaml
+spec:
+  ...
+  target:
+    match: 
+     - application: accounting
+...
+```
+
+Will trigger an Execution on any Global Runner with the `application: accounting` label, For more details,
+see our guide on [Runner Targeting](/articles/install/multi-agent#targeting-runners-in-testkube-resources).
 
 ### Action Parameters
 
@@ -110,23 +130,25 @@ Check the kubernets docs [JsonPath Expression](https://kubernetes.io/docs/refere
 Also you can use Golang template syntax we support for Webhook processing and take data from Golang object fields.
 
 ```yaml
-actionParameters:
-  config: map of key-value pairs
-  tags: map of key-value pairs 
+spec:
+  actionParameters:
+    config: map of key-value pairs
+    tags: map of key-value pairs 
 ```
 
 for example:
 
 ```yaml
-actionParameters:
-  config:
-    environment: production
-    datavalue: jsonpath={.data.test} # if the resource object is a configmap with key `test`
-    labels: "{{ .ObjectMeta.Labels }}"
-  tags:
-    workflow: core
-    trigger: jsonpath={.metadata.namespace} # namespace of the resource object
-    name: "{{ .ObjectMeta.Name }}"
+spec:
+  actionParameters:
+    config:
+      environment: production
+      datavalue: jsonpath={.data.test} # if the resource object is a configmap with key `test`
+      labels: "{{ .ObjectMeta.Labels }}"
+    tags:
+      workflow: core
+      trigger: jsonpath={.metadata.namespace} # namespace of the resource object
+      name: "{{ .ObjectMeta.Name }}"
 ```
 
 ### Supported Values
