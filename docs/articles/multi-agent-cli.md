@@ -25,14 +25,14 @@ The configuration of a new Runner for an Environment is broken into two steps:
    that installation a created Runner in the Environment. 
 
 :::note
-Since you will mostly do both at the same time, these can be rolled into one command by adding the `--create` 
-flag to the `install` command, as shown in the Getting Started example above.
+Since you will often do both at the same time, these two commands can be rolled into one by adding the `--create` 
+flag to the `install` command.
 :::
 
 The reason for this separation is to enable the following use-cases:
-- Reusing Runner installations in different namespaces/clusters for the same Runner definition in the Environment
+- Reusing Runner installations in different namespaces/clusters for the same Runner definition in the Environment.
 - Retrieving the secret-key required connecting a Runner installation to an Environment when installing a Runner with 
-  the Helm Chart
+  the Helm Chart.
 
 ### Creating new Runner Agents
 
@@ -47,9 +47,10 @@ list of Runners in the Testkube Dashboard.
 
 ### Installing new Runner Agents
 
-Once a Runner has been defined in the Testkube Control Plane with the install command above, you'll need to 
-install the actual Runner Agent in a Cluster/Namespace for executing Workflows with `testkube install runner <name>`,
-for example:
+Once a Runner has been defined on the Testkube Control Plane with the `install` command above, you'll need to 
+install an actual Runner Agent in a Cluster/Namespace for executing your Workflows. 
+
+Use the `testkube install runner <name>` to do this, for example:
 
 ```sh
 $ testkube install runner staging-runner 
@@ -58,6 +59,26 @@ $ testkube install runner staging-runner
 :::note
 The name needs to match a previously defined Runner, otherwise the command will fail.
 :::
+
+As hinted above, you can merge the `create` and `install` commands into one by adding `--create` to the `install` command, in
+which case the Runner will be both created and installed with one command.
+
+```sh
+$ testkube install runner staging-runner --create 
+```
+
+### Runner Agent modes
+
+Runner Agents can be created in one of three different modes, impacting how they are selected for execution:
+
+- **Independent Runners** (default) need to be targeted explicitly by name to run a Workflow - [Read More](/articles/install/multi-agent#independent-runners)
+- **Grouped Runners** can be targeted/filtered by labels/groups - allowing you to run a Workflow on either a single available
+  Runner (of several) or on multiple Runners at once. Grouped Runners are created by adding the `--group` argument to either `create` or `install` above -
+  [Read More](/articles/install/multi-agent#grouped-runners)
+- **Global Runners** do not need to be targeted by name but can be filtered by labels, the default Standalone Agent works as a Global Runner.
+  Global Runners are created by adding the `--global` argument to either `create` or `install` above - [Read More](/articles/install/multi-agent#global-runners)
+
+Check out the [Runner Agent Modes](/articles/install/multi-agent#runner-agent-modes) section in the Multi-Agent Overview to learn more.
 
 ## Listing Agents
 
@@ -87,18 +108,24 @@ Unknown agents in current cluster
 ➜  ~
 ```
 
-## Delete a Runner Agent
+## Deleting and Uinstalling a Runner Agent
 
-Delete an existing Runner Agent by name using `testkube delete runner <name>`:
+Just as there are separate `create` and `install` commands, there are corresponding `delete` and `uninstall` commands.
+
+- `uninstall` - removes the specified Runner Agent from the cluster, but keeps the Runner definition in the Control Plane.
+- `delete` - removes the Runner definition from the Control-Plane, but keeps the Runner Agent installed in the cluster.
+
+Delete or uninstall an existing Runner Agent by name using `testkube delete runner <name>` command and then specifying 
+either the `--delete` or `--uninstall` arguments (or both):
 
 ```sh
-$ testkube delete runner staging-runner
+$ testkube delete runner staging-runner --delete --uninstall
 ```
 
 ## Change Runner Agent Status
 
-It is possible to temporarily disable/enable a runner, for example when there are maintenance windows. Any executions
-scheduled for that specific runner will be queued until it becomes available again. 
+It is possible to temporarily disable/enable a runner, for example, when there are maintenance windows. Any executions
+scheduled for that specific runner will be queued until it (or any other Runner with matching target criteria) becomes available again.
 
 Use `testkube disable/enable runner <name>` for this:
 
@@ -109,7 +136,7 @@ $ testkube enable runner my-runner
 
 ## Update Runner Agent Labels
 
-You can add as many labels as you want to your runners to help you target them for your executions, for example
+You can add as many labels as you want to your runners to help you target them for your executions, for example,
 when creating a runner for an ephemeral use-case, you might label it with some identifier of that ephemeral 
 instance which you can then use to target your Workflow Executions to that runner.
 
@@ -117,3 +144,8 @@ instance which you can then use to target your Workflow Executions to that runne
 $ testkube update runner my-runner -l myReadiness=true # add label
 $ testkube update runner my-runner -L myReadiness      # delete label
 ```
+
+:::tip
+Check out [Using labels for filtering runners](/articles/install/multi-agent#using-labels-for-filtering-runners) to see examples
+for this.
+:::
