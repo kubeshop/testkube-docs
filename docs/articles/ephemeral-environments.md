@@ -13,7 +13,8 @@ currently supports these two cases.
 
 :::tip
 Testkube has now launched [Multi-Agent Environments](/articles/install/multi-agent) that make the ephemeral 
-environment use-case much easier to implement, please refer to that document for more information.
+environment use-case much easier to implement, please refer to that document for general information and 
+[Independent Runners](/articles/install/multi-agent#independent-runners) in particular for the ephemeral use-case.
 :::
 
 ## 1. Ephemeral Clusters

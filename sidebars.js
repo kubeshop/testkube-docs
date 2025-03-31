@@ -340,7 +340,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Pod & Job",
+              label: "Job & Pod Configuration",
               id: "articles/test-workflows-job-and-pod",
             },
             {
