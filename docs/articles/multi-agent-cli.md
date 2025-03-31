@@ -34,6 +34,10 @@ The reason for this separation is to enable the following use-cases:
 - Retrieving the secret-key required connecting a Runner installation to an Environment when installing a Runner with 
   the Helm Chart.
 
+:::tip
+See the corresponding [Delete and Uninstall](#deleting-and-uninstalling-a-runner-agent) commands below.
+:::
+
 ### Creating new Runner Agents
 
 Define a new Runner in the Testkube Control Plane with `testkube create runner <name>`
@@ -108,7 +112,7 @@ Unknown agents in current cluster
 ➜  ~
 ```
 
-## Deleting and Uinstalling a Runner Agent
+## Deleting and Uninstalling a Runner Agent
 
 Just as there are separate `create` and `install` commands, there are corresponding `delete` and `uninstall` commands.
 
@@ -121,6 +125,11 @@ either the `--delete` or `--uninstall` arguments (or both):
 ```sh
 $ testkube delete runner staging-runner --delete --uninstall
 ```
+
+Use-cases for these in separation could be:
+
+- Use only `uninstall` if you are moving the Runner to another cluster/namespace.
+- Use only `delete` if the Runner itself is no longer available (for example if it was removed by tearing down and ephemeral cluster).
 
 ## Change Runner Agent Status
 

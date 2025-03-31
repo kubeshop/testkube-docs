@@ -95,6 +95,20 @@ _needs_ to be targeted explicitly by name to for Workflow execution.
 testkube run testworkflow my-k6-test --target name=staging-runner
 ```
 
+Specifying multiple `--target name=XXX` arguments will run your Workflow on one of the selected runners, if you want to 
+run on all of them use the `--target-replicate` argument [described below](#running-workflows-on-multiple-runners).
+
+:::tip
+Independent Runners are useful for ephemeral use-cases when you need to target specific Workflow Executions, for example when 
+provisioning an ephemeral cluster/namespace for testing a Pull Request you could:
+
+- Provision the ephemeral cluster/namespace containing the application/components to be tested.
+- Create/Install an Independent Runner named after the Pull Request in this cluster/namespace.
+- Run Workflow(s) to test your application/components using this Runner explicitly.
+- Tear down the cluster/namespace and its Runner once tests are run (or keep it around to debug failed tests).
+- View corresponding Workflow Execution results in the Testkube Dashboard. 
+:::
+
 ### Grouped Runners
 
 Grouped Runners are defined by a `--group` argument when creating/installing:
@@ -120,7 +134,7 @@ testkube run testworkflow my-k6-test --target group=staging-runners --target-rep
 ```
 
 :::tip
-You can use `--target-replicate` to enable execution across multiple runners as described here 
+You can use `--target-replicate` to enable execution across multiple runners as described [below](#running-workflows-on-multiple-runners). 
 :::
 
 ### Global Runners
@@ -163,6 +177,43 @@ testkube run testworkflow my-k6-test --target region=europe
 Since Independent Runners always need to be targeted by name, adding labels to them provides no added benefit
 in regard to targeting/execution.
 :::
+
+## Running Workflows on Multiple Runners
+
+If your target argument(s) select multiple Runners as shown above, Testkube will by default execute your Workflow
+on one of the selected Runners (randomly selected). If you instead want to execute your Workflow on all selected Runners
+simultaneously you can add `--target-replicate <label>` to the `testkube run testworkflow` command, which will "shard"
+the Workflow Execution across all unique matches for the specified `label` (which could be `name`). 
+
+For example:
+
+```
+testkube run testworkflow my-k6-test --target name=runner1 --target name=runner2 --target-replicate=name
+```
+
+will run the specified Workflow on both Runners since their names are unique. 
+
+A more advanced use-case: For Grouped Runners created with these arguments:
+
+```
+name=1 group=my-group team=users
+name=2 group=my-group team=users
+name=3 group=my-group team=something
+```
+
+When executing a Workflow with
+
+```
+testkube run testworkflow my-k6-test --target group=my-group --target-replicate=team
+```
+
+Makes there two groups, sharded by team:
+- The `users` team: `name=1 group=my-group team=users` and `name=2 group=my-group team=users`
+- The `something` team: `name=3 group=my-group team=something`
+
+Because of that, the execution will be run twice:
+- any (1) of: `name=1 group=my-group team=users` and `name=2 group=my-group team=users`
+- any (1) of: `name=3 group=my-group team=something`
 
 ## Queuing of Workflow Executions
 
