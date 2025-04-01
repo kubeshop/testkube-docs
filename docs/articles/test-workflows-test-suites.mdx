@@ -248,11 +248,28 @@ spec:
               - workflows
 ```
 
-## Passing input from files
+## Passing Input Parameters
+
+Configuration parameters defined for a Workflow (see [Parameterization](/articles/test-workflows-examples-configuration)) can be passed/overridden
+when executing a Workflow as described above by adding a `config` property that specifies the desired values.
+
+In the below example the `example-distributed-k6` Workflow is executed with specified values for `vus`, `duration` and `workers` parameters:
+
+```yaml
+...
+  steps:
+  - execute:
+      workflows:
+      - name: example-distributed-k6
+        config:
+          vus: 8
+          duration: 1s
+          workers: 2
+```
+
+### Passing Specific files
 
 It may happen that you will need to pass information from the file system. You can either pass the files using Test Workflow expressions (like `file("./file-content.txt")`) or using a `tarball` syntax.
-
-### Specific files
 
 You can easily use Test Workflow expressions to fetch some files and send them as a configuration variable:
 
