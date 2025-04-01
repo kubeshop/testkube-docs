@@ -49,6 +49,11 @@ $ testkube create runner staging-runner -l env=staging
 This defines a new runner named `staging-runner` with the label `env=staging` which is now visible in the
 list of Runners in the Testkube Dashboard. 
 
+:::note
+As Runners are internally defined at the Organization level, the Runner name must be unique across all Runners within 
+the containing Organization.
+:::
+
 ### Installing new Runner Agents
 
 Once a Runner has been defined on the Testkube Control Plane with the `create` command above, you'll need to 

@@ -129,7 +129,7 @@ testkube run testworkflow my-k6-test --target group=staging-runners
 If you want to run on _all_ Runners in a group, use the `--target-replicate name` argument:
 
 ```sh
-# run Workflow on all runners in the staging-runners group
+# run Workflow on all Runners in the staging-runners group
 testkube run testworkflow my-k6-test --target group=staging-runners --target-replicate name
 ```
 
@@ -150,7 +150,7 @@ Global runners will be used either when no target is specified to the run comman
 label-filter (see below) applies to them.
 
 ```sh
-# Run workflow on any available Global Runner
+# Run Workflow on an available Global Runner
 testkube run testworkflow my-k6-test 
 ```
 
@@ -169,7 +169,7 @@ testkube run testworkflow my-k6-test --target group=staging-runners --target reg
 ```
 
 ```sh
-# run Workflow on all global runners with the region=europe label
+# run Workflow on a Global Runner with the region=europe label
 testkube run testworkflow my-k6-test --target region=europe
 ```
 
