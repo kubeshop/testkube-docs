@@ -331,6 +331,136 @@ spec:
         - test/cypress/executor-tests/cypress-12
 ```
 
+### Using multiple git repositories
+
+There are a few different ways to do it.
+
+- Use multiple content.git setups
+
+The content.git clause may be nested to load multiple repositories.
+
+```
+spec:
+  content:
+    git:
+      uri: https://github.com/kubeshop/testkube
+steps:
+- content:
+    git:
+      uri: https://github.com/kubeshop/testkube-operator
+      mountPath: /operator
+  steps:
+  - shell: ls -lah /data/repo && ls -lah /operator
+```
+
+The cloned repositories will be available only for
+**Explanation**: Under the hood, it will create EmptyDir volumes and volume mounts at /data/repo and /operator and clone the repositories there.
+**Potential QoL future improvement**: add syntax to clone multiple repositories, like clone.gits.
+
+- Custom step to load the selected repositories
+
+You can just have an initial step to load the selected repositories. 
+If you are actually using it in multiple tests, likely it would be best to have it in the TestWorkflowTemplate.
+
+```
+spec:
+  pod:
+    volumes:
+    - name: repos
+      emptyDir: {}
+  container:
+    volumeMounts:
+    - name: repos
+      mountPath: /repos
+  setup:
+  - name: Load common repositories
+    run:
+      image: bitnami/git:2.49.0
+      shell: |
+        git clone --depth 1 https://github.com/kubeshop/testkube /repos/testkube
+        git clone --depth 1 https://github.com/kubeshop/testkube-operator /repos/operator
+  - shell: tree /repos
+```
+
+**Explanation**: this would create EmptyDir volume at /repos, load the repositories in there, and keep it available for all other steps.
+
+- Clone to common EmptyDir volume
+
+```
+We already have an EmptyDir volume mounted in /data by default, so you can just use it:
+spec:
+  setup:
+  - name: Load common repositories
+    run:
+      image: bitnami/git:2.49.0
+      shell: |
+        git clone --depth 1 https://github.com/kubeshop/testkube /data/repos/testkube
+        git clone --depth 1 https://github.com/kubeshop/testkube-operator /data/repos/operator
+  - shell: tree /data/repos
+```
+
+- Pure Steps
+
+Assuming that you would be i.e. always using the same image, you need to have a user that will have permissions to write in some into container storage, 
+and you can then just clone it as above, but without volume.
+
+```
+spec:
+  system:
+    pureByDefault: true
+  container:
+    securityContext:
+      runAsUser: 0 # ensure that you have permissions to write in some random /repos directory
+  setup:
+  - name: Load common repositories
+    run:
+      image: bitnami/git:2.49.0
+      shell: |
+        git clone --depth 1 https://github.com/kubeshop/testkube /repos/testkube
+        git clone --depth 1 https://github.com/kubeshop/testkube-operator /repos/operator
+  - shell: tree /repos
+```
+
+**Explanation**: it will clone the repos into the ephemeral storage where image is unpacked. 
+It's rather not recommended - EmptyDir will be much more resilient, secure, and with a similar performance.
+
+- Getting from other place
+
+If you don't actually need a repository, but i.e. some binary that you have available somewhere, there is mechanism to untar these dependencies:
+
+```
+spec:
+  content:
+    tarball:
+    - url: https://github.com/kubeshop/testkube/releases/download/v2.1.131/testkube_2.1.131_Linux_x86_64.tar.gz
+      path: /testkube-binaries
+  steps:
+  - shell: tree /testkube-binaries
+```
+
+**Explanation**: it will mount an EmptyDir volume if needed, download the tarball and unpack it to selected directory.
+
+- Git submodules
+
+Your main repository could have all these repos loaded as a Git submodules.
+
+```
+spec:
+  content:
+    git:
+      uri: https://github.com/robocorp/example-use-git-submodule-for-shared-code
+  setup:
+  - name: Load submodules
+    run:
+      image: bitnami/git:2.49.0
+      workingDir: /data/repo
+      shell: git -c safe.directory=/data/repo submodule update --init --recursive
+  - shell: tree /data/repo
+```
+
+**Explanation**: Testkube will load the repository, while the prepared submodules will be available too
+**Potential future QoL improvement**: we could add submodules: true option for the content.git, that would basically do it. (edited) 
+
 ### Customizable Git Branch
 
 Often you may want to run the Test Workflow for different code revisions (i.e. running it on Pull Requests with [**GitHub Action**](https://github.com/marketplace/actions/testkube-action)).
