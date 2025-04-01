@@ -154,7 +154,9 @@ testkube run testworkflow my-k6-test
 The required Standalone Agent always works as a Global Runner.
 :::
 
-## Using labels for filtering runners
+## Runner Targeting
+
+### Using labels for filtering
 
 Labels can be added to any type of Runner with the `-l <name=value>` argument during creation, these 
 can then be used to filter out Runners that are used for execution:
@@ -174,7 +176,7 @@ Since Independent Runners always need to be targeted by name, adding labels to t
 in regard to targeting/execution.
 :::
 
-## Running Workflows on Multiple Runners
+### Running on Multiple Runners
 
 If your target argument(s) select multiple Runners as shown above, Testkube will by default execute your Workflow
 on one of the selected Runners (randomly selected). If you instead want to execute your Workflow on all selected Runners
@@ -211,7 +213,7 @@ Because of that, the execution will be run twice:
 - any (1) of: `name=1 group=my-group team=users` and `name=2 group=my-group team=users`
 - any (1) of: `name=3 group=my-group team=something`
 
-## Targeting Runners in Testkube Resources
+### Targeting Runners in Testkube Resources
 
 There are several situations where you might want to target specific Runners in your actual Testkube Resource
 definitions:
@@ -294,7 +296,7 @@ You can target the Standalone Agent in several ways:
 
 The ID is shown in the list of Agents (see below), the Name is the same `xxxx` prefixed with tkcenv instead.
 
-![img.png](img.png)
+![Standalone Agent ID](images/standalone-agent-id.png)
 
 ## Migrating existing Environments
 
