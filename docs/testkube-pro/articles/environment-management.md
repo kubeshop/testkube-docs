@@ -78,17 +78,6 @@ Find the general settings for your environment on the **General** tab. You can a
 
 ![General Settings Dashboard](../../img/general-settings-dashboard-072024.png)
 
-### Agent Information
-
-The middle section of the General tab presents information about the agent connected to this Environment, showing you:
-
-- The connection status and name of the agent.
-- Which Testkube version the Agent is running, and the latest available version (so you know if an upgrade is available).
-- CLI and Helm commands to install or update the Agent to the latest version.
-- The `testkube set context` CLI command to configure the Testkube CLI for this agent - [Read More](/testkube-pro/articles/managing-cli-context).
-
-![Agent Information](../../img/agent-information.png)
-
 ### Environment Members
 
 You can assign environment-specific roles to [Teams](/articles/teams) or individual [Members](/testkube-pro/articles/organization-management#members) of your organization to control which

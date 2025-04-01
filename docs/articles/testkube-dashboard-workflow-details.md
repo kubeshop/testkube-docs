@@ -9,8 +9,8 @@ The "**Run Now**" button in the top right has two modes of operation:
 - Clicking on the "Run Now" label will immediately schedule an execution of the workflow on a global runner.
 - Clicking on the down-arrow will open a list of available Runners where one can select on which Runner(s) to run.
 
-In the below screenshot the Workflow will run on the two selected runner when the "Run on 2 selected runners" button
-is pressed.
+In the below screenshot, the Workflow will run on the two selected Runners when the "Run on 2 selected runners" button
+is selected.
 
 ![Run Workflow Button](images/run-workflow-button.png)
 
