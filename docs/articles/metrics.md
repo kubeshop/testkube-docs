@@ -1,6 +1,11 @@
 # Prometheus Metrics
 
-The Testkube API Server exposes a `/metrics` endpoint that can be consumed by Prometheus, Grafana, etc. Currently, the following metrics are exposed:
+The Testkube API Server in the [Testkube Agent](/articles/install/standalone-agent) exposes a `/metrics` endpoint that can be consumed by Prometheus, Grafana, etc. 
+
+Depending on if the Agent is deployed in Standalone or Connected mode, it will expose metrics either for local executions or 
+for executions performed in the associated Environment.
+
+Currently, the following metrics are exposed:
 
 * `testkube_test_executions_count` - The total number of test executions.
 * `testkube_testsuite_executions_count` - The total number of test suite executions.
@@ -23,7 +28,8 @@ The Testkube API Server exposes a `/metrics` endpoint that can be consumed by Pr
 * `testkube_testtrigger_event_count` - The total number of test trigger events.
 * `testkube_webhook_executions_count` - The total number of webhook executions.
 
-Note: as the metrics also include labels with the associated test name (see below), no metrics are produced unless some tests were run since last api-server restart 
+Note: as the metrics also include labels with the associated test name (see below), no metrics are produced unless some tests were run since 
+the last api-server restart 
 
 ```
 # HELP testkube_test_executions_count The total number of test executions
