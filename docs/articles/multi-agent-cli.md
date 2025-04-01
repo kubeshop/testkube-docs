@@ -51,8 +51,8 @@ list of Runners in the Testkube Dashboard.
 
 ### Installing new Runner Agents
 
-Once a Runner has been defined on the Testkube Control Plane with the `install` command above, you'll need to 
-install an actual Runner Agent in a Cluster/Namespace for executing your Workflows. 
+Once a Runner has been defined on the Testkube Control Plane with the `create` command above, you'll need to 
+`install` an actual Runner Agent in a Cluster/Namespace for executing your Workflows. 
 
 Use the `testkube install runner <name>` to do this, for example:
 
@@ -156,5 +156,5 @@ $ testkube update runner my-runner -L myReadiness      # delete label
 
 :::tip
 Check out [Using labels for filtering runners](/articles/install/multi-agent#using-labels-for-filtering-runners) to see examples
-for this.
+for how to use labels for selecting Runners for Workflow execution.
 :::
