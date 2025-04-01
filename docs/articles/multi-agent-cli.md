@@ -70,10 +70,11 @@ The name needs to match a previously defined Runner, otherwise the command will 
 :::
 
 As hinted above, you can merge the `create` and `install` commands into one by adding `--create` to the `install` command, in
-which case the Runner will be both created and installed with one command.
+which case the Runner will be both created and installed with one command. In this case you can also specify which labels
+you want to associate with the created Runner.
 
 ```sh
-$ testkube install runner staging-runner --create 
+$ testkube install runner staging-runner --create -l env=staging
 ```
 
 ### Runner Agent modes
@@ -91,7 +92,7 @@ Check out the [Runner Agent Modes](/articles/install/multi-agent#runner-agent-mo
 
 ## Updating a Runner Agent
 
-An existing Runner Agent can be update to the latest version by rerunning the `testkube agent install <name>` command.
+An existing Runner Agent can be updated to the latest version by rerunning the corresponding `testkube agent install <name>` command.
 
 ## Listing Agents
 
