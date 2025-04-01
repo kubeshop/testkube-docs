@@ -46,18 +46,31 @@ The Test Workflow can be run using the `testkube run testworkflow` command using
 testkube run testworkflow TEST_WORKFLOW_NAME
 ```
 
-Optionally, the follow option can be used to watch execution and get the log summary directly:
+This will start the Workflow execution asynchronously. 
+
+If you instead want to follow the execution and see its log output as it runs, you can add the `-f` option: 
 
 ```shell
 testkube run testworkflow TEST_WORKFLOW_NAME -f
 ```
 
+:::tip
+With the introduction of [Multi-Agent Environments](/articles/install/multi-agent) it is possible to add a 
+`--target` argument to specify on which Runner a Workflow should be run - [Read More](/articles/install/multi-agent#2-run-your-workflows).
+:::
+
 ## ReRun 
-The Test Workflow can be rerun using the `testkube rerun twe` command providing Test Workflow execution id:
+
+A previous Test Workflow execution can be rerun using the `testkube rerun twe` command providing Test Workflow execution id:
 
 ```shell
 testkube rerun twe EXECUTION_ID
 ```
+
+:::note
+If the previous execution explicitly targeted a Runner that is no longer available, the execution will be queued 
+until a corresponding Runner is available - [Read More](/articles/install/multi-agent#queuing-of-workflow-executions).
+:::
 
 ## Workflow Execution Status
 
