@@ -83,7 +83,7 @@ To avoid issues with the reduced isolation, by default we are merging together o
 If you want part of your `shell` or `run` steps to allow merging with other `shell`/`run` steps, you have to specify `pure: true` for them.
 This way, they will be acknowledged as free of side effects and will be merged with next or previous step when it is possible.
 
-When the steps are marked as pure, they are merged as long as they can live in the same container. It means that they need to have the same volumes mounted, same security context (user), and most importantly the same image. 
+When the steps are marked as pure, they are merged as long as they can live in the same container. It means that they need to have the same volumes mounted, same security context (user), and **most importantly the same image**. 
 
 ```yaml
 spec:
