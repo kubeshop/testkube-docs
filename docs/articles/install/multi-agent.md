@@ -298,15 +298,10 @@ The ID is shown in the list of Agents (see below), the Name is the same `xxxx` p
 
 ## Migrating existing Environments
 
-If you have an existing Environment that already has Workflows being executed by CI/CD, Kubernetes Event Triggers,
+If you have an existing Environment that already has Workflows being executed by CI/CD, CronJobs, Kubernetes Event Triggers,
 etc., these will continue to be executed on _any_ [Global Runner Agent](#global-runners) (including the required
-Standalone Agent) connected to your Environment unless you update the corresponding triggering commands to target
+Standalone Agent) connected to your Environment unless you update the corresponding triggering commands / configuration to target
 a specific Runner Agent, either by name, group or label as described above.
-
-:::note
-Workflow Executions that are triggered by a CronJob or Kubernetes Trigger can currently not be targeted to a
-specific Runner and will run on available Runner in the corresponding Environment.
-:::
 
 ## Licensing and implications
 
