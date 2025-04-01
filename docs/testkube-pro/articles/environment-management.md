@@ -52,7 +52,8 @@ a prompt for a unique environment name:
 
 After providing the environment name you will be prompted as shown below to [Install the CLI](/articles/install/cli)
 (do this only if you haven't already done so) and then run a CLI command to install the
-Testkube Agent for your environment, see [Testkube Agent Installation][installing] for more details.
+[Testkube Agent](/articles/install/standalone-agent) for your environment, the provided command will automatically
+connect the Agent to your Control Plane.
 
 ![New Environment Connection](../../img/new-environment-connection.png)
 

@@ -3,7 +3,7 @@
 Testube 2.X introduces the concept of Multi-Agent Environments, which adds two major new capabilities:
 
 1. The ability to **run the same Workflow in multiple namespaces/clusters**, (possibly at the same time!).
-2. The ability to **add ephemeral Runners** to an Environment and run your Test Workflows on them 
+2. The ability to easily **add ephemeral Runners** to an Environment and run your Test Workflows on them. 
 
 Both of these scenarios were previously hard to achieve efficiently, and required elaborate scripting as 
 described in [Remote Workflow Execution](/articles/remote-workflow-execution) and [Ephemeral Environments](/articles/ephemeral-environments).
@@ -283,8 +283,8 @@ from the Dashboard as before.
 Each Testkube Environment requires a **[Standalone Agent](standalone-agent)** (as before) which
 provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
 
-Standalone Agents are shown on the bottom of the list of Agents with the label `runnertype: superagent` and work as
-a Global Runner (described below).
+Standalone Agents are installed when initially creating an Environment and shown on the bottom of 
+the list of Agents with the label `runnertype: superagent` and work as a Global Runner (described below).
 
 You can target the Standalone Agent in several ways:
 
