@@ -335,7 +335,7 @@ spec:
 
 There are a few different ways to do it.
 
-- Use multiple content.git setups
+#### Use multiple content.git setups
 
 The content.git clause may be nested to load multiple repositories.
 
@@ -353,11 +353,11 @@ steps:
   - shell: ls -lah /data/repo && ls -lah /operator
 ```
 
-The cloned repositories will be available only for
+The cloned repositories will be available only for nested steps
 **Explanation**: Under the hood, it will create EmptyDir volumes and volume mounts at /data/repo and /operator and clone the repositories there.
 **Potential QoL future improvement**: add syntax to clone multiple repositories, like clone.gits.
 
-- Custom step to load the selected repositories
+#### Custom step to load the selected repositories
 
 You can just have an initial step to load the selected repositories. 
 If you are actually using it in multiple tests, likely it would be best to have it in the TestWorkflowTemplate.
@@ -384,7 +384,7 @@ spec:
 
 **Explanation**: this would create EmptyDir volume at /repos, load the repositories in there, and keep it available for all other steps.
 
-- Clone to common EmptyDir volume
+#### Clone to common EmptyDir volume
 
 ```
 We already have an EmptyDir volume mounted in /data by default, so you can just use it:
@@ -399,7 +399,7 @@ spec:
   - shell: tree /data/repos
 ```
 
-- Pure Steps
+#### Pure Steps
 
 Assuming that you would be i.e. always using the same image, you need to have a user that will have permissions to write in some into container storage, 
 and you can then just clone it as above, but without volume.
@@ -424,7 +424,7 @@ spec:
 **Explanation**: it will clone the repos into the ephemeral storage where image is unpacked. 
 It's rather not recommended - EmptyDir will be much more resilient, secure, and with a similar performance.
 
-- Getting from other place
+#### Getting from other place
 
 If you don't actually need a repository, but i.e. some binary that you have available somewhere, there is mechanism to untar these dependencies:
 
@@ -440,7 +440,7 @@ spec:
 
 **Explanation**: it will mount an EmptyDir volume if needed, download the tarball and unpack it to selected directory.
 
-- Git submodules
+#### Git submodules
 
 Your main repository could have all these repos loaded as a Git submodules.
 
