@@ -24,11 +24,7 @@ can be used to select Agents for execution:
 ![Multi-Agent Management](images/multi-agent-management.png)
 
 :::note
-Each Testkube Environment also requires a **[Standalone Agent](standalone-agent)** (as before) which
-provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
-
-Standalone Agents are shown on the bottom of the list of Agents with the label `runnertype: superagent` and work as 
-a Global Runner (described below).
+Testkube Environments always require a Standalone Agent for core functionality - [Read More](#the-standalone-agent-in-multi-agent-environments).
 :::
 
 ## Running Workflows on Runner Agents
@@ -281,6 +277,24 @@ Workflow will be executed accordingly.
 
 You can abort queued executions using the corresponding [CLI Command](/cli/testkube-abort-testworkflowexecution) or
 from the Dashboard as before.
+
+## The Standalone Agent in Multi-Agent Environments
+
+Each Testkube Environment requires a **[Standalone Agent](standalone-agent)** (as before) which
+provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
+
+Standalone Agents are shown on the bottom of the list of Agents with the label `runnertype: superagent` and work as
+a Global Runner (described below).
+
+You can target the Standalone Agent in several ways:
+
+- By Label: `testkube run tw my-k6-test --target runnertype=superagent`
+- By Name: `testkube run tw my-k6-test --target name=tkcenv_xxxxxxxxxx`
+- By ID: `testkube run tw my-k6-test --target id=tkcroot_xxxxxxxxxx`
+
+The ID is shown in the list of Agents (see below), the Name is the same `xxxx` prefixed with tkcenv instead.
+
+![img.png](img.png)
 
 ## Migrating existing Environments
 
