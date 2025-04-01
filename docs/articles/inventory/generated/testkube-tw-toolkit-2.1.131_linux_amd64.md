@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:038e17188733ad50ea0a60e1a6eba5608e17228512a971b0abd3b05281ffe5b8</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/medium-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>digest</td><td><code>sha256:820d7ca2dc24056cc01e9de433e7541180c55ffea2e39ae38ff34f67285ffe7c</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/medium-4-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
-<tr><td>size</td><td>65 MB</td></tr>
-<tr><td>packages</td><td>204</td></tr>
+<tr><td>size</td><td>48 MB</td></tr>
+<tr><td>packages</td><td>169</td></tr>
 </table>
 </details></table>
 </details>
@@ -18,8 +18,8 @@ hide_table_of_contents: true
 <small><code>pkg:golang/golang.org/x/crypto@0.32.0</code></small><br/>
 
 ```dockerfile
-# api-server.Dockerfile (36:36)
-COPY --from=build /app /bin/app
+# tw-toolkit.Dockerfile (28:28)
+COPY --from=build /app/testworkflow-init /init
 ```
 
 <br/>
@@ -29,8 +29,8 @@ COPY --from=build /app /bin/app
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.35.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.35.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.060%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.090%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -48,7 +48,7 @@ SSH servers which implement file transfer protocols are vulnerable to a denial o
 <small><code>pkg:apk/alpine/musl-utils@1.2.5-r0?arch=x86_64&distro=alpine-3.20.3&upstream=musl</code></small><br/>
 
 ```dockerfile
-# api-server.Dockerfile (33:33)
+# tw-toolkit.Dockerfile (24:24)
 FROM ${ALPINE_IMAGE}
 ```
 
@@ -59,8 +59,8 @@ FROM ${ALPINE_IMAGE}
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.2.5-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.2.5-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.041%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.024%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -78,8 +78,8 @@ FROM ${ALPINE_IMAGE}
 <small><code>pkg:golang/golang.org/x/oauth2@0.26.0</code></small><br/>
 
 ```dockerfile
-# api-server.Dockerfile (36:36)
-COPY --from=build /app /bin/app
+# tw-toolkit.Dockerfile (28:28)
+COPY --from=build /app/testworkflow-init /init
 ```
 
 <br/>
@@ -89,8 +89,8 @@ COPY --from=build /app /bin/app
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.27.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.27.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.171%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.121%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -108,8 +108,8 @@ An attacker can pass a malicious malformed token which causes unexpected memory 
 <small><code>pkg:apk/alpine/libexpat@2.6.4-r0?arch=x86_64&distro=alpine-3.20.3&upstream=expat</code></small><br/>
 
 ```dockerfile
-# api-server.Dockerfile (34:34)
-RUN apk --no-cache add ca-certificates libssl3 git
+# tw-toolkit.Dockerfile (25:25)
+RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 ```
 
 <br/>
@@ -119,8 +119,8 @@ RUN apk --no-cache add ca-certificates libssl3 git
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.7.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.7.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.650%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>55th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.693%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>70th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -138,7 +138,7 @@ RUN apk --no-cache add ca-certificates libssl3 git
 <small><code>pkg:apk/alpine/libssl3@3.3.2-r0?arch=x86_64&distro=alpine-3.20.3&upstream=openssl</code></small><br/>
 
 ```dockerfile
-# api-server.Dockerfile (33:33)
+# tw-toolkit.Dockerfile (24:24)
 FROM ${ALPINE_IMAGE}
 ```
 
@@ -149,8 +149,8 @@ FROM ${ALPINE_IMAGE}
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.3.3-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.3.3-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.077%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>64th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.117%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -166,8 +166,8 @@ FROM ${ALPINE_IMAGE}
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.3.2-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.3.2-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.681%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>71st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.469%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>62nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -183,8 +183,8 @@ FROM ${ALPINE_IMAGE}
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.3.2-r2</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.3.2-r2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.113%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.075%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -202,8 +202,8 @@ FROM ${ALPINE_IMAGE}
 <small><code>pkg:golang/golang.org/x/net@0.34.0</code></small><br/>
 
 ```dockerfile
-# api-server.Dockerfile (36:36)
-COPY --from=build /app /bin/app
+# tw-toolkit.Dockerfile (28:28)
+COPY --from=build /app/testworkflow-init /init
 ```
 
 <br/>
@@ -216,87 +216,13 @@ COPY --from=build /app /bin/app
 <tr><td>CVSS Score</td><td><code>4.4</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:L</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.018%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
 Matching of hosts against proxy patterns can improperly treat an IPv6 zone ID as a hostname component. For example, when the NO_PROXY environment variable is set to "*.example.com", a request to "[::1%25.example.com]:80` will incorrectly match and not be proxied.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>gopkg.in/square/go-jose.v2</strong> <code>2.6.0</code> (golang)</summary>
-
-<small><code>pkg:golang/gopkg.in/square/go-jose.v2@2.6.0</code></small><br/>
-
-```dockerfile
-# api-server.Dockerfile (36:36)
-COPY --from=build /app /bin/app
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2024-28180?s=github&n=go-jose.v2&ns=gopkg.in%2Fsquare&t=golang&vr=%3C%3D2.6.0"><img alt="medium 4.3: CVE--2024--28180" src="https://img.shields.io/badge/CVE--2024--28180-lightgrey?label=medium%204.3&labelColor=fbb552"/></a> <i>Improper Handling of Highly Compressed Data (Data Amplification)</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=2.6.0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>CVSS Score</td><td><code>4.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>2.056%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>73rd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-### Impact
-An attacker could send a JWE containing compressed data that used large amounts of memory and CPU when decompressed by Decrypt or DecryptMulti. Those functions now return an error if the decompressed data would exceed 250kB or 10x the compressed size (whichever is larger). Thanks to Enze Wang@Alioth and Jianjun Chen@Zhongguancun Lab (@zer0yu and @chenjj) for reporting.
-
-### Patches
-The problem is fixed in the following packages and versions:
-- github.com/go-jose/go-jose/v4 version 4.0.1
-- github.com/go-jose/go-jose/v3 version 3.0.3
-- gopkg.in/go-jose/go-jose.v2 version 2.6.3
-
-The problem will not be fixed in the following package because the package is archived:
-- gopkg.in/square/go-jose.v2
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/vektah/gqlparser/v2</strong> <code>2.5.2-0.20230422221642-25e09f9d292d</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/vektah/gqlparser@2.5.2-0.20230422221642-25e09f9d292d#v2</code></small><br/>
-
-```dockerfile
-# api-server.Dockerfile (36:36)
-COPY --from=build /app /bin/app
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2023-49559?s=github&n=v2&ns=github.com%2Fvektah%2Fgqlparser&t=golang&vr=%3C2.5.14"><img alt="medium 5.3: CVE--2023--49559" src="https://img.shields.io/badge/CVE--2023--49559-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Uncontrolled Resource Consumption</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.5.14</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.5.14</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.700%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>56th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-An issue in vektah gqlparser open-source-library v.2.5.10 allows a remote attacker to cause a denial of service via a crafted script to the parserDirectives function.
 
 </blockquote>
 </details>
