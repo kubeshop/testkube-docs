@@ -89,6 +89,10 @@ Runner Agents can be created in one of three different modes, impacting how they
 
 Check out the [Runner Agent Modes](/articles/install/multi-agent#runner-agent-modes) section in the Multi-Agent Overview to learn more.
 
+## Updating a Runner Agent
+
+An existing Runner Agent can be update to the latest version by rerunning the `testkube agent install <name>` command.
+
 ## Listing Agents
 
 Use `testkube get agents` to get a list of all Agents installed in your organization, including the mandatory Standalone Agent 
@@ -116,6 +120,7 @@ Unknown agents in current cluster
   -    |      | -       | •:testkube | -            | -
 ➜  ~
 ```
+
 
 ## Deleting and Uninstalling a Runner Agent
 
