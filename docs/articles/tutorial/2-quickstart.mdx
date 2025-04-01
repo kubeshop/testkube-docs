@@ -117,6 +117,13 @@ spec:
   # to update this to the directory of your content, but be mindful as some testing
   # tools might malfunction when their container's working directory is changed.
   # Git content is put in `/data/repo`, whereas relative file content in `/data`.
+  # A few useful hints about the `workingDir` resolution:
+  # - without `workingDir` (or with empty) in step - it will use the parent's working dir (down the workflow specification tree)
+  # - without `workingDir` (or with empty) at all in the workflow specification tree - it will use working dir from the image default
+  # - with relative `workingDir` in step - it will go further from parent's working dir (down the workflow specification tree)
+  # - with relative `workingDir` in step, but no other in a workflow specification tree - it will go further from the image default
+  # - the parent is whatever is found in the workflow specification tree, for example, the Global Template's `spec.container.workingDir`
+  # goes down to Test Workflows `spec.container.workingDir` (unless overridden).
   container:
     workingDir: /data
   # Steps are the main building blocks in workflows. Each step is executed in sequential order.

@@ -392,6 +392,11 @@ const sidebars = {
                   label: "Uploading Artifacts to Custom S3 Bucket",
                   id: "articles/custom-minio-artifact-upload",
                 },
+                {
+                  type: "doc",
+                  label: "Enforcing Workflow Policies",
+                  id: "articles/enforcing-workflow-policies",
+                },
               ],
             },
           ],

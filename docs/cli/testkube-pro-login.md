@@ -19,6 +19,7 @@ testkube pro login [flags]
       --api-prefix string           usually don't need to be changed [required for custom cloud mode] (default "api")
       --api-uri-override string     api uri override
       --auth-uri-override string    auth uri override
+      --callback-port int           usually don't need to be changed [required for custom cloud mode] (default 8090)
       --custom-auth                 usually don't need to be changed [required for custom cloud mode]
       --env-id string               Testkube Pro environment id [required for centralized mode]
       --feature-logs-v2             Logs v2 feature flag
