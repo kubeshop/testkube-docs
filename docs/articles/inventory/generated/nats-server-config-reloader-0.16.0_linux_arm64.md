@@ -124,8 +124,8 @@ In the event that the client received a subsequent same-domain redirect, however
 <table>
 <tr><td>Affected range</td><td><code>>=1.23.0-0<br/><1.23.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.023%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.007%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
