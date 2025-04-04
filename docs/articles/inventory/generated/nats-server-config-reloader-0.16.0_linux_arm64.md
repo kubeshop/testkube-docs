@@ -182,7 +182,7 @@ FROM alpine:3.20.3
 <tr><td>Affected range</td><td><code>&lt;3.3.3-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.3.3-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.117%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
