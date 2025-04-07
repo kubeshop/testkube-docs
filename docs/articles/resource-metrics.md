@@ -93,3 +93,19 @@ For Workflows with multiple steps, these are separated by purple lines, for exam
 
 This Workflow has 5 steps, each indicated with a vertical dotted line in the charts. Hovering over a specific line 
 shows the name of the step on the top of the chart.
+
+## Visualisation of parallel Nodes
+
+When looking at resource metrics for a Workflow Execution that ran across multiple nodes, each node will be visualised
+separately, for example the following k6 test that ran across 5 nodes:
+
+![Parallel Nodes Workflow](images/parallel-nodes-workflow.png)
+
+shows the following resource usage, where each node has their own line in each chart:
+
+![Parallel Nodes Resource Usage](images/parallel-nodes-resource-usage.png)
+
+Clicking on the individual labels for each line shows/hides them from the graph; in the below graph all Worker Writes have
+been deselected to show only Worker Reads in the graph:
+
+![Parallel Node Line Selection](images/parallel-nodes-line-selection.png)
