@@ -1,5 +1,6 @@
 # Multi-Agent Environments 
 
+
 Testube 2.X introduces the concept of Multi-Agent Environments, which adds two major new capabilities:
 
 1. The ability to **run the same Workflow in multiple namespaces/clusters**, (possibly at the same time!).
@@ -11,11 +12,15 @@ described in [Remote Workflow Execution](/articles/remote-workflow-execution) an
 The Multi-Agent functionality is available to any existing and new Testkube Environment, provided it has been
 upgraded to the latest version of the Testkube Control Plane and Testkube Agent.
 
+:::note
+Multi-Agent Environments are in Preview, meaning they are actively being developed and improved based on user
+feedback.
+:::
+
 ## Runner Agents
 
-To provide this capability, Testkube now allows you to add an arbitrary number of **Runner Agents** to an environment from 
-the [Agent Management](/testkube-pro/articles/agent-management) section of your Environment Settings or 
-directly with the CLI (see below).
+In addition to the mandatory [Standalone Agent](#the-standalone-agent-in-multi-agent-environments), Testkube also allows you to add an arbitrary number of **Runner Agents** 
+to any Environment from the [Agent Management](/testkube-pro/articles/agent-management) section of your Environment Settings or directly with the CLI (see below).
 
 Runner Agents (or just "Runners") are lightweight agents that can be installed in any namespace/cluster where you need to
 run your Testkube Workflows. Each Runner Agent has a name, an internal id, and an optional list of labels which
@@ -304,6 +309,11 @@ If you have an existing Environment that already has Workflows being executed by
 etc., these will continue to be executed on _any_ [Global Runner Agent](#global-runners) (including the required
 Standalone Agent) connected to your Environment unless you update the corresponding triggering commands / configuration to target
 a specific Runner Agent, either by name, group or label as described above.
+
+:::note
+Existing Environments that do not make the use of Runner Agents will continue to work as before, it is only
+when you start adding Runners that you might need to adjust how your existing Workflows are triggered by external sources.
+:::
 
 ## Licensing and implications
 
