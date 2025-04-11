@@ -107,8 +107,9 @@ which Runner(s) a Workflow should execute on. For example
 spec:
   executionRequest:
     target:
-      match: 
-       - application: accounting
+      match:
+        application:
+          - accounting
 ...
 ```
 

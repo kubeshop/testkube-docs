@@ -244,8 +244,9 @@ The following targets a specific Runner by name:
 ```yaml
 ...
     target:
-      match: 
-       - name: staging-runner
+      match:
+        name:
+          - staging-runner
 ...
 ```
 
@@ -254,8 +255,9 @@ or run on a Grouped Runner:
 ```yaml
 ...
     target:
-      match: 
-       - group: region-us
+      match:
+        group:
+          - region-us
 ...
 ```
 
@@ -266,11 +268,13 @@ Run on all Runners in the `region-us` group, except the `k8s-1.21-spain` Runner:
 ```yaml
 ...
     target:
-      match: 
-        - group: region-eu
+      match:
+        group:
+          - region-eu
       not:
-        - name: k8s-1.21-spain 
-      replicate: 
+        name:
+          - k8s-1.21-spain
+      replicate:
         - name
 ...
 ```
