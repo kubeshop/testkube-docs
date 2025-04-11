@@ -1,4 +1,4 @@
-# Test Workflows - Job and Pod
+# Test Workflows - Job and Pod Configuration
 
 You may need to configure the Job and Pod used for execution. It can be also used for [**parallel workers**](./test-workflows-parallel.mdx) and [**services**](./test-workflows-services.mdx).
 
@@ -48,6 +48,11 @@ spec:
     # schedule the execution in `another-testkube-zone` namespace
     namespace: another-testkube-zone
 ```
+
+:::tip
+Check out [Ephemeral Namespaces](/articles/ephemeral-environments#2-ephemeral-namespaces) for an example of how to 
+use the `namespace` property in an ephemeral environment scenario.
+:::
 
 ## Pod
 

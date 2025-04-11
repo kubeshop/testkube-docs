@@ -97,6 +97,28 @@ spec:
         type: basic
 ```
 
+### Targeting specific Runners
+
+With the introduction of [Multi-Agent Environments](/articles/install/multi-agent) you can optionally specify
+which Runner(s) a Workflow should execute on. For example
+
+```yaml
+...
+spec:
+  executionRequest:
+    target:
+      match:
+        application:
+          - accounting
+...
+```
+
+Will run on any Global Runner with the `application: accounting` label, For more details,
+see our guide on [Runner Targeting](/articles/install/multi-agent#targeting-runners-in-testkube-resources).
+
+:::note
+This is only supported for `TestWorkflowExecution` CRDs since the Multi-Agent Runners do not support Tests or Suites.
+:::
 
 ## Architecture
 
