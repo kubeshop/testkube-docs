@@ -134,7 +134,7 @@ testkube run testworkflow my-k6-test --target group=staging-runners --target-rep
 ```
 
 :::tip
-You can use `--target-replicate` to enable execution across multiple runners as described [below](#running-workflows-on-multiple-runners). 
+You can use `--target-replicate` to enable execution across multiple runners as described [below](#running-on-multiple-runners). 
 :::
 
 ### Global Runners
@@ -314,8 +314,8 @@ Testkube Agents can be assigned either Fixed or Floating licenses.
 - Agents assigned a **Fixed License** can always run test independently at any time.
   The Standalone Agent required for each Testkube Environment always requires a fixed license.
 - Agents assigned a **Floating license** share the ability to execute tests concurrently; if one agent with a floating license is executing tests, 
-  a second agent will queue test executions until the first agent is complete. If you, for example, purchase three floating licenses, 
-  three agents assigned a floating license will be able to run Workflows concurrently at any give time.
+  a second agent will queue test executions until the first agent is complete. If you, for example, purchase two floating licenses and assign those 
+  to 10 agents, two of those agents will be able to execute Workflows concurrently at any give time.
 
 Floating licenses are useful for ephemeral/sandbox clusters where you don't know in advance how many agents you will have at any 
 given point in time, and/or you don’t mind if the test executions get queued.

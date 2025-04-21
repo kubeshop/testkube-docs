@@ -50,8 +50,8 @@ spec:
 ```
 
 :::tip
-Check out [Ephemeral Namespaces](/articles/ephemeral-environments#2-ephemeral-namespaces) for an example of how to 
-use the `namespace` property in an ephemeral environment scenario.
+Check out [Ephemeral Namespaces](/articles/ephemeral-environments) for an example of how to use 
+the `namespace` property in an ephemeral environment scenario.
 :::
 
 ## Pod
@@ -60,7 +60,7 @@ To pass custom Pod configuration, you may pass it in the `pod` property. It supp
 
 ### Labels & Annotations
 
-You may simply add labels and annotations for the Pod using `labels` and `annotations` properties:
+You can add labels and annotations for the Pod using `labels` and `annotations` properties:
 
 ```yaml
 spec:
