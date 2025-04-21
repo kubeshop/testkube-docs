@@ -335,8 +335,8 @@ $ testkube install runner pr-12u48y34-runner --create --floating
 ```
 
 :::note
-- You will only be able to create as many fixed Agents as you have fixed licenses in your Testkube plan.
-- You will need to have at least one floating license in your Testkube plan to be able to create Agents with the `--floating` argument.
+- You will only be able to create as many fixed Agents as you have Fixed licenses in your Testkube plan.
+- You will need to have at least one Floating license in your Testkube plan to be able to create Agents with the `--floating` argument.
 :::
 
 ## Migrating existing Environments
