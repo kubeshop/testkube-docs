@@ -1,11 +1,13 @@
 # Ephemeral Environments
 
-While application namespaces/clusters are often long-lived (dev, staging, prod), it is equally common to provision short-lived
+While application namespaces/clusters are often long-lived (dev, staging, prod, etc.), it is equally common to provision short-lived
 clusters and/or namespace for pull-requests, local sandboxes, etc. 
+
+Using Testkube to run tests in these ephemeral namespaces/clusters can be achieved using both multi and single-agent setups. 
 
 ## Multi-Agent Approach
 
-With the addition of [Multi-Agent Environments](/articles/install/multi-agent) to Testkube, supporting these ephemeral/short-lived 
+With the addition of [Multi-Agent Environments](/articles/install/multi-agent) to Testkube, supporting ephemeral/short-lived 
 namespaces/clusters is straight-forward:
 
 1. Provision your ephemeral namespace/cluster and application as desired using the tool of your choice.
@@ -15,7 +17,7 @@ namespaces/clusters is straight-forward:
 4. [Remove the Agent](/articles/multi-agent-cli#deleting-and-uninstalling-a-runner-agent) and tear down your namespace/cluster when finished.
 5. View the results/artifacts/resource-usage of your Workflow Executions in the Testkube Dashboard as before.
 
-The following diagram describes this setup.
+Steps 2, 3 and 4 above can all be automated via the Testkube CLI in your CI/CD pipelines; the following diagram describes this setup.
 
 ![Multi-Agent Ephemeral](images/multi-agent-ephemeral.png)
 
