@@ -91,6 +91,8 @@ If you need to change the type of Runner Agent, you'll need to remove it first a
 A Runner not defined as either Grouped or Global as described below, will work as an "Independent Runner" and thus
 _needs_ to be targeted explicitly by name to for Workflow execution.
 
+For example, the following command runs the `my-k6-test` Workflow on the Runner named `staging-runner`:
+
 ```sh
 testkube run testworkflow my-k6-test --target name=staging-runner
 ```
@@ -99,14 +101,7 @@ Specifying multiple `--target name=XXX` arguments will run your Workflow on one 
 run on all of them use the `--target-replicate` argument [described below](#running-on-multiple-runners).
 
 :::tip
-Independent Runners are useful for ephemeral use-cases when you need to target specific Workflow Executions, for example when 
-provisioning an ephemeral cluster/namespace for testing a Pull Request you could:
-
-- Provision the ephemeral cluster/namespace containing the application/components to be tested.
-- Create/Install an Independent Runner named after the Pull Request in this cluster/namespace.
-- Run Workflow(s) to test your application/components using this Runner explicitly.
-- Tear down the cluster/namespace and its Runner once tests are run (or keep it around to debug failed tests).
-- View corresponding Workflow Execution results in the Testkube Dashboard. 
+Independent Runners are useful for ephemeral use-cases when you need to target specific Workflow Executions - [Read More](/articles/ephemeral-environments#multi-agent-approach).
 :::
 
 ### Grouped Runners
@@ -283,21 +278,19 @@ Run on all Runners in the `region-us` group, except the `k8s-1.21-spain` Runner:
 
 When requesting to run a Workflow on a specific Agent, either by name or label(s), and no
 matching Agent is available, Testkube will queue the execution of the Workflow indefinitely; once a corresponding
-Agent is available (barring licensing restrictions [described below](#licensing-for-testkube-agents)) the queued
+Agent is available (barring Floating license restrictions [described below](#licensing-for-testkube-agents)) the queued
 Workflow will be executed accordingly.
 
-You can abort queued executions using the corresponding [CLI Command](/cli/testkube-abort-testworkflowexecution) or
-from the Dashboard as before.
+You can abort queued executions using the corresponding [CLI Command](/cli/testkube-abort-testworkflowexecution) or from the Dashboard.
 
 ## The Standalone Agent in Multi-Agent Environments
 
-Each Testkube Environment requires a **[Standalone Agent](standalone-agent)** (as before) which
-provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
+Each Testkube Environment requires a **[Standalone Agent](standalone-agent)** which provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
 
 Standalone Agents are installed when initially creating an Environment and shown on the bottom of 
-the list of Agents with the label `runnertype: superagent` and work as a Global Runner (described above).
+the list of Agents with the label `runnertype: superagent`.
 
-You can target the Standalone Agent in several ways:
+Standalone Agents work as a Global Runner (described above) and can also be explicitly targeted in several ways:
 
 - By Label: `testkube run tw my-k6-test --target runnertype=superagent`
 - By Name: `testkube run tw my-k6-test --target name=tkcenv_xxxxxxxxxx`
@@ -317,7 +310,7 @@ Testkube Agents can be assigned either Fixed or Floating licenses.
   a second agent will queue test executions until the first agent is complete. If you, for example, purchase two floating licenses and assign those 
   to 10 agents, two of those agents will be able to execute Workflows concurrently at any give time.
 
-Floating licenses are useful for ephemeral/sandbox clusters where you don't know in advance how many agents you will have at any 
+Floating licenses are useful for [ephemeral use-cases](/articles/ephemeral-environments) where you don't know in advance how many agents you will have at any 
 given point in time, and/or you don’t mind if the test executions get queued.
 
 :::note
