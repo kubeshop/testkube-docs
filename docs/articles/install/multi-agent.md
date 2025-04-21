@@ -335,15 +335,16 @@ $ testkube install runner pr-12u48y34-runner --create --floating
 ```
 
 :::note
-If your current Testkube plan lacks sufficient licenses for the type of license you are assigning, the creation command will fail. 
+- You will only be able to create as many fixed Agents as you have fixed licenses in your Testkube plan.
+- You will need to have at least one floating license in your Testkube plan to be able to create Agents with the `--floating` argument.
 :::
 
 ## Migrating existing Environments
 
-If you have an existing Environment created before the Multi-Agent functionality was introduced, which already has Workflows being 
+If you have an existing Environment created before the Multi-Agent functionality was introduced, and that Environment already has Workflows being 
 executed by CI/CD, CronJobs, Kubernetes Event Triggers, etc., these will continue to be executed on _any_ [Global Runner Agent](#global-runners) 
 (including the required Standalone Agent) connected to your Environment unless you update the corresponding triggering commands/configuration 
-to target a specific Runner Agent, either by name, group or label as described above.
+to target a specific Runner Agent, either by name, group or label as [described above](/articles/install/multi-agent#runner-targeting).
 
 :::note
 Existing Environments that do not make the use of Runner Agents will continue to work as before, it is only
