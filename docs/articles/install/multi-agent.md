@@ -96,7 +96,7 @@ testkube run testworkflow my-k6-test --target name=staging-runner
 ```
 
 Specifying multiple `--target name=XXX` arguments will run your Workflow on one of the selected runners, if you want to 
-run on all of them use the `--target-replicate` argument [described below](#running-workflows-on-multiple-runners).
+run on all of them use the `--target-replicate` argument [described below](#running-on-multiple-runners).
 
 :::tip
 Independent Runners are useful for ephemeral use-cases when you need to target specific Workflow Executions, for example when 
@@ -279,7 +279,7 @@ Run on all Runners in the `region-us` group, except the `k8s-1.21-spain` Runner:
 
 When requesting to run a Workflow on a specific Agent, either by name or label(s), and no
 matching Agent is available, Testkube will queue the execution of the Workflow indefinitely; once a corresponding
-Agent is available (barring licensing restrictions [described below](#licensing-and-implications-on-workflow-executions)) the queued
+Agent is available (barring licensing restrictions [described below](#licensing-for-testkube-agents)) the queued
 Workflow will be executed accordingly.
 
 You can abort queued executions using the corresponding [CLI Command](/cli/testkube-abort-testworkflowexecution) or
@@ -303,7 +303,7 @@ The ID is shown in the list of Agents (see below), the Name is the same `xxxx` p
 
 ![Standalone Agent ID](images/standalone-agent-id.png)
 
-## Fixed and Floating Licenses for Testkube Agents 
+## Licensing for Testkube Agents
 
 Testkube Agents can be assigned either Fixed or Floating licenses.
 
