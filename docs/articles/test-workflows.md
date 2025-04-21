@@ -392,8 +392,9 @@ which Runner(s) a CronJob execution should run on. For example
     config:
       myParameter: param2
     target:
-      match: 
-       - application: accounting
+      match:
+        application:
+          - accounting
 ...
 ```
 
@@ -423,8 +424,9 @@ which Runner(s) this Workflow should run on. For example
 spec:
   execution:
     target:
-      match: 
-       - application: accounting
+      match:
+        application:
+          - accounting
 ...
 ```
 
