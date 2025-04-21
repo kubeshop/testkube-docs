@@ -1,5 +1,4 @@
-# Multi-Agent Environments 
-
+# Multi-Agent Environments
 
 Testube 2.X introduces the concept of Multi-Agent Environments, which adds two major new capabilities:
 
@@ -225,6 +224,7 @@ definitions:
 
 - **Workflows** - you might want to ensure that a Workflow always runs on a Runner with a specific name or label - [Read More](/articles/test-workflows#runner-target).
 - **Workflow CronJobs** - you might want to target scheduled Workflow Executions to specific Runner(s) - [Read More](/articles/test-workflows#targeting-specific-runners-in-cronjobs).
+- **Workflow `execute` Steps** - you might want Composite Workflows to execute Workflows on specific Runner(s) - [Read More](/articles/test-workflows-test-suites#targeting-specific-runner-agents).
 - **Triggers** - you might want Kubernetes Event Triggers to trigger Workflow Executions on specific Runner(s) - [Read More](/articles/test-triggers#targeting-specific-runners).
 - **Execution CRDs** - you might want an `WorkflowExecution` CR to trigger Workflow Executions on specific Runner(s) - [Read More](/articles/test-executions#targeting-specific-runners).
 
@@ -277,9 +277,9 @@ Run on all Runners in the `region-us` group, except the `k8s-1.21-spain` Runner:
 
 ## Queuing of Workflow Executions
 
-When requesting to run a Workflow on a specific Runner, either by name or label(s), and no
+When requesting to run a Workflow on a specific Agent, either by name or label(s), and no
 matching Agent is available, Testkube will queue the execution of the Workflow indefinitely; once a corresponding
-Runner is available (barring licensing restrictions [described below](#licensing-and-implications)) the queued
+Agent is available (barring licensing restrictions [described below](#licensing-and-implications-on-workflow-executions)) the queued
 Workflow will be executed accordingly.
 
 You can abort queued executions using the corresponding [CLI Command](/cli/testkube-abort-testworkflowexecution) or
@@ -291,7 +291,7 @@ Each Testkube Environment requires a **[Standalone Agent](standalone-agent)** (a
 provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
 
 Standalone Agents are installed when initially creating an Environment and shown on the bottom of 
-the list of Agents with the label `runnertype: superagent` and work as a Global Runner (described below).
+the list of Agents with the label `runnertype: superagent` and work as a Global Runner (described above).
 
 You can target the Standalone Agent in several ways:
 
@@ -303,26 +303,45 @@ The ID is shown in the list of Agents (see below), the Name is the same `xxxx` p
 
 ![Standalone Agent ID](images/standalone-agent-id.png)
 
+## Fixed and Floating Licenses for Testkube Agents 
+
+Testkube Agents can be assigned either Fixed or Floating licenses.
+
+- Agents assigned a **Fixed License** can always run test independently at any time.
+  The Standalone Agent required for each Testkube Environment always requires a fixed license.
+- Agents assigned a **Floating license** share the ability to execute tests concurrently; if one agent with a floating license is executing tests, 
+  a second agent will queue test executions until the first agent is complete. If you, for example, purchase three floating licenses, 
+  three agents assigned a floating license will be able to run Workflows concurrently at any give time.
+
+Floating licenses are useful for ephemeral/sandbox clusters where you don't know in advance how many agents you will have at any 
+given point in time, and/or you don’t mind if the test executions get queued.
+
+:::note
+The agent limit for both Fixed and Floating Licenses is counted and enforced at the organization level, i.e., across all your environments.
+:::
+
+### Assigning Licenses to Agents
+
+Agents are by default assigned a fixed license (as in all the examples above), use the `--floating` argument to the Agent 
+creation command to assign a floating license:
+
+```sh
+# install temporary Runner Agent using a floating license
+$ testkube install runner pr-12u48y34-runner --create --floating
+```
+
+:::note
+If your current Testkube plan lacks sufficient licenses for the type of license you are assigning, the creation command will fail. 
+:::
+
 ## Migrating existing Environments
 
-If you have an existing Environment that already has Workflows being executed by CI/CD, CronJobs, Kubernetes Event Triggers,
-etc., these will continue to be executed on _any_ [Global Runner Agent](#global-runners) (including the required
-Standalone Agent) connected to your Environment unless you update the corresponding triggering commands / configuration to target
-a specific Runner Agent, either by name, group or label as described above.
+If you have an existing Environment created before the Multi-Agent functionality was introduced, which already has Workflows being 
+executed by CI/CD, CronJobs, Kubernetes Event Triggers, etc., these will continue to be executed on _any_ [Global Runner Agent](#global-runners) 
+(including the required Standalone Agent) connected to your Environment unless you update the corresponding triggering commands/configuration 
+to target a specific Runner Agent, either by name, group or label as described above.
 
 :::note
 Existing Environments that do not make the use of Runner Agents will continue to work as before, it is only
 when you start adding Runners that you might need to adjust how your existing Workflows are triggered by external sources.
 :::
-
-## Licensing and implications
-
-Runner Agents are licensed by concurrently active Runners, allowing you to add as many Runners as you want but only 
-run Workflows concurrently on as many Runners as you have licensed. Workflows that cannot be executed because of unavailable 
-Runners due to licensing constraints will be queued and executed as soon as a concurrent runner seat "frees up" to execute 
-the queued Workflow.
-
-Furthermore: 
-- The concurrent runner limit is counted and enforced at the organization level, i.e., across all your environments.
-- By default, you are given the same number of concurrent active runner seats as you have environments, please get in touch
-  if you need more to evaluate this functionality.

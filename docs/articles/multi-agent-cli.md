@@ -2,8 +2,8 @@
 
 The Testkube CLI provides a number of commands to work with Runner Agents in [Multi-Agent Environments](/articles/install/multi-agent).
 
-:::note
-Multi-Agent Environments are under active development, and some of the commands shown below are subject to change.
+:::tip
+All commands below have a `--help` argument for printing all available arguments with a short description. 
 :::
 
 ## Prerequisites
@@ -21,7 +21,7 @@ Testkube Organization.
 The configuration of a new Runner for an Environment is broken into two steps:
 
 1. `create runner <name> <args>` - defines a runner in the Environment, but doesn't install anything in your cluster.
-2. `install runner <name> <args>` - installs the actual Runner Helm Chart  in the current cluster/namespace and connects 
+2. `install runner <name> <args>` - installs the actual Runner Helm Chart in the current cluster and connects 
    that installation a created Runner in the Environment. 
 
 :::note
@@ -35,7 +35,7 @@ The reason for this separation is to enable the following use-cases:
   the Helm Chart.
 
 :::tip
-See the corresponding [Delete and Uninstall](#deleting-and-uninstalling-a-runner-agent) commands below.
+See the [Delete and Uninstall](#deleting-and-uninstalling-a-runner-agent) commands below for corresponding removal actions.
 :::
 
 ### Creating new Runner Agents
@@ -76,6 +76,20 @@ you want to associate with the created Runner.
 ```sh
 $ testkube install runner staging-runner --create -l env=staging
 ```
+
+### Runner Namespaces
+
+Runners are installed in a namespace in your current cluster, the `install` command will either prompt you or you can specify 
+the namespace with the --namespace argument
+
+
+
+
+:::tip
+You can install multiple runners in the same namespace if needed, for example to target different applications 
+:::
+
+
 
 ### Runner Agent modes
 

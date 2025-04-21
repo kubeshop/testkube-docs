@@ -348,3 +348,25 @@ The `execute` operation supports matrix and sharding, to run multiple replicas a
 It is supported by regular matrix/sharding properties (`matrix`, `shards`, `count` and `maxCount`) for each Test Workflow or Test reference.
 
 You can read more about it in the general [**Matrix and Sharding**](./test-workflows-matrix-and-sharding.mdx) documentation.
+
+## Targeting specific Runner Agents
+
+With the introduction of [Multi-Agent Environments](/articles/install/multi-agent) it is possible to specify target Runners for each
+workflow specified in the `execute` command, for example:
+
+```yaml
+...
+  - execute:
+      workflows:
+      - name: k6-base
+        target:
+          match:
+            name:
+            - load-runner-agent
+      - name: e2e-test
+```
+
+Will run the `k6-base` test on a Runner Agent named `load-runner-agent` while running the e2e-test on the Agent the containing
+Workflow is running on. For more details, see our guide on [Runner Targeting](/articles/install/multi-agent#targeting-runners-in-testkube-resources).
+
+

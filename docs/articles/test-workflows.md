@@ -397,7 +397,7 @@ which Runner(s) a CronJob execution should run on. For example
 ...
 ```
 
-Will run this CronJob on any Global Runner with the `application: accounting` label, For more details,
+Will run this CronJob on any Global Runner with the `application: accounting` label, for more details,
 see our guide on [Runner Targeting](/articles/install/multi-agent#targeting-runners-in-testkube-resources).
 
 ## Tags
