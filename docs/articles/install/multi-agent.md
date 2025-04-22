@@ -325,6 +325,8 @@ $ testkube install runner pr-12u48y34-runner --create --floating
 - The [Standalone Agent](#the-standalone-agent-in-multi-agent-environments) required for each Environment will always be assigned a Fixed license.
 - You will only be able to create as many fixed Agents as you have Fixed licenses in your Testkube plan.
 - You will need to have at least one Floating license in your Testkube plan to be able to create Agents with the `--floating` argument.
+
+Please don't hesitate to [Get in Touch](https://testkube.io/contact) if you have any questions/concerns about licensing.
 :::
 
 ## Migrating existing Environments

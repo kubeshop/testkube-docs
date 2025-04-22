@@ -184,6 +184,6 @@ $ testkube update runner my-runner -L myReadiness      # delete label
 ```
 
 :::tip
-Check out [Using labels for filtering runners](/articles/install/multi-agent#using-labels-for-filtering) to see examples
+Check out [Using labels for filtering runners](/articles/install/multi-agent#using-labels-for-runner-selection) to see examples
 for how to use labels for selecting Runners for Workflow execution.
 :::
