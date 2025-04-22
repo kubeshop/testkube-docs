@@ -54,6 +54,15 @@ As Runners are internally defined at the Organization level, the Runner name mus
 the containing Organization.
 :::
 
+### License assignment for Runner Agents
+
+New Runner Agents will by default be assigned a Fixed license from your Testkube plan, if no Fixed licenses are available, the command will fail. 
+
+If you have Floating licenses in your Testkube plan, you can instead assign this to your Agent by adding the `--floating` argument to 
+the `create` and `install ... --create` commands.
+
+[Read More about Licensing](/articles/install/multi-agent#licensing-for-testkube-agents).
+
 ### Installing new Runner Agents
 
 Once a Runner has been defined on the Testkube Control Plane with the `create` command above, you'll need to 
@@ -82,14 +91,9 @@ $ testkube install runner staging-runner --create -l env=staging
 Runners are installed in a namespace in your current cluster, the `install` command will either prompt you or you can specify 
 the namespace with the --namespace argument
 
-
-
-
 :::tip
-You can install multiple runners in the same namespace if needed, for example to target different applications 
+You can install multiple runners in the same namespace if needed, for example, to target different applications 
 :::
-
-
 
 ### Runner Agent modes
 

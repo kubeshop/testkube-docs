@@ -304,23 +304,23 @@ The ID is shown in the list of Agents (see below), the Name is the same `xxxx` p
 
 Testkube Agents can be assigned either Fixed or Floating licenses.
 
-- Agents assigned a **Fixed License** can always run test independently at any time.
+- Agents assigned a **Fixed License** can always run Workflows independently at any time.
   The Standalone Agent required for each Testkube Environment always requires a fixed license.
-- Agents assigned a **Floating license** share the ability to execute tests concurrently; if one agent with a floating license is executing tests, 
-  a second agent will queue test executions until the first agent is complete. If you, for example, purchase two floating licenses and assign those 
+- Agents assigned a **Floating license** share the ability to execute Workflows concurrently; if one Agent with a floating license is executing a Workflow, 
+  a second agent will queue Workflow executions until the first agent is complete. If you, for example, purchase two floating licenses and assign those 
   to 10 agents, two of those agents will be able to execute Workflows concurrently at any give time.
 
-Floating licenses are useful for [ephemeral use-cases](/articles/ephemeral-environments) where you don't know in advance how many agents you will have at any 
-given point in time, and/or you don’t mind if the test executions get queued.
+Floating licenses are useful for automated and/or [ephemeral use-cases](/articles/ephemeral-environments) where you don't know in advance how many agents 
+you will have at any given point in time, and/or you don’t mind if your Workflow executions get queued.
 
 :::note
-The agent limit for both Fixed and Floating Licenses is counted and enforced at the organization level, i.e., across all your environments.
+The Agent limit for both Fixed and Floating Licenses is counted and enforced at the organization level, i.e., across all your environments.
 :::
 
 ### Assigning Licenses to Agents
 
 Agents are by default assigned a fixed license (as in all the examples above), use the `--floating` argument to the Agent 
-creation command to assign a floating license:
+creation commands to instead assign a floating license, for example:
 
 ```sh
 # install temporary Runner Agent using a floating license
@@ -328,6 +328,7 @@ $ testkube install runner pr-12u48y34-runner --create --floating
 ```
 
 :::note
+- The [Standalone Agent](#the-standalone-agent-in-multi-agent-environments) required for each Environment will always be assigned a Fixed license.
 - You will only be able to create as many fixed Agents as you have Fixed licenses in your Testkube plan.
 - You will need to have at least one Floating license in your Testkube plan to be able to create Agents with the `--floating` argument.
 :::
