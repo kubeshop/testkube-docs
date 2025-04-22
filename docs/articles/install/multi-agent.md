@@ -8,6 +8,17 @@ Testube 2.X introduces the concept of Multi-Agent Environments, which adds two m
 The Multi-Agent functionality is available to any existing and new Testkube Environment, provided it has been
 upgraded to the latest version of the Testkube Control Plane and Testkube Agent.
 
+## Use Cases
+
+Being able to connect multiple Agents to a single Testkube Environment unlocks several advanced usage scenarios, 
+including:
+
+- Execute the same set of tests across production, staging or testing environments to ensure consistent test execution.
+- Execute the same set of tests in similar geographically dispersed environments to ensure consistent application behavior.
+- Execute tests in local sandbox environments during development while having access to the centralized catalog of tests.
+- Execute tests from multiple geographical locations against a (single) environment for realistic performance and e2e testing.
+- Execute tests in ephemeral environments created during CI/CD pipelines for testing and deployment purposes - [Read More](/articles/ephemeral-environments).
+
 ## Runner Agents
 
 In addition to the mandatory [Standalone Agent](#the-standalone-agent-in-multi-agent-environments), Testkube also allows you to add an arbitrary number of **Runner Agents** 
@@ -174,9 +185,11 @@ in regard to targeting/execution.
 ### Running on Multiple Runners
 
 If your target argument(s) selects multiple Runners as shown above, Testkube will by default execute your Workflow
-on one of the selected Runners (randomly selected). If you instead want to execute your Workflow on all selected Runners
-simultaneously you can add `--target-replicate <label>` to the `testkube run testworkflow` command, which will "shard"
-the Workflow Execution across all unique matches for the specified `label` (which could be `name`). 
+on only _one_ of the selected Runners (randomly selected).
+
+If you instead want to execute your Workflow on _all_ selected Runners simultaneously you can add `--target-replicate <label>` 
+to the `testkube run testworkflow` command, which will "shard" the Workflow Execution across all unique matches for the 
+specified `label` (which could be `name`). 
 
 For example:
 
@@ -200,7 +213,7 @@ When executing a Workflow with
 testkube run testworkflow my-k6-test --target group=my-group --target-replicate=team
 ```
 
-Makes two groups, sharded by team:
+This makes two groups, sharded by team:
 - The `users` team: `name=runner-1 group=my-group team=users` and `name=runner-2 group=my-group team=users`
 - The `something` team: `namerunner-=3 group=my-group team=something`
 
@@ -309,13 +322,17 @@ you will have at any given point in time, and/or you don’t mind if your Workfl
 
 ### Assigning Licenses to Agents
 
-Agents are by default assigned a fixed license (as in all the examples above), use the `--floating` argument to the Agent
+Agents are by default assigned a fixed license (as in all the examples above), use the `--floating` argument with Agent
 creation commands to instead assign a floating license, for example:
 
 ```sh
 # install temporary Runner Agent using a floating license
 $ testkube install runner pr-12u48y34-runner --create --floating
 ```
+
+The Agent will be shown with the License Type "Floating" in the list of Agents:
+
+![Floating Agent in Agent List](images/floating-agent-in-list.png)
 
 ### License Enforcement
 
@@ -337,5 +354,5 @@ to target a specific Runner Agent, either by name, group or label as [described 
 
 :::info
 Existing Environments that do not make the use of Runner Agents will continue to work as before, it is only
-when you start adding Runners that you might need to adjust how your existing Workflows are triggered by external sources.
+when you start adding additional Runner Agents that you might need to adjust how your existing Workflows are triggered by external sources.
 :::
