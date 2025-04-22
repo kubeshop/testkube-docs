@@ -5,16 +5,8 @@ Testube 2.X introduces the concept of Multi-Agent Environments, which adds two m
 1. The ability to **run the same Workflow in multiple namespaces/clusters**, (possibly at the same time!).
 2. The ability to easily **add ephemeral Runners** to an Environment and run your Test Workflows on them. 
 
-Both of these scenarios were previously hard to achieve efficiently, and required elaborate scripting as 
-described in [Remote Workflow Execution](/articles/remote-workflow-execution) and [Ephemeral Environments](/articles/ephemeral-environments).
-
 The Multi-Agent functionality is available to any existing and new Testkube Environment, provided it has been
 upgraded to the latest version of the Testkube Control Plane and Testkube Agent.
-
-:::note
-Multi-Agent Environments are in Preview, meaning they are actively being developed and improved based on user
-feedback.
-:::
 
 ## Runner Agents
 
@@ -113,7 +105,7 @@ Grouped Runners are defined by a `--group` argument when creating/installing:
 $ testkube install runner staging-runner --create --group staging-runners
 ```
 
-Grouped Runners _need_ to be either targeted by name (as independent runners above), or by group, which will 
+Grouped Runners _need_ to be either targeted by name (as the independent runners above), or by group, which will 
 use any available Runner in that group for execution:
 
 ```sh
@@ -141,7 +133,7 @@ Global Runners are created with the `--global` argument:
 $ testkube install runner global-runner --create --global 
 ```
 
-Global runners will be used either when no target is specified to the run command, or when a corresponding
+Global runners will be used either when no target is specified to the run command or when a corresponding
 label-filter (see below) applies to them.
 
 ```sh
@@ -155,7 +147,11 @@ The required Standalone Agent always works as a Global Runner.
 
 ## Runner Targeting
 
-### Using labels for filtering
+Once you have created Runners in your Environment, you can select them both implicitly and explicitly when 
+executing your Workflows. Selection of Runners can be done both at runtime when executing a 
+Workflow via the CLI or Dashboard, or at design-time when defining Workflows, CronJobs, Triggers, etc.
+
+### Using labels for Runner selection
 
 Labels can be added to any type of Runner with the `-l <name=value>` argument during creation, these 
 can then be used to filter out Runners that are used for execution:
@@ -177,7 +173,7 @@ in regard to targeting/execution.
 
 ### Running on Multiple Runners
 
-If your target argument(s) select multiple Runners as shown above, Testkube will by default execute your Workflow
+If your target argument(s) selects multiple Runners as shown above, Testkube will by default execute your Workflow
 on one of the selected Runners (randomly selected). If you instead want to execute your Workflow on all selected Runners
 simultaneously you can add `--target-replicate <label>` to the `testkube run testworkflow` command, which will "shard"
 the Workflow Execution across all unique matches for the specified `label` (which could be `name`). 
@@ -193,9 +189,9 @@ will run the specified Workflow on both Runners since their names are unique.
 A more advanced use-case: For Grouped Runners created with these arguments:
 
 ```
-name=1 group=my-group team=users
-name=2 group=my-group team=users
-name=3 group=my-group team=something
+name=runner-1 group=my-group team=users
+name=runner-2 group=my-group team=users
+name=runner-3 group=my-group team=something
 ```
 
 When executing a Workflow with
@@ -204,13 +200,13 @@ When executing a Workflow with
 testkube run testworkflow my-k6-test --target group=my-group --target-replicate=team
 ```
 
-Makes there two groups, sharded by team:
-- The `users` team: `name=1 group=my-group team=users` and `name=2 group=my-group team=users`
-- The `something` team: `name=3 group=my-group team=something`
+Makes two groups, sharded by team:
+- The `users` team: `name=runner-1 group=my-group team=users` and `name=runner-2 group=my-group team=users`
+- The `something` team: `namerunner-=3 group=my-group team=something`
 
 Because of that, the execution will be run twice:
-- any (1) of: `name=1 group=my-group team=users` and `name=2 group=my-group team=users`
-- any (1) of: `name=3 group=my-group team=something`
+- any (1) of: `name=runner-1 group=my-group team=users` and `name=runner-2 group=my-group team=users`
+- any (1) of: `name=runner-3 group=my-group team=something`
 
 ### Targeting Runners in Testkube Resources
 
@@ -278,8 +274,7 @@ Run on all Runners in the `region-us` group, except the `k8s-1.21-spain` Runner:
 
 When requesting to run a Workflow on a specific Agent, either by name or label(s), and no
 matching Agent is available, Testkube will queue the execution of the Workflow indefinitely; once a corresponding
-Agent is available (barring Floating license restrictions [described below](#licensing-for-testkube-agents)) the queued
-Workflow will be executed accordingly.
+Agent is available, the queued Workflow will be executed accordingly (barring Floating license restrictions [described below](#licensing-for-testkube-agents)).
 
 You can abort queued executions using the corresponding [CLI Command](/cli/testkube-abort-testworkflowexecution) or from the Dashboard.
 
@@ -287,8 +282,7 @@ You can abort queued executions using the corresponding [CLI Command](/cli/testk
 
 Each Testkube Environment requires a **[Standalone Agent](standalone-agent)** which provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
 
-Standalone Agents are installed when initially creating an Environment and shown on the bottom of 
-the list of Agents with the label `runnertype: superagent`.
+Standalone Agents are installed when initially creating an Environment and shown on the bottom of the list of Agents with the label `runnertype: superagent`.
 
 Standalone Agents work as a Global Runner (described above) and can also be explicitly targeted in several ways:
 
