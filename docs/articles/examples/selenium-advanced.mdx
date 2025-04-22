@@ -18,6 +18,10 @@ just make sure to update the `name` and `namespace` for your environment if need
 - The `spec.steps[0].parallel.matrix` property defines a matrix of ip-addresses gathered from the corresponding browser engine services (read more about [Matrix Parameters](/articles/test-workflows-matrix-and-sharding)).
 - The `spec.steps[0].parallel.steps` property defines the actual steps to run on each parallel node, using the properties defined in the matrix for the browser name and ip address.
 
+:::tip
+Check out [this article](https://testkube.io/learn/faster-smarter-selenium-testing-with-testkube-on-kubernetes) to learn how to use Selenium Grid with Testkube under Kubernetes.
+:::
+
 <AdvancedSelenium/>
 
 After execution, you can see the output from the test executions under the executions panel tabs:
