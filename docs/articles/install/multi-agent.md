@@ -14,7 +14,7 @@ Being able to connect multiple Agents to a single Testkube Environment unlocks s
 including:
 
 - Execute the same set of tests across production, staging or testing environments to ensure consistent test execution.
-- Execute the same set of tests in similar geographically dispersed environments to ensure consistent application behavior.
+- Execute the same set of tests in geographically dispersed environments to ensure consistent application behavior.
 - Execute tests in local sandbox environments during development while having access to the centralized catalog of tests.
 - Execute tests from multiple geographical locations against a (single) environment for realistic performance and e2e testing.
 - Execute tests in ephemeral environments created during CI/CD pipelines for testing and deployment purposes - [Read More](/articles/ephemeral-environments).
@@ -25,7 +25,7 @@ In addition to the mandatory [Standalone Agent](#the-standalone-agent-in-multi-a
 to any Environment from the [Agent Management](/testkube-pro/articles/agent-management) section of your Environment Settings or directly with the CLI (see below).
 
 Runner Agents (or just "Runners") are lightweight agents that can be installed in any namespace/cluster where you need to
-run your Testkube Workflows. Each Runner Agent has a name, an internal id, and an optional list of labels which
+run your Testkube Workflows. Each Runner Agent has a name, a license type, an agent id, and an optional list of labels which
 can be used to select Agents for execution:
 
 ![Multi-Agent Management](images/multi-agent-management.png)
@@ -273,11 +273,9 @@ Run on all Runners in the `region-us` group, except the `k8s-1.21-spain` Runner:
 ...
     target:
       match:
-        group:
-          - region-eu
+        group: [region-eu]
       not:
-        name:
-          - k8s-1.21-spain
+        name: [k8s-1.21-spain]
       replicate:
         - name
 ...
