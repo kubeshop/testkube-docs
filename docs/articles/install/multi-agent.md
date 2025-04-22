@@ -141,7 +141,7 @@ label-filter (see below) applies to them.
 testkube run testworkflow my-k6-test 
 ```
 
-:::note 
+:::info 
 The required Standalone Agent always works as a Global Runner.
 :::
 
@@ -307,13 +307,9 @@ Testkube Agents can be assigned either Fixed or Floating licenses.
 Floating licenses are useful for automated and/or [ephemeral use-cases](/articles/ephemeral-environments) where you don't know in advance how many agents 
 you will have at any given point in time, and/or you don’t mind if your Workflow executions get queued.
 
-:::note
-The Agent limit for both Fixed and Floating Licenses is counted and enforced at the organization level, i.e., across all your environments.
-:::
-
 ### Assigning Licenses to Agents
 
-Agents are by default assigned a fixed license (as in all the examples above), use the `--floating` argument to the Agent 
+Agents are by default assigned a fixed license (as in all the examples above), use the `--floating` argument to the Agent
 creation commands to instead assign a floating license, for example:
 
 ```sh
@@ -321,13 +317,16 @@ creation commands to instead assign a floating license, for example:
 $ testkube install runner pr-12u48y34-runner --create --floating
 ```
 
-:::note
+### License Enforcement
+
+The Agent limit for both Fixed and Floating Licenses is counted and enforced at the organization level, i.e., across all your
+environments. Furthermore:
+
 - The [Standalone Agent](#the-standalone-agent-in-multi-agent-environments) required for each Environment will always be assigned a Fixed license.
 - You will only be able to create as many fixed Agents as you have Fixed licenses in your Testkube plan.
 - You will need to have at least one Floating license in your Testkube plan to be able to create Agents with the `--floating` argument.
 
 Please don't hesitate to [Get in Touch](https://testkube.io/contact) if you have any questions/concerns about licensing.
-:::
 
 ## Migrating existing Environments
 
@@ -336,7 +335,7 @@ executed by CI/CD, CronJobs, Kubernetes Event Triggers, etc., these will continu
 (including the required Standalone Agent) connected to your Environment unless you update the corresponding triggering commands/configuration 
 to target a specific Runner Agent, either by name, group or label as [described above](/articles/install/multi-agent#runner-targeting).
 
-:::note
+:::info
 Existing Environments that do not make the use of Runner Agents will continue to work as before, it is only
 when you start adding Runners that you might need to adjust how your existing Workflows are triggered by external sources.
 :::
