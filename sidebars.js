@@ -710,6 +710,11 @@ const sidebars = {
               label: "Functional Testing with Selenium",
               href: "https://testkube.io/learn/functional-testing-with-selenium-in-testkube",
             },
+            {
+              type: "link",
+              label: "Selenium Grid with Testkube",
+              href: "https://testkube.io/learn/faster-smarter-selenium-testing-with-testkube-on-kubernetes",
+            },
           ],
         },
         {
