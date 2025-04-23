@@ -9,7 +9,7 @@ The "**Run Now**" button in the top right has two modes of operation:
 - Clicking on the "Run Now" label will immediately schedule an execution of the workflow on a global runner.
 - Clicking on the down-arrow will open a list of available Runners where one can select on which Runner(s) to run.
 
-In the below screenshot, the Workflow will run on the two selected Runners when the "Run on 2 selected runners" button
+In the below screenshot, the Workflow will run on the three selected Runners when the "Run on 3 selected runners" button
 is selected.
 
 ![Run Workflow Button](images/run-workflow-button.png)
@@ -46,7 +46,7 @@ the table will show an expandable section that includes all those executions:
 
 ![Multi-agent Executions List](images/mulit-agent-executions-list.png)
 
-Use the arrow at the top left of this section to expand/collapse the contained executions. 
+Use the arrow at the top right of this section to expand/collapse the contained executions. 
 
 ## CLI Commands Tab
 
