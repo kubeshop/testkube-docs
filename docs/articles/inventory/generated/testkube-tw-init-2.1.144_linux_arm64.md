@@ -3,45 +3,15 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:70adc4c6d9ac96d9bf0497f4b6faf9e01e26f3356c7341e6abe9a3c9c77ce999</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/medium-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
-<tr><td>platform</td><td>linux/amd64</td></tr>
-<tr><td>size</td><td>18 MB</td></tr>
+<tr><td>digest</td><td><code>sha256:ae90193b0bde40718d98fa2c84b90871ab7195e8ec0ebc70c4469c8b9ffcfb9d</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/medium-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>platform</td><td>linux/arm64</td></tr>
+<tr><td>size</td><td>16 MB</td></tr>
 <tr><td>packages</td><td>137</td></tr>
 </table>
 </details></table>
 </details>
 
 <table>
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.32.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/crypto@0.32.0</code></small><br/>
-
-```dockerfile
-# tw-init.Dockerfile (18:18)
-COPY --from=build /app/testworkflow-init /init
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2025-22869?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.35.0"><img alt="high : CVE--2025--22869" src="https://img.shields.io/badge/CVE--2025--22869-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.35.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.35.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.042%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-SSH servers which implement file transfer protocols are vulnerable to a denial of service attack from clients which complete the key exchange slowly, or not at all, causing pending content to be read into memory, but never transmitted.
-
-</blockquote>
-</details>
-</details></td></tr>
-
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/oauth2</strong> <code>0.26.0</code> (golang)</summary>
 
@@ -67,6 +37,36 @@ COPY --from=build /app/testworkflow-init /init
 <blockquote>
 
 An attacker can pass a malicious malformed token which causes unexpected memory to be consumed during parsing.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.32.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/crypto@0.32.0</code></small><br/>
+
+```dockerfile
+# tw-init.Dockerfile (18:18)
+COPY --from=build /app/testworkflow-init /init
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-22869?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.35.0"><img alt="high : CVE--2025--22869" src="https://img.shields.io/badge/CVE--2025--22869-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.35.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.35.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.042%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+SSH servers which implement file transfer protocols are vulnerable to a denial of service attack from clients which complete the key exchange slowly, or not at all, causing pending content to be read into memory, but never transmitted.
 
 </blockquote>
 </details>

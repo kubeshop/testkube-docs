@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:6200cedfbe0d340913f74f16f93dcd203ec89702c7f120abf45b4bbbea3689cf</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 5" src="https://img.shields.io/badge/high-5-e25d68"/> <img alt="medium: 7" src="https://img.shields.io/badge/medium-7-fbb552"/> <img alt="low: 23" src="https://img.shields.io/badge/low-23-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>digest</td><td><code>sha256:6200cedfbe0d340913f74f16f93dcd203ec89702c7f120abf45b4bbbea3689cf</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 5" src="https://img.shields.io/badge/high-5-e25d68"/> <img alt="medium: 7" src="https://img.shields.io/badge/medium-7-fbb552"/> <img alt="low: 24" src="https://img.shields.io/badge/low-24-fce1a9"/> <!-- unspecified: 0 --></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>100 MB</td></tr>
 <tr><td>packages</td><td>475</td></tr>
@@ -35,36 +35,14 @@ The net/http package improperly accepts a bare LF as a line terminator in chunke
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/oauth2</strong> <code>0.24.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/golang-jwt/jwt/v4</strong> <code>4.5.1</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/oauth2@0.24.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-22868?s=golang&n=oauth2&ns=golang.org%2Fx&t=golang&vr=%3C0.27.0"><img alt="high : CVE--2025--22868" src="https://img.shields.io/badge/CVE--2025--22868-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.27.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.27.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.051%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-An attacker can pass a malicious malformed token which causes unexpected memory to be consumed during parsing.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/golang-jwt/jwt/v5</strong> <code>5.2.1</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/golang-jwt/jwt@5.2.1#v5</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-30204?s=github&n=v5&ns=github.com%2Fgolang-jwt%2Fjwt&t=golang&vr=%3E%3D5.0.0-rc.1%2C%3C5.2.2"><img alt="high 8.7: CVE--2025--30204" src="https://img.shields.io/badge/CVE--2025--30204-lightgrey?label=high%208.7&labelColor=e25d68"/></a> <i>Asymmetric Resource Consumption (Amplification)</i>
+<small><code>pkg:golang/github.com/golang-jwt/jwt@4.5.1#v4</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2025-30204?s=github&n=v4&ns=github.com%2Fgolang-jwt%2Fjwt&t=golang&vr=%3C4.5.2"><img alt="high 8.7: CVE--2025--30204" src="https://img.shields.io/badge/CVE--2025--30204-lightgrey?label=high%208.7&labelColor=e25d68"/></a> <i>Asymmetric Resource Consumption (Amplification)</i>
 
 <table>
-<tr><td>Affected range</td><td><code>>=5.0.0-rc.1<br/><5.2.2</code></td></tr>
-<tr><td>Fixed version</td><td><code>5.2.2</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;4.5.2</code></td></tr>
+<tr><td>Fixed version</td><td><code>4.5.2</code></td></tr>
 <tr><td>CVSS Score</td><td><code>8.7</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.022%</code></td></tr>
@@ -87,6 +65,28 @@ See [`parse.ParseUnverified`](https://github.com/golang-jwt/jwt/blob/c035977d9e1
 ### Impact
 
 Excessive memory allocation
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/oauth2</strong> <code>0.24.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/oauth2@0.24.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2025-22868?s=golang&n=oauth2&ns=golang.org%2Fx&t=golang&vr=%3C0.27.0"><img alt="high : CVE--2025--22868" src="https://img.shields.io/badge/CVE--2025--22868-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.27.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.27.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.051%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+An attacker can pass a malicious malformed token which causes unexpected memory to be consumed during parsing.
 
 </blockquote>
 </details>
@@ -126,14 +126,14 @@ https://sourceware.org/pipermail/libc-announce/2025/000044.html
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/golang-jwt/jwt/v4</strong> <code>4.5.1</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/golang-jwt/jwt/v5</strong> <code>5.2.1</code> (golang)</summary>
 
-<small><code>pkg:golang/github.com/golang-jwt/jwt@4.5.1#v4</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-30204?s=github&n=v4&ns=github.com%2Fgolang-jwt%2Fjwt&t=golang&vr=%3C4.5.2"><img alt="high 8.7: CVE--2025--30204" src="https://img.shields.io/badge/CVE--2025--30204-lightgrey?label=high%208.7&labelColor=e25d68"/></a> <i>Asymmetric Resource Consumption (Amplification)</i>
+<small><code>pkg:golang/github.com/golang-jwt/jwt@5.2.1#v5</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2025-30204?s=github&n=v5&ns=github.com%2Fgolang-jwt%2Fjwt&t=golang&vr=%3E%3D5.0.0-rc.1%2C%3C5.2.2"><img alt="high 8.7: CVE--2025--30204" src="https://img.shields.io/badge/CVE--2025--30204-lightgrey?label=high%208.7&labelColor=e25d68"/></a> <i>Asymmetric Resource Consumption (Amplification)</i>
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;4.5.2</code></td></tr>
-<tr><td>Fixed version</td><td><code>4.5.2</code></td></tr>
+<tr><td>Affected range</td><td><code>>=5.0.0-rc.1<br/><5.2.2</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.2.2</code></td></tr>
 <tr><td>CVSS Score</td><td><code>8.7</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.022%</code></td></tr>
@@ -235,7 +235,7 @@ Matching of hosts against proxy patterns can improperly treat an IPv6 zone ID as
 <table>
 <tr><td>Affected range</td><td><code>>=1.20.1-2+deb12u2</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.012%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.009%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
 </table>
 
@@ -337,7 +337,7 @@ overflow is non-issue
 <table>
 <tr><td>Affected range</td><td><code>&lt;7.88.1-10+deb12u9</code></td></tr>
 <tr><td>Fixed version</td><td><code>7.88.1-10+deb12u9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.192%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.197%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
 </table>
 
@@ -443,6 +443,31 @@ This is the same sort of issue as in the golang.org/x/oauth2/jws package as CVE-
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>minio</strong> <code>2025.2.7-0</code> (bitnami)</summary>
+
+<small><code>pkg:bitnami/minio@2025.2.7-0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2025-27414?s=bitnami&n=minio&t=bitnami&vr=%3E%3D2024.6.6%2C%3C2025.2.28"><img alt="medium 4.6: CVE--2025--27414" src="https://img.shields.io/badge/CVE--2025--27414-lightgrey?label=medium%204.6&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=2024.6.6<br/><2025.2.28</code></td></tr>
+<tr><td>Fixed version</td><td><code>2025.2.28</code></td></tr>
+<tr><td>CVSS Score</td><td><code>4.6</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N/E:U/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.122%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+MinIO is a high performance object storage. Starting in RELEASE.2024-06-06T09-36-42Z and prior to 
+RELEASE.2025-02-28T09-55-16Z, a bug in evaluating the trust of the SSH key used in an SFTP connection to MinIO allows authentication bypass and unauthorized data access. On a MinIO server with SFTP access configured and using LDAP as an external identity provider, MinIO supports SSH key based authentication for SFTP connections when the user has the `sshPublicKey` attribute set in their LDAP server. The server trusts the client's key only when the public key is the same as the `sshPublicKey` attribute. Due to the bug, when the user has no `sshPublicKey` property in LDAP, the server ends up trusting the key allowing the client to perform any FTP operations allowed by the MinIO access policies associated with the LDAP user (or any of their groups). Three requirements must be met in order to exploit the vulnerability. First, the MinIO server must be configured to allow SFTP access and use LDAP as an external identity provider. Second, the attacker must have knowledge of an LDAP username that does not have the `sshPublicKey` property set. Third, such an LDAP username or one of their groups must also have some MinIO access policy configured. When this bug is successfully exploited, the attacker can perform any FTP operations (i.e. reading, writing, deleting and listing objects) allowed by the access policy associated with the LDAP user account (and their groups). Version 1.2.0 fixes the issue.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>gnutls28</strong> <code>3.7.9-2+deb12u3</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/gnutls28@3.7.9-2%2Bdeb12u3?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
@@ -473,31 +498,6 @@ Fixed by: https://gitlab.com/gnutls/gnutls/-/commit/4760bc63531e3f5039e70ede91a2
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>minio</strong> <code>2025.2.7-0</code> (bitnami)</summary>
-
-<small><code>pkg:bitnami/minio@2025.2.7-0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-27414?s=bitnami&n=minio&t=bitnami&vr=%3E%3D2024.6.6%2C%3C2025.2.28"><img alt="medium 4.6: CVE--2025--27414" src="https://img.shields.io/badge/CVE--2025--27414-lightgrey?label=medium%204.6&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=2024.6.6<br/><2025.2.28</code></td></tr>
-<tr><td>Fixed version</td><td><code>2025.2.28</code></td></tr>
-<tr><td>CVSS Score</td><td><code>4.6</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N/E:U/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.122%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-MinIO is a high performance object storage. Starting in RELEASE.2024-06-06T09-36-42Z and prior to 
-RELEASE.2025-02-28T09-55-16Z, a bug in evaluating the trust of the SSH key used in an SFTP connection to MinIO allows authentication bypass and unauthorized data access. On a MinIO server with SFTP access configured and using LDAP as an external identity provider, MinIO supports SSH key based authentication for SFTP connections when the user has the `sshPublicKey` attribute set in their LDAP server. The server trusts the client's key only when the public key is the same as the `sshPublicKey` attribute. Due to the bug, when the user has no `sshPublicKey` property in LDAP, the server ends up trusting the key allowing the client to perform any FTP operations allowed by the MinIO access policies associated with the LDAP user (or any of their groups). Three requirements must be met in order to exploit the vulnerability. First, the MinIO server must be configured to allow SFTP access and use LDAP as an external identity provider. Second, the attacker must have knowledge of an LDAP username that does not have the `sshPublicKey` property set. Third, such an LDAP username or one of their groups must also have some MinIO access policy configured. When this bug is successfully exploited, the attacker can perform any FTP operations (i.e. reading, writing, deleting and listing objects) allowed by the access policy associated with the LDAP user account (and their groups). Version 1.2.0 fixes the issue.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 4" src="https://img.shields.io/badge/L-4-fce1a9"/> <!-- unspecified: 0 --><strong>openldap</strong> <code>2.5.13+dfsg-5</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/openldap@2.5.13%2Bdfsg-5?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
@@ -506,8 +506,8 @@ RELEASE.2025-02-28T09-55-16Z, a bug in evaluating the trust of the SSH key used 
 <table>
 <tr><td>Affected range</td><td><code>>=2.5.13+dfsg-5</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.414%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>60th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.394%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>59th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -533,8 +533,8 @@ protocols published prior to RFC6125, like RFC4513 for LDAP.
 <table>
 <tr><td>Affected range</td><td><code>>=2.5.13+dfsg-5</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>5.322%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>89th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.643%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>81st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -555,8 +555,8 @@ nops slapd-module not built
 <table>
 <tr><td>Affected range</td><td><code>>=2.5.13+dfsg-5</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.077%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.116%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -729,26 +729,89 @@ https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105039
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>apt</strong> <code>2.6.1</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>libgcrypt20</strong> <code>1.10.1-3</code> (deb)</summary>
 
-<small><code>pkg:deb/debian/apt@2.6.1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2011-3374?s=debian&n=apt&ns=debian&t=deb&osn=debian&osv=12&vr=%3E%3D2.6.1"><img alt="low : CVE--2011--3374" src="https://img.shields.io/badge/CVE--2011--3374-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<small><code>pkg:deb/debian/libgcrypt20@1.10.1-3?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-2236?s=debian&n=libgcrypt20&ns=debian&t=deb&osn=debian&osv=12&vr=%3E%3D1.10.1-3"><img alt="low : CVE--2024--2236" src="https://img.shields.io/badge/CVE--2024--2236-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>>=2.6.1</code></td></tr>
+<tr><td>Affected range</td><td><code>>=1.10.1-3</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>1.082%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>77th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.123%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-It was found that apt-key in apt, all versions, do not correctly validate gpg keys with the master keyring, leading to a potential man-in-the-middle attack.
+A timing-based side-channel flaw was found in libgcrypt's RSA implementation. This issue may allow a remote attacker to initiate a Bleichenbacher-style attack, which can lead to the decryption of RSA ciphertexts.
 
 ---
-- apt <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=642480)
-Not exploitable in Debian, since no keyring URI is defined
+- libgcrypt20 <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1065683)
+https://bugzilla.redhat.com/show_bug.cgi?id=2268268
+https://lists.gnupg.org/pipermail/gcrypt-devel/2024-March/005607.html
+https://github.com/tomato42/marvin-toolkit/tree/master/example/libgcrypt
+https://people.redhat.com/~hkario/marvin/
+https://dev.gnupg.org/T7136
+https://gitlab.com/redhat-crypto/libgcrypt/libgcrypt-mirror/-/merge_requests/17
+Not in scope for libgcrypt security policy, work ongoing to add support in the protocol layer
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2018-6829?s=debian&n=libgcrypt20&ns=debian&t=deb&osn=debian&osv=12&vr=%3E%3D1.10.1-3"><img alt="low : CVE--2018--6829" src="https://img.shields.io/badge/CVE--2018--6829-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.10.1-3</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.841%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>73rd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+cipher/elgamal.c in Libgcrypt through 1.8.2, when used to encrypt messages directly, improperly encodes plaintexts, which allows attackers to obtain sensitive information by reading ciphertext data (i.e., it does not have semantic security in face of a ciphertext-only attack). The Decisional Diffie-Hellman (DDH) assumption does not hold for Libgcrypt's ElGamal implementation.
+
+---
+- libgcrypt20 <unfixed> (unimportant)
+- libgcrypt11 <removed> (unimportant)
+- gnupg1 <unfixed> (unimportant)
+- gnupg <removed> (unimportant)
+https://github.com/weikengchen/attack-on-libgcrypt-elgamal
+https://github.com/weikengchen/attack-on-libgcrypt-elgamal/wiki
+https://lists.gnupg.org/pipermail/gcrypt-devel/2018-February/004394.html
+GnuPG uses ElGamal in hybrid mode only.
+This is not a vulnerability in libgcrypt, but in an application using
+it in an insecure manner, see also
+https://lists.gnupg.org/pipermail/gcrypt-devel/2018-February/004401.html
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>tar</strong> <code>1.34+dfsg-1.2+deb12u1</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/tar@1.34%2Bdfsg-1.2%2Bdeb12u1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2005-2541?s=debian&n=tar&ns=debian&t=deb&osn=debian&osv=12&vr=%3E%3D1.34%2Bdfsg-1.2%2Bdeb12u1"><img alt="low : CVE--2005--2541" src="https://img.shields.io/badge/CVE--2005--2541-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.34+dfsg-1.2+deb12u1</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>2.187%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>83rd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Tar 1.15.1 does not properly warn the user when extracting setuid or setgid files, which may allow local users or remote attackers to gain privileges.
+
+---
+This is intended behaviour, after all tar is an archiving tool and you
+need to give -p as a command line flag
+- tar <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=328228; unimportant)
 
 </blockquote>
 </details>
@@ -782,29 +845,57 @@ unknown usernames are not recorded on login failures
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>xz-utils</strong> <code>5.4.1-0.2</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>apt</strong> <code>2.6.1</code> (deb)</summary>
 
-<small><code>pkg:deb/debian/xz-utils@5.4.1-0.2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-31115?s=debian&n=xz-utils&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.4.1-1"><img alt="low : CVE--2025--31115" src="https://img.shields.io/badge/CVE--2025--31115-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<small><code>pkg:deb/debian/apt@2.6.1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2011-3374?s=debian&n=apt&ns=debian&t=deb&osn=debian&osv=12&vr=%3E%3D2.6.1"><img alt="low : CVE--2011--3374" src="https://img.shields.io/badge/CVE--2011--3374-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;5.4.1-1</code></td></tr>
-<tr><td>Fixed version</td><td><code>5.4.1-1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.117%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>>=2.6.1</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>1.082%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>77th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-XZ Utils provide a general-purpose data-compression library plus command-line tools. In XZ Utils 5.3.3alpha to 5.8.0, the multithreaded .xz decoder in liblzma has a bug where invalid input can at least result in a crash. The effects include heap use after free and writing to an address based on the null pointer plus an offset. Applications and libraries that use the lzma_stream_decoder_mt function are affected. The bug has been fixed in XZ Utils 5.8.1, and the fix has been committed to the v5.4, v5.6, v5.8, and master branches in the xz Git repository. No new release packages will be made from the old stable branches, but a standalone patch is available that applies to all affected releases.
+It was found that apt-key in apt, all versions, do not correctly validate gpg keys with the master keyring, leading to a potential man-in-the-middle attack.
 
 ---
-- xz-utils 5.8.1-1
-[bullseye] - xz-utils <not-affected> (Vulnerable code introduced later)
-https://www.openwall.com/lists/oss-security/2025/04/03/1
-https://tukaani.org/xz/threaded-decoder-early-free.html
-https://github.com/tukaani-project/xz/security/advisories/GHSA-6cc8-p5mm-29w2
+- apt <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=642480)
+Not exploitable in Debian, since no keyring URI is defined
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>coreutils</strong> <code>9.1-1</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/coreutils@9.1-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2017-18018?s=debian&n=coreutils&ns=debian&t=deb&osn=debian&osv=12&vr=%3E%3D9.1-1"><img alt="low : CVE--2017--18018" src="https://img.shields.io/badge/CVE--2017--18018-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=9.1-1</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.045%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+In GNU Coreutils through 8.29, chown-core.c in chown and chgrp does not prevent replacement of a plain file with a symlink during use of the POSIX "-R -L" options, which allows local users to modify the ownership of arbitrary files by leveraging a race condition.
+
+---
+- coreutils <unfixed> (unimportant)
+http://lists.gnu.org/archive/html/coreutils/2017-12/msg00045.html
+https://www.openwall.com/lists/oss-security/2018/01/04/3
+Documentation patches proposed:
+https://lists.gnu.org/archive/html/coreutils/2017-12/msg00072.html
+https://lists.gnu.org/archive/html/coreutils/2017-12/msg00073.html
+Neutralised by kernel hardening
 
 </blockquote>
 </details>
@@ -869,64 +960,6 @@ by src:shadow and util-linux is configured with --disable-chfn-chsh
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>tar</strong> <code>1.34+dfsg-1.2+deb12u1</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/tar@1.34%2Bdfsg-1.2%2Bdeb12u1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2005-2541?s=debian&n=tar&ns=debian&t=deb&osn=debian&osv=12&vr=%3E%3D1.34%2Bdfsg-1.2%2Bdeb12u1"><img alt="low : CVE--2005--2541" src="https://img.shields.io/badge/CVE--2005--2541-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.34+dfsg-1.2+deb12u1</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>2.187%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>83rd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Tar 1.15.1 does not properly warn the user when extracting setuid or setgid files, which may allow local users or remote attackers to gain privileges.
-
----
-This is intended behaviour, after all tar is an archiving tool and you
-need to give -p as a command line flag
-- tar <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=328228; unimportant)
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>coreutils</strong> <code>9.1-1</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/coreutils@9.1-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2017-18018?s=debian&n=coreutils&ns=debian&t=deb&osn=debian&osv=12&vr=%3E%3D9.1-1"><img alt="low : CVE--2017--18018" src="https://img.shields.io/badge/CVE--2017--18018-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=9.1-1</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.045%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-In GNU Coreutils through 8.29, chown-core.c in chown and chgrp does not prevent replacement of a plain file with a symlink during use of the POSIX "-R -L" options, which allows local users to modify the ownership of arbitrary files by leveraging a race condition.
-
----
-- coreutils <unfixed> (unimportant)
-http://lists.gnu.org/archive/html/coreutils/2017-12/msg00045.html
-https://www.openwall.com/lists/oss-security/2018/01/04/3
-Documentation patches proposed:
-https://lists.gnu.org/archive/html/coreutils/2017-12/msg00072.html
-https://lists.gnu.org/archive/html/coreutils/2017-12/msg00073.html
-Neutralised by kernel hardening
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gnupg2</strong> <code>2.2.40-1.1</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/gnupg2@2.2.40-1.1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
@@ -957,35 +990,29 @@ GnuPG upstream is not implementing this change.
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>libgcrypt20</strong> <code>1.10.1-3</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>xz-utils</strong> <code>5.4.1-0.2</code> (deb)</summary>
 
-<small><code>pkg:deb/debian/libgcrypt20@1.10.1-3?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2018-6829?s=debian&n=libgcrypt20&ns=debian&t=deb&osn=debian&osv=12&vr=%3E%3D1.10.1-3"><img alt="low : CVE--2018--6829" src="https://img.shields.io/badge/CVE--2018--6829-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<small><code>pkg:deb/debian/xz-utils@5.4.1-0.2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2025-31115?s=debian&n=xz-utils&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.4.1-1"><img alt="low : CVE--2025--31115" src="https://img.shields.io/badge/CVE--2025--31115-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>>=1.10.1-3</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.841%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>73rd percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;5.4.1-1</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.4.1-1</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.117%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-cipher/elgamal.c in Libgcrypt through 1.8.2, when used to encrypt messages directly, improperly encodes plaintexts, which allows attackers to obtain sensitive information by reading ciphertext data (i.e., it does not have semantic security in face of a ciphertext-only attack). The Decisional Diffie-Hellman (DDH) assumption does not hold for Libgcrypt's ElGamal implementation.
+XZ Utils provide a general-purpose data-compression library plus command-line tools. In XZ Utils 5.3.3alpha to 5.8.0, the multithreaded .xz decoder in liblzma has a bug where invalid input can at least result in a crash. The effects include heap use after free and writing to an address based on the null pointer plus an offset. Applications and libraries that use the lzma_stream_decoder_mt function are affected. The bug has been fixed in XZ Utils 5.8.1, and the fix has been committed to the v5.4, v5.6, v5.8, and master branches in the xz Git repository. No new release packages will be made from the old stable branches, but a standalone patch is available that applies to all affected releases.
 
 ---
-- libgcrypt20 <unfixed> (unimportant)
-- libgcrypt11 <removed> (unimportant)
-- gnupg1 <unfixed> (unimportant)
-- gnupg <removed> (unimportant)
-https://github.com/weikengchen/attack-on-libgcrypt-elgamal
-https://github.com/weikengchen/attack-on-libgcrypt-elgamal/wiki
-https://lists.gnupg.org/pipermail/gcrypt-devel/2018-February/004394.html
-GnuPG uses ElGamal in hybrid mode only.
-This is not a vulnerability in libgcrypt, but in an application using
-it in an insecure manner, see also
-https://lists.gnupg.org/pipermail/gcrypt-devel/2018-February/004401.html
+- xz-utils 5.8.1-1
+[bullseye] - xz-utils <not-affected> (Vulnerable code introduced later)
+https://www.openwall.com/lists/oss-security/2025/04/03/1
+https://tukaani.org/xz/threaded-decoder-early-free.html
+https://github.com/tukaani-project/xz/security/advisories/GHSA-6cc8-p5mm-29w2
 
 </blockquote>
 </details>

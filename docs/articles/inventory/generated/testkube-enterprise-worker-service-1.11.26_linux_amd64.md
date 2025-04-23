@@ -23,8 +23,8 @@ hide_table_of_contents: true
 <tr><td>Fixed version</td><td><code>2.10.27</code></td></tr>
 <tr><td>CVSS Score</td><td><code>9.6</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:N/I:H/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.028%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.032%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

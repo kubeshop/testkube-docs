@@ -3,9 +3,9 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:044b4e358a523fc6dbb8654082ed52758533cfd13459cd8b964ac4180167c4ca</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 7" src="https://img.shields.io/badge/medium-7-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
-<tr><td>platform</td><td>linux/amd64</td></tr>
-<tr><td>size</td><td>65 MB</td></tr>
+<tr><td>digest</td><td><code>sha256:d25c7479689526b3097860b15971d679931fb36b26f9bde7bc9da09051c1b7f5</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 7" src="https://img.shields.io/badge/medium-7-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>platform</td><td>linux/arm64</td></tr>
+<tr><td>size</td><td>62 MB</td></tr>
 <tr><td>packages</td><td>208</td></tr>
 </table>
 </details></table>
@@ -31,8 +31,8 @@ COPY --from=build /app /bin/app
 <tr><td>Fixed version</td><td><code>2.10.27</code></td></tr>
 <tr><td>CVSS Score</td><td><code>9.6</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:N/I:H/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.028%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.032%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -305,7 +305,7 @@ SSH servers which implement file transfer protocols are vulnerable to a denial o
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>musl</strong> <code>1.2.5-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/musl@1.2.5-r0?arch=x86_64&distro=alpine-3.20.3</code></small><br/>
+<small><code>pkg:apk/alpine/musl@1.2.5-r0?arch=aarch64&distro=alpine-3.20.3</code></small><br/>
 
 ```dockerfile
 # api-server.Dockerfile (33:33)
@@ -335,7 +335,7 @@ FROM ${ALPINE_IMAGE}
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libexpat</strong> <code>2.6.4-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/libexpat@2.6.4-r0?arch=x86_64&distro=alpine-3.20.3&upstream=expat</code></small><br/>
+<small><code>pkg:apk/alpine/libexpat@2.6.4-r0?arch=aarch64&distro=alpine-3.20.3&upstream=expat</code></small><br/>
 
 ```dockerfile
 # api-server.Dockerfile (34:34)
@@ -365,7 +365,7 @@ RUN apk --no-cache add ca-certificates libssl3 git
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 3" src="https://img.shields.io/badge/M-3-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libssl3</strong> <code>3.3.2-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/libssl3@3.3.2-r0?arch=x86_64&distro=alpine-3.20.3&upstream=openssl</code></small><br/>
+<small><code>pkg:apk/alpine/libssl3@3.3.2-r0?arch=aarch64&distro=alpine-3.20.3&upstream=openssl</code></small><br/>
 
 ```dockerfile
 # api-server.Dockerfile (33:33)
