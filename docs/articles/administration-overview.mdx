@@ -8,25 +8,46 @@ export const DocCardList = (input) => (<>
       <article key="1" className="col padding--sm intro__card">
         <DocCard item={        {
           icon: "🛠",
-          label: "Organization Management",
+          label: "Organizations",
           description:
             "Learn about managing your Organizations, including Members and API Tokens",
-          href: "../testkube-pro/articles/organization-management",
+          href: "/testkube-pro/articles/organization-management",
           type: "intro",
         }}/>
       </article>
       <article key="1" className="col padding--sm intro__card">
         <DocCard item={        {
           icon: "🛠",
-          label: "Environment Management",
+          label: "Environments",
           description:
             "Learn about managing your Environments, including Member access and custom Keyword handling",
-          href: "../testkube-pro/articles/environment-management",
+          href: "/testkube-pro/articles/environment-management",
           type: "intro",
         }}/>
       </article>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Agents",
+          description:
+            "Learn about how to manage different types of Agents in your Environments",
+          href: "/testkube-pro/articles/agent-management",
+          type: "intro",
+        }}/>
+      </article>
+
     </section>
     <section className={clsx("row indent--min")}>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
+          label: "Members",
+          description:
+            "Learn about how to manage members in your Organization",
+          href: "/testkube-pro/articles/member-management",
+          type: "intro",
+        }}/>
+      </article>
       <article key="1" className="col padding--sm intro__card">
         <DocCard item={        {
           icon: "🛠",
@@ -37,6 +58,8 @@ export const DocCardList = (input) => (<>
           type: "intro",
         }}/>
       </article>
+    </section>
+    <section className={clsx("row indent--min")}>
       <article key="1" className="col padding--sm intro__card">
         <DocCard item={        {
           icon: "🛠",
@@ -47,8 +70,6 @@ export const DocCardList = (input) => (<>
           type: "intro",
         }}/>
       </article>
-    </section>
-    <section className={clsx("row indent--min")}>
       <article key="1" className="col padding--sm intro__card">
         <DocCard item={        {
           icon: "🛠",
@@ -59,10 +80,12 @@ export const DocCardList = (input) => (<>
           type: "intro",
         }}/>
       </article>
+    </section>
+    <section className={clsx("row indent--min")}>
       <article key="1" className="col padding--sm intro__card">
         <DocCard item={        {
           icon: "🛠",
-          label: "API Token Management",
+          label: "API Tokens",
           description:
             "Learn about how to manage API Tokens used with the Testkube CLI",
           href: "../testkube-pro/articles/api-token-management",

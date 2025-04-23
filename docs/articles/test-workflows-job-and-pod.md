@@ -1,4 +1,4 @@
-# Test Workflows - Job and Pod
+# Test Workflows - Job and Pod Configuration
 
 You may need to configure the Job and Pod used for execution. It can be also used for [**parallel workers**](./test-workflows-parallel.mdx) and [**services**](./test-workflows-services.mdx).
 
@@ -49,13 +49,18 @@ spec:
     namespace: another-testkube-zone
 ```
 
+:::tip
+Check out [Ephemeral Namespaces](/articles/ephemeral-environments) for an example of how to use 
+the `namespace` property in an ephemeral environment scenario.
+:::
+
 ## Pod
 
 To pass custom Pod configuration, you may pass it in the `pod` property. It supports most of the native Kubernetes' [**PodSpec**](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/#podspec-v1-core) configuration.
 
 ### Labels & Annotations
 
-You may simply add labels and annotations for the Pod using `labels` and `annotations` properties:
+You can add labels and annotations for the Pod using `labels` and `annotations` properties:
 
 ```yaml
 spec:

@@ -52,7 +52,8 @@ a prompt for a unique environment name:
 
 After providing the environment name you will be prompted as shown below to [Install the CLI](/articles/install/cli)
 (do this only if you haven't already done so) and then run a CLI command to install the
-Testkube Agent for your environment, see [Testkube Agent Installation][installing] for more details.
+[Testkube Agent](/articles/install/standalone-agent) for your environment, the provided command will automatically
+connect the Agent to your Control Plane.
 
 ![New Environment Connection](../../img/new-environment-connection.png)
 
@@ -77,17 +78,6 @@ There are 4 tabs for managing your Environment.
 Find the general settings for your environment on the **General** tab. You can also delete the environment here, but, be aware, this action cannot be undone.
 
 ![General Settings Dashboard](../../img/general-settings-dashboard-072024.png)
-
-### Agent Information
-
-The middle section of the General tab presents information about the agent connected to this Environment, showing you:
-
-- The connection status and name of the agent.
-- Which Testkube version the Agent is running, and the latest available version (so you know if an upgrade is available).
-- CLI and Helm commands to install or update the Agent to the latest version.
-- The `testkube set context` CLI command to configure the Testkube CLI for this agent - [Read More](/testkube-pro/articles/managing-cli-context).
-
-![Agent Information](../../img/agent-information.png)
 
 ### Environment Members
 

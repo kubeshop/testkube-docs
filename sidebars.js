@@ -102,18 +102,8 @@ const sidebars = {
                 },
                 {
                   type: "doc",
-                  label: "Image Inventory",
-                  id: "articles/inventory/images",
-                },
-                {
-                  type: "doc",
                   label: "Using an external MongoDB",
                   id: "articles/mongodb-administration",
-                },
-                {
-                  type: "doc",
-                  label: "Ephemeral Environments",
-                  id: "articles/ephemeral-environments",
                 },
                 {
                   type: "doc",
@@ -142,13 +132,13 @@ const sidebars = {
                 },
                 {
                   type: "doc",
-                  label: "Using Global Parameters in Testkube Helm Charts",
+                  label: "Using Global Parameters",
                   id: "articles/global-parameters-in-testkube-helm-charts",
                 },
                 {
-                  type: "link",
-                  label: "Testkube with Kind",
-                  href: "https://testkube.io/learn/testing-in-kind-using-testkube-with-kubernetes-in-docker",
+                  type: "doc",
+                  label: "Image Inventory",
+                  id: "articles/inventory/images",
                 },
               ],
             },
@@ -184,6 +174,16 @@ const sidebars = {
           type: "doc",
           label: "Cloud Control Plane",
           id: "articles/install/cloud-overview",
+        },
+        {
+          type: "doc",
+          label: "Multi-Agent Environments",
+          id: "articles/install/multi-agent",
+        },
+        {
+          type: "doc",
+          label: "Ephemeral Environments",
+          id: "articles/ephemeral-environments",
         },
         "articles/install/faq",
         {
@@ -300,18 +300,8 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Working with Workflows",
+              label: "CLI Commands",
               id: "articles/test-workflows-creating",
-            },
-            {
-              type: "doc",
-              label: "Parameterization",
-              id: "articles/test-workflows-examples-configuration",
-            },
-            {
-              type: "doc",
-              label: "Expression Language",
-              id: "articles/test-workflows-expressions",
             },
             {
               type: "doc",
@@ -322,6 +312,16 @@ const sidebars = {
               type: "doc",
               label: "Artifacts",
               id: "articles/test-workflows-artifacts",
+            },
+            {
+              type: "doc",
+              label: "Expression Language",
+              id: "articles/test-workflows-expressions",
+            },
+            {
+              type: "doc",
+              label: "Parameterization",
+              id: "articles/test-workflows-examples-configuration",
             },
             {
               type: "doc",
@@ -340,7 +340,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Pod & Job",
+              label: "Job & Pod Configuration",
               id: "articles/test-workflows-job-and-pod",
             },
             {
@@ -515,6 +515,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Agents",
+              id: "testkube-pro/articles/agent-management",
+            },
+            {
+              type: "doc",
               label: "Members",
               id: "testkube-pro/articles/member-management",
             },
@@ -569,6 +574,11 @@ const sidebars = {
               type: "doc",
               label: "Docker CLI",
               id: "articles/testkube-cli-docker",
+            },
+            {
+              type: "doc",
+              label: "Multi-Agent CLI Commands",
+              id: "articles/multi-agent-cli",
             },
           ],
         },
@@ -699,6 +709,11 @@ const sidebars = {
               type: "link",
               label: "Functional Testing with Selenium",
               href: "https://testkube.io/learn/functional-testing-with-selenium-in-testkube",
+            },
+            {
+              type: "link",
+              label: "Selenium Grid with Testkube",
+              href: "https://testkube.io/learn/faster-smarter-selenium-testing-with-testkube-on-kubernetes",
             },
           ],
         },

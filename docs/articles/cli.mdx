@@ -16,7 +16,7 @@ export const DocCardList = (input) => (<>
           icon: "🛠",
           label: "Installation",
           description:
-            "How to install the CLI on various platforms",
+            "How to install the CLI on various platforms.",
           href: "/articles/install/cli",
           type: "intro",
         }}/>
@@ -26,7 +26,7 @@ export const DocCardList = (input) => (<>
           icon: "🛠",
           label: "Managing CLI Context",
           description:
-            "How to connect the CLI to your Testkube environments",
+            "How to connect the CLI to your Testkube Environments.",
           href: "/testkube-pro/articles/managing-cli-context",
           type: "intro",
         }}/>
@@ -38,7 +38,7 @@ export const DocCardList = (input) => (<>
           icon: "🛠",
           label: "Docker CLI",
           description:
-            "About the Dockerized version of the CLI",
+            "About the Dockerized version of the CLI.",
           href: "/articles/testkube-cli-docker",
           type: "intro",
         }}/>
@@ -46,14 +46,25 @@ export const DocCardList = (input) => (<>
       <article key="1" className="col padding--sm intro__card">
         <DocCard item={        {
           icon: "🛠",
+          label: "Multi-Agent CLI Commands",
+          description:
+            "CLI Commands related to the new Multi-Agent functionality.",
+          href: "/articles/multi-agent-cli",
+          type: "intro",
+        }}/>
+      </article>
+    </section>
+    <section className={clsx("row indent--min")}>
+      <article key="1" className="col padding--sm intro__card">
+        <DocCard item={        {
+          icon: "🛠",
           label: "Command Reference",
           description:
-            "Reference for all CLI commands",
+            "Reference for all CLI commands.",
           href: "/cli/testkube",
           type: "intro",
         }}/>
       </article>
-
     </section>
   </>
 );
