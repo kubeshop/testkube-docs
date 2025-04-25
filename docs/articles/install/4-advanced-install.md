@@ -140,7 +140,6 @@ Users will now have to be invited within the Dashboard. You can configure the SM
 
 ```yaml
 testkube-cloud-api:
-  inviteMode: `email`
   api:
     email:
       fromEmail: "no-reply@example.com"
