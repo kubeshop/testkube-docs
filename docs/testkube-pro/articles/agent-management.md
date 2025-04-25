@@ -34,7 +34,7 @@ to see examples of applicable CLI commands:
 
 :::tip
 Check out [Multi-Agent CLI Overview](/articles/multi-agent-cli) for an overview of all Testkube CLI commands for
-working with Testkube Agents.
+working with Testkube Agents, or [Runner Helm Chart Overview](/articles/multi-agent-runner-helm-chart).
 :::
 
 ## Managing the Standalone Agent

@@ -59,7 +59,11 @@ Testkube Environment, use `testkube install runner <name> --create` command to i
 $ testkube install runner staging-runner --create 
 ```
 
-This will create and install a Runner Agent named `staging-runner` that can now be used to run your Workflows. 
+This will create and install a Runner Agent named `staging-runner` that can now be used to run your Workflows.
+
+:::tip
+Alternatively, you can [install runner using Helm Charts](/articles/multi-agent-runner-helm-chart).
+:::
 
 ### 2. Run your Workflows 
 
