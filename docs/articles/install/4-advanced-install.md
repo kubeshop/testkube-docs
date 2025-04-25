@@ -136,7 +136,7 @@ testkube-cloud-api:
 
 ### Invitations
 
-Users will now have to be invited within the Dashboard. You can configure the SMTP server and Testkube will send e-mail invitations, alternatively new users will join the organization without explicitly accepting the invitation.
+Users will now have to be invited within the Dashboard. You can configure the SMTP server and Testkube will send e-mail invitations.
 
 ```yaml
 testkube-cloud-api:
