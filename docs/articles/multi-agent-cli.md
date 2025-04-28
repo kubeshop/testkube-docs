@@ -1,4 +1,4 @@
-# Multi-Agent CLI Overview
+# Multi-Agent CLI Commands
 
 The Testkube CLI provides a number of commands to work with Runner Agents in [Multi-Agent Environments](/articles/install/multi-agent).
 

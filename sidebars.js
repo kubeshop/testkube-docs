@@ -43,6 +43,7 @@ const sidebars = {
         {
           type: "category",
           label: "On-Prem Control Plane",
+          collapsed: false,
           items: [
             {
               type: "doc",
@@ -69,7 +70,6 @@ const sidebars = {
               type: "category",
               label: "Advanced Guides",
               items: [
-                "articles/install/multi-cluster",
                 {
                   type: "doc",
                   label: "SSO / Identity Provides",
@@ -147,6 +147,7 @@ const sidebars = {
         {
           type: "category",
           label: "Standalone Agent",
+          collapsed: false,
           items: [
             {
               type: "doc",
@@ -176,9 +177,26 @@ const sidebars = {
           id: "articles/install/cloud-overview",
         },
         {
-          type: "doc",
+          type: "category",
           label: "Multi-Agent Environments",
-          id: "articles/install/multi-agent",
+          collapsed: false,
+          items: [
+              {
+                type: "doc",
+                label: "Overview",
+                id: "articles/install/multi-agent",
+              },
+              {
+                type: "doc",
+                label: "Runner Agent Helm Chart",
+                id: "articles/multi-agent-runner-helm-chart",
+              },
+              {
+                type: "doc",
+                label: "CLI Commands",
+                id: "articles/multi-agent-cli",
+              },
+              ]
         },
         {
           type: "doc",
@@ -574,11 +592,6 @@ const sidebars = {
               type: "doc",
               label: "Docker CLI",
               id: "articles/testkube-cli-docker",
-            },
-            {
-              type: "doc",
-              label: "Multi-Agent CLI Commands",
-              id: "articles/multi-agent-cli",
             },
           ],
         },
