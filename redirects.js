@@ -293,6 +293,7 @@ const redirects = [
       "/testkube-pro/installing-agent",
       "/testkube-pro/articles/installing-agent",
       "/articles/install/advanced-multi-cluster",
+      "/articles/install/multi-cluster",
       "/testkube-cloud/transition-from-oss",
       "/testkube-cloud/articles/transition-from-oss",
       "/testkube-pro/transition-from-oss",
