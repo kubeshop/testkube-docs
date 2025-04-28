@@ -132,5 +132,3 @@ You can add/edit/remove categories using the corresponding actions in the interf
 There is currently only one product feature that can be toggled on or off; Legacy Test Support - [Read More](/articles/legacy-features)
 
 ![Product Features](../../img/environment-product-features.png)
-
-[installing]: ../../articles/install/multi-cluster-old.md
