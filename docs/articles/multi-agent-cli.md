@@ -86,6 +86,10 @@ you want to associate with the created Runner.
 $ testkube install runner staging-runner --create -l env=staging
 ```
 
+:::tip
+You can also install Runner Agents from a Helm Chart - [Read More](/articles/multi-agent-runner-helm-chart)
+:::
+
 ### Runner Namespaces
 
 Runners are installed in a namespace in your current cluster, the `install` command will either prompt you or you can specify 

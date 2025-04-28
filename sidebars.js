@@ -147,7 +147,6 @@ const sidebars = {
         {
           type: "category",
           label: "Standalone Agent",
-          collapsed: false,
           items: [
             {
               type: "doc",
