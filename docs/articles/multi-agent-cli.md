@@ -86,6 +86,10 @@ you want to associate with the created Runner.
 $ testkube install runner staging-runner --create -l env=staging
 ```
 
+:::note
+This command installs the runner into the Kubernetes cluster configured as the current context, before install check if it's the expected by running the command: `kubectl config current-context`. Use parameter `--namespace <namespace-name>` to place runner in a different namespace, by default it uses the name of the runner.
+:::
+
 :::tip
 You can also install Runner Agents from a Helm Chart - [Read More](/articles/multi-agent-runner-helm-chart)
 :::
