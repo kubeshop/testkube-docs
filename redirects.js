@@ -298,7 +298,7 @@ const redirects = [
       "/testkube-pro/transition-from-oss",
       "/testkube-pro/articles/transition-from-oss",
     ],
-    to: "/articles/install/multi-cluster",
+    to: "/articles/install/multi-agent",
   },
   {
     from: [

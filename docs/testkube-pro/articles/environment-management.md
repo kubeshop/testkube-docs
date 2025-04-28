@@ -133,4 +133,4 @@ There is currently only one product feature that can be toggled on or off; Legac
 
 ![Product Features](../../img/environment-product-features.png)
 
-[installing]: ../../articles/install/multi-cluster.md
+[installing]: ../../articles/install/multi-cluster-old.md
