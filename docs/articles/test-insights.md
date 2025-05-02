@@ -115,7 +115,18 @@ The execution time series allows you to analyse your executions over time.
 ### Executions Measure
 
 The x-axis will always be the time, whereas the y-axis is defined by your **Measure**. Currently, 
-you can measure the execution **count**, **duration** or the **JUnit Case count**.
+you can select one of the following:
+- **Execution count** - use this to see how many Workflows that were executed
+- **Execution duration** - use this to understand how much time your tests are taking.
+- **JUnit Case count**. - the number of JUnit tests execution based on extracted [JUnit Reports](/articles/test-workflows-reports).
+- **CPU Usage** - use this to analyze CPU consumption of your Workflow executions.
+- **Memory Usage** - use this to analyze Memory consumption of your Workflow executions.
+- **Network Usage** - use this to analyze Network usage of your Workflow executions.
+- **Disk Usage** - use this to analyze Disk usage of your Workflow executions.
+
+:::tip
+Read more about Resource Metric Insights at [Resource Aggregates in Insights](/articles/resource-metrics#resource-metric-aggregates-in-insights).
+:::
 
 ![Test Insights Executions Measure](images/insights-executions-measure.png)
 
@@ -123,6 +134,10 @@ you can measure the execution **count**, **duration** or the **JUnit Case count*
 
 You can use the **Aggregate** to decide how to treat multiple executions of the same workflow within 
 each interval. For example, for the **Execution duration** you can aggregate on **sum**, **average**, **minimum** or **maximum**.
+
+:::note
+The actual aggregate(s) available will depend on which Executions Measure you selected.
+:::
 
 ![Test Insights Executions Aggregate](images/insights-executions-aggregate.png)
 
