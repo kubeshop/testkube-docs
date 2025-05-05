@@ -43,7 +43,7 @@ These are all installed by the Testkube Helm Chart and configured accordingly.
 
 #### License Server
 
-By default, Testkube Control Plane API reach Keygen public API, it requires network access to domain `api.keygen.sh` port 443. In case of an air-gapped installations, this integration is skipped.
+By default, Testkube Control Plane API requires network access to domain `license.testkube.io` on port 443. In case of an air-gapped installations, this integration is skipped.
 
 #### Testkube Control Plane
 
