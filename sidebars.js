@@ -776,6 +776,11 @@ const sidebars = {
           id: "articles/examples/test-containers-basic",
         },
         {
+          type: "doc",
+          label: "Chainsaw",
+          id: "articles/examples/chainsaw-basic",
+        },
+        {
           type: "category",
           label: "Pytest",
           items: [
