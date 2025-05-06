@@ -1,9 +1,9 @@
 bitnami/minio:2025.2.7-debian-12-r1
 kubeshop/bitnami-mongodb:7.0.12
 kubeshop/dex:v2.42.0
-kubeshop/testkube-enterprise-api:1.11.29
+kubeshop/testkube-enterprise-api:1.11.30
 kubeshop/testkube-enterprise-ui:2.12.3
-kubeshop/testkube-enterprise-worker-service:1.11.29
-kubeshop/testkube-migration:1.11.29
+kubeshop/testkube-enterprise-worker-service:1.11.30
+kubeshop/testkube-migration:1.11.30
 nats:2.10.24-alpine
 natsio/nats-server-config-reloader:0.16.0
