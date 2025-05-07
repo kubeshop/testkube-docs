@@ -43,8 +43,8 @@ The net/http package improperly accepts a bare LF as a line terminator in chunke
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.27.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.27.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.048%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.056%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
