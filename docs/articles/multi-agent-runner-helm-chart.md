@@ -68,7 +68,7 @@ cloud:
 
 There are common things that you may want to set up in your values.
 
-### Install Runner in one namespace, and run executions in another
+### Install Runner in one namespace and run executions in another
 
 To separate concerns, you may separate your runners from the execution:
 
@@ -83,7 +83,7 @@ execution:
 By default, your executions will use a ServiceAccount that has access to pods, jobs, and events.
 It's required for [Parallel Steps](/articles/test-workflows-parallel) and [Services](/articles/test-workflows-services).
 
-To disable it, you can disable auto-creation of service account for executions:
+To disable it, you can disable auto-creation of ServiceAccount for executions:
 
 ```yaml
 execution:
@@ -92,6 +92,10 @@ execution:
       autoCreate: false
       # name: my-custom-service-account # you can also use your own service account
 ```
+
+:::tip
+Read more about [ServiceAccounts below](#service-accounts)
+:::
 
 ### Support additional namespaces
 
@@ -118,10 +122,10 @@ spec:
 
 ### Setting Global Template
 
-For each runner, you may set custom Global Template.
-It will be used as foundation for every execution in this Runner Agent.
+For each runner, you may set a custom Global Template.
+It will be used as the foundation for every execution in this Runner Agent.
 
-It's useful e.g. to set up OpenShift's security context, that will be separate for each runner:
+It's useful for example to set up OpenShift's security context, that will be separate for each runner:
 
 ```yaml
 globalTemplate:
@@ -136,4 +140,77 @@ globalTemplate:
      securityContext:
        runAsUser: 1000650001
        runAsNonRoot: true
+```
+
+## Service Accounts
+
+The Runner Agent Helm Chart creates two ServiceAccounts:
+
+- `exec-sa-testkube` - ServiceAccount for the Execution Pods; it allows the Execution to schedule and monitor Pods for `services` and `parallel` syntaxes.
+- `agent-sa-testkube` - ServiceAccount for Agent Pods; it allows the Agent to (1) create pods for executions, and (2) read configmaps/secrets in own namespace.
+
+The `agent-sa-testkube` ServiceAccount needs to be in the Agent's namespace, as it's used by the Agent's Pod.
+The `exec-sa-testkube` ServiceAccounts are deployed to the namespaces where the executions will run as they need to use them in the above situations.
+
+### Example: Using the same namespace for Agent and Executions
+
+By default, we deploy both Agent and Executions to the same namespace the Helm Chart is released to. 
+Then, `agent-sa-testkube` and `exec-sa-testkube` are deployed in that namespace. `agent-sa-testkube` has wider permissions and is used by Agent, 
+`exec-sa-testkube` has smaller permissions and is used by Executions.
+
+###  Example: Avoid ServiceAccount for the executions
+
+If you are not using `services` and `parallel` syntax, you may want to set Helm Chart values to:
+
+```yaml
+execution:
+  default:
+    serviceAccount:
+      autoCreate: false
+```
+
+This way, the executions will use default or specified ServiceAccount, that likely won't have access to i.e. reading pods (in opposite to auto-created one). 
+This blocks the ability of using `services` and `parallel` though, unless you will provide service account name 
+in the spec (`pod: { serviceAccountName: "my-name-or-i-e-agent-sa-testkube" } }`)
+
+### Example: Run executions in a different namespace than the Agent
+
+For better security, you may isolate the executions to be running in a different namespace than the Agent. This way, you ensure that they 
+cannot i.e. read Agent's data (like Agent Token), or anything else. Also, this could help to i.e. deploy multiple runners in the same namespace, 
+while having the executions for each of them in a different one.
+
+To achieve that, you can use such Helm Chart values:
+
+```yaml
+execution:
+  default:
+    namespace: "my-namespace-where-only-executions-should-run"
+```
+
+In such case:
+- `agent-sa-testkube` ServiceAccount will still be deployed in the Helm Chart release namespace,
+- `exec-sa-testkube` ServiceAccount will be deployed in `my-namespace-where-only-executions-should-run` namespace
+
+### Example: Full Security
+
+You can as well combine both cases - avoid `parallel`/`services` and deploy executions to a separate namespace. This way you have full isolation.
+
+```yaml
+execution:
+  default:
+    namespace: "my-namespace-where-only-executions-should-run"
+    serviceAccount:
+      autoCreate: false
+```
+
+### Example: Multiple Namespaces
+
+To allow Runner to support `job: { namespace: "non-default-namespace" } }` in the Test Workflow's spec, you can provide additional namespaces aside of the default one:
+
+```yaml
+execution:
+  additionalNamespaces:
+    another:
+      serviceAccount:
+        autoCreate: true
 ```
