@@ -12,6 +12,7 @@ testkube create testworkflowtemplate [flags]
 ### Options
 
 ```
+      --dry-run       validate test workflow template specification yaml
   -f, --file string   file path to get the test workflow template specification
   -h, --help          help for testworkflowtemplate
       --name string   test workflow template name
@@ -32,5 +33,5 @@ testkube create testworkflowtemplate [flags]
 
 ### SEE ALSO
 
-* [testkube create](testkube-create.md)	 - Create resource
+* [testkube create](testkube_create.md)	 - Create resource
 
