@@ -117,7 +117,7 @@ oc create route edge testkube-enterprise-minio --service=testkube-enterprise-min
 
 **_GRPC (Agent endpoint)_**
 
-The [gRPC protocol relies on HTTP/2](https://www.redhat.com/en/blog/grpc-or-http/2-ingress-connectivity-in-openshift) for communication. The connection from HAProxy to the application pod can use HTTP/2 only for re-encrypt or passthrough routes and not for edge-terminated or insecure routes.
+The [gRPC protocol relies on HTTP/2](https://www.redhat.com/en/blog/grpc-or-http/2-ingress-connectivity-in-openshift) for communication. The connection from HAProxy to the application pod can use HTTP/2 only for re-encrypt or passthrough routes and not for edge-terminated or insecure routes. We suggest to use _passthrough_:
 ```yaml
 oc create route passthrough testkube-enterprise-grpc --service=testkube-enterprise-api --port=grpcs -n testkube-control-plane --hostname agent.openshift.testkube.dev
 ```
