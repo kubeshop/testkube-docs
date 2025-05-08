@@ -33,5 +33,5 @@ testkube create testworkflowtemplate [flags]
 
 ### SEE ALSO
 
-* [testkube create](testkube_create.md)	 - Create resource
+* [testkube create](testkube-create.md)	 - Create resource
 
