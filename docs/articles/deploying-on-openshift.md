@@ -128,6 +128,13 @@ As Testkube uses the same hostname for the Dex and the API, therefore, we need t
 ```yaml
 oc create route reencrypt testkube-enterprise-api --service=testkube-enterprise-api --port=https --cert=tls.crt --key=tls.key --ca-cert=ca-chain.crt --dest-ca-cert=ca-chain.crt --hostname=api.openshift.testkube.dev --namespace testkube-control-plane
 ```
+
+**_WebSocket_**
+
+```yaml
+oc create route passthrough testkube-enterprise-ws --service=testkube-enterprise-api --port=https --hostname=websocket.openshift.testkube.dev --namespace testkube-control-plane
+```
+
 Now try accessing the Control Plane Dashboard and configuring an environment to verify that OpenShift Routes are working properly.
 
 Check more information on Openshift Routes [here](https://www.redhat.com/en/blog/encryption-secure-routes-openshift).
