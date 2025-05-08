@@ -144,13 +144,17 @@ globalTemplate:
 
 ## Service Accounts
 
-The Runner Agent Helm Chart creates two ServiceAccounts:
+The Runner Agent Helm Chart creates two kinds of ServiceAccounts:
 
 - `exec-sa-testkube` - ServiceAccount for the Execution Pods; it allows the Execution to schedule and monitor Pods for `services` and `parallel` syntaxes.
 - `agent-sa-testkube` - ServiceAccount for Agent Pods; it allows the Agent to (1) create pods for executions, and (2) read configmaps/secrets in own namespace.
 
 The `agent-sa-testkube` ServiceAccount needs to be in the Agent's namespace, as it's used by the Agent's Pod.
 The `exec-sa-testkube` ServiceAccounts are deployed to the namespaces where the executions will run as they need to use them in the above situations.
+
+:::note
+The `-testkube` suffix in the ServiceAccount names above and below might differ based on the underlying Helm Chart release name.
+:::
 
 ### Example: Using the same namespace for Agent and Executions
 
@@ -170,8 +174,16 @@ execution:
 ```
 
 This way, the executions will use default or specified ServiceAccount, that likely won't have access to i.e. reading pods (in opposite to auto-created one). 
-This blocks the ability of using `services` and `parallel` though, unless you will provide service account name 
-in the spec (`pod: { serviceAccountName: "my-name-or-i-e-agent-sa-testkube" } }`)
+This blocks the ability of using `services` and `parallel` though, unless you will provide service account name in the spec with
+
+```yaml
+  pod: 
+    serviceAccountName: "my-name-or-i-e-agent-sa-testkube"
+```
+
+:::tip
+Read more about Workflow `pod` configuration at [Test Workflows - Job and Pod Configuration](/articles/test-workflows-job-and-pod).
+:::
 
 ### Example: Run executions in a different namespace than the Agent
 
@@ -205,12 +217,19 @@ execution:
 
 ### Example: Multiple Namespaces
 
-To allow Runner to support `job: { namespace: "non-default-namespace" } }` in the Test Workflow's spec, you can provide additional namespaces aside of the default one:
+To allow Runner to support  
+
+```yaml
+  job:
+    namespace: "non-default-namespace"
+```
+
+in the Test Workflow's spec (see [Test Workflows - Job and Pod Configuration](/articles/test-workflows-job-and-pod)), you can provide additional namespaces alongside the default one:
 
 ```yaml
 execution:
   additionalNamespaces:
-    another:
+    non-default-namespace:
       serviceAccount:
         autoCreate: true
 ```
