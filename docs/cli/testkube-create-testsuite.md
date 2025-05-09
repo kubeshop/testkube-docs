@@ -1,6 +1,10 @@
 ---
 title: "testkube create testsuite"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube create testsuite
 
 Create new TestSuite

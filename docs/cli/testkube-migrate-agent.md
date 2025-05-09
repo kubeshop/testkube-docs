@@ -1,6 +1,10 @@
 ---
 title: "testkube migrate agent"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube migrate agent
 
 manual migrate agent command

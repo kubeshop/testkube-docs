@@ -1,6 +1,10 @@
 ---
 title: "testkube diagnostics install"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube diagnostics install
 
 Diagnose pre-installation dependencies

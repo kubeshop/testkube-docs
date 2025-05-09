@@ -1,6 +1,10 @@
 ---
 title: "testkube completion bash"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube completion bash
 
 Generate the autocompletion script for bash

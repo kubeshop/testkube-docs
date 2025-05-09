@@ -1,6 +1,10 @@
 ---
 title: "testkube delete webhook"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube delete webhook
 
 Delete webhook

@@ -1,6 +1,10 @@
 ---
 title: "testkube update"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube update
 
 Update resource
@@ -29,6 +33,7 @@ testkube update <resourceName> [flags]
 ### SEE ALSO
 
 * [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
+* [testkube update agent](testkube-update-agent.md)	 - 
 * [testkube update executor](testkube-update-executor.md)	 - Update Executor
 * [testkube update template](testkube-update-template.md)	 - Update Template
 * [testkube update test](testkube-update-test.md)	 - Update test

@@ -1,6 +1,10 @@
 ---
 title: "testkube pro disconnect"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube pro disconnect
 
 Switch back to Testkube Core OSS mode, based on active .kube/config file

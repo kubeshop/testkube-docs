@@ -1,6 +1,10 @@
 ---
 title: "testkube delete testworkflow"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube delete testworkflow
 
 Delete test workflows

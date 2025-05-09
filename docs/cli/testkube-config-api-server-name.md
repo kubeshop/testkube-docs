@@ -1,6 +1,10 @@
 ---
 title: "testkube config api server name"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube config api-server-name
 
 Set api server name for testkube client

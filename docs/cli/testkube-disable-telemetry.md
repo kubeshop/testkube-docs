@@ -1,6 +1,10 @@
 ---
 title: "testkube disable telemetry"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube disable telemetry
 
 disable collecting of anonymous telemetry data

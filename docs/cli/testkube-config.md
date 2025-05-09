@@ -1,6 +1,10 @@
 ---
 title: "testkube config"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube config
 
 Set feature configuration value

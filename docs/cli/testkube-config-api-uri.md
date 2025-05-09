@@ -1,6 +1,10 @@
 ---
 title: "testkube config api uri"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube config api-uri
 
 Set api uri for testkube client

@@ -1,6 +1,10 @@
 ---
 title: "testkube disable"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube disable
 
 Disable feature
@@ -29,5 +33,6 @@ testkube disable <feature> [flags]
 ### SEE ALSO
 
 * [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
+* [testkube disable agent](testkube-disable-agent.md)	 - 
 * [testkube disable telemetry](testkube-disable-telemetry.md)	 - disable collecting of anonymous telemetry data
 

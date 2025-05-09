@@ -1,6 +1,10 @@
 ---
 title: "testkube abort execution"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube abort execution
 
 Aborts execution of the test

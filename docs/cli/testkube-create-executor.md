@@ -1,6 +1,10 @@
 ---
 title: "testkube create executor"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube create executor
 
 Create new Executor

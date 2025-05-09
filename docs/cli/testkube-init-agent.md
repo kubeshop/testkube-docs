@@ -1,6 +1,10 @@
 ---
 title: "testkube init agent"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube init agent
 
 Install Testkube Pro Agent and connect to Testkube Pro environment

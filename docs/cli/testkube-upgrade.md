@@ -1,6 +1,10 @@
 ---
 title: "testkube upgrade"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube upgrade
 
 Upgrade Helm chart, install dependencies and run migrations

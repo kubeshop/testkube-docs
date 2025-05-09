@@ -1,6 +1,10 @@
 ---
 title: "testkube enable telemetry"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube enable telemetry
 
 Enable collecting of anonymous telemetry data

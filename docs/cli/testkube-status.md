@@ -1,6 +1,10 @@
 ---
 title: "testkube status"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube status
 
 Show status of feature or resource

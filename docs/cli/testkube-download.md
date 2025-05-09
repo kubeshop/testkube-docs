@@ -1,6 +1,10 @@
 ---
 title: "testkube download"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube download
 
 Artifacts management commands

@@ -1,6 +1,10 @@
 ---
 title: "testkube watch testworkflowexecution"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube watch testworkflowexecution
 
 Watch output from test workflow execution

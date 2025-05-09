@@ -1,6 +1,10 @@
 ---
 title: "testkube set"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube set
 
 Set resources

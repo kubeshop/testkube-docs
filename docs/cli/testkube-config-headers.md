@@ -1,6 +1,10 @@
 ---
 title: "testkube config headers"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube config headers
 
 Set headers for testkube client

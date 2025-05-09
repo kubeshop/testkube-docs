@@ -1,6 +1,10 @@
 ---
 title: "testkube completion zsh"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube completion zsh
 
 Generate the autocompletion script for zsh

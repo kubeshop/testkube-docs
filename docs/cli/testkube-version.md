@@ -1,6 +1,10 @@
 ---
 title: "testkube version"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube version
 
 Shows version and build info

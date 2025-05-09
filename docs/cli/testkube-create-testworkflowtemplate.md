@@ -1,6 +1,10 @@
 ---
 title: "testkube create testworkflowtemplate"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube create testworkflowtemplate
 
 Create test workflow template

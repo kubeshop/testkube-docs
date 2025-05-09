@@ -1,6 +1,10 @@
 ---
 title: "testkube delete executor"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube delete executor
 
 Delete Executor

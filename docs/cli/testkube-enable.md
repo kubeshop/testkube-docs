@@ -1,6 +1,10 @@
 ---
 title: "testkube enable"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube enable
 
 Enable feature
@@ -29,5 +33,6 @@ testkube enable <feature> [flags]
 ### SEE ALSO
 
 * [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
+* [testkube enable agent](testkube-enable-agent.md)	 - 
 * [testkube enable telemetry](testkube-enable-telemetry.md)	 - Enable collecting of anonymous telemetry data
 

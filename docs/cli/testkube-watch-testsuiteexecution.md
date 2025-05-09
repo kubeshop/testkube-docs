@@ -1,6 +1,10 @@
 ---
 title: "testkube watch testsuiteexecution"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube watch testsuiteexecution
 
 Watch test suite

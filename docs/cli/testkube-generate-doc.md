@@ -1,6 +1,10 @@
 ---
 title: "testkube generate doc"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube generate doc
 
 Generate docs for kubectl testkube

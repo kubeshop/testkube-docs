@@ -3,7 +3,8 @@
 The Testkube CLI provides a number of commands to work with Runner Agents in [Multi-Agent Environments](/articles/install/multi-agent).
 
 :::tip
-All commands below have a `--help` argument for printing all available arguments with a short description. 
+All commands below have a `--help` argument for printing all available arguments with a short description, and they
+are also documented in the [CLI Reference](/cli/testkube).
 :::
 
 ## Prerequisites

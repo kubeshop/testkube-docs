@@ -1,6 +1,10 @@
 ---
 title: "testkube abort testworkflowexecution"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube abort testworkflowexecution
 
 Abort test workflow execution

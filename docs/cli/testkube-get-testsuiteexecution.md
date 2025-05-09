@@ -1,6 +1,10 @@
 ---
 title: "testkube get testsuiteexecution"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube get testsuiteexecution
 
 Gets TestSuite Execution details

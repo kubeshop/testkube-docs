@@ -2,6 +2,10 @@
 title: "testkube"
 sidebar_position: 1
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube
 
 Testkube entrypoint for kubectl plugin
@@ -29,6 +33,7 @@ testkube [flags]
 * [testkube completion](testkube-completion.md)	 - Generate the autocompletion script for the specified shell
 * [testkube config](testkube-config.md)	 - Set feature configuration value
 * [testkube create](testkube-create.md)	 - Create resource
+* [testkube create-ticket](testkube-create-ticket.md)	 - Create bug ticket
 * [testkube dashboard](testkube-dashboard.md)	 - Open Testkube dashboard
 * [testkube debug](testkube-debug.md)	 - Print debugging info
 * [testkube delete](testkube-delete.md)	 - Delete resources
@@ -40,6 +45,7 @@ testkube [flags]
 * [testkube generate](testkube-generate.md)	 - Generate resources commands
 * [testkube get](testkube-get.md)	 - Get resources
 * [testkube init](testkube-init.md)	 - Init Testkube profiles(standalone-agent|demo|agent)
+* [testkube install](testkube-install.md)	 - 
 * [testkube login](testkube-login.md)	 - Login to Testkube Pro
 * [testkube migrate](testkube-migrate.md)	 - Migrate resources
 * [testkube pro](testkube-pro.md)	 - Testkube Pro commands

@@ -1,6 +1,10 @@
 ---
 title: "testkube dashboard"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube dashboard
 
 Open Testkube dashboard

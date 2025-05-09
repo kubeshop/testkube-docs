@@ -1,6 +1,10 @@
 ---
 title: "testkube agent"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube agent
 
 Testkube Pro Agent related commands

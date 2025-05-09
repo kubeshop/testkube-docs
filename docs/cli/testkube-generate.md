@@ -1,6 +1,10 @@
 ---
 title: "testkube generate"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube generate
 
 Generate resources commands

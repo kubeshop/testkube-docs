@@ -1,6 +1,10 @@
 ---
 title: "testkube docker init"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube docker init
 
 Run Testkube Docker Agent and connect to Testkube Pro environment

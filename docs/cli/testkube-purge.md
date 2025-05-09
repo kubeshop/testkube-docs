@@ -1,6 +1,10 @@
 ---
 title: "testkube purge"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube purge
 
 Uninstall Testkube from your current kubectl context

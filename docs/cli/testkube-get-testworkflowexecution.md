@@ -1,6 +1,10 @@
 ---
 title: "testkube get testworkflowexecution"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube get testworkflowexecution
 
 Gets TestWorkflow execution details

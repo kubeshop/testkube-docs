@@ -1,6 +1,10 @@
 ---
 title: "testkube debug"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube debug
 
 Print debugging info
