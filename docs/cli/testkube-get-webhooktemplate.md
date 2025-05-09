@@ -1,6 +1,10 @@
 ---
 title: "testkube get webhooktemplate"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube get webhooktemplate
 
 Get webhook template details

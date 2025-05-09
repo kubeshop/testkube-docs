@@ -1,6 +1,10 @@
 ---
 title: "testkube update executor"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube update executor
 
 Update Executor

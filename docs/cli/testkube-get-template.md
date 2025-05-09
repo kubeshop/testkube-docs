@@ -1,6 +1,10 @@
 ---
 title: "testkube get template"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube get template
 
 Get template details.

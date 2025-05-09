@@ -1,6 +1,10 @@
 ---
 title: "testkube delete testworkflowtemplate"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube delete testworkflowtemplate
 
 Delete test workflow templates

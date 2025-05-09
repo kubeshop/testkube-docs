@@ -1,6 +1,10 @@
 ---
 title: "testkube completion powershell"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube completion powershell
 
 Generate the autocompletion script for powershell

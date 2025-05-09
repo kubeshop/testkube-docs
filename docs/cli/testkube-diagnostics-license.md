@@ -1,6 +1,10 @@
 ---
 title: "testkube diagnostics license"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube diagnostics license
 
 Diagnose license errors

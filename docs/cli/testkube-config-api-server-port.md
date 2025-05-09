@@ -1,6 +1,10 @@
 ---
 title: "testkube config api server port"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube config api-server-port
 
 Set api server port for testkube client

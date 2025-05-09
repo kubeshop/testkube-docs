@@ -125,7 +125,7 @@ you can select one of the following:
 - **Disk Usage** - use this to analyze Disk usage of your Workflow executions.
 
 :::tip
-Read more about Resource Metric Insights at [Resource Aggregates in Insights](/articles/resource-metrics#resource-metric-aggregates-in-insights).
+Read more about Resource Metric Insights at [Resource Aggregates in Insights](/articles/resource-metrics#resource-aggregates-in-insights).
 :::
 
 ![Test Insights Executions Measure](images/insights-executions-measure.png)

@@ -1,6 +1,10 @@
 ---
 title: "testkube delete webhooktemplate"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube delete webhooktemplate
 
 Delete webhook template

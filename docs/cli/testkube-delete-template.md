@@ -1,6 +1,10 @@
 ---
 title: "testkube delete template"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube delete template
 
 Delete a template.

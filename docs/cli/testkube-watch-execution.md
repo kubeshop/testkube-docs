@@ -1,6 +1,10 @@
 ---
 title: "testkube watch execution"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube watch execution
 
 Watch logs output from executor pod

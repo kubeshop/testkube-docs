@@ -1,6 +1,10 @@
 ---
 title: "testkube diagnostics"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube diagnostics
 
 Diagnoze testkube issues with ease

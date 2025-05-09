@@ -1,6 +1,10 @@
 ---
 title: "testkube create testworkflow"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube create testworkflow
 
 Create test workflow
@@ -12,6 +16,7 @@ testkube create testworkflow [flags]
 ### Options
 
 ```
+      --dry-run       validate test workflow specification yaml
   -f, --file string   file path to get the test workflow specification
   -h, --help          help for testworkflow
       --name string   test workflow name

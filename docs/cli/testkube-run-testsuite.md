@@ -1,6 +1,10 @@
 ---
 title: "testkube run testsuite"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube run testsuite
 
 Starts new test suite

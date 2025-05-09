@@ -1,6 +1,10 @@
 ---
 title: "testkube docker"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube docker
 
 Testkube Docker commands

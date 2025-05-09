@@ -1,6 +1,10 @@
 ---
 title: "testkube get testsuite"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube get testsuite
 
 Get test suite by name

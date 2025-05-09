@@ -1,6 +1,10 @@
 ---
 title: "testkube create"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube create
 
 Create resource
@@ -30,7 +34,9 @@ testkube create <resourceName> [flags]
 ### SEE ALSO
 
 * [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
+* [testkube create agent](testkube-create-agent.md)	 - 
 * [testkube create executor](testkube-create-executor.md)	 - Create new Executor
+* [testkube create runner](testkube-create-runner.md)	 - 
 * [testkube create template](testkube-create-template.md)	 - Create a new Template.
 * [testkube create test](testkube-create-test.md)	 - Create new Test
 * [testkube create testsource](testkube-create-testsource.md)	 - Create new TestSource

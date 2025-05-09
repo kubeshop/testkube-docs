@@ -1,6 +1,10 @@
 ---
 title: "testkube completion fish"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube completion fish
 
 Generate the autocompletion script for fish

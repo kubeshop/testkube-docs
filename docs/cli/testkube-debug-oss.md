@@ -1,6 +1,10 @@
 ---
 title: "testkube debug oss"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube debug oss
 
 Show OSS installation debug info

@@ -1,6 +1,10 @@
 ---
 title: "testkube set context"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube set context
 
 Set context data for Testkube Pro

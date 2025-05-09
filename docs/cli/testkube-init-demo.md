@@ -1,6 +1,10 @@
 ---
 title: "testkube init demo"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube init demo
 
 Install Testkube On-Prem demo in your current context

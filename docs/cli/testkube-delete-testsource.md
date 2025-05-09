@@ -1,6 +1,10 @@
 ---
 title: "testkube delete testsource"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube delete testsource
 
 Delete test source

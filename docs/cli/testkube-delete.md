@@ -1,6 +1,10 @@
 ---
 title: "testkube delete"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube delete
 
 Delete resources
@@ -29,6 +33,7 @@ testkube delete <resourceName> [flags]
 ### SEE ALSO
 
 * [testkube](testkube.md)	 - Testkube entrypoint for kubectl plugin
+* [testkube delete agent](testkube-delete-agent.md)	 - 
 * [testkube delete executor](testkube-delete-executor.md)	 - Delete Executor
 * [testkube delete template](testkube-delete-template.md)	 - Delete a template.
 * [testkube delete test](testkube-delete-test.md)	 - Delete Test

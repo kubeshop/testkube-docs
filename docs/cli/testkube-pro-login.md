@@ -1,12 +1,16 @@
 ---
 title: "testkube pro login"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube pro login
 
 Login to Testkube Pro
 
 ```
-testkube pro login [flags]
+testkube pro login [apiUrl] [flags]
 ```
 
 ### Options

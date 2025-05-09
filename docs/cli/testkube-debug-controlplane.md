@@ -1,6 +1,10 @@
 ---
 title: "testkube debug controlplane"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube debug controlplane
 
 Show Control Plane debug information

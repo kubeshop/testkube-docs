@@ -1,6 +1,10 @@
 ---
 title: "testkube config namespace"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube config namespace
 
 Set namespace for testkube client

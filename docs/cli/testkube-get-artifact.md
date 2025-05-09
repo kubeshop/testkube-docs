@@ -1,6 +1,10 @@
 ---
 title: "testkube get artifact"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube get artifact
 
 List artifacts of the given test, test suite or test workflow execution name

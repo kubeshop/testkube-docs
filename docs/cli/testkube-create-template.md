@@ -1,6 +1,10 @@
 ---
 title: "testkube create template"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube create template
 
 Create a new Template.

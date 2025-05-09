@@ -1,6 +1,10 @@
 ---
 title: "testkube migrate"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube migrate
 
 Migrate resources

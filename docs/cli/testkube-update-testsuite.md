@@ -1,6 +1,10 @@
 ---
 title: "testkube update testsuite"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube update testsuite
 
 Update Test Suite

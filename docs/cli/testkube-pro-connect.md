@@ -1,6 +1,10 @@
 ---
 title: "testkube pro connect"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube pro connect
 
 Testkube Pro connect 

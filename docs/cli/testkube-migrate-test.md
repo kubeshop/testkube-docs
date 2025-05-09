@@ -1,6 +1,10 @@
 ---
 title: "testkube migrate test"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube migrate test
 
 Migrate all available tests to test workflows

@@ -1,6 +1,10 @@
 ---
 title: "testkube get testworkflowtemplate"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube get testworkflowtemplate
 
 Get all available test workflow templates

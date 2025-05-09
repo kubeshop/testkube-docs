@@ -1,6 +1,10 @@
 ---
 title: "testkube init standalone agent"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube init standalone-agent
 
 Install Testkube OSS in your current context

@@ -1,6 +1,10 @@
 ---
 title: "testkube get executor"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube get executor
 
 Gets executor details

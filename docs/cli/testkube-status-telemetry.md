@@ -1,6 +1,10 @@
 ---
 title: "testkube status telemetry"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube status telemetry
 
 Get telemetry status

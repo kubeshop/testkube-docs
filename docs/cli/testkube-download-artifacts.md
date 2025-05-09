@@ -1,6 +1,10 @@
 ---
 title: "testkube download artifacts"
 ---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
 ## testkube download artifacts
 
 download artifacts
