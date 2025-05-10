@@ -1,8 +1,8 @@
 kubeshop/kube-webhook-certgen:0.0.7
-kubeshop/testkube-api-server:2.1.149
+kubeshop/testkube-api-server:2.1.150
 kubeshop/testkube-operator:2.1.146
-kubeshop/testkube-tw-init:2.1.149
-kubeshop/testkube-tw-toolkit:2.1.149
+kubeshop/testkube-tw-init:2.1.150
+kubeshop/testkube-tw-toolkit:2.1.150
 nats:2.10.24-alpine
 natsio/nats-server-config-reloader:0.16.0
 rancher/kubectl:v1.23.7
