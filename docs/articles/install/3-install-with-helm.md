@@ -57,7 +57,7 @@ helm upgrade --install \
 ### License
 
 You will have to set a license key to get started with Testkube. You can also opt to use [a shared secret for your license][secret-license]. 
-You can request a trial license on the [Testkube website](https://testkube.io/download), no up-front credit card required.
+You can request a trial license on the [Testkube Website](https://testkube.io/download).
 
 ```yaml {2}
 global:
