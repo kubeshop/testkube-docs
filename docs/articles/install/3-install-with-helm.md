@@ -57,7 +57,7 @@ helm upgrade --install \
 ### License
 
 You will have to set a license key to get started with Testkube. You can also opt to use [a shared secret for your license][secret-license]. 
-You can request a trial license on the [Testkube website](https://testkube.io/get-started).
+You can request a trial license on the [Testkube Website](https://testkube.io/download).
 
 ```yaml {2}
 global:
@@ -204,7 +204,7 @@ kubectl create secret generic testkube-license --from-file=LICENSE_KEY=«license
 
 This secret is referenced by the `global.enterpriseLicenseRef` setting. For offline licences, you will also have to set `global.enterpriseOfflineAccess: true`.
 
-[license]: https://testkube.io/get-started
+[license]: https://testkube.io/download
 
 ## Advanced Settings
 
