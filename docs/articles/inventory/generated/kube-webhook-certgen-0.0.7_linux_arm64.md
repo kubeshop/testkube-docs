@@ -21,7 +21,7 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.23.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.8</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.015%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.016%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
 </table>
 
@@ -86,8 +86,8 @@ The tokenizer incorrectly interprets tags with unquoted attribute values that en
 <tr><td>Fixed version</td><td><code>0.36.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>4.4</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.009%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.008%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

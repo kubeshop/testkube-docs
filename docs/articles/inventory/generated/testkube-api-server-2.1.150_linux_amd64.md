@@ -13,6 +13,36 @@ hide_table_of_contents: true
 
 <table>
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libexpat</strong> <code>2.6.4-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/libexpat@2.6.4-r0?arch=x86_64&distro=alpine-3.20.3&upstream=expat</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (34:34)
+RUN apk --no-cache add ca-certificates libssl3 git
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2024-8176?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C2.7.0-r0"><img alt="high : CVE--2024--8176" src="https://img.shields.io/badge/CVE--2024--8176-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.7.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.7.0-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.358%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/oauth2</strong> <code>0.26.0</code> (golang)</summary>
 
 <small><code>pkg:golang/golang.org/x/oauth2@0.26.0</code></small><br/>
@@ -61,36 +91,6 @@ FROM ${ALPINE_IMAGE}
 <tr><td>Fixed version</td><td><code>1.2.5-r1</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.010%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libexpat</strong> <code>2.6.4-r0</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/libexpat@2.6.4-r0?arch=x86_64&distro=alpine-3.20.3&upstream=expat</code></small><br/>
-
-```dockerfile
-# api-server.Dockerfile (34:34)
-RUN apk --no-cache add ca-certificates libssl3 git
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2024-8176?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C2.7.0-r0"><img alt="high : CVE--2024--8176" src="https://img.shields.io/badge/CVE--2024--8176-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.7.0-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.7.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.358%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -204,8 +204,8 @@ The tokenizer incorrectly interprets tags with unquoted attribute values that en
 <tr><td>Fixed version</td><td><code>0.36.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>4.4</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.009%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.008%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
