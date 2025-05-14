@@ -41,7 +41,7 @@ In this WorkflowTemplate, we have defined:
 
 The WorkflowTemplate expects the following parameters to be provided (see example below):
 - `org-id`, `env-id` : Organization and Environment IDs for the Environment containing the Workflow to run, you can get these from
-  the Agent Information section of the Environment Settings - [Read More](/testkube-pro/articles/environment-management#agent-information).
+  the Agent Information section of the Environment Settings - [Read More](/testkube-pro/articles/environment-management#environment-connection).
 - `api-key` : An API Token required to call the Testkube API through the CLI - [Read More](/testkube-pro/articles/api-token-management).
 - `testkube-cli-command` : the Testkube CLI command you want to run.
 

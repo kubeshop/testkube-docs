@@ -64,7 +64,7 @@ The defined Job uses the Testkube CLI to run the specified Workflow, you will ne
 
 - `api-key` : An API Token required to call the Testkube API through the CLI - [Read More](/testkube-pro/articles/api-token-management).
 - `org-id`, `env-id` : Organization and Environment IDs for the Environment containing the Workflow to run, you can get these from 
-  the Agent Information section of the Environment Settings - [Read More](/testkube-pro/articles/environment-management#agent-information).
+  the Agent Information section of the Environment Settings - [Read More](/testkube-pro/articles/environment-management#environment-connection).
 - `root-domain` : Where you are hosting the Testkube Control Plane - use `testkube.io` for Testkube Cloud or your internal hostname for on-prem installations.
 
 ## Canary Deployments
