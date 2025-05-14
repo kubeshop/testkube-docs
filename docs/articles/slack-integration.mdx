@@ -29,7 +29,7 @@ Copy the webhook URL from the next screen and keep it handy, as we’ll need it 
 
 ## Creating a Webhook For Slack
 
-Testkube allows you to create Webhooks using the Dashboard as well as the CLI. 
+Testkube allows you to create Webhooks using the Dashboard as well as the CLI.
 
 ### Using the Testkube Dashboard
 
@@ -61,7 +61,7 @@ Here, we’re adding custom text that includes:
 
 - The name of the test workflow.
 - The status.
-- A link to the execution log of that particular test workflow. 
+- A link to the execution log of that particular test workflow.
 
 To build the URL, we access the environment variables **TESTKUBE_PRO_ORG_ID** and **TESTKUBE_PRO_ENV_ID**, which are your organization and environment variables that you get when you create an environment in Testkube.
 
@@ -72,7 +72,7 @@ We have successfully configured the Slack webhook and will now receive events in
     <details>
         <summary>Custom Payload</summary>
 
-        ```
+        ```json
         {{ $dashboardUrl := print "https://app.testkube.io/organization/" (index .Envs "TESTKUBE_PRO_ORG_ID") "/environment/" (index .Envs "TESTKUBE_PRO_ENV_ID") "/dashboard" }}
         {{ $name := "" }}
         {{ $logsUrl := "" }}
@@ -92,7 +92,7 @@ We have successfully configured the Slack webhook and will now receive events in
             "text": ":alert: Testkube Test Status \n *Name*: {{$name}} \n *Status*: {{ .Type_ }} \n *Logs*: {{$logsUrl}}"
         }
         ```
-    
+
     </details>
 </Admonition>
 
@@ -101,7 +101,7 @@ We have successfully configured the Slack webhook and will now receive events in
 We’ll create a webhook for the Slack integration using the Testkube CLI. Open a terminal and use the `testkube create webhook` command to create a webhook.
 
 ```sh
-testkube create webhook --name slack-cli --events end-test-success --selector test-type=curl-test --header Content-Type=application/json --uri  https://hooks.slack.com/services/ABCDEFGHJKL/MNOPQRSTUVW
+testkube create webhook --name slack-cli --events end-testworkflow-success --selector test-type=curl-test --header Content-Type=application/json --uri  https://hooks.slack.com/services/ABCDEFGHJKL/MNOPQRSTUVW
 ```
 
 Below are the parameters used in the create webhook command:
@@ -115,14 +115,13 @@ Below are the parameters used in the create webhook command:
 The webhook is created after executing the command.
 
 ```sh
-$ testkube create webhook --name slack-cli --events end-test-success --selector test-type=curl-test --header Content-Type=application/json --uri  https://hooks.slack.com/services/ABCDEFGHJKL/MNOPQRSTUVW
+$ testkube create webhook --name slack-cli --events end-testworkflow-success --selector test-type=curl-test --header Content-Type=application/json --uri  https://hooks.slack.com/services/ABCDEFGHJKL/MNOPQRSTUVW
 
 Context: cloud (2.0.8)   Namespace: testkube   Org: Atulpriya Sharma-personal-org   Env: local-kind
 ---------------------------------------------------------------------------------------------------
 Webhook created slack-cli 🥇
 
 ```
-
 
 # Testing the Webhook
 

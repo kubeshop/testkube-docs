@@ -38,12 +38,12 @@ The Testkube Dashboard allows you to create Webhooks interactively from the Inte
 Webhooks can be created with Testkube CLI using the `create webhook` command.
 
 ```sh
-testkube create webhook --name example-webhook --events start-test --events end-test-success --events end-test-failed --uri <YOUR_ENDPOINT_URL>
+testkube create webhook --name example-webhook --events start-testworkflow --events end-testworkflow-success --events end-testworkflow-failed --uri <YOUR_ENDPOINT_URL>
 ```
 
-`--name` - Your webhook name (in this case `example-webhook`).
-`--events` - Event that will trigger a webhook. Multiple `--events` can be defined (in this case `--events start-test --events end-test-success --events end-test-failed`). All available trigger events can be found in the [Supported Event types](#supported-event-types) section.
-`--uri` - The HTTPS endpoint where you want to receive the webhook events.
+- `--name` - Your webhook name (in this case `example-webhook`).
+- `--events` - Event that will trigger a webhook. Multiple `--events` can be defined (in this case `--events start-testworkflow --events end-testworkflow-success --events end-testworkflow-failed`). All available trigger events can be found in the [Supported Event types](#supported-event-types) section.
+- `--uri` - The HTTPS endpoint where you want to receive the webhook events.
 
 </TabItem>
 
@@ -58,9 +58,9 @@ metadata:
 spec:
   uri: <YOUR_ENDPOINT_URL>
   events:
-    - start-test
-    - end-test-success
-    - end-test-failed
+    - start-testworkflow
+    - end-testworkflow-success
+    - end-testworkflow-failed
   selector: ""
 ```
 
@@ -114,9 +114,9 @@ metadata:
 spec:
   uri: <YOUR_ENDPOINT_URL>
   events:
-    - start-test
-    - end-test-success
-    - end-test-failed
+    - start-testworkflow
+    - end-testworkflow-success
+    - end-testworkflow-failed
   selector: test-type=postman-collection
 ```
 
@@ -151,7 +151,7 @@ Create a webhook payload template file:
 And set it with `--payload-template template.json`.
 
 ```sh
-testkube create webhook --name example-webhook --events start-test --events end-test-passed --events end-test-failed --payload-template template.json --uri <YOUR_ENDPOINT_URL>
+testkube create webhook --name example-webhook --events start-testworkflow --events end-testworkflow-passed --events end-testworkflow-failed --payload-template template.json --uri <YOUR_ENDPOINT_URL>
 ```
 
 Where `<YOUR_ENDPOINT_URL>` should be replaced with the HTTPS endpoint URL where you want to receive the webhook events.
@@ -182,9 +182,9 @@ metadata:
 spec:
   uri: <YOUR_ENDPOINT_URL>
   events:
-    - start-test
-    - end-test-success
-    - end-test-failed
+    - start-testworkflow
+    - end-testworkflow-success
+    - end-testworkflow-failed
   selector: ""
   payloadObjectField: ""
   payloadTemplate: |
@@ -202,14 +202,14 @@ However, any of these [supported Event Variables](#supported-event-variables) ca
 
 For example, the following payload:
 
-```
-{"text": "Event {{ .Type_ }} - Test '{{ .TestExecution.TestName }}' execution ({{ .TestExecution.Number }}) finished with '{{ .TestExecution.ExecutionResult.Status }}' status"}
+```json
+{"text": "Event {{ .Type_ }} - Test '{{ .TestWorkflowExecution.TestName }}' execution ({{ .TestWorkflowExecution.Number }}) finished with '{{ .TestWorkflowExecution.ExecutionResult.Status }}' status"}
 ```
 
 will result in:
 
-```
-{"text": "Event end-test-success - Test 'postman-executor-smoke' execution (948) finished with 'passed' status"}
+```json
+{"text": "Event end-testworkflow-success - Test 'postman-executor-smoke' execution (948) finished with 'passed' status"}
 ```
 
 ### Helper methods
@@ -364,9 +364,9 @@ metadata:
 spec:
   uri: <YOUR_ENDPOINT_URL>
   events:
-    - start-test
-    - end-test-success
-    - end-test-failed
+    - start-testworkflow
+    - end-testworkflow-success
+    - end-testworkflow-failed
   selector: ""
   headers:
     X-Token: "12345"
@@ -452,12 +452,12 @@ For Test Suites (deprecated - [Read More](/articles/legacy-features)):
 
 ## Supported Event Variables
 
-### Event-specific variables:
+### Event-specific variables
 
 - `Id` - event ID (for example, `2a20c7da-3b77-4ea9-a33d-403187d3e9e6`)
 - `Resource`
 - `ResourceId`
-- `Type_` - event Type (for example, `start-test`, `end-test,success`, etc. All available trigger events can be found in the [Supported Event types](#supported-event-types) section).
+- `Type_` - event Type (for example, `start-testworkflow`, `end-testworkflow-success`, etc. All available trigger events can be found in the [Supported Event types](#supported-event-types) section).
 - `TestExecution` - test execution details (example: [TestExecution (Execution)](#testexecution-execution) section)
 - `TestSuiteExecution` - test suite execution details (example: [TestSuiteExecution](#testsuiteexecution) section)
 - `TestWorkflowExecution` - test suite execution details (example: [TestWorkflowExecution](#testworkflowexecution) section)
@@ -465,6 +465,49 @@ For Test Suites (deprecated - [Read More](/articles/legacy-features)):
 - `Envs` (API-server ENV variables) - list of Testkube API-Server ENV variables
 
 The full Event Data Model can be found [here](https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_event.go).
+
+### TestWorkflowExecution
+
+- `Id` - TestWorkflowExecution ID (for example, `64f8d5b2712890925aea51dc`)
+- `Name` - TestWorkflow execution name (for example, `wf-postman-smoke-tests-1`)
+- `Namepace` - TestWorkflowExecution namespace (for example, `my-testkube`)
+- `Number` - TestWorkflowExecution sequence number
+- `ScheduledAt` - TestWorkflow scheduled time (for example, `2023-09-06 19:23:34.543433547 +0000 UTC`)
+- `StatusAt` - Time when the execution result's status has changed last time (for example, `2023-09-06 19:23:42.221493031 +0000 UTC`)
+- `Signature` - Structured tree of TestWorkflow steps
+- `Result` - TestWorkflow execution result
+- `Output` - Additional information from the steps, like referenced executed tests or artifacts
+- `Workflow` - TestWorkflow definition
+- `ResolvedWorkflow` - TestWorkflow definition with resolved fields
+
+The full TestWorkflowExecution data model can be found [here](https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_test_workflow_execution.go).
+
+#### TestWorkflow for TestWorkflowExecution Workflow and ResolvedWorkflow fields
+
+- `Workflow.Name` - TestWorkflow name (for example, `wf-postman-smoke-tests`)
+- `Workflow.Description` - TestWorkflow description (for example, `postman smoke tests to run after application deployment`)
+
+The full TestWorkflow data model can be found [here](https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_test_workflow.go).
+
+#### TestWorkflowResult for TestWorkflowExecution Result field
+
+- `Result.FinishedAt` - TestWorkflow execution finished time(for example, `2024-11-15 11:24:37.129 +0000 UTC`)
+- `Result.Duration` - TestWorkflow execution duration (for example, `8.504s`)
+- `Result.Status` - TestWorkflow execution status (for example, `passed`)
+
+The full TestWorkflowResult data model can be found [here](https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_test_workflow_result.go).
+
+### Additional Top-level Variables
+
+- `ExecutionCommand` - The CLI command to access the execution (example: `kubectl testkube get execution 6679893e3b11f4e4900e17a5`).
+- `ExecutionURL` - The Dashboard URL to look at the execution (example: `https://app.testkube.io/organization/tkcorg_9deb42dda2197657/environment/tkcenv_1145999f3c4d1115/dashboard/tests/git-zap-api-test/executions/6679893e3b11f4e4900e17a5`).
+- `ArtifactsCommand` - The CLI command to access the artifacts (example: `kubectl testkube get artifacts 6679893e3b11f4e4900e17a5`).
+- `ArtifactsURL` - The Dashboard URL to look at the artifacts directly (example: `https://app.testkube.io/organization/tkcorg_9deb42dda2197657/environment/tkcenv_1145999f3c4d1115/dashboard/tests/git-zap-api-test/executions/6679893e3b11f4e4900e17a5/artifacts`).
+- `LogsCommand` - The CLI command to access the logs (example: `kubectl testkube get execution 6679893e3b11f4e4900e17a5 --logs-only`).
+- `LogsURL` - The Dashboard URL to look at the logs (example: `https://app.testkube.io/organization/tkcorg_9deb42dda2197657/environment/tkcenv_1145999f3c4d1115/dashboard/tests/git-zap-api-test/executions/6679893e3b11f4e4900e17a5/log-output`).
+
+Make sure that the value `testkube-api.dashboardUri` in the helm-charts is set to `app.testkube.io`, or your remote Dashboard URL, so that the variables above can be populated with the correct values.
+
 
 ### TestExecution (Execution)
 
@@ -494,7 +537,7 @@ Test and Test Suite webhooks are being deprecated from Testkube. [Read More](../
 
 The full Execution data model can be found [here](https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_execution.go).
 
-### TestSuiteExecution:
+### TestSuiteExecution
 
 :::warning
 Test and Test Suite webhooks are being deprecated from Testkube. [Read More](../articles/legacy-features.md).
@@ -517,47 +560,6 @@ Test and Test Suite webhooks are being deprecated from Testkube. [Read More](../
 
 The full TestSuiteExecution data model can be found [here](https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_test_suite_execution.go).
 
-### TestWorkflowExecution:
-
-- `Id` - TestWorkflowExecution ID (for example, `64f8d5b2712890925aea51dc`)
-- `Name` - TestWorkflow execution name (for example, `wf-postman-smoke-tests-1`)
-- `Namepace` - TestWorkflowExecution namespace (for example, `my-testkube`)
-- `Number` - TestWorkflowExecution sequence number
-- `ScheduledAt` - TestWorkflow scheduled time (for example, `2023-09-06 19:23:34.543433547 +0000 UTC`)
-- `StatusAt` - Time when the execution result's status has changed last time (for example, `2023-09-06 19:23:42.221493031 +0000 UTC`)
-- `Signature` - Structured tree of TestWorkflow steps
-- `Result` - TestWorkflow execution result
-- `Output` - Additional information from the steps, like referenced executed tests or artifacts
-- `Workflow` - TestWorkflow definition
-- `ResolvedWorkflow` - TestWorkflow definition with resolved fields
-
-The full TestWorkflowExecution data model can be found [here](https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_test_workflow_execution.go).
-
-#### TestWorkflow for TestWorkflowExecution Workflow and ResolvedWorkflow fields:
-
-- `Workflow.Name` - TestWorkflow name (for example, `wf-postman-smoke-tests`)
-- `Workflow.Description` - TestWorkflow description (for example, `postman smoke tests to run after application deployment`)
-
-The full TestWorkflow data model can be found [here](https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_test_workflow.go).
-
-#### TestWorkflowResult for TestWorkflowExecution Result field:
-
-- `Result.FinishedAt` - TestWorkflow execution finished time(for example, `2024-11-15 11:24:37.129 +0000 UTC`)
-- `Result.Duration` - TestWorkflow execution duration (for example, `8.504s`)
-- `Result.Status` - TestWorkflow execution status (for example, `passed`)
-
-The full TestWorkflowResult data model can be found [here](https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_test_workflow_result.go).
-
-### Additional Top-level Variables:
-
-- `ExecutionCommand` - The CLI command to access the execution (example: `kubectl testkube get execution 6679893e3b11f4e4900e17a5`).
-- `ExecutionURL` - The Dashboard URL to look at the execution (example: `https://app.testkube.io/organization/tkcorg_9deb42dda2197657/environment/tkcenv_1145999f3c4d1115/dashboard/tests/git-zap-api-test/executions/6679893e3b11f4e4900e17a5`).
-- `ArtifactsCommand` - The CLI command to access the artifacts (example: `kubectl testkube get artifacts 6679893e3b11f4e4900e17a5`).
-- `ArtifactsURL` - The Dashboard URL to look at the artifacts directly (example: `https://app.testkube.io/organization/tkcorg_9deb42dda2197657/environment/tkcenv_1145999f3c4d1115/dashboard/tests/git-zap-api-test/executions/6679893e3b11f4e4900e17a5/artifacts`).
-- `LogsCommand` - The CLI command to access the logs (example: `kubectl testkube get execution 6679893e3b11f4e4900e17a5 --logs-only`).
-- `LogsURL` - The Dashboard URL to look at the logs (example: `https://app.testkube.io/organization/tkcorg_9deb42dda2197657/environment/tkcenv_1145999f3c4d1115/dashboard/tests/git-zap-api-test/executions/6679893e3b11f4e4900e17a5/log-output`).
-
-Make sure that the value `testkube-api.dashboardUri` in the helm-charts is set to `app.testkube.io`, or your remote Dashboard URL, so that the variables above can be populated with the correct values.
 
 ## Webhook templates
 
@@ -677,9 +679,9 @@ metadata:
 spec:
   uri: <YOUR_ENDPOINT_URL>
   events:
-    - start-test
-    - end-test-success
-    - end-test-failed
+    - start-testworkflow
+    - end-testworkflow-success
+    - end-testworkflow-failed
   selector: ""
   disabled: "true"
 ```
@@ -709,7 +711,7 @@ Disabling webhooks can also be done directly on an execution of a test, a test s
 Use the flag `--disable-webhooks` on the CLI:
 
 ```bash
-testkube run test k6-test --disable-webhooks
+testkube run testworkflow k6-test --disable-webhooks
 ```
 
 </TabItem>
@@ -739,7 +741,7 @@ The examples show only the `create` operations, however these instructions work 
 Use the flag `--disable-webhooks` on the CLI:
 
 ```bash
-testkube run testsuite test-suite-1 --disable-webhooks
+testkube run testworkflow test-workflow --disable-webhooks
 ```
 
 </TabItem>
@@ -807,7 +809,7 @@ testkube update webhook --name example-webhook
   "name": "example-webhook",
   "namespace": "testkube",
   "uri": "https://webhook.url/",
-  "events": ["start-test", "end-test-success", "end-test-failed"],
+  "events": ["start-testworkflow", "end-testworkflow-success", "end-testworkflow-failed"],
   "disabled": false
 }
 ```
@@ -824,9 +826,9 @@ metadata:
   namespace: testkube
 spec:
   events:
-    - start-test
-    - end-test-success
-    - end-test-failed
+    - start-testworkflow
+    - end-testworkflow-success
+    - end-testworkflow-failed
   uri: https://webhook.url/
 ```
 

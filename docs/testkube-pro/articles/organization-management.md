@@ -68,11 +68,24 @@ This section shows your current usage against the limits of your current plan.
 
 ![Usage](../../img/usage.png)
 
-For more details about the Testkube offerings, check our [pricing page](https://testkube.io/pricing).
+Usage shows 
+- Members - the number of Member Seats currently used from your license/plan.
+- Environments - the number of Testkube Environments currently created against the number in your license/plan.
+- Fixed Agents - the number of Agents using a Fixed License - [Read More](/articles/install/multi-agent#licensing-for-testkube-agents).
+- Concurrent Floating Runners - the number of Floating Agents concurrently running Workflows over the last 30 days - [Read More](/articles/install/multi-agent#licensing-for-testkube-agents).
 
-If you are using the cloud version of Testkube you can upgrade your plan here. 
-Once on the commercial plan, you will automatically be charged for additional 
-users and environments in line with the current [Pricing Model](https://testkube.io/pricing).
+:::tip
+For more details about the Testkube offerings, check out the Testkube [Pricing Page](https://testkube.io/pricing).
+:::
+
+### Upgrading your Plan
+
+If you are using the cloud instance of the Testkube Control-Plane you can upgrade your plan on the bottom of this page. 
+Once on the commercial plan, you will automatically be charged for additional users and environments in line with the current [Pricing Model](https://testkube.io/pricing).
+
+:::tip
+Don't hesitate to [Contact Us](https://testkube.io/contact) if you have any questions about pricing, your plan, limits, etc.
+:::
 
 ## Settings
 
@@ -80,3 +93,8 @@ In settings, you can update the name of the organization, set artifacts limits, 
 
 ![Organization Setting](../../img/organization-settings.png)
 
+## Audit Log
+
+The Audit Log provides insights into usage of your Testkube instance - [Read More](audit-logs)
+
+![Audit Log](images/audit-log-overview.png)
