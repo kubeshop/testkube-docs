@@ -600,6 +600,14 @@ spec:
     name: example-template
 ```
 
+### Managing WebhookTemplate Resources
+
+Testkube WebhookTemplates are CRDs that must be created in the same Kubernetes namespace where your Testkube agent is running. While the Testkube dashboard does not expose these resources for management, you can access the corresponding Kubernetes namespace and work with them directly, there. Below are some commands for working with WebhookTemplate resources.
+
+- List existents: `kubectl get webhooktemplates -n <namespace>`{:.bash}
+- Create new: `kubectl apply -f <webhook-template-manifest-file>.yaml -n <namespace>`{:.bash}
+- Edit one: `kubectl edit webhooktemplates <name-of-webhook-template> -n <namespace>`{:.bash}
+- Delete: `kubectl delete webhooktemplates <name-of-webhook-template> -n <namespace>`{:.bash}
 
 ## Testing Webhooks
 
