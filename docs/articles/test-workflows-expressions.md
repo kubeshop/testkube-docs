@@ -222,6 +222,11 @@ The expressions language provides several built-in variables. Some of these are 
       <td>Sequence number of the execution</td>
     </tr>
     <tr>
+      <td><code>execution.tags.&lt;name&gt;</code></td>
+      <td>✅</td>
+      <td>Tags passed to the execution with <code>--tag</code></td>
+    </tr>
+    <tr>
       <td><code>execution.scheduledAt</code></td>
       <td>✅</td>
       <td>Scheduled execution date/time</td>
