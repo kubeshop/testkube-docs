@@ -25,7 +25,7 @@ helm upgrade --namespace namespace_name my-testkube kubeshop/testkube
 ### Using Testkube's CLI
 
 You can use the `upgrade` command to upgrade your Testkube installation, see the
-corresponding [CLI Documentation](../cli/testkube-upgrade.md) for all options.
+corresponding [CLI Documentation](../cli/testkube-upgrade) for all options.
 
 Simple usage:
 
@@ -35,7 +35,8 @@ testkube upgrade
 
 ## Uninstalling Testkube
 
-You can follow one of the two procedures below to uninstall Testkube. You might need to repeat this process in case you deployed the control plane and one or more agents in different clusters or namespaces.
+You can follow one of the two procedures below to uninstall Testkube. You might need to repeat this process in case you deployed the 
+control plane and one or more agents in different clusters or namespaces.
 
 ### Uninstalling with the Testkube CLI
 
@@ -45,7 +46,8 @@ You can use the CLI to uninstall Testkube:
 testkube purge
 ```
 
-If you installed testkube in another namespace than the default `testkube` namespace, make sure to pass that namespace as an argument to the `purge` command. Learn more [here](https://docs.testkube.io/cli/testkube-purge) or execute `testkube purge --help`.
+If you installed testkube in another namespace than the default `testkube` namespace, make sure to pass that namespace as 
+an argument to the `purge` command. Learn more [here](https://docs.testkube.io/cli/testkube-purge) or execute `testkube purge --help`.
 
 ```go
 testkube purge --namespace my-testkube-namespace
