@@ -32,6 +32,7 @@ Testkube uses the same scheduling format as Kubernetes Cron jobs. For details on
 refer to the [Wikipedia Cron format](https://en.wikipedia.org/wiki/Cron) for details.
 
 The timezone value in Testkube is also based on the tz database, consistent with Kubernetes Cron jobs. 
+If no timezone is specified, Testkube will fall back to the cluster’s local time (usually the system time of the node running the job).
 For a list of supported time zones, see the [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for details.
 :::
 
