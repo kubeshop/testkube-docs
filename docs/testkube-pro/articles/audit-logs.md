@@ -36,9 +36,26 @@ This makes it easy to integrate the audit log events with other reporting or ana
 
 By default, audit log events are retained for **180 days**. After this period, the logs are automatically cleaned up to optimize storage.
 
+## Console Logging
+
+
+By default, Testkube does **not** emit audit events to the console. Turning this on can help with real-time debugging and monitoring—but may expose sensitive user data.
+
+- **Enable Console Logging**  
+  Streams audit events to stdout.
+
+- **Anonymize User Information**  
+  When console logging is enabled, log only the user’s internal ID (not their username/email).
+
+> ⚠️ Console logs can leak sensitive details. If you need privacy, enable anonymization.
+
+See the **Configuration** section for the corresponding Helm parameters or environment variables.
+
 ## Configuration
 
 If you are using **Testkube On-Prem**, audit log settings can be configured during installation via **Helm** parameters:
 * **Retention Period**: Customize the number of days to retain audit log events - `audit.cleanup.retentionPeriod` (default: `30`)
 * **Audit Log Cleanup**: Control whether automatic cleanup is enabled - `audit.cleanup.enabled` (default: `true`)
 * **Cleanup Interval**: Define how often the cleanup job runs, using a cron expression - `audit.cleanup.cronInterval` (default: `0 3 * * *`)
+* **Enable Console Logging**: Toggle whether audit log events should also be logged to console - `audit.logger.enabled` (default: `false`)
+* **Anonymize User Information**: If console logging is enabled and this toggle is enabled, audit log events console logs will only contain user ID and not username/email - `audit.logger.forceIdentifyUsersById` (default: `false`)
