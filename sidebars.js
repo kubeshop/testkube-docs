@@ -30,7 +30,7 @@ const sidebars = {
     {
       type: "doc",
       label: "Changelog",
-      id: "CHANGELOG",
+      id: "changelog",
     },
     {
       type: "html",
