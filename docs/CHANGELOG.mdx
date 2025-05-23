@@ -1,0 +1,37 @@
+# Testkube Changelog
+
+## v1.15.0 (2025-05-23)
+
+This release is available in Helm Chart v2.321.0.
+
+## What changed?
+
+Quality has been our focus for Testkube v1.15.
+This release is packed with a variety of bug fixes and improvements.
+
+Our team also took a good look at the release procedures of the Testkube Control Plane:
+
+The control plane now comes with public changelogs and a unified version.
+In the past, each service such as the dashboard, API Server, workers, etc, would have its own version.
+Today they all share the same version which makes it easier to communicate changes and service interoperability.
+
+The release cadence will also be reduced to better fit enterprises and make changes more predictable.
+Moving forward you can expect a monthly minor release with some unplanned patch versions in between.
+The stability of these releases will be better moving forward.
+
+## Features
+
+- Added timezone to TestWorkflows cronjobs.
+
+## Improvements & fixes
+
+- Fixed variety of security issues.
+- Added downloading of an execution's log to the dashboard.
+- Fixed an issue with preview URLs when changing environments.
+- Fixed an issue with legacy tests events for the webhook condition selector
+- Fixed an issue with full screen mode within execution dialogue.
+- Fixed a problem where workingDir were incorrectly substituted within workflow definitions.
+- Fixed an issue updating team and board descriptions.
+- Fixed workflow termination when resource metrics cannot be stored due to lack of free storage space.
+Improved user interface of multi-agent engine
+- Many other minor fixes and improvements.
