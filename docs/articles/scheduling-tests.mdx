@@ -23,12 +23,18 @@ spec:
   events:
   - cronjob:
       cron: 0 3 * * *
+      timezone: America/New_York
 ...
 ```
 
+
 :::tip
-Testkube's schedule data format is the same that is used to define Kubernetes Cron jobs,
-visit [Wikipedia Cron format](https://en.wikipedia.org/wiki/Cron) for details.
+Testkube uses the same scheduling format as Kubernetes Cron jobs. For details on the cron expression syntax, 
+refer to the [Wikipedia Cron format](https://en.wikipedia.org/wiki/Cron) for details.
+
+The timezone value in Testkube is also based on the tz database, consistent with Kubernetes Cron jobs. 
+If no timezone is specified, Testkube will fall back to the cluster’s local time (usually the system time of the node running the job).
+For a list of supported time zones, see the [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for details.
 :::
 
 ## Schedule a Workflow from the Testkube Dashboard
@@ -56,3 +62,21 @@ For each schedule, a special cron job is created from this [template](https://gi
 Technically, it is a callback to the Testkube API server method, launching the corresponding Workflow execution.
 The call is executed using curl command from the image `curlimages/curl`, please make sure it's available in your Kubernetes cluster.
 
+As of May 1, 2025, the Testkube Agent includes a built-in cron scheduler, now used as the default mode, replacing Kubernetes Cron jobs.
+This internal scheduler uses RPC (Remote Procedure Call) to trigger Test Workflows directly, eliminating the need to create separate CronJob pods. 
+As a result, it significantly reduces Kubernetes resource usage and scales efficiently, even with a large number of scheduled Test Workflows.
+After switching to the Testkube Agent's built-in cron scheduler, existing Kubernetes CronJobs will be automatically removed by both the Agent and the Operator during startup.
+You can always swicth between Agent and Operator crons using helm chat variables, both either should be `true` or `false`
+
+```yaml
+    cronJobs:
+      ## Should it manage cron jobs
+      enabled: true
+```
+
+and
+
+```yaml
+  # -- Agent cron jobs for scheduling test, suites, workflows
+  agentCronJobs: true
+```

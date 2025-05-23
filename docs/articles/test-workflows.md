@@ -364,6 +364,7 @@ spec:
           key2: value2
         config:
           myParameter: param1
+        timezone: Etc/GMT+5
     - cronjob:
         cron: "*/5 * * * *"
         labels:
@@ -374,7 +375,8 @@ spec:
           myParameter: param2
 ```
 
-> **Info:** Testkube uses the standard Kubernetes Cron format. See [Cron Format on Wikipedia](https://en.wikipedia.org/wiki/Cron) for details.
+> **Info:** Testkube uses the standard Kubernetes Cron format. See [Cron Format on Wikipedia](https://en.wikipedia.org/wiki/Cron) and [tz database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for details. If no timezone is specified, Testkube will use the cluster’s local time.
+
 
 ### Targeting specific Runners in CronJobs
 
