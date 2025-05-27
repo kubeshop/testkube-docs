@@ -129,6 +129,6 @@ You can add/edit/remove categories using the corresponding actions in the interf
 
 ### Product Features
 
-There is currently only one product feature that can be toggled on or off; Legacy Test Support - [Read More](/articles/legacy-features)
+This tab allows you to configure Environment-level Product Features:
 
 ![Product Features](../../img/environment-product-features.png)

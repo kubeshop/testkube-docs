@@ -12,7 +12,7 @@ In the environments section, you can see the list of your existing environments.
 
 ![Existing Environments](../../img/existing-environments-062024.png)
 
-GREEN status means that your agent is connected successfully. 
+GREEN status means that your agent is connected successfully.
 
 In the case of a RED status, you can try to debug the issues with the command below:
 
@@ -26,7 +26,7 @@ Read more about [Environment Management](../articles/environment-management.md).
 
 ## Members
 
-The members section allows you to invite and manage your organizations' members and their roles - [Read More](member-management) 
+The members section allows you to invite and manage your organizations' members and their roles - [Read More](member-management)
 
 ![Organization Member Management](images/org-members.png)
 
@@ -46,7 +46,7 @@ member access - [Read More](/articles/resource-groups).
 
 ## API Tokens
 
-API tokens allows running tests without linking the run to a specific account - see [API Token Management](api-token-management) 
+API tokens allows running tests without linking the run to a specific account - see [API Token Management](api-token-management)
 for more details on how to create and use API Tokens.
 
 ![API Tokens](../../img/api-tokens.png)
@@ -59,6 +59,7 @@ This tab allows you to configure Organization-level Product Features:
 - **Global Insights** - Toggle Global Insights of your Workflow executions - [Read More](/articles/test-insights).
 - **AI Copilot** - Toggle the AI Copilot feature for your organization [Read More](/articles/copilot-overview).
 - **Webhooks URL Masking** - Toggle Webhooks URL masking - [Read More](/articles/webhooks#url-masking).
+- **Agent Token Masking** - Toggle Agent Token masking - [Read More](/articles/multi-agent#agent-token-masking).
 
 ![Organization Product Features](../../img/organization-product-features.png)
 
@@ -68,7 +69,8 @@ This section shows your current usage against the limits of your current plan.
 
 ![Usage](../../img/usage.png)
 
-Usage shows 
+Usage shows
+
 - Members - the number of Member Seats currently used from your license/plan.
 - Environments - the number of Testkube Environments currently created against the number in your license/plan.
 - Fixed Agents - the number of Agents using a Fixed License - [Read More](/articles/install/multi-agent#licensing-for-testkube-agents).
@@ -80,7 +82,7 @@ For more details about the Testkube offerings, check out the Testkube [Pricing P
 
 ### Upgrading your Plan
 
-If you are using the cloud instance of the Testkube Control-Plane you can upgrade your plan on the bottom of this page. 
+If you are using the cloud instance of the Testkube Control-Plane you can upgrade your plan on the bottom of this page.
 Once on the commercial plan, you will automatically be charged for additional users and environments in line with the current [Pricing Model](https://testkube.io/pricing).
 
 :::tip
