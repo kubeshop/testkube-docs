@@ -350,7 +350,7 @@ Please don't hesitate to [Get in Touch](https://testkube.io/contact) if you have
 In the “Organization Management” section, under the “Product Features” tab, there is an option called “Agent Token Masking”.
 When this toggle is enabled, the Testkube Dashboard will no longer display sensitive agent tokens in the UI.
 
-![Settings - agent token masking](../img/agent-token-masking.png)
+![Settings - agent token masking](images/agent-token-masking.png)
 
 :::warning
 **Important:** This masking feature applies **only** to the Testkube Dashboard UI. Agent tokens or secret keys will still be visible in CLI outputs (e.g., when using `testkube create runner` or retrieving details for Helm chart installation as described in [Installing Runner Agent with Helm Charts](/articles/multi-agent-runner-helm-chart)) and in any direct API interactions.
