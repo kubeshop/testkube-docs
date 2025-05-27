@@ -241,7 +241,6 @@ definitions:
 Each of these definitions supports a corresponding `target` property:
 
 ```yaml
----
 target:
   match: [<label>: <values>]
   not: [<label>: <values>]
@@ -251,7 +250,6 @@ target:
 The following targets a specific Runner by name:
 
 ```yaml
----
 target:
   match:
     name:
@@ -261,7 +259,6 @@ target:
 or run on a Grouped Runner:
 
 ```yaml
----
 target:
   match:
     group:
@@ -273,7 +270,6 @@ Add `replicate` to mimic `--target-replicate` behavior described above, and `not
 Run on all Runners in the `region-us` group, except the `k8s-1.21-spain` Runner:
 
 ```yaml
----
 target:
   match:
     group: [region-eu]
