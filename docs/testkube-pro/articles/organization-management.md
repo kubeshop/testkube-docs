@@ -59,7 +59,7 @@ This tab allows you to configure Organization-level Product Features:
 - **Global Insights** - Toggle Global Insights of your Workflow executions - [Read More](/articles/test-insights).
 - **AI Copilot** - Toggle the AI Copilot feature for your organization [Read More](/articles/copilot-overview).
 - **Webhooks URL Masking** - Toggle Webhooks URL masking - [Read More](/articles/webhooks#url-masking).
-- **Agent Token Masking** - Toggle Agent Token masking - [Read More](/articles/multi-agent#agent-token-masking).
+- **Agent Token Masking** - Toggle Agent Token masking - [Read More](/articles/install/multi-agent#agent-token-masking).
 
 ![Organization Product Features](../../img/organization-product-features.png)
 
