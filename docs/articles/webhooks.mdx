@@ -509,6 +509,237 @@ The full TestWorkflowResult data model can be found [here](https://github.com/ku
 
 Make sure that the value `testkube-api.dashboardUri` in the helm-charts is set to `app.testkube.io`, or your remote Dashboard URL, so that the variables above can be populated with the correct values.
 
+Webhook JSON payload example
+
+```json
+{
+  "id": "2e2ffe66-0f13-4f0f-9fa3-1036e47916ba",
+  "resource": "testworkflowexecution",
+  "resourceId": "6835aabaecd4e4a1447e0287",
+  "type": "end-testworkflow-success",
+  "testWorkflowExecution": {
+    "id": "6835aabaecd4e4a1447e0287",
+    "groupId": "6835aabaecd4e4a1447e0287",
+    "runnerId": "tkcroot_6fdb6bedebc61297",
+    "runnerTarget": {},
+    "runnerOriginalTarget": {},
+    "name": "pytest-workflow-smoke-junit-success-only-133",
+    "number": 133,
+    "scheduledAt": "2025-05-27T12:06:18.446Z",
+    "assignedAt": "2025-05-27T12:06:18.474Z",
+    "statusAt": "2025-05-27T12:06:45.690926889Z",
+    "signature": [
+      {
+        "ref": "rvcjww5",
+        "category": "Clone Git repository"
+      },
+      {
+        "ref": "rvc7j59",
+        "name": "Run test",
+        "children": [
+          {
+            "ref": "r4kzlmb",
+            "category": "Run shell command"
+          },
+          {
+            "ref": "r2v48sd",
+            "category": "Upload artifacts"
+          }
+        ]
+      }
+    ],
+    "result": {
+      "status": "passed",
+      "predictedStatus": "passed",
+      "queuedAt": "2025-05-27T12:06:18.446Z",
+      "startedAt": "2025-05-27T12:06:18.446Z",
+      "finishedAt": "2025-05-27T12:06:45.690926889Z",
+      "duration": "27.245s",
+      "totalDuration": "27.245s",
+      "durationMs": 27244,
+      "pausedMs": 0,
+      "totalDurationMs": 27244,
+      "initialization": {
+        "status": "passed",
+        "queuedAt": "2025-05-27T12:06:18.446Z",
+        "startedAt": "2025-05-27T12:06:19.371727926Z",
+        "finishedAt": "2025-05-27T12:06:20.238548057Z"
+      },
+      "steps": {
+        "r2v48sd": {
+          "status": "passed",
+          "queuedAt": "2025-05-27T12:06:45.448914778Z",
+          "startedAt": "2025-05-27T12:06:45.449040908Z",
+          "finishedAt": "2025-05-27T12:06:45.690926889Z"
+        },
+        "r4kzlmb": {
+          "status": "passed",
+          "queuedAt": "2025-05-27T12:06:21.188826191Z",
+          "startedAt": "2025-05-27T12:06:23.730489947Z",
+          "finishedAt": "2025-05-27T12:06:45.448914778Z"
+        },
+        "rvc7j59": {
+          "status": "passed",
+          "queuedAt": "2025-05-27T12:06:21.188826191Z",
+          "startedAt": "2025-05-27T12:06:21.188848491Z",
+          "finishedAt": "2025-05-27T12:06:45.690926889Z"
+        },
+        "rvcjww5": {
+          "status": "passed",
+          "queuedAt": "2025-05-27T12:06:20.238548057Z",
+          "startedAt": "2025-05-27T12:06:20.239657977Z",
+          "finishedAt": "2025-05-27T12:06:21.188826191Z"
+        }
+      }
+    },
+    "output": [
+      {
+        "ref": "tktw-init",
+        "name": "pod",
+        "value": {
+          "agent": "0.0.0-SNAPSHOT-a467e28",
+          "init": "",
+          "name": "6835aabaecd4e4a1447e0287-zhfjg",
+          "namespace": "enterprise-sandbox-webhook",
+          "nodeName": "gke-testkube-cloud-edg-spot-node-pool-66738c92-hblm",
+          "serviceAccountName": "testkube-api-server-tests-job",
+          "toolkit": ""
+        }
+      }
+    ],
+    "reports": [
+      {
+        "ref": "r2v48sd",
+        "kind": "junit",
+        "file": "artifacts/pytest-report.xml",
+        "summary": {
+          "tests": 9,
+          "passed": 9,
+          "duration": 16009
+        }
+      }
+    ],
+    "workflow": {
+      "name": "pytest-workflow-smoke-junit-success-only",
+      "namespace": "enterprise-sandbox-webhook",
+      "labels": {
+        "argocd.argoproj.io/instance": "webhook-testkube-agent",
+        "core-tests": "workflows",
+        "tool": "pytest"
+      },
+      "annotations": {
+        "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"testworkflows.testkube.io/v1\",\"kind\":\"TestWorkflow\",\"metadata\":{\"annotations\":{},\"labels\":{\"argocd.argoproj.io/instance\":\"webhook-testkube-agent\",\"core-tests\":\"workflows\",\"tool\":\"pytest\"},\"name\":\"pytest-workflow-smoke-junit-success-only\",\"namespace\":\"enterprise-sandbox-webhook\"},\"spec\":{\"container\":{\"image\":\"python:3.12.6-alpine3.20\",\"resources\":{\"requests\":{\"cpu\":\"256m\",\"memory\":\"256Mi\"}},\"workingDir\":\"/data/repo/test/pytest/pytest-project\"},\"content\":{\"git\":{\"paths\":[\"test/pytest/pytest-project\"],\"revision\":\"main\",\"uri\":\"https://github.com/kubeshop/testkube\"}},\"job\":{\"activeDeadlineSeconds\":180},\"steps\":[{\"artifacts\":{\"paths\":[\"/data/artifacts/**\"]},\"name\":\"Run test\",\"shell\":\"pip install -r requirements.txt\\nmkdir /data/artifacts\\npytest tests/success --junit-xml=/data/artifacts/pytest-report.xml\\n\"}]}}\n"
+      },
+      "created": "2025-05-16T10:21:45Z",
+      "updated": "2025-05-16T10:21:45Z",
+      "spec": {
+        "content": {
+          "git": {
+            "uri": "https://github.com/kubeshop/testkube",
+            "revision": "main",
+            "paths": [
+              "test/pytest/pytest-project"
+            ]
+          }
+        },
+        "container": {
+          "workingDir": {
+            "value": "/data/repo/test/pytest/pytest-project"
+          },
+          "image": "python:3.12.6-alpine3.20",
+          "resources": {
+            "requests": {
+              "cpu": "256m",
+              "memory": "256Mi"
+            }
+          }
+        },
+        "job": {
+          "activeDeadlineSeconds": {
+            "value": 180
+          }
+        },
+        "steps": [
+          {
+            "name": "Run test",
+            "shell": "pip install -r requirements.txt\nmkdir /data/artifacts\npytest tests/success --junit-xml=/data/artifacts/pytest-report.xml\n",
+            "artifacts": {
+              "paths": [
+                "/data/artifacts/**"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "resolvedWorkflow": {
+      "name": "pytest-workflow-smoke-junit-success-only",
+      "namespace": "enterprise-sandbox-webhook",
+      "labels": {
+        "argocd.argoproj.io/instance": "webhook-testkube-agent",
+        "core-tests": "workflows",
+        "tool": "pytest"
+      },
+      "annotations": {
+        "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"testworkflows.testkube.io/v1\",\"kind\":\"TestWorkflow\",\"metadata\":{\"annotations\":{},\"labels\":{\"argocd.argoproj.io/instance\":\"webhook-testkube-agent\",\"core-tests\":\"workflows\",\"tool\":\"pytest\"},\"name\":\"pytest-workflow-smoke-junit-success-only\",\"namespace\":\"enterprise-sandbox-webhook\"},\"spec\":{\"container\":{\"image\":\"python:3.12.6-alpine3.20\",\"resources\":{\"requests\":{\"cpu\":\"256m\",\"memory\":\"256Mi\"}},\"workingDir\":\"/data/repo/test/pytest/pytest-project\"},\"content\":{\"git\":{\"paths\":[\"test/pytest/pytest-project\"],\"revision\":\"main\",\"uri\":\"https://github.com/kubeshop/testkube\"}},\"job\":{\"activeDeadlineSeconds\":180},\"steps\":[{\"artifacts\":{\"paths\":[\"/data/artifacts/**\"]},\"name\":\"Run test\",\"shell\":\"pip install -r requirements.txt\\nmkdir /data/artifacts\\npytest tests/success --junit-xml=/data/artifacts/pytest-report.xml\\n\"}]}}\n"
+      },
+      "created": "2025-05-16T10:21:45Z",
+      "updated": "2025-05-16T10:21:45Z",
+      "spec": {
+        "content": {
+          "git": {
+            "uri": "https://github.com/kubeshop/testkube",
+            "revision": "main",
+            "paths": [
+              "test/pytest/pytest-project"
+            ]
+          }
+        },
+        "container": {
+          "workingDir": {
+            "value": "/data/repo/test/pytest/pytest-project"
+          },
+          "image": "python:3.12.6-alpine3.20",
+          "resources": {
+            "requests": {
+              "cpu": "256m",
+              "memory": "256Mi"
+            }
+          }
+        },
+        "job": {
+          "activeDeadlineSeconds": {
+            "value": 180
+          }
+        },
+        "steps": [
+          {
+            "name": "Run test",
+            "shell": "pip install -r requirements.txt\nmkdir /data/artifacts\npytest tests/success --junit-xml=/data/artifacts/pytest-report.xml\n",
+            "artifacts": {
+              "paths": [
+                "/data/artifacts/**"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "runningContext": {
+      "interface": {
+        "type": "ui"
+      },
+      "actor": {
+        "name": "admin@example.com",
+        "email": "admin@example.com",
+        "executionReference": "6835910fecd4e4a1447e023f",
+        "type": "user"
+      }
+    }
+  },
+  "external": true
+}
+```
 
 ### TestExecution (Execution)
 
