@@ -172,7 +172,39 @@ annotations:
   nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
 ```
 
-To use your own ingress controller, reach out to our support team and we’ll gladly investigate your ingress of choice. Alternatively, you can give it a try yourself by deploying Testkube and seeing whether gRPC and WebSockets are working properly.
+To use your own ingress controller, reach out to our support team and we'll gladly investigate your ingress of choice. Alternatively, you can give it a try yourself by deploying Testkube and seeing whether gRPC and WebSockets are working properly.
+
+### Contour Ingress Controller
+
+Testkube can be exposed using [Contour](https://projectcontour.io/) as an ingress controller, which supports gRPC and HTTP/2 natively. When configuring Contour, you will typically use an `HTTPProxy` resource. For gRPC streaming APIs (such as those used by the Testkube Agent), it is critical to set `timeoutPolicy.response` to `infinity` to avoid breaking long-lived gRPC streams. Users **cannot** set a finite `timeoutPolicy.response`, as this will cause Envoy (used by Contour) to terminate gRPC streams prematurely.
+
+Example configuration:
+
+```yaml
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: testkube-api-grpc
+  namespace: testkube
+spec:
+  virtualhost:
+    fqdn: testkube-grpc.local
+  routes:
+    - conditions:
+        - prefix: /
+      timeoutPolicy:
+        idle: 60s        # OK to set
+        response: infinity  # MUST be infinity for gRPC streaming
+      services:
+        - name: testkube-enterprise-api
+          port: 8089
+          protocol: h2c
+```
+
+**Why?**
+- `timeoutPolicy.response` covers the time from the end of the client request to the end of the upstream response. Envoy defaults this to 15s, which is not compatible with streaming responses (like gRPC streams) and will kill the connection.
+- See [Contour HTTPProxy docs](https://projectcontour.io/docs/v1.4.0/httpproxy/) and [Envoy timeout FAQ](https://www.envoyproxy.io/docs/envoy/latest/faq/configuration/timeouts#route-timeouts) for more details.
+
 
 ## Multi-namespace Agent Installation 
 It is possible to deploy multiple Testkube Agent instances into the same Kubernetes cluster. Please put the following configuration to your `values.yaml` when deploying another agent:
