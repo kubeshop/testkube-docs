@@ -123,7 +123,7 @@ FROM ${ALPINE_IMAGE}
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.3.2-r2</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.3.2-r2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.030%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.029%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
