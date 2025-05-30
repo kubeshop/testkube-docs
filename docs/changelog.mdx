@@ -1,22 +1,27 @@
 # Testkube Changelog
 
+:::info
+This is the changelog for the Testkube Control Plane, latest releases are on top.
 
-## v1.15.1 (2025-05-23)
+- **Monthly releases** add new functionality and overall improvements.
+- **Patch releases** focus on critical bugs and security issues.
+:::
+
+## Patch Release v1.15.1 (2025-05-23)
 
 This release is available in Helm Chart v2.321.1.
 
-## Improvements
+### Improvements
 
 - Security updates in upstream dependencies.
 
-
-## v1.15.0 (2025-05-23)
+## Monthly Release v1.15.0 (2025-05-23)
 
 This release is available in Helm Chart v2.321.0.
 
-## What changed?
+### What changed?
 
-Quality has been our focus for Testkube v1.15.
+Release Quality has been our focus for Testkube v1.15.
 This release is packed with a variety of bug fixes and improvements.
 
 Our team also took a good look at the release procedures of the Testkube Control Plane:
@@ -27,12 +32,12 @@ Today they all share the same version which makes it easier to communicate chang
 - The release cadence will also be reduced to better fit enterprises. Moving forward you can expect a monthly minor release with some unplanned patch versions in between. The new process also improves predictability and stability of these releases.
 - Our Helm Chart is now available as an OCI Artifact. The old Helm Repository approach still works, but under the hood it will now also pull as an OCI Artifact.
 
-## Features
+### Features
 
 - Added timezone to TestWorkflows cronjobs.
 - Added support for logging Audit Events to console.
 
-## Improvements & fixes
+### Improvements & fixes
 
 - Fixed variety of security issues.
 - Added downloading of an execution's log to the dashboard.
