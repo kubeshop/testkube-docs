@@ -72,15 +72,111 @@ If SCIM server is enabled, users cannot log in to Testkube before they are provi
 
 ### Configuration
 
-1. Set the `SCIM_SERVER_ENABLED` environment variable to `true` in the Testkube Enterprise API or `testkube-cloud-api.scim.enabled: true` if installing the `testkube-enterprise` Helm chart.
-2. Set the `SCIM_SERVER_DEFAULT_ORGANIZATION` environment variable or `testkube-cloud-api.scim.defaultOrganization` if installing the `testkube-enterprise` Helm chart to the default organization name for new users and groups ([bootstrap feature](https://docs.testkube.io/articles/install/advanced-install#bootstrap-user-mapping) can be used to create the default organization).
-3. The default port for the SCIM server is `8081`. You can change it by setting the `SCIM_SERVER_PORT` environment variable ir `testkube-cloud-api.scim.port` if installing the `testkube-enterprise` Helm chart.
-4. Set the `SCIM_SERVER_AUTH_TOKEN` environment variable or `testkube-cloud-api.scim.auth.token` if installing the `testkube-enterprise` Helm chart to a secure token that will be used to authenticate SCIM requests or create a Kubernetes secret with a key named `SCIM_AUTH_TOKEN` and set the `testkube-cloud-api.scim.auth.secretRef` to point to that secret. If token is not set, SCIM server will run without auth.
-5. Configure the SCIM client in your IdP (e.g., Okta, Azure AD) to point to the Testkube SCIM endpoints.
+To enable and configure the SCIM server in **Testkube Enterprise**, follow these steps:
 
-:::tip
-SCIM can be used as a complent to using a custom [Identity Provider for SSO](auth). 
-:::
+#### 1. Enable the SCIM Server
+
+Choose **one** of the following methods:
+
+- **Environment variable:**
+  ```env
+  SCIM_SERVER_ENABLED=true
+  ```
+
+- **Helm values (testkube-enterprise chart):**
+  ```yaml
+  testkube-cloud-api:
+    scim:
+      enabled: true
+  ```
+
+#### 2. Set the Default Organization
+
+This defines the organization to which new SCIM users and groups will be assigned.
+
+- **Environment variable:**
+  ```env
+  SCIM_SERVER_DEFAULT_ORGANIZATION=my-org
+  ```
+
+- **Helm values:**
+  ```yaml
+  testkube-cloud-api:
+    scim:
+      # This should be equal to the organization name (not slug or ID)
+      defaultOrganization: my-org
+  ```
+
+> Tip: Use the bootstrap feature to create the default organization if it doesn't exist yet.
+
+#### 3. Configure the SCIM Server Port (Optional)
+
+The default SCIM server port is `8081`. You can change it with:
+
+- **Environment variable:**
+  ```env
+  SCIM_SERVER_PORT=9090
+  ```
+
+- **Helm values:**
+  ```yaml
+  testkube-cloud-api:
+    scim:
+      port: 9090
+  ```
+
+#### 4. Set the Authentication Token
+
+Secure your SCIM server using a token. Choose one of the following methods:
+
+#### Option A: Direct token configuration
+
+- **Environment variable:**
+  ```env
+  SCIM_SERVER_AUTH_TOKEN=your-secure-token
+  ```
+
+- **Helm values:**
+  ```yaml
+  testkube-cloud-api:
+    scim:
+      auth:
+        token: your-secure-token
+  ```
+
+#### Option B: Use a Kubernetes secret
+
+1. Create a Kubernetes secret:
+   ```bash
+   kubectl create secret generic scim-auth-token \
+     --from-literal=SCIM_AUTH_TOKEN=your-secure-token
+   ```
+
+2. Reference it in Helm values:
+   ```yaml
+   testkube-cloud-api:
+     scim:
+       auth:
+         secretRef: scim-auth-token
+   ```
+
+> **Warning**: If no token is set, the SCIM server will run **without authentication**.
+
+#### 5. Expose the SCIM Server
+
+Ensure the SCIM server is accessible from your Identity Provider.
+SCIM Ingress can be enabled using the following Helm values:
+```yaml
+testkube-cloud-api:
+  scimIngress:
+    enabled: true
+```
+
+#### 6. Configure SCIM Client in Your Identity Provider
+
+Set up the SCIM integration in your IdP (e.g., Okta, Azure AD) by pointing it to the Testkube SCIM endpoints. Ensure that the auth token (if set) is included in requests as a bearer token.
+
+> SCIM is a complement to custom [Identity Provider for SSO](auth), it does not replace it. 
 
 ### Roles and Entitlements
 
