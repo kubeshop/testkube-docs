@@ -8,7 +8,7 @@ metadata:
     docs: example
 spec:
   container:
-    workingDir: /data/repo/test/playwright/executor-tests/playwright-project
+    workingDir: /data/repo/test/playwright/playwright-project
   steps:
   - name: Run from template
     content:
@@ -16,8 +16,8 @@ spec:
         uri: https://github.com/kubeshop/testkube
         revision: main
         paths:
-        - test/playwright/executor-tests/playwright-project
-    workingDir: /data/repo/test/playwright/executor-tests/playwright-project
+        - test/playwright/playwright-project
+    workingDir: /data/repo/test/playwright/playwright-project
     template:
       name: official/playwright/v1
       config:

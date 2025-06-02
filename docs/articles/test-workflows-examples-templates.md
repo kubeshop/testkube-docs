@@ -81,10 +81,10 @@ spec:
     git:
       uri: 'https://github.com/kubeshop/testkube'
       paths:
-      - 'test/playwright/executor-tests/playwright-project'
+      - 'test/playwright/playwright-project'
 
   container:
-    workingDir: '/data/repo/test/playwright/executor-tests/playwright-project'
+    workingDir: '/data/repo/test/playwright/playwright-project'
 
   steps:
   - template:

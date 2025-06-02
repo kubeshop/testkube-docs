@@ -77,7 +77,7 @@ Check templateReference fields in the Core OSS API spec. For example, Test -> ex
 Templates can be created with the Testkube CLI using the `create template` command.
 
 ```sh
-kubectl testkube create test --name template-test --type k6/script --job-template-reference=job-template --test-content-type git --git-uri  "https://github.com/kubeshop/testkube.git" --git-branch main --git-path test/k6/executor-tests/k6-smoke-test.js
+kubectl testkube create test --name template-test --type k6/script --job-template-reference=job-template --test-content-type git --git-uri  "https://github.com/kubeshop/testkube.git" --git-branch main --git-path test/k6/k6-smoke-test.js
 ```
 
 `--name` - Your test name (in this case `template-test`).
@@ -86,7 +86,7 @@ kubectl testkube create test --name template-test --type k6/script --job-templat
 `--test-content-type` - Test content type (in this case `git`).
 `--git-uri` - Git URI to repository (in this case `https://github.com/kubeshop/testkube.git`).
 `--git-branch` - Git branch to use (in this case `main`).
-`--git-path` - Git path to the test (in this case `test/k6/executor-tests/k6-smoke-test.js`).
+`--git-path` - Git path to the test (in this case `test/k6/k6-smoke-test.js`).
 
 </TabItem>
 
@@ -106,7 +106,7 @@ spec:
       type: git
       uri: https://github.com/kubeshop/testkube.git
       branch: main
-      path: test/k6/executor-tests/k6-smoke-test.js
+      path: test/k6/k6-smoke-test.js
       authType: basic
   executionRequest:
     jobTemplateReference: job-template

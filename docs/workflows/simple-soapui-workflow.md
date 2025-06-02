@@ -12,7 +12,7 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-        - test/soapui/executor-smoke/soapui-smoke-test.xml
+        - test/soapui/soapui-smoke-test.xml
   container:
     resources:
       requests:
@@ -24,6 +24,6 @@ spec:
         image: smartbear/soapuios-testrunner:5.7.2
         env:
           - name: COMMAND_LINE
-            value: -r /data/repo/test/soapui/executor-smoke/soapui-smoke-test.xml 
+            value: -r /data/repo/test/soapui/soapui-smoke-test.xml 
 
 ```

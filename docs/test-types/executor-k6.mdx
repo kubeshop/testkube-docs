@@ -65,7 +65,7 @@ export const ExecutorInfo = () => {
 ## Example k6 test
 
 In this example we will use the following k6 test:
-https://github.com/kubeshop/testkube/blob/main/test/k6/executor-tests/k6-smoke-test-without-envs.js
+https://github.com/kubeshop/testkube/blob/main/test/k6/k6-smoke-test-without-envs.js
 
 ```js
 import http from "k6/http";
@@ -99,7 +99,7 @@ If the source is **File**, the test file is uploaded directly.
 
 ### Git File
 
-If the source is a **Git file**, you need to fill in repository details - Git repository URI (in this case `https://github.com/kubeshop/testkube.git`), branch (`main`), and the path to k6 script in your repository (`test/k6/executor-tests/k6-smoke-test-without-envs.js`). In this example, the repository is public, but in the case of private ones you would need to additionally fill in Git credentials.
+If the source is a **Git file**, you need to fill in repository details - Git repository URI (in this case `https://github.com/kubeshop/testkube.git`), branch (`main`), and the path to k6 script in your repository (`test/k6/k6-smoke-test-without-envs.js`). In this example, the repository is public, but in the case of private ones you would need to additionally fill in Git credentials.
 
 ![K6 test - creation dialog - git file](../img/dashboard-k6-create-test-git-file.png)
 
@@ -125,10 +125,10 @@ Then choose the Test Content type based on Test Source you want to use:
 In the case of File test source:
 
 - `--test-content-type` (`file-uri`)
-- `--file` (path to your k6 script - in this case `test/k6/executor-tests/k6-smoke-test-without-envs.js`)
+- `--file` (path to your k6 script - in this case `test/k6/k6-smoke-test-without-envs.js`)
 
 ```sh
-testkube create test --name k6-test --type k6/script --test-content-type file-uri --file test/k6/executor-tests/k6-smoke-test-without-envs.js
+testkube create test --name k6-test --type k6/script --test-content-type file-uri --file test/k6/k6-smoke-test-without-envs.js
 ```
 
 ```sh title="Expected output:"
@@ -140,10 +140,10 @@ Test created testkube / k6-test 🥇
 - `--test-content-type` (`git-file`, so specific file will be checked out from the Git repository)
 - `--git-uri` - repository URI (in case of this example, `https://github.com/kubeshop/testkube.git`)
 - `--git-branch`
-- `--git-path` - path to the k6 script in the repository (in this case `test/k6/executor-tests/k6-smoke-test-without-envs.js`)
+- `--git-path` - path to the k6 script in the repository (in this case `test/k6/k6-smoke-test-without-envs.js`)
 
 ```sh
-testkube create test --name k6-test --type k6/script --test-content-type git-file --git-uri https://github.com/kubeshop/testkube.git --git-branch main --git-path test/k6/executor-tests/k6-smoke-test-without-envs.js
+testkube create test --name k6-test --type k6/script --test-content-type git-file --git-uri https://github.com/kubeshop/testkube.git --git-branch main --git-path test/k6/k6-smoke-test-without-envs.js
 ```
 
 ```sh title="Expected output:"
@@ -156,10 +156,10 @@ Test created testkube / k6-test 🥇
 - `--git-uri` - repository URI (in case of this example, `https://github.com/kubeshop/testkube.git`)
 - `--git-branch`
 - `--git-path` (path to the directory that should be checked out)
-- `--executor-args` (whole directory will be checked out - specific test file must be set as k6 argument - in this example `test/k6/executor-tests/k6-smoke-test-without-envs.js`)
+- `--executor-args` (whole directory will be checked out - specific test file must be set as k6 argument - in this example `test/k6/k6-smoke-test-without-envs.js`)
 
 ```sh
-testkube create test --name k6-test --type k6/script --test-content-type git-dir --git-uri https://github.com/kubeshop/testkube.git --git-branch main --git-path test/k6/executor-tests --executor-args test/k6/executor-tests/k6-smoke-test-without-envs.js
+testkube create test --name k6-test --type k6/script --test-content-type git-dir --git-uri https://github.com/kubeshop/testkube.git --git-branch main --git-path test/k6 --executor-args test/k6/k6-smoke-test-without-envs.js
 ```
 
 ```sh title="Expected output:"
@@ -193,12 +193,12 @@ spec:
       type: git
       uri: https://github.com/kubeshop/testkube.git
       branch: main
-      path: test/k6/executor-tests/k6-smoke-test-without-envs.js
+      path: test/k6/k6-smoke-test-without-envs.js
 ```
 
 #### Git Directory
 
-Check out the entire Git directory (in the following example `test/k6/executor-tests`), and run a specific test file (`test/k6/executor-tests/k6-smoke-test-without-envs.js`):
+Check out the entire Git directory (in the following example `test/k6`), and run a specific test file (`test/k6/k6-smoke-test-without-envs.js`):
 
 ```yaml
 apiVersion: tests.testkube.io/v3
@@ -214,10 +214,10 @@ spec:
       type: git
       uri: https://github.com/kubeshop/testkube.git
       branch: main
-      path: test/k6/executor-tests
+      path: test/k6
   executionRequest:
     args:
-      - test/k6/executor-tests/k6-smoke-test-without-envs.js
+      - test/k6/k6-smoke-test-without-envs.js
 ```
 
 ##### String

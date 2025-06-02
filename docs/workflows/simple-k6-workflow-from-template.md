@@ -8,19 +8,19 @@ metadata:
     docs: example
 spec:
   container:
-    workingDir: /data/repo/test/k6/executor-tests
+    workingDir: /data/repo/test/k6
     env:
     - name: K6_SYSTEM_ENV
       value: K6_SYSTEM_ENV_value
   steps:
   - name: Run from template
-    workingDir: /data/repo/test/k6/executor-tests
+    workingDir: /data/repo/test/k6
     content:
       git:
         uri: https://github.com/kubeshop/testkube
         revision: main
         paths:
-        - test/k6/executor-tests/k6-smoke-test.js
+        - test/k6/k6-smoke-test.js
     template:
       name: official/k6/v1
       config:

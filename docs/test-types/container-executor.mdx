@@ -159,7 +159,7 @@ You can provide the image, args, command, and image pull secrets in the HTTP Req
 ## Creating and Configuring a Container Executor: Playwright
 Despite having the dedicated [Playwright executor](executor-playwright.mdx), you may want to use a version that isn't supported. That's where you can use the Container executor. It allows you to use any Playwright image you may need.
 
-The example Playwright project uses Playwright `1.31.1`: https://github.com/kubeshop/testkube/tree/main/test/playwright/executor-tests/playwright-project
+The example Playwright project uses Playwright `1.31.1`: https://github.com/kubeshop/testkube/tree/main/test/playwright/playwright-project
 That is the specific version that is needed to run the tests. So, in this example the container executor will be created with `mcr.microsoft.com/playwright:v1.31.1-focal` Playwright official image. If you need another image you can find specific image tags in the Playwright Docs: https://playwright.dev/docs/docker#image-tags.
 
 <Tabs groupId="dashboard-cli">
@@ -239,8 +239,8 @@ spec:
       type: git
       uri: https://github.com/kubeshop/testkube
       branch: main
-      path: test/playwright/executor-tests/playwright-project
-      workingDir: test/playwright/executor-tests/playwright-project
+      path: test/playwright/playwright-project
+      workingDir: test/playwright/playwright-project
 ```
 
 </TabItem>

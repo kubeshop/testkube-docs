@@ -284,7 +284,7 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-      - test/k6/executor-tests/k6-smoke-test-without-envs.js
+      - test/k6/k6-smoke-test-without-envs.js
   steps:
   - execute:
       workflows:
@@ -293,7 +293,7 @@ spec:
           vus: 8
           duration: 1s
           workers: 2
-          script: '{{ file("/data/repo/test/k6/executor-tests/k6-smoke-test-without-envs.js") }}'
+          script: '{{ file("/data/repo/test/k6/k6-smoke-test-without-envs.js") }}'
 ```
 
 ### Multiple files transfer
@@ -312,7 +312,7 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-      - test/k6/executor-tests/k6-smoke-test-without-envs.js
+      - test/k6/k6-smoke-test-without-envs.js
   steps:
   - execute:
       workflows:

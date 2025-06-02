@@ -12,9 +12,9 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-      - test/playwright/executor-tests/playwright-project
+      - test/playwright/playwright-project
   container:
-    workingDir: /data/repo/test/playwright/executor-tests/playwright-project
+    workingDir: /data/repo/test/playwright/playwright-project
     image: mcr.microsoft.com/playwright:v1.32.3-focal
     resources:
       requests:

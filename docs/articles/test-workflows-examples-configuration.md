@@ -43,11 +43,11 @@ spec:
     git:
       uri: "https://github.com/kubeshop/testkube"
       paths:
-        - "test/playwright/executor-tests/playwright-project"
+        - "test/playwright/playwright-project"
 
   container:
     image: "mcr.microsoft.com/playwright:v{{ config.version }}" # <- Using config parameter for version
-    workingDir: "/data/repo/test/playwright/executor-tests/playwright-project"
+    workingDir: "/data/repo/test/playwright/playwright-project"
 
   steps:
     - shell: "npm ci && npx playwright test --workers {{ config.workers }}" # <- Using config parameter for workers

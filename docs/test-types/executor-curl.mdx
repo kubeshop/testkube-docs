@@ -38,7 +38,7 @@ You can also find this test in the Testkube repository: https://github.com/kubes
 
 ## Example Test
 
-In this example we will use the following cURL test: https://github.com/kubeshop/testkube/blob/main/test/curl/executor-tests/curl-smoke-test.json.
+In this example we will use the following cURL test: https://github.com/kubeshop/testkube/blob/main/test/curl/curl-smoke-test.json.
 
 ```json
 {
@@ -62,7 +62,7 @@ For a File source, the test file is uploaded directly.
 
 ### Git File
 
-For a Git file, you need to fill in the repository details - Git repository URI (in this case `https://github.com/kubeshop/testkube.git`), branch (`main`), and the path to the cURL test in your repository (`test/curl/executor-tests/curl-smoke-test.json`). In this example, the repository is public, but in the case of private ones, you would need to additionally fill in the Git credentials.
+For a Git file, you need to fill in the repository details - Git repository URI (in this case `https://github.com/kubeshop/testkube.git`), branch (`main`), and the path to the cURL test in your repository (`test/curl/curl-smoke-test.json`). In this example, the repository is public, but in the case of private ones, you would need to additionally fill in the Git credentials.
 
 ![curl test - creation dialog - git file](../img/dashboard-curl-create-test-git-file.png)
 
@@ -83,10 +83,10 @@ And, then choose the Test Content type based on the Test Source you want to use:
 For a File test source:
 
 - `--test-content-type` (`file-uri`)
-- `--file` (path to your curl test - in this case `test/curl/executor-tests/curl-smoke-test.json`)
+- `--file` (path to your curl test - in this case `test/curl/curl-smoke-test.json`)
 
 ```sh
-testkube create test --name curl-test --type curl/test --file test/curl/executor-tests/curl-smoke-test.json
+testkube create test --name curl-test --type curl/test --file test/curl/curl-smoke-test.json
 ```
 
 ```sh title="Expected output:"
@@ -100,10 +100,10 @@ You can then run the test with `testkube run test curl-test`.
 - `--test-content-type` (`git-file`, so specific file will be checked out from the Git repository)
 - `--git-uri` - Repository URI (in case of this example, `https://github.com/kubeshop/testkube.git`).
 - `--git-branch`
-- `--git-path` - Path to the k6 script in the repository (in this case `test/curl/executor-tests/curl-smoke-test.json`).
+- `--git-path` - Path to the k6 script in the repository (in this case `test/curl/curl-smoke-test.json`).
 
 ```sh
-testkube create test --name curl-test --type curl/test --test-content-type git-file --git-uri https://github.com/kubeshop/testkube.git --git-branch main --git-path test/curl/executor-tests/curl-smoke-test.json
+testkube create test --name curl-test --type curl/test --test-content-type git-file --git-uri https://github.com/kubeshop/testkube.git --git-branch main --git-path test/curl/curl-smoke-test.json
 ```
 
 ```sh title="Expected output:"
@@ -150,7 +150,7 @@ Duration:          00:00:09
 Repository parameters:
   Branch:          main
   Commit:
-  Path:            test/curl/executor-tests/curl-smoke-test.json
+  Path:            test/curl/curl-smoke-test.json
   Working dir:
   Certificate:
 
@@ -170,7 +170,7 @@ RUNNER_GITUSERNAME=""
 RUNNER_GITTOKEN=""
 RUNNER_DATADIR="/data"
 📦 Fetching test content from git-file...
-✅ Test content fetched to path /data/repo/test/curl/executor-tests/curl-smoke-test.json
+✅ Test content fetched to path /data/repo/test/curl/curl-smoke-test.json
 📂 Fetching uploads from object store testkube-minio-service-testkube:9000...
 📂 Placing files from buckets into /data/uploads/ []
 📂 Getting the contents of bucket folders [test-curl-test]
@@ -199,7 +199,7 @@ RUNNER_DATADIR="/data"
 running test [6400870d237c189271627cfa]
 🚚 Preparing for test run
 📦 Fetching test content from git-file...
-✅ Test content fetched to path /tmp/git-checkout2214379061/repo/test/curl/executor-tests/curl-smoke-test.json
+✅ Test content fetched to path /tmp/git-checkout2214379061/repo/test/curl/curl-smoke-test.json
 🔑 Filling in the input templates
 ✅ Successfully filled the input templates
 🔬 Executing in directory :
@@ -221,7 +221,7 @@ You can also get a definition while using the `testkube create test` command by 
 In that case, the test won't be created but the definition will be displayed.
 
 ```sh title="Expected output:"
-testkube create test --name curl-test --type curl/test --test-content-type git-file --git-uri https://github.com/kubeshop/testkube.git --git-branch main --git-path test/curl/executor-tests/curl-smoke-test.json --crd-only
+testkube create test --name curl-test --type curl/test --test-content-type git-file --git-uri https://github.com/kubeshop/testkube.git --git-branch main --git-path test/curl/curl-smoke-test.json --crd-only
 ```
 
 ```yaml
@@ -240,7 +240,7 @@ spec:
       type: git-file
       uri: https://github.com/kubeshop/testkube.git
       branch: main
-      path: test/curl/executor-tests/curl-smoke-test.json
+      path: test/curl/curl-smoke-test.json
 ```
 
 </TabItem>

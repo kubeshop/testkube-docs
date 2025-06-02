@@ -96,7 +96,7 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-        - test/cypress/executor-tests/cypress-13
+        - test/cypress/cypress-13
 ```
 
 ### Files
@@ -171,7 +171,7 @@ Set the default working directory:
 ```yaml
 spec:
   container:
-    workingDir: /data/repo/test/cypress/executor-tests/cypress-13
+    workingDir: /data/repo/test/cypress/cypress-13
 ```
 
 ## Environment Variables
@@ -316,13 +316,13 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-        - test/cypress/executor-tests/cypress-13
+        - test/cypress/cypress-13
   container:
     resources:
       requests:
         cpu: 2
         memory: 2Gi
-    workingDir: /data/repo/test/cypress/executor-tests/cypress-13
+    workingDir: /data/repo/test/cypress/cypress-13
   steps:
     - name: Run tests
       run:
@@ -337,7 +337,7 @@ spec:
             value: CYPRESS_CUSTOM_ENV_value
       steps:
         - name: Save artifacts
-          workingDir: /data/repo/test/cypress/executor-tests/cypress-13/cypress/videos
+          workingDir: /data/repo/test/cypress/cypress-13/cypress/videos
           artifacts:
             paths:
               - "**/*"

@@ -8,10 +8,10 @@ spec:
     git:
       uri: https://github.com/kubeshop/testkube
       paths:
-        - test/cypress/executor-tests/cypress-13
+        - test/cypress/cypress-13
   container:
     image: cypress/included:13.6.4
-    workingDir: /data/repo/test/cypress/executor-tests/cypress-13
+    workingDir: /data/repo/test/cypress/cypress-13
 
   steps:
     - name: Install dependencies

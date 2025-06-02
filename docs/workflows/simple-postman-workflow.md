@@ -13,9 +13,9 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-        - test/postman/executor-tests/postman-executor-smoke-without-envs.postman_collection.json
+        - test/postman/postman-executor-smoke-without-envs.postman_collection.json
   container:
-    workingDir: /data/repo/test/postman/executor-tests
+    workingDir: /data/repo/test/postman
     resources:
       requests:
         cpu: 256m
