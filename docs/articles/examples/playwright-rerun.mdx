@@ -18,7 +18,7 @@ The below Workflow is an example of how to achieve this for Playwright tests.
 
 Playwright needs the `test-results/.last-run.json` file from a previous execution to rerun failed tests. The Workflow below retrieves this by automating
 the Testkube CLI `testkube download artifact` command to download the corresponding file from a previous execution and saving it to the 
-root tests folder (where Playwright will be default be looking for it).
+root tests folder (where Playwright will be looking for it).
 
 - The **"Get last execution results"** step (lines 31-49) uses `testkube get testworkflowexecution` to get the execution before the ongoing one
   and then a combination of `grep` and `sed` to extract the `executionId`.
@@ -35,8 +35,8 @@ root tests folder (where Playwright will be default be looking for it).
   This is achieved by the "Fail if no previous results are Found" step instead if the `failOnMissing` property is set to `true`.
 
 :::note
-Please note that the `rerun-failed` option should only be used for the same or "compatible" revision/"version"/branch of your underlying Playwright tests, 
-just using the last one may not be correct.
+Please note that this `rerun-failed` option should only be used for the same or "compatible" revision/"version"/branch of your underlying Playwright tests, 
+just using the last one may not always be correct.
 :::
 
 <RerunPlaywright/>
