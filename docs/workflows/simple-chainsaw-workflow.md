@@ -10,9 +10,14 @@ spec:
       uri: https://github.com/cerebro1/chainsaw-testkube-demo.git
   container:
     image: ghcr.io/kyverno/chainsaw:latest
+  pod:
+    serviceAccountName: chainsaw-service-account  
   steps:
   - name: Run test
     shell: |
-      chainsaw test /data/repo/chainsaw-test/basic-test
+      chainsaw test --report-format XML --report-path /data/repo --report-name chainsaw-report /data/repo/chainsaw-test/basic-test
+    artifacts:
+      paths:
+        - /data/repo/chainsaw-report.xml
 status: {}
 ```
