@@ -706,6 +706,11 @@ const sidebars = {
               label: "Sharded",
               id: "articles/examples/playwright-sharded",
             },
+            {
+              type: "doc",
+              label: "Rerun Failed Tests",
+              id: "articles/examples/playwright-rerun",
+            },
           ],
         },
         {
