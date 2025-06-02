@@ -6,15 +6,23 @@ Playwright provides the ability to only rerun failed tests from a previous execu
 to cut down overall execution times when working with flaky tests and/or when you know the reason for a specific test failure
 has been fixed and rerunning all tests is not necessary - [Read More](https://playwright.dev/docs/running-tests#run-last-failed-tests).
 
+:::note
+Since all testing tools have different approaches to rerunning failed tests, Testkube does not have a native "Rerun failed tests" functionality.
+That being said, it is certainly possible to create Workflows that tap into the corresponding functionality in the testing tool at hand,
+with some custom scripting and/or configuration parameters.
+
+The below Workflow is an example of how to achieve this for Playwright tests.
+:::
+
 ## Workflow Overview
 
-The below Workflow shows how to leverage this functionality in Testkube alongside "regular" Playwright test execution.
+Playwright needs the `test-results/.last-run.json` file from a previous execution to rerun failed tests. The Workflow below retrieves this by automating
+the Testkube CLI `testkube download artifact` command to download the corresponding file from a previous execution and saving it to the 
+root tests folder (where Playwright will be default be looking for it).
 
-- Playwright needs the `test-results/.last-run.json` file from a previous execution to rerun failed tests. The Workflow retrieves this by automating
-  the Testkube CLI `testkube download artifact` command to download the corresponding file from a previous execution.
-  - The **"Get last execution results"** step (lines 31-49) uses `testkube get testworkflowexecution` to get the execution before the ongoing one
-    and then a combination of `grep` and `sed` to extract the `executionId`.
-  - The **"Get specific execution results"** step (lines 50-64) uses the provided `executionId` instead.
+- The **"Get last execution results"** step (lines 31-49) uses `testkube get testworkflowexecution` to get the execution before the ongoing one
+  and then a combination of `grep` and `sed` to extract the `executionId`.
+- The **"Get specific execution results"** step (lines 50-64) uses the provided `executionId` instead.
 - The CLI needs an API Token to retrieve results; it is recommended to use a `Member` token with access to the
   containing Environment with Read permissions as described at [Member Tokens](/testkube-pro/articles/api-token-management#member-tokens)
   and replace the `tkcapi_XXXX` value on line 57
@@ -25,6 +33,11 @@ The below Workflow shows how to leverage this functionality in Testkube alongsid
   - `failOnMissing` : fails the Workflow if the previous/specified execution has no results when `rerunFailed` is set to true (defaults to `false`).
 - The **"Get xx execution results"** steps are marked as `optional` so they don't fail the Workflow if no corresponding execution or artifact is found.
   This is achieved by the "Fail if no previous results are Found" step instead if the `failOnMissing` property is set to `true`.
+
+:::note
+Please note that the `rerun-failed` option should only be used for the same or "compatible" revision/"version"/branch of your underlying Playwright tests, 
+just using the last one may not be correct.
+:::
 
 <RerunPlaywright/>
 
