@@ -261,7 +261,7 @@ Testkube uses [Informers](https://pkg.go.dev/k8s.io/client-go/informers) to watc
 on certain actions on the watched Kubernetes resources.
 
 Informers are a reliable, scalable and fault-tolerant Kubernetes concept where each informer registers handlers with the
-Kubernetes API and gets notified by Kubernetes on each event on the watched resources.
+Kubernetes API and gets notified by Kubernetes on each event on the watched resources. Only the super-agent is able to register handlers with a Kubernetes API server, limiting our watched resources to the cluster in which the super-agent is deployed.
 
 ## API
 
