@@ -93,6 +93,10 @@ pod:
   serviceAccountName: some-account
 ```
 
+:::tip
+See the [Chainsaw Example](/articles/examples/chainsaw-basic) to see how a custom ServiceAccount can be used.
+:::
+
 ### Example: Single Execution Per Node
 
 You can design Kubernetes' [**Affinity and anti-affinity**](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) to choose where the pod should be scheduled.
