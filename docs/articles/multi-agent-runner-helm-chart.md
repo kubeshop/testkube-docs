@@ -156,6 +156,10 @@ The `exec-sa-testkube` ServiceAccounts are deployed to the namespaces where the 
 The `-testkube` suffix in the ServiceAccount names above and below might differ based on the underlying Helm Chart release name.
 :::
 
+:::tip
+See the [Chainsaw Example](/articles/examples/chainsaw-basic) to see how a custom ServiceAccount can be used in your Workflow.
+:::
+
 ### Example: Using the same namespace for Agent and Executions
 
 By default, we deploy both Agent and Executions to the same namespace the Helm Chart is released to. 

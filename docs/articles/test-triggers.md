@@ -269,6 +269,12 @@ Testkube exposes CRUD operations on test triggers in the REST API. Check out the
 
 ## Injected Environment Variables
 
+:::info
+Injected Environment Variables are supported when triggering legacy Tests / Suites only (see [Legacy Features](/articles/legacy-features)).
+
+You can use [Action Parameters](#action-parameters) instead when triggering Workflows.
+:::
+
 The following environment variables are automatically injected into each triggered test pod:
 
 - `WATCHER_EVENT_RESOURCE`: resource type
