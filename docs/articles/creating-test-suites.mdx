@@ -217,7 +217,7 @@ spec:
       type: git
       uri: https://github.com/kubeshop/testkube.git
       branch: main
-      path: test/k6/executor-tests/
+      path: test/k6/
   executionRequest:
       args:
         - k6-smoke-test-without-envs.js
@@ -308,10 +308,10 @@ The logs show the exact commands:
 ```bash
 ...
 🔬 Executing in directory /data/repo:
- $ k6 run test/k6/executor-tests/k6-smoke-test-without-envs.js -vu 1
+ $ k6 run test/k6/k6-smoke-test-without-envs.js -vu 1
 ...
 🔬 Executing in directory /data/repo:
- $ k6 run test/k6/executor-tests/k6-smoke-test-without-envs.js -vu 2
+ $ k6 run test/k6/k6-smoke-test-without-envs.js -vu 2
 ...
 ```
 

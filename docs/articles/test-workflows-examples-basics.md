@@ -80,7 +80,7 @@ spec:
       uri: "https://github.com/kubeshop/testkube"
       revision: "main"
       paths:
-        - "test/cypress/executor-tests/cypress-12"
+        - "test/cypress/cypress-12"
 
   steps:
     - shell: "tree /data/repo"
@@ -133,18 +133,18 @@ spec:
       uri: "https://github.com/kubeshop/testkube"
       revision: "main"
       paths:
-        - "test/cypress/executor-tests/cypress-12"
+        - "test/cypress/cypress-12"
 
   steps:
     - name: "Install dependencies"
       run:
         image: "cypress/included:13.6.4"
-        workingDir: "/data/repo/test/cypress/executor-tests/cypress-12"
+        workingDir: "/data/repo/test/cypress/cypress-12"
         shell: "npm install"
     - name: "Run test"
       run:
         image: "cypress/included:13.6.4"
-        workingDir: "/data/repo/test/cypress/executor-tests/cypress-12"
+        workingDir: "/data/repo/test/cypress/cypress-12"
         shell: "cypress run"
 ```
 
@@ -168,11 +168,11 @@ spec:
       uri: "https://github.com/kubeshop/testkube"
       revision: "main"
       paths:
-        - "test/cypress/executor-tests/cypress-12"
+        - "test/cypress/cypress-12"
 
   container:
     image: "cypress/included:13.6.4"
-    workingDir: "/data/repo/test/cypress/executor-tests/cypress-12"
+    workingDir: "/data/repo/test/cypress/cypress-12"
     resources:
       requests:
         memory: "2Gi"
@@ -210,10 +210,10 @@ spec:
           uri: "https://github.com/kubeshop/testkube"
           revision: "main"
           paths:
-            - "test/cypress/executor-tests/cypress-12"
+            - "test/cypress/cypress-12"
       container:
         image: "cypress/included:13.6.4"
-        workingDir: "/data/repo/test/cypress/executor-tests/cypress-12"
+        workingDir: "/data/repo/test/cypress/cypress-12"
       steps:
         - name: "Install dependencies"
           shell: "npm install"
@@ -324,11 +324,11 @@ spec:
     git:
       uri: "https://github.com/kubeshop/testkube"
       paths:
-        - "test/playwright/executor-tests/playwright-project"
+        - "test/playwright/playwright-project"
 
   container:
     image: "mcr.microsoft.com/playwright:v1.32.3"
-    workingDir: "/data/repo/test/playwright/executor-tests/playwright-project"
+    workingDir: "/data/repo/test/playwright/playwright-project"
     resources:
       requests:
         memory: "2Gi"
@@ -426,18 +426,18 @@ Read more about Job and Pod configurations at [Pod & Job](/articles/test-workflo
 Additional Test Workflow examples can be found under the [Examples and Guides](/articles/examples/overview) 
 section in this documentation, and in the Testkube repository.
 
-- [Cypress](https://github.com/kubeshop/testkube/blob/develop/test/cypress/executor-tests/crd-workflow/smoke.yaml)
+- [Cypress](https://github.com/kubeshop/testkube/blob/develop/test/cypress/crd-workflow/smoke.yaml)
 
-- [Gradle](https://github.com/kubeshop/testkube/blob/develop/test/gradle/executor-smoke/crd-workflow/smoke.yaml)
+- [Gradle](https://github.com/kubeshop/testkube/blob/develop/test/gradle/crd-workflow/smoke.yaml)
 
-- [JMeter](https://github.com/kubeshop/testkube/blob/develop/test/jmeter/executor-tests/crd-workflow/smoke.yaml)
+- [JMeter](https://github.com/kubeshop/testkube/blob/develop/test/jmeter/crd-workflow/smoke.yaml)
 
-- [k6](https://github.com/kubeshop/testkube/blob/develop/test/k6/executor-tests/crd-workflow/smoke.yaml)
+- [k6](https://github.com/kubeshop/testkube/blob/develop/test/k6/crd-workflow/smoke.yaml)
 
-- [Maven](https://github.com/kubeshop/testkube/blob/develop/test/maven/executor-smoke/crd-workflow/smoke.yaml)
+- [Maven](https://github.com/kubeshop/testkube/blob/develop/test/maven/crd-workflow/smoke.yaml)
 
-- [Playwright](https://github.com/kubeshop/testkube/blob/develop/test/playwright/executor-tests/crd-workflow/smoke.yaml)
+- [Playwright](https://github.com/kubeshop/testkube/blob/develop/test/playwright/crd-workflow/smoke.yaml)
 
-- [Postman](https://github.com/kubeshop/testkube/blob/develop/test/postman/executor-tests/crd-workflow/smoke.yaml)
+- [Postman](https://github.com/kubeshop/testkube/blob/develop/test/postman/crd-workflow/smoke.yaml)
 
-- [SoapUI](https://github.com/kubeshop/testkube/blob/develop/test/soapui/executor-smoke/crd-workflow/smoke.yaml)
+- [SoapUI](https://github.com/kubeshop/testkube/blob/develop/test/soapui/crd-workflow/smoke.yaml)

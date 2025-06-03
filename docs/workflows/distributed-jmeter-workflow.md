@@ -16,9 +16,9 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-      - test/jmeter/executor-tests/jmeter-executor-smoke.jmx
+      - test/jmeter/jmeter-executor-smoke.jmx
   container:
-    workingDir: /data/repo/test/jmeter/executor-tests
+    workingDir: /data/repo/test/jmeter
   services:
     slave:
       use:

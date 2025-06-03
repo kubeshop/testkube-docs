@@ -12,9 +12,9 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-      - test/jmeter/executor-tests/jmeter-executor-smoke.jmx
+      - test/jmeter/jmeter-executor-smoke.jmx
   container:
-    workingDir: /data/repo/test/jmeter/executor-tests
+    workingDir: /data/repo/test/jmeter
   steps:
   - name: Run tests
     shell: jmeter -n -t jmeter-executor-smoke.jmx -j /data/artifacts/jmeter.log -o /data/artifacts/report -l /data/artifacts/jtl-report.jtl -e

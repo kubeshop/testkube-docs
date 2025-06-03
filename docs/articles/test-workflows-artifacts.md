@@ -27,7 +27,7 @@ Artifacts are resolved relatively to the workingDir, so for example
 
 ```yaml
 - name: Saving artifacts
-  workingDir: /data/repo/test/cypress/executor-tests/cypress-13/cypress/videos
+  workingDir: /data/repo/test/cypress/cypress-13/cypress/videos
   artifacts:
     paths:
       - "**/*"

@@ -21,7 +21,7 @@ spec:
     git:
       uri: https://github.com/kubeshop/testkube
       paths:
-        - test/k6/executor-tests/k6-smoke-test.js
+        - test/k6/k6-smoke-test.js
   steps:
     - name: Run test
       parallel:
@@ -31,7 +31,7 @@ spec:
         use:
           - name: distribute/evenly
         container:
-          workingDir: /data/repo/test/k6/executor-tests
+          workingDir: /data/repo/test/k6
           env:
             - name: K6_SYSTEM_ENV
               value: K6_SYSTEM_ENV_value

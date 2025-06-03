@@ -100,11 +100,11 @@ Spec:
       Requests:
         Cpu:      128m
         Memory:   128Mi
-    Working Dir:  /data/repo/test/k6/executor-tests
+    Working Dir:  /data/repo/test/k6
   Content:
     Git:
       Paths:
-        test/k6/executor-tests/k6-smoke-test.js
+        test/k6/k6-smoke-test.js
       Revision:  main
       Uri:       https://github.com/kubeshop/testkube
   Steps:

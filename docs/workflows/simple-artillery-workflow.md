@@ -12,9 +12,9 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-      - test/artillery/executor-smoke/artillery-smoke-test.yaml
+      - test/artillery/artillery-smoke-test.yaml
   container:
-    workingDir: /data/repo/test/artillery/executor-smoke
+    workingDir: /data/repo/test/artillery
   steps:
   - name: Run Artillery tests
     run:

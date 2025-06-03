@@ -41,7 +41,7 @@ spec:
       type: git
       uri: https://github.com/kubeshop/testkube.git
       branch: main
-      path: test/postman/executor-tests/postman-executor-smoke.postman_collection.json
+      path: test/postman/postman-executor-smoke.postman_collection.json
   executionRequest:
     args:
       - "--env-var"
@@ -70,7 +70,7 @@ spec:
       uri: https://github.com/kubeshop/testkube.git
       revision: main
       paths:
-      - test/postman/executor-tests/postman-executor-smoke.postman_collection.json
+      - test/postman/postman-executor-smoke.postman_collection.json
   job:
     labels:
       core-tests: executors
@@ -82,7 +82,7 @@ spec:
       name: official--postman--beta
       config:
         run: newman run --env-var TESTKUBE_POSTMAN_PARAM=TESTKUBE_POSTMAN_PARAM_value
-          /data/repo/test/postman/executor-tests/postman-executor-smoke.postman_collection.json
+          /data/repo/test/postman/postman-executor-smoke.postman_collection.json
 ```
 
 ### Example - Test Workflow and Test Workflow Template for K6 Container Executor Test
@@ -120,8 +120,8 @@ spec:
       type: git
       uri: https://github.com/kubeshop/testkube
       branch: main
-      path: test/k6/executor-tests/k6-smoke-test-without-envs.js
-      workingDir: test/k6/executor-tests
+      path: test/k6/k6-smoke-test-without-envs.js
+      workingDir: test/k6
   executionRequest:
     args:
       - "run"
@@ -165,9 +165,9 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-      - test/k6/executor-tests/k6-smoke-test-without-envs.js
+      - test/k6/k6-smoke-test-without-envs.js
   container:
-    workingDir: /data/repo/test/k6/executor-tests
+    workingDir: /data/repo/test/k6
   job:
     labels:
       core-tests: executors

@@ -8,7 +8,7 @@ metadata:
     docs: example
 spec:
   container:
-    workingDir: /data/repo/test/cypress/executor-tests/cypress-13
+    workingDir: /data/repo/test/cypress/cypress-13
     env:
     - name: CYPRESS_CUSTOM_ENV
       value: "CYPRESS_CUSTOM_ENV_value"
@@ -17,10 +17,10 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-      - test/cypress/executor-tests/cypress-13
+      - test/cypress/cypress-13
   steps:
   - name: Run from template
-    workingDir: /data/repo/test/cypress/executor-tests/cypress-13
+    workingDir: /data/repo/test/cypress/cypress-13
     template:
       name: official/cypress/v1
       config:

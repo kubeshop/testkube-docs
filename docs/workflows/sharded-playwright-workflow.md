@@ -8,10 +8,10 @@ spec:
     git:
       uri: https://github.com/kubeshop/testkube
       paths:
-        - test/playwright/executor-tests/playwright-project
+        - test/playwright/playwright-project
   container:
     image: mcr.microsoft.com/playwright:v1.38.0-focal
-    workingDir: /data/repo/test/playwright/executor-tests/playwright-project
+    workingDir: /data/repo/test/playwright/playwright-project
   steps:
     - name: Install dependencies
       shell: 'npm install --save-dev @playwright/test@1.38.0 && npm ci'
@@ -21,7 +21,7 @@ spec:
         transfer:
           - from: /data/repo
         fetch:
-          - from: /data/repo/test/playwright/executor-tests/playwright-project/blob-report
+          - from: /data/repo/test/playwright/playwright-project/blob-report
             to: /data/reports
         container:
           resources:

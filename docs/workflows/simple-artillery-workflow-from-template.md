@@ -8,7 +8,7 @@ metadata:
     docs: example
 spec:
   container:
-    workingDir: /data/repo/test/artillery/executor-smoke
+    workingDir: /data/repo/test/artillery
   steps:
   - name: Run from template
     content:
@@ -16,8 +16,8 @@ spec:
         uri: https://github.com/kubeshop/testkube
         revision: main
         paths:
-        - test/artillery/executor-smoke/artillery-smoke-test.yaml
-    workingDir: /data/repo/test/artillery/executor-smoke
+        - test/artillery/artillery-smoke-test.yaml
+    workingDir: /data/repo/test/artillery
     template:
       name: official/artillery/v1
       config:

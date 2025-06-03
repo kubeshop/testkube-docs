@@ -105,7 +105,7 @@ metadata:
 spec:
   steps:
     - name: Run from template
-      workingDir: /data/repo/test/k6/executor-tests
+      workingDir: /data/repo/test/k6
       use:
         name: example-template/k6
         config:

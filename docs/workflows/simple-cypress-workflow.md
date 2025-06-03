@@ -12,9 +12,9 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-        - test/cypress/executor-tests/cypress-13
+        - test/cypress/cypress-13
   container:
-    workingDir: /data/repo/test/cypress/executor-tests/cypress-13
+    workingDir: /data/repo/test/cypress/cypress-13
   steps:
     - name: Run tests
       run:
