@@ -3,6 +3,7 @@ import LegacyWarning from "../articles/_legacy-warning.mdx";
 # Using Testkube from CI/CD
 
 Triggering Workflows from your CI/CD pipeline can be done in several ways:
+
 - Using one of Testkubes native integrations (see below).
 - Automating the [Testkube CLI](/articles/cli) in your CI/CD tool.
 - Directly calling the [Testkube API](/openapi/overview).
@@ -24,6 +25,7 @@ The following tutorials are available for integrating Testkube with common CI/CD
 ## Native CI/CD Integrations
 
 Native Integrations are available for
+
 - Jenkins - https://plugins.jenkins.io/testkube-cli
 - GitHub - https://github.com/marketplace/actions/testkube-action
 - Azure Devops - https://marketplace.visualstudio.com/items?itemName=Testkube.testkubecli
@@ -60,7 +62,7 @@ These variables are crucial for authenticating and directing your tests to the c
 Within your pipeline script, execute a command to set the Testkube context using the environment variables. For instance:
 
 ```
-testkube set context --api-key $TESTKUBE_API_KEY --org $TESTKUBE_ORG_ID --env $TESTKUBE_ENV_ID
+testkube set context --api-key $TESTKUBE_API_KEY --org-id $TESTKUBE_ORG_ID --env-id $TESTKUBE_ENV_ID
 ```
 
 This step configures the Testkube CLI with the correct parameters for your specific Testkube environment.
