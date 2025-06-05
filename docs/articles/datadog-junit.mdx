@@ -83,7 +83,12 @@ metadata:
 spec:
   config:                              
     service:
+      description: Name of the service or library being tested
       type: string
+    report-directory:
+      description: The directory where test results are stored; default scans entire directory
+      type: string
+      default: /data/repo/**/*
 ...
 ...
 ...
