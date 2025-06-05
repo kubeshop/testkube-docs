@@ -1,0 +1,129 @@
+# Datadog
+
+Datadog’s CI / Test Visibility product can ingest JUnit XML reports so you can visualize test performance and flake rate straight from your CI/CD pipelines. However, if you’re trying to [decouple test execution from CI/CD automation](https://testkube.io/learn/stop-running-tests-with-your-ci-cd-tool), you may want to send JUnit reports to Data Dog directly from a Testkube TestWorkflow execution. This guide shows how to upload those reports immediately after a TestWorkflow finishes by using a reusable **TestWorkflowTemplate**.
+
+## How it works
+
+1. Your test step produces JUnit XML files and saves them under the default working directory (/data/repo/) or any directy path specified for the testing tool executing the tests and writing the JUnit output
+2. A template step runs the official `datadog/ci` container and calls `datadog-ci junit upload`, passing paramaterized metadata such as the service name or working directory
+3. Any TestWorkflow can reference the template with a single `template:` step, keeping your pipelines clean and DRY
+
+---
+
+## Prerequisites
+
+- Testkube control plane deployed in your cluster
+- A Datadog account with **CI or Test Visibility** enabled
+- A Kubernetes Secret that stores your **Datadog API key**:
+
+```bash
+kubectl create secret generic datadog-api-key \
+  --from-literal=DATADOG_API_KEY=<your-key> \
+  -n testkube
+
+```
+
+---
+
+## 1. Create the `TestWorkflowTemplate`
+
+```yaml
+kind: TestWorkflowTemplate
+apiVersion: testworkflows.testkube.io/v1
+metadata:
+  name: datadog-ci-junit-upload
+  namespace: testkube
+spec:
+  # Optional parameter you can override from the TestWorkflow
+  config:
+    service:
+      description: Name of the service or library being tested
+      type: string
+      default: my-service
+    report-directory:
+      description: The directory where test results are stored; default scans entire directory
+      type string
+      default: /data/repo/**/*
+  steps:
+  - name: Upload JUnit to Datadog        
+    run:
+      image: datadog/ci:latest
+      env:
+      - name: DATADOG_API_KEY          # injected from the secret
+        valueFrom:
+          secretKeyRef:
+            name: datadog-api-key
+            key: DATADOG_API_KEY
+      command:
+      - datadog-ci
+      args:
+      - junit
+      - upload
+      - --service={{ config.service }}
+      - {{ config.report-directory }}
+
+```
+
+### A few notes
+
+- Append `--dry-run` to the `args` list to validate that the CLI discovers your XML files without actually sending data. Remove it once the output looks correct.
+- This template is parameterized to accept a “service” name used by the DataDog CLI to align the test results with a DataDog "service" - modify the configuartion element with the parameters needed for your command configuration
+
+---
+
+## 2. Reference the template from a `TestWorkflow`
+
+```yaml
+kind: TestWorkflow
+apiVersion: testworkflows.testkube.io/v1
+metadata:
+  name: cypress-tests-with-datadog-upload
+  namespace: testkube
+spec:
+  config:                              
+    service:
+      description: Name of the service or library being tested
+      type: string
+    report-directory:
+      description: The directory where test results are stored; default scans entire directory
+      type: string
+      default: /data/repo/**/*
+...
+...
+...
+    steps:
+    - name: My testing step
+      ...
+      ...
+      ...
+      artifacts:
+        paths:
+        - '**/*'
+    - template:
+        name: datadog-ci-junit-upload
+        config:
+          service: '{{ config.service }}'
+          report-directory: '{{ config.report-directory }}'
+
+```
+
+---
+
+## 3. Re‑using the pattern for other CLI integrations
+
+The same approach works for any tool that ships results via a containerized CLI:
+
+1. Build or choose a container image that contains the CLI.
+2. Create a template that
+    - passes any configurable parameters to the command via parameterization
+    - injects authentication and any other environment variables via `env`
+    - executes the CLI with arguments that reference `{{ config.* }}` placeholders.
+3. Use a step-level template reference to call the command
+
+---
+
+## See also
+
+- [Uploading JUnit XML reports with `datadog-ci`](https://docs.datadoghq.com/tests/setup/junit_xml/)
+- [TestWorkflow Templates reference](https://docs.testkube.io/articles/test-workflow-templates)
+- [`datadog-ci` GitHub page](https://github.com/DataDog/datadog-ci)

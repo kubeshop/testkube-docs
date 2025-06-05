@@ -985,6 +985,11 @@ const sidebars = {
           label: "Microsoft Teams",
           id: "articles/teams-integration",
         },
+        {
+          type: "doc",
+          label: "Datadog JUnit Results",
+          id: "articles/datadog-junit",
+        },       
       ],
     },
     {
