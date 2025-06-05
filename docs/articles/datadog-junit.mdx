@@ -40,6 +40,10 @@ spec:
       description: Name of the service or library being tested
       type: string
       default: my-service
+    report-directory:
+      description: The directory where test results are stored 
+      type string
+      default: /data/repo/**/*
   steps:
   - name: Upload JUnit to Datadog        
     run:
@@ -56,7 +60,7 @@ spec:
       - junit
       - upload
       - --service={{ config.service }}
-      - "**/*"                         # glob picking up every JUnit file - this could be paramterized to a specific directory just like 'service'
+      - {{ config.report-directory }}
 
 ```
 
