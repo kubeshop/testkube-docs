@@ -67,8 +67,7 @@ spec:
 ### A few notes
 
 - Append `--dry-run` to the `args` list to validate that the CLI discovers your XML files without actually sending data. Remove it once the output looks correct.
-- This template is parameterized to accept a “service” name - add additional parameters as needed for your command configuration
-_ The config element is optional, and is used to illustrate how parameterization can be used to inject arguments into the DataDog CLI command - in this case to specify how DataDog should categorize results
+- This template is parameterized to accept a “service” name used by the DataDog CLI to align the test results with a DataDog "service" - modify the configuartion element with the parameters needed for your command configuration
 
 ---
 
