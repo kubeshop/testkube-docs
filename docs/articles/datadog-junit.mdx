@@ -4,8 +4,8 @@ Datadog’s CI / Test Visibility product can ingest JUnit XML reports so you can
 
 ## How it works
 
-1. Your test step produces JUnit XML files and saves them under **/data/artifacts** (the default working directory in Testkube TestWorkflow).
-2. A template step runs the official `datadog/ci` container and calls `datadog-ci junit upload`, pointing it at the artifacts directory and passing metadata such as the service name.
+1. Your test step produces JUnit XML files and saves them under the default working directory (/data/repo) or any specified directory
+2. A template step runs the official `datadog/ci` container and calls `datadog-ci junit upload`, passing paramaterized metadata such as the service name or working directory
 3. Any TestWorkflow can reference the template with a single `template:` step, keeping your pipelines clean and DRY.
 
 ---
@@ -41,8 +41,7 @@ spec:
       type: string
       default: my-service
   steps:
-  - name: Upload JUnit to Datadog
-    workingDir: /data/artifacts        # where Testkube stores saved artifacts
+  - name: Upload JUnit to Datadog        
     run:
       image: datadog/ci:latest
       env:
@@ -57,7 +56,7 @@ spec:
       - junit
       - upload
       - --service={{ config.service }}
-      - "**/*"                         # glob picking up every JUnit file
+      - "**/*"                         # glob picking up every JUnit file - this could be paramterized to a specific directory 
 
 ```
 
@@ -77,7 +76,7 @@ metadata:
   name: cypress-tests-with-datadog-upload
   namespace: testkube
 spec:
-  config:
+  config:                             # This config statement is an optional parameter used by the DataDog CLI to categorize results 
     service:
       type: string
 ...
@@ -100,7 +99,7 @@ spec:
 
 ---
 
-## 4 Re‑using the pattern for other CLI integrations
+## 3 Re‑using the pattern for other CLI integrations
 
 The same approach works for any tool that ships results via a containerized CLI:
 
