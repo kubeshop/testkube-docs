@@ -1,6 +1,6 @@
 # Testkube AI Assistant On-Prem Installation
 
-[Testkube AI Assistant](./AI Assistant-overview) supports any LLM service that implements the OpenAI API specification, giving you full flexibility in where and how you run the model.
+[Testkube AI Assistant](./ai-assistant-overview) supports any LLM service that implements the OpenAI API specification, giving you full flexibility in where and how you run the model.
 
 ## Configurations
 
