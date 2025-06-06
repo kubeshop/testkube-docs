@@ -5,8 +5,16 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 
 - **Monthly releases** add new functionality and overall improvements.
 - **Patch releases** focus on critical bugs and security issues.
-:::
+  :::
 
+## Patch Release v1.15.4 (2025-06-06)
+
+This release is available in Helm Chart v2.321.4
+
+### Improvements
+
+- Fixed an issue where the Workflow wizard shows an empty preview whe combining multiple templates
+- Security updates in upstream dependencies.
 
 ## Patch Release v1.15.3 (2025-06-04)
 
@@ -46,8 +54,8 @@ This release is packed with a variety of bug fixes and improvements.
 Our team also took a good look at the release procedures of the Testkube Control Plane:
 
 - Changelogs! Testkube's control plane now comes with public changelogs and a unified version.
-In the past, each service such as the dashboard, API Server, workers, etc, would have its own version.
-Today they all share the same version which makes it easier to communicate changes and service interoperability.
+  In the past, each service such as the dashboard, API Server, workers, etc, would have its own version.
+  Today they all share the same version which makes it easier to communicate changes and service interoperability.
 - The release cadence will also be reduced to better fit enterprises. Moving forward you can expect a monthly minor release with some unplanned patch versions in between. The new process also improves predictability and stability of these releases.
 - Our Helm Chart is now available as an OCI Artifact. The old Helm Repository approach still works, but under the hood it will now also pull as an OCI Artifact.
 
@@ -66,5 +74,5 @@ Today they all share the same version which makes it easier to communicate chang
 - Fixed a problem where workingDir were incorrectly substituted within workflow definitions.
 - Fixed an issue updating team and board descriptions.
 - Fixed workflow termination when resource metrics cannot be stored due to lack of free storage space.
-Improved user interface of multi-agent engine
+  Improved user interface of multi-agent engine
 - Many other minor fixes and improvements.
