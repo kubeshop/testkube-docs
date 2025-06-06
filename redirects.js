@@ -155,11 +155,7 @@ const redirects = [
     to: "/articles/getting-tests-results",
   },
   {
-    from: [
-      "/concepts/tests/tests-variables",
-      "/tests-variables",
-      "/using-testkube/tests/tests-variables",
-    ],
+    from: ["/concepts/tests/tests-variables", "/tests-variables", "/using-testkube/tests/tests-variables"],
     to: "/articles/adding-tests-variables",
   },
   {
@@ -219,10 +215,7 @@ const redirects = [
     to: "/articles/cli",
   },
   {
-    from: [
-      "/guides/going-to-production/authentication/oauth-ui",
-      "/articles/oauth-dashboard",
-    ],
+    from: ["/guides/going-to-production/authentication/oauth-ui", "/articles/oauth-dashboard"],
     to: "/articles/testkube-dashboard-explore",
   },
   {
@@ -275,15 +268,10 @@ const redirects = [
   },
   {
     from: "/articles/install/onprem-overview",
-    to: "/articles/install/overview"
+    to: "/articles/install/overview",
   },
   {
-    from: [
-      "/testkube-cloud/intro",
-      "/testkube-cloud",
-      "/testkube-cloud/articles/intro",
-      "/testkube-pro/intro",
-    ],
+    from: ["/testkube-cloud/intro", "/testkube-cloud", "/testkube-cloud/articles/intro", "/testkube-pro/intro"],
     to: "/articles/using-testkube",
   },
   {
@@ -326,11 +314,7 @@ const redirects = [
     to: "/testkube-pro/articles/managing-cli-context",
   },
   {
-    from: [
-      "/testkube-cloud/architecture",
-      "/testkube-cloud/articles/architecture",
-      "/testkube-pro/architecture",
-    ],
+    from: ["/testkube-cloud/architecture", "/testkube-cloud/articles/architecture", "/testkube-pro/architecture"],
     to: "/articles/architecture",
   },
   {
@@ -341,24 +325,15 @@ const redirects = [
     to: "/testkube-pro/articles/running-parallel-tests-with-test-suite",
   },
   {
-    from: [
-      "/testkube-cloud/articles/AI-test-insights",
-      "/testkube-pro/AI-test-insights",
-    ],
+    from: ["/testkube-cloud/articles/AI-test-insights", "/testkube-pro/AI-test-insights"],
     to: "/testkube-pro/articles/AI-test-insights",
   },
   {
-    from: [
-      "/testkube-cloud/articles/status-pages",
-      "/testkube-pro/status-pages",
-    ],
+    from: ["/testkube-cloud/articles/status-pages", "/testkube-pro/status-pages"],
     to: "/testkube-pro/articles/status-pages",
   },
   {
-    from: [
-      "/testkube-cloud/articles/cached-results",
-      "/testkube-pro/cached-results",
-    ],
+    from: ["/testkube-cloud/articles/cached-results", "/testkube-pro/cached-results"],
     to: "/testkube-pro/articles/cached-results",
   },
   {
@@ -415,10 +390,7 @@ const redirects = [
     to: "/articles/install/install-with-cli",
   },
   {
-    from: [
-      "/testkube-enterprise/articles/usage-guide",
-      "/testkube-pro-on-prem/articles/usage-guide",
-    ],
+    from: ["/testkube-enterprise/articles/usage-guide", "/testkube-pro-on-prem/articles/usage-guide"],
     to: "/articles/install/install-with-helm",
   },
   {
@@ -514,7 +486,7 @@ const redirects = [
     to: "/articles/examples/maven-basic",
   },
   {
-    from: ["/github","/articles/run-tests-with-github-actions"],
+    from: ["/github", "/articles/run-tests-with-github-actions"],
     to: "/articles/github-actions",
   },
   {
@@ -572,6 +544,27 @@ const redirects = [
   {
     from: ["/articles/testkube-dependencies", "/concepts/dependencies"],
     to: "/articles/mongodb-administration",
+  },
+  // Copilot to AI Assistant redirects
+  {
+    from: "/articles/copilot-overview",
+    to: "/articles/ai-assistant-overview",
+  },
+  {
+    from: "/articles/copilot-on-prem-install",
+    to: "/articles/ai-assistant-on-prem-install",
+  },
+  {
+    from: "/articles/copilot-enable",
+    to: "/articles/ai-assistant-enable",
+  },
+  {
+    from: "/articles/copilot-can-help",
+    to: "/articles/ai-assistant-can-help",
+  },
+  {
+    from: "/articles/copilot-is-different",
+    to: "/articles/ai-assistant-is-different",
   },
 ];
 

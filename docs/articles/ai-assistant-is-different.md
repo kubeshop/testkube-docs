@@ -1,19 +1,19 @@
-# How Copilot Is Different from Other Chatbots
+# How AI Assistant Is Different from Other Chatbots
 
-Testkube Copilot is more than just a chatbot or a general-purpose LLM.  
+Testkube AI Assistant is more than just a chatbot or a general-purpose LLM.  
 Its design and integration with the Testkube ecosystem set it apart:
 
 ## Deep Integration with Testkube
 
 - **Contextual Awareness:**  
-  Copilot continuously enriches its context based on the current page you’re viewing on the Testkube Dashboard.
+  AI Assistant continuously enriches its context based on the current page you’re viewing on the Testkube Dashboard.
 
 - **Direct Control Plane Interaction:**  
   It can retrieve real-time information directly from the Testkube Control Plane, ensuring that the data and recommendations are up to date.
 
 ## Specialized Agent Architecture
 
-Copilot is powered by a suite of specialized agents that work both independently and collaboratively:
+AI Assistant is powered by a suite of specialized agents that work both independently and collaboratively:
 
 - **Logs Analysis Agent:**  
   Fetches and analyzes logs from test executions.
@@ -36,6 +36,6 @@ These agents can work on their own for quick tasks or in tandem for more complex
 ## Future Enhancements
 
 - **Actionable Commands:**  
-  In upcoming releases, Copilot will be able to perform actions directly from the chat interface, further streamlining your workflow.
+  In upcoming releases, AI Assistant will be able to perform actions directly from the chat interface, further streamlining your workflow.
 
 This tight integration and specialized functionality provide a tailored experience that generic chatbots or LLMs cannot match.
