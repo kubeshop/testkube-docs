@@ -1,10 +1,10 @@
-# Testkube Copilot Overview
+# Testkube AI Assistant Overview
 
 > **On-Prem Installation Notice:**  
 > For details on installing and enabling the AI service on On-Prem deployments, please see the [On-Prem Installation](./copilot-on-prem-install.md) page.
 
-Welcome to the documentation for the **Testkube Copilot** – an AI-powered assistant integrated directly into the Testkube Dashboard.  
-Copilot is designed to help you streamline your test orchestration by providing intelligent assistance in areas such as log analysis, dashboard navigation, YAML configuration, and general Testkube guidance.
+Welcome to the documentation for the **Testkube AI Assistant** – an AI-powered assistant integrated directly into the Testkube Dashboard.  
+AI Assistant is designed to help you streamline your test orchestration by providing intelligent assistance in areas such as log analysis, dashboard navigation, YAML configuration, and general Testkube guidance.
 
 ## Key Features
 
@@ -23,9 +23,9 @@ Copilot is designed to help you streamline your test orchestration by providing 
 - **General Testkube Guidance:**  
   Ask questions about the Testkube Control Plane, Agents, and Dashboard, with answers referencing our detailed documentation.
 
-## Learn more about Copilot
+## Learn more about AI Assistant
 
 - [On-Prem Installation](./copilot-on-prem-install.md)
-- [Enable Copilot](./copilot-enable.md)
-- [How Copilot can help](./copilot-can-help.md)
-- [How Copilot is different from other chatbots](./copilot-is-different.md)
+- [Enable AI Assistant](./copilot-enable.md)
+- [How AI Assistant can help](./copilot-can-help.md)
+- [How AI Assistant is different from other chatbots](./copilot-is-different.md)

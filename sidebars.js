@@ -122,7 +122,7 @@ const sidebars = {
                 },
                 {
                   type: "doc",
-                  label: "Testkube Copilot",
+                  label: "Testkube AI Assistant",
                   id: "articles/copilot-on-prem-install",
                 },
                 {
@@ -601,7 +601,7 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Testkube Copilot",
+          label: "Testkube AI Assistant",
           items: [
             {
               type: "doc",
@@ -615,17 +615,17 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Enable Copilot",
+              label: "Enable AI Assistant",
               id: "articles/copilot-enable",
             },
             {
               type: "doc",
-              label: "How Copilot can help",
+              label: "How AI Assistant can help",
               id: "articles/copilot-can-help",
             },
             {
               type: "doc",
-              label: "How Copilot is different",
+              label: "How AI Assistant is different",
               id: "articles/copilot-is-different",
             },
           ],
@@ -989,7 +989,7 @@ const sidebars = {
           type: "doc",
           label: "Datadog JUnit Results",
           id: "articles/datadog-junit",
-        },       
+        },
       ],
     },
     {

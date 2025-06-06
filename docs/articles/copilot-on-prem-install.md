@@ -1,6 +1,6 @@
-# Testkube Copilot On-Prem Installation
+# Testkube AI Assistant On-Prem Installation
 
-[Testkube Copilot](./copilot-overview) supports any LLM service that implements the OpenAI API specification, giving you full flexibility in where and how you run the model.
+[Testkube AI Assistant](./AI Assistant-overview) supports any LLM service that implements the OpenAI API specification, giving you full flexibility in where and how you run the model.
 
 ## Configurations
 
@@ -22,7 +22,7 @@ kubectl -n <namespace> create secret generic <secret name> \
 In the `testkube-enterprise` chart you configure **two** components:
 
 1. **testkube-ai-service** – the backend that communicates with the LLM.
-2. **testkube-cloud-ui** – the web UI that surfaces Copilot features.
+2. **testkube-cloud-ui** – the web UI that surfaces AI Assistant features.
 
 ```yaml
 # Activate and wire the AI service
@@ -35,7 +35,7 @@ testkube-ai-service:
     # K8s secret that stores your LLM_API_KEY
     secretRef: "<secret name>"
 
-# Enable Copilot features in the UI and tell it
+# Enable AI Assistant features in the UI and tell it
 # where the ai-service is reachable
 testkube-cloud-ui:
   ai:
@@ -68,9 +68,9 @@ testkube-ai-service:
     secretRef: "<secret name>"
 ```
 
-### Trying Copilot with the Testkube Hosted LLM Proxy (Trials & Demos)
+### Trying AI Assistant with the Testkube Hosted LLM Proxy (Trials & Demos)
 
-If you just want to explore Copilot without operating your own model, you can use our hosted LLM proxy at **llm.testkube.io**.  
+If you just want to explore AI Assistant without operating your own model, you can use our hosted LLM proxy at **llm.testkube.io**.  
 Request an evaluation license from [testkube.io](https://testkube.io) and point the AI service to the proxy:
 
 ```yaml

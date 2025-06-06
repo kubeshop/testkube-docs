@@ -5,9 +5,9 @@ The below table shows a feature comparison between deploying the Testkube Agent 
 The Control Plane column applies to both On-Prem and Cloud deployments of the Control Plane.
 
 | Features                             |       Testkube Agent <br/> in standalone mode        | Testkube Agent(s) <br/>connected to Control Plane |                                Read More                                |
-|:-------------------------------------|:----------------------------------------------------:|:-------------------------------------------------:|:-----------------------------------------------------------------------:|
+| :----------------------------------- | :--------------------------------------------------: | :-----------------------------------------------: | :---------------------------------------------------------------------: |
 | **TestWorkflows**                    | :white_check_mark: - :warning: see limitations above |                :white_check_mark:                 |                    [Docs](/articles/test-workflows)                     |
-| **Test Logs/Artifacts**              |   :white_check_mark: -  :warning: via CLI/API only   |                :white_check_mark:                 |                  [Docs](/articles/logs-and-artifacts)                   |
+| **Test Logs/Artifacts**              |   :white_check_mark: - :warning: via CLI/API only    |                :white_check_mark:                 |                  [Docs](/articles/logs-and-artifacts)                   |
 | **Webhooks**                         |                  :white_check_mark:                  |                :white_check_mark:                 |                       [Docs](/articles/webhooks)                        |
 | **Test Triggers**                    |                  :white_check_mark:                  |                :white_check_mark:                 |                  [Docs](/articles/triggering-overview)                  |
 | **Test, Suites, Sources, Executors** |                  :white_check_mark:                  |                :white_check_mark:                 |           Deprecated - [Read More](/articles/legacy-features)           |
@@ -25,5 +25,5 @@ The Control Plane column applies to both On-Prem and Cloud deployments of the Co
 | **Resource Groups**                  |                         :x:                          |                :white_check_mark:                 |                    [Docs](/articles/resource-groups)                    |
 | **JUnit Reports**                    |                         :x:                          |                :white_check_mark:                 |                [Docs](/articles/test-workflows-reports)                 |
 | **Audit Logs**                       |                         :x:                          |                :white_check_mark:                 |                [Docs](/testkube-pro/articles/audit-logs)                |
-| **Testkube Copilot**                 |                         :x:                          |                :white_check_mark:                 |                   [Docs](/articles/copilot-overview)                    |
+| **Testkube AI Assistant**            |                         :x:                          |                :white_check_mark:                 |                   [Docs](/articles/copilot-overview)                    |
 | **Test Discovery**                   |                         :x:                          |                :white_check_mark:                 | [Docs](/articles/test-workflows-create-wizard#automatic-test-discovery) |
