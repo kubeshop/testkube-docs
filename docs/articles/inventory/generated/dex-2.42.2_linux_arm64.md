@@ -21,6 +21,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>>=1.24.0-0<br/><1.24.4</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.017%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -36,6 +38,8 @@ Calling Verify with a VerifyOptions.KeyUsages that contains ExtKeyUsageAny unint
 <table>
 <tr><td>Affected range</td><td><code>>=1.24.0-0<br/><1.24.4</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.030%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -51,6 +55,8 @@ Proxy-Authorization and Proxy-Authenticate headers persisted on cross-origin red
 <table>
 <tr><td>Affected range</td><td><code>>=1.24.0-0<br/><1.24.4</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.012%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
