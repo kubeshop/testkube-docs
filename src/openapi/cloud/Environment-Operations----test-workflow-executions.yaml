@@ -7,13 +7,37 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: cloud-api/1.10.51
+  version: 1.16.0-de.53
 servers:
   - url: https://api.testkube.io
     description: Testkube Cloud API Endpoint
   - url: https://<your-testkube-api-host>
     description: Testkube On-Prem API Endpoint
 paths:
+  /organizations/{id}/environments/{environmentID}/test-workflow-executions/{executionID}/artifacts:
+    post:
+      summary: Get Test Workflow artifact
+      description: Get Test Workflow artifact with artifactID
+      operationId: getTestWorkflowArtifactPost
+      requestBody:
+        $ref: './components.yaml#/components/requestBodies/ServeArtifact'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/ArtifactURL'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/EnvironmentID'
+      - $ref: './components.yaml#/components/parameters/ExecutionID'
   /organizations/{id}/environments/{environmentID}/test-workflow-executions/{executionID}/artifacts/{artifactID}:
     get:
       summary: Get Test Workflow artifact
@@ -68,6 +92,54 @@ paths:
       - $ref: './components.yaml#/components/parameters/EnvironmentID'
       - $ref: './components.yaml#/components/parameters/ExecutionID'
       - $ref: './components.yaml#/components/parameters/ArtifactID'
+  /organizations/{id}/environments/{environmentID}/test-workflow-executions/{executionID}/logs:
+    get:
+      summary: Get Test Workflow logs URL
+      description: Get Test Workflow logs URL
+      operationId: getTestWorkflowLogsURL
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/ArtifactURL'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/EnvironmentID'
+      - $ref: './components.yaml#/components/parameters/ExecutionID'
+  /organizations/{id}/environments/{environmentID}/test-workflow-executions/{executionID}/serve-artifact:
+    post:
+      summary: Serve artifact
+      description: Serve artifact
+      operationId: serveTestWorkflowArtifactPost
+      requestBody:
+        $ref: './components.yaml#/components/requestBodies/ServeArtifact'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/ArtifactURL'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/EnvironmentID'
+      - $ref: './components.yaml#/components/parameters/ExecutionID'
+      - $ref: './components.yaml#/components/parameters/OptionalTestName'
+      - $ref: './components.yaml#/components/parameters/FilterTestsuiteName'
   /organizations/{id}/environments/{environmentID}/test-workflow-executions/{executionID}/serve-artifact/{artifactID}:
     get:
       summary: Serve Test Workflow artifact
