@@ -24,7 +24,9 @@ Before you proceed with the installation, please ensure that you have the follow
 Make sure you're using the **correct Ingress controller**.
 
 ✅ Use: [kubernetes/ingress-nginx](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx)
+
 🚫 Do not use: [nginx/nginx-ingress (NGINX Inc.)](https://artifacthub.io/packages/helm/nginx/nginx-ingress)
+
 Using the wrong chart causes one of the Dex or API Ingresses to be ignored when they share the same hostname.
 :::
 
