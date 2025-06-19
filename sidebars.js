@@ -932,6 +932,11 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "Argo Events",
+          id: "articles/argoevents-integration",
+        },
+        {
+          type: "doc",
           label: "Argo Workflows",
           id: "articles/argoworkflows-integration",
         },
