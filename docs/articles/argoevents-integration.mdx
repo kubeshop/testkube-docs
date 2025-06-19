@@ -1,4 +1,4 @@
-# Trigger Testkube webhook with Argo Events
+# Integrating Testkube with Argo Events
 
 Tools like [Argo Events](https://argoproj.github.io/argo-events/) help capture Kubernetes resource lifecycle events, such as CREATE, UPDATE, or DELETE.
  It is capable of detecting and responding to a wide range of cluster events. These events can then be integrated into cloud-native test orchestration
@@ -89,7 +89,7 @@ Based on the test you want to run, [configure a Test Workflow in the Testkube Da
 
 ### 4. Create an EventSource
 
-Configure an EventSource that will watch the resources like a ConfigMap for ADD, UPDATE, and DELETE events and filter them if they have required label set.
+Configure an [EventSource](https://argoproj.github.io/argo-events/concepts/event_source/) that will watch the resources like a ConfigMap for ADD, UPDATE, and DELETE events and filter them if they have required label set.
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -127,7 +127,7 @@ spec:
 
 ### 5. Create a Sensor
 
-Configure a Sensor that:
+Configure a [Sensor](https://argoproj.github.io/argo-events/concepts/sensor/) that:
 
 * Connects to the EventSource resource and provides details of the Kubernetes resource under watch.
 
@@ -214,7 +214,7 @@ $ kubectl patch configmap demo-config -n default --type merge -p '{"data":{"dumm
 configmap/demo-config patched  
 ```
 
-c. View Sensor logs to verify that Testkube webhook is triggered.
+c. View Sensor logs to verify that Testkube Test Workflow is triggered.
 
 ```sh
 $ kubectl logs -n argo-events -l sensor-name=configmap-webhook-sensor --tail=2
@@ -222,7 +222,7 @@ $ kubectl logs -n argo-events -l sensor-name=configmap-webhook-sensor --tail=2
 {"level":"info","ts":"2025-06-18T11:25:43.512504542Z","logger":"argo-events.sensor","caller":"sensors/listener.go:449","msg":"Successfully processed trigger 'testkube-webhook-trigger'","sensorName":"configmap-webhook-sensor","triggerName":"testkube-webhook-trigger","triggerType":"HTTP","triggeredBy":["configmap-dep"],"triggeredByEvents":["e09792772c454a038a7b02efeadc86b2"]}
 ```
 
-d. View Test Workflow execution details using [Testkube CLI](/articles/install/cli) or Testkube Dashboard. Use the following command.
+d. View Test Workflow execution details using [Testkube CLI](/articles/install/cli) or [Testkube Dashboard](/articles/testkube-dashboard-explore). Use the following command.
 
 ```sh
 testkube get testworkflow <Test_Workflow_Name>
@@ -265,6 +265,30 @@ Duration:             10.496s
 ```
 
 The above output shows the Tags added by Argo Event, status and duration of test execution.
+
+Check Testkube Dashboard for deeper insights like execution logs, artifacts and resource utilisation during test execution.
+
+![Testkube Dashboard with Test Workflow Execution](./images/argoevent-1.png)
+
+The execution of the Test Workflow is triggered and completed successfully.
+The `tags` configured in the Sensor configuration helps verify that the request is coming from ArgoEvent.
+Check the Executions in Testkube Dashboard to see if the tag is added.
+
+![Execution](./images/argoevent-2.png)
+
+Tag `ArgoEventConfigMapUpdate` is added to the execution along with the name of the ConfigMap `demo-config`.
+
+Select Test Workflows execution and view the Log Output.
+
+![Logs](./images/argoevent-3.png)
+
+Select the Artifacts and view the test results.
+
+![Test Result](./images/argoevent-4.png)
+
+Monitor Resource Usage including CPU, memory, network traffic and disk usage across each test execution.
+
+![Resource Usage](./images/argoevent-5.png)
 
 This setup enables a reliable, event-driven testing workflow in Kubernetes by integrating Argo Events with Testkube.
 It ensures that any resource change automatically triggers targeted tests, helping teams validate changes early and maintain application stability.
