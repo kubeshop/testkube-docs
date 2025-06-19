@@ -1,4 +1,4 @@
-# Getting Started Testkube Open Source 
+# Getting Started with Testkube Open Source 
 
 ## 1. Install the Testkube Agent in Standalone Mode 
 
