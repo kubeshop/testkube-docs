@@ -2,7 +2,9 @@
 
 You can install lightweight Runner Agent using `kubeshop/testkube-runner` Helm Chart.
 
-## Creating Runner Agent for Helm Charts
+## Basic installation
+
+### Creating Runner Agent for Helm Charts
 
 To create Runner Agent, you can run `testkube create runner` command, like:
 
@@ -31,7 +33,7 @@ Policy:
    Required Matching Labels: name
 ```
 
-## Basic installation
+### Helm install
 
 1. Add the Kubeshop Helm repository:
    ```sh
@@ -63,6 +65,56 @@ runner:
 cloud:
   url: "agent.testkube.io:443"
 ```
+
+## Self-registering runner Helm install
+
+Sometimes it may be desirable to allow runners to create themselves automatically on first run (without using the CLI),
+for example when using an ephemeral testing environment that is programmatically created.
+
+Each environment has a Runner Join Token assigned to it. This API key can be used for creating agents automatically when
+the agent itself first starts.
+
+This enables you to install the runner using only `helm`:
+
+1. Retrieve the helm instructions including runner join token for the target environment:
+   ![Create self-registering runner UI](images/create-runner-helm.png)
+2. Add the Kubeshop Helm repository:
+   ```sh
+   helm repo add kubeshop https://kubeshop.github.io/helm-charts
+   ```
+3. If this repo already exists, run `helm repo update` to retrieve
+   the `latest` versions of the packages.
+   You can then run `helm search repo testkube` to see the charts.
+4. Install the Helm Chart:
+   ```sh
+   helm upgrade --install \
+     --create-namespace \
+     --namespace my-runner \
+     --set 'runner.orgId=<your:tkcorg_:organization_id>' \
+     --set 'runner.register.token=<your:tkcapi_:key>' \
+     --set 'cloud.url=agent.testkube.io:443' \
+     my-runner kubeshop/testkube-runner
+   ```
+   
+Or with a values file:
+
+```yaml
+runner:
+  orgId: "<your:tkcorg_:organization_id>"
+  register: 
+   token: "<your:tkcapi_:key>"
+
+cloud:
+  url: "agent.testkube.io:443"
+```
+
+### Limitations of self-registering runners
+
+- Runners must be able to create Kubernetes `Secrets` in their namespace.
+  These secrets are used to store the runner's ID and connection key which are generated during registration.
+  If the runner cannot create a `Secret` it will self-register every time it starts up.
+- Runners will not deregister themselves during `helm uninstall`.
+  Instead self-registered runners must be manually removed using the UI or CLI.
 
 ## Cookbook
 
@@ -140,6 +192,16 @@ globalTemplate:
      securityContext:
        runAsUser: 1000650001
        runAsNonRoot: true
+```
+
+### Register as a floating runner
+
+With self-registering runners you may wish to have them created as a floating runner:
+
+```yaml
+runner:
+  register:
+    floating: true
 ```
 
 ## Service Accounts
