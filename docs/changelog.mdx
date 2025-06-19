@@ -7,6 +7,22 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Patch releases** focus on critical bugs and security issues.
   :::
 
+## Patch Release v1.15.5 (2025-06-19)
+
+This release is available in Helm Chart v2.321.5
+
+### Improvements
+
+- Fixed an issue where the correct JUnit test suite icon wasn't displaying properly
+- Improved handling of JUnit format when working with nested test suites
+- Resolved a problem with empty string default values in workflow config settings
+- Enhanced the agents dropdown for better usability
+- Fixed an issue where your selected agents weren't being preserved when running workflows
+- Corrected broken links in the running context that weren't properly directing to workflows
+- Fixed a search error that occurred when searching for empty or non-existent values in execution logs
+- Resolved a critical security vulnerability (F-2025-4481) related to OAuth account hijacking via redirect URLs
+- Strengthened security headers in our nginx configuration for better protection
+
 ## Patch Release v1.15.4 (2025-06-06)
 
 This release is available in Helm Chart v2.321.4
