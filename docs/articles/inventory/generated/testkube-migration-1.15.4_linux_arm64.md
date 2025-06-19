@@ -79,8 +79,8 @@ Excessive memory allocation
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.23.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.030%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.040%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -96,7 +96,7 @@ Proxy-Authorization and Proxy-Authenticate headers persisted on cross-origin red
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.23.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.012%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.013%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
 </table>
 
