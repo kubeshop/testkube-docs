@@ -994,7 +994,7 @@ const sidebars = {
           type: "doc",
           label: "Datadog JUnit Results",
           id: "articles/datadog-junit",
-        },       
+        },
       ],
     },
     {
@@ -1103,6 +1103,11 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "Getting Started",
+          id: "articles/getting-started-with-open-source",
+        },
+        {
+          type: "doc",
           label: "Licensing FAQ",
           id: "articles/testkube-licensing-FAQ",
         },
@@ -1167,10 +1172,6 @@ const sidebars = {
         {
           type: "category",
           label: "Test Types",
-          link: {
-            type: "generated-index",
-            description: "Supported Test Types / Executors within Testkube",
-          },
           items: [
             "test-types/executor-artillery",
             "test-types/executor-curl",

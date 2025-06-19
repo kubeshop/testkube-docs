@@ -7,7 +7,7 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: cloud-api/1.10.51
+  version: 1.16.0-de.53
 servers:
   - url: https://api.testkube.io
     description: Testkube Cloud API Endpoint
@@ -39,6 +39,32 @@ paths:
       summary: Get artifact archive
       description: Get artifact archive
       operationId: getArtifactArchive
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/ArtifactURL'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/EnvironmentID'
+      - $ref: './components.yaml#/components/parameters/ExecutionID'
+      - $ref: './components.yaml#/components/parameters/OptionalTestName'
+      - $ref: './components.yaml#/components/parameters/FilterTestsuiteName'
+  /organizations/{id}/environments/{environmentID}/executions/{executionID}/artifacts:
+    post:
+      summary: Get artifact
+      description: Get artifact
+      operationId: getArtifactPost
+      requestBody:
+        $ref: './components.yaml#/components/requestBodies/ServeArtifact'
       responses:
         '200':
           $ref: './components.yaml#/components/responses/ArtifactURL'
@@ -114,6 +140,28 @@ paths:
       - $ref: './components.yaml#/components/parameters/EnvironmentID'
       - $ref: './components.yaml#/components/parameters/ExecutionID'
       - $ref: './components.yaml#/components/parameters/ArtifactID'
+  /organizations/{id}/environments/{environmentID}/executions/{executionID}/junit:
+    get:
+      summary: Get JUnit report for execution
+      description: Returns JUnit report for the specified execution
+      operationId: getExecutionJUnitReports
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/JUnitReports'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+        '500':
+          $ref: './components.yaml#/components/responses/InternalServerError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/EnvironmentID'
+      - $ref: './components.yaml#/components/parameters/ExecutionID'
   /organizations/{id}/environments/{environmentID}/executions/{executionID}/logs:
     get:
       summary: Get Testkube Pro logs for execution
@@ -166,6 +214,32 @@ paths:
       - $ref: './components.yaml#/components/parameters/ID'
       - $ref: './components.yaml#/components/parameters/EnvironmentID'
       - $ref: './components.yaml#/components/parameters/ExecutionID'
+  /organizations/{id}/environments/{environmentID}/executions/{executionID}/serve-artifact:
+    post:
+      summary: Serve artifact
+      description: Serve artifact
+      operationId: serveArtifactPost
+      requestBody:
+        $ref: './components.yaml#/components/requestBodies/ServeArtifact'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/ArtifactURL'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/EnvironmentID'
+      - $ref: './components.yaml#/components/parameters/ExecutionID'
+      - $ref: './components.yaml#/components/parameters/OptionalTestName'
+      - $ref: './components.yaml#/components/parameters/FilterTestsuiteName'
   /organizations/{id}/environments/{environmentID}/executions/{executionID}/serve-artifact/{artifactID}:
     get:
       summary: Serve artifact

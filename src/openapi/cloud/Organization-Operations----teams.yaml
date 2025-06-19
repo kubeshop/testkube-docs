@@ -7,7 +7,7 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: cloud-api/1.10.51
+  version: 1.16.0-de.53
 servers:
   - url: https://api.testkube.io
     description: Testkube Cloud API Endpoint
@@ -117,10 +117,13 @@ paths:
               type: object
               properties:
                 name:
-                  description: Name of the team
+                  description: The new name of the team.
                   type: string
                 description:
-                  description: Description of the team
+                  description: The new description of this team.
+                  type: string
+                slug:
+                  description: The new slug of this team.
                   type: string
         required: true
       responses:
@@ -207,6 +210,8 @@ paths:
           $ref: './components.yaml#/components/responses/ForbiddenError'
         '404':
           $ref: './components.yaml#/components/responses/NotFoundError'
+        '429':
+          $ref: './components.yaml#/components/responses/TooManyRequests'
       security:
         - BearerAuth: []
     delete:

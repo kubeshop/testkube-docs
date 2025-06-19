@@ -1,0 +1,89 @@
+openapi: 3.0.1
+info:
+  title: Testkube Pro API
+  description: API for Testkube Pro
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: COMMERICAL
+    url: https://opensource.org/licenses/MIT
+  version: 1.16.0-de.53
+servers:
+  - url: https://api.testkube.io
+    description: Testkube Cloud API Endpoint
+  - url: https://<your-testkube-api-host>
+    description: Testkube On-Prem API Endpoint
+paths:
+  /organizations/{id}/environments/{environmentID}/execution-groups:
+    get:
+      summary: List Test Workflow executions
+      description: List Test Workflow executions
+      operationId: listExecutionGroupsV2
+      parameters:
+        - $ref: './components.yaml#/components/parameters/Limit'
+        - $ref: './components.yaml#/components/parameters/Offset'
+        - $ref: './components.yaml#/components/parameters/Page'
+        - $ref: './components.yaml#/components/parameters/PageSize'
+        - $ref: './components.yaml#/components/parameters/TextSearch'
+        - $ref: './components.yaml#/components/parameters/Status'
+        - $ref: './components.yaml#/components/parameters/LastDays'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/ExecutionGroupListV2'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    post:
+      summary: Schedule Test Workflow execution group
+      description: Schedule Test Workflow execution group
+      operationId: scheduleExecutionV2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/ScheduleRequestV2'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/ExecutionGroupV2'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '429':
+          $ref: './components.yaml#/components/responses/TooManyRequests'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/EnvironmentID'
+  /organizations/{id}/environments/{environmentID}/execution-groups/{executionGroupID}:
+    get:
+      summary: Get Test Workflow execution group
+      description: Get Test Workflow execution group
+      operationId: getExecutionGroupV2
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/ExecutionGroupV2'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/EnvironmentID'
+      - $ref: './components.yaml#/components/parameters/ExecutionGroupID'

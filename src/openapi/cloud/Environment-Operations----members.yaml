@@ -7,7 +7,7 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: cloud-api/1.10.51
+  version: 1.16.0-de.53
 servers:
   - url: https://api.testkube.io
     description: Testkube Cloud API Endpoint
@@ -29,26 +29,6 @@ paths:
       deprecated: true
       security:
         - BearerAuth: []
-    patch:
-      summary: Add member to environment
-      description: Add member to environment
-      operationId: addEnvironmentMembers
-      requestBody:
-        $ref: './components.yaml#/components/requestBodies/EnvironmentMembers'
-      responses:
-        '200':
-          $ref: './components.yaml#/components/responses/EnvironmentMembers'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '402':
-          $ref: './components.yaml#/components/responses/PaymentRequiredError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-      deprecated: true
-      security:
-        - BearerAuth: []
     parameters:
       - $ref: './components.yaml#/components/parameters/ID'
       - $ref: './components.yaml#/components/parameters/EnvironmentID'
@@ -64,26 +44,6 @@ paths:
           $ref: './components.yaml#/components/responses/BadRequestError'
         '401':
           $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-      deprecated: true
-      security:
-        - BearerAuth: []
-    patch:
-      summary: Update env member role
-      description: Update env member role
-      operationId: updateEnvironmentMemberRole
-      requestBody:
-        $ref: './components.yaml#/components/requestBodies/EnvironmentMemberRoleChange'
-      responses:
-        '200':
-          $ref: './components.yaml#/components/responses/EnvironmentMember'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '402':
-          $ref: './components.yaml#/components/responses/PaymentRequiredError'
         '403':
           $ref: './components.yaml#/components/responses/ForbiddenError'
       deprecated: true

@@ -7,7 +7,7 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: cloud-api/1.10.51
+  version: 1.16.0-de.53
 servers:
   - url: https://api.testkube.io
     description: Testkube Cloud API Endpoint
@@ -32,6 +32,11 @@ paths:
         - BearerAuth: []
     parameters:
       - $ref: './components.yaml#/components/parameters/ID'
+      - name: emailSearch
+        in: query
+        description: Filter members by email
+        schema:
+          type: string
   /organizations/{id}/members/{memberEmail}:
     delete:
       summary: Remove user from organization
@@ -61,8 +66,33 @@ paths:
           $ref: './components.yaml#/components/responses/PaymentRequiredError'
         '403':
           $ref: './components.yaml#/components/responses/ForbiddenError'
+        '429':
+          $ref: './components.yaml#/components/responses/TooManyRequests'
       security:
         - BearerAuth: []
     parameters:
       - $ref: './components.yaml#/components/parameters/ID'
       - $ref: './components.yaml#/components/parameters/MemberEmail'
+  /organizations/{id}/members/{memberEmail}/permissions:
+    get:
+      summary: Get member permissions
+      description: Retrieve the permissions for a specific member in an organization.
+      operationId: getOrganizationMemberPermissions
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the organization
+          required: true
+          schema:
+            type: string
+        - name: memberEmail
+          in: path
+          description: The email of the member
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/MemberPermissionsResponse'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
