@@ -23,7 +23,7 @@ Before you proceed with the installation, please ensure that you have the follow
 :::note IMPORTANT
 Make sure you're using the **correct Ingress controller**.
 
-✅ Use: [kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
+✅ Use: [kubernetes/ingress-nginx](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx)
 
 🚫 Do not use: [nginx/nginx-ingress (NGINX Inc.)](https://artifacthub.io/packages/helm/nginx/nginx-ingress)
 
