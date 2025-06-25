@@ -7,6 +7,33 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Patch releases** focus on critical bugs and security issues.
   :::
 
+## Patch Release v1.16.0 (2025-06-PLACHOLDER)
+
+## Features
+
+Testkube Helm Chart for Runner - PLACHOLDER Section
+
+Testkube Shared views - PLACHOLDER Section
+
+Testkube Workflow health - PLACHOLDER Section
+
+## Improvements and fixes
+
+- CLI Arfitact Download - Fixed authentication problems with certain cloud providers due to presence of duplicate authentication mechanism.
+- Fixed an issue where the correct JUnit test suite icon wasn't displaying properly
+- Improved handling of JUnit format when working with nested test suites
+- Resolved a problem with empty string default values in workflow config settings
+- Enhanced the agents dropdown for better usability
+- Fixed an issue where your selected agents weren't being preserved when running workflows
+- Corrected broken links in the running context that weren't properly directing to workflows
+- Fixed a search error that occurred when searching for empty or non-existent values in execution logs
+- Resolved a critical security vulnerability (F-2025-4481) related to OAuth account hijacking via redirect URLs
+- Strengthened security headers in our nginx configuration for better protection
+- Fixed an issue where the Workflow wizard shows an empty preview whe combining multiple templates
+- Security updates in upstream dependencies.
+- Fix API failure when deleting expired API token.
+- Artifact cleaning via `ENTERPRISE_ARTIFACT_RETENTION_DAYS` and `ENTERPRISE_ARTIFACT_MAX_STORAGE_SIZE_GB` now works as expected.
+
 ## Patch Release v1.15.5 (2025-06-19)
 
 This release is available in Helm Chart v2.321.5
