@@ -465,6 +465,11 @@ const sidebars = {
               id: "articles/results-overview",
             },
             {
+              type: "doc",
+              label: "Workflow Health & Flakiness",
+              id: "articles/workflow-health",
+            },
+            {
               type: "category",
               label: "Individual Execution Results",
               collapsed: false,
