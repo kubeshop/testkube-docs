@@ -19,7 +19,7 @@ You can now install a Runner using only Helm. Previously a Runner had to be regi
 
 Users can now create custom views to group workflows by any criteria, making it easier to organize workflows that belong together or quickly access frequently used filtered results. These views are shared between all the users of a given environment.
 
-We've added a new Workflow Health indicator that shows a quick visual summary of a workflow's recent stability, helping users understand how reliably it's been running over time, not just surfacing flakiness, but overall consistency. The health score is calculated as PassRate x (1 - FlipRate) and shown as an icon next to each workflow in both list and detail views, using weather-style visuals to represent different health levels.
+We've added a [new Workflow Health indicator](/articles/workflow-health) that shows a quick visual summary of a workflow's recent stability, helping users understand how reliably it's been running over time, not just surfacing flakiness, but overall consistency. The health score is calculated as PassRate x (1 - FlipRate) and shown as an icon next to each workflow in both list and detail views, using weather-style visuals to represent different health levels.
 
 We've introduced a new Canceled status to distinguish manual cancellations from system-level Aborted executions. Previously, both were marked as Aborted. With updated icons and messaging, users can now clearly see if a test Failed, was Aborted (system error), or Canceled (manual action).
 
