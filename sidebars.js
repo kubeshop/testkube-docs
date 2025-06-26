@@ -465,6 +465,11 @@ const sidebars = {
               id: "articles/results-overview",
             },
             {
+              type: "doc",
+              label: "Workflow Health & Flakiness",
+              id: "articles/workflow-health",
+            },
+            {
               type: "category",
               label: "Individual Execution Results",
               collapsed: false,
@@ -932,6 +937,11 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "Argo Events",
+          id: "articles/argoevents-integration",
+        },
+        {
+          type: "doc",
           label: "Argo Workflows",
           id: "articles/argoworkflows-integration",
         },
@@ -1098,6 +1108,11 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "Getting Started",
+          id: "articles/getting-started-with-open-source",
+        },
+        {
+          type: "doc",
           label: "Licensing FAQ",
           id: "articles/testkube-licensing-FAQ",
         },
@@ -1162,10 +1177,6 @@ const sidebars = {
         {
           type: "category",
           label: "Test Types",
-          link: {
-            type: "generated-index",
-            description: "Supported Test Types / Executors within Testkube",
-          },
           items: [
             "test-types/executor-artillery",
             "test-types/executor-curl",

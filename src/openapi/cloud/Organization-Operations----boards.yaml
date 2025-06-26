@@ -1,0 +1,167 @@
+openapi: 3.0.1
+info:
+  title: Testkube Pro API
+  description: API for Testkube Pro
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: COMMERICAL
+    url: https://opensource.org/licenses/MIT
+  version: 1.16.0-de.53
+servers:
+  - url: https://api.testkube.io
+    description: Testkube Cloud API Endpoint
+  - url: https://<your-testkube-api-host>
+    description: Testkube On-Prem API Endpoint
+paths:
+  /organizations/{id}/boards:
+    get:
+      summary: List board summaries
+      description: Lists the summaries of the boards in your organization.
+      operationId: listBoards
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/BoardSummary'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    post:
+      summary: Create a board
+      description: Creates a board.
+      operationId: createBoard
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: The display name of the new board
+                  type: string
+                slug:
+                  description: The slug of the new board
+                  type: string
+                description:
+                  description: The description of the new board
+                  type: string
+              required:
+                - name
+        required: true
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Board'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+  /organizations/{id}/boards/{boardID}:
+    get:
+      summary: Get a board
+      description: Get a board by its `id` or `slug`.
+      operationId: getBoard
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Board'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    delete:
+      summary: Delete a board
+      description: Deletes a board.
+      operationId: deleteBoard
+      responses:
+        '204':
+          description: Delete Success
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    patch:
+      summary: Update a board
+      description: Updates a board's details, content or layout.
+      operationId: updateBoard
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: The new display name of this board.
+                  type: string
+                description:
+                  description: The new description of this board.
+                  type: string
+                slug:
+                  description: The new slug of this board.
+                  type: string
+                layout: {}
+                content:
+                  description: A patch for the content of this board.
+                  type: object
+                  properties:
+                    action:
+                      type: string
+                      enum:
+                        - create
+                        - update
+                        - delete
+                    content_kind:
+                      type: string
+                    content_id:
+                      type: string
+                    content_data: {}
+                  required:
+                    - action
+                    - content_kind
+        required: true
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Board'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/BoardID'

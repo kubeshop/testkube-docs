@@ -21,6 +21,12 @@ Testkube has flexibility in its deployments (learn more in the [Installation Ove
 4. Run the `testkube dashboard` command to open Testkube without configuring Ingress.
 5. Log in to Testkube with the credentials from the third step.
 
+:::tip
+This evaluation installation is for a **single/local user only**, it is not configured to be shared with other users.
+
+For a **production install**, please install with the [Helm Chart](/articles/install/install-with-helm) for more flexibility and configurability.
+:::
+
 You will now see the Testkube Dashboard for the default environment created in your on-prem installation:
 
 ![The dashboard](./img/new-environment-dashboard.png)
@@ -31,7 +37,7 @@ You will now see the Testkube Dashboard for the default environment created in y
   1. Sign in to the [Testkube Cloud Control Plane](https://app.testkube.io).
   2. Click on the `Let's get started` button.
   3. Enter an environment name and click `Create environment`.
-  4. Run the generated `testkube pro init` command in your terminal to install the Testkube Agent.
+  4. Run the provided commands in your terminal to install the Testkube Agent.
 
   You will now see the Testkube Dashboard for your new environment:
 

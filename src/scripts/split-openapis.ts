@@ -229,7 +229,7 @@ async function splitOpenAPIByPaths(
 
 // Core OpenAPI definition goes into agent folder
 splitOpenAPIByPaths(
-  "https://raw.githubusercontent.com/kubeshop/testkube/main/api/v1/testkube.yaml",
+  "https://raw.githubusercontent.com/kubeshop/testkube/refs/heads/main/api/v1/testkube.yaml",
   "src/openapi/agent",
   "docs/openapi/agent",
   "Standalone Agent",
@@ -240,11 +240,12 @@ splitOpenAPIByPaths(
 
 // Control-plane OpenAPI definition goes into cloud folder
 splitOpenAPIByPaths(
-  "https://raw.githubusercontent.com/kubeshop/testkube-cloud-api/dev/api/v1/testkube-cloud.yaml",
+  "https://raw.githubusercontent.com/kubeshop/testkube-cloud-api/refs/heads/main/api/v1/testkube-cloud.yaml",
   "src/openapi/cloud",
   "docs/openapi/cloud",
   "Control Plane",
   (opPath) => {
+    console.log( "mapping path " + opPath)
     // only show these in the docs
     let segments = opPath.split("/");
     if (
@@ -304,6 +305,9 @@ splitOpenAPIByPaths(
           "/usage",
           "/payments",
           "/features-usage",
+          "/agent-analytics",
+          "/features",
+          "/settings",
         ].filter((str) => opPath.includes(str)).length > 0
       )
         return null;

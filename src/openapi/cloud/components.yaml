@@ -56,6 +56,84 @@ components:
           $ref: '#/components/schemas/PodAffinity'
         podAntiAffinity:
           $ref: '#/components/schemas/PodAffinity'
+    Agent:
+      type: object
+      properties:
+        id:
+          description: The unique identifier for the agent.
+          type: string
+        name:
+          description: The unique name for the agent.
+          type: string
+        version:
+          description: Last acknowledged agent version.
+          type: string
+        namespace:
+          description: Last acknowledged agent namespace.
+          type: string
+        disabled:
+          description: Is the Agent disabled?
+          type: boolean
+        type:
+          $ref: '#/components/schemas/AgentType'
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        environments:
+          description: Environments where the agent is restricted to.
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentEnvironment'
+        runnerPolicy:
+          $ref: '#/components/schemas/AgentRunnerPolicy'
+        floating:
+          type: boolean
+        accessedAt:
+          description: When it has been read last time by execution.
+          type: string
+          format: date-time
+        createdAt:
+          description: When it has been created last time.
+          type: string
+          format: date-time
+        deletedAt:
+          description: When it has been deleted.
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - createdAt
+        - floating
+    AgentEnvironment:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - slug
+        - name
+    AgentRunnerPolicy:
+      type: object
+      properties:
+        requiredMatch:
+          type: array
+          items:
+            type: string
+      required:
+        - requiredMatch
+    AgentType:
+      type: string
+      enum:
+        - run
+        - sync
+        - agnt
     Any: {}
     ApiInfo:
       type: object
@@ -65,6 +143,127 @@ components:
           type: string
       required:
         - version
+    AppArmorProfile:
+      type: object
+      properties:
+        type:
+          type: string
+        localhostProfile:
+          $ref: '#/components/schemas/BoxedString'
+    ApplicationAuditEvent:
+      description: Represents an audit event for application operations.
+      type: object
+      properties:
+        id:
+          description: Unique identifier for the audit event
+          type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+        createdAt:
+          description: Timestamp when the event was created
+          type: string
+          format: date-time
+          example: '2023-09-24T18:35:24Z'
+        eventType:
+          description: The type of the event
+          type: string
+        objects:
+          description: List of objects the action was performed on
+          type: array
+          items:
+            $ref: '#/components/schemas/Entity'
+        subject:
+          $ref: '#/components/schemas/Entity'
+        source:
+          description: Source of the event from where it originated
+          type: string
+          example: ui
+        scope:
+          description: Scope of the event - organization, environment, etc.
+          type: string
+          example: organization
+        action:
+          description: Action performed on the object
+          type: string
+          example: token.created
+        metadata:
+          $ref: '#/components/schemas/ApplicationAuditEventMetadata'
+      required:
+        - id
+        - createdAt
+        - eventType
+        - objects
+        - subject
+        - source
+        - scope
+        - action
+        - metadata
+    ApplicationAuditEventMetadata:
+      description: >
+        Metadata object containing key-value pairs with additional information.
+
+        This can store data such as environment IDs, organization IDs, or any
+        custom information.
+      type: object
+      additionalProperties:
+        type: string
+    ApplicationAuditLog:
+      description: List of audit events
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationAuditEvent'
+    ApplicationAuditLogExportRequest:
+      type: object
+      properties:
+        format:
+          description: Specify the format of the exported audit log
+          type: string
+          example: json
+      required:
+        - format
+    ApplicationAuditLogKeymap:
+      description: >
+        Represents a keymap that defines various audit-related types such as
+        event types, actions, entity types,
+
+        and sources. Each map contains a set of key-value pairs where keys
+        represent internal identifiers and
+
+        values represent human-readable descriptions.
+      type: object
+      properties:
+        eventTypes:
+          description: >
+            A key-value map where keys are event types and values are
+            descriptions or labels of the event types.
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Field'
+        actions:
+          description: >
+            A key-value map where keys are action types and values are
+            descriptions or labels of the actions.
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Field'
+        entityTypes:
+          description: >
+            A key-value map where keys are entity types and values are
+            descriptions or labels of the entity types.
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Field'
+        sources:
+          description: >
+            A key-value map where keys are sources and values are descriptions
+            or labels of the sources.
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Field'
+      required:
+        - eventTypes
+        - actions
+        - entityTypes
+        - sources
     Artifact:
       description: API server artifact
       type: object
@@ -196,6 +395,15 @@ components:
             - error
             - diff
             - message
+    AuditLogDistinctSubjects:
+      description: >-
+        A key-value map where keys are entity types and values are distinct
+        subjects.
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/Entity'
     AuditLogs:
       type: object
       properties:
@@ -294,6 +502,78 @@ components:
         updatedAt:
           type: string
           format: date-time
+    Board:
+      type: object
+      properties:
+        id:
+          description: The identifier of this board.
+          type: string
+        slug:
+          description: A human- and url-friendly identifier of this board.
+          type: string
+        name:
+          description: The name of this board.
+          type: string
+        description:
+          description: The description of this board
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        layout: {}
+        content:
+          description: The content of this board.
+          type: object
+          properties:
+            reports:
+              type: array
+              items:
+                $ref: '#/components/schemas/Report'
+            custom:
+              type: array
+              items:
+                type: object
+      required:
+        - id
+        - slug
+        - name
+        - createdAt
+        - updatedAt
+        - creator
+        - shared
+        - content
+        - layout
+    BoardSummary:
+      type: object
+      properties:
+        id:
+          description: The identifier of this board.
+          type: string
+        slug:
+          description: A human- and url-friendly identifier of this board.
+          type: string
+        name:
+          description: The name of this board.
+          type: string
+        description:
+          description: The description of this board
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - slug
+        - name
+        - createdAt
+        - updatedAt
+        - shared
     BoxedBoolean:
       type: object
       properties:
@@ -324,6 +604,29 @@ components:
             type: string
       required:
         - value
+    CSIVolumeSource:
+      description: >-
+        Represents a source location of a volume to mount, managed by an
+        external CSI driver
+      type: object
+      properties:
+        driver:
+          description: driver is the name of the CSI driver that handles this volume.
+          type: string
+        readOnly:
+          $ref: '#/components/schemas/BoxedBoolean'
+        fsType:
+          $ref: '#/components/schemas/BoxedString'
+        volumeAttributes:
+          description: >-
+            volumeAttributes stores driver-specific properties that are passed
+            to the CSI driver. Consult your driver's documentation for supported
+            values.
+          type: object
+          additionalProperties:
+            type: string
+        nodePublishSecretRef:
+          $ref: '#/components/schemas/LocalObjectReference'
     CephFSVolumeSource:
       description: >-
         cephFS represents a Ceph FS mount on the host that shares a pod's
@@ -402,9 +705,28 @@ components:
         - id
         - name
         - createdAt
-        - updatedAt
         - kind
         - role
+    ConcurrentRunnersTimeSeriesEntry:
+      type: object
+      properties:
+        ts:
+          type: string
+          format: date-time
+        last:
+          type: integer
+        min:
+          type: integer
+        max:
+          type: integer
+        avg:
+          type: number
+      required:
+        - ts
+        - last
+        - min
+        - max
+        - avg
     Config:
       description: Testkube API config data structure
       type: object
@@ -489,12 +811,59 @@ components:
         optional:
           description: optional specify whether the ConfigMap or its keys must be defined
           type: boolean
+    ConfigSummary:
+      type: object
+      properties:
+        exists:
+          type: boolean
+        overrides:
+          type: boolean
+        sensitive:
+          type: boolean
+        truncated:
+          type: boolean
+      required:
+        - exists
+        - overrides
+        - sensitive
+        - truncated
     ContentGitAuthType:
       description: auth type for git requests
       type: string
       enum:
         - basic
         - header
+    Credential:
+      type: object
+      properties:
+        name:
+          description: The identifier for the credential.
+          type: string
+        environmentId:
+          description: Environment ID where the credential is restricted to.
+          type: string
+        workflowName:
+          description: Workflow Name where the credential is restricted to.
+          type: string
+        executionId:
+          description: Execution ID where the credential is restricted to.
+          type: string
+        accessedAt:
+          description: When it has been read last time by execution.
+          type: string
+          format: date-time
+        createdAt:
+          description: When it has been created last time.
+          type: string
+          format: date-time
+        updatedAt:
+          description: When its value has been updated last time.
+          type: string
+          format: date-time
+      required:
+        - name
+        - createdAt
+        - updatedAt
     DebugInfo:
       description: Testkube debug info
       type: object
@@ -524,16 +893,6 @@ components:
             - logline1
             - logline2
             - logline3
-        executionLogs:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-            example:
-              - logline1
-              - logline2
-              - logline3
     DownloadArtifactOptions:
       description: options to download artifacts from previous steps
       type: object
@@ -566,6 +925,29 @@ components:
           type: string
         sizeLimit:
           $ref: '#/components/schemas/BoxedString'
+    Entity:
+      description: Holds information about an action participant.
+      type: object
+      properties:
+        id:
+          description: Unique identifier for the entity
+          type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+        name:
+          description: Name of the entity.
+          type: string
+          example: John Doe
+        metadata:
+          $ref: '#/components/schemas/ApplicationAuditEventMetadata'
+        entityType:
+          description: Type of the entity.
+          type: string
+          example: user
+      required:
+        - id
+        - name
+        - uri
+        - entityType
     EnvFromSource:
       type: object
       properties:
@@ -597,6 +979,8 @@ components:
     EnvVar:
       type: object
       properties:
+        global:
+          $ref: '#/components/schemas/BoxedBoolean'
         name:
           type: string
         value:
@@ -626,42 +1010,9 @@ components:
           required:
             - key
         fieldRef:
-          description: >-
-            Selects a field of the pod: supports metadata.name,
-            metadata.namespace, `metadata.labels['<KEY>']`,
-            `metadata.annotations['<KEY>']`, spec.nodeName,
-            spec.serviceAccountName, status.hostIP, status.podIP, status.podIPs.
-          type: object
-          properties:
-            apiVersion:
-              description: >-
-                Version of the schema the FieldPath is written in terms of,
-                defaults to "v1".
-              type: string
-            fieldPath:
-              description: Path of the field to select in the specified API version.
-              type: string
-          required:
-            - fieldPath
+          $ref: '#/components/schemas/FieldRef'
         resourceFieldRef:
-          description: >-
-            Selects a resource of the container: only resources limits and
-            requests (limits.cpu, limits.memory, limits.ephemeral-storage,
-            requests.cpu, requests.memory and requests.ephemeral-storage) are
-            currently supported.
-          type: object
-          properties:
-            containerName:
-              description: 'Container name: required for volumes, optional for env vars'
-              type: string
-            divisor:
-              type: string
-              pattern: ^[0-9]+(m|[GMK]i)$
-            resource:
-              description: 'Required: resource to select'
-              type: string
-          required:
-            - resource
+          $ref: '#/components/schemas/ResourceFieldRef'
         secretKeyRef:
           description: Selects a key of a secret in the pod's namespace
           type: object
@@ -729,7 +1080,7 @@ components:
               example: >-
                 helm upgrade --install --create-namespace testkube
                 testkube/testkube --set
-                testkube-api.cloud.url=agent.testkube.xyz:443 --set
+                testkube-api.cloud.url=agent.example.com:443 --set
                 testkube-api.cloud.key=<api-key> --set
                 testkube-api.minio.enabled=false --set mongodb.enabled=false
                 --namespace testkube
@@ -738,18 +1089,58 @@ components:
               type: string
               example: >-
                 testkube init-cloud --agent-key tkcagnt_111 --agent-url
-                agent.testkube.xyz:443
+                agent.example.com:443
             configureContextCommand:
               description: command to configure
               type: string
               example: >-
-                testkube context set --api-url https://api.testkube.xyz
-                --api-key <api-key> --agent-url https://agent.testkube.xyz
-                --agent-key <agent-key>
+                testkube context set --api-url https://api.example.com --api-key
+                <api-key> --agent-url https://agent.example.com --agent-key
+                <agent-key>
             features:
               type: array
               items:
                 $ref: '#/components/schemas/EnvironmentFeature'
+            runDockerCommand:
+              description: command to run Docker agent
+              type: string
+              example: >-
+                docker run -d --privileged --name=testkube-agent -e AGENT_KEY=AK
+                kubeshop/testkube-agent:1.2.3
+            runDockerCommandCli:
+              description: command to run Docker agent
+              type: string
+              example: testkube docker init --agent-token=AK --org-id=org --env-id=env
+            upgradeDockerCommand:
+              description: command to upgrade Docker agent
+              type: string
+              example: >-
+                docker exec testkube-agent helm upgrade testkube
+                testkube/testkube --namespace testkube --set
+                testkube-api.minio.enabled=false --set mongodb.enabled=false
+                --set testkube-api.cloud.key=AK --set
+                testkube-api.cloud.url=api.testkube.io:999 --set
+                testkube-api.dockerImageVersion=1.2.3
+            upgradeDockerCommandCli:
+              description: command to upgrade Docker agent
+              type: string
+              example: testkube upgrade
+            cloudStorage:
+              description: should this environment store data in the control plane
+              type: boolean
+            newArchitecture:
+              description: should this environment use the new architecture
+              type: boolean
+            runnerJoinToken:
+              description: token to register a runner with the environment
+              type: string
+            installRunnerCommand:
+              description: command to install runner
+              type: string
+              example: >-
+                helm install --create-namespace runner testkube/testkube-runner
+                --set runner.register.token=<runner-token> --set
+                runner.orgId=<org-id> --namespace testkube
           required:
             - connected
     EnvironmentDurationStats:
@@ -892,6 +1283,10 @@ components:
           description: is agent version outdated
           type: boolean
           default: false
+        dockerImageVersion:
+          description: docker image version
+          type: string
+          example: 2.1.2
       required:
         - environmentId
         - environmentName
@@ -975,6 +1370,8 @@ components:
             type: string
           example:
             WEBHOOK_PARAMETER: any value
+        external:
+          type: boolean
       required:
         - type
         - id
@@ -988,6 +1385,7 @@ components:
         - executor
         - trigger
         - webhook
+        - webhooktemplate
         - testexecution
         - testsuiteexecution
         - testsource
@@ -1238,6 +1636,40 @@ components:
           example:
             - true
             - false
+    ExecutionConfigValueV2:
+      description: configuration values used in the test workflow execution
+      type: object
+      properties:
+        value:
+          description: configuration value
+          type: string
+        defaultValue:
+          description: configuration value default
+          type: string
+        truncated:
+          description: indicates if the value is truncated
+          type: boolean
+    ExecutionContextTypeV2:
+      type: string
+      enum:
+        - ui
+        - cli
+        - ci/cd
+        - cron
+        - testtrigger
+        - kubernetesobject
+        - execution
+    ExecutionContextV2:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ExecutionContextTypeV2'
+        id:
+          type: string
+        name:
+          type: string
+      required:
+        - type
     ExecutionCore:
       description: test execution core
       type: object
@@ -1261,6 +1693,79 @@ components:
           format: date-time
         status:
           $ref: '#/components/schemas/ExecutionStatus'
+    ExecutionGroupShortV2:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        avgDurationMs:
+          type: integer
+        scheduledAt:
+          type: string
+          format: date-time
+        statusAt:
+          type: string
+          format: date-time
+        finishedAt:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/ExecutionStatusV2'
+        predictedStatus:
+          $ref: '#/components/schemas/ExecutionStatusV2'
+        count:
+          type: integer
+        totals:
+          type: object
+          properties:
+            queued:
+              type: integer
+            running:
+              type: integer
+            paused:
+              type: integer
+            passed:
+              type: integer
+            failed:
+              type: integer
+            aborted:
+              type: integer
+        executions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExecutionReferenceV2'
+        workflows:
+          type: array
+          items:
+            type: string
+        target:
+          $ref: '#/components/schemas/ExecutionTargetV2'
+        context:
+          $ref: '#/components/schemas/ExecutionContextV2'
+        user:
+          $ref: '#/components/schemas/UserReference'
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+      required:
+        - id
+        - name
+        - status
+        - predictedStatus
+        - scheduledAt
+        - statusAt
+        - executionIds
+        - workflows
+        - count
+        - totals
+        - target
+    ExecutionGroupV2:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ExecutionGroupShortV2'
     ExecutionMetadata:
       type: object
       properties:
@@ -1278,6 +1783,13 @@ components:
         name:
           description: The name of this execution.
           type: string
+        environment:
+          description: The environment in which this execution was run
+          type: string
+        labels:
+          type: object
+          additionalProperties:
+            type: string
         kind:
           description: The test definition's kind. Either Test, TestSuite or TestWorkflow.
           type: string
@@ -1295,14 +1807,61 @@ components:
           description: The moment this execution started.
           type: string
           format: date-time
+        reports:
+          description: generated reports from the steps, like junit
+          type: array
+          items:
+            $ref: '#/components/schemas/TestWorkflowReport'
       required:
         - id
         - name
+        - environment
         - kind
         - parent
         - status
         - duration
         - runAt
+    ExecutionReferenceV2:
+      type: object
+      properties:
+        id:
+          type: string
+        number:
+          type: integer
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/ExecutionStatusV2'
+        durationMs:
+          type: integer
+        runnerId:
+          type: string
+        assignedAt:
+          type: string
+          format: date-time
+        startedAt:
+          type: string
+          format: date-time
+        finishedAt:
+          type: string
+          format: date-time
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+        resourceAggregations:
+          type: boolean
+        config:
+          $ref: '#/components/schemas/ConfigSummary'
+        reports:
+          $ref: '#/components/schemas/ReportsSummary'
+      required:
+        - id
+        - number
+        - name
+        - status
+        - scheduledAt
+        - resourceAggregations
     ExecutionRefs:
       type: object
       properties:
@@ -1579,6 +2138,66 @@ components:
               type: string
       required:
         - status
+    ExecutionShortV2:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        number:
+          type: integer
+        status:
+          $ref: '#/components/schemas/ExecutionStatusV2'
+        predictedStatus:
+          $ref: '#/components/schemas/ExecutionStatusV2'
+        durationMs:
+          type: integer
+        totalDurationMs:
+          type: integer
+        pausedMs:
+          type: integer
+        scheduledAt:
+          type: string
+          format: date-time
+        statusAt:
+          type: string
+          format: date-time
+        assignedAt:
+          type: string
+          format: date-time
+        startedAt:
+          type: string
+          format: date-time
+        finishedAt:
+          type: string
+          format: date-time
+        tags:
+          type: object
+          properties:
+            additionalProperties:
+              type: string
+        config:
+          type: object
+          properties:
+            additionalProperties:
+              $ref: '#/components/schemas/ExecutionConfigValueV2'
+        workflow:
+          $ref: '#/components/schemas/TestWorkflowReference'
+        target:
+          $ref: '#/components/schemas/ExecutionTargetV2'
+        runner:
+          $ref: '#/components/schemas/RunnerReference'
+      required:
+        - id
+        - name
+        - number
+        - status
+        - statusAt
+        - scheduledAt
+        - workflow
+        - tags
+        - target
     ExecutionStatus:
       type: string
       enum:
@@ -1589,6 +2208,15 @@ components:
         - aborted
         - timeout
         - skipped
+    ExecutionStatusV2:
+      type: string
+      enum:
+        - queued
+        - running
+        - paused
+        - passed
+        - failed
+        - aborted
     ExecutionStepResult:
       description: execution result data
       type: object
@@ -1678,6 +2306,69 @@ components:
         - testName
         - testType
         - status
+    ExecutionTarget:
+      type: object
+      properties:
+        match:
+          description: runner labels to match
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        not:
+          description: runner labels to NOT match
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        replicate:
+          description: list of runner labels to replicate the executions
+          type: array
+          items:
+            type: string
+    ExecutionTargetV2:
+      type: object
+      properties:
+        match:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        not:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        replicate:
+          type: array
+          items:
+            type: string
+    ExecutionTotalsV2:
+      type: object
+      properties:
+        queued:
+          type: integer
+        running:
+          type: integer
+        paused:
+          type: integer
+        passed:
+          type: integer
+        failed:
+          type: integer
+        aborted:
+          type: integer
+      required:
+        - queued
+        - running
+        - paused
+        - passed
+        - failed
+        - aborted
     ExecutionUpdateRequest:
       description: test execution request update body
       type: object
@@ -1769,6 +2460,8 @@ components:
       properties:
         executionId:
           type: string
+        groupId:
+          type: string
         duration:
           type: string
         durationMs:
@@ -1780,6 +2473,8 @@ components:
         startTime:
           type: string
           format: date-time
+        runnerId:
+          type: string
     ExecutionsResult:
       description: the result for a page of executions
       type: object
@@ -2014,6 +2709,38 @@ components:
       required:
         - type
         - count
+    Field:
+      type: object
+      properties:
+        name:
+          description: Name is a human-readable/pretty-printed name of the field.
+          type: string
+          example: Test Trigger
+        description:
+          description: // Description is description of the field.
+          type: string
+          example: Some description of a field
+      required:
+        - name
+        - description
+    FieldRef:
+      description: >-
+        Selects a field of the pod: supports metadata.name, metadata.namespace,
+        `metadata.labels['<KEY>']`, `metadata.annotations['<KEY>']`,
+        spec.nodeName, spec.serviceAccountName, status.hostIP, status.podIP,
+        status.podIPs.
+      type: object
+      properties:
+        apiVersion:
+          description: >-
+            Version of the schema the FieldPath is written in terms of, defaults
+            to "v1".
+          type: string
+        fieldPath:
+          description: Path of the field to select in the specified API version.
+          type: string
+      required:
+        - fieldPath
     GCEPersistentDiskVolumeSource:
       description: >-
         gcePersistentDisk represents a GCE Disk resource that is attached to a
@@ -2364,6 +3091,124 @@ components:
         - description
         - periodStart
         - periodEnd
+    JUnitProperty:
+      description: Represents a property element within properties
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    JUnitReport:
+      description: Represents the root element, which can contain one or more test suites
+      type: object
+      properties:
+        name:
+          type: string
+        testSuites:
+          type: array
+          items:
+            $ref: '#/components/schemas/JUnitTestSuite'
+        summary:
+          $ref: '#/components/schemas/JUnitTestSuitesSummary'
+    JUnitResult:
+      description: Represents failure and error elements
+      type: object
+      properties:
+        message:
+          type: string
+        type:
+          type: string
+        content:
+          type: string
+    JUnitSkip:
+      description: Represents a skipped element
+      type: object
+      properties:
+        message:
+          type: string
+    JUnitTestCase:
+      description: Represents an individual test case element
+      type: object
+      properties:
+        _id:
+          description: Internal ID, randomly generated
+          type: string
+        name:
+          type: string
+        className:
+          type: string
+        time:
+          description: The total duration in milliseconds.
+          type: integer
+          format: int64
+        status:
+          type: string
+        systemOut:
+          type: string
+        systemErr:
+          type: string
+        failure:
+          type: string
+      required:
+        - _id
+        - name
+    JUnitTestSuite:
+      description: Represents a test suite element
+      type: object
+      properties:
+        testCases:
+          type: array
+          items:
+            $ref: '#/components/schemas/JUnitTestCase'
+        name:
+          type: string
+        tests:
+          type: integer
+        failures:
+          type: integer
+        errors:
+          type: integer
+        time:
+          description: The duration in milliseconds.
+          type: integer
+          format: int64
+        disabled:
+          type: integer
+        skipped:
+          type: integer
+        package:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+        systemOut:
+          type: string
+        systemErr:
+          type: string
+      required:
+        - _id
+        - testCases
+        - name
+    JUnitTestSuitesSummary:
+      description: Summary of all test suites
+      type: object
+      properties:
+        name:
+          type: string
+        time:
+          description: The total duration in milliseconds.
+          type: integer
+          format: int64
+        tests:
+          type: integer
+        failures:
+          type: integer
+        errors:
+          type: integer
+        disabled:
+          type: integer
     JoinOrganization:
       description: Join Organization response data
       type: object
@@ -2410,6 +3255,7 @@ components:
           - backend
         env:
           - prod
+    Layout: {}
     License:
       type: object
       properties:
@@ -2447,6 +3293,9 @@ components:
           default: false
         limits:
           $ref: '#/components/schemas/PlanLimits'
+        llmKey:
+          description: LLM key for onboarding and demo envs
+          type: string
     LocalObjectReference:
       description: Reference to Kubernetes object
       type: object
@@ -2623,6 +3472,13 @@ components:
           description: Inviting user email
           type: string
           example: pikachu@testkube.io
+        cascadedRoles:
+          type: array
+          items:
+            type: string
+        lastActivityAt:
+          type: string
+          format: date-time
       required:
         - email
     MemberRole:
@@ -2770,10 +3626,64 @@ components:
         usersCount:
           description: number of users in organization
           type: integer
+        persistentRunnersCount:
+          description: number of persistent runners in organization
+          type: integer
         environments:
           type: array
           items:
             $ref: '#/components/schemas/EnvironmentUsage'
+        maxTestResults:
+          description: Max number of test results
+          type: integer
+          example: 12
+        usedTestResults:
+          description: number of used test results
+          type: integer
+          example: 12
+        maxReadOnlyUsers:
+          description: Max number of read-only users
+          type: integer
+          example: 12
+        usedReadOnlyUsers:
+          description: number of used read-only users
+          type: integer
+          example: 12
+        maxFullUsers:
+          description: Max number of full users
+          type: integer
+          example: 12
+        usedFullUsers:
+          description: number of used full users
+          type: integer
+          example: 12
+        ssoAllowed:
+          description: Is custom SSO allowed
+          type: boolean
+        rbacAllowed:
+          description: Is custom RBAC allowed
+          type: boolean
+        maxConcurrentFloatingRunners:
+          description: Max number of floating runners running in parallel
+          type: integer
+          example: 3
+        maxPersistentRunners:
+          description: Max number of persistent runners
+          type: integer
+          example: 3
+        isTrial:
+          description: is current license trial
+          type: boolean
+          default: false
+        licenseType:
+          description: license type
+          type: string
+          example: trial
+        licenseExpiration:
+          description: expiration date
+          type: string
+          format: date-time
+          example: '2006-01-02T15:04:05Z'
       required:
         - organizationId
         - stats
@@ -2832,6 +3742,10 @@ components:
               description: external product/subscription id
               type: string
               example: si_2039092394029043
+            paymentType:
+              description: Type of payment method used for the plan
+              type: string
+              example: manual
             currentPeriodStart:
               description: current payment period start date
               type: string
@@ -2868,8 +3782,20 @@ components:
           description: Max number of organizations
           type: integer
           example: 1000
+        maxConcurrentFloatingRunners:
+          description: Max number of floating runners running in parallel
+          type: integer
+          example: 3
+        maxPersistentRunners:
+          description: Max number of persistent runners
+          type: integer
+          example: 3
         maxUsers:
           description: Max number of users
+          type: integer
+          example: 12
+        maxReadOnlyUsers:
+          description: Max read-only number of users
           type: integer
           example: 12
         maxTestResults:
@@ -2902,6 +3828,18 @@ components:
         rbacAllowed:
           description: Is custom RBAC allowed
           type: boolean
+        usedUsers:
+          description: number of used full users
+          type: integer
+          example: 12
+        usedReadOnlyUsers:
+          description: number of read-only users used
+          type: integer
+          example: 12
+        usedTestResults:
+          description: number of used test results
+          type: integer
+          example: 12
     PlanName:
       type: string
       enum:
@@ -3014,12 +3952,37 @@ components:
     PodSecurityContext:
       type: object
       properties:
+        seLinuxOptions:
+          $ref: '#/components/schemas/SELinuxOptions'
+        windowsOptions:
+          $ref: '#/components/schemas/WindowsSecurityContextOptions'
         runAsUser:
           $ref: '#/components/schemas/BoxedInteger'
         runAsGroup:
           $ref: '#/components/schemas/BoxedInteger'
         runAsNonRoot:
           $ref: '#/components/schemas/BoxedBoolean'
+        supplementalGroups:
+          type: array
+          items:
+            type: integer
+            format: int64
+        supplementalGroupsPolicy:
+          $ref: '#/components/schemas/BoxedString'
+        fsGroup:
+          $ref: '#/components/schemas/BoxedInteger'
+        sysctls:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sysctl'
+        fsGroupChangePolicy:
+          $ref: '#/components/schemas/BoxedString'
+        seccompProfile:
+          $ref: '#/components/schemas/SeccompProfile'
+        appArmorProfile:
+          $ref: '#/components/schemas/AppArmorProfile'
+        seLinuxChangePolicy:
+          $ref: '#/components/schemas/BoxedString'
     PodUpdateRequest:
       description: pod request update body
       type: object
@@ -3080,6 +4043,10 @@ components:
           description: HTTP status code for this occurrence of the problem.
           type: integer
           example: 500
+        errorCode:
+          description: A more specific type of the error
+          type: string
+          example: user-limit
         detail:
           description: >-
             A human-readable explanation specific to this occurrence of the
@@ -3098,6 +4065,257 @@ components:
         - status
         - detail
         - instance
+    ProjectedVolumeSource:
+      description: Represents a projected volume source
+      type: object
+      properties:
+        defaultMode:
+          $ref: '#/components/schemas/BoxedInteger'
+        sources:
+          description: >-
+            sources is the list of volume projections. Each entry in this list
+            handles one source.
+          type: array
+          items:
+            description: >-
+              Projection that may be projected along with other supported volume
+              types. Exactly one of these fields must be set.
+            type: object
+            properties:
+              clusterTrustBundle:
+                description: >-
+                  ClusterTrustBundle allows a pod to access the
+                  `.spec.trustBundle` field of ClusterTrustBundle objects in an
+                  auto-updating file.
+                type: object
+                properties:
+                  labelSelector:
+                    $ref: '#/components/schemas/LabelSelector'
+                  name:
+                    $ref: '#/components/schemas/BoxedString'
+                  optional:
+                    $ref: '#/components/schemas/BoxedBoolean'
+                  path:
+                    description: Relative path from the volume root to write the bundle.
+                    type: string
+                  signerName:
+                    $ref: '#/components/schemas/BoxedString'
+                required:
+                  - path
+              configMap:
+                description: configMap information about the configMap data to project
+                type: object
+                properties:
+                  items:
+                    description: >-
+                      items if unspecified, each key-value pair in the Data
+                      field of the referenced ConfigMap will be projected into
+                      the volume as a file whose name is the key and content is
+                      the value. If specified, the listed keys will be projected
+                      into the specified paths, and unlisted keys will not be
+                      present. If a key is specified which is not present in the
+                      ConfigMap, the volume setup will error unless it is marked
+                      optional. Paths must be relative and may not contain the
+                      '..' path or start with '..'.
+                    type: array
+                    items:
+                      description: Maps a string key to a path within a volume.
+                      type: object
+                      properties:
+                        key:
+                          description: key is the key to project.
+                          type: string
+                        mode:
+                          $ref: '#/components/schemas/BoxedInteger'
+                        path:
+                          description: >-
+                            path is the relative path of the file to map the key
+                            to. May not be an absolute path. May not contain the
+                            path element '..'. May not start with the string
+                            '..'.
+                          type: string
+                      required:
+                        - key
+                        - path
+                  name:
+                    description: >-
+                      Name of the referent. More info:
+                      https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                      TODO: Add other useful fields. apiVersion, kind, uid?
+                    type: string
+                  optional:
+                    $ref: '#/components/schemas/BoxedBoolean'
+              downwardAPI:
+                description: downwardAPI information about the downwardAPI data to project
+                type: object
+                properties:
+                  items:
+                    description: Items is a list of DownwardAPIVolume file
+                    type: array
+                    items:
+                      description: >-
+                        DownwardAPIVolumeFile represents information to create
+                        the file containing the pod field
+                      type: object
+                      properties:
+                        fieldRef:
+                          $ref: '#/components/schemas/FieldRef'
+                        mode:
+                          $ref: '#/components/schemas/BoxedInteger'
+                        path:
+                          description: >-
+                            path is the relative path of the file to map the key
+                            to. May not be an absolute path. May not contain the
+                            path element '..'. May not start with the string
+                            '..'.
+                          type: string
+                        resourceFieldRef:
+                          $ref: '#/components/schemas/ResourceFieldRef'
+                      required:
+                        - path
+              secret:
+                description: secret information about the secret data to project
+                type: object
+                properties:
+                  items:
+                    description: >-
+                      items if unspecified, each key-value pair in the Data
+                      field of the referenced ConfigMap will be projected into
+                      the volume as a file whose name is the key and content is
+                      the value. If specified, the listed keys will be projected
+                      into the specified paths, and unlisted keys will not be
+                      present. If a key is specified which is not present in the
+                      ConfigMap, the volume setup will error unless it is marked
+                      optional. Paths must be relative and may not contain the
+                      '..' path or start with '..'.
+                    type: array
+                    items:
+                      description: Maps a string key to a path within a volume.
+                      type: object
+                      properties:
+                        key:
+                          description: key is the key to project.
+                          type: string
+                        mode:
+                          $ref: '#/components/schemas/BoxedInteger'
+                        path:
+                          description: >-
+                            path is the relative path of the file to map the key
+                            to. May not be an absolute path. May not contain the
+                            path element '..'. May not start with the string
+                            '..'.
+                          type: string
+                      required:
+                        - key
+                        - path
+                  name:
+                    description: >-
+                      Name of the referent. More info:
+                      https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                      TODO: Add other useful fields. apiVersion, kind, uid?
+                    type: string
+                  optional:
+                    $ref: '#/components/schemas/BoxedBoolean'
+              serviceAccountToken:
+                description: >-
+                  serviceAccountToken is information about the
+                  serviceAccountToken data to project
+                type: object
+                properties:
+                  audience:
+                    description: >-
+                      audience is the intended audience of the token. A
+                      recipient of a token must identify itself with an
+                      identifier specified in the audience of the token, and
+                      otherwise should reject the token. The audience defaults
+                      to the identifier of the apiserver.
+                    type: string
+                  expirationSeconds:
+                    $ref: '#/components/schemas/BoxedInteger'
+                  path:
+                    description: >-
+                      path is the path relative to the mount point of the file
+                      to project the token into.
+                    type: string
+                required:
+                  - path
+    PublicInfo:
+      type: object
+      properties:
+        authUrl:
+          type: string
+        apiUrl:
+          type: string
+        uiUrl:
+          type: string
+        agentUrl:
+          type: string
+        rootDomain:
+          type: string
+      required:
+        - authUrl
+        - apiUrl
+        - uiUrl
+        - agentUrl
+        - rootDomain
+    QueueDepthTimeSeriesEntry:
+      type: object
+      properties:
+        ts:
+          type: string
+          format: date-time
+        last:
+          type: integer
+        min:
+          type: integer
+        max:
+          type: integer
+        avg:
+          type: number
+      required:
+        - ts
+        - last
+        - min
+        - max
+        - avg
+    Report:
+      type: object
+      properties:
+        id:
+          type: string
+        kind:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        params: {}
+      required:
+        - id
+        - kind
+    ReportArgs: {}
+    ReportsSummary:
+      type: object
+      properties:
+        total:
+          type: integer
+        failed:
+          type: integer
+        errored:
+          type: integer
+        skipped:
+          type: integer
+        passed:
+          type: integer
+        summary:
+          $ref: '#/components/schemas/TestWorkflowReportSummary'
+      required:
+        - total
+        - failed
+        - errored
+        - skipped
+        - passed
+        - summary
     Repository:
       description: repository representation for tests in git repositories
       type: object
@@ -3192,6 +4410,24 @@ components:
       nullable: true
       allOf:
         - $ref: '#/components/schemas/RepositoryParameters'
+    ResourceFieldRef:
+      description: >-
+        Selects a resource of the container: only resources limits and requests
+        (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu,
+        requests.memory and requests.ephemeral-storage) are currently supported.
+      type: object
+      properties:
+        containerName:
+          description: 'Container name: required for volumes, optional for env vars'
+          type: string
+        divisor:
+          type: string
+          pattern: ^[0-9]+(m|[GMK]i)$
+        resource:
+          description: 'Required: resource to select'
+          type: string
+      required:
+        - resource
     ResourceGroup:
       type: object
       properties:
@@ -3269,6 +4505,49 @@ components:
         - role
         - resource
         - features
+    RunnerLatestExecution:
+      type: object
+      properties:
+        id:
+          type: string
+        environmentId:
+          type: string
+        name:
+          type: string
+        workflow:
+          type: string
+      required:
+        - id
+        - environmentId
+        - name
+        - workflow
+    RunnerReference:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+    RunnerStatus:
+      type: object
+      properties:
+        id:
+          type: string
+        activeExecutionsCount:
+          type: integer
+        latestExecutions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RunnerLatestExecution'
+        persistent:
+          type: boolean
+      required:
+        - id
+        - activeExecutionsCount
+        - latestExecutions
+        - persistent
     RunningContext:
       description: running context for test or test suite execution
       type: object
@@ -3282,11 +4561,101 @@ components:
             - testsuite
             - testtrigger
             - scheduler
+            - testworkflow
         context:
           description: Context value depending from its type
           type: string
       required:
         - type
+    SELinuxOptions:
+      type: object
+      properties:
+        user:
+          type: string
+        role:
+          type: string
+        type:
+          type: string
+        level:
+          type: string
+    ScheduleRequestContextTypeV2:
+      type: string
+      enum:
+        - ui
+        - cli
+        - ci/cd
+    ScheduleRequestContextV2:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ScheduleRequestContextTypeV2'
+        id:
+          type: string
+        name:
+          type: string
+      required:
+        - type
+    ScheduleRequestExecutionSelectorByWorkflowLabelsV2:
+      type: object
+      properties:
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+      required:
+        - labels
+    ScheduleRequestExecutionSelectorByWorkflowNameV2:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+        - name
+    ScheduleRequestExecutionSelectorV2:
+      type: object
+      oneOf:
+        - $ref: >-
+            #/components/schemas/ScheduleRequestExecutionSelectorByWorkflowNameV2
+        - $ref: >-
+            #/components/schemas/ScheduleRequestExecutionSelectorByWorkflowLabelsV2
+    ScheduleRequestExecutionV2:
+      type: object
+      properties:
+        selector:
+          $ref: '#/components/schemas/ScheduleRequestExecutionSelectorV2'
+        config:
+          type: object
+          additionalProperties:
+            type: string
+        executionName:
+          type: string
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+        targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExecutionTargetV2'
+      required:
+        - selector
+    ScheduleRequestV2:
+      type: object
+      properties:
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+        context:
+          $ref: '#/components/schemas/ScheduleRequestContextV2'
+        disableWebhooks:
+          type: boolean
+        executions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduleRequestExecutionV2'
+      required:
+        - executions
     Scope:
       type: object
       properties:
@@ -3311,6 +4680,13 @@ components:
         - resource
         - identifier
         - role
+    SeccompProfile:
+      type: object
+      properties:
+        type:
+          type: string
+        localhostProfile:
+          $ref: '#/components/schemas/BoxedString'
     Secret:
       description: Secret with keys
       type: object
@@ -3542,6 +4918,14 @@ components:
           $ref: '#/components/schemas/BoxedBoolean'
         allowPrivilegeEscalation:
           $ref: '#/components/schemas/BoxedBoolean'
+    ServeArtifact:
+      type: object
+      properties:
+        artifactID:
+          description: artifact ID
+          type: string
+      required:
+        - artifactID
     ServerInfo:
       description: Server information with build version, build commit etc.
       type: object
@@ -3600,6 +4984,10 @@ components:
           items:
             type: string
             example: my-namespace
+        dockerImageVersion:
+          description: docker image version
+          type: string
+          example: 2.1.2
       required:
         - version
     Setting:
@@ -3609,11 +4997,18 @@ components:
         key:
           type: string
           enum:
+            - aiCopilotEnabled
+            - aiCopilotPrompted
             - aiEnabled
             - logsSearchKeywords
             - logsSearchKeywordsVersion
             - webhookUrlMaskEnabled
+            - agentTokenMaskEnabled
+            - insightsEnabled
             - currentOnboardingStep
+            - pinnedEnvironments
+            - pinnedAgents
+            - scimEnabled
         valueType:
           description: value type for given settings
           type: string
@@ -3622,6 +5017,7 @@ components:
             - string
             - number
             - logsSearchKeywords
+            - array
         value:
           $ref: '#/components/schemas/Any'
         organizationId:
@@ -3643,6 +5039,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Setting'
+      required:
+        - elements
     SlavesMeta:
       description: Slave data for executing tests in distributed environment
       type: object
@@ -3820,6 +5218,13 @@ components:
           type: string
       required:
         - organizationID
+    Sysctl:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
     TCPSocketAction:
       type: object
       properties:
@@ -4946,6 +6351,8 @@ components:
           $ref: '#/components/schemas/TestTriggerProbeSpec'
         action:
           $ref: '#/components/schemas/TestTriggerActions'
+        actionParameters:
+          $ref: '#/components/schemas/TestTriggerActionParameters'
         execution:
           $ref: '#/components/schemas/TestTriggerExecutions'
         testSelector:
@@ -4966,6 +6373,16 @@ components:
         - action
         - execution
         - testSelector
+    TestTriggerActionParameters:
+      description: supported action parameters for test triggers
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/TestWorkflowConfigValue'
+        tags:
+          $ref: '#/components/schemas/TestWorkflowTagValue'
+        target:
+          $ref: '#/components/schemas/ExecutionTarget'
     TestTriggerActions:
       description: supported actions for test triggers
       type: string
@@ -5184,6 +6601,10 @@ components:
           description: resource namespace
           type: string
           example: testkube
+        namespaceRegex:
+          description: kubernetes resource namespace regex
+          type: string
+          example: test*
         labelSelector:
           $ref: >-
             https://raw.githubusercontent.com/garethr/kubernetes-json-schema/master/v1.7.8/_definitions.json#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector
@@ -5258,6 +6679,10 @@ components:
           additionalProperties:
             type: string
         created:
+          type: string
+          format: date-time
+          example: '2022-07-30T06:54:15Z'
+        updated:
           type: string
           format: date-time
           example: '2022-07-30T06:54:15Z'
@@ -5371,6 +6796,9 @@ components:
             where to mount the fetched repository contents (defaults to "repo"
             directory in the data volume)
           type: string
+        cone:
+          description: enable cone mode for sparse checkout with paths
+          type: boolean
         paths:
           description: paths to fetch for the sparse checkout
           type: array
@@ -5408,6 +6836,14 @@ components:
           type: object
           additionalProperties:
             type: string
+        config:
+          $ref: '#/components/schemas/TestWorkflowConfigValue'
+        target:
+          $ref: '#/components/schemas/ExecutionTarget'
+        timezone:
+          $ref: '#/components/schemas/BoxedString'
+          description: cron timezone
+          example: America/New_York
       required:
         - cron
     TestWorkflowEvent:
@@ -5423,6 +6859,18 @@ components:
           type: string
           format: bson objectId
           example: 62f395e004109209b50edfc1
+        groupId:
+          description: identifier for group of correlated executions
+          type: string
+          format: bson objectId
+          example: 62f395e004109209b50edfc1
+        runnerId:
+          description: identifier of the runner where it has been executed
+          type: string
+        runnerTarget:
+          $ref: '#/components/schemas/ExecutionTarget'
+        runnerOriginalTarget:
+          $ref: '#/components/schemas/ExecutionTarget'
         name:
           description: execution name
           type: string
@@ -5436,6 +6884,10 @@ components:
           type: integer
         scheduledAt:
           description: when the execution has been scheduled to run
+          type: string
+          format: date-time
+        assignedAt:
+          description: when the execution has been assigned to some runner
           type: string
           format: date-time
         statusAt:
@@ -5463,6 +6915,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TestWorkflowReport'
+        resourceAggregations:
+          $ref: '#/components/schemas/TestWorkflowExecutionResourceAggregationsReport'
         workflow:
           $ref: '#/components/schemas/TestWorkflow'
         resolvedWorkflow:
@@ -5479,6 +6933,11 @@ components:
             - false
         tags:
           $ref: '#/components/schemas/TestWorkflowTagValue'
+        runningContext:
+          $ref: '#/components/schemas/TestWorkflowRunningContext'
+          description: running context for the test workflow execution (Pro edition only)
+        configParams:
+          $ref: '#/components/schemas/TestWorkflowExecutionConfig'
       required:
         - id
         - name
@@ -5497,6 +6956,33 @@ components:
           description: test workflow execution status
       required:
         - testWorkflow
+    TestWorkflowExecutionConfig:
+      description: map of configuration values used in the test workflow execution
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TestWorkflowExecutionConfigValue'
+    TestWorkflowExecutionConfigValue:
+      description: configuration values used in the test workflow execution
+      type: object
+      properties:
+        value:
+          description: configuration value
+          type: string
+        emptyValue:
+          description: configuration value is empty
+          type: boolean
+        defaultValue:
+          description: configuration value default
+          type: string
+        emptyDefaultValue:
+          description: configuration value default is empty
+          type: boolean
+        truncated:
+          description: indicates if the value is truncated
+          type: boolean
+        sensitive:
+          description: marks value as sensitive
+          type: boolean
     TestWorkflowExecutionNotification:
       type: object
       properties:
@@ -5536,6 +7022,83 @@ components:
           default: false
         tags:
           $ref: '#/components/schemas/TestWorkflowTagValue'
+        target:
+          $ref: '#/components/schemas/ExecutionTarget'
+        runningContext:
+          $ref: '#/components/schemas/TestWorkflowRunningContext'
+          description: running context for the test workflow execution (Pro edition only)
+        parentExecutionIds:
+          description: parent execution ids
+          type: array
+          items:
+            type: string
+    TestWorkflowExecutionResourceAggregations:
+      description: >
+        TestWorkflowExecutionResourceAggregations provides min, max, average,
+        total,
+
+        and standard deviation values for a resource metric.
+      type: object
+      properties:
+        total:
+          description: Total sum of the metric.
+          type: number
+          format: float64
+        min:
+          description: Minimum value of the metric.
+          type: number
+          format: float64
+        max:
+          description: Maximum value of the metric.
+          type: number
+          format: float64
+        avg:
+          description: Average value of the metric.
+          type: number
+          format: float64
+        stdDev:
+          description: Standard deviation of the metric.
+          type: number
+          format: float64
+    TestWorkflowExecutionResourceAggregationsByMeasurement:
+      description: >
+        TestWorkflowExecutionResourceAggregationsByMeasurement provides resource
+        usage aggregations
+
+        for a specific measurement (e.g. CPU, Memory, etc.) across all steps in
+        a TestWorkflowExecution.
+      type: object
+      additionalProperties:
+        description: >
+          TestWorkflowExecutionResourceAggregations provides resource usage
+          aggregations
+
+          for a specific field (e.g. millicores, used...).
+        type: object
+        additionalProperties:
+          $ref: '#/components/schemas/TestWorkflowExecutionResourceAggregations'
+    TestWorkflowExecutionResourceAggregationsReport:
+      description: >
+        TestWorkflowExecutionResourceAggregationsReport provides resource usage
+        aggregations
+
+        for an entire TestWorkflowExecution (globally) and also per-step (by
+        measurements).
+      type: object
+      properties:
+        global:
+          $ref: >-
+            #/components/schemas/TestWorkflowExecutionResourceAggregationsByMeasurement
+        step:
+          type: array
+          items:
+            $ref: '#/components/schemas/TestWorkflowExecutionStepResourceAggregations'
+    TestWorkflowExecutionResourceAggregationsScope:
+      description: Scope of the resource metrics aggregations.
+      type: string
+      enum:
+        - step
+        - global
     TestWorkflowExecutionStatusCR:
       description: test workflow execution status
       type: object
@@ -5546,6 +7109,16 @@ components:
           description: test workflow execution generation
           type: integer
           format: int64
+    TestWorkflowExecutionStepResourceAggregations:
+      description: Step-based resource metrics aggregations (by measurement and field)
+      type: object
+      properties:
+        ref:
+          description: step reference
+          type: string
+        aggregations:
+          $ref: >-
+            #/components/schemas/TestWorkflowExecutionResourceAggregationsByMeasurement
     TestWorkflowExecutionSummary:
       type: object
       properties:
@@ -5554,6 +7127,14 @@ components:
           type: string
           format: bson objectId
           example: 62f395e004109209b50edfc1
+        groupId:
+          description: identifier for group of correlated executions
+          type: string
+          format: bson objectId
+          example: 62f395e004109209b50edfc1
+        runnerId:
+          description: identifier of the runner where it has been executed
+          type: string
         name:
           description: execution name
           type: string
@@ -5577,6 +7158,18 @@ components:
           $ref: '#/components/schemas/TestWorkflowSummary'
         tags:
           $ref: '#/components/schemas/TestWorkflowTagValue'
+        runningContext:
+          $ref: '#/components/schemas/TestWorkflowRunningContext'
+          description: running context for the test workflow execution (Pro edition only)
+        configParams:
+          $ref: '#/components/schemas/TestWorkflowExecutionConfig'
+        reports:
+          description: generated reports from the steps, like junit
+          type: array
+          items:
+            $ref: '#/components/schemas/TestWorkflowReport'
+        resourceAggregations:
+          $ref: '#/components/schemas/TestWorkflowExecutionResourceAggregationsReport'
       required:
         - id
         - name
@@ -5628,6 +7221,10 @@ components:
               type: string
             readinessProbe:
               $ref: '#/components/schemas/Probe'
+            pvcs:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/TestWorkflowPvcConfig'
     TestWorkflowIndependentStep:
       type: object
       properties:
@@ -5657,8 +7254,6 @@ components:
         timeout:
           description: maximum time this step may take
           type: string
-          pattern: >-
-            ^((0|[1-9][0-9]*)h)?((0|[1-9][0-9]*)m)?((0|[1-9][0-9]*)s)?((0|[1-9][0-9]*)ms)?$
         delay:
           description: delay before the step
           type: string
@@ -5790,6 +7385,10 @@ components:
           $ref: '#/components/schemas/BoxedInteger'
         multipleOf:
           $ref: '#/components/schemas/BoxedInteger'
+        sensitive:
+          description: whether this value should be stored in the secret
+          type: boolean
+          default: false
       required:
         - type
     TestWorkflowParameterType:
@@ -5890,6 +7489,57 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PodResourceClaim'
+        hostPID:
+          $ref: '#/components/schemas/BoxedBoolean'
+    TestWorkflowPvcConfig:
+      type: object
+      properties:
+        accessModes:
+          description: >-
+            Access mode for claim storage. More info:
+            https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes
+          type: array
+          items:
+            type: string
+        volumeMode:
+          $ref: '#/components/schemas/BoxedString'
+          description: >-
+            Volume mode indicates the consumption of the volume as either a
+            filesystem or block device. More info:
+            https://kubernetes.io/docs/concepts/storage/persistent-volumes/#volume-mode
+        resources:
+          $ref: '#/components/schemas/TestWorkflowResources'
+          description: Resources required for pvc
+        storageClassName:
+          $ref: '#/components/schemas/BoxedString'
+          description: >-
+            Storage class name specifies the name of a StorageClass. More info:
+            https://kubernetes.io/docs/concepts/storage/storage-classes/
+        volumeName:
+          description: Volume name is used to identify the volume
+          type: string
+        selector:
+          $ref: '#/components/schemas/LabelSelector'
+          description: >-
+            Only the volumes whose labels match the selector can be bound to the
+            claim
+        dataSource:
+          $ref: '#/components/schemas/TypedLocalObjectReference'
+          description: >-
+            Data source field can be used to specify either: * An existing
+            VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot) * An
+            existing PVC (PersistentVolumeClaim)
+        dataSourceRef:
+          $ref: '#/components/schemas/TypedObjectReference'
+          description: >-
+            Data source reference specifies the object from which to populate
+            the volume with data, if a non-empty volume is desired
+        volumeAttributesClassName:
+          $ref: '#/components/schemas/BoxedString'
+          description: >-
+            Volume attributes class name may be used to set the
+            VolumeAttributesClass used by this claim. More info:
+            https://kubernetes.io/docs/concepts/storage/persistent-volumes#volumeattributesclass
     TestWorkflowRef:
       type: object
       properties:
@@ -5898,6 +7548,13 @@ components:
           type: string
         config:
           $ref: '#/components/schemas/TestWorkflowConfigValue'
+      required:
+        - name
+    TestWorkflowReference:
+      type: object
+      properties:
+        name:
+          type: string
       required:
         - name
     TestWorkflowReport:
@@ -6067,6 +7724,70 @@ components:
           type: string
       required:
         - count
+    TestWorkflowRunningContext:
+      description: running context for test workflow execution
+      type: object
+      properties:
+        interface:
+          $ref: '#/components/schemas/TestWorkflowRunningContextInterface'
+        actor:
+          $ref: '#/components/schemas/TestWorkflowRunningContextActor'
+      required:
+        - interface
+        - actor
+    TestWorkflowRunningContextActor:
+      description: running context actor for test workflow execution
+      type: object
+      properties:
+        name:
+          description: actor name
+          type: string
+        email:
+          description: actor email
+          type: string
+        executionId:
+          description: test workflow execution id
+          type: string
+        executionPath:
+          description: all test workflow execution ids starting from the root
+          type: string
+        executionReference:
+          description: reference test workflow execution id
+          type: string
+        type:
+          $ref: '#/components/schemas/TestWorkflowRunningContextActorType'
+      required:
+        - type
+    TestWorkflowRunningContextActorType:
+      description: supported actors for test workflow running context
+      type: string
+      enum:
+        - cron
+        - testtrigger
+        - user
+        - testworkflow
+        - testworkflowexecution
+        - program
+    TestWorkflowRunningContextInterface:
+      description: running context interface for test workflow execution
+      type: object
+      properties:
+        name:
+          description: interface name
+          type: string
+        type:
+          $ref: '#/components/schemas/TestWorkflowRunningContextInterfaceType'
+      required:
+        - type
+    TestWorkflowRunningContextInterfaceType:
+      description: supported interfaces for test workflow running context
+      type: string
+      enum:
+        - cli
+        - ui
+        - api
+        - ci/cd
+        - internal
     TestWorkflowServiceSpec:
       type: object
       allOf:
@@ -6140,6 +7861,10 @@ components:
             $ref: '#/components/schemas/TestWorkflowEvent'
         execution:
           $ref: '#/components/schemas/TestWorkflowTagSchema'
+        pvcs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TestWorkflowPvcConfig'
     TestWorkflowStatus:
       type: string
       enum:
@@ -6191,8 +7916,6 @@ components:
         timeout:
           description: maximum time this step may take
           type: string
-          pattern: >-
-            ^((0|[1-9][0-9]*)h)?((0|[1-9][0-9]*)m)?((0|[1-9][0-9]*)s)?((0|[1-9][0-9]*)ms)?$
         delay:
           description: delay before the step
           type: string
@@ -6269,8 +7992,6 @@ components:
         timeout:
           description: maximum time this step may take
           type: string
-          pattern: >-
-            ^((0|[1-9][0-9]*)h)?((0|[1-9][0-9]*)m)?((0|[1-9][0-9]*)s)?((0|[1-9][0-9]*)ms)?$
     TestWorkflowStepExecute:
       type: object
       properties:
@@ -6484,6 +8205,11 @@ components:
                 $ref: '#/components/schemas/TestWorkflowTarballRequest'
             config:
               $ref: '#/components/schemas/TestWorkflowConfigValue'
+            selector:
+              $ref: '#/components/schemas/LabelSelector'
+              description: label selector for test workflow
+            target:
+              $ref: '#/components/schemas/ExecutionTarget'
     TestWorkflowStepOperations:
       type: object
       properties:
@@ -6652,6 +8378,8 @@ components:
       properties:
         tags:
           $ref: '#/components/schemas/TestWorkflowTagValue'
+        target:
+          $ref: '#/components/schemas/ExecutionTarget'
     TestWorkflowTagValue:
       description: tag values to pass to the test workflow execution
       type: object
@@ -6676,6 +8404,27 @@ components:
           $ref: '#/components/schemas/TestWorkflowTarballFilePattern'
       required:
         - from
+    TestWorkflowTarget:
+      type: object
+      properties:
+        match:
+          description: labels to attach to the job
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        not:
+          description: labels to attach to the job
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        replicate:
+          type: array
+          items:
+            type: string
     TestWorkflowTemplate:
       type: object
       properties:
@@ -6702,6 +8451,10 @@ components:
           additionalProperties:
             type: string
         created:
+          type: string
+          format: date-time
+          example: '2022-07-30T06:54:15Z'
+        updated:
           type: string
           format: date-time
           example: '2022-07-30T06:54:15Z'
@@ -6754,6 +8507,10 @@ components:
             $ref: '#/components/schemas/TestWorkflowEvent'
         execution:
           $ref: '#/components/schemas/TestWorkflowTagSchema'
+        pvcs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TestWorkflowPvcConfig'
     TestWorkflowWithExecution:
       type: object
       properties:
@@ -6898,6 +8655,32 @@ components:
           type: array
           items:
             type: string
+    TypedLocalObjectReference:
+      description: >-
+        TypedLocalObjectReference contains enough information to let you locate
+        the typed referenced object inside the same namespace
+      type: object
+      properties:
+        apiGroup:
+          $ref: '#/components/schemas/BoxedString'
+          description: api group is the group for the resource being referenced
+        kind:
+          description: kind is the type of resource being referenced
+          type: string
+        name:
+          description: name is the name of resource being referenced
+          type: string
+    TypedObjectReference:
+      description: >-
+        TypedObjectReference contains enough information to let you locate the
+        typed referenced object inside the specified namespace
+      type: object
+      properties:
+        namespace:
+          $ref: '#/components/schemas/BoxedString'
+          description: Namespace is the namespace of resource being referenced
+      allOf:
+        - $ref: '#/components/schemas/TypedLocalObjectReference'
     UsageStats:
       type: object
       properties:
@@ -6998,6 +8781,28 @@ components:
           required:
             - email
             - confirmed
+    UserPreferences:
+      type: object
+      properties:
+        id:
+          description: preference id
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - values
+    UserReference:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+      required:
+        - email
     Users:
       type: object
       properties:
@@ -7071,6 +8876,10 @@ components:
           $ref: '#/components/schemas/AzureDiskVolumeSource'
         configMap:
           $ref: '#/components/schemas/ConfigMapVolumeSource'
+        csi:
+          $ref: '#/components/schemas/CSIVolumeSource'
+        projected:
+          $ref: '#/components/schemas/ProjectedVolumeSource'
       required:
         - name
     VolumeMount:
@@ -7169,14 +8978,146 @@ components:
           example:
             - true
             - false
+        config:
+          $ref: '#/components/schemas/WebhookConfig'
+        parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookParameterSchema'
+        webhookTemplateRef:
+          $ref: '#/components/schemas/WebhookTemplateRef'
       required:
-        - uri
-        - events
+        - name
+    WebhookConfig:
+      description: configuration values
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/WebhookConfigValue'
+    WebhookConfigValue:
+      description: configuration value
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/BoxedString'
+          description: public value to use in webhook template
+        secret:
+          $ref: '#/components/schemas/SecretRef'
+          description: private value stored in secret to use in webhook template
     WebhookCreateRequest:
       description: webhook create request body
       type: object
       allOf:
         - $ref: '#/components/schemas/Webhook'
+    WebhookParameterSchema:
+      description: parameter definition
+      type: object
+      properties:
+        name:
+          description: unique parameter name
+          type: string
+        description:
+          description: description for the parameter
+          type: string
+        required:
+          description: whether parameter is required
+          type: boolean
+          default: false
+        example:
+          description: example value for the parameter
+          type: string
+        default:
+          $ref: '#/components/schemas/BoxedString'
+        pattern:
+          description: regular expression to match
+          type: string
+      required:
+        - name
+    WebhookTemplate:
+      description: CRD based webhook data template
+      type: object
+      properties:
+        name:
+          type: string
+          example: webhook1
+        namespace:
+          type: string
+          example: testkube
+        uri:
+          type: string
+          example: https://hooks.app.com/services/1
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventType'
+        selector:
+          description: Labels to filter for tests and test suites
+          type: string
+        payloadObjectField:
+          description: will load the generated payload for notification inside the object
+          type: string
+        payloadTemplate:
+          description: golang based template for notification payload
+          type: string
+        payloadTemplateReference:
+          description: name of the template resource
+          type: string
+        headers:
+          description: webhook headers (golang template supported)
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            Content-Type: application/xml
+        labels:
+          description: webhook labels
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            app: backend
+            env: prod
+        annotations:
+          description: webhook annotations
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            app: backend
+            env: prod
+        disabled:
+          description: whether webhook is disabled
+          type: boolean
+          default: false
+          example:
+            - true
+            - false
+        config:
+          $ref: '#/components/schemas/WebhookConfig'
+        parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookParameterSchema'
+      required:
+        - name
+    WebhookTemplateCreateRequest:
+      description: webhook template create request body
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/WebhookTemplate'
+    WebhookTemplateRef:
+      type: object
+      properties:
+        name:
+          description: webhook template name to use
+          type: string
+      required:
+        - name
+    WebhookTemplateUpdateRequest:
+      description: webhook template update request body
+      type: object
+      nullable: true
+      allOf:
+        - $ref: '#/components/schemas/WebhookTemplate'
     WebhookUpdateRequest:
       description: webhook update request body
       type: object
@@ -7192,6 +9133,17 @@ components:
           $ref: '#/components/schemas/PodAffinityTerm'
       required:
         - podAffinityTerm
+    WindowsSecurityContextOptions:
+      type: object
+      properties:
+        gmsaCredentialSpecName:
+          $ref: '#/components/schemas/BoxedString'
+        gmsaCredentialSpec:
+          $ref: '#/components/schemas/BoxedString'
+        runAsUserName:
+          $ref: '#/components/schemas/BoxedString'
+        hostProcess:
+          $ref: '#/components/schemas/BoxedBoolean'
   responses:
     AlreadyJoinedOrganization:
       description: Already joined organization
@@ -7205,12 +9157,24 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiInfo'
+    ApplicationAuditLogKeymap:
+      description: successful operation for listing application audit logs keymap
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApplicationAuditLogKeymap'
     ArtifactURL:
       description: successful operation for artifact url
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ArtifactURL'
+    AuditLogSubjectFilterValues:
+      description: successful operation for listing distinct audit log subjects
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuditLogDistinctSubjects'
     AuditLogs:
       description: successful operation for listing audit logs
       content:
@@ -7277,6 +9241,25 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Environments'
+    ExecutionGroupListV2:
+      description: List of Test Workflow execution groups
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              totals:
+                $ref: '#/components/schemas/ExecutionTotalsV2'
+              filtered:
+                $ref: '#/components/schemas/ExecutionTotalsV2'
+              results:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExecutionGroupShortV2'
+            required:
+              - results
+              - totals
+              - filtered
     ExecutionMetadata:
       description: successful operation for getting execution metadata
       content:
@@ -7289,6 +9272,19 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ExecutionRefs'
+    ExportedApplicationAuditLog:
+      description: successful operation for application audit log export
+      headers:
+        Content-Disposition:
+          description: The filename of the exported file
+          required: true
+          schema:
+            type: string
+      content:
+        application/octet-stream:
+          schema:
+            type: string
+            format: binary
     Features:
       description: Global Testkube Pro/Enterprise features
       content:
@@ -7323,6 +9319,14 @@ components:
             $ref: '#/components/schemas/Problem'
     InviteAcceptedRedirect:
       description: No content after resource created
+    JUnitReports:
+      description: JUnit test reports
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/JUnitReport'
     JoinOrganization:
       description: Join organization response
       content:
@@ -7359,6 +9363,36 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Member'
+    MemberPermissionsResponse:
+      description: A list of permissions
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: namespace
+                slug:
+                  type: string
+                  example: slug
+                type:
+                  type: string
+                  example: environment
+                role:
+                  type: string
+                  example: admin
+                reason:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      example: Team
+                    name:
+                      type: string
+                      example: team X
     Members:
       description: successful operation for organization members
       content:
@@ -7423,6 +9457,33 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Organizations'
+    PaginatedApplicationAuditLog:
+      description: successful operation for listing application audit logs
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              items:
+                $ref: '#/components/schemas/ApplicationAuditLog'
+              pageSize:
+                description: Number of returned audit events per page
+                type: integer
+              pageIndex:
+                description: Current page index
+                type: integer
+              totalPages:
+                description: Total number of pages
+                type: integer
+              totalItems:
+                description: Total number of audit events
+                type: integer
+            required:
+              - items
+              - pageSize
+              - pageIndex
+              - totalPages
+              - totalItems
     PaymentRequiredError:
       description: 402 Payment Required
       content:
@@ -7520,6 +9581,31 @@ components:
           schema:
             $ref: '#/components/schemas/Users'
   parameters:
+    ActorName:
+      name: actorName
+      in: query
+      schema:
+        description: Test workflow running conntext actor name
+        type: string
+    ActorType:
+      name: actorType
+      in: query
+      schema:
+        description: Test workflow running conntext actor type
+        type: string
+    AgentName:
+      name: agentID
+      in: path
+      description: The identifier of the agent
+      required: true
+      schema:
+        type: string
+    AgentTypeQP:
+      name: type
+      in: query
+      description: filter resources by agent type
+      schema:
+        $ref: '#/components/schemas/AgentType'
     Aggregate:
       name: aggregate
       in: query
@@ -7542,12 +9628,41 @@ components:
       required: true
       schema:
         type: string
+    BoardID:
+      name: boardID
+      in: path
+      description: The identifier of this board
+      required: true
+      schema:
+        type: string
+    BucketSize:
+      name: bucketSize
+      in: query
+      description: bucketSize in seconds to count concurrent runners in
+      schema:
+        type: integer
+      example: 1
     ConcurrencyLevel:
       name: concurrency
       in: query
       schema:
         type: integer
         default: 10
+    CredentialName:
+      name: credentialName
+      in: path
+      description: The identifier of the credential
+      required: true
+      schema:
+        type: string
+    DateTime:
+      name: date
+      in: query
+      description: date in RFC3339 format, i.e. "2006-01-02T15:04:05Z"
+      schema:
+        type: string
+        format: date-time
+      example: '2006-01-02T15:04:05Z'
     EndDateFilter:
       name: endDate
       in: query
@@ -7563,10 +9678,35 @@ components:
         type: string
         format: date-time
       example: '2006-01-02T15:04:05Z'
+    Environment:
+      name: env
+      in: query
+      description: env filters the data according to environments.
+      schema:
+        type: string
     EnvironmentID:
       name: environmentID
       in: path
       description: unique id of the environment
+      required: true
+      schema:
+        type: string
+    EnvironmentIDQP:
+      name: environmentId
+      in: query
+      description: filter by environment id
+      schema:
+        type: string
+    EventType:
+      name: event
+      in: query
+      description: filter by event type in audit logs
+      schema:
+        type: string
+    ExecutionGroupID:
+      name: executionGroupID
+      in: path
+      description: unique id of the execution group
       required: true
       schema:
         type: string
@@ -7589,10 +9729,31 @@ components:
       description: optional status filter containing multiple values separated by comma
       schema:
         $ref: '#/components/schemas/ExecutionStatus'
+    ExportFormat:
+      name: format
+      in: query
+      description: specify the format of the exported report
+      required: true
+      schema:
+        type: string
+      example: csv
     Filename:
       name: filename
       in: path
       description: filename of the object usually used for artifacts
+      required: true
+      schema:
+        type: string
+    Fill:
+      name: fill
+      in: query
+      description: fill missing buckets in the time series
+      schema:
+        type: boolean
+    Filter:
+      name: f
+      in: query
+      description: The filter for this operation.
       required: true
       schema:
         type: string
@@ -7622,6 +9783,12 @@ components:
       required: true
       schema:
         type: string
+    IncludeDeleted:
+      name: includeDeleted
+      in: query
+      description: consider also soft-deleted records
+      schema:
+        type: boolean
     InlineTemplates:
       name: inline
       in: query
@@ -7655,6 +9822,12 @@ components:
       schema:
         type: integer
         default: 7
+    LastSeconds:
+      name: lastSeconds
+      in: query
+      description: how many last seconds should be filtered
+      schema:
+        type: integer
     Limit:
       name: limit
       in: query
@@ -7695,6 +9868,12 @@ components:
         description: Namespace of the object
         type: string
         default: testkube
+    Offset:
+      name: offset
+      in: query
+      description: skip some items in list of resources
+      schema:
+        type: integer
     OptionalTestName:
       name: testName
       in: query
@@ -7766,6 +9945,12 @@ components:
       schema:
         type: boolean
         default: false
+    SkipResultCount:
+      name: skipResultCount
+      in: query
+      description: skip result count in usage calculation
+      schema:
+        type: boolean
     StartDateFilter:
       name: startDate
       in: query
@@ -7795,6 +9980,12 @@ components:
       in: path
       description: unique id of the status page
       required: true
+      schema:
+        type: string
+    Subject:
+      name: subject
+      in: query
+      description: filter by subject in audit logs
       schema:
         type: string
     TagSelector:
@@ -7872,10 +10063,10 @@ components:
     TextSearch:
       name: textSearch
       in: query
-      description: text to search in name and test name
+      description: full-text search
       schema:
         type: string
-        default: ''
+      example: foo
     TokenID:
       name: tokenID
       in: path
@@ -7952,6 +10143,13 @@ components:
           schema:
             $ref: '#/components/schemas/EnvironmentMembers'
       required: true
+    ExportApplicationAuditLog:
+      description: Export application audit log request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApplicationAuditLogExportRequest'
+      required: true
     LogsSearchKeywords:
       description: Logs search keywords
       content:
@@ -7986,6 +10184,19 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/PlanLimits'
+      required: true
+    Preferences:
+      description: User preferences upsert
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserPreferences'
+    ServeArtifact:
+      description: Serve artifact request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ServeArtifact'
       required: true
     SettingUpsert:
       description: Settings upsert request
@@ -8069,6 +10280,13 @@ components:
           schema:
             $ref: '#/components/schemas/User'
       required: true
+  headers:
+    link:
+      schema:
+        type: string
+      example: >-
+        <https://api.testkube.io/resource?page=3>; rel="next",
+        <https://api.testkube.io/resource?page=1>; rel="previous"
   securitySchemes:
     BearerAuth:
       type: http

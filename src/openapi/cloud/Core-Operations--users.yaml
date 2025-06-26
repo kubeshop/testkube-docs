@@ -7,92 +7,13 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: cloud-api/1.10.51
+  version: 1.16.0-de.53
 servers:
   - url: https://api.testkube.io
     description: Testkube Cloud API Endpoint
   - url: https://<your-testkube-api-host>
     description: Testkube On-Prem API Endpoint
 paths:
-  /users:
-    get:
-      summary: List users
-      description: List users
-      operationId: listUsers
-      parameters:
-        - $ref: './components.yaml#/components/parameters/Limit'
-      responses:
-        '200':
-          $ref: './components.yaml#/components/responses/Users'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-      security:
-        - BearerAuth: []
-    post:
-      summary: Create new user
-      description: Create user
-      operationId: createUser
-      requestBody:
-        $ref: './components.yaml#/components/requestBodies/User'
-      responses:
-        '200':
-          $ref: './components.yaml#/components/responses/User'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-      security:
-        - BearerAuth: []
-  /users/{id}:
-    get:
-      summary: Get user by ID
-      description: Get user by ID
-      operationId: getUser
-      responses:
-        '200':
-          $ref: './components.yaml#/components/responses/User'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-      security:
-        - BearerAuth: []
-    delete:
-      summary: Delete user
-      description: Deletes user
-      operationId: deleteUser
-      responses:
-        '204':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-      security:
-        - BearerAuth: []
-    patch:
-      summary: Update user
-      description: Update user with given request body
-      operationId: updateUser
-      requestBody:
-        $ref: './components.yaml#/components/requestBodies/User'
-      responses:
-        '200':
-          $ref: './components.yaml#/components/responses/User'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
   /users/{id}/settings:
     get:
       summary: User settings, global for Testkube Pro or Enterprise
@@ -120,3 +41,21 @@ paths:
           $ref: './components.yaml#/components/responses/InternalServerError'
     parameters:
       - $ref: './components.yaml#/components/parameters/ID'
+  /users/preferences:
+    post:
+      summary: Create user preferences
+      description: Create user preferences
+      operationId: createUserPreferences
+      requestBody:
+        $ref: './components.yaml#/components/requestBodies/Preferences'
+      responses:
+        '201':
+          $ref: './components.yaml#/components/responses/NoContent'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []

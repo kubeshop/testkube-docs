@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:542709bd3be26cc57d01ee0d7644775daef93a11413811aee5c3de6cca27e8f4</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/medium-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>digest</td><td><code>sha256:a1b7cd11fa51ede6977412c15679632133da522604b646122d10eee1a13fec10</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 3" src="https://img.shields.io/badge/high-3-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/medium-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <!-- unspecified: 0 --></td></tr>
 <tr><td>platform</td><td>linux/arm64</td></tr>
-<tr><td>size</td><td>42 MB</td></tr>
-<tr><td>packages</td><td>249</td></tr>
+<tr><td>size</td><td>54 MB</td></tr>
+<tr><td>packages</td><td>254</td></tr>
 </table>
 </details></table>
 </details>
@@ -43,28 +43,6 @@ See [`parse.ParseUnverified`](https://github.com/golang-jwt/jwt/blob/c035977d9e1
 ### Impact
 
 Excessive memory allocation
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/oauth2</strong> <code>0.26.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/oauth2@0.26.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-22868?s=golang&n=oauth2&ns=golang.org%2Fx&t=golang&vr=%3C0.27.0"><img alt="high : CVE--2025--22868" src="https://img.shields.io/badge/CVE--2025--22868-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.27.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.27.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.063%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-An attacker can pass a malicious malformed token which causes unexpected memory to be consumed during parsing.
 
 </blockquote>
 </details>
@@ -117,8 +95,8 @@ Excessive memory allocation
 <tr><td>Fixed version</td><td><code>2.52.7</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.7</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:P</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.052%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.057%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -235,6 +213,35 @@ The problem is fixed in the following packages and versions:
 
 The problem will not be fixed in the following package because the package is archived:
 - gopkg.in/square/go-jose.v2
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/cloudflare/circl</strong> <code>1.5.0</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/cloudflare/circl@1.5.0</code></small><br/>
+<a href="https://scout.docker.com/v/GHSA-2x5j-vhc8-9cwm?s=github&n=circl&ns=github.com%2Fcloudflare&t=golang&vr=%3C1.6.1"><img alt="low : GHSA--2x5j--vhc8--9cwm" src="https://img.shields.io/badge/GHSA--2x5j--vhc8--9cwm-lightgrey?label=low%20&labelColor=fce1a9"/></a> <i>Improper Input Validation</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.6.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.6.1</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+The CIRCL implementation of FourQ fails to validate user-supplied low-order points during Diffie-Hellman key exchange, potentially allowing attackers to force the identity point and compromise session security.
+
+Moreover, there is an incorrect point validation in ScalarMult can lead to incorrect results in the isEqual function and if a point is on the curve.
+
+
+### Patches
+Version 1.6.1 (https://github.com/cloudflare/circl/tree/v1.6.1) mitigates the identified issues.
+
+We acknowledge Alon Livne (Botanica Software Labs) for the reported findings.
 
 </blockquote>
 </details>

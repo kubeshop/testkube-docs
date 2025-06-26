@@ -8,7 +8,7 @@ Testkube exposes two REST APIs that can be consumed accordingly:
 ## Agent API
 
 The Agent API provides programmatic access to most features exposed
-by the agent itself when it is running in standalone mode. This is the same API used by 
+by the agent itself when it is running in [standalone mode](/articles/install/standalone-agent). This is the same API used by 
 the Testkube CLI for most of its commands. 
 
 By default this API does not require any authentication for any of its operations - so be careful in giving access.

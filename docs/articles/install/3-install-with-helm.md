@@ -20,6 +20,16 @@ Before you proceed with the installation, please ensure that you have the follow
 - Own a public/private domain for creating Ingress rules.
 - License Key and/or License File, if offline access is required.
 
+:::note IMPORTANT
+Make sure you're using the **correct Ingress controller**.
+
+✅ Use: [kubernetes/ingress-nginx](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx)
+
+🚫 Do not use: [nginx/nginx-ingress (NGINX Inc.)](https://artifacthub.io/packages/helm/nginx/nginx-ingress)
+
+Using the wrong chart causes one of the Dex or API Ingresses to be ignored when they share the same hostname.
+:::
+
 ## Installing
 
 1. Add the Testkube Helm repository:

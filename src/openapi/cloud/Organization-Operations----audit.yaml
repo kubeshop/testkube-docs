@@ -1,0 +1,153 @@
+openapi: 3.0.1
+info:
+  title: Testkube Pro API
+  description: API for Testkube Pro
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: COMMERICAL
+    url: https://opensource.org/licenses/MIT
+  version: 1.16.0-de.53
+servers:
+  - url: https://api.testkube.io
+    description: Testkube Cloud API Endpoint
+  - url: https://<your-testkube-api-host>
+    description: Testkube On-Prem API Endpoint
+paths:
+  /organizations/{id}/audit:
+    get:
+      summary: Retrieve a list of application audit logs
+      description: >
+        Fetch a paginated list of audit logs detailing actions performed on
+        application resources.
+
+        This includes actions such as resource creation, updates, and deletions,
+        along with metadata
+
+        about the entities involved and the context in which the actions
+        occurred.
+
+
+        The logs provide visibility into operations for auditing and compliance
+        purposes,
+
+        and may be filtered or limited by the parameters provided.
+      operationId: listApplicationAuditLogs
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: './components.yaml#/components/parameters/Limit'
+        - $ref: './components.yaml#/components/parameters/EnvironmentIDQP'
+        - $ref: './components.yaml#/components/parameters/StartDateTime'
+        - $ref: './components.yaml#/components/parameters/EndDateTime'
+        - $ref: './components.yaml#/components/parameters/Subject'
+        - $ref: './components.yaml#/components/parameters/EventType'
+        - $ref: './components.yaml#/components/parameters/Page'
+        - $ref: './components.yaml#/components/parameters/PageSize'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/PaginatedApplicationAuditLog'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+      security:
+        - BearerAuth: []
+  /organizations/{id}/audit/export:
+    get:
+      summary: Download an export of application audit logs
+      description: >
+        Download an export of application audit logs in a structured format,
+        such as CSV or JSON,
+
+        for the specified organization. The export includes detailed information
+        about actions
+
+        performed on application resources, including the entities involved, the
+        context in which
+
+        the actions occurred, and metadata about the operations.
+
+
+        The export provides a comprehensive record of operations for auditing
+        and compliance purposes,
+
+        and can be used to analyze and visualize the history of changes to
+        application resources.
+      operationId: exportApplicationAuditLog
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: './components.yaml#/components/parameters/EnvironmentIDQP'
+        - $ref: './components.yaml#/components/parameters/StartDateTime'
+        - $ref: './components.yaml#/components/parameters/EndDateTime'
+        - $ref: './components.yaml#/components/parameters/Subject'
+        - $ref: './components.yaml#/components/parameters/EventType'
+        - $ref: './components.yaml#/components/parameters/ExportFormat'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/ExportedApplicationAuditLog'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+      security:
+        - BearerAuth: []
+  /organizations/{id}/audit/filters/subject:
+    get:
+      summary: Returns a list of distinct values for the subject filter.
+      description: >
+        Returns a list of distinct values for the subject filter based on the
+        provided query parameters.
+
+        The subject filter is used to filter audit logs based on the entity that
+        performed the action,
+
+        such as a user, API token... This endpoint provides a list of distinct
+
+        subjects that can be used to filter audit logs by the entity that
+        performed the action.
+      operationId: getAuditLogSubjectFilterValues
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: './components.yaml#/components/parameters/EnvironmentIDQP'
+        - $ref: './components.yaml#/components/parameters/StartDateTime'
+        - $ref: './components.yaml#/components/parameters/EndDateTime'
+        - $ref: './components.yaml#/components/parameters/EventType'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/AuditLogSubjectFilterValues'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+      security:
+        - BearerAuth: []
+  /organizations/{id}/audit/keymap:
+    get:
+      summary: Retrieve a keymap of application audit log types
+      description: >
+        Retrieve a keymap that provides mappings of various audit log
+        attributes, such as event types,
+
+        actions, entity types, and sources, for the specified organization.
+
+
+        This keymap helps interpret the structure and meaning of audit logs by
+        mapping internal identifiers
+
+        to their corresponding human-readable descriptions. It can be used to
+        facilitate the analysis and
+
+        display of audit logs by providing context for different events,
+        actions, and entities involved in the
+
+        logged operations.
+      operationId: getApplicationAuditLogKeymap
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/ApplicationAuditLogKeymap'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+      security:
+        - BearerAuth: []

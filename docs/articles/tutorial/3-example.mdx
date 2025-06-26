@@ -39,13 +39,11 @@ spec:
       # The revision is the branch, tag or commit sha of your git repository.
       # In this case, it's a configuration variable that defaults to the 'main' branch.
       revision: "{{ config.ref }}"
-      # (optionally) You can limit fetching specific paths to increase cloning performance.
-      paths: ["api"]
   container:
     # The default image for your steps. You can choose to override the image within each step.
     image: node:alpine
     # The default working directory for your steps. Git content will be checked out in `/data/repo`.
-    workingDir: /data/repo/api
+    workingDir: /data/repo
   steps:
     # The `shell` keyword is a shorthand over `run` which makes it convenient to execute commands.
     # In this case, we first install all dependencies and afterwards run the tests.

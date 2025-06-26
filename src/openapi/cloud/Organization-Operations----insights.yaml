@@ -1,0 +1,148 @@
+openapi: 3.0.1
+info:
+  title: Testkube Pro API
+  description: API for Testkube Pro
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: COMMERICAL
+    url: https://opensource.org/licenses/MIT
+  version: 1.16.0-de.53
+servers:
+  - url: https://api.testkube.io
+    description: Testkube Cloud API Endpoint
+  - url: https://<your-testkube-api-host>
+    description: Testkube On-Prem API Endpoint
+paths:
+  /organizations/{id}/insights/executions:
+    get:
+      summary: Get environment execution duration stats
+      description: Get environment execution duration stats
+      operationId: getExecutionInsights
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/EnvironmentDurationStats'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/StartDateTime'
+      - $ref: './components.yaml#/components/parameters/EndDateTime'
+      - $ref: './components.yaml#/components/parameters/GroupBy'
+      - $ref: './components.yaml#/components/parameters/Environment'
+      - $ref: './components.yaml#/components/parameters/Selector'
+      - $ref: './components.yaml#/components/parameters/Status'
+      - $ref: './components.yaml#/components/parameters/Workflow'
+  /organizations/{id}/insights/series:
+    get:
+      summary: Get time series insights
+      description: Get time series insights
+      operationId: getTimeSeriesInsights
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/TimeSeriesData'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/StartDateTime'
+      - $ref: './components.yaml#/components/parameters/EndDateTime'
+      - $ref: './components.yaml#/components/parameters/Measure'
+      - $ref: './components.yaml#/components/parameters/Aggregate'
+      - $ref: './components.yaml#/components/parameters/Segment'
+      - $ref: './components.yaml#/components/parameters/Selector'
+      - $ref: './components.yaml#/components/parameters/Status'
+      - $ref: './components.yaml#/components/parameters/Workflow'
+      - $ref: './components.yaml#/components/parameters/Environment'
+  /organizations/{id}/insights/series/executions:
+    get:
+      summary: Get execution references
+      description: Get references to executions from insights
+      operationId: listInsightExecutions
+      responses:
+        '200':
+          description: Response
+          headers:
+            Link:
+              $ref: './components.yaml#/components/headers/link'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/ExecutionRef'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/StartDateTime'
+      - $ref: './components.yaml#/components/parameters/EndDateTime'
+      - $ref: './components.yaml#/components/parameters/Selector'
+      - $ref: './components.yaml#/components/parameters/Status'
+      - $ref: './components.yaml#/components/parameters/Workflow'
+      - $ref: './components.yaml#/components/parameters/Environment'
+      - $ref: './components.yaml#/components/parameters/Page'
+      - $ref: './components.yaml#/components/parameters/PageSize'
+  /organizations/{id}/insights/stats:
+    get:
+      summary: Get environment execution count stats
+      description: Get environment execution count stats
+      operationId: getPassFailInsights
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/EnvironmentExecutionStats'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/StartDateTime'
+      - $ref: './components.yaml#/components/parameters/EndDateTime'
+      - $ref: './components.yaml#/components/parameters/Workflow'
+      - $ref: './components.yaml#/components/parameters/Environment'
+      - $ref: './components.yaml#/components/parameters/Selector'
+  /organizations/{id}/insights/workflows:
+    get:
+      summary: Get environment workflow summaries
+      description: Get environment workflow summaries
+      operationId: getWorkflowSummaryInsights
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/EnvironmentWorkflowSummaries'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/StartDateTime'
+      - $ref: './components.yaml#/components/parameters/EndDateTime'
+      - $ref: './components.yaml#/components/parameters/Environment'
+      - $ref: './components.yaml#/components/parameters/Selector'
+      - $ref: './components.yaml#/components/parameters/Status'
+      - $ref: './components.yaml#/components/parameters/Workflow'

@@ -1,0 +1,232 @@
+openapi: 3.0.1
+info:
+  title: Testkube Pro API
+  description: API for Testkube Pro
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: COMMERICAL
+    url: https://opensource.org/licenses/MIT
+  version: 1.16.0-de.53
+servers:
+  - url: https://api.testkube.io
+    description: Testkube Cloud API Endpoint
+  - url: https://<your-testkube-api-host>
+    description: Testkube On-Prem API Endpoint
+paths:
+  /organizations/{id}/agents:
+    get:
+      summary: List agents used in the organization
+      description: List agents used in the organization.
+      operationId: listAgents
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  elements:
+                    type: array
+                    items:
+                      $ref: './components.yaml#/components/schemas/Agent'
+                required:
+                  - items
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    post:
+      summary: Create a new agent in the organization
+      description: Create a new agent in the organization.
+      operationId: createAgent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  maxLength: 40
+                  pattern: ^[a-z0-9]([a-z0-9-.]*[a-z0-9])?$
+                type:
+                  $ref: './components.yaml#/components/schemas/AgentType'
+                labels:
+                  type: object
+                  additionalProperties:
+                    type: string
+                environments:
+                  description: Environment IDs where the agent is restricted to.
+                  type: array
+                  items:
+                    type: string
+                runnerPolicy:
+                  $ref: './components.yaml#/components/schemas/AgentRunnerPolicy'
+                floating:
+                  type: boolean
+              required:
+                - name
+                - type
+                - environments
+        required: true
+      responses:
+        '201':
+          description: Response
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: './components.yaml#/components/schemas/Agent'
+                  - type: object
+                    properties:
+                      secretKey:
+                        type: string
+                    required:
+                      - secretKey
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/EnvironmentIDQP'
+      - $ref: './components.yaml#/components/parameters/AgentTypeQP'
+      - $ref: './components.yaml#/components/parameters/Limit'
+      - $ref: './components.yaml#/components/parameters/Offset'
+      - $ref: './components.yaml#/components/parameters/Page'
+      - $ref: './components.yaml#/components/parameters/PageSize'
+      - $ref: './components.yaml#/components/parameters/IncludeDeleted'
+  /organizations/{id}/agents/{agentID}:
+    get:
+      summary: Get agent from the organization
+      description: Get agent from the organization.
+      operationId: getAgent
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Agent'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    delete:
+      summary: Delete agent in the organization
+      description: Delete agent in the organization.
+      operationId: deleteAgent
+      responses:
+        '204':
+          $ref: './components.yaml#/components/responses/NoContent'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    patch:
+      summary: Update agent data in the organization
+      description: Update agent data in the organization.
+      operationId: updateAgent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                labels:
+                  type: object
+                  additionalProperties:
+                    type: string
+                disabled:
+                  type: boolean
+                environments:
+                  description: Environment IDs where the agent is restricted to.
+                  type: array
+                  items:
+                    type: string
+        required: true
+      responses:
+        '204':
+          $ref: './components.yaml#/components/responses/NoContent'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/AgentName'
+      - $ref: './components.yaml#/components/parameters/IncludeDeleted'
+  /organizations/{id}/agents/{agentID}/secret-key:
+    get:
+      summary: Get the secret key for selected agent.
+      description: Get the secret key for selected agent.
+      operationId: getAgentSecretKey
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  secretKey:
+                    type: string
+                required:
+                  - secretKey
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    delete:
+      summary: Regenerate the secret key for selected agent.
+      description: Regenerate the secret key for selected agent.
+      operationId: regenerateAgentSecretKey
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  secretKey:
+                    type: string
+                required:
+                  - secretKey
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/AgentName'

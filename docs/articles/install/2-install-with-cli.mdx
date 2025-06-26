@@ -3,11 +3,13 @@ import CliInstallation from '../_cli_installation.mdx';
 # Testkube Evaluation Install
 
 This step-by-step tutorial provides you with a simplified Testkube On Prem installation that deploys both the Testkube Control Plane and Agent
-within the same namespace. It does not create Ingress configuration as it is mainly designed for local installations that allow
-you to quickly try out and evaluate the solution. It comes with a preconfigured admin account, Organization and Environment for running your tests.
+within the same namespace. It does not create Ingress configuration as it is mainly designed for a local installations that allows
+a single user to quickly try out and evaluate the solution. It comes with a preconfigured admin account, Organization and Environment for running your tests.
 
 :::tip
-For a **production install** we recommend using the [Helm Chart](install-with-helm) for more flexibility and configurability.
+This evaluation installation is for a **single/local user only**, it is not configured to be shared with other users.
+
+For a **production install**, please install with the [Helm Chart](install-with-helm) for more flexibility and configurability.
 :::
 
 ## 1. Prerequisites

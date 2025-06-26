@@ -7,7 +7,7 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: cloud-api/1.10.51
+  version: 1.16.0-de.53
 servers:
   - url: https://api.testkube.io
     description: Testkube Cloud API Endpoint
@@ -22,6 +22,8 @@ paths:
       parameters:
         - $ref: './components.yaml#/components/parameters/ID'
         - $ref: './components.yaml#/components/parameters/TagSelector'
+        - $ref: './components.yaml#/components/parameters/ActorName'
+        - $ref: './components.yaml#/components/parameters/ActorType'
       responses:
         '200':
           description: successful list operation
@@ -36,6 +38,53 @@ paths:
                 type: string
         '400':
           description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    post:
+      summary: Execute test workflows
+      description: Execute test workflows in the kubernetes cluster
+      operationId: executeTestWorkflows
+      parameters:
+        - $ref: './components.yaml#/components/parameters/Selector'
+        - $ref: './components.yaml#/components/parameters/ConcurrencyLevel'
+      requestBody:
+        description: test workflow execution request
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/TestWorkflowExecutionRequest'
+        required: true
+      responses:
+        '200':
+          description: successful execution
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/TestWorkflowExecution'
+        '400':
+          description: problem with body parsing - probably some bad input occurs
           content:
             application/problem+json:
               schema:
@@ -314,6 +363,56 @@ paths:
                   $ref: './components.yaml#/components/schemas/Problem'
         '500':
           description: problem with getting artifacts from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+    parameters:
+      - name: id
+        in: path
+        description: organizationId
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        description: environmentID
+        required: true
+        schema:
+          type: string
+  /organizations/{id}/environments/{environmentId}/agent/test-workflow-executions/{executionID}/rerun:
+    post:
+      summary: Rerun test workflow execution
+      description: Rerun test workflow execution
+      operationId: rerunTestWorkflowExecution
+      parameters:
+        - $ref: './components.yaml#/components/parameters/executionID'
+      requestBody:
+        description: test workflow running context
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/TestWorkflowRunningContext'
+        required: true
+      responses:
+        '200':
+          description: successful execution
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/TestWorkflowExecution'
+        '400':
+          description: problem with body parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
           content:
             application/problem+json:
               schema:
