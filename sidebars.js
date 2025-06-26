@@ -122,8 +122,8 @@ const sidebars = {
                 },
                 {
                   type: "doc",
-                  label: "Testkube Copilot",
-                  id: "articles/copilot-on-prem-install",
+                  label: "Testkube AI Assistant",
+                  id: "articles/ai-assistant-on-prem-install",
                 },
                 {
                   type: "doc",
@@ -606,32 +606,32 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Testkube Copilot",
+          label: "Testkube AI Assistant",
           items: [
             {
               type: "doc",
               label: "Overview",
-              id: "articles/copilot-overview",
+              id: "articles/ai-assistant-overview",
             },
             {
               type: "doc",
               label: "On-Prem Installation",
-              id: "articles/copilot-on-prem-install",
+              id: "articles/ai-assistant-on-prem-install",
             },
             {
               type: "doc",
-              label: "Enable Copilot",
-              id: "articles/copilot-enable",
+              label: "Enable AI Assistant",
+              id: "articles/ai-assistant-enable",
             },
             {
               type: "doc",
-              label: "How Copilot can help",
-              id: "articles/copilot-can-help",
+              label: "How AI Assistant can help",
+              id: "articles/ai-assistant-can-help",
             },
             {
               type: "doc",
-              label: "How Copilot is different",
-              id: "articles/copilot-is-different",
+              label: "How AI Assistant is different",
+              id: "articles/ai-assistant-is-different",
             },
           ],
         },
