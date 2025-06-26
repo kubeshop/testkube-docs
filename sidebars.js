@@ -835,6 +835,11 @@ const sidebars = {
               label: "Distributed",
               id: "articles/examples/jmeter-distributed",
             },
+            {
+               type: "doc",
+               label: "Plugins",
+               id: "articles/examples/jmeter-plugins",
+             },
           ],
         },
         {
