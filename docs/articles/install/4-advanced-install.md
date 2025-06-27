@@ -60,6 +60,46 @@ global:
     skipVerify: true
 ```
 
+## Security Headers
+
+Security headers are an essential component of web security, providing protection against various types of attacks and enhancing the overall security posture of the web application. If you are exposing the Testkube On-Prem Control Plane components using the default Nginx Ingress Controller, inject the recommended security headers using the following snippet:
+
+:::note
+It requires the ingress controller configuration `allow-snippet-annotations` set as `true`, by default from version v1.9.0 it's set as `false` by default. Check [here](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#allow-snippet-annotations) for more information.
+:::
+
+```yaml
+testkube-cloud-api:
+  ingress:
+    annotations:
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        more_set_headers "X-Content-Type-Options: nosniff"
+        more_set_headers "X-Frame-Options: DENY"
+        more_set_headers "X-XSS-Protection: 1; mode=block"
+        more_set_headers "Referrer-Policy: strict-origin-when-cross-origin"
+        more_set_headers "Permissions-Policy: "
+        more_set_headers "Strict-Transport-Security: max-age=31536000; includeSubDomains; preload"
+
+testkube-cloud-ui:
+  ingress:
+    annotations: &securityHeaders
+      nginx.ingress.kubernetes.io/configuration-snippet: &securityHeaders |
+        more_set_headers "X-Content-Type-Options: nosniff"
+        more_set_headers "X-Frame-Options: SAMEORIGIN"
+        more_set_headers "X-XSS-Protection: 1; mode=block"
+        more_set_headers "Referrer-Policy: strict-origin-when-cross-origin"
+        more_set_headers "Permissions-Policy: fullscreen=(self)"
+        more_set_headers "Strict-Transport-Security: max-age=31536000; includeSubDomains; preload"
+        more_set_headers "Content-Security-Policy: default-src 'self' https: wss:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; worker-src https: wss: blob:; connect-src 'self' https: wss:"
+
+testkube-ai-service:
+  ingress:
+    annotations: 
+      nginx.ingress.kubernetes.io/configuration-snippet: *securityHeaders
+```
+
+It's possible to implement same headers with other ingress controllers or traffic managers, check the annotations or CRDs of the solution selected to expose Testkube On-Prem Control Plane components in your setup.
+
 ## Organization Management
 
 ### Bootstrap Member Mapping
