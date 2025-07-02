@@ -64,7 +64,7 @@ Here’s what this workflow is doing:
 - Fetching Jmeter tests from a private git repo, with credentials stored in a `secretKeyRef`
 - Sets the working directory for the container to match the repository directory structure (remember! [Git repository contents are mounted at `/data/repo` by default](https://docs.testkube.io/articles/test-workflows-content#git-repository)):
 
-![image.png](Jmeter%20article%2021eec8eaab6b80d18d84cf7bb0651713/image.png)
+![JMeter Git Directory Structure](./images/jmeter-plugins-git-directory.png)
 
 - Uses shell commands to execute a jmeter test with -`Jplugin_dependency_paths=/data/repo/jmeter-tests/lib` and -`Jsearch_paths=/data/repo/jmeter-tests/lib/ext` set to ensure Jmeter scans for the desired jars.
 
