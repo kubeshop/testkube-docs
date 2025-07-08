@@ -135,12 +135,14 @@ Kubernetes doesn't have a direct mechanism to get this metadata. To obtain it, w
 
 When the image you are using is stored in the private registry, you may need to add [`pod.imagePullSecrets`](https://docs.testkube.io/articles/test-workflows-examples-basics#configuring-the-pod) to the specific Test Workflow or [**Global Template**](./test-workflow-templates#global-templates).
 
-#### AWS Elastic Container Registry
+#### Using Private AWS Elastic Container Registry
 
-In the case you are using private AWS Elastic Container Registry, as its [authorization tokens](https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry_auth.html#registry-auth-token) are only valid for 12 hours, you can ensure persistent Testkube access by configuring a Service Account with IAM Role, follow these steps:
+In the case you are using private AWS Elastic Container Registry (ECR), as its [authorization tokens](https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry_auth.html#registry-auth-token) are only valid for 12 hours, you can ensure persistent Testkube access by configuring a Service Account with IAM Role or Environment Variables, follow these steps:
+
+If you are running agent into AWS Elastic Kubernetes Service (EKS):
 
 * Configure your EKS cluster to manage [IAM roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html).
-* Create a [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create) allowing these actions over your private registry: `ecr:GetAuthorizationToken`, `ecr:CreateRepository`, `ecr:BatchImportUpstreamImage`, `ecr:BatchGetImage`, `ecr:BatchCheckLayerAvailability`, `ecr:CompleteLayerUpload`, and `ecr:GetDownloadUrlForLayer`.
+* Create a [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create) allowing the following actions over your private registry: `ecr:GetAuthorizationToken`, `ecr:CreateRepository`, `ecr:BatchImportUpstreamImage`, `ecr:BatchGetImage`, `ecr:BatchCheckLayerAvailability`, `ecr:CompleteLayerUpload`, and `ecr:GetDownloadUrlForLayer`.
 * Assign IAM Role to `testkube-api-server` service account with annotation: `eks.amazonaws.com/role-arn=<iam-role-arn>`. 
 
     ```yaml
@@ -159,9 +161,36 @@ In the case you are using private AWS Elastic Container Registry, as its [author
         name: <custom-service-account-name>
     ```
 
+If you are running agent from any other Kubernetes distribution than EKS:
+
+* Create an [IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html), create and assign an [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create) allowing the following actions over your private registry: `ecr:GetAuthorizationToken`, `ecr:CreateRepository`, `ecr:BatchImportUpstreamImage`, `ecr:BatchGetImage`, `ecr:BatchCheckLayerAvailability`, `ecr:CompleteLayerUpload`, and `ecr:GetDownloadUrlForLayer`.
+* Generate an access key for that user.
+* Save key ID and access key in your Secret Management tool that syncs values to your Kuberenetes cluster, or directly create the Kubernetes Secret in the Testkube Agent namespace.
+* Finally, configure Testkube agent to take those values as environment variables form secret:
+
+    ```yaml
+    testkube-api:
+      extraEnvVars:
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: <secret-name>
+              key: AWS_ACCESS_KEY_ID
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: <secret-name>
+              key: AWS_SECRET_ACCESS_KEY
+        - name: AWS_DEFAULT_REGION
+          valueFrom:
+            secretKeyRef:
+              name: <secret-name>
+              key: AWS_DEFAULT_REGION
+    ```
+
 :::note
 
-Supported only from Testkube Agent API version 2.1.162 in advance.
+Supported only for Testkube Agent API version `2.1.162` or higher, and Testkube Helm Chart version `2.1.254` or higher.
 
 :::
 
