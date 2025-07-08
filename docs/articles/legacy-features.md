@@ -51,3 +51,14 @@ we see Legacy Test Support disabled for the current environment:
 Enabling Legacy Test Support makes the corresponding tabs/panels available in the left navigation toolbar:
 
 ![Legacy Tests Enabled](../img/legacy-tests-enabled.png)
+
+## Enabling Legacy Tests Agent functionality
+
+Testkube Agents have this feature enabled by default, it means the agent will kepp performing all supported operations with these Legacy Tests and Suites even if the [Dashboard functionality](#enabling-legacy-tests-dashboard-functionality) is disabled. To fully disable it's needed to use a flag in the Testkube Agent deployment, use the following snippet to change your `values.yaml`:
+
+```yaml
+testkube-api:
+  next:
+    legacyTests:
+      enabled: false
+```
