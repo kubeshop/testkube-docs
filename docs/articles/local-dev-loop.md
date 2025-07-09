@@ -8,7 +8,7 @@ retrieved from git with those retrieved from your local working copy.
 
 :::note
 The below approach is a temporary workaround for the lack of local-development functionality in Testkube, which is something
-we plan to support natively in the near future.
+we plan to support natively in the future.
 :::
 
 ## Overview
@@ -17,7 +17,7 @@ The workaround consists of the following parts:
 
 1) A local ftp server that provides (preferably) read-only access to the folder containing the contents of the git
    repository that your Workflow is using in its `spec.content.git` configuration
-2) An optional step first in your Workflow that retrieves the contents of your local git repository via ftp 
+2) An optional first step in your Workflow that retrieves the contents of your git repository via ftp from your local machine 
    and therefore overrides any files initially cloned from the actual git repository.
 3) A local Kubernetes Cluster (minikube, kind, etc.) with a Testkube Runner Agent deployed.
 
@@ -165,7 +165,7 @@ This high-level sequence diagram illustrates the execution of the Workflow:
 
 ![Local Development Sequence Diagram](images/local-dev-sequence-diagram.png)
 
-## Next Steps
+## Next Steps 
 
 If this approach is to your liking, you could extract the ftp-retrieval step into a [WorkflowTemplate](/articles/test-workflow-templates) 
 that you include in your Workflows, providing a consistent mechanism for local development (you will still need to add the `localOverride` 
