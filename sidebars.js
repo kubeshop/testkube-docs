@@ -419,6 +419,11 @@ const sidebars = {
                   label: "Enforcing Workflow Policies",
                   id: "articles/enforcing-workflow-policies",
                 },
+                {
+                  type: "doc",
+                  label: "Local Dev Loop",
+                  id: "articles/local-dev-loop",
+                },
               ],
             },
           ],
