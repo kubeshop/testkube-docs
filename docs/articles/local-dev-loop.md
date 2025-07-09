@@ -1,7 +1,12 @@
 # Local Test Development
 
-While developing the actual tests being run with a Test Workflow, it can be cumbersome to have to commit every
-change to git to be able to run tests via Testkube. While there is currently no built-in Workflow functionality that allows
+:::tip
+If you're new to Testkube, make sure you have a thorough understanding of [Test Workflows](/articles/test-workflows) 
+before diving into this topic.
+:::
+
+While developing the actual tests being run with a Test Workflow (for example a Playwright test), it can be cumbersome to have to 
+commit every change to git to be able to run tests via Testkube. While there is currently no built-in Workflow functionality that allows
 content retrieval from a local filesystem (instead of git), the approach outlined below shows how to achieve this with 
 a local ftp server and a dedicated step in your Test Workflow that can be used to (optionally) override the test files
 retrieved from git with those retrieved from your local working copy.
@@ -15,9 +20,9 @@ we plan to support natively in the future.
 
 The workaround consists of the following parts:
 
-1) A local ftp server that provides (preferably) read-only access to the folder containing the contents of the git
+1) A local FTP server that provides (preferably) read-only access to the folder containing the contents of the git
    repository that your Workflow is using in its `spec.content.git` configuration
-2) An optional first step in your Workflow that retrieves the contents of your git repository via ftp from your local machine 
+2) A first step in your Workflow that (optionally) retrieves the contents of your git repository via ftp from your local machine 
    and therefore overrides any files initially cloned from the actual git repository.
 3) A local Kubernetes Cluster (minikube, kind, etc.) with a Testkube Runner Agent deployed.
 
@@ -57,14 +62,19 @@ with those in your local folders.
 ```
 
 A couple of notes:
-- Make sure to set the username/password to the same you had configured in the step above - `testkube`/`testkube` in our example.
-- The various set commands are used to disable SSL verification and configure logging so we can see which files that were transferred (see screenshot below)
+- `condition: config.localOverride` is used to run this step only if the `localOverride` config parameter is `true` - [Read more](/articles/test-workflows-examples-configuration).
 - The step is marked as `optional` to avoid the Workflow failing if the ftp retrieval fails for some reason, you might want to remove this
-  if you want to be sure the ftp retrieval works when enabled.
+  if you want to be sure the ftp retrieval works when enabled - [Read More](/articles/test-workflows-examples-basics#optional-steps).
+- The `shell` command invokes `lftp` with the `host.docker.internal` hostname made available by Docker on MacOS - [see below](#host-network-access).
+- Make sure to set the username/password to the same you had configured in the FTP Server.
+- The various `lftp` `set` commands are used to disable SSL verification and configure logging so we can see which files that 
+  were transferred (see screenshot below)
 
-:::warning
-For the ftp client to be able to reach the ftp server running on your local machine, the local Kubernetes instance needs to mount 
-your local (host) network into the network of the Kubernetes instance itself. 
+:::note
+#### Host Network Access
+
+For the Workflow Step running the ftp client to be able to reach the ftp server running on your local machine, 
+the local Kubernetes instance needs to mount your local (host) network into the network of the Kubernetes instance itself. 
 
 For example, pods running under Kind with Docker Desktop on MacOS can use `host.docker.internal`
 to access the network of the hosting machine (as in the example below).
