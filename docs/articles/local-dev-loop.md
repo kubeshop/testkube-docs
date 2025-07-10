@@ -26,6 +26,10 @@ The workaround consists of the following parts:
    and therefore overrides any files initially cloned from the actual git repository.
 3) A local Kubernetes Cluster (minikube, kind, etc.) with a Testkube Runner Agent deployed.
 
+:::note
+This example uses FTP for convenience, but any client/server setup that allows for file transfer should work; sftp/ssh, etc.
+:::
+
 ### 1. Local FTP Server
 
 In this example, we will use the [Filezilla Server](https://filezilla-project.org/download.php?type=server) but any FTP Server
