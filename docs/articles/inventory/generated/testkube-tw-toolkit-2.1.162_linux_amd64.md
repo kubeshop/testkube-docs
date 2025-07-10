@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:2236d8e30a200ff52a1e92f3aa69e094c21d3c85d805742a122aad3d8cfeb398</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/high-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/medium-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>digest</td><td><code>sha256:2236d8e30a200ff52a1e92f3aa69e094c21d3c85d805742a122aad3d8cfeb398</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 3" src="https://img.shields.io/badge/high-3-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/medium-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 4" src="https://img.shields.io/badge/unspecified-4-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>50 MB</td></tr>
 <tr><td>packages</td><td>201</td></tr>
@@ -12,6 +12,124 @@ hide_table_of_contents: true
 </details>
 
 <table>
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 4" src="https://img.shields.io/badge/U-4-lightgrey"/><strong>git</strong> <code>2.45.3-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/git@2.45.3-r0?arch=x86_64&distro=alpine-3.20.6</code></small><br/>
+
+```dockerfile
+# tw-toolkit.Dockerfile (25:25)
+RUN apk --no-cache add ca-certificates libssl3 git openssh-client
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-48385?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C2.45.4-r0"><img alt="high : CVE--2025--48385" src="https://img.shields.io/badge/CVE--2025--48385-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.45.4-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.45.4-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2025-48384?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C2.45.4-r0"><img alt="high : CVE--2025--48384" src="https://img.shields.io/badge/CVE--2025--48384-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.45.4-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.45.4-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2025-48386?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C2.45.4-r0"><img alt="medium : CVE--2025--48386" src="https://img.shields.io/badge/CVE--2025--48386-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.45.4-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.45.4-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2025-46835?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C2.45.4-r0"><img alt="unspecified : CVE--2025--46835" src="https://img.shields.io/badge/CVE--2025--46835-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.45.4-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.45.4-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2025-46334?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C2.45.4-r0"><img alt="unspecified : CVE--2025--46334" src="https://img.shields.io/badge/CVE--2025--46334-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.45.4-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.45.4-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2025-27614?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C2.45.4-r0"><img alt="unspecified : CVE--2025--27614" src="https://img.shields.io/badge/CVE--2025--27614-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.45.4-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.45.4-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2025-27613?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C2.45.4-r0"><img alt="unspecified : CVE--2025--27613" src="https://img.shields.io/badge/CVE--2025--27613-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.45.4-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.45.4-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/golang-jwt/jwt/v4</strong> <code>4.5.0</code> (golang)</summary>
 
