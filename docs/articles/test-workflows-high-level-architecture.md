@@ -149,6 +149,13 @@ If you are running agent into AWS Elastic Kubernetes Service (EKS):
 
 * Configure your EKS cluster to manage [IAM roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html).
 * Create a [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create) allowing the following actions over your private registry: `ecr:GetAuthorizationToken`, `ecr:CreateRepository`, `ecr:BatchImportUpstreamImage`, `ecr:BatchGetImage`, `ecr:BatchCheckLayerAvailability`, `ecr:CompleteLayerUpload`, and `ecr:GetDownloadUrlForLayer`.
+
+:::note
+
+The actions `ecr:CreateRepository` and `ecr:CompleteLayerUpload` are only needed when AWS ECR is mirroring Docker Hub with a pull through cache rule. If not, pulling and pushing of images to AWS ECR must be done manually or with another automated mechanism.
+
+:::
+
 * Assign IAM Role to `testkube-api-server` service account with annotation: `eks.amazonaws.com/role-arn=<iam-role-arn>`. 
 
     ```yaml
@@ -170,6 +177,13 @@ If you are running agent into AWS Elastic Kubernetes Service (EKS):
 If you are running agent from any other Kubernetes distribution than EKS:
 
 * Create an [IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html), create and assign an [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create) allowing the following actions over your private registry: `ecr:GetAuthorizationToken`, `ecr:CreateRepository`, `ecr:BatchImportUpstreamImage`, `ecr:BatchGetImage`, `ecr:BatchCheckLayerAvailability`, `ecr:CompleteLayerUpload`, and `ecr:GetDownloadUrlForLayer`.
+
+:::note
+
+The actions `ecr:CreateRepository` and `ecr:CompleteLayerUpload` are only needed when AWS ECR is mirroring Docker Hub with a pull through cache rule. If not, pulling and pushing of images to AWS ECR must be done manually or with another automated mechanism.
+
+:::
+
 * Generate an access key for that user.
 * Save key ID and access key in your Secret Management tool that syncs values to your Kuberenetes cluster, or directly create the Kubernetes Secret in the Testkube Agent namespace.
 * Finally, configure Testkube agent to take those values as environment variables form secret:
