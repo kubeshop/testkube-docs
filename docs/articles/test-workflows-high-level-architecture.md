@@ -137,6 +137,12 @@ When the image you are using is stored in the private registry, you may need to 
 
 #### Using Private AWS Elastic Container Registry
 
+:::note
+
+Supported only for Testkube Agent API version `2.1.162` or higher, and Testkube Helm Chart version `2.1.254` or higher.
+
+:::
+
 In the case you are using private AWS Elastic Container Registry (ECR), as its [authorization tokens](https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry_auth.html#registry-auth-token) are only valid for 12 hours, you can ensure persistent Testkube access by configuring a Service Account with IAM Role or Environment Variables, follow these steps:
 
 If you are running agent into AWS Elastic Kubernetes Service (EKS):
@@ -187,12 +193,6 @@ If you are running agent from any other Kubernetes distribution than EKS:
               name: <secret-name>
               key: AWS_DEFAULT_REGION
     ```
-
-:::note
-
-Supported only for Testkube Agent API version `2.1.162` or higher, and Testkube Helm Chart version `2.1.254` or higher.
-
-:::
 
 ### Avoid Fetching Image Metadata
 
