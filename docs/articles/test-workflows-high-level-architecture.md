@@ -137,12 +137,25 @@ When the image you are using is stored in the private registry, you may need to 
 
 #### Using Private AWS Elastic Container Registry
 
+:::note
+
+Supported only for Testkube Agent API version `2.1.162` or higher, and Testkube Helm Chart version `2.1.254` or higher.
+
+:::
+
 In the case you are using private AWS Elastic Container Registry (ECR), as its [authorization tokens](https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry_auth.html#registry-auth-token) are only valid for 12 hours, you can ensure persistent Testkube access by configuring a Service Account with IAM Role or Environment Variables, follow these steps:
 
 If you are running agent into AWS Elastic Kubernetes Service (EKS):
 
 * Configure your EKS cluster to manage [IAM roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html).
 * Create a [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create) allowing the following actions over your private registry: `ecr:GetAuthorizationToken`, `ecr:CreateRepository`, `ecr:BatchImportUpstreamImage`, `ecr:BatchGetImage`, `ecr:BatchCheckLayerAvailability`, `ecr:CompleteLayerUpload`, and `ecr:GetDownloadUrlForLayer`.
+
+:::note
+
+The actions `ecr:CreateRepository` and `ecr:CompleteLayerUpload` are only needed when AWS ECR is mirroring Docker Hub with a pull through cache rule. If not, pulling and pushing of images to AWS ECR must be done manually or with another automated mechanism.
+
+:::
+
 * Assign IAM Role to `testkube-api-server` service account with annotation: `eks.amazonaws.com/role-arn=<iam-role-arn>`. 
 
     ```yaml
@@ -164,6 +177,13 @@ If you are running agent into AWS Elastic Kubernetes Service (EKS):
 If you are running agent from any other Kubernetes distribution than EKS:
 
 * Create an [IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html), create and assign an [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create) allowing the following actions over your private registry: `ecr:GetAuthorizationToken`, `ecr:CreateRepository`, `ecr:BatchImportUpstreamImage`, `ecr:BatchGetImage`, `ecr:BatchCheckLayerAvailability`, `ecr:CompleteLayerUpload`, and `ecr:GetDownloadUrlForLayer`.
+
+:::note
+
+The actions `ecr:CreateRepository` and `ecr:CompleteLayerUpload` are only needed when AWS ECR is mirroring Docker Hub with a pull through cache rule. If not, pulling and pushing of images to AWS ECR must be done manually or with another automated mechanism.
+
+:::
+
 * Generate an access key for that user.
 * Save key ID and access key in your Secret Management tool that syncs values to your Kuberenetes cluster, or directly create the Kubernetes Secret in the Testkube Agent namespace.
 * Finally, configure Testkube agent to take those values as environment variables form secret:
@@ -187,12 +207,6 @@ If you are running agent from any other Kubernetes distribution than EKS:
               name: <secret-name>
               key: AWS_DEFAULT_REGION
     ```
-
-:::note
-
-Supported only for Testkube Agent API version `2.1.162` or higher, and Testkube Helm Chart version `2.1.254` or higher.
-
-:::
 
 ### Avoid Fetching Image Metadata
 
