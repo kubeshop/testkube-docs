@@ -208,6 +208,62 @@ The actions `ecr:CreateRepository` and `ecr:CompleteLayerUpload` are only needed
               key: AWS_DEFAULT_REGION
     ```
 
+#### Using Google Cloud Artifact Registry
+
+:::note
+
+Supported only for Testkube Agent API version `2.1.162` or higher, and Testkube Helm Chart version `2.1.254` or higher.
+
+:::
+
+In the case you are using Google Cloud Artifact Registry (GCAR), as its [authorization tokens](https://cloud.google.com/docs/authentication/token-types#at-lifetime) cannot be valid for more than 12 hours, you can ensure persistent Testkube access by configuring a Google Service Account link with Kubernetes Service Account or Access Key, follow these steps:
+
+In any of both solution you first must have the Google Service Account with right role or permission:
+
+* Create a Google [Service Account](https://cloud.google.com/iam/docs/service-accounts-create).
+* Assign the role Artifact Registry Reader to your Google Service Account:
+
+    ```bash
+    gcloud artifacts repositories add-iam-policy-binding <artifact-repository-name> \
+        --location=<region-id> --project=<project-id> \
+        --member=serviceAccount:<service-account-email> \
+        --role="roles/artifactregistry.reader"
+    ```
+
+To link with a Kubernetes Service Account you must be running Testkube Agent into a Google Cloud Kubernetes Engine (GKE), then follow these instructions:
+
+* Ensure [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#enable_on_clusters_and_node_pools) is enabled in your cluster.
+* Link Google [Service Account to the Testkube Agent Service Account](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#kubernetes-sa-to-iam), by default it creates one called `testkube-api-server`, but ensure your Testkube Agent installation is not customizing that behavior.
+* Annotate Testkube Agent Service Account, use the snippet below as reference to update your `values.yaml`:
+
+    ```yaml
+    testkube-api:
+      serviceAccount:
+        annotations:
+          iam.gke.io/gcp-service-account: <google-service-account-email>
+    ```
+
+If you prefer to use Service Account Access Key then:
+
+* Create [Service Account Access Key](https://cloud.google.com/iam/docs/keys-create-delete#creating) and download credential JSON.
+* Create a Kubernetes Secret with the credential JSON.
+* Finally configure Testkube Agent to mount credential JSON, use the following snippet to update your `values.yaml`:
+
+    ```yaml
+    testkube-api:
+      extraEnvVars:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /google/credentials.json
+      additionalVolumes:
+        - name: google-credentials
+          secret:
+            secretName: <google-credentials-secret-name>
+      additionalVolumeMounts:
+        - name: google-credentials
+          mountPath: /google/
+          readOnly: true
+    ```
+
 ### Avoid Fetching Image Metadata
 
 Companies may have a strict policy of not storing the credentials for the Container Registry in the Kubernetes' Secret, or disallow Secrets at all.
