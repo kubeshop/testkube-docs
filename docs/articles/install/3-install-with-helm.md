@@ -32,7 +32,7 @@ Using the wrong chart causes one of the Dex or API Ingresses to be ignored when 
 
 ## Installing
 
-Install the Testkube Helm Chart from OCI registry:
+Install the Testkube Helm Chart:
 
 ```bash
 helm upgrade --install \
