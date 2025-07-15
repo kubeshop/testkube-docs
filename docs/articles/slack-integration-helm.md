@@ -29,7 +29,7 @@ helm upgrade \
   --namespace testkube \
   --create-namespace \
   --set testkube-api.slackToken="YOUR_SLACK_TOKEN" \
-  kubeshop/testkube
+  testkube oci://registry-1.docker.io/kubeshop/testkube --version <version>
 ```
 
 To see all the values that can be configured, check the Helm chart documentation [here](/articles/install/install-with-helm). 
@@ -79,7 +79,7 @@ helm upgrade \
   --create-namespace \
   --namespace testkube \
   testkube \
-  kubeshop/testkube \
+  oci://registry-1.docker.io/kubeshop/testkube --version <version> \
   --set testkube-api.slackToken="$SLACK_BOT_TOKEN" \
   --set testkube-api.slackConfig="$(cat config.yaml)"
 ```
