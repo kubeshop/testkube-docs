@@ -44,7 +44,7 @@ Use the following command to install the Helm Chart from OCI Registry:
      --set 'runner.orgId=<your:tkcorg_:organization_id>' \
      --set 'runner.secret=<your:tkckey_run_:key>' \
      --set 'cloud.url=agent.testkube.io:443' \
-     my-runner oci://registry-1.docker.io/kubeshop/testkube-enetrprise --version <version>
+     my-runner oci://registry-1.docker.io/kubeshop/testkube-enterprise --version <version>
    ```
 
 You can also use own `values.yaml` file, based on [our defaults](https://github.com/kubeshop/helm-charts/blob/main/charts/testkube-runner/values.yaml):
@@ -79,7 +79,7 @@ This enables you to install the runner using only `helm`:
      --set 'runner.orgId=<your:tkcorg_:organization_id>' \
      --set 'runner.register.token=<your:tkcapi_:key>' \
      --set 'cloud.url=agent.testkube.io:443' \
-     my-runner oci://registry-1.docker.io/kubeshop/testkube-enetrprise --version <version>
+     my-runner oci://registry-1.docker.io/kubeshop/testkube-enterprise --version <version>
    ```
    
 Or with a values file:
