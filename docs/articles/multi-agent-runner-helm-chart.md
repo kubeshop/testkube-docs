@@ -35,14 +35,7 @@ Policy:
 
 ### Helm install
 
-1. Add the Kubeshop Helm repository:
-   ```sh
-   helm repo add kubeshop https://kubeshop.github.io/helm-charts
-   ```
-2. If this repo already exists, run `helm repo update` to retrieve
-   the `latest` versions of the packages.
-   You can then run `helm search repo testkube` to see the charts.
-3. Install the Helm Chart:
+Use the following command to install the Helm Chart from OCI Registry:
    ```sh
    helm upgrade --install \
      --create-namespace \
@@ -51,7 +44,7 @@ Policy:
      --set 'runner.orgId=<your:tkcorg_:organization_id>' \
      --set 'runner.secret=<your:tkckey_run_:key>' \
      --set 'cloud.url=agent.testkube.io:443' \
-     my-runner kubeshop/testkube-runner
+     my-runner oci://registry-1.docker.io/kubeshop/testkube-enetrprise --version <version>
    ```
 
 You can also use own `values.yaml` file, based on [our defaults](https://github.com/kubeshop/helm-charts/blob/main/charts/testkube-runner/values.yaml):
@@ -78,13 +71,6 @@ This enables you to install the runner using only `helm`:
 
 1. Retrieve the helm instructions including runner join token for the target environment:
    ![Create self-registering runner UI](images/create-runner-helm.png)
-2. Add the Kubeshop Helm repository:
-   ```sh
-   helm repo add kubeshop https://kubeshop.github.io/helm-charts
-   ```
-3. If this repo already exists, run `helm repo update` to retrieve
-   the `latest` versions of the packages.
-   You can then run `helm search repo testkube` to see the charts.
 4. Install the Helm Chart:
    ```sh
    helm upgrade --install \
@@ -93,7 +79,7 @@ This enables you to install the runner using only `helm`:
      --set 'runner.orgId=<your:tkcorg_:organization_id>' \
      --set 'runner.register.token=<your:tkcapi_:key>' \
      --set 'cloud.url=agent.testkube.io:443' \
-     my-runner kubeshop/testkube-runner
+     my-runner oci://registry-1.docker.io/kubeshop/testkube-enetrprise --version <version>
    ```
    
 Or with a values file:

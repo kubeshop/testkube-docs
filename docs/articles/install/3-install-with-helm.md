@@ -32,34 +32,14 @@ Using the wrong chart causes one of the Dex or API Ingresses to be ignored when 
 
 ## Installing
 
-1. Add the Testkube Helm repository:
-
-```bash
-helm repo add testkubeenterprise https://kubeshop.github.io/testkube-cloud-charts
-```
-
-2. Create and configure your values.yaml:
-
-```bash
-helm show values testkubeenterprise/testkube-enterprise > values.yaml
-```
-
-Alternatively, export one of our profiles:
-
-```
-testkube init <profile> --export > values.yaml
-```
-
-Currently available profiles are: `demo`.
-
-3. Install the Testkube Helm Chart:
+Install the Testkube Helm Chart from OCI registry:
 
 ```bash
 helm upgrade --install \
   --create-namespace \
   --namespace testkube \
    -f values.yaml \
-  testkube testkubeenterprise/testkube-enterprise
+  testkube oci://registry-1.docker.io/kubeshop/testkube --version <version>
 ```
 
 ## General Settings

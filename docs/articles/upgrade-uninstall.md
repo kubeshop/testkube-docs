@@ -9,17 +9,8 @@ There are two ways to upgrade Testkube:
 
 ### Using Helm
 
-By default, the namespace for the installation will be `testkube`.
-To upgrade the `testkube` chart if it was installed into the default namespace:
-
 ```sh
-helm upgrade my-testkube kubeshop/testkube
-```
-
-And for a namespace other than `testkube`:
-
-```sh
-helm upgrade --namespace namespace_name my-testkube kubeshop/testkube
+helm upgrade --namespace namespace_name my-testkube oci://registry-1.docker.io/kubeshop/testkube --version <version>
 ```
 
 ### Using Testkube's CLI

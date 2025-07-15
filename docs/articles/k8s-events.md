@@ -13,7 +13,7 @@ helm upgrade \
   --create-namespace \
   --namespace testkube \
   testkube \
-  kubeshop/testkube \
+  oci://registry-1.docker.io/kubeshop/testkube --version <version> \
   --set testkube-api.enableK8sEvents=true
 ```
 
