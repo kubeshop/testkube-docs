@@ -270,8 +270,8 @@ helm install testkube oci://registry-1.docker.io/kubeshop/testkube --version <ve
 Please notice that since we've just installed MongoDB with a `testkube-mongodb` Helm release name, you are not required to reconfigure the Testkube API MongoDB connection URI. If you've installed with a different name/namespace, please adjust `--set testkube-api.mongodb.dsn: "mongodb://testkube-mongodb:27017"` to your MongoDB service.
 
 ### Using PostgreSQL as a database
-You can run Testkube Standalone Agent using PostgreSQL instead of MongoDB. It's an experimental option and deprecated features are not supported.
-In order to use it, please change the setting in your helm chart `values.yaml` file. Enable postgresql options and disable mogodb ones
+You can run the Testkube Standalone Agent with PostgreSQL instead of MongoDB. This is currently an experimental feature, and deprecated functionalities are not supported.
+To enable PostgreSQL, update the values.yaml file in your Helm chart: enable the PostgreSQL settings and disable the MongoDB options.
 
 ```yaml
 mongodb:
@@ -286,7 +286,6 @@ testkube-api:
     enabled: true    
     dsn: <postgresql dsn (postgres://...)>
 ```
-
 
 ### Deploying on AWS
 
