@@ -3,14 +3,24 @@ import TabItem from "@theme/TabItem";
 
 # Testkube Quickstart
 
-In this tutorial you will learn how to get started with Testkube, run your first Test Workflow, inspect its executions, and
-integrate it with your CI/CD pipeline(s).
+In this tutorial you will learn how to get started with Testkube, run your first Test Workflow, inspect its executions, and integrate it with your CI/CD pipeline(s). If you’d like to learn more about Testkube before deploying, [schedule a conversation with our Solutions Engineering team](https://testkube.io/demo).
+ 
 
-## 1. Install or Sign in to Testkube
+:::note
+Testkube is composed of two core components. The first is the Control Plane, which exposes the UI Dashboard, and facilitates management of Test Workflows, data, users, etc. The second component is the Test Execution Agent. One or more Agents can connect to a Control Plane, usually with one Agent per cluster, and do the work of running tests (scheduling jobs and managing pods). Learn more about our product architecture in the [Installation Overview](https://www.notion.so/articles/install/overview).
 
-Testkube has flexibility in its deployments (learn more in the [Installation Overview](/articles/install/overview)).
+The Testkube Control Plane has flexibility in its deployment: 
+
 - **Testkube On-Prem** runs both the Control Plane and Test Execution Agents in your infrastructure.
 - **Testkube Cloud Control Plane** runs the Control Plane in our cloud and the Test Execution Agents in your infrastructure.
+
+With that in mind, we have a few recommendations on how to start with Testkube: 
+
+- If you are looking to evaluate Testkube before sharing it with others, we recommend using the [Evaluation Install](https://docs.testkube.io/articles/install/install-with-cli). This runs on your local machine, and is deployed into a pre-existing light-weight Kubernetes distribution (like [minikube](https://minikube.sigs.k8s.io/docs/)). This guide assumes an Evaluation Installation.
+- If you are looking to share Testkube with your team, then we recommend using the Cloud Control Plane, or [deploying an On-Prem Control Plane via Helm](https://docs.testkube.io/articles/install/install-with-helm) to a cluster which your team, or partner DevOps team, can manage. If you self host, we recommend deploying the Agent and Control Plane to the same cluster and namespace, unless your use case requires otherwise.
+:::
+
+## 1. Install or Sign in to Testkube
 
 <Tabs groupId="tutorial-install-cli">
 <TabItem value="on-prem" label="Testkube On-Prem" default>
