@@ -73,8 +73,8 @@ Usage shows
 
 - Members - the number of Member Seats currently used from your license/plan.
 - Environments - the number of Testkube Environments currently created against the number in your license/plan.
-- Fixed Agents - the number of Agents using a Fixed License - [Read More](/articles/install/multi-agent#licensing-for-testkube-agents).
-- Concurrent Floating Runners - the number of Floating Agents concurrently running Workflows over the last 30 days - [Read More](/articles/install/multi-agent#licensing-for-testkube-agents).
+- Fixed Agents - the number of Runner Agents using a Fixed License - [Read More](/articles/install/multi-agent#licensing-for-runner-agents).
+- Concurrent Floating Runner Agents - the number of Agents assigned a Floating license concurrently running Workflows over the last 30 days - [Read More](/articles/install/multi-agent#licensing-for-runner-agents).
 
 :::tip
 For more details about the Testkube offerings, check out the Testkube [Pricing Page](https://testkube.io/pricing).
