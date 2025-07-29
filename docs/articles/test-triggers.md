@@ -105,10 +105,10 @@ spec:
         headers: test trigger condition probe headers to submit
 ```
 
-### Targeting specific Runners 
+### Targeting specific Runner Agents 
 
 With the introduction of [Multi-Agent Environments](/articles/install/multi-agent) you can optionally specify
-which Runner(s) a Triggered execution should run on. For example
+which Runner Agent(s) a Triggered execution should run on. For example
 
 ```yaml
 spec:
@@ -119,8 +119,8 @@ spec:
 ...
 ```
 
-Will trigger an Execution on any Global Runner with the `application: accounting` label, For more details,
-see our guide on [Runner Targeting](/articles/install/multi-agent#targeting-runners-in-testkube-resources).
+Will trigger an Execution on any Global Runner Agent with the `application: accounting` label, For more details,
+see our guide on [Runner Agent Targeting](/articles/install/multi-agent#targeting-runner-agents-in-testkube-resources).
 
 ### Action Parameters
 
