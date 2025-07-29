@@ -10,7 +10,7 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 
 ## Monthly Release v1.17.0 (2025-07-28)
 
-This release is available in Helm Chart [to be updated].
+This release is available in Helm Chart 2.323.0.
 
 ### What's new!
 
@@ -20,21 +20,13 @@ You can now **filter workflow executions on the dashboard by name, labels, or st
 
 **Workflow Templates** now support **runner targeting** directly in the template spec. This allows you to define which runners should execute your workflows once, and reuse that logic across environments and pipelines. [Learn more in the docs →](https://docs.testkube.io/articles/test-workflows#runner-target)
 
-We’ve introduced new execution event types: **Canceled** and **Not Passed**. These provide clearer distinction between manual cancellations, validation failures, and system-aborted executions, making it easier to reason about what happened and why.
-
-Verbose logging for Cloud API and a new **debug mode for the Worker Service** are now available. You can enable debug logging by setting `worker.debug=true` in the Helm chart, making it easier to troubleshoot issues in complex deployments.
-
-Finally, we’ve removed the **WebSocket Ingress** from the default install to simplify the deployment footprint and reduce maintenance overhead.
-
 ### Improvements and fixes
 
 - Added workflow health status to the `status` subresource of the Workflow object, aligning with Kubernetes best practices and improving accessibility.
-- Added filters to the dashboard page, allowing users to filter workflow executions by name, labels, or status.
-- Workflow Templates: you can now target runners within Workflow Template Custom Resources, allowing reuse across multiple workflows.
 - Added `Canceled` and `Not Passed` events to provide better differentiation between manual stops and failed validations.
-- Enabled verbose logging for Cloud API and added debug mode for Worker Service (`worker.debug=true` in Helm values).
-- Moved `testkube-agent` and `testkube-runner` Helm charts to the OCI registry for more reliable and standardized distribution.
-- Removed deprecated WebSocket Ingress from the default installation.
+- Enabled verbose logging for the Control Plane API and added debug mode for Worker Service (`testkube-worker-service.enableDebugMode=true` in Helm values).
+- Both `testkube-agent` and `testkube-runner` Helm charts are now being published to the OCI registry. They will remain accessible via the original Helm repository as well.
+- Simplified network configuration by using the default Ingress for WebSockets used by clients. The separate WebSocket Ingress can safely be removed without requiring other changes.
 
 ## Patch Release v1.16.3 (2025-07-11)
 
