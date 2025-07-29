@@ -8,6 +8,26 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Monthly Release v1.17.0 (2025-07-28)
+
+This release is available in Helm Chart 2.323.0.
+
+### What's new!
+
+This release focuses on usability improvements, better observability, and more powerful reuse of workflow templates.
+
+You can now **filter workflow executions on the dashboard by name, labels, or status**, making it easier to focus on relevant runs during debugging, monitoring, or audits.
+
+**Workflow Templates** now support **runner targeting** directly in the template spec. This allows you to define which runners should execute your workflows once, and reuse that logic across environments and pipelines. [Learn more in the docs →](https://docs.testkube.io/articles/test-workflows#runner-target)
+
+### Improvements and fixes
+
+- Added workflow health status to the `status` subresource of the Workflow object, aligning with Kubernetes best practices and improving accessibility.
+- Added `Canceled` and `Not Passed` events to provide better differentiation between manual stops and failed validations.
+- Enabled verbose logging for the Control Plane API and added debug mode for Worker Service (`testkube-worker-service.enableDebugMode=true` in Helm values).
+- Both `testkube-agent` and `testkube-runner` Helm charts are now being published to the OCI registry. They will remain accessible via the original Helm repository as well.
+- Simplified network configuration by using the default Ingress for WebSockets used by clients. The separate WebSocket Ingress can safely be removed without requiring other changes.
+
 ## Patch Release v1.16.3 (2025-07-11)
 
 This release is available in Helm Chart v2.322.3
