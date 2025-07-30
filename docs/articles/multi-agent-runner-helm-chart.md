@@ -44,7 +44,7 @@ Use the following command to install the Helm Chart from OCI Registry:
      --set 'runner.orgId=<your:tkcorg_:organization_id>' \
      --set 'runner.secret=<your:tkckey_run_:key>' \
      --set 'cloud.url=agent.testkube.io:443' \
-     my-runner oci://registry-1.docker.io/kubeshop/testkube-enterprise --version <version>
+     my-runner oci://registry-1.docker.io/kubeshop/testkube-runner --version <version>
    ```
 
 You can also use own `values.yaml` file, based on [our defaults](https://github.com/kubeshop/helm-charts/blob/main/charts/testkube-runner/values.yaml):
@@ -59,19 +59,19 @@ cloud:
   url: "agent.testkube.io:443"
 ```
 
-## Self-registering runner Helm install
+## Self-registering Runner Agent Helm install
 
-Sometimes it may be desirable to allow runners to create themselves automatically on first run (without using the CLI),
+Sometimes it may be desirable to allow Runner Agents to create themselves automatically on first run (without using the CLI),
 for example when using an ephemeral testing environment that is programmatically created.
 
-Each environment has a Runner Join Token assigned to it. This API key can be used for creating agents automatically when
-the agent itself first starts.
+Each environment has a Runner Agent Join Token assigned to it. This API key can be used for creating Runner Agents automatically when
+the Runner Agent itself first starts.
 
-This enables you to install the runner using only `helm`:
+This enables you to install the Runner Agent using only `helm`:
 
-1. Retrieve the helm instructions including runner join token for the target environment:
+1. Retrieve the helm instructions including Runner Agent join token for the target environment:
    ![Create self-registering runner UI](images/create-runner-helm.png)
-4. Install the Helm Chart:
+2. Install the Helm Chart:
    ```sh
    helm upgrade --install \
      --create-namespace \
@@ -79,7 +79,7 @@ This enables you to install the runner using only `helm`:
      --set 'runner.orgId=<your:tkcorg_:organization_id>' \
      --set 'runner.register.token=<your:tkcapi_:key>' \
      --set 'cloud.url=agent.testkube.io:443' \
-     my-runner oci://registry-1.docker.io/kubeshop/testkube-enterprise --version <version>
+     my-runner oci://registry-1.docker.io/kubeshop/testkube-runner --version <version>
    ```
    
 Or with a values file:
@@ -94,21 +94,21 @@ cloud:
   url: "agent.testkube.io:443"
 ```
 
-### Limitations of self-registering runners
+### Limitations of self-registering Runner Agents
 
-- Runners must be able to create Kubernetes `Secrets` in their namespace.
+- Runner Agents must be able to create Kubernetes `Secrets` in their namespace.
   These secrets are used to store the runner's ID and connection key which are generated during registration.
-  If the runner cannot create a `Secret` it will self-register every time it starts up.
-- Runners will not deregister themselves during `helm uninstall`.
-  Instead self-registered runners must be manually removed using the UI or CLI.
+  If the Runner Agent cannot create a `Secret` it will self-register every time it starts up.
+- Runner Agents will not deregister themselves during `helm uninstall`.
+  Instead, self-registered Runner Agents must be manually removed using the UI or CLI.
 
 ## Cookbook
 
 There are common things that you may want to set up in your values.
 
-### Install Runner in one namespace and run executions in another
+### Install Runner Agent in one namespace and run executions in another
 
-To separate concerns, you may separate your runners from the execution:
+To separate concerns, you may separate your Runner Agents from the execution:
 
 ```yaml
 execution:
@@ -137,7 +137,7 @@ Read more about [ServiceAccounts below](#service-accounts)
 
 ### Support additional namespaces
 
-You can also allow the runner to schedule in multiple namespaces.
+You can also allow the Runner Agent to schedule in multiple namespaces.
 
 In your `values.yaml` file:
 
@@ -160,10 +160,10 @@ spec:
 
 ### Setting Global Template
 
-For each runner, you may set a custom Global Template.
+For each Runner Agent, you may set a custom Global Template.
 It will be used as the foundation for every execution in this Runner Agent.
 
-It's useful for example to set up OpenShift's security context, that will be separate for each runner:
+It's useful, for example, to set up OpenShift's security context that will be separate for each Runner Agent:
 
 ```yaml
 globalTemplate:
@@ -180,9 +180,10 @@ globalTemplate:
        runAsNonRoot: true
 ```
 
-### Register as a floating runner
+### Register as a floating Runner Agent
 
-With self-registering runners you may wish to have them created as a floating runner:
+Self-registering Runner Agents are by default assigned a fixed license, if you wish to assign them a floating license 
+instead you can do as follows:
 
 ```yaml
 runner:
@@ -190,14 +191,18 @@ runner:
     floating: true
 ```
 
+:::tip
+Read more about floating licenses at [Licensing for Runner Agents](/articles/install/multi-agent#licensing-for-runner-agents)
+:::
+
 ## Service Accounts
 
 The Runner Agent Helm Chart creates two kinds of ServiceAccounts:
 
 - `exec-sa-testkube` - ServiceAccount for the Execution Pods; it allows the Execution to schedule and monitor Pods for `services` and `parallel` syntaxes.
-- `agent-sa-testkube` - ServiceAccount for Agent Pods; it allows the Agent to (1) create pods for executions, and (2) read configmaps/secrets in own namespace.
+- `agent-sa-testkube` - ServiceAccount for Agent Pods; it allows the Runner Agent to (1) create pods for executions, and (2) read configmaps/secrets in own namespace.
 
-The `agent-sa-testkube` ServiceAccount needs to be in the Agent's namespace, as it's used by the Agent's Pod.
+The `agent-sa-testkube` ServiceAccount needs to be in the Runner Agent's namespace, as it's used by the Runner Agent's Pod.
 The `exec-sa-testkube` ServiceAccounts are deployed to the namespaces where the executions will run as they need to use them in the above situations.
 
 :::note
@@ -208,10 +213,10 @@ The `-testkube` suffix in the ServiceAccount names above and below might differ 
 See the [Chainsaw Example](/articles/examples/chainsaw-basic) to see how a custom ServiceAccount can be used in your Workflow.
 :::
 
-### Example: Using the same namespace for Agent and Executions
+### Example: Using the same namespace for Runner Agent and Executions
 
-By default, we deploy both Agent and Executions to the same namespace the Helm Chart is released to. 
-Then, `agent-sa-testkube` and `exec-sa-testkube` are deployed in that namespace. `agent-sa-testkube` has wider permissions and is used by Agent, 
+By default, we deploy both Runner Agent and Executions to the same namespace the Helm Chart is released to. 
+Then, `agent-sa-testkube` and `exec-sa-testkube` are deployed in that namespace. `agent-sa-testkube` has wider permissions and is used by Runner Agent, 
 `exec-sa-testkube` has smaller permissions and is used by Executions.
 
 ###  Example: Avoid ServiceAccount for the executions
@@ -237,10 +242,10 @@ This blocks the ability of using `services` and `parallel` though, unless you wi
 Read more about Workflow `pod` configuration at [Test Workflows - Job and Pod Configuration](/articles/test-workflows-job-and-pod).
 :::
 
-### Example: Run executions in a different namespace than the Agent
+### Example: Run executions in a different namespace than the Runner Agent
 
-For better security, you may isolate the executions to be running in a different namespace than the Agent. This way, you ensure that they 
-cannot i.e. read Agent's data (like Agent Token), or anything else. Also, this could help to i.e. deploy multiple runners in the same namespace, 
+For better security, you may isolate the executions to be running in a different namespace than the Runner Agent. This way, you ensure that they 
+cannot read Runner Agent's data (like Agent Token), or anything else. Also, this could help to deploy multiple Runner Agents in the same namespace 
 while having the executions for each of them in a different one.
 
 To achieve that, you can use such Helm Chart values:
@@ -269,7 +274,7 @@ execution:
 
 ### Example: Multiple Namespaces
 
-To allow Runner to support  
+To allow Runner Agent to support  
 
 ```yaml
   job:

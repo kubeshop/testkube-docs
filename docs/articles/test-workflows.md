@@ -42,7 +42,7 @@ spec:
   execution: # Optional execution properties
     tags: # execution tags
       ...
-    target: # target specific Runners
+    target: # target specific Runner Agents
       ...
   steps: # Ordered steps for execution (supports nesting)
     - name: ... # name of step
@@ -377,14 +377,13 @@ spec:
 
 > **Info:** Testkube uses the standard Kubernetes Cron format. See [Cron Format on Wikipedia](https://en.wikipedia.org/wiki/Cron) and [tz database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for details. If no timezone is specified, Testkube will use the cluster’s local time.
 
-
-### Targeting specific Runners in CronJobs
+### Targeting specific Runner Agents in CronJobs
 
 With the introduction of [Multi-Agent Environments](/articles/install/multi-agent) you can optionally specify
-which Runner(s) a CronJob execution should run on. For example
+which Runner Agent(s) a CronJob execution should run on. For example
 
 ```yaml
-...
+---
 - cronjob:
     cron: "*/5 * * * *"
     labels:
@@ -397,11 +396,10 @@ which Runner(s) a CronJob execution should run on. For example
       match:
         application:
           - accounting
-...
 ```
 
-Will run this CronJob on any Global Runner with the `application: accounting` label, for more details,
-see our guide on [Runner Targeting](/articles/install/multi-agent#targeting-runners-in-testkube-resources).
+Will run this CronJob on any Global Runner Agent with the `application: accounting` label, for more details,
+see our guide on [Runner Agent Targeting](/articles/install/multi-agent#targeting-runner-agents-in-testkube-resources).
 
 ## Tags
 
@@ -414,26 +412,29 @@ spec:
       name1: value1
       name2: value2
 ```
+
 For more details, see our guide on [Filtering Test Workflow Executions Using Tags](/articles/filtering-test-workflow-executions-using-tags).
 
-## Runner Target
+## Runner Agent Target
 
-With the introduction of [Multi-Agent Environments](/articles/install/multi-agent) you can optionally specify 
-which Runner(s) this Workflow should run on. For example
+With the introduction of [Multi-Agent Environments](/articles/install/multi-agent) you can optionally specify
+which Runner Agent(s) this Workflow should run on. For example:
 
 ```yaml
-...
 spec:
   execution:
     target:
       match:
         application:
           - accounting
-...
 ```
 
-Will run on any Global Runner with the `application: accounting` label, For more details, 
-see our guide on [Runner Targeting](/articles/install/multi-agent#targeting-runners-in-testkube-resources).
+Will run on any Global Runner Agent with the `application: accounting` label. You can use this targeting with either Workflows or Workflow Templates.
+
+- A Workflow target will have priority over targets within Workflow Templates.
+- A Workflow using Workflow Templates may only target Runner Agents with at most one template, or an error will occur when scheduled.
+
+For more details, see our guide on [Runner Agent Targeting](/articles/install/multi-agent#targeting-runner-agents-in-testkube-resources).
 
 ## Templates
 

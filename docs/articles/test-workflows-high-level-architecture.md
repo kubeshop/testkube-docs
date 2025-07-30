@@ -220,7 +220,7 @@ In the case you are using Google Cloud Artifact Registry (GCAR), as its [authori
 
 In any of both solution you first must have the Google Service Account with right role or permission:
 
-* Create a Google [Service Account](https://cloud.google.com/iam/docs/service-accounts-create).
+* Create a Google [Service Account](https://cloud.google.com/iam/docs/service-accounts-create), it must belong to the Google project in which the Artifact Registry is located.
 * Assign the role Artifact Registry Reader to your Google Service Account:
 
     ```bash
