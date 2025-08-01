@@ -70,3 +70,12 @@ Helps you navigate/open used templates for editing:
 
 ![Workflow Editor Clickable Template References](images/workflow-editor-click-template-reference.png)
 
+## Ignored Changes
+
+Testkube stores the current health metrics of a Workflow under the status property, which is also visible in the editor:
+
+![Ignored Editor Changes](images/ignored-editor-changes.png)
+
+Any changes made to this section will be ignored when saving.
+
+
