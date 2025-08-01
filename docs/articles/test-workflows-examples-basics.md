@@ -269,6 +269,21 @@ It’s possible to automatically retry the step on a failure (or any other condi
 
 ![Step Orchestration](../img/step-orchestration.png)
 
+### Step Timeouts
+
+Steps can have individual `timeout` values to constrain their execution time. If the timeout is exceeded, the step and containing Workflow fail accordingly.
+
+The regex-pattern for the timeout is  
+
+```
+^((0|[1-9][0-9]*)h)?((0|[1-9][0-9]*)m)?((0|[1-9][0-9]*)s)?((0|[1-9][0-9]*)ms)?$
+```
+so valid values include `10s`, `1m`, `1h30m`, `500ms`, etc.
+
+:::tip
+If you want to ensure that steps _after_ a step with a timeout always execute, either mark the step as `optional` or mark the following steps with `condition: always`.
+:::
+
 ## Content Files
 
 ### Provide Static Files
@@ -345,7 +360,7 @@ spec:
 
 ![Artifacts](../img/artifacts.png)
 
-## Test Suite Like Runs
+## Test Suite Like Workflows
 
 ### Run Dependent Test Workflows or Tests
 
@@ -372,7 +387,7 @@ spec:
 ![Dependent Tests](../img/dependent-tests.png)
 
 :::tip
-Read more about Workflow orchestration at [Test Suites](/articles/test-workflows-test-suites).
+Read more about Workflow orchestration at [Workflow Orchestration](/articles/test-workflows-test-suites).
 :::
 
 ## Job/Pod Configuration
