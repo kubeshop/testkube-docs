@@ -42,7 +42,7 @@ You need to create a copy of the Workflow Template with the new name and delete 
 
 This panel allows you to assign this Workflow Template to a Resource Group - [Read More](/articles/resource-groups#managing-resources-in-a-resource-group).
 
-![Workflow Template Resource Group](install/workflow-template-resource-group.png)
+![Workflow Template Resource Group](images/workflow-template-resource-group.png)
 
 ### Definition
 
