@@ -1,96 +1,44 @@
-# Testkube Installation Overview
+import DocCard from "../src/theme/DocCard";
+import clsx from "clsx";
 
-<div style={{ display: 'flex', gap: '40px', marginBottom: '20px' }}>
-  <div style={{ flex: 1 }}>
-    ## Overview
 
-    Testkube contains two main components:
+## Learn More About Testkube
 
-    1. The **Testkube Control Plane**, which includes the [Dashboard](/articles/testkube-dashboard-explore), Storage for Results/Logs/Artifacts, User/Role mgmt, Insights, 3rd party integrations, etc.
+Once you're up to speed and running your first tests, dive in and learn more about Testkube!
 
-    2. The **Testkube Agent**, which executes your tests, collects test execution logs/results and listens for Kubernetes Events.
+export const LearnCardList = (input) => (
+  <section className={clsx("row indent--min")}>
+    {[
+      {
+        icon: "🛠",
+        label: "Core Concepts",
+        description:
+          "Learn about Testkube Core Concepts and how it fits into the Software Testing Lifecycle (STLC).",
+        href: "/articles/testing-pipeline",
+        type: "intro",
+      },
+      {
+        icon: "🛠",
+        label: "Using Testkube",
+        description:
+          "Learn about Workflows, Templates, Triggers, Results and Reporting to get the most of Testkubes features.",
+        href: "/articles/using-testkube",
+        type: "intro",
+      },
+      {
+        icon: "🛠",
+        label: "Examples & Guides",
+        description:
+          "See example Workflows for your favorite testing tools, including k6, playwright, cypress, jmeter, and postman.",
+        href: "/articles/examples/overview",
+        type: "intro",
+      },
+    ].map((item, i) => (
+      <article key={i} className="col padding--sm intro__card">
+        <DocCard item={item} />
+      </article>
+    ))}
+  </section>
+);
 
-       The Agent is **Open-Source** and can be deployed both Standalone and connected to the Control Plane.
-
-       **The agent is _always_ deployed by you in your own infrastructure.**
-  </div>
-  <div style={{ flex: 1 }}>
-    <div style={{ textAlign: 'center' }}>
-      <img src="/img/testkube-components.png" alt="Testkube Components" />
-    </div>
-  </div>
-</div>
-
-## Deployment Options
-
-You can deploy Testkube in one of the following ways:
-
-| Deployment Option         | &nbsp;&nbsp;&nbsp;Licensing&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Agent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Control&nbsp;Plane&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;Dashboard&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
-|---------------------------|:---------------------------------------------:|:-----------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------:|:---------------------------------------------------------------:|
-| **On-Prem Control Plane** |   [Commercial](https://testkube.io/pricing)   |                                             Hosted by you                                             |                                                   Hosted by you                                                    |                       ✅                       |                                ✅                                |
-| **Cloud Control Plane**   |   [Commercial](https://testkube.io/pricing)   |                                             Hosted by you                                             |                                                 Hosted by Testkube                                                 |                       ✅                       |                                ✅                                |
-| **Standalone Agent**      |     [Open Source](/articles/open-source)      |                                             Hosted by you                                             |                                                         ❌                                                          |                       ❌                       |                                ✅                                |
-
-The high-level deployment architecture and how to get started with each of these is described below.
-
-:::note
-An architectural overview of Testkube and its components is available in the [Architecture Reference](../architecture).
-:::
-
-## On-Prem Control Plane
-
-Testkube with the On-Prem Control Plane runs entirely in your infrastructure and can also run in air-gapped environments.
-The default installation deploys both the Control Plane and a single Testkube Agent within the same namespace.
-
-You can install a preconfigured version of Testkube On-Prem [with the CLI][install-cli] for an out-of-the-box experience
-or install [with Helm][install-helm] for more configurability in production scenarios.
-
-In either case, you will need to [request a trial license](https://testkube.io/download) that will be required
-during the installation process.
-
-A high-level deployment architecture for Testkube On-Prem is shown below.
-
-:::tip
-Check out Testkubes [Multi-Agent functionality](/articles/install/multi-agent) to learn how you can run your tests
-in as many fixed and ephemeral cluster/namespaces as you need.
-:::
-
-![Deployment with single agent](../../img/architecture-default.jpeg)
-
-:::tip
-Check out [Helm Components](/articles/helm-components) to see all the actual components used by Testkube.
-:::
-
-## Cloud Control Plane
-
-When using the Testkube Cloud Control Plane, the Control Plane is managed by the Testkube team, you only have to install the
-Testkube Agent in your infrastructure wherever you want to run your tests.
-
-To get started, visit https://app.testkube.io and sign up for a trial account. During the onboarding you will be
-prompted to create an initial Testkube Environment, which will provide you with the required CLI/Helm commands to
-deploy the corresponding Testkube Agent in your infrastructure - [Read More](/testkube-pro/articles/environment-management#creating-a-new-environment)
-
-A high-level deployment architecture for the Testkube Cloud Control Plane is shown below.
-
-![Deployment with managed control plane](../../img/architecture-managed.jpeg)
-
-:::info
-Even when using the Testkube Cloud Control Plane, your actual tests are never run or stored on our servers, only test
-logs and artifacts will be stored.
-:::
-
-## Standalone Agent
-
-The Testkube Agent is Open Source and can be deployed without being connected to the Testkube
-Control Plane. All management and test execution tasks are done through the [Testkube CLI](/articles/cli).
-
-- Learn more about how to [deploy the Standalone Agent][deploy-standalone].
-
-![Deployment with standalone agent](../../img/architecture-standalone.jpeg)
-
-[cloud]: https://app.testkube.io/
-[install-cli]: /articles/install/install-with-cli
-[install-helm]: /articles/install/install-with-helm
-[deploy-standalone]: /articles/install/standalone-agent
-[deploy-demo]: /articles/install/install-with-cli#deploy-an-on-prem-demo
-[testkube-repo]: https://github.com/kubeshop/testkube
+<LearnCardList />
