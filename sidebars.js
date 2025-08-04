@@ -25,7 +25,6 @@ const sidebars = {
     {
       type: "category",
       label: "Quickstart",
-      id: "articles/tutorial/quickstart",
       items: [
         {
           type: "doc",
