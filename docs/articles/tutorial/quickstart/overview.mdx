@@ -1,6 +1,81 @@
 import DocCard from "../src/theme/DocCard";
 import clsx from "clsx";
 
+# Welcome to the Testkube Documentation!
+
+We're happy you're here to become a Testkube aficionado!
+
+## Getting Started
+
+export const DocCardList = (input) => (
+  <section className={clsx("row indent--min")}>
+    {[
+      {
+        icon: "🛠",
+        label: "Quickstart",
+        description:
+          "Get up and running by installing Testkube within minutes.",
+        href: "/articles/tutorial/quickstart",
+        type: "intro",
+      },
+      {
+        icon: "🏎💨",
+        label: "Run your first Test",
+        description:
+          "Learn how to create, run, and display the results for your first Test Workflow.",
+        href: "/articles/tutorial/quickstart#2-define-your-first-test-workflow",
+        type: "intro",
+      },
+      {
+        icon: "🚀",
+        label: "Connect to your CI/CD",
+        description:
+          "Trigger the execution of your tests from your existing CI/CD pipeline.",
+        href: "/articles/tutorial/quickstart#5-integrate-with-your-cicd-pipelines",
+        type: "intro",
+      },
+    ].map((item, i) => (
+      <article key={i} className="col padding--sm intro__card">
+        <DocCard item={item} />
+      </article>
+    ))}
+  </section>
+);
+
+<DocCardList />
+
+## What is Testkube?
+
+import TwoColumns from '@site/src/components/TwoColumns';
+
+<TwoColumns
+  left={<>
+<p>
+    Testkube is a Test Orchestration and Execution Framework for Cloud-Native Applications. It provides a single
+    platform for defining, running and analyzing test executions, using your existing testing tools/scripts,
+    running in your existing infrastructure.
+  </p>
+  <p>
+
+    Testkube consists of a <b>Control Plane</b> and any number of <b>Testkube Agents</b>. The Control Plane exposes
+    a <b>Dashboard</b> for easy and centralized access to most Testkube features.
+
+  </p>
+
+  </>}
+  right={<p>
+    <iframe width="400" height="200" src="https://youtube.com/embed/7q0wR-skW8M" title="Getting Started with Testkube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </p>}
+/>
+
+- The Control Plane can be running either in the Cloud or On-Prem - [Read more](/articles/install/overview).
+- The Agents run your tests and are _always_ running in your own infrastructure.
+- The Agent is 100% Open Source and can also be run standalone without the Control Plane - [Read more](/articles/install/standalone-agent).
+
+:::tip
+Testkube has recently introduced the concept of [Multi-Agent Environments](/articles/install/multi-agent) - check it out to see how this can help you solve for
+advanced test orchestration and executions scenarios.
+:::
 
 ## Learn More About Testkube
 
@@ -42,3 +117,41 @@ export const LearnCardList = (input) => (
 );
 
 <LearnCardList />
+
+export const LearnMoreCardList = (input) => (
+  <section className={clsx("row indent--min")}>
+    {[
+      {
+        icon: "🛠",
+        label: "Integrations",
+        description:
+          "Integrate Testkube into your existing CI/CD pipelines and infrastructure via dedicated plugins, " +
+          "Kubernetes Events, Webhooks, CDEvents, etc.",
+        href: "/articles/integrations",
+        type: "intro",
+      },
+      {
+        icon: "🛠",
+        label: "Reference Docs",
+        description:
+          "Get into the nitty-gritty of Testkube CRDs, Helm Charts, OpenAPI definitions and CLI commands",
+        href: "/articles/reference",
+        type: "intro",
+      },
+      {
+        icon: "🛠",
+        label: "Open Source Agent",
+        description:
+          "Learn about the Testkube Agent which is 100% Open Source.",
+        href: "/articles/install/standalone-agent",
+        type: "intro",
+      },
+    ].map((item, i) => (
+      <article key={i} className="col padding--sm intro__card">
+        <DocCard item={item} />
+      </article>
+    ))}
+  </section>
+);
+
+<LearnMoreCardList />
