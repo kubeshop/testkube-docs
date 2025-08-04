@@ -51,7 +51,8 @@ const sidebars = {
           type: "doc",
           label: "Enterprise POC",
           id: "articles/tutorial/quickstart/enterprise-poc",
-        },  
+        },
+      ],
     },
     {
       type: "doc",
