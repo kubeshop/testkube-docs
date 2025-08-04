@@ -23,9 +23,35 @@ const sidebars = {
       id: "index",
     },
     {
-      type: "doc",
+      type: "category",
       label: "Quickstart",
       id: "articles/tutorial/quickstart",
+      items: [
+        {
+          type: "doc",
+          label: "Overview",
+          id: "articles/tutorial/quickstart/overview",
+        },
+        {
+          type: "doc",
+          label: "Demo Environment",
+          id: "articles/tutorial/quickstart/demo-environment",
+        },
+        {
+          type: "doc",
+          label: "Local Sandbox",
+          id: "articles/tutorial/quickstart/local-sandbox",
+        }, 
+        {
+          type: "doc",
+          label: "Team Evaluation",
+          id: "articles/tutorial/quickstart/team-evaluation",
+        },
+        {
+          type: "doc",
+          label: "Enterprise POC",
+          id: "articles/tutorial/quickstart/enterprise-poc",
+        },  
     },
     {
       type: "doc",
