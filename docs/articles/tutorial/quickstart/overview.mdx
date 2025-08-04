@@ -1,4 +1,4 @@
-import DocCard from "../src/theme/DocCard";
+import DocCard from "@site/src/theme/DocCard";
 import clsx from "clsx";
 
 
@@ -31,6 +31,14 @@ export const LearnCardList = (input) => (
         description:
           "Deploy it in a cluster you control",
         href: "/articles/tutorial/quickstart/team-evaluation",
+        type: "intro",
+      },
+      {
+        icon: "🛠",
+        label: "Enterprise POC",
+        description:
+          "Deploy for the whole org to see",
+        href: "/articles/tutorial/quickstart/enterprise-poc",
         type: "intro",
       },
     ].map((item, i) => (
