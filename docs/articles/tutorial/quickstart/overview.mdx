@@ -25,22 +25,6 @@ export const LearnCardList = (input) => (
         href: "/articles/tutorial/quickstart/local-sandbox",
         type: "intro",
       },
-      {
-        icon: "🛠",
-        label: "Team Evaluation",
-        description:
-          "Deploy it in a cluster you control",
-        href: "/articles/tutorial/quickstart/team-evaluation",
-        type: "intro",
-      },
-      {
-        icon: "🛠",
-        label: "Enterprise POC",
-        description:
-          "Deploy for the whole org to see",
-        href: "/articles/tutorial/quickstart/enterprise-poc",
-        type: "intro",
-      },
     ].map((item, i) => (
       <article key={i} className="col padding--sm intro__card">
         <DocCard item={item} />
