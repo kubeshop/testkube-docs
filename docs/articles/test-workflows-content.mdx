@@ -355,7 +355,15 @@ There are a few different ways to do it.
 
 ### Use multiple content.git setups
 
-The content.git clause may be nested to load multiple repositories.
+The `content.git` clause may be nested to load multiple repositories.
+
+:::
+
+:::warning
+
+The cloned repositories will be available **only for nested steps**.
+
+:::
 
 ```yaml
 spec:
@@ -367,11 +375,13 @@ steps:
     git:
       uri: https://github.com/kubeshop/testkube-operator
       mountPath: /operator
+  # highlight-start
+  # NOTE: Cloned data only available for these nested steps
   steps:
+  # highlight-end
   - shell: ls -lah /data/repo && ls -lah /operator
 ```
 
-The cloned repositories will be available only for nested steps.<br/>
 **Explanation**: Under the hood, it will create EmptyDir volumes and volume mounts at /data/repo and /operator and clone the repositories there.<br/>
 **Potential QoL future improvement**: add syntax to clone multiple repositories, like clone.gits.
 
