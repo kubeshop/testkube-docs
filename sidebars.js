@@ -33,11 +33,6 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "Demo Environment",
-          id: "articles/tutorial/quickstart/demo-environment",
-        },
-        {
-          type: "doc",
           label: "Local Sandbox",
           id: "articles/tutorial/quickstart/local-sandbox",
         }, 
