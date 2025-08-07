@@ -56,25 +56,19 @@ Cursor provides powerful AI assistance with built-in MCP support.
 
 ### Configuration
 
-1. **Open Cursor Settings** (Cmd/Ctrl + ,)
+**Add Testkube server configuration to your Cursor MCP settings:**
 
-2. **Navigate to Extensions > Model Context Protocol**
-
-3. **Add Testkube server configuration:**
-
-   ```json
-   {
-     "mcpServers": {
-       "testkube": {
-         "command": "testkube",
-         "args": ["mcp", "serve"],
-         "type": "stdio"
-       }
-     }
-   }
-   ```
-
-4. **Restart Cursor**
+```json
+{
+  "mcpServers": {
+    "testkube": {
+      "command": "testkube",
+      "args": ["mcp", "serve"],
+      "type": "stdio"
+    }
+  }
+}
+```
 
 ### Usage Examples
 
