@@ -640,6 +640,27 @@ const sidebars = {
             },
           ],
         },
+        {
+          type: "category",
+          label: "Testkube MCP Integration",
+          items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/mcp-overview",
+            },
+            {
+              type: "doc",
+              label: "Setup & Authentication",
+              id: "articles/mcp-setup",
+            },
+            {
+              type: "doc",
+              label: "Configuration Examples",
+              id: "articles/mcp-configuration",
+            },
+          ],
+        },
       ],
     },
     {
@@ -841,10 +862,10 @@ const sidebars = {
               id: "articles/examples/jmeter-distributed",
             },
             {
-               type: "doc",
-               label: "Plugins",
-               id: "articles/examples/jmeter-plugins",
-             },
+              type: "doc",
+              label: "Plugins",
+              id: "articles/examples/jmeter-plugins",
+            },
           ],
         },
         {
