@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:ec14df28629123028f3f3fb3580b156f82bfb93cef41caf409288683d7d1e6b1</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/medium-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>digest</td><td><code>sha256:ec14df28629123028f3f3fb3580b156f82bfb93cef41caf409288683d7d1e6b1</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/medium-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/arm64</td></tr>
 <tr><td>size</td><td>43 MB</td></tr>
 <tr><td>packages</td><td>274</td></tr>
@@ -309,14 +309,16 @@ The problem will not be fixed in the following package because the package is ar
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/cloudflare/circl</strong> <code>1.5.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>github.com/cloudflare/circl</strong> <code>1.5.0</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/cloudflare/circl@1.5.0</code></small><br/>
-<a href="https://scout.docker.com/v/GHSA-2x5j-vhc8-9cwm?s=github&n=circl&ns=github.com%2Fcloudflare&t=golang&vr=%3C1.6.1"><img alt="low : GHSA--2x5j--vhc8--9cwm" src="https://img.shields.io/badge/GHSA--2x5j--vhc8--9cwm-lightgrey?label=low%20&labelColor=fce1a9"/></a> <i>Improper Input Validation</i>
+<a href="https://scout.docker.com/v/CVE-2025-8556?s=github&n=circl&ns=github.com%2Fcloudflare&t=golang&vr=%3C1.6.1"><img alt="low 3.7: CVE--2025--8556" src="https://img.shields.io/badge/CVE--2025--8556-lightgrey?label=low%203.7&labelColor=fce1a9"/></a> <i>Improper Input Validation</i>
 
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.6.1</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.6.1</code></td></tr>
+<tr><td>CVSS Score</td><td><code>3.7</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -332,6 +334,23 @@ Moreover, there is an incorrect point validation in ScalarMult can lead to incor
 Version 1.6.1 (https://github.com/cloudflare/circl/tree/v1.6.1) mitigates the identified issues.
 
 We acknowledge Alon Livne (Botanica Software Labs) for the reported findings.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/GHSA-2x5j-vhc8-9cwm?s=gitlab&n=circl&ns=github.com%2Fcloudflare&t=golang&vr=%3C1.6.1"><img alt="unspecified : GHSA--2x5j--vhc8--9cwm" src="https://img.shields.io/badge/GHSA--2x5j--vhc8--9cwm-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> <i>OWASP Top Ten 2017 Category A9 - Using Components with Known Vulnerabilities</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.6.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.6.1</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The CIRCL implementation of FourQ fails to validate user-supplied low-order points during Diffie-Hellman key exchange, potentially allowing attackers to force the identity point and compromise session security.
+
+Moreover, there is an incorrect point validation in ScalarMult can lead to incorrect results in the isEqual function and if a point is on the curve.
 
 </blockquote>
 </details>
