@@ -24,7 +24,7 @@ The Testkube MCP server provides the same powerful tools available in the Testku
 
 ### Enhanced with AI Agents
 
-When used with agentic AI tools like GitHub Copilot (Claude Sonnet 4) in VS Code or Cursor, MCP enables:
+When used with agentic AI tools like GitHub Copilot with Claude Sonnet 4 in VS Code or Cursor, MCP enables:
 
 - **Multi-step Problem Solving:** AI agents can run multiple tools in sequence to solve complex testing scenarios
 - **Automated Debugging:** Agents can analyze failures, examine logs, and suggest fixes
@@ -41,7 +41,9 @@ To get started with Testkube MCP:
 
 :::info Testkube Pro Required
 MCP requires OAuth authentication and only works with Testkube Pro environments. You must use `testkube login` to authenticate with the Control Plane.
-:::## Supported AI Tools
+:::
+
+## Supported AI Tools
 
 Testkube MCP works with any tool that supports the Model Context Protocol standard, including:
 
