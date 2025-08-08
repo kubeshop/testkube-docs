@@ -9,7 +9,7 @@ The **Testkube Model Context Protocol (MCP)** integration enables AI assistants 
 - **Execute and Monitor Test Workflows:** Run workflows, check execution status, and retrieve results
 - **Analyze Test Results:** Access execution logs, artifacts, and failure details
 - **Navigate Test History:** Search through past executions and analyze trends
-- **Manage Test Resources:** List workflows, view configurations, and access metadata
+- **Create and Manage Test Resources:** List workflows, view configurations, create workflows and access metadata
 
 ## Key Capabilities
 
@@ -55,6 +55,32 @@ Testkube MCP works with any tool that supports the Model Context Protocol standa
 :::tip Best Results
 We've found the best results using **Agent mode in VS Code with Claude Sonnet 4**, which provides sophisticated multi-step reasoning for complex testing scenarios.
 :::
+
+## Sample Prompts
+
+Here are some example prompts to get you started with Testkube MCP:
+
+```text
+List my test workflows and their recent execution status
+```
+
+```text
+Help me debug my last failed workflow execution
+```
+
+```text
+Create a new test workflow for my Python API and run it
+```
+
+```text
+Show me test execution trends for the past week and identify failing patterns
+```
+
+```text
+Analyze the logs of execution "api-tests-123" and suggest fixes
+```
+
+Check out the [Configuration Examples](./mcp-configuration) document for more detailed usage samples and multi-step workflows.
 
 ## Learn More
 

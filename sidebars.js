@@ -611,53 +611,59 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Testkube AI Assistant",
+          label: "Testkube AI",
           items: [
             {
-              type: "doc",
-              label: "Overview",
-              id: "articles/ai-assistant-overview",
+              type: "category",
+              label: "AI Assistant",
+              items: [
+                {
+                  type: "doc",
+                  label: "Overview",
+                  id: "articles/ai-assistant-overview",
+                },
+                {
+                  type: "doc",
+                  label: "On-Prem Installation",
+                  id: "articles/ai-assistant-on-prem-install",
+                },
+                {
+                  type: "doc",
+                  label: "Enable AI Assistant",
+                  id: "articles/ai-assistant-enable",
+                },
+                {
+                  type: "doc",
+                  label: "How AI Assistant can help",
+                  id: "articles/ai-assistant-can-help",
+                },
+                {
+                  type: "doc",
+                  label: "How AI Assistant is different",
+                  id: "articles/ai-assistant-is-different",
+                },
+              ],
             },
             {
-              type: "doc",
-              label: "On-Prem Installation",
-              id: "articles/ai-assistant-on-prem-install",
-            },
-            {
-              type: "doc",
-              label: "Enable AI Assistant",
-              id: "articles/ai-assistant-enable",
-            },
-            {
-              type: "doc",
-              label: "How AI Assistant can help",
-              id: "articles/ai-assistant-can-help",
-            },
-            {
-              type: "doc",
-              label: "How AI Assistant is different",
-              id: "articles/ai-assistant-is-different",
-            },
-          ],
-        },
-        {
-          type: "category",
-          label: "Testkube MCP Integration",
-          items: [
-            {
-              type: "doc",
-              label: "Overview",
-              id: "articles/mcp-overview",
-            },
-            {
-              type: "doc",
-              label: "Setup & Authentication",
-              id: "articles/mcp-setup",
-            },
-            {
-              type: "doc",
-              label: "Configuration Examples",
-              id: "articles/mcp-configuration",
+              type: "category",
+              label: "MCP Server",
+              items: [
+                {
+                  type: "doc",
+                  label: "Overview",
+                  id: "articles/mcp-overview",
+                },
+                {
+                  type: "doc",
+                  label: "Setup & Authentication",
+                  id: "articles/mcp-setup",
+                },
+                {
+                  type: "doc",
+                  label: "Configuration Examples",
+                  id: "articles/mcp-configuration",
+                },
+              ],
             },
           ],
         },

@@ -108,7 +108,7 @@ I need to create a new workflow for testing my Python application.
 Can you help me set this up?
 ```
 
-## Example Workflows
+## Example Claude Workflows
 
 ### Automated Debugging Session
 
