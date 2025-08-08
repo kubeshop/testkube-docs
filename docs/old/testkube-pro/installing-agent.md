@@ -1,7 +1,7 @@
 # Installing the Testkube Agent
 
 Following steps, are under the assumption that you already have a Testkube Pro account, if that's not the case, 
-you can find a detailed description about how to get started with Testkube [here](/articles/tutorial/quickstart).
+you can find a detailed description about how to get started with Testkube [here](/articles/tutorial/quickstart/overview).
 
 ## Installation Steps
 
