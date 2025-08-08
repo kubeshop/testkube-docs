@@ -1,27 +1,61 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Testkube Enterprise POC
+# Testkube Enterprise Proof of Concept
 
-This article describes how to architect a full-scale POC in a production-like environment. This is for formal trials / POCs that will run over multipl weeks, mirroring enterprsie requirements.
+This article describes how to architect a full-scale proof of concept (POC) in a production-like environment. This is for formal trials / POCs that will run over multipl sprints, mirroring enterprsie requirements. Our solutions engineering team can partner with you and your team to ensure an effective evaluation of Testkube. **[Schedule time for a consultation today!](https://meetings.hubspot.com/jonathan-fortunati)**
+
+
+
+## 1. Deploy Testkube 
+To get started you will need to deploy Testkube. You can either follow the [Team Evaluation quickstart guide][team-evaluation-quickstart] or review our [installation by Helm documentation][helm-installation-basic].
+
+## 2. POC Planning 
+Planning a proof of concept ensures that you are able to reach a decision on new tooling as efficiently as possible, and with budget in place. Properly documenting the proof of concept allows an evaluation team to effectiely communicate how a third-party solution will solve real problems, and how solving those problems will improve business outcomes. 
+### Define success criteria 
+Success criteria details what outcomes you expect from implementing dedicated Test Orchestration into your stack. These outcomes should reflect an improvement upon your current state, or alignment with a strategic initiative. When posisbley, they should be measurable. Here's some examples we see:
+- Improve pipeline execution time by 50%
+- Optimize test execution costs by running tests within existing Kubernetes infrastructure
+- Deploy event based testing for all services
+- Dynamically scale load testing to reduce 3rd party cloud costs
+- Implement 50% of existing integration, UI, performance testing in orchestratoin platform
+### Identify stakeholders / POC participants 
+This will be a list of the people who need to be involved for a successful POC. This list will typically include: 
+- A DevOps engineer with adequate acceess for debugging / deployment in the target Kubernetes infrastructure 
+- Members from a QA organization who will be implementing the Test Workflows and setting requirements 
+- Leadership to help champion the project, communicate Success Criteria to senior leadership decision makers, and be point of contact for the purchasing process
+### Build capability checklist 
+This will be a list of the specific capabilities that need to be verified during the proof of concept. Some items will be derived directly from your success criteria, others from your organizations standards, and some you'll discover as you learn more about the product. Some example capabilities include:
+* Ability to deploy Playwright and Jmeter tests 
+* Aggregate reporting on test executions 
+* Built in artifact collection supporting .html and .mp4
+* Team management and permissions for compliance 
+* Integration with CICD systems 
+* Integration with Grafana 
+
+## 3. POC Execution 
+Evaluating third party tooling is rarely someones actual job, which makes executing a POC difficult in an environment with competing priorities. A few things can help keep your POC moving:
+- **Routine POC syncs**: scheudling a routine touchpoint between the evaluation team and the vendor ensures questoins don't go unanswered for too long, and vendor support is engaged and allocated appropriately. A routine sync - even without the vendor - helps ensure evaluations teams hold themselves accountable to timelines, and POC deliverables. 
+- **Engagig busines-side stakeholders early**: bringing a tool in-house can entail a complex approval and purchasing process involving numerous business side stakeholders like procurement, finance, and secops. Upfront consultation of these stakeholders ensures we provide adequate access to our software, and minimizes disruption between POC closure and activation date. 
+- **Break the POC into phases**: while tools like a capability checklist and success criteria can help define scope, that scope still needs to be temporarily constrained. Breaking up the POC into phases allows teams to match value-generation to time-investment. We recommend breaking up POCs into multiple phases. Usually only the first two are needed:
+    - **Proof of viability**: a light-weight initial investigation that determines if the tooling solution matches the problem space 
+    - **Proof of value**: a more in-depth analysis of the tooling in real-world conditions with impact measured against pre-defined success criteria 
+    - **Proof of scale**: a longer term initiative geared towards standardization and deployment of tooling accross development organizations
+
+## 4. POC Wrapup
+Once a team has enough information about a potential vendor solution to conclude the POC, they will need to document and socialize their findings internally (and hopefully to the vendor!). This process usually consistes of at least two components: 
+- **POC conclusion meeting**: this is an opportunity for the evaluation team to do a final review review of their capabilites checklist and success criteria, and compare that to their findings. If the vendor is involved, its also an opportunity to address any perceived gaps, or ask any final questions. Should the evaluation team decide to move forward with the solution, this meeting also serves as an opportunity to begin the post-sales relationship between vendor and customer, by documenting any feature requests, or feedback that could influence future roadmap items.  
+- **Build proof of value presentation**: many organizations require evaluation teams to defend a request to purchase a tool with documentation that summarizes the POC, the impact to the business, and the return on investment. The vendor can help quantify the financial impact a tool will have based on the measured impact of the tool during the POC process.
+
+## 5. Going forward
+A POC is just the first step in adopting a tool into an organization. Following the activation date, a team will often need help with formalizing deployment, training, managing successful adoption, and influencing the vendors roadmap. Testkube was founded on a culture of partnership, and we take the post-sales experience and relationship as seriously as we do in the pre-sales phase. Our team can assist with onboarding and adoption to ensure your investment continues to provide value and address your goals.
 
 :::tip
-Call to action for contacting SE 
+Want to live help? Don't hesitate to reach out for help by:
+- [Scheduling time with our Solutions Engineering team](https://meetings.hubspot.com/jonathan-fortunati)
+- Joining our [Slack Community](https://bit.ly/testkube-slack)
+- [Reaching out to sales](https://testkube.io/contact)
 :::
 
-## Deploy Testkube 
-To get started, follow the deployment guideline as described in team-evaluation.mdx
-
-## POC Planning 
-### define success criteria 
-### Identify stakeholders / POC participants 
-### Build capability checklist 
-
-## POC Execution 
-- Schedule routine syncs w/ SE team 
-- Get extended license 
-- Deploy, execute, and report on tests 
-
-## POC Wrapup
-- Wrap up POC findings 
-- Build proof of value presentation 
+[team-evaluation-quickstart]: /articles/tutorial/quickstart/team-evaluation
+[helm-installation-basic]: /articles/install/3-install-with-helm.md

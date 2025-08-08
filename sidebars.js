@@ -73,7 +73,7 @@ const sidebars = {
           items: [
             {
               type: "category",
-              label: "Production",
+              label: "Introductory Guides",
               items: [
                 {
                   type: "doc",
