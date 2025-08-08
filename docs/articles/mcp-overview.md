@@ -1,6 +1,6 @@
 # Testkube MCP (Model Context Protocol) Overview
 
-The **Testkube Model Context Protocol (MCP)** integration enables AI assistants and agents to interact directly with your Testkube workflows, executions, and artifacts through a standardized protocol. This powerful integration brings Testkube's testing capabilities directly into your development environment.
+The **Testkube Model Context Protocol (MCP)** integration enables AI assistants and agents to interact directly with your Testkube workflows, executions, and artifacts through a standardized protocol. This powerful integration brings Testkube's test orchestration capabilities directly into your development environment.
 
 ## What is Model Context Protocol?
 
