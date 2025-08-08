@@ -72,11 +72,6 @@ const sidebars = {
           collapsed: false,
           items: [
             {
-              type: "doc",
-              label: "Evaluation",
-              id: "articles/install/install-with-cli",
-            },
-            {
               type: "category",
               label: "Production",
               items: [

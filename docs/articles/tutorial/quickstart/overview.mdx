@@ -1,27 +1,20 @@
 import DocCard from "@site/src/theme/DocCard";
 import clsx from "clsx";
 
+# Quickstart Overview
 
 ## Learn More About Testkube
 
-Once you're up to speed and running your first tests, dive in and learn more about Testkube!
+Choose the evaluation path that is right for you - were here to help along the way
 
-export const LearnCardList = (input) => (
+export const QuickstartCardList = (input) => (
   <section className={clsx("row indent--min")}>
     {[
       {
         icon: "🛠",
-        label: "Demo Environment",
+        label: "Local Sandbox: Local Deployment, Full Potential",
         description:
-          "Check out the demo environment, no install needed",
-        href: "/articles/tutorial/quickstart/demo-environment",
-        type: "intro",
-      },
-      {
-        icon: "🛠",
-        label: "Local Sandbox",
-        description:
-          "Deploy it locall, on a Minikube cluster",
+          "Best for individual evaluators investigating Testkube before sharing it with others. Requires a local Kuberentes runtime, like Minikube",
         href: "/articles/tutorial/quickstart/local-sandbox",
         type: "intro",
       },
@@ -33,7 +26,55 @@ export const LearnCardList = (input) => (
   </section>
 );
 
-<LearnCardList />
+<QuickstartCardList />
+
+export const QuickstartCardList2 = (input) => (
+  <section className={clsx("row indent--min")}>
+    {[
+      {
+        icon: "🛠",
+        label: "Team Evaluation: Your Cluster, Real Tests",
+        description:
+          "Best for teams investigating Testkube in real-life scenarios. Requires Kubernetes cluster access with sufficient permissions for deployment and debugging",
+        href: "/articles/tutorial/quickstart/team-evaluation",
+        type: "intro",
+      },
+    ].map((item, i) => (
+      <article key={i} className="col padding--sm intro__card">
+        <DocCard item={item} />
+      </article>
+    ))}
+  </section>
+);
+
+<QuickstartCardList2 />
+
+export const QuickstartCardList3 = (input) => (
+  <section className={clsx("row indent--min")}>
+    {[
+      {
+        icon: "🛠",
+        label: "Enterprise POC: Strategic Pilot, Global Roll-out",
+        description:
+          "Best for enterprise architecture or central tooling teams evaluating tooling to support strategic initiatives",
+        href: "/articles/tutorial/quickstart/enterprise-poc",
+        type: "intro",
+      },
+    ].map((item, i) => (
+      <article key={i} className="col padding--sm intro__card">
+        <DocCard item={item} />
+      </article>
+    ))}
+  </section>
+);
+
+<QuickstartCardList3 />
+
+| Evaluation Path | Goal | Persona | Best for | Time to Value |
+|---|---|---|---|---|
+| Local Sandbox | To see Testkube run a test inside a local Kubernetes cluster with minimal friction | An individual developer or technical evaluator on their local machine | Exploring the UI, manual trigger points, using sample workflows, and understanding the contours of the product | ≤ a day |
+| Team Evaluation | Install the full Testkube platform into a shared environment, running real tests | Team Lead, Senior DevOps Engineer, QA Lead | Orchestrating existing tests, tying into CICD, event triggers, and getting a real-world feel for the tool  | ≤ a sprint |
+| Enterprise POC | Evaluate Testkube against enterprsie requirements like security, scalability, reporting, integrations, and in line with formal POC best practices | Engineering, DevOps, QA Leadership | Integrating test orchestration into strategic intiatives around quality, speed of delivery, and cost reduction | ≤ a quarter |
 
 ## Looking try Testkube without installation?
 
@@ -42,12 +83,11 @@ Testkube without having to install anything in your infrastructure. It contains 
 different testing tools, with corresponding execution results and Test Insights for you to explore.
 
 :::info
-The Demo Environment won't allow you to follow the steps further down in the quickstart since
-those steps require your own environment.
+The Demo Environment won't allow you to create or update Test Workflows - to get the full experience, deploy the control plane today!
 :::
 
 1. Sign in to the [Testkube Cloud Control Plane](https://app.testkube.io).
-2. Once authenticated, [go to the demo environment.](https://app.testkube.io/demo-environment) - (there are multiple in-app
+2. Once authenticated, [go to the demo environment.](https://app.testkube.io/organization/testkube-demo/environment/testkube-demo/dashboard/home) - (there are multiple in-app
   prompts for this also).
 
 You will now see the Dashboard without having to install an agent, and are free to explore/run existing Workflows,
