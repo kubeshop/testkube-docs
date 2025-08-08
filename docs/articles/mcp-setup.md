@@ -6,7 +6,7 @@ This guide covers the setup and authentication requirements specific to Testkube
 
 - **Testkube CLI installed** - [Installation Guide](/cli/testkube)
 - **Access to a Testkube Pro environment** - MCP requires a Testkube Pro environment with Control Plane access
-- **An AI tool that supports MCP** - Such as VS Code with GitHub Copilot, Cursor, or Claude Desktop
+- **An AI tool that supports MCP** - Such as VS Code with GitHub Copilot, Cursor, Claude Desktop or Gemini CLI
 
 ## Authentication & Context
 

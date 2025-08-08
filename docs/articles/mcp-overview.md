@@ -4,7 +4,7 @@ The **Testkube Model Context Protocol (MCP)** integration enables AI assistants 
 
 ## What is Model Context Protocol?
 
-Model Context Protocol (MCP) is an open standard that enables AI assistants to connect with external systems and data sources. With Testkube's MCP integration, your AI assistant can:
+[Model Context Protocol (MCP)](https://modelcontextprotocol.io) is an open standard that enables AI assistants to connect with external systems and data sources. With Testkube's MCP integration, your AI assistant can:
 
 - **Execute and Monitor Test Workflows:** Run workflows, check execution status, and retrieve results
 - **Analyze Test Results:** Access execution logs, artifacts, and failure details

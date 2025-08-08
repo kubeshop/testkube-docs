@@ -6,12 +6,6 @@ This guide provides configuration examples for integrating Testkube MCP with var
 
 GitHub Copilot with Agent mode in VS Code provides excellent agentic capabilities for multi-step testing workflows.
 
-### Prerequisites
-
-- VS Code with GitHub Copilot extension
-- GitHub Copilot subscription with Agent mode access
-- [Completed Testkube MCP setup](./mcp-setup)
-
 ### Configuration
 
 1. **Create or edit your MCP configuration file:**
@@ -73,13 +67,11 @@ Cursor provides powerful AI assistance with built-in MCP support.
 ### Usage Examples
 
 ```text
-// Create and run a test workflow for my API
-Create a test workflow that checks my REST API endpoints,
-then run it and show me the results.
+Create a test workflow that checks my REST API endpoints, then run it and show me the results.
+```
 
-// Analyze test failures
-Look at my recent test failures and help me understand
-what's causing them. Check the logs and artifacts.
+```text
+Look at my recent test failures and help me understand what's causing them. Check the logs and artifacts.
 ```
 
 ## Claude Desktop
@@ -130,16 +122,6 @@ Can you:
 5. Suggest next steps
 ```
 
-### Test Creation and Execution
-
-```text
-Help me create a new test workflow that:
-1. Tests my REST API endpoints
-2. Runs on every commit to main branch
-3. Sends notifications on failure
-Then run it and show me the results.
-```
-
 ### Test Analysis and Reporting
 
 ```text
@@ -181,12 +163,3 @@ testkube get workflows
 # Check current context
 testkube get context
 ```
-
-## Next Steps
-
-Once configured, start exploring the powerful combination of AI agents with Testkube:
-
-- Use natural language to manage your test workflows
-- Let AI agents handle complex debugging scenarios
-- Automate test analysis and reporting
-- Create intelligent test maintenance workflows
