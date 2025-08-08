@@ -190,5 +190,3 @@ Once configured, start exploring the powerful combination of AI agents with Test
 - Let AI agents handle complex debugging scenarios
 - Automate test analysis and reporting
 - Create intelligent test maintenance workflows
-
-For more information about Testkube features, see our [main documentation](/docs).
