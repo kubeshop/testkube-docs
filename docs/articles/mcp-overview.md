@@ -17,17 +17,18 @@ More specifically, it allows you and your AI agents to:
 [Model Context Protocol (MCP)](https://modelcontextprotocol.io) is an open standard that enables AI assistants to connect with external systems and data sources. 
 :::
 
-### Enhanced with AI Agents
+:::tip
 
-When used with agentic AI tools like GitHub Copilot with Claude Sonnet 4 in VS Code or Cursor, MCP enables:
+When used with agentic AI tools like GitHub Copilot with Claude Sonnet 4 in VS Code or Cursor, the Testkube MCP enables:
 
 - **Multi-step Problem Solving:** AI agents can run multiple tools in sequence to solve complex testing scenarios
 - **Automated Debugging:** Agents can analyze failures, examine logs, and suggest fixes
 - **Intelligent Test Management:** Automated workflow creation, execution, and result analysis
+:::
 
 ## Prerequisites
 
-- **Testkube CLI installed** - [Installation Guide](/cli/testkube)
+- **Testkube CLI installed** - [Installation Guide](/articles/install/cli)
 - **Access to a Testkube Environment** - The MCP Server requires you to have access to a Testkube Environment.
 - **An AI tool that supports MCP** - Such as VS Code with GitHub Copilot, Cursor, Claude Desktop or Gemini CLI.
 
@@ -39,7 +40,8 @@ Once the CLI is installed, authenticate with Testkube:
 testkube login
 ```
 
-This ensures that the MCP Server operates within the security context of your Testkube account and Environment.
+This will open a browser window to sign in and authenticate with the Testkube Dashboard,
+which ensures that the MCP Server operates within the security context of your Testkube account and Environment.
 
 ### Step 2: Validate the MCP Server
 
@@ -73,15 +75,17 @@ Testkube MCP works with any tool that supports the Model Context Protocol standa
 - **Claude Desktop**
 - **Custom MCP clients**
 
-Have a look at [Configure Your AI Tools](./mcp-configuration) for detailed instructions.
+Have a look at [Configure Your AI Tools](./mcp-configuration) for detailed instructions and examples.
 
 :::tip Best Results
 We've found the best results using **Agent mode in VS Code with Claude Sonnet 4**, which provides sophisticated multi-step reasoning for complex testing scenarios.
 :::
 
-## Sample Prompts
+### Step 4: Start interacting with Testkube
 
-Here are some example prompts to get you started with Testkube MCP:
+Once you've configured your AI tools, you can start using Testkube MCP in AI Chat windows or other AI assistants.
+
+Here are some example prompts to get you started:
 
 ```text
 List my test workflows and their recent execution status
@@ -111,12 +115,17 @@ Check out the [Configuration Examples](./mcp-configuration) document for more de
 
 - **Session expired**: Run `testkube login` to re-authenticate
 - **Wrong context**: Check with `testkube get context` and reconfigure if needed
-- **Network issues**: Ensure access to `api.testkube.io` for Testkube Pro
+- **Network issues**: Ensure access to `api.testkube.io` or the corresponding api endpoint if you're hosting the Testkube
+  Control Plane on premise.
 
 ### MCP Server Issues
 
 - **Use debug mode**: `testkube mcp serve --debug` for detailed logging
 - **Check workflows**: Verify you can list workflows before configuring AI tools
+
+:::info
+Don't hesitate to reach out to us on [Slack](https://bit.ly/testkube-slack) if you run into any issues!
+:::
 
 
 
