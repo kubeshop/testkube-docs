@@ -650,13 +650,8 @@ const sidebars = {
               items: [
                 {
                   type: "doc",
-                  label: "Overview",
+                  label: "Getting Started",
                   id: "articles/mcp-overview",
-                },
-                {
-                  type: "doc",
-                  label: "Setup & Authentication",
-                  id: "articles/mcp-setup",
                 },
                 {
                   type: "doc",
