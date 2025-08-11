@@ -1,49 +1,72 @@
-# Testkube MCP (Model Context Protocol) Overview
+# Testkube MCP Server
 
-The **Testkube Model Context Protocol (MCP)** integration enables AI assistants and agents to interact directly with your Testkube workflows, executions, and artifacts through a standardized protocol. This powerful integration brings Testkube's test orchestration capabilities directly into your development environment.
+## Overview
 
-## What is Model Context Protocol?
+The **Testkube MCP Server** brings Testkube's test orchestration capabilities directly into your 
+development environment and AI-powered workflows, enabling AI assistants and agents to interact directly 
+with your Testkube workflows, executions, and artifacts. 
 
-[Model Context Protocol (MCP)](https://modelcontextprotocol.io) is an open standard that enables AI assistants to connect with external systems and data sources. With Testkube's MCP integration, your AI assistant can:
+More specifically, it allows you and your AI agents to:
 
 - **Execute and Monitor Test Workflows:** Run workflows, check execution status, and retrieve results
 - **Analyze Test Results:** Access execution logs, artifacts, and failure details
 - **Navigate Test History:** Search through past executions and analyze trends
 - **Create and Manage Test Resources:** List workflows, view configurations, create workflows and access metadata
 
-## Key Capabilities
+:::note
+[Model Context Protocol (MCP)](https://modelcontextprotocol.io) is an open standard that enables AI assistants to connect with external systems and data sources. 
+:::
 
-The Testkube MCP server provides the same powerful tools available in the Testkube AI Assistant, with additional capabilities when used with agentic AI tools:
+:::tip
 
-### Core Features
-
-- **Workflow Management:** List, create, and execute test workflows
-- **Execution Monitoring:** Track test runs, view logs, and analyze results
-- **Artifact Access:** Download and examine test outputs, reports, and logs
-- **Resource Discovery:** Find workflows by labels, resource groups, or search terms
-
-### Enhanced with AI Agents
-
-When used with agentic AI tools like GitHub Copilot with Claude Sonnet 4 in VS Code or Cursor, MCP enables:
+When used with agentic AI tools like GitHub Copilot with Claude Sonnet 4 in VS Code or Cursor, the Testkube MCP enables:
 
 - **Multi-step Problem Solving:** AI agents can run multiple tools in sequence to solve complex testing scenarios
 - **Automated Debugging:** Agents can analyze failures, examine logs, and suggest fixes
 - **Intelligent Test Management:** Automated workflow creation, execution, and result analysis
-
-## Quick Start
-
-To get started with Testkube MCP:
-
-1. **Install Testkube CLI** - [Installation Guide](/cli/testkube)
-2. **Authenticate** - Run `testkube login` and set your context ([Managing CLI Context](/testkube-pro/articles/managing-cli-context))
-3. **Test MCP Server** - Run `testkube mcp serve` to verify it works
-4. **[Configure Your AI Tools](./mcp-configuration)** - Set up VS Code, Cursor, or other MCP-compatible tools
-
-:::info Testkube Pro Required
-MCP requires OAuth authentication and only works with Testkube Pro environments. You must use `testkube login` to authenticate with the Control Plane.
 :::
 
-## Supported AI Tools
+## Prerequisites
+
+- **Testkube CLI installed** - [Installation Guide](/articles/install/cli)
+- **Access to a Testkube Environment** - The MCP Server requires you to have access to a Testkube Environment.
+- **An AI tool that supports MCP** - Such as VS Code with GitHub Copilot, Cursor, Claude Desktop or Gemini CLI.
+
+### Step 1: Authenticate
+
+Once the CLI is installed, authenticate with Testkube:
+
+```bash
+testkube login
+```
+
+This will open a browser window to sign in and authenticate with the Testkube Dashboard,
+which ensures that the MCP Server operates within the security context of your Testkube account and Environment.
+
+### Step 2: Validate the MCP Server
+
+2. Start the MCP Server to make sure it works, run
+
+```bash
+testkube mcp serve --verbose
+``` 
+
+You should see output similar to:
+
+```
+➜  ~ testkube mcp serve --verbose
+✔ loading config
+Starting MCP server with configuration:
+  Organization: Testkube Internal Demo (tkcorg_0f382d90e81ea228)
+  Environment: Paris (tkcenv_943fe797cb48b4d2)
+  API URL: https://api.testkube.io
+  Dashboard URL: https://app.testkube.io
+
+Configure AI tools: https://docs.testkube.io/articles/mcp-configuration
+Feedback welcome: https://bit.ly/testkube-slack
+```
+
+### Step 3: Configure your AI Tools 
 
 Testkube MCP works with any tool that supports the Model Context Protocol standard, including:
 
@@ -52,13 +75,17 @@ Testkube MCP works with any tool that supports the Model Context Protocol standa
 - **Claude Desktop**
 - **Custom MCP clients**
 
+Have a look at [Configure Your AI Tools](./mcp-configuration) for detailed instructions and examples.
+
 :::tip Best Results
 We've found the best results using **Agent mode in VS Code with Claude Sonnet 4**, which provides sophisticated multi-step reasoning for complex testing scenarios.
 :::
 
-## Sample Prompts
+### Step 4: Start interacting with Testkube
 
-Here are some example prompts to get you started with Testkube MCP:
+Once you've configured your AI tools, you can start using Testkube MCP in AI Chat windows or other AI assistants.
+
+Here are some example prompts to get you started:
 
 ```text
 List my test workflows and their recent execution status
@@ -82,8 +109,23 @@ Analyze the logs of execution "api-tests-123" and suggest fixes
 
 Check out the [Configuration Examples](./mcp-configuration) document for more detailed usage samples and multi-step workflows.
 
-## Learn More
+## MCP Server Troubleshooting
 
-- [Setup & Authentication](./mcp-setup)
-- [Configuration Examples](./mcp-configuration)
-- [Model Context Protocol Documentation](https://modelcontextprotocol.io/)
+### Authentication Issues
+
+- **Session expired**: Run `testkube login` to re-authenticate
+- **Wrong context**: Check with `testkube get context` and reconfigure if needed
+- **Network issues**: Ensure access to `api.testkube.io` or the corresponding api endpoint if you're hosting the Testkube
+  Control Plane on premise.
+
+### MCP Server Issues
+
+- **Use debug mode**: `testkube mcp serve --debug` for detailed logging
+- **Check workflows**: Verify you can list workflows before configuring AI tools
+
+:::info
+Don't hesitate to reach out to us on [Slack](https://bit.ly/testkube-slack) if you run into any issues!
+:::
+
+
+

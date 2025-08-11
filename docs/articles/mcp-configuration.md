@@ -1,6 +1,7 @@
-# Configuration Examples
+# MCP Server Configuration Examples
 
-This guide provides configuration examples for integrating Testkube MCP with various AI tools and development environments.
+This guide provides configuration examples for integrating the [Testkube MCP Server](/articles/mcp-overview) with various 
+AI tools and development environments.
 
 ## GitHub Copilot (VS Code)
 
@@ -135,8 +136,8 @@ Show me which workflows are failing most often and help me create a summary repo
 
 **MCP server not starting:**
 
-- Verify [authentication setup](./mcp-setup)
 - Check that `testkube` binary is accessible
+- Verify that you have logged in to Testkube with: `testkube login`
 - Try running `testkube mcp serve --verbose` manually
 
 **No response from AI tools:**

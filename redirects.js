@@ -566,6 +566,10 @@ const redirects = [
     from: "/articles/copilot-is-different",
     to: "/articles/ai-assistant-is-different",
   },
+  {
+    from: ["/articles/mcp-setup", "/articles/mcp"],
+    to: "/articles/mcp-overview",
+  },
 ];
 
 module.exports = redirects;
