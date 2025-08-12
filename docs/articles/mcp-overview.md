@@ -45,7 +45,7 @@ which ensures that the MCP Server operates within the security context of your T
 
 ### Step 2: Validate the MCP Server
 
-2. Start the MCP Server to make sure it works, run
+Start the MCP Server to make sure it works, run
 
 ```bash
 testkube mcp serve --verbose
@@ -57,14 +57,17 @@ You should see output similar to:
 ➜  ~ testkube mcp serve --verbose
 ✔ loading config
 Starting MCP server with configuration:
-  Organization: Testkube Internal Demo (tkcorg_0f382d90e81ea228)
-  Environment: Paris (tkcenv_943fe797cb48b4d2)
+  Organization: Testkube Internal Demo (tkcorg_XXX)
+  Environment: Paris (tkcenv_YYY)
   API URL: https://api.testkube.io
   Dashboard URL: https://app.testkube.io
 
 Configure AI tools: https://docs.testkube.io/articles/mcp-configuration
 Feedback welcome: https://bit.ly/testkube-slack
 ```
+
+If you plan to use the MCP Server with an existing AI tool you can terminate the above with Ctrl-C and integrate
+it with your tool(s) as described below.
 
 ### Step 3: Configure your AI Tools 
 
@@ -96,7 +99,7 @@ Help me debug my last failed workflow execution
 ```
 
 ```text
-Create a new test workflow for my Python API and run it
+Create a new test workflow for my Python API and run it 
 ```
 
 ```text
