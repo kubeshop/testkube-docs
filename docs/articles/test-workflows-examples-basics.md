@@ -269,7 +269,7 @@ It’s possible to automatically retry the step on a failure (or any other condi
 
 ![Step Orchestration](../img/step-orchestration.png)
 
-### Step Timeouts
+### Step Timeout
 
 Steps can have individual `timeout` values to constrain their execution time. If the timeout is exceeded, the step and containing Workflow fail accordingly.
 
@@ -283,6 +283,25 @@ so valid values include `10s`, `1m`, `1h30m`, `500ms`, etc.
 :::tip
 If you want to ensure that steps _after_ a step with a timeout always execute, either mark the step as `optional` or mark the following steps with `condition: always`.
 :::
+
+### Step Delay
+
+It is possible to delay the execution of the step with the `delay` property, which follows the same 
+syntax as the `timeout` property above.
+
+For example, the following step will be executed after 10 seconds.
+
+```yaml
+apiVersion: testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: delay-example
+spec:
+  steps:
+    - name: Step 1
+      delay: 10s
+      shell: echo hello
+```
 
 ## Content Files
 

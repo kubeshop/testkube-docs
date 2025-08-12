@@ -321,8 +321,9 @@ const redirects = [
     from: [
       "/testkube-cloud/articles/running-parallel-tests-with-test-suite",
       "/testkube-pro/running-parallel-tests-with-test-suite",
+      "/testkube-pro/articles/running-parallel-tests-with-test-suite"
     ],
-    to: "/testkube-pro/articles/running-parallel-tests-with-test-suite",
+    to: "/articles/test-workflows-test-suites",
   },
   {
     from: ["/testkube-cloud/articles/AI-test-insights", "/testkube-pro/AI-test-insights"],
