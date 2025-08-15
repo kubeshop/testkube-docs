@@ -387,7 +387,7 @@ const redirects = [
       "/testkube-pro-on-prem/articles/testkube-pro-on-prem",
       "/articles/install/quickstart-install",
     ],
-    to: "/articles/tutorial/quickstart/local-sandbox",
+    to: "/articles/tutorial/quickstart/individual-evaluation",
   },
   {
     from: ["/testkube-enterprise/articles/usage-guide", "/testkube-pro-on-prem/articles/usage-guide"],

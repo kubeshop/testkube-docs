@@ -33,8 +33,8 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "Local Sandbox",
-          id: "articles/tutorial/quickstart/local-sandbox",
+          label: "Individual Evaluation",
+          id: "articles/tutorial/quickstart/individual-evaluation",
         }, 
         {
           type: "doc",
