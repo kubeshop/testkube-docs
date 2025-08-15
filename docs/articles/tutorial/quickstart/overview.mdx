@@ -1,5 +1,22 @@
+import React from "react";
 import DocCard from "@site/src/theme/DocCard";
 import clsx from "clsx";
+
+export function KV({items}) {
+  const wrap = { marginTop: '.75rem' };
+  const row  = { margin: '0 0 .35rem', fontSize: '0.95rem', lineHeight: 1.5 };
+  const key  = { fontWeight: 700 }; // bold label
+
+  return (
+    <div style={wrap}>
+      {items.map(([k, v]) => (
+        <p key={k} style={row}>
+          <span style={key}>{k}:</span> {v}
+        </p>
+      ))}
+    </div>
+  );
+}
 
 # Quickstart Overview
 
@@ -13,9 +30,22 @@ export const QuickstartCardList = (input) => (
       {
         icon: "🛠",
         label: "Local Sandbox: Local Deployment, Full Potential",
-        description:
-          "Best for individual evaluators investigating Testkube before sharing it with others. Requires a local Kuberentes runtime, like Minikube",
-        href: "/articles/tutorial/quickstart/",
+        description: (
+          <>
+            <p style={{margin: '0.25rem 0 0.5rem', color: 'var(--ifm-color-content-secondary)'}}>
+              Best for individual evaluators investigating Testkube before sharing it with others.
+              Requires a local Kubernetes runtime, like Minikube.
+            </p>
+
+            <KV items={[
+              ['Goal', 'Run a test locally with minimal friction'],
+              ['Persona', 'Individual developer / technical evaluator'],
+              ['Intended for', 'UI exploration, manual triggers, sample workflows'],
+              ['Time to value', '≤ a day'],
+            ]}/>
+          </>
+        ),
+        href: "/articles/tutorial/quickstart/individual-evaluation",
         type: "intro",
       },
     ].map((item, i) => (
@@ -34,8 +64,20 @@ export const QuickstartCardList2 = (input) => (
       {
         icon: "🛠",
         label: "Team Evaluation: Your Cluster, Real Tests",
-        description:
-          "Best for teams investigating Testkube in real-life scenarios. Requires Kubernetes cluster access with sufficient permissions for deployment and debugging",
+        description: (
+          <>
+            <p style={{margin: '0.25rem 0 0.5rem', color: 'var(--ifm-color-content-secondary)'}}>
+              Best for teams investigating Testkube in real-life scenarios. Requires Kubernetes cluster access with sufficient permissions for deployment and debugging
+            </p>
+
+            <KV items={[
+              ['Goal', 'Install the full Testkube platform into a shared environment, running real tests'],
+              ['Persona', 'Team Lead, Senior DevOps Engineer, QA Lead'],
+              ['Intended for', 'Orchestrating existing tests, tying into CICD, event triggers, and getting a real-world feel for the tool'],
+              ['Time to value', '≤ a sprint'],
+            ]}/>
+          </>
+        ),
         href: "/articles/tutorial/quickstart/team-evaluation",
         type: "intro",
       },
@@ -55,8 +97,20 @@ export const QuickstartCardList3 = (input) => (
       {
         icon: "🛠",
         label: "Enterprise POC: Strategic Pilot, Global Roll-out",
-        description:
-          "Best for enterprise architecture or central tooling teams evaluating tooling to support strategic initiatives",
+        description: (
+          <>
+            <p style={{margin: '0.25rem 0 0.5rem', color: 'var(--ifm-color-content-secondary)'}}>
+              Best for enterprise architecture or central tooling teams evaluating tooling to support strategic initiatives
+            </p>
+
+            <KV items={[
+              ['Goal', 'Evaluate Testkube against enterprsie requirements like security, scalability, reporting, integrations, and in line with formal POC best practices'],
+              ['Persona', 'Engineering, DevOps, QA Leadership'],
+              ['Intended for', 'Integrating test orchestration into strategic intiatives around quality, speed of delivery, and cost reduction'],
+              ['Time to value', '≤ a quarter'],
+            ]}/>
+          </>
+        ),
         href: "/articles/tutorial/quickstart/enterprise-poc",
         type: "intro",
       },
@@ -70,11 +124,7 @@ export const QuickstartCardList3 = (input) => (
 
 <QuickstartCardList3 />
 
-| Evaluation Path | Goal | Persona | Intended for | Time to Value |
-|---|---|---|---|---|
-| Local Sandbox | To see Testkube run a test inside a local Kubernetes cluster with minimal friction | An individual developer or technical evaluator on their local machine | Exploring the UI, manual trigger points, using sample workflows, and understanding the contours of the product | ≤ a day |
-| Team Evaluation | Install the full Testkube platform into a shared environment, running real tests | Team Lead, Senior DevOps Engineer, QA Lead | Orchestrating existing tests, tying into CICD, event triggers, and getting a real-world feel for the tool  | ≤ a sprint |
-| Enterprise POC | Evaluate Testkube against enterprsie requirements like security, scalability, reporting, integrations, and in line with formal POC best practices | Engineering, DevOps, QA Leadership | Integrating test orchestration into strategic intiatives around quality, speed of delivery, and cost reduction | ≤ a quarter |
+
 
 ## Looking try Testkube without installation?
 
