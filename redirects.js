@@ -135,7 +135,7 @@ const redirects = [
       "/getting-started/step3-creating-first-test",
       "/articles/step3-creating-first-test",
     ],
-    to: "/articles/tutorial/quickstart",
+    to: "/articles/tutorial/quickstart/overview",
   },
   {
     from: [
@@ -388,7 +388,7 @@ const redirects = [
       "/testkube-pro-on-prem/articles/testkube-pro-on-prem",
       "/articles/install/quickstart-install",
     ],
-    to: "/articles/install/install-with-cli",
+    to: "/articles/tutorial/quickstart/individual-evaluation",
   },
   {
     from: ["/testkube-enterprise/articles/usage-guide", "/testkube-pro-on-prem/articles/usage-guide"],
@@ -436,7 +436,7 @@ const redirects = [
   },
   {
     from: "/articles/getting-started",
-    to: "/articles/tutorial/quickstart",
+    to: "/articles/tutorial/quickstart/overview",
   },
   {
     from: "/articles/helm-chart",

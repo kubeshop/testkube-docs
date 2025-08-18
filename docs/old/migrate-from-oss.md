@@ -96,4 +96,4 @@ After running the command, navigate to the Dashboard and you will see all your t
 
 It is possible to deploy Testkube On-Prem and connect an Agent to it in the same k8s cluster without exposing endpoints to the outside world. You can find all the instructions at [the Testkube Quickstart][quickstart].
 
-[quickstart]: /articles/install/install-with-cli
+[quickstart]: /articles/tutorial/quickstart/individual-evaluation

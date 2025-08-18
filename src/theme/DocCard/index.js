@@ -42,12 +42,13 @@ export function CardLayout({ href, icon, logo, title, description }) {
         {title}
       </h2>
       {description && (
-        <p
-          className={clsx("text--truncate", styles.cardDescription)}
-          title={description}
-        >
-          {description}
-        </p>
+        <div className={styles.cardDescription}>
+          {typeof description === 'string' ? (
+            <p className="text--truncate" title={description}>{description}</p>
+          ) : (
+            description
+          )}
+        </div>
       )}
     </CardContainer>
   );

@@ -23,9 +23,30 @@ const sidebars = {
       id: "index",
     },
     {
-      type: "doc",
+      type: "category",
       label: "Quickstart",
-      id: "articles/tutorial/quickstart",
+      items: [
+        {
+          type: "doc",
+          label: "Overview",
+          id: "articles/tutorial/quickstart/overview",
+        },
+        {
+          type: "doc",
+          label: "Individual Evaluation",
+          id: "articles/tutorial/quickstart/individual-evaluation",
+        }, 
+        {
+          type: "doc",
+          label: "Team Evaluation",
+          id: "articles/tutorial/quickstart/team-evaluation",
+        },
+        {
+          type: "doc",
+          label: "Enterprise POC",
+          id: "articles/tutorial/quickstart/enterprise-poc",
+        },
+      ],
     },
     {
       type: "doc",
@@ -51,13 +72,8 @@ const sidebars = {
           collapsed: false,
           items: [
             {
-              type: "doc",
-              label: "Evaluation",
-              id: "articles/install/install-with-cli",
-            },
-            {
               type: "category",
-              label: "Production",
+              label: "Introductory Guides",
               items: [
                 {
                   type: "doc",

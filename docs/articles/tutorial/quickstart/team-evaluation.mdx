@@ -1,41 +1,43 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Testkube Quickstart
+# Testkube Team Evaluation
 
-In this tutorial you will learn how to get started with Testkube, run your first Test Workflow, inspect its executions, and integrate it with your CI/CD pipeline(s). If you’d like to learn more about Testkube before deploying, [schedule a conversation with our Solutions Engineering team](https://testkube.io/demo).
- 
+In this tutorial you will learn how to get started with Testkube, run your first Test Workflow, inspect its executions, and
+integrate it with your CI/CD pipeline(s).
+
+**Prefer to talk to a person? [Schedule time with our Solutions Engineering team!](/articles/tutorial/quickstart/team-evaluation)**
 
 :::note
-Testkube is composed of two core components. The first is the Control Plane, which exposes the UI Dashboard, and facilitates management of Test Workflows, data, users, etc. The second component is the Test Execution Agent. One or more Agents can connect to a Control Plane, usually with one Agent per cluster, and do the work of running tests (scheduling jobs and managing pods). Learn more about our product architecture in the [Installation Overview](https://www.notion.so/articles/install/overview).
+This demo installation is for a **team evaluation**, using a Kubernetes cluster a real Kubernetes cluster. Customization of the deployment may be required (ex. using S3) but can be implemented over time. 
 
-The Testkube Control Plane has flexibility in its deployment: 
-
-- **Testkube On-Prem** runs both the Control Plane and Test Execution Agents in your infrastructure.
-- **Testkube Cloud Control Plane** runs the Control Plane in our cloud and the Test Execution Agents in your infrastructure.
-
-With that in mind, we have a few recommendations on how to start with Testkube: 
-
-- If you are looking to evaluate Testkube before sharing it with others, we recommend using the [Evaluation Install](https://docs.testkube.io/articles/tutorial/quickstart/individual-evaluation). This runs on your local machine, and is deployed into a pre-existing light-weight Kubernetes distribution (like [minikube](https://minikube.sigs.k8s.io/docs/)). This guide assumes an Evaluation Installation.
-- If you are looking to share Testkube with your team, then we recommend using the Cloud Control Plane, or [deploying an On-Prem Control Plane via Helm](https://docs.testkube.io/articles/install/install-with-helm) to a cluster which your team, or partner DevOps team, can manage. If you self host, we recommend deploying the Agent and Control Plane to the same cluster and namespace, unless your use case requires otherwise.
+For evaluations suitable for **individual usage**, please follow the [Individual Evaluation quickstart guide](/articles/tutorial/quickstart/individual-evaluation). \
+For information on conducting **enterprise proof of concepts**, please review the [Enterprise POC guide](/articles/tutorial/quickstart/enterprise-poc).
 :::
 
 ## 1. Install or Sign in to Testkube
+
+Testkube has flexibility in its deployments (learn more in the [Installation Overview](/articles/install/overview)).
+- **Testkube On-Prem** runs both the Control Plane and Test Execution Agents in your infrastructure.
+- **Testkube Cloud Control Plane** runs the Control Plane in our cloud and the Test Execution Agents in your infrastructure.
 
 <Tabs groupId="tutorial-install-cli">
 <TabItem value="on-prem" label="Testkube On-Prem" default>
 
 1. [Install the Testkube CLI](/articles/install/cli)
 2. Request a trial license at https://testkube.io/download.
-3. Run the `testkube init demo` command in your terminal.
+3. Deploy Testkube via Helm:
+```bash
+helm upgrade --install \
+  --create-namespace \
+  --namespace testkube \
+   -f values.yaml \
+  testkube oci://registry-1.docker.io/kubeshop/testkube-enterprise --version <version>
+```
+*For more information on baseline configuration of the Testkube Control Plane deployment, please visit [our base installation documentation ][base-install]*
+
 4. Run the `testkube dashboard` command to open Testkube without configuring Ingress.
 5. Log in to Testkube with the credentials from the third step.
-
-:::warning
-This evaluation installation is for a **single/local user only**, it is not configured to be shared with other users.
-
-For a **production install**, please install with the [Helm Chart](/articles/install/install-with-helm) for more flexibility and configurability.
-:::
 
 You will now see the Testkube Dashboard for the default environment created in your on-prem installation:
 
@@ -54,34 +56,13 @@ You will now see the Testkube Dashboard for the default environment created in y
   ![The dashboard](./img/new-environment-dashboard.png)
 
 </TabItem>
-<TabItem value="demo" label="Testkube Demo Environment (no install)">
-
-The Testkube Demo environment available in the Testkube Cloud Control Plane is a great way to explore the functionality provided by
-Testkube without having to install anything in your infrastructure. It contains a large collection of Workflows for
-different testing tools, with corresponding execution results and Test Insights for you to explore.
-
-:::info
-The Demo Environment won't allow you to follow the steps further down in the quickstart since
-those steps require your own environment.
-:::
-
-1. Sign in to the [Testkube Cloud Control Plane](https://app.testkube.io).
-2. Once authenticated, [go to the demo environment.](https://app.testkube.io/demo-environment) - (there are multiple in-app
-  prompts for this also).
-
-You will now see the Dashboard without having to install an agent, and are free to explore/run existing Workflows,
-look at execution results, etc.
-
-![The dashboard](./img/demo-environment-dashboard.png)
-
-</TabItem>
 </Tabs>
 
 :::info
 Looking for more installation details or customization? You can learn more in [our installation documentation][testkube-installing].
 :::
 
-## 2. Define your First Test Workflow
+## 2. Define your First Test Workflow test
 
 Let's take a look at a K6 load test to familiarize ourselves with Testkube's Workflows:
 
@@ -167,40 +148,17 @@ Learn more about Workflows functionality and configuration in the [Workflow Docu
 
 ## 3. Run your Test Workflow
 
-<Tabs groupId="tutorial-cli">
-
-<TabItem value="dashboard" label="Using the Dashboard">
-
 1. Choose "Import from YAML" in the [Workflow Wizard](/articles/test-workflows-create-wizard)
 2. Copy and paste the Test Workflow above.
 3. Click the `Create` button.
 4. View the status and logs of the Workflow as it is executing.
 
-:::tip
+:::info
 Alternatively, you can use the "Create from Wizard" option in the Workflow Wizard to create your own Test Workflow from
 scratch leveraging Test Workflow Templates for a variety of tools such as K6, Postman, Artillery, Cypress, Playwright and more.
 :::
 
-</TabItem>
-
-<TabItem value="cli" label="Using the CLI">
-
-1. Create a file named _my-workflow.yaml_.
-2. Copy and paste the Test Workflow above.
-3. Execute the command below.
-4. View the status and logs of the Workflow as it is executing.
-
-```bash
-kubectl apply -f my-workflow.yaml && kubectl testkube run tw my-test --watch
-```
-
-</TabItem>
-</Tabs>
-
 ## 4. Looking at Past Executions
-
-<Tabs groupId="tutorial-cli">
-<TabItem value="dashboard" label="Using the dashboard" default>
 
 1. Go to the Dashboard and open your recent execution.
 2. You can see this execution's logs right away.
@@ -208,27 +166,6 @@ kubectl apply -f my-workflow.yaml && kubectl testkube run tw my-test --watch
 4. Click the download icon to download it.
 
 ![A past execution](./img/past-execution-092024.png)
-
-</TabItem>
-
-<TabItem value="cli" label="Using the CLI">
-
-```bash
-# List recent executions.
-kubectl testkube get twe
-
-# List artifacts of this execution.
-kubectl testkube get artifacts 664dbae9924211bb076bd58e
-
-# Download the artifact of this execution.
-kubectl testkube download artifact 6655cc6d7d0abf889e531168 junit.xml .
-
-# Download the logs of this execution.
-kubectl testkube get twe 664dbae9924211bb076bd58e --logs-only
-```
-
-</TabItem>
-</Tabs>
 
 ## 5. Integrate with your CI/CD Pipelines
 
@@ -244,7 +181,7 @@ For example, if I want to run this test every time my deployment's image updates
 3. You can see the instructions where all variables have been prefilled for you.
 4. Follow these instructions to run it on your favourite provider.
 
-:::tip
+:::info
 Testkube currently shows instructions for GitHub Actions, GitLab CI, CircleCI, Jenkins, Azure DevOps, Tekton and ArgoCD, but can
   be integrated into any CI/CD pipeline by automating the [Testkube CLI](/articles/cli) or the [Testkube API](/openapi/overview).
 
@@ -270,7 +207,7 @@ spec:
   steps: …
 ```
 
-:::tip
+:::info
 Learn more about [Scheduled Execution](/articles/scheduling-tests) in the documentation.
 :::
 
@@ -284,7 +221,7 @@ Learn more about [Scheduled Execution](/articles/scheduling-tests) in the docume
 
   ![create-trigger](./img/create-trigger.png)
 
-  :::tip
+  :::info
   Learn more about [Kubernetes Event Triggers](/articles/test-triggers) in the documentation.
   :::
 
@@ -309,7 +246,7 @@ Other ways to trigger a Test Workflow in Testkube include:
 _Congratulations on running your first Test Workflow!_
 
 At this point you should have installed Testkube, run a sample test and integrated that within your pipeline.
-Our recommended next step is to write run one of your own tests within Testkube.
+Our recommended next step is to run one of your own tests within Testkube.
 
 To learn how to do this we recommend you either:
 
@@ -318,10 +255,14 @@ To learn how to do this we recommend you either:
 - [Dive deeper into the workflow documentation.][upnext-docs]
 
 :::tip
-Don't hesitate to reach out for help on our [Slack Community](https://bit.ly/testkube-slack) or by [Getting in touch](https://testkube.io/contact).
+Want to speak with a human? Don't hesitate to reach out for help by:
+- [Scheduling time with our Solutions Engineering team](https://testkube.io/demo)
+- Joining our [Slack Community](https://bit.ly/testkube-slack)
+- [Reaching out to sales](https://testkube.io/contact)
 :::
 
 [testkube-installing]: /articles/install/overview
 [upnext-tutorial]: /articles/tutorial/example
 [upnext-examples]: /articles/examples/overview
 [upnext-docs]: /articles/test-workflows
+[base-install]: /articles/install/3-install-with-helm.md
