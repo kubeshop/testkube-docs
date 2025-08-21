@@ -27,6 +27,10 @@ Currently, the following metrics are exposed:
 * `testkube_testworkflow_executions_duration_ms`- The duration of test workflow executions.
 * `testkube_testtrigger_event_count` - The total number of test trigger events.
 * `testkube_webhook_executions_count` - The total number of webhook executions.
+* `testkube_testworkflow_execution_steps_duration_ms` - The duration of test workflow execution steps.
+* `testkube_testworkflow_execution_steps_count` - The total number of test workflow execution steps.
+* `testkube_testworkflow_execution_steps_start_time_ms` - The start time of test workflow execution steps.
+* `testkube_testworkflow_execution_steps_finish_time_ms` - The finish time of test workflow execution steps.
 
 Note: as the metrics also include labels with the associated test name (see below), no metrics are produced unless some tests were run since 
 the last api-server restart 
