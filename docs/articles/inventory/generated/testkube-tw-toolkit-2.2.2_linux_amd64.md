@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:04ccd66a764925af271d033448166bf2c57a27b97471109670bd3d18f69ad8b2</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 5" src="https://img.shields.io/badge/high-5-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/medium-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <!-- unspecified: 0 --></td></tr>
-<tr><td>platform</td><td>linux/arm64</td></tr>
-<tr><td>size</td><td>46 MB</td></tr>
-<tr><td>packages</td><td>195</td></tr>
+<tr><td>digest</td><td><code>sha256:aa394461138bdb8efef26e2bab3018e3bbb6738413ee76082f7ed9766d35f410</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 5" src="https://img.shields.io/badge/high-5-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/medium-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>platform</td><td>linux/amd64</td></tr>
+<tr><td>size</td><td>49 MB</td></tr>
+<tr><td>packages</td><td>196</td></tr>
 </table>
 </details></table>
 </details>
@@ -15,7 +15,7 @@ hide_table_of_contents: true
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 5" src="https://img.shields.io/badge/H-5-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>git</strong> <code>2.45.3-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/git@2.45.3-r0?arch=aarch64&distro=alpine-3.20.6</code></small><br/>
+<small><code>pkg:apk/alpine/git@2.45.3-r0?arch=x86_64&distro=alpine-3.20.6</code></small><br/>
 
 ```dockerfile
 # tw-toolkit.Dockerfile (25:25)
