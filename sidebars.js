@@ -461,7 +461,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Kubernetes Triggers",
+              label: "Kubernetes Events",
               id: "articles/test-triggers",
             },
             {
