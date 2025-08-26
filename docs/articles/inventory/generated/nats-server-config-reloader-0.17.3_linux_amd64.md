@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:6798c689cca8a98f34e57db124abe46c81edf9bfb02d54ad85da60d0e41ef592</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/high-1-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/medium-3-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>digest</td><td><code>sha256:6798c689cca8a98f34e57db124abe46c81edf9bfb02d54ad85da60d0e41ef592</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/high-1-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/medium-3-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/low-2-fce1a9"/> <!-- unspecified: 0 --></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>5.1 MB</td></tr>
 <tr><td>packages</td><td>24</td></tr>
@@ -121,6 +121,80 @@ FROM alpine:3.22.0
 <tr><td>Affected range</td><td><code>&lt;3.5.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.1-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.030%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>busybox</strong> <code>1.37.0-r18</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/busybox@1.37.0-r18?os_name=alpine&os_version=3.22</code></small><br/>
+
+```dockerfile
+# Dockerfile (4:31)
+FROM alpine:3.22.0 AS deps
+
+ARG GO_APP
+ARG GORELEASER_DIST_DIR=/go/src/dist
+
+ARG TARGETOS
+ARG TARGETARCH
+ARG TARGETVARIANT
+
+RUN mkdir -p /go/bin /go/src ${GORELEASER_DIST_DIR}
+
+COPY --from=build ${GORELEASER_DIST_DIR}/ ${GORELEASER_DIST_DIR}
+
+RUN <<EOT
+  set -e 
+  apk add --no-cache ca-certificates jq
+  cd ${GORELEASER_DIST_DIR}/..
+
+  if [[ ${TARGETARCH} == "arm" ]]; then VARIANT=$(echo ${TARGETVARIANT} | sed 's/^v//'); fi
+  BIN_PATH=$(jq -r ".[] |select(.type   == \"Binary\" and \
+                                .name   == \"${GO_APP}\" and \
+                                .goos   == \"${TARGETOS}\" and \
+                                .goarch == \"${TARGETARCH}\" and \
+                                (.goarm == \"${VARIANT}\" or .goarm == null)) | .path" < /go/src/dist/artifacts.json)
+  cp ${BIN_PATH} /go/bin
+EOT
+
+FROM alpine:3.22.0
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-46394?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.22&vr=%3C%3D1.37.0-r18"><img alt="low : CVE--2025--46394" src="https://img.shields.io/badge/CVE--2025--46394-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=1.37.0-r18</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.022%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2024-58251?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.22&vr=%3C%3D1.37.0-r18"><img alt="low : CVE--2024--58251" src="https://img.shields.io/badge/CVE--2024--58251-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=1.37.0-r18</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.031%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
