@@ -1,0 +1,94 @@
+.copilot-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+  font-family: var(--ifm-font-family-base);
+}
+
+.copilot-chat-wrapper {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+
+  /* Default size */
+  width: 380px;
+  height: 500px;
+
+  /* Min sizes */
+  min-width: 320px;
+  min-height: 400px;
+}
+
+/* Responsive sizing */
+@media (max-width: 480px) {
+  .copilot-chat-wrapper {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    width: calc(100vw - 32px);
+    max-width: 380px;
+    height: 60vh;
+    min-height: 300px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .copilot-chat-wrapper {
+    width: 360px;
+    height: 50vh;
+    min-height: 400px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .copilot-chat-wrapper {
+    width: 420px;
+    height: 580px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .copilot-chat-wrapper {
+    width: 480px;
+    height: 650px;
+    max-height: 75vh;
+  }
+}
+
+@media (min-width: 1441px) and (max-width: 1920px) {
+  .copilot-chat-wrapper {
+    width: 520px;
+    height: 700px;
+    max-height: 80vh;
+  }
+}
+
+/* 2K displays and larger */
+@media (min-width: 1921px) {
+  .copilot-chat-wrapper {
+    width: 600px;
+    height: 800px;
+    max-height: 85vh;
+  }
+}
+
+/* Ultra-wide displays */
+@media (min-width: 2560px) {
+  .copilot-chat-wrapper {
+    width: 650px;
+    height: 850px;
+    max-height: 90vh;
+  }
+}
+
+@media (max-height: 600px) {
+  .copilot-chat-wrapper {
+    height: 80vh;
+    max-height: 400px;
+  }
+}

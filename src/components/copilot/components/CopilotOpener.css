@@ -1,0 +1,30 @@
+.copilot-opener {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ifm-color-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+}
+
+.copilot-opener:hover {
+  background: var(--ifm-color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.copilot-opener:active {
+  background: var(--ifm-color-primary-darker);
+  transform: translateY(0);
+}
+
+.copilot-opener-label {
+  white-space: nowrap;
+}
