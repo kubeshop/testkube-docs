@@ -8,6 +8,33 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Monthly Release v1.18.0 (2025-08-27)
+
+This release is available in Helm Chart 2.324.0.
+
+### What's new!
+
+This release brings smarter filtering, personalized views, enhanced observability, and streamlined enterprise integrations.
+
+**Dynamic filters** now automatically show only the options that are actually available in your current data, **eliminating UI clutter and making filtering more intuitive.** No more scrolling through irrelevant filter options.
+
+**Private filters** let you **create personalized filter sets that only you can see**, separate from shared team filters. Access and manage your private filters through the new navbar section without affecting what others see.
+
+**Enhanced Prometheus metrics** now include **additional workflow execution fields (triggered_by, tags) plus new step-level duration and count metrics** for deeper visibility into Test Workflow performance and execution details.
+
+**SCIM 2.0 enterprise integration is now **fully multi-tenant and available on SaaS** for the first time. Configure identity provider integrations (Okta, Azure AD, etc.) **directly from Organization Management > Product Features\*\* - no more Helm changes or service restarts needed for on-prem users.
+
+**New Testkube MCP Server** enables **AI assistants (GitHub Copilot, Cursor, Claude Desktop) to directly run and monitor Test Workflows**, analyze results, search execution history, and create workflows. AI agents can now help automate debugging and identify failing patterns right from your coding environment.
+
+### Improvements and fixes
+
+- Added dynamic filtering system that shows only available options based on current data to reduce interface clutter
+- Added private filters - save personalized filter views that only you can see, with easy management through a new navbar section
+- CLI: Added support for SSO login, allowing users to authenticate the Testkube CLI with their organization’s identity provider.
+- New and enhanced Agent Prometheus metrics
+- Added support for SCIM in SaaS and improved user experience for on-prem as it is now configurable via UI.
+- Updated Usage & Billing page for SaaS product
+
 ## Monthly Release v1.17.1 (2025-07-29)
 
 This release is available in Helm Chart 2.323.1.
