@@ -8,6 +8,27 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Monthly Release v1.18.0 (2025-08-27)
+
+This release is available in Helm Chart 2.324.0.
+
+### What's new!
+
+Latest release is live, bringing personalized views, streamlined enterprise integrations, and new AI assistant capabilities that let tools like GitHub Copilot and Claude directly interact with your test workflows.
+
+**Private filters** let you **create personalized filter sets that only you can see**, separate from shared team filters. Access and manage your private filters through the new navbar section without affecting what others see.
+
+**SCIM 2.0 enterprise integration** is now **fully multi-tenant and available on SaaS** for the first time. Configure identity provider integrations (Okta, Azure AD, etc.) **directly from Organization Management > Product Features** - no more Helm changes or service restarts needed for on-prem users.
+
+**New Testkube MCP Server** enables **AI assistants (GitHub Copilot, Cursor, Claude Desktop) to directly run and monitor Test Workflows**, analyze results, search execution history, and create workflows. AI agents can now help automate debugging and identify failing patterns right from your coding environment. [Learn more in the docs →](https://docs.testkube.io/articles/mcp-overview)
+
+### Improvements and fixes
+
+- Added dynamic filtering system that shows only available options based on current data to reduce interface clutter.
+- CLI: Added support for SSO login, allowing users to authenticate the Testkube CLI with their organization’s identity provider.
+- Agent Metrics: Expanded Prometheus metrics for Test Workflows and Execution Steps. Workflow execution metrics now include [additional fields](https://docs.testkube.io/articles/metrics#executions) (`triggered_by`, `tags`) for richer filtering and analysis, while new metrics for step-level duration and counts provide deeper visibility into execution details.
+- Updated Usage & Billing page for SaaS product.
+
 ## Monthly Release v1.17.1 (2025-07-29)
 
 This release is available in Helm Chart 2.323.1.
