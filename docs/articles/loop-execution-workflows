@@ -1,0 +1,43 @@
+# Looping Test Workflow Executions from Workflows
+
+For certain testing scenarios, teams may desire a workflow to run continuously, looped, until some timeout condition occurs (the workflow is manually ended, or a time limit is reached). This can be useful for driving activity against a system under test while a second workflow performs the actual tests. 
+
+The Services feature of Test Workflows allows for this type of looping behavior. A service is started at the beginning of a workflow or step and stopped at the end. A service can be a dependency background process for a step or workflow, like a Selenium Grid, or a database with test data, but it can also be used to run a simple script while other steps are executed. We take this simple approach to achieve our goal: 
+
+```yaml 
+kind: TestWorkflow
+apiVersion: testworkflows.testkube.io/v1
+metadata:
+  name: loop-driver
+  namespace: testkube
+spec:
+  services:
+    cli-runner:
+      logs: always
+      content:
+        files:
+        - path: /scripts/loop.sh
+          content: |
+            #!/bin/sh
+            set -eu
+            testkube set context --api-key tkcapi_### --org tkcorg_### --env tkcenv_###
+            while true; do
+              echo "Triggering workflow..."
+              testkube run tw loop-target
+              sleep 20
+            done
+      image: kubeshop/testkube-cli:latest
+      command:
+      - /bin/sh
+      - -lc
+      - |
+        exec /bin/sh /scripts/loop.sh
+  steps:
+  - name: keep-alive
+    run:
+      image: bash:devel-alpine3.22
+      shell: sleep 300
+```
+
+
+
