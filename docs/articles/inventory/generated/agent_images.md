@@ -1,6 +1,6 @@
 :::info
 
-Based on chart `testkube` as of version `2.2.6` on 26-08-2025
+Based on chart `testkube` as of version `2.2.6` on 27-08-2025
 
 :::
 
