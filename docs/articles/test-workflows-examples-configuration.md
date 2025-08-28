@@ -30,7 +30,14 @@ spec:
       default: 2
       sensitive: true # <- Marked as sensitive
     printTree:
-      type: boolean # <- No default, marked as required
+      type: boolean   # <- No default, marked as required
+    targetDomain:
+      type: string 
+      enum:           # <- Generates a drop-down list to select from at execution
+      - prod.acme.eu
+      - staging.acme.eu
+      - dev.acme.eu
+      default: dev.acme.eu
 ```
 
 ### Example: Parametrized Container Image and Commands
