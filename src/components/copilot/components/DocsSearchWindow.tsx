@@ -23,7 +23,8 @@ const DocsSearchWindow: FC<DocsSearchWindowProps> = ({ onClose }) => {
     isLoading,
     hasResults,
   } = useDocsSearch({
-    apiUrl: process.env.NODE_ENV === "development" ? "http://localhost:9090" : "",
+    apiUrl:
+      process.env.NODE_ENV === "development" ? "http://localhost:9090" : "",
     enableAuth: false,
   });
 
@@ -48,11 +49,19 @@ const DocsSearchWindow: FC<DocsSearchWindowProps> = ({ onClose }) => {
         </div>
         <div className="docs-search-window-actions">
           {hasResults && (
-            <button onClick={handleNewSearch} className="docs-search-window-new-button" title="New search">
+            <button
+              onClick={handleNewSearch}
+              className="docs-search-window-new-button"
+              title="New search"
+            >
               ↻
             </button>
           )}
-          <button onClick={onClose} className="docs-search-window-close-button" title="Close">
+          <button
+            onClick={onClose}
+            className="docs-search-window-close-button"
+            title="Close"
+          >
             ✕
           </button>
         </div>

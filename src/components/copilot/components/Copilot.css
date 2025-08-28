@@ -24,6 +24,72 @@
   min-height: 400px;
 }
 
+/* Resize Handle */
+.copilot-resize-handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  cursor: nesw-resize;
+  background: transparent;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 2px;
+}
+
+.copilot-resize-handle::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 16px;
+  height: 16px;
+  background-image: 
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+    radial-gradient(circle at 8px 2px, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+    radial-gradient(circle at 14px 2px, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+    radial-gradient(circle at 2px 8px, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+    radial-gradient(circle at 8px 8px, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+    radial-gradient(circle at 14px 8px, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+    radial-gradient(circle at 8px 14px, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+    radial-gradient(circle at 14px 14px, rgba(255, 255, 255, 0.4) 1px, transparent 1px);
+  background-size: 16px 16px;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.copilot-resize-handle:hover::before {
+  opacity: 1;
+}
+
+.copilot-resize-handle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 16px;
+  height: 16px;
+  background-image: 
+    radial-gradient(circle at 2px 2px, var(--ifm-color-primary) 1px, transparent 1px),
+    radial-gradient(circle at 8px 2px, var(--ifm-color-primary) 1px, transparent 1px),
+    radial-gradient(circle at 14px 2px, var(--ifm-color-primary) 1px, transparent 1px),
+    radial-gradient(circle at 2px 8px, var(--ifm-color-primary) 1px, transparent 1px),
+    radial-gradient(circle at 8px 8px, var(--ifm-color-primary) 1px, transparent 1px),
+    radial-gradient(circle at 14px 8px, var(--ifm-color-primary) 1px, transparent 1px),
+    radial-gradient(circle at 8px 14px, var(--ifm-color-primary) 1px, transparent 1px),
+    radial-gradient(circle at 14px 14px, var(--ifm-color-primary) 1px, transparent 1px);
+  background-size: 16px 16px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.copilot-resize-handle:hover::after {
+  opacity: 0.8;
+}
+
 /* Responsive sizing */
 @media (max-width: 480px) {
   .copilot-chat-wrapper {
@@ -91,4 +157,29 @@
     height: 80vh;
     max-height: 400px;
   }
+}
+
+/* Dark mode support for resize handle */
+[data-theme="dark"] .copilot-resize-handle::before {
+  background-image: 
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 8px 2px, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 14px 2px, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 2px 8px, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 8px 8px, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 14px 8px, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 8px 14px, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 14px 14px, rgba(255, 255, 255, 0.3) 1px, transparent 1px);
+}
+
+[data-theme="dark"] .copilot-resize-handle::after {
+  background-image: 
+    radial-gradient(circle at 2px 2px, var(--ifm-color-primary-lighter) 1px, transparent 1px),
+    radial-gradient(circle at 8px 2px, var(--ifm-color-primary-lighter) 1px, transparent 1px),
+    radial-gradient(circle at 14px 2px, var(--ifm-color-primary-lighter) 1px, transparent 1px),
+    radial-gradient(circle at 2px 8px, var(--ifm-color-primary-lighter) 1px, transparent 1px),
+    radial-gradient(circle at 8px 8px, var(--ifm-color-primary-lighter) 1px, transparent 1px),
+    radial-gradient(circle at 14px 8px, var(--ifm-color-primary-lighter) 1px, transparent 1px),
+    radial-gradient(circle at 8px 14px, var(--ifm-color-primary-lighter) 1px, transparent 1px),
+    radial-gradient(circle at 14px 14px, var(--ifm-color-primary-lighter) 1px, transparent 1px);
 }

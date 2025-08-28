@@ -11,9 +11,23 @@ interface DocsSearchProps {
   placeholder?: string;
 }
 
-const DocsSearch: FC<DocsSearchProps> = ({ config, className = "", placeholder }) => {
-  const { status, query, response, error, search, stopSearch, retry, resetState, isLoading, hasResults } =
-    useDocsSearch(config);
+const DocsSearch: FC<DocsSearchProps> = ({
+  config,
+  className = "",
+  placeholder,
+}) => {
+  const {
+    status,
+    query,
+    response,
+    error,
+    search,
+    stopSearch,
+    retry,
+    resetState,
+    isLoading,
+    hasResults,
+  } = useDocsSearch(config);
 
   const handleSearch = (searchQuery: string) => {
     search(searchQuery);
@@ -31,7 +45,11 @@ const DocsSearch: FC<DocsSearchProps> = ({ config, className = "", placeholder }
         <div className="docs-search-header">
           <h3 className="docs-search-title">🤖 Ask Testkube Documentation</h3>
           {hasResults && (
-            <button onClick={handleReset} className="docs-search-reset-button" title="Start new search">
+            <button
+              onClick={handleReset}
+              className="docs-search-reset-button"
+              title="Start new search"
+            >
               New Search
             </button>
           )}
@@ -60,8 +78,8 @@ const DocsSearch: FC<DocsSearchProps> = ({ config, className = "", placeholder }
         {hasResults && (
           <div className="docs-search-footer">
             <p className="docs-search-disclaimer">
-              AI-generated responses based on Testkube documentation. Please verify important information in the
-              official docs.
+              AI-generated responses based on Testkube documentation. Please
+              verify important information in the official docs.
             </p>
           </div>
         )}
