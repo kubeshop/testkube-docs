@@ -1,0 +1,236 @@
+/* DocsSearchWindow - Floating window styles that match existing copilot design */
+
+.docs-search-window {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--ifm-color-white);
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: var(--ifm-font-family-base);
+}
+
+/* Header */
+.docs-search-window-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  background: var(--ifm-color-primary);
+  color: var(--ifm-color-white);
+  border-bottom: 1px solid var(--ifm-color-primary-dark);
+}
+
+.docs-search-window-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.docs-search-window-icon {
+  font-size: 1.125rem;
+}
+
+.docs-search-window-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.docs-search-window-new-button,
+.docs-search-window-close-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: var(--ifm-color-white);
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.docs-search-window-new-button:hover,
+.docs-search-window-close-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.docs-search-window-close-button:hover {
+  background: rgba(255, 0, 0, 0.3);
+}
+
+/* Content */
+.docs-search-window-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Input Section */
+.docs-search-window-input-section {
+  padding: 1rem 1.25rem 0;
+  flex-shrink: 0;
+}
+
+/* Override DocsSearch input styles for the window context */
+.docs-search-window-input-section .docs-search-input-container {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  background: var(--ifm-color-white);
+}
+
+.docs-search-window-input-section .docs-search-input-container:focus-within {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 2px var(--ifm-color-primary-lightest);
+}
+
+.docs-search-window-input-section .docs-search-input {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+}
+
+.docs-search-window-input-section .docs-search-submit-button {
+  padding: 0.75rem;
+}
+
+/* Results Section */
+.docs-search-window-results-section {
+  flex: 1;
+  padding: 1rem 1.25rem 1.25rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Override DocsSearch results styles for compact window */
+.docs-search-window-results {
+  flex: 1;
+  min-height: auto;
+}
+
+.docs-search-window-results .docs-search-placeholder {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.docs-search-window-results .docs-search-placeholder-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.docs-search-window-results .docs-search-response {
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
+.docs-search-window-results .docs-search-progress {
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 6px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.docs-search-window-results .docs-search-error {
+  padding: 1rem;
+  margin: 0;
+}
+
+/* Sources in window */
+.docs-search-window-sources {
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  flex-shrink: 0;
+}
+
+.docs-search-window-sources .docs-search-sources-title {
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.docs-search-window-sources .docs-search-source-item {
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.docs-search-window-sources .docs-search-source-item:last-child {
+  margin-bottom: 0;
+}
+
+.docs-search-window-sources .docs-search-source-file {
+  font-size: 0.8125rem;
+}
+
+.docs-search-window-sources .docs-search-source-lines {
+  font-size: 0.6875rem;
+}
+
+.docs-search-window-sources .docs-search-source-excerpt {
+  font-size: 0.8125rem;
+  padding: 0.375rem 0.5rem;
+  margin-top: 0.375rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .docs-search-window-header {
+    padding: 0.875rem 1rem;
+  }
+
+  .docs-search-window-title {
+    font-size: 0.875rem;
+  }
+
+  .docs-search-window-input-section {
+    padding: 0.875rem 1rem 0;
+  }
+
+  .docs-search-window-results-section {
+    padding: 0.875rem 1rem 1rem;
+  }
+
+  .docs-search-window-sources {
+    padding: 0.875rem;
+  }
+}
+
+/* Dark mode support */
+[data-theme="dark"] .docs-search-window {
+  background: var(--ifm-color-emphasis-100);
+}
+
+[data-theme="dark"] .docs-search-window-input-section .docs-search-input-container {
+  background: var(--ifm-color-emphasis-200);
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+[data-theme="dark"] .docs-search-window-sources {
+  background: var(--ifm-color-emphasis-200);
+}
+
+/* Scrollbar styling for the results section */
+.docs-search-window-results-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.docs-search-window-results-section::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.docs-search-window-results-section::-webkit-scrollbar-thumb {
+  background: var(--ifm-color-emphasis-400);
+  border-radius: 3px;
+}
+
+.docs-search-window-results-section::-webkit-scrollbar-thumb:hover {
+  background: var(--ifm-color-emphasis-500);
+}

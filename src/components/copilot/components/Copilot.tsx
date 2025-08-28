@@ -1,10 +1,10 @@
-import * as React from "react";
+import { FC, useState } from "react";
 import CopilotOpener from "./CopilotOpener";
-import CopilotChatWindow from "./CopilotChatWindow";
+import DocsSearchWindow from "./DocsSearchWindow";
 import "./Copilot.css";
 
-const Copilot: React.FC = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
+const Copilot: FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
@@ -20,7 +20,7 @@ const Copilot: React.FC = () => {
         <CopilotOpener onClick={toggleChat} />
       ) : (
         <div className="copilot-chat-wrapper">
-          <CopilotChatWindow onClose={closeChat} />
+          <DocsSearchWindow onClose={closeChat} />
         </div>
       )}
     </div>

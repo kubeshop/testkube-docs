@@ -1,4 +1,4 @@
-import * as React from "react";
+import { FC } from "react";
 
 interface IconRobotProps {
   width?: number;
@@ -6,7 +6,7 @@ interface IconRobotProps {
   className?: string;
 }
 
-const IconRobot: React.FC<IconRobotProps> = ({ width = 20, height = 20, className }) => {
+const IconRobot: FC<IconRobotProps> = ({ width = 20, height = 20, className }) => {
   return (
     <svg
       width={width}
