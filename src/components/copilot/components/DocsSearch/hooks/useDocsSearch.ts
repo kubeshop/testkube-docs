@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from "react";
-import { DocsSearchState, DocsSearchSource, DocsSearchConfig } from "../types";
+import { DocsSearchState, DocsSearchConfig } from "../types";
 import { useStreamParser } from "./useStreamParser";
 
 const DEFAULT_CONFIG: DocsSearchConfig = {
@@ -14,7 +14,6 @@ export const useDocsSearch = (config: DocsSearchConfig = {}) => {
     status: "idle",
     query: "",
     response: "",
-    sources: [],
     error: null,
   });
 
@@ -25,9 +24,7 @@ export const useDocsSearch = (config: DocsSearchConfig = {}) => {
       status: "idle",
       query: "",
       response: "",
-      sources: [],
       error: null,
-      progress: undefined,
     });
   }, []);
 
@@ -39,10 +36,6 @@ export const useDocsSearch = (config: DocsSearchConfig = {}) => {
     setState((prev) => ({ ...prev, error, status: "error" }));
   }, []);
 
-  const setProgress = useCallback((progress: string) => {
-    setState((prev) => ({ ...prev, progress }));
-  }, []);
-
   const addToken = useCallback((token: string) => {
     setState((prev) => ({
       ...prev,
@@ -51,21 +44,12 @@ export const useDocsSearch = (config: DocsSearchConfig = {}) => {
     }));
   }, []);
 
-  const addSource = useCallback((source: DocsSearchSource) => {
-    setState((prev) => ({
-      ...prev,
-      sources: [...prev.sources, source],
-    }));
-  }, []);
-
   const complete = useCallback(() => {
-    setState((prev) => ({ ...prev, status: "complete", progress: undefined }));
+    setState((prev) => ({ ...prev, status: "complete" }));
   }, []);
 
   const { parseStream } = useStreamParser({
     onToken: addToken,
-    onSearchProgress: setProgress,
-    onSourceFound: addSource,
     onComplete: complete,
     onError: setError,
   });
@@ -87,9 +71,7 @@ export const useDocsSearch = (config: DocsSearchConfig = {}) => {
         status: "searching",
         query: query.trim(),
         response: "",
-        sources: [],
         error: null,
-        progress: "Starting search...",
       });
 
       const controller = new AbortController();
@@ -164,6 +146,6 @@ export const useDocsSearch = (config: DocsSearchConfig = {}) => {
     retry,
     resetState,
     isLoading: state.status === "searching" || state.status === "streaming",
-    hasResults: state.response.length > 0 || state.sources.length > 0,
+    hasResults: state.response.length > 0,
   };
 };

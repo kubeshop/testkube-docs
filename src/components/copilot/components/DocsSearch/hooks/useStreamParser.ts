@@ -3,19 +3,11 @@ import { StreamEvent } from "../types";
 
 interface UseStreamParserProps {
   onToken: (token: string) => void;
-  onSearchProgress: (message: string) => void;
-  onSourceFound: (source: { file: string; lines: [number, number]; excerpt: string; context: string }) => void;
   onComplete: () => void;
   onError: (error: string) => void;
 }
 
-export const useStreamParser = ({
-  onToken,
-  onSearchProgress,
-  onSourceFound,
-  onComplete,
-  onError,
-}: UseStreamParserProps) => {
+export const useStreamParser = ({ onToken, onComplete, onError }: UseStreamParserProps) => {
   const parseStream = useCallback(
     async (reader: ReadableStreamDefaultReader<Uint8Array>) => {
       const decoder = new TextDecoder();
@@ -43,15 +35,6 @@ export const useStreamParser = ({
 
               if (data.token) {
                 onToken(data.token);
-              } else if (data.type === "search_progress" && data.message) {
-                onSearchProgress(data.message);
-              } else if (data.type === "source_found" && data.file && data.lines && data.excerpt && data.context) {
-                onSourceFound({
-                  file: data.file,
-                  lines: data.lines,
-                  excerpt: data.excerpt,
-                  context: data.context,
-                });
               } else if (data.done) {
                 onComplete();
                 return;
@@ -69,7 +52,7 @@ export const useStreamParser = ({
         onError(streamError instanceof Error ? streamError.message : String(streamError));
       }
     },
-    [onToken, onSearchProgress, onSourceFound, onComplete, onError]
+    [onToken, onComplete, onError]
   );
 
   return { parseStream };

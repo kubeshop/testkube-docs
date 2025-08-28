@@ -3,21 +3,13 @@ import ReactMarkdown from "react-markdown";
 
 interface DocsSearchResultsProps {
   response: string;
-  progress?: string;
   error?: string | null;
   status: "idle" | "searching" | "streaming" | "complete" | "error";
   onRetry?: () => void;
   className?: string;
 }
 
-const DocsSearchResults: FC<DocsSearchResultsProps> = ({
-  response,
-  progress,
-  error,
-  status,
-  onRetry,
-  className = "",
-}) => {
+const DocsSearchResults: FC<DocsSearchResultsProps> = ({ response, error, status, onRetry, className = "" }) => {
   const formatResponse = (text: string): React.ReactNode => {
     return (
       <div className="docs-search-markdown">
@@ -90,16 +82,6 @@ const DocsSearchResults: FC<DocsSearchResultsProps> = ({
 
   return (
     <div className={`docs-search-results docs-search-results--active ${className}`}>
-      {/* Progress indicator */}
-      {(status === "searching" || status === "streaming") && progress && (
-        <div className="docs-search-progress">
-          <div className="docs-search-progress-indicator">
-            <span className="docs-search-spinner" />
-            <span className="docs-search-progress-text">{progress}</span>
-          </div>
-        </div>
-      )}
-
       {/* Response content */}
       {response && (
         <div className="docs-search-response">
@@ -110,8 +92,8 @@ const DocsSearchResults: FC<DocsSearchResultsProps> = ({
         </div>
       )}
 
-      {/* Empty state for active search */}
-      {status === "searching" && !response && !progress && (
+      {/* Loading state for active search */}
+      {status === "searching" && !response && (
         <div className="docs-search-searching">
           <span className="docs-search-spinner" />
           <span>Searching documentation...</span>
