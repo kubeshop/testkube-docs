@@ -1,6 +1,8 @@
 import { FC, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
+import { FINAL_ANSWER_PREFIX } from "./constants";
+
 interface DocsSearchResultsProps {
   response: string;
   error?: string | null;
@@ -106,9 +108,22 @@ const DocsSearchResults: FC<DocsSearchResultsProps> = ({ response, error, status
     );
   };
   const splitResponseByConfidence = (text: string): { preliminary: string; final: string } => {
-    const lowerContent = text.toLowerCase();
+    // Use imported constant that matches backend
+    const prefixIndex = text.indexOf(FINAL_ANSWER_PREFIX);
 
-    // Look for confidence indicators (both formats the AI might use)
+    if (prefixIndex !== -1) {
+      // Found the hardcoded prefix - split at this point
+      const preliminary = text.substring(0, prefixIndex).trim();
+      const final = text.substring(prefixIndex + FINAL_ANSWER_PREFIX.length).trim();
+
+      return {
+        preliminary,
+        final,
+      };
+    }
+
+    // Fallback to old confidence-based logic for backwards compatibility
+    const lowerContent = text.toLowerCase();
     const confidencePatterns = [
       "ready for final answer",
       "high confidence",
@@ -133,7 +148,7 @@ const DocsSearchResults: FC<DocsSearchResultsProps> = ({ response, error, status
       }
     }
 
-    // If no confidence indicator found, treat everything as preliminary during streaming
+    // If no prefix or confidence indicator found, treat everything as preliminary during streaming
     // or as final if complete
     if (status === "streaming") {
       return { preliminary: text, final: "" };
