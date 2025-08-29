@@ -383,6 +383,17 @@
   list-style-type: disc;
 }
 
+.docs-search-link {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.docs-search-link:hover {
+  color: var(--ifm-color-primary-dark);
+  text-decoration: underline;
+}
+
 .docs-search-inline-code {
   background: var(--ifm-color-emphasis-200);
   color: var(--ifm-color-emphasis-800);

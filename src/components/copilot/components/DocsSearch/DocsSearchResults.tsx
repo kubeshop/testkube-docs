@@ -11,7 +11,13 @@ interface DocsSearchResultsProps {
   className?: string;
 }
 
-const DocsSearchResults: FC<DocsSearchResultsProps> = ({ response, error, status, onRetry, className = "" }) => {
+const DocsSearchResults: FC<DocsSearchResultsProps> = ({
+  response,
+  error,
+  status,
+  onRetry,
+  className = "",
+}) => {
   const [isPreliminaryExpanded, setIsPreliminaryExpanded] = useState(false);
 
   const getCurrentSentence = (text: string, maxLength = 100): string => {
@@ -24,7 +30,11 @@ const DocsSearchResults: FC<DocsSearchResultsProps> = ({ response, error, status
     for (let i = 0; i < text.length; i++) {
       if (sentenceEnders.includes(text[i])) {
         // Check if it's followed by space or end of string (not just a decimal or abbreviation)
-        if (i === text.length - 1 || text[i + 1] === " " || text[i + 1] === "\n") {
+        if (
+          i === text.length - 1 ||
+          text[i + 1] === " " ||
+          text[i + 1] === "\n"
+        ) {
           lastSentenceEnd = i;
         }
       }
@@ -71,13 +81,17 @@ const DocsSearchResults: FC<DocsSearchResultsProps> = ({ response, error, status
     return currentText;
   };
 
-  const renderCollapsiblePreliminary = (preliminaryText: string): React.ReactNode => {
+  const renderCollapsiblePreliminary = (
+    preliminaryText: string
+  ): React.ReactNode => {
     if (!preliminaryText) return null;
 
     return (
       <div className="docs-search-preliminary-container">
         <div
-          className={`docs-search-preliminary-toggle ${isPreliminaryExpanded ? "expanded" : "collapsed"}`}
+          className={`docs-search-preliminary-toggle ${
+            isPreliminaryExpanded ? "expanded" : "collapsed"
+          }`}
           onClick={() => setIsPreliminaryExpanded(!isPreliminaryExpanded)}
           role="button"
           tabIndex={0}
@@ -89,32 +103,44 @@ const DocsSearchResults: FC<DocsSearchResultsProps> = ({ response, error, status
           }}
         >
           <div className="docs-search-preliminary-header">
-            <span className="docs-search-preliminary-icon">{isPreliminaryExpanded ? "🤔" : "💭"}</span>
+            <span className="docs-search-preliminary-icon">
+              {isPreliminaryExpanded ? "🤔" : "💭"}
+            </span>
             <span className="docs-search-preliminary-label">
               {isPreliminaryExpanded ? "Thinking process" : "AI is thinking"}
             </span>
-            <span className="docs-search-preliminary-chevron">{isPreliminaryExpanded ? "▼" : "▶"}</span>
+            <span className="docs-search-preliminary-chevron">
+              {isPreliminaryExpanded ? "▼" : "▶"}
+            </span>
           </div>
 
           {!isPreliminaryExpanded && (
-            <div className="docs-search-preliminary-preview">{getCurrentSentence(preliminaryText)}</div>
+            <div className="docs-search-preliminary-preview">
+              {getCurrentSentence(preliminaryText)}
+            </div>
           )}
         </div>
 
         {isPreliminaryExpanded && (
-          <div className="docs-search-preliminary-expanded">{formatResponse(preliminaryText, true)}</div>
+          <div className="docs-search-preliminary-expanded">
+            {formatResponse(preliminaryText, true)}
+          </div>
         )}
       </div>
     );
   };
-  const splitResponseByConfidence = (text: string): { preliminary: string; final: string } => {
+  const splitResponseByConfidence = (
+    text: string
+  ): { preliminary: string; final: string } => {
     // Use imported constant that matches backend
     const prefixIndex = text.indexOf(FINAL_ANSWER_PREFIX);
 
     if (prefixIndex !== -1) {
       // Found the hardcoded prefix - split at this point
       const preliminary = text.substring(0, prefixIndex).trim();
-      const final = text.substring(prefixIndex + FINAL_ANSWER_PREFIX.length).trim();
+      const final = text
+        .substring(prefixIndex + FINAL_ANSWER_PREFIX.length)
+        .trim();
 
       return {
         preliminary,
@@ -156,7 +182,10 @@ const DocsSearchResults: FC<DocsSearchResultsProps> = ({ response, error, status
     return { preliminary: "", final: text };
   };
 
-  const formatResponse = (text: string, isPreliminary = false): React.ReactNode => {
+  const formatResponse = (
+    text: string,
+    isPreliminary = false
+  ): React.ReactNode => {
     const markdownClassName = isPreliminary
       ? "docs-search-markdown docs-search-markdown--preliminary"
       : "docs-search-markdown";
@@ -166,15 +195,35 @@ const DocsSearchResults: FC<DocsSearchResultsProps> = ({ response, error, status
         <ReactMarkdown
           components={{
             // Custom components for better styling
-            h1: ({ children }) => <h2 className="docs-search-h1">{children}</h2>,
-            h2: ({ children }) => <h3 className="docs-search-h2">{children}</h3>,
-            h3: ({ children }) => <h4 className="docs-search-h3">{children}</h4>,
-            h4: ({ children }) => <h5 className="docs-search-h4">{children}</h5>,
-            h5: ({ children }) => <h6 className="docs-search-h5">{children}</h6>,
-            p: ({ children }) => <p className="docs-search-paragraph">{children}</p>,
-            ul: ({ children }) => <ul className="docs-search-list">{children}</ul>,
-            ol: ({ children }) => <ol className="docs-search-list docs-search-list-ordered">{children}</ol>,
-            li: ({ children }) => <li className="docs-search-list-item">{children}</li>,
+            h1: ({ children }) => (
+              <h2 className="docs-search-h1">{children}</h2>
+            ),
+            h2: ({ children }) => (
+              <h3 className="docs-search-h2">{children}</h3>
+            ),
+            h3: ({ children }) => (
+              <h4 className="docs-search-h3">{children}</h4>
+            ),
+            h4: ({ children }) => (
+              <h5 className="docs-search-h4">{children}</h5>
+            ),
+            h5: ({ children }) => (
+              <h6 className="docs-search-h5">{children}</h6>
+            ),
+            p: ({ children }) => (
+              <p className="docs-search-paragraph">{children}</p>
+            ),
+            ul: ({ children }) => (
+              <ul className="docs-search-list">{children}</ul>
+            ),
+            ol: ({ children }) => (
+              <ol className="docs-search-list docs-search-list-ordered">
+                {children}
+              </ol>
+            ),
+            li: ({ children }) => (
+              <li className="docs-search-list-item">{children}</li>
+            ),
             code: ({ children, ...props }) => {
               // Check if it's inline code by looking at the props
               const isInline = !props.className?.includes("language-");
@@ -186,9 +235,27 @@ const DocsSearchResults: FC<DocsSearchResultsProps> = ({ response, error, status
                 </pre>
               );
             },
-            blockquote: ({ children }) => <blockquote className="docs-search-blockquote">{children}</blockquote>,
-            strong: ({ children }) => <strong className="docs-search-bold">{children}</strong>,
-            em: ({ children }) => <em className="docs-search-italic">{children}</em>,
+            blockquote: ({ children }) => (
+              <blockquote className="docs-search-blockquote">
+                {children}
+              </blockquote>
+            ),
+            strong: ({ children }) => (
+              <strong className="docs-search-bold">{children}</strong>
+            ),
+            em: ({ children }) => (
+              <em className="docs-search-italic">{children}</em>
+            ),
+            a: ({ href, children }) => (
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="docs-search-link"
+              >
+                {children}
+              </a>
+            ),
           }}
         >
           {text}
@@ -199,12 +266,16 @@ const DocsSearchResults: FC<DocsSearchResultsProps> = ({ response, error, status
 
   if (status === "idle") {
     return (
-      <div className={`docs-search-results docs-search-results--idle ${className}`}>
+      <div
+        className={`docs-search-results docs-search-results--idle ${className}`}
+      >
         <div className="docs-search-placeholder">
           <div className="docs-search-placeholder-icon">🔍</div>
+
           <p>Search the Testkube documentation</p>
           <p className="docs-search-placeholder-hint">
-            Try asking: "How do I install Testkube CLI?" or "What are test workflows?"
+            Try asking: "How do I install Testkube CLI?" or "What are test
+            workflows?"
           </p>
         </div>
       </div>
@@ -213,7 +284,9 @@ const DocsSearchResults: FC<DocsSearchResultsProps> = ({ response, error, status
 
   if (status === "error" && error) {
     return (
-      <div className={`docs-search-results docs-search-results--error ${className}`}>
+      <div
+        className={`docs-search-results docs-search-results--error ${className}`}
+      >
         <div className="docs-search-error">
           <div className="docs-search-error-icon">⚠️</div>
           <div className="docs-search-error-content">
@@ -231,13 +304,16 @@ const DocsSearchResults: FC<DocsSearchResultsProps> = ({ response, error, status
   }
 
   return (
-    <div className={`docs-search-results docs-search-results--active ${className}`}>
+    <div
+      className={`docs-search-results docs-search-results--active ${className}`}
+    >
       {/* Response content */}
       {response && (
         <div className="docs-search-response">
           <div className="docs-search-response-content">
             {(() => {
-              const { preliminary, final } = splitResponseByConfidence(response);
+              const { preliminary, final } =
+                splitResponseByConfidence(response);
 
               return (
                 <>
@@ -249,7 +325,9 @@ const DocsSearchResults: FC<DocsSearchResultsProps> = ({ response, error, status
           </div>
 
           {/* Streaming indicator */}
-          {status === "streaming" && <span className="docs-search-cursor">|</span>}
+          {status === "streaming" && (
+            <span className="docs-search-cursor">|</span>
+          )}
         </div>
       )}
 
