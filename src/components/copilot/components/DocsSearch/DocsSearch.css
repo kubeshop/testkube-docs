@@ -219,6 +219,110 @@
   line-height: 1.6;
 }
 
+/* Preliminary content styling (gray) */
+.docs-search-markdown--preliminary {
+  opacity: 0.6;
+}
+
+.docs-search-markdown--preliminary h1,
+.docs-search-markdown--preliminary h2,
+.docs-search-markdown--preliminary h3,
+.docs-search-markdown--preliminary h4,
+.docs-search-markdown--preliminary h5,
+.docs-search-markdown--preliminary h6 {
+  color: var(--ifm-color-emphasis-600) !important;
+}
+
+.docs-search-markdown--preliminary p,
+.docs-search-markdown--preliminary li {
+  color: var(--ifm-color-emphasis-600) !important;
+}
+
+/* Collapsible preliminary content */
+.docs-search-preliminary-container {
+  margin-bottom: 1rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--ifm-color-emphasis-50);
+}
+
+.docs-search-preliminary-toggle {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.docs-search-preliminary-toggle:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.docs-search-preliminary-toggle:focus {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: -2px;
+}
+
+.docs-search-preliminary-header {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--ifm-color-emphasis-75);
+}
+
+.docs-search-preliminary-toggle.expanded .docs-search-preliminary-header {
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.docs-search-preliminary-toggle.collapsed .docs-search-preliminary-header {
+  border-bottom: none;
+}
+
+.docs-search-preliminary-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.docs-search-preliminary-label {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-700);
+  flex-shrink: 0;
+}
+
+.docs-search-preliminary-chevron {
+  font-size: 0.75rem;
+  color: var(--ifm-color-emphasis-600);
+  margin-left: auto;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.docs-search-preliminary-preview {
+  padding: 0.75rem 1rem;
+  color: var(--ifm-color-emphasis-600);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+.docs-search-preliminary-expanded {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 1rem;
+  background: var(--ifm-color-white);
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.docs-search-preliminary-expanded .docs-search-markdown {
+  margin: 0;
+}
+
+.docs-search-preliminary-expanded .docs-search-markdown--preliminary {
+  opacity: 0.8;
+}
+
 .docs-search-markdown h1,
 .docs-search-markdown h2,
 .docs-search-markdown h3,

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
 interface DocsSearchResultsProps {
@@ -10,9 +10,144 @@ interface DocsSearchResultsProps {
 }
 
 const DocsSearchResults: FC<DocsSearchResultsProps> = ({ response, error, status, onRetry, className = "" }) => {
-  const formatResponse = (text: string): React.ReactNode => {
+  const [isPreliminaryExpanded, setIsPreliminaryExpanded] = useState(false);
+
+  const getCurrentSentence = (text: string, maxLength = 100): string => {
+    if (!text) return "";
+
+    // Find the last complete sentence ending with punctuation
+    const sentenceEnders = [".", "!", "?"];
+    let lastSentenceEnd = -1;
+
+    for (let i = 0; i < text.length; i++) {
+      if (sentenceEnders.includes(text[i])) {
+        // Check if it's followed by space or end of string (not just a decimal or abbreviation)
+        if (i === text.length - 1 || text[i + 1] === " " || text[i + 1] === "\n") {
+          lastSentenceEnd = i;
+        }
+      }
+    }
+
+    let currentText = "";
+    if (lastSentenceEnd !== -1) {
+      // Find the start of the last complete sentence
+      let sentenceStart = 0;
+
+      // Look backwards from the last sentence end to find the previous sentence end
+      for (let i = lastSentenceEnd - 1; i >= 0; i--) {
+        if (sentenceEnders.includes(text[i])) {
+          if (i === 0 || text[i + 1] === " " || text[i + 1] === "\n") {
+            sentenceStart = i + 1;
+            break;
+          }
+        }
+      }
+
+      // Extract just the last complete sentence
+      currentText = text.substring(sentenceStart, lastSentenceEnd + 1).trim();
+    } else {
+      // No complete sentence found, show the current sentence being built
+      // Find the start of the current sentence (after the last sentence ender)
+      let currentSentenceStart = 0;
+      for (let i = text.length - 1; i >= 0; i--) {
+        if (sentenceEnders.includes(text[i])) {
+          if (i === 0 || text[i + 1] === " " || text[i + 1] === "\n") {
+            currentSentenceStart = i + 1;
+            break;
+          }
+        }
+      }
+
+      currentText = text.substring(currentSentenceStart).trim();
+
+      // Truncate if too long
+      if (currentText.length > maxLength) {
+        currentText = currentText.substring(0, maxLength).trim() + "...";
+      }
+    }
+
+    return currentText;
+  };
+
+  const renderCollapsiblePreliminary = (preliminaryText: string): React.ReactNode => {
+    if (!preliminaryText) return null;
+
     return (
-      <div className="docs-search-markdown">
+      <div className="docs-search-preliminary-container">
+        <div
+          className={`docs-search-preliminary-toggle ${isPreliminaryExpanded ? "expanded" : "collapsed"}`}
+          onClick={() => setIsPreliminaryExpanded(!isPreliminaryExpanded)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setIsPreliminaryExpanded(!isPreliminaryExpanded);
+            }
+          }}
+        >
+          <div className="docs-search-preliminary-header">
+            <span className="docs-search-preliminary-icon">{isPreliminaryExpanded ? "🤔" : "💭"}</span>
+            <span className="docs-search-preliminary-label">
+              {isPreliminaryExpanded ? "Thinking process" : "AI is thinking"}
+            </span>
+            <span className="docs-search-preliminary-chevron">{isPreliminaryExpanded ? "▼" : "▶"}</span>
+          </div>
+
+          {!isPreliminaryExpanded && (
+            <div className="docs-search-preliminary-preview">{getCurrentSentence(preliminaryText)}</div>
+          )}
+        </div>
+
+        {isPreliminaryExpanded && (
+          <div className="docs-search-preliminary-expanded">{formatResponse(preliminaryText, true)}</div>
+        )}
+      </div>
+    );
+  };
+  const splitResponseByConfidence = (text: string): { preliminary: string; final: string } => {
+    const lowerContent = text.toLowerCase();
+
+    // Look for confidence indicators (both formats the AI might use)
+    const confidencePatterns = [
+      "ready for final answer",
+      "high confidence",
+      "confidence level: high",
+      "comprehensive information",
+      "confident in this answer",
+    ];
+
+    for (const pattern of confidencePatterns) {
+      const index = lowerContent.indexOf(pattern);
+      if (index !== -1) {
+        // Find the end of the current line or paragraph containing the confidence indicator
+        const fromIndex = index + pattern.length;
+        let splitIndex = text.indexOf("\n", fromIndex);
+        if (splitIndex === -1) splitIndex = text.indexOf("\n\n", fromIndex);
+        if (splitIndex === -1) splitIndex = fromIndex;
+
+        return {
+          preliminary: text.substring(0, splitIndex).trim(),
+          final: text.substring(splitIndex).trim(),
+        };
+      }
+    }
+
+    // If no confidence indicator found, treat everything as preliminary during streaming
+    // or as final if complete
+    if (status === "streaming") {
+      return { preliminary: text, final: "" };
+    }
+    return { preliminary: "", final: text };
+  };
+
+  const formatResponse = (text: string, isPreliminary = false): React.ReactNode => {
+    const markdownClassName = isPreliminary
+      ? "docs-search-markdown docs-search-markdown--preliminary"
+      : "docs-search-markdown";
+
+    return (
+      <div className={markdownClassName}>
         <ReactMarkdown
           components={{
             // Custom components for better styling
@@ -85,7 +220,18 @@ const DocsSearchResults: FC<DocsSearchResultsProps> = ({ response, error, status
       {/* Response content */}
       {response && (
         <div className="docs-search-response">
-          <div className="docs-search-response-content">{formatResponse(response)}</div>
+          <div className="docs-search-response-content">
+            {(() => {
+              const { preliminary, final } = splitResponseByConfidence(response);
+
+              return (
+                <>
+                  {preliminary && renderCollapsiblePreliminary(preliminary)}
+                  {final && formatResponse(final, false)}
+                </>
+              );
+            })()}
+          </div>
 
           {/* Streaming indicator */}
           {status === "streaming" && <span className="docs-search-cursor">|</span>}
