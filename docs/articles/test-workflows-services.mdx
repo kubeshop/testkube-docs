@@ -142,27 +142,30 @@ as the hub's IP address, and using nested steps to execute the actual test using
 kind: TestWorkflow
 apiVersion: testworkflows.testkube.io/v1
 metadata:
-  name: selenium-java-hub-and-nodes-workflow-smoke
-  namespace: testkube-agent
+  name: selenium-java-hub-and-nodes
+description: "Selenium Java + Hub + Chrome Nodes"
 spec:
+  config:
+    chromeNodes: {type: integer, default: 2}
+    junitParallelism: {type: integer, default: 4}
   content:
     git:
       uri: https://github.com/kubeshop/testkube
-      revision: TKC-4043-selenium-initial-cases
+      revision: main
       paths:
-      - test/selenium/selenium-java
+        - test/selenium/selenium-java
   container:
-    workingDir: /data/repo/test/selenium/selenium-java
     image: maven:3.9.11-eclipse-temurin-17
+    workingDir: /data/repo/test/selenium/selenium-java
     resources:
       requests:
         cpu: 1
         memory: 512Mi
   services:
     hub:
-      logs: always
-      timeout: 120s
       image: selenium/hub:4.34.0-20250727
+      timeout: 120s
+      logs: always
       resources:
         requests:
           cpu: 300m
@@ -173,54 +176,54 @@ spec:
           port: 4444
         periodSeconds: 1
   steps:
-  - name: Start node-chrome
-    services:
-      node-chrome:
-        count: 2
-        logs: always
-        timeout: 120s
-        image: selenium/node-chrome:112.0-chromedriver-112.0-grid-4.34.0-20250727
-        env:
-        - name: SE_EVENT_BUS_HOST
-          value: '{{ services.hub.0.ip }}'
-        - name: SE_EVENT_BUS_PUBLISH_PORT
-          value: "4442"
-        - name: SE_EVENT_BUS_SUBSCRIBE_PORT
-          value: "4443"
-        resources:
-          requests:
-            cpu: 500m
-            memory: 512Mi
-        readinessProbe:
-          httpGet:
-            path: /status
-            port: 5555
-          periodSeconds: 1
-    steps:
-    - name: Run test
-      run:
-        env:
-        - name: REMOTE_WEBDRIVER_URL
-          value: http://{{ services.hub.0.ip }}:4444/wd/hub
-        - name: BROWSER
-          value: chrome
-        - name: JUNIT_JUPITER_EXECUTION_PARALLEL_ENABLED
-          value: "true"
-        - name: JUNIT_JUPITER_EXECUTION_PARALLEL_MODE_DEFAULT
-          value: concurrent
-        - name: JUNIT_JUPITER_EXECUTION_PARALLEL_MODE_CLASSES_DEFAULT
-          value: concurrent
-        - name: JUNIT_JUPITER_EXECUTION_PARALLEL_CONFIG_STRATEGY
-          value: fixed
-        - name: JUNIT_JUPITER_EXECUTION_PARALLEL_CONFIG_FIXED_PARALLELISM
-          value: "4"
-        shell: |
-          mvn test
-          mvn surefire-report:report
-      artifacts:
-        paths:
-        - target/site/**/*
-        - target/surefire-reports/**/*
+    - name: Start node-chrome
+      services:
+        node-chrome:
+          image: selenium/node-chrome:112.0-chromedriver-112.0-grid-4.34.0-20250727
+          timeout: 120s
+          logs: always
+          count: config.chromeNodes
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+          readinessProbe:
+            httpGet:
+              path: /status
+              port: 5555
+            periodSeconds: 1
+          env:
+            - name: SE_EVENT_BUS_HOST
+              value: '{{ services.hub.0.ip }}'
+            - name: SE_EVENT_BUS_PUBLISH_PORT
+              value: "4442"
+            - name: SE_EVENT_BUS_SUBSCRIBE_PORT
+              value: "4443"
+      steps:
+      - name: Run test
+        run:
+          env:
+            - name: REMOTE_WEBDRIVER_URL
+              value: 'http://{{ services.hub.0.ip }}:4444/wd/hub'
+            - name: BROWSER
+              value: 'chrome'
+            - name: JUNIT_JUPITER_EXECUTION_PARALLEL_ENABLED
+              value: "true"
+            - name: JUNIT_JUPITER_EXECUTION_PARALLEL_MODE_DEFAULT
+              value: concurrent
+            - name: JUNIT_JUPITER_EXECUTION_PARALLEL_MODE_CLASSES_DEFAULT
+              value: concurrent
+            - name: JUNIT_JUPITER_EXECUTION_PARALLEL_CONFIG_STRATEGY
+              value: fixed
+            - name: JUNIT_JUPITER_EXECUTION_PARALLEL_CONFIG_FIXED_PARALLELISM
+              value: "{{ config.junitParallelism }}"
+          shell: |
+            mvn test
+            mvn surefire-report:report
+        artifacts:
+          paths:
+            - target/site/**/*
+            - target/surefire-reports/**/*
 ```
 
 The output of this execution looks as follows:
