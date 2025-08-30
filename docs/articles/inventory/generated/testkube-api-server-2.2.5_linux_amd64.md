@@ -3,9 +3,9 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:8c941c3ea69a52fc051f0997fde6e4f718aa70711b8f62da8e3bcb0076b7a7af</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 9" src="https://img.shields.io/badge/high-9-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/medium-3-fbb552"/> <img alt="low: 4" src="https://img.shields.io/badge/low-4-fce1a9"/> <!-- unspecified: 0 --></td></tr>
-<tr><td>platform</td><td>linux/arm64</td></tr>
-<tr><td>size</td><td>69 MB</td></tr>
+<tr><td>digest</td><td><code>sha256:6a502a572107750c7bf6b5cb9314324606ce0a3df830ea3a7fe93012865f7766</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 9" src="https://img.shields.io/badge/high-9-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/medium-3-fbb552"/> <img alt="low: 4" src="https://img.shields.io/badge/low-4-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>platform</td><td>linux/amd64</td></tr>
+<tr><td>size</td><td>73 MB</td></tr>
 <tr><td>packages</td><td>245</td></tr>
 </table>
 </details></table>
@@ -15,7 +15,7 @@ hide_table_of_contents: true
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 6" src="https://img.shields.io/badge/H-6-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>git</strong> <code>2.45.3-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/git@2.45.3-r0?arch=aarch64&distro=alpine-3.20.6</code></small><br/>
+<small><code>pkg:apk/alpine/git@2.45.3-r0?arch=x86_64&distro=alpine-3.20.6</code></small><br/>
 
 ```dockerfile
 # api-server.Dockerfile (34:34)
@@ -162,36 +162,6 @@ RUN apk --no-cache add ca-certificates libssl3 git
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libcurl</strong> <code>8.12.1-r0</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/libcurl@8.12.1-r0?arch=aarch64&distro=alpine-3.20.6&upstream=curl</code></small><br/>
-
-```dockerfile
-# api-server.Dockerfile (34:34)
-RUN apk --no-cache add ca-certificates libssl3 git
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2025-5399?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C%3D8.12.1-r0"><img alt="high : CVE--2025--5399" src="https://img.shields.io/badge/CVE--2025--5399-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=8.12.1-r0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.050%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/gofiber/fiber/v2</strong> <code>2.52.5</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/gofiber/fiber@2.52.5#v2</code></small><br/>
@@ -297,9 +267,39 @@ The `idx` is not validated before use, leading to unsafe slice allocation for ex
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libcurl</strong> <code>8.12.1-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/libcurl@8.12.1-r0?arch=x86_64&distro=alpine-3.20.6&upstream=curl</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (34:34)
+RUN apk --no-cache add ca-certificates libssl3 git
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-5399?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C%3D8.12.1-r0"><img alt="high : CVE--2025--5399" src="https://img.shields.io/badge/CVE--2025--5399-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=8.12.1-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.050%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>c-ares</strong> <code>1.33.1-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/c-ares@1.33.1-r0?arch=aarch64&distro=alpine-3.20.6</code></small><br/>
+<small><code>pkg:apk/alpine/c-ares@1.33.1-r0?arch=x86_64&distro=alpine-3.20.6</code></small><br/>
 
 ```dockerfile
 # api-server.Dockerfile (34:34)
@@ -403,7 +403,7 @@ An issue in vektah gqlparser open-source-library v.2.5.10 allows a remote attack
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>ssl_client</strong> <code>1.36.1-r29</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/ssl_client@1.36.1-r29?arch=aarch64&distro=alpine-3.20.6&upstream=busybox</code></small><br/>
+<small><code>pkg:apk/alpine/ssl_client@1.36.1-r29?arch=x86_64&distro=alpine-3.20.6&upstream=busybox</code></small><br/>
 
 ```dockerfile
 # api-server.Dockerfile (33:33)
