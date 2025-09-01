@@ -10,7 +10,10 @@ When the CLI is installed, authenticate with your Testkube Control Plane:
 testkube login
 ```
 
-This will prompt to open a browser window to sign in and authenticate with the Testkube Dashboard.
+This will prompt to open a browser window to sign in and authenticate with the Testkube Dashboard. Once authenticated, 
+the CLI will prompt for the Testkube Organisation and Environment to use with CLI commands. 
+
+![CLI Authentication](images/cli-auth.png)
 
 ## SSO Authentication
 
