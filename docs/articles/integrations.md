@@ -51,3 +51,7 @@ us know on our Slack channel so we can add it!
  
 - [CDEvents](/articles/cd-events) - Learn about CDEvents emitted by Testkube.
 - [Allure Reports](allure-reports) - Learn how to generate Allure Reports as artifacts in your Workflows
+
+## User Provisioning and Management
+
+- [SCIM](/articles/scim) - Learn how to integrate Testkube with your Identity Provider using SCIM for automated user provisioning and deprovisioning.

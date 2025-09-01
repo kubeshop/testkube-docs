@@ -121,7 +121,7 @@ testkube-cloud-api:
 Alternatively, you can use the full advanced configuration for more options. The following example creates an organization with 
 two environments. New users will automatically join as members of the default organizations and be added to specified environments 
 and teams. Note that this will only happen on the first sign in. Afterwards, you can manage users through Testkube's dashboard, unless
-you use SCIM to manage your SSO integration - [Read More](/testkube-pro-on-prem/articles/scim).
+you use SCIM to manage your SSO integration - [Read More](/articles/scim).
 
 ```yaml
 testkube-cloud-api:

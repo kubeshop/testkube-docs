@@ -65,7 +65,7 @@ Invite new members from the Members page by specifying:
 
 :::note
 A new member will not have access to any resources or environments and will initially count as a read-only
-member (see above) unless default permissions have been assigned via [SCIM](/testkube-pro-on-prem/articles/scim) 
+member (see above) unless default permissions have been assigned via [SCIM](/articles/scim) 
 or [bootstrap member mapping](/articles/install/advanced-install#bootstrap-member-mapping). 
 
 See [Resource Access Management](/articles/resource-access-management) to learn how to give members access to 
