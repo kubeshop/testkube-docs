@@ -571,6 +571,15 @@ const redirects = [
     from: ["/articles/mcp-setup", "/articles/mcp"],
     to: "/articles/mcp-overview",
   },
+  // SCIM
+  {
+    from: "/testkube-enterprise/articles/scim",
+    to: "/articles/scim",
+  },
+  {
+    from: "/testkube-pro-on-prem/articles/scim",
+    to: "/articles/scim",
+  },
 ];
 
 module.exports = redirects;

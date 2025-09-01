@@ -89,6 +89,6 @@ dex:
 ```
 
 :::tip
-Once SSO is configured, you can further configure default user permission mapping using either [SCIM](scim) or 
+Once SSO is configured, you can further configure default user permission mapping using either [SCIM](/articles/scim) or 
 [Bootstrap Member Mapping](/articles/install/advanced-install#bootstrap-member-mapping).
 :::

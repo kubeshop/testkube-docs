@@ -98,11 +98,6 @@ const sidebars = {
                 },
                 {
                   type: "doc",
-                  label: "SCIM Integration",
-                  id: "testkube-pro-on-prem/articles/scim",
-                },
-                {
-                  type: "doc",
                   label: "S3 with IAM Authentication",
                   id: "articles/install/s3-storage",
                 },
@@ -1048,6 +1043,11 @@ const sidebars = {
           label: "Datadog JUnit Results",
           id: "articles/datadog-junit",
         },
+        {
+          type: "doc",
+          label: "SCIM",
+          id: "articles/scim",
+        }
       ],
     },
     {
