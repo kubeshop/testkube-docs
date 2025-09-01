@@ -43,6 +43,11 @@ testkube login
 This will open a browser window to sign in and authenticate with the Testkube Dashboard,
 which ensures that the MCP Server operates within the security context of your Testkube account and Environment.
 
+:::note
+If you're using SSO or a self-hosted Testkube instance, you can use the `--email` flag with the login 
+command - [Read More](/testkube-pro/articles/managing-cli-context#sso-authentication).
+:::
+
 ### Step 2: Validate the MCP Server
 
 Start the MCP Server to make sure it works, run

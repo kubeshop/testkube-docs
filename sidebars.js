@@ -35,7 +35,7 @@ const sidebars = {
           type: "doc",
           label: "Individual Evaluation",
           id: "articles/tutorial/quickstart/individual-evaluation",
-        }, 
+        },
         {
           type: "doc",
           label: "Team Evaluation",
@@ -615,7 +615,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Managing CLI Context",
+              label: "CLI Authentication",
               id: "testkube-pro/articles/managing-cli-context",
             },
             {
