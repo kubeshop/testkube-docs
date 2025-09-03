@@ -689,6 +689,11 @@ const sidebars = {
       },
       items: [
         {
+          type: "doc",
+          label: "Create Your Own Examples",
+          id: "articles/examples/create-your-own-examples",
+        },
+        {
           type: "category",
           label: "K6",
           items: [
