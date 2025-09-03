@@ -690,7 +690,7 @@ const sidebars = {
       items: [
         {
           type: "doc",
-          label: "Create Your Own Examples",
+          label: "Custom Test Workflow Examples",
           id: "articles/examples/create-your-own-examples",
         },
         {
