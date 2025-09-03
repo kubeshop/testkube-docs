@@ -7,6 +7,18 @@ This guide shows two ways to publish your own Test Workflow Templates so they ap
 
 > See the Examples & Guides catalog and Workflow Templates docs for built‑in templates.
 
+## Prerequisite: show Official Templates in the Wizard
+
+If you also want the built‑in templates to be created and visible in the wizard, make sure the Helm values include:
+
+```yaml
+global:
+  testWorkflows:
+    createOfficialTemplates: true
+```
+
+This flag belongs to the Testkube chart values and is applied during install/upgrade.
+
 ## Option A: Apply a template with kubectl
 
 1) Create a `TestWorkflowTemplate` with the required labels so it shows up in the wizard:
