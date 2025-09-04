@@ -579,6 +579,15 @@ const redirects = [
     from: "/ai",
     to: "/articles/ai-assistant-overview",
   },
+  // SCIM
+  {
+    from: "/testkube-enterprise/articles/scim",
+    to: "/articles/scim",
+  },
+  {
+    from: "/testkube-pro-on-prem/articles/scim",
+    to: "/articles/scim",
+  },
 ];
 
 module.exports = redirects;
