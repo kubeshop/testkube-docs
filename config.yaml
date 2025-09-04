@@ -1,0 +1,6 @@
+# This file is a configuration for crd-ref-docs used to generate documentation from CRD specs.
+processor:
+  ignoreFields:
+    - "TypeMeta$"
+render:
+  kubernetesVersion: 1.28

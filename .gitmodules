@@ -1,0 +1,3 @@
+[submodule "testkube-operator"]
+	path = testkube-operator
+	url = https://github.com/kubeshop/testkube-operator
