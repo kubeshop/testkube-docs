@@ -1,5 +1,10 @@
 # Testkube MCP Server
 
+:::tip
+Check out https://testkube.io/blog/building-ai-assisted-test-workflows-testkube-mcp-github-copilot for a complete example on 
+AI-driven remediation using the Testkube MCP Server with Github and Vs-Code.
+:::
+
 ## Overview
 
 The **Testkube MCP Server** brings Testkube's test orchestration capabilities directly into your 
@@ -18,12 +23,12 @@ More specifically, it allows you and your AI agents to:
 :::
 
 :::tip
-
 When used with agentic AI tools like GitHub Copilot with Claude Sonnet 4 in VS Code or Cursor, the Testkube MCP enables:
 
-- **Multi-step Problem Solving:** AI agents can run multiple tools in sequence to solve complex testing scenarios
-- **Automated Debugging:** Agents can analyze failures, examine logs, and suggest fixes
-- **Intelligent Test Management:** Automated workflow creation, execution, and result analysis
+- **Multi-step Problem Solving:** AI agents can run multiple tools in sequence to solve complex testing scenarios.
+- **Automated Debugging:** Agents can analyze failures, examine logs, and suggest fixes.
+- **Intelligent Test Management:** Automated workflow creation, execution, and result analysis.
+
 :::
 
 ## Prerequisites
