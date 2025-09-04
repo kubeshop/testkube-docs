@@ -6,6 +6,10 @@
 Welcome to the documentation for the **Testkube AI Assistant** – an AI-powered assistant integrated directly into the Testkube Dashboard.  
 AI Assistant is designed to help you streamline your test orchestration by providing intelligent assistance in areas such as log analysis, dashboard navigation, YAML configuration, and general Testkube guidance.
 
+:::tip
+Check out the [Testkube MCP Server](/articles/mcp-overview) to see how you can integrate Testkube functionality into your AI-powered workflows and agents.
+:::
+
 ## Key Features
 
 - **Log Analysis & Debugging:**  
