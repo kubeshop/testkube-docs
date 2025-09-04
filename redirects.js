@@ -581,11 +581,7 @@ const redirects = [
   },
   // SCIM
   {
-    from: "/testkube-enterprise/articles/scim",
-    to: "/articles/scim",
-  },
-  {
-    from: "/testkube-pro-on-prem/articles/scim",
+    from: ["/testkube-enterprise/articles/scim","/testkube-pro-on-prem/articles/scim","/scim"],
     to: "/articles/scim",
   },
 ];
