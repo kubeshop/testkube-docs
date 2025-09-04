@@ -117,6 +117,7 @@ _Appears in:_
 | `number` _integer_ | execution number |  |  |
 | `startTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | test start time |  |  |
 | `endTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | test end time |  |  |
+| `status` _[ExecutionStatus](#executionstatus)_ |  |  | Enum: [queued running passed failed aborted timeout] <br /> |
 
 
 ### ExecutionRequest
@@ -174,6 +175,26 @@ _Appears in:_
 | `disableWebhooks` _boolean_ | whether webhooks should be called on execution<br />Deprecated: field is not used |  |  |
 
 
+### ExecutionStatus
+
+_Underlying type:_ _string_
+
+
+
+_Validation:_
+- Enum: [queued running passed failed aborted timeout]
+
+_Appears in:_
+- [ExecutionCore](#executioncore)
+
+| Field | Description |
+| --- | --- |
+| `queued` |  |
+| `running` |  |
+| `passed` |  |
+| `failed` |  |
+| `aborted` |  |
+| `timeout` |  |
 
 
 ### GitAuthType
@@ -183,7 +204,7 @@ _Underlying type:_ _string_
 GitAuthType defines git auth type
 
 _Validation:_
-- Enum: [basic header]
+- Enum: [basic header github]
 
 _Appears in:_
 - [ContentGit](#contentgit)
@@ -193,6 +214,7 @@ _Appears in:_
 | --- | --- |
 | `basic` | GitAuthTypeBasic for git basic auth requests<br /> |
 | `header` | GitAuthTypeHeader for git header auth requests<br /> |
+| `github` | GitAuthTypeGitHub for GitHub App auth requests<br /> |
 
 
 ### PodRequest
@@ -252,7 +274,7 @@ _Appears in:_
 | `tokenSecret` _[SecretRef](#secretref)_ |  |  |  |
 | `certificateSecret` _string_ | git auth certificate secret for private repositories |  |  |
 | `workingDir` _string_ | if provided we checkout the whole repository and run test from this directory |  |  |
-| `authType` _[GitAuthType](#gitauthtype)_ | auth type for git requests |  | Enum: [basic header] <br /> |
+| `authType` _[GitAuthType](#gitauthtype)_ | auth type for git requests |  | Enum: [basic header github] <br /> |
 
 
 ### ResourceRequest
@@ -329,6 +351,7 @@ _Appears in:_
 | `kind` _string_ | `Test` | | |
 | `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[TestSpec](#testspec)_ |  |  |  |
+| `status` _[TestStatus](#teststatus)_ |  |  |  |
 
 
 ### TestContent
@@ -412,6 +435,20 @@ _Appears in:_
 | `uploads` _string array_ | files to be used from minio uploads |  |  |
 
 
+### TestStatus
+
+
+
+TestStatus defines the observed state of Test
+
+
+
+_Appears in:_
+- [Test](#test)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `latestExecution` _[ExecutionCore](#executioncore)_ | latest execution result |  |  |
 
 
 ### TestSuite
@@ -431,6 +468,7 @@ _Appears in:_
 | `kind` _string_ | `TestSuite` | | |
 | `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[TestSuiteSpec](#testsuitespec)_ |  |  |  |
+| `status` _[TestSuiteStatus](#testsuitestatus)_ |  |  |  |
 
 
 ### TestSuiteBatchStep
@@ -467,6 +505,7 @@ _Appears in:_
 | `id` _string_ | execution id |  |  |
 | `startTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | test suite execution start time |  |  |
 | `endTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | test suite execution end time |  |  |
+| `status` _[TestSuiteExecutionStatus](#testsuiteexecutionstatus)_ |  |  |  |
 
 
 ### TestSuiteExecutionRequest
@@ -503,6 +542,26 @@ _Appears in:_
 | `disableWebhooks` _boolean_ | whether webhooks should be called on execution<br />Deprecated: field is not used |  |  |
 
 
+### TestSuiteExecutionStatus
+
+_Underlying type:_ _string_
+
+
+
+
+
+_Appears in:_
+- [TestSuiteExecutionCore](#testsuiteexecutioncore)
+
+| Field | Description |
+| --- | --- |
+| `queued` |  |
+| `running` |  |
+| `passed` |  |
+| `failed` |  |
+| `aborting` |  |
+| `aborted` |  |
+| `timeout` |  |
 
 
 ### TestSuiteList
@@ -545,6 +604,20 @@ _Appears in:_
 | `executionRequest` _[TestSuiteExecutionRequest](#testsuiteexecutionrequest)_ |  |  |  |
 
 
+### TestSuiteStatus
+
+
+
+TestSuiteStatus defines the observed state of TestSuite
+
+
+
+_Appears in:_
+- [TestSuite](#testsuite)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `latestExecution` _[TestSuiteExecutionCore](#testsuiteexecutioncore)_ | latest execution result |  |  |
 
 
 ### TestSuiteStepExecutionRequest
