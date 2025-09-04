@@ -571,6 +571,14 @@ const redirects = [
     from: ["/articles/mcp-setup", "/articles/mcp"],
     to: "/articles/mcp-overview",
   },
+  {
+    from: "/mcp",
+    to: "/articles/mcp-overview",
+  },
+  {
+    from: "/ai",
+    to: "/articles/ai-assistant-overview",
+  },
 ];
 
 module.exports = redirects;
