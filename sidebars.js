@@ -438,7 +438,7 @@ const sidebars = {
                 {
                   type: "doc",
                   label: "Looping Test Workflow Executions from Workflows",
-                  id: "articles/loop-execution-workflow",
+                  id: "articles/loop-execution-workflows",
                 },
               ],
             },
