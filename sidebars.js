@@ -684,6 +684,11 @@ const sidebars = {
       },
       items: [
         {
+          type: "doc",
+          label: "Custom Test Workflow Examples",
+          id: "articles/examples/create-your-own-examples",
+        },
+        {
           type: "category",
           label: "K6",
           items: [
