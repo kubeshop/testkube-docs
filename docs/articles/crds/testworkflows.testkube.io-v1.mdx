@@ -62,7 +62,7 @@ _Appears in:_
 | `workingDir` _string_ | override default working directory in the image (empty string to default WORKDIR for the image) |  |  |
 | `image` _string_ | image to be used for the container |  |  |
 | `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#pullpolicy-v1-core)_ | pulling policy for the image |  |  |
-| `env` _[EnvVar](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvar-v1-core) array_ | environment variables to append to the container |  |  |
+| `env` _[EnvVar](#envvar) array_ | environment variables to append to the container |  |  |
 | `envFrom` _[EnvFromSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envfromsource-v1-core) array_ | external environment variables to append to the container |  |  |
 | `command` _string_ | override default command in the image (empty string to default ENTRYPOINT of the image) |  |  |
 | `args` _string_ | override default command in the image (empty string to default CMD of the image) |  |  |
@@ -136,7 +136,7 @@ _Appears in:_
 | `tokenFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_ | external token to fetch with |  |  |
 | `sshKey` _string_ | plain text SSH private key to fetch with |  |  |
 | `sshKeyFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_ | external SSH private key to fetch with |  |  |
-| `authType` _[GitAuthType](#gitauthtype)_ | authorization type for the credentials |  | Enum: [basic header] <br /> |
+| `authType` _[GitAuthType](#gitauthtype)_ | authorization type for the credentials |  | Enum: [basic header github] <br /> |
 | `mountPath` _string_ | where to mount the fetched repository contents (defaults to "repo" directory in the data volume) |  |  |
 | `cone` _boolean_ | enable cone mode for sparse checkout with paths |  |  |
 | `paths` _string array_ | paths to fetch for the sparse checkout |  |  |
@@ -177,6 +177,8 @@ _Appears in:_
 | `labels` _object (keys:string, values:string)_ | labels to attach to the cron job |  |  |
 | `annotations` _object (keys:string, values:string)_ | annotations to attach to the cron job |  |  |
 | `config` _object (keys:string, values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util))_ | configuration to pass for the workflow |  |  |
+| `target` _[Target](#target)_ | Targets helps decide on which runner the execution is scheduled. |  |  |
+| `timezone` _string_ | cron timezone |  |  |
 
 
 ### DynamicList
@@ -204,6 +206,28 @@ _Appears in:_
 | `Dynamic` _boolean_ |  |  |  |
 | `Static` _interface{} array_ |  |  |  |
 | `Expression` _string_ |  |  |  |
+
+
+### EnvVar
+
+
+
+
+
+
+
+_Appears in:_
+- [ContainerConfig](#containerconfig)
+- [IndependentServiceSpec](#independentservicespec)
+- [ServiceSpec](#servicespec)
+- [StepRun](#steprun)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ | Name of the environment variable. Must be a C_IDENTIFIER. |  |  |
+| `value` _string_ | Variable references $(VAR_NAME) are expanded<br />using the previously defined environment variables in the container and<br />any service environment variables. If a variable cannot be resolved,<br />the reference in the input string will be unchanged. Double $$ are reduced<br />to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.<br />"$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".<br />Escaped references will never be expanded, regardless of whether the variable<br />exists or not.<br />Defaults to "". |  |  |
+| `valueFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_ | Source for the environment variable's value. Cannot be used if value is not empty. |  |  |
+| `global` _boolean_ | whether to use env var in underlying services |  |  |
 
 
 ### Event
@@ -245,14 +269,14 @@ _Appears in:_
 | `shards` _object (keys:string, values:[DynamicList](#dynamiclist))_ | parameters that should be distributed across sharded instances |  |  |
 | `description` _string_ | service description to display |  |  |
 | `logs` _string_ | should save logs for the service (false if not specified) |  |  |
-| `timeout` _string_ | maximum time until reaching readiness |  | Pattern: `^((0\|[1-9][0-9]*)h)?((0\|[1-9][0-9]*)m)?((0\|[1-9][0-9]*)s)?((0\|[1-9][0-9]*)ms)?$` <br /> |
+| `timeout` _string_ | maximum time until reaching readiness |  |  |
 | `transfer` _[StepParallelTransfer](#stepparalleltransfer) array_ | instructions for transferring files |  |  |
 | `content` _[Content](#content)_ | global content that should be fetched into all containers |  |  |
 | `pod` _[PodConfig](#podconfig)_ | configuration for the scheduled pod |  |  |
 | `workingDir` _string_ | override default working directory in the image (empty string to default WORKDIR for the image) |  |  |
 | `image` _string_ | image to be used for the container |  |  |
 | `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#pullpolicy-v1-core)_ | pulling policy for the image |  |  |
-| `env` _[EnvVar](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvar-v1-core) array_ | environment variables to append to the container |  |  |
+| `env` _[EnvVar](#envvar) array_ | environment variables to append to the container |  |  |
 | `envFrom` _[EnvFromSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envfromsource-v1-core) array_ | external environment variables to append to the container |  |  |
 | `command` _string_ | override default command in the image (empty string to default ENTRYPOINT of the image) |  |  |
 | `args` _string_ | override default command in the image (empty string to default CMD of the image) |  |  |
@@ -286,7 +310,7 @@ _Appears in:_
 | `optional` _boolean_ | is the step optional, so its failure won't affect the TestWorkflow result |  |  |
 | `paused` _boolean_ | pause the step initially |  |  |
 | `retry` _[RetryPolicy](#retrypolicy)_ | policy for retrying the step |  |  |
-| `timeout` _string_ | maximum time this step may take |  | Pattern: `^((0\|[1-9][0-9]*)h)?((0\|[1-9][0-9]*)m)?((0\|[1-9][0-9]*)s)?((0\|[1-9][0-9]*)ms)?$` <br /> |
+| `timeout` _string_ | maximum time this step may take |  |  |
 | `content` _[Content](#content)_ | content that should be fetched for this step |  |  |
 | `services` _object (keys:string, values:[IndependentServiceSpec](#independentservicespec))_ | list of accompanying services to start |  |  |
 | `container` _[ContainerConfig](#containerconfig)_ | defaults for the containers in this step |  |  |
@@ -483,6 +507,7 @@ _Appears in:_
 | `topologySpreadConstraints` _[TopologySpreadConstraint](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#topologyspreadconstraint-v1-core) array_ | TopologySpreadConstraints describes how a group of pods ought to spread across topology domains. |  | Schemaless: \{\} <br /> |
 | `schedulingGates` _[PodSchedulingGate](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#podschedulinggate-v1-core) array_ | SchedulingGates is an opaque list of values that if specified will block scheduling the pod. |  |  |
 | `resourceClaims` _[PodResourceClaim](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#podresourceclaim-v1-core) array_ | ResourceClaims defines which ResourceClaims must be allocated and reserved before the Pod is allowed to start. |  |  |
+| `hostPID` _boolean_ | Whether to allow a pod to have access to the host process ID namespace |  |  |
 
 
 ### Resources
@@ -563,14 +588,14 @@ _Appears in:_
 | `shards` _object (keys:string, values:[DynamicList](#dynamiclist))_ | parameters that should be distributed across sharded instances |  |  |
 | `description` _string_ | service description to display |  |  |
 | `logs` _string_ | should save logs for the service (false if not specified) |  |  |
-| `timeout` _string_ | maximum time until reaching readiness |  | Pattern: `^((0\|[1-9][0-9]*)h)?((0\|[1-9][0-9]*)m)?((0\|[1-9][0-9]*)s)?((0\|[1-9][0-9]*)ms)?$` <br /> |
+| `timeout` _string_ | maximum time until reaching readiness |  |  |
 | `transfer` _[StepParallelTransfer](#stepparalleltransfer) array_ | instructions for transferring files |  |  |
 | `content` _[Content](#content)_ | global content that should be fetched into all containers |  |  |
 | `pod` _[PodConfig](#podconfig)_ | configuration for the scheduled pod |  |  |
 | `workingDir` _string_ | override default working directory in the image (empty string to default WORKDIR for the image) |  |  |
 | `image` _string_ | image to be used for the container |  |  |
 | `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#pullpolicy-v1-core)_ | pulling policy for the image |  |  |
-| `env` _[EnvVar](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvar-v1-core) array_ | environment variables to append to the container |  |  |
+| `env` _[EnvVar](#envvar) array_ | environment variables to append to the container |  |  |
 | `envFrom` _[EnvFromSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envfromsource-v1-core) array_ | external environment variables to append to the container |  |  |
 | `command` _string_ | override default command in the image (empty string to default ENTRYPOINT of the image) |  |  |
 | `args` _string_ | override default command in the image (empty string to default CMD of the image) |  |  |
@@ -604,7 +629,7 @@ _Appears in:_
 | `optional` _boolean_ | is the step optional, so its failure won't affect the TestWorkflow result |  |  |
 | `paused` _boolean_ | pause the step initially |  |  |
 | `retry` _[RetryPolicy](#retrypolicy)_ | policy for retrying the step |  |  |
-| `timeout` _string_ | maximum time this step may take |  | Pattern: `^((0\|[1-9][0-9]*)h)?((0\|[1-9][0-9]*)m)?((0\|[1-9][0-9]*)s)?((0\|[1-9][0-9]*)ms)?$` <br /> |
+| `timeout` _string_ | maximum time this step may take |  |  |
 | `use` _[TemplateRef](#templateref) array_ | multiple templates to include in this step |  |  |
 | `content` _[Content](#content)_ | content that should be fetched for this step |  |  |
 | `services` _object (keys:string, values:[ServiceSpec](#servicespec))_ | list of accompanying services to start |  |  |
@@ -659,7 +684,7 @@ _Appears in:_
 | `optional` _boolean_ | is the step optional, so its failure won't affect the TestWorkflow result |  |  |
 | `paused` _boolean_ | pause the step initially |  |  |
 | `retry` _[RetryPolicy](#retrypolicy)_ | policy for retrying the step |  |  |
-| `timeout` _string_ | maximum time this step may take |  | Pattern: `^((0\|[1-9][0-9]*)h)?((0\|[1-9][0-9]*)m)?((0\|[1-9][0-9]*)s)?((0\|[1-9][0-9]*)ms)?$` <br /> |
+| `timeout` _string_ | maximum time this step may take |  |  |
 
 
 ### StepDefaults
@@ -769,6 +794,7 @@ _Appears in:_
 | `executionName` _string_ | unique execution name to use |  |  |
 | `tarball` _object (keys:string, values:[TarballRequest](#tarballrequest))_ | pack some data from the original file system to serve them down |  |  |
 | `config` _object (keys:string, values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util))_ | configuration to pass for the workflow |  |  |
+| `target` _[Target](#target)_ | Targets helps decide on which runner the execution is scheduled. |  |  |
 
 
 ### StepMeta
@@ -813,7 +839,7 @@ _Appears in:_
 
 ### StepParallel
 
-_Underlying type:_ _[struct\{Parallelism int32 "json:\"parallelism,omitempty\""; StepExecuteStrategy "json:\",inline\" expr:\"include\""; Description string "json:\"description,omitempty\" expr:\"template\""; Logs *string "json:\"logs,omitempty\" expr:\"expression\""; Transfer []StepParallelTransfer "json:\"transfer,omitempty\" expr:\"include\""; Fetch []StepParallelFetch "json:\"fetch,omitempty\" expr:\"include\""; TestWorkflowSpec "json:\",inline\" expr:\"include\""; StepControl "json:\",inline\" expr:\"include\""; StepOperations "json:\",inline\" expr:\"include\""; Template *TemplateRef "json:\"template,omitempty\" expr:\"include\""}](#struct{parallelism-int32-"json:\"parallelism,omitempty\"";-stepexecutestrategy-"json:\",inline\"-expr:\"include\"";-description-string-"json:\"description,omitempty\"-expr:\"template\"";-logs-*string-"json:\"logs,omitempty\"-expr:\"expression\"";-transfer-[]stepparalleltransfer-"json:\"transfer,omitempty\"-expr:\"include\"";-fetch-[]stepparallelfetch-"json:\"fetch,omitempty\"-expr:\"include\"";-testworkflowspec-"json:\",inline\"-expr:\"include\"";-stepcontrol-"json:\",inline\"-expr:\"include\"";-stepoperations-"json:\",inline\"-expr:\"include\"";-template-*templateref-"json:\"template,omitempty\"-expr:\"include\""})_
+_Underlying type:_ _[struct\{Parallelism int32 "json:\"parallelism,omitempty\""; StepExecuteStrategy "json:\",inline\" expr:\"include\""; Description string "json:\"description,omitempty\" expr:\"template\""; Logs *string "json:\"logs,omitempty\" expr:\"expression\""; Transfer []StepParallelTransfer "json:\"transfer,omitempty\" expr:\"include\""; Fetch []StepParallelFetch "json:\"fetch,omitempty\" expr:\"include\""; StepControl "json:\",inline\" expr:\"include\""; StepOperations "json:\",inline\" expr:\"include\""; Template *TemplateRef "json:\"template,omitempty\" expr:\"include\""; Use []TemplateRef "json:\"use,omitempty\" expr:\"include\""; Events []Event "json:\"events,omitempty\" expr:\"include\""; System *TestWorkflowSystem "json:\"system,omitempty\" expr:\"include\""; Config map[string]ParameterSchema "json:\"config,omitempty\" expr:\"include\""; Content *Content "json:\"content,omitempty\" expr:\"include\""; Container *ContainerConfig "json:\"container,omitempty\" expr:\"include\""; Job *JobConfig "json:\"job,omitempty\" expr:\"include\""; Pod *PodConfig "json:\"pod,omitempty\" expr:\"include\""; Notifications *NotificationsConfig "json:\"notifications,omitempty\" expr:\"include\""; Execution *TestWorkflowTagSchema "json:\"execution,omitempty\" expr:\"include\""; Services map[string]ServiceSpec "json:\"services,omitempty\" expr:\"template,include\""; Setup []Step "json:\"setup,omitempty\" expr:\"include\""; Steps []Step "json:\"steps,omitempty\" expr:\"include\""; After []Step "json:\"after,omitempty\" expr:\"include\""; Pvcs map[string]k8s.io/api/core/v1.PersistentVolumeClaimSpec "json:\"pvcs,omitempty\" expr:\"template,include\""}](#struct{parallelism-int32-"json:\"parallelism,omitempty\"";-stepexecutestrategy-"json:\",inline\"-expr:\"include\"";-description-string-"json:\"description,omitempty\"-expr:\"template\"";-logs-*string-"json:\"logs,omitempty\"-expr:\"expression\"";-transfer-[]stepparalleltransfer-"json:\"transfer,omitempty\"-expr:\"include\"";-fetch-[]stepparallelfetch-"json:\"fetch,omitempty\"-expr:\"include\"";-stepcontrol-"json:\",inline\"-expr:\"include\"";-stepoperations-"json:\",inline\"-expr:\"include\"";-template-*templateref-"json:\"template,omitempty\"-expr:\"include\"";-use-[]templateref-"json:\"use,omitempty\"-expr:\"include\"";-events-[]event-"json:\"events,omitempty\"-expr:\"include\"";-system-*testworkflowsystem-"json:\"system,omitempty\"-expr:\"include\"";-config-map[string]parameterschema-"json:\"config,omitempty\"-expr:\"include\"";-content-*content-"json:\"content,omitempty\"-expr:\"include\"";-container-*containerconfig-"json:\"container,omitempty\"-expr:\"include\"";-job-*jobconfig-"json:\"job,omitempty\"-expr:\"include\"";-pod-*podconfig-"json:\"pod,omitempty\"-expr:\"include\"";-notifications-*notificationsconfig-"json:\"notifications,omitempty\"-expr:\"include\"";-execution-*testworkflowtagschema-"json:\"execution,omitempty\"-expr:\"include\"";-services-map[string]servicespec-"json:\"services,omitempty\"-expr:\"template,include\"";-setup-[]step-"json:\"setup,omitempty\"-expr:\"include\"";-steps-[]step-"json:\"steps,omitempty\"-expr:\"include\"";-after-[]step-"json:\"after,omitempty\"-expr:\"include\"";-pvcs-map[string]k8sioapicorev1persistentvolumeclaimspec-"json:\"pvcs,omitempty\"-expr:\"template,include\""})_
 
 
 
@@ -866,7 +892,7 @@ _Appears in:_
 | `workingDir` _string_ | override default working directory in the image (empty string to default WORKDIR for the image) |  |  |
 | `image` _string_ | image to be used for the container |  |  |
 | `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#pullpolicy-v1-core)_ | pulling policy for the image |  |  |
-| `env` _[EnvVar](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvar-v1-core) array_ | environment variables to append to the container |  |  |
+| `env` _[EnvVar](#envvar) array_ | environment variables to append to the container |  |  |
 | `envFrom` _[EnvFromSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envfromsource-v1-core) array_ | external environment variables to append to the container |  |  |
 | `command` _string_ | override default command in the image (empty string to default ENTRYPOINT of the image) |  |  |
 | `args` _string_ | override default command in the image (empty string to default CMD of the image) |  |  |
@@ -991,6 +1017,7 @@ _Appears in:_
 | `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `description` _string_ | TestWorkflow readable description |  |  |
 | `spec` _[TestWorkflowSpec](#testworkflowspec)_ | TestWorkflow specification |  |  |
+| `status` _[TestWorkflowStatusSummary](#testworkflowstatussummary)_ |  |  |  |
 
 
 ### TestWorkflowExecution
@@ -1010,6 +1037,7 @@ _Appears in:_
 | `kind` _string_ | `TestWorkflowExecution` | | |
 | `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[TestWorkflowExecutionSpec](#testworkflowexecutionspec)_ | TestWorkflowExecution specification |  |  |
+| `status` _[TestWorkflowExecutionStatus](#testworkflowexecutionstatus)_ | TestWorkflowExecutionStatus specification |  |  |
 
 
 ### TestWorkflowExecutionDetails
@@ -1035,12 +1063,31 @@ _Appears in:_
 | `result` _[TestWorkflowResult](#testworkflowresult)_ |  |  |  |
 | `output` _[TestWorkflowOutput](#testworkflowoutput) array_ | additional information from the steps, like referenced executed tests or artifacts |  |  |
 | `reports` _[TestWorkflowReport](#testworkflowreport) array_ | generated reports from the steps, like junit |  |  |
+| `resourceAggregations` _[TestWorkflowExecutionResourceAggregationsReport](#testworkflowexecutionresourceaggregationsreport)_ | resource metrics aggregations (min, max, avg, stddev) |  |  |
 | `workflow` _[TestWorkflow](#testworkflow)_ |  |  | Schemaless: \{\} <br /> |
 | `resolvedWorkflow` _[TestWorkflow](#testworkflow)_ |  |  | Schemaless: \{\} <br /> |
 | `testWorkflowExecutionName` _string_ | test workflow execution name started the test workflow execution |  |  |
 | `disableWebhooks` _boolean_ | whether webhooks should be disabled for this execution |  |  |
 | `tags` _object (keys:string, values:string)_ | test workflow execution tags |  |  |
 | `runningContext` _[TestWorkflowRunningContext](#testworkflowrunningcontext)_ | running context for the test workflow execution (Pro edition only) |  |  |
+
+
+### TestWorkflowExecutionHealth
+
+
+
+TestWorkflowExecutionHealth provides health information about a test workflow
+
+
+
+_Appears in:_
+- [TestWorkflowStatusSummary](#testworkflowstatussummary)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `passRate` _float_ | Recency-weighted fraction of executions that passed (value between 0.0 and 1.0). |  |  |
+| `flipRate` _float_ | Fraction of status changes among consecutive executions without recency weighting (value between 0.0 and 1.0). |  |  |
+| `overallHealth` _float_ | Combined health score, computed as passRate * (1 - flipRate) (value between 0.0 and 1.0). |  |  |
 
 
 ### TestWorkflowExecutionList
@@ -1080,6 +1127,64 @@ _Appears in:_
 | `disableWebhooks` _boolean_ | whether webhooks should be disabled for this execution |  |  |
 | `tags` _object (keys:string, values:string)_ | test workflow execution tags |  |  |
 | `runningContext` _[TestWorkflowRunningContext](#testworkflowrunningcontext)_ | running context for the test workflow execution (Pro edition only) |  |  |
+| `target` _[Target](#target)_ | Targets helps decide on which runner the execution is scheduled. |  |  |
+
+
+### TestWorkflowExecutionResourceAggregations
+
+_Underlying type:_ _[struct\{Total float64 "json:\"total,omitempty\""; Min float64 "json:\"min,omitempty\""; Max float64 "json:\"max,omitempty\""; Avg float64 "json:\"avg,omitempty\""; StdDev float64 "json:\"stddev,omitempty\""}](#struct{total-float64-"json:\"total,omitempty\"";-min-float64-"json:\"min,omitempty\"";-max-float64-"json:\"max,omitempty\"";-avg-float64-"json:\"avg,omitempty\"";-stddev-float64-"json:\"stddev,omitempty\""})_
+
+TestWorkflowExecutionResourceAggregations contains resource metrics aggregations
+
+
+
+_Appears in:_
+- [TestWorkflowExecutionResourceAggregationsByField](#testworkflowexecutionresourceaggregationsbyfield)
+
+
+
+### TestWorkflowExecutionResourceAggregationsByField
+
+_Underlying type:_ _[map[string]*TestWorkflowExecutionResourceAggregations](#map[string]*testworkflowexecutionresourceaggregations)_
+
+
+
+
+
+_Appears in:_
+- [TestWorkflowExecutionResourceAggregationsByMeasurement](#testworkflowexecutionresourceaggregationsbymeasurement)
+
+
+
+### TestWorkflowExecutionResourceAggregationsByMeasurement
+
+_Underlying type:_ _[map[string]TestWorkflowExecutionResourceAggregationsByField](#map[string]testworkflowexecutionresourceaggregationsbyfield)_
+
+
+
+
+
+_Appears in:_
+- [TestWorkflowExecutionResourceAggregationsReport](#testworkflowexecutionresourceaggregationsreport)
+- [TestWorkflowExecutionStepResourceAggregations](#testworkflowexecutionstepresourceaggregations)
+
+
+
+### TestWorkflowExecutionResourceAggregationsReport
+
+
+
+
+
+
+
+_Appears in:_
+- [TestWorkflowExecutionDetails](#testworkflowexecutiondetails)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `global` _[TestWorkflowExecutionResourceAggregationsByMeasurement](#testworkflowexecutionresourceaggregationsbymeasurement)_ |  |  |  |
+| `step` _[TestWorkflowExecutionStepResourceAggregations](#testworkflowexecutionstepresourceaggregations) array_ |  |  |  |
 
 
 ### TestWorkflowExecutionSpec
@@ -1099,6 +1204,38 @@ _Appears in:_
 | `executionRequest` _[TestWorkflowExecutionRequest](#testworkflowexecutionrequest)_ |  |  |  |
 
 
+### TestWorkflowExecutionStatus
+
+
+
+TestWorkflowExecutionStatus defines the observed state of TestWorkflowExecution
+
+
+
+_Appears in:_
+- [TestWorkflowExecution](#testworkflowexecution)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `latestExecution` _[TestWorkflowExecutionDetails](#testworkflowexecutiondetails)_ | INSERT ADDITIONAL STATUS FIELD - define observed state of cluster<br />Important: Run "make" to regenerate code after modifying this file |  |  |
+| `generation` _integer_ | test workflow execution generation |  |  |
+
+
+### TestWorkflowExecutionStepResourceAggregations
+
+
+
+
+
+
+
+_Appears in:_
+- [TestWorkflowExecutionResourceAggregationsReport](#testworkflowexecutionresourceaggregationsreport)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `ref` _string_ | step reference |  |  |
+| `aggregations` _[TestWorkflowExecutionResourceAggregationsByMeasurement](#testworkflowexecutionresourceaggregationsbymeasurement)_ | resource metrics aggregations grouped by measurement and field |  |  |
 
 
 ### TestWorkflowExecutionSummary
@@ -1183,7 +1320,7 @@ _Appears in:_
 
 
 
-TestWorkflowStepReport contains report of TestWorkflow
+TestWorkflowReport contains report of TestWorkflow
 
 
 
@@ -1202,7 +1339,7 @@ _Appears in:_
 
 
 
-TestWorkflowStepReportSummary contains report summary of TestWorkflow
+TestWorkflowReportSummary contains report summary of TestWorkflow
 
 
 
@@ -1232,6 +1369,7 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
+| `status` _[TestWorkflowStatus](#testworkflowstatus)_ |  |  | Enum: [queued running paused passed failed aborted] <br /> |
 | `predictedStatus` _[TestWorkflowStatus](#testworkflowstatus)_ |  |  | Enum: [queued running paused passed failed aborted] <br /> |
 | `queuedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the pod was created |  |  |
 | `startedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the pod has been successfully assigned |  |  |
@@ -1259,6 +1397,7 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
+| `status` _[TestWorkflowStatus](#testworkflowstatus)_ |  |  | Enum: [queued running paused passed failed aborted] <br /> |
 | `predictedStatus` _[TestWorkflowStatus](#testworkflowstatus)_ |  |  | Enum: [queued running paused passed failed aborted] <br /> |
 | `queuedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the pod was created |  |  |
 | `startedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the pod has been successfully assigned |  |  |
@@ -1306,6 +1445,7 @@ _Appears in:_
 | `email` _string_ | actor email |  |  |
 | `executionId` _string_ | test workflow execution id |  |  |
 | `executionPath` _string_ | all test workflow execution ids starting from the root |  |  |
+| `executionReference` _string_ | reference test workflow execution id |  |  |
 | `type` _[TestWorkflowRunningContextActorType](#testworkflowrunningcontextactortype)_ |  |  | Enum: [cron testtrigger user testworkflow testworkflowexecution program] <br /> |
 
 
@@ -1469,6 +1609,22 @@ _Appears in:_
 | `aborted` |  |
 
 
+### TestWorkflowStatusSummary
+
+
+
+TestWorkflowStatusSummary contains information about the TestWorkflow status.
+It includes details about the latest execution and health of the TestWorkflow.
+
+
+
+_Appears in:_
+- [TestWorkflow](#testworkflow)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `latestExecution` _[TestWorkflowExecutionSummary](#testworkflowexecutionsummary)_ | (Deprecated) LatestExecution maintained for backward compatibility, never actively used |  |  |
+| `health` _[TestWorkflowExecutionHealth](#testworkflowexecutionhealth)_ |  |  |  |
 
 
 ### TestWorkflowStepResult
@@ -1485,12 +1641,34 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `errorMessage` _string_ |  |  |  |
+| `status` _[TestWorkflowStepStatus](#testworkflowstepstatus)_ |  |  |  |
 | `exitCode` _integer_ |  |  |  |
 | `queuedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the container was created |  |  |
 | `startedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the container was started |  |  |
 | `finishedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the container was finished |  |  |
 
 
+### TestWorkflowStepStatus
+
+_Underlying type:_ _string_
+
+TestWorkfloStepwStatus has step status of TestWorkflow
+
+
+
+_Appears in:_
+- [TestWorkflowStepResult](#testworkflowstepresult)
+
+| Field | Description |
+| --- | --- |
+| `queued` |  |
+| `running` |  |
+| `paused` |  |
+| `passed` |  |
+| `failed` |  |
+| `timeout` |  |
+| `skipped` |  |
+| `aborted` |  |
 
 
 ### TestWorkflowSummary
@@ -1547,6 +1725,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `tags` _object (keys:string, values:string)_ | test workflow execution tags |  |  |
+| `target` _[Target](#target)_ | Targets helps decide on which runner the execution is scheduled. |  |  |
 
 
 ### TestWorkflowTemplate

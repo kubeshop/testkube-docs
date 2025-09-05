@@ -129,59 +129,20 @@ The customized markdown templates are in this repositories [src/crd-templates](s
 
 Follow these steps:
 
-1. Clone/update the [testkube-operator](https://github.com/kubeshop/testkube-operator) `main` branch to make sure you have the latest types available locally.
-2. Clone the https://github.com/kubeshop/crd-ref-docs repo
-3. Make sure you have go tooling installed and run `go build` in this repo, this
-   should create a `crd-ref-docs` binary in the roof folder of the repo.
-4. Set the desired Kubernetes Version to use for outgoing links to reference docs in the `config.yaml` file (at least v1.28)
-5. Create a `docs` folder in the cloned repo and now run the following command (using the `crd-ref-docs` tool):
-
-```shell
-./crd-ref-docs
-  --source-path=<path to testestkube-operator project>
-  --config=config.yaml
-  --renderer=markdown
-  --output-path=./docs
-  --output-mode=group
-  --templates-dir=<testkube-docs-root>/src/crd-templates
-```
-
-For example:
-
-```shell
- ./crd-ref-docs --source-path=/Users/olensmar/GolandProjects/testkube-operator --config=config.yaml --renderer=markdown --output-path=./docs --output-mode=group --templates-dir=/Users/olensmar/WebstormProjects/testkube-docs/src/crd-templates
-2024-08-05T11:44:21.019+0200    INFO    crd-ref-docs    Loading configuration   {"path": "config.yaml"}
-2024-08-05T11:44:21.020+0200    INFO    crd-ref-docs    Processing source directory     {"directory": "/Users/olensmar/GolandProjects/testkube-operator", "depth": 10}
-2024-08-05T11:44:22.717+0200    INFO    crd-ref-docs    Rendering output        {"path": "./docs"}
-2024-08-05T11:44:22.790+0200    INFO    crd-ref-docs    CRD reference documentation generated
-2024-08-05T11:44:22.790+0200    INFO    crd-ref-docs    Execution time: 1.770360541s
-```
-
-The `docs` folder should now contain the generated files:
-
-```shell
-➜  crd-ref-docs git:(master) ✗ ls -l docs
-total 152
--rw-r--r-- 1 olensmar  8737 Aug  5 11:44 executor.testkube.io-v1.md
--rw-r--r-- 1 olensmar 45172 Aug  5 11:44 tests.testkube.io-v1.md
--rw-r--r-- 1 olensmar 10369 Aug  5 11:44 tests.testkube.io-v2.md
--rw-r--r-- 1 olensmar 19695 Aug  5 11:44 tests.testkube.io-v3.md
--rw-r--r-- 1 olensmar 60601 Aug  5 11:44 testworkflows.testkube.io-v1.md
-```
-
-6. Copy these files to the `/docs/articles/crds` folder in this repo
-7. Make sure the links and info in `/docs/articles/crds.md` is correct and up to date
-8. Add the deprecation warning after the main headline in all files containing deprecated APIs:
-
-```markdown
-# Testkube API Reference
-
-import LegacyWarning from '../\_legacy-warning.mdx';
-
-<LegacyWarning />
-```
-
-9. Create a branch, commit and create a PR
+1. Ensure you have pulled the [testkube-operator](https://github.com/kubeshop/testkube-operator) submodule `main` branch to make sure you have the latest types available locally.
+2. Make sure you have go tooling installed.
+3. Set the desired Kubernetes Version to use for outgoing links to reference docs in the `config.yaml` file (at least v1.28)
+4. Run `go generate gen-crds.go`.
+5. Make sure the links and info in `/docs/articles/crds.md` is correct and up to date
+6. Add the deprecation warning after the main headline in all files containing deprecated APIs:
+   ```markdown
+    # Testkube API Reference
+    
+    import LegacyWarning from '../\_legacy-warning.mdx';
+    
+    <LegacyWarning />
+   ```
+7. Create a branch, commit and create a PR
 
 ## Updating the CLI Reference docs
 

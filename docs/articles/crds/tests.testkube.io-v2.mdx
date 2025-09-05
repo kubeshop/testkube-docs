@@ -88,6 +88,7 @@ _Appears in:_
 | `kind` _string_ | `Script` | | |
 | `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[ScriptSpec](#scriptspec)_ |  |  |  |
+| `status` _[ScriptStatus](#scriptstatus)_ |  |  |  |
 
 
 ### ScriptContent
@@ -147,6 +148,21 @@ _Appears in:_
 | `tags` _string array_ | script tags |  |  |
 
 
+### ScriptStatus
+
+
+
+ScriptStatus defines the observed state of Script
+
+
+
+_Appears in:_
+- [Script](#script)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `last_execution` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ |  |  |  |
+| `executions_count` _integer_ |  |  |  |
 
 
 ### Test
@@ -166,6 +182,7 @@ _Appears in:_
 | `kind` _string_ | `Test` | | |
 | `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[TestSpec](#testspec)_ |  |  |  |
+| `status` _[TestStatus](#teststatus)_ |  |  |  |
 
 
 ### TestContent
@@ -227,6 +244,21 @@ _Appears in:_
 | `executorArgs` _string array_ | additional executor binary arguments |  |  |
 
 
+### TestStatus
+
+
+
+TestStatus defines the observed state of Test
+
+
+
+_Appears in:_
+- [Test](#test)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `last_execution` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ |  |  |  |
+| `executions_count` _integer_ |  |  |  |
 
 
 ### TestSuite
@@ -246,6 +278,7 @@ _Appears in:_
 | `kind` _string_ | `TestSuite` | | |
 | `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[TestSuiteSpec](#testsuitespec)_ |  |  |  |
+| `status` _[TestSuiteStatus](#testsuitestatus)_ |  |  |  |
 
 
 ### TestSuiteExecutionCore
@@ -264,6 +297,7 @@ _Appears in:_
 | `id` _string_ | execution id |  |  |
 | `startTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | test suite execution start time |  |  |
 | `endTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | test suite execution end time |  |  |
+| `status` _[TestSuiteExecutionStatus](#testsuiteexecutionstatus)_ |  |  | Enum: [queued running passed failed aborting aborted timeout] <br /> |
 
 
 ### TestSuiteExecutionRequest
@@ -292,6 +326,27 @@ _Appears in:_
 | `cronJobTemplate` _string_ | cron job template extensions |  |  |
 
 
+### TestSuiteExecutionStatus
+
+_Underlying type:_ _string_
+
+
+
+_Validation:_
+- Enum: [queued running passed failed aborting aborted timeout]
+
+_Appears in:_
+- [TestSuiteExecutionCore](#testsuiteexecutioncore)
+
+| Field | Description |
+| --- | --- |
+| `queued` |  |
+| `running` |  |
+| `passed` |  |
+| `failed` |  |
+| `aborting` |  |
+| `aborted` |  |
+| `timeout` |  |
 
 
 ### TestSuiteList
@@ -334,6 +389,20 @@ _Appears in:_
 | `executionRequest` _[TestSuiteExecutionRequest](#testsuiteexecutionrequest)_ |  |  |  |
 
 
+### TestSuiteStatus
+
+
+
+TestSuiteStatus defines the observed state of TestSuite
+
+
+
+_Appears in:_
+- [TestSuite](#testsuite)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `latestExecution` _[TestSuiteExecutionCore](#testsuiteexecutioncore)_ | latest execution result |  |  |
 
 
 ### TestSuiteStepDelay
