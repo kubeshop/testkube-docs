@@ -23,6 +23,21 @@ This flag belongs to the Testkube chart values and is applied during install/upg
 
 1) Create a `TestWorkflowTemplate` with the required labels so it shows up in the wizard:
 
+### Required Labels and Wizard Mapping
+
+The Testkube Dashboard wizard uses specific labels to organize and display templates:
+
+- **`testkube.io/name`**: The display name shown on the template card in the wizard. Must be a valid Kubernetes label (no spaces, use hyphens or underscores).
+- **`testkube.io/wizard: enabled`**: Makes the template visible in the Dashboard wizard. Without this label, the template won't appear in the UI.
+
+**Optional annotations** that enhance the template card:
+- **`testkube.io/categories`**: Groups templates in the wizard (e.g., "Load & Performance", "API Testing", "Samples")
+- **`testkube.io/description`**: Short description shown on the template card
+- **`testkube.io/icon`**: Icon identifier for the template (e.g., "artillery", "postman")
+- **`testkube.io/image`**: Container image shown as example
+- **`testkube.io/example`**: YAML snippet shown in the template preview
+- **`testkube.io/example-path`**: Path to example file in the template
+
 ```yaml title="sample--echo--v1.yaml"
 apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflowTemplate
