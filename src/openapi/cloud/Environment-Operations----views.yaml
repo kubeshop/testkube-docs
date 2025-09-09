@@ -1,0 +1,97 @@
+openapi: 3.0.1
+info:
+  title: Testkube Pro API
+  description: API for Testkube Pro
+  contact:
+    email: testkube@kubeshop.io
+  license:
+    name: COMMERICAL
+    url: https://opensource.org/licenses/MIT
+  version: 1.18.0-de.80
+servers:
+  - url: https://api.testkube.io
+    description: Testkube Cloud API Endpoint
+  - url: https://<your-testkube-api-host>
+    description: Testkube On-Prem API Endpoint
+paths:
+  /organizations/{id}/environments/{environmentID}/views:
+    get:
+      summary: List views
+      description: List all views for an environment
+      operationId: listViews
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: './components.yaml#/components/parameters/EnvironmentID'
+        - name: entity
+          in: query
+          description: Filter by environment view entity
+          schema:
+            type: string
+            example: workflow
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/Views'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    post:
+      summary: Create view
+      description: Create a new view
+      operationId: createView
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: './components.yaml#/components/parameters/EnvironmentID'
+        - name: isPrivate
+          in: query
+          description: >-
+            Whether the view should be private (true) or shared (false). Private
+            views are only visible to the user who created them, while shared
+            views are visible to all users in the environment.
+          schema:
+            type: boolean
+            default: true
+      requestBody:
+        $ref: './components.yaml#/components/requestBodies/View'
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/View'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+  /organizations/{id}/environments/{environmentID}/views/{viewID}:
+    delete:
+      summary: Delete view
+      description: Delete a view
+      operationId: deleteView
+      parameters:
+        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: './components.yaml#/components/parameters/EnvironmentID'
+        - name: viewID
+          in: path
+          description: View ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          $ref: './components.yaml#/components/responses/NoContent'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []

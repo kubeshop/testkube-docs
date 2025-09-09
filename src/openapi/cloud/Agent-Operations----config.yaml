@@ -7,7 +7,7 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: 1.16.0-de.53
+  version: 1.18.0-de.80
 servers:
   - url: https://api.testkube.io
     description: Testkube Cloud API Endpoint

@@ -7,39 +7,13 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: 1.16.0-de.53
+  version: 1.18.0-de.80
 servers:
   - url: https://api.testkube.io
     description: Testkube Cloud API Endpoint
   - url: https://<your-testkube-api-host>
     description: Testkube On-Prem API Endpoint
 paths:
-  /organizations/{id}/environments/{environmentID}/agent/executions/{executionID}/ai:
-    get:
-      summary: Generate OpenAI analysis websockets stream
-      description: OpenAI analysis websockets stream
-      operationId: executionAiAnalysis
-      responses:
-        '200':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
-        '409':
-          $ref: './components.yaml#/components/responses/Conflict'
-        '429':
-          $ref: './components.yaml#/components/responses/TooManyRequests'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/ExecutionID'
   /organizations/{id}/environments/{environmentId}/agent/executions:
     get:
       summary: Get all test executions

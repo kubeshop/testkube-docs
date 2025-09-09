@@ -7,7 +7,7 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: 1.16.0-de.53
+  version: 1.18.0-de.80
 servers:
   - url: https://api.testkube.io
     description: Testkube Cloud API Endpoint
@@ -34,6 +34,9 @@ paths:
       - $ref: './components.yaml#/components/parameters/Kind'
       - $ref: './components.yaml#/components/parameters/Page'
       - $ref: './components.yaml#/components/parameters/PageSize'
+      - $ref: './components.yaml#/components/parameters/Selector'
+      - $ref: './components.yaml#/components/parameters/TextSearch'
+      - $ref: './components.yaml#/components/parameters/Status'
   /organizations/{id}/environments/{environmentID}/executions/{executionID}/artifact-archive:
     get:
       summary: Get artifact archive
@@ -140,6 +143,37 @@ paths:
       - $ref: './components.yaml#/components/parameters/EnvironmentID'
       - $ref: './components.yaml#/components/parameters/ExecutionID'
       - $ref: './components.yaml#/components/parameters/ArtifactID'
+  /organizations/{id}/environments/{environmentID}/executions/{executionID}/events:
+    get:
+      summary: Get events that regard this execution.
+      description: Get events that regard this execution
+      operationId: getExecutionEvents
+      responses:
+        '200':
+          description: Testkube event
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/TestkubeEvent'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/EnvironmentID'
+      - $ref: './components.yaml#/components/parameters/ExecutionID'
+      - name: series
+        in: query
+        description: Whether to group isomorphic events or keep a flat list of events.
+        schema:
+          type: boolean
   /organizations/{id}/environments/{environmentID}/executions/{executionID}/junit:
     get:
       summary: Get JUnit report for execution
@@ -194,26 +228,6 @@ paths:
         required: true
         schema:
           type: integer
-  /organizations/{id}/environments/{environmentID}/executions/{executionID}/metadata:
-    get:
-      summary: Get Testkube Pro metadata for execution
-      description: OpenAI analysis websockets stream
-      operationId: getExecutionMetadata
-      responses:
-        '200':
-          $ref: './components.yaml#/components/responses/ExecutionMetadata'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/ExecutionID'
   /organizations/{id}/environments/{environmentID}/executions/{executionID}/serve-artifact:
     post:
       summary: Serve artifact
