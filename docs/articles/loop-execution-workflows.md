@@ -1,8 +1,8 @@
 # Looping Test Workflow Executions from Workflows
 
-For certain testing scenarios, teams may desire a workflow to run continuously, looped, until some timeout condition occurs (the workflow is manually ended, or a time limit is reached). This can be useful for driving activity against a system under test while a second workflow performs the actual tests. 
+For certain testing scenarios, teams may desire a workflow to run continuously, looped, until some timeout condition occurs (the workflow is manually ended, or a time limit is reached). This continuously looping workflow can be useful for driving specific activity against a system under test while a second Test Workflow performs the actual tests. 
 
-The Services feature of Test Workflows allows for this type of looping behavior. A service is started at the beginning of a workflow or step and stopped at the end. A service can be a dependency background process for a step or workflow, like a Selenium Grid, or a database with test data, but it can also be used to run a simple script while other steps are executed. We take this simple approach to achieve our goal: 
+The [Services](./test-workflows-services) feature of Test Workflows allows for this type of looping behavior. A service is a testing dependency like a Selenium Grid, a database with test data, the service under test itself, or in this case a simple script that loops indefinitely. A service is started at the beginning of a workflow or step and stopped at the end, making it a convinient solution to our use case. We take this simple approach to achieve our goal: 
 
 ```yaml
 kind: TestWorkflow

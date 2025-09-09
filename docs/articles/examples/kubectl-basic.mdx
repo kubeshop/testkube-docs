@@ -1,0 +1,195 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import KubectlWorkflow from "../../workflows/kubectl-workflow.md"
+import KubectlRoleBinding from "../../workflows/kubectl-role-binding.md"
+
+# Running Kubectl Commands in Test Workflows
+
+This guide shows how to run `kubectl` commands from within Test Workflows to interact with your Kubernetes cluster during test execution. This is useful for testing cluster state, validating deployments, or performing cluster operations as part of your test suite.
+
+## Prerequisites
+
+Before running kubectl commands in Test Workflows, you need to configure proper RBAC permissions for the Testkube service account.
+
+## Setting Up RBAC Permissions
+
+The Testkube service account (`testkube-api-server-tests-job`) needs appropriate permissions to execute kubectl commands. You'll need to create a Role or ClusterRole and bind it to the service account. Please note that this guide assumes you will use the default Testkube service account. If you'd like to use a different service account, you can tell Testkube to use a specific service account for a Test Workflow using the [Job and Pod Configuration](/articles/test-workflows-job-and-pod#service-account).
+
+### Step 1: Apply the Role Binding
+
+Apply the following YAML to grant the necessary permissions:
+
+<KubectlRoleBinding/>
+
+### Step 2: Verify Service Account
+
+Ensure the service account exists in your testkube namespace:
+
+```bash
+kubectl get serviceaccount testkube-api-server-tests-job -n testkube
+```
+
+If it doesn't exist, create it:
+
+```bash
+kubectl create serviceaccount testkube-api-server-tests-job -n testkube
+```
+
+## Basic Kubectl Workflow Example
+
+Below is a basic workflow for executing kubectl commands. You can paste this directly into the YAML of an existing or new test, just make sure to update the `name` and `namespace` for your environment if needed.
+
+- The `spec.steps` property defines multiple steps that run different kubectl commands
+- Each step uses the `bitnami/kubectl` image which includes kubectl and necessary tools
+- Commands are executed using the `shell` property
+
+<KubectlWorkflow/>
+
+## Common Use Cases
+
+### 1. Cluster Health Checks
+
+```yaml
+- name: Check cluster health
+  container:
+    image: bitnami/kubectl:1.28
+  shell: |
+    kubectl get nodes
+    kubectl get pods -A --field-selector=status.phase!=Running
+    kubectl top nodes
+```
+
+### 2. Application Deployment Validation
+
+```yaml
+- name: Validate deployment
+  container:
+    image: bitnami/kubectl:1.28
+  shell: |
+    kubectl get deployment my-app -n production
+    kubectl rollout status deployment/my-app -n production
+    kubectl get pods -l app=my-app -n production
+```
+
+### 3. Resource Monitoring
+
+```yaml
+- name: Monitor resources
+  container:
+    image: bitnami/kubectl:1.28
+  shell: |
+    kubectl get pods -o wide
+    kubectl describe nodes
+    kubectl get events --sort-by=.metadata.creationTimestamp
+```
+
+### 4. Configuration Management
+
+```yaml
+- name: Check configurations
+  container:
+    image: bitnami/kubectl:1.28
+  shell: |
+    kubectl get configmaps
+    kubectl get secrets
+    kubectl get ingress -A
+```
+
+## Advanced Examples
+
+### Multi-Namespace Operations
+
+```yaml
+- name: Check multiple namespaces
+  container:
+    image: bitnami/kubectl:1.28
+  shell: |
+    for ns in production staging development; do
+      echo "Checking namespace: $ns"
+      kubectl get pods -n $ns
+      kubectl get services -n $ns
+    done
+```
+
+### Conditional Operations
+
+```yaml
+- name: Conditional deployment check
+  container:
+    image: bitnami/kubectl:1.28
+  shell: |
+    if kubectl get deployment my-app -n production >/dev/null 2>&1; then
+      echo "Deployment exists, checking status..."
+      kubectl rollout status deployment/my-app -n production
+    else
+      echo "Deployment not found"
+      exit 1
+    fi
+```
+
+### Resource Cleanup
+
+```yaml
+- name: Cleanup test resources
+  container:
+    image: bitnami/kubectl:1.28
+  shell: |
+    kubectl delete pods -l test=cleanup-me --ignore-not-found=true
+    kubectl delete configmaps -l test=cleanup-me --ignore-not-found=true
+```
+
+## Security Considerations
+
+### Principle of Least Privilege
+
+- Only grant the minimum permissions required for your tests
+- Use namespace-specific RoleBindings when possible instead of ClusterRoleBindings
+- Regularly review and audit the permissions granted
+
+### Sensitive Data
+
+- Avoid using kubectl commands that might expose sensitive information in logs
+- Be careful with `kubectl describe` and `kubectl get` commands on secrets
+- Consider using `kubectl get` with `-o jsonpath` to extract only needed information
+
+### Example: Safe Secret Checking
+
+```yaml
+- name: Check secret exists without exposing data
+  container:
+    image: bitnami/kubectl:1.28
+  shell: |
+    if kubectl get secret my-secret -n production >/dev/null 2>&1; then
+      echo "Secret exists"
+      kubectl get secret my-secret -n production -o jsonpath='{.data}' | jq 'keys'
+    else
+      echo "Secret not found"
+      exit 1
+    fi
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Permission Denied**: Ensure the RoleBinding is correctly applied and the service account has the necessary permissions.
+
+2. **Service Account Not Found**: Verify the service account `testkube-api-server-tests-job` exists in the testkube namespace.
+
+3. **Image Pull Issues**: Use a reliable kubectl image like `bitnami/kubectl` or `rancher/kubectl`.
+
+4. **Command Not Found**: Ensure the kubectl binary is available in the container image.
+
+### Debugging Commands
+
+```yaml
+- name: Debug kubectl access
+  container:
+    image: bitnami/kubectl:1.28
+  shell: |
+    kubectl auth can-i get pods
+    kubectl auth can-i list services
+    kubectl config view
+    kubectl cluster-info
+```
+

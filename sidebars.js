@@ -943,6 +943,11 @@ const sidebars = {
           label: "Testing a Sample Application",
           id: "articles/tutorial/example",
         },
+        {
+          type: "doc",
+          label: "Executing Kubectl Commands",
+          id: "articles/examples/kubectl-basic",
+        },
       ],
     },
     {
