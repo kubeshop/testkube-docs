@@ -435,6 +435,11 @@ const sidebars = {
                   label: "Local Dev Loop",
                   id: "articles/local-dev-loop",
                 },
+                {
+                  type: "doc",
+                  label: "Transferring Output Between Steps",
+                  id: "articles/test-workflows-step-output-transfer",
+                },
               ],
             },
           ],
