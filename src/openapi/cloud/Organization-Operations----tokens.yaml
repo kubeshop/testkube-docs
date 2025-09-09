@@ -7,7 +7,7 @@ info:
   license:
     name: COMMERICAL
     url: https://opensource.org/licenses/MIT
-  version: 1.16.0-de.53
+  version: 1.18.0-de.80
 servers:
   - url: https://api.testkube.io
     description: Testkube Cloud API Endpoint
@@ -50,6 +50,25 @@ paths:
     parameters:
       - $ref: './components.yaml#/components/parameters/ID'
   /organizations/{id}/tokens/{tokenID}:
+    get:
+      summary: Get API Token
+      description: >-
+        Gets an API Token for an Organization. Only SCIM tokens can be
+        retrieved, other token types will return Forbidden.
+      operationId: getOrganizationToken
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/Token'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
     delete:
       summary: Delete API Token
       description: Deletes an API Token for an Organization

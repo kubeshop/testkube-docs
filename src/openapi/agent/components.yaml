@@ -1184,6 +1184,7 @@ components:
         - aborted
         - timeout
         - skipped
+        - canceled
     ExecutionResult:
       description: execution result returned from executor
       type: object
@@ -2567,10 +2568,14 @@ components:
         - end-testworkflow-success
         - end-testworkflow-failed
         - end-testworkflow-aborted
+        - end-testworkflow-canceled
+        - end-testworkflow-not-passed
         - become-testworkflow-up
         - become-testworkflow-down
         - become-testworkflow-failed
         - become-testworkflow-aborted
+        - become-testworkflow-canceled
+        - become-testworkflow-not-passed
         - created
         - updated
         - deleted
@@ -3280,8 +3285,6 @@ components:
           description: if test workflow is offline and cannot be executed
         status:
           $ref: '#/components/schemas/TestWorkflowStatusSummary'
-        health:
-          $ref: '#/components/schemas/TestWorkflowExecutionHealth'
     TestWorkflowExecutionRequest:
       type: object
       properties:
@@ -3567,8 +3570,8 @@ components:
       type: object
       description: test workflow status
       properties:
-        latestExecution:
-          $ref: '#/components/schemas/TestWorkflowExecutionSummary'
+        health:
+          $ref: '#/components/schemas/TestWorkflowExecutionHealth'
     TestWorkflowExecutionNotification:
       type: object
       properties:
@@ -3861,11 +3864,18 @@ components:
       type: string
       enum:
         - queued
+        - pending
+        - starting
+        - scheduling
         - running
+        - pausing
         - paused
+        - resuming
         - passed
         - failed
+        - stopping
         - aborted
+        - canceled
     TestWorkflowStepStatus:
       type: string
       enum:
@@ -3877,6 +3887,7 @@ components:
         - timeout
         - skipped
         - aborted
+        - canceled
     TestWorkflowTemplate:
       type: object
       properties:
