@@ -1,9 +1,5 @@
 # Transferring Output Between TestWorkflow Steps
 
-In Testkube TestWorkflows, there are several ways to transfer output from one step to another in consecutive steps. This guide covers the most effective approaches for passing data between workflow steps.
-
-## Overview
-
 Testkube TestWorkflows execute steps sequentially, and each step runs in its own container context. To pass data between steps, you need to use persistent storage mechanisms that survive across step boundaries.
 
 ## Methods for Transferring Output
@@ -84,74 +80,6 @@ spec:
         fi
 ```
 
-## Real-World Example: API Testing with Data Transfer
-
-Here's a practical example that demonstrates transferring API response data between steps:
-
-```yaml
-apiVersion: testworkflows.testkube.io/v1
-kind: TestWorkflow
-metadata:
-  name: api-testing-with-data-transfer
-spec:
-  config:
-    apiUrl:
-      type: string
-      default: "https://api.example.com"
-  steps:
-    - name: Authenticate and get token
-      shell: |
-        # Make API call to get authentication token
-        response=$(curl -s -X POST "{{ config.apiUrl }}/auth" \
-          -H "Content-Type: application/json" \
-          -d '{"username": "testuser", "password": "testpass"}')
-        
-        # Extract token from response
-        token=$(echo $response | jq -r '.token')
-        echo "Token: $token"
-        
-        # Save token for next step
-        echo $token > /data/auth_token.txt
-        
-    - name: Use token for API calls
-      shell: |
-        # Read token from previous step
-        token=$(cat /data/auth_token.txt)
-        echo "Using token: $token"
-        
-        # Make authenticated API call
-        curl -s -X GET "{{ config.apiUrl }}/users" \
-          -H "Authorization: Bearer $token" \
-          -o /data/users.json
-        
-        # Process the response
-        user_count=$(cat /data/users.json | jq '.users | length')
-        echo "Found $user_count users"
-        
-    - name: Generate report
-      shell: |
-        # Use data from previous steps
-        token=$(cat /data/auth_token.txt)
-        user_count=$(cat /data/users.json | jq '.users | length')
-        
-        # Generate report
-        cat > /data/report.txt << EOF
-        API Test Report
-        ===============
-        API URL: {{ config.apiUrl }}
-        Token: ${token:0:10}...
-        Users Found: $user_count
-        Timestamp: $(date)
-        EOF
-        
-        echo "Report generated:"
-        cat /data/report.txt
-      artifacts:
-        paths:
-          - "/data/report.txt"
-          - "/data/users.json"
-```
-
 ## Key Points to Remember
 
 1. **File System Persistence**: Files written in one step are available in subsequent steps within the same workflow execution.
@@ -167,13 +95,3 @@ spec:
 6. **JSON Data**: For structured data, consider using JSON format and the `jq` command for parsing.
 
 7. **Error Handling**: Always check if files exist before trying to read them in subsequent steps.
-
-## Best Practices
-
-- **Use descriptive file names**: Choose clear, descriptive names for your output files
-- **Handle errors gracefully**: Check if files exist before reading them
-- **Use absolute paths**: Always use absolute paths for file operations
-- **Clean up temporary files**: Remove temporary files when no longer needed
-- **Document your data flow**: Comment your workflow to make the data flow clear
-
-The file-based approach is the most reliable and commonly used method for transferring output between consecutive steps in Testkube TestWorkflows.
