@@ -1,4 +1,4 @@
-# Custom Test Workflow Examples
+# Custom Test Workflow Templates
 
 This guide shows two ways to publish your own Test Workflow Templates so they appear in the Dashboard wizard and can be reused across teams.
 
@@ -6,18 +6,6 @@ This guide shows two ways to publish your own Test Workflow Templates so they ap
 - Use a small Helm chart to version and ship a curated catalog of templates.
 
 > See the Examples & Guides catalog and Workflow Templates docs for built‑in templates.
-
-## Prerequisite: show Official Templates in the Wizard
-
-If you also want the built‑in templates to be created and visible in the wizard, make sure the Helm values include:
-
-```yaml
-global:
-  testWorkflows:
-    createOfficialTemplates: true
-```
-
-This flag belongs to the Testkube chart values and is applied during install/upgrade.
 
 ## Option A: Apply a template with kubectl
 
@@ -35,8 +23,8 @@ The Testkube Dashboard wizard uses specific labels to organize and display templ
 - **`testkube.io/description`**: Short description shown on the template card
 - **`testkube.io/icon`**: Icon identifier for the template (e.g., "artillery", "postman")
 - **`testkube.io/image`**: Container image shown as example
-- **`testkube.io/example`**: YAML snippet shown in the template preview
-- **`testkube.io/example-path`**: Path to example file in the template
+- **`testkube.io/example`**: YAML snippet shown in the template preview (users can copy this content)
+- **`testkube.io/example-path`**: Path to example file within the template (accessible as `/path` in the UI)
 
 ```yaml title="sample--echo--v1.yaml"
 apiVersion: testworkflows.testkube.io/v1
