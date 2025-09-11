@@ -34,6 +34,18 @@ Test executions will need to send artifacts and logs to a Cloud Storage bucket
 on GCP so egress traffic to the `storage.googleapis.com` host on port `443`
 should also be allowed.
 
+Testkube includes a background service that checks the latest Agent version by 
+querying the GitHub Releases API. In environments with restricted egress, 
+allow access to `api.github.com` or disable the check by setting 
+`DISABLE_AGENT_VERSION_CHECK=true` on the Testkube Enterprise API:
+```yaml
+testkube-cloud-api:
+  additionalEnv:
+    DISABLE_AGENT_VERSION_CHECK: true
+```
+The check is informational only and does not affect core functionality. 
+For offline installations, it is disabled by default.
+
 ### Ingress
 
 When using the Testkube Cloud Control Plane, all network traffic is initiated from the Agent to
