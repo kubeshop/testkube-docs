@@ -36,9 +36,8 @@ should also be allowed.
 
 Testkube includes a background service that checks the latest Agent version by 
 querying the GitHub Releases API. In environments with restricted egress, 
-allow access to https://api.github.com/repos/kubeshop/testkube/releases/latest or 
-disable the check by setting `DISABLE_AGENT_VERSION_CHECK=true` 
-on the Testkube Enterprise API:
+allow access to `api.github.com` or disable the check by setting 
+`DISABLE_AGENT_VERSION_CHECK=true` on the Testkube Enterprise API:
 ```yaml
 testkube-cloud-api:
   additionalEnv:
