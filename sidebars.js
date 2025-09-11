@@ -688,6 +688,11 @@ const sidebars = {
         id: "articles/examples/overview",
       },
       items: [
+                {
+                  type: "doc",
+                  label: "Custom Test Workflow Templates",
+                  id: "articles/examples/create-your-own-examples",
+                },
         {
           type: "category",
           label: "K6",
