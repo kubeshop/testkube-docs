@@ -1,0 +1,123 @@
+# Creating your own Workflow Templates
+
+This guide shows two ways to publish your own Test Workflow Templates so they appear in the Dashboard wizard and can be reused across teams.
+
+- Use kubectl for quick, ad-hoc rollout by a platform team.
+- Use a small Helm chart to version and ship a curated catalog of templates.
+
+> See the Examples & Guides catalog and [Workflow Templates docs](/articles/test-workflow-templates) for built‑in templates.
+
+## Option A: Apply a template with kubectl
+
+1) Create a `TestWorkflowTemplate` with the required labels so it shows up in the wizard:
+
+### Required Labels and Wizard Mapping
+
+The Testkube Dashboard wizard uses specific labels to organize and display templates:
+
+- **`testkube.io/name`**: The display name shown on the template card in the wizard. Must be a valid Kubernetes label (no spaces, use hyphens or underscores).
+- **`testkube.io/wizard: enabled`**: Makes the template visible in the Dashboard wizard. Without this label, the template won't appear in the UI.
+
+**Optional annotations** that enhance the template card:
+- **`testkube.io/categories`**: Groups templates in the wizard (e.g., "Load & Performance", "API Testing", "Samples")
+- **`testkube.io/description`**: Short description shown on the template card
+- **`testkube.io/icon`**: Icon identifier for the template (e.g., "artillery", "postman")
+- **`testkube.io/image`**: Container image shown as example
+- **`testkube.io/example`**: YAML snippet shown in the template preview (users can copy this content)
+- **`testkube.io/example-path`**: Path to example file within the template (accessible as `/path` in the UI)
+
+```yaml title="sample--echo--v1.yaml"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflowTemplate
+metadata:
+  name: sample--echo--v1
+  labels:
+    testkube.io/name: Echo-Sample   # must be a valid label (no spaces)
+    testkube.io/wizard: enabled
+  annotations:
+    testkube.io/categories: Samples
+    testkube.io/description: Minimal echo step
+spec:
+  steps:
+  - name: Echo-hello
+    run:
+      image: alpine:3.20
+      shell: echo hello
+```
+
+2) Apply it in the same namespace where Testkube is installed:
+
+```bash
+kubectl apply -n <your-namespace> -f sample--echo--v1.yaml
+```
+
+- The template will be visible in the wizard with the display name from `testkube.io/name`.
+- Optional annotations that improve the card: `testkube.io/icon`, `testkube.io/image`, `testkube.io/example`, `testkube.io/example-path`.
+
+## Option B: Package templates in a Helm chart
+
+Use this when you want to version, enable/disable, and roll out templates via GitOps/Helm.
+
+### 1) Chart layout
+```
+my-custom-templates/
+  Chart.yaml
+  values.yaml
+  templates/
+    templates.yaml
+```
+
+### 2) Example `values.yaml`
+```yaml
+templates:
+  - name: sample--curl--v1
+    displayName: Curl-Sample
+    category: Samples
+    description: Simple HTTP GET
+    image: curlimages/curl:8.9.1
+    shell: curl -sS https://example.com | head -n 1
+    enabled: true
+```
+
+### 3) `templates/templates.yaml`
+```yaml
+{{- range .Values.templates }}
+{{- if .enabled }}
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflowTemplate
+metadata:
+  name: {{ .name }}
+  labels:
+    testkube.io/name: {{ .displayName }}
+    testkube.io/wizard: enabled
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-weight: "30"
+    helm.sh/hook-delete-policy: hook-failed,before-hook-creation
+    testkube.io/categories: {{ .category | quote }}
+    testkube.io/description: {{ .description | quote }}
+spec:
+  steps:
+  - name: Run-curl
+    run:
+      image: {{ .image }}
+      shell: {{ .shell | quote }}
+---
+{{- end }}
+{{- end }}
+```
+
+The Helm hooks ensure templates are created after install/upgrade of this chart.
+
+### 4) Install in your Testkube namespace
+```bash
+helm upgrade --install my-templates ./my-custom-templates -n <your-namespace> --wait
+```
+
+After installation, the new templates appear in the Dashboard under the Templates wizard.
+
+---
+
+### Verify
+- Dashboard → Test Workflow Templates: you should see the new cards (e.g. Echo-Sample, Curl-Sample).
+- CLI: `kubectl get testworkflowtemplates -n <your-namespace>` should list your resources.

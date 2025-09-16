@@ -440,6 +440,11 @@ const sidebars = {
                   label: "Looping Test Workflow Executions from Workflows",
                   id: "articles/loop-execution-workflows",
                 },
+                {
+                  type: "doc",
+                  label: "Creating your own Workflow Templates",
+                  id: "articles/examples/create-your-own-examples",
+                },
               ],
             },
           ],
@@ -680,14 +685,14 @@ const sidebars = {
         },
       ],
     },
-    {
-      type: "category",
-      label: "Examples & Guides",
-      link: {
-        type: "doc",
-        id: "articles/examples/overview",
-      },
-      items: [
+        {
+          type: "category",
+          label: "Examples & Guides",
+          link: {
+            type: "doc",
+            id: "articles/examples/overview",
+          },
+          items: [
         {
           type: "category",
           label: "K6",
