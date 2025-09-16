@@ -25,6 +25,8 @@ or create a TestWorkflowTemplate Custom Resource in your Kubernetes cluster usin
 This custom resources follows the same structure as a Test Workflow, with the additional ability to define configuration parameters that 
 can be specified when the template is used.
 
+> To learn how to create and publish your own custom templates that appear in the Dashboard wizard, see [Creating your own Workflow Templates](/articles/examples/create-your-own-examples).
+
 The example below templates a testing tool. More specifically, it defines a k6 test with parameters for the
 k6 version to use and the parameters to pass to k6.
 
