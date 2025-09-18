@@ -29,8 +29,8 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.45.4-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.45.4-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.117%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.145%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>36th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -46,8 +46,8 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.45.4-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.45.4-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.023%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.026%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -63,8 +63,8 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.45.4-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.45.4-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.024%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.027%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -80,8 +80,8 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.45.4-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.45.4-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.024%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.028%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -97,8 +97,8 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.45.4-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.45.4-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>6.402%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>91st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>5.144%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>89th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -148,8 +148,8 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.45.4-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.45.4-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.020%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.029%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -255,8 +255,8 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 <table>
 <tr><td>Affected range</td><td><code>&lt;=1.33.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.106%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.123%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
