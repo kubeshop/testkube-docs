@@ -35,6 +35,18 @@ By embedding expressions within double curly brackets `{{ }}`, you can dynamical
 image: "mcr.microsoft.com/playwright:v{{ config.version }}"
 ```
 
+### Generating Array values
+
+By surrounding embedded expressions within brackets `[ ]`, you can dynamically generate array property values. In the example below, the `git.content` paths are taken from a comma-separate config value:
+
+```yaml
+ content:
+    git:
+      uri: https://github.com/kubeshop/testkube
+      revision: main
+      paths: ["{{ split(config.paths) }}"]
+```
+
 ### Configurable K6 Script
 
 Expressions can also be used to build dynamic content files. For example, you can create a K6 script that uses JSON-parsed thresholds and additional script content from your configuration:
