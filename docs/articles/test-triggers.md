@@ -29,47 +29,76 @@ Triggers are ultimately defined as Customer Resources in your cluster - [TestTri
 
 ### Selectors
 
-Triggers use Selectors to specify which events to listen for.
+Triggers use selectors to determine which events should trigger the action
+and which tests should be the target of the trigger action.
 
-The `resourceSelector` and `testSelector` fields support selecting resources either by name or using
-the Kubernetes [Label Selector](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements).
+#### Event Selector
 
-Each selector should specify the `namespace` of the object, otherwise the namespace defaults to `testkube`.
-
-```
-selector := resourceSelector | testSelector
-```
-
-#### Name Selector
-
-Name selectors are used when we want to select a specific resource in a specific namespace.
+Each event that is emitted by a listener agent has labels on it which could be
+used for selection of a triggering event using the `selector` field:
 
 ```yaml
 selector:
-  name: Kubernetes object name
-  nameRegex: Kubernetes object name regex (for example, "testworkflow.*")
-  namespace: Kubernetes object namespace (default is **testkube**)
-  namespaceRegex: Kubernetes object namespace regex( for example, "test.*")
+  matchLabels: map of key-value pairs
+  matchExpressions:
+    - key: label name
+      operator: [In | NotIn | Exists | DoesNotExist
+      values: list of values
 ```
 
-:::note
-The `namespace` property is only supported for resourceSelectors, and not for testSelectors.
-:::
+There are several built in labels which come with each event:
 
-#### Label Selector
+- `testkube.io/agent-name` - the name of the listening agent
+- `testkube.io/agent-namespace` - the namespace of the listening agent
+- `testkube.io/resource-name` - the name of the resource triggering the event
+- `testkube.io/resource-namespace` - the namespace of the resource triggering the event
 
-Label selectors are used when we want to select a group of resources in a specific namespace.
+During agent installation one can also specify custom labels which will be
+emitted with each event from the listening agent by using the following values
+in the `testkube-runner` Helm chart:
 
 ```yaml
-spec:
-  selector:
-    namespace: Kubernetes object namespace (default is **testkube**)
-    labelSelector:
-      matchLabels: map of key-value pairs
-      matchExpressions:
-        - key: label name
-          operator: [In | NotIn | Exists | DoesNotExist
-          values: list of values
+listener:
+  eventLabels:
+    # highlight-next-line
+    deployment-location: eastern-usa
+```
+
+#### Resource Selector
+
+Using the fields `resource` and `resourceSelector` one can select the triggering
+event by the source resource.
+
+```yaml
+resource: Kinds of resources to match (possible values, `pod`, `deployment`, `statefulset`, `daemonset`, `service`, `ingress`, `event`, `configmap`)
+resourceSelector:
+  name: Kubernetes object name
+  nameRegex: Kubernetes object name regex (for example, "app.*")
+  namespace: Kubernetes object namespace (default is agent's namespace)
+  namespaceRegex: Kubernetes object namespace regex( for example, "test.*")
+  labelSelector:
+    matchLabels: map of key-value pairs
+    matchExpressions:
+      - key: label name
+        operator: [In | NotIn | Exists | DoesNotExist
+        values: list of values
+```
+
+#### Test Selector
+
+The `testSelector` field could be used to select the target of the trigger
+action.
+
+```yaml
+testSelector:
+  name: TestWorkflow name
+  nameRegex: TestWorkflow name regex (for example, "test.*")
+  labelSelector:
+    matchLabels: map of key-value pairs
+    matchExpressions:
+      - key: label name
+        operator: [In | NotIn | Exists | DoesNotExist
+        values: list of values
 ```
 
 ### Resource Conditions
