@@ -16,9 +16,9 @@ via `kubectl`.
 ## Creating Test Triggers in the Testkube Dashboard
 
 Select the Integrations tab (lightning bolt icon) on the left on the Testkube Dashboard to access the "Triggers"
-panel which shows a list of Triggers in your Environment. 
+panel which shows a list of Triggers in your Environment.
 
-The "Create a new trigger" on the right allows you create a new 
+The "Create a new trigger" on the right allows you create a new
 trigger as described at [create Test Triggers](/articles/integrations-triggers#creating-a-new-trigger).
 
 ![Triggers](../img/integrations-triggers.png)
@@ -29,47 +29,76 @@ Triggers are ultimately defined as Customer Resources in your cluster - [TestTri
 
 ### Selectors
 
-Triggers use Selectors to specify which events to listen for.
+Triggers use selectors to determine which events should trigger the action
+and which workflows should be the target of the trigger action.
 
-The `resourceSelector` and `testSelector` fields support selecting resources either by name or using
-the Kubernetes [Label Selector](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements).
+#### Event Selector
 
-Each selector should specify the `namespace` of the object, otherwise the namespace defaults to `testkube`.
-
-```
-selector := resourceSelector | testSelector
-```
-
-#### Name Selector
-
-Name selectors are used when we want to select a specific resource in a specific namespace.
+Each event that is emitted by a listener agent has labels on it which could be
+used for selection of a triggering event using the `selector` field:
 
 ```yaml
 selector:
-  name: Kubernetes object name
-  nameRegex: Kubernetes object name regex (for example, "testworkflow.*")
-  namespace: Kubernetes object namespace (default is **testkube**)
-  namespaceRegex: Kubernetes object namespace regex( for example, "test.*")
+  matchLabels: map of key-value pairs
+  matchExpressions:
+    - key: label name
+      operator: [In | NotIn | Exists | DoesNotExist
+      values: list of values
 ```
 
-:::note
-The `namespace` property is only supported for resourceSelectors, and not for testSelectors.
-:::
+There are several built in labels which come with each event:
 
-#### Label Selector
+- `testkube.io/agent-name` - the name of the listening agent
+- `testkube.io/agent-namespace` - the namespace of the listening agent
+- `testkube.io/resource-name` - the name of the resource triggering the event
+- `testkube.io/resource-namespace` - the namespace of the resource triggering the event
 
-Label selectors are used when we want to select a group of resources in a specific namespace.
+During agent installation one can also specify custom labels which will be
+emitted with each event from the listening agent by using the following values
+in the `testkube-runner` Helm chart:
 
 ```yaml
-spec:
-  selector:
-    namespace: Kubernetes object namespace (default is **testkube**)
-    labelSelector:
-      matchLabels: map of key-value pairs
-      matchExpressions:
-        - key: label name
-          operator: [In | NotIn | Exists | DoesNotExist
-          values: list of values
+listener:
+  eventLabels:
+    # highlight-next-line
+    deployment-location: eastern-usa
+```
+
+#### Resource Selector
+
+Using the fields `resource` and `resourceSelector` one can select the triggering
+event by the source resource.
+
+```yaml
+resource: Kinds of resources to match (possible values, `pod`, `deployment`, `statefulset`, `daemonset`, `service`, `ingress`, `event`, `configmap`)
+resourceSelector:
+  name: Kubernetes object name
+  nameRegex: Kubernetes object name regex (for example, "app.*")
+  namespace: Kubernetes object namespace (default is agent's namespace)
+  namespaceRegex: Kubernetes object namespace regex( for example, "test.*")
+  labelSelector:
+    matchLabels: map of key-value pairs
+    matchExpressions:
+      - key: label name
+        operator: [In | NotIn | Exists | DoesNotExist
+        values: list of values
+```
+
+#### Test Selector
+
+The `testSelector` field could be used to select the target Workflow of the
+trigger action.
+
+```yaml
+testSelector:
+  name: TestWorkflow name
+  nameRegex: TestWorkflow name regex (for example, "test.*")
+  labelSelector:
+    matchLabels: map of key-value pairs
+    matchExpressions:
+      - key: label name
+        operator: [In | NotIn | Exists | DoesNotExist
+        values: list of values
 ```
 
 ### Resource Conditions
@@ -105,7 +134,7 @@ spec:
         headers: test trigger condition probe headers to submit
 ```
 
-### Targeting specific Runner Agents 
+### Targeting specific Runner Agents
 
 With the introduction of [Multi-Agent Environments](/articles/install/multi-agent) you can optionally specify
 which Runner Agent(s) a Triggered execution should run on. For example
@@ -114,7 +143,7 @@ which Runner Agent(s) a Triggered execution should run on. For example
 spec:
   ...
   target:
-    match: 
+    match:
      - application: accounting
 ...
 ```
@@ -124,8 +153,8 @@ see our guide on [Runner Agent Targeting](/articles/install/multi-agent#targetin
 
 ### Action Parameters
 
-Action parameters are used to pass config and tag values to the test execution workflow. You can specify either text values or 
-jsonpath expression in a form of `jsonpath={.metadata.name}`. The data will be taken from the resource object of the trigger event. 
+Action parameters are used to pass config and tag values to the test execution workflow. You can specify either text values or
+jsonpath expression in a form of `jsonpath={.metadata.name}`. The data will be taken from the resource object of the trigger event.
 Check the kubernets docs [JsonPath Expression](https://kubernetes.io/docs/reference/kubectl/jsonpath/).
 Also you can use Golang template syntax we support for Webhook processing and take data from Golang object fields.
 
@@ -133,7 +162,7 @@ Also you can use Golang template syntax we support for Webhook processing and ta
 spec:
   actionParameters:
     config: map of key-value pairs
-    tags: map of key-value pairs 
+    tags: map of key-value pairs
 ```
 
 for example:
@@ -159,9 +188,9 @@ spec:
 - **Cause** (can be used instead of **Event**)
   - For deployments - `deployment-scale-update`, `deployment-image-update`, `deployment-env-update`, `deployment-containers-modified`,
     `deployment-generation-modified`, `deployment-resource-modified`
-  - For Testkube events - `event-start-test`, `event-end-test-success`, `event-end-test-failed`, `event-end-test-aborted`, `event-end-test-timeout`, 
-    `event-start-testsuite`, `event-end-testsuite-success`, `event-end-testsuite-failed`, `event-end-testsuite-aborted`, `event-end-testsuite-timeout`, 
-    `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`, `event-end-testworkflow-failed`, `event-end-testworkflow-aborted`, 
+  - For Testkube events - `event-start-test`, `event-end-test-success`, `event-end-test-failed`, `event-end-test-aborted`, `event-end-test-timeout`,
+    `event-start-testsuite`, `event-end-testsuite-success`, `event-end-testsuite-failed`, `event-end-testsuite-aborted`, `event-end-testsuite-timeout`,
+    `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`, `event-end-testworkflow-failed`, `event-end-testworkflow-aborted`,
     `event-created`, `event-updated`, `event-deleted`
 - **Execution** - `test`, `testsuite`, `testworkflow`
 - **ConcurrencyPolicy** - `allow`, `forbid`, `replace`
