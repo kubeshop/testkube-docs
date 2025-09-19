@@ -16,9 +16,9 @@ via `kubectl`.
 ## Creating Test Triggers in the Testkube Dashboard
 
 Select the Integrations tab (lightning bolt icon) on the left on the Testkube Dashboard to access the "Triggers"
-panel which shows a list of Triggers in your Environment. 
+panel which shows a list of Triggers in your Environment.
 
-The "Create a new trigger" on the right allows you create a new 
+The "Create a new trigger" on the right allows you create a new
 trigger as described at [create Test Triggers](/articles/integrations-triggers#creating-a-new-trigger).
 
 ![Triggers](../img/integrations-triggers.png)
@@ -30,7 +30,7 @@ Triggers are ultimately defined as Customer Resources in your cluster - [TestTri
 ### Selectors
 
 Triggers use selectors to determine which events should trigger the action
-and which tests should be the target of the trigger action.
+and which workflows should be the target of the trigger action.
 
 #### Event Selector
 
@@ -86,8 +86,8 @@ resourceSelector:
 
 #### Test Selector
 
-The `testSelector` field could be used to select the target of the trigger
-action.
+The `testSelector` field could be used to select the target Workflow of the
+trigger action.
 
 ```yaml
 testSelector:
@@ -134,7 +134,7 @@ spec:
         headers: test trigger condition probe headers to submit
 ```
 
-### Targeting specific Runner Agents 
+### Targeting specific Runner Agents
 
 With the introduction of [Multi-Agent Environments](/articles/install/multi-agent) you can optionally specify
 which Runner Agent(s) a Triggered execution should run on. For example
@@ -143,7 +143,7 @@ which Runner Agent(s) a Triggered execution should run on. For example
 spec:
   ...
   target:
-    match: 
+    match:
      - application: accounting
 ...
 ```
@@ -153,8 +153,8 @@ see our guide on [Runner Agent Targeting](/articles/install/multi-agent#targetin
 
 ### Action Parameters
 
-Action parameters are used to pass config and tag values to the test execution workflow. You can specify either text values or 
-jsonpath expression in a form of `jsonpath={.metadata.name}`. The data will be taken from the resource object of the trigger event. 
+Action parameters are used to pass config and tag values to the test execution workflow. You can specify either text values or
+jsonpath expression in a form of `jsonpath={.metadata.name}`. The data will be taken from the resource object of the trigger event.
 Check the kubernets docs [JsonPath Expression](https://kubernetes.io/docs/reference/kubectl/jsonpath/).
 Also you can use Golang template syntax we support for Webhook processing and take data from Golang object fields.
 
@@ -162,7 +162,7 @@ Also you can use Golang template syntax we support for Webhook processing and ta
 spec:
   actionParameters:
     config: map of key-value pairs
-    tags: map of key-value pairs 
+    tags: map of key-value pairs
 ```
 
 for example:
@@ -188,9 +188,9 @@ spec:
 - **Cause** (can be used instead of **Event**)
   - For deployments - `deployment-scale-update`, `deployment-image-update`, `deployment-env-update`, `deployment-containers-modified`,
     `deployment-generation-modified`, `deployment-resource-modified`
-  - For Testkube events - `event-start-test`, `event-end-test-success`, `event-end-test-failed`, `event-end-test-aborted`, `event-end-test-timeout`, 
-    `event-start-testsuite`, `event-end-testsuite-success`, `event-end-testsuite-failed`, `event-end-testsuite-aborted`, `event-end-testsuite-timeout`, 
-    `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`, `event-end-testworkflow-failed`, `event-end-testworkflow-aborted`, 
+  - For Testkube events - `event-start-test`, `event-end-test-success`, `event-end-test-failed`, `event-end-test-aborted`, `event-end-test-timeout`,
+    `event-start-testsuite`, `event-end-testsuite-success`, `event-end-testsuite-failed`, `event-end-testsuite-aborted`, `event-end-testsuite-timeout`,
+    `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`, `event-end-testworkflow-failed`, `event-end-testworkflow-aborted`,
     `event-created`, `event-updated`, `event-deleted`
 - **Execution** - `test`, `testsuite`, `testworkflow`
 - **ConcurrencyPolicy** - `allow`, `forbid`, `replace`
