@@ -162,6 +162,66 @@ RUN apk --no-cache add ca-certificates libssl3 git
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libcurl</strong> <code>8.12.1-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/libcurl@8.12.1-r0?arch=aarch64&distro=alpine-3.20.6&upstream=curl</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (34:34)
+RUN apk --no-cache add ca-certificates libssl3 git
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-5399?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C%3D8.12.1-r0"><img alt="high : CVE--2025--5399" src="https://img.shields.io/badge/CVE--2025--5399-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=8.12.1-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.050%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>c-ares</strong> <code>1.33.1-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/c-ares@1.33.1-r0?arch=aarch64&distro=alpine-3.20.6</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (34:34)
+RUN apk --no-cache add ca-certificates libssl3 git
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-31498?s=alpine&n=c-ares&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C%3D1.33.1-r0"><img alt="high : CVE--2025--31498" src="https://img.shields.io/badge/CVE--2025--31498-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=1.33.1-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.123%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/gofiber/fiber/v2</strong> <code>2.52.5</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/gofiber/fiber@2.52.5#v2</code></small><br/>
@@ -267,66 +327,6 @@ The `idx` is not validated before use, leading to unsafe slice allocation for ex
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libcurl</strong> <code>8.12.1-r0</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/libcurl@8.12.1-r0?arch=aarch64&distro=alpine-3.20.6&upstream=curl</code></small><br/>
-
-```dockerfile
-# api-server.Dockerfile (34:34)
-RUN apk --no-cache add ca-certificates libssl3 git
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2025-5399?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C%3D8.12.1-r0"><img alt="high : CVE--2025--5399" src="https://img.shields.io/badge/CVE--2025--5399-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=8.12.1-r0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.050%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>c-ares</strong> <code>1.33.1-r0</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/c-ares@1.33.1-r0?arch=aarch64&distro=alpine-3.20.6</code></small><br/>
-
-```dockerfile
-# api-server.Dockerfile (34:34)
-RUN apk --no-cache add ca-certificates libssl3 git
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2025-31498?s=alpine&n=c-ares&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C%3D1.33.1-r0"><img alt="high : CVE--2025--31498" src="https://img.shields.io/badge/CVE--2025--31498-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=1.33.1-r0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.123%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>gopkg.in/square/go-jose.v2</strong> <code>2.6.0</code> (golang)</summary>
 
 <small><code>pkg:golang/gopkg.in/square/go-jose.v2@2.6.0</code></small><br/>
@@ -417,8 +417,8 @@ FROM ${ALPINE_IMAGE}
 <table>
 <tr><td>Affected range</td><td><code>&lt;=1.36.1-r30</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.022%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.011%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -434,8 +434,8 @@ FROM ${ALPINE_IMAGE}
 <table>
 <tr><td>Affected range</td><td><code>&lt;=1.36.1-r30</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.031%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.015%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
