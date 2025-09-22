@@ -52,6 +52,9 @@ There are several built in labels which come with each event:
 - `testkube.io/agent-namespace` - the namespace of the listening agent
 - `testkube.io/resource-name` - the name of the resource triggering the event
 - `testkube.io/resource-namespace` - the namespace of the resource triggering the event
+- `testkube.io/resource-kind` - the kind (i.e. `Deployment`) of the resource triggering the event
+- `testkube.io/resource-group` - the API group (i.e. `apps`) of the resource triggering the event
+- `testkube.io/resource-version` - the API version (i.e. `v1`) of the resource triggering the event
 
 During agent installation one can also specify custom labels which will be
 emitted with each event from the listening agent by using the following values
@@ -65,6 +68,15 @@ listener:
 ```
 
 #### Resource Selector
+
+:::warning
+
+The `resource` and `resourceSelector` fields are deprecated, please use the
+`selector` field to match on the builtin labels such as
+`teskube.io/resource-kind` and `testkube.io/resource-name` to achieve similar
+outcomes.
+
+:::
 
 Using the fields `resource` and `resourceSelector` one can select the triggering
 event by the source resource.
@@ -203,8 +215,11 @@ Events and values related to Tests and Test Suites have been deprecated and will
 
 ### On Deployment Update
 
-Here is an example for a **Test Trigger** _default/testtrigger-example_ which runs the **TestSuite** _frontend/sanity-test_
-when a **deployment** containing the label **testkube.io/tier: backend** gets **modified** and also has the conditions **Progressing: True: NewReplicaSetAvailable** and **Available: True**.
+Here is an example for a **Test Trigger** _default/testtrigger-example_ which
+runs the **TestSuite** _frontend/sanity-test_ when a **deployment** containing
+the label **testkube.io/tier: backend** gets **modified** and also has the
+conditions **Progressing: True: NewReplicaSetAvailable** and **Available:
+True**.
 
 ```yaml
 apiVersion: tests.testkube.io/v1
@@ -213,11 +228,10 @@ metadata:
   name: testtrigger-example
   namespace: default
 spec:
-  resource: deployment
-  resourceSelector:
-    labelSelector:
-      matchLabels:
-        testkube.io/tier: backend
+  selector:
+    matchLabels:
+      testkube.io/resource-kind: Deployment
+      testkube.io/tier: backend
   event: modified
   conditionSpec:
     timeout: 100
@@ -251,8 +265,9 @@ spec:
 ```
 ### On Testkube Cluster Event
 
-You can define **Test Trigger** for Testkube cluster events.
-In below example, if **TestWorkflow** `k6-executor-smoke` is completed succesfully, then we run **TestWorkflow** `postman-smoke-tests`
+You can define **Test Trigger** for Testkube cluster events. In below example,
+if **TestWorkflow** `k6-executor-smoke` is completed succesfully, then we run
+**TestWorkflow** `postman-smoke-tests`
 
 ```yaml
 apiVersion: tests.testkube.io/v1
@@ -261,9 +276,10 @@ metadata:
   name: testtrigger-event
   namespace: testkube
 spec:
-  resource: event
-  resourceSelector:
-    name: k6-smoke-test
+  selector:
+    matchLabels:
+      testkube.io/resource-kind: Event
+      testkube.io/resource-name: k6-smoke-test
   event: event-end-test-success
   action: run
   actionParameters:
