@@ -25,15 +25,17 @@ export TK_ENV_ID="your_environment_id"
 
 ### Optional Environment Variables
 
-- `TK_CONTROL_PLANE_URL` - Testkube API URL (default: https://api.testkube.io)
-- `TK_DASHBOARD_URL` - Testkube dashboard URL (auto-derived from control plane URL)
-- `TK_DEBUG` - Enable debug output (default: false)
+- `TK_CONTROL_PLANE_URL` - Testkube API URL (default: https://api.testkube.io), override this for on-prem deployments. 
+- `TK_DASHBOARD_URL` - Testkube dashboard URL (auto-derived from control plane URL).
+- `TK_DEBUG` - Enable debug output (default: false).
 
 ## MCP Client Configuration
 
-### VSCode Configuration
+The Testkube Docker MCP Server can run using both stdio and shttp transports - [Read More](/articles/mcp-overview#mcp-server-transport-modes)
 
-#### VSCode Stdio Transport
+### VSCode / Cursor
+
+Using `stdio` transport:
 
 ```json
 {
@@ -54,7 +56,7 @@ export TK_ENV_ID="your_environment_id"
 }
 ```
 
-#### VSCode SHTTP Transport
+Using `shttp` transport:
 
 ```json
 {
@@ -78,7 +80,7 @@ export TK_ENV_ID="your_environment_id"
 
 ### Claude Desktop Configuration
 
-#### Claude Stdio Transport
+Using `stdio` transport:
 
 ```json
 {
@@ -98,7 +100,7 @@ export TK_ENV_ID="your_environment_id"
 }
 ```
 
-#### Claude SHTTP Transport
+Using `shttp` transport:
 
 ```json
 {
