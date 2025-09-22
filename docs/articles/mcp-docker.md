@@ -68,7 +68,6 @@ Using `shttp` transport:
         "-e", "TK_ACCESS_TOKEN=${TK_ACCESS_TOKEN}",
         "-e", "TK_ORG_ID=${TK_ORG_ID}",
         "-e", "TK_ENV_ID=${TK_ENV_ID}",
-        "-e", "TK_MCP_TRANSPORT=shttp",
         "testkube/mcp-server:latest",
         "mcp", "serve", "--transport=shttp"
       ],
@@ -112,7 +111,6 @@ Using `shttp` transport:
         "-e", "TK_ACCESS_TOKEN=${TK_ACCESS_TOKEN}",
         "-e", "TK_ORG_ID=${TK_ORG_ID}",
         "-e", "TK_ENV_ID=${TK_ENV_ID}",
-        "-e", "TK_MCP_TRANSPORT=shttp",
         "testkube/mcp-server:latest",
         "mcp", "serve", "--transport=shttp"
       ]
