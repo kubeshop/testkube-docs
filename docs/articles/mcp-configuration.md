@@ -73,7 +73,9 @@ Create a test workflow that checks my REST API endpoints, then run it and show m
 Look at my recent test failures and help me understand what's causing them. Check the logs and artifacts.
 ```
 
-## Claude Desktop
+## Claude 
+
+### Claude Desktop
 
 For direct interaction with Claude through the desktop application.
 
@@ -94,6 +96,18 @@ For direct interaction with Claude through the desktop application.
 
 2. **Restart Claude Desktop**
 
+### Claude Code
+
+Use the following to add the Docker MCP Server to Claude Code
+
+```bash
+claude mcp add testkube -- docker run --rm -i \ 
+   -e TK_ACCESS_TOKEN=${TK_ACCESS_TOKEN} \
+   -e TK_ORG_ID=${TK_ORG_ID} \
+   -e TK_ENV_ID=${TK_ENV_ID} \
+   testkube/mcp-server:latest mcp serve
+```
+
 ### Usage
 
 Claude Desktop provides conversational access to your Testkube resources:
@@ -105,46 +119,7 @@ I need to create a new workflow for testing my Python application.
 Can you help me set this up?
 ```
 
-## API Key Authentication
 
-For automated environments, CI/CD pipelines, or when OAuth is not suitable, you can use API key authentication.
-
-### Configuration with API Key
-
-1. **Set up API key authentication:**
-
-   ```bash
-   testkube set context --api-key <your-api-key> --org-id <organization-id> --env-id <environment-id>
-   ```
-
-2. **Verify configuration:**
-
-   ```bash
-   testkube get context
-   ```
-
-3. **Use the same MCP configuration** as shown above - the MCP server will automatically use the API key from your context.
-
-### Docker/Environment Variable Mode
-
-For containerized deployments, you can use environment variables:
-
-```bash
-export TK_MCP_ENV_MODE=true
-export TK_ACCESS_TOKEN=<your-api-key>
-export TK_ORG_ID=<organization-id>
-export TK_ENV_ID=<environment-id>
-export TK_CONTROL_PLANE_URL=https://api.testkube.io
-export TK_DASHBOARD_URL=https://app.testkube.io
-
-testkube mcp serve
-```
-
-Then configure your AI tools to use the same command.
-
-:::tip Security
-Never commit API keys to version control. Use environment variables or secret management systems for production deployments.
-:::
 
 ## Example Claude Workflows
 
@@ -165,40 +140,4 @@ Can you:
 ```text
 Analyze my test execution trends for the last week.
 Show me which workflows are failing most often and help me create a summary report for my team.
-```
-
-## Troubleshooting
-
-### Common Issues
-
-**MCP server not starting:**
-
-- Check that `testkube` binary is accessible
-- Verify that you have logged in to Testkube with: `testkube login`
-- Try running `testkube mcp serve --verbose` manually
-
-**No response from AI tools:**
-
-- Restart your AI application after configuration changes
-- Verify JSON configuration syntax
-- Check application logs for MCP connection errors
-
-**Authentication errors:**
-
-- Ensure you're logged in: `testkube get context`
-- Refresh your login: `testkube login`
-- Verify correct context is set
-- For API key authentication: `testkube set context --api-key <key> --org-id <org> --env-id <env>`
-
-### Debug Commands
-
-```bash
-# Test MCP server manually
-testkube mcp serve --debug
-
-# Verify CLI authentication
-testkube get workflows
-
-# Check current context
-testkube get context
 ```

@@ -370,19 +370,41 @@ testkube mcp serve --transport shttp --shttp-host localhost --shttp-port 8080 --
 curl http://localhost:8080/health
 ```
 
-## MCP Server Troubleshooting
+## Troubleshooting
 
-### Authentication Issues
+### Common Issues
 
-- **Session expired**: Run `testkube login` to re-authenticate
-- **Wrong context**: Check with `testkube get context` and reconfigure if needed
-- **Network issues**: Ensure access to `api.testkube.io` or the corresponding api endpoint if you're hosting the Testkube
-  Control Plane on premise.
+**MCP server not starting:**
 
-### MCP Server Issues
+- Check that `testkube` binary is accessible
+- Verify that you have logged in to Testkube with: `testkube login`
+- Try running `testkube mcp serve --verbose` manually
 
-- **Use debug mode**: `testkube mcp serve --debug` for detailed logging
-- **Check workflows**: Verify you can list workflows before configuring AI tools
+**No response from AI tools:**
+
+- Restart your AI application after configuration changes
+- Verify JSON configuration syntax
+- Check application logs for MCP connection errors
+
+**Authentication errors:**
+
+- Ensure you're logged in: `testkube get context`
+- Refresh your login: `testkube login`
+- Verify correct context is set
+- For API key authentication: `testkube set context --api-key <key> --org-id <org> --env-id <env>`
+
+### Debug Commands
+
+```bash
+# Test MCP server manually
+testkube mcp serve --debug
+
+# Verify CLI authentication
+testkube get workflows
+
+# Check current context
+testkube get context
+```
 
 :::info
 Don't hesitate to reach out to us on [Slack](https://bit.ly/testkube-slack) if you run into any issues!

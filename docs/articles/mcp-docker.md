@@ -119,6 +119,18 @@ Using `shttp` transport:
 }
 ```
 
+### Claude Code Configuration
+
+Use the following to add the Testkube MCP Server to Claude Code
+
+```bash
+claude mcp add testkube -- docker run --rm -i \ 
+   -e TK_ACCESS_TOKEN=${TK_ACCESS_TOKEN} \
+   -e TK_ORG_ID=${TK_ORG_ID} \
+   -e TK_ENV_ID=${TK_ENV_ID} \
+   testkube/mcp-server:latest mcp serve
+```
+
 ## Troubleshooting
 
 ### Common Issues
@@ -198,7 +210,7 @@ docker buildx bake mcp-server
 ./build/mcp-server/build-local-mcp.sh testkube/mcp-server:local
 ```
 
-## Build & Run locallly
+## Build & Run locally
 
 After building the MCP Server with `build-local-mcp.sh` you can test it with
 
@@ -217,3 +229,16 @@ npx @modelcontextprotocol/inspector docker run --rm -i \
   -e TK_ENV_ID="$TK_ENV_ID" \
   testkube/mcp-server:local mcp serve
 ```
+
+### Using with the MCP Inspector
+
+When launching the MCP Inspector as shown above, follow these steps to invoke one of the available tools:
+
+1. Make sure the arguments contain the environment variables `TK_ACCESS_TOKEN`, `TK_ORG_ID`, and `TK_ENV_ID`
+2. Press the "Connect" button
+3. Select "List Tools" to see the available tools
+4. Select the tool you want to use, in the below screenshot we use list_workflows
+5. Select "Run Tool" to the right
+6. See the response in the bottom left panel.
+
+![img.png](images/mcp-inspector.png)
