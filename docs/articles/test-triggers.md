@@ -165,7 +165,7 @@ see our guide on [Runner Agent Targeting](/articles/install/multi-agent#targetin
 
 ### Action Parameters
 
-Action parameters are used to pass config and tag values to the test execution workflow. You can specify either text values or
+Action parameters are used to pass config and tag values to the workflow execution. You can specify either text values or
 jsonpath expression in a form of `jsonpath={.metadata.name}`. The data will be taken from the resource object of the trigger event.
 Check the kubernets docs [JsonPath Expression](https://kubernetes.io/docs/reference/kubectl/jsonpath/).
 Also you can use Golang template syntax we support for Webhook processing and take data from Golang object fields.
