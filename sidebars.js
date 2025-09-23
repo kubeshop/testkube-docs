@@ -679,6 +679,11 @@ const sidebars = {
                   label: "Configuration Examples",
                   id: "articles/mcp-configuration",
                 },
+                {
+                  type: "doc",
+                  label: "Docker MCP Server",
+                  id: "articles/mcp-docker",
+                },
               ],
             },
           ],

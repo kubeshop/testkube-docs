@@ -1,6 +1,6 @@
 # MCP Server Configuration Examples
 
-This guide provides configuration examples for integrating the [Testkube MCP Server](/articles/mcp-overview) with various 
+This guide provides configuration examples for integrating the [Testkube MCP Server](/articles/mcp-overview) with various
 AI tools and development environments.
 
 ## GitHub Copilot (VS Code)
@@ -49,8 +49,6 @@ We recommend using **Claude Sonnet 4** with GitHub Copilot for the most sophisti
 
 Cursor provides powerful AI assistance with built-in MCP support.
 
-### Configuration
-
 **Add Testkube server configuration to your Cursor MCP settings:**
 
 ```json
@@ -75,11 +73,11 @@ Create a test workflow that checks my REST API endpoints, then run it and show m
 Look at my recent test failures and help me understand what's causing them. Check the logs and artifacts.
 ```
 
-## Claude Desktop
+## Claude 
+
+### Claude Desktop
 
 For direct interaction with Claude through the desktop application.
-
-### Configuration
 
 1. **Create or edit Claude Desktop config:**
 
@@ -98,6 +96,18 @@ For direct interaction with Claude through the desktop application.
 
 2. **Restart Claude Desktop**
 
+### Claude Code
+
+Use the following to add the Docker MCP Server to Claude Code
+
+```bash
+claude mcp add testkube -- docker run --rm -i \ 
+   -e TK_ACCESS_TOKEN=${TK_ACCESS_TOKEN} \
+   -e TK_ORG_ID=${TK_ORG_ID} \
+   -e TK_ENV_ID=${TK_ENV_ID} \
+   testkube/mcp-server:latest mcp serve
+```
+
 ### Usage
 
 Claude Desktop provides conversational access to your Testkube resources:
@@ -108,6 +118,8 @@ Can you show me all my test workflows and their recent execution status?
 I need to create a new workflow for testing my Python application.
 Can you help me set this up?
 ```
+
+
 
 ## Example Claude Workflows
 
@@ -128,39 +140,4 @@ Can you:
 ```text
 Analyze my test execution trends for the last week.
 Show me which workflows are failing most often and help me create a summary report for my team.
-```
-
-## Troubleshooting
-
-### Common Issues
-
-**MCP server not starting:**
-
-- Check that `testkube` binary is accessible
-- Verify that you have logged in to Testkube with: `testkube login`
-- Try running `testkube mcp serve --verbose` manually
-
-**No response from AI tools:**
-
-- Restart your AI application after configuration changes
-- Verify JSON configuration syntax
-- Check application logs for MCP connection errors
-
-**Authentication errors:**
-
-- Ensure you're logged in: `testkube get context`
-- Refresh your login: `testkube login`
-- Verify correct context is set
-
-### Debug Commands
-
-```bash
-# Test MCP server manually
-testkube mcp serve --debug
-
-# Verify CLI authentication
-testkube get workflows
-
-# Check current context
-testkube get context
 ```
