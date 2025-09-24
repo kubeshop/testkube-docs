@@ -5,6 +5,7 @@ import TabItem from "@theme/TabItem";
 
 In this tutorial you will learn how to get started with Testkube, run your first Test Workflow, inspect its executions, and integrate it with your CI/CD pipeline(s). If you’d like to learn more about Testkube before deploying, [schedule a conversation with our Solutions Engineering team](https://testkube.io/demo).
  
+ **[Schedule time with our Solutions Engineering team](https://testkube.io/demo)** to get your trial license and answers to any questions you have.
 
 :::note
 Testkube is composed of two core components. The first is the Control Plane, which exposes the UI Dashboard, and facilitates management of Test Workflows, data, users, etc. The second component is the Test Execution Agent. One or more Agents can connect to a Control Plane, usually with one Agent per cluster, and do the work of running tests (scheduling jobs and managing pods). Learn more about our product architecture in the [Installation Overview](https://www.notion.so/articles/install/overview).
@@ -26,13 +27,13 @@ With that in mind, we have a few recommendations on how to start with Testkube:
 <TabItem value="on-prem" label="Testkube On-Prem" default>
 
 1. [Install the Testkube CLI](/articles/install/cli)
-2. Request a trial license at https://testkube.io/download.
-3. Run the `testkube init demo` command in your terminal.
-4. Run the `testkube dashboard` command to open Testkube without configuring Ingress.
-5. Log in to Testkube with the credentials from the third step.
+2. Run the `testkube init demo` command in your terminal.
+3. Run the `testkube dashboard` command to open Testkube without configuring Ingress.
+4. Log in to Testkube with the credentials from the second step.
 
 :::warning
-This evaluation installation is for a **single/local user only**, it is not configured to be shared with other users.
+This evaluation installation is for a **single/local user only**, it is not configured to be shared with other users, read more about evaluation 
+options in the [Quickstart Overview](/articles/tutorial/quickstart/overview).
 
 For a **production install**, please install with the [Helm Chart](/articles/install/install-with-helm) for more flexibility and configurability.
 :::

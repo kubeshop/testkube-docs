@@ -6,7 +6,8 @@ import TabItem from "@theme/TabItem";
 In this tutorial you will learn how to get started with Testkube, run your first Test Workflow, inspect its executions, and
 integrate it with your CI/CD pipeline(s).
 
-**Prefer to talk to a person? [Schedule time with our Solutions Engineering team!](/articles/tutorial/quickstart/team-evaluation)**
+If you don't already have a license or Testkube Cloud account, **[schedule time with our Solutions Engineering team](https://testkube.io/demo)** to get your license/account 
+and answers to any questions you have.
 
 :::note
 This demo installation is for a **team evaluation**, using a Kubernetes cluster a real Kubernetes cluster. Customization of the deployment may be required (ex. using S3) but can be implemented over time. 
@@ -25,8 +26,7 @@ Testkube has flexibility in its deployments (learn more in the [Installation Ove
 <TabItem value="on-prem" label="Testkube On-Prem" default>
 
 1. [Install the Testkube CLI](/articles/install/cli)
-2. Request a trial license at https://testkube.io/download.
-3. Deploy Testkube via Helm:
+2. Deploy Testkube via Helm:
 ```bash
 helm upgrade --install \
   --create-namespace \
@@ -36,8 +36,8 @@ helm upgrade --install \
 ```
 *For more information on baseline configuration of the Testkube Control Plane deployment, please visit [our base installation documentation ][base-install]*
 
-4. Run the `testkube dashboard` command to open Testkube without configuring Ingress.
-5. Log in to Testkube with the credentials from the third step.
+3. Run the `testkube dashboard` command to open Testkube without configuring Ingress.
+4. Log in to Testkube with the credentials from the second step.
 
 You will now see the Testkube Dashboard for the default environment created in your on-prem installation:
 
