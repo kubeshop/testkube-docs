@@ -1,0 +1,58 @@
+# Distributed Tracing (OpenTelemetry)
+
+Testkube exports distributed traces via OpenTelemetry over HTTP using the `otlptracehttp` exporter for both the Control Plane and the Testkube Agent. This lets you visualize and troubleshoot requests end-to-end using backends such as Grafana Tempo, Jaeger.
+
+## Environment variables
+
+Configure tracing using these environment variables:
+
+- **TRACING_ENABLED**: Enable/disable tracing export
+  - Type: boolean
+  - Default: `false`
+- **OTLP_ENDPOINT**: OTLP HTTP collector endpoint URL
+  - Type: string (URL)
+  - Default: `http://localhost:4318`
+  - Example: `http://otel-collector.observability:4318`
+- **OTLP_SERVICE_NAME**: Logical service name used in traces
+  - Type: string
+  - Default: `testkube`
+  - Tip: Set distinct names per component/agent to separate services in your tracing UI
+- **TRACING_SAMPLE_RATE**: Probability sampler between 0.0 and 1.0
+  - Type: float
+  - Default: `1.0` (sample all)
+  - Example: `0.1` to sample ~10% of requests
+
+Notes:
+- Transport: OTLP over HTTP (protobuf) using OpenTelemetry `otlptracehttp`.
+- Use an HTTP endpoint (commonly port 4318) for your collector, or your chosen HTTP port.
+
+## Control Plane (On-Prem)
+
+Add the variables to the Control Plane API via Helm values:
+
+```yaml
+# values.yaml
+testkube-cloud-api:
+  additionalEnv:
+    TRACING_ENABLED: "true"
+    OTLP_ENDPOINT: "http://otel-collector.observability:4318"
+    OTLP_SERVICE_NAME: "testkube-control-plane"
+    TRACING_SAMPLE_RATE: "0.2"
+```
+
+## Testkube Agent (Kubernetes)
+
+Set the same variables on the Agent so workflow execution paths are traced as well:
+
+```yaml
+# values.yaml
+# When deploying the combined Testkube chart, use the agent subchart block
+
+testkube-agent:
+  testkube-api:
+    additionalEnv:
+      TRACING_ENABLED: "true"
+      OTLP_ENDPOINT: "http://otel-collector.observability:4318"
+      OTLP_SERVICE_NAME: "testkube-agent"
+      TRACING_SAMPLE_RATE: "0.2"
+```
