@@ -88,14 +88,14 @@ Refer to the documentation of your Kubernetes provider to find out the correspon
 
 ### 3. Testkube Runner Agent
 
-Next, install a Testkube Runner Agent in your local Kubernetes cluster as described at [Runner Agent Quickstart](/articles/install/multi-agent#runner-agent-quickstart).
+Next, install a Testkube Runner Agent in your local Kubernetes cluster as described at [Runner Agent Quickstart](/articles/test-workflows-running#runner-agent-quickstart).
 
 Once installed, you should see the Runner Agent in the list of Agents under your Environment:
 
 ![Local Development Runner Agent](images/local-dev-runner-agent.png)
 
 When running your Workflow, make sure to run it on this Runner Agent as described 
-at [Running Workflows on Runner Agents](/articles/install/multi-agent#running-workflows-on-runner-agents).
+at [Running Workflows on Runner Agents](/articles/test-workflows-running#runner-agent-targeting).
 
 ## Putting it all together
 

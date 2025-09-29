@@ -107,7 +107,7 @@ spec:
 
 ### Targeting specific Runner Agents 
 
-With the introduction of [Multi-Agent Environments](/articles/install/multi-agent) you can optionally specify
+With the introduction of [Runner Agents](/articles/agents-overview#runner-agents) you can optionally specify
 which Runner Agent(s) a Triggered execution should run on. For example
 
 ```yaml
@@ -120,7 +120,7 @@ spec:
 ```
 
 Will trigger an Execution on any Global Runner Agent with the `application: accounting` label, For more details,
-see our guide on [Runner Agent Targeting](/articles/install/multi-agent#targeting-runner-agents-in-testkube-resources).
+see our guide on [Runner Agent Targeting](/articles/test-workflows-running#runner-agent-targeting).
 
 ### Action Parameters
 

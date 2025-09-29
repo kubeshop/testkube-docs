@@ -59,7 +59,7 @@ This tab allows you to configure Organization-level Product Features:
 - **Global Insights** - Toggle Global Insights of your Workflow executions - [Read More](/articles/test-insights).
 - **AI Assistant** - Toggle the AI Assistant feature for your organization [Read More](/articles/ai-assistant-overview).
 - **Webhooks URL Masking** - Toggle Webhooks URL masking - [Read More](/articles/webhooks#url-masking).
-- **Agent Token Masking** - Toggle Agent Token masking - [Read More](/articles/install/multi-agent#agent-token-masking).
+- **Agent Token Masking** - Toggle Agent Token masking - [Read More](/articles/agents-overview#agent-token-masking).
 
 ![Organization Product Features](../../img/organization-product-features.png)
 
@@ -73,8 +73,8 @@ Usage shows
 
 - Members - the number of Member Seats currently used from your license/plan.
 - Environments - the number of Testkube Environments currently created against the number in your license/plan.
-- Fixed Agents - the number of Runner Agents using a Fixed License - [Read More](/articles/install/multi-agent#licensing-for-runner-agents).
-- Concurrent Floating Runner Agents - the number of Agents assigned a Floating license concurrently running Workflows over the last 30 days - [Read More](/articles/install/multi-agent#licensing-for-runner-agents).
+- Fixed Agents - the number of Runner Agents using a Fixed License - [Read More](/articles/agents-overview#licensing-for-runner-agents).
+- Concurrent Floating Runner Agents - the number of Agents assigned a Floating license concurrently running Workflows over the last 30 days - [Read More](/articles/agents-overview#licensing-for-runner-agents).
 
 :::tip
 For more details about the Testkube offerings, check out the Testkube [Pricing Page](https://testkube.io/pricing).

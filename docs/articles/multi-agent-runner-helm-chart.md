@@ -192,7 +192,7 @@ runner:
 ```
 
 :::tip
-Read more about floating licenses at [Licensing for Runner Agents](/articles/install/multi-agent#licensing-for-runner-agents)
+Read more about floating licenses at [Licensing for Runner Agents](/articles/agents-overview#licensing-for-runner-agents)
 :::
 
 ## Service Accounts

@@ -351,7 +351,7 @@ You can read more about it in the general [**Matrix and Sharding**](./test-workf
 
 ## Targeting specific Runner Agents
 
-With the introduction of [Multi-Agent Environments](/articles/install/multi-agent) it is possible to specify target Runner Agents for each
+With the introduction of [Runner Agents](/articles/agents-overview#runner-agents) it is possible to specify target Runner Agents for each
 workflow specified in the `execute` command, for example:
 
 ```yaml
@@ -367,6 +367,6 @@ workflow specified in the `execute` command, for example:
 ```
 
 Will run the `k6-base` test on a Runner Agent named `load-runner-agent` while running the e2e-test on the Runner Agent the containing
-Workflow is running on. For more details, see our guide on [Runner Agent Targeting](/articles/install/multi-agent#targeting-runner-agents-in-testkube-resources).
+Workflow is running on. For more details, see our guide on [Runner Agent Targeting](/articles/test-workflows-running#runner-agent-targeting).
 
 

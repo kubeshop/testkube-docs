@@ -1,6 +1,6 @@
-# Multi-Agent CLI Commands
+# Testkube Agent CLI Commands
 
-The Testkube CLI provides a number of commands to work with Runner Agents in [Multi-Agent Environments](/articles/install/multi-agent).
+The Testkube CLI provides a number of commands to work with different types of Agents - [Read More](/articles/agents-overview).
 
 :::tip
 All commands below have a `--help` argument for printing all available arguments with a short description, and they
@@ -17,12 +17,12 @@ To be able to use these commands, you'll need to be on the latest version of
 To use these CLI commands, you will have to use `testkube login` to first connect your CLI with a specific Environment in your
 Testkube Organization.
 
-## Create / Install Runner Agents
+## Create / Install Agents
 
-The configuration of a new Runner Agent for an Environment is broken into two steps:
+The configuration of a new Agent for an Environment is broken into two steps:
 
-1. `create runner <name> <args>` - defines a Runner Agent in the Environment, but doesn't install anything in your cluster.
-2. `install runner <name> <args>` - installs the actual Runner Agent Helm Chart in the current cluster and connects 
+1. `create agent <name> <args> [--runner] [--listener]` - defines a Runner Agent in the Environment with the corresponding capabilities, but doesn't install anything in your cluster.
+2. `install agent <name> <args>` - installs the actual Runner Agent Helm Chart in the current cluster and connects 
    that installation a created Runner Agent in the Environment. 
 
 :::note
@@ -44,7 +44,7 @@ See the [Delete and Uninstall](#deleting-and-uninstalling-a-runner-agent) comman
 Define a new Runner Agent in the Testkube Control Plane with `testkube create runner <name>`
 
 ```sh
-$ testkube create runner staging-runner -l env=staging
+$ testkube create agent --runner staging-runner -l env=staging
 ```
 
 This defines a new Runner Agent named `staging-runner` with the label `env=staging` which is now visible in the
@@ -61,7 +61,7 @@ New Runner Agents will by default be assigned a Fixed license from your Testkube
 If you have Floating licenses in your Testkube plan, you can instead assign this to your Agent by adding the `--floating` argument to 
 the `create` and `install ... --create` commands.
 
-[Read More about Licensing](/articles/install/multi-agent#licensing-for-runner-agents).
+[Read More about Licensing](/articles/agents-overview#licensing-for-runner-agents).
 
 ### Installing new Runner Agents
 
@@ -109,14 +109,16 @@ You can install multiple Runner Agents in the same namespace if needed, for exam
 
 Runner Agents can be created in one of three different modes, impacting how they are selected for execution:
 
-- **Independent Runner Agents** (default) need to be targeted explicitly by name to run a Workflow - [Read More](/articles/install/multi-agent#independent-runner-agents)
+- **Independent Runner Agents** (default) need to be targeted explicitly by name to run a Workflow - [Read More](/articles/test-workflows-running#independent-runner-agents)
 - **Grouped Runner Agents** can be targeted/filtered by labels/groups - allowing you to run a Workflow on either a single available
   Runner Agent (of several) or on multiple Runners at once. Grouped Runner Agents are created by adding the `--group` argument to either `create` or `install` above -
-  [Read More](/articles/install/multi-agent#grouped-runner-agents)
+  [Read More](/articles/test-workflows-running#grouped-runner-agents)
 - **Global Runner Agents** do not need to be targeted by name but can be filtered by labels, the default Standalone Agent works as a Global Runner Agent.
-  Global Runner Agents are created by adding the `--global` argument to either `create` or `install` above - [Read More](/articles/install/multi-agent#global-runner-agents)
+  Global Runner Agents are created by adding the `--global` argument to either `create` or `install` above - [Read More](/articles/test-workflows-running#global-runner-agents)
 
-Check out the [Runner Agent Modes](/articles/install/multi-agent#runner-agent-modes) section in the Multi-Agent Overview to learn more.
+:::tip
+Check out [Runner Agent Modes](/articles/test-workflows-running#runner-agent-modes) to learn more.
+:::
 
 ## Updating a Runner Agent
 
@@ -194,6 +196,6 @@ $ testkube update runner my-runner -L myReadiness      # delete label
 ```
 
 :::tip
-Check out [Using labels for filtering runners](/articles/install/multi-agent#using-labels-for-runner-agent-selection) to see examples
+Check out [Using labels for filtering runners](/articles/test-workflows-running#using-labels-for-runner-agent-selection) to see examples
 for how to use labels for selecting Runner Agents for Workflow execution.
 :::

@@ -15,7 +15,7 @@ is selected.
 ![Run Workflow Button](images/run-workflow-button.png)
 
 :::tip
-Check out the [Multi-agent functionality](/articles/install/multi-agent) to learn how to use multiple Runner Agents in your Environments. 
+Check out the [Runner Agents](/articles/agents-overview#runner-agents) to learn how to use multiple Runner Agents in your Environments. 
 :::
 
 ## Overview Tab
@@ -41,7 +41,7 @@ panels.
 
 ### Multi-Agent Executions
 
-For executions run on multiple agents using the [Multi-Agent functionality](/articles/install/multi-agent),
+For executions run on multiple agents using [Runner Agents](/articles/agents-overview#runner-agents),
 the table will show an expandable section that includes all those executions:
 
 ![Multi-agent Executions List](images/mulit-agent-executions-list.png)
