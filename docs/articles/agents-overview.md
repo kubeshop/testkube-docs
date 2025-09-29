@@ -11,7 +11,7 @@ There are currently 3 types of Agents available:
 2. **Listener Agents** - are deployed to any cluster/namespace where you want to listen for [Kubernetes Event Triggers](/articles/test-triggers)
 3. **The Standalone Agent** - every Testkube Environment currently requires one (and one only) Standalone Agent - [Read More](#the-standalone-agent-in-multi-agent-environments)
 
-## Runner Agents
+### Runner Agents
 
 Runner Agents allow you to run your Workflows wherever you deploy them. You can have any number of Runner Agents in an Environment, allowing you to
 
@@ -28,53 +28,13 @@ Use-cases for this are:
 
 Read More about how to run Workflows on Runner Agents at [Running Test Workflows](/articles/test-workflows-running).
 
-:::note
 The Standalone Agent always doubles as a Runner Agent also, see below.
+
+:::info
+Runner Agents require a license to run Workflows - [Read More](#licensing-for-runner-agents).
 :::
 
-### Licensing for Runner Agents
-
-Testkube Runner Agents require a license for usage, which can be either Fixed or Floating.
-
-- Runner Agents assigned a **Fixed License** can always run Workflows independently at any time.
-  The Standalone Agent required for each Testkube Environment always requires a fixed license.
-- Runner Agents assigned a **Floating license** share the ability to execute Workflows concurrently; if one Runner Agent with a floating license is executing a Workflow,
-  a second agent will queue Workflow executions until the first agent is complete. If you, for example, purchase two floating licenses and assign those
-  to 10 agents, two of those agents will be able to execute Workflows concurrently at any give time.
-
-Floating licenses are useful for automated and/or [ephemeral use-cases](/articles/ephemeral-environments) where you don't know in advance how many Runner Agents
-you will have at any given point in time, and/or you don’t mind if your Workflow executions get queued.
-
-:::note
-Listener Agents do not require a license, you can have as many Listener Agents deployed in your infrastructure as needed.
-:::
-
-### Assigning Licenses to Runner Agents
-
-Runner Agents are by default assigned a fixed license (as in all the examples above), use the `--floating` argument with Runner Agent
-creation commands to instead assign a floating license, for example:
-
-```sh
-# install temporary Runner Agent using a floating license
-$ testkube install runner pr-12u48y34-runner --create --floating
-```
-
-The Runner Agent will be shown with the License Type "Floating" in the list of Agents:
-
-![Runner Agent with Floating license in Agent List](install/images/floating-agent-in-list.png)
-
-### Runner Agent License Enforcement
-
-The Runner Agent limit for both Fixed and Floating Licenses is counted and enforced at the organization level, i.e., across all your
-environments. Furthermore:
-
-- The [Standalone Agent](#the-standalone-agent) required for each Environment will always be assigned a Fixed license.
-- You will only be able to create as many fixed Runner Agents as you have Fixed licenses in your Testkube plan.
-- You will need to have at least one Floating license in your Testkube plan to be able to create Runner Agents with the `--floating` argument.
-
-Please don't hesitate to [Get in Touch](https://testkube.io/contact) if you have any questions/concerns about licensing.
-
-## Listener Agents
+### Listener Agents
 
 Listener Agents are created and deployed to clusters/namespaces where you want to listen for Kubernetes Events to trigger [Test Triggers](/articles/test-triggers). 
 
@@ -92,7 +52,7 @@ on a Runner Agent deployed in cluster B
 Just like for Runner Agents, the Standalone Agent always doubles as a Listener Agent also, see below.
 :::
 
-## The Standalone Agent 
+### The Standalone Agent 
 
 Each Testkube Environment requires a **[Standalone Agent](/articles/install/standalone-agent)** which provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
 
@@ -180,6 +140,49 @@ When this toggle is enabled, the Testkube Dashboard will no longer display sensi
 :::warning
 **Important:** This masking feature applies **only** to the Testkube Dashboard UI. Agent tokens or secret keys will still be visible in CLI outputs (e.g., when using `testkube create runner` or retrieving details for Helm chart installation as described in [Installing Runner Agent with Helm Charts](/articles/multi-agent-runner-helm-chart)) and in any direct API interactions.
 :::
+
+## Licensing for Runner Agents
+
+Testkube Runner Agents require a license for usage, which can be either Fixed or Floating.
+
+- Runner Agents assigned a **Fixed License** can always run Workflows independently at any time.
+  The Standalone Agent required for each Testkube Environment always requires a fixed license.
+- Runner Agents assigned a **Floating license** share the ability to execute Workflows concurrently; if one Runner Agent with a floating license is executing a Workflow,
+  a second agent will queue Workflow executions until the first agent is complete. If you, for example, purchase two floating licenses and assign those
+  to 10 agents, two of those agents will be able to execute Workflows concurrently at any give time.
+
+Floating licenses are useful for automated and/or [ephemeral use-cases](/articles/ephemeral-environments) where you don't know in advance how many Runner Agents
+you will have at any given point in time, and/or you don’t mind if your Workflow executions get queued.
+
+:::note
+Listener Agents do not require a license, you can have as many Listener Agents deployed in your infrastructure as needed.
+:::
+
+### Assigning Licenses to Runner Agents
+
+Runner Agents are by default assigned a fixed license (as in all the examples above), use the `--floating` argument with Runner Agent
+creation commands to instead assign a floating license, for example:
+
+```sh
+# install temporary Runner Agent using a floating license
+$ testkube install runner pr-12u48y34-runner --create --floating
+```
+
+The Runner Agent will be shown with the License Type "Floating" in the list of Agents:
+
+![Runner Agent with Floating license in Agent List](install/images/floating-agent-in-list.png)
+
+### Runner Agent License Enforcement
+
+The Runner Agent limit for both Fixed and Floating Licenses is counted and enforced at the organization level, i.e., across all your
+environments. Furthermore:
+
+- The [Standalone Agent](#the-standalone-agent) required for each Environment will always be assigned a Fixed license.
+- You will only be able to create as many fixed Runner Agents as you have Fixed licenses in your Testkube plan.
+- You will need to have at least one Floating license in your Testkube plan to be able to create Runner Agents with the `--floating` argument.
+
+Please don't hesitate to [Get in Touch](https://testkube.io/contact) if you have any questions/concerns about licensing.
+
 
 ## Migrating existing Environments
 
