@@ -122,6 +122,67 @@ spec:
 Will trigger an Execution on any Global Runner Agent with the `application: accounting` label, For more details,
 see our guide on [Runner Agent Targeting](/articles/test-workflows-running#runner-agent-targeting).
 
+### Template-based target selection
+
+You can resolve values in `target.match` at runtime using Go templates or JSONPath.
+
+- Run on the same agent that handled the event:
+
+```yaml
+spec:
+  action: run
+  actionParameters:
+    target:
+      match:
+        name:
+          - '{{ .Agent.Name }}'
+```
+
+- Target by agent labels (e.g., environment):
+
+```yaml
+spec:
+  action: run
+  actionParameters:
+    target:
+      match:
+        group:
+          - '{{ index .Agent.Labels "env" }}'
+```
+
+Note: Add/update agent labels via CLI: `testkube update agent <agent-name> --label env=eu-west1`.
+
+- Provide custom event labels via environment variable and reference them in templates:
+
+```yaml
+env:
+  - name: EVENT_LABELS
+    value: cluster:dev
+```
+
+Then reference in a template as `{{ index .EventLabels "cluster" }}`.
+
+Tip: To inspect the full event data, run the agent with `DEBUG=true`.
+
+Available template fields (Go templates and JSONPath):
+
+- `Agent.Name` (string)
+- `Agent.Labels` (map) — access with `{{ index .Agent.Labels "<key>" }}`
+- `EventLabels` (map) — includes auto-populated keys:
+    - `testkube.io/agent-name`, `testkube.io/agent-namespace`
+    - `testkube.io/resource-name`, `testkube.io/resource-namespace`
+    - `testkube.io/resource-kind`, `testkube.io/resource-group`, `testkube.io/resource-version`
+    - plus any pairs from `EVENT_LABELS`, e.g., `cluster:dev` → `{{ index .EventLabels "cluster" }}`
+- `Namespace` (string) — namespace of the resource that emitted the event
+- `Object` — the full Kubernetes object for the event
+
+JSONPath scope:
+
+- In `actionParameters`, JSONPath is evaluated against the resource object, so fields can be referenced directly, e.g., `jsonpath={.metadata.name}`.
+- In `target.match`, JSONPath is evaluated against the full event. To reach resource fields, prefix with `.Object`, e.g., `jsonpath={.Object.metadata.name}`. To reach agent or labels: `jsonpath={.Agent.Name}` or `jsonpath={.EventLabels.cluster}`.
+
+
+
 ### Action Parameters
 
 Action parameters are used to pass config and tag values to the test execution workflow. You can specify either text values or 
