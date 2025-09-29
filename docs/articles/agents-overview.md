@@ -1,6 +1,6 @@
 # Testkube Agents
 
-A Testkube Environment can contain an arbitrary number of Agents to perform specific tasks. Agents are added to an Environment 
+A Testkube Environment can contain any number of Agents to perform specific tasks. Agents are added to an Environment 
 via the Dashboard (see below) and then deployed into their target cluster/namespace using either the provided CLI or Helm commands.
 
 ## Agent Types
@@ -9,7 +9,7 @@ There are currently 3 types of Agents available:
 
 1. **Runner Agents** - are deployed to any cluster/namespace where you want to run Workflows created in the Environment
 2. **Listener Agents** - are deployed to any cluster/namespace where you want to listen for [Kubernetes Event Triggers](/articles/test-triggers)
-3. **The Standalone Agent** - every Testkube Environment currently requires one (and one only) Standalone Agent - [Read More](#the-standalone-agent-in-multi-agent-environments)
+3. **The Standalone Agent** - every Testkube Environment currently requires one (and one only) Standalone Agent - [Read More](#the-standalone-agent)
 
 ### Runner Agents
 
@@ -54,9 +54,9 @@ Just like for Runner Agents, the Standalone Agent always doubles as a Listener A
 
 ### The Standalone Agent 
 
-Each Testkube Environment requires a **[Standalone Agent](/articles/install/standalone-agent)** which provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
+Each Testkube Environment always requires a single **[Standalone Agent](/articles/install/standalone-agent)** which provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
 
-The Standalone Agent is installed when as part of the Testkube Environment creation process and are shown on the bottom of the list of Agents 
+The Standalone Agent is installed when you [create a new Testkube Environment](/testkube-pro/articles/environment-management#creating-a-new-environment) and is shown on the bottom of the list of Agents 
 with the label `runnertype: superagent`.
 
 :::note

@@ -1,6 +1,8 @@
 # Environment Management
 
-A _Testkube Environment_ is a grouping Workflows, Workflow Templates, Triggers and Webhooks - and their 
+## What is an Environment?
+
+A _Testkube Environment_ is a grouping of Workflows, Workflow Templates, Triggers and Webhooks - and their 
 corresponding artifacts, logs, and execution results.
 
 You can create multiple environments within your Testkube Organization (see below) to organize your resources and usage
