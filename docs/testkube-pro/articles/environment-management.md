@@ -83,7 +83,7 @@ toolbar buttton on the left:
 
 ![Environment Settings](../../img/environment-settings.png)
 
-There are 5 tabs for managing your Environment.
+There are 6 panels for managing your Environment.
 
 ### General
 
@@ -148,6 +148,15 @@ There are 4 default categories, represented with a few keywords each:
 | **Access & Authorization** | Denied, Unauthorized, Forbidden, Invalid, Invalid Token, Expired    |
 
 You can add/edit/remove categories using the corresponding actions in the interface.
+
+### Queueing & Concurrency
+
+This panel allows you to configure the Queueing & Concurrency settings for your Environment
+
+- Environment Queue Limit / Max Queued Executions: Immediately abort new executions when the number of queued executions for this environment surpasses the given threshold.
+- Runner Concurrency Limit / Max Concurrent Executions: Queue this execution when ongoing executions when all runners surpasses the given threshold.
+
+![Queueing & Concurrency Panel](images/env-concurrency-panel.png)
 
 ### Product Features
 
