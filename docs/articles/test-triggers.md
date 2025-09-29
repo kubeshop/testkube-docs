@@ -1,38 +1,67 @@
 # Kubernetes Event Triggers
 
-Testkube allows you to automate running Test Workflows by defining triggers on certain events for various Kubernetes resources.
+Testkube allows you to automate the execution of Test Workflows by defining triggers on certain events for various Kubernetes resources.
 
 ## What is a Testkube Event Trigger?
 
 In generic terms, a _Trigger_ defines an _action_ which will be executed for a given _execution_ when a certain _event_ on a specific _resource_ occurs.
 For example, we could define a _TestTrigger_ which _runs_ a _Test_ when a _ConfigMap_ gets _modified_.
 
-In Testkube, Event Triggers allow you to trigger the execution of a Workflow based on Kubernetes Events - for example when a Deployment is updated
+In Testkube, Event Triggers allow you to trigger the execution of a Workflow based on Kubernetes Events - for example, when a Deployment is updated
 or an Ingress gets deleted.
 
 You can currently create/manage Event Triggers in the Testkube Dashboard or by interacting with corresponding Trigger custom resources
 via `kubectl`.
 
-## Creating Test Triggers in the Testkube Dashboard
+## Creating Test Triggers 
 
 Select the Integrations tab (lightning bolt icon) on the left on the Testkube Dashboard to access the "Triggers"
 panel which shows a list of Triggers in your Environment.
 
-The "Create a new trigger" on the right allows you create a new
+The "Create a new trigger" on the right allows you to create a new
 trigger as described at [create Test Triggers](/articles/integrations-triggers#creating-a-new-trigger).
 
 ![Triggers](../img/integrations-triggers.png)
 
-## Custom Resource Definition Model
-
+:::tip
 Triggers are ultimately defined as Customer Resources in your cluster - [TestTrigger Reference](/articles/crds/tests.testkube.io-v1#testtrigger)
+:::
 
-### Selectors
+## Listener Agents with TestTriggers
 
-Triggers use selectors to determine which events should trigger the action
-and which workflows should be the target of the trigger action.
+Testkube uses [Listener Agents](/articles/agents-overview#listener-agents) to listen for Kubernetes events that will
+be matched against your TestTriggers. Your Testkube Environment can have any number of Listener Agents, deployed to 
+whichever namespaces/clusters you need to listen for events. 
 
-#### Event Selector
+Events captured by a specific Listener Agents are annotated with a number of testkube.io specific labels:
+
+- `testkube.io/agent-name` - the name of the Listener Agent
+- `testkube.io/agent-namespace` - the namespace of the Listener Agent
+- `testkube.io/resource-name` - the name of the resource triggering the event
+- `testkube.io/resource-namespace` - the namespace of the resource triggering the event
+- `testkube.io/resource-kind` - the kind (i.e. `Deployment`) of the resource triggering the event
+- `testkube.io/resource-group` - the API group (i.e. `apps`) of the resource triggering the event
+- `testkube.io/resource-version` - the API version (i.e. `v1`) of the resource triggering the event
+
+See below how you can select on these labels to define Listener-specific trigger rules.
+
+### Custom Event Labels
+
+During agent installation one can also specify custom labels which will be emitted with each event from the
+Listener Agent by using the following values in the `testkube-runner` Helm chart:
+
+```yaml
+listener:
+  eventLabels:
+    # highlight-next-line
+    deployment-location: eastern-usa
+```
+
+## Selectors
+
+Triggers use selectors to determine which events should trigger the action and which workflows should be the target of the trigger action.
+
+### Event Selector
 
 Each event that is emitted by a listener agent has labels on it which could be
 used for selection of a triggering event using the `selector` field:
@@ -46,32 +75,11 @@ selector:
       values: list of values
 ```
 
-There are several built in labels which come with each event:
-
-- `testkube.io/agent-name` - the name of the listening agent
-- `testkube.io/agent-namespace` - the namespace of the listening agent
-- `testkube.io/resource-name` - the name of the resource triggering the event
-- `testkube.io/resource-namespace` - the namespace of the resource triggering the event
-- `testkube.io/resource-kind` - the kind (i.e. `Deployment`) of the resource triggering the event
-- `testkube.io/resource-group` - the API group (i.e. `apps`) of the resource triggering the event
-- `testkube.io/resource-version` - the API version (i.e. `v1`) of the resource triggering the event
-
-During agent installation one can also specify custom labels which will be
-emitted with each event from the listening agent by using the following values
-in the `testkube-runner` Helm chart:
-
-```yaml
-listener:
-  eventLabels:
-    # highlight-next-line
-    deployment-location: eastern-usa
-```
-
-#### Resource Selector
+### Resource Selector
 
 :::warning
 
-The `resource` and `resourceSelector` fields are deprecated, please use the
+The `resource` and `resourceSelector` fields are deprecated (but still supported), please use the
 `selector` field to match on the builtin labels such as
 `teskube.io/resource-kind` and `testkube.io/resource-name` to achieve similar
 outcomes.
@@ -96,7 +104,7 @@ resourceSelector:
         values: list of values
 ```
 
-#### Test Selector
+### Test Selector
 
 The `testSelector` field could be used to select the target Workflow of the
 trigger action.
@@ -113,7 +121,7 @@ testSelector:
         values: list of values
 ```
 
-### Resource Conditions
+## Resource Conditions
 
 Resource Conditions allows triggers to be defined based on the status conditions for a specific resource.
 
@@ -129,7 +137,7 @@ spec:
         ttl: test trigger condition ttl
 ```
 
-### Resource Probes
+## Resource Probes
 
 Resource Probes allows triggers to be defined based on the probe status.
 
@@ -146,7 +154,7 @@ spec:
         headers: test trigger condition probe headers to submit
 ```
 
-### Targeting specific Runner Agents
+## Targeting specific Runner Agents
 
 With the introduction of [Runner Agents](/articles/agents-overview#runner-agents) you can optionally specify
 which Runner Agent(s) a Triggered execution should run on. For example
@@ -222,9 +230,7 @@ JSONPath scope:
 - In `actionParameters`, JSONPath is evaluated against the resource object, so fields can be referenced directly, e.g., `jsonpath={.metadata.name}`.
 - In `target.match`, JSONPath is evaluated against the full event. To reach resource fields, prefix with `.Object`, e.g., `jsonpath={.Object.metadata.name}`. To reach agent or labels: `jsonpath={.Agent.Name}` or `jsonpath={.EventLabels.cluster}`.
 
-
-
-### Action Parameters
+## Action Parameters
 
 Action parameters are used to pass config and tag values to the workflow execution. You can specify either text values or
 jsonpath expression in a form of `jsonpath={.metadata.name}`. The data will be taken from the resource object of the trigger event.

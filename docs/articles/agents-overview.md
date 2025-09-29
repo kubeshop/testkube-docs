@@ -46,7 +46,9 @@ Use-cases for deploying Listener Agents:
 Having multiple/separate Listener Agents from Runner Agents allows you to listen for changes in clusters separate
 from where you might want to run your tests, for example, if tests need to run from outside a cluster to validation connectivity
 or network performance, you could listen for events using a Listener Agent in cluster A, which would trigger the execution of Workflow 
-on a Runner Agent deployed in cluster B
+on a Runner Agent deployed in cluster B.
+
+Read more about how TestTriggers map to Listener Agents at [Listener Agents with TestTriggers](/articles/test-triggers#listener-agents).
 
 :::note
 Just like for Runner Agents, the Standalone Agent always doubles as a Listener Agent also, see below.
