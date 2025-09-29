@@ -18,11 +18,19 @@ At the technical level, the Resources in a Testkube environment are managed by a
 Kubernetes Cluster - read more [here](../../articles/architecture.md).
 :::
 
+Your existing Environments are available from the Environment dropdown on the top of the Testkube Dashboard (see 
+screenshot below), selecting an Environment will focus the Testkube Dashboard on the resources in that Environment - 
+[Read More](/articles/testkube-dashboard-explore).
+
 ## Creating a New Environment
 
-You can create a new environment from the "Environments" drop down in the header section of the Testkube Dashboard.
+You can create a new environment from the Environments dropdown in the header section of the Testkube Dashboard:
 
 ![Create Environment](../../img/create-environment.png)
+
+:::tip
+You can create an Environment from the "Environments" panel in the [Organization Settings](/testkube-pro/articles/organization-management#environments) also.
+:::
 
 ### Cloud Options
 

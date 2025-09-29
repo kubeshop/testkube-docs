@@ -12,7 +12,7 @@ In the environments section, you can see the list of your existing environments.
 
 ![Existing Environments](../../img/existing-environments-062024.png)
 
-GREEN status means that your agent is connected successfully.
+GREEN status means that the [Standalone Agent](/articles/agents-overview#the-standalone-agent) in your Environment is connected successfully.
 
 In the case of a RED status, you can try to debug the issues with the command below:
 
