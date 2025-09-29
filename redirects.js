@@ -155,7 +155,11 @@ const redirects = [
     to: "/articles/getting-tests-results",
   },
   {
-    from: ["/concepts/tests/tests-variables", "/tests-variables", "/using-testkube/tests/tests-variables"],
+    from: [
+      "/concepts/tests/tests-variables",
+      "/tests-variables",
+      "/using-testkube/tests/tests-variables",
+    ],
     to: "/articles/adding-tests-variables",
   },
   {
@@ -215,7 +219,10 @@ const redirects = [
     to: "/articles/cli",
   },
   {
-    from: ["/guides/going-to-production/authentication/oauth-ui", "/articles/oauth-dashboard"],
+    from: [
+      "/guides/going-to-production/authentication/oauth-ui",
+      "/articles/oauth-dashboard",
+    ],
     to: "/articles/testkube-dashboard-explore",
   },
   {
@@ -271,7 +278,12 @@ const redirects = [
     to: "/articles/install/overview",
   },
   {
-    from: ["/testkube-cloud/intro", "/testkube-cloud", "/testkube-cloud/articles/intro", "/testkube-pro/intro"],
+    from: [
+      "/testkube-cloud/intro",
+      "/testkube-cloud",
+      "/testkube-cloud/articles/intro",
+      "/testkube-pro/intro",
+    ],
     to: "/articles/using-testkube",
   },
   {
@@ -314,27 +326,40 @@ const redirects = [
     to: "/testkube-pro/articles/managing-cli-context",
   },
   {
-    from: ["/testkube-cloud/architecture", "/testkube-cloud/articles/architecture", "/testkube-pro/architecture"],
+    from: [
+      "/testkube-cloud/architecture",
+      "/testkube-cloud/articles/architecture",
+      "/testkube-pro/architecture",
+    ],
     to: "/articles/architecture",
   },
   {
     from: [
       "/testkube-cloud/articles/running-parallel-tests-with-test-suite",
       "/testkube-pro/running-parallel-tests-with-test-suite",
-      "/testkube-pro/articles/running-parallel-tests-with-test-suite"
+      "/testkube-pro/articles/running-parallel-tests-with-test-suite",
     ],
     to: "/articles/test-workflows-test-suites",
   },
   {
-    from: ["/testkube-cloud/articles/AI-test-insights", "/testkube-pro/AI-test-insights"],
+    from: [
+      "/testkube-cloud/articles/AI-test-insights",
+      "/testkube-pro/AI-test-insights",
+    ],
     to: "/testkube-pro/articles/AI-test-insights",
   },
   {
-    from: ["/testkube-cloud/articles/status-pages", "/testkube-pro/status-pages"],
+    from: [
+      "/testkube-cloud/articles/status-pages",
+      "/testkube-pro/status-pages",
+    ],
     to: "/testkube-pro/articles/status-pages",
   },
   {
-    from: ["/testkube-cloud/articles/cached-results", "/testkube-pro/cached-results"],
+    from: [
+      "/testkube-cloud/articles/cached-results",
+      "/testkube-pro/cached-results",
+    ],
     to: "/testkube-pro/articles/cached-results",
   },
   {
@@ -391,7 +416,10 @@ const redirects = [
     to: "/articles/tutorial/quickstart/individual-evaluation",
   },
   {
-    from: ["/testkube-enterprise/articles/usage-guide", "/testkube-pro-on-prem/articles/usage-guide"],
+    from: [
+      "/testkube-enterprise/articles/usage-guide",
+      "/testkube-pro-on-prem/articles/usage-guide",
+    ],
     to: "/articles/install/install-with-helm",
   },
   {
@@ -581,8 +609,21 @@ const redirects = [
   },
   // SCIM
   {
-    from: ["/testkube-enterprise/articles/scim","/testkube-pro-on-prem/articles/scim","/scim"],
+    from: [
+      "/testkube-enterprise/articles/scim",
+      "/testkube-pro-on-prem/articles/scim",
+      "/scim",
+    ],
     to: "/articles/scim",
+  },
+  // Learn more URLs from dashboard
+  {
+    from: "/learn/environment-queue-limit",
+    to: "/articles/test-workflows-concurrency-queueing#environment-queue-limit",
+  },
+  {
+    from: "/learn/runner-concurrency-limit",
+    to: "/articles/test-workflows-concurrency-queueing#runner-concurrency-limit",
   },
 ];
 
