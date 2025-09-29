@@ -156,6 +156,11 @@ const sidebars = {
                   label: "Image Inventory",
                   id: "articles/inventory/images",
                 },
+                {
+                  type: "doc",
+                  label: "Distributed Tracing",
+                  id: "articles/tracing",
+                },
               ],
             },
           ],
@@ -1078,17 +1083,17 @@ const sidebars = {
         id: "articles/reference",
       },
       items: [
-        {
-          type: "doc",
-          label: "Architecture",
-          id: "articles/architecture",
-        },
-        "articles/helm-components",
-        "articles/telemetry",
-        {
-          type: "category",
-          label: "Testkube CRDs",
-          items: [
+            {
+              type: "doc",
+              label: "Architecture",
+              id: "articles/architecture",
+            },
+            "articles/helm-components",
+            "articles/telemetry",
+            {
+              type: "category",
+              label: "Testkube CRDs",
+              items: [
             {
               type: "doc",
               label: "Overview",
