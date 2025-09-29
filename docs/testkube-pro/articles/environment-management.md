@@ -19,17 +19,17 @@ When creating a new environment in the Testkube Cloud Control Plane, you will fi
 1. **I have a K8s Cluster** - select this if you have a cluster where you can install the Testkube Agent for your
    environment.
 2. **No Cluster at hand** - setting up a local cluster for evaluation purposes is straightforward, for example using [kind](https://kind.sigs.k8s.io/)
-   or [minikube](https://minikube.sigs.k8s.io/docs/). Alternatively, you can use our demo environment for exploring Testkube functionality with having to install anything.
+   or [minikube](https://minikube.sigs.k8s.io/docs/). Alternatively, you can use our sandbox environment for exploring Testkube functionality with having to install anything.
 3. **I don't use Kubernetes** - if you're not familiar with Kubernetes and don't want to install a local cluster, you can use
-   our demo environment for exploring Testkube functionality with having to install anything.
+   our sandbox environment for exploring Testkube functionality with having to install anything.
 
 ![Cloud Environment Creation](../../img/cloud-create-environment.png)
 
 :::tip
 
-### Testkube Demo Environment
+### Testkube Sandbox Environment
 
-The Testkube Demo environment available in the Testkube Cloud Control Plane is a great way to explore the functionality provided by Testkube.
+The Testkube Sandbox environment available in the Testkube Cloud Control Plane is a great way to explore the functionality provided by Testkube.
 It contains a large collection of Workflows for different testing tools, with corresponding execution results and
 Test Insights.
 
@@ -37,7 +37,7 @@ You are added as a member with the Run role (see [below](/testkube-pro/articles/
 which gives you read-only access to explore and run these workflows and their results, as well as read-only access to
 all other major features of Testkube.
 
-![Demo Environment](../../img/demo-environment.png)
+![Sandbox Environment](../../img/demo-environment.png)
 
 :::
 

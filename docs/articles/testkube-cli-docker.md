@@ -54,7 +54,7 @@ Once you have the image, run the following command pointing to the Testkube demo
 docker run kubeshop/testkube-cli:latest version --namespace testkube --api-uri https://demo.testkube.io/results --client direct
 ```
 
-This command starts a new Docker container with the Testkube CLI image and executes the command `testkube version`, pointing to the api-server running on the Testkube demo environment.
+This command starts a new Docker container with the Testkube CLI image and executes the command `testkube version`, pointing to the api-server running on the Testkube sandbox environment.
 
 There are multiple *client types* you can set for the Testkube CLI:
 
