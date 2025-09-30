@@ -166,6 +166,10 @@ This panel allows you to configure the Queueing & Concurrency settings for your 
 
 ![Queueing & Concurrency Panel](images/env-concurrency-panel.png)
 
+:::tip
+Check out [Concurrency & Queueing](/articles/test-workflows-concurrency-queueing) to learn more about this functionality.   
+:::
+
 ### Product Features
 
 This tab allows you to configure Environment-level Product Features:
