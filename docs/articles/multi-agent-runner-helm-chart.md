@@ -1,15 +1,18 @@
-# Installing Runner Agent with Helm Charts
+# Installing Testkube Agent with Helm Charts
 
-You can install lightweight Runner Agent using `kubeshop/testkube-runner` Helm Chart.
+You can install a Testkube Runner or Listener Agents using the `kubeshop/testkube-runner` Helm Chart. The Standalone
+Agent is installed as described at [Installing the Standalone Agent](/articles/install/standalone-agent#installing-the-standalone-agent).
 
 ## Basic installation
 
-### Creating Runner Agent for Helm Charts
+Make sure you've read about Testkube Agents at [Agents Overview](/articles/agents-overview) before diving into the installation.
 
-To create Runner Agent, you can run `testkube create runner` command, like:
+### Creating Agent for Helm Charts
+
+To create an Agent with both the runner and listener capability, you can run `testkube create agent` command, like:
 
 ```sh
-testkube create runner my-name --label my-label=my-value
+testkube create agent my-name --label my-label=my-value
 ```
 
 After selecting the environment (unless you pass `--env env-id` parameter),
@@ -59,18 +62,18 @@ cloud:
   url: "agent.testkube.io:443"
 ```
 
-## Self-registering Runner Agent Helm install
+## Self-registering Agent Helm install
 
-Sometimes it may be desirable to allow Runner Agents to create themselves automatically on first run (without using the CLI),
+Sometimes it may be desirable to allow Agents to create themselves automatically on deployment (without using the CLI),
 for example when using an ephemeral testing environment that is programmatically created.
 
-Each environment has a Runner Agent Join Token assigned to it. This API key can be used for creating Runner Agents automatically when
-the Runner Agent itself first starts.
+Each environment has an Agent Join Token assigned to it. This API key can be used for creating Agents automatically when
+the Agent itself first starts.
 
-This enables you to install the Runner Agent using only `helm`:
+This enables you to install the Agent using only `helm`:
 
-1. Retrieve the helm instructions including Runner Agent join token for the target environment:
-   ![Create self-registering runner UI](images/create-runner-helm.png)
+1. Retrieve the helm instructions including the Agent join token for the target environment:
+   ![Create self-registering Agent UI](images/create-runner-helm.png)
 2. Install the Helm Chart:
    ```sh
    helm upgrade --install \
@@ -79,6 +82,8 @@ This enables you to install the Runner Agent using only `helm`:
      --set 'runner.orgId=<your:tkcorg_:organization_id>' \
      --set 'runner.register.token=<your:tkcapi_:key>' \
      --set 'cloud.url=agent.testkube.io:443' \
+     --set 'runner.enabled=true' \
+     --set 'listener.enabled=true' \
      my-runner oci://registry-1.docker.io/kubeshop/testkube-runner --version <version>
    ```
    
@@ -86,23 +91,26 @@ Or with a values file:
 
 ```yaml
 runner:
+  enabled: true
   orgId: "<your:tkcorg_:organization_id>"
   register: 
-   token: "<your:tkcapi_:key>"
+    token: "<your:tkcapi_:key>"
+  
+listener:
+  enabled: true
 
 cloud:
   url: "agent.testkube.io:443"
 ```
 
-### Limitations of self-registering Runner Agents
+### Limitations of self-registering Agents
 
-- Runner Agents must be able to create Kubernetes `Secrets` in their namespace.
-  These secrets are used to store the runner's ID and connection key which are generated during registration.
-  If the Runner Agent cannot create a `Secret` it will self-register every time it starts up.
-- Runner Agents will not deregister themselves during `helm uninstall`.
-  Instead, self-registered Runner Agents must be manually removed using the UI or CLI.
+- Self-registering Agents must be able to create Kubernetes `Secrets` in their namespace.
+  These secrets are used to store the agent's ID and connection key which are generated during registration.
+  If the Agent cannot create a `Secret` it will self-register every time it starts up.
+- Agents will not deregister themselves during `helm uninstall`. Instead, self-registered Agents must be manually removed using the UI or CLI.
 
-## Cookbook
+## Runner Agent Cookbook
 
 There are common things that you may want to set up in your values.
 
@@ -289,4 +297,19 @@ execution:
     non-default-namespace:
       serviceAccount:
         autoCreate: true
+```
+
+## Listener Agent Cookbook
+
+### Listening in additional namespaces
+
+Listener Agents only listen for events in the namespace where they are deployed by default. You can configure 
+additional namespaces to listen to by setting the `additionalNamespaces` value in the Helm Chart:
+
+```yaml
+listener:
+  enabled: true
+  additionalNamespaces:
+    - nm-2
+    - nm-3
 ```

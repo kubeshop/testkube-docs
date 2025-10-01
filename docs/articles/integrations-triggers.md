@@ -87,7 +87,3 @@ The **General** tab allows you to modify the name of the Trigger and delete it i
 previous tabs.
 
 ![Trigger Definition](../img/existing-trigger-definition.png)
-
-:::tip
-Triggers are stored as CRDs in your cluster - [Read More about the Trigger CRD](/articles/test-triggers#custom-resource-definition-model) 
-:::

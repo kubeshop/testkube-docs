@@ -29,9 +29,17 @@ Triggers are ultimately defined as Customer Resources in your cluster - [TestTri
 
 ## Listener Agents with TestTriggers
 
-Testkube uses [Listener Agents](/articles/agents-overview#listener-agents) to listen for Kubernetes events that will
-be matched against your TestTriggers. Your Testkube Environment can have any number of Listener Agents, deployed to 
-whichever namespaces/clusters you need to listen for events. 
+Testkube uses [Listener Agents](/articles/agents-overview#listener-agents) or the [Standalone Agent](/articles/agents-overview#the-standalone-agent) 
+to listen for Kubernetes events that will be matched against your TestTriggers. Your Testkube Environment can have any number of 
+Listener Agents, deployed to whichever namespaces/clusters you need to listen for events.
+
+The Listener Agent and Standalone Agent by default behave somewhat differently when it comes to listening for events:
+- Listener Agents by default listen for events only in the namespace they are deployed to, if you need to listen for events from 
+  additional namespaces, you can configure this as described at [Listening in additional namespaces](/articles/multi-agent-runner-helm-chart#listening-in-additional-namespaces).
+- The Standalone Agent listens for events in all namespaces, you can configure this as described at 
+  [Multi-namespace Agent Installation](/articles/install/advanced-install#multi-namespace-agent-installation).
+
+### Listener Agent Event Labels
 
 Events captured by a specific Listener Agents are annotated with a number of testkube.io specific labels:
 
@@ -79,9 +87,8 @@ selector:
 
 :::warning
 
-The `resource` and `resourceSelector` fields are deprecated (but still supported), please use the
-`selector` field to match on the builtin labels such as
-`teskube.io/resource-kind` and `testkube.io/resource-name` to achieve similar
+The `resource` and `resourceSelector` will be deprecated eventually but are still supported for now, please use the
+`selector` field to match on the builtin labels such as `teskube.io/resource-kind` and `testkube.io/resource-name` to achieve similar
 outcomes.
 
 :::
