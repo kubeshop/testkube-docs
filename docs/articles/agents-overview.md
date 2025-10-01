@@ -167,7 +167,7 @@ creation commands to instead assign a floating license, for example:
 
 ```sh
 # install temporary Runner Agent using a floating license
-$ testkube install runner pr-12u48y34-runner --create --floating
+$ testkube install agent pr-12u48y34-runner --runner --create --floating
 ```
 
 The Runner Agent will be shown with the License Type "Floating" in the list of Agents:
@@ -184,7 +184,6 @@ environments. Furthermore:
 - You will need to have at least one Floating license in your Testkube plan to be able to create Runner Agents with the `--floating` argument.
 
 Please don't hesitate to [Get in Touch](https://testkube.io/contact) if you have any questions/concerns about licensing.
-
 
 ## Migrating existing Environments
 

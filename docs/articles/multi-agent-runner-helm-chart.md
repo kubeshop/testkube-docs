@@ -203,7 +203,7 @@ runner:
 Read more about floating licenses at [Licensing for Runner Agents](/articles/agents-overview#licensing-for-runner-agents)
 :::
 
-## Service Accounts
+### Service Accounts
 
 The Runner Agent Helm Chart creates two kinds of ServiceAccounts:
 
@@ -221,13 +221,13 @@ The `-testkube` suffix in the ServiceAccount names above and below might differ 
 See the [Chainsaw Example](/articles/examples/chainsaw-basic) to see how a custom ServiceAccount can be used in your Workflow.
 :::
 
-### Example: Using the same namespace for Runner Agent and Executions
+#### Example: Using the same namespace for Runner Agent and Executions
 
 By default, we deploy both Runner Agent and Executions to the same namespace the Helm Chart is released to. 
 Then, `agent-sa-testkube` and `exec-sa-testkube` are deployed in that namespace. `agent-sa-testkube` has wider permissions and is used by Runner Agent, 
 `exec-sa-testkube` has smaller permissions and is used by Executions.
 
-###  Example: Avoid ServiceAccount for the executions
+#### Example: Avoid ServiceAccount for the executions
 
 If you are not using `services` and `parallel` syntax, you may want to set Helm Chart values to:
 
@@ -250,7 +250,7 @@ This blocks the ability of using `services` and `parallel` though, unless you wi
 Read more about Workflow `pod` configuration at [Test Workflows - Job and Pod Configuration](/articles/test-workflows-job-and-pod).
 :::
 
-### Example: Run executions in a different namespace than the Runner Agent
+#### Example: Run executions in a different namespace than the Runner Agent
 
 For better security, you may isolate the executions to be running in a different namespace than the Runner Agent. This way, you ensure that they 
 cannot read Runner Agent's data (like Agent Token), or anything else. Also, this could help to deploy multiple Runner Agents in the same namespace 
@@ -268,7 +268,7 @@ In such case:
 - `agent-sa-testkube` ServiceAccount will still be deployed in the Helm Chart release namespace,
 - `exec-sa-testkube` ServiceAccount will be deployed in `my-namespace-where-only-executions-should-run` namespace
 
-### Example: Full Security
+#### Example: Full Security
 
 You can as well combine both cases - avoid `parallel`/`services` and deploy executions to a separate namespace. This way you have full isolation.
 
@@ -280,7 +280,7 @@ execution:
       autoCreate: false
 ```
 
-### Example: Multiple Namespaces
+#### Example: Multiple Namespaces
 
 To allow Runner Agent to support  
 

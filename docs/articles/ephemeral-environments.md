@@ -14,7 +14,7 @@ namespaces/clusters is straight-forward:
 2. Create a corresponding Runner Agent in the same namespace/cluster as described at [Independent Runner Agents](/articles/test-workflows-running#independent-runner-agents).
 3. Run your Workflows on this Runner Agent using the corresponding [targeting arguments](/articles/test-workflows-running#runner-agent-targeting), the execution results will 
    be aggregated on the Control Plane as before and contain metadata on which Runner Agent they were executed.
-4. [Remove the Runner Agent](/articles/multi-agent-cli#deleting-and-uninstalling-a-runner-agent) and tear down your namespace/cluster when finished.
+4. [Remove the Runner Agent](/articles/multi-agent-cli#deleting-and-uninstalling-an-agent) and tear down your namespace/cluster when finished.
 5. View the results/artifacts/resource-usage of your Workflow Executions in the Testkube Dashboard as before.
 
 Steps 2, 3 and 4 above can all be automated via the Testkube CLI in your CI/CD pipelines; the following diagram describes this setup.

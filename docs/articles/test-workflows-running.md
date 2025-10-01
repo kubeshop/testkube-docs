@@ -34,7 +34,7 @@ After installing the [Testkube CLI](/articles/cli) and using `testkube login` to
 Testkube Environment, use `testkube install runner <name> --create` command to install your first Runner Agent:
 
 ```sh
-$ testkube install runner staging-runner --create
+$ testkube install agent staging-runner --create --runner
 ```
 
 This will create and install a Runner Agent named `staging-runner` that can now be used to run your Workflows.
