@@ -196,33 +196,6 @@ const sidebars = {
           label: "Cloud Control Plane",
           id: "articles/install/cloud-overview",
         },
-        {
-          type: "category",
-          label: "Multi-Agent Environments",
-          collapsed: false,
-          items: [
-            {
-              type: "doc",
-              label: "Overview",
-              id: "articles/install/multi-agent",
-            },
-            {
-              type: "doc",
-              label: "Runner Agent Helm Chart",
-              id: "articles/multi-agent-runner-helm-chart",
-            },
-            {
-              type: "doc",
-              label: "CLI Commands",
-              id: "articles/multi-agent-cli",
-            },
-          ],
-        },
-        {
-          type: "doc",
-          label: "Ephemeral Environments",
-          id: "articles/ephemeral-environments",
-        },
         "articles/install/faq",
         {
           type: "doc",
@@ -251,6 +224,37 @@ const sidebars = {
         id: "articles/using-testkube",
       },
       items: [
+        {
+          type: "category",
+          label: "Testkube Environments",
+          items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "testkube-pro/articles/environment-management",
+            },
+            {
+              type: "doc",
+              label: "Testkube Agents",
+              id: "articles/agents-overview",
+            },
+            {
+              type: "doc",
+              label: "Agent Helm Chart",
+              id: "articles/multi-agent-runner-helm-chart",
+            },
+            {
+              type: "doc",
+              label: "Agent CLI Commands",
+              id: "articles/multi-agent-cli",
+            },
+            {
+              type: "doc",
+              label: "Ephemeral Environments",
+              id: "articles/ephemeral-environments",
+            },
+          ],
+        },
         {
           type: "category",
           label: "Testkube Dashboard",
@@ -335,6 +339,11 @@ const sidebars = {
               type: "doc",
               label: "Basic Examples",
               id: "articles/test-workflows-examples-basics",
+            },
+            {
+              type: "doc",
+              label: "Running Workflows",
+              id: "articles/test-workflows-running",
             },
             {
               type: "doc",
@@ -570,16 +579,6 @@ const sidebars = {
               type: "doc",
               label: "Organizations",
               id: "testkube-pro/articles/organization-management",
-            },
-            {
-              type: "doc",
-              label: "Environments",
-              id: "testkube-pro/articles/environment-management",
-            },
-            {
-              type: "doc",
-              label: "Agents",
-              id: "testkube-pro/articles/agent-management",
             },
             {
               type: "doc",

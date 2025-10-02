@@ -379,7 +379,7 @@ spec:
 
 ### Targeting specific Runner Agents in CronJobs
 
-With the introduction of [Multi-Agent Environments](/articles/install/multi-agent) you can optionally specify
+With the introduction of [Runner Agents](/articles/agents-overview#runner-agents) you can optionally specify
 which Runner Agent(s) a CronJob execution should run on. For example
 
 ```yaml
@@ -399,7 +399,7 @@ which Runner Agent(s) a CronJob execution should run on. For example
 ```
 
 Will run this CronJob on any Global Runner Agent with the `application: accounting` label, for more details,
-see our guide on [Runner Agent Targeting](/articles/install/multi-agent#targeting-runner-agents-in-testkube-resources).
+see our guide on [Runner Agent Targeting](/articles/test-workflows-running#targeting-runner-agents-in-testkube-resources).
 
 ## Tags
 
@@ -417,7 +417,7 @@ For more details, see our guide on [Filtering Test Workflow Executions Using Tag
 
 ## Runner Agent Target
 
-With the introduction of [Multi-Agent Environments](/articles/install/multi-agent) you can optionally specify
+With the introduction of [Runner Agents](/articles/agents-overview#runner-agents) you can optionally specify
 which Runner Agent(s) this Workflow should run on. For example:
 
 ```yaml
@@ -434,7 +434,7 @@ Will run on any Global Runner Agent with the `application: accounting` label. Yo
 - A Workflow target will have priority over targets within Workflow Templates.
 - A Workflow using Workflow Templates may only target Runner Agents with at most one template, or an error will occur when scheduled.
 
-For more details, see our guide on [Runner Agent Targeting](/articles/install/multi-agent#targeting-runner-agents-in-testkube-resources).
+For more details, see our guide on [Runner Agent Targeting](/articles/test-workflows-running#targeting-runner-agents-in-testkube-resources).
 
 ## Templates
 

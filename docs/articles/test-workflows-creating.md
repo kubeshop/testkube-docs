@@ -55,8 +55,8 @@ testkube run testworkflow TEST_WORKFLOW_NAME -f
 ```
 
 :::tip
-With the introduction of [Multi-Agent Environments](/articles/install/multi-agent) it is possible to add a 
-`--target` argument to specify on which Runner a Workflow should be run - [Read More](/articles/install/multi-agent#2-run-your-workflows).
+With the introduction of [Runner Agents](/articles/agents-overview#runner-agents) it is possible to add a 
+`--target` argument to specify on which Runner a Workflow should be run - [Read More](/articles/test-workflows-running#runner-agent-targeting).
 :::
 
 ## ReRun 
@@ -69,7 +69,7 @@ testkube rerun twe EXECUTION_ID
 
 :::note
 If the previous execution explicitly targeted a Runner that is no longer available, the execution will be queued 
-until a corresponding Runner is available - [Read More](/articles/install/multi-agent#queuing-of-workflow-executions).
+until a corresponding Runner is available - [Read More](/articles/test-workflows-running#queuing-of-workflow-executions).
 :::
 
 ## Workflow Execution Status

@@ -1,16 +1,36 @@
 # Environment Management
 
-An environment is a grouping Workflows, Execution Results, Triggers and Webhooks.
+## What is an Environment?
+
+A _Testkube Environment_ is a grouping of Workflows, Workflow Templates, Triggers and Webhooks - and their 
+corresponding artifacts, logs, and execution results.
+
+You can create multiple environments within your Testkube Organization (see below) to organize your resources and usage
+of Testkube accordingly, for example, you can create a separate environment for each of your development teams (although
+if you are looking for a way to control access to Resources, [Resource Groups](/articles/resource-groups) might be
+a better approach).
+
+A Testkube Environment can contain any number of [Testkube Agents](/articles/agents-overview), which are responsible
+for managing Resources, executing Workflows and listening to Events. 
 
 :::info
-A Testkube environment is managed by a Testkube Agent running in your Kubernetes Cluster - read more [here](../../articles/architecture.md).
+At the technical level, the Resources in a Testkube environment are managed by a Testkube Agent running in your 
+Kubernetes Cluster - read more [here](../../articles/architecture.md).
 :::
+
+Your existing Environments are available from the Environment dropdown on the top of the Testkube Dashboard (see 
+screenshot below), selecting an Environment will focus the Testkube Dashboard on the resources in that Environment - 
+[Read More](/articles/testkube-dashboard-explore).
 
 ## Creating a New Environment
 
-You can create a new environment from the "Environments" drop down in the header section of the Testkube Dashboard.
+You can create a new environment from the Environments dropdown in the header section of the Testkube Dashboard:
 
 ![Create Environment](../../img/create-environment.png)
+
+:::tip
+You can create an Environment from the "Environments" panel in the [Organization Settings](/testkube-pro/articles/organization-management#environments) also.
+:::
 
 ### Cloud Options
 
@@ -71,7 +91,7 @@ toolbar buttton on the left:
 
 ![Environment Settings](../../img/environment-settings.png)
 
-There are 4 tabs for managing your Environment.
+There are 6 panels for managing your Environment.
 
 ### General
 
@@ -79,10 +99,18 @@ Find the general settings for your environment on the **General** tab. You can a
 
 ![General Settings Dashboard](../../img/general-settings-dashboard-072024.png)
 
+### Agents
+
+Manage your Environment Agents here - [Read More](/articles/agents-overview).
+
+![Testkube Agents Panel](images/testkube-agents-panel.png)
+
 ### Environment Members
 
 You can assign environment-specific roles to [Teams](/articles/teams) or individual [Members](/testkube-pro/articles/organization-management#members) of your organization to control which
 actions a member can perform in a specific environment.
+
+#### Adding Environment Members
 
 To add new members to an Environment, select the Members tab under the Environment settings and use the "Add Collaborators"
 section to search for and add individual members or teams from your organization.
@@ -105,6 +133,8 @@ Have a look at [Resource Access Management](/articles/resource-access-management
 allows you to manage and apply Resource Access controls.
 :::
 
+#### Listing Environment Members
+
 You can see a list of existing Environment members at the bottom of this panel, and change their role or remove them
 using the popup menu on the right:
 
@@ -126,6 +156,19 @@ There are 4 default categories, represented with a few keywords each:
 | **Access & Authorization** | Denied, Unauthorized, Forbidden, Invalid, Invalid Token, Expired    |
 
 You can add/edit/remove categories using the corresponding actions in the interface.
+
+### Queueing & Concurrency
+
+This panel allows you to configure the Queueing & Concurrency settings for your Environment
+
+- Environment Queue Limit / Max Queued Executions: Immediately abort new executions when the number of queued executions for this environment surpasses the given threshold.
+- Runner Concurrency Limit / Max Concurrent Executions: Queue this execution when ongoing executions when all runners surpasses the given threshold.
+
+![Queueing & Concurrency Panel](images/env-concurrency-panel.png)
+
+:::tip
+Check out [Concurrency & Queueing](/articles/test-workflows-concurrency-queueing) to learn more about this functionality.   
+:::
 
 ### Product Features
 

@@ -5,7 +5,7 @@ The below table shows a feature comparison between deploying the Testkube Agent 
 The Control Plane column applies to both On-Prem and Cloud deployments of the Control Plane.
 
 | Features                             |       Testkube Agent <br/> in standalone mode        | Testkube Agent(s) <br/>connected to Control Plane |                                Read More                                |
-| :----------------------------------- | :--------------------------------------------------: | :-----------------------------------------------: | :---------------------------------------------------------------------: |
+| :----------------------------------- | :--------------------------------------------------: | :-----------------------------------------------: |:-----------------------------------------------------------------------:|
 | **TestWorkflows**                    | :white_check_mark: - :warning: see limitations above |                :white_check_mark:                 |                    [Docs](/articles/test-workflows)                     |
 | **Test Logs/Artifacts**              |   :white_check_mark: - :warning: via CLI/API only    |                :white_check_mark:                 |                  [Docs](/articles/logs-and-artifacts)                   |
 | **Webhooks**                         |                  :white_check_mark:                  |                :white_check_mark:                 |                       [Docs](/articles/webhooks)                        |
@@ -15,9 +15,9 @@ The Control Plane column applies to both On-Prem and Cloud deployments of the Co
 | **REST API**                         |    :white_check_mark: -:warning: Unauthenticated     |                :white_check_mark:                 |                        [Docs](/openapi/overview)                        |
 | **Dashboard**                        |                         :x:                          |                :white_check_mark:                 |              [Docs](/articles/testkube-dashboard-explore)               |
 | **Environment Management**           |                         :x:                          |                :white_check_mark:                 |          [Docs](/testkube-pro/articles/environment-management)          |
-| **Multi-Agent Environments**         |                         :x:                          |                :white_check_mark:                 |                  [Docs](/articles/install/multi-agent)                  |
+| **Multi-Agent Environments**         |                         :x:                          |                :white_check_mark:                 |                    [Docs](/articles/agents-overview)                    |
 | **SSO Integration**                  |                         :x:                          |                :white_check_mark:                 |               [Docs](/testkube-pro-on-prem/articles/auth)               |
-| **SCIM Integration**                 |                         :x:                          |                :white_check_mark:                 |               [Docs](/articles/scim)               |
+| **SCIM Integration**                 |                         :x:                          |                :white_check_mark:                 |                         [Docs](/articles/scim)                          |
 | **RBAC/User Mgmt**                   |                         :x:                          |                :white_check_mark:                 |         [Docs](/testkube-pro/articles/organization-management)          |
 | **Resource Metrics**                 |                         :x:                          |                :white_check_mark:                 |                   [Docs](/articles/resource-metrics)                    |
 | **Reporting/Insights**               |                         :x:                          |                :white_check_mark:                 |                     [Docs](/articles/test-insights)                     |

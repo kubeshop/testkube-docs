@@ -247,7 +247,9 @@ spec:
 
 
 ## Multi-namespace Agent Installation 
+
 It is possible to deploy multiple Testkube Agent instances into the same Kubernetes cluster. Please put the following configuration to your `values.yaml` when deploying another agent:
+
 ```yaml
 testkube-api:
   multinamespace:
@@ -257,7 +259,9 @@ testkube-operator:
   enabled: false
 ```
 
-By default, Testkube monitors events across the entire Kubernetes cluster to trigger the execution of a test workflow. You might want to limit the namespaces that Testkube observes due to security restrictions, in which case you can use the multinamespace configuration:
+By default, Testkube monitors events across the entire Kubernetes cluster to trigger the execution of a Test Workflow with the [Kubernetes Event Triggers](/articles/test-triggers)
+functionality. You might want to limit the namespaces that Testkube observes due to security restrictions, in which case you can use the `multinamespace` configuration:
+
 ```yaml {3-7}
 testkube-agent:
   testkube-api:
@@ -267,7 +271,9 @@ testkube-agent:
       - namespace2
       - namespace3
 ```
-Note: The naming is a bit counterintuitive, but this instructs Testkube to stop watching all namespaces and to only observe the namespaces listed on top of the namespace where Testkube is installed. No ClusterRole will be created, instead you will have Roles for each specified namespace.
+
+Note: The naming is a bit counterintuitive, but this instructs Testkube to stop watching all namespaces and to only observe the namespaces listed under `additionalNamespaces` _in 
+addition to_ the namespace where Testkube is installed. No ClusterRole will be created, instead you will have Roles for each specified namespace.
 
 ## Kubernetes Namespaces
 

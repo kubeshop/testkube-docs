@@ -299,7 +299,7 @@ const redirects = [
       "/testkube-pro/transition-from-oss",
       "/testkube-pro/articles/transition-from-oss",
     ],
-    to: "/articles/install/multi-agent",
+    to: "/testkube-pro/articles/environment-management",
   },
   {
     from: [
@@ -606,6 +606,14 @@ const redirects = [
   {
     from: "/ai",
     to: "/articles/ai-assistant-overview",
+  },
+  {
+    from: "/articles/install/multi-agent",
+    to: "/testkube-pro/articles/environment-management",
+  },
+  {
+    from: "/testkube-pro/articles/agent-management",
+    to: "/articles/agents-overview",
   },
   // SCIM
   {
