@@ -7,14 +7,15 @@ import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx"
 
 <RequiresCommercialWorkflows/>
 
+## Overview
+
 With Test Workflows it is possible to run downstream Test Workflows and Tests with `execute` operation, allowing you
 to create a Workflow that orchestrates the execution of other Workflows, both in sequence and parallel.
 
-## Advantages over original Test Suite
+The possibility to orchestrate the execution of other Workflows from within a Workflow gives you great flexibility in how you can
+use Testkube to modularize and execute your tests:
 
-As it is a regular Test Workflow, where a single step is dispatching downstream Test Workflows and Tests,
-the execution is very flexible. You can:
-
+* Break down complex Workflows into smaller, reusable steps.
 * Fetch input data before (i.e. by using `curl`/`wget` to download data, or fetching Git repository).
 * Run setup operations (i.e. start shared instance of database, or generate API key).
 * Process the results (i.e. by notifying about the status).
@@ -24,23 +25,14 @@ the execution is very flexible. You can:
 * Run any number of Workflows both in sequence or parallel.
 * Run Workflows based on labels - for dynamic selection of which Workflows to run.
 
-:::warning
-Test Workflows are our long-term solution, so keep in mind that the original Test Suites are being deprecated - [Read More   ](/articles/legacy-features).
-:::
-
-## Syntax
+## `execute` Syntax
 
 You have to use `execute` operation in the step, and provide definition of the Test Workflows to run - [Schema Reference](/articles/crds/testworkflows.testkube.io-v1#stepexecute).
 
-:::tip
+For each Workflow to execute, you have to provide its `name` and optionally `config` values.
 
-The Testkube Dashboard contains a visual builder for creating Composite Workflows -
-[Read More](/articles/test-workflows-create-wizard#combine-existing-workflows)
-
-:::
-
-<Tabs>
-<TabItem value="yaml" label="YAML" default>
+This example runs two Workflows - `example-distributed-k6` and `example-sharded-cypress` in parallel, providing configuration values for 
+the `example-distributed-k6` Workflow:
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -59,44 +51,37 @@ spec:
           duration: 1s
           workers: 2
       - name: example-sharded-cypress
-      tests:
-      - name: example-test
-        description: Example without request
-      - name: example-test
-        description: Example with env variables
-        executionRequest:
-          variables:
-            SOME_VARIABLE:
-              type: basic
-              name: SOME_VARIABLE
-              value: some-value
 ```
 
-</TabItem>
-<TabItem value="log" label="Log Output">
-
-![example-test-suite.png](../img/example-test-suite.png)
-
-</TabItem>
-</Tabs>
-
-### Running Test Workflows with `execute`
-
-To run Test Workflow as part of the `execute` step, you have to add its reference in the `workflows` list.
-
-You need to provide `name`, along with optional `config` values for parametrization.
-
-### Running Tests with `execute`
-
-:::warning
-Tests are being deprecated from Testkube - so only use this possibility if/while transitioning to Workflows
-- [Read More](legacy-features.md).
+:::tip
+The Testkube Dashboard contains a visual builder for creating Composite Workflows -
+[Read More](/articles/test-workflows-create-wizard#combine-existing-workflows)
 :::
 
-To run Tests as part of the `execute` step, you have to add its reference in the `tests` list.
+### Parallel / Sequential Execution
 
-You need to provide `name`, along with optional `executionRequest` values for parametrization,
-that are similar to the regular Test execution request.
+Using multiple `execute` steps in your Workflow allows you to orchestrate the execution of other Workflows both in parallel and in sequence. For example,
+the below Workflow first runs the `cure-with-nginx-service` and `junit5-junit` Workflows in parallel, then the `cypress-browsers-matrix` and
+`nunit-junit-report` workflows in sequence.
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: composite-workflow
+spec:
+  steps:
+    - execute:
+        workflows:
+          - name: curl-with-nginx-service
+          - name: junit5-junit
+    - execute:
+        workflows:
+          - name: cypress-browsers-matrix
+    - execute:
+        workflows:
+          - name: nunit-junit-report
+```
 
 ### Controlling the concurrency level
 
@@ -138,30 +123,65 @@ spec:
 </TabItem>
 </Tabs>
 
-## Parallel / Sequential Execution
+### Dynamic workflow selection
 
-Using multiple `execute` steps in your Workflow allows you to orchestrate the execution of other Workflows both in parallel and in sequence. For example,
-the below Workflow first runs the `cure-with-nginx-service` and `junit5-junit` Workflows in parallel, then the `cypress-browsers-matrix` and
-`nunit-junit-report` workflows in sequence.
+In case you don't know an exact list of workflows to be excuted inside of the suite, you can define it dynamically using test workflow labels.
+This list will be generated during test workflow execution. You have 2 options to choose:
 
+Either using labels themselves
 ```yaml
-apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
+apiVersion: testworkflows.testkube.io/v1
 metadata:
-  name: composite-workflow
+  name: tw-suite-dynamic-labels
 spec:
   steps:
-    - execute:
-        workflows:
-          - name: curl-with-nginx-service
-          - name: junit5-junit
-    - execute:
-        workflows:
-          - name: cypress-browsers-matrix
-    - execute:
-        workflows:
-          - name: nunit-junit-report
+  - execute:
+      parallelism: 2
+      workflows:
+        - selector:
+            matchLabels:
+              core-tests: workflows
 ```
+
+Or using Kubernetes label expressions
+```yaml
+kind: TestWorkflow
+apiVersion: testworkflows.testkube.io/v1
+metadata:
+  name: tw-suite-dynamic-expressions
+spec:
+  steps:
+  - execute:
+      parallelism: 2
+      workflows:
+        - selector:
+            matchExpressions:
+            - key: core-tests
+              operator: In
+              values:
+              - workflows
+```
+
+### Targeting specific Runner Agents
+
+With the introduction of [Runner Agents](/articles/agents-overview#runner-agents) it is possible to specify target Runner Agents for each
+workflow specified in the `execute` command, for example:
+
+```yaml
+...
+  - execute:
+      workflows:
+      - name: k6-base
+        target:
+          match:
+            name:
+            - load-runner-agent
+      - name: e2e-test
+```
+
+Will run the `k6-base` test on a Runner Agent named `load-runner-agent` while running the e2e-test on the Runner Agent the containing
+Workflow is running on. For more details, see our guide on [Runner Agent Targeting](/articles/test-workflows-running#runner-agent-targeting).
 
 ## Nesting workflows
 Workflows can be nested, a Workflow can execute other Workflow(s) executing other Workflow(s). [**Parallelism**](#controlling-the-concurrency-level) can then be used to control the execution flow.
@@ -207,45 +227,6 @@ spec:
       - name: playwright-workflow-suite
       - name: postman-workflow-suite
       - name: soapui-workflow-suite
-```
-
-## Dynamic workflow selection
-In case you don't know an exact list of workflows to be excuted inside of the suite, you can define it dynamically using test workflow labels.
-This list will be generated during test workflow execution. You have 2 options to choose:
-
-Either using labels themselves
-```yaml
-kind: TestWorkflow
-apiVersion: testworkflows.testkube.io/v1
-metadata:
-  name: tw-suite-dynamic-labels
-spec:
-  steps:
-  - execute:
-      parallelism: 2
-      workflows:
-        - selector:
-            matchLabels:
-              core-tests: workflows
-```
-
-Or using Kubernetes label expressions
-```yaml
-kind: TestWorkflow
-apiVersion: testworkflows.testkube.io/v1
-metadata:
-  name: tw-suite-dynamic-expressions
-spec:
-  steps:
-  - execute:
-      parallelism: 2
-      workflows:
-        - selector:
-            matchExpressions:
-            - key: core-tests
-              operator: In
-              values:
-              - workflows
 ```
 
 ## Passing Input Parameters
@@ -349,24 +330,5 @@ It is supported by regular matrix/sharding properties (`matrix`, `shards`, `coun
 
 You can read more about it in the general [**Matrix and Sharding**](./test-workflows-matrix-and-sharding.mdx) documentation.
 
-## Targeting specific Runner Agents
-
-With the introduction of [Runner Agents](/articles/agents-overview#runner-agents) it is possible to specify target Runner Agents for each
-workflow specified in the `execute` command, for example:
-
-```yaml
-...
-  - execute:
-      workflows:
-      - name: k6-base
-        target:
-          match:
-            name:
-            - load-runner-agent
-      - name: e2e-test
-```
-
-Will run the `k6-base` test on a Runner Agent named `load-runner-agent` while running the e2e-test on the Runner Agent the containing
-Workflow is running on. For more details, see our guide on [Runner Agent Targeting](/articles/test-workflows-running#runner-agent-targeting).
 
 
