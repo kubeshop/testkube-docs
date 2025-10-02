@@ -290,7 +290,7 @@ Events and values related to Tests and Test Suites have been deprecated and will
 ### On Deployment Update
 
 Here is an example for a **Test Trigger** _default/testtrigger-example_ which
-runs the **TestSuite** _frontend/sanity-test_ when a **deployment** containing
+runs the **TestWorkflow** _frontend/sanity-test_ when a **deployment** containing
 the label **testkube.io/tier: backend** gets **modified** and also has the
 conditions **Progressing: True: NewReplicaSetAvailable** and **Available:
 True**.
