@@ -313,3 +313,15 @@ listener:
     - nm-2
     - nm-3
 ```
+
+### Listening in all namespaces
+
+If you don't want to maintain a list of namespaces, you can enable cluster-wide listening by setting `watchAllNamespaces` to `true`:
+
+```yaml
+listener:
+  enabled: true
+  watchAllNamespaces: true
+```
+
+This makes the Listener Agent watch every namespace in the cluster. Use this when you need full coverage or when namespaces are created dynamically.
