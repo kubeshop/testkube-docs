@@ -53,6 +53,8 @@ In your IdP’s SCIM configuration:
 
 Testkube uses **URNs (Uniform Resource Names)** to define roles. A role URN specifies what permissions a user has for a particular resource.
 
+All of the settings below are configured on your Identity Provider side, so each user should have a `roles` attribute containing an array of strings.
+
 ### Organization Roles
 
 Example:
@@ -176,6 +178,8 @@ Result: User has read access everywhere, but full admin in `production`.
 
 Entitlements assign users or teams to environments or resource groups.
 
+All of the settings below are configured on your Identity Provider side, so each user should have an `entitlements` attribute containing an array of strings.
+
 Example:
 ```json
 {
@@ -187,7 +191,7 @@ Example:
 }
 ```
 
-> 💡 If the environment doesn’t exist, Testkube creates it automatically.
+> 💡 If a resource, configured by an entitlement, doesn’t exist, Testkube creates it automatically.
 
 ---
 
@@ -302,24 +306,24 @@ This guide walks you through integrating Okta with Testkube for **SCIM provision
 - A Testkube Organization with SCIM enabled (SCIM Server Endpoint Bearer Token available in Testkube UI).
 - Admin access to your Okta tenant.
 
-### Step 1. Log in to Okta Admin Portal
+#### Step 1. Log in to Okta Admin Portal
 1. Go to [Okta Admin Console](https://login.okta.com/).
 2. Use an administrator account to sign in.
 
-### Step 2. Create a New Application Integration
+#### Step 2. Create a New Application Integration
 1. In the left sidebar, navigate to **Applications** → **Applications**.
 2. Click **Create App Integration**.
 3. Choose **SWA – Secure Web Authentication**.
 4. Set the **Application username** to **Email**.
 5. Save the new application.
 
-### Step 3. Enable SCIM Provisioning
+#### Step 3. Enable SCIM Provisioning
 1. Open the newly created application in Okta.
 2. Go to **General** → click **Edit**.
 3. Under **App Settings**, enable **SCIM Provisioning**.
 4. Save changes.
 
-### Step 4. Configure SCIM Connector
+#### Step 4. Configure SCIM Connector
 1. Navigate to the **Provisioning** tab.
 2. Click **Integration** then **Edit**.
 3. Enter the following details:
@@ -329,13 +333,36 @@ This guide walks you through integrating Okta with Testkube for **SCIM provision
 4. Select all supported provisioning actions (Import New Users and Profile Updates, Push New Users, Push Profile Updates, Push Groups, Import Groups).
 5. Set **Unique identifier field for users** to **email**.
 
-### Step 5. Test Connector Configuration
+#### Step 5. Test Connector Configuration
 1. Click **Test Connector Configuration**.
 2. The test should be successful. If not, verify the SCIM URL and token from Testkube.
 
-### Step 6. Save & Finish
+#### Step 6. Save & Finish
 1. Save the configuration.
 2. SCIM provisioning between Okta and Testkube is now active.
 3. You can now assign users and groups to this application, and they will be provisioned into Testkube automatically.
 
----
+### Defining Roles and Entitlements in Okta
+
+When integrating Okta with Testkube via SCIM, you may want to assign additional `roles` (permissions) and `entitlements` (resource memberships) to users or groups.
+This is done by defining extra attributes in Okta and mapping them to Testkube.
+
+#### Step 1. Add Custom Attributes in Okta
+1. In the **Okta Admin Console**, go to **Directory** → **Profile Editor**.
+2. Select the **SCIM Application** you created.
+3. Click **Add Attribute**.
+4. Create the following attributes:
+   * **roles** (type: string, array supported)
+   * **entitlements** (type: string, array supported)
+
+> 💡 When creating the additional attributes, make sure the `external namespace` is set to `urn:ietf:params:scim:schemas:core:2.0:User`.
+
+> 💡 You can also edit an individual user under **Directory** → **People** → **Select a User** → **Profile** → **Edit Attributes** and 
+> directly add these fields there for testing.
+
+#### Step 2. Map Attributes to the SCIM App
+1. Still in **Profile Editor**, select the **Mappings** tab.
+2. Ensure the new attributes are mapped:
+   * From **Okta User** → **Created SCIM Application**
+   * And optionally back from **Created SCIM Application** → **Okta User** (if you want to sync values both ways).
+3. Save the mappings.
