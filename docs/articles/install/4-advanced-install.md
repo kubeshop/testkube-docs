@@ -174,6 +174,83 @@ testkube-cloud-api:
       disablePersonalOrgs: true
 ```
 
+### Agent Tokens in Bootstrap Configuration
+
+When using the Bootstrap configuration to create environments programmatically, you can also configure **Agent Join Tokens** as part of the "as code" deployment. Agent Join Tokens allow agents to self-register when they are deployed, enabling fully automated environment setup.
+
+#### How It Works
+
+Each environment can have an Agent Join Token that allows new agents to automatically register themselves without manual intervention. This is particularly useful for:
+
+- **GitOps workflows**: Where infrastructure is managed declaratively
+- **Ephemeral environments**: That are programmatically created and destroyed
+- **CI/CD pipelines**: That need to spin up testing environments on-demand
+- **Multi-tenant deployments**: Where environments are created automatically for each tenant
+
+#### Configuration
+
+Agent Join Tokens are created automatically when you create an environment through the Bootstrap configuration. Once the environment is created, you can retrieve the token and use it to deploy agents.
+
+**Step 1: Create environment with Bootstrap**
+
+```yaml
+testkube-cloud-api:
+  api:
+    features:
+      bootstrapConfig:
+        enabled: true
+        config:
+          organizations:
+            - name: prod_organization
+              environments:
+                - name: production_1
+                  default_role: run
+```
+
+**Step 2: Retrieve the Agent Join Token**
+
+After the environment is created during bootstrap, you can retrieve the Agent Join Token using the Testkube API:
+
+```bash
+# Get the Agent Join Token for an environment
+curl -X GET \
+  "https://<your-testkube-domain>/api/organizations/<org-id>/environments/<env-id>/agent-token" \
+  -H "Authorization: Bearer <your-api-token>"
+```
+
+Or using the CLI (after the initial deployment):
+
+```bash
+testkube get environment <env-name> --org <org-name>
+```
+
+**Step 3: Use the token for agent deployment**
+
+Once you have the Agent Join Token, you can use it to deploy agents automatically:
+
+```yaml
+# Agent values.yaml
+runner:
+  enabled: true
+  orgId: "<your:tkcorg_:organization_id>"
+  register: 
+    token: "<agent-join-token>"
+  
+listener:
+  enabled: true
+
+cloud:
+  url: "<your-testkube-domain>:443"
+```
+
+:::tip
+For more details on self-registering agents, see the [Multi-Agent Runner Helm Chart documentation](/articles/multi-agent-runner-helm-chart#self-registering-agent-helm-install).
+:::
+
+:::warning
+**Security Note**: Agent Join Tokens should be treated as sensitive credentials. Store them securely using Kubernetes secrets, vault systems, or your CI/CD platform's secret management.
+:::
+
 ### Invitations
 
 Users will now have to be invited within the Dashboard. You can configure the SMTP server and Testkube will send e-mail invitations.
