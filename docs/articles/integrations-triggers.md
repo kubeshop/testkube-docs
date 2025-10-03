@@ -23,7 +23,7 @@ Select the **Create a new trigger** button to create a new Kubernetes Trigger:
 
 :::tip
 The wizard to create a Trigger only exposes basic Trigger configurations, for more advanced [condition and action
-configuration](/articles/test-triggers#custom-resource-definition-model) you can modify the generated YAML directly in the 
+configuration](/articles/test-triggers#resource-conditions) you can modify the generated YAML directly in the 
 [Definition tab](/articles/integrations-triggers#definition) for your Trigger. 
 :::
 
@@ -87,7 +87,3 @@ The **General** tab allows you to modify the name of the Trigger and delete it i
 previous tabs.
 
 ![Trigger Definition](../img/existing-trigger-definition.png)
-
-:::tip
-Triggers are stored as CRDs in your cluster - [Read More about the Trigger CRD](/articles/test-triggers#custom-resource-definition-model) 
-:::

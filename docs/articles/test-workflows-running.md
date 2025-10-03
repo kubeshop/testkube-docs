@@ -1,42 +1,16 @@
-# Multi-Agent Environments
+# Running Test Workflows
 
-Testube 2.X introduces the concept of Multi-Agent Environments, which adds two major new capabilities:
+## Overview 
 
-1. The ability to **run the same Workflow in multiple namespaces/clusters**, (possibly at the same time!).
-2. The ability to easily **add ephemeral Runner Agents** to an Environment and run your Test Workflows on them.
+Workflows can be triggered to execute in any of the ways described in [Triggering Test Workflows](/articles/triggering-overview). When triggered, 
+Workflows execute either on the default Standalone Agent or dedicated Runner Agents connected to an Environment - [Read More about Agents](/articles/agents-overview),
 
-The Multi-Agent functionality is available to any existing and new Testkube Environment, provided it has been
-upgraded to the latest version of the Testkube Control Plane and Testkube Agent.
+Check out the [High-level Architecture](/articles/test-workflows-high-level-architecture) to understand how Workflows
+are used to create Kubernetes Jobs and Pods during execution.
 
-## Use Cases
+## Targeting Runner Agents
 
-Being able to connect multiple Agents to a single Testkube Environment unlocks several advanced usage scenarios,
-including:
-
-- Execute the same set of tests across production, staging or testing environments to ensure consistent test execution.
-- Execute the same set of tests in geographically dispersed environments to ensure consistent application behavior.
-- Execute tests in local sandbox environments during development while having access to the centralized catalog of tests.
-- Execute tests from multiple geographical locations against a (single) environment for realistic performance and e2e testing.
-- Execute tests in ephemeral environments created during CI/CD pipelines for testing and deployment purposes - [Read More](/articles/ephemeral-environments).
-
-## Runner Agents
-
-In addition to the mandatory [Standalone Agent](#the-standalone-agent-in-multi-agent-environments), Testkube also allows you to add an arbitrary number of **Runner Agents**
-to any Environment from the [Agent Management](/testkube-pro/articles/agent-management) section of your Environment Settings or directly with the CLI (see below).
-
-Runner Agents are lightweight agents that can be installed in any namespace/cluster where you need to
-run your Testkube Workflows. Each Runner Agent has a name, a license type, an agent id, and an optional list of labels which
-can be used to select Agents for execution:
-
-![Multi-Agent Management](images/multi-agent-management.png)
-
-:::note
-Testkube Environments always require a Standalone Agent for core functionality - [Read More](#the-standalone-agent-in-multi-agent-environments).
-:::
-
-## Running Workflows on Runner Agents
-
-Once Runner Agents have been added to an Environment, they can be used to execute your Workflows:
+If you want to run a Workflow on a specific Agent instead of the default Standalone Agent, you can do so in several ways:
 
 - Via the Dashboard as described at [Running a Workflow](/articles/testkube-dashboard-workflow-details#running-a-workflow).
 - Via the CLI by using the `--target` argument for the `testkube run testworkflow` command (see below).
@@ -51,13 +25,16 @@ Runner Agents do **not** support execution of legacy Tests and TestSuites.
 
 ## Runner Agent Quickstart
 
+If you don't want to run your Workflows on the default Standalone Agent, you can install and run them on a specific
+Runner Agent as described below:
+
 ### 1. Install your first Runner Agent
 
 After installing the [Testkube CLI](/articles/cli) and using `testkube login` to log in to your
 Testkube Environment, use `testkube install runner <name> --create` command to install your first Runner Agent:
 
 ```sh
-$ testkube install runner staging-runner --create
+$ testkube install agent staging-runner --create --runner
 ```
 
 This will create and install a Runner Agent named `staging-runner` that can now be used to run your Workflows.
@@ -285,13 +262,13 @@ target:
 
 When requesting to run a Workflow on a specific Runner Agent, either by name or label(s), and no
 matching Runner Agent is available, Testkube will queue the execution of the Workflow indefinitely; once a corresponding
-Runner Agent is available, the queued Workflow will be executed accordingly (barring Floating license restrictions [described below](#licensing-for-runner-agents)).
+Runner Agent is available, the queued Workflow will be executed accordingly (barring Floating license restrictions - [Read More](/articles/agents-overview#licensing-for-runner-agents)).
 
 You can abort queued executions using the corresponding [CLI Command](/cli/testkube-abort-testworkflowexecution) or from the Dashboard.
 
-## The Standalone Agent in Multi-Agent Environments
+## Targeting the Standalone Agent 
 
-Each Testkube Environment requires a **[Standalone Agent](standalone-agent)** which provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
+Each Testkube Environment requires a **[Standalone Agent](/articles/install/standalone-agent)** which provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
 
 Standalone Agents are installed when initially creating an Environment and shown on the bottom of the list of Agents with the label `runnertype: superagent`.
 
@@ -303,65 +280,3 @@ Standalone Agents work as a Global Runner Agent (described above) and can also b
 
 The ID is shown in the list of Agents (see below), the Name is the same `xxxx` prefixed with tkcenv instead.
 
-![Standalone Agent ID](images/standalone-agent-id.png)
-
-## Licensing for Runner Agents
-
-Testkube Runner Agents can be assigned either Fixed or Floating licenses.
-
-- Runner Agents assigned a **Fixed License** can always run Workflows independently at any time.
-  The Standalone Agent required for each Testkube Environment always requires a fixed license.
-- Runner Agents assigned a **Floating license** share the ability to execute Workflows concurrently; if one Runner Agent with a floating license is executing a Workflow,
-  a second agent will queue Workflow executions until the first agent is complete. If you, for example, purchase two floating licenses and assign those
-  to 10 agents, two of those agents will be able to execute Workflows concurrently at any give time.
-
-Floating licenses are useful for automated and/or [ephemeral use-cases](/articles/ephemeral-environments) where you don't know in advance how many Runner Agents
-you will have at any given point in time, and/or you don’t mind if your Workflow executions get queued.
-
-### Assigning Licenses to Runner Agents
-
-Runner Agents are by default assigned a fixed license (as in all the examples above), use the `--floating` argument with Runner Agent
-creation commands to instead assign a floating license, for example:
-
-```sh
-# install temporary Runner Agent using a floating license
-$ testkube install runner pr-12u48y34-runner --create --floating
-```
-
-The Runner Agent will be shown with the License Type "Floating" in the list of Agents:
-
-![Runner Agent with Floating license in Agent List](images/floating-agent-in-list.png)
-
-### License Enforcement
-
-The Runner Agent limit for both Fixed and Floating Licenses is counted and enforced at the organization level, i.e., across all your
-environments. Furthermore:
-
-- The [Standalone Agent](#the-standalone-agent-in-multi-agent-environments) required for each Environment will always be assigned a Fixed license.
-- You will only be able to create as many fixed Runner Agents as you have Fixed licenses in your Testkube plan.
-- You will need to have at least one Floating license in your Testkube plan to be able to create Runner Agents with the `--floating` argument.
-
-Please don't hesitate to [Get in Touch](https://testkube.io/contact) if you have any questions/concerns about licensing.
-
-## Agent Token Masking
-
-In the “Organization Management” section, under the “Product Features” tab, there is an option called “Agent Token Masking”.
-When this toggle is enabled, the Testkube Dashboard will no longer display sensitive Runner Agent tokens in the UI.
-
-![Settings - Agent token masking](images/agent-token-masking.png)
-
-:::warning
-**Important:** This masking feature applies **only** to the Testkube Dashboard UI. Agent tokens or secret keys will still be visible in CLI outputs (e.g., when using `testkube create runner` or retrieving details for Helm chart installation as described in [Installing Runner Agent with Helm Charts](/articles/multi-agent-runner-helm-chart)) and in any direct API interactions.
-:::
-
-## Migrating existing Environments
-
-If you have an existing Environment created before the Multi-Agent functionality was introduced, and that Environment already has Workflows being
-executed by CI/CD, CronJobs, Kubernetes Event Triggers, etc., these will continue to be executed on _any_ [Global Runner Agent](#global-runner-agents)
-(including the required Standalone Agent) connected to your Environment unless you update the corresponding triggering commands/configuration
-to target a specific Runner Agent, either by name, group or label as [described above](/articles/install/multi-agent#runner-agent-targeting).
-
-:::info
-Existing Environments that do not make the use of Runner Agents will continue to work as before, it is only
-when you start adding additional Runner Agents that you might need to adjust how your existing Workflows are triggered by external sources.
-:::

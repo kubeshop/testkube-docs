@@ -1,0 +1,91 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Workflow Concurrency & Queueing
+
+By default, Testkube allows multiple executions within the same workflow to run concurrently.
+This means that multiple instances of the same execution can run at the same time, performing the same tests.
+
+There are many reasons as to why you might want to limit concurrency. Here are some examples:
+
+1. only one load test can run at any given time,
+2. a shared resource like a predeployed database may only be used by one execution simultaneously,
+3. you are running tests against the production environment and only up to five tests should run in parallel to limit stability impact, or
+4. a workflow is very heavy and intensive and you only want a few to run at a time to avoid overwhelming your system.
+
+## Workflow Concurrency Policy
+
+### Limit concurrency of this workflow
+
+You can limit the concurrency within a workflow by setting `spec.concurrency.max`.
+Prevent concurrent runs by setting this to `1` or set it to any positive number to
+allow multiple concurrent runs up to this maximum. Setting this to `0` will run unlimited concurrent workflows.
+
+When the maximum amount of concurrent execution is reached, all new executions will remain queued until previously ongoing executions are finished.
+
+```yaml
+kind: TestWorkflow
+spec:
+  concurrency:
+    max: 1
+```
+
+### Limit concurrency across workflows
+
+By default, the concurrency is based on the workflow's name. You can set a `spec.concurrency.group` to instead
+base concurrency on this key. The benefit is that you can use this across multiple workflows. As always, you
+can use templates as a reusable building block across workflows:
+
+```yaml
+kind: TestWorkflowTemplate
+metadata:
+  name: concurrency-shared-database
+spec:
+  concurrency:
+    max: 2
+    group: shared-database
+---
+kind: TestWorkflow
+metadata:
+  name: workflow-foo
+spec:
+  use:
+    - name: concurrency-shared-database
+---
+kind: TestWorkflow
+metadata:
+  name: workflow-bar
+spec:
+  use:
+    - name: concurrency-shared-database
+```
+
+:::note
+We strongly recommend to always use Test Workflow Templates for concurrency groups
+to ensure consistency across workflows.
+:::
+
+## Runner Concurrency Limit
+
+This limit will set a limit to the amount of concurrent executions that can run on your runners.
+By default the runner concurrency limit is set to 250, which means that each runner can run up to 250 executions in parallel.
+Once the threshold is met, further executions will be queued until this runner finishes ongoing executions or another runner candidate picks up this execution.
+
+## Environment Queue Limit
+
+Executions might be queued because there are no matching runner candidates or due to concurrency policies and limits.
+The total queue size has a maximum capacity after which newly scheduled executions will immediately abort.
+
+By default an environment has a queue limit of 1000. 
+
+:::tip
+You can configure the Runner Concurrency Limit and the Environment Queue Limit in the  
+Environment Settings > [Queueing & Concurrency](/testkube-pro/articles/environment-management#queueing--concurrency).
+:::
+
+## Execution Timeouts
+
+Testkube times out executions to improve reliability and fault tolerance of the system:
+
+- Executions stuck in the queue for one day will be aborted.
+- Executions stuck ongoing for seven days will be gracefully aborted; and force aborted twelve hours after that.

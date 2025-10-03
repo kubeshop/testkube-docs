@@ -55,3 +55,4 @@ us know on our Slack channel so we can add it!
 ## User Provisioning and Management
 
 - [SCIM](/articles/scim) - Learn how to integrate Testkube with your Identity Provider using SCIM for automated user provisioning and deprovisioning.
+- [Custom SSO](/articles/custom-sso) - Learn how to integrate a custom SSO provider with Testkube.

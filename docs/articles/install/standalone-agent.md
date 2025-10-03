@@ -431,7 +431,7 @@ testkube-api:
     accessKey: ""
     location: eu-central-1
     bucket: my-testkube-dev
-    SSL: true
+    skipVerify: true
     endpoint_port: ""
   logs:
     storage: "minio"

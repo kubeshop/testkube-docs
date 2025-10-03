@@ -1,78 +1,134 @@
 # Kubernetes Event Triggers
 
-Testkube allows you to automate running Test Workflows by defining triggers on certain events for various Kubernetes resources.
+Testkube allows you to automate the execution of Test Workflows by defining triggers on certain events for various Kubernetes resources.
 
 ## What is a Testkube Event Trigger?
 
 In generic terms, a _Trigger_ defines an _action_ which will be executed for a given _execution_ when a certain _event_ on a specific _resource_ occurs.
 For example, we could define a _TestTrigger_ which _runs_ a _Test_ when a _ConfigMap_ gets _modified_.
 
-In Testkube, Event Triggers allow you to trigger the execution of a Workflow based on Kubernetes Events - for example when a Deployment is updated
+In Testkube, Event Triggers allow you to trigger the execution of a Workflow based on Kubernetes Events - for example, when a Deployment is updated
 or an Ingress gets deleted.
 
 You can currently create/manage Event Triggers in the Testkube Dashboard or by interacting with corresponding Trigger custom resources
 via `kubectl`.
 
-## Creating Test Triggers in the Testkube Dashboard
+## Creating Test Triggers 
 
 Select the Integrations tab (lightning bolt icon) on the left on the Testkube Dashboard to access the "Triggers"
-panel which shows a list of Triggers in your Environment. 
+panel which shows a list of Triggers in your Environment.
 
-The "Create a new trigger" on the right allows you create a new 
+The "Create a new trigger" on the right allows you to create a new
 trigger as described at [create Test Triggers](/articles/integrations-triggers#creating-a-new-trigger).
 
 ![Triggers](../img/integrations-triggers.png)
 
-## Custom Resource Definition Model
-
+:::tip
 Triggers are ultimately defined as Customer Resources in your cluster - [TestTrigger Reference](/articles/crds/tests.testkube.io-v1#testtrigger)
+:::
 
-### Selectors
+## Listener Agents with TestTriggers
 
-Triggers use Selectors to specify which events to listen for.
+Testkube uses [Listener Agents](/articles/agents-overview#listener-agents) or the [Standalone Agent](/articles/agents-overview#the-standalone-agent) 
+to listen for Kubernetes events that will be matched against your TestTriggers. Your Testkube Environment can have any number of 
+Listener Agents, deployed to whichever namespaces/clusters you need to listen for events.
 
-The `resourceSelector` and `testSelector` fields support selecting resources either by name or using
-the Kubernetes [Label Selector](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements).
+The Listener Agent and Standalone Agent by default behave somewhat differently when it comes to listening for events:
+- Listener Agents by default listen for events only in the namespace they are deployed to, if you need to listen for events from 
+  additional namespaces, you can configure this as described at [Listening in additional namespaces](/articles/multi-agent-runner-helm-chart#listening-in-additional-namespaces).
+- The Standalone Agent listens for events in all namespaces, you can configure this as described at 
+  [Multi-namespace Agent Installation](/articles/install/advanced-install#multi-namespace-agent-installation).
 
-Each selector should specify the `namespace` of the object, otherwise the namespace defaults to `testkube`.
+### Listener Agent Event Labels
 
+Events captured by a specific Listener Agents are annotated with a number of testkube.io specific labels:
+
+- `testkube.io/agent-name` - the name of the Listener Agent
+- `testkube.io/agent-namespace` - the namespace of the Listener Agent
+- `testkube.io/resource-name` - the name of the resource triggering the event
+- `testkube.io/resource-namespace` - the namespace of the resource triggering the event
+- `testkube.io/resource-kind` - the kind (i.e. `Deployment`) of the resource triggering the event
+- `testkube.io/resource-group` - the API group (i.e. `apps`) of the resource triggering the event
+- `testkube.io/resource-version` - the API version (i.e. `v1`) of the resource triggering the event
+
+See below how you can select on these labels to define Listener-specific trigger rules.
+
+### Custom Event Labels
+
+During agent installation one can also specify custom labels which will be emitted with each event from the
+Listener Agent by using the following values in the `testkube-runner` Helm chart:
+
+```yaml
+listener:
+  eventLabels:
+    # highlight-next-line
+    deployment-location: eastern-usa
 ```
-selector := resourceSelector | testSelector
-```
 
-#### Name Selector
+## Selectors
 
-Name selectors are used when we want to select a specific resource in a specific namespace.
+Triggers use selectors to determine which events should trigger the action and which workflows should be the target of the trigger action.
+
+### Event Selector
+
+Each event that is emitted by a listener agent has labels on it which could be
+used for selection of a triggering event using the `selector` field:
 
 ```yaml
 selector:
-  name: Kubernetes object name
-  nameRegex: Kubernetes object name regex (for example, "testworkflow.*")
-  namespace: Kubernetes object namespace (default is **testkube**)
-  namespaceRegex: Kubernetes object namespace regex( for example, "test.*")
+  matchLabels: map of key-value pairs
+  matchExpressions:
+    - key: label name
+      operator: [In | NotIn | Exists | DoesNotExist
+      values: list of values
 ```
 
-:::note
-The `namespace` property is only supported for resourceSelectors, and not for testSelectors.
+### Resource Selector
+
+:::warning
+
+The `resource` and `resourceSelector` will be deprecated eventually but are still supported for now, please use the
+`selector` field to match on the builtin labels such as `teskube.io/resource-kind` and `testkube.io/resource-name` to achieve similar
+outcomes.
+
 :::
 
-#### Label Selector
-
-Label selectors are used when we want to select a group of resources in a specific namespace.
+Using the fields `resource` and `resourceSelector` one can select the triggering
+event by the source resource.
 
 ```yaml
-spec:
-  selector:
-    namespace: Kubernetes object namespace (default is **testkube**)
-    labelSelector:
-      matchLabels: map of key-value pairs
-      matchExpressions:
-        - key: label name
-          operator: [In | NotIn | Exists | DoesNotExist
-          values: list of values
+resource: Kinds of resources to match (possible values, `pod`, `deployment`, `statefulset`, `daemonset`, `service`, `ingress`, `event`, `configmap`)
+resourceSelector:
+  name: Kubernetes object name
+  nameRegex: Kubernetes object name regex (for example, "app.*")
+  namespace: Kubernetes object namespace (default is agent's namespace)
+  namespaceRegex: Kubernetes object namespace regex( for example, "test.*")
+  labelSelector:
+    matchLabels: map of key-value pairs
+    matchExpressions:
+      - key: label name
+        operator: [In | NotIn | Exists | DoesNotExist
+        values: list of values
 ```
 
-### Resource Conditions
+### Test Selector
+
+The `testSelector` field could be used to select the target Workflow of the
+trigger action.
+
+```yaml
+testSelector:
+  name: TestWorkflow name
+  nameRegex: TestWorkflow name regex (for example, "test.*")
+  labelSelector:
+    matchLabels: map of key-value pairs
+    matchExpressions:
+      - key: label name
+        operator: [In | NotIn | Exists | DoesNotExist
+        values: list of values
+```
+
+## Resource Conditions
 
 Resource Conditions allows triggers to be defined based on the status conditions for a specific resource.
 
@@ -88,7 +144,7 @@ spec:
         ttl: test trigger condition ttl
 ```
 
-### Resource Probes
+## Resource Probes
 
 Resource Probes allows triggers to be defined based on the probe status.
 
@@ -105,27 +161,86 @@ spec:
         headers: test trigger condition probe headers to submit
 ```
 
-### Targeting specific Runner Agents 
+## Targeting specific Runner Agents
 
-With the introduction of [Multi-Agent Environments](/articles/install/multi-agent) you can optionally specify
+With the introduction of [Runner Agents](/articles/agents-overview#runner-agents) you can optionally specify
 which Runner Agent(s) a Triggered execution should run on. For example
 
 ```yaml
 spec:
   ...
   target:
-    match: 
+    match:
      - application: accounting
 ...
 ```
 
 Will trigger an Execution on any Global Runner Agent with the `application: accounting` label, For more details,
-see our guide on [Runner Agent Targeting](/articles/install/multi-agent#targeting-runner-agents-in-testkube-resources).
+see our guide on [Runner Agent Targeting](/articles/test-workflows-running#runner-agent-targeting).
 
-### Action Parameters
+### Template-based target selection
 
-Action parameters are used to pass config and tag values to the test execution workflow. You can specify either text values or 
-jsonpath expression in a form of `jsonpath={.metadata.name}`. The data will be taken from the resource object of the trigger event. 
+You can resolve values in `target.match` at runtime using Go templates or JSONPath.
+
+- Run on the same agent that handled the event:
+
+```yaml
+spec:
+  action: run
+  actionParameters:
+    target:
+      match:
+        name:
+          - '{{ .Agent.Name }}'
+```
+
+- Target by agent labels (e.g., environment):
+
+```yaml
+spec:
+  action: run
+  actionParameters:
+    target:
+      match:
+        group:
+          - '{{ index .Agent.Labels "env" }}'
+```
+
+Note: Add/update agent labels via CLI: `testkube update agent <agent-name> --label env=eu-west1`.
+
+- Provide custom event labels via environment variable and reference them in templates:
+
+```yaml
+env:
+  - name: EVENT_LABELS
+    value: cluster:dev
+```
+
+Then reference in a template as `{{ index .EventLabels "cluster" }}`.
+
+Tip: To inspect the full event data, run the agent with `DEBUG=true`.
+
+Available template fields (Go templates and JSONPath):
+
+- `Agent.Name` (string)
+- `Agent.Labels` (map) — access with `{{ index .Agent.Labels "<key>" }}`
+- `EventLabels` (map) — includes auto-populated keys:
+    - `testkube.io/agent-name`, `testkube.io/agent-namespace`
+    - `testkube.io/resource-name`, `testkube.io/resource-namespace`
+    - `testkube.io/resource-kind`, `testkube.io/resource-group`, `testkube.io/resource-version`
+    - plus any pairs from `EVENT_LABELS`, e.g., `cluster:dev` → `{{ index .EventLabels "cluster" }}`
+- `Namespace` (string) — namespace of the resource that emitted the event
+- `Object` — the full Kubernetes object for the event
+
+JSONPath scope:
+
+- In `actionParameters`, JSONPath is evaluated against the resource object, so fields can be referenced directly, e.g., `jsonpath={.metadata.name}`.
+- In `target.match`, JSONPath is evaluated against the full event. To reach resource fields, prefix with `.Object`, e.g., `jsonpath={.Object.metadata.name}`. To reach agent or labels: `jsonpath={.Agent.Name}` or `jsonpath={.EventLabels.cluster}`.
+
+## Action Parameters
+
+Action parameters are used to pass config and tag values to the workflow execution. You can specify either text values or
+jsonpath expression in a form of `jsonpath={.metadata.name}`. The data will be taken from the resource object of the trigger event.
 Check the kubernets docs [JsonPath Expression](https://kubernetes.io/docs/reference/kubectl/jsonpath/).
 Also you can use Golang template syntax we support for Webhook processing and take data from Golang object fields.
 
@@ -133,7 +248,7 @@ Also you can use Golang template syntax we support for Webhook processing and ta
 spec:
   actionParameters:
     config: map of key-value pairs
-    tags: map of key-value pairs 
+    tags: map of key-value pairs
 ```
 
 for example:
@@ -159,9 +274,9 @@ spec:
 - **Cause** (can be used instead of **Event**)
   - For deployments - `deployment-scale-update`, `deployment-image-update`, `deployment-env-update`, `deployment-containers-modified`,
     `deployment-generation-modified`, `deployment-resource-modified`
-  - For Testkube events - `event-start-test`, `event-end-test-success`, `event-end-test-failed`, `event-end-test-aborted`, `event-end-test-timeout`, 
-    `event-start-testsuite`, `event-end-testsuite-success`, `event-end-testsuite-failed`, `event-end-testsuite-aborted`, `event-end-testsuite-timeout`, 
-    `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`, `event-end-testworkflow-failed`, `event-end-testworkflow-aborted`, 
+  - For Testkube events - `event-start-test`, `event-end-test-success`, `event-end-test-failed`, `event-end-test-aborted`, `event-end-test-timeout`,
+    `event-start-testsuite`, `event-end-testsuite-success`, `event-end-testsuite-failed`, `event-end-testsuite-aborted`, `event-end-testsuite-timeout`,
+    `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`, `event-end-testworkflow-failed`, `event-end-testworkflow-aborted`,
     `event-created`, `event-updated`, `event-deleted`
 - **Execution** - `test`, `testsuite`, `testworkflow`
 - **ConcurrencyPolicy** - `allow`, `forbid`, `replace`
@@ -174,8 +289,11 @@ Events and values related to Tests and Test Suites have been deprecated and will
 
 ### On Deployment Update
 
-Here is an example for a **Test Trigger** _default/testtrigger-example_ which runs the **TestSuite** _frontend/sanity-test_
-when a **deployment** containing the label **testkube.io/tier: backend** gets **modified** and also has the conditions **Progressing: True: NewReplicaSetAvailable** and **Available: True**.
+Here is an example for a **Test Trigger** _default/testtrigger-example_ which
+runs the **TestWorkflow** _frontend/sanity-test_ when a **deployment** containing
+the label **testkube.io/tier: backend** gets **modified** and also has the
+conditions **Progressing: True: NewReplicaSetAvailable** and **Available:
+True**.
 
 ```yaml
 apiVersion: tests.testkube.io/v1
@@ -184,11 +302,10 @@ metadata:
   name: testtrigger-example
   namespace: default
 spec:
-  resource: deployment
-  resourceSelector:
-    labelSelector:
-      matchLabels:
-        testkube.io/tier: backend
+  selector:
+    matchLabels:
+      testkube.io/resource-kind: Deployment
+      testkube.io/tier: backend
   event: modified
   conditionSpec:
     timeout: 100
@@ -222,8 +339,9 @@ spec:
 ```
 ### On Testkube Cluster Event
 
-You can define **Test Trigger** for Testkube cluster events.
-In below example, if **TestWorkflow** `k6-executor-smoke` is completed succesfully, then we run **TestWorkflow** `postman-smoke-tests`
+You can define **Test Trigger** for Testkube cluster events. In below example,
+if **TestWorkflow** `k6-executor-smoke` is completed succesfully, then we run
+**TestWorkflow** `postman-smoke-tests`
 
 ```yaml
 apiVersion: tests.testkube.io/v1
@@ -232,9 +350,10 @@ metadata:
   name: testtrigger-event
   namespace: testkube
 spec:
-  resource: event
-  resourceSelector:
-    name: k6-smoke-test
+  selector:
+    matchLabels:
+      testkube.io/resource-kind: Event
+      testkube.io/resource-name: k6-smoke-test
   event: event-end-test-success
   action: run
   actionParameters:

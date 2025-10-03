@@ -156,6 +156,11 @@ const sidebars = {
                   label: "Image Inventory",
                   id: "articles/inventory/images",
                 },
+                {
+                  type: "doc",
+                  label: "Distributed Tracing",
+                  id: "articles/tracing",
+                },
               ],
             },
           ],
@@ -191,33 +196,6 @@ const sidebars = {
           label: "Cloud Control Plane",
           id: "articles/install/cloud-overview",
         },
-        {
-          type: "category",
-          label: "Multi-Agent Environments",
-          collapsed: false,
-          items: [
-            {
-              type: "doc",
-              label: "Overview",
-              id: "articles/install/multi-agent",
-            },
-            {
-              type: "doc",
-              label: "Runner Agent Helm Chart",
-              id: "articles/multi-agent-runner-helm-chart",
-            },
-            {
-              type: "doc",
-              label: "CLI Commands",
-              id: "articles/multi-agent-cli",
-            },
-          ],
-        },
-        {
-          type: "doc",
-          label: "Ephemeral Environments",
-          id: "articles/ephemeral-environments",
-        },
         "articles/install/faq",
         {
           type: "doc",
@@ -246,6 +224,37 @@ const sidebars = {
         id: "articles/using-testkube",
       },
       items: [
+        {
+          type: "category",
+          label: "Testkube Environments",
+          items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "testkube-pro/articles/environment-management",
+            },
+            {
+              type: "doc",
+              label: "Testkube Agents",
+              id: "articles/agents-overview",
+            },
+            {
+              type: "doc",
+              label: "Agent Helm Chart",
+              id: "articles/multi-agent-runner-helm-chart",
+            },
+            {
+              type: "doc",
+              label: "Agent CLI Commands",
+              id: "articles/multi-agent-cli",
+            },
+            {
+              type: "doc",
+              label: "Ephemeral Environments",
+              id: "articles/ephemeral-environments",
+            },
+          ],
+        },
         {
           type: "category",
           label: "Testkube Dashboard",
@@ -333,6 +342,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Running Workflows",
+              id: "articles/test-workflows-running",
+            },
+            {
+              type: "doc",
               label: "CLI Commands",
               id: "articles/test-workflows-creating",
             },
@@ -370,6 +384,11 @@ const sidebars = {
               type: "doc",
               label: "Sharding & Matrix Params",
               id: "articles/test-workflows-matrix-and-sharding",
+            },
+            {
+              type: "doc",
+              label: "Concurrency & Queueing",
+              id: "articles/test-workflows-concurrency-queueing",
             },
             {
               type: "doc",
@@ -563,16 +582,6 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Environments",
-              id: "testkube-pro/articles/environment-management",
-            },
-            {
-              type: "doc",
-              label: "Agents",
-              id: "testkube-pro/articles/agent-management",
-            },
-            {
-              type: "doc",
               label: "Members",
               id: "testkube-pro/articles/member-management",
             },
@@ -690,14 +699,14 @@ const sidebars = {
         },
       ],
     },
-        {
-          type: "category",
-          label: "Examples & Guides",
-          link: {
-            type: "doc",
-            id: "articles/examples/overview",
-          },
-          items: [
+    {
+      type: "category",
+      label: "Examples & Guides",
+      link: {
+        type: "doc",
+        id: "articles/examples/overview",
+      },
+      items: [
         {
           type: "category",
           label: "K6",
@@ -1015,7 +1024,8 @@ const sidebars = {
           type: "link",
           label: "Keptn",
           href: "https://testkube.io/learn/leveraging-testkube-as-a-quality-gate-in-multi-stage-deployments-with-keptn",
-          description: "Leveraging Testkube as a Quality Gate in Multi-Stage Deployments with Keptn",
+          description:
+            "Leveraging Testkube as a Quality Gate in Multi-Stage Deployments with Keptn",
         },
         {
           type: "doc",
@@ -1039,13 +1049,15 @@ const sidebars = {
           type: "link",
           label: "PagerDuty",
           href: "https://testkube.io/learn/critical-test-based-alerting-with-pagerduty-and-testkube",
-          description: "Critical Test Based Alerting with PagerDuty and Testkube",
+          description:
+            "Critical Test Based Alerting with PagerDuty and Testkube",
         },
         {
           type: "link",
           label: "Zapier",
           href: "https://testkube.io/learn/integrating-testkube-and-zapier-for-instant-email-alerts",
-          description: "Integrating Testkube and Zapier for Instant Email Alerts",
+          description:
+            "Integrating Testkube and Zapier for Instant Email Alerts",
         },
         { type: "doc", label: "Grafana", id: "articles/grafana" },
         {
@@ -1067,7 +1079,7 @@ const sidebars = {
           type: "doc",
           label: "SCIM",
           id: "articles/scim",
-        }
+        },
       ],
     },
     {
@@ -1078,17 +1090,17 @@ const sidebars = {
         id: "articles/reference",
       },
       items: [
-        {
-          type: "doc",
-          label: "Architecture",
-          id: "articles/architecture",
-        },
-        "articles/helm-components",
-        "articles/telemetry",
-        {
-          type: "category",
-          label: "Testkube CRDs",
-          items: [
+            {
+              type: "doc",
+              label: "Architecture",
+              id: "articles/architecture",
+            },
+            "articles/helm-components",
+            "articles/telemetry",
+            {
+              type: "category",
+              label: "Testkube CRDs",
+              items: [
             {
               type: "doc",
               label: "Overview",

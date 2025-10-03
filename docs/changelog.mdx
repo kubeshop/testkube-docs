@@ -8,6 +8,49 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Monthly Release v1.19.0 (2025-10-01)
+
+This release is available in Helm Chart 2.325.0.
+
+### What's new!
+
+**Concurrency & Queue Policies.**
+This release adds new functionality to manage the concurrency and reliability of executions, allowing you to control the number of executions that can run 
+simultaneously across a single or a group of workflows. This helps you ensure that the number of tests running is always in line with the capacity of 
+both your testing infrastructure and the system-under-test.
+
+**Runner Concurrency Limits** allow you to prevent overwhelming your runners with too many concurrent test executions. Whenever a concurrency threshold is met, 
+the execution will be queued until previous executions finish. Since the execution queue might fill up due to these concurrency features or because no online and 
+matching runners can be found, **Environment Queue Limits** help to prevent your workspace from getting overwhelmed. Once this limit is hit, executions will immediately 
+abort which will also trigger its web hooks for alerting. Lastly, **Execution Time-outs** will abort queued and ongoing executions respectively after 1 day and 7 days 
+with further fail-safes when runners are unable to gracefully abort.
+
+[Read more about Concurrency & Queueing](/articles/test-workflows-concurrency-queueing)
+
+**Listener Agents.**
+This release introduces the concept of [Listener Agents](/articles/agents-overview#listener-agents) that allow you to listen for TestTriggers in multiple namespaces/clusters within a single Testkube Environment.
+We added, a new `selector` field for Test Triggers enables agent-based filtering so you can filter out events from specific Agents and run triggers only in selected environments.
+
+Under the hood, this release introduces a new capabilities model for the Testkube Agent that gives you granular control over how agents operate. Newly created agents can 
+register with runner and/or listener capabilities to fit your architecture.
+
+[Read more about Agents](/articles/agents-overview)
+
+### Improvements and fixes
+
+- Improved overall filter handling to be consistent across workflows/templates and dashboard executions.
+- TestWorkflows: Added support for dynamic runtime environment variable overrides via the `--variable` CLI flag.
+- On-Prem: Fixed an issue where inactive SCIM users were incorrectly counted towards license quotas.
+- Improved Agents page. You can view and install agents with different capabilities.
+- Added OpenTelemetry Tracing to the Control Plane.
+
+### Architectural Improvements
+
+The team is working on some exciting architectural updates to make Testkube more scalable and reliable. Starting from this release, the 
+internal scheduling is changing from a push-based to a pull-based architecture. You should not notice much from this change, likely things 
+become more reliable when the connection between the control plane and agents is flaky. Another benefit is that this sits closer to Kubernetes 
+architecture, which will open interesting opportunities in the future. Stay tuned!
+
 ## Patch Release v1.18.7 (2025-09-08)
 
 This release is available in Helm Chart v2.324.7.
