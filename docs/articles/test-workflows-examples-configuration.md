@@ -164,9 +164,49 @@ When you click **Run now** in the UI, you will be prompted to enter values for a
 
 ### Running with the CLI
 
-You can also pass parameter values via the CLI using the `--config` flag. For environment or secret parameters, use the `--env-var` or `--global-var` options.
+You can pass parameter values via the CLI in two ways:
 
-![Running with CLI](../img/running-with-cli.png)
+1. **Configuration parameters** – override `config` values declared in the workflow schema.
+2. **Environment variables** – define or override runtime environment variables for the execution.  
+
+#### Overriding Configuration Parameters
+
+Use the `--config` flag to supply values for configuration parameters:
+
+```bash
+testkube run testworkflow my-workflow \
+  --config version=1.24.0 \
+  --config workers=4
+```
+
+This overrides the default `version` and `workers` defined in the workflow’s `spec.config`.
+
+#### Overriding Runtime Parameters
+
+In addition to `--config`, you can also define or override runtime environment variables using the `--variable` flag.
+These variables are injected into the container and can be referenced with `{{ env.<parameter> }}`.
+
+**Examples**
+
+Define environment variables dynamically:
+
+```bash
+testkube run testworkflow my-workflow \
+  --variable FOO=bar \
+  --variable DEBUG=true
+```
+
+Combine both `--config` and `--variable` flags:
+
+```bash
+testkube run testworkflow my-workflow \
+  --config version=1.32.3 \
+  --config workers=6 \
+  --variable API_URL=https://api.staging.acme.io \
+  --variable LOG_LEVEL=debug
+```
+
+This lets you override schema-defined parameters while also injecting ad-hoc environment variables for a specific execution.
 
 ### Providing Parameters to Referenced Workflows
 
