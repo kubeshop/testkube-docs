@@ -1,3 +1,5 @@
+import path from 'path';
+
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
@@ -88,6 +90,9 @@ const config = {
         specs: [...agentRedocSpecs, ...cloudRedocSpecs],
         theme: {
           primaryColor: "#818cf8",
+          options: {
+            hideDownloadButtons: true,
+          }
         },
       },
     ],
