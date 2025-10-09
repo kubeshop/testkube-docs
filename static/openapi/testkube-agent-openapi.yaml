@@ -1,3 +1,4303 @@
+openapi: 3.0.1
+info:
+  title: Testkube Standalone Agent API
+  description: API for Testkube Standalone Agent
+  contact:
+    email: info@testkube.io
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 1.0.0
+servers:
+  - url: https://api.testkube.io
+    description: Testkube Cloud Control Plane API Endpoint
+  - url: https://<your-testkube-api-host>
+    description: Testkube On-Prem API Endpoint
+paths:
+  /triggers:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/Namespace'
+        - $ref: '#/components/parameters/Selector'
+      summary: List test triggers
+      description: List test triggers from the kubernetes cluster
+      operationId: listTestTriggers
+      responses:
+        '200':
+          description: successful list operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestTrigger'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create new test trigger
+      description: Create new test trigger CRD inside a Kubernetes cluster
+      operationId: createTestTrigger
+      requestBody:
+        description: test trigger body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestTriggerUpsertRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestTrigger'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: >-
+            problem with test trigger definition - probably some bad input
+            occurs (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Bulk update test triggers
+      description: Updates test triggers provided as an array in the request body
+      operationId: bulkUpdateTestTriggers
+      requestBody:
+        description: array of test trigger upsert requests
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TestTriggerUpsertRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestTrigger'
+        '400':
+          description: >-
+            problem with test trigger definition - probably some bad input
+            occurs (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete test triggers
+      description: Deletes all or labeled test triggers
+      operationId: deleteTestTriggers
+      parameters:
+        - $ref: '#/components/parameters/Namespace'
+        - $ref: '#/components/parameters/Selector'
+      responses:
+        '204':
+          description: no content
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: test trigger not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /triggers/{id}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/Namespace'
+      summary: Get test trigger by ID
+      description: Get test trigger by ID from CRD in kubernetes cluster
+      operationId: getTestTriggerByID
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestTrigger'
+            text/yaml:
+              schema:
+                type: string
+        '404':
+          description: test trigger not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    patch:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/Namespace'
+      summary: Update test trigger
+      description: Update test trigger
+      operationId: updateTestTrigger
+      requestBody:
+        description: test trigger upsert request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestTriggerUpsertRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestTrigger'
+        '400':
+          description: >-
+            problem with test trigger definition - probably some bad input
+            occurs (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: test trigger not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/Namespace'
+      summary: Delete test trigger
+      description: Deletes a test trigger
+      operationId: deleteTestTrigger
+      responses:
+        '204':
+          description: no content
+        '404':
+          description: test trigger not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-suites:
+    post:
+      summary: Create new test suite
+      description: Create new test suite action
+      operationId: createTestSuite
+      requestBody:
+        description: test details body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestSuiteUpsertRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/yaml:
+              schema:
+                type: string
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestSuite'
+        '400':
+          description: >-
+            problem with test suite definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    get:
+      summary: Get all test suites
+      description: Returns array of test suites
+      operationId: listTestSuites
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+        - $ref: '#/components/parameters/TextSearch'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestSuite'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input for CRD generation
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with listing test suites from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete test suites
+      description: Deletes all or labeled test suites
+      operationId: deleteTestSuites
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+      responses:
+        '204':
+          description: no content
+        '404':
+          description: test suite not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-suites/{id}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Get test suite by ID
+      description: Returns test suite with given name
+      operationId: getTestSuiteByID
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestSuite'
+            text/yaml:
+              schema:
+                type: string
+        '404':
+          description: test suite not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: could not get execution result from the database
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    patch:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Update test suite
+      description: Update test based on test suite content or git based data
+      operationId: updateTestSuite
+      requestBody:
+        description: test suite details body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestSuiteUpdateRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestSuite'
+        '400':
+          description: >-
+            problem with test suite definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: test suite not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/SkipDeleteCRD'
+      summary: Delete test suite
+      description: Deletes a test suite
+      operationId: deleteTestSuite
+      responses:
+        '204':
+          description: no content
+        '404':
+          description: test suite not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-suites/{id}/metrics:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/LastNDays'
+        - $ref: '#/components/parameters/Limit'
+      summary: Get test suite metrics
+      description: >-
+        Gets test suite metrics for given tests executions, with particular
+        execution status and timings
+      operationId: getTestSuiteMetrics
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutionsMetrics'
+        '500':
+          description: problem with read information from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-suites/{id}/tests:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: List tests for test suite
+      description: List available tests for test suite
+      operationId: listTestSuiteTests
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Test'
+            text/yaml:
+              schema:
+                type: string
+        '404':
+          description: test suite not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-suites/{id}/abort:
+    post:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Abort all executions of a test suite
+      description: Abort all test executions of a test suite
+      operationId: abortTestSuiteExecutions
+      responses:
+        '204':
+          description: no content
+        '404':
+          description: no execution found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with aborting test suite execution
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-suites/{id}/executions:
+    post:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/Namespace'
+        - $ref: '#/components/parameters/LastNDays'
+        - $ref: '#/components/parameters/TestSuiteExecutionName'
+      summary: Starts new test suite execution
+      description: >-
+        New test suite execution returns new execution details on successful
+        execution start
+      operationId: executeTestSuite
+      requestBody:
+        description: body passed to configure execution
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestSuiteExecutionRequest'
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestSuiteExecutionsResult'
+        '400':
+          description: problem with request body
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: test suite not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with test suite execution
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/PageIndex'
+        - $ref: '#/components/parameters/TestExecutionsStatusFilter'
+        - $ref: '#/components/parameters/StartDateFilter'
+        - $ref: '#/components/parameters/EndDateFilter'
+      summary: Get all test suite executions
+      description: Returns array of all available test suite executions
+      operationId: listTestSuiteExecutions
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestSuiteExecutionsResult'
+        '500':
+          description: problem with getting test suite executions from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-suites/{id}/executions/{executionID}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/executionID'
+      summary: Get test suite execution
+      description: Returns test suite execution with given executionID
+      operationId: getTestSuiteExecution
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestSuiteExecution'
+        '404':
+          description: test not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting test suite executions from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with Kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    patch:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/executionID'
+      summary: Aborts testsuite execution
+      description: Aborts testsuite execution with given executionID
+      operationId: abortTestSuiteExecution
+      responses:
+        '204':
+          description: no content
+        '404':
+          description: test suite not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with read information from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-suites/{id}/executions/{executionID}/artifacts:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/executionID'
+      summary: Get test suite execution artifacts
+      description: Returns test suite execution artifacts with given executionID
+      operationId: getTestSuiteExecutionArtifactsByTestsuite
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Artifact'
+        '404':
+          description: test suite not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting test suite executions from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-suite-with-executions:
+    get:
+      summary: Get all test suite with executions
+      description: Returns array of test suite with executions
+      operationId: listTestSuiteWithExecutions
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+        - $ref: '#/components/parameters/TextSearch'
+        - $ref: '#/components/parameters/TestExecutionsStatusFilter'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/PageIndex'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestSuiteWithExecutionSummary'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting test suite with executions from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with getting test suite from Kubernetes clusteer
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-suite-with-executions/{id}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Get test suite by ID with execution
+      description: Returns test suite with given name with execution
+      operationId: getTestSuiteByIDWithExecution
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestSuiteWithExecution'
+            text/yaml:
+              schema:
+                type: string
+        '500':
+          description: problem with getting test suite with execution from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-suite-executions:
+    post:
+      parameters:
+        - $ref: '#/components/parameters/Namespace'
+        - $ref: '#/components/parameters/Selector'
+        - $ref: '#/components/parameters/ConcurrencyLevel'
+      summary: Starts new test suite executions
+      description: >-
+        New test suite executions returns new executions details on successful
+        executions start
+      operationId: executeTestSuites
+      requestBody:
+        description: body passed to configure executions
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestSuiteExecutionRequest'
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestSuiteExecutionsResult'
+        '400':
+          description: problem with request body
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with test suites executions
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    get:
+      summary: Get all test suite executions
+      description: Returns array of test suite executions
+      operationId: listAllTestSuiteExecutions
+      parameters:
+        - $ref: '#/components/parameters/LastNDays'
+        - $ref: '#/components/parameters/TestName'
+        - $ref: '#/components/parameters/TextSearch'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/PageIndex'
+        - $ref: '#/components/parameters/TestExecutionsStatusFilter'
+        - $ref: '#/components/parameters/StartDateFilter'
+        - $ref: '#/components/parameters/EndDateFilter'
+        - $ref: '#/components/parameters/Selector'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestSuiteExecutionsResult'
+        '500':
+          description: problem with getting test suite executions from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-suite-executions/{executionID}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/executionID'
+        - $ref: '#/components/parameters/LastNDays'
+      summary: Get test suite execution by ID
+      description: Returns test suite execution with given executionID
+      operationId: getTestSuiteExecutionByID
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestSuiteExecution'
+        '500':
+          description: problem with getting test suite execution from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    patch:
+      parameters:
+        - $ref: '#/components/parameters/executionID'
+      summary: Aborts testsuite execution
+      description: Aborts testsuite execution with given executionID
+      operationId: abortTestSuiteExecutionByID
+      responses:
+        '204':
+          description: no content
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-suite-executions/{executionID}/artifacts:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/executionID'
+      summary: Get test suite execution artifacts
+      description: Returns test suite execution artifacts with given executionID
+      operationId: getTestSuiteExecutionArtifacts
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Artifact'
+        '500':
+          description: problem with getting test suite executions from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /executions:
+    post:
+      parameters:
+        - $ref: '#/components/parameters/Namespace'
+        - $ref: '#/components/parameters/Selector'
+        - $ref: '#/components/parameters/ExecutionSelector'
+        - $ref: '#/components/parameters/ConcurrencyLevel'
+      summary: Starts new test executions
+      description: >-
+        New test executions returns new executions details on successful
+        executions start
+      operationId: executeTests
+      requestBody:
+        description: body passed to configure executions
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecutionRequest'
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExecutionResult'
+        '400':
+          description: problem with request body
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: test not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with test executions
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    get:
+      summary: Get all test executions
+      description: Returns array of test executions
+      operationId: listExecutions
+      parameters:
+        - $ref: '#/components/parameters/TestName'
+        - $ref: '#/components/parameters/Type'
+        - $ref: '#/components/parameters/TextSearch'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/PageIndex'
+        - $ref: '#/components/parameters/ExecutionsStatusFilter'
+        - $ref: '#/components/parameters/StartDateFilter'
+        - $ref: '#/components/parameters/EndDateFilter'
+        - $ref: '#/components/parameters/Selector'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutionsResult'
+        '404':
+          description: execution not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting test executions from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /executions/{executionID}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/executionID'
+      summary: Get test execution by ID
+      description: Returns execution with given executionID
+      operationId: getExecutionByID
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Execution'
+        '404':
+          description: execution not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting test executions from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with reading secrets from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /executions/{id}/artifacts:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Get execution's artifacts by ID
+      description: Returns artifacts of the given executionID
+      operationId: getExecutionArtifacts
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Artifact'
+        '404':
+          description: execution not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting execution's artifacts from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /executions/{id}/logs:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Get execution's logs by ID
+      description: Returns logs of the given executionID
+      operationId: getExecutionLogs
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExecutorOutput'
+        '500':
+          description: problem with getting execution's logs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /executions/{id}/logs/v2:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Get execution's logs by ID version 2
+      description: Returns logs of the given executionID version 2
+      operationId: getExecutionLogsV2
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LogV2'
+        '500':
+          description: problem with getting execution's logs version 2
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /executions/{id}/artifacts/{filename}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/Filename'
+      summary: Download artifact
+      description: Download the artifact file from the given execution
+      operationId: downloadFile
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: execution not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting artifacts from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /executions/{id}/artifact-archive:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/Mask'
+      summary: Download artifact archive
+      description: Download the artifact archive from the given execution
+      operationId: downloadArchive
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: execution not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting artifact archive from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /tests:
+    get:
+      summary: List tests
+      description: List available tests
+      operationId: listTests
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+        - $ref: '#/components/parameters/TextSearch'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Test'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: invalid parameters
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create new test
+      description: Create new test based on file content, uri or git based data
+      operationId: createTest
+      requestBody:
+        description: test details body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestUpsertRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/yaml:
+              schema:
+                type: string
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Test'
+        '400':
+          description: >-
+            problem with test definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete tests
+      description: Deletes all or labeled tests
+      operationId: deleteTests
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+      responses:
+        '204':
+          description: no content
+        '404':
+          description: no tests found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with deleting tests and their executions
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /tests/{id}:
+    patch:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Update test
+      description: Update test based on test content or git based data
+      operationId: updateTest
+      requestBody:
+        description: test details body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestUpdateRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Test'
+        '400':
+          description: >-
+            problem with test definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: test not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Get test
+      description: Gets the specified test
+      operationId: getTest
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Test'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: invalid parameters
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: test not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/SkipDeleteExecutions'
+        - $ref: '#/components/parameters/SkipDeleteCRD'
+      summary: Delete test
+      description: Deletes a test
+      operationId: deleteTest
+      responses:
+        '204':
+          description: no content
+        '404':
+          description: no tests found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with deleting test and its executions
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /tests/{id}/abort:
+    post:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Abort all executions of a test
+      description: Abort all test executions
+      operationId: abortTestExecutions
+      responses:
+        '204':
+          description: no content
+        '404':
+          description: no execution found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with aborting test execution
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /tests/{id}/metrics:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/LastNDays'
+        - $ref: '#/components/parameters/Limit'
+      summary: Get test metrics
+      description: >-
+        Gets test metrics for given tests executions, with particular execution
+        status and timings
+      operationId: getTestMetrics
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutionsMetrics'
+        '500':
+          description: problem with getting metrics
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with read information from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /tests/{id}/executions:
+    post:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/Namespace'
+        - $ref: '#/components/parameters/TestExecutionName'
+      summary: Starts new test execution
+      description: >-
+        New test execution returns new execution details on successful execution
+        start
+      operationId: executeTest
+      requestBody:
+        description: body passed to configure execution
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecutionRequest'
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutionResult'
+        '400':
+          description: problem with request body
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: test not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with test execution
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/LastNDays'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/PageIndex'
+        - $ref: '#/components/parameters/ExecutionsStatusFilter'
+        - $ref: '#/components/parameters/StartDateFilter'
+        - $ref: '#/components/parameters/EndDateFilter'
+      summary: Get all test executions
+      description: Returns array of all available test executions
+      operationId: listTestExecutions
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutionsResult'
+        '404':
+          description: test or execution not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting test executions from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /tests/{id}/executions/{executionID}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/executionID'
+      summary: Get test execution
+      description: Returns execution with given executionID
+      operationId: getTestExecution
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Execution'
+        '404':
+          description: execution not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting test executions from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with reading secrets from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    patch:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/executionID'
+      summary: Aborts execution
+      description: Aborts execution with given executionID
+      operationId: abortExecution
+      responses:
+        '204':
+          description: no content
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-with-executions:
+    get:
+      summary: List test with executions
+      description: List available test with executions
+      operationId: listTestWithExecutions
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+        - $ref: '#/components/parameters/TextSearch'
+        - $ref: '#/components/parameters/ExecutionsStatusFilter'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/PageIndex'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestWithExecutionSummary'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: invalid parameters
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting tests and their executions
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-with-executions/{id}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Get test with execution
+      description: Gets the specified test with execution
+      operationId: getTestWithExecution
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestWithExecution'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: invalid parameters
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: no tests found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting tests and their executions
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /executors:
+    get:
+      summary: List executors
+      description: List executors available in cluster
+      operationId: listExecutors
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Executor'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input for CRD generation
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create new executor
+      description: Create new executor based on variables passed in request
+      operationId: createExecutor
+      requestBody:
+        description: executor request body data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecutorUpsertRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/yaml:
+              schema:
+                type: string
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutorDetails'
+        '400':
+          description: >-
+            problem with executor definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete executors
+      description: Deletes labeled executors
+      operationId: deleteExecutors
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+      responses:
+        '204':
+          description: no content
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /executors/{id}:
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Delete executor
+      description: Deletes executor by its name
+      operationId: deleteExecutor
+      responses:
+        '204':
+          description: executor deleted successfuly
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Get executor details
+      description: Returns executors data with executions passed to executor
+      operationId: getExecutor
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutorDetails'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input for CRD generation
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting executor data
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    patch:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Update executor
+      description: Update new executor based on variables passed in request
+      operationId: updateExecutor
+      requestBody:
+        description: executor request body data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecutorUpdateRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutorDetails'
+        '400':
+          description: >-
+            problem with executor definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: executor not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /executor-by-types:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/TestType'
+      summary: Get executor details by type
+      description: Returns executors data with executions passed to executor
+      operationId: getExecutorByType
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutorDetails'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input for CRD generation
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting executor data
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /webhooks:
+    get:
+      summary: List webhooks
+      description: List webhooks available in cluster
+      operationId: listWebhooks
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Webhook'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input for CRD generation
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create new webhook
+      description: Create new webhook based on variables passed in request
+      operationId: createWebhook
+      requestBody:
+        description: webhook request body data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookCreateRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/yaml:
+              schema:
+                type: string
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '400':
+          description: >-
+            problem with webhook definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete webhooks
+      description: Deletes labeled webhooks
+      operationId: deleteWebhooks
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+      responses:
+        '204':
+          description: no content
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /webhooks/{id}:
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Delete webhook
+      description: Deletes webhook by its name
+      operationId: deleteWebhook
+      responses:
+        '204':
+          description: webhook deleted successfuly
+        '404':
+          description: webhook not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Get webhook details
+      description: Returns webhook
+      operationId: getWebhook
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input for CRD generation
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: webhook not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting webhook data
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    patch:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Update new webhook
+      description: Update new webhook based on variables passed in request
+      operationId: updateWebhook
+      requestBody:
+        description: webhook request body data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookUpdateRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '400':
+          description: >-
+            problem with webhook definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: webhook not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /webhook-templates:
+    get:
+      summary: List webhook templates
+      description: List webhook templates available in cluster
+      operationId: listWebhookTemplates
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebhookTemplate'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input for CRD generation
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create new webhook template
+      description: Create new webhook template based on variables passed in request
+      operationId: createWebhookTemplate
+      requestBody:
+        description: webhook template request body data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookTemplateCreateRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/yaml:
+              schema:
+                type: string
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookTemplate'
+        '400':
+          description: >-
+            problem with webhook template definition - probably some bad input
+            occurs (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete webhook templates
+      description: Deletes labeled webhook templates
+      operationId: deleteWebhookTemplates
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+      responses:
+        '204':
+          description: no content
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /webhook-templates/{id}:
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Delete webhook template
+      description: Deletes webhook template by its name
+      operationId: deleteWebhookTemplate
+      responses:
+        '204':
+          description: webhook template deleted successfuly
+        '404':
+          description: webhook template not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Get webhook template details
+      description: Returns webhook template
+      operationId: getWebhookTemplate
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookTemplate'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input for CRD generation
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: webhook template not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting webhook template data
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    patch:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Update new webhook template
+      description: Update new webhook template based on variables passed in request
+      operationId: updateWebhookTemplate
+      requestBody:
+        description: webhook template request body data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookTemplateUpdateRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookTemplate'
+        '400':
+          description: >-
+            problem with webhook template definition - probably some bad input
+            occurs (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: webhook template not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /templates:
+    get:
+      summary: List templates
+      description: List templates available in cluster
+      operationId: listTemplates
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Template'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input for CRD generation
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create new template
+      description: Create new template based on variables passed in request
+      operationId: createTemplate
+      requestBody:
+        description: template request body data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateCreateRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/yaml:
+              schema:
+                type: string
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Template'
+        '400':
+          description: >-
+            problem with template definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete templates
+      description: Deletes labeled templates
+      operationId: deleteTemplates
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+      responses:
+        '204':
+          description: no content
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /templates/{id}:
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Delete template
+      description: Deletes template by its name
+      operationId: deleteTemplate
+      responses:
+        '204':
+          description: template deleted successfuly
+        '404':
+          description: template not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Get template details
+      description: Returns template
+      operationId: getTemplate
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Template'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input for CRD generation
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: template not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting template data
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    patch:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Update new template
+      description: Update new template based on variables passed in request
+      operationId: updateTemplate
+      requestBody:
+        description: template request body data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateUpdateRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Template'
+        '400':
+          description: >-
+            problem with template definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: template not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-sources:
+    get:
+      summary: List test sources
+      description: List test sources available in cluster
+      operationId: listTestSources
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestSource'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input for CRD generation
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create new test source
+      description: Create new test source based on variables passed in request
+      operationId: createTestSource
+      requestBody:
+        description: test source request body data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestSourceUpsertRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/yaml:
+              schema:
+                type: string
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestSource'
+        '400':
+          description: >-
+            problem with test source definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Process test source batch (create, update, delete)
+      description: Process test source batch based on variables passed in request
+      operationId: processTestSourceBatch
+      requestBody:
+        description: test source batch request body data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestSourceBatchRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestSourceBatchResult'
+        '400':
+          description: >-
+            problem with test source definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete test sources
+      description: Deletes labeled test sources
+      operationId: deleteTestSources
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+      responses:
+        '204':
+          description: no content
+        '502':
+          description: problem with read information from kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-sources/{id}:
+    patch:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Update test source
+      description: Update test source based on test content or git based data
+      operationId: updateTestSource
+      requestBody:
+        description: test source body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestSourceUpdateRequest'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestSource'
+        '400':
+          description: >-
+            problem with test source definition - probably some bad input occurs
+            (invalid JSON body or similar)
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: test source not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Delete test source
+      description: Deletes test source by its name
+      operationId: deleteTestSource
+      responses:
+        '204':
+          description: test source deleted successfuly
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Get test source data
+      description: Returns test sources data
+      operationId: getTestSource
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestSource'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with input for CRD generation
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: test source not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting test source data
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem with communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflows:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+      summary: List test workflows
+      description: List test workflows from the kubernetes cluster
+      operationId: listTestWorkflows
+      responses:
+        '200':
+          description: successful list operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestWorkflow'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+        - $ref: '#/components/parameters/TestWorkflowNames'
+      summary: Delete test workflows
+      description: Delete test workflows from the kubernetes cluster
+      operationId: deleteTestWorkflows
+      responses:
+        '204':
+          description: no content
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create test workflow
+      description: Create test workflow in the kubernetes cluster
+      operationId: createTestWorkflow
+      requestBody:
+        description: test workflow body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestWorkflow'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful creation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestWorkflow'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with body parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    put:
+      summary: Validate test workflow
+      description: Validate test workflow specification against CRD schema
+      operationId: validateTestWorkflow
+      requestBody:
+        description: test workflow body
+        required: true
+        content:
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '204':
+          description: no content
+        '400':
+          description: problem with body parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflows/{id}/executions:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/TagSelector'
+        - $ref: '#/components/parameters/ActorName'
+        - $ref: '#/components/parameters/ActorType'
+      summary: List test workflow executions
+      description: List test workflow executions
+      operationId: listTestWorkflowExecutionsByTestWorkflow
+      responses:
+        '200':
+          description: successful list operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestWorkflowExecutionsResult'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    post:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/TestWorkflowExecutionName'
+      summary: Execute test workflow
+      description: Execute test workflow in the kubernetes cluster
+      operationId: executeTestWorkflow
+      requestBody:
+        description: test workflow execution request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestWorkflowExecutionRequest'
+      responses:
+        '200':
+          description: successful execution
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestWorkflowExecution'
+        '400':
+          description: problem with body parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflows/{id}/tags:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: List test workflow execution tags
+      description: List test workflow execution tags for all executed test workflows
+      operationId: listTestWorkflowTagsByTestWorkflow
+      responses:
+        '200':
+          description: successful list operation
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    type: string
+                example:
+                  app:
+                    - backend
+                  env:
+                    - prod
+                  toDelete:
+                    - 'yes'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflows/{id}/metrics:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Get test workflow metrics
+      description: Get metrics of test workflow executions
+      operationId: getTestWorkflowMetrics
+      responses:
+        '200':
+          description: successful list operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutionsMetrics'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflows/{id}/executions/{executionID}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/executionID'
+      summary: Get test workflow execution
+      description: Get test workflow execution details
+      operationId: getTestWorkflowExecutionByTestWorkflow
+      responses:
+        '200':
+          description: successful list operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestWorkflowExecution'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflows/{id}/executions/{executionID}/abort:
+    post:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/executionID'
+        - $ref: '#/components/parameters/ForceAgent'
+      summary: Abort test workflow execution
+      description: Abort test workflow execution
+      operationId: abortTestWorkflowExecutionByTestWorkflow
+      responses:
+        '204':
+          description: no content
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflows/{id}/executions/{executionID}/rerun:
+    post:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/executionID'
+      summary: Rerun test workflow execution
+      description: Rerun test workflow execution
+      operationId: rerunTestWorkflowExecutionByTestWorkflow
+      requestBody:
+        description: test workflow running context
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestWorkflowRunningContext'
+      responses:
+        '200':
+          description: successful execution
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestWorkflowExecution'
+        '400':
+          description: problem with body parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflows/{id}/abort:
+    post:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Abort all test workflow executions
+      description: Abort all test workflow executions
+      operationId: abortAllTestWorkflowExecutions
+      responses:
+        '204':
+          description: no content
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflows/{id}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Get test workflow details
+      description: Get test workflow details from the kubernetes cluster
+      operationId: getTestWorkflow
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestWorkflow'
+            text/yaml:
+              schema:
+                type: string
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: the resource has not been found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    put:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Update test workflow details
+      description: Update test workflow details in the kubernetes cluster
+      operationId: updateTestWorkflow
+      requestBody:
+        description: test workflow body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestWorkflow'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestWorkflow'
+            text/yaml:
+              schema:
+                type: string
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: the resource has not been found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/SkipDeleteExecutions'
+        - $ref: '#/components/parameters/SkipDeleteCRD'
+      summary: Delete test workflow
+      description: Delete test workflow from the kubernetes cluster
+      operationId: deleteTestWorkflow
+      responses:
+        '204':
+          description: no content
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: the resource has not been found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflow-with-executions:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+      summary: List test workflows with latest execution
+      description: List test workflows from the kubernetes cluster with latest execution
+      operationId: listTestWorkflowWithExecutions
+      responses:
+        '200':
+          description: successful list operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestWorkflowWithExecutionSummary'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflow-with-executions/{id}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Get test workflow details with latest execution
+      description: >-
+        Get test workflow details from the kubernetes cluster with latest
+        execution
+      operationId: getTestWorkflowWithExecution
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestWorkflowWithExecution'
+            text/yaml:
+              schema:
+                type: string
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: the resource has not been found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflow-with-executions/{id}/tags:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: List test workflow execution tags
+      description: List test workflow execution tags for all executed test workflows
+      operationId: listTestWorkflowWithExecutionTags
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    type: string
+                example:
+                  app:
+                    - backend
+                  env:
+                    - prod
+                  toDelete:
+                    - 'yes'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflow-executions:
+    post:
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+        - $ref: '#/components/parameters/ConcurrencyLevel'
+      summary: Execute test workflows
+      description: Execute test workflows in the kubernetes cluster
+      operationId: executeTestWorkflows
+      requestBody:
+        description: test workflow execution request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestWorkflowExecutionRequest'
+      responses:
+        '200':
+          description: successful execution
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestWorkflowExecution'
+        '400':
+          description: problem with body parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/TagSelector'
+        - $ref: '#/components/parameters/ActorName'
+        - $ref: '#/components/parameters/ActorType'
+      summary: List test workflow executions
+      description: List test workflow executions
+      operationId: listTestWorkflowExecutions
+      responses:
+        '200':
+          description: successful list operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestWorkflowExecutionsResult'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflow-executions/{executionID}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/executionID'
+      summary: Get test workflow execution
+      description: Get test workflow execution details
+      operationId: getTestWorkflowExecution
+      responses:
+        '200':
+          description: successful list operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestWorkflowExecution'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflow-executions/{executionID}/artifacts:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/executionID'
+      summary: Get test workflow execution's artifacts by ID
+      description: Returns artifacts of the given executionID
+      operationId: getTestWorkflowExecutionArtifacts
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Artifact'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: execution not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting execution's artifacts from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflow-executions/{executionID}/artifacts/{filename}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/executionID'
+        - $ref: '#/components/parameters/Filename'
+      summary: Download test workflow artifact
+      description: Download the artifact file from the given execution
+      operationId: downloadTestWorkflowArtifact
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: execution not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting artifacts from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflow-executions/{executionID}/artifact-archive:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/executionID'
+        - $ref: '#/components/parameters/Mask'
+      summary: Download test workflow artifact archive
+      description: Download the artifact archive from the given execution
+      operationId: downloadTestWorkflowArtifactArchive
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: execution not found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '500':
+          description: problem with getting artifact archive from storage
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflow-executions/{executionID}/abort:
+    post:
+      parameters:
+        - $ref: '#/components/parameters/executionID'
+        - $ref: '#/components/parameters/ForceAgent'
+      summary: Abort test workflow execution
+      description: Abort test workflow execution
+      operationId: abortTestWorkflowExecution
+      responses:
+        '204':
+          description: no content
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflow-executions/{executionID}/rerun:
+    post:
+      parameters:
+        - $ref: '#/components/parameters/executionID'
+      summary: Rerun test workflow execution
+      description: Rerun test workflow execution
+      operationId: rerunTestWorkflowExecution
+      requestBody:
+        description: test workflow running context
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestWorkflowRunningContext'
+      responses:
+        '200':
+          description: successful execution
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestWorkflowExecution'
+        '400':
+          description: problem with body parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflow-templates:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+      summary: List test workflow templates
+      description: List test workflow templates from the kubernetes cluster
+      operationId: listTestWorkflowTemplates
+      responses:
+        '200':
+          description: successful list operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestWorkflowTemplate'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/Selector'
+      summary: Delete test workflow templates
+      description: Delete test workflow templates from the kubernetes cluster
+      operationId: deleteTestWorkflowTemplates
+      responses:
+        '204':
+          description: no content
+        '400':
+          description: problem with selector parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create test workflow template
+      description: Create test workflow template in the kubernetes cluster
+      operationId: createTestWorkflowTemplate
+      requestBody:
+        description: test workflow template body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestWorkflowTemplate'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful creation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestWorkflowTemplate'
+            text/yaml:
+              schema:
+                type: string
+        '400':
+          description: problem with body parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    put:
+      summary: Validate test workflow template
+      description: Validate test workflow template specification against CRD schema
+      operationId: validateTestWorkflowTemplate
+      requestBody:
+        description: test workflow template body
+        required: true
+        content:
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '204':
+          description: no content
+        '400':
+          description: problem with body parsing - probably some bad input occurs
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+  /test-workflow-templates/{id}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Get test workflow template details
+      description: Get test workflow template details from the kubernetes cluster
+      operationId: getTestWorkflowTemplate
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestWorkflowTemplate'
+            text/yaml:
+              schema:
+                type: string
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: the resource has not been found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    put:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Update test workflow template details
+      description: Update test workflow template details in the kubernetes cluster
+      operationId: updateTestWorkflowTemplate
+      requestBody:
+        description: test workflow template body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestWorkflowTemplate'
+          text/yaml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestWorkflowTemplate'
+            text/yaml:
+              schema:
+                type: string
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: the resource has not been found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      summary: Delete test workflow template
+      description: Delete test workflow template from the kubernetes cluster
+      operationId: deleteTestWorkflowTemplate
+      responses:
+        '204':
+          description: no content
+        '402':
+          description: missing Pro subscription for a commercial feature
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '404':
+          description: the resource has not been found
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
+        '502':
+          description: problem communicating with kubernetes cluster
+          content:
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Problem'
 components:
   schemas:
     ExecutionsMetrics:

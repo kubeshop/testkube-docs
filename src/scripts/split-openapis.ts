@@ -45,6 +45,9 @@ async function splitOpenAPIByPaths(
   outputDir: string,
   docsDir: string,
   title: string,
+  mergedSpecFolder: string,
+  mergedSpecFile: string,
+  mergedSpecInfo: object,
   pathFilter?: (path: string) => {
     basePath?: string;
     submenu?: string;
@@ -63,9 +66,8 @@ async function splitOpenAPIByPaths(
 
   // extract components to shared file
   if (components) {
-    const componentsFile = path.join(outputDir, "components.yaml");
     fs.writeFileSync(
-      componentsFile,
+      path.join(outputDir, "components.yaml"),
       yaml.dump({ components: components }, { sortKeys: false })
     );
   }
@@ -105,17 +107,37 @@ async function splitOpenAPIByPaths(
     }
   }
 
+  const mergedOpenAPI: OpenAPI = {
+    openapi: openapi.openapi || "3.0.0",
+    info: mergedSpecInfo,
+    servers: [
+      {
+        url: "https://api.testkube.io",
+        description: "Testkube Cloud Control Plane API Endpoint",
+      },
+      {
+        url: "https://<your-testkube-api-host>",
+        description: "Testkube On-Prem API Endpoint",
+      },
+    ],
+    paths: {},
+    components: components || {}
+  };
+
   // now create new openapi file for each mapping
   openapis.forEach((paths, rootPath) => {
     const fileName = rootPath.replace(/[\/\s{}:\.]/g, "-");
     const outputFile = path.join(outputDir, `${fileName}.yaml`);
     const newOpenAPI: OpenAPI = {
       openapi: openapi.openapi || "3.0.0",
-      info: openapi.info,
+      info: {
+        title: "Testkube API Docs",
+        description: "See the <a href='/openapi/overview'>Overview</a> for more information and the link to OpenAPI spec.",
+      },
       servers: [
         {
           url: "https://api.testkube.io",
-          description: "Testkube Cloud API Endpoint",
+          description: "Testkube Cloud Control Plane API Endpoint",
         },
         {
           url: "https://<your-testkube-api-host>",
@@ -133,6 +155,8 @@ async function splitOpenAPIByPaths(
 
       newOpenAPI.paths[key] = value;
     });
+
+    mergedOpenAPI.paths = { ...mergedOpenAPI.paths, ...newOpenAPI.paths };
 
     // generate YAML and replace component references to point to external file
     let openApiYaml = yaml.dump(newOpenAPI, { sortKeys: false });
@@ -177,7 +201,7 @@ async function splitOpenAPIByPaths(
     console.log("written " + mdxFilePath);
 
     // add generated file to redoc config and sidebar
-    redocSpecs.push({ spec: outputFile, url: openApiUrl, id: fileName });
+    redocSpecs.push({ spec: outputFile, url: '/openapi/' + mergedSpecFile, id: fileName });
   });
 
   // build sidebars
@@ -225,6 +249,10 @@ async function splitOpenAPIByPaths(
     path.join(outputDir, "redoc-sidebar.js"),
     "module.exports = " + JSON.stringify(redocSidebar)
   );
+
+  // write merged openapi spec
+  let mergedOpenApiYaml = yaml.dump(mergedOpenAPI, { sortKeys: false });
+  fs.writeFileSync( path.join(mergedSpecFolder, mergedSpecFile), mergedOpenApiYaml);
 }
 
 // Core OpenAPI definition goes into agent folder
@@ -233,8 +261,39 @@ splitOpenAPIByPaths(
   "src/openapi/agent",
   "docs/openapi/agent",
   "Standalone Agent",
+  "static/openapi",
+  "testkube-agent-openapi.yaml",
+  {
+    title: "Testkube Standalone Agent API",
+    description: "API for Testkube Standalone Agent",
+    contact: {
+      email: "info@testkube.io",
+    },
+    license: {
+      name: "MIT",
+      url: "https://opensource.org/licenses/MIT",
+    },
+    version: "1.0.0",
+  },
   (opPath) => {
-    return opPath.split("/").indexOf("uploads") >= 0 ? null : {};
+    // only show these in the docs
+    let segments = opPath.split("/");
+    if (
+      [
+        "config",
+        "keymap",
+        "labels",
+        "tags",
+        "debug",
+        "secrets",
+        "uploads",
+        "repositories",
+        "preview-test-workflow",
+      ].includes(segments[1])
+    )
+      return null;
+
+    return {};
   }
 );
 
@@ -244,6 +303,16 @@ splitOpenAPIByPaths(
   "src/openapi/cloud",
   "docs/openapi/cloud",
   "Control Plane",
+  "static/openapi",
+  "testkube-control-plane-openapi.yaml",
+  {
+    title: "Testkube Control Plane API",
+    description: "API for Testkube Control Plane",
+    contact: {
+      email: "info@testkube.io",
+    },
+    version: "1.0.0",
+  },
   (opPath) => {
     console.log( "mapping path " + opPath)
     // only show these in the docs
@@ -277,6 +346,23 @@ splitOpenAPIByPaths(
       const p = opPath.substring(
         "/organizations/{id}/environments/{environmentID}/agent/".length
       );
+
+      let segments = p.split("/");
+      if (
+        [
+          "config",
+          "keymap",
+          "labels",
+          "tags",
+          "debug",
+          "secrets",
+          "uploads",
+          "repositories",
+          "preview-test-workflow",
+        ].includes(segments[0])
+      )
+        return null;
+
       return { basePath: "../" + p.split("/")[0], submenu: "Agent Operations" };
     }
 

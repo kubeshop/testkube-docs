@@ -1,16 +1,12 @@
 openapi: 3.0.1
 info:
-  title: Testkube Pro API
-  description: API for Testkube Pro
-  contact:
-    email: testkube@kubeshop.io
-  license:
-    name: COMMERICAL
-    url: https://opensource.org/licenses/MIT
-  version: 1.18.0-de.80
+  title: Testkube API Docs
+  description: >-
+    See the <a href='/openapi/overview'>Overview</a> for more information and
+    the link to OpenAPI spec.
 servers:
   - url: https://api.testkube.io
-    description: Testkube Cloud API Endpoint
+    description: Testkube Cloud Control Plane API Endpoint
   - url: https://<your-testkube-api-host>
     description: Testkube On-Prem API Endpoint
 paths:
@@ -108,6 +104,7 @@ paths:
       - $ref: './components.yaml#/components/parameters/ID'
       - $ref: './components.yaml#/components/parameters/EnvironmentIDQP'
       - $ref: './components.yaml#/components/parameters/AgentTypeQP'
+      - $ref: './components.yaml#/components/parameters/AgentCapabilityQP'
       - $ref: './components.yaml#/components/parameters/Limit'
       - $ref: './components.yaml#/components/parameters/Offset'
       - $ref: './components.yaml#/components/parameters/Page'

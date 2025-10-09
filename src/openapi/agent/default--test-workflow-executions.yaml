@@ -1,18 +1,12 @@
 openapi: 3.0.1
 info:
-  title: Testkube API
+  title: Testkube API Docs
   description: >-
-    Testkube provides a Kubernetes-native framework for test definition,
-    execution and results
-  contact:
-    email: contact@testkube.io
-  license:
-    name: MIT
-    url: https://opensource.org/licenses/MIT
-  version: 1.0.0
+    See the <a href='/openapi/overview'>Overview</a> for more information and
+    the link to OpenAPI spec.
 servers:
   - url: https://api.testkube.io
-    description: Testkube Cloud API Endpoint
+    description: Testkube Cloud Control Plane API Endpoint
   - url: https://<your-testkube-api-host>
     description: Testkube On-Prem API Endpoint
 paths:
@@ -276,6 +270,7 @@ paths:
     post:
       parameters:
         - $ref: './components.yaml#/components/parameters/executionID'
+        - $ref: './components.yaml#/components/parameters/ForceAgent'
       summary: Abort test workflow execution
       description: Abort test workflow execution
       operationId: abortTestWorkflowExecution
