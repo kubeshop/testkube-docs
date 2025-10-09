@@ -108,6 +108,7 @@ small script at `src/scripts/split-openapis.ts` that:
   generated mdx files to the sidebar navigation
 - generates `src/openapi/../redoc-specs.js` files that are included into the `docusaurus.config.js` config to
   add the generated specs to the redocusaurs configuration
+- generates aggregated openapi files for the agent and control plane APIs into the `static/openapi` folder
 
 The script requires a GitHub Access Token to be provided in a TESTKUBE_OPENAPI_GITHUB_ACCESS_TOKEN environment variable
 for retrieving the Control Plane OpenAPI definition from its private repo.
@@ -125,7 +126,7 @@ Once run, the generated/updated files need to be committed back to the repo for 
 CRD references docs at are generated from the corresponding GoLang types using a fork of the
 https://github.com/elastic/crd-ref-docs project, available at https://github.com/kubeshop/crd-ref-docs.
 
-The customized markdown templates are in this repositories [src/crd-templates](src/crd-templates) folder
+The customized Markdown templates are in this repositories [src/crd-templates](src/crd-templates) folder
 
 Follow these steps:
 
