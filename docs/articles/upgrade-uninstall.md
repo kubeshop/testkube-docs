@@ -10,7 +10,7 @@ There are two ways to upgrade Testkube:
 ### Using Helm
 
 ```sh
-helm upgrade --namespace namespace_name my-testkube oci://registry-1.docker.io/kubeshop/testkube --version <version>
+helm upgrade --namespace namespace_name my-testkube oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube --version <version>
 ```
 
 ### Using Testkube's CLI

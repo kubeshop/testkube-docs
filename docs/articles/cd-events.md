@@ -15,7 +15,7 @@ helm upgrade \
   --create-namespace \
   --namespace testkube \
   testkube \
-  oci://registry-1.docker.io/kubeshop/testkube --version <version> \
+  oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube --version <version> \
   --set testkube-api.cdeventsTarget=https://YOUR_WEBHOOK_URL
 ```
 

@@ -85,7 +85,7 @@ Install the Helm Chart with defaults:
 helm upgrade --install \
   --create-namespace \
   --namespace testkube \
-  oci://registry-1.docker.io/kubeshop/testkube --version <version>
+  oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube --version <version>
 ```
 
 By default, the namespace for the installation will be `testkube`. If the `testkube` namespace does not exist, it will be created for you.
@@ -103,7 +103,7 @@ helm upgrade --install \
   --create-namespace \
   --namespace testkube \
   -f values.yaml \
-  oci://registry-1.docker.io/kubeshop/testkube --version <version>
+  oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube --version <version>
 ```
 
 :::tip
@@ -205,7 +205,7 @@ STORAGE_SSL
 Which can be set while installing with Helm:
 
 ```sh
-helm install testkube oci://registry-1.docker.io/kubeshop/testkube --version <version> --set STORAGE_ENDPOINT=custom_value --create-namespace --namespace testkube
+helm install testkube oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube --version <version> --set STORAGE_ENDPOINT=custom_value --create-namespace --namespace testkube
 ```
 
 Alternatively, these values can be read from Kubernetes secrets and set:
@@ -264,7 +264,7 @@ testkube-operator:
 3. Install Testkube specifying the path to the new `values.yaml` file
 
 ```
-helm install testkube oci://registry-1.docker.io/kubeshop/testkube --version <version> --create-namespace --namespace testkube --values values.yaml
+helm install testkube oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube --version <version> --create-namespace --namespace testkube --values values.yaml
 ```
 
 Please notice that since we've just installed MongoDB with a `testkube-mongodb` Helm release name, you are not required to reconfigure the Testkube API MongoDB connection URI. If you've installed with a different name/namespace, please adjust `--set testkube-api.mongodb.dsn: "mongodb://testkube-mongodb:27017"` to your MongoDB service.
@@ -346,7 +346,7 @@ uiIngress:
 Once we are ready with the `values.yaml` file, we can deploy Testkube into our cluster:
 
 ```sh
-helm install testkube oci://registry-1.docker.io/kubeshop/testkube --version <version> --values values.yaml --namespace testkube --create-namespace
+helm install testkube oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube --version <version> --values values.yaml --namespace testkube --create-namespace
 ```
 
 After the installation command is complete, you will see the following resources created into your AWS Console.

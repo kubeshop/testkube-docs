@@ -39,7 +39,7 @@ helm upgrade --install \
   --create-namespace \
   --namespace testkube \
    -f values.yaml \
-  testkube oci://registry-1.docker.io/kubeshop/testkube-enterprise --version <version>
+  testkube oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube-enterprise --version <version>
 ```
 
 ## General Settings
