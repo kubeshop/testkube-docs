@@ -33,10 +33,11 @@ When used with agentic AI tools like GitHub Copilot with Claude Sonnet 4 in VS C
 
 ## Getting Started
 
-There are 2 ways to run the Testkube MCP Server:
+There are 3 ways to run the Testkube MCP Server:
 
 1. Via the **Testkube CLI** as described below.
 2. Via the **MCP Server Docker Container** as described at [Docker MCP Server](mcp-docker).
+3. Via the **Hosted MCP Endpoint** from the Testkube Control Plane as described [below](#using-the-hosted-mcp-endpoint).
 
 ## Using the Testkube CLI
 
@@ -131,6 +132,118 @@ Analyze the logs of execution "api-tests-123" and suggest fixes
 ```
 
 Check out the [Configuration Examples](./mcp-configuration) document for more detailed usage samples and multi-step workflows.
+
+## Using the Hosted MCP Endpoint
+
+The Testkube Control Plane provides a hosted MCP endpoint that allows you to connect directly without running a local MCP server. This is particularly useful for:
+
+- **Remote access** - Connect to Testkube from any location without local setup
+- **Simplified deployment** - No need to manage a local MCP server process
+- **Centralized configuration** - Manage authentication and permissions through the Control Plane
+- **Team collaboration** - Multiple users can connect to the same endpoint
+
+### Prerequisites
+
+- **Access to a Testkube Environment** - You need an active Testkube organization and environment
+- **API Token** - A valid Testkube API token with appropriate permissions
+- **An AI tool that supports MCP with SSE transport** - Such as Claude Desktop, Cursor, or custom MCP clients
+
+### Endpoint URL Structure
+
+The hosted MCP endpoint follows this URL pattern:
+
+```
+https://api.testkube.io/organizations/{organization_id}/environments/{environment_id}/mcp
+```
+
+Replace:
+- `{organization_id}` with your Testkube organization ID (e.g., `tkcorg_076487a004a7f6fb`)
+- `{environment_id}` with your environment ID (e.g., `tkcenv_d19e797ff2c1449b`)
+
+:::tip Finding Your IDs
+You can find your organization and environment IDs in the Testkube Dashboard URL or by running:
+```bash
+testkube get context
+```
+:::
+
+### Configuration Example
+
+To use the hosted endpoint with an AI tool that supports SSE (Server-Sent Events) transport:
+
+```json
+{
+  "mcpServers": {
+    "testkube": {
+      "url": "https://api.testkube.io/organizations/tkcorg_076487a004a7f6fb/environments/tkcenv_d19e797ff2c1449b/mcp",
+      "transport": {
+        "type": "sse"
+      },
+      "headers": {
+        "Authorization": "Bearer YOUR_API_TOKEN_HERE"
+      }
+    }
+  }
+}
+```
+
+Replace:
+- `tkcorg_076487a004a7f6fb` with your actual organization ID
+- `tkcenv_d19e797ff2c1449b` with your actual environment ID
+- `YOUR_API_TOKEN_HERE` with your Testkube API token
+
+### Obtaining an API Token
+
+1. Log in to your Testkube Dashboard
+2. Navigate to **Organization Settings** → **API Tokens**
+3. Create a new API token with appropriate permissions
+4. Copy the generated API token (you won't be able to see it again)
+
+See [API Token Management](/testkube-pro/articles/organization-management#api-tokens) for more details.
+
+### Self-Hosted Deployments
+
+For self-hosted Testkube instances, use your custom control plane URL:
+
+```json
+{
+  "mcpServers": {
+    "testkube": {
+      "url": "https://your-control-plane.example.com/organizations/{organization_id}/environments/{environment_id}/mcp",
+      "transport": {
+        "type": "sse"
+      },
+      "headers": {
+        "Authorization": "Bearer YOUR_API_TOKEN_HERE"
+      }
+    }
+  }
+}
+```
+
+### Advantages of the Hosted Endpoint
+
+- **No local installation** - No need to install the Testkube CLI or Docker
+- **Always available** - The endpoint is always running and accessible
+- **Automatic updates** - Control Plane updates are handled automatically
+- **Consistent performance** - Leverages the Control Plane's infrastructure
+- **Network accessible** - Can be accessed from anywhere with proper authentication
+
+### Troubleshooting
+
+**Connection errors:**
+- Verify your organization and environment IDs are correct
+- Ensure your API token is valid and not expired
+- Check that your API token has sufficient permissions
+
+**Authentication failures:**
+- Verify the Authorization header is properly formatted: `Bearer YOUR_TOKEN`
+- Ensure the API token has access to the specified organization and environment
+
+**Network issues:**
+- Check connectivity to the Control Plane URL
+- Verify firewall rules allow outbound HTTPS connections
+- For self-hosted deployments, ensure the control plane is accessible
 
 ## API-Key Authentication
 
