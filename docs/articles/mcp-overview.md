@@ -426,7 +426,7 @@ The MCP server provides 20 tools for comprehensive Testkube management:
 
 ### Agent Management
 
-- `list_agents` - List available agents for workflow execution targeting
+- `list_agents` - List available agents for workflow execution targeting - [Read More](/articles/agents-overview)
 
 ### Execution Management
 
