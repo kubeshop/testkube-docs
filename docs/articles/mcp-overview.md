@@ -412,7 +412,7 @@ Don't hesitate to reach out to us on [Slack](https://bit.ly/testkube-slack) if y
 
 ## Available Tools
 
-The MCP server provides 17 tools for comprehensive Testkube management:
+The MCP server provides 20 tools for comprehensive Testkube management:
 
 ### Workflow Management
 
@@ -424,12 +424,18 @@ The MCP server provides 17 tools for comprehensive Testkube management:
 - `update_workflow` - Update existing workflow
 - `run_workflow` - Execute workflow
 
+### Agent Management
+
+- `list_agents` - List available agents for workflow execution targeting
+
 ### Execution Management
 
 - `list_executions` - List workflow executions
 - `get_execution_info` - Get execution details
+- `get_workflow_execution_metrics` - Get detailed resource consumption metrics for a specific execution
 - `fetch_execution_logs` - Get execution logs
 - `lookup_execution_id` - Resolve execution name to ID
+- `wait_for_executions` - Wait for executions to complete
 - `abort_workflow_execution` - Cancel running execution
 
 ### Artifact Management
