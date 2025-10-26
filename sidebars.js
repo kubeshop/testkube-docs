@@ -697,6 +697,17 @@ const sidebars = {
             },
           ],
         },
+        {
+          type: "category",
+          label: "Best Practices",
+          items: [
+            {
+              type: "doc",
+              label: "Environments and Access Control",
+              id: "articles/environments-best-practices",
+            },
+          ]
+        }
       ],
     },
     {
@@ -952,20 +963,26 @@ const sidebars = {
           id: "articles/examples/curl-basic",
         },
         {
-          type: "link",
-          label: "Hardware Testing",
-          href: "https://testkube.io/blog/implementing-kubernetes-native-hardware-testing-with-testkube",
-          description: "Test for hardware components and infrastructure.",
+          type: "category",
+          label: "Testing Infrastructure",
+          items: [
+            {
+              type: "doc",
+              label: "Validating Kubernetes Clusters",
+              id: "articles/examples/kubectl-basic",
+            },
+            {
+              type: "link",
+              label: "Testing Hardware Components",
+              href: "https://testkube.io/blog/implementing-kubernetes-native-hardware-testing-with-testkube",
+              description: "Test for hardware components and infrastructure.",
+            },
+          ]
         },
         {
           type: "doc",
           label: "Testing a Sample Application",
           id: "articles/tutorial/example",
-        },
-        {
-          type: "doc",
-          label: "Executing Kubectl Commands",
-          id: "articles/examples/kubectl-basic",
         },
       ],
     },
