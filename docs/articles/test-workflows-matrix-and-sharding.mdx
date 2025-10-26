@@ -575,7 +575,7 @@ Make debugging easier with clear descriptions:
 ```yaml
 parallel:
   count: 5
-  description: 'Shard {{ index + 1 }}/{{ count }} - {{ shard.testFiles | length }} tests'
+  description: 'Shard {{ index + 1 }}/{{ count }} - {{ len(shard.testFiles) }} tests'
 ```
 
 #### 4. Implement Retry Logic
