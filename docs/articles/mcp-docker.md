@@ -1,6 +1,6 @@
 # Docker MCP Server
 
-The Testkube MCP Server is available on [DockerHub](https://hub.docker.com/repository/docker/testkube/mcp-server) and can 
+The Testkube MCP Server is available on [DockerHub](https://hub.docker.com/repository/docker/kubeshop/testkube-mcp-server) and can 
 be used in IDEs via stdio and remotely over shttp in local agent scenarios.
 
 ## Running the Container
@@ -47,7 +47,7 @@ Using `stdio` transport:
         "-e", "TK_ACCESS_TOKEN=${TK_ACCESS_TOKEN}",
         "-e", "TK_ORG_ID=${TK_ORG_ID}",
         "-e", "TK_ENV_ID=${TK_ENV_ID}",
-        "testkube/mcp-server:latest",
+        "kubeshop/testkube-mcp-server:latest",
         "mcp", "serve"
       ],
       "type": "stdio"
@@ -68,7 +68,7 @@ Using `shttp` transport:
         "-e", "TK_ACCESS_TOKEN=${TK_ACCESS_TOKEN}",
         "-e", "TK_ORG_ID=${TK_ORG_ID}",
         "-e", "TK_ENV_ID=${TK_ENV_ID}",
-        "testkube/mcp-server:latest",
+        "kubeshop/testkube-mcp-server:latest",
         "mcp", "serve", "--transport=shttp"
       ],
       "type": "shttp"
@@ -91,7 +91,7 @@ Using `stdio` transport:
         "-e", "TK_ACCESS_TOKEN=${TK_ACCESS_TOKEN}",
         "-e", "TK_ORG_ID=${TK_ORG_ID}",
         "-e", "TK_ENV_ID=${TK_ENV_ID}",
-        "testkube/mcp-server:latest",
+        "kubeshop/testkube-mcp-server:latest",
         "mcp", "serve"
       ]
     }
@@ -111,7 +111,7 @@ Using `shttp` transport:
         "-e", "TK_ACCESS_TOKEN=${TK_ACCESS_TOKEN}",
         "-e", "TK_ORG_ID=${TK_ORG_ID}",
         "-e", "TK_ENV_ID=${TK_ENV_ID}",
-        "testkube/mcp-server:latest",
+        "kubeshop/testkube-mcp-server:latest",
         "mcp", "serve", "--transport=shttp"
       ]
     }
@@ -128,7 +128,7 @@ claude mcp add testkube -- docker run --rm -i \
    -e TK_ACCESS_TOKEN=${TK_ACCESS_TOKEN} \
    -e TK_ORG_ID=${TK_ORG_ID} \
    -e TK_ENV_ID=${TK_ENV_ID} \
-   testkube/mcp-server:latest mcp serve
+   kubeshop/testkube-mcp-server:latest mcp serve
 ```
 
 ## Troubleshooting
@@ -149,7 +149,7 @@ docker run --rm -it \
   -e TK_ORG_ID="$TK_ORG_ID" \
   -e TK_ENV_ID="$TK_ENV_ID" \
   -e TK_DEBUG=true \
-  testkube/mcp-server:latest
+  kubeshop/testkube-mcp-server:latest
 ```
 
 ## Development
@@ -176,7 +176,7 @@ The following files are available in the [Testkube GitHub repository](https://gi
 
 ```bash
 # Build and push to registry
-./build/mcp-server/build-mcp-server.sh testkube/mcp-server:latest
+./build/mcp-server/build-mcp-server.sh kubeshop/testkube-mcp-server:latest
 
 # Build locally for testing
 ./build/mcp-server/build-local-mcp.sh testkube/mcp-server:local
@@ -191,7 +191,7 @@ docker buildx build \
   --file build/mcp-server/Dockerfile \
   --build-arg VERSION="1.0.0" \
   --build-arg GIT_SHA="$(git rev-parse --short HEAD)" \
-  --tag testkube/mcp-server:latest \
+  --tag kubeshop/testkube-mcp-server:latest \
   --push \
   .
 ```
