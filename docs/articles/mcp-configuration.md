@@ -105,7 +105,7 @@ claude mcp add testkube -- docker run --rm -i \
    -e TK_ACCESS_TOKEN=${TK_ACCESS_TOKEN} \
    -e TK_ORG_ID=${TK_ORG_ID} \
    -e TK_ENV_ID=${TK_ENV_ID} \
-   testkube/mcp-server:latest mcp serve
+   kubeshop/testkube-mcp-server:latest mcp serve
 ```
 
 ### Usage
