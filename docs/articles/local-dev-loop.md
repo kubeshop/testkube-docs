@@ -45,7 +45,12 @@ There are still a couple of potential drawbacks to this approach:
 
 Fortunately, there are ways to overcome these issues.
 - Executing silently will discount the resulting test results from any health/metric/reporting perspective
-- Using a tool like title to shorten the local dev loop which bypasses the need to commit changes to git
+- Using a tool like [Tilt](https://tilt.dev) to shorten the local dev loop which bypasses the need to commit changes to git. 
+
+:::tip 
+See https://github.com/kubeshop/testkube-tilt for a complete example for how to automate the local test 
+development workflow with Tilt (based on the mechanics described below).
+:::
  
 ## Testkube for Local Test Development
 
@@ -187,3 +192,13 @@ The actual host name or IP address will vary depending on your local Kubernetes 
 further depends on how/where you are running it. The most common scenario, running minikube under Docker on a Mac or 
 Windows, will expose the host to the container at `host.docker.internal`.
 :::
+
+### Packaging with Tilt
+
+[Tilt](https://tilt.dev) provides a convienient way to automate the local development workflow described above, with
+additional helpers for automatically running tests when they (or their workflows) change.
+
+Head over to the [Tilt example repo](https://github.com/kubeshop/testkube-tilt) for a complete example of how to 
+automate the local test development workflow with Tilt.
+
+![Local Dev Loop with Tilt](images/loca-dev-with-tilt.png)
