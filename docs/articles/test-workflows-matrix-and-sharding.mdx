@@ -12,6 +12,240 @@ either to distribute the load or to verify it on different setup.
 
 Test Workflows have a built-in mechanism for all these cases - both static and dynamic.
 
+## Configuration File Setup
+
+Test Workflow sharding is configured through YAML files that define TestWorkflow custom resources in your Kubernetes cluster.
+
+### Where to Define Configuration
+
+You can create and apply Test Workflow configurations in several ways:
+
+1. **Create a YAML file** (e.g., `my-workflow.yaml`) with your TestWorkflow definition
+2. **Apply it using kubectl**:
+   ```bash
+   kubectl apply -f my-workflow.yaml
+   ```
+3. **Or use the Testkube CLI**:
+   ```bash
+   testkube create testworkflow -f my-workflow.yaml
+   ```
+4. **Or use the Testkube Dashboard** - navigate to Test Workflows and create/edit workflows through the UI
+
+All Test Workflows are stored as custom resources in your Kubernetes cluster under the `testworkflows.testkube.io/v1` API version.
+
+### Basic Configuration Structure
+
+A minimal sharded workflow configuration looks like this:
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: my-sharded-workflow
+spec:
+  # Your container and content configuration
+  container:
+    image: your-test-image:latest
+  
+  steps:
+  - name: Run tests
+    parallel:
+      count: 3  # Number of shards to create
+      shell: 'run-your-tests.sh'
+```
+
+## Choosing the Right Shard Number
+
+The number of shards you configure has a direct impact on performance and resource utilization:
+
+### Performance Impact
+
+| Shard Count | Execution Time | Resource Usage | Best For |
+|-------------|----------------|----------------|----------|
+| 1 (no sharding) | Baseline | Low | Small test suites, limited resources |
+| 2-5 | ~50-80% reduction | Medium | Medium test suites (10-50 tests) |
+| 5-10 | ~60-90% reduction | High | Large test suites (50-200 tests) |
+| 10+ | ~70-95% reduction | Very High | Very large test suites (200+ tests) |
+
+:::tip
+**General Guidelines:**
+- **Small test suites (fewer than 10 tests)**: Use 1-2 shards. More shards add overhead without benefit.
+- **Medium test suites (10-50 tests)**: Use 3-5 shards for optimal balance.
+- **Large test suites (50-200 tests)**: Use 5-10 shards based on available cluster resources.
+- **Very large test suites (200+ tests)**: Use 10-20 shards, but monitor resource consumption.
+
+The optimal number depends on:
+- **Test duration**: Longer tests benefit more from sharding
+- **Cluster capacity**: Each shard requires a pod with allocated resources
+- **Test distribution**: Shards work best when tests can be evenly distributed
+:::
+
+### Resource Considerations
+
+Each shard runs in its own pod, so consider:
+- **CPU and memory**: Each shard consumes the resources defined in `container.resources`
+- **Cluster capacity**: Ensure your cluster can handle `count` x `resources` simultaneously
+- **Cost**: More shards = more parallel pods = higher infrastructure costs during execution
+
+## Step-by-Step Configuration Guide
+
+### Step 1: Determine Your Sharding Strategy
+
+Choose between static and dynamic sharding:
+
+**Static Sharding (`count` only)**: Fixed number of shards
+```yaml
+parallel:
+  count: 5  # Always creates exactly 5 shards
+```
+
+**Dynamic Sharding (`maxCount` + `shards`)**: Adaptive based on test data
+```yaml
+parallel:
+  maxCount: 5  # Creates up to 5 shards based on available tests
+  shards:
+    testFiles: 'glob("tests/**/*.spec.js")'
+```
+
+### Step 2: Define Resource Limits
+
+Specify resources for each shard to prevent resource contention:
+
+```yaml
+parallel:
+  count: 3
+  container:
+    resources:
+      requests:
+        cpu: 1          # Each shard gets 1 CPU
+        memory: 1Gi     # Each shard gets 1GB RAM
+      limits:
+        cpu: 2
+        memory: 2Gi
+```
+
+### Step 3: Configure Data Distribution
+
+For dynamic sharding, define how to split your test data:
+
+```yaml
+parallel:
+  maxCount: 5
+  shards:
+    testFiles: 'glob("cypress/e2e/**/*.cy.js")'  # Discover test files
+  shell: |
+    # Access distributed test files via shard.testFiles
+    npx cypress run --spec '{{ join(shard.testFiles, ",") }}'
+```
+
+### Step 4: Apply and Verify
+
+```bash
+# Apply your workflow
+kubectl apply -f my-sharded-workflow.yaml
+
+# Run the workflow
+testkube run testworkflow my-sharded-workflow -f
+
+# Monitor execution
+kubectl get pods -l testworkflow=my-sharded-workflow
+```
+
+## Common Use Cases
+
+### Use Case 1: Sharding Cypress Tests
+
+Distribute Cypress E2E tests across multiple shards:
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: cypress-sharded
+spec:
+  content:
+    git:
+      uri: https://github.com/your-org/your-repo
+      paths: [cypress]
+  container:
+    image: cypress/included:13.6.4
+    workingDir: /data/repo/cypress
+  
+  steps:
+  - name: Install dependencies
+    shell: npm ci
+  
+  - name: Run tests in parallel
+    parallel:
+      maxCount: 5  # Up to 5 shards for optimal distribution
+      shards:
+        testFiles: 'glob("cypress/e2e/**/*.cy.js")'
+      description: 'Shard {{ index + 1 }}/{{ count }}: {{ join(shard.testFiles, ", ") }}'
+      transfer:
+      - from: /data/repo
+      container:
+        resources:
+          requests:
+            cpu: 1
+            memory: 1Gi
+      run:
+        args: [--spec, '{{ join(shard.testFiles, ",") }}']
+```
+
+### Use Case 2: Load Testing with K6
+
+Generate load from multiple nodes:
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: k6-load-test
+spec:
+  container:
+    image: grafana/k6:latest
+  
+  steps:
+  - name: Run distributed load test
+    parallel:
+      count: 10  # 10 shards generating concurrent load
+      description: 'Load generator {{ index + 1 }}/{{ count }}'
+      container:
+        resources:
+          requests:
+            cpu: 2
+            memory: 2Gi
+      shell: |
+        k6 run --vus 50 --duration 5m \
+          --tag shard={{ index }} script.js
+```
+
+### Use Case 3: Multi-Browser Testing with Playwright
+
+Test across different browsers with sharding:
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: playwright-multi-browser
+spec:
+  container:
+    image: mcr.microsoft.com/playwright:latest
+  
+  steps:
+  - name: Run tests
+    parallel:
+      matrix:
+        browser: [chromium, firefox, webkit]  # Test on each browser
+      count: 3  # Shard each browser's tests into 3 parts
+      description: '{{ matrix.browser }} - shard {{ shardIndex + 1 }}/{{ shardCount }}'
+      shell: |
+        npx playwright test \
+          --project={{ matrix.browser }} \
+          --shard={{ shardIndex + 1 }}/{{ shardCount }}
+```
+
 ## Usage
 
 Matrix and sharding features are supported in [**Services (`services`)**](./test-workflows-services), and both [**Test Suite (`execute`)**](./test-workflows-test-suites) and [**Parallel Steps (`parallel`)**](./test-workflows-parallel) operations.
@@ -240,3 +474,147 @@ Will start 8 instances:
 | `5`     | `2`           | `"firefox"`      | `"1Gi"`         | `1`          | `["https://app.testkube.io"]`                         |
 | `6`     | `3`           | `"firefox"`      | `"2Gi"`         | `0`          | `["https://testkube.io", "https://docs.testkube.io"]` |
 | `7`     | `3`           | `"firefox"`      | `"2Gi"`         | `1`          | `["https://app.testkube.io"]`                         |
+
+## Troubleshooting and Best Practices
+
+### Common Issues
+
+#### Issue: Shards Not Starting
+
+**Symptoms**: Some or all shards remain in pending state
+
+**Solutions**:
+1. **Check cluster resources**: Ensure your cluster has enough capacity for all shards
+   ```bash
+   kubectl describe nodes  # Check available resources
+   kubectl get pods -n testkube  # Check pod status
+   ```
+2. **Review resource requests**: Each shard needs allocated resources
+   ```yaml
+   container:
+     resources:
+       requests:
+         cpu: 500m      # Reduce if resources are limited
+         memory: 512Mi
+   ```
+3. **Reduce shard count**: If resources are constrained, use fewer shards
+   ```yaml
+   parallel:
+     count: 3  # Reduced from 10
+   ```
+
+#### Issue: Uneven Test Distribution
+
+**Symptoms**: Some shards finish much faster than others
+
+**Solutions**:
+1. **Use dynamic sharding** with `maxCount` instead of `count`:
+   ```yaml
+   parallel:
+     maxCount: 5  # Adapts to available tests
+     shards:
+       testFiles: 'glob("tests/**/*.test.js")'
+   ```
+2. **Ensure test files are similar in size/duration**: Group fast and slow tests evenly
+3. **Monitor execution times**:
+   ```bash
+   testkube get twe EXECUTION_ID  # Check individual shard durations
+   ```
+
+#### Issue: Out of Memory Errors
+
+**Symptoms**: Pods crash with OOM (Out of Memory) errors
+
+**Solutions**:
+1. **Increase memory limits**:
+   ```yaml
+   container:
+     resources:
+       limits:
+         memory: 4Gi  # Increased from 2Gi
+   ```
+2. **Reduce tests per shard**: Increase shard count to distribute load
+   ```yaml
+   parallel:
+     count: 10  # More shards = fewer tests per shard
+   ```
+
+### Best Practices
+
+#### 1. Start Conservative and Scale Up
+
+Begin with a small shard count and increase based on results:
+```yaml
+# Week 1: Baseline
+parallel:
+  count: 2
+
+# Week 2: If successful, increase
+parallel:
+  count: 5
+
+# Week 3: Optimize based on metrics
+parallel:
+  count: 8  # Sweet spot for your test suite
+```
+
+#### 2. Monitor Resource Usage
+
+Track resource consumption to optimize shard configuration:
+```bash
+# Watch resource usage during execution
+kubectl top pods -n testkube -l testworkflow=my-workflow
+
+# Review completed execution metrics
+testkube get twe EXECUTION_ID
+```
+
+#### 3. Use Descriptive Names
+
+Make debugging easier with clear descriptions:
+```yaml
+parallel:
+  count: 5
+  description: 'Shard {{ index + 1 }}/{{ count }} - {{ len(shard.testFiles) }} tests'
+```
+
+#### 4. Implement Retry Logic
+
+Account for transient failures in sharded tests:
+```yaml
+steps:
+- name: Run tests with retry
+  parallel:
+    count: 3
+    retry:
+      count: 2  # Retry failed shards up to 2 times
+    shell: 'run-tests.sh'
+```
+
+#### 5. Consider Cost vs. Speed Tradeoffs
+
+More shards = faster execution but higher cost:
+- **Development**: Use fewer shards (2-3) to save resources
+- **CI/CD**: Use optimal shards (5-8) for speed
+- **Production validation**: Use maximum shards (10+) for critical releases
+
+#### 6. Balance Matrix and Sharding
+
+When combining matrix and sharding, avoid excessive parallelism:
+```yaml
+# This creates 3 browsers × 5 shards = 15 pods
+parallel:
+  matrix:
+    browser: [chrome, firefox, safari]  # 3 combinations
+  count: 5  # 5 shards per combination
+  # Total: 15 concurrent pods - ensure cluster can handle this!
+```
+
+## Additional Resources
+
+- [Test Workflows Overview](./test-workflows.md)
+- [Parallel Execution](./test-workflows-parallel.mdx)
+- [Test Workflow Expressions](./test-workflows-expressions.md)
+- [Job and Pod Configuration](./test-workflows-job-and-pod.md)
+- [Sharded Cypress Example](./examples/cypress-sharded.mdx)
+- [Sharded Playwright Example](./examples/playwright-sharded.mdx)
