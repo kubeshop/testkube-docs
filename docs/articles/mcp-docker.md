@@ -3,6 +3,10 @@
 The Testkube MCP Server is available on [DockerHub](https://hub.docker.com/repository/docker/kubeshop/testkube-mcp-server) and can 
 be used in IDEs via stdio and remotely over shttp in local agent scenarios.
 
+:::tip Hosted Alternative
+If you don't want to run a local Docker container, consider using the [Hosted MCP Endpoint](./mcp-setup) from the Testkube Control Plane, which provides direct access without local setup.
+:::
+
 ## Running the Container
 
 ### Prerequisites
