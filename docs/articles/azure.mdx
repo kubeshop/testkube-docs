@@ -16,7 +16,7 @@ For solutions to common issues, such as the `--git` flags causing timeouts, plea
 
 ### How to configure Testkube CLI action for Testkube and run a Test Workflow
 
-To use Azure DevOps Pipelines with [Testkube](https://app.testkube.io/), you need to create an [API token](https://docs.testkube.io/testkube-pro/articles/organization-management#api-tokens).
+To use Azure DevOps Pipelines with [Testkube](https://app.testkube.io/), you need to create an [API token](https://docs.testkube.io/articles/organization-management#api-tokens).
 Then, pass the **organization** and **environment** IDs, along with the **token** and other parameters specific for your use case.
 
 If a Test Workflow is already created, you can run it using the command `testkube run testworkflow TEST_WORKFLOW_NAME -f`. However, if you need to create a test in this workflow, you need to add a creation command, e.g.: `testkube create testworkflow -f EXAMPLE_FILE.yaml`.

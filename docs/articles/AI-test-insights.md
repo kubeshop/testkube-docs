@@ -32,13 +32,13 @@ Source: `String`
   }
 ```
 
-![Create a Test](../../img/create-a-test.png)
+![Create a Test](../img/create-a-test.png)
 
 ## Execute and Validate Tests
 
 Click on `Run Now` to execute the test. After the test has finished executing, you can click on it to view the results. In this case, the test has failed. Let's analyze the logs to understand why the test has failed.
 
-![Log Output](../../img/log-output.png)
+![Log Output](../img/log-output.png)
 
 It shows that the IP address we are looking for in the request is different; hence, the test has failed. Let's see what the AI Analysis feature has to say on this.
 
@@ -46,7 +46,7 @@ It shows that the IP address we are looking for in the request is different; hen
 
 Navigate to the AI Analysis Tab. Testkube will automatically collect the relevant details from the log and analyze them.
 
-![AI Analysis Results](../../img/AI-analysis-results.png)
+![AI Analysis Results](../img/AI-analysis-results.png)
 
 As per the AI Analysis, the assessment is “The test execution is failing because the expected result does not match the actual result. The expected result was not received from the API”. This means that the response that we received is different from what is expected, which is spot on. 
 
@@ -70,7 +70,7 @@ Let's update the expected IP address in the test and execute it again.
     "expected_body": "{\"ip\": \"120.88.40.232\"}"
   }
 ```
-![Passed Test](../../img/passed-test.png)
+![Passed Test](../img/passed-test.png)
 
 Now if you execute the test again, it passes. Note that the AI Analysis tab is not present this time. This is because AI Analysis is best suited to analyze failed tests and not otherwise.
 

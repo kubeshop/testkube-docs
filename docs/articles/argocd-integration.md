@@ -119,7 +119,7 @@ testkube-dashboard:
   enabled: false
 ```
 
-You can find the corresponding values in the [Environment Settings](/testkube-pro/articles/environment-management#general) for the Testkube Environment that the Agent should connect
+You can find the corresponding values in the [Environment Settings](/articles/environment-management#general) for the Testkube Environment that the Agent should connect
 to:
 
 ![Agent Helm Chart Values](images/agent-helm-chart-values.png)
@@ -180,8 +180,8 @@ spec:
 The Job first sets the Testkube CLI context and then simply invokes the `testkube run` command for each Workflow that was synced, with the -f option to capture the output.
 (here you can obviously run any combination of Testkube CLI commands).
 
-- The `tkcorg_XXXX` and `tkcenv_YYYY` identifiers can be found on the [Environment Settings](/testkube-pro/articles/environment-management#general) page. 
-- The `tkcapi_ZZZZ` api-key needs to created as described under [API Token Management](/testkube-pro/articles/api-token-management).
+- The `tkcorg_XXXX` and `tkcenv_YYYY` identifiers can be found on the [Environment Settings](/articles/environment-management#general) page. 
+- The `tkcapi_ZZZZ` api-key needs to created as described under [API Token Management](/articles/api-token-management).
 - the `root-domain` should be `testkube.io` if you're using Testkube Cloud, or your local Testkube API endpoint for on-prem installations.
 
 :::tip

@@ -6,7 +6,7 @@ You can see a live example of a Status Page [here](https://app.testkube.io/statu
 
 ## Overview
 
-![status-page-main](../../img/status-page-main.png)
+![status-page-main](../img/status-page-main.png)
 
 Testkube Status Pages is a feature within the Testkube software that allows you to create and manage dedicated status pages for your software projects. These pages provide real-time information about the health and availability of your project components, making it easier for both internal teams and external stakeholders to stay informed.
 
@@ -30,7 +30,7 @@ The very first thing you have to consider, even before thinking about your statu
 
 Let's create a scheduled cURL test. In order to do this, you should define a cURL command. For the sake of simplicity, we will be checking on the Testkube website `https://testkube.io`.
 
-![sp-create-test](../../img/sp-create-test.png)
+![sp-create-test](../img/sp-create-test.png)
 
 The cURL Test input we want to use is the following:
 
@@ -46,11 +46,11 @@ The cURL Test input we want to use is the following:
 
 Make sure to add a Custom schedule in the Test settings to run it every minute:
 
-![sp-schedule](../../img/sp-schedule.png)
+![sp-schedule](../img/sp-schedule.png)
 
 After a few minutes, you will have a nice history of executions:
 
-![sp-test-ran](../../img/sp-test-ran.png)
+![sp-test-ran](../img/sp-test-ran.png)
 
 You can also use `kubectl apply -f testcrd.yaml` on the CLI to port your test from one machine to the other. An example test definition would look like:
 
@@ -83,7 +83,7 @@ Now, you are properly equipped to start creating a status page that always has r
 
 ### Creating Your First Status Page
 
-![status-page-edit](../../img/status-page-edit.png)
+![status-page-edit](../img/status-page-edit.png)
 
 1. Provide a unique name and description for your status page.
 2. Choose a time scale for the status page. This will define the aggregation period of the test execution results.
@@ -95,7 +95,7 @@ Now, you are properly equipped to start creating a status page that always has r
 
 Services represent the different parts of your software project that you want to monitor, such as servers or databases. In Testkube, you can define them by adding the appropriate tests to one Service in your Status Page.
 
-![status-page-edit-services](../../img/status-page-edit-services.png)
+![status-page-edit-services](../img/status-page-edit-services.png)
 
 To add and configure a service:
 
@@ -107,7 +107,7 @@ To add and configure a service:
 
 The Status Page rendered is unique for each Testkube environment. You can only have one Status Page per environment, so make sure the tests added offer an accurate representation of the status of the services. On the very top of the screen you will see the name of your Status Page and the given description. No details of your Testkube environment or organization will be published on this page, so this is where they need to be pointed out for efficient communication with your users.
 
-![status-page-service](../../img/status-page-service.png)
+![status-page-service](../img/status-page-service.png)
 
 Below that you will see a list of the services with multiple ways to represent their state. On the top left is the name of the service. Top right is current status - this is calculated based on the last bar of the chart below. The possible values are:
 
@@ -140,11 +140,11 @@ Testkube Status Pages streamlines the incident management processes by providing
 
 Incidents are simple objects responsible for communication between the service providers and their users. Managing them is as easy as creating them via the Status Pages management page.
 
-![incidents-edit](../../img/incidents-edit.png)
+![incidents-edit](../img/incidents-edit.png)
 
 They will be shown at the bottom, similar to a news feed.
 
-![incidents-main](../../img/incidents-main.png)
+![incidents-main](../img/incidents-main.png)
 
 On the top of each individual incident there is the start date. The incidents are ordered by this, with the latest incident on top. The other relevant dates, for example, when it was created, updated and resolved are shown at the very bottom. The end date can be left intentionally empty, signifying that this incident has not been resolved.
 

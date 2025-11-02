@@ -1,7 +1,7 @@
 # Testkube Teams
 
 Testkube Teams allow you to group Organization members into Teams that can then be assigned to either
-[Environments](/testkube-pro/articles/environment-management#environment-members) or [Resource Groups](/articles/resource-groups) with a specific Role.
+[Environments](/articles/environment-management#environment-members) or [Resource Groups](/articles/resource-groups) with a specific Role.
 
 :::info
 Please read [Resource Access Management](/articles/resource-access-management) to get an overview of how Testkube

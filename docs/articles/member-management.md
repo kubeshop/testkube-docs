@@ -74,7 +74,7 @@ environments and resources.
 
 Once all specified, select the Invite button in the bottom right.
 
-![Organization Member Invite](../../img/organization-members.png)
+![Organization Member Invite](../img/organization-members.png)
 
 :::tip
 For Testkube On-Prem deployments you can configure default organizations, environments and roles for users - see 
@@ -86,7 +86,7 @@ For Testkube On-Prem deployments you can configure default organizations, enviro
 Manage existing members in the list of members at the bottom of the tab. Use the menu to the right for 
 each member to delete them or change their role.
 
-![Organization Members](../../img/org-members-list.png)
+![Organization Members](../img/org-members-list.png)
 
 Use the menu to the right to Update or Remove a member and view their details.
 
@@ -101,5 +101,5 @@ Use the "Show Member Details" option shows the breakdown for the Members' Consol
 Manage pending member invites in the lists at the bottom of the tab. Use the menu to the right for
 each invite to update, revoke or resent the invite.
 
-![Organization Invites](../../img/organization-invites.png)
+![Organization Invites](../img/organization-invites.png)
 

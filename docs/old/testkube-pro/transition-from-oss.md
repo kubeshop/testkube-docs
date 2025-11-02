@@ -24,4 +24,4 @@ This is planned for coming releases.
 testkube pro connect
 ```
 
-2. [Set your CLI Context to talk to Testkube Pro](../../testkube-pro/articles/managing-cli-context.md).
+2. [Set your CLI Context to talk to Testkube Pro](/articles/managing-cli-context.md).

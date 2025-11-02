@@ -13,7 +13,7 @@ More rigorous RBAC functionality enforced across the entire Testkube stack is on
 
 ## Organization Members and Teams
 
-There are four roles for organization members - [Read More](/testkube-pro/articles/organization-management#members). For the sake of this document:
+There are four roles for organization members - [Read More](/articles/organization-management#members). For the sake of this document:
 - `Owner` / `Admin` - Always have access to all resources in all environments.
 - `Member` - Resource access is controlled at the Environment and Resource Group level.
 - `Biller` - No Resource access.
@@ -29,7 +29,7 @@ There are currently two "levels" of providing access to Testkube Resources:
 ## Environment Access
 
 To have access to resources in a Testkube Environment, organization Members and Teams _must_ be added to 
-an Environment with a specific role - [Read More](/testkube-pro/articles/environment-management#environment-members). 
+an Environment with a specific role - [Read More](/articles/environment-management#environment-members). 
 The given role applies to all Resources in that Environment. 
 
 If a member has access to an Environment via multiple Teams and/or as a direct Member, Testkube will enforce the 

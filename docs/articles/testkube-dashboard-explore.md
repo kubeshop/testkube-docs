@@ -12,7 +12,7 @@ The toggles at the top of the screen (1) allow you to choose the Organization an
 currently shown in the Dashboard.
 
 :::info
-See the documentation on [Organizations](/testkube-pro/articles/organization-management) and [Environments](/testkube-pro/articles/environment-management)
+See the documentation on [Organizations](/articles/organization-management) and [Environments](/articles/environment-management)
 for more information on how to manage your Testkube Instance.
 :::
 
@@ -22,7 +22,7 @@ The navigation on the left (2) of the screen contains buttons for (in top-to-bot
 - Test Workflows - [Read More](/articles/testkube-dashboard-workflows-overview)
 - Integrations - [Read More](/articles/integrations-dashboard-explore)
 - Test Insights - [Read More](/articles/test-insights)
-- Status Pages - [Read More](/testkube-pro/articles/status-pages)
+- Status Pages - [Read More](/articles/status-pages)
 - Tests *
 - Test Suites *
 - Executors *

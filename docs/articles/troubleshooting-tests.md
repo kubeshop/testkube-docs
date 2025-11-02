@@ -38,10 +38,10 @@ Testkube simplifies the troubleshooting process with several built-in features:
   If your testing tool outputs standard JUnit reports, Testkube will [capture those](../articles/test-workflows-artifacts#junit-report-extraction) for further analysis.
 
 - **Enhanced Log Analysis:**  
-  The Dashboard offers features like [Keyword Highlighting](../testkube-pro/articles/log-highlighting) and Log Comparison to help you identify relevant content quickly.
+  The Dashboard offers features like [Keyword Highlighting](/articles/log-highlighting) and Log Comparison to help you identify relevant content quickly.
 
 - **AI Insights:**  
-  The [AI Insights](../testkube-pro/articles/AI-test-insights) module leverages GPT to analyze and interpret test logs, providing actionable insights.
+  The [AI Insights](/articles/AI-test-insights) module leverages GPT to analyze and interpret test logs, providing actionable insights.
 
 ![Logs & Artifacts](../img/concepts-logs-artifacts.png)
 

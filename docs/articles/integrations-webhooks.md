@@ -78,7 +78,7 @@ previous tabs.
 
 :::tip
 If you want to hide the Webhook YAML definition in the Dashboard because it contains sensitive information you can 
-enable Webhooks URL Masking under the [Organization Product Features](/testkube-pro/articles/organization-management#product-features), 
+enable Webhooks URL Masking under the [Organization Product Features](/articles/organization-management#product-features), 
 which will hide the Definition tab under the Webhook Settings.
 :::
 

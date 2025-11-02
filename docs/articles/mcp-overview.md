@@ -59,7 +59,7 @@ which ensures that the MCP Server operates within the security context of your T
 
 :::note
 If you're using SSO or a self-hosted Testkube instance, you can use the `--email` flag with the login
-command - [Read More](/testkube-pro/articles/managing-cli-context#sso-authentication), or authenticate with an
+command - [Read More](/articles/managing-cli-context#sso-authentication), or authenticate with an
 API Key as [described below](#api-key-authentication).
 :::
 
@@ -139,7 +139,7 @@ For scenarios where OAuth authentication is not suitable (such as CI/CD pipeline
 ### Step 1: Obtain an API Key
 
 1. Log in to your Testkube Dashboard
-2. Navigate to **Organization Settings** → **API Tokens** - [Read More](/testkube-pro/articles/organization-management#api-tokens)
+2. Navigate to **Organization Settings** → **API Tokens** - [Read More](/articles/organization-management#api-tokens)
 3. Create a new API key with appropriate permissions for your use case
 4. Copy the generated API key (you won't be able to see it again)
 
