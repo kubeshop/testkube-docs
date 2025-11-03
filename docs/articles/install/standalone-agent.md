@@ -78,7 +78,7 @@ helm upgrade --install \
 
 By default, the namespace for the installation will be `testkube`. If the `testkube` namespace does not exist, it will be created for you.
 
-Alternatively, you can customize the default values.yaml by fetching the helm chart first, unarchiving, modifying the `values.yaml` and installing it from the current directory:
+Alternatively, you can customize the default `values.yaml` by first fetching the Helm chart, unpacking it, modifying the `values.yaml`, and then installing it from the current directory:
 
 ```sh
 helm pull oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube:<version>
