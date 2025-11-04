@@ -280,3 +280,38 @@ Standalone Agents work as a Global Runner Agent (described above) and can also b
 
 The ID is shown in the list of Agents (see below), the Name is the same `xxxx` prefixed with tkcenv instead.
 
+## Silent Executions
+
+Silent Executions let you run Workflows and Tests without recording the execution in Insights, 
+generating metrics, triggering CDEvents or Webhooks, or affecting Workflow health.
+This is useful when you want to test or debug your pipelines without polluting analytics dashboards, reports, or automated signals.
+
+Silent Execution mode is available both in the Dashboard and CLI.
+
+> Note: Silent Executions are currently not support for nested Workflows which are run via `execute`  command.
+
+### When to use Silent Executions
+
+Silent Executions are ideal when you want to run tests without leaving traces in your analytics or automation pipeline, such as:
+- Local development and debugging
+- Trial runs before production usage
+- Internal verification or smoke checks
+- CI experimentation without affecting dashboards
+
+Silent Executions behave exactly like normal executions — they run on Agents, respect targeting rules, and produce logs — but execute “quietly.”
+
+### Running Silent Executions in the Dashboard
+
+You can run a Workflow silently from the Workflow details page.
+Click the dropdown button next to the **Run now** button and select the **Run as silent execution checkbox**, 
+then click on the **Run now** button.
+
+![Run as silent execution](images/silent-execution.png)
+
+### Running Silent Executions via CLI
+
+To execute a Workflow silently using the CLI, add the `--silent` flag:
+
+```sh
+testkube run testworkflow my-k6-test --silent
+```
