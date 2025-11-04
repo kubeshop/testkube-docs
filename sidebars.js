@@ -610,6 +610,11 @@ const sidebars = {
               label: "Audit Logs",
               id: "testkube-pro/articles/audit-logs",
             },
+            {
+              type: "doc",
+              label: "Credential Management",
+              id: "articles/credential-management",
+            },
           ],
         },
         ,
