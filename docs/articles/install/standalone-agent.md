@@ -69,18 +69,6 @@ testkube init
 
 ### With Helm
 
-Add the Kubeshop Helm repository:
-
-```sh
-helm repo add kubeshop https://kubeshop.github.io/helm-charts
-```
-
-If this repo already exists, run `helm repo update` to retrieve
-the `latest` versions of the packages. You can then run `helm search repo
-testkube` to see the charts.
-
-Install the Helm Chart with defaults:
-
 ```sh
 helm upgrade --install \
   --create-namespace \
@@ -90,20 +78,13 @@ helm upgrade --install \
 
 By default, the namespace for the installation will be `testkube`. If the `testkube` namespace does not exist, it will be created for you.
 
-Alternatively, you can customize by fetching the default values.yaml and modifying it afterward:
+Alternatively, you can customize the default `values.yaml` by first fetching the Helm chart, unpacking it, modifying the `values.yaml`, and then installing it from the current directory:
 
 ```sh
-helm show values kubeshop/testkube > values.yaml
-```
-
-In this case you can install the Helm Chart as follows:
-
-```sh
-helm upgrade --install \
-  --create-namespace \
-  --namespace testkube \
-  -f values.yaml \
-  oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube --version <version>
+helm pull oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube:<version>
+tar -xzf testkube-<version>
+cd testkube/
+helm install testkube . --create-namespace --namespace testkube --values values.yaml
 ```
 
 :::tip
