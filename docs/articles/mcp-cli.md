@@ -85,10 +85,6 @@ Help me debug my last failed workflow execution
 ```
 
 ```text
-Create a new test workflow for my Python API and run it 
-```
-
-```text
 Show me test execution trends for the past week and identify failing patterns
 ```
 

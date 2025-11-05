@@ -35,7 +35,7 @@ export TK_ENV_ID="your_environment_id"
 
 ## MCP Client Configuration
 
-The Testkube Docker MCP Server can run using both stdio and shttp transports - [Read More](/articles/mcp-overview#mcp-server-transport-modes)
+The Testkube Docker MCP Server can run using both stdio and shttp transports - [Read More](/articles/mcp-cli#mcp-server-transport-modes)
 
 ### VSCode / Cursor
 
