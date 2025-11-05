@@ -451,11 +451,6 @@ const sidebars = {
                 },
                 {
                   type: "doc",
-                  label: "Local Dev Loop",
-                  id: "articles/local-dev-loop",
-                },
-                {
-                  type: "doc",
                   label: "Looping Test Workflow Executions from Workflows",
                   id: "articles/loop-execution-workflows",
                 },
@@ -710,6 +705,11 @@ const sidebars = {
               type: "doc",
               label: "Environments and Access Control",
               id: "articles/environments-best-practices",
+            },
+            {
+              type: "doc",
+              label: "Local Development Loop",
+              id: "articles/local-dev-loop",
             },
           ]
         }
