@@ -4,7 +4,7 @@ This guide provides configuration examples for integrating the Testkube MCP Serv
 
 :::tip
 Before configuring your AI tools, make sure you've set up the Testkube MCP Server using one of these methods:
-- **[Hosted Endpoint](./mcp-setup)** (Recommended - no installation required)
+- **[Hosted Endpoint](./mcp-hosted)** (Recommended - no installation required)
 - **[CLI Setup](./mcp-cli)** (For local development)
 - **[Docker Setup](./mcp-docker)** (For containerized deployments)
 :::
@@ -37,7 +37,7 @@ GitHub Copilot with Agent mode in VS Code provides excellent agentic capabilitie
 
    Replace `tkcorg_YOUR_ORG_ID`, `tkcenv_YOUR_ENV_ID`, and `YOUR_API_TOKEN_HERE` with your actual values.
    
-   **[Learn more about the hosted endpoint →](./mcp-setup)**
+   **[Learn more about the hosted endpoint →](./mcp-hosted)**
 
 2. **Restart VS Code** to load the new configuration
 
@@ -111,7 +111,7 @@ Add the hosted endpoint configuration to your Cursor MCP settings:
 
 Replace `tkcorg_YOUR_ORG_ID`, `tkcenv_YOUR_ENV_ID`, and `YOUR_API_TOKEN_HERE` with your actual values.
 
-**[Learn more about the hosted endpoint →](./mcp-setup)**
+**[Learn more about the hosted endpoint →](./mcp-hosted)**
 
 ### Using the CLI
 
@@ -171,7 +171,7 @@ For direct interaction with Claude through the desktop application.
 
    Replace `tkcorg_YOUR_ORG_ID`, `tkcenv_YOUR_ENV_ID`, and `YOUR_API_TOKEN_HERE` with your actual values.
    
-   **[Learn more about the hosted endpoint →](./mcp-setup)**
+   **[Learn more about the hosted endpoint →](./mcp-hosted)**
 
 2. **Restart Claude Desktop**
 

@@ -3,7 +3,7 @@
 Run the Testkube MCP Server locally using the Testkube CLI. This approach is ideal for local development and when you need full control over the MCP server process.
 
 :::tip
-If you don't want to install the CLI locally, consider using the [Hosted MCP Endpoint](./mcp-setup) instead.
+If you don't want to install the CLI locally, consider using the [Hosted MCP Endpoint](./mcp-hosted) instead.
 :::
 
 ## Prerequisites

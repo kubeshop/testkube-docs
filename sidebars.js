@@ -686,7 +686,7 @@ const sidebars = {
                 {
                   type: "doc",
                   label: "Hosted Endpoint",
-                  id: "articles/mcp-setup",
+                  id: "articles/mcp-hosted",
                 },
                 {
                   type: "doc",

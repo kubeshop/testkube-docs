@@ -44,7 +44,7 @@ Choose the setup method that works best for you:
 - ✅ Best for remote access and team collaboration
 - ✅ Works with any AI tool that supports SSE transport
 
-**[Get Started with Hosted Endpoint →](./mcp-setup)**
+**[Get Started with Hosted Endpoint →](./mcp-hosted)**
 
 ### 2. Testkube CLI
 
