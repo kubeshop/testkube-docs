@@ -597,7 +597,7 @@ const redirects = [
   },
   {
     from: ["/articles/mcp-setup", "/articles/mcp"],
-    to: "/articles/mcp-overview",
+    to: "/articles/mcp-hosted",
   },
   {
     from: "/mcp",

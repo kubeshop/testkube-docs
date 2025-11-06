@@ -451,11 +451,6 @@ const sidebars = {
                 },
                 {
                   type: "doc",
-                  label: "Local Dev Loop",
-                  id: "articles/local-dev-loop",
-                },
-                {
-                  type: "doc",
                   label: "Looping Test Workflow Executions from Workflows",
                   id: "articles/loop-execution-workflows",
                 },
@@ -610,6 +605,11 @@ const sidebars = {
               label: "Audit Logs",
               id: "articles/audit-logs",
             },
+            {
+              type: "doc",
+              label: "Credential Management",
+              id: "articles/credential-management",
+            },
           ],
         },
         ,
@@ -680,18 +680,28 @@ const sidebars = {
               items: [
                 {
                   type: "doc",
-                  label: "Getting Started",
+                  label: "Overview",
                   id: "articles/mcp-overview",
+                },
+                {
+                  type: "doc",
+                  label: "Hosted Endpoint",
+                  id: "articles/mcp-hosted",
+                },
+                {
+                  type: "doc",
+                  label: "CLI Setup",
+                  id: "articles/mcp-cli",
+                },
+                {
+                  type: "doc",
+                  label: "Docker Setup",
+                  id: "articles/mcp-docker",
                 },
                 {
                   type: "doc",
                   label: "Configuration Examples",
                   id: "articles/mcp-configuration",
-                },
-                {
-                  type: "doc",
-                  label: "Docker MCP Server",
-                  id: "articles/mcp-docker",
                 },
               ],
             },
@@ -705,6 +715,11 @@ const sidebars = {
               type: "doc",
               label: "Environments and Access Control",
               id: "articles/environments-best-practices",
+            },
+            {
+              type: "doc",
+              label: "Local Development Loop",
+              id: "articles/local-dev-loop",
             },
           ]
         }
