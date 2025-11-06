@@ -15,7 +15,7 @@ for managing Resources, executing Workflows and listening to Events.
 
 :::info
 At the technical level, the Resources in a Testkube environment are managed by a Testkube Agent running in your 
-Kubernetes Cluster - read more [here](../../articles/architecture.md).
+Kubernetes Cluster - read more [here](/articles/architecture.md).
 :::
 
 Your existing Environments are available from the Environment dropdown on the top of the Testkube Dashboard (see 
@@ -26,10 +26,10 @@ screenshot below), selecting an Environment will focus the Testkube Dashboard on
 
 You can create a new environment from the Environments dropdown in the header section of the Testkube Dashboard:
 
-![Create Environment](../../img/create-environment.png)
+![Create Environment](../img/create-environment.png)
 
 :::tip
-You can create an Environment from the "Environments" panel in the [Organization Settings](/testkube-pro/articles/organization-management#environments) also.
+You can create an Environment from the "Environments" panel in the [Organization Settings](/articles/organization-management#environments) also.
 :::
 
 ### Cloud Options
@@ -43,7 +43,7 @@ When creating a new environment in the Testkube Cloud Control Plane, you will fi
 3. **I don't use Kubernetes** - if you're not familiar with Kubernetes and don't want to install a local cluster, you can use
    our sandbox environment for exploring Testkube functionality with having to install anything.
 
-![Cloud Environment Creation](../../img/cloud-create-environment.png)
+![Cloud Environment Creation](../img/cloud-create-environment.png)
 
 :::tip
 
@@ -53,11 +53,11 @@ The Testkube Sandbox environment available in the Testkube Cloud Control Plane i
 It contains a large collection of Workflows for different testing tools, with corresponding execution results and
 Test Insights.
 
-You are added as a member with the Run role (see [below](/testkube-pro/articles/environment-management#environment-members)),
+You are added as a member with the Run role (see [below](/articles/environment-management#environment-members)),
 which gives you read-only access to explore and run these workflows and their results, as well as read-only access to
 all other major features of Testkube.
 
-![Sandbox Environment](../../img/demo-environment.png)
+![Sandbox Environment](../img/demo-environment.png)
 
 :::
 
@@ -66,7 +66,7 @@ all other major features of Testkube.
 Creating an environment in Testkube on-prem or selecting **Let's get started** in the cloud-specific dialog above will show
 a prompt for a unique environment name:
 
-![Provide Environment Name](../../img/create-environment-name.png)
+![Provide Environment Name](../img/create-environment-name.png)
 
 ### Environment connection
 
@@ -75,11 +75,11 @@ After providing the environment name you will be prompted as shown below to [Ins
 [Testkube Agent](/articles/install/standalone-agent) for your environment, the provided command will automatically
 connect the Agent to your Control Plane.
 
-![New Environment Connection](../../img/new-environment-connection.png)
+![New Environment Connection](../img/new-environment-connection.png)
 
 Running the provided Testkube CLI command in your terminal will install the agent and connect it to the created environment:
 
-![Environment CLI Agent Installation](../../img/environment-cli-agent-install.png)
+![Environment CLI Agent Installation](../img/environment-cli-agent-install.png)
 
 Once connected, you should see a corresponding status update in the dialog above to indicate that the installation
 was successful.
@@ -89,7 +89,7 @@ was successful.
 You can access the settings for an existing Environment either from the same top-level menu or the corresponding
 toolbar buttton on the left:
 
-![Environment Settings](../../img/environment-settings.png)
+![Environment Settings](../img/environment-settings.png)
 
 There are 6 panels for managing your Environment.
 
@@ -97,7 +97,7 @@ There are 6 panels for managing your Environment.
 
 Find the general settings for your environment on the **General** tab. You can also delete the environment here, but, be aware, this action cannot be undone.
 
-![General Settings Dashboard](../../img/general-settings-dashboard-072024.png)
+![General Settings Dashboard](../img/general-settings-dashboard-072024.png)
 
 ### Agents
 
@@ -107,7 +107,7 @@ Manage your Environment Agents here - [Read More](/articles/agents-overview).
 
 ### Environment Members
 
-You can assign environment-specific roles to [Teams](/articles/teams) or individual [Members](/testkube-pro/articles/organization-management#members) of your organization to control which
+You can assign environment-specific roles to [Teams](/articles/teams) or individual [Members](/articles/organization-management#members) of your organization to control which
 actions a member can perform in a specific environment.
 
 #### Adding Environment Members
@@ -115,7 +115,7 @@ actions a member can perform in a specific environment.
 To add new members to an Environment, select the Members tab under the Environment settings and use the "Add Collaborators"
 section to search for and add individual members or teams from your organization.
 
-![Add Environment Members](../../img/add-environment-members.png)
+![Add Environment Members](../img/add-environment-members.png)
 
 You can choose from one of the following roles for a member:
 
@@ -138,13 +138,13 @@ allows you to manage and apply Resource Access controls.
 You can see a list of existing Environment members at the bottom of this panel, and change their role or remove them
 using the popup menu on the right:
 
-![Environment Members](../../img/environment-members.png)
+![Environment Members](../img/environment-members.png)
 
 ### Keyword Handling
 
-This tab allows you to manage the Filtering categories available for [Log Highlighting](/testkube-pro/articles/log-highlighting)
+This tab allows you to manage the Filtering categories available for [Log Highlighting](/articles/log-highlighting)
 
-![Keyword Handling](../../img/environment-keyword-handling.png)
+![Keyword Handling](../img/environment-keyword-handling.png)
 
 There are 4 default categories, represented with a few keywords each:
 
@@ -174,4 +174,4 @@ Check out [Concurrency & Queueing](/articles/test-workflows-concurrency-queueing
 
 This tab allows you to configure Environment-level Product Features:
 
-![Product Features](../../img/environment-product-features.png)
+![Product Features](../img/environment-product-features.png)

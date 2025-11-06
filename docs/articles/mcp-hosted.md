@@ -74,7 +74,7 @@ Replace:
 3. Create a new API token with appropriate permissions
 4. Copy the generated API token (you won't be able to see it again)
 
-See [API Token Management](/testkube-pro/articles/organization-management#api-tokens) for more details.
+See [API Token Management](/articles/organization-management#api-tokens) for more details.
 
 ## Self-Hosted Deployments
 

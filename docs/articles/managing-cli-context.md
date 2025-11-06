@@ -36,7 +36,7 @@ testkube login \
 ## API Token Authentication
 
 An alternative Control Plane authentication approach is to use an API Token, which can be created in the
-Testkube Dashboard ([Read More](/testkube-pro/articles/api-token-management)) and set the CLI Context accordingly. The CLI will
+Testkube Dashboard ([Read More](/articles/api-token-management)) and set the CLI Context accordingly. The CLI will
 use this token to authenticate and gain access to corresponding Testkube resources and commands.
 
 When the token is created, you're ready to change the Testkube CLI context using the

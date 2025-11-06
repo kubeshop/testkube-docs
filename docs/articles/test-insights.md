@@ -34,7 +34,7 @@ The "Your Boards" section contains all Boards created within your Organization.
 There is currently no way to limit access to individual boards for Organization members; everyone has access
 to all boards and can thus see all data within (which is read-only). 
 
-If this is a concern you can disable Insights entirely for from the [Product Features Panel](/testkube-pro/articles/organization-management#product-features).
+If this is a concern you can disable Insights entirely for from the [Product Features Panel](/articles/organization-management#product-features).
 :::
 
 ## Boards

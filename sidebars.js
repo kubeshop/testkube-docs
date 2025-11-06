@@ -94,7 +94,7 @@ const sidebars = {
                 {
                   type: "doc",
                   label: "SSO / Identity Provides",
-                  id: "testkube-pro-on-prem/articles/auth",
+                  id: "articles/auth",
                 },
                 {
                   type: "doc",
@@ -231,7 +231,7 @@ const sidebars = {
             {
               type: "doc",
               label: "Overview",
-              id: "testkube-pro/articles/environment-management",
+              id: "articles/environment-management",
             },
             {
               type: "doc",
@@ -518,7 +518,7 @@ const sidebars = {
                 {
                   type: "doc",
                   label: "Log Highlighting",
-                  id: "testkube-pro/articles/log-highlighting",
+                  id: "articles/log-highlighting",
                 },
                 {
                   type: "doc",
@@ -533,12 +533,12 @@ const sidebars = {
                 {
                   type: "doc",
                   label: "AI Analysis",
-                  id: "testkube-pro/articles/AI-test-insights",
+                  id: "articles/AI-test-insights",
                 },
                 {
                   type: "doc",
                   label: "Cached Test Results",
-                  id: "testkube-pro/articles/cached-results",
+                  id: "articles/cached-results",
                 },
               ],
             },
@@ -555,7 +555,7 @@ const sidebars = {
                 {
                   type: "doc",
                   label: "Status Pages",
-                  id: "testkube-pro/articles/status-pages",
+                  id: "articles/status-pages",
                 },
               ],
             },
@@ -573,12 +573,12 @@ const sidebars = {
             {
               type: "doc",
               label: "Organizations",
-              id: "testkube-pro/articles/organization-management",
+              id: "articles/organization-management",
             },
             {
               type: "doc",
               label: "Members",
-              id: "testkube-pro/articles/member-management",
+              id: "articles/member-management",
             },
             {
               type: "doc",
@@ -598,12 +598,12 @@ const sidebars = {
             {
               type: "doc",
               label: "API Tokens",
-              id: "testkube-pro/articles/api-token-management",
+              id: "articles/api-token-management",
             },
             {
               type: "doc",
               label: "Audit Logs",
-              id: "testkube-pro/articles/audit-logs",
+              id: "articles/audit-logs",
             },
             {
               type: "doc",
@@ -630,7 +630,7 @@ const sidebars = {
             {
               type: "doc",
               label: "CLI Authentication",
-              id: "testkube-pro/articles/managing-cli-context",
+              id: "articles/managing-cli-context",
             },
             {
               type: "doc",

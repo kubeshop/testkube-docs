@@ -12,7 +12,7 @@ These logs can help monitor usage patterns, identify security risks, and ensure 
 
 Here, **Organization Owners** and **Admins** can review detailed records of user actions.
 
-![Audit log](../../img/audit-log.png "Audit log")
+![Audit log](../img/audit-log.png "Audit log")
 
 ## Filtering Audit Logs
 
@@ -30,7 +30,7 @@ Events in the Audit Log can be filtered using various parameters to focus on spe
 
 This makes it easy to integrate the audit log events with other reporting or analysis tools.
 
-![Export Audit Logs](../../img/audit-log-export.png "Export Audit Logs")
+![Export Audit Logs](../img/audit-log-export.png "Export Audit Logs")
 
 ## Retention Period
 

@@ -24,7 +24,7 @@ root tests folder (where Playwright will be looking for it).
   and then a combination of `grep` and `sed` to extract the `executionId`.
 - The **"Get specific execution results"** step (lines 50-64) uses the provided `executionId` instead.
 - The CLI needs an API Token to retrieve results; it is recommended to use a `Member` token with access to the
-  containing Environment with Read permissions as described at [Member Tokens](/testkube-pro/articles/api-token-management#member-tokens)
+  containing Environment with Read permissions as described at [Member Tokens](/articles/api-token-management#member-tokens)
   and replace the `tkcapi_XXXX` value on line 57
 - The Workflow prompts for three parameters (all optional):
   - `rerunFailed` : tells the Workflow to rerun failed executions from a previous execution; if set to `false` (default)

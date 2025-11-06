@@ -2,7 +2,7 @@
 
 To manage your organization settings click "Organization Management" from organizations drop-down menu:
 
-![Organization Management](../../img/organization-management.png)
+![Organization Management](../img/organization-management.png)
 
 (You can also create new organizations from this menu).
 
@@ -10,7 +10,7 @@ To manage your organization settings click "Organization Management" from organi
 
 In the environments section, you can see the list of your existing environments.
 
-![Existing Environments](../../img/existing-environments-062024.png)
+![Existing Environments](../img/existing-environments-062024.png)
 
 GREEN status means that the [Standalone Agent](/articles/agents-overview#the-standalone-agent) in your Environment is connected successfully.
 
@@ -22,11 +22,11 @@ testkube agent debug
 
 Run this on your cluster where the given agent is installed.
 
-Read more about [Environment Management](../articles/environment-management.md).
+Read more about [Environment Management](/articles/environment-management).
 
 ## Members
 
-The members section allows you to invite and manage your organizations' members and their roles - [Read More](member-management)
+The members section allows you to invite and manage your organizations' members and their roles - [Read More](/articles/member-management)
 
 ![Organization Member Management](images/org-members.png)
 
@@ -35,21 +35,21 @@ The members section allows you to invite and manage your organizations' members 
 Teams allow you to group Organization members to simplify access control management for Environments
 and Resource Groups - [Read More](/articles/teams).
 
-![Teams Overview](../../img/teams-overview.png)
+![Teams Overview](../img/teams-overview.png)
 
 ## Resource Groups
 
 Resource Groups allow you to group Testkube Resources across all your environments and assign
 member access - [Read More](/articles/resource-groups).
 
-![Resource Groups Overview](../../img/resource-groups-overview.png)
+![Resource Groups Overview](../img/resource-groups-overview.png)
 
 ## API Tokens
 
-API tokens allows running tests without linking the run to a specific account - see [API Token Management](api-token-management)
+API tokens allows running tests without linking the run to a specific account - see [API Token Management](/articles/api-token-management)
 for more details on how to create and use API Tokens.
 
-![API Tokens](../../img/api-tokens.png)
+![API Tokens](../img/api-tokens.png)
 
 ## Product Features
 
@@ -61,13 +61,13 @@ This tab allows you to configure Organization-level Product Features:
 - **Webhooks URL Masking** - Toggle Webhooks URL masking - [Read More](/articles/webhooks#url-masking).
 - **Agent Token Masking** - Toggle Agent Token masking - [Read More](/articles/agents-overview#agent-token-masking).
 
-![Organization Product Features](../../img/organization-product-features.png)
+![Organization Product Features](../img/organization-product-features.png)
 
 ## Usage & Billing
 
 This section shows your current usage against the limits of your current plan.
 
-![Usage](../../img/usage.png)
+![Usage](../img/usage.png)
 
 Usage shows
 
@@ -93,10 +93,10 @@ Don't hesitate to [Contact Us](https://testkube.io/contact) if you have any ques
 
 In settings, you can update the name of the organization, set artifacts limits, or enable or disable AI Hints and Webhooks URL Masking.
 
-![Organization Setting](../../img/organization-settings.png)
+![Organization Setting](../img/organization-settings.png)
 
 ## Audit Log
 
-The Audit Log provides insights into usage of your Testkube instance - [Read More](audit-logs)
+The Audit Log provides insights into usage of your Testkube instance - [Read More](/articles/audit-logs)
 
 ![Audit Log](images/audit-log-overview.png)

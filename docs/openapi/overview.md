@@ -34,5 +34,5 @@ The operations exposed by the control plane are here divided into the following 
 - **Environment Operations**: Operations for a specific environment defined within an organization.
 
 These API calls all require an API token specified using `Bearer Token` authentication. 
-- API Tokens can be created as described at [Organization Management](../testkube-pro/articles/api-token-management).
+- API Tokens can be created as described at [Organization Management](/articles/api-token-management).
 - Add an `Authorization` HTTP header to your API requests with the value `Bearer: <API token>`

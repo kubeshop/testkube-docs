@@ -299,7 +299,7 @@ const redirects = [
       "/testkube-pro/transition-from-oss",
       "/testkube-pro/articles/transition-from-oss",
     ],
-    to: "/testkube-pro/articles/environment-management",
+    to: "/articles/environment-management",
   },
   {
     from: [
@@ -307,7 +307,7 @@ const redirects = [
       "/testkube-cloud/articles/organization-management",
       "/testkube-pro/organization-management",
     ],
-    to: "/testkube-pro/articles/organization-management",
+    to: "/articles/organization-management",
   },
   {
     from: [
@@ -315,7 +315,7 @@ const redirects = [
       "/testkube-cloud/articles/environment-management",
       "/testkube-pro/environment-management",
     ],
-    to: "/testkube-pro/articles/environment-management",
+    to: "/articles/environment-management",
   },
   {
     from: [
@@ -323,7 +323,7 @@ const redirects = [
       "/testkube-cloud/articles/managing-cli-context",
       "/testkube-pro/managing-cli-context",
     ],
-    to: "/testkube-pro/articles/managing-cli-context",
+    to: "/articles/managing-cli-context",
   },
   {
     from: [
@@ -346,21 +346,21 @@ const redirects = [
       "/testkube-cloud/articles/AI-test-insights",
       "/testkube-pro/AI-test-insights",
     ],
-    to: "/testkube-pro/articles/AI-test-insights",
+    to: "/articles/AI-test-insights",
   },
   {
     from: [
       "/testkube-cloud/articles/status-pages",
       "/testkube-pro/status-pages",
     ],
-    to: "/testkube-pro/articles/status-pages",
+    to: "/articles/status-pages",
   },
   {
     from: [
       "/testkube-cloud/articles/cached-results",
       "/testkube-pro/cached-results",
     ],
-    to: "/testkube-pro/articles/cached-results",
+    to: "/articles/cached-results",
   },
   {
     from: "/reference/helm-chart",
@@ -405,7 +405,7 @@ const redirects = [
   },
   {
     from: ["/testkube-enterprise/articles/auth", "/articles/install/auth"],
-    to: "/testkube-pro-on-prem/articles/auth",
+    to: "/articles/auth",
   },
   {
     from: [
@@ -609,7 +609,7 @@ const redirects = [
   },
   {
     from: "/articles/install/multi-agent",
-    to: "/testkube-pro/articles/environment-management",
+    to: "/articles/environment-management",
   },
   {
     from: "/testkube-pro/articles/agent-management",
@@ -632,6 +632,52 @@ const redirects = [
   {
     from: "/learn/runner-concurrency-limit",
     to: "/articles/test-workflows-concurrency-queueing#runner-concurrency-limit",
+  },
+  // Redirects for moved testkube-pro articles
+  {
+    from: "/testkube-pro/articles/AI-test-insights",
+    to: "/articles/AI-test-insights",
+  },
+  {
+    from: "/testkube-pro/articles/api-token-management",
+    to: "/articles/api-token-management",
+  },
+  {
+    from: "/testkube-pro/articles/audit-logs",
+    to: "/articles/audit-logs",
+  },
+  {
+    from: "/testkube-pro/articles/cached-results",
+    to: "/articles/cached-results",
+  },
+  {
+    from: "/testkube-pro/articles/environment-management",
+    to: "/articles/environment-management",
+  },
+  {
+    from: "/testkube-pro/articles/log-highlighting",
+    to: "/articles/log-highlighting",
+  },
+  {
+    from: "/testkube-pro/articles/managing-cli-context",
+    to: "/articles/managing-cli-context",
+  },
+  {
+    from: "/testkube-pro/articles/member-management",
+    to: "/articles/member-management",
+  },
+  {
+    from: "/testkube-pro/articles/organization-management",
+    to: "/articles/organization-management",
+  },
+  {
+    from: "/testkube-pro/articles/status-pages",
+    to: "/articles/status-pages",
+  },
+  // Redirects for moved testkube-pro-on-prem articles
+  {
+    from: "/testkube-pro-on-prem/articles/auth",
+    to: "/articles/auth",
   },
 ];
 

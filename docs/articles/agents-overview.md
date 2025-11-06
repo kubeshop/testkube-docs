@@ -51,13 +51,13 @@ on a Runner Agent deployed in cluster B.
 The [Standalone Agent](#the-standalone-agent) doubles as a Listener Agent also, but as opposed to the Standalone Agent, which listens for events in all namespaces by default, 
 Listener Agents only listen for events in the namespace they are deployed in.
 
-Read more about how TestTriggers map to Listener Agents at [Listener Agents with TestTriggers](/articles/test-triggers#listener-agents).
+Read more about how TestTriggers map to Listener Agents at [Listener Agents with TestTriggers](/articles/test-triggers#listener-agents-with-testtriggers).
 
 ### The Standalone Agent
 
 Each Testkube Environment always requires a single **[Standalone Agent](/articles/install/standalone-agent)** which provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
 
-The Standalone Agent is installed when you [create a new Testkube Environment](/testkube-pro/articles/environment-management#creating-a-new-environment) and is shown on the bottom of the list of Agents 
+The Standalone Agent is installed when you [create a new Testkube Environment](/articles/environment-management#creating-a-new-environment) and is shown on the bottom of the list of Agents 
 with the label `runnertype: superagent`.
 
 :::note
@@ -128,7 +128,7 @@ the following information:
 - The connection status and name of the agent.
 - Which Testkube version the Agent is running, and the latest available version (so you know if an upgrade is available).
 - CLI and Helm commands to install or update the Agent to the latest version.
-- The `testkube set context` CLI command to configure the Testkube CLI for this agent - [Read More](/testkube-pro/articles/managing-cli-context).
+- The `testkube set context` CLI command to configure the Testkube CLI for this agent - [Read More](/articles/managing-cli-context).
 
 ![Manage Standalone Agent Dialog](images/manage-standalone-agent-dialog.png)
 
