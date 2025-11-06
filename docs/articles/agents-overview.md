@@ -51,7 +51,7 @@ on a Runner Agent deployed in cluster B.
 The [Standalone Agent](#the-standalone-agent) doubles as a Listener Agent also, but as opposed to the Standalone Agent, which listens for events in all namespaces by default, 
 Listener Agents only listen for events in the namespace they are deployed in.
 
-Read more about how TestTriggers map to Listener Agents at [Listener Agents with TestTriggers](/articles/test-triggers#listener-agents).
+Read more about how TestTriggers map to Listener Agents at [Listener Agents with TestTriggers](/articles/test-triggers#listener-agents-with-testtriggers).
 
 ### The Standalone Agent
 
