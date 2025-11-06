@@ -1,13 +1,51 @@
 # MCP Server Configuration Examples
 
-This guide provides configuration examples for integrating the [Testkube MCP Server](/articles/mcp-overview) with various
-AI tools and development environments.
+This guide provides configuration examples for integrating the Testkube MCP Server with various AI tools and development environments.
+
+:::tip
+Before configuring your AI tools, make sure you've set up the Testkube MCP Server using one of these methods:
+- **[Hosted Endpoint](./mcp-hosted)** (Recommended - no installation required)
+- **[CLI Setup](./mcp-cli)** (For local development)
+- **[Docker Setup](./mcp-docker)** (For containerized deployments)
+:::
 
 ## GitHub Copilot (VS Code)
 
 GitHub Copilot with Agent mode in VS Code provides excellent agentic capabilities for multi-step testing workflows.
 
-### Configuration
+### Using the Hosted Endpoint (Recommended)
+
+1. **Create or edit your MCP configuration file:**
+
+   **Location:** `~/Library/Application Support/Code/User/mcp.json` (macOS) or `%APPDATA%\Code\User\mcp.json` (Windows)
+
+   ```json
+   {
+     "mcpServers": {
+       "testkube": {
+         "url": "https://api.testkube.io/organizations/tkcorg_YOUR_ORG_ID/environments/tkcenv_YOUR_ENV_ID/mcp",
+         "transport": {
+           "type": "sse"
+         },
+         "headers": {
+           "Authorization": "Bearer YOUR_API_TOKEN_HERE"
+         }
+       }
+     }
+   }
+   ```
+
+   Replace `tkcorg_YOUR_ORG_ID`, `tkcenv_YOUR_ENV_ID`, and `YOUR_API_TOKEN_HERE` with your actual values.
+   
+   **[Learn more about the hosted endpoint →](./mcp-hosted)**
+
+2. **Restart VS Code** to load the new configuration
+
+3. **Test the integration:**
+   - Open GitHub Copilot Agent mode
+   - Try a prompt like: `list my testkube workflows`
+
+### Using the CLI
 
 1. **Create or edit your MCP configuration file:**
 
@@ -25,6 +63,8 @@ GitHub Copilot with Agent mode in VS Code provides excellent agentic capabilitie
      "inputs": []
    }
    ```
+
+   **[Learn more about CLI setup →](./mcp-cli)**
 
 2. **Restart VS Code** to load the new configuration
 
@@ -49,7 +89,33 @@ We recommend using **Claude Sonnet 4** with GitHub Copilot for the most sophisti
 
 Cursor provides powerful AI assistance with built-in MCP support.
 
-**Add Testkube server configuration to your Cursor MCP settings:**
+### Using the Hosted Endpoint (Recommended)
+
+Add the hosted endpoint configuration to your Cursor MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "testkube": {
+      "url": "https://api.testkube.io/organizations/tkcorg_YOUR_ORG_ID/environments/tkcenv_YOUR_ENV_ID/mcp",
+      "transport": {
+        "type": "sse"
+      },
+      "headers": {
+        "Authorization": "Bearer YOUR_API_TOKEN_HERE"
+      }
+    }
+  }
+}
+```
+
+Replace `tkcorg_YOUR_ORG_ID`, `tkcenv_YOUR_ENV_ID`, and `YOUR_API_TOKEN_HERE` with your actual values.
+
+**[Learn more about the hosted endpoint →](./mcp-hosted)**
+
+### Using the CLI
+
+Add Testkube server configuration to your Cursor MCP settings:
 
 ```json
 {
@@ -62,6 +128,8 @@ Cursor provides powerful AI assistance with built-in MCP support.
   }
 }
 ```
+
+**[Learn more about CLI setup →](./mcp-cli)**
 
 ### Usage Examples
 
@@ -79,6 +147,36 @@ Look at my recent test failures and help me understand what's causing them. Chec
 
 For direct interaction with Claude through the desktop application.
 
+#### Using the Hosted Endpoint (Recommended)
+
+1. **Create or edit Claude Desktop config:**
+
+   **Location:** `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
+
+   ```json
+   {
+     "mcpServers": {
+       "testkube": {
+         "url": "https://api.testkube.io/organizations/tkcorg_YOUR_ORG_ID/environments/tkcenv_YOUR_ENV_ID/mcp",
+         "transport": {
+           "type": "sse"
+         },
+         "headers": {
+           "Authorization": "Bearer YOUR_API_TOKEN_HERE"
+         }
+       }
+     }
+   }
+   ```
+
+   Replace `tkcorg_YOUR_ORG_ID`, `tkcenv_YOUR_ENV_ID`, and `YOUR_API_TOKEN_HERE` with your actual values.
+   
+   **[Learn more about the hosted endpoint →](./mcp-hosted)**
+
+2. **Restart Claude Desktop**
+
+#### Using the CLI
+
 1. **Create or edit Claude Desktop config:**
 
    **Location:** `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
@@ -94,6 +192,8 @@ For direct interaction with Claude through the desktop application.
    }
    ```
 
+   **[Learn more about CLI setup →](./mcp-cli)**
+
 2. **Restart Claude Desktop**
 
 ### Claude Code
@@ -108,6 +208,8 @@ claude mcp add testkube -- docker run --rm -i \
    kubeshop/testkube-mcp-server:latest mcp serve
 ```
 
+**[Learn more about Docker setup →](./mcp-docker)**
+
 ### Usage
 
 Claude Desktop provides conversational access to your Testkube resources:
@@ -118,8 +220,6 @@ Can you show me all my test workflows and their recent execution status?
 I need to create a new workflow for testing my Python application.
 Can you help me set this up?
 ```
-
-
 
 ## Example Claude Workflows
 

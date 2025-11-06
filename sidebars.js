@@ -680,18 +680,28 @@ const sidebars = {
               items: [
                 {
                   type: "doc",
-                  label: "Getting Started",
+                  label: "Overview",
                   id: "articles/mcp-overview",
+                },
+                {
+                  type: "doc",
+                  label: "Hosted Endpoint",
+                  id: "articles/mcp-hosted",
+                },
+                {
+                  type: "doc",
+                  label: "CLI Setup",
+                  id: "articles/mcp-cli",
+                },
+                {
+                  type: "doc",
+                  label: "Docker Setup",
+                  id: "articles/mcp-docker",
                 },
                 {
                   type: "doc",
                   label: "Configuration Examples",
                   id: "articles/mcp-configuration",
-                },
-                {
-                  type: "doc",
-                  label: "Docker MCP Server",
-                  id: "articles/mcp-docker",
                 },
               ],
             },
