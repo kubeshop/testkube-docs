@@ -240,3 +240,56 @@ Will start 8 instances:
 | `5`     | `2`           | `"firefox"`      | `"1Gi"`         | `1`          | `["https://app.testkube.io"]`                         |
 | `6`     | `3`           | `"firefox"`      | `"2Gi"`         | `0`          | `["https://testkube.io", "https://docs.testkube.io"]` |
 | `7`     | `3`           | `"firefox"`      | `"2Gi"`         | `1`          | `["https://app.testkube.io"]`                         |
+
+## Dynamic Sharding
+
+Individual tests that are spread across shards can have varying execution times, potentially leading to a situation where 
+some shards take much longer to execute than others. A common approach to solve this is to statically define which tests that 
+go into which shard, based on previous execution times. While Testkube currently does not support this approach natively, 
+an alternative approach is available that will work for any kind of sharding mechanism. 
+
+To implement dynamic sharding in a parallel step:
+- Set the number of shards very high (preferably to the number of testcases, but NOT higher)
+- Set the number of parallel workers to a lower value (higher than 1), which will be the actual number of parallel workers that will be used.
+
+Testkube will still create individual nodes for each shard, but only the specified number of parallel workers will execute
+at the same time, resulting in individual long-running tests not blocking other short-running test-cases, while multiple
+long-running test-cases can be executed in parallel without staggering the entire execution.
+
+### Playwright Example
+
+For example, with Playwright tests, hooking into Playwrights native sharding mechanism:
+
+```yaml
+- name: Run tests
+  parallel:
+    description: "Shard: {{ index + 1 }}/{{ count }}"
+    count: 20 # keeping this one high, to have a high number of shards - every test could be a separate shard
+    parallelism: 3 # keeping this low to execute up to 3 "workers" at a time
+    transfer:
+    - from: /data/repo
+    run:
+      shell: 'npx playwright test  --shard={{ index + 1 }}/{{ count }}' # sharding
+```
+
+### Cypress Example
+
+This example is for Cypress, where we use the `shards` property to split test files into shards:
+
+```yaml
+- name: Run tests
+  parallel:
+    maxCount: 10
+    parallelism: 3
+    shards:
+      testFiles: glob("cypress/e2e/**/*.js")
+    description: '{{join(map(shard.testFiles,"relpath(_.value, \"cypress/e2e\")"),",)}}'
+    transfer:
+    - from: /data/repo
+    run:
+      args:
+      - --env
+      - NON_CYPRESS_ENV=NON_CYPRESS_ENV_value
+      - --spec
+      - '{{join(shard.testFiles,",")}}'
+```
