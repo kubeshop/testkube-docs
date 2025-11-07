@@ -7,9 +7,12 @@ import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx"
 
 <RequiresCommercialWorkflows/>
 
-Often you would like to speed up the test execution, by distributing the load across multiple runs.
+It is often desirable to spread the execution of a test across multiple nodes, for example, to generate extended load with
+a performance testing tool, or to speed up execution of a test by breaking it into smaller parts (i.e. sharding).
 
-Test Workflows have `parallel` steps, that allow you to distribute your test even dynamically, and among multiple cluster nodes.
+Test Workflows have `parallel` steps, that allow you to distribute your test even dynamically, and among multiple cluster 
+nodes, which can further be combined with [**matrix and sharding**](./test-workflows-matrix-and-sharding.mdx) to break
+down execution into multiple parallel steps.
 
 ## Syntax
 
