@@ -672,6 +672,11 @@ const sidebars = {
                   label: "How AI Assistant is different",
                   id: "articles/ai-assistant-is-different",
                 },
+                {
+                  type: "doc",
+                  label: "Security & Compliance",
+                  id: "articles/ai-assistant-security",
+                },
               ],
             },
             {
@@ -703,6 +708,11 @@ const sidebars = {
                   label: "Configuration Examples",
                   id: "articles/mcp-configuration",
                 },
+                {
+                  type: "doc",
+                  label: "Security & Compliance",
+                  id: "articles/mcp-security",
+                },
               ],
             },
           ],
@@ -721,8 +731,8 @@ const sidebars = {
               label: "Local Development Loop",
               id: "articles/local-dev-loop",
             },
-          ]
-        }
+          ],
+        },
       ],
     },
     {
@@ -992,7 +1002,7 @@ const sidebars = {
               href: "https://testkube.io/blog/implementing-kubernetes-native-hardware-testing-with-testkube",
               description: "Test for hardware components and infrastructure.",
             },
-          ]
+          ],
         },
         {
           type: "doc",
@@ -1056,8 +1066,7 @@ const sidebars = {
           type: "link",
           label: "Keptn",
           href: "https://testkube.io/learn/leveraging-testkube-as-a-quality-gate-in-multi-stage-deployments-with-keptn",
-          description:
-            "Leveraging Testkube as a Quality Gate in Multi-Stage Deployments with Keptn",
+          description: "Leveraging Testkube as a Quality Gate in Multi-Stage Deployments with Keptn",
         },
         {
           type: "doc",
@@ -1081,15 +1090,13 @@ const sidebars = {
           type: "link",
           label: "PagerDuty",
           href: "https://testkube.io/learn/critical-test-based-alerting-with-pagerduty-and-testkube",
-          description:
-            "Critical Test Based Alerting with PagerDuty and Testkube",
+          description: "Critical Test Based Alerting with PagerDuty and Testkube",
         },
         {
           type: "link",
           label: "Zapier",
           href: "https://testkube.io/learn/integrating-testkube-and-zapier-for-instant-email-alerts",
-          description:
-            "Integrating Testkube and Zapier for Instant Email Alerts",
+          description: "Integrating Testkube and Zapier for Instant Email Alerts",
         },
         { type: "doc", label: "Grafana", id: "articles/grafana" },
         {
@@ -1122,17 +1129,17 @@ const sidebars = {
         id: "articles/reference",
       },
       items: [
-            {
-              type: "doc",
-              label: "Architecture",
-              id: "articles/architecture",
-            },
-            "articles/helm-components",
-            "articles/telemetry",
-            {
-              type: "category",
-              label: "Testkube CRDs",
-              items: [
+        {
+          type: "doc",
+          label: "Architecture",
+          id: "articles/architecture",
+        },
+        "articles/helm-components",
+        "articles/telemetry",
+        {
+          type: "category",
+          label: "Testkube CRDs",
+          items: [
             {
               type: "doc",
               label: "Overview",
