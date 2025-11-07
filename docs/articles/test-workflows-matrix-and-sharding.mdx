@@ -7,14 +7,24 @@ import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx"
 
 <RequiresCommercialWorkflows/>
 
-Often you want to run a test with multiple scenarios or environments,
-either to distribute the load or to verify it on different setup.
+It is often desirable to run a test for multiple scenarios or environments, for example to distribute load or to verify 
+your application for different input. This is traditionally achieved by defining configuration matrixes for 
+each scenario and running all permutations. 
 
-Test Workflows have a built-in mechanism for all these cases - both static and dynamic.
+Furthermore, it is common to split tests into multiple executions that run in parallel ("shards") to speed up the execution.
+
+Test Workflows have built-in mechanisms for both these cases, using both static and dynamic configurations, which
+can further be combined with [parallelisation](test-workflows-parallel) to achieve highly efficient test executions.
+
+:::note
+Sharding (or parallel execution in general) usually only makes sense for long-lasting tests. In the case of
+small and/or short-lasting tests, sharding will often not decrease overall execution times.
+:::
 
 ## Usage
 
-Matrix and sharding features are supported in [**Services (`services`)**](./test-workflows-services), and both [**Test Suite (`execute`)**](./test-workflows-test-suites) and [**Parallel Steps (`parallel`)**](./test-workflows-parallel) operations.
+Matrix and sharding features are supported in [**Services (`services`)**](./test-workflows-services), and both [**Composite (`execute`)**](./test-workflows-test-suites) 
+and [**Parallel Step (`parallel`)**](./test-workflows-parallel) operations.
 
 <Tabs>
 <TabItem value="services" label={<span>Services (<code>services</code>)</span>} default>
@@ -47,7 +57,7 @@ spec:
 ```
 
 </TabItem>
-<TabItem value="execute" label={<span>Test Suite (<code>execute</code>)</span>}>
+<TabItem value="execute" label={<span>Composite (<code>execute</code>)</span>}>
 
 ```yaml
 kind: TestWorkflow
@@ -163,10 +173,7 @@ Often you may want to distribute the load, to speed up the execution. To do so, 
   * `count` defines static number of instances (always)
   * `maxCount` defines maximum number of instances (will be lower if there is not enough data in `shards` to split)
 
-:::note
-Sharding (or parallel execution in general) usually only makes sense for long-lasting tests. In the case of 
-small and/or short-lasting tests, sharding will often not decrease overall execution times at all.
-:::
+Similarly to `matrix`, the `shards` may contain a static list, or [**Test Workflow's expression**](test-workflows-expressions), see examples below:
 
 <Tabs>
 <TabItem value="count" label={<span>Replicas (<code>count</code> only)</span>} default>
@@ -178,7 +185,6 @@ parallel:
   run:
     image: grafana/k6:latest
 ```
-__
 </TabItem>
 <TabItem value="count-shard" label={<span>Static sharding (<code>count</code> + <code>shards</code>)</span>} default>
 
@@ -210,7 +216,6 @@ parallel:
 </TabItem>
 </Tabs>
 
-Similarly to `matrix`, the `shards` may contain a static list, or [**Test Workflow's expression**](test-workflows-expressions).
 
 :::tip
 While running tests in parallel shards, each run can result in its own report or artifacts, which need to be 
