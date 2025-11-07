@@ -163,6 +163,11 @@ Often you may want to distribute the load, to speed up the execution. To do so, 
   * `count` defines static number of instances (always)
   * `maxCount` defines maximum number of instances (will be lower if there is not enough data in `shards` to split)
 
+:::note
+Sharding (or parallel execution in general) usually only makes sense for long-lasting tests. In the case of 
+small and/or short-lasting tests, sharding will often not decrease overall execution times at all.
+:::
+
 <Tabs>
 <TabItem value="count" label={<span>Replicas (<code>count</code> only)</span>} default>
 
@@ -207,6 +212,15 @@ parallel:
 
 Similarly to `matrix`, the `shards` may contain a static list, or [**Test Workflow's expression**](test-workflows-expressions).
 
+:::tip
+While running tests in parallel shards, each run can result in its own report or artifacts, which need to be 
+captured and possibly merged into a single report.
+
+Sometimes this can be handled directly by the tool (like Playwright's [merge-report](https://playwright.dev/docs/test-sharding#merging-reports-from-multiple-shards), 
+see the [Sharded Playwright Example](/articles/examples/playwright-sharded)), but sometimes handling that in 
+custom ways may be needed.
+:::
+
 ### Counters
 
 Besides having the `matrix.<key>` and `shard.<key>` there are some counter variables available in Test Workflow's expressions:
@@ -250,7 +264,8 @@ an alternative approach is available that will work for any kind of sharding mec
 
 To implement dynamic sharding in a parallel step:
 - Set the number of shards very high (preferably to the number of testcases, but NOT higher)
-- Set the number of parallel workers to a lower value (higher than 1), which will be the actual number of parallel workers that will be used.
+- Set the number of parallel workers to a lower value (higher than 1), which will be the actual number of 
+  parallel workers that will be used to execute the tests.
 
 Testkube will still create individual nodes for each shard, but only the specified number of parallel workers will execute
 at the same time, resulting in individual long-running tests not blocking other short-running test-cases, while multiple
@@ -271,6 +286,10 @@ For example, with Playwright tests, hooking into Playwrights native sharding mec
     run:
       shell: 'npx playwright test  --shard={{ index + 1 }}/{{ count }}' # sharding
 ```
+
+:::tip
+See the [Sharded Playwright Example](/articles/examples/playwright-sharded) for a more detailed example.
+:::
 
 ### Cypress Example
 
@@ -293,3 +312,7 @@ This example is for Cypress, where we use the `shards` property to split test fi
       - --spec
       - '{{join(shard.testFiles,",")}}'
 ```
+
+:::tip
+See the [Sharded Cypress Example](/articles/examples/cypress-sharded) for a more detailed example.
+:::
