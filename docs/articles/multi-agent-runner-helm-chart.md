@@ -117,7 +117,9 @@ There are common things that you may want to set up in your values.
 
 ### Setting Agent Mode
 
-:::warning Agents mode cannot be changed after registration, to change that first uninstall and remove manually removed using the UI or CLI to later install again with new mode. :::
+:::warning 
+Agents mode cannot be changed after registration, to change that first uninstall and remove manually removed using the UI or CLI to later install again with new mode. 
+:::
 
 Agents allows 3 modes: Independent, Global, and Grouped, review the description of them 
 [here](/articles/test-workflows-running#runner-agent-modes). By default all new Agents 
@@ -131,7 +133,9 @@ will use mode **Independent**, to set a different mode there is 2 options:
        global: true
    ```
 
-:::note Global mode has more priority than any other mode, so to set another mode ensure Global is `false`. :::
+:::note 
+Global mode has more priority than any other mode, so to set another mode ensure Global is `false`. 
+:::
 
 * For Grouped mode:
 
