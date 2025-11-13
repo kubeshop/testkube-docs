@@ -117,8 +117,8 @@ There are common things that you may want to set up in your values.
 
 ### Setting Agent Mode
 
-:::warning 
-Agents mode cannot be changed after registration, to change that first uninstall and remove manually removed using the UI or CLI to later install again with new mode. 
+:::note 
+The agent mode cannot be changed after registration. To modify it, you must uninstall the agent via the UI or CLI and then perform a fresh installation. 
 :::
 
 Agents allows 3 modes: Independent, Global, and Grouped, review the description of them 
@@ -134,7 +134,7 @@ will use mode **Independent**, to set a different mode there is 2 options:
    ```
 
 :::note 
-Global mode has more priority than any other mode, so to set another mode ensure Global is `false`. 
+Global mode has more priority than any other modes, so to set another mode ensure Global is `false`.
 :::
 
 * For Grouped mode:
@@ -142,14 +142,16 @@ Global mode has more priority than any other mode, so to set another mode ensure
    ```yaml
    runner:
      register:
+       global: false
        groupName: my-group
    ```
 
 ### Setting Agent Labels
 
-Agent labels will be the same labels used for its deployment, but using one specific prefix that by defautl is `runner.testkube.io/`, 
-it means that all labels with this prefix will be added to as the agent labels to the Testkube Control Plane when the agent starts.
-As instance, the deployment label `runner.testkube.io/env: testing` will be the agent label `env=testing`.
+Agent labels are derived from the agent deployment’s labels using a specific prefix, which defaults to `runner.testkube.io/`.
+All labels with this prefix are sent to the Testkube Control Plane when the agent starts.
+
+For example, the agent deployment label `runner.testkube.io/env: testing` becomes the agent label `env=testing`.
 
 Use the following values to set agent labels:
 
