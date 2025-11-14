@@ -27,7 +27,7 @@ To obtain the Testkube CLI Docker image, you have two options:
 The Testkube CLI Docker image is available on Docker Hub. You can pull it using the following command:
 
 ```bash
-docker pull testkube/cli:latest
+docker pull kubeshop/testkube-cli:latest
 ```
 
 ### 2. Building from Source
