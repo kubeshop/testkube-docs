@@ -99,7 +99,7 @@ You may also provide your own Service Account and in that case `testkube-cloud-a
 :::
 
 ## Configure CORS for S3
-To allow the Testkube UI to retrieve TestWorkflow artifacts directly from your S3 bucket, you must configure Cross-Origin Resource Sharing (CORS) for that bucket.
+To allow the Testkube Dashboard to retrieve TestWorkflow artifacts directly from your S3 bucket, you must configure Cross-Origin Resource Sharing (CORS) for that bucket.
 
 *Allowed Origins:* Specify only the Testkube UI domain that will access your bucket.
 
