@@ -97,3 +97,14 @@ You may also provide your own Service Account and in that case `testkube-cloud-a
 :::note
 `accessKeyId` and `secretAccessKey` must be set to `""` in order auth to be defaulted to IAM-based.
 :::
+
+## Configure CORS for S3
+To allow the Testkube UI to retrieve TestWorkflow artifacts directly from your S3 bucket, you must configure Cross-Origin Resource Sharing (CORS) for that bucket.
+
+*Allowed Origins:* Specify only the Testkube UI domain that will access your bucket.
+
+*Allowed methods:* GET, OPTIONS.
+
+*Allowed Headers:* `*` is fine (or specific `Authorization`, `Range`, `Content-Type` ), expose `Content-Length`, `Content-Type`, `ETag`
+
+*Max age:* 3600s (1 hour)
