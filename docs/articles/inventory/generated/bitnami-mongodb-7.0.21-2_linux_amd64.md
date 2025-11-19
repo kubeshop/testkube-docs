@@ -211,13 +211,54 @@ tar.Reader does not set a maximum size on the number of sparse region data block
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>tar-fs</strong> <code>2.1.3</code> (npm)</summary>
+
+<small><code>pkg:npm/tar-fs@2.1.3</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2025-59343?s=github&n=tar-fs&t=npm&vr=%3E%3D2.0.0%2C%3C2.1.4"><img alt="high 8.7: CVE--2025--59343" src="https://img.shields.io/badge/CVE--2025--59343-lightgrey?label=high%208.7&labelColor=e25d68"/></a> <i>Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=2.0.0<br/><2.1.4</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.1.4</code></td></tr>
+<tr><td>CVSS Score</td><td><code>8.7</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.023%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+ v3.1.0, v2.1.3, v1.16.5 and below
+
+### Patches
+Has been patched in 3.1.1, 2.1.4, and 1.16.6
+
+### Workarounds
+You can use the ignore option to ignore non files/directories.
+
+```js
+  ignore (_, header) {
+    // pass files & directories, ignore e.g. symlinks
+    return header.type !== 'file' && header.type !== 'directory'
+  }
+```
+
+### Credit
+Reported by: Mapta / BugBunny_ai
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>glob</strong> <code>10.4.5</code> (npm)</summary>
 
 <small><code>pkg:npm/glob@10.4.5</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-64756?s=github&n=glob&t=npm&vr=%3E%3D10.3.7%2C%3C%3D11.0.3"><img alt="high 7.5: CVE--2025--64756" src="https://img.shields.io/badge/CVE--2025--64756-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')</i>
+<a href="https://scout.docker.com/v/CVE-2025-64756?s=github&n=glob&t=npm&vr=%3E%3D10.3.7%2C%3C10.5.0"><img alt="high 7.5: CVE--2025--64756" src="https://img.shields.io/badge/CVE--2025--64756-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')</i>
 
 <table>
-<tr><td>Affected range</td><td><code>>=10.3.7<br/><=11.0.3</code></td></tr>
+<tr><td>Affected range</td><td><code>>=10.3.7<br/><10.5.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>11.1.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H</code></td></tr>
@@ -349,50 +390,9 @@ touch '$(env | grep -E "(TOKEN|KEY|SECRET)" > /tmp/secrets.txt)'
 
 ### Remediation
 
-- Upgrade to `glob@11.1.0` or higher, as soon as possible.
+- Upgrade to `glob@10.5.0`, `glob@11.1.0`, or higher, as soon as possible.
 - If any `glob` CLI actions fail, then convert commands containing positional arguments, to use the `--cmd-arg`/`-g` option instead.
-- As a last resort, use `--shell` to maintain `shell:true` behavior until glob v12, but ensure that no untrusted contents can possibly be encountered in the file path results.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>tar-fs</strong> <code>2.1.3</code> (npm)</summary>
-
-<small><code>pkg:npm/tar-fs@2.1.3</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-59343?s=github&n=tar-fs&t=npm&vr=%3E%3D2.0.0%2C%3C2.1.4"><img alt="high 8.7: CVE--2025--59343" src="https://img.shields.io/badge/CVE--2025--59343-lightgrey?label=high%208.7&labelColor=e25d68"/></a> <i>Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')</i>
-
-<table>
-<tr><td>Affected range</td><td><code>>=2.0.0<br/><2.1.4</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.1.4</code></td></tr>
-<tr><td>CVSS Score</td><td><code>8.7</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.023%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-### Impact
- v3.1.0, v2.1.3, v1.16.5 and below
-
-### Patches
-Has been patched in 3.1.1, 2.1.4, and 1.16.6
-
-### Workarounds
-You can use the ignore option to ignore non files/directories.
-
-```js
-  ignore (_, header) {
-    // pass files & directories, ignore e.g. symlinks
-    return header.type !== 'file' && header.type !== 'directory'
-  }
-```
-
-### Credit
-Reported by: Mapta / BugBunny_ai
+- As a last resort, use `--shell` to maintain `shell:true` behavior until glob v12, but take care to ensure that no untrusted contents can possibly be encountered in the file path results.
 
 </blockquote>
 </details>
