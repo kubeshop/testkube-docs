@@ -193,7 +193,7 @@ For an offline license, the format is a long string prefixed with `key/`. You wi
 kubectl create secret generic testkube-license --from-file=LICENSE_KEY=«license key» --from-file=license.lic=license file»
 ```
 
-This secret is referenced by the `global.enterpriseLicenseRef` setting. For offline licences, you will also have to set `global.enterpriseOfflineAccess: true`.
+This secret is referenced by the `global.enterpriseLicenseSecretRef` setting. For offline licences, you will also have to set `global.enterpriseOfflineAccess: true`.
 
 [license]: https://testkube.io/download
 
