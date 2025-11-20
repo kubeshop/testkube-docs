@@ -30,7 +30,7 @@ COPY --from=deps /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.075%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -47,7 +47,7 @@ The ParseAddress function constructeds domain-literal address components through
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.075%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -66,7 +66,7 @@ This affects programs which parse untrusted PEM inputs.
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.033%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -84,8 +84,8 @@ This affects programs which validate arbitrary certificate chains.
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.24.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.017%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.033%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -103,8 +103,8 @@ This affects programs which validate arbitrary certificate chains.
 <table>
 <tr><td>Affected range</td><td><code>>=1.24.0-0<br/><1.24.4</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.4</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.011%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.028%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -120,8 +120,8 @@ Calling Verify with a VerifyOptions.KeyUsages that contains ExtKeyUsageAny unint
 <table>
 <tr><td>Affected range</td><td><code>>=1.24.0-0<br/><1.24.4</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.4</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.008%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.053%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -138,7 +138,7 @@ Proxy-Authorization and Proxy-Authenticate headers persisted on cross-origin red
 <tr><td>Affected range</td><td><code>>=1.24.0<br/><1.24.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.025%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -154,8 +154,8 @@ If the PATH environment variable contains paths which are executables (rather th
 <table>
 <tr><td>Affected range</td><td><code>>=1.24.0-0<br/><1.24.4</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.4</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.007%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.032%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -172,7 +172,7 @@ os.OpenFile(path, os.O_CREATE|O_EXCL) behaved differently on Unix and Windows sy
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.055%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -189,7 +189,7 @@ The Reader.ReadResponse function constructs a response string through repeated s
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.041%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -206,7 +206,7 @@ When Conn.Handshake fails during ALPN negotiation the error contains attacker co
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.055%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -222,8 +222,8 @@ Despite HTTP headers having a default limit of 1MB, the number of cookies that c
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.027%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.063%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -240,7 +240,7 @@ Parsing a maliciously crafted DER payload could allocate large amounts of memory
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.054%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -256,8 +256,8 @@ The Parse function permits values other than IPv6 addresses to be included in sq
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.016%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.039%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -313,8 +313,8 @@ FROM alpine:3.22.0
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.4-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.4-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.034%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.025%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -330,8 +330,8 @@ FROM alpine:3.22.0
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.4-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.4-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.015%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.055%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -347,8 +347,8 @@ FROM alpine:3.22.0
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.1-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.015%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.070%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -364,8 +364,8 @@ FROM alpine:3.22.0
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.4-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.4-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.025%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.131%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -421,8 +421,8 @@ FROM alpine:3.22.0
 <table>
 <tr><td>Affected range</td><td><code>&lt;=1.37.0-r19</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.017%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.031%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -438,8 +438,8 @@ FROM alpine:3.22.0
 <table>
 <tr><td>Affected range</td><td><code>&lt;=1.37.0-r19</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.020%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.040%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

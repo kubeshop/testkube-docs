@@ -22,7 +22,7 @@ hide_table_of_contents: true
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.075%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -39,7 +39,7 @@ The ParseAddress function constructeds domain-literal address components through
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.075%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -58,7 +58,7 @@ This affects programs which parse untrusted PEM inputs.
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.033%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -76,8 +76,8 @@ This affects programs which validate arbitrary certificate chains.
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.24.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.017%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.033%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -96,7 +96,7 @@ This affects programs which validate arbitrary certificate chains.
 <tr><td>Affected range</td><td><code>>=1.24.0<br/><1.24.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.025%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -113,7 +113,7 @@ If the PATH environment variable contains paths which are executables (rather th
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.055%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -130,7 +130,7 @@ The Reader.ReadResponse function constructs a response string through repeated s
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.041%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -147,7 +147,7 @@ When Conn.Handshake fails during ALPN negotiation the error contains attacker co
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.055%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -163,8 +163,8 @@ Despite HTTP headers having a default limit of 1MB, the number of cookies that c
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.027%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.063%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -181,7 +181,7 @@ Parsing a maliciously crafted DER payload could allocate large amounts of memory
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.054%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -197,8 +197,8 @@ The Parse function permits values other than IPv6 addresses to be included in sq
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.016%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.039%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -214,13 +214,15 @@ tar.Reader does not set a maximum size on the number of sparse region data block
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>glob</strong> <code>10.4.5</code> (npm)</summary>
 
 <small><code>pkg:npm/glob@10.4.5</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-64756?s=github&n=glob&t=npm&vr=%3E%3D10.3.7%2C%3C10.5.0"><img alt="high 7.5: CVE--2025--64756" src="https://img.shields.io/badge/CVE--2025--64756-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')</i>
+<a href="https://scout.docker.com/v/CVE-2025-64756?s=github&n=glob&t=npm&vr=%3E%3D10.2.0%2C%3C10.5.0"><img alt="high 7.5: CVE--2025--64756" src="https://img.shields.io/badge/CVE--2025--64756-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')</i>
 
 <table>
-<tr><td>Affected range</td><td><code>>=10.3.7<br/><10.5.0</code></td></tr>
+<tr><td>Affected range</td><td><code>>=10.2.0<br/><10.5.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>11.1.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.130%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -339,9 +341,9 @@ touch '$(env | grep -E "(TOKEN|KEY|SECRET)" > /tmp/secrets.txt)'
 - **Ecosystem:** npm
 - **Package name:** glob
 - **Component:** CLI only (`src/bin.mts`)
-- **Affected versions:** v10.3.7 through v11.0.3 (and likely later versions until patched)
-- **Introduced:** v10.3.7 (first release with CLI containing `-c/--cmd` option)
-- **Patched versions:** 11.1.0
+- **Affected versions:** v10.2.0 through v11.0.3 (and likely later versions until patched)
+- **Introduced:** v10.2.0 (first release with CLI containing `-c/--cmd` option)
+- **Patched versions:** 11.1.0and 10.5.0
 
 **Scope Limitation:**
 - **Library API Not Affected:** Core glob functions (`glob()`, `globSync()`, async iterators) are safe
@@ -368,8 +370,8 @@ touch '$(env | grep -E "(TOKEN|KEY|SECRET)" > /tmp/secrets.txt)'
 <tr><td>Fixed version</td><td><code>2.1.4</code></td></tr>
 <tr><td>CVSS Score</td><td><code>8.7</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.023%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.068%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -410,7 +412,7 @@ Reported by: Mapta / BugBunny_ai
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.031%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
