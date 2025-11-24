@@ -629,7 +629,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "CLI Authentication",
+              label: "Managing CLI Context",
               id: "articles/managing-cli-context",
             },
             {
