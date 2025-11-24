@@ -506,7 +506,7 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.7.2-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.7.2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.125%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.131%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
 </table>
 
@@ -561,11 +561,11 @@ FROM ${ALPINE_IMAGE}
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2025-46394?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C%3D1.36.1-r29"><img alt="low : CVE--2025--46394" src="https://img.shields.io/badge/CVE--2025--46394-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2025-46394?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C1.36.1-r31"><img alt="low : CVE--2025--46394" src="https://img.shields.io/badge/CVE--2025--46394-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;=1.36.1-r29</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.36.1-r31</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.36.1-r31</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.017%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
 </table>
@@ -578,11 +578,11 @@ FROM ${ALPINE_IMAGE}
 </blockquote>
 </details>
 
-<a href="https://scout.docker.com/v/CVE-2024-58251?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C%3D1.36.1-r29"><img alt="low : CVE--2024--58251" src="https://img.shields.io/badge/CVE--2024--58251-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2024-58251?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C1.36.1-r31"><img alt="low : CVE--2024--58251" src="https://img.shields.io/badge/CVE--2024--58251-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;=1.36.1-r29</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.36.1-r31</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.36.1-r31</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.020%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
 </table>
