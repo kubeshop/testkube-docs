@@ -38,6 +38,7 @@ Testkube Control Plane:
 - **Parallel execution** with `parallel` - see [Parallelization](/articles/test-workflows-parallel.mdx)
 - **Parameterization** with `matrix` (and `count`, `shards`, `maxCount`) - see [Sharding & Matrix Params](/articles/test-workflows-matrix-and-sharding.mdx)
 - **Spawning dependencies** for your tests with `services` - see [Services](/articles/test-workflows-services.mdx)
+- **Concurrency Policies** with `concurrency` - see [Concurrency](/articles/test-workflows-concurrency-queueing)
 
 :::tip
 Deploying the Testkube Agent in Standalone Mode provides **extensive** test execution capabilities even 
