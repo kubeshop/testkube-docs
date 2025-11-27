@@ -51,7 +51,7 @@ The following steps are required to install the Standalone Agent into a Kubernet
 
 - Create a Testkube namespace.
 - Deploy the Testkube API (see below).
-- Use MongoDB for test results and Minio for artifact storage (optional; disable with --no-minio).
+- Use MongoDB or PostgreSQL for test results and Minio for artifact storage (optional; disable with --no-minio).
 - Testkube will listen and manage all the CRDs for TestWorkflows, Triggers, Webhooks, etc… inside the Testkube namespace.
 
 Once installed you can verify your installation and check that Testkube is up and running with
@@ -203,7 +203,7 @@ Alternatively, these values can be read from Kubernetes secrets and set:
 
 To install the standalone agent Testkube on an Openshift cluster you will need to include the following configuration:
 
-1. Add security context for MongoDB to `values.yaml`:
+1. Add security context for MongoDB or PostgreSQL to `values.yaml`:
 
 ```yaml
 mongodb:

@@ -29,6 +29,9 @@ The central component that manages connected Agents.
 * MongoDB - It is a database that is used for storing the data.
     * Helm chart - Used as a bitnami subchart in the [testkube-enterprise](https://github.com/kubeshop/testkube-cloud-charts/tree/main/charts/testkube-enterprise) Helm chart.
     * Docker image - [MongoDB](https://hub.docker.com/r/bitnami/mongodb/tags)
+* PostgeSQL - It is a database that is used for storing the data.
+    * Helm chart - Used as a bitnami subchart in the [testkube-enterprise](https://github.com/kubeshop/testkube-cloud-charts/tree/main/charts/testkube-enterprise) Helm chart.
+    * Docker image - [PostgreSQL](https://hub.docker.com/r/bitnami/postgresql/tags)   
 * NATS - It is a service that is used as a message broker for communication between API and Agents.
     * Helm chart - Used as a NATS subchart in the [testkube-enterprise](https://github.com/kubeshop/testkube-cloud-charts/tree/main/charts/testkube-enterprise) Helm chart.
     * Docker image - [NATS](https://hub.docker.com/_/nats/tags)
