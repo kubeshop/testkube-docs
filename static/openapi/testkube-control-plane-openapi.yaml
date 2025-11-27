@@ -103,8 +103,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Agent'
-                required:
-                  - items
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -231,6 +229,13 @@ paths:
             schema:
               type: object
               properties:
+                runnerPolicy:
+                  type: object
+                  properties:
+                    requiredMatch:
+                      type: array
+                      items:
+                        type: string
                 labels:
                   type: object
                   additionalProperties:
@@ -615,8 +620,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Credential'
-                required:
-                  - items
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -638,6 +641,15 @@ paths:
                 name:
                   description: The identifier for the credential.
                   type: string
+                type:
+                  description: >-
+                    The type of credential (secret, variable, or vault).
+                    Defaults to secret if not specified.
+                  type: string
+                  enum:
+                    - secret
+                    - variable
+                    - vault
                 base64:
                   description: Base64-encoded value for the credential.
                   type: string
@@ -672,6 +684,23 @@ paths:
       - $ref: '#/components/parameters/ID'
       - $ref: '#/components/parameters/EnvironmentIDQP'
   /organizations/{id}/credentials/{credentialName}:
+    get:
+      summary: Get credential in the organization
+      description: >-
+        Get credential details. Variables will include their decrypted value,
+        secrets will not.
+      operationId: getCredential
+      responses:
+        '200':
+          $ref: '#/components/responses/Credential'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
     delete:
       summary: Delete credential in the organization
       description: Delete credential in the organization.
@@ -929,6 +958,158 @@ paths:
     parameters:
       - $ref: '#/components/parameters/ID'
       - $ref: '#/components/parameters/EnvironmentID'
+  /organizations/{id}/environments/{environmentID}/credentials:
+    get:
+      summary: List credentials in the environment
+      description: >-
+        List credentials in the environment. Use filter=all to include
+        organization-level credentials that are not overridden by
+        environment-level credentials.
+      operationId: listEnvironmentCredentials
+      parameters:
+        - name: filter
+          in: query
+          description: >-
+            Optional filter to include organization-level credentials. Use 'all'
+            to merge org and env credentials, excluding org credentials that are
+            overridden by env credentials with the same name.
+          schema:
+            type: string
+            enum:
+              - all
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  elements:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Credential'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    post:
+      summary: Create a new credential in the environment
+      description: Create a new credential in the environment.
+      operationId: createEnvironmentCredential
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: The identifier for the credential.
+                  type: string
+                type:
+                  description: >-
+                    The type of credential (secret, variable, or vault).
+                    Defaults to secret if not specified.
+                  type: string
+                  enum:
+                    - secret
+                    - variable
+                    - vault
+                base64:
+                  description: Base64-encoded value for the credential.
+                  type: string
+              required:
+                - name
+                - base64
+        required: true
+      responses:
+        '201':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credential'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '409':
+          $ref: '#/components/responses/Conflict'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: '#/components/parameters/ID'
+      - $ref: '#/components/parameters/EnvironmentID'
+  /organizations/{id}/environments/{environmentID}/credentials/{credentialName}:
+    get:
+      summary: Get credential in the environment
+      description: >-
+        Get credential details. Variables will include their decrypted value,
+        secrets will not.
+      operationId: getEnvironmentCredential
+      responses:
+        '200':
+          $ref: '#/components/responses/Credential'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    delete:
+      summary: Delete credential in the environment
+      description: Delete credential in the environment.
+      operationId: deleteEnvironmentCredential
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    patch:
+      summary: Update value of the credential in the environment
+      description: Update value of the credential in the environment.
+      operationId: updateEnvironmentCredential
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                base64:
+                  description: Base64-encoded value for the credential.
+                  type: string
+              required:
+                - base64
+        required: true
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: '#/components/parameters/ID'
+      - $ref: '#/components/parameters/EnvironmentID'
+      - $ref: '#/components/parameters/CredentialName'
   /organizations/{id}/environments/{environmentID}/execution-groups:
     get:
       summary: List Test Workflow executions
@@ -1027,6 +1208,9 @@ paths:
       - $ref: '#/components/parameters/Selector'
       - $ref: '#/components/parameters/TextSearch'
       - $ref: '#/components/parameters/Status'
+      - $ref: '#/components/parameters/TagSelector'
+      - $ref: '#/components/parameters/Runner'
+      - $ref: '#/components/parameters/Health'
   /organizations/{id}/environments/{environmentID}/executions/{executionID}/artifact-archive:
     get:
       summary: Get artifact archive
@@ -1043,6 +1227,8 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+        '410':
+          $ref: '#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -1069,6 +1255,8 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+        '410':
+          $ref: '#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -1093,6 +1281,8 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+        '410':
+          $ref: '#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -1124,6 +1314,8 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+        '410':
+          $ref: '#/components/responses/GoneError'
         '500':
           $ref: '#/components/responses/InternalServerError'
       security:
@@ -1200,6 +1392,8 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+        '410':
+          $ref: '#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -1236,6 +1430,8 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+        '410':
+          $ref: '#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -1260,6 +1456,8 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+        '410':
+          $ref: '#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -1714,6 +1912,8 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '403':
           $ref: '#/components/responses/ForbiddenError'
+        '410':
+          $ref: '#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -1887,6 +2087,161 @@ paths:
       - $ref: '#/components/parameters/ID'
       - $ref: '#/components/parameters/EnvironmentID'
       - $ref: '#/components/parameters/TestWorkflowName'
+  /organizations/{id}/environments/{environmentID}/test-workflows/{testWorkflowName}/credentials:
+    get:
+      summary: List credentials for the test workflow
+      description: >-
+        List credentials for the specified test workflow. Use filter=all to
+        include organization and environment credentials that are not overridden
+        by workflow-level credentials.
+      operationId: listWorkflowCredentials
+      parameters:
+        - name: filter
+          in: query
+          description: >-
+            Optional filter to include organization and environment credentials.
+            Use 'all' to merge org, env, and workflow credentials, with workflow
+            overriding env and org, and env overriding org for credentials with
+            the same name.
+          schema:
+            type: string
+            enum:
+              - all
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  elements:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Credential'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    post:
+      summary: Create a new credential for the test workflow
+      description: Create a new credential for the specified test workflow.
+      operationId: createWorkflowCredential
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: The identifier for the credential.
+                  type: string
+                type:
+                  description: >-
+                    The type of credential (secret, variable, or vault).
+                    Defaults to secret if not specified.
+                  type: string
+                  enum:
+                    - secret
+                    - variable
+                    - vault
+                base64:
+                  description: Base64-encoded value for the credential.
+                  type: string
+              required:
+                - name
+                - base64
+        required: true
+      responses:
+        '201':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credential'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '409':
+          $ref: '#/components/responses/Conflict'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: '#/components/parameters/ID'
+      - $ref: '#/components/parameters/EnvironmentID'
+      - $ref: '#/components/parameters/TestWorkflowName'
+  /organizations/{id}/environments/{environmentID}/test-workflows/{testWorkflowName}/credentials/{credentialName}:
+    get:
+      summary: Get credential for the test workflow
+      description: >-
+        Get credential details. Variables will include their decrypted value,
+        secrets will not.
+      operationId: getWorkflowCredential
+      responses:
+        '200':
+          $ref: '#/components/responses/Credential'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    delete:
+      summary: Delete credential for the test workflow
+      description: Delete credential for the specified test workflow.
+      operationId: deleteWorkflowCredential
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    patch:
+      summary: Update value of the credential for the test workflow
+      description: Update value of the credential for the specified test workflow.
+      operationId: updateWorkflowCredential
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                base64:
+                  description: Base64-encoded value for the credential.
+                  type: string
+              required:
+                - base64
+        required: true
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: '#/components/parameters/ID'
+      - $ref: '#/components/parameters/EnvironmentID'
+      - $ref: '#/components/parameters/TestWorkflowName'
+      - $ref: '#/components/parameters/CredentialName'
   /organizations/{id}/environments/{environmentID}/test-workflows/{testWorkflowName}/execution-groups:
     get:
       summary: List Test Workflow executions
@@ -1950,6 +2305,8 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '403':
           $ref: '#/components/responses/ForbiddenError'
+        '410':
+          $ref: '#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -1968,6 +2325,8 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '403':
           $ref: '#/components/responses/ForbiddenError'
+        '410':
+          $ref: '#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -1984,10 +2343,13 @@ paths:
         - $ref: '#/components/parameters/EnvironmentID'
         - name: entity
           in: query
-          description: Filter by environment view entity
+          description: >-
+            Filter views by entity type. When specified, only returns views
+            associated with the given entity type (e.g., test-workflows or
+            executions). If omitted, returns all views regardless of entity
+            type.
           schema:
-            type: string
-            example: workflow
+            $ref: '#/components/schemas/ViewEntity'
       responses:
         '200':
           $ref: '#/components/responses/Views'
@@ -8401,6 +8763,8 @@ components:
         - runner
         - listener
         - gitops
+        - webhooks
+        - cloud-webhooks
     AgentEnvironment:
       type: object
       properties:
@@ -9093,6 +9457,23 @@ components:
         name:
           description: The identifier for the credential.
           type: string
+        type:
+          description: The type of credential (secret, variable, or vault).
+          type: string
+          enum:
+            - secret
+            - variable
+            - vault
+        value:
+          description: >-
+            The value of the credential (only included for variables, not
+            secrets).
+          type: string
+        reference:
+          description: >-
+            The credential reference that can be used in test workflow
+            expressions.
+          type: string
         environmentId:
           description: Environment ID where the credential is restricted to.
           type: string
@@ -9439,7 +9820,7 @@ components:
           description: feature name
           type: string
         displayName:
-          description: feature name
+          description: feature display name
           type: string
         description:
           description: feature description
@@ -9453,8 +9834,6 @@ components:
           type: boolean
       required:
         - name
-        - displayName
-        - description
         - enabled
     EnvironmentFeatures:
       type: object
@@ -9568,6 +9947,10 @@ components:
           description: The average execution duration in milliseconds.
           type: integer
           format: int64
+        p95Duration:
+          description: The p95 execution duration in milliseconds.
+          type: integer
+          format: int64
         lastRunAt:
           description: The timestamp of the last execution.
           type: string
@@ -9579,6 +9962,7 @@ components:
         - totalExecutionCount
         - failedExecutionCount
         - averageDuration
+        - p95Duration
         - lastRunAt
         - labels
     Environments:
@@ -10067,11 +10451,25 @@ components:
           description: The moment this execution started.
           type: string
           format: date-time
+        runnerId:
+          description: The identifier of the runner that executed this execution.
+          type: string
+        tags:
+          description: Tag values to pass to the test workflow execution
+          type: object
+          additionalProperties:
+            type: string
         reports:
           description: generated reports from the steps, like junit
           type: array
           items:
             $ref: '#/components/schemas/TestWorkflowReport'
+        runningContext:
+          $ref: '#/components/schemas/TestWorkflowRunningContext'
+        health:
+          description: Health indicator for the workflow at the time of this execution
+          allOf:
+            - $ref: '#/components/schemas/TestWorkflowExecutionHealth'
       required:
         - id
         - name
@@ -10115,6 +10513,8 @@ components:
           $ref: '#/components/schemas/ConfigSummary'
         reports:
           $ref: '#/components/schemas/ReportsSummary'
+        silentMode:
+          $ref: '#/components/schemas/SilentMode'
       required:
         - id
         - number
@@ -13209,6 +13609,27 @@ components:
             $ref: '#/components/schemas/Setting'
       required:
         - elements
+    SilentMode:
+      description: >-
+        controls what aspects of an execution should be silent (not
+        tracked/processed)
+      type: object
+      properties:
+        webhooks:
+          description: disable webhooks for this execution
+          type: boolean
+        insights:
+          description: disable insights/analytics for this execution
+          type: boolean
+        health:
+          description: disable health checks for this execution
+          type: boolean
+        metrics:
+          description: disable metrics collection for this execution
+          type: boolean
+        cdevents:
+          description: disable CDEvents for this execution
+          type: boolean
     SlavesMeta:
       description: Slave data for executing tests in distributed environment
       type: object
@@ -13219,6 +13640,11 @@ components:
           example: kubeshop/ex-slaves-image:latest
       required:
         - image
+    Source:
+      description: synchronisation sources
+      type: string
+      enum:
+        - kubernetes
     StatusObservable:
       type: object
       properties:
@@ -13386,6 +13812,23 @@ components:
           type: string
       required:
         - organizationID
+    Syncable:
+      description: >
+        source information about resources that may have been synced from
+        multiple sources.
+
+        An empty source indicates that the source was the UI/API for backwards
+        compatibility.
+      type: object
+      properties:
+        creationSource:
+          $ref: '#/components/schemas/Source'
+          description: the original source from which the resource was created
+        lastModificationSource:
+          $ref: '#/components/schemas/Source'
+          description: >-
+            the source from which the last modification of the resource
+            originated
     Sysctl:
       type: object
       properties:
@@ -14538,6 +14981,8 @@ components:
           example:
             - true
             - false
+        sync:
+          $ref: '#/components/schemas/Syncable'
       required:
         - event
         - action
@@ -14863,6 +15308,8 @@ components:
           type: boolean
         status:
           $ref: '#/components/schemas/TestWorkflowStatusSummary'
+        sync:
+          $ref: '#/components/schemas/Syncable'
     TestWorkflowConcurrencyPolicy:
       description: configuration to control concurrent executions.
       type: object
@@ -15126,6 +15573,8 @@ components:
           example:
             - true
             - false
+        silentMode:
+          $ref: '#/components/schemas/SilentMode'
         tags:
           $ref: '#/components/schemas/TestWorkflowTagValue'
         runningContext:
@@ -15192,7 +15641,7 @@ components:
         flipRate:
           description: >
             Fraction of status changes among consecutive executions without
-            recency weighting 
+            recency weighting
 
             (value between 0.0 and 1.0).
           type: number
@@ -15247,6 +15696,8 @@ components:
           description: whether webhooks on the execution of this test workflow are disabled
           type: boolean
           default: false
+        silentMode:
+          $ref: '#/components/schemas/SilentMode'
         tags:
           $ref: '#/components/schemas/TestWorkflowTagValue'
         target:
@@ -15408,6 +15859,9 @@ components:
             $ref: '#/components/schemas/TestWorkflowReport'
         resourceAggregations:
           $ref: '#/components/schemas/TestWorkflowExecutionResourceAggregationsReport'
+        silentMode:
+          $ref: '#/components/schemas/SilentMode'
+          description: execution mode to determine which events to skip
       required:
         - id
         - name
@@ -16703,6 +17157,8 @@ components:
           example: '2022-07-30T06:54:15Z'
         spec:
           $ref: '#/components/schemas/TestWorkflowTemplateSpec'
+        sync:
+          $ref: '#/components/schemas/Syncable'
     TestWorkflowTemplateRef:
       type: object
       properties:
@@ -17119,9 +17575,7 @@ components:
           type: string
           example: This is an example view
         entity:
-          description: Type of the view (e.g., workflow, test)
-          type: string
-          example: workflow
+          $ref: '#/components/schemas/ViewEntity'
         filter:
           description: filter of the view
           type: string
@@ -17132,6 +17586,13 @@ components:
             (visible to all users in environment)
           type: boolean
           example: true
+    ViewEntity:
+      description: Type of entity that the view is associated with
+      type: string
+      enum:
+        - test-workflows
+        - executions
+      example: test-workflows
     Views:
       type: object
       properties:
@@ -17224,6 +17685,37 @@ components:
         namespace:
           type: string
           example: testkube
+        labels:
+          description: webhook labels
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            app: backend
+            env: prod
+        annotations:
+          description: webhook annotations
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            app: backend
+            env: prod
+        created:
+          type: string
+          format: date-time
+          example: '2022-07-30T06:54:15Z'
+        updated:
+          type: string
+          format: date-time
+          example: '2022-07-30T06:54:15Z'
+        disabled:
+          description: whether webhook is disabled
+          type: boolean
+          default: false
+          example:
+            - true
+            - false
         uri:
           type: string
           example: https://hooks.app.com/services/1
@@ -17250,29 +17742,6 @@ components:
             type: string
           example:
             Content-Type: application/xml
-        labels:
-          description: webhook labels
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            app: backend
-            env: prod
-        annotations:
-          description: webhook annotations
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            app: backend
-            env: prod
-        disabled:
-          description: whether webhook is disabled
-          type: boolean
-          default: false
-          example:
-            - true
-            - false
         config:
           $ref: '#/components/schemas/WebhookConfig'
         parameters:
@@ -17281,6 +17750,8 @@ components:
             $ref: '#/components/schemas/WebhookParameterSchema'
         webhookTemplateRef:
           $ref: '#/components/schemas/WebhookTemplateRef'
+        sync:
+          $ref: '#/components/schemas/Syncable'
       required:
         - name
     WebhookConfig:
@@ -17392,6 +17863,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WebhookParameterSchema'
+        sync:
+          $ref: '#/components/schemas/Syncable'
       required:
         - name
     WebhookTemplateCreateRequest:
@@ -17482,6 +17955,12 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/Problem'
+    Credential:
+      description: successful operation for credential
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Credential'
     Environment:
       description: successful operation for environment
       content:
@@ -17574,8 +18053,12 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/Problem'
-    Healthcheck:
-      description: Healthcheck response
+    GoneError:
+      description: 410 Gone
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
     HubspotVisitorSession:
       description: hubspot visitor's session data
       content:
@@ -18058,6 +18541,15 @@ components:
       required: true
       schema:
         type: string
+    Health:
+      name: health
+      in: query
+      description: >-
+        Filter by workflow health categories (comma-separated). Options -
+        perfect, excellent, good, fair, poor, critical
+      schema:
+        type: string
+      example: excellent,good
     ID:
       name: id
       in: path
@@ -18204,6 +18696,12 @@ components:
       required: true
       schema:
         type: string
+    Runner:
+      name: runner
+      in: query
+      description: Filter by runner/agent ID
+      schema:
+        type: string
     Segment:
       name: segment
       in: query
@@ -18292,8 +18790,8 @@ components:
     TagSelector:
       name: tagSelector
       in: query
+      description: Test workflow execution tags
       schema:
-        description: Test workflow execution tags
         type: string
     TeamID:
       name: teamID
