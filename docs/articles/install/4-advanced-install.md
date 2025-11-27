@@ -295,7 +295,7 @@ Testkube enables GitOps practices by storing configuration within custom resourc
 
 ## Bring Your Own Infra
 
-Testkube supports integrating with existing infrastructure components such as MongoDB, NATS, Dex, etc. For production environments, it's recommended to use your own infra or to harden the sub-charts.
+Testkube supports integrating with existing infrastructure components such as MongoDB, PostgreSQL, NATS, Dex, etc. For production environments, it's recommended to use your own infra or to harden the sub-charts.
 
 ### MongoDB
 
@@ -325,6 +325,32 @@ mongodb:
 testkube-api:
   mongodb:
     dsn: <mongodb dsn (mongodb://...)>
+```
+
+### Using PostgreSQL as a database
+You can run the Testkube with PostgreSQL instead of MongoDB. This is currently an experimental feature, and deprecated functionalities are not supported. To enable PostgreSQL, update the values.yaml file in your Helm chart: enable the PostgreSQL settings and disable the MongoDB options.
+
+```yaml
+mongodb:
+  enabled: false
+postgresql:
+  enabled: true
+
+testkube-api:
+  api:
+    mongodb:
+      enabled: false
+    postgresql:
+      enabled: true
+      dsn: <postgresql dsn (postgres://...)>
+
+testkube-worker-service:
+  api:
+    mongo:
+      enabled: false
+    postgres:
+      enabled: true
+      dsn: <postgresql dsn (postgres://...)>
 ```
 
 ### NATS
