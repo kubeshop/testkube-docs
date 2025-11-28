@@ -20,6 +20,56 @@ Before you proceed with the installation, please ensure that you have the follow
 - Own a public/private domain for creating Ingress rules.
 - License Key and/or License File, if offline access is required.
 
+### Kubernetes Cluster Requirements
+
+- At least 3 nodes
+- At least 2 CPU cores per node
+- At least 8GB of memory per node
+
+### External Dependencies Requirements
+
+The following are production requirements for external dependencies:
+
+- **MongoDB**
+  - At least 1 CPU core
+  - 2GB of memory
+  - At least 10GB of storage (subject to increase as load increases)
+
+- **MinIO**
+  - At least 1 CPU core
+  - 2GB of memory
+  - At least 20GB of storage (subject to increase as load increases as logs and test artifacts are saved here)
+
+- **Dex**
+  - At least 0.1 CPU core
+  - 128MB of memory
+
+- **NATS**
+  - At least 0.5 CPU core per replica
+  - 1GB of memory per replica
+  - At least 1GB of storage per replica
+  - Running total of 3 replicas in cluster mode
+
+### Control Plane Components Requirements
+
+The following are production requirements for Control Plane components:
+
+- **API**
+  - At least 0.5 CPU
+  - 1GB of memory
+
+- **Worker Service**
+  - At least 1 CPU
+  - 2GB of memory
+
+- **UI**
+  - At least 0.1 CPU
+  - 128MB of memory
+
+:::note
+Control Plane can run with lower resources, but the above requirements will ensure a smooth usage of Testkube.
+:::
+
 :::note IMPORTANT
 Make sure you're using the **correct Ingress controller**.
 
