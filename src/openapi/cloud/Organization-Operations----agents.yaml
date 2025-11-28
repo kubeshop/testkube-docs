@@ -27,8 +27,6 @@ paths:
                     type: array
                     items:
                       $ref: './components.yaml#/components/schemas/Agent'
-                required:
-                  - items
         '401':
           $ref: './components.yaml#/components/responses/UnauthorizedError'
         '403':
@@ -155,6 +153,13 @@ paths:
             schema:
               type: object
               properties:
+                runnerPolicy:
+                  type: object
+                  properties:
+                    requiredMatch:
+                      type: array
+                      items:
+                        type: string
                 labels:
                   type: object
                   additionalProperties:

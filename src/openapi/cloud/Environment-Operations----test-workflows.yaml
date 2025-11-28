@@ -28,6 +28,161 @@ paths:
       - $ref: './components.yaml#/components/parameters/ID'
       - $ref: './components.yaml#/components/parameters/EnvironmentID'
       - $ref: './components.yaml#/components/parameters/TestWorkflowName'
+  /organizations/{id}/environments/{environmentID}/test-workflows/{testWorkflowName}/credentials:
+    get:
+      summary: List credentials for the test workflow
+      description: >-
+        List credentials for the specified test workflow. Use filter=all to
+        include organization and environment credentials that are not overridden
+        by workflow-level credentials.
+      operationId: listWorkflowCredentials
+      parameters:
+        - name: filter
+          in: query
+          description: >-
+            Optional filter to include organization and environment credentials.
+            Use 'all' to merge org, env, and workflow credentials, with workflow
+            overriding env and org, and env overriding org for credentials with
+            the same name.
+          schema:
+            type: string
+            enum:
+              - all
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  elements:
+                    type: array
+                    items:
+                      $ref: './components.yaml#/components/schemas/Credential'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    post:
+      summary: Create a new credential for the test workflow
+      description: Create a new credential for the specified test workflow.
+      operationId: createWorkflowCredential
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: The identifier for the credential.
+                  type: string
+                type:
+                  description: >-
+                    The type of credential (secret, variable, or vault).
+                    Defaults to secret if not specified.
+                  type: string
+                  enum:
+                    - secret
+                    - variable
+                    - vault
+                base64:
+                  description: Base64-encoded value for the credential.
+                  type: string
+              required:
+                - name
+                - base64
+        required: true
+      responses:
+        '201':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Credential'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+        '409':
+          $ref: './components.yaml#/components/responses/Conflict'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/EnvironmentID'
+      - $ref: './components.yaml#/components/parameters/TestWorkflowName'
+  /organizations/{id}/environments/{environmentID}/test-workflows/{testWorkflowName}/credentials/{credentialName}:
+    get:
+      summary: Get credential for the test workflow
+      description: >-
+        Get credential details. Variables will include their decrypted value,
+        secrets will not.
+      operationId: getWorkflowCredential
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/Credential'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    delete:
+      summary: Delete credential for the test workflow
+      description: Delete credential for the specified test workflow.
+      operationId: deleteWorkflowCredential
+      responses:
+        '204':
+          $ref: './components.yaml#/components/responses/NoContent'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    patch:
+      summary: Update value of the credential for the test workflow
+      description: Update value of the credential for the specified test workflow.
+      operationId: updateWorkflowCredential
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                base64:
+                  description: Base64-encoded value for the credential.
+                  type: string
+              required:
+                - base64
+        required: true
+      responses:
+        '204':
+          $ref: './components.yaml#/components/responses/NoContent'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/EnvironmentID'
+      - $ref: './components.yaml#/components/parameters/TestWorkflowName'
+      - $ref: './components.yaml#/components/parameters/CredentialName'
   /organizations/{id}/environments/{environmentID}/test-workflows/{testWorkflowName}/execution-groups:
     get:
       summary: List Test Workflow executions
