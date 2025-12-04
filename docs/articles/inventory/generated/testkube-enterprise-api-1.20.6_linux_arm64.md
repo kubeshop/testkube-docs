@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:a7b5d548131d43185ed937fd654a44956e77778560433c5702305e6ecc213c8e</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 3" src="https://img.shields.io/badge/high-3-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/medium-4-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:c601bd25460d771a275df949c3a76caaa9fb1030eee4743e28f17aeeaca97a49</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/medium-4-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/arm64</td></tr>
-<tr><td>size</td><td>52 MB</td></tr>
-<tr><td>packages</td><td>315</td></tr>
+<tr><td>size</td><td>66 MB</td></tr>
+<tr><td>packages</td><td>331</td></tr>
 </table>
 </details></table>
 </details>
@@ -199,26 +199,6 @@ github.com/gofiber/fiber/v2/internal/schema.(*Decoder).decode(0xc00002c570, {0x7
 
 ### Impact
 Anyone using `fiber.Ctx.BodyParser` can/will have their servers crashed when an invalid payload is sent
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>stdlib</strong> <code>1.25.4</code> (golang)</summary>
-
-<small><code>pkg:golang/stdlib@1.25.4</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-61729?s=golang&n=stdlib&t=golang&vr=%3E%3D1.25.0%2C%3C1.25.5"><img alt="high : CVE--2025--61729" src="https://img.shields.io/badge/CVE--2025--61729-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.5</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.25.5</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Within HostnameError.Error(), when constructing an error string, there is no limit to the number of hosts that will be printed out. Furthermore, the error string is constructed by repeated string concatenation, leading to quadratic runtime. Therefore, a certificate provided by a malicious actor can result in excessive resource consumption.
 
 </blockquote>
 </details>

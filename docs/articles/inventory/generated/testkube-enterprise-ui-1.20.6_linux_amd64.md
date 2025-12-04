@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:a250cff0d745812dbb6589e01e88c9288d627a7ec59cc8c7f57347229fbf5201</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 2" src="https://img.shields.io/badge/critical-2-8b1924"/> <img alt="high: 8" src="https://img.shields.io/badge/high-8-e25d68"/> <img alt="medium: 11" src="https://img.shields.io/badge/medium-11-fbb552"/> <img alt="low: 4" src="https://img.shields.io/badge/low-4-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>digest</td><td><code>sha256:585751f667b8b9390da817ff47e37e1e57b390fb7a1302b94e133c8995107048</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 2" src="https://img.shields.io/badge/critical-2-8b1924"/> <img alt="high: 8" src="https://img.shields.io/badge/high-8-e25d68"/> <img alt="medium: 11" src="https://img.shields.io/badge/medium-11-fbb552"/> <img alt="low: 4" src="https://img.shields.io/badge/low-4-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>75 MB</td></tr>
 <tr><td>packages</td><td>83</td></tr>
@@ -210,7 +210,7 @@ hide_table_of_contents: true
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libpng</strong> <code>1.6.47-r0</code> (apk)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>libpng</strong> <code>1.6.47-r0</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/libpng@1.6.47-r0?os_name=alpine&os_version=3.21</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2025-65018?s=alpine&n=libpng&ns=alpine&t=apk&osn=alpine&osv=3.21&vr=%3C%3D1.6.47-r0"><img alt="high : CVE--2025--65018" src="https://img.shields.io/badge/CVE--2025--65018-lightgrey?label=high%20&labelColor=e25d68"/></a> 
@@ -271,6 +271,21 @@ hide_table_of_contents: true
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.012%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2025-66293?s=alpine&n=libpng&ns=alpine&t=apk&osn=alpine&osv=3.21&vr=%3C%3D1.6.47-r0"><img alt="unspecified : CVE--2025--66293" src="https://img.shields.io/badge/CVE--2025--66293-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=1.6.47-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 </table>
 
 <details><summary>Description</summary>
