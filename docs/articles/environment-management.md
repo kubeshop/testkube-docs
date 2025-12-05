@@ -99,6 +99,10 @@ Find the general settings for your environment on the **General** tab. You can a
 
 ![General Settings Dashboard](../img/general-settings-dashboard-072024.png)
 
+### Credentials
+
+Manage your Environment Credentials here - [Read More](/articles/credential-management).
+
 ### Agents
 
 Manage your Environment Agents here - [Read More](/articles/agents-overview).
@@ -175,3 +179,10 @@ Check out [Concurrency & Queueing](/articles/test-workflows-concurrency-queueing
 This tab allows you to configure Environment-level Product Features:
 
 ![Product Features](../img/environment-product-features.png)
+
+### MCP Server
+
+Allows you to enable/disable the MCP Server for your Environment and provides easy access to the MCP Server endpoint
+with configuration examples for common IDEs - [Read More](/articles/mcp-hosted).
+
+![MCP Server Settings](images/mcp-server-settings.png)
