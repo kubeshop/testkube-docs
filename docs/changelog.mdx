@@ -8,6 +8,36 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Patch Release v1.20.4 (2025-11-20)
+
+This release is available in Helm chart v2.326.4.
+
+### Improvements and fixes
+
+- Fix SCIM compatibility issue with Microsoft Entra ID.
+
+## Patch Release v1.20.3 (2025-11-19)
+
+This release is available in Helm chart v2.326.3.
+
+### Improvements and fixes
+
+- Fix SCIM issue where organization membership gets dropped for certain users.
+- Add Silent Execution icon on Execution List.
+- Fix broken dashboard executions link.
+- Replace MongoDB and MinIO Helm charts with Testkube custom charts and images.
+
+## Patch Release v1.20.2 (2025-11-13)
+
+This release is available in Helm Chart v2.326.2.
+
+### Improvements and fixes
+
+- Insights APIs now respond faster thanks to smarter queries and better indexes.
+- Workflow and credential flows feel more reliable across the UI.
+- Deleting workflow executions is safer now that the process uses a configurable timeout (default 30m) instead of a rigid 5s timeout.
+- Version check now correctly checks agent version.
+
 ## Monthly Release v1.20.0 (2025-11-03)
 
 This release is available in Helm Chart 2.326.0.

@@ -31,7 +31,7 @@ expose ports for both HTTPS and WSS endpoints.
 The main 3rd party dependencies that are required by the Control Plane are:
 
 - NATS
-- MongoDB - [Read more](mongodb-administration)
+- MongoDB - [Read more](mongodb-administration) or PostgreSQL
 - S3 (via Minio)
 - Dex for federated authentication
 
@@ -63,6 +63,7 @@ This component also integrates with:
 
 * **Dex:** using port `5556` and `5557` with TCP protocol.
 * **MongoDB:** using default port `27017` with TCP protocol.
+* **PostgreSQL:** using default port `5432` with TCP protocol.
 * **NATS**: using port `4222` with TCP protocol. It also apply to Testkube Agent API, unless it's configured to have embedded NATS.
 
 #### S3 or Object storage

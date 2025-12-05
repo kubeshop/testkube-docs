@@ -20,10 +20,13 @@ paths:
         - $ref: './components.yaml#/components/parameters/EnvironmentID'
         - name: entity
           in: query
-          description: Filter by environment view entity
+          description: >-
+            Filter views by entity type. When specified, only returns views
+            associated with the given entity type (e.g., test-workflows or
+            executions). If omitted, returns all views regardless of entity
+            type.
           schema:
-            type: string
-            example: workflow
+            $ref: './components.yaml#/components/schemas/ViewEntity'
       responses:
         '200':
           $ref: './components.yaml#/components/responses/Views'

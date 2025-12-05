@@ -1,4 +1,26 @@
-# CLI Authentication
+# Managing CLI Context
+
+The Testkube CLI can be configured to connect to either a Standalone OSS Testkube Agent or 
+a commercial Testkube Control Plane hosted either on-premise or in the cloud.
+
+:::note
+Check out the [CLI Configuration File](/articles/cli-config-reference) documentation for more details on the CLI configuration.
+:::
+
+## Connecting to a Standalone Testkube Agent
+
+The easiest way to connect the CLI to a standalone Testkube Agent is to make sure your current kubectl context is pointing 
+to the cluster where the Testkube Agent is deployed and then running
+
+```sh 
+testkube set context --kubeconfig
+```
+
+:::tip
+If the Agent is not in the default testkube namespace, you can use the `--namespace` flag to specify the namespace.
+:::
+
+## Connecting to a Testkube Control Plane
 
 If you're using a commercial Testkube instance, you can use the `testkube login` command to 
 authenticate and connect the CLI with your Testkube Control Plane, which ensures that CLI commands 
@@ -42,10 +64,3 @@ use this token to authenticate and gain access to corresponding Testkube resourc
 When the token is created, you're ready to change the Testkube CLI context using the
 [`testkube set context`](/cli/testkube-set-context) command.
 
-## Connecting Using `kubeconfig` Context
-
-If you want to connect to your Testkube instance directly (like you would do with `kubectl`), set the CLI Context to be `kubeconfig`-based:
-
-```sh 
-testkube set context --kubeconfig
-```

@@ -22,6 +22,8 @@ paths:
           $ref: './components.yaml#/components/responses/UnauthorizedError'
         '403':
           $ref: './components.yaml#/components/responses/ForbiddenError'
+        '410':
+          $ref: './components.yaml#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
