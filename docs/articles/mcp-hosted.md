@@ -96,3 +96,9 @@ For self-hosted Testkube instances, use your custom control plane URL:
 }
 ```
 
+## Hosted Endpoint in the Testkube Dashboard    
+
+The Testkube Dashboard provides convenient access to the hosted endpoint for your Testkube Environments together with 
+configuration examples for common IDEs, simply navigate to the Environment Settings page and select the MCP Server option:
+
+![MCP Server Settings](images/mcp-server-settings.png)
