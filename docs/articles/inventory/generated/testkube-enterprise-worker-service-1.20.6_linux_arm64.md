@@ -346,7 +346,7 @@ https://firewalld.org/documentation/howto/reload-firewalld.html
 <tr><td>Fixed version</td><td><code>1.6.1</code></td></tr>
 <tr><td>CVSS Score</td><td><code>3.7</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.014%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.015%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
 </table>
 
