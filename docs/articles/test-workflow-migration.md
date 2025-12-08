@@ -1,7 +1,7 @@
 # Migrating Tests, Test Suites and Executors to Test Workflows and Test Workflow Templates
 
-:::info
-We are in the process of deprecating Tests and Test Suites - [Read More](/articles/legacy-features).
+:::danger
+Legacy Tests and Test Suites have been deprecated and removed from Testkube as of the December 2025 release - [Read More](/articles/legacy-features).
 :::
 
 ## Introduction
