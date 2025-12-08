@@ -4,9 +4,8 @@ As of the December 2025 Testkube Release (see [changelog](/changelog)), legacy f
 Sources has been removed from both the Testkube Control Plane and the Open Source Agent, in line with the notice given [early 2025](/articles/legacy-features).
 
 This has the following implications:
-- CLI Commands related to legacy functionality have been removed
-- API Operations related to legacy functionality have been removed
-- Corresponding reference documentation has been removed accordingly. 
+- CLI Commands related to legacy functionality have been removed, legacy CLI docs are available [here](/legacy-cli/testkube).
+- API Operations related to legacy functionality have been removed, legacy API docs have been removed accordingly. 
 
 CRDs related to legacy functionality described in the [Testkube CRDs](/articles/crds) are still part of the installation to avoid deletion
 of corresponding resources in automated/GitOps usage scenarios.
