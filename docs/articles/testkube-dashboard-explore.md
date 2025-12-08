@@ -1,44 +1,39 @@
-# The Testkube Dashboard
+# Testkube Dashboard
 
-The Testkube Dashboard provides a centralized user interface for managing your Testkube deployment. The Dashboard
-is included in the Testkube Control Plane and available after installation either via local port-forwarding using the 
-`testkube dashboard` command or via the NGINX Ingress Controller - [Read More](/articles/install/install-with-helm). 
+The Testkube dashboard offers a centralized user interface for managing Testkube deployments. The dashboard is part of the 
+Testkube control plane and is available after installation via local port-forwarding using the 
+`testkube dashboard` command or through use of the NGINX Ingress Controller. For more information, 
+read [Production Installations](/articles/install/install-with-helm). 
 
-When opening the Dashboard you will be presented with the following layout:
+**Dashboard**:
 
-![Testkube Dashboard](../img/dashboard-072024.png)
+![Testkube Dashboard](../articles/images/dashboard-overview.png)
 
-The toggles at the top of the screen (1) allow you to choose the Organization and Environment 
-currently shown in the Dashboard.
+**Testkube Sandbox** appears in the **Organization** and **Environment** drop-down list boxes near the dashboard (top left). 
+You can click the arrows associated with each to view a list of options, allowing you to change these selections.
+**Insights** and **See all insights** launch you to visual analytics specific
+to system performance and test results.
 
 :::info
-See the documentation on [Organizations](/articles/organization-management) and [Environments](/articles/environment-management)
-for more information on how to manage your Testkube Instance.
+For more information on how to manage your Testkube instance, read [Organizations](/articles/organization-management) and [Environments](/articles/environment-management).
 :::
 
-The navigation on the left (2) of the screen contains buttons for (in top-to-bottom order):
+The left navigation pane contains:
 
-- Environment Overview - see below.
-- Test Workflows - [Read More](/articles/testkube-dashboard-workflows-overview)
-- Integrations - [Read More](/articles/integrations-dashboard-explore)
-- Test Insights - [Read More](/articles/test-insights)
-- Status Pages - [Read More](/articles/status-pages)
-- Tests *
-- Test Suites *
-- Executors *
-- Sources *
-- Settings - [Read More](/articles/settings-dashboard-explore)
-
-(* are deprecated and not shown if you have them disabled, [Read More](/articles/legacy-features#enabling-legacy-tests-dashboard-functionality))
+* [Home](/articles/testkube-dashboard-explore)
+* [Workflows](/articles/testkube-dashboard-workflows-overview)
+* [Integrations](/articles/integrations-dashboard-explore)
+* [Insights](/articles/test-insights)
+* [Status Page](/articles/status-pages)
+* [Settings](/articles/settings-dashboard-explore)
 
 ## Environment Overview
 
-The top left icon takes you to an overview of the currently selected environment, as shown above. 
+**Workflow Insights** dashboard (top middle) provides an overview of the **Environment** you selected and includes:
 
-It contains:
+* **Pass/Fail Ratio**
+* **Failed Executions**
+* **Total Executions**
 
-- An overview of the Pass/Fail Ratio, the number of Failed Executions and the Total Executions (3).
-- A scrollable list of most recent executions (4).
-- Filters for narrowing down on specific types of executions (5).
-
-Selecting an execution opens the corresponding [Execution Details](testkube-dashboard-execution-details)
+The dashboard (center) contains a scrollable list of your **Recent Executions**. You can **Search** for specific executions or click **Add a Filter** to narrow your search.
+Selecting an execution provides access to its corresponding [Execution Details](testkube-dashboard-execution-details).
