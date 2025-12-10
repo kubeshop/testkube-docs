@@ -23,8 +23,8 @@ The left navigation pane contains:
 
 * [Home](/articles/testkube-dashboard-explore)
 * [Workflows](/articles/testkube-dashboard-workflows-overview)
-* [Integrations](/articles/integrations-dashboard-explore)
 * [Insights](/articles/test-insights)
+* [Integrations](/articles/integrations-dashboard-explore)
 * [Status Page](/articles/status-pages)
 * [Settings](/articles/settings-dashboard-explore)
 
@@ -36,16 +36,5 @@ The left navigation pane contains:
 * **Failed Executions**
 * **Total Executions**
 
-The dashboard (center) contains a scrollable list of your **Recent Executions**. You can **Search** for specific executions or click **Add a Filter** to narrow your search.
-Selecting an execution provides access to its corresponding [Execution Details](testkube-dashboard-execution-details).
-
-## Filters
-The images below depict the output of single and multiple filters.
-
-Single filter: **Status = Failed**
-
-![Filter Status Failed](../articles/images/dashboard-filter-failed.png)
-
-Multiple filters: **Status = Passed, Canceled**
-
-![Filter Status Failed](../articles/images/dashboard-filter-pass-cancel.png)
+The dashboard (center) contains a scrollable list of your **Recent Executions**. Selecting an execution 
+provides access to its corresponding [Execution Details](testkube-dashboard-execution-details).
