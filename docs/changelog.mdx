@@ -8,9 +8,9 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
-## Monthly Release v1.21.0 (2025-12-10)
+## Monthly Release v1.21.1 (2025-12-10)
 
-This release is available in Helm chart v2.327.0.
+This release is available in Helm chart v2.327.1.
 
 ### What's new!
 
@@ -23,20 +23,23 @@ The new dashboard provides a single view with everything you need to work effici
 
   With this unified view, you can spot a failing execution, view its logs with one click, and act on it immediately. No more checking workflows individually or navigating through multiple pages to get the information you need. Plus, we've added several other features to make working with executions even easier.
 
+  The Executions Dashboard is available via a dedicated icon in the left navigation toolbar.
+
 - **Webhook Credentials Support**
 Webhooks can now securely reference **Credentials**, so you can inject API keys and secrets into webhook URLs, headers, or payload templates using the ``credentials()`` expression instead of hard-coding them.
 
   This keeps your integrations with external systems (**Slack**, **incident tools**, **custom endpoints**, etc.) both safer and easier to maintain, since you can rotate or update secrets in one place without touching webhook definitions.
 
 - **Deprecation of Tests & Suites**
-Last year (2024), with the introduction of TestWorkflows, we announced our plan to deprecate legacy features including Tests, Suites, Executors, and Sources [see documentation on legacy features](https://docs.testkube.io/articles/legacy-features).
+  Over the past year, TestWorkflows has become the recommended way to orchestrate tests in Testkube — offering more flexibility, better visibility, and continuous feature improvements driven directly by user feedback.
+  
+  To reduce complexity and make it easier to understand how to get started, we are now fully transitioning to TestWorkflows. Beginning with version 1.21, legacy Tests, Test Suites, Executors, and Sources are removed from the product. This ensures that all future enhancements benefit the most powerful and supported workflow engine in Testkube.
   :::danger
   If you are still using legacy functionality, you will need to stay on previous Testkube releases and migrate your Tests/Suites to
   TestWorkflows before upgrading to this release, as described in the [migration guide](/articles/test-workflow-migration).
   :::
-
-  To simplify our codebase and improve development velocity, we are now moving forward with the removal of these legacy components from the Control Plane and Dashboard.
-  Since the majority of users have already migrated to TestWorkflows, we expect minimal impact. For teams that still rely on these features, a backward-compatible legacy version will remain available for a limited transition period, receiving only critical fixes (no new functionality).
+  Join us on [Slack](https://testkubeworkspace.slack.com/join/shared_invite/zt-2arhz5vmu-U2r3WZ69iPya5Fw0hMhRDg#/shared-invite/email)
+  and we’ll guide you through the process. In the meantime, you can remain on version 1.20, which will continue receiving critical bug fixes while you complete the transition.
 
 - **(Preview) Support for PostgreSQL**
 As part of ongoing improvements to our data layer, we are introducing PostgreSQL as a new storage option.
