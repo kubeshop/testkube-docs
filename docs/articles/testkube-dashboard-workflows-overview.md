@@ -1,6 +1,6 @@
 # Workflows Overview
 
-The Workflows Overview displays all workflows in the **Environment** you selected, which includes the most
+The Workflows Overview displays all workflows (automated tests) in the **Environment** you selected, which includes the most
 recent and the execution status of each. 
 
 ![Workflows Overview](images/workflows-overview.png)
@@ -18,10 +18,18 @@ You can **Search** and **Filter** your workflows to narrow the output. When you 
 
 ![Workflow Search](images/workflows-overview-search.png)
 
-When you click **Save as view**, **Save new view** opens – enabling you to retain the view.
-
-![Save new view](images/workflows-overview-save-new-view.png)
-
-You can also filter workflows by separately selecting **Labels**, **Status**, and **Resource Group** and choosing one or more parameters.
+You can filter workflows by separately selecting **Labels**, **Status**, and **Resource Group** and choosing one or more parameters specific to each.
 
 ![Workflow Filters](images/workflows-overview-filter.png)
+
+## Custom Views
+
+Custom views are saved filters that allow you to:
+
+* Access and reuse these filters, which become visible within **Workflows Overview**.
+* Establish **Private** views (Default) such that only you have view access.
+* Set views to **Shared across environment**, which allows you to make these custom views available to team members.
+
+When you click **Save as view**, **Save new view** opens – allowing you to establish, retain, and share these custom views.
+
+![Save new view](images/workflows-overview-save-new-view.png)
