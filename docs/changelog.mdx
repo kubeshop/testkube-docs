@@ -14,7 +14,7 @@ This release is available in Helm chart v2.327.0.
 
 ### What's new!
 
-**Unified Execution Dashboard**
+**New Executions Dashboard!**
 We've built a **Unified Execution Dashboard** that brings all your executions into one place, making debugging and monitoring significantly faster.
 The new dashboard provides a single view with everything you need to work efficiently:
 - **Custom Views** & **Advanced Filtering**: Create private and shared views with comprehensive filter options, or use prepopulated views to quickly access common filter combinations
@@ -27,6 +27,10 @@ With this unified view, you can spot a failing execution, view its logs with one
 
 **Deprecation of Tests & Suites**
 Earlier this year, with the introduction of TestWorkflows, we announced our plan to deprecate legacy features including Tests, Suites, Executors, and Sources [see documentation on legacy features](https://docs.testkube.io/articles/legacy-features).
+:::danger
+If you are still using legacy functionality, you will need to stay on previous Testkube releases and migrate your Tests/Suites to
+TestWorkflows before upgrading to this release, as described in the [migration guide](/articles/test-workflow-migration).
+:::
 
 To simplify our codebase and improve development velocity, we are now moving forward with the removal of these legacy components from the Control Plane and Dashboard.
 Since the majority of users have already migrated to TestWorkflows, we expect minimal impact. For teams that still rely on these features, a backward-compatible legacy version will remain available for a limited transition period, receiving only critical fixes (no new functionality).
@@ -36,13 +40,13 @@ As part of ongoing improvements to our data layer, we are introducing PostgreSQL
 This release includes PostgreSQL support in preview mode, which can be enabled through custom configuration.
 PostgreSQL brings significant benefits in performance, scalability, and data security — laying the groundwork for future enhancements.
 
+Migration tools for existing Testkube installations using MongoDB will be provided in a future release!
+
 
 ### Improvements and fixes
 
 - Silent executions tooltips and icon are more user friendly
-- Tracking dashboard events for Sandbox account
 - Updating credential now updates the correct credential scope when there is an override
-- Posthog is now routed through a proxy to avoid ads blockers issues
 - Added browser tab title to Execution Details Page
 
 ## Patch Release v1.20.4 (2025-11-20)
