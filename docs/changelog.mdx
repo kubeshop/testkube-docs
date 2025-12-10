@@ -23,7 +23,10 @@ The new dashboard provides a single view with everything you need to work effici
 
 With this unified view, you can spot a failing execution, view its logs with one click, and act on it immediately. No more checking workflows individually or navigating through multiple pages to get the information you need. Plus, we've added several other features to make working with executions even easier.
 
-**Webhooks** now support **global credentials** and **variables**, enabling a more secure and streamlined configuration process.
+**Webhook Credentials Support**
+Webhooks can now securely reference **Credentials**, so you can inject API keys and secrets into webhook URLs, headers, or payload templates using the ``credentials()`` expression instead of hard-coding them.
+
+This keeps your integrations with external systems (**Slack**, **incident tools**, **custom endpoints**, etc.) both safer and easier to maintain, since you can rotate or update secrets in one place without touching webhook definitions.
 
 **Deprecation of Tests & Suites**
 Earlier this year, with the introduction of TestWorkflows, we announced our plan to deprecate legacy features including Tests, Suites, Executors, and Sources [see documentation on legacy features](https://docs.testkube.io/articles/legacy-features).
