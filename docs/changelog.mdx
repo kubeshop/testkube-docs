@@ -29,7 +29,7 @@ Webhooks can now securely reference **Credentials**, so you can inject API keys 
 This keeps your integrations with external systems (**Slack**, **incident tools**, **custom endpoints**, etc.) both safer and easier to maintain, since you can rotate or update secrets in one place without touching webhook definitions.
 
 **Deprecation of Tests & Suites**
-Earlier this year, with the introduction of TestWorkflows, we announced our plan to deprecate legacy features including Tests, Suites, Executors, and Sources [see documentation on legacy features](https://docs.testkube.io/articles/legacy-features).
+Last year (2024), with the introduction of TestWorkflows, we announced our plan to deprecate legacy features including Tests, Suites, Executors, and Sources [see documentation on legacy features](https://docs.testkube.io/articles/legacy-features).
 :::danger
 If you are still using legacy functionality, you will need to stay on previous Testkube releases and migrate your Tests/Suites to
 TestWorkflows before upgrading to this release, as described in the [migration guide](/articles/test-workflow-migration).
@@ -40,7 +40,8 @@ Since the majority of users have already migrated to TestWorkflows, we expect mi
 
 **(Preview) Support for PostgreSQL**
 As part of ongoing improvements to our data layer, we are introducing PostgreSQL as a new storage option.
-This release includes PostgreSQL support in preview mode, which can be enabled through custom configuration.
+This release includes PostgreSQL support in preview mode, which can be enabled through custom configuration documented 
+[here](https://docs.testkube.io/articles/install/advanced-install#using-postgresql-as-a-database) and [here](https://docs.testkube.io/articles/install/standalone-agent#using-postgresql-as-a-database)
 PostgreSQL brings significant benefits in performance, scalability, and data security — laying the groundwork for future enhancements.
 
 Migration tools for existing Testkube installations using MongoDB will be provided in a future release!
