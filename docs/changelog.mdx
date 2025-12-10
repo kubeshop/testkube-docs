@@ -8,6 +8,41 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Monthly Release v1.21.0 (2025-12-10)
+
+This release is available in Helm chart v2.327.0.
+
+### What's new!
+
+**Executions dashboard optimizations**
+- The executions dashboard was redesigned for a lighter, more streamlined view — making it easier for users to focus on executions.
+- A dedicated “Executions” entry was added to the main navigation, with built-in filters plus options for creating custom, advanced filtering.
+- Users can now build custom views with specific filters, and reuse those views later.
+- The detail page for a single execution is now more accessible and loads significantly faster.
+
+**Webhooks support for global credentials&variables**
+Webhooks now support global credentials and variables, enabling a more secure and streamlined configuration process.
+
+**Deprecation of Tests & Suites**
+Earlier this year, with the introduction of TestWorkflows, we announced our plan to deprecate legacy features including Tests, Suites, Executors, and Sources [see documentation on legacy features](https://docs.testkube.io/articles/legacy-features).
+
+To simplify our codebase and improve development velocity, we are now moving forward with the removal of these legacy components from the Control Plane and Dashboard.
+Since the majority of users have already migrated to TestWorkflows, we expect minimal impact. For teams that still rely on these features, a backward-compatible legacy version will remain available for a limited transition period, receiving only critical fixes (no new functionality).
+
+**(Preview) Support for PostgreSQL**
+As part of ongoing improvements to our data layer, we are introducing PostgreSQL as a new storage option.
+This release includes PostgreSQL support in preview mode, which can be enabled through custom configuration.
+PostgreSQL brings significant benefits in performance, scalability, and data security — laying the groundwork for future enhancements.
+
+
+### Improvements and fixes
+
+- Silent executions tooltips and icon are more user friendly
+- Tracking dashboard events for Sandbox account
+- Updating credential now updates the correct credential scope when there is an override
+- Posthog is now routed through a proxy to avoid ads blockers issues
+- Added browser tab title to Execution Details Page
+
 ## Patch Release v1.20.4 (2025-11-20)
 
 This release is available in Helm chart v2.326.4.
