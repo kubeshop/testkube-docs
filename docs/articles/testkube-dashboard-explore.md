@@ -9,9 +9,9 @@ read [Production Installations](/articles/install/install-with-helm).
 
 ![Testkube Dashboard](../articles/images/dashboard-overview.png)
 
-**Testkube Sandbox** appears in the **Organization** and **Environment** drop-down list boxes near the dashboard (top left). 
-**TestKube Sandbox** displays in these fields when you are in the Testkube Sandbox environment. When you are not in this environment, 
-these fields display and list your company-related **Organization** and **Environment**, respectively. You can click the arrows associated
+**Testkube Sandbox** appears in the **Organization** and **Environment** drop-down list boxes near the dashboard (top left) 
+when you are in the [Testkube Sandbox](/articles/environment-management#testkube-sandbox-environment) environment. When you are not in this environment, these fields display and list your 
+company-related **Organization** and **Environment**, respectively. You can click the arrows associated
 with each to view a list of options, allowing you to change these selections. [Insights](/articles/test-insights) and 
 [See all insights](/articles/test-insights) launch you to visual analytics specific to system performance and test results.
 
