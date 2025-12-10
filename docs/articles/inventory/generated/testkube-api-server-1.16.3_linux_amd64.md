@@ -3931,6 +3931,30 @@ Discovered by OSS-Fuzz
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/oauth2</strong> <code>0.12.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/oauth2@0.12.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2025-22868?s=github&n=oauth2&ns=golang.org%2Fx&t=golang&vr=%3C0.27.0"><img alt="high 7.5: CVE--2025--22868" src="https://img.shields.io/badge/CVE--2025--22868-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Improper Validation of Syntactic Correctness of Input</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.27.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.27.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.116%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+An attacker can pass a malicious malformed token which causes unexpected memory to be consumed during parsing.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/containers/image/v5</strong> <code>5.25.0</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/containers/image@5.25.0#v5</code></small><br/>
@@ -3949,6 +3973,62 @@ Discovered by OSS-Fuzz
 <blockquote>
 
 A flaw was found in the github.com/containers/image library. This flaw allows attackers to trigger unexpected authenticated registry accesses on behalf of a victim user, causing resource exhaustion, local path traversal, and other attacks.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/sigstore/fulcio</strong> <code>1.2.0</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/sigstore/fulcio@1.2.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2025-66506?s=github&n=fulcio&ns=github.com%2Fsigstore&t=golang&vr=%3C%3D1.8.2"><img alt="high 7.5: CVE--2025--66506" src="https://img.shields.io/badge/CVE--2025--66506-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Asymmetric Resource Consumption (Amplification)</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=1.8.2</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.8.3</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.023%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Function [identity.extractIssuerURL](https://github.com/sigstore/fulcio/blob/main/pkg/identity/issuerpool.go#L44-L45) currently splits (via a call to [strings.Split](https://pkg.go.dev/strings#Split)) its argument (which is untrusted data) on periods.
+
+As a result, in the face of a malicious request with an (invalid) OIDC identity token in the payload containing many period characters, a call to `extractIssuerURL` incurs allocations to the tune of O(n) bytes (where n stands for the length of the function's argument), with a constant factor of about 16. Relevant weakness: [CWE-405: Asymmetric Resource Consumption (Amplification)](https://cwe.mitre.org/data/definitions/405.html)
+
+Details
+See [identity.extractIssuerURL](https://github.com/sigstore/fulcio/blob/main/pkg/identity/issuerpool.go#L44-L45)
+
+Impact
+Excessive memory allocation
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/sirupsen/logrus</strong> <code>1.9.0</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/sirupsen/logrus@1.9.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2025-65637?s=github&n=logrus&ns=github.com%2Fsirupsen&t=golang&vr=%3D1.9.0"><img alt="high 8.7: CVE--2025--65637" src="https://img.shields.io/badge/CVE--2025--65637-lightgrey?label=high%208.7&labelColor=e25d68"/></a> <i>Uncontrolled Resource Consumption</i>
+
+<table>
+<tr><td>Affected range</td><td><code>=1.9.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.9.1</code></td></tr>
+<tr><td>CVSS Score</td><td><code>8.7</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.019%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A denial-of-service vulnerability exists in github.com/sirupsen/logrus when using Entry.Writer() to log a single-line payload larger than 64KB without newline characters. Due to limitations in the internal bufio.Scanner, the read fails with "token too long" and the writer pipe is closed, leaving Writer() unusable and causing application unavailability (DoS). This affects versions < 1.8.3, 1.9.0, and 1.9.2. The issue is fixed in 1.8.3, 1.9.1, and 1.9.3+, where the input is chunked and the writer continues to function even if an error is logged.
 
 </blockquote>
 </details>
@@ -4012,6 +4092,30 @@ If you have any questions or comments about this advisory:
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/oauth2</strong> <code>0.6.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/oauth2@0.6.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2025-22868?s=github&n=oauth2&ns=golang.org%2Fx&t=golang&vr=%3C0.27.0"><img alt="high 7.5: CVE--2025--22868" src="https://img.shields.io/badge/CVE--2025--22868-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Improper Validation of Syntactic Correctness of Input</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.27.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.27.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.116%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+An attacker can pass a malicious malformed token which causes unexpected memory to be consumed during parsing.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>musl</strong> <code>1.2.4-r0</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/musl@1.2.4-r0?os_name=alpine&os_version=3.18</code></small><br/>
@@ -4028,30 +4132,6 @@ If you have any questions or comments about this advisory:
 <blockquote>
 
 
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/oauth2</strong> <code>0.12.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/oauth2@0.12.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-22868?s=github&n=oauth2&ns=golang.org%2Fx&t=golang&vr=%3C0.27.0"><img alt="high 7.5: CVE--2025--22868" src="https://img.shields.io/badge/CVE--2025--22868-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Improper Validation of Syntactic Correctness of Input</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.27.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.27.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.116%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-An attacker can pass a malicious malformed token which causes unexpected memory to be consumed during parsing.
 
 </blockquote>
 </details>
@@ -4155,86 +4235,6 @@ Based on discussions with other runtimes, it seems that crun and youki may have 
 Thanks to Li Fubang (@lifubang from acmcoder.com, CIIC) and Tõnis Tiigi (@tonistiigi from Docker) for both independently discovering this vulnerability, as well as Aleksa Sarai (@cyphar from SUSE) for the original research into this class of security issues and solutions.
 
 Additional thanks go to Tõnis Tiigi for finding some very useful exploit templates for these kinds of race attacks using `docker buildx build`.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/sirupsen/logrus</strong> <code>1.9.0</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/sirupsen/logrus@1.9.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-65637?s=github&n=logrus&ns=github.com%2Fsirupsen&t=golang&vr=%3D1.9.0"><img alt="high 8.7: CVE--2025--65637" src="https://img.shields.io/badge/CVE--2025--65637-lightgrey?label=high%208.7&labelColor=e25d68"/></a> <i>Uncontrolled Resource Consumption</i>
-
-<table>
-<tr><td>Affected range</td><td><code>=1.9.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.9.1</code></td></tr>
-<tr><td>CVSS Score</td><td><code>8.7</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.019%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A denial-of-service vulnerability exists in github.com/sirupsen/logrus when using Entry.Writer() to log a single-line payload larger than 64KB without newline characters. Due to limitations in the internal bufio.Scanner, the read fails with "token too long" and the writer pipe is closed, leaving Writer() unusable and causing application unavailability (DoS). This affects versions < 1.8.3, 1.9.0, and 1.9.2. The issue is fixed in 1.8.3, 1.9.1, and 1.9.3+, where the input is chunked and the writer continues to function even if an error is logged.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/sigstore/fulcio</strong> <code>1.2.0</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/sigstore/fulcio@1.2.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-66506?s=github&n=fulcio&ns=github.com%2Fsigstore&t=golang&vr=%3C%3D1.8.2"><img alt="high 7.5: CVE--2025--66506" src="https://img.shields.io/badge/CVE--2025--66506-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Asymmetric Resource Consumption (Amplification)</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=1.8.2</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.8.3</code></td></tr>
-<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.023%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Function [identity.extractIssuerURL](https://github.com/sigstore/fulcio/blob/main/pkg/identity/issuerpool.go#L44-L45) currently splits (via a call to [strings.Split](https://pkg.go.dev/strings#Split)) its argument (which is untrusted data) on periods.
-
-As a result, in the face of a malicious request with an (invalid) OIDC identity token in the payload containing many period characters, a call to `extractIssuerURL` incurs allocations to the tune of O(n) bytes (where n stands for the length of the function's argument), with a constant factor of about 16. Relevant weakness: [CWE-405: Asymmetric Resource Consumption (Amplification)](https://cwe.mitre.org/data/definitions/405.html)
-
-Details
-See [identity.extractIssuerURL](https://github.com/sigstore/fulcio/blob/main/pkg/identity/issuerpool.go#L44-L45)
-
-Impact
-Excessive memory allocation
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/oauth2</strong> <code>0.6.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/oauth2@0.6.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-22868?s=github&n=oauth2&ns=golang.org%2Fx&t=golang&vr=%3C0.27.0"><img alt="high 7.5: CVE--2025--22868" src="https://img.shields.io/badge/CVE--2025--22868-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Improper Validation of Syntactic Correctness of Input</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.27.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.27.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.116%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-An attacker can pass a malicious malformed token which causes unexpected memory to be consumed during parsing.
 
 </blockquote>
 </details>
@@ -4437,9 +4437,67 @@ The go-jose package is subject to a "billion hashes attack" causing denial-of-se
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/protobuf</strong> <code>1.31.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>gopkg.in/square/go-jose.v2</strong> <code>2.6.0</code> (golang)</summary>
 
-<small><code>pkg:golang/google.golang.org/protobuf@1.31.0</code></small><br/>
+<small><code>pkg:golang/gopkg.in/square/go-jose.v2@2.6.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-28180?s=github&n=go-jose.v2&ns=gopkg.in%2Fsquare&t=golang&vr=%3C%3D2.6.0"><img alt="medium 4.3: CVE--2024--28180" src="https://img.shields.io/badge/CVE--2024--28180-lightgrey?label=medium%204.3&labelColor=fbb552"/></a> <i>Improper Handling of Highly Compressed Data (Data Amplification)</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=2.6.0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>CVSS Score</td><td><code>4.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>3.644%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>87th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+An attacker could send a JWE containing compressed data that used large amounts of memory and CPU when decompressed by Decrypt or DecryptMulti. Those functions now return an error if the decompressed data would exceed 250kB or 10x the compressed size (whichever is larger). Thanks to Enze Wang@Alioth and Jianjun Chen@Zhongguancun Lab (@zer0yu and @chenjj) for reporting.
+
+### Patches
+The problem is fixed in the following packages and versions:
+- github.com/go-jose/go-jose/v4 version 4.0.1
+- github.com/go-jose/go-jose/v3 version 3.0.3
+- gopkg.in/go-jose/go-jose.v2 version 2.6.3
+
+The problem will not be fixed in the following package because the package is archived:
+- gopkg.in/square/go-jose.v2
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/vektah/gqlparser/v2</strong> <code>2.5.2-0.20230422221642-25e09f9d292d</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/vektah/gqlparser@2.5.2-0.20230422221642-25e09f9d292d#v2</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2023-49559?s=github&n=v2&ns=github.com%2Fvektah%2Fgqlparser&t=golang&vr=%3C2.5.14"><img alt="medium 5.3: CVE--2023--49559" src="https://img.shields.io/badge/CVE--2023--49559-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Uncontrolled Resource Consumption</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.5.14</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.5.14</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.073%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+An issue in vektah gqlparser open-source-library v.2.5.10 allows a remote attacker to cause a denial of service via a crafted script to the parserDirectives function.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/protobuf</strong> <code>1.30.0</code> (golang)</summary>
+
+<small><code>pkg:golang/google.golang.org/protobuf@1.30.0</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2024-24786?s=github&n=protobuf&ns=google.golang.org&t=golang&vr=%3C1.33.0"><img alt="medium 6.6: CVE--2024--24786" src="https://img.shields.io/badge/CVE--2024--24786-lightgrey?label=medium%206.6&labelColor=fbb552"/></a> <i>Loop with Unreachable Exit Condition ('Infinite Loop')</i>
 
 <table>
@@ -4461,34 +4519,94 @@ The protojson.Unmarshal function can enter an infinite loop when unmarshaling ce
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>gopkg.in/go-jose/go-jose.v2</strong> <code>2.6.1</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>nghttp2</strong> <code>1.57.0-r0</code> (apk)</summary>
 
-<small><code>pkg:golang/gopkg.in/go-jose/go-jose.v2@2.6.1</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-28180?s=github&n=go-jose.v2&ns=gopkg.in%2Fgo-jose&t=golang&vr=%3C2.6.3"><img alt="medium 4.3: CVE--2024--28180" src="https://img.shields.io/badge/CVE--2024--28180-lightgrey?label=medium%204.3&labelColor=fbb552"/></a> <i>Improper Handling of Highly Compressed Data (Data Amplification)</i>
+<small><code>pkg:apk/alpine/nghttp2@1.57.0-r0?os_name=alpine&os_version=3.18</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-28182?s=alpine&n=nghttp2&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C%3D1.57.0-r0"><img alt="medium : CVE--2024--28182" src="https://img.shields.io/badge/CVE--2024--28182-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;2.6.3</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.6.3</code></td></tr>
-<tr><td>CVSS Score</td><td><code>4.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>3.644%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>87th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;=1.57.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>25.454%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>96th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/cloudevents/sdk-go/v2</strong> <code>2.14.0</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/cloudevents/sdk-go@2.14.0#v2</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-28110?s=github&n=v2&ns=github.com%2Fcloudevents%2Fsdk-go&t=golang&vr=%3C%3D2.15.1"><img alt="medium : CVE--2024--28110" src="https://img.shields.io/badge/CVE--2024--28110-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=2.15.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.15.2</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.179%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
 ### Impact
-An attacker could send a JWE containing compressed data that used large amounts of memory and CPU when decompressed by Decrypt or DecryptMulti. Those functions now return an error if the decompressed data would exceed 250kB or 10x the compressed size (whichever is larger). Thanks to Enze Wang@Alioth and Jianjun Chen@Zhongguancun Lab (@zer0yu and @chenjj) for reporting.
+_What kind of vulnerability is it? Who is impacted?_
+Using cloudevents.WithRoundTripper to create a cloudevents.Client with an authenticated http.RoundTripper causes the go-sdk to leak credentials to arbitrary endpoints.
+
+The relevant code is [here](https://github.com/cloudevents/sdk-go/blob/67e389964131d55d65cd14b4eb32d57a47312695/v2/protocol/http/protocol.go#L104-L110) (also inline, emphasis added):
+
+<pre>if p.Client == nil {
+  p.Client = **http.DefaultClient**
+}
+
+if p.roundTripper != nil {
+  p.Client.**Transport = p.roundTripper**
+}
+</pre>
+
+When the transport is populated with an authenticated transport such as:
+- [oauth2.Transport](https://pkg.go.dev/golang.org/x/oauth2#Transport)
+- [idtoken.NewClient(...).Transport](https://pkg.go.dev/google.golang.org/api/idtoken#NewClient)
+
+... then http.DefaultClient is modified with the authenticated transport and will start to send Authorization tokens to
+**any endpoint** it is used to contact!
+
+Found and patched by: @tcnghia and @mattmoor
 
 ### Patches
-The problem is fixed in the following packages and versions:
-- github.com/go-jose/go-jose/v4 version 4.0.1
-- github.com/go-jose/go-jose/v3 version 3.0.3
-- gopkg.in/go-jose/go-jose.v2 version 2.6.3
+v.2.15.2
 
-The problem will not be fixed in the following package because the package is archived:
-- gopkg.in/square/go-jose.v2
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/hashicorp/go-retryablehttp</strong> <code>0.7.2</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/hashicorp/go-retryablehttp@0.7.2</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-6104?s=github&n=go-retryablehttp&ns=github.com%2Fhashicorp&t=golang&vr=%3C0.7.7"><img alt="medium 6.0: CVE--2024--6104" src="https://img.shields.io/badge/CVE--2024--6104-lightgrey?label=medium%206.0&labelColor=fbb552"/></a> <i>Insertion of Sensitive Information into Log File</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.7.7</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.7.7</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:H/UI:N/S:C/C:H/I:N/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.047%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+go-retryablehttp prior to 0.7.7 did not sanitize urls when writing them to its log file. This could lead to go-retryablehttp writing sensitive HTTP basic auth credentials to its log file. This vulnerability, CVE-2024-6104, was fixed in go-retryablehttp 0.7.7.
 
 </blockquote>
 </details>
@@ -4517,6 +4635,30 @@ The problem will not be fixed in the following package because the package is ar
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/containers/common</strong> <code>0.52.0</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/containers/common@0.52.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-9341?s=github&n=common&ns=github.com%2Fcontainers&t=golang&vr=%3C0.60.4"><img alt="medium 5.8: CVE--2024--9341" src="https://img.shields.io/badge/CVE--2024--9341-lightgrey?label=medium%205.8&labelColor=fbb552"/></a> <i>Improper Link Resolution Before File Access ('Link Following')</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.60.4</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.60.4</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.8</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:A/VC:H/VI:L/VA:N/SC:N/SI:N/SA:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.972%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>76th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A flaw was found in Go. When FIPS mode is enabled on a system, container runtimes may incorrectly handle certain file paths due to improper validation in the containers/common Go library. This flaw allows an attacker to exploit symbolic links and trick the system into mounting sensitive host directories inside a container. This issue also allows attackers to access critical host files, bypassing the intended isolation between containers and the host system.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libtasn1</strong> <code>4.19.0-r1</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/libtasn1@4.19.0-r1?os_name=alpine&os_version=3.18</code></small><br/>
@@ -4539,24 +4681,24 @@ The problem will not be fixed in the following package because the package is ar
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/hashicorp/go-retryablehttp</strong> <code>0.7.2</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/protobuf</strong> <code>1.31.0</code> (golang)</summary>
 
-<small><code>pkg:golang/github.com/hashicorp/go-retryablehttp@0.7.2</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-6104?s=github&n=go-retryablehttp&ns=github.com%2Fhashicorp&t=golang&vr=%3C0.7.7"><img alt="medium 6.0: CVE--2024--6104" src="https://img.shields.io/badge/CVE--2024--6104-lightgrey?label=medium%206.0&labelColor=fbb552"/></a> <i>Insertion of Sensitive Information into Log File</i>
+<small><code>pkg:golang/google.golang.org/protobuf@1.31.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-24786?s=github&n=protobuf&ns=google.golang.org&t=golang&vr=%3C1.33.0"><img alt="medium 6.6: CVE--2024--24786" src="https://img.shields.io/badge/CVE--2024--24786-lightgrey?label=medium%206.6&labelColor=fbb552"/></a> <i>Loop with Unreachable Exit Condition ('Infinite Loop')</i>
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;0.7.7</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.7.7</code></td></tr>
-<tr><td>CVSS Score</td><td><code>6</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:H/UI:N/S:C/C:H/I:N/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.047%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.33.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.33.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.6</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:U</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.231%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-go-retryablehttp prior to 0.7.7 did not sanitize urls when writing them to its log file. This could lead to go-retryablehttp writing sensitive HTTP basic auth credentials to its log file. This vulnerability, CVE-2024-6104, was fixed in go-retryablehttp 0.7.7.
+The protojson.Unmarshal function can enter an infinite loop when unmarshaling certain forms of invalid JSON. This condition can occur when unmarshaling into a message which contains a google.protobuf.Any value, or when the UnmarshalOptions.DiscardUnknown option is set.
 
 </blockquote>
 </details>
@@ -4667,112 +4809,6 @@ Servers with a small amount of RAM that download and unpack a large number of un
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/containers/common</strong> <code>0.52.0</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/containers/common@0.52.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-9341?s=github&n=common&ns=github.com%2Fcontainers&t=golang&vr=%3C0.60.4"><img alt="medium 5.8: CVE--2024--9341" src="https://img.shields.io/badge/CVE--2024--9341-lightgrey?label=medium%205.8&labelColor=fbb552"/></a> <i>Improper Link Resolution Before File Access ('Link Following')</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.60.4</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.60.4</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5.8</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:A/VC:H/VI:L/VA:N/SC:N/SI:N/SA:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.972%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>76th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A flaw was found in Go. When FIPS mode is enabled on a system, container runtimes may incorrectly handle certain file paths due to improper validation in the containers/common Go library. This flaw allows an attacker to exploit symbolic links and trick the system into mounting sensitive host directories inside a container. This issue also allows attackers to access critical host files, bypassing the intended isolation between containers and the host system.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>gopkg.in/square/go-jose.v2</strong> <code>2.6.0</code> (golang)</summary>
-
-<small><code>pkg:golang/gopkg.in/square/go-jose.v2@2.6.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-28180?s=github&n=go-jose.v2&ns=gopkg.in%2Fsquare&t=golang&vr=%3C%3D2.6.0"><img alt="medium 4.3: CVE--2024--28180" src="https://img.shields.io/badge/CVE--2024--28180-lightgrey?label=medium%204.3&labelColor=fbb552"/></a> <i>Improper Handling of Highly Compressed Data (Data Amplification)</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=2.6.0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>CVSS Score</td><td><code>4.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>3.644%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>87th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-### Impact
-An attacker could send a JWE containing compressed data that used large amounts of memory and CPU when decompressed by Decrypt or DecryptMulti. Those functions now return an error if the decompressed data would exceed 250kB or 10x the compressed size (whichever is larger). Thanks to Enze Wang@Alioth and Jianjun Chen@Zhongguancun Lab (@zer0yu and @chenjj) for reporting.
-
-### Patches
-The problem is fixed in the following packages and versions:
-- github.com/go-jose/go-jose/v4 version 4.0.1
-- github.com/go-jose/go-jose/v3 version 3.0.3
-- gopkg.in/go-jose/go-jose.v2 version 2.6.3
-
-The problem will not be fixed in the following package because the package is archived:
-- gopkg.in/square/go-jose.v2
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/cloudevents/sdk-go/v2</strong> <code>2.14.0</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/cloudevents/sdk-go@2.14.0#v2</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-28110?s=github&n=v2&ns=github.com%2Fcloudevents%2Fsdk-go&t=golang&vr=%3C%3D2.15.1"><img alt="medium : CVE--2024--28110" src="https://img.shields.io/badge/CVE--2024--28110-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=2.15.1</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.15.2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.179%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-### Impact
-_What kind of vulnerability is it? Who is impacted?_
-Using cloudevents.WithRoundTripper to create a cloudevents.Client with an authenticated http.RoundTripper causes the go-sdk to leak credentials to arbitrary endpoints.
-
-The relevant code is [here](https://github.com/cloudevents/sdk-go/blob/67e389964131d55d65cd14b4eb32d57a47312695/v2/protocol/http/protocol.go#L104-L110) (also inline, emphasis added):
-
-<pre>if p.Client == nil {
-  p.Client = **http.DefaultClient**
-}
-
-if p.roundTripper != nil {
-  p.Client.**Transport = p.roundTripper**
-}
-</pre>
-
-When the transport is populated with an authenticated transport such as:
-- [oauth2.Transport](https://pkg.go.dev/golang.org/x/oauth2#Transport)
-- [idtoken.NewClient(...).Transport](https://pkg.go.dev/google.golang.org/api/idtoken#NewClient)
-
-... then http.DefaultClient is modified with the authenticated transport and will start to send Authorization tokens to
-**any endpoint** it is used to contact!
-
-Found and patched by: @tcnghia and @mattmoor
-
-### Patches
-v.2.15.2
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/cyphar/filepath-securejoin</strong> <code>0.2.3</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/cyphar/filepath-securejoin@0.2.3</code></small><br/>
@@ -4807,70 +4843,34 @@ See #9.
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/protobuf</strong> <code>1.30.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>gopkg.in/go-jose/go-jose.v2</strong> <code>2.6.1</code> (golang)</summary>
 
-<small><code>pkg:golang/google.golang.org/protobuf@1.30.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-24786?s=github&n=protobuf&ns=google.golang.org&t=golang&vr=%3C1.33.0"><img alt="medium 6.6: CVE--2024--24786" src="https://img.shields.io/badge/CVE--2024--24786-lightgrey?label=medium%206.6&labelColor=fbb552"/></a> <i>Loop with Unreachable Exit Condition ('Infinite Loop')</i>
+<small><code>pkg:golang/gopkg.in/go-jose/go-jose.v2@2.6.1</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-28180?s=github&n=go-jose.v2&ns=gopkg.in%2Fgo-jose&t=golang&vr=%3C2.6.3"><img alt="medium 4.3: CVE--2024--28180" src="https://img.shields.io/badge/CVE--2024--28180-lightgrey?label=medium%204.3&labelColor=fbb552"/></a> <i>Improper Handling of Highly Compressed Data (Data Amplification)</i>
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;1.33.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.33.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>6.6</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:U</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.231%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.6.3</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.6.3</code></td></tr>
+<tr><td>CVSS Score</td><td><code>4.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>3.644%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>87th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-The protojson.Unmarshal function can enter an infinite loop when unmarshaling certain forms of invalid JSON. This condition can occur when unmarshaling into a message which contains a google.protobuf.Any value, or when the UnmarshalOptions.DiscardUnknown option is set.
+### Impact
+An attacker could send a JWE containing compressed data that used large amounts of memory and CPU when decompressed by Decrypt or DecryptMulti. Those functions now return an error if the decompressed data would exceed 250kB or 10x the compressed size (whichever is larger). Thanks to Enze Wang@Alioth and Jianjun Chen@Zhongguancun Lab (@zer0yu and @chenjj) for reporting.
 
-</blockquote>
-</details>
-</details></td></tr>
+### Patches
+The problem is fixed in the following packages and versions:
+- github.com/go-jose/go-jose/v4 version 4.0.1
+- github.com/go-jose/go-jose/v3 version 3.0.3
+- gopkg.in/go-jose/go-jose.v2 version 2.6.3
 
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/vektah/gqlparser/v2</strong> <code>2.5.2-0.20230422221642-25e09f9d292d</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/vektah/gqlparser@2.5.2-0.20230422221642-25e09f9d292d#v2</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2023-49559?s=github&n=v2&ns=github.com%2Fvektah%2Fgqlparser&t=golang&vr=%3C2.5.14"><img alt="medium 5.3: CVE--2023--49559" src="https://img.shields.io/badge/CVE--2023--49559-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Uncontrolled Resource Consumption</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.5.14</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.5.14</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.073%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-An issue in vektah gqlparser open-source-library v.2.5.10 allows a remote attacker to cause a denial of service via a crafted script to the parserDirectives function.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>nghttp2</strong> <code>1.57.0-r0</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/nghttp2@1.57.0-r0?os_name=alpine&os_version=3.18</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-28182?s=alpine&n=nghttp2&ns=alpine&t=apk&osn=alpine&osv=3.18&vr=%3C%3D1.57.0-r0"><img alt="medium : CVE--2024--28182" src="https://img.shields.io/badge/CVE--2024--28182-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=1.57.0-r0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>25.454%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>96th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
+The problem will not be fixed in the following package because the package is archived:
+- gopkg.in/square/go-jose.v2
 
 </blockquote>
 </details>

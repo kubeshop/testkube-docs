@@ -2751,45 +2751,6 @@ This issue was identified and reported by SimCorp.
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>zlib</strong> <code>1.2.11-r3</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/zlib@1.2.11-r3?os_name=alpine&os_version=3.13</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2022-37434?s=alpine&n=zlib&ns=alpine&t=apk&osn=alpine&osv=3.13&vr=%3C1.2.12-r2"><img alt="critical : CVE--2022--37434" src="https://img.shields.io/badge/CVE--2022--37434-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.2.12-r2</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.2.12-r2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>92.470%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>100th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2018-25032?s=alpine&n=zlib&ns=alpine&t=apk&osn=alpine&osv=3.13&vr=%3C1.2.12-r0"><img alt="high : CVE--2018--25032" src="https://img.shields.io/badge/CVE--2018--25032-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.2.12-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.2.12-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.093%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>apk-tools</strong> <code>2.12.1-r0</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/apk-tools@2.12.1-r0?os_name=alpine&os_version=3.13</code></small><br/>
@@ -2829,9 +2790,48 @@ This issue was identified and reported by SimCorp.
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>github.com/nats-io/jwt</strong> <code>1.2.2</code> (golang)</summary>
+<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>zlib</strong> <code>1.2.11-r3</code> (apk)</summary>
 
-<small><code>pkg:golang/github.com/nats-io/jwt@1.2.2</code></small><br/>
+<small><code>pkg:apk/alpine/zlib@1.2.11-r3?os_name=alpine&os_version=3.13</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2022-37434?s=alpine&n=zlib&ns=alpine&t=apk&osn=alpine&osv=3.13&vr=%3C1.2.12-r2"><img alt="critical : CVE--2022--37434" src="https://img.shields.io/badge/CVE--2022--37434-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.2.12-r2</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.2.12-r2</code></td></tr>
+<tr><td>EPSS Score</td><td><code>92.470%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>100th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2018-25032?s=alpine&n=zlib&ns=alpine&t=apk&osn=alpine&osv=3.13&vr=%3C1.2.12-r0"><img alt="high : CVE--2018--25032" src="https://img.shields.io/badge/CVE--2018--25032-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.2.12-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.2.12-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.093%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>github.com/nats-io/jwt</strong> <code>1.1.0</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/nats-io/jwt@1.1.0</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2021-3127?s=github&n=jwt&ns=github.com%2Fnats-io&t=golang&vr=%3C%3D1.2.2"><img alt="critical : CVE--2021--3127" src="https://img.shields.io/badge/CVE--2021--3127-lightgrey?label=critical%20&labelColor=8b1924"/></a> <i>Incorrect Authorization</i>
 
 <table>
@@ -2962,9 +2962,9 @@ Audit all accounts JWTs to scan for exploit attempts; a Python script to audit t
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>github.com/nats-io/jwt</strong> <code>1.1.0</code> (golang)</summary>
+<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>github.com/nats-io/jwt</strong> <code>1.2.2</code> (golang)</summary>
 
-<small><code>pkg:golang/github.com/nats-io/jwt@1.1.0</code></small><br/>
+<small><code>pkg:golang/github.com/nats-io/jwt@1.2.2</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2021-3127?s=github&n=jwt&ns=github.com%2Fnats-io&t=golang&vr=%3C%3D1.2.2"><img alt="critical : CVE--2021--3127" src="https://img.shields.io/badge/CVE--2021--3127-lightgrey?label=critical%20&labelColor=8b1924"/></a> <i>Incorrect Authorization</i>
 
 <table>
@@ -3676,9 +3676,9 @@ This issue was identified and reported by SimCorp.
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/H-4-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.0.0-20200622213623-75b288015ac9</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/H-4-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.0.0-20200323165209-0ec3e9974c59</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/crypto@0.0.0-20200622213623-75b288015ac9</code></small><br/>
+<small><code>pkg:golang/golang.org/x/crypto@0.0.0-20200323165209-0ec3e9974c59</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2022-30636?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.0.0-20220525230936-793ad666bf5e"><img alt="high : CVE--2022--30636" src="https://img.shields.io/badge/CVE--2022--30636-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
@@ -3800,9 +3800,9 @@ This attack targets the specification of ChaCha20-Poly1305 (chacha20-poly1305@op
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/H-4-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.0.0-20200323165209-0ec3e9974c59</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/H-4-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.0.0-20200622213623-75b288015ac9</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/crypto@0.0.0-20200323165209-0ec3e9974c59</code></small><br/>
+<small><code>pkg:golang/golang.org/x/crypto@0.0.0-20200622213623-75b288015ac9</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2022-30636?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.0.0-20220525230936-793ad666bf5e"><img alt="high : CVE--2022--30636" src="https://img.shields.io/badge/CVE--2022--30636-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
@@ -4135,33 +4135,6 @@ golang.org/x/text/language in golang.org/x/text before 0.3.7 can panic with an o
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.0.0-20210421221651-33663a62ff08</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/sys@0.0.0-20210421221651-33663a62ff08</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2022-29526?s=github&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.0.0-20220412211240-33da011f77ad"><img alt="medium 5.3: CVE--2022--29526" src="https://img.shields.io/badge/CVE--2022--29526-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Improper Privilege Management</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.0.0-20220412211240-33da011f77ad</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.0.0-20220412211240-33da011f77ad</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.173%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Go before 1.17.10 and 1.18.x before 1.18.2 has Incorrect Privilege Reporting in syscall. When called with a non-zero flags parameter, the Faccessat function could incorrectly report that a file is accessible.
-
-### Specific Go Packages Affected
-golang.org/x/sys/unix
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/ulikunitz/xz</strong> <code>0.5.10</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/ulikunitz/xz@0.5.10</code></small><br/>
@@ -4260,6 +4233,33 @@ func UnpackLZMA(lzmaFile string) error {
 
 ### Impact
 Servers with a small amount of RAM that download and unpack a large number of unverified LZMA archives
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.0.0-20210421221651-33663a62ff08</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/sys@0.0.0-20210421221651-33663a62ff08</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2022-29526?s=github&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.0.0-20220412211240-33da011f77ad"><img alt="medium 5.3: CVE--2022--29526" src="https://img.shields.io/badge/CVE--2022--29526-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Improper Privilege Management</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.0.0-20220412211240-33da011f77ad</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.0.0-20220412211240-33da011f77ad</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.173%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Go before 1.17.10 and 1.18.x before 1.18.2 has Incorrect Privilege Reporting in syscall. When called with a non-zero flags parameter, the Faccessat function could incorrectly report that a file is accessible.
+
+### Specific Go Packages Affected
+golang.org/x/sys/unix
 
 </blockquote>
 </details>
