@@ -1,9 +1,7 @@
 ---
 hide_table_of_contents: true
 ---
-<h2>:mag: Vulnerabilities of <code>nats:2.9.8-alpine</code></h2>
 
-<details open="true"><summary>:package: Image Reference</strong> <code>nats:2.9.8-alpine</code></summary>
 <table>
 <tr><td>digest</td><td><code>sha256:540ea1800ec43613e42f90ec14f3c0081d20dfb233611c49d193c76022c3ea53</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 4" src="https://img.shields.io/badge/critical-4-8b1924"/> <img alt="high: 29" src="https://img.shields.io/badge/high-29-e25d68"/> <img alt="medium: 37" src="https://img.shields.io/badge/medium-37-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
 <tr><td>platform</td><td>linux/arm64/v8</td></tr>
@@ -21,7 +19,7 @@ hide_table_of_contents: true
 <a href="https://scout.docker.com/v/CVE-2024-24790?s=golang&n=stdlib&t=golang&vr=%3C1.21.11"><img alt="critical : CVE--2024--24790" src="https://img.shields.io/badge/CVE--2024--24790-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.082%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
@@ -38,7 +36,7 @@ The various Is methods (IsPrivate, IsLoopback, etc) did not work as expected for
 <a href="https://scout.docker.com/v/CVE-2023-24540?s=golang&n=stdlib&t=golang&vr=%3C1.19.9"><img alt="critical : CVE--2023--24540" src="https://img.shields.io/badge/CVE--2023--24540-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.9</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.250%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
@@ -55,7 +53,7 @@ Not all valid JavaScript whitespace characters are considered to be whitespace. 
 <a href="https://scout.docker.com/v/CVE-2023-24538?s=golang&n=stdlib&t=golang&vr=%3C1.19.8"><img alt="critical : CVE--2023--24538" src="https://img.shields.io/badge/CVE--2023--24538-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.664%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>70th percentile</code></td></tr>
@@ -80,7 +78,7 @@ Users who rely on the previous behavior can re-enable it using the GODEBUG flag 
 <a href="https://scout.docker.com/v/CVE-2025-22871?s=golang&n=stdlib&t=golang&vr=%3C1.23.8"><img alt="critical : CVE--2025--22871" src="https://img.shields.io/badge/CVE--2025--22871-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.23.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.23.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.019%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
@@ -97,7 +95,7 @@ The net/http package improperly accepts a bare LF as a line terminator in chunke
 <a href="https://scout.docker.com/v/CVE-2023-29403?s=golang&n=stdlib&t=golang&vr=%3C1.19.10"><img alt="high : CVE--2023--29403" src="https://img.shields.io/badge/CVE--2023--29403-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.10</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.009%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
@@ -116,7 +114,7 @@ If a setuid/setgid binary is executed with standard I/O file descriptors closed,
 <a href="https://scout.docker.com/v/CVE-2025-61729?s=golang&n=stdlib&t=golang&vr=%3C1.24.11"><img alt="high : CVE--2025--61729" src="https://img.shields.io/badge/CVE--2025--61729-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.016%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
@@ -133,7 +131,7 @@ Within HostnameError.Error(), when constructing an error string, there is no lim
 <a href="https://scout.docker.com/v/CVE-2025-61725?s=golang&n=stdlib&t=golang&vr=%3C1.24.8"><img alt="high : CVE--2025--61725" src="https://img.shields.io/badge/CVE--2025--61725-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.026%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
@@ -150,7 +148,7 @@ The ParseAddress function constructs domain-literal address components through r
 <a href="https://scout.docker.com/v/CVE-2025-61723?s=golang&n=stdlib&t=golang&vr=%3C1.24.8"><img alt="high : CVE--2025--61723" src="https://img.shields.io/badge/CVE--2025--61723-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.026%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
@@ -169,7 +167,7 @@ This affects programs which parse untrusted PEM inputs.
 <a href="https://scout.docker.com/v/CVE-2025-58188?s=golang&n=stdlib&t=golang&vr=%3C1.24.8"><img alt="high : CVE--2025--58188" src="https://img.shields.io/badge/CVE--2025--58188-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.014%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
@@ -188,7 +186,7 @@ This affects programs which validate arbitrary certificate chains.
 <a href="https://scout.docker.com/v/CVE-2025-58187?s=golang&n=stdlib&t=golang&vr=%3C1.24.9"><img alt="high : CVE--2025--58187" src="https://img.shields.io/badge/CVE--2025--58187-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.9</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.015%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
@@ -207,7 +205,7 @@ This affects programs which validate arbitrary certificate chains.
 <a href="https://scout.docker.com/v/CVE-2024-34158?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="high : CVE--2024--34158" src="https://img.shields.io/badge/CVE--2024--34158-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.147%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>36th percentile</code></td></tr>
@@ -224,7 +222,7 @@ Calling Parse on a "// +build" build tag line with deeply nested expressions can
 <a href="https://scout.docker.com/v/CVE-2024-34156?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="high : CVE--2024--34156" src="https://img.shields.io/badge/CVE--2024--34156-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.298%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>53rd percentile</code></td></tr>
@@ -241,7 +239,7 @@ Calling Decoder.Decode on a message which contains deeply nested structures can 
 <a href="https://scout.docker.com/v/CVE-2024-24791?s=golang&n=stdlib&t=golang&vr=%3C1.21.12"><img alt="high : CVE--2024--24791" src="https://img.shields.io/badge/CVE--2024--24791-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.12</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.12</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.618%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>69th percentile</code></td></tr>
@@ -260,7 +258,7 @@ An attacker sending a request to a net/http/httputil.ReverseProxy proxy can expl
 <a href="https://scout.docker.com/v/CVE-2024-24784?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="high : CVE--2024--24784" src="https://img.shields.io/badge/CVE--2024--24784-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>1.498%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>81st percentile</code></td></tr>
@@ -277,7 +275,7 @@ The ParseAddressList function incorrectly handles comments (text within parenthe
 <a href="https://scout.docker.com/v/CVE-2023-45288?s=golang&n=stdlib&t=golang&vr=%3C1.21.9"><img alt="high : CVE--2023--45288" src="https://img.shields.io/badge/CVE--2023--45288-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.9</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>66.635%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>98th percentile</code></td></tr>
@@ -300,7 +298,7 @@ The fix sets a limit on the amount of excess header frames we will process befor
 <a href="https://scout.docker.com/v/CVE-2023-45287?s=golang&n=stdlib&t=golang&vr=%3C1.20.0"><img alt="high : CVE--2023--45287" src="https://img.shields.io/badge/CVE--2023--45287-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.185%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
@@ -319,7 +317,7 @@ In Go 1.20, the crypto/tls library switched to a fully constant time RSA impleme
 <a href="https://scout.docker.com/v/CVE-2023-45283?s=golang&n=stdlib&t=golang&vr=%3C1.20.11"><img alt="high : CVE--2023--45283" src="https://img.shields.io/badge/CVE--2023--45283-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.097%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
@@ -346,7 +344,7 @@ UPDATE: Go 1.20.11 and Go 1.21.4 inadvertently changed the definition of the vol
 <a href="https://scout.docker.com/v/CVE-2023-44487?s=golang&n=stdlib&t=golang&vr=%3C1.20.10"><img alt="high : CVE--2023--44487" src="https://img.shields.io/badge/CVE--2023--44487-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.10</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>94.419%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>100th percentile</code></td></tr>
@@ -369,7 +367,7 @@ The default stream concurrency limit is 250 streams (requests) per HTTP/2 connec
 <a href="https://scout.docker.com/v/CVE-2023-39325?s=golang&n=stdlib&t=golang&vr=%3C1.20.10"><img alt="high : CVE--2023--39325" src="https://img.shields.io/badge/CVE--2023--39325-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.10</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.163%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
@@ -392,7 +390,7 @@ The default stream concurrency limit is 250 streams (requests) per HTTP/2 connec
 <a href="https://scout.docker.com/v/CVE-2023-24537?s=golang&n=stdlib&t=golang&vr=%3C1.19.8"><img alt="high : CVE--2023--24537" src="https://img.shields.io/badge/CVE--2023--24537-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.013%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
@@ -409,7 +407,7 @@ Calling any of the Parse functions on Go source code which contains //line direc
 <a href="https://scout.docker.com/v/CVE-2023-24536?s=golang&n=stdlib&t=golang&vr=%3C1.19.8"><img alt="high : CVE--2023--24536" src="https://img.shields.io/badge/CVE--2023--24536-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.059%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
@@ -441,7 +439,7 @@ In addition, the fixed mime/multipart.Reader imposes the following limits on the
 <a href="https://scout.docker.com/v/CVE-2023-24534?s=golang&n=stdlib&t=golang&vr=%3C1.19.8"><img alt="high : CVE--2023--24534" src="https://img.shields.io/badge/CVE--2023--24534-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.040%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
@@ -462,7 +460,7 @@ With fix, header parsing now correctly allocates only the memory required to hol
 <a href="https://scout.docker.com/v/CVE-2022-41725?s=golang&n=stdlib&t=golang&vr=%3C1.19.6"><img alt="high : CVE--2022--41725" src="https://img.shields.io/badge/CVE--2022--41725-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.046%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
@@ -489,7 +487,7 @@ Users should be aware that multipart.ReadForm and the http.Request methods that 
 <a href="https://scout.docker.com/v/CVE-2022-41724?s=golang&n=stdlib&t=golang&vr=%3C1.19.6"><img alt="high : CVE--2022--41724" src="https://img.shields.io/badge/CVE--2022--41724-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.016%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
@@ -510,7 +508,7 @@ This affects all TLS 1.3 clients, TLS 1.2 clients which explicitly enable sessio
 <a href="https://scout.docker.com/v/CVE-2022-41723?s=golang&n=stdlib&t=golang&vr=%3C1.19.6"><img alt="high : CVE--2022--41723" src="https://img.shields.io/badge/CVE--2022--41723-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.235%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
@@ -527,7 +525,7 @@ A maliciously crafted HTTP/2 stream could cause excessive CPU consumption in the
 <a href="https://scout.docker.com/v/CVE-2022-41722?s=golang&n=stdlib&t=golang&vr=%3C1.19.6"><img alt="high : CVE--2022--41722" src="https://img.shields.io/badge/CVE--2022--41722-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.169%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
@@ -571,7 +569,7 @@ With fix applied, the behavior of os.DirFS("") has changed. Previously, an empty
 <a href="https://scout.docker.com/v/CVE-2022-30635?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="high : CVE--2022--30635" src="https://img.shields.io/badge/CVE--2022--30635-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.160%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>37th percentile</code></td></tr>
@@ -588,7 +586,7 @@ Calling Decoder.Decode on a message which contains deeply nested structures can 
 <a href="https://scout.docker.com/v/CVE-2023-29400?s=golang&n=stdlib&t=golang&vr=%3C1.19.9"><img alt="high : CVE--2023--29400" src="https://img.shields.io/badge/CVE--2023--29400-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.9</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.049%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
@@ -605,7 +603,7 @@ Templates containing actions in unquoted HTML attributes (e.g. "attr={{.}}") exe
 <a href="https://scout.docker.com/v/CVE-2023-24539?s=golang&n=stdlib&t=golang&vr=%3C1.19.9"><img alt="high : CVE--2023--24539" src="https://img.shields.io/badge/CVE--2023--24539-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.9</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.067%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
@@ -622,7 +620,7 @@ Angle brackets (<>) are not considered dangerous characters when inserted into C
 <a href="https://scout.docker.com/v/CVE-2025-4673?s=golang&n=stdlib&t=golang&vr=%3C1.23.10"><img alt="medium : CVE--2025--4673" src="https://img.shields.io/badge/CVE--2025--4673-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.23.10</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.23.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.010%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
@@ -639,7 +637,7 @@ Proxy-Authorization and Proxy-Authenticate headers persisted on cross-origin red
 <a href="https://scout.docker.com/v/CVE-2025-61727?s=golang&n=stdlib&t=golang&vr=%3C1.24.11"><img alt="medium : CVE--2025--61727" src="https://img.shields.io/badge/CVE--2025--61727-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.021%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
@@ -656,7 +654,7 @@ An excluded subdomain constraint in a certificate chain does not restrict the us
 <a href="https://scout.docker.com/v/CVE-2025-47906?s=golang&n=stdlib&t=golang&vr=%3C1.23.12"><img alt="medium : CVE--2025--47906" src="https://img.shields.io/badge/CVE--2025--47906-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.23.12</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.23.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.12</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.020%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
@@ -673,7 +671,7 @@ If the PATH environment variable contains paths which are executables (rather th
 <a href="https://scout.docker.com/v/CVE-2023-45290?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="medium : CVE--2023--45290" src="https://img.shields.io/badge/CVE--2023--45290-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.362%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>58th percentile</code></td></tr>
@@ -692,7 +690,7 @@ With fix, the ParseMultipartForm function now correctly limits the maximum size 
 <a href="https://scout.docker.com/v/CVE-2023-29406?s=golang&n=stdlib&t=golang&vr=%3C1.19.11"><img alt="medium : CVE--2023--29406" src="https://img.shields.io/badge/CVE--2023--29406-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.236%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
@@ -711,7 +709,7 @@ With fix, the HTTP/1 client now refuses to send requests containing an invalid R
 <a href="https://scout.docker.com/v/CVE-2024-45341?s=golang&n=stdlib&t=golang&vr=%3C1.22.11"><img alt="medium : CVE--2024--45341" src="https://img.shields.io/badge/CVE--2024--45341-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.048%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
@@ -730,7 +728,7 @@ Certificates containing URIs are not permitted in the web PKI, so this only affe
 <a href="https://scout.docker.com/v/CVE-2024-45336?s=golang&n=stdlib&t=golang&vr=%3C1.22.11"><img alt="medium : CVE--2024--45336" src="https://img.shields.io/badge/CVE--2024--45336-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.078%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
@@ -749,7 +747,7 @@ In the event that the client received a subsequent same-domain redirect, however
 <a href="https://scout.docker.com/v/CVE-2023-39319?s=golang&n=stdlib&t=golang&vr=%3C1.20.8"><img alt="medium : CVE--2023--39319" src="https://img.shields.io/badge/CVE--2023--39319-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.085%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
@@ -766,7 +764,7 @@ The html/template package does not apply the proper rules for handling occurrenc
 <a href="https://scout.docker.com/v/CVE-2023-39318?s=golang&n=stdlib&t=golang&vr=%3C1.20.8"><img alt="medium : CVE--2023--39318" src="https://img.shields.io/badge/CVE--2023--39318-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.085%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
@@ -783,7 +781,7 @@ The html/template package does not properly handle HTML-like "" comment tokens, 
 <a href="https://scout.docker.com/v/CVE-2024-24783?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="medium : CVE--2024--24783" src="https://img.shields.io/badge/CVE--2024--24783-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.445%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>63rd percentile</code></td></tr>
@@ -802,7 +800,7 @@ This affects all crypto/tls clients, and servers that set Config.ClientAuth to V
 <a href="https://scout.docker.com/v/CVE-2025-0913?s=golang&n=stdlib&t=golang&vr=%3C1.23.10"><img alt="medium : CVE--2025--0913" src="https://img.shields.io/badge/CVE--2025--0913-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.23.10</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.23.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.008%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
@@ -819,7 +817,7 @@ os.OpenFile(path, os.O_CREATE|O_EXCL) behaved differently on Unix and Windows sy
 <a href="https://scout.docker.com/v/CVE-2024-24789?s=golang&n=stdlib&t=golang&vr=%3C1.21.11"><img alt="medium : CVE--2024--24789" src="https://img.shields.io/badge/CVE--2024--24789-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.006%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
@@ -836,7 +834,7 @@ The archive/zip package's handling of certain types of invalid zip files differs
 <a href="https://scout.docker.com/v/CVE-2024-24785?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="medium : CVE--2024--24785" src="https://img.shields.io/badge/CVE--2024--24785-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.273%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
@@ -853,7 +851,7 @@ If errors returned from MarshalJSON methods contain user controlled data, they m
 <a href="https://scout.docker.com/v/CVE-2025-61724?s=golang&n=stdlib&t=golang&vr=%3C1.24.8"><img alt="medium : CVE--2025--61724" src="https://img.shields.io/badge/CVE--2025--61724-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.025%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
@@ -870,7 +868,7 @@ The Reader.ReadResponse function constructs a response string through repeated s
 <a href="https://scout.docker.com/v/CVE-2025-58189?s=golang&n=stdlib&t=golang&vr=%3C1.24.8"><img alt="medium : CVE--2025--58189" src="https://img.shields.io/badge/CVE--2025--58189-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.019%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
@@ -887,7 +885,7 @@ When Conn.Handshake fails during ALPN negotiation the error contains attacker co
 <a href="https://scout.docker.com/v/CVE-2025-58186?s=golang&n=stdlib&t=golang&vr=%3C1.24.8"><img alt="medium : CVE--2025--58186" src="https://img.shields.io/badge/CVE--2025--58186-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.029%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
@@ -904,7 +902,7 @@ Despite HTTP headers having a default limit of 1MB, the number of cookies that c
 <a href="https://scout.docker.com/v/CVE-2025-58185?s=golang&n=stdlib&t=golang&vr=%3C1.24.8"><img alt="medium : CVE--2025--58185" src="https://img.shields.io/badge/CVE--2025--58185-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.033%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
@@ -921,7 +919,7 @@ Parsing a maliciously crafted DER payload could allocate large amounts of memory
 <a href="https://scout.docker.com/v/CVE-2025-47912?s=golang&n=stdlib&t=golang&vr=%3C1.24.8"><img alt="medium : CVE--2025--47912" src="https://img.shields.io/badge/CVE--2025--47912-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.025%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
@@ -938,7 +936,7 @@ The Parse function permits values other than IPv6 addresses to be included in sq
 <a href="https://scout.docker.com/v/CVE-2023-45284?s=golang&n=stdlib&t=golang&vr=%3C1.20.11"><img alt="medium : CVE--2023--45284" src="https://img.shields.io/badge/CVE--2023--45284-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.040%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
@@ -959,7 +957,7 @@ With fix, IsLocal now correctly reports these names as non-local.
 <a href="https://scout.docker.com/v/CVE-2023-39326?s=golang&n=stdlib&t=golang&vr=%3C1.20.12"><img alt="medium : CVE--2023--39326" src="https://img.shields.io/badge/CVE--2023--39326-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.12</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.12</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.048%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
@@ -980,7 +978,7 @@ Chunk extensions are a little-used HTTP feature which permit including additiona
 <a href="https://scout.docker.com/v/CVE-2023-29409?s=golang&n=stdlib&t=golang&vr=%3C1.19.12"><img alt="medium : CVE--2023--29409" src="https://img.shields.io/badge/CVE--2023--29409-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.12</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.12</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.112%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>30th percentile</code></td></tr>
@@ -1001,7 +999,7 @@ Based on a survey of publicly trusted RSA keys, there are currently only three c
 <a href="https://scout.docker.com/v/CVE-2023-24532?s=golang&n=stdlib&t=golang&vr=%3C1.19.7"><img alt="medium : CVE--2023--24532" src="https://img.shields.io/badge/CVE--2023--24532-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.024%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
@@ -1039,7 +1037,7 @@ HTTP/2 server connections contain a cache of HTTP header keys sent by the client
 <a href="https://scout.docker.com/v/CVE-2025-58183?s=golang&n=stdlib&t=golang&vr=%3C1.24.8"><img alt="medium : CVE--2025--58183" src="https://img.shields.io/badge/CVE--2025--58183-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.014%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
@@ -1056,7 +1054,7 @@ tar.Reader does not set a maximum size on the number of sparse region data block
 <a href="https://scout.docker.com/v/CVE-2024-34155?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="medium : CVE--2024--34155" src="https://img.shields.io/badge/CVE--2024--34155-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.073%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
@@ -1073,7 +1071,7 @@ Calling any of the Parse functions on Go source code which contains deeply neste
 <a href="https://scout.docker.com/v/CVE-2023-45289?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="medium : CVE--2023--45289" src="https://img.shields.io/badge/CVE--2023--45289-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.454%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>63rd percentile</code></td></tr>
@@ -1092,7 +1090,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2025-22866?s=golang&n=stdlib&t=golang&vr=%3C1.22.12"><img alt="medium : CVE--2025--22866" src="https://img.shields.io/badge/CVE--2025--22866-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.12</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.12</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.017%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
@@ -1114,7 +1112,7 @@ Due to the usage of a variable time instruction in the assembly implementation o
 <a href="https://scout.docker.com/v/CVE-2023-0464?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1t-r1"><img alt="high : CVE--2023--0464" src="https://img.shields.io/badge/CVE--2023--0464-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1t-r1</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1t-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1t-r1</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.857%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>74th percentile</code></td></tr>
@@ -1131,7 +1129,7 @@ Due to the usage of a variable time instruction in the assembly implementation o
 <a href="https://scout.docker.com/v/CVE-2023-0286?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1t-r0"><img alt="high : CVE--2023--0286" src="https://img.shields.io/badge/CVE--2023--0286-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1t-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1t-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1t-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>88.474%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>99th percentile</code></td></tr>
@@ -1174,7 +1172,7 @@ The fix was developed by Hugo Landau.
 <a href="https://scout.docker.com/v/CVE-2023-2650?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1u-r0"><img alt="medium : CVE--2023--2650" src="https://img.shields.io/badge/CVE--2023--2650-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1u-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1u-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1u-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>91.907%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>100th percentile</code></td></tr>
@@ -1191,7 +1189,7 @@ The fix was developed by Hugo Landau.
 <a href="https://scout.docker.com/v/CVE-2023-5678?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1w-r1"><img alt="medium : CVE--2023--5678" src="https://img.shields.io/badge/CVE--2023--5678-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1w-r1</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1w-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1w-r1</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.638%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>70th percentile</code></td></tr>
@@ -1208,7 +1206,7 @@ The fix was developed by Hugo Landau.
 <a href="https://scout.docker.com/v/CVE-2023-3817?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1v-r0"><img alt="medium : CVE--2023--3817" src="https://img.shields.io/badge/CVE--2023--3817-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1v-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1v-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1v-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.329%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>55th percentile</code></td></tr>
@@ -1225,7 +1223,7 @@ The fix was developed by Hugo Landau.
 <a href="https://scout.docker.com/v/CVE-2023-3446?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1u-r2"><img alt="medium : CVE--2023--3446" src="https://img.shields.io/badge/CVE--2023--3446-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1u-r2</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1u-r2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1u-r2</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.976%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>76th percentile</code></td></tr>
@@ -1242,7 +1240,7 @@ The fix was developed by Hugo Landau.
 <a href="https://scout.docker.com/v/CVE-2023-0465?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1t-r2"><img alt="medium : CVE--2023--0465" src="https://img.shields.io/badge/CVE--2023--0465-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1t-r2</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1t-r2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1t-r2</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.398%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>60th percentile</code></td></tr>
@@ -1259,7 +1257,7 @@ The fix was developed by Hugo Landau.
 <a href="https://scout.docker.com/v/CVE-2023-0215?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1t-r0"><img alt="medium : CVE--2023--0215" src="https://img.shields.io/badge/CVE--2023--0215-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1t-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1t-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1t-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.545%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>67th percentile</code></td></tr>
@@ -1312,7 +1310,7 @@ developed by Viktor Dukhovni and Matt Caswell.
 <a href="https://scout.docker.com/v/CVE-2022-4450?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1t-r0"><img alt="medium : CVE--2022--4450" src="https://img.shields.io/badge/CVE--2022--4450-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1t-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1t-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1t-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.140%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
@@ -1362,7 +1360,7 @@ Dawei Wang. The fix was developed by Kurt Roeckx and Matt Caswell.
 <a href="https://scout.docker.com/v/CVE-2022-4304?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1t-r0"><img alt="medium : CVE--2022--4304" src="https://img.shields.io/badge/CVE--2022--4304-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1t-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1t-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1t-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.255%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
@@ -1409,7 +1407,7 @@ The fix was developed by Dmitry Belyavsky (Red Hat) and Hubert Kario.
 <a href="https://scout.docker.com/v/CVE-2025-26519?s=alpine&n=musl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.2.3-r4"><img alt="high : CVE--2025--26519" src="https://img.shields.io/badge/CVE--2025--26519-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.2.3-r4</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.2.3-r4</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.2.3-r4</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.016%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
@@ -1431,7 +1429,7 @@ The fix was developed by Dmitry Belyavsky (Red Hat) and Hubert Kario.
 <a href="https://scout.docker.com/v/CVE-2023-42366?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.35.0-r18"><img alt="medium : CVE--2023--42366" src="https://img.shields.io/badge/CVE--2023--42366-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.35.0-r18</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.35.0-r18</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.35.0-r18</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.024%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
@@ -1453,7 +1451,7 @@ The fix was developed by Dmitry Belyavsky (Red Hat) and Hubert Kario.
 <a href="https://scout.docker.com/v/CVE-2023-48795?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.0.0-20231218163308-9d2ee975ef9f"><img alt="medium 5.9: CVE--2023--48795" src="https://img.shields.io/badge/CVE--2023--48795-lightgrey?label=medium%205.9&labelColor=fbb552"/></a> <i>Insufficient Verification of Data Authenticity</i>
 
 <table>
-<tr><td>Affected range</td><td><code><0.0.0-20231218163308-9d2ee975ef9f</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.0.0-20231218163308-9d2ee975ef9f</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.0.0-20231218163308-9d2ee975ef9f</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5.9</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N</code></td></tr>

