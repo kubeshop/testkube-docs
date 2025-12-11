@@ -108,7 +108,7 @@ spec:
 
 ## Save the JIRA API Token to a Secret
 
-To ensure confidential handling of your JIRA API Token it is recommende to store it in a Secret:
+To ensure confidential handling of your JIRA API Token it is recommended to store it in a Secret. The `jiraApiToken` value stored in the secret must be the Base64 encoded string of your email and token combined in the format `email:token`:
 
 ```yaml
 apiVersion: v1
