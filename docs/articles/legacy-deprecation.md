@@ -1,6 +1,6 @@
 # Legacy Feature Deprecation
 
-As of the December 2025 Testkube Release (see [changelog](/changelog)), legacy functionality related to Tests, TestSuites, Executors and 
+As of the December 2025 Testkube Release (see [changelog](/changelog#monthly-release-v1211-2025-12-10)), legacy functionality related to Tests, TestSuites, Executors and 
 Sources has been removed from both the Testkube Control Plane and the Open Source Agent, in line with the notice given [early 2025](/articles/legacy-features).
 
 This has the following implications:
