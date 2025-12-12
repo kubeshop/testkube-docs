@@ -6,6 +6,11 @@ This section contains the old documentation for deprecated/legacy Testkube funct
 Legacy functionality described in this document will be EOL and removed from Testkube by the end of 2025.
 :::
 
+:::danger
+Legacy functionality **has been deprecated and removed** from Testkube as of the December 2025 release - [Read More](/articles/legacy-deprecation). 
+:::
+
+
 ## The move to Test Workflows
 
 While the initial constructs with Tests/Executors/TestSuites made it easy to get basic tests running with Testkube, they often fell

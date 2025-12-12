@@ -83,3 +83,32 @@ which will hide the Definition tab under the Webhook Settings.
 :::
 
 ![Webhook Definition](images/webhook-definition.png)
+
+### Credentials
+
+Webhooks often need to call external systems that require authentication (for example, API tokens or secrets).
+Instead of hard-coding these sensitive values into your Webhook definition,
+Testkube lets you securely inject them from **Credentials** using the `{{credentials(<NAME>)}}` template function.
+
+You can reference **Credentials** in:
+* The Webhook URL
+* Headers
+* The payload template
+
+Example:
+```yaml
+apiVersion: executor.testkube.io/v1
+kind: Webhook
+metadata:
+  name: example-webhook
+spec:
+  events:
+    - end-testworkflow-success
+  uri: https://webhook.example.com/test?token={{credential('TOKEN')}}
+  headers:
+    X-API-Token: "{{credential('HEADER_TOKEN'}}"
+  selector: test-type=k6
+  payloadTemplate: "This template includes an inline secret: {{credential('SECRET'}}"
+```
+
+Visit our [Credentials](/articles/credential-management) docs to learn how to create and manage Credentials used in Webhooks.

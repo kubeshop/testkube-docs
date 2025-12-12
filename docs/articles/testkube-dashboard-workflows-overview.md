@@ -1,25 +1,35 @@
 # Workflows Overview
 
-The Workflows Overview displays all Workflows in your currently selected Environment, including
-their latest and overall execution status. 
+The Workflows Overview displays all workflows (automated tests) in the **Environment** you selected, which includes the most
+recent and the execution status of each. 
 
-![Workflow Search Filter](../img/workflow-search-filter-072024.png)
+![Workflows Overview](images/workflows-overview.png)
 
-- Selecting a Workflow in either of these views takes you to the [Workflow Details](/articles/testkube-dashboard-workflow-details)
-- Selecting the "Add new test workflow" button on the top right opens the [Workflow Wizard](test-workflows-create-wizard) for
-  creating a new Workflow.
+## Views
 
-## Workflows Grid View
+You can switch from the **Grid view** to the **Table view** for all workflows.
 
-You can also switch from the Grid view to a Table view of all workflows in the selected environment:
+![Workflow Table Grid](images/workflows-overview-table-grid.png)
 
-![Workflow Search Filter](../img/workflow-table-view-072024.png)
+## Search and Filter
 
-## Workflow Filtering
+You can **Search** and **Filter** your workflows to narrow the output. When you search for a workflow, 
+**Save as view** becomes visible.
 
-You can search / filter your Workflows using the corresponding input fields at the top of the panel:
+![Workflow Search](images/workflows-overview-search.png)
 
-![Workflow Filters](images/workflow-filters.png)
+You can filter workflows by separately selecting **Labels**, **Status**, and **Resource Group** and choosing one or more parameters specific to each.
 
+![Workflow Filters](images/workflows-overview-filter.png)
 
+## Custom Views
 
+Custom views are saved filters that allow you to:
+
+* Access and reuse these filters, which become visible within **Workflows Overview**.
+* Establish **Private** views (Default) such that only you have view access.
+* Set views to **Shared across environment**, which allows you to make these custom views available to team members.
+
+When you click **Save as view**, **Save new view** opens – allowing you to establish, retain, and share these custom views.
+
+![Save new view](images/workflows-overview-save-new-view.png)
