@@ -302,9 +302,41 @@ const sidebars = {
               ],
             },
             {
-              type: "doc",
+              type: "category",
               label: "Executions",
-              id: "articles/testkube-dashboard-executions",
+              collapsed: false,
+              items: [
+                {
+                  type: "doc",
+                  label: "All Executions",
+                  id: "articles/testkube-dashboard-executions",
+                },
+                {
+                  type: "doc",
+                  label: "Pending Executions",
+                  id: "articles/testkube-dashboard-executions-pending",
+                },
+                {
+                  type: "doc",
+                  label: "Running Executions",
+                  id: "articles/testkube-dashboard-executions-running",
+                },
+                {
+                  type: "doc",
+                  label: "Passed Executions",
+                  id: "articles/testkube-dashboard-executions-passed",
+                },
+                {
+                  type: "doc",
+                  label: "Failed Executions",
+                  id: "articles/testkube-dashboard-executions-failed",
+                },
+                {
+                  type: "doc",
+                  label: "Aborted Executions",
+                  id: "articles/testkube-dashboard-executions-aborted",
+                },
+              ],
             },
             {
               type: "category",
