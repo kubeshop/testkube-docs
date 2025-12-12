@@ -38,7 +38,7 @@ Test execution **Status** symbols:
 ## Pending Executions
 
 A Testkube **Pending execution** is a test that is slated to run. There could be several reasons
-a test execution has a pending status. For example, the test could be awaiting other executions because 
+a test execution has a **Pending** status. For example, the test could be awaiting other executions because 
 there are too many tests running. There might also be resource issues specific CPU space or memory. For additional
 information, read [Pending Executions](../articles/testkube-dashboard-executions-pending.md).
 
