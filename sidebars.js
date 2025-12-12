@@ -302,41 +302,9 @@ const sidebars = {
               ],
             },
             {
-              type: "category",
+              type: "doc",
               label: "Executions",
-              collapsed: false,
-              items: [
-                {
-                  type: "doc",
-                  label: "All Executions",
-                  id: "articles/testkube-dashboard-executions",
-                },
-                {
-                  type: "doc",
-                  label: "Pending Executions",
-                  id: "articles/testkube-dashboard-executions-pending",
-                },
-                {
-                  type: "doc",
-                  label: "Running Executions",
-                  id: "articles/testkube-dashboard-executions-running",
-                },
-                {
-                  type: "doc",
-                  label: "Passed Executions",
-                  id: "articles/testkube-dashboard-executions-passed",
-                },
-                {
-                  type: "doc",
-                  label: "Failed Executions",
-                  id: "articles/testkube-dashboard-executions-failed",
-                },
-                {
-                  type: "doc",
-                  label: "Aborted Executions",
-                  id: "articles/testkube-dashboard-executions-aborted",
-                },
-              ],
+              id: "articles/testkube-dashboard-executions",
             },
             {
               type: "category",
@@ -359,6 +327,11 @@ const sidebars = {
                   id: "articles/integrations-webhooks",
                 },
               ],
+            },
+            {
+              type: "doc",
+              label: "Custom Views",
+              id: "articles/testkube-dashboard-custom-views",
             },
             {
               type: "doc",
