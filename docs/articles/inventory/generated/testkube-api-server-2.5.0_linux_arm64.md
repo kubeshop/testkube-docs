@@ -230,7 +230,7 @@ RUN apk --no-cache add ca-certificates libssl3 git
 <tr><td>Affected range</td><td><code>&lt;8.14.1-r2</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.14.1-r2</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.070%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
