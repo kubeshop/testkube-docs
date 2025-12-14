@@ -1,233 +1,248 @@
 # Workflow Wizard
 
-Selecting the "Add a new Test Workflow" button on the top right of the [Workflows Overview](testkube-dashboard-workflows-overview) 
-opens the following dialog:
+The **Workflow Wizard** guides you through creating and managing Testkube Workflows – streamlining test setup
+by automatically discovering tests, generating configurations, and producing YAML files. The Wizard improves onboarding
+speed, reduces configuration errors, and offers several options that allow you to create workflows.
 
-![Create Test Workflow](../img/create-test-workflow.png)
+You initiate the Wizard by accessing **Test Workflows** and selecting **Add a new Test Workflow**.
 
-The different options are described below.
+![Test Workflows](../articles/images/workflow-wizard-add-new-test-workflow.png)
 
-## Automatic Test Discovery
+Upon selection of **Add a new Test Workflow**, the **Create a Test Workflow** modal opens. You can start a new workflow via **Create with Wizard**, 
+**Start from an example**, **Combine existing Workflows**, and **Import from YAML**.
 
-Selecting the "Scan my repository for tests" option for Git Sources on the [first page of the Workflow wizard](#git-source) will result in
-Testkube automatically scanning for supported tests in the specific repo/branch/folder.
-
-Testkube currently attempts to identify the following test types:
-
-- K6 scripts
-- Postman Collections
-- Playwright Projects
-- Cypress Projects
-- JMeter Projects
-- Maven Projects
-- Gradle Projects
-
-:::tip
-Is Testkube not finding your tests? Or are you missing a common testing tool in this list? Let us know on [Slack](https://bit.ly/testkube-slack) so we can improve our algorithms!
-:::
-
-You will see the below panel while Testkube is scanning your repository:
-
-![Workflow Wizard - Scanning Repo](images/workflow-wizard-scanning.png)
-
-Once finished, Testkube will show the number of found tests for each type of test in the next step of the wizard, together
-with a selector for a test.
-
-Selecting the "Skip this" button will abort the ongoing Test Discovery process and take you straight to the Type step
-in the Wizard.
-
-:::note
-Testkube will cache the Test Discovery result for your repository as long as you stay within the Wizard. If you want to rescan
-the repository (for example if you have updated its contents), you will need to close the Wizard entirely and start over.
-:::
+![Create a Test Workfow modal](../articles/images/workflow-wizard-create-a-test-workflow-modal.png)
 
 ## Create with Wizard
 
-This option will walk you through 5 steps for creating a Workflow to run your tests:
+**Create with Wizard** includes five steps:
 
-1) The **Name and Source** for your test.
-2) The **Type** and version of testing tool to use to run the test.
-3) The **Run** configuration for how to run the test.
-4) The **Collaboration** settings for the generated Workflow
-5) A **Summary** showing the underlying Workflow YAML for your test.
+1. **Name & Source** – Allows you to identify and distinquish your test by providing **Name**, **Labels**, and **Source**.
+1. **Type** – Allows you to select a project and indicate the testing tool version number.
+1. **Run** – Enables you to specify the configuration for how to run the test.
+1. **Collaboration** – Allows you to establish the settings for the generated Workflow.
+1. **Summary** – Displays the underlying Workflow YAML for your test.
 
-### Step 1 - Name & Source
+### Step 1 – Name & Source
 
-The first page of the wizard will ask you for the name, labels (optional) and source of the test you want to run with Testkube. 
+Complete the fields in **Name & Source**.
 
 ![Workflow Wizard - Name & Source](images/workflow-wizard-first-step.png)
 
-There are three source options:
+You must enter a **Name**. **Labels** and **Source** are optional. In the drop-down list box, **Source** contains:
 
-- **Git**: prompts for Git repository details
-- **File**: allows you to upload a file containing the test you want to run
-- **String**: allows you to specify the test directly in the dialog
+* **Git** – Prompts for Git repository details.
+* **File** – Allows you to upload a file containing the test you want to run.
+* **String** – Allows you to specify the test directly in the dialog.
 
 :::tip
-Read more about how to work with content in your Workflows at [Test Workflows - Content](/articles/test-workflows-content)
+For additional information about how to work with Workflow content, read [Test Workflows – Content](/articles/test-workflows-content)
 :::
 
 #### Git Source
 
-Selecting Git as the source for your test will prompt as follows:
+When you select **Git** as the **Source**, your test prompts as follows:
 
 ![Workflow Wizard - Git Source](images/workflow-wizard-git-source.png)
 
-- **Git Repository URI**: Testkube supports checking out repositories via HTTPS or SSH.
-- **Scan my repository for tests**: Enables the [Test Discovery functionality](#automatic-test-discovery)
-- **Git Token** / **Git Username**: can be specified using
-  - **Secret**: Testkube will automatically create a Kubernetes Secret for the specified value.
-  - **Secret Reference**: Allows you to specify both the Kubernetes Secret Name and Key to use.
-  - **Plain-text**: Allows you to specify the value in plain-text (not recommended!). 
-- **Branch**: Which branch to use (optional).
-- **Path**: Which path (relative to the repository root) that contains your tests (optional).
+* **Git Repository URI** – Allows you to enter the URI. Testkube supports checking out repositories via HTTPS or SSH.
+* **Scan my repository for tests** – Enables [Automatic Test Discovery](#automatic-test-discovery) via this default checkbox selection.
+* **Git Token** / **Git Username** – Allows you to choose **Secret Reference**, **Secret**, **Plain-Text**, **Credential**, or **Credential Reference**.
+  * **Secret Reference** – Allows you to specify both the Kubernetes Secret Name and Key to use.
+  * **Secret** – Testkube automatically creates a Kubernetes Secret for the specified value.
+  * **Plain-text** – Allows you to specify the value in plain-text (**not recommended**). 
+  * **Credenital** – Allows you to enter the credential name.
+  * **Credential Reference** – Allows you to enter the credential reference.
+* **Branch** – Allows you to specify the branch name.
+* **Path** – Allows you to specify a path (relative to the repository root) that contains your tests.
+
+#### Automatic Test Discovery
+
+Default selected checkbox – **Scan my repository for test** (with [Git Source selection](#git-source)) – triggers
+Testkube's automatic scan for supported tests in the specific repository/branch/folder.
+
+Testkube attempts to identify the following test types:
+
+* Cypress Projects
+* Gradle Projects
+* JMeter Projects
+* K6 scripts
+* Maven Projects
+* Playwright Projects
+* Postman Collections
+
+:::tip
+Testkube not finding your tests? Common testing tool missing from this list? Let us know on [Slack](https://bit.ly/testkube-slack). We can improve our algorithms!
+:::
+
+The panel depicted below displays as Testkube scans your repository. Selecting **Skip this** aborts the ongoing **Test Discovery** process and launches you to the next step in the Wizard, **Type**.
+
+![Workflow Wizard – Scanning Repo](images/workflow-wizard-scanning.png)
+
+Scan completion also moves you forward to **Type**.
+
+:::note
+Testkube caches the **Test Discovery** result for your repository while you are within the Wizard. If you want to rescan
+the repository (for example if you have updated its content), you must close the Wizard and restart the process.
+:::
 
 #### File Source
 
-Selecting File as the source for your test will prompt as follows:
+When you select **File** as the **Source**, your test prompts as follows:
 
-![Workflow Wizard - File Source](images/workflow-wizard-file-source.png)
+![Workflow Wizard – File Source](images/workflow-wizard-file-source.png)
 
-- **File**: Choose the file to upload
-- **File path**: The path where the file content will be mounted in the container that will be used to run your test. 
-You can use either relative or absolute paths.
+* **File** – Allows you to choose the file to upload.
+* **File path** – Allows you to denote the path where the file content will be mounted, which is the container that will be used to run your test. 
+You can use relative or absolute paths.
 
 #### String Source
 
-Selecting String as the source for your test will prompt as follows:
+When you select **String** as your **Source**, your test prompts as follows:
 
-![Workflow Wizard - String Source](images/workflow-wizard-string-source.png)
+![Workflow Wizard – String Source](images/workflow-wizard-string-source.png)
 
-- **File Path**: The path where the file content will be mounted in the container. You can use either relative or absolute paths.
-- **File Content**: the actual test script that will be written to the file.
+* **File Path** – The path where the file content will be mounted in the container. You can use relative or absolute paths.
+* **File Content** – The actual test script that will be written to the file.
 
+### Step 2 – Type
 
-### Step 2 - Type
+This step prompts you for the test **Type**:
 
-The second page prompts you for the type of Test you want to run:
+![Workflow Wizard – Test Type](images/workflow-wizard-type-step.png)
 
-![Workflow Wizard - Test Type](images/workflow-wixard-type-step.png)
+The image above depicts Testkube's detection of a number of tests for each **Type** in the specified repository via
+**Test Discovery**. The green value represents the number for each test using tools such as Cypress: 90, Postman: 29, Playwright: 12, and K6: 5.
 
-In the screenshot above, Testkube has detected a number of tests for each type in the specified repository (via the
-Test Discovery functionality described above), indicated with a green number for each of the tools (Cypress: 90, Postman: 29, etc.).
-
-Selecting a tool type that has detected tests will show a corresponding selector allowing you to select which of 
-the found tests you want to run. For example, when selecting the Cypress type in the screenshot above, the following
+Selecting a tool type that has detected tests displays a corresponding Selector that allows you to choose which of 
+the tests you want to run. For example, when selecting the **Cypress** as depicted above, the following
 Cypress projects are available:
 
-![Workflow Wizard - Select Project](images/workflow-wizard-select-project.png)
+![Workflow Wizard – Select Project](images/workflow-wizard-select-project.png)
 
-Depending on the testing tool discovered, Testkube will also attempt to extract the correct version of the tool to use, which
-can be seen and modified in the "Cypress version to use" field below the selector. 
+Depending on the testing tool discovered, Testkube attempts to extract the correct version of the tool to use. You can view and modify
+this tool version in **Cypress version to use**, which resides below the Selector. 
 
-Selecting a tool for which Testkube has not found any tests will prompt you for the version and command to use to run the tool, 
-for example for Artillery below:
+Selecting a tool for which Testkube has not found any tests prompts you for the version and command to use to run the tool:
 
-![Workflow Wizard - Select Type](images/workflow-wizard-select-type.png)
+![Workflow Wizard – Select Type](images/workflow-wizard-select-type.png)
 
-### Step 3 - Run 
+### Step 3 – Run 
 
-This page allows you to specify/modify the run command and execution working directory for the selected testing tool. 
-If your test was discovered with Test Discovery, these values will be pre-filled accordingly, otherwise you will have
-to specify the run command and path to your test script manually.
+**Run** allows you to specify and modify the run command along with the execution working directory for the selected testing tool. 
+If your test was discovered via **Test Discovery**, these values will be pre-filled; otherwise, you must
+manually enter the run command and path to your test script.
 
 
-![Workflow Wizard - Run Step](images/workflow-wizard-run-step.png)
+![Workflow Wizard – Run Step](images/workflow-wizard-run-step.png)
 
 :::tip
-When using a Git Source, the repository is cloned and mounted under the `/data/repo` folder into your container, the execution
-working directory needs to be set accordingly. When using a File/String source, the file is written to the `/data` folder instead.
-Make sure your command and execution directory are configured accordingly.
+When using a **Git Source**, the repository is cloned and mounted under the `/data/repo` folder in your container. The execution
+working directory must be set accordingly. When using a **File** or **String** **Source**, the file is written to the `/data` folder instead.
+Ensure your command and execution directory are configured appropriately.
 :::
 
-Here you can also specify:
+You can also specify:
 
-- **Artifacts**: Where Testkube can find artifacts created by your testing tool (reports, videos, etc.). [Read More about Artifacts](/articles/test-workflows-artifacts)
-- **Environment Variables**: Any environment variables that need to be passed to your testing tool for test execution
+* **Artifacts** – Location where Testkube can find artifacts created by your testing tool (such as reports and videos). For additional information, read [Artifacts](/articles/test-workflows-artifacts).
+* **Environment Variables** – Any environment variables that must be passed to your testing tool for test execution.
 
-### Step 4 - Collaboration
+### Step 4 – Collaboration
 
-This page allows you to add the Workflow to a [Resource Group](/articles/resource-groups) for further collaboration and access control:
+**Collaboration** allows you to add the Workflow to a [Resource Group](/articles/resource-groups) for further collaboration and access control:
+
+![Workflow Wizard - Collaboration Step](images/workflow-wizard-no-resource-group.png)
 
 ![Workflow Wizard - Collaboration Step](images/workflow-wixard-collaboration-step.png)
 
-### Step 5 - Summary
+### Step 5 – Summary
 
-This shows the generated Workflow YAML based on all the input provided in the previous steps. You can
-make adjustments to the YAML as needed, or go back to the previous steps to update accordingly.
+This step displays the generated Workflow YAML based on the input provided in previous steps. You can
+modify the YAML (as needed), or you can return to the previous steps for update.
 
-![Test Workflow Wizard Summary](images/testworkflow-wizard-summary-page.png)
+![Test Workflow Wizard Summary No Inline Template Definitions](images/workflow-wizard-summary-no-inline.png)
 
-Use the "Inline Template Definitions" checkbox in the bottom left to inline any used Templates into the generated YAML
+Select the **Inline template definitions** checkbox to *inline* any used templates into the generated YAML.
 
-![Test Workflow Wizard Summary with inline Template](images/testworkflow-wizard-summary-expanded-template.png)
+![Test Workflow Wizard Summary Inline Template Definitions](images/workflow-wizard-summary-inline.png)
 
 :::tip
 
-Use this option if you want to make more detailed changes to how the underlying testing tool is used and that won't
+Select this checkbox to make detailed changes to how the underlying testing tool is used; changes **will not**
 affect other workflows using the same template.
 
 :::
 
-When you're happy with the created Workflow select either "Create & Run" or just "Create" from the button in the bottom
-right to create your Workflow.
+When you are satisfied with the created Workflow, select **Create & Run** or **Create**.
 
 ## Start from an Example
 
-Use the "Start from Example" option if you want to start from one of Testkubes many example Workflows which you can then further modify
-for your specific needs.
-
-![Workflow from Example](../img/workflow-from-example.png)
+**Start from an example** allows you to launch a test with one of Testkube's example Workflows, which you can modify
+to align with your requirements.
 
 
-- The selector at the top allows you to filter which examples are shown
-- The list in the middle shows the available examples
-- The YAML at the bottom shows the selected example
+![Start from an Example](../articles/images/workflow-wizard-start-from-an-example.png)
 
-You can edit the selected example before using either the Create or Create & Run option to create it.
+Selecting **Start from an example** opens:
+
+![Start from an Example K6](../articles/images/workflow-wizard-start-from-an-example-k6.png)
+
+
+* The Selector (top) allows you to filter the examples that are visible and available for selection.
+* The List (middle) displays the available examples.
+* The YAML (bottom) displays the example you selected.
+
+You can edit the example before selecting **Create & Run** or **Create**.
 
 :::tip
 
-You will most likely want to change the name of the created workflow, do this by updating the
+You can change the **Name** of the Workflow you created by updating the
 `metadata.name` property in the YAML example before creating the Workflow.
 
 :::
 
 ## Combine Existing Workflows
 
-The "Combine existing Workflows" option allows you to create a Workflow that orchestrates multiple existing Workflows to run either in sequence or parallel.
+**Combine existing Workflows** allows you to create a Workflow that orchestrates multiple existing Workflows to run in sequence or in parallel.
 
-![Combine Existing Workflows](../img/combine-existing-workflows.png)
+![Combine Existing Workflows](../articles/images/workflow-wizard-combine-existing-workflows.png)
 
-Start by specifying the name and optional labels that you want to add to this workflow, then select the
-"Add the first workflow" button to select an initial workflow. Once added you can add more existing Workflows
-and organize them to execute in any desired order/combination:
+Selecting **Combine existing Workflows** opens:
 
-![Test Workflow Composite Workflow Wizard](images/testworkflow-composite-wizard.png)
+![Combine Existing Workflows](../articles/images/workflow-wizard-combine-existing-workflows-page.png)
 
-Once done, select the Next button to see the corresponding YAML for your Workflow.
+Enter the **Name** and **Labels** (optional) that you want to add to this Workflow. Next, select
+**+Add the first workflow** to choose an initial Workflow. Once added, you can include more existing Workflows
+and organize them to execute in any preferred order or combination:
 
-![Test Workflow Composite Workflow Wizard Summary](images/testworkflow-composite-wizard-summary.png)
+![Existing Workflows Combined](images/workflow-wizard-combined-existing-workflows.png)
 
-Select either the Create or Create & Run option to create your workflow accordingly.
+Upon completion, select **Next** to view the corresponding YAML for your Workflow.
+
+![YAML from Combined Existing Workflows](images/workflow-wizard-combined-existing-workflows-yaml.png)
+
+Select **Create & Run** or **Create**.
 
 :::tip
 
-Read more about how to create Composite Workflows at [Workflow Orchestration](/articles/test-workflows-test-suites)
+For additional information about **Combine existing workflows**, read [Workflow Orchestration](/articles/test-workflows-test-suites).
 
 :::
 
 ## Import from YAML
 
-This final "Import from YAML" option allows you to paste/edit your Workflow YAML from scratch:
+**Import from YAML** allows you to paste and edit your YAML workflow definition.
 
-![Import from YAML Template Wizard](../img/import-from-yaml-template-wizard.png)
+![Import from YAML](../articles/images/workflow-wizard-import-from-yaml.png)
 
-Once done, select either the Create or Create & Run option to create your workflow accordingly.
+Selecting **Import from YAML** opens:
+
+![Import from YAML page](../articles/images/workflow-wizard-import-from-yaml-page.png)
+
+Upon completion, select **Create & Run** or **Create**.
 
 :::tip
 
-The [Examples and Guides](/articles/examples/overview) section in the documentation contains many
-Workflow examples that you can paste here to try out and refine.
+[Examples and Guides](/articles/examples/overview) contains Workflow examples that you can paste here, try, and refine.
 
 :::
