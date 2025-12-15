@@ -140,9 +140,9 @@ const config = {
       },
 
       announcementBar: {
-        id: "join-testkube-pro",
+        id: "testkube-121-release",
         content:
-          '<strong>New to Testkube?</strong> Unleash the power of cloud native testing in Kubernetes with Testkube. <a id="get_started_docs" href="https://testkube.io/get-started?utm_source=docs" target="_blank">Get Started ></a>',
+          '<b>Testkube 1.21 is out! A new Execution Dashboard, Webhook Credentials and Test/Suite Deprecation are some of the major enhancements, <a href="/changelog">Read More</a></b>',
         backgroundColor: "#8951ff",
         textColor: "#fff",
       },

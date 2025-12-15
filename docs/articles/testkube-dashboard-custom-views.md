@@ -2,11 +2,13 @@
 
 Custom Views allow you to save reusable sets of search criteria and filters such that you do not need to repeatedly
 enter the same information. When you enter frequently used search or filter criteria, you can save
-those settings.
+those settings. 
 
 Saved views appear in the left navigation pane under **PRIVATE VIEWS** (for your use only) or **SHARED VIEWS** (available to team members).
 This feature helps you work more efficiently by reducing repetitive steps and allowing you to streamline how you
 access commonly used search criteria and filters.
+
+Custom Views are available in the **Workflow Catalog** and the **Executions** dashboard.
 
 To establish a Custom View:
 
