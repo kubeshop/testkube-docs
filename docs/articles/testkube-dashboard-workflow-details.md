@@ -13,6 +13,10 @@ includes **Run as silent execution**. You can select this checkbox to run silent
 
 ![Run Now](images/workflow-details-run-now.png)
 
+:::tip
+A **Runner Agent** acts as the test execution engine and runs within the Kubernetes cluster to spin up pods, facilitate the testing defined in Testkube, 
+and report results. You can use multiple **Runner Agents** in your **Environment**. For additional information, read [Runner Agents](/articles/agents-overview#runner-agents). 
+:::
 
 ## Overview Tab
 
@@ -35,14 +39,22 @@ bar within the bar chart to reveal additional metrics.
 
 ![Execution Details](../articles/images/workflow-details-executions.png)
 
-You can identify and select a Workflow then choose More Options (three vertical dots) to view and make other selections.
+You can identify and select a Workflow execution then choose More Options (three vertical dots) to view and make other selections.
 
 ![Execution – More Options](../articles/images/workflow-details-executions-more-options.png)
 
-You can also select a bar from witin the bar chart to view details specific to the **Log Output**, **JUnit Reports**, **Artifacts**, **Resource Usage**, **Flowchart**, **CLI Commands**,
+You can also select an Execution from the list to view Execution-specific details. These details open in a new modal that contains **Log Output**, **JUnit Reports**, **Artifacts**, **Resource Usage**, **Flowchart**, **CLI Commands**,
 **Events**, and **Workflow Definition** tabs. **Run again** allows you to re-execute the Workflow.
 
 ![Executions – Select More Tabs](../articles/images/workflow-details-executions-select-for-more-tabs.png) 
+
+### Multi-Agent Executions
+
+For executions run on multiple agents using [Runner Agents](/articles/agents-overview#runner-agents),
+an expandable section includes those executions. Use the arrows to expand and collapse the contained executions. 
+
+![Multi-agent Executions List](images/multi-agent-executions-list.png)
+
 
 ## CLI Commands Tab
 
@@ -53,7 +65,7 @@ The **CLI Commands** tab displays CLI commands you can run to interact with the 
 
 ## CI/CD Integrations Tab
 
-The **CI/CD Integration** tab provides insight into how to integrate the Workflow with common CI/CD tools and includes ready-to-use examples for each.
+The **CI/CD Integration** tab provides insight into how to trigger the Workflow from common CI/CD tools and includes ready-to-use examples for each.
 For additional information, read [Testkube Integrations Overview](/articles/integrations).
 
 ![CI/CD Integration](../articles/images/workflow-details-ci-cd-integration.png)
