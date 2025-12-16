@@ -1,6 +1,6 @@
 # Workflow Details
 
-**Workflow Details** provides a central location to run, monitor, and configure the Workflows in your **Environmwent**.
+**Workflow Details** provides a central location to run, monitor, and configure the Workflows in your **Environment**.
 
 ![Workflow Details](../articles/images/workflow-details-select-workflow.png)
 
@@ -9,14 +9,20 @@
 
 After you select a Workflow, you can view its details via the **Overview**, **Executions**, **CLI Commands**, **CI/CD Integration**, and **Settings** tabs.
 You can also access **Run now** (top right) to run the Workflow immediately. The **Run now** drop-down list box
-includes **Run as silent execution**. You can select this checkbox to run silent executions, which do not trigger webhooks, events, or metrics collection.
+includes **Run as silent execution**. You can select this checkbox to run silent Executions, which do not trigger webhooks, events, or metrics collection. Therefore, the Execution completes normally; however, 
+it is excluded from integrations, notifications, and monitoring systems that would otherwise respond to this run.
+
+While you can select **Run now** from various tabs, it is common to run Workflows via **CI/CD Integration** and from **Scheduling** located within the **Settings** tab.
+
+Workflows execute one or more tests; Composite Workflows execute one or more Workflows, with one orchestrating the others. The number of tests or Workflows that run
+is based on the testing tool you use.
+
+:::info
+A **Runner Agent** acts as the test Execution engine and runs within the Kubernetes cluster to spin up pods, facilitate the testing defined in Testkube, 
+and report results. You can use multiple **Runner Agents** in your **Environment**. For additional information, read [Runner Agents](/articles/agents-overview#runner-agents).
+:::
 
 ![Run Now](images/workflow-details-run-now.png)
-
-:::tip
-A **Runner Agent** acts as the test execution engine and runs within the Kubernetes cluster to spin up pods, facilitate the testing defined in Testkube, 
-and report results. You can use multiple **Runner Agents** in your **Environment**. For additional information, read [Runner Agents](/articles/agents-overview#runner-agents). 
-:::
 
 ## Overview Tab
 
@@ -28,30 +34,31 @@ Upon selection, the **Resource Usage**, **Artifacts** and **Content Sources** ic
 
 ![Resource Usage, Artifacts, Content Sources](../articles/images/workflow-details-overview-icons-middle.png)
 
-More results are available (lower page) along with a Reports visualization option.
+More results are available (lower page) along with a Reports visualization option. JUnit Reports, for example, generate based on the content of your YAML file. Adding arguments 
+specific to JUnit reports trigger this report generation.
 
 ![Overview More Results](../articles/images/workflow-details-overview-lower-more-results.png)
 
 ## Executions Tab
 
 The **Executions** tab displays **Test Execution Insights for the Last Week** along with **Search** and **Add a filter**. You can hover over each
-bar within the bar chart to reveal additional metrics.
+Execution to reveal additional metrics.
 
 ![Execution Details](../articles/images/workflow-details-executions.png)
 
-You can identify and select a Workflow execution then choose More Options (three vertical dots) to view and make other selections.
+You can identify and select a Workflow Execution then choose More Options (three vertical dots) to view and make other selections.
 
 ![Execution – More Options](../articles/images/workflow-details-executions-more-options.png)
 
-You can also select an Execution from the list to view Execution-specific details. These details open in a new modal that contains **Log Output**, **JUnit Reports**, **Artifacts**, **Resource Usage**, **Flowchart**, **CLI Commands**,
+You can also select an Execution from the list to view Execution-specific details. These details open in a new modal that contains the **Log Output**, **JUnit Reports**, **Artifacts**, **Resource Usage**, **Flowchart**, **CLI Commands**,
 **Events**, and **Workflow Definition** tabs. **Run again** allows you to re-execute the Workflow.
 
 ![Executions – Select More Tabs](../articles/images/workflow-details-executions-select-for-more-tabs.png) 
 
 ### Multi-Agent Executions
 
-For executions run on multiple agents using [Runner Agents](/articles/agents-overview#runner-agents),
-an expandable section includes those executions. Use the arrows to expand and collapse the contained executions. 
+For Executions that use multiple [Runner Agents](/articles/agents-overview#runner-agents),
+an expandable section includes those Executions. Use the arrows to expand and collapse these Executions. 
 
 ![Multi-agent Executions List](images/multi-agent-executions-list.png)
 
@@ -68,13 +75,16 @@ The **CLI Commands** tab displays CLI commands you can run to interact with the 
 The **CI/CD Integration** tab provides insight into how to trigger the Workflow from common CI/CD tools and includes ready-to-use examples for each.
 For additional information, read [Testkube Integrations Overview](/articles/integrations).
 
+You commonly run Workflows via this tab and **Scheduling**, accessible via **Settings**.
+
 ![CI/CD Integration](../articles/images/workflow-details-ci-cd-integration.png)
 
 ## Workflow Settings Tabs
 
-The **Settings** tab comprises **General**, **Execution**, **Test Content**, **Resource Usage**, **Variables & Secrets**, **Resource Group**,
-**Scheduling**, and **Definition**. You can leverage each setting to configure the Workflow, impacting its behavior. You can configure most **Settings**
-directly in the Workflow via **Definition**.
+The **Settings** tab is the primary interface for building the YAML **Definition**, encompassing configurable settings such as **General**, **Execution**, **Test Content**, **Resource Usage**, 
+**Variables & Secrets**, **Resource Group**, **Scheduling**, and **Definition**. More specifically, configuring these settings dynamically generates and updates the YAML visible 
+via **Definition**. For example, designating **333** in the **CPU** field in the **Resource Limits** section of **Resource Usage** populates the corresponding *resource/limits* 
+in the YAML file. You can configure **Definition** using the **Settings** configurations, or you can edit the YAML **Definition** directly.
 
 ![General](../articles/images/workflow-details-settings-general.png)
 
@@ -82,12 +92,12 @@ directly in the Workflow via **Definition**.
 
 The **General** setting allows you to update:
 
-* **Test Workflow name** – Title or designation you use to identify Workflow.
-* **Labels** – Tag you add to Workflow for actions such as filtering and searching.
-* **Timeout** – Workflow execution expiration.
+* **Test Workflow name** – Title or designation you use to identify the Workflow.
+* **Labels** – Tag you add to the Workflow for actions such as filtering and searching.
+* **Timeout** – Workflow Execution expiration.
 
 **General** also allows you to **Delete this Test Workflow** and **Purge Past Executions**; the latter makes database/storage space available
-if you have a large number of old executions for this Workflow.
+if you have several old Executions for this Workflow.
 
 Due to Kubernetes constraints, it is not possible to change the Workflow name.
 Instead, you must create a copy of the Workflow with the new name and delete the old one.
@@ -102,7 +112,7 @@ other constructs in your Workflow.
 
 :::
 
-The **Execution** setting allows you to define **Container configuration** which includes the **Image**, **Tag**, **Command**, and **Args** along with the **Working directory**.
+The **Execution** setting allows you to define **Container configuration** which includes **Image**, **Tag**, **Command**, and **Args** along with the **Working directory**.
 Collectively, you can use these settings to run your tests.
 
 ![Execution Settings](../articles/images/workflow-details-settings-execution.png)
@@ -125,7 +135,7 @@ limits per image or Workflow step, you can do so directly in the Workflow YAML v
 
 ### Variables and Secrets
 
-The **Variables & Secrets** setting allows you to define global variables and secrets that are used throughout the Workflow.
+The **Variables & Secrets** setting allows you to define global variables and secrets used throughout the Workflow.
 You can also reference global credentials created at the **Organization** or **Environment** level.
 
 ![Variables & Secrets Settings](../articles/images/workflow-details-settings-variables-and-secrets.png)
@@ -138,8 +148,10 @@ The **Resource Group** setting allows you to assign this Workflow to a Resource 
 
 ### Scheduling
 
-The **Scheduling** setting allows you to configure a single schedule for your Workflow. If you want to define
+The **Scheduling** setting allows you to configure a single schedule for your Workflow, designating *when* and *how often* the Workflow runs. If you want to define
 multiple schedules, you can do so directly in the Workflow YAML via the **Definition** setting.
+
+You commonly run Workflows via this setting and the **CI/CD Integration** tab.
 
 For additional information, read [Scheduling Workflows](/articles/scheduling-tests).
 
@@ -147,6 +159,8 @@ For additional information, read [Scheduling Workflows](/articles/scheduling-tes
 
 ### Definition
 
-The **Definition** setting provides a powerful YAML editor for editing your Workflows. For additional information, read [Workflow YAML Editor](testkube-dashboard-workflow-editor). 
+The **Definition** setting provides a powerful YAML editor for modifying your Workflows. As you designate various configurations via **General**, **Execution**, **Test Content**, **Resource Usage**,
+**Variables & Secrets**, **Resource Group**, and **Scheduling**, your specifications are automatically reflected in the YAML file. These settings, therefore, dynamically build this file. Some changes, however, you must make
+manually in the YAML file itself. For additional information, read [Workflow YAML Editor](testkube-dashboard-workflow-editor). 
 
 ![Definition Settings](../articles/images/workflow-details-settings-definition.png)
