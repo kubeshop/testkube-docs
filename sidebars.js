@@ -302,6 +302,11 @@ const sidebars = {
               ],
             },
             {
+              type: "doc",
+              label: "Executions",
+              id: "articles/testkube-dashboard-executions",
+            },
+            {
               type: "category",
               label: "Integrations",
               collapsed: false,
@@ -322,6 +327,11 @@ const sidebars = {
                   id: "articles/integrations-webhooks",
                 },
               ],
+            },
+            {
+              type: "doc",
+              label: "Custom Views",
+              id: "articles/testkube-dashboard-custom-views",
             },
             {
               type: "doc",
