@@ -6,7 +6,7 @@ hide_table_of_contents: true
 <tr><td>digest</td><td><code>sha256:f6be324fcee27f2a91178d74f77bb4ba3e5a9d2e72ba7d6871f45d14aadca40a</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 8" src="https://img.shields.io/badge/high-8-e25d68"/> <img alt="medium: 14" src="https://img.shields.io/badge/medium-14-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/low-2-fce1a9"/> <!-- unspecified: 0 --></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>10 MB</td></tr>
-<tr><td>packages</td><td>31</td></tr>
+<tr><td>packages</td><td>32</td></tr>
 </table>
 </details></table>
 </details>
@@ -68,7 +68,7 @@ Within HostnameError.Error(), when constructing an error string, there is no lim
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.026%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -85,7 +85,7 @@ The ParseAddress function constructs domain-literal address components through r
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.026%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -362,7 +362,7 @@ RUN set -eux; \
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.43.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.43.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.018%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.019%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
 </table>
 

@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:000d9a0554ecff2cc0bb5ecf96ac00f5bfc977909993fd0f9063218f3e082cbb</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/medium-4-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
-<tr><td>platform</td><td>linux/amd64</td></tr>
-<tr><td>size</td><td>57 MB</td></tr>
-<tr><td>packages</td><td>314</td></tr>
+<tr><td>digest</td><td><code>sha256:9c9e0753d1460c5c5bc1fff5b3d7b6fd3bef69b5feeeaa3260df7d1d54821f30</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/medium-4-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
+<tr><td>platform</td><td>linux/arm64</td></tr>
+<tr><td>size</td><td>66 MB</td></tr>
+<tr><td>packages</td><td>414</td></tr>
 </table>
 </details></table>
 </details>

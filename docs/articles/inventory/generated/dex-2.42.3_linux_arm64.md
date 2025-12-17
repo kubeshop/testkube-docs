@@ -6,7 +6,7 @@ hide_table_of_contents: true
 <tr><td>digest</td><td><code>sha256:0bc48e0aa5a3a54794e78d303c42e3d7a3c464e6cab85f87209764d590dd0230</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 7" src="https://img.shields.io/badge/high-7-e25d68"/> <img alt="medium: 13" src="https://img.shields.io/badge/medium-13-fbb552"/> <img alt="low: 3" src="https://img.shields.io/badge/low-3-fce1a9"/> <!-- unspecified: 0 --></td></tr>
 <tr><td>platform</td><td>linux/arm64</td></tr>
 <tr><td>size</td><td>41 MB</td></tr>
-<tr><td>packages</td><td>235</td></tr>
+<tr><td>packages</td><td>303</td></tr>
 </table>
 </details></table>
 </details>
@@ -39,7 +39,7 @@ Within HostnameError.Error(), when constructing an error string, there is no lim
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.026%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -56,7 +56,7 @@ The ParseAddress function constructs domain-literal address components through r
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.026%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -309,7 +309,7 @@ tar.Reader does not set a maximum size on the number of sparse region data block
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.43.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.43.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.018%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.019%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
 </table>
 
