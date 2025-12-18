@@ -609,7 +609,7 @@ const redirects = [
   },
   {
     from: "/articles/install/multi-agent",
-    to: "/articles/environment-management",
+    to: "/articles/agents-overview",
   },
   {
     from: "/testkube-pro/articles/agent-management",
