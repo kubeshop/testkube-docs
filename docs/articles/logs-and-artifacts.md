@@ -20,11 +20,11 @@ a more complete picture of why a test failed - [Read More](/articles/tw-capture-
 
 Select from the **Compare to another execution step** drop down to compare two steps from the selected workflow.
 
-![Compare Steps](../img/compare-steps-092024.png)
+![Compare Steps](../articles/images/workflow-execution-details-compare-steps.png)
 
 The next screen will show the differences between the two steps:
 
-![Comparison Screen](../img/comparison-screen-092024.png)
+![View Comnparison Differences](../articles/images/workflow-execution-details-compare-step-differences.png)
 
 ## Artifact Collection
 

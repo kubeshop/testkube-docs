@@ -1,30 +1,71 @@
 # Workflow Execution Details
 
-When selecting a specific Workflow Execution the modal that opens has the following tabs:
+**Workflow Execution Details** provides a comprehensive view of a Workflow run to include the steps, logs, artifacts, and configuration – helping you understand
+outcomes and troubleshoot any potential issues.
+
+To view **Workflow Execution Details**, you must choose a Workflow Execution then select **Open Details & Logs**. Selecting a single step/runtime instance or the entire Execution, 
+facilitates your ability to view progress and pinpoint any failures within the overall Workflow.
+
+![Open Details & Logs](../articles/images/workflow-execution-details-open-details-and-logs.png)
+
+After you select **Open Details & Logs**, you have access to the **Log Output**, **Artifacts**, **Resource Usage**, **Flowchart**, **CLI Commands**, 
+**Events**, and **Workflow Definition** tabs that – upon selection – provide additional insight specific to the Workflow Execution you selected.
 
 ## Log Output
 
-This tab shows the log output for each executed step - [Read More](/articles/logs-and-artifacts#log-collection).
+This tab displays the **Log Output** for this Execution, providing runtime messages such as *Initializing*, *Clone Git Repository*, and *Run Test*. 
+For additional information, read [Log Collection](../articles/logs-and-artifacts.md#log-collection).
 
-![Log Output](../img/workflows-log-output-092024.png)
+![Log Output](../articles/images/workflow-execution-details-log-output.png)
 
-Select from the **Compare to another execution step** drop down to compare two steps from the selected workflow.
+You can select the **Compare to another execution step** drop-down list box to choose another Execution, comparing a second Execution step to the first one you selected.
 
-![Compare Steps](../img/compare-steps-092024.png)
+![Compare Two Execution Steps](../articles/images/workflow-execution-details-compare-steps.png)
 
-The next screen will show the differences between the two steps:
+Upon selection of a second comparison Execution step, you can view the highlighted differences between the two.
 
-![Comparison Screen](../img/comparison-screen-092024.png)
+![Compare Execution Step Differences](../articles/images/workflow-execution-details-compare-step-differences.png)
 
 ## Artifacts
 
-This tab shows artifacts created by your test executions - [Read More](/articles/logs-and-artifacts#artifact-collection)
+This tab displays artifacts the Execution created such as reports, charts, and images. In some cases, there are artifacts; in other cases, artifacts do not exist.
+For additional information, read [Artifacts](/articles/logs-and-artifacts#artifact-collection).
 
-![Artifacts](../img/workflows-artifacts-tab-2.1.png)
+![Artifacts](../articles/images/workflow-execution-details-artifacts.png)
 
-## Executed Workflow
+## Resource Usage
+This tab displays **CPU** and **Memory** consumption during Execution, which helps you both identify performance issues and optimize resource allocation. You can hover
+over each graph to gain additional insight, such as **CPU** *Container Usage* and *Container Requests* along with *Outgoing Traffic* and *Incoming Traffic* relative 
+to **Network Traffic**.
 
-This tab shows the actual Workflow that was executed, selecting the "Inline templates" option will expand any 
-used Workflow Templates and specified configuration properties also.
+**CPU** and **Memory**
 
-![Code](../img/workflows-code-2.1.png)
+![Resource Usage](../articles/images/workflow-execution-details-resource-usage-1.png)
+
+**Network Traffic** and **Disk Usage**
+
+![Resource Usage](../articles/images/workflow-execution-details-resource-usage-2.png)
+
+## Flowchart
+
+This tab displays a visualization of the Workflow structure and Execution path, which helps you understand dependencies, order of operations, and failure points.
+
+![Flowchart](../articles/images/workflow-execution-details-flowchart.png)
+
+## CLI Commands
+
+This tab includes CLI commands that you can copy then paste into the **Workflow Definition** YAML file to configure your Workflow.
+
+![CLI Commands](../articles/images/workflow-execution-details-cli-commands.png)
+
+## Events
+
+This tab captures significant lifecycle actions (such as *Start*, *Completion*, and *Failure*) that occurred during Execution runtime.
+
+![Events](../articles/images/workflow-execution-details-events.png)
+
+## Workflow Definition
+
+This tab displays the YAML that allows you to configure the Workflow.
+
+![Workflow Definition](../articles/images/workflow-execution-details-workflow-definition.png)
