@@ -1,7 +1,7 @@
 # Workflow Templates
  
-**Workflow Templates** are reusable, standardized configuration instructions for running tests specific to a range of tools such as Playwright and Selenium. With a standard set of instructions 
-for testing tools, you do not have to start your test instructions with a *blank page* of sorts. Instead, you can start with a **Workflow Template** –
+**Workflow Templates** are reusable configuration blocks for your Workflows that you can use to ensure your Workflows follow specific patterns or best practices, such as when using tools like Playwright and Selenium. 
+With a standard set of instructions for testing tools, you do not have to start your test instructions with a *blank page* of sorts. Instead, you can start with a **Workflow Template** –
 tailoring this baseline to align with your current configuration requirements. These templates are powerful mechanisms for defining, sharing, and reusing Workflow configurations.
 Leveraging these templates allows you to save time by using and tweaking existing configurations as opposed to building each new set of instructions from scratch. For additional information,
 read [Test Workflow Templates](/articles/test-workflow-templates).
@@ -49,7 +49,7 @@ This setting allows you to assign this **Workflow Template** to a **Resource Gro
 
 ### Definition
 
-This setting allows you to edit the **Workflow Template** by updating its configuration via a YAML file.
+This setting allows you to edit the **Workflow Template** by updating its configuration via a dedicated YAML editor.
 
 ![Definition Setting](../articles/images/workflow-templates-settings-definition.png)
 
@@ -73,7 +73,7 @@ Select **Add a new template** to create **Workflow Templates** specific to:
 
 ### Git Content
 
-You can create a template to use across Workflows, ensuring each uses the same Git Source as its content. For example, all Workflows might use the same Git repository/branch or even the same access method
+This option creates a **Workflow Template** that ensures your Workflows use the same Git Source as its content. For example, all Workflows might use the same Git repository/branch or even the same access method
 such as SSH or HTTPS.
 
 ![Git Content Template](../articles/images/workflow-templates-git-content.png)
@@ -81,7 +81,7 @@ such as SSH or HTTPS.
 
 ### Static Content
 
-You can create a template to use across Workflows, ensuring each uses the same static content for the same scenarios. For example, Deployment Workflows might use the same template such that
+This option creates a **Workflow Template** that ensures your Workflows use the same static content for the same scenarios. For example, Deployment Workflows might use the same template such that
 the production setup text is identical. Similarly, Onboarding Workflows might reference the same static instructions for new users.
 
 ![Static Content Template](../articles/images/workflow-templates-static-content.png)
@@ -89,7 +89,7 @@ the production setup text is identical. Similarly, Onboarding Workflows might re
 
 ### Testing Tool
 
-You can create a template to use across Workflows such that each uses a specific testing tool or script the same way.
+This option creates a **Workflow Template** that ensures your Workflows use the same testing tool or script the same way.
 
 ![Testing Tool Template Wizard](../articles/images/workflow-templates-testing%20tool.png)
 
