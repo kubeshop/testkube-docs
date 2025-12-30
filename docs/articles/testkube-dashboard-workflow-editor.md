@@ -1,11 +1,11 @@
 # Workflow YAML Editor
 
-The **Workflow Editor** allows you to configure your Workflows via YAML.
+The **Workflow Editor** allows you to configure your Workflows via a dedicated YAML editor.
 
 The **Settings** tab [Workflows | Select Workflow from Dashboard | Settings] is the primary interface for building the YAML file, encompassing configurable settings 
 such as **General**, **Execution**, **Test Content**, **Resource Usage**, **Variables & Secrets**, **Resource Group**, **Scheduling**, and **Definition**. 
 More specifically, configuring these settings dynamically generates and updates the YAML file in the **Definition** setting. Some changes, however, you must make
-manually in the YAML file itself. 
+manually in the YAML file itself. For additional information, read [Workflow Settings](../articles/testkube-dashboard-workflow-details#workflow-settings-tabs).
 
 :::tip
 The **Workflow Editor** uses the same technology that powers VS Code, allowing you to use the same editing features and mirroring your user experience.
@@ -40,8 +40,8 @@ When you select **Save & Run**, you can view the [Execution Details](../articles
 
 ## Template Inlining
 
-This tool allows you to preview two versions of the same YAML file: one (left) is abbreviated; the other (right) displays a more complete and extended YAML version. Re-select 
-**Template Inlining** to remove these previews.
+This tool allows you to preview the expanded YAML of your Workflow when using [Workflow Templates](../articles/test-workflow-templates.md): one (left) is abbreviated; 
+the other (right) displays a more complete and extended YAML version. Re-select **Template Inlining** to remove these previews.
 
 ![Inline Template](../articles/images/workflow-editor-inline-template.png)
 
@@ -69,7 +69,7 @@ The feature adds an underline (sometimes called an *error squiggle*) below a key
 
 ### Autocomplete for Template Names
 
-This feature helps you select valid template(s) used in your Workflows, particularly when you are expected to enter a Workflow template name.
+This feature helps you select valid template(s) used in your Workflows.
 
 ![Workflow Editor Template Auto-complete](images/workflow-editor-template-autocomplete.png)
 
