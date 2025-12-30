@@ -1,6 +1,6 @@
 # Integrations Webhooks
 
-Webhooks are request-driven and external – exposing HTTP endpoints that run Testkube actions when called by external systems, such as CI/CD tools, GitHub, Slack, or other services. You might
+Webhooks are event-driven and invoke HTTP endpoints exposed by external systems, such as CI/CD tools, GitHub, Slack, or other services. You might
 create a Webhook, for example, to notify your team if a critical API test fails so the team can fix the issue immediately. If this test finishes with a *Failed* status,
 Testkube (based on your Webhook configuration) sends an HTTP POST request to a Slack Webhook URL which then posts a message in the *Alerts* channel. The Slack Webhook URL is a private entrance (of sorts) to the *Alerts* channel,
 automatically turning data into a chat message for your team. This allows Testkube to communicate with Slack without the need for you to manually copy/paste this message. 
@@ -25,6 +25,7 @@ The **Create a Webhook** modal displays:
 **EXAMPLE**
 
 When a Testkube test finishes with a *Failed* status, Testkube sends an HTTP POST request to a Slack Webhook URL which then posts a message in your *Alerts* Slack channel to notify team members.
+For additional information, read [Slack Integration](../articles/slack-integration.mdx).
 
 1. Enter the **Name**, **Resource identifier**, and **Triggered events**.
 1. Select **Next**.
@@ -51,7 +52,7 @@ generated YAML directly in the [Definition](/articles/integrations-webhooks#defi
 The **General** setting allows you to access **Name**, **Enable/Disable this Webhook**, and **Delete this webhook**.
 
 :::tip
-You can disable a Webhook for specific Workflow Executions. For additional information, read [Disabling Webhooks](/articles/webhooks#disabling-webhooks-on-tests).
+You can disable a Webhook for specific Workflow Executions. For additional information, read [Disabling Webhooks](../articles/webhooks#disabling-webhooks).
 :::
 
 ![Webhooks Settings](../articles/images/testkube-dashboard-integrations-webhooks-settings-general.png)
