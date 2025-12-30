@@ -2,13 +2,13 @@
 
 The **Workflow Wizard** guides you through creating and managing Testkube Workflows – streamlining test setup
 by automatically discovering tests, generating configurations, and producing YAML files. The Wizard improves onboarding
-speed, reduces configuration errors, and offers several options that allow you to create workflows.
+speed, reduces configuration errors, and offers several options that allow you to create Workflows.
 
 You initiate the Wizard by accessing **Test Workflows** and selecting **Add a new Test Workflow**.
 
 ![Test Workflows](../articles/images/workflow-wizard-add-new-test-workflow.png)
 
-Upon selection of **Add a new Test Workflow**, the **Create a Test Workflow** modal opens. You can start a new workflow via **Create with Wizard**, 
+Upon selection of **Add a new Test Workflow**, the **Create a Test Workflow** modal opens. You can start a new Workflow via **Create with Wizard**, 
 **Start from an example**, **Combine existing Workflows**, and **Import from YAML**.
 
 ![Create a Test Workfow modal](../articles/images/workflow-wizard-create-a-test-workflow-modal.png)
@@ -129,7 +129,7 @@ Selecting a tool for which Testkube has not found any tests prompts you for the 
 
 ### Step 3 – Run 
 
-**Run** allows you to specify and modify the run command along with the execution working directory for the selected testing tool. 
+**Run** allows you to specify and modify the run command along with the Execution working directory for the selected testing tool. 
 If your test was discovered via **Test Discovery**, these values will be pre-filled; otherwise, you must
 manually enter the run command and path to your test script.
 
@@ -137,15 +137,15 @@ manually enter the run command and path to your test script.
 ![Workflow Wizard – Run Step](images/workflow-wizard-run-step.png)
 
 :::tip
-When using a **Git Source**, the repository is cloned and mounted under the `/data/repo` folder in your container. The execution
+When using a **Git Source**, the repository is cloned and mounted under the `/data/repo` folder in your container. The Execution
 working directory must be set accordingly. When using a **File** or **String** **Source**, the file is written to the `/data` folder instead.
-Ensure your command and execution directory are configured appropriately.
+Ensure your command and Execution directory are configured appropriately.
 :::
 
 You can also specify:
 
 * **Artifacts** – Location where Testkube can find artifacts created by your testing tool (such as reports and videos). For additional information, read [Artifacts](/articles/test-workflows-artifacts).
-* **Environment Variables** – Any environment variables that must be passed to your testing tool for test execution.
+* **Environment Variables** – Any environment variables that must be passed to your testing tool for test Execution.
 
 ### Step 4 – Collaboration
 
@@ -169,7 +169,7 @@ Select the **Inline template definitions** checkbox to *inline* any used templat
 :::tip
 
 Select this checkbox to make detailed changes to how the underlying testing tool is used; changes **will not**
-affect other workflows using the same template.
+affect other Workflows using the same template.
 
 :::
 
@@ -231,7 +231,7 @@ For additional information about **Combine existing workflows**, read [Workflow 
 
 ## Import from YAML
 
-**Import from YAML** allows you to paste and edit your YAML workflow definition.
+**Import from YAML** allows you to paste and edit your YAML Workflow definition.
 
 ![Import from YAML](../articles/images/workflow-wizard-import-from-yaml.png)
 

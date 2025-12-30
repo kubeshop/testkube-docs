@@ -52,9 +52,8 @@ Once the condition has been specified, you need to specify what action to take w
 Selecting a Trigger from the list of Triggers shows its Settings.
 
 :::note
-As with the wizard above to create a Trigger, the Settings tab only expose basic Trigger configurations, for more 
-advanced [condition and action configuration](/articles/test-triggers#custom-resource-definition-model) you can modify the 
-generated YAML directly in the [Definition tab](/articles/integrations-triggers#definition) for your Trigger.
+As with the wizard above to create a Trigger, the Settings tab only exposes basic Trigger configurations, for more 
+advanced condition and action configuration you can modify the generated YAML directly in the [Definition tab](/articles/integrations-triggers#definition) for your Trigger.
 :::
 
 ### General

@@ -271,16 +271,10 @@ spec:
 - **Event** - `created`, `modified`, `deleted`
   - For deployments - `deployment-scale-update`, `deployment-image-update`, `deployment-env-update`, `deployment-containers-modified`,
     `deployment-generation-modified`, `deployment-resource-modified`
-  - For Testkube events - `event-start-test`, `event-end-test-success`, `event-end-test-failed`, `event-end-test-aborted`, `event-end-test-timeout`,
-    `event-start-testsuite`, `event-end-testsuite-success`, `event-end-testsuite-failed`, `event-end-testsuite-aborted`, `event-end-testsuite-timeout`,
-    `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`, `event-end-testworkflow-failed`, `event-end-testworkflow-aborted`,
-    `event-created`, `event-updated`, `event-deleted`
-- **Execution** - `test`, `testsuite`, `testworkflow`
+  - For Testkube events - `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`, 
+    `event-end-testworkflow-failed`, `event-end-testworkflow-aborted`, `event-created`, `event-updated`, `event-deleted`
+- **Execution** - `testworkflow`
 - **ConcurrencyPolicy** - `allow`, `forbid`, `replace`
-
-:::info
-Events and values related to Tests and Test Suites have been deprecated and will be removed - [Read More](/articles/legacy-features)
-:::
 
 ## Examples
 
@@ -382,18 +376,3 @@ Kubernetes API and gets notified by Kubernetes on each event on the watched reso
 ## API
 
 Testkube exposes CRUD operations on test triggers in the REST API. Check out the [OpenAPI docs](../openapi/overview) for more info.
-
-## Injected Environment Variables
-
-:::info
-Injected Environment Variables are supported when triggering legacy Tests / Suites only (see [Legacy Features](/articles/legacy-features)).
-
-You can use [Action Parameters](#action-parameters) instead when triggering Workflows.
-:::
-
-The following environment variables are automatically injected into each triggered test pod:
-
-- `WATCHER_EVENT_RESOURCE`: resource type
-- `WATCHER_EVENT_NAME`: resource name
-- `WATCHER_EVENT_NAMESPACE`: resource namespace
-- `WATCHER_EVENT_EVENT_TYPE`: event type
