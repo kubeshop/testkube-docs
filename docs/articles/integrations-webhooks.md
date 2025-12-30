@@ -47,7 +47,7 @@ generated YAML directly in the [Definition tab](/articles/integrations-webhooks#
 The **General** tab allows you to modify the name of the Webhook, temporarily enable/disable it, and delete it if needed.
 
 :::tip
-You can disable a Webhook for specific Workflow Executions also - [Read More](/articles/webhooks#disabling-webhooks-on-tests)
+You can disable a Webhook for specific Workflow Executions - [Read More](/articles/webhooks#disabling-webhooks)
 :::
 
 ![Webhooks Settings](../img/existing-webhook-general.png)
