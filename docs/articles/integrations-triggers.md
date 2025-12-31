@@ -55,8 +55,8 @@ This Trigger will help identify deployment issues early and without manual testi
 You can select an existing Trigger to view its Settings.
 
 :::tip
-**Create a Trigger** exposes basic configurations. For additional information, read [Resource Conditions](/articles/test-triggers#resource-conditions) and 
-[Action Parameters](../articles/test-triggers#action-parameters). You can modify the generated YAML directly in the [Definition](/articles/integrations-triggers#definition) for this Trigger. 
+Similar to **Create a Trigger**, **Settings** only exposes basic Trigger configurations. For more advanced *action* and *condition* configurations, you can modify the generated 
+YAML directly in the [Definition](/articles/integrations-triggers#definition) for this Trigger. 
 :::
 
 ### General
