@@ -215,9 +215,7 @@ will result in:
 ### Helper methods
 
 We also provide special helper methods to use in the webhook template:
-`executionstatustostring` is the method to convert a pointer to a execution status to a string type.
-`testsuiteexecutionstatustostring` is the method to convert a pointer to a test suite execution status to a string type.
-`testworkflowstatustostring` is the method to convert a pointer to a test workflow status to a string type.
+- `testworkflowstatustostring` is the method to convert a pointer to a test workflow status to a string type.
 
 Usage example:
 
@@ -397,31 +395,9 @@ Webhooks can be triggered on any of the following events:
 
 They can be triggered by the following resources:
 
-- test
-- testsuite
 - testworkflow
-- executor
 - trigger
 - webhook
-- testexecution
-- testsuiteexecution
-
-### Test / Test Suite Events
-
-:::warning
-Test and Test Suites are being deprecated from Testkube. [Read More](../articles/legacy-features.md).
-:::
-
-- start-test
-- end-test-success
-- end-test-failed
-- end-test-aborted
-- end-test-timeout
-- start-testsuite
-- end-testsuite-success
-- end-testsuite-failed
-- end-testsuite-aborted
-- end-testsuite-timeout
 
 ### Events for State Changes
 
@@ -435,23 +411,6 @@ For Test Workflows:
 - become-testworkflow-failed (from any state to failed one)
 - become-testworkflow-aborted (from any state to aborted one)
 
-For Tests (deprecated - [Read More](/articles/legacy-features)):
-
-- become-test-up (from any error state to succeed one)
-- become-test-down (from succeed state to any error one)
-- become-test-failed (from any state to failed one)
-- become-test-aborted (from any state to aborted one)
-- become-test-timeout (from any state to timeout one)
-
-For Test Suites (deprecated - [Read More](/articles/legacy-features)):
-
-- become-testsuite-up (from any error state to succeed one)
-- become-testsuite-down (from succeed state to any error one)
-- become-testsuite-failed (from any state to failed one)
-- become-testsuite-aborted (from any state to aborted one)
-- become-testsuite-timeout (from any state to timeout one)
-
-
 ## Supported Event Variables
 
 ### Event-specific variables
@@ -460,9 +419,7 @@ For Test Suites (deprecated - [Read More](/articles/legacy-features)):
 - `Resource`
 - `ResourceId`
 - `Type_` - event Type (for example, `start-testworkflow`, `end-testworkflow-success`, etc. All available trigger events can be found in the [Supported Event types](#supported-event-types) section).
-- `TestExecution` - test execution details (example: [TestExecution (Execution)](#testexecution-execution) section)
-- `TestSuiteExecution` - test suite execution details (example: [TestSuiteExecution](#testsuiteexecution) section)
-- `TestWorkflowExecution` - test suite execution details (example: [TestWorkflowExecution](#testworkflowexecution) section)
+- `TestWorkflowExecution` - Test Workflow execution details (example: [TestWorkflowExecution](#testworkflowexecution) section)
 - `ClusterName` - cluster name
 - `Envs` (API-server ENV variables) - list of Testkube API-Server ENV variables
 
@@ -745,58 +702,6 @@ Here is Webhook JSON payload example
 }
 ```
 
-### TestExecution (Execution)
-
-:::warning
-Test and Test Suite webhooks are being deprecated from Testkube. [Read More](../articles/legacy-features.md).
-:::
-
-- `Id` - Execution ID (for example, `64f8cf3c712890925aea51ce`)
-- `TestName` - Test Name (for example, `postman-executor-smoke`)
-- `TestSuiteName` - Test Suite name (if run as a part of a Test Suite)
-- `TestNamespace` - Execution namespace, where testkube is installed (for example, `testkube`)
-- `TestType` - Test type (for example, `postman/collection`)
-- `Name` - Execution name (for example, `postman-executor-smoke-937)
-- `Number` - Execution number (for example, `937`)
-- `Envs` - List of ENV variables for specific Test (if defined)
-- `Command` - Command executed inside the Pod (for example, `newman`)
-- `Args` - Command arguments (for example, `run <runPath> -e <envFile> --reporters cli,json --reporter-json-export <reportFile>`)
-- `Variables` - List of variables
-- `Content` - Test content
-- `StartTime` - Test start time (for example, `2023-09-06 19:23:34.543433547 +0000 UTC`)
-- `EndTime` - Time when the test execution finished (for example, `2023-09-06 19:23:42.221493031 +0000 UTC`)
-- `Duration` - Test duration in seconds (for example, `7.68s`)
-- `DurationMs` - Test duration in miliseconds (for example, `7678`)
-- `ExecutionResult` - Execution result (https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_event.go)
-- `Labels` Test labels (for example, `[core-tests:executors executor:postman-executor test-type:postman-collection],`)
-- `RunningContext` - Running context - how the test has been triggered (for example, `user-ui`)
-
-The full Execution data model can be found [here](https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_execution.go).
-
-### TestSuiteExecution
-
-:::warning
-Test and Test Suite webhooks are being deprecated from Testkube. [Read More](../articles/legacy-features.md).
-:::
-
-- `Id` - TestSuiteExecution ID (for example, `64f8d5b2712890925aea51dc`)
-- `Name` - TestSuite execution name (for example, `ts-executor-postman-smoke-tests-472`)
-- `Status` - TestSuite execution status (for example, `running` or `passed`)
-- `TestSuite.Name` - TestSuite name (for example, `executor-postman-smoke-tests`)
-- `TestSuite.Namespace` - TestSuite namespace (for example, `testkube`)
-- `Envs` - List of ENV variables
-- `Variables` - List of variables
-- `StartTime` - Test suite start time (for example, `2023-09-06 19:23:34.543433547 +0000 UTC`)
-- `EndTime` - Time when the test suite execution finished (for example, `2023-09-06 19:23:42.221493031 +0000 UTC`)
-- `Duration` - Test suite execution duration in seconds (for example, `7.68s`)
-- `DurationMs` - Test suite execution duration in milliseconds (for example, `7678`)
-- `StepResults`
-- `Labels` - TestSuite labels (for example, `[app:testkube testsuite:executor-postman-smoke-tests]`)
-- `RunningContext` - Running context - how the TestSuite has been triggered (for example, `user-ui`)
-
-The full TestSuiteExecution data model can be found [here](https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_test_suite_execution.go).
-
-
 ## Webhook templates
 
 In order to re-use the Webhook specification, you can define a special Testkube resource - WebhookTemplate.
@@ -942,71 +847,11 @@ To enable a webhook again, you can either set the field `disabled` to `"false"` 
 
 </Tabs>
 
-### Disabling Webhooks on Other Resources
+### Disabling for Workflow Executions
 
-Disabling webhooks can also be done directly on an execution of a test, a test suite and a test workflow. This way the notifications can be disabled temporarily during running the execution. The CLI offers the flag `--disable-webhooks`, the API the parameter `disableWebhooks`. When not set explicitly, webhooks will be enabled by default.
-
-#### Disabling Webhooks on Tests
-
-<Tabs>
-
-<TabItem value="cli" label="CLI">
-
-Use the flag `--disable-webhooks` on the CLI:
-
-```bash
-testkube run testworkflow k6-test --disable-webhooks
-```
-
-</TabItem>
-
-<TabItem value="api" label="API">
-
-The API expects a boolean value of the form:
-
-```json
-{
-  "disableWebhooks": true
-}
-```
-
-</TabItem>
-
-</Tabs>
-
-The examples show only the `create` operations, however these instructions work the same for `update` and `run` as well.
-
-#### Disabling Webhooks on Test Suites
-
-<Tabs>
-
-<TabItem value="cli" label="CLI">
-
-Use the flag `--disable-webhooks` on the CLI:
-
-```bash
-testkube run testworkflow test-workflow --disable-webhooks
-```
-
-</TabItem>
-
-<TabItem value="api" label="API">
-
-The API expects a boolean value of the form:
-
-```json
-{
-  "disableWebhooks": true
-}
-```
-
-</TabItem>
-
-</Tabs>
-
-The examples show only the `create` operations, however these instructions work the same for `update` and `run` as well.
-
-#### Disabling Webhooks on Test Workflows
+Disabling webhooks can also be done directly when executing a TestWorkflow. This way the notifications can be disabled temporarily 
+during running the execution. The CLI offers the flag `--disable-webhooks`, the API the parameter `disableWebhooks`. When not set 
+explicitly, webhooks will be enabled by default.
 
 <Tabs>
 
@@ -1079,3 +924,7 @@ spec:
 </TabItem>
 
 </Tabs>
+
+:::tip
+You can also use [Silent Executions](/articles/test-workflows-running#silent-executions) to disable Webhooks for a specific Workflow execution.
+:::
