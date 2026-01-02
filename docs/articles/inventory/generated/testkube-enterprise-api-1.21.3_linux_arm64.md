@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:c3e55e436914bffb6dd4659cce7ea0cdad0b8f08d9b9a4c1904178b108275946</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/medium-4-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:c6a0cde06008384e5697fd648131fc6ee5410f39a089b6b73e7e4b00978809b2</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/medium-4-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/arm64</td></tr>
-<tr><td>size</td><td>52 MB</td></tr>
-<tr><td>packages</td><td>389</td></tr>
+<tr><td>size</td><td>66 MB</td></tr>
+<tr><td>packages</td><td>414</td></tr>
 </table>
 </details></table>
 </details>
@@ -115,8 +115,8 @@ The `idx` is not validated before use, leading to unsafe slice allocation for ex
 <tr><td>Fixed version</td><td><code>2.52.7</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.7</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:P</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.171%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.163%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -292,7 +292,7 @@ The problem will not be fixed in the following package because the package is ar
 <tr><td>Fixed version</td><td><code>28.3.3</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5.1</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:P/VC:L/VI:L/VA:N/SC:L/SI:L/SA:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.006%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.004%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
 </table>
 
