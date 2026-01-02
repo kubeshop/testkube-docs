@@ -1,88 +1,90 @@
 # Kubernetes Triggers
 
-The Testkube Dashboard allows you to create and manage the Kubernetes Triggers available in your 
-Environments.
+**Kubernetes Triggers** allow you to automatically run Testkube actions based on Kubernetes events. You might add a Trigger, for example, to run smoke
+or regression tests after a deployment to validate application health. 
 
-:::tip
-Check out the [Kubernetes Event Triggers](/articles/test-triggers) document to learn how Event Triggers work
-in Testkube. 
+You can create and manage Triggers in your **Environment** via the Testkube Dashboard, 
+selecting **Integrations** from the left navigation pane then proceeding to the **Kubernetes Triggers** tab. For additional information, read [Kubernetes Event Triggers](/articles/test-triggers).
+
+![Kubernetes Triggers](../articles/images/testkube-dashboard-integrations-kubernetes-triggers.png)
+
+The **Kubernetes Triggers** tab displays a list of any available Triggers, allowing you to select each for review, update, or deletion.
+
+:::info
+Triggers respond to Kubernetes events; webhooks respond to external HTTP calls. More specifically, Triggers are event-driven and internal 
+to Kubernetes – reacting automatically to Kubernetes resource events (such as create/update/delete) inside a cluster. Webhooks are request-driven 
+and external – exposing an HTTP endpoint that runs a Testkube action when called by external systems, such as CI/CD tools, GitHub, or other services.
 :::
 
-Triggers are defined under an Environment and are managed from the "Kubernetes Triggers" tab in the Integrations 
-panel: 
+## Add a new Trigger
 
-![Triggers](../img/integrations-triggers.png)
+You can select **Add a new Trigger** or **Create my first trigger** (as appropriate) to access the **Create a Trigger** modal.
 
-You will see the list of currently available triggers. Select one of these to review, update or delete.
-
-## Creating a New Trigger
-
-Select the **Create a new trigger** button to create a new Kubernetes Trigger:
-
-![Create New Trigger](../img/create-new-trigger.png)
+![Add a new Trigger](../articles/images/testkube-dashboard-integrations-kubernetes-triggers-add-trigger.png)
 
 :::tip
-The wizard to create a Trigger only exposes basic Trigger configurations, for more advanced [condition and action
-configuration](/articles/test-triggers#resource-conditions) you can modify the generated YAML directly in the 
-[Definition tab](/articles/integrations-triggers#definition) for your Trigger. 
+**Add a new Trigger** exposes basic configurations. For additional information, read [Resource Conditions](/articles/test-triggers#resource-conditions) and 
+[Action Parameters](../articles/test-triggers#action-parameters). You can modify the generated YAML directly in the [Definition](/articles/integrations-triggers#definition) for this Trigger. 
 :::
 
 ### New Trigger Condition
 
-You will initially be prompted for
+The **Create a Trigger** modal displays:
 
-- the **Name** of the Trigger - must be a valid Kubernetes name as Triggers are stored as CRDs in your cluster.
-- the **K8s Resource** kind to monitor for events.
-- the **Resources Identifier** for which resources to monitor, can either be a list of Kubernetes Labels or a specific resource name.
-- the **Triggered event** to listen for.
+* **Name** – Unique identifier that must represent a valid Kubernetes name, as Triggers are stored as Custom Resource Definitions (CRDs) in your cluster.
+* **K8s resource** – Cluster object (Pod/deployment/job) that Testkube monitors to determine if an event Triggers.
+* **Resource identifier** – A way to select which specific Kubernetes resources to monitor, using either a resource name or labels.
+* **Triggered event** – The specific Kubernetes action (such as create/update/delete) that causes the Testkube Trigger to run.
 
-![Create New Trigger Modal 1](../img/create-new-trigger-modal-1.png)
+**EXAMPLE** <br/>
+When a new version of an app is deployed to Kubernetes, automatically run a smoke test to confirm that the app started correctly.
+This Trigger will help identify deployment issues early and without manual testing.
 
-### New Trigger Action
+1. Enter the **Name**, **K8s resource**, **Resource identifier**, and **Triggered event**.
+1. Select **Next**.
 
-Once the condition has been specified, you need to specify what action to take when the trigger occurs:
+   ![Create Trigger](../articles/images/testkube-dashboard-integrations-create-trigger-a.png)
 
-- select the **Testkube action** to perform.
-- select the target **Testkube Resource** for the action, either by Labels or by Name.
+1. Enter **Testkube Action** and **Testkube Resource**.
+1. Select **Create**.
 
-![Create New Trigger Modal 2](../img/create-new-trigger-modal-2.png)
+   ![Create Trigger](../articles/images/testkube-dashboard-integrations-create-trigger-b.png)
 
 ## Trigger Settings
 
-Selecting a Trigger from the list of Triggers shows its Settings.
+You can select an existing Trigger to view its Settings.
 
-:::note
-As with the wizard above to create a Trigger, the Settings tab only exposes basic Trigger configurations, for more 
-advanced condition and action configuration you can modify the generated YAML directly in the [Definition tab](/articles/integrations-triggers#definition) for your Trigger.
+:::tip
+Similar to **Create a Trigger**, **Settings** only exposes basic Trigger configurations. For more advanced *action* and *condition* configurations, you can modify the generated 
+YAML directly in the [Definition](/articles/integrations-triggers#definition) for this Trigger. 
 :::
 
 ### General
 
-The **General** tab allows you to modify the name of the Trigger and delete it if needed.
+This setting allows you to modify the **Trigger name** or **Delete this trigger**, if needed.
 
 ![Trigger Settings](../img/existing-trigger-settings.png)
 
 ### Trigger Condition
 
-**Trigger Condition** allows you to configure the conditions to be met for the current trigger to be called.
+This setting specifies the conditions that must be satisfied to invoke this Trigger.
 
 ![Trigger Condition](../img/existing-trigger-condition.png)
 
 ### Trigger Action
 
-**Trigger Action** allows you to configure the action to be performed in Testkube once the conditions are met.
+This setting defines what happens once the Trigger conditions are satisfied.
 
 ![Trigger Action](../img/existing-trigger-action.png)
 
 ### Resource Group
 
-**Resource Group** defines the Resource Group this Trigger belongs to - [Read More about Resource Groups](/articles/resource-groups)
+This setting identifies the Resource Group that contains this Trigger. For additional information, read [Resource Groups](/articles/resource-groups).
 
 ![Trigger Resource Group](../img/existing-trigger-resource-group.png)
 
 ### Definition
 
-**Definition** shows the underlying YAML for your Trigger, allowing you to manually configure your Trigger vs using the
-previous tabs.
+This setting displays the underlying YAML for your Trigger, enabling you to manually configure the Trigger as opposed to using the tabs.
 
 ![Trigger Definition](../img/existing-trigger-definition.png)
