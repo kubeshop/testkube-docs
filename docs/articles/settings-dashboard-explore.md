@@ -1,18 +1,19 @@
 #  Global Settings 
 
-The Testkube Dashboard allows you to configure settings for both your Organizations and Environments.
+The Testkube Dashboard provides a central location for you to configure your **Organization** and **Environment** settings.
+
+![Organization, Environment](../articles/images/testkube-dashboard-global-settings-org-env.png)
 
 ## Organization Settings
 
-Configure your Organization by selecting the "Organization Management" menu action from the 
-Organization drop-down at the top of the Dashboard - [Read More about Organization Management](/articles/organization-management).
+You must have an **Owner** or **Admin** role to adjust this setting – configuring **Organization Management** by first selecting this option from the **Organization** drop-down list box. 
+For additional information, read [Organization Management](/articles/organization-management) and [Inviting Members](../articles/member-management#inviting-members).
 
-
-![Organization Settings Dashboard](images/organization-settings-overview.png)
+![Organization Management](../articles/images/testkube-dashboard-global-settings-organization.png)
 
 ## Environment Settings
 
-Configure your Environments by selecting either the bottom icon in the left toolbar or by selecting
-the "Environment Settings" menu action from the Environment drop-down at the top of the Dashboard - [Read More about Environment Management](/articles/environment-management).
+You must have an **Owner**, **Admin**, or **Editor (Write)** role to adjust this setting – configuring **Environment Settings** by first selecting this option from the **Environment** drop-down list box 
+or selecting **Settings** from the left navigation pane. For additional information, read [Environment Management](../articles/environment-management.md) and [Resource Access Management](../articles/resource-access-management.md).
 
-![Environment Settings Dashboard](../img/settings-dashboard-072024.png)
+![Environment Settings](../articles/images/testkube-dashboard-global-settings-environment.png)
