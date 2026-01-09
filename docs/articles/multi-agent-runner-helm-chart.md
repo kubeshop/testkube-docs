@@ -108,11 +108,61 @@ cloud:
 - Self-registering Agents must be able to create Kubernetes `Secrets` in their namespace.
   These secrets are used to store the agent's ID and connection key which are generated during registration.
   If the Agent cannot create a `Secret` it will self-register every time it starts up.
+- Agents mode cannot be changed after registration, to change that first uninstall and remove manually removed using the UI or CLI to later install again with new mode.
 - Agents will not deregister themselves during `helm uninstall`. Instead, self-registered Agents must be manually removed using the UI or CLI.
 
 ## Runner Agent Cookbook
 
 There are common things that you may want to set up in your values.
+
+### Setting Agent Mode
+
+:::note 
+The agent mode cannot be changed after registration. To modify it, you must uninstall the agent via the UI or CLI and then perform a fresh installation. 
+:::
+
+Agents allows 3 modes: Independent, Global, and Grouped, review the description of them 
+[here](/articles/test-workflows-running#runner-agent-modes). By default all new Agents 
+will use mode **Independent**, to set a different mode there is 2 options:
+
+* For Global mode:
+
+   ```yaml
+   runner:
+     register:
+       global: true
+   ```
+
+:::note 
+Global mode has more priority than any other modes, so to set another mode ensure Global is `false`.
+:::
+
+* For Grouped mode:
+
+   ```yaml
+   runner:
+     register:
+       global: false
+       groupName: my-group
+   ```
+
+### Setting Agent Labels
+
+Agent labels are derived from the agent deployment’s labels using a specific prefix, which defaults to `runner.testkube.io/`.
+All labels with this prefix are sent to the Testkube Control Plane when the agent starts.
+
+For example, the agent deployment label `runner.testkube.io/env: testing` becomes the agent label `env=testing`.
+
+Use the following values to set agent labels:
+
+```yaml
+runner:
+  register:
+    labels:
+      env: testing
+    ## To replace label prefix uncomment:
+    # labelPrefix: runner.testkube.io/
+```
 
 ### Install Runner Agent in one namespace and run executions in another
 
