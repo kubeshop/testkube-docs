@@ -1,12 +1,53 @@
-# Filtering Test Workflow Executions Using Tags
+# Execution Tags
 
-Test Workflows allow you to add execution tags, which can be used for filtering and organizing your test executions. These tags are especially useful when you want to categorize your tests based on specific attributes. Here are two common examples:
+Test Workflows allow you to add execution tags, which can be used for filtering and organizing your test executions. 
+These tags are especially useful when you want to categorize your test results based on specific attributes. Here are two common examples:
 
-## Tagging Service and Target URL
+## Adding Tags to a Workflow Execution
+
+There are multiple ways to add tags to a workflow execution.
+
+### In the Workflow Definition
+
+You can add tags to a workflow execution by setting the `execution.tags` field in the workflow definition.
+
+```yaml
+kind: TestWorkflow
+apiVersion: testworkflows.testkube.io/v1
+metadata:
+   name: execution-tags-sample
+   labels:
+      docs: example
+spec:
+   execution:
+      tags:
+         service: '{{config.serviceUnderTest}}'
+         url: '{{config.targetUrl}}'
+```
+
+### From the CLI
+
+The Testkube CLI allows you to specify tags when triggering a workflow execution using the `--tag` flag:
+
+```sh
+testkube run testworkflow execution-tags-example --tag service=testkube-app
+```
+
+### In a TestTrigger
+
+Testkube TestTriggers allow you to specify tags when triggering a TestWorkflow execution using the `tags` field -
+see more at [Action Parameters](/articles/test-triggers#action-parameters).
+
+### Via the REST API
+
+When triggering a TestWorkflow execution via the REST API using the `executeTestWorkflow` operation, it is possible to specify 
+tags using the `tags` property - [Read More](https://docs.testkube.io/openapi/cloud/Agent-Operations----test-workflows#operation/executeTestWorkflow).
+
+## Example Use Cases
+
+### Tagging Service and Target URL
 
 This example shows how to tag executions with the service under test and target URL.
-
-### Example Workflow
 
 ```yaml
 kind: TestWorkflow
@@ -34,7 +75,7 @@ spec:
     shell: curl -s -I {{ config.targetUrl }}
 ```
 
-### How It Works
+#### How It Works
 
 1. The workflow defines two configuration variables: `serviceUnderTest` and `targetUrl`.
 2. These variables are used to set execution tags:
@@ -53,15 +94,15 @@ You can run this workflow multiple times with different values for `serviceUnder
 2. `testkube-app` and its URL
 3. `testkube-web` and its URL
 
-These tags allow you to easily filter and view executions in the Testkube UI or CLI based on the service or URL being tested.
+These tags allow you to easily filter and view executions in the [Testkube Dashboard Executions View](/articles/testkube-dashboard-executions) based on the service or URL being tested.
 
 ![Filtering Test Workflow Executions by Tags](../img/test-workflow-executions-filtering-by-tags.png)
 
-## Tracking Git Branches
+### Tracking Git Branches
 
 This example demonstrates tagging executions with the Git branch being tested. This is particularly valuable when you're managing tests across multiple branches and need to track which tests were run on which branch.
 
-### Example Workflow
+Example Workflow
 
 ```yaml
 kind: TestWorkflow
@@ -84,7 +125,7 @@ spec:
     - shell: echo running tests
 ```
 
-### How It Works
+#### How It Works
 
 1. The workflow defines a configuration variable `branch` with a default value of `main`.
 2. This variable is used to set an execution tag:
@@ -103,6 +144,5 @@ You can run this workflow multiple times with different values for the branch. F
 2. `feature/new-test` branch
 3. `bugfix/issue-123` branch
 
-These branch tags enable you to quickly filter and analyze test results for specific branches in the Testkube UI. This is particularly helpful when you need to verify the test status of a feature branch before merging or when investigating test failures on specific branches.
-
-![Filtering Test Workflow Executions by Branches Tags](../img/test-workflow-executions-filtering-by-tags-branches.png)
+These branch tags enable you to quickly filter and analyze test results for specific branches using the
+Executions View as shown above.

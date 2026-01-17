@@ -407,6 +407,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Execution Tags",
+              id: "articles/filtering-test-workflow-executions-using-tags",
+            },
+            {
+              type: "doc",
               label: "Workflow Orchestration",
               id: "articles/test-workflows-test-suites",
             },
@@ -443,11 +448,6 @@ const sidebars = {
                   type: "doc",
                   label: "Remote Workflow Execution",
                   id: "articles/remote-workflow-execution",
-                },
-                {
-                  type: "doc",
-                  label: "Filtering Executions using Tags",
-                  id: "articles/filtering-test-workflow-executions-using-tags",
                 },
                 {
                   type: "doc",

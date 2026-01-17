@@ -258,15 +258,7 @@ target:
     - name
 ```
 
-## Queuing of Workflow Executions
-
-When requesting to run a Workflow on a specific Runner Agent, either by name or label(s), and no
-matching Runner Agent is available, Testkube will queue the execution of the Workflow indefinitely; once a corresponding
-Runner Agent is available, the queued Workflow will be executed accordingly (barring Floating license restrictions - [Read More](/articles/agents-overview#licensing-for-runner-agents)).
-
-You can abort queued executions using the corresponding [CLI Command](/cli/testkube-abort-testworkflowexecution) or from the Dashboard.
-
-## Targeting the Standalone Agent 
+### Targeting the Standalone Agent
 
 Each Testkube Environment requires a **[Standalone Agent](/articles/install/standalone-agent)** which provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
 
@@ -279,6 +271,15 @@ Standalone Agents work as a Global Runner Agent (described above) and can also b
 - By ID: `testkube run tw my-k6-test --target id=tkcroot_xxxxxxxxxx`
 
 The ID is shown in the list of Agents (see below), the Name is the same `xxxx` prefixed with tkcenv instead.
+
+
+### Queuing of Workflow Executions
+
+When requesting to run a Workflow on a specific Runner Agent, either by name or label(s), and no
+matching Runner Agent is available, Testkube will queue the execution of the Workflow indefinitely; once a corresponding
+Runner Agent is available, the queued Workflow will be executed accordingly (barring Floating license restrictions - [Read More](/articles/agents-overview#licensing-for-runner-agents)).
+
+You can abort queued executions using the corresponding [CLI Command](/cli/testkube-abort-testworkflowexecution) or from the Dashboard.
 
 ## Silent Executions
 
@@ -315,3 +316,4 @@ To execute a Workflow silently using the CLI, add the `--silent` flag:
 ```sh
 testkube run testworkflow my-k6-test --silent
 ```
+
