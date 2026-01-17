@@ -5,7 +5,7 @@ updating a corresponding Test Workflow Execution CRD.
 
 ## Usage
 
-The below example **TestWorkflowExecutionn** `testworkflowexecution-example` runs the **Test Workflow** `testworkflow-example`
+The below example **TestWorkflowExecution** `testworkflowexecution-example` runs the **Test Workflow** `testworkflow-example`
 when the **TestWorkflowExecution** is created or updated
 
 ```yaml
