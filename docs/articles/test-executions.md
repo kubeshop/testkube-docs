@@ -1,52 +1,33 @@
 # Testkube Execution CRDs
 
-Testkube allows you to automatically trigger the execution of Test, Suites and Test Workflows by creating or 
-updating corresponding Test, Test Suite or Test Workflow Execution CRDs.
+Testkube allows you to automatically trigger the execution of a Test Workflow by creating or 
+updating a corresponding Test Workflow Execution CRD.
 
-:::info
-Please note that Tests and Test Suites are being deprecated - [Read more](/articles/legacy-features)
+## Usage
+
+The below example **TestWorkflowExecution** `testworkflowexecution-example` runs the **Test Workflow** `testworkflow-example`
+when the **TestWorkflowExecution** is created or updated
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflowExecution
+metadata:
+  name: testworkflowexecution-example
+spec:
+  testWorkflow:
+    name: testworkflow-example
+```
+
+:::tip
+Check out the [TestWorkflowExecution CRD Reference](/articles/crds/testworkflows.testkube.io-v1#testworkflowexecution)
 :::
 
-## What are Testkube Execution CRDs?
+## Specifying Configuration Parameters
 
-In generic terms, an _Execution_ defines a _test_, _testsuite_ or _testworkflow_ which will be executed when 
-CRD is created or updated. For example, we could define a _TestExecution_ which _runs_ a _Test_ when 
-a _TestExecution_ gets _modified_.
+Add configuration parameters to the execution request to override the default values set in the Test Workflow using
+the `spec.executionRequest.config` field. 
 
-#### Selecting Resource
-
-Names are used when we want to select a specific resource. 
-
-```yaml
-test:
-  name: Testkube test name
-```
-
-or 
-
-```yaml
-testSuite:
-  name: Testkube test suite name
-```
-
-or 
-
-```yaml
-testWorkflow:
-  name: Testkube test workflow name
-```
-
-### Execution Request
-
-An Execution Request defines execution parameters for each specific resource.
-
-## Example
-
-Here are examples for a **Test Execution** *testexecution-example* which runs the **Test** *test-example*
-when the **Test Execution** is created or updated, a **Test Suite Execution** *testsuiteexecution-example* 
-which runs the **Test Suite** *testsuite-example* when the **Test Suite Execution** is created or updated
-and a **Test Workflow Execution** *testworkflowexecution-example* which runs the **Test Workflow** *testworkflow-example*
-when the **Test Workflow Execution** is created or updated
+The below example runs the TestWorkflow with the `browser` configuration parameter set to `chrome`
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -61,43 +42,28 @@ spec:
       browser: "chrome"
 ```
 
-:::tip
-Check out the [TestWorkflowExecution CRD Reference](/articles/crds/testworkflows.testkube.io-v1#testworkflowexecution)
-:::
+Read more about configuration parameters at [Test Workflow Parameterization](/articles/test-workflows-examples-configuration).
+
+## Adding Execution Tags
+
+The below example adds a tag `source: ci` to the Test Workflow Execution.
 
 ```yaml
-apiVersion: tests.testkube.io/v1
-kind: TestExecution
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflowExecution
 metadata:
-  name: testexecution-example
+  name: testworkflowexecution-example
 spec:
-  test:
-    name: test-example
+  testWorkflow:
+    name: testworkflow-example
   executionRequest:
-    variables:
-      VAR_TEST:
-        name: VAR_TEST
-        value: "ANY"
-        type: basic
+    tags:
+      source: "ci"
 ```
 
-```yaml
-apiVersion: tests.testkube.io/v1
-kind: TestSuiteExecution
-metadata:
-  name: testsuiteexecution-example
-spec:
-  testSuite:
-    name: testsuite-example
-  executionRequest:
-    variables:
-      VAR_TEST:
-        name: VAR_TEST
-        value: "ANY"
-        type: basic
-```
+Read more about execution tags at [Filtering Test Workflow Executions Using Tags](/articles/filtering-test-workflow-executions-using-tags).
 
-### Targeting specific Runner Agents
+## Targeting specific Runner Agents
 
 With the introduction of [Runner Agents](/articles/agents-overview#runner-agents) you can optionally specify
 which Runner(s) a Workflow should execute on. For example
@@ -113,13 +79,4 @@ spec:
 ...
 ```
 
-Will run on any Global Runner Agent with the `application: accounting` label, For more details,
-see our guide on [Runner Agent Targeting](/articles/test-workflows-running#runner-agent-targeting).
-
-:::note
-This is only supported for `TestWorkflowExecution` CRDs since the Runner Agents do not support Tests or Suites.
-:::
-
-## Architecture
-
-Testkube uses a Kubernetes Operator to reconcile Test, Test Suite and Test Workflow Execution CRDs state and run the corresponding test, test suite and test workflow when resource generation is changed.
+Will run on any Global Runner Agent with the `application: accounting` label, For more details, see our guide on [Runner Agent Targeting](/articles/test-workflows-running#runner-agent-targeting).
