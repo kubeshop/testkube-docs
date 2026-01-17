@@ -47,19 +47,16 @@ Read more about configuration parameters at [Test Workflow Parameterization](/ar
 ## Adding Execution Tags
 
 The below example adds a tag `source: ci` to the Test Workflow Execution.
-
-```yaml
-apiVersion: tests.testkube.io/v1
-kind: TestSuiteExecution
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflowExecution
 metadata:
-  name: testsuiteexecution-example
+  name: testworkflowexecution-example
 spec:
-  testSuite:
-    name: testsuite-example
+  testWorkflow:
+    name: testworkflow-example
   executionRequest:
     tags:
       source: "ci"
-```
 
 Read more about execution tags at [Filtering Test Workflow Executions Using Tags](/articles/filtering-test-workflow-executions-using-tags).
 
