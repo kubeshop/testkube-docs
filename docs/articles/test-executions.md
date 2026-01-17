@@ -47,6 +47,8 @@ Read more about configuration parameters at [Test Workflow Parameterization](/ar
 ## Adding Execution Tags
 
 The below example adds a tag `source: ci` to the Test Workflow Execution.
+
+```yaml
 apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflowExecution
 metadata:
@@ -57,9 +59,9 @@ spec:
   executionRequest:
     tags:
       source: "ci"
+```
 
 Read more about execution tags at [Filtering Test Workflow Executions Using Tags](/articles/filtering-test-workflow-executions-using-tags).
-
 
 ## Targeting specific Runner Agents
 
@@ -78,4 +80,3 @@ spec:
 ```
 
 Will run on any Global Runner Agent with the `application: accounting` label, For more details, see our guide on [Runner Agent Targeting](/articles/test-workflows-running#runner-agent-targeting).
-
