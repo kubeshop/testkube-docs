@@ -15,7 +15,7 @@ When your agent is offline, Workflows are shown as offline:
 
 It is still possible to drill down into the settings and results of each Workflow, but no changes can be made to the Workflow itself.
 
-For example, selecting the distributed-k6-workflow seen above allows you view each execution, with the "Read Only" marker at the top indicating
+For example, selecting the distributed-k6-workflow seen above allows you to view each execution, with the "Read Only" marker at the top indicating
 that the Workflow is in read-only mode:
 
 ![Offline Execution Results](images/readonly-workflow-executions.png)
