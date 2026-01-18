@@ -3,8 +3,9 @@
 > **On-Prem Installation Notice:**  
 > For details on installing and enabling the AI service on On-Prem deployments, please see the [On-Prem Installation](./ai-assistant-on-prem-install.md) page.
 
-Welcome to the documentation for the **Testkube AI Assistant** – an AI-powered assistant integrated directly into the Testkube Dashboard.  
-AI Assistant is designed to help you streamline your test orchestration by providing intelligent assistance in areas such as log analysis, dashboard navigation, YAML configuration, and general Testkube guidance.
+Welcome to the documentation for the **Testkube AI Assistant** – an AI-powered assistant integrated directly into the Testkube Dashboard, 
+designed to help you streamline your test orchestration by providing intelligent assistance in areas such as log analysis, dashboard navigation,
+YAML configuration, and general Testkube guidance.
 
 :::tip
 Check out the [Testkube MCP Server](/articles/mcp-overview) to see how you can integrate Testkube functionality into your AI-powered workflows and agents.
@@ -33,3 +34,20 @@ Check out the [Testkube MCP Server](/articles/mcp-overview) to see how you can i
 - [Enable AI Assistant](./ai-assistant-enable.md)
 - [How AI Assistant can help](./ai-assistant-can-help.md)
 - [How AI Assistant is different from other chatbots](./ai-assistant-is-different.md)
+
+## Accessing the AI Assistant
+
+The AI Assistant is integrated into the Testkube Dashboard via a corresponding button in the bottom left corner.
+
+![img_1.png](images/ai-assistant-button.png)
+
+Clicking it opens the prompt interface where you can interact with the Assistant any of the features described above.
+
+![img.png](images/ai-assistant-interface.png)
+
+The buttons in the top right corner of the AI Assistant allow you to maximize/minimize the interface, clear the prompt history or close the Assistant.
+
+:::tip
+The Testkube Dashboard provides shortcuts to the AI Assistant for the execution results of your Workflow 
+Executions - [Read More](/articles/AI-test-insights).
+:::
