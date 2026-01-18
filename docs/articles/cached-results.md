@@ -4,7 +4,7 @@ The Testkube Standalone Agent manages all Testkube Environment Resources (Workfl
 CRDs in the namespace where it is installed - [Read More](/articles/agents-overview#the-standalone-agent). All corresponding Workflow 
 Execution results are stored in the database either configured for the Testkube Control Plane or for the Agent when running in standalone mode.
 
-When using the Testkube Control Plane and the Standalone Agent in offline, the Testkube Dashboard still allows you to view previous 
+When using the Testkube Control Plane and the Standalone Agent is offline, the Testkube Dashboard still allows you to view previous 
 Workflow Execution results, while the Workflow itself is in read-only mode (since the agent is offline, no changes can be made).
 
 ## Accessing Cached Results
