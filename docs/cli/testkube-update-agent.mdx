@@ -17,8 +17,10 @@ testkube update agent <name> [flags]
 
 ```
   -L, --delete-label strings   labels to delete
+  -g, --group-name string      group name used to target executions
   -h, --help                   help for agent
   -l, --label strings          labels to set
+  -m, --runner-mode string     runner mode, allowed values: independent, group, global
 ```
 
 ### Options inherited from parent commands
@@ -28,7 +30,7 @@ testkube update agent <name> [flags]
   -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
-      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
+      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube-dev")
       --verbose                 show additional debug messages
 ```
 

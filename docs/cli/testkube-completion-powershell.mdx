@@ -15,9 +15,7 @@ Generate the autocompletion script for powershell.
 
 To load completions in your current shell session:
 
-```
 	testkube completion powershell | Out-String | Invoke-Expression
-```
 
 To load completions for every new session, add the output of the above command
 to your powershell profile.
@@ -41,7 +39,7 @@ testkube completion powershell [flags]
   -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
-      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
+      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube-dev")
       --verbose                 show additional debug messages
 ```
 

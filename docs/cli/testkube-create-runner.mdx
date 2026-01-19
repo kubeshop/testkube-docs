@@ -17,9 +17,9 @@ testkube create runner [flags]
 
 ```
   -e, --env strings     environment ID or slug that the agent have access to
-      --floating        create as a floating runner
-      --global          make it global runner
-      --group string    make it grouped runner
+      --floating        create as a floating agent
+      --global          make it global agent
+      --group string    make it grouped agent
   -h, --help            help for runner
   -l, --label strings   label key value pair: --label key1=value1
 ```
@@ -32,7 +32,7 @@ testkube create runner [flags]
       --crd-only                generate only crd
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
-      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
+      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube-dev")
       --verbose                 show additional debug messages
 ```
 

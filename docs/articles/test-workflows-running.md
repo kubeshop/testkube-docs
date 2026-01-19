@@ -279,7 +279,7 @@ When requesting to run a Workflow on a specific Runner Agent, either by name or 
 matching Runner Agent is available, Testkube will queue the execution of the Workflow indefinitely; once a corresponding
 Runner Agent is available, the queued Workflow will be executed accordingly (barring Floating license restrictions - [Read More](/articles/agents-overview#licensing-for-runner-agents)).
 
-You can abort queued executions using the corresponding [CLI Command](/cli/testkube-abort-testworkflowexecution) or from the Dashboard.
+You can abort queued executions using the corresponding [CLI Command](/cli/testkube-cancel-testworkflowexecution) or from the Dashboard.
 
 ## Silent Executions
 

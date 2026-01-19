@@ -16,9 +16,21 @@ testkube install agent <name> [flags]
 ### Options
 
 ```
-  -h, --help               help for agent
-  -n, --namespace string   namespace to install the agent
-  -s, --secret string      secret key for the selected agent
+      --create                        auto create that agent
+      --dry-run                       display helm commands only
+  -e, --env strings                   (with --create) environment ID or slug that the agent have access to
+  -N, --execution-namespace string    namespace to run executions (defaults to installation namespace)
+      --floating                      (with --create) create as a floating agent
+      --global                        make it global agent
+  -g, --global-template-path string   include global template
+      --group string                  make it grouped agent
+  -h, --help                          help for agent
+  -l, --label strings                 (with --create) label key value pair: --label key1=value1
+      --listener                      enable listener component (default: enabled when no component flags are set)
+  -n, --namespace string              namespace to install the agent
+      --runner                        enable runner component (default: enabled when no component flags are set)
+  -s, --secret string                 secret key for the selected agent
+      --version string                agent version to use (defaults to latest)
 ```
 
 ### Options inherited from parent commands

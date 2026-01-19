@@ -1,22 +1,22 @@
 ---
-title: "testkube abort testworkflowexecution"
+title: "testkube cancel"
 ---
 <head>
   <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
-## testkube abort testworkflowexecution
+## testkube cancel
 
-Abort test workflow execution
+Cancel executions
 
 ```
-testkube abort testworkflowexecution <executionName> [flags]
+testkube cancel <resourceName> [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for testworkflowexecution
+  -h, --help   help for cancel
 ```
 
 ### Options inherited from parent commands
@@ -26,11 +26,13 @@ testkube abort testworkflowexecution <executionName> [flags]
   -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
-      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
+      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube-dev")
       --verbose                 show additional debug messages
 ```
 
 ### SEE ALSO
 
-* [testkube abort](testkube-abort.mdx)	 - Abort tests or test suites
+* [testkube](testkube.mdx)	 - Testkube entrypoint for kubectl plugin
+* [testkube cancel testworkflowexecution](testkube-cancel-testworkflowexecution.mdx)	 - Cancel test workflow execution
+* [testkube cancel testworkflowexecutions](testkube-cancel-testworkflowexecutions.mdx)	 - Cancel all test workflow executions
 

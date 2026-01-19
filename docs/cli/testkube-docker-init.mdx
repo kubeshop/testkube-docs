@@ -28,7 +28,6 @@ testkube docker init [flags]
       --docker-container string         Docker container name for Testkube Docker Agent (default "testkube-agent")
       --docker-image string             Docker image for Testkube Docker Agent (default "kubeshop/testkube-agent:<latest-stable-release>")
       --env-id string                   Testkube Pro environment id [required for centralized mode]. It can be skipped for no login mode
-      --feature-logs-v2                 Logs v2 feature flag
   -h, --help                            help for init
       --logs-prefix string              usually don't need to be changed [required for custom cloud mode] (default "logs")
       --logs-uri string                 Testkube Pro logs URI [required for centralized mode]
@@ -48,7 +47,7 @@ testkube docker init [flags]
   -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
-      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
+      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube-dev")
       --verbose                 show additional debug messages
 ```
 

@@ -7,7 +7,7 @@ title: "testkube watch"
 
 ## testkube watch
 
-Watch tests or test suites
+Watch test workflows
 
 ```
 testkube watch <resourceName> [flags]
@@ -26,14 +26,12 @@ testkube watch <resourceName> [flags]
   -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
-      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
+      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube-dev")
       --verbose                 show additional debug messages
 ```
 
 ### SEE ALSO
 
 * [testkube](testkube.mdx)	 - Testkube entrypoint for kubectl plugin
-* [testkube watch execution](testkube-watch-execution.mdx)	 - Watch logs output from executor pod
-* [testkube watch testsuiteexecution](testkube-watch-testsuiteexecution.mdx)	 - Watch test suite
 * [testkube watch testworkflowexecution](testkube-watch-testworkflowexecution.mdx)	 - Watch output from test workflow execution
 

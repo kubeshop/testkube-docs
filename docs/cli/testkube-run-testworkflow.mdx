@@ -16,8 +16,7 @@ testkube run testworkflow [name] [flags]
 ### Options
 
 ```
-      --config stringToString          configuration variables in a form of name1=val1 passed to executor (default [])
-      --disable-webhooks               disable webhooks for this execution
+      --config stringArray             configuration variables in form key=value or key={"json":"value"}: supports both simple strings and JSON objects/arrays
   -d, --download-artifacts             download artifacts automatically
       --download-dir string            download dir (default "artifacts")
       --format string                  data format for storing files, one of folder|archive (default "folder")
@@ -29,10 +28,12 @@ testkube run testworkflow [name] [flags]
       --parallel-step-name string      test workflow parallel step name or reference
       --service-index int              test workflow service index starting from 0
       --service-name string            test workflow service name
+      --silent                         run test workflow silently (disables webhooks, insights, health, metrics, cdevents)
       --tag stringToString             execution tag adds a tag to execution in form of name1=val1 passed to executor (default [])
       --target stringArray             runner labels to match
       --target-not stringArray         runner labels to not match
       --target-replicate stringArray   runner labels to replicate over
+  -v, --variable stringArray           execution variable passed to executor
   -f, --watch                          watch for changes after start
 ```
 
@@ -44,12 +45,12 @@ testkube run testworkflow [name] [flags]
       --go-template string      go template to render (default "{{.}}")
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
-      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
+      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube-dev")
   -o, --output string           output type can be one of json|yaml|pretty|go (default "pretty")
       --verbose                 show additional debug messages
 ```
 
 ### SEE ALSO
 
-* [testkube run](testkube-run.mdx)	 - Runs tests, test suites, test workflows or test workflow executions
+* [testkube run](testkube-run.mdx)	 - Run  test workflows or re-run executions
 

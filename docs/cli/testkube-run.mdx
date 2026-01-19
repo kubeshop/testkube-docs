@@ -7,7 +7,7 @@ title: "testkube run"
 
 ## testkube run
 
-Runs tests, test suites, test workflows or test workflow executions
+Run  test workflows or re-run executions
 
 ```
 testkube run <resourceName> [flags]
@@ -28,15 +28,13 @@ testkube run <resourceName> [flags]
   -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
-      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
+      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube-dev")
       --verbose                 show additional debug messages
 ```
 
 ### SEE ALSO
 
 * [testkube](testkube.mdx)	 - Testkube entrypoint for kubectl plugin
-* [testkube run test](testkube-run-test.mdx)	 - Starts new test
-* [testkube run testsuite](testkube-run-testsuite.mdx)	 - Starts new test suite
 * [testkube run testworkflow](testkube-run-testworkflow.mdx)	 - Starts test workflow execution
 * [testkube run testworkflowexecution](testkube-run-testworkflowexecution.mdx)	 - ReRun test workflow execution
 

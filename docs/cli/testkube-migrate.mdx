@@ -30,7 +30,7 @@ testkube migrate <resourceName> [flags]
   -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
-      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
+      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube-dev")
       --verbose                 show additional debug messages
 ```
 
@@ -38,6 +38,4 @@ testkube migrate <resourceName> [flags]
 
 * [testkube](testkube.mdx)	 - Testkube entrypoint for kubectl plugin
 * [testkube migrate agent](testkube-migrate-agent.mdx)	 - manual migrate agent command
-* [testkube migrate test](testkube-migrate-test.mdx)	 - Migrate all available tests to test workflows
-* [testkube migrate testsuite](testkube-migrate-testsuite.mdx)	 - Migrate all available test suites to test workflows
 

@@ -26,6 +26,7 @@ testkube get testworkflowexecution [executionID] [flags]
   -l, --label strings         label key value pair: --label key1=value1
       --limit int             max number of records to return (default 1000)
       --logs-only             show only execution logs
+      --status string         test workflow execution status filter, supports comma-separated list of statuses (e.g., 'running', 'passed,failed')
       --tag strings           tag key value pair: --tag key1=value1
   -w, --testworkflow string   test workflow name
 ```
@@ -38,7 +39,7 @@ testkube get testworkflowexecution [executionID] [flags]
       --go-template string      go template to render (default "{{.}}")
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
-      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
+      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube-dev")
   -o, --output string           output type can be one of json|yaml|pretty|go (default "pretty")
       --verbose                 show additional debug messages
 ```
