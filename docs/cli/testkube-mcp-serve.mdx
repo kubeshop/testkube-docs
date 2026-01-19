@@ -1,0 +1,66 @@
+---
+title: "testkube mcp serve"
+---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
+## testkube mcp serve
+
+Start MCP server for AI assistant integration (runs silently, use --verbose for output)
+
+### Synopsis
+
+Start a Model Context Protocol (MCP) server that enables AI assistants to interact with Testkube.
+
+The MCP server provides AI assistants with tools to:
+• Execute and monitor test workflows
+• Analyze test results, logs, and artifacts
+• Navigate test execution history  
+• Manage test resources and configurations
+
+Please get in touch on Slack for questions and feedback: https://bit.ly/testkube-slack
+
+Requirements:
+• OAuth authentication (run 'testkube login')
+• Testkube environment with proper context
+
+The server runs silently by default to avoid interfering with JSON-RPC communication
+over stdio. Use --verbose to see detailed output during startup.
+
+Setup Guide: https://docs.testkube.io/articles/mcp-setup
+Configuration Examples: https://docs.testkube.io/articles/mcp-configuration
+
+```
+testkube mcp serve [flags]
+```
+
+### Options
+
+```
+      --base-url string          Base URL for Testkube API (uses context API URL if not specified)
+      --debug                    Enable debug mode with detailed operation information
+  -h, --help                     help for serve
+      --shttp-cert-file string   TLS certificate file for SHTTP server
+      --shttp-host string        Host to bind SHTTP server to, defaults to 0.0.0.0 when running in Docker, localhost otherwise
+      --shttp-key-file string    TLS private key file for SHTTP server
+      --shttp-port int           Port to bind SHTTP server to (default 8080)
+      --shttp-tls                Enable TLS for SHTTP server
+      --transport string         Transport protocol: stdio or shttp (default "stdio")
+```
+
+### Options inherited from parent commands
+
+```
+  -a, --api-uri string          api uri, default value read from config if set (default "http://localhost:8088")
+  -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
+      --header stringToString   headers for direct client key value pair: --header name=value (default [])
+      --insecure                insecure connection for direct client
+      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube-dev")
+      --verbose                 show additional debug messages
+```
+
+### SEE ALSO
+
+* [testkube mcp](testkube-mcp.mdx)	 - MCP server enables AI assistants to run workflows, analyze results (Preview)
+

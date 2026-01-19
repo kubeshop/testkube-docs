@@ -1,0 +1,38 @@
+---
+title: "testkube install crd"
+---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
+## testkube install crd
+
+
+
+```
+testkube install crd [flags]
+```
+
+### Options
+
+```
+      --dry-run               display helm commands only
+  -h, --help                  help for crd
+  -n, --namespace string      namespace to install the Helm Chart
+  -r, --release-name string   Helm Chart release name (default "testkube-crd")
+```
+
+### Options inherited from parent commands
+
+```
+  -a, --api-uri string          api uri, default value read from config if set (default "http://localhost:8088")
+  -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
+      --header stringToString   headers for direct client key value pair: --header name=value (default [])
+      --insecure                insecure connection for direct client
+      --verbose                 show additional debug messages
+```
+
+### SEE ALSO
+
+* [testkube install](testkube-install.mdx)	 - 
+

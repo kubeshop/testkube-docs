@@ -1,0 +1,61 @@
+---
+title: "testkube"
+sidebar_position: 1
+---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
+## testkube
+
+Testkube entrypoint for kubectl plugin
+
+```
+testkube [flags]
+```
+
+### Options
+
+```
+  -a, --api-uri string          api uri, default value read from config if set (default "http://localhost:8088")
+  -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
+      --header stringToString   headers for direct client key value pair: --header name=value (default [])
+  -h, --help                    help for testkube
+      --insecure                insecure connection for direct client
+      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube-dev")
+      --verbose                 show additional debug messages
+```
+
+### SEE ALSO
+
+* [testkube agent](testkube-agent.mdx)	 - Testkube Pro Agent related commands
+* [testkube cancel](testkube-cancel.mdx)	 - Cancel executions
+* [testkube completion](testkube-completion.mdx)	 - Generate the autocompletion script for the specified shell
+* [testkube config](testkube-config.mdx)	 - Set feature configuration value
+* [testkube create](testkube-create.mdx)	 - Create resource
+* [testkube create-ticket](testkube-create-ticket.mdx)	 - Create bug ticket
+* [testkube dashboard](testkube-dashboard.mdx)	 - Open Testkube dashboard
+* [testkube debug](testkube-debug.mdx)	 - Print debugging info
+* [testkube delete](testkube-delete.mdx)	 - Delete resources
+* [testkube diagnostics](testkube-diagnostics.mdx)	 - Diagnoze testkube issues with ease
+* [testkube disable](testkube-disable.mdx)	 - Disable feature
+* [testkube docker](testkube-docker.mdx)	 - Testkube Docker commands
+* [testkube download](testkube-download.mdx)	 - Artifacts management commands
+* [testkube enable](testkube-enable.mdx)	 - Enable feature
+* [testkube generate](testkube-generate.mdx)	 - Generate resources commands
+* [testkube get](testkube-get.mdx)	 - Get resources
+* [testkube init](testkube-init.mdx)	 - Init Testkube profiles(standalone-agent|demo|agent)
+* [testkube install](testkube-install.mdx)	 - 
+* [testkube login](testkube-login.mdx)	 - Login to Testkube Pro
+* [testkube mcp](testkube-mcp.mdx)	 - MCP server enables AI assistants to run workflows, analyze results (Preview)
+* [testkube migrate](testkube-migrate.mdx)	 - Migrate resources
+* [testkube pro](testkube-pro.mdx)	 - Testkube Pro commands
+* [testkube purge](testkube-purge.mdx)	 - Uninstall Testkube from your current kubectl context
+* [testkube run](testkube-run.mdx)	 - Run  test workflows or re-run executions
+* [testkube set](testkube-set.mdx)	 - Set resources
+* [testkube status](testkube-status.mdx)	 - Show status of feature or resource
+* [testkube update](testkube-update.mdx)	 - Update resource
+* [testkube upgrade](testkube-upgrade.mdx)	 - Upgrade Helm chart, install dependencies and run migrations
+* [testkube version](testkube-version.mdx)	 - Shows version and build info
+* [testkube watch](testkube-watch.mdx)	 - Watch test workflows
+
