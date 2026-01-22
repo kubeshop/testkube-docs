@@ -1,81 +1,87 @@
 # Workflow YAML Editor
 
-This Definition panel under the Workflow settings provides a powerful YAML editor for editing your Workflows. 
+The **Workflow Editor** allows you to configure your Workflows via a dedicated YAML editor.
+
+The **Settings** tab [Workflows | Select Workflow from Dashboard | Settings] is the primary interface for building the YAML file, encompassing configurable settings 
+such as **General**, **Execution**, **Test Content**, **Resource Usage**, **Variables & Secrets**, **Resource Group**, **Scheduling**, and **Definition**. 
+More specifically, configuring these settings dynamically generates and updates the YAML file in the **Definition** setting. Some changes, however, you must make
+manually in the YAML file itself. For additional information, read [Workflow Settings](../articles/testkube-dashboard-workflow-details#workflow-settings-tabs).
 
 :::tip
-The editor uses the same editing component as VS-Code, so any editing features you are
-familiar with from there should apply here also.
+The **Workflow Editor** uses the same technology that powers VS Code, allowing you to use the same editing features and mirroring your user experience.
 :::
 
-![Definition Settings](../img/definition-settings.png)
+![Definition Settings](../articles/images/workflow-editor-settings-definition.png)
 
 ## Editor Actions
 
-The toolbar at the top right provides the following actions (left to right):
+The toolbar (YAML file top right) provides:
 
-- Search - global search and replace functionality, with regex, capitalization, etc.
-- Undo / Redo / Copy
-- Inline templates - to help you understand how used templates "play into" your Workflow by showing a side-by-side
-  diff view of your Workflow with and without expanded templates (see example below).
-- Full-screen mode - opens the editor in a larger panel, helpful for editing larger Workflows.
+* **Search** – Finds specific text or keywords within the YAML configuration.
+* **Undo** – Reverts your most recent edit or change.
+* **Redo** – Re-applies an action previously reversed.
+* **Copy** – Duplicates selection to clipboard for later use, such as paste.
+* **Inline Templates** – Displays two YAML files, one abbreviated and the other extended with more details.
+* **Fullscreen** – Enlarges the **Workflow Editor** for easier viewing and editing.
+* **Save** – Updates the Workflow configuration.
 
-Furthermore, the editor provides an F1-popup menu with an extensive list of editor actions:
+You can select text within the YAML configuration then press F1 to view and use other **Workflow Editor** actions.
 
-![Editor Popup Menu](../img/editor-popup-menu.png)
+![Editor Popup Menu](../articles/images/workflow-editor-f1-popup-menu-editor-actions.png)
 
-Once you're happy with your changes, use the Save & Run option to the top right to immediately trigger an execution
-after saving, the corresponding Execution Details will be opened automatically.
+When you edit the YAML directly, the previously disabled **Save** button (YAML file top right) becomes an enabled **Save & Run** button with an attached drop-down arrow. After you complete YAML updates, 
+you can select **Save** from the drop-down list box to update the Workflow configuration or select **Save & Run** to update the Workflow configuration and trigger the Execution. 
+
+![Save & Run](../articles/images/workflow-editor-save-run.png)
+
+When you select **Save & Run**, you can view the [Execution Details](../articles/testkube-dashboard-execution-details.md) in the modal that opens. From this modal, you may also **Run again**.
+
+![Save & Run Results](../articles/images/workflow-editor-save-run-results.png)
 
 ## Template Inlining
 
-The below screenshot shows the Inline-Templates view in Full-screen mode:
-- the left panel shows the actual workflow with the `use` clause
-- the right part shows the steps inlined by the `official--artillery--v1` template
+This tool allows you to preview the expanded YAML of your Workflow when using [Workflow Templates](../articles/test-workflow-templates.md): one (left) is abbreviated; 
+the other (right) displays a more complete and extended YAML version. Re-select **Template Inlining** to remove these previews.
 
-![Test Workflow editor in fullscreen with inline diff](images/workflows-fullscreen-inline-diff.png)
+![Inline Template](../articles/images/workflow-editor-inline-template.png)
 
-## Workflow Specific Editor Intelligence
+## Workflow-Specific Editor Intelligence
 
-The Workflow YAML editor in the Definition panel described above the has a number of 
-features that help you work specifically with Workflow YAML:
+The **Workflow Editor** includes several features.
 
-### Documentation Hovers 
+### Hover Documentation 
 
-Helps you understand the purpose/usage of the corresponding Workflow property.
+This feature helps you understand the purpose and usage of the corresponding Workflow property.
 
 ![Editor Documentation Hover](../img/editor-documentation-hover.png)
 
 ### Autocomplete for Applicable Properties
 
-Helps you craft valid Workflow YAMLs
+This feature predicts or suggests YAML keywords or values as you type, allowing you to select the suggestion(s) as appropriate.
 
-![Workflow Properties Autocomplete](../img/workflow-properties-autocomplete.png)
+![Workflow Properties Autocomplete](../articles/images/workflow-editor-auto-complete.png)
 
 ### Error Indicators for Invalid Properties
 
-Helps you find and correct Workflow YAML errors, in the below screenshot the `service` property is marked
-(it should be `services`)
+The feature adds an underline (sometimes called an *error squiggle*) below a keyword or **Property** which indicates, for example, a misspelling. This feature allows you to readily identify and correct this and similar errors.
 
 ![Workflow Editor Error Marker](images/workflow-editor-error-marker.png)
 
 ### Autocomplete for Template Names
 
-Helps you select valid template(s) used in your Workflows wherever a template name is expected:
+This feature helps you select valid template(s) used in your Workflows.
 
 ![Workflow Editor Template Auto-complete](images/workflow-editor-template-autocomplete.png)
 
-### Clickable Template References
+### Template References for Selection
 
-Helps you navigate/open used templates for editing:
+This feature helps you navigate and open existing templates.
 
-![Workflow Editor Clickable Template References](images/workflow-editor-click-template-reference.png)
+![Workflow Editor Templates](images/workflow-editor-click-template-reference.png)
 
 ## Ignored Changes
 
-Testkube stores the current health metrics of a Workflow under the status property, which is also visible in the editor:
+Testkube associates the current Workflow health metrics with the **Status** property, which is visible in the **Workflow Editor**. Since Workflow health is based on underlying metrics,
+the **Workflow Editor** disregards any changes you make in this section when you **Save** the YAML file configuration.
 
-![Ignored Editor Changes](images/ignored-editor-changes.png)
-
-Any changes made to this section will be ignored when saving.
-
-
+![Status Changes Ignored](../articles/images/workflow-editor-status-change-ignored.png)
