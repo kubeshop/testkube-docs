@@ -147,7 +147,7 @@
 - **Type checking**: `npm run typecheck`
 - **Clear cache**: `npm run clear`
 - **Serve built site**: `npm run serve`
-- Site is automatically deployed (likely via GitHub Pages or similar)
+- Site is automatically deployed with Vercel.
 
 ## Custom Components
 
