@@ -52,18 +52,6 @@ testkube-api:
         sidecar.istio.io/inject: "false"
 ```
 
-#### Disable Istio for Operator Hooks
-
-Chart `testkube`:
-
-```yaml
-testkube-operator:
-    webhook:
-        patch:
-            podAnnotations:
-                sidecar.istio.io/inject: "false"
-```
-
 #### Define a Global Test Workflows Template
 
 Chart `testkube`:

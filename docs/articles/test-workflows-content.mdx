@@ -371,12 +371,12 @@ spec:
 steps:
 - content:
     git:
-      uri: https://github.com/kubeshop/testkube-operator
-      mountPath: /operator
+      uri: https://github.com/kubeshop/helm-charts
+      mountPath: /helm-charts
   # highlight-start
   # NOTE: Cloned data only available for these nested steps
   steps:
-  - shell: ls -lah /data/repo && ls -lah /operator
+  - shell: ls -lah /data/repo && ls -lah /helm-charts
   # highlight-end
 ```
 
@@ -404,7 +404,7 @@ spec:
       image: bitnami/git:2.49.0
       shell: |
         git clone --depth 1 https://github.com/kubeshop/testkube /repos/testkube
-        git clone --depth 1 https://github.com/kubeshop/testkube-operator /repos/operator
+        git clone --depth 1 https://github.com/kubeshop/helm-charts /repos/helm-charts
   - shell: tree /repos
 ```
 
@@ -421,7 +421,7 @@ spec:
       image: bitnami/git:2.49.0
       shell: |
         git clone --depth 1 https://github.com/kubeshop/testkube /data/repos/testkube
-        git clone --depth 1 https://github.com/kubeshop/testkube-operator /data/repos/operator
+        git clone --depth 1 https://github.com/kubeshop/helm-charts /data/repos/helm-charts
   - shell: tree /data/repos
 ```
 
@@ -443,7 +443,7 @@ spec:
       image: bitnami/git:2.49.0
       shell: |
         git clone --depth 1 https://github.com/kubeshop/testkube /repos/testkube
-        git clone --depth 1 https://github.com/kubeshop/testkube-operator /repos/operator
+        git clone --depth 1 https://github.com/kubeshop/helm-charts /repos/helm-charts
   - shell: tree /repos
 ```
 
