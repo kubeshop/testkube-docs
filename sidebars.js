@@ -1076,6 +1076,11 @@ const sidebars = {
         { type: "doc", label: "Prometheus", id: "articles/metrics" },
         {
           type: "doc",
+          label: "Scheduler Metrics",
+          id: "articles/scheduler-metrics",
+        },
+        {
+          type: "doc",
           label: "Allure Reports",
           id: "articles/allure-reports",
         },
