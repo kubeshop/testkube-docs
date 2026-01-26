@@ -19,3 +19,12 @@ Enable AI Assistant in one of two ways:
    Navigate to the **Product Features** tab in your organization settings and toggle the AI Assistant feature on.
 
 Once enabled, AI Assistant will integrate with your Testkube Dashboard, ready to assist you and your team with your testing needs.
+
+## Default LLM and Model
+
+The default LLM used by the AI Assistant is OpenAIs [GPT-5.2-Codex](https://openai.com/index/introducing-gpt-5-2-codex/).
+
+For On-Prem-installations you can configure your own OpenAI API Key or separate LLM/model as described in the 
+[On-Prem Installation](/articles/ai-assistant-on-prem-install) instructions.
+
+For Cloud-installations the default LLM and model can not be changed.

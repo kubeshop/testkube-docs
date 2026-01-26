@@ -655,6 +655,53 @@ const sidebars = {
           items: [
             {
               type: "category",
+              label: "AI Agents",
+              items: [
+                {
+                  type: "doc",
+                  label: "Overview",
+                  id: "articles/ai-agents",
+                },
+                {
+                  type: "doc",
+                  label: "AI Agent Chats",
+                  id: "articles/using-ai-agents",
+                },
+                {
+                  type: "doc",
+                  label: "Defining AI Agents",
+                  id: "articles/defining-ai-agents",
+                },
+                {
+                  type: "doc",
+                  label: "Connecting MCP Servers",
+                  id: "articles/mcp-servers-for-ai-agents",
+                },
+                {
+                  type: "category",
+                  label: "Example Agents",
+                  items: [
+                    {
+                      type: "doc",
+                      label: "Remediation",
+                      id: "articles/remediation-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Trend Analysis",
+                      id: "articles/trend-analysis-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Issue Reporting",
+                      id: "articles/issue-reporting-agent",
+                    }
+                  ],
+                },
+              ],
+            },
+            {
+              type: "category",
               label: "AI Assistant",
               items: [
                 {
@@ -691,7 +738,7 @@ const sidebars = {
             },
             {
               type: "category",
-              label: "MCP Server",
+              label: "Testkube MCP Server",
               items: [
                 {
                   type: "doc",
