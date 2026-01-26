@@ -172,15 +172,14 @@ helm template test kubeshop/testkube --skip-crds --set mongodb.enabled=false --s
 sort -o "$AGENT_IMAGES" "$AGENT_IMAGES"
 
 # Specify image descriptions
-add_image_desc "quay.io/brancz/kube-rbac-proxy" "Small HTTP proxy used by the Testkube operator to perform RBAC authorization against the Kubernetes API."
+add_image_desc "quay.io/brancz/kube-rbac-proxy" "Small HTTP proxy for RBAC authorization against the Kubernetes API."
 # Source: https://github.com/kubeshop/kube-webhook-certgen
-add_image_desc "kubeshop/kube-webhook-certgen" "Used to generate certificates for the Testkube operator admission webhook."
+add_image_desc "kubeshop/kube-webhook-certgen" "Used to generate certificates for admission webhooks."
 add_image_desc "kubeshop/testkube-api-server" "API server for the Testkube agent."
-add_image_desc "kubeshop/testkube-operator" "Controller for the Testkube operator."
 add_image_desc "nats" "NATS message broker."
 add_image_desc "natsio/nats-server-config-reloader" "NATS config reloader."
 add_image_desc "natsio/nats-server-config-reloader" "NATS config reloader."
-add_image_desc "rancher/kubectl" "Image containing the \`kubectl\` binary used in the admission webhooks of the Testkube operator."
+add_image_desc "rancher/kubectl" "Image containing the \`kubectl\` binary used in admission webhooks."
 add_image_desc "kubeshop/testkube-tw-init" "Image used to initialize a Workflow execution."
 add_image_desc "kubeshop/testkube-tw-toolkit" "Image used within a Workflow execution."
 add_image_desc "natsio/prometheus-nats-exporter" "NATS metrics exporter."
