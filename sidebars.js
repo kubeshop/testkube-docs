@@ -674,7 +674,7 @@ const sidebars = {
                 },
                 {
                   type: "doc",
-                  label: "Connecting MCP Servers",
+                  label: "Connected MCP Servers",
                   id: "articles/mcp-servers-for-ai-agents",
                 },
                 {
