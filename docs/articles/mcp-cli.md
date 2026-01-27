@@ -1,4 +1,4 @@
-# Testkube MCP Server via CLI
+# Testkube MCP Server with CLI
 
 Run the Testkube MCP Server locally using the Testkube CLI. This approach is ideal for local development and when you need full control over the MCP server process.
 

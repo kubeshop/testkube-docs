@@ -1,4 +1,4 @@
-# Docker MCP Server
+# Testkube MCP Server with Docker
 
 The Testkube MCP Server is available on [DockerHub](https://hub.docker.com/repository/docker/kubeshop/testkube-mcp-server) and can
 be used in IDEs via stdio and remotely over shttp in local agent scenarios.

@@ -1,4 +1,4 @@
-# AI Architecture
+# Testkube AI Architecture
 
 This document provides a high-level overview of the architecture powering Testkube's AI capabilities, 
 including the AI Assistant and AI Agents. Understanding this architecture helps you leverage these 
@@ -153,7 +153,7 @@ Each interaction with an AI Agent or the AI Assistant creates a session (also ca
 
 ### State Persistence
 
-Conversation state is stored in a PostgreSQL database, ensuring:
+Conversation state is stored in the database configured for the Testkube Control Plane (PostgreSQL or MongoDB), ensuring:
 
 - **Reliability**: Sessions survive service restarts
 - **Multi-user Access**: Multiple users can view and interact with the same session (with appropriate permissions)
