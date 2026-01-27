@@ -654,6 +654,11 @@ const sidebars = {
           label: "Testkube AI",
           items: [
             {
+              type: "doc",
+              label: "Architecture",
+              id: "articles/ai-architecture",
+            },
+            {
               type: "category",
               label: "AI Agents",
               items: [
