@@ -1,4 +1,4 @@
-# MCP Server Security & Compliance
+# Testkube MCP Server Security & Compliance
 
 The **Testkube MCP Server** integrates with your existing Testkube security infrastructure, ensuring all operations are authenticated, authorized, and auditable.
 
