@@ -2,7 +2,7 @@
 
 Testkube is designed from the ground up to integrate seamlessly with GitOps workflows. As a Kubernetes-native 
 Continuous Testing Platform, Testkube stores all its core resources as Custom Resource Definitions (CRDs), making 
-Git the natural source of truth for your test definitions, triggers, and execution policies.
+Git the natural source of truth for your TestWorkflow, TestTrigger and Webhook definitions.
 
 This guide provides a high-level overview of how Testkube fits into GitOps-managed infrastructure.
 
@@ -14,7 +14,7 @@ making it difficult to validate deployments consistently.
 
 Testkube addresses this by:
 
-- **Storing tests as Kubernetes CRDs** - Test Workflows, Triggers, and Templates live alongside your application 
+- **Storing tests as Kubernetes CRDs** - TestWorkflows, Triggers, Webhooks, etc. live alongside your application 
   manifests in Git, versioned and reviewed through the same processes.
 - **Executing tests inside your cluster** - No need to expose services externally for testing; tests run where 
   your applications run.
@@ -22,77 +22,6 @@ Testkube addresses this by:
   deployments actually change, not just when pipelines complete.
 - **Supporting declarative execution** - TestWorkflowExecution CRDs allow you to trigger tests declaratively, 
   perfect for GitOps reconciliation loops.
-
-## GitOps Integration Architecture
-
-The following diagram illustrates how Testkube integrates into a typical GitOps workflow:
-
-```mermaid
-flowchart TB
-    subgraph git["Git Repository"]
-        manifests["Application Manifests"]
-        workflows["Test Workflows"]
-        triggers["Test Triggers"]
-        templates["Workflow Templates"]
-    end
-
-    subgraph gitops["GitOps Controller"]
-        argo["ArgoCD / Flux"]
-    end
-
-    subgraph cluster["Kubernetes Cluster"]
-        subgraph apps["Application Namespace"]
-            deployment["Deployments"]
-            services["Services"]
-        end
-        
-        subgraph testkube["Testkube Namespace"]
-            agent["Testkube Agent"]
-            tw["TestWorkflow CRDs"]
-            tt["TestTrigger CRDs"]
-        end
-    end
-
-    subgraph cp["Testkube Control Plane"]
-        dashboard["Dashboard"]
-        storage["Results & Artifacts"]
-    end
-
-    git --> |"sync"| gitops
-    gitops --> |"reconcile"| deployment
-    gitops --> |"reconcile"| services
-    gitops --> |"reconcile"| tw
-    gitops --> |"reconcile"| tt
-    
-    deployment --> |"events"| agent
-    agent --> |"execute"| tw
-    tt --> |"trigger"| agent
-    agent --> |"report"| cp
-```
-
-## Test Execution Flow
-
-When using GitOps with Testkube, test executions can be triggered through multiple mechanisms. The sequence 
-diagram below shows the typical flow when a deployment change triggers test execution:
-
-```mermaid
-sequenceDiagram
-    participant Git as Git Repository
-    participant GitOps as ArgoCD/Flux
-    participant K8s as Kubernetes API
-    participant Agent as Testkube Agent
-    participant CP as Control Plane
-
-    Git->>GitOps: Push changes
-    GitOps->>K8s: Sync resources
-    K8s->>K8s: Update Deployment
-    K8s->>Agent: Deployment modified event
-    Agent->>Agent: Match TestTrigger
-    Agent->>K8s: Create Workflow Job
-    K8s->>K8s: Execute test containers
-    Agent->>CP: Stream logs & results
-    CP->>CP: Store artifacts
-```
 
 ## Core Concepts
 
