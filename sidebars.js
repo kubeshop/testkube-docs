@@ -1053,23 +1053,34 @@ const sidebars = {
           label: "CircleCI",
           id: "articles/circleci",
         },
-        {type: "doc", label: "ArgoCD", id: "articles/argocd-integration"},
         {
-          type: "doc",
-          label: "Argo Rollouts",
-          id: "articles/argorollouts-integration",
+          type: "category",
+          label: "GitOps",
+          items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/gitops-overview",
+            },
+            {type: "doc", label: "ArgoCD", id: "articles/argocd-integration"},
+            {
+              type: "doc",
+              label: "Argo Rollouts",
+              id: "articles/argorollouts-integration",
+            },
+            {
+              type: "doc",
+              label: "Argo Events",
+              id: "articles/argoevents-integration",
+            },
+            {
+              type: "doc",
+              label: "Argo Workflows",
+              id: "articles/argoworkflows-integration",
+            },
+            {type: "doc", label: "Flux", id: "articles/flux-integration"},
+          ],
         },
-        {
-          type: "doc",
-          label: "Argo Events",
-          id: "articles/argoevents-integration",
-        },
-        {
-          type: "doc",
-          label: "Argo Workflows",
-          id: "articles/argoworkflows-integration",
-        },
-        {type: "doc", label: "Flux", id: "articles/flux-integration"},
         {type: "doc", label: "CDEvents", id: "articles/cd-events"},
         {type: "doc", label: "Tekton", id: "articles/tekton"},
         {
