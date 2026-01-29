@@ -13,7 +13,9 @@ If your favorite tool isn't covered here, have a look at [General Steps for CI/C
 us know on our Slack channel so we can add it!
 :::
 
-## CI/CD Tooling
+## CI/CD Pipelines
+
+Integrate Testkube into your continuous integration and delivery pipelines:
 
 - [GitHub](/articles/github-actions) - Learn to integrate Testkube with GitHub Workflows.
 - [GitLab](/articles/gitlab) - Learn how to integrate Testkube with GitLab CI.
@@ -24,35 +26,48 @@ us know on our Slack channel so we can add it!
 - [BitBucket](https://testkube.io/learn/unleashing-the-power-of-ci-cd-testing-with-bitbucket-and-testkube) - Learn how to integrate Testkube with BitBucket.
 - [CircleCI](/articles/circleci) - Learn how to integrate Testkube with CircleCI.
 - [Tekton](/articles/tekton) - Learn how to integrate Testkube with Tekton.
-- [Keptn](https://testkube.io/learn/leveraging-testkube-as-a-quality-gate-in-multi-stage-deployments-with-keptn) - Leveraging Testkube as a Quality Gate in Multi-Stage Deployments with Keptn.
-- [Argo Rollouts](argorollouts-integration) - Learn how to use Testkube with Progressive Delivery in Argo Rollouts.
 
-## GitOps Tooling
+## GitOps
 
+Use Testkube in GitOps-managed Kubernetes environments:
+
+- [GitOps Overview](/articles/gitops-overview) - High-level guide to using Testkube with GitOps tooling.
 - [ArgoCD](/articles/argocd-integration) - Learn how to integrate Testkube with ArgoCD.
+- [Argo Rollouts](/articles/argorollouts-integration) - Learn how to use Testkube with Progressive Delivery in Argo Rollouts.
+- [Argo Events](/articles/argoevents-integration) - Learn how to trigger Testkube from Argo Events.
+- [Argo Workflows](/articles/argoworkflows-integration) - Learn how to run Testkube CLI commands from Argo Workflows.
 - [Flux](/articles/flux-integration) - Learn how to integrate Testkube with Flux.
+- [CDEvents](/articles/cd-events) - Learn about CDEvents emitted by Testkube.
+- [Keptn](https://testkube.io/learn/leveraging-testkube-as-a-quality-gate-in-multi-stage-deployments-with-keptn) - Leveraging Testkube as a Quality Gate in Multi-Stage Deployments with Keptn.
 
-## Kubernetes
+## Collaboration & Alerting
 
-- [Kubernetes Events](/articles/k8s-events) - Learn about events emitted by Testkube.
-- [Prometheus](/articles/metrics) - Learn about metrics exposed by Testkube.
-- [Grafana](/articles/grafana) - Learn about how to integrate with Grafana.
+Connect Testkube to your team communication and incident management tools:
 
-## Process/Workflows
-
-- [Argo Workflows](/articles/argoworkflows-integration) - Learn how to run Testkube CLI commands from Argo Workflows
 - [Slack](/articles/slack-integration) - Learn about how to configure Slack integration with Testkube.
-- [PagerDuty](https://testkube.io/learn/critical-test-based-alerting-with-pagerduty-and-testkube) - Learn about how to integrate Testkube with PagerDuty for alerting.
-- [Zapier](https://testkube.io/learn/integrating-testkube-and-zapier-for-instant-email-alerts) - Learn about how to integrate Testkube with Zapier.
 - [Microsoft Teams](/articles/teams-integration) - Learn about how to integrate with Microsoft Teams.
 - [Atlassian Jira](/articles/jira-integration) - Learn about how to integrate with Atlassian Jira.
+- [PagerDuty](https://testkube.io/learn/critical-test-based-alerting-with-pagerduty-and-testkube) - Learn about how to integrate Testkube with PagerDuty for alerting.
+- [Zapier](https://testkube.io/learn/integrating-testkube-and-zapier-for-instant-email-alerts) - Learn about how to integrate Testkube with Zapier.
 
-## Miscellaneous
- 
-- [CDEvents](/articles/cd-events) - Learn about CDEvents emitted by Testkube.
-- [Allure Reports](allure-reports) - Learn how to generate Allure Reports as artifacts in your Workflows
+## Observability & Reporting
 
-## User Provisioning and Management
+Monitor and visualize your test results:
+
+- [Prometheus](/articles/metrics) - Learn about metrics exposed by Testkube.
+- [Grafana](/articles/grafana) - Learn about how to integrate with Grafana.
+- [Datadog](/articles/datadog-junit) - Learn how to send JUnit results to Datadog.
+- [Allure Reports](/articles/allure-reports) - Learn how to generate Allure Reports as artifacts in your Workflows.
+
+## Events & Webhooks
+
+React to Testkube events and integrate with external systems:
+
+- [Kubernetes Events](/articles/k8s-events) - Learn about events emitted by Testkube.
+- [Webhooks](/articles/webhooks) - Learn how to configure webhooks to notify external systems.
+
+## Identity Mgmt
+
+Manage user provisioning and authentication:
 
 - [SCIM](/articles/scim) - Learn how to integrate Testkube with your Identity Provider using SCIM for automated user provisioning and deprovisioning.
-- [Custom SSO](/articles/custom-sso) - Learn how to integrate a custom SSO provider with Testkube.

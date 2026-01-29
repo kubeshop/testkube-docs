@@ -755,262 +755,169 @@ const sidebars = {
       items: [
         {
           type: "category",
-          label: "K6",
+          label: "Load & Performance Testing",
           items: [
             {
-              type: "doc",
-              label: "Basic",
-              id: "articles/examples/k6-basic",
+              type: "category",
+              label: "K6",
+              items: [
+                {type: "doc", label: "Basic", id: "articles/examples/k6-basic"},
+                {type: "doc", label: "Distributed", id: "articles/examples/k6-distributed"},
+                {
+                  type: "link",
+                  label: "Testkube K6 Introduction",
+                  href: "https://testkube.io/blog/load-testing-in-kubernetes-with-k6-and-testkube",
+                },
+                {
+                  type: "link",
+                  label: "Testkube vs K6-operator",
+                  href: "https://testkube.io/learn/comparing-the-k6-operator-vs-testkube-for-load-testing",
+                },
+                {
+                  type: "link",
+                  label: "Generating Massive Load",
+                  href: "https://testkube.io/learn/a-guide-to-scalable-and-heavy-load-testing-with-k6-and-testkube",
+                },
+              ],
             },
             {
-              type: "doc",
-              label: "Distributed",
-              id: "articles/examples/k6-distributed",
+              type: "category",
+              label: "JMeter",
+              items: [
+                {type: "doc", label: "Basic", id: "articles/examples/jmeter-basic"},
+                {type: "doc", label: "Distributed", id: "articles/examples/jmeter-distributed"},
+                {type: "doc", label: "Plugins", id: "articles/examples/jmeter-plugins"},
+              ],
+            },
+            {type: "doc", label: "Gatling", id: "articles/examples/gatling-basic"},
+            {
+              type: "category",
+              label: "Locust",
+              items: [
+                {type: "doc", label: "Basic", id: "articles/examples/locust-basic"},
+                {type: "doc", label: "Distributed", id: "articles/examples/locust-distributed"},
+              ],
+            },
+            {type: "doc", label: "Artillery", id: "articles/examples/artillery-basic"},
+          ],
+        },
+        {
+          type: "category",
+          label: "End-to-End & Browser Testing",
+          items: [
+            {
+              type: "category",
+              label: "Cypress",
+              items: [
+                {type: "doc", label: "Basic", id: "articles/examples/cypress-basic"},
+                {type: "doc", label: "Sharded", id: "articles/examples/cypress-sharded"},
+                {
+                  type: "link",
+                  label: "Scaling Cypress Tests",
+                  href: "https://testkube.io/learn/scaling-cypress-tests-parallelise-your-end-to-end-tests-with-testkube",
+                },
+              ],
             },
             {
-              type: "link",
-              label: "Testkube K6 Introduction",
-              href: "https://testkube.io/blog/load-testing-in-kubernetes-with-k6-and-testkube",
+              type: "category",
+              label: "Playwright",
+              items: [
+                {type: "doc", label: "Basic", id: "articles/examples/playwright-basic"},
+                {type: "doc", label: "Sharded", id: "articles/examples/playwright-sharded"},
+                {type: "doc", label: "Rerun Failed Tests", id: "articles/examples/playwright-rerun"},
+              ],
             },
             {
-              type: "link",
-              label: "Testkube vs K6-operator",
-              href: "https://testkube.io/learn/comparing-the-k6-operator-vs-testkube-for-load-testing",
+              type: "category",
+              label: "Selenium",
+              items: [
+                {type: "doc", label: "Basic", id: "articles/examples/selenium-basic"},
+                {type: "doc", label: "Advanced", id: "articles/examples/selenium-advanced"},
+                {
+                  type: "link",
+                  label: "Functional Testing with Selenium",
+                  href: "https://testkube.io/learn/functional-testing-with-selenium-in-testkube",
+                },
+                {
+                  type: "link",
+                  label: "Selenium Grid with Testkube",
+                  href: "https://testkube.io/learn/faster-smarter-selenium-testing-with-testkube-on-kubernetes",
+                },
+              ],
             },
             {
-              type: "link",
-              label: "Generating Massive Load",
-              href: "https://testkube.io/learn/a-guide-to-scalable-and-heavy-load-testing-with-k6-and-testkube",
+              type: "category",
+              label: "Robot Framework",
+              items: [
+                {type: "doc", label: "Basic", id: "articles/examples/robot-framework-basic"},
+                {type: "doc", label: "Parallelized", id: "articles/examples/robot-framework-parallel"},
+                {
+                  type: "link",
+                  label: "Automated Acceptance Testing",
+                  href: "https://testkube.io/learn/automated-acceptance-testing-with-robot-framework-and-testkube",
+                },
+              ],
             },
           ],
         },
         {
           type: "category",
-          label: "Cypress",
+          label: "API Testing",
           items: [
             {
-              type: "doc",
-              label: "Basic",
-              id: "articles/examples/cypress-basic",
+              type: "category",
+              label: "Postman",
+              items: [
+                {type: "doc", label: "Basic", id: "articles/examples/postman-basic"},
+                {
+                  type: "link",
+                  label: "API Test Automation with Postman",
+                  href: "https://testkube.io/blog/api-testing-in-kubernetes-with-postman",
+                },
+              ],
             },
+            {type: "doc", label: "SoapUI", id: "articles/examples/soapui-basic"},
+            {type: "doc", label: "REST Assured", id: "articles/examples/rest-assured-basic"},
+            {type: "doc", label: "cURL", id: "articles/examples/curl-basic"},
+          ],
+        },
+        {
+          type: "category",
+          label: "Unit & Integration Testing",
+          items: [
             {
-              type: "doc",
-              label: "Sharded",
-              id: "articles/examples/cypress-sharded",
+              type: "category",
+              label: "Pytest",
+              items: [
+                {type: "doc", label: "Basic", id: "articles/examples/pytest-basic"},
+                {
+                  type: "link",
+                  label: "Pytest and Testkube",
+                  href: "https://testkube.io/learn/testing-kubernetes-applications-with-pytest-and-testkube-a-complete-guide",
+                },
+              ],
             },
+            {type: "doc", label: "Maven", id: "articles/examples/maven-basic"},
+            {type: "doc", label: "Gradle", id: "articles/examples/gradle-basic"},
+            {type: "doc", label: "NUnit", id: "articles/examples/nunit-basic"},
+            {type: "doc", label: "TestContainers", id: "articles/examples/test-containers-basic"},
             {
               type: "link",
-              label: "Scaling Cypress Tests",
-              href: "https://testkube.io/learn/scaling-cypress-tests-parallelise-your-end-to-end-tests-with-testkube",
+              label: "Cucumber",
+              href: "https://testkube.io/learn/simplify-bdd-testing-for-distributed-java-applications-with-testkube",
             },
           ],
         },
         {
           type: "category",
-          label: "Playwright",
+          label: "Kubernetes & Infrastructure Testing",
           items: [
-            {
-              type: "doc",
-              label: "Basic",
-              id: "articles/examples/playwright-basic",
-            },
-            {
-              type: "doc",
-              label: "Sharded",
-              id: "articles/examples/playwright-sharded",
-            },
-            {
-              type: "doc",
-              label: "Rerun Failed Tests",
-              id: "articles/examples/playwright-rerun",
-            },
-          ],
-        },
-        {
-          type: "category",
-          label: "Selenium",
-          items: [
-            {
-              type: "doc",
-              label: "Basic",
-              id: "articles/examples/selenium-basic",
-            },
-            {
-              type: "doc",
-              label: "Advanced",
-              id: "articles/examples/selenium-advanced",
-            },
-            {
-              type: "link",
-              label: "Functional Testing with Selenium",
-              href: "https://testkube.io/learn/functional-testing-with-selenium-in-testkube",
-            },
-            {
-              type: "link",
-              label: "Selenium Grid with Testkube",
-              href: "https://testkube.io/learn/faster-smarter-selenium-testing-with-testkube-on-kubernetes",
-            },
-          ],
-        },
-        {
-          type: "category",
-          label: "Postman",
-          items: [
-            {
-              type: "doc",
-              label: "Basic",
-              id: "articles/examples/postman-basic",
-            },
-            {
-              type: "link",
-              label: "API Test Automation with Postman",
-              href: "https://testkube.io/blog/api-testing-in-kubernetes-with-postman",
-            },
-          ],
-        },
-        {
-          type: "doc",
-          label: "SoapUI",
-          id: "articles/examples/soapui-basic",
-        },
-        {
-          type: "doc",
-          label: "Gatling",
-          id: "articles/examples/gatling-basic",
-        },
-        {
-          type: "doc",
-          label: "Maven",
-          id: "articles/examples/maven-basic",
-        },
-        {
-          type: "doc",
-          label: "Gradle",
-          id: "articles/examples/gradle-basic",
-        },
-        {
-          type: "doc",
-          label: "NUnit",
-          id: "articles/examples/nunit-basic",
-        },
-        {
-          type: "doc",
-          label: "TestContainers",
-          id: "articles/examples/test-containers-basic",
-        },
-        {
-          type: "doc",
-          label: "Chainsaw",
-          id: "articles/examples/chainsaw-basic",
-        },
-        {
-          type: "category",
-          label: "Pytest",
-          items: [
-            {
-              type: "doc",
-              label: "Basic",
-              id: "articles/examples/pytest-basic",
-            },
-            {
-              type: "link",
-              label: "Pytest and Testkube",
-              href: "https://testkube.io/learn/testing-kubernetes-applications-with-pytest-and-testkube-a-complete-guide",
-            },
-          ],
-        },
-        {
-          type: "doc",
-          label: "REST Assured",
-          id: "articles/examples/rest-assured-basic",
-        },
-        {
-          type: "link",
-          label: "Cucumber",
-          href: "https://testkube.io/learn/simplify-bdd-testing-for-distributed-java-applications-with-testkube",
-        },
-        {
-          type: "category",
-          label: "JMeter",
-          items: [
-            {
-              type: "doc",
-              label: "Basic",
-              id: "articles/examples/jmeter-basic",
-            },
-            {
-              type: "doc",
-              label: "Distributed",
-              id: "articles/examples/jmeter-distributed",
-            },
-            {
-              type: "doc",
-              label: "Plugins",
-              id: "articles/examples/jmeter-plugins",
-            },
-          ],
-        },
-        {
-          type: "category",
-          label: "Locust",
-          items: [
-            {
-              type: "doc",
-              label: "Basic",
-              id: "articles/examples/locust-basic",
-            },
-            {
-              type: "doc",
-              label: "Distributed",
-              id: "articles/examples/locust-distributed",
-            },
-          ],
-        },
-        {
-          type: "category",
-          label: "Robot Framework",
-          items: [
-            {
-              type: "doc",
-              label: "Basic",
-              id: "articles/examples/robot-framework-basic",
-            },
-            {
-              type: "doc",
-              label: "Parallelized",
-              id: "articles/examples/robot-framework-parallel",
-            },
-            {
-              type: "link",
-              label: "Automated Acceptance Testing",
-              href: "https://testkube.io/learn/automated-acceptance-testing-with-robot-framework-and-testkube",
-            },
-          ],
-        },
-        {
-          type: "doc",
-          label: "Artillery",
-          id: "articles/examples/artillery-basic",
-        },
-        {
-          type: "doc",
-          label: "cURL",
-          id: "articles/examples/curl-basic",
-        },
-        {
-          type: "category",
-          label: "Testing Infrastructure",
-          items: [
-            {
-              type: "doc",
-              label: "Validating Kubernetes Clusters",
-              id: "articles/examples/kubectl-basic",
-            },
+            {type: "doc", label: "Chainsaw", id: "articles/examples/chainsaw-basic"},
+            {type: "doc", label: "Validating Kubernetes Clusters", id: "articles/examples/kubectl-basic"},
             {
               type: "link",
               label: "Testing Hardware Components",
               href: "https://testkube.io/blog/implementing-kubernetes-native-hardware-testing-with-testkube",
-              description: "Test for hardware components and infrastructure.",
             },
           ],
         },
