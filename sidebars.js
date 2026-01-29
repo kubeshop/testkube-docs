@@ -973,11 +973,30 @@ const sidebars = {
               id: "articles/gitops-overview",
             },
             {type: "doc", label: "ArgoCD", id: "articles/argocd-integration"},
+            {type: "doc", label: "Flux", id: "articles/flux-integration"},
+          ],
+        },
+        {
+          type: "category",
+          label: "Progressive Delivery",
+          items: [
             {
               type: "doc",
               label: "Argo Rollouts",
               id: "articles/argorollouts-integration",
             },
+            {
+              type: "link",
+              label: "Keptn",
+              href: "https://testkube.io/learn/leveraging-testkube-as-a-quality-gate-in-multi-stage-deployments-with-keptn",
+              description: "Leveraging Testkube as a Quality Gate in Multi-Stage Deployments with Keptn",
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Event-Driven Automation",
+          items: [
             {
               type: "doc",
               label: "Argo Events",
@@ -988,14 +1007,9 @@ const sidebars = {
               label: "Argo Workflows",
               id: "articles/argoworkflows-integration",
             },
-            {type: "doc", label: "Flux", id: "articles/flux-integration"},
             {type: "doc", label: "CDEvents", id: "articles/cd-events"},
-            {
-              type: "link",
-              label: "Keptn",
-              href: "https://testkube.io/learn/leveraging-testkube-as-a-quality-gate-in-multi-stage-deployments-with-keptn",
-              description: "Leveraging Testkube as a Quality Gate in Multi-Stage Deployments with Keptn",
-            },
+            {type: "doc", label: "Kubernetes Events", id: "articles/k8s-events"},
+            {type: "doc", label: "Webhooks", id: "articles/webhooks"},
           ],
         },
         {
@@ -1027,14 +1041,6 @@ const sidebars = {
             {type: "doc", label: "Grafana", id: "articles/grafana"},
             {type: "doc", label: "Datadog", id: "articles/datadog-junit"},
             {type: "doc", label: "Allure Reports", id: "articles/allure-reports"},
-          ],
-        },
-        {
-          type: "category",
-          label: "Events & Webhooks",
-          items: [
-            {type: "doc", label: "Kubernetes Events", id: "articles/k8s-events"},
-            {type: "doc", label: "Webhooks", id: "articles/webhooks"},
           ],
         },
         {

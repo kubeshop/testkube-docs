@@ -117,8 +117,12 @@ tool-specific hooks:
 |------|-------------------|----------|
 | **ArgoCD** | Resource Hooks, Kubernetes Triggers | Post-sync validation, continuous testing |
 | **Flux** | Kubernetes Triggers, Kustomizations | Automated sync-based testing |
-| **Argo Rollouts** | AnalysisTemplates | Progressive delivery validation |
-| **Argo Events** | HTTP Triggers, Sensors | Event-driven test orchestration |
+
+:::tip Related Integrations
+Testkube also integrates with tools for [Progressive Delivery](/articles/argorollouts-integration) (Argo Rollouts, Keptn) 
+and [Event-Driven Automation](/articles/argoevents-integration) (Argo Events, Argo Workflows, CDEvents) which complement 
+GitOps workflows but serve different purposes.
+:::
 
 ### ArgoCD Integration
 
@@ -196,54 +200,17 @@ flowchart LR
 
 For detailed setup instructions, see [GitOps Testing with Flux](/articles/flux-integration).
 
-### Progressive Delivery with Argo Rollouts
+### Other Delivery Integrations
 
-Testkube can serve as an analysis provider for Argo Rollouts, validating canary or blue-green 
-deployments before promotion:
+While ArgoCD and Flux are the core GitOps tools, Testkube also integrates with complementary 
+delivery and automation tools:
 
-```mermaid
-sequenceDiagram
-    participant Rollout as Argo Rollout
-    participant Analysis as AnalysisRun
-    participant TK as Testkube
-    participant Agent as Testkube Agent
-
-    Rollout->>Rollout: Deploy canary (10%)
-    Rollout->>Analysis: Start pre-promotion analysis
-    Analysis->>TK: Run validation workflow
-    TK->>Agent: Execute tests against canary
-    Agent-->>TK: Tests passed
-    TK-->>Analysis: Success
-    Analysis-->>Rollout: Promote canary
-    Rollout->>Rollout: Scale to 100%
-```
-
-For detailed setup instructions, see [Using Testkube with Argo Rollouts](/articles/argorollouts-integration).
-
-### Event-Driven Testing with Argo Events
-
-For complex event-driven scenarios, Argo Events can trigger Testkube executions via webhooks:
-
-```mermaid
-flowchart LR
-    subgraph cluster["Kubernetes Cluster"]
-        resource["ConfigMap/Secret/etc"]
-        es["EventSource"]
-        sensor["Sensor"]
-    end
-    
-    subgraph testkube["Testkube"]
-        api["Testkube API"]
-        agent["Agent"]
-    end
-    
-    resource -->|"watch"| es
-    es -->|"event"| sensor
-    sensor -->|"HTTP webhook"| api
-    api -->|"trigger"| agent
-```
-
-For detailed setup instructions, see [Integrating Testkube with Argo Events](/articles/argoevents-integration).
+- **[Progressive Delivery](/articles/argorollouts-integration)** - Use Testkube as an analysis provider 
+  for Argo Rollouts or Keptn to validate canary/blue-green deployments before promotion.
+  
+- **[Event-Driven Automation](/articles/argoevents-integration)** - Trigger test executions based on 
+  cluster events using Argo Events, orchestrate complex test pipelines with Argo Workflows, or 
+  emit standardized CDEvents for CI/CD interoperability.
 
 ## Best Practices
 
@@ -333,10 +300,20 @@ spec:
 
 ## Related Documentation
 
+### GitOps Integrations
 - [Using Testkube with ArgoCD](/articles/argocd-integration) - Detailed ArgoCD integration guide
 - [GitOps Testing with Flux](/articles/flux-integration) - Flux-specific setup instructions
-- [Using Testkube with Argo Rollouts](/articles/argorollouts-integration) - Progressive delivery validation
+
+### Progressive Delivery
+- [Using Testkube with Argo Rollouts](/articles/argorollouts-integration) - Canary and blue-green deployment validation
+- [Keptn Integration](https://testkube.io/learn/leveraging-testkube-as-a-quality-gate-in-multi-stage-deployments-with-keptn) - Quality gates in multi-stage deployments
+
+### Event-Driven Automation
 - [Integrating Testkube with Argo Events](/articles/argoevents-integration) - Event-driven test execution
+- [Using Testkube with Argo Workflows](/articles/argoworkflows-integration) - Workflow orchestration
+- [CDEvents Integration](/articles/cd-events) - CI/CD event interoperability
+
+### Core Testkube Features
 - [Kubernetes Event Triggers](/articles/test-triggers) - Native Testkube triggering
 - [Testkube Execution CRDs](/articles/test-executions) - Declarative test execution
 - [Test Workflow Templates](/articles/test-workflow-templates) - Reusable workflow components
