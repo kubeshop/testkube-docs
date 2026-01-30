@@ -1,6 +1,6 @@
 # Testkube Remediation Agent
 
-A Remediation AI Agent in Testkube can be tasked to automatically identify, and in the best scenario, fix issues related to failing tests. 
+A Remediation AI Agent in Testkube can be tasked to automatically identify, and in the best scenario, fix code or configurationissues related to failing tests. 
 
 ## Requirements
 
@@ -15,10 +15,10 @@ Optionally, it can also be set up to:
 - Interact with collaboration tools to notify that an issue has been fixed (Slack, Teams, etc)
 - Create a corresponding issue in an issue tracker (JIRA, Linear, etc) 
 
-## Basic Example using the GitHub
+## Basic Remedation Agent using GitHub
 
 The following example AI Agent expects the code changes to be in a GitHub repository and uses
-the GitHub MCP Server to create a pull request with the suggested fix.
+the [GitHub MCP Server](https://github.com/github/github-mcp-server) to create a pull request with the suggested fix.
 
 ### Start by connecting the GitHub MCP Server
 
@@ -40,7 +40,7 @@ this AI Agent will interact with.
 ### Create the Remediation AI Agent
 
 - Create an AI Agent as described at [Creating an AI Agent](/articles/defining-ai-agents#creating-a-new-ai-agent), name it
-what you want and set the prompt to the following:
+what you want and set the prompt to the following (feel free to adapt it to your needs!):
 
 > You are an expert engineer specializing in troubleshooting and remediating failed test results and recent code changes.
 > You will be provided with a workflow execution and a GitHub repository and branch. If you are not provided with a
@@ -68,7 +68,10 @@ and give it access to the following tools:
 ## Using the Remediation AI Agent
 
 Once the AI Agent is created in line with the above settings, navigate to a failed Workflow Execution where 
-the "AI Analyze" button is available. Click the button and select the AI Agent you created: 
+the "AI Analyze" button is available. Make sure this Workflow is testing a component or service that 
+has its GitHub repository defined in the corresponding `testkube.io/target-repository` annotation (see example below). 
+
+Click the button and select the AI Agent you created: 
 
 ![Remediation AI Analyze](remediation-ai-analyze.png)
 
@@ -88,7 +91,7 @@ spec:
   ...
 ```
 
-:::note
+:::tip
 These heuristics for extracting the repository and branch information from the Workflow itself are just an example, 
 you are free to define any mechanism that works best for your use-case.
 :::
