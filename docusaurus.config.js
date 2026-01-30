@@ -24,7 +24,10 @@ const config = {
       onBrokenMarkdownLinks: 'warn',
       onBrokenMarkdownImages: 'throw',
     },
+    mermaid: true,
   },
+
+  themes: ['@docusaurus/theme-mermaid'],
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -209,6 +212,12 @@ const config = {
         defaultMode: "dark",
         disableSwitch: false,
         respectPrefersColorScheme: true,
+      },
+      mermaid: {
+        theme: {
+          light: 'neutral',
+          dark: 'dark',
+        },
       },
     },
   plugins: [
