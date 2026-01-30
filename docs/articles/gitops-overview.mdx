@@ -1,17 +1,320 @@
-# GitOps Cloud Native Testing
+# GitOps with Testkube
 
-One of the major trends in contemporary cloud native application development is the adoption of GitOps; managing the state of your Kubernetes cluster(s) in Git - with all the bells and whistles provided by modern Git platforms like GitHub and GitLab in regard to workflows, auditing, security, tooling, etc. Tools like ArgoCD or Flux are used to do the heavy lifting of keeping your Kubernetes cluster in sync with your Git repository; as soon as a difference is detected between Git and your cluster, it is deployed to ensure that your repository is the source-of-truth for your runtime environment.
+Testkube is designed from the ground up to integrate seamlessly with GitOps workflows. As a Kubernetes-native 
+Continuous Testing Platform, Testkube stores all its core resources as Custom Resource Definitions (CRDs), making 
+Git the natural source of truth for your TestWorkflow, TestTrigger and Webhook definitions.
 
-Testkube is the first GitOps-friendly Cloud-native test orchestration/execution framework to ensure that your QA efforts align with this new approach to application configuration and cluster configuration management. Combined with the GitOps approach described above, Testkube will include your test artifacts and application configuration in the state of your cluster and make Git the source of truth for these test artifacts.
+This guide provides a high-level overview of how Testkube fits into GitOps-managed infrastructure.
 
-## Benefits of the GitOps Approach
+## Why Testkube for GitOps?
 
-- Since your tests are included in the state of your cluster you are always able to validate that your application components/services work as required.
-- Since tests are executed from inside your cluster there is no need to expose services under test externally purely for the purpose of being able to test them.
-- Tests in your cluster are always in sync with the external tooling used for authoring.
-- Test execution is not strictly tied to CI but can also be triggered manually for ad-hoc validations or via internal triggers (Kubernetes events).
-- You can leverage all your existing test automation assets from Postman, Cypress (even for end-to-end testing), or through executor plugins.
+Traditional CI/CD-driven testing approaches often create a disconnect between your application deployment state 
+and your test execution. Tests are triggered by pipeline events rather than actual cluster state changes, 
+making it difficult to validate deployments consistently.
 
-Conceptually, this can be illustrated as follows:
+Testkube addresses this by:
 
-![GitOps CLoud Testing](../img/GitOps-cloud-testing.jpeg)
+- **Storing tests as Kubernetes CRDs** - TestWorkflows, Triggers, Webhooks, etc. live alongside your application 
+  manifests in Git, versioned and reviewed through the same processes.
+- **Executing tests inside your cluster** - No need to expose services externally for testing; tests run where 
+  your applications run.
+- **Reacting to cluster state** - Kubernetes Event Triggers and GitOps tool hooks ensure tests run when 
+  deployments actually change, not just when pipelines complete.
+- **Supporting declarative execution** - TestWorkflowExecution CRDs allow you to trigger tests declaratively, 
+  perfect for GitOps reconciliation loops.
+
+## Core Concepts
+
+### Test Workflows as CRDs
+
+Test Workflows are Kubernetes Custom Resources that define how your tests are orchestrated. They can be 
+stored in your Git repository and managed through your GitOps tooling:
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: api-integration-tests
+  namespace: testkube
+  labels:
+    app: my-api
+    test-type: integration
+spec:
+  content:
+    git:
+      uri: https://github.com/myorg/api-tests
+      branch: main
+  steps:
+    - name: Run tests
+      run:
+        image: postman/newman:latest
+        args: ["run", "collection.json"]
+```
+
+When your GitOps controller syncs this resource to your cluster, the Testkube Agent automatically 
+registers it and makes it available for execution.
+
+### Kubernetes Event Triggers
+
+TestTriggers allow you to automatically execute Test Workflows when Kubernetes resources change. 
+This is particularly powerful in GitOps scenarios where you want tests to run after deployments 
+are reconciled:
+
+```yaml
+apiVersion: tests.testkube.io/v1
+kind: TestTrigger
+metadata:
+  name: test-on-deployment-update
+  namespace: testkube
+spec:
+  selector:
+    matchLabels:
+      testkube.io/resource-kind: Deployment
+      app: my-api
+  event: modified
+  conditionSpec:
+    conditions:
+      - type: Available
+        status: "True"
+  action: run
+  execution: testworkflow
+  testSelector:
+    name: api-integration-tests
+```
+
+This trigger executes the `api-integration-tests` workflow whenever a Deployment with the label 
+`app: my-api` is modified and becomes available.
+
+### Declarative Test Execution
+
+For scenarios where you need to trigger a specific test execution as part of a GitOps sync, 
+TestWorkflowExecution CRDs provide a declarative approach:
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflowExecution
+metadata:
+  name: release-validation
+  namespace: testkube
+spec:
+  testWorkflow:
+    name: full-regression-suite
+  executionRequest:
+    config:
+      environment: staging
+    tags:
+      release: "v2.1.0"
+```
+
+Creating or updating this resource triggers an execution of the specified workflow.
+
+## GitOps Tool Integrations
+
+Testkube integrates with popular GitOps tools through both native Kubernetes mechanisms and 
+tool-specific hooks:
+
+| Tool | Integration Method | Use Case |
+|------|-------------------|----------|
+| **ArgoCD** | Resource Hooks, Kubernetes Triggers | Post-sync validation, continuous testing |
+| **Flux** | Kubernetes Triggers, Kustomizations | Automated sync-based testing |
+
+:::tip Related Integrations
+Testkube also integrates with tools for [Progressive Delivery](/articles/argorollouts-integration) (Argo Rollouts, Keptn) 
+and [Event-Driven Automation](/articles/argoevents-integration) (Argo Events, Argo Workflows, CDEvents) which complement 
+GitOps workflows but serve different purposes.
+:::
+
+### ArgoCD Integration
+
+ArgoCD is the most common GitOps tool used with Testkube. There are two primary patterns:
+
+**Pattern 1: Post-Sync Resource Hooks**
+
+Execute tests after ArgoCD successfully syncs your application:
+
+```mermaid
+sequenceDiagram
+    participant Argo as ArgoCD
+    participant K8s as Kubernetes
+    participant Hook as PostSync Job
+    participant TK as Testkube CLI
+    participant Agent as Testkube Agent
+
+    Argo->>K8s: Sync application resources
+    K8s-->>Argo: Sync successful
+    Argo->>Hook: Execute PostSync hook
+    Hook->>TK: testkube run tw api-tests
+    TK->>Agent: Trigger execution
+    Agent->>Agent: Run tests
+    Agent-->>TK: Execution complete
+    TK-->>Hook: Exit code 0/1
+    Hook-->>Argo: Hook result
+```
+
+**Pattern 2: Kubernetes Event Triggers**
+
+React to resource changes regardless of how they were applied:
+
+```mermaid
+sequenceDiagram
+    participant Argo as ArgoCD
+    participant K8s as Kubernetes
+    participant Agent as Testkube Agent
+
+    Argo->>K8s: Sync Deployment
+    K8s->>Agent: Deployment modified event
+    Agent->>Agent: Match TestTrigger conditions
+    Agent->>K8s: Create test Job
+    Note over Agent,K8s: Tests run independently of ArgoCD
+```
+
+For detailed setup instructions, see [Using Testkube with ArgoCD](/articles/argocd-integration).
+
+### Flux Integration
+
+Flux users can leverage Kustomizations to sync Test Workflows alongside application resources:
+
+```mermaid
+flowchart LR
+    subgraph git["Git Repository"]
+        app["apps/"]
+        tests["tests/"]
+    end
+    
+    subgraph flux["Flux"]
+        ks1["App Kustomization"]
+        ks2["Tests Kustomization"]
+    end
+    
+    subgraph cluster["Cluster"]
+        deploy["Deployments"]
+        tw["TestWorkflows"]
+        trigger["TestTriggers"]
+    end
+    
+    app --> ks1 --> deploy
+    tests --> ks2 --> tw
+    tests --> ks2 --> trigger
+    deploy -.->|"events"| trigger
+```
+
+For detailed setup instructions, see [GitOps Testing with Flux](/articles/flux-integration).
+
+### Other Delivery Integrations
+
+While ArgoCD and Flux are the core GitOps tools, Testkube also integrates with complementary 
+delivery and automation tools:
+
+- **[Progressive Delivery](/articles/argorollouts-integration)** - Use Testkube as an analysis provider 
+  for Argo Rollouts or Keptn to validate canary/blue-green deployments before promotion.
+  
+- **[Event-Driven Automation](/articles/argoevents-integration)** - Trigger test executions based on 
+  cluster events using Argo Events, orchestrate complex test pipelines with Argo Workflows, or 
+  emit standardized CDEvents for CI/CD interoperability.
+
+## Best Practices
+
+### Repository Structure
+
+Organize your test resources alongside application manifests:
+
+```
+├── apps/
+│   ├── api/
+│   │   ├── deployment.yaml
+│   │   └── service.yaml
+│   └── frontend/
+│       └── deployment.yaml
+├── tests/
+│   ├── workflows/
+│   │   ├── api-integration.yaml
+│   │   └── e2e-tests.yaml
+│   ├── triggers/
+│   │   └── on-api-update.yaml
+│   └── templates/
+│       └── common-steps.yaml
+└── kustomization.yaml
+```
+
+### Preventing Pruning of Testkube Resources
+
+When using ArgoCD with auto-sync and pruning enabled, add annotations to prevent intermediate 
+test execution resources from being deleted:
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: my-test
+spec:
+  job:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-options: Prune=false
+```
+
+Consider creating a [Workflow Template](/articles/test-workflow-templates) to apply these 
+annotations consistently across all your workflows.
+
+### Sync Waves for Proper Ordering
+
+Use ArgoCD sync waves to ensure resources are created in the correct order:
+
+```yaml
+# TestWorkflow - sync first
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+
+# TestTrigger - sync after workflows exist
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+
+# Application Deployment - sync last, triggers tests
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+```
+
+### Environment-Specific Configuration
+
+Use Kustomize overlays or Helm values to configure environment-specific test parameters:
+
+```yaml
+# base/workflow.yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: api-tests
+spec:
+  config:
+    - name: API_URL
+      type: string
+
+# overlays/staging/patch.yaml
+- op: add
+  path: /spec/config/0/default
+  value: "https://api.staging.example.com"
+```
+
+## Related Documentation
+
+### GitOps Integrations
+- [Using Testkube with ArgoCD](/articles/argocd-integration) - Detailed ArgoCD integration guide
+- [GitOps Testing with Flux](/articles/flux-integration) - Flux-specific setup instructions
+
+### Progressive Delivery
+- [Using Testkube with Argo Rollouts](/articles/argorollouts-integration) - Canary and blue-green deployment validation
+- [Keptn Integration](https://testkube.io/learn/leveraging-testkube-as-a-quality-gate-in-multi-stage-deployments-with-keptn) - Quality gates in multi-stage deployments
+
+### Event-Driven Automation
+- [Integrating Testkube with Argo Events](/articles/argoevents-integration) - Event-driven test execution
+- [Using Testkube with Argo Workflows](/articles/argoworkflows-integration) - Workflow orchestration
+- [CDEvents Integration](/articles/cd-events) - CI/CD event interoperability
+
+### Core Testkube Features
+- [Kubernetes Event Triggers](/articles/test-triggers) - Native Testkube triggering
+- [Testkube Execution CRDs](/articles/test-executions) - Declarative test execution
+- [Test Workflow Templates](/articles/test-workflow-templates) - Reusable workflow components
+- [Testkube CRD Reference](/articles/crds) - Complete CRD documentation
