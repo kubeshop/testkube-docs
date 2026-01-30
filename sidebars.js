@@ -910,7 +910,7 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Kubernetes & Infrastructure Testing",
+          label: "Infrastructure Testing",
           items: [
             {type: "doc", label: "Chainsaw", id: "articles/examples/chainsaw-basic"},
             {type: "doc", label: "Validating Kubernetes Clusters", id: "articles/examples/kubectl-basic"},
@@ -922,9 +922,15 @@ const sidebars = {
           ],
         },
         {
-          type: "doc",
-          label: "Testing a Sample Application",
-          id: "articles/tutorial/example",
+          type: "category",
+          label: "Tutorials",
+          items: [
+            {
+              type: "doc",
+              label: "Testing a Sample Application",
+              id: "articles/tutorial/example",
+            },
+          ],
         },
       ],
     },
