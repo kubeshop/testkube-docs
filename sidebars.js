@@ -693,8 +693,8 @@ const sidebars = {
                     },
                     {
                       type: "doc",
-                      label: "Trend Analysis",
-                      id: "articles/trend-analysis-agent",
+                      label: "Flakiness Analysis",
+                      id: "articles/flakiness-analysis-agent",
                     },
                     {
                       type: "doc",

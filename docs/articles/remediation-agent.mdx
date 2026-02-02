@@ -30,7 +30,7 @@ Use the following configuration:
 - Headers
     - `Authorization` - `Bearer <your-github-token>`
 
-![Remediation GitHub Authorization](remediation-github-auth.png)
+![Remediation GitHub Authorization](images/remediation-github-auth.png)
 
 :::tip
 You can generate your GitHub token at https://github.com/settings/tokens, make sure it has content access to the repositories
@@ -63,7 +63,7 @@ and give it access to the following tools:
   - `create_pull_request` - so it can create a pull request with the suggested fix
   - `list_commits` - so it can list commits in the specified branch to find recent code changes
 
-![Remediation GitHub MCP Server Tools](remediation-github-mcp-tools.png)
+![Remediation GitHub MCP Server Tools](images/remediation-github-mcp-tools.png)
 
 ## Using the Remediation AI Agent
 
@@ -73,7 +73,7 @@ has its GitHub repository defined in the corresponding `testkube.io/target-repos
 
 Click the button and select the AI Agent you created: 
 
-![Remediation AI Analyze](remediation-ai-analyze.png)
+![Remediation AI Analyze](images/remediation-ai-analyze.png)
 
 The instructions to the AI Agent are automatically prefilled with the execution and workflow names, which the agent 
 will use for its task. As you can see this does not contain any repository or branch information, which the Agent 
@@ -99,16 +99,16 @@ you are free to define any mechanism that works best for your use-case.
 Select the "Run Agent" button, this will start the AI Agent and open up the corresponding Chat where you can 
 see the progress of the analysis.
 
-![Remediation Chat Panel](remediation-chat-panel.png)
+![Remediation Chat Panel](images/remediation-chat-panel.png)
 
 After its initial analysis, the agent will attempt to access your GitHub repository, unless you set the corresponding
 GitHub MCP Server tools to auto-approve, you will be required to Approve them:
 
-![Remediation Tool Approval](remediation-tool-approval.png)
+![Remediation Tool Approval](images/remediation-tool-approval.png)
 
 Once all steps have been completed (with corresponding tool approvals), you will see a Summary created by the AI Agent,
 which in this case contained a link to the pull request:
 
-![Remediation Result](remediation-result.png)
+![Remediation Result](images/remediation-result.png)
 
 (The prompt at the bottom allows you to send a follow-up message, for example ask it for more details about the issue)
