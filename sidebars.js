@@ -695,11 +695,6 @@ const sidebars = {
                       type: "doc",
                       label: "Flakiness Analysis",
                       id: "articles/flakiness-analysis-agent",
-                    },
-                    {
-                      type: "doc",
-                      label: "Issue Reporting",
-                      id: "articles/issue-reporting-agent",
                     }
                   ],
                 },
