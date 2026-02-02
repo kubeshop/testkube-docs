@@ -24,7 +24,7 @@ see [Default LLM and Model](/articles/ai-assistant-enable#default-llm-and-model)
 
 Testkube AI Agents can be designed with two distinct approaches depending on your use case:
 
-### Task-Focused Agents
+### Task-Focused AI Agents
 
 Task-focused agents are designed to perform a **specific task given specific inputs**, typically as part of an 
 automated pipeline. These agents:
@@ -43,7 +43,7 @@ AI-powered analysis and actions without human intervention.
 See the [Remediation Agent Example](/articles/remediation-agent) for an example of a task-focused agent.
 :::
 
-### Guidance and Support Agents
+### Guidance and Support AI Agents
 
 Guidance agents are designed to provide **interactive assistance for general tasks**, acting more like an 
 AI-powered assistant or copilot. These agents:
@@ -58,6 +58,13 @@ testing requirements, suggesting appropriate configurations, and generating the 
 Guidance agents are ideal for **onboarding, exploration, and complex configuration tasks** where users benefit 
 from interactive support and contextual recommendations.
 
+#### Predefined Guidance AI Agents
+
+Testkube includes a set of pre-defined Guidance AI Agents in the Dashboard that you can easily add to your environment 
+and use to get started with AI Agents - read more at [Creating an AI Agent from a Template](/articles/defining-ai-agents#creating-an-ai-agent-from-a-template).
+
+![AI Agent Templates](images/ai-agent-templates.png)
+
 ### Choosing the Right Approach
 
 | Aspect | Task-Focused | Guidance & Support |
@@ -66,7 +73,7 @@ from interactive support and contextual recommendations.
 | **Input** | Specific, well-defined data | Open-ended questions or goals |
 | **Output** | Concrete action or artifact | Recommendations and assistance |
 | **Interaction** | Fire-and-forget | Interactive, multi-turn |
-| **Best for** | CI/CD automation, alerting | Onboarding, configuration, exploration |
+| **Best for** | CI/CD/GitOps automation, alerting | Onboarding, configuration, exploration |
 
 Both styles can leverage the same MCP Servers and tools - the difference lies in how the agent is triggered 
 and how it interacts with users or systems.
