@@ -670,6 +670,11 @@ const sidebars = {
               id: "articles/ai-architecture",
             },
             {
+              type: "doc",
+              label: "Configuration Reference",
+              id: "articles/ai-configuration",
+            },
+            {
               type: "category",
               label: "AI Agents",
               items: [
