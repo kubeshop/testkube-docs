@@ -33,7 +33,7 @@ testkube-ai-service:
 - Supports air-gapped deployments
 - Full compliance with data residency requirements
 
-See [On-Prem Installation](/articles/ai-assistant-on-prem-install) for setup details.
+See [AI Configuration Reference](/articles/ai-configuration) for setup details.
 
 ### Third-Party LLM Providers
 
@@ -100,6 +100,6 @@ AI Assistant supports fully disconnected deployments when using self-hosted LLM 
 ## Additional Resources
 
 - [AI Assistant Overview](/articles/ai-assistant-overview)
-- [On-Prem Installation](/articles/ai-assistant-on-prem-install)
+- [AI Configuration Reference](/articles/ai-configuration)
 - [Audit Logs](/articles/audit-logs)
 - [Environments & Access Control](/articles/environments-best-practices)

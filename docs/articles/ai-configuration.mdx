@@ -1,28 +1,41 @@
 # Testkube AI Configuration Reference
 
-This document provides a comprehensive reference for enabling and configuring Testkube AI functionality, including [AI Assistant](./ai-assistant-overview), [AI Agents](./ai-agents), and related features.
+This document provides a comprehensive reference for enabling and configuring Testkube AI functionality, 
+including [AI Assistant](./ai-assistant-overview), [AI Agents](./ai-agents), and related features.
 
-## Cloud Users
+## Cloud Control Plane Users
 
-For Testkube Cloud users, enabling AI functionality is straightforward:
+For users of the Testkube Cloud Control Plane, enabling AI functionality is straightforward:
 
 ### Enable AI Assistant
 
-AI Assistant is disabled by default for new organizations.
+The Testkube AI Assistant is disabled by default for new organizations.
 
 **Who can enable:** Organization Owner or Admin
 
 **How to enable:**
-1. Navigate to **Organization Settings** → **Product Features** tab
-2. Toggle **AI Assistant** on
 
-That's it! No additional configuration, databases, or API keys are needed — everything is managed by Testkube. The AI functionality uses OpenAI GPT-5.2-Codex by default (the model cannot be changed in cloud installations).
+1. **Via the Initial AI Assistant Prompt:** 
+   When you first access the AI Assistant, an initial prompt is displayed with action buttons that allow you to either enable the feature or keep it disabled.
+
+2. **Through Organization Settings:**  
+   Navigate to **Organization Settings** → **Product Features** tab and toggle **AI Assistant** on.
+
+Once enabled, AI Assistant will integrate with your Testkube Dashboard, ready to assist you and your team.
+
+### Default LLM and Model
+
+The default LLM used by AI functionality is OpenAI's [GPT-5.2-Codex](https://openai.com/index/introducing-gpt-5-2-codex/).
+
+For Cloud installations, the LLM and model cannot be changed — everything is managed by Testkube.
+
+For On-Prem installations, you can configure your own OpenAI API Key or use a different LLM/model as described in the [On-Prem Users](#on-prem-users) section below.
 
 ---
 
 ## On-Prem Users
 
-Self-hosted installations require additional infrastructure and configuration.
+Self-hosted installations require additional infrastructure and configuration apart from the above Cloud Control Plane configuration.
 
 ### Infrastructure Requirements
 
@@ -236,6 +249,4 @@ testkube-ai-service:
 
 - [AI Agents](./ai-agents)
 - [AI Assistant Overview](./ai-assistant-overview)
-- [AI Assistant On-Prem Installation](./ai-assistant-on-prem-install)
-- [AI Assistant Enablement](./ai-assistant-enable)
 - [AI Assistant Security & Compliance](./ai-assistant-security)

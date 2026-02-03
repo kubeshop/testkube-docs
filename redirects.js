@@ -581,11 +581,19 @@ const redirects = [
   },
   {
     from: "/articles/copilot-on-prem-install",
-    to: "/articles/ai-assistant-on-prem-install",
+    to: "/articles/ai-configuration",
+  },
+  {
+    from: "/articles/ai-assistant-on-prem-install",
+    to: "/articles/ai-configuration",
   },
   {
     from: "/articles/copilot-enable",
-    to: "/articles/ai-assistant-enable",
+    to: "/articles/ai-configuration",
+  },
+  {
+    from: "/articles/ai-assistant-enable",
+    to: "/articles/ai-configuration",
   },
   {
     from: "/articles/copilot-can-help",

@@ -133,11 +133,6 @@ const sidebars = {
                 },
                 {
                   type: "doc",
-                  label: "Testkube AI Assistant",
-                  id: "articles/ai-assistant-on-prem-install",
-                },
-                {
-                  type: "doc",
                   label: "Deploying on OpenShift",
                   id: "articles/deploying-on-openshift",
                 },
@@ -724,16 +719,6 @@ const sidebars = {
                   type: "doc",
                   label: "Overview",
                   id: "articles/ai-assistant-overview",
-                },
-                {
-                  type: "doc",
-                  label: "On-Prem Installation",
-                  id: "articles/ai-assistant-on-prem-install",
-                },
-                {
-                  type: "doc",
-                  label: "Enable AI Assistant",
-                  id: "articles/ai-assistant-enable",
                 },
                 {
                   type: "doc",
