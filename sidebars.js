@@ -661,13 +661,8 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              label: "Architecture",
-              id: "articles/ai-architecture",
-            },
-            {
-              type: "doc",
-              label: "Configuration Reference",
-              id: "articles/ai-configuration",
+              label: "Overview",
+              id: "articles/testkube-ai-overview",
             },
             {
               type: "category",
@@ -773,6 +768,22 @@ const sidebars = {
                 },
               ],
             },
+            {
+              type: "category",
+              label: "Reference",
+              items: [
+                {
+                  type: "doc",
+                  label: "Configuration",
+                  id: "articles/ai-configuration",
+                },
+                {
+                  type: "doc",
+                  label: "Architecture",
+                  id: "articles/ai-architecture",
+                }
+              ],
+            }
           ],
         },
         {
