@@ -28,21 +28,12 @@ Self-hosted installations require additional infrastructure and configuration.
 
 #### PostgreSQL Database
 
-A PostgreSQL database is required for LangGraph checkpointing (conversation persistence). The AI service creates and uses the following tables:
+A PostgreSQL database is required for LangGraph checkpointing (conversation persistence). Configure the database connection 
+via `POSTGRES_URI` environment variable or Helm `db.secretRef` configuration.
 
-| Table | Purpose |
-|-------|---------|
-| `ai_mcp_servers` | MCP server configurations |
-| `ai_assistants` | AI assistant definitions |
-| `ai_assistant_sessions` | Session executions and history |
-| `ai_mcp_server_tools` | Tools provided by MCP servers |
-| `ai_session_tool_calls` | Tool invocations within sessions |
-
-Configure the database connection via `POSTGRES_URI` environment variable or Helm `db.secretRef` configuration.
-
-#### NATS Message Queue
-
-The AI service uses the global NATS instance for async operations. No additional NATS configuration is required if you already have Testkube deployed.
+:::note
+This DB is separate from the main Testkube database and is used solely for AI functionality - you can still use MongoDB for your main Testkube database (recommended).
+:::
 
 ### Helm Configuration
 
