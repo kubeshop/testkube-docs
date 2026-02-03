@@ -192,9 +192,20 @@ const sidebars = {
           ],
         },
         {
-          type: "doc",
+          type: "category",
           label: "Cloud Control Plane",
-          id: "articles/install/cloud-overview",
+          items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/install/cloud-overview",
+            },
+            {
+              type: "doc",
+              label: "Custom SSO",
+              id: "articles/custom-sso",
+            },
+          ]
         },
         "articles/install/faq",
         {
