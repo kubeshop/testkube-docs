@@ -665,6 +665,11 @@ const sidebars = {
               id: "articles/testkube-ai-overview",
             },
             {
+              type: "doc",
+              label: "Configuration",
+              id: "articles/ai-enabling",
+            },
+            {
               type: "category",
               label: "AI Agents",
               items: [
