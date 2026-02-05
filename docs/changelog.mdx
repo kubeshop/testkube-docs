@@ -20,11 +20,14 @@ Patch versions may differ between components as fixes are released independently
 :::warning Breaking Change
 If you were using the AI Assistant in a previous release, you must now configure a PostgreSQL database for the AI service to function.
 The AI service uses PostgreSQL to persist conversation state and session data for the new AI Agents feature.
+
+[Read more about the AI Functionality in Testkube](/articles/testkube-ai-overview)
 :::
 
 ### What's new!
 
-**AI Agents for Test Automation**
+**AI Agents for Test Orchestration**
+
 Testkube now supports **custom AI Agents** that can autonomously execute complex testing tasks with human oversight.
 This is a major evolution from the previous AI Assistant which was limited to read-only Q&A and navigation help.
 
@@ -36,9 +39,18 @@ AI Agents bring true agentic capabilities to your testing platform:
 - **Multi-turn Sessions**: Agents maintain conversation context across multiple interactions. Continue a debugging session later, or have the agent iterate on a complex task over time.
 - **AI Assistant Integration**: The dashboard AI Assistant (now read-only) can delegate requests to AI Agent sessions.
 
+**Example Use Cases:**
+
+- **Automated Remediation** — Analyze failed tests, identify root causes, and suggest or apply fixes automatically (see [Example](/articles/remediation-agent))
+- **Intelligent Analysis** — Detect flaky tests, analyze execution patterns, and surface anomalies (see [Example](/articles/flakiness-analysis-agent))
+- **Custom Workflows** — Define agents tailored to your specific testing needs and integrate with external systems
+
 AI Agents are available from the dashboard and can be configured per environment with granular control over which tools are enabled and which require approval before execution.
 
+[Read more about the AI Agents feature](/articles/ai-agents)
+
 **New MCP Server Tools**
+
 The Testkube MCP Server now includes powerful new tools for querying and exploring your test data:
 
 - **`query_workflows`** and **`query_executions`**: Use JSONPath expressions to extract specific data from multiple workflows or executions at once. Query patterns like `$..image` to find all container images across workflows, or `$.result.steps.*` to analyze step results across executions.
@@ -48,6 +60,8 @@ These tools make it easier for AI assistants to perform bulk analysis and genera
 
 ### Improvements and fixes
 
+- Workflows can now be configured as silent at the Workflow level by setting `spec.execution.silent` to true, which will
+  result in all executions being silent by default - [Read more about Silent Executions](/articles/test-workflows-running#silent-executions)
 - On-prem customers can now configure custom LLM models via Helm instead of being locked to defaults.
 - AI service now uses two model types: a primary model for complex agent tasks and a lightweight model for quick tasks like generating session titles.
 - Default models updated to `gpt-5.2` (primary) and `gpt-5-mini` (lightweight), with optional temperature settings for models that support it.

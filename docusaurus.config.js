@@ -143,9 +143,9 @@ const config = {
       },
 
       announcementBar: {
-        id: "testkube-122-release",
+        id: "testkube-260-release",
         content:
-          '<b>Testkube 1.22 is out! A new AI Agent Framework that integrates with external MCP Servers for agentic troubleshooting, remediation, etc. <a href="/changelog">Read More</a></b>',
+          '<b>Testkube 2.6.0 is out! A new AI Agent Framework that integrates with external MCP Servers for agentic troubleshooting, remediation, etc. <a href="/changelog">Read More</a></b>',
         backgroundColor: "#8951ff",
         textColor: "#fff",
       },
