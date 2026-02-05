@@ -8,6 +8,43 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Monthly Release v2.6.0 (2025-02-05)
+
+This release is available in Helm chart v2.328.0. Control Plane and Agent versions are now unified at **v2.6.0**.
+
+:::note Version Unification
+Starting with this release, we've consolidated the Control Plane and Agent versioning into a single unified version number.
+Both components are now at v2.6.0, making it easier to track compatibility and understand which features are available across your Testkube deployment.
+:::
+
+### What's new!
+
+**AI Agents for Test Automation**
+Testkube now supports **custom AI Agents** that can autonomously execute complex testing tasks with human oversight.
+This is a major evolution from the previous AI Assistant which was limited to read-only Q&A and navigation help.
+
+AI Agents bring true agentic capabilities to your testing platform:
+
+- **Create Custom AI Agents**: Define agents with custom instructions tailored to your testing workflows — from "Debug failing E2E tests" to "Generate load test reports" or "Monitor flaky test patterns."
+- **Connect External MCP Servers**: Extend agent capabilities by connecting any Model Context Protocol (MCP) server. This lets agents access external tools, documentation services, or custom integrations alongside Testkube's built-in tools.
+- **Human-in-the-Loop Approval**: Agents pause before executing sensitive operations (like creating workflows or modifying resources) and request your approval. You can approve or respond with alternative instructions.
+- **Multi-turn Sessions**: Agents maintain conversation context across multiple interactions. Continue a debugging session later, or have the agent iterate on a complex task over time.
+- **AI Assistant Integration**: The dashboard AI Assistant (now read-only) can delegate requests to AI Agent sessions.
+
+AI Agents are available from the dashboard and can be configured per environment with granular control over which tools are enabled and which require approval before execution.
+
+**New MCP Server Tools**
+The Testkube MCP Server now includes powerful new tools for querying and exploring your test data:
+
+- **`query_workflows`** and **`query_executions`**: Use JSONPath expressions to extract specific data from multiple workflows or executions at once. Query patterns like `$..image` to find all container images across workflows, or `$.result.steps.*` to analyze step results across executions.
+- **`get_workflow_schema`** and **`get_execution_schema`**: Retrieve the full YAML schema for TestWorkflow definitions and execution data. These tools help AI assistants understand the complete data structure when creating, updating, or analyzing workflows and results.
+
+These tools make it easier for AI assistants to perform bulk analysis and generate insights across your test infrastructure.
+
+### Improvements and fixes
+
+- (Add additional fixes and improvements here)
+
 ## Patch Release (2025-12-23)
 
 Control Plane is available in Helm chart v2.327.3 and Agent is available in Helm chart v2.5.3
