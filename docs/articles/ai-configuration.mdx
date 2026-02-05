@@ -124,6 +124,64 @@ testkube-ai-service:
 The hosted proxy is intended **only for trials, demos, and onboarding**. It has usage limits and is not recommended for production workloads.
 :::
 
+### Advanced Model Configuration
+
+For more granular control over AI models, you can configure multiple models with different roles using the `models` array:
+
+```yaml
+testkube-ai-service:
+  enabled: true
+  models:
+    - name: gpt-5.2-codex       # Required - model identifier
+      type: primary             # Main model for AI Agents deep reasoning loop
+      url: ""                   # Optional - custom LLM endpoint
+      apiKey: ""                # Optional - direct API key
+      secretRef: ""             # Optional - K8s secret name
+      secretRefKey: ""          # Optional - key within the secret
+    - name: gpt-5-mini
+      type: lightweight         # Fast model for UI enrichment tasks
+      secretRef: "llm-secrets"
+      secretRefKey: "OPENAI_API_KEY"
+```
+
+#### Model Types
+
+| Type | Purpose | Examples |
+|------|---------|----------|
+| `primary` | Used within the deep agentic reasoning loop for complex tasks like test analysis, workflow generation, and debugging | AI Agents sessions, complex Copilot queries |
+| `lightweight` | Used to enrich the UI with summaries, generate descriptions, and create titles | Execution summaries, workflow descriptions, conversation titles |
+
+If only one model is configured (or using the simple `model` property), it will be used for both primary and lightweight tasks.
+
+#### Model Authentication
+
+Each model can have its own authentication configuration:
+
+| Property | Description |
+|----------|-------------|
+| `url` | Custom LLM endpoint URL (defaults to global `llmApi.url` or OpenAI) |
+| `apiKey` | Direct API key value (not recommended for production) |
+| `secretRef` | Kubernetes secret name containing the API key |
+| `secretRefKey` | Key within the secret (defaults to `LLM_API_KEY`) |
+
+:::tip
+For most deployments, configure `secretRef` and `secretRefKey` to securely reference API keys stored in Kubernetes secrets.
+:::
+
+#### Simple vs Advanced Configuration
+
+For simple deployments with a single model, use the `model` property:
+
+```yaml
+testkube-ai-service:
+  enabled: true
+  model: "gpt-5.2-codex"
+  llmApi:
+    secretRef: "llm-secrets"
+```
+
+For advanced deployments with multiple models or different LLM providers, use the `models` array as shown above.
+
 ### Authentication Configuration
 
 The AI service requires OAuth/OIDC authentication. Configure one of the following:
@@ -188,7 +246,8 @@ The following environment variables can be configured for the AI service:
 |----------|----------|-------------|
 | `LLM_API_KEY` | Conditional | Required if not using license key or custom LLM |
 | `LLM_API_URL` | No | Custom LLM endpoint (OpenAI-compatible) |
-| `MODEL_NAME` | No | Model name (e.g., `gpt-4o`, `gpt-5.2-codex`) |
+| `MODEL_NAME` | No | Simple model name (e.g., `gpt-4o`, `gpt-5.2-codex`) |
+| `AI_MODELS_FILE` | No | Path to YAML file with advanced model configurations (takes precedence over `MODEL_NAME`) |
 
 ### Authentication
 
