@@ -1,66 +1,27 @@
-# Enabling Testkube AI Features - Complete Guide
+# Testkube AI Configuration Quick Start
 
 ## Cloud Control Plane Users
 
-For users of the Testkube Cloud Control Plane, enabling AI functionality is straightforward:
+For users of the Testkube Cloud Control Plane, AI features are enabled as follows:
 
-### Enable AI Assistant
-
-The Testkube AI Assistant is disabled by default for new organizations.
-
-**How to enable:**
-
-1. **Via the Initial AI Assistant Prompt:** 
-   When you first access the AI Assistant, an initial prompt is displayed with action buttons that allow you to either enable the feature or keep it disabled.
-
-2. **Through Organization Settings:**  
-   Navigate to **Organization Settings** → **Product Features** tab and toggle **AI Assistant** on.
-
-Once enabled, AI Assistant will integrate with your Testkube Dashboard, ready to assist you and your team.
+- AI Agents are always enabled for all environments in your organization.
+- AI Assistant is disabled by default, enabled by one of the following methods (Admin or Owner only):
+  1. When you first access the AI Assistant, an initial prompt is displayed with action buttons that allow you to either enable the feature or keep it disabled.
+  2. Navigate to **Organization Settings** → **Product Features** tab and toggle **AI Assistant** on.
 
 :::info
-The LLM used by AI functionality in Testkube Cloud is OpenAI's [GPT-5.2-Codex](https://openai.com/index/introducing-gpt-5-2-codex/).
+The LLM used by AI functionality in Testkube Cloud is OpenAI's [GPT-5.2](https://openai.com/index/introducing-gpt-5-2/).
 
 For Cloud installations, the LLM and model cannot be changed — everything is managed by Testkube.
 :::
 
-## Testkube On-Prem Deployments
+## On-Prem Users
 
 **Prerequisites:**
 - OpenAI API key (or compatible LLM API)
-- PostgreSQL database (for conversation persistence)
+- PostgreSQL database (for conversation persistence) - this can live alongside MongoDB as your main Testkube database.
 
----
-
-### Option 1: Minimal Setup (with bundled PostgreSQL)
-
-Best for trials and non-production environments:
-
-```yaml
-# Enable bundled PostgreSQL (not production-grade)
-postgresql:
-  enabled: true
-
-# Enable AI service
-testkube-ai-service:
-  enabled: true
-  db:
-    url: postgresql://testkube:postgres5432@testkube-enterprise-postgresql:5432/ai?sslmode=disable
-  llmApi:
-    secretRef: my-openai-secret        # Secret containing OPENAI_API_KEY
-    secretRefKey: OPENAI_API_KEY
-
-# Enable AI in the dashboard
-testkube-cloud-ui:
-  ai:
-    enabled: true
-```
-
----
-
-### Option 2: Production Setup (Bring Your Own PostgreSQL)
-
-Recommended for production with managed PostgreSQL (AWS RDS, GCP Cloud SQL, Azure Database, etc.):
+### Helm Configuration
 
 ```yaml
 testkube-ai-service:
@@ -117,3 +78,12 @@ testkube-ai-service:
 | `testkube-ai-service.db.*` | empty | ✅ PostgreSQL required |
 | `testkube-ai-service.llmApi.secretRef` | empty | ✅ OpenAI key required |
 | `postgresql.enabled` | `false` | Only if using bundled DB |
+
+## Next Steps
+
+Read more about:
+
+- [AI Agents](./ai-agents)
+- [AI Assistant Overview](./ai-assistant-overview)
+- [AI Assistant Security & Compliance](./ai-assistant-security)
+- [AI Configuration Reference](./ai-configuration)

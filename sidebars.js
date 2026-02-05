@@ -666,7 +666,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Configuration",
+              label: "Configuration Quick Start",
               id: "articles/ai-enabling",
             },
             {
