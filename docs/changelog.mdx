@@ -17,6 +17,11 @@ Starting with this release, we've consolidated the Control Plane and Agent versi
 Patch versions may differ between components as fixes are released independently, but the major.minor version (e.g., 2.6.x) will be kept in sync, making it easier to track compatibility across your Testkube deployment.
 :::
 
+:::warning Breaking Change
+If you were using the AI Assistant in a previous release, you must now configure a PostgreSQL database for the AI service to function.
+The AI service uses PostgreSQL to persist conversation state and session data for the new AI Agents feature.
+:::
+
 ### What's new!
 
 **AI Agents for Test Automation**
