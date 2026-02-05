@@ -51,6 +51,7 @@ These tools make it easier for AI assistants to perform bulk analysis and genera
 - On-prem customers can now configure custom LLM models via Helm instead of being locked to defaults.
 - AI service now uses two model types: a primary model for complex agent tasks and a lightweight model for quick tasks like generating session titles.
 - Default models updated to `gpt-5.2` (primary) and `gpt-5-mini` (lightweight), with optional temperature settings for models that support it.
+- Control Plane scheduler improvements: synchronized MongoDB and PostgreSQL implementations, resolved race conditions during test workflow execution scheduling.
 
 ## Patch Release (2025-12-23)
 
