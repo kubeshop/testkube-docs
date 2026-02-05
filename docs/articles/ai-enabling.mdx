@@ -17,11 +17,14 @@ For Cloud installations, the LLM and model cannot be changed — everything is m
 
 ## On-Prem Users
 
+For On-Prem installations, you need to configure the AI service manually as described below - AND enable the AI Assistant 
+in the Dashboard as described above.
+
+### AI Service Helm Configuration
+
 **Prerequisites:**
 - OpenAI API key (or compatible LLM API)
 - PostgreSQL database (for conversation persistence) - this can live alongside MongoDB as your main Testkube database.
-
-### Helm Configuration
 
 ```yaml
 testkube-ai-service:
@@ -57,15 +60,6 @@ testkube-ai-service:
     secretRef: my-azure-openai-secret
     secretRefKey: AZURE_OPENAI_KEY
 ```
-
----
-
-### What Gets Enabled
-
-| Feature | Description |
-|---------|-------------|
-| **Chats** | AI assistant in the sidebar for workflow help |
-| **AI Agents** | Configurable MCP agents in Environment Settings |
 
 ---
 
