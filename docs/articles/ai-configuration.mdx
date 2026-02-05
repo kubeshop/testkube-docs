@@ -1,0 +1,295 @@
+# Testkube AI Configuration Reference
+
+This document provides a comprehensive reference for enabling and configuring Testkube AI functionality, 
+including [AI Assistant](./ai-assistant-overview), [AI Agents](./ai-agents), and related features.
+
+## Cloud Control Plane Users
+
+For users of the Testkube Cloud Control Plane, enabling AI functionality is straightforward:
+
+### Enable AI Assistant
+
+The Testkube AI Assistant is disabled by default for new organizations.
+
+**Who can enable:** Organization Owner or Admin
+
+**How to enable:**
+
+1. **Via the Initial AI Assistant Prompt:** 
+   When you first access the AI Assistant, an initial prompt is displayed with action buttons that allow you to either enable the feature or keep it disabled.
+
+2. **Through Organization Settings:**  
+   Navigate to **Organization Settings** → **Product Features** tab and toggle **AI Assistant** on.
+
+Once enabled, AI Assistant will integrate with your Testkube Dashboard, ready to assist you and your team.
+
+### Default LLM and Model
+
+The default LLM used by AI functionality is OpenAI's [GPT-5.2-Codex](https://openai.com/index/introducing-gpt-5-2-codex/).
+
+For Cloud installations, the LLM and model cannot be changed — everything is managed by Testkube.
+
+For On-Prem installations, you can configure your own OpenAI API Key or use a different LLM/model as described in the [On-Prem Users](#on-prem-users) section below.
+
+---
+
+## On-Prem Users
+
+Self-hosted installations require additional infrastructure and configuration apart from the above Cloud Control Plane configuration.
+
+### Infrastructure Requirements
+
+#### PostgreSQL Database
+
+A PostgreSQL database is required for LangGraph checkpointing (conversation persistence). Configure the database connection 
+via `POSTGRES_URI` environment variable or Helm `db.secretRef` configuration.
+
+:::note
+This DB is separate from the main Testkube database and is used solely for AI functionality - you can still use MongoDB for your main Testkube database (recommended).
+:::
+
+### Helm Configuration
+
+Configure the following components in your `testkube-enterprise` Helm values:
+
+```yaml
+# Enable the AI service
+testkube-ai-service:
+  enabled: true  # Default: false
+  llmApi:
+    url: ""  # Optional - defaults to OpenAI API when omitted
+    secretRef: "<secret-name>"  # K8s secret storing LLM_API_KEY
+    secretRefKey: "LLM_API_KEY"  # Default key name
+
+# Enable AI features in the UI
+testkube-cloud-ui:
+  ai:
+    enabled: true  # Default: false
+    aiServiceApiUri: "https://ai.<your-domain>"
+```
+
+### LLM API Key Setup
+
+Create a Kubernetes secret containing your LLM API key:
+
+```bash
+kubectl -n <namespace> create secret generic <secret-name> \
+  --from-literal=LLM_API_KEY=<your-api-key>
+```
+
+:::tip
+The secret must be in the same namespace as the Testkube control plane.
+:::
+
+### LLM Provider Options
+
+Testkube supports any LLM service that implements the OpenAI API specification:
+
+#### OpenAI (Direct)
+
+Leave `url` empty and provide the secret reference:
+
+```yaml
+testkube-ai-service:
+  enabled: true
+  llmApi:
+    secretRef: "<secret-name>"
+```
+
+#### Self-Hosted or Third-Party LLMs
+
+For self-hosted models (vLLM, LiteLLM, OpenLLM) or commercial gateways:
+
+```yaml
+testkube-ai-service:
+  enabled: true
+  llmApi:
+    url: "http://your-llm-service:8000/v1"
+    secretRef: "<secret-name>"
+```
+
+#### Testkube Hosted LLM Proxy (Trials Only)
+
+For evaluation purposes, you can use the Testkube hosted proxy:
+
+```yaml
+testkube-ai-service:
+  enabled: true
+  llmApi:
+    url: "https://llm.testkube.io"
+    # No secretRef needed - authentication handled via license key
+```
+
+:::warning
+The hosted proxy is intended **only for trials, demos, and onboarding**. It has usage limits and is not recommended for production workloads.
+:::
+
+### Advanced Model Configuration
+
+For more granular control over AI models, you can configure multiple models with different roles using the `models` array:
+
+```yaml
+testkube-ai-service:
+  enabled: true
+  models:
+    - name: gpt-5.2-codex       # Required - model identifier
+      type: primary             # Main model for AI Agents deep reasoning loop
+      url: ""                   # Optional - custom LLM endpoint
+      apiKey: ""                # Optional - direct API key
+      secretRef: ""             # Optional - K8s secret name
+      secretRefKey: ""          # Optional - key within the secret
+    - name: gpt-5-mini
+      type: lightweight         # Fast model for UI enrichment tasks
+      secretRef: "llm-secrets"
+      secretRefKey: "OPENAI_API_KEY"
+```
+
+#### Model Types
+
+| Type | Purpose | Examples |
+|------|---------|----------|
+| `primary` | Used within the deep agentic reasoning loop for complex tasks like test analysis, workflow generation, and debugging | AI Agents sessions, complex Copilot queries |
+| `lightweight` | Used to enrich the UI with summaries, generate descriptions, and create titles | Execution summaries, workflow descriptions, conversation titles |
+
+If only one model is configured (or using the simple `model` property), it will be used for both primary and lightweight tasks.
+
+#### Model Authentication
+
+Each model can have its own authentication configuration:
+
+| Property | Description |
+|----------|-------------|
+| `url` | Custom LLM endpoint URL (defaults to global `llmApi.url` or OpenAI) |
+| `apiKey` | Direct API key value (not recommended for production) |
+| `secretRef` | Kubernetes secret name containing the API key |
+| `secretRefKey` | Key within the secret (defaults to `LLM_API_KEY`) |
+
+:::tip
+For most deployments, configure `secretRef` and `secretRefKey` to securely reference API keys stored in Kubernetes secrets.
+:::
+
+#### Simple vs Advanced Configuration
+
+For simple deployments with a single model, use the `model` property:
+
+```yaml
+testkube-ai-service:
+  enabled: true
+  model: "gpt-5.2-codex"
+  llmApi:
+    secretRef: "llm-secrets"
+```
+
+For advanced deployments with multiple models or different LLM providers, use the `models` array as shown above.
+
+### Authentication Configuration
+
+The AI service requires OAuth/OIDC authentication. Configure one of the following:
+
+| Option | Environment Variable | Description |
+|--------|---------------------|-------------|
+| OIDC Discovery (recommended) | `OIDC_CONFIGURATION_URL` | Auto-discovers endpoints from Dex |
+| Manual configuration | `OAUTH_JWKS_URL` + `OAUTH_ISSUER` | Provide both URLs manually |
+
+When using Dex (default), authentication is automatically configured via the global Dex issuer settings.
+
+### Network Requirements
+
+Ensure your firewall allows traffic to:
+
+- **LLM endpoint** — OpenAI API or your custom LLM service
+- **Testkube AI Service API** — The deployed AI service endpoint
+
+For corporate proxies, inject proxy variables into the AI service pod:
+
+```yaml
+testkube-ai-service:
+  enabled: true
+  llmApi:
+    secretRef: "<secret-name>"
+  extraEnvVars:
+    - name: HTTP_PROXY
+      value: "http://proxy.domain:8080"
+    - name: HTTPS_PROXY
+      value: "https://proxy.domain:8043"
+    - name: NO_PROXY
+      value: ""
+```
+
+---
+
+## Feature Flags Reference
+
+| Flag/Setting | Location | Default | Purpose |
+|-------------|----------|---------|---------|
+| `testkube-ai-service.enabled` | Helm | `false` | Deploy AI service |
+| `testkube-cloud-ui.ai.enabled` | Helm | `false` | Enable UI AI features |
+| `MCP_ENABLED` | Control Plane env | `false` | Enable MCP integration |
+| `aiCopilotEnabled` | User settings (API) | `false` | Per-user AI toggle |
+
+---
+
+## Environment Variables Reference
+
+The following environment variables can be configured for the AI service:
+
+### Required Variables
+
+| Variable | Description |
+|----------|-------------|
+| `CONTROL_PLANE_ENDPOINT` | URL endpoint for the Testkube Control Plane |
+| `POSTGRES_URI` | PostgreSQL connection string for checkpointing |
+
+### LLM Configuration
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `LLM_API_KEY` | Conditional | Required if not using license key or custom LLM |
+| `LLM_API_URL` | No | Custom LLM endpoint (OpenAI-compatible) |
+| `MODEL_NAME` | No | Simple model name (e.g., `gpt-4o`, `gpt-5.2-codex`) |
+| `AI_MODELS_FILE` | No | Path to YAML file with advanced model configurations (takes precedence over `MODEL_NAME`) |
+
+### Authentication
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `OIDC_CONFIGURATION_URL` | Conditional | OIDC discovery URL (recommended) |
+| `OAUTH_JWKS_URL` | Conditional | JWK set document URL (if not using OIDC discovery) |
+| `OAUTH_ISSUER` | Conditional | OAuth issuer URL (if not using OIDC discovery) |
+
+---
+
+## Quick Start Checklist
+
+### Cloud Users
+
+- [ ] Enable AI Assistant in Organization Settings → Product Features
+
+### On-Prem Users
+
+- [ ] PostgreSQL database available and accessible
+- [ ] LLM API key secret created in the correct namespace
+- [ ] Helm values configured:
+  - [ ] `testkube-ai-service.enabled: true`
+  - [ ] `testkube-ai-service.llmApi.secretRef` set
+  - [ ] `testkube-cloud-ui.ai.enabled: true`
+  - [ ] `testkube-cloud-ui.ai.aiServiceApiUri` set
+- [ ] Network access to LLM endpoint configured
+- [ ] OAuth/OIDC authentication configured (or using default Dex)
+- [ ] Enable AI Assistant in Organization Settings after deployment
+
+---
+
+### External Secrets
+
+If using External Secrets Operator:
+
+```yaml
+testkube-ai-service:
+  externalSecrets:
+    enabled: true
+    refreshInterval: 5m
+    clusterSecretStoreName: secret-store
+```
+
+

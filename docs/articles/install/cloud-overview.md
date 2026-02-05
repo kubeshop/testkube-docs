@@ -6,10 +6,10 @@ your infrastructure wherever you want to run your tests.
 
 ## Getting Started
 
-To get started with the Cloud Control Plane, go to https://app.testkube.io and sign up for a trial account. During the onboarding,
-you will be prompted to create an initial Testkube Environment, which will provide you with the required CLI/Helm commands to
-deploy the corresponding Testkube Agent in your infrastructure. You can then add as many Environments as you need 
-to execute your Tests in your infrastructure accordingly - [Read More](/articles/environment-management#creating-a-new-environment).
+To get started with the Cloud Control Plane, go to https://app.testkube.io and sign up for a trial account. During the onboarding, 
+you will be prompted to create an initial Testkube Environment, which will provide you with the required CLI/Helm commands to deploy 
+the corresponding Testkube Agent in your infrastructure. You can then add as many Environments as you need to execute your Tests in 
+your infrastructure accordingly - [Read More](/articles/environment-management#creating-a-new-environment).
 
 For local deployment of the Agent (for example during evaluation) you can either use the [Testkube Docker Agent](docker-agent) or
 create your own local Kubernetes cluster - [Read More](quickstart-no-k8s).

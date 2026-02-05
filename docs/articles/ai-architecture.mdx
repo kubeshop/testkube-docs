@@ -1,0 +1,220 @@
+# Testkube AI Architecture
+
+This document provides a high-level overview of the architecture powering Testkube's AI capabilities, 
+including the AI Assistant and AI Agents. Understanding this architecture helps you leverage these 
+features effectively and understand their capabilities and limitations.
+
+## Overview
+
+Testkube's AI features are built on a modern agentic AI architecture that combines:
+
+- **Large Language Models (LLMs)** for natural language understanding and generation
+- **LangGraph** for agent orchestration and stateful conversation management
+- **Model Context Protocol (MCP)** for tool integration and extensibility
+- **Human-in-the-Loop (HITL)** controls for safe execution of sensitive operations
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         Testkube Dashboard                              │
+│  ┌──────────────────┐              ┌──────────────────────────────────┐ │
+│  │   AI Assistant   │              │          AI Agent Chats          │ │
+│  │   (Chat Panel)   │              │    (Background/Async Tasks)      │ │
+│  └────────┬─────────┘              └───────────────┬──────────────────┘ │
+└───────────┼────────────────────────────────────────┼────────────────────┘
+            │                                        │
+            └──────────────────┬─────────────────────┘
+                               ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│                        Testkube AI Backend                               │
+│  ┌─────────────────────────────────────────────────────────────────────┐ │
+│  │                     LangGraph Agent Orchestrator                    │ │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌────────────┐  │ │
+│  │  │   System    │  │   State     │  │    Tool     │  │   HITL     │  │ │
+│  │  │   Prompt    │  │  Management │  │  Execution  │  │  Controls  │  │ │
+│  │  └─────────────┘  └─────────────┘  └─────────────┘  └────────────┘  │ │
+│  └─────────────────────────────────────────────────────────────────────┘ │
+│                                    │                                     │
+│         ┌──────────────────────────┼──────────────────────────┐          │
+│         ▼                          ▼                          ▼          │
+│  ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────────┐ │
+│  │  Testkube MCP   │     │   Local Tools   │     │   External MCP      │ │
+│  │     Server      │     │                 │     │     Servers         │ │
+│  │  (via Bridge)   │     │  - Search Docs  │     │  (User-defined)     │ │
+│  │                 │     │  - Navigation   │     │                     │ │
+│  │  - Workflows    │     │  - YAML Search  │     │  - GitHub, Jira,    │ │
+│  │  - Executions   │     │  - Agent Mgmt   │     │    Slack, etc.      │ │
+│  │  - Artifacts    │     │                 │     │                     │ │
+│  └─────────────────┘     └─────────────────┘     └─────────────────────┘ │
+└──────────────────────────────────────────────────────────────────────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │   LLM Provider      │
+                    │  (OpenAI, etc.)     │
+                    └─────────────────────┘
+```
+
+## Key Components
+
+### LangGraph Agent Framework
+
+The AI backend uses [LangGraph](https://langchain-ai.github.io/langgraph/), an open-source framework for building 
+stateful, multi-actor AI applications. LangGraph provides:
+
+- **Conversation State Management**: Maintains context across multiple interactions within a chat session
+- **Checkpointing**: Persists conversation history to allow resuming sessions and reviewing past interactions
+- **Tool Orchestration**: Manages the execution of tools based on the LLM's decisions
+- **Interrupts and Approvals**: Supports pausing execution for human approval before sensitive operations
+
+### Model Context Protocol (MCP)
+
+[MCP](https://modelcontextprotocol.io/) is an open standard for connecting AI assistants to external tools and data sources. 
+Testkube uses MCP to:
+
+- **Expose Testkube Functionality**: The built-in [Testkube MCP Server](/articles/mcp-overview) provides tools for managing workflows, 
+  analyzing executions, and retrieving artifacts
+- **Enable Extensibility**: Connect external MCP servers (GitHub, Jira, Slack, etc.) to extend AI capabilities
+- **Standardize Tool Interfaces**: Use a consistent protocol for tool discovery, invocation, and response handling
+
+Learn more about MCP integration in the [MCP Configuration](/articles/mcp-configuration) documentation.
+
+### Large Language Models
+
+The AI features are powered by Large Language Models that provide:
+
+- **Natural Language Understanding**: Interpret user questions and requests
+- **Reasoning and Planning**: Decide which tools to use and in what order
+- **Response Generation**: Produce helpful, contextual responses
+
+:::note
+The LLM used by AI Agents and the AI Assistant is configurable. See [Default LLM and Model](/articles/ai-configuration#default-llm-and-model) 
+for configuration details.
+:::
+
+## Testkube MCP Tools
+
+The Testkube MCP Server exposes a comprehensive set of tools that allow AI Agents to interact with your 
+Testkube environment. These tools are automatically available to the AI Assistant and can be enabled 
+for custom AI Agents.
+
+The available tools cover:
+
+- **Workflow Management** - List, create, update, and run workflows
+- **Execution Management** - List executions, fetch logs, abort running executions, wait for completion
+- **Artifacts** - List and read artifacts produced by executions
+- **Metadata** - Build dashboard URLs, list labels, resource groups, and agents
+
+For a complete list of available tools and their descriptions, see the [Testkube MCP Server Overview](/articles/mcp-overview#available-tools).
+
+## Local Tools
+
+In addition to MCP tools, the AI backend includes built-in local tools that enhance the AI's capabilities:
+
+- **Documentation Search** - Semantic search over Testkube documentation
+- **YAML Examples Search** - Search TestWorkflow YAML examples for reference
+- **Dashboard Navigation** - Assistance with navigating the Testkube Dashboard
+- **AI Agent Management** - List agents, check session status, and trigger new sessions
+
+## Human-in-the-Loop (HITL) Approval
+
+For security and control, certain tool operations require human approval before execution. This is particularly 
+important for tools that can modify data or perform sensitive operations.
+
+### How HITL Works
+
+1. **Tool Invocation**: The AI decides to use a tool that requires approval
+2. **Execution Pauses**: The agent session is suspended, waiting for user input
+3. **Approval Request**: The pending tool call is displayed to the user with its parameters
+4. **User Decision**: The user can:
+   - **Approve**: Allow the tool to execute as requested
+   - **Edit**: Modify the tool parameters before execution
+   - **Respond**: Provide feedback to the AI without executing the tool
+   - **Ignore**: Skip the tool execution entirely
+5. **Execution Resumes**: Based on the user's decision, the session continues
+
+### Configuring Tool Approval
+
+When [defining AI Agents](/articles/defining-ai-agents#configuring-mcp-server-tools), you can configure 
+which tools require approval:
+
+- **Auto-approved Tools**: Execute immediately without user intervention (suitable for read-only operations)
+- **Approval-required Tools**: Pause for user confirmation (recommended for mutating operations)
+- **Disabled Tools**: Prevent the AI from using specific tools entirely
+
+## Conversation State and Persistence
+
+### Session Management
+
+Each interaction with an AI Agent or the AI Assistant creates a session (also called a "Chat"). Sessions provide:
+
+- **Conversation History**: All messages, tool calls, and responses are preserved
+- **Context Continuity**: The AI maintains awareness of previous interactions within the session
+- **Resumability**: Sessions can be paused and resumed, even after browser refresh
+
+### State Persistence
+
+Conversation state is stored in the database configured for the Testkube Control Plane (PostgreSQL or MongoDB), ensuring:
+
+- **Reliability**: Sessions survive service restarts
+- **Multi-user Access**: Multiple users can view and interact with the same session (with appropriate permissions)
+- **Audit Trail**: Complete history of AI interactions for compliance and debugging
+
+## Extensibility with Custom MCP Servers
+
+One of the most powerful features of Testkube's AI architecture is the ability to connect external MCP servers, 
+extending the AI's capabilities beyond Testkube itself.
+
+### Use Cases for External MCP Servers
+
+- **GitHub Integration**: Fetch code changes, create issues, manage PRs
+- **Jira Integration**: Create tickets, update issue status, link test failures
+- **Slack Integration**: Send notifications, post summaries to channels
+- **Custom Tools**: Connect your own MCP servers for domain-specific functionality
+
+### How External MCP Servers Work
+
+1. Configure the MCP server connection in Testkube ([MCP Server Configuration](/articles/mcp-servers-for-ai-agents))
+2. Select which tools from the server to enable for your AI Agent
+3. Configure approval policies for each tool
+4. The AI Agent can now use these tools alongside Testkube's built-in tools
+
+Learn more about configuring MCP servers in [Connected MCP Servers](/articles/mcp-servers-for-ai-agents).
+
+## Security Considerations
+
+### Data Flow
+
+- User prompts and context are sent to the configured LLM provider for processing
+- Tool execution happens within Testkube's infrastructure
+- Results are returned to the user through the Testkube Dashboard
+
+### Access Control
+
+- AI Agents operate within the user's permissions - they cannot access resources the user doesn't have access to
+- Tool approval policies provide an additional layer of control over sensitive operations
+- Session history is scoped to the organization and environment
+
+For detailed security information, see [AI Assistant Security & Compliance](/articles/ai-assistant-security).
+
+## Performance and Limitations
+
+### Capabilities
+
+- **Multi-step Reasoning**: Can plan and execute complex sequences of tool operations
+- **Context Awareness**: Understands the current workflow, execution, or dashboard context
+- **Knowledge Integration**: Combines Testkube documentation with real-time data from your environment
+
+### Current Limitations
+
+- **LLM Token Limits**: Very long conversations may be summarized to fit within model context windows
+- **Tool Latency**: Some operations (especially those involving large artifacts) may take time to complete
+- **Non-determinism**: LLM responses can vary slightly between invocations for the same input
+
+## Related Documentation
+
+- [Testkube AI Agents Overview](/articles/ai-agents)
+- [Defining AI Agents](/articles/defining-ai-agents)
+- [AI Agent Chats](/articles/using-ai-agents)
+- [Connected MCP Servers](/articles/mcp-servers-for-ai-agents)
+- [AI Assistant Overview](/articles/ai-assistant-overview)
+- [Testkube MCP Server Configuration](/articles/mcp-configuration)

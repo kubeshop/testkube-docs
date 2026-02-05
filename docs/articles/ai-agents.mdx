@@ -1,0 +1,81 @@
+# Testkube AI Agents
+
+Testkube allows you to define AI Agents to perform advanced test orchestration and analysis tasks, using
+both the internal and external MCP Servers for whatever scenario you need. 
+
+## Example Use Cases for AI Agents
+
+Example Use Cases for AI Agents are:
+
+- **Automated Remediation**: introspection of failed tests and related code changes to suggest fixes (see [Remediation Agent Example](/articles/remediation-agent))
+- **Anomaly Detection**: analysis of execution results or resource usage over time to detect anomalies.
+- **Advanced Integrations**: integrating with external systems via their MCP Server(s) for creating issues, sharing/reading data, etc.
+- **Advanced Troubleshooting**: including externally available data for troubleshooting failed tests (see [Flakiness Analysis Agent Example](/articles/flakiness-analysis-agent))
+- **Automated Test Generation**: Agents can both create new automated tests and the Workflows required to run them. 
+
+The only limit to an AI Agents capabilities is set by the LLM you use and the MCP Servers you integrate with.
+
+:::note
+Testkube AI Agents use the same LLM that has been configured for the AI Assistant for resolving the provided prompt,
+see [Default LLM and Model](/articles/ai-configuration#default-llm-and-model).
+:::
+
+## Types of AI Agents
+
+Testkube AI Agents can be designed with two distinct approaches depending on your use case:
+
+### Task-Focused AI Agents
+
+Task-focused agents are designed to perform a **specific task given specific inputs**, typically as part of an 
+automated pipeline. These agents:
+
+- Receive well-defined inputs (e.g., a workflow execution ID, test results, or error logs)
+- Perform a specific analysis or action
+- Produce a concrete output (e.g., post a summary to Slack, create a GitHub issue, update a dashboard)
+
+**Examples**: An agent that analyzes a failed workflow execution, identifies the root cause, and automatically 
+posts a summary with remediation suggestions to a Slack channel.
+
+Task-focused agents are ideal for **automation scenarios** where you want to augment your Continuous Testing pipelines with 
+AI-powered analysis and actions without human intervention.
+
+:::tip
+See the [Remediation Agent Example](/articles/remediation-agent) for an example of a task-focused agent.
+:::
+
+### Guidance and Support AI Agents
+
+Guidance agents are designed to provide **interactive assistance for general tasks**, acting more like an 
+AI-powered assistant or copilot. These agents:
+
+- Help users accomplish broader goals through conversation
+- Provide recommendations, best practices, and step-by-step guidance
+- Can perform actions on behalf of the user when requested
+
+**Example**: An agent that helps users create new TestWorkflows by asking clarifying questions about their 
+testing requirements, suggesting appropriate configurations, and generating the workflow definition.
+
+Guidance agents are ideal for **onboarding, exploration, and complex configuration tasks** where users benefit 
+from interactive support and contextual recommendations.
+
+#### Predefined Guidance AI Agents
+
+Testkube includes a set of pre-defined Guidance AI Agents in the Dashboard that you can easily add to your environment 
+and use to get started with AI Agents - read more at [Creating an AI Agent from a Template](/articles/defining-ai-agents#creating-an-ai-agent-from-a-template).
+
+![AI Agent Templates](images/ai-agent-templates.png)
+
+### Choosing the Right Approach
+
+| Aspect | Task-Focused | Guidance & Support |
+|--------|--------------|-------------------|
+| **Trigger** | Automated (e.g., on execution failure) | User-initiated conversation |
+| **Input** | Specific, well-defined data | Open-ended questions or goals |
+| **Output** | Concrete action or artifact | Recommendations and assistance |
+| **Interaction** | Fire-and-forget | Interactive, multi-turn |
+| **Best for** | CI/CD/GitOps automation, alerting | Onboarding, configuration, exploration |
+
+Both styles can leverage the same MCP Servers and tools - the difference lies in how the agent is triggered 
+and how it interacts with users or systems.
+
+Check out [Defining AI Agents](/articles/defining-ai-agents) for more details on how to create and manage AI Agents.

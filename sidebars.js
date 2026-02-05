@@ -133,11 +133,6 @@ const sidebars = {
                 },
                 {
                   type: "doc",
-                  label: "Testkube AI Assistant",
-                  id: "articles/ai-assistant-on-prem-install",
-                },
-                {
-                  type: "doc",
                   label: "Deploying on OpenShift",
                   id: "articles/deploying-on-openshift",
                 },
@@ -192,9 +187,20 @@ const sidebars = {
           ],
         },
         {
-          type: "doc",
+          type: "category",
           label: "Cloud Control Plane",
-          id: "articles/install/cloud-overview",
+          items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/install/cloud-overview",
+            },
+            {
+              type: "doc",
+              label: "Custom SSO",
+              id: "articles/custom-sso",
+            },
+          ]
         },
         "articles/install/faq",
         {
@@ -654,6 +660,58 @@ const sidebars = {
           label: "Testkube AI",
           items: [
             {
+              type: "doc",
+              label: "Overview",
+              id: "articles/testkube-ai-overview",
+            },
+            {
+              type: "doc",
+              label: "Configuration Quick Start",
+              id: "articles/ai-enabling",
+            },
+            {
+              type: "category",
+              label: "AI Agents",
+              items: [
+                {
+                  type: "doc",
+                  label: "Overview",
+                  id: "articles/ai-agents",
+                },
+                {
+                  type: "doc",
+                  label: "AI Agent Chats",
+                  id: "articles/using-ai-agents",
+                },
+                {
+                  type: "doc",
+                  label: "Defining AI Agents",
+                  id: "articles/defining-ai-agents",
+                },
+                {
+                  type: "doc",
+                  label: "Connected MCP Servers",
+                  id: "articles/mcp-servers-for-ai-agents",
+                },
+                {
+                  type: "category",
+                  label: "Example Agents",
+                  items: [
+                    {
+                      type: "doc",
+                      label: "Remediation",
+                      id: "articles/remediation-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Flakiness Analysis",
+                      id: "articles/flakiness-analysis-agent",
+                    }
+                  ],
+                },
+              ],
+            },
+            {
               type: "category",
               label: "AI Assistant",
               items: [
@@ -661,16 +719,6 @@ const sidebars = {
                   type: "doc",
                   label: "Overview",
                   id: "articles/ai-assistant-overview",
-                },
-                {
-                  type: "doc",
-                  label: "On-Prem Installation",
-                  id: "articles/ai-assistant-on-prem-install",
-                },
-                {
-                  type: "doc",
-                  label: "Enable AI Assistant",
-                  id: "articles/ai-assistant-enable",
                 },
                 {
                   type: "doc",
@@ -691,7 +739,7 @@ const sidebars = {
             },
             {
               type: "category",
-              label: "MCP Server",
+              label: "Testkube MCP Server",
               items: [
                 {
                   type: "doc",
@@ -725,6 +773,22 @@ const sidebars = {
                 },
               ],
             },
+            {
+              type: "category",
+              label: "Reference",
+              items: [
+                {
+                  type: "doc",
+                  label: "Configuration",
+                  id: "articles/ai-configuration",
+                },
+                {
+                  type: "doc",
+                  label: "Architecture",
+                  id: "articles/ai-architecture",
+                }
+              ],
+            }
           ],
         },
         {

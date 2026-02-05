@@ -1,7 +1,7 @@
 # Testkube AI Assistant Overview
 
 > **On-Prem Installation Notice:**  
-> For details on installing and enabling the AI service on On-Prem deployments, please see the [On-Prem Installation](./ai-assistant-on-prem-install.md) page.
+> For details on installing and enabling the AI service on On-Prem deployments, please see the [AI Configuration Reference](./ai-configuration.mdx) page.
 
 Welcome to the documentation for the **Testkube AI Assistant** – an AI-powered assistant integrated directly into the Testkube Dashboard, 
 designed to help you streamline your test orchestration by providing intelligent assistance in areas such as log analysis, dashboard navigation,
@@ -30,8 +30,7 @@ Check out the [Testkube MCP Server](/articles/mcp-overview) to see how you can i
 
 ## Learn more about AI Assistant
 
-- [On-Prem Installation](./ai-assistant-on-prem-install.md)
-- [Enable AI Assistant](./ai-assistant-enable.md)
+- [Configuration Reference](./ai-configuration.mdx)
 - [How AI Assistant can help](./ai-assistant-can-help.md)
 - [How AI Assistant is different from other chatbots](./ai-assistant-is-different.md)
 
