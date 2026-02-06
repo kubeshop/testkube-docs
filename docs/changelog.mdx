@@ -8,6 +8,41 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Monthly Release v2.7.0 (Planned)
+
+Control Plane and Agent continue with unified versioning in `2.7.x`.
+
+### What's new!
+
+**Control Plane becomes default source of truth for connected environments**
+
+Starting in `v2.7`, orchestration ownership moves to the Control Plane by default for connected environments.
+For most users, this means workflow and schedule management is now centered in Control Plane with no workflow changes required.
+Environment health no longer depends on continuous SuperAgent connectivity, and environments no longer automatically enter read-only mode when that connection is unavailable.
+
+On upgrade, the Agent executes the SuperAgent migration to align existing environments with the new source-of-truth model.
+
+Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-truth)
+
+**Workflow sync behavior changed (GitOps opt-in)**
+
+Workflow CRDs are no longer synced from Kubernetes.
+If your team manages workflows as CRDs, enable and validate GitOps capability/agent flow so Git-managed CRD updates continue to reconcile as expected.
+
+Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-truth#workflow-definitions-and-gitops)
+
+**Scheduling ownership moved to Control Plane**
+
+Scheduled Workflows are now managed by the Control Plane by default in connected deployments.
+
+Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-truth#scheduling-changes)
+
+### Observability updates
+
+A large set of SuperAgent Prometheus metrics is now available in Control Plane.
+
+Read more: [Control Plane Metrics](/articles/control-plane-metrics)
+
 ## Monthly Release v2.6.0 (2026-02-05)
 
 This release is available in Helm chart v2.329.0. Control Plane and Agent versions are now unified at **v2.6.0**.
