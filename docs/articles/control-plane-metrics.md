@@ -16,8 +16,6 @@ Control Plane metrics are available in Testkube Cloud and Enterprise connected d
 - `TK_CLOUD_METRICS_ENABLED` controls control-plane metrics emission (default `true` in `v2.7+`).
 - `TK_SCHEDULER_METRICS_ENABLED` controls scheduler metrics emission (default `true`).
 
-When metrics are disabled, collectors are wired but do not emit samples.
-
 ## Label Model (Control Plane)
 
 - `environment_name` (if environment has no name, its ID is used).
@@ -120,4 +118,3 @@ testkube_webhook_executions_total{
 
 - Agent metrics keep legacy labels (`labels`, `tags`, URIs) and no environment scoping; control-plane metrics use fixed labels and add `environment_name`.
 - Durations are histograms in seconds (agent used summaries/gauges in milliseconds).
-- Trigger event counter is paused in control plane to avoid double-counting; other agent metrics are mirrored.
