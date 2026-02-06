@@ -49,8 +49,6 @@ paths:
                   type: string
                   maxLength: 40
                   pattern: ^[a-z0-9]([a-z0-9-.]*[a-z0-9])?$
-                type:
-                  $ref: './components.yaml#/components/schemas/AgentType'
                 labels:
                   type: object
                   additionalProperties:
@@ -71,7 +69,6 @@ paths:
                   type: boolean
               required:
                 - name
-                - type
                 - environments
         required: true
       responses:
@@ -101,7 +98,6 @@ paths:
     parameters:
       - $ref: './components.yaml#/components/parameters/ID'
       - $ref: './components.yaml#/components/parameters/EnvironmentIDQP'
-      - $ref: './components.yaml#/components/parameters/AgentTypeQP'
       - $ref: './components.yaml#/components/parameters/AgentCapabilityQP'
       - $ref: './components.yaml#/components/parameters/Limit'
       - $ref: './components.yaml#/components/parameters/Offset'
@@ -187,6 +183,31 @@ paths:
       - $ref: './components.yaml#/components/parameters/ID'
       - $ref: './components.yaml#/components/parameters/AgentName'
       - $ref: './components.yaml#/components/parameters/IncludeDeleted'
+  /organizations/{id}/agents/{agentID}/commands:
+    get:
+      summary: '[internal] Get commands for this super agent'
+      description: >-
+        Get commands for this super agent. This endpoint is deprecated and will
+        be removed in the near future.
+      operationId: getSuperAgentCommands
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/SuperAgentCommands'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/AgentName'
   /organizations/{id}/agents/{agentID}/secret-key:
     get:
       summary: Get the secret key for selected agent.
