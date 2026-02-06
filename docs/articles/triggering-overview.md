@@ -10,5 +10,3 @@ Workflows defined in Testkube can be triggered by a number of mechanisms:
 6. Via the [Testkube CLI](../cli/testkube-run)
 7. Via the [REST API](/openapi/overview)
 8. From another Workflow - as described in [Test Workflows - Test Suites](/articles/test-workflows-test-suites) and [Remote Workflow Execution](/articles/remote-workflow-execution)
-
-For connected environments in `v2.7`, see [Control Plane Source of Truth](/articles/control-plane-source-of-truth) for details on ownership changes, listener-based triggers, and scheduling behavior.

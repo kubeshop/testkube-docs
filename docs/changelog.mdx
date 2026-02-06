@@ -18,6 +18,7 @@ Control Plane and Agent continue with unified versioning in `2.7.x`.
 
 Starting in `v2.7`, orchestration ownership moves to the Control Plane by default for connected environments.
 For most users, this means workflow and schedule management is now centered in Control Plane with no workflow changes required.
+Environment health no longer depends on continuous SuperAgent connectivity, and environments no longer automatically enter read-only mode when that connection is unavailable.
 
 On upgrade, the Agent executes the SuperAgent migration to align existing environments with the new source-of-truth model.
 
@@ -38,8 +39,8 @@ Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-tru
 
 **Webhook and trigger execution remain agent-based**
 
-- Webhooks continue to be executed by Agents.
-- Test Triggers continue to run through Listener Agents (or Standalone Agent listener behavior).
+- Webhooks continue to be executed by Agents via the agent capability model.
+- Test Triggers continue to run through [Listener Agents](/articles/agents-overview#listener-agents) (or Standalone Agent listener behavior).
 
 Note: "webhook capability" is currently an internal implementation detail and may change in future releases.
 
