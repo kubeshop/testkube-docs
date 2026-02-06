@@ -26,7 +26,7 @@ Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-tru
 
 **Workflow sync behavior changed (GitOps opt-in)**
 
-Workflow CRDs are no longer synced from Kubernetes by default in connected mode.
+Workflow CRDs are no longer synced from Kubernetes.
 If your team manages workflows as CRDs, enable and validate GitOps capability/agent flow so Git-managed CRD updates continue to reconcile as expected.
 
 Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-truth#workflow-definitions-and-gitops)
@@ -37,21 +37,9 @@ Scheduled Workflows are now managed by the Control Plane by default in connected
 
 Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-truth#scheduling-changes)
 
-**Webhook and trigger execution remain agent-based**
-
-- Webhooks continue to be executed by Agents via the agent capability model.
-- Test Triggers continue to run through [Listener Agents](/articles/agents-overview#listener-agents) (or Standalone Agent listener behavior).
-
-Note: "webhook capability" is currently an internal implementation detail and may change in future releases.
-
-Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-truth#webhooks-and-triggers)
-
 ### Observability updates
 
-**Control Plane metrics enabled by default**
-
-Control Plane metrics are enabled by default in `v2.7`.
-Scheduler metrics docs are consolidated with control-plane metrics documentation.
+A large set of SuperAgent Prometheus metrics is now available in Control Plane.
 
 Read more: [Control Plane Metrics](/articles/control-plane-metrics)
 
