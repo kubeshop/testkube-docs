@@ -1,8 +1,9 @@
 # Test Workflow Best Practices
 
 This guide provides practical recommendations for authoring Test Workflows in Testkube. The advice is
-organized into general best practices that apply to all workflows, followed by recommendations for
-specific test categories (performance, E2E/UI, API, etc.) and individual testing tools.
+organized into general best practices that apply to all workflows, recommendations for
+specific test categories (performance, E2E/UI, API, etc.), error handling and scheduling patterns,
+security guidelines, and tool-specific recommendations at the end.
 
 :::tip
 These recommendations are derived from real-world TestWorkflow patterns used by the Testkube team and
@@ -30,7 +31,7 @@ container:
 
 ### Set Appropriate Resource Requests
 
-Every workflow should declare resource requests to help the Kubernetes scheduler place pods correctly
+Every workflow should declare [resource requests](/articles/test-workflows-job-and-pod) to help the Kubernetes scheduler place pods correctly
 and avoid noisy-neighbor problems. Use these as starting-point guidelines:
 
 | Test Category | CPU | Memory |
@@ -58,6 +59,7 @@ leave enough headroom above the request.
 
 When cloning from a large repository, use the `paths` field to fetch only the files your test needs.
 This reduces clone time and disk usage significantly.
+See [Content](/articles/test-workflows-content#git-repository) for all Git options.
 
 ```yaml
 content:
@@ -70,7 +72,7 @@ content:
 
 ### Name Your Steps Clearly
 
-Give every step a descriptive `name`. Names appear in the Testkube Dashboard execution logs and make
+Give every step a descriptive `name`. Names appear in the Testkube Dashboard [execution logs](/articles/testkube-dashboard-execution-details) and make
 it much easier to understand what happened when debugging failures.
 
 ```yaml
@@ -87,7 +89,7 @@ steps:
 
 ### Always Collect Artifacts
 
-Even if a test tool writes output to stdout, collecting file artifacts (reports, logs, screenshots,
+Even if a test tool writes output to stdout, collecting file [artifacts](/articles/test-workflows-artifacts) (reports, logs, screenshots,
 videos) gives you persistent, downloadable evidence of every run.
 
 Create the target directory first, and use `condition: always` so artifacts are saved even when the
@@ -101,7 +103,7 @@ steps:
       my-test-command --report /data/artifacts/report.html
     steps:
       - name: Save artifacts
-        condition: always
+        condition: always 
         workingDir: /data/artifacts
         artifacts:
           paths:
@@ -117,7 +119,7 @@ Configure your testing tool to produce JUnit output whenever possible.
 
 ### Set Job Timeouts
 
-Protect your cluster from runaway tests by always setting `activeDeadlineSeconds`. Choose a value
+Protect your cluster from runaway tests by always setting [`activeDeadlineSeconds`](/articles/test-workflows-job-and-pod). Choose a value
 that comfortably covers the expected test duration with some buffer.
 
 ```yaml
@@ -181,7 +183,7 @@ container:
 ### Use Concurrency Controls
 
 If a workflow should not run in parallel with itself (e.g., a load test hitting a shared environment),
-set a concurrency limit:
+set a [concurrency limit](/articles/test-workflows-concurrency-queueing):
 
 ```yaml
 concurrency:
@@ -206,8 +208,9 @@ execution:
 
 ### Performance Testing (k6, JMeter, Artillery, Locust)
 
-**Scale with parallel workers.** All major performance tools support distributed execution in
-Testkube. Use `parallel` to fan out load generation across multiple pods, and `paused: true`
+**Scale with [parallel](/articles/test-workflows-parallel) workers.** All major performance tools support distributed execution in
+Testkube — see examples for [k6](/articles/examples/k6-distributed), [JMeter](/articles/examples/jmeter-distributed),
+and [Locust](/articles/examples/locust-distributed). Use `parallel` to fan out load generation across multiple pods, and `paused: true`
 to synchronize workers so they start generating load simultaneously.
 
 ```yaml title="Synchronized k6 workers"
@@ -232,7 +235,7 @@ pressure. Profile your load test locally first, then set resource requests accor
 workers produce unreliable throughput numbers.
 
 **Collect HTML and JTL/JSON reports.** Most performance tools can produce rich HTML dashboards.
-Always write them to artifacts so the team can review results without re-running the test.
+Always write them to [artifacts](/articles/test-workflows-artifacts) so the team can review results without re-running the test.
 
 **Use separate environments for performance tests.** Performance tests can disrupt shared services.
 Use [execution tags](/articles/filtering-test-workflow-executions-using-tags) or
@@ -240,12 +243,15 @@ Use [execution tags](/articles/filtering-test-workflow-executions-using-tags) or
 
 ### End-to-End / UI Testing (Playwright, Cypress, Selenium)
 
+See the full examples for [Playwright](/articles/examples/playwright-basic), [Cypress](/articles/examples/cypress-basic),
+and [Selenium](/articles/examples/selenium-basic).
+
 **Allocate generous CPU and memory.** Browser processes are resource-hungry. The recommended
 baseline for a single-browser workflow is `cpu: 1500m` and `memory: 2Gi`. Under-provisioning
 leads to flaky timeouts.
 
 **Mount `/dev/shm` for Cypress.** Chrome inside containers needs shared memory. Mount an in-memory
-`emptyDir` at `/dev/shm` to avoid crashes:
+`emptyDir` at `/dev/shm` to avoid crashes (see [Job & Pod Configuration](/articles/test-workflows-job-and-pod) for volume details):
 
 ```yaml
 pod:
@@ -261,7 +267,8 @@ container:
 ```
 
 **Shard tests for parallelism.** Both Playwright and Cypress support built-in sharding. Use the
-`parallel` and `shards` features to split test files across workers and merge reports afterward.
+[`parallel` and `shards`](/articles/test-workflows-matrix-and-sharding) features to split test files across workers and merge reports afterward.
+See the [Playwright sharded](/articles/examples/playwright-sharded) and [Cypress sharded](/articles/examples/cypress-sharded) examples.
 
 ```yaml title="Playwright sharding"
 steps:
@@ -279,7 +286,7 @@ steps:
     shell: npx playwright merge-reports /data/all-reports
 ```
 
-**Use matrix execution for cross-browser testing.** Run the same test suite across multiple browsers
+**Use [matrix execution](/articles/test-workflows-matrix-and-sharding) for cross-browser testing.** Run the same test suite across multiple browsers
 in a single workflow:
 
 ```yaml
@@ -312,10 +319,13 @@ services:
 
 ### API Testing (Postman/Newman, curl, SoapUI)
 
+See the full examples for [Postman](/articles/examples/postman-basic), [cURL](/articles/examples/curl-basic),
+and [SoapUI](/articles/examples/soapui-basic).
+
 **Keep API test workflows lightweight.** API tests don't need browsers or heavy build tools.
 Use small resource requests (`cpu: 128m–256m`, `memory: 128Mi`) and short timeouts.
 
-**Use matrix execution for endpoint coverage.** Test multiple endpoints or environments in parallel
+**Use [matrix execution](/articles/test-workflows-matrix-and-sharding) for endpoint coverage.** Test multiple endpoints or environments in parallel
 without duplicating workflows:
 
 ```yaml
@@ -336,7 +346,10 @@ for values like base URLs or API keys so the same workflow can run against dev, 
 
 ### Unit and Integration Testing (JUnit, Pytest, Maven, Gradle, NUnit)
 
-**Collect build tool reports as artifacts.** Maven Surefire, Gradle, and pytest all produce JUnit
+See the full examples for [Maven](/articles/examples/maven-basic), [Gradle](/articles/examples/gradle-basic),
+[Pytest](/articles/examples/pytest-basic), and [NUnit](/articles/examples/nunit-basic).
+
+**Collect build tool reports as [artifacts](/articles/test-workflows-artifacts).** Maven Surefire, Gradle, and pytest all produce JUnit
 XML natively or with minimal configuration. Always collect these reports:
 
 ```yaml title="Maven example"
@@ -353,12 +366,13 @@ steps:
             - target/surefire-reports/**/*
 ```
 
-**Install dependencies before testing.** For Python-based tests, add an explicit setup step:
+**Install dependencies before testing.** For Python-based tests, add an explicit setup step and mark it as [pure](/articles/test-workflows-high-level-architecture#pure-steps):
 
 ```yaml
 steps:
   - name: Install dependencies
     shell: pip install -r requirements.txt
+    pure: true
   - name: Run tests
     shell: pytest tests --junit-xml=/data/artifacts/report.xml
 ```
@@ -376,195 +390,6 @@ artifacts:
   paths:
     - pact/pacts/**/*
 ```
-
----
-
-## Tool-Specific Recommendations
-
-### k6
-
-- Enable the **web dashboard** and export HTML reports:
-
-```yaml
-env:
-  - name: K6_WEB_DASHBOARD
-    value: "true"
-  - name: K6_WEB_DASHBOARD_EXPORT
-    value: "/data/artifacts/k6-test-report.html"
-```
-
-- For distributed runs, use **execution segments** to split the workload:
-
-```yaml
-run:
-  shell: |
-    k6 run test.js \
-      --execution-segment '{{ index }}/{{ count }}:{{ index + 1 }}/{{ count }}'
-```
-
-- Use the `official/k6/v1` template for simple runs.
-
-### Playwright
-
-- Use the official Microsoft container image `mcr.microsoft.com/playwright:<version>`.
-- Always install dependencies with `npm ci` before running tests.
-- Export JUnit reports using `PLAYWRIGHT_JUNIT_OUTPUT_NAME`.
-- Enable **traces** with `--trace on` for post-mortem debugging.
-- Use **blob reporters** (`--reporter=blob`) for sharded runs, then merge with `playwright merge-reports`.
-
-### Cypress
-
-- Use the `cypress/included:<version>` image which bundles Cypress and a browser.
-- Set `UV_USE_IO_URING=0` as a workaround if npm hangs in the container.
-- Configure screenshots and video folders to point at your artifacts directory:
-
-```yaml
-args:
-  - --config
-  - '{"screenshotsFolder":"/data/artifacts/screenshots","videosFolder":"/data/artifacts/videos"}'
-```
-
-- Use `--reporter junit` with `--reporter-options mochaFile=...` for JUnit output.
-- Use the `official/cypress/v1` template with the `shards.testFiles` option for parallelism.
-
-### JMeter
-
-- Use the `alpine/jmeter` image for smaller footprint.
-- Always generate all three output types: **log** (`-j`), **HTML report** (`-o`/`-e`), and **JTL** (`-l`).
-- For **distributed testing**, use Testkube services for JMeter slaves:
-
-```yaml
-services:
-  slave:
-    count: 3
-    image: alpine/jmeter:5.6
-    run:
-      args: ["-s", "-Dserver.rmi.localport=60000", "-Dserver_port=1099", "-Jserver.rmi.ssl.disable=true"]
-    readinessProbe:
-      tcpSocket:
-        port: 1099
-```
-
-- Connect the master to slaves: `-R '{{ services.slave.*.ip }}'`.
-- Use the `official/jmeter/v2` template for simpler setups.
-
-### Postman / Newman
-
-- Use the `postman/newman:6-alpine` image.
-- Always add JUnit reporting: `-r cli,junit --reporter-junit-export /data/artifacts/junit-report.xml`.
-- Pass environment variables with `--env-var`.
-- Use the `official/postman/v1` template.
-
-### Artillery
-
-- For distributed load tests, override phases per worker to split the arrival rate:
-
-```yaml
-run:
-  shell: |
-    artillery run test.yaml \
-      --overrides '{ "phases": [{ "duration": {{ config.duration }}, "arrivalRate": {{ config.arrivalRatePerWorker }} }] }'
-```
-
-- Use `paused: true` to synchronize workers before starting the test.
-- Collect JSON reports and convert to HTML if needed.
-
-### Selenium
-
-- Use **readiness probes** on the Selenium standalone or hub service to avoid tests starting before
-  the browser is ready.
-- For a **Selenium Grid** setup, use one `hub` service and multiple `node-chrome` services:
-
-```yaml
-services:
-  hub:
-    image: selenium/hub:4.34.0
-    readinessProbe:
-      httpGet:
-        path: /status
-        port: 4444
-  node-chrome:
-    count: 3
-    image: selenium/node-chrome:4.34.0
-    env:
-      - name: SE_EVENT_BUS_HOST
-        value: "{{ services.hub.0.ip }}"
-      - name: SE_EVENT_BUS_PUBLISH_PORT
-        value: "4442"
-      - name: SE_EVENT_BUS_SUBSCRIBE_PORT
-        value: "4443"
-```
-
-- Pass the WebDriver URL via environment variable:
-
-```yaml
-env:
-  - name: REMOTE_WEBDRIVER_URL
-    value: "http://{{ services.hub.0.ip }}:4444/wd/hub"
-```
-
-### Locust
-
-- Use the **master-worker** architecture for distributed tests:
-
-```yaml
-services:
-  master:
-    image: locustio/locust:2.32.3
-    readinessProbe:
-      tcpSocket:
-        port: 5557
-    transfer:
-      - from: /data/repo/test/locust
-    run:
-      shell: locust --master --headless -f locustfile.py
-steps:
-  - name: Workers
-    parallel:
-      count: 5
-      run:
-        shell: locust --worker --master-host {{ services.master.0.ip }} -f locustfile.py
-```
-
-- Export HTML reports with `--html=/data/artifacts/report.html`.
-- Set `--stop-timeout` to give workers time to finish gracefully.
-
-### Pytest
-
-- Install dependencies in a dedicated step before running tests.
-- Generate JUnit XML with `--junit-xml=/data/artifacts/report.xml`.
-- Use `python:3.x-alpine` images for smaller footprint when native dependencies are not needed.
-
-### Maven / Gradle
-
-- Use JDK-specific image tags (e.g., `maven:3.9.9-eclipse-temurin-11-alpine`) to match your project requirements.
-- Collect Surefire/Failsafe reports from `target/surefire-reports/**/*` or `build/reports/**/*`.
-- For Maven, consider the `official/maven/v1` template.
-- For Gradle, consider the `official/gradle/v1` template.
-
-### .NET (NUnit, xUnit)
-
-- Use the `bitnamilegacy/dotnet-sdk:8-debian-12` image (or equivalent).
-- Generate JUnit output with the logger option:
-
-```bash
-dotnet test --logger:"junit;LogFilePath=test-report/junit-report.xml"
-```
-
-- Collect reports from the configured logger output directory.
-
-### Robot Framework
-
-- Use the `marketsquare/robotframework-browser` image for browser tests.
-- Direct all output to the artifacts directory:
-
-```yaml
-run:
-  shell: |
-    robot --outputdir /data/artifacts --xunit /data/artifacts/junit.xml tests/
-```
-
-- Use `--exclude` tags to skip known-failing or environment-specific tests.
 
 ---
 
@@ -601,7 +426,7 @@ steps:
 ### Use Retries for Flaky Steps
 
 If a step is inherently flaky (e.g., waiting for an external service), use `retry` with an
-`until` expression:
+`until` [expression](/articles/test-workflows-expressions):
 
 ```yaml
 steps:
@@ -618,7 +443,7 @@ steps:
 
 ### Use Cron for Recurring Tests
 
-Schedule workflows to run on a cadence using the `events` property:
+[Schedule](/articles/scheduling-tests) workflows to run on a cadence using the `events` property:
 
 ```yaml
 events:
@@ -629,7 +454,7 @@ events:
 
 ### Orchestrate Workflows with `execute`
 
-Compose larger test suites by having one workflow execute others. Control parallelism to avoid
+Compose larger test suites by having one workflow [execute](/articles/test-workflows-test-suites) others. Control parallelism to avoid
 overwhelming your cluster:
 
 ```yaml
@@ -645,7 +470,7 @@ steps:
 ### Use `silent: true` for Utility Workflows
 
 Workflows that serve as health checks or infrastructure probes and should not contribute to
-test metrics or trigger webhooks can be marked as silent:
+[test metrics](/articles/test-insights) or trigger [webhooks](/articles/webhooks) can be marked as silent:
 
 ```yaml
 execution:
@@ -656,34 +481,37 @@ execution:
 
 ## Security
 
-### Never Hardcode Secrets
+### Use Credentials for Secrets and Configuration
 
-Use Kubernetes Secrets and reference them through `valueFrom`:
+Never hardcode sensitive values in your workflow definitions. Instead, use Testkube
+[Credentials](/articles/credential-management) to store secrets (passwords, API keys, tokens) and
+configuration variables (URLs, settings) securely. Credentials can be scoped at the organization,
+environment, or workflow level — with workflow-scoped values taking the highest priority.
 
-```yaml
-env:
-  - name: API_KEY
-    valueFrom:
-      secretKeyRef:
-        name: my-api-secrets
-        key: api-key
-```
-
-For file-based secrets (e.g., service account keys), use `contentFrom`:
+Reference a credential anywhere in your workflow using the `credential()` expression:
 
 ```yaml
-content:
-  files:
-    - path: /root/credentials.json
-      contentFrom:
-        secretKeyRef:
-          name: gcp-credentials
-          key: service-account.json
+spec:
+  container:
+    env:
+      - name: API_KEY
+        value: '{{credential("my-api-key")}}'
+      - name: BASE_URL
+        value: '{{credential("staging-base-url")}}'
 ```
+
+Use **encrypted** credentials for sensitive data (values are hidden in the UI and only injected at
+runtime) and **plaintext** credentials for non-sensitive configuration that team members may need
+to review or edit.
+
+:::tip
+You can manage credentials via the Dashboard under Organization Management, Environment Settings,
+or Workflow Settings — see [Credential Management](/articles/credential-management) for details.
+:::
 
 ### Use `imagePullSecrets` for Private Registries
 
-If your test images live in a private registry, configure pull secrets at the pod level:
+If your test images live in a private registry, configure pull secrets at the [pod level](/articles/test-workflows-job-and-pod):
 
 ```yaml
 pod:
@@ -704,14 +532,229 @@ container:
 
 ---
 
+## Tool-Specific Recommendations
+
+### k6
+
+See the [basic](/articles/examples/k6-basic) and [distributed](/articles/examples/k6-distributed) k6 examples.
+
+- Enable the **web dashboard** and export HTML reports:
+
+```yaml
+env:
+  - name: K6_WEB_DASHBOARD
+    value: "true"
+  - name: K6_WEB_DASHBOARD_EXPORT
+    value: "/data/artifacts/k6-test-report.html"
+```
+
+- For distributed runs, use **execution segments** to split the workload:
+
+```yaml
+run:
+  shell: |
+    k6 run test.js \
+      --execution-segment '{{ index }}/{{ count }}:{{ index + 1 }}/{{ count }}'
+```
+
+- Use the `official/k6/v1` [template](/articles/test-workflow-templates) for simple runs.
+
+### Playwright
+
+See the [basic](/articles/examples/playwright-basic), [sharded](/articles/examples/playwright-sharded),
+and [rerun failed tests](/articles/examples/playwright-rerun) Playwright examples.
+
+- Use the official Microsoft container image `mcr.microsoft.com/playwright:<version>`.
+- Always install dependencies with `npm ci` before running tests.
+- Export [JUnit reports](/articles/test-workflows-reports) using `PLAYWRIGHT_JUNIT_OUTPUT_NAME`.
+- Enable **traces** with `--trace on` for post-mortem debugging.
+- Use **blob reporters** (`--reporter=blob`) for [sharded](/articles/test-workflows-matrix-and-sharding) runs, then merge with `playwright merge-reports`.
+
+### Cypress
+
+See the [basic](/articles/examples/cypress-basic) and [sharded](/articles/examples/cypress-sharded) Cypress examples.
+
+- Use the `cypress/included:<version>` image which bundles Cypress and a browser.
+- Configure screenshots and video folders to point at your artifacts directory:
+
+```yaml
+args:
+  - --config
+  - '{"screenshotsFolder":"/data/artifacts/screenshots","videosFolder":"/data/artifacts/videos"}'
+```
+
+- Use `--reporter junit` with `--reporter-options mochaFile=...` for [JUnit output](/articles/test-workflows-reports).
+- Use the `official/cypress/v1` [template](/articles/test-workflow-templates) with the [`shards.testFiles`](/articles/test-workflows-matrix-and-sharding) option for parallelism.
+
+### JMeter
+
+See the [basic](/articles/examples/jmeter-basic) and [distributed](/articles/examples/jmeter-distributed) JMeter examples.
+
+- Use the `alpine/jmeter` image for smaller footprint.
+- Always generate all three output types: **log** (`-j`), **HTML report** (`-o`/`-e`), and **JTL** (`-l`).
+- For **distributed testing**, use Testkube [services](/articles/test-workflows-services) for JMeter slaves:
+
+```yaml
+services:
+  slave:
+    count: 3
+    image: alpine/jmeter:5.6
+    run:
+      args: ["-s", "-Dserver.rmi.localport=60000", "-Dserver_port=1099", "-Jserver.rmi.ssl.disable=true"]
+    readinessProbe:
+      tcpSocket:
+        port: 1099
+```
+
+- Connect the master to slaves using [expressions](/articles/test-workflows-expressions): `-R '{{ services.slave.*.ip }}'`.
+- Use the `official/jmeter/v2` [template](/articles/test-workflow-templates) for simpler setups.
+
+### Postman / Newman
+
+See the [Postman example](/articles/examples/postman-basic).
+
+- Use the `postman/newman:6-alpine` image.
+- Always add [JUnit reporting](/articles/test-workflows-reports): `-r cli,junit --reporter-junit-export /data/artifacts/junit-report.xml`.
+- Pass environment variables with `--env-var`.
+- Use the `official/postman/v1` [template](/articles/test-workflow-templates).
+
+### Artillery
+
+See the [Artillery example](/articles/examples/artillery-basic).
+
+- Use `paused: true` to synchronize workers before starting the test.
+- Collect JSON reports and convert to HTML if needed.
+
+### Selenium
+
+See the [basic](/articles/examples/selenium-basic) and [advanced](/articles/examples/selenium-advanced) Selenium examples.
+
+- Use **readiness probes** on the Selenium standalone or hub [service](/articles/test-workflows-services) to avoid tests starting before
+  the browser is ready.
+- For a **Selenium Grid** setup, use one `hub` service and multiple `node-chrome` services:
+
+```yaml
+services:
+  hub:
+    image: selenium/hub:4.34.0
+    readinessProbe:
+      httpGet:
+        path: /status
+        port: 4444
+  node-chrome:
+    count: 3
+    image: selenium/node-chrome:4.34.0
+    env:
+      - name: SE_EVENT_BUS_HOST
+        value: "{{ services.hub.0.ip }}"
+      - name: SE_EVENT_BUS_PUBLISH_PORT
+        value: "4442"
+      - name: SE_EVENT_BUS_SUBSCRIBE_PORT
+        value: "4443"
+```
+
+- Pass the WebDriver URL via environment variable using [expressions](/articles/test-workflows-expressions):
+
+```yaml
+env:
+  - name: REMOTE_WEBDRIVER_URL
+    value: "http://{{ services.hub.0.ip }}:4444/wd/hub"
+```
+
+### Locust
+
+See the [basic](/articles/examples/locust-basic) and [distributed](/articles/examples/locust-distributed) Locust examples.
+
+- Use the **master-worker** architecture with [services](/articles/test-workflows-services) for distributed tests:
+
+```yaml
+services:
+  master:
+    image: locustio/locust:2.32.3
+    readinessProbe:
+      tcpSocket:
+        port: 5557
+    transfer:
+      - from: /data/repo/test/locust
+    run:
+      shell: locust --master --headless -f locustfile.py
+steps:
+  - name: Workers
+    parallel:
+      count: 5
+      run:
+        shell: locust --worker --master-host {{ services.master.0.ip }} -f locustfile.py
+```
+
+- Export HTML reports with `--html=/data/artifacts/report.html`.
+- Set `--stop-timeout` to give workers time to finish gracefully.
+
+### Pytest
+
+See the [Pytest example](/articles/examples/pytest-basic).
+
+- Install dependencies in a dedicated step before running tests.
+- Generate [JUnit XML](/articles/test-workflows-reports) with `--junit-xml=/data/artifacts/report.xml`.
+- Use `python:3.x-alpine` images for smaller footprint when native dependencies are not needed.
+
+### Maven / Gradle
+
+See the [Maven](/articles/examples/maven-basic) and [Gradle](/articles/examples/gradle-basic) examples.
+
+- Use JDK-specific image tags (e.g., `maven:3.9.9-eclipse-temurin-11-alpine`) to match your project requirements.
+- Collect Surefire/Failsafe reports from `target/surefire-reports/**/*` or `build/reports/**/*`.
+- For Maven, consider the `official/maven/v1` [template](/articles/test-workflow-templates).
+- For Gradle, consider the `official/gradle/v1` [template](/articles/test-workflow-templates).
+
+### .NET (NUnit, xUnit)
+
+See the [NUnit example](/articles/examples/nunit-basic).
+
+- Use the `bitnamilegacy/dotnet-sdk:8-debian-12` image (or equivalent).
+- Generate [JUnit output](/articles/test-workflows-reports) with the logger option:
+
+```bash
+dotnet test --logger:"junit;LogFilePath=test-report/junit-report.xml"
+```
+
+- Collect reports from the configured logger output directory.
+
+### Robot Framework
+
+See the [basic](/articles/examples/robot-framework-basic) and [parallel](/articles/examples/robot-framework-parallel) Robot Framework examples.
+
+- Use the `marketsquare/robotframework-browser` image for browser tests.
+- Direct all output to the artifacts directory:
+
+```yaml
+run:
+  shell: |
+    robot --outputdir /data/artifacts --xunit /data/artifacts/junit.xml tests/
+```
+
+- Use `--exclude` tags to skip known-failing or environment-specific tests.
+
+---
+
 ## Further Reading
 
 - [Test Workflow Overview](/articles/test-workflows)
 - [Basic Examples](/articles/test-workflows-examples-basics)
+- [Tool-Specific Examples](/articles/examples/overview)
+- [Content & Git](/articles/test-workflows-content)
+- [Artifacts](/articles/test-workflows-artifacts)
 - [Parameterization](/articles/test-workflows-examples-configuration)
+- [Expression Language](/articles/test-workflows-expressions)
 - [Parallel Execution](/articles/test-workflows-parallel)
 - [Services](/articles/test-workflows-services)
 - [Sharding & Matrix](/articles/test-workflows-matrix-and-sharding)
+- [Concurrency & Queueing](/articles/test-workflows-concurrency-queueing)
+- [Job & Pod Configuration](/articles/test-workflows-job-and-pod)
+- [Execution Tags](/articles/filtering-test-workflow-executions-using-tags)
+- [Workflow Orchestration](/articles/test-workflows-test-suites)
 - [Test Workflow Templates](/articles/test-workflow-templates)
+- [Creating Your Own Templates](/articles/examples/create-your-own-examples)
 - [JUnit Report Visualization](/articles/test-workflows-reports)
 - [Test Insights](/articles/test-insights)
+- [Scheduling Tests](/articles/scheduling-tests)
+- [Running Workflows](/articles/test-workflows-running)
