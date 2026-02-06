@@ -65,8 +65,8 @@ See [Scheduling Workflows](/articles/scheduling-tests) for schedule syntax and u
 
 The execution model for Webhooks and Trigger listeners remains agent-based:
 
-- Webhooks are still executed by Agents.
-- Test Triggers are still handled by Listener Agents (or the Standalone Agent with listener behavior).
+- During SuperAgent migration, SuperAgent keeps the webhook capability so webhook-driven workflow execution continues through the agent path.
+- Test Triggers are still handled by Listener Agents.
 
 Related docs:
 
@@ -85,11 +85,3 @@ Control Plane Prometheus metrics are enabled by default in `v2.7`.
 Metrics coverage (including scheduler metrics) is documented in:
 
 - [Control Plane Metrics](/articles/control-plane-metrics)
-
-## Upgrade Checklist
-
-1. Validate that workflow changes in Control Plane are used as the active connected state.
-2. If you use workflow CRDs, enable and validate GitOps capability/agent flow before rollout.
-3. Validate schedules are managed from Control Plane (no missed or duplicate runs).
-4. Validate webhooks and trigger flows still execute through agents/listener agents.
-5. Scrape and verify Control Plane `/metrics` for workflow, scheduler, and webhook metrics.
