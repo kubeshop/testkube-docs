@@ -23,7 +23,7 @@ This gives existing environments a consistent starting point when moving to Cont
 For most users, this change simplifies day-to-day operations:
 
 - Workflow updates made in the Control Plane are the authoritative connected state.
-- Environment health no longer depends on continuous connection to the Standalone Agent (SuperAgent).
+- Environment health no longer depends on continuous connection to SuperAgent.
 - Environments no longer automatically switch to read-only mode when the SuperAgent connection is unavailable.
 - Scheduling is managed centrally from the Control Plane.
 - Webhooks and Kubernetes-event triggers continue to execute through agents via the agent capability model (for triggers, see [Listener Agents](/articles/agents-overview#listener-agents)).
@@ -35,7 +35,7 @@ By default, Workflow CRDs are no longer synced from Kubernetes into the connecte
 
 If your team manages workflows as Kubernetes CRDs, you should enable and validate the GitOps capability/agent flow so Git-managed CRD updates are reconciled as intended.
 
-If you do not enable GitOps, CRD-side workflow edits are not expected to become the active connected state.
+Without GitOps, workflow CRD edits are not synced to the connected state.
 
 ### Enable GitOps agent flow via Helm
 
