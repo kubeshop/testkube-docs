@@ -1,5 +1,93 @@
 components:
   schemas:
+    AIAssistant:
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the AI assistant
+          type: string
+        name:
+          description: Display name of the AI assistant
+          type: string
+        description:
+          description: Optional description of the AI assistant
+          type: string
+        instructions:
+          description: System prompt/instructions for the assistant
+          type: string
+        mcpServers:
+          description: MCP server configurations for this assistant
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantMCPServerConfig'
+        labels:
+          description: Labels for categorization
+          type: object
+          additionalProperties:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+    AIAssistantCreate:
+      type: object
+      properties:
+        name:
+          description: Display name of the AI assistant
+          type: string
+        description:
+          description: Optional description of the AI assistant
+          type: string
+        instructions:
+          description: System prompt/instructions for the assistant
+          type: string
+        mcpServers:
+          description: MCP server configurations for this assistant
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantMCPServerConfig'
+        labels:
+          description: Labels for categorization
+          type: object
+          additionalProperties:
+            type: string
+      required:
+        - name
+        - instructions
+    AIAssistantList:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/AIAssistant'
+    AIAssistantUpdate:
+      type: object
+      properties:
+        name:
+          description: Display name of the AI assistant
+          type: string
+        description:
+          description: Optional description of the AI assistant
+          type: string
+        instructions:
+          description: System prompt/instructions for the assistant
+          type: string
+        mcpServers:
+          description: MCP server configurations for this assistant
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantMCPServerConfig'
+        labels:
+          description: Labels for categorization
+          type: object
+          additionalProperties:
+            type: string
     AWSElasticBlockStoreVolumeSource:
       description: >-
         awsElasticBlockStore represents an AWS Disk resource that is attached to
@@ -67,8 +155,6 @@ components:
         disabled:
           description: Is the Agent disabled?
           type: boolean
-        type:
-          $ref: '#/components/schemas/AgentType'
         labels:
           type: object
           additionalProperties:
@@ -99,6 +185,9 @@ components:
           description: When it has been deleted.
           type: string
           format: date-time
+        isSuperAgent:
+          description: Whether this is a super agent.
+          type: boolean
       required:
         - id
         - name
@@ -134,12 +223,6 @@ components:
             type: string
       required:
         - requiredMatch
-    AgentType:
-      type: string
-      enum:
-        - run
-        - sync
-        - agnt
     Any: {}
     ApiInfo:
       type: object
@@ -347,6 +430,86 @@ components:
         errorMessage:
           type: string
           nullable: true
+    AssistantMCPServerConfig:
+      type: object
+      properties:
+        mcpServerId:
+          description: ID of the MCP server to use
+          type: string
+        tools:
+          description: Per-tool configuration keyed by tool name
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AssistantMCPServerToolConfig'
+      required:
+        - mcpServerId
+    AssistantMCPServerToolConfig:
+      description: Per-tool configuration for an MCP server in an assistant
+      type: object
+      properties:
+        enabled:
+          description: Whether the tool is enabled
+          type: boolean
+          default: false
+        autoApproved:
+          description: Whether tool calls are auto-approved (no HITL prompt)
+          type: boolean
+          default: false
+    AssistantSession:
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the session
+          type: string
+        assistantId:
+          description: ID of the AI assistant
+          type: string
+        name:
+          description: Generated session name based on user input
+          type: string
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+        instructions:
+          description: Instructions/prompt for this session
+          type: string
+        executionContext:
+          $ref: '#/components/schemas/ExecutionContext'
+        error:
+          description: Error message if the session failed
+          type: string
+        toolCalls:
+          description: Tool calls made during this session
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionToolCall'
+        startedAt:
+          description: When the session started executing
+          type: string
+          format: date-time
+        finishedAt:
+          description: When the session finished
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/SessionMessageActor'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - assistantId
+        - status
+    AssistantSessionCreate:
+      type: object
+      properties:
+        instructions:
+          description: Instructions/prompt for this session
+          type: string
+        executionContext:
+          $ref: '#/components/schemas/ExecutionContext'
     AuditLogDistinctSubjects:
       description: >-
         A key-value map where keys are entity types and values are distinct
@@ -958,6 +1121,24 @@ components:
           default: false
       required:
         - reference
+    EnvStatus:
+      type: object
+      properties:
+        status:
+          description: State of the environment
+          type: string
+          enum:
+            - Green
+            - Yellow
+            - Red
+            - Gray
+          example: Green
+        sourceOfTruth:
+          description: Whether this environment is the source of truth in CP.
+          type: boolean
+          example: true
+      required:
+        - status
     EnvVar:
       type: object
       properties:
@@ -1042,6 +1223,12 @@ components:
               description: organizationID
               type: string
               example: 733420bd-7e56-461f-8431-6378759e60ae
+            sourceOfTruthSince:
+              description: >-
+                The time stamp during which this environment became the source
+                of truth.
+              type: string
+              format: date-time
             agentToken:
               description: agent token for environment
               type: string
@@ -1330,6 +1517,9 @@ components:
           type: string
         streamTopic:
           description: stream topic
+          type: string
+        groupId:
+          description: ID for event group
           type: string
         resource:
           $ref: '#/components/schemas/EventResource'
@@ -1647,6 +1837,18 @@ components:
           example:
             - true
             - false
+    ExecutionContext:
+      type: object
+      properties:
+        executionId:
+          description: ID of the test execution
+          type: string
+        executionName:
+          description: Name of the test execution
+          type: string
+        workflowName:
+          description: Name of the workflow (if applicable)
+          type: string
     ExecutionContextTypeV2:
       type: string
       enum:
@@ -1781,6 +1983,11 @@ components:
           type: object
           additionalProperties:
             type: string
+        workflowAnnotations:
+          description: Annotations from the test workflow
+          type: object
+          additionalProperties:
+            type: string
         kind:
           description: The test definition's kind. Either Test, TestSuite or TestWorkflow.
           type: string
@@ -1817,6 +2024,8 @@ components:
           description: Health indicator for the workflow at the time of this execution
           allOf:
             - $ref: '#/components/schemas/TestWorkflowExecutionHealth'
+        configParams:
+          $ref: '#/components/schemas/TestWorkflowExecutionConfig'
       required:
         - id
         - name
@@ -3373,6 +3582,197 @@ components:
       required:
         - lines
         - bytes
+    MCPServer:
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the MCP server
+          type: string
+        name:
+          description: Display name of the MCP server
+          type: string
+        description:
+          description: Optional description of the MCP server
+          type: string
+        type:
+          description: >-
+            Type of MCP server connection (http for HTTP-based, sse for
+            Server-Sent Events, stdio for local binaries)
+          type: string
+          enum:
+            - http
+            - sse
+            - stdio
+          default: http
+        url:
+          description: MCP server endpoint URL (required for http/sse type)
+          type: string
+        command:
+          description: Command to execute for stdio type MCP servers
+          type: string
+        args:
+          description: Arguments for the command (stdio type only)
+          type: array
+          items:
+            type: string
+        headers:
+          description: Optional headers for MCP server requests
+          type: object
+          additionalProperties:
+            type: string
+        status:
+          description: Connection status of the MCP server
+          type: string
+          enum:
+            - unknown
+            - active
+            - error
+        lastConnectedAt:
+          description: Last successful connection time
+          type: string
+          format: date-time
+        lastError:
+          description: Last error message if status is error
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - url
+    MCPServerCreate:
+      type: object
+      properties:
+        name:
+          description: Display name of the MCP server
+          type: string
+        description:
+          description: Optional description of the MCP server
+          type: string
+        type:
+          description: >-
+            Type of MCP server connection (http for HTTP-based, sse for
+            Server-Sent Events, stdio for local binaries)
+          type: string
+          enum:
+            - http
+            - sse
+            - stdio
+          default: http
+        url:
+          description: MCP server endpoint URL (required for http/sse type)
+          type: string
+        command:
+          description: Command to execute for stdio type MCP servers
+          type: string
+        args:
+          description: Arguments for the command (stdio type only)
+          type: array
+          items:
+            type: string
+        headers:
+          description: Optional headers for MCP server requests
+          type: object
+          additionalProperties:
+            type: string
+      required:
+        - name
+        - url
+    MCPServerList:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/MCPServer'
+    MCPServerTool:
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the tool
+          type: string
+        mcpServerId:
+          description: ID of the MCP server this tool belongs to
+          type: string
+        name:
+          description: Name of the tool
+          type: string
+        description:
+          description: Description of the tool
+          type: string
+        inputSchema:
+          description: JSON Schema for tool input parameters
+          type: object
+          additionalProperties: true
+        enabled:
+          description: Whether the tool is enabled for use
+          type: boolean
+        available:
+          description: Whether the tool is currently available on the MCP server
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - mcpServerId
+        - name
+        - enabled
+        - available
+    MCPServerToolList:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/MCPServerTool'
+    MCPServerToolUpdate:
+      type: object
+      properties:
+        enabled:
+          description: Whether the tool should be enabled
+          type: boolean
+    MCPServerUpdate:
+      type: object
+      properties:
+        name:
+          description: Display name of the MCP server
+          type: string
+        description:
+          description: Optional description of the MCP server
+          type: string
+        type:
+          description: >-
+            Type of MCP server connection (http for HTTP-based, sse for
+            Server-Sent Events, stdio for local binaries)
+          type: string
+          enum:
+            - http
+            - sse
+            - stdio
+        url:
+          description: MCP server endpoint URL (required for http/sse type)
+          type: string
+        command:
+          description: Command to execute for stdio type MCP servers
+          type: string
+        args:
+          description: Arguments for the command (stdio type only)
+          type: array
+          items:
+            type: string
+        headers:
+          description: Optional headers for MCP server requests
+          type: object
+          additionalProperties:
+            type: string
     Member:
       type: object
       properties:
@@ -4899,6 +5299,218 @@ components:
           example: 2.1.2
       required:
         - version
+    SessionDetail:
+      description: Detailed session including message history from LangGraph
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the session
+          type: string
+        assistantId:
+          description: ID of the AI assistant
+          type: string
+        assistantName:
+          description: Name of the AI assistant
+          type: string
+        name:
+          description: Generated session name based on user input
+          type: string
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+        instructions:
+          description: Instructions/prompt for this session
+          type: string
+        executionContext:
+          $ref: '#/components/schemas/ExecutionContext'
+        error:
+          description: Error message if the session failed
+          type: string
+        messages:
+          description: Conversation message history from LangGraph checkpoint
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionMessage'
+        toolCalls:
+          description: Tool calls made during this session (stored in cloud-api)
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionToolCall'
+        startedAt:
+          description: When the session started executing
+          type: string
+          format: date-time
+        finishedAt:
+          description: When the session finished
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/SessionMessageActor'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - assistantId
+        - status
+    SessionList:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantSession'
+        hasNextPage:
+          description: Whether there are more pages available
+          type: boolean
+    SessionMessage:
+      description: A message in the session conversation history
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the message
+          type: string
+        role:
+          description: Role of the message sender
+          type: string
+          enum:
+            - user
+            - assistant
+            - tool
+        content:
+          description: Message content
+          type: string
+        sources:
+          description: Documentation sources for assistant messages
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionSource'
+        timestamp:
+          description: Unix timestamp when message was created
+          type: integer
+          format: int64
+        toolCalls:
+          description: Tool calls made by assistant in this message
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Tool call ID
+                type: string
+              name:
+                description: Tool name
+                type: string
+              arguments:
+                description: Tool arguments as JSON string
+                type: string
+        toolCallId:
+          description: For tool messages, the ID of the tool call this responds to
+          type: string
+        toolName:
+          description: For tool messages, the name of the tool
+          type: string
+        actor:
+          $ref: '#/components/schemas/SessionMessageActor'
+      required:
+        - id
+        - role
+        - content
+    SessionMessageActor:
+      description: The actor (user or API token) that sent a message or created a session
+      type: object
+      properties:
+        type:
+          description: Type of the actor
+          type: string
+          enum:
+            - user
+            - api-token
+        id:
+          description: Unique identifier of the actor (user ID or token ID)
+          type: string
+      required:
+        - type
+        - id
+    SessionSource:
+      description: Documentation source reference attached to a session message
+      type: object
+      properties:
+        label:
+          description: Human-readable source label
+          type: string
+        link:
+          description: Documentation link path
+          type: string
+        file:
+          description: Source file identifier
+          type: string
+      required:
+        - label
+        - link
+        - file
+    SessionStatus:
+      description: Status of an assistant session
+      type: string
+      enum:
+        - pending
+        - running
+        - waiting_approval
+        - completed
+        - failed
+    SessionToolCall:
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the tool call
+          type: string
+        sessionId:
+          description: ID of the session this tool call belongs to
+          type: string
+        name:
+          description: Name of the tool being called
+          type: string
+        mcpServerId:
+          description: ID of the MCP server providing this tool
+          type: string
+        status:
+          $ref: '#/components/schemas/ToolCallStatus'
+        input:
+          description: Input parameters for the tool call
+          type: object
+          additionalProperties: true
+        error:
+          description: Error message if tool execution failed
+          type: string
+        approvedAt:
+          description: When the tool call was approved
+          type: string
+          format: date-time
+        declinedAt:
+          description: When the tool call was declined
+          type: string
+          format: date-time
+        startedAt:
+          description: When the tool started executing
+          type: string
+          format: date-time
+        completedAt:
+          description: When the tool finished executing
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - sessionId
+        - name
+        - status
     Setting:
       description: Generic Settings
       type: object
@@ -5159,6 +5771,81 @@ components:
           type: string
       required:
         - organizationID
+    SuperAgentCommands:
+      type: object
+      properties:
+        agentToken:
+          description: agent token for environment
+          type: string
+          example: tkcagnt_adead343112adeadcaaaaa221daee2
+        connectCommand:
+          description: >-
+            command to connect existing Testkube OSS installation to the
+            Testkube Pro
+          type: string
+          example: testkube pro connect --agent-key tkcagnt_111
+        disconnectCommand:
+          description: >-
+            command to disconnect from testkube pro and get back to standalone
+            OSS mode
+          type: string
+          example: testkube pro disconnect
+        installCommand:
+          description: command to install/upgrade agent
+          type: string
+          example: >-
+            helm upgrade --install --create-namespace testkube testkube/testkube
+            --set testkube-api.cloud.url=agent.example.com:443 --set
+            testkube-api.cloud.key=<api-key> --set
+            testkube-api.minio.enabled=false --set mongodb.enabled=false
+            --namespace testkube
+        installCommandCli:
+          description: command to install/upgrade agent
+          type: string
+          example: >-
+            testkube init-cloud --agent-key tkcagnt_111 --agent-url
+            agent.example.com:443
+        configureContextCommand:
+          description: command to configure
+          type: string
+          example: >-
+            testkube context set --api-url https://api.example.com --api-key
+            <api-key> --agent-url https://agent.example.com --agent-key
+            <agent-key>
+        runDockerCommand:
+          description: command to run Docker agent
+          type: string
+          example: >-
+            docker run -d --privileged --name=testkube-agent -e AGENT_KEY=AK
+            kubeshop/testkube-agent:1.2.3
+        runDockerCommandCli:
+          description: command to run Docker agent
+          type: string
+          example: testkube docker init --agent-token=AK --org-id=org --env-id=env
+        upgradeDockerCommand:
+          description: command to upgrade Docker agent
+          type: string
+          example: >-
+            docker exec testkube-agent helm upgrade testkube testkube/testkube
+            --namespace testkube --set testkube-api.minio.enabled=false --set
+            mongodb.enabled=false --set testkube-api.cloud.key=AK --set
+            testkube-api.cloud.url=api.testkube.io:999 --set
+            testkube-api.dockerImageVersion=1.2.3
+        upgradeDockerCommandCli:
+          description: command to upgrade Docker agent
+          type: string
+          example: testkube upgrade
+      required:
+        - agentToken
+        - connectCommand
+        - disconnectCommand
+        - installCommand
+        - installCommandCli
+        - configureContextCommand
+        - runDockerCommand
+        - runDockerCommandCli
+        - upgradeDockerCommand
+        - upgradeDockerCommandCli
     Syncable:
       description: >
         source information about resources that may have been synced from
@@ -6575,8 +7262,6 @@ components:
       description: test trigger create or update request body
       type: object
       required:
-        - resource
-        - resourceSelector
         - event
         - action
         - execution
@@ -7133,6 +7818,21 @@ components:
           type: object
           additionalProperties:
             type: string
+    TestWorkflowExecutionSchema:
+      description: test workflow execution configuration
+      type: object
+      properties:
+        tags:
+          $ref: '#/components/schemas/TestWorkflowTagValue'
+        target:
+          $ref: '#/components/schemas/ExecutionTarget'
+        silent:
+          description: >-
+            indicates that all executions should be silent by default. When
+            true, SilentMode is activated for all executions (Webhooks,
+            Insights, Health, Metrics, Cdevents all set to true).
+          type: boolean
+          default: false
     TestWorkflowExecutionStatusCR:
       description: test workflow execution status
       type: object
@@ -7894,7 +8594,7 @@ components:
           items:
             $ref: '#/components/schemas/TestWorkflowEvent'
         execution:
-          $ref: '#/components/schemas/TestWorkflowTagSchema'
+          $ref: '#/components/schemas/TestWorkflowExecutionSchema'
         pvcs:
           type: object
           additionalProperties:
@@ -8416,14 +9116,6 @@ components:
           $ref: '#/components/schemas/BoxedBoolean'
         isolatedContainers:
           $ref: '#/components/schemas/BoxedBoolean'
-    TestWorkflowTagSchema:
-      description: test workflow execution tag definition
-      type: object
-      properties:
-        tags:
-          $ref: '#/components/schemas/TestWorkflowTagValue'
-        target:
-          $ref: '#/components/schemas/ExecutionTarget'
     TestWorkflowTagValue:
       description: tag values to pass to the test workflow execution
       type: object
@@ -8554,7 +9246,7 @@ components:
           items:
             $ref: '#/components/schemas/TestWorkflowEvent'
         execution:
-          $ref: '#/components/schemas/TestWorkflowTagSchema'
+          $ref: '#/components/schemas/TestWorkflowExecutionSchema'
         pvcs:
           type: object
           additionalProperties:
@@ -8719,6 +9411,15 @@ components:
           type: string
         tolerationSeconds:
           $ref: '#/components/schemas/BoxedInteger'
+    ToolCallStatus:
+      description: Status of a tool call within a session
+      type: string
+      enum:
+        - pending
+        - approved
+        - declined
+        - completed
+        - failed
     TopologySpreadConstraint:
       type: object
       properties:
@@ -9680,6 +10381,41 @@ components:
           schema:
             $ref: '#/components/schemas/Views'
   parameters:
+    AIAssistantID:
+      name: assistantId
+      in: path
+      description: Unique identifier of the AI assistant
+      required: true
+      schema:
+        type: string
+    AIMCPServerID:
+      name: serverId
+      in: path
+      description: Unique identifier of the MCP server
+      required: true
+      schema:
+        type: string
+    AIMCPServerToolID:
+      name: toolId
+      in: path
+      description: Unique identifier of the MCP server tool
+      required: true
+      schema:
+        type: string
+    AISessionID:
+      name: sessionId
+      in: path
+      description: Unique identifier of the assistant session
+      required: true
+      schema:
+        type: string
+    AIToolCallID:
+      name: toolCallId
+      in: path
+      description: Unique identifier of the tool call
+      required: true
+      schema:
+        type: string
     ActorName:
       name: actorName
       in: query
@@ -9705,12 +10441,6 @@ components:
       required: true
       schema:
         type: string
-    AgentTypeQP:
-      name: type
-      in: query
-      description: filter resources by agent type
-      schema:
-        $ref: '#/components/schemas/AgentType'
     Aggregate:
       name: aggregate
       in: query

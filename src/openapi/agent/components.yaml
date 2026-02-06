@@ -2013,8 +2013,6 @@ components:
       description: test trigger create or update request body
       type: object
       required:
-        - resource
-        - resourceSelector
         - event
         - action
         - execution
@@ -4168,7 +4166,7 @@ components:
           items:
             $ref: '#/components/schemas/TestWorkflowEvent'
         execution:
-          $ref: '#/components/schemas/TestWorkflowTagSchema'
+          $ref: '#/components/schemas/TestWorkflowExecutionSchema'
         pvcs:
           type: object
           additionalProperties:
@@ -4211,7 +4209,7 @@ components:
           items:
             $ref: '#/components/schemas/TestWorkflowEvent'
         execution:
-          $ref: '#/components/schemas/TestWorkflowTagSchema'
+          $ref: '#/components/schemas/TestWorkflowExecutionSchema'
         pvcs:
           type: object
           additionalProperties:
@@ -5145,14 +5143,21 @@ components:
           type: boolean
           description: disable CDEvents for this execution
           default: false
-    TestWorkflowTagSchema:
+    TestWorkflowExecutionSchema:
       type: object
-      description: test workflow execution tag definition
+      description: test workflow execution configuration
       properties:
         tags:
           $ref: '#/components/schemas/TestWorkflowTagValue'
         target:
           $ref: '#/components/schemas/ExecutionTarget'
+        silent:
+          type: boolean
+          description: >-
+            indicates that all executions should be silent by default. When
+            true, SilentMode is activated for all executions (Webhooks,
+            Insights, Health, Metrics, Cdevents all set to true).
+          default: false
     TestWorkflowExecutionTags:
       type: object
       properties:

@@ -289,6 +289,15 @@ splitOpenAPIByPaths(
         "uploads",
         "repositories",
         "preview-test-workflow",
+        "test-suites",
+        "test-suite-executions",
+        "test-suite-with-executions",
+        "tests",
+        "test-with-executions",
+        "executors",
+        "executor-by-types",
+        "templates",
+        "test-sources",
       ].includes(segments[1])
     )
       return null;
@@ -359,6 +368,15 @@ splitOpenAPIByPaths(
           "uploads",
           "repositories",
           "preview-test-workflow",
+          "test-suites",
+          "test-suite-executions",
+          "test-suite-with-executions",
+          "tests",
+          "test-with-executions",
+          "executors",
+          "executor-by-types",
+          "templates",
+          "test-sources",
         ].includes(segments[0])
       )
         return null;
@@ -375,10 +393,17 @@ splitOpenAPIByPaths(
       const p = opPath.substring(
         "/organizations/{id}/environments/{environmentID}/".length
       );
-      return {
-        basePath: "../" + p.split("/")[0],
-        submenu: "Environment Operations",
-      };
+
+      if (p.startsWith("collaborators") || p.startsWith("credentials") || 
+         p.startsWith("executions") || p.startsWith("test-workflow-executions") || p.startsWith("test-workflows") ) {
+      
+        return {
+          basePath: "../" + p.split("/")[0],
+          submenu: "Environment Operations",
+        };
+      }
+  
+      return null;
     }
 
     // filter operations at the organization level - this is ultimately a hack, should be controlled in the API
@@ -394,6 +419,7 @@ splitOpenAPIByPaths(
           "/agent-analytics",
           "/features",
           "/settings",
+          "/events"
         ].filter((str) => opPath.includes(str)).length > 0
       )
         return null;
