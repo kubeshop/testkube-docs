@@ -5,6 +5,11 @@ import TabItem from "@theme/TabItem";
 
 Webhooks allow you to integrate Testkube with external systems by sending HTTP POST payloads containing information about Testkube executions and their current state when specific events occur. To set up webhooks in Testkube, you'll need to have an HTTPS endpoint to receive the events and a payload template to be sent along with the data.
 
+:::info
+In connected environments from `v2.7`, webhooks continue to be executed by Agents while the Control Plane becomes the default source of orchestration truth.
+See [Control Plane Source of Truth](/articles/control-plane-source-of-truth#webhooks-and-triggers).
+:::
+
 :::note
 Please visit our Blog, [Empowering Kubernetes Tests with Webhooks](https://testkube.io/blog/empowering-kubernetes-tests-with-webhooks) for a tutorial on setting up webhooks for Slack and Grafana Dashboard.
 :::

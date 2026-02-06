@@ -246,6 +246,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Control Plane Source of Truth",
+              id: "articles/control-plane-source-of-truth",
+            },
+            {
+              type: "doc",
               label: "Agent Helm Chart",
               id: "articles/multi-agent-runner-helm-chart",
             },
@@ -1110,8 +1115,8 @@ const sidebars = {
             {type: "doc", label: "Prometheus", id: "articles/metrics"},
             {
               type: "doc",
-              label: "Scheduler Metrics",
-              id: "articles/scheduler-metrics",
+              label: "Control Plane Metrics",
+              id: "articles/control-plane-metrics",
             },
             {type: "doc", label: "Grafana", id: "articles/grafana"},
             {type: "doc", label: "Datadog", id: "articles/datadog-junit"},

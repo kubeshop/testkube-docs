@@ -8,6 +8,54 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Monthly Release v2.7.0 (Planned)
+
+Control Plane and Agent continue with unified versioning in `2.7.x`.
+
+### What's new!
+
+**Control Plane becomes default source of truth for connected environments**
+
+Starting in `v2.7`, orchestration ownership moves to the Control Plane by default:
+
+- Control Plane: `CAPABILITY_SOURCE_OF_TRUTH=true`
+- Agent: `WARNING_UNSAFE_FORCE_SUPERAGENT_MODE=false`
+
+On upgrade, the Agent executes the SuperAgent migration to align existing environments with the new source-of-truth model.
+
+Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-truth)
+
+**Workflow sync behavior changed (GitOps opt-in)**
+
+Workflow CRDs are no longer synced from Kubernetes by default in connected mode.
+If you want Kubernetes manifests to remain authoritative for workflows, configure GitOps capability.
+
+Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-truth#workflow-definitions-and-gitops)
+
+**Scheduling ownership moved to Control Plane**
+
+Scheduled Workflows are now managed by the Control Plane by default in connected deployments.
+
+Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-truth#scheduling-changes)
+
+**Webhook and trigger execution remain agent-based**
+
+- Webhooks continue to be executed by Agents.
+- Test Triggers continue to run through Listener Agents (or Standalone Agent listener behavior).
+
+Note: "webhook capability" is currently an internal implementation detail and may change in future releases.
+
+Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-truth#webhooks-and-triggers)
+
+### Observability updates
+
+**Control Plane metrics enabled by default**
+
+`TK_CLOUD_METRICS_ENABLED=true` is enabled by default in `v2.7`.
+Scheduler metrics docs are consolidated with control-plane metrics documentation.
+
+Read more: [Control Plane Metrics](/articles/control-plane-metrics)
+
 ## Monthly Release v2.6.0 (2026-02-05)
 
 This release is available in Helm chart v2.329.0. Control Plane and Agent versions are now unified at **v2.6.0**.
