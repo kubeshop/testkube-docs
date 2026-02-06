@@ -47,15 +47,12 @@ The central component that manages connected Agents.
 
 A lightweight component that connects to the Control Plane and executes test runs.
 
-* API - a service that runs REST APIs and establishes a connection between Agent and a Control Plane
+* API - a service that runs REST APIs, establishes a connection between Agent and a Control Plane, and manages Test, Test Suite and Test Workflow Execution CRDs state
     * Helm chart - Bundled as a subchart in the [kubeshop/testkube](https://github.com/kubeshop/helm-charts/tree/main/charts/testkube) Helm charts
     * Docker image - [kubeshop/testkube-api-server](https://hub.docker.com/r/kubeshop/testkube-api-server)
 * NATS - a message broker.
     * Helm chart - Used as a NATS subchart in the [kubeshop/testkube](https://github.com/kubeshop/helm-charts/tree/main/charts/testkube) Helm chart.
     * Docker image - [NATS](https://hub.docker.com/_/nats/tags)
-* Operator - is a Testkube service that reconciles Test, Test Suite and Test Workflow Execution CRDs state and runs the corresponding test, test suite and test workflow when resource generation is changed.
-    * Helm chart - Bundled as a subchart in the [kubeshop/testkube](https://github.com/kubeshop/helm-charts/tree/main/charts/testkube) Helm chart.
-    * Docker image - [kubeshop/testkube-operator](https://hub.docker.com/repository/docker/kubeshop/testkube-operator/tags)
 * Additional images used for running jobs during the chart install:
     * [kubectl](https://hub.docker.com/r/bitnami/kubectl)
     * [nats-reloader](https://hub.docker.com/r/natsio/nats-server-config-reloader)

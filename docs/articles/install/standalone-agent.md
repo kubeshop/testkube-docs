@@ -117,7 +117,7 @@ A high-level deployment architecture for Standalone Agent is shown below.
 
 ![Deployment with standalone agent](../../img/architecture-standalone.jpeg)
 
-The Testkube CRDs managed by the Operator are described in [Testkube Custom Resources](/articles/crds).
+The Testkube CRDs managed by the Agent are described in [Testkube Custom Resources](/articles/crds).
 
 ## Connecting to the Testkube Control Plane
 
@@ -221,26 +221,6 @@ mongodb:
     enabled: false
   auth:
     enabled: false
-```
-
-2. Add security context for `Patch` and `Migrate` jobs that are a part of Testkube Operator configuration to `values.yaml`:
-
-```yaml
-testkube-operator:
-  webhook:
-    migrate:
-      enabled: true
-      securityContext:
-        allowPrivilegeEscalation: false
-        capabilities:
-          drop: ["ALL"]
-
-    patch:
-      enabled: true
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000650000
-        fsGroup: 1000650000
 ```
 
 3. Install Testkube specifying the path to the new `values.yaml` file
