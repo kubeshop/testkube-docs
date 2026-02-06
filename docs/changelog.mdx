@@ -16,10 +16,8 @@ Control Plane and Agent continue with unified versioning in `2.7.x`.
 
 **Control Plane becomes default source of truth for connected environments**
 
-Starting in `v2.7`, orchestration ownership moves to the Control Plane by default:
-
-- Control Plane: `CAPABILITY_SOURCE_OF_TRUTH=true`
-- Agent: `WARNING_UNSAFE_FORCE_SUPERAGENT_MODE=false`
+Starting in `v2.7`, orchestration ownership moves to the Control Plane by default for connected environments.
+For most users, this means workflow and schedule management is now centered in Control Plane with no workflow changes required.
 
 On upgrade, the Agent executes the SuperAgent migration to align existing environments with the new source-of-truth model.
 
@@ -28,7 +26,7 @@ Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-tru
 **Workflow sync behavior changed (GitOps opt-in)**
 
 Workflow CRDs are no longer synced from Kubernetes by default in connected mode.
-If you want Kubernetes manifests to remain authoritative for workflows, configure GitOps capability.
+If your team manages workflows as CRDs, enable and validate GitOps capability/agent flow so Git-managed CRD updates continue to reconcile as expected.
 
 Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-truth#workflow-definitions-and-gitops)
 
@@ -51,7 +49,7 @@ Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-tru
 
 **Control Plane metrics enabled by default**
 
-`TK_CLOUD_METRICS_ENABLED=true` is enabled by default in `v2.7`.
+Control Plane metrics are enabled by default in `v2.7`.
 Scheduler metrics docs are consolidated with control-plane metrics documentation.
 
 Read more: [Control Plane Metrics](/articles/control-plane-metrics)

@@ -2,33 +2,30 @@
 
 Starting in Testkube `v2.7`, connected deployments use the Control Plane as the default source of truth for orchestration state.
 
-This is enabled by default with the following configuration:
-
-```yaml
-# Control Plane
-env:
-  - name: CAPABILITY_SOURCE_OF_TRUTH
-    value: "true"
-```
-
-```yaml
-# Agent (Standalone Agent / SuperAgent)
-env:
-  - name: WARNING_UNSAFE_FORCE_SUPERAGENT_MODE
-    value: "false"
-```
-
 ## What Changes in v2.7
 
-When `CAPABILITY_SOURCE_OF_TRUTH=true`, state ownership moves from the Agent to the Control Plane for connected environments.
+State ownership moves from the Agent to the Control Plane for connected environments.
 
 On upgrade, the Agent runs the SuperAgent migration so existing data can be aligned with the new control-plane-driven model.
+
+## What This Means for Users
+
+For most users, this change simplifies day-to-day operations:
+
+- Workflow updates made in the Control Plane are the authoritative connected state.
+- Scheduling is managed centrally from the Control Plane.
+- Webhooks and Kubernetes-event triggers continue to execute through agents.
+- Control Plane metrics are available by default for observability.
 
 ## Workflow Definitions and GitOps
 
 By default, Workflow CRDs are no longer synced from Kubernetes into the connected environment state.
 
-If you want Kubernetes manifests to remain the source for Workflow definitions, configure GitOps capability and workflows accordingly:
+If your team manages workflows as Kubernetes CRDs, you should enable and validate the GitOps capability/agent flow so Git-managed CRD updates are reconciled as intended.
+
+If you do not enable GitOps, CRD-side workflow edits are not expected to become the active connected state.
+
+Start here:
 
 - [GitOps Overview](/articles/gitops-overview)
 
@@ -57,13 +54,7 @@ The "webhook capability" naming is currently an internal implementation detail a
 
 ## Metrics Default
 
-Control Plane Prometheus metrics are enabled by default in `v2.7`:
-
-```yaml
-env:
-  - name: TK_CLOUD_METRICS_ENABLED
-    value: "true"
-```
+Control Plane Prometheus metrics are enabled by default in `v2.7`.
 
 Metrics coverage (including scheduler metrics) is documented in:
 
@@ -71,7 +62,8 @@ Metrics coverage (including scheduler metrics) is documented in:
 
 ## Upgrade Checklist
 
-1. Ensure `CAPABILITY_SOURCE_OF_TRUTH=true` on Control Plane.
-2. Ensure `WARNING_UNSAFE_FORCE_SUPERAGENT_MODE=false` on Agent.
-3. Confirm whether you need GitOps-driven Workflow sync and enable/configure it explicitly if required.
-4. Scrape the Control Plane `/metrics` endpoint and verify `TK_CLOUD_METRICS_ENABLED=true`.
+1. Validate that workflow changes in Control Plane are used as the active connected state.
+2. If you use workflow CRDs, enable and validate GitOps capability/agent flow before rollout.
+3. Validate schedules are managed from Control Plane (no missed or duplicate runs).
+4. Validate webhooks and trigger flows still execute through agents/listener agents.
+5. Scrape and verify Control Plane `/metrics` for workflow, scheduler, and webhook metrics.
