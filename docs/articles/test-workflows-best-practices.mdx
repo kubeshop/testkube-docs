@@ -398,7 +398,7 @@ artifacts:
 ### Use `condition: always` for Cleanup and Artifact Steps
 
 Steps marked with `condition: always` execute regardless of whether previous steps passed or failed.
-This is essential for artifact collection and cleanup.
+This is essential for artifact collection and cleanup if those are done in separate steps.
 
 ### Use `optional: true` for Non-Critical Steps
 
@@ -741,20 +741,4 @@ run:
 - [Test Workflow Overview](/articles/test-workflows)
 - [Basic Examples](/articles/test-workflows-examples-basics)
 - [Tool-Specific Examples](/articles/examples/overview)
-- [Content & Git](/articles/test-workflows-content)
-- [Artifacts](/articles/test-workflows-artifacts)
-- [Parameterization](/articles/test-workflows-examples-configuration)
-- [Expression Language](/articles/test-workflows-expressions)
-- [Parallel Execution](/articles/test-workflows-parallel)
-- [Services](/articles/test-workflows-services)
-- [Sharding & Matrix](/articles/test-workflows-matrix-and-sharding)
-- [Concurrency & Queueing](/articles/test-workflows-concurrency-queueing)
-- [Job & Pod Configuration](/articles/test-workflows-job-and-pod)
-- [Execution Tags](/articles/filtering-test-workflow-executions-using-tags)
-- [Workflow Orchestration](/articles/test-workflows-test-suites)
-- [Test Workflow Templates](/articles/test-workflow-templates)
-- [Creating Your Own Templates](/articles/examples/create-your-own-examples)
-- [JUnit Report Visualization](/articles/test-workflows-reports)
-- [Test Insights](/articles/test-insights)
-- [Scheduling Tests](/articles/scheduling-tests)
-- [Running Workflows](/articles/test-workflows-running)
+
