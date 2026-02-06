@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:0a67863a9f30ba352c04bdec137dca27a6dbf3674f4b0a85797afa69c49d8640</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 15" src="https://img.shields.io/badge/high-15-e25d68"/> <img alt="medium: 24" src="https://img.shields.io/badge/medium-24-fbb552"/> <img alt="low: 43" src="https://img.shields.io/badge/low-43-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>digest</td><td><code>sha256:0a67863a9f30ba352c04bdec137dca27a6dbf3674f4b0a85797afa69c49d8640</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 15" src="https://img.shields.io/badge/high-15-e25d68"/> <img alt="medium: 24" src="https://img.shields.io/badge/medium-24-fbb552"/> <img alt="low: 43" src="https://img.shields.io/badge/low-43-fce1a9"/> <img alt="unspecified: 6" src="https://img.shields.io/badge/unspecified-6-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>89 MB</td></tr>
 <tr><td>packages</td><td>484</td></tr>
@@ -13,7 +13,7 @@ hide_table_of_contents: true
 
 <table>
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 6" src="https://img.shields.io/badge/H-6-e25d68"/> <img alt="medium: 10" src="https://img.shields.io/badge/M-10-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>stdlib</strong> <code>1.25.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 6" src="https://img.shields.io/badge/H-6-e25d68"/> <img alt="medium: 10" src="https://img.shields.io/badge/M-10-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>stdlib</strong> <code>1.25.0</code> (golang)</summary>
 
 <small><code>pkg:golang/stdlib@1.25.0</code></small><br/>
 
@@ -190,8 +190,8 @@ When using http.CrossOriginProtection, the AddInsecureBypassPattern method can u
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.022%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.024%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -300,6 +300,21 @@ The Parse function permits values other than IPv6 addresses to be included in sq
 <blockquote>
 
 tar.Reader does not set a maximum size on the number of sparse region data blocks in GNU tar pax 1.0 sparse files. A maliciously-crafted archive containing a large number of sparse regions can cause a Reader to read an unbounded amount of data from the archive into memory. When reading from a compressed source, a small compressed input can result in large allocations.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2025-68121?s=golang&n=stdlib&t=golang&vr=%3E%3D1.25.0-0%2C%3C1.25.7"><img alt="unspecified : CVE--2025--68121" src="https://img.shields.io/badge/CVE--2025--68121-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.25.0-0<br/><1.25.7</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.25.7</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+During session resumption in crypto/tls, if the underlying Config has its ClientCAs or RootCAs fields mutated between the initial handshake and the resumed handshake, the resumed handshake may succeed when it should have failed. This may happen when a user calls Config.Clone and mutates the returned Config, or uses Config.GetConfigForClient. This can cause a client to resume a session with a server that it would not have resumed with during the initial handshake, or cause a server to resume a session with a client that it would not have resumed with during the initial handshake.
 
 </blockquote>
 </details>
@@ -562,7 +577,7 @@ to the security policy: https://www.openssl.org/policies/general/security-policy
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/M-3-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>stdlib</strong> <code>1.25.3</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/M-3-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>stdlib</strong> <code>1.25.3</code> (golang)</summary>
 
 <small><code>pkg:golang/stdlib@1.25.3</code></small><br/>
 
@@ -648,8 +663,8 @@ An excluded subdomain constraint in a certificate chain does not restrict the us
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.022%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.024%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -659,16 +674,31 @@ During the TLS 1.3 handshake if multiple messages are sent in records that span 
 
 </blockquote>
 </details>
+
+<a href="https://scout.docker.com/v/CVE-2025-68121?s=golang&n=stdlib&t=golang&vr=%3E%3D1.25.0-0%2C%3C1.25.7"><img alt="unspecified : CVE--2025--68121" src="https://img.shields.io/badge/CVE--2025--68121-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.25.0-0<br/><1.25.7</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.25.7</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+During session resumption in crypto/tls, if the underlying Config has its ClientCAs or RootCAs fields mutated between the initial handshake and the resumed handshake, the resumed handshake may succeed when it should have failed. This may happen when a user calls Config.Clone and mutates the returned Config, or uses Config.GetConfigForClient. This can cause a client to resume a session with a server that it would not have resumed with during the initial handshake, or cause a server to resume a session with a client that it would not have resumed with during the initial handshake.
+
+</blockquote>
+</details>
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.40.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.37.0</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/crypto@0.40.0</code></small><br/>
+<small><code>pkg:golang/golang.org/x/crypto@0.37.0</code></small><br/>
 
 ```dockerfile
-# minio-release.dockerfile (76:76)
-COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
+# minio-release.dockerfile (80:80)
+COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
 ```
 
 <br/>
@@ -730,13 +760,13 @@ SSH Agent servers do not validate the size of messages when processing new ident
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.37.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.40.0</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/crypto@0.37.0</code></small><br/>
+<small><code>pkg:golang/golang.org/x/crypto@0.40.0</code></small><br/>
 
 ```dockerfile
-# minio-release.dockerfile (80:80)
-COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
+# minio-release.dockerfile (76:76)
+COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
 ```
 
 <br/>
@@ -945,8 +975,8 @@ FROM debian:bookworm-slim
 <table>
 <tr><td>Affected range</td><td><code>>=1.34+dfsg-1.2+deb12u1</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.060%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.068%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1212,8 +1242,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 <table>
 <tr><td>Affected range</td><td><code>&lt;=7.88.1-10+deb12u14</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.059%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.049%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1236,8 +1266,8 @@ Debian builds with libssh2 for SSH backend
 <table>
 <tr><td>Affected range</td><td><code>&lt;=7.88.1-10+deb12u14</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.031%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.021%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1284,8 +1314,8 @@ Built with OpenLDAP (only affects the legacy LDAP support)
 <table>
 <tr><td>Affected range</td><td><code>&lt;=7.88.1-10+deb12u14</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.039%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.015%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1308,8 +1338,8 @@ wolfSSH backend not used in Debian
 <table>
 <tr><td>Affected range</td><td><code>&lt;=7.88.1-10+deb12u14</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>2.076%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>84th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.904%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>75th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1333,8 +1363,8 @@ Can only be triggered when using ancient runtime zlib of version 1.2.0.3 or olde
 <table>
 <tr><td>Affected range</td><td><code>&lt;=7.88.1-10+deb12u14</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.247%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.205%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1510,7 +1540,7 @@ FROM debian:bookworm-slim
 <tr><td>Affected range</td><td><code>&lt;=252.39-1~deb12u1</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.094%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>26th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1554,7 +1584,7 @@ https://github.com/kastel-security/Journald/blob/main/journald-publication.pdf
 <tr><td>Affected range</td><td><code>&lt;=252.39-1~deb12u1</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.128%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1751,68 +1781,6 @@ Neutralised by kernel hardening
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>perl</strong> <code>5.36.0-7+deb12u3</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/perl@5.36.0-7%2Bdeb12u3?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (36:36)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2023-31486?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D5.36.0-7%2Bdeb12u3"><img alt="low : CVE--2023--31486" src="https://img.shields.io/badge/CVE--2023--31486-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=5.36.0-7+deb12u3</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.560%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>68th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-HTTP::Tiny before 0.083, a Perl core module since 5.13.9 and available standalone on CPAN, has an insecure default TLS configuration where users must opt in to verify certificates.
-
----
-- libhttp-tiny-perl 0.088-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=962407; unimportant)
-[experimental] - perl 5.38.0~rc2-1
-- perl 5.38.2-2 (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=954089)
-https://www.openwall.com/lists/oss-security/2023/04/18/14
-https://github.com/chansen/p5-http-tiny/issues/134
-https://blog.hackeriet.no/perl-http-tiny-insecure-tls-default-affects-cpan-modules/
-https://hackeriet.github.io/cpan-http-tiny-overview/
-Applications need to explicitly opt in to enable verification.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2011-4116?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D5.36.0-7%2Bdeb12u3"><img alt="low : CVE--2011--4116" src="https://img.shields.io/badge/CVE--2011--4116-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=5.36.0-7+deb12u3</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.195%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-_is_safe in the File::Temp module for Perl does not properly handle symlinks.
-
----
-- perl <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=776268)
-http://thread.gmane.org/gmane.comp.security.oss.general/6174/focus=6177
-https://github.com/Perl-Toolchain-Gang/File-Temp/issues/14
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>jq</strong> <code>1.6-2.1+deb12u1</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/jq@1.6-2.1%2Bdeb12u1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
@@ -1857,8 +1825,8 @@ Assertion failure in testsuite, negligible security impact
 <table>
 <tr><td>Affected range</td><td><code>&lt;=1.6-2.1+deb12u1</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.099%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.109%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>30th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1948,9 +1916,9 @@ https://lists.gnupg.org/pipermail/gcrypt-devel/2018-February/004401.html
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gcc-12</strong> <code>12.2.0-14+deb12u1</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>perl</strong> <code>5.36.0-7+deb12u3</code> (deb)</summary>
 
-<small><code>pkg:deb/debian/gcc-12@12.2.0-14%2Bdeb12u1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+<small><code>pkg:deb/debian/perl@5.36.0-7%2Bdeb12u3?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
 
 ```dockerfile
 # minio-release.dockerfile (36:36)
@@ -1959,33 +1927,60 @@ FROM debian:bookworm-slim
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2022-27943?s=debian&n=gcc-12&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D12.2.0-14%2Bdeb12u1"><img alt="low : CVE--2022--27943" src="https://img.shields.io/badge/CVE--2022--27943-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2023-31486?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D5.36.0-7%2Bdeb12u3"><img alt="low : CVE--2023--31486" src="https://img.shields.io/badge/CVE--2023--31486-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;=12.2.0-14+deb12u1</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;=5.36.0-7+deb12u3</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.050%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.560%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>68th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-libiberty/rust-demangle.c in GNU GCC 11.2 allows stack consumption in demangle_const, as demonstrated by nm-new.
+HTTP::Tiny before 0.083, a Perl core module since 5.13.9 and available standalone on CPAN, has an insecure default TLS configuration where users must opt in to verify certificates.
 
 ---
-- gcc-12 <unfixed> (unimportant)
-Negligible security impact
-https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105039
+- libhttp-tiny-perl 0.088-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=962407; unimportant)
+[experimental] - perl 5.38.0~rc2-1
+- perl 5.38.2-2 (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=954089)
+https://www.openwall.com/lists/oss-security/2023/04/18/14
+https://github.com/chansen/p5-http-tiny/issues/134
+https://blog.hackeriet.no/perl-http-tiny-insecure-tls-default-affects-cpan-modules/
+https://hackeriet.github.io/cpan-http-tiny-overview/
+Applications need to explicitly opt in to enable verification.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2011-4116?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D5.36.0-7%2Bdeb12u3"><img alt="low : CVE--2011--4116" src="https://img.shields.io/badge/CVE--2011--4116-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=5.36.0-7+deb12u3</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.195%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+_is_safe in the File::Temp module for Perl does not properly handle symlinks.
+
+---
+- perl <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=776268)
+http://thread.gmane.org/gmane.comp.security.oss.general/6174/focus=6177
+https://github.com/Perl-Toolchain-Gang/File-Temp/issues/14
 
 </blockquote>
 </details>
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>apt</strong> <code>2.6.1</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>util-linux</strong> <code>2.38.1-5+deb12u3</code> (deb)</summary>
 
-<small><code>pkg:deb/debian/apt@2.6.1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+<small><code>pkg:deb/debian/util-linux@2.38.1-5%2Bdeb12u3?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
 
 ```dockerfile
 # minio-release.dockerfile (36:36)
@@ -1994,23 +1989,62 @@ FROM debian:bookworm-slim
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2011-3374?s=debian&n=apt&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D2.6.1"><img alt="low : CVE--2011--3374" src="https://img.shields.io/badge/CVE--2011--3374-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2022-0563?s=debian&n=util-linux&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D2.38.1-5%2Bdeb12u3"><img alt="low : CVE--2022--0563" src="https://img.shields.io/badge/CVE--2022--0563-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;=2.6.1</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;=2.38.1-5+deb12u3</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>1.509%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>81st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.020%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-It was found that apt-key in apt, all versions, do not correctly validate gpg keys with the master keyring, leading to a potential man-in-the-middle attack.
+A flaw was found in the util-linux chfn and chsh utilities when compiled with Readline support. The Readline library uses an "INPUTRC" environment variable to get a path to the library config file. When the library cannot parse the specified file, it prints an error message containing data from the file. This flaw allows an unprivileged user to read root-owned files, potentially leading to privilege escalation. This flaw affects util-linux versions prior to 2.37.4.
 
 ---
-- apt <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=642480)
-Not exploitable in Debian, since no keyring URI is defined
+- util-linux <unfixed> (unimportant)
+https://bugzilla.redhat.com/show_bug.cgi?id=2053151
+https://lore.kernel.org/util-linux/20220214110609.msiwlm457ngoic6w@ws.net.home/T/#u
+https://github.com/util-linux/util-linux/commit/faa5a3a83ad0cb5e2c303edbfd8cd823c9d94c17
+util-linux in Debian does build with readline support but chfn and chsh are provided
+by src:shadow and util-linux is configured with --disable-chfn-chsh
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>shadow</strong> <code>1:4.13+dfsg1-1+deb12u1</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/shadow@1%3A4.13%2Bdfsg1-1%2Bdeb12u1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (36:36)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2007-5686?s=debian&n=shadow&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D1%3A4.13%2Bdfsg1-1%2Bdeb12u2"><img alt="low : CVE--2007--5686" src="https://img.shields.io/badge/CVE--2007--5686-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=1:4.13+dfsg1-1+deb12u2</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.264%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+initscripts in rPath Linux 1 sets insecure permissions for the /var/log/btmp file, which allows local users to obtain sensitive information regarding authentication attempts.  NOTE: because sshd detects the insecure permissions and does not log certain events, this also prevents sshd from logging failed authentication attempts by remote attackers.
+
+---
+- shadow <unfixed> (unimportant)
+See #290803, on Debian LOG_UNKFAIL_ENAB in login.defs is set to no so
+unknown usernames are not recorded on login failures
 
 </blockquote>
 </details>
@@ -2033,8 +2067,8 @@ FROM debian:bookworm-slim
 <table>
 <tr><td>Affected range</td><td><code>&lt;=3.7.9-2+deb12u5</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>6.839%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>91st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>3.895%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>88th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2103,9 +2137,9 @@ all versions vulnerable, backport required for wheezy
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>util-linux</strong> <code>2.38.1-5+deb12u3</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>apt</strong> <code>2.6.1</code> (deb)</summary>
 
-<small><code>pkg:deb/debian/util-linux@2.38.1-5%2Bdeb12u3?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+<small><code>pkg:deb/debian/apt@2.6.1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
 
 ```dockerfile
 # minio-release.dockerfile (36:36)
@@ -2114,36 +2148,32 @@ FROM debian:bookworm-slim
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2022-0563?s=debian&n=util-linux&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D2.38.1-5%2Bdeb12u3"><img alt="low : CVE--2022--0563" src="https://img.shields.io/badge/CVE--2022--0563-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2011-3374?s=debian&n=apt&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D2.6.1"><img alt="low : CVE--2011--3374" src="https://img.shields.io/badge/CVE--2011--3374-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;=2.38.1-5+deb12u3</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;=2.6.1</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.020%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.509%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>81st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-A flaw was found in the util-linux chfn and chsh utilities when compiled with Readline support. The Readline library uses an "INPUTRC" environment variable to get a path to the library config file. When the library cannot parse the specified file, it prints an error message containing data from the file. This flaw allows an unprivileged user to read root-owned files, potentially leading to privilege escalation. This flaw affects util-linux versions prior to 2.37.4.
+It was found that apt-key in apt, all versions, do not correctly validate gpg keys with the master keyring, leading to a potential man-in-the-middle attack.
 
 ---
-- util-linux <unfixed> (unimportant)
-https://bugzilla.redhat.com/show_bug.cgi?id=2053151
-https://lore.kernel.org/util-linux/20220214110609.msiwlm457ngoic6w@ws.net.home/T/#u
-https://github.com/util-linux/util-linux/commit/faa5a3a83ad0cb5e2c303edbfd8cd823c9d94c17
-util-linux in Debian does build with readline support but chfn and chsh are provided
-by src:shadow and util-linux is configured with --disable-chfn-chsh
+- apt <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=642480)
+Not exploitable in Debian, since no keyring URI is defined
 
 </blockquote>
 </details>
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>shadow</strong> <code>1:4.13+dfsg1-1+deb12u1</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gcc-12</strong> <code>12.2.0-14+deb12u1</code> (deb)</summary>
 
-<small><code>pkg:deb/debian/shadow@1%3A4.13%2Bdfsg1-1%2Bdeb12u1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+<small><code>pkg:deb/debian/gcc-12@12.2.0-14%2Bdeb12u1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
 
 ```dockerfile
 # minio-release.dockerfile (36:36)
@@ -2152,24 +2182,110 @@ FROM debian:bookworm-slim
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2007-5686?s=debian&n=shadow&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D1%3A4.13%2Bdfsg1-1%2Bdeb12u2"><img alt="low : CVE--2007--5686" src="https://img.shields.io/badge/CVE--2007--5686-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2022-27943?s=debian&n=gcc-12&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D12.2.0-14%2Bdeb12u1"><img alt="low : CVE--2022--27943" src="https://img.shields.io/badge/CVE--2022--27943-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;=1:4.13+dfsg1-1+deb12u2</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;=12.2.0-14+deb12u1</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.264%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.050%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-initscripts in rPath Linux 1 sets insecure permissions for the /var/log/btmp file, which allows local users to obtain sensitive information regarding authentication attempts.  NOTE: because sshd detects the insecure permissions and does not log certain events, this also prevents sshd from logging failed authentication attempts by remote attackers.
+libiberty/rust-demangle.c in GNU GCC 11.2 allows stack consumption in demangle_const, as demonstrated by nm-new.
 
 ---
-- shadow <unfixed> (unimportant)
-See #290803, on Debian LOG_UNKFAIL_ENAB in login.defs is set to no so
-unknown usernames are not recorded on login failures
+- gcc-12 <unfixed> (unimportant)
+Negligible security impact
+https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105039
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/U-2-lightgrey"/><strong>golang.org/x/net</strong> <code>0.39.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/net@0.39.0</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (80:80)
+COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-58190?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.45.0"><img alt="unspecified : CVE--2025--58190" src="https://img.shields.io/badge/CVE--2025--58190-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.45.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.45.0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The html.Parse function in golang.org/x/net/html has an infinite parsing loop when processing certain inputs, which can lead to denial of service (DoS) if an attacker provides specially crafted HTML content.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2025-47911?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.45.0"><img alt="unspecified : CVE--2025--47911" src="https://img.shields.io/badge/CVE--2025--47911-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.45.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.45.0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The html.Parse function in golang.org/x/net/html has quadratic parsing complexity when processing certain inputs, which can lead to denial of service (DoS) if an attacker provides specially crafted HTML content.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/U-2-lightgrey"/><strong>golang.org/x/net</strong> <code>0.42.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/net@0.42.0</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (76:76)
+COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-58190?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.45.0"><img alt="unspecified : CVE--2025--58190" src="https://img.shields.io/badge/CVE--2025--58190-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.45.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.45.0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The html.Parse function in golang.org/x/net/html has an infinite parsing loop when processing certain inputs, which can lead to denial of service (DoS) if an attacker provides specially crafted HTML content.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2025-47911?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.45.0"><img alt="unspecified : CVE--2025--47911" src="https://img.shields.io/badge/CVE--2025--47911-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.45.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.45.0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The html.Parse function in golang.org/x/net/html has quadratic parsing complexity when processing certain inputs, which can lead to denial of service (DoS) if an attacker provides specially crafted HTML content.
 
 </blockquote>
 </details>

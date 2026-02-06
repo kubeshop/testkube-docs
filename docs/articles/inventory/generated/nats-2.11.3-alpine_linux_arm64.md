@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:77790b065a14aa640a9906611f2593849afbc24e3dfe9ea845191d6d6b2b9ea3</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 12" src="https://img.shields.io/badge/high-12-e25d68"/> <img alt="medium: 23" src="https://img.shields.io/badge/medium-23-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/low-2-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:77790b065a14aa640a9906611f2593849afbc24e3dfe9ea845191d6d6b2b9ea3</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 12" src="https://img.shields.io/badge/high-12-e25d68"/> <img alt="medium: 23" src="https://img.shields.io/badge/medium-23-fbb552"/> <img alt="low: 3" src="https://img.shields.io/badge/low-3-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/arm64/v8</td></tr>
 <tr><td>size</td><td>10 MB</td></tr>
 <tr><td>packages</td><td>32</td></tr>
@@ -247,7 +247,7 @@ hide_table_of_contents: true
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 7" src="https://img.shields.io/badge/H-7-e25d68"/> <img alt="medium: 12" src="https://img.shields.io/badge/M-12-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>stdlib</strong> <code>1.24.2</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 7" src="https://img.shields.io/badge/H-7-e25d68"/> <img alt="medium: 12" src="https://img.shields.io/badge/M-12-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>stdlib</strong> <code>1.24.2</code> (golang)</summary>
 
 <small><code>pkg:golang/stdlib@1.24.2</code></small><br/>
 
@@ -496,8 +496,8 @@ os.OpenFile(path, os.O_CREATE|O_EXCL) behaved differently on Unix and Windows sy
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.24.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.12</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.022%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.024%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -610,7 +610,7 @@ tar.Reader does not set a maximum size on the number of sparse region data block
 </blockquote>
 </details>
 
-<a href="https://scout.docker.com/v/CVE-2025-22873?s=golang&n=stdlib&t=golang&vr=%3E%3D1.24.0-0%2C%3C1.24.3"><img alt="unspecified : CVE--2025--22873" src="https://img.shields.io/badge/CVE--2025--22873-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+<a href="https://scout.docker.com/v/CVE-2025-22873?s=golang&n=stdlib&t=golang&vr=%3E%3D1.24.0-0%2C%3C1.24.3"><img alt="low : CVE--2025--22873" src="https://img.shields.io/badge/CVE--2025--22873-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
 <tr><td>Affected range</td><td><code>>=1.24.0-0<br/><1.24.3</code></td></tr>
@@ -621,6 +621,21 @@ tar.Reader does not set a maximum size on the number of sparse region data block
 <blockquote>
 
 It was possible to improperly access the parent directory of an os.Root by opening a filename ending in "../". For example, Root.Open("../") would open the parent directory of the Root. This escape only permits opening the parent directory itself, not ancestors of the parent or files contained within the parent.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2025-68121?s=golang&n=stdlib&t=golang&vr=%3C1.24.13"><img alt="unspecified : CVE--2025--68121" src="https://img.shields.io/badge/CVE--2025--68121-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.24.13</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.24.13</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+During session resumption in crypto/tls, if the underlying Config has its ClientCAs or RootCAs fields mutated between the initial handshake and the resumed handshake, the resumed handshake may succeed when it should have failed. This may happen when a user calls Config.Clone and mutates the returned Config, or uses Config.GetConfigForClient. This can cause a client to resume a session with a server that it would not have resumed with during the initial handshake, or cause a server to resume a session with a client that it would not have resumed with during the initial handshake.
 
 </blockquote>
 </details>
