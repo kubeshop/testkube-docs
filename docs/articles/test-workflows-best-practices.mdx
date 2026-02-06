@@ -32,7 +32,10 @@ container:
 ### Set Appropriate Resource Requests
 
 Every workflow should declare [resource requests](/articles/test-workflows-job-and-pod) to help the Kubernetes scheduler place pods correctly
-and avoid noisy-neighbor problems. Use these as starting-point guidelines:
+and avoid noisy-neighbor problems. You can use the [Resource Usage](/articles/testkube-dashboard-execution-details#resource-usage) tab in 
+the Testkube Dashboard to monitor resource usage and help you adjust requests and limits accordingly.
+
+Use these as starting-point guidelines:
 
 | Test Category | CPU | Memory |
 |---|---|---|
