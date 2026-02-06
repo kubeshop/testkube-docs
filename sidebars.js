@@ -438,7 +438,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Best Practices",
+              label: "Workflow Best Practices",
               id: "articles/test-workflows-best-practices",
             },
             {
