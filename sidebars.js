@@ -437,6 +437,11 @@ const sidebars = {
               id: "articles/test-workflows-high-level-architecture",
             },
             {
+              type: "doc",
+              label: "Best Practices",
+              id: "articles/test-workflows-best-practices",
+            },
+            {
               type: "category",
               label: "Cookbook",
               items: [
