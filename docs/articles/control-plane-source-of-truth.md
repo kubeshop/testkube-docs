@@ -50,36 +50,10 @@ testkube-api:
       syncKubernetesToCloud: true
 ```
 
-If you install the `testkube-api` chart directly:
-
-```yaml
-next:
-  gitops:
-    syncKubernetesToCloud: true
-```
-
-Or set it inline during upgrade:
-
-```sh
-helm upgrade --install <release> <chart> \
-  --set 'testkube-api.next.gitops.syncKubernetesToCloud=true'
-```
-
-For `testkube-api` chart directly, use:
-
-```sh
-helm upgrade --install <release> <chart> \
-  --set 'next.gitops.syncKubernetesToCloud=true'
-```
-
-In other words:
+Notes:
 
 - Migration backfills existing CRD-based configuration into Control Plane.
 - Ongoing Kubernetes-to-Control-Plane synchronization is an explicit GitOps capability choice.
-
-Start here:
-
-- [GitOps Overview](/articles/gitops-overview)
 
 ## Scheduling Changes
 
