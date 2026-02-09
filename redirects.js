@@ -576,7 +576,11 @@ const redirects = [
   },
   // Copilot to AI Assistant redirects
   {
-    from: "/articles/copilot-overview",
+    from: ["/articles/copilot-overview",
+      "/articles/copilot-can-help",
+      "/articles/copilot-is-different",
+      "/articles/ai-assistant-can-help",
+      "/articles/ai-assistant-is-different"],
     to: "/articles/ai-assistant-overview",
   },
   {
@@ -594,14 +598,6 @@ const redirects = [
   {
     from: "/articles/ai-assistant-enable",
     to: "/articles/ai-configuration",
-  },
-  {
-    from: "/articles/copilot-can-help",
-    to: "/articles/ai-assistant-can-help",
-  },
-  {
-    from: "/articles/copilot-is-different",
-    to: "/articles/ai-assistant-is-different",
   },
   {
     from: ["/articles/mcp-setup", "/articles/mcp"],
@@ -686,6 +682,11 @@ const redirects = [
   {
     from: "/testkube-pro-on-prem/articles/auth",
     to: "/articles/auth",
+  },
+  // AI Assistant Security consolidated into AI Configuration
+  {
+    from: "/articles/ai-assistant-security",
+    to: "/articles/ai-configuration#security--compliance",
   },
 ];
 
