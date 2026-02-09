@@ -730,21 +730,6 @@ const sidebars = {
                   label: "Overview",
                   id: "articles/ai-assistant-overview",
                 },
-                {
-                  type: "doc",
-                  label: "How AI Assistant can help",
-                  id: "articles/ai-assistant-can-help",
-                },
-                {
-                  type: "doc",
-                  label: "How AI Assistant is different",
-                  id: "articles/ai-assistant-is-different",
-                },
-                {
-                  type: "doc",
-                  label: "Security & Compliance",
-                  id: "articles/ai-assistant-security",
-                },
               ],
             },
             {
