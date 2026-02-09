@@ -218,6 +218,38 @@ testkube-ai-service:
 
 ---
 
+## Security & Compliance
+
+### Data Privacy
+
+Where your data is processed depends on your LLM configuration:
+
+| Configuration | Data Residency |
+|--------------|----------------|
+| Self-hosted LLM | Data never leaves your infrastructure. Supports air-gapped deployments and full compliance with data residency requirements. |
+| Third-party provider (your API key) | Queries and Testkube context (logs, workflow names, execution details) are sent to the provider's API. Review their data handling policies. |
+| Testkube hosted proxy | For trials/demos only. **Do not use for production or sensitive environments.** |
+
+### Disabling Telemetry
+
+To disable diagnostic telemetry collection:
+
+```yaml
+testkube-ai-service:
+  enabled: true
+  extraEnvVars:
+    - name: DO_NOT_TRACK
+      value: "true"
+```
+
+See [Telemetry Configuration](/articles/telemetry) for more details.
+
+### Air-Gapped Environments
+
+AI functionality supports fully disconnected deployments when using self-hosted LLM infrastructure. See [Repackaging Testkube](/articles/repackaging-testkube) for air-gapped setup guidance.
+
+---
+
 ## Feature Flags Reference
 
 | Flag/Setting | Location | Default | Purpose |
