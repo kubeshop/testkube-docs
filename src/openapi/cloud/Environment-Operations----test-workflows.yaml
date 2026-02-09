@@ -234,3 +234,49 @@ paths:
       - $ref: './components.yaml#/components/parameters/EnvironmentID'
       - $ref: './components.yaml#/components/parameters/TestWorkflowName'
       - $ref: './components.yaml#/components/parameters/ExecutionGroupID'
+  /organizations/{id}/environments/{environmentID}/test-workflows/definitions:
+    get:
+      summary: Get workflow definitions in bulk
+      description: Returns a map of workflow name to YAML definition for MCP query tools
+      operationId: getTestWorkflowDefinitionsBulk
+      parameters:
+        - name: selector
+          in: query
+          description: Label selector to filter workflows
+          schema:
+            type: string
+        - name: resourceGroup
+          in: query
+          description: Resource group to filter workflows
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          description: Maximum number of workflows to return (default 50, max 100)
+          schema:
+            type: integer
+            maximum: 100
+            default: 50
+      responses:
+        '200':
+          description: Map of workflow name to YAML definition
+          content:
+            application/json:
+              schema:
+                description: Map where key is workflow name and value is YAML definition
+                type: object
+                additionalProperties:
+                  type: string
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '500':
+          $ref: './components.yaml#/components/responses/InternalServerError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/EnvironmentID'

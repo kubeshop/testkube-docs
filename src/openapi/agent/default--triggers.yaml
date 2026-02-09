@@ -200,6 +200,27 @@ paths:
       parameters:
         - $ref: './components.yaml#/components/parameters/ID'
         - $ref: './components.yaml#/components/parameters/Namespace'
+        - name: mode
+          in: query
+          description: >
+            Update mode for the trigger. When set to "replace", the entire
+            trigger 
+
+            is replaced with the request body (full replacement semantics). When
+            not 
+
+            set or set to any other value, merge semantics are used where only 
+
+            non-null fields from the request are applied to the existing
+            trigger.
+
+            This is used by cloud-api to signal that the original request was
+            YAML.
+          required: false
+          schema:
+            type: string
+            enum:
+              - replace
       summary: Update test trigger
       description: Update test trigger
       operationId: updateTestTrigger
