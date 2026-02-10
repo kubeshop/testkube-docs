@@ -55,6 +55,93 @@ Notes:
 - Migration backfills existing CRD-based configuration into Control Plane.
 - Ongoing Kubernetes-to-Control-Plane synchronization is an explicit GitOps capability choice.
 
+## Agent Capability Cookbook (v2.7)
+
+In `v2.7`, connected environments still use agent capabilities for eventing and optional sync paths.
+
+Use this section as a practical cookbook when deciding which capabilities to enable on each connected agent.
+
+### Listener capability
+
+Use Listener capability when you need Kubernetes-event triggers (`TestTrigger`) to be evaluated from cluster events.
+
+For self-registering Runner Agents (`testkube-runner` chart):
+
+```yaml
+listener:
+  enabled: true
+```
+
+For namespace-scoped and cluster-wide listening patterns, see [Listener Agent Cookbook](/articles/multi-agent-runner-helm-chart#listener-agent-cookbook).
+
+CLI example:
+
+```bash
+testkube install agent <name> --create --listener
+```
+
+### GitOps capability
+
+Use GitOps capability when your source of truth for Workflows/Triggers/Webhooks remains in Kubernetes manifests and you want those CRD changes synchronized into connected Control Plane state.
+
+For self-registering Runner Agents (`testkube-runner` chart):
+
+```yaml
+gitops:
+  enabled: true
+```
+
+CLI example:
+
+```bash
+testkube install agent <name> --create --gitops
+```
+
+### Webhooks capability
+
+Use Webhooks capability when webhook-triggered execution should run through the agent path in connected mode.
+
+For self-registering Runner Agents (`testkube-runner` chart):
+
+```yaml
+webhooks:
+  enabled: true
+```
+
+CLI example:
+
+```bash
+testkube install agent <name> --create --webhooks
+```
+
+:::note
+During SuperAgent migration, webhook capability is preserved so existing webhook behavior continues after upgrading to `v2.7`.
+:::
+
+### Combined capability example
+
+A common connected setup keeps Runner + Listener enabled and adds GitOps and Webhooks explicitly:
+
+```yaml
+runner:
+  enabled: true
+
+listener:
+  enabled: true
+
+gitops:
+  enabled: true
+
+webhooks:
+  enabled: true
+```
+
+Equivalent CLI flow:
+
+```bash
+testkube install agent <name> --create --runner --listener --gitops --webhooks
+```
+
 ## Scheduling Changes
 
 Scheduled Workflows are now managed by the Control Plane by default in connected mode.
