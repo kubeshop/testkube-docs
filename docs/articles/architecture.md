@@ -61,7 +61,7 @@ Check the table to know each of the integrations between Testkube Components:
 |Worker Service|NATS|To manage events happening into the platform|4222|
 |Worker Service|MongoDB|To manage the state of the whole platform objects (Test Workflows, Test Triggers, Webhooks, etc.) generating metrics|27017 (If it's the default MongoDB deployed together with Testkube platform)|
 |Testkube Agent API|Testkube Control Plane API|To receive instructions on Test Workflow and other features execution in the specific environment and Kubernetes cluster|8089 (if HTTPS, 8443)|
-|Testkube Agent API|S3|to store artifacts (test workflow execution results, logs, and metrics)|9000 (If is MinIO)|
+|Testkube Agent API|S3|To store artifacts (test workflow execution results, logs, and metrics)|9000 (If is MinIO)|
 |Testkube Agent API|NATS|To manage events happening into the platform|4222|
 
 _** Only for installation using Online Testkube License._
