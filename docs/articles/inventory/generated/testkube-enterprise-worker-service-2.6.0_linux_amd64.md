@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:f78c01c17f061bf023c01ad4835c7ffde9807cfde86f27768cd6f4aeb8900123</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/medium-2-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:f78c01c17f061bf023c01ad4835c7ffde9807cfde86f27768cd6f4aeb8900123</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/medium-2-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>57 MB</td></tr>
 <tr><td>packages</td><td>389</td></tr>
@@ -13,9 +13,71 @@ hide_table_of_contents: true
 
 <table>
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/gofiber/fiber/v2</strong> <code>2.52.6</code> (golang)</summary>
+<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/gofiber/fiber/v2</strong> <code>2.52.6</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/gofiber/fiber@2.52.6#v2</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2025-66630?s=github&n=v2&ns=github.com%2Fgofiber%2Ffiber&t=golang&vr=%3C2.52.11"><img alt="critical 9.2: CVE--2025--66630" src="https://img.shields.io/badge/CVE--2025--66630-lightgrey?label=critical%209.2&labelColor=8b1924"/></a> <i>Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG)</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.52.11</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.52.11</code></td></tr>
+<tr><td>CVSS Score</td><td><code>9.2</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:H/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Fiber v2 contains an internal vendored copy of `gofiber/utils`, and its functions `UUIDv4()` and `UUID()` inherit the same critical weakness described in the upstream advisory. On **Go versions prior to 1.24**, the underlying `crypto/rand` implementation **can return an error** if secure randomness cannot be obtained. In such cases, these Fiber v2 UUID functions silently fall back to generating predictable values — the all-zero UUID `00000000-0000-0000-0000-000000000000`.
+
+On Go **1.24+**, the language guarantees that `crypto/rand` no longer returns an error (it will block or panic instead), so this vulnerability primarily affects **Fiber v2 users running Go 1.23 or earlier**, which Fiber v2 officially supports.
+
+Because no error is returned by the Fiber v2 UUID functions, application code may unknowingly rely on *predictable, repeated, or low-entropy identifiers* in security-critical pathways. This is especially impactful because many Fiber v2 middleware components (session middleware, CSRF, rate limiting, request-ID generation, etc.) **default to using `utils.UUIDv4()`**.
+
+Impact includes, but is not limited to:
+
+* **Session fixation or hijacking** (predictable session IDs)
+* **CSRF token forgery** or bypass
+* **Authentication replay / token prediction**
+* **Potential denial-of-service (DoS):** if the zero UUID is generated, key-based structures (sessions, rate-limits, caches, CSRF stores) may collapse into a single shared key, causing overwrites, lock contention, or state corruption
+* **Request-ID collisions**, undermining logging and trace integrity
+* **General compromise** of confidentiality, integrity, and authorization logic relying on UUIDs for uniqueness or secrecy
+
+All Fiber v2 versions containing the internal `utils.UUIDv4()` / `utils.UUID()` implementation are affected when running on **Go <1.24**. **No patched Fiber v2 release currently exists.**
+
+---
+
+## Suggested Mitigations / Workarounds
+
+Update to the latest version of Fiber v2.
+
+---
+
+### Likelihood / Environmental Factors
+
+It’s important to note that **entropy exhaustion on modern Linux systems is extremely rare**, as the kernel’s CSPRNG is resilient and non-blocking. However, **entropy-source failures** — where `crypto/rand` cannot read from its underlying provider — are significantly more likely in certain environments.
+
+This includes containerized deployments, restricted sandboxes, misconfigured systems lacking read access to `/dev/urandom` or platform-equivalent sources, chrooted or jailed environments, embedded devices, or systems with non-standard or degraded randomness providers. On **Go <1.24**, such failures cause `crypto/rand` to return an error, which the Fiber v2 UUID functions currently treat as a signal to silently generate predictable UUIDs, including the zero UUID. This silent fallback is the root cause of the vulnerability.
+
+---
+
+## References
+
+* Upstream advisory for `gofiber/utils`: **GHSA-m98w-cqp3-qcqr**
+* Source repositories:
+
+  * `github.com/gofiber/fiber`
+  * `github.com/gofiber/utils`
+
+---
+
+## Credits / Reporter
+
+Reported by **@sixcolors** (Fiber Maintainer / Security Team)
+
+</blockquote>
+</details>
+
 <a href="https://scout.docker.com/v/CVE-2025-54801?s=github&n=v2&ns=github.com%2Fgofiber%2Ffiber&t=golang&vr=%3C%3D2.52.8"><img alt="high 8.7: CVE--2025--54801" src="https://img.shields.io/badge/CVE--2025--54801-lightgrey?label=high%208.7&labelColor=e25d68"/></a> <i>Memory Allocation with Excessive Size Value</i>
 
 <table>

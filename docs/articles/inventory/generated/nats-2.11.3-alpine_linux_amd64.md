@@ -632,7 +632,7 @@ tar.Reader does not set a maximum size on the number of sparse region data block
 <table>
 <tr><td>Affected range</td><td><code>>=1.24.0-0<br/><1.24.3</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.3</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.003%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.004%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
 </table>
 
