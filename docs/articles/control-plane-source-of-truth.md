@@ -1,14 +1,14 @@
 # Control Plane Source of Truth (v2.7)
 
-Starting in Testkube `v2.7`, connected deployments use the Control Plane as the default source of truth for orchestration state.
+Starting in Testkube `v2.7`, Testkube stores its Resources in the Control Plane instead of in the default Superagent.
 
 ## Background
 
 ### The Testkube Agent as the Source-of-Truth
 
-Up until this version of the Testkube Control Plane, all Testkube Resources available in an Environment were stored and managed as CRDs in the
-namespace where the initial Environment Agent was deployed. This design worked well for standalone agent deployments, but became increasingly 
-problematic for deployments using the Testkube Control Plane:
+Up until this version of the Testkube, all Testkube Resources available in an Environment were stored and managed as CRDs in the
+namespace where the initial Environment Agent ("Superagent") was deployed. This design worked well for standalone agent deployments, but became increasingly 
+problematic for complex deployments using the Testkube Control Plane:
 
 - Whenever the initial Agent became unavailable (for example for networking reasons), the Control Plane and Dashboard would no longer have access to 
   the Testkube Resources in that Environment, resulting in the "Read Only" behaviour in the Dashboard.
@@ -70,8 +70,8 @@ flowchart LR
 
 ## What happens when migrating to 2.7.0
 
-When upgrading the Agent to the 2.7.0 version, it will automatically startm migration of existing Testkube resources to the Control Plane 
-in line with the new architecture described above. 
+When upgrading the Agent to the 2.7.0 version, it will automatically migrate existing Testkube resources to the Control Plane,
+in line with the new architecture described above. This migration should be transparent to users.
 
 The Testkube Resources synced are
 
@@ -82,6 +82,10 @@ The Testkube Resources synced are
 - `WebhookTemplate` (`executor.testkube.io/v1`)
 
 This gives existing environments a consistent starting point when moving to Control Plane ownership.
+
+Once migrated, the (Super)Agent will show up in the list of Agents as an Agent with all 4 agent capabilities enabled; runner, listener, gitops and webhook.
+This is functionality equivalent to its pre-migration state, so users can continue using Testkube as before without having to perform any further tasks 
+for the migration to finish.
 
 :::note
 If you want to continue syncing Testkube resources into the Control Plane after the migration, read the [Testkube Resources and GitOps](#testkube-resources-and-gitops) section below.
@@ -98,7 +102,7 @@ For most users, this change simplifies day-to-day operations:
 - Webhooks and Kubernetes-event triggers continue to execute through agents via the agent capability model (for triggers, see [Listener Agents](/articles/agents-overview#listener-agents)).
 - Control Plane metrics are available by default for observability (see [Control Plane Metrics](/articles/control-plane-metrics)).
 
-Once migrated, the Agent will show up in the list of Agents as an Agent with all 4 agent capabilities; runner, listener, gitops and webhook (see below).
+
 
 ## Testkube Resources and GitOps
 
