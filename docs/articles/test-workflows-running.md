@@ -317,3 +317,21 @@ To execute a Workflow silently using the CLI, add the `--silent` flag:
 testkube run testworkflow my-k6-test --silent
 ```
 
+### Silent Workflows
+
+Introduced with Testkube 2.6.0, you can also set a Workflow to always run executions silently instead of having to flag each individual execution. 
+
+Simply add the following to your Worfklow definition:
+
+```yaml
+...
+spec:
+  execution:
+    silent: true
+...
+```
+
+:::tip
+Use this when you want to silence/mute a Workflow temporarily, for example if you know it will fail or is flaky for some reason that 
+can't be handled at the moment.
+:::
