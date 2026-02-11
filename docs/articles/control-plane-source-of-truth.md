@@ -16,6 +16,7 @@ problematic for deployments using the Testkube Control Plane:
   a round-trip to the Agent where the Resource was actually stored - which in large deployment would result in sluggish and sometimes fragile functionality.
 - Performing bulk actions on Testkube Resources in the Dashboard (for example search or find/replace across Workflows) was not technically feasible as all 
   Resources would first have to be retrieved from the Agent, and updating them atomically would not be possible.
+- RBAC controls for Testkube Resources in the Testkube Dashboard could be bypassed by modifying corresponding Kubernetes resources directly with kubectl/etc.
 
 ```mermaid
 flowchart LR
@@ -47,6 +48,7 @@ The new architecture introduced in this release moves the storage and management
   run a Workflow, or start listening to Kubernetes Events that you will need to deploy a Runner or Listener Agent - [Read More about Testkube Agents](/articles/agents-overview)
 - The Dashboard will no longer exhibit "Read Only" behaviour - it is always connected to the Control Plane where all Resources are stored.
 - Latency and reliability for working with Testkube Resources in large deployments should be greatly improved.
+- RBAC controls for Testkube Resource are now much harder to bypass, ensuring integrity of your resources in a regulated/audited environment.
 - Bulk actions on Resources is now possible - which will allow us to add corresponding functionality going forward.
 
 ```mermaid
@@ -68,11 +70,10 @@ flowchart LR
 
 ## What happens when migrating to 2.7.0
 
-As described above, state ownership for all Testkube Resources moves from the Agent to the Control Plane for connected environments.
+When upgrading the Agent to the 2.7.0 version, it will automatically startm migration of existing Testkube resources to the Control Plane 
+in line with the new architecture described above. 
 
-On upgrade, the Agent runs the SuperAgent migration so existing data can be aligned with the new control-plane-driven model.
-
-As part of that migration, the agent sync path covers the CRDs used for connected orchestration configuration:
+The Testkube Resources synced are
 
 - `TestWorkflow` (`testworkflows.testkube.io/v1`)
 - `TestWorkflowTemplate` (`testworkflows.testkube.io/v1`)
@@ -81,6 +82,10 @@ As part of that migration, the agent sync path covers the CRDs used for connecte
 - `WebhookTemplate` (`executor.testkube.io/v1`)
 
 This gives existing environments a consistent starting point when moving to Control Plane ownership.
+
+:::note
+If you want to continue syncing Testkube resources into the Control Plane after the migration, read the [Testkube Resources and GitOps](#testkube-resources-and-gitops) section below.
+:::
 
 ## What This Means for Users
 
@@ -93,14 +98,16 @@ For most users, this change simplifies day-to-day operations:
 - Webhooks and Kubernetes-event triggers continue to execute through agents via the agent capability model (for triggers, see [Listener Agents](/articles/agents-overview#listener-agents)).
 - Control Plane metrics are available by default for observability (see [Control Plane Metrics](/articles/control-plane-metrics)).
 
-## Workflow Definitions and GitOps
+Once migrated, the Agent will show up in the list of Agents as an Agent with all 4 agent capabilities; runner, listener, gitops and webhook (see below).
 
-Allthough Testkube Resources are now stored in the Control Plane, they can still be provided and managed as CRDs in a GitOps setup by using 
+## Testkube Resources and GitOps
+
+Allthough Testkube Resources are now stored in the Control Plane, they can still be provided and managed as CRDs in an external/GitOps setup by using 
 the new GitOps Agent capability introduced as part of this release. 
 
-Once deployed in a namespace, a GitOps-Agent will monitor that namespace for any Testkube Resources 
-and copy those to its Environment in the Control-Plane. Coupled with a GitOps tool like ArgoCD or Flux, this can be used to effectively sync Testkube Resources
-from any number of deployments/namespaces into your Testkube Environment(s).
+Once deployed, a GitOps-Agent will monitor its namespace for any Testkube Resources and copy those to the connected Environment in the Control-Plane. 
+Coupled with a GitOps tool like ArgoCD or Flux, this can be used to effectively sync Testkube Resources from any number of Git repositories 
+and deployments/namespaces into your Testkube Environment(s).
 
 ```mermaid
 flowchart LR
@@ -142,6 +149,8 @@ flowchart LR
 
 Syncing is uni-directional, i.e. from GitOps Agent to Control Plane only - changes in the Control Plane are not synced back to the Resource in the Agent Namespace.
 
+Synced resources are left in the monitored namespace to enable the deletion behaviour described below.
+
 ### Resource Update Behaviour
 
 The GitOps Agent will currently overwrite any existing/conflicting Testkube Resources already in the Control Plane:
@@ -160,7 +169,7 @@ resources not initially available in its namespace. For example:
 > - the Agent will sync Workflow B to the Environment, Workflow C will be left as is
 > - if Workflow B is deleted from Namespace A, the Agent will delete it from the Testkube Environment also
 
-### Enable GitOps agent flow via Helm
+### Enable GitOps Agent via Helm
 
 Enable Kubernetes-to-Control-Plane sync in your agent Helm values.
 
@@ -173,10 +182,12 @@ testkube-api:
       syncKubernetesToCloud: true
 ```
 
-Notes:
+For self-registering Runner Agents (`testkube-runner` chart):
 
-- Migration backfills existing CRD-based configuration into Control Plane.
-- Ongoing Kubernetes-to-Control-Plane synchronization is an explicit GitOps capability choice.
+```yaml
+gitops:
+  enabled: true
+```
 
 ## Agent Capability Cookbook (v2.7)
 
