@@ -96,9 +96,9 @@ For most users, this change simplifies day-to-day operations:
 ## Workflow Definitions and GitOps
 
 Allthough Testkube Resources are now stored in the Control Plane, they can still be provided and managed as CRDs in a GitOps setup by using 
-the new Sync Agent introduced as part of this release. 
+the new GitOps Agent capability introduced as part of this release. 
 
-Once deployed in a namespace, the Sync-Agent will monitor that namespace for any Testkube Resources 
+Once deployed in a namespace, a GitOps-Agent will monitor that namespace for any Testkube Resources 
 and copy those to its Environment in the Control-Plane. Coupled with a GitOps tool like ArgoCD or Flux, this can be used to effectively sync Testkube Resources
 from any number of deployments/namespaces into your Testkube Environment(s).
 
@@ -114,11 +114,11 @@ flowchart LR
         ARGO[GitOps Tool<br/>ArgoCD / Flux]
         subgraph Namespace A
             CRD_A[(CRDs)]
-            SA_A[Sync Agent]
+            SA_A[GitOps Agent]
         end
         subgraph Namespace B
             CRD_B[(CRDs)]
-            SA_B[Sync Agent]
+            SA_B[GitOps Agent]
         end
     end
 
@@ -140,21 +140,22 @@ flowchart LR
 
 ### Unidirectional Sync
 
-Syncing is uni-directional, i.e. from Agent to Control PLane only - changes in the Control Plane are not synced back to the Resource in the Agent Namespace.
+Syncing is uni-directional, i.e. from GitOps Agent to Control Plane only - changes in the Control Plane are not synced back to the Resource in the Agent Namespace.
 
 ### Resource Update Behaviour
 
-The Sync Agent will currently overwrite any existing/conflicting Testkube Resources already in the Control Plane:
+The GitOps Agent will currently overwrite any existing/conflicting Testkube Resources already in the Control Plane:
 
-- If you make changes to a Resource via the Testkube Dashboard or any other mechanism, those changes could be lost.
-- If you have multiple Sync Agents syncing the same Teskube Resources into the same Testkube Environment, these will overwrite each other 
+- If you make changes to a Resource via the Testkube Dashboard or any other mechanism, those changes will be overwritten when a new version of the Resource is detected
+  and synced by a GitOps Agent.
+- If you have multiple GitOps Agents syncing the same Teskube Resources into the same Testkube Environment, these will overwrite each other.
 
 ### Deleting Resources
 
-The Sync Agent will only delete Resources in the Control Plane if those are initially available and deleted locally, i.e. it won't delete 
+A GitOps Agent will only delete Resources in the Control Plane if those are initially available and deleted locally, i.e. it won't delete 
 resources not initially available in its namespace. For example:
 
-> A Sync Agent is deployed inte Namespace A which contains Workflow B. The Testkube Environment the Agent is connected to already contains another Workflow C.
+> A GitOps Agent is deployed inte Namespace A which contains Workflow B. The Testkube Environment the Agent is connected to already contains another Workflow C.
 >
 > - the Agent will sync Workflow B to the Environment, Workflow C will be left as is
 > - if Workflow B is deleted from Namespace A, the Agent will delete it from the Testkube Environment also
