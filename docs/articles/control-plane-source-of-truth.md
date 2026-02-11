@@ -2,9 +2,73 @@
 
 Starting in Testkube `v2.7`, connected deployments use the Control Plane as the default source of truth for orchestration state.
 
-## What Changes in v2.7
+## Background
 
-State ownership moves from the Agent to the Control Plane for connected environments.
+### The Testkube Agent as the Source-of-Truth
+
+Up until this version of the Testkube Control Plane, all Testkube Resources available in an Environment were stored and managed as CRDs in the
+namespace where the initial Environment Agent was deployed. This design worked well for standalone agent deployments, but became increasingly 
+problematic for deployments using the Testkube Control Plane:
+
+- Whenever the initial Agent became unavailable (for example for networking reasons), the Control Plane and Dashboard would no longer have access to 
+  the Testkube Resources in that Environment, resulting in the "Read Only" behaviour in the Dashboard.
+- Any action in the Testkube Dashboard that involved the retrieval/update of a Testkube Resources (for example updating a Workflow), would require 
+  a round-trip to the Agent where the Resource was actually stored - which in large deployment would result in sluggish and sometimes fragile functionality.
+- Performing bulk actions on Testkube Resources in the Dashboard (for example search or find/replace across Workflows) was not technically feasible as all 
+  Resources would first have to be retrieved from the Agent, and updating them atomically would not be possible.
+
+```mermaid
+flowchart LR
+    subgraph Control Plane
+        CP[Control Plane API]
+        DB[(Dashboard)]
+    end
+
+    subgraph Kubernetes Cluster
+        SA[SuperAgent]
+        CRD[(CRDs<br/>Workflows · Templates<br/>Triggers · Webhooks)]
+    end
+
+    DB -- "manage resources" --> CP
+    CP -- "round-trip for<br/>every read/write" --> SA
+    SA -- "stores & owns" --> CRD
+
+    SA -. "agent offline → <br/>Dashboard read-only" .-> CP
+
+    style CRD fill:#f9d6d6,stroke:#c0392b
+    style SA fill:#f9d6d6,stroke:#c0392b
+```
+
+### Testkube Control Plane as the Source-of-Truth
+
+The new architecture introduced in this release moves the storage and management of all Testkube Resources from the Agent to the Control Plane itself, resulting in:
+
+- An agent is no longer required to create and manage an Environment and its resources in the Testkube Dashboard, it is first when you actually want to 
+  run a Workflow, or start listening to Kubernetes Events that you will need to deploy a Runner or Listener Agent - [Read More about Testkube Agents](/articles/agents-overview)
+- The Dashboard will no longer exhibit "Read Only" behaviour - it is always connected to the Control Plane where all Resources are stored.
+- Latency and reliability for working with Testkube Resources in large deployments should be greatly improved.
+- Bulk actions on Resources is now possible - which will allow us to add corresponding functionality going forward.
+
+```mermaid
+flowchart LR
+
+    subgraph Control Plane
+        direction LR
+        DB[(Dashboard)]
+        CP[Control Plane API]
+        RS[(Resources<br/>Workflows · Templates<br/>Triggers · Webhooks)]
+    end
+
+    DB -- "manage resources<br/>always available" --> CP
+    CP -- "stores & owns" --> RS
+
+    style RS fill:#d5f5e3,stroke:#27ae60
+    style CP fill:#d5f5e3,stroke:#27ae60
+```
+
+## What happens when migrating to 2.7.0
+
+As described above, state ownership for all Testkube Resources moves from the Agent to the Control Plane for connected environments.
 
 On upgrade, the Agent runs the SuperAgent migration so existing data can be aligned with the new control-plane-driven model.
 
@@ -31,11 +95,69 @@ For most users, this change simplifies day-to-day operations:
 
 ## Workflow Definitions and GitOps
 
-By default, Workflow CRDs are no longer synced from Kubernetes into the connected environment state.
+Allthough Testkube Resources are now stored in the Control Plane, they can still be provided and managed as CRDs in a GitOps setup by using 
+the new Sync Agent introduced as part of this release. 
 
-If your team manages workflows as Kubernetes CRDs, you should enable and validate the GitOps capability/agent flow so Git-managed CRD updates are reconciled as intended.
+Once deployed in a namespace, the Sync-Agent will monitor that namespace for any Testkube Resources 
+and copy those to its Environment in the Control-Plane. Coupled with a GitOps tool like ArgoCD or Flux, this can be used to effectively sync Testkube Resources
+from any number of deployments/namespaces into your Testkube Environment(s).
 
-Without GitOps, workflow CRD edits are not synced to the connected state.
+```mermaid
+flowchart LR
+    subgraph Git Repository
+        direction LR
+        GR[(Testkube CRDs<br/>Workflows · Templates<br/>Triggers · Webhooks)]
+    end
+
+    subgraph Kubernetes Cluster
+        direction TB
+        ARGO[GitOps Tool<br/>ArgoCD / Flux]
+        subgraph Namespace A
+            CRD_A[(CRDs)]
+            SA_A[Sync Agent]
+        end
+        subgraph Namespace B
+            CRD_B[(CRDs)]
+            SA_B[Sync Agent]
+        end
+    end
+
+    subgraph Control Plane
+        direction LR
+        ENV[(Environment with<br/>Testkube Resources)]
+    end
+
+    GR -- "deploy CRDs" --> ARGO
+    ARGO --> CRD_A
+    ARGO --> CRD_B
+    SA_A -- "watch & sync" --> ENV
+    SA_B -- "watch & sync" --> ENV
+
+    style SA_A fill:#d5f5e3,stroke:#27ae60
+    style SA_B fill:#d5f5e3,stroke:#27ae60
+    style ENV fill:#d5f5e3,stroke:#27ae60
+```
+
+### Unidirectional Sync
+
+Syncing is uni-directional, i.e. from Agent to Control PLane only - changes in the Control Plane are not synced back to the Resource in the Agent Namespace.
+
+### Resource Update Behaviour
+
+The Sync Agent will currently overwrite any existing/conflicting Testkube Resources already in the Control Plane:
+
+- If you make changes to a Resource via the Testkube Dashboard or any other mechanism, those changes could be lost.
+- If you have multiple Sync Agents syncing the same Teskube Resources into the same Testkube Environment, these will overwrite each other 
+
+### Deleting Resources
+
+The Sync Agent will only delete Resources in the Control Plane if those are initially available and deleted locally, i.e. it won't delete 
+resources not initially available in its namespace. For example:
+
+> A Sync Agent is deployed inte Namespace A which contains Workflow B. The Testkube Environment the Agent is connected to already contains another Workflow C.
+>
+> - the Agent will sync Workflow B to the Environment, Workflow C will be left as is
+> - if Workflow B is deleted from Namespace A, the Agent will delete it from the Testkube Environment also
 
 ### Enable GitOps agent flow via Helm
 
