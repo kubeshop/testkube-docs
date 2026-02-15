@@ -480,6 +480,11 @@ const sidebars = {
                   label: "Creating your own Workflow Templates",
                   id: "articles/examples/create-your-own-examples",
                 },
+                {
+                  type: "doc",
+                  label: "Transferring Output Between Steps",
+                  id: "articles/test-workflows-step-output-transfer",
+                },
               ],
             },
           ],
