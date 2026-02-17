@@ -13,7 +13,7 @@ const cloudRedocSpecs = require("./src/openapi/cloud/redoc-specs");
 const config = {
   title: "Testkube Documentation",
   tagline:
-    "Kubernetes-native Continuous Testing Platform for Cloud-Native Applications",
+    "Test Orchestration Platform for Cloud-Native Applications",
   url: "https://docs.testkube.io",
   baseUrl: "/",
   onBrokenLinks: "throw",
