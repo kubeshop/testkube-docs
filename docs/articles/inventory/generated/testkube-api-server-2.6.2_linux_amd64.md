@@ -3,9 +3,9 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:ddb6a0287dce01dab78b6e0d9fdbb99a2f1df361bf7970222b32ea80924064bb</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 16" src="https://img.shields.io/badge/medium-16-fbb552"/> <img alt="low: 4" src="https://img.shields.io/badge/low-4-fce1a9"/> <!-- unspecified: 0 --></td></tr>
-<tr><td>platform</td><td>linux/arm64</td></tr>
-<tr><td>size</td><td>66 MB</td></tr>
+<tr><td>digest</td><td><code>sha256:21c2766ce4ab6c8dc08714f5f77e25f1715f09033ea0fd1eedfd8681e9742e0f</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 16" src="https://img.shields.io/badge/medium-16-fbb552"/> <img alt="low: 4" src="https://img.shields.io/badge/low-4-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>platform</td><td>linux/amd64</td></tr>
+<tr><td>size</td><td>70 MB</td></tr>
 <tr><td>packages</td><td>255</td></tr>
 </table>
 </details></table>
@@ -15,7 +15,7 @@ hide_table_of_contents: true
 <tr><td valign="top">
 <details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 3" src="https://img.shields.io/badge/H-3-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/M-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libssl3</strong> <code>3.3.5-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/libssl3@3.3.5-r0?arch=aarch64&distro=alpine-3.20.8&upstream=openssl</code></small><br/>
+<small><code>pkg:apk/alpine/libssl3@3.3.5-r0?arch=x86_64&distro=alpine-3.20.8&upstream=openssl</code></small><br/>
 
 ```dockerfile
 # api-server.Dockerfile (33:33)
@@ -198,7 +198,7 @@ FROM ${ALPINE_IMAGE}
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>c-ares</strong> <code>1.33.1-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/c-ares@1.33.1-r0?arch=aarch64&distro=alpine-3.20.8</code></small><br/>
+<small><code>pkg:apk/alpine/c-ares@1.33.1-r0?arch=x86_64&distro=alpine-3.20.8</code></small><br/>
 
 ```dockerfile
 # api-server.Dockerfile (34:34)
@@ -245,7 +245,7 @@ RUN apk --no-cache add ca-certificates libssl3 git
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 6" src="https://img.shields.io/badge/M-6-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>libcurl</strong> <code>8.14.1-r2</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/libcurl@8.14.1-r2?arch=aarch64&distro=alpine-3.20.8&upstream=curl</code></small><br/>
+<small><code>pkg:apk/alpine/libcurl@8.14.1-r2?arch=x86_64&distro=alpine-3.20.8&upstream=curl</code></small><br/>
 
 ```dockerfile
 # api-server.Dockerfile (34:34)
@@ -377,7 +377,7 @@ RUN apk --no-cache add ca-certificates libssl3 git
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>ssl_client</strong> <code>1.36.1-r30</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/ssl_client@1.36.1-r30?arch=aarch64&distro=alpine-3.20.8&upstream=busybox</code></small><br/>
+<small><code>pkg:apk/alpine/ssl_client@1.36.1-r30?arch=x86_64&distro=alpine-3.20.8&upstream=busybox</code></small><br/>
 
 ```dockerfile
 # api-server.Dockerfile (33:33)
@@ -441,7 +441,7 @@ FROM ${ALPINE_IMAGE}
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>libexpat</strong> <code>2.7.3-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/libexpat@2.7.3-r0?arch=aarch64&distro=alpine-3.20.8&upstream=expat</code></small><br/>
+<small><code>pkg:apk/alpine/libexpat@2.7.3-r0?arch=x86_64&distro=alpine-3.20.8&upstream=expat</code></small><br/>
 
 ```dockerfile
 # api-server.Dockerfile (34:34)
