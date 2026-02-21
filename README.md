@@ -130,7 +130,7 @@ The customized Markdown templates are in this repositories [src/crd-templates](s
 
 Follow these steps:
 
-1. Ensure you have pulled the [testkube-operator](https://github.com/kubeshop/testkube-operator) submodule `main` branch to make sure you have the latest types available locally.
+1. Ensure you have cloned the [testkube](https://github.com/kubeshop/testkube) repository. The CRD generation expects it to be in a sibling directory (e.g., if testkube-docs is at `/path/to/testkube-docs`, testkube should be at `/path/to/testkube`). Adjust the path in `gen-crds.go` if your directory structure differs.
 2. Make sure you have go tooling installed.
 3. Set the desired Kubernetes Version to use for outgoing links to reference docs in the `config.yaml` file (at least v1.28)
 4. Run `go generate gen-crds.go`.
