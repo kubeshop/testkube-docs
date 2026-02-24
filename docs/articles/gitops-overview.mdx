@@ -256,6 +256,30 @@ spec:
 Consider creating a [Workflow Template](/articles/test-workflow-templates) to apply these 
 annotations consistently across all your workflows.
 
+### Temporarily Pausing GitOps Sync to Control Plane
+
+If you need to temporarily protect a Testkube resource from being changed by the GitOps sync agent,
+add the `testkube.io/no-gitops-sync` annotation to the resource:
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: api-integration-tests
+  annotations:
+    testkube.io/no-gitops-sync: "true"
+```
+
+When the value is set to `"true"`, Control Plane sync for that resource is skipped:
+
+- Update/create sync requests are accepted but ignored.
+- Delete sync requests are accepted but ignored.
+
+This allows temporary manual edits in the Control Plane without being overwritten by GitOps sync.
+
+To re-enable sync, remove the annotation (or set it to `"false"`) and then apply your desired
+resource state again from Git.
+
 ### Sync Waves for Proper Ordering
 
 Use ArgoCD sync waves to ensure resources are created in the correct order:
