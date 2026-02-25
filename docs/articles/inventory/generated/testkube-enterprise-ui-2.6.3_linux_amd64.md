@@ -16,11 +16,11 @@ hide_table_of_contents: true
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libpng</strong> <code>1.6.54-r0</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/libpng@1.6.54-r0?os_name=alpine&os_version=3.23</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-25646?s=alpine&n=libpng&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D1.6.54-r0"><img alt="high : CVE--2026--25646" src="https://img.shields.io/badge/CVE--2026--25646-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-25646?s=alpine&n=libpng&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C1.6.55-r0"><img alt="high : CVE--2026--25646" src="https://img.shields.io/badge/CVE--2026--25646-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;=1.6.54-r0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.6.55-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.6.55-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.063%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
 </table>
