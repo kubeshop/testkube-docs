@@ -51,6 +51,35 @@ Read more: [Control Plane Metrics](/articles/control-plane-metrics)
 - Update MongoDB image and helm chart to use latest patch version available, MongoDB version `8.2.5`.
 - Update PostgreSQL image and helm chart to use latest patch version available, PostgreSQL version `18.2`.
 
+## Patch Release v2.6.3 (2026-02-17)
+
+This release focuses on stability fixes in backend and dashboard components, MongoDB index correctness for soft-deleted agents, and AI service Helm configuration improvements.
+
+Control Plane is available in Helm chart vv2.329.3 and Agent is available in Helm chart v2.6.2 ([Check its release notes](https://github.com/kubeshop/testkube/releases/tag/2.6.2)).
+
+### Security Updates
+
+- Updated Go modules to address reported CVEs and Docker Scout findings.
+- Upgraded `go-jose` lineage to `v2.6.3` (`gopkg.in/square/go-jose.v2` replacement and dependency updates) as part of the CVE remediation set.
+
+### Bug Fixes
+
+- Fixed a panic path by updating the `testkube` dependency to include upstream handling for nil metric timestamps.
+- Corrected cloud plan user quota behavior so enterprise-named plans in cloud mode no longer incorrectly appear as unlimited users.
+- Fixed agent uniqueness behavior with soft deletes by introducing partial unique indexes for `name` and `secret` and adding a migration to drop/recreate conflicting indexes.
+- Improved MongoDB migration/index handling by tolerating missing collection/index cases and tightening partial-index filter matching.
+- Fixed AI PostgreSQL DSN precedence in Helm: `db.secretRef` now takes precedence over `db.url` and `global.postgres.dsn`, and missing DB configuration now fails fast at template render time.
+  - Adjusted DSN resolution logic in the Testkube Enterprise Helm chart, specifically AI component, to correctly prioritize AI-specific PostgreSQL configuration over global defaults. This ensures the AI service uses its dedicated database settings when provided.
+  - Enhanced PostgreSQL configuration in the Testkube Enterprise Helm chart, specifically AI component, by allowing SSL mode to be configured via optional query parameters in the DSN. This provides greater flexibility for different database setups and environments.
+- Restored TestWorkflow YAML editor capabilities in the dashboard (schema validation, hover, autocomplete) by stabilizing Monaco YAML worker lifecycle and compatibility.
+- Fixed Monaco editor toolbar actions by forwarding refs through lazy-loaded Monaco wrappers.
+- Added guards in workflow settings to handle malformed template/workflow entities without runtime failures.
+
+### Features and Improvements
+
+- Added global Helm setting `global.aiApiSubdomain` in cloud API values to support AI API subdomain configuration.
+- Made AI service PostgreSQL SSL mode configurable when using `db.secretRef` by adding `db.queryParams` (instead of hardcoding `sslmode=disable`).
+
 ## Monthly Release v2.6.0 (2026-02-05)
 
 This release is available in Helm chart v2.329.0. Control Plane and Agent versions are now unified at **v2.6.0**.
@@ -104,7 +133,7 @@ These tools make it easier for AI assistants to perform bulk analysis and genera
 ### Improvements and fixes
 
 - Workflows can now be configured as silent at the Workflow level by setting `spec.execution.silent` to true, which will
-  result in all executions being silent by default - [Read more about Silent Executions](/articles/test-workflows-running#silent-executions)
+  result in all executions being silent by default - [Read more about Silent Workflows](/articles/test-workflows-running#silent-workflows)
 - On-prem customers can now configure custom LLM models via Helm instead of being locked to defaults.
 - AI service now uses two model types: a primary model for complex agent tasks and a lightweight model for quick tasks like generating session titles.
 - Default models updated to `gpt-5.2` (primary) and `gpt-5-mini` (lightweight), with optional temperature settings for models that support it.

@@ -2,8 +2,8 @@
 
 Welcome to Testkube!
 
-Testkube is a Continuous Testing Platform.
-You can automate both simple and complex multi-tool testing scenarios and analyse all of your setup in one centralised place.
+Testkube is a Test Orchestration Platform allowing you to 
+orchestrate both simple and complex multi-tool testing scenarios and analyse all of your executions and their results in one centralised place.
 
 ## Key Features
 
