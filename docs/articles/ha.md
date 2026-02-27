@@ -30,21 +30,14 @@ a `NoSchedule` effect.
 
 ## Example Configuration
 
-### Operator and Agent
+### Agent
 
-Example values for the `testkube` chart for the agent and operator:
+Example values for the `testkube` chart for the agent:
 
 ```yaml {2-3,10-14}
 testkube-api:
   # Create a priority class for Testkube, i.e. high
   priorityClassName: high
-  tolerations:
-  - key: testkube
-    operator: Exists
-    effect: NoSchedule
-testkube-operator:
-  priorityClassName: high
-  # Dedicate nodes to Testkube, i.e. taint with testkube key
   tolerations:
   - key: testkube
     operator: Exists
@@ -133,9 +126,6 @@ nats:
   Coordinating multiple replicas would require implementing leader election, but
 electing a new leader would mostly likely take longer than spawning a new pod on
 a different node and reconnecting.
-- The operator can only run as a single instance, but it is responsible for
-  running a periodic reconciliation process which at most could be delayed while
-a new pod spawns on a different node.
 - Setting up MongoDB for high availability is outside of the scope of this
   guide, but in production deployments we highly recommend utilizing a managed service
 such as [MongoDB

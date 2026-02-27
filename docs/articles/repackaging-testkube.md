@@ -70,7 +70,6 @@ ENTRYPOINT ["/toolkit"]
 
 - [Testkube Agent Dockerfiles](https://github.com/kubeshop/testkube/tree/main/build/_local)
 - [Testkube Control Plane Dockerfiles](https://github.com/kubeshop/testkube-cloud-api/tree/main/build/_local)
-- [Testkube Operator Dockerfile](https://github.com/kubeshop/testkube-operator/blob/main/Dockerfile)
 - [kube-webhook-certgen Dockerfile](https://github.com/kubeshop/kube-webhook-certgen/blob/master/Dockerfile)
 
 ### UI Dockerfile
