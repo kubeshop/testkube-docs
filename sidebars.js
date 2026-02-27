@@ -246,11 +246,6 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Control Plane Source of Truth",
-              id: "articles/control-plane-source-of-truth",
-            },
-            {
-              type: "doc",
               label: "Agent Helm Chart",
               id: "articles/multi-agent-runner-helm-chart",
             },
@@ -258,12 +253,7 @@ const sidebars = {
               type: "doc",
               label: "Agent CLI Commands",
               id: "articles/multi-agent-cli",
-            },
-            {
-              type: "doc",
-              label: "Ephemeral Environments",
-              id: "articles/ephemeral-environments",
-            },
+            }
           ],
         },
         {
@@ -792,6 +782,16 @@ const sidebars = {
           items: [
             {
               type: "doc",
+              label: "GitOps with Testkube",
+              id: "articles/gitops-overview",
+            },
+            {
+              type: "doc",
+              label: "Ephemeral Environments",
+              id: "articles/ephemeral-environments",
+            },
+            {
+              type: "doc",
               label: "Environments and Access Control",
               id: "articles/environments-best-practices",
             },
@@ -1032,11 +1032,6 @@ const sidebars = {
           type: "category",
           label: "GitOps",
           items: [
-            {
-              type: "doc",
-              label: "Overview",
-              id: "articles/gitops-overview",
-            },
             {type: "doc", label: "ArgoCD", id: "articles/argocd-integration"},
             {type: "doc", label: "Flux", id: "articles/flux-integration"},
           ],
@@ -1135,8 +1130,21 @@ const sidebars = {
           label: "Architecture",
           id: "articles/architecture",
         },
-        "articles/helm-components",
-        "articles/telemetry",
+        {
+          type: "doc",
+          label: "Control Plane Source of Truth",
+          id: "articles/control-plane-source-of-truth",
+        },
+        {
+          type: "doc",
+          label: "Helm Components",
+          id: "articles/helm-components",
+        },
+        {
+          type: "doc",
+          label: "Telemetry",
+          id: "articles/telemetry",
+        },
         {
           type: "category",
           label: "Testkube CRDs",
