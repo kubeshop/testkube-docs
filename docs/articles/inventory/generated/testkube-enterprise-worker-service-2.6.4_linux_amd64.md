@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:0ebd67abf5449572fcd0bebb05c09df76ae2fee1ec675dbf138b4c8a99775063</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/high-1-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/medium-3-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>digest</td><td><code>sha256:1cf6c3fd742bbc062560e5e846e1260a0e0bf25b11da8244cdd24e176ab9f336</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/high-1-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/medium-3-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <!-- unspecified: 0 --></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
-<tr><td>size</td><td>71 MB</td></tr>
-<tr><td>packages</td><td>414</td></tr>
+<tr><td>size</td><td>56 MB</td></tr>
+<tr><td>packages</td><td>389</td></tr>
 </table>
 </details></table>
 </details>
@@ -16,11 +16,13 @@ hide_table_of_contents: true
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel/sdk</strong> <code>1.38.0</code> (golang)</summary>
 
 <small><code>pkg:golang/go.opentelemetry.io/otel/sdk@1.38.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-24051?s=golang&n=sdk&ns=go.opentelemetry.io%2Fotel&t=golang&vr=%3E%3D1.21.0%2C%3C1.40.0"><img alt="high : CVE--2026--24051" src="https://img.shields.io/badge/CVE--2026--24051-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-24051?s=github&n=sdk&ns=go.opentelemetry.io%2Fotel&t=golang&vr=%3E%3D1.21.0%2C%3C1.40.0"><img alt="high 7.0: CVE--2026--24051" src="https://img.shields.io/badge/CVE--2026--24051-lightgrey?label=high%207.0&labelColor=e25d68"/></a> <i>Untrusted Search Path</i>
 
 <table>
 <tr><td>Affected range</td><td><code>>=1.21.0<br/><1.40.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.40.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.006%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
 </table>
@@ -28,53 +30,14 @@ hide_table_of_contents: true
 <details><summary>Description</summary>
 <blockquote>
 
-OpenTelemetry Go SDK Vulnerable to Arbitrary Code Execution via PATH Hijacking in go.opentelemetry.io/otel/sdk
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/nats-io/nats-server/v2</strong> <code>2.11.4</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/nats-io/nats-server@2.11.4#v2</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-27571?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3C2.11.12"><img alt="medium 5.9: CVE--2026--27571" src="https://img.shields.io/badge/CVE--2026--27571-lightgrey?label=medium%205.9&labelColor=fbb552"/></a> <i>Improper Handling of Highly Compressed Data (Data Amplification)</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.11.12</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.11.12</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5.9</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.055%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
 ### Impact
-
-The WebSockets handling of NATS messages handles compressed messages via the WebSockets negotiated compression.  The implementation bound the memory size of a NATS message but did not independently bound the memory consumption of the memory stream when constructing a NATS message which might then fail validation for size reasons.
-
-An attacker can use a compression bomb to cause excessive memory consumption, often resulting in the operating system terminating the server process.
-
-The use of compression is negotiated before authentication, so this does not require valid NATS credentials to exploit.
-
-The fix was to bounds the decompression to fail once the message was too large, instead of continuing on.
+The OpenTelemetry Go SDK in version `v1.20.0`-`1.39.0` is vulnerable to Path Hijacking (Untrusted Search Paths) on macOS/Darwin systems. The resource detection code in `sdk/resource/host_id.go` executes the `ioreg` system command using a search path. An attacker with the ability to locally modify the PATH environment variable can achieve Arbitrary Code Execution (ACE) within the context of the application.
 
 ### Patches
-
-This was released in nats-server without being highlighted as a security issue.  It should have been, this was an oversight.  Per the NATS security policy, because this does not require a valid user, it is CVE-worthy.
-
-This was fixed in the v2.11 series with v2.11.12 and in the v2.12 series with v2.12.3.
-
-### Workarounds
-
-This only affects deployments which use WebSockets and which expose the network port to untrusted end-points.
+This has been patched in [d45961b](https://github.com/open-telemetry/opentelemetry-go/commit/d45961bcda453fcbdb6469c22d6e88a1f9970a53), which was released with `v1.40.0`.
 
 ### References
-
-This was reported to the NATS maintainers by Pavel Kohout of Aisle Research (www.aisle.com).
+- [CWE-426: Untrusted Search Path](https://cwe.mitre.org/data/definitions/426.html)
 
 </blockquote>
 </details>
@@ -387,6 +350,52 @@ Until patched, users should:
 ## Credit
 
 **Discovered by:** @sixcolors (Fiber maintainer) and @TheAspectDev
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/nats-io/nats-server/v2</strong> <code>2.11.4</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/nats-io/nats-server@2.11.4#v2</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-27571?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3C2.11.12"><img alt="medium 5.9: CVE--2026--27571" src="https://img.shields.io/badge/CVE--2026--27571-lightgrey?label=medium%205.9&labelColor=fbb552"/></a> <i>Improper Handling of Highly Compressed Data (Data Amplification)</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.11.12</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.11.12</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.9</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.055%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+
+The WebSockets handling of NATS messages handles compressed messages via the WebSockets negotiated compression.  The implementation bound the memory size of a NATS message but did not independently bound the memory consumption of the memory stream when constructing a NATS message which might then fail validation for size reasons.
+
+An attacker can use a compression bomb to cause excessive memory consumption, often resulting in the operating system terminating the server process.
+
+The use of compression is negotiated before authentication, so this does not require valid NATS credentials to exploit.
+
+The fix was to bounds the decompression to fail once the message was too large, instead of continuing on.
+
+### Patches
+
+This was released in nats-server without being highlighted as a security issue.  It should have been, this was an oversight.  Per the NATS security policy, because this does not require a valid user, it is CVE-worthy.
+
+This was fixed in the v2.11 series with v2.11.12 and in the v2.12 series with v2.12.3.
+
+### Workarounds
+
+This only affects deployments which use WebSockets and which expose the network port to untrusted end-points.
+
+### References
+
+This was reported to the NATS maintainers by Pavel Kohout of Aisle Research (www.aisle.com).
 
 </blockquote>
 </details>
