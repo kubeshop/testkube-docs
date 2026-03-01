@@ -8,6 +8,49 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Monthly Release v2.7.0 (Planned)
+
+Control Plane and Agent continue with unified versioning in `2.7.x`.
+
+### What's new!
+
+**Control Plane becomes default source of truth for connected environments**
+
+Starting in `v2.7`, orchestration ownership moves to the Control Plane by default for connected environments.
+For most users, this means workflow and schedule management is now centered in Control Plane with no workflow changes required.
+Environment health no longer depends on continuous SuperAgent connectivity, and environments no longer automatically enter read-only mode when that connection is unavailable.
+
+On upgrade, the Agent executes the SuperAgent migration to align existing environments with the new source-of-truth model.
+
+Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-truth)
+
+**Workflow sync behavior changed (GitOps opt-in)**
+
+Workflow CRDs are no longer synced from Kubernetes.
+If your team manages workflows as CRDs, enable and validate GitOps capability/agent flow so Git-managed CRD updates continue to reconcile as expected.
+
+Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-truth#workflow-definitions-and-gitops)
+
+**Scheduling ownership moved to Control Plane**
+
+Scheduled Workflows are now managed by the Control Plane by default in connected deployments.
+
+Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-truth#scheduling-changes)
+
+### Observability updates
+
+A large set of SuperAgent Prometheus metrics is now available in Control Plane.
+
+Read more: [Control Plane Metrics](/articles/control-plane-metrics)
+
+### Improvements and fixes
+
+- Removed the deprecated native Slack integration configuration from Helm values: `slackToken`, `slackSecret`, and `slackConfig`.
+- Slack notifications should now be configured with Testkube Webhooks - [Read more](/articles/slack-integration).
+- Extended support in JUnit visualization for non-numeric time values, such as 200ms, 2s, 0.2m, and 0.2h.
+- Update MongoDB image and helm chart to use latest patch version available, MongoDB version `8.2.5`.
+- Update PostgreSQL image and helm chart to use latest patch version available, PostgreSQL version `18.2`.
+
 ## Patch Release v2.6.4 (2026-02-27)
 
 This release introduces polished and improvements around our [SCIM integration](/articles/scim).
@@ -106,7 +149,7 @@ These tools make it easier for AI assistants to perform bulk analysis and genera
 - AI service now uses two model types: a primary model for complex agent tasks and a lightweight model for quick tasks like generating session titles.
 - Default models updated to `gpt-5.2` (primary) and `gpt-5-mini` (lightweight), with optional temperature settings for models that support it.
 - Control Plane scheduler improvements: synchronized MongoDB and PostgreSQL implementations, resolved race conditions during test workflow execution scheduling.
-- Added scheduler metrics to improve scheduler observability and monitoring - [Read more about Scheduler Metrics](/articles/scheduler-metrics)
+- Added scheduler metrics to improve scheduler observability and monitoring - [Read more about Scheduler Metrics](/articles/control-plane-metrics)
 - Fixed an issue where the member details view did not correctly show permissions inherited from resource groups.
 
 ## Patch Release (2025-12-23)

@@ -183,6 +183,10 @@ const redirects = [
     to: "/articles/scheduling-tests",
   },
   {
+    from: "/articles/scheduler-metrics",
+    to: "/articles/control-plane-metrics",
+  },
+  {
     from: ["/concepts/artifacts", "/using-testkube/artifacts"],
     to: "/articles/artifacts",
   },

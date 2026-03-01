@@ -10,16 +10,13 @@ our [GitOps blogpost](https://testkube.io/blog/a-gitops-powered-kubernetes-testi
 
 ## Managing Testkube CRDs with ArgoCD
 
-Testkube stores its core resources (Workflows, Triggers, etc.) as Custom Resources in your Kubernetes Cluster -
-[Read More about Testkube CRDs](/articles/crds). This makes it straightforward to manage them using a GitOps approach with a tool
-like ArgoCD.
+Testkube stores its core resources (Workflows, Triggers, etc.) as Custom Resources in the Testkube Control Plane. This makes 
+it straightforward to manage them using a GitOps approach with a tool like ArgoCD.
 
-To use Testkube Resources in the synced cluster, the target namespace will need to have the Testkube Agent installed (since 
-the Agent can currently only work with Testkube Resources in its own namespace). 
+To use Testkube Resources in the synced cluster, the target namespace will need to have a Testkube GitOps Agent installed, which will 
+copy resources to the Testkube Control Plane as described in [GitOps with Testkube](/articles/gitops-overview).
 
-If the Testkube Agent is connected to an Environment in the Testkube Control Plane (either on-prem or in Testkube Cloud), 
-you will see corresponding Testkube Resources in the Testkube Dashboard as soon as they are synced into your cluster by ArgoCD, 
-and be able to trigger/manage them. 
+Once the Testkube GitOps Agent has synced Testkube resources to the Control Plane, they will be available for execution/triggering/etc.
 
 :::note
 In line with GitOps principles, any changes that you make to Testkube Resources in your cluster via the Testkube CLI or 
@@ -27,6 +24,51 @@ Dashboard will be overwritten by ArgoCD when it syncs these resources against yo
 source of truth for the state of your cluster). Therefore, make sure to make desired modifications to your Testkube Resources 
 in your Git repo instead. 
 :::
+
+## ArgoCD Integration Patterns
+
+There are two primary patterns for running tests with Testkube when using ArgoCD:
+
+### 1. Post-Sync Resource Hooks
+
+Execute tests after ArgoCD successfully syncs your application:
+
+```mermaid
+sequenceDiagram
+    participant Argo as ArgoCD
+    participant K8s as Kubernetes
+    participant Hook as PostSync Job
+    participant TK as Testkube CLI
+    participant Agent as Testkube Agent
+
+    Argo->>K8s: Sync application resources
+    K8s-->>Argo: Sync successful
+    Argo->>Hook: Execute PostSync hook
+    Hook->>TK: testkube run tw api-tests
+    TK->>Agent: Trigger execution
+    Agent->>Agent: Run tests
+    Agent-->>TK: Execution complete
+    TK-->>Hook: Exit code 0/1
+    Hook-->>Argo: Hook result
+```
+
+### 2. Kubernetes Event Triggers
+
+React to resource changes regardless of how they were applied:
+
+```mermaid
+sequenceDiagram
+    participant Argo as ArgoCD
+    participant K8s as Kubernetes
+    participant Agent as Testkube Agent
+
+    Argo->>K8s: Sync Deployment
+    K8s->>Agent: Deployment modified event
+    Agent->>Agent: Match TestTrigger conditions
+    Agent->>K8s: Create test Job
+    Note over Agent,K8s: Tests run independently of ArgoCD
+```
+
 
 ### Avoiding pruning of intermediate Testkube Resources
 
@@ -48,18 +90,18 @@ You can create a [Workflow Template](/articles/test-workflow-templates) that add
 them manually. 
 :::
 
-## Using the Testkube Agent with ArgoCD
+## Using Testkube Runner Agents with ArgoCD
 
-Since the Testkube Agent needs to be installed in the target namespace for your Argo Application(s), you will need to either
+Since a [Testkube Runner Agent](/articles/agents-overview#runner-agents) needs to be installed in the target namespace for your Argo Application(s), you will need to either
 
-1. Preinstall the Agent in the target namespace and disable pruning in ArgoCD. 
-2. Include the Testkube Agent manifests or Helm Chart in your ArgoCD Application.
+1. Preinstall a Runner Agent in the target namespace and disable pruning in ArgoCD. 
+2. Include the Testkube Runner Agent manifests or Helm Chart in your ArgoCD Application.
 
-### Pre-install the Agent and disable Pruning
+### Pre-install the Runner Agent and disable Pruning
 
 This option is more suited for long-lived namespaces - for example a dedicated namespace for a staging or development environment.
 
-When pre-installing the Testkube Agent in your target namespace, it is important to NOT select the `prune` option when auto-syncing your
+When pre-installing the Runner Agent in your target namespace, it is important to NOT select the `prune` option when auto-syncing your
 Application with Argo, otherwise Argo will remove the Agent from your namespace when syncing.
 
 ![ArgoCD disable prune auto-syncing](images/argocd-disable-prune-autosync.png)
@@ -68,38 +110,15 @@ Same applies to manual synchronization - do NOT select the `prune` option:
 
 ![ArgoCD disable prune manual sync](images/argocd-disable-prune-manual-sync.png)
 
-### Include the Agent in your GitOps Repo
+### Include the Runner Agent in your GitOps Repo
 
 For ephemeral namespaces it can be more convenient to include the Agent manifests in your GitOps repo so the Agent 
 gets installed and synced together with any other resources you are managing with ArgoCD. You can simply use `helm template` 
-with the [Testkube Helm Chart](/articles/install/standalone-agent) to generate the manifests to be added to your repository.
+with the [Testkube Helm Chart](/articles/multi-agent-runner-helm-chart) to generate the manifests to be added to your repository.
 
-Alternatively you can make use of the [Multiple Source for an Application](https://argo-cd.readthedocs.io/en/stable/user-guide/multiple_sources/#helm-value-files-from-external-git-repository) feature of ArgoCD, including the 
-Testkube Helm chart as an external source:
+### Connecting the Runner Agent to a Control Plane
 
-```yaml
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-spec:
-  sources:
-  - repoURL: 'https://kubeshop.github.io/helm-charts'
-    chart: testkube
-    targetRevision: 2.1.22
-    helm:
-      valueFiles:
-      - $values/charts/testkube-agent/values.yaml
-  - repoURL: 'https://git.example.com/org/test-repository.git'
-    targetRevision: dev
-    ref: values
-```
-
-This example installs the Testkube Agent Helm Chart version `2.1.22` together with Kubernetes resources defined in the
-`https://git.example.com/org/test-repository.git` repository. A values file at `/charts/testkube-agent/values.yaml`
-in this repository is used to configure the Helm installation of the Agent.
-
-#### Connecting the Agent to a Control Plane
-
-If you want to connect the Agent to a Testkube Control Plane (for storing results, troubleshooting, etc),
+To connect the Runner Agent to a Testkube Control Plane (for storing results, troubleshooting, etc),
 your values file will require at least the following properties:
 
 ```yaml
@@ -122,9 +141,7 @@ testkube-dashboard:
 You can find the corresponding values in the [Environment Settings](/articles/environment-management#general) for the Testkube Environment that the Agent should connect
 to:
 
-![Agent Helm Chart Values](images/agent-helm-chart-values.png)
-
-## Triggering Test Executions 
+## Triggering Workflow Executions 
 
 Once any Testkube Test Workflows have been synced to your cluster(s) it is likely that you will want to trigger these to execute
 corresponding Tests. You can of course trigger them manually through the CLI or Dashboard, it will probably make more 
@@ -177,16 +194,14 @@ spec:
       restartPolicy: Never
 ```
 
-The Job first sets the Testkube CLI context and then simply invokes the `testkube run` command for each Workflow that was synced, with the -f option to capture the output.
-(here you can obviously run any combination of Testkube CLI commands).
+The Job first sets the Testkube CLI context and then simply invokes the `testkube run tw` command for each Workflow that was synced, with the -f option to capture the output. (here you can obviously run any combination of Testkube CLI commands).
 
 - The `tkcorg_XXXX` and `tkcenv_YYYY` identifiers can be found on the [Environment Settings](/articles/environment-management#general) page. 
 - The `tkcapi_ZZZZ` api-key needs to created as described under [API Token Management](/articles/api-token-management).
 - the `root-domain` should be `testkube.io` if you're using Testkube Cloud, or your local Testkube API endpoint for on-prem installations.
 
 :::tip
-This [blog-post](https://testkube.io/blog/a-gitops-powered-kubernetes-testing-machine-with-argocd-and-testkube) contains a complete example of a Post-Sync Resource Hook 
-with video and screenshots.
+If you need to target a specific Runner Agent in your commands, see [Runner Agent Targeting](/articles/test-workflows-running#runner-agent-targeting).
 :::
 
 ### Trigger using a Kubernetes Event Trigger

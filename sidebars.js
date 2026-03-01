@@ -253,12 +253,7 @@ const sidebars = {
               type: "doc",
               label: "Agent CLI Commands",
               id: "articles/multi-agent-cli",
-            },
-            {
-              type: "doc",
-              label: "Ephemeral Environments",
-              id: "articles/ephemeral-environments",
-            },
+            }
           ],
         },
         {
@@ -787,6 +782,16 @@ const sidebars = {
           items: [
             {
               type: "doc",
+              label: "GitOps with Testkube",
+              id: "articles/gitops-overview",
+            },
+            {
+              type: "doc",
+              label: "Ephemeral Environments",
+              id: "articles/ephemeral-environments",
+            },
+            {
+              type: "doc",
               label: "Environments and Access Control",
               id: "articles/environments-best-practices",
             },
@@ -1027,11 +1032,6 @@ const sidebars = {
           type: "category",
           label: "GitOps",
           items: [
-            {
-              type: "doc",
-              label: "Overview",
-              id: "articles/gitops-overview",
-            },
             {type: "doc", label: "ArgoCD", id: "articles/argocd-integration"},
             {type: "doc", label: "Flux", id: "articles/flux-integration"},
           ],
@@ -1100,8 +1100,8 @@ const sidebars = {
             {type: "doc", label: "Prometheus", id: "articles/metrics"},
             {
               type: "doc",
-              label: "Scheduler Metrics",
-              id: "articles/scheduler-metrics",
+              label: "Control Plane Metrics",
+              id: "articles/control-plane-metrics",
             },
             {type: "doc", label: "Grafana", id: "articles/grafana"},
             {type: "doc", label: "Datadog", id: "articles/datadog-junit"},
@@ -1130,8 +1130,21 @@ const sidebars = {
           label: "Architecture",
           id: "articles/architecture",
         },
-        "articles/helm-components",
-        "articles/telemetry",
+        {
+          type: "doc",
+          label: "Control Plane Source of Truth",
+          id: "articles/control-plane-source-of-truth",
+        },
+        {
+          type: "doc",
+          label: "Helm Components",
+          id: "articles/helm-components",
+        },
+        {
+          type: "doc",
+          label: "Telemetry",
+          id: "articles/telemetry",
+        },
         {
           type: "category",
           label: "Testkube CRDs",
@@ -1360,11 +1373,6 @@ const sidebars = {
 
         {type: "doc", label: "Templates", id: "articles/templates"},
         "articles/legacy-architecture",
-        {
-          type: "doc",
-          label: "Integrating with Slack Using Helm",
-          id: "articles/slack-integration-helm",
-        },
         {
           type: "category",
           label: "Legacy CLI Commands",

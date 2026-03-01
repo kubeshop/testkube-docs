@@ -1,20 +1,20 @@
 # GitOps with Testkube
 
 Testkube is designed from the ground up to integrate seamlessly with GitOps workflows. As a Kubernetes-native 
-Test Orchestration Platform, Testkube stores all its core resources as Custom Resource Definitions (CRDs), making 
+Test Orchestration Platform, Testkube manages all its core resources as Custom Resource Definitions (CRDs), making 
 Git the natural source of truth for your TestWorkflow, TestTrigger and Webhook definitions.
 
 This guide provides a high-level overview of how Testkube fits into GitOps-managed infrastructure.
 
-## Why Testkube for GitOps?
+## Why GitOps with Testkube?
 
 Traditional CI/CD-driven testing approaches often create a disconnect between your application deployment state 
 and your test execution. Tests are triggered by pipeline events rather than actual cluster state changes, 
 making it difficult to validate deployments consistently.
 
-Testkube addresses this by:
+GitOps with Testkube addresses this by:
 
-- **Storing tests as Kubernetes CRDs** - TestWorkflows, Triggers, Webhooks, etc. live alongside your application 
+- **Managing tests as Kubernetes CRDs** - TestWorkflows, Triggers, Webhooks, etc. live alongside your application 
   manifests in Git, versioned and reviewed through the same processes.
 - **Executing tests inside your cluster** - No need to expose services externally for testing; tests run where 
   your applications run.
@@ -23,38 +23,105 @@ Testkube addresses this by:
 - **Supporting declarative execution** - TestWorkflowExecution CRDs allow you to trigger tests declaratively, 
   perfect for GitOps reconciliation loops.
 
-## Core Concepts
+## The Testkube GitOps Agent
 
-### Test Workflows as CRDs
+Allthough Testkube Resources are stored in the Testkube Control Plane, they can still be provided and managed as CRDs in an external/GitOps setup by using 
+the GitOps Agent introduced with Testkube 2.7.0. 
 
-Test Workflows are Kubernetes Custom Resources that define how your tests are orchestrated. They can be 
-stored in your Git repository and managed through your GitOps tooling:
+Once deployed, a GitOps-Agent will monitor its namespace for any Testkube Resources and copy those to the connected Environment in the Control-Plane. 
+Coupled with a GitOps tool like ArgoCD or Flux, this can be used to effectively sync Testkube Resources from any number of Git repositories 
+and deployments/namespaces into your Testkube Environment(s).
 
-```yaml
-apiVersion: testworkflows.testkube.io/v1
-kind: TestWorkflow
-metadata:
-  name: api-integration-tests
-  namespace: testkube
-  labels:
-    app: my-api
-    test-type: integration
-spec:
-  content:
-    git:
-      uri: https://github.com/myorg/api-tests
-      branch: main
-  steps:
-    - name: Run tests
-      run:
-        image: postman/newman:latest
-        args: ["run", "collection.json"]
+```mermaid
+flowchart LR
+    subgraph Git Repository
+        direction LR
+        GR[(Testkube CRDs<br/>Workflows · Templates<br/>Triggers · Webhooks)]
+    end
+
+    subgraph Kubernetes Cluster
+        direction TB
+        ARGO[GitOps Tool<br/>ArgoCD / Flux]
+        subgraph Namespace A
+            CRD_A[(CRDs)]
+            SA_A[GitOps Agent]
+        end
+        subgraph Namespace B
+            CRD_B[(CRDs)]
+            SA_B[GitOps Agent]
+        end
+    end
+
+    subgraph Control Plane
+        direction LR
+        ENV[(Environment with<br/>Testkube Resources)]
+    end
+
+    GR -- "deploy CRDs" --> ARGO
+    ARGO --> CRD_A
+    ARGO --> CRD_B
+    SA_A -- "watch & sync" --> ENV
+    SA_B -- "watch & sync" --> ENV
+
+    style SA_A fill:#d5f5e3,stroke:#27ae60
+    style SA_B fill:#d5f5e3,stroke:#27ae60
+    style ENV fill:#d5f5e3,stroke:#27ae60
 ```
 
-When your GitOps controller syncs this resource to your cluster, the Testkube Agent automatically 
-registers it and makes it available for execution.
+:::tip
+Read more about different types of Testkube Agents at [Testkube Agents](/articles/agents-overview).
+:::
 
-### Kubernetes Event Triggers
+### Unidirectional Sync
+
+Syncing is uni-directional, i.e. from GitOps Agent to Control Plane only - changes in the Control Plane are not synced back to the Resource in the Agent Namespace.
+
+Synced resources are left in the monitored namespace to enable the deletion behaviour described below.
+
+### Resource Update Behaviour
+
+The GitOps Agent will currently overwrite any existing/conflicting Testkube Resources already in the Control Plane:
+
+- If you make changes to a Resource via the Testkube Dashboard or any other mechanism, those changes will be overwritten when a new version of the Resource is detected
+  and synced by a GitOps Agent.
+- If you have multiple GitOps Agents syncing the same Teskube Resources into the same Testkube Environment, these will overwrite each other.
+
+### Deleting Resources
+
+A GitOps Agent will only delete Resources in the Control Plane if those are initially available and deleted locally, i.e. it won't delete 
+resources not initially available in its namespace. For example:
+
+> A GitOps Agent is deployed inte Namespace A which contains Workflow B. The Testkube Environment the Agent is connected to already contains another Workflow C.
+>
+> - the Agent will sync Workflow B to the Environment, Workflow C will be left as is
+> - if Workflow B is deleted from Namespace A, the Agent will delete it from the Testkube Environment also
+
+### Enable GitOps Agent via Helm
+
+Enable Kubernetes-to-Control-Plane sync in your agent Helm values.
+
+If you install the full `testkube` chart:
+
+```yaml
+testkube-api:
+  next:
+    gitops:
+      syncKubernetesToCloud: true
+```
+
+For self-registering Runner Agents (`testkube-runner` chart):
+
+```yaml
+gitops:
+  enabled: true
+```
+
+## Triggering Testkube Workflows in GitOps
+
+Testkube provides several native mechanisms for triggering Workflows in GitOps scenarios, while specific GitOps tools provide
+their own mechanisms for triggering Workflows (for example, ArgoCD Resource Hooks and Flux Kustomizations).
+
+## Using Kubernetes Event Triggers
 
 TestTriggers allow you to automatically execute Test Workflows when Kubernetes resources change. 
 This is particularly powerful in GitOps scenarios where you want tests to run after deployments 
@@ -113,104 +180,16 @@ Creating or updating this resource triggers an execution of the specified workfl
 Testkube integrates with popular GitOps tools through both native Kubernetes mechanisms and 
 tool-specific hooks:
 
-| Tool | Integration Method | Use Case |
-|------|-------------------|----------|
-| **ArgoCD** | Resource Hooks, Kubernetes Triggers | Post-sync validation, continuous testing |
-| **Flux** | Kubernetes Triggers, Kustomizations | Automated sync-based testing |
+| Tool | Integration Method | Use Case | Instructions |
+|------|-------------------|----------| -------------- |
+| **ArgoCD** | Resource Hooks, Kubernetes Triggers | Post-sync validation, continuous testing | [Read More](/articles/argocd-integration)
+| **Flux** | Kubernetes Triggers, Kustomizations | Automated sync-based testing | [Read More](/articles/flux-integration)
 
 :::tip Related Integrations
 Testkube also integrates with tools for [Progressive Delivery](/articles/argorollouts-integration) (Argo Rollouts, Keptn) 
 and [Event-Driven Automation](/articles/argoevents-integration) (Argo Events, Argo Workflows, CDEvents) which complement 
 GitOps workflows but serve different purposes.
 :::
-
-### ArgoCD Integration
-
-ArgoCD is the most common GitOps tool used with Testkube. There are two primary patterns:
-
-**Pattern 1: Post-Sync Resource Hooks**
-
-Execute tests after ArgoCD successfully syncs your application:
-
-```mermaid
-sequenceDiagram
-    participant Argo as ArgoCD
-    participant K8s as Kubernetes
-    participant Hook as PostSync Job
-    participant TK as Testkube CLI
-    participant Agent as Testkube Agent
-
-    Argo->>K8s: Sync application resources
-    K8s-->>Argo: Sync successful
-    Argo->>Hook: Execute PostSync hook
-    Hook->>TK: testkube run tw api-tests
-    TK->>Agent: Trigger execution
-    Agent->>Agent: Run tests
-    Agent-->>TK: Execution complete
-    TK-->>Hook: Exit code 0/1
-    Hook-->>Argo: Hook result
-```
-
-**Pattern 2: Kubernetes Event Triggers**
-
-React to resource changes regardless of how they were applied:
-
-```mermaid
-sequenceDiagram
-    participant Argo as ArgoCD
-    participant K8s as Kubernetes
-    participant Agent as Testkube Agent
-
-    Argo->>K8s: Sync Deployment
-    K8s->>Agent: Deployment modified event
-    Agent->>Agent: Match TestTrigger conditions
-    Agent->>K8s: Create test Job
-    Note over Agent,K8s: Tests run independently of ArgoCD
-```
-
-For detailed setup instructions, see [Using Testkube with ArgoCD](/articles/argocd-integration).
-
-### Flux Integration
-
-Flux users can leverage Kustomizations to sync Test Workflows alongside application resources:
-
-```mermaid
-flowchart LR
-    subgraph git["Git Repository"]
-        app["apps/"]
-        tests["tests/"]
-    end
-    
-    subgraph flux["Flux"]
-        ks1["App Kustomization"]
-        ks2["Tests Kustomization"]
-    end
-    
-    subgraph cluster["Cluster"]
-        deploy["Deployments"]
-        tw["TestWorkflows"]
-        trigger["TestTriggers"]
-    end
-    
-    app --> ks1 --> deploy
-    tests --> ks2 --> tw
-    tests --> ks2 --> trigger
-    deploy -.->|"events"| trigger
-```
-
-For detailed setup instructions, see [GitOps Testing with Flux](/articles/flux-integration).
-
-### Other Delivery Integrations
-
-While ArgoCD and Flux are the core GitOps tools, Testkube also integrates with complementary 
-delivery and automation tools:
-
-- **[Progressive Delivery](/articles/argorollouts-integration)** - Use Testkube as an analysis provider 
-  for Argo Rollouts or Keptn to validate canary/blue-green deployments before promotion.
-  
-- **[Event-Driven Automation](/articles/argoevents-integration)** - Trigger test executions based on 
-  cluster events using Argo Events, orchestrate complex test pipelines with Argo Workflows, or 
-  emit standardized CDEvents for CI/CD interoperability.
 
 ## Best Practices
 
@@ -255,6 +234,30 @@ spec:
 
 Consider creating a [Workflow Template](/articles/test-workflow-templates) to apply these 
 annotations consistently across all your workflows.
+
+### Temporarily Pausing GitOps Sync to Control Plane
+
+If you need to temporarily protect a Testkube resource from being changed by the GitOps sync agent,
+add the `testkube.io/no-gitops-sync` annotation to the resource:
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: api-integration-tests
+  annotations:
+    testkube.io/no-gitops-sync: "true"
+```
+
+When the value is set to `"true"`, Control Plane sync for that resource is skipped:
+
+- Update/create sync requests are accepted but ignored.
+- Delete sync requests are accepted but ignored.
+
+This allows temporary manual edits in the Control Plane without being overwritten by GitOps sync.
+
+To re-enable sync, remove the annotation (or set it to `"false"`) and then apply your desired
+resource state again from Git.
 
 ### Sync Waves for Proper Ordering
 

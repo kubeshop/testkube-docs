@@ -6,14 +6,6 @@ injector](https://developer.hashicorp.com/vault/docs/platform/k8s/injector), but
 we are ready to support enterprise customers utilizing the secrets operator or
 the CSI provider.
 
-:::warning
-
-Prebuilt and container executors are deprecated so we do not officially support
-their usage with Vault, please [migrate to
-workflows](./test-workflow-migration).
-
-:::
-
 ## Sidecar Injector
 
 Vault's sidecar injector injects an init container to fetch secrets on

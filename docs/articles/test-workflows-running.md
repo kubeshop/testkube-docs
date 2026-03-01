@@ -19,10 +19,6 @@ If you want to run a Workflow on a specific Agent instead of the default Standal
 When a Workflow has been executed on multiple Runner Agents, the Dashboard provides an expandable section for the corresponding
 executions, see [Multi-agent Executions](/articles/testkube-dashboard-workflow-details#multi-agent-executions).
 
-:::warning
-Runner Agents do **not** support execution of legacy Tests and TestSuites.
-:::
-
 ## Runner Agent Quickstart
 
 If you don't want to run your Workflows on the default Standalone Agent, you can install and run them on a specific
