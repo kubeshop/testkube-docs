@@ -134,12 +134,14 @@ testkube-ai-service:
   models:
     - name: gpt-5.2-codex       # Required - model identifier
       type: primary             # Main model for AI Agents deep reasoning loop
+      temperature: 0            # Optional - temperature setting
       url: ""                   # Optional - custom LLM endpoint
       apiKey: ""                # Optional - direct API key
       secretRef: ""             # Optional - K8s secret name
       secretRefKey: ""          # Optional - key within the secret
     - name: gpt-5-mini
       type: lightweight         # Fast model for UI enrichment tasks
+      temperature: 1            # Optional - omit to use the model's default
       secretRef: "llm-secrets"
       secretRefKey: "OPENAI_API_KEY"
 ```
@@ -153,20 +155,33 @@ testkube-ai-service:
 
 If only one model is configured (or using the simple `model` property), it will be used for both primary and lightweight tasks.
 
-#### Model Authentication
+#### Model Properties
 
-Each model can have its own authentication configuration:
+Each model in the `models` array supports the following properties:
 
-| Property | Description |
-|----------|-------------|
-| `url` | Custom LLM endpoint URL (defaults to global `llmApi.url` or OpenAI) |
-| `apiKey` | Direct API key value (not recommended for production) |
-| `secretRef` | Kubernetes secret name containing the API key |
-| `secretRefKey` | Key within the secret (defaults to `LLM_API_KEY`) |
+| Property | Required | Description |
+|----------|----------|-------------|
+| `name` | Yes | Model identifier (e.g., `gpt-5.2-codex`, `gpt-4o`) |
+| `type` | No | `primary` or `lightweight`. First model defaults to `primary` if not specified |
+| `temperature` | No | Temperature setting (0-2). Omit to use the model's default. Some models like `gpt-5.2` only support the default value |
+| `url` | No | Custom LLM endpoint URL (defaults to global `llmApi.url` or OpenAI) |
+| `apiKey` | No | Direct API key value (not recommended for production) |
+| `secretRef` | No | Kubernetes secret name containing the API key |
+| `secretRefKey` | No | Key within the secret (defaults to `LLM_API_KEY`) |
 
 :::tip
 For most deployments, configure `secretRef` and `secretRefKey` to securely reference API keys stored in Kubernetes secrets.
 :::
+
+#### Configuration Priority
+
+Testkube evaluates model configuration in the following order (highest priority first):
+
+1. **`modelsFile`** — External YAML file (see below)
+2. **`models`** — Array of model configurations in Helm values
+3. **`model`** — Simple single model name
+
+Only the highest-priority configuration that is set will be used.
 
 #### Simple vs Advanced Configuration
 
@@ -181,6 +196,25 @@ testkube-ai-service:
 ```
 
 For advanced deployments with multiple models or different LLM providers, use the `models` array as shown above.
+
+#### External Models File
+
+For deployments that manage configuration outside of Helm values, you can provide a models file directly:
+
+```yaml
+testkube-ai-service:
+  modelsFile:
+    enabled: true
+    content: |
+      models:
+        - name: gpt-5.2-codex
+          type: primary
+          temperature: 0
+        - name: gpt-5-mini
+          type: lightweight
+```
+
+This is useful when model configurations are managed by external tooling or stored separately from your Helm values.
 
 ### Authentication Configuration
 
