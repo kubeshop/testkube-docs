@@ -297,7 +297,7 @@ During the TLS 1.3 handshake if multiple messages are sent in records that span 
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.022%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -445,7 +445,7 @@ It was possible to improperly access the parent directory of an os.Root by openi
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.3.5-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.3.5-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.023%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.022%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
@@ -513,8 +513,8 @@ It was possible to improperly access the parent directory of an os.Root by openi
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.3.5-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.3.5-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.015%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.020%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -530,7 +530,7 @@ It was possible to improperly access the parent directory of an os.Root by openi
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.3.5-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.3.5-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.024%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.023%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
