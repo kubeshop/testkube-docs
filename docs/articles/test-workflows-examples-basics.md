@@ -257,6 +257,10 @@ spec:
       shell: echo foo; exit 1
 ```
 
+### Negative Steps
+
+You can add `negative: true` to invert a step's result — a non-zero exit code becomes a pass.
+
 ### Conditional Steps
 
 By default, the next step will run only when the previous steps have succeeded. This can be controlled with the **`condition`** property.

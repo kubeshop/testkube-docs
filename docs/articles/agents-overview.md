@@ -18,20 +18,22 @@ When upgrading a "superagent" from a pre 2.7.0 version to a 2.7.0+ version, that
 
 A Testkube Agent can have any of the following 4 capabilities
 
-1. **Runner Agents** - are deployed to any cluster/namespace where you want to execute your TestWorkflows.
-2. **Listene Agents** - are deployed to any cluster/namespace where you want to listen for [Kubernetes Event Triggers](/articles/test-triggers).
+1. **Runner Agents** - are deployed to any cluster/namespace where you want to execute your TestWorkflows - [Read More](#runner-agents).
+2. **Listener Agents** - are deployed to any cluster/namespace where you want to listen for - [Read More](#listener-agents).
 3. **GitOps Agents** - are deployed for syncing Testkube Resources into the Control Plane - [Read More](#gitops-agents).
 4. **Webhook Agents** - are deployed to from where you want to emit Webhook/CDEvents - [Read More](#webhook-agents).
 
+:::note
 ### Naming - Agents vs Capabilities 
 
-Since an Agent can technically have any combination of these capabilties enabled, we will use the term capability and agent somewhat 
+Since an Agent can technically have any combination of these capabilties enabled, we will use the terms **capability** and **agent** somewhat 
 interchangably - i.e. a "Runner Agent" is the same as an "Agent with the Runner Capability", while an Agent with both the Listener and Webhook capabilities is both 
 a Listener Agent and a Webhook Agent. 
+:::
 
 ### Runner Agents
 
-Runner Agents execute Test Workflows in the cluster/namespace where they are deployed. You can have any number of Runner Agents in an Environment, allowing you to
+Runner Agents execute Test Workflows in the cluster/namespace where they are deployed. You can have any number of Runner Agents in a Testkube Environment, allowing you to
 
 1. **Run the same Workflow in multiple namespaces/clusters**, (possibly at the same time!).
 2. **Add ephemeral Runner Agents** (deployed in ephemeral infrastructure) to an Environment and run your Test Workflows on them - [Read More](/articles/ephemeral-environments).
@@ -93,7 +95,7 @@ For the emitting of CDEvents and Kubernetes Events, that corresponding functiona
 
 Agents are managed in the Agents tab under the Environment Settings:
 
-![Multi-Agent Management](images/testkube-agents.png)
+![Multi-Agent Management](images/testkube-agents-panel.png)
 
 The table has the following columns:
 

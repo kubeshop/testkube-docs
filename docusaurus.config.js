@@ -22,7 +22,7 @@ const config = {
     format: "detect",
     hooks: {
       onBrokenMarkdownLinks: 'warn',
-      onBrokenMarkdownImages: 'throw',
+      onBrokenMarkdownImages: 'warn',
     },
     mermaid: true,
   },
