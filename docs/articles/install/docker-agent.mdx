@@ -38,7 +38,7 @@ with the Docker Agent, which would otherwise have to be done with the `testkube 
 testkube docker --agent-token=tkcagnt_XXX --org-id=tkcorg_YYY --env-id=tkcenv_ZZZ
 ```
 
-You can get the required tokens from the [Standalone Agent Panel](/articles/agents-overview#managing-the-standalone-agent).
+You can get the required tokens from the [Agents Panel](/articles/agents-overview#managing-agents).
 
 :::tip
 When creating a new Environment in the Testkube Dashboard, you will be shown the above command with the correct
@@ -96,7 +96,7 @@ docker start <name>
 
 To connect the Testkube CLI to the Testkube Agent running in Docker you will need to create an API Key
 and then use that with the `testkube set context` command provided in the
-[Standalone Agent Settings](/articles/agents-overview#managing-the-standalone-agent) popup.
+[Agent Settings](/articles/agents-overview#managing-an-existing-agent) popup.
 
 :::note
 This is not necessary if you used the Testkube CLI to install the Docker Agent as described above.
@@ -129,8 +129,12 @@ docker exec testkube-agent helm upgrade testkube testkube/testkube --namespace t
 
 ### Replacing the Agent Docker Image
 
-This option comes with the drawback that you will lose any Testkube resources (Workflows, etc.)
-that were created in the Environment using the Agent (since these are stored as CRDs in your Agents cluster).
+:::info
+As of Testkube v2.7, Testkube Resources are stored in the Control Plane, so replacing the Docker Agent
+will not result in loss of your Workflows or other resources - [Read More](/articles/control-plane-source-of-truth).
+For pre-v2.7 environments, this option comes with the drawback that you will lose any Testkube resources 
+that were created in the Environment (since these were stored as CRDs in the Agent's cluster).
+:::
 
 1. Use `docker ps` to find the existing container id:
 

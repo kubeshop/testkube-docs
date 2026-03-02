@@ -254,13 +254,10 @@ It is possible to deploy multiple Testkube Agent instances into the same Kuberne
 testkube-api:
   multinamespace:
      enabled: true
-
-testkube-operator:
-  enabled: false
 ```
 
-By default, Testkube monitors events across the entire Kubernetes cluster to trigger the execution of a Test Workflow with the [Kubernetes Event Triggers](/articles/test-triggers)
-functionality. You might want to limit the namespaces that Testkube observes due to security restrictions, in which case you can use the `multinamespace` configuration:
+By default, a [Listener Agent](/articles/agents-overview#listener-agents) monitors events across the entire Kubernetes cluster to trigger the execution of a Test Workflow with the [Kubernetes Event Triggers](/articles/test-triggers)
+functionality. You might want to limit the namespaces that the Listener Agent observes due to security restrictions, in which case you can use the `multinamespace` configuration:
 
 ```yaml {3-7}
 testkube-agent:
@@ -291,7 +288,7 @@ testkube-agent:
 
 ### Namespaces for Testkube Custom Resources
 
-Testkube enables GitOps practices by storing configuration within custom resources, such as the TestWorkflow CRD. By default, Testkube will only watch for custom Testkube resources within the namespace where it is installed. It is currently unsupported to change this behaviour.
+As of Testkube v2.7, Testkube Resources are stored in the Control Plane - [Read More](/articles/control-plane-source-of-truth). If you are using a [GitOps Agent](/articles/agents-overview#gitops-agents) to sync Testkube CRDs from your cluster into the Control Plane, the agent will watch for custom Testkube resources within the namespace where it is installed. It is currently unsupported to change this behaviour.
 
 ## Bring Your Own Infra
 

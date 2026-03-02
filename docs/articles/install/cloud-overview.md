@@ -1,15 +1,12 @@
 # Testkube Cloud Control Plane
 
 If you don't want to host the Testkube Control Plane in your infrastructure, you can use the Cloud Control Plane provided
-by the Testkube team at https://app.testkube.io. In this scenario, you only have to install Testkube Agent(s) in 
-your infrastructure wherever you want to run your tests. 
+by the Testkube team at https://app.testkube.io. You can create Environments and manage Resources (Workflows, Triggers, etc.) directly from the Dashboard. You then deploy [Testkube Agents](/articles/agents-overview) in your infrastructure when you want to execute Workflows, listen for Kubernetes events, etc.
 
 ## Getting Started
 
 To get started with the Cloud Control Plane, go to https://app.testkube.io and sign up for a trial account. During the onboarding, 
-you will be prompted to create an initial Testkube Environment, which will provide you with the required CLI/Helm commands to deploy 
-the corresponding Testkube Agent in your infrastructure. You can then add as many Environments as you need to execute your Tests in 
-your infrastructure accordingly - [Read More](/articles/environment-management#creating-a-new-environment).
+you will be prompted to create an initial Testkube Environment. You can start creating Workflows and other resources right away. When you are ready to execute your Workflows, you can deploy [Testkube Agents](/articles/agents-overview) in your infrastructure using the provided CLI/Helm commands. You can then add as many Environments and Agents as you need - [Read More](/articles/environment-management#creating-a-new-environment).
 
 For local deployment of the Agent (for example during evaluation) you can either use the [Testkube Docker Agent](docker-agent) or
 create your own local Kubernetes cluster - [Read More](quickstart-no-k8s).
