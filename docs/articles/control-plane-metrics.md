@@ -21,9 +21,8 @@ Control Plane metrics are available in Testkube Cloud and Enterprise connected d
 - `environment_name`.
 - `runner_id` (stable), `runner_name` (readable).
 - No dynamic maps/arrays: dropped `labels`, `tags`, `testworkflow_uri`, trigger `causes`.
-- `triggered_by` is normalized to `manual|schedule|trigger`.
+- `triggered_by` is normalized to `manual`, `schedule`, or `trigger`.
 - CRUD counters drop resource names to keep cardinality bounded.
-- Trigger event counter is currently disabled in control plane (`testkube_testtrigger_event_total` is not emitted).
 
 ## Scheduler Metrics
 
@@ -61,7 +60,7 @@ All scheduler metrics include `environment_name`. Runner-level gauges also inclu
 
 - **Workflow CRUD**  
   - `testkube_testworkflow_creations_total`, `..._updates_total`, `..._deletes_total` (counters)  
-  Labels: `environment_name`, `result` (`created|updated|deleted|error`)
+  Labels: `environment_name`, `result` (`created`, `updated`, `deleted`, or `error`)
 
 - **Workflow templates**  
   - `testkube_testworkflowtemplate_creations_total`, `..._updates_total`, `..._deletes_total` (counters)  
@@ -70,7 +69,6 @@ All scheduler metrics include `environment_name`. Runner-level gauges also inclu
 - **Triggers**  
   - `testkube_testtrigger_creations_total`, `..._updates_total`, `..._deletes_total`, `..._bulk_updates_total`, `..._bulk_deletes_total` (counters)  
   Labels: `environment_name`, `result`
-  - `testkube_testtrigger_event_total` is currently not emitted by control plane.
 
 - **Webhooks**  
   - `testkube_webhook_executions_total` (counter)  
@@ -118,7 +116,7 @@ testkube_webhook_executions_total{
 
 | Agent metric | Control-plane metric | Type / unit change | Label mapping notes |
 | --- | --- | --- | --- |
-| `testkube_testworkflow_executions_count` | `testkube_testworkflow_executions_total` | Counter suffix (`_count` -> `_total`) | Agent labels `name,result,labels,testworkflow_uri,triggered_by,tags` become `environment_name,workflow_name,workflow_result,triggered_by,runner_id,runner_name`; dropped `labels`, `tags`, `testworkflow_uri`; `triggered_by` normalized to `manual|schedule|trigger`. |
+| `testkube_testworkflow_executions_count` | `testkube_testworkflow_executions_total` | Counter suffix (`_count` -> `_total`) | Agent labels `name,result,labels,testworkflow_uri,triggered_by,tags` become `environment_name,workflow_name,workflow_result,triggered_by,runner_id,runner_name`; dropped `labels`, `tags`, `testworkflow_uri`; `triggered_by` normalized to `manual`, `schedule`, or `trigger`. |
 | `testkube_testworkflow_executions_duration_ms` | `testkube_testworkflow_executions_duration_seconds` | Summary (ms) -> Histogram (seconds) | Same label migration as workflow execution counter. |
 | `testkube_testworkflow_aborts_count` | `testkube_testworkflow_aborts_total` | Counter suffix (`_count` -> `_total`) | Agent used only `result`; control plane uses workflow execution labels (`environment_name`, workflow, runner, trigger context). |
 | `testkube_testworkflow_execution_steps_count` | `testkube_testworkflow_execution_steps_total` | Counter suffix (`_count` -> `_total`) | Agent labels `workflow_name,step_name,status`; control plane adds execution context labels and renames `status` -> `step_status`. |
@@ -137,12 +135,11 @@ testkube_webhook_executions_total{
 | `testkube_testtriggers_bulk_updates_count` | `testkube_testtrigger_bulk_updates_total` | Counter suffix (`_count` -> `_total`) and name normalization (`testtriggers` -> `testtrigger`) | Agent label `result`; control plane labels `environment_name,result`. |
 | `testkube_testtriggers_bulk_deletes_count` | `testkube_testtrigger_bulk_deletes_total` | Counter suffix (`_count` -> `_total`) and name normalization (`testtriggers` -> `testtrigger`) | Agent label `result`; control plane labels `environment_name,result`. |
 | `testkube_webhook_executions_count` | `testkube_webhook_executions_total` | Counter suffix (`_count` -> `_total`) | Agent labels `name,eventType,result`; control plane labels `environment_name,webhook_name,event_type,result`. |
-| `testkube_testtrigger_event_count` | Not emitted in control plane | N/A | Control-plane `testkube_testtrigger_event_total` remains disabled (no series exported). |
 
 ## Migration Notes
 
 - Control-plane series add environment and runner scoping to workflow execution/step metrics via `environment_name`, `runner_id`, and `runner_name`.
 - Unbounded labels were removed from control-plane metrics: `labels`, `tags`, `testworkflow_uri`, and trigger `causes`.
 - Workflow/step timing metrics are exported as histograms in seconds for cross-replica aggregation.
-- `triggered_by` is constrained to `manual|schedule|trigger` in control-plane metrics.
+- `triggered_by` is constrained to `manual`, `schedule`, or `trigger` in control-plane metrics.
 - Agent-only test and test-suite metric families (`testkube_test_*`, `testkube_testsuite_*`) are not part of this control-plane mapping.
