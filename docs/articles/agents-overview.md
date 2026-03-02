@@ -48,8 +48,6 @@ Use-cases for this are:
 
 Read More about how to run Workflows on Runner Agents at [Running Test Workflows](/articles/test-workflows-running).
 
-The Standalone Agent always doubles as a Runner Agent also, see below.
-
 :::info
 Runner Agents require a license - [Read More](#licensing-for-runner-agents).
 :::
@@ -159,7 +157,6 @@ When this toggle is enabled, the Testkube Dashboard will no longer display sensi
 Testkube Runner Agents require a license for usage, which can be either Fixed or Floating.
 
 - Runner Agents assigned a **Fixed License** can always run Workflows independently at any time.
-  The Standalone Agent required for each Testkube Environment always requires a fixed license.
 - Runner Agents assigned a **Floating license** share the ability to execute Workflows concurrently; if one Runner Agent with a floating license is executing a Workflow,
   a second agent will queue Workflow executions until the first agent is complete. If you, for example, purchase two floating licenses and assign those
   to 10 agents, two of those agents will be able to execute Workflows concurrently at any give time.
@@ -198,7 +195,7 @@ Please don't hesitate to [Get in Touch](https://testkube.io/contact) if you have
 
 If you have an existing Environment created before the Multi-Agent functionality was introduced in Q2 2025, and that Environment already has Workflows being
 executed by CI/CD, CronJobs, Kubernetes Event Triggers, etc., these will continue to be executed on _any_ [Global Runner Agent](/articles/test-workflows-running#global-runner-agents)
-(including the required Standalone Agent) connected to your Environment unless you update the corresponding triggering commands/configuration
+connected to your Environment unless you update the corresponding triggering commands/configuration
 to target a specific Runner Agent, either by name, group or label - [Read More](/articles/test-workflows-running#runner-agent-targeting).
 
 :::info

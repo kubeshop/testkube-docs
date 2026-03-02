@@ -2,8 +2,8 @@
 
 Testkube contains two sub-systems:
 
-- A **Control Plane** which includes the Dashboard, Storage for Results/Artifacts, Cluster Federation, etc
-- An **Agent** running in your cluster that manages Testkube resources, runs tests, gathers results, etc.
+- A **Control Plane** which includes the Dashboard, Storage for Resources/Results/Artifacts, Scheduling, Cluster Federation, etc - [Read More](/articles/control-plane-source-of-truth)
+- One or more **Agents** running in your cluster(s) that execute Test Workflows, listen for Kubernetes events, sync resources via GitOps, and emit webhooks/CDEvents - [Read More](/articles/agents-overview)
 
 The below diagrams explain this architecture using [C4 diagrams](https://c4model.com/) - please
 don't hesitate to reach out on our Slack if you have questions.

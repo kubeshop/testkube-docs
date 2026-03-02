@@ -11,11 +11,11 @@ if you are looking for a way to control access to Resources, [Resource Groups](/
 a better approach).
 
 A Testkube Environment can contain any number of [Testkube Agents](/articles/agents-overview), which are responsible
-for managing Resources, executing Workflows and listening to Events. 
+for executing Workflows, listening to Kubernetes events, syncing resources via GitOps, and emitting webhooks. 
 
 :::info
-At the technical level, the Resources in a Testkube environment are managed by a Testkube Agent running in your 
-Kubernetes Cluster - read more [here](/articles/architecture.md).
+Testkube Resources are stored and managed in the Testkube Control Plane - [Read More](/articles/control-plane-source-of-truth). 
+Agents are deployed into your clusters for running Workflows, listening to events, and other capabilities - [Read More](/articles/agents-overview).
 :::
 
 Your existing Environments are available from the Environment dropdown on the top of the Testkube Dashboard (see 
@@ -70,9 +70,15 @@ a prompt for a unique environment name:
 
 ### Environment connection
 
+:::tip
+As of Testkube v2.7, you can create an Environment and manage its Resources (Workflows, Triggers, etc.) 
+directly from the Dashboard without deploying an Agent first. You only need to deploy an Agent when you 
+want to execute Workflows or listen for Kubernetes events - [Read More](/articles/control-plane-source-of-truth).
+:::
+
 After providing the environment name you will be prompted as shown below to [Install the CLI](/articles/install/cli)
-(do this only if you haven't already done so) and then run a CLI command to install the
-[Testkube Agent](/articles/install/standalone-agent) for your environment, the provided command will automatically
+(do this only if you haven't already done so) and then run a CLI command to install a
+[Testkube Agent](/articles/agents-overview) for your environment, the provided command will automatically
 connect the Agent to your Control Plane.
 
 ![New Environment Connection](../img/new-environment-connection.png)

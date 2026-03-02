@@ -14,12 +14,18 @@ Once deployed, you can interact with the agent through the [Testkube CLI](instal
 
 ## Open Source Functionality Overview
 
-As described in the [Standalone Agent Overview](/articles/install/standalone-agent#running-in-standalone-mode), the agent
+As described in the [Standalone Agent Overview](/articles/install/standalone-agent#running-in-standalone-mode), in standalone mode the agent
 
 - Manages all Testkube Resources as CRDs in the cluster/namespace where it is deployed.
 - Schedules and executes your Test Workflows and collects execution logs and artifacts into configured MongoDB and S3 storage.
 - Listens to Kubernetes Events for Event Triggers.
 - Emits Webhooks and CDEvents as configured.
+
+:::note
+When connected to a Control Plane (v2.7+), these responsibilities are distributed across specialized 
+[Agent capabilities](/articles/agents-overview): Runner, Listener, GitOps, and Webhook. Resources 
+are stored in the Control Plane rather than as CRDs - [Read More](/articles/control-plane-source-of-truth).
+:::
 
 ![Standalone Agent Overview](images/standalone-agent.png)
 

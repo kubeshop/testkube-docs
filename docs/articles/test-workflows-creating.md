@@ -5,9 +5,9 @@ Test Workflows can be created and managed either through the [Testkube CLI](/art
 
 :::tip
 
-Since Workflows are ultimately stored as custom resources in your clusters ([Read More](/articles/crds)), you can
-also manipulate them directly using `kubectl`, for example `kubectl apply` can be used
-to create a Workflow:
+As of Testkube v2.7, Workflows are stored in the Testkube Control Plane - [Read More](/articles/control-plane-source-of-truth).
+If you are using a [GitOps Agent](/articles/agents-overview#gitops-agents), you can also use `kubectl apply` to create
+Workflows as CRDs, which will then be synced to the Control Plane:
 
 ```shell
 kubectl apply -f EXAMPLE_FILE.yaml
