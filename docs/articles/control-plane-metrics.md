@@ -112,7 +112,7 @@ testkube_webhook_executions_total{
 } 3
 ```
 
-## Agent to Control-Plane Mapping (`TK_CLOUD_METRICS_ENABLED=true`)
+## Agent to Control-Plane Mapping
 
 | Agent metric | Control-plane metric | Type / unit change | Label mapping notes |
 | --- | --- | --- | --- |
@@ -141,5 +141,4 @@ testkube_webhook_executions_total{
 - Control-plane series add environment and runner scoping to workflow execution/step metrics via `environment_name`, `runner_id`, and `runner_name`.
 - Unbounded labels were removed from control-plane metrics: `labels`, `tags`, `testworkflow_uri`, and trigger `causes`.
 - Workflow/step timing metrics are exported as histograms in seconds for cross-replica aggregation.
-- `triggered_by` is constrained to `manual`, `schedule`, or `trigger` in control-plane metrics.
 - Agent-only test and test-suite metric families (`testkube_test_*`, `testkube_testsuite_*`) are not part of this control-plane mapping.
