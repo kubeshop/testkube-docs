@@ -29,7 +29,7 @@ Triggers are ultimately defined as Customer Resources in your cluster - [TestTri
 
 ## Listener Agents with TestTriggers
 
-Testkube uses [Listener Agents](/articles/agents-overview#listener-agents) or the [Standalone Agent](/articles/agents-overview#the-standalone-agent) 
+Testkube uses [Listener Agents](/articles/agents-overview#listener-agents) 
 to listen for Kubernetes events that will be matched against your TestTriggers. Your Testkube Environment can have any number of 
 Listener Agents, deployed to whichever namespaces/clusters you need to listen for events.
 

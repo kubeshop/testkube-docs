@@ -29,7 +29,7 @@ Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-tru
 Workflow CRDs are no longer synced from Kubernetes.
 If your team manages workflows as CRDs, enable and validate GitOps capability/agent flow so Git-managed CRD updates continue to reconcile as expected.
 
-Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-truth#workflow-definitions-and-gitops)
+Read more: [Control Plane Source of Truth](/articles/control-plane-source-of-truth#gitops-capability)
 
 **Scheduling ownership moved to Control Plane**
 
@@ -452,7 +452,7 @@ This release is available in Helm Chart v2.322.1.
 
 This release comes with a new way to deploy Runner Agents and several improvements to workflows.
 
-You can now install a Runner Agent using only Helm. Previously a Runner Agent had to be registered using the CLI or UI prior to Helm install. This feature can be used to create Runner Agents for ephemeral environments in a single step. [Documentation is available here](/articles/multi-agent-runner-helm-chart#self-registering-runner-agent-helm-install).
+You can now install a Runner Agent using only Helm. Previously a Runner Agent had to be registered using the CLI or UI prior to Helm install. This feature can be used to create Runner Agents for ephemeral environments in a single step. [Documentation is available here](/articles/multi-agent-runner-helm-chart#self-registering-agent-helm-install).
 
 Users can now create custom views to group workflows by any criteria, making it easier to organize workflows that belong together or quickly access frequently used filtered results. These views are shared between all the users of a given environment.
 
