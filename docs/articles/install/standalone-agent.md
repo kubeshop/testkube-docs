@@ -223,24 +223,11 @@ mongodb:
     enabled: false
 ```
 
-2. Add security context for `Patch` and `Migrate` jobs that are a part of Testkube Operator configuration to `values.yaml`:
+2. The Testkube Operator is deprecated and disabled by default. If your installation previously used it, ensure it is disabled in `values.yaml`:
 
 ```yaml
 testkube-operator:
-  webhook:
-    migrate:
-      enabled: true
-      securityContext:
-        allowPrivilegeEscalation: false
-        capabilities:
-          drop: ["ALL"]
-
-    patch:
-      enabled: true
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000650000
-        fsGroup: 1000650000
+  enabled: false
 ```
 
 3. Install Testkube specifying the path to the new `values.yaml` file

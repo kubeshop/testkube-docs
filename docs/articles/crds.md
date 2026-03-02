@@ -21,7 +21,7 @@ The following Resource Group/Versions are available (click for documentation)
 More detailed schema docs are also available at https://doc.crds.dev/github.com/kubeshop/testkube-operator
 :::
 
-The current definitions can be found in the [kubeshop/testkube-operator](https://github.com/kubeshop/testkube-operator/tree/main/config/crd) repository.
+The current CRD definitions can be found in the [kubeshop/testkube](https://github.com/kubeshop/testkube) repository.
 
 ## Checking installed CRDs
 
