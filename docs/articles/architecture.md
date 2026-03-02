@@ -5,30 +5,83 @@ Testkube contains two sub-systems:
 - A **Control Plane** which includes the Dashboard, Storage for Resources/Results/Artifacts, Scheduling, Cluster Federation, etc - [Read More](/articles/control-plane-source-of-truth)
 - One or more **Agents** running in your cluster(s) that execute Test Workflows, listen for Kubernetes events, sync resources via GitOps, and emit webhooks/CDEvents - [Read More](/articles/agents-overview)
 
-The below diagrams explain this architecture using [C4 diagrams](https://c4model.com/) - please
-don't hesitate to reach out on our Slack if you have questions.
-
-Also check out the [Installation Overview](/articles/install/overview) document for more details on
+Check out the [Installation Overview](/articles/install/overview) document for more details on
 how Testkube can be deployed, and the [Workflow Architecture](/articles/test-workflows-high-level-architecture)
 document for an overview of how the Workflow engine works.
 
-## Context
+## System Overview
 
-High level overview of Testkube components when running Testkube entirely on-prem. When using Testkube
-Cloud, the Dashboard and control-plane are hosted and entitlement is done internally (without a License Server).
+The Control Plane is the source of truth for all Testkube Resources and is always accessible,
+even when no agents are connected. Agents are deployed into your Kubernetes clusters and connect
+to the Control Plane via gRPC to execute workflows, listen for events, sync resources, and emit webhooks.
 
-![Testkube Context Diagram](../img/testkube-context-diagram.png)
+When using Testkube Cloud, the Control Plane is hosted by Testkube. For on-prem installations,
+all components are deployed in your own infrastructure.
 
-## Testkube Containers
+```mermaid
+flowchart TB
+    Users["Users / CI/CD"]
 
-The diagram below shows a breakdown of Testkube components and their network connections/dependencies
-when running Testkube entirely on-prem. As in the previous diagram, the License Server does not
-apply when using the Testkube Cloud Control Plane.
+    subgraph Control Plane
+        Dashboard["Dashboard"]
+        CPAPI["Control Plane API"]
+        Store[("Resources, Results, Artifacts")]
+    end
+
+    subgraph Cluster A
+        A1["Agent - Runner / Listener"]
+    end
+
+    subgraph Cluster B
+        A2["Agent - Runner / GitOps / Webhook"]
+    end
+
+    Users --> Dashboard
+    Users --> CPAPI
+    Dashboard --> CPAPI
+    CPAPI --- Store
+    A1 -- "gRPC" --> CPAPI
+    CPAPI -- "gRPC" --> A1
+    A2 -- "gRPC" --> CPAPI
+    CPAPI -- "gRPC" --> A2
+
+    style CPAPI fill:#d5f5e3,stroke:#27ae60
+    style Store fill:#d5f5e3,stroke:#27ae60
+    style Dashboard fill:#d5f5e3,stroke:#27ae60
+```
+
+## Agent Capabilities
+
+Agents connect to the Control Plane via gRPC and can have one or more capabilities enabled.
+The following diagram shows the data flow for each capability type.
+See [Testkube Agents](/articles/agents-overview) for full details.
+
+```mermaid
+flowchart LR
+    CP["Control Plane"]
+
+    Runner["Runner Agent"]
+    Listener["Listener Agent"]
+    GitOps["GitOps Agent"]
+    Webhook["Webhook Agent"]
+
+    CP -- "dispatch workflow" --> Runner
+    Runner -- "results, logs" --> CP
+    Listener -- "trigger events" --> CP
+    GitOps -- "sync resources" --> CP
+    CP -- "dispatch events" --> Webhook
+```
+
+## Component Breakdown
+
+The diagram below shows a detailed breakdown of Testkube components and their dependencies
+when running Testkube on-prem. The License Server does not apply when using the Testkube
+Cloud Control Plane.
 
 The Testkube Dashboard connects to the Control Plane API via an L7 Load Balancer that needs to
 expose ports for both HTTPS and WSS endpoints.
 
-The main 3rd party dependencies that are required by the Control Plane are:
+The main infrastructure dependencies required by the Control Plane are:
 
 - NATS
 - MongoDB - [Read more](mongodb-administration) or PostgreSQL
@@ -37,7 +90,42 @@ The main 3rd party dependencies that are required by the Control Plane are:
 
 These are all installed by the Testkube Helm Chart and configured accordingly.
 
-![Testkube Containers Diagram](../img/testkube-containers-diagram.png)
+```mermaid
+flowchart TB
+    subgraph Control Plane
+        Dashboard["Dashboard - port 8080"]
+        API["Control Plane API"]
+        Worker["Worker Service"]
+    end
+
+    subgraph Infrastructure Dependencies
+        Dex["Dex - 5556, 5557"]
+        DB[("MongoDB / PostgreSQL")]
+        NATS["NATS - 4222"]
+        S3["S3 / MinIO - 9000"]
+    end
+
+    LS["License Server - on-prem only"]
+
+    subgraph Kubernetes Cluster
+        AgentAPI["Agent API"]
+        WF["Workflow Jobs"]
+    end
+
+    Dashboard -- "HTTPS / WSS" --> API
+    API --> Dex
+    API --> DB
+    API --> NATS
+    API --> S3
+    API -.-> LS
+    Worker --> DB
+    Worker --> NATS
+    Worker --> S3
+    API -- "gRPC" --> AgentAPI
+    AgentAPI -- "gRPC" --> API
+    AgentAPI --> WF
+    AgentAPI -- "presigned URLs" --> S3
+```
 
 ### Integration Details
 
@@ -113,19 +201,43 @@ Requirements to esure this integration is working properly:
 
 ## Components - Workflow Job
 
-Description of components/interactions when Testkube runs a Test Workflow.
+The following diagram shows the interaction between a Workflow Job, the Control Plane API,
+and S3 storage during Test Workflow execution. This applies to both on-prem and cloud deployments.
 
-![Testkube Workflow Job Components](../img/workflow-job-components.png)
-(This applies to both on-prem and cloud deployments.)
+```mermaid
+sequenceDiagram
+    participant WF as Workflow Job
+    participant CP as Control Plane API
+    participant S3 as S3 Bucket
+
+    WF->>CP: 1. Get supported features (gRPC)
+    WF->>WF: 2. Execute test container(s)
+    WF->>CP: 3. Send results & JUnit reports (gRPC)
+    WF->>CP: 4. Request presigned PUT URL (gRPC)
+    CP-->>WF: Presigned URL
+    WF->>S3: 5. Upload artifacts (presigned URL)
+```
 
 ## Components - Worker Service
 
-The Worker service is responsible for
+The Worker Service handles asynchronous background tasks triggered via NATS events:
 
-- unpacking artifact tarballs and uploads individual files
-- cleaning up Test Workflow logs and artifacts when deleting Test Workflow executions
+- Unpacking artifact tarballs and uploading individual files to S3
+- Cleaning up Test Workflow logs and artifacts when deleting Test Workflow executions
 
-This processing is done asynchronously and triggered via NATS events.
+This applies to both on-prem and cloud deployments.
 
-![Testkube Worker Service Components](../img/worker-service-components.png)
-(This applies to both on-prem and cloud deployments.)
+```mermaid
+flowchart TB
+    NATS["NATS"]
+    WS["Worker Service"]
+    DB[("MongoDB")]
+    S3["S3 / MinIO"]
+
+    NATS -- "Unpack Artifacts event" --> WS
+    NATS -- "Delete Executions event" --> WS
+    WS -- "download artifact tarballs" --> S3
+    WS -- "upload individual files" --> S3
+    WS -- "delete artifacts & logs" --> S3
+    WS -- "delete execution records" --> DB
+```

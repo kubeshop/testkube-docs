@@ -551,11 +551,6 @@ const sidebars = {
                   label: "AI Analysis",
                   id: "articles/AI-test-insights",
                 },
-                {
-                  type: "doc",
-                  label: "Cached Test Results",
-                  id: "articles/cached-results",
-                },
               ],
             },
             {
@@ -1271,6 +1266,11 @@ const sidebars = {
           type: "doc",
           label: "Legacy Deprecation",
           id: "articles/legacy-deprecation",
+        },
+        {
+          type: "doc",
+          label: "Cached Test Results",
+          id: "articles/cached-results",
         },
         {
           type: "doc",
