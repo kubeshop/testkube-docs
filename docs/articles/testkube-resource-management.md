@@ -1,8 +1,7 @@
 # Testkube Resource Management
 
 Starting in Testkube `v2.7`, Testkube stores its Resources directly in the Control Plane instead of in the cluster/namespace where the 
-default Superagent was deployed, and the concept of a "superagent" has been retired in favor of discrete agent 
-capabilities (Runner, Listener, GitOps and Webhooks) - [Read More](/articles/agents-overview).
+default Superagent was deployed, and the concept of a "superagent" has been retired in favor of discrete Agents/capabilities - [Read More](/articles/agents-overview).
 
 ## Background
 
