@@ -13,7 +13,7 @@ Resources can still be provided to the Testkube Control Plane using CRDs in a Gi
 
 ## Background
 
-### The Testkube Agent as the Source-of-Truth
+### The Testkube Agent as the Source-of-Truth (Legacy)
 
 Up until version 2.7.0 of the Testkube, all Testkube Resources available in an Environment were stored and managed as CRDs in the
 namespace where the initial Environment Agent ("Superagent") was deployed. This design worked well for standalone agent deployments, but became increasingly 

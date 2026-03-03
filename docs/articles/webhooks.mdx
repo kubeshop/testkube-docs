@@ -227,14 +227,15 @@ Usage example:
 You can use Sprig golang template functions if you need to have some special logic in your templates.
 You can find a full list of them [here](https://masterminds.github.io/sprig/)
 
-#### Using API Server Environment Variables in Webhooks
+#### Using Agent Environment Variables in Webhooks
 
-In addition to event-specific variables, it's possible to use environment variables from the Testkube API server in your webhook payloads and configurations.
+In addition to event-specific variables, it's possible to use environment variables from the Agent API server
+(on agents with the [Webhook capability](/articles/agents-overview#webhook-agents)) in your webhook payloads and configurations.
 This feature is particularly useful for including sensitive information like API keys or URIs without exposing them in your webhook definitions.
 
-##### Configuring API Server Environment Variables
+##### Configuring Agent Environment Variables
 
-To set up extra environment variables for the API Server, you can use the `testkube-api.extraEnvVars` field in your Helm chart configuration.
+To set up extra environment variables for the Agent API Server, you can use the `testkube-api.extraEnvVars` field in your Helm chart configuration.
 This allows you to define environment variables, including those that reference Kubernetes secrets:
 
 ```yaml

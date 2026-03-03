@@ -58,7 +58,7 @@ docker run --name=docker-testkube-agent -d --privileged -e AGENT_KEY=tkcagnt_XXX
 - The `-d` flag is optional and runs the Agent in the detached mode - [Read More](https://docs.docker.com/reference/cli/docker/container/run/#detach).
 :::
 
-Once running, the Agent will connect to the Testkube Control Plane and be available for running your Workflows.
+Once running, the Agent will connect to the Testkube Control Plane with all capabilities enabled (Runner, Listener, GitOps, Webhook) and be ready for running Workflows, listening for Kubernetes events, and more - [Read More](/articles/agents-overview).
 
 ## Working with the Docker Agent
 
