@@ -91,7 +91,7 @@ The interval is automatically inferred depending on the size of the period.
 A period less than two days will have an hourly interval, then daily, and up to weekly when looking at a quarter.
 
 More to the right, you can see the Analysis Selector: it defaults to **Executions** time series, but you can also 
-select **Executions Bar Chart**, **Efficieny Quadrant Analysis** and **Pass/Fail Statistics** (all described below)
+select **Executions Bar Chart**, **Efficiency Quadrant Analysis** and **Pass/Fail Statistics** (all described below)
 
 ![Test Insights Select Analysis](images/insights-select-analysis.png)
 

@@ -116,7 +116,7 @@ Execution Details:
 
 Execution List:
 
-![Metric Aggregates in Exection List](images/metric-aggregates-in-execution-list.png)
+![Metric Aggregates in Execution List](images/metric-aggregates-in-execution-list.png)
 
 ### Resource Aggregates in Insights
 

@@ -143,7 +143,7 @@ Testkube can be configured to use different storage for test logs output that ca
 ```yaml
 ## Logs storage for Testkube API.
 logs:
-  ## where the logs should be stored there are 2 possible valuse : minio|mongo
+  ## where the logs should be stored there are 2 possible values : minio|mongo
   storage: "minio"
   ## if storage is set to minio then the bucket must be specified, if minio with s3 is used make sure to use a unique name
   bucket: "testkube-logs"
