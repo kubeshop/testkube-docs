@@ -22,3 +22,7 @@ yarn-error.log*
 dist
 .idea
 .vscode
+
+# Vale styles (downloaded via `vale sync`)
+.vale/styles/Google
+.vale/styles/proselint

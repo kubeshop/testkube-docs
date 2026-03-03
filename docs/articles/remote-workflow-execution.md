@@ -113,7 +113,7 @@ These artifacts are now available for viewing under the Artifacts Tab:
 
 ![Remote Workflow Artifacts Tab](images/remote-workflow-aritfacts-tab.png)
 
-## Synchronized Multi-Enviroment Execution
+## Synchronized Multi-Environment Execution
 
 It can sometimes be desirable to coordinate the execution of Workflows across multiple Testkube Environments, for example
 if you want to synchronize tests to run from different geographical locations against an external target, or if you

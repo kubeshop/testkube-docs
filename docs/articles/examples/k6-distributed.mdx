@@ -28,7 +28,7 @@ number of nodes
     * It runs K6 executable against that test case (`steps[0].parallel.run.shell`)
         * It passes number of Virtual Users and test duration via K6 parameters
         * It uses K6 [**--execution-segment**](https://grafana.com/docs/k6/latest/using-k6/k6-options/reference/#execution-segment) argument to select the fraction of tests to run
-    * It retrives the generated HTML reports as artifacts
+    * It retrieves the generated HTML reports as artifacts
 
 <DistributedK6/>
 
@@ -44,7 +44,7 @@ The k6 log output from one of the workers:
 
 The uploaded HTML reports for each of the Workers is available in the Artifacts tab
 
-![Distributed K6 HTLM Report](images/distributed-k6-artifacts.png)
+![Distributed K6 HTML Report](images/distributed-k6-artifacts.png)
 
 </TabItem>
 

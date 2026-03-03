@@ -450,9 +450,9 @@ spec:
         - name: yourSecretName
 ```
 
-### Changing the Default Slave Pod Template and Resource Specs Used for Slave Pods of Distrubited Executtors
+### Changing the Default Slave Pod Template and Resource Specs Used for Slave Pods of Distributed Executtors
 
-For distributed executors you can adjust an existing slave pod specfication using template or resource fields. In this case you can use the additional parameters `--slave-pod-template` and/or `--slave-pod-requests-XXX`/`--slave-pod-limits-XXX` when you create or run the test:
+For distributed executors you can adjust an existing slave pod specification using template or resource fields. In this case you can use the additional parameters `--slave-pod-template` and/or `--slave-pod-requests-XXX`/`--slave-pod-limits-XXX` when you create or run the test:
 
 ```sh
 testkube create test --git-branch develop --git-uri https://github.com/kubeshop/testkube.git --git-path contrib/executor/jmeterd/examples/gitflow --name distributed-jmeter --type jmeterd/test --slave-pod-template slave-pod.yaml --slave-pod-limits-cpu 20m --slave-pod-limits-memory 30Mi --slave-pod-requests-cpu 40m --slave-pod-requests-memory 50mi
@@ -598,7 +598,7 @@ testkube create test --file test/postman/LocalHealth.postman_collection.json --n
 
 ### Automatically Add All ConfigMap and Secret Keys to Test Variables
 
-You may want to automatcially add all keys from your ConfigMap and Secret to your test. For this, you will need to provide them as additional
+You may want to automatically add all keys from your ConfigMap and Secret to your test. For this, you will need to provide them as additional
 parameters when you create or run the test using the `--variable-configmap` and `--variable-secret` options and they will be automatically added during test execution. All ConfigMap keys will be added with `key` as the variable name for Basic variables and all Secret keys will be added with key as variable name for Secret variables:
 
 ```sh

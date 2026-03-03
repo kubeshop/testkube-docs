@@ -93,7 +93,7 @@ was successful.
 ## Environment Settings
 
 You can access the settings for an existing Environment either from the same top-level menu or the corresponding
-toolbar buttton on the left:
+toolbar button on the left:
 
 ![Environment Settings](../img/environment-settings.png)
 

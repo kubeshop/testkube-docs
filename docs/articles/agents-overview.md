@@ -4,7 +4,7 @@ A Testkube Environment can contain any number of Agents to perform specific task
 via the Dashboard (see below) and then deployed into their target cluster/namespace using either the provided CLI or Helm commands.
 
 :::tip
-The Agents described here are related to the Test Orchestration capabilites of Testkube, not to be confused with [Testkube AI Agents](/articles/ai-agents), 
+The Agents described here are related to the Test Orchestration capabilities of Testkube, not to be confused with [Testkube AI Agents](/articles/ai-agents), 
 which allow you to run Agentic workloads in your Testkube Environment.
 :::
 
@@ -12,7 +12,7 @@ which allow you to run Agentic workloads in your Testkube Environment.
 
 As of Testkube 2.7.0, the concept of a standalone "superagent" has been deprecated and been entirely replaced with Agents with the below capabilities - [Read More](/articles/testkube-resource-management). 
 
-When upgrading a "superagent" from a pre 2.7.0 version to a 2.7.0+ version, that Agent will be automatically migrated to an Agent with all 4 capabilties enabled, its name will be set to `default-agent-<environment-name>`.
+When upgrading a "superagent" from a pre 2.7.0 version to a 2.7.0+ version, that Agent will be automatically migrated to an Agent with all 4 capabilities enabled, its name will be set to `default-agent-<environment-name>`.
 
 ## Agent Capabilities
 
@@ -26,8 +26,8 @@ A Testkube Agent can have any of the following 4 capabilities
 :::note
 ### Naming - Agents vs Capabilities 
 
-Since an Agent can technically have any combination of these capabilties enabled, we will use the terms **capability** and **agent** somewhat 
-interchangably - i.e. a "Runner Agent" is the same as an "Agent with the Runner Capability", while an Agent with both the Listener and Webhook capabilities is both 
+Since an Agent can technically have any combination of these capabilities enabled, we will use the terms **capability** and **agent** somewhat 
+interchangeably - i.e. a "Runner Agent" is the same as an "Agent with the Runner Capability", while an Agent with both the Listener and Webhook capabilities is both 
 a Listener Agent and a Webhook Agent. 
 :::
 

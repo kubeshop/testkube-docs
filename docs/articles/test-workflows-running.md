@@ -317,7 +317,7 @@ testkube run testworkflow my-k6-test --silent
 
 Introduced with Testkube 2.6.0, you can also set a Workflow to always run executions silently instead of having to flag each individual execution. 
 
-Simply add the following to your Worfklow definition:
+Simply add the following to your Workflow definition:
 
 ```yaml
 ...

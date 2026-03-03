@@ -11,13 +11,13 @@ You initiate the Wizard by accessing **Test Workflows** and selecting **Add a ne
 Upon selection of **Add a new Test Workflow**, the **Create a Test Workflow** modal opens. You can start a new Workflow via **Create with Wizard**, 
 **Start from an example**, **Combine existing Workflows**, and **Import from YAML**.
 
-![Create a Test Workfow modal](../articles/images/workflow-wizard-create-a-test-workflow-modal.png)
+![Create a Test Workflow modal](../articles/images/workflow-wizard-create-a-test-workflow-modal.png)
 
 ## Create with Wizard
 
 **Create with Wizard** includes five steps:
 
-1. **Name & Source** – Allows you to identify and distinquish your test by providing **Name**, **Labels**, and **Source**.
+1. **Name & Source** – Allows you to identify and distinguish your test by providing **Name**, **Labels**, and **Source**.
 1. **Type** – Allows you to select a project and indicate the testing tool version number.
 1. **Run** – Enables you to specify the configuration for how to run the test.
 1. **Collaboration** – Allows you to establish the settings for the generated Workflow.
