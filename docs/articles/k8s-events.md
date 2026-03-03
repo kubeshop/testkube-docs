@@ -4,6 +4,11 @@ Testkube can emit native [Kubernetes Events](https://kubernetes.io/docs/referenc
 for TestWorkflow lifecycle changes and resource operations. This allows you to integrate with CD tools,
 monitoring systems, or any automation that watches Kubernetes Events.
 
+:::note
+As of Testkube 2.7.0, you need a **Webhook Agent** in your Testkube Environment to emit Kubernetes Events - [Read More](/articles/agents-overview#webhook-agents)
+:::
+
+
 ## Enabling Kubernetes Events
 
 Kubernetes Events are **enabled by default**. To explicitly enable or disable them, set the
