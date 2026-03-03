@@ -11,7 +11,7 @@ document for an overview of how the Workflow engine works.
 
 ## System Overview
 
-The Control Plane is the source of truth for all Testkube Resources and is always accessible,
+The Control Plane is the source of truth for all [Testkube Resources](/articles/testkube-resource-management) and is always accessible,
 even when no agents are connected. Agents are deployed into your Kubernetes clusters and connect
 to the Control Plane via gRPC to execute workflows, listen for events, sync resources, and emit webhooks.
 

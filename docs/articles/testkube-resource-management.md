@@ -1,7 +1,15 @@
 # Testkube Resource Management
 
-Starting in Testkube `v2.7`, Testkube stores its Resources directly in the Control Plane instead of in the cluster/namespace where the 
-default Superagent was deployed, and the concept of a "superagent" has been retired in favor of discrete Agents/capabilities - [Read More](/articles/agents-overview).
+Testkube defines a number of Resources for its core functionality:
+- TestWorkflows / TestWorkflowTemplates for defining how to run and orchestrate your tests.
+- Webhooks / WebhookTemplates for integrating external tools into the TestWorkflow lifecycle.
+- TestTriggers for integrating Test Orchestration with Kubernetes Events.
+
+While these were all originally stored as CRDs where the Testkube Agent was deployed (see below), starting in Testkube `v2.7` these resources are stored directly in the Testkube Control Plane. As a consequence, the concept of a "superagent" has been retired in favor of discrete Agents/capabilities - [Read More](/articles/agents-overview). 
+
+:::note
+Resources can still be provided to the Testkube Control Plane using CRDs in a GitOps setup, see [GitOps with Testkube](/articles/gitops-overview).
+:::
 
 ## Background
 
