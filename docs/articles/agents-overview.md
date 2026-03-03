@@ -10,7 +10,7 @@ which allow you to run Agentic workloads in your Testkube Environment.
 
 ### Deprecation of Standalone Agents in Testkube 2.7.0
 
-As of Testkube 2.7.0, the concept of a standalone "superagent" has been deprecated and been entirely replaced with Agents with the below capabilities - [Read More](/articles/control-plane-source-of-truth). 
+As of Testkube 2.7.0, the concept of a standalone "superagent" has been deprecated and been entirely replaced with Agents with the below capabilities - [Read More](/articles/testkube-resource-management). 
 
 When upgrading a "superagent" from a pre 2.7.0 version to a 2.7.0+ version, that Agent will be automatically migrated to an Agent with all 4 capabilties enabled, its name will be set to `default-agent-<environment-name>`.
 

@@ -1128,7 +1128,7 @@ const sidebars = {
         {
           type: "doc",
           label: "Control Plane Source of Truth",
-          id: "articles/control-plane-source-of-truth",
+          id: "articles/testkube-resource-management",
         },
         {
           type: "doc",

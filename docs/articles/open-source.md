@@ -24,7 +24,7 @@ As described in the [Standalone Agent Overview](/articles/install/standalone-age
 :::note
 When connected to a Control Plane (v2.7+), these responsibilities are distributed across specialized 
 [Agent capabilities](/articles/agents-overview): Runner, Listener, GitOps, and Webhook. Resources 
-are stored in the Control Plane rather than as CRDs - [Read More](/articles/control-plane-source-of-truth).
+are stored in the Control Plane rather than as CRDs - [Read More](/articles/testkube-resource-management).
 :::
 
 ![Standalone Agent Overview](images/standalone-agent.png)

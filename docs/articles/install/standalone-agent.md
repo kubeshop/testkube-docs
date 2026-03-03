@@ -52,7 +52,7 @@ The following steps are required to install the Standalone Agent into a Kubernet
 - Create a Testkube namespace.
 - Deploy the Testkube API (see below).
 - Use MongoDB or PostgreSQL for test results and Minio for artifact storage (optional; disable with --no-minio).
-- In standalone mode, Testkube will listen and manage all the CRDs for TestWorkflows, Triggers, Webhooks, etc. inside the Testkube namespace. In connected mode (v2.7+), resources are managed by the Control Plane instead - [Read More](/articles/control-plane-source-of-truth).
+- In standalone mode, Testkube will listen and manage all the CRDs for TestWorkflows, Triggers, Webhooks, etc. inside the Testkube namespace. In connected mode (v2.7+), resources are managed by the Control Plane instead - [Read More](/articles/testkube-resource-management).
 
 Once installed you can verify your installation and check that Testkube is up and running with
 `kubectl get all -n testkube`. Once validated, you're ready to unleash the full potential of Testkube in your environment.

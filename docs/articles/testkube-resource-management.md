@@ -1,12 +1,14 @@
-# Control Plane Source of Truth (v2.7)
+# Testkube Resource Management
 
-Starting in Testkube `v2.7`, Testkube stores its Resources in the Control Plane instead of in the default Superagent.
+Starting in Testkube `v2.7`, Testkube stores its Resources directly in the Control Plane instead of in the cluster/namespace where the 
+default Superagent was deployed, and the concept of a "superagent" has been retired in favor of discrete agent 
+capabilities (Runner, Listener, GitOps and Webhooks) - [Read More](/articles/agents-overview).
 
 ## Background
 
 ### The Testkube Agent as the Source-of-Truth
 
-Up until this version of the Testkube, all Testkube Resources available in an Environment were stored and managed as CRDs in the
+Up until version 2.7.0 of the Testkube, all Testkube Resources available in an Environment were stored and managed as CRDs in the
 namespace where the initial Environment Agent ("Superagent") was deployed. This design worked well for standalone agent deployments, but became increasingly 
 problematic for complex deployments using the Testkube Control Plane:
 
@@ -42,7 +44,7 @@ flowchart LR
 
 ### Testkube Control Plane as the Source-of-Truth
 
-The new architecture introduced in this release moves the storage and management of all Testkube Resources from the Agent to the Control Plane itself, resulting in:
+The new architecture introduced with 2.7.0 moves the storage and management of all Testkube Resources from the Agent to the Control Plane itself, resulting in:
 
 - An agent is no longer required to create and manage an Environment and its resources in the Testkube Dashboard, it is first when you actually want to 
   run a Workflow, or start listening to Kubernetes Events that you will need to deploy a Runner or Listener Agent - [Read More about Testkube Agents](/articles/agents-overview)
@@ -87,11 +89,13 @@ Once migrated, the (Super)Agent will show up in the list of Agents as an Agent w
 This is functionality equivalent to its pre-migration state, so users can continue using Testkube as before without having to perform any further tasks 
 for the migration to finish.
 
-:::note
-If you want to continue syncing Testkube resources into the Control Plane after the migration, read the [Testkube Resources and GitOps](#testkube-resources-and-gitops) section below.
+:::tip
+If you want to continue syncing Testkube resources into the Control Plane after the migration, read the [GitOps with Testkube article](/articles/gitops-overview).
 :::
 
 ## What This Means for Users
+
+### Simplified Operations
 
 For most users, this change simplifies day-to-day operations:
 
@@ -102,102 +106,16 @@ For most users, this change simplifies day-to-day operations:
 - Webhooks and Kubernetes-event triggers continue to execute through agents via the agent capability model (for triggers, see [Listener Agents](/articles/agents-overview#listener-agents)).
 - Control Plane metrics are available by default for observability (see [Control Plane Metrics](/articles/control-plane-metrics)).
 
+Furthermore, the fact that Testkube Resources are now natively managed in the Control Plane will provide significant performance and stability improvements to the 
+Testkube Dashboard in large-scale deployments.
 
-
-## Agent Capability Cookbook (v2.7)
-
-In `v2.7`, connected environments still use agent capabilities for eventing and optional sync paths.
-
-Use this section as a practical cookbook when deciding which capabilities to enable on each connected agent.
-
-### Listener capability
-
-Use Listener capability when you need Kubernetes-event triggers (`TestTrigger`) to be evaluated from cluster events.
-
-For self-registering Runner Agents (`testkube-runner` chart):
-
-```yaml
-listener:
-  enabled: true
-```
-
-For namespace-scoped and cluster-wide listening patterns, see [Listener Agent Cookbook](/articles/multi-agent-runner-helm-chart#listener-agent-cookbook).
-
-CLI example:
-
-```bash
-testkube install agent <name> --create --listener
-```
-
-### GitOps capability
-
-Use GitOps capability when your source of truth for Workflows/Triggers/Webhooks remains in Kubernetes manifests and you want those CRD changes synchronized into connected Control Plane state.
-
-For self-registering Runner Agents (`testkube-runner` chart):
-
-```yaml
-gitops:
-  enabled: true
-```
-
-CLI example:
-
-```bash
-testkube install agent <name> --create --gitops
-```
-
-### Webhooks capability
-
-Use Webhooks capability when webhook-triggered execution should run through the agent path in connected mode.
-
-For self-registering Runner Agents (`testkube-runner` chart):
-
-```yaml
-webhooks:
-  enabled: true
-```
-
-CLI example:
-
-```bash
-testkube install agent <name> --create --webhooks
-```
-
-:::note
-During SuperAgent migration, webhook capability is preserved so existing webhook behavior continues after upgrading to `v2.7`.
-:::
-
-### Combined capability example
-
-A common connected setup keeps Runner + Listener enabled and adds GitOps and Webhooks explicitly:
-
-```yaml
-runner:
-  enabled: true
-
-listener:
-  enabled: true
-
-gitops:
-  enabled: true
-
-webhooks:
-  enabled: true
-```
-
-Equivalent CLI flow:
-
-```bash
-testkube install agent <name> --create --runner --listener --gitops --webhooks
-```
-
-## Scheduling Changes
+### Scheduling Changes
 
 Scheduled Workflows are now managed by the Control Plane by default in connected mode.
 
 See [Scheduling Workflows](/articles/scheduling-tests) for schedule syntax and usage, and [Control Plane Metrics](/articles/control-plane-metrics) for scheduler observability.
 
-## Webhooks and Triggers
+### Webhooks and Triggers
 
 The execution model for Webhooks and Trigger listeners remains agent-based:
 
@@ -214,10 +132,7 @@ Related docs:
 The "webhook capability" naming is currently an internal implementation detail and may change in future releases.
 :::
 
-## Metrics Default
+### Prometheus Metrics
 
-Control Plane Prometheus metrics are enabled by default in `v2.7`.
-
-Metrics coverage (including scheduler metrics) is documented in:
-
-- [Control Plane Metrics](/articles/control-plane-metrics)
+Runner and Webhook Agents expose the Prometheus metrics as before, while the Control Plane itself exposes its own (improved) metrics for Testkube monitoring, 
+read more at [Control Plane Metrics](/articles/control-plane-metrics).

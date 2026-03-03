@@ -131,7 +131,7 @@ docker exec testkube-agent helm upgrade testkube testkube/testkube --namespace t
 
 :::info
 As of Testkube v2.7, Testkube Resources are stored in the Control Plane, so replacing the Docker Agent
-will not result in loss of your Workflows or other resources - [Read More](/articles/control-plane-source-of-truth).
+will not result in loss of your Workflows or other resources - [Read More](/articles/testkube-resource-management).
 For pre-v2.7 environments, this option comes with the drawback that you will lose any Testkube resources 
 that were created in the Environment (since these were stored as CRDs in the Agent's cluster).
 :::

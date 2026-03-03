@@ -288,7 +288,7 @@ testkube-agent:
 
 ### Namespaces for Testkube Custom Resources
 
-As of Testkube v2.7, Testkube Resources are stored in the Control Plane - [Read More](/articles/control-plane-source-of-truth). If you are using a [GitOps Agent](/articles/agents-overview#gitops-agents) to sync Testkube CRDs from your cluster into the Control Plane, the agent will watch for custom Testkube resources within the namespace where it is installed. It is currently unsupported to change this behaviour.
+As of Testkube v2.7, Testkube Resources are stored in the Control Plane - [Read More](/articles/testkube-resource-management). If you are using a [GitOps Agent](/articles/agents-overview#gitops-agents) to sync Testkube CRDs from your cluster into the Control Plane, the agent will watch for custom Testkube resources within the namespace where it is installed. It is currently unsupported to change this behaviour.
 
 ## Bring Your Own Infra
 

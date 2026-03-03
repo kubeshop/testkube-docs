@@ -1,7 +1,7 @@
 # Testkube Custom Resources
 
 :::info
-As of Testkube v2.7, Testkube Resources are stored in the Control Plane - [Read More](/articles/control-plane-source-of-truth). 
+As of Testkube v2.7, Testkube Resources are stored in the Control Plane - [Read More](/articles/testkube-resource-management). 
 CRDs are still used by the [GitOps Agent](/articles/agents-overview#gitops-agents) to sync resources from Kubernetes 
 into the Control Plane and by the [Standalone Agent](/articles/install/standalone-agent) for local resource management.
 :::

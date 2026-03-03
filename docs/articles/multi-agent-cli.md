@@ -130,7 +130,7 @@ Context: cloud (2.7.x)   Namespace: testkube   Org: Testkube   Env: my-env
 
 :::note
 Environments migrated from pre-2.7 will show a `default-agent-<environment-name>` entry with all four capabilities enabled,
-replacing the previous "SuperAgent" - [Read More](/articles/control-plane-source-of-truth).
+replacing the previous "SuperAgent" - [Read More](/articles/testkube-resource-management).
 :::
 
 ## Deleting and Uninstalling an Agent

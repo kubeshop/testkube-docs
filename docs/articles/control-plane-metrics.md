@@ -6,7 +6,7 @@ In `v2.7+`, Control Plane metrics are enabled by default with:
 
 - `TK_CLOUD_METRICS_ENABLED=true`
 
-For context on the source-of-truth migration in `v2.7`, see [Control Plane Source of Truth](/articles/control-plane-source-of-truth).
+For context on the source-of-truth migration in `v2.7`, see [Control Plane Source of Truth](/articles/testkube-resource-management).
 
 ## Availability and Enablement
 

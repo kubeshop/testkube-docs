@@ -56,7 +56,7 @@ to do this directly in the Workflow Definition.
 
 ## Scheduling Architecture
 
-In connected mode (v2.7+), scheduling is managed centrally by the Control Plane - [Read More](/articles/control-plane-source-of-truth#scheduling-changes).
+In connected mode (v2.7+), scheduling is managed centrally by the Control Plane - [Read More](/articles/testkube-resource-management#scheduling-changes).
 
 For standalone deployments, the Testkube Agent includes a built-in cron scheduler (the default mode) that uses RPC to trigger
 Test Workflows directly, eliminating the need to create separate CronJob pods. This significantly reduces Kubernetes resource

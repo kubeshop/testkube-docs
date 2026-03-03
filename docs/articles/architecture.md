@@ -2,7 +2,7 @@
 
 Testkube contains two sub-systems:
 
-- A **Control Plane** which includes the Dashboard, Storage for Resources/Results/Artifacts, Scheduling, Cluster Federation, etc - [Read More](/articles/control-plane-source-of-truth)
+- A **Control Plane** which includes the Dashboard, Storage for Resources/Results/Artifacts, Scheduling, Cluster Federation, etc - [Read More](/articles/testkube-resource-management)
 - One or more **Agents** running in your cluster(s) that execute Test Workflows, listen for Kubernetes events, sync resources via GitOps, and emit webhooks/CDEvents - [Read More](/articles/agents-overview)
 
 Check out the [Installation Overview](/articles/install/overview) document for more details on

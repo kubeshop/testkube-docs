@@ -14,7 +14,7 @@ A Testkube Environment can contain any number of [Testkube Agents](/articles/age
 for executing Workflows, listening to Kubernetes events, syncing resources via GitOps, and emitting webhooks. 
 
 :::info
-Testkube Resources are stored and managed in the Testkube Control Plane - [Read More](/articles/control-plane-source-of-truth). 
+Testkube Resources are stored and managed in the Testkube Control Plane - [Read More](/articles/testkube-resource-management). 
 Agents are deployed into your clusters for running Workflows, listening to events, and other capabilities - [Read More](/articles/agents-overview).
 :::
 
@@ -73,7 +73,7 @@ a prompt for a unique environment name:
 :::tip
 As of Testkube v2.7, you can create an Environment and manage its Resources (Workflows, Triggers, etc.) 
 directly from the Dashboard without deploying an Agent first. You only need to deploy an Agent when you 
-want to execute Workflows or listen for Kubernetes events - [Read More](/articles/control-plane-source-of-truth).
+want to execute Workflows or listen for Kubernetes events - [Read More](/articles/testkube-resource-management).
 :::
 
 After providing the environment name you will be prompted as shown below to [Install the CLI](/articles/install/cli)
