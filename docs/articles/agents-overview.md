@@ -71,14 +71,14 @@ Read more about how TestTriggers map to Listener Agents at [Listener Agents with
 ### GitOps Agents
 
 GitOps Agents are used to sync Testkube Resources from a Kubernetes namespace into the Testkube Control-Plane, which is required if you are using Testkube in a GitOps
-environment and want to manage your Testkube Resources in Git togethere with other Kubernetes Resources - [Read More](/articles/gitops-overview).
+environment and want to manage your Testkube Resources in Git together with other Kubernetes Resources - [Read More](/articles/gitops-overview).
 
 ### Webhook Agents
 
 Testkube has the capability to emit different types of events for integrating with external tools:
 
 - [Webhooks](/articles/webhooks)
-- [CDvents](/articles/cd-events)
+- [CDEvents](/articles/cd-events)
 - [Kubernetes events](/articles/k8s-events)
 
 These are all emitted by a dedicated Webhook Agent which you can deploy anywhere in your infrastructure from where you want these events to be emitted.

@@ -33,7 +33,7 @@ To achieve this with Testkube, you need
 ![Local Test Execution with Testkube](images/local-test-exec-with-testkube.png)
 
 This solves many of the problems mentioned above:
-- You don't need to install any testing tools locally as Testkubes Workflow engine will provision these automatically inside
+- You don't need to install any testing tools locally as Testkube's Workflow engine will provision these automatically inside
   Kubernetes when running these tests
 - Tests are run using the same execution engine and environment (Kubernetes) as they would run in your CI/CD pipelines
 - Tests are run using the same source-code as they would run in your CI/CD pipelines 

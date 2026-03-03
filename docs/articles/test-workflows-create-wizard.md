@@ -51,7 +51,7 @@ When you select **Git** as the **Source**, your test prompts as follows:
   * **Secret Reference** – Allows you to specify both the Kubernetes Secret Name and Key to use.
   * **Secret** – Testkube automatically creates a Kubernetes Secret for the specified value.
   * **Plain-text** – Allows you to specify the value in plain-text (**not recommended**). 
-  * **Credenital** – Allows you to enter the credential name.
+  * **Credential** – Allows you to enter the credential name.
   * **Credential Reference** – Allows you to enter the credential reference.
 * **Branch** – Allows you to specify the branch name.
 * **Path** – Allows you to specify a path (relative to the repository root) that contains your tests.

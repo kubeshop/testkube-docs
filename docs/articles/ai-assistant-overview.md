@@ -8,7 +8,7 @@ YAML configuration, and general Testkube guidance.
 Check out the [AI Configuration Quick Start](/articles/ai-enabling) on how to enable the AI Assistant for your Testkube instance.
 :::
 
-The AI Assistant is different from external AI tools that interact with Testkubes MCP Server in several ways:
+The AI Assistant is different from external AI tools that interact with Testkube's MCP Server in several ways:
 
 - **Contextual Awareness:**  
   AI Assistant continuously enriches its context based on the current page you’re viewing on the Testkube Dashboard.
@@ -78,7 +78,7 @@ Executions - [Read More](/articles/AI-test-insights).
 
 The AI Assistant has read-only access to all tools of the Testkube MCP Server, allowing it to query and analyze Testkube data accordingly. 
 
-If you want to modify/create Testkube resources via Testkubes AI functionality, or interact with external MCP Servers, you will need to create an [AI Agent](/articles/ai-agents) with read/write access to Testkube and external MCP Tools.
+If you want to modify/create Testkube resources via Testkube's AI functionality, or interact with external MCP Servers, you will need to create an [AI Agent](/articles/ai-agents) with read/write access to Testkube and external MCP Tools.
 
 ## Security Consideration
 

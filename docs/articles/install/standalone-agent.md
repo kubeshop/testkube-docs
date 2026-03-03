@@ -381,7 +381,7 @@ data "aws_iam_policy_document" "testkube" {
 }
 ```
 
-**Teskube helm values:**
+**Testkube helm values:**
 
 ```yaml
 testkube-api:

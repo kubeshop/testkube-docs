@@ -243,10 +243,10 @@ Read more in the [mocha-junit-reporter docs](https://www.npmjs.com/package/mocha
 
 ## Conclusion
 
-Testkubes JUnit report processing and visualization features provide a powerful toolset for managing and analyzing test
+Testkube's JUnit report processing and visualization features provide a powerful toolset for managing and analyzing test
 results. By automatically extracting data from JUnit XML reports and presenting it in both summary and detailed views, 
 Testkube enables teams to gain valuable insights into their test workflows quickly and efficiently.
 
 :::tip
-For more information on Testkubes reporting features, check out [Test Insights](/articles/test-insights).
+For more information on Testkube's reporting features, check out [Test Insights](/articles/test-insights).
 :::

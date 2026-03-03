@@ -48,4 +48,4 @@ For offline installations, it is disabled by default.
 When using the Testkube Cloud Control Plane, all network traffic is initiated from the Agent to
 the Control Plane. If you are using a stateful firewall you will not need
 to add any additional ingress rules, but if not then you will need to allow
-ingres connections on the ephemeral ports for your particular OS.
+ingress connections on the ephemeral ports for your particular OS.

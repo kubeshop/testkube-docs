@@ -13,7 +13,7 @@ Testkube samples the following metrics and calculates aggregates for each Workfl
 
 | Metric          | Value Types | Aggregates                         | Description                                      |
 |-----------------|-------------|------------------------------------|--------------------------------------------------|
-| CPU             | millicores  | min, max, avg, total               | CPU usage in milicores over time                 |
+| CPU             | millicores  | min, max, avg, total               | CPU usage in millicores over time                 |
 | Memory          | bytes       | min, max, avg, total               | Memory usage in bytes over time                  |
 | Network Traffic | bytes       | sent/received min, max, avg, total | Network traffic (read/write) in bytes per second |
 | Disk IO         | bytes       | read/write min, max, avg, total    | Disk operations (read/write) in bytes per second |

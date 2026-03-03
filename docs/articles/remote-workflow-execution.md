@@ -107,7 +107,7 @@ The following changes were made:
 
 The following example output is from a remote Playwright test that was configured to generate both reports and traces:
 
-![Remote Worklflow Artifact Download](images/remote-workflow-artifact-download.png)
+![Remote Workflow Artifact Download](images/remote-workflow-artifact-download.png)
 
 These artifacts are now available for viewing under the Artifacts Tab:
 

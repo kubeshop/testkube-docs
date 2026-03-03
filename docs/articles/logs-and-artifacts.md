@@ -24,11 +24,11 @@ Select from the **Compare to another execution step** drop down to compare two s
 
 The next screen will show the differences between the two steps:
 
-![View Comnparison Differences](../articles/images/workflow-execution-details-compare-step-differences.png)
+![View Comparison Differences](../articles/images/workflow-execution-details-compare-step-differences.png)
 
 ## Artifact Collection
 
-Workflows that produce artifacts can be configured to upload those to Testkubes Artifact storage - [Read More](test-workflows-artifacts). These 
+Workflows that produce artifacts can be configured to upload those to Testkube's Artifact storage - [Read More](test-workflows-artifacts). These 
 could be, for example, videos, logs, html-reports, JUnit XML reports, etc. - anything that you want to make available
 for inspecting or troubleshooting a test execution. 
 
