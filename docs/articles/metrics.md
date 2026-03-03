@@ -8,20 +8,20 @@ performed in the associated Environment. Runner and Webhook Agents expose the ex
 the Control Plane exposes its own metrics for centralized observability - see [Control Plane Metrics](/articles/control-plane-metrics).
 
 :::note
-No metrics are produced until at least one test has been run since the last Agent API server restart.
+No metrics are produced until at least one Workflow has been executed since the last Agent API server restart.
 :::
 
 ## Available Metrics
 
-| Metric | Capability | Description | Labels |
+| Metric | Agent Capabilities* | Description | Labels |
 |--------|------------|-------------|--------|
 | **Workflow Executions** | | | |
-| `testkube_testworkflow_executions_count` | Webhook | Total number of test workflow executions | `name`, `result`, `labels`, `testworkflow_uri`, `triggered_by`, `tags` |
-| `testkube_testworkflow_executions_duration_ms` | Webhook | Duration of test workflow executions | `name`, `result`, `labels`, `testworkflow_uri`, `triggered_by`, `tags` |
+| `testkube_testworkflow_executions_count` | Webhook + Runner | Total number of test workflow executions | `name`, `result`, `labels`, `testworkflow_uri`, `triggered_by`, `tags` |
+| `testkube_testworkflow_executions_duration_ms` | Webhook + Runner | Duration of test workflow executions | `name`, `result`, `labels`, `testworkflow_uri`, `triggered_by`, `tags` |
 | `testkube_testworkflow_aborts_count` | Runner | Total number of test workflow aborts | `result` |
 | **Workflow Execution Steps** | | | |
-| `testkube_testworkflow_execution_steps_count` | Webhook | Total number of test workflow execution steps | `workflow_name`, `step_name`, `status` |
-| `testkube_testworkflow_execution_steps_duration_ms` | Webhook | Duration of test workflow execution steps | `workflow_name`, `step_name`, `status` |
+| `testkube_testworkflow_execution_steps_count` | Webhook + Runner | Total number of test workflow execution steps | `workflow_name`, `step_name`, `status` |
+| `testkube_testworkflow_execution_steps_duration_ms` | Webhook + Runner | Duration of test workflow execution steps | `workflow_name`, `step_name`, `status` |
 | `testkube_testworkflow_execution_steps_start_time_ms` | Runner | Start time of test workflow execution steps | `workflow_name`, `step_name`, `status` |
 | `testkube_testworkflow_execution_steps_finish_time_ms` | Runner | Finish time of test workflow execution steps | `workflow_name`, `step_name`, `status` |
 | **Workflow Lifecycle (CRUD)** | | | |
@@ -40,7 +40,9 @@ No metrics are produced until at least one test has been run since the last Agen
 | `testkube_testtriggers_bulk_deletes_count` | Runner | Total number of test trigger bulk delete events | `result` |
 | `testkube_testtrigger_event_count` | Runner | Total number of test trigger events | `name`, `resource`, `eventType`, `causes` |
 | **Webhooks** | | | |
-| `testkube_webhook_executions_count` | Runner | Total number of webhook executions | `name`, `eventType`, `result` |
+| `testkube_webhook_executions_count` | Runner + Webhook | Total number of webhook executions | `name`, `eventType`, `result` |
+
+(* = these are the Agent capabilities required for the metric to be available and updated.)
 
 ### Example Prometheus Output
 

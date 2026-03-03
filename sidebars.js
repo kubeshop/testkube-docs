@@ -1092,7 +1092,7 @@ const sidebars = {
           type: "category",
           label: "Observability & Reporting",
           items: [
-            {type: "doc", label: "Prometheus", id: "articles/metrics"},
+            {type: "doc", label: "Agent Metrics", id: "articles/metrics"},
             {
               type: "doc",
               label: "Control Plane Metrics",
