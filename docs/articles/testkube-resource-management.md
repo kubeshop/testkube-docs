@@ -1,9 +1,9 @@
 # Testkube Resource Management
 
 Testkube defines a number of Resources for its core functionality:
-- TestWorkflows / TestWorkflowTemplates for defining how to run and orchestrate your tests.
-- Webhooks / WebhookTemplates for integrating external tools into the TestWorkflow lifecycle.
-- TestTriggers for integrating Test Orchestration with Kubernetes Events.
+- TestWorkflows / TestWorkflowTemplates for defining how to run and orchestrate your tests - [Read More](/articles/test-workflows).
+- Webhooks / WebhookTemplates for integrating external tools into the TestWorkflow lifecycle - [Read More](/articles/webhooks).
+- TestTriggers for integrating Test Orchestration with Kubernetes Events - [Read More](/articles/test-triggers).
 
 While these were all originally stored as CRDs where the Testkube Agent was deployed (see below), starting in Testkube `v2.7` these resources are stored directly in the Testkube Control Plane. As a consequence, the concept of a "superagent" has been retired in favor of discrete Agents/capabilities - [Read More](/articles/agents-overview). 
 
