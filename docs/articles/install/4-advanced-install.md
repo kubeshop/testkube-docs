@@ -254,9 +254,6 @@ It is possible to deploy multiple Testkube Agent instances into the same Kuberne
 testkube-api:
   multinamespace:
      enabled: true
-
-testkube-operator:
-  enabled: false
 ```
 
 By default, Testkube monitors events across the entire Kubernetes cluster to trigger the execution of a Test Workflow with the [Kubernetes Event Triggers](/articles/test-triggers)
