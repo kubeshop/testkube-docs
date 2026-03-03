@@ -165,7 +165,7 @@ Floating licenses are useful for automated and/or [ephemeral use-cases](/article
 you will have at any given point in time, and/or you don’t mind if your Workflow executions get queued.
 
 :::note
-Listener Agents do not require a license, you can have as many Listener Agents deployed in your infrastructure as needed.
+Neither Listener, Webhook or GitOps Agents require a license, you can have as many of these Agents deployed in your infrastructure as you need.
 :::
 
 ### Assigning Licenses to Runner Agents
