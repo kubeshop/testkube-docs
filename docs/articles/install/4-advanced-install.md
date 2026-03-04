@@ -103,7 +103,10 @@ It's possible to implement same headers with other ingress controllers or traffi
 ## Credentials Encryption
 
 Testkube supports storing encrypted secrets (passwords, API keys, tokens, etc.) as [Credentials](/articles/credential-management).
-To enable this, you must configure a master password that is used to derive the encryption keys for secrets stored in the database.
+To enable this, you must configure a master password that is used to:
+
+- **Encrypt credentials** — secrets stored in the database are encrypted using a key derived from the master password.
+- **Sign execution tokens** — when the scheduler dispatches a workflow execution to a runner, a signed token is generated so the runner can securely retrieve credentials. Without a master password, workflow executions that use credentials will fail.
 
 :::warning
 The master password cannot be recovered. If it is lost, all previously encrypted secrets will become unreadable
