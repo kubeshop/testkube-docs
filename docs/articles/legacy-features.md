@@ -23,7 +23,7 @@ on [the Testkube blog](https://testkube.io/learn/getting-started-with-test-workf
 
 ## Replacing Tests/Executors/Suites with Test Workflows
 
-[Test Workflows](test-workflows) is Testkubes replacement for Tests/Executors/TestSuites, as it provides both a 
+[Test Workflows](test-workflows) is Testkube's replacement for Tests/Executors/TestSuites, as it provides both a 
 smooth initial onboarding experience for quickly running basic tests/suites, while allowing for customization 
 for real-life scenarios without extensive overhead. Workflows also provides advanced features like
 [parallelization](test-workflows-parallel.mdx), [sharding](test-workflows-matrix-and-sharding.mdx), 

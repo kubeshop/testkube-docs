@@ -32,19 +32,12 @@ a `NoSchedule` effect.
 
 ### Operator and Agent
 
-Example values for the `testkube` chart for the agent and operator:
+Example values for the `testkube` chart for the agent:
 
-```yaml {2-3,10-14}
+```yaml {2-3}
 testkube-api:
   # Create a priority class for Testkube, i.e. high
   priorityClassName: high
-  tolerations:
-  - key: testkube
-    operator: Exists
-    effect: NoSchedule
-testkube-operator:
-  priorityClassName: high
-  # Dedicate nodes to Testkube, i.e. taint with testkube key
   tolerations:
   - key: testkube
     operator: Exists

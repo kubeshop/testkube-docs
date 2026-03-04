@@ -11,13 +11,13 @@ You initiate the Wizard by accessing **Test Workflows** and selecting **Add a ne
 Upon selection of **Add a new Test Workflow**, the **Create a Test Workflow** modal opens. You can start a new Workflow via **Create with Wizard**, 
 **Start from an example**, **Combine existing Workflows**, and **Import from YAML**.
 
-![Create a Test Workfow modal](../articles/images/workflow-wizard-create-a-test-workflow-modal.png)
+![Create a Test Workflow modal](../articles/images/workflow-wizard-create-a-test-workflow-modal.png)
 
 ## Create with Wizard
 
 **Create with Wizard** includes five steps:
 
-1. **Name & Source** – Allows you to identify and distinquish your test by providing **Name**, **Labels**, and **Source**.
+1. **Name & Source** – Allows you to identify and distinguish your test by providing **Name**, **Labels**, and **Source**.
 1. **Type** – Allows you to select a project and indicate the testing tool version number.
 1. **Run** – Enables you to specify the configuration for how to run the test.
 1. **Collaboration** – Allows you to establish the settings for the generated Workflow.
@@ -51,7 +51,7 @@ When you select **Git** as the **Source**, your test prompts as follows:
   * **Secret Reference** – Allows you to specify both the Kubernetes Secret Name and Key to use.
   * **Secret** – Testkube automatically creates a Kubernetes Secret for the specified value.
   * **Plain-text** – Allows you to specify the value in plain-text (**not recommended**). 
-  * **Credenital** – Allows you to enter the credential name.
+  * **Credential** – Allows you to enter the credential name.
   * **Credential Reference** – Allows you to enter the credential reference.
 * **Branch** – Allows you to specify the branch name.
 * **Path** – Allows you to specify a path (relative to the repository root) that contains your tests.

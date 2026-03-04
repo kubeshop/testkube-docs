@@ -52,7 +52,7 @@ The following steps are required to install the Standalone Agent into a Kubernet
 - Create a Testkube namespace.
 - Deploy the Testkube API (see below).
 - Use MongoDB or PostgreSQL for test results and Minio for artifact storage (optional; disable with --no-minio).
-- Testkube will listen and manage all the CRDs for TestWorkflows, Triggers, Webhooks, etc… inside the Testkube namespace.
+- In standalone mode, Testkube will listen and manage all the CRDs for TestWorkflows, Triggers, Webhooks, etc. inside the Testkube namespace. In connected mode (v2.7+), resources are managed by the Control Plane instead - [Read More](/articles/testkube-resource-management).
 
 Once installed you can verify your installation and check that Testkube is up and running with
 `kubectl get all -n testkube`. Once validated, you're ready to unleash the full potential of Testkube in your environment.
@@ -117,7 +117,7 @@ A high-level deployment architecture for Standalone Agent is shown below.
 
 ![Deployment with standalone agent](../../img/architecture-standalone.jpeg)
 
-The Testkube CRDs managed by the Operator are described in [Testkube Custom Resources](/articles/crds).
+The Testkube CRDs are described in [Testkube Custom Resources](/articles/crds).
 
 ## Connecting to the Testkube Control Plane
 
@@ -143,7 +143,7 @@ Testkube can be configured to use different storage for test logs output that ca
 ```yaml
 ## Logs storage for Testkube API.
 logs:
-  ## where the logs should be stored there are 2 possible valuse : minio|mongo
+  ## where the logs should be stored there are 2 possible values : minio|mongo
   storage: "minio"
   ## if storage is set to minio then the bucket must be specified, if minio with s3 is used make sure to use a unique name
   bucket: "testkube-logs"
@@ -223,24 +223,11 @@ mongodb:
     enabled: false
 ```
 
-2. Add security context for `Patch` and `Migrate` jobs that are a part of Testkube Operator configuration to `values.yaml`:
+2. The Testkube Operator is deprecated and disabled by default. If your installation previously used it, ensure it is disabled in `values.yaml`:
 
 ```yaml
 testkube-operator:
-  webhook:
-    migrate:
-      enabled: true
-      securityContext:
-        allowPrivilegeEscalation: false
-        capabilities:
-          drop: ["ALL"]
-
-    patch:
-      enabled: true
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000650000
-        fsGroup: 1000650000
+  enabled: false
 ```
 
 3. Install Testkube specifying the path to the new `values.yaml` file
@@ -394,7 +381,7 @@ data "aws_iam_policy_document" "testkube" {
 }
 ```
 
-**Teskube helm values:**
+**Testkube helm values:**
 
 ```yaml
 testkube-api:

@@ -107,7 +107,7 @@ This workflow establishes a connection to the EKS cluster and creates and runs a
 
 - The **_AwsAccessKeyId_**, **_AwsSecretAccessKeyId_** secrets should contain your AWS IAM keys with proper permissions to connect to EKS cluster.
 - The **_AwsRegion_** secret should contain the AWS region where EKS is.
-- Tke **EksClusterName** secret points to the name of the EKS cluster you want to connect.
+- The **EksClusterName** secret points to the name of the EKS cluster you want to connect.
 
 ```yaml
 version: 2.1
@@ -154,7 +154,7 @@ workflows:
 
 This example connects to a k8s cluster in Google Cloud then creates and runs a test using Testkube CircleCI. Please make sure that the following points are satisfied:
 
-- The **_GKE Sevice Account_** should already be created in Google Cloud and added to CircleCI variables along with **_GKE Project_** value.
+- The **_GKE Service Account_** should already be created in Google Cloud and added to CircleCI variables along with **_GKE Project_** value.
 - The **_GKE Cluster Name_** and **_GKE Zone_** can be added as environment variables in the workflow.
 
 ```yaml

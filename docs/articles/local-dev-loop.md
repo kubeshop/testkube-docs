@@ -14,7 +14,7 @@ a local instance of your application, preferably without having to commit any ch
 
 Running tests natively like this is convenient but also has some drawbacks:
 - corresponding tools to run tests need to be installed locally
-- the tests themselves are often managed separately from source-code, requireing both tests and testing tools to be made available
+- the tests themselves are often managed separately from source-code, requiring both tests and testing tools to be made available
   locally for test execution
 - in either case, tests are not run using the same environment as they would be in your CI/CD pipelines; versions, infrastructure will be different and can ultimately lead to inconsistent test results.
 
@@ -33,7 +33,7 @@ To achieve this with Testkube, you need
 ![Local Test Execution with Testkube](images/local-test-exec-with-testkube.png)
 
 This solves many of the problems mentioned above:
-- You don't need to install any testing tools locally as Testkubes Workflow engine will provision these automatically inside
+- You don't need to install any testing tools locally as Testkube's Workflow engine will provision these automatically inside
   Kubernetes when running these tests
 - Tests are run using the same execution engine and environment (Kubernetes) as they would run in your CI/CD pipelines
 - Tests are run using the same source-code as they would run in your CI/CD pipelines 
@@ -199,7 +199,7 @@ Windows, will expose the host to the container at `host.docker.internal`.
 
 ### Packaging with Tilt
 
-[Tilt](https://tilt.dev) provides a convienient way to automate the local development workflow described above, with
+[Tilt](https://tilt.dev) provides a convenient way to automate the local development workflow described above, with
 additional helpers for automatically running tests when they (or their workflows) change.
 
 Head over to the [Tilt example repo](https://github.com/kubeshop/testkube-tilt) for a complete example of how to 

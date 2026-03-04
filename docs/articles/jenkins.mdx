@@ -81,7 +81,7 @@ This workflow establishes a connection to EKS cluster and creates and runs a tes
  to reveal sensitive data. Please make sure that the following points are satisfied:
 - The **_AwsAccessKeyId_**, **_AwsSecretAccessKeyId_** secrets should contain your AWS IAM keys with proper permissions to connect to EKS cluster.
 - The **_AwsRegion_** secret should contain AWS region where EKS is
-- Tke **EksClusterName** secret points to the name of EKS cluster you want to connect.
+- The **EksClusterName** secret points to the name of EKS cluster you want to connect.
 
 You'll need to create a Jenkinsfile. This Jenkinsfile should define the stages and steps necessary to execute the workflow
 
@@ -126,7 +126,7 @@ pipeline {
 
 This example connects to a k8s cluster in Google Cloud, creates and runs a test using Testkube Jenkins workflow. Please make sure that the following points are satisfied:
 
-- The **_GKE Sevice Account_** should be created prior in Google Cloud and added to Jenkins variables along with **_GKE Project_** value;
+- The **_GKE Service Account_** should be created prior in Google Cloud and added to Jenkins variables along with **_GKE Project_** value;
 - The **_GKE Cluster Name_** and **_GKE Zone_** can be added as environmental variables in the workflow.
   you'll need to create a Jenkinsfile. This Jenkinsfile should define the stages and steps necessary to execute the workflow
 

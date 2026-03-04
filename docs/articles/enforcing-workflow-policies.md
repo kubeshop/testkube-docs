@@ -252,7 +252,7 @@ Access the Test Workflow in the Testkube Dashboard.
 
 ![Test Workflow in Testkube Dashboard shows label added](images/policy-label-added.png)
 
-Trigger the first execution of Test Worklow from the Dashboard or you can use CLI as shown below:
+Trigger the first execution of Test Workflow from the Dashboard or you can use CLI as shown below:
 
 ```
 $ kubectl testkube start tw jmeter-missing-label  

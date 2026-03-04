@@ -29,7 +29,7 @@ Triggers are ultimately defined as Customer Resources in your cluster - [TestTri
 
 ## Listener Agents with TestTriggers
 
-Testkube uses [Listener Agents](/articles/agents-overview#listener-agents) or the [Standalone Agent](/articles/agents-overview#the-standalone-agent) 
+Testkube uses [Listener Agents](/articles/agents-overview#listener-agents) 
 to listen for Kubernetes events that will be matched against your TestTriggers. Your Testkube Environment can have any number of 
 Listener Agents, deployed to whichever namespaces/clusters you need to listen for events.
 
@@ -239,7 +239,7 @@ JSONPath scope:
 
 Action parameters are used to pass config and tag values to the workflow execution. You can specify either text values or
 jsonpath expression in a form of `jsonpath={.metadata.name}`. The data will be taken from the resource object of the trigger event.
-Check the kubernets docs [JsonPath Expression](https://kubernetes.io/docs/reference/kubectl/jsonpath/).
+Check the Kubernetes docs [JsonPath Expression](https://kubernetes.io/docs/reference/kubectl/jsonpath/).
 Also you can use Golang template syntax we support for Webhook processing and take data from Golang object fields.
 
 ```yaml
@@ -331,7 +331,7 @@ spec:
 ### On Testkube Cluster Event
 
 You can define **Test Trigger** for Testkube cluster events. In below example,
-if **TestWorkflow** `k6-executor-smoke` is completed succesfully, then we run
+if **TestWorkflow** `k6-executor-smoke` is completed successfully, then we run
 **TestWorkflow** `postman-smoke-tests`
 
 ```yaml

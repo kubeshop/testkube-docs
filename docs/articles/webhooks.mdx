@@ -6,6 +6,10 @@ import TabItem from "@theme/TabItem";
 Webhooks allow you to integrate Testkube with external systems by sending HTTP POST payloads containing information about Testkube executions and their current state when specific events occur. To set up webhooks in Testkube, you'll need to have an HTTPS endpoint to receive the events and a payload template to be sent along with the data.
 
 :::note
+As of Testkube 2.7.0, you need a **Webhook Agent** in your Testkube Environment to emit CDEvents - [Read More](/articles/agents-overview#webhook-agents)
+:::
+
+:::tip
 Please visit our Blog, [Empowering Kubernetes Tests with Webhooks](https://testkube.io/blog/empowering-kubernetes-tests-with-webhooks) for a tutorial on setting up webhooks for Slack and Grafana Dashboard.
 :::
 
@@ -227,14 +231,15 @@ Usage example:
 You can use Sprig golang template functions if you need to have some special logic in your templates.
 You can find a full list of them [here](https://masterminds.github.io/sprig/)
 
-#### Using API Server Environment Variables in Webhooks
+#### Using Agent Environment Variables in Webhooks
 
-In addition to event-specific variables, it's possible to use environment variables from the Testkube API server in your webhook payloads and configurations.
+In addition to event-specific variables, it's possible to use environment variables from the Agent API server
+(on agents with the [Webhook capability](/articles/agents-overview#webhook-agents)) in your webhook payloads and configurations.
 This feature is particularly useful for including sensitive information like API keys or URIs without exposing them in your webhook definitions.
 
-##### Configuring API Server Environment Variables
+##### Configuring Agent Environment Variables
 
-To set up extra environment variables for the API Server, you can use the `testkube-api.extraEnvVars` field in your Helm chart configuration.
+To set up extra environment variables for the Agent API Server, you can use the `testkube-api.extraEnvVars` field in your Helm chart configuration.
 This allows you to define environment variables, including those that reference Kubernetes secrets:
 
 ```yaml
@@ -429,14 +434,14 @@ The full Event Data Model can be found [here](https://github.com/kubeshop/testku
 
 - `Id` - TestWorkflowExecution ID (for example, `64f8d5b2712890925aea51dc`)
 - `Name` - TestWorkflow execution name (for example, `wf-postman-smoke-tests-1`)
-- `Namepace` - TestWorkflowExecution namespace (for example, `my-testkube`)
+- `Namespace` - TestWorkflowExecution namespace (for example, `my-testkube`)
 - `Number` - TestWorkflowExecution sequence number
 - `ScheduledAt` - TestWorkflow scheduled time (for example, `2023-09-06 19:23:34.543433547 +0000 UTC`)
 - `StatusAt` - Time when the execution result's status has changed last time (for example, `2023-09-06 19:23:42.221493031 +0000 UTC`)
 - `Signature` - Structured tree of TestWorkflow steps
 - `Result` - TestWorkflow execution result
 - `Output` - Additional information from the steps, like referenced executed tests or artifacts
-- `Reports` - TestWorklow reports generated from the steps, like junit
+- `Reports` - TestWorkflow reports generated from the steps, like junit
 - `Workflow` - TestWorkflow definition
 - `ResolvedWorkflow` - TestWorkflow definition with resolved fields
 
@@ -745,7 +750,7 @@ spec:
 
 Testkube WebhookTemplates are CRDs that must be created in the same Kubernetes namespace where your Testkube agent is running. While the Testkube dashboard does not expose these resources for management, you can access the corresponding Kubernetes namespace and work with them directly, there. Below are some commands for working with WebhookTemplate resources.
 
-- List existents: `kubectl get webhooktemplates -n <namespace>`
+- List existing: `kubectl get webhooktemplates -n <namespace>`
 - Create new: `kubectl apply -f <webhook-template-manifest-file>.yaml -n <namespace>`
 - Edit one: `kubectl edit webhooktemplates <name-of-webhook-template> -n <namespace>`
 - Delete: `kubectl delete webhooktemplates <name-of-webhook-template> -n <namespace>`

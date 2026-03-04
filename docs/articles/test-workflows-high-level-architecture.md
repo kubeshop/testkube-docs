@@ -185,7 +185,7 @@ The actions `ecr:CreateRepository` and `ecr:CompleteLayerUpload` are only needed
 :::
 
 * Generate an access key for that user.
-* Save key ID and access key in your Secret Management tool that syncs values to your Kuberenetes cluster, or directly create the Kubernetes Secret in the Testkube Agent namespace.
+* Save key ID and access key in your Secret Management tool that syncs values to your Kubernetes cluster, or directly create the Kubernetes Secret in the Testkube Agent namespace.
 * Finally, configure Testkube agent to take those values as environment variables form secret:
 
     ```yaml

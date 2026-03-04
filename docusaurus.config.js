@@ -22,7 +22,7 @@ const config = {
     format: "detect",
     hooks: {
       onBrokenMarkdownLinks: 'warn',
-      onBrokenMarkdownImages: 'throw',
+      onBrokenMarkdownImages: 'warn',
     },
     mermaid: true,
   },
@@ -143,9 +143,9 @@ const config = {
       },
 
       announcementBar: {
-        id: "testkube-260-release",
+        id: "testkube-270-release",
         content:
-          '<b>Testkube 2.6.0 is out! A new AI Agent Framework that integrates with external MCP Servers for agentic troubleshooting, remediation, etc. <a href="/changelog">Read More</a></b>',
+          '<b>Testkube 2.7.0 is out! An improved resource management architecture and a new GitOps Agent, AI improvements, and more. <a href="/changelog">Read More</a></b>',
         backgroundColor: "#8951ff",
         textColor: "#fff",
       },

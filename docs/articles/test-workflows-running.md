@@ -19,10 +19,6 @@ If you want to run a Workflow on a specific Agent instead of the default Standal
 When a Workflow has been executed on multiple Runner Agents, the Dashboard provides an expandable section for the corresponding
 executions, see [Multi-agent Executions](/articles/testkube-dashboard-workflow-details#multi-agent-executions).
 
-:::warning
-Runner Agents do **not** support execution of legacy Tests and TestSuites.
-:::
-
 ## Runner Agent Quickstart
 
 If you don't want to run your Workflows on the default Standalone Agent, you can install and run them on a specific
@@ -321,7 +317,7 @@ testkube run testworkflow my-k6-test --silent
 
 Introduced with Testkube 2.6.0, you can also set a Workflow to always run executions silently instead of having to flag each individual execution. 
 
-Simply add the following to your Worfklow definition:
+Simply add the following to your Workflow definition:
 
 ```yaml
 ...

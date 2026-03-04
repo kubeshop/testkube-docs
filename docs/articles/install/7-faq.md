@@ -19,8 +19,8 @@ install your own [Kubernetes Cluster](quickstart-no-k8s.mdx).
 
 ## Do I have to provide any infrastructure of my own to run Testkube in production
 
-Yes, the Testkube Agent _always_ runs in your own cluster(s)/infrastructure for managing and executing your tests.
-The Control Plane containing the Dashboard can be hosted either by us or by you. Read more about the
+Yes, Testkube Agents _always_ run in your own cluster(s)/infrastructure for executing your tests.
+The Control Plane containing the Dashboard and Resource storage can be hosted either by us or by you. Read more about the
 Testkube deployment options at [Installation Overview](/articles/install/overview)
 
 ## Can I run Testkube in an air-gapped environment

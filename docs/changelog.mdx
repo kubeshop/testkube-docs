@@ -8,6 +8,47 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Monthly Release v2.7.0 (2026-03-04)
+
+Control Plane and Agent continue with unified versioning in `2.7.x`.
+
+### What's new!
+
+#### Control Plane owns Testkube Resource management
+
+Starting in `v2.7`, Testkube Resource ownership moves to the Control Plane for commercial deployments.
+For most users, this means workflow and schedule management is now centered in Control Plane with no workflow changes required.
+Environment health no longer depends on continuous SuperAgent connectivity, and environments no longer automatically enter read-only mode when that connection is unavailable.
+
+If you're upgrading from a Testkube previous version, your existing SuperAgent(s) will automatically migrate your Testkube Environment(s) with the new source-of-truth model.
+
+Read more: [Testkube Resource Management](/articles/testkube-resource-management)
+
+#### Workflow sync behavior in GitOps Deployments
+
+If your team manages Testkube Resources as CRDs, enable and validate newly introduced **GitOps Agent** so Git-managed CRD updates continue to reconcile as expected.
+
+Read more about [GitOps with Testkube](/articles/gitops-overview) and [Testkube Agents](/articles/agents-overview).
+
+### Observability updates
+
+A large set of SuperAgent Prometheus metrics is now available in Control Plane.
+
+Read more: [Control Plane Metrics](/articles/control-plane-metrics)
+
+### AI Updates
+
+- External MCP Servers now support OAuth authentication.
+- Many improvements and bug-fixes to the orchestration engine.
+
+### Improvements and fixes
+
+- Removed the deprecated native Slack integration configuration from Helm values: `slackToken`, `slackSecret`, and `slackConfig`.
+- Slack notifications should now be configured with Testkube Webhooks - [Read more](/articles/slack-integration).
+- Extended support in JUnit visualization for non-numeric time values, such as 200ms, 2s, 0.2m, and 0.2h.
+- Update MongoDB image and helm chart to use latest patch version available, MongoDB version `8.2.5`.
+- Update PostgreSQL image and helm chart to use latest patch version available, PostgreSQL version `18.2`.
+
 ## Patch Release v2.6.4 (2026-02-27)
 
 This release introduces polished and improvements around our [SCIM integration](/articles/scim).
@@ -106,7 +147,7 @@ These tools make it easier for AI assistants to perform bulk analysis and genera
 - AI service now uses two model types: a primary model for complex agent tasks and a lightweight model for quick tasks like generating session titles.
 - Default models updated to `gpt-5.2` (primary) and `gpt-5-mini` (lightweight), with optional temperature settings for models that support it.
 - Control Plane scheduler improvements: synchronized MongoDB and PostgreSQL implementations, resolved race conditions during test workflow execution scheduling.
-- Added scheduler metrics to improve scheduler observability and monitoring - [Read more about Scheduler Metrics](/articles/scheduler-metrics)
+- Added scheduler metrics to improve scheduler observability and monitoring - [Read more about Scheduler Metrics](/articles/control-plane-metrics)
 - Fixed an issue where the member details view did not correctly show permissions inherited from resource groups.
 
 ## Patch Release (2025-12-23)
@@ -409,7 +450,7 @@ This release is available in Helm Chart v2.322.1.
 
 This release comes with a new way to deploy Runner Agents and several improvements to workflows.
 
-You can now install a Runner Agent using only Helm. Previously a Runner Agent had to be registered using the CLI or UI prior to Helm install. This feature can be used to create Runner Agents for ephemeral environments in a single step. [Documentation is available here](/articles/multi-agent-runner-helm-chart#self-registering-runner-agent-helm-install).
+You can now install a Runner Agent using only Helm. Previously a Runner Agent had to be registered using the CLI or UI prior to Helm install. This feature can be used to create Runner Agents for ephemeral environments in a single step. [Documentation is available here](/articles/multi-agent-runner-helm-chart#self-registering-agent-helm-install).
 
 Users can now create custom views to group workflows by any criteria, making it easier to organize workflows that belong together or quickly access frequently used filtered results. These views are shared between all the users of a given environment.
 

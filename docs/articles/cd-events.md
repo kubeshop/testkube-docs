@@ -4,6 +4,10 @@
 
 As of the 1.12 release, Testkube can emit standard CDEvents to a webhook endpoint. This can be used to integrate with any CD tool that supports the CDEvents standard.
 
+:::note
+As of Testkube 2.7.0, you need a **Webhook Agent** in your Testkube Environment to emit CDEvents - [Read More](/articles/agents-overview#webhook-agents)
+:::
+
 ## Step 1 - Enable CDEvents
 
 To enable CDEvents, you need to set the following Helm
@@ -21,7 +25,7 @@ helm upgrade \
 
 For testing purposes you can use [webhook.site](https://webhook.site/) to get a webhook URL.
 
-## Step 2 - Test Emmiting CDEvents
+## Step 2 - Test Emitting CDEvents
 
 To test emitting CDEvents, create a sample Test Workflow with Testkube and run it.
 
@@ -31,7 +35,7 @@ testkube create testworkflow -f EXAMPLE_FILE.yaml
 testkube run testworkflow TEST_WORKFLOW_NAME -f
 ```
 
-Check the webhook sink to see the CDEvent emitted by Testkube. An event like the following should have been emmitted: 
+Check the webhook sink to see the CDEvent emitted by Testkube. An event like the following should have been emitted: 
 <!-- Please check the code outputs. This may require update -->
 ```json 
 {

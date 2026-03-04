@@ -1,0 +1,25 @@
+[files]
+extend-exclude = [
+    "docs/cli/",
+    "docs/legacy-cli/",
+    "docs/openapi/",
+    "docs/crd/",
+    "docs/articles/inventory/",
+    "docs/articles/crds/",
+    "node_modules/",
+    "build/",
+    "src/openapi/",
+    "static/openapi/",
+    "*.png",
+    "*.jpg",
+    "*.svg",
+    "*.gif",
+]
+
+[default.extend-words]
+iam = "iam"
+daa = "daa"
+
+[default.extend-identifiers]
+# Docker image hashes
+daa69 = "daa69"

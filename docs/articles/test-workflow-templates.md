@@ -143,7 +143,7 @@ spec:
     - shell: echo 1
 ```
 
-**Inlining the same property will cause it to be overriden.**
+**Inlining the same property will cause it to be overridden.**
 
 To illustrate, the `serviceAccountName` within workflow will always be `test-restricted`.
 Since the template is fully merged before executions starts, its not that the service account name
@@ -213,7 +213,7 @@ spec:
 **Inlining within run will work (almost) exactly the same as top-level.**
 
 It will take the spec and put it at the place where the template is used.
-One exeception is that the whole `pod` object will be removed beforehand.
+One exception is that the whole `pod` object will be removed beforehand.
 
 ```yaml title="Example inlining the same list"
 apiVersion: testworkflows.testkube.io/v1

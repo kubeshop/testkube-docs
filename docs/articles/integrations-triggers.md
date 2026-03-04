@@ -31,7 +31,7 @@ configuration](/articles/test-triggers#resource-conditions) you can modify the g
 
 You will initially be prompted for
 
-- the **Name** of the Trigger - must be a valid Kubernetes name as Triggers are stored as CRDs in your cluster.
+- the **Name** of the Trigger - must be a valid Kubernetes resource name.
 - the **K8s Resource** kind to monitor for events.
 - the **Resources Identifier** for which resources to monitor, can either be a list of Kubernetes Labels or a specific resource name.
 - the **Triggered event** to listen for.

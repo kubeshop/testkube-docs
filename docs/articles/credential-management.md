@@ -50,7 +50,7 @@ Follow this steps to create an Organization-scoped credential:
 1. Click the Organization dropdown menu and select the **Organization Management** page.
 2. Select **Credentials (Variables & Secrets)** from the left sidenav menu.
 3. Click **Add new variable** and create a credential with either **Plaintext** or **Encrypted** type.
-4. After you have added all of your credentials, make sure to to click the **Save** button!
+4. After you have added all of your credentials, make sure to click the **Save** button!
 
 ![Organization credentials](images/organization-credentials.png)
 
@@ -60,7 +60,7 @@ Follow this steps to create an Environment-scoped credential:
 1. Click the Environment dropdown menu and select the **Environment settings** page.
 2. Select **Credentials (Variables & Secrets)** from the left sidenav menu.
 3. Click **Add new variable** and create a credential with either **Plaintext** or **Encrypted** type.
-4. After you have added all of your credentials, make sure to to click the **Save** button!
+4. After you have added all of your credentials, make sure to click the **Save** button!
 
 ![Environment credentials](images/environment-credentials.png)
 

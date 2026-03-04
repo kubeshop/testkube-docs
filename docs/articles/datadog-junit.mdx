@@ -4,8 +4,8 @@ Datadog’s CI / Test Visibility product can ingest JUnit XML reports so you can
 
 ## How it works
 
-1. Your test step produces JUnit XML files and saves them under the default working directory (/data/repo/) or any directy path specified for the testing tool executing the tests and writing the JUnit output
-2. A template step runs the official `datadog/ci` container and calls `datadog-ci junit upload`, passing paramaterized metadata such as the service name or working directory
+1. Your test step produces JUnit XML files and saves them under the default working directory (/data/repo/) or any directly path specified for the testing tool executing the tests and writing the JUnit output
+2. A template step runs the official `datadog/ci` container and calls `datadog-ci junit upload`, passing parameterized metadata such as the service name or working directory
 3. Any TestWorkflow can reference the template with a single `template:` step, keeping your pipelines clean and DRY
 
 ---
@@ -67,7 +67,7 @@ spec:
 ### A few notes
 
 - Append `--dry-run` to the `args` list to validate that the CLI discovers your XML files without actually sending data. Remove it once the output looks correct.
-- This template is parameterized to accept a “service” name used by the DataDog CLI to align the test results with a DataDog "service" - modify the configuartion element with the parameters needed for your command configuration
+- This template is parameterized to accept a “service” name used by the DataDog CLI to align the test results with a DataDog "service" - modify the configuration element with the parameters needed for your command configuration
 
 ---
 

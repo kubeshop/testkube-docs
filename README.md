@@ -83,6 +83,41 @@ You can create tabs for structuring your content, for example as in the [CLI Ins
 Please note that headlines inside tab content will be shown in the navigation menu to the right, but will not
 work as direct links from external sources unless they are under the default/first tab.
 
+## Spell & Grammar Checking
+
+This repo uses [Vale](https://vale.sh/) for grammar/style linting and [typos](https://github.com/cburber/typos) for auto-fixing common spelling mistakes.
+
+### Setup
+
+```bash
+brew install vale typos-cli   # macOS
+vale sync                     # download Vale style packages
+```
+
+### Auto-fix spelling with typos
+
+```bash
+typos docs/articles/                       # preview corrections (dry run)
+typos docs/articles/ --diff                # show a diff of what would change
+typos docs/articles/ --write-changes       # apply corrections in-place
+```
+
+Configuration is in `_typos.toml` (excluded paths, allowed words).
+
+### Grammar & style linting with Vale
+
+```bash
+vale docs/articles/                           # check all articles
+vale docs/articles/agents-overview.md         # check a single file
+vale --minAlertLevel error docs/articles/     # show only errors (spelling, etc.)
+```
+
+### Tuning
+
+- **typos**: Add allowed words to `[default.extend-words]` in `_typos.toml`
+- **Vale vocabulary**: Add accepted terms to `.vale/styles/config/vocabularies/Testkube/accept.txt`
+- **Vale rules**: Disable noisy rules in `.vale.ini` by adding e.g. `Google.Passive = NO` under `[*.{md,mdx}]`
+
 ## Search Indexing
 
 For search, we've indexed all the pages into 3 distinct categories `Main`, `Reference` and `Legacy`.

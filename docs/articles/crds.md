@@ -1,8 +1,13 @@
 # Testkube Custom Resources
 
-Most Testkube objects like Workflows, WorkflowTemplates, Triggers, etc. are 
-defined as [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
-and stored in the cluster where your Agents are installed.
+:::info
+As of Testkube v2.7, Testkube Resources are stored in the Control Plane - [Read More](/articles/testkube-resource-management). 
+CRDs are still used by the [GitOps Agent](/articles/agents-overview#gitops-agents) to sync resources from Kubernetes 
+into the Control Plane and by the [Standalone Agent](/articles/install/standalone-agent) for local resource management.
+:::
+
+Testkube defines several [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) 
+types for use with [Standalone Agent](/articles/install/standalone-agent) and [GitOps Agent](/articles/agents-overview#gitops-agents) deployments.
 
 The following Resource Group/Versions are available (click for documentation)
 
@@ -16,7 +21,7 @@ The following Resource Group/Versions are available (click for documentation)
 More detailed schema docs are also available at https://doc.crds.dev/github.com/kubeshop/testkube-operator
 :::
 
-The current definitions can be found in the [kubeshop/testkube-operator](https://github.com/kubeshop/testkube-operator/tree/main/config/crd) repository.
+The current CRD definitions can be found in the [kubeshop/testkube](https://github.com/kubeshop/testkube) repository.
 
 ## Checking installed CRDs
 
