@@ -26,6 +26,16 @@ There are two types of credentials:
 
 **Example**: API base URL, test database name, environment-specific settings
 
+:::info On-Prem Requirement for Encrypted Secrets
+For on-prem installations, the **Secret** (encrypted) credential type requires a master password to be configured
+on the control plane. Without it, only **Variable** (plaintext) credentials can be stored.
+
+See [Credentials Encryption](/articles/install/advanced-install#credentials-encryption) in the installation
+guide for setup instructions.
+
+Testkube Cloud users do not need to configure this — encryption is enabled by default.
+:::
+
 ### Scopes
 
 Credentials can be scoped on 3 different levels:

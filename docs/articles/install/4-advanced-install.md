@@ -100,6 +100,45 @@ testkube-ai-service:
 
 It's possible to implement same headers with other ingress controllers or traffic managers, check the annotations or CRDs of the solution selected to expose Testkube On-Prem Control Plane components in your setup.
 
+## Credentials Encryption
+
+Testkube supports storing encrypted secrets (passwords, API keys, tokens, etc.) as [Credentials](/articles/credential-management).
+To enable this, you must configure a master password that is used to derive the encryption keys for secrets stored in the database.
+
+:::warning
+The master password cannot be recovered. If it is lost, all previously encrypted secrets will become unreadable
+and will need to be recreated. Store it securely.
+:::
+
+### Configuring the Master Password
+
+The recommended approach is to store the master password in a Kubernetes Secret and reference it in your Helm values.
+
+First, create the secret (the password must be at least 32 characters):
+
+```bash
+kubectl create secret generic testkube-master-password \
+  --from-literal=password=$(openssl rand -base64 48) \
+  -n testkube
+```
+
+Then reference it in your `values.yaml`:
+
+```yaml
+global:
+  credentials:
+    masterPassword:
+      secretKeyRef:
+        name: testkube-master-password
+        key: password
+```
+
+Alternatively, you can set the password directly in your Helm values using `global.credentials.masterPassword.value`,
+but this is not recommended for production environments.
+
+Without a master password configured, only plaintext **Variable** credentials can be created. Attempting to create
+an encrypted **Secret** credential will result in an error.
+
 ## Organization Management
 
 ### Bootstrap Member Mapping
