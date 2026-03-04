@@ -205,6 +205,13 @@ Alternatively, you can use [a local database with static users](/articles/auth#s
 
 Once authenticated, users will also need to be invited to org. By default, new users will automatically join the default organization. You can change this behaviour by changing [the bootstrap and invitation configuration][advanced-bootstrap].
 
+### Credentials Encryption
+
+Testkube requires a master password to enable encrypted credential storage and to sign execution tokens used by
+runners. Without it, only plaintext variables can be stored and workflow executions that use credentials will fail.
+
+See [Credentials Encryption][advanced-credentials] in the custom installation guide for configuration steps.
+
 ### Prometheus Metrics
 
 Testkube exposes Prometheus metrics on the `/metrics` endpoint and uses a `ServiceMonitor` resource to expose 
@@ -255,5 +262,6 @@ organization management, custom ingress controllers, production environments, an
 [advanced]: /articles/install/advanced-install
 [secret-license]: /articles/install/install-with-helm#testkube-license
 [advanced-bootstrap]: /articles/install/advanced-install#organization-management
+[advanced-credentials]: /articles/install/advanced-install#credentials-encryption
 [ss-license]: /articles/install/install-with-helm#testkube-license
 

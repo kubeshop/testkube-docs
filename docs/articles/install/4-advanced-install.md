@@ -7,6 +7,46 @@ See [Components](/articles/helm-components) for a list of all included component
 Helm Charts with a list of their available properties.
 :::
 
+## Master Password for Encryption
+
+Testkube requires a **master password** to enable encrypted [Credential](/articles/credential-management) storage
+and to sign the tokens that allow runners to securely retrieve credentials during workflow execution.
+
+:::warning Important
+Without a master password configured:
+- Only plaintext **Variable** credentials can be created — encrypted **Secret** credentials will be rejected.
+- Workflow executions that use credentials will fail because the runner cannot obtain a valid execution token.
+
+The master password cannot be recovered. If it is lost, all previously encrypted secrets will become unreadable
+and will need to be recreated. Store it securely.
+:::
+
+### Configuring the Master Password
+
+The recommended approach is to store the master password in a Kubernetes Secret and reference it in your Helm values.
+
+First, create the secret (the password must be at least 32 characters):
+
+```bash
+kubectl create secret generic testkube-master-password \
+  --from-literal=password=$(openssl rand -base64 48) \
+  -n testkube
+```
+
+Then reference it in your `values.yaml`:
+
+```yaml
+global:
+  credentials:
+    masterPassword:
+      secretKeyRef:
+        name: testkube-master-password
+        key: password
+```
+
+Alternatively, you can set the password directly in your Helm values using `global.credentials.masterPassword.value`,
+but this is not recommended for production environments.
+
 ## Artifact storage & cleanup
 
 Testkube uses MinIO or any S3-compatible storage to store test artifacts by default.
@@ -99,48 +139,6 @@ testkube-ai-service:
 ```
 
 It's possible to implement same headers with other ingress controllers or traffic managers, check the annotations or CRDs of the solution selected to expose Testkube On-Prem Control Plane components in your setup.
-
-## Credentials Encryption
-
-Testkube supports storing encrypted secrets (passwords, API keys, tokens, etc.) as [Credentials](/articles/credential-management).
-To enable this, you must configure a master password that is used to:
-
-- **Encrypt credentials** — secrets stored in the database are encrypted using a key derived from the master password.
-- **Sign execution tokens** — when the scheduler dispatches a workflow execution to a runner, a signed token is generated so the runner can securely retrieve credentials. Without a master password, workflow executions that use credentials will fail.
-
-:::warning
-The master password cannot be recovered. If it is lost, all previously encrypted secrets will become unreadable
-and will need to be recreated. Store it securely.
-:::
-
-### Configuring the Master Password
-
-The recommended approach is to store the master password in a Kubernetes Secret and reference it in your Helm values.
-
-First, create the secret (the password must be at least 32 characters):
-
-```bash
-kubectl create secret generic testkube-master-password \
-  --from-literal=password=$(openssl rand -base64 48) \
-  -n testkube
-```
-
-Then reference it in your `values.yaml`:
-
-```yaml
-global:
-  credentials:
-    masterPassword:
-      secretKeyRef:
-        name: testkube-master-password
-        key: password
-```
-
-Alternatively, you can set the password directly in your Helm values using `global.credentials.masterPassword.value`,
-but this is not recommended for production environments.
-
-Without a master password configured, only plaintext **Variable** credentials can be created. Attempting to create
-an encrypted **Secret** credential will result in an error.
 
 ## Organization Management
 
