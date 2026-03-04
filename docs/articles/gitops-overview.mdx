@@ -96,6 +96,50 @@ resources not initially available in its namespace. For example:
 > - the Agent will sync Workflow B to the Environment, Workflow C will be left as is
 > - if Workflow B is deleted from Namespace A, the Agent will delete it from the Testkube Environment also
 
+### Temporarily Pausing GitOps Sync
+
+If you need to temporarily protect a Testkube resource from being changed by the GitOps sync agent,
+add the `testkube.io/no-gitops-sync` annotation to the resource:
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: api-integration-tests
+  annotations:
+    testkube.io/no-gitops-sync: "true"
+```
+
+When the value is set to `"true"`, Control Plane sync for that resource is skipped:
+
+- Update/create sync requests are accepted but ignored.
+- Delete sync requests are accepted but ignored.
+
+This applies to all resource types synced by the GitOps Agent: TestWorkflows, TestWorkflow Templates,
+TestTriggers, Webhooks, and Webhook Templates.
+
+#### Where to Place the Annotation
+
+You can add the annotation in **either** location depending on your use case:
+
+- **On the CRD in Kubernetes** -- prevents that specific CRD from ever being synced to the Control
+  Plane. Useful when a resource exists in the cluster for other purposes but should not appear in the
+  Testkube Environment.
+- **On the resource in the Control Plane** (via the Dashboard or API) -- protects the Control Plane
+  copy from being overwritten or deleted by any GitOps Agent. Useful when you need to make temporary
+  manual edits in the Control Plane without having them reverted on the next reconciliation cycle.
+
+:::info
+Because the annotation is checked on both the incoming CRD and the existing Control Plane resource,
+adding it in **either** location is sufficient to block sync for that resource.
+:::
+
+#### Re-enabling Sync
+
+To re-enable sync, remove the annotation (or set it to `"false"`) and then apply your desired
+resource state again from Git. If the annotation was set on the Control Plane resource, you also
+need to remove or update it there (via the Dashboard or API) before syncs will be applied again.
+
 ### Enable GitOps Agent via Helm
 
 Enable Kubernetes-to-Control-Plane sync in your agent Helm values.
@@ -234,30 +278,6 @@ spec:
 
 Consider creating a [Workflow Template](/articles/test-workflow-templates) to apply these 
 annotations consistently across all your workflows.
-
-### Temporarily Pausing GitOps Sync to Control Plane
-
-If you need to temporarily protect a Testkube resource from being changed by the GitOps sync agent,
-add the `testkube.io/no-gitops-sync` annotation to the resource:
-
-```yaml
-apiVersion: testworkflows.testkube.io/v1
-kind: TestWorkflow
-metadata:
-  name: api-integration-tests
-  annotations:
-    testkube.io/no-gitops-sync: "true"
-```
-
-When the value is set to `"true"`, Control Plane sync for that resource is skipped:
-
-- Update/create sync requests are accepted but ignored.
-- Delete sync requests are accepted but ignored.
-
-This allows temporary manual edits in the Control Plane without being overwritten by GitOps sync.
-
-To re-enable sync, remove the annotation (or set it to `"false"`) and then apply your desired
-resource state again from Git.
 
 ### Sync Waves for Proper Ordering
 
