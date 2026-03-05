@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:0a0b7a6a9e5613f5bed88676449189d2df83f1671d11fb52a62a35202efdeb36</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 5" src="https://img.shields.io/badge/high-5-e25d68"/> <img alt="medium: 18" src="https://img.shields.io/badge/medium-18-fbb552"/> <img alt="low: 5" src="https://img.shields.io/badge/low-5-fce1a9"/> <!-- unspecified: 0 --></td></tr>
-<tr><td>platform</td><td>linux/amd64</td></tr>
-<tr><td>size</td><td>70 MB</td></tr>
-<tr><td>packages</td><td>256</td></tr>
+<tr><td>digest</td><td><code>sha256:35e7663d747d9390bc2cad071f49d7d972b014d1e7114192efe09a86217cfad6</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 5" src="https://img.shields.io/badge/high-5-e25d68"/> <img alt="medium: 18" src="https://img.shields.io/badge/medium-18-fbb552"/> <img alt="low: 5" src="https://img.shields.io/badge/low-5-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>platform</td><td>linux/arm64</td></tr>
+<tr><td>size</td><td>65 MB</td></tr>
+<tr><td>packages</td><td>255</td></tr>
 </table>
 </details></table>
 </details>
@@ -15,10 +15,10 @@ hide_table_of_contents: true
 <tr><td valign="top">
 <details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 3" src="https://img.shields.io/badge/H-3-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/M-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libssl3</strong> <code>3.3.5-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/libssl3@3.3.5-r0?arch=x86_64&distro=alpine-3.20.8&upstream=openssl</code></small><br/>
+<small><code>pkg:apk/alpine/libssl3@3.3.5-r0?arch=aarch64&distro=alpine-3.20.8&upstream=openssl</code></small><br/>
 
 ```dockerfile
-# api-server.Dockerfile (33:33)
+# api-server.Dockerfile (29:29)
 FROM ${ALPINE_IMAGE}
 ```
 
@@ -198,10 +198,10 @@ FROM ${ALPINE_IMAGE}
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>c-ares</strong> <code>1.33.1-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/c-ares@1.33.1-r0?arch=x86_64&distro=alpine-3.20.8</code></small><br/>
+<small><code>pkg:apk/alpine/c-ares@1.33.1-r0?arch=aarch64&distro=alpine-3.20.8</code></small><br/>
 
 ```dockerfile
-# api-server.Dockerfile (34:34)
+# api-server.Dockerfile (30:30)
 RUN apk --no-cache add ca-certificates libssl3 git
 ```
 
@@ -248,7 +248,7 @@ RUN apk --no-cache add ca-certificates libssl3 git
 <small><code>pkg:golang/go.opentelemetry.io/otel/sdk@1.34.0</code></small><br/>
 
 ```dockerfile
-# api-server.Dockerfile (36:36)
+# api-server.Dockerfile (32:32)
 COPY --from=build /app /bin/app
 ```
 
@@ -284,10 +284,10 @@ This has been patched in [d45961b](https://github.com/open-telemetry/opentelemet
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 6" src="https://img.shields.io/badge/M-6-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>libcurl</strong> <code>8.14.1-r2</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/libcurl@8.14.1-r2?arch=x86_64&distro=alpine-3.20.8&upstream=curl</code></small><br/>
+<small><code>pkg:apk/alpine/libcurl@8.14.1-r2?arch=aarch64&distro=alpine-3.20.8&upstream=curl</code></small><br/>
 
 ```dockerfile
-# api-server.Dockerfile (34:34)
+# api-server.Dockerfile (30:30)
 RUN apk --no-cache add ca-certificates libssl3 git
 ```
 
@@ -416,10 +416,10 @@ RUN apk --no-cache add ca-certificates libssl3 git
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>ssl_client</strong> <code>1.36.1-r30</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/ssl_client@1.36.1-r30?arch=x86_64&distro=alpine-3.20.8&upstream=busybox</code></small><br/>
+<small><code>pkg:apk/alpine/ssl_client@1.36.1-r30?arch=aarch64&distro=alpine-3.20.8&upstream=busybox</code></small><br/>
 
 ```dockerfile
-# api-server.Dockerfile (33:33)
+# api-server.Dockerfile (29:29)
 FROM ${ALPINE_IMAGE}
 ```
 
@@ -480,10 +480,10 @@ FROM ${ALPINE_IMAGE}
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>libexpat</strong> <code>2.7.3-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/libexpat@2.7.3-r0?arch=x86_64&distro=alpine-3.20.8&upstream=expat</code></small><br/>
+<small><code>pkg:apk/alpine/libexpat@2.7.3-r0?arch=aarch64&distro=alpine-3.20.8&upstream=expat</code></small><br/>
 
 ```dockerfile
-# api-server.Dockerfile (34:34)
+# api-server.Dockerfile (30:30)
 RUN apk --no-cache add ca-certificates libssl3 git
 ```
 
@@ -494,7 +494,7 @@ RUN apk --no-cache add ca-certificates libssl3 git
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.7.4-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.7.4-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.006%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.007%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
 </table>
 
@@ -530,7 +530,7 @@ RUN apk --no-cache add ca-certificates libssl3 git
 <small><code>pkg:golang/github.com/nats-io/nats-server/v2@2.11.4</code></small><br/>
 
 ```dockerfile
-# api-server.Dockerfile (36:36)
+# api-server.Dockerfile (32:32)
 COPY --from=build /app /bin/app
 ```
 
@@ -584,7 +584,7 @@ This was reported to the NATS maintainers by Pavel Kohout of Aisle Research (www
 <small><code>pkg:golang/github.com/go-jose/go-jose@2.6.3%2Bincompatible</code></small><br/>
 
 ```dockerfile
-# api-server.Dockerfile (36:36)
+# api-server.Dockerfile (32:32)
 COPY --from=build /app /bin/app
 ```
 
@@ -626,7 +626,7 @@ This is the same sort of issue as in the golang.org/x/oauth2/jws package as CVE-
 <small><code>pkg:golang/github.com/gofiber/fiber/v2@2.52.11</code></small><br/>
 
 ```dockerfile
-# api-server.Dockerfile (36:36)
+# api-server.Dockerfile (32:32)
 COPY --from=build /app /bin/app
 ```
 
@@ -909,10 +909,10 @@ Until patched, users should:
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>zlib</strong> <code>1.3.1-r1</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/zlib@1.3.1-r1?arch=x86_64&distro=alpine-3.20.8</code></small><br/>
+<small><code>pkg:apk/alpine/zlib@1.3.1-r1?arch=aarch64&distro=alpine-3.20.8</code></small><br/>
 
 ```dockerfile
-# api-server.Dockerfile (33:33)
+# api-server.Dockerfile (29:29)
 FROM ${ALPINE_IMAGE}
 ```
 
