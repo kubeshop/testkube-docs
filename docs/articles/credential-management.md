@@ -41,6 +41,12 @@ in the installation guide.
 Testkube Cloud users do not need to configure this — it is enabled by default.
 :::
 
+:::tip Disabling Credentials
+On-prem users who manage secrets externally (e.g. HashiCorp Vault) can disable
+credentials entirely or turn off just the encrypted backend.
+See [Disabling Credentials](/articles/install/advanced-install#disabling-credentials) for details.
+:::
+
 ### Scopes
 
 Credentials can be scoped on 3 different levels:
