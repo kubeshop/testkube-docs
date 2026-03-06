@@ -34,72 +34,12 @@ retrieve secrets during workflow execution.
 Without a master password, only **Variable** (plaintext) credentials can be stored, and workflow executions
 that require credentials will fail.
 
-See [Credentials Encryption](/articles/install/advanced-install#credentials-encryption) in the installation
-guide for setup instructions.
+For setup details, runtime behavior, and recovery notes, see
+[Master Password for Encryption](/articles/install/advanced-install#master-password-for-encryption)
+in the installation guide.
 
 Testkube Cloud users do not need to configure this — it is enabled by default.
 :::
-
-### What does the master password protect?
-
-In on-premise setups, the master password became a hard requirement for credentials + runner execution flows starting with v1.13.0 (introduced with execution-token based runner authentication). 
-
-It is used in multiple control-plane paths, not just secret storage:
-
-* Deriving encryption keys for **Secret credential values**.
-* Creating and validating **Agent secret keys** (Runner/GitOps agent authentication).
-* Signing execution tokens that runners use during workflow execution.
-
-All of these use the same runtime secret value:
-
-* Environment variable: `CREDENTIALS_MASTER_PASSWORD`
-* Helm values:
-  * `global.credentials.masterPassword.secretKeyRef` (recommended)
-  * `global.credentials.masterPassword.value` (not recommended for production)
-
-The error in logs:
-
-```text
-cannot fetch agent ... error="missing master password for secret keys"
-```
-
-means the control-plane attempted to create or read agent secret-key crypto state without the password being set.
-
-Set it before startup with one of the following examples:
-
-```bash
-kubectl create secret generic testkube-master-password \
-  --from-literal=password="$(openssl rand -base64 48)" \
-  -n <namespace>
-```
-
-```yaml
-global:
-  credentials:
-    masterPassword:
-      secretKeyRef:
-        name: testkube-master-password
-        key: password
-```
-
-```yaml
-global:
-  credentials:
-    masterPassword:
-      value: "<your-strong-password>"
-```
-
-### Where is it stored?
-
-`masterPassword` is **not stored in MongoDB** as a plain field that can be inspected.
-It is a runtime secret used to derive crypto material, and without it existing encrypted records cannot be decrypted.
-
-For on-prem, this is a critical operational dependency:
-
-* Never rotate it casually.
-* If it is lost, encrypted secrets must be recreated and agent secrets reissued.
-
-`POST /organizations/<organizationId>/agents/<agentIdOrName>/regenerate` regenerates an agent secret key for affected agents.
 
 ### Scopes
 
