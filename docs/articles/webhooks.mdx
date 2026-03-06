@@ -392,18 +392,6 @@ Webhooks can be triggered on any of the following events:
 - end-testworkflow-canceled
 - end-testworkflow-not-passed
 
-### Create/Update/Delete Events
-
-- created
-- updated
-- deleted
-
-They can be triggered by the following resources:
-
-- testworkflow
-- trigger
-- webhook
-
 ### Events for State Changes
 
 It is possible to get notified by webhooks only when the latest execution's outcome differs from the previous one. This way you can see instantly when one of your scheduled tests was healed or when they got broken. It could also help prevent alert fatigue by deduplicating the alerts and therefore decreasing the load on your monitoring systems.
