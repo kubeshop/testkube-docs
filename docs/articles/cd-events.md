@@ -8,6 +8,10 @@ As of the 1.12 release, Testkube can emit standard CDEvents to a webhook endpoin
 As of Testkube 2.7.0, you need a **Webhook Agent** in your Testkube Environment to emit CDEvents - [Read More](/articles/agents-overview#webhook-agents)
 :::
 
+:::warning As of Testkube 2.7.0 — resource lifecycle
+In 2.7.0, resources are stored in the Control Plane database. CDEvents for **resource lifecycle** (created, updated, deleted) are not emitted when workflows or other resources are created, updated, or deleted via the Control Plane (e.g. the dashboard). See the [Changelog — v2.7.0](/changelog#monthly-release-v270-2026-03-04) for details and the planned fix in the next monthly release.
+:::
+
 ## Step 1 - Enable CDEvents
 
 To enable CDEvents, you need to set the following Helm
