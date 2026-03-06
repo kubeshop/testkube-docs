@@ -30,14 +30,23 @@ If your team manages Testkube Resources as CRDs, enable and validate newly intro
 
 Read more about [GitOps with Testkube](/articles/gitops-overview) and [Testkube Agents](/articles/agents-overview).
 
-### API changes
+:::warning
+### Breaking changes
 
-:::warning Breaking API change
+#### API endpoints
+
 The legacy execution groups endpoint was removed in `v2.7.0`:
 `GET /organizations/{orgId}/environments/{environmentId}/test-workflows/{workflowId}/execution-groups`
 
-Use the executions list endpoint instead:
+-> Use the executions list endpoint instead:
 `GET /organizations/{orgId}/environments/{environmentId}/agent/test-workflows/{workflowId}/executions`
+
+#### Kubernetes lifecycle events
+If you rely on [Kubernetes Events](/articles/k8s-events#resource-lifecycle-events) or [CDEvents](/articles/cd-events) for 
+resource lifecycle (e.g. to trigger automation when a workflow is created from the dashboard), those will not fire 
+for the Control Plane - originated changes mentioned above. This behavior will be fixed at the latest in 
+the **next monthly release at the end of March**.
+
 :::
 
 ### Observability updates
