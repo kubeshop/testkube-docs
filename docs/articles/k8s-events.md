@@ -49,6 +49,19 @@ Testkube emits Kubernetes Events for the following event types:
 | `updated` | `updated` | A Testkube resource was updated |
 | `deleted` | `deleted` | A Testkube resource was deleted |
 
+### Supported resource types
+
+Not all event types apply to every resource. Events are emitted as follows:
+
+- **TestWorkflow execution events** (queued, started, succeed, failed, aborted, canceled) are emitted for **TestWorkflows** only. Each event is tied to a specific TestWorkflow and its execution. The Kubernetes Event’s **InvolvedObject** points to that TestWorkflow resource so you can correlate events with a workflow by name and namespace.
+
+- **Resource lifecycle events** (created, updated, deleted) are emitted when the following Testkube resources change:
+  - **Triggers** (TestTrigger) — when a trigger is created, updated, or deleted
+  - **Webhooks** — when a webhook is created, updated, or deleted
+  - **Webhook templates** — when a webhook template is created, updated, or deleted
+
+  For these lifecycle events, the event **Reason** and **Action** (e.g. `created` / `created`) identify what happened; the specific resource that changed (trigger, webhook, or webhook template) is not set on the Kubernetes Event’s **InvolvedObject**. To correlate lifecycle events with a particular resource, use the event **Name**, **Reason**, and **Message** together with your own tooling or labels.
+
 ## Event Structure
 
 Each Kubernetes Event created by Testkube has the following structure:
@@ -63,8 +76,8 @@ Each Kubernetes Event created by Testkube has the following structure:
 | **Message** | `executionId=<execution-id>` for workflow executions |
 | **ReportingController** | `testkube.io/services` |
 | **ReportingInstance** | `testkube.io/services/testkube-api-server` |
-| **InvolvedObject** | References the `TestWorkflow` resource that triggered the event |
-| **Labels** | Inherited from the TestWorkflow's labels |
+| **InvolvedObject** | For **TestWorkflow execution events**: references the TestWorkflow resource (name, namespace, labels). For **resource lifecycle events**: references a generic Testkube object, not the specific Trigger, Webhook, or WebhookTemplate that changed. |
+| **Labels** | For workflow execution events: inherited from the TestWorkflow's labels. For lifecycle events: not set from the resource. |
 
 ## Querying Events
 
