@@ -30,6 +30,16 @@ If your team manages Testkube Resources as CRDs, enable and validate newly intro
 
 Read more about [GitOps with Testkube](/articles/gitops-overview) and [Testkube Agents](/articles/agents-overview).
 
+### API changes
+
+:::warning Breaking API change
+The legacy execution groups endpoint was removed in `v2.7.0`:
+`GET /organizations/{orgId}/environments/{environmentId}/test-workflows/{workflowId}/execution-groups`
+
+Use the executions list endpoint instead:
+`GET /organizations/{orgId}/environments/{environmentId}/agent/test-workflows/{workflowId}/executions`
+:::
+
 ### Observability updates
 
 A large set of SuperAgent Prometheus metrics is now available in Control Plane.
