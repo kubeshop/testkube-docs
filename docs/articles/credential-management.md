@@ -34,8 +34,9 @@ retrieve secrets during workflow execution.
 Without a master password, only **Variable** (plaintext) credentials can be stored, and workflow executions
 that require credentials will fail.
 
-See [Credentials Encryption](/articles/install/advanced-install#credentials-encryption) in the installation
-guide for setup instructions.
+For setup details, runtime behavior, and recovery notes, see
+[Master Password for Encryption](/articles/install/advanced-install#master-password-for-encryption)
+in the installation guide.
 
 Testkube Cloud users do not need to configure this — it is enabled by default.
 :::

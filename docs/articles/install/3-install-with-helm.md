@@ -262,6 +262,5 @@ organization management, custom ingress controllers, production environments, an
 [advanced]: /articles/install/advanced-install
 [secret-license]: /articles/install/install-with-helm#testkube-license
 [advanced-bootstrap]: /articles/install/advanced-install#organization-management
-[advanced-credentials]: /articles/install/advanced-install#credentials-encryption
+[advanced-credentials]: /articles/install/advanced-install#master-password-for-encryption
 [ss-license]: /articles/install/install-with-helm#testkube-license
-

@@ -7,6 +7,8 @@ See [Components](/articles/helm-components) for a list of all included component
 Helm Charts with a list of their available properties.
 :::
 
+<a id="credentials-encryption"></a>
+
 ## Master Password for Encryption
 
 Testkube requires a **master password** to enable encrypted [Credential](/articles/credential-management) storage
@@ -20,6 +22,32 @@ Without a master password configured:
 The master password cannot be recovered. If it is lost, all previously encrypted secrets will become unreadable
 and will need to be recreated. Store it securely.
 :::
+
+### What the master password protects
+
+In on-premise setups, the master password became a hard requirement for credentials and runner execution flows
+starting with v1.13.0, when execution-token based runner authentication was introduced.
+
+It is used in multiple control-plane paths, not just secret storage:
+
+* Deriving encryption keys for **Secret** credential values
+* Creating and validating **Agent secret keys** for Runner and GitOps agent authentication
+* Signing execution tokens that runners use during workflow execution
+
+All of these use the same runtime secret value:
+
+* Environment variable: `CREDENTIALS_MASTER_PASSWORD`
+* Helm values:
+  * `global.credentials.masterPassword.secretKeyRef` (recommended)
+  * `global.credentials.masterPassword.value` (not recommended for production)
+
+If you see the following log message:
+
+```text
+cannot fetch agent ... error="missing master password for secret keys"
+```
+
+the control plane attempted to create or read agent secret-key crypto state without the password being set.
 
 ### Configuring the Master Password
 
@@ -46,6 +74,26 @@ global:
 
 Alternatively, you can set the password directly in your Helm values using `global.credentials.masterPassword.value`,
 but this is not recommended for production environments.
+
+```yaml
+global:
+  credentials:
+    masterPassword:
+      value: "<your-strong-password>"
+```
+
+### Storage and recovery considerations
+
+`masterPassword` is not stored in MongoDB as a plain field that can be inspected. It is a runtime secret used to
+derive crypto material, and without it existing encrypted records cannot be decrypted.
+
+For on-prem, this is a critical operational dependency:
+
+* Never rotate it casually
+* If it is lost, encrypted secrets must be recreated and agent secrets reissued
+
+`POST /organizations/<organizationId>/agents/<agentIdOrName>/regenerate` regenerates an agent secret key for
+affected agents.
 
 ## Artifact storage & cleanup
 
