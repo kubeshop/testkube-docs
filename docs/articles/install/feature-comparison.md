@@ -1,6 +1,7 @@
 # Testkube Agent Feature Comparison
 
-The below table shows a feature comparison between deploying the Testkube Agent in Standalone Mode vs Connected Mode - [Read More](/articles/install/standalone-agent).
+The below table shows a feature comparison between deploying the Testkube Agent in Standalone Mode vs when it is connected to the 
+commercial Control Plane - [Read More](/articles/install/standalone-agent).
 
 The Control Plane column applies to both On-Prem and Cloud deployments of the Control Plane.
 

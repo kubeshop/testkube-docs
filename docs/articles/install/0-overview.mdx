@@ -1,16 +1,25 @@
 # Testkube Installation Overview
 
-## Overview
+<div style={{ display: 'flex', gap: '40px', marginBottom: '20px' }}>
+  <div style={{ flex: 1 }}>
+    ## Overview
 
-Testkube contains two main components:
+    Testkube contains two main components:
 
-1. The **Testkube Control Plane**, which includes the [Dashboard](/articles/testkube-dashboard-explore), Storage for Resources/Results/Logs/Artifacts, Scheduling, User/Role mgmt, Insights, 3rd party integrations, etc. - [Read More](/articles/testkube-resource-management)
+    1. The **Testkube Control Plane**, which includes the [Dashboard](/articles/testkube-dashboard-explore), Storage for Resources/Results/Logs/Artifacts, Scheduling, User/Role mgmt, Insights, 3rd party integrations, etc.
 
-2. One or more **Testkube Agents** with specific [capabilities](/articles/agents-overview): executing Test Workflows (Runner), listening for Kubernetes Events (Listener), syncing CRDs via GitOps (GitOps), and emitting Webhooks/CDEvents (Webhook).
+    2. One or more **Testkube Agents** with specific [capabilities](/articles/agents-overview): executing Test Workflows (Runner), listening for Kubernetes Events (Listener), syncing CRDs via GitOps (GitOps), and emitting Webhooks/CDEvents (Webhook).
 
-   The Agent is **Open-Source** and can be deployed both Standalone and connected to the Control Plane.
+       The Agent is **Open-Source** and can be deployed both Standalone and connected to the Control Plane - [Read More](/articles/open-source).
 
-   **Agents are _always_ deployed by you in your own infrastructure.**
+       **Agents are _always_ deployed by you in your own infrastructure.**
+  </div>
+  <div style={{ flex: 1 }}>
+    <div style={{ textAlign: 'center' }}>
+      <img src="/img/testkube-components.png" alt="Testkube Components" />
+    </div>
+  </div>
+</div>
 
 ## Deployment Options
 

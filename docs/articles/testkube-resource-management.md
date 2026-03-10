@@ -16,10 +16,9 @@ Resources can still be provided to the Testkube Control Plane using CRDs in a Gi
 ### The Testkube Agent as the Source-of-Truth (Legacy)
 
 Up until version 2.7.0 of the Testkube, all Testkube Resources available in an Environment were stored and managed as CRDs in the
-namespace where the initial Environment Agent ("Superagent") was deployed. This design worked well for standalone agent deployments, but became increasingly 
-problematic for complex deployments using the Testkube Control Plane:
+namespace where the initial Environment Agent ("Superagent") was deployed. This design works well for [standalone agent deployments](/articles/install/standalone-agent), but became increasingly problematic for complex deployments when connecting the Agent to the Testkube Control Plane:
 
-- Whenever the initial Agent became unavailable (for example for networking reasons), the Control Plane and Dashboard would no longer have access to 
+- Whenever the Agent became unavailable (for example for networking reasons), the Control Plane and Dashboard would no longer have access to 
   the Testkube Resources in that Environment, resulting in the "Read Only" behaviour in the Dashboard.
 - Any action in the Testkube Dashboard that involved the retrieval/update of a Testkube Resources (for example updating a Workflow), would require 
   a round-trip to the Agent where the Resource was actually stored - which in large deployment would result in sluggish and sometimes fragile functionality.
@@ -79,10 +78,9 @@ flowchart LR
 
 ## What happens when migrating to 2.7.0
 
-When upgrading the Agent to the 2.7.0 version, it will automatically migrate existing Testkube resources to the Control Plane,
-in line with the new architecture described above. This migration should be transparent to users.
+When connecting a Standalone Agent to the Control Plane, or upgrading an already connected Agent to the 2.7.0 version, it will automatically migrate existing Testkube resources to the Control Plane, in line with the new architecture described above. This migration will be transparent to users.
 
-The Testkube Resources synced are
+The Testkube Resources migrated are
 
 - `TestWorkflow` (`testworkflows.testkube.io/v1`)
 - `TestWorkflowTemplate` (`testworkflows.testkube.io/v1`)

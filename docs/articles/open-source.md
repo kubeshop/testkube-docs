@@ -3,14 +3,19 @@
 The Testkube Agent is 100% Open Source and can be [deployed in standalone mode](install/standalone-agent) without being connected
 to the commercial Control Plane.
 
-Once deployed, you can interact with the agent through the [Testkube CLI](install/cli) or directly via the [Agent API](/openapi/overview#agent-api). 
+You can interact with the Standalone Agent through the [Testkube CLI](install/cli) or directly via the [Agent API](/openapi/overview#agent-api). 
 
 - Check out [Getting Started](/articles/getting-started-with-open-source) on how to quickly set up your first Test Workflows.
 - Read more about [Test Workflows](/articles/test-workflows) to learn how to run any type of test with Testkube.
 - Head over to the [Examples & Guides](/articles/examples/overview) for sample Test Workflows with popular testing tools.
 - Check out the [Getting Started with Testkube Open Source](https://testkube.io/blog/getting-started-with-testkube-open-source) blogpost to further see how you can use the Standalone Agent with GitHub Actions
 - Go through the [CLI Reference](/cli/testkube) to see available CLI commands.
-- Head over to the [Testkube Slack](https://bit.ly/testkube-slack) to ask questions and (hopefully) get answers.
+- Head over to the [Testkube Slack](https://bit.ly/testkube-slack) to ask questions and get answers.
+
+:::tip
+See the [Feature Comparison](/articles/install/feature-comparison) to understand the differences in functionality between using
+the Testkube Agent in Standalone and Connected modes.
+:::
 
 ## Open Source Functionality Overview
 
