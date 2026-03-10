@@ -176,11 +176,6 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Docker Install",
-              id: "articles/install/docker-agent",
-            },
-            {
-              type: "doc",
               label: "Local Kubernetes Install",
               id: "articles/install/quickstart-no-k8s",
             },

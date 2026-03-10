@@ -8,8 +8,7 @@ by the Testkube team at https://app.testkube.io. You can create Environments and
 To get started with the Cloud Control Plane, go to https://app.testkube.io and sign up for a trial account. During the onboarding, 
 you will be prompted to create an initial Testkube Environment. You can start creating Workflows and other resources right away. When you are ready to execute your Workflows, you can deploy [Testkube Agents](/articles/agents-overview) in your infrastructure using the provided CLI/Helm commands. You can then add as many Environments and Agents as you need - [Read More](/articles/environment-management#creating-a-new-environment).
 
-For local deployment of the Agent (for example during evaluation) you can either use the [Testkube Docker Agent](docker-agent) or
-create your own local Kubernetes cluster - [Read More](quickstart-no-k8s).
+For local deployment of the Agent (for example during evaluation) you can create your own local Kubernetes cluster - [Read More](quickstart-no-k8s).
 
 ## Deployment Architecture
 

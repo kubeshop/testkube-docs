@@ -14,8 +14,7 @@ you can join it with a control plane as described [here][migrate-oss].
 ## Do I have to have my own Kubernetes Cluster to evaluate Testkube
 
 No, for evaluation you can use our Cloud offering at app.testkube.io which includes a Sandbox environment for you to explore
-Testkube functionality. For your running your own tests you can either use the [Testkube Docker Agent](docker-agent) or
-install your own [Kubernetes Cluster](quickstart-no-k8s.mdx).
+Testkube functionality. For running your own tests you can install your own [Kubernetes Cluster](quickstart-no-k8s.mdx).
 
 ## Do I have to provide any infrastructure of my own to run Testkube in production
 
