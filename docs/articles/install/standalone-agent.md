@@ -126,6 +126,8 @@ corresponding functionality (see [Feature Comparison](feature-comparison)).
 All Workflow/Trigger/Webhook definitions will be preserved, but historical test execution results and 
 artifacts won't be copied to the control plane.
 
+After connecting, your agent appears in the Control Plane as a single agent with all four capabilities (Runner, Listener, GitOps, Webhook) enabled by default - [Read More](/articles/testkube-resource-management).
+
 The following command which will guide you through the migration process:
 
 ```

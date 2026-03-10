@@ -36,7 +36,7 @@ are stored in the Control Plane rather than as CRDs - [Read More](/articles/test
 
 ## Migrating from OSS to Commercial
 
-Migrating from a Standalone Agent deployment to utilizing the Testkube Control plane is described 
+Migrating from a Standalone Agent deployment to utilizing the Testkube Control Plane is described 
 at [Connecting to the Testkube Control Plane](/articles/install/standalone-agent#connecting-to-the-testkube-control-plane).
 
 ## Source Code and Licensing
