@@ -8,6 +8,19 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Patch Release v2.7.1 (2026-03-10)
+
+This patch release improves webhook reliability, Agent capability visibility, and runner installation behavior.
+
+Update both the Control Plane and the Agent to get the full set of fixes in this release.
+
+### Fixes
+
+- `queue-testworkflow` and `start-testworkflow` events now correctly trigger webhooks in environment-scoped setups.
+- Agent capabilities are now synced to the Control Plane based on the Agent configuration, so the UI reflects how Agents are actually configured.
+- `runner` capability is still not changed through capability sync. If you need to change it, recreate the Agent.
+- Added `installCRDs` support to `testkube-runner`, so CRD installation can be controlled explicitly and passed through to the operator.
+
 ## Monthly Release v2.7.0 (2026-03-04)
 
 Control Plane and Agent continue with unified versioning in `2.7.x`.
