@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:0bc48e0aa5a3a54794e78d303c42e3d7a3c464e6cab85f87209764d590dd0230</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 2" src="https://img.shields.io/badge/critical-2-8b1924"/> <img alt="high: 12" src="https://img.shields.io/badge/high-12-e25d68"/> <img alt="medium: 25" src="https://img.shields.io/badge/medium-25-fbb552"/> <img alt="low: 6" src="https://img.shields.io/badge/low-6-fce1a9"/> <img alt="unspecified: 3" src="https://img.shields.io/badge/unspecified-3-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:0bc48e0aa5a3a54794e78d303c42e3d7a3c464e6cab85f87209764d590dd0230</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 5" src="https://img.shields.io/badge/critical-5-8b1924"/> <img alt="high: 12" src="https://img.shields.io/badge/high-12-e25d68"/> <img alt="medium: 25" src="https://img.shields.io/badge/medium-25-fbb552"/> <img alt="low: 7" src="https://img.shields.io/badge/low-7-fce1a9"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/arm64</td></tr>
 <tr><td>size</td><td>41 MB</td></tr>
 <tr><td>packages</td><td>303</td></tr>
@@ -13,7 +13,132 @@ hide_table_of_contents: true
 
 <table>
 <tr><td valign="top">
-<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 6" src="https://img.shields.io/badge/H-6-e25d68"/> <img alt="medium: 10" src="https://img.shields.io/badge/M-10-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 3" src="https://img.shields.io/badge/U-3-lightgrey"/><strong>stdlib</strong> <code>1.24.4</code> (golang)</summary>
+<details><summary><img alt="critical: 3" src="https://img.shields.io/badge/C-3-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/dexidp/dex</strong> <code>0.0.0-20250523112731-94f2c587b299+dirty</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/dexidp/dex@0.0.0-20250523112731-94f2c587b299%2Bdirty</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2020-27847?s=github&n=dex&ns=github.com%2Fdexidp&t=golang&vr=%3C2.27.0"><img alt="critical 9.8: CVE--2020--27847" src="https://img.shields.io/badge/CVE--2020--27847-lightgrey?label=critical%209.8&labelColor=8b1924"/></a> <i>Improper Handling of Syntactically Invalid Structure</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.27.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.27.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>9.8</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.357%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>58th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A vulnerability exists in the SAML connector of the github.com/dexidp/dex library used to process SAML Signature Validation. This flaw allows an attacker to bypass SAML authentication. The highest threat from this vulnerability is to confidentiality, integrity, as well as system availability. This flaw affects dex versions before 2.27.0.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2022-39222?s=github&n=dex&ns=github.com%2Fdexidp&t=golang&vr=%3C%3D2.34.0"><img alt="critical 9.3: CVE--2022--39222" src="https://img.shields.io/badge/CVE--2022--39222-lightgrey?label=critical%209.3&labelColor=8b1924"/></a> <i>Exposure of Sensitive Information to an Unauthorized Actor</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=2.34.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.35.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>9.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.123%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>78th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+Dex instances with public clients (and by extension, clients accepting tokens issued by those Dex instances) are affected by this vulnerability.
+
+An attacker can exploit this vulnerability by making a victim navigate to a malicious website and guiding them through the OIDC flow, stealing the OAuth authorization code in the process. The authorization code then can be exchanged by the attacker for a token, gaining access to applications accepting that token.
+
+### Steps to reproduce
+
+1) A victim navigates to a malicious website
+
+2) The webserver initiates a connection with a Dex instance directly - https://dexexample.com/auth/https:%252F%252Faccounts.google.com?access_type=online&client_id=example&nonce=2AaJAimQU9CbeOFsNra1d7CJTWB&redirect_uri=http%3A%2F%2Flocalhost%3A40393%2Fauth%2Fcallback&response_type=code&scope=openid+email&state=2AaJAjhpUmsB25csCo5muvorMTl. In this example, the Dex instance is hosted on `dexexample.com`, and the connector is `accounts.google.com`.
+
+3) Dex returns a 302 Redirect to the connector IDP, https://accounts.google.com/o/oauth2/v2/auth?client_id=237800849078-hri2ndt7gdafpf34kq8crd5sik9pe3so.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fdexexample.com%2Fauth%2Fcallback&response_type=code&scope=openid+email&state=g3dkmpontsr3ugocoddjx72ef. The attacker records the state parameter value g3dkmpontsr3ugocoddjx72ef which will be used as the request ID later on.
+
+4) The malicious website redirects the victim’s browser to the connector IDP.
+
+5) The user authenticates to the connector IDP. If they have authenticated before, they may not be presented with an authentication challenge. The user will silently be taken through the following steps:
+
+    Authentication with the connector IDP, which redirects the browser to the Dex callback with a code - https://dexexample.com/callback?state=g3dkmpontsr3ugocoddjx72ef&code=4%2F0AX4XfWizg1PQEQNl18hmP0_YQ3iUYII2ed13n9ikKr_ZcV7uCZpZaPcIlxBzX5QwFIcs-w&scope=email+openid+https%3A%2F%[2Fwww.googleapis.com](http://2fwww.googleapis.com/)%2Fauth%2Fuserinfo.email&authuser=0&hd=[google.com](http://google.com/)&prompt=none
+
+    Dex handles the callback, fetching the user claims from the connector IDP, persisting them and generating an OAuth code. Then Dex redirects the browser to the approval endpoint https://dexexample.com/approval?req=g3dkmpontsr3ugocoddjx72ef. Note that the req parameter is the same as the attacker's recorded state parameter.
+
+    Dex uses the request ID to look up the OAuth code, and builds a redirect to the original callback with the code - http://localhost:40393/auth/callback?code=bz5p3oov2wlh5k3rboa4atxas&state=2AaJAjhpUmsB25csCo5muvorMTl.
+
+
+In step 2., when the webserver initiates the connection to Dex and receives the redirect to the connector IDP, the webserver will persist the connector state parameter (`g3dkmpontsr3ugocoddjx72ef`), which is used as the request ID to later look up the OAuth code. As the user goes through the authentication flow with the connector IDP, the webserver will repeatedly request `/approval?req=<state>`. Once the user has successfully authenticated, if the webserver is able to call /approval before the victim’s browser calls `/approval`, then an attacker can fetch the Dex OAuth code which can be exchanged for an ID token using the `/token` endpoint.
+
+Note that PKCE does not defend against this attack since the webserver initiates the request to Dex with a known code challenge.
+
+### Fix
+
+The request has been made unpredictable with message authentication. This was accomplished by creating an [HMAC](https://en.wikipedia.org/wiki/HMAC) using a randomly generated per-request secret. This secret is persisted between the initial login request and the approval request. Since the HMAC is derived using a secret key, its value cannot be known to an attacker, so they will be unable to poll `/approval` for the code.
+
+### Patches
+Update to 2.35.0.
+
+### Workarounds
+No known workarounds (without impacting behavior) for existing versions.
+
+Disabling public clients is the only way to defend against attacks exploiting this vulnerability.
+
+### References
+
+### For more information
+If you have any questions or comments about this advisory:
+* Start a new [discussion](https://github.com/dexidp/dex/discussions/new?category=q-a)
+* Email us at [cncf-dex-maintainers@lists.cncf.io](mailto:cncf-dex-maintainers@lists.cncf.io)
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2020-26290?s=github&n=dex&ns=github.com%2Fdexidp&t=golang&vr=%3C2.27.0"><img alt="critical 9.3: CVE--2020--26290" src="https://img.shields.io/badge/CVE--2020--26290-lightgrey?label=critical%209.3&labelColor=8b1924"/></a> <i>Improper Verification of Cryptographic Signature</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.27.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.27.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>9.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>66th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+
+The following vulnerabilities have been disclosed, which impact users leveraging the SAML connector:
+
+Signature Validation Bypass (CVE-2020-15216): https://github.com/russellhaering/goxmldsig/security/advisories/GHSA-q547-gmf8-8jr7
+
+`encoding/xml` instabilities:
+ - [Element namespace prefix instability (CVE-2020-29511)](https://github.com/mattermost/xml-roundtrip-validator/blob/master/advisories/unstable-elements.md)
+ - [Attribute namespace prefix instability (CVE-2020-29509)](https://github.com/mattermost/xml-roundtrip-validator/blob/master/advisories/unstable-attributes.md)
+ - [Directive comment instability (CVE-2020-29510)](https://github.com/mattermost/xml-roundtrip-validator/blob/master/advisories/unstable-directives.md)
+
+### Patches
+
+Immediately update to [Dex v2.27.0](https://github.com/dexidp/dex/releases/tag/v2.27.0).
+
+### Workarounds
+
+There are no known workarounds.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 6" src="https://img.shields.io/badge/H-6-e25d68"/> <img alt="medium: 10" src="https://img.shields.io/badge/M-10-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/U-2-lightgrey"/><strong>stdlib</strong> <code>1.24.4</code> (golang)</summary>
 
 <small><code>pkg:golang/stdlib@1.24.4</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2025-68121?s=golang&n=stdlib&t=golang&vr=%3C1.24.13"><img alt="critical : CVE--2025--68121" src="https://img.shields.io/badge/CVE--2025--68121-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
@@ -183,7 +308,7 @@ An excluded subdomain constraint in a certificate chain does not restrict the us
 <tr><td>Affected range</td><td><code>>=1.24.0<br/><1.24.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.028%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -313,6 +438,25 @@ tar.Reader does not set a maximum size on the number of sparse region data block
 </blockquote>
 </details>
 
+<a href="https://scout.docker.com/v/CVE-2026-27139?s=golang&n=stdlib&t=golang&vr=%3C1.25.8"><img alt="low : CVE--2026--27139" src="https://img.shields.io/badge/CVE--2026--27139-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.25.8</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.25.8</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.005%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+On Unix platforms, when listing the contents of a directory using File.ReadDir or File.Readdir the returned FileInfo could reference a file outside of the Root in which the File was opened.
+
+The impact of this escape is limited to reading metadata provided by lstat from arbitrary locations on the filesystem without permitting reading or writing files outside the root.
+
+</blockquote>
+</details>
+
 <a href="https://scout.docker.com/v/CVE-2026-27142?s=golang&n=stdlib&t=golang&vr=%3C1.25.8"><img alt="unspecified : CVE--2026--27142" src="https://img.shields.io/badge/CVE--2026--27142-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
@@ -328,25 +472,6 @@ tar.Reader does not set a maximum size on the number of sparse region data block
 Actions which insert URLs into the content attribute of HTML meta tags are not escaped. This can allow XSS if the meta tag also has an http-equiv attribute with the value "refresh".
 
 A new GODEBUG setting has been added, htmlmetacontenturlescape, which can be used to disable escaping URLs in actions in the meta content attribute which follow "url=" by setting htmlmetacontenturlescape=0.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-27139?s=golang&n=stdlib&t=golang&vr=%3C1.25.8"><img alt="unspecified : CVE--2026--27139" src="https://img.shields.io/badge/CVE--2026--27139-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.25.8</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.25.8</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.005%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-On Unix platforms, when listing the contents of a directory using File.ReadDir or File.Readdir the returned FileInfo could reference a file outside of the Root in which the File was opened.
-
-The impact of this escape is limited to reading metadata provided by lstat from arbitrary locations on the filesystem without permitting reading or writing files outside the root.
 
 </blockquote>
 </details>
@@ -712,8 +837,8 @@ The html.Parse function in golang.org/x/net/html has an infinite parsing loop wh
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.45.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.45.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.019%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.015%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
