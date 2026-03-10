@@ -8,9 +8,9 @@ The Agents described here are related to the Test Orchestration capabilities of 
 which allow you to run Agentic workloads in your Testkube Environment.
 :::
 
-### Deprecation of Standalone Agents in Testkube 2.7.0
+### From SuperAgent to the Capability Model (Testkube 2.7.0)
 
-As of Testkube 2.7.0, the concept of a standalone "superagent" has been deprecated and been entirely replaced with Agents with the below capabilities - [Read More](/articles/testkube-resource-management). 
+As of Testkube 2.7.0, the concept of a single "superagent" (one agent holding all state when connected to the Control Plane) has been deprecated and replaced with agents that have explicit capabilities - [Read More](/articles/testkube-resource-management). Standalone mode (agent not connected to any Control Plane) remains unchanged and is still supported.
 
 When upgrading a "superagent" from a pre 2.7.0 version to a 2.7.0+ version, that Agent will be automatically migrated to an Agent with all 4 capabilities enabled, its name will be set to `default-agent-<environment-name>`.
 

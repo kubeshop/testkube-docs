@@ -254,13 +254,11 @@ target:
     - name
 ```
 
-### Targeting the Standalone Agent
+### Targeting the Default (Full-Capability) Agent
 
-Each Testkube Environment requires a **[Standalone Agent](/articles/install/standalone-agent)** which provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
+Environments that were migrated from pre-2.7 or created with a single default agent have one agent with all capabilities (Runner, Listener, GitOps, Webhook), which provides core functionality for Triggers, Webhooks, Prometheus metrics, etc. - [Read More](/articles/agents-overview). That agent is shown in the list of Agents with the label `runnertype: superagent`.
 
-Standalone Agents are installed when initially creating an Environment and shown on the bottom of the list of Agents with the label `runnertype: superagent`.
-
-Standalone Agents work as a Global Runner Agent (described above) and can also be explicitly targeted in several ways:
+The default (full-capability) agent works as a Global Runner Agent (described above) and can also be explicitly targeted in several ways:
 
 - By Label: `testkube run tw my-k6-test --target runnertype=superagent`
 - By Name: `testkube run tw my-k6-test --target name=tkcenv_xxxxxxxxxx`

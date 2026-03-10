@@ -1,9 +1,11 @@
 # Testkube Agent Feature Comparison
 
 The below table shows a feature comparison between deploying the Testkube Agent in Standalone Mode vs when it is connected to the 
-commercial Control Plane - [Read More](/articles/install/standalone-agent).
+Testkube Control Plane - [Read More](/articles/install/standalone-agent).
 
 The Control Plane column applies to both On-Prem and Cloud deployments of the Control Plane.
+
+In standalone mode, a single agent provides runner, listener, and webhook behavior; the ❌ for Listener Agents, GitOps Agents, and Webhook Agents means that discrete capability-based agents are only available when connected to the Control Plane.
 
 | Features                             |       Testkube Agent <br/> in standalone mode        | Testkube Agent(s) <br/>connected to Control Plane |                                Read More                                |
 |:-------------------------------------| :--------------------------------------------------: | :-----------------------------------------------: |:-----------------------------------------------------------------------:|
