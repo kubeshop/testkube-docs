@@ -32,6 +32,18 @@ When the CLI is installed, authenticate with your Testkube Control Plane:
 testkube login
 ```
 
+If it's a self-hosted Testkube instance, you must specify the API URL to make sure you’re hitting the right instance
+(not the public cloud):
+
+```bash
+testkube login https://api.mycompany.com
+```
+
+
+:::note
+If your self-hosted Testkube instance uses custom subdomains, check the override parameters using `testkube login --help` to connect to your instance correctly.
+:::
+
 This will prompt to open a browser window to sign in and authenticate with the Testkube Dashboard. Once authenticated, 
 the CLI will prompt for the Testkube Organisation and Environment to use with CLI commands. 
 
@@ -39,20 +51,18 @@ the CLI will prompt for the Testkube Organisation and Environment to use with CL
 
 ## SSO Authentication
 
-If you're using SSO or a self-hosted Testkube instance, you can use the `--email` flag with the login command to trigger the SSO login flow:
+If you're using SSO, you can use the `--email` flag with the login command to trigger the SSO login flow:
 
 ```bash
 testkube login --email
 ```
 
-If needed, you can also specify uri-override arguments to make sure you’re hitting the right instance
+If it's a self-hosted Testkube instance, you must specify the API URL to make sure you’re hitting the right instance
 (not the public cloud):
 
 ```bash
-testkube login \
---email=email@mycompany.com \
---api-uri-override=https://api.mycompany.com/ \
---auth-uri-override=https://api.mycompany.com/idp
+testkube login https://api.mycompany.com \
+--email=email@mycompany.com
 ```
 
 ## API Token Authentication
