@@ -212,8 +212,8 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 <table>
 <tr><td>Affected range</td><td><code>&lt;=8.14.1-r2</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.042%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.039%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -229,8 +229,8 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 <table>
 <tr><td>Affected range</td><td><code>&lt;=8.14.1-r2</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.028%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.026%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -246,8 +246,8 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 <table>
 <tr><td>Affected range</td><td><code>&lt;=8.14.1-r2</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.058%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.054%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -297,8 +297,8 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 <table>
 <tr><td>Affected range</td><td><code>&lt;=8.14.1-r2</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.030%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.028%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

@@ -175,7 +175,7 @@ This affects programs which parse untrusted PEM inputs.
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.007%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.006%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
 </table>
 
@@ -282,7 +282,7 @@ An excluded subdomain constraint in a certificate chain does not restrict the us
 <tr><td>Affected range</td><td><code>>=1.24.0<br/><1.24.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.028%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
