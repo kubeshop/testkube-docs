@@ -443,45 +443,6 @@ RUN apk --no-cache add ca-certificates libssl3 git
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel/sdk</strong> <code>1.34.0</code> (golang)</summary>
-
-<small><code>pkg:golang/go.opentelemetry.io/otel/sdk@1.34.0</code></small><br/>
-
-```dockerfile
-# api-server.Dockerfile (32:32)
-COPY --from=build /app /bin/app
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-24051?s=github&n=sdk&ns=go.opentelemetry.io%2Fotel&t=golang&vr=%3E%3D1.21.0%2C%3C1.40.0"><img alt="high 7.0: CVE--2026--24051" src="https://img.shields.io/badge/CVE--2026--24051-lightgrey?label=high%207.0&labelColor=e25d68"/></a> <i>Untrusted Search Path</i>
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.21.0<br/><1.40.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.40.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>7</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.007%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-### Impact
-The OpenTelemetry Go SDK in version `v1.20.0`-`1.39.0` is vulnerable to Path Hijacking (Untrusted Search Paths) on macOS/Darwin systems. The resource detection code in `sdk/resource/host_id.go` executes the `ioreg` system command using a search path. An attacker with the ability to locally modify the PATH environment variable can achieve Arbitrary Code Execution (ACE) within the context of the application.
-
-### Patches
-This has been patched in [d45961b](https://github.com/open-telemetry/opentelemetry-go/commit/d45961bcda453fcbdb6469c22d6e88a1f9970a53), which was released with `v1.40.0`.
-
-### References
-- [CWE-426: Untrusted Search Path](https://cwe.mitre.org/data/definitions/426.html)
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>27.1.1+incompatible</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/docker/cli@27.1.1%2Bincompatible</code></small><br/>
@@ -543,6 +504,45 @@ Nitesh Surana (niteshsurana.com) of Trend Research of TrendAI
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel/sdk</strong> <code>1.34.0</code> (golang)</summary>
+
+<small><code>pkg:golang/go.opentelemetry.io/otel/sdk@1.34.0</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (32:32)
+COPY --from=build /app /bin/app
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-24051?s=github&n=sdk&ns=go.opentelemetry.io%2Fotel&t=golang&vr=%3E%3D1.21.0%2C%3C1.40.0"><img alt="high 7.0: CVE--2026--24051" src="https://img.shields.io/badge/CVE--2026--24051-lightgrey?label=high%207.0&labelColor=e25d68"/></a> <i>Untrusted Search Path</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.21.0<br/><1.40.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.40.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.007%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+The OpenTelemetry Go SDK in version `v1.20.0`-`1.39.0` is vulnerable to Path Hijacking (Untrusted Search Paths) on macOS/Darwin systems. The resource detection code in `sdk/resource/host_id.go` executes the `ioreg` system command using a search path. An attacker with the ability to locally modify the PATH environment variable can achieve Arbitrary Code Execution (ACE) within the context of the application.
+
+### Patches
+This has been patched in [d45961b](https://github.com/open-telemetry/opentelemetry-go/commit/d45961bcda453fcbdb6469c22d6e88a1f9970a53), which was released with `v1.40.0`.
+
+### References
+- [CWE-426: Untrusted Search Path](https://cwe.mitre.org/data/definitions/426.html)
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>ssl_client</strong> <code>1.36.1-r30</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/ssl_client@1.36.1-r30?arch=aarch64&distro=alpine-3.20.8&upstream=busybox</code></small><br/>
@@ -576,8 +576,8 @@ FROM ${ALPINE_IMAGE}
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.36.1-r31</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.36.1-r31</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.083%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.090%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

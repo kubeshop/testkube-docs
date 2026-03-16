@@ -261,7 +261,7 @@ During the TLS 1.3 handshake if multiple messages are sent in records that span 
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.2</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.016%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1381,13 +1381,13 @@ all versions vulnerable, backport required for wheezy
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.39.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.42.0</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/net@0.39.0</code></small><br/>
+<small><code>pkg:golang/golang.org/x/net@0.42.0</code></small><br/>
 
 ```dockerfile
-# minio-release.dockerfile (80:80)
-COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
+# minio-release.dockerfile (76:76)
+COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
 ```
 
 <br/>
@@ -1428,13 +1428,13 @@ The html.Parse function in golang.org/x/net/html has quadratic parsing complexit
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.42.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.39.0</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/net@0.42.0</code></small><br/>
+<small><code>pkg:golang/golang.org/x/net@0.39.0</code></small><br/>
 
 ```dockerfile
-# minio-release.dockerfile (76:76)
-COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
+# minio-release.dockerfile (80:80)
+COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
 ```
 
 <br/>
@@ -1906,6 +1906,40 @@ Neutralised by kernel hardening
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>apt</strong> <code>2.6.1</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/apt@2.6.1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (36:36)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2011-3374?s=debian&n=apt&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D2.6.1"><img alt="low : CVE--2011--3374" src="https://img.shields.io/badge/CVE--2011--3374-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=2.6.1</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>1.509%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>81st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+It was found that apt-key in apt, all versions, do not correctly validate gpg keys with the master keyring, leading to a potential man-in-the-middle attack.
+
+---
+- apt <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=642480)
+Not exploitable in Debian, since no keyring URI is defined
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>shadow</strong> <code>1:4.13+dfsg1-1+deb12u1</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/shadow@1%3A4.13%2Bdfsg1-1%2Bdeb12u1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
@@ -1935,75 +1969,6 @@ initscripts in rPath Linux 1 sets insecure permissions for the /var/log/btmp fil
 - shadow <unfixed> (unimportant)
 See #290803, on Debian LOG_UNKFAIL_ENAB in login.defs is set to no so
 unknown usernames are not recorded on login failures
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gcc-12</strong> <code>12.2.0-14+deb12u1</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/gcc-12@12.2.0-14%2Bdeb12u1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (36:36)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2022-27943?s=debian&n=gcc-12&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D12.2.0-14%2Bdeb12u1"><img alt="low : CVE--2022--27943" src="https://img.shields.io/badge/CVE--2022--27943-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=12.2.0-14+deb12u1</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.050%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-libiberty/rust-demangle.c in GNU GCC 11.2 allows stack consumption in demangle_const, as demonstrated by nm-new.
-
----
-- gcc-12 <unfixed> (unimportant)
-Negligible security impact
-https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105039
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>apt</strong> <code>2.6.1</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/apt@2.6.1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (36:36)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2011-3374?s=debian&n=apt&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D2.6.1"><img alt="low : CVE--2011--3374" src="https://img.shields.io/badge/CVE--2011--3374-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=2.6.1</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>1.509%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>81st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-It was found that apt-key in apt, all versions, do not correctly validate gpg keys with the master keyring, leading to a potential man-in-the-middle attack.
-
----
-- apt <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=642480)
-Not exploitable in Debian, since no keyring URI is defined
 
 </blockquote>
 </details>
@@ -2042,6 +2007,41 @@ If the method was called on an initialized point that is not the identity point,
 If the method was called on an uninitialized point, the behavior was undefined. In particular, if the receiver was the zero value, MultiScalarMult returned an invalid point that compared Equal to every point.
 
 *Note that MultiScalarMult is a rarely used advanced API. For example, if you only depend on `filippo.io/edwards25519` via `github.com/go-sql-driver/mysql`, **you are not affected**. If you were notified of this issue despite not being affected, consider switching to a vulnerability scanner that is more precise and respectful of your attention, like [govulncheck](https://go.dev/doc/tutorial/govulncheck).*
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gcc-12</strong> <code>12.2.0-14+deb12u1</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/gcc-12@12.2.0-14%2Bdeb12u1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (36:36)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2022-27943?s=debian&n=gcc-12&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D12.2.0-14%2Bdeb12u1"><img alt="low : CVE--2022--27943" src="https://img.shields.io/badge/CVE--2022--27943-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=12.2.0-14+deb12u1</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.050%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+libiberty/rust-demangle.c in GNU GCC 11.2 allows stack consumption in demangle_const, as demonstrated by nm-new.
+
+---
+- gcc-12 <unfixed> (unimportant)
+Negligible security impact
+https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105039
 
 </blockquote>
 </details>

@@ -344,7 +344,7 @@ An excluded subdomain constraint in a certificate chain does not restrict the us
 <tr><td>Affected range</td><td><code>>=1.24.0<br/><1.24.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.028%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -378,7 +378,7 @@ During the TLS 1.3 handshake if multiple messages are sent in records that span 
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.016%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -605,8 +605,8 @@ The impact of this escape is limited to reading metadata provided by lstat from 
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.3.5-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.3.5-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.033%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.039%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -876,8 +876,8 @@ The html.Parse function in golang.org/x/net/html has quadratic parsing complexit
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.37.0-r14</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.37.0-r14</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.083%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.090%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -988,28 +988,6 @@ Thanks @N0zoM1z0 for finding and reporting this issue privately to the `go-git` 
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>zlib</strong> <code>1.3.1-r2</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/zlib@1.3.1-r2?os_name=alpine&os_version=3.21</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-27171?s=alpine&n=zlib&ns=alpine&t=apk&osn=alpine&osv=3.21&vr=%3C%3D1.3.1-r2"><img alt="low : CVE--2026--27171" src="https://img.shields.io/badge/CVE--2026--27171-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=1.3.1-r2</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.006%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/cloudflare/circl</strong> <code>1.6.1</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/cloudflare/circl@1.6.1</code></small><br/>
@@ -1061,6 +1039,28 @@ If the method was called on an initialized point that is not the identity point,
 If the method was called on an uninitialized point, the behavior was undefined. In particular, if the receiver was the zero value, MultiScalarMult returned an invalid point that compared Equal to every point.
 
 *Note that MultiScalarMult is a rarely used advanced API. For example, if you only depend on `filippo.io/edwards25519` via `github.com/go-sql-driver/mysql`, **you are not affected**. If you were notified of this issue despite not being affected, consider switching to a vulnerability scanner that is more precise and respectful of your attention, like [govulncheck](https://go.dev/doc/tutorial/govulncheck).*
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>zlib</strong> <code>1.3.1-r2</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/zlib@1.3.1-r2?os_name=alpine&os_version=3.21</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-27171?s=alpine&n=zlib&ns=alpine&t=apk&osn=alpine&osv=3.21&vr=%3C%3D1.3.1-r2"><img alt="low : CVE--2026--27171" src="https://img.shields.io/badge/CVE--2026--27171-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=1.3.1-r2</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.006%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
 
 </blockquote>
 </details>
