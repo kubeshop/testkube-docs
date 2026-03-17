@@ -8,11 +8,22 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Patch Release v2.7.3 (2026-03-10)
+
+This patch release introduces fixes for Testkube CLI and Control Plane PostgreSQL BD support.
+
+Control Plane is available in Helm chart v2.330.3.
+
+### Fixes
+
+- Include missing PostgreSQL DB table called `leases`.
+- Returning a list when requesting server to run multiple Test Workflows. As instance, using Testkube CLI to start Test Workflows by label(s) when more than one match with same label(s).
+
 ## Patch Release v2.7.1 (2026-03-10)
 
 This patch release improves webhook reliability, Agent capability visibility, and runner installation behavior.
 
-Update both the Control Plane and the Agent to get the full set of fixes in this release.
+Update both the Control Plane and the Agent to get the full set of fixes in this release. This release is available in Helm chart v2.330.1.
 
 ### Fixes
 
