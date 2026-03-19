@@ -181,7 +181,7 @@ $ testkube agent rotate-key my-agent --grace-period 4h
 You can also rotate keys using the API:
 
 ```
-POST /organizations/<organizationId>/agents/<agentId>/regenerate
+DELETE /organizations/<organizationId>/agents/<agentIdOrName>/secret-key
 ```
 
 ### Best Practices
