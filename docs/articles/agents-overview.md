@@ -152,6 +152,44 @@ When this toggle is enabled, the Testkube Dashboard will no longer display sensi
 **Important:** This masking feature applies **only** to the Testkube Dashboard UI. Agent tokens or secret keys will still be visible in CLI outputs (e.g., when using `testkube create runner` or retrieving details for Helm chart installation as described in [Installing Runner Agent with Helm Charts](/articles/multi-agent-runner-helm-chart)) and in any direct API interactions.
 :::
 
+## Agent Key Rotation
+
+Agent secret keys can be rotated to maintain security best practices or in response to a potential compromise. When a key is rotated, the previous key remains valid for a configurable **grace period** to allow in-flight requests to complete without interruption.
+
+### How It Works
+
+- **Grace period**: After rotation, the old key continues to work for a configurable duration (default: 24 hours, maximum: 7 days). This ensures connected agents are not immediately disconnected.
+- **Single previous key**: Only one previous key is retained at a time. If you rotate again before the grace period expires, the earlier previous key is discarded.
+- **Hash-only storage**: Only the hash of the previous key is stored — the previous key value cannot be recovered from the Control Plane.
+
+### Rotating via the CLI
+
+Use the `testkube agent rotate-key` command to rotate an agent's secret key:
+
+```sh
+$ testkube agent rotate-key my-agent
+```
+
+To specify a custom grace period:
+
+```sh
+$ testkube agent rotate-key my-agent --grace-period 4h
+```
+
+### Rotating via the API
+
+You can also rotate keys using the API:
+
+```
+POST /organizations/<organizationId>/agents/<agentId>/regenerate
+```
+
+### Best Practices
+
+- Rotate keys periodically as part of your security hygiene.
+- Use the grace period to perform a rolling update of your agent deployments with the new key before the old key expires.
+- After rotating, verify that all agents have reconnected with the new key before the grace period ends.
+
 ## Licensing for Runner Agents
 
 Testkube Runner Agents require a license for usage, which can be either Fixed or Floating.
