@@ -691,6 +691,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Credential'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -1054,6 +1056,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Credential'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -1707,6 +1711,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Credential'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -1786,57 +1792,6 @@ paths:
       - $ref: '#/components/parameters/EnvironmentID'
       - $ref: '#/components/parameters/TestWorkflowName'
       - $ref: '#/components/parameters/CredentialName'
-  /organizations/{id}/environments/{environmentID}/test-workflows/{testWorkflowName}/execution-groups:
-    get:
-      summary: List Test Workflow executions
-      description: List Test Workflow executions
-      operationId: listExecutionGroupsForTestWorkflowV2
-      parameters:
-        - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
-        - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/PageSize'
-        - $ref: '#/components/parameters/TextSearch'
-        - $ref: '#/components/parameters/Status'
-        - $ref: '#/components/parameters/LastDays'
-      responses:
-        '200':
-          $ref: '#/components/responses/ExecutionGroupListV2'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: '#/components/parameters/ID'
-      - $ref: '#/components/parameters/EnvironmentID'
-      - $ref: '#/components/parameters/TestWorkflowName'
-  /organizations/{id}/environments/{environmentID}/test-workflows/{testWorkflowName}/execution-groups/{executionGroupID}:
-    get:
-      summary: Get Test Workflow execution group by test workflow name
-      description: Get Test Workflow execution group by test workflow name
-      operationId: getExecutionGroupForTestWorkflowV2
-      responses:
-        '200':
-          description: Successfully retrieved execution group for test workflow
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExecutionGroupV2'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: '#/components/parameters/ID'
-      - $ref: '#/components/parameters/EnvironmentID'
-      - $ref: '#/components/parameters/TestWorkflowName'
-      - $ref: '#/components/parameters/ExecutionGroupID'
   /organizations/{id}/environments/{environmentID}/test-workflows/definitions:
     get:
       summary: Get workflow definitions in bulk
@@ -4737,6 +4692,8 @@ paths:
       responses:
         '204':
           description: Delete Success
+        '400':
+          $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -5415,6 +5372,8 @@ paths:
       responses:
         '204':
           description: Delete Success
+        '400':
+          $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -5963,6 +5922,7 @@ components:
         - gitops
         - webhooks
         - cloud-webhooks
+        - cron-delegation
     AgentEnvironment:
       type: object
       properties:
@@ -6260,6 +6220,24 @@ components:
         updatedAt:
           type: string
           format: date-time
+        isArchived:
+          description: Whether this session has been archived
+          type: boolean
+        inputTokens:
+          description: Total input (prompt) tokens consumed across all invocations
+          type: integer
+          format: int64
+        outputTokens:
+          description: Total output (completion) tokens consumed across all invocations
+          type: integer
+          format: int64
+        totalTokens:
+          description: Total tokens consumed (input + output) across all invocations
+          type: integer
+          format: int64
+        model:
+          description: LLM model name used for generation
+          type: string
       required:
         - id
         - assistantId
@@ -7655,80 +7633,6 @@ components:
           format: date-time
         status:
           $ref: '#/components/schemas/ExecutionStatus'
-    ExecutionGroupShortV2:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        avgDurationMs:
-          type: integer
-        scheduledAt:
-          type: string
-          format: date-time
-        statusAt:
-          type: string
-          format: date-time
-        finishedAt:
-          type: string
-          format: date-time
-        status:
-          $ref: '#/components/schemas/ExecutionStatusV2'
-        predictedStatus:
-          $ref: '#/components/schemas/ExecutionStatusV2'
-        count:
-          type: integer
-        totals:
-          type: object
-          properties:
-            queued:
-              type: integer
-            running:
-              type: integer
-            paused:
-              type: integer
-            passed:
-              type: integer
-            failed:
-              type: integer
-            aborted:
-              type: integer
-        executions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExecutionReferenceV2'
-        workflows:
-          type: array
-          items:
-            type: string
-        target:
-          $ref: '#/components/schemas/ExecutionTargetV2'
-        context:
-          $ref: '#/components/schemas/ExecutionContextV2'
-        user:
-          $ref: '#/components/schemas/UserReference'
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-      required:
-        - id
-        - name
-        - status
-        - predictedStatus
-        - scheduledAt
-        - statusAt
-        - executionIds
-        - workflows
-        - count
-        - totals
-        - target
-    ExecutionGroupV2:
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/ExecutionGroupShortV2'
-        - type: object
     ExecutionRef:
       type: object
       properties:
@@ -9344,6 +9248,85 @@ components:
       required:
         - lines
         - bytes
+    MCPOAuthAuthorizeRequest:
+      description: Request to generate OAuth authorization URL
+      type: object
+      properties:
+        redirectUri:
+          description: Frontend callback URL after OAuth completes
+          type: string
+        responseMode:
+          description: How to handle the OAuth response
+          type: string
+          enum:
+            - popup
+            - redirect
+          default: popup
+    MCPOAuthAuthorizeResponse:
+      description: Response containing OAuth authorization URL
+      type: object
+      properties:
+        authorizationUrl:
+          description: URL to redirect user for OAuth authorization
+          type: string
+        state:
+          description: Encrypted OAuth state parameter
+          type: string
+      required:
+        - authorizationUrl
+        - state
+    MCPOAuthStatus:
+      description: OAuth authentication status for a user
+      type: object
+      properties:
+        authenticated:
+          description: Whether the user has valid OAuth tokens
+          type: boolean
+        expiresAt:
+          description: When the current access token expires
+          type: string
+          format: date-time
+        scopes:
+          description: Scopes granted by the OAuth provider
+          type: array
+          items:
+            type: string
+        needsReauth:
+          description: Whether user needs to re-authenticate
+          type: boolean
+      required:
+        - authenticated
+    MCPOAuthTokens:
+      description: OAuth tokens for MCP server authentication
+      type: object
+      properties:
+        accessToken:
+          description: OAuth access token
+          type: string
+        refreshToken:
+          description: OAuth refresh token
+          type: string
+        tokenType:
+          description: Token type (usually Bearer)
+          type: string
+        expiresAt:
+          description: When the access token expires
+          type: string
+          format: date-time
+        scopes:
+          description: Scopes granted by the OAuth provider
+          type: array
+          items:
+            type: string
+        clientId:
+          description: OAuth client ID from Dynamic Client Registration
+          type: string
+        clientSecret:
+          description: OAuth client secret from Dynamic Client Registration
+          type: string
+      required:
+        - accessToken
+        - tokenType
     MCPServer:
       type: object
       properties:
@@ -9396,6 +9379,21 @@ components:
         lastError:
           description: Last error message if status is error
           type: string
+        authType:
+          description: Authentication type for this MCP server
+          type: string
+          enum:
+            - none
+            - headers
+            - oauth
+          default: none
+        oauthConfig:
+          $ref: '#/components/schemas/MCPServerOAuthConfig'
+        oauthAuthenticated:
+          description: >-
+            Whether the current user has authenticated with this OAuth MCP
+            server
+          type: boolean
         createdAt:
           type: string
           format: date-time
@@ -9441,6 +9439,16 @@ components:
           type: object
           additionalProperties:
             type: string
+        authType:
+          description: Authentication type for this MCP server
+          type: string
+          enum:
+            - none
+            - headers
+            - oauth
+          default: none
+        oauthConfig:
+          $ref: '#/components/schemas/MCPServerOAuthConfig'
       required:
         - name
         - url
@@ -9451,6 +9459,31 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MCPServer'
+    MCPServerOAuthConfig:
+      description: OAuth 2.1 configuration for MCP server authentication
+      type: object
+      properties:
+        clientId:
+          description: OAuth client ID
+          type: string
+        clientSecret:
+          description: OAuth client secret (write-only, not returned in responses)
+          type: string
+        authorizationUrl:
+          description: OAuth authorization endpoint URL
+          type: string
+        tokenUrl:
+          description: OAuth token endpoint URL
+          type: string
+        scopes:
+          description: OAuth scopes to request
+          type: array
+          items:
+            type: string
+      required:
+        - clientId
+        - authorizationUrl
+        - tokenUrl
     MCPServerTool:
       type: object
       properties:
@@ -9535,6 +9568,15 @@ components:
           type: object
           additionalProperties:
             type: string
+        authType:
+          description: Authentication type for this MCP server
+          type: string
+          enum:
+            - none
+            - headers
+            - oauth
+        oauthConfig:
+          $ref: '#/components/schemas/MCPServerOAuthConfig'
     Member:
       type: object
       properties:
@@ -11113,6 +11155,24 @@ components:
         updatedAt:
           type: string
           format: date-time
+        isArchived:
+          description: Whether this session has been archived
+          type: boolean
+        inputTokens:
+          description: Total input (prompt) tokens consumed across all invocations
+          type: integer
+          format: int64
+        outputTokens:
+          description: Total output (completion) tokens consumed across all invocations
+          type: integer
+          format: int64
+        totalTokens:
+          description: Total tokens consumed (input + output) across all invocations
+          type: integer
+          format: int64
+        model:
+          description: LLM model name used for generation
+          type: string
       required:
         - id
         - assistantId
@@ -11192,6 +11252,9 @@ components:
             - api-token
         id:
           description: Unique identifier of the actor (user ID or token ID)
+          type: string
+        name:
+          description: Display name of the actor, resolved server-side
           type: string
       required:
         - type
@@ -11292,6 +11355,7 @@ components:
             - pinnedEnvironments
             - pinnedAgents
             - scimEnabled
+            - scimManagePermissionsInTestkube
             - eventsEnabled
         valueType:
           description: value type for given settings
@@ -13802,6 +13866,9 @@ components:
             parallelism:
               description: how many resources could be scheduled in parallel
               type: integer
+            failFast:
+              description: abort remaining parallel workers on first failure
+              type: boolean
             description:
               description: worker description to display
               type: string
@@ -14741,6 +14808,9 @@ components:
             parallelism:
               description: how many resources could be scheduled in parallel
               type: integer
+            failFast:
+              description: abort remaining parallel workers on first failure
+              type: boolean
             description:
               description: worker description to display
               type: string
@@ -15813,25 +15883,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Environments'
-    ExecutionGroupListV2:
-      description: List of Test Workflow execution groups
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              totals:
-                $ref: '#/components/schemas/ExecutionTotalsV2'
-              filtered:
-                $ref: '#/components/schemas/ExecutionTotalsV2'
-              results:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ExecutionGroupShortV2'
-            required:
-              - results
-              - totals
-              - filtered
     ExecutionRefs:
       description: List of references to executions of either Test, TestSuite or Workflows
       content:
@@ -16298,13 +16349,6 @@ components:
       name: event
       in: query
       description: filter by event type in audit logs
-      schema:
-        type: string
-    ExecutionGroupID:
-      name: executionGroupID
-      in: path
-      description: unique id of the execution group
-      required: true
       schema:
         type: string
     ExecutionID:

@@ -13,14 +13,21 @@ interface OpenAPI {
 }
 
 // fetch the specified OpenAPI definition
-async function fetchOpenAPI(url: string): Promise<OpenAPI> {
-  console.log("Retrieving OpenAPI definition from " + url);
-  const response = await axios.get(url, {
-    headers: {
-      // token needs to have read access to private Testkube repos
-      Authorization:
-        "Bearer " + process.env.TESTKUBE_OPENAPI_GITHUB_ACCESS_TOKEN,
-    },
+async function fetchOpenAPI(source: string): Promise<OpenAPI> {
+  console.log("Retrieving OpenAPI definition from " + source);
+
+  if (!source.startsWith("http://") && !source.startsWith("https://")) {
+    return yaml.load(fs.readFileSync(source, "utf8")) as OpenAPI;
+  }
+
+  const token = process.env.TESTKUBE_OPENAPI_GITHUB_ACCESS_TOKEN;
+  const response = await axios.get(source, {
+    headers: token
+      ? {
+          // token needs to have read access to private Testkube repos
+          Authorization: "Bearer " + token,
+        }
+      : undefined,
   });
   return yaml.load(response.data) as OpenAPI;
 }
@@ -257,7 +264,8 @@ async function splitOpenAPIByPaths(
 
 // Core OpenAPI definition goes into agent folder
 splitOpenAPIByPaths(
-  "https://raw.githubusercontent.com/kubeshop/testkube/refs/heads/main/api/v1/testkube.yaml",
+  process.env.TESTKUBE_OPENAPI_AGENT_SPEC ||
+    "https://raw.githubusercontent.com/kubeshop/testkube/main/api/v1/testkube.yaml",
   "src/openapi/agent",
   "docs/openapi/agent",
   "Standalone Agent",
@@ -308,7 +316,8 @@ splitOpenAPIByPaths(
 
 // Control-plane OpenAPI definition goes into cloud folder
 splitOpenAPIByPaths(
-  "https://raw.githubusercontent.com/kubeshop/testkube-cloud-api/refs/heads/main/api/v1/testkube-cloud.yaml",
+  process.env.TESTKUBE_OPENAPI_CLOUD_SPEC ||
+    "https://raw.githubusercontent.com/kubeshop/testkube-cloud-api/main/api/v1/testkube-cloud.yaml",
   "src/openapi/cloud",
   "docs/openapi/cloud",
   "Control Plane",
