@@ -8,6 +8,19 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Patch Release v2.7.4 (2026-03-20)
+
+This patch release focuses on control-plane stability.
+
+### Fixes
+
+- Control Plane now emits resource lifecycle events consistently when resources are created, updated, or deleted through the Control Plane.
+- Control Plane now uses MongoDB v2 client.
+- `ListExecutions` MCP handler now handles empty `WorkflowName` and date filters correctly.
+- Prevent a Postgres read-write race that could affect distributed locking behavior.
+- Fixed Postgres empty TestWorkflows catalog.
+- `queue-testworkflow` and `start-testworkflow` events now correctly trigger webhooks.
+
 ## Patch Release v2.7.3 (2026-03-10)
 
 This patch release introduces fixes for Testkube CLI and Control Plane PostgreSQL BD support.
