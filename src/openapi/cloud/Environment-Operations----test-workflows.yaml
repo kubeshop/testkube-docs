@@ -104,6 +104,8 @@ paths:
             application/json:
               schema:
                 $ref: './components.yaml#/components/schemas/Credential'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
         '401':
           $ref: './components.yaml#/components/responses/UnauthorizedError'
         '403':
@@ -183,57 +185,6 @@ paths:
       - $ref: './components.yaml#/components/parameters/EnvironmentID'
       - $ref: './components.yaml#/components/parameters/TestWorkflowName'
       - $ref: './components.yaml#/components/parameters/CredentialName'
-  /organizations/{id}/environments/{environmentID}/test-workflows/{testWorkflowName}/execution-groups:
-    get:
-      summary: List Test Workflow executions
-      description: List Test Workflow executions
-      operationId: listExecutionGroupsForTestWorkflowV2
-      parameters:
-        - $ref: './components.yaml#/components/parameters/Limit'
-        - $ref: './components.yaml#/components/parameters/Offset'
-        - $ref: './components.yaml#/components/parameters/Page'
-        - $ref: './components.yaml#/components/parameters/PageSize'
-        - $ref: './components.yaml#/components/parameters/TextSearch'
-        - $ref: './components.yaml#/components/parameters/Status'
-        - $ref: './components.yaml#/components/parameters/LastDays'
-      responses:
-        '200':
-          $ref: './components.yaml#/components/responses/ExecutionGroupListV2'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/TestWorkflowName'
-  /organizations/{id}/environments/{environmentID}/test-workflows/{testWorkflowName}/execution-groups/{executionGroupID}:
-    get:
-      summary: Get Test Workflow execution group by test workflow name
-      description: Get Test Workflow execution group by test workflow name
-      operationId: getExecutionGroupForTestWorkflowV2
-      responses:
-        '200':
-          description: Successfully retrieved execution group for test workflow
-          content:
-            application/json:
-              schema:
-                $ref: './components.yaml#/components/schemas/ExecutionGroupV2'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/TestWorkflowName'
-      - $ref: './components.yaml#/components/parameters/ExecutionGroupID'
   /organizations/{id}/environments/{environmentID}/test-workflows/definitions:
     get:
       summary: Get workflow definitions in bulk
