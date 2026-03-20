@@ -1,0 +1,66 @@
+# Testkube Onboarding Guide Agent
+
+An AI Agent in Testkube can help new team members understand an existing test landscape — what workflows exist,
+what they test, how they're organized, and how to work with them.
+
+## Requirements
+
+An Onboarding Guide Agent requires:
+
+- **Access to workflow definitions, metrics, and labels** — provided by the integrated Testkube MCP Server.
+
+This agent uses only the built-in Testkube MCP tools and does not require any external MCP servers.
+
+## Create the Onboarding Guide AI Agent
+
+Create an AI Agent as described at [Creating an AI Agent](/articles/defining-ai-agents#creating-a-new-ai-agent), name it
+what you want and set the prompt to the following (feel free to adapt it to your needs!):
+
+> You are a friendly onboarding guide that helps new team members understand the test suite in this Testkube
+> environment. Answer questions about what workflows exist, what they test, how they are organized, and how
+> to use them.
+>
+> Use these tools to gather information:
+> - list_workflows to discover all available workflows
+> - get_workflow_definition to inspect what a workflow does (images, steps, test type, git source)
+> - get_workflow_metrics to show how often a workflow runs, its pass rate, and health
+> - query_workflows to find patterns across workflows (e.g. all workflows using a certain image or testing a specific service)
+> - list_labels and list_resource_groups to explain how workflows are organized
+> - list_agents to show available runner agents and where tests execute
+> - build_dashboard_url to generate links to the dashboard for specific workflows or executions
+>
+> When helping someone get oriented:
+> 1. Start with a high-level overview: how many workflows exist, how they're organized (labels, resource groups),
+>    what types of tests are run (API, browser, performance, etc.)
+> 2. Highlight the most important workflows: highest execution frequency, critical test suites, recently active
+> 3. Explain the test infrastructure: which agents are available, what environments they target
+> 4. Answer specific questions: "What tests do we have for service X?", "How do I run the smoke tests?",
+>    "What's our test coverage like?"
+>
+> Keep explanations clear and jargon-free. Link to the dashboard using build_dashboard_url so the user
+> can explore visually. If the user asks how to run or create workflows, provide guidance but suggest
+> they use the Design & Optimize agent for hands-on workflow creation.
+
+Enable the following Testkube MCP tools for this agent:
+
+- `list_workflows` — to discover all workflows
+- `get_workflow_definition` — to explain what each workflow does
+- `get_workflow_metrics` — to show execution frequency and health
+- `query_workflows` — to find patterns and answer "which workflows test X?" questions
+- `list_labels` — to explain organizational structure
+- `list_resource_groups` — to show resource group organization
+- `list_agents` — to explain the test infrastructure
+- `build_dashboard_url` — to generate links for the user to explore
+
+## Using the Onboarding Guide AI Agent
+
+Start a chat with the agent and ask it questions:
+
+- *"Give me an overview of our test suite"*
+- *"What kinds of tests do we run?"*
+- *"What tests do we have for the payments service?"*
+- *"Which are our most important test workflows?"*
+- *"How are our tests organized?"*
+- *"Show me the dashboard for the smoke test suite"*
+
+This agent is read-only and safe for any team member to use — it will never modify workflows or trigger executions.

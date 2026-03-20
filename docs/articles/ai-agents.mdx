@@ -37,7 +37,8 @@ automated pipeline. These agents:
 posts a summary with remediation suggestions to a Slack channel.
 
 Task-focused agents are ideal for **automation scenarios** where you want to augment your Continuous Testing pipelines with 
-AI-powered analysis and actions without human intervention.
+AI-powered analysis and actions without human intervention. Use [AI Agent Triggers](/articles/ai-triggers) to 
+automatically run task-focused agents when workflow executions finish, fail, or change state.
 
 :::tip
 See the [Remediation Agent Example](/articles/remediation-agent) for an example of a task-focused agent.
@@ -69,7 +70,7 @@ and use to get started with AI Agents - read more at [Creating an AI Agent from 
 
 | Aspect | Task-Focused | Guidance & Support |
 |--------|--------------|-------------------|
-| **Trigger** | Automated (e.g., on execution failure) | User-initiated conversation |
+| **Trigger** | Automated via [AI Agent Triggers](/articles/ai-triggers) (e.g., on execution failure) | User-initiated conversation |
 | **Input** | Specific, well-defined data | Open-ended questions or goals |
 | **Output** | Concrete action or artifact | Recommendations and assistance |
 | **Interaction** | Fire-and-forget | Interactive, multi-turn |
@@ -78,4 +79,5 @@ and use to get started with AI Agents - read more at [Creating an AI Agent from 
 Both styles can leverage the same MCP Servers and tools - the difference lies in how the agent is triggered 
 and how it interacts with users or systems.
 
-Check out [Defining AI Agents](/articles/defining-ai-agents) for more details on how to create and manage AI Agents.
+Check out [Defining AI Agents](/articles/defining-ai-agents) for more details on how to create and manage AI Agents,
+and [AI Agent Triggers](/articles/ai-triggers) to learn how to automate agent execution based on workflow events.

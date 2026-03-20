@@ -684,6 +684,11 @@ const sidebars = {
                   id: "articles/mcp-servers-for-ai-agents",
                 },
                 {
+                  type: "doc",
+                  label: "AI Agent Triggers",
+                  id: "articles/ai-triggers",
+                },
+                {
                   type: "category",
                   label: "Example Agents",
                   items: [
@@ -696,7 +701,32 @@ const sidebars = {
                       type: "doc",
                       label: "Flakiness Analysis",
                       id: "articles/flakiness-analysis-agent",
-                    }
+                    },
+                    {
+                      type: "doc",
+                      label: "Performance Regression",
+                      id: "articles/performance-regression-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Test Suite Curator",
+                      id: "articles/test-suite-curator-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Onboarding Guide",
+                      id: "articles/onboarding-guide-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Dependency Impact",
+                      id: "articles/dependency-impact-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Security & Compliance",
+                      id: "articles/security-compliance-agent",
+                    },
                   ],
                 },
               ],

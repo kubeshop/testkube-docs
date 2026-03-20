@@ -1,0 +1,183 @@
+# AI Agent Triggers
+
+AI Agent Triggers allow you to automatically run AI agents in response to workflow execution events — for example,
+triggering failure analysis when a test fails, or running a release readiness check when all tests pass.
+
+Triggers turn AI agents from interactive chat assistants into **automated pipeline components** that react to 
+events in your testing infrastructure without human intervention.
+
+## How Triggers Work
+
+When a Test Workflow execution finishes, Testkube evaluates all enabled triggers in the environment:
+
+1. **Event matching** — the execution's final status (failed, passed, aborted, canceled) is compared against the trigger's configured events.
+2. **Label selector** — if the trigger has a label selector, the workflow's labels must match. An empty selector matches all workflows.
+3. **Trigger mode** — determines whether the trigger fires on every match or only on state changes.
+4. **Session creation** — if all conditions match, Testkube creates a new AI agent session with the rendered prompt template and starts it automatically.
+
+The resulting session appears in the AI Agent Chats list and can be monitored or continued interactively.
+
+## Creating a Trigger
+
+Navigate to **Integrations → AI Triggers** in the Testkube Dashboard and click **Create new trigger**.
+
+### Configuration Fields
+
+| Field | Description | Required |
+|-------|-------------|----------|
+| **Name** | A unique name for the trigger (must be a valid Kubernetes resource name) | Yes |
+| **AI Agent** | The AI agent to run when the trigger fires | Yes |
+| **Trigger Events** | Which execution outcomes activate the trigger | Yes |
+| **Label Selector** | Filter which workflows can activate the trigger based on their labels | No |
+| **Trigger Mode** | When to fire: every match or only on state changes | Yes |
+| **Prompt Template** | Instructions sent to the agent, with template variables for execution context | No |
+
+### Trigger Events
+
+Select one or more events that should activate the trigger:
+
+| Event | Fires when |
+|-------|------------|
+| **Test Workflow Failed** | A workflow execution finishes with a `failed` status |
+| **Test Workflow Success** | A workflow execution finishes with a `passed` status |
+| **Test Workflow Aborted** | A workflow execution is aborted |
+| **Test Workflow Canceled** | A workflow execution is canceled |
+
+:::tip
+The most common setup is triggering on **Test Workflow Failed** to automatically analyze failures.
+You can select multiple events — for example, both Failed and Aborted.
+:::
+
+### Label Selector
+
+The label selector filters which workflows can activate the trigger. Only workflows whose labels match the
+selector will fire the trigger.
+
+- Leave empty to match **all workflows** in the environment
+- Use label key-value pairs to target specific workflows (e.g. `suite=smoke`, `team=payments`)
+- Multiple labels are combined with AND logic — all must match
+
+**Examples:**
+- `suite=critical` — only trigger for workflows labeled with `suite=critical`
+- `team=backend, type=api` — only trigger for backend team API test workflows
+- *(empty)* — trigger for all workflows
+
+### Trigger Mode
+
+| Mode | Behavior |
+|------|----------|
+| **Every match** | Fires every time a matching event occurs. Use this when you want analysis on every failure regardless of history. |
+| **On state change** | Fires only when the execution status differs from the previous execution of the same workflow. For example, if a workflow goes from passing to failing, or from failing to passing. Use this to avoid repeated triggers for workflows that are consistently failing. |
+
+:::note
+**On state change** compares the current execution's status against the most recent previous finished execution
+of the same workflow. The first execution of a workflow is always considered a state change.
+:::
+
+### Prompt Template
+
+The prompt template defines the instructions sent to the AI agent when the trigger fires. You can use
+Go template variables to include execution context:
+
+| Variable | Description | Example value |
+|----------|-------------|---------------|
+| `{{.WorkflowName}}` | Name of the workflow that was executed | `my-api-tests` |
+| `{{.ExecutionName}}` | Name of the specific execution | `my-api-tests-42` |
+| `{{.ExecutionID}}` | Unique ID of the execution | `6721a3b2...` |
+| `{{.Status}}` | Final status of the execution | `failed` |
+
+**Default template** (used when no custom template is provided):
+
+```
+Execution ID: {{.ExecutionID}}
+```
+
+**Custom template example** for a failure analysis trigger:
+
+```
+Analyze the failed execution of workflow {{.WorkflowName}}.
+Execution ID: {{.ExecutionID}}
+Status: {{.Status}}
+
+Focus on identifying the root cause and suggest actionable fixes.
+If the failure looks transient (flaky test, infrastructure issue), recommend a rerun.
+```
+
+## Example: Auto-Analyze Failed Tests
+
+This example sets up a trigger that automatically runs the **Troubleshoot** agent whenever a critical test workflow fails.
+
+1. Navigate to **Integrations → AI Triggers** and click **Create new trigger**
+2. Configure:
+   - **Name**: `analyze-critical-failures`
+   - **AI Agent**: Select the **Troubleshoot** agent (or any failure analysis agent)
+   - **Trigger Events**: Test Workflow Failed
+   - **Label Selector**: `priority=critical`
+   - **Trigger Mode**: Every match
+   - **Prompt Template**:
+     ```
+     A critical test workflow has failed. Analyze execution {{.ExecutionID}} of {{.WorkflowName}} 
+     and provide a root cause analysis with suggested fixes.
+     ```
+3. Click **Create Trigger**
+
+Now whenever a workflow with the label `priority=critical` fails, the Troubleshoot agent will automatically
+start a session analyzing the failure. You can find the resulting analysis in **AI Agents → Chats**.
+
+## Example: State-Change Notifications
+
+This example triggers analysis only when a workflow's status changes — for example, when a previously passing
+workflow starts failing:
+
+1. **Name**: `detect-new-failures`
+2. **AI Agent**: Select your preferred analysis agent
+3. **Trigger Events**: Test Workflow Failed
+4. **Label Selector**: *(leave empty for all workflows)*
+5. **Trigger Mode**: On state change
+6. **Prompt Template**:
+   ```
+   Workflow {{.WorkflowName}} has changed state to {{.Status}}.
+   This was previously passing. Analyze execution {{.ExecutionID}} to determine what changed.
+   Check recent workflow definition changes and execution logs for the root cause.
+   ```
+
+This avoids generating repeated analysis sessions for workflows that are consistently failing.
+
+## Managing Triggers
+
+### Viewing Triggers
+
+All triggers are listed at **Integrations → AI Triggers**. Each trigger card shows:
+- The trigger name and enabled/disabled status
+- The linked AI agent
+- The configured events (Failed, Success, Aborted, Canceled)
+- The trigger mode (Every match or On state change)
+
+### Enabling and Disabling
+
+Click on a trigger to open its details, where you can toggle the **Enabled** switch. Disabled triggers
+are not evaluated and will not fire.
+
+### API Token Requirement
+
+AI Agent Triggers require an API token to authenticate the automatically created sessions. When creating a trigger,
+Testkube generates a dedicated API token. This token is used internally to start the AI agent session
+on behalf of the trigger.
+
+:::warning
+If the API token associated with a trigger is deleted or expires, the trigger will stop firing. 
+Check the trigger's API token configuration if sessions are not being created as expected.
+:::
+
+## Best Practices
+
+- **Start with "On state change" mode** for general failure detection — this avoids flooding your AI agent chats
+  with repeated analysis of the same broken workflow.
+- **Use "Every match" mode** for critical workflows where you want analysis of every single failure, or for
+  agents that take action (like the Smart Rerun agent).
+- **Use label selectors** to scope triggers to specific workflow groups rather than triggering on everything.
+  This keeps AI usage focused and costs manageable.
+- **Customize prompt templates** to give the agent specific instructions relevant to your trigger scenario.
+  Generic prompts produce generic analysis — specific prompts produce actionable insights.
+- **Combine triggers with specialized agents** — for example, use the Troubleshoot agent for failure analysis,
+  the Smart Rerun agent for automatic retries, or the Failure Categorizer for tagging failures.
