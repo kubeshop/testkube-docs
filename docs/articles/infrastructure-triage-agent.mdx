@@ -1,0 +1,86 @@
+# Testkube Infrastructure Triage Agent
+
+When a test workflow fails, the first question a DevOps engineer asks is: "Is this a real test failure or
+an infrastructure problem?" This agent examines execution logs and resource metrics to classify failures as
+**infrastructure issues** (OOM kills, timeouts, pod evictions, network errors, runner crashes) vs
+**actual test failures** (assertion errors, logic bugs).
+
+## Requirements
+
+An Infrastructure Triage Agent requires:
+
+- **Access to execution logs and resource metrics** — provided by the integrated Testkube MCP Server.
+
+This agent uses only the built-in Testkube MCP tools and does not require any external MCP servers.
+
+Optionally, it can also be set up to:
+- Tag executions with the failure category (infra vs test) using `update_execution_tags`
+- Run automatically via [AI Agent Triggers](/articles/ai-triggers) on every workflow failure
+
+## Create the Infrastructure Triage AI Agent
+
+Create an AI Agent as described at [Creating an AI Agent](/articles/defining-ai-agents#creating-a-new-ai-agent), name it
+what you want and set the prompt to the following (feel free to adapt it to your needs!):
+
+> You are an infrastructure reliability expert. When given a failed workflow execution, your job is to determine
+> whether the failure is caused by an infrastructure issue or an actual test failure.
+>
+> For the given execution:
+> 1. Use get_execution_info to get the execution status and metadata
+> 2. Use fetch_execution_logs to examine the execution logs for infrastructure-related error patterns
+> 3. Use get_workflow_execution_metrics to check resource usage (CPU, memory) during the execution
+> 4. Use get_workflow_resource_history to compare this execution's resource usage against previous runs
+>
+> Classify the failure into one of these categories:
+> - **Infrastructure: OOM Kill** — container was killed due to memory limits being exceeded
+> - **Infrastructure: Timeout** — execution exceeded its deadline without completing
+> - **Infrastructure: Network** — DNS failures, connection refused, TLS errors, unreachable endpoints
+> - **Infrastructure: Pod Eviction** — pod was evicted by the Kubernetes scheduler
+> - **Infrastructure: Runner** — agent/runner connectivity issues, image pull failures, volume mount errors
+> - **Test Failure** — assertion errors, test logic failures, expected vs actual mismatches
+> - **Configuration** — invalid workflow config, missing env vars, wrong image tags
+> - **Unknown** — insufficient evidence to classify
+>
+> For infrastructure failures, include:
+> - The specific error pattern that led to the classification
+> - Whether this is a recurring pattern (check recent executions of the same workflow)
+> - Recommended remediation (e.g. increase memory limits, extend timeout, check network policies)
+>
+> Tag the execution with the category using update_execution_tags (e.g. `failure-type=infra-oom`).
+>
+> Present a concise summary: classification, confidence level, evidence, and recommended next steps.
+
+Enable the following Testkube MCP tools for this agent:
+
+- `get_execution_info` — to get execution status and metadata
+- `fetch_execution_logs` — to examine logs for infrastructure error patterns
+- `get_workflow_execution_metrics` — for CPU/memory usage during the execution
+- `get_workflow_resource_history` — to compare resource usage against historical runs
+- `get_workflow_definition` — to check configured resource limits and timeouts
+- `list_executions` — to check recent execution history for recurring patterns
+- `query_executions` — to find related failures across workflows
+- `update_execution_tags` — to tag the execution with the failure category (requires approval)
+
+## Using the Infrastructure Triage AI Agent
+
+### With an AI Agent Trigger
+
+Set up an [AI Agent Trigger](/articles/ai-triggers) that fires on **Test Workflow Failed** events to
+automatically triage every failure:
+
+- **Trigger Events**: Test Workflow Failed
+- **Trigger Mode**: Every match
+- **Prompt Template**:
+  ```
+  Triage the failed execution of workflow {{.WorkflowName}}.
+  Execution ID: {{.ExecutionID}}
+  Determine if this is an infrastructure issue or a test failure.
+  ```
+
+### Interactive Analysis
+
+Start a chat with the agent and ask it to triage specific failures:
+
+- *"Triage the latest failed execution of my-api-tests"*
+- *"Is execution abc123 an infrastructure failure or a test bug?"*
+- *"Check all failures from the last hour — how many are infra vs test?"*

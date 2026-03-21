@@ -1,0 +1,61 @@
+# AI Agent Examples Overview
+
+This section provides example AI Agent configurations that showcase different ways to leverage AI-powered
+automation in your testing pipelines. Each example includes a ready-to-use prompt, the recommended MCP tools,
+and usage guidance.
+
+The examples are grouped by primary audience, though many agents are valuable to both QA engineers and
+DevOps/platform engineers.
+
+## For QA & Test Engineers
+
+These agents focus on **test quality, failure analysis, and test authoring** — helping QA teams understand
+why tests fail, improve test coverage, and maintain a healthy test suite.
+
+| Agent | Description | Trigger Style |
+|-------|-------------|---------------|
+| [Remediation](/articles/remediation-agent) | Analyzes failed tests, inspects recent code changes, and opens a pull request with a suggested fix | Task (on failure) |
+| [Flakiness Analysis](/articles/flakiness-analysis-agent) | Detects flaky tests by analyzing execution patterns across multiple runs and correlating with source changes | Interactive or triggered |
+| [Performance Regression](/articles/performance-regression-agent) | Monitors execution duration and resource trends to detect workflows that are getting slower over time | Scheduled or interactive |
+| [Test Suite Curator](/articles/test-suite-curator-agent) | Audits your test suite for redundant, overlapping, or unmaintained workflows and recommends consolidation | Scheduled |
+| [Dependency Impact](/articles/dependency-impact-agent) | When a test fails, analyzes which other workflows might be affected by the same root cause | Task (on failure) |
+
+## For DevOps & Platform Engineers
+
+These agents focus on **infrastructure reliability, pipeline efficiency, and operational governance** — helping
+platform teams keep test execution fast, cost-effective, and well-managed.
+
+| Agent | Description | Trigger Style |
+|-------|-------------|---------------|
+| [Infrastructure Triage](/articles/infrastructure-triage-agent) | Classifies failures as infrastructure issues (OOM, timeouts, network) vs actual test failures | Task (on failure) |
+| [Execution Cost Analyzer](/articles/execution-cost-agent) | Analyzes execution patterns to identify expensive workflows and recommend optimization strategies | Interactive or scheduled |
+| [Resource Right-Sizer](/articles/resource-rightsizer-agent) | Examines CPU/memory usage across executions and recommends resource request/limit adjustments | Interactive or scheduled |
+| [Pipeline SLA Guardian](/articles/pipeline-sla-agent) | Monitors execution durations against expected baselines and flags regressions with root cause analysis | Triggered (on state change) |
+| [Incident Correlator](/articles/incident-correlator-agent) | Groups simultaneous failures to determine if they share a common infrastructure root cause | Task (on failure) |
+| [Environment Health Auditor](/articles/environment-health-agent) | Produces a periodic health report covering agent connectivity, error rates, and stuck executions | Scheduled |
+| [Workflow Standardization](/articles/workflow-standardization-agent) | Audits workflows against organizational naming, labeling, and configuration standards | Scheduled or interactive |
+| [Capacity Planner](/articles/capacity-planner-agent) | Analyzes execution volume patterns and growth trends to recommend infrastructure scaling decisions | Interactive |
+
+## Cross-Functional
+
+These agents serve both audiences equally:
+
+| Agent | Description | Trigger Style |
+|-------|-------------|---------------|
+| [Onboarding Guide](/articles/onboarding-guide-agent) | Helps new team members understand the existing test infrastructure and create their first workflows | Interactive |
+| [Security & Compliance](/articles/security-compliance-agent) | Audits workflows for security best practices, secret handling, and operational compliance | Scheduled or interactive |
+
+## Getting Started
+
+All examples use the built-in Testkube MCP Server. To create any of these agents:
+
+1. Follow the [Creating an AI Agent](/articles/defining-ai-agents#creating-a-new-ai-agent) guide
+2. Copy the prompt from the example page
+3. Enable the listed MCP tools
+4. Optionally set up an [AI Agent Trigger](/articles/ai-triggers) for automated execution
+
+:::tip
+These examples are starting points — customize the prompts, tools, and trigger conditions to match your
+team's specific needs. You can also combine multiple agents: for example, use the Infrastructure Triage agent
+to classify failures, then route infrastructure issues to an ops channel and test failures to QA.
+:::

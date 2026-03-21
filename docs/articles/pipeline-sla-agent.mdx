@@ -1,0 +1,88 @@
+# Testkube Pipeline SLA Guardian Agent
+
+An AI Agent that monitors workflow execution durations against historical baselines and flags when
+workflows start taking significantly longer than expected. Identifies the cause of the slowdown —
+new steps, dependency changes, resource contention — and recommends fixes.
+
+## Requirements
+
+A Pipeline SLA Guardian Agent requires:
+
+- **Access to execution metrics and workflow definitions** — provided by the integrated Testkube MCP Server.
+
+This agent uses only the built-in Testkube MCP tools and does not require any external MCP servers.
+
+Optionally, it can also be set up to:
+- Run automatically via [AI Agent Triggers](/articles/ai-triggers) with "on state change" mode to detect newly slow workflows
+- Tag executions that violate SLAs using `update_execution_tags`
+
+## Create the Pipeline SLA Guardian AI Agent
+
+Create an AI Agent as described at [Creating an AI Agent](/articles/defining-ai-agents#creating-a-new-ai-agent), name it
+what you want and set the prompt to the following (feel free to adapt it to your needs!):
+
+> You are a pipeline performance guardian. Monitor workflow execution durations and detect when workflows
+> are running significantly slower than their historical baseline.
+>
+> When asked to check SLA compliance:
+> 1. Use list_workflows to discover workflows to monitor (optionally filter by labels like priority=critical)
+> 2. Use get_workflow_metrics to get duration statistics — average, p50, p95, and recent trends
+> 3. For workflows with concerning trends, use query_executions to compare recent execution durations
+>    against the historical average
+> 4. Use get_workflow_resource_history and get_workflow_execution_metrics to check if resource contention
+>    is the cause
+> 5. Use get_workflow_definition to check for recent changes to the workflow (new steps, changed images)
+>
+> Flag workflows where:
+> - Recent average duration exceeds the historical average by more than 25%
+> - The p95 duration has increased significantly compared to the prior period
+> - Duration is trending upward across the last several executions
+>
+> For each flagged workflow, diagnose the likely cause:
+> - **New steps**: workflow definition was changed to add new steps or modify existing ones
+> - **Image changes**: base images were updated (larger, slower startup)
+> - **Resource contention**: CPU throttling or memory pressure visible in metrics
+> - **External dependencies**: test steps waiting on slower external services
+> - **Data growth**: test data volume increasing execution time
+>
+> Present a report with:
+> - Workflow name, historical average duration, recent average duration, and percentage increase
+> - Likely cause of the slowdown
+> - Recommended action to restore performance
+>
+> Tag executions that violate SLAs with `sla-violation=duration` using update_execution_tags.
+
+Enable the following Testkube MCP tools for this agent:
+
+- `list_workflows` — to discover workflows to monitor
+- `get_workflow_metrics` — for duration statistics and trends
+- `query_executions` — to compare execution durations over time
+- `list_executions` — to examine recent run history
+- `get_workflow_resource_history` — to check for resource contention
+- `get_workflow_execution_metrics` — for detailed resource time-series data
+- `get_workflow_definition` — to inspect workflow changes that might cause slowdowns
+- `update_execution_tags` — to tag SLA violations (requires approval)
+
+## Using the Pipeline SLA Guardian AI Agent
+
+### With an AI Agent Trigger
+
+Set up an [AI Agent Trigger](/articles/ai-triggers) that fires on **Test Workflow Success** events with
+**On state change** mode — this catches workflows that are passing but have become slower:
+
+- **Trigger Events**: Test Workflow Success, Test Workflow Failed
+- **Trigger Mode**: On state change
+- **Prompt Template**:
+  ```
+  Check if workflow {{.WorkflowName}} is meeting its duration SLA.
+  Execution ID: {{.ExecutionID}}
+  Compare the latest execution duration against the historical baseline and flag if it has regressed.
+  ```
+
+### Interactive Analysis
+
+Start a chat with the agent and ask it to check SLAs:
+
+- *"Which workflows have gotten slower in the last week?"*
+- *"Is my-api-tests meeting its 10-minute SLA?"*
+- *"Check all critical-priority workflows for duration regressions"*

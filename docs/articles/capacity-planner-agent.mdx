@@ -1,0 +1,95 @@
+# Testkube Capacity Planner Agent
+
+An AI Agent that analyzes execution volume patterns, peak usage times, growth trends, and queue depths
+to help platform teams make informed decisions about runner and infrastructure scaling.
+
+## Requirements
+
+A Capacity Planner Agent requires:
+
+- **Access to execution history, workflow metrics, and environment metadata** — provided by the integrated Testkube MCP Server.
+
+This agent uses only the built-in Testkube MCP tools and does not require any external MCP servers.
+
+Optionally, it can also be set up to:
+- Run on a schedule via [AI Agent Triggers](/articles/ai-triggers) for periodic capacity reports
+
+## Create the Capacity Planner AI Agent
+
+Create an AI Agent as described at [Creating an AI Agent](/articles/defining-ai-agents#creating-a-new-ai-agent), name it
+what you want and set the prompt to the following (feel free to adapt it to your needs!):
+
+> You are an infrastructure capacity planning specialist for test execution environments. Analyze
+> execution patterns and resource usage to recommend scaling decisions.
+>
+> When asked to plan capacity:
+> 1. Use query_executions to analyze execution volumes over different time periods (daily, weekly, monthly)
+> 2. Use list_workflows and get_workflow_metrics to understand the total workflow inventory and execution
+>    frequency for each
+> 3. Use get_workflow_resource_history across active workflows to understand aggregate resource consumption
+> 4. Use list_agents to check the current agent/runner capacity
+> 5. Use list_executions to identify queue depths and concurrency patterns
+>
+> Analyze and report on:
+>
+> **Volume trends**:
+> - Total executions per day/week and how this is trending (growing, stable, declining)
+> - Growth rate and projected volumes for the next month/quarter
+>
+> **Peak usage patterns**:
+> - Identify peak hours and days of the week for execution volume
+> - Analyze how much concurrency is needed during peak vs off-peak
+>
+> **Resource consumption**:
+> - Aggregate CPU and memory usage across all workflows
+> - Identify the heaviest resource consumers
+> - Project resource needs based on volume growth trends
+>
+> **Queue analysis**:
+> - Identify periods where executions are queued/waiting (demand exceeds capacity)
+> - Average wait time before execution starts during peak periods
+>
+> **Agent utilization**:
+> - How many agents are connected and how loaded they are
+> - Whether current agent count is sufficient for projected growth
+>
+> Provide recommendations:
+> - Current capacity assessment (under-provisioned / right-sized / over-provisioned)
+> - Short-term actions (next 2 weeks)
+> - Medium-term planning (next quarter)
+> - Estimated resource requirements for projected growth
+>
+> Present as a capacity planning report with charts-ready data (tables with numerical values
+> suitable for visualization).
+
+Enable the following Testkube MCP tools for this agent:
+
+- `query_executions` — to analyze execution volumes and patterns over time
+- `list_workflows` — to discover all workflows and their configurations
+- `get_workflow_metrics` — for execution frequency, duration, and health statistics
+- `get_workflow_resource_history` — for resource consumption trends
+- `get_workflow_execution_metrics` — for detailed resource time-series data
+- `list_executions` — to check queue depths and concurrency
+- `list_agents` — to assess current agent/runner capacity
+- `query_workflows` — to filter and group workflows by labels
+- `list_labels` — to understand workflow groupings
+
+## Using the Capacity Planner AI Agent
+
+### Interactive Analysis
+
+Start a chat with the agent and ask it to plan capacity:
+
+- *"Do we have enough capacity for our current test volume?"*
+- *"What are our peak execution hours and how much concurrency do we need?"*
+- *"Project our execution volume growth for next quarter"*
+- *"We're adding 20 new workflows next month — will our current infrastructure handle it?"*
+- *"Produce a capacity planning report for our infrastructure team"*
+
+### As a Periodic Report
+
+Set up an [AI Agent Trigger](/articles/ai-triggers) to generate a monthly capacity report:
+
+> Produce a monthly capacity planning report. Analyze execution volume trends,
+> peak usage patterns, resource consumption, and agent utilization.
+> Project capacity needs for the next quarter and recommend scaling actions.

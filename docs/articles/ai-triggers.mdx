@@ -143,6 +143,116 @@ workflow starts failing:
 
 This avoids generating repeated analysis sessions for workflows that are consistently failing.
 
+## Scheduled AI Agent Triggers
+
+AI Agent Triggers fire in response to workflow execution events — but what if you want to run an AI agent
+on a **fixed schedule** (daily, weekly, etc.) rather than in response to a specific workflow's outcome?
+
+Since triggers require a workflow execution event to fire, the pattern is to create a lightweight
+**scheduler workflow** that runs on a cron schedule and exists solely to activate the trigger.
+
+### Step 1: Create a Scheduler Workflow
+
+Create a minimal workflow that completes immediately and carries a label identifying its purpose.
+This workflow does no actual testing — it simply acts as a clock signal for the trigger.
+
+```yaml title="ai-scheduler-daily.yaml"
+kind: TestWorkflow
+apiVersion: testworkflows.testkube.io/v1
+metadata:
+  name: ai-scheduler-daily
+  labels:
+    purpose: ai-scheduler
+    schedule: daily
+spec:
+  events:
+  - cronjob:
+      cron: "0 8 * * *"
+  steps:
+  - name: noop
+    shell: 'echo "AI agent scheduler tick"'
+```
+
+:::tip
+You can create multiple scheduler workflows for different intervals — for example,
+`ai-scheduler-weekly` with `cron: "0 8 * * 1"` (Mondays at 8am) or `ai-scheduler-hourly` with
+`cron: "0 * * * *"`. Give each a distinct `schedule` label value so triggers can target the right one.
+
+See [Scheduling Workflows](/articles/scheduling-tests) for more details on cron expressions and timezone
+configuration.
+:::
+
+### Step 2: Create an AI Agent Trigger for the Schedule
+
+Create a trigger that listens for the scheduler workflow's completion:
+
+1. Navigate to **Integrations → AI Triggers** and click **Create new trigger**
+2. Configure:
+   - **Name**: `daily-health-audit` (or whatever describes the agent's task)
+   - **AI Agent**: Select the agent you want to run on schedule (e.g. Environment Health Auditor)
+   - **Trigger Events**: Test Workflow Success
+   - **Label Selector**: `purpose=ai-scheduler, schedule=daily`
+   - **Trigger Mode**: Every match
+   - **Prompt Template**: The instructions for the scheduled run, for example:
+     ```
+     Produce a daily health report for this environment.
+     Cover agent health, execution error rates for the last 24 hours,
+     stuck executions, and workflows with declining health scores.
+     ```
+3. Click **Create Trigger**
+
+The label selector `purpose=ai-scheduler, schedule=daily` ensures this trigger only fires for the
+scheduler workflow — not for any of your actual test workflows.
+
+### Reusing a Single Scheduler for Multiple Agents
+
+You can attach multiple triggers to the same scheduler workflow. For example, if you want both a
+health audit and a cost analysis to run daily:
+
+- Create **one** scheduler workflow (`ai-scheduler-daily`) with labels `purpose=ai-scheduler, schedule=daily`
+- Create **two** triggers, both with label selector `purpose=ai-scheduler, schedule=daily`, each pointing to a different agent with its own prompt template
+
+Both agents will be triggered every time the scheduler workflow completes.
+
+### Example: Weekly Compliance Audit
+
+A complete example using this pattern for a weekly workflow standardization audit:
+
+**Scheduler workflow:**
+
+```yaml title="ai-scheduler-weekly.yaml"
+kind: TestWorkflow
+apiVersion: testworkflows.testkube.io/v1
+metadata:
+  name: ai-scheduler-weekly
+  labels:
+    purpose: ai-scheduler
+    schedule: weekly
+spec:
+  events:
+  - cronjob:
+      cron: "0 9 * * 1"
+      timezone: America/New_York
+  steps:
+  - name: noop
+    shell: 'echo "Weekly AI agent scheduler tick"'
+```
+
+**Trigger configuration:**
+
+- **Name**: `weekly-compliance-audit`
+- **AI Agent**: Workflow Standardization agent
+- **Trigger Events**: Test Workflow Success
+- **Label Selector**: `purpose=ai-scheduler, schedule=weekly`
+- **Trigger Mode**: Every match
+- **Prompt Template**:
+  ```
+  Run a full compliance audit of all workflows in this environment.
+  Check naming conventions, required labels (team, type), resource limits,
+  timeouts, and artifact collection. Produce a compliance report with the
+  overall compliance rate and a prioritized list of violations.
+  ```
+
 ## Managing Triggers
 
 ### Viewing Triggers
