@@ -75,9 +75,8 @@ Enable the following Testkube MCP tools for this agent:
 Set up an [AI Agent Trigger](/articles/ai-triggers) to generate a daily health report:
 
 - **Trigger Events**: Test Workflow Success (use any frequently running workflow as the "clock")
-- **Trigger Mode**: On state change
-- **Prompt Template**:
-  ```
+- **Trigger Events**: Test Workflow Success (use any frequently running workflow as the "clock")
+- **Trigger Mode**: Every match
   Produce a daily health report for this environment.
   Cover agent health, execution error rates for the last 24 hours,
   stuck executions, and workflows with declining health scores.
