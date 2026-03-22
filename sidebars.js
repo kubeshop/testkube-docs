@@ -656,8 +656,13 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Configuration Quick Start",
+              label: "Configuration",
               id: "articles/ai-enabling",
+            },
+            {
+              type: "doc",
+              label: "AI Assistant",
+              id: "articles/ai-assistant-overview",
             },
             {
               type: "category",
@@ -748,17 +753,6 @@ const sidebars = {
                       id: "articles/ai-agent-ideas",
                     },
                   ],
-                },
-              ],
-            },
-            {
-              type: "category",
-              label: "AI Assistant",
-              items: [
-                {
-                  type: "doc",
-                  label: "Overview",
-                  id: "articles/ai-assistant-overview",
                 },
               ],
             },
