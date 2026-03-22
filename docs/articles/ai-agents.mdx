@@ -1,24 +1,43 @@
 # Testkube AI Agents
 
 Testkube allows you to define AI Agents to perform advanced test orchestration and analysis tasks, using
-both the internal and external MCP Servers for whatever scenario you need. 
+both the internal and external MCP Servers for whatever scenario you need. AI Agents can be triggered both manually
+and automatically based on workflow execution events or schedules, allowing you to leverage AI-powered automation 
+in your testing pipelines, be they CI/CD pipelines, GitOps pipelines, or other automation pipelines.
 
-## Example Use Cases for AI Agents
+## Example Use Cases
 
-Example Use Cases for AI Agents are:
+AI Agents can address a wide range of testing and operational challenges:
 
-- **Automated Remediation**: introspection of failed tests and related code changes to suggest fixes (see [Remediation Agent Example](/articles/remediation-agent))
-- **Anomaly Detection**: analysis of execution results or resource usage over time to detect anomalies.
-- **Advanced Integrations**: integrating with external systems via their MCP Server(s) for creating issues, sharing/reading data, etc.
-- **Advanced Troubleshooting**: including externally available data for troubleshooting failed tests (see [Flakiness Analysis Agent Example](/articles/flakiness-analysis-agent))
-- **Automated Test Generation**: Agents can both create new automated tests and the Workflows required to run them. 
+**For QA & Test Engineers:**
+- **Automated Remediation** — Analyze failed tests, inspect code changes, and open a fix PR (see [Remediation Agent](/articles/remediation-agent))
+- **Flakiness Analysis** — Detect flaky tests across execution history and correlate with source changes (see [Flakiness Analysis Agent](/articles/flakiness-analysis-agent))
+- **Dependency Impact** — When a test fails, assess which other workflows might be affected (see [Dependency Impact Agent](/articles/dependency-impact-agent))
 
-The only limit to an AI Agents capabilities is set by the LLM you use and the MCP Servers you integrate with.
+**For DevOps & Platform Engineers:**
+- **Infrastructure Triage** — Classify failures as infra issues (OOM, timeouts) vs test bugs (see [Infrastructure Triage Agent](/articles/infrastructure-triage-agent))
+- **Incident Correlation** — Group simultaneous failures and identify common root causes (see [Incident Correlator Agent](/articles/incident-correlator-agent))
+- **Execution Cost Analysis** — Find expensive workflows and recommend optimizations (see [Execution Cost Analyzer Agent](/articles/execution-cost-agent))
 
-:::note
-Testkube AI Agents use the same LLM that has been configured for the AI Assistant for resolving the provided prompt,
-see [Default LLM and Model](/articles/ai-configuration#default-llm-and-model).
-:::
+**General:**
+- **Advanced Integrations** — Connect external MCP Servers (GitHub, Jira, Slack) to create issues, post notifications, or read data
+- **Automated Test Generation** — Create new tests and the Workflows required to run them
+
+See [Example Agents](/articles/ai-agent-examples-overview) for ready-to-use agent configurations and [More Ideas](/articles/ai-agent-ideas) for additional inspiration.
+
+## Default AI Agents
+
+Every Testkube environment comes with four pre-configured agents ready to use immediately:
+
+| Agent | Purpose |
+|-------|---------|
+| **Testkube Helper** | General-purpose assistant with access to all Testkube MCP tools. Ask it anything about your workflows, executions, or environment. |
+| **Troubleshoot** | Specialized in analyzing failed executions — examines logs, artifacts, and execution history to identify root causes and suggest fixes. |
+| **Design & Optimize** | Helps create new Test Workflows and optimize existing ones — generates workflow definitions, suggests improvements, and applies changes (with approval). |
+| **Analyze & Report** | Summarizes execution trends, workflow health, and metrics across your environment into actionable reports. |
+
+These agents are automatically provisioned and kept up to date. They cannot be deleted but can be
+supplemented with custom agents tailored to your needs.
 
 ## Types of AI Agents
 
@@ -31,9 +50,9 @@ automated pipeline. These agents:
 
 - Receive well-defined inputs (e.g., a workflow execution ID, test results, or error logs)
 - Perform a specific analysis or action
-- Produce a concrete output (e.g., post a summary to Slack, create a GitHub issue, update a dashboard)
+- Produce a concrete output (e.g., post a summary to Slack, create a GitHub issue, tag an execution)
 
-**Examples**: An agent that analyzes a failed workflow execution, identifies the root cause, and automatically 
+**Example**: An agent that analyzes a failed workflow execution, identifies the root cause, and automatically 
 posts a summary with remediation suggestions to a Slack channel.
 
 Task-focused agents are ideal for **automation scenarios** where you want to augment your Continuous Testing pipelines with 
@@ -41,7 +60,8 @@ AI-powered analysis and actions without human intervention. Use [AI Agent Trigge
 automatically run task-focused agents when workflow executions finish, fail, or change state.
 
 :::tip
-See the [Remediation Agent Example](/articles/remediation-agent) for an example of a task-focused agent.
+See the [Remediation Agent](/articles/remediation-agent) for a detailed task-focused example, or the
+[Infrastructure Triage Agent](/articles/infrastructure-triage-agent) for a DevOps-oriented example.
 :::
 
 ### Guidance and Support AI Agents
@@ -59,10 +79,12 @@ testing requirements, suggesting appropriate configurations, and generating the 
 Guidance agents are ideal for **onboarding, exploration, and complex configuration tasks** where users benefit 
 from interactive support and contextual recommendations.
 
-#### Predefined Guidance AI Agents
+#### Agent Templates
 
-Testkube includes a set of pre-defined Guidance AI Agents in the Dashboard that you can easily add to your environment 
-and use to get started with AI Agents - read more at [Creating an AI Agent from a Template](/articles/defining-ai-agents#creating-an-ai-agent-from-a-template).
+Testkube includes a set of agent templates in the Dashboard that you can use as starting points when
+creating a new agent. Templates provide pre-configured prompts and tool selections for common use cases.
+
+Read more at [Creating an AI Agent from a Template](/articles/defining-ai-agents#creating-an-ai-agent-from-a-template).
 
 ![AI Agent Templates](images/ai-agent-templates.png)
 
@@ -76,8 +98,22 @@ and use to get started with AI Agents - read more at [Creating an AI Agent from 
 | **Interaction** | Fire-and-forget | Interactive, multi-turn |
 | **Best for** | CI/CD/GitOps automation, alerting | Onboarding, configuration, exploration |
 
-Both styles can leverage the same MCP Servers and tools - the difference lies in how the agent is triggered 
+Both styles can leverage the same MCP Servers and tools — the difference lies in how the agent is triggered 
 and how it interacts with users or systems.
 
-Check out [Defining AI Agents](/articles/defining-ai-agents) for more details on how to create and manage AI Agents,
-and [AI Agent Triggers](/articles/ai-triggers) to learn how to automate agent execution based on workflow events.
+## LLM and Model Selection
+
+AI Agents use the LLM configured for your Testkube environment by default. You can also
+[add custom LLM providers](/articles/ai-models) and select which model to use per conversation
+in the AI Assistant or Chat panel.
+
+See [Default LLM and Model](/articles/ai-configuration#default-llm-and-model) for platform configuration details.
+
+## Read More
+
+- [Defining AI Agents](/articles/defining-ai-agents) — Create custom agents with tailored prompts and MCP tool access
+- [AI Agent Chats](/articles/using-ai-agents) — Manage chats, view tool calls, and handle approval requests
+- [AI Agent Triggers](/articles/ai-triggers) — Automate agent execution on workflow events or schedules
+- [Connected MCP Servers](/articles/mcp-servers-for-ai-agents) — Integrate external tools (GitHub, Slack, Jira, etc.)
+- [Configuring AI Models](/articles/ai-models) — Add custom LLM providers and models
+- [Example Agents](/articles/ai-agent-examples-overview) — Ready-to-use agent configurations for QA and DevOps
