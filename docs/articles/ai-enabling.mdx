@@ -10,9 +10,10 @@ For users of the Testkube Cloud Control Plane, AI features are enabled as follow
   2. Navigate to **Organization Settings** → **Product Features** tab and toggle **AI Assistant** on.
 
 :::info
-The LLM used by AI functionality in Testkube Cloud is OpenAI's [GPT-5.2](https://openai.com/index/introducing-gpt-5-2/).
+The default LLM used by AI functionality in Testkube Cloud is OpenAI's [GPT-5.2-Codex](https://openai.com/index/introducing-gpt-5-2-codex/).
 
-For Cloud installations, the LLM and model cannot be changed — everything is managed by Testkube.
+You can add your own LLM providers (OpenAI, Azure OpenAI, or any OpenAI-compatible service) to make
+additional models available — see [Configuring AI Models](/articles/ai-models).
 :::
 
 ## On-Prem Users
@@ -79,8 +80,8 @@ testkube-ai-service:
 
 ## Next Steps
 
-Read more about:
-
-- [AI Agents](./ai-agents)
-- [AI Assistant Overview](./ai-assistant-overview)
-- [AI Configuration Reference](./ai-configuration) (includes Security & Compliance)
+- [AI Assistant](./ai-assistant-overview) — Start using the AI Assistant in the Dashboard
+- [AI Agents](./ai-agents) — Learn about default and custom AI Agents
+- [AI Agent Triggers](./ai-triggers) — Automate agent execution on workflow events or schedules
+- [Configuring AI Models](./ai-models) — Add custom LLM providers
+- [AI Configuration Reference](./ai-configuration) — Advanced configuration, security, and compliance

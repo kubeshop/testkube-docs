@@ -25,7 +25,7 @@ questions or short interactions while keeping your current context visible in th
 
 ![Overlay AI Assistant](images/ai-assistant-overlay.png)
 
-### Navigating Between Chats in Overlay Mode
+### Navigating between Chats in Overlay Mode
 
 The AI Assistant keeps a history of your conversations. Use the chat list icon at the top of the panel to
 see previous chats and switch between them. Each chat retains its full conversation history, so you can
@@ -45,6 +45,12 @@ workflows, executions, and other resources alongside the conversation.
 :::tip
 Switch back to Overlay mode or navigate to the [Chats Panel](/articles/using-ai-agents) by selecting the 3-dot menu of the Chat tab title.
 :::
+
+### Navigating between Chats in Docked Mode
+
+When adding a new Chat in Docked mode you get the same selection of previous Chats as shown above for Overlay Mode:
+
+![Selecting Chat in Docked Mode](images/select-chat-in-docked-mode.png)
 
 ## Selecting an AI Agent and Model
 
