@@ -1,0 +1,117 @@
+# More AI Agent Ideas
+
+Beyond the [detailed examples](/articles/ai-agent-examples-overview), here are additional AI Agent concepts
+to inspire your own automation. Each includes a brief description, suggested tools, and a sample prompt
+to get you started.
+
+:::tip
+All of these agents use only the built-in Testkube MCP Server tools. Create any of them by following
+[Creating an AI Agent](/articles/defining-ai-agents#creating-a-new-ai-agent) and enabling the listed tools.
+:::
+
+## Performance Regression Detector
+
+Monitors execution duration and resource trends to detect workflows that are getting slower over time.
+
+**Tools:** `list_workflows`, `get_workflow_metrics`, `get_workflow_resource_history`, `get_workflow_execution_metrics`, `query_executions`, `get_workflow_definition`
+
+**Sample prompt:**
+
+> Analyze workflows for performance regressions. For each workflow, compare recent execution durations
+> against the historical average. Flag any where duration increased by more than 20% or resource usage
+> shows an upward trend. Present findings as a summary table with the workflow name, metric that regressed,
+> magnitude, and when it started. Use get_workflow_definition to inspect possible causes.
+
+---
+
+## Test Suite Curator
+
+Audits your test suite for redundant, overlapping, or unmaintained workflows and recommends consolidation.
+
+**Tools:** `list_workflows`, `get_workflow_definition`, `get_workflow_metrics`, `query_executions`, `list_labels`, `list_workflow_templates`
+
+**Sample prompt:**
+
+> Audit the test suite for maintenance opportunities. Identify workflows that have not run in 30+ days,
+> workflows with overlapping test coverage (similar names, same labels, similar steps), and workflows
+> with consistently 100% pass rates that might be candidates for reduced execution frequency.
+> Recommend which workflows to consolidate, archive, or adjust.
+
+---
+
+## Resource Right-Sizer
+
+Examines CPU and memory usage across executions and recommends resource request/limit adjustments.
+
+**Tools:** `list_workflows`, `get_workflow_resource_history`, `get_workflow_execution_metrics`, `get_workflow_definition`, `get_workflow_metrics`, `fetch_execution_logs`
+
+**Sample prompt:**
+
+> Analyze resource usage for all workflows. Compare actual CPU/memory usage against configured limits.
+> Flag workflows where peak usage is consistently below 50% of limits (over-provisioned) or above
+> 85% of limits (OOM risk). Recommend adjusted limits at ~130% of observed peak usage.
+> Present a table with current vs recommended values.
+
+---
+
+## Pipeline SLA Guardian
+
+Monitors execution durations against expected baselines and flags regressions with root cause analysis.
+
+**Tools:** `list_workflows`, `get_workflow_metrics`, `query_executions`, `get_workflow_resource_history`, `get_workflow_execution_metrics`, `get_workflow_definition`, `update_execution_tags`
+
+**Sample prompt:**
+
+> Check if workflows are meeting duration SLAs. Compare recent average duration against the
+> historical baseline. Flag workflows where duration increased by more than 25%. For each,
+> diagnose the likely cause (new steps, image changes, resource contention, external dependencies)
+> and recommend a fix. Tag violations with `sla-violation=duration`.
+
+---
+
+## Environment Health Auditor
+
+Produces a periodic health report covering agent connectivity, error rates, stuck executions, and
+declining workflow health scores.
+
+**Tools:** `list_agents`, `query_executions`, `list_executions`, `get_workflow_metrics`, `list_workflows`, `get_workflow_resource_history`
+
+**Sample prompt:**
+
+> Produce a health report for this environment. Check agent connectivity, calculate execution
+> pass/fail rates for the last 24 hours, identify any stuck or abnormally long-running executions,
+> and find workflows with declining health scores. Present an overall health assessment
+> (healthy/degraded/critical) with recommended actions.
+
+**Tip:** Use the [Scheduled AI Agent Trigger](/articles/ai-triggers#scheduled-ai-agent-triggers) pattern
+to run this agent daily or weekly.
+
+---
+
+## Workflow Standardization Reviewer
+
+Audits workflows against organizational naming, labeling, and configuration standards.
+
+**Tools:** `list_workflows`, `get_workflow_definition`, `get_workflow`, `list_labels`, `list_workflow_templates`, `get_workflow_template_definition`
+
+**Sample prompt:**
+
+> Audit all workflows for compliance with organizational standards. Check that each workflow has:
+> a consistent naming pattern (lowercase with hyphens), required labels (team, type), explicit
+> resource limits, a configured timeout, and artifact collection for test results.
+> Report the compliance rate and a prioritized list of violations.
+
+---
+
+## Capacity Planner
+
+Analyzes execution volume patterns and growth trends to recommend infrastructure scaling decisions.
+
+**Tools:** `query_executions`, `list_workflows`, `get_workflow_metrics`, `get_workflow_resource_history`, `list_executions`, `list_agents`
+
+**Sample prompt:**
+
+> Analyze execution volume trends and resource consumption. Identify peak usage hours,
+> growth rate over the last month, and whether current agent/runner capacity is sufficient.
+> Project resource needs for the next quarter and recommend scaling actions
+> (add agents, increase resources, optimize scheduling).

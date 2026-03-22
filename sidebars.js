@@ -685,6 +685,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "Configuring AI Models",
+                  id: "articles/ai-models",
+                },
+                {
+                  type: "doc",
                   label: "AI Agent Triggers",
                   id: "articles/ai-triggers",
                 },
@@ -698,100 +703,49 @@ const sidebars = {
                       id: "articles/ai-agent-examples-overview",
                     },
                     {
-                      type: "category",
-                      label: "QA & Test Engineering",
-                      collapsed: false,
-                      items: [
-                        {
-                          type: "doc",
-                          label: "Remediation",
-                          id: "articles/remediation-agent",
-                        },
-                        {
-                          type: "doc",
-                          label: "Flakiness Analysis",
-                          id: "articles/flakiness-analysis-agent",
-                        },
-                        {
-                          type: "doc",
-                          label: "Performance Regression",
-                          id: "articles/performance-regression-agent",
-                        },
-                        {
-                          type: "doc",
-                          label: "Test Suite Curator",
-                          id: "articles/test-suite-curator-agent",
-                        },
-                        {
-                          type: "doc",
-                          label: "Dependency Impact",
-                          id: "articles/dependency-impact-agent",
-                        },
-                      ],
+                      type: "doc",
+                      label: "Remediation",
+                      id: "articles/remediation-agent",
                     },
                     {
-                      type: "category",
-                      label: "DevOps & Platform Engineering",
-                      collapsed: false,
-                      items: [
-                        {
-                          type: "doc",
-                          label: "Infrastructure Triage",
-                          id: "articles/infrastructure-triage-agent",
-                        },
-                        {
-                          type: "doc",
-                          label: "Execution Cost Analyzer",
-                          id: "articles/execution-cost-agent",
-                        },
-                        {
-                          type: "doc",
-                          label: "Resource Right-Sizer",
-                          id: "articles/resource-rightsizer-agent",
-                        },
-                        {
-                          type: "doc",
-                          label: "Pipeline SLA Guardian",
-                          id: "articles/pipeline-sla-agent",
-                        },
-                        {
-                          type: "doc",
-                          label: "Incident Correlator",
-                          id: "articles/incident-correlator-agent",
-                        },
-                        {
-                          type: "doc",
-                          label: "Environment Health Auditor",
-                          id: "articles/environment-health-agent",
-                        },
-                        {
-                          type: "doc",
-                          label: "Workflow Standardization",
-                          id: "articles/workflow-standardization-agent",
-                        },
-                        {
-                          type: "doc",
-                          label: "Capacity Planner",
-                          id: "articles/capacity-planner-agent",
-                        },
-                      ],
+                      type: "doc",
+                      label: "Flakiness Analysis",
+                      id: "articles/flakiness-analysis-agent",
                     },
                     {
-                      type: "category",
-                      label: "Cross-Functional",
-                      collapsed: false,
-                      items: [
-                        {
-                          type: "doc",
-                          label: "Onboarding Guide",
-                          id: "articles/onboarding-guide-agent",
-                        },
-                        {
-                          type: "doc",
-                          label: "Security & Compliance",
-                          id: "articles/security-compliance-agent",
-                        },
-                      ],
+                      type: "doc",
+                      label: "Dependency Impact",
+                      id: "articles/dependency-impact-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Infrastructure Triage",
+                      id: "articles/infrastructure-triage-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Incident Correlator",
+                      id: "articles/incident-correlator-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Execution Cost Analyzer",
+                      id: "articles/execution-cost-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Onboarding Guide",
+                      id: "articles/onboarding-guide-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Security & Compliance",
+                      id: "articles/security-compliance-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "More Ideas",
+                      id: "articles/ai-agent-ideas",
                     },
                   ],
                 },

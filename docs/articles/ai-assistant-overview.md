@@ -59,15 +59,16 @@ Whether you have questions about the Testkube Control Plane, Agents, or Dashboar
 
 ## Accessing the AI Assistant
 
-The AI Assistant is integrated into the Testkube Dashboard via a corresponding button in the bottom left corner.
+The AI Assistant is available through the **AI Chats** panel in the Testkube Dashboard. Open it from the left-side
+menu to start interacting with the Assistant.
 
-![img_1.png](images/ai-assistant-button.png)
+![AI Chats Panel](images/ai-chats-panel.png)
 
-Clicking it opens the prompt interface where you can interact with the Assistant any of the features described above.
+The Chats panel provides a full-featured chat interface similar to other AI tools:
 
-![img.png](images/ai-assistant-interface.png)
-
-The buttons in the top right corner of the AI Assistant allow you to maximize/minimize the interface, clear the prompt history or close the Assistant.
+- **Multiple Chats** — Create new chats or select existing ones to continue previous conversations.
+- **Agent & Model Selection** — Choose which AI Agent and model to use for each chat.
+- **Resizable & Dockable** — Resize the panel or dock it to the left side of the screen for a side-by-side workflow.
 
 :::tip
 The Testkube Dashboard provides shortcuts to the AI Assistant for the execution results of your Workflow 
