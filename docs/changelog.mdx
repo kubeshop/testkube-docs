@@ -16,7 +16,8 @@ Control Plane is available in Helm chart v2.330.6.
 
 ### Fixes
 
-- Fix Postgres guard unescaping dots in control-plane values so nested keys are handled safely.
+- Fix a panic when using Postgres when listing test workflows without
+executions.
 - Remove the runner registration rate limiter to avoid unnecessary registration failures.
 
 ## Patch Release v2.7.5 (2026-03-20)
