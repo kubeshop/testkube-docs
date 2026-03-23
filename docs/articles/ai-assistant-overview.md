@@ -61,7 +61,7 @@ for the conversation:
   (Testkube Helper, Troubleshoot, Design & Optimize, Analyze & Report) or any
   [custom agent](/articles/defining-ai-agents) you have created.
 - **Model** — Choose from the available LLM models (platform models and any
-  [custom LLM providers](/articles/ai-models) you have configured).
+  [custom models](/articles/ai-models) you have configured).
 
 Changing the agent or model takes effect for new messages in the current conversation.
 
@@ -87,6 +87,6 @@ tailored to your specific needs — see [Defining AI Agents](/articles/defining-
 - [AI Agent Chats](/articles/using-ai-agents) — Full chat management, filtering, tool approvals, and all the ways to start a chat
 - [Defining AI Agents](/articles/defining-ai-agents) — Create custom agents with tailored prompts and MCP tool access
 - [AI Agent Triggers](/articles/ai-triggers) — Automate agent execution based on workflow events or schedules
-- [Configuring AI Models](/articles/ai-models) — Add custom LLM providers and models
+- [Configuring AI Models](/articles/ai-models) — Add custom models
 - [Example Agents](/articles/ai-agent-examples-overview) — Ready-to-use agent configurations for QA and DevOps
 

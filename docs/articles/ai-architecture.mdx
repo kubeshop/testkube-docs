@@ -300,7 +300,7 @@ See [Adding from the Registry](/articles/mcp-servers-for-ai-agents#from-the-mcp-
 
 ### Data Flow
 
-- User prompts and context are sent to the configured LLM provider for processing
+- User prompts and context are sent to the configured LLM for processing
 - Tool execution happens within Testkube's infrastructure (AI Service)
 - The Testkube MCP bridge runs as a local subprocess — Testkube data does not traverse external networks for built-in tools
 - External MCP server calls go directly from the AI Service to the configured server endpoints
