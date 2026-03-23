@@ -8,6 +8,27 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Patch Release v2.7.6 (2026-03-23)
+
+This patch release focuses on runner registration and data parsing stability.
+
+Control Plane is available in Helm chart v2.330.6.
+
+### Fixes
+
+- Fix Postgres guard unescaping dots in control-plane values so nested keys are handled safely.
+- Remove the runner registration rate limiter to avoid unnecessary registration failures.
+
+## Patch Release v2.7.5 (2026-03-20)
+
+This patch release focuses on postgres database migration reliability.
+
+Control Plane is available in Helm chart v2.330.5.
+
+### Fixes
+
+- Allow out-of-order PostgreSQL migrations so release upgrades are more resilient.
+
 ## Patch Release v2.7.4 (2026-03-20)
 
 This patch release focuses on control-plane stability.
@@ -21,7 +42,7 @@ This patch release focuses on control-plane stability.
 - Fixed Postgres empty TestWorkflows catalog.
 - `queue-testworkflow` and `start-testworkflow` events now correctly trigger webhooks.
 
-## Patch Release v2.7.3 (2026-03-10)
+## Patch Release v2.7.3 (2026-03-16)
 
 This patch release introduces fixes for Testkube CLI and Control Plane PostgreSQL BD support.
 
