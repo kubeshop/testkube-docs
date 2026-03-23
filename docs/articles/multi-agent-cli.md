@@ -164,6 +164,27 @@ $ testkube disable agent staging-runner
 $ testkube enable agent my-runner
 ```
 
+## Rotating Agent Secret Keys
+
+Agent secret keys can be rotated for security purposes. When rotated, the previous key remains valid for a grace period
+to allow zero-downtime rollover of connected agents.
+
+```sh
+$ testkube agent rotate-key my-agent
+```
+
+By default, the previous key remains valid for 24 hours. You can specify a custom grace period (up to 7 days):
+
+```sh
+$ testkube agent rotate-key my-agent --grace-period 4h
+```
+
+After rotating, update your agent deployment with the new key. The old key will continue to work until the grace period expires.
+
+:::tip
+Read more about key rotation behavior and best practices in [Agent Key Rotation](/articles/agents-overview#agent-key-rotation).
+:::
+
 ## Runner Agent specific commands
 
 The following applies to Agents with the `runner` capability enabled (i.e. "Runner Agents").
