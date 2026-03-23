@@ -15,58 +15,99 @@ Testkube's AI features are built on a modern agentic AI architecture that combin
 - **Event-driven triggers** for automated agent execution on workflow events
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                           Testkube Dashboard                                │
-│  ┌──────────────────┐   ┌──────────────────┐  ┌──────────────────────────┐  │
-│  │   AI Assistant   │   │  AI Agent Chats  │  │    AI Agent Triggers     │  │
-│  │  (Overlay/Dock)  │   │   (Chat Panel)   │  │  (Integrations Panel)    │  │
-│  └────────┬─────────┘   └────────┬─────────┘  └────────────┬─────────────┘  │
-└───────────┼──────────────────────┼─────────────────────────┼────────────────┘
-            │                      │                         │
-            └──────────┬───────────┘                         │
-                       ▼                                     │
-┌──────────────────────────────────┐     ┌───────────────────┴──────────────┐
-│      Testkube Control Plane      │     │        Worker Service            │
-│     (Cloud API / Enterprise)     │     │   (NATS JetStream Consumer)      │
-│                                  │     │                                  │
-│  Sessions, Agents, MCP Servers,  │     │  Execution finished events →     │
-│  Triggers, OAuth tokens          │     │  AI Trigger Handler →            │
-│                                  │     │  Session creation + Copilot      │
-│                                  │     │  internal run                    │
-└──────────────┬───────────────────┘     └──────────────────────────────────┘
-               │
-               ▼
-┌──────────────────────────────────────────────────────────────────────────────┐
-│                        AI Service (Copilot)                                  │
-│  ┌─────────────────────────────────────────────────────────────────────────┐ │
-│  │             LangGraph Agent (createAgent + Middleware)                  │ │
-│  │  ┌──────────────┐  ┌──────────────┐  ┌─────────────┐  ┌─────────────┐   │ │
-│  │  │   System     │  │  Checkpoint  │  │    Tool     │  │   HITL      │   │ │
-│  │  │   Prompt     │  │  (Postgres)  │  │  Execution  │  │  Middleware │   │ │
-│  │  └──────────────┘  └──────────────┘  └─────────────┘  └─────────────┘   │ │
-│  └─────────────────────────────────────────────────────────────────────────┘ │
-│                                    │                                         │
-│         ┌──────────────────────────┼──────────────────────────┐              │
-│         ▼                          ▼                          ▼              │
-│  ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────────┐     │
-│  │  Testkube MCP   │     │  Built-in Tools │     │   External MCP      │     │
-│  │   (stdio bridge │     │                 │     │     Servers         │     │
-│  │    binary)      │     │  - Search Docs  │     │   (HTTP/SSE)        │     │
-│  │                 │     │  - YAML Search  │     │                     │     │
-│  │  - Workflows    │     │                 │     │  - GitHub, Jira,    │     │
-│  │  - Executions   │     │  Copilot-only:  │     │    Slack, etc.      │     │
-│  │  - Artifacts    │     │  - Navigation   │     │                     │     │
-│  │  - Metrics      │     │  - Agent Mgmt   │     │  Auth: Headers      │     │
-│  │                 │     │  - Session Mgmt │     │  or OAuth           │     │
-│  └─────────────────┘     └─────────────────┘     └─────────────────────┘     │
-└──────────────────────────────────────────────────────────────────────────────┘
-               │
-               ▼
-    ┌─────────────────────┐
-    │    LLM Provider     │
-    │  (Platform or       │
-    │   Custom Provider)  │
-    └─────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                  Testkube Dashboard                                         │
+│                                                                                             │
+│  ┌─── AI Assistant ──────┐  ┌─── AI Agent Chats ────┐  ┌─── AI Agent Triggers ──────────┐  │
+│  │    (Overlay/Dock)      │  │    (Chat Panel)       │  │    (Integrations Panel)        │  │
+│  └───────────┬────────────┘  └───────────┬───────────┘  └──────────────┬─────────────────┘  │
+└──────────────┼───────────────────────────┼─────────────────────────────┼─────────────────────┘
+               └─────────────┬─────────────┘                             │
+                             ▼                                           ▼
+┌────────────────────────────────────────────┐    ┌──────────────────────────────────────────┐
+│       Testkube Control Plane               │    │           Worker Service                 │
+│      (Cloud API / Enterprise)              │    │      (NATS JetStream Consumer)           │
+│                                            │    │                                          │
+│  Session metadata, Agents, MCP Servers,    │    │  Execution finished events →             │
+│  Triggers, OAuth tokens                    │    │  AI Trigger Handler →                    │
+│                                            │    │  Session creation + AI Service run       │
+└───────────────────┬────────────────────────┘    └──────────────────────┬───────────────────┘
+          ▲         │                                                    │
+  session │         │ JWT auth                                  API token│auth
+ metadata │         │                                                    │
+  updates │         ▼                                                    │
+┌─────────┴──────────────────────────────────────────────────────────────┴────────────────────┐
+│                                     AI Service                                              │
+│                                                                                             │
+│  ┌─── AGENTIC LOOP (LangGraph) ─────────────────────────────────────────────────────────┐   │
+│  │                                                                                      │   │
+│  │  ┌─── Session ────────────────────────────────────────────────────────────────────┐  │   │
+│  │  │ New Chat ──▶ Load Tools ──▶ Build Prompt ──▶ Resolve Model ──▶ Run Agent       │  │   │
+│  │  │ Status: pending → running → completed | waiting_approval                       │  │   │
+│  │  └────────────────────────────────────────────────────────────────────────────────┘  │   │
+│  │                                         │                                            │   │
+│  │                                         ▼                                            │   │
+│  │  ┌─── Prompt Assembly ───────────────────────────────────────────────────────────┐   │   │
+│  │  │ Base System Prompt ──▶ + Agent Instructions ──▶ + Runtime Context             │   │   │
+│  │  └───────────────────────────────────────────────────────────────────────────────┘   │   │
+│  │                                         │                                            │   │
+│  │                                         ▼                                            │   │
+│  │  ┌─── Runtime Loop ─────────────────────────────────────────────────────────────┐    │   │
+│  │  │                                                                              │    │   │
+│  │  │  ┌───────┐     ┌───────────┐     ┌─────────────────────┐    ┌──────────┐     │    │   │
+│  │  │  │       │     │           │ yes │   Execute tool      │    │          │     │    │   │
+│  │  │  │  LLM  │────▶│ HITL Gate │────▶│                     │───▶│ Response │     │    │   │
+│  │  │  │       │     │           │     └─────────────────────┘    │          │     │    │   │
+│  │  │  └───▲───┘     └─────┬─────┘                                └──────────┘     │    │   │
+│  │  │      │               │ no                                                    │    │   │
+│  │  │      │               ▼                                                       │    │   │
+│  │  │      │         ┌──────────────────────────────────────────────┐              │    │   │
+│  │  │      │         │  Pause → User: ✓ Approve ✎ Edit ✗ Reject     │              │    │   │
+│  │  │      │         └─────────────────────┬────────────────────────┘              │    │   │
+│  │  │      └───────────────────────────────┘                                       │    │   │
+│  │  │                           (loop until done)                                  │    │   │
+│  │  └──────────────────────────────────────────────────────────────────────────────┘    │   │
+│  │                                         │                                            │   │
+│  │  ┌─── Checkpointing ────────────────────────────────────────────────────────────┐    │   │
+│  │  │ Full state persisted per session: messages, tool results, pending approvals  │    │   │
+│  │  │ Sessions survive restarts and can be resumed at any point                    │    │   │
+│  │  └──────────────────────────────────────────────────────────────────────────────┘    │   │
+│  │                                                                                      │   │
+│  └──────────────────────────────────────────────────────────────────────────────────────┘   │
+│                                          │                                                  │
+│                                          ▼                                                  │
+│  ┌─── TOOL LAYER ───────────────────────────────────────────────────────────────────────┐   │
+│  │                                                                                      │   │
+│  │  ┌─── Testkube MCP (via Bridge) ─────────────────────────────────────────────────┐   │   │
+│  │  │ Workflows        Executions        Artifacts        Metadata                  │   │   │
+│  │  │ List, Create,    List, Fetch       List, Read,      Labels, Agents,           │   │   │
+│  │  │ Update, Run      Logs, Abort       Download         Dashboard URLs            │   │   │
+│  │  │                                                                               │   │   │
+│  │  │ Read-only → auto-approved                Mutations → approval required        │   │   │
+│  │  └───────────────────────────────────────────────────────────────────────────────┘   │   │
+│  │                                                                                      │   │
+│  │  ┌─── Built-in Tools ───────┐  ┌─── External MCP Servers (User-Configured) ───────┐  │   │
+│  │  │                          │  │                                                  │  │   │
+│  │  │ Documentation Search     │  │  GitHub, Jira, Slack, custom servers, ...        │  │   │
+│  │  │ YAML Examples Search     │  │                                                  │  │   │
+│  │  │ Task Tracking            │  │  Auth:  OAuth (managed token refresh)            │  │   │
+│  │  │                          │  │         Header (static credentials)              │  │   │
+│  │  └──────────────────────────┘  └──────────────────────────────────────────────────┘  │   │
+│  │                                                                                      │   │
+│  └──────────────────────────────────────────────────────────────────────────────────────┘   │
+│                                          │                                                  │
+│                                          ▼                                                  │
+│  ┌─── LLM PROVIDERS ────────────────────────────────────────────────────────────────────┐   │
+│  │                                                                                      │   │
+│  │  ┌─── Platform Default ───────────┐  ┌─── Bring Your Own Key (per Env) ────────────┐ │   │
+│  │  │                                │  │                                             │ │   │
+│  │  │ Pre-configured model catalog   │  │ Override provider, endpoint, and API        │ │   │
+│  │  │ Primary and lightweight models │  │ key per environment (OpenAI, Azure, ..)     │ │   │
+│  │  └────────────────────────────────┘  └─────────────────────────────────────────────┘ │   │
+│  │                                                                                      │   │
+│  └──────────────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                             │
+└─────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ## Key Components
@@ -77,11 +118,15 @@ The AI Service uses [LangGraph](https://langchain-ai.github.io/langgraph/), an o
 stateful, multi-actor AI applications. The agent is built using LangGraph's `createAgent` with a middleware
 stack that provides:
 
-- **Checkpointing**: Conversation state is persisted to PostgreSQL, allowing sessions to survive service
-  restarts and be resumed at any time
-- **Tool Orchestration**: Manages the execution of MCP tools and built-in tools based on the LLM's decisions
+- **Session Lifecycle**: Each chat creates a session that loads available tools, assembles the system prompt
+  with agent-specific instructions and runtime context, resolves the LLM model, and runs the agent loop
+- **Prompt Assembly**: The system prompt is composed from a base prompt (Testkube platform context and tool
+  guidelines), per-agent custom instructions, and runtime context (current organization, environment, date)
+- **Agent Loop**: The LLM reasons about the user's request, calls tools as needed, and iterates until done.
+  Tools configured for approval pass through the HITL gate before execution
+- **Checkpointing**: Full conversation state (messages, tool results, pending approvals) is persisted to
+  PostgreSQL, allowing sessions to survive restarts and be resumed at any point
 - **HITL Middleware**: Intercepts tool calls that require approval and suspends execution until the user responds
-- **Runtime Middleware**: Testkube-specific middleware for tool message handling and context management
 
 ### Model Context Protocol (MCP)
 
@@ -93,9 +138,10 @@ Testkube uses MCP to:
 - **Enable Extensibility**: Connect external MCP servers (GitHub, Jira, Slack, etc.) to extend AI capabilities
 - **Standardize Tool Interfaces**: Use a consistent protocol for tool discovery, invocation, and response handling
 
-The Testkube MCP Server connects to the AI Service via a **stdio bridge binary** — the AI Service spawns
-the bridge process locally with environment credentials, which provides low-latency tool access without
-network overhead. External MCP servers connect via HTTP/SSE transport.
+The Testkube MCP Server connects to the AI Service via a **stdio bridge** — the AI Service spawns
+the bridge process locally with environment credentials, providing low-latency tool access without
+network overhead. External MCP servers connect via HTTP/SSE transport and support both OAuth
+(with managed token refresh) and header-based authentication.
 
 Learn more about MCP integration in the [MCP Configuration](/articles/mcp-configuration) documentation.
 
@@ -138,7 +184,7 @@ In addition to MCP tools, the AI Service includes built-in tools that are always
 - **Documentation Search** — Semantic search over Testkube documentation for answering product questions
 - **YAML Examples Search** — Search TestWorkflow YAML examples for reference when creating or modifying workflows
 
-### AI Assistant (Copilot) Only
+### AI Assistant Only
 
 The AI Assistant has additional tools for Dashboard integration:
 
@@ -158,7 +204,7 @@ The trigger pipeline works as follows:
    - Checks the workflow's labels against the trigger's label selector
    - For "on state change" mode, compares against the previous execution's status
 4. For matching triggers, the handler creates an `AssistantSession` in the database
-5. The handler calls the AI Service's internal endpoint to **start the session automatically**
+5. The handler calls the AI Service to **start the session automatically**
 6. The AI Agent runs autonomously with the rendered prompt template as instructions
 
 Trigger-created sessions appear in the AI Agent Chats panel like any other chat, and can be
