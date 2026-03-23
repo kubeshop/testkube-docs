@@ -195,7 +195,7 @@ const sidebars = {
               label: "Custom SSO",
               id: "articles/custom-sso",
             },
-          ]
+          ],
         },
         "articles/install/faq",
         {
@@ -248,7 +248,7 @@ const sidebars = {
               type: "doc",
               label: "Agent CLI Commands",
               id: "articles/multi-agent-cli",
-            }
+            },
           ],
         },
         {
@@ -340,7 +340,7 @@ const sidebars = {
           type: "category",
           label: "Test Workflows",
           items: [
-            {type: "doc", label: "Overview", id: "articles/test-workflows"},
+            { type: "doc", label: "Overview", id: "articles/test-workflows" },
             {
               type: "doc",
               label: "Basic Examples",
@@ -696,7 +696,7 @@ const sidebars = {
                       type: "doc",
                       label: "Flakiness Analysis",
                       id: "articles/flakiness-analysis-agent",
-                    }
+                    },
                   ],
                 },
               ],
@@ -761,9 +761,9 @@ const sidebars = {
                   type: "doc",
                   label: "Architecture",
                   id: "articles/ai-architecture",
-                }
+                },
               ],
-            }
+            },
           ],
         },
         {
@@ -810,8 +810,16 @@ const sidebars = {
               type: "category",
               label: "K6",
               items: [
-                {type: "doc", label: "Basic", id: "articles/examples/k6-basic"},
-                {type: "doc", label: "Distributed", id: "articles/examples/k6-distributed"},
+                {
+                  type: "doc",
+                  label: "Basic",
+                  id: "articles/examples/k6-basic",
+                },
+                {
+                  type: "doc",
+                  label: "Distributed",
+                  id: "articles/examples/k6-distributed",
+                },
                 {
                   type: "link",
                   label: "Testkube K6 Introduction",
@@ -833,21 +841,49 @@ const sidebars = {
               type: "category",
               label: "JMeter",
               items: [
-                {type: "doc", label: "Basic", id: "articles/examples/jmeter-basic"},
-                {type: "doc", label: "Distributed", id: "articles/examples/jmeter-distributed"},
-                {type: "doc", label: "Plugins", id: "articles/examples/jmeter-plugins"},
+                {
+                  type: "doc",
+                  label: "Basic",
+                  id: "articles/examples/jmeter-basic",
+                },
+                {
+                  type: "doc",
+                  label: "Distributed",
+                  id: "articles/examples/jmeter-distributed",
+                },
+                {
+                  type: "doc",
+                  label: "Plugins",
+                  id: "articles/examples/jmeter-plugins",
+                },
               ],
             },
-            {type: "doc", label: "Gatling", id: "articles/examples/gatling-basic"},
+            {
+              type: "doc",
+              label: "Gatling",
+              id: "articles/examples/gatling-basic",
+            },
             {
               type: "category",
               label: "Locust",
               items: [
-                {type: "doc", label: "Basic", id: "articles/examples/locust-basic"},
-                {type: "doc", label: "Distributed", id: "articles/examples/locust-distributed"},
+                {
+                  type: "doc",
+                  label: "Basic",
+                  id: "articles/examples/locust-basic",
+                },
+                {
+                  type: "doc",
+                  label: "Distributed",
+                  id: "articles/examples/locust-distributed",
+                },
               ],
             },
-            {type: "doc", label: "Artillery", id: "articles/examples/artillery-basic"},
+            {
+              type: "doc",
+              label: "Artillery",
+              id: "articles/examples/artillery-basic",
+            },
           ],
         },
         {
@@ -858,8 +894,16 @@ const sidebars = {
               type: "category",
               label: "Cypress",
               items: [
-                {type: "doc", label: "Basic", id: "articles/examples/cypress-basic"},
-                {type: "doc", label: "Sharded", id: "articles/examples/cypress-sharded"},
+                {
+                  type: "doc",
+                  label: "Basic",
+                  id: "articles/examples/cypress-basic",
+                },
+                {
+                  type: "doc",
+                  label: "Sharded",
+                  id: "articles/examples/cypress-sharded",
+                },
                 {
                   type: "link",
                   label: "Scaling Cypress Tests",
@@ -871,17 +915,37 @@ const sidebars = {
               type: "category",
               label: "Playwright",
               items: [
-                {type: "doc", label: "Basic", id: "articles/examples/playwright-basic"},
-                {type: "doc", label: "Sharded", id: "articles/examples/playwright-sharded"},
-                {type: "doc", label: "Rerun Failed Tests", id: "articles/examples/playwright-rerun"},
+                {
+                  type: "doc",
+                  label: "Basic",
+                  id: "articles/examples/playwright-basic",
+                },
+                {
+                  type: "doc",
+                  label: "Sharded",
+                  id: "articles/examples/playwright-sharded",
+                },
+                {
+                  type: "doc",
+                  label: "Rerun Failed Tests",
+                  id: "articles/examples/playwright-rerun",
+                },
               ],
             },
             {
               type: "category",
               label: "Selenium",
               items: [
-                {type: "doc", label: "Basic", id: "articles/examples/selenium-basic"},
-                {type: "doc", label: "Advanced", id: "articles/examples/selenium-advanced"},
+                {
+                  type: "doc",
+                  label: "Basic",
+                  id: "articles/examples/selenium-basic",
+                },
+                {
+                  type: "doc",
+                  label: "Advanced",
+                  id: "articles/examples/selenium-advanced",
+                },
                 {
                   type: "link",
                   label: "Functional Testing with Selenium",
@@ -898,8 +962,16 @@ const sidebars = {
               type: "category",
               label: "Robot Framework",
               items: [
-                {type: "doc", label: "Basic", id: "articles/examples/robot-framework-basic"},
-                {type: "doc", label: "Parallelized", id: "articles/examples/robot-framework-parallel"},
+                {
+                  type: "doc",
+                  label: "Basic",
+                  id: "articles/examples/robot-framework-basic",
+                },
+                {
+                  type: "doc",
+                  label: "Parallelized",
+                  id: "articles/examples/robot-framework-parallel",
+                },
                 {
                   type: "link",
                   label: "Automated Acceptance Testing",
@@ -917,7 +989,11 @@ const sidebars = {
               type: "category",
               label: "Postman",
               items: [
-                {type: "doc", label: "Basic", id: "articles/examples/postman-basic"},
+                {
+                  type: "doc",
+                  label: "Basic",
+                  id: "articles/examples/postman-basic",
+                },
                 {
                   type: "link",
                   label: "API Test Automation with Postman",
@@ -925,9 +1001,17 @@ const sidebars = {
                 },
               ],
             },
-            {type: "doc", label: "SoapUI", id: "articles/examples/soapui-basic"},
-            {type: "doc", label: "REST Assured", id: "articles/examples/rest-assured-basic"},
-            {type: "doc", label: "cURL", id: "articles/examples/curl-basic"},
+            {
+              type: "doc",
+              label: "SoapUI",
+              id: "articles/examples/soapui-basic",
+            },
+            {
+              type: "doc",
+              label: "REST Assured",
+              id: "articles/examples/rest-assured-basic",
+            },
+            { type: "doc", label: "cURL", id: "articles/examples/curl-basic" },
           ],
         },
         {
@@ -938,7 +1022,11 @@ const sidebars = {
               type: "category",
               label: "Pytest",
               items: [
-                {type: "doc", label: "Basic", id: "articles/examples/pytest-basic"},
+                {
+                  type: "doc",
+                  label: "Basic",
+                  id: "articles/examples/pytest-basic",
+                },
                 {
                   type: "link",
                   label: "Pytest and Testkube",
@@ -946,10 +1034,26 @@ const sidebars = {
                 },
               ],
             },
-            {type: "doc", label: "Maven", id: "articles/examples/maven-basic"},
-            {type: "doc", label: "Gradle", id: "articles/examples/gradle-basic"},
-            {type: "doc", label: "NUnit", id: "articles/examples/nunit-basic"},
-            {type: "doc", label: "TestContainers", id: "articles/examples/test-containers-basic"},
+            {
+              type: "doc",
+              label: "Maven",
+              id: "articles/examples/maven-basic",
+            },
+            {
+              type: "doc",
+              label: "Gradle",
+              id: "articles/examples/gradle-basic",
+            },
+            {
+              type: "doc",
+              label: "NUnit",
+              id: "articles/examples/nunit-basic",
+            },
+            {
+              type: "doc",
+              label: "TestContainers",
+              id: "articles/examples/test-containers-basic",
+            },
             {
               type: "link",
               label: "Cucumber",
@@ -961,8 +1065,16 @@ const sidebars = {
           type: "category",
           label: "Infrastructure Testing",
           items: [
-            {type: "doc", label: "Chainsaw", id: "articles/examples/chainsaw-basic"},
-            {type: "doc", label: "Validating Kubernetes Clusters", id: "articles/examples/kubectl-basic"},
+            {
+              type: "doc",
+              label: "Chainsaw",
+              id: "articles/examples/chainsaw-basic",
+            },
+            {
+              type: "doc",
+              label: "Validating Kubernetes Clusters",
+              id: "articles/examples/kubectl-basic",
+            },
             {
               type: "link",
               label: "Testing Hardware Components",
@@ -995,8 +1107,8 @@ const sidebars = {
           type: "category",
           label: "CI/CD Pipelines",
           items: [
-            {type: "doc", label: "GitHub", id: "articles/github-actions"},
-            {type: "doc", label: "GitLab", id: "articles/gitlab"},
+            { type: "doc", label: "GitHub", id: "articles/github-actions" },
+            { type: "doc", label: "GitLab", id: "articles/gitlab" },
             {
               type: "doc",
               label: "Jenkins Pipelines",
@@ -1007,23 +1119,23 @@ const sidebars = {
               label: "Jenkins UI",
               id: "articles/jenkins-ui",
             },
-            {type: "doc", label: "Azure DevOps", id: "articles/azure"},
+            { type: "doc", label: "Azure DevOps", id: "articles/azure" },
             {
               type: "link",
               label: "BitBucket",
               href: "https://testkube.io/learn/unleashing-the-power-of-ci-cd-testing-with-bitbucket-and-testkube",
               description: "Integrate Testkube with Bitbucket Pipelines",
             },
-            {type: "doc", label: "CircleCI", id: "articles/circleci"},
-            {type: "doc", label: "Tekton", id: "articles/tekton"},
+            { type: "doc", label: "CircleCI", id: "articles/circleci" },
+            { type: "doc", label: "Tekton", id: "articles/tekton" },
           ],
         },
         {
           type: "category",
           label: "GitOps",
           items: [
-            {type: "doc", label: "ArgoCD", id: "articles/argocd-integration"},
-            {type: "doc", label: "Flux", id: "articles/flux-integration"},
+            { type: "doc", label: "ArgoCD", id: "articles/argocd-integration" },
+            { type: "doc", label: "Flux", id: "articles/flux-integration" },
           ],
         },
         {
@@ -1039,7 +1151,8 @@ const sidebars = {
               type: "link",
               label: "Keptn",
               href: "https://testkube.io/learn/leveraging-testkube-as-a-quality-gate-in-multi-stage-deployments-with-keptn",
-              description: "Leveraging Testkube as a Quality Gate in Multi-Stage Deployments with Keptn",
+              description:
+                "Leveraging Testkube as a Quality Gate in Multi-Stage Deployments with Keptn",
             },
           ],
         },
@@ -1057,29 +1170,48 @@ const sidebars = {
               label: "Argo Workflows",
               id: "articles/argoworkflows-integration",
             },
-            {type: "doc", label: "CDEvents", id: "articles/cd-events"},
-            {type: "doc", label: "Kubernetes Events", id: "articles/k8s-events"},
-            {type: "doc", label: "Webhooks", id: "articles/webhooks"},
+            { type: "doc", label: "CDEvents", id: "articles/cd-events" },
+            {
+              type: "doc",
+              label: "Kubernetes Events",
+              id: "articles/k8s-events",
+            },
+            { type: "doc", label: "Webhooks", id: "articles/webhooks" },
           ],
         },
         {
           type: "category",
           label: "Collaboration & Alerting",
           items: [
-            {type: "doc", label: "Slack", id: "articles/slack-integration"},
-            {type: "doc", label: "Microsoft Teams", id: "articles/teams-integration"},
-            {type: "doc", label: "Atlassian Jira", id: "articles/jira-integration"},
+            { type: "doc", label: "Slack", id: "articles/slack-integration" },
+            {
+              type: "doc",
+              label: "Microsoft Teams",
+              id: "articles/teams-integration",
+            },
+            {
+              type: "doc",
+              label: "Atlassian Jira",
+              id: "articles/jira-integration",
+            },
             {
               type: "link",
               label: "PagerDuty",
               href: "https://testkube.io/learn/critical-test-based-alerting-with-pagerduty-and-testkube",
-              description: "Critical Test Based Alerting with PagerDuty and Testkube",
+              description:
+                "Critical Test Based Alerting with PagerDuty and Testkube",
             },
             {
               type: "link",
               label: "Zapier",
               href: "https://testkube.io/learn/integrating-testkube-and-zapier-for-instant-email-alerts",
-              description: "Integrating Testkube and Zapier for Instant Email Alerts",
+              description:
+                "Integrating Testkube and Zapier for Instant Email Alerts",
+            },
+            {
+              type: "doc",
+              label: "Backstage",
+              id: "articles/backstage-integration",
             },
           ],
         },
@@ -1087,23 +1219,25 @@ const sidebars = {
           type: "category",
           label: "Observability & Reporting",
           items: [
-            {type: "doc", label: "Agent Metrics", id: "articles/metrics"},
+            { type: "doc", label: "Agent Metrics", id: "articles/metrics" },
             {
               type: "doc",
               label: "Control Plane Metrics",
               id: "articles/control-plane-metrics",
             },
-            {type: "doc", label: "Grafana", id: "articles/grafana"},
-            {type: "doc", label: "Datadog", id: "articles/datadog-junit"},
-            {type: "doc", label: "Allure Reports", id: "articles/allure-reports"},
+            { type: "doc", label: "Grafana", id: "articles/grafana" },
+            { type: "doc", label: "Datadog", id: "articles/datadog-junit" },
+            {
+              type: "doc",
+              label: "Allure Reports",
+              id: "articles/allure-reports",
+            },
           ],
         },
         {
           type: "category",
           label: "Identity Mgmt",
-          items: [
-            {type: "doc", label: "SCIM", id: "articles/scim"},
-          ],
+          items: [{ type: "doc", label: "SCIM", id: "articles/scim" }],
         },
       ],
     },
@@ -1348,7 +1482,7 @@ const sidebars = {
             },
           ],
         },
-        {type: "doc", label: "Deprecations", id: "articles/deprecations"},
+        { type: "doc", label: "Deprecations", id: "articles/deprecations" },
         {
           type: "doc",
           label: "Generating Test CRDs",
@@ -1366,7 +1500,7 @@ const sidebars = {
           id: "articles/testkube-dashboard-general-settings",
         },
 
-        {type: "doc", label: "Templates", id: "articles/templates"},
+        { type: "doc", label: "Templates", id: "articles/templates" },
         "articles/legacy-architecture",
         {
           type: "category",
