@@ -86,3 +86,17 @@ The list of tools available in an MCP Server is shown in the "Tools" section of 
 be made available to AI Agents as described in [Defining AI Agents](/articles/defining-ai-agents#configuring-mcp-server-tools).
 
 ![MCP Server Tools](images/mcp-server-tools.png)
+
+## Use Cases for External MCP Servers
+
+Connecting external MCP Servers unlocks powerful cross-tool automation for your AI Agents. For example:
+
+- **Kubernetes** — Agents can check pod status, node conditions, and deployment health during failure analysis
+- **Grafana / Datadog** — Agents can correlate test failures with application performance metrics
+- **GitHub / GitLab** — Agents can inspect source code, create fix PRs, or correlate failures with recent changes
+- **Slack / Teams** — Agents can post analysis results, incident summaries, or reports to team channels
+- **Jira / Linear** — Agents can create tickets automatically when they detect issues
+
+See [Enhancing Agents with External MCP Servers](/articles/ai-agent-examples-overview#enhancing-agents-with-external-mcp-servers) for a
+full mapping of MCP Servers to agent capabilities, and the [Example Agents](/articles/ai-agent-examples-overview) for concrete examples
+that use external MCP Servers alongside the built-in Testkube tools.

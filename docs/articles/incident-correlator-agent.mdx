@@ -94,3 +94,21 @@ Start a chat with the agent during an incident:
 - *"We're seeing a lot of failures right now — are they related?"*
 - *"Group all failures from the last hour and tell me if there's a common cause"*
 - *"Is the cluster having issues? Multiple teams are reporting test failures"*
+
+## Enhancing with External MCP Servers
+
+Connect additional [MCP Servers](/articles/mcp-servers-for-ai-agents) to make incident correlation
+significantly more powerful:
+
+- **Kubernetes MCP Server** — Query cluster-wide events, pod restarts, and node conditions. If
+  multiple failures coincide with a node eviction or a failed deployment rollout, the agent can
+  confirm the systemic cause definitively.
+- **PagerDuty / OpsGenie** — Check if there's an active infrastructure incident. If a P1 is already
+  open for a database outage, the agent can immediately correlate the test failures to it rather than
+  investigating from scratch.
+- **Grafana / Datadog** — Pull application metrics around the failure time window. A spike in error
+  rates or a latency increase across shared dependencies confirms a systemic issue.
+- **Slack** — Post an incident summary to `#incidents` with the correlated failure count, affected
+  teams, and likely root cause — giving ops teams an instant situational overview.
+- **Jira / Linear** — Automatically create an incident ticket with the correlation analysis, affected
+  workflows, and recommended next steps.

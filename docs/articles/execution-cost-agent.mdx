@@ -76,3 +76,19 @@ Set up an [AI Agent Trigger](/articles/ai-triggers) to generate a weekly cost re
 
 > Produce a weekly execution cost report. Analyze all workflows, rank them by total execution time,
 > and highlight the top 10 optimization opportunities with estimated time savings.
+
+## Enhancing with External MCP Servers
+
+Connect additional [MCP Servers](/articles/mcp-servers-for-ai-agents) to enrich cost analysis with
+infrastructure and financial context:
+
+- **Kubernetes MCP Server** — Query actual cluster resource usage and quotas. The agent can compare
+  Testkube workflow resource consumption against total cluster capacity, identify contention with
+  other workloads, and recommend namespace-level resource adjustments.
+- **Grafana / Prometheus** — Pull infrastructure cost metrics, node utilization, and cloud billing
+  data. This lets the agent estimate actual dollar costs per workflow execution, not just time.
+- **GitHub / GitLab** — Correlate cost increases with recent workflow definition changes. If a PR
+  added a new test step that doubled execution time, the agent can pinpoint exactly when costs
+  increased and who to follow up with.
+- **Slack** — Post the weekly cost report to a `#test-infrastructure` channel, highlighting the
+  top optimization opportunities with estimated savings.

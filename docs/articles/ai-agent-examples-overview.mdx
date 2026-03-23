@@ -38,6 +38,27 @@ These agents serve both audiences equally:
 | [Onboarding Guide](/articles/onboarding-guide-agent) | Helps new team members understand the existing test infrastructure and create their first workflows | Interactive |
 | [Security & Compliance](/articles/security-compliance-agent) | Audits workflows for security best practices, secret handling, and operational compliance | Scheduled or interactive |
 
+## Enhancing Agents with External MCP Servers
+
+All the examples above use only the built-in Testkube MCP Server. By connecting
+[external MCP Servers](/articles/mcp-servers-for-ai-agents), you can give agents access to additional
+context that dramatically improves their analysis and enables new automation capabilities.
+
+| MCP Server | What it adds | Agent enhancements |
+|------------|-------------|-------------------|
+| **GitHub / GitLab** | Code changes, PRs, issues, file contents | Remediation can open fix PRs; Flakiness Analysis can correlate with source changes; any failure agent can auto-create issues |
+| **Kubernetes** | Pod status, events, node conditions, resource quotas | Infrastructure Triage can check pod evictions and node pressure; Incident Correlator can query cluster-wide events |
+| **Grafana** | Dashboard data, metrics, alerts | Infrastructure Triage can correlate test failures with application performance metrics; Performance Regression can compare against APM baselines |
+| **Slack / Teams** | Channel messaging | Any triggered agent can post summaries to a channel; Incident Correlator can alert #incidents |
+| **Jira / Linear** | Issue creation and tracking | Failure agents can create tickets automatically; Security & Compliance can file violation issues |
+| **Datadog / Prometheus** | APM metrics, traces, error rates | Infrastructure Triage can check if the service under test had errors; Performance Regression can compare against application-level SLIs |
+| **PagerDuty / OpsGenie** | Active incidents and alerts | Incident Correlator can check if there's an active infrastructure incident explaining test failures |
+
+:::tip
+You can browse available MCP Servers in the [MCP Server Registry](/articles/mcp-servers-for-ai-agents#from-the-mcp-server-registry)
+directly from the Dashboard. For more external-MCP-powered agent ideas, see [More AI Agent Ideas](/articles/ai-agent-ideas#combining-with-external-mcp-servers).
+:::
+
 ## More Ideas
 
 Looking for more inspiration? See [More AI Agent Ideas](/articles/ai-agent-ideas) for additional agent
@@ -55,5 +76,7 @@ All examples use the built-in Testkube MCP Server. To create any of these agents
 :::tip
 These examples are starting points — customize the prompts, tools, and trigger conditions to match your
 team's specific needs. You can also combine multiple agents: for example, use the Infrastructure Triage agent
-to classify failures, then route infrastructure issues to an ops channel and test failures to QA.
+to classify failures, then route infrastructure issues to an ops channel and test failures to QA. Connect
+[external MCP Servers](#enhancing-agents-with-external-mcp-servers) like Kubernetes, Grafana, or GitHub to
+give your agents deeper context and automation capabilities.
 :::

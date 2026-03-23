@@ -84,3 +84,19 @@ Start a chat with the agent and ask it to triage specific failures:
 - *"Triage the latest failed execution of my-api-tests"*
 - *"Is execution abc123 an infrastructure failure or a test bug?"*
 - *"Check all failures from the last hour — how many are infra vs test?"*
+
+## Enhancing with External MCP Servers
+
+Connect additional [MCP Servers](/articles/mcp-servers-for-ai-agents) to give this agent deeper
+infrastructure context:
+
+- **Kubernetes MCP Server** — Query pod status, events, and node conditions directly. The agent can
+  check if the pod was evicted, if the node was under memory pressure, or if there were scheduling
+  failures — providing definitive infrastructure evidence rather than inferring from logs alone.
+- **Grafana / Datadog** — Cross-reference test failures with application performance metrics. If the
+  service under test was experiencing elevated error rates or latency at the time of the test failure,
+  that strongly suggests an infrastructure or dependency issue.
+- **PagerDuty / OpsGenie** — Check if there's an active incident that explains the failure, saving
+  the team from investigating a known issue.
+- **Slack** — Post triage results to a designated channel (e.g. `#test-infra-alerts`) so ops teams
+  see infrastructure failures immediately.

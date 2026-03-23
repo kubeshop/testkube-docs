@@ -76,3 +76,14 @@ assess the blast radius whenever a key workflow fails. Configure with a prompt l
 
 > Analyze the blast radius of this failed execution. Identify all workflows sharing the same container images,
 > git repositories, or target services. Report which are currently affected and which are at risk.
+
+## Enhancing with External MCP Servers
+
+Connect additional [MCP Servers](/articles/mcp-servers-for-ai-agents) to deepen the blast radius analysis:
+
+- **GitHub / GitLab** — Inspect recent commits and open PRs to determine if a code change is the likely
+  root cause. The agent can then identify all workflows that test the affected repository or service.
+- **Kubernetes** — Query deployments and services to map which workflows exercise which running services.
+  If a deployment is unhealthy, the agent can instantly identify all workflows that depend on it.
+- **Jira / Linear** — Automatically create a tracking ticket listing all affected workflows, their current
+  status, and the suspected root cause — so the team knows the full scope at a glance.

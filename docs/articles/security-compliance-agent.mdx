@@ -86,3 +86,18 @@ Set up a trigger that fires when new workflows are created to catch issues early
 
 > Review the newly created workflow for security and operational best practices. Flag any violations before
 > the workflow is used in production.
+
+## Enhancing with External MCP Servers
+
+Connect additional [MCP Servers](/articles/mcp-servers-for-ai-agents) to expand compliance coverage:
+
+- **Kubernetes** — Check RBAC configurations, namespace policies, and network policies alongside
+  workflow definitions. The agent can flag workflows that run with elevated privileges or access
+  namespaces they shouldn't.
+- **GitHub / GitLab** — Verify that workflow source repos have branch protection, required reviews,
+  and signed commits. The agent can also check `.gitignore` and CI config for accidentally committed
+  secrets.
+- **Jira / Linear** — Automatically create compliance tickets for violations, making it easy to
+  track remediation across teams.
+- **Vault / AWS Secrets Manager** — Verify that workflows reference secrets from approved secret
+  stores rather than hardcoding values or using unmanaged environment variables.
