@@ -29,7 +29,7 @@ in the Dashboard as described above.
 ```yaml
 testkube-ai-service:
   enabled: true
-  db:
+  postgres:
     secretRef:
       name: my-postgres-credentials     # Secret with DB credentials
       endpointKey: host                 # Key containing DB host
