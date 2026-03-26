@@ -303,8 +303,25 @@ The expressions language provides several built-in variables. Some of these are 
       <td>❌</td>
       <td>IP addresses of initialized services</td>
     </tr>
+    <tr>
+      <td><code>step.results</code></td>
+      <td>❌</td>
+      <td>Path to the current step's results directory (for writing files that later steps can read)</td>
+    </tr>
+    <tr>
+      <td><code>step.&lt;id&gt;.results</code></td>
+      <td>❌</td>
+      <td>Path to a previous step's results directory (for reading files written by that step)</td>
+    </tr>
+    <tr>
+      <td><code>step.&lt;id&gt;.outputs.&lt;key&gt;</code></td>
+      <td>❌</td>
+      <td>Output value written by a previous step to <code>/testkube/outputs/&lt;key&gt;</code></td>
+    </tr>
   </tbody>
 </table>
+
+See [Sharing Data Between Steps](/articles/test-workflows-step-sharing) for usage examples.
 
 ### Contextual Variables
 
