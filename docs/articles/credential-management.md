@@ -9,9 +9,11 @@ Instead of putting secrets and common configuration params directly in your test
 There are three types of credentials:
 
 ### **Secret** (For sensitive data)
+
 **Use for**: Passwords, API keys, tokens, private keys
 
 **Benefits**:
+
 - Values are encrypted and hidden in the UI
 - Safe to store sensitive information
 - Only visible during test execution
@@ -19,9 +21,11 @@ There are three types of credentials:
 **Example**: GitHub personal access token, database password, AWS secret key
 
 ### **Variable** (For configuration data)
+
 **Use for**: URLs, settings, non-sensitive configuration
 
 **Benefits**:
+
 - Values are visible in the UI for easy editing
 - Good for configuration that needs to be readable
 - Can be shared and reviewed by team members
@@ -29,9 +33,11 @@ There are three types of credentials:
 **Example**: API base URL, test database name, environment-specific settings
 
 ### **Vault** (For enterprise secret management)
+
 **Use for**: Secrets that must live in HashiCorp Vault
 
 **Benefits**:
+
 - Secrets stay in your existing Vault infrastructure — no duplication
 - Centralized audit trail and rotation through Vault
 - Testkube reads secrets from Vault at execution time
@@ -68,10 +74,11 @@ See [Disabling Credentials](/articles/install/advanced-install#disabling-credent
 ### Scopes
 
 Credentials can be scoped on different levels:
-* **Organization-scoped**: Can be referenced by Workflows across the entire Organization
-* **Environment-scoped**: Can be referenced by Workflows in a specific Environment
-* **Resource-group-scoped**: Can be referenced by Workflows in a specific Resource Group
-* **Workflow-scoped**: Can be referenced only within the Workflow where the credentials were created
+
+- **Organization-scoped**: Can be referenced by Workflows across the entire Organization
+- **Environment-scoped**: Can be referenced by Workflows in a specific Environment
+- **Resource-group-scoped**: Can be referenced by Workflows in a specific Resource Group
+- **Workflow-scoped**: Can be referenced only within the Workflow where the credentials were created
 
 > If a credential with the same name is defined at multiple scopes, the most specific scope wins:
 > workflow > resource group > environment > organization.
@@ -88,6 +95,7 @@ in the place where the credential value should be injected.
 ### Organization-scoped
 
 Follow these steps to create an Organization-scoped credential:
+
 1. Click the Organization dropdown menu and select the **Organization Management** page.
 2. Select **Credentials (Variables & Secrets)** from the left sidenav menu.
 3. Click **Add new variable** and create a credential with either **Plaintext**, **Encrypted**, or **Vault** type.
@@ -98,6 +106,7 @@ Follow these steps to create an Organization-scoped credential:
 ### Environment-scoped
 
 Follow these steps to create an Environment-scoped credential:
+
 1. Click the Environment dropdown menu and select the **Environment settings** page.
 2. Select **Credentials (Variables & Secrets)** from the left sidenav menu.
 3. Click **Add new variable** and create a credential with either **Plaintext**, **Encrypted**, or **Vault** type.
@@ -105,10 +114,19 @@ Follow these steps to create an Environment-scoped credential:
 
 ![Environment credentials](images/environment-credentials.png)
 
+### Resource group-scoped
+
+Follow these steps to create a Resource group-scoped credential:
+
+1. Open your Resource Group settings.
+2. Select the **Credentials** tab.
+3. Click **Add new variable** and create a credential with either **Plaintext** or **Encrypted** type.
+4. After you have added all of your credentials, make sure to click the **Save** button.
+
 ### Workflow-scoped
 
 For a specific Workflow, you can either create Workflow-scoped credentials or
-reference existing Organization-, Environment-, or Workflow-scoped credentials.
+reference existing Organization-, Environment-, Resource group-, or Workflow-scoped credentials.
 
 This can be done by opening Workflow **Settings** page and selecting the **Variables & Secrets** page from the left sidenav.
 
@@ -116,6 +134,7 @@ If you want to create a new Workflow-scoped credential, click the **Add a new va
 select **New credential (encrypted)** as the credential type.
 The name of the credential is actually the name of the global environment variable which will be accessible by all steps,
 and the value will get encrypted and the expression `credential("<NAME>")` will be injected:
+
 ```yaml
 spec:
   container:
@@ -313,7 +332,7 @@ Testkube organizes secrets in Vault by scope. Given the default `mountPath: "sec
 the paths look like this:
 
 | Scope          | Vault Path                                                               |
-|----------------|--------------------------------------------------------------------------|
+| -------------- | ------------------------------------------------------------------------ |
 | Organization   | `secret/data/testkube/o/<orgID>/<credentialName>`                        |
 | Environment    | `secret/data/testkube/e/<orgID>/<envID>/<credentialName>`                |
 | Resource Group | `secret/data/testkube/rg/<orgID>/<rgID>/<credentialName>`                |
