@@ -14,10 +14,60 @@ This release is available in Helm chart v2.331.0. Control Plane and Agent versio
 
 ### What's new!
 
-- **Google Sing-In at our SaaS**: You can now sign in to our SaaS using your Google account. This adds another convenient login option alongside our existing authentication providers.
+#### Login via Google
+
+You can now sign in to our SaaS using your Google account. This adds another convenient login option alongside our existing authentication providers.
+
+#### Vault Integration
+
+You can now use HashiCorp Vault (KV v2) as a backend in Credentials API. Workflow secrets are read from Vault at execution time instead of being stored in Testkube's database. Useful for teams that already manage secrets in Vault and do not want to duplicate them.
+
+Supports Kubernetes auth, static token auth, and Vault Enterprise namespaces.
+
+Read more: [Credentials — Vault Backend Setup](/articles/credential-management#vault-backend-setup)
+
+#### Resource Group Credentials
+
+Credentials can now be scoped to Resource Groups, sitting between Environment and Workflow in the precedence hierarchy.
+
+Read more: [Credentials](/articles/credential-management)
+
+#### Workflow Marketplace
+
+The Dashboard now includes a workflow catalog where you can browse pre-built TestWorkflows, configure parameters, preview the generated YAML, and create & run the workflow.
+
+#### Share Data Between Steps
+
+Steps can now pass values and files to each other — write outputs or drop files in one step, read them in any later step.
+
+Read more: [Sharing Data Between Steps](/articles/test-workflows-step-sharing)
+
+#### Fail-Fast for Parallel Steps
+
+Parallel steps now support a `failFast` option. When one worker fails, the remaining workers are aborted immediately instead of continuing to run.
+
+Read more: [Parallel Steps](/articles/test-workflows-parallel)
+
+#### Backstage Integration
+
+A new Testkube plugin for Backstage is available. It provides a read-only view of environments and recent executions in your Backstage portal, with links back to the Testkube Dashboard.
+
+Read more: [Backstage Integration](/articles/backstage-integration)
+
+#### Queued Execution Timeouts
+
+Executions waiting in the queue can now be automatically aborted after a configurable timeout. Configurable at the installation level using environment variables.
+
+Read more: TBD <!-- TODO: link to queue timeout docs once written -->
+
+#### Multiple GitHub App Installations
+
+Testkube now supports multiple GitHub App installations. If your organization uses multiple GitHub organizations, all valid installations work at the same time — invalid ones are skipped.
 
 ### Improvements and fixes
 
+- JUnit report attachments, including screenshots and URLs, are now rendered inline in the Report tab.
+- Execution tags can now be edited after completion — through the Dashboard, CLI, or MCP server.
 
 ## Patch Release v2.7.6 (2026-03-23)
 
