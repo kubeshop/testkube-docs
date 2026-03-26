@@ -403,6 +403,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Timeouts",
+              id: "articles/test-workflows-timeouts",
+            },
+            {
+              type: "doc",
               label: "Job & Pod Configuration",
               id: "articles/test-workflows-job-and-pod",
             },
