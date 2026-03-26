@@ -10,6 +10,7 @@ There are three types of credentials:
 
 ### **Secret** (For sensitive data)
 **Use for**: Passwords, API keys, tokens, private keys
+
 **Benefits**:
 - Values are encrypted and hidden in the UI
 - Safe to store sensitive information
@@ -19,6 +20,7 @@ There are three types of credentials:
 
 ### **Variable** (For configuration data)
 **Use for**: URLs, settings, non-sensitive configuration
+
 **Benefits**:
 - Values are visible in the UI for easy editing
 - Good for configuration that needs to be readable
@@ -28,6 +30,7 @@ There are three types of credentials:
 
 ### **Vault** (For enterprise secret management)
 **Use for**: Secrets that must live in HashiCorp Vault
+
 **Benefits**:
 - Secrets stay in your existing Vault infrastructure — no duplication
 - Centralized audit trail and rotation through Vault
@@ -42,7 +45,7 @@ See [Vault Backend Setup](#vault-backend-setup) below for setup instructions.
 :::
 
 :::info On-Prem Master Password Requirement
-For on-prem installations, a master password must be configured on the control plane. It is used to encrypt
+For on-prem installations, a master password must be configured on the Control Plane. It is used to encrypt
 **Secret** credentials stored in the database and to sign the tokens that allow runners to
 retrieve secrets during workflow execution.
 
@@ -50,16 +53,10 @@ Without a master password, only **Variable** (plaintext) credentials can be stor
 that require credentials will fail.
 
 For setup details, runtime behavior, and recovery notes, see
-[Master Password for Encryption](/articles/install/advanced-install#master-password-for-encryption)
+[Credentials Encryption](/articles/install/advanced-install#credentials-encryption)
 in the installation guide.
 
 Testkube Cloud users do not need to configure this — it is enabled by default.
-:::
-
-:::tip Disabling Credentials
-On-prem users who manage secrets externally (e.g. HashiCorp Vault) can disable
-credentials entirely or turn off just the encrypted backend.
-See [Disabling Credentials](/articles/install/advanced-install#disabling-credentials) for details.
 :::
 
 ### Scopes
@@ -140,20 +137,19 @@ When you create a credential with type **Vault**, Testkube:
 
 1. Writes the secret value to Vault's KV v2 engine at a deterministic path under your configured mount
 2. Stores a reference to that Vault path in its database (the actual secret value is never stored in Testkube)
-3. At workflow execution time, the control plane reads the secret from Vault and passes it to the runner
+3. At workflow execution time, the Control Plane reads the secret from Vault and passes it to the runner
 
-All Vault access goes through the control plane. Agents and runners never talk to Vault directly.
+All Vault access goes through the Control Plane. Agents and runners never talk to Vault directly.
 
 ### Prerequisites
 
 - An on-prem (Enterprise) Testkube installation
-- A running HashiCorp Vault instance (OSS or Enterprise) accessible from the control plane
+- A running HashiCorp Vault instance (OSS or Enterprise) accessible from the Control Plane
 - A KV v2 secrets engine enabled in Vault (typically mounted at `secret/`)
 
 ### 1. Create a Vault Policy
 
-The control plane needs read and write access to the KV v2 path where credentials will be stored.
-By default, Testkube stores secrets under `<mountPath>/data/testkube/...`.
+The Control Plane needs read and write access to the KV v2 path where credentials will be stored.
 
 ```hcl
 path "secret/data/testkube/*" {
@@ -177,7 +173,7 @@ Testkube supports two authentication methods: **Kubernetes auth** (recommended f
 
 #### Kubernetes Auth (Recommended)
 
-This method uses the control plane pod's ServiceAccount token to authenticate with Vault.
+This method uses the Control Plane pod's ServiceAccount token to authenticate with Vault.
 No static secrets to manage — the token is automatically rotated by Kubernetes and renewed by Testkube.
 
 Enable the Kubernetes auth method in Vault (if not already enabled):
@@ -189,21 +185,26 @@ vault write auth/kubernetes/config \
   kubernetes_host="https://kubernetes.default.svc.cluster.local:443"
 ```
 
-Create a role bound to the control plane's ServiceAccount:
+Create a role bound to the Control Plane's ServiceAccount:
 
 ```bash
 vault write auth/kubernetes/role/testkube-cp \
-  bound_service_account_names=testkube-enterprise-api \
+  bound_service_account_names=<service-account-name> \
   bound_service_account_namespaces=<your-namespace> \
   policies=testkube-cp \
   ttl=1h
 ```
 
-Replace `<your-namespace>` with the namespace where Testkube is installed.
+Replace `<your-namespace>` with the namespace where Testkube is installed and `<service-account-name>` with the Control Plane's ServiceAccount name.
 
 :::tip
-The ServiceAccount name `testkube-enterprise-api` is the default created by the Helm chart. If you've
-customized `serviceAccount.name` in your values, use that name instead.
+The ServiceAccount name is derived from your Helm release name. You can find it with:
+
+```bash
+kubectl get sa -n <namespace> | grep enterprise-api
+```
+
+Or check the `serviceAccount.name` override in your Helm values.
 :::
 
 #### Static Token (Dev/Testing Only)
@@ -236,20 +237,7 @@ testkube-cloud-api:
 
 #### With Static Token
 
-```yaml
-testkube-cloud-api:
-  credentials:
-    backends:
-      vault:
-        enabled: true
-        addr: "http://vault.vault.svc.cluster.local:8200"
-        mountPath: "secret"
-        pathPrefix: "testkube"
-        authMethod: "token"
-        token: "hvs.your-vault-token"
-```
-
-For production, store the token in a Kubernetes Secret and reference it instead:
+For production, reference a Kubernetes Secret containing the token:
 
 ```yaml
 testkube-cloud-api:
@@ -265,6 +253,8 @@ testkube-cloud-api:
           name: "vault-token-secret"
           key: "token"
 ```
+
+For quick testing, you can set the `token` field directly instead of `tokenSecretRef` (not recommended for production).
 
 #### Vault Enterprise Namespace
 
@@ -284,50 +274,44 @@ testkube-cloud-api:
         namespace: "my-team"
 ```
 
-### 4. Apply and Verify
+### 4. Verify
 
-After updating your Helm values, upgrade the release:
-
-```bash
-helm upgrade tke testkube-enterprise/testkube-enterprise -f values.yaml -n <namespace>
-```
-
-Check the control plane logs for successful Vault initialization:
-
-```bash
-kubectl logs deployment/testkube-enterprise-api -n <namespace> | grep -i vault
-```
-
-If Vault initialization fails, you'll see a warning like `Failed to initialize vault backend` — the control plane
+After upgrading, check the Control Plane API logs for successful Vault initialization.
+If Vault initialization fails, you'll see a warning like `Failed to initialize vault backend` — the Control Plane
 continues running but vault credentials won't be available. Check the error message for details
 (usually a connectivity or authentication issue).
 
-### Vault Configuration Reference
+### 5. Create and Use Vault Credentials
 
-| Parameter | Description | Default |
-|-----------|-------------|---------|
-| `enabled` | Enable the Vault credentials backend | `false` |
-| `addr` | Vault server address (e.g. `http://vault:8200`) | `""` |
-| `mountPath` | KV v2 secrets engine mount path | `"secret"` |
-| `pathPrefix` | Prefix for all credential paths in Vault | `"testkube"` |
-| `authMethod` | `"kubernetes"` or `"token"` | `"token"` |
-| `role` | Vault role name (for kubernetes auth) | `""` |
-| `token` | Static Vault token (for token auth) | `""` |
-| `tokenSecretRef.name` | Kubernetes Secret name containing the token | `""` |
-| `tokenSecretRef.key` | Key within the Secret | `"token"` |
-| `namespace` | Vault Enterprise namespace | `""` |
+Once the backend is configured, Vault credentials work the same way as any other credential type. You can
+create them through the Dashboard at any scope (Organization, Environment, Resource Group) by selecting
+the **Vault** type — or through the API.
+
+In your workflow, reference them with the same `credential()` expression you'd use for any other type:
+
+```yaml
+spec:
+  container:
+    env:
+      - name: API_KEY
+        value: '{{credential("my-api-key")}}'
+```
+
+Testkube resolves the credential at execution time by reading the secret from Vault and injecting it
+into the workflow step. The workflow doesn't need to know whether the credential is stored in Vault or
+in Testkube's database — the `credential()` expression works the same either way.
 
 ### Vault Path Structure
 
 Testkube organizes secrets in Vault by scope. Given the default `mountPath: "secret"` and `pathPrefix: "testkube"`,
 the paths look like this:
 
-| Scope | Vault Path |
-|-------|-----------|
-| Organization | `secret/data/testkube/o/<orgID>/<credentialName>` |
-| Environment | `secret/data/testkube/e/<orgID>/<envID>/<credentialName>` |
-| Resource Group | `secret/data/testkube/rg/<orgID>/<rgID>/<credentialName>` |
-| Workflow | `secret/data/testkube/w/<orgID>/<envID>/<workflowName>/<credentialName>` |
+| Scope          | Vault Path                                                               |
+|----------------|--------------------------------------------------------------------------|
+| Organization   | `secret/data/testkube/o/<orgID>/<credentialName>`                        |
+| Environment    | `secret/data/testkube/e/<orgID>/<envID>/<credentialName>`                |
+| Resource Group | `secret/data/testkube/rg/<orgID>/<rgID>/<credentialName>`                |
+| Workflow       | `secret/data/testkube/w/<orgID>/<envID>/<workflowName>/<credentialName>` |
 
 This structure lets you use Vault's ACL policies to restrict access by scope if needed.
 
