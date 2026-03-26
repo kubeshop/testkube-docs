@@ -79,7 +79,7 @@ Once you've set up the Testkube MCP Server, configure your AI tools:
 
 ## Available Tools
 
-The MCP server provides 25 tools for comprehensive Testkube management:
+The MCP server provides 30 tools for comprehensive Testkube management:
 
 ### Workflow Management
 
@@ -90,6 +90,13 @@ The MCP server provides 25 tools for comprehensive Testkube management:
 - `create_workflow` - Create new workflow
 - `update_workflow` - Update existing workflow
 - `run_workflow` - Execute workflow
+
+### Workflow Template Management
+
+- `list_workflowtemplates` - List all workflow templates with optional label filtering
+- `get_workflowtemplate_definition` - Get workflow template YAML definition
+- `create_workflowtemplate` - Create new workflow template
+- `update_workflowtemplate` - Update existing workflow template
 
 ### Agent Management
 
@@ -105,6 +112,7 @@ The MCP server provides 25 tools for comprehensive Testkube management:
 - `lookup_execution_id` - Resolve execution name to ID
 - `wait_for_executions` - Wait for executions to complete
 - `abort_workflow_execution` - Cancel running execution
+- `update_execution_tags` - Update tags on an execution (replace semantics)
 
 ### Artifact Management
 

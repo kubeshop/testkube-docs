@@ -1,0 +1,96 @@
+# Testkube Security & Compliance Reviewer Agent
+
+An AI Agent in Testkube can audit your test workflows for security and operational best practices — catching
+issues like unpinned images, missing resource limits, and configuration that could pose risks in production environments.
+
+## Requirements
+
+A Security & Compliance Reviewer Agent requires:
+
+- **Access to workflow definitions and schema** — provided by the integrated Testkube MCP Server.
+
+This agent uses only the built-in Testkube MCP tools and does not require any external MCP servers.
+
+Optionally, it can also be set up to:
+- Run on a schedule via [AI Agent Triggers](/articles/ai-triggers) for periodic compliance audits
+- Run automatically when new workflows are created (trigger on workflow creation events)
+
+## Create the Security & Compliance Reviewer AI Agent
+
+Create an AI Agent as described at [Creating an AI Agent](/articles/defining-ai-agents#creating-a-new-ai-agent), name it
+what you want and set the prompt to the following (feel free to adapt it to your needs!):
+
+> You are an AI agent that reviews test workflows for security and operational compliance. Audit workflow
+> definitions against best practices and report violations.
+>
+> When asked to review workflows:
+> 1. Use list_workflows to discover all workflows (or a filtered subset)
+> 2. Use get_workflow_definition to inspect each workflow's configuration
+> 3. Use query_workflows to find patterns across many workflows at once
+> 4. Use get_workflow_schema as reference for valid fields and options
+>
+> Check each workflow for these compliance rules:
+>
+> **Security:**
+> - Unpinned image tags (`:latest` or no tag) — require pinned versions (e.g. `alpine:3.19`)
+> - Hardcoded secrets, tokens, or passwords in workflow YAML (env values, args, shell commands)
+> - Overly permissive service accounts or RBAC references
+> - Use of `privileged: true` or unnecessary security context escalation
+>
+> **Operational:**
+> - Missing resource requests/limits (CPU, memory) — workflows should set appropriate resource requests
+> - Missing timeouts — both `spec.job.activeDeadlineSeconds` and step-level `timeout` should be set
+> - No artifact collection — workflows should collect artifacts with `condition: always` for debugging
+> - Missing labels — workflows should have metadata labels for organization and filtering
+> - Missing JUnit report generation — test workflows should generate JUnit XML where applicable
+>
+> **Reliability:**
+> - No retry configuration on steps known to be flaky
+> - Missing `condition: always` on cleanup/artifact steps
+> - Hardcoded URLs or endpoints that should be parameterized via `spec.config`
+>
+> For each violation, report: the workflow name, the rule violated, the severity (critical/warning/info),
+> the specific line or field, and the recommended fix.
+>
+> Present findings as a compliance report with a summary score (e.g. "12/15 workflows compliant")
+> and a grouped list of violations by severity.
+
+Enable the following Testkube MCP tools for this agent:
+
+- `list_workflows` — to discover all workflows
+- `get_workflow_definition` — to inspect workflow configuration
+- `query_workflows` — to find patterns across workflows
+- `get_workflow_schema` — to reference valid fields and best practices
+
+## Using the Security & Compliance Reviewer AI Agent
+
+### Interactive Review
+
+Start a chat with the agent and ask it to review your workflows:
+
+- *"Audit all workflows for security issues"*
+- *"Check my workflows for unpinned images"*
+- *"Run a compliance review on the production test suite"*
+- *"Does my-api-test follow best practices?"*
+
+### As a Scheduled Trigger
+
+Set up an [AI Agent Trigger](/articles/ai-triggers) that runs weekly to maintain compliance:
+
+> Audit all workflows for security and operational compliance. Report any unpinned images, missing timeouts,
+> missing resource limits, or hardcoded secrets. Provide a compliance score and prioritized list of fixes.
+
+## Enhancing with External MCP Servers
+
+Connect additional [MCP Servers](/articles/mcp-servers-for-ai-agents) to expand compliance coverage:
+
+- **Kubernetes** — Check RBAC configurations, namespace policies, and network policies alongside
+  workflow definitions. The agent can flag workflows that run with elevated privileges or access
+  namespaces they shouldn't.
+- **GitHub / GitLab** — Verify that workflow source repos have branch protection, required reviews,
+  and signed commits. The agent can also check `.gitignore` and CI config for accidentally committed
+  secrets.
+- **Jira / Linear** — Automatically create compliance tickets for violations, making it easy to
+  track remediation across teams.
+- **Vault / AWS Secrets Manager** — Verify that workflows reference secrets from approved secret
+  stores rather than hardcoding values or using unmanaged environment variables.

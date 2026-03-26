@@ -1,0 +1,114 @@
+# Testkube Incident Correlator Agent
+
+When multiple workflows fail around the same time, this agent groups the failures, identifies common
+patterns (shared infrastructure, same cluster, same time window, similar error messages), and determines
+whether it is a systemic issue or coincidental individual failures.
+
+## Requirements
+
+An Incident Correlator Agent requires:
+
+- **Access to execution data, logs, and metrics** — provided by the integrated Testkube MCP Server.
+
+This agent uses only the built-in Testkube MCP tools and does not require any external MCP servers.
+
+Optionally, it can also be set up to:
+- Run automatically via [AI Agent Triggers](/articles/ai-triggers) on workflow failure events
+- Tag correlated executions with an incident ID using `update_execution_tags`
+
+## Create the Incident Correlator AI Agent
+
+Create an AI Agent as described at [Creating an AI Agent](/articles/defining-ai-agents#creating-a-new-ai-agent), name it
+what you want and set the prompt to the following (feel free to adapt it to your needs!):
+
+> You are an incident analysis expert for test infrastructure. When failures occur, your job is to determine
+> if they are isolated test issues or part of a broader systemic incident.
+>
+> When triggered or asked to investigate:
+> 1. Use query_executions to find all failed executions within a recent time window (e.g. last 2 hours)
+> 2. Use get_execution_info for each failure to gather metadata (workflow name, status, timing, labels)
+> 3. Use fetch_execution_logs for a sample of failures to look for common error patterns
+> 4. Use get_workflow_execution_metrics to check if failures correlate with resource pressure
+> 5. Use list_agents to check if failures are concentrated on specific agents/clusters
+>
+> Analyze the failures for correlation signals:
+> - **Temporal clustering**: Multiple workflows failing within a narrow time window
+> - **Common errors**: Same error message or error pattern across different workflows
+> - **Infrastructure signals**: OOM kills, network errors, or timeout patterns appearing simultaneously
+> - **Agent correlation**: Failures concentrated on a single agent or cluster
+> - **Label correlation**: Failures affecting workflows with shared labels (e.g. same team, same target service)
+>
+> Classify the situation:
+> - **Systemic incident**: Correlated failures indicating a shared root cause (infrastructure outage,
+>   dependency failure, cluster issue). Identify the likely root cause.
+> - **Independent failures**: Unrelated failures that happened to coincide. Note the coincidence but
+>   recommend individual investigation.
+> - **Partial correlation**: Some failures are related while others are independent. Group them accordingly.
+>
+> For systemic incidents, provide:
+> - A summary of the incident scope (how many workflows, which teams/labels affected)
+> - The common failure pattern and likely root cause
+> - Recommended immediate action (e.g. check cluster health, verify dependency availability)
+> - A suggested incident tag for tracking
+>
+> Tag correlated executions with a shared incident identifier using update_execution_tags
+> (e.g. `incident=2024-03-20-cluster-outage`).
+
+Enable the following Testkube MCP tools for this agent:
+
+- `query_executions` — to find all recent failed executions
+- `get_execution_info` — to gather metadata for each failure
+- `fetch_execution_logs` — to examine error patterns in logs
+- `get_workflow_execution_metrics` — to check for resource pressure correlations
+- `list_executions` — to check execution history for each workflow
+- `list_agents` — to identify if failures are concentrated on specific agents
+- `list_labels` — to understand workflow groupings
+- `list_workflows` — to get workflow metadata and labels
+- `update_execution_tags` — to tag correlated executions with an incident ID (requires approval)
+
+## Using the Incident Correlator AI Agent
+
+### With an AI Agent Trigger
+
+Set up an [AI Agent Trigger](/articles/ai-triggers) that fires on **Test Workflow Failed** events:
+
+- **Trigger Events**: Test Workflow Failed
+- **Trigger Mode**: Every match
+- **Prompt Template**:
+  ```
+  Workflow {{.WorkflowName}} has failed (execution {{.ExecutionID}}).
+  Check if there are other recent failures that might be correlated.
+  If multiple workflows have failed in the last 30 minutes, analyze whether they share
+  a common root cause (infrastructure issue, dependency outage, etc.).
+  ```
+
+:::tip
+Consider using the **On state change** trigger mode if you want to limit the analysis to newly failing
+workflows rather than every individual failure.
+:::
+
+### Interactive Analysis
+
+Start a chat with the agent during an incident:
+
+- *"We're seeing a lot of failures right now — are they related?"*
+- *"Group all failures from the last hour and tell me if there's a common cause"*
+- *"Is the cluster having issues? Multiple teams are reporting test failures"*
+
+## Enhancing with External MCP Servers
+
+Connect additional [MCP Servers](/articles/mcp-servers-for-ai-agents) to make incident correlation
+significantly more powerful:
+
+- **Kubernetes MCP Server** — Query cluster-wide events, pod restarts, and node conditions. If
+  multiple failures coincide with a node eviction or a failed deployment rollout, the agent can
+  confirm the systemic cause definitively.
+- **PagerDuty / OpsGenie** — Check if there's an active infrastructure incident. If a P1 is already
+  open for a database outage, the agent can immediately correlate the test failures to it rather than
+  investigating from scratch.
+- **Grafana / Datadog** — Pull application metrics around the failure time window. A spike in error
+  rates or a latency increase across shared dependencies confirms a systemic issue.
+- **Slack** — Post an incident summary to `#incidents` with the correlated failure count, affected
+  teams, and likely root cause — giving ops teams an instant situational overview.
+- **Jira / Linear** — Automatically create an incident ticket with the correlation analysis, affected
+  workflows, and recommended next steps.

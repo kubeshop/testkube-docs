@@ -666,8 +666,13 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Configuration Quick Start",
+              label: "Configuration",
               id: "articles/ai-enabling",
+            },
+            {
+              type: "doc",
+              label: "AI Assistant",
+              id: "articles/ai-assistant-overview",
             },
             {
               type: "category",
@@ -694,9 +699,24 @@ const sidebars = {
                   id: "articles/mcp-servers-for-ai-agents",
                 },
                 {
+                  type: "doc",
+                  label: "Configuring AI Models",
+                  id: "articles/ai-models",
+                },
+                {
+                  type: "doc",
+                  label: "AI Agent Triggers",
+                  id: "articles/ai-triggers",
+                },
+                {
                   type: "category",
                   label: "Example Agents",
                   items: [
+                    {
+                      type: "doc",
+                      label: "Overview",
+                      id: "articles/ai-agent-examples-overview",
+                    },
                     {
                       type: "doc",
                       label: "Remediation",
@@ -707,18 +727,42 @@ const sidebars = {
                       label: "Flakiness Analysis",
                       id: "articles/flakiness-analysis-agent",
                     },
+                    {
+                      type: "doc",
+                      label: "Dependency Impact",
+                      id: "articles/dependency-impact-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Infrastructure Triage",
+                      id: "articles/infrastructure-triage-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Incident Correlator",
+                      id: "articles/incident-correlator-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Execution Cost Analyzer",
+                      id: "articles/execution-cost-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Onboarding Guide",
+                      id: "articles/onboarding-guide-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Security & Compliance",
+                      id: "articles/security-compliance-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "More Ideas",
+                      id: "articles/ai-agent-ideas",
+                    },
                   ],
-                },
-              ],
-            },
-            {
-              type: "category",
-              label: "AI Assistant",
-              items: [
-                {
-                  type: "doc",
-                  label: "Overview",
-                  id: "articles/ai-assistant-overview",
                 },
               ],
             },
