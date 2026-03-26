@@ -19,22 +19,21 @@ The resulting session appears in the AI Agent Chats list and can be monitored or
 
 ## Creating a Trigger
 
-Navigate to **Integrations → AI Triggers** in the Testkube Dashboard and click **Create new trigger**.
+Navigate to **Integrations → AI Triggers** in the Testkube Dashboard and click **Create new trigger** which will start a two-step wizard to configure the trigger.
 
-![AI Triggers](images/create-ai-trigger.png)
+### Step 1 - Basic Configuration
 
-### Configuration Fields
+![AI Triggers](images/create-ai-trigger-step-1.png)
+
 
 | Field | Description | Required |
 |-------|-------------|----------|
 | **Name** | A unique name for the trigger (must be a valid Kubernetes resource name) | Yes |
-| **AI Agent** | The AI agent to run when the trigger fires | Yes |
 | **Trigger Events** | Which execution outcomes activate the trigger | Yes |
 | **Label Selector** | Filter which workflows can activate the trigger based on their labels | No |
 | **Trigger Mode** | When to fire: every match or only on state changes | Yes |
-| **Prompt Template** | Instructions sent to the agent, with template variables for execution context | No |
 
-### Trigger Events
+#### Trigger Events
 
 Select one or more events that should activate the trigger:
 
@@ -50,7 +49,7 @@ The most common setup is triggering on **Test Workflow Failed** to automatically
 You can select multiple events — for example, both Failed and Aborted.
 :::
 
-### Label Selector
+#### Label Selector
 
 The label selector filters which workflows can activate the trigger. Only workflows whose labels match the
 selector will fire the trigger.
@@ -64,7 +63,7 @@ selector will fire the trigger.
 - `team=backend, type=api` — only trigger for backend team API test workflows
 - *(empty)* — trigger for all workflows
 
-### Trigger Mode
+#### Trigger Mode
 
 | Mode | Behavior |
 |------|----------|
@@ -76,7 +75,31 @@ selector will fire the trigger.
 of the same workflow. The first execution of a workflow is always considered a state change.
 :::
 
-### Prompt Template
+
+### Step 2 - Agent, Prompt Template & API Token
+
+![AI Triggers](images/create-ai-trigger-step-2.png)
+
+| Field | Description | Required |
+|-------|-------------|----------|
+| **Name** | A unique name for the trigger (must be a valid Kubernetes resource name) | Yes |
+| **AI Agent** | The AI agent to run when the trigger fires | Yes |
+| **API Token** | The API token to use for authentication when the trigger fires | Yes |
+| **Prompt Template** | Instructions sent to the agent, with template variables for execution context | No |
+
+#### Trigger API Tokens 
+
+AI Agent Triggers require an API token to authenticate the automatically created sessions. When creating a trigger,
+Testkube generates a dedicated API token. This token is used internally to start the AI agent session
+on behalf of the trigger. You can also use an existing API token by selecting it from the dropdown.
+
+:::warning
+If the API token associated with a trigger is deleted or expires, the trigger will stop firing. 
+Check the trigger's API token configuration if sessions are not being created as expected.
+:::
+
+
+#### Prompt Template
 
 The prompt template defines the instructions sent to the AI agent when the trigger fires. You can use
 Go template variables to include execution context:
