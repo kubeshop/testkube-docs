@@ -95,6 +95,43 @@ For on-prem, this is a critical operational dependency:
 `POST /organizations/<organizationId>/agents/<agentIdOrName>/regenerate` regenerates an agent secret key for
 affected agents.
 
+## Disabling Credentials
+
+You can turn off the built-in credentials feature entirely, or disable just the encrypted (Secret) backend
+if you manage secrets through an external tool such as HashiCorp Vault.
+
+### Disable All Credentials
+
+Turns off all credential operations. The Dashboard will not allow creating or editing credentials, and workflows
+will not be able to resolve them. All credential endpoints return `403 Forbidden`.
+
+```yaml
+testkube-cloud-api:
+  credentials:
+    enabled: false
+```
+
+Environment variable: `CREDENTIALS_ENABLED=false`
+
+:::note
+The master password is still required at startup even when credentials are disabled — it is used to sign
+execution tokens that runners need to communicate with the control plane.
+:::
+
+### Disable Encrypted Credentials Only
+
+Keeps plaintext **Variable** credentials and **Vault** references working, but blocks encrypted **Secret** credentials.
+
+```yaml
+testkube-cloud-api:
+  credentials:
+    backends:
+      encrypted:
+        enabled: false
+```
+
+Environment variable: `CREDENTIALS_BACKEND_ENCRYPTED_ENABLED=false`
+
 ## Artifact storage & cleanup
 
 Testkube uses MinIO or any S3-compatible storage to store test artifacts by default.

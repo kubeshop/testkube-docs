@@ -45,6 +45,71 @@ The parallel steps are started as a separate jobs/pods, so you can configure `po
 
 Similarly to regular steps, you can configure things like `timeout` (`timeout: 30m`), `optional: true`, or `negative: true` for expecting failure.
 
+### Fail-Fast
+
+By default, all parallel workers run to completion regardless of individual failures. You can set `failFast: true` on a `parallel` step to abort remaining workers as soon as one fails.
+
+* When `failFast` is **not set** (or `false`), every worker runs to completion — failures are reported after all workers finish
+* When `failFast: true`, the first worker failure cancels all other running workers (marked as aborted) and skips any queued-but-not-started workers
+
+:::info
+
+`failFast` is useful when running expensive parallel workloads where continuing after a failure would waste resources. For example, sharded test suites where a failure in one shard means the overall result will fail anyway.
+
+:::
+
+<Tabs>
+<TabItem value="enabled" label="failFast enabled" default>
+
+In this example, 4 workers are started but the first worker fails after 2 seconds. With `failFast: true`, the remaining workers are immediately cancelled.
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: example-parallel-fail-fast
+spec:
+  steps:
+  - name: Run tests
+    parallel:
+      count: 4
+      failFast: true
+      container:
+        image: alpine:latest
+      shell: |
+        if [ "{{ index }}" = "0" ]; then
+          sleep 2 && echo "Worker {{ index }}: failing" && exit 1
+        fi
+        echo "Worker {{ index }}: running" && sleep 30
+```
+
+</TabItem>
+<TabItem value="disabled" label="failFast disabled (default)">
+
+Without `failFast` (the default), all workers run to completion even if one fails. The first worker fails immediately, but the other 3 workers continue running.
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: example-parallel-no-fail-fast
+spec:
+  steps:
+  - name: Run tests
+    parallel:
+      count: 4
+      container:
+        image: alpine:latest
+      shell: |
+        if [ "{{ index }}" = "0" ]; then
+          echo "Worker {{ index }}: failing" && exit 1
+        fi
+        echo "Worker {{ index }}: passing" && sleep 5
+```
+
+</TabItem>
+</Tabs>
+
 ### Matrix and sharding
 
 The parallel steps are meant to support matrix and sharding, to run multiple replicas and/or distribute the load across multiple instances.

@@ -60,6 +60,7 @@ Connect Testkube to your team communication and incident management tools:
 - [Atlassian Jira](/articles/jira-integration) - Learn about how to integrate with Atlassian Jira.
 - [PagerDuty](https://testkube.io/learn/critical-test-based-alerting-with-pagerduty-and-testkube) - Learn about how to integrate Testkube with PagerDuty for alerting.
 - [Zapier](https://testkube.io/learn/integrating-testkube-and-zapier-for-instant-email-alerts) - Learn about how to integrate Testkube with Zapier.
+- [Backstage](/articles/backstage-integration) - Learn about how to integrate Testkube with Backstage.
 
 ## Observability & Reporting
 

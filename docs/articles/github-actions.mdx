@@ -224,6 +224,8 @@ testkube-cloud-api:
 3. (Re)-Deploy Testkube
 4. You are now ready to [use your GitHub App to clone your content][workflow-content-github-app]!
 
+If you need to authenticate across multiple GitHub organizations, you can install the same application in each organization and then update `values.yaml` with a comma-separated list of IDs (for example, `installationId: "your_installation_id1,your_installation_id2"`).
+
 ### Configuration for multi-tenancy
 
 This approach would install GitHub Apps on individual Testkube Organizations.

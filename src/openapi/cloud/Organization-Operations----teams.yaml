@@ -94,6 +94,8 @@ paths:
       responses:
         '204':
           description: Delete Success
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
         '401':
           $ref: './components.yaml#/components/responses/UnauthorizedError'
         '403':
