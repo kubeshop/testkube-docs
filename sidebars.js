@@ -363,6 +363,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Sharing Data Between Steps",
+              id: "articles/test-workflows-step-sharing",
+            },
+            {
+              type: "doc",
               label: "Artifacts",
               id: "articles/test-workflows-artifacts",
             },
