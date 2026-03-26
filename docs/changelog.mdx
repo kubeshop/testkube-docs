@@ -64,6 +64,36 @@ Read more: TBD <!-- TODO: link to queue timeout docs once written -->
 
 Testkube now supports multiple GitHub App installations. If your organization uses multiple GitHub organizations, all valid installations work at the same time — invalid ones are skipped.
 
+### AI Updates
+
+#### Chat Overlay
+
+A floating, resizable chat widget is now accessible from any page in the Testkube dashboard. Start a new AI conversation or switch between recent chats without leaving your current workflow. The widget persists its position and size across sessions.
+
+#### Chat Sidebar
+
+A persistent side panel lets you work with AI assistance alongside your regular dashboard workflow. The sidebar supports multiple simultaneous chat tabs, each with independent conversation state. Panel width is resizable and remembered across sessions.
+
+#### AI Agent Triggers
+
+You can now configure AI Agent triggers that automatically invoke an AI agent in response to test events. For example, set up a trigger that runs a failure-analysis agent whenever a Cypress test fails — with configurable trigger events, label selectors, trigger modes, and prompt templates.
+
+#### MCP Registry Browser
+
+Browse and install MCP servers directly from the dashboard using the new MCP Registry Browser. Search available servers, view descriptions and versions, and install them with a single click to extend your AI agents' capabilities.
+
+#### Custom LLM Models
+
+Environment administrators can now configure custom LLM providers and models for AI agents. Add your own OpenAI-compatible provider with an API key credential, register specific models, and select them in the chat model picker alongside the platform default.
+
+#### Notifications for Pending Tool Approvals
+
+A new notification center alerts you when AI agent sessions are waiting for tool approval. Review and approve pending actions directly from the notification panel without having to navigate to each chat session individually.
+
+#### Default Installed Agents
+
+New environments now come with a built-in **Testkube Helper** agent pre-installed — a general-purpose assistant with access to all Testkube MCP tools for troubleshooting, workflow authoring, execution analysis, and operations guidance.
+
 ### Improvements and fixes
 
 - JUnit report attachments, including screenshots and URLs, are now rendered inline in the Report tab.
