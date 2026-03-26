@@ -8,6 +8,106 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Monthly Release v2.8.0 (2026-03-26)
+
+This release is available in Helm chart v2.331.0. Control Plane and Agent versions are now unified at **v2.8.0**. ([Check out Agent release notes](https://github.com/kubeshop/testkube/releases/tag/2.8.0)).
+
+### What's new!
+
+#### Login via Google
+
+You can now sign in to our SaaS using your Google account. This adds another convenient login option alongside our existing authentication providers.
+
+### Workflows Updates
+
+#### Vault Integration
+
+You can now use HashiCorp Vault (KV v2) as a backend in Credentials API. Workflow secrets are read from Vault at execution time instead of being stored in Testkube's database. Useful for teams that already manage secrets in Vault and do not want to duplicate them.
+As of now, this is available only for on-prem installations.
+
+Supports Kubernetes auth, static token auth, and Vault Enterprise namespaces.
+
+Read more: [Credentials — Vault Backend Setup](/articles/credential-management#vault-backend-setup)
+
+#### Resource Group Credentials
+
+Credentials can now be scoped to Resource Groups, sitting between Environment and Workflow in the precedence hierarchy.
+
+Read more: [Credentials](/articles/credential-management)
+
+#### Workflow Marketplace
+
+The Dashboard now includes a workflow catalog where you can browse pre-built TestWorkflows, configure parameters, preview the generated YAML, and create & run the workflow.
+
+Read more: [Workflow Wizard - Start from an Example](/articles/test-workflows-create-wizard#start-from-an-example)
+
+#### Share Data Between Steps
+
+Steps can now pass values and files to each other — write outputs or drop files in one step, read them in any later step.
+
+Read more: [Sharing Data Between Steps](/articles/test-workflows-content#shared-directories)
+
+#### Fail-Fast for Parallel Steps
+
+Parallel steps now support a `failFast` option. When one worker fails, the remaining workers are aborted immediately instead of continuing to run.
+
+Read more: [Parallel Steps](/articles/test-workflows-parallel)
+
+#### Backstage Integration
+
+A new Testkube plugin for Backstage is available. It provides a read-only view of environments and recent executions in your Backstage portal, with links back to the Testkube Dashboard.
+
+Read more: [Backstage Integration](/articles/backstage-integration)
+
+#### Queued Execution Timeouts
+
+Executions waiting in the queue can now be automatically aborted after a configurable timeout. Configurable at the installation level using environment variables.
+
+Read more: [Testworkflow Timeouts](/articles/test-workflows-concurrency-queueing#execution-timeouts)
+
+#### Multiple GitHub App Installations
+
+Testkube now supports multiple GitHub App installations. If your organization uses multiple GitHub organizations, all valid installations work at the same time — invalid ones are skipped.
+
+Read more: [GitHub Apps with Testkube](/articles/github-actions#using-github-apps-with-testkube)
+
+### AI Updates
+
+#### Chat Overlay
+
+A floating, resizable chat widget is now accessible from any page in the Testkube dashboard. Start a new AI conversation or switch between recent chats without leaving your current workflow. The widget persists its position and size across sessions.
+
+#### Chat Sidebar
+
+A persistent side panel lets you work with AI assistance alongside your regular dashboard workflow. The sidebar supports multiple simultaneous chat tabs, each with independent conversation state. Panel width is resizable and remembered across sessions.
+
+#### AI Agent Triggers
+
+You can now configure AI Agent triggers that automatically invoke an AI agent in response to test events. For example, set up a trigger that runs a failure-analysis agent whenever a Cypress test fails — with configurable trigger events, label selectors, trigger modes, and prompt templates.
+
+#### MCP Registry Browser
+
+Browse and install MCP servers directly from the dashboard using the new MCP Registry Browser. Search available servers, view descriptions and versions, and install them with a single click to extend your AI agents' capabilities.
+
+#### Custom LLM Models
+
+Environment administrators can now configure custom LLM providers and models for AI agents. Add your own OpenAI-compatible provider with an API key credential, register specific models, and select them in the chat model picker alongside the platform default.
+
+#### Notifications for Pending Tool Approvals
+
+A new notification center alerts you when AI agent sessions are waiting for tool approval. Review and approve pending actions directly from the notification panel without having to navigate to each chat session individually.
+
+Read more: [AI Agent Chats - MCP Tool Approval](/articles/using-ai-agents#mcp-tool-approval)
+
+#### Default Installed Agents
+
+New Environments now come with 4 default agents tuned for Troubleshooting, Analysis, Optimization and General Assistance.
+
+### Improvements and fixes
+
+- JUnit report attachments, including screenshots and URLs, are now rendered inline in the Report tab. [Read more](/articles/test-workflows-reports#2-reports-tab)
+- Execution tags can now be edited after completion — through the Dashboard, CLI, or MCP server. [Read more](/articles/filtering-test-workflow-executions-using-tags)
+
 ## Patch Release v2.7.6 (2026-03-23)
 
 This patch release focuses on runner registration and data parsing stability.
