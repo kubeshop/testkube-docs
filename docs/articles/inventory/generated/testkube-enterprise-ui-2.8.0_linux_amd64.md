@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:207f43f7aa06025ce4fa096a7eb78a4f57f3a9886f4bb2f21009e7cdd3a1ea46</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 10" src="https://img.shields.io/badge/medium-10-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/low-2-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>digest</td><td><code>sha256:2d5098bfc565c9f631e87bbbc2a46dffbc39072d36703aff427f1ede65b7e791</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 10" src="https://img.shields.io/badge/medium-10-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/low-2-fce1a9"/> <!-- unspecified: 0 --></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>76 MB</td></tr>
 <tr><td>packages</td><td>87</td></tr>
@@ -12,6 +12,41 @@ hide_table_of_contents: true
 </details>
 
 <table>
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libpng</strong> <code>1.6.55-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/libpng@1.6.55-r0?os_name=alpine&os_version=3.23</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-33636?s=alpine&n=libpng&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C1.6.56-r0"><img alt="high : CVE--2026--33636" src="https://img.shields.io/badge/CVE--2026--33636-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.6.56-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.6.56-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-33416?s=alpine&n=libpng&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C1.6.56-r0"><img alt="high : CVE--2026--33416" src="https://img.shields.io/badge/CVE--2026--33416-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.6.56-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.6.56-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 8" src="https://img.shields.io/badge/M-8-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>curl</strong> <code>8.17.0-r1</code> (apk)</summary>
 

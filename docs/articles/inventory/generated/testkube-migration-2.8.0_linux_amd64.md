@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:33a6185ecc9e5557a86a93525dc4894706daf72917d165a8ff69e19804831d9f</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 5" src="https://img.shields.io/badge/high-5-e25d68"/> <img alt="medium: 7" src="https://img.shields.io/badge/medium-7-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
-<tr><td>platform</td><td>linux/arm64</td></tr>
-<tr><td>size</td><td>33 MB</td></tr>
-<tr><td>packages</td><td>267</td></tr>
+<tr><td>digest</td><td><code>sha256:2d8a1317a09910f1cef10185e116d354ed3e7bfd58ef0a9661b40e7240231130</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 5" src="https://img.shields.io/badge/high-5-e25d68"/> <img alt="medium: 7" src="https://img.shields.io/badge/medium-7-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>platform</td><td>linux/amd64</td></tr>
+<tr><td>size</td><td>36 MB</td></tr>
+<tr><td>packages</td><td>268</td></tr>
 </table>
 </details></table>
 </details>
@@ -173,6 +173,8 @@ None.
 <tr><td>Fixed version</td><td><code>2.12.6</code></td></tr>
 <tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.015%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

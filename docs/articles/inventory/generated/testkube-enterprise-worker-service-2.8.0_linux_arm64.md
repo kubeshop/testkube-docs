@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:33f72d52afce7565cb947fa06ccb5ff7fba2166655832b3d225cf6b2036f9832</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 6" src="https://img.shields.io/badge/high-6-e25d68"/> <img alt="medium: 7" src="https://img.shields.io/badge/medium-7-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:e1a75dce105ace3c13891d88ee3680c9c61ca7c3d2dd780a87b8e42f79c5d1dc</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 6" src="https://img.shields.io/badge/high-6-e25d68"/> <img alt="medium: 7" src="https://img.shields.io/badge/medium-7-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/arm64</td></tr>
-<tr><td>size</td><td>67 MB</td></tr>
-<tr><td>packages</td><td>449</td></tr>
+<tr><td>size</td><td>52 MB</td></tr>
+<tr><td>packages</td><td>425</td></tr>
 </table>
 </details></table>
 </details>
@@ -173,6 +173,8 @@ None.
 <tr><td>Fixed version</td><td><code>2.12.6</code></td></tr>
 <tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.015%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -442,7 +444,7 @@ The Delete function fails to properly validate offsets when processing malformed
 </blockquote>
 </details>
 
-<a href="https://scout.docker.com/v/GO-2026-4514?s=golang&n=jsonparser&ns=github.com%2Fbuger&t=golang&vr=%3E%3D0.0.0"><img alt="unspecified : GO--2026--4514" src="https://img.shields.io/badge/GO--2026--4514-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-32285?s=golang&n=jsonparser&ns=github.com%2Fbuger&t=golang&vr=%3E%3D0.0.0"><img alt="unspecified : CVE--2026--32285" src="https://img.shields.io/badge/CVE--2026--32285-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
 <tr><td>Affected range</td><td><code>>=0.0.0</code></td></tr>

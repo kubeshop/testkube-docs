@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:3f705faaef053c285c387842df848307746edef718e707118cbe3d0984b09d33</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 6" src="https://img.shields.io/badge/high-6-e25d68"/> <img alt="medium: 7" src="https://img.shields.io/badge/medium-7-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:f55092a58ef4b6883fd9b9e67c8741139c3701acff2d7e57930abbb54d2d4478</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 8" src="https://img.shields.io/badge/medium-8-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <!-- unspecified: 0 --></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
-<tr><td>size</td><td>57 MB</td></tr>
-<tr><td>packages</td><td>421</td></tr>
+<tr><td>size</td><td>11 MB</td></tr>
+<tr><td>packages</td><td>34</td></tr>
 </table>
 </details></table>
 </details>
@@ -16,6 +16,36 @@ hide_table_of_contents: true
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/H-4-e25d68"/> <img alt="medium: 7" src="https://img.shields.io/badge/M-7-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/nats-io/nats-server/v2</strong> <code>2.12.5</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/nats-io/nats-server@2.12.5#v2</code></small><br/>
+
+```dockerfile
+# 2.12.x/alpine3.22/Dockerfile (14:36)
+RUN set -eux; \
+    apkArch="$(apk --print-arch)"; \
+    case "$apkArch" in \
+    aarch64) natsArch='arm64'; sha256='85caf0500b011a31b105fb04992cb350236e2d5935a4d2ea7cc1efe9203aafc2' ;; \
+    armhf) natsArch='arm6'; sha256='71a4b194ea3c093318fefb30f5aa9bcbc2b25b172ecb9f17fc9ea18b9c4c7f67' ;; \
+    armv7) natsArch='arm7'; sha256='72f0084970ca9605b83db78806717403e1f676a587a4a07bb28a4b86ae201bc6' ;; \
+    x86_64) natsArch='amd64'; sha256='f1967bea3fbf6c86273f1a2edf5be65165d795716ae1ac2a14824f19cdc35c20' ;; \
+    x86) natsArch='386'; sha256='5549c7352ff3b04424c15402656bccfc5bc3fb26433e0b092ee794c1eae00c8e' ;; \
+    s390x) natsArch='s390x'; sha256='ca7235acf15b59d0b29d413ecb2a3654fa2a877d0a5f6d91db28dbc2d4064ad8' ;; \
+    ppc64le) natsArch='ppc64le'; sha256='29cc4c2566e960a85d2b277b99bf24322ce5c3e3da6e197eb253beb372e9839f' ;; \
+    loong64) natsArch='loong64'; sha256='b126457f298c58981fd42f21bff7c9a37e992ab5727862af64b41aa68b0d8d3b' ;; \
+    *) echo >&2 "error: $apkArch is not supported!"; exit 1 ;; \
+    esac; \
+    \
+    wget -O nats-server.tar.gz "https://github.com/nats-io/nats-server/releases/download/v${NATS_SERVER}/nats-server-v${NATS_SERVER}-linux-${natsArch}.tar.gz"; \
+    echo "${sha256} *nats-server.tar.gz" | sha256sum -c -; \
+    \
+    apk add --no-cache ca-certificates tzdata; \
+    \
+    tar -xf nats-server.tar.gz; \
+    rm nats-server.tar.gz; \
+    mv "nats-server-v${NATS_SERVER}-linux-${natsArch}/nats-server" /usr/local/bin; \
+    rm -rf "nats-server-v${NATS_SERVER}-linux-${natsArch}";
+```
+
+<br/>
+
 <a href="https://scout.docker.com/v/CVE-2026-33216?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3E%3D2.12.0-RC.1%2C%3C2.12.6"><img alt="high 8.6: CVE--2026--33216" src="https://img.shields.io/badge/CVE--2026--33216-lightgrey?label=high%208.6&labelColor=e25d68"/></a> <i>Plaintext Storage of a Password</i>
 
 <table>
@@ -173,6 +203,8 @@ None.
 <tr><td>Fixed version</td><td><code>2.12.6</code></td></tr>
 <tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.015%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -422,86 +454,60 @@ Developers should review their CA issuing practices.
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>github.com/buger/jsonparser</strong> <code>1.1.1</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>busybox</strong> <code>1.37.0-r20</code> (apk)</summary>
 
-<small><code>pkg:golang/github.com/buger/jsonparser@1.1.1</code></small><br/>
-<a href="https://scout.docker.com/v/GHSA-6g7g-w4f8-9c9x?s=github&n=jsonparser&ns=github.com%2Fbuger&t=golang&vr=%3C%3D1.1.1"><img alt="high 7.5: GHSA--6g7g--w4f8--9c9x" src="https://img.shields.io/badge/GHSA--6g7g--w4f8--9c9x-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Out-of-bounds Read</i>
+<small><code>pkg:apk/alpine/busybox@1.37.0-r20?os_name=alpine&os_version=3.22</code></small><br/>
 
-<table>
-<tr><td>Affected range</td><td><code>&lt;=1.1.1</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.1.2</code></td></tr>
-<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-</table>
+```dockerfile
+# 2.12.x/alpine3.22/Dockerfile (0:0)
 
-<details><summary>Description</summary>
-<blockquote>
+```
 
-The Delete function fails to properly validate offsets when processing malformed JSON input. This can lead to a negative slice index and a runtime panic, allowing a denial of service attack.
+<br/>
 
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/GO-2026-4514?s=golang&n=jsonparser&ns=github.com%2Fbuger&t=golang&vr=%3E%3D0.0.0"><img alt="unspecified : GO--2026--4514" src="https://img.shields.io/badge/GO--2026--4514-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+<a href="https://scout.docker.com/v/CVE-2025-60876?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.22&vr=%3C%3D1.37.0-r20"><img alt="medium : CVE--2025--60876" src="https://img.shields.io/badge/CVE--2025--60876-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>>=0.0.0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;=1.37.0-r20</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.064%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-The Delete function fails to properly validate offsets when processing malformed JSON input. This can lead to a negative slice index and a runtime panic, allowing a denial of service attack.
+
 
 </blockquote>
 </details>
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>29.3.0+incompatible</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>zlib</strong> <code>1.3.1-r2</code> (apk)</summary>
 
-<small><code>pkg:golang/github.com/docker/cli@29.3.0%2Bincompatible</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-15558?s=golang&n=cli&ns=github.com%2Fdocker&t=golang&vr=%3E%3D19.03.0%2Bincompatible"><img alt="high : CVE--2025--15558" src="https://img.shields.io/badge/CVE--2025--15558-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+<small><code>pkg:apk/alpine/zlib@1.3.1-r2?os_name=alpine&os_version=3.22</code></small><br/>
+
+```dockerfile
+# 2.12.x/alpine3.22/Dockerfile (0:0)
+
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-27171?s=alpine&n=zlib&ns=alpine&t=apk&osn=alpine&osv=3.22&vr=%3C%3D1.3.1-r2"><img alt="low : CVE--2026--27171" src="https://img.shields.io/badge/CVE--2026--27171-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>>=19.03.0+incompatible</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;=1.3.1-r2</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.020%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.007%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Escalation on Windows in github.com/docker/cli
 
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/cloudflare/circl</strong> <code>1.6.1</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/cloudflare/circl@1.6.1</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-1229?s=github&n=circl&ns=github.com%2Fcloudflare&t=golang&vr=%3C1.6.3"><img alt="low 2.9: CVE--2026--1229" src="https://img.shields.io/badge/CVE--2026--1229-lightgrey?label=low%202.9&labelColor=fce1a9"/></a> <i>Incorrect Calculation</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.6.3</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.6.3</code></td></tr>
-<tr><td>CVSS Score</td><td><code>2.9</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:H/AT:N/PR:N/UI:N/VC:L/VI:L/VA:L/SC:L/SI:L/SA:L/E:P/S:N/AU:Y/U:Amber</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.020%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-The CombinedMult function in the CIRCL ecc/p384 package (secp384r1 curve) produces an incorrect value for specific inputs. The issue is fixed by using complete addition formulas.
-ECDH and ECDSA signing relying on this curve are not affected.
-
-The bug was fixed in **[v1.6.3](https://github.com/cloudflare/circl/releases/tag/v1.6.3)**.
 
 </blockquote>
 </details>

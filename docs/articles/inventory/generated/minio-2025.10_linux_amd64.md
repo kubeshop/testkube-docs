@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:0a67863a9f30ba352c04bdec137dca27a6dbf3674f4b0a85797afa69c49d8640</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 7" src="https://img.shields.io/badge/critical-7-8b1924"/> <img alt="high: 23" src="https://img.shields.io/badge/high-23-e25d68"/> <img alt="medium: 33" src="https://img.shields.io/badge/medium-33-fbb552"/> <img alt="low: 24" src="https://img.shields.io/badge/low-24-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:0a67863a9f30ba352c04bdec137dca27a6dbf3674f4b0a85797afa69c49d8640</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 6" src="https://img.shields.io/badge/critical-6-8b1924"/> <img alt="high: 24" src="https://img.shields.io/badge/high-24-e25d68"/> <img alt="medium: 33" src="https://img.shields.io/badge/medium-33-fbb552"/> <img alt="low: 24" src="https://img.shields.io/badge/low-24-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>89 MB</td></tr>
 <tr><td>packages</td><td>484</td></tr>
@@ -31,6 +31,8 @@ COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>CVSS Score</td><td><code>9.2</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.016%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -127,6 +129,8 @@ brew install minio/aistor/minio
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>CVSS Score</td><td><code>9.1</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.050%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -869,48 +873,13 @@ The impact of this escape is limited to reading metadata provided by lstat from 
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>ncurses</strong> <code>6.4-4</code> (deb)</summary>
+<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/grpc</strong> <code>1.72.0</code> (golang)</summary>
 
-<small><code>pkg:deb/debian/ncurses@6.4-4?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (36:36)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2025-69720?s=debian&n=ncurses&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D6.4-4"><img alt="critical : CVE--2025--69720" src="https://img.shields.io/badge/CVE--2025--69720-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=6.4-4</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.044%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-ncurses v6.5 and v6.4 are vulnerable to Buffer Overflow in progs/infocmp.c, function analyze_string().
-
----
-- ncurses <unfixed>
-https://github.com/Cao-Wuhui/CVE-2025-69720
-TODO: check upstream status
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/grpc</strong> <code>1.71.0</code> (golang)</summary>
-
-<small><code>pkg:golang/google.golang.org/grpc@1.71.0</code></small><br/>
+<small><code>pkg:golang/google.golang.org/grpc@1.72.0</code></small><br/>
 
 ```dockerfile
-# minio-release.dockerfile (76:76)
-COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
+# minio-release.dockerfile (80:80)
+COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
 ```
 
 <br/>
@@ -987,13 +956,13 @@ Switch to a "default deny" posture in your authorization policies (explicitly li
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/grpc</strong> <code>1.72.0</code> (golang)</summary>
+<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/grpc</strong> <code>1.71.0</code> (golang)</summary>
 
-<small><code>pkg:golang/google.golang.org/grpc@1.72.0</code></small><br/>
+<small><code>pkg:golang/google.golang.org/grpc@1.71.0</code></small><br/>
 
 ```dockerfile
-# minio-release.dockerfile (80:80)
-COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
+# minio-release.dockerfile (76:76)
+COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
 ```
 
 <br/>
@@ -1544,7 +1513,7 @@ FROM debian:bookworm-slim
 <tr><td>Affected range</td><td><code>&lt;2.2.40-1.1+deb12u2</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.2.40-1.1+deb12u2</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.018%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1621,7 +1590,7 @@ The Delete function fails to properly validate offsets when processing malformed
 </blockquote>
 </details>
 
-<a href="https://scout.docker.com/v/GO-2026-4514?s=golang&n=jsonparser&ns=github.com%2Fbuger&t=golang&vr=%3E%3D0.0.0"><img alt="unspecified : GO--2026--4514" src="https://img.shields.io/badge/GO--2026--4514-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-32285?s=golang&n=jsonparser&ns=github.com%2Fbuger&t=golang&vr=%3E%3D0.0.0"><img alt="unspecified : CVE--2026--32285" src="https://img.shields.io/badge/CVE--2026--32285-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
 <tr><td>Affected range</td><td><code>>=0.0.0</code></td></tr>
@@ -1632,6 +1601,41 @@ The Delete function fails to properly validate offsets when processing malformed
 <blockquote>
 
 The Delete function fails to properly validate offsets when processing malformed JSON input. This can lead to a negative slice index and a runtime panic, allowing a denial of service attack.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>ncurses</strong> <code>6.4-4</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/ncurses@6.4-4?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (36:36)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-69720?s=debian&n=ncurses&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D6.4-4"><img alt="high : CVE--2025--69720" src="https://img.shields.io/badge/CVE--2025--69720-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=6.4-4</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.057%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+ncurses v6.5 and v6.4 are vulnerable to Buffer Overflow in progs/infocmp.c, function analyze_string().
+
+---
+- ncurses <unfixed>
+https://github.com/Cao-Wuhui/CVE-2025-69720
+TODO: check upstream status
 
 </blockquote>
 </details>
@@ -1819,13 +1823,13 @@ all versions vulnerable, backport required for wheezy
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.39.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.42.0</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/net@0.39.0</code></small><br/>
+<small><code>pkg:golang/golang.org/x/net@0.42.0</code></small><br/>
 
 ```dockerfile
-# minio-release.dockerfile (80:80)
-COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
+# minio-release.dockerfile (76:76)
+COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
 ```
 
 <br/>
@@ -1866,13 +1870,13 @@ The html.Parse function in golang.org/x/net/html has quadratic parsing complexit
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.42.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.39.0</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/net@0.42.0</code></small><br/>
+<small><code>pkg:golang/golang.org/x/net@0.39.0</code></small><br/>
 
 ```dockerfile
-# minio-release.dockerfile (76:76)
-COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
+# minio-release.dockerfile (80:80)
+COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
 ```
 
 <br/>
@@ -2027,7 +2031,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 <tr><td>Affected range</td><td><code>&lt;=2.5.13+dfsg-5</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.021%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2143,6 +2147,72 @@ Debian builds with GNUTLS, not NSS
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>coreutils</strong> <code>9.1-1</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/coreutils@9.1-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (36:36)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-5278?s=debian&n=coreutils&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D9.1-1"><img alt="low : CVE--2025--5278" src="https://img.shields.io/badge/CVE--2025--5278-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=9.1-1</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.063%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A flaw was found in GNU Coreutils. The sort utility's begfield() function is vulnerable to a heap buffer under-read. The program may access memory outside the allocated buffer if a user runs a crafted command using the traditional key format. A malicious input could lead to a crash or leak sensitive data.
+
+---
+- coreutils <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1106733; unimportant)
+https://bugzilla.redhat.com/show_bug.cgi?id=2368764
+https://lists.gnu.org/archive/html/bug-coreutils/2025-05/msg00036.html
+https://lists.gnu.org/archive/html/bug-coreutils/2025-05/msg00040.html
+https://cgit.git.savannah.gnu.org/cgit/coreutils.git/commit/?id=8c9602e3a145e9596dc1a63c6ed67865814b6633
+https://www.openwall.com/lists/oss-security/2025/05/27/2
+https://debbugs.gnu.org/cgi/bugreport.cgi?bug=78507
+Crash in CLI tool, no security impact
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2017-18018?s=debian&n=coreutils&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D9.1-1"><img alt="low : CVE--2017--18018" src="https://img.shields.io/badge/CVE--2017--18018-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=9.1-1</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.057%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+In GNU Coreutils through 8.29, chown-core.c in chown and chgrp does not prevent replacement of a plain file with a symlink during use of the POSIX "-R -L" options, which allows local users to modify the ownership of arbitrary files by leveraging a race condition.
+
+---
+- coreutils <unfixed> (unimportant)
+http://lists.gnu.org/archive/html/coreutils/2017-12/msg00045.html
+https://www.openwall.com/lists/oss-security/2018/01/04/3
+Documentation patches proposed:
+https://lists.gnu.org/archive/html/coreutils/2017-12/msg00072.html
+https://lists.gnu.org/archive/html/coreutils/2017-12/msg00073.html
+Neutralised by kernel hardening
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>jq</strong> <code>1.6-2.1+deb12u1</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/jq@1.6-2.1%2Bdeb12u1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
@@ -2224,8 +2294,8 @@ FROM debian:bookworm-slim
 <table>
 <tr><td>Affected range</td><td><code>&lt;=1.10.1-3</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.565%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>68th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.765%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>73rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2278,9 +2348,9 @@ https://lists.gnupg.org/pipermail/gcrypt-devel/2018-February/004401.html
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>coreutils</strong> <code>9.1-1</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gcc-12</strong> <code>12.2.0-14+deb12u1</code> (deb)</summary>
 
-<small><code>pkg:deb/debian/coreutils@9.1-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+<small><code>pkg:deb/debian/gcc-12@12.2.0-14%2Bdeb12u1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
 
 ```dockerfile
 # minio-release.dockerfile (36:36)
@@ -2289,55 +2359,59 @@ FROM debian:bookworm-slim
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2025-5278?s=debian&n=coreutils&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D9.1-1"><img alt="low : CVE--2025--5278" src="https://img.shields.io/badge/CVE--2025--5278-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2022-27943?s=debian&n=gcc-12&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D12.2.0-14%2Bdeb12u1"><img alt="low : CVE--2022--27943" src="https://img.shields.io/badge/CVE--2022--27943-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;=9.1-1</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;=12.2.0-14+deb12u1</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.063%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.051%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-A flaw was found in GNU Coreutils. The sort utility's begfield() function is vulnerable to a heap buffer under-read. The program may access memory outside the allocated buffer if a user runs a crafted command using the traditional key format. A malicious input could lead to a crash or leak sensitive data.
+libiberty/rust-demangle.c in GNU GCC 11.2 allows stack consumption in demangle_const, as demonstrated by nm-new.
 
 ---
-- coreutils <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1106733; unimportant)
-https://bugzilla.redhat.com/show_bug.cgi?id=2368764
-https://lists.gnu.org/archive/html/bug-coreutils/2025-05/msg00036.html
-https://lists.gnu.org/archive/html/bug-coreutils/2025-05/msg00040.html
-https://cgit.git.savannah.gnu.org/cgit/coreutils.git/commit/?id=8c9602e3a145e9596dc1a63c6ed67865814b6633
-https://www.openwall.com/lists/oss-security/2025/05/27/2
-https://debbugs.gnu.org/cgi/bugreport.cgi?bug=78507
-Crash in CLI tool, no security impact
+- gcc-12 <unfixed> (unimportant)
+Negligible security impact
+https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105039
 
 </blockquote>
 </details>
+</details></td></tr>
 
-<a href="https://scout.docker.com/v/CVE-2017-18018?s=debian&n=coreutils&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D9.1-1"><img alt="low : CVE--2017--18018" src="https://img.shields.io/badge/CVE--2017--18018-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>shadow</strong> <code>1:4.13+dfsg1-1+deb12u1</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/shadow@1%3A4.13%2Bdfsg1-1%2Bdeb12u1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (36:36)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2007-5686?s=debian&n=shadow&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D1%3A4.13%2Bdfsg1-1%2Bdeb12u2"><img alt="low : CVE--2007--5686" src="https://img.shields.io/badge/CVE--2007--5686-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;=9.1-1</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;=1:4.13+dfsg1-1+deb12u2</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.057%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.196%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-In GNU Coreutils through 8.29, chown-core.c in chown and chgrp does not prevent replacement of a plain file with a symlink during use of the POSIX "-R -L" options, which allows local users to modify the ownership of arbitrary files by leveraging a race condition.
+initscripts in rPath Linux 1 sets insecure permissions for the /var/log/btmp file, which allows local users to obtain sensitive information regarding authentication attempts.  NOTE: because sshd detects the insecure permissions and does not log certain events, this also prevents sshd from logging failed authentication attempts by remote attackers.
 
 ---
-- coreutils <unfixed> (unimportant)
-http://lists.gnu.org/archive/html/coreutils/2017-12/msg00045.html
-https://www.openwall.com/lists/oss-security/2018/01/04/3
-Documentation patches proposed:
-https://lists.gnu.org/archive/html/coreutils/2017-12/msg00072.html
-https://lists.gnu.org/archive/html/coreutils/2017-12/msg00073.html
-Neutralised by kernel hardening
+- shadow <unfixed> (unimportant)
+See #290803, on Debian LOG_UNKFAIL_ENAB in login.defs is set to no so
+unknown usernames are not recorded on login failures
 
 </blockquote>
 </details>
@@ -2410,76 +2484,6 @@ It was found that apt-key in apt, all versions, do not correctly validate gpg ke
 ---
 - apt <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=642480)
 Not exploitable in Debian, since no keyring URI is defined
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>shadow</strong> <code>1:4.13+dfsg1-1+deb12u1</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/shadow@1%3A4.13%2Bdfsg1-1%2Bdeb12u1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (36:36)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2007-5686?s=debian&n=shadow&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D1%3A4.13%2Bdfsg1-1%2Bdeb12u2"><img alt="low : CVE--2007--5686" src="https://img.shields.io/badge/CVE--2007--5686-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=1:4.13+dfsg1-1+deb12u2</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.196%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-initscripts in rPath Linux 1 sets insecure permissions for the /var/log/btmp file, which allows local users to obtain sensitive information regarding authentication attempts.  NOTE: because sshd detects the insecure permissions and does not log certain events, this also prevents sshd from logging failed authentication attempts by remote attackers.
-
----
-- shadow <unfixed> (unimportant)
-See #290803, on Debian LOG_UNKFAIL_ENAB in login.defs is set to no so
-unknown usernames are not recorded on login failures
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gcc-12</strong> <code>12.2.0-14+deb12u1</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/gcc-12@12.2.0-14%2Bdeb12u1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (36:36)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2022-27943?s=debian&n=gcc-12&ns=debian&t=deb&osn=debian&osv=12&vr=%3C%3D12.2.0-14%2Bdeb12u1"><img alt="low : CVE--2022--27943" src="https://img.shields.io/badge/CVE--2022--27943-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=12.2.0-14+deb12u1</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.051%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-libiberty/rust-demangle.c in GNU GCC 11.2 allows stack consumption in demangle_const, as demonstrated by nm-new.
-
----
-- gcc-12 <unfixed> (unimportant)
-Negligible security impact
-https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105039
 
 </blockquote>
 </details>
