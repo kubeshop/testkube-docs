@@ -1,22 +1,29 @@
 ---
-title: "testkube enable agent"
+title: "testkube dashboard"
 ---
 <head>
   <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
-## testkube enable agent
+## testkube dashboard
 
+Open Testkube dashboard
 
+### Synopsis
+
+Open Testkube dashboard
 
 ```
-testkube enable agent <name> [flags]
+testkube dashboard [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for agent
+  -h, --help               help for dashboard
+  -n, --namespace string   Namespace to install Testkube On-Prem demo
+      --skip-browser       skip opening dashboard in the browser, only for on-premise installation
+      --verbose            show additional debug messages
 ```
 
 ### Options inherited from parent commands
@@ -26,11 +33,9 @@ testkube enable agent <name> [flags]
   -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
-      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
-      --verbose                 show additional debug messages
 ```
 
 ### SEE ALSO
 
-* [testkube enable](testkube-enable.mdx)	 - Enable feature
+* [testkube](testkube.mdx)	 - Testkube entrypoint for kubectl plugin
 

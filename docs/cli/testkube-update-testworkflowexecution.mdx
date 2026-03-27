@@ -1,22 +1,27 @@
 ---
-title: "testkube enable agent"
+title: "testkube update testworkflowexecution"
 ---
 <head>
   <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
-## testkube enable agent
+## testkube update testworkflowexecution
 
+Update test workflow execution tags
 
+### Synopsis
+
+Update test workflow execution tags. Use --tag key=value to set tags. Replaces all existing tags. Omit --tag to clear all tags.
 
 ```
-testkube enable agent <name> [flags]
+testkube update testworkflowexecution <executionID> [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for agent
+  -h, --help              help for testworkflowexecution
+      --tag stringArray   tag in key=value format (can be specified multiple times, omit to clear all tags)
 ```
 
 ### Options inherited from parent commands
@@ -32,5 +37,5 @@ testkube enable agent <name> [flags]
 
 ### SEE ALSO
 
-* [testkube enable](testkube-enable.mdx)	 - Enable feature
+* [testkube update](testkube-update.mdx)	 - Update resource
 

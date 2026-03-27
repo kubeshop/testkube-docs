@@ -21,6 +21,7 @@ testkube install agent <name> [flags]
   -e, --env strings                   (with --create) environment ID or slug that the agent have access to
   -N, --execution-namespace string    namespace to run executions (defaults to installation namespace)
       --floating                      (with --create) create as a floating agent
+      --gitops                        enable gitops capability
       --global                        make it global agent
   -g, --global-template-path string   include global template
       --group string                  make it grouped agent
@@ -31,6 +32,7 @@ testkube install agent <name> [flags]
       --runner                        enable runner component (default: enabled when no component flags are set)
   -s, --secret string                 secret key for the selected agent
       --version string                agent version to use (defaults to latest)
+      --webhooks                      enable webhooks capability
 ```
 
 ### Options inherited from parent commands

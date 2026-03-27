@@ -18,12 +18,14 @@ testkube create agent [flags]
 ```
   -e, --env strings     environment ID or slug that the agent have access to
       --floating        create as a floating agent
+      --gitops          enable gitops capability
       --global          make it global agent
       --group string    make it grouped agent
   -h, --help            help for agent
   -l, --label strings   label key value pair: --label key1=value1
       --listener        enable listener capability (default: enabled when no component flags are set)
       --runner          enable runner capability (default: enabled when no component flags are set)
+      --webhooks        enable webhooks capability
 ```
 
 ### Options inherited from parent commands
@@ -34,7 +36,7 @@ testkube create agent [flags]
       --crd-only                generate only crd
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
-      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube-dev")
+      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
       --verbose                 show additional debug messages
 ```
 
