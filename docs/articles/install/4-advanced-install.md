@@ -449,6 +449,38 @@ testkube-api:
     dsn: <mongodb dsn (mongodb://...)>
 ```
 
+#### MongoDB upgrade from 8.0.15 to 8.2.5
+Starting with chart version `2.329.0`, MongoDB is upgraded to `8.2.3` and in the later versions to `8.2.5`.  This is a **breaking change** for installations that are not already running MongoDB `8.0.x`, because MongoDB requires the upgrade path to go through `8.0` before moving to `8.2.x`.
+
+To upgrade safely, you must first ensure they you on at least chart version `2.326.3`, which includes MongoDB `8.0.15`. Only after that should you upgrade to the latest chart version.
+
+**Required upgrade path**
+
+1. Upgrade to chart version `2.326.3`: this moves MongoDB to `8.0.15`
+
+2. Upgrade from `2.326.3` to the latest chart version.
+
+3. Enable the MongoDB FCV jobs in your chart values so the compatibility version is updated during the upgrade:
+
+```yaml
+mongodb:
+  preUpgradeFCVJob:
+    enabled: true
+```
+**How it works**
+
+When the FCV jobs are enabled:
+
+- the pre-upgrade job connects to the current MongoDB instance and checks the current compatibility version; if needed, it updates it to the configured pre-upgrade target – `8.0` before the image upgrade starts
+- Helm upgrades the MongoDB image to `8.2.5`
+- the post-upgrade job waits for the upgraded MongoDB instance to become ready and then updates the MongoDB Feature Compatibility Version to `8.2`
+
+:::warning Important
+If your installation is still on MongoDB `7.x`, do not upgrade directly to a chart version that includes MongoDB `8.2.5`. MongoDB does not support a direct 7.x -> 8.2.x upgrade in a single step. You must first upgrade to chart version `2.326.3`, and only then continue to the latest version.
+:::
+
+The FCV jobs are configurable and can also be used for future supported MongoDB upgrades by changing the compatibility values in the chart.
+
 ### Using PostgreSQL as a database
 You can run the Testkube with PostgreSQL instead of MongoDB. This is currently an experimental feature, and deprecated functionalities are not supported. To enable PostgreSQL, update the values.yaml file in your Helm chart: enable the PostgreSQL settings and disable the MongoDB options.
 
