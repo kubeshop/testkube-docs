@@ -115,6 +115,7 @@ All Control Plane metrics gain `environment_name` for environment-level scoping.
 
 - **Workflow execution and step metrics** gain `runner_id` and `runner_name` for runner-level scoping, and rename agent labels for clarity: `name` → `workflow_name`, `result` → `workflow_result`, `status` → `step_status`.
 - **`triggered_by`** is normalized to one of `manual`, `schedule`, or `trigger`.
+- To count executions started by a TestTrigger, query `testkube_testworkflow_executions_total{triggered_by="trigger"}`.
 - **High-cardinality labels are dropped**: `labels`, `tags`, `testworkflow_uri`, and trigger `causes` are not carried to the Control Plane.
 - **CRUD counters** use only `environment_name` and `result` (workflow names are omitted to keep cardinality bounded). Template metrics additionally include `workflow_template`.
 - **Webhook metrics** rename `name` → `webhook_name` and `eventType` → `event_type`.
