@@ -180,9 +180,6 @@ When you are satisfied with the created Workflow, select **Create & Run** or **C
 **Start from an example** allows you to launch a test with one of Testkube's example Workflows, which you can modify
 to align with your requirements.
 
-
-![Start from an Example](../articles/images/workflow-wizard-start-from-an-example.png)
-
 Selecting **Start from an example** opens:
 
 ![Start from an Example K6](../articles/images/workflow-wizard-start-from-an-example-k6.png)
@@ -204,8 +201,6 @@ You can change the **Name** of the Workflow you created by updating the
 ## Combine Existing Workflows
 
 **Combine existing Workflows** allows you to create a Workflow that orchestrates multiple existing Workflows to run in sequence or in parallel.
-
-![Combine Existing Workflows](../articles/images/workflow-wizard-combine-existing-workflows.png)
 
 Selecting **Combine existing Workflows** opens:
 
@@ -229,11 +224,44 @@ For additional information about **Combine existing workflows**, read [Workflow 
 
 :::
 
+## Infrastructure Validation
+
+This option allows you to import an existing Workflow for Infrastructure Validation from the [Testkube Marketplace](https://github.com/kubeshop/testkube-marketplace).
+
+
+### Selecting a Workflow from the Marketplace
+
+Selecting **Infrastructure Validation** opens an initial screen that shows all available Workflows on the Marketplace:
+
+![Select Workflow from Catalog](images/select-workflow-from-catalog.png)
+
+### Configuring the Workflow
+
+Selecting a Workflow takes you to its configuration page where you can specify configuration parameters (if applicable):
+
+![Infrastructure Workflow Config Params](images/infrastructure-workflow-config-params.png)
+
+### Workflow YAML
+
+The **YAML** tab shows the actual TestWorkflow YAML of the Workflow:
+
+![Infrastructure Workflow YAML](images/infrastructure-workflow-yaml.png)
+
+The [View on Github] link opens the corresponding Workflow in the Marketplace on GitHub
+
+### Workflow Documentation
+
+The **Documentation** tab shows the content of a corresponding README file in the repository if available.
+
+![Infrastructure Workflow README](images/infrastructure-workflow-readme.png)
+
+### Adding the Workflow to your Environment
+
+Select **Create & Run** or **Create** at the bottom of any of these tabs to import the Workflow into your Environment with the specified configuration parameters.
+
 ## Import from YAML
 
 **Import from YAML** allows you to paste and edit your YAML Workflow definition.
-
-![Import from YAML](../articles/images/workflow-wizard-import-from-yaml.png)
 
 Selecting **Import from YAML** opens:
 
