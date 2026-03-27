@@ -147,3 +147,5 @@ Agent-only legacy test and test-suite metric families (`testkube_test_*`, `testk
 | `testkube_testtriggers_bulk_updates_count` | `testkube_testtrigger_bulk_updates_total` |
 | `testkube_testtriggers_bulk_deletes_count` | `testkube_testtrigger_bulk_deletes_total` |
 | `testkube_webhook_executions_count` | `testkube_webhook_executions_total` |
+
+Migration note: `testkube_testtrigger_event_count` does not have a direct Control Plane equivalent yet. If you used it to count executions started by a TestTrigger, query `testkube_testworkflow_executions_total{triggered_by="trigger"}` instead. That gives you workflow executions started by any trigger, but it does not preserve the per-trigger `name`, `resource`, `eventType`, or `causes` dimensions from the agent metric.
