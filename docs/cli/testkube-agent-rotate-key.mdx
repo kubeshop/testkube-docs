@@ -1,22 +1,28 @@
 ---
-title: "testkube enable agent"
+title: "testkube agent rotate key"
 ---
 <head>
   <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
-## testkube enable agent
+## testkube agent rotate-key
 
+Rotate the secret key for an agent
 
+### Synopsis
+
+Rotate the secret key for an agent with a configurable grace period during which the old key remains valid
 
 ```
-testkube enable agent <name> [flags]
+testkube agent rotate-key <nameOrId> [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for agent
+      --grace-period string   how long the old key remains valid (e.g., 24h, 48h, 0s for immediate) (default "24h")
+  -h, --help                  help for rotate-key
+  -y, --yes                   skip confirmation prompt
 ```
 
 ### Options inherited from parent commands
@@ -32,5 +38,5 @@ testkube enable agent <name> [flags]
 
 ### SEE ALSO
 
-* [testkube enable](testkube-enable.mdx)	 - Enable feature
+* [testkube agent](testkube-agent.mdx)	 - Testkube Pro Agent related commands
 
