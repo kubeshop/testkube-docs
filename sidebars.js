@@ -1423,14 +1423,10 @@ const sidebars = {
           id: "articles/testkube-licensing-FAQ",
         },
         {
-          type: "category",
+          type: "doc",
           label: "Contributing",
-          link: {
-            type: "doc",
-            id: "articles/contributing",
-          },
-          items: ["articles/development"],
-        },
+          id: "articles/contributing"
+        }
       ],
     },
     {
