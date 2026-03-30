@@ -155,7 +155,7 @@ When [mongo](https://www.mongodb.com/kubernetes) is specified, logs will be stor
 
 When [minio](https://min.io/) is specified, logs will be stored as separate files in the configured bucket of the MinIO instance or the S3 bucket if MinIO is configured to work with S3.
 
-### MongoDB upgrade from 8.0.15 to 8.2.5
+### MongoDB upgrade from 8.0.13 to 8.2.5
 
 Starting with chart version `2.6.0`, MongoDB is upgraded to `8.2.3` and in the later versions to `8.2.5`.  This is a **breaking change** for installations that are not already running MongoDB `8.0.x`, because MongoDB requires the upgrade path to go through `8.0` before moving to `8.2.x`.
 
