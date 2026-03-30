@@ -195,7 +195,7 @@ concurrency:
 
 ### Use Execution Tags for Traceability
 
-Add [execution tags](/articles/filtering-test-workflow-executions-using-tags) to link test runs back
+Add [execution tags](/articles/execution-tags) to link test runs back
 to CI builds, deployments, or environments:
 
 ```yaml
@@ -241,7 +241,7 @@ workers produce unreliable throughput numbers.
 Always write them to [artifacts](/articles/test-workflows-artifacts) so the team can review results without re-running the test.
 
 **Use separate environments for performance tests.** Performance tests can disrupt shared services.
-Use [execution tags](/articles/filtering-test-workflow-executions-using-tags) or
+Use [execution tags](/articles/execution-tags) or
 [Runner Agent targets](/articles/test-workflows-running) to run them on dedicated clusters or node pools.
 
 ### End-to-End / UI Testing (Playwright, Cypress, Selenium)

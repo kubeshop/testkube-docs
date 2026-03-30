@@ -1,11 +1,12 @@
 # Execution Tags
 
-Test Workflows allow you to add execution tags, which can be used for filtering and organizing your test executions. 
-These tags are especially useful when you want to categorize your test results based on specific attributes. Here are two common examples:
+Execution tags let you label, filter, and organize your test executions. Tags are key-value pairs 
+that can be set when an execution is triggered, or added and modified after an execution has completed,
+making them useful both for upfront categorization and for post-hoc analysis.
 
-## Adding Tags to a Workflow Execution
+## Adding Tags When Triggering an Execution
 
-There are multiple ways to add tags to a workflow execution.
+There are multiple ways to add tags when triggering a workflow execution.
 
 ### In the Workflow Definition
 
@@ -42,6 +43,39 @@ see more at [Action Parameters](/articles/test-triggers#action-parameters).
 
 When triggering a TestWorkflow execution via the REST API using the `executeTestWorkflow` operation, it is possible to specify 
 tags using the `tags` property - [Read More](https://docs.testkube.io/openapi/cloud/Agent-Operations----test-workflows#operation/executeTestWorkflow).
+
+## Editing Tags After Execution
+
+Tags can also be added or modified after an execution has completed. This is useful for
+post-hoc categorization — for example, marking executions as part of a release, flagging
+regressions, or annotating results during triage.
+
+### From the Dashboard
+
+Open a completed execution in the Testkube Dashboard and edit its tags directly from the
+execution details panel.
+
+![Edit Execution Tags](images/edit-execution-tags.png)
+
+### From the CLI
+
+Use the `testkube update testworkflowexecution` command to set or replace tags on a
+finished execution:
+
+```sh
+testkube update testworkflowexecution <executionID> --tag release=v1.42.0 --tag status=reviewed
+```
+
+### Via the REST API
+
+The `updateTestWorkflowExecution` operation accepts a `tags` property to update tags on an
+existing execution — [Read More](https://docs.testkube.io/openapi/cloud/Agent-Operations----test-workflows#operation/updateTestWorkflowExecution).
+
+### Via the MCP Server
+
+When using Testkube's [MCP Server](/articles/mcp-overview), you can update execution tags
+through the `update_execution_tags` tool, making it possible to tag executions from AI
+assistants and automation pipelines.
 
 ## Example Use Cases
 
@@ -146,3 +180,36 @@ You can run this workflow multiple times with different values for the branch. F
 
 These branch tags enable you to quickly filter and analyze test results for specific branches using the
 Executions View as shown above.
+
+### Post-Execution Failure Categorization
+
+Tags don't have to be set at execution time. A powerful pattern is to tag executions *after*
+they complete — for example, an AI agent or CI pipeline step that inspects failed executions
+and categorizes the root cause.
+
+Consider a scenario where an automated agent reviews every failed execution and adds tags
+describing the failure type:
+
+```sh
+testkube update testworkflowexecution 6723a8e5b4f3c21d009a1b2c \
+  --tag failure-category=flaky-infrastructure \
+  --tag root-cause=pod-eviction \
+  --tag reviewed-by=ai-agent
+```
+
+Over time this builds a searchable catalog of failure modes. You can then filter the
+Executions View by `failure-category` to answer questions like:
+
+- How many failures this week were caused by flaky infrastructure vs. genuine test regressions?
+- Which services have the most `timeout` failures?
+- Have `pod-eviction` failures decreased after a cluster scaling change?
+
+This works equally well from the Dashboard, the REST API, or the MCP Server — any tool that
+can call the update operation can participate in the tagging workflow.
+
+:::tip Automate with the Failure Categorizer Agent
+Testkube includes a ready-made **Failure Categorizer** agent template that automatically
+inspects failed executions and tags them by failure type (`network`, `configuration`,
+`infrastructure`, or `test_failure`). See [Agent Templates](/articles/ai-agents#agent-templates)
+for details.
+:::
