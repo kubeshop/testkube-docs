@@ -414,7 +414,7 @@ const sidebars = {
             {
               type: "doc",
               label: "Execution Tags",
-              id: "articles/filtering-test-workflow-executions-using-tags",
+              id: "articles/execution-tags",
             },
             {
               type: "doc",

@@ -692,6 +692,10 @@ const redirects = [
     from: "/articles/ai-assistant-security",
     to: "/articles/ai-configuration#security--compliance",
   },
+  {
+    from: "/articles/filtering-test-workflow-executions-using-tags",
+    to: "/articles/execution-tags",
+  },
 ];
 
 module.exports = redirects;

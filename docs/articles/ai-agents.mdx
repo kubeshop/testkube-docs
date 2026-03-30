@@ -39,6 +39,28 @@ Every Testkube environment comes with four pre-configured agents ready to use im
 These agents are automatically provisioned and kept up to date. They cannot be deleted but can be
 supplemented with custom agents tailored to your needs.
 
+## Agent Templates
+
+Testkube includes a set of agent templates in the Dashboard that you can use as starting points when
+creating a new agent. Templates provide pre-configured system prompts and MCP tool selections for
+common use cases:
+
+| Template | Description |
+|----------|-------------|
+| **Flaky Test Detective** | Analyzes execution history across many runs to detect flaky tests, correlate intermittent failures with timing or resource trends, and suggest stabilization strategies (retries, isolation, wait conditions). |
+| **Smart Rerun** | Examines failed executions, classifies the failure as transient or deterministic, and automatically reruns the workflow when a retry is likely to succeed (flaky tests, infrastructure issues, network glitches). Tags both the original and rerun executions for traceability. |
+| **Failure Categorizer** | Inspects logs and artifacts of failed executions and tags each one with a failure category — `network`, `configuration`, `infrastructure`, or `test_failure` — to build a searchable catalog of failure modes. |
+| **Infrastructure Validator** | Creates lightweight TestWorkflows that validate in-cluster infrastructure components (e.g. ArgoCD, cert-manager, ingress controllers) using only curl and shell scripts, then runs them and reports results. |
+| **CI/CD Integration Assistant** | Provides guidance on integrating Testkube with CI/CD platforms (GitHub Actions, GitLab CI, Jenkins, etc.) — generates configuration snippets, advises on workflow triggering, and recommends best practices. Read-only; does not execute workflows. |
+| **Release Readiness Gate** | Evaluates whether your services are ready for release by checking pass rates, recent failures, coverage gaps, and execution trends, then delivers a GO / NO-GO / CONDITIONAL verdict with a summary report. |
+
+Select a template when creating a new agent to get a working configuration you can use as-is or
+customize further. Read more at [Creating an AI Agent from a Template](/articles/defining-ai-agents#creating-an-ai-agent-from-a-template).
+
+The screenshot below shows the default AI Agents ("Installed AI Agents") and AI Agent Templates ("Create AI Agent from Template") available for any new Environment in the Testkube Dashboard.
+
+![AI Agent Templates](images/agent-templates.png)
+
 ## Types of AI Agents
 
 Testkube AI Agents can be designed with two distinct approaches depending on your use case:
@@ -78,15 +100,6 @@ testing requirements, suggesting appropriate configurations, and generating the 
 
 Guidance agents are ideal for **onboarding, exploration, and complex configuration tasks** where users benefit 
 from interactive support and contextual recommendations.
-
-#### Agent Templates
-
-Testkube includes a set of agent templates in the Dashboard that you can use as starting points when
-creating a new agent. Templates provide pre-configured prompts and tool selections for common use cases.
-
-Read more at [Creating an AI Agent from a Template](/articles/defining-ai-agents#creating-an-ai-agent-from-a-template).
-
-![AI Agent Templates](images/ai-agent-templates.png)
 
 ### Choosing the Right Approach
 

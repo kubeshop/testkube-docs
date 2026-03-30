@@ -61,7 +61,7 @@ spec:
       source: "ci"
 ```
 
-Read more about execution tags at [Filtering Test Workflow Executions Using Tags](/articles/filtering-test-workflow-executions-using-tags).
+Read more about execution tags at [Execution Tags](/articles/execution-tags).
 
 ## Targeting specific Runner Agents
 
