@@ -16,10 +16,10 @@ Control Plane is available in Helm chart `v2.331.2` and the Agent is available i
 
 #### Improvements and fixes
 
-- SCIM Server lock contention: write lock contention now returns 409 instead of 429. This is the correct status per RFC 7644 Table 9 for POST/PUT/PATCH/DELETE conflicts. The library passes it through, and IdPs treat it as retriable.
-- Follow long Test Workflow executions: include a keepalived signal to avoid timeouts while following long Test Workflow executions from CLI and integration plaforms.
 - New! Testkube on-prem installations no longer require `testkube-agent`. New environments start with the Control Plane owning Testkube Resource management by default.
 - `testkube init demo` no longer installs the agent bundle.
+- SCIM Server lock contention: write lock contention now returns 409 instead of 429. This is the correct status per RFC 7644 Table 9 for POST/PUT/PATCH/DELETE conflicts. The library passes it through, and IdPs treat it as retriable.
+- Follow long Test Workflow executions: include a keepalived signal to avoid timeouts while following long Test Workflow executions from CLI and integration plaforms.
 - SSO Authentication: fix SSO login failure caused by sending static "sso" as connector_id.
 
 ### Agent v2.8.2
