@@ -4,8 +4,8 @@ import CliInstallation from '../../_cli_installation.mdx';
 
 # Testkube Individual Evaluation
 
-This step-by-step tutorial provides you with a simplified Testkube On Prem installation that deploys both the Testkube Control Plane and Agent
-within the same namespace, in less than 10 minutes.  
+This step-by-step tutorial provides you with a simplified Testkube On Prem installation that deploys the Testkube Control Plane
+in less than 10 minutes.
 
 :::note
 This demo installation is for a **single/local user only**, on a individual workstation. It does not create an Ingress configuration, and is not configured to be used by others.
@@ -39,7 +39,8 @@ The installer will complete these steps:
 
 - Check if you have chosen the right Kubernetes environment.
 - Ask for some information, such as the trial license requested as noted above.
-- Install Testkube's Control Plane and Agent, both within the same namespace.
+- Install Testkube's Control Plane.
+- If you want to run workflows in this demo, install a Testkube Runner separately using the `testkube install runner` flow.
 
 The whole process takes 3-5 minutes and can be started with the following command:
 

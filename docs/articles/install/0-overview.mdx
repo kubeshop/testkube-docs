@@ -40,7 +40,7 @@ An architectural overview of Testkube and its components is available in the [Ar
 ## On-Prem Control Plane
 
 Testkube with the On-Prem Control Plane runs entirely in your infrastructure and can also run in air-gapped environments.
-The default installation deploys both the Control Plane and a default Testkube Agent (with all capabilities enabled) within the same namespace.
+The default installation deploys the Control Plane. Install Testkube Runners separately if you want to execute workflows in the cluster.
 
 You can install a preconfigured version of Testkube On-Prem [with the CLI][install-cli] for an out-of-the-box experience
 or install [with Helm][install-helm] for more configurability in production scenarios.
@@ -62,7 +62,7 @@ flowchart TB
             S3[("MinIO")]
             NATS["NATS"]
         end
-        subgraph Default Agent - all capabilities
+        subgraph Runner Agent(s) - installed separately
             AgentAPI["Agent API"]
             WF["Workflow Jobs"]
         end

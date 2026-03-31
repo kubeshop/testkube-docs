@@ -12,11 +12,13 @@ import LegacyCliWarning from "../articles/_legacy-cli-warning.mdx";
 
 ## testkube init demo
 
-Install Testkube On-Prem demo in your current context
+Install the Testkube On-Prem demo Control Plane in your current context
 
 ```
 testkube init demo [flags]
 ```
+
+This installs the Control Plane only. If you want to run workflows, install a Testkube Runner separately using `testkube install runner`.
 
 ### Options
 
@@ -44,4 +46,4 @@ testkube init demo [flags]
 ### SEE ALSO
 
 * [testkube init](testkube-init.mdx)	 - Init Testkube profiles(standalone-agent|demo|agent)
-
+* [testkube install runner](testkube-install-runner.mdx)	 - Install a Testkube Runner separately

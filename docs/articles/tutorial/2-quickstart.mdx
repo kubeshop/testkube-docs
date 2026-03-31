@@ -12,13 +12,13 @@ Testkube is composed of two core components. The first is the Control Plane, whi
 
 The Testkube Control Plane has flexibility in its deployment: 
 
-- **Testkube On-Prem** runs both the Control Plane and Test Execution Agents in your infrastructure.
+- **Testkube On-Prem** runs the Control Plane in your infrastructure. Install Testkube Runners separately when you want to execute tests.
 - **Testkube Cloud Control Plane** runs the Control Plane in our cloud and the Test Execution Agents in your infrastructure.
 
 With that in mind, we have a few recommendations on how to start with Testkube: 
 
 - If you are looking to evaluate Testkube before sharing it with others, we recommend using the [Evaluation Install](https://docs.testkube.io/articles/tutorial/quickstart/individual-evaluation). This runs on your local machine, and is deployed into a pre-existing light-weight Kubernetes distribution (like [minikube](https://minikube.sigs.k8s.io/docs/)). This guide assumes an Evaluation Installation.
-- If you are looking to share Testkube with your team, then we recommend using the Cloud Control Plane, or [deploying an On-Prem Control Plane via Helm](https://docs.testkube.io/articles/install/install-with-helm) to a cluster which your team, or partner DevOps team, can manage. If you self host, we recommend deploying the Agent and Control Plane to the same cluster and namespace, unless your use case requires otherwise.
+- If you are looking to share Testkube with your team, then we recommend using the Cloud Control Plane, or [deploying an On-Prem Control Plane via Helm](https://docs.testkube.io/articles/install/install-with-helm) to a cluster which your team, or partner DevOps team, can manage. If you self host, we recommend deploying the Control Plane to your cluster and installing one or more Testkube Runners where your tests should execute, unless your use case requires otherwise.
 :::
 
 ## 1. Install or Sign in to Testkube
@@ -27,9 +27,10 @@ With that in mind, we have a few recommendations on how to start with Testkube:
 <TabItem value="on-prem" label="Testkube On-Prem" default>
 
 1. [Install the Testkube CLI](/articles/install/cli)
-2. Run the `testkube init demo` command in your terminal.
-3. Run the `testkube dashboard` command to open Testkube without configuring Ingress.
-4. Log in to Testkube with the credentials from the second step.
+2. Run the `testkube init demo` command in your terminal to install the Control Plane.
+3. Install a Testkube Runner separately using the `testkube install runner` flow.
+4. Run the `testkube dashboard` command to open Testkube without configuring Ingress.
+5. Log in to Testkube with the credentials from the second step.
 
 :::warning
 This evaluation installation is for a **single/local user only**, it is not configured to be shared with other users, read more about evaluation 
