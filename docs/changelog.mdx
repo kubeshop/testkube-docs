@@ -8,6 +8,30 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   ::: 
 
+## Patch Release v2.8.2 (2026-03-30)
+
+Control Plane is available in Helm chart `v2.331.2` and the Agent is available in Helm chart `v2.8.2`.
+
+### Control Plane v2.331.2
+
+#### Improvements and fixes
+
+- New! Testkube on-prem installations no longer require `testkube-agent`. New environments start with the Control Plane owning Testkube Resource management by default.
+- `testkube init demo` no longer installs the agent bundle.
+- SCIM Server lock contention: write lock contention now returns 409 instead of 429. This is the correct status per RFC 7644 Table 9 for POST/PUT/PATCH/DELETE conflicts. The library passes it through, and IdPs treat it as retriable.
+- Follow long Test Workflow executions: include a keepalived signal to avoid timeouts while following long Test Workflow executions from CLI and integration plaforms.
+- SSO Authentication: fix SSO login failure caused by sending static "sso" as connector_id.
+
+### Agent v2.8.2
+
+#### Improvements and fixes
+
+- Installation OSS Agent: remove operator and param as it's already deprecated, replacing by Testkube CRDs only.
+- `testkube-agent` is deprecated in the `testkube-enterprise` chart.
+- Testkube Agent Global Template: manage if it's inline and the name of the Global Template from Testkube Agent helm chart properties.
+- Testkube Agent Name: allow override agent name from Testkube Agent helm chart property `runner.name`.
+- Follow long Test Workflow executions: improve the behavior when the underlying execution is healthy but the live log stream is interrupted by the network path between the CLI runner and the Control Plane.
+
 ## Patch Release v2.8.1 (2026-03-30)
 
 Control Plane is available in Helm chart `v2.331.1` and the Agent is available in Helm chart `v2.8.1`.
