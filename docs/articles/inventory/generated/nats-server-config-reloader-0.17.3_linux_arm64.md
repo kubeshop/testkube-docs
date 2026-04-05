@@ -63,7 +63,7 @@ url.Parse insufficiently validated the host/authority component and accepted som
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.24.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.11</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.022%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.023%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
