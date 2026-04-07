@@ -274,7 +274,8 @@ helm install testkube oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testku
 
 Please notice that since we've just installed MongoDB with a `testkube-mongodb` Helm release name, you are not required to reconfigure the Testkube API MongoDB connection URI. If you've installed with a different name/namespace, please adjust `--set testkube-api.mongodb.dsn: "mongodb://testkube-mongodb:27017"` to your MongoDB service.
 
-### Using PostgreSQL as a database
+## Using PostgreSQL as a database
+
 Starting with release `3.0`, PostgreSQL will be used as the primary database instead of MongoDB. Since both options are currently supported, you must first disable MongoDB and then enable PostgreSQL in your `values.yaml` file. We strongly recommend using `CloudNativePG` instead of plain PostgreSQL, as it offloads much of the database management, and the installation of PostgreSQL by Bitnami will be deprecated by the end of 2026.
 
 The operator-based path has two parts:
@@ -302,20 +303,19 @@ testkube-api:
 
 If you deploy the CloudNativePG operator separately, or you already have it running in your k8s cluster, set `postgresqlOperatorCluster.enabled=false` in the `values.yaml`.
 
- simply leave it disabled in the `values.yaml`.
-
 :::warning
 
-Do not enable both `postgresql.enabled`(standard chart installation) and `postgresqlOperatorCluster.enabled` at the same time as you will have 2 databases in the cluster.
+Do not enable both `postgresql.enabled` (standard chart installation) and `postgresqlOperatorCluster.enabled` at the same time as you will have 2 databases in the cluster.
 
 :::
 
-## Migrating Testkube PostgreSQL to the CloudNativePG Operator
+### Migrating Testkube PostgreSQL to the CloudNativePG Operator
+
 Moving from the bundled Bitnami PostgreSQL chart to CloudNativePG is a breaking infrastructure change for existing installations.
 
 The resource model changes from a Helm-managed PostgreSQL `StatefulSet` to an operator-managed PostgreSQL `Cluster`, so this is not a direct in-place database upgrade.
 
-## Recommended Migration Strategy
+### Recommended Migration Strategy
 
 1. Keep the existing bundled PostgreSQL deployment running.
 2. Install the CloudNativePG operator and create a new PostgreSQL cluster.
@@ -326,11 +326,11 @@ The resource model changes from a Helm-managed PostgreSQL `StatefulSet` to an op
 
 **Treat this migration as a database migration, not just a Helm upgrade.**
 
-## Using an external PostgreSQL instance
+### Using an external PostgreSQL instance
 
 You can easily connect PostgreSQL to an external database by creating a Kubernetes secret with the database connection details and wiring it into `testkube-api.postgresql.secretName`. 
 
-## New installation with CloudNativePG Operator
+### New installation with CloudNativePG Operator
 
 During Helm installation you may encounter an error: `no matches for kind "Cluster" in version "postgresql.cnpg.io/v1"`. This happens because `cloudnative-pg` and `postgresqlOperatorCluster` are both subcharts in the same Helm release, defined in `testkube/Chart.yaml`. The PostgreSQL Cluster custom resource depends on the `clusters.postgresql.cnpg.io` CustomResourceDefinition (CRD). On a fresh Kubernetes cluster, Helm cannot create that custom resource until the CRD has already been installed and registered.
 To tackle this you may install Testkube in two steps.

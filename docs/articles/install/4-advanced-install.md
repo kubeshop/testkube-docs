@@ -458,12 +458,12 @@ Do not enable both `postgresql.enabled` (standard chart installation) and `postg
 
 :::
 
-## Migrating Testkube Enterprise PostgreSQL to the CloudNativePG Operator
+### Migrating Testkube Enterprise PostgreSQL to the CloudNativePG Operator
 Moving from the bundled Bitnami PostgreSQL chart to CloudNativePG is a breaking infrastructure change for existing installations. 
 
 The resource model changes from a Helm-managed PostgreSQL `StatefulSet` to an operator-managed PostgreSQL `Cluster`, so this is not a direct in-place database upgrade.
 
-## Recommended Migration Strategy
+### Recommended Migration Strategy
 
 1. Keep the existing bundled PostgreSQL deployment running.
 2. Install the CloudNativePG operator and create a new PostgreSQL cluster.
@@ -474,13 +474,13 @@ The resource model changes from a Helm-managed PostgreSQL `StatefulSet` to an op
 
 **Treat this migration as a database migration, not just a Helm upgrade.**
 
-## Using an external PostgreSQL instance 
+### Using an external PostgreSQL instance 
 
 You can easily connect PostgreSQL to an external database by creating a Kubernetes secret with the database connection details and wiring it into `global.postgres.secretRef`. Optionally, you can also use `global.postgres.dsn` instead of separate secret-based fields.
 
 ### MongoDB
 
-:::IMPORTANT!
+:::warning Important
 
 MongoDB has been deprecated as the primary database and will be removed from Testkube by the end of 2026. Please plan your migration to PostgreSQL at your earliest convenience.
 
