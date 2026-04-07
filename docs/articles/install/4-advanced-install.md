@@ -419,7 +419,7 @@ As of Testkube v2.7, Testkube Resources are stored in the Control Plane - [Read 
 
 Testkube supports integrating with existing infrastructure components such as PostgreSQL, NATS, Dex, etc. For production environments, it's recommended to use your own infra or to harden the sub-charts.
 
-### PostgreSQL
+## PostgreSQL
 
 Starting with release `3.0`, PostgreSQL will be used as the primary database instead of MongoDB. Since both options are currently supported, you must first disable MongoDB and then enable PostgreSQL in your `values.yaml` file. We strongly recommend using `CloudNativePG` instead of plain PostgreSQL, as it offloads much of the database management, and the installation of PostgreSQL by Bitnami will be deprecated by the end of 2026.
 The operator-based path has two parts:
