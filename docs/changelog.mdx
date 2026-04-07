@@ -8,6 +8,24 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   ::: 
 
+## Patch Release v2.8.3 (2026-04-07)
+
+Control Plane is available in Helm chart `v2.331.3` and the Agent is available in Helm chart `v2.8.3`.
+
+### Control Plane v2.331.3
+
+#### Improvement & Fixes
+
+- Licensing Limits logic: fix how is counting floating agents across environment.
+- UX in Create Trigger: Remove autocomplete from create new trigger form.
+- AI Assistant PostgresDB with SSL: Improved SSL configuration for integrating with PostgresDB instance.
+
+### Agent v2.8.3
+
+#### Improvement & Fixes
+
+- Resilient git clone with basic auth: configure git credential store to survive HTTP redirects during clone.
+
 ## Patch Release v2.8.2 (2026-03-30)
 
 Control Plane is available in Helm chart `v2.331.2` and the Agent is available in Helm chart `v2.8.2`.
