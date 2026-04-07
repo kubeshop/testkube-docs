@@ -286,19 +286,19 @@ The operator-based path has two parts:
 To enable this, update your `values.yaml` as follows:
 ```yaml
 mongodb:
-  enabled: false
+  enabled: false #disables MongoDB chart installation
   
 cloudnative-pg:
-  enabled: true
+  enabled: true #install the CloudNativePG operator
   
 postgresqlOperatorCluster:
-  enabled: true
+  enabled: true #creates a CloudNativePG Cluster resource
   
 testkube-api:
   mongodb:
-    enabled: false
+    enabled: false #disable MongoDB connection for API
   postgresql:
-    enabled: true
+    enabled: true #use Postgres as a database for API
 ```
 
 If you deploy the CloudNativePG operator separately, or you already have it running in your k8s cluster, set `postgresqlOperatorCluster.enabled=false` in the `values.yaml`.
@@ -357,7 +357,7 @@ helm upgrade --install testkube oci://us-east1-docker.pkg.dev/testkube-cloud-372
 This second step allows Helm to create the PostgreSQL Cluster resource after the required CRD is available.
 
 
-### Deploying on AWS
+## Deploying on AWS
 
 If you are using **Amazon Web Services**, this tutorial will show you how to deploy Testkube OSS in EKS and expose its API to the Internet with the AWS Load Balancer Controller.
 

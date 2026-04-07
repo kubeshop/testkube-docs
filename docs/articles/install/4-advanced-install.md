@@ -478,7 +478,7 @@ The resource model changes from a Helm-managed PostgreSQL `StatefulSet` to an op
 
 You can easily connect PostgreSQL to an external database by creating a Kubernetes secret with the database connection details and wiring it into `global.postgres.secretRef`. Optionally, you can also use `global.postgres.dsn` instead of separate secret-based fields.
 
-### MongoDB
+## MongoDB
 
 :::warning Important
 
