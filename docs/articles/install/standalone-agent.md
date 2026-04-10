@@ -281,7 +281,7 @@ Starting with release `3.0`, PostgreSQL will be used as the primary database ins
 The operator-based path has two parts:
 
 1. The `cloudnative-pg` operator, which manages PostgreSQL lifecycle in Kubernetes.
-2. A `Cluster` custom resource, created by the `postgresqlOperatorCluster` chart values.
+2. A `Cluster` custom resource, created by the `postgresqlCluster` chart values.
 
 To enable this, update your `values.yaml` as follows:
 ```yaml
@@ -291,7 +291,7 @@ mongodb:
 cloudnative-pg:
   enabled: true #install the CloudNativePG operator
   
-postgresqlOperatorCluster:
+postgresqlCluster:
   enabled: true #creates a CloudNativePG Cluster resource
   
 testkube-api:
@@ -301,11 +301,11 @@ testkube-api:
     enabled: true #use Postgres as a database for API
 ```
 
-If you deploy the CloudNativePG operator separately, or you already have it running in your k8s cluster, set `postgresqlOperatorCluster.enabled=false` in the `values.yaml`.
+If you deploy the CloudNativePG operator separately, or you already have it running in your k8s cluster, set `postgresqlCluster.enabled=false` in the `values.yaml`.
 
 :::warning
 
-Do not enable both `postgresql.enabled` (standard chart installation) and `postgresqlOperatorCluster.enabled` at the same time as you will have 2 databases in the cluster.
+Do not enable both `postgresql.enabled` (standard chart installation) and `postgresqlCluster.enabled` at the same time as you will have 2 databases in the cluster.
 
 :::
 
@@ -332,7 +332,7 @@ You can easily connect PostgreSQL to an external database by creating a Kubernet
 
 ### New installation with CloudNativePG Operator
 
-During Helm installation you may encounter an error: `no matches for kind "Cluster" in version "postgresql.cnpg.io/v1"`. This happens because `cloudnative-pg` and `postgresqlOperatorCluster` are both subcharts in the same Helm release, defined in `testkube/Chart.yaml`. The PostgreSQL Cluster custom resource depends on the `clusters.postgresql.cnpg.io` CustomResourceDefinition (CRD). On a fresh Kubernetes cluster, Helm cannot create that custom resource until the CRD has already been installed and registered.
+During Helm installation you may encounter an error: `no matches for kind "Cluster" in version "postgresql.cnpg.io/v1"`. This happens because `cloudnative-pg` and `postgresqlCluster` are both subcharts in the same Helm release, defined in `testkube/Chart.yaml`. The PostgreSQL Cluster custom resource depends on the `clusters.postgresql.cnpg.io` CustomResourceDefinition (CRD). On a fresh Kubernetes cluster, Helm cannot create that custom resource until the CRD has already been installed and registered.
 To tackle this you may install Testkube in two steps.
 
 First, install the operator and its CRDs only:
@@ -342,7 +342,7 @@ helm upgrade --install testkube oci://us-east1-docker.pkg.dev/testkube-cloud-372
   -n testkube \
   --create-namespace \
   -f values.yaml \
-  --set postgresqlOperatorCluster.enabled=false
+  --set postgresqlCluster.enabled=false
 ```
 
 Once the CRDs are installed and registered in the cluster, run Helm again with the PostgreSQL cluster enabled:
@@ -351,7 +351,7 @@ Once the CRDs are installed and registered in the cluster, run Helm again with t
 helm upgrade --install testkube oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube --version <version> \
   -n testkube \
   -f values.yaml \
-  --set postgresqlOperatorCluster.enabled=true
+  --set postgresqlCluster.enabled=true
 ```
 
 This second step allows Helm to create the PostgreSQL Cluster resource after the required CRD is available.

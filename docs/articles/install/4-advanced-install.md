@@ -425,7 +425,7 @@ Starting with release `3.0`, PostgreSQL will be used as the primary database ins
 The operator-based path has two parts:
 
 1. The `cloudnative-pg` operator, which manages PostgreSQL lifecycle in Kubernetes.
-2. A `Cluster` custom resource, created by the `postgresqlOperatorCluster` chart values.
+2. A `Cluster` custom resource, created by the `postgresqlCluster` chart values.
 
 To enable this, update your `values.yaml` as follows:
 
@@ -444,17 +444,17 @@ global:
 cloudnative-pg:
   enabled: true #install the CloudNativePG operator
   
-postgresqlOperatorCluster:
+postgresqlCluster:
   enabled: true #creates a CloudNativePG Cluster resource
   
 mongodb:
   enabled: false #disables MongoDB chart installation
 ```
-If you deploy the CloudNativePG operator separately, or you already have it running in your k8s cluster, set `postgresqlOperatorCluster.enabled=false` in the `values.yaml`.
+If you deploy the CloudNativePG operator separately, or you already have it running in your k8s cluster, set `postgresqlCluster.enabled=false` in the `values.yaml`.
 
 :::warning
 
-Do not enable both `postgresql.enabled` (standard chart installation) and `postgresqlOperatorCluster.enabled` at the same time as you will have 2 databases in the cluster.
+Do not enable both `postgresql.enabled` (standard chart installation) and `postgresqlCluster.enabled` at the same time as you will have 2 databases in the cluster.
 
 :::
 
