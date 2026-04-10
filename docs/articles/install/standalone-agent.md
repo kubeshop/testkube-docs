@@ -274,25 +274,90 @@ helm install testkube oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testku
 
 Please notice that since we've just installed MongoDB with a `testkube-mongodb` Helm release name, you are not required to reconfigure the Testkube API MongoDB connection URI. If you've installed with a different name/namespace, please adjust `--set testkube-api.mongodb.dsn: "mongodb://testkube-mongodb:27017"` to your MongoDB service.
 
-### Using PostgreSQL as a database
-You can run the Testkube Standalone Agent with PostgreSQL instead of MongoDB. This is currently an experimental feature, and deprecated functionalities are not supported.
-To enable PostgreSQL, update the values.yaml file in your Helm chart: enable the PostgreSQL settings and disable the MongoDB options.
+## Using PostgreSQL as a database
 
+Starting with release `3.0`, PostgreSQL will be used as the primary database instead of MongoDB. Since both options are currently supported, you must first disable MongoDB and then enable PostgreSQL in your `values.yaml` file. We strongly recommend using `CloudNativePG` instead of plain PostgreSQL, as it offloads much of the database management, and the installation of PostgreSQL by Bitnami will be deprecated by the end of 2026.
+
+The operator-based path has two parts:
+
+1. The `cloudnative-pg` operator, which manages PostgreSQL lifecycle in Kubernetes.
+2. A `Cluster` custom resource, created by the `postgresqlCluster` chart values.
+
+To enable this, update your `values.yaml` as follows:
 ```yaml
 mongodb:
-  enabled: false
-postgresql:
-  enabled: true
-
+  enabled: false #disables MongoDB chart installation
+  
+cloudnative-pg:
+  enabled: true #install the CloudNativePG operator
+  
+postgresqlCluster:
+  enabled: true #creates a CloudNativePG Cluster resource
+  
 testkube-api:
   mongodb:
-    enabled: false
+    enabled: false #disable MongoDB connection for API
   postgresql:
-    enabled: true    
-    dsn: <postgresql dsn (postgres://...)>
+    enabled: true #use Postgres as a database for API
 ```
 
-### Deploying on AWS
+If you deploy the CloudNativePG operator separately, or you already have it running in your k8s cluster, set `postgresqlCluster.enabled=false` in the `values.yaml`.
+
+:::warning
+
+Do not enable both `postgresql.enabled` (standard chart installation) and `postgresqlCluster.enabled` at the same time as you will have 2 databases in the cluster.
+
+:::
+
+### Migrating Testkube PostgreSQL to the CloudNativePG Operator
+
+Moving from the bundled Bitnami PostgreSQL chart to CloudNativePG is a breaking infrastructure change for existing installations.
+
+The resource model changes from a Helm-managed PostgreSQL `StatefulSet` to an operator-managed PostgreSQL `Cluster`, so this is not a direct in-place database upgrade.
+
+### Recommended Migration Strategy
+
+1. Keep the existing bundled PostgreSQL deployment running.
+2. Install the CloudNativePG operator and create a new PostgreSQL cluster.
+3. Copy data from the existing database to the new operator-managed database with `pg_dump`/`pg_restore`.
+4. Switch Testkube services to the operator-managed database.
+5. Observe the system and keep the old database available in case rollback is needed.
+6. Remove the old database only after the migration is confirmed stable.
+
+**Treat this migration as a database migration, not just a Helm upgrade.**
+
+### Using an external PostgreSQL instance
+
+You can easily connect PostgreSQL to an external database by creating a Kubernetes secret with the database connection details and wiring it into `testkube-api.postgresql.secretName`. 
+
+### New installation with CloudNativePG Operator
+
+During Helm installation you may encounter an error: `no matches for kind "Cluster" in version "postgresql.cnpg.io/v1"`. This happens because `cloudnative-pg` and `postgresqlCluster` are both subcharts in the same Helm release, defined in `testkube/Chart.yaml`. The PostgreSQL Cluster custom resource depends on the `clusters.postgresql.cnpg.io` CustomResourceDefinition (CRD). On a fresh Kubernetes cluster, Helm cannot create that custom resource until the CRD has already been installed and registered.
+To tackle this you may install Testkube in two steps.
+
+First, install the operator and its CRDs only:
+
+```yaml
+helm upgrade --install testkube oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube --version <version> \
+  -n testkube \
+  --create-namespace \
+  -f values.yaml \
+  --set postgresqlCluster.enabled=false
+```
+
+Once the CRDs are installed and registered in the cluster, run Helm again with the PostgreSQL cluster enabled:
+
+```yaml
+helm upgrade --install testkube oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube --version <version> \
+  -n testkube \
+  -f values.yaml \
+  --set postgresqlCluster.enabled=true
+```
+
+This second step allows Helm to create the PostgreSQL Cluster resource after the required CRD is available.
+
+
+## Deploying on AWS
 
 If you are using **Amazon Web Services**, this tutorial will show you how to deploy Testkube OSS in EKS and expose its API to the Internet with the AWS Load Balancer Controller.
 
