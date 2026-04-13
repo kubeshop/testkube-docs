@@ -50,6 +50,10 @@ const sidebars = {
     },
     {
       type: "doc",
+      label: "Concepts Walkthrough",
+      id: "articles/testworkflows-showcase",
+    },    {
+      type: "doc",
       label: "Changelog",
       id: "changelog",
     },
