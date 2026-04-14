@@ -50,10 +50,6 @@ const sidebars = {
     },
     {
       type: "doc",
-      label: "Concepts Walkthrough",
-      id: "articles/testworkflows-showcase",
-    },    {
-      type: "doc",
       label: "Changelog",
       id: "changelog",
     },
@@ -345,6 +341,12 @@ const sidebars = {
           label: "Test Workflows",
           items: [
             { type: "doc", label: "Overview", id: "articles/test-workflows" },
+            {
+              type: "doc",
+              label: "Interactive Walkthrough",
+              id: "articles/testworkflows-showcase",
+            },    
+        
             {
               type: "doc",
               label: "Basic Examples",
