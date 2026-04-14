@@ -343,6 +343,12 @@ const sidebars = {
             { type: "doc", label: "Overview", id: "articles/test-workflows" },
             {
               type: "doc",
+              label: "Interactive Walkthrough",
+              id: "articles/testworkflows-showcase",
+            },    
+        
+            {
+              type: "doc",
               label: "Basic Examples",
               id: "articles/test-workflows-examples-basics",
             },
