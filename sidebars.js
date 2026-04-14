@@ -138,6 +138,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "Deploying on AWS EKS",
+                  id: "articles/install/deploy-on-aws-eks",
+                },
+                {
+                  type: "doc",
                   label: "Repackaging Testkube",
                   id: "articles/repackaging-testkube",
                 },
