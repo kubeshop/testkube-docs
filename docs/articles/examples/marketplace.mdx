@@ -1,0 +1,170 @@
+# Testkube Marketplace
+
+The [Testkube Marketplace](https://github.com/kubeshop/testkube-marketplace) is a community-driven collection of
+reusable TestWorkflows for validating infrastructure components in Kubernetes environments. It provides pre-built,
+security-vetted workflows for common infrastructure such as databases, message brokers, networking, storage,
+and more — ready to deploy and run in minutes.
+
+## Available Categories
+
+The Marketplace organizes workflows by infrastructure type:
+
+| Category | Components | Examples |
+|----------|------------|----------|
+| **Databases** | PostgreSQL, MySQL, MongoDB, Redis | Connectivity checks, health validation |
+| **Messaging** | Kafka, RabbitMQ, NATS | Broker connectivity, topic validation |
+| **Networking** | Ingress controllers, Service mesh | Endpoint health, ingress validation |
+| **Storage** | MinIO, Elasticsearch, Persistent Volumes | PVC binding, attachment checks |
+| **Observability** | Prometheus, Grafana, Jaeger | Monitoring stack validation |
+| **Security** | Vault, cert-manager | Certificate and secret management checks |
+| **Kubernetes Core** | Pods, StatefulSets, Namespaces | Resource health, namespace scoping |
+
+## Using the Marketplace from the Dashboard
+
+The Testkube Dashboard includes a built-in wizard for browsing and importing workflows directly from the Marketplace.
+When creating a new TestWorkflow, select **"Create from Marketplace"** to browse available workflows, see their
+documentation, and configure parameters before deploying.
+
+![Create From Marketplace](images/marketplace-create-from-catalog.png)
+
+Each Marketplace workflow includes configurable parameters that are rendered in the Dashboard when importing,
+letting you customize connection details, credentials, and other settings for your environment.
+
+![Workflow Parameters](images/marketplace-workflow-parameters.png)
+
+## Using the Marketplace from the CLI
+
+You can also deploy Marketplace workflows using `kubectl` or the Testkube CLI.
+
+### Clone and Apply
+
+```bash
+git clone https://github.com/kubeshop/testkube-marketplace.git
+cd testkube-marketplace
+
+# Apply a workflow to your Testkube instance
+kubectl apply -f workflows/databases/redis/redis-connectivity.yaml
+
+# Or use the Testkube CLI
+testkube create testworkflow -f workflows/databases/redis/redis-connectivity.yaml
+```
+
+### Run with Custom Parameters
+
+```bash
+testkube run testworkflow redis-connectivity \
+  --config host=my-redis.default.svc.cluster.local \
+  --config port=6379
+```
+
+## Example: Redis Connectivity Check
+
+Below is the Redis connectivity workflow from the Marketplace. It validates that a Redis server is reachable
+and operational by running PING, SET, GET, and DEL operations.
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: redis-connectivity
+  labels:
+    marketplace.testkube.io/category: databases
+    marketplace.testkube.io/component: redis
+    marketplace.testkube.io/validation-type: connectivity
+  annotations:
+    marketplace.testkube.io/display-name: "Redis Connectivity Check"
+    marketplace.testkube.io/description: "Validates Redis server connectivity with PING and basic GET/SET operations"
+    marketplace.testkube.io/icon: "https://cdn.simpleicons.org/redis"
+
+spec:
+  config:
+    host:
+      type: string
+      default: "redis.default.svc.cluster.local"
+      description: "Redis host address"
+    port:
+      type: string
+      default: "6379"
+      description: "Redis port"
+    password:
+      type: string
+      default: ""
+      sensitive: true
+      description: "Redis password (leave empty if no auth)"
+    db:
+      type: string
+      default: "0"
+      description: "Redis database number"
+
+  steps:
+  - name: "Validate Redis Connectivity"
+    run:
+      image: docker.io/library/redis:7-alpine@sha256:ee64a64...
+      shell: |
+        echo "Target: {{ config.host }}:{{ config.port }}"
+
+        REDIS_ARGS="-h {{ config.host }} -p {{ config.port }} -n {{ config.db }}"
+
+        # PING test
+        RESULT=$(redis-cli $REDIS_ARGS PING 2>&1)
+        if [ "$RESULT" = "PONG" ]; then
+          echo "✓ PING successful"
+        else
+          echo "✗ PING failed: $RESULT"
+          exit 1
+        fi
+
+        # SET / GET / DEL operations
+        TEST_KEY="testkube:validation:$(date +%s)"
+        redis-cli $REDIS_ARGS SET "$TEST_KEY" "test-value" EX 60
+        redis-cli $REDIS_ARGS GET "$TEST_KEY"
+        redis-cli $REDIS_ARGS DEL "$TEST_KEY"
+
+        echo "✓ Redis Connectivity Validation Passed"
+```
+
+All Marketplace workflows follow this pattern: standardized metadata labels and annotations for discovery,
+configurable parameters with sensible defaults, and clear pass/fail output.
+
+## Workflow Metadata
+
+Marketplace workflows use standardized metadata so they can be indexed and filtered in the Dashboard:
+
+### Labels
+
+| Label | Purpose | Values |
+|-------|---------|--------|
+| `marketplace.testkube.io/category` | Infrastructure type | `databases`, `messaging`, `networking`, `storage`, `observability`, `security`, `other` |
+| `marketplace.testkube.io/component` | Specific component | `redis`, `postgresql`, `kafka`, etc. |
+| `marketplace.testkube.io/validation-type` | What's being validated | `connectivity`, `health`, `performance`, `security` |
+
+### Annotations
+
+| Annotation | Purpose |
+|------------|---------|
+| `marketplace.testkube.io/display-name` | Human-readable name shown in the Dashboard |
+| `marketplace.testkube.io/description` | What the workflow validates |
+| `marketplace.testkube.io/icon` | Icon URL for UI display |
+| `marketplace.testkube.io/tags` | Search keywords |
+
+## Security
+
+All workflows in the Marketplace follow strict security guidelines enforced by CI on every pull request:
+
+- **Approved registries only** — images must come from vetted sources (Docker Hub official, Bitnami, Chainguard, etc.)
+- **Digest pinning** — all images use immutable SHA256 digest references instead of mutable tags
+- **Automated validation** — CI checks reject PRs that violate image security policies
+
+## Contributing
+
+The Marketplace is open for community contributions. To add a new workflow:
+
+1. Fork the [testkube-marketplace](https://github.com/kubeshop/testkube-marketplace) repository
+2. Add your workflow under the appropriate category in `workflows/`
+3. Include the required metadata labels and annotations
+4. Ensure all images are from approved registries with digest pinning
+5. Add a `README.md` with usage documentation
+6. Submit a pull request
+
+See the [Contributing Guidelines](https://github.com/kubeshop/testkube-marketplace/blob/main/CONTRIBUTING.md)
+for full details on naming conventions, image security requirements, and the PR checklist.
