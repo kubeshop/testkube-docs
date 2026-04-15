@@ -1132,6 +1132,11 @@ const sidebars = {
           items: [
             {
               type: "doc",
+              label: "Testkube Marketplace",
+              id: "articles/examples/marketplace",
+            },
+            {
+              type: "doc",
               label: "Chainsaw",
               id: "articles/examples/chainsaw-basic",
             },
