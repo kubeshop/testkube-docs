@@ -160,5 +160,5 @@ Congrats on getting up and running with Testkube, now you can
 - Head over to the [Examples & Guides](/articles/examples/overview) for sample Test Workflows with popular testing tools.
 - Check out the [Getting Started with Testkube Open Source](https://testkube.io/blog/getting-started-with-testkube-open-source) blogpost to further see how you can use the Standalone Agent with GitHub Actions
 - Go through the [CLI Reference](/cli/testkube) to see available CLI commands.
-- Head over to the [Testkube Slack](https://bit.ly/testkube-slack) to ask questions and get answers.
+- Head over to the [Testkube Slack](https://join.slack.com/t/testkubeworkspace/shared_invite/zt-3kfpny0gx-apPMq9_Swu4KG3uwz6Bk2g) to ask questions and get answers.
 

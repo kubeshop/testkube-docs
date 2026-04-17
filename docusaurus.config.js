@@ -125,7 +125,7 @@ const config = {
           {
             label: "Slack",
             position: "right",
-            href: "https://bit.ly/testkube-slack",
+            href: "https://join.slack.com/t/testkubeworkspace/shared_invite/zt-3kfpny0gx-apPMq9_Swu4KG3uwz6Bk2g",
           },
           {
             type: "html",
@@ -164,7 +164,7 @@ const config = {
           },
           {
             label: "Slack",
-            href: "https://bit.ly/testkube-slack",
+            href: "https://join.slack.com/t/testkubeworkspace/shared_invite/zt-3kfpny0gx-apPMq9_Swu4KG3uwz6Bk2g",
           },
           {
             label: "Twitter",
