@@ -1,0 +1,94 @@
+# Testkube Execution Cost Analyzer Agent
+
+An AI Agent that analyzes execution patterns across your workflows to identify where time and resources
+are being spent, which workflows are most expensive to run, and where optimization efforts would have the
+highest impact.
+
+## Requirements
+
+An Execution Cost Analyzer Agent requires:
+
+- **Access to workflow metrics, execution history, and resource data** — provided by the integrated Testkube MCP Server.
+
+This agent uses only the built-in Testkube MCP tools and does not require any external MCP servers.
+
+Optionally, it can also be set up to:
+- Run on a schedule via [AI Agent Triggers](/articles/ai-triggers) for periodic cost reporting
+- Suggest workflow definition changes using `update_workflow` (with approval)
+
+## Create the Execution Cost Analyzer AI Agent
+
+Create an AI Agent as described at [Creating an AI Agent](/articles/defining-ai-agents#creating-a-new-ai-agent), name it
+what you want and set the prompt to the following (feel free to adapt it to your needs!):
+
+> You are a test infrastructure cost optimization expert. Analyze workflow execution patterns to identify
+> inefficiencies and recommend concrete optimizations to reduce execution time and resource consumption.
+>
+> When asked to analyze costs:
+> 1. Use list_workflows and query_workflows to discover all active workflows
+> 2. Use get_workflow_metrics for each workflow to get execution frequency, duration statistics, and pass rates
+> 3. Use get_workflow_resource_history for the top consumers to analyze resource usage trends
+> 4. Use get_workflow_execution_metrics for detailed CPU/memory time-series data on expensive workflows
+> 5. Use get_workflow_definition to inspect workflow configs and identify optimization opportunities
+>
+> Analyze and report on:
+> - **Top consumers**: Rank workflows by total execution time (frequency x average duration) and resource usage
+> - **Unnecessary runs**: Workflows that run frequently but have 100% pass rates (candidates for reduced frequency)
+> - **Over-provisioned resources**: Workflows requesting significantly more CPU/memory than they use
+> - **Long-running outliers**: Workflows whose duration is disproportionately long compared to similar workflows
+> - **Parallelization opportunities**: Sequential workflows that could benefit from parallel step execution
+> - **Redundant executions**: Workflows that run on overlapping schedules or duplicate test coverage
+>
+> For each finding, provide:
+> - The workflow name and current cost profile (duration x frequency)
+> - The specific inefficiency identified
+> - A concrete recommendation with estimated savings
+> - Implementation complexity (easy, medium, hard)
+>
+> Present findings as a prioritized table sorted by estimated impact, with a summary of total potential savings.
+
+Enable the following Testkube MCP tools for this agent:
+
+- `list_workflows` — to discover all workflows
+- `query_workflows` — to search and filter workflows
+- `get_workflow_metrics` — for execution frequency, duration, and health statistics
+- `get_workflow_resource_history` — for resource usage trends across runs
+- `get_workflow_execution_metrics` — for detailed CPU/memory time-series data
+- `get_workflow_definition` — to inspect workflow configuration for optimization opportunities
+- `query_executions` — to analyze execution patterns and frequencies
+- `list_executions` — to examine recent run history
+- `list_labels` — to understand workflow groupings and categories
+
+## Using the Execution Cost Analyzer AI Agent
+
+### Interactive Analysis
+
+Start a chat with the agent and ask it to analyze costs:
+
+- *"Which workflows are consuming the most execution time?"*
+- *"Analyze all workflows labeled team=backend for cost optimization opportunities"*
+- *"What are my top 5 most expensive workflows and how can I reduce their cost?"*
+- *"Find workflows that run more often than necessary"*
+
+### As a Scheduled Report
+
+Set up an [AI Agent Trigger](/articles/ai-triggers) to generate a weekly cost report with a prompt like:
+
+> Produce a weekly execution cost report. Analyze all workflows, rank them by total execution time,
+> and highlight the top 10 optimization opportunities with estimated time savings.
+
+## Enhancing with External MCP Servers
+
+Connect additional [MCP Servers](/articles/mcp-servers-for-ai-agents) to enrich cost analysis with
+infrastructure and financial context:
+
+- **Kubernetes MCP Server** — Query actual cluster resource usage and quotas. The agent can compare
+  Testkube workflow resource consumption against total cluster capacity, identify contention with
+  other workloads, and recommend namespace-level resource adjustments.
+- **Grafana / Prometheus** — Pull infrastructure cost metrics, node utilization, and cloud billing
+  data. This lets the agent estimate actual dollar costs per workflow execution, not just time.
+- **GitHub / GitLab** — Correlate cost increases with recent workflow definition changes. If a PR
+  added a new test step that doubled execution time, the agent can pinpoint exactly when costs
+  increased and who to follow up with.
+- **Slack** — Post the weekly cost report to a `#test-infrastructure` channel, highlighting the
+  top optimization opportunities with estimated savings.

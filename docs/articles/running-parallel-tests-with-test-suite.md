@@ -24,6 +24,6 @@ For this test suite, we have added 5 tests that all run in parallel:
 
 ![Tests in Test Suite](../img/tests-in-test-suite.png)
 
-Here is an example of a Test Suite sequence with 2 tests running in parallel and, when they complete, a single test runs, then 2 addtional parallel tests:
+Here is an example of a Test Suite sequence with 2 tests running in parallel and, when they complete, a single test runs, then 2 additional parallel tests:
 
 ![Test and Order of Execution](../img/test-and-order-of-execution.png)

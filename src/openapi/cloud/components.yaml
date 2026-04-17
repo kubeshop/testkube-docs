@@ -1,5 +1,93 @@
 components:
   schemas:
+    AIAssistant:
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the AI assistant
+          type: string
+        name:
+          description: Display name of the AI assistant
+          type: string
+        description:
+          description: Optional description of the AI assistant
+          type: string
+        instructions:
+          description: System prompt/instructions for the assistant
+          type: string
+        mcpServers:
+          description: MCP server configurations for this assistant
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantMCPServerConfig'
+        labels:
+          description: Labels for categorization
+          type: object
+          additionalProperties:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+    AIAssistantCreate:
+      type: object
+      properties:
+        name:
+          description: Display name of the AI assistant
+          type: string
+        description:
+          description: Optional description of the AI assistant
+          type: string
+        instructions:
+          description: System prompt/instructions for the assistant
+          type: string
+        mcpServers:
+          description: MCP server configurations for this assistant
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantMCPServerConfig'
+        labels:
+          description: Labels for categorization
+          type: object
+          additionalProperties:
+            type: string
+      required:
+        - name
+        - instructions
+    AIAssistantList:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/AIAssistant'
+    AIAssistantUpdate:
+      type: object
+      properties:
+        name:
+          description: Display name of the AI assistant
+          type: string
+        description:
+          description: Optional description of the AI assistant
+          type: string
+        instructions:
+          description: System prompt/instructions for the assistant
+          type: string
+        mcpServers:
+          description: MCP server configurations for this assistant
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantMCPServerConfig'
+        labels:
+          description: Labels for categorization
+          type: object
+          additionalProperties:
+            type: string
     AWSElasticBlockStoreVolumeSource:
       description: >-
         awsElasticBlockStore represents an AWS Disk resource that is attached to
@@ -67,8 +155,6 @@ components:
         disabled:
           description: Is the Agent disabled?
           type: boolean
-        type:
-          $ref: '#/components/schemas/AgentType'
         labels:
           type: object
           additionalProperties:
@@ -99,6 +185,9 @@ components:
           description: When it has been deleted.
           type: string
           format: date-time
+        isSuperAgent:
+          description: Whether this is a super agent.
+          type: boolean
       required:
         - id
         - name
@@ -110,6 +199,9 @@ components:
         - runner
         - listener
         - gitops
+        - webhooks
+        - cloud-webhooks
+        - cron-delegation
     AgentEnvironment:
       type: object
       properties:
@@ -132,12 +224,6 @@ components:
             type: string
       required:
         - requiredMatch
-    AgentType:
-      type: string
-      enum:
-        - run
-        - sync
-        - agnt
     Any: {}
     ApiInfo:
       type: object
@@ -345,6 +431,104 @@ components:
         errorMessage:
           type: string
           nullable: true
+    AssistantMCPServerConfig:
+      type: object
+      properties:
+        mcpServerId:
+          description: ID of the MCP server to use
+          type: string
+        tools:
+          description: Per-tool configuration keyed by tool name
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AssistantMCPServerToolConfig'
+      required:
+        - mcpServerId
+    AssistantMCPServerToolConfig:
+      description: Per-tool configuration for an MCP server in an assistant
+      type: object
+      properties:
+        enabled:
+          description: Whether the tool is enabled
+          type: boolean
+          default: false
+        autoApproved:
+          description: Whether tool calls are auto-approved (no HITL prompt)
+          type: boolean
+          default: false
+    AssistantSession:
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the session
+          type: string
+        assistantId:
+          description: ID of the AI assistant
+          type: string
+        name:
+          description: Generated session name based on user input
+          type: string
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+        instructions:
+          description: Instructions/prompt for this session
+          type: string
+        executionContext:
+          $ref: '#/components/schemas/ExecutionContext'
+        error:
+          description: Error message if the session failed
+          type: string
+        toolCalls:
+          description: Tool calls made during this session
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionToolCall'
+        startedAt:
+          description: When the session started executing
+          type: string
+          format: date-time
+        finishedAt:
+          description: When the session finished
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/SessionMessageActor'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        isArchived:
+          description: Whether this session has been archived
+          type: boolean
+        inputTokens:
+          description: Total input (prompt) tokens consumed across all invocations
+          type: integer
+          format: int64
+        outputTokens:
+          description: Total output (completion) tokens consumed across all invocations
+          type: integer
+          format: int64
+        totalTokens:
+          description: Total tokens consumed (input + output) across all invocations
+          type: integer
+          format: int64
+        model:
+          description: LLM model name used for generation
+          type: string
+      required:
+        - id
+        - assistantId
+        - status
+    AssistantSessionCreate:
+      type: object
+      properties:
+        instructions:
+          description: Instructions/prompt for this session
+          type: string
+        executionContext:
+          $ref: '#/components/schemas/ExecutionContext'
     AuditLogDistinctSubjects:
       description: >-
         A key-value map where keys are entity types and values are distinct
@@ -802,6 +986,23 @@ components:
         name:
           description: The identifier for the credential.
           type: string
+        type:
+          description: The type of credential (secret, variable, or vault).
+          type: string
+          enum:
+            - secret
+            - variable
+            - vault
+        value:
+          description: >-
+            The value of the credential (only included for variables, not
+            secrets).
+          type: string
+        reference:
+          description: >-
+            The credential reference that can be used in test workflow
+            expressions.
+          type: string
         environmentId:
           description: Environment ID where the credential is restricted to.
           type: string
@@ -939,6 +1140,24 @@ components:
           default: false
       required:
         - reference
+    EnvStatus:
+      type: object
+      properties:
+        status:
+          description: State of the environment
+          type: string
+          enum:
+            - Green
+            - Yellow
+            - Red
+            - Gray
+          example: Green
+        sourceOfTruth:
+          description: Whether this environment is the source of truth in CP.
+          type: boolean
+          example: true
+      required:
+        - status
     EnvVar:
       type: object
       properties:
@@ -1023,6 +1242,12 @@ components:
               description: organizationID
               type: string
               example: 733420bd-7e56-461f-8431-6378759e60ae
+            sourceOfTruthSince:
+              description: >-
+                The time stamp during which this environment became the source
+                of truth.
+              type: string
+              format: date-time
             agentToken:
               description: agent token for environment
               type: string
@@ -1148,7 +1373,7 @@ components:
           description: feature name
           type: string
         displayName:
-          description: feature name
+          description: feature display name
           type: string
         description:
           description: feature description
@@ -1162,8 +1387,6 @@ components:
           type: boolean
       required:
         - name
-        - displayName
-        - description
         - enabled
     EnvironmentFeatures:
       type: object
@@ -1277,6 +1500,10 @@ components:
           description: The average execution duration in milliseconds.
           type: integer
           format: int64
+        p95Duration:
+          description: The p95 execution duration in milliseconds.
+          type: integer
+          format: int64
         lastRunAt:
           description: The timestamp of the last execution.
           type: string
@@ -1288,6 +1515,7 @@ components:
         - totalExecutionCount
         - failedExecutionCount
         - averageDuration
+        - p95Duration
         - lastRunAt
         - labels
     Environments:
@@ -1308,6 +1536,9 @@ components:
           type: string
         streamTopic:
           description: stream topic
+          type: string
+        groupId:
+          description: ID for event group
           type: string
         resource:
           $ref: '#/components/schemas/EventResource'
@@ -1625,6 +1856,18 @@ components:
           example:
             - true
             - false
+    ExecutionContext:
+      type: object
+      properties:
+        executionId:
+          description: ID of the test execution
+          type: string
+        executionName:
+          description: Name of the test execution
+          type: string
+        workflowName:
+          description: Name of the workflow (if applicable)
+          type: string
     ExecutionContextTypeV2:
       type: string
       enum:
@@ -1669,80 +1912,6 @@ components:
           format: date-time
         status:
           $ref: '#/components/schemas/ExecutionStatus'
-    ExecutionGroupShortV2:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        avgDurationMs:
-          type: integer
-        scheduledAt:
-          type: string
-          format: date-time
-        statusAt:
-          type: string
-          format: date-time
-        finishedAt:
-          type: string
-          format: date-time
-        status:
-          $ref: '#/components/schemas/ExecutionStatusV2'
-        predictedStatus:
-          $ref: '#/components/schemas/ExecutionStatusV2'
-        count:
-          type: integer
-        totals:
-          type: object
-          properties:
-            queued:
-              type: integer
-            running:
-              type: integer
-            paused:
-              type: integer
-            passed:
-              type: integer
-            failed:
-              type: integer
-            aborted:
-              type: integer
-        executions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExecutionReferenceV2'
-        workflows:
-          type: array
-          items:
-            type: string
-        target:
-          $ref: '#/components/schemas/ExecutionTargetV2'
-        context:
-          $ref: '#/components/schemas/ExecutionContextV2'
-        user:
-          $ref: '#/components/schemas/UserReference'
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-      required:
-        - id
-        - name
-        - status
-        - predictedStatus
-        - scheduledAt
-        - statusAt
-        - executionIds
-        - workflows
-        - count
-        - totals
-        - target
-    ExecutionGroupV2:
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/ExecutionGroupShortV2'
-        - type: object
     ExecutionRef:
       type: object
       properties:
@@ -1756,6 +1925,11 @@ components:
           description: The environment in which this execution was run
           type: string
         labels:
+          type: object
+          additionalProperties:
+            type: string
+        workflowAnnotations:
+          description: Annotations from the test workflow
           type: object
           additionalProperties:
             type: string
@@ -1776,11 +1950,27 @@ components:
           description: The moment this execution started.
           type: string
           format: date-time
+        runnerId:
+          description: The identifier of the runner that executed this execution.
+          type: string
+        tags:
+          description: Tag values to pass to the test workflow execution
+          type: object
+          additionalProperties:
+            type: string
         reports:
           description: generated reports from the steps, like junit
           type: array
           items:
             $ref: '#/components/schemas/TestWorkflowReport'
+        runningContext:
+          $ref: '#/components/schemas/TestWorkflowRunningContext'
+        health:
+          description: Health indicator for the workflow at the time of this execution
+          allOf:
+            - $ref: '#/components/schemas/TestWorkflowExecutionHealth'
+        configParams:
+          $ref: '#/components/schemas/TestWorkflowExecutionConfig'
       required:
         - id
         - name
@@ -1824,6 +2014,8 @@ components:
           $ref: '#/components/schemas/ConfigSummary'
         reports:
           $ref: '#/components/schemas/ReportsSummary'
+        silentMode:
+          $ref: '#/components/schemas/SilentMode'
       required:
         - id
         - number
@@ -3335,6 +3527,335 @@ components:
       required:
         - lines
         - bytes
+    MCPOAuthAuthorizeRequest:
+      description: Request to generate OAuth authorization URL
+      type: object
+      properties:
+        redirectUri:
+          description: Frontend callback URL after OAuth completes
+          type: string
+        responseMode:
+          description: How to handle the OAuth response
+          type: string
+          enum:
+            - popup
+            - redirect
+          default: popup
+    MCPOAuthAuthorizeResponse:
+      description: Response containing OAuth authorization URL
+      type: object
+      properties:
+        authorizationUrl:
+          description: URL to redirect user for OAuth authorization
+          type: string
+        state:
+          description: Encrypted OAuth state parameter
+          type: string
+      required:
+        - authorizationUrl
+        - state
+    MCPOAuthStatus:
+      description: OAuth authentication status for a user
+      type: object
+      properties:
+        authenticated:
+          description: Whether the user has valid OAuth tokens
+          type: boolean
+        expiresAt:
+          description: When the current access token expires
+          type: string
+          format: date-time
+        scopes:
+          description: Scopes granted by the OAuth provider
+          type: array
+          items:
+            type: string
+        needsReauth:
+          description: Whether user needs to re-authenticate
+          type: boolean
+      required:
+        - authenticated
+    MCPOAuthTokens:
+      description: OAuth tokens for MCP server authentication
+      type: object
+      properties:
+        accessToken:
+          description: OAuth access token
+          type: string
+        refreshToken:
+          description: OAuth refresh token
+          type: string
+        tokenType:
+          description: Token type (usually Bearer)
+          type: string
+        expiresAt:
+          description: When the access token expires
+          type: string
+          format: date-time
+        scopes:
+          description: Scopes granted by the OAuth provider
+          type: array
+          items:
+            type: string
+        clientId:
+          description: OAuth client ID from Dynamic Client Registration
+          type: string
+        clientSecret:
+          description: OAuth client secret from Dynamic Client Registration
+          type: string
+      required:
+        - accessToken
+        - tokenType
+    MCPServer:
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the MCP server
+          type: string
+        name:
+          description: Display name of the MCP server
+          type: string
+        description:
+          description: Optional description of the MCP server
+          type: string
+        type:
+          description: >-
+            Type of MCP server connection (http for HTTP-based, sse for
+            Server-Sent Events, stdio for local binaries)
+          type: string
+          enum:
+            - http
+            - sse
+            - stdio
+          default: http
+        url:
+          description: MCP server endpoint URL (required for http/sse type)
+          type: string
+        command:
+          description: Command to execute for stdio type MCP servers
+          type: string
+        args:
+          description: Arguments for the command (stdio type only)
+          type: array
+          items:
+            type: string
+        headers:
+          description: Optional headers for MCP server requests
+          type: object
+          additionalProperties:
+            type: string
+        status:
+          description: Connection status of the MCP server
+          type: string
+          enum:
+            - unknown
+            - active
+            - error
+        lastConnectedAt:
+          description: Last successful connection time
+          type: string
+          format: date-time
+        lastError:
+          description: Last error message if status is error
+          type: string
+        authType:
+          description: Authentication type for this MCP server
+          type: string
+          enum:
+            - none
+            - headers
+            - oauth
+          default: none
+        oauthConfig:
+          $ref: '#/components/schemas/MCPServerOAuthConfig'
+        oauthAuthenticated:
+          description: >-
+            Whether the current user has authenticated with this OAuth MCP
+            server
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - url
+    MCPServerCreate:
+      type: object
+      properties:
+        name:
+          description: Display name of the MCP server
+          type: string
+        description:
+          description: Optional description of the MCP server
+          type: string
+        type:
+          description: >-
+            Type of MCP server connection (http for HTTP-based, sse for
+            Server-Sent Events, stdio for local binaries)
+          type: string
+          enum:
+            - http
+            - sse
+            - stdio
+          default: http
+        url:
+          description: MCP server endpoint URL (required for http/sse type)
+          type: string
+        command:
+          description: Command to execute for stdio type MCP servers
+          type: string
+        args:
+          description: Arguments for the command (stdio type only)
+          type: array
+          items:
+            type: string
+        headers:
+          description: Optional headers for MCP server requests
+          type: object
+          additionalProperties:
+            type: string
+        authType:
+          description: Authentication type for this MCP server
+          type: string
+          enum:
+            - none
+            - headers
+            - oauth
+          default: none
+        oauthConfig:
+          $ref: '#/components/schemas/MCPServerOAuthConfig'
+      required:
+        - name
+        - url
+    MCPServerList:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/MCPServer'
+    MCPServerOAuthConfig:
+      description: OAuth 2.1 configuration for MCP server authentication
+      type: object
+      properties:
+        clientId:
+          description: OAuth client ID
+          type: string
+        clientSecret:
+          description: OAuth client secret (write-only, not returned in responses)
+          type: string
+        authorizationUrl:
+          description: OAuth authorization endpoint URL
+          type: string
+        tokenUrl:
+          description: OAuth token endpoint URL
+          type: string
+        scopes:
+          description: OAuth scopes to request
+          type: array
+          items:
+            type: string
+      required:
+        - clientId
+        - authorizationUrl
+        - tokenUrl
+    MCPServerTool:
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the tool
+          type: string
+        mcpServerId:
+          description: ID of the MCP server this tool belongs to
+          type: string
+        name:
+          description: Name of the tool
+          type: string
+        description:
+          description: Description of the tool
+          type: string
+        inputSchema:
+          description: JSON Schema for tool input parameters
+          type: object
+          additionalProperties: true
+        enabled:
+          description: Whether the tool is enabled for use
+          type: boolean
+        available:
+          description: Whether the tool is currently available on the MCP server
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - mcpServerId
+        - name
+        - enabled
+        - available
+    MCPServerToolList:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/MCPServerTool'
+    MCPServerToolUpdate:
+      type: object
+      properties:
+        enabled:
+          description: Whether the tool should be enabled
+          type: boolean
+    MCPServerUpdate:
+      type: object
+      properties:
+        name:
+          description: Display name of the MCP server
+          type: string
+        description:
+          description: Optional description of the MCP server
+          type: string
+        type:
+          description: >-
+            Type of MCP server connection (http for HTTP-based, sse for
+            Server-Sent Events, stdio for local binaries)
+          type: string
+          enum:
+            - http
+            - sse
+            - stdio
+        url:
+          description: MCP server endpoint URL (required for http/sse type)
+          type: string
+        command:
+          description: Command to execute for stdio type MCP servers
+          type: string
+        args:
+          description: Arguments for the command (stdio type only)
+          type: array
+          items:
+            type: string
+        headers:
+          description: Optional headers for MCP server requests
+          type: object
+          additionalProperties:
+            type: string
+        authType:
+          description: Authentication type for this MCP server
+          type: string
+          enum:
+            - none
+            - headers
+            - oauth
+        oauthConfig:
+          $ref: '#/components/schemas/MCPServerOAuthConfig'
     Member:
       type: object
       properties:
@@ -4861,6 +5382,239 @@ components:
           example: 2.1.2
       required:
         - version
+    SessionDetail:
+      description: Detailed session including message history from LangGraph
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the session
+          type: string
+        assistantId:
+          description: ID of the AI assistant
+          type: string
+        assistantName:
+          description: Name of the AI assistant
+          type: string
+        name:
+          description: Generated session name based on user input
+          type: string
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+        instructions:
+          description: Instructions/prompt for this session
+          type: string
+        executionContext:
+          $ref: '#/components/schemas/ExecutionContext'
+        error:
+          description: Error message if the session failed
+          type: string
+        messages:
+          description: Conversation message history from LangGraph checkpoint
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionMessage'
+        toolCalls:
+          description: Tool calls made during this session (stored in cloud-api)
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionToolCall'
+        startedAt:
+          description: When the session started executing
+          type: string
+          format: date-time
+        finishedAt:
+          description: When the session finished
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/SessionMessageActor'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        isArchived:
+          description: Whether this session has been archived
+          type: boolean
+        inputTokens:
+          description: Total input (prompt) tokens consumed across all invocations
+          type: integer
+          format: int64
+        outputTokens:
+          description: Total output (completion) tokens consumed across all invocations
+          type: integer
+          format: int64
+        totalTokens:
+          description: Total tokens consumed (input + output) across all invocations
+          type: integer
+          format: int64
+        model:
+          description: LLM model name used for generation
+          type: string
+      required:
+        - id
+        - assistantId
+        - status
+    SessionList:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantSession'
+        hasNextPage:
+          description: Whether there are more pages available
+          type: boolean
+    SessionMessage:
+      description: A message in the session conversation history
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the message
+          type: string
+        role:
+          description: Role of the message sender
+          type: string
+          enum:
+            - user
+            - assistant
+            - tool
+        content:
+          description: Message content
+          type: string
+        sources:
+          description: Documentation sources for assistant messages
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionSource'
+        timestamp:
+          description: Unix timestamp when message was created
+          type: integer
+          format: int64
+        toolCalls:
+          description: Tool calls made by assistant in this message
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Tool call ID
+                type: string
+              name:
+                description: Tool name
+                type: string
+              arguments:
+                description: Tool arguments as JSON string
+                type: string
+        toolCallId:
+          description: For tool messages, the ID of the tool call this responds to
+          type: string
+        toolName:
+          description: For tool messages, the name of the tool
+          type: string
+        actor:
+          $ref: '#/components/schemas/SessionMessageActor'
+      required:
+        - id
+        - role
+        - content
+    SessionMessageActor:
+      description: The actor (user or API token) that sent a message or created a session
+      type: object
+      properties:
+        type:
+          description: Type of the actor
+          type: string
+          enum:
+            - user
+            - api-token
+        id:
+          description: Unique identifier of the actor (user ID or token ID)
+          type: string
+        name:
+          description: Display name of the actor, resolved server-side
+          type: string
+      required:
+        - type
+        - id
+    SessionSource:
+      description: Documentation source reference attached to a session message
+      type: object
+      properties:
+        label:
+          description: Human-readable source label
+          type: string
+        link:
+          description: Documentation link path
+          type: string
+        file:
+          description: Source file identifier
+          type: string
+      required:
+        - label
+        - link
+        - file
+    SessionStatus:
+      description: Status of an assistant session
+      type: string
+      enum:
+        - pending
+        - running
+        - waiting_approval
+        - completed
+        - failed
+    SessionToolCall:
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the tool call
+          type: string
+        sessionId:
+          description: ID of the session this tool call belongs to
+          type: string
+        name:
+          description: Name of the tool being called
+          type: string
+        mcpServerId:
+          description: ID of the MCP server providing this tool
+          type: string
+        status:
+          $ref: '#/components/schemas/ToolCallStatus'
+        input:
+          description: Input parameters for the tool call
+          type: object
+          additionalProperties: true
+        error:
+          description: Error message if tool execution failed
+          type: string
+        approvedAt:
+          description: When the tool call was approved
+          type: string
+          format: date-time
+        declinedAt:
+          description: When the tool call was declined
+          type: string
+          format: date-time
+        startedAt:
+          description: When the tool started executing
+          type: string
+          format: date-time
+        completedAt:
+          description: When the tool finished executing
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - sessionId
+        - name
+        - status
     Setting:
       description: Generic Settings
       type: object
@@ -4880,6 +5634,7 @@ components:
             - pinnedEnvironments
             - pinnedAgents
             - scimEnabled
+            - scimManagePermissionsInTestkube
             - eventsEnabled
         valueType:
           description: value type for given settings
@@ -4918,6 +5673,27 @@ components:
             $ref: '#/components/schemas/Setting'
       required:
         - elements
+    SilentMode:
+      description: >-
+        controls what aspects of an execution should be silent (not
+        tracked/processed)
+      type: object
+      properties:
+        webhooks:
+          description: disable webhooks for this execution
+          type: boolean
+        insights:
+          description: disable insights/analytics for this execution
+          type: boolean
+        health:
+          description: disable health checks for this execution
+          type: boolean
+        metrics:
+          description: disable metrics collection for this execution
+          type: boolean
+        cdevents:
+          description: disable CDEvents for this execution
+          type: boolean
     SlavesMeta:
       description: Slave data for executing tests in distributed environment
       type: object
@@ -4928,6 +5704,11 @@ components:
           example: kubeshop/ex-slaves-image:latest
       required:
         - image
+    Source:
+      description: synchronisation sources
+      type: string
+      enum:
+        - kubernetes
     StatusObservable:
       type: object
       properties:
@@ -5095,6 +5876,98 @@ components:
           type: string
       required:
         - organizationID
+    SuperAgentCommands:
+      type: object
+      properties:
+        agentToken:
+          description: agent token for environment
+          type: string
+          example: tkcagnt_adead343112adeadcaaaaa221daee2
+        connectCommand:
+          description: >-
+            command to connect existing Testkube OSS installation to the
+            Testkube Pro
+          type: string
+          example: testkube pro connect --agent-key tkcagnt_111
+        disconnectCommand:
+          description: >-
+            command to disconnect from testkube pro and get back to standalone
+            OSS mode
+          type: string
+          example: testkube pro disconnect
+        installCommand:
+          description: command to install/upgrade agent
+          type: string
+          example: >-
+            helm upgrade --install --create-namespace testkube testkube/testkube
+            --set testkube-api.cloud.url=agent.example.com:443 --set
+            testkube-api.cloud.key=<api-key> --set
+            testkube-api.minio.enabled=false --set mongodb.enabled=false
+            --namespace testkube
+        installCommandCli:
+          description: command to install/upgrade agent
+          type: string
+          example: >-
+            testkube init-cloud --agent-key tkcagnt_111 --agent-url
+            agent.example.com:443
+        configureContextCommand:
+          description: command to configure
+          type: string
+          example: >-
+            testkube context set --api-url https://api.example.com --api-key
+            <api-key> --agent-url https://agent.example.com --agent-key
+            <agent-key>
+        runDockerCommand:
+          description: command to run Docker agent
+          type: string
+          example: >-
+            docker run -d --privileged --name=testkube-agent -e AGENT_KEY=AK
+            kubeshop/testkube-agent:1.2.3
+        runDockerCommandCli:
+          description: command to run Docker agent
+          type: string
+          example: testkube docker init --agent-token=AK --org-id=org --env-id=env
+        upgradeDockerCommand:
+          description: command to upgrade Docker agent
+          type: string
+          example: >-
+            docker exec testkube-agent helm upgrade testkube testkube/testkube
+            --namespace testkube --set testkube-api.minio.enabled=false --set
+            mongodb.enabled=false --set testkube-api.cloud.key=AK --set
+            testkube-api.cloud.url=api.testkube.io:999 --set
+            testkube-api.dockerImageVersion=1.2.3
+        upgradeDockerCommandCli:
+          description: command to upgrade Docker agent
+          type: string
+          example: testkube upgrade
+      required:
+        - agentToken
+        - connectCommand
+        - disconnectCommand
+        - installCommand
+        - installCommandCli
+        - configureContextCommand
+        - runDockerCommand
+        - runDockerCommandCli
+        - upgradeDockerCommand
+        - upgradeDockerCommandCli
+    Syncable:
+      description: >
+        source information about resources that may have been synced from
+        multiple sources.
+
+        An empty source indicates that the source was the UI/API for backwards
+        compatibility.
+      type: object
+      properties:
+        creationSource:
+          $ref: '#/components/schemas/Source'
+          description: the original source from which the resource was created
+        lastModificationSource:
+          $ref: '#/components/schemas/Source'
+          description: >-
+            the source from which the last modification of the resource
+            originated
     Sysctl:
       type: object
       properties:
@@ -6247,6 +7120,8 @@ components:
           example:
             - true
             - false
+        sync:
+          $ref: '#/components/schemas/Syncable'
       required:
         - event
         - action
@@ -6492,8 +7367,6 @@ components:
       description: test trigger create or update request body
       type: object
       required:
-        - resource
-        - resourceSelector
         - event
         - action
         - execution
@@ -6572,6 +7445,8 @@ components:
           type: boolean
         status:
           $ref: '#/components/schemas/TestWorkflowStatusSummary'
+        sync:
+          $ref: '#/components/schemas/Syncable'
     TestWorkflowConcurrencyPolicy:
       description: configuration to control concurrent executions.
       type: object
@@ -6835,6 +7710,8 @@ components:
           example:
             - true
             - false
+        silentMode:
+          $ref: '#/components/schemas/SilentMode'
         tags:
           $ref: '#/components/schemas/TestWorkflowTagValue'
         runningContext:
@@ -6901,7 +7778,7 @@ components:
         flipRate:
           description: >
             Fraction of status changes among consecutive executions without
-            recency weighting 
+            recency weighting
 
             (value between 0.0 and 1.0).
           type: number
@@ -6956,6 +7833,8 @@ components:
           description: whether webhooks on the execution of this test workflow are disabled
           type: boolean
           default: false
+        silentMode:
+          $ref: '#/components/schemas/SilentMode'
         tags:
           $ref: '#/components/schemas/TestWorkflowTagValue'
         target:
@@ -7044,6 +7923,21 @@ components:
           type: object
           additionalProperties:
             type: string
+    TestWorkflowExecutionSchema:
+      description: test workflow execution configuration
+      type: object
+      properties:
+        tags:
+          $ref: '#/components/schemas/TestWorkflowTagValue'
+        target:
+          $ref: '#/components/schemas/ExecutionTarget'
+        silent:
+          description: >-
+            indicates that all executions should be silent by default. When
+            true, SilentMode is activated for all executions (Webhooks,
+            Insights, Health, Metrics, Cdevents all set to true).
+          type: boolean
+          default: false
     TestWorkflowExecutionStatusCR:
       description: test workflow execution status
       type: object
@@ -7117,6 +8011,9 @@ components:
             $ref: '#/components/schemas/TestWorkflowReport'
         resourceAggregations:
           $ref: '#/components/schemas/TestWorkflowExecutionResourceAggregationsReport'
+        silentMode:
+          $ref: '#/components/schemas/SilentMode'
+          description: execution mode to determine which events to skip
       required:
         - id
         - name
@@ -7248,6 +8145,9 @@ components:
             parallelism:
               description: how many resources could be scheduled in parallel
               type: integer
+            failFast:
+              description: abort remaining parallel workers on first failure
+              type: boolean
             description:
               description: worker description to display
               type: string
@@ -7802,7 +8702,7 @@ components:
           items:
             $ref: '#/components/schemas/TestWorkflowEvent'
         execution:
-          $ref: '#/components/schemas/TestWorkflowTagSchema'
+          $ref: '#/components/schemas/TestWorkflowExecutionSchema'
         pvcs:
           type: object
           additionalProperties:
@@ -8187,6 +9087,9 @@ components:
             parallelism:
               description: how many resources could be scheduled in parallel
               type: integer
+            failFast:
+              description: abort remaining parallel workers on first failure
+              type: boolean
             description:
               description: worker description to display
               type: string
@@ -8324,14 +9227,6 @@ components:
           $ref: '#/components/schemas/BoxedBoolean'
         isolatedContainers:
           $ref: '#/components/schemas/BoxedBoolean'
-    TestWorkflowTagSchema:
-      description: test workflow execution tag definition
-      type: object
-      properties:
-        tags:
-          $ref: '#/components/schemas/TestWorkflowTagValue'
-        target:
-          $ref: '#/components/schemas/ExecutionTarget'
     TestWorkflowTagValue:
       description: tag values to pass to the test workflow execution
       type: object
@@ -8412,6 +9307,8 @@ components:
           example: '2022-07-30T06:54:15Z'
         spec:
           $ref: '#/components/schemas/TestWorkflowTemplateSpec'
+        sync:
+          $ref: '#/components/schemas/Syncable'
     TestWorkflowTemplateRef:
       type: object
       properties:
@@ -8460,7 +9357,7 @@ components:
           items:
             $ref: '#/components/schemas/TestWorkflowEvent'
         execution:
-          $ref: '#/components/schemas/TestWorkflowTagSchema'
+          $ref: '#/components/schemas/TestWorkflowExecutionSchema'
         pvcs:
           type: object
           additionalProperties:
@@ -8625,6 +9522,15 @@ components:
           type: string
         tolerationSeconds:
           $ref: '#/components/schemas/BoxedInteger'
+    ToolCallStatus:
+      description: Status of a tool call within a session
+      type: string
+      enum:
+        - pending
+        - approved
+        - declined
+        - completed
+        - failed
     TopologySpreadConstraint:
       type: object
       properties:
@@ -8828,9 +9734,7 @@ components:
           type: string
           example: This is an example view
         entity:
-          description: Type of the view (e.g., workflow, test)
-          type: string
-          example: workflow
+          $ref: '#/components/schemas/ViewEntity'
         filter:
           description: filter of the view
           type: string
@@ -8841,6 +9745,13 @@ components:
             (visible to all users in environment)
           type: boolean
           example: true
+    ViewEntity:
+      description: Type of entity that the view is associated with
+      type: string
+      enum:
+        - test-workflows
+        - executions
+      example: test-workflows
     Views:
       type: object
       properties:
@@ -8933,6 +9844,37 @@ components:
         namespace:
           type: string
           example: testkube
+        labels:
+          description: webhook labels
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            app: backend
+            env: prod
+        annotations:
+          description: webhook annotations
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            app: backend
+            env: prod
+        created:
+          type: string
+          format: date-time
+          example: '2022-07-30T06:54:15Z'
+        updated:
+          type: string
+          format: date-time
+          example: '2022-07-30T06:54:15Z'
+        disabled:
+          description: whether webhook is disabled
+          type: boolean
+          default: false
+          example:
+            - true
+            - false
         uri:
           type: string
           example: https://hooks.app.com/services/1
@@ -8959,29 +9901,6 @@ components:
             type: string
           example:
             Content-Type: application/xml
-        labels:
-          description: webhook labels
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            app: backend
-            env: prod
-        annotations:
-          description: webhook annotations
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            app: backend
-            env: prod
-        disabled:
-          description: whether webhook is disabled
-          type: boolean
-          default: false
-          example:
-            - true
-            - false
         config:
           $ref: '#/components/schemas/WebhookConfig'
         parameters:
@@ -8990,6 +9909,8 @@ components:
             $ref: '#/components/schemas/WebhookParameterSchema'
         webhookTemplateRef:
           $ref: '#/components/schemas/WebhookTemplateRef'
+        sync:
+          $ref: '#/components/schemas/Syncable'
       required:
         - name
     WebhookConfig:
@@ -9101,6 +10022,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WebhookParameterSchema'
+        sync:
+          $ref: '#/components/schemas/Syncable'
       required:
         - name
     WebhookTemplateCreateRequest:
@@ -9191,6 +10114,12 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/Problem'
+    Credential:
+      description: successful operation for credential
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Credential'
     Environment:
       description: successful operation for environment
       content:
@@ -9233,25 +10162,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Environments'
-    ExecutionGroupListV2:
-      description: List of Test Workflow execution groups
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              totals:
-                $ref: '#/components/schemas/ExecutionTotalsV2'
-              filtered:
-                $ref: '#/components/schemas/ExecutionTotalsV2'
-              results:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ExecutionGroupShortV2'
-            required:
-              - results
-              - totals
-              - filtered
     ExecutionRefs:
       description: List of references to executions of either Test, TestSuite or Workflows
       content:
@@ -9283,8 +10193,12 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/Problem'
-    Healthcheck:
-      description: Healthcheck response
+    GoneError:
+      description: 410 Gone
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
     HubspotVisitorSession:
       description: hubspot visitor's session data
       content:
@@ -9559,6 +10473,41 @@ components:
           schema:
             $ref: '#/components/schemas/Views'
   parameters:
+    AIAssistantID:
+      name: assistantId
+      in: path
+      description: Unique identifier of the AI assistant
+      required: true
+      schema:
+        type: string
+    AIMCPServerID:
+      name: serverId
+      in: path
+      description: Unique identifier of the MCP server
+      required: true
+      schema:
+        type: string
+    AIMCPServerToolID:
+      name: toolId
+      in: path
+      description: Unique identifier of the MCP server tool
+      required: true
+      schema:
+        type: string
+    AISessionID:
+      name: sessionId
+      in: path
+      description: Unique identifier of the assistant session
+      required: true
+      schema:
+        type: string
+    AIToolCallID:
+      name: toolCallId
+      in: path
+      description: Unique identifier of the tool call
+      required: true
+      schema:
+        type: string
     ActorName:
       name: actorName
       in: query
@@ -9584,12 +10533,6 @@ components:
       required: true
       schema:
         type: string
-    AgentTypeQP:
-      name: type
-      in: query
-      description: filter resources by agent type
-      schema:
-        $ref: '#/components/schemas/AgentType'
     Aggregate:
       name: aggregate
       in: query
@@ -9687,13 +10630,6 @@ components:
       description: filter by event type in audit logs
       schema:
         type: string
-    ExecutionGroupID:
-      name: executionGroupID
-      in: path
-      description: unique id of the execution group
-      required: true
-      schema:
-        type: string
     ExecutionID:
       name: executionID
       in: path
@@ -9767,6 +10703,15 @@ components:
       required: true
       schema:
         type: string
+    Health:
+      name: health
+      in: query
+      description: >-
+        Filter by workflow health categories (comma-separated). Options -
+        perfect, excellent, good, fair, poor, critical
+      schema:
+        type: string
+      example: excellent,good
     ID:
       name: id
       in: path
@@ -9913,6 +10858,12 @@ components:
       required: true
       schema:
         type: string
+    Runner:
+      name: runner
+      in: query
+      description: Filter by runner/agent ID
+      schema:
+        type: string
     Segment:
       name: segment
       in: query
@@ -10001,8 +10952,8 @@ components:
     TagSelector:
       name: tagSelector
       in: query
+      description: Test workflow execution tags
       schema:
-        description: Test workflow execution tags
         type: string
     TeamID:
       name: teamID

@@ -1,4 +1,4 @@
-# MCP Server Configuration Examples
+# Testkube MCP Server Configuration Examples
 
 This guide provides configuration examples for integrating the Testkube MCP Server with various AI tools and development environments.
 

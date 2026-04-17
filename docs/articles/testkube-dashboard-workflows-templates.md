@@ -1,102 +1,102 @@
 # Workflow Templates
+ 
+**Workflow Templates** are reusable configuration blocks for your Workflows that you can use to ensure your Workflows follow specific patterns or best practices, such as when using tools like Playwright and Selenium. 
+With a standard set of instructions for testing tools, you do not have to start your test instructions with a *blank page* of sorts. Instead, you can start with a **Workflow Template** –
+tailoring this baseline to align with your current configuration requirements. These templates are powerful mechanisms for defining, sharing, and reusing Workflow configurations.
+Leveraging these templates allows you to save time by using and tweaking existing configurations as opposed to building each new set of instructions from scratch. For additional information,
+read [Test Workflow Templates](/articles/test-workflow-templates).
 
-:::tip
+You can select **Workflow Templates** to view the list available in your **Environment**.
 
-Workflow Templates provide a powerful mechanism for defining shared / reusable Workflow configurations - [Read More](/articles/test-workflow-templates)
+![Workflow Templates](../articles/images/workflow-templates.png)
 
-:::
 
-Under the **Workflow Templates** tab, you will find a list of available Workflow Templates in your environment.
-
-![Workflow Templates](../img/workflow-templates-072024.png)
+![Workflow Templates in Environment](../articles/images/workflow-templates-available-list-in-environment.png)
 
 :::info
 
-Templates named `offical/...` are used by the [Workflow Wizard](/articles/test-workflows-create-wizard#create-with-wizard) to help 
-you create Workflows for the corresponding testing tools.
+The [Workflow Wizard](/articles/test-workflows-create-wizard#create-with-wizard) uses templates named `official/...` to help you create Workflows for the corresponding testing tools.
 
 :::
 
-Just like with Workflow - you can toggle between grid and list layouts:
+Similar to Workflows, you can toggle between **Grid view** and **Table view**. You can also [Add a New Template](#add-a-new-template).
 
-![Workflow Templates List](../img/workflow-templates-list.png)
-
+![Grid View and Table View](../articles/images/workflow-templates-grid-table-views.png)
 
 ## Workflow Template Settings
 
-Selecting a Workflow Template opens the Settings tab for the Template.
+When you select a **Workflow Template**, **Settings** opens with emphasis on **General**.
+
+![Select Workflow Template](../articles/images/workflow-templates-select-template.png)
 
 ### General Settings
 
-The General settings shown above allow you to specify the description of the template, and below that
-shows an example of how to use this template in a workflow.
+**General** allows you to enter a **Description**. The three vertical dots – More Options (top right) – allow you to **Edit** or **Delete** the **Workflow Template**. Deleting the **Workflow Template**
+is an irreversible action. **General** also includes a **Usage example** which displays YAML, depicting how to include this template in your **Test Workflow**.
 
 :::info
-Due to Kubernetes constraints, it is not possible to change the name of a Workflow Template.
-You need to create a copy of the Workflow Template with the new name and delete the old Workflow Template instead.
+Kubernetes constraints prevent you from changing the **Template Name**. Instead, you must create a copy of the **Workflow Template** with the new name 
+and delete the old one.
 ::: 
 
-![Workflow Templates Settings](../img/workflow-templates-settings.png)
+![General Setting](../articles/images/workflow-templates-settings-general.png)
 
 ### Resource Group
 
-This panel allows you to assign this Workflow Template to a Resource Group - [Read More](/articles/resource-groups#managing-resources-in-a-resource-group).
+This setting allows you to assign this **Workflow Template** to a **Resource Group**, facilitating your ability to collaborate. For additional information, read [Managing Resources in a Resource Group](/articles/resource-groups#managing-resources-in-a-resource-group).
 
-![Workflow Template Resource Group](images/workflow-template-resource-group.png)
+![Resource Group Setting](../articles/images/workflow-templates-resource-group.png)
 
 ### Definition
 
-The Definition pane allows you to edit the Workflow Template.
+This setting allows you to edit the **Workflow Template** by updating its configuration via a dedicated YAML editor.
 
-![Workflow Template Definition](../img/workflow-template-definition.png)
+![Definition Setting](../articles/images/workflow-templates-settings-definition.png)
 
 
 :::warning
 
-Remember that changing your templates will affect all Workflows that use them - be sure to not break any usage!
+Changing templates impacts all Workflows that use them. Please ensure updates do not disrupt existing usage.
 
 :::
 
-## Adding a New Workflow Template
+## Add a New Template
 
-Click the **Add a new template** button in the Workflows Template overview (shown above) to create a new Workflow Template. 
-The options are:
+![Workflow Templates](../articles/images/workflow-templates-add-new-template.png)
 
-- **Git content**: Create a template to use a git source across multiple test workflows.
-- **Static content**: Create a template to use a static file across multiple test workflows.
-- **Testing tool**: Create a template with a
-container/runnable testing tool across to base your test workflows on.
-- **Import from YAML**: Create a template from scratch or copy/paste YAML examples.
+Select **Add a new template** to create **Workflow Templates** specific to:
 
-![Add a New Template](../img/add-new-workflow-template-072024.png)
+* **Git Content** – Create a template to use a Git Source across multiple **Test Workflows**.
+* **Static Content** – Create a template to use a static file across multiple **Test Workflows**.
+* **Testing Tool** – Create a template with a container/runnable testing tool on which to base your **Test Workflows**.
+* **Import from YAML** – Create a template from scratch or copy/paste YAML examples.
 
-### Creating a Git Content Template
+### Git Content
 
-The Git Content template wizard helps you create a Workflow Template that you can use across your workflows to ensure
-they are all using the same Git Source as their content.
+This option creates a **Workflow Template** that ensures your Workflows use the same Git Source as its content. For example, all Workflows might use the same Git repository/branch or even the same access method
+such as SSH or HTTPS.
 
-![Git Workflow Template](../img/git-content-template-wizard.png)
+![Git Content Template](../articles/images/workflow-templates-git-content.png)
 
 
-### Creating a Static Content Template
+### Static Content
 
-The Static content template wizard helps you create a Workflow Template that you can use across your workflows to ensure 
-they are all using the same static content in corresponding scenarios.
+This option creates a **Workflow Template** that ensures your Workflows use the same static content for the same scenarios. For example, Deployment Workflows might use the same template such that
+the production setup text is identical. Similarly, Onboarding Workflows might reference the same static instructions for new users.
 
-![Static Content Template Wizard](../img/static-content-template-wizard.png)
-
-
-### Creating a Testing Tool Template
-
-The Testing Tool template wizard helps you create a Workflow Template that you can use across your workflows to ensure
-they are all using a specific testing tool or script in a consistent way.
-
-![Testing Tool Template Wizard](../img/testing-tool-template-wizard.png)
+![Static Content Template](../articles/images/workflow-templates-static-content.png)
 
 
-### Creating a Template from YAML Content 
+### Testing Tool
 
-This wizard allows you to paste or create any Workflow Template from YAML.
+This option creates a **Workflow Template** that ensures your Workflows use the same testing tool or script the same way.
 
-![Import from YAML Template Wizard](../img/import-from-yaml-template-wizard.png)
+![Testing Tool Template Wizard](../articles/images/workflow-templates-testing%20tool.png)
+
+
+### Import from YAML
+
+You can paste YAML directly, or you can create a new template using YAML.
+
+![Import from YAML Template Wizard](../articles/images/workflow-templates-import-from-yaml.png)
 

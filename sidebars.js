@@ -133,13 +133,13 @@ const sidebars = {
                 },
                 {
                   type: "doc",
-                  label: "Testkube AI Assistant",
-                  id: "articles/ai-assistant-on-prem-install",
+                  label: "Deploying on OpenShift",
+                  id: "articles/deploying-on-openshift",
                 },
                 {
                   type: "doc",
-                  label: "Deploying on OpenShift",
-                  id: "articles/deploying-on-openshift",
+                  label: "Deploying on AWS EKS",
+                  id: "articles/install/deploy-on-aws-eks",
                 },
                 {
                   type: "doc",
@@ -181,20 +181,26 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Docker Install",
-              id: "articles/install/docker-agent",
-            },
-            {
-              type: "doc",
               label: "Local Kubernetes Install",
               id: "articles/install/quickstart-no-k8s",
             },
           ],
         },
         {
-          type: "doc",
+          type: "category",
           label: "Cloud Control Plane",
-          id: "articles/install/cloud-overview",
+          items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/install/cloud-overview",
+            },
+            {
+              type: "doc",
+              label: "Custom SSO",
+              id: "articles/custom-sso",
+            },
+          ],
         },
         "articles/install/faq",
         {
@@ -248,11 +254,6 @@ const sidebars = {
               label: "Agent CLI Commands",
               id: "articles/multi-agent-cli",
             },
-            {
-              type: "doc",
-              label: "Ephemeral Environments",
-              id: "articles/ephemeral-environments",
-            },
           ],
         },
         {
@@ -302,6 +303,11 @@ const sidebars = {
               ],
             },
             {
+              type: "doc",
+              label: "Executions",
+              id: "articles/testkube-dashboard-executions",
+            },
+            {
               type: "category",
               label: "Integrations",
               collapsed: false,
@@ -325,6 +331,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Custom Views",
+              id: "articles/testkube-dashboard-custom-views",
+            },
+            {
+              type: "doc",
               label: "Global Settings",
               id: "articles/settings-dashboard-explore",
             },
@@ -335,6 +346,12 @@ const sidebars = {
           label: "Test Workflows",
           items: [
             { type: "doc", label: "Overview", id: "articles/test-workflows" },
+            {
+              type: "doc",
+              label: "Interactive Walkthrough",
+              id: "articles/testworkflows-showcase",
+            },    
+        
             {
               type: "doc",
               label: "Basic Examples",
@@ -354,6 +371,11 @@ const sidebars = {
               type: "doc",
               label: "Content",
               id: "articles/test-workflows-content",
+            },
+            {
+              type: "doc",
+              label: "Sharing Data Between Steps",
+              id: "articles/test-workflows-step-sharing",
             },
             {
               type: "doc",
@@ -392,8 +414,18 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Timeouts",
+              id: "articles/test-workflows-timeouts",
+            },
+            {
+              type: "doc",
               label: "Job & Pod Configuration",
               id: "articles/test-workflows-job-and-pod",
+            },
+            {
+              type: "doc",
+              label: "Execution Tags",
+              id: "articles/execution-tags",
             },
             {
               type: "doc",
@@ -416,6 +448,11 @@ const sidebars = {
               id: "articles/test-workflows-high-level-architecture",
             },
             {
+              type: "doc",
+              label: "Workflow Best Practices",
+              id: "articles/test-workflows-best-practices",
+            },
+            {
               type: "category",
               label: "Cookbook",
               items: [
@@ -433,11 +470,6 @@ const sidebars = {
                   type: "doc",
                   label: "Remote Workflow Execution",
                   id: "articles/remote-workflow-execution",
-                },
-                {
-                  type: "doc",
-                  label: "Filtering Executions using Tags",
-                  id: "articles/filtering-test-workflow-executions-using-tags",
                 },
                 {
                   type: "doc",
@@ -535,11 +567,6 @@ const sidebars = {
                   label: "AI Analysis",
                   id: "articles/AI-test-insights",
                 },
-                {
-                  type: "doc",
-                  label: "Cached Test Results",
-                  id: "articles/cached-results",
-                },
               ],
             },
             {
@@ -629,7 +656,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "CLI Authentication",
+              label: "Managing CLI Context",
               id: "articles/managing-cli-context",
             },
             {
@@ -644,44 +671,115 @@ const sidebars = {
           label: "Testkube AI",
           items: [
             {
-              type: "category",
+              type: "doc",
+              label: "Overview",
+              id: "articles/testkube-ai-overview",
+            },
+            {
+              type: "doc",
+              label: "Configuration",
+              id: "articles/ai-enabling",
+            },
+            {
+              type: "doc",
               label: "AI Assistant",
+              id: "articles/ai-assistant-overview",
+            },
+            {
+              type: "category",
+              label: "AI Agents",
               items: [
                 {
                   type: "doc",
                   label: "Overview",
-                  id: "articles/ai-assistant-overview",
+                  id: "articles/ai-agents",
                 },
                 {
                   type: "doc",
-                  label: "On-Prem Installation",
-                  id: "articles/ai-assistant-on-prem-install",
+                  label: "AI Agent Chats",
+                  id: "articles/using-ai-agents",
                 },
                 {
                   type: "doc",
-                  label: "Enable AI Assistant",
-                  id: "articles/ai-assistant-enable",
+                  label: "Defining AI Agents",
+                  id: "articles/defining-ai-agents",
                 },
                 {
                   type: "doc",
-                  label: "How AI Assistant can help",
-                  id: "articles/ai-assistant-can-help",
+                  label: "Connected MCP Servers",
+                  id: "articles/mcp-servers-for-ai-agents",
                 },
                 {
                   type: "doc",
-                  label: "How AI Assistant is different",
-                  id: "articles/ai-assistant-is-different",
+                  label: "Configuring AI Models",
+                  id: "articles/ai-models",
                 },
                 {
                   type: "doc",
-                  label: "Security & Compliance",
-                  id: "articles/ai-assistant-security",
+                  label: "AI Agent Triggers",
+                  id: "articles/ai-triggers",
+                },
+                {
+                  type: "category",
+                  label: "Example Agents",
+                  items: [
+                    {
+                      type: "doc",
+                      label: "Overview",
+                      id: "articles/ai-agent-examples-overview",
+                    },
+                    {
+                      type: "doc",
+                      label: "Remediation",
+                      id: "articles/remediation-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Flakiness Analysis",
+                      id: "articles/flakiness-analysis-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Dependency Impact",
+                      id: "articles/dependency-impact-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Infrastructure Triage",
+                      id: "articles/infrastructure-triage-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Incident Correlator",
+                      id: "articles/incident-correlator-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Execution Cost Analyzer",
+                      id: "articles/execution-cost-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Onboarding Guide",
+                      id: "articles/onboarding-guide-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "Security & Compliance",
+                      id: "articles/security-compliance-agent",
+                    },
+                    {
+                      type: "doc",
+                      label: "More Ideas",
+                      id: "articles/ai-agent-ideas",
+                    },
+                  ],
                 },
               ],
             },
             {
               type: "category",
-              label: "MCP Server",
+              label: "Testkube MCP Server",
               items: [
                 {
                   type: "doc",
@@ -715,12 +813,38 @@ const sidebars = {
                 },
               ],
             },
+            {
+              type: "category",
+              label: "Reference",
+              items: [
+                {
+                  type: "doc",
+                  label: "Configuration",
+                  id: "articles/ai-configuration",
+                },
+                {
+                  type: "doc",
+                  label: "Architecture",
+                  id: "articles/ai-architecture",
+                },
+              ],
+            },
           ],
         },
         {
           type: "category",
           label: "Best Practices",
           items: [
+            {
+              type: "doc",
+              label: "GitOps with Testkube",
+              id: "articles/gitops-overview",
+            },
+            {
+              type: "doc",
+              label: "Ephemeral Environments",
+              id: "articles/ephemeral-environments",
+            },
             {
               type: "doc",
               label: "Environments and Access Control",
@@ -745,252 +869,277 @@ const sidebars = {
       items: [
         {
           type: "category",
-          label: "K6",
+          label: "Load & Performance Testing",
           items: [
             {
-              type: "doc",
-              label: "Basic",
-              id: "articles/examples/k6-basic",
+              type: "category",
+              label: "K6",
+              items: [
+                {
+                  type: "doc",
+                  label: "Basic",
+                  id: "articles/examples/k6-basic",
+                },
+                {
+                  type: "doc",
+                  label: "Distributed",
+                  id: "articles/examples/k6-distributed",
+                },
+                {
+                  type: "link",
+                  label: "Testkube K6 Introduction",
+                  href: "https://testkube.io/blog/load-testing-in-kubernetes-with-k6-and-testkube",
+                },
+                {
+                  type: "link",
+                  label: "Testkube vs K6-operator",
+                  href: "https://testkube.io/learn/comparing-the-k6-operator-vs-testkube-for-load-testing",
+                },
+                {
+                  type: "link",
+                  label: "Generating Massive Load",
+                  href: "https://testkube.io/learn/a-guide-to-scalable-and-heavy-load-testing-with-k6-and-testkube",
+                },
+              ],
+            },
+            {
+              type: "category",
+              label: "JMeter",
+              items: [
+                {
+                  type: "doc",
+                  label: "Basic",
+                  id: "articles/examples/jmeter-basic",
+                },
+                {
+                  type: "doc",
+                  label: "Distributed",
+                  id: "articles/examples/jmeter-distributed",
+                },
+                {
+                  type: "doc",
+                  label: "Plugins",
+                  id: "articles/examples/jmeter-plugins",
+                },
+              ],
             },
             {
               type: "doc",
-              label: "Distributed",
-              id: "articles/examples/k6-distributed",
+              label: "Gatling",
+              id: "articles/examples/gatling-basic",
             },
             {
-              type: "link",
-              label: "Testkube K6 Introduction",
-              href: "https://testkube.io/blog/load-testing-in-kubernetes-with-k6-and-testkube",
+              type: "category",
+              label: "Locust",
+              items: [
+                {
+                  type: "doc",
+                  label: "Basic",
+                  id: "articles/examples/locust-basic",
+                },
+                {
+                  type: "doc",
+                  label: "Distributed",
+                  id: "articles/examples/locust-distributed",
+                },
+              ],
             },
             {
-              type: "link",
-              label: "Testkube vs K6-operator",
-              href: "https://testkube.io/learn/comparing-the-k6-operator-vs-testkube-for-load-testing",
-            },
-            {
-              type: "link",
-              label: "Generating Massive Load",
-              href: "https://testkube.io/learn/a-guide-to-scalable-and-heavy-load-testing-with-k6-and-testkube",
+              type: "doc",
+              label: "Artillery",
+              id: "articles/examples/artillery-basic",
             },
           ],
         },
         {
           type: "category",
-          label: "Cypress",
+          label: "End-to-End & Browser Testing",
           items: [
             {
-              type: "doc",
-              label: "Basic",
-              id: "articles/examples/cypress-basic",
+              type: "category",
+              label: "Cypress",
+              items: [
+                {
+                  type: "doc",
+                  label: "Basic",
+                  id: "articles/examples/cypress-basic",
+                },
+                {
+                  type: "doc",
+                  label: "Sharded",
+                  id: "articles/examples/cypress-sharded",
+                },
+                {
+                  type: "link",
+                  label: "Scaling Cypress Tests",
+                  href: "https://testkube.io/learn/scaling-cypress-tests-parallelise-your-end-to-end-tests-with-testkube",
+                },
+              ],
+            },
+            {
+              type: "category",
+              label: "Playwright",
+              items: [
+                {
+                  type: "doc",
+                  label: "Basic",
+                  id: "articles/examples/playwright-basic",
+                },
+                {
+                  type: "doc",
+                  label: "Sharded",
+                  id: "articles/examples/playwright-sharded",
+                },
+                {
+                  type: "doc",
+                  label: "Rerun Failed Tests",
+                  id: "articles/examples/playwright-rerun",
+                },
+              ],
+            },
+            {
+              type: "category",
+              label: "Selenium",
+              items: [
+                {
+                  type: "doc",
+                  label: "Basic",
+                  id: "articles/examples/selenium-basic",
+                },
+                {
+                  type: "doc",
+                  label: "Advanced",
+                  id: "articles/examples/selenium-advanced",
+                },
+                {
+                  type: "link",
+                  label: "Functional Testing with Selenium",
+                  href: "https://testkube.io/learn/functional-testing-with-selenium-in-testkube",
+                },
+                {
+                  type: "link",
+                  label: "Selenium Grid with Testkube",
+                  href: "https://testkube.io/learn/faster-smarter-selenium-testing-with-testkube-on-kubernetes",
+                },
+              ],
+            },
+            {
+              type: "category",
+              label: "Robot Framework",
+              items: [
+                {
+                  type: "doc",
+                  label: "Basic",
+                  id: "articles/examples/robot-framework-basic",
+                },
+                {
+                  type: "doc",
+                  label: "Parallelized",
+                  id: "articles/examples/robot-framework-parallel",
+                },
+                {
+                  type: "link",
+                  label: "Automated Acceptance Testing",
+                  href: "https://testkube.io/learn/automated-acceptance-testing-with-robot-framework-and-testkube",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "API Testing",
+          items: [
+            {
+              type: "category",
+              label: "Postman",
+              items: [
+                {
+                  type: "doc",
+                  label: "Basic",
+                  id: "articles/examples/postman-basic",
+                },
+                {
+                  type: "link",
+                  label: "API Test Automation with Postman",
+                  href: "https://testkube.io/blog/api-testing-in-kubernetes-with-postman",
+                },
+              ],
             },
             {
               type: "doc",
-              label: "Sharded",
-              id: "articles/examples/cypress-sharded",
+              label: "SoapUI",
+              id: "articles/examples/soapui-basic",
+            },
+            {
+              type: "doc",
+              label: "REST Assured",
+              id: "articles/examples/rest-assured-basic",
+            },
+            { type: "doc", label: "cURL", id: "articles/examples/curl-basic" },
+          ],
+        },
+        {
+          type: "category",
+          label: "Unit & Integration Testing",
+          items: [
+            {
+              type: "category",
+              label: "Pytest",
+              items: [
+                {
+                  type: "doc",
+                  label: "Basic",
+                  id: "articles/examples/pytest-basic",
+                },
+                {
+                  type: "link",
+                  label: "Pytest and Testkube",
+                  href: "https://testkube.io/learn/testing-kubernetes-applications-with-pytest-and-testkube-a-complete-guide",
+                },
+              ],
+            },
+            {
+              type: "doc",
+              label: "Maven",
+              id: "articles/examples/maven-basic",
+            },
+            {
+              type: "doc",
+              label: "Gradle",
+              id: "articles/examples/gradle-basic",
+            },
+            {
+              type: "doc",
+              label: "NUnit",
+              id: "articles/examples/nunit-basic",
+            },
+            {
+              type: "doc",
+              label: "TestContainers",
+              id: "articles/examples/test-containers-basic",
             },
             {
               type: "link",
-              label: "Scaling Cypress Tests",
-              href: "https://testkube.io/learn/scaling-cypress-tests-parallelise-your-end-to-end-tests-with-testkube",
+              label: "Cucumber",
+              href: "https://testkube.io/learn/simplify-bdd-testing-for-distributed-java-applications-with-testkube",
             },
           ],
         },
         {
           type: "category",
-          label: "Playwright",
+          label: "Infrastructure Testing",
           items: [
             {
               type: "doc",
-              label: "Basic",
-              id: "articles/examples/playwright-basic",
+              label: "Testkube Marketplace",
+              id: "articles/examples/marketplace",
             },
             {
               type: "doc",
-              label: "Sharded",
-              id: "articles/examples/playwright-sharded",
+              label: "Chainsaw",
+              id: "articles/examples/chainsaw-basic",
             },
-            {
-              type: "doc",
-              label: "Rerun Failed Tests",
-              id: "articles/examples/playwright-rerun",
-            },
-          ],
-        },
-        {
-          type: "category",
-          label: "Selenium",
-          items: [
-            {
-              type: "doc",
-              label: "Basic",
-              id: "articles/examples/selenium-basic",
-            },
-            {
-              type: "doc",
-              label: "Advanced",
-              id: "articles/examples/selenium-advanced",
-            },
-            {
-              type: "link",
-              label: "Functional Testing with Selenium",
-              href: "https://testkube.io/learn/functional-testing-with-selenium-in-testkube",
-            },
-            {
-              type: "link",
-              label: "Selenium Grid with Testkube",
-              href: "https://testkube.io/learn/faster-smarter-selenium-testing-with-testkube-on-kubernetes",
-            },
-          ],
-        },
-        {
-          type: "category",
-          label: "Postman",
-          items: [
-            {
-              type: "doc",
-              label: "Basic",
-              id: "articles/examples/postman-basic",
-            },
-            {
-              type: "link",
-              label: "API Test Automation with Postman",
-              href: "https://testkube.io/blog/api-testing-in-kubernetes-with-postman",
-            },
-          ],
-        },
-        {
-          type: "doc",
-          label: "SoapUI",
-          id: "articles/examples/soapui-basic",
-        },
-        {
-          type: "doc",
-          label: "Gatling",
-          id: "articles/examples/gatling-basic",
-        },
-        {
-          type: "doc",
-          label: "Maven",
-          id: "articles/examples/maven-basic",
-        },
-        {
-          type: "doc",
-          label: "Gradle",
-          id: "articles/examples/gradle-basic",
-        },
-        {
-          type: "doc",
-          label: "NUnit",
-          id: "articles/examples/nunit-basic",
-        },
-        {
-          type: "doc",
-          label: "TestContainers",
-          id: "articles/examples/test-containers-basic",
-        },
-        {
-          type: "doc",
-          label: "Chainsaw",
-          id: "articles/examples/chainsaw-basic",
-        },
-        {
-          type: "category",
-          label: "Pytest",
-          items: [
-            {
-              type: "doc",
-              label: "Basic",
-              id: "articles/examples/pytest-basic",
-            },
-            {
-              type: "link",
-              label: "Pytest and Testkube",
-              href: "https://testkube.io/learn/testing-kubernetes-applications-with-pytest-and-testkube-a-complete-guide",
-            },
-          ],
-        },
-        {
-          type: "doc",
-          label: "REST Assured",
-          id: "articles/examples/rest-assured-basic",
-        },
-        {
-          type: "link",
-          label: "Cucumber",
-          href: "https://testkube.io/learn/simplify-bdd-testing-for-distributed-java-applications-with-testkube",
-        },
-        {
-          type: "category",
-          label: "JMeter",
-          items: [
-            {
-              type: "doc",
-              label: "Basic",
-              id: "articles/examples/jmeter-basic",
-            },
-            {
-              type: "doc",
-              label: "Distributed",
-              id: "articles/examples/jmeter-distributed",
-            },
-            {
-              type: "doc",
-              label: "Plugins",
-              id: "articles/examples/jmeter-plugins",
-            },
-          ],
-        },
-        {
-          type: "category",
-          label: "Locust",
-          items: [
-            {
-              type: "doc",
-              label: "Basic",
-              id: "articles/examples/locust-basic",
-            },
-            {
-              type: "doc",
-              label: "Distributed",
-              id: "articles/examples/locust-distributed",
-            },
-          ],
-        },
-        {
-          type: "category",
-          label: "Robot Framework",
-          items: [
-            {
-              type: "doc",
-              label: "Basic",
-              id: "articles/examples/robot-framework-basic",
-            },
-            {
-              type: "doc",
-              label: "Parallelized",
-              id: "articles/examples/robot-framework-parallel",
-            },
-            {
-              type: "link",
-              label: "Automated Acceptance Testing",
-              href: "https://testkube.io/learn/automated-acceptance-testing-with-robot-framework-and-testkube",
-            },
-          ],
-        },
-        {
-          type: "doc",
-          label: "Artillery",
-          id: "articles/examples/artillery-basic",
-        },
-        {
-          type: "doc",
-          label: "cURL",
-          id: "articles/examples/curl-basic",
-        },
-        {
-          type: "category",
-          label: "Testing Infrastructure",
-          items: [
             {
               type: "doc",
               label: "Validating Kubernetes Clusters",
@@ -1000,14 +1149,19 @@ const sidebars = {
               type: "link",
               label: "Testing Hardware Components",
               href: "https://testkube.io/blog/implementing-kubernetes-native-hardware-testing-with-testkube",
-              description: "Test for hardware components and infrastructure.",
             },
           ],
         },
         {
-          type: "doc",
-          label: "Testing a Sample Application",
-          id: "articles/tutorial/example",
+          type: "category",
+          label: "Tutorials",
+          items: [
+            {
+              type: "doc",
+              label: "Testing a Sample Application",
+              id: "articles/tutorial/example",
+            },
+          ],
         },
       ],
     },
@@ -1019,105 +1173,141 @@ const sidebars = {
         id: "articles/integrations",
       },
       items: [
-        { type: "doc", label: "GitHub", id: "articles/github-actions" },
-        { type: "doc", label: "GitLab", id: "articles/gitlab" },
         {
-          type: "doc",
-          label: "Jenkins Pipelines",
-          id: "articles/jenkins",
+          type: "category",
+          label: "CI/CD Pipelines",
+          items: [
+            { type: "doc", label: "GitHub", id: "articles/github-actions" },
+            { type: "doc", label: "GitLab", id: "articles/gitlab" },
+            {
+              type: "doc",
+              label: "Jenkins Pipelines",
+              id: "articles/jenkins",
+            },
+            {
+              type: "doc",
+              label: "Jenkins UI",
+              id: "articles/jenkins-ui",
+            },
+            { type: "doc", label: "Azure DevOps", id: "articles/azure" },
+            {
+              type: "link",
+              label: "BitBucket",
+              href: "https://testkube.io/learn/unleashing-the-power-of-ci-cd-testing-with-bitbucket-and-testkube",
+              description: "Integrate Testkube with Bitbucket Pipelines",
+            },
+            { type: "doc", label: "CircleCI", id: "articles/circleci" },
+            { type: "doc", label: "Tekton", id: "articles/tekton" },
+          ],
         },
         {
-          type: "doc",
-          label: "Jenkins UI",
-          id: "articles/jenkins-ui",
-        },
-        { type: "doc", label: "Azure DevOps", id: "articles/azure" },
-        {
-          type: "link",
-          label: "BitBucket",
-          href: "https://testkube.io/learn/unleashing-the-power-of-ci-cd-testing-with-bitbucket-and-testkube",
-          description: "Integrate Testkube with Bitbucket Pipelines",
+          type: "category",
+          label: "GitOps",
+          items: [
+            { type: "doc", label: "ArgoCD", id: "articles/argocd-integration" },
+            { type: "doc", label: "Flux", id: "articles/flux-integration" },
+          ],
         },
         {
-          type: "doc",
-          label: "CircleCI",
-          id: "articles/circleci",
-        },
-        { type: "doc", label: "ArgoCD", id: "articles/argocd-integration" },
-        {
-          type: "doc",
-          label: "Argo Rollouts",
-          id: "articles/argorollouts-integration",
-        },
-        {
-          type: "doc",
-          label: "Argo Events",
-          id: "articles/argoevents-integration",
-        },
-        {
-          type: "doc",
-          label: "Argo Workflows",
-          id: "articles/argoworkflows-integration",
-        },
-        { type: "doc", label: "Flux", id: "articles/flux-integration" },
-        { type: "doc", label: "CDEvents", id: "articles/cd-events" },
-        { type: "doc", label: "Tekton", id: "articles/tekton" },
-        {
-          type: "link",
-          label: "Keptn",
-          href: "https://testkube.io/learn/leveraging-testkube-as-a-quality-gate-in-multi-stage-deployments-with-keptn",
-          description: "Leveraging Testkube as a Quality Gate in Multi-Stage Deployments with Keptn",
+          type: "category",
+          label: "Progressive Delivery",
+          items: [
+            {
+              type: "doc",
+              label: "Argo Rollouts",
+              id: "articles/argorollouts-integration",
+            },
+            {
+              type: "link",
+              label: "Keptn",
+              href: "https://testkube.io/learn/leveraging-testkube-as-a-quality-gate-in-multi-stage-deployments-with-keptn",
+              description:
+                "Leveraging Testkube as a Quality Gate in Multi-Stage Deployments with Keptn",
+            },
+          ],
         },
         {
-          type: "doc",
-          label: "Slack Integration",
-          id: "articles/slack-integration",
-        },
-        { type: "doc", label: "Prometheus", id: "articles/metrics" },
-        {
-          type: "doc",
-          label: "Allure Reports",
-          id: "articles/allure-reports",
-        },
-
-        {
-          type: "doc",
-          label: "Kubernetes Events",
-          id: "articles/k8s-events",
-        },
-        { type: "doc", label: "Webhooks", id: "articles/webhooks" },
-        {
-          type: "link",
-          label: "PagerDuty",
-          href: "https://testkube.io/learn/critical-test-based-alerting-with-pagerduty-and-testkube",
-          description: "Critical Test Based Alerting with PagerDuty and Testkube",
-        },
-        {
-          type: "link",
-          label: "Zapier",
-          href: "https://testkube.io/learn/integrating-testkube-and-zapier-for-instant-email-alerts",
-          description: "Integrating Testkube and Zapier for Instant Email Alerts",
-        },
-        { type: "doc", label: "Grafana", id: "articles/grafana" },
-        {
-          type: "doc",
-          label: "Atlassian Jira",
-          id: "articles/jira-integration",
+          type: "category",
+          label: "Event-Driven Automation",
+          items: [
+            {
+              type: "doc",
+              label: "Argo Events",
+              id: "articles/argoevents-integration",
+            },
+            {
+              type: "doc",
+              label: "Argo Workflows",
+              id: "articles/argoworkflows-integration",
+            },
+            { type: "doc", label: "CDEvents", id: "articles/cd-events" },
+            {
+              type: "doc",
+              label: "Kubernetes Events",
+              id: "articles/k8s-events",
+            },
+            { type: "doc", label: "Webhooks", id: "articles/webhooks" },
+          ],
         },
         {
-          type: "doc",
-          label: "Microsoft Teams",
-          id: "articles/teams-integration",
+          type: "category",
+          label: "Collaboration & Alerting",
+          items: [
+            { type: "doc", label: "Slack", id: "articles/slack-integration" },
+            {
+              type: "doc",
+              label: "Microsoft Teams",
+              id: "articles/teams-integration",
+            },
+            {
+              type: "doc",
+              label: "Atlassian Jira",
+              id: "articles/jira-integration",
+            },
+            {
+              type: "link",
+              label: "PagerDuty",
+              href: "https://testkube.io/learn/critical-test-based-alerting-with-pagerduty-and-testkube",
+              description:
+                "Critical Test Based Alerting with PagerDuty and Testkube",
+            },
+            {
+              type: "link",
+              label: "Zapier",
+              href: "https://testkube.io/learn/integrating-testkube-and-zapier-for-instant-email-alerts",
+              description:
+                "Integrating Testkube and Zapier for Instant Email Alerts",
+            },
+            {
+              type: "doc",
+              label: "Backstage",
+              id: "articles/backstage-integration",
+            },
+          ],
         },
         {
-          type: "doc",
-          label: "Datadog JUnit Results",
-          id: "articles/datadog-junit",
+          type: "category",
+          label: "Observability & Reporting",
+          items: [
+            { type: "doc", label: "Agent Metrics", id: "articles/metrics" },
+            {
+              type: "doc",
+              label: "Control Plane Metrics",
+              id: "articles/control-plane-metrics",
+            },
+            { type: "doc", label: "Grafana", id: "articles/grafana" },
+            { type: "doc", label: "Datadog", id: "articles/datadog-junit" },
+            {
+              type: "doc",
+              label: "Allure Reports",
+              id: "articles/allure-reports",
+            },
+          ],
         },
         {
-          type: "doc",
-          label: "SCIM",
-          id: "articles/scim",
+          type: "category",
+          label: "Identity Mgmt",
+          items: [{ type: "doc", label: "SCIM", id: "articles/scim" }],
         },
       ],
     },
@@ -1134,8 +1324,21 @@ const sidebars = {
           label: "Architecture",
           id: "articles/architecture",
         },
-        "articles/helm-components",
-        "articles/telemetry",
+        {
+          type: "doc",
+          label: "Resource Management",
+          id: "articles/testkube-resource-management",
+        },
+        {
+          type: "doc",
+          label: "Helm Components",
+          id: "articles/helm-components",
+        },
+        {
+          type: "doc",
+          label: "Telemetry",
+          id: "articles/telemetry",
+        },
         {
           type: "category",
           label: "Testkube CRDs",
@@ -1236,14 +1439,10 @@ const sidebars = {
           id: "articles/testkube-licensing-FAQ",
         },
         {
-          type: "category",
+          type: "doc",
           label: "Contributing",
-          link: {
-            type: "doc",
-            id: "articles/contributing",
-          },
-          items: ["articles/development"],
-        },
+          id: "articles/contributing"
+        }
       ],
     },
     {
@@ -1258,6 +1457,16 @@ const sidebars = {
         id: "articles/legacy-features",
       },
       items: [
+        {
+          type: "doc",
+          label: "Legacy Deprecation",
+          id: "articles/legacy-deprecation",
+        },
+        {
+          type: "doc",
+          label: "Cached Test Results",
+          id: "articles/cached-results",
+        },
         {
           type: "doc",
           label: "Creating Your First Test",
@@ -1360,9 +1569,14 @@ const sidebars = {
         { type: "doc", label: "Templates", id: "articles/templates" },
         "articles/legacy-architecture",
         {
-          type: "doc",
-          label: "Integrating with Slack Using Helm",
-          id: "articles/slack-integration-helm",
+          type: "category",
+          label: "Legacy CLI Commands",
+          items: [
+            {
+              type: "autogenerated",
+              dirName: "legacy-cli",
+            },
+          ],
         },
       ],
     },

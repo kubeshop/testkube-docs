@@ -20,10 +20,10 @@ export const DocCardList = (input) => (
       },
       {
         icon: "🏎💨",
-        label: "Kick the Tires",
+        label: "Start exploring Testkube",
         description:
-          "Get a feel for Testkube without deploying, or installation using our hosted sandbox environment",
-        href: "/articles/tutorial/quickstart/overview#looking-try-testkube-without-installation",
+          "Spin up a trial and see how test orchestration works across workflows, environments, and clusters.",
+        href: "/articles/tutorial/quickstart/overview#want-to-try-testkube-without-installing-anything",
         type: "intro",
       },
     ].map((item, i) => (
@@ -43,7 +43,7 @@ import TwoColumns from '@site/src/components/TwoColumns';
 <TwoColumns
   left={<>
 <p>
-    Testkube is a Test Orchestration and Execution Framework for Cloud-Native Applications. It provides a single
+    Testkube is a Test Orchestration Platform for Cloud-Native Applications. It provides a single
     platform for defining, running and analyzing test executions, using your existing testing tools/scripts,
     running in your existing infrastructure.
   </p>
@@ -61,12 +61,11 @@ import TwoColumns from '@site/src/components/TwoColumns';
 />
 
 - The Control Plane can be running either in the Cloud or On-Prem - [Read more](/articles/install/overview).
-- The Agents run your tests and are _always_ running in your own infrastructure.
-- The Agent is 100% Open Source and can also be run standalone without the Control Plane - [Read more](/articles/install/standalone-agent).
+- Agents are deployed in your infrastructure to execute tests, listen for Kubernetes events, sync resources, and more - [Read more](/articles/agents-overview).
+- The Agents are 100% Open Source and can also be run standalone without the Control Plane - [Read more](/articles/install/standalone-agent).
 
 :::tip
-Testkube has recently introduced the concept of [Runner Agents](/articles/agents-overview#runner-agents) - check it out to see how this can help you solve for
-advanced test orchestration and executions scenarios.
+Testkube has recently introduced the concept of [AI Agents](/articles/ai-agents) - check them out to see how AI can help with troubleshooting, analysis, and remediation of your tests.
 :::
 
 ## Learn More About Testkube

@@ -6,6 +6,11 @@ This section contains the old documentation for deprecated/legacy Testkube funct
 Legacy functionality described in this document will be EOL and removed from Testkube by the end of 2025.
 :::
 
+:::danger
+Legacy functionality **has been deprecated and removed** from Testkube as of the December 2025 release - [Read More](/articles/legacy-deprecation). 
+:::
+
+
 ## The move to Test Workflows
 
 While the initial constructs with Tests/Executors/TestSuites made it easy to get basic tests running with Testkube, they often fell
@@ -18,7 +23,7 @@ on [the Testkube blog](https://testkube.io/learn/getting-started-with-test-workf
 
 ## Replacing Tests/Executors/Suites with Test Workflows
 
-[Test Workflows](test-workflows) is Testkubes replacement for Tests/Executors/TestSuites, as it provides both a 
+[Test Workflows](test-workflows) is Testkube's replacement for Tests/Executors/TestSuites, as it provides both a 
 smooth initial onboarding experience for quickly running basic tests/suites, while allowing for customization 
 for real-life scenarios without extensive overhead. Workflows also provides advanced features like
 [parallelization](test-workflows-parallel.mdx), [sharding](test-workflows-matrix-and-sharding.mdx), 

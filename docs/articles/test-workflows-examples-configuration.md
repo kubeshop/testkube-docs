@@ -118,6 +118,23 @@ spec:
         echo "Sanitized secret: {{ shellquote(env.MY_SUPER_SECRET) }}"  # <- Using the shellquote function to sanitize output
 ```
 
+:::tip
+
+### Using Credentials defined in Testkube
+
+You can also define Credentials (Secrets or Variables) in Testkube itself at the Organization, Environment
+and individual Workflow level, and then use those in your Workflows - [Read More](/articles/credential-management).
+
+The following example shows how to use a Secret defined in Testkube:
+
+```yaml
+spec:
+  steps:
+    - shell: |
+        echo "Secret value: {{credential("MY_SUPER_SECRET")}}" 
+        echo "Sanitized secret: {{ shellquote(credential("MY_SUPER_SECRET")) }}" 
+```
+:::
 ## Combining `config` and `env`
 
 For enhanced flexibility, you can combine configuration parameters with environment parameters. This allows you to define parameters in `config` and then inject them into your container as environment variables.

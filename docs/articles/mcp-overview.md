@@ -79,7 +79,7 @@ Once you've set up the Testkube MCP Server, configure your AI tools:
 
 ## Available Tools
 
-The MCP server provides 20 tools for comprehensive Testkube management:
+The MCP server provides 30 tools for comprehensive Testkube management:
 
 ### Workflow Management
 
@@ -91,6 +91,13 @@ The MCP server provides 20 tools for comprehensive Testkube management:
 - `update_workflow` - Update existing workflow
 - `run_workflow` - Execute workflow
 
+### Workflow Template Management
+
+- `list_workflowtemplates` - List all workflow templates with optional label filtering
+- `get_workflowtemplate_definition` - Get workflow template YAML definition
+- `create_workflowtemplate` - Create new workflow template
+- `update_workflowtemplate` - Update existing workflow template
+
 ### Agent Management
 
 - `list_agents` - List available agents for workflow execution targeting - [Read More](/articles/test-workflows-running#runner-agent-targeting)
@@ -100,15 +107,27 @@ The MCP server provides 20 tools for comprehensive Testkube management:
 - `list_executions` - List workflow executions
 - `get_execution_info` - Get execution details
 - `get_workflow_execution_metrics` - Get detailed resource consumption metrics for a specific execution
+- `get_workflow_resource_history` - Analyze resource consumption patterns across multiple executions (trends, outliers, statistics)
 - `fetch_execution_logs` - Get execution logs
 - `lookup_execution_id` - Resolve execution name to ID
 - `wait_for_executions` - Wait for executions to complete
 - `abort_workflow_execution` - Cancel running execution
+- `update_execution_tags` - Update tags on an execution (replace semantics)
 
 ### Artifact Management
 
 - `list_artifacts` - List execution artifacts
 - `read_artifact` - Read artifact content
+
+### Query Tools
+
+- `query_workflows` - Query multiple workflow definitions using JSONPath expressions
+- `query_executions` - Query multiple execution records using JSONPath expressions
+
+### Schema Tools
+
+- `get_workflow_schema` - Get the YAML schema for TestWorkflow definitions
+- `get_execution_schema` - Get the YAML schema for TestWorkflowExecution data
 
 ### Utility Tools
 

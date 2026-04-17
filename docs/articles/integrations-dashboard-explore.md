@@ -1,28 +1,42 @@
 # Integrations Overview
 
-The Integrations Overview provides access to Testkube functionality for integrating with your
-existing tooling and infrastructure.
+The **Integrations Overview** provides insight into how Testkube connects with tools you already use, such as
+Kubernetes and CI/CD systems (GitHub Actions, GitLab CI, and Jenkins) along with Slack and other collaboration tools.
+Integrations allow you to automate testing and trigger Workflows based on system events. They also help you run tests 
+as part of deployments, react to infrastructure changes, and stay informed without adding manual steps.
 
-## Kubernetes Triggers 
+## Kubernetes Event Triggers 
 
-Integrate Testkube with Kubernetes for triggering Workflows based on Kubernetes Events - [Read More](/articles/integrations-triggers)
+You can integrate Testkube with Kubernetes to automatically trigger Workflows when specific Kubernetes events occur. For example, you can 
+trigger a Workflow when a new Pod is created in a namespace. For additional information, read [Kubernetes Triggers](/articles/integrations-triggers).
 
-![Kubernetes Triggers](images/trigger-integrations-overview.png)
+![Kubernetes Event Triggers](../articles/images/testkube-dashboard-integrations-kubernetes-triggers.png)
 
 ## Webhooks
 
-Integrate with external tools (Slack, Zapier, etc) based on internal events in Testkube - [Read More](/articles/integrations-webhooks)
+A webhook is an HTTP call that sends information automatically when an event occurs. Webhooks allow you to integrate Testkube with your existing internal or external tools, such as Slack and Zapier, based on internal Testkube events.
+You can send a Slack message when a test fails, for example, or trigger Zapier automation when a test run completes. For additional information, read [Webhooks](/articles/integrations-webhooks).
 
-![Webhooks Integrations](images/webhooks-integrations-overview.png)
+![Webhooks](../articles/images/testkube-dashboard-integrations-webhooks.png)
 
 ## CI/CD Tools
+ 
+Testkube integrates with CI/CD tools (such as GitHub Actions, GitLab CI, and Jenkins) to run tests automatically as part of your software delivery process. CI/CD tools automate building, 
+testing, and deploying code, helping you deliver software faster and more reliably. For example, you can automatically run integration or end-to-end tests 
+after code is merged or before deploying to production.
 
-Shows how to integrate Testkube with most popuple CI/CD tools, click on each corresponding item to learn more.
+This tab displays CI/CD tools that are commonly integrated with Testkube. Select each to learn more.
 
-![CI/CD Integrations](images/cicd-integrations-overview.png)
+![CI/CD Tools](../articles/images/testkube-dashboard-integrations-ci-cd-tools.png)
 
-## Notifications & Alerts
+## Integration Examples
 
-Shows how to integrate Testkube with your existing infrastructure processes and workflows, click on each corresponding item to learn more.
+You can view tutorials and access examples specific to tools like **PagerDuty**, **Zapier**, **Slack**, and **MS Teams**.
+You can send an alert to a Slack channel when a critical test fails, for example, or you can notify the on-call team when performance tests exceed defined thresholds.
+You can also integrate Testkube with your existing infrastructure processes and Workflows. 
 
-![Notifications Integrations](images/notifications-integrations-overview.png)
+This tab displays integration examples, and you can select each to learn more.
+
+![Integration Examples](../articles/images/testkube-dashboard-integrations-examples.png)
+
+

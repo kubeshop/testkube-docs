@@ -19,10 +19,6 @@ If you want to run a Workflow on a specific Agent instead of the default Standal
 When a Workflow has been executed on multiple Runner Agents, the Dashboard provides an expandable section for the corresponding
 executions, see [Multi-agent Executions](/articles/testkube-dashboard-workflow-details#multi-agent-executions).
 
-:::warning
-Runner Agents do **not** support execution of legacy Tests and TestSuites.
-:::
-
 ## Runner Agent Quickstart
 
 If you don't want to run your Workflows on the default Standalone Agent, you can install and run them on a specific
@@ -258,27 +254,26 @@ target:
     - name
 ```
 
-## Queuing of Workflow Executions
+### Targeting the Default (Full-Capability) Agent
 
-When requesting to run a Workflow on a specific Runner Agent, either by name or label(s), and no
-matching Runner Agent is available, Testkube will queue the execution of the Workflow indefinitely; once a corresponding
-Runner Agent is available, the queued Workflow will be executed accordingly (barring Floating license restrictions - [Read More](/articles/agents-overview#licensing-for-runner-agents)).
+Environments that were migrated from pre-2.7 or created with a single default agent have one agent with all capabilities (Runner, Listener, GitOps, Webhook), which provides core functionality for Triggers, Webhooks, Prometheus metrics, etc. - [Read More](/articles/agents-overview). That agent is shown in the list of Agents with the label `runnertype: superagent`.
 
-You can abort queued executions using the corresponding [CLI Command](/cli/testkube-abort-testworkflowexecution) or from the Dashboard.
-
-## Targeting the Standalone Agent 
-
-Each Testkube Environment requires a **[Standalone Agent](/articles/install/standalone-agent)** which provides core functionality for Triggers, Webhooks, Prometheus metrics, etc.
-
-Standalone Agents are installed when initially creating an Environment and shown on the bottom of the list of Agents with the label `runnertype: superagent`.
-
-Standalone Agents work as a Global Runner Agent (described above) and can also be explicitly targeted in several ways:
+The default (full-capability) agent works as a Global Runner Agent (described above) and can also be explicitly targeted in several ways:
 
 - By Label: `testkube run tw my-k6-test --target runnertype=superagent`
 - By Name: `testkube run tw my-k6-test --target name=tkcenv_xxxxxxxxxx`
 - By ID: `testkube run tw my-k6-test --target id=tkcroot_xxxxxxxxxx`
 
 The ID is shown in the list of Agents (see below), the Name is the same `xxxx` prefixed with tkcenv instead.
+
+
+### Queuing of Workflow Executions
+
+When requesting to run a Workflow on a specific Runner Agent, either by name or label(s), and no
+matching Runner Agent is available, Testkube will queue the execution of the Workflow indefinitely; once a corresponding
+Runner Agent is available, the queued Workflow will be executed accordingly (barring Floating license restrictions - [Read More](/articles/agents-overview#licensing-for-runner-agents)).
+
+You can abort queued executions using the corresponding [CLI Command](/cli/testkube-cancel-testworkflowexecution) or from the Dashboard.
 
 ## Silent Executions
 
@@ -315,3 +310,22 @@ To execute a Workflow silently using the CLI, add the `--silent` flag:
 ```sh
 testkube run testworkflow my-k6-test --silent
 ```
+
+### Silent Workflows
+
+Introduced with Testkube 2.6.0, you can also set a Workflow to always run executions silently instead of having to flag each individual execution. 
+
+Simply add the following to your Workflow definition:
+
+```yaml
+...
+spec:
+  execution:
+    silent: true
+...
+```
+
+:::tip
+Use this when you want to silence/mute a Workflow temporarily, for example if you know it will fail or is flaky for some reason that 
+can't be handled at the moment.
+:::

@@ -1,4 +1,26 @@
-# CLI Authentication
+# Managing CLI Context
+
+The Testkube CLI can be configured to connect to either a Standalone OSS Testkube Agent or 
+a commercial Testkube Control Plane hosted either on-premise or in the cloud.
+
+:::note
+Check out the [CLI Configuration File](/articles/cli-config-reference) documentation for more details on the CLI configuration.
+:::
+
+## Connecting to a Standalone Testkube Agent
+
+The easiest way to connect the CLI to a standalone Testkube Agent is to make sure your current kubectl context is pointing 
+to the cluster where the Testkube Agent is deployed and then running
+
+```sh 
+testkube set context --kubeconfig
+```
+
+:::tip
+If the Agent is not in the default testkube namespace, you can use the `--namespace` flag to specify the namespace.
+:::
+
+## Connecting to a Testkube Control Plane
 
 If you're using a commercial Testkube instance, you can use the `testkube login` command to 
 authenticate and connect the CLI with your Testkube Control Plane, which ensures that CLI commands 
@@ -10,6 +32,18 @@ When the CLI is installed, authenticate with your Testkube Control Plane:
 testkube login
 ```
 
+If it's a self-hosted Testkube instance, you must specify the API URL to make sure you’re hitting the right instance
+(not the public cloud):
+
+```bash
+testkube login https://api.mycompany.com
+```
+
+
+:::note
+If your self-hosted Testkube instance uses custom subdomains, check the override parameters using `testkube login --help` to connect to your instance correctly.
+:::
+
 This will prompt to open a browser window to sign in and authenticate with the Testkube Dashboard. Once authenticated, 
 the CLI will prompt for the Testkube Organisation and Environment to use with CLI commands. 
 
@@ -17,20 +51,18 @@ the CLI will prompt for the Testkube Organisation and Environment to use with CL
 
 ## SSO Authentication
 
-If you're using SSO or a self-hosted Testkube instance, you can use the `--email` flag with the login command to trigger the SSO login flow:
+If you're using SSO, you can use the `--email` flag with the login command to trigger the SSO login flow:
 
 ```bash
 testkube login --email
 ```
 
-If needed, you can also specify uri-override arguments to make sure you’re hitting the right instance
+If it's a self-hosted Testkube instance, you must specify the API URL to make sure you’re hitting the right instance
 (not the public cloud):
 
 ```bash
-testkube login \
---email=email@mycompany.com \
---api-uri-override=https://api.mycompany.com/ \
---auth-uri-override=https://api.mycompany.com/idp
+testkube login https://api.mycompany.com \
+--email=email@mycompany.com
 ```
 
 ## API Token Authentication
@@ -42,10 +74,3 @@ use this token to authenticate and gain access to corresponding Testkube resourc
 When the token is created, you're ready to change the Testkube CLI context using the
 [`testkube set context`](/cli/testkube-set-context) command.
 
-## Connecting Using `kubeconfig` Context
-
-If you want to connect to your Testkube instance directly (like you would do with `kubectl`), set the CLI Context to be `kubeconfig`-based:
-
-```sh 
-testkube set context --kubeconfig
-```

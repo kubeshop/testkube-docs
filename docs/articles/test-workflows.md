@@ -413,7 +413,7 @@ spec:
       name2: value2
 ```
 
-For more details, see our guide on [Filtering Test Workflow Executions Using Tags](/articles/filtering-test-workflow-executions-using-tags).
+For more details, see our guide on [Execution Tags](/articles/execution-tags).
 
 ## Runner Agent Target
 

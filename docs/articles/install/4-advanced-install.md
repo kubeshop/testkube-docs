@@ -7,6 +7,131 @@ See [Components](/articles/helm-components) for a list of all included component
 Helm Charts with a list of their available properties.
 :::
 
+<a id="credentials-encryption"></a>
+
+## Master Password for Encryption
+
+Testkube requires a **master password** to enable encrypted [Credential](/articles/credential-management) storage
+and to sign the tokens that allow runners to securely retrieve credentials during workflow execution.
+
+:::warning Important
+Without a master password configured:
+- Only plaintext **Variable** credentials can be created — encrypted **Secret** credentials will be rejected.
+- Workflow executions that use credentials will fail because the runner cannot obtain a valid execution token.
+
+The master password cannot be recovered. If it is lost, all previously encrypted secrets will become unreadable
+and will need to be recreated. Store it securely.
+:::
+
+### What the master password protects
+
+In on-premise setups, the master password became a hard requirement for credentials and runner execution flows
+starting with v1.13.0, when execution-token based runner authentication was introduced.
+
+It is used in multiple control-plane paths, not just secret storage:
+
+* Deriving encryption keys for **Secret** credential values
+* Creating and validating **Agent secret keys** for Runner and GitOps agent authentication
+* Signing execution tokens that runners use during workflow execution
+
+All of these use the same runtime secret value:
+
+* Environment variable: `CREDENTIALS_MASTER_PASSWORD`
+* Helm values:
+  * `global.credentials.masterPassword.secretKeyRef` (recommended)
+  * `global.credentials.masterPassword.value` (not recommended for production)
+
+If you see the following log message:
+
+```text
+cannot fetch agent ... error="missing master password for secret keys"
+```
+
+the control plane attempted to create or read agent secret-key crypto state without the password being set.
+
+### Configuring the Master Password
+
+The recommended approach is to store the master password in a Kubernetes Secret and reference it in your Helm values.
+
+First, create the secret (the password must be at least 32 characters):
+
+```bash
+kubectl create secret generic testkube-master-password \
+  --from-literal=password=$(openssl rand -base64 48) \
+  -n testkube
+```
+
+Then reference it in your `values.yaml`:
+
+```yaml
+global:
+  credentials:
+    masterPassword:
+      secretKeyRef:
+        name: testkube-master-password
+        key: password
+```
+
+Alternatively, you can set the password directly in your Helm values using `global.credentials.masterPassword.value`,
+but this is not recommended for production environments.
+
+```yaml
+global:
+  credentials:
+    masterPassword:
+      value: "<your-strong-password>"
+```
+
+### Storage and recovery considerations
+
+`masterPassword` is not stored in MongoDB as a plain field that can be inspected. It is a runtime secret used to
+derive crypto material, and without it existing encrypted records cannot be decrypted.
+
+For on-prem, this is a critical operational dependency:
+
+* Never rotate it casually
+* If it is lost, encrypted secrets must be recreated and agent secrets reissued
+
+`POST /organizations/<organizationId>/agents/<agentIdOrName>/regenerate` regenerates an agent secret key for
+affected agents.
+
+## Disabling Credentials
+
+You can turn off the built-in credentials feature entirely, or disable just the encrypted (Secret) backend
+if you manage secrets through an external tool such as HashiCorp Vault.
+
+### Disable All Credentials
+
+Turns off all credential operations. The Dashboard will not allow creating or editing credentials, and workflows
+will not be able to resolve them. All credential endpoints return `403 Forbidden`.
+
+```yaml
+testkube-cloud-api:
+  credentials:
+    enabled: false
+```
+
+Environment variable: `CREDENTIALS_ENABLED=false`
+
+:::note
+The master password is still required at startup even when credentials are disabled — it is used to sign
+execution tokens that runners need to communicate with the control plane.
+:::
+
+### Disable Encrypted Credentials Only
+
+Keeps plaintext **Variable** credentials and **Vault** references working, but blocks encrypted **Secret** credentials.
+
+```yaml
+testkube-cloud-api:
+  credentials:
+    backends:
+      encrypted:
+        enabled: false
+```
+
+Environment variable: `CREDENTIALS_BACKEND_ENCRYPTED_ENABLED=false`
+
 ## Artifact storage & cleanup
 
 Testkube uses MinIO or any S3-compatible storage to store test artifacts by default.
@@ -254,13 +379,10 @@ It is possible to deploy multiple Testkube Agent instances into the same Kuberne
 testkube-api:
   multinamespace:
      enabled: true
-
-testkube-operator:
-  enabled: false
 ```
 
-By default, Testkube monitors events across the entire Kubernetes cluster to trigger the execution of a Test Workflow with the [Kubernetes Event Triggers](/articles/test-triggers)
-functionality. You might want to limit the namespaces that Testkube observes due to security restrictions, in which case you can use the `multinamespace` configuration:
+By default, a [Listener Agent](/articles/agents-overview#listener-agents) monitors events across the entire Kubernetes cluster to trigger the execution of a Test Workflow with the [Kubernetes Event Triggers](/articles/test-triggers)
+functionality. You might want to limit the namespaces that the Listener Agent observes due to security restrictions, in which case you can use the `multinamespace` configuration:
 
 ```yaml {3-7}
 testkube-agent:
@@ -291,11 +413,11 @@ testkube-agent:
 
 ### Namespaces for Testkube Custom Resources
 
-Testkube enables GitOps practices by storing configuration within custom resources, such as the TestWorkflow CRD. By default, Testkube will only watch for custom Testkube resources within the namespace where it is installed. It is currently unsupported to change this behaviour.
+As of Testkube v2.7, Testkube Resources are stored in the Control Plane - [Read More](/articles/testkube-resource-management). If you are using a [GitOps Agent](/articles/agents-overview#gitops-agents) to sync Testkube CRDs from your cluster into the Control Plane, the agent will watch for custom Testkube resources within the namespace where it is installed. It is currently unsupported to change this behaviour.
 
 ## Bring Your Own Infra
 
-Testkube supports integrating with existing infrastructure components such as MongoDB, NATS, Dex, etc. For production environments, it's recommended to use your own infra or to harden the sub-charts.
+Testkube supports integrating with existing infrastructure components such as MongoDB, PostgreSQL, NATS, Dex, etc. For production environments, it's recommended to use your own infra or to harden the sub-charts.
 
 ### MongoDB
 
@@ -325,6 +447,64 @@ mongodb:
 testkube-api:
   mongodb:
     dsn: <mongodb dsn (mongodb://...)>
+```
+
+#### MongoDB upgrade from 8.0.15 to 8.2.5
+Starting with chart version `2.329.0`, MongoDB is upgraded to `8.2.3` and in the later versions to `8.2.5`.  This is a **breaking change** for installations that are not already running MongoDB `8.0.x`, because MongoDB requires the upgrade path to go through `8.0` before moving to `8.2.x`.
+
+To upgrade safely, you must first ensure they you on at least chart version `2.326.3`, which includes MongoDB `8.0.15`. Only after that should you upgrade to the latest chart version.
+
+**Required upgrade path**
+
+1. Upgrade to chart version `2.326.3`: this moves MongoDB to `8.0.15`
+
+2. Upgrade from `2.326.3` to the latest chart version.
+
+3. Enable the MongoDB FCV jobs in your chart values so the compatibility version is updated during the upgrade:
+
+```yaml
+mongodb:
+  preUpgradeFCVJob:
+    enabled: true
+```
+**How it works**
+
+When the FCV jobs are enabled:
+
+- the pre-upgrade job connects to the current MongoDB instance and checks the current compatibility version; if needed, it updates it to the configured pre-upgrade target – `8.0` before the image upgrade starts
+- Helm upgrades the MongoDB image to `8.2.5`
+- the post-upgrade job waits for the upgraded MongoDB instance to become ready and then updates the MongoDB Feature Compatibility Version to `8.2`
+
+:::warning Important
+If your installation is still on MongoDB `7.x`, do not upgrade directly to a chart version that includes MongoDB `8.2.5`. MongoDB does not support a direct 7.x -> 8.2.x upgrade in a single step. You must first upgrade to chart version `2.326.3`, and only then continue to the latest version.
+:::
+
+The FCV jobs are configurable and can also be used for future supported MongoDB upgrades by changing the compatibility values in the chart.
+
+### Using PostgreSQL as a database
+You can run the Testkube with PostgreSQL instead of MongoDB. This is currently an experimental feature, and deprecated functionalities are not supported. To enable PostgreSQL, update the values.yaml file in your Helm chart: enable the PostgreSQL settings and disable the MongoDB options.
+
+```yaml
+mongodb:
+  enabled: false
+postgresql:
+  enabled: true
+
+testkube-api:
+  api:
+    mongodb:
+      enabled: false
+    postgresql:
+      enabled: true
+      dsn: <postgresql dsn (postgres://...)>
+
+testkube-worker-service:
+  api:
+    mongo:
+      enabled: false
+    postgres:
+      enabled: true
+      dsn: <postgresql dsn (postgres://...)>
 ```
 
 ### NATS

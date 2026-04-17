@@ -26,7 +26,7 @@ dex:
 Replace `<user email>`, `<bcrypt hash of user password>`, and `<username>` with
 the actual values for your user(s).
 
-The hash for your password can be optained as follows:
+The hash for your password can be obtained as follows:
 
 ```
 echo password | htpasswd -BinC 10 admin | cut -d: -f2

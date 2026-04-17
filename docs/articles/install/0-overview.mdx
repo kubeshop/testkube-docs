@@ -6,13 +6,13 @@
 
     Testkube contains two main components:
 
-    1. The **Testkube Control Plane**, which includes the [Dashboard](/articles/testkube-dashboard-explore), Storage for Results/Logs/Artifacts, User/Role mgmt, Insights, 3rd party integrations, etc.
+    1. The **Testkube Control Plane**, which includes the [Dashboard](/articles/testkube-dashboard-explore), Storage for Resources/Results/Logs/Artifacts, Scheduling, User/Role mgmt, Insights, 3rd party integrations, etc.
 
-    2. The **Testkube Agent**, which executes your tests, collects test execution logs/results and listens for Kubernetes Events.
+    2. One or more **Testkube Agents** with specific [capabilities](/articles/agents-overview): executing Test Workflows (Runner), listening for Kubernetes Events (Listener), syncing CRDs via GitOps (GitOps), and emitting Webhooks/CDEvents (Webhook).
 
-       The Agent is **Open-Source** and can be deployed both Standalone and connected to the Control Plane.
+       The Agent is **Open-Source** and can be deployed both Standalone and connected to the Control Plane - [Read More](/articles/open-source).
 
-       **The agent is _always_ deployed by you in your own infrastructure.**
+       **Agents are _always_ deployed by you in your own infrastructure.**
   </div>
   <div style={{ flex: 1 }}>
     <div style={{ textAlign: 'center' }}>
@@ -40,7 +40,7 @@ An architectural overview of Testkube and its components is available in the [Ar
 ## On-Prem Control Plane
 
 Testkube with the On-Prem Control Plane runs entirely in your infrastructure and can also run in air-gapped environments.
-The default installation deploys both the Control Plane and a single Testkube Agent within the same namespace.
+The default installation deploys the Control Plane. Install Testkube Runners separately if you want to execute workflows in the cluster.
 
 You can install a preconfigured version of Testkube On-Prem [with the CLI][install-cli] for an out-of-the-box experience
 or install [with Helm][install-helm] for more configurability in production scenarios.
@@ -50,7 +50,33 @@ your license and answers to any questions you have.
 
 A high-level deployment architecture for Testkube On-Prem is shown below.
 
-![Deployment with single agent](../../img/architecture-default.jpeg)
+```mermaid
+flowchart TB
+    subgraph Your Kubernetes Cluster
+        subgraph Control Plane
+            Dashboard["Dashboard"]
+            API["Control Plane API"]
+            Worker["Worker Service"]
+            Dex["Dex"]
+            DB[("MongoDB")]
+            S3[("MinIO")]
+            NATS["NATS"]
+        end
+        subgraph Runner Agent(s) - installed separately
+            AgentAPI["Agent API"]
+            WF["Workflow Jobs"]
+        end
+    end
+
+    Dashboard --> API
+    API --> DB
+    API --> S3
+    API --> NATS
+    API --> Dex
+    Worker --> NATS
+    API -- "gRPC" --> AgentAPI
+    AgentAPI --> WF
+```
 
 :::tip
 Check out [Helm Components](/articles/helm-components) to see all the actual components used by Testkube.
@@ -58,8 +84,7 @@ Check out [Helm Components](/articles/helm-components) to see all the actual com
 
 ## Cloud Control Plane
 
-When using the Testkube Cloud Control Plane (available at https://app.testkube.io), the Control Plane is managed by the Testkube team, you only have to install the
-Testkube Agent in your infrastructure wherever you want to run your tests.
+When using the Testkube Cloud Control Plane (available at https://app.testkube.io), the Control Plane is managed by the Testkube team. You can create Environments and manage Resources (Workflows, Triggers, etc.) directly from the Dashboard. You then deploy [Testkube Agents](/articles/agents-overview) in your infrastructure when you want to execute Workflows, listen for events, etc.
 
 A trial account will be required for evaluating the Cloud Control Plane - **[schedule time with our Solutions Engineering team](https://testkube.io/demo)** to get 
 your account and answers to any questions you have.
@@ -69,7 +94,24 @@ deploy the corresponding Testkube Agent in your infrastructure - [Read More](/ar
 
 A high-level deployment architecture for the Testkube Cloud Control Plane is shown below.
 
-![Deployment with managed control plane](../../img/architecture-managed.jpeg)
+```mermaid
+flowchart LR
+    subgraph Hosted by Testkube
+        CP["Control Plane - Dashboard, API, Storage"]
+    end
+
+    subgraph Your Infrastructure
+        subgraph Cluster 1
+            A1["Agent - Runner, Listener"]
+        end
+        subgraph Cluster N
+            AN["Agent - Runner, GitOps, Webhook"]
+        end
+    end
+
+    CP -- "gRPC" --> A1
+    CP -- "gRPC" --> AN
+```
 
 :::info
 Even when using the Testkube Cloud Control Plane, your actual tests are never run or stored on our servers, only test
@@ -83,7 +125,28 @@ Control Plane. All management and test execution tasks are done through the [Tes
 
 - Learn more about how to [deploy the Standalone Agent][deploy-standalone].
 
-![Deployment with standalone agent](../../img/architecture-standalone.jpeg)
+```mermaid
+flowchart TB
+    CLI["Testkube CLI"]
+
+    subgraph Your Kubernetes Cluster
+        subgraph Testkube Namespace
+            AgentAPI["Agent API"]
+            DB[("MongoDB")]
+            S3[("MinIO")]
+            NATS["NATS"]
+            CRDs["Testkube CRDs"]
+            WF["Workflow Jobs"]
+        end
+    end
+
+    CLI --> AgentAPI
+    AgentAPI --> DB
+    AgentAPI --> S3
+    AgentAPI --> NATS
+    AgentAPI --> CRDs
+    AgentAPI --> WF
+```
 
 [cloud]: https://app.testkube.io/
 [install-cli]: /articles/tutorial/quickstart/individual-evaluation

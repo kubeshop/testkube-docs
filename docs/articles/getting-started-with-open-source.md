@@ -51,7 +51,9 @@ kubectl apply -f testworkflow.yaml
 ```
 
 :::tip
-Testkube uses Kubernetes CRDs to define its core resources - [Read More](/articles/crds).
+In standalone mode, Testkube uses Kubernetes CRDs to store its resources - [Read More](/articles/crds). 
+In connected mode (v2.7+), resources are stored in the Control Plane and CRDs are only used 
+with a [GitOps Agent](/articles/agents-overview#gitops-agents).
 :::
 
 

@@ -12,6 +12,36 @@ work and speeds up the testing and deployment process, giving faster feedback an
 Testkube can be integrated into a Flux-managed CI/CD pipeline, with Flux managing continuous application delivery and Testkube ensuring thorough
 testing at all stages. Here is how to integrate Flux with Testkube for automated GitOps testing.
 
+### Flux Integration
+
+Flux users can leverage Kustomizations to sync Test Workflows alongside application resources:
+
+```mermaid
+flowchart LR
+    subgraph git["Git Repository"]
+        app["apps/"]
+        tests["tests/"]
+    end
+    
+    subgraph flux["Flux"]
+        ks1["App Kustomization"]
+        ks2["Tests Kustomization"]
+    end
+    
+    subgraph cluster["Cluster"]
+        deploy["Deployments"]
+        tw["TestWorkflows"]
+        trigger["TestTriggers"]
+    end
+    
+    app --> ks1 --> deploy
+    tests --> ks2 --> tw
+    tests --> ks2 --> trigger
+    deploy -.->|"events"| trigger
+```
+
+For detailed setup instructions, see [GitOps Testing with Flux](/articles/flux-integration).
+
 ### Prerequisites
 
 - Kubernetes cluster with [Testkube Installed](/articles/install/overview)

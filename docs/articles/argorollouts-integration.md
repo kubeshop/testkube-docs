@@ -154,7 +154,7 @@ spec:
       etc...
 ```
 
-In this case the Analysis is not providing a specific `worfklow-name` argument for the `testkube-experiment-analysis` AnalysisTemplate, 
+In this case the Analysis is not providing a specific `workflow-name` argument for the `testkube-experiment-analysis` AnalysisTemplate, 
 so the default Test Workflow `basic-k6-workflow` will be run to validate the BlueGreen deployment.
 
 

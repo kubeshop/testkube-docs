@@ -6,7 +6,491 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Monthly releases** add new functionality and overall improvements.
 - **Patch releases** focus on critical bugs and security issues.
 - **Doc updates** focus on major changes to the documentation
+  ::: 
+
+## Patch Release v2.8.3 (2026-04-07)
+
+Control Plane is available in Helm chart `v2.331.3` and the Agent is available in Helm chart `v2.8.3`.
+
+### Control Plane v2.331.3
+
+#### Improvement & Fixes
+
+- Licensing Limits logic: fix how is counting floating agents across environment.
+- UX in Create Trigger: Remove autocomplete from create new trigger form.
+- AI Assistant PostgresDB with SSL: Improved SSL configuration for integrating with PostgresDB instance.
+
+### Agent v2.8.3
+
+#### Improvement & Fixes
+
+- Resilient git clone with basic auth: configure git credential store to survive HTTP redirects during clone.
+
+## Patch Release v2.8.2 (2026-03-30)
+
+Control Plane is available in Helm chart `v2.331.2` and the Agent is available in Helm chart `v2.8.2`.
+
+### Control Plane v2.331.2
+
+#### Improvements and fixes
+
+- New! Testkube on-prem installations no longer require `testkube-agent`. New environments start with the Control Plane owning Testkube Resource management by default.
+- `testkube init demo` no longer installs the agent bundle.
+- SCIM Server lock contention: write lock contention now returns 409 instead of 429. This is the correct status per RFC 7644 Table 9 for POST/PUT/PATCH/DELETE conflicts. The library passes it through, and IdPs treat it as retriable.
+- Follow long Test Workflow executions: include a keepalived signal to avoid timeouts while following long Test Workflow executions from CLI and integration plaforms.
+- SSO Authentication: fix SSO login failure caused by sending static "sso" as connector_id.
+
+### Agent v2.8.2
+
+#### Improvements and fixes
+
+- Installation OSS Agent: remove operator and param as it's already deprecated, replacing by Testkube CRDs only.
+- `testkube-agent` is deprecated in the `testkube-enterprise` chart.
+- Testkube Agent Global Template: manage if it's inline and the name of the Global Template from Testkube Agent helm chart properties.
+- Testkube Agent Name: allow override agent name from Testkube Agent helm chart property `runner.name`.
+- Follow long Test Workflow executions: improve the behavior when the underlying execution is healthy but the live log stream is interrupted by the network path between the CLI runner and the Control Plane.
+
+## Patch Release v2.8.1 (2026-03-30)
+
+Control Plane is available in Helm chart `v2.331.1` and the Agent is available in Helm chart `v2.8.1`.
+
+### Control Plane v2.331.1
+
+#### Improvements and fixes
+
+- Added MongoDB jobs to upgrade from version `8.0.15` to `8.2.5`. [Read more](/articles/install/advanced-install#mongodb-upgrade-from-8015-to-825)
+- SuperAgents can no longer be removed before migration.
+
+### Agent v2.8.1
+
+#### Improvements and fixes
+
+- Added MongoDB jobs to upgrade from version `8.0.13` to `8.2.5`. [Read more](/articles/install/standalone-agent#mongodb-upgrade-from-8013-to-825)
+
+## Monthly Release v2.8.0 (2026-03-26)
+
+This release is available in Helm chart v2.331.0. Control Plane and Agent versions are now unified at **v2.8.0**. ([Check out Agent release notes](https://github.com/kubeshop/testkube/releases/tag/2.8.0)).
+
+### What's new!
+
+#### Login via Google
+
+You can now sign in to our SaaS using your Google account. This adds another convenient login option alongside our existing authentication providers.
+
+### Workflows Updates
+
+#### Vault Integration
+
+You can now use HashiCorp Vault (KV v2) as a backend in Credentials API. Workflow secrets are read from Vault at execution time instead of being stored in Testkube's database. Useful for teams that already manage secrets in Vault and do not want to duplicate them.
+As of now, this is available only for on-prem installations.
+
+Supports Kubernetes auth, static token auth, and Vault Enterprise namespaces.
+
+Read more: [Credentials — Vault Backend Setup](/articles/credential-management#vault-backend-setup)
+
+#### Resource Group Credentials
+
+Credentials can now be scoped to Resource Groups, sitting between Environment and Workflow in the precedence hierarchy.
+
+Read more: [Credentials](/articles/credential-management)
+
+#### Workflow Marketplace
+
+The Dashboard now includes a workflow catalog where you can browse pre-built TestWorkflows, configure parameters, preview the generated YAML, and create & run the workflow.
+
+Read more: [Workflow Marketplace](/articles/examples/marketplace)
+
+#### Share Data Between Steps
+
+Steps can now pass values and files to each other — write outputs or drop files in one step, read them in any later step.
+
+Read more: [Sharing Data Between Steps](/articles/test-workflows-step-sharing)
+
+#### Fail-Fast for Parallel Steps
+
+Parallel steps now support a `failFast` option. When one worker fails, the remaining workers are aborted immediately instead of continuing to run.
+
+Read more: [Parallel Steps](/articles/test-workflows-parallel)
+
+#### Backstage Integration
+
+A new Testkube plugin for Backstage is available. It provides a read-only view of environments and recent executions in your Backstage portal, with links back to the Testkube Dashboard.
+
+Read more: [Backstage Integration](/articles/backstage-integration)
+
+#### Queued Execution Timeouts
+
+Executions waiting in the queue can now be automatically aborted after a configurable timeout. Configurable at the installation level using environment variables.
+
+Read more: [Testworkflow Timeouts](/articles/test-workflows-timeouts)
+
+#### Multiple GitHub App Installations
+
+Testkube now supports multiple GitHub App installations. If your organization uses multiple GitHub organizations, all valid installations work at the same time — invalid ones are skipped.
+
+Read more: [GitHub Apps with Testkube](/articles/github-actions#using-github-apps-with-testkube)
+
+#### Agent Key Rotation
+
+The CLI now supports rotating agent secret keys. This is useful if you need to rotate the secret key for an agent.
+
+Read more: [Agent Key Rotation](/articles/agents-overview#agent-key-rotation)
+
+### AI Updates
+
+#### Chat Overlay
+
+A floating, resizable chat widget is now accessible from any page in the Testkube dashboard. Start a new AI conversation or switch between recent chats without leaving your current workflow. The widget persists its position and size across sessions.
+
+Read more: [AI Agent Chats](/articles/using-ai-agents)
+
+#### Chat Sidebar
+
+A persistent side panel lets you work with AI assistance alongside your regular dashboard workflow. The sidebar supports multiple simultaneous chat tabs, each with independent conversation state. Panel width is resizable and remembered across sessions.
+
+Read more: [AI Agent Chats](/articles/using-ai-agents)
+
+#### AI Agent Triggers
+
+You can now configure AI Agent triggers that automatically invoke an AI agent in response to test events. For example, set up a trigger that runs a failure-analysis agent whenever a Cypress test fails — with configurable trigger events, label selectors, trigger modes, and prompt templates.
+
+Read more: [AI Agent Triggers](/articles/ai-triggers)
+
+#### MCP Registry Browser
+
+Browse and install MCP servers directly from the dashboard using the new MCP Registry Browser. Search available servers, view descriptions and versions, and install them with a single click to extend your AI agents' capabilities.
+
+Read more: [Connected MCP Servers](/articles/mcp-servers-for-ai-agents)
+
+#### Custom LLM Models
+
+Environment administrators can now configure custom LLM providers and models for AI agents. Add your own OpenAI-compatible provider with an API key credential, register specific models, and select them in the chat model picker alongside the platform default.
+
+Read more: [Configuring AI Models](/articles/ai-models)
+
+#### Notifications for Pending Tool Approvals
+
+A new notification center alerts you when AI agent sessions are waiting for tool approval. Review and approve pending actions directly from the notification panel without having to navigate to each chat session individually.
+
+Read more: [AI Agent Chats - MCP Tool Approval](/articles/using-ai-agents#mcp-tool-approval)
+
+#### Default Installed Agents
+
+New Environments now come with 4 default agents tuned for Troubleshooting, Analysis, Optimization and General Assistance.
+
+Read more: [Defining AI Agents](/articles/ai-agents#default-ai-agents)
+
+### Improvements and fixes
+
+- JUnit report attachments, including screenshots and URLs, are now rendered inline in the Report tab. [Read more](/articles/test-workflows-reports#2-reports-tab)
+- Execution tags can now be edited after completion — through the Dashboard, CLI, or MCP server. [Read more](/articles/execution-tags)
+
+## Patch Release v2.7.6 (2026-03-23)
+
+This patch release focuses on runner registration and data parsing stability.
+
+Control Plane is available in Helm chart v2.330.6.
+
+### Fixes
+
+- Fix a panic when using PostgreSQL when listing test workflows without executions.
+- Remove the runner registration rate limiter to avoid unnecessary registration failures.
+
+## Patch Release v2.7.5 (2026-03-20)
+
+This patch release focuses on PostgreSQL database migration reliability.
+
+Control Plane is available in Helm chart v2.330.5.
+
+### Fixes
+
+- Allow out-of-order PostgreSQL migrations so release upgrades are more resilient.
+
+## Patch Release v2.7.4 (2026-03-20)
+
+This patch release focuses on control-plane stability.
+
+### Fixes
+
+- Control Plane now emits resource lifecycle events consistently when resources are created, updated, or deleted through the Control Plane.
+- Control Plane now uses MongoDB v2 client.
+- `ListExecutions` MCP handler now handles empty `WorkflowName` and date filters correctly.
+- Prevent a Postgres read-write race that could affect distributed locking behavior.
+- Fixed Postgres empty TestWorkflows catalog.
+- `queue-testworkflow` and `start-testworkflow` events now correctly trigger webhooks.
+
+## Patch Release v2.7.3 (2026-03-16)
+
+This patch release introduces fixes for Testkube CLI and Control Plane PostgreSQL BD support.
+
+Control Plane is available in Helm chart v2.330.3.
+
+### Fixes
+
+- Include missing PostgreSQL DB table called `leases`.
+- Returning a list when requesting server to run multiple Test Workflows. As instance, using Testkube CLI to start Test Workflows by label(s) when more than one match with same label(s).
+
+## Patch Release v2.7.1 (2026-03-10)
+
+This patch release improves webhook reliability, Agent capability visibility, and runner installation behavior.
+
+Update both the Control Plane and the Agent to get the full set of fixes in this release. This release is available in Helm chart v2.330.1.
+
+### Fixes
+
+- `queue-testworkflow` and `start-testworkflow` events now correctly trigger webhooks.
+- Agent capabilities are now synced to the Control Plane based on the Agent configuration, so the UI reflects how Agents are actually configured.
+- `runner` capability is still not changed through capability sync. If you need to change it, recreate the Agent.
+
+## Monthly Release v2.7.0 (2026-03-04)
+
+This release is available in Helm chart v2.330.0. Control Plane and Agent continue with unified versioning in `2.7.x`.
+
+### What's new!
+
+#### Control Plane owns Testkube Resource management
+
+Starting in `v2.7`, Testkube Resource ownership moves to the Control Plane for commercial deployments.
+For most users, this means workflow and schedule management is now centered in Control Plane with no workflow changes required.
+Environment health no longer depends on continuous SuperAgent connectivity, and environments no longer automatically enter read-only mode when that connection is unavailable.
+
+If you're upgrading from a Testkube previous version, your existing SuperAgent(s) will automatically migrate your Testkube Environment(s) with the new source-of-truth model.
+
+Read more: [Testkube Resource Management](/articles/testkube-resource-management)
+
+#### Workflow sync behavior in GitOps Deployments
+
+If your team manages Testkube Resources as CRDs, enable and validate newly introduced **GitOps Agent** so Git-managed CRD updates continue to reconcile as expected.
+
+Read more about [GitOps with Testkube](/articles/gitops-overview) and [Testkube Agents](/articles/agents-overview).
+
+:::warning
+### Breaking changes
+
+#### API endpoints
+
+The legacy execution groups endpoint was removed in `v2.7.0`:
+`GET /organizations/{orgId}/environments/{environmentId}/test-workflows/{workflowId}/execution-groups`
+
+-> Use the executions list endpoint instead:
+`GET /organizations/{orgId}/environments/{environmentId}/agent/test-workflows/{workflowId}/executions`
+
+#### Kubernetes lifecycle events
+If you rely on [Kubernetes Events](/articles/k8s-events#resource-lifecycle-events) or [CDEvents](/articles/cd-events) for 
+resource lifecycle (e.g. to trigger automation when a workflow is created from the dashboard), those will not fire 
+for the Control Plane - originated changes mentioned above. This behavior will be fixed at the latest in 
+the **next monthly release at the end of March**.
+
+:::
+
+### Observability updates
+
+A large set of SuperAgent Prometheus metrics is now available in Control Plane.
+
+Read more: [Control Plane Metrics](/articles/control-plane-metrics)
+
+### AI Updates
+
+- External MCP Servers now support OAuth authentication. [Read more](/articles/mcp-servers-for-ai-agents)
+- Many improvements and bug-fixes to the orchestration engine.
+
+### Improvements and fixes
+
+- Removed the deprecated native Slack integration configuration from Helm values: `slackToken`, `slackSecret`, and `slackConfig`.
+- Slack notifications should now be configured with Testkube Webhooks - [Read more](/articles/slack-integration).
+- Extended support in JUnit visualization for non-numeric time values, such as 200ms, 2s, 0.2m, and 0.2h.
+- Update MongoDB image and helm chart to use latest patch version available, MongoDB version `8.2.5`.
+- Update PostgreSQL image and helm chart to use latest patch version available, PostgreSQL version `18.2`.
+
+## Patch Release v2.6.4 (2026-02-27)
+
+This release introduces polished and improvements around our [SCIM integration](/articles/scim).
+
+Control Plane is available in Helm chart v2.329.4.
+
+### Features and Improvements
+
+- **Manage permissions in Testkube**: A new toggle in **Organization Management → Product features** lets admins control roles, environment access, and resource group assignments directly in the Testkube dashboard —
+while SCIM continues to handle user provisioning and team membership automatically. [Learn more about this option](/articles/scim#manage-permissions-in-testkube).
+
+## Patch Release v2.6.3 (2026-02-17)
+
+This release focuses on stability fixes in backend and dashboard components, MongoDB index correctness for soft-deleted agents, and AI service Helm configuration improvements.
+
+Control Plane is available in Helm chart v2.329.3 and Agent is available in Helm chart v2.6.2 ([Check its release notes](https://github.com/kubeshop/testkube/releases/tag/2.6.2)).
+
+### Security Updates
+
+- Updated Go modules to address reported CVEs and Docker Scout findings.
+- Upgraded `go-jose` lineage to `v2.6.3` (`gopkg.in/square/go-jose.v2` replacement and dependency updates) as part of the CVE remediation set.
+
+### Bug Fixes
+
+- Fixed a panic path by updating the `testkube` dependency to include upstream handling for nil metric timestamps.
+- Corrected cloud plan user quota behavior so enterprise-named plans in cloud mode no longer incorrectly appear as unlimited users.
+- Fixed agent uniqueness behavior with soft deletes by introducing partial unique indexes for `name` and `secret` and adding a migration to drop/recreate conflicting indexes.
+- Improved MongoDB migration/index handling by tolerating missing collection/index cases and tightening partial-index filter matching.
+- Fixed AI PostgreSQL DSN precedence in Helm: `db.secretRef` now takes precedence over `db.url` and `global.postgres.dsn`, and missing DB configuration now fails fast at template render time.
+  - Adjusted DSN resolution logic in the Testkube Enterprise Helm chart, specifically AI component, to correctly prioritize AI-specific PostgreSQL configuration over global defaults. This ensures the AI service uses its dedicated database settings when provided.
+  - Enhanced PostgreSQL configuration in the Testkube Enterprise Helm chart, specifically AI component, by allowing SSL mode to be configured via optional query parameters in the DSN. This provides greater flexibility for different database setups and environments.
+- Restored TestWorkflow YAML editor capabilities in the dashboard (schema validation, hover, autocomplete) by stabilizing Monaco YAML worker lifecycle and compatibility.
+- Fixed Monaco editor toolbar actions by forwarding refs through lazy-loaded Monaco wrappers.
+- Added guards in workflow settings to handle malformed template/workflow entities without runtime failures.
+
+### Features and Improvements
+
+- Added global Helm setting `global.aiApiSubdomain` in cloud API values to support AI API subdomain configuration.
+- Made AI service PostgreSQL SSL mode configurable when using `db.secretRef` by adding `db.queryParams` (instead of hardcoding `sslmode=disable`).
+
+## Monthly Release v2.6.0 (2026-02-05)
+
+This release is available in Helm chart v2.329.0. Control Plane and Agent versions are now unified at **v2.6.0**.
+
+:::note Version Unification
+Starting with this release, we've consolidated the Control Plane and Agent versioning to share the same major and minor version numbers.
+Patch versions may differ between components as fixes are released independently, but the major.minor version (e.g., 2.6.x) will be kept in sync, making it easier to track compatibility across your Testkube deployment.
+:::
+
+:::warning Breaking Change
+If you were using the AI Assistant in a previous release, you must now configure a PostgreSQL database for the AI service to function.
+The AI service uses PostgreSQL to persist conversation state and session data for the new AI Agents feature.
+
+[Read more about the AI Functionality in Testkube](/articles/testkube-ai-overview)
+:::
+
+### What's new!
+
+**AI Agents for Test Orchestration**
+
+Testkube now supports **custom AI Agents** that can autonomously execute complex testing tasks with human oversight.
+This is a major evolution from the previous AI Assistant which was limited to read-only Q&A and navigation help.
+
+AI Agents bring true agentic capabilities to your testing platform:
+
+- **Create Custom AI Agents**: Define agents with custom instructions tailored to your testing workflows — from "Debug failing E2E tests" to "Generate load test reports" or "Monitor flaky test patterns."
+- **Connect External MCP Servers**: Extend agent capabilities by connecting any Model Context Protocol (MCP) server. This lets agents access external tools, documentation services, or custom integrations alongside Testkube's built-in tools.
+- **Human-in-the-Loop Approval**: Agents pause before executing sensitive operations (like creating workflows or modifying resources) and request your approval. You can approve or respond with alternative instructions.
+- **Multi-turn Sessions**: Agents maintain conversation context across multiple interactions. Continue a debugging session later, or have the agent iterate on a complex task over time.
+- **AI Assistant Integration**: The dashboard AI Assistant (now read-only) can delegate requests to AI Agent sessions.
+
+**Example Use Cases:**
+
+- **Automated Remediation** — Analyze failed tests, identify root causes, and suggest or apply fixes automatically (see [Example](/articles/remediation-agent))
+- **Intelligent Analysis** — Detect flaky tests, analyze execution patterns, and surface anomalies (see [Example](/articles/flakiness-analysis-agent))
+- **Custom Workflows** — Define agents tailored to your specific testing needs and integrate with external systems
+
+AI Agents are available from the dashboard and can be configured per environment with granular control over which tools are enabled and which require approval before execution.
+
+[Read more about the AI Agents feature](/articles/ai-agents)
+
+**New MCP Server Tools**
+
+The Testkube MCP Server now includes powerful new tools for querying and exploring your test data:
+
+- **`query_workflows`** and **`query_executions`**: Use JSONPath expressions to extract specific data from multiple workflows or executions at once. Query patterns like `$..image` to find all container images across workflows, or `$.result.steps.*` to analyze step results across executions.
+- **`get_workflow_schema`** and **`get_execution_schema`**: Retrieve the full YAML schema for TestWorkflow definitions and execution data. These tools help AI assistants understand the complete data structure when creating, updating, or analyzing workflows and results.
+
+These tools make it easier for AI assistants to perform bulk analysis and generate insights across your test infrastructure.
+
+### Improvements and fixes
+
+- Workflows can now be configured as silent at the Workflow level by setting `spec.execution.silent` to true, which will
+  result in all executions being silent by default - [Read more about Silent Workflows](/articles/test-workflows-running#silent-workflows)
+- On-prem customers can now configure custom LLM models via Helm instead of being locked to defaults.
+- AI service now uses two model types: a primary model for complex agent tasks and a lightweight model for quick tasks like generating session titles.
+- Default models updated to `gpt-5.2` (primary) and `gpt-5-mini` (lightweight), with optional temperature settings for models that support it.
+- Control Plane scheduler improvements: synchronized MongoDB and PostgreSQL implementations, resolved race conditions during test workflow execution scheduling.
+- Added scheduler metrics to improve scheduler observability and monitoring - [Read more about Scheduler Metrics](/articles/control-plane-metrics)
+- Fixed an issue where the member details view did not correctly show permissions inherited from resource groups.
+
+## Patch Release (2025-12-23)
+
+Control Plane is available in Helm chart v2.327.3 and Agent is available in Helm chart v2.5.3
+
+### Control Plane v1.21.3
+
+- Fixed broken documentation references in the UI.
+- Fixes to SCIM server when removing admins assigned from an IDP group
+
+### Agent v2.5.3
+
+- Fix issue where executions were marked as successful if an accompanying `service` fails immediately.
+
+## Monthly Release v1.21.1 (2025-12-10)
+
+This release is available in Helm chart v2.327.1.
+
+### What's new!
+
+- **New Executions Dashboard!**
+We've built a **Unified Executions Dashboard** that brings all your executions into one place, making debugging and monitoring significantly faster.
+The new dashboard provides a single view with everything you need to work efficiently:
+  - **Custom Views** & **Advanced Filtering**: Create private and shared views with comprehensive filter options, or use prepopulated views to quickly access common filter combinations
+  - **Inline Details**: See all relevant execution information directly in the list without clicking into detail pages
+  - **Live Data Toggle**: Control live updates to focus on current executions without interruption
+
+  With this unified view, you can spot a failing execution, view its logs with one click, and act on it immediately. No more checking workflows individually or navigating through multiple pages to get the information you need. Plus, we've added several other features to make working with executions even easier.
+
+  The **Executions Dashboard** is available via a dedicated icon in the left navigation toolbar.
+
+- **Webhook Credentials Support** — Webhooks can now securely reference **Credentials**, so you can inject API keys and secrets into webhook URLs, headers, or payload templates using the ``credentials()`` expression instead of hard-coding them.
+
+  This keeps your integrations with external systems (**Slack**, **incident tools**, **custom endpoints**, etc.) both safer and easier to maintain, since you can rotate or update secrets in one place without touching webhook definitions.
+
+- **Deprecation of Tests & Suites** — Over the past year, TestWorkflows has become the recommended way to orchestrate tests in Testkube — offering more flexibility, better visibility, and continuous feature improvements driven directly by user feedback.
+
+  To reduce complexity and make it easier to understand how to get started, we are now fully transitioning to TestWorkflows. Beginning with version 1.21, legacy Tests, Test Suites, Executors, and Sources are removed from the product.
+  This ensures that all future enhancements benefit the most powerful and supported workflow engine in Testkube. Read more about the legacy deprecation [here](/articles/legacy-deprecation).
+
+  :::danger
+  If you are still using legacy functionality, you will need to stay on previous Testkube releases and migrate your Tests/Suites to
+  TestWorkflows before upgrading to this release, as described in the [migration guide](/articles/test-workflow-migration).
   :::
+  Join us on [Slack](https://testkubeworkspace.slack.com/join/shared_invite/zt-2arhz5vmu-U2r3WZ69iPya5Fw0hMhRDg#/shared-invite/email)
+  and we’ll guide you through the process. In the meantime, you can remain on version 1.20, which will continue receiving critical bug fixes while you complete the transition.
+
+- **(Preview) Support for PostgreSQL** — As part of ongoing improvements to our data layer, we are introducing PostgreSQL as a new storage option.
+This release includes PostgreSQL support in preview mode, which can be enabled through custom configuration documented
+[here](https://docs.testkube.io/articles/install/advanced-install#using-postgresql-as-a-database) and [here](https://docs.testkube.io/articles/install/standalone-agent#using-postgresql-as-a-database)
+PostgreSQL brings significant benefits in performance, scalability, and data security — laying the groundwork for future enhancements.
+
+  Migration tools for existing Testkube installations using MongoDB will be provided in a future release!
+
+### Improvements and fixes
+
+- Silent executions tooltips and icon are more user friendly
+- Updating credential now updates the correct credential scope when there is an override
+- Added browser tab title to Execution Details Page
+
+## Patch Release v1.20.4 (2025-11-20)
+
+This release is available in Helm chart v2.326.4.
+
+### Improvements and fixes
+
+- Fix SCIM compatibility issue with Microsoft Entra ID.
+
+## Patch Release v1.20.3 (2025-11-19)
+
+This release is available in Helm chart v2.326.3.
+
+### Improvements and fixes
+
+- Fix SCIM issue where organization membership gets dropped for certain users.
+- Add Silent Execution icon on Execution List.
+- Fix broken dashboard executions link.
+- Replace MongoDB and MinIO Helm charts with Testkube custom charts and images.
+
+## Patch Release v1.20.2 (2025-11-13)
+
+This release is available in Helm Chart v2.326.2.
+
+### Improvements and fixes
+
+- Insights APIs now respond faster thanks to smarter queries and better indexes.
+- Workflow and credential flows feel more reliable across the UI.
+- Deleting workflow executions is safer now that the process uses a configurable timeout (default 30m) instead of a rigid 5s timeout.
+- Version check now correctly checks agent version.
 
 ## Monthly Release v1.20.0 (2025-11-03)
 
@@ -219,7 +703,7 @@ This release is available in Helm Chart v2.322.1.
 
 This release comes with a new way to deploy Runner Agents and several improvements to workflows.
 
-You can now install a Runner Agent using only Helm. Previously a Runner Agent had to be registered using the CLI or UI prior to Helm install. This feature can be used to create Runner Agents for ephemeral environments in a single step. [Documentation is available here](/articles/multi-agent-runner-helm-chart#self-registering-runner-agent-helm-install).
+You can now install a Runner Agent using only Helm. Previously a Runner Agent had to be registered using the CLI or UI prior to Helm install. This feature can be used to create Runner Agents for ephemeral environments in a single step. [Documentation is available here](/articles/multi-agent-runner-helm-chart#self-registering-agent-helm-install).
 
 Users can now create custom views to group workflows by any criteria, making it easier to organize workflows that belong together or quickly access frequently used filtered results. These views are shared between all the users of a given environment.
 

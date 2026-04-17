@@ -1,0 +1,340 @@
+# Testkube AI Architecture
+
+This document provides a high-level overview of the architecture powering Testkube's AI capabilities, 
+including the AI Assistant, AI Agents, and AI Agent Triggers. Understanding this architecture helps 
+you leverage these features effectively and understand their capabilities and limitations.
+
+## Overview
+
+Testkube's AI features are built on a modern agentic AI architecture that combines:
+
+- **Large Language Models (LLMs)** for natural language understanding and generation
+- **LangGraph** for agent orchestration, checkpointing, and stateful conversation management
+- **Model Context Protocol (MCP)** for tool integration and extensibility
+- **Human-in-the-Loop (HITL)** controls for safe execution of sensitive operations
+- **Event-driven triggers** for automated agent execution on workflow events
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                  Testkube Dashboard                                         │
+│                                                                                             │
+│  ┌─── AI Assistant ───────┐  ┌─── AI Agent Chats ────┐  ┌─── AI Agent Triggers ──────────┐  │
+│  │    (Overlay/Dock)      │  │    (Chat Panel)       │  │    (Integrations Panel)        │  │
+│  └───────────┬────────────┘  └───────────┬───────────┘  └──────────────┬─────────────────┘  │
+└──────────────┼───────────────────────────┼─────────────────────────────┼────────────────────┘
+               └─────────────┬─────────────┘                             │
+                             ▼                                           ▼
+┌────────────────────────────────────────────┐    ┌──────────────────────────────────────────┐
+│       Testkube Control Plane               │    │           Worker Service                 │
+│      (Cloud API / Enterprise)              │    │      (NATS JetStream Consumer)           │
+│                                            │    │                                          │
+│  Session metadata, Agents, MCP Servers,    │    │  Execution finished events →             │
+│  Triggers, OAuth tokens                    │    │  AI Trigger Handler →                    │
+│                                            │    │  Session creation + AI Service run       │
+└───────────────────┬────────────────────────┘    └──────────────────────┬───────────────────┘
+          ▲         │                                                    │
+  session │         │ JWT auth                                  API token│auth
+ metadata │         │                                                    │
+  updates │         ▼                                                    │
+┌─────────┴──────────────────────────────────────────────────────────────┴────────────────────┐
+│                                     AI Service                                              │
+│                                                                                             │
+│  ┌─── AGENTIC LOOP (LangGraph) ─────────────────────────────────────────────────────────┐   │
+│  │                                                                                      │   │
+│  │  ┌─── Session ────────────────────────────────────────────────────────────────────┐  │   │
+│  │  │ New Chat ──▶ Load Tools ──▶ Build Prompt ──▶ Resolve Model ──▶ Run Agent       │  │   │
+│  │  │ Status: pending → running → completed | waiting_approval                       │  │   │
+│  │  └────────────────────────────────────────────────────────────────────────────────┘  │   │
+│  │                                         │                                            │   │
+│  │                                         ▼                                            │   │
+│  │  ┌─── Prompt Assembly ───────────────────────────────────────────────────────────┐   │   │
+│  │  │ Base System Prompt ──▶ + Agent Instructions ──▶ + Runtime Context             │   │   │
+│  │  └───────────────────────────────────────────────────────────────────────────────┘   │   │
+│  │                                         │                                            │   │
+│  │                                         ▼                                            │   │
+│  │  ┌─── Runtime Loop ─────────────────────────────────────────────────────────────┐    │   │
+│  │  │                                                                              │    │   │
+│  │  │  ┌───────┐     ┌───────────┐     ┌─────────────────────┐    ┌──────────┐     │    │   │
+│  │  │  │       │     │           │ yes │   Execute tool      │    │          │     │    │   │
+│  │  │  │  LLM  │────▶│ HITL Gate │────▶│                     │───▶│ Response │     │    │   │
+│  │  │  │       │     │           │     └─────────────────────┘    │          │     │    │   │
+│  │  │  └───▲───┘     └─────┬─────┘                                └──────────┘     │    │   │
+│  │  │      │               │ no                                                    │    │   │
+│  │  │      │               ▼                                                       │    │   │
+│  │  │      │         ┌──────────────────────────────────────────────┐              │    │   │
+│  │  │      │         │  Pause → User: ✓ Approve ✎ Edit ✗ Reject     │              │    │   │
+│  │  │      │         └─────────────────────┬────────────────────────┘              │    │   │
+│  │  │      └───────────────────────────────┘                                       │    │   │
+│  │  │                           (loop until done)                                  │    │   │
+│  │  └──────────────────────────────────────────────────────────────────────────────┘    │   │
+│  │                                         │                                            │   │
+│  │  ┌─── Checkpointing ────────────────────────────────────────────────────────────┐    │   │
+│  │  │ Full state persisted per session: messages, tool results, pending approvals  │    │   │
+│  │  │ Sessions survive restarts and can be resumed at any point                    │    │   │
+│  │  └──────────────────────────────────────────────────────────────────────────────┘    │   │
+│  │                                                                                      │   │
+│  └──────────────────────────────────────────────────────────────────────────────────────┘   │
+│                                          │                                                  │
+│                                          ▼                                                  │
+│  ┌─── TOOL LAYER ───────────────────────────────────────────────────────────────────────┐   │
+│  │                                                                                      │   │
+│  │  ┌─── Testkube MCP (via Bridge) ─────────────────────────────────────────────────┐   │   │
+│  │  │ Workflows        Executions        Artifacts        Metadata                  │   │   │
+│  │  │ List, Create,    List, Fetch       List, Read,      Labels, Agents,           │   │   │
+│  │  │ Update, Run      Logs, Abort       Download         Dashboard URLs            │   │   │
+│  │  │                                                                               │   │   │
+│  │  │ Read-only → auto-approved                Mutations → approval required        │   │   │
+│  │  └───────────────────────────────────────────────────────────────────────────────┘   │   │
+│  │                                                                                      │   │
+│  │  ┌─── Built-in Tools ───────┐  ┌─── External MCP Servers (User-Configured) ───────┐  │   │
+│  │  │                          │  │                                                  │  │   │
+│  │  │ Documentation Search     │  │  GitHub, Jira, Slack, custom servers, ...        │  │   │
+│  │  │ YAML Examples Search     │  │                                                  │  │   │
+│  │  │ Task Tracking            │  │  Auth:  OAuth (managed token refresh)            │  │   │
+│  │  │                          │  │         Header (static credentials)              │  │   │
+│  │  └──────────────────────────┘  └──────────────────────────────────────────────────┘  │   │
+│  │                                                                                      │   │
+│  └──────────────────────────────────────────────────────────────────────────────────────┘   │
+│                                          │                                                  │
+│                                          ▼                                                  │
+│  ┌─── LLM PROVIDERS ────────────────────────────────────────────────────────────────────┐   │
+│  │                                                                                      │   │
+│  │  ┌─── Platform Default ───────────┐  ┌─── Bring Your Own Key (per Env) ────────────┐ │   │
+│  │  │                                │  │                                             │ │   │
+│  │  │ Pre-configured model catalog   │  │ Override provider, endpoint, and API        │ │   │
+│  │  │ Primary and lightweight models │  │ key per environment (OpenAI, Azure, ..)     │ │   │
+│  │  └────────────────────────────────┘  └─────────────────────────────────────────────┘ │   │
+│  │                                                                                      │   │
+│  └──────────────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                             │
+└─────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+## Key Components
+
+### LangGraph Agent Framework
+
+The AI Service uses [LangGraph](https://langchain-ai.github.io/langgraph/), an open-source framework for building 
+stateful, multi-actor AI applications. The agent is built using LangGraph's `createAgent` with a middleware
+stack that provides:
+
+- **Session Lifecycle**: Each chat creates a session that loads available tools, assembles the system prompt
+  with agent-specific instructions and runtime context, resolves the LLM model, and runs the agent loop
+- **Prompt Assembly**: The system prompt is composed from a base prompt (Testkube platform context and tool
+  guidelines), per-agent custom instructions, and runtime context (current organization, environment, date)
+- **Agent Loop**: The LLM reasons about the user's request, calls tools as needed, and iterates until done.
+  Tools configured for approval pass through the HITL gate before execution
+- **Checkpointing**: Full conversation state (messages, tool results, pending approvals) is persisted to
+  PostgreSQL, allowing sessions to survive restarts and be resumed at any point
+- **HITL Middleware**: Intercepts tool calls that require approval and suspends execution until the user responds
+
+### Model Context Protocol (MCP)
+
+[MCP](https://modelcontextprotocol.io/) is an open standard for connecting AI assistants to external tools and data sources. 
+Testkube uses MCP to:
+
+- **Expose Testkube Functionality**: The built-in Testkube MCP Server provides tools for managing workflows, 
+  analyzing executions, and retrieving artifacts
+- **Enable Extensibility**: Connect external MCP servers (GitHub, Jira, Slack, etc.) to extend AI capabilities
+- **Standardize Tool Interfaces**: Use a consistent protocol for tool discovery, invocation, and response handling
+
+The Testkube MCP Server connects to the AI Service via a **stdio bridge** — the AI Service spawns
+the bridge process locally with environment credentials, providing low-latency tool access without
+network overhead. External MCP servers connect via HTTP/SSE transport and support both OAuth
+(with managed token refresh) and header-based authentication.
+
+Learn more about MCP integration in the [MCP Configuration](/articles/mcp-configuration) documentation.
+
+### Large Language Models
+
+The AI features are powered by Large Language Models that provide:
+
+- **Natural Language Understanding**: Interpret user questions and requests
+- **Reasoning and Planning**: Decide which tools to use and in what order
+- **Response Generation**: Produce helpful, contextual responses
+
+Testkube supports multiple LLM providers. Platform models are available out of the box, and you can add
+custom providers (OpenAI, Azure OpenAI, or any OpenAI-compatible service) to use specific models for
+different agents or conversations.
+
+See [Configuring AI Models](/articles/ai-models) for details on adding custom LLM providers.
+
+## Testkube MCP Tools
+
+The Testkube MCP Server exposes a comprehensive set of tools that allow AI Agents to interact with your 
+Testkube environment. These tools are automatically available to the AI Assistant and can be enabled 
+for custom AI Agents.
+
+The available tools cover:
+
+- **Workflow Management** — List, query, create, update, and run workflows and workflow templates
+- **Execution Management** — List and query executions, fetch logs, abort running executions, wait for completion, update tags
+- **Metrics & Resources** — Workflow health metrics, execution resource metrics, resource usage history
+- **Artifacts** — List and read artifacts produced by executions
+- **Metadata** — Build dashboard URLs, list labels, resource groups, agents, and schemas
+
+For a complete list of available tools and their descriptions, see the [Testkube MCP Server Overview](/articles/mcp-overview#available-tools).
+
+## Built-in Tools
+
+In addition to MCP tools, the AI Service includes built-in tools that are always available:
+
+### All Sessions
+
+- **Documentation Search** — Semantic search over Testkube documentation for answering product questions
+- **YAML Examples Search** — Search TestWorkflow YAML examples for reference when creating or modifying workflows
+
+### AI Assistant Only
+
+The AI Assistant has additional tools for Dashboard integration:
+
+- **Dashboard Navigation** — Help users navigate to specific pages and settings in the Dashboard
+- **AI Agent Management** — List available agents, list connected MCP servers, inspect MCP server tools
+- **Session Management** — Trigger new agent sessions and check session status from within a conversation
+
+## AI Agent Triggers
+
+AI Agent Triggers enable automated, event-driven agent execution without human intervention.
+The trigger pipeline works as follows:
+
+1. A Test Workflow execution finishes (pass, fail, abort, or cancel)
+2. The **Worker Service** receives the execution-finished event via NATS JetStream
+3. The **AI Trigger Handler** evaluates all enabled triggers in the environment:
+   - Matches the execution status against the trigger's configured events
+   - Checks the workflow's labels against the trigger's label selector
+   - For "on state change" mode, compares against the previous execution's status
+4. For matching triggers, the handler creates an `AssistantSession` in the database
+5. The handler calls the AI Service to **start the session automatically**
+6. The AI Agent runs autonomously with the rendered prompt template as instructions
+
+Trigger-created sessions appear in the AI Agent Chats panel like any other chat, and can be
+monitored or continued interactively.
+
+See [AI Agent Triggers](/articles/ai-triggers) for configuration details, including how to set up
+[scheduled triggers](/articles/ai-triggers#scheduled-ai-agent-triggers) using lightweight scheduler workflows.
+
+## Human-in-the-Loop (HITL) Approval
+
+For security and control, certain tool operations require human approval before execution. This is particularly 
+important for tools that can modify data or perform sensitive operations.
+
+### How HITL Works
+
+1. **Tool Invocation**: The AI decides to use a tool that requires approval
+2. **Execution Pauses**: The HITL middleware suspends the agent, persisting state to the checkpoint
+3. **Approval Request**: The pending tool call is displayed to the user with its parameters
+4. **User Decision**: The user can:
+   - **Approve**: Allow the tool to execute as requested
+   - **Edit**: Modify the tool parameters before execution
+   - **Respond**: Provide feedback to the AI without executing the tool
+   - **Ignore**: Skip the tool execution entirely
+5. **Execution Resumes**: Based on the user's decision, the session continues from the checkpoint
+
+### Configuring Tool Approval
+
+When [defining AI Agents](/articles/defining-ai-agents#configuring-mcp-server-tools), you can configure 
+which tools require approval:
+
+- **Auto-approved Tools**: Execute immediately without user intervention (suitable for read-only operations)
+- **Approval-required Tools**: Pause for user confirmation (recommended for mutating operations)
+- **Disabled Tools**: Prevent the AI from using specific tools entirely
+
+## Session Management and Persistence
+
+### Session Creation Paths
+
+Sessions (also called "Chats") can be created through several paths:
+
+| Path | How it works |
+|------|-------------|
+| **AI Assistant** | User opens the AI Assistant panel and sends a message |
+| **AI Chats panel** | User starts a new chat from the Chats panel, selecting an agent and providing a prompt |
+| **AI Analyze button** | User clicks "AI Analyze" on a failed execution, which pre-fills the prompt with execution context |
+| **Agent configuration** | User clicks "Run Agent" from an agent's configuration page |
+| **AI Agent Trigger** | Worker Service creates a session automatically when a trigger fires, then calls the AI Service's internal endpoint |
+| **From within a chat** | The AI Assistant can trigger a new agent session on the user's behalf using the `trigger_agent_session` tool |
+
+### State Persistence
+
+Conversation state (messages, tool calls, responses, and LangGraph checkpoints) is persisted to
+**PostgreSQL**, ensuring:
+
+- **Reliability**: Sessions survive service restarts
+- **Resumability**: Sessions can be paused and resumed, even after browser refresh or HITL interrupts
+- **Audit Trail**: Complete history of AI interactions for compliance and debugging
+
+Session metadata (agent association, environment, creation context) is managed by the Control Plane
+and stored alongside other organizational data.
+
+## External MCP Server Integration
+
+One of the most powerful features of Testkube's AI architecture is the ability to connect external MCP servers, 
+extending the AI's capabilities beyond Testkube itself.
+
+### Authentication Methods
+
+External MCP servers support two authentication methods:
+
+- **Header-based**: Custom headers (e.g. `Authorization: Bearer <token>`) sent with every request
+- **OAuth**: OAuth flow managed by the Control Plane — tokens are stored securely and refreshed automatically
+
+See [Connected MCP Servers](/articles/mcp-servers-for-ai-agents#authentication) for details.
+
+### MCP Server Registry
+
+Testkube provides a curated MCP Server Registry for discovering and adding popular MCP servers (GitHub,
+Slack, Jira, etc.) with minimal configuration. The registry is accessible from the Dashboard when
+adding a new MCP server.
+
+See [Adding from the Registry](/articles/mcp-servers-for-ai-agents#from-the-mcp-server-registry) for details.
+
+### How External MCP Servers Connect
+
+1. Configure the MCP server connection in Testkube ([MCP Server Configuration](/articles/mcp-servers-for-ai-agents))
+2. Select which tools from the server to enable for your AI Agent
+3. Configure approval policies for each tool
+4. At session start, the AI Service loads the server's tools via HTTP/SSE transport
+5. The AI Agent can now use these tools alongside Testkube's built-in tools
+
+## Security Considerations
+
+### Data Flow
+
+- User prompts and context are sent to the configured LLM for processing
+- Tool execution happens within Testkube's infrastructure (AI Service)
+- The Testkube MCP bridge runs as a local subprocess — Testkube data does not traverse external networks for built-in tools
+- External MCP server calls go directly from the AI Service to the configured server endpoints
+
+### Access Control
+
+- AI Agents operate within the user's permissions — they cannot access resources the user doesn't have access to
+- Tool approval policies provide an additional layer of control over sensitive operations
+- Trigger-created sessions use a dedicated API token scoped to the trigger
+- Session history is scoped to the organization and environment
+
+For detailed security information, see [Security & Compliance](/articles/ai-configuration#security--compliance).
+
+## Performance and Limitations
+
+### Capabilities
+
+- **Multi-step Reasoning**: Can plan and execute complex sequences of tool operations
+- **Context Awareness**: Understands the current workflow, execution, or dashboard context
+- **Knowledge Integration**: Combines Testkube documentation with real-time data from your environment
+
+### Current Limitations
+
+- **LLM Token Limits**: Very long conversations may be summarized to fit within model context windows
+- **Tool Latency**: Some operations (especially those involving large artifacts) may take time to complete
+- **Non-determinism**: LLM responses can vary slightly between invocations for the same input
+
+## Related Documentation
+
+- [Testkube AI Agents Overview](/articles/ai-agents)
+- [Defining AI Agents](/articles/defining-ai-agents)
+- [AI Agent Chats](/articles/using-ai-agents)
+- [AI Agent Triggers](/articles/ai-triggers)
+- [Configuring AI Models](/articles/ai-models)
+- [Connected MCP Servers](/articles/mcp-servers-for-ai-agents)
+- [AI Assistant Overview](/articles/ai-assistant-overview)
+- [Testkube MCP Server Configuration](/articles/mcp-configuration)

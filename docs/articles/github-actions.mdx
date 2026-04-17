@@ -76,7 +76,7 @@ not to reveal sensitive data. Please make sure that the following points are sat
 
 - The **_AwsAccessKeyId_**, **_AwsSecretAccessKeyId_** secrets should contain your AWS IAM keys with proper permissions to connect to EKS cluster.
 - The **_AwsRegion_** secret should contain an AWS region where EKS is.
-- Tke **EksClusterName** secret points to the name of EKS cluster you want to connect.
+- The **EksClusterName** secret points to the name of EKS cluster you want to connect.
 
 ```yaml
 steps:
@@ -103,7 +103,7 @@ steps:
 This example connects to a k8s cluster in Google Cloud, creates and runs a Test Workflow using Testkube GH Action. Please make sure that the following points
 are satisfied:
 
-- The **_GKE Sevice Account_** should be created prior in Google Cloud and added to GH Secrets along with **_GKE Project_** value;
+- The **_GKE Service Account_** should be created prior in Google Cloud and added to GH Secrets along with **_GKE Project_** value;
 - The **_GKE Cluster Name_** and **_GKE Zone_** can be added as [environmental variables](https://docs.github.com/en/actions/learn-github-actions/variables) in
   the workflow.
 
@@ -181,6 +181,10 @@ jobs:
 
 ## Using GitHub Apps with Testkube
 
+:::note
+GitHub Apps Integration is currently not supported for Testkube Cloud.
+:::
+
 With GitHub Apps you can simplify authentication to cloning your GitHub repositories and more.
 
 ### Configuration for single-tenant
@@ -219,6 +223,10 @@ testkube-cloud-api:
 
 3. (Re)-Deploy Testkube
 4. You are now ready to [use your GitHub App to clone your content][workflow-content-github-app]!
+
+### Multiple GitHub Organizations
+
+If you need to authenticate across multiple GitHub organizations, you can install the same application in each organization and then update `values.yaml` with a comma-separated list of IDs (for example, `installationId: "your_installation_id1,your_installation_id2"`).
 
 ### Configuration for multi-tenancy
 

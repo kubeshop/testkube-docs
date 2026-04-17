@@ -31,7 +31,7 @@ configuration](/articles/test-triggers#resource-conditions) you can modify the g
 
 You will initially be prompted for
 
-- the **Name** of the Trigger - must be a valid Kubernetes name as Triggers are stored as CRDs in your cluster.
+- the **Name** of the Trigger - must be a valid Kubernetes resource name.
 - the **K8s Resource** kind to monitor for events.
 - the **Resources Identifier** for which resources to monitor, can either be a list of Kubernetes Labels or a specific resource name.
 - the **Triggered event** to listen for.
@@ -52,9 +52,8 @@ Once the condition has been specified, you need to specify what action to take w
 Selecting a Trigger from the list of Triggers shows its Settings.
 
 :::note
-As with the wizard above to create a Trigger, the Settings tab only expose basic Trigger configurations, for more 
-advanced [condition and action configuration](/articles/test-triggers#custom-resource-definition-model) you can modify the 
-generated YAML directly in the [Definition tab](/articles/integrations-triggers#definition) for your Trigger.
+As with the wizard above to create a Trigger, the Settings tab only exposes basic Trigger configurations, for more 
+advanced condition and action configuration you can modify the generated YAML directly in the [Definition tab](/articles/integrations-triggers#definition) for your Trigger.
 :::
 
 ### General

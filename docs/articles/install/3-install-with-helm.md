@@ -20,6 +20,56 @@ Before you proceed with the installation, please ensure that you have the follow
 - Own a public/private domain for creating Ingress rules.
 - License Key and/or License File, if offline access is required.
 
+### Kubernetes Cluster Requirements
+
+- At least 3 nodes
+- At least 2 CPU cores per node
+- At least 8GB of memory per node
+
+### External Dependencies Requirements
+
+The following are production requirements for external dependencies:
+
+- **MongoDB**
+  - At least 1 CPU core
+  - 2GB of memory
+  - At least 10GB of storage (subject to increase as load increases)
+
+- **MinIO**
+  - At least 1 CPU core
+  - 2GB of memory
+  - At least 20GB of storage (subject to increase as load increases as logs and test artifacts are saved here)
+
+- **Dex**
+  - At least 0.1 CPU core
+  - 128MB of memory
+
+- **NATS**
+  - At least 0.5 CPU core per replica
+  - 1GB of memory per replica
+  - At least 1GB of storage per replica
+  - Running total of 3 replicas in cluster mode
+
+### Control Plane Components Requirements
+
+The following are production requirements for Control Plane components:
+
+- **API**
+  - At least 0.5 CPU
+  - 1GB of memory
+
+- **Worker Service**
+  - At least 1 CPU
+  - 2GB of memory
+
+- **UI**
+  - At least 0.1 CPU
+  - 128MB of memory
+
+:::note
+Control Plane can run with lower resources, but the above requirements will ensure a smooth usage of Testkube.
+:::
+
 :::note IMPORTANT
 Make sure you're using the **correct Ingress controller**.
 
@@ -155,6 +205,13 @@ Alternatively, you can use [a local database with static users](/articles/auth#s
 
 Once authenticated, users will also need to be invited to org. By default, new users will automatically join the default organization. You can change this behaviour by changing [the bootstrap and invitation configuration][advanced-bootstrap].
 
+### Credentials Encryption
+
+Testkube requires a master password to enable encrypted credential storage and to sign execution tokens used by
+runners. Without it, only plaintext variables can be stored and workflow executions that use credentials will fail.
+
+See [Credentials Encryption][advanced-credentials] in the custom installation guide for configuration steps.
+
 ### Prometheus Metrics
 
 Testkube exposes Prometheus metrics on the `/metrics` endpoint and uses a `ServiceMonitor` resource to expose 
@@ -193,7 +250,7 @@ For an offline license, the format is a long string prefixed with `key/`. You wi
 kubectl create secret generic testkube-license --from-file=LICENSE_KEY=«license key» --from-file=license.lic=license file»
 ```
 
-This secret is referenced by the `global.enterpriseLicenseRef` setting. For offline licences, you will also have to set `global.enterpriseOfflineAccess: true`.
+This secret is referenced by the `global.enterpriseLicenseSecretRef` setting. For offline licences, you will also have to set `global.enterpriseOfflineAccess: true`.
 
 [license]: https://testkube.io/download
 
@@ -205,5 +262,5 @@ organization management, custom ingress controllers, production environments, an
 [advanced]: /articles/install/advanced-install
 [secret-license]: /articles/install/install-with-helm#testkube-license
 [advanced-bootstrap]: /articles/install/advanced-install#organization-management
+[advanced-credentials]: /articles/install/advanced-install#master-password-for-encryption
 [ss-license]: /articles/install/install-with-helm#testkube-license
-

@@ -24,7 +24,7 @@ Steps 2, 3 and 4 above can all be automated via the Testkube CLI in your CI/CD p
 ## Single Agent Approach
 
 If you are not able to install a dedicated Runner Agent for each ephemeral namespace/cluster, you can
-use Testkubes `executionNamespace` with the Standalone Agent instead:
+use Testkube's `executionNamespace` with the Standalone Agent instead:
 
 - Install the Standalone Agent for your Testkube Environment in a dedicated namespace in the same cluster(s) that 
   you will be provisioning ephemeral namespaces, make sure [Namespaces for Test Execution](/articles/install/advanced-install#namespaces-for-test-execution)

@@ -7,7 +7,11 @@ title: "testkube get agent"
 
 ## testkube get agent
 
+Get agents registered in the current environment
 
+### Synopsis
+
+Get details of a specific agent or list all agents. By default only active agents in the current environment are shown. Use --all-environments to list across environments, --show-deleted to view deleted agents, or --show-unknown to find cluster agents not registered in the control plane.
 
 ```
 testkube get agent [name] [flags]
@@ -16,8 +20,11 @@ testkube get agent [name] [flags]
 ### Options
 
 ```
+      --all-environments   show agents from all environments (not just current environment)
       --decrypted-secret   should it fetch decrypted secret key
   -h, --help               help for agent
+      --show-deleted       show only deleted agents
+      --show-unknown       show only unknown agents (agents in cluster not registered in control plane)
 ```
 
 ### Options inherited from parent commands

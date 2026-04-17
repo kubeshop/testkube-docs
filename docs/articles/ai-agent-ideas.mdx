@@ -1,0 +1,221 @@
+# More AI Agent Ideas
+
+Beyond the [detailed examples](/articles/ai-agent-examples-overview), here are additional AI Agent concepts
+to inspire your own automation. Each includes a brief description, suggested tools, and a sample prompt
+to get you started.
+
+:::tip
+Each agent below works with just the built-in Testkube MCP Server tools, but also includes **"Enhance with"**
+suggestions showing how [external MCP Servers](/articles/mcp-servers-for-ai-agents) like Kubernetes, Grafana,
+and GitHub can take it further. The [bottom section](#combining-with-external-mcp-servers) has agents that
+are built around external MCP Servers from the start. Create any agent by following
+[Creating an AI Agent](/articles/defining-ai-agents#creating-a-new-ai-agent).
+:::
+
+## Performance Regression Detector
+
+Monitors execution duration and resource trends to detect workflows that are getting slower over time.
+
+**Tools:** `list_workflows`, `get_workflow_metrics`, `get_workflow_resource_history`, `get_workflow_execution_metrics`, `query_executions`, `get_workflow_definition`
+
+**Sample prompt:**
+
+> Analyze workflows for performance regressions. For each workflow, compare recent execution durations
+> against the historical average. Flag any where duration increased by more than 20% or resource usage
+> shows an upward trend. Present findings as a summary table with the workflow name, metric that regressed,
+> magnitude, and when it started. Use get_workflow_definition to inspect possible causes.
+
+**Enhance with:** **Grafana/Datadog** to compare test duration regressions against application APM metrics
+(response times, throughput) — determining whether slower tests reflect a slower application or a test-side
+issue. **GitHub/GitLab** to correlate regressions with recent workflow definition changes or dependency updates.
+
+---
+
+## Test Suite Curator
+
+Audits your test suite for redundant, overlapping, or unmaintained workflows and recommends consolidation.
+
+**Tools:** `list_workflows`, `get_workflow_definition`, `get_workflow_metrics`, `query_executions`, `list_labels`, `list_workflow_templates`
+
+**Sample prompt:**
+
+> Audit the test suite for maintenance opportunities. Identify workflows that have not run in 30+ days,
+> workflows with overlapping test coverage (similar names, same labels, similar steps), and workflows
+> with consistently 100% pass rates that might be candidates for reduced execution frequency.
+> Recommend which workflows to consolidate, archive, or adjust.
+
+**Enhance with:** **GitHub/GitLab** to check if the test source code has been modified recently —
+stale workflows often correspond to abandoned test repos. **Jira/Linear** to create cleanup tickets
+for each consolidation recommendation so the work gets tracked and assigned.
+
+---
+
+## Resource Right-Sizer
+
+Examines CPU and memory usage across executions and recommends resource request/limit adjustments.
+
+**Tools:** `list_workflows`, `get_workflow_resource_history`, `get_workflow_execution_metrics`, `get_workflow_definition`, `get_workflow_metrics`, `fetch_execution_logs`
+
+**Sample prompt:**
+
+> Analyze resource usage for all workflows. Compare actual CPU/memory usage against configured limits.
+> Flag workflows where peak usage is consistently below 50% of limits (over-provisioned) or above
+> 85% of limits (OOM risk). Recommend adjusted limits at ~130% of observed peak usage.
+> Present a table with current vs recommended values.
+
+**Enhance with:** **Kubernetes** to query actual node capacity, namespace resource quotas, and
+LimitRange defaults — recommendations become cluster-aware rather than based on Testkube metrics alone.
+**Prometheus** to pull container-level CPU/memory time-series for finer-grained analysis than execution
+summaries provide.
+
+---
+
+## Pipeline SLA Guardian
+
+Monitors execution durations against expected baselines and flags regressions with root cause analysis.
+
+**Tools:** `list_workflows`, `get_workflow_metrics`, `query_executions`, `get_workflow_resource_history`, `get_workflow_execution_metrics`, `get_workflow_definition`, `update_execution_tags`
+
+**Sample prompt:**
+
+> Check if workflows are meeting duration SLAs. Compare recent average duration against the
+> historical baseline. Flag workflows where duration increased by more than 25%. For each,
+> diagnose the likely cause (new steps, image changes, resource contention, external dependencies)
+> and recommend a fix. Tag violations with `sla-violation=duration`.
+
+**Enhance with:** **Grafana/Prometheus** to check if SLA breaches correlate with infrastructure
+events (node scaling, high cluster utilization, network latency spikes). **Slack** to post SLA
+violation alerts to a `#pipeline-health` channel with the diagnosis and recommended fix.
+**Jira/Linear** to auto-create a ticket for each SLA violation that needs engineering follow-up.
+
+---
+
+## Environment Health Auditor
+
+Produces a periodic health report covering agent connectivity, error rates, stuck executions, and
+declining workflow health scores.
+
+**Tools:** `list_agents`, `query_executions`, `list_executions`, `get_workflow_metrics`, `list_workflows`, `get_workflow_resource_history`
+
+**Sample prompt:**
+
+> Produce a health report for this environment. Check agent connectivity, calculate execution
+> pass/fail rates for the last 24 hours, identify any stuck or abnormally long-running executions,
+> and find workflows with declining health scores. Present an overall health assessment
+> (healthy/degraded/critical) with recommended actions.
+
+**Tip:** Use the [Scheduled AI Agent Trigger](/articles/ai-triggers#scheduled-ai-agent-triggers) pattern
+to run this agent daily or weekly.
+
+**Enhance with:** **Kubernetes** to include cluster-level health in the report — node status, pending
+pods, resource pressure, and recent events give a fuller picture beyond Testkube execution data.
+**Grafana** to embed dashboard links or metric snapshots in the report. **Slack** to post the
+health report to a team channel on a schedule. **PagerDuty/OpsGenie** to check if any active
+incidents explain degraded health scores.
+
+---
+
+## Workflow Standardization Reviewer
+
+Audits workflows against organizational naming, labeling, and configuration standards.
+
+**Tools:** `list_workflows`, `get_workflow_definition`, `get_workflow`, `list_labels`, `list_workflow_templates`, `get_workflow_template_definition`
+
+**Sample prompt:**
+
+> Audit all workflows for compliance with organizational standards. Check that each workflow has:
+> a consistent naming pattern (lowercase with hyphens), required labels (team, type), explicit
+> resource limits, a configured timeout, and artifact collection for test results.
+> Report the compliance rate and a prioritized list of violations.
+
+**Enhance with:** **GitHub/GitLab** to verify that workflow source repos follow the same standards
+(branch protection, required reviews, CI pipelines). **Confluence/Notion** to pull organizational
+standards documents so the agent audits against the latest team-agreed conventions rather than
+hardcoded rules. **Jira/Linear** to create compliance tickets for violations, grouped by team.
+
+---
+
+## Capacity Planner
+
+Analyzes execution volume patterns and growth trends to recommend infrastructure scaling decisions.
+
+**Tools:** `query_executions`, `list_workflows`, `get_workflow_metrics`, `get_workflow_resource_history`, `list_executions`, `list_agents`
+
+**Sample prompt:**
+
+> Analyze execution volume trends and resource consumption. Identify peak usage hours,
+> growth rate over the last month, and whether current agent/runner capacity is sufficient.
+> Project resource needs for the next quarter and recommend scaling actions
+> (add agents, increase resources, optimize scheduling).
+
+**Enhance with:** **Kubernetes** to query current node pool sizes, autoscaler configuration, and
+resource quotas — the agent can recommend concrete cluster scaling actions, not just abstract
+capacity numbers. **Prometheus/Grafana** to pull historical infrastructure utilization alongside
+Testkube execution data for more accurate growth projections. **Slack** to post the quarterly
+capacity forecast to a `#platform-planning` channel.
+
+---
+
+## Combining with External MCP Servers
+
+The agents above use only the built-in Testkube MCP tools. By connecting
+[external MCP Servers](/articles/mcp-servers-for-ai-agents), you can build agents that bridge Testkube
+with the rest of your toolchain. Here are some ideas:
+
+### Deployment-Aware Failure Analyzer
+
+Connect a **Kubernetes** or **ArgoCD** MCP Server alongside Testkube tools. When a test fails, the agent
+checks recent deployments, rollout status, and pod health — determining whether the failure was caused by
+a bad deploy and suggesting a rollback if needed.
+
+**External tools needed:** Kubernetes pod/deployment status, rollout history, events
+
+---
+
+### Full-Stack Incident Reporter
+
+Connect **Grafana/Datadog** + **Slack** + **Jira** MCP Servers. When a test failure correlates with
+application performance degradation, the agent creates a Jira incident with the test failure details,
+Grafana dashboard links, and posts a summary to the team's Slack channel — all automatically.
+
+**External tools needed:** Grafana dashboard/alert queries, Jira issue creation, Slack messaging
+
+---
+
+### Change Impact Predictor
+
+Connect a **GitHub/GitLab** MCP Server. Before or after a PR merge, the agent analyzes which test
+workflows cover the changed files/services and predicts which tests are most likely to be affected.
+It can suggest which workflows to run first or flag high-risk changes.
+
+**External tools needed:** GitHub PR details, file diff, commit history
+
+---
+
+### Test Environment Provisioning Assistant
+
+Connect a **Kubernetes** + **Helm/ArgoCD** MCP Server. The agent helps users spin up test environments
+by creating namespaces, deploying required services, running the test workflow, and tearing down the
+environment — all through a conversational interface.
+
+**External tools needed:** Kubernetes namespace/deployment management, Helm release management
+
+---
+
+### SLO Compliance Monitor
+
+Connect a **Prometheus/Grafana** MCP Server. The agent compares test execution results against
+SLO targets defined in your monitoring stack. If test pass rates or performance metrics drop below
+SLO thresholds, it generates a compliance report and optionally creates an alert or ticket.
+
+**External tools needed:** Prometheus SLO queries, Grafana alert management
+
+---
+
+### Release Notes Generator
+
+Connect a **GitHub/GitLab** + **Jira/Linear** MCP Server. After a successful test run of a release
+candidate, the agent collects all merged PRs, linked issues, and test results to auto-generate
+release notes with a testing summary — ready for the release manager.
+
+**External tools needed:** GitHub PR listing, Jira issue queries, Slack posting

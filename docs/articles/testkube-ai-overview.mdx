@@ -1,0 +1,92 @@
+# Testkube AI Overview
+
+Testkube AI brings intelligent automation and assistance to your continuous testing pipelines. From
+interactive troubleshooting in the Dashboard to fully automated failure analysis triggered by pipeline
+events, Testkube AI helps both QA engineers and DevOps teams work faster and more effectively.
+
+## AI Assistant
+
+The [AI Assistant](/articles/ai-assistant-overview) is your entry point to Testkube AI — an always-available
+chat interface in the Testkube Dashboard. Open it from the bottom-left button to ask questions, analyze
+failures, or run any AI Agent interactively.
+
+- **Overlay mode** for quick questions on top of your current view
+- **Docked mode** for side-by-side work during longer analysis sessions
+- Switch between AI Agents and LLM models on the fly
+
+[Learn more about the AI Assistant →](/articles/ai-assistant-overview)
+
+## AI Agents
+
+[AI Agents](/articles/ai-agents) are the core of Testkube AI — customizable, LLM-powered workers that
+perform analysis and automation tasks using [MCP (Model Context Protocol)](https://modelcontextprotocol.io)
+tools to interact with your workflows, executions, and external systems.
+
+### Default Agents
+
+Every environment comes with four pre-configured agents ready to use:
+
+| Agent | What it does |
+|-------|-------------|
+| **Testkube Helper** | General-purpose assistant — ask it anything about your workflows, executions, or environment |
+| **Troubleshoot** | Analyzes failed executions — examines logs, artifacts, and history to identify root causes |
+| **Design & Optimize** | Creates new Test Workflows and optimizes existing ones (with approval for changes) |
+| **Analyze & Report** | Summarizes execution trends, workflow health, and metrics into actionable reports |
+
+### Custom Agents
+
+Build agents tailored to your needs by defining a custom prompt and selecting which MCP tools the agent
+can access. Connect external MCP Servers (GitHub, Slack, Jira, etc.) to extend agents beyond Testkube.
+
+- [Defining AI Agents](/articles/defining-ai-agents) — Create and configure custom agents
+- [Connected MCP Servers](/articles/mcp-servers-for-ai-agents) — Integrate external tools
+- [Example Agents](/articles/ai-agent-examples-overview) — Ready-to-use configurations for QA and DevOps
+
+[Learn more about AI Agents →](/articles/ai-agents)
+
+## AI Agent Triggers
+
+[AI Agent Triggers](/articles/ai-triggers) turn agents into automated pipeline components that react to
+events without human intervention. Configure a trigger to automatically run an agent when:
+
+- A workflow execution **fails** — instant root cause analysis or automatic rerun
+- A workflow **changes state** — detect newly broken workflows without repeated noise
+- A scheduled workflow **completes** — periodic health audits, compliance checks, or cost reports
+
+Triggers support label selectors to scope which workflows activate them, prompt templates with execution
+context variables, and deduplication to prevent duplicate sessions.
+
+[Learn more about AI Agent Triggers →](/articles/ai-triggers)
+
+## AI Models
+
+Testkube AI works with your choice of LLM. Platform models are provided out of the box, and you can
+[add your own models](/articles/ai-models) (OpenAI, Azure OpenAI, or any OpenAI-compatible service)
+to use specific models for different agents or tasks.
+
+[Learn more about Configuring AI Models →](/articles/ai-models)
+
+## Testkube MCP Server
+
+The [Testkube MCP Server](/articles/mcp-overview) implements the Model Context Protocol standard, enabling
+AI tools in your IDE — GitHub Copilot, Cursor, Claude, and others — to interact directly with your Testkube
+environment. Run workflows, analyze failures, and manage tests using natural language from your editor.
+
+[Learn more about the MCP Server →](/articles/mcp-overview)
+
+---
+
+## Getting Started
+
+1. **Enable AI** — [Configuration Quick Start](/articles/ai-enabling)
+2. **Try the AI Assistant** — Open it from the Dashboard and ask a default agent to analyze a recent execution
+3. **Create a custom agent** — [Define an agent](/articles/defining-ai-agents) tailored to your workflow, or start from an [example](/articles/ai-agent-examples-overview)
+4. **Automate with triggers** — [Set up a trigger](/articles/ai-triggers) to run agents automatically on failures or on a schedule
+5. **Connect your IDE** — [Configure the MCP Server](/articles/mcp-overview) for AI-assisted testing in your editor
+
+## Reference
+
+- [AI Architecture](/articles/ai-architecture) — How Testkube AI components work together
+- [AI Configuration Reference](/articles/ai-configuration) — Helm-based configuration for on-prem installations
+- [Security & Compliance](/articles/ai-configuration#security--compliance) — Authentication, authorization, and data privacy
+- [MCP Server Security](/articles/mcp-security) — Security considerations for MCP integrations

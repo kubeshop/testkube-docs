@@ -1,0 +1,89 @@
+# Testkube Dependency Impact Analyzer Agent
+
+An AI Agent in Testkube can analyze the blast radius of a test failure by checking if other workflows share
+the same container images, git repositories, or configuration patterns that might also be affected.
+
+## Requirements
+
+A Dependency Impact Analyzer Agent requires:
+
+- **Access to workflow definitions, execution data, and metrics** — provided by the integrated Testkube MCP Server.
+
+This agent uses only the built-in Testkube MCP tools and does not require any external MCP servers.
+
+Optionally, it can also be set up to:
+- Run automatically via [AI Agent Triggers](/articles/ai-triggers) on workflow failure events to immediately assess impact
+- Work alongside the default **Troubleshoot** agent for combined failure analysis and impact assessment
+
+## Create the Dependency Impact Analyzer AI Agent
+
+Create an AI Agent as described at [Creating an AI Agent](/articles/defining-ai-agents#creating-a-new-ai-agent), name it
+what you want and set the prompt to the following (feel free to adapt it to your needs!):
+
+> You are an AI agent that analyzes the blast radius of test failures. When a workflow fails, determine
+> whether other workflows might be affected by the same root cause.
+>
+> When asked to analyze the impact of a failure:
+> 1. Use get_execution_info and fetch_execution_logs to understand why the specified workflow failed
+> 2. Use get_workflow_definition to extract the failed workflow's dependencies:
+>    - Container images (and their versions)
+>    - Git repositories (spec.content.git)
+>    - Shared templates
+>    - Environment variables and config
+>    - Target services or endpoints being tested
+> 3. Use query_workflows to search across all workflows for those sharing the same dependencies:
+>    - Same container image (e.g. all workflows using cypress:13.x)
+>    - Same git repo or test source
+>    - Same target service (check annotations, labels, or step URLs)
+> 4. Use get_workflow_metrics and list_executions for each potentially affected workflow to check
+>    if they are also failing or showing degraded health
+>
+> Report:
+> - **Root cause summary**: what caused the original failure
+> - **Shared dependencies**: which other workflows share the same images, repos, or targets
+> - **Currently affected**: which of those are also failing right now
+> - **At risk**: which share dependencies but are still passing (may fail soon)
+> - **Safe**: which share no dependencies with the failed workflow
+>
+> Present findings as a blast radius diagram (text-based) showing the failed workflow at the center
+> and affected/at-risk workflows around it. Suggest mitigation priorities (e.g. "fix the base image first,
+> it affects 8 workflows").
+
+Enable the following Testkube MCP tools for this agent:
+
+- `get_execution_info` — to understand the original failure
+- `fetch_execution_logs` — for detailed failure analysis
+- `get_workflow_definition` — to extract dependencies from workflow config
+- `query_workflows` — to find workflows sharing the same dependencies
+- `list_workflows` — to discover all workflows
+- `get_workflow_metrics` — to check health of potentially affected workflows
+- `list_executions` — to check recent execution status of related workflows
+
+## Using the Dependency Impact Analyzer AI Agent
+
+### Interactive Analysis
+
+Navigate to a failed execution and start a chat with the agent:
+
+- *"What other workflows might be affected by this failure?"*
+- *"Show me the blast radius of the my-api-test failure"*
+- *"Which workflows use the same base image as this one?"*
+
+### As a Failure Trigger
+
+Set up an [AI Agent Trigger](/articles/ai-triggers) that fires on execution failure events to automatically
+assess the blast radius whenever a key workflow fails. Configure with a prompt like:
+
+> Analyze the blast radius of this failed execution. Identify all workflows sharing the same container images,
+> git repositories, or target services. Report which are currently affected and which are at risk.
+
+## Enhancing with External MCP Servers
+
+Connect additional [MCP Servers](/articles/mcp-servers-for-ai-agents) to deepen the blast radius analysis:
+
+- **GitHub / GitLab** — Inspect recent commits and open PRs to determine if a code change is the likely
+  root cause. The agent can then identify all workflows that test the affected repository or service.
+- **Kubernetes** — Query deployments and services to map which workflows exercise which running services.
+  If a deployment is unhealthy, the agent can instantly identify all workflows that depend on it.
+- **Jira / Linear** — Automatically create a tracking ticket listing all affected workflows, their current
+  status, and the suspected root cause — so the team knows the full scope at a glance.

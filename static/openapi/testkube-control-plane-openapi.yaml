@@ -103,8 +103,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Agent'
-                required:
-                  - items
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -127,8 +125,6 @@ paths:
                   type: string
                   maxLength: 40
                   pattern: ^[a-z0-9]([a-z0-9-.]*[a-z0-9])?$
-                type:
-                  $ref: '#/components/schemas/AgentType'
                 labels:
                   type: object
                   additionalProperties:
@@ -149,7 +145,6 @@ paths:
                   type: boolean
               required:
                 - name
-                - type
                 - environments
         required: true
       responses:
@@ -179,7 +174,6 @@ paths:
     parameters:
       - $ref: '#/components/parameters/ID'
       - $ref: '#/components/parameters/EnvironmentIDQP'
-      - $ref: '#/components/parameters/AgentTypeQP'
       - $ref: '#/components/parameters/AgentCapabilityQP'
       - $ref: '#/components/parameters/Limit'
       - $ref: '#/components/parameters/Offset'
@@ -231,6 +225,13 @@ paths:
             schema:
               type: object
               properties:
+                runnerPolicy:
+                  type: object
+                  properties:
+                    requiredMatch:
+                      type: array
+                      items:
+                        type: string
                 labels:
                   type: object
                   additionalProperties:
@@ -258,6 +259,31 @@ paths:
       - $ref: '#/components/parameters/ID'
       - $ref: '#/components/parameters/AgentName'
       - $ref: '#/components/parameters/IncludeDeleted'
+  /organizations/{id}/agents/{agentID}/commands:
+    get:
+      summary: '[internal] Get commands for this super agent'
+      description: >-
+        Get commands for this super agent. This endpoint is deprecated and will
+        be removed in the near future.
+      operationId: getSuperAgentCommands
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuperAgentCommands'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: '#/components/parameters/ID'
+      - $ref: '#/components/parameters/AgentName'
   /organizations/{id}/agents/{agentID}/secret-key:
     get:
       summary: Get the secret key for selected agent.
@@ -615,8 +641,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Credential'
-                required:
-                  - items
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -638,6 +662,15 @@ paths:
                 name:
                   description: The identifier for the credential.
                   type: string
+                type:
+                  description: >-
+                    The type of credential (secret, variable, or vault).
+                    Defaults to secret if not specified.
+                  type: string
+                  enum:
+                    - secret
+                    - variable
+                    - vault
                 base64:
                   description: Base64-encoded value for the credential.
                   type: string
@@ -658,6 +691,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Credential'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -672,6 +707,23 @@ paths:
       - $ref: '#/components/parameters/ID'
       - $ref: '#/components/parameters/EnvironmentIDQP'
   /organizations/{id}/credentials/{credentialName}:
+    get:
+      summary: Get credential in the organization
+      description: >-
+        Get credential details. Variables will include their decrypted value,
+        secrets will not.
+      operationId: getCredential
+      responses:
+        '200':
+          $ref: '#/components/responses/Credential'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
     delete:
       summary: Delete credential in the organization
       description: Delete credential in the organization.
@@ -929,69 +981,148 @@ paths:
     parameters:
       - $ref: '#/components/parameters/ID'
       - $ref: '#/components/parameters/EnvironmentID'
-  /organizations/{id}/environments/{environmentID}/execution-groups:
+  /organizations/{id}/environments/{environmentID}/credentials:
     get:
-      summary: List Test Workflow executions
-      description: List Test Workflow executions
-      operationId: listExecutionGroupsV2
+      summary: List credentials in the environment
+      description: >-
+        List credentials in the environment. Use filter=all to include
+        organization-level credentials that are not overridden by
+        environment-level credentials.
+      operationId: listEnvironmentCredentials
       parameters:
-        - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
-        - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/PageSize'
-        - $ref: '#/components/parameters/TextSearch'
-        - $ref: '#/components/parameters/Status'
-        - $ref: '#/components/parameters/LastDays'
+        - name: filter
+          in: query
+          description: >-
+            Optional filter to include organization-level credentials. Use 'all'
+            to merge org and env credentials, excluding org credentials that are
+            overridden by env credentials with the same name.
+          schema:
+            type: string
+            enum:
+              - all
       responses:
         '200':
-          $ref: '#/components/responses/ExecutionGroupListV2'
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  elements:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Credential'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
           $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
       security:
         - BearerAuth: []
     post:
-      summary: Schedule Test Workflow execution group
-      description: Schedule Test Workflow execution group
-      operationId: scheduleExecutionV2
+      summary: Create a new credential in the environment
+      description: Create a new credential in the environment.
+      operationId: createEnvironmentCredential
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ScheduleRequestV2'
+              type: object
+              properties:
+                name:
+                  description: The identifier for the credential.
+                  type: string
+                type:
+                  description: >-
+                    The type of credential (secret, variable, or vault).
+                    Defaults to secret if not specified.
+                  type: string
+                  enum:
+                    - secret
+                    - variable
+                    - vault
+                base64:
+                  description: Base64-encoded value for the credential.
+                  type: string
+              required:
+                - name
+                - base64
+        required: true
       responses:
-        '200':
-          description: Successfully created execution group
+        '201':
+          description: Response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExecutionGroupV2'
+                $ref: '#/components/schemas/Credential'
         '400':
           $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
           $ref: '#/components/responses/ForbiddenError'
-        '429':
-          $ref: '#/components/responses/TooManyRequests'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '409':
+          $ref: '#/components/responses/Conflict'
       security:
         - BearerAuth: []
     parameters:
       - $ref: '#/components/parameters/ID'
       - $ref: '#/components/parameters/EnvironmentID'
-  /organizations/{id}/environments/{environmentID}/execution-groups/{executionGroupID}:
+  /organizations/{id}/environments/{environmentID}/credentials/{credentialName}:
     get:
-      summary: Get Test Workflow execution group
-      description: Get Test Workflow execution group
-      operationId: getExecutionGroupV2
+      summary: Get credential in the environment
+      description: >-
+        Get credential details. Variables will include their decrypted value,
+        secrets will not.
+      operationId: getEnvironmentCredential
       responses:
         '200':
-          description: Successfully retrieved execution group
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExecutionGroupV2'
+          $ref: '#/components/responses/Credential'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    delete:
+      summary: Delete credential in the environment
+      description: Delete credential in the environment.
+      operationId: deleteEnvironmentCredential
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    patch:
+      summary: Update value of the credential in the environment
+      description: Update value of the credential in the environment.
+      operationId: updateEnvironmentCredential
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                base64:
+                  description: Base64-encoded value for the credential.
+                  type: string
+              required:
+                - base64
+        required: true
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -1003,7 +1134,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/ID'
       - $ref: '#/components/parameters/EnvironmentID'
-      - $ref: '#/components/parameters/ExecutionGroupID'
+      - $ref: '#/components/parameters/CredentialName'
   /organizations/{id}/environments/{environmentID}/executions:
     get:
       summary: Get recent executions
@@ -1027,6 +1158,9 @@ paths:
       - $ref: '#/components/parameters/Selector'
       - $ref: '#/components/parameters/TextSearch'
       - $ref: '#/components/parameters/Status'
+      - $ref: '#/components/parameters/TagSelector'
+      - $ref: '#/components/parameters/Runner'
+      - $ref: '#/components/parameters/Health'
   /organizations/{id}/environments/{environmentID}/executions/{executionID}/artifact-archive:
     get:
       summary: Get artifact archive
@@ -1043,6 +1177,8 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+        '410':
+          $ref: '#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -1069,6 +1205,8 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+        '410':
+          $ref: '#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -1093,6 +1231,8 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+        '410':
+          $ref: '#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -1124,6 +1264,8 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+        '410':
+          $ref: '#/components/responses/GoneError'
         '500':
           $ref: '#/components/responses/InternalServerError'
       security:
@@ -1200,6 +1342,8 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+        '410':
+          $ref: '#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -1236,6 +1380,8 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+        '410':
+          $ref: '#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -1260,6 +1406,8 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+        '410':
+          $ref: '#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -1269,457 +1417,6 @@ paths:
       - $ref: '#/components/parameters/ArtifactID'
       - $ref: '#/components/parameters/OptionalTestName'
       - $ref: '#/components/parameters/FilterTestsuiteName'
-  /organizations/{id}/environments/{environmentID}/features:
-    get:
-      summary: Get environment features
-      description: Get environment features
-      operationId: getEnvironmentFeatures
-      responses:
-        '200':
-          $ref: '#/components/responses/EnvironmentFeatures'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
-      security:
-        - BearerAuth: []
-    patch:
-      summary: Patch environment features
-      description: Endpoint for updating environment features
-      operationId: patchEnvironmentFeatures
-      requestBody:
-        $ref: '#/components/requestBodies/EnvironmentFeatures'
-      responses:
-        '200':
-          $ref: '#/components/responses/NoBody'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: '#/components/parameters/ID'
-      - $ref: '#/components/parameters/EnvironmentID'
-  /organizations/{id}/environments/{environmentID}/insights/executions:
-    get:
-      summary: Get environment execution duration stats
-      description: Get environment execution duration stats
-      operationId: getEnvironmentExecutionDurationInsights
-      responses:
-        '200':
-          $ref: '#/components/responses/EnvironmentDurationStats'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: '#/components/parameters/ID'
-      - $ref: '#/components/parameters/EnvironmentID'
-      - $ref: '#/components/parameters/StartDateTime'
-      - $ref: '#/components/parameters/EndDateTime'
-      - $ref: '#/components/parameters/GroupBy'
-  /organizations/{id}/environments/{environmentID}/insights/series:
-    get:
-      summary: Get time series insights
-      description: Get time series insights
-      operationId: GetExecutionTimeSeriesInsights
-      responses:
-        '200':
-          $ref: '#/components/responses/TimeSeriesData'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: '#/components/parameters/ID'
-      - $ref: '#/components/parameters/EnvironmentID'
-      - $ref: '#/components/parameters/StartDateTime'
-      - $ref: '#/components/parameters/EndDateTime'
-      - $ref: '#/components/parameters/Measure'
-      - $ref: '#/components/parameters/Aggregate'
-      - $ref: '#/components/parameters/Segment'
-      - $ref: '#/components/parameters/Selector'
-      - $ref: '#/components/parameters/Status'
-      - $ref: '#/components/parameters/Workflow'
-  /organizations/{id}/environments/{environmentID}/insights/stats:
-    get:
-      summary: Get environment execution count stats
-      description: Get environment execution count stats
-      operationId: getEnvironmentExecutionCountInsights
-      responses:
-        '200':
-          $ref: '#/components/responses/EnvironmentExecutionStats'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: '#/components/parameters/ID'
-      - $ref: '#/components/parameters/EnvironmentID'
-      - $ref: '#/components/parameters/StartDateTime'
-      - $ref: '#/components/parameters/EndDateTime'
-      - $ref: '#/components/parameters/Workflow'
-  /organizations/{id}/environments/{environmentID}/insights/workflows:
-    get:
-      summary: Get environment workflow summaries
-      description: Get environment workflow summaries
-      operationId: getEnvironmentWorkflowSummaryInsights
-      responses:
-        '200':
-          $ref: '#/components/responses/EnvironmentWorkflowSummaries'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: '#/components/parameters/ID'
-      - $ref: '#/components/parameters/EnvironmentID'
-      - $ref: '#/components/parameters/StartDateTime'
-      - $ref: '#/components/parameters/EndDateTime'
-  /organizations/{id}/environments/{environmentID}/logs-search-keywords:
-    get:
-      summary: Get Testkube Pro logs search keywords for execution
-      description: Get Logs search keywords separately from execution
-      operationId: getExecutionLogsSearchKeywords
-      responses:
-        '200':
-          $ref: '#/components/responses/LogsSearchKeywords'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
-      security:
-        - BearerAuth: []
-    patch:
-      summary: Update execution logs search keywords
-      description: Update execution logs search keywords
-      operationId: updateExecutionLogsSearchKeywords
-      requestBody:
-        $ref: '#/components/requestBodies/LogsSearchKeywords'
-      responses:
-        '200':
-          $ref: '#/components/responses/LogsSearchKeywords'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: '#/components/parameters/ID'
-      - $ref: '#/components/parameters/EnvironmentID'
-  /organizations/{id}/environments/{environmentID}/members:
-    get:
-      summary: Get environment members
-      description: Get environment members
-      operationId: getEnvironmentMembers
-      responses:
-        '200':
-          $ref: '#/components/responses/EnvironmentMembers'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-      deprecated: true
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: '#/components/parameters/ID'
-      - $ref: '#/components/parameters/EnvironmentID'
-  /organizations/{id}/environments/{environmentID}/members/{memberEmail}:
-    delete:
-      summary: Remove user from environment
-      description: Remove user from environment
-      operationId: deleteEnvironmentMember
-      responses:
-        '204':
-          $ref: '#/components/responses/NoContent'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-      deprecated: true
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: '#/components/parameters/ID'
-      - $ref: '#/components/parameters/EnvironmentID'
-      - $ref: '#/components/parameters/MemberEmail'
-  /organizations/{id}/environments/{environmentID}/status-pages:
-    get:
-      summary: List status pages
-      description: Returns a list of status pages
-      operationId: listStatusPages
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/EnvironmentID'
-      responses:
-        '200':
-          $ref: '#/components/responses/StatusPages'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-    post:
-      summary: Create new status page
-      description: Creates a new status page
-      operationId: createStatusPage
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/EnvironmentID'
-      requestBody:
-        description: body passed to configure new status page
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/StatusPage'
-      responses:
-        '201':
-          description: status page successfully created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StatusPage'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-  /organizations/{id}/environments/{environmentID}/status-pages/{statusPageID}:
-    get:
-      summary: Get status page by ID
-      description: Returns a status page for the given statusPageId
-      operationId: getStatusPage
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/EnvironmentID'
-        - name: statusPageID
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StatusPage'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-    delete:
-      summary: Delete a status page
-      description: Deletes the status page with the given ID
-      operationId: deleteStatusPage
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/EnvironmentID'
-        - name: statusPageID
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '204':
-          $ref: '#/components/responses/NoContent'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-    patch:
-      summary: Update an existing status page
-      description: Updates an existing status page
-      operationId: updateStatusPage
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/EnvironmentID'
-        - name: statusPageID
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        description: body passed to configure new status page
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/StatusPage'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StatusPage'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-  /organizations/{id}/environments/{environmentID}/status-pages/{statusPageID}/incidents:
-    get:
-      summary: List incidents for a status page
-      description: Returns the list of incidents assigned to a status page
-      operationId: listIncidents
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/EnvironmentID'
-        - $ref: '#/components/parameters/StatusPageID'
-        - $ref: '#/components/parameters/Visibility'
-      responses:
-        '200':
-          $ref: '#/components/responses/Incidents'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-    post:
-      summary: Create new incident
-      description: Creates an incident
-      operationId: createIncident
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/EnvironmentID'
-        - $ref: '#/components/parameters/StatusPageID'
-      requestBody:
-        description: body passed to configure new incident
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Incident'
-      responses:
-        '201':
-          description: incident successfully created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Incident'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-  /organizations/{id}/environments/{environmentID}/status-pages/{statusPageID}/incidents/{incidentID}:
-    get:
-      summary: Get incident by ID
-      description: Returns an incident for the given incidentID
-      operationId: getIncident
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/EnvironmentID'
-        - $ref: '#/components/parameters/StatusPageID'
-        - name: incidentID
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Incident'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-    delete:
-      summary: Deletes an incident
-      description: Deletes the incident with the given ID
-      operationId: deleteIncident
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/EnvironmentID'
-        - $ref: '#/components/parameters/StatusPageID'
-        - name: incidentID
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '204':
-          $ref: '#/components/responses/NoContent'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-    patch:
-      summary: Updates an existing incident
-      description: Updates an existing incident
-      operationId: updateIncident
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/EnvironmentID'
-        - $ref: '#/components/parameters/StatusPageID'
-        - name: incidentID
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        description: body passed to configure new incident
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Incident'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Incident'
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-  /organizations/{id}/environments/{environmentID}/test-suites/{testSuiteName}:
-    delete:
-      summary: Delete testsuite
-      description: Deletes test-suite executions
-      operationId: deleteTestSuiteExecutions
-      responses:
-        '204':
-          $ref: '#/components/responses/NoContent'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: '#/components/parameters/ID'
-      - $ref: '#/components/parameters/EnvironmentID'
-      - $ref: '#/components/parameters/TestSuiteName'
   /organizations/{id}/environments/{environmentID}/test-workflow-executions/{executionID}/artifacts:
     post:
       summary: Get Test Workflow artifact
@@ -1869,6 +1566,57 @@ paths:
       - $ref: '#/components/parameters/EnvironmentID'
       - $ref: '#/components/parameters/ExecutionID'
       - $ref: '#/components/parameters/ArtifactID'
+  /organizations/{id}/environments/{environmentID}/test-workflow-executions/summaries:
+    get:
+      summary: Get execution summaries in bulk
+      description: Returns a map of execution ID to JSON summary for MCP query tools
+      operationId: getTestWorkflowExecutionSummariesBulk
+      parameters:
+        - name: workflowName
+          in: query
+          description: Filter by workflow name
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Filter by execution status
+          schema:
+            type: string
+        - name: textSearch
+          in: query
+          description: Text search filter
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          description: Maximum number of executions to return (default 50, max 100)
+          schema:
+            type: integer
+            maximum: 100
+            default: 50
+      responses:
+        '200':
+          description: Map of execution ID to JSON summary
+          content:
+            application/json:
+              schema:
+                description: Map where key is execution ID and value is JSON summary
+                type: object
+                additionalProperties:
+                  type: string
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: '#/components/parameters/ID'
+      - $ref: '#/components/parameters/EnvironmentID'
   /organizations/{id}/environments/{environmentID}/test-workflows/{testWorkflowName}:
     delete:
       summary: Delete test workflow
@@ -1887,110 +1635,38 @@ paths:
       - $ref: '#/components/parameters/ID'
       - $ref: '#/components/parameters/EnvironmentID'
       - $ref: '#/components/parameters/TestWorkflowName'
-  /organizations/{id}/environments/{environmentID}/test-workflows/{testWorkflowName}/execution-groups:
+  /organizations/{id}/environments/{environmentID}/test-workflows/{testWorkflowName}/credentials:
     get:
-      summary: List Test Workflow executions
-      description: List Test Workflow executions
-      operationId: listExecutionGroupsForTestWorkflowV2
+      summary: List credentials for the test workflow
+      description: >-
+        List credentials for the specified test workflow. Use filter=all to
+        include organization and environment credentials that are not overridden
+        by workflow-level credentials.
+      operationId: listWorkflowCredentials
       parameters:
-        - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
-        - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/PageSize'
-        - $ref: '#/components/parameters/TextSearch'
-        - $ref: '#/components/parameters/Status'
-        - $ref: '#/components/parameters/LastDays'
+        - name: filter
+          in: query
+          description: >-
+            Optional filter to include organization and environment credentials.
+            Use 'all' to merge org, env, and workflow credentials, with workflow
+            overriding env and org, and env overriding org for credentials with
+            the same name.
+          schema:
+            type: string
+            enum:
+              - all
       responses:
         '200':
-          $ref: '#/components/responses/ExecutionGroupListV2'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: '#/components/parameters/ID'
-      - $ref: '#/components/parameters/EnvironmentID'
-      - $ref: '#/components/parameters/TestWorkflowName'
-  /organizations/{id}/environments/{environmentID}/test-workflows/{testWorkflowName}/execution-groups/{executionGroupID}:
-    get:
-      summary: Get Test Workflow execution group by test workflow name
-      description: Get Test Workflow execution group by test workflow name
-      operationId: getExecutionGroupForTestWorkflowV2
-      responses:
-        '200':
-          description: Successfully retrieved execution group for test workflow
+          description: Response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExecutionGroupV2'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: '#/components/parameters/ID'
-      - $ref: '#/components/parameters/EnvironmentID'
-      - $ref: '#/components/parameters/TestWorkflowName'
-      - $ref: '#/components/parameters/ExecutionGroupID'
-  /organizations/{id}/environments/{environmentID}/tests/{testName}:
-    delete:
-      summary: Delete test
-      description: Deletes test executions
-      operationId: deleteTestExecutions
-      responses:
-        '204':
-          $ref: '#/components/responses/NoContent'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: '#/components/parameters/ID'
-      - $ref: '#/components/parameters/EnvironmentID'
-      - $ref: '#/components/parameters/TestName'
-  /organizations/{id}/environments/{environmentID}/tests/{testName}/labels:
-    get:
-      summary: Get labels for environment
-      description: Get labels for a test in the specified environment
-      operationId: listTestLabels
-      responses:
-        '200':
-          $ref: '#/components/responses/Labels'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-      security:
-        - BearerAuth: []
-    parameters:
-      - $ref: '#/components/parameters/ID'
-      - $ref: '#/components/parameters/EnvironmentID'
-      - $ref: '#/components/parameters/TestName'
-  /organizations/{id}/environments/{environmentID}/views:
-    get:
-      summary: List views
-      description: List all views for an environment
-      operationId: listViews
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/EnvironmentID'
-        - name: entity
-          in: query
-          description: Filter by environment view entity
-          schema:
-            type: string
-            example: workflow
-      responses:
-        '200':
-          $ref: '#/components/responses/Views'
+                type: object
+                properties:
+                  elements:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Credential'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -2000,26 +1676,41 @@ paths:
       security:
         - BearerAuth: []
     post:
-      summary: Create view
-      description: Create a new view
-      operationId: createView
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/EnvironmentID'
-        - name: isPrivate
-          in: query
-          description: >-
-            Whether the view should be private (true) or shared (false). Private
-            views are only visible to the user who created them, while shared
-            views are visible to all users in the environment.
-          schema:
-            type: boolean
-            default: true
+      summary: Create a new credential for the test workflow
+      description: Create a new credential for the specified test workflow.
+      operationId: createWorkflowCredential
       requestBody:
-        $ref: '#/components/requestBodies/View'
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: The identifier for the credential.
+                  type: string
+                type:
+                  description: >-
+                    The type of credential (secret, variable, or vault).
+                    Defaults to secret if not specified.
+                  type: string
+                  enum:
+                    - secret
+                    - variable
+                    - vault
+                base64:
+                  description: Base64-encoded value for the credential.
+                  type: string
+              required:
+                - name
+                - base64
+        required: true
       responses:
-        '200':
-          $ref: '#/components/responses/View'
+        '201':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credential'
         '400':
           $ref: '#/components/responses/BadRequestError'
         '401':
@@ -2028,22 +1719,36 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+        '409':
+          $ref: '#/components/responses/Conflict'
       security:
         - BearerAuth: []
-  /organizations/{id}/environments/{environmentID}/views/{viewID}:
+    parameters:
+      - $ref: '#/components/parameters/ID'
+      - $ref: '#/components/parameters/EnvironmentID'
+      - $ref: '#/components/parameters/TestWorkflowName'
+  /organizations/{id}/environments/{environmentID}/test-workflows/{testWorkflowName}/credentials/{credentialName}:
+    get:
+      summary: Get credential for the test workflow
+      description: >-
+        Get credential details. Variables will include their decrypted value,
+        secrets will not.
+      operationId: getWorkflowCredential
+      responses:
+        '200':
+          $ref: '#/components/responses/Credential'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
     delete:
-      summary: Delete view
-      description: Delete a view
-      operationId: deleteView
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/EnvironmentID'
-        - name: viewID
-          in: path
-          description: View ID
-          required: true
-          schema:
-            type: string
+      summary: Delete credential for the test workflow
+      description: Delete credential for the specified test workflow.
+      operationId: deleteWorkflowCredential
       responses:
         '204':
           $ref: '#/components/responses/NoContent'
@@ -2055,6 +1760,84 @@ paths:
           $ref: '#/components/responses/NotFoundError'
       security:
         - BearerAuth: []
+    patch:
+      summary: Update value of the credential for the test workflow
+      description: Update value of the credential for the specified test workflow.
+      operationId: updateWorkflowCredential
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                base64:
+                  description: Base64-encoded value for the credential.
+                  type: string
+              required:
+                - base64
+        required: true
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: '#/components/parameters/ID'
+      - $ref: '#/components/parameters/EnvironmentID'
+      - $ref: '#/components/parameters/TestWorkflowName'
+      - $ref: '#/components/parameters/CredentialName'
+  /organizations/{id}/environments/{environmentID}/test-workflows/definitions:
+    get:
+      summary: Get workflow definitions in bulk
+      description: Returns a map of workflow name to YAML definition for MCP query tools
+      operationId: getTestWorkflowDefinitionsBulk
+      parameters:
+        - name: selector
+          in: query
+          description: Label selector to filter workflows
+          schema:
+            type: string
+        - name: resourceGroup
+          in: query
+          description: Resource group to filter workflows
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          description: Maximum number of workflows to return (default 50, max 100)
+          schema:
+            type: integer
+            maximum: 100
+            default: 50
+      responses:
+        '200':
+          description: Map of workflow name to YAML definition
+          content:
+            application/json:
+              schema:
+                description: Map where key is workflow name and value is YAML definition
+                type: object
+                additionalProperties:
+                  type: string
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: '#/components/parameters/ID'
+      - $ref: '#/components/parameters/EnvironmentID'
   /organizations/{id}/environments/{environmentId}/agent/executions:
     get:
       summary: Get all test executions
@@ -2406,1812 +2189,6 @@ paths:
                   $ref: '#/components/schemas/LogV2'
         '500':
           description: problem with getting execution's logs version 2
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/executor-by-types:
-    get:
-      summary: Get executor details by type
-      description: Returns executors data with executions passed to executor
-      operationId: getExecutorByType
-      parameters:
-        - $ref: '#/components/parameters/TestType'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExecutorDetails'
-            text/yaml:
-              schema:
-                type: string
-        '400':
-          description: problem with input for CRD generation
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with getting executor data
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/executors:
-    get:
-      summary: List executors
-      description: List executors available in cluster
-      operationId: listExecutors
-      parameters:
-        - $ref: '#/components/parameters/Selector'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Executor'
-            text/yaml:
-              schema:
-                type: string
-        '400':
-          description: problem with input for CRD generation
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with read information from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    post:
-      summary: Create new executor
-      description: Create new executor based on variables passed in request
-      operationId: createExecutor
-      requestBody:
-        description: executor request body data
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ExecutorUpsertRequest'
-          text/yaml:
-            schema:
-              type: string
-        required: true
-      responses:
-        '200':
-          description: successful operation
-          content:
-            text/yaml:
-              schema:
-                type: string
-        '201':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExecutorDetails'
-        '400':
-          description: >-
-            problem with executor definition - probably some bad input occurs
-            (invalid JSON body or similar)
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    delete:
-      summary: Delete executors
-      description: Deletes labeled executors
-      operationId: deleteExecutors
-      parameters:
-        - $ref: '#/components/parameters/Selector'
-      responses:
-        '204':
-          description: no content
-        '502':
-          description: problem with read information from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/executors/{id}:
-    get:
-      summary: Get executor details
-      description: Returns executors data with executions passed to executor
-      operationId: getExecutor
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExecutorDetails'
-            text/yaml:
-              schema:
-                type: string
-        '400':
-          description: problem with input for CRD generation
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with getting executor data
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    delete:
-      summary: Delete executor
-      description: Deletes executor by its name
-      operationId: deleteExecutor
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      responses:
-        '204':
-          description: executor deleted successfuly
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    patch:
-      summary: Update executor
-      description: Update new executor based on variables passed in request
-      operationId: updateExecutor
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      requestBody:
-        description: executor request body data
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ExecutorUpdateRequest'
-          text/yaml:
-            schema:
-              type: string
-        required: true
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExecutorDetails'
-        '400':
-          description: >-
-            problem with executor definition - probably some bad input occurs
-            (invalid JSON body or similar)
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '404':
-          description: executor not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/templates:
-    get:
-      summary: List templates
-      description: List templates available in cluster
-      operationId: listTemplates
-      parameters:
-        - $ref: '#/components/parameters/Selector'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Template'
-            text/yaml:
-              schema:
-                type: string
-        '400':
-          description: problem with input for CRD generation
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with read information from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    post:
-      summary: Create new template
-      description: Create new template based on variables passed in request
-      operationId: createTemplate
-      requestBody:
-        description: template request body data
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TemplateCreateRequest'
-          text/yaml:
-            schema:
-              type: string
-        required: true
-      responses:
-        '200':
-          description: successful operation
-          content:
-            text/yaml:
-              schema:
-                type: string
-        '201':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Template'
-        '400':
-          description: >-
-            problem with template definition - probably some bad input occurs
-            (invalid JSON body or similar)
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    delete:
-      summary: Delete templates
-      description: Deletes labeled templates
-      operationId: deleteTemplates
-      parameters:
-        - $ref: '#/components/parameters/Selector'
-      responses:
-        '204':
-          description: no content
-        '502':
-          description: problem with read information from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/templates/{id}:
-    get:
-      summary: Get template details
-      description: Returns template
-      operationId: getTemplate
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Template'
-            text/yaml:
-              schema:
-                type: string
-        '400':
-          description: problem with input for CRD generation
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '404':
-          description: template not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with getting template data
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    delete:
-      summary: Delete template
-      description: Deletes template by its name
-      operationId: deleteTemplate
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      responses:
-        '204':
-          description: template deleted successfuly
-        '404':
-          description: template not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    patch:
-      summary: Update new template
-      description: Update new template based on variables passed in request
-      operationId: updateTemplate
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      requestBody:
-        description: template request body data
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TemplateUpdateRequest'
-          text/yaml:
-            schema:
-              type: string
-        required: true
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Template'
-        '400':
-          description: >-
-            problem with template definition - probably some bad input occurs
-            (invalid JSON body or similar)
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '404':
-          description: template not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/test-sources:
-    get:
-      summary: List test sources
-      description: List test sources available in cluster
-      operationId: listTestSources
-      parameters:
-        - $ref: '#/components/parameters/Selector'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TestSource'
-            text/yaml:
-              schema:
-                type: string
-        '400':
-          description: problem with input for CRD generation
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with read information from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    post:
-      summary: Create new test source
-      description: Create new test source based on variables passed in request
-      operationId: createTestSource
-      requestBody:
-        description: test source request body data
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TestSourceUpsertRequest'
-          text/yaml:
-            schema:
-              type: string
-        required: true
-      responses:
-        '200':
-          description: successful operation
-          content:
-            text/yaml:
-              schema:
-                type: string
-        '201':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TestSource'
-        '400':
-          description: >-
-            problem with test source definition - probably some bad input occurs
-            (invalid JSON body or similar)
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    delete:
-      summary: Delete test sources
-      description: Deletes labeled test sources
-      operationId: deleteTestSources
-      parameters:
-        - $ref: '#/components/parameters/Selector'
-      responses:
-        '204':
-          description: no content
-        '502':
-          description: problem with read information from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    patch:
-      summary: Process test source batch (create, update, delete)
-      description: Process test source batch based on variables passed in request
-      operationId: processTestSourceBatch
-      requestBody:
-        description: test source batch request body data
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TestSourceBatchRequest'
-        required: true
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TestSourceBatchResult'
-        '400':
-          description: >-
-            problem with test source definition - probably some bad input occurs
-            (invalid JSON body or similar)
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/test-sources/{id}:
-    get:
-      summary: Get test source data
-      description: Returns test sources data
-      operationId: getTestSource
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TestSource'
-            text/yaml:
-              schema:
-                type: string
-        '400':
-          description: problem with input for CRD generation
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '404':
-          description: test source not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with getting test source data
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    delete:
-      summary: Delete test source
-      description: Deletes test source by its name
-      operationId: deleteTestSource
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      responses:
-        '204':
-          description: test source deleted successfuly
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    patch:
-      summary: Update test source
-      description: Update test source based on test content or git based data
-      operationId: updateTestSource
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      requestBody:
-        description: test source body
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TestSourceUpdateRequest'
-          text/yaml:
-            schema:
-              type: string
-        required: true
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TestSource'
-        '400':
-          description: >-
-            problem with test source definition - probably some bad input occurs
-            (invalid JSON body or similar)
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '404':
-          description: test source not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/test-suite-executions:
-    get:
-      summary: Get all test suite executions
-      description: Returns array of test suite executions
-      operationId: listAllTestSuiteExecutions
-      parameters:
-        - $ref: '#/components/parameters/LastNDays'
-        - $ref: '#/components/parameters/TestName'
-        - $ref: '#/components/parameters/TextSearch'
-        - $ref: '#/components/parameters/PageSize'
-        - $ref: '#/components/parameters/PageIndex'
-        - $ref: '#/components/parameters/TestExecutionsStatusFilter'
-        - $ref: '#/components/parameters/StartDateFilter'
-        - $ref: '#/components/parameters/EndDateFilter'
-        - $ref: '#/components/parameters/Selector'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TestSuiteExecutionsResult'
-        '500':
-          description: problem with getting test suite executions from storage
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    post:
-      summary: Starts new test suite executions
-      description: >-
-        New test suite executions returns new executions details on successful
-        executions start
-      operationId: executeTestSuites
-      parameters:
-        - $ref: '#/components/parameters/Namespace'
-        - $ref: '#/components/parameters/Selector'
-        - $ref: '#/components/parameters/ConcurrencyLevel'
-      requestBody:
-        description: body passed to configure executions
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TestSuiteExecutionRequest'
-        required: true
-      responses:
-        '201':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TestSuiteExecutionsResult'
-        '400':
-          description: problem with request body
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with test suites executions
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/test-suite-executions/{executionID}:
-    get:
-      summary: Get test suite execution by ID
-      description: Returns test suite execution with given executionID
-      operationId: getTestSuiteExecutionByID
-      parameters:
-        - $ref: '#/components/parameters/executionID'
-        - $ref: '#/components/parameters/LastNDays'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TestSuiteExecution'
-        '500':
-          description: problem with getting test suite execution from storage
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    patch:
-      summary: Aborts testsuite execution
-      description: Aborts testsuite execution with given executionID
-      operationId: abortTestSuiteExecutionByID
-      parameters:
-        - $ref: '#/components/parameters/executionID'
-      responses:
-        '204':
-          description: no content
-        '502':
-          description: problem with read information from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/test-suite-executions/{executionID}/artifacts:
-    get:
-      summary: Get test suite execution artifacts
-      description: Returns test suite execution artifacts with given executionID
-      operationId: getTestSuiteExecutionArtifacts
-      parameters:
-        - $ref: '#/components/parameters/executionID'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Artifact'
-        '500':
-          description: problem with getting test suite executions from storage
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/test-suite-with-executions:
-    get:
-      summary: Get all test suite with executions
-      description: Returns array of test suite with executions
-      operationId: listTestSuiteWithExecutions
-      parameters:
-        - $ref: '#/components/parameters/Selector'
-        - $ref: '#/components/parameters/TextSearch'
-        - $ref: '#/components/parameters/TestExecutionsStatusFilter'
-        - $ref: '#/components/parameters/PageSize'
-        - $ref: '#/components/parameters/PageIndex'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TestSuiteWithExecutionSummary'
-            text/yaml:
-              schema:
-                type: string
-        '400':
-          description: problem with input
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with getting test suite with executions from storage
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with getting test suite from Kubernetes clusteer
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/test-suite-with-executions/{id}:
-    get:
-      summary: Get test suite by ID with execution
-      description: Returns test suite with given name with execution
-      operationId: getTestSuiteByIDWithExecution
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TestSuiteWithExecution'
-            text/yaml:
-              schema:
-                type: string
-        '500':
-          description: problem with getting test suite with execution from storage
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/test-suites:
-    get:
-      summary: Get all test suites
-      description: Returns array of test suites
-      operationId: listTestSuites
-      parameters:
-        - $ref: '#/components/parameters/Selector'
-        - $ref: '#/components/parameters/TextSearch'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TestSuite'
-            text/yaml:
-              schema:
-                type: string
-        '400':
-          description: problem with input for CRD generation
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with listing test suites from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    post:
-      summary: Create new test suite
-      description: Create new test suite action
-      operationId: createTestSuite
-      requestBody:
-        description: test details body
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TestSuiteUpsertRequest'
-          text/yaml:
-            schema:
-              type: string
-        required: true
-      responses:
-        '200':
-          description: successful operation
-          content:
-            text/yaml:
-              schema:
-                type: string
-        '201':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TestSuite'
-        '400':
-          description: >-
-            problem with test suite definition - probably some bad input occurs
-            (invalid JSON body or similar)
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    delete:
-      summary: Delete test suites
-      description: Deletes all or labeled test suites
-      operationId: deleteTestSuites
-      parameters:
-        - $ref: '#/components/parameters/Selector'
-      responses:
-        '204':
-          description: no content
-        '404':
-          description: test suite not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with read information from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/test-suites/{id}:
-    get:
-      summary: Get test suite by ID
-      description: Returns test suite with given name
-      operationId: getTestSuiteByID
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TestSuite'
-            text/yaml:
-              schema:
-                type: string
-        '404':
-          description: test suite not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: could not get execution result from the database
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    delete:
-      summary: Delete test suite
-      description: Deletes a test suite
-      operationId: deleteTestSuite
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/SkipDeleteCRD'
-      responses:
-        '204':
-          description: no content
-        '404':
-          description: test suite not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with read information from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    patch:
-      summary: Update test suite
-      description: Update test based on test suite content or git based data
-      operationId: updateTestSuite
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      requestBody:
-        description: test suite details body
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TestSuiteUpdateRequest'
-          text/yaml:
-            schema:
-              type: string
-        required: true
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TestSuite'
-        '400':
-          description: >-
-            problem with test suite definition - probably some bad input occurs
-            (invalid JSON body or similar)
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '404':
-          description: test suite not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/test-suites/{id}/abort:
-    post:
-      summary: Abort all executions of a test suite
-      description: Abort all test executions of a test suite
-      operationId: abortTestSuiteExecutions
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      responses:
-        '204':
-          description: no content
-        '404':
-          description: no execution found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with aborting test suite execution
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with read information from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/test-suites/{id}/executions:
-    get:
-      summary: Get all test suite executions
-      description: Returns array of all available test suite executions
-      operationId: listTestSuiteExecutions
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/PageSize'
-        - $ref: '#/components/parameters/PageIndex'
-        - $ref: '#/components/parameters/TestExecutionsStatusFilter'
-        - $ref: '#/components/parameters/StartDateFilter'
-        - $ref: '#/components/parameters/EndDateFilter'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TestSuiteExecutionsResult'
-        '500':
-          description: problem with getting test suite executions from storage
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    post:
-      summary: Starts new test suite execution
-      description: >-
-        New test suite execution returns new execution details on successful
-        execution start
-      operationId: executeTestSuite
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/Namespace'
-        - $ref: '#/components/parameters/LastNDays'
-        - $ref: '#/components/parameters/TestSuiteExecutionName'
-      requestBody:
-        description: body passed to configure execution
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TestSuiteExecutionRequest'
-        required: true
-      responses:
-        '201':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TestSuiteExecutionsResult'
-        '400':
-          description: problem with request body
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '404':
-          description: test suite not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with test suite execution
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/test-suites/{id}/executions/{executionID}:
-    get:
-      summary: Get test suite execution
-      description: Returns test suite execution with given executionID
-      operationId: getTestSuiteExecution
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/executionID'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TestSuiteExecution'
-        '404':
-          description: test not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with getting test suite executions from storage
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with Kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    patch:
-      summary: Aborts testsuite execution
-      description: Aborts testsuite execution with given executionID
-      operationId: abortTestSuiteExecution
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/executionID'
-      responses:
-        '204':
-          description: no content
-        '404':
-          description: test suite not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with read information from storage
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/test-suites/{id}/executions/{executionID}/artifacts:
-    get:
-      summary: Get test suite execution artifacts
-      description: Returns test suite execution artifacts with given executionID
-      operationId: getTestSuiteExecutionArtifactsByTestsuite
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/executionID'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Artifact'
-        '404':
-          description: test suite not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with getting test suite executions from storage
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/test-suites/{id}/metrics:
-    get:
-      summary: Get test suite metrics
-      description: >-
-        Gets test suite metrics for given tests executions, with particular
-        execution status and timings
-      operationId: getTestSuiteMetrics
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/LastNDays'
-        - $ref: '#/components/parameters/Limit'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExecutionsMetrics'
-        '500':
-          description: problem with read information from storage
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/test-suites/{id}/tests:
-    get:
-      summary: List tests for test suite
-      description: List available tests for test suite
-      operationId: listTestSuiteTests
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Test'
-            text/yaml:
-              schema:
-                type: string
-        '404':
-          description: test suite not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with read information from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/test-with-executions:
-    get:
-      summary: List test with executions
-      description: List available test with executions
-      operationId: listTestWithExecutions
-      parameters:
-        - $ref: '#/components/parameters/Selector'
-        - $ref: '#/components/parameters/TextSearch'
-        - $ref: '#/components/parameters/ExecutionsStatusFilter'
-        - $ref: '#/components/parameters/PageSize'
-        - $ref: '#/components/parameters/PageIndex'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TestWithExecutionSummary'
-            text/yaml:
-              schema:
-                type: string
-        '400':
-          description: invalid parameters
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with getting tests and their executions
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with read information from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/test-with-executions/{id}:
-    get:
-      summary: Get test with execution
-      description: Gets the specified test with execution
-      operationId: getTestWithExecution
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TestWithExecution'
-            text/yaml:
-              schema:
-                type: string
-        '400':
-          description: invalid parameters
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '404':
-          description: no tests found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with getting tests and their executions
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with read information from kubernetes cluster
           content:
             application/problem+json:
               schema:
@@ -5831,540 +3808,6 @@ paths:
         required: true
         schema:
           type: string
-  /organizations/{id}/environments/{environmentId}/agent/tests:
-    get:
-      summary: List tests
-      description: List available tests
-      operationId: listTests
-      parameters:
-        - $ref: '#/components/parameters/Selector'
-        - $ref: '#/components/parameters/TextSearch'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Test'
-            text/yaml:
-              schema:
-                type: string
-        '400':
-          description: invalid parameters
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with read information from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    post:
-      summary: Create new test
-      description: Create new test based on file content, uri or git based data
-      operationId: createTest
-      requestBody:
-        description: test details body
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TestUpsertRequest'
-          text/yaml:
-            schema:
-              type: string
-        required: true
-      responses:
-        '200':
-          description: successful operation
-          content:
-            text/yaml:
-              schema:
-                type: string
-        '201':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Test'
-        '400':
-          description: >-
-            problem with test definition - probably some bad input occurs
-            (invalid JSON body or similar)
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    delete:
-      summary: Delete tests
-      description: Deletes all or labeled tests
-      operationId: deleteTests
-      parameters:
-        - $ref: '#/components/parameters/Selector'
-      responses:
-        '204':
-          description: no content
-        '404':
-          description: no tests found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with deleting tests and their executions
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with read information from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/tests/{id}:
-    get:
-      summary: Get test
-      description: Gets the specified test
-      operationId: getTest
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Test'
-            text/yaml:
-              schema:
-                type: string
-        '400':
-          description: invalid parameters
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '404':
-          description: test not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with read information from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    delete:
-      summary: Delete test
-      description: Deletes a test
-      operationId: deleteTest
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/SkipDeleteExecutions'
-        - $ref: '#/components/parameters/SkipDeleteCRD'
-      responses:
-        '204':
-          description: no content
-        '404':
-          description: no tests found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with deleting test and its executions
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with read information from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    patch:
-      summary: Update test
-      description: Update test based on test content or git based data
-      operationId: updateTest
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      requestBody:
-        description: test details body
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TestUpdateRequest'
-          text/yaml:
-            schema:
-              type: string
-        required: true
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Test'
-        '400':
-          description: >-
-            problem with test definition - probably some bad input occurs
-            (invalid JSON body or similar)
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '404':
-          description: test not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/tests/{id}/abort:
-    post:
-      summary: Abort all executions of a test
-      description: Abort all test executions
-      operationId: abortTestExecutions
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      responses:
-        '204':
-          description: no content
-        '404':
-          description: no execution found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with aborting test execution
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with read information from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/tests/{id}/executions:
-    get:
-      summary: Get all test executions
-      description: Returns array of all available test executions
-      operationId: listTestExecutions
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/LastNDays'
-        - $ref: '#/components/parameters/PageSize'
-        - $ref: '#/components/parameters/PageIndex'
-        - $ref: '#/components/parameters/ExecutionsStatusFilter'
-        - $ref: '#/components/parameters/StartDateFilter'
-        - $ref: '#/components/parameters/EndDateFilter'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExecutionsResult'
-        '404':
-          description: test or execution not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with getting test executions from storage
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    post:
-      summary: Starts new test execution
-      description: >-
-        New test execution returns new execution details on successful execution
-        start
-      operationId: executeTest
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/Namespace'
-        - $ref: '#/components/parameters/TestExecutionName'
-      requestBody:
-        description: body passed to configure execution
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ExecutionRequest'
-        required: true
-      responses:
-        '201':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExecutionResult'
-        '400':
-          description: problem with request body
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '404':
-          description: test not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with test execution
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with communicating with kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/tests/{id}/executions/{executionID}:
-    get:
-      summary: Get test execution
-      description: Returns execution with given executionID
-      operationId: getTestExecution
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/executionID'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Execution'
-        '404':
-          description: execution not found
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '500':
-          description: problem with getting test executions from storage
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with reading secrets from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    patch:
-      summary: Aborts execution
-      description: Aborts execution with given executionID
-      operationId: abortExecution
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/executionID'
-      responses:
-        '204':
-          description: no content
-        '502':
-          description: problem with read information from kubernetes cluster
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
-  /organizations/{id}/environments/{environmentId}/agent/tests/{id}/metrics:
-    get:
-      summary: Get test metrics
-      description: >-
-        Gets test metrics for given tests executions, with particular execution
-        status and timings
-      operationId: getTestMetrics
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/LastNDays'
-        - $ref: '#/components/parameters/Limit'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExecutionsMetrics'
-        '500':
-          description: problem with getting metrics
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-        '502':
-          description: problem with read information from storage
-          content:
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Problem'
-    parameters:
-      - name: id
-        in: path
-        description: organizationId
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        description: environmentID
-        required: true
-        schema:
-          type: string
   /organizations/{id}/environments/{environmentId}/agent/triggers:
     get:
       summary: List test triggers
@@ -6597,6 +4040,26 @@ paths:
       parameters:
         - $ref: '#/components/parameters/ID'
         - $ref: '#/components/parameters/Namespace'
+        - name: mode
+          in: query
+          description: >
+            Update mode for the trigger. When set to "replace", the entire
+            trigger 
+
+            is replaced with the request body (full replacement semantics). When
+            not 
+
+            set or set to any other value, merge semantics are used where only 
+
+            non-null fields from the request are applied to the existing
+            trigger.
+
+            This is used by cloud-api to signal that the original request was
+            YAML.
+          schema:
+            type: string
+            enum:
+              - replace
       requestBody:
         description: test trigger upsert request
         content:
@@ -7145,43 +4608,6 @@ paths:
         required: true
         schema:
           type: string
-  /organizations/{id}/events:
-    get:
-      summary: Retrieve a list of Testkube Events
-      description: Get events related to the scheduler and executions.
-      operationId: listEvents
-      parameters:
-        - $ref: '#/components/parameters/ID'
-        - $ref: '#/components/parameters/Since'
-        - $ref: '#/components/parameters/Until'
-        - $ref: '#/components/parameters/Period'
-        - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/PageSize'
-        - name: series
-          in: query
-          description: Whether to group isomorphic events or keep a flat list of events.
-          schema:
-            type: boolean
-      responses:
-        '200':
-          description: Testkube event
-          headers:
-            Link:
-              $ref: '#/components/headers/link'
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TestkubeEvent'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
-      security:
-        - BearerAuth: []
   /organizations/{id}/groups:
     get:
       summary: List organization groups
@@ -7266,6 +4692,8 @@ paths:
       responses:
         '204':
           description: Delete Success
+        '400':
+          $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -7944,6 +5372,8 @@ paths:
       responses:
         '204':
           description: Delete Success
+        '400':
+          $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -8291,6 +5721,94 @@ paths:
         - BearerAuth: []
 components:
   schemas:
+    AIAssistant:
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the AI assistant
+          type: string
+        name:
+          description: Display name of the AI assistant
+          type: string
+        description:
+          description: Optional description of the AI assistant
+          type: string
+        instructions:
+          description: System prompt/instructions for the assistant
+          type: string
+        mcpServers:
+          description: MCP server configurations for this assistant
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantMCPServerConfig'
+        labels:
+          description: Labels for categorization
+          type: object
+          additionalProperties:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+    AIAssistantCreate:
+      type: object
+      properties:
+        name:
+          description: Display name of the AI assistant
+          type: string
+        description:
+          description: Optional description of the AI assistant
+          type: string
+        instructions:
+          description: System prompt/instructions for the assistant
+          type: string
+        mcpServers:
+          description: MCP server configurations for this assistant
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantMCPServerConfig'
+        labels:
+          description: Labels for categorization
+          type: object
+          additionalProperties:
+            type: string
+      required:
+        - name
+        - instructions
+    AIAssistantList:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/AIAssistant'
+    AIAssistantUpdate:
+      type: object
+      properties:
+        name:
+          description: Display name of the AI assistant
+          type: string
+        description:
+          description: Optional description of the AI assistant
+          type: string
+        instructions:
+          description: System prompt/instructions for the assistant
+          type: string
+        mcpServers:
+          description: MCP server configurations for this assistant
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantMCPServerConfig'
+        labels:
+          description: Labels for categorization
+          type: object
+          additionalProperties:
+            type: string
     AWSElasticBlockStoreVolumeSource:
       description: >-
         awsElasticBlockStore represents an AWS Disk resource that is attached to
@@ -8358,8 +5876,6 @@ components:
         disabled:
           description: Is the Agent disabled?
           type: boolean
-        type:
-          $ref: '#/components/schemas/AgentType'
         labels:
           type: object
           additionalProperties:
@@ -8390,6 +5906,9 @@ components:
           description: When it has been deleted.
           type: string
           format: date-time
+        isSuperAgent:
+          description: Whether this is a super agent.
+          type: boolean
       required:
         - id
         - name
@@ -8401,6 +5920,9 @@ components:
         - runner
         - listener
         - gitops
+        - webhooks
+        - cloud-webhooks
+        - cron-delegation
     AgentEnvironment:
       type: object
       properties:
@@ -8423,12 +5945,6 @@ components:
             type: string
       required:
         - requiredMatch
-    AgentType:
-      type: string
-      enum:
-        - run
-        - sync
-        - agnt
     Any: {}
     ApiInfo:
       type: object
@@ -8636,6 +6152,104 @@ components:
         errorMessage:
           type: string
           nullable: true
+    AssistantMCPServerConfig:
+      type: object
+      properties:
+        mcpServerId:
+          description: ID of the MCP server to use
+          type: string
+        tools:
+          description: Per-tool configuration keyed by tool name
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AssistantMCPServerToolConfig'
+      required:
+        - mcpServerId
+    AssistantMCPServerToolConfig:
+      description: Per-tool configuration for an MCP server in an assistant
+      type: object
+      properties:
+        enabled:
+          description: Whether the tool is enabled
+          type: boolean
+          default: false
+        autoApproved:
+          description: Whether tool calls are auto-approved (no HITL prompt)
+          type: boolean
+          default: false
+    AssistantSession:
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the session
+          type: string
+        assistantId:
+          description: ID of the AI assistant
+          type: string
+        name:
+          description: Generated session name based on user input
+          type: string
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+        instructions:
+          description: Instructions/prompt for this session
+          type: string
+        executionContext:
+          $ref: '#/components/schemas/ExecutionContext'
+        error:
+          description: Error message if the session failed
+          type: string
+        toolCalls:
+          description: Tool calls made during this session
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionToolCall'
+        startedAt:
+          description: When the session started executing
+          type: string
+          format: date-time
+        finishedAt:
+          description: When the session finished
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/SessionMessageActor'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        isArchived:
+          description: Whether this session has been archived
+          type: boolean
+        inputTokens:
+          description: Total input (prompt) tokens consumed across all invocations
+          type: integer
+          format: int64
+        outputTokens:
+          description: Total output (completion) tokens consumed across all invocations
+          type: integer
+          format: int64
+        totalTokens:
+          description: Total tokens consumed (input + output) across all invocations
+          type: integer
+          format: int64
+        model:
+          description: LLM model name used for generation
+          type: string
+      required:
+        - id
+        - assistantId
+        - status
+    AssistantSessionCreate:
+      type: object
+      properties:
+        instructions:
+          description: Instructions/prompt for this session
+          type: string
+        executionContext:
+          $ref: '#/components/schemas/ExecutionContext'
     AuditLogDistinctSubjects:
       description: >-
         A key-value map where keys are entity types and values are distinct
@@ -9093,6 +6707,23 @@ components:
         name:
           description: The identifier for the credential.
           type: string
+        type:
+          description: The type of credential (secret, variable, or vault).
+          type: string
+          enum:
+            - secret
+            - variable
+            - vault
+        value:
+          description: >-
+            The value of the credential (only included for variables, not
+            secrets).
+          type: string
+        reference:
+          description: >-
+            The credential reference that can be used in test workflow
+            expressions.
+          type: string
         environmentId:
           description: Environment ID where the credential is restricted to.
           type: string
@@ -9230,6 +6861,24 @@ components:
           default: false
       required:
         - reference
+    EnvStatus:
+      type: object
+      properties:
+        status:
+          description: State of the environment
+          type: string
+          enum:
+            - Green
+            - Yellow
+            - Red
+            - Gray
+          example: Green
+        sourceOfTruth:
+          description: Whether this environment is the source of truth in CP.
+          type: boolean
+          example: true
+      required:
+        - status
     EnvVar:
       type: object
       properties:
@@ -9314,6 +6963,12 @@ components:
               description: organizationID
               type: string
               example: 733420bd-7e56-461f-8431-6378759e60ae
+            sourceOfTruthSince:
+              description: >-
+                The time stamp during which this environment became the source
+                of truth.
+              type: string
+              format: date-time
             agentToken:
               description: agent token for environment
               type: string
@@ -9439,7 +7094,7 @@ components:
           description: feature name
           type: string
         displayName:
-          description: feature name
+          description: feature display name
           type: string
         description:
           description: feature description
@@ -9453,8 +7108,6 @@ components:
           type: boolean
       required:
         - name
-        - displayName
-        - description
         - enabled
     EnvironmentFeatures:
       type: object
@@ -9568,6 +7221,10 @@ components:
           description: The average execution duration in milliseconds.
           type: integer
           format: int64
+        p95Duration:
+          description: The p95 execution duration in milliseconds.
+          type: integer
+          format: int64
         lastRunAt:
           description: The timestamp of the last execution.
           type: string
@@ -9579,6 +7236,7 @@ components:
         - totalExecutionCount
         - failedExecutionCount
         - averageDuration
+        - p95Duration
         - lastRunAt
         - labels
     Environments:
@@ -9599,6 +7257,9 @@ components:
           type: string
         streamTopic:
           description: stream topic
+          type: string
+        groupId:
+          description: ID for event group
           type: string
         resource:
           $ref: '#/components/schemas/EventResource'
@@ -9916,6 +7577,18 @@ components:
           example:
             - true
             - false
+    ExecutionContext:
+      type: object
+      properties:
+        executionId:
+          description: ID of the test execution
+          type: string
+        executionName:
+          description: Name of the test execution
+          type: string
+        workflowName:
+          description: Name of the workflow (if applicable)
+          type: string
     ExecutionContextTypeV2:
       type: string
       enum:
@@ -9960,80 +7633,6 @@ components:
           format: date-time
         status:
           $ref: '#/components/schemas/ExecutionStatus'
-    ExecutionGroupShortV2:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        avgDurationMs:
-          type: integer
-        scheduledAt:
-          type: string
-          format: date-time
-        statusAt:
-          type: string
-          format: date-time
-        finishedAt:
-          type: string
-          format: date-time
-        status:
-          $ref: '#/components/schemas/ExecutionStatusV2'
-        predictedStatus:
-          $ref: '#/components/schemas/ExecutionStatusV2'
-        count:
-          type: integer
-        totals:
-          type: object
-          properties:
-            queued:
-              type: integer
-            running:
-              type: integer
-            paused:
-              type: integer
-            passed:
-              type: integer
-            failed:
-              type: integer
-            aborted:
-              type: integer
-        executions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExecutionReferenceV2'
-        workflows:
-          type: array
-          items:
-            type: string
-        target:
-          $ref: '#/components/schemas/ExecutionTargetV2'
-        context:
-          $ref: '#/components/schemas/ExecutionContextV2'
-        user:
-          $ref: '#/components/schemas/UserReference'
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-      required:
-        - id
-        - name
-        - status
-        - predictedStatus
-        - scheduledAt
-        - statusAt
-        - executionIds
-        - workflows
-        - count
-        - totals
-        - target
-    ExecutionGroupV2:
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/ExecutionGroupShortV2'
-        - type: object
     ExecutionRef:
       type: object
       properties:
@@ -10047,6 +7646,11 @@ components:
           description: The environment in which this execution was run
           type: string
         labels:
+          type: object
+          additionalProperties:
+            type: string
+        workflowAnnotations:
+          description: Annotations from the test workflow
           type: object
           additionalProperties:
             type: string
@@ -10067,11 +7671,27 @@ components:
           description: The moment this execution started.
           type: string
           format: date-time
+        runnerId:
+          description: The identifier of the runner that executed this execution.
+          type: string
+        tags:
+          description: Tag values to pass to the test workflow execution
+          type: object
+          additionalProperties:
+            type: string
         reports:
           description: generated reports from the steps, like junit
           type: array
           items:
             $ref: '#/components/schemas/TestWorkflowReport'
+        runningContext:
+          $ref: '#/components/schemas/TestWorkflowRunningContext'
+        health:
+          description: Health indicator for the workflow at the time of this execution
+          allOf:
+            - $ref: '#/components/schemas/TestWorkflowExecutionHealth'
+        configParams:
+          $ref: '#/components/schemas/TestWorkflowExecutionConfig'
       required:
         - id
         - name
@@ -10115,6 +7735,8 @@ components:
           $ref: '#/components/schemas/ConfigSummary'
         reports:
           $ref: '#/components/schemas/ReportsSummary'
+        silentMode:
+          $ref: '#/components/schemas/SilentMode'
       required:
         - id
         - number
@@ -11626,6 +9248,335 @@ components:
       required:
         - lines
         - bytes
+    MCPOAuthAuthorizeRequest:
+      description: Request to generate OAuth authorization URL
+      type: object
+      properties:
+        redirectUri:
+          description: Frontend callback URL after OAuth completes
+          type: string
+        responseMode:
+          description: How to handle the OAuth response
+          type: string
+          enum:
+            - popup
+            - redirect
+          default: popup
+    MCPOAuthAuthorizeResponse:
+      description: Response containing OAuth authorization URL
+      type: object
+      properties:
+        authorizationUrl:
+          description: URL to redirect user for OAuth authorization
+          type: string
+        state:
+          description: Encrypted OAuth state parameter
+          type: string
+      required:
+        - authorizationUrl
+        - state
+    MCPOAuthStatus:
+      description: OAuth authentication status for a user
+      type: object
+      properties:
+        authenticated:
+          description: Whether the user has valid OAuth tokens
+          type: boolean
+        expiresAt:
+          description: When the current access token expires
+          type: string
+          format: date-time
+        scopes:
+          description: Scopes granted by the OAuth provider
+          type: array
+          items:
+            type: string
+        needsReauth:
+          description: Whether user needs to re-authenticate
+          type: boolean
+      required:
+        - authenticated
+    MCPOAuthTokens:
+      description: OAuth tokens for MCP server authentication
+      type: object
+      properties:
+        accessToken:
+          description: OAuth access token
+          type: string
+        refreshToken:
+          description: OAuth refresh token
+          type: string
+        tokenType:
+          description: Token type (usually Bearer)
+          type: string
+        expiresAt:
+          description: When the access token expires
+          type: string
+          format: date-time
+        scopes:
+          description: Scopes granted by the OAuth provider
+          type: array
+          items:
+            type: string
+        clientId:
+          description: OAuth client ID from Dynamic Client Registration
+          type: string
+        clientSecret:
+          description: OAuth client secret from Dynamic Client Registration
+          type: string
+      required:
+        - accessToken
+        - tokenType
+    MCPServer:
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the MCP server
+          type: string
+        name:
+          description: Display name of the MCP server
+          type: string
+        description:
+          description: Optional description of the MCP server
+          type: string
+        type:
+          description: >-
+            Type of MCP server connection (http for HTTP-based, sse for
+            Server-Sent Events, stdio for local binaries)
+          type: string
+          enum:
+            - http
+            - sse
+            - stdio
+          default: http
+        url:
+          description: MCP server endpoint URL (required for http/sse type)
+          type: string
+        command:
+          description: Command to execute for stdio type MCP servers
+          type: string
+        args:
+          description: Arguments for the command (stdio type only)
+          type: array
+          items:
+            type: string
+        headers:
+          description: Optional headers for MCP server requests
+          type: object
+          additionalProperties:
+            type: string
+        status:
+          description: Connection status of the MCP server
+          type: string
+          enum:
+            - unknown
+            - active
+            - error
+        lastConnectedAt:
+          description: Last successful connection time
+          type: string
+          format: date-time
+        lastError:
+          description: Last error message if status is error
+          type: string
+        authType:
+          description: Authentication type for this MCP server
+          type: string
+          enum:
+            - none
+            - headers
+            - oauth
+          default: none
+        oauthConfig:
+          $ref: '#/components/schemas/MCPServerOAuthConfig'
+        oauthAuthenticated:
+          description: >-
+            Whether the current user has authenticated with this OAuth MCP
+            server
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - url
+    MCPServerCreate:
+      type: object
+      properties:
+        name:
+          description: Display name of the MCP server
+          type: string
+        description:
+          description: Optional description of the MCP server
+          type: string
+        type:
+          description: >-
+            Type of MCP server connection (http for HTTP-based, sse for
+            Server-Sent Events, stdio for local binaries)
+          type: string
+          enum:
+            - http
+            - sse
+            - stdio
+          default: http
+        url:
+          description: MCP server endpoint URL (required for http/sse type)
+          type: string
+        command:
+          description: Command to execute for stdio type MCP servers
+          type: string
+        args:
+          description: Arguments for the command (stdio type only)
+          type: array
+          items:
+            type: string
+        headers:
+          description: Optional headers for MCP server requests
+          type: object
+          additionalProperties:
+            type: string
+        authType:
+          description: Authentication type for this MCP server
+          type: string
+          enum:
+            - none
+            - headers
+            - oauth
+          default: none
+        oauthConfig:
+          $ref: '#/components/schemas/MCPServerOAuthConfig'
+      required:
+        - name
+        - url
+    MCPServerList:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/MCPServer'
+    MCPServerOAuthConfig:
+      description: OAuth 2.1 configuration for MCP server authentication
+      type: object
+      properties:
+        clientId:
+          description: OAuth client ID
+          type: string
+        clientSecret:
+          description: OAuth client secret (write-only, not returned in responses)
+          type: string
+        authorizationUrl:
+          description: OAuth authorization endpoint URL
+          type: string
+        tokenUrl:
+          description: OAuth token endpoint URL
+          type: string
+        scopes:
+          description: OAuth scopes to request
+          type: array
+          items:
+            type: string
+      required:
+        - clientId
+        - authorizationUrl
+        - tokenUrl
+    MCPServerTool:
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the tool
+          type: string
+        mcpServerId:
+          description: ID of the MCP server this tool belongs to
+          type: string
+        name:
+          description: Name of the tool
+          type: string
+        description:
+          description: Description of the tool
+          type: string
+        inputSchema:
+          description: JSON Schema for tool input parameters
+          type: object
+          additionalProperties: true
+        enabled:
+          description: Whether the tool is enabled for use
+          type: boolean
+        available:
+          description: Whether the tool is currently available on the MCP server
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - mcpServerId
+        - name
+        - enabled
+        - available
+    MCPServerToolList:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/MCPServerTool'
+    MCPServerToolUpdate:
+      type: object
+      properties:
+        enabled:
+          description: Whether the tool should be enabled
+          type: boolean
+    MCPServerUpdate:
+      type: object
+      properties:
+        name:
+          description: Display name of the MCP server
+          type: string
+        description:
+          description: Optional description of the MCP server
+          type: string
+        type:
+          description: >-
+            Type of MCP server connection (http for HTTP-based, sse for
+            Server-Sent Events, stdio for local binaries)
+          type: string
+          enum:
+            - http
+            - sse
+            - stdio
+        url:
+          description: MCP server endpoint URL (required for http/sse type)
+          type: string
+        command:
+          description: Command to execute for stdio type MCP servers
+          type: string
+        args:
+          description: Arguments for the command (stdio type only)
+          type: array
+          items:
+            type: string
+        headers:
+          description: Optional headers for MCP server requests
+          type: object
+          additionalProperties:
+            type: string
+        authType:
+          description: Authentication type for this MCP server
+          type: string
+          enum:
+            - none
+            - headers
+            - oauth
+        oauthConfig:
+          $ref: '#/components/schemas/MCPServerOAuthConfig'
     Member:
       type: object
       properties:
@@ -13152,6 +11103,239 @@ components:
           example: 2.1.2
       required:
         - version
+    SessionDetail:
+      description: Detailed session including message history from LangGraph
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the session
+          type: string
+        assistantId:
+          description: ID of the AI assistant
+          type: string
+        assistantName:
+          description: Name of the AI assistant
+          type: string
+        name:
+          description: Generated session name based on user input
+          type: string
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+        instructions:
+          description: Instructions/prompt for this session
+          type: string
+        executionContext:
+          $ref: '#/components/schemas/ExecutionContext'
+        error:
+          description: Error message if the session failed
+          type: string
+        messages:
+          description: Conversation message history from LangGraph checkpoint
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionMessage'
+        toolCalls:
+          description: Tool calls made during this session (stored in cloud-api)
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionToolCall'
+        startedAt:
+          description: When the session started executing
+          type: string
+          format: date-time
+        finishedAt:
+          description: When the session finished
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/SessionMessageActor'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        isArchived:
+          description: Whether this session has been archived
+          type: boolean
+        inputTokens:
+          description: Total input (prompt) tokens consumed across all invocations
+          type: integer
+          format: int64
+        outputTokens:
+          description: Total output (completion) tokens consumed across all invocations
+          type: integer
+          format: int64
+        totalTokens:
+          description: Total tokens consumed (input + output) across all invocations
+          type: integer
+          format: int64
+        model:
+          description: LLM model name used for generation
+          type: string
+      required:
+        - id
+        - assistantId
+        - status
+    SessionList:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantSession'
+        hasNextPage:
+          description: Whether there are more pages available
+          type: boolean
+    SessionMessage:
+      description: A message in the session conversation history
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the message
+          type: string
+        role:
+          description: Role of the message sender
+          type: string
+          enum:
+            - user
+            - assistant
+            - tool
+        content:
+          description: Message content
+          type: string
+        sources:
+          description: Documentation sources for assistant messages
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionSource'
+        timestamp:
+          description: Unix timestamp when message was created
+          type: integer
+          format: int64
+        toolCalls:
+          description: Tool calls made by assistant in this message
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Tool call ID
+                type: string
+              name:
+                description: Tool name
+                type: string
+              arguments:
+                description: Tool arguments as JSON string
+                type: string
+        toolCallId:
+          description: For tool messages, the ID of the tool call this responds to
+          type: string
+        toolName:
+          description: For tool messages, the name of the tool
+          type: string
+        actor:
+          $ref: '#/components/schemas/SessionMessageActor'
+      required:
+        - id
+        - role
+        - content
+    SessionMessageActor:
+      description: The actor (user or API token) that sent a message or created a session
+      type: object
+      properties:
+        type:
+          description: Type of the actor
+          type: string
+          enum:
+            - user
+            - api-token
+        id:
+          description: Unique identifier of the actor (user ID or token ID)
+          type: string
+        name:
+          description: Display name of the actor, resolved server-side
+          type: string
+      required:
+        - type
+        - id
+    SessionSource:
+      description: Documentation source reference attached to a session message
+      type: object
+      properties:
+        label:
+          description: Human-readable source label
+          type: string
+        link:
+          description: Documentation link path
+          type: string
+        file:
+          description: Source file identifier
+          type: string
+      required:
+        - label
+        - link
+        - file
+    SessionStatus:
+      description: Status of an assistant session
+      type: string
+      enum:
+        - pending
+        - running
+        - waiting_approval
+        - completed
+        - failed
+    SessionToolCall:
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the tool call
+          type: string
+        sessionId:
+          description: ID of the session this tool call belongs to
+          type: string
+        name:
+          description: Name of the tool being called
+          type: string
+        mcpServerId:
+          description: ID of the MCP server providing this tool
+          type: string
+        status:
+          $ref: '#/components/schemas/ToolCallStatus'
+        input:
+          description: Input parameters for the tool call
+          type: object
+          additionalProperties: true
+        error:
+          description: Error message if tool execution failed
+          type: string
+        approvedAt:
+          description: When the tool call was approved
+          type: string
+          format: date-time
+        declinedAt:
+          description: When the tool call was declined
+          type: string
+          format: date-time
+        startedAt:
+          description: When the tool started executing
+          type: string
+          format: date-time
+        completedAt:
+          description: When the tool finished executing
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - sessionId
+        - name
+        - status
     Setting:
       description: Generic Settings
       type: object
@@ -13171,6 +11355,7 @@ components:
             - pinnedEnvironments
             - pinnedAgents
             - scimEnabled
+            - scimManagePermissionsInTestkube
             - eventsEnabled
         valueType:
           description: value type for given settings
@@ -13209,6 +11394,27 @@ components:
             $ref: '#/components/schemas/Setting'
       required:
         - elements
+    SilentMode:
+      description: >-
+        controls what aspects of an execution should be silent (not
+        tracked/processed)
+      type: object
+      properties:
+        webhooks:
+          description: disable webhooks for this execution
+          type: boolean
+        insights:
+          description: disable insights/analytics for this execution
+          type: boolean
+        health:
+          description: disable health checks for this execution
+          type: boolean
+        metrics:
+          description: disable metrics collection for this execution
+          type: boolean
+        cdevents:
+          description: disable CDEvents for this execution
+          type: boolean
     SlavesMeta:
       description: Slave data for executing tests in distributed environment
       type: object
@@ -13219,6 +11425,11 @@ components:
           example: kubeshop/ex-slaves-image:latest
       required:
         - image
+    Source:
+      description: synchronisation sources
+      type: string
+      enum:
+        - kubernetes
     StatusObservable:
       type: object
       properties:
@@ -13386,6 +11597,98 @@ components:
           type: string
       required:
         - organizationID
+    SuperAgentCommands:
+      type: object
+      properties:
+        agentToken:
+          description: agent token for environment
+          type: string
+          example: tkcagnt_adead343112adeadcaaaaa221daee2
+        connectCommand:
+          description: >-
+            command to connect existing Testkube OSS installation to the
+            Testkube Pro
+          type: string
+          example: testkube pro connect --agent-key tkcagnt_111
+        disconnectCommand:
+          description: >-
+            command to disconnect from testkube pro and get back to standalone
+            OSS mode
+          type: string
+          example: testkube pro disconnect
+        installCommand:
+          description: command to install/upgrade agent
+          type: string
+          example: >-
+            helm upgrade --install --create-namespace testkube testkube/testkube
+            --set testkube-api.cloud.url=agent.example.com:443 --set
+            testkube-api.cloud.key=<api-key> --set
+            testkube-api.minio.enabled=false --set mongodb.enabled=false
+            --namespace testkube
+        installCommandCli:
+          description: command to install/upgrade agent
+          type: string
+          example: >-
+            testkube init-cloud --agent-key tkcagnt_111 --agent-url
+            agent.example.com:443
+        configureContextCommand:
+          description: command to configure
+          type: string
+          example: >-
+            testkube context set --api-url https://api.example.com --api-key
+            <api-key> --agent-url https://agent.example.com --agent-key
+            <agent-key>
+        runDockerCommand:
+          description: command to run Docker agent
+          type: string
+          example: >-
+            docker run -d --privileged --name=testkube-agent -e AGENT_KEY=AK
+            kubeshop/testkube-agent:1.2.3
+        runDockerCommandCli:
+          description: command to run Docker agent
+          type: string
+          example: testkube docker init --agent-token=AK --org-id=org --env-id=env
+        upgradeDockerCommand:
+          description: command to upgrade Docker agent
+          type: string
+          example: >-
+            docker exec testkube-agent helm upgrade testkube testkube/testkube
+            --namespace testkube --set testkube-api.minio.enabled=false --set
+            mongodb.enabled=false --set testkube-api.cloud.key=AK --set
+            testkube-api.cloud.url=api.testkube.io:999 --set
+            testkube-api.dockerImageVersion=1.2.3
+        upgradeDockerCommandCli:
+          description: command to upgrade Docker agent
+          type: string
+          example: testkube upgrade
+      required:
+        - agentToken
+        - connectCommand
+        - disconnectCommand
+        - installCommand
+        - installCommandCli
+        - configureContextCommand
+        - runDockerCommand
+        - runDockerCommandCli
+        - upgradeDockerCommand
+        - upgradeDockerCommandCli
+    Syncable:
+      description: >
+        source information about resources that may have been synced from
+        multiple sources.
+
+        An empty source indicates that the source was the UI/API for backwards
+        compatibility.
+      type: object
+      properties:
+        creationSource:
+          $ref: '#/components/schemas/Source'
+          description: the original source from which the resource was created
+        lastModificationSource:
+          $ref: '#/components/schemas/Source'
+          description: >-
+            the source from which the last modification of the resource
+            originated
     Sysctl:
       type: object
       properties:
@@ -14538,6 +12841,8 @@ components:
           example:
             - true
             - false
+        sync:
+          $ref: '#/components/schemas/Syncable'
       required:
         - event
         - action
@@ -14783,8 +13088,6 @@ components:
       description: test trigger create or update request body
       type: object
       required:
-        - resource
-        - resourceSelector
         - event
         - action
         - execution
@@ -14863,6 +13166,8 @@ components:
           type: boolean
         status:
           $ref: '#/components/schemas/TestWorkflowStatusSummary'
+        sync:
+          $ref: '#/components/schemas/Syncable'
     TestWorkflowConcurrencyPolicy:
       description: configuration to control concurrent executions.
       type: object
@@ -15126,6 +13431,8 @@ components:
           example:
             - true
             - false
+        silentMode:
+          $ref: '#/components/schemas/SilentMode'
         tags:
           $ref: '#/components/schemas/TestWorkflowTagValue'
         runningContext:
@@ -15192,7 +13499,7 @@ components:
         flipRate:
           description: >
             Fraction of status changes among consecutive executions without
-            recency weighting 
+            recency weighting
 
             (value between 0.0 and 1.0).
           type: number
@@ -15247,6 +13554,8 @@ components:
           description: whether webhooks on the execution of this test workflow are disabled
           type: boolean
           default: false
+        silentMode:
+          $ref: '#/components/schemas/SilentMode'
         tags:
           $ref: '#/components/schemas/TestWorkflowTagValue'
         target:
@@ -15335,6 +13644,21 @@ components:
           type: object
           additionalProperties:
             type: string
+    TestWorkflowExecutionSchema:
+      description: test workflow execution configuration
+      type: object
+      properties:
+        tags:
+          $ref: '#/components/schemas/TestWorkflowTagValue'
+        target:
+          $ref: '#/components/schemas/ExecutionTarget'
+        silent:
+          description: >-
+            indicates that all executions should be silent by default. When
+            true, SilentMode is activated for all executions (Webhooks,
+            Insights, Health, Metrics, Cdevents all set to true).
+          type: boolean
+          default: false
     TestWorkflowExecutionStatusCR:
       description: test workflow execution status
       type: object
@@ -15408,6 +13732,9 @@ components:
             $ref: '#/components/schemas/TestWorkflowReport'
         resourceAggregations:
           $ref: '#/components/schemas/TestWorkflowExecutionResourceAggregationsReport'
+        silentMode:
+          $ref: '#/components/schemas/SilentMode'
+          description: execution mode to determine which events to skip
       required:
         - id
         - name
@@ -15539,6 +13866,9 @@ components:
             parallelism:
               description: how many resources could be scheduled in parallel
               type: integer
+            failFast:
+              description: abort remaining parallel workers on first failure
+              type: boolean
             description:
               description: worker description to display
               type: string
@@ -16093,7 +14423,7 @@ components:
           items:
             $ref: '#/components/schemas/TestWorkflowEvent'
         execution:
-          $ref: '#/components/schemas/TestWorkflowTagSchema'
+          $ref: '#/components/schemas/TestWorkflowExecutionSchema'
         pvcs:
           type: object
           additionalProperties:
@@ -16478,6 +14808,9 @@ components:
             parallelism:
               description: how many resources could be scheduled in parallel
               type: integer
+            failFast:
+              description: abort remaining parallel workers on first failure
+              type: boolean
             description:
               description: worker description to display
               type: string
@@ -16615,14 +14948,6 @@ components:
           $ref: '#/components/schemas/BoxedBoolean'
         isolatedContainers:
           $ref: '#/components/schemas/BoxedBoolean'
-    TestWorkflowTagSchema:
-      description: test workflow execution tag definition
-      type: object
-      properties:
-        tags:
-          $ref: '#/components/schemas/TestWorkflowTagValue'
-        target:
-          $ref: '#/components/schemas/ExecutionTarget'
     TestWorkflowTagValue:
       description: tag values to pass to the test workflow execution
       type: object
@@ -16703,6 +15028,8 @@ components:
           example: '2022-07-30T06:54:15Z'
         spec:
           $ref: '#/components/schemas/TestWorkflowTemplateSpec'
+        sync:
+          $ref: '#/components/schemas/Syncable'
     TestWorkflowTemplateRef:
       type: object
       properties:
@@ -16751,7 +15078,7 @@ components:
           items:
             $ref: '#/components/schemas/TestWorkflowEvent'
         execution:
-          $ref: '#/components/schemas/TestWorkflowTagSchema'
+          $ref: '#/components/schemas/TestWorkflowExecutionSchema'
         pvcs:
           type: object
           additionalProperties:
@@ -16916,6 +15243,15 @@ components:
           type: string
         tolerationSeconds:
           $ref: '#/components/schemas/BoxedInteger'
+    ToolCallStatus:
+      description: Status of a tool call within a session
+      type: string
+      enum:
+        - pending
+        - approved
+        - declined
+        - completed
+        - failed
     TopologySpreadConstraint:
       type: object
       properties:
@@ -17119,9 +15455,7 @@ components:
           type: string
           example: This is an example view
         entity:
-          description: Type of the view (e.g., workflow, test)
-          type: string
-          example: workflow
+          $ref: '#/components/schemas/ViewEntity'
         filter:
           description: filter of the view
           type: string
@@ -17132,6 +15466,13 @@ components:
             (visible to all users in environment)
           type: boolean
           example: true
+    ViewEntity:
+      description: Type of entity that the view is associated with
+      type: string
+      enum:
+        - test-workflows
+        - executions
+      example: test-workflows
     Views:
       type: object
       properties:
@@ -17224,6 +15565,37 @@ components:
         namespace:
           type: string
           example: testkube
+        labels:
+          description: webhook labels
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            app: backend
+            env: prod
+        annotations:
+          description: webhook annotations
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            app: backend
+            env: prod
+        created:
+          type: string
+          format: date-time
+          example: '2022-07-30T06:54:15Z'
+        updated:
+          type: string
+          format: date-time
+          example: '2022-07-30T06:54:15Z'
+        disabled:
+          description: whether webhook is disabled
+          type: boolean
+          default: false
+          example:
+            - true
+            - false
         uri:
           type: string
           example: https://hooks.app.com/services/1
@@ -17250,29 +15622,6 @@ components:
             type: string
           example:
             Content-Type: application/xml
-        labels:
-          description: webhook labels
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            app: backend
-            env: prod
-        annotations:
-          description: webhook annotations
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            app: backend
-            env: prod
-        disabled:
-          description: whether webhook is disabled
-          type: boolean
-          default: false
-          example:
-            - true
-            - false
         config:
           $ref: '#/components/schemas/WebhookConfig'
         parameters:
@@ -17281,6 +15630,8 @@ components:
             $ref: '#/components/schemas/WebhookParameterSchema'
         webhookTemplateRef:
           $ref: '#/components/schemas/WebhookTemplateRef'
+        sync:
+          $ref: '#/components/schemas/Syncable'
       required:
         - name
     WebhookConfig:
@@ -17392,6 +15743,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WebhookParameterSchema'
+        sync:
+          $ref: '#/components/schemas/Syncable'
       required:
         - name
     WebhookTemplateCreateRequest:
@@ -17482,6 +15835,12 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/Problem'
+    Credential:
+      description: successful operation for credential
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Credential'
     Environment:
       description: successful operation for environment
       content:
@@ -17524,25 +15883,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Environments'
-    ExecutionGroupListV2:
-      description: List of Test Workflow execution groups
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              totals:
-                $ref: '#/components/schemas/ExecutionTotalsV2'
-              filtered:
-                $ref: '#/components/schemas/ExecutionTotalsV2'
-              results:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ExecutionGroupShortV2'
-            required:
-              - results
-              - totals
-              - filtered
     ExecutionRefs:
       description: List of references to executions of either Test, TestSuite or Workflows
       content:
@@ -17574,8 +15914,12 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/Problem'
-    Healthcheck:
-      description: Healthcheck response
+    GoneError:
+      description: 410 Gone
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
     HubspotVisitorSession:
       description: hubspot visitor's session data
       content:
@@ -17850,6 +16194,41 @@ components:
           schema:
             $ref: '#/components/schemas/Views'
   parameters:
+    AIAssistantID:
+      name: assistantId
+      in: path
+      description: Unique identifier of the AI assistant
+      required: true
+      schema:
+        type: string
+    AIMCPServerID:
+      name: serverId
+      in: path
+      description: Unique identifier of the MCP server
+      required: true
+      schema:
+        type: string
+    AIMCPServerToolID:
+      name: toolId
+      in: path
+      description: Unique identifier of the MCP server tool
+      required: true
+      schema:
+        type: string
+    AISessionID:
+      name: sessionId
+      in: path
+      description: Unique identifier of the assistant session
+      required: true
+      schema:
+        type: string
+    AIToolCallID:
+      name: toolCallId
+      in: path
+      description: Unique identifier of the tool call
+      required: true
+      schema:
+        type: string
     ActorName:
       name: actorName
       in: query
@@ -17875,12 +16254,6 @@ components:
       required: true
       schema:
         type: string
-    AgentTypeQP:
-      name: type
-      in: query
-      description: filter resources by agent type
-      schema:
-        $ref: '#/components/schemas/AgentType'
     Aggregate:
       name: aggregate
       in: query
@@ -17978,13 +16351,6 @@ components:
       description: filter by event type in audit logs
       schema:
         type: string
-    ExecutionGroupID:
-      name: executionGroupID
-      in: path
-      description: unique id of the execution group
-      required: true
-      schema:
-        type: string
     ExecutionID:
       name: executionID
       in: path
@@ -18058,6 +16424,15 @@ components:
       required: true
       schema:
         type: string
+    Health:
+      name: health
+      in: query
+      description: >-
+        Filter by workflow health categories (comma-separated). Options -
+        perfect, excellent, good, fair, poor, critical
+      schema:
+        type: string
+      example: excellent,good
     ID:
       name: id
       in: path
@@ -18204,6 +16579,12 @@ components:
       required: true
       schema:
         type: string
+    Runner:
+      name: runner
+      in: query
+      description: Filter by runner/agent ID
+      schema:
+        type: string
     Segment:
       name: segment
       in: query
@@ -18292,8 +16673,8 @@ components:
     TagSelector:
       name: tagSelector
       in: query
+      description: Test workflow execution tags
       schema:
-        description: Test workflow execution tags
         type: string
     TeamID:
       name: teamID

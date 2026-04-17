@@ -38,6 +38,7 @@ Testkube Control Plane:
 - **Parallel execution** with `parallel` - see [Parallelization](/articles/test-workflows-parallel.mdx)
 - **Parameterization** with `matrix` (and `count`, `shards`, `maxCount`) - see [Sharding & Matrix Params](/articles/test-workflows-matrix-and-sharding.mdx)
 - **Spawning dependencies** for your tests with `services` - see [Services](/articles/test-workflows-services.mdx)
+- **Concurrency Policies** with `concurrency` - see [Concurrency](/articles/test-workflows-concurrency-queueing)
 
 :::tip
 Deploying the Testkube Agent in Standalone Mode provides **extensive** test execution capabilities even 
@@ -50,8 +51,8 @@ The following steps are required to install the Standalone Agent into a Kubernet
 
 - Create a Testkube namespace.
 - Deploy the Testkube API (see below).
-- Use MongoDB for test results and Minio for artifact storage (optional; disable with --no-minio).
-- Testkube will listen and manage all the CRDs for TestWorkflows, Triggers, Webhooks, etc… inside the Testkube namespace.
+- Use MongoDB or PostgreSQL for test results and Minio for artifact storage (optional; disable with --no-minio).
+- In standalone mode, Testkube will listen and manage all the CRDs for TestWorkflows, Triggers, Webhooks, etc. inside the Testkube namespace. In connected mode (v2.7+), resources are managed by the Control Plane instead - [Read More](/articles/testkube-resource-management).
 
 Once installed you can verify your installation and check that Testkube is up and running with
 `kubectl get all -n testkube`. Once validated, you're ready to unleash the full potential of Testkube in your environment.
@@ -70,10 +71,13 @@ testkube init
 ### With Helm
 
 ```sh
-helm upgrade --install \
+helm repo add kubeshop https://kubeshop.github.io/helm-charts
+helm repo update
+
+helm upgrade --install testkube kubeshop/testkube \
   --create-namespace \
   --namespace testkube \
-  oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube --version <version>
+  --set installCRDs=true
 ```
 
 By default, the namespace for the installation will be `testkube`. If the `testkube` namespace does not exist, it will be created for you.
@@ -81,9 +85,6 @@ By default, the namespace for the installation will be `testkube`. If the `testk
 Alternatively, you can customize the default `values.yaml` by first fetching the Helm chart, unpacking it, modifying the `values.yaml`, and then installing it from the current directory:
 
 ```sh
-helm pull oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube:<version>
-tar -xzf testkube-<version>
-cd testkube/
 helm install testkube . --create-namespace --namespace testkube --values values.yaml
 ```
 
@@ -116,7 +117,7 @@ A high-level deployment architecture for Standalone Agent is shown below.
 
 ![Deployment with standalone agent](../../img/architecture-standalone.jpeg)
 
-The Testkube CRDs managed by the Operator are described in [Testkube Custom Resources](/articles/crds).
+The Testkube CRDs are described in [Testkube Custom Resources](/articles/crds).
 
 ## Connecting to the Testkube Control Plane
 
@@ -124,6 +125,8 @@ You can connect a standalone Agent to an instance of the Testkube Control Plane 
 corresponding functionality (see [Feature Comparison](feature-comparison)).
 All Workflow/Trigger/Webhook definitions will be preserved, but historical test execution results and 
 artifacts won't be copied to the control plane.
+
+After connecting, your agent appears in the Control Plane as a single agent with all four capabilities (Runner, Listener, GitOps, Webhook) enabled by default - [Read More](/articles/testkube-resource-management).
 
 The following command which will guide you through the migration process:
 
@@ -142,7 +145,7 @@ Testkube can be configured to use different storage for test logs output that ca
 ```yaml
 ## Logs storage for Testkube API.
 logs:
-  ## where the logs should be stored there are 2 possible valuse : minio|mongo
+  ## where the logs should be stored there are 2 possible values : minio|mongo
   storage: "minio"
   ## if storage is set to minio then the bucket must be specified, if minio with s3 is used make sure to use a unique name
   bucket: "testkube-logs"
@@ -151,6 +154,40 @@ logs:
 When [mongo](https://www.mongodb.com/kubernetes) is specified, logs will be stored in a separate collection so the execution handling performance is not affected.
 
 When [minio](https://min.io/) is specified, logs will be stored as separate files in the configured bucket of the MinIO instance or the S3 bucket if MinIO is configured to work with S3.
+
+### MongoDB upgrade from 8.0.13 to 8.2.5
+
+Starting with chart version `2.6.0`, MongoDB is upgraded to `8.2.3` and in the later versions to `8.2.5`.  This is a **breaking change** for installations that are not already running MongoDB `8.0.x`, because MongoDB requires the upgrade path to go through `8.0` before moving to `8.2.x`.
+
+To upgrade safely, you must first ensure they you on at least chart version `2.4.0`, which includes MongoDB `8.0.13`. Only after that should you upgrade to the latest chart version.
+
+**Required upgrade path**
+
+1. Upgrade to chart version `2.4.0`: this moves MongoDB to `8.0.13`
+
+2. Upgrade from `2.4.0` to the latest chart version.
+
+3. Enable the MongoDB FCV jobs in your chart values so the compatibility version is updated during the upgrade:
+
+```yaml
+mongodb:
+  preUpgradeFCVJob:
+    enabled: true
+```
+**How it works**
+
+When the FCV jobs are enabled:
+
+- the pre-upgrade job connects to the current MongoDB instance and checks the current compatibility version; if needed, it updates it to the configured pre-upgrade target – `8.0` before the image upgrade starts
+- Helm upgrades the MongoDB image to `8.2.5`
+- the post-upgrade job waits for the upgraded MongoDB instance to become ready and then updates the MongoDB Feature Compatibility Version to `8.2`
+
+:::warning Important
+If your installation is still on MongoDB `7.x`, do not upgrade directly to a chart version that includes MongoDB `8.2.5`. MongoDB does not support a direct 7.x -> 8.2.x upgrade in a single step. You must first upgrade to chart version `2.4.0`, and only then continue to the latest version.
+:::
+
+The FCV jobs are configurable and can also be used for future supported MongoDB upgrades by changing the compatibility values in the chart.
+
 
 ### Artifact Storage
 
@@ -202,7 +239,7 @@ Alternatively, these values can be read from Kubernetes secrets and set:
 
 To install the standalone agent Testkube on an Openshift cluster you will need to include the following configuration:
 
-1. Add security context for MongoDB to `values.yaml`:
+1. Add security context for MongoDB or PostgreSQL to `values.yaml`:
 
 ```yaml
 mongodb:
@@ -222,24 +259,11 @@ mongodb:
     enabled: false
 ```
 
-2. Add security context for `Patch` and `Migrate` jobs that are a part of Testkube Operator configuration to `values.yaml`:
+2. The Testkube Operator is deprecated and disabled by default. If your installation previously used it, ensure it is disabled in `values.yaml`:
 
 ```yaml
 testkube-operator:
-  webhook:
-    migrate:
-      enabled: true
-      securityContext:
-        allowPrivilegeEscalation: false
-        capabilities:
-          drop: ["ALL"]
-
-    patch:
-      enabled: true
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000650000
-        fsGroup: 1000650000
+  enabled: false
 ```
 
 3. Install Testkube specifying the path to the new `values.yaml` file
@@ -393,7 +417,7 @@ data "aws_iam_policy_document" "testkube" {
 }
 ```
 
-**Teskube helm values:**
+**Testkube helm values:**
 
 ```yaml
 testkube-api:

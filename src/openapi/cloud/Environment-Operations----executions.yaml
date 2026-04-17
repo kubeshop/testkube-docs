@@ -33,6 +33,9 @@ paths:
       - $ref: './components.yaml#/components/parameters/Selector'
       - $ref: './components.yaml#/components/parameters/TextSearch'
       - $ref: './components.yaml#/components/parameters/Status'
+      - $ref: './components.yaml#/components/parameters/TagSelector'
+      - $ref: './components.yaml#/components/parameters/Runner'
+      - $ref: './components.yaml#/components/parameters/Health'
   /organizations/{id}/environments/{environmentID}/executions/{executionID}/artifact-archive:
     get:
       summary: Get artifact archive
@@ -49,6 +52,8 @@ paths:
           $ref: './components.yaml#/components/responses/ForbiddenError'
         '404':
           $ref: './components.yaml#/components/responses/NotFoundError'
+        '410':
+          $ref: './components.yaml#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -75,6 +80,8 @@ paths:
           $ref: './components.yaml#/components/responses/ForbiddenError'
         '404':
           $ref: './components.yaml#/components/responses/NotFoundError'
+        '410':
+          $ref: './components.yaml#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -99,6 +106,8 @@ paths:
           $ref: './components.yaml#/components/responses/ForbiddenError'
         '404':
           $ref: './components.yaml#/components/responses/NotFoundError'
+        '410':
+          $ref: './components.yaml#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -130,6 +139,8 @@ paths:
           $ref: './components.yaml#/components/responses/ForbiddenError'
         '404':
           $ref: './components.yaml#/components/responses/NotFoundError'
+        '410':
+          $ref: './components.yaml#/components/responses/GoneError'
         '500':
           $ref: './components.yaml#/components/responses/InternalServerError'
       security:
@@ -206,6 +217,8 @@ paths:
           $ref: './components.yaml#/components/responses/ForbiddenError'
         '404':
           $ref: './components.yaml#/components/responses/NotFoundError'
+        '410':
+          $ref: './components.yaml#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -242,6 +255,8 @@ paths:
           $ref: './components.yaml#/components/responses/ForbiddenError'
         '404':
           $ref: './components.yaml#/components/responses/NotFoundError'
+        '410':
+          $ref: './components.yaml#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:
@@ -266,6 +281,8 @@ paths:
           $ref: './components.yaml#/components/responses/ForbiddenError'
         '404':
           $ref: './components.yaml#/components/responses/NotFoundError'
+        '410':
+          $ref: './components.yaml#/components/responses/GoneError'
       security:
         - BearerAuth: []
     parameters:

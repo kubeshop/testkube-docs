@@ -49,6 +49,22 @@ In your IdP’s SCIM configuration:
 
 ---
 
+## Manage Permissions in Testkube
+
+When SCIM is enabled, roles and resource assignments are controlled by your IdP via the `roles` and `entitlements` custom attributes.
+The **Manage permissions in Testkube** checkbox lets admins manage these directly in Testkube instead, while SCIM still handles user and team provisioning.
+
+Enable this in **Organization Management → Product Features** after enabling SCIM.
+
+With this option enabled:
+- SCIM still provisions/deprovisions users and syncs team membership.
+- `roles` and `entitlements` attributes from SCIM requests are ignored.
+- Admins assign organization roles, environment access, and resource group access in the Testkube dashboard.
+
+This is useful in cases where custom attributes `roles` and `entitlements` cannot be defined on the IdP side.
+
+---
+
 ## Role Management
 
 Testkube uses **URNs (Uniform Resource Names)** to define roles. A role URN specifies what permissions a user has for a particular resource.

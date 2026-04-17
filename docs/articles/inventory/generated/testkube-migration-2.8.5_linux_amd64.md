@@ -1,0 +1,556 @@
+---
+hide_table_of_contents: true
+---
+
+<table>
+<tr><td>digest</td><td><code>sha256:a7ba486748012229f8f85685d8b19a3450b306379fe8a088df242af044356430</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 5" src="https://img.shields.io/badge/high-5-e25d68"/> <img alt="medium: 7" src="https://img.shields.io/badge/medium-7-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>platform</td><td>linux/amd64</td></tr>
+<tr><td>size</td><td>36 MB</td></tr>
+<tr><td>packages</td><td>212</td></tr>
+</table>
+</details></table>
+</details>
+
+<table>
+<tr><td valign="top">
+<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/jackc/pgx/v5</strong> <code>5.9.1</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/jackc/pgx/v5@5.9.1</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-33815?s=golang&n=v5&ns=github.com%2Fjackc%2Fpgx&t=golang&vr=%3E%3D0"><img alt="critical : CVE--2026--33815" src="https://img.shields.io/badge/CVE--2026--33815-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.056%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Memory-safety vulnerability in github.com/jackc/pgx/v5.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/H-4-e25d68"/> <img alt="medium: 7" src="https://img.shields.io/badge/M-7-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/nats-io/nats-server/v2</strong> <code>2.12.5</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/nats-io/nats-server/v2@2.12.5</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-33216?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3E%3D2.12.0-RC.1%2C%3C2.12.6"><img alt="high 8.6: CVE--2026--33216" src="https://img.shields.io/badge/CVE--2026--33216-lightgrey?label=high%208.6&labelColor=e25d68"/></a> <i>Plaintext Storage of a Password</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=2.12.0-RC.1<br/><2.12.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.12.6</code></td></tr>
+<tr><td>CVSS Score</td><td><code>8.6</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.044%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Background
+
+NATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.
+
+The nats-server provides an MQTT client interface.
+
+### Problem Description
+
+For MQTT deployments using usercodes/passwords: MQTT passwords are incorrectly classified as a non-authenticating identity statement (JWT) and exposed via monitoring endpoints.
+
+### Affected Versions
+
+Any version before v2.12.6 or v2.11.15
+
+### Workarounds
+
+Ensure monitoring end-points are adequately secured.
+
+Best practice remains to not expose the monitoring endpoint to the Internet or other untrusted network users.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-33218?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3E%3D2.12.0-RC.1%2C%3C2.12.6"><img alt="high 7.5: CVE--2026--33218" src="https://img.shields.io/badge/CVE--2026--33218-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Improper Input Validation</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=2.12.0-RC.1<br/><2.12.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.12.6</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.166%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Background
+
+NATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.
+
+The nats-server allows hub/spoke topologies using "leafnode" connections by other nats-servers.
+
+### Problem Description
+
+A client which can connect to the leafnode port can crash the nats-server with a certain malformed message pre-authentication.
+
+### Affected Versions
+
+Any version before v2.12.6 or v2.11.15
+
+### Workarounds
+
+1. Disable leafnode support if not needed.
+2. Restrict network connections to your leafnode port, if plausible without compromising the service offered.
+
+### References
+
+ * This document is canonically: <https://advisories.nats.io/CVE/secnote-2026-10.txt>
+ * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-vprv-35vv-q339>
+ * MITRE CVE entry: <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-33218>
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-33247?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3E%3D2.12.0-RC.1%2C%3C2.12.6"><img alt="high 7.4: CVE--2026--33247" src="https://img.shields.io/badge/CVE--2026--33247-lightgrey?label=high%207.4&labelColor=e25d68"/></a> <i>Insertion of Sensitive Information Into Debugging Code</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=2.12.0-RC.1<br/><2.12.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.12.6</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.4</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.033%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Background
+
+NATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.
+
+The nats-server provides an optional monitoring port, which provides access to sensitive data.  The nats-server can take certain configuration options on the command-line instead of requiring a configuration file.
+
+
+### Problem Description
+
+If a nats-server is run with static credentials for all clients provided via argv (the command-line), then those credentials are visible to any user who can see the monitoring port, if that too is enabled.
+
+The `/debug/vars` end-point contains an unredacted copy of argv.
+
+### Patches
+
+Fixed in nats-server 2.12.6 & 2.11.15
+
+### Workarounds
+
+The NATS Maintainers are bemused at the concept of someone deploying a real configuration using `--pass` to avoid a config file, but also enabling monitoring.
+
+Configure credentials inside a configuration file instead of via argv.
+
+Do not enable the monitoring port if using secrets in argv.
+
+Best practice remains to not expose the monitoring port to the Internet, or to untrusted network sources.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-33217?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3E%3D2.12.0-RC.1%2C%3C2.12.6"><img alt="high 7.1: CVE--2026--33217" src="https://img.shields.io/badge/CVE--2026--33217-lightgrey?label=high%207.1&labelColor=e25d68"/></a> <i>Incorrect Authorization</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=2.12.0-RC.1<br/><2.12.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.12.6</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.1</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:H/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.027%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Background
+
+NATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.
+
+The nats-server provides an MQTT client interface.
+
+### Problem Description
+
+When using ACLs on message subjects, these ACLs were not applied in the `$MQTT.>` namespace, allowing MQTT clients to bypass ACL checks for MQTT subjects.
+
+### Affected Versions
+
+Any version before v2.12.6 or v2.11.15
+
+### Workarounds
+
+None.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-33215?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3E%3D2.12.0-RC.1%2C%3C2.12.6"><img alt="medium 6.5: CVE--2026--33215" src="https://img.shields.io/badge/CVE--2026--33215-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Improper Authentication</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=2.12.0-RC.1<br/><2.12.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.12.6</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.015%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Background
+
+NATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.
+
+The nats-server provides an MQTT client interface.
+
+### Problem Description
+
+Sessions and Messages can by hijacked via MQTT Client ID malfeasance.
+
+### Affected Versions
+
+Any version before v2.12.6 or v2.11.15
+
+### Workarounds
+
+None.
+
+### Resources
+
+ * This document is canonically: <https://advisories.nats.io/CVE/secnote-2026-06.txt>
+ * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-fcjp-h8cc-6879>
+ * MITRE CVE entry: <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-33215>
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-33246?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3E%3D2.12.0-RC.1%2C%3C2.12.6"><img alt="medium 6.4: CVE--2026--33246" src="https://img.shields.io/badge/CVE--2026--33246-lightgrey?label=medium%206.4&labelColor=fbb552"/></a> <i>Improper Authentication</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=2.12.0-RC.1<br/><2.12.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.12.6</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.4</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:L/I:L/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.026%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Background
+
+NATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.
+
+The nats-server allows hub/spoke topologies using "leafnode" connections by other nats-servers.  NATS messages can have headers.
+
+### Problem Description
+
+The nats-server offers a `Nats-Request-Info:` message header, providing information about a request.  This is supposed to provide enough information to allow for account/user identification, such that NATS clients could make their own decisions on how to trust a message, provided that they trust the nats-server as a broker.
+
+A leafnode connecting to a nats-server is not fully trusted unless the system account is bridged too.  Thus identity claims should not have propagated unchecked.
+
+Thus NATS clients relying upon the Nats-Request-Info: header could be spoofed.
+
+Does not directly affect the nats-server itself, but the CVSS Confidentiality and Integrity scores are based upon what a hypothetical client might choose to do with this NATS header.
+
+### Affected Versions
+
+Any version before v2.12.6 or v2.11.15
+
+### Workarounds
+
+None.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-33223?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3E%3D2.12.0-RC.1%2C%3C2.12.6"><img alt="medium 6.4: CVE--2026--33223" src="https://img.shields.io/badge/CVE--2026--33223-lightgrey?label=medium%206.4&labelColor=fbb552"/></a> <i>Authentication Bypass by Spoofing</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=2.12.0-RC.1<br/><2.12.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.12.6</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.4</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:L/I:L/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.026%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Background
+
+NATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.
+
+The nats-server offers a `Nats-Request-Info:` message header, providing information about a request.
+
+### Problem Description
+
+The NATS message header `Nats-Request-Info:` is supposed to be a guarantee of identity by the NATS server, but the stripping of this header from inbound messages was not fully effective.
+
+An attacker with valid credentials for any regular client interface could thus spoof their identity to services which rely upon this header.
+
+### Affected Versions
+
+Any version before v2.12.6 or v2.11.15
+
+### Workarounds
+
+None.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-33219?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3E%3D2.12.0-RC.1%2C%3C2.12.6"><img alt="medium 5.3: CVE--2026--33219" src="https://img.shields.io/badge/CVE--2026--33219-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Allocation of Resources Without Limits or Throttling</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=2.12.0-RC.1<br/><2.12.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.12.6</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.079%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Background
+
+NATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.
+
+The nats-server offers a WebSockets client service, used in deployments where browsers are the NATS clients.
+
+### Problem Description
+
+A malicious client which can connect to the WebSockets port can cause unbounded memory use in the nats-server before authentication; this requires sending a corresponding amount of data.
+
+This is a milder variant of [NATS-advisory-ID 2026-02](https://advisories.nats.io/CVE/secnote-2026-02.txt) (aka CVE-2026-27571; GHSA-qrvq-68c2-7grw).
+That earlier issue was a compression bomb, this vulnerability is not. Attacks against this new issue thus require significant client bandwidth.
+
+### Affected Versions
+
+Any version before v2.12.6 or v2.11.15
+
+### Workarounds
+
+Disable websockets if not required for project deployment.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-33222?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3E%3D2.12.0-RC.1%2C%3C2.12.6"><img alt="medium 4.9: CVE--2026--33222" src="https://img.shields.io/badge/CVE--2026--33222-lightgrey?label=medium%204.9&labelColor=fbb552"/></a> <i>Improper Authorization</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=2.12.0-RC.1<br/><2.12.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.12.6</code></td></tr>
+<tr><td>CVSS Score</td><td><code>4.9</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:N/I:H/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.025%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Background
+
+NATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.
+
+The persistent storage feature, JetStream, has a management API which has many features, amongst which are backup and restore.
+
+### Problem Description
+
+Users with JetStream admin API access to restore one stream could restore to other stream names, impacting data which should have been protected against them.
+
+### Affected Versions
+
+Any version before v2.12.6 or v2.11.15
+
+### Workarounds
+
+If developers have configured users to have limited JetStream restore permissions, temporarily remove those permissions.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-33249?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3E%3D2.12.0-preview.1%2C%3C2.12.6"><img alt="medium 4.3: CVE--2026--33249" src="https://img.shields.io/badge/CVE--2026--33249-lightgrey?label=medium%204.3&labelColor=fbb552"/></a> <i>Incorrect Authorization</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=2.12.0-preview.1<br/><2.12.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.12.6</code></td></tr>
+<tr><td>CVSS Score</td><td><code>4.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.027%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Background
+
+NATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.
+
+The nats-server supports telemetry on messages, using the per-message NATS headers.
+
+### Problem Description
+
+A valid client which uses message tracing headers can indicate that the trace messages can be sent to an arbitrary valid subject, including those to which the client does not have publish permission.
+
+The payload is a valid trace message and not chosen by the attacker.
+
+### Affected Versions
+
+Any version before v2.12.6 or v2.11.15
+
+### Workarounds
+
+None.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-33248?s=github&n=v2&ns=github.com%2Fnats-io%2Fnats-server&t=golang&vr=%3E%3D2.12.0-RC.1%2C%3C2.12.6"><img alt="medium 4.2: CVE--2026--33248" src="https://img.shields.io/badge/CVE--2026--33248-lightgrey?label=medium%204.2&labelColor=fbb552"/></a> <i>Improper Authentication</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=2.12.0-RC.1<br/><2.12.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.12.6</code></td></tr>
+<tr><td>CVSS Score</td><td><code>4.2</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.018%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Background
+
+NATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.
+
+One authentication model supported is mTLS, deriving the NATS client identity from properties of the TLS Client Certificate.
+
+### Problem Description
+
+When using mTLS for client identity, with `verify_and_map` to derive a NATS identity from the client certificate's Subject DN, certain patterns of RDN would not be correctly enforced, allowing for authentication bypass.
+
+This does require a valid certificate from a CA already trusted for client certificates, and `DN` naming patterns which the NATS maintainers consider highly unlikely.
+
+So this is an unlikely attack. Nonetheless, administrators who have been very sophisticated in their `DN` construction patterns might conceivably be impacted.
+
+### Affected Versions
+
+Fixed in nats-server 2.12.6 & 2.11.15
+
+### Workarounds
+
+Developers should review their CA issuing practices.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/moby/spdystream</strong> <code>0.5.0</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/moby/spdystream@0.5.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-35469?s=github&n=spdystream&ns=github.com%2Fmoby&t=golang&vr=%3C%3D0.5.0"><img alt="high 8.7: CVE--2026--35469" src="https://img.shields.io/badge/CVE--2026--35469-lightgrey?label=high%208.7&labelColor=e25d68"/></a> <i>Allocation of Resources Without Limits or Throttling</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=0.5.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.5.1</code></td></tr>
+<tr><td>CVSS Score</td><td><code>8.7</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The SPDY/3 frame parser in spdystream does not validate
+attacker-controlled counts and lengths before allocating memory. A
+remote peer that can send SPDY frames to a service using spdystream can
+cause the process to allocate gigabytes of memory with a small number of
+malformed control frames, leading to an out-of-memory crash.
+ 
+Three allocation paths in the receive side are affected:
+1. **SETTINGS entry count** -- The SETTINGS frame reader reads a 32-bit
+`numSettings` from the payload and allocates a slice of that size
+without checking it against the declared frame length. An attacker
+can set `numSettings` to a value far exceeding the actual payload,
+triggering a large allocation before any setting data is read.
+ 
+2. **Header count** -- `parseHeaderValueBlock` reads a 32-bit
+`numHeaders` from the decompressed header block and allocates an
+`http.Header` map of that size with no upper bound.
+ 
+3. **Header field size** -- Individual header name and value lengths are
+read as 32-bit integers and used directly as allocation sizes with
+no validation.
+ 
+Because SPDY header blocks are zlib-compressed, a small on-the-wire
+payload can decompress into attacker-controlled bytes that the parser
+interprets as 32-bit counts and lengths. A single crafted frame is
+enough to exhaust process memory.
+## Impact
+ Any program that accepts SPDY connections using spdystream -- directly
+or through a dependent library -- is affected. A remote peer that can
+send SPDY frames to the service can crash the process with a single
+crafted SPDY control frame, causing denial of service.
+## Affected versions
+ `github.com/moby/spdystream` <= v0.5.0
+## Fix
+ v0.5.1 addresses the receive-side allocation bugs and adds related
+hardening:
+ 
+**Core fixes:**
+ 
+- **SETTINGS entry-count validation** -- The SETTINGS frame reader now
+checks that `numSettings` is consistent with the declared frame
+length (`numSettings <= (length-4)/8`) before allocating.
+ 
+- **Header count limit** -- `parseHeaderValueBlock` enforces a maximum
+number of headers per frame (default: 1000).
+ 
+- **Header field size limit** -- Individual header name and value
+lengths are checked against a per-field size limit (default: 1 MiB)
+before allocation.
+ 
+- **Connection closure on protocol error** -- The connection read loop
+now closes the underlying `net.Conn` when it encounters an
+`InvalidControlFrame` error, preventing further exploitation on the
+same connection.
+ 
+**Additional hardening:**
+ 
+- **Write-side bounds checks** -- All frame write methods now verify
+that payloads fit within the 24-bit length field, preventing the
+library from producing invalid frames.
+ 
+**Configurable limits:**
+ 
+- Callers can adjust the defaults using `NewConnectionWithOptions` or
+the lower-level `spdy.NewFramerWithOptions` with functional options:
+`WithMaxControlFramePayloadSize`, `WithMaxHeaderFieldSize`, and
+`WithMaxHeaderCount`.
+ 
+
+</blockquote>
+</details>
+</details></td></tr>
+</table>
+

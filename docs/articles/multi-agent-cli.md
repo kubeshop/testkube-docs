@@ -21,9 +21,9 @@ Testkube Organization.
 
 The configuration of a new Agent for an Environment is broken into two steps:
 
-1. `create agent <name> <args> [--runner] [--listener]` - defines a Runner Agent in the Environment with the corresponding capabilities, but doesn't install anything in your cluster.
-2. `install agent <name> <args>` - installs the actual Runner Agent Helm Chart in the current cluster and connects 
-   that installation a created Runner Agent in the Environment. 
+1. `create agent <name> <args> [--runner] [--listener] [--gitops] [--webhooks]` - defines an Agent in the Environment with the specified capabilities, but doesn't install anything in your cluster.
+2. `install agent <name> <args>` - installs the Agent Helm Chart in the current cluster and connects
+   that installation to a created Agent in the Environment.
 
 :::note
 Since you will often do both at the same time, these two commands can be rolled into one by adding the `--create` 
@@ -31,8 +31,8 @@ flag to the `install` command.
 :::
 
 The reason for this separation is to enable the following use-cases:
-- Reusing Runner Agent installations in different namespaces/clusters for the same Runner Agent definition in the Environment.
-- Retrieving the secret-key required connecting a Runner Agent installation to an Environment when installing a Runner Agent with 
+- Reusing Agent installations in different namespaces/clusters for the same Agent definition in the Environment.
+- Retrieving the secret-key required for connecting an Agent installation to an Environment when installing an Agent with
   the Helm Chart.
 
 :::tip
@@ -44,11 +44,17 @@ See the [Delete and Uninstall](#deleting-and-uninstalling-an-agent) commands bel
 Define a new Agent in the Testkube Control Plane with `testkube create agent <name>`
 
 ```sh
-$ testkube create agent --runner staging-runner -l env=staging
+$ testkube create agent staging-runner --runner -l env=staging
 ```
 
 This defines a new Agent with the runner capability (i.e. a "Runner Agent") named `staging-runner` with the label `env=staging` which is now visible in the
-list of Agents in the Testkube Dashboard. 
+list of Agents in the Testkube Dashboard.
+
+You can combine any of the four capability flags when creating an Agent:
+
+```sh
+$ testkube create agent my-agent --runner --listener --gitops --webhooks
+```
 
 :::note
 The Agent name must be unique across all Agents within the containing Organization.
@@ -56,8 +62,8 @@ The Agent name must be unique across all Agents within the containing Organizati
 
 ### Installing new Agents
 
-Once a Agent has been defined on the Testkube Control Plane with the `create` command above, you'll need to 
-`install` an actual Agent in a Cluster/Namespace for executing your Workflows and/or listening for events. 
+Once an Agent has been defined on the Testkube Control Plane with the `create` command above, you'll need to
+`install` the Agent in a Cluster/Namespace for executing Workflows, listening for events, syncing resources via GitOps, or emitting webhooks.
 
 Use the `testkube install agent <name>` to do this, for example:
 
@@ -78,8 +84,11 @@ $ testkube install agent staging-runner --create -l env=staging
 ```
 
 :::note
-This command installs an Agent with both runner and listener capabilities into the Kubernetes cluster configured as the current context. 
-Before installing you can check if it's the expected cluster by running the command: `kubectl config current-context`. 
+When no capability flags are specified, this command installs an Agent with both runner and listener capabilities by default.
+Add `--gitops` and/or `--webhooks` to enable additional capabilities.
+
+The Agent is installed into the Kubernetes cluster configured as the current context.
+Before installing you can check if it's the expected cluster by running the command: `kubectl config current-context`.
 
 Use parameter `--namespace <namespace-name>` to install the Agent in a different namespace, it uses the name of the Agent by default.
 :::
@@ -103,32 +112,26 @@ An existing Agent can be updated to the latest version by rerunning the correspo
 
 ## Listing Agents
 
-Use `testkube get agents` to get a list of all Agents installed in your organization, including the mandatory Standalone Agent 
- shown with the label `runnertype=superagent`.
+Use `testkube get agents` to get a list of all Agents in your Environment, along with their capabilities and status.
 
 ```shell
 ➜  ~ testkube get agents
 
-Context: cloud (2.1.117)   Namespace: testkube   Org: Testkube   Env: ole-kind
+Context: cloud (2.7.x)   Namespace: testkube   Org: Testkube   Env: my-env
 ------------------------------------------------------------------------------
-server version not set
 
-Recognized agents in current cluster
-None
-
-Agents outside of current cluster
-  TYPE       | NAME                    | VERSION | NAMESPACE | ENVIRONMENTS                 | LABELS
--------------+-------------------------+---------+-----------+------------------------------+------------------------
-  SuperAgent | tkcenv_a7a9f692d2248d3e |         |           | ole-kind                     | runnertype=superagent
-  SuperAgent | tkcenv_84019fff03aac934 |         |           | testkube-cloud-basic         | runnertype=superagent
-
-Unknown agents in current cluster
-  TYPE | NAME | VERSION | NAMESPACE  | ENVIRONMENTS | LABELS
--------+------+---------+------------+--------------+---------
-  -    |      | -       | •:testkube | -            | -
+  NAME            | CAPABILITIES            | VERSION | NAMESPACE  | LABELS
+------------------+-------------------------+---------+------------+--------------------
+  staging-runner  | runner, listener        | 2.7.0   | staging    | env=staging
+  prod-runner     | runner                  | 2.7.0   | prod       | env=prod
+  gitops-agent    | gitops, webhooks        | 2.7.0   | testkube   |
 ➜  ~
 ```
 
+:::note
+Environments migrated from pre-2.7 will show a `default-agent-<environment-name>` entry with all four capabilities enabled,
+replacing the previous "SuperAgent" - [Read More](/articles/testkube-resource-management).
+:::
 
 ## Deleting and Uninstalling an Agent
 
@@ -137,7 +140,7 @@ Just as there are separate `create` and `install` commands, there are correspond
 - `uninstall` - removes the specified Agent from the cluster, but keeps the Agent definition in the Control Plane.
 - `delete` - removes the definition from the Control-Plane, but keeps the Agent installed in the cluster.
 
-Delete or uninstall an existing Agent by name using `testkube delete runner <name>` command and then specifying 
+Delete or uninstall an existing Agent by name using `testkube delete agent <name>` command and specifying
 either the `--delete` or `--uninstall` arguments (or both):
 
 ```sh
@@ -160,6 +163,27 @@ Use `testkube disable/enable agent <name>` for this:
 $ testkube disable agent staging-runner
 $ testkube enable agent my-runner
 ```
+
+## Rotating Agent Secret Keys
+
+Agent secret keys can be rotated for security purposes. When rotated, the previous key remains valid for a grace period
+to allow zero-downtime rollover of connected agents.
+
+```sh
+$ testkube agent rotate-key my-agent
+```
+
+By default, the previous key remains valid for 24 hours. You can specify a custom grace period (up to 7 days):
+
+```sh
+$ testkube agent rotate-key my-agent --grace-period 4h
+```
+
+After rotating, update your agent deployment with the new key. The old key will continue to work until the grace period expires.
+
+:::tip
+Read more about key rotation behavior and best practices in [Agent Key Rotation](/articles/agents-overview#agent-key-rotation).
+:::
 
 ## Runner Agent specific commands
 

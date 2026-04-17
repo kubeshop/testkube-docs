@@ -1,12 +1,12 @@
 # Custom SSO
 
-[Testkube Cloud Control Plane](https://app.testkube.io) supports login via GitHub, GitLab and email magic links.
+The [Testkube Cloud Control Plane](/articles/install/cloud-overview) supports login via GitHub, GitLab and email magic links.
 
 If you want a custom SSO solution for your organization or domain, reach out to [us](https://testkube.io/contact).
 
 ## IDP-initiated login
 
-If your identity provider supports IDP-initiated login, you can use it to log in to Testkube SaaS directly from your IDP dashboard.
+If your identity provider supports IDP-initiated login, you can use it to log into the Cloud Control Plane directly from your IDP dashboard.
 
 ### Okta
 

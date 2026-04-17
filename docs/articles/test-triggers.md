@@ -29,7 +29,7 @@ Triggers are ultimately defined as Customer Resources in your cluster - [TestTri
 
 ## Listener Agents with TestTriggers
 
-Testkube uses [Listener Agents](/articles/agents-overview#listener-agents) or the [Standalone Agent](/articles/agents-overview#the-standalone-agent) 
+Testkube uses [Listener Agents](/articles/agents-overview#listener-agents) 
 to listen for Kubernetes events that will be matched against your TestTriggers. Your Testkube Environment can have any number of 
 Listener Agents, deployed to whichever namespaces/clusters you need to listen for events.
 
@@ -239,7 +239,7 @@ JSONPath scope:
 
 Action parameters are used to pass config and tag values to the workflow execution. You can specify either text values or
 jsonpath expression in a form of `jsonpath={.metadata.name}`. The data will be taken from the resource object of the trigger event.
-Check the kubernets docs [JsonPath Expression](https://kubernetes.io/docs/reference/kubectl/jsonpath/).
+Check the Kubernetes docs [JsonPath Expression](https://kubernetes.io/docs/reference/kubectl/jsonpath/).
 Also you can use Golang template syntax we support for Webhook processing and take data from Golang object fields.
 
 ```yaml
@@ -271,16 +271,10 @@ spec:
 - **Event** - `created`, `modified`, `deleted`
   - For deployments - `deployment-scale-update`, `deployment-image-update`, `deployment-env-update`, `deployment-containers-modified`,
     `deployment-generation-modified`, `deployment-resource-modified`
-  - For Testkube events - `event-start-test`, `event-end-test-success`, `event-end-test-failed`, `event-end-test-aborted`, `event-end-test-timeout`,
-    `event-start-testsuite`, `event-end-testsuite-success`, `event-end-testsuite-failed`, `event-end-testsuite-aborted`, `event-end-testsuite-timeout`,
-    `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`, `event-end-testworkflow-failed`, `event-end-testworkflow-aborted`,
-    `event-created`, `event-updated`, `event-deleted`
-- **Execution** - `test`, `testsuite`, `testworkflow`
+  - For Testkube events - `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`, 
+    `event-end-testworkflow-failed`, `event-end-testworkflow-aborted`, `event-created`, `event-updated`, `event-deleted`
+- **Execution** - `testworkflow`
 - **ConcurrencyPolicy** - `allow`, `forbid`, `replace`
-
-:::info
-Events and values related to Tests and Test Suites have been deprecated and will be removed - [Read More](/articles/legacy-features)
-:::
 
 ## Examples
 
@@ -337,7 +331,7 @@ spec:
 ### On Testkube Cluster Event
 
 You can define **Test Trigger** for Testkube cluster events. In below example,
-if **TestWorkflow** `k6-executor-smoke` is completed succesfully, then we run
+if **TestWorkflow** `k6-executor-smoke` is completed successfully, then we run
 **TestWorkflow** `postman-smoke-tests`
 
 ```yaml
@@ -382,18 +376,3 @@ Kubernetes API and gets notified by Kubernetes on each event on the watched reso
 ## API
 
 Testkube exposes CRUD operations on test triggers in the REST API. Check out the [OpenAPI docs](../openapi/overview) for more info.
-
-## Injected Environment Variables
-
-:::info
-Injected Environment Variables are supported when triggering legacy Tests / Suites only (see [Legacy Features](/articles/legacy-features)).
-
-You can use [Action Parameters](#action-parameters) instead when triggering Workflows.
-:::
-
-The following environment variables are automatically injected into each triggered test pod:
-
-- `WATCHER_EVENT_RESOURCE`: resource type
-- `WATCHER_EVENT_NAME`: resource name
-- `WATCHER_EVENT_NAMESPACE`: resource namespace
-- `WATCHER_EVENT_EVENT_TYPE`: event type

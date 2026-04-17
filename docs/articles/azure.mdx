@@ -1,6 +1,6 @@
 # Testkube Azure DevOps Pipelines
 
-Testkubes integration with Azure DevOps streamlines the installation of Testkube, enabling the execution of any [Testkube CLI](https://docs.testkube.io/cli/testkube) command within Azure DevOps pipelines. This integration can be effortlessly integrated into your Azure DevOps setup, enhancing your continuous integration and delivery processes.
+Testkube's integration with Azure DevOps streamlines the installation of Testkube, enabling the execution of any [Testkube CLI](https://docs.testkube.io/cli/testkube) command within Azure DevOps pipelines. This integration can be effortlessly integrated into your Azure DevOps setup, enhancing your continuous integration and delivery processes.
 The Azure DevOps integration offers a versatile solution for managing your pipeline workflows and is compatible with both commercial and open source deployments of Testkube. It allows Azure DevOps users to effectively utilize Testkube's capabilities within their CI/CD pipelines, providing a robust and flexible framework for test execution and automation.
 
 ### Azure DevOps Extension
@@ -81,7 +81,7 @@ to reveal sensitive data. Please make sure that the following points are satisfi
 
 - The **AWS_ACCESS_KEY_ID**, **AWS_SECRET_ACCESS_KEY** secrets should contain your AWS IAM keys with proper permissions to connect to the EKS cluster.
 - The **AWS_REGION** secret should contain the AWS region where EKS is.
-- Tke **EKS_CLUSTER_NAME** secret points to the name of the EKS cluster you want to connect.
+- The **EKS_CLUSTER_NAME** secret points to the name of the EKS cluster you want to connect.
 
 ```yaml
 trigger:
@@ -119,7 +119,7 @@ stages:
 
 This example connects to a k8s cluster in Google Cloud and creates and runs a test using Testkube Azure DevOps pipeline. Please make sure that the following points are satisfied:
 
-- The **GKE Sevice Account** should have already been created in Google Cloud and added to pipeline variables along with **GKE_PROJECT** value.
+- The **GKE Service Account** should have already been created in Google Cloud and added to pipeline variables along with **GKE_PROJECT** value.
 - The **GKE_CLUSTER_NAME** and **GKE_ZONE** can be added as environmental variables in the workflow.
 
 ```yaml

@@ -13,7 +13,7 @@ const cloudRedocSpecs = require("./src/openapi/cloud/redoc-specs");
 const config = {
   title: "Testkube Documentation",
   tagline:
-    "Kubernetes-native Continuous Testing Platform for Cloud-Native Applications",
+    "Test Orchestration Platform for Cloud-Native Applications",
   url: "https://docs.testkube.io",
   baseUrl: "/",
   onBrokenLinks: "throw",
@@ -22,9 +22,12 @@ const config = {
     format: "detect",
     hooks: {
       onBrokenMarkdownLinks: 'warn',
-      onBrokenMarkdownImages: 'throw',
+      onBrokenMarkdownImages: 'warn',
     },
+    mermaid: true,
   },
+
+  themes: ['@docusaurus/theme-mermaid'],
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -49,7 +52,7 @@ const config = {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: "https://github.com/kubeshop/testkube/tree/develop/docs",
+          editUrl: "https://github.com/kubeshop/testkube-docs/tree/main/docs",
           // Generating BreadCrumbs for the docs
           breadcrumbs: false,
         },
@@ -128,6 +131,11 @@ const config = {
             href: "https://join.slack.com/t/testkubeworkspace/shared_invite/zt-3kfpny0gx-apPMq9_Swu4KG3uwz6Bk2g",
           },
           {
+            label: "Marketplace",
+            position: "right",
+            href: "https://github.com/kubeshop/testkube-marketplace",
+          },
+          {
             type: "html",
             position: "right",
             value: `<iframe src="https://ghbtns.com/github-btn.html?user=kubeshop&repo=testkube&type=star&count=true&color=dark" style='margin-top: 6px' frameborder="0" scrolling="0" width="110" height="20" title="GitHub"></iframe>`,
@@ -140,9 +148,9 @@ const config = {
       },
 
       announcementBar: {
-        id: "join-testkube-pro",
+        id: "testkube-280-release",
         content:
-          '<strong>New to Testkube?</strong> Unleash the power of cloud native testing in Kubernetes with Testkube. <a id="get_started_docs" href="https://testkube.io/get-started?utm_source=docs" target="_blank">Get Started ></a>',
+          '<b>Testkube 2.8.0 is out! Autonomous AI Agents, Custom AI Models, fail-fast and input/output parameters for Workflows, and much more. <a href="/changelog">Read More</a></b>',
         backgroundColor: "#8951ff",
         textColor: "#fff",
       },
@@ -209,6 +217,12 @@ const config = {
         defaultMode: "dark",
         disableSwitch: false,
         respectPrefersColorScheme: true,
+      },
+      mermaid: {
+        theme: {
+          light: 'neutral',
+          dark: 'dark',
+        },
       },
     },
   plugins: [
