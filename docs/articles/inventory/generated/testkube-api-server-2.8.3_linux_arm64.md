@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:6b3756982864e85c14dea408500792255f2ebab7549d181b3d5a6c3ce0921049</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 2" src="https://img.shields.io/badge/critical-2-8b1924"/> <img alt="high: 22" src="https://img.shields.io/badge/high-22-e25d68"/> <img alt="medium: 31" src="https://img.shields.io/badge/medium-31-fbb552"/> <img alt="low: 4" src="https://img.shields.io/badge/low-4-fce1a9"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:6b3756982864e85c14dea408500792255f2ebab7549d181b3d5a6c3ce0921049</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 2" src="https://img.shields.io/badge/critical-2-8b1924"/> <img alt="high: 23" src="https://img.shields.io/badge/high-23-e25d68"/> <img alt="medium: 31" src="https://img.shields.io/badge/medium-31-fbb552"/> <img alt="low: 4" src="https://img.shields.io/badge/low-4-fce1a9"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/arm64</td></tr>
 <tr><td>size</td><td>67 MB</td></tr>
 <tr><td>packages</td><td>268</td></tr>
@@ -303,7 +303,7 @@ FROM ${ALPINE_IMAGE}
 <tr><td>Affected range</td><td><code>&lt;3.3.6-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.3.6-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.063%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -550,7 +550,7 @@ Any version before v2.12.6 or v2.11.15
 <tr><td>CVSS Score</td><td><code>7.4</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.033%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1220,7 +1220,7 @@ RUN apk --no-cache add ca-certificates libssl3 git
 <tr><td>Affected range</td><td><code>&lt;=8.14.1-r2</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.084%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1389,6 +1389,102 @@ Use the absolute path:
     if result, err := r.execCommand("/bin/kenv", "-q", "smbios.system.uuid"); err == nil {
 
 On FreeBSD, `kenv` is located at `/bin/kenv`.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/moby/spdystream</strong> <code>0.5.0</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/moby/spdystream@0.5.0</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (32:32)
+COPY --from=build /app /bin/app
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-35469?s=github&n=spdystream&ns=github.com%2Fmoby&t=golang&vr=%3C%3D0.5.0"><img alt="high 8.7: CVE--2026--35469" src="https://img.shields.io/badge/CVE--2026--35469-lightgrey?label=high%208.7&labelColor=e25d68"/></a> <i>Allocation of Resources Without Limits or Throttling</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=0.5.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.5.1</code></td></tr>
+<tr><td>CVSS Score</td><td><code>8.7</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The SPDY/3 frame parser in spdystream does not validate
+attacker-controlled counts and lengths before allocating memory. A
+remote peer that can send SPDY frames to a service using spdystream can
+cause the process to allocate gigabytes of memory with a small number of
+malformed control frames, leading to an out-of-memory crash.
+ 
+Three allocation paths in the receive side are affected:
+1. **SETTINGS entry count** -- The SETTINGS frame reader reads a 32-bit
+`numSettings` from the payload and allocates a slice of that size
+without checking it against the declared frame length. An attacker
+can set `numSettings` to a value far exceeding the actual payload,
+triggering a large allocation before any setting data is read.
+ 
+2. **Header count** -- `parseHeaderValueBlock` reads a 32-bit
+`numHeaders` from the decompressed header block and allocates an
+`http.Header` map of that size with no upper bound.
+ 
+3. **Header field size** -- Individual header name and value lengths are
+read as 32-bit integers and used directly as allocation sizes with
+no validation.
+ 
+Because SPDY header blocks are zlib-compressed, a small on-the-wire
+payload can decompress into attacker-controlled bytes that the parser
+interprets as 32-bit counts and lengths. A single crafted frame is
+enough to exhaust process memory.
+## Impact
+ Any program that accepts SPDY connections using spdystream -- directly
+or through a dependent library -- is affected. A remote peer that can
+send SPDY frames to the service can crash the process with a single
+crafted SPDY control frame, causing denial of service.
+## Affected versions
+ `github.com/moby/spdystream` <= v0.5.0
+## Fix
+ v0.5.1 addresses the receive-side allocation bugs and adds related
+hardening:
+ 
+**Core fixes:**
+ 
+- **SETTINGS entry-count validation** -- The SETTINGS frame reader now
+checks that `numSettings` is consistent with the declared frame
+length (`numSettings <= (length-4)/8`) before allocating.
+ 
+- **Header count limit** -- `parseHeaderValueBlock` enforces a maximum
+number of headers per frame (default: 1000).
+ 
+- **Header field size limit** -- Individual header name and value
+lengths are checked against a per-field size limit (default: 1 MiB)
+before allocation.
+ 
+- **Connection closure on protocol error** -- The connection read loop
+now closes the underlying `net.Conn` when it encounters an
+`InvalidControlFrame` error, preventing further exploitation on the
+same connection.
+ 
+**Additional hardening:**
+ 
+- **Write-side bounds checks** -- All frame write methods now verify
+that payloads fit within the 24-bit length field, preventing the
+library from producing invalid frames.
+ 
+**Configurable limits:**
+ 
+- Callers can adjust the defaults using `NewConnectionWithOptions` or
+the lower-level `spdy.NewFramerWithOptions` with functional options:
+`WithMaxControlFramePayloadSize`, `WithMaxHeaderFieldSize`, and
+`WithMaxHeaderCount`.
+ 
 
 </blockquote>
 </details>
