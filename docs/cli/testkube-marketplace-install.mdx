@@ -1,0 +1,64 @@
+---
+title: "testkube marketplace install"
+---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
+## testkube marketplace install
+
+Install a marketplace TestWorkflow into the cluster
+
+### Synopsis
+
+Downloads a TestWorkflow from the Testkube Marketplace, applies any --set
+parameter overrides to its spec.config defaults, and creates (or updates) the
+TestWorkflow in the target namespace.
+
+When run on a terminal the command prompts for every parameter the workflow
+exposes; values supplied via --set are used as the prompt default, and empty
+input keeps the current value. Parameters marked sensitive are read with
+masked input and their current value is never echoed. Pass --interactive=false
+(or run without a TTY, e.g. in CI) to skip prompting and use the defaults plus
+any --set overrides as-is. --interactive=true forces prompting even off a TTY.
+
+After a successful create/update the command asks whether to run the workflow
+immediately. Use --run=true to skip the prompt and trigger a run, or
+--run=false to skip both the prompt and the run (useful for CI/automation).
+Pass -f/--follow to stream logs and wait for completion (implies --run=true
+when --run was not supplied).
+
+```
+testkube marketplace install <name> [flags]
+```
+
+### Options
+
+```
+      --dry-run           validate the workflow (with overrides applied) without creating it
+  -f, --follow            follow the execution (stream logs and wait for completion); implies --run=true when --run is not supplied
+  -h, --help              help for install
+  -i, --interactive       prompt for every spec.config parameter (default: auto — prompt when attached to a terminal). Use --interactive=false to force non-interactive, --interactive to force prompting.
+      --name string       override the TestWorkflow name
+      --run               run the workflow after install (default: ask). Use --run=true to skip the prompt and run, --run=false to skip both prompt and run
+      --set stringArray   override a spec.config parameter, in key=value form (repeatable)
+      --update            update, if test workflow already exists
+```
+
+### Options inherited from parent commands
+
+```
+  -a, --api-uri string          api uri, default value read from config if set (default "http://localhost:8088")
+  -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
+      --go-template string      go template to render when --output=go (default "{{.}}")
+      --header stringToString   headers for direct client key value pair: --header name=value (default [])
+      --insecure                insecure connection for direct client
+      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
+  -o, --output string           output type: pretty|json|yaml|go (default "pretty")
+      --verbose                 show additional debug messages
+```
+
+### SEE ALSO
+
+* [testkube marketplace](testkube-marketplace.mdx)	 - Browse and install TestWorkflows from the Testkube Marketplace
+
