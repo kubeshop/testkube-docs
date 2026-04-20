@@ -29,7 +29,7 @@ COPY --from=build /app/testworkflow-init /init
 <table>
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.011%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.009%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
 </table>
 

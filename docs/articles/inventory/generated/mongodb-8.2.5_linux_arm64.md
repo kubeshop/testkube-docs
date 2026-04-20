@@ -336,8 +336,8 @@ tar.Reader can allocate an unbounded amount of memory when reading a maliciously
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.1</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.011%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.012%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1407,8 +1407,8 @@ SSH clients receiving SSH_AGENT_SUCCESS when expecting a typed response will pan
 <tr><td>Fixed version</td><td><code>0.45.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.039%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.038%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1702,6 +1702,146 @@ Issue summary: An uncommon configuration of clients performing DANE TLSA-based s
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>expat</strong> <code>2.6.1-2ubuntu0.4</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/expat@2.6.1-2ubuntu0.4?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (62:101)
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends \
+        ca-certificates \
+        curl \
+        libbrotli1 \
+        libcom-err2 \
+        libcurl4 \
+        libffi8 \
+        libgcc-s1 \
+        libgmp10 \
+        libgnutls30 \
+        libgssapi-krb5-2 \
+        libhogweed6 \
+        libidn2-0 \
+        libk5crypto3 \
+        libkeyutils1 \
+        libkrb5-3 \
+        libkrb5support0 \
+        libldap2 \
+        libnettle8 \
+        libnghttp2-14 \
+        libp11-kit0 \
+        libpsl5 \
+        librtmp1 \
+        libsasl2-2 \
+        libssh2-1 \
+        libssl3 \
+        libtasn1-6 \
+        libunistring5 \
+        libzstd1 \
+        numactl \
+        procps \
+        zlib1g \
+        yq \
+        wait-for-it \
+    && apt-get autoremove -y \
+    && apt-get autoclean \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-66382?s=ubuntu&n=expat&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium 5.5: CVE--2025--66382" src="https://img.shields.io/badge/CVE--2025--66382-lightgrey?label=medium%205.5&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>CVSS Score</td><td><code>5.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.011%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+In libexpat through 2.7.3, a crafted file with an approximate size of 2 MiB can lead to dozens of seconds of processing time.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>python3.12</strong> <code>3.12.3-1ubuntu0.11</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/python3.12@3.12.3-1ubuntu0.11?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (62:101)
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends \
+        ca-certificates \
+        curl \
+        libbrotli1 \
+        libcom-err2 \
+        libcurl4 \
+        libffi8 \
+        libgcc-s1 \
+        libgmp10 \
+        libgnutls30 \
+        libgssapi-krb5-2 \
+        libhogweed6 \
+        libidn2-0 \
+        libk5crypto3 \
+        libkeyutils1 \
+        libkrb5-3 \
+        libkrb5support0 \
+        libldap2 \
+        libnettle8 \
+        libnghttp2-14 \
+        libp11-kit0 \
+        libpsl5 \
+        librtmp1 \
+        libsasl2-2 \
+        libssh2-1 \
+        libssl3 \
+        libtasn1-6 \
+        libunistring5 \
+        libzstd1 \
+        numactl \
+        procps \
+        zlib1g \
+        yq \
+        wait-for-it \
+    && apt-get autoremove -y \
+    && apt-get autoclean \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-13462?s=ubuntu&n=python3.12&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2025--13462" src="https://img.shields.io/badge/CVE--2025--13462-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.014%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The "tarfile" module would still apply normalization of AREGTYPE (\x00) blocks to DIRTYPE, even while processing a multi-block member such as GNUTYPE_LONGNAME or GNUTYPE_LONGLINK. This could result in a crafted tar archive being misinterpreted by the tarfile module compared to other implementations.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>js-yaml</strong> <code>3.13.1</code> (npm)</summary>
 
 <small><code>pkg:npm/js-yaml@3.13.1</code></small><br/>
@@ -1778,75 +1918,6 @@ GNU Tar through 1.35 allows file overwrite via directory traversal in crafted TA
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>python3.12</strong> <code>3.12.3-1ubuntu0.11</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/python3.12@3.12.3-1ubuntu0.11?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (62:101)
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y --no-install-recommends \
-        ca-certificates \
-        curl \
-        libbrotli1 \
-        libcom-err2 \
-        libcurl4 \
-        libffi8 \
-        libgcc-s1 \
-        libgmp10 \
-        libgnutls30 \
-        libgssapi-krb5-2 \
-        libhogweed6 \
-        libidn2-0 \
-        libk5crypto3 \
-        libkeyutils1 \
-        libkrb5-3 \
-        libkrb5support0 \
-        libldap2 \
-        libnettle8 \
-        libnghttp2-14 \
-        libp11-kit0 \
-        libpsl5 \
-        librtmp1 \
-        libsasl2-2 \
-        libssh2-1 \
-        libssl3 \
-        libtasn1-6 \
-        libunistring5 \
-        libzstd1 \
-        numactl \
-        procps \
-        zlib1g \
-        yq \
-        wait-for-it \
-    && apt-get autoremove -y \
-    && apt-get autoclean \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2025-13462?s=ubuntu&n=python3.12&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2025--13462" src="https://img.shields.io/badge/CVE--2025--13462-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.014%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-The "tarfile" module would still apply normalization of AREGTYPE (\x00) blocks to DIRTYPE, even while processing a multi-block member such as GNUTYPE_LONGNAME or GNUTYPE_LONGLINK. This could result in a crafted tar archive being misinterpreted by the tarfile module compared to other implementations.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libssh</strong> <code>0.10.6-2ubuntu0.3</code> (deb)</summary>
 
 <small><code>pkg:deb/ubuntu/libssh@0.10.6-2ubuntu0.3?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
@@ -1873,77 +1944,6 @@ FROM mongo:8.2.5
 <blockquote>
 
 A weakness has been identified in libssh up to 0.11.3. The impacted element is the function sftp_extensions_get_name/sftp_extensions_get_data of the file src/sftp.c of the component SFTP Extension Name Handler. Executing a manipulation of the argument idx can lead to out-of-bounds read. The attack may be performed from remote. Upgrading to version 0.11.4 and 0.12.0 is sufficient to resolve this issue. This patch is called 855a0853ad3abd4a6cd85ce06fce6d8d4c7a0b60. You should upgrade the affected component.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>expat</strong> <code>2.6.1-2ubuntu0.4</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/expat@2.6.1-2ubuntu0.4?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (62:101)
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y --no-install-recommends \
-        ca-certificates \
-        curl \
-        libbrotli1 \
-        libcom-err2 \
-        libcurl4 \
-        libffi8 \
-        libgcc-s1 \
-        libgmp10 \
-        libgnutls30 \
-        libgssapi-krb5-2 \
-        libhogweed6 \
-        libidn2-0 \
-        libk5crypto3 \
-        libkeyutils1 \
-        libkrb5-3 \
-        libkrb5support0 \
-        libldap2 \
-        libnettle8 \
-        libnghttp2-14 \
-        libp11-kit0 \
-        libpsl5 \
-        librtmp1 \
-        libsasl2-2 \
-        libssh2-1 \
-        libssl3 \
-        libtasn1-6 \
-        libunistring5 \
-        libzstd1 \
-        numactl \
-        procps \
-        zlib1g \
-        yq \
-        wait-for-it \
-    && apt-get autoremove -y \
-    && apt-get autoclean \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2025-66382?s=ubuntu&n=expat&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium 5.5: CVE--2025--66382" src="https://img.shields.io/badge/CVE--2025--66382-lightgrey?label=medium%205.5&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>CVSS Score</td><td><code>5.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.011%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-In libexpat through 2.7.3, a crafted file with an approximate size of 2 MiB can lead to dozens of seconds of processing time.
 
 </blockquote>
 </details>
@@ -1980,36 +1980,6 @@ systemd, a system and service manager, (as PID 1) hits an assert and freezes exe
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>libgcrypt20</strong> <code>1.10.3-2build1</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/libgcrypt20@1.10.3-2build1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (51:51)
-FROM mongo:8.2.5
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2024-2236?s=ubuntu&n=libgcrypt20&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="low : CVE--2024--2236" src="https://img.shields.io/badge/CVE--2024--2236-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.745%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>73rd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A timing-based side-channel flaw was found in libgcrypt's RSA implementation. This issue may allow a remote attacker to initiate a Bleichenbacher-style attack, which can lead to the decryption of RSA ciphertexts.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>shadow</strong> <code>1:4.13+dfsg1-4ubuntu3.2</code> (deb)</summary>
 
 <small><code>pkg:deb/ubuntu/shadow@1%3A4.13%2Bdfsg1-4ubuntu3.2?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
@@ -2034,6 +2004,36 @@ FROM mongo:8.2.5
 <blockquote>
 
 shadow-utils (aka shadow) 4.4 through 4.17.0 establishes a default /etc/subuid behavior (e.g., uid 100000 through 165535 for the first user account) that can realistically conflict with the uids of users defined on locally administered networks, potentially leading to account takeover, e.g., by leveraging newuidmap for access to an NFS home directory (or same-host resources in the case of remote logins by these local network users). NOTE: it may also be argued that system administrators should not have assigned uids, within local networks, that are within the range that can occur in /etc/subuid.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>libgcrypt20</strong> <code>1.10.3-2build1</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/libgcrypt20@1.10.3-2build1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (51:51)
+FROM mongo:8.2.5
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2024-2236?s=ubuntu&n=libgcrypt20&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="low : CVE--2024--2236" src="https://img.shields.io/badge/CVE--2024--2236-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.745%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>73rd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A timing-based side-channel flaw was found in libgcrypt's RSA implementation. This issue may allow a remote attacker to initiate a Bleichenbacher-style attack, which can lead to the decryption of RSA ciphertexts.
 
 </blockquote>
 </details>
