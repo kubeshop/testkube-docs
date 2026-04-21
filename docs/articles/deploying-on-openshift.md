@@ -2,6 +2,48 @@
 
 When deploying Testkube in an OpenShift cluster, you can expose its public endpoints using OpenShift Routes while securing them with custom certificates.
 
+## TestWorkflow security context on OpenShift
+
+OpenShift often expects the platform to assign the effective runtime UID and GID through Security Context Constraints.
+For TestWorkflows, this matters most when you use `parallel`, because each worker is created as a separate Kubernetes Job.
+
+If you want Testkube to leave pod `securityContext.fsGroup` unset so OpenShift can assign it, use:
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: openshift-parallel-example
+spec:
+  pod:
+    disableFsGroupDefaulting: true
+  steps:
+  - name: Run in parallel
+    parallel:
+      count: 2
+      shell: |
+        id
+```
+
+If you need different behavior only for worker pods, set it on the parallel step instead:
+
+```yaml
+spec:
+  steps:
+  - name: Run in parallel
+    parallel:
+      count: 2
+      pod:
+        disableFsGroupDefaulting: true
+      shell: id
+```
+
+If you explicitly set `pod.securityContext.fsGroup`, that explicit value still takes precedence.
+
+For `runAsUser` and `runAsNonRoot`, Testkube does not apply similar defaulting. Set them explicitly in the workflow if you need fixed values, or leave them unset if you want OpenShift to control them.
+
+See [Test Workflows - Job and Pod Configuration](/articles/test-workflows-job-and-pod#fsgroup-and-runasgroup-defaulting) for the full defaulting behavior.
+
 ## Prerequisites
 - OpenShift cluster (version 4.5 and later)
 - OpenShift CLI installed with the same version of the cluster (or later)

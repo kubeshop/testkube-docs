@@ -41,6 +41,37 @@ It takes an expression condition, so you can dynamically choose whether it shoul
 
 The parallel steps are started as a separate jobs/pods, so you can configure `pod` and `job` similarly to general Test Workflow.
 
+Root workflow `spec.pod` settings are inherited by parallel worker pods.
+If you need worker-specific behavior, define `steps[].parallel.pod`, which overrides the inherited pod settings for those workers.
+
+This is particularly useful for security context handling, for example:
+
+```yaml
+spec:
+  pod:
+    disableFsGroupDefaulting: true
+  steps:
+  - name: Run tests
+    parallel:
+      count: 4
+      shell: npm test
+```
+
+Or, if you only want to change the worker pods:
+
+```yaml
+spec:
+  steps:
+  - name: Run tests
+    parallel:
+      count: 4
+      pod:
+        disableFsGroupDefaulting: true
+      shell: npm test
+```
+
+See [Job and Pod Configuration](./test-workflows-job-and-pod.md#fsgroup-and-runasgroup-defaulting) for the full security-context defaulting rules.
+
 ### Lifecycle
 
 Similarly to regular steps, you can configure things like `timeout` (`timeout: 30m`), `optional: true`, or `negative: true` for expecting failure.
