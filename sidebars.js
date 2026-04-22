@@ -161,6 +161,11 @@ const sidebars = {
                   label: "Distributed Tracing",
                   id: "articles/tracing",
                 },
+                {
+                  type: "doc",
+                  label: "Mongo to Postges migration tool",
+                  id: "articles/convert",
+                },
               ],
             },
           ],

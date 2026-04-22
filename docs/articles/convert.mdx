@@ -1,0 +1,266 @@
+# Convert Utility
+
+The **convert** utility migrates data from MongoDB to PostgreSQL. It reads every
+collection used by the Testkube control plane, transforms each record into the
+PostgreSQL schema, and writes it to the target database. Both "record-level"
+collections (organisations, environments, agents, …) and high-volume "bulk"
+collections (usage, audit logs, events, workflow executions, …) are handled in
+a single run.
+
+## Prerequisites
+
+| Requirement | Details |
+|---|---|
+| **MongoDB** | A running MongoDB instance containing the source data. The utility connects using the standard MongoDB connection string. |
+| **PostgreSQL** | An empty (or partially migrated) PostgreSQL database. The utility automatically applies any pending Goose schema migrations before writing data. |
+| **Credentials master password** | The same master password that was used to encrypt secrets in the source database. It is required to re-encrypt credentials for PostgreSQL. Must be at least 32 characters. |
+
+## Quick start
+
+```bash
+# Using environment variables
+export API_MONGO_DSN="mongodb://user:pass@mongo-host:27017"
+export API_MONGO_DB="testkubecloud"
+export API_POSTGRES_URL="postgres://user:pass@pg-host:5432/testkube?sslmode=disable"
+export CREDENTIALS_MASTER_PASSWORD="your-32-char-master-password"
+
+go run cmd/convert/main.go
+```
+
+```bash
+# Using CLI flags
+go run cmd/convert/main.go \
+  -mongo_dsn "mongodb://user:pass@mongo-host:27017" \
+  -mongo_db  "testkubecloud" \
+  -postgres_url "postgres://user:pass@pg-host:5432/testkube?sslmode=disable" \
+  -credentials_master_password "your-32-char-master-password"
+```
+
+```bash
+# Using Docker
+docker run --rm \
+  -e API_MONGO_DSN="mongodb://user:pass@mongo-host:27017" \
+  -e API_MONGO_DB="testkubecloud" \
+  -e API_POSTGRES_URL="postgres://user:pass@pg-host:5432/testkube?sslmode=disable" \
+  -e CREDENTIALS_MASTER_PASSWORD="your-32-char-master-password" \
+  <convert-image>
+```
+
+## Configuration
+
+Every setting can be provided as an **environment variable**, a **CLI flag**, or
+both. When both are provided the CLI flag takes precedence.
+
+### Connection settings
+
+| Environment variable | CLI flag | Default | Description |
+|---|---|---|---|
+| `API_MONGO_DSN` | `-mongo_dsn` | *(empty)* | MongoDB connection string. |
+| `API_MONGO_DB` | `-mongo_db` | `testkubecloud` | MongoDB database name. |
+| `API_MONGO_MIN_POOL_SIZE` | `-mongo_min_pool_size` | `0` | Minimum connection pool size for MongoDB. |
+| `API_MONGO_MAX_POOL_SIZE` | `-mongo_max_pool_size` | `100` | Maximum connection pool size for MongoDB. |
+| `API_MONGO_MAX_CONNECTING` | `-mongo_max_connecting` | `2` | Maximum number of connections being established concurrently. |
+| `API_MONGO_READ_PREFERENCE` | `-mongo_read_preference` | `secondaryPreferred` | MongoDB read preference. |
+| `API_MONGO_CONNECTION_TIMEOUT` | `-mongo_connection_timeout` | `5s` | Timeout for establishing a MongoDB connection. |
+| `API_MONGO_CONNECTION_DELAY` | `-mongo_connection_delay` | `1s` | Delay between MongoDB connection retry attempts. |
+| `API_MONGO_CONNECTION_ATTEMPTS` | `-mongo_connection_attempts` | `120` | Number of MongoDB connection retry attempts. |
+| `API_POSTGRES_URL` | `-postgres_url` | *(empty)* | PostgreSQL connection string. |
+| `CREDENTIALS_MASTER_PASSWORD` | `-credentials_master_password` | *(empty)* | Master password for credential encryption/signing. |
+
+### Migration tuning
+
+| Environment variable | CLI flag | Default | Description |
+|---|---|---|---|
+| `CONVERT_BATCH_SIZE` | `-convert_batch_size` | `1000` | Number of records fetched per batch during record-level migrations (users, organisations, environments, etc.). |
+| `CONVERT_BULK_READ_SIZE` | `-convert_bulk_read_size` | `10000` | Number of records fetched per batch during bulk migrations (usage, audit logs, events, executions, etc.). |
+| `CONVERT_BULK_WRITE_SIZE` | `-convert_bulk_write_size` | `100000` | Number of records written per batch during bulk migrations. |
+| `CONVERT_WORKERS` | `-convert_parallel_workers` | `10` | Number of parallel workers used for record-level migration processing. |
+| `CONVERT_DRY_RUN` | `-convert_dry_run` | `false` | When `true`, reads and transforms data but does **not** write to PostgreSQL. Useful for validating the migration before committing. |
+| `CONVERT_SKIP_EXISTING` | `-convert_skip_existing` | `false` | When `true`, silently skips records that already exist in PostgreSQL instead of failing. Useful for resuming an interrupted migration. |
+| `CONVERT_WORK_DIR` | `-convert_work_dir` | *(empty – current directory)* | Directory used for writing error report files. |
+| `CONVERT_SKIP_INTEGRITY_ERRORS` | `-convert_skip_integrity_errors` | `false` | When `true`, skips records that fail integrity checks (e.g. orphaned references) instead of aborting. |
+| `CONVERT_SINCE` | `-convert_since` | *(empty – all records)* | Only include usage records created on or after this date. Format: `YYYY-MM-DD`. |
+
+## What gets migrated
+
+The utility migrates the following data in two phases.
+
+### Phase 1 – Record-level migrations
+
+These collections are read from MongoDB, transformed, and inserted into
+PostgreSQL one batch at a time. Each batch is processed by a pool of parallel
+workers.
+
+| Data | MongoDB collection |
+|---|---|
+| Users | `users` |
+| Organisations | `organizations` |
+| Environments | `environments` |
+| Agents | `agents` |
+| Boards | `boards` |
+| Config | `config` |
+| Credentials | `credentials` |
+| Organisation domains | `organization_domains` |
+| Status pages | `status_pages` |
+| Incidents | `incidents` |
+| Invites | `invites` |
+| Metadata | `metadata` |
+| Resource groups | `resource_groups` |
+| Settings | `settings` |
+| Tokens | `tokens` |
+| Trackers | `trackers` |
+| Views | `views` |
+| Payments history | `organizations` (embedded) |
+| Cron schedules | `cron_schedules` |
+| AI assistants | `ai_assistants` (per org) |
+| LLM providers | `ai_llm_providers` (per org) |
+| MCP servers | `ai_mcp_servers` (per org) |
+| MCP server tokens | `ai_mcp_server_tokens` (per org) |
+| MCP server tools | `ai_mcp_server_tools` (per org) |
+| AI agent triggers | `ai_agent_triggers` (per org) |
+| Assistant sessions | `ai_sessions` (per org) |
+| Session tool calls | `ai_session_tool_calls` (per org) |
+| Agent configs | per org/env |
+| Test workflows | per org/env |
+| Test workflow templates | per org/env |
+| Test triggers | per org/env |
+| Webhooks | per org/env |
+| Webhook templates | per org/env |
+
+### Phase 2 – Bulk migrations
+
+High-volume collections are migrated using optimised bulk readers and writers.
+These run sequentially after the record-level phase.
+
+| Data |
+|---|
+| Usage records |
+| Audit log events |
+| Application audit events |
+| Events |
+| Reporting data |
+| Test workflow executions (per org/env) |
+| Sequences (per org/env) |
+
+## Examples
+
+### Dry run
+
+Validate that all records can be read and transformed without writing anything:
+
+```bash
+go run cmd/convert/main.go \
+  -mongo_dsn "mongodb://localhost:27017" \
+  -postgres_url "postgres://localhost:5432/testkube?sslmode=disable" \
+  -credentials_master_password "supersecretmasterpassword1234567" \
+  -convert_dry_run=true
+```
+
+### Resume after an interrupted migration
+
+If a previous run was interrupted, re-run with `-convert_skip_existing` to
+continue from where it left off:
+
+```bash
+go run cmd/convert/main.go \
+  -mongo_dsn "mongodb://localhost:27017" \
+  -postgres_url "postgres://localhost:5432/testkube?sslmode=disable" \
+  -credentials_master_password "supersecretmasterpassword1234567" \
+  -convert_skip_existing=true
+```
+
+### Skip integrity errors
+
+Some records may reference organisations or environments that no longer exist.
+Use `-convert_skip_integrity_errors` to skip those and continue:
+
+```bash
+go run cmd/convert/main.go \
+  -mongo_dsn "mongodb://localhost:27017" \
+  -postgres_url "postgres://localhost:5432/testkube?sslmode=disable" \
+  -credentials_master_password "supersecretmasterpassword1234567" \
+  -convert_skip_existing=true \
+  -convert_skip_integrity_errors=true
+```
+
+### Migrate only recent usage data
+
+Only migrate usage records from the last quarter:
+
+```bash
+go run cmd/convert/main.go \
+  -mongo_dsn "mongodb://localhost:27017" \
+  -postgres_url "postgres://localhost:5432/testkube?sslmode=disable" \
+  -credentials_master_password "supersecretmasterpassword1234567" \
+  -convert_since "2026-01-01"
+```
+
+### Tuning for large datasets
+
+For databases with millions of records, increase batch sizes and parallelism:
+
+```bash
+go run cmd/convert/main.go \
+  -mongo_dsn "mongodb://mongo:27017" \
+  -postgres_url "postgres://pg:5432/testkube?sslmode=disable" \
+  -credentials_master_password "supersecretmasterpassword1234567" \
+  -convert_batch_size 5000 \
+  -convert_bulk_read_size 50000 \
+  -convert_bulk_write_size 200000 \
+  -convert_parallel_workers 20 \
+  -convert_work_dir /tmp/convert-errors
+```
+
+### Save error reports to a specific directory
+
+```bash
+mkdir -p /var/log/convert
+go run cmd/convert/main.go \
+  -mongo_dsn "mongodb://localhost:27017" \
+  -postgres_url "postgres://localhost:5432/testkube?sslmode=disable" \
+  -credentials_master_password "supersecretmasterpassword1234567" \
+  -convert_work_dir /var/log/convert
+```
+
+Error reports are written as `<migration_name>_migration_errors.log` in the
+work directory.
+
+## Output and logging
+
+The utility logs progress to stdout using structured logging. For each
+migration task you will see:
+
+- **Start message** – the task name and source collection.
+- **Statistics summary** – total records, successful, failed, skipped counts,
+  duration, and throughput (records/second).
+- **Error report** – if any records fail, an error log file is written to the
+  work directory with details (record ID, timestamp, error message, and
+  context).
+
+Example statistics output:
+
+```
+============================================================
+USERS MIGRATION STATISTICS
+============================================================
+Total Records:        1250
+Successful:           1248
+Failed:               2
+Skipped:              0
+Duration:             3.21s
+Records/second:       388.79
+============================================================
+```
+
+## Limitations
+
+- **No resume support for bulk migrations.** Record-level migrations can be
+  partially resumed with `-convert_skip_existing`, but the bulk migration phase
+  (usage, audit logs, events, executions) does not track progress. If
+  interrupted, bulk data may need to be truncated and re-migrated.
+- **Target database should be empty.** The utility is designed for a one-time
+  migration. Running it against a database that already has data without
+  `-convert_skip_existing` will result in duplicate-key errors.
+- **Sequential execution.** Bulk migration tasks run sequentially. For very
+  large datasets the total migration time is bounded by the largest collection.
+  
