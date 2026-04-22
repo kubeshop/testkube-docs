@@ -40,8 +40,6 @@ spec:
 
 If you explicitly set `pod.securityContext.fsGroup`, that explicit value still takes precedence.
 
-For `runAsUser` and `runAsNonRoot`, Testkube does not apply similar defaulting. Set them explicitly in the workflow if you need fixed values, or leave them unset if you want OpenShift to control them.
-
 See [Test Workflows - Job and Pod Configuration](/articles/test-workflows-job-and-pod#fsgroup-and-runasgroup-defaulting) for the full defaulting behavior.
 
 ## Prerequisites
