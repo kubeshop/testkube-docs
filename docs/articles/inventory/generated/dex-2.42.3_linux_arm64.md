@@ -1531,7 +1531,7 @@ Thanks to the 3 separate reports from @<!-- -->celinke97, @<!-- -->N0zoM1z0 and 
 <tr><td>CVSS Score</td><td><code>4.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:N</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.007%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1644,8 +1644,8 @@ The html.Parse function in golang.org/x/net/html has quadratic parsing complexit
 <table>
 <tr><td>Affected range</td><td><code>&lt;=1.37.0-r13</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.043%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.051%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
