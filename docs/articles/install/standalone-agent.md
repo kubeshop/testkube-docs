@@ -276,7 +276,7 @@ Please notice that since we've just installed MongoDB with a `testkube-mongodb` 
 
 ## Using PostgreSQL as a database
 
-Starting with release `3.0`, PostgreSQL will be used as the primary database instead of MongoDB. Since both options are currently supported, you must first disable MongoDB and then enable PostgreSQL in your `values.yaml` file. We strongly recommend using `CloudNativePG` instead of plain PostgreSQL, as it offloads much of the database management, and the installation of PostgreSQL by Bitnami will be deprecated by the end of 2026.
+Starting with release `2.9`, PostgreSQL will be used as the primary database instead of MongoDB. Since both options are currently supported, you must first disable MongoDB and then enable PostgreSQL in your `values.yaml` file. We strongly recommend using `CloudNativePG` instead of plain PostgreSQL, as it offloads much of the database management, and the installation of PostgreSQL by Bitnami will be deprecated by the end of 2026.
 
 The operator-based path has two parts:
 
