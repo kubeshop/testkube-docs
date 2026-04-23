@@ -43,7 +43,7 @@ docker run --rm \
   -e API_MONGO_DB="testkubecloud" \
   -e API_POSTGRES_URL="postgres://user:pass@pg-host:5432/testkube?sslmode=disable" \
   -e CREDENTIALS_MASTER_PASSWORD="your-32-char-master-password" \
-  <convert-image>
+  kubeshop/testkube-postgres-migration:<image-tag>
 ```
 
 ## Configuration
@@ -263,4 +263,66 @@ Records/second:       388.79
   `-convert_skip_existing` will result in duplicate-key errors.
 - **Sequential execution.** Bulk migration tasks run sequentially. For very
   large datasets the total migration time is bounded by the largest collection.
-  
+
+## Running the MongoDB to PostgreSQL migration job using Helm chart
+
+Testkube Enterprise includes a one-time Helm Job that migrates control plane data from MongoDB to PostgreSQL. The job is disabled by default and is enabled with the `testkube-cloud-api.api.mongoToPostgresMigration.enabled` Helm value.
+
+This job is separate from the regular MongoDB schema migration job controlled by `testkube-cloud-api.api.migrations.enabled`.
+
+### Before you start
+
+Before enabling the migration job:
+
+- Back up MongoDB and PostgreSQL.
+- Make sure PostgreSQL is reachable from the cluster.
+- Use an empty PostgreSQL database for the migration target. The converter applies PostgreSQL schema migrations first, then writes migrated records. The migration is not designed to resume after a crash or merge into an already populated database.
+- Make sure the chart is connected to the same MongoDB database currently used by Testkube.
+- Make sure `global.credentials.masterPassword` is set to the same value used by the existing installation, or points to the same Kubernetes Secret. This is required to migrate encrypted credentials correctly.
+- Plan a maintenance window so the source MongoDB data does not continue changing while the migration runs.
+
+### Configure the migration
+
+Create a values file that enables PostgreSQL for the API and enables the MongoDB to PostgreSQL migration job.
+
+```yaml
+global:
+  mongo:
+    dsnSecretRef: testkube-mongo-dsn
+    database: testkubeEnterpriseDB
+
+  postgres:
+    enabled: true
+    dsnSecretRef: testkube-postgres-dsn
+    dsnSecretKey: POSTGRES_DSN
+
+  credentials:
+    masterPassword:
+      secretKeyRef:
+        name: testkube-credentials-master-password
+        key: password
+
+testkube-cloud-api:
+  api:
+    mongoToPostgresMigration:
+      enabled: true
+```
+### After the migration succeeds
+
+After the Job completes successfully:
+
+- Disable the migration job so it does not run on future upgrades.
+- Keep PostgreSQL enabled.
+
+```yaml
+global:
+  postgres:
+    enabled: true
+    dsnSecretRef: testkube-postgres-dsn
+    dsnSecretKey: POSTGRES_DSN
+
+testkube-cloud-api:
+  api:
+    mongoToPostgresMigration:
+      enabled: false
+```
