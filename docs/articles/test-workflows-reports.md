@@ -37,7 +37,7 @@ For a more detailed examination of your JUnit reports, navigate to the Reports t
 
 - A comprehensive view of all processed reports
 - A search bar for filtering test suites and test cases
-- Options to filter results by "passed" or "failed" status
+- Options to filter results by "passed", "skipped or "failed" status
 - Inlining of artifacts related to passed or failed excecutions
 
 This detailed view allows for in-depth analysis of test results and easy navigation through large sets of test data.
@@ -51,6 +51,10 @@ Example with filtering options:
 Example with inlined attachments - images will be shown in a small hover-popup:
 
 ![Example with inlined JUnit Attachments](images/inlined-junit-attachments.png)
+
+:::tip
+The JUnit Report will automatically expand the first failed test - to make it easy to navigate your failed tests for troubleshooting.
+:::
 
 
 ### 3. Test Insights

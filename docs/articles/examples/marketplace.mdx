@@ -35,22 +35,123 @@ letting you customize connection details, credentials, and other settings for yo
 
 ## Using the Marketplace from the CLI
 
-You can also deploy Marketplace workflows using `kubectl` or the Testkube CLI.
+The Testkube CLI ships with a built-in `marketplace` command group that talks to the same catalog the
+Dashboard uses, so open-source users can browse and install workflows without leaving the terminal.
 
-### Clone and Apply
+### Browse the Catalog
+
+Discover what categories exist before drilling into specific workflows:
+
+```bash
+testkube marketplace categories
+```
+
+List every workflow in the Marketplace, optionally filtered by category or component:
+
+```bash
+testkube marketplace list
+testkube marketplace list --category databases
+testkube marketplace list --component postgresql --output json
+```
+
+The default `pretty` output renders a table; use `--output json|yaml|go` (with `--go-template`) for
+machine-readable formats.
+
+### Inspect a Workflow
+
+`get` shows the catalog entry, the configurable parameters extracted from `spec.config`, and optionally
+the raw YAML and readme:
+
+```bash
+testkube marketplace get redis-connectivity
+testkube marketplace get redis-connectivity --show-yaml --show-readme
+```
+
+### Install a Workflow
+
+`install` downloads the workflow YAML, applies any `--set key=value` overrides to the matching
+`spec.config.<key>.default` fields, and creates (or updates) the TestWorkflow in your cluster — the
+same pipeline as `testkube create testworkflow -f`:
+
+```bash
+# Install with the workflow's defaults
+testkube marketplace install redis-connectivity
+
+# Override one or more parameters; values are written into spec.config defaults
+testkube marketplace install redis-connectivity \
+  --set host=my-redis.default.svc.cluster.local \
+  --set port=6379
+
+# When attached to a terminal, install prompts for every parameter the workflow
+# exposes by default. --set values become the pre-filled default; empty input
+# keeps the current value; sensitive parameters are read with masked input.
+testkube marketplace install redis-connectivity
+
+# Force non-interactive (use defaults + --set as-is) -- handy on a terminal
+# when you know the overrides already cover everything you need.
+testkube marketplace install redis-connectivity --interactive=false
+
+# Validate without creating, or upsert an existing workflow
+testkube marketplace install redis-connectivity --dry-run
+testkube marketplace install redis-connectivity --update
+```
+
+Prompting is automatically skipped when stdin is not a terminal (CI, piped
+input), so the same command works unattended in pipelines. Pass
+`--interactive=true` (or `-i`) to force prompting even off a TTY.
+
+Because `--set` (and any values collected interactively) rewrite the workflow's
+defaults, subsequent `testkube run testworkflow redis-connectivity` calls do
+not need to repeat `--config` overrides.
+
+After a successful install the command asks whether to run the workflow immediately. Use
+`--run` to skip the prompt and make the command fully automatable, or `-f`/`--follow` to
+stream logs until the execution finishes:
+
+```bash
+# Install and run unattended (suitable for CI)
+testkube marketplace install redis-connectivity --run=true
+
+# Install only, do not prompt or run
+testkube marketplace install redis-connectivity --run=false
+
+# Install, run, and follow the execution (logs stream until completion;
+# exit code matches the workflow's result)
+testkube marketplace install redis-connectivity -f
+```
+
+`-f` implies `--run=true` when `--run` is not supplied; combine with `--update` to
+reinstall-and-rerun an existing workflow in a single command.
+
+### Install Directly from a URL
+
+`testkube create testworkflow` also accepts a `--url` flag that fetches a TestWorkflow YAML from any
+HTTP(S) endpoint before validating and creating it. This works for raw GitHub URLs, internal storage,
+or any other source:
+
+```bash
+testkube create testworkflow --url \
+  https://raw.githubusercontent.com/kubeshop/testkube-marketplace/main/workflows/databases/redis/redis-connectivity.yaml
+```
+
+`--url` and `--file` are mutually exclusive.
+
+### Clone and Apply (Manual Workflow)
+
+If you prefer working from a local checkout, the workflows can still be applied directly:
 
 ```bash
 git clone https://github.com/kubeshop/testkube-marketplace.git
 cd testkube-marketplace
 
-# Apply a workflow to your Testkube instance
 kubectl apply -f workflows/databases/redis/redis-connectivity.yaml
-
-# Or use the Testkube CLI
+# or
 testkube create testworkflow -f workflows/databases/redis/redis-connectivity.yaml
 ```
 
-### Run with Custom Parameters
+### Run with Custom Parameters at Execution Time
+
+If you installed a workflow with the original defaults, you can still override parameters per-run:
 
 ```bash
 testkube run testworkflow redis-connectivity \

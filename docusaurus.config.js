@@ -148,9 +148,9 @@ const config = {
       },
 
       announcementBar: {
-        id: "testkube-280-release",
+        id: "testkube-290-release",
         content:
-          '<b>Testkube 2.8.0 is out! Autonomous AI Agents, Custom AI Models, fail-fast and input/output parameters for Workflows, and much more. <a href="/changelog">Read More</a></b>',
+          '<b>Testkube 2.9.0 is out! Open-Source Execution Viewer, AI and TestTrigger improvements, CLI Marketplace support, and much more. <a href="/changelog">Read More</a></b>',
         backgroundColor: "#8951ff",
         textColor: "#fff",
       },

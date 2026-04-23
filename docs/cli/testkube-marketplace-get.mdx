@@ -1,27 +1,29 @@
 ---
-title: "testkube create testworkflow"
+title: "testkube marketplace get"
 ---
 <head>
   <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
-## testkube create testworkflow
+## testkube marketplace get
 
-Create test workflow
+Show detailed information about a marketplace TestWorkflow
+
+### Synopsis
+
+Displays the catalog entry, configurable parameters, and optionally the raw YAML
+and readme content for a marketplace TestWorkflow.
 
 ```
-testkube create testworkflow [flags]
+testkube marketplace get <name> [flags]
 ```
 
 ### Options
 
 ```
-      --dry-run       validate test workflow specification yaml
-  -f, --file string   file path to get the test workflow specification
-  -h, --help          help for testworkflow
-      --name string   test workflow name
-      --update        update, if test workflow already exists
-  -u, --url string    URL to fetch the test workflow specification from (mutually exclusive with --file)
+  -h, --help          help for get
+      --show-readme   include the workflow readme in the output
+      --show-yaml     include the raw workflow YAML in the output
 ```
 
 ### Options inherited from parent commands
@@ -29,14 +31,15 @@ testkube create testworkflow [flags]
 ```
   -a, --api-uri string          api uri, default value read from config if set (default "http://localhost:8088")
   -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
-      --crd-only                generate only crd
+      --go-template string      go template to render when --output=go (default "{{.}}")
       --header stringToString   headers for direct client key value pair: --header name=value (default [])
       --insecure                insecure connection for direct client
       --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
+  -o, --output string           output type: pretty|json|yaml|go (default "pretty")
       --verbose                 show additional debug messages
 ```
 
 ### SEE ALSO
 
-* [testkube create](testkube-create.mdx)	 - Create resource
+* [testkube marketplace](testkube-marketplace.mdx)	 - Browse and install TestWorkflows from the Testkube Marketplace
 
