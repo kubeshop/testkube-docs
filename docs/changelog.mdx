@@ -10,6 +10,126 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 
 ## Monthly Release v2.9.0 (2026-04-23)
 
+Control Plane and Agent continue with unified versioning at **v2.9.0**.
+
+### What's new!
+
+#### View OSS Execution Results in the Cloud
+
+OSS users can now view execution details from their local client directly in the Testkube Cloud UI. Open the execution data (step tree, logs, and artifacts) in a lightweight, read-only page. No login or Cloud account required.
+
+To try it, run:
+
+```
+testkube view <execution-id-or-name>
+```
+
+and it will open the generated link in your browser.
+
+### AI Updates
+
+#### Interactive Clarification in AI Chats
+
+AI agents can now ask structured follow-up questions when your request needs more context. Instead of making assumptions, the agent presents an interactive form to gather the details it needs — whether you're creating a workflow, debugging a failure, or exploring execution data — then acts on your answers.
+
+#### Reconnect to In-Progress AI Sessions
+
+Navigate away from an active AI chat and return without losing context. Sessions continue in the background, and all prior events are shown when you reconnect. Multiple users can observe the same session simultaneously.
+
+#### Improvements
+
+- Users can manually rename chat titles from the sidebar.
+- Chat overlay persists across page refreshes.
+- AI agents can now analyze logs from parallel workflow workers — use grep, line ranges, and step filtering on individual worker output, not just the main execution log.
+- AI agents can now filter executions server-side by tags, time ranges, and label selectors, enabling precise queries like "all executions longer than 30s without a suite label" without downloading and scanning every result.
+- MCP registry entries now indicate the expected authentication method when browsing available servers.
+
+#### Fixes
+
+- Fixed artifact file retrieval when reading files in subdirectories through the MCP server.
+- Fixed date and time filtering for execution queries using natural-language time ranges.
+- Fixed JSON path queries that could miss matching workflows.
+- Deleting an AI agent now removes associated AI triggers automatically.
+
+### Triggers Updates
+
+#### Custom Resource Triggers
+
+TestTriggers can now fire on arbitrary Kubernetes Custom Resources, not just the built-in set (Pods, Deployments, etc.).
+Any CRD installed in the cluster — Argo Rollouts, Flux, Crossplane, your own operator's types — can be named as the trigger's resource by its Group, Version, and Kind.
+
+#### Field-Level Trigger Matching
+
+TestTriggers now support `spec.match` to fire only when specific fields on the watched resource satisfy a condition. Instead of reacting to every create/update event, a trigger can watch for a precise state transition — e.g. `status.phase == Healthy` or `status.currentStepIndex == 3` — and run the associated Workflow only then.
+
+#### Example: Argo Rollouts
+
+Combining the two, you can tie test execution directly into a progressive delivery pipeline. A single `Rollout` resource moves through phases as canary steps advance; with field-level matching you can kick off the right tests at the right step without polling or external glue:
+
+- **Smoke tests after each canary step** — match on `status.phase == Paused` to run quick health checks while the Rollout is waiting at a weight increment.
+- **Full regression on completion** — match on `status.phase == Healthy` and `status.currentPodHash` changing, so tests run exactly once per successful rollout and not on unrelated status updates.
+- **Rollback validation** — match on `status.phase == Degraded` to trigger a diagnostic workflow the moment Argo aborts a rollout.
+
+### OSS Updates
+
+#### `testkube pro connect`
+
+Switches a Testkube OSS installation to Pro mode. Before switching, the CLI automatically exports all TestWorkflow execution data (metadata, logs, and sequence numbers) from the local agent and uploads it to the Testkube Control Plane, ensuring seamless data migration. It then installs a cloud runner agent, scales down the now-unnecessary OSS services (API server, MinIO, NATS, and the database), and updates the CLI context to Pro mode. Users can skip the export with `--skip-export` or limit it to recent data with `--since`.
+
+Features:
+
+- **Automatic data migration**: Execution data is exported as a `.tar.gz` archive and imported to the Control Plane in a single flow — no manual steps required.
+- **Graceful error handling**: If the export or import fails (e.g. archive too large), users are warned and can continue connecting; the archive is preserved for manual retry.
+- **Database-aware teardown**: The CLI auto-detects whether MongoDB or PostgreSQL is deployed and only scales down the active database.
+- **CRD conflict prevention**: The runner chart is installed with `gitops.installCRD: false` to avoid duplicate CRD ownership with the existing OSS chart.
+
+#### `testkube pro disconnect`
+
+Reverts a Testkube Pro installation back to OSS standalone mode. The CLI uninstalls the cloud runner agent chart, deletes the agent record from the Control Plane, scales the original OSS services (API server, MinIO, NATS, and the database) back up, and resets the CLI context to kubeconfig mode. All historical data remains intact in the original cluster database.
+
+Features:
+
+- **Full automated rollback**: The runner Helm release and Control Plane agent record are cleaned up automatically.
+- **Database-aware restore**: Scales up only the database type (MongoDB or PostgreSQL) that was originally deployed; falls back to attempting both for clusters connected before this feature was added.
+- **Configurable replicas**: Users can control how many replicas to restore for MinIO (`--minio-replicas`), MongoDB (`--mongo-replicas`), and PostgreSQL (`--postgres-replicas`).
+
+### Control Plane
+
+#### Images
+
+Updated image registry references in Helm values: container images are now sourced from DockerHub instead of Google Artifact Registry, including dependencies such as MongoDB, MinIO, PostgreSQL, and kubectl. Helm charts will continue to be published and stored in Google Artifact Registry.
+
+#### PostgreSQL
+
+- Added support for supplying the PostgreSQL DSN from Kubernetes secrets for all Testkube services.
+- Added support for running PostgreSQL with CloudNativePG, alongside the existing bundled PostgreSQL deployment to preserve backward compatibility. This includes support for installing the CloudNativePG operator and provisioning an operator-managed PostgreSQL cluster. Read more: [PostgreSQL](/articles/install/4-advanced-install#postgresql)
+
+#### Solve vulnerabilities
+
+The following CVEs were solved by upgrading libraries and packages in the Testkube images: `CVE-2026-34986` and `CVE-2025-27144`.
+
+#### Upgrade 3rd party images and helm charts
+
+- MongoDB to `8.2.7`.
+- PostgreSQL to `18.3`.
+- KubeCTL to `1.35.4`.
+
+### Agent
+
+#### Allow Multiple GitOps Agents in the same namespace
+
+Fixed the naming of the GitOps Agent Kubernetes resource to allow multiple instances of it in the same namespace to sync Testkube Resources to multiple Testkube environments.
+
+#### PostgreSQL
+
+- Added an option to source the PostgreSQL DSN from a Kubernetes secret.
+- Added support for running PostgreSQL with CloudNativePG while keeping the existing bundled PostgreSQL deployment for backward compatibility. This includes support for installing the CloudNativePG operator and provisioning an operator-managed PostgreSQL cluster. Read more: [PostgreSQL](/articles/install/standalone-agent#using-postgresql-as-a-database)
+
+#### Upgrade 3rd party images and helm charts
+
+- MongoDB to `8.2.7`.
+- PostgreSQL to `18.3`.
+
 ## Patch Release v2.8.3 (2026-04-07)
 
 Control Plane is available in Helm chart `v2.331.3` and the Agent is available in Helm chart `v2.8.3`.
