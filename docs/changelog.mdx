@@ -14,11 +14,12 @@ Control Plane and Agent continue with unified versioning at **v2.9.0**.
 
 ### What's new!
 
-#### View OSS Execution Results in the Cloud
+#### View Open Source Execution Results 
 
-OSS users can now view execution details from their local client directly in the Testkube Cloud UI. Open the execution data (step tree, logs, and artifacts) in a lightweight, read-only page. No login or Cloud account required.
+Open Source users can now view execution details (step tree, logs, and artifacts) from their TestWorkflow executions 
+directly in their browser, in a lightweight, read-only page hosted by Testkube. No login or Cloud account required.
 
-To try it, run:
+To try it, update to the latest CLI and run:
 
 ```
 testkube view <execution-id-or-name>
@@ -70,7 +71,7 @@ Combining the two, you can tie test execution directly into a progressive delive
 - **Full regression on completion** — match on `status.phase == Healthy` and `status.currentPodHash` changing, so tests run exactly once per successful rollout and not on unrelated status updates.
 - **Rollback validation** — match on `status.phase == Degraded` to trigger a diagnostic workflow the moment Argo aborts a rollout.
 
-### OSS Updates
+### Open Source Updates
 
 #### `testkube pro connect`
 
@@ -93,11 +94,16 @@ Features:
 - **Database-aware restore**: Scales up only the database type (MongoDB or PostgreSQL) that was originally deployed; falls back to attempting both for clusters connected before this feature was added.
 - **Configurable replicas**: Users can control how many replicas to restore for MinIO (`--minio-replicas`), MongoDB (`--mongo-replicas`), and PostgreSQL (`--postgres-replicas`).
 
+#### `testkube marketplaces <command>`
+
+Added CLI commands to browse and install TestWorkflows from the Testkube Marketplace - [Read more](/articles/examples/marketplace#using-the-marketplace-from-the-cli)
+
 ### Control Plane
 
 #### Improvements
 
 - Following live TestWorkflow logs is now more reliable for customers using the CLI or integrations. Reconnects resume from the right place instead of hanging, replaying the wrong data, or getting stuck when the Kubernetes log stream goes silent unexpectedly.
+- The JUnit Report tab now automatically opens the first failed test and also allows for filtering on skipped tests - [Read more](/articles/test-workflows-reports#2-reports-tab).
 
 #### Images
 
@@ -107,6 +113,7 @@ Updated image registry references in Helm values: container images are now sourc
 
 - Added support for supplying the PostgreSQL DSN from Kubernetes secrets for all Testkube services.
 - Added support for running PostgreSQL with CloudNativePG, alongside the existing bundled PostgreSQL deployment to preserve backward compatibility. This includes support for installing the CloudNativePG operator and provisioning an operator-managed PostgreSQL cluster. Read more: PostgreSQL
+- Added migration command to migrate MongoDB to PostgreSQL - [Read more](/articles/convert)
 
 #### Solve vulnerabilities
 
