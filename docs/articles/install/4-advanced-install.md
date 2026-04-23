@@ -84,7 +84,7 @@ global:
 
 ### Storage and recovery considerations
 
-`masterPassword` is not stored in MongoDB as a plain field that can be inspected. It is a runtime secret used to
+`masterPassword` is not stored in a database as a plain field that can be inspected. It is a runtime secret used to
 derive crypto material, and without it existing encrypted records cannot be decrypted.
 
 For on-prem, this is a critical operational dependency:
@@ -417,9 +417,74 @@ As of Testkube v2.7, Testkube Resources are stored in the Control Plane - [Read 
 
 ## Bring Your Own Infra
 
-Testkube supports integrating with existing infrastructure components such as MongoDB, PostgreSQL, NATS, Dex, etc. For production environments, it's recommended to use your own infra or to harden the sub-charts.
+Testkube supports integrating with existing infrastructure components such as PostgreSQL, NATS, Dex, etc. For production environments, it's recommended to use your own infra or to harden the sub-charts.
 
-### MongoDB
+## PostgreSQL
+
+Starting with release `2.9`, PostgreSQL will be used as the primary database instead of MongoDB. Since both options are currently supported, you must first disable MongoDB and then enable PostgreSQL in your `values.yaml` file. We strongly recommend using `CloudNativePG` instead of plain PostgreSQL, as it offloads much of the database management, and the installation of PostgreSQL by Bitnami will be deprecated by the end of 2026.
+The operator-based path has two parts:
+
+1. The `cloudnative-pg` operator, which manages PostgreSQL lifecycle in Kubernetes.
+2. A `Cluster` custom resource, created by the `postgresqlCluster` chart values.
+
+To enable this, update your `values.yaml` as follows:
+
+```yaml
+global:
+  mongo:
+    enabled: false #disable MongoDB for API and Worker services
+  postgres:
+    enabled: true #use Postgres as a database for API, AI and Worker service
+    secretRef: #credentials k8s secret that connects the services to Postgres database
+      name: 'testkube-enterprise-postgresql-app'
+      endpointKey: 'host'
+      usernameKey: 'username'
+      passwordKey: 'password'
+      
+cloudnative-pg:
+  enabled: true #install the CloudNativePG operator
+  
+postgresqlCluster:
+  enabled: true #creates a CloudNativePG Cluster resource
+  
+mongodb:
+  enabled: false #disables MongoDB chart installation
+```
+If you deploy the CloudNativePG operator separately, or you already have it running in your k8s cluster, set `postgresqlCluster.enabled=false` in the `values.yaml`.
+
+:::warning
+
+Do not enable both `postgresql.enabled` (standard chart installation) and `postgresqlCluster.enabled` at the same time as you will have 2 databases in the cluster.
+
+:::
+
+### Migrating Testkube Enterprise PostgreSQL to the CloudNativePG Operator
+Moving from the bundled Bitnami PostgreSQL chart to CloudNativePG is a breaking infrastructure change for existing installations. 
+
+The resource model changes from a Helm-managed PostgreSQL `StatefulSet` to an operator-managed PostgreSQL `Cluster`, so this is not a direct in-place database upgrade.
+
+### Recommended Migration Strategy
+
+1. Keep the existing bundled PostgreSQL deployment running.
+2. Install the CloudNativePG operator and create a new PostgreSQL cluster.
+3. Copy data from the existing database to the new operator-managed database with `pg_dump`/`pg_restore`.
+4. Switch Testkube services to the operator-managed database.
+5. Observe the system and keep the old database available in case rollback is needed.
+6. Remove the old database only after the migration is confirmed stable.
+
+**Treat this migration as a database migration, not just a Helm upgrade.**
+
+### Using an external PostgreSQL instance 
+
+You can easily connect PostgreSQL to an external database by creating a Kubernetes secret with the database connection details and wiring it into `global.postgres.secretRef`. Optionally, you can also use `global.postgres.dsn` instead of separate secret-based fields.
+
+## MongoDB
+
+:::warning Important
+
+MongoDB has been deprecated as the primary database and will be removed from Testkube by the end of 2026. Please plan your migration to PostgreSQL at your earliest convenience.
+
+:::
 
 Testkube uses [MongoDB](https://www.mongodb.com/) as a database for storing all the data.
 By default, it will install a MongoDB instance using the Bitnami MongoDB Helm chart.
@@ -480,32 +545,6 @@ If your installation is still on MongoDB `7.x`, do not upgrade directly to a cha
 :::
 
 The FCV jobs are configurable and can also be used for future supported MongoDB upgrades by changing the compatibility values in the chart.
-
-### Using PostgreSQL as a database
-You can run the Testkube with PostgreSQL instead of MongoDB. This is currently an experimental feature, and deprecated functionalities are not supported. To enable PostgreSQL, update the values.yaml file in your Helm chart: enable the PostgreSQL settings and disable the MongoDB options.
-
-```yaml
-mongodb:
-  enabled: false
-postgresql:
-  enabled: true
-
-testkube-api:
-  api:
-    mongodb:
-      enabled: false
-    postgresql:
-      enabled: true
-      dsn: <postgresql dsn (postgres://...)>
-
-testkube-worker-service:
-  api:
-    mongo:
-      enabled: false
-    postgres:
-      enabled: true
-      dsn: <postgresql dsn (postgres://...)>
-```
 
 ### NATS
 

@@ -161,6 +161,11 @@ const sidebars = {
                   label: "Distributed Tracing",
                   id: "articles/tracing",
                 },
+                {
+                  type: "doc",
+                  label: "Mongo to Postgres Migration",
+                  id: "articles/convert",
+                },
               ],
             },
           ],
@@ -184,6 +189,11 @@ const sidebars = {
               label: "Local Kubernetes Install",
               id: "articles/install/quickstart-no-k8s",
             },
+              {
+              type: "doc",
+              label: "Switching to Cloud",
+              id: "articles/install/oss-to-cloud",
+            },          
           ],
         },
         {
