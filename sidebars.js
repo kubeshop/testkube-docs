@@ -184,6 +184,11 @@ const sidebars = {
               label: "Local Kubernetes Install",
               id: "articles/install/quickstart-no-k8s",
             },
+              {
+              type: "doc",
+              label: "Switching to Cloud",
+              id: "articles/install/oss-to-cloud",
+            },          
           ],
         },
         {
