@@ -163,7 +163,7 @@ const sidebars = {
                 },
                 {
                   type: "doc",
-                  label: "Mongo to Postges migration tool",
+                  label: "Mongo to Postgres migration tool",
                   id: "articles/convert",
                 },
               ],

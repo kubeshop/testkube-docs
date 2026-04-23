@@ -18,25 +18,6 @@ a single run.
 ## Quick start
 
 ```bash
-# Using environment variables
-export API_MONGO_DSN="mongodb://user:pass@mongo-host:27017"
-export API_MONGO_DB="testkubecloud"
-export API_POSTGRES_URL="postgres://user:pass@pg-host:5432/testkube?sslmode=disable"
-export CREDENTIALS_MASTER_PASSWORD="your-32-char-master-password"
-
-go run cmd/convert/main.go
-```
-
-```bash
-# Using CLI flags
-go run cmd/convert/main.go \
-  -mongo_dsn "mongodb://user:pass@mongo-host:27017" \
-  -mongo_db  "testkubecloud" \
-  -postgres_url "postgres://user:pass@pg-host:5432/testkube?sslmode=disable" \
-  -credentials_master_password "your-32-char-master-password"
-```
-
-```bash
 # Using Docker
 docker run --rm \
   -e API_MONGO_DSN="mongodb://user:pass@mongo-host:27017" \
@@ -149,11 +130,13 @@ These run sequentially after the record-level phase.
 Validate that all records can be read and transformed without writing anything:
 
 ```bash
-go run cmd/convert/main.go \
-  -mongo_dsn "mongodb://localhost:27017" \
-  -postgres_url "postgres://localhost:5432/testkube?sslmode=disable" \
-  -credentials_master_password "supersecretmasterpassword1234567" \
-  -convert_dry_run=true
+docker run --rm \
+  -e API_MONGO_DSN="mongodb://user:pass@mongo-host:27017" \
+  -e API_MONGO_DB="testkubecloud" \
+  -e API_POSTGRES_URL="postgres://user:pass@pg-host:5432/testkube?sslmode=disable" \
+  -e CREDENTIALS_MASTER_PASSWORD="your-32-char-master-password" \
+  -e CONVERT_DRY_RUN="true" \
+  kubeshop/testkube-postgres-migration:<image-tag>
 ```
 
 ### Resume after an interrupted migration
@@ -162,11 +145,13 @@ If a previous run was interrupted, re-run with `-convert_skip_existing` to
 continue from where it left off:
 
 ```bash
-go run cmd/convert/main.go \
-  -mongo_dsn "mongodb://localhost:27017" \
-  -postgres_url "postgres://localhost:5432/testkube?sslmode=disable" \
-  -credentials_master_password "supersecretmasterpassword1234567" \
-  -convert_skip_existing=true
+docker run --rm \
+  -e API_MONGO_DSN="mongodb://user:pass@mongo-host:27017" \
+  -e API_MONGO_DB="testkubecloud" \
+  -e API_POSTGRES_URL="postgres://user:pass@pg-host:5432/testkube?sslmode=disable" \
+  -e CREDENTIALS_MASTER_PASSWORD="your-32-char-master-password" \
+  -e CONVERT_SKIP_EXISTING="true" \
+  kubeshop/testkube-postgres-migration:<image-tag>
 ```
 
 ### Skip integrity errors
@@ -175,12 +160,14 @@ Some records may reference organisations or environments that no longer exist.
 Use `-convert_skip_integrity_errors` to skip those and continue:
 
 ```bash
-go run cmd/convert/main.go \
-  -mongo_dsn "mongodb://localhost:27017" \
-  -postgres_url "postgres://localhost:5432/testkube?sslmode=disable" \
-  -credentials_master_password "supersecretmasterpassword1234567" \
-  -convert_skip_existing=true \
-  -convert_skip_integrity_errors=true
+docker run --rm \
+  -e API_MONGO_DSN="mongodb://user:pass@mongo-host:27017" \
+  -e API_MONGO_DB="testkubecloud" \
+  -e API_POSTGRES_URL="postgres://user:pass@pg-host:5432/testkube?sslmode=disable" \
+  -e CREDENTIALS_MASTER_PASSWORD="your-32-char-master-password" \
+  -e CONVERT_SKIP_EXISTING="true" \
+  -e CONVERT_SKIP_INTEGRITY_ERRORS="true" \
+  kubeshop/testkube-postgres-migration:<image-tag>
 ```
 
 ### Migrate only recent usage data
@@ -188,11 +175,13 @@ go run cmd/convert/main.go \
 Only migrate usage records from the last quarter:
 
 ```bash
-go run cmd/convert/main.go \
-  -mongo_dsn "mongodb://localhost:27017" \
-  -postgres_url "postgres://localhost:5432/testkube?sslmode=disable" \
-  -credentials_master_password "supersecretmasterpassword1234567" \
-  -convert_since "2026-01-01"
+docker run --rm \
+  -e API_MONGO_DSN="mongodb://user:pass@mongo-host:27017" \
+  -e API_MONGO_DB="testkubecloud" \
+  -e API_POSTGRES_URL="postgres://user:pass@pg-host:5432/testkube?sslmode=disable" \
+  -e CREDENTIALS_MASTER_PASSWORD="your-32-char-master-password" \
+  -e CONVERT_SINCE="2026-01-01" \
+  kubeshop/testkube-postgres-migration:<image-tag>
 ```
 
 ### Tuning for large datasets
@@ -200,26 +189,29 @@ go run cmd/convert/main.go \
 For databases with millions of records, increase batch sizes and parallelism:
 
 ```bash
-go run cmd/convert/main.go \
-  -mongo_dsn "mongodb://mongo:27017" \
-  -postgres_url "postgres://pg:5432/testkube?sslmode=disable" \
-  -credentials_master_password "supersecretmasterpassword1234567" \
-  -convert_batch_size 5000 \
-  -convert_bulk_read_size 50000 \
-  -convert_bulk_write_size 200000 \
-  -convert_parallel_workers 20 \
-  -convert_work_dir /tmp/convert-errors
+docker run --rm \
+  -e API_MONGO_DSN="mongodb://user:pass@mongo-host:27017" \
+  -e API_MONGO_DB="testkubecloud" \
+  -e API_POSTGRES_URL="postgres://user:pass@pg-host:5432/testkube?sslmode=disable" \
+  -e CREDENTIALS_MASTER_PASSWORD="your-32-char-master-password" \
+  -e CONVERT_BATCH_SIZE="5000" \
+  -e CONVERT_BULK_READ_SIZE="50000" \
+  -e CONVERT_BULK_WRITE_SIZE="200000" \
+  -e CONVERT_WORKERS="20" \
+  -e CONVERT_WORK_DIR="/tmp/convert-errors" \
+  kubeshop/testkube-postgres-migration:<image-tag>
 ```
 
 ### Save error reports to a specific directory
 
 ```bash
-mkdir -p /var/log/convert
-go run cmd/convert/main.go \
-  -mongo_dsn "mongodb://localhost:27017" \
-  -postgres_url "postgres://localhost:5432/testkube?sslmode=disable" \
-  -credentials_master_password "supersecretmasterpassword1234567" \
-  -convert_work_dir /var/log/convert
+docker run --rm \
+  -e API_MONGO_DSN="mongodb://user:pass@mongo-host:27017" \
+  -e API_MONGO_DB="testkubecloud" \
+  -e API_POSTGRES_URL="postgres://user:pass@pg-host:5432/testkube?sslmode=disable" \
+  -e CREDENTIALS_MASTER_PASSWORD="your-32-char-master-password" \
+  -e CONVERT_WORK_DIR="/var/log/convert" \
+  kubeshop/testkube-postgres-migration:<image-tag>
 ```
 
 Error reports are written as `<migration_name>_migration_errors.log` in the
