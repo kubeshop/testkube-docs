@@ -75,7 +75,14 @@ Combining the two, you can tie test execution directly into a progressive delive
 
 #### `testkube pro connect`
 
-Switches a Testkube OSS installation to Pro mode. Before switching, the CLI automatically exports all TestWorkflow execution data (metadata, logs, and sequence numbers) from the local agent and uploads it to the Testkube Control Plane, ensuring seamless data migration. It then installs a cloud runner agent, scales down the now-unnecessary OSS services (API server, MinIO, NATS, and the database), and updates the CLI context to Pro mode. Users can skip the export with `--skip-export` or limit it to recent data with `--since`.
+Connects a Testkube Open Source installation to a Testkube Control Plane. Use this command when you want to:
+- Evaluate Testkube Pro functionality and capabilities with your existing TestWorkflows and results.
+- Migrate your existing Testkube resources to a commercial Testkube instance (cloud or on-prem).
+
+Before switching, the CLI automatically exports all TestWorkflow execution data (metadata, logs, and sequence numbers) from the 
+local agent and uploads it to the Testkube Control Plane, ensuring seamless data migration. It then installs a [Testkube Runner Agent](/articles/agents-overview), 
+scales down the now-unnecessary OSS services (API server, MinIO, NATS, and the database), and updates the CLI context to Pro mode. 
+Users can skip the export with `--skip-export` or limit it to recent data with `--since`.
 
 Features:
 
@@ -86,13 +93,20 @@ Features:
 
 #### `testkube pro disconnect`
 
-Reverts a Testkube Pro installation back to OSS standalone mode. The CLI uninstalls the cloud runner agent chart, deletes the agent record from the Control Plane, scales the original OSS services (API server, MinIO, NATS, and the database) back up, and resets the CLI context to kubeconfig mode. All historical data remains intact in the original cluster database.
+Reverts a Testkube Pro installation back to OSS standalone mode. The command uninstalls the Testkube Runner Agent chart, deletes the agent record from the Control Plane, 
+scales the original OSS services (API server, MinIO, NATS, and the database) back up, and resets the CLI context to kubeconfig mode. All historical data remains 
+intact in the original cluster database.
 
 Features:
 
 - **Full automated rollback**: The runner Helm release and Control Plane agent record are cleaned up automatically.
 - **Database-aware restore**: Scales up only the database type (MongoDB or PostgreSQL) that was originally deployed; falls back to attempting both for clusters connected before this feature was added.
 - **Configurable replicas**: Users can control how many replicas to restore for MinIO (`--minio-replicas`), MongoDB (`--mongo-replicas`), and PostgreSQL (`--postgres-replicas`).
+
+:::note
+`disconnect` reverts the Testkube Agent back to the standalone state it was in before it was connected to a Testkube Control Plane. 
+Any resources or results that were created in Testkube while the agent was connected to the Control Plane will be lost.
+:::
 
 #### `testkube marketplaces <command>`
 
