@@ -58,7 +58,7 @@ flowchart TB
             API["Control Plane API"]
             Worker["Worker Service"]
             Dex["Dex"]
-            DB[("MongoDB")]
+            DB[("PostgreSQL")]
             S3[("MinIO")]
             NATS["NATS"]
         end
@@ -132,7 +132,7 @@ flowchart TB
     subgraph Your Kubernetes Cluster
         subgraph Testkube Namespace
             AgentAPI["Agent API"]
-            DB[("MongoDB")]
+            DB[("PostgreSQL")]
             S3[("MinIO")]
             NATS["NATS"]
             CRDs["Testkube CRDs"]
