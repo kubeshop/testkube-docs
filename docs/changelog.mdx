@@ -95,6 +95,10 @@ Features:
 
 ### Control Plane
 
+#### Improvements
+
+- Following live TestWorkflow logs is now more reliable for customers using the CLI or integrations. Reconnects resume from the right place instead of hanging, replaying the wrong data, or getting stuck when the Kubernetes log stream goes silent unexpectedly.
+
 #### Images
 
 Updated image registry references in Helm values: container images are now sourced from DockerHub instead of Google Artifact Registry, including dependencies such as MongoDB, MinIO, PostgreSQL, and kubectl. Helm charts will continue to be published and stored in Google Artifact Registry.
@@ -129,6 +133,10 @@ Fixed the naming of the GitOps Agent Kubernetes resource to allow multiple insta
 
 - MongoDB to `8.2.7`.
 - PostgreSQL to `18.3`.
+
+#### Fixes
+
+- TestWorkflows are now easier to run on OpenShift and similar restricted clusters. You can opt out of automatic pod `fsGroup` injection when your platform expects security policies to assign that value.
 
 ## Patch Release v2.8.3 (2026-04-07)
 
