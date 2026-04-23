@@ -1,6 +1,6 @@
-# Convert Utility
+# Mongo to Postgres Migration
 
-The **convert** utility migrates data from MongoDB to PostgreSQL. It reads every
+Testkube includes a **convert** utility that migrates data from MongoDB to PostgreSQL. It reads every
 collection used by the Testkube control plane, transforms each record into the
 PostgreSQL schema, and writes it to the target database. Both "record-level"
 collections (organisations, environments, agents, …) and high-volume "bulk"
