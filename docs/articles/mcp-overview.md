@@ -162,5 +162,5 @@ Analyze the logs of execution "api-tests-123" and suggest fixes
 ## Need Help?
 
 :::info
-Don't hesitate to reach out to us on [Slack](https://bit.ly/testkube-slack) if you run into any issues!
+Don't hesitate to reach out to us on [Slack](https://join.slack.com/t/testkubeworkspace/shared_invite/zt-3kfpny0gx-apPMq9_Swu4KG3uwz6Bk2g) if you run into any issues!
 :::
