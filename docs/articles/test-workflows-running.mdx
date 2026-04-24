@@ -1,5 +1,8 @@
 # Running Test Workflows
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 ## Overview 
 
 Workflows can be triggered to execute in any of the ways described in [Triggering Test Workflows](/articles/triggering-overview). When triggered, 
@@ -26,9 +29,11 @@ Runner Agent as described below:
 
 ### 1. Install your first Runner Agent
 
+<Tabs groupId="install-runner-agent">
+  <TabItem value="cli" label="From the CLI" default>
 
 After installing the [Testkube CLI](/articles/cli) and using `testkube login` to log in to your
-Testkube Environment, use `testkube install runner <name> --create` command to install your first Runner Agent:
+Testkube Environment, use the `testkube install agent <name> --create --runner` command to install your first Runner Agent:
 
 ```sh
 $ testkube install agent staging-runner --create --runner
@@ -39,6 +44,25 @@ This will create and install a Runner Agent named `staging-runner` that can now 
 :::tip
 Alternatively, you can [install runner using Helm Charts](/articles/multi-agent-runner-helm-chart).
 :::
+
+  </TabItem>
+  <TabItem value="dashboard" label="From the Dashboard">
+
+Open the Testkube Dashboard and navigate to the **Agents** page for your Environment (see [Adding Agents to an Environment](/articles/agents-overview#adding-agents-to-an-environment) for more details). Click the **Connect New Agent**
+button to open the installation dialog:
+
+![Connect New Agent Dialog](images/add-agent-panel.png)
+
+In the dialog:
+
+1. Choose the **Runner** capability for the new Agent.
+2. Select your preferred installation tool - **Testkube CLI**, **Helm**, or **GitOps**.
+3. Copy and run the generated commands (or YAML) against the cluster/namespace where you want the Runner Agent to execute Workflows.
+
+Once the Agent connects successfully, it will appear in the list of Agents and is ready to run your Workflows.
+
+  </TabItem>
+</Tabs>
 
 ### 2. Run your Workflows
 
@@ -294,7 +318,7 @@ Silent Executions are ideal when you want to run tests without leaving traces in
 - Internal verification or smoke checks
 - CI experimentation without affecting dashboards
 
-Silent Executions behave exactly like normal executions — they run on Agents, respect targeting rules, and produce logs — but execute “quietly.”
+Silent Executions behave exactly like normal executions — they run on Agents, respect targeting rules, and produce logs — but execute "quietly."
 
 ### Running Silent Executions in the Dashboard
 
