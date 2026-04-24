@@ -83,6 +83,123 @@ pod:
     runAsUser: 100690000
 ```
 
+### fsGroup and runAsGroup defaulting
+
+Testkube applies a small amount of security-context defaulting for TestWorkflow execution pods.
+This matters most for [parallel workers](./test-workflows-parallel.mdx), because they run as separate Jobs and Pods.
+
+The effective logic is:
+
+1. If you explicitly set `pod.securityContext.fsGroup`, Testkube uses that value as-is.
+2. If `fsGroup` is not set, Testkube may inspect the image metadata for the main non-Testkube container.
+   If the image has a numeric group in its `USER` declaration, for example `USER 1001:1001`,
+   Testkube can reuse that group.
+3. If Testkube still cannot resolve a group, it defaults pod `fsGroup` to `1001`.
+4. When an effective pod `fsGroup` exists, missing container `securityContext.runAsGroup` values may be backfilled from it.
+
+This means that an image with a root group, or an image that resolves to group `0`, can produce:
+
+```yaml
+pod:
+  securityContext:
+    fsGroup: 0
+```
+
+For clusters such as OpenShift, that may be undesirable because the platform is expected to inject the runtime group automatically.
+
+### Disabling fsGroup defaulting
+
+Testkube supports disabling automatic pod `fsGroup` injection with `disableFsGroupDefaulting`.
+
+Use it when you want Testkube to leave pod `securityContext.fsGroup` unset unless you explicitly provide one.
+
+```yaml
+spec:
+  pod:
+    disableFsGroupDefaulting: true
+```
+
+With this setting:
+
+* explicit `pod.securityContext.fsGroup` still wins
+* Testkube stops inferring pod `fsGroup` from image metadata
+* Testkube stops injecting the fallback default `fsGroup: 1001`
+
+This is especially useful on OpenShift when the Security Context Constraints should assign the group automatically.
+
+### What about runAsUser and runAsNonRoot?
+
+`runAsUser` and `runAsNonRoot` follow different rules than `fsGroup`.
+
+Testkube does **not** currently infer or default:
+
+* pod `securityContext.runAsUser`
+* pod `securityContext.runAsNonRoot`
+* container `securityContext.runAsUser`
+* container `securityContext.runAsNonRoot`
+
+For these fields, Testkube only passes through what you define explicitly in the workflow.
+
+```yaml
+spec:
+  pod:
+    securityContext:
+      runAsUser: 1000650001
+      runAsNonRoot: true
+```
+
+If you do not set those fields:
+
+* Testkube does not synthesize values for them
+* the container image's own default `USER` may still apply at runtime
+* your cluster policy, such as OpenShift SCCs or other admission controls, may also inject or enforce them
+
+Testkube does inspect image metadata, but for this security-context path it only uses the numeric **group** portion of the image `USER` field when calculating `runAsGroup` / `fsGroup`.
+It does **not** take the image user ID and copy it into `runAsUser`.
+
+In other words:
+
+* image `USER 1001:1001` can influence `runAsGroup` / `fsGroup`
+* it does not cause Testkube to write `runAsUser: 1001`
+* static files or other workflow content are not used for security-context inference
+
+### Examples
+
+#### Set a fixed fsGroup explicitly
+
+```yaml
+spec:
+  pod:
+    securityContext:
+      fsGroup: 1000650001
+```
+
+#### Leave fsGroup unset for the whole workflow
+
+This affects the main execution pod and is also inherited by parallel worker pods unless a parallel step overrides it.
+
+```yaml
+spec:
+  pod:
+    disableFsGroupDefaulting: true
+```
+
+#### Disable fsGroup defaulting only for a parallel step
+
+```yaml
+spec:
+  steps:
+  - name: Run shards
+    parallel:
+      count: 4
+      pod:
+        disableFsGroupDefaulting: true
+      shell: |
+        echo "worker {{ index + 1 }}/{{ count }}"
+```
+
+If you define both `spec.pod` and `steps[].parallel.pod`, the parallel step pod settings override the inherited root pod settings for those workers.
+
 ### Service Account
 
 By default, Testkube creates and uses a service account that will allow you to use all Testkube features.
@@ -182,4 +299,3 @@ container:
   - name: some-name
     mountPath: /mnt/some/name
 ```
-
