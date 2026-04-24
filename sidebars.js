@@ -189,11 +189,11 @@ const sidebars = {
               label: "Local Kubernetes Install",
               id: "articles/install/quickstart-no-k8s",
             },
-              {
+            {
               type: "doc",
               label: "Switching to Cloud",
               id: "articles/install/oss-to-cloud",
-            },          
+            },
           ],
         },
         {
@@ -360,8 +360,8 @@ const sidebars = {
               type: "doc",
               label: "Interactive Walkthrough",
               id: "articles/testworkflows-showcase",
-            },    
-        
+            },
+
             {
               type: "doc",
               label: "Basic Examples",
@@ -1445,14 +1445,19 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "View Executions",
+          id: "articles/viewing-oss-executions",
+        },
+        {
+          type: "doc",
           label: "Licensing FAQ",
           id: "articles/testkube-licensing-FAQ",
         },
         {
           type: "doc",
           label: "Contributing",
-          id: "articles/contributing"
-        }
+          id: "articles/contributing",
+        },
       ],
     },
     {
