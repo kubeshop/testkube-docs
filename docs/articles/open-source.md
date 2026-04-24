@@ -8,7 +8,7 @@ You can interact with the Standalone Agent through the [Testkube CLI](install/cl
 - Check out [Getting Started](/articles/getting-started-with-open-source) on how to quickly set up your first Test Workflows.
 - Read more about [Test Workflows](/articles/test-workflows) to learn how to run any type of test with Testkube.
 - Head over to the [Examples & Guides](/articles/examples/overview) for sample Test Workflows with popular testing tools.
-- View an execution in the dashboard [Viewing OSS Execution Results in the Cloud](/articles/viewing-oss-executions).
+- View an execution in the dashboard [Viewing Open Source Execution Results in the Cloud](/articles/viewing-oss-executions).
 - Check out the [Getting Started with Testkube Open Source](https://testkube.io/blog/getting-started-with-testkube-open-source) blogpost to further see how you can use the Standalone Agent with GitHub Actions
 - Go through the [CLI Reference](/cli/testkube) to see available CLI commands.
 - Head over to the [Testkube Slack](https://bit.ly/testkube-slack) to ask questions and get answers.

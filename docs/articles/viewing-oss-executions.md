@@ -1,9 +1,9 @@
-# Viewing OSS Execution Results in the Cloud
+# Viewing Open Source Executions
 
-OSS users can now view execution details from their local client directly in the Testkube Cloud UI. Open the execution data (step tree, logs, and artifacts) in a lightweight, read-only page. No login or Cloud account required.
+Open Source user can view Workflow execution details (step tree, logs, and artifacts) in a lightweight dashboard hosted by Testkube, no login or Testkube account required.
 
 :::note
-This feature is available to OSS / Standalone Agent users connecting out to Testkube Cloud. It is not available in Enterprise or on-prem dedicated deployments.
+Using this feature with a commercial Testkube instance will open the standard Testkube Dashboard for the specified execution instead.
 :::
 
 ## Quickstart
@@ -15,6 +15,8 @@ testkube view <executionId|executionName>
 ```
 
 The command accepts either the execution UUID or its name (for example `my-workflow-12345`). It prints a tokenized URL on `view.testkube.io` and opens it in your default browser.
+
+![Terminal output showing the generated view.testkube.io link after running `testkube view`](images/public-execution-viewer.png)
 
 When the CLI is already connected to a Testkube Cloud / Control Plane context, `testkube view` opens the execution in the dashboard directly — no upload is performed.
 
@@ -43,9 +45,13 @@ Example — view a still-running execution after it completes, without the artif
 testkube view my-k6-test-12345 --wait --skip-artifacts --force
 ```
 
-## Size limits
+## Limits
 
-A single public execution is capped at **10 MB** total for logs and artifacts combined. If your execution exceeds the limit, use `--skip-artifacts` to upload logs and metadata only, or trim the artifact set before running the command.
+| Limit                 | Value   | Notes                                                                                          |
+| --------------------- | ------- | ---------------------------------------------------------------------------------------------- |
+| **Execution size**    | 10 MB   | Total for logs and artifacts combined. Use `--skip-artifacts` to share logs and metadata only. |
+| **Link lifetime**     | 4 hours | After this, the viewer returns `410 Gone`.                                                     |
+| **Active executions** | 50      | Creating a new public execution when you're at the cap evicts the oldest (FIFO).               |
 
 ## Privacy and security
 
