@@ -111,6 +111,58 @@ resourceSelector:
         values: list of values
 ```
 
+### Triggering on Custom Resources (CRDs)
+
+Use `resourceRef` to trigger on any Kubernetes resource — including custom
+resources like Argo Rollouts, Crossplane claims, Strimzi `KafkaTopic`, or
+your own CRDs. You select the resource by its API Group, Version, and Kind:
+
+```yaml
+resourceRef:
+  group: argoproj.io       # the API group; use "" for core resources like Pod or Service
+  version: v1alpha1        # the API version
+  kind: Rollout            # the resource kind
+```
+
+`resourceRef` and the older `resource` field both pick what the trigger
+watches — set one, not both. Use `resource` for common built-ins (`pod`,
+`deployment`, etc.) and `resourceRef` for everything else.
+
+In the dashboard, choose **Custom Resource** in the K8s resource dropdown and
+the Group / Version / Kind selectors will guide you through valid options.
+
+#### Granting Testkube access to your CRDs
+
+Testkube's listener watches a curated set of built-in Kubernetes resources
+out of the box. To trigger on a custom resource, you need to grant the
+listener `get`, `list`, and `watch` access to it.
+
+The easiest way is to add the resources to your Helm values when you install
+or upgrade the `testkube-api` chart:
+
+```yaml
+# values.yaml
+rbac:
+  extraWatchedResources:
+    - apiGroups: ["argoproj.io"]
+      resources: ["rollouts"]
+    - apiGroups: ["cert-manager.io"]
+      resources: ["certificates", "certificaterequests"]
+    - apiGroups: ["kafka.strimzi.io"]
+      resources: ["kafkatopics"]
+```
+
+Each entry follows the same shape as Kubernetes RBAC `rules`. `verbs` is
+optional and defaults to `["get", "list", "watch"]` — the listener never
+modifies the watched resource, only observes it. The chart applies these
+rules to every namespace it watches, so single-namespace, multi-namespace,
+and cluster-wide installations all work without extra configuration.
+
+If you manage RBAC outside Helm, create an equivalent `ClusterRole` (or
+namespace-scoped `Role`) granting `get,list,watch` on the resource and bind
+it to the listener's `ServiceAccount` — by default `testkube-api-server` in
+the `testkube` namespace.
+
 ### Test Selector
 
 The `testSelector` field could be used to select the target Workflow of the
@@ -158,6 +210,56 @@ spec:
         port: test trigger condition probe port to connect
         headers: test trigger condition probe headers to submit
 ```
+
+## Match Conditions
+
+Sometimes you only want a trigger to fire when a specific field changes — not
+on every event for the resource. **Match conditions** let you do that. Each
+entry inspects a single field on the watched object; the trigger fires only
+when *all* entries are satisfied.
+
+For example, "fire when `.status.phase` becomes `Healthy`" or
+"fire when `.spec.paused` is `true`":
+
+```yaml
+spec:
+  match:
+    - path: .status.phase
+      operator: changed_to
+      value: Healthy
+```
+
+Each entry has three parts:
+
+- **`path`** — a dot-path to the field, like `.status.phase` or `.spec.replicas`.
+- **`operator`** — how to compare the field (see the table below).
+- **`value`** — the value to compare against (required by some operators, not by others).
+
+### Operators
+
+| Operator       | Fires when…                                                                |
+|----------------|----------------------------------------------------------------------------|
+| `equals`       | the field currently equals `value`                                         |
+| `not_equals`   | the field currently does not equal `value`                                 |
+| `exists`       | the field is present on the object (no `value` needed)                     |
+| `not_exists`   | the field is absent from the object (no `value` needed)                    |
+| `changed`      | the field changed from any value to any other (requires `event: modified`) |
+| `changed_to`   | the field changed to `value` (requires `event: modified`)                  |
+| `changed_from` | the field changed away from `value` (requires `event: modified`)           |
+
+`changed`, `changed_to`, and `changed_from` are only meaningful on update
+events, so they require `event: modified` on the trigger.
+
+### Tips
+
+- **Paths use dot notation** and start with a leading dot — `.status.phase`,
+  `.spec.template.spec.containers`. Array indexing (`containers[0]`,
+  `containers[*]`) is not supported yet — match on scalar fields under arrays
+  for now.
+- **`equals` and `not_equals` only work on scalar fields** (strings, numbers,
+  booleans). Use `exists`, `not_exists`, or `changed` for arrays and objects.
+- **Numbers and booleans are compared as strings** — `value: "5"` matches
+  `.spec.replicas: 5`; `value: "true"` matches `.spec.paused: true`.
 
 ## Targeting specific Runner Agents
 
@@ -328,6 +430,54 @@ spec:
     namespace: frontend
   disabled: false
 ```
+### On an Argo Rollout becoming Healthy
+
+A common pattern with [Argo Rollouts](https://argoproj.github.io/argo-rollouts/)
+is to run smoke tests every time a Rollout finishes a successful update. The
+trigger below watches the `Rollout` custom resource and runs the
+`rollout-smoke-tests` workflow whenever a rollout transitions to the
+`Healthy` phase:
+
+```yaml
+apiVersion: tests.testkube.io/v1
+kind: TestTrigger
+metadata:
+  name: testtrigger-rollout-healthy
+  namespace: default
+spec:
+  resourceRef:
+    group: argoproj.io
+    version: v1alpha1
+    kind: Rollout
+  resourceSelector:
+    namespace: default
+  event: modified
+  match:
+    - path: .status.phase
+      operator: changed_to
+      value: Healthy
+  action: run
+  execution: testworkflow
+  testSelector:
+    name: rollout-smoke-tests
+    namespace: default
+  disabled: false
+```
+
+Before this trigger can fire, grant Testkube access to watch Rollouts. Add
+the resource to your Helm values:
+
+```yaml
+# values.yaml
+rbac:
+  extraWatchedResources:
+    - apiGroups: ["argoproj.io"]
+      resources: ["rollouts"]
+```
+
+See [Granting Testkube access to your CRDs](#granting-testkube-access-to-your-crds)
+for more on this field.
+
 ### On Testkube Cluster Event
 
 You can define **Test Trigger** for Testkube cluster events. In below example,
