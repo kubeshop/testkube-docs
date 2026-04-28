@@ -111,34 +111,37 @@ resourceSelector:
         values: list of values
 ```
 
-### Resource Reference (any Kubernetes resource, including CRDs)
+### Triggering on Custom Resources (CRDs)
 
-The `resourceRef` field targets any Kubernetes resource by its Group/Version/Kind.
-It works for built-in K8s types and for any installed CustomResourceDefinition
-(Argo Rollouts, Crossplane, KafkaTopic, etc.). It is mutually exclusive with the
-legacy `resource` field — set one or the other.
+Use `resourceRef` to trigger on any Kubernetes resource — including custom
+resources like Argo Rollouts, Crossplane claims, Strimzi `KafkaTopic`, or
+your own CRDs. You select the resource by its API Group, Version, and Kind:
 
 ```yaml
 resourceRef:
-  group: API group (use empty string for core resources like Pod, Service)
-  version: API version (e.g. "v1", "v1alpha1")
-  kind: Resource kind (e.g. "Rollout", "KafkaTopic")
+  group: argoproj.io       # the API group; use "" for core resources like Pod or Service
+  version: v1alpha1        # the API version
+  kind: Rollout            # the resource kind
 ```
 
-The agent's ServiceAccount must have `list,watch` RBAC on the GVK for triggers
-to receive events; the dashboard's Custom Resource picker only surfaces
-resources the agent can actually watch.
+`resourceRef` and the older `resource` field both pick what the trigger
+watches — set one, not both. Use `resource` for common built-ins (`pod`,
+`deployment`, etc.) and `resourceRef` for everything else.
 
-#### Granting access to extra CRDs (Helm)
+In the dashboard, choose **Custom Resource** in the K8s resource dropdown and
+the Group / Version / Kind selectors will guide you through valid options.
 
-The agent's watcher Role/ClusterRole ships with a curated list of built-in
-Kubernetes resources. To watch additional CRDs, add them to
-`rbac.extraWatchedResources` in the `testkube-api` chart values — entries are
-expanded into every watcher role variant the chart renders (cluster-wide,
-release-namespace, and per-`additionalNamespaces`):
+#### Granting Testkube access to your CRDs
+
+Testkube's listener watches a curated set of built-in Kubernetes resources
+out of the box. To trigger on a custom resource, you need to grant the
+listener `get`, `list`, and `watch` access to it.
+
+The easiest way is to add the resources to your Helm values when you install
+or upgrade the `testkube-api` chart:
 
 ```yaml
-# values.yaml passed to the testkube-api chart
+# values.yaml
 rbac:
   extraWatchedResources:
     - apiGroups: ["argoproj.io"]
@@ -147,11 +150,18 @@ rbac:
       resources: ["certificates", "certificaterequests"]
     - apiGroups: ["kafka.strimzi.io"]
       resources: ["kafkatopics"]
-      verbs: ["get", "list", "watch"]   # default if omitted
 ```
 
-Verbs default to `["get", "list", "watch"]` (read-only — triggers don't mutate
-the watched resource). Override per-entry only if you need something else.
+Each entry follows the same shape as Kubernetes RBAC `rules`. `verbs` is
+optional and defaults to `["get", "list", "watch"]` — the listener never
+modifies the watched resource, only observes it. The chart applies these
+rules to every namespace it watches, so single-namespace, multi-namespace,
+and cluster-wide installations all work without extra configuration.
+
+If you manage RBAC outside Helm, create an equivalent `ClusterRole` (or
+namespace-scoped `Role`) granting `get,list,watch` on the resource and bind
+it to the listener's `ServiceAccount` — by default `testkube-api-server` in
+the `testkube` namespace.
 
 ### Test Selector
 
@@ -203,44 +213,53 @@ spec:
 
 ## Match Conditions
 
-Match conditions narrow when a trigger fires by inspecting fields on the watched object.
-Each entry pairs a dot-path (e.g. `.status.phase`) with an operator and an optional value;
-all entries must hold for the trigger to fire (AND logic). They are most useful with
-`resourceRef` because the dashboard surfaces the resource's OpenAPI schema as path
-autocomplete and offers type-aware value validation (integer/number/boolean leaves and
-enum-constrained strings).
+Sometimes you only want a trigger to fire when a specific field changes — not
+on every event for the resource. **Match conditions** let you do that. Each
+entry inspects a single field on the watched object; the trigger fires only
+when *all* entries are satisfied.
+
+For example, "fire when `.status.phase` becomes `Healthy`" or
+"fire when `.spec.paused` is `true`":
 
 ```yaml
 spec:
   match:
-    - path: dot-path on the watched object (e.g. ".status.phase", ".spec.replicas")
-      operator: equals | not_equals | exists | not_exists | changed | changed_to | changed_from
-      value: comparison value (required for equals, not_equals, changed_to, changed_from)
+    - path: .status.phase
+      operator: changed_to
+      value: Healthy
 ```
+
+Each entry has three parts:
+
+- **`path`** — a dot-path to the field, like `.status.phase` or `.spec.replicas`.
+- **`operator`** — how to compare the field (see the table below).
+- **`value`** — the value to compare against (required by some operators, not by others).
 
 ### Operators
 
-| Operator       | Use case                                                              |
-|----------------|-----------------------------------------------------------------------|
-| `equals`       | Field's current value equals `value`                                  |
-| `not_equals`   | Field's current value differs from `value`                            |
-| `exists`       | Field is present (no `value` needed)                                  |
-| `not_exists`   | Field is absent (no `value` needed)                                   |
-| `changed`      | Field changed from any value to any other (requires `event: modified`)|
-| `changed_to`   | Field changed to `value` (requires `event: modified`)                 |
-| `changed_from` | Field changed from `value` to anything else (requires `event: modified`)|
+| Operator       | Fires when…                                                                |
+|----------------|----------------------------------------------------------------------------|
+| `equals`       | the field currently equals `value`                                         |
+| `not_equals`   | the field currently does not equal `value`                                 |
+| `exists`       | the field is present on the object (no `value` needed)                     |
+| `not_exists`   | the field is absent from the object (no `value` needed)                    |
+| `changed`      | the field changed from any value to any other (requires `event: modified`) |
+| `changed_to`   | the field changed to `value` (requires `event: modified`)                  |
+| `changed_from` | the field changed away from `value` (requires `event: modified`)           |
 
-### Notes and limitations
+`changed`, `changed_to`, and `changed_from` are only meaningful on update
+events, so they require `event: modified` on the trigger.
 
-- Paths must be dot-separated identifiers starting with a leading dot (`.spec.replicas`).
-  Bracket suffixes (`[*]`, `[N]`) are accepted by the regex but rejected at save time today —
-  array-traversing matches are a planned enhancement.
-- For `metadata`, paths beyond what the CRD declares (e.g. `.metadata.name`) are accepted —
-  K8s CRDs commonly omit `ObjectMeta` properties from their schema.
-- `equals`/`not_equals` only work on scalar fields. For arrays or objects, use
-  `exists`/`not_exists`/`changed`.
-- Numeric and boolean fields are compared as their string form: `value: "5"` matches
-  `.spec.replicas: 5`, `value: "true"` matches `.spec.paused: true`.
+### Tips
+
+- **Paths use dot notation** and start with a leading dot — `.status.phase`,
+  `.spec.template.spec.containers`. Array indexing (`containers[0]`,
+  `containers[*]`) is not supported yet — match on scalar fields under arrays
+  for now.
+- **`equals` and `not_equals` only work on scalar fields** (strings, numbers,
+  booleans). Use `exists`, `not_exists`, or `changed` for arrays and objects.
+- **Numbers and booleans are compared as strings** — `value: "5"` matches
+  `.spec.replicas: 5`; `value: "true"` matches `.spec.paused: true`.
 
 ## Targeting specific Runner Agents
 
@@ -411,12 +430,13 @@ spec:
     namespace: frontend
   disabled: false
 ```
-### On Argo Rollout becoming Healthy (CRD with resourceRef + match)
+### On an Argo Rollout becoming Healthy
 
-This example uses `resourceRef` to target the Argo Rollouts `Rollout` CRD by its
-Group/Version/Kind, and `match` to fire only when `.status.phase` transitions to
-`Healthy`. It runs the **TestWorkflow** `rollout-smoke-tests` once per qualifying
-rollout transition.
+A common pattern with [Argo Rollouts](https://argoproj.github.io/argo-rollouts/)
+is to run smoke tests every time a Rollout finishes a successful update. The
+trigger below watches the `Rollout` custom resource and runs the
+`rollout-smoke-tests` workflow whenever a rollout transitions to the
+`Healthy` phase:
 
 ```yaml
 apiVersion: tests.testkube.io/v1
@@ -444,9 +464,8 @@ spec:
   disabled: false
 ```
 
-For the trigger to receive Rollout events, grant the agent `list,watch` on
-`rollouts.argoproj.io` via the chart's `rbac.extraWatchedResources` (see
-[Granting access to extra CRDs](#granting-access-to-extra-crds-helm)):
+Before this trigger can fire, grant Testkube access to watch Rollouts. Add
+the resource to your Helm values:
 
 ```yaml
 # values.yaml
@@ -456,10 +475,8 @@ rbac:
       resources: ["rollouts"]
 ```
 
-If you manage RBAC outside the chart, the equivalent raw manifests are a
-ClusterRole granting `get,list,watch` on `rollouts.argoproj.io` bound to the
-agent's ServiceAccount (default `testkube-api-server` in the `testkube`
-namespace).
+See [Granting Testkube access to your CRDs](#granting-testkube-access-to-your-crds)
+for more on this field.
 
 ### On Testkube Cluster Event
 
