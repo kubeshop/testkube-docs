@@ -129,6 +129,30 @@ The agent's ServiceAccount must have `list,watch` RBAC on the GVK for triggers
 to receive events; the dashboard's Custom Resource picker only surfaces
 resources the agent can actually watch.
 
+#### Granting access to extra CRDs (Helm)
+
+The agent's watcher Role/ClusterRole ships with a curated list of built-in
+Kubernetes resources. To watch additional CRDs, add them to
+`rbac.extraWatchedResources` in the `testkube-api` chart values — entries are
+expanded into every watcher role variant the chart renders (cluster-wide,
+release-namespace, and per-`additionalNamespaces`):
+
+```yaml
+# values.yaml passed to the testkube-api chart
+rbac:
+  extraWatchedResources:
+    - apiGroups: ["argoproj.io"]
+      resources: ["rollouts"]
+    - apiGroups: ["cert-manager.io"]
+      resources: ["certificates", "certificaterequests"]
+    - apiGroups: ["kafka.strimzi.io"]
+      resources: ["kafkatopics"]
+      verbs: ["get", "list", "watch"]   # default if omitted
+```
+
+Verbs default to `["get", "list", "watch"]` (read-only — triggers don't mutate
+the watched resource). Override per-entry only if you need something else.
+
 ### Test Selector
 
 The `testSelector` field could be used to select the target Workflow of the
@@ -420,32 +444,22 @@ spec:
   disabled: false
 ```
 
-For the trigger to receive Rollout events the agent's ServiceAccount needs
-`list,watch` RBAC on `rollouts.argoproj.io`. A minimal ClusterRole + binding:
+For the trigger to receive Rollout events, grant the agent `list,watch` on
+`rollouts.argoproj.io` via the chart's `rbac.extraWatchedResources` (see
+[Granting access to extra CRDs](#granting-access-to-extra-crds-helm)):
 
 ```yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: testkube-agent-watch-rollouts
-rules:
-  - apiGroups: ["argoproj.io"]
-    resources: ["rollouts"]
-    verbs: ["get", "list", "watch"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: testkube-agent-watch-rollouts
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: testkube-agent-watch-rollouts
-subjects:
-  - kind: ServiceAccount
-    name: testkube-api-server
-    namespace: testkube
+# values.yaml
+rbac:
+  extraWatchedResources:
+    - apiGroups: ["argoproj.io"]
+      resources: ["rollouts"]
 ```
+
+If you manage RBAC outside the chart, the equivalent raw manifests are a
+ClusterRole granting `get,list,watch` on `rollouts.argoproj.io` bound to the
+agent's ServiceAccount (default `testkube-api-server` in the `testkube`
+namespace).
 
 ### On Testkube Cluster Event
 
