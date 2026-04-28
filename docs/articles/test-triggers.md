@@ -111,6 +111,24 @@ resourceSelector:
         values: list of values
 ```
 
+### Resource Reference (any Kubernetes resource, including CRDs)
+
+The `resourceRef` field targets any Kubernetes resource by its Group/Version/Kind.
+It works for built-in K8s types and for any installed CustomResourceDefinition
+(Argo Rollouts, Crossplane, KafkaTopic, etc.). It is mutually exclusive with the
+legacy `resource` field — set one or the other.
+
+```yaml
+resourceRef:
+  group: API group (use empty string for core resources like Pod, Service)
+  version: API version (e.g. "v1", "v1alpha1")
+  kind: Resource kind (e.g. "Rollout", "KafkaTopic")
+```
+
+The agent's ServiceAccount must have `list,watch` RBAC on the GVK for triggers
+to receive events; the dashboard's Custom Resource picker only surfaces
+resources the agent can actually watch.
+
 ### Test Selector
 
 The `testSelector` field could be used to select the target Workflow of the
@@ -158,6 +176,47 @@ spec:
         port: test trigger condition probe port to connect
         headers: test trigger condition probe headers to submit
 ```
+
+## Match Conditions
+
+Match conditions narrow when a trigger fires by inspecting fields on the watched object.
+Each entry pairs a dot-path (e.g. `.status.phase`) with an operator and an optional value;
+all entries must hold for the trigger to fire (AND logic). They are most useful with
+`resourceRef` because the dashboard surfaces the resource's OpenAPI schema as path
+autocomplete and offers type-aware value validation (integer/number/boolean leaves and
+enum-constrained strings).
+
+```yaml
+spec:
+  match:
+    - path: dot-path on the watched object (e.g. ".status.phase", ".spec.replicas")
+      operator: equals | not_equals | exists | not_exists | changed | changed_to | changed_from
+      value: comparison value (required for equals, not_equals, changed_to, changed_from)
+```
+
+### Operators
+
+| Operator       | Use case                                                              |
+|----------------|-----------------------------------------------------------------------|
+| `equals`       | Field's current value equals `value`                                  |
+| `not_equals`   | Field's current value differs from `value`                            |
+| `exists`       | Field is present (no `value` needed)                                  |
+| `not_exists`   | Field is absent (no `value` needed)                                   |
+| `changed`      | Field changed from any value to any other (requires `event: modified`)|
+| `changed_to`   | Field changed to `value` (requires `event: modified`)                 |
+| `changed_from` | Field changed from `value` to anything else (requires `event: modified`)|
+
+### Notes and limitations
+
+- Paths must be dot-separated identifiers starting with a leading dot (`.spec.replicas`).
+  Bracket suffixes (`[*]`, `[N]`) are accepted by the regex but rejected at save time today —
+  array-traversing matches are a planned enhancement.
+- For `metadata`, paths beyond what the CRD declares (e.g. `.metadata.name`) are accepted —
+  K8s CRDs commonly omit `ObjectMeta` properties from their schema.
+- `equals`/`not_equals` only work on scalar fields. For arrays or objects, use
+  `exists`/`not_exists`/`changed`.
+- Numeric and boolean fields are compared as their string form: `value: "5"` matches
+  `.spec.replicas: 5`, `value: "true"` matches `.spec.paused: true`.
 
 ## Targeting specific Runner Agents
 
@@ -328,6 +387,66 @@ spec:
     namespace: frontend
   disabled: false
 ```
+### On Argo Rollout becoming Healthy (CRD with resourceRef + match)
+
+This example uses `resourceRef` to target the Argo Rollouts `Rollout` CRD by its
+Group/Version/Kind, and `match` to fire only when `.status.phase` transitions to
+`Healthy`. It runs the **TestWorkflow** `rollout-smoke-tests` once per qualifying
+rollout transition.
+
+```yaml
+apiVersion: tests.testkube.io/v1
+kind: TestTrigger
+metadata:
+  name: testtrigger-rollout-healthy
+  namespace: default
+spec:
+  resourceRef:
+    group: argoproj.io
+    version: v1alpha1
+    kind: Rollout
+  resourceSelector:
+    namespace: default
+  event: modified
+  match:
+    - path: .status.phase
+      operator: changed_to
+      value: Healthy
+  action: run
+  execution: testworkflow
+  testSelector:
+    name: rollout-smoke-tests
+    namespace: default
+  disabled: false
+```
+
+For the trigger to receive Rollout events the agent's ServiceAccount needs
+`list,watch` RBAC on `rollouts.argoproj.io`. A minimal ClusterRole + binding:
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: testkube-agent-watch-rollouts
+rules:
+  - apiGroups: ["argoproj.io"]
+    resources: ["rollouts"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: testkube-agent-watch-rollouts
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: testkube-agent-watch-rollouts
+subjects:
+  - kind: ServiceAccount
+    name: testkube-api-server
+    namespace: testkube
+```
+
 ### On Testkube Cluster Event
 
 You can define **Test Trigger** for Testkube cluster events. In below example,
