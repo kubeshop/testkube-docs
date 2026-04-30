@@ -26,8 +26,10 @@ import TabItem from "@theme/TabItem";
     Run the following commands to install the Testkube CLI on Ubuntu:
 
     ```sh
-    wget -qO - https://repo.testkube.io/key.pub | sudo apt-key add -
-    echo "deb https://repo.testkube.io/linux linux main" | sudo tee -a /etc/apt/sources.list
+    sudo apt-get update && sudo apt-get install -y gnupg wget
+    sudo install -m 0755 -d /etc/apt/keyrings
+    wget -qO- https://repo.testkube.io/key.pub | sudo gpg --dearmor -o /etc/apt/keyrings/testkube.gpg
+    echo "deb [signed-by=/etc/apt/keyrings/testkube.gpg] https://repo.testkube.io/linux linux main" | sudo tee /etc/apt/sources.list.d/testkube.list
     sudo apt-get update
     sudo apt-get install -y testkube
     ```
