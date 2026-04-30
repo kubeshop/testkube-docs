@@ -62,7 +62,7 @@ flowchart TB
             S3[("MinIO")]
             NATS["NATS"]
         end
-        subgraph Runner Agent(s) - installed separately
+        subgraph "Runner Agent(s) - installed separately"
             AgentAPI["Agent API"]
             WF["Workflow Jobs"]
         end
