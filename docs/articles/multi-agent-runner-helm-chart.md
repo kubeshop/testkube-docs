@@ -176,6 +176,7 @@ It's useful, for example, to set up OpenShift's security context that will be se
 ```yaml
 globalTemplate:
   enabled: true
+  inline: true
   spec:
    pod:
      securityContext:
