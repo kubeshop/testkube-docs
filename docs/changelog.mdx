@@ -24,6 +24,8 @@ Control Plane and Agent continue with unified versioning at **v2.9.2**.
 ### Fixes
 
 - **Container security context on init containers**: Fixed an issue where `ContainerSecurityContext` could not be applied to init containers in TestWorkflow pods.
+- **Floating runner parallel scheduling**: Fixed an issue where an already-active floating runner could be blocked from taking additional parallel executions when the floating runner concurrency limit was set to `1`.
+- **Quiet workflow log streams**: Fixed an issue where workflow log streams could disconnect during quiet periods even though the workflow was still running.
 - **TestWorkflowExecution controller status generation**: Fixed `Status.Generation` never being written by the `testworkflowexecution` controller, which caused all TWE CRDs to re-trigger on every operator restart.
 
 ### OSS Execution Viewer
