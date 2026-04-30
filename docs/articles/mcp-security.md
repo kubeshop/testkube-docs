@@ -24,9 +24,6 @@ This means the MCP Server operates within your existing security boundaries - it
   "mcpServers": {
     "testkube": {
       "url": "https://api.testkube.io/organizations/{org_id}/environments/{env_id}/mcp",
-      "transport": {
-        "type": "sse"
-      },
       "headers": {
         "Authorization": "Bearer YOUR_API_TOKEN"
       }

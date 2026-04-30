@@ -47,16 +47,13 @@ testkube get context
 
 ## Configuration Example
 
-To use the Control Plane MCP endpoint with an AI tool that supports SSE (Server-Sent Events) transport:
+To use the Control Plane MCP endpoint with an AI tool that supports remote MCP servers:
 
 ```json
 {
   "mcpServers": {
     "testkube": {
       "url": "https://api.testkube.io/organizations/tkcorg_076487a004a7f6fb/environments/tkcenv_d19e797ff2c1449b/mcp",
-      "transport": {
-        "type": "sse"
-      },
       "headers": {
         "Authorization": "Bearer YOUR_API_TOKEN_HERE"
       }
@@ -132,9 +129,6 @@ For self-hosted instances, use your custom control plane URL in the MCP configur
   "mcpServers": {
     "testkube": {
       "url": "https://your-control-plane.example.com/organizations/{organization_id}/environments/{environment_id}/mcp",
-      "transport": {
-        "type": "sse"
-      },
       "headers": {
         "Authorization": "Bearer YOUR_API_TOKEN_HERE"
       }

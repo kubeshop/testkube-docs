@@ -24,9 +24,6 @@ GitHub Copilot with Agent mode in VS Code provides excellent agentic capabilitie
      "mcpServers": {
        "testkube": {
          "url": "https://api.testkube.io/organizations/tkcorg_YOUR_ORG_ID/environments/tkcenv_YOUR_ENV_ID/mcp",
-         "transport": {
-           "type": "sse"
-         },
          "headers": {
            "Authorization": "Bearer YOUR_API_TOKEN_HERE"
          }
@@ -98,9 +95,6 @@ Add the hosted endpoint configuration to your Cursor MCP settings:
   "mcpServers": {
     "testkube": {
       "url": "https://api.testkube.io/organizations/tkcorg_YOUR_ORG_ID/environments/tkcenv_YOUR_ENV_ID/mcp",
-      "transport": {
-        "type": "sse"
-      },
       "headers": {
         "Authorization": "Bearer YOUR_API_TOKEN_HERE"
       }
