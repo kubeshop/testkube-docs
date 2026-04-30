@@ -51,10 +51,6 @@ Self-hosted installations require additional infrastructure and configuration ap
 A PostgreSQL database is required for LangGraph checkpointing (conversation persistence). Configure the database connection 
 via `POSTGRES_URI` environment variable or Helm `db.secretRef` configuration.
 
-:::note
-This DB is separate from the main Testkube database and is used solely for AI functionality - you can still use PostgreSQL for your main Testkube database (recommended).
-:::
-
 ### Helm Configuration
 
 Configure the following components in your `testkube-enterprise` Helm values:

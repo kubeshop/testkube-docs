@@ -23,7 +23,7 @@ the Testkube Agent in Standalone and Connected modes.
 As described in the [Standalone Agent Overview](/articles/install/standalone-agent#running-in-standalone-mode), in standalone mode the agent
 
 - Manages all Testkube Resources as CRDs in the cluster/namespace where it is deployed.
-- Schedules and executes your Test Workflows and collects execution logs and artifacts into configured PostgreSQL as the primary database, with MongoDB support still available for legacy deployments, and S3-compatible storage.
+- Schedules and executes your Test Workflows and collects execution logs and artifacts into configured PostgreSQL, and S3-compatible storage.
 - Listens to Kubernetes Events for Event Triggers.
 - Emits Webhooks and CDEvents as configured.
 
