@@ -239,7 +239,7 @@ Alternatively, these values can be read from Kubernetes secrets and set:
 
 To install the standalone agent Testkube on an Openshift cluster you will need to include the following configuration:
 
-1. Add security context for PostgreSQL to `values.yaml` (and MongoDB only if you are maintaining a legacy deployment):
+1. Add security context for MongoDB to `values.yaml`:
 
 ```yaml
 mongodb:
