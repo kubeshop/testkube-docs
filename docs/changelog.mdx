@@ -8,6 +8,30 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Patch Release v2.9.2 (2026-04-30)
+
+Control Plane and Agent continue with unified versioning at **v2.9.2**.
+
+### Chart Fixes
+
+- **Missing `IMPORTS_BUCKET` variable**: Added the missing `IMPORTS_BUCKET` environment variable for both `cloud-api` and `worker` services. By default, it now falls back to `OUTPUTS_BUCKET` unless a different imports bucket is explicitly configured. This variable is used for importing OSS data into Testkube Cloud; because it was missing, upgrades of the charts to v2.9.1 were failing.
+
+### Features
+
+- **Disable test log persistence**: Added a `none` option for `logs.storage` to disable test log persistence entirely for environments that don't need to retain log data.
+- **S3 Virtual-Hosted-Style URLs**: Added support for S3 virtual-hosted-style URLs (`bucket.s3.region.amazonaws.com`) alongside the existing path-style addressing.
+
+### Fixes
+
+- **Container security context on init containers**: Fixed an issue where `ContainerSecurityContext` could not be applied to init containers in TestWorkflow pods.
+- **TestWorkflowExecution controller status generation**: Fixed `Status.Generation` never being written by the `testworkflowexecution` controller, which caused all TWE CRDs to re-trigger on every operator restart.
+
+### OSS Execution Viewer
+
+- **Validate execution before prompting**: `testkube view` now validates the execution ID (or name) before asking for upload permission, so users see a clear "execution not found" error instead of being prompted for non-existent executions.
+- **Log panel scroll**: Fixed an issue where the execution viewer expanded log panels to the full log height, breaking the internal scroll. Logs now scroll within their fixed container.
+- **Avoid duplicate uploads**: `testkube view <id>` now checks whether the execution has already been shared and reuses the existing public link instead of re-uploading the same execution.
+
 ## Monthly Release v2.9.1 (2026-04-23)
 
 Control Plane and Agent continue with unified versioning at **v2.9.1**.
