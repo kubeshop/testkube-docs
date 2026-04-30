@@ -84,7 +84,7 @@ expose ports for both HTTPS and WSS endpoints.
 The main infrastructure dependencies required by the Control Plane are:
 
 - NATS
-- MongoDB - [Read more](mongodb-administration) or PostgreSQL
+- PostgreSQL - [Read more](mongodb-administration)
 - S3 (via Minio)
 - Dex for federated authentication
 
@@ -100,7 +100,7 @@ flowchart TB
 
     subgraph Infrastructure Dependencies
         Dex["Dex - 5556, 5557"]
-        DB[("MongoDB / PostgreSQL")]
+        DB[("PostgreSQL")]
         NATS["NATS - 4222"]
         S3["S3 / MinIO - 9000"]
     end

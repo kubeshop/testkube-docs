@@ -52,7 +52,7 @@ A PostgreSQL database is required for LangGraph checkpointing (conversation pers
 via `POSTGRES_URI` environment variable or Helm `db.secretRef` configuration.
 
 :::note
-This DB is separate from the main Testkube database and is used solely for AI functionality - you can still use MongoDB for your main Testkube database (recommended).
+This DB is separate from the main Testkube database and is used solely for AI functionality - you can still use PostgreSQL for your main Testkube database (recommended).
 :::
 
 ### Helm Configuration
@@ -390,4 +390,3 @@ testkube-ai-service:
 - [AI Agent Triggers](/articles/ai-triggers) — Automating agent execution on workflow events
 - [Configuring AI Models](/articles/ai-models) — Adding custom models from the Dashboard
 - [AI Architecture](/articles/ai-architecture) — How Testkube AI components work together
-

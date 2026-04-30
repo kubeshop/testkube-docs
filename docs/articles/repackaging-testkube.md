@@ -101,7 +101,7 @@ EXPOSE 8080
 
 Testkube has some dependencies on other components such as:
 
-- MongoDB or PostgreSQL
+- PostgreSQL as the primary database, with MongoDB still present for legacy deployments and migration scenarios
 - Minio
 - NATS
 - Dex

@@ -1,8 +1,12 @@
 # MongoDB administration
 
+:::note
+PostgreSQL is the primary database for current Testkube installations. This page is kept for teams that still operate MongoDB-based deployments or are preparing a migration to PostgreSQL.
+:::
+
 ## Using an external MongoDB instance
 
-MongoDB is used for storage of Testkube Test results and various Testkube configurations as telemetry settings and cluster ID.
+MongoDB is used for storage of Testkube Test results and various Testkube configurations as telemetry settings and cluster ID in legacy MongoDB-based deployments.
 
 In order to use an external MongoDB instance, follow these steps:
 
@@ -15,6 +19,10 @@ kubectl testkube install --set mongo.enabled=false
 ```
 
 3. [Update MongoDB details for the api-server in the Helm values with valid connection string](/articles/install/advanced-install#mongodb).
+
+:::tip
+For new installations, prefer PostgreSQL and the guidance in [advanced install](/articles/install/advanced-install#postgresql) or [standalone agent PostgreSQL setup](/articles/install/standalone-agent#using-postgresql-as-a-database).
+:::
 
 ### SSL Connections
 
