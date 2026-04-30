@@ -129,11 +129,9 @@ a different node and reconnecting.
 - The operator can only run as a single instance, but it is responsible for
   running a periodic reconciliation process which at most could be delayed while
 a new pod spawns on a different node.
-- Setting up MongoDB for high availability is outside of the scope of this
+- Setting up PostgreSQL for high availability is outside of the scope of this
   guide, but in production deployments we highly recommend utilizing a managed service
-such as [MongoDB
-Atlas](https://www.mongodb.com/products/platform/atlas-database) as an [external
-MongoDB cluster](./mongodb-administration#using-an-external-mongodb-instance).
+or operator-backed deployment for PostgreSQL. MongoDB-based legacy deployments should continue using an [external MongoDB cluster](./mongodb-administration#using-an-external-mongodb-instance).
 - Dex should be backed by an highly available data storage like
   [etcd](https://dexidp.io/docs/configuration/storage/#etcd).
 - The NATS chart is currently missing the ability to specify `tolerations` and

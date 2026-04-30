@@ -12,32 +12,29 @@ for your specific needs.
 
 The central component that manages connected Agents.
 * API - A service which runs the REST, Agent gRPC and Websocket APIs for interacting with the Control Plane.
-    * Helm chart - Bundled as a subchart in the [testkube-enterprise](https://github.com/kubeshop/testkube-cloud-charts/tree/main/charts/testkube-enterprise) Helm chart.
     * Docker image - [kubeshop/testkube-enterprise-api](https://hub.docker.com/r/kubeshop/testkube-enterprise-api)
 * Dashboard - The web-based UI for managing tests, environments, and users.
-    * Helm chart - Bundled as a subchart in the [testkube-enterprise](https://github.com/kubeshop/testkube-cloud-charts/tree/main/charts/testkube-enterprise) Helm chart.
     * Docker image - [kubeshop/testkube-enterprise-ui](https://hub.docker.com/r/kubeshop/testkube-enterprise-ui)
 * Worker Service - A service which handles async operations for artifacts and test executions.
-    * Helm chart - Bundled as a subchart in the [testkube-enterprise](https://github.com/kubeshop/testkube-cloud-charts/tree/main/charts/testkube-enterprise) Helm chart.
     * Docker image - [kubeshop/testkube-enterprise-worker-service](https://hub.docker.com/r/kubeshop/testkube-enterprise-worker-service)
 * Dex - A service that is used as an identity provider.
-    * Helm chart - Bundled as a subchart in the [testkube-enterprise](https://github.com/kubeshop/testkube-cloud-charts/tree/main/charts/testkube-enterprise) Helm chart.
-    * Docker image - [dex](https://github.com/dexidp/dex/pkgs/container/dex)
+    * Docker image - [kubeshop/dex](https://hub.docker.com/r/kubeshop/dex)
 * Minio - It is a database that is used for storing artifacts.
-    * Helm chart - Used as a bitnami subchart in the [testkube-enterprise](https://github.com/kubeshop/testkube-cloud-charts/tree/main/charts/testkube-enterprise) Helm chart.
-    * Docker image - [MinIo](https://hub.docker.com/r/bitnami/minio/tags)
-* MongoDB - It is a database that is used for storing the data.
-    * Helm chart - Used as a bitnami subchart in the [testkube-enterprise](https://github.com/kubeshop/testkube-cloud-charts/tree/main/charts/testkube-enterprise) Helm chart.
-    * Docker image - [MongoDB](https://hub.docker.com/r/bitnami/mongodb/tags)
-* PostgreSQL - It is a database that is used for storing the data.
-    * Helm chart - Used as a bitnami subchart in the [testkube-enterprise](https://github.com/kubeshop/testkube-cloud-charts/tree/main/charts/testkube-enterprise) Helm chart.
-    * Docker image - [PostgreSQL](https://hub.docker.com/r/bitnami/postgresql/tags)   
+    * Helm chart - Maintained in the [testkube-thirdparty-artifacts](https://github.com/kubeshop/testkube-thirdparty-artifacts) repository.
+    * Docker image - [kubeshop/testkube-minio](https://hub.docker.com/r/kubeshop/testkube-minio)
+* PostgreSQL - It is the primary database used for storing Testkube data.
+    * Recommended deployment - Use the native [CloudNativePG](https://cloudnative-pg.io/) operator for PostgreSQL lifecycle management in Kubernetes.
+    * Helm chart - If needed, supporting artifacts are maintained in the [testkube-thirdparty-artifacts](https://github.com/kubeshop/testkube-thirdparty-artifacts) repository for legacy or transitional setups.
+    * Docker image - [kubeshop/testkube-postgres](https://hub.docker.com/r/kubeshop/testkube-postgres)
+* MongoDB - Legacy database support retained for existing installations and migration workflows.
+    * Helm chart - Maintained in the [testkube-thirdparty-artifacts](https://github.com/kubeshop/testkube-thirdparty-artifacts) repository.
+    * Docker image - [kubeshop/bitnami-mongodb](https://hub.docker.com/r/kubeshop/bitnami-mongodb)
 * NATS - It is a service that is used as a message broker for communication between API and Agents.
-    * Helm chart - Used as a NATS subchart in the [testkube-enterprise](https://github.com/kubeshop/testkube-cloud-charts/tree/main/charts/testkube-enterprise) Helm chart.
+    * Helm chart - Maintained in the [testkube-thirdparty-artifacts](https://github.com/kubeshop/testkube-thirdparty-artifacts) repository.
     * Docker image - [NATS](https://hub.docker.com/_/nats/tags)
 * Additional images used for running jobs during the chart install:
     * [kubectl](https://hub.docker.com/r/bitnami/kubectl)
-    * [mongosh](https://hub.docker.com/r/alpine/mongosh)
+    * [mongosh](https://hub.docker.com/r/alpine/mongosh) for legacy MongoDB operations
     * [db-migrations](https://hub.docker.com/repository/docker/kubeshop/testkube-enterprise-api-migrations/tags)
     * [nats-reloader](https://hub.docker.com/r/natsio/nats-server-config-reloader)
     * [natsBox](https://hub.docker.com/r/natsio/nats-box)
