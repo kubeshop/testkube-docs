@@ -2,8 +2,7 @@
 
 Welcome to Testkube!
 
-Testkube is a Test Orchestration Platform allowing you to 
-orchestrate both simple and complex multi-tool testing scenarios and analyse all of your executions and their results in one centralised place.
+Testkube allows you to orchestrate both simple and complex multi-tool testing scenarios and analyse all of your executions and their results in one centralised place.
 
 ## Key Features
 
