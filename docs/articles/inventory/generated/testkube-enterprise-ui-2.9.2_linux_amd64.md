@@ -3,9 +3,9 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:a0751040dbfd19cdeff1b426de1dddcbe70eb8f520392309b12fc4686df2925c</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 9" src="https://img.shields.io/badge/medium-9-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/low-2-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
-<tr><td>platform</td><td>linux/arm64</td></tr>
-<tr><td>size</td><td>76 MB</td></tr>
+<tr><td>digest</td><td><code>sha256:63c7bbf3062089ad68d2b7be5a76cd13dc55f9004ac3e01ec6b18b5a49ff6abf</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 9" src="https://img.shields.io/badge/medium-9-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/low-2-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>platform</td><td>linux/amd64</td></tr>
+<tr><td>size</td><td>77 MB</td></tr>
 <tr><td>packages</td><td>87</td></tr>
 </table>
 </details></table>
@@ -242,26 +242,6 @@ hide_table_of_contents: true
 <tr><td>Fixed version</td><td><code>5.8.3-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.055%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>libxpm</strong> <code>3.5.17-r0</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/libxpm@3.5.17-r0?os_name=alpine&os_version=3.23</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-4367?s=alpine&n=libxpm&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C3.5.19-r0"><img alt="unspecified : CVE--2026--4367" src="https://img.shields.io/badge/CVE--2026--4367-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;3.5.19-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>3.5.19-r0</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
