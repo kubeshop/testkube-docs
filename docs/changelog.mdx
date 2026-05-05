@@ -8,6 +8,15 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Patch Release v2.9.3 (2026-05-05)
+
+This is an Agent only release. the Agent is available in Helm chart `v2.9.3`.
+
+### Improvements
+
+- **PostgreSQL Support**: The execution time for some queries has been reduced when using the PostgreSQL database.
+- **Skip Kubernetes TLS verification**:  The agent API can now handle communication to collect logs from running pods when the Kubernetes API uses an invalid TLS certificate.
+
 ## Patch Release v2.9.2 (2026-04-30)
 
 Control Plane is available in Helm chart `v2.332.2` and the Agent is available in Helm chart `v2.9.2`.
