@@ -247,7 +247,7 @@ go-git maintainers thank @<!-- -->kq5y for finding and reporting this issue priv
 <tr><td>Fixed version</td><td><code>1.6.3</code></td></tr>
 <tr><td>CVSS Score</td><td><code>2.9</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:H/AT:N/PR:N/UI:N/VC:L/VI:L/VA:L/SC:L/SI:L/SA:L/E:P/S:N/AU:Y/U:Amber</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.022%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.023%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
