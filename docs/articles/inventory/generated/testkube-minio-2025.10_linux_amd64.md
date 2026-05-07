@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:909758579645bacf0967d2abb062caf74aa5dac14a04c571e666907de23157ff</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 5" src="https://img.shields.io/badge/critical-5-8b1924"/> <img alt="high: 27" src="https://img.shields.io/badge/high-27-e25d68"/> <img alt="medium: 26" src="https://img.shields.io/badge/medium-26-fbb552"/> <img alt="low: 48" src="https://img.shields.io/badge/low-48-fce1a9"/> <img alt="unspecified: 9" src="https://img.shields.io/badge/unspecified-9-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:909758579645bacf0967d2abb062caf74aa5dac14a04c571e666907de23157ff</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 5" src="https://img.shields.io/badge/critical-5-8b1924"/> <img alt="high: 27" src="https://img.shields.io/badge/high-27-e25d68"/> <img alt="medium: 25" src="https://img.shields.io/badge/medium-25-fbb552"/> <img alt="low: 48" src="https://img.shields.io/badge/low-48-fce1a9"/> <img alt="unspecified: 9" src="https://img.shields.io/badge/unspecified-9-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>89 MB</td></tr>
 <tr><td>packages</td><td>423</td></tr>
@@ -1206,13 +1206,13 @@ The impact of this escape is limited to reading metadata provided by lstat from 
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/grpc</strong> <code>1.71.0</code> (golang)</summary>
+<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/grpc</strong> <code>1.72.0</code> (golang)</summary>
 
-<small><code>pkg:golang/google.golang.org/grpc@1.71.0</code></small><br/>
+<small><code>pkg:golang/google.golang.org/grpc@1.72.0</code></small><br/>
 
 ```dockerfile
-# minio-release.dockerfile (76:76)
-COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
+# minio-release.dockerfile (80:80)
+COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
 ```
 
 <br/>
@@ -1289,13 +1289,13 @@ Switch to a "default deny" posture in your authorization policies (explicitly li
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/grpc</strong> <code>1.72.0</code> (golang)</summary>
+<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/grpc</strong> <code>1.71.0</code> (golang)</summary>
 
-<small><code>pkg:golang/google.golang.org/grpc@1.72.0</code></small><br/>
+<small><code>pkg:golang/google.golang.org/grpc@1.71.0</code></small><br/>
 
 ```dockerfile
-# minio-release.dockerfile (80:80)
-COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
+# minio-release.dockerfile (76:76)
+COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
 ```
 
 <br/>
@@ -1585,6 +1585,8 @@ COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
 <tr><td>Fixed version</td><td><code>0.311.3</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.021%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1613,6 +1615,8 @@ User who can not upgrade can place Prometheus behind a reverse proxy or firewall
 <tr><td>Fixed version</td><td><code>0.311.3</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.010%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1757,8 +1761,8 @@ FROM debian:bookworm-slim
 <table>
 <tr><td>Affected range</td><td><code>>0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.059%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.063%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1782,7 +1786,7 @@ Fixed by: https://gitlab.com/gnutls/gnutls/-/commit/65ab33fa54e34fba69d793735b7d
 <table>
 <tr><td>Affected range</td><td><code>>0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.036%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.035%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
 </table>
 
@@ -2163,8 +2167,8 @@ On FreeBSD, `kenv` is located at `/bin/kenv`.
 <tr><td>Fixed version</td><td><code>1.40.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.011%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.014%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2320,223 +2324,50 @@ SSH Agent servers do not validate the size of messages when processing new ident
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 7" src="https://img.shields.io/badge/L-7-fce1a9"/> <!-- unspecified: 0 --><strong>glibc</strong> <code>2.36-9+deb12u13</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>nghttp2</strong> <code>1.52.0-1+deb12u2</code> (deb)</summary>
 
-<small><code>pkg:deb/debian/glibc@2.36-9%2Bdeb12u13?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+<small><code>pkg:deb/debian/nghttp2@1.52.0-1%2Bdeb12u2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
 
 ```dockerfile
-# minio-release.dockerfile (36:36)
-FROM debian:bookworm-slim
+# minio-release.dockerfile (53:59)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    jq \
+    curl \
+    procps \
+    bash \
+  && rm -rf /var/lib/apt/lists/*
 ```
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2026-5435?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="high : CVE--2026--5435" src="https://img.shields.io/badge/CVE--2026--5435-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-27135?s=debian&n=nghttp2&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="high : CVE--2026--27135" src="https://img.shields.io/badge/CVE--2026--27135-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
 <tr><td>Affected range</td><td><code>>0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.049%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.024%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-The deprecated functions ns_printrrf, ns_printrr and fp_nquery in the GNU C Library version 2.2 and newer fail to enforce the caller-supplied buffer length, and can result in an out-of-bounds write when printing TSIG records.
+nghttp2 is an implementation of the Hypertext Transfer Protocol version 2 in C. Prior to version 1.68.1, the nghttp2 library stops reading the incoming data when user facing public API `nghttp2_session_terminate_session` or `nghttp2_session_terminate_session2` is called by the application. They might be called internally by the library when it detects the situation that is subject to connection error. Due to the missing internal state validation, the library keeps reading the rest of the data after one of those APIs is called. Then receiving a malformed frame that causes FRAME_SIZE_ERROR causes assertion failure. nghttp2 v1.68.1 adds missing state validation to avoid assertion failure. No known workarounds are available.
 
 ---
-- glibc <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1135230)
-https://sourceware.org/bugzilla/show_bug.cgi?id=34033
-https://sourceware.org/git/?p=glibc.git;a=blob_plain;f=advisories/GLIBC-SA-2026-0011
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-6238?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="medium : CVE--2026--6238" src="https://img.shields.io/badge/CVE--2026--6238-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.049%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-The deprecated functions ns_printrrf, ns_printrr and fp_nquery in the GNU C Library version 2.2 and newer fail to validate the RDATA content against the RDATA length in a DNS response when processing LOC, CERT, TKEY or TSIG records, which may allow an attacker to craft a DNS response, causing a target application to crash or read uninitialized memory.  These functions are for application debugging only and hence not in the path of code executed by the DNS resolver.  Further, they have been deprecated since version 2.34 and should not be used by any new applications.  Applications should consider porting away from these interfaces since they may be removed in future versions.
-
----
-- glibc <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1135231)
-https://sourceware.org/bugzilla/show_bug.cgi?id=34069
-https://sourceware.org/git/?p=glibc.git;a=blob_plain;f=advisories/GLIBC-SA-2026-0012
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2019-9192?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2019--9192" src="https://img.shields.io/badge/CVE--2019--9192-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.790%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>74th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-In the GNU C Library (aka glibc or libc6) through 2.29, check_dst_limits_calc_pos_1 in posix/regexec.c has Uncontrolled Recursion, as demonstrated by '(|)(\\1\\1)*' in grep, a different issue than CVE-2018-20796. NOTE: the software maintainer disputes that this is a vulnerability because the behavior occurs only with a crafted pattern
-
----
-- glibc <unfixed> (unimportant)
-- eglibc <removed> (unimportant)
-https://sourceware.org/bugzilla/show_bug.cgi?id=24269
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2019-1010025?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2019--1010025" src="https://img.shields.io/badge/CVE--2019--1010025-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.840%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>75th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may guess the heap addresses of pthread_created thread. The component is: glibc. NOTE: the vendor's position is "ASLR bypass itself is not a vulnerability.
-
----
-- glibc <unfixed> (unimportant)
-Not treated as a security issue by upstream
-https://sourceware.org/bugzilla/show_bug.cgi?id=22853
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2019-1010024?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2019--1010024" src="https://img.shields.io/badge/CVE--2019--1010024-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.634%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>70th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may bypass ASLR using cache of thread stack and heap. The component is: glibc. NOTE: Upstream comments indicate "this is being treated as a non-security bug and no real threat.
-
----
-- glibc <unfixed> (unimportant)
-Not treated as a security issue by upstream
-https://sourceware.org/bugzilla/show_bug.cgi?id=22852
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2019-1010023?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2019--1010023" src="https://img.shields.io/badge/CVE--2019--1010023-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.307%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-GNU Libc current is affected by: Re-mapping current loaded library with malicious ELF file. The impact is: In worst case attacker may evaluate privileges. The component is: libld. The attack vector is: Attacker sends 2 ELF files to victim and asks to run ldd on it. ldd execute code. NOTE: Upstream comments indicate "this is being treated as a non-security bug and no real threat.
-
----
-- glibc <unfixed> (unimportant)
-Not treated as a security issue by upstream
-https://sourceware.org/bugzilla/show_bug.cgi?id=22851
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2019-1010022?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2019--1010022" src="https://img.shields.io/badge/CVE--2019--1010022-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.129%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may bypass stack guard protection. The component is: nptl. The attack vector is: Exploit stack buffer overflow vulnerability and use this bypass vulnerability to bypass stack guard. NOTE: Upstream comments indicate "this is being treated as a non-security bug and no real threat.
-
----
-- glibc <unfixed> (unimportant)
-Not treated as a security issue by upstream
-https://sourceware.org/bugzilla/show_bug.cgi?id=22850
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2018-20796?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2018--20796" src="https://img.shields.io/badge/CVE--2018--20796-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>1.492%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>81st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-In the GNU C Library (aka glibc or libc6) through 2.29, check_dst_limits_calc_pos_1 in posix/regexec.c has Uncontrolled Recursion, as demonstrated by '(\227|)(\\1\\1|t1|\\\2537)+' in grep.
-
----
-- glibc <unfixed> (unimportant)
-- eglibc <removed> (unimportant)
-https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34141
-https://lists.gnu.org/archive/html/bug-gnulib/2019-01/msg00108.html
-No treated as vulnerability: https://sourceware.org/glibc/wiki/Security%20Exceptions
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2010-4756?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2010--4756" src="https://img.shields.io/badge/CVE--2010--4756-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.394%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>60th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-The glob implementation in the GNU C Library (aka glibc or libc6) allows remote authenticated users to cause a denial of service (CPU and memory consumption) via crafted glob expressions that do not match any pathnames, as demonstrated by glob expressions in STAT commands to an FTP daemon, a different vulnerability than CVE-2010-2632.
-
----
-- glibc <removed> (unimportant)
-- eglibc <unfixed> (unimportant)
-That's standard POSIX behaviour implemented by (e)glibc. Applications using
-glob need to impose limits for themselves
+- nghttp2 1.68.1-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1131369)
+https://github.com/nghttp2/nghttp2/security/advisories/GHSA-6933-cjhr-5qg6
+Fixed by: https://github.com/nghttp2/nghttp2/commit/5c7df8fa815ac1004d9ecb9d1f7595c4d37f46e1 (v1.68.1)
 
 </blockquote>
 </details>
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/go-jose/go-jose/v4</strong> <code>4.1.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/apache/thrift</strong> <code>0.21.0</code> (golang)</summary>
 
-<small><code>pkg:golang/github.com/go-jose/go-jose/v4@4.1.0</code></small><br/>
+<small><code>pkg:golang/github.com/apache/thrift@0.21.0</code></small><br/>
 
 ```dockerfile
 # minio-release.dockerfile (80:80)
@@ -2545,43 +2376,25 @@ COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2026-34986?s=github&n=v4&ns=github.com%2Fgo-jose%2Fgo-jose&t=golang&vr=%3C4.1.4"><img alt="high 7.5: CVE--2026--34986" src="https://img.shields.io/badge/CVE--2026--34986-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Uncaught Exception</i>
+<a href="https://scout.docker.com/v/CVE-2026-41602?s=github&n=thrift&ns=github.com%2Fapache&t=golang&vr=%3C0.23.0"><img alt="high 7.5: CVE--2026--41602" src="https://img.shields.io/badge/CVE--2026--41602-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Integer Overflow or Wraparound</i>
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;4.1.4</code></td></tr>
-<tr><td>Fixed version</td><td><code>4.1.4</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.23.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.23.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.019%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.176%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-### Impact
+Integer Overflow or Wraparound vulnerability in Apache Thrift TFramedTransport Go language implementation
 
-Decrypting a JSON Web Encryption (JWE) object will panic if the `alg` field indicates a key wrapping algorithm ([one ending in `KW`](https://pkg.go.dev/github.com/go-jose/go-jose/v4#pkg-constants), with the exception of `A128GCMKW`, `A192GCMKW`, and `A256GCMKW`) and the `encrypted_key` field is empty. The panic happens when `cipher.KeyUnwrap()` in `key_wrap.go` attempts to allocate a slice with a zero or negative length based on the length of the `encrypted_key`.
+This issue affects Apache Thrift: before 0.23.0.
 
-This code path is reachable from `ParseEncrypted()` / `ParseEncryptedJSON()` / `ParseEncryptedCompact()` followed by `Decrypt()` on the resulting object. Note that the parse functions take a list of accepted key algorithms. If the accepted key algorithms do not include any key wrapping algorithms, parsing will fail and the application will be unaffected.
-
-This panic is also reachable by calling `cipher.KeyUnwrap()` directly with any `ciphertext` parameter less than 16 bytes long, but calling this function directly is less common.
-
-Panics can lead to denial of service.
-
-### Fixed In
-
-4.1.4 and v3.0.5
-
-### Workarounds
-
-If the list of `keyAlgorithms` passed to `ParseEncrypted()` / `ParseEncryptedJSON()` / `ParseEncryptedCompact()` does not include key wrapping algorithms (those ending in `KW`), your application is unaffected.
-
-If your application uses key wrapping, you can prevalidate to the JWE objects to ensure the `encrypted_key` field is nonempty. If your application accepts JWE Compact Serialization, apply that validation to the corresponding field of that serialization (the data between the first and second `.`).
-
-### Thanks
-
-Thanks to Datadog's Security team for finding this issue.
+Users are recommended to upgrade to version 0.23.0, which fixes the issue.
 
 </blockquote>
 </details>
@@ -2620,41 +2433,54 @@ The Delete function fails to properly validate offsets when processing malformed
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>nghttp2</strong> <code>1.52.0-1+deb12u2</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/go-jose/go-jose/v4</strong> <code>4.1.0</code> (golang)</summary>
 
-<small><code>pkg:deb/debian/nghttp2@1.52.0-1%2Bdeb12u2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+<small><code>pkg:golang/github.com/go-jose/go-jose/v4@4.1.0</code></small><br/>
 
 ```dockerfile
-# minio-release.dockerfile (53:59)
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates \
-    jq \
-    curl \
-    procps \
-    bash \
-  && rm -rf /var/lib/apt/lists/*
+# minio-release.dockerfile (80:80)
+COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
 ```
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2026-27135?s=debian&n=nghttp2&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="high : CVE--2026--27135" src="https://img.shields.io/badge/CVE--2026--27135-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-34986?s=github&n=v4&ns=github.com%2Fgo-jose%2Fgo-jose&t=golang&vr=%3C4.1.4"><img alt="high 7.5: CVE--2026--34986" src="https://img.shields.io/badge/CVE--2026--34986-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Uncaught Exception</i>
 
 <table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.024%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;4.1.4</code></td></tr>
+<tr><td>Fixed version</td><td><code>4.1.4</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.022%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-nghttp2 is an implementation of the Hypertext Transfer Protocol version 2 in C. Prior to version 1.68.1, the nghttp2 library stops reading the incoming data when user facing public API `nghttp2_session_terminate_session` or `nghttp2_session_terminate_session2` is called by the application. They might be called internally by the library when it detects the situation that is subject to connection error. Due to the missing internal state validation, the library keeps reading the rest of the data after one of those APIs is called. Then receiving a malformed frame that causes FRAME_SIZE_ERROR causes assertion failure. nghttp2 v1.68.1 adds missing state validation to avoid assertion failure. No known workarounds are available.
+### Impact
 
----
-- nghttp2 1.68.1-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1131369)
-https://github.com/nghttp2/nghttp2/security/advisories/GHSA-6933-cjhr-5qg6
-Fixed by: https://github.com/nghttp2/nghttp2/commit/5c7df8fa815ac1004d9ecb9d1f7595c4d37f46e1 (v1.68.1)
+Decrypting a JSON Web Encryption (JWE) object will panic if the `alg` field indicates a key wrapping algorithm ([one ending in `KW`](https://pkg.go.dev/github.com/go-jose/go-jose/v4#pkg-constants), with the exception of `A128GCMKW`, `A192GCMKW`, and `A256GCMKW`) and the `encrypted_key` field is empty. The panic happens when `cipher.KeyUnwrap()` in `key_wrap.go` attempts to allocate a slice with a zero or negative length based on the length of the `encrypted_key`.
+
+This code path is reachable from `ParseEncrypted()` / `ParseEncryptedJSON()` / `ParseEncryptedCompact()` followed by `Decrypt()` on the resulting object. Note that the parse functions take a list of accepted key algorithms. If the accepted key algorithms do not include any key wrapping algorithms, parsing will fail and the application will be unaffected.
+
+This panic is also reachable by calling `cipher.KeyUnwrap()` directly with any `ciphertext` parameter less than 16 bytes long, but calling this function directly is less common.
+
+Panics can lead to denial of service.
+
+### Fixed In
+
+4.1.4 and v3.0.5
+
+### Workarounds
+
+If the list of `keyAlgorithms` passed to `ParseEncrypted()` / `ParseEncryptedJSON()` / `ParseEncryptedCompact()` does not include key wrapping algorithms (those ending in `KW`), your application is unaffected.
+
+If your application uses key wrapping, you can prevalidate to the JWE objects to ensure the `encrypted_key` field is nonempty. If your application accepts JWE Compact Serialization, apply that validation to the corresponding field of that serialization (the data between the first and second `.`).
+
+### Thanks
+
+Thanks to Datadog's Security team for finding this issue.
 
 </blockquote>
 </details>
@@ -2725,8 +2551,8 @@ https://github.com/krb5/krb5/commit/2e75f0d9362fb979f5fc92829431a590a130929f
 <table>
 <tr><td>Affected range</td><td><code>>0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.081%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.062%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2773,8 +2599,8 @@ https://mailman.mit.edu/pipermail/kerberos/2024-March/023095.html
 <table>
 <tr><td>Affected range</td><td><code>>0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>1.293%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>80th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.504%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>81st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2793,13 +2619,13 @@ overflow is non-issue
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.39.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.42.0</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/net@0.39.0</code></small><br/>
+<small><code>pkg:golang/golang.org/x/net@0.42.0</code></small><br/>
 
 ```dockerfile
-# minio-release.dockerfile (80:80)
-COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
+# minio-release.dockerfile (76:76)
+COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
 ```
 
 <br/>
@@ -2840,13 +2666,13 @@ The html.Parse function in golang.org/x/net/html has quadratic parsing complexit
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.42.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.39.0</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/net@0.42.0</code></small><br/>
+<small><code>pkg:golang/golang.org/x/net@0.39.0</code></small><br/>
 
 ```dockerfile
-# minio-release.dockerfile (76:76)
-COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
+# minio-release.dockerfile (80:80)
+COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
 ```
 
 <br/>
@@ -3097,6 +2923,176 @@ COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
 In Eclipse Paho Go MQTT v3.1 library (paho.mqtt.golang) versions <=1.5.0 UTF-8 encoded strings, passed into the library, may be incorrectly encoded if their length exceeds 65535 bytes. This may lead to unexpected content in packets sent to the server (for example, part of an MQTT topic may leak into the message body in a PUBLISH packet).
 
 The issue arises because the length of the data passed in was converted from an int64/int32 (depending upon CPU) to an int16 without checks for overflows. The int16 length was then written, followed by the data (e.g. topic). This meant that when the data (e.g. topic) was over 65535 bytes then the amount of data written exceeds what the length field indicates. This could lead to a corrupt packet, or mean that the excess data leaks into another field (e.g. topic leaks into message body).
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 7" src="https://img.shields.io/badge/L-7-fce1a9"/> <!-- unspecified: 0 --><strong>glibc</strong> <code>2.36-9+deb12u13</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/glibc@2.36-9%2Bdeb12u13?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (36:36)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2019-9192?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2019--9192" src="https://img.shields.io/badge/CVE--2019--9192-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.790%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>74th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+In the GNU C Library (aka glibc or libc6) through 2.29, check_dst_limits_calc_pos_1 in posix/regexec.c has Uncontrolled Recursion, as demonstrated by '(|)(\\1\\1)*' in grep, a different issue than CVE-2018-20796. NOTE: the software maintainer disputes that this is a vulnerability because the behavior occurs only with a crafted pattern
+
+---
+- glibc <unfixed> (unimportant)
+- eglibc <removed> (unimportant)
+https://sourceware.org/bugzilla/show_bug.cgi?id=24269
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2019-1010025?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2019--1010025" src="https://img.shields.io/badge/CVE--2019--1010025-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.840%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>75th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may guess the heap addresses of pthread_created thread. The component is: glibc. NOTE: the vendor's position is "ASLR bypass itself is not a vulnerability.
+
+---
+- glibc <unfixed> (unimportant)
+Not treated as a security issue by upstream
+https://sourceware.org/bugzilla/show_bug.cgi?id=22853
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2019-1010024?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2019--1010024" src="https://img.shields.io/badge/CVE--2019--1010024-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.634%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>70th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may bypass ASLR using cache of thread stack and heap. The component is: glibc. NOTE: Upstream comments indicate "this is being treated as a non-security bug and no real threat.
+
+---
+- glibc <unfixed> (unimportant)
+Not treated as a security issue by upstream
+https://sourceware.org/bugzilla/show_bug.cgi?id=22852
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2019-1010023?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2019--1010023" src="https://img.shields.io/badge/CVE--2019--1010023-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.307%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+GNU Libc current is affected by: Re-mapping current loaded library with malicious ELF file. The impact is: In worst case attacker may evaluate privileges. The component is: libld. The attack vector is: Attacker sends 2 ELF files to victim and asks to run ldd on it. ldd execute code. NOTE: Upstream comments indicate "this is being treated as a non-security bug and no real threat.
+
+---
+- glibc <unfixed> (unimportant)
+Not treated as a security issue by upstream
+https://sourceware.org/bugzilla/show_bug.cgi?id=22851
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2019-1010022?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2019--1010022" src="https://img.shields.io/badge/CVE--2019--1010022-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.129%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may bypass stack guard protection. The component is: nptl. The attack vector is: Exploit stack buffer overflow vulnerability and use this bypass vulnerability to bypass stack guard. NOTE: Upstream comments indicate "this is being treated as a non-security bug and no real threat.
+
+---
+- glibc <unfixed> (unimportant)
+Not treated as a security issue by upstream
+https://sourceware.org/bugzilla/show_bug.cgi?id=22850
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2018-20796?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2018--20796" src="https://img.shields.io/badge/CVE--2018--20796-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>1.492%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>81st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+In the GNU C Library (aka glibc or libc6) through 2.29, check_dst_limits_calc_pos_1 in posix/regexec.c has Uncontrolled Recursion, as demonstrated by '(\227|)(\\1\\1|t1|\\\2537)+' in grep.
+
+---
+- glibc <unfixed> (unimportant)
+- eglibc <removed> (unimportant)
+https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34141
+https://lists.gnu.org/archive/html/bug-gnulib/2019-01/msg00108.html
+No treated as vulnerability: https://sourceware.org/glibc/wiki/Security%20Exceptions
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2010-4756?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2010--4756" src="https://img.shields.io/badge/CVE--2010--4756-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.394%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>60th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The glob implementation in the GNU C Library (aka glibc or libc6) allows remote authenticated users to cause a denial of service (CPU and memory consumption) via crafted glob expressions that do not match any pathnames, as demonstrated by glob expressions in STAT commands to an FTP daemon, a different vulnerability than CVE-2010-2632.
+
+---
+- glibc <removed> (unimportant)
+- eglibc <unfixed> (unimportant)
+That's standard POSIX behaviour implemented by (e)glibc. Applications using
+glob need to impose limits for themselves
 
 </blockquote>
 </details>
@@ -3388,8 +3384,8 @@ Negligible security impact, but filed #877512
 <table>
 <tr><td>Affected range</td><td><code>>0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>1.912%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>83rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>2.575%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>86th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -3573,72 +3569,6 @@ Crash in CLI tool, no security impact
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>util-linux</strong> <code>2.38.1-5+deb12u3</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/util-linux@2.38.1-5%2Bdeb12u3?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (36:36)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2025-14104?s=debian&n=util-linux&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2025--14104" src="https://img.shields.io/badge/CVE--2025--14104-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.006%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A flaw was found in util-linux. This vulnerability allows a heap buffer overread when processing 256-byte usernames, specifically within the `setpwnam()` function, affecting SUID (Set User ID) login-utils utilities writing to the password database.
-
----
-- util-linux 2.41.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1122058; unimportant)
-https://bugzilla.redhat.com/show_bug.cgi?id=2419369
-https://github.com/util-linux/util-linux/issues/3585
-https://github.com/util-linux/util-linux/pull/3586
-Fixed by: https://github.com/util-linux/util-linux/commit/aaa9e718c88d6916b003da7ebcfe38a3c88df8e6
-Fixed by: https://github.com/util-linux/util-linux/commit/9a36d77012c4c771f8d51eba46b6e62c29bf572a
-Affected code in setpwnam() is only used by chsh and chfn which are not build
-in any Debian released binary package from src:util-linux and explicitly configured
-as with --disable-chfn-chsh since 2.25-1.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2022-0563?s=debian&n=util-linux&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2022--0563" src="https://img.shields.io/badge/CVE--2022--0563-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.025%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A flaw was found in the util-linux chfn and chsh utilities when compiled with Readline support. The Readline library uses an "INPUTRC" environment variable to get a path to the library config file. When the library cannot parse the specified file, it prints an error message containing data from the file. This flaw allows an unprivileged user to read root-owned files, potentially leading to privilege escalation. This flaw affects util-linux versions prior to 2.37.4.
-
----
-- util-linux <unfixed> (unimportant)
-https://bugzilla.redhat.com/show_bug.cgi?id=2053151
-https://lore.kernel.org/util-linux/20220214110609.msiwlm457ngoic6w@<!-- -->ws.net.home/T/#u
-https://github.com/util-linux/util-linux/commit/faa5a3a83ad0cb5e2c303edbfd8cd823c9d94c17
-util-linux in Debian does build with readline support but chfn and chsh are provided
-by src:shadow and util-linux is configured with --disable-chfn-chsh
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>coreutils</strong> <code>9.1-1</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/coreutils@9.1-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
@@ -3699,6 +3629,72 @@ Documentation patches proposed:
 https://lists.gnu.org/archive/html/coreutils/2017-12/msg00072.html
 https://lists.gnu.org/archive/html/coreutils/2017-12/msg00073.html
 Neutralised by kernel hardening
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>util-linux</strong> <code>2.38.1-5+deb12u3</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/util-linux@2.38.1-5%2Bdeb12u3?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (36:36)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-14104?s=debian&n=util-linux&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2025--14104" src="https://img.shields.io/badge/CVE--2025--14104-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.006%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A flaw was found in util-linux. This vulnerability allows a heap buffer overread when processing 256-byte usernames, specifically within the `setpwnam()` function, affecting SUID (Set User ID) login-utils utilities writing to the password database.
+
+---
+- util-linux 2.41.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1122058; unimportant)
+https://bugzilla.redhat.com/show_bug.cgi?id=2419369
+https://github.com/util-linux/util-linux/issues/3585
+https://github.com/util-linux/util-linux/pull/3586
+Fixed by: https://github.com/util-linux/util-linux/commit/aaa9e718c88d6916b003da7ebcfe38a3c88df8e6
+Fixed by: https://github.com/util-linux/util-linux/commit/9a36d77012c4c771f8d51eba46b6e62c29bf572a
+Affected code in setpwnam() is only used by chsh and chfn which are not build
+in any Debian released binary package from src:util-linux and explicitly configured
+as with --disable-chfn-chsh since 2.25-1.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2022-0563?s=debian&n=util-linux&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2022--0563" src="https://img.shields.io/badge/CVE--2022--0563-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.025%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A flaw was found in the util-linux chfn and chsh utilities when compiled with Readline support. The Readline library uses an "INPUTRC" environment variable to get a path to the library config file. When the library cannot parse the specified file, it prints an error message containing data from the file. This flaw allows an unprivileged user to read root-owned files, potentially leading to privilege escalation. This flaw affects util-linux versions prior to 2.37.4.
+
+---
+- util-linux <unfixed> (unimportant)
+https://bugzilla.redhat.com/show_bug.cgi?id=2053151
+https://lore.kernel.org/util-linux/20220214110609.msiwlm457ngoic6w@<!-- -->ws.net.home/T/#u
+https://github.com/util-linux/util-linux/commit/faa5a3a83ad0cb5e2c303edbfd8cd823c9d94c17
+util-linux in Debian does build with readline support but chfn and chsh are provided
+by src:shadow and util-linux is configured with --disable-chfn-chsh
 
 </blockquote>
 </details>
@@ -3767,9 +3763,9 @@ https://github.com/Perl-Toolchain-Gang/File-Temp/issues/14
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>shadow</strong> <code>1:4.13+dfsg1-1+deb12u2</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gnupg2</strong> <code>2.2.40-1.1+deb12u2</code> (deb)</summary>
 
-<small><code>pkg:deb/debian/shadow@1%3A4.13%2Bdfsg1-1%2Bdeb12u2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+<small><code>pkg:deb/debian/gnupg2@2.2.40-1.1%2Bdeb12u2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
 
 ```dockerfile
 # minio-release.dockerfile (36:36)
@@ -3778,24 +3774,27 @@ FROM debian:bookworm-slim
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2007-5686?s=debian&n=shadow&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2007--5686" src="https://img.shields.io/badge/CVE--2007--5686-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2022-3219?s=debian&n=gnupg2&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2022--3219" src="https://img.shields.io/badge/CVE--2022--3219-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
 <tr><td>Affected range</td><td><code>>0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.322%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>55th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.015%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-initscripts in rPath Linux 1 sets insecure permissions for the /var/log/btmp file, which allows local users to obtain sensitive information regarding authentication attempts.  NOTE: because sshd detects the insecure permissions and does not log certain events, this also prevents sshd from logging failed authentication attempts by remote attackers.
+GnuPG can be made to spin on a relatively small input by (for example) crafting a public key with thousands of signatures attached, compressed down to just a few KB.
 
 ---
-- shadow <unfixed> (unimportant)
-See #290803, on Debian LOG_UNKFAIL_ENAB in login.defs is set to no so
-unknown usernames are not recorded on login failures
+- gnupg2 <unfixed> (unimportant)
+https://bugzilla.redhat.com/show_bug.cgi?id=2127010
+https://dev.gnupg.org/D556
+https://dev.gnupg.org/T5993
+https://www.openwall.com/lists/oss-security/2022/07/04/8
+GnuPG upstream is not implementing this change.
 
 </blockquote>
 </details>
@@ -3874,9 +3873,9 @@ Not exploitable in Debian, since no keyring URI is defined
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gnupg2</strong> <code>2.2.40-1.1+deb12u2</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>shadow</strong> <code>1:4.13+dfsg1-1+deb12u2</code> (deb)</summary>
 
-<small><code>pkg:deb/debian/gnupg2@2.2.40-1.1%2Bdeb12u2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+<small><code>pkg:deb/debian/shadow@1%3A4.13%2Bdfsg1-1%2Bdeb12u2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
 
 ```dockerfile
 # minio-release.dockerfile (36:36)
@@ -3885,27 +3884,24 @@ FROM debian:bookworm-slim
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2022-3219?s=debian&n=gnupg2&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2022--3219" src="https://img.shields.io/badge/CVE--2022--3219-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2007-5686?s=debian&n=shadow&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2007--5686" src="https://img.shields.io/badge/CVE--2007--5686-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
 <tr><td>Affected range</td><td><code>>0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.015%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.322%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>55th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-GnuPG can be made to spin on a relatively small input by (for example) crafting a public key with thousands of signatures attached, compressed down to just a few KB.
+initscripts in rPath Linux 1 sets insecure permissions for the /var/log/btmp file, which allows local users to obtain sensitive information regarding authentication attempts.  NOTE: because sshd detects the insecure permissions and does not log certain events, this also prevents sshd from logging failed authentication attempts by remote attackers.
 
 ---
-- gnupg2 <unfixed> (unimportant)
-https://bugzilla.redhat.com/show_bug.cgi?id=2127010
-https://dev.gnupg.org/D556
-https://dev.gnupg.org/T5993
-https://www.openwall.com/lists/oss-security/2022/07/04/8
-GnuPG upstream is not implementing this change.
+- shadow <unfixed> (unimportant)
+See #290803, on Debian LOG_UNKFAIL_ENAB in login.defs is set to no so
+unknown usernames are not recorded on login failures
 
 </blockquote>
 </details>

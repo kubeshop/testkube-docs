@@ -1073,8 +1073,8 @@ On FreeBSD, `kenv` is located at `/bin/kenv`.
 <tr><td>Fixed version</td><td><code>1.40.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.011%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.014%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1421,8 +1421,8 @@ https://github.com/russellhaering/goxmldsig/blob/main/validate.go
 <tr><td>Fixed version</td><td><code>4.1.4</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.019%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.022%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1791,45 +1791,6 @@ The html.Parse function in golang.org/x/net/html has quadratic parsing complexit
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/aws/aws-sdk-go</strong> <code>1.55.7</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/aws/aws-sdk-go@1.55.7</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2020-8911?s=golang&n=aws-sdk-go&ns=github.com%2Faws&t=golang&vr=%3E%3D0"><img alt="medium : CVE--2020--8911" src="https://img.shields.io/badge/CVE--2020--8911-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.203%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A padding oracle vulnerability exists in the AWS S3 Crypto SDK for GoLang versions prior to V2. The SDK allows users to encrypt files with AES-CBC without computing a Message Authentication Code (MAC), which then allows an attacker who has write access to the target's S3 bucket and can observe whether or not an endpoint with access to the key can decrypt a file, they can reconstruct the plaintext with (on average) 128*length (plaintext) queries to the endpoint, by exploiting CBC's ability to manipulate the bytes of the next block and PKCS5 padding errors. It is recommended to update your SDK to V2 or later, and re-encrypt your files.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2020-8912?s=golang&n=aws-sdk-go&ns=github.com%2Faws&t=golang&vr=%3E%3D0"><img alt="low : CVE--2020--8912" src="https://img.shields.io/badge/CVE--2020--8912-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.141%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A vulnerability in the in-band key negotiation exists in the AWS S3 Crypto SDK for GoLang versions prior to V2. An attacker with write access to the targeted bucket can change the encryption algorithm of an object in the bucket, which can then allow them to change AES-GCM to AES-CTR. Using this in combination with a decryption oracle can reveal the authentication key used by AES-GCM as decrypting the GMAC tag leaves the authentication key recoverable as an algebraic equation. It is recommended to update your SDK to V2 or later, and re-encrypt your files.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>zlib</strong> <code>1.3.1-r2</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/zlib@1.3.1-r2?os_name=alpine&os_version=3.21</code></small><br/>
@@ -1869,24 +1830,77 @@ A vulnerability in the in-band key negotiation exists in the AWS S3 Crypto SDK f
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/azure/go-ntlmssp</strong> <code>0.0.0-20221128193559-754e69321358</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/aws/aws-sdk-go</strong> <code>1.55.7</code> (golang)</summary>
 
-<small><code>pkg:golang/github.com/azure/go-ntlmssp@0.0.0-20221128193559-754e69321358</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-32952?s=github&n=go-ntlmssp&ns=github.com%2Fazure&t=golang&vr=%3C0.1.1"><img alt="medium 5.3: CVE--2026--32952" src="https://img.shields.io/badge/CVE--2026--32952-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Integer Overflow or Wraparound</i>
+<small><code>pkg:golang/github.com/aws/aws-sdk-go@1.55.7</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2020-8911?s=golang&n=aws-sdk-go&ns=github.com%2Faws&t=golang&vr=%3E%3D0"><img alt="medium : CVE--2020--8911" src="https://img.shields.io/badge/CVE--2020--8911-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;0.1.1</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.1.1</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.068%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.203%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-go-ntlmssp is a Go package that provides NTLM/Negotiate authentication over HTTP. Prior to version 0.1.1, a malicious NTLM challenge message can causes an slice out of bounds panic, which can crash any Go process using `ntlmssp.Negotiator` as an HTTP transport. Version 0.1.1 patches the issue.
+A padding oracle vulnerability exists in the AWS S3 Crypto SDK for GoLang versions prior to V2. The SDK allows users to encrypt files with AES-CBC without computing a Message Authentication Code (MAC), which then allows an attacker who has write access to the target's S3 bucket and can observe whether or not an endpoint with access to the key can decrypt a file, they can reconstruct the plaintext with (on average) 128*length (plaintext) queries to the endpoint, by exploiting CBC's ability to manipulate the bytes of the next block and PKCS5 padding errors. It is recommended to update your SDK to V2 or later, and re-encrypt your files.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2020-8912?s=golang&n=aws-sdk-go&ns=github.com%2Faws&t=golang&vr=%3E%3D0"><img alt="low : CVE--2020--8912" src="https://img.shields.io/badge/CVE--2020--8912-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.141%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A vulnerability in the in-band key negotiation exists in the AWS S3 Crypto SDK for GoLang versions prior to V2. An attacker with write access to the targeted bucket can change the encryption algorithm of an object in the bucket, which can then allow them to change AES-GCM to AES-CTR. Using this in combination with a decryption oracle can reveal the authentication key used by AES-GCM as decrypting the GMAC tag leaves the authentication key recoverable as an algebraic equation. It is recommended to update your SDK to V2 or later, and re-encrypt your files.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream</strong> <code>1.6.10</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream@1.6.10</code></small><br/>
+<a href="https://scout.docker.com/v/GHSA-xmrv-pmrh-hhx2?s=github&n=eventstream&ns=github.com%2Faws%2Faws-sdk-go-v2%2Faws%2Fprotocol&t=golang&vr=%3C1.7.8"><img alt="medium 5.9: GHSA--xmrv--pmrh--hhx2" src="https://img.shields.io/badge/GHSA--xmrv--pmrh--hhx2-lightgrey?label=medium%205.9&labelColor=fbb552"/></a> <i>Improper Input Validation</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.7.8</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.7.8</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.9</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+**CVSSv3.1 Rating**: [Medium]
+**CVSSv3.1 Score**: [5.9]
+**CVSSv3.1 Vector String**: [CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H]
+
+## Summary and Impact
+An issue exists in the the EventStream header decoder in AWS SDK for Go v2 in versions predating [2026-03-23](https://github.com/aws/aws-sdk-go-v2/releases/tag/release-2026-03-23). An actor can send a malformed EventStream response frame containing a crafted header value type byte outside the valid range, which can cause the host process to terminate.
+
+Impacted versions: < [2026-03-23](https://github.com/aws/aws-sdk-go-v2/releases/tag/release-2026-03-23)
+
+## Patches
+This issue has been addressed in versions [2026-03-23](https://github.com/aws/aws-sdk-go-v2/releases/tag/release-2026-03-23) and above. We recommend upgrading to the latest version and ensuring any forked or derivative code is patched to incorporate the new fixes. 
+
+## Workarounds
+Not Applicable
+
+## References
+If you have any questions or comments about this advisory, we ask that you contact [AWS/Amazon] Security via our [vulnerability reporting page](https://aws.amazon.com/security/vulnerability-reporting) or directly via email to [aws-security@<!-- -->amazon.com](mailto:aws-security@<!-- -->amazon.com). Please do not create a public GitHub issue.
 
 </blockquote>
 </details>
@@ -1931,38 +1945,24 @@ If you have any questions or comments about this advisory, we ask that you conta
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream</strong> <code>1.6.10</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/azure/go-ntlmssp</strong> <code>0.0.0-20221128193559-754e69321358</code> (golang)</summary>
 
-<small><code>pkg:golang/github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream@1.6.10</code></small><br/>
-<a href="https://scout.docker.com/v/GHSA-xmrv-pmrh-hhx2?s=github&n=eventstream&ns=github.com%2Faws%2Faws-sdk-go-v2%2Faws%2Fprotocol&t=golang&vr=%3C1.7.8"><img alt="medium 5.9: GHSA--xmrv--pmrh--hhx2" src="https://img.shields.io/badge/GHSA--xmrv--pmrh--hhx2-lightgrey?label=medium%205.9&labelColor=fbb552"/></a> <i>Improper Input Validation</i>
+<small><code>pkg:golang/github.com/azure/go-ntlmssp@0.0.0-20221128193559-754e69321358</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-32952?s=github&n=go-ntlmssp&ns=github.com%2Fazure&t=golang&vr=%3C0.1.1"><img alt="medium 5.3: CVE--2026--32952" src="https://img.shields.io/badge/CVE--2026--32952-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Integer Overflow or Wraparound</i>
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;1.7.8</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.7.8</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5.9</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.1.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.1.1</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.068%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-**CVSSv3.1 Rating**: [Medium]
-**CVSSv3.1 Score**: [5.9]
-**CVSSv3.1 Vector String**: [CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H]
-
-## Summary and Impact
-An issue exists in the the EventStream header decoder in AWS SDK for Go v2 in versions predating [2026-03-23](https://github.com/aws/aws-sdk-go-v2/releases/tag/release-2026-03-23). An actor can send a malformed EventStream response frame containing a crafted header value type byte outside the valid range, which can cause the host process to terminate.
-
-Impacted versions: < [2026-03-23](https://github.com/aws/aws-sdk-go-v2/releases/tag/release-2026-03-23)
-
-## Patches
-This issue has been addressed in versions [2026-03-23](https://github.com/aws/aws-sdk-go-v2/releases/tag/release-2026-03-23) and above. We recommend upgrading to the latest version and ensuring any forked or derivative code is patched to incorporate the new fixes. 
-
-## Workarounds
-Not Applicable
-
-## References
-If you have any questions or comments about this advisory, we ask that you contact [AWS/Amazon] Security via our [vulnerability reporting page](https://aws.amazon.com/security/vulnerability-reporting) or directly via email to [aws-security@<!-- -->amazon.com](mailto:aws-security@<!-- -->amazon.com). Please do not create a public GitHub issue.
+go-ntlmssp is a Go package that provides NTLM/Negotiate authentication over HTTP. Prior to version 0.1.1, a malicious NTLM challenge message can causes an slice out of bounds panic, which can crash any Go process using `ntlmssp.Negotiator` as an HTTP transport. Version 0.1.1 patches the issue.
 
 </blockquote>
 </details>
