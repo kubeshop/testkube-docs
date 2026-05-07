@@ -419,7 +419,7 @@ As of Testkube v2.7, Testkube Resources are stored in the Control Plane - [Read 
 
 Testkube supports integrating with existing infrastructure components such as PostgreSQL, NATS, Dex, etc. For production environments, it's recommended to use your own infra or to harden the sub-charts.
 
-## PostgreSQL
+### PostgreSQL
 
 Starting with release `2.9`, PostgreSQL will be used as the primary database instead of MongoDB. Since both options are currently supported, you must first disable MongoDB and then enable PostgreSQL in your `values.yaml` file. We strongly recommend using `CloudNativePG` instead of plain PostgreSQL, as it offloads much of the database management, and the installation of PostgreSQL by Bitnami will be deprecated by the end of 2026.
 The operator-based path has two parts:
@@ -474,12 +474,12 @@ Do not enable both `postgresql.enabled` (standard chart installation) and `postg
 
 :::
 
-### Migrating Testkube Enterprise PostgreSQL to the CloudNativePG Operator
+#### Migrating Testkube Enterprise PostgreSQL to the CloudNativePG Operator
 Moving from the bundled Bitnami PostgreSQL chart to CloudNativePG is a breaking infrastructure change for existing installations. 
 
 The resource model changes from a Helm-managed PostgreSQL `StatefulSet` to an operator-managed PostgreSQL `Cluster`, so this is not a direct in-place database upgrade.
 
-### Recommended Migration Strategy
+#### Recommended Migration Strategy
 
 1. Keep the existing bundled PostgreSQL deployment running.
 2. Install the CloudNativePG operator and create a new PostgreSQL cluster.
@@ -490,11 +490,11 @@ The resource model changes from a Helm-managed PostgreSQL `StatefulSet` to an op
 
 **Treat this migration as a database migration, not just a Helm upgrade.**
 
-### Using an external PostgreSQL instance 
+#### Using an external PostgreSQL instance 
 
 You can easily connect PostgreSQL to an external database by creating a Kubernetes secret with the database connection details and wiring it into `global.postgres.secretRef`. Optionally, you can also use `global.postgres.dsn` instead of separate secret-based fields.
 
-## MongoDB
+### MongoDB
 
 :::warning Important
 
