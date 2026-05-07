@@ -8,6 +8,22 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Patch Release v2.9.4 (2026-05-07)
+
+Control Plane is available in Helm chart `v2.332.4` and the Agent is available in Helm chart `v2.9.3`.
+
+### Features
+
+- **JUnit Report Tab in Public Execution Viewer**: The OSS execution viewer now includes a JUnit report tab, allowing users to browse test results directly in the public viewer.
+
+### Improvements
+
+- **PostgreSQL**: Execution query performance has been improved through denormalization migrations and updated insights queries.
+
+### Fixes
+
+- Fixed an issue where agent capabilities were not correctly queried, which could lead to incorrect agent state in the UI.
+
 ## Patch Release v2.9.3 (2026-05-05)
 
 This is an Agent only release. the Agent is available in Helm chart `v2.9.3`.
@@ -15,7 +31,7 @@ This is an Agent only release. the Agent is available in Helm chart `v2.9.3`.
 ### Improvements
 
 - **PostgreSQL Support**: The execution time for some queries has been reduced when using the PostgreSQL database.
-- **Skip Kubernetes TLS verification**:  The agent API can now handle communication to collect logs from running pods when the Kubernetes API uses an invalid TLS certificate.
+- **Skip Kubernetes TLS verification**: The agent API can now handle communication to collect logs from running pods when the Kubernetes API uses an invalid TLS certificate.
 
 ## Patch Release v2.9.2 (2026-04-30)
 
