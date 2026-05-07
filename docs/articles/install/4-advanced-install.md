@@ -431,10 +431,7 @@ To enable this, update your `values.yaml` as follows:
 
 ```yaml
 global:
-  mongo:
-    enabled: false #disable MongoDB for API and Worker services
   postgres:
-    enabled: true #use Postgres as a database for API, AI and Worker service
     secretRef: #credentials k8s secret that connects the services to Postgres database
       name: 'testkube-enterprise-postgresql-app'
       endpointKey: 'host'
@@ -449,7 +446,26 @@ postgresqlCluster:
   
 mongodb:
   enabled: false #disables MongoDB chart installation
+  
+testkube-cloud-api: 
+  api:
+    mongo:
+      enabled: false #disable MongoDB for the cloud API service
+    postgres:
+      enabled: true #enable PostgreSQL for the cloud API service
+      dsn: '' #leave empty when connection details come from global.postgres.secretRef
+testkube-worker-service:
+  api:
+    mongo:
+      enabled: false #disable MongoDB for the worker service
+    postgres:
+      enabled: true #enable PostgreSQL for the worker service
+      dsn: '' #leave empty when connection details come from global.postgres.secretRef
 ```
+:::note
+`global.postgres` provides shared connection settings only. You still need the testkube-cloud-api.api and testkube-worker-service.api blocks to explicitly switch those services from MongoDB to PostgreSQL, and dsn: "" ensures they inherit correct global PostgreSQL config.
+:::
+
 If you deploy the CloudNativePG operator separately, or you already have it running in your k8s cluster, set `postgresqlCluster.enabled=false` in the `values.yaml`.
 
 :::warning
