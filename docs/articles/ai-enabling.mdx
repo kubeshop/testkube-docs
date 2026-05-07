@@ -30,14 +30,14 @@ in the Dashboard as described above.
 ```yaml
 testkube-ai-service:
   enabled: true
-  db:
+  postgres:
+    # Database name (defaults to 'ai' if empty)
+    database: "testkube_ai"
     secretRef:
       name: my-postgres-credentials     # Secret with DB credentials
       endpointKey: host                 # Key containing DB host
       usernameKey: username             # Key containing DB username  
       passwordKey: password             # Key containing DB password
-    # Database name (defaults to 'ai' if empty)
-    name: "testkube_ai"
   llmApi:
     secretRef: my-openai-secret
     secretRefKey: OPENAI_API_KEY

@@ -419,7 +419,7 @@ As of Testkube v2.7, Testkube Resources are stored in the Control Plane - [Read 
 
 Testkube supports integrating with existing infrastructure components such as PostgreSQL, NATS, Dex, etc. For production environments, it's recommended to use your own infra or to harden the sub-charts.
 
-## PostgreSQL
+### PostgreSQL
 
 Starting with release `2.9`, PostgreSQL will be used as the primary database instead of MongoDB. Since both options are currently supported, you must first disable MongoDB and then enable PostgreSQL in your `values.yaml` file. We strongly recommend using `CloudNativePG` instead of plain PostgreSQL, as it offloads much of the database management, and the installation of PostgreSQL by Bitnami will be deprecated by the end of 2026.
 The operator-based path has two parts:
@@ -431,10 +431,7 @@ To enable this, update your `values.yaml` as follows:
 
 ```yaml
 global:
-  mongo:
-    enabled: false #disable MongoDB for API and Worker services
   postgres:
-    enabled: true #use Postgres as a database for API, AI and Worker service
     secretRef: #credentials k8s secret that connects the services to Postgres database
       name: 'testkube-enterprise-postgresql-app'
       endpointKey: 'host'
@@ -449,7 +446,26 @@ postgresqlCluster:
   
 mongodb:
   enabled: false #disables MongoDB chart installation
+  
+testkube-cloud-api: 
+  api:
+    mongo:
+      enabled: false #disable MongoDB for the cloud API service
+    postgres:
+      enabled: true #enable PostgreSQL for the cloud API service
+      dsn: '' #leave empty when connection details come from global.postgres.secretRef
+testkube-worker-service:
+  api:
+    mongo:
+      enabled: false #disable MongoDB for the worker service
+    postgres:
+      enabled: true #enable PostgreSQL for the worker service
+      dsn: '' #leave empty when connection details come from global.postgres.secretRef
 ```
+:::note
+`global.postgres` provides shared connection settings only. You still need the testkube-cloud-api.api and testkube-worker-service.api blocks to explicitly switch those services from MongoDB to PostgreSQL, and dsn: "" ensures they inherit correct global PostgreSQL config.
+:::
+
 If you deploy the CloudNativePG operator separately, or you already have it running in your k8s cluster, set `postgresqlCluster.enabled=false` in the `values.yaml`.
 
 :::warning
@@ -458,12 +474,12 @@ Do not enable both `postgresql.enabled` (standard chart installation) and `postg
 
 :::
 
-### Migrating Testkube Enterprise PostgreSQL to the CloudNativePG Operator
+#### Migrating Testkube Enterprise PostgreSQL to the CloudNativePG Operator
 Moving from the bundled Bitnami PostgreSQL chart to CloudNativePG is a breaking infrastructure change for existing installations. 
 
 The resource model changes from a Helm-managed PostgreSQL `StatefulSet` to an operator-managed PostgreSQL `Cluster`, so this is not a direct in-place database upgrade.
 
-### Recommended Migration Strategy
+#### Recommended Migration Strategy
 
 1. Keep the existing bundled PostgreSQL deployment running.
 2. Install the CloudNativePG operator and create a new PostgreSQL cluster.
@@ -474,11 +490,11 @@ The resource model changes from a Helm-managed PostgreSQL `StatefulSet` to an op
 
 **Treat this migration as a database migration, not just a Helm upgrade.**
 
-### Using an external PostgreSQL instance 
+#### Using an external PostgreSQL instance 
 
 You can easily connect PostgreSQL to an external database by creating a Kubernetes secret with the database connection details and wiring it into `global.postgres.secretRef`. Optionally, you can also use `global.postgres.dsn` instead of separate secret-based fields.
 
-## MongoDB
+### MongoDB
 
 :::warning Important
 
