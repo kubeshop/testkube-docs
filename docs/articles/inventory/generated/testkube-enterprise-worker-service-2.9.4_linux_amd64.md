@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:ae1987aa50f7d0fb5ac0a4c3c0b2c683fbbd301ea9d0a4567a8988fa8bb566e0</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/medium-4-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/low-2-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>digest</td><td><code>sha256:16779bc22fdbd4a0c74328e600b3376699903682ff91ae2be87c69525fdb0157</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/medium-3-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/low-2-fce1a9"/> <img alt="unspecified: 8" src="https://img.shields.io/badge/unspecified-8-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>58 MB</td></tr>
 <tr><td>packages</td><td>327</td></tr>
@@ -237,160 +237,6 @@ go-git maintainers thank @<!-- -->kq5y for finding and reporting this issue priv
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/gofiber/fiber/v2</strong> <code>2.52.12</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/gofiber/fiber/v2@2.52.12</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-42554?s=github&n=v2&ns=github.com%2Fgofiber%2Ffiber&t=golang&vr=%3C%3D2.52.12"><img alt="medium 5.3: CVE--2026--42554" src="https://img.shields.io/badge/CVE--2026--42554-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=2.52.12</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.52.13</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:P/VC:N/VI:N/VA:N/SC:L/SI:L/SA:N</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-## Summary
-
-**Description**
-
-A Cross-Site Scripting (CWE-79) vulnerability in Go Fiber allows a remote attacker to inject arbitrary HTML/JavaScript by supplying `Accept: text/html` on any request whose handler passes attacker-influenced data to the AutoFormat() feature. This affects `github.com/gofiber/fiber/v3` (`DefaultRes.AutoFormat`) through version 3.1.0 and `github.com/gofiber/fiber/v2` (`Ctx.Format`) through version 2.52.12. 
-
-The developer opts into content negotiation by calling AutoFormat(), but does not opt into raw HTML emission for a particular request; Fiber chooses that branch from attacker-controlled Accept. Five of the six branches of the same method already escape. `JSON`, `XML`, `MsgPack`, and `CBOR` all route through encoders that neutralize markup; the txt branch emits `text/plain` and cannot execute. The html branch is the sole outlier in a method whose name (`AutoFormat`) and symmetrical structure actively telegraph "safe, format-agnostic reply."
-
-## Details
-The issue resides in `res.go` within `(*DefaultRes).AutoFormat()`. The method negotiates against the request Accept header, selects one of `html | json | txt | xml | msgpack | cbor`, and serializes the caller-supplied body accordingly.
-
-The "html" branch concatenates the stringified body directly into HTML markup with no output encoding:
-- `accept` comes from `r.c.Accepts(...)`, i.e. is fully attacker-controlled. An attacker can force the "html" branch on any `AutoFormat()` call regardless of which format the developer tested against.
-- `b` is produced from `body` via direct assignment (`string` / `[]byte`) or `fmt.Sprintf("%v", body)`. No `html.EscapeString` is applied.
-- The resulting string is sent as `text/html; charset=utf-8`, so browsers render it as active HTML.
-
-```go
-// res.go
-func (r *DefaultRes) AutoFormat(body any) error {
-
-    accept := r.c.DefaultReq.Accepts("html", "json", "txt", "xml", "msgpack", "cbor")
-
-    r.Type(accept)
-    var b string
-    switch val := body.(type) {
-    case string:
-        b = val
-    case []byte:
-        b = r.c.app.toString(val)
-    default:
-        b = fmt.Sprintf("%v", val)
-    }
-
-    switch accept {
-    case "txt":
-        return r.SendString(b)
-    case "json":
-        return r.JSON(body)
-    case "xml":
-        return r.XML(body)
-    case "html":
-        return r.SendString("<p>" + b + "</p>")
-    case "msgpack":
-        return r.MsgPack(body)
-    case "cbor":
-        return r.CBOR(body)
-    }
-    return r.SendString(b)
-}
-```
-## Impact
-
-This impacts all current v3 releases ≤ 3.1.0 containing `DefaultRes.AutoFormat`, and all current v2 releases ≤ 2.52.12 where the identical `"<p>" + b + "</p>"` construction exists in `(*Ctx).Format()`. Exploitation requires that an application call `c.AutoFormat(v)` where `v` (or a field stringified by `%v`) contains request-influenced data.
-
-A handler that uses `AutoFormat()` to serve multiple representations of the same data can be turned into an HTML XSS sink when the client sends `Accept: text/html`, even if the developer only tested the JSON path.
-
-This may result in:
-- **Reflected XSS** in the application's origin via any request-derived value reaching `AutoFormat`.
-- **Stored XSS** where the reflected value originates from persisted input later passed to `AutoFormat`.
-
-## Proposed Patch
-
-The injection surface is `r.Type("html")` followed by `r.SendString(b)` with unescaped caller data, where it constructs markup on the caller's behalf around a value whose HTML-ness the caller did not declare. A few options:
-- `AutoFormat()` should treat `body` as data, not markup, in the `"html"` branch and escape it before concatenating it into the framework-generated `<p>` wrapper. Callers that need raw negotiated HTML should use `Format()` with an explicit HTML handler.
-- Introduce a sibling method that escapes, leave `AutoFormat` alone for backward compatibility.
-
-HTML-escape the value in the "html" branch before concatenating it into the `<p>` wrapper.
-```go
-import "html"
-
-// ...
-case "html":
-    return r.SendString("<p>" + html.EscapeString(b) + "</p>")
-```
-
-`html.EscapeString` escapes `<`, `>`, `&`, `'`, `"`, which is sufficient for an element-text context. Apply the same change to v2's `(*Ctx).Format()`.
-
-## Proof of Concept
-
-```bash
-# Create project directory
-mkdir fiber-xss-poc && cd fiber-xss-poc
-
-# Initialize Go module
-go mod init fiber-xss-poc
-
-# Install Fiber v3
-go get github.com/gofiber/fiber/v3
-
-# Create the PoC file
-cat > main.go << 'EOF'
-package main
-
-import (
-	"github.com/gofiber/fiber/v3"
-)
-
-type User struct {
-	ID   int    `json:"id"`
-	Name string `json:"name"`
-}
-
-func main() {
-	app := fiber.New()
-	
-	app.Get("/api/user", func(c fiber.Ctx) error {
-		user := User{
-			ID:   1,
-			Name: c.Query("name", "anonymous"),
-		}
-		return c.AutoFormat(user)
-	})
-
-	app.Listen(":3000")
-}
-EOF
-
-# Run it
-go run main.go
-}
-```
-
-Benign JSON
-```bash
-curl -s 'http://127.0.0.1:3000/api/user?name=Alice' -H 'Accept: application/json'
-{"id":1,"name":"Alice"}
-```
-
-HTML sink enables XSS
-```bash
-curl -s 'http://127.0.0.1:3000/api/user?name=<script>alert(document.domain)</script>' -H 'Accept: text/html'
-<p>{1 <script>alert(document.domain)</script>}</p>
-```
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/cloudflare/circl</strong> <code>1.6.1</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/cloudflare/circl@1.6.1</code></small><br/>
@@ -412,6 +258,135 @@ The CombinedMult function in the CIRCL ecc/p384 package (secp384r1 curve) produc
 ECDH and ECDSA signing relying on this curve are not affected.
 
 The bug was fixed in **[v1.6.3](https://github.com/cloudflare/circl/releases/tag/v1.6.3)**.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 8" src="https://img.shields.io/badge/U-8-lightgrey"/><strong>stdlib</strong> <code>1.26.2</code> (golang)</summary>
+
+<small><code>pkg:golang/stdlib@1.26.2</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-42499?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.3"><img alt="unspecified : CVE--2026--42499" src="https://img.shields.io/badge/CVE--2026--42499-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.3</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.26.3</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Pathological inputs could cause DoS through consumePhrase when parsing an email address according to RFC 5322.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-39836?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.3"><img alt="unspecified : CVE--2026--39836" src="https://img.shields.io/badge/CVE--2026--39836-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.3</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.26.3</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The Dial and LookupPort functions panic on Windows when provided with an input containing a NUL (0).
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-39826?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.3"><img alt="unspecified : CVE--2026--39826" src="https://img.shields.io/badge/CVE--2026--39826-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.3</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.26.3</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+If a trusted template author were to write a <script> tag containing an empty 'type' attribute or a 'type' attribute with an ASCII whitespace, the execution of the template would incorrectly escape any data passed into the <script> block.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-39825?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.3"><img alt="unspecified : CVE--2026--39825" src="https://img.shields.io/badge/CVE--2026--39825-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.3</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.26.3</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+ReverseProxy can forward queries containing parameters not visible to Rewrite functions.
+
+When used with a Rewrite function, or a Director function which parses query parameters, ReverseProxy sanitizes the forwarded request to remove query parameters which are not parsed by url.ParseQuery. ReverseProxy does not take ParseQuery's limit on the total number of query parameters (controlled by GODEBUG=urlmaxqueryparams=N) into account. This can permit ReverseProxy to forward a request containing a query parameter that is not visible to the Rewrite function.
+
+For example, the query "a1=x&a2=x&...&a10000=x&hidden=y" can forward the parameter "hidden=y" while hiding it from the proxy's Rewrite function.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-39823?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.3"><img alt="unspecified : CVE--2026--39823" src="https://img.shields.io/badge/CVE--2026--39823-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.3</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.26.3</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+CVE-2026-27142 fixed a vulnerability in which URLs were not correctly escaped inside of a <meta> tag's <content> attribute. If the URL content were to insert ASCII whitespaces around the '=' rune inside of the <content> attribute, the escaper would fail to similarly escape it, leading to XSS.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-39820?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.3"><img alt="unspecified : CVE--2026--39820" src="https://img.shields.io/badge/CVE--2026--39820-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.3</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.26.3</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Well-crafted inputs reaching ParseAddress, ParseAddressList, and ParseDate were able to trigger excessive CPU exhaustion and memory allocations.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-33814?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.3"><img alt="unspecified : CVE--2026--33814" src="https://img.shields.io/badge/CVE--2026--33814-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.3</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.26.3</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+When processing HTTP/2 SETTINGS frames, transport will enter an infinite loop of writing CONTINUATION frames if it receives a SETTINGS_MAX_FRAME_SIZE with a value of 0.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-33811?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.3"><img alt="unspecified : CVE--2026--33811" src="https://img.shields.io/badge/CVE--2026--33811-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.3</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.26.3</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+When using LookupCNAME with the cgo DNS resolver, a very long CNAME response can trigger a double-free of C memory and a crash.
 
 </blockquote>
 </details>
