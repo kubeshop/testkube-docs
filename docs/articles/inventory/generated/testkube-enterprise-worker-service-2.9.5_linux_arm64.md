@@ -3,160 +3,15 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:16779bc22fdbd4a0c74328e600b3376699903682ff91ae2be87c69525fdb0157</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 9" src="https://img.shields.io/badge/high-9-e25d68"/> <img alt="medium: 7" src="https://img.shields.io/badge/medium-7-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/low-2-fce1a9"/> <!-- unspecified: 0 --></td></tr>
-<tr><td>platform</td><td>linux/amd64</td></tr>
-<tr><td>size</td><td>58 MB</td></tr>
+<tr><td>digest</td><td><code>sha256:53b1dbcde8606451a2cfce15327d8fe575ec0822e768d24b4df10493a3e6925b</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/medium-4-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/low-2-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>platform</td><td>linux/arm64</td></tr>
+<tr><td>size</td><td>53 MB</td></tr>
 <tr><td>packages</td><td>327</td></tr>
 </table>
 </details></table>
 </details>
 
 <table>
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 5" src="https://img.shields.io/badge/H-5-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/M-3-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>stdlib</strong> <code>1.26.2</code> (golang)</summary>
-
-<small><code>pkg:golang/stdlib@1.26.2</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-42499?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.3"><img alt="high : CVE--2026--42499" src="https://img.shields.io/badge/CVE--2026--42499-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.3</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.26.3</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.030%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Pathological inputs could cause DoS through consumePhrase when parsing an email address according to RFC 5322.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-39836?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.3"><img alt="high : CVE--2026--39836" src="https://img.shields.io/badge/CVE--2026--39836-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.3</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.26.3</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.023%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-The Dial and LookupPort functions panic on Windows when provided with an input containing a NUL (0).
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-39820?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.3"><img alt="high : CVE--2026--39820" src="https://img.shields.io/badge/CVE--2026--39820-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.3</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.26.3</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.055%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Well-crafted inputs reaching ParseAddress, ParseAddressList, and ParseDate were able to trigger excessive CPU exhaustion and memory allocations.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-33814?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.3"><img alt="high : CVE--2026--33814" src="https://img.shields.io/badge/CVE--2026--33814-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.3</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.26.3</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.025%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-When processing HTTP/2 SETTINGS frames, transport will enter an infinite loop of writing CONTINUATION frames if it receives a SETTINGS_MAX_FRAME_SIZE with a value of 0.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-33811?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.3"><img alt="high : CVE--2026--33811" src="https://img.shields.io/badge/CVE--2026--33811-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.3</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.26.3</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.017%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-When using LookupCNAME with the cgo DNS resolver, a very long CNAME response can trigger a double-free of C memory and a crash.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-39826?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.3"><img alt="medium : CVE--2026--39826" src="https://img.shields.io/badge/CVE--2026--39826-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.3</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.26.3</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.016%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-If a trusted template author were to write a <script> tag containing an empty 'type' attribute or a 'type' attribute with an ASCII whitespace, the execution of the template would incorrectly escape any data passed into the <script> block.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-39823?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.3"><img alt="medium : CVE--2026--39823" src="https://img.shields.io/badge/CVE--2026--39823-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.3</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.26.3</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.014%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-CVE-2026-27142 fixed a vulnerability in which URLs were not correctly escaped inside of a <meta> tag's <content> attribute. If the URL content were to insert ASCII whitespaces around the '=' rune inside of the <content> attribute, the escaper would fail to similarly escape it, leading to XSS.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-39825?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.3"><img alt="medium : CVE--2026--39825" src="https://img.shields.io/badge/CVE--2026--39825-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.3</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.26.3</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.016%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-ReverseProxy can forward queries containing parameters not visible to Rewrite functions.
-
-When used with a Rewrite function, or a Director function which parses query parameters, ReverseProxy sanitizes the forwarded request to remove query parameters which are not parsed by url.ParseQuery. ReverseProxy does not take ParseQuery's limit on the total number of query parameters (controlled by GODEBUG=urlmaxqueryparams=N) into account. This can permit ReverseProxy to forward a request containing a query parameter that is not visible to the Rewrite function.
-
-For example, the query "a1=x&a2=x&...&a10000=x&hidden=y" can forward the parameter "hidden=y" while hiding it from the proxy's Rewrite function.
-
-</blockquote>
-</details>
-</details></td></tr>
-
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/go-git/go-git/v5</strong> <code>5.16.5</code> (golang)</summary>
 
@@ -230,8 +85,8 @@ The go-git maintainers thank @<!-- -->kq5y for finding and reporting this issue 
 <tr><td>Fixed version</td><td><code>5.18.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>4.7</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:N/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.053%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.057%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
