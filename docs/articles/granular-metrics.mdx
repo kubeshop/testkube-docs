@@ -1,0 +1,145 @@
+# Granular Metrics
+
+Granular metrics let Testkube store tool-specific measurements as named time series, so you can track more than
+workflow status, duration, and resource usage. They are useful for performance tests where the most important
+signals are inside the test report itself, such as k6 request duration percentiles or request counts.
+
+For example, a k6 workflow can publish `http_req_duration` percentiles, `http_reqs` counts, `checks` results,
+and iteration duration as individual metric series. Testkube stores those series with the workflow execution,
+then makes them available for Insights analysis across multiple executions.
+
+:::note
+Granular metrics are execution-level metric series. A k6 `summary.json` file contains aggregated values for one
+run, such as `avg`, `min`, `max`, `p(90)`, `p(95)`, `count`, and `rate`. Testkube stores those values per
+execution so you can compare them over time. It does not turn a k6 summary export into raw per-sample metrics
+from inside a single k6 run.
+:::
+
+## How Testkube Stores Granular Metrics
+
+When a workflow uploads a supported report, Testkube detects report metrics during post-processing and stores them
+as metric series. Each series has:
+
+- A source, such as `k6`.
+- A metric key, such as `http_req_duration_p95_ms`.
+- Optional identity fields for stable dimensions, such as k6 metric tags.
+- One value per workflow execution.
+
+The execution timestamp still comes from the workflow execution. This means a chart can show how a metric changes
+from run to run, while preserving the workflow, environment, status, and label filters you already use for
+Insights.
+
+## k6 Summary Integration
+
+k6 can export a machine-readable summary with the `--summary-export` flag. To make that summary available as
+granular metrics in Testkube:
+
+1. Export the summary JSON into an artifact directory.
+2. Include the JSON file in the workflow artifacts.
+3. Run the workflow normally.
+
+Testkube detects k6 summary JSON files during artifact post-processing and registers them as `k6.summary` reports.
+The control plane then ingests the report into granular metric series.
+
+```yaml showLineNumbers title="K6 workflow with summary export"
+kind: TestWorkflow
+apiVersion: testworkflows.testkube.io/v1
+metadata:
+  name: k6-summary-example
+  namespace: testkube
+spec:
+  content:
+    files:
+      - path: /data/example.js
+        content: |-
+          import http from "k6/http";
+          import { sleep } from "k6";
+
+          export default function () {
+            http.get("https://test.k6.io");
+            sleep(1);
+          }
+  steps:
+    - name: Run k6
+      workingDir: /data
+      run:
+        image: grafana/k6:1.1.0
+        shell: |
+          mkdir -p /data/artifacts
+          k6 run example.js \
+            --duration 30s \
+            --summary-export /data/artifacts/summary.json
+      artifacts:
+        workingDir: /data/artifacts
+        paths:
+          - summary.json
+```
+
+After the workflow finishes, the summary file remains available as a normal artifact, and Testkube stores the
+detected k6 metrics as granular series.
+
+## Metric Names
+
+Testkube normalizes k6 metric names and summary statistics so they are stable in Insights and API responses.
+Common examples include:
+
+| k6 summary field | Testkube metric key |
+| --- | --- |
+| `http_req_duration.values["p(95)"]` | `http_req_duration_p95_ms` |
+| `http_req_duration.values.avg` | `http_req_duration_avg_ms` |
+| `http_reqs.values.count` | `http_reqs_count` |
+| `http_reqs.values.rate` | `http_reqs_rate` |
+| `checks.values.passes` | `checks_passes` |
+| `checks.values.fails` | `checks_fails` |
+| `iteration_duration.values.avg` | `iteration_duration_avg_ms` |
+
+Timing metrics are stored in milliseconds. Counter and rate metrics keep their k6 summary values.
+
+## Tagged k6 Metrics
+
+k6 can emit tagged metric summaries, for example separate `http_req_duration` values for successful responses or
+custom tags. Testkube preserves stable tag dimensions as series identity fields. This lets you compare the same
+metric overall and for a tagged subset when the k6 summary contains those tagged metrics.
+
+For example, a tagged k6 summary metric can produce separate series for:
+
+- `http_req_duration_p95_ms` with no identity fields.
+- `http_req_duration_p95_ms` with an identity such as `expected_response=true`.
+
+Use tags intentionally. High-cardinality tags, such as unique URLs or request IDs, can create many metric series
+and make analysis harder.
+
+## Distributed k6 Workflows
+
+For distributed k6 workflows, each worker should write a unique summary filename and upload it as an artifact.
+This avoids workers overwriting each other's summary file.
+
+```yaml showLineNumbers title="Distributed k6 summary artifacts"
+run:
+  image: grafana/k6:1.1.0
+  shell: |
+    mkdir -p /data/artifacts
+    k6 run k6-smoke-test.js \
+      --vus {{ config.vus }} \
+      --duration {{ shellquote(config.duration) }} \
+      --execution-segment {{ index }}/{{ count }}:{{ index + 1 }}/{{ count }} \
+      --summary-export /data/artifacts/summary-worker-{{ index + 1 }}.json
+artifacts:
+  workingDir: /data/artifacts
+  paths:
+    - "*.json"
+```
+
+Each uploaded k6 summary report is ingested into granular metric series for the workflow execution.
+
+## Troubleshooting
+
+If k6 metrics do not appear in Insights:
+
+- Confirm that the k6 command includes `--summary-export`.
+- Confirm that the exported JSON file is included in `artifacts.paths`.
+- Use a `.json` file extension for the summary export.
+- Keep the summary file non-empty and in k6 summary JSON format.
+- Check the workflow execution artifacts to confirm the summary file was uploaded.
+
+The summary file can be uploaded alongside other artifacts, such as the k6 HTML dashboard report.

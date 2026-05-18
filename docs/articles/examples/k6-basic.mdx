@@ -9,7 +9,8 @@ Below is a simple workflow for executing an inline K6 test. You can paste this d
 sure to update the `name` and `namespace` for your environment if needed.
 
 - The `spec.content` property defines a simple k6 script which gets written to `/data/example.js`
-- the `spec.steps` property defines a single step that runs the test and uploads the created report.
+- The `spec.steps` property defines a single step that runs the test and uploads the created report.
+- The k6 command exports `summary.json`, which Testkube can ingest as [granular metrics](/articles/granular-metrics).
 
 <SimpleK6/>
 
