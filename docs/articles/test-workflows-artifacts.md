@@ -117,8 +117,13 @@ values as [Granular Metrics](/articles/granular-metrics). The original files rem
 Supported report artifacts include:
 
 - k6 `summary.json` exports created with `--summary-export`, registered as `k6.summary` reports.
+- Artillery JSON reports created with `-o <report-file>`, registered as `artillery.report`.
 - JMeter dashboard `statistics.json` files created with `-e -o <report-directory>`, registered as
   `jmeter.statistics` reports.
+
+For Artillery workflows, write the JSON report into an artifact directory. For example, a command such as
+`/home/node/artillery/bin/run run artillery-smoke-test.yaml -o /data/artifacts/artillery-report.json` creates an
+Artillery aggregate report that Testkube can detect when `/data/artifacts/**/*` is uploaded.
 
 For JMeter workflows, make sure the generated dashboard report directory is included in the step artifacts. For
 example, a command such as `jmeter -n -t test.jmx -l /data/artifacts/jtl-report.jtl -e -o /data/artifacts/report`

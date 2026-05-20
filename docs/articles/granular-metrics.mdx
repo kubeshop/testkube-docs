@@ -5,8 +5,9 @@ workflow status, duration, and resource usage. They are useful for performance t
 signals are inside the test report itself, such as k6 request duration percentiles or request counts.
 
 For example, a k6 workflow can publish `http_req_duration` percentiles, `http_reqs` counts, `checks` results,
-and iteration duration as individual metric series. A JMeter workflow can publish sample counts, error rates,
-response-time percentiles, throughput, and sent/received throughput from its dashboard `statistics.json` file.
+and iteration duration as individual metric series. An Artillery workflow can publish request counts, request rates,
+latency percentiles, and scenario duration from its JSON report. A JMeter workflow can publish sample counts, error
+rates, response-time percentiles, throughput, and sent/received throughput from its dashboard `statistics.json` file.
 Testkube stores those series with the workflow execution, then makes them available for Insights analysis across
 multiple executions.
 
@@ -21,7 +22,7 @@ them over time. It does not turn an aggregated report into raw per-sample metric
 When a workflow uploads a supported report, Testkube detects report metrics during post-processing and stores them
 as metric series. Each series has:
 
-- A source, such as `k6` or `jmeter`.
+- A source, such as `k6`, `artillery`, or `jmeter`.
 - A metric key, such as `http_req_duration_p95_ms`.
 - Optional identity fields for stable dimensions, such as k6 metric tags.
 - One value per workflow execution.
@@ -78,6 +79,51 @@ spec:
 
 After the workflow finishes, the summary file remains available as a normal artifact, and Testkube stores the
 detected k6 metrics as granular series.
+
+## Artillery Report Integration
+
+Artillery can export a machine-readable JSON report with the `-o` flag. To make that report available as granular
+metrics in Testkube:
+
+1. Export the Artillery report JSON into an artifact directory.
+2. Include the JSON file in the workflow artifacts.
+3. Run the workflow normally.
+
+Testkube detects Artillery JSON files with numeric aggregate metrics under `counters`, `rates`, `summaries`, or
+`histograms` during artifact post-processing and registers them with the `artillery.report` report type. The control
+plane then ingests the report into granular metric series.
+
+```yaml showLineNumbers title="Artillery workflow with JSON report"
+kind: TestWorkflow
+apiVersion: testworkflows.testkube.io/v1
+metadata:
+  name: artillery-report-example
+  namespace: testkube
+spec:
+  content:
+    git:
+      uri: https://github.com/kubeshop/testkube
+      revision: main
+      paths:
+        - test/artillery/artillery-smoke-test.yaml
+  container:
+    workingDir: /data/repo/test/artillery
+  steps:
+    - name: Run Artillery
+      run:
+        image: artilleryio/artillery:2.0.9
+        shell: |
+          mkdir -p /data/artifacts
+          /home/node/artillery/bin/run run artillery-smoke-test.yaml \
+            -o /data/artifacts/artillery-report.json
+      artifacts:
+        workingDir: /data/artifacts
+        paths:
+          - artillery-report.json
+```
+
+After the workflow finishes, the report file remains available as a normal artifact, and Testkube stores the
+detected Artillery aggregate metrics as granular series.
 
 ## JMeter Statistics Integration
 
@@ -143,6 +189,33 @@ Common examples include:
 
 Timing metrics are stored in milliseconds. Counter and rate metrics keep their k6 summary values.
 
+## Artillery Metric Names
+
+Testkube normalizes Artillery aggregate metric names and statistics into stable metric keys. Common examples
+include:
+
+| Artillery report field | Testkube metric key |
+| --- | --- |
+| `aggregate.counters["http.requests"]` | `http_requests` |
+| `aggregate.counters["vusers.created"]` | `vusers_created` |
+| `aggregate.rates["http.request_rate"]` | `http_request_rate` |
+| `aggregate.summaries["http.response_time"].min` | `http_response_time_min_ms` |
+| `aggregate.summaries["http.response_time"].p95` | `http_response_time_p95_ms` |
+| `aggregate.histograms["http.response_time"].p99` | `http_response_time_p99_ms` |
+| `aggregate.histograms["vusers.session_length"].p99` | `vusers_session_length_p99` |
+| `aggregate.scenariosCreated` | `scenarios_created` |
+| `aggregate.requestsCompleted` | `requests_completed` |
+| `aggregate.codes["200"]` | `codes_200` |
+| `aggregate.errors.ETIMEDOUT` | `errors_etimedout` |
+| `aggregate.latency.p95` | `latency_p95_ms` |
+| `aggregate.rps.mean` | `rps_mean` |
+| `aggregate.scenarioDuration.p95` | `scenario_duration_p95_ms` |
+
+Latency, response-time, and duration metrics are stored in milliseconds when they include a statistic, such as
+`min`, `max`, `median`, `p95`, or `p99`. Counter and rate metrics keep their Artillery report values.
+The control plane also understands common Artillery aggregate fields such as `latency`, `rps`, and
+`scenarioDuration` when those fields are present in a report.
+
 ## JMeter Metric Names
 
 Testkube normalizes JMeter dashboard statistics into stable metric keys. Common examples include:
@@ -203,6 +276,9 @@ artifacts:
 
 Each uploaded k6 summary report is ingested into granular metric series for the workflow execution.
 
+For distributed Artillery workflows, each worker should write a unique JSON report filename and upload those files as
+artifacts. Testkube detects each uploaded Artillery report independently.
+
 ## Troubleshooting
 
 If k6 metrics do not appear in Insights:
@@ -214,6 +290,15 @@ If k6 metrics do not appear in Insights:
 - Check the workflow execution artifacts to confirm the summary file was uploaded.
 
 The summary file can be uploaded alongside other artifacts, such as the k6 HTML dashboard report.
+
+If Artillery metrics do not appear in Insights:
+
+- Confirm that the Artillery command includes `-o <report-file>`.
+- Confirm that the exported JSON file is included in `artifacts.paths`.
+- Use a `.json` file extension for the report.
+- Keep the report non-empty and in Artillery aggregate JSON format, with numeric aggregate metrics under `counters`,
+  `rates`, `summaries`, or `histograms`.
+- Check the workflow execution artifacts to confirm the report file was uploaded.
 
 If JMeter metrics do not appear in Insights:
 

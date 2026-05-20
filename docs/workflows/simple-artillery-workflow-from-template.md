@@ -22,5 +22,9 @@ spec:
       name: official/artillery/v1
       config:
         version: 2.0.9
-        run: "artillery run artillery-smoke-test.yaml"
+        run: "mkdir -p /data/artifacts && artillery run artillery-smoke-test.yaml -o /data/artifacts/artillery-report.json"
+    artifacts:
+      workingDir: /data/artifacts
+      paths:
+      - '*'
 ```
