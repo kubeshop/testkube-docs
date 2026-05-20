@@ -17,6 +17,12 @@ The workflow runs JMeter with `-e -o /data/artifacts/report`, which generates th
 dashboard includes `report/statistics.json`; when that file is uploaded as an artifact, Testkube can detect it as
 a `jmeter.statistics` report and ingest its aggregated values as [Granular Metrics](/articles/granular-metrics).
 
+The JMeter statistics report includes response-time percentile slots as `response_time_percentile_1_ms`,
+`response_time_percentile_2_ms`, and `response_time_percentile_3_ms`. By default, JMeter maps these slots to
+the 90th, 95th, and 99th percentiles. If your JMeter configuration overrides `aggregate_rpt_pct1`,
+`aggregate_rpt_pct2`, or `aggregate_rpt_pct3`, the same Testkube metric keys represent those configured
+percentile slots instead.
+
 After execution, you can see the output from the test executions under the executions panel tabs:
 
 <Tabs>
