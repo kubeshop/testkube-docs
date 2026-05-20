@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:56d35c5c4ca66e419e086a15b50fe99288ca27e0a75e3a212a2a992ace50428f</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 6" src="https://img.shields.io/badge/high-6-e25d68"/> <img alt="medium: 5" src="https://img.shields.io/badge/medium-5-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/low-2-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>digest</td><td><code>sha256:56d35c5c4ca66e419e086a15b50fe99288ca27e0a75e3a212a2a992ace50428f</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 6" src="https://img.shields.io/badge/high-6-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/medium-6-fbb552"/> <img alt="low: 3" src="https://img.shields.io/badge/low-3-fce1a9"/> <!-- unspecified: 0 --></td></tr>
 <tr><td>platform</td><td>linux/arm64</td></tr>
 <tr><td>size</td><td>72 MB</td></tr>
 <tr><td>packages</td><td>342</td></tr>
@@ -273,7 +273,7 @@ Mountpoint creation is now scoped to the container root using `os.Root` (Go 1.24
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/go-git/go-git/v5</strong> <code>5.16.5</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/M-3-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/go-git/go-git/v5</strong> <code>5.16.5</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/go-git/go-git/v5@5.16.5</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2026-45022?s=github&n=v5&ns=github.com%2Fgo-git%2Fgo-git&t=golang&vr=%3C5.19.0"><img alt="high 7.0: CVE--2026--45022" src="https://img.shields.io/badge/CVE--2026--45022-lightgrey?label=high%207.0&labelColor=e25d68"/></a> <i>Incorrect Behavior Order: Validate Before Canonicalize</i>
@@ -303,6 +303,38 @@ Users should upgrade to a patched version in order to mitigate this vulnerabilit
 Thanks to @<!-- -->bugbunny-research (https://bugbunny.ai/) for reporting this to `sigstore/gitsign`, and to @<!-- -->wlynch, @<!-- -->patzielinski and @<!-- -->adityasaky for coordinating the disclosure with the `go-git` project. :bow: :1st_place_medal: 
 
 Thanks to @<!-- -->wayphinder for reporting this to the `go-git` project. :bow:
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-45571?s=github&n=v5&ns=github.com%2Fgo-git%2Fgo-git&t=golang&vr=%3C%3D5.19.0"><img alt="medium 5.4: CVE--2026--45571" src="https://img.shields.io/badge/CVE--2026--45571-lightgrey?label=medium%205.4&labelColor=fbb552"/></a> <i>Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=5.19.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.19.1</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.4</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:L</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+A path validation issue in `go-git` could allow crafted repository data to affect files outside the intended checkout target, including the repository's `.git` directory.
+
+These validations were introduced in upstream Git years ago, so the vulnerability arose from go-git drifting from those checks. Some attack vectors were platform-specific: certain payloads affected only Windows users, others affected only macOS users, and some applied across all supported platforms.
+
+Using non-descendant `go-billy` filesystem instances, or different filesystem types, for the `Storer` and `Worktree` may provide some isolation against `.git` directory manipulation. For example, users that store the `.git` directory through `memfs` while using `osfs` for the worktree are not affected by this vulnerability in the main repository, because repository metadata is not materialized inside the worktree filesystem.
+
+However, this isolation does not necessarily apply when the repository contains submodules, since submodule dotgit directories may still be represented or materialized within the worktree context.
+
+It is important to note that exploitation requires a maliciously crafted repository payload. Users should always exercise caution when interacting with repositories or Git servers they do not trust.
+
+### Patches
+Users should upgrade to a patched version in order to mitigate this vulnerability. Versions prior to `v5` are likely to be affected, users are recommended to upgrade to a supported go-git version.
+
+### Credits
+Thanks to @<!-- -->kodareef5, @<!-- -->AyushParkara and @<!-- -->N0zoM1z0 for reporting this to the go-git project in three separate reports. 🙇
 
 </blockquote>
 </details>
@@ -406,6 +438,39 @@ go-git maintainers thank @<!-- -->kq5y for finding and reporting this issue priv
 
 </blockquote>
 </details>
+
+<a href="https://scout.docker.com/v/CVE-2026-45570?s=github&n=v5&ns=github.com%2Fgo-git%2Fgo-git&t=golang&vr=%3C%3D5.19.0"><img alt="low 2.3: CVE--2026--45570" src="https://img.shields.io/badge/CVE--2026--45570-lightgrey?label=low%202.3&labelColor=fce1a9"/></a> <i>Improper Encoding or Escaping of Output</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=5.19.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.19.1</code></td></tr>
+<tr><td>CVSS Score</td><td><code>2.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:N/VI:N/VA:N/SC:L/SI:L/SA:L</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+
+`go-git`'s SSH transport constructs the remote exec command by wrapping the repository path in single quotes without escaping single quotes embedded inside the path. This diverges from canonical Git, which shell-quotes the path through `sq_quote_buf` so that an embedded `'` becomes the `'\''` close-escape-reopen sequence and the whole path round-trips as a single quoted argument.
+
+A repository path containing a single quote can therefore break out of the quoted region in the exec command and be appended as additional shell tokens. On SSH servers that evaluate the exec command through a shell (for example a user account whose login shell is `/bin/sh` or `/bin/bash`, or a `ForceCommand` wrapper that re-evaluates `$SSH_ORIGINAL_COMMAND`), those additional tokens execute in that account's command-execution context. SSH servers that tokenize the exec command without shell evaluation, including the canonical `git-shell` setup, are not affected.
+
+The vulnerable behaviour is on the SSH server side, not in `go-git`: the same bytes can be produced by any SSH client. The change in `go-git` is defense-in-depth that restores parity with canonical Git's wire format and prevents `go-git` from being a vehicle for reaching shell-evaluating servers through attacker-influenced repository paths.
+
+### Patches
+
+Users should upgrade to a patched version in order to mitigate this issue. The fix ports `sq_quote_buf` from canonical Git into `go-git`'s SSH transport so that the wire output is byte-identical to what `git` itself would send for the same input.
+
+Versions prior to `v5` are likely to be affected, users are recommended to upgrade to a supported go-git version.
+
+### Credit
+
+Thanks to @<!-- -->N0zoM1z0 for reporting this to the `go-git` project. :bow:
+
+</blockquote>
+</details>
 </details></td></tr>
 
 <tr><td valign="top">
@@ -479,7 +544,7 @@ Thanks to @<!-- -->faran66 for finding and reporting this issue privately to the
 <tr><td>Affected range</td><td><code>>=19.03.0+incompatible</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.023%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
