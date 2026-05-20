@@ -32,3 +32,13 @@ The uploaded report is available in the Artifacts tab:
 </TabItem>
 </Tabs>
 
+## JMeter statistics in Test Insights
+
+When the workflow uploads JMeter's generated `report/statistics.json` file, Testkube processes it as a native JMeter statistics report for [Test Insights](/articles/test-insights).
+The report includes response-time percentile slots from JMeter as:
+
+- `response_time_percentile_1_ms`
+- `response_time_percentile_2_ms`
+- `response_time_percentile_3_ms`
+
+By default, JMeter maps these slots to the 90th, 95th, and 99th percentiles. If your JMeter configuration overrides `aggregate_rpt_pct1`, `aggregate_rpt_pct2`, or `aggregate_rpt_pct3`, the same Testkube metric keys represent those configured percentile slots instead.
