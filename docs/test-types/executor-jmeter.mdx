@@ -15,8 +15,8 @@ Parameters in `<>` are calculated at test execution:
 * `<entryPoint>` - The entrypoint for the JMeter runner set by the environment variable `ENTRYPOINT_CMD`, defaults to the file in `contrib/executor/jmeter/scripts/entrypoint.sh`.
 * `<logFile>` - JMeter log path
 * `<runPath>` - path to the test files
-* `<jtlFile>` - path to the JTL report file
-* `<reportFile>` - path to the JMeter dashboard report directory
+* `<jtlFile>` - path to the jrl report file
+* `<reportFile>` - path to the report
 * `<envVars>` - list of environment variables
 
 [See more at "Redefining the Prebuilt Executor Command and Arguments" on the Creating Test page.](../articles/creating-tests.mdx#redefining-the-prebuilt-executor-command-and-arguments)
@@ -167,14 +167,8 @@ $ kubectl testkube run test -f jmeter-test --args '-LsutHost=https://staging.kub
 ### **JMeter Test Results**
 
 A JMeter test will be successful in Testkube when all checks and thresholds are successful. In the case of an error, the test will have `failed` status,
-and the JMeter executor is configured to store the JTL report and dashboard report after the test run. You can get
-the files from the "Artifacts" tab in the execution results in the Testkube Dashboard, or download them with the
-`testkube get artifacts EXECUTION_ID` command.
-
-When the JMeter command includes `-e -o <report-directory>`, JMeter creates a dashboard report that includes
-`statistics.json`. If that file is uploaded as an artifact, Testkube can detect it as a `jmeter.statistics` report
-and ingest sample counts, error rates, response-time aggregates and percentiles, throughput, and sent/received
-throughput as [Granular Metrics](/articles/granular-metrics).
+and the JMeter executor is configured to store the `report.jtl` file after the test run. You can get the file from the "Artifacts" tab in the execution results in the Testkube Dashboard, 
+or download it with the `testkube get artifacts EXECUTION_ID` command.
 
 ### **JMeter Memory Consumption**
 
