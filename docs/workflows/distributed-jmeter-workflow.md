@@ -41,6 +41,7 @@ spec:
     run:
       image: alpine/jmeter:5.6
       shell: |
+        mkdir -p /data/artifacts
         jmeter -n \
           -X -Jserver.rmi.ssl.disable=true -Jclient.rmi.localport=7000 \
           -R {{ services.slave.*.ip }} \

@@ -139,7 +139,7 @@ The `container.image` field specifies the Docker image that will execute your st
 ```yaml
 steps:
   - name: Run tests
-    shell: jmeter -n -t jmeter-executor-smoke.jmx -o /data/artifacts/report -l /data/artifacts/jtl-report.jtl -e
+    shell: mkdir -p /data/artifacts && jmeter -n -t jmeter-executor-smoke.jmx -o /data/artifacts/report -l /data/artifacts/jtl-report.jtl -e
     container:
       image: alpine/jmeter:5.6
 ```

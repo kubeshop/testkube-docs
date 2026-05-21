@@ -155,6 +155,7 @@ spec:
   steps:
     - name: Run JMeter
       shell: |
+        mkdir -p /data/artifacts
         jmeter -n \
           -t jmeter-executor-smoke.jmx \
           -l /data/artifacts/jtl-report.jtl \
