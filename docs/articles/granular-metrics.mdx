@@ -158,6 +158,7 @@ spec:
         mkdir -p /data/artifacts
         jmeter -n \
           -t jmeter-executor-smoke.jmx \
+          -j /data/artifacts/jmeter.log \
           -l /data/artifacts/jtl-report.jtl \
           -e \
           -o /data/artifacts/report

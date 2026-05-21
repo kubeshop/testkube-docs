@@ -46,6 +46,7 @@ spec:
           -X -Jserver.rmi.ssl.disable=true -Jclient.rmi.localport=7000 \
           -R {{ services.slave.*.ip }} \
           -t jmeter-executor-smoke.jmx \
+          -j /data/artifacts/jmeter.log \
           -o /data/artifacts/report \
           -l /data/artifacts/jtl-report.jtl -e
     artifacts:
