@@ -123,6 +123,8 @@ you can select one of the following:
 - **Memory Usage** - use this to analyze Memory consumption of your Workflow executions.
 - **Network Usage** - use this to analyze Network usage of your Workflow executions.
 - **Disk Usage** - use this to analyze Disk usage of your Workflow executions.
+- **Granular report metrics** - use grouped custom report metrics from supported performance reports, such as
+  [k6, Artillery, and JMeter granular metrics](/articles/granular-metrics).
 
 :::tip
 Read more about Resource Metric Insights at [Resource Aggregates in Insights](/articles/resource-metrics#resource-aggregates-in-insights).
@@ -198,4 +200,3 @@ The pass/fail stats shows details about workflow executions that failed or passe
 These analysis are useful to quickly understand if certain workflows need attention.
 
 ![Test Insights - Efficiency Quadrant Analysis](images/insights-pass-fail.jpg)
-

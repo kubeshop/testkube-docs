@@ -31,6 +31,34 @@ The execution timestamp still comes from the workflow execution. This means a ch
 from run to run, while preserving the workflow, environment, status, and label filters you already use for
 Insights.
 
+## Granular Metrics in Insights
+
+Granular metrics appear in the Test Insights time series measure picker as grouped report metrics. The selected
+measure remains the underlying metric key, such as `http_req_duration_p95_ms` or `sample_count`; the group is only
+used to make the picker easier to browse.
+
+Performance-oriented report metrics are grouped by what the metric describes:
+
+| Insights group | Example metric keys |
+| --- | --- |
+| Request Latency | `http_req_duration_p95_ms`, `response_time_mean_ms`, `latency_p99_ms` |
+| Request Throughput | `http_reqs_rate`, `http_request_rate`, `rps_mean` |
+| Traffic Volume | `data_received_count`, `data_sent_count`, `received_kbytes_per_sec` |
+| Request Errors | `http_req_failed_rate`, `error_count`, `errors_etimedout` |
+| Request Volume | `http_reqs_count`, `sample_count`, `requests_completed` |
+| Virtual Users | `vus`, `vusers_created`, `virtual_users` |
+| Checks & Assertions | `checks_passes`, `checks_fails`, `assertions_failed` |
+| Custom Report Metrics | Any detected report metric that does not match one of the performance groups |
+
+These groups are separate from resource metrics such as CPU, memory, disk, and legacy Network Usage. For example,
+network traffic reported by a load test appears under **Traffic Volume**, while pod or container network resource
+metrics remain under the resource metric groups.
+
+Insights chooses a default aggregate based on the selected metric key. Count-style metrics usually default to
+**sum**, while latency, rate, percentage, throughput, and byte-rate metrics default to **maximum** so the first chart
+highlights the highest observed value in each time bucket. You can still select another available aggregate when a
+different view is more useful.
+
 ## k6 Summary Integration
 
 k6 can export a machine-readable summary with the `--summary-export` flag. To make that summary available as
