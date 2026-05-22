@@ -131,7 +131,7 @@ FROM ${ALPINE_IMAGE}
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.6-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.6-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.022%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.023%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
@@ -835,6 +835,36 @@ FROM ${ALPINE_IMAGE}
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>ssl_client</strong> <code>1.37.0-r30</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/ssl_client@1.37.0-r30?arch=x86_64&distro=alpine-3.23.3&upstream=busybox</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (29:29)
+FROM ${ALPINE_IMAGE}
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-60876?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D1.37.0-r30"><img alt="medium : CVE--2025--60876" src="https://img.shields.io/badge/CVE--2025--60876-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=1.37.0-r30</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.051%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/gofiber/fiber/v2</strong> <code>2.52.12</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/gofiber/fiber/v2@2.52.12</code></small><br/>
@@ -993,36 +1023,6 @@ HTML sink enables XSS
 curl -s 'http://127.0.0.1:3000/api/user?name=<script>alert(document.domain)</script>' -H 'Accept: text/html'
 <p>{1 <script>alert(document.domain)</script>}</p>
 ```
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>ssl_client</strong> <code>1.37.0-r30</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/ssl_client@1.37.0-r30?arch=x86_64&distro=alpine-3.23.3&upstream=busybox</code></small><br/>
-
-```dockerfile
-# api-server.Dockerfile (29:29)
-FROM ${ALPINE_IMAGE}
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2025-60876?s=alpine&n=busybox&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D1.37.0-r30"><img alt="medium : CVE--2025--60876" src="https://img.shields.io/badge/CVE--2025--60876-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=1.37.0-r30</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.051%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
 
 </blockquote>
 </details>
