@@ -164,17 +164,4 @@ testkube-api:
     secretKeySecretAccessKey: secretAccessKey
 ```
 
-## Migration from MinIO to SeaweedFS
-
-If you are switching an existing installation from MinIO to SeaweedFS, include a migration step for artifact data.
-
-1. Keep your existing MinIO deployment running (source of truth during migration).
-2. Deploy SeaweedFS and validate S3 connectivity/authentication.
-3. Run a one-time migration job to copy objects from MinIO bucket(s) to SeaweedFS bucket(s).
-4. Verify artifact read/write in Testkube.
-5. Switch `global.storageProvider` to `seaweedfs` and disable MinIO.
-
-:::note
-For large datasets, run migration in a maintenance window and monitor pod resources during copy.
-:::
 
