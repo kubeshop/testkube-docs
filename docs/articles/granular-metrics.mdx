@@ -69,8 +69,8 @@ Use this as a rule of thumb:
 
 | Report source | Common identity fields | Notes |
 | --- | --- | --- |
-| k6 summary | Scenario, k6 metric tags | k6 only writes tagged submetrics to the summary when the script requests them, usually through thresholds. Global metrics such as total received bytes or max VUs may not have a scenario identity. |
-| Artillery report | Usually workflow-level aggregate metrics | Standard Artillery JSON reports expose aggregate counters, rates, summaries, and endpoint-shaped plugin metrics. A named Artillery scenario is useful test metadata, but the exported aggregate report does not guarantee scenario- or transaction-scoped latency/request metrics. |
+| k6 summary | Scenario, Endpoint, k6 metric tags | k6 only writes tagged submetrics to the summary when the script requests them, usually through thresholds. Global metrics such as total received bytes or max VUs may not have scenario or endpoint identity. |
+| Artillery report | Scenario, Transaction | Scenario identities come from named Artillery scenarios. Transaction identities come from endpoint-level metrics when the report includes them. Other aggregate metrics remain workflow-level when the report does not include scenario or transaction context. |
 | JMeter statistics | Transaction | JMeter dashboard statistics are keyed by transaction label, including `Total`. |
 
 If an optional segment or filter returns no series, check the uploaded report first. It usually means that the
@@ -185,9 +185,12 @@ For example, a tagged k6 summary metric can produce separate series for:
 - `http_req_duration_p95_ms` with an identity such as `expected_response=true`.
 - `http_req_duration_p95_ms` with `scenario=homepage` or `scenario=docs`, when the script defines named scenarios
   and asks k6 to include those scenario-tagged submetrics in the summary.
+- `http_req_duration_p95_ms` with `endpoint=test-workflow-with-executions-list`, when the script tags requests by
+  endpoint and asks k6 to include those endpoint-tagged submetrics in the summary.
 
-k6 does not include every possible tag combination in `summary.json` automatically. If you need scenario-level
-series in Insights, define named scenarios and add thresholds for the metric/tag combinations you want to chart:
+k6 does not include every possible tag combination in `summary.json` automatically. If you need scenario-level or
+endpoint-level series in Insights, define the tag values and add thresholds for the metric/tag combinations you want
+to chart.
 
 ```js showLineNumbers title="k6 scenario-tagged summary metrics"
 export const options = {
@@ -206,6 +209,52 @@ export const options = {
   },
 };
 ```
+
+For endpoint-level metrics, tag the request and add a threshold for that endpoint tag. The tag key can be any stable
+name, but `endpoint` is useful for API and UI performance tests because it lets Insights split latency by logical
+operation instead of by raw URL.
+
+```js showLineNumbers title="k6 endpoint-tagged summary metrics"
+import http from "k6/http";
+import { check } from "k6";
+
+export const options = {
+  thresholds: {
+    "http_req_duration{endpoint:test-workflow-with-executions-list}": ["p(95)<1500"],
+    "http_reqs{endpoint:test-workflow-with-executions-list}": ["count>0"],
+    "http_req_failed{endpoint:test-workflow-with-executions-list}": ["rate<0.5"],
+  },
+};
+
+export default function () {
+  const res = http.get("https://api.example.test/test-workflow-with-executions", {
+    tags: { endpoint: "test-workflow-with-executions-list" },
+  });
+
+  check(res, { "status is 200": r => r.status === 200 });
+}
+```
+
+The exported `summary.json` then contains tagged metrics such as:
+
+```json title="summary.json excerpt"
+{
+  "metrics": {
+    "http_req_duration{endpoint:test-workflow-with-executions-list}": {
+      "avg": 73.29462443521597,
+      "min": 42.533486,
+      "med": 57.999752,
+      "max": 649.471687,
+      "p(90)": 109.167417,
+      "p(95)": 131.830345
+    }
+  }
+}
+```
+
+Testkube stores that as metric key `http_req_duration_p95_ms` with identity
+`endpoint=test-workflow-with-executions-list`, so the same measure can be segmented or filtered by **Endpoint** in
+Insights.
 
 Use tags intentionally. High-cardinality tags, such as unique URLs or request IDs, can create many metric series
 and make analysis harder.
@@ -311,6 +360,10 @@ include:
 | `aggregate.latency.p95` | `latency_p95_ms` |
 | `aggregate.rps.mean` | `rps_mean` |
 | `aggregate.scenarioDuration.p95` | `scenario_duration_p95_ms` |
+| `aggregate.counters["vusers.created_by_name.homepage"]` | `vusers_created` with `scenario=homepage` |
+| `aggregate.scenarioCounts.homepage` | `scenario_counts` with `scenario=homepage` |
+| `aggregate.summaries["plugins.metrics-by-endpoint.response_time.//"].p95` | `http_response_time_p95_ms` with `transaction=/` |
+| `aggregate.counters["plugins.metrics-by-endpoint.//.codes.200"]` | `http_codes_200` with `transaction=/` |
 
 Latency, response-time, and duration metrics are stored in milliseconds when they include a statistic, such as
 `min`, `max`, `median`, `p95`, or `p99`. Counter and rate metrics keep their Artillery report values.
@@ -319,14 +372,30 @@ The control plane also understands common Artillery aggregate fields such as `la
 
 ### Artillery Segmentation
 
-Artillery scenario definitions can have names, and those names are useful for keeping the script readable and for
-running a specific scenario with Artillery. However, the standard JSON report exported with `-o` is primarily an
-aggregate report. In current Testkube ingestion, Artillery metrics should be treated as workflow-level report
-metrics unless the uploaded report contains an explicit stable identity that Testkube can store.
+Artillery metrics can use **Scenario** and **Transaction** as identity fields when the uploaded report includes
+those dimensions. This lets Insights split or filter Artillery report metrics by the logical scenario or endpoint
+that produced the measurement.
 
-For Insights boards, this means Artillery latency, request rate, request volume, and error charts should usually be
-segmented by workflow or left unsegmented. Do not expect **Scenario** or **Transaction** filter values for Artillery
-metrics unless your report format actually includes those dimensions.
+Scenario identities are created from named Artillery scenarios. For example, the following scenario name can appear
+in the JSON report as `vusers.created_by_name.homepage`, and Testkube stores the name as `scenario=homepage`:
+
+```yaml showLineNumbers title="Named Artillery scenario"
+scenarios:
+  - name: homepage
+    flow:
+      - get:
+          url: "/"
+```
+
+Transaction identities are created from endpoint-level Artillery metrics, such as
+`plugins.metrics-by-endpoint.response_time.//` and `plugins.metrics-by-endpoint.//.codes.200`. Testkube stores the
+endpoint as the transaction identity, so the root endpoint `//` is shown as `transaction=/`.
+
+Scenario and transaction identities are optional per metric. Artillery aggregate metrics that do not carry scenario
+or transaction context are still stored as workflow-level series. For example, global `http.response_time` values are
+available as overall latency metrics, while `plugins.metrics-by-endpoint.response_time.<endpoint>` values can be
+segmented by Transaction. If a Scenario or Transaction filter returns no series for a selected Artillery metric, check
+whether the uploaded report contains that identity for the metric key you are charting.
 
 ### Distributed Artillery Workflows
 
