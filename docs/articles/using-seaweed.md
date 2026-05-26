@@ -1,11 +1,171 @@
 # Using Seaweed
 
-This guide explains how to run Testkube with embedded SeaweedFS as the S3-compatible storage backend for artifacts.
+This guide explains how to run the **Testkube On-Prem Control Plane** with embedded SeaweedFS as the S3-compatible storage backend.
+
+## Scope
+
+This page is focused on the `testkube-enterprise` Helm chart.
+
+- Applies to: On-Prem Control Plane deployments (Enterprise chart).
+- Not covered here: Standalone Agent (OSS) storage setup.
 
 ## Overview
 
-By default, Testkube uses embedded MinIO for object storage.  
-With SeaweedFS support, you can switch the embedded storage provider while keeping the same S3-based artifact flow.
+By default, the Enterprise chart uses embedded MinIO for object storage.
+SeaweedFS can be enabled as an embedded S3-compatible alternative with the same artifact and log storage flow.
+
+At a minimum, switch these toggles:
+
+- `minio.enabled: false`
+- `seaweedfs.enabled: true`
+- `global.storage.provider: seaweedfs`
+- `global.storage.endpoint: <seaweedfs-s3-endpoint>`
+
+## Enterprise configuration (embedded SeaweedFS)
+
+Use this as the baseline values override for `testkube-enterprise`:
+
+```yaml
+minio:
+  enabled: false
+  customIngress:
+    enabled: false
+
+seaweedfs:
+  enabled: true
+  filer:
+    s3:
+      enabled: true
+      enableAuth: true
+
+global:
+  storage:
+    provider: seaweedfs
+    endpoint: "testkube-seaweedfs-s3.testkube.svc.cluster.local:8333"
+    outputsBucket: "testkube-cloud-outputs"
+    secure: false
+    skipVerify: false
+    # Use inline access key/secret from global.storage for SeaweedFS auth.
+    credsSecretRef: ""
+
+testkube-cloud-api:
+  api:
+    minio:
+      signing:
+        hostname: "testkube-seaweedfs-s3.testkube.svc.cluster.local:8333"
+        secure: false
+
+testkube-agent:
+  testkube-api:
+    nats:
+      enabled: false
+    minio:
+      enabled: false
+
+testkube-worker-service:
+  additionalEnv:
+    # `USE_MINIO` here means "use S3-compatible storage driver", not "deploy embedded MinIO".
+    USE_MINIO: true
+```
+
+## TLS configuration
+
+If SeaweedFS S3 is exposed over HTTPS, enable TLS in both storage and signing settings.
+
+### Public CA certificate
+
+```yaml
+global:
+  storage:
+    endpoint: "testkube-seaweedfs-filer.testkube.svc.cluster.local:8443"
+    secure: true
+    skipVerify: false
+```
+
+### Private or self-signed CA
+
+1. Create a secret with your CA certificate:
+
+```bash
+kubectl -n testkube create secret generic seaweed-ca \
+  --from-file=ca.crt=./ca.crt
+```
+
+2. Reference it in values:
+
+```yaml
+global:
+  customCaSecretRef: seaweed-ca
+  customCaSecretKey: ca.crt
+  storage:
+    endpoint: "testkube-seaweedfs-filer.testkube.svc.cluster.local:8443"
+    secure: true
+    skipVerify: false
+    accessKeyId: "testkube-enterprise"
+    secretAccessKey: "t3stkub3-3nt3rpr1s3"
+
+seaweedfs:
+  enabled: true
+  global:
+    seaweedfs:
+      enableSecurity: true
+  filer:
+    s3:
+      enabled: true
+      enableAuth: true
+      port: 8333
+      httpsPort: 8443
+      existingConfigSecret: testkube-seaweedfs-s3-config
+```
+
+## Credentials
+
+You can provide S3 credentials inline under `global.storage` or from an existing secret via `global.storage.credsSecretRef`.
+
+For production, use Kubernetes secrets and avoid storing secrets directly in values files.
+
+## Install or upgrade
+
+```bash
+helm upgrade --install testkube testkube-enterprise/testkube-enterprise \
+  -n testkube --create-namespace \
+  -f values.yaml
+```
+
+If you maintain a separate Seaweed override, include both files:
+
+```bash
+helm upgrade --install testkube testkube-enterprise/testkube-enterprise \
+  -n testkube --create-namespace \
+  -f values.yaml \
+  -f values-seaweedfs-embedded.yaml
+```
+
+## Verify SeaweedFS is in use
+
+1. Confirm SeaweedFS components are running:
+
+```bash
+kubectl get pods -n testkube | grep seaweed
+```
+
+2. Confirm storage settings on the API deployment:
+
+```bash
+kubectl get deploy testkube-enterprise-api -n testkube -o yaml | grep STORAGE_ -A4
+```
+
+3. Confirm signing endpoint points to Seaweed:
+
+```bash
+kubectl get deploy testkube-enterprise-api -n testkube -o yaml | grep MINIO_SIGNING_ -A2
+```
+
+## Notes
+
+- Keep `testkube-worker-service.additionalEnv.USE_MINIO=true` because the worker uses the S3-compatible storage integration path.
+- Disable embedded MinIO whenever SeaweedFS is the active storage backend.
+- Set `global.storage.endpoint` to a reachable Seaweed S3 service address from control-plane pods.
 
 ## On-Prem Control Plane (OSS chart)
 
@@ -163,5 +323,4 @@ testkube-api:
     secretNameSecretAccessKey: testkube-storage-creds
     secretKeySecretAccessKey: secretAccessKey
 ```
-
 
