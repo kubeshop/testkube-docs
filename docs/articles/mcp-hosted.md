@@ -21,7 +21,7 @@ This is the easiest way to get started with the Testkube MCP Server - no local i
 
 - **Access to a Testkube Environment** - You need an active Testkube organization and environment
 - **API Token** - A valid Testkube API token with appropriate permissions
-- **An AI tool that supports MCP with SSE transport** - Such as Claude Desktop, Cursor, VS Code with GitHub Copilot, or custom MCP clients
+- **An AI tool that supports remote MCP servers** - Such as Cursor, VS Code with GitHub Copilot, or custom MCP clients. Note: Claude Desktop does not support remote MCP servers via its config file — use the [CLI](./mcp-cli) or [Docker](./mcp-docker) setup instead
 
 ## Endpoint URL Structure
 

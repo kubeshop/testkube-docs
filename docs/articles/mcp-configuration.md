@@ -147,35 +147,11 @@ Look at my recent test failures and help me understand what's causing them. Chec
 
 For direct interaction with Claude through the desktop application.
 
-#### Using the Hosted Endpoint (Recommended)
+:::warning Claude Desktop Limitation
+Claude Desktop's `claude_desktop_config.json` only supports **local stdio servers** (`command` + `args`). It does not support remote MCP servers configured directly in the config file. To connect to a remote MCP server, use the CLI or Docker options below, or add the server via **Settings → Integrations** in Claude Desktop.
+:::
 
-1. **Create or edit Claude Desktop config:**
-
-   **Location:** `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
-
-   ```json
-   {
-     "mcpServers": {
-       "testkube": {
-         "url": "https://api.testkube.io/organizations/tkcorg_YOUR_ORG_ID/environments/tkcenv_YOUR_ENV_ID/mcp",
-         "transport": {
-           "type": "sse"
-         },
-         "headers": {
-           "Authorization": "Bearer YOUR_API_TOKEN_HERE"
-         }
-       }
-     }
-   }
-   ```
-
-   Replace `tkcorg_YOUR_ORG_ID`, `tkcenv_YOUR_ENV_ID`, and `YOUR_API_TOKEN_HERE` with your actual values.
-   
-   **[Learn more about the hosted endpoint →](./mcp-hosted)**
-
-2. **Restart Claude Desktop**
-
-#### Using the CLI
+#### Using the CLI (Recommended)
 
 1. **Create or edit Claude Desktop config:**
 
@@ -193,6 +169,35 @@ For direct interaction with Claude through the desktop application.
    ```
 
    **[Learn more about CLI setup →](./mcp-cli)**
+
+2. **Restart Claude Desktop**
+
+#### Using Docker
+
+1. **Create or edit Claude Desktop config:**
+
+   **Location:** `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
+
+   ```json
+   {
+     "mcpServers": {
+       "testkube": {
+         "command": "docker",
+         "args": [
+           "run", "--rm", "-i",
+           "-e", "TK_ACCESS_TOKEN=YOUR_API_TOKEN_HERE",
+           "-e", "TK_ORG_ID=tkcorg_YOUR_ORG_ID",
+           "-e", "TK_ENV_ID=tkcenv_YOUR_ENV_ID",
+           "kubeshop/testkube-mcp-server:latest", "mcp", "serve"
+         ]
+       }
+     }
+   }
+   ```
+
+   Replace `tkcorg_YOUR_ORG_ID`, `tkcenv_YOUR_ENV_ID`, and `YOUR_API_TOKEN_HERE` with your actual values.
+
+   **[Learn more about Docker setup →](./mcp-docker)**
 
 2. **Restart Claude Desktop**
 
