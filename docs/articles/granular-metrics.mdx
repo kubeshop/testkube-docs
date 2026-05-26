@@ -6,7 +6,7 @@ signals are inside the test report itself, such as k6 request duration percentil
 
 For example, a k6 workflow can publish `http_req_duration` percentiles, `http_reqs` counts, `checks` results,
 and iteration duration as individual metric series. An Artillery workflow can publish request counts, request rates,
-latency percentiles, and scenario duration from its JSON report. A JMeter workflow can publish sample counts, error
+and latency percentiles from its JSON report. A JMeter workflow can publish sample counts, error
 rates, response-time percentiles, throughput, and sent/received throughput from its dashboard `statistics.json` file.
 Testkube stores those series with the workflow execution, then makes them available for Insights analysis across
 multiple executions.
@@ -24,7 +24,7 @@ as metric series. Each series has:
 
 - A source, such as `k6`, `artillery`, or `jmeter`.
 - A metric key, such as `http_req_duration_p95_ms`.
-- Optional identity fields for stable dimensions, such as k6 metric tags.
+- Optional identity fields for stable dimensions, such as k6 metric tags or JMeter transaction labels.
 - One value per workflow execution.
 
 The execution timestamp still comes from the workflow execution. This means a chart can show how a metric changes
@@ -59,6 +59,23 @@ Insights chooses a default aggregate based on the selected metric key. Count-sty
 highlights the highest observed value in each time bucket. You can still select another available aggregate when a
 different view is more useful.
 
+### Segmenting and Filtering Granular Metrics
+
+Some granular metric reports include stable identity fields. When those fields are present, Insights can use them
+as optional segment or filter choices, for example **Scenario** or **Transaction**. These choices are report-driven:
+they only return data for metric keys whose source report includes that identity.
+
+Use this as a rule of thumb:
+
+| Report source | Common identity fields | Notes |
+| --- | --- | --- |
+| k6 summary | Scenario, k6 metric tags | k6 only writes tagged submetrics to the summary when the script requests them, usually through thresholds. Global metrics such as total received bytes or max VUs may not have a scenario identity. |
+| Artillery report | Usually workflow-level aggregate metrics | Standard Artillery JSON reports expose aggregate counters, rates, summaries, and endpoint-shaped plugin metrics. A named Artillery scenario is useful test metadata, but the exported aggregate report does not guarantee scenario- or transaction-scoped latency/request metrics. |
+| JMeter statistics | Transaction | JMeter dashboard statistics are keyed by transaction label, including `Total`. |
+
+If an optional segment or filter returns no series, check the uploaded report first. It usually means that the
+selected metric was ingested as a global aggregate and does not carry that identity.
+
 ## k6 Summary Integration
 
 k6 can export a machine-readable summary with the `--summary-export` flag. To make that summary available as
@@ -83,10 +100,42 @@ spec:
       - path: /data/example.js
         content: |-
           import http from "k6/http";
-          import { sleep } from "k6";
+          import { check, sleep } from "k6";
 
-          export default function () {
-            http.get("https://test.k6.io");
+          export const options = {
+            scenarios: {
+              homepage: {
+                executor: "constant-vus",
+                exec: "homepage",
+                vus: 1,
+                duration: "10s",
+              },
+              docs: {
+                executor: "constant-vus",
+                exec: "docs",
+                vus: 1,
+                duration: "10s",
+              },
+            },
+            thresholds: {
+              "http_req_duration{scenario:homepage}": ["p(95)<2000"],
+              "http_req_duration{scenario:docs}": ["p(95)<2000"],
+              "http_reqs{scenario:homepage}": ["count>0"],
+              "http_reqs{scenario:docs}": ["count>0"],
+              "http_req_failed{scenario:homepage}": ["rate<0.5"],
+              "http_req_failed{scenario:docs}": ["rate<0.5"],
+            },
+          };
+
+          export function homepage() {
+            const res = http.get("https://test.k6.io");
+            check(res, { "homepage status is 200": (r) => r.status === 200 });
+            sleep(1);
+          }
+
+          export function docs() {
+            const res = http.get("https://test.k6.io/news.php");
+            check(res, { "docs status is 200": (r) => r.status === 200 });
             sleep(1);
           }
   steps:
@@ -97,7 +146,6 @@ spec:
         shell: |
           mkdir -p /data/artifacts
           k6 run example.js \
-            --duration 30s \
             --summary-export /data/artifacts/summary.json
       artifacts:
         workingDir: /data/artifacts
@@ -135,6 +183,29 @@ For example, a tagged k6 summary metric can produce separate series for:
 
 - `http_req_duration_p95_ms` with no identity fields.
 - `http_req_duration_p95_ms` with an identity such as `expected_response=true`.
+- `http_req_duration_p95_ms` with `scenario=homepage` or `scenario=docs`, when the script defines named scenarios
+  and asks k6 to include those scenario-tagged submetrics in the summary.
+
+k6 does not include every possible tag combination in `summary.json` automatically. If you need scenario-level
+series in Insights, define named scenarios and add thresholds for the metric/tag combinations you want to chart:
+
+```js showLineNumbers title="k6 scenario-tagged summary metrics"
+export const options = {
+  scenarios: {
+    homepage: {
+      executor: "constant-vus",
+      exec: "homepage",
+      vus: 1,
+      duration: "10s",
+    },
+  },
+  thresholds: {
+    "http_req_duration{scenario:homepage}": ["p(95)<2000"],
+    "http_reqs{scenario:homepage}": ["count>0"],
+    "http_req_failed{scenario:homepage}": ["rate<0.5"],
+  },
+};
+```
 
 Use tags intentionally. High-cardinality tags, such as unique URLs or request IDs, can create many metric series
 and make analysis harder.
@@ -245,6 +316,17 @@ Latency, response-time, and duration metrics are stored in milliseconds when the
 `min`, `max`, `median`, `p95`, or `p99`. Counter and rate metrics keep their Artillery report values.
 The control plane also understands common Artillery aggregate fields such as `latency`, `rps`, and
 `scenarioDuration` when those fields are present in a report.
+
+### Artillery Segmentation
+
+Artillery scenario definitions can have names, and those names are useful for keeping the script readable and for
+running a specific scenario with Artillery. However, the standard JSON report exported with `-o` is primarily an
+aggregate report. In current Testkube ingestion, Artillery metrics should be treated as workflow-level report
+metrics unless the uploaded report contains an explicit stable identity that Testkube can store.
+
+For Insights boards, this means Artillery latency, request rate, request volume, and error charts should usually be
+segmented by workflow or left unsegmented. Do not expect **Scenario** or **Transaction** filter values for Artillery
+metrics unless your report format actually includes those dimensions.
 
 ### Distributed Artillery Workflows
 
