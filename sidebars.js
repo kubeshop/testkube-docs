@@ -1257,6 +1257,7 @@ const sidebars = {
               id: "articles/k8s-events",
             },
             { type: "doc", label: "Webhooks", id: "articles/webhooks" },
+            { type: "doc", label: "Git", id: "articles/git" },
           ],
         },
         {
