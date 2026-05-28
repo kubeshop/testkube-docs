@@ -50,7 +50,6 @@ Trigger and respond to events for automated test execution:
 - [CDEvents](/articles/cd-events) - Learn about CDEvents emitted by Testkube.
 - [Kubernetes Events](/articles/k8s-events) - Learn about events emitted by Testkube.
 - [Webhooks](/articles/webhooks) - Learn how to configure webhooks to notify external systems.
-- [Git](/articles/git) - Learn how to how to trigger Testkube on your Git repository changes.
 
 ## Collaboration & Alerting
 
