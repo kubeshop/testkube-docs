@@ -8,13 +8,69 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
-## Monthly Release v2.10.0 (2026-6-01)
+## Monthly Release v2.10.0 (2026-06-01)
 
-Control Plane is available in Helm chart `v2.332.1` and the Agent is available in Helm chart `v2.9.1`.
+Control Plane is available in Helm chart `[TODO]` and the Agent is available in Helm chart `[TODO]`.
 
 ### What's new!
 
-Extending insights with granuluar metrics. [TODO]: Add moree details.
+#### Granular Test Insights
+
+Monitoring test results across multiple tools and workflows can get noisy fast. In v2.10.0, we expanded Insights so you can do a deep dive into your performance and correctness tests.
+
+- Automatically process JUnit, JMeter, k6, and Artillery reports, extracting relevant metrics.
+- Filter and segment results by test case, test suite, endpoint, and other relevant dimensions.
+- Explore extended metrics with improved metric grouping in the Insights time-series picker.
+
+[Read more](TODO)
+
+### AI Updates
+
+AI chats now surface clearer progress while work is in flight, and agents can request credentials securely when they need access to secrets — without putting values in the thread. Together, these changes make longer AI tasks easier to trust and follow from start to finish.
+
+#### Improvements
+
+- Clearer status and activity messages while the agent is working.
+- Secure credential requests in chat without exposing secret values in the conversation.
+- More transparent chat behavior during longer-running tasks.
+
+#### Fixes
+
+- Fixed several AI chat UX issues, including cases where chat titles or message input behavior could become inconsistent.
+
+### Control Plane
+
+Teams on a single plan can now manage multiple organizations from one place: create organizations, review usage across them, and get warnings before hitting plan limits. GitOps-managed workflows also warn you when dashboard edits may be overwritten by sync.
+
+#### Improvements
+
+- Multi-organization support on a single plan: create organizations, see usage across your organizations, and get warnings when approaching plan limits.
+- Added a warning when editing GitOps managed workflows, so it’s clearer when UI changes may be reverted.
+
+#### Fixes
+
+- Fixed an issue where switching organizations would occasionally show stale data.
+- Fixed an issue where the SCIM setup URL could be generated incorrectly.
+- Fixed the dashboard silent execution toggle so silent runs behave as expected.
+- Fixed cases where canceled parallel workers could still appear to be running in the UI.
+- Improved reliability of the executions view for large environments.
+
+### Agent
+
+This release improves agent reliability for webhooks and execution-related flows, and makes execution lists faster and more dependable in large, high-churn environments.
+
+#### Fixes
+
+- Fixed issues where webhooks or execution-related flows could behave incorrectly in some environments.
+- Improved execution-list performance and reliability for large-scale environments.
+
+### Open Source Updates
+
+#### AI Analysis in the Public Execution Viewer
+
+Sharing a workflow execution publicly is useful for debugging handoffs, but raw logs and reports still take time to interpret. The public execution viewer now includes AI-generated summaries of test results so readers can quickly understand failures and what to investigate next — alongside the JUnit report browsing added in recent patches.
+
+Read more: [Viewing Open Source Executions](/articles/viewing-oss-executions)
 
 ## Patch Release v2.9.7 (2026-05-29)
 
