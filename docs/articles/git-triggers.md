@@ -1,4 +1,4 @@
-# ContentGit usage for TestTrigger
+# Git Event Triggers
 
 This guide shows how to configure git-based content triggers using the new `ContentGit` fields.
 
