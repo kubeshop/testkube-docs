@@ -16,9 +16,10 @@ Control Plane is available in Helm chart `[TODO]` and the Agent is available in 
 
 #### Granular Test Insights
 
-Monitoring test results across multiple tools and workflows can get noisy fast. In v2.10.0, we expanded Insights so you can do a deep dive into your performance and correctness tests.
+In v2.10.0, we've expanded the underlying metrics data model for Test Insights so you can do a deep dive into your 
+E2E/functional and performance test results over time.
 
-- Automatically process JUnit, JMeter, k6, and Artillery reports, extracting relevant metrics.
+- Automatically process JUnit, JMeter, k6, and Artillery reports, extracting relevant metrics and exposing them in the Insights.
 - Filter and segment results by test case, test suite, endpoint, and other relevant dimensions.
 - Explore extended metrics with improved metric grouping in the Insights time-series picker.
 - Improved ordering of stacked segments to be consistent across columns.
@@ -43,16 +44,14 @@ AI chats now surface clearer progress while work is in flight, and agents can re
 
 #### Fixes
 
-- Fixed several AI chat UX issues, including cases where chat titles or message input behavior could become inconsistent.
+Fixed several AI chat UX issues, including cases where chat titles or message input behavior could become inconsistent.
 
 ### Control Plane
 
-Teams on a single plan can now manage multiple organizations from one place: create organizations, review usage across them, and get warnings before hitting plan limits. GitOps-managed workflows also warn you when dashboard edits may be overwritten by sync.
+On-Prem Customers on the Enterprise plan can now manage multiple organizations from one place: create organizations, 
+review usage across them, and get warnings before hitting plan limits. 
 
-#### Improvements
-
-- Multi-organization support on a single plan: create organizations, see usage across your organizations, and get warnings when approaching plan limits.
-- Added a warning when editing GitOps managed workflows, so it’s clearer when UI changes may be reverted.
+GitOps-managed workflows how show a warning in the Dashboard for that edits may be overwritten by sync.
 
 #### Fixes
 
