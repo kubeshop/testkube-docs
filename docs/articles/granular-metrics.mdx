@@ -1,80 +1,80 @@
 # Granular Metrics
 
 Granular metrics let Testkube store tool-specific measurements as named time series, so you can track more than
-workflow status, duration, and resource usage. They are useful for performance tests where the most important
-signals are inside the test report itself, such as k6 request duration percentiles or request counts.
+workflow status, duration, and resource usage. Granular metrics can be used to track metrics within a workflow (e.g.
+the performance of an individual test case) or as summary metrics for a workflow (e.g. maximum HTTP response time).
 
-For example, a k6 workflow can publish `http_req_duration` percentiles, `http_reqs` counts, `checks` results,
-and iteration duration as individual metric series. An Artillery workflow can publish request counts, request rates,
-and latency percentiles from its JSON report. A JMeter workflow can publish sample counts, error
-rates, response-time percentiles, throughput, and sent/received throughput from its dashboard `statistics.json` file.
-Testkube stores those series with the workflow execution, then makes them available for Insights analysis across
-multiple executions.
+## Configuration
 
-:::note
-Granular metrics are execution-level metric series. Supported report files contain aggregated values for one run,
-such as averages, percentiles, counts, and rates. Testkube stores those values per execution so you can compare
-them over time. It does not turn an aggregated report into raw per-sample metrics from inside a single test run.
-:::
+Granular metrics are **enabled by default**. The control plane worker service ingests supported reports from workflow
+artifacts into time series after each execution completes.
 
-## How Testkube Stores Granular Metrics
+To explicitly enable or disable ingestion, set the `testkube-worker-service.granularMetrics.enabled` Helm value on your deployment:
 
-When a workflow uploads a supported report, Testkube detects report metrics during post-processing and stores them
-as metric series. Each series has:
+```yaml
+testkube-worker-service:
+  granularInsights:
+    enabled: false
+```
 
-- A source, such as `k6`, `artillery`, or `jmeter`.
-- A metric key, such as `http_req_duration_p95_ms`.
-- Optional identity fields for stable dimensions, such as k6 metric tags or JMeter transaction labels.
-- One value per workflow execution.
-
-The execution timestamp still comes from the workflow execution. This means a chart can show how a metric changes
-from run to run, while preserving the workflow, environment, status, and label filters you already use for
-Insights.
+Set the value to `false` to disable granular metrics ingestion. [Insights](/articles/test-insights) will not show
+granular measures for executions processed while ingestion is disabled.
 
 ## Granular Metrics in Insights
 
-Granular metrics appear in the Test Insights time series measure picker as grouped report metrics. The selected
-measure remains the underlying metric key, such as `http_req_duration_p95_ms` or `sample_count`; the group is only
-used to make the picker easier to browse.
+The primary way to interact with captured granular metrics is [Insights](/articles/test-insights). Once granular metrics are captured, they
+appear as measures in an [Executions Time Series](/articles/test-insights#executions-time-series) analysis. Granular metrics are grouped by category to make exploration easier.
 
-Performance-oriented report metrics are grouped by what the metric describes:
-
-| Insights group | Example metric keys |
-| --- | --- |
-| Request Latency | `http_req_duration_p95_ms`, `response_time_mean_ms`, `latency_p99_ms` |
-| Request Throughput | `http_reqs_rate`, `http_request_rate`, `rps_mean` |
-| Traffic Volume | `data_received_count`, `data_sent_count`, `received_kbytes_per_sec` |
-| Request Errors | `http_req_failed_rate`, `error_count`, `errors_etimedout` |
-| Request Volume | `http_reqs_count`, `sample_count`, `requests_completed` |
-| Virtual Users | `vus`, `vusers_created`, `virtual_users` |
-| Checks & Assertions | `checks_passes`, `checks_fails`, `assertions_failed` |
-| Custom Report Metrics | Any detected report metric that does not match one of the performance groups |
-
-These groups are separate from resource metrics such as CPU, memory, disk, and legacy Network Usage. For example,
-network traffic reported by a load test appears under **Traffic Volume**, while pod or container network resource
-metrics remain under the resource metric groups.
+| Insights group          | Example metric keys                                                    |
+| ----------------------- | ---------------------------------------------------------------------- |
+| Junit Test Case Metrics | `test_duration_ms`, `test_count_failed`, `test_count_passed`           |
+| Request Latency         | `http_req_duration_p95_ms`, `response_time_mean_ms`, `latency_p99_ms`  |
+| Request Throughput      | `http_reqs_rate`, `http_request_rate`, `rps_mean`                      |
+| Traffic Volume          | `data_received_count`, `data_sent_count`, `received_kbytes_per_sec`    |
+| Request Errors          | `http_req_failed_rate`, `error_count`, `errors_etimedout`              |
+| Request Volume          | `http_reqs_count`, `sample_count`, `requests_completed`                |
+| Virtual Users           | `vus`, `vusers_created`, `virtual_users`                               |
+| Checks & Assertions     | `checks_passes`, `checks_fails`, `assertions_failed`                   |
+| Custom Report Metrics   | Any detected report metric that does not match one of the above groups |
 
 Insights chooses a default aggregate based on the selected metric key. Count-style metrics usually default to
 **sum**, while latency, rate, percentage, throughput, and byte-rate metrics default to **maximum** so the first chart
 highlights the highest observed value in each time bucket. You can still select another available aggregate when a
 different view is more useful.
 
-### Segmenting and Filtering Granular Metrics
+### Segmentation and Filtering
 
-Some granular metric reports include stable identity fields. When those fields are present, Insights can use them
-as optional segment or filter choices, for example **Scenario** or **Transaction**. These choices are report-driven:
-they only return data for metric keys whose source report includes that identity.
+In addition to standard filtering and segmentation, granular metrics support segmentation and filtering based on a set of _identity fields_.
+Each series includes identity fields derived from the tool that produced the report. Below is a table of common identity fields
+for the supported report sources.
 
-Use this as a rule of thumb:
+| Report source     | Common identity fields             | Notes                                                                                                                                                                                                                                                           |
+| ----------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| JUnit report      | Testcase, Testsuite                | Test cases and suites are uniquely identified by their name. If you have the same test case name across multiple workflows they will be aggregated together (a workflow filter can help mitigate this issue).                                                   |
+| k6 summary        | Scenario, Endpoint, k6 metric tags | k6 only writes tagged submetrics to the summary when the script requests them, usually through thresholds. Global metrics such as total received bytes or max VUs may not have scenario or endpoint identity.                                                   |
+| Artillery report  | Scenario, Transaction              | Scenario identities come from named Artillery scenarios. Transaction identities come from endpoint-level metrics when the report includes them. Other aggregate metrics remain workflow-level when the report does not include scenario or transaction context. |
+| JMeter statistics | Transaction                        | JMeter dashboard statistics are keyed by transaction label, including `Total`.                                                                                                                                                                                  |
 
-| Report source | Common identity fields | Notes |
-| --- | --- | --- |
-| k6 summary | Scenario, Endpoint, k6 metric tags | k6 only writes tagged submetrics to the summary when the script requests them, usually through thresholds. Global metrics such as total received bytes or max VUs may not have scenario or endpoint identity. |
-| Artillery report | Scenario, Transaction | Scenario identities come from named Artillery scenarios. Transaction identities come from endpoint-level metrics when the report includes them. Other aggregate metrics remain workflow-level when the report does not include scenario or transaction context. |
-| JMeter statistics | Transaction | JMeter dashboard statistics are keyed by transaction label, including `Total`. |
+## Use Case: Granular Metrics for Test Results
 
-If an optional segment or filter returns no series, check the uploaded report first. It usually means that the
-selected metric was ingested as a global aggregate and does not carry that identity.
+Granular metrics are automatically ingested for JUnit output when you [create a JUnit report](/articles/test-workflows-reports). These are exposed under the
+`Junit Test Case Metrics` measure group. For each test case and test suite in a workflow, six series are created:
+
+- test_count_failed: The number of tests that failed.
+- test_count_passed: The number of tests that passed.
+- test_count_errored: The number of tests that errored.
+- test_count_skipped: The number of tests that were skipped.
+- test_count_total: The total number of tests.
+- test_duration_ms: The duration of the test case or test suite.
+
+These metrics can be used to understand trends for individual tests over time. For example, viewing `test_duration_ms` segmented
+by test case can highlight your slowest tests and tests that suddenly take significantly longer than expected.
+
+## Use Case: Performance Testing
+
+Granular metrics integrate with major performance testing tools. [k6](#k6-summary-integration), [Artillery](#artillery-report-integration), and [JMeter](#jmeter-statistics-integration) are currently supported; the sections below describe how to export reports and collect them as workflow artifacts for each tool.
+The metrics exported by each tool will differ, but you can chart the values you care about and see how they change over time.
+For example, charting `http_req_duration_p95_ms` segmented by **Scenario** helps you compare p95 latency across load profiles and spot regressions in a single scenario.
 
 ## k6 Summary Integration
 
@@ -161,15 +161,15 @@ detected k6 metrics as granular series.
 Testkube normalizes k6 metric names and summary statistics so they are stable in Insights and API responses.
 Common examples include:
 
-| k6 summary field | Testkube metric key |
-| --- | --- |
-| `http_req_duration.values["p(95)"]` | `http_req_duration_p95_ms` |
-| `http_req_duration.values.avg` | `http_req_duration_avg_ms` |
-| `http_reqs.values.count` | `http_reqs_count` |
-| `http_reqs.values.rate` | `http_reqs_rate` |
-| `checks.values.passes` | `checks_passes` |
-| `checks.values.fails` | `checks_fails` |
-| `iteration_duration.values.avg` | `iteration_duration_avg_ms` |
+| k6 summary field                    | Testkube metric key         |
+| ----------------------------------- | --------------------------- |
+| `http_req_duration.values["p(95)"]` | `http_req_duration_p95_ms`  |
+| `http_req_duration.values.avg`      | `http_req_duration_avg_ms`  |
+| `http_reqs.values.count`            | `http_reqs_count`           |
+| `http_reqs.values.rate`             | `http_reqs_rate`            |
+| `checks.values.passes`              | `checks_passes`             |
+| `checks.values.fails`               | `checks_fails`              |
+| `iteration_duration.values.avg`     | `iteration_duration_avg_ms` |
 
 Timing metrics are stored in milliseconds. Counter and rate metrics keep their k6 summary values.
 
@@ -220,18 +220,25 @@ import { check } from "k6";
 
 export const options = {
   thresholds: {
-    "http_req_duration{endpoint:test-workflow-with-executions-list}": ["p(95)<1500"],
+    "http_req_duration{endpoint:test-workflow-with-executions-list}": [
+      "p(95)<1500",
+    ],
     "http_reqs{endpoint:test-workflow-with-executions-list}": ["count>0"],
-    "http_req_failed{endpoint:test-workflow-with-executions-list}": ["rate<0.5"],
+    "http_req_failed{endpoint:test-workflow-with-executions-list}": [
+      "rate<0.5",
+    ],
   },
 };
 
 export default function () {
-  const res = http.get("https://api.example.test/test-workflow-with-executions", {
-    tags: { endpoint: "test-workflow-with-executions-list" },
-  });
+  const res = http.get(
+    "https://api.example.test/test-workflow-with-executions",
+    {
+      tags: { endpoint: "test-workflow-with-executions-list" },
+    },
+  );
 
-  check(res, { "status is 200": r => r.status === 200 });
+  check(res, { "status is 200": (r) => r.status === 200 });
 }
 ```
 
@@ -344,26 +351,26 @@ detected Artillery aggregate metrics as granular series.
 Testkube normalizes Artillery aggregate metric names and statistics into stable metric keys. Common examples
 include:
 
-| Artillery report field | Testkube metric key |
-| --- | --- |
-| `aggregate.counters["http.requests"]` | `http_requests` |
-| `aggregate.counters["vusers.created"]` | `vusers_created` |
-| `aggregate.rates["http.request_rate"]` | `http_request_rate` |
-| `aggregate.summaries["http.response_time"].min` | `http_response_time_min_ms` |
-| `aggregate.summaries["http.response_time"].p95` | `http_response_time_p95_ms` |
-| `aggregate.histograms["http.response_time"].p99` | `http_response_time_p99_ms` |
-| `aggregate.histograms["vusers.session_length"].p99` | `vusers_session_length_p99` |
-| `aggregate.scenariosCreated` | `scenarios_created` |
-| `aggregate.requestsCompleted` | `requests_completed` |
-| `aggregate.codes["200"]` | `codes_200` |
-| `aggregate.errors.ETIMEDOUT` | `errors_etimedout` |
-| `aggregate.latency.p95` | `latency_p95_ms` |
-| `aggregate.rps.mean` | `rps_mean` |
-| `aggregate.scenarioDuration.p95` | `scenario_duration_p95_ms` |
-| `aggregate.counters["vusers.created_by_name.homepage"]` | `vusers_created` with `scenario=homepage` |
-| `aggregate.scenarioCounts.homepage` | `scenario_counts` with `scenario=homepage` |
+| Artillery report field                                                    | Testkube metric key                              |
+| ------------------------------------------------------------------------- | ------------------------------------------------ |
+| `aggregate.counters["http.requests"]`                                     | `http_requests`                                  |
+| `aggregate.counters["vusers.created"]`                                    | `vusers_created`                                 |
+| `aggregate.rates["http.request_rate"]`                                    | `http_request_rate`                              |
+| `aggregate.summaries["http.response_time"].min`                           | `http_response_time_min_ms`                      |
+| `aggregate.summaries["http.response_time"].p95`                           | `http_response_time_p95_ms`                      |
+| `aggregate.histograms["http.response_time"].p99`                          | `http_response_time_p99_ms`                      |
+| `aggregate.histograms["vusers.session_length"].p99`                       | `vusers_session_length_p99`                      |
+| `aggregate.scenariosCreated`                                              | `scenarios_created`                              |
+| `aggregate.requestsCompleted`                                             | `requests_completed`                             |
+| `aggregate.codes["200"]`                                                  | `codes_200`                                      |
+| `aggregate.errors.ETIMEDOUT`                                              | `errors_etimedout`                               |
+| `aggregate.latency.p95`                                                   | `latency_p95_ms`                                 |
+| `aggregate.rps.mean`                                                      | `rps_mean`                                       |
+| `aggregate.scenarioDuration.p95`                                          | `scenario_duration_p95_ms`                       |
+| `aggregate.counters["vusers.created_by_name.homepage"]`                   | `vusers_created` with `scenario=homepage`        |
+| `aggregate.scenarioCounts.homepage`                                       | `scenario_counts` with `scenario=homepage`       |
 | `aggregate.summaries["plugins.metrics-by-endpoint.response_time.//"].p95` | `http_response_time_p95_ms` with `transaction=/` |
-| `aggregate.counters["plugins.metrics-by-endpoint.//.codes.200"]` | `http_codes_200` with `transaction=/` |
+| `aggregate.counters["plugins.metrics-by-endpoint.//.codes.200"]`          | `http_codes_200` with `transaction=/`            |
 
 Latency, response-time, and duration metrics are stored in milliseconds when they include a statistic, such as
 `min`, `max`, `median`, `p95`, or `p99`. Counter and rate metrics keep their Artillery report values.
@@ -465,21 +472,21 @@ detected JMeter statistics as granular series. The detected report file is typic
 
 Testkube normalizes JMeter dashboard statistics into stable metric keys. Common examples include:
 
-| JMeter statistics field | Testkube metric key |
-| --- | --- |
-| `sampleCount` | `sample_count` |
-| `errorCount` | `error_count` |
-| `errorPct` | `error_pct` |
-| `meanResTime` | `response_time_mean_ms` |
-| `medianResTime` | `response_time_median_ms` |
-| `minResTime` | `response_time_min_ms` |
-| `maxResTime` | `response_time_max_ms` |
-| `pct1ResTime` | `response_time_p90_ms` |
-| `pct2ResTime` | `response_time_p95_ms` |
-| `pct3ResTime` | `response_time_p99_ms` |
-| `throughput` | `throughput` |
-| `receivedKBytesPerSec` | `received_kbytes_per_sec` |
-| `sentKBytesPerSec` | `sent_kbytes_per_sec` |
+| JMeter statistics field | Testkube metric key       |
+| ----------------------- | ------------------------- |
+| `sampleCount`           | `sample_count`            |
+| `errorCount`            | `error_count`             |
+| `errorPct`              | `error_pct`               |
+| `meanResTime`           | `response_time_mean_ms`   |
+| `medianResTime`         | `response_time_median_ms` |
+| `minResTime`            | `response_time_min_ms`    |
+| `maxResTime`            | `response_time_max_ms`    |
+| `pct1ResTime`           | `response_time_p90_ms`    |
+| `pct2ResTime`           | `response_time_p95_ms`    |
+| `pct3ResTime`           | `response_time_p99_ms`    |
+| `throughput`            | `throughput`              |
+| `receivedKBytesPerSec`  | `received_kbytes_per_sec` |
+| `sentKBytesPerSec`      | `sent_kbytes_per_sec`     |
 
 Response-time metrics are stored in milliseconds. JMeter transaction labels, including `Total`, are stored as
 series identity fields so each transaction can be compared across workflow executions.
