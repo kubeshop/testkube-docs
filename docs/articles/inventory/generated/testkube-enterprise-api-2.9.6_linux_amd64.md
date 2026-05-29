@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:9d3474f8252bf6a84b2efc039968580fef0932eebc5b592c3326eba9a76ccaaf</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 8" src="https://img.shields.io/badge/critical-8-8b1924"/> <img alt="high: 6" src="https://img.shields.io/badge/high-6-e25d68"/> <img alt="medium: 11" src="https://img.shields.io/badge/medium-11-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
-<tr><td>platform</td><td>linux/arm64</td></tr>
-<tr><td>size</td><td>48 MB</td></tr>
-<tr><td>packages</td><td>291</td></tr>
+<tr><td>digest</td><td><code>sha256:468b533ea7355b4230d85774417adfcfca2c0b95a94c12f42e208dcd5816c86e</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 8" src="https://img.shields.io/badge/critical-8-8b1924"/> <img alt="high: 8" src="https://img.shields.io/badge/high-8-e25d68"/> <img alt="medium: 15" src="https://img.shields.io/badge/medium-15-fbb552"/> <img alt="low: 4" src="https://img.shields.io/badge/low-4-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>platform</td><td>linux/amd64</td></tr>
+<tr><td>size</td><td>78 MB</td></tr>
+<tr><td>packages</td><td>342</td></tr>
 </table>
 </details></table>
 </details>
@@ -174,8 +174,8 @@ The RSA and DSA public key parsers did not enforce size limits on key parameters
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.041%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.020%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -608,6 +608,268 @@ Mountpoint creation is now scoped to the container root using `os.Root` (Go 1.24
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/M-3-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/go-git/go-git/v5</strong> <code>5.16.5</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/go-git/go-git/v5@5.16.5</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-45022?s=github&n=v5&ns=github.com%2Fgo-git%2Fgo-git&t=golang&vr=%3C5.19.0"><img alt="high 7.0: CVE--2026--45022" src="https://img.shields.io/badge/CVE--2026--45022-lightgrey?label=high%207.0&labelColor=e25d68"/></a> <i>Incorrect Behavior Order: Validate Before Canonicalize</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;5.19.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.19.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:H/AT:N/PR:L/UI:N/VC:N/VI:H/VA:N/SC:N/SI:H/SA:N</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+`go-git` may parse malformed Git objects in a way that differs from upstream Git. When `commit` or `tag` objects contain ambiguous or malformed headers, `go-git`’s decoded representation may expose values differently from how Git itself would interpret or reject the same object.
+
+Additionally, `go-git`’s commit signing and verification logic operates over commit data reconstructed from `go-git`’s parsed representation rather than the original raw object bytes. As a result, `go-git` may sign or verify a commit payload that is not byte-for-byte equivalent to the object stored in the repository.
+
+This can cause a signature to appear valid for a commit whose displayed or effective metadata differs from the object that was intended to be signed.
+
+### Patches
+Users should upgrade to a patched version in order to mitigate this vulnerability. Versions prior to v5 are likely to be affected, users are recommended to upgrade to a supported `go-git` version.
+
+### Credit
+
+Thanks to @<!-- -->bugbunny-research (https://bugbunny.ai/) for reporting this to `sigstore/gitsign`, and to @<!-- -->wlynch, @<!-- -->patzielinski and @<!-- -->adityasaky for coordinating the disclosure with the `go-git` project. :bow: :1st_place_medal: 
+
+Thanks to @<!-- -->wayphinder for reporting this to the `go-git` project. :bow:
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-45571?s=github&n=v5&ns=github.com%2Fgo-git%2Fgo-git&t=golang&vr=%3C%3D5.19.0"><img alt="medium 5.4: CVE--2026--45571" src="https://img.shields.io/badge/CVE--2026--45571-lightgrey?label=medium%205.4&labelColor=fbb552"/></a> <i>Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=5.19.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.19.1</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.4</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:L</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+A path validation issue in `go-git` could allow crafted repository data to affect files outside the intended checkout target, including the repository's `.git` directory.
+
+These validations were introduced in upstream Git years ago, so the vulnerability arose from go-git drifting from those checks. Some attack vectors were platform-specific: certain payloads affected only Windows users, others affected only macOS users, and some applied across all supported platforms.
+
+Using non-descendant `go-billy` filesystem instances, or different filesystem types, for the `Storer` and `Worktree` may provide some isolation against `.git` directory manipulation. For example, users that store the `.git` directory through `memfs` while using `osfs` for the worktree are not affected by this vulnerability in the main repository, because repository metadata is not materialized inside the worktree filesystem.
+
+However, this isolation does not necessarily apply when the repository contains submodules, since submodule dotgit directories may still be represented or materialized within the worktree context.
+
+It is important to note that exploitation requires a maliciously crafted repository payload. Users should always exercise caution when interacting with repositories or Git servers they do not trust.
+
+### Patches
+Users should upgrade to a patched version in order to mitigate this vulnerability. Versions prior to `v5` are likely to be affected, users are recommended to upgrade to a supported go-git version.
+
+### Credits
+Thanks to @<!-- -->kodareef5, @<!-- -->AyushParkara and @<!-- -->N0zoM1z0 for reporting this to the go-git project in three separate reports. 🙇
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-34165?s=github&n=v5&ns=github.com%2Fgo-git%2Fgo-git&t=golang&vr=%3E%3D5.0.0%2C%3C%3D5.17.0"><img alt="medium 5.0: CVE--2026--34165" src="https://img.shields.io/badge/CVE--2026--34165-lightgrey?label=medium%205.0&labelColor=fbb552"/></a> <i>Integer Underflow (Wrap or Wraparound)</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=5.0.0<br/><=5.17.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.17.1</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.006%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+
+A vulnerability has been identified in which a maliciously crafted `.idx` file can cause asymmetric memory consumption, potentially exhausting available memory and resulting in a Denial of Service (DoS) condition.
+
+Exploitation requires write access to the local repository's `.git` directory, it order to create or alter existing `.idx` files. 
+
+### Patches
+
+Users should upgrade to `v5.17.1`, or the latest `v6` [pseudo-version](https://go.dev/ref/mod#pseudo-versions), in order to mitigate this vulnerability.
+
+### Credit
+
+The go-git maintainers thank @<!-- -->kq5y for finding and reporting this issue privately to the `go-git` project.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-41506?s=github&n=v5&ns=github.com%2Fgo-git%2Fgo-git&t=golang&vr=%3C%3D5.17.2"><img alt="medium 4.7: CVE--2026--41506" src="https://img.shields.io/badge/CVE--2026--41506-lightgrey?label=medium%204.7&labelColor=fbb552"/></a> <i>Insufficiently Protected Credentials</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=5.17.2</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.18.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>4.7</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:N/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.057%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+`go-git` may leak HTTP authentication credentials when following redirects during smart-HTTP clone and fetch operations.
+
+If a remote repository responds to the initial `/info/refs` request with a redirect to a different host, go-git updates the session endpoint to the redirected location and reuses the original authentication for subsequent requests. This can result in the credentials (e.g. Authorization headers) being sent to an unintended host.
+
+An attacker controlling or influencing the redirect target can capture these credentials and potentially reuse them to access the victim’s repositories or other resources, depending on the scope of the credential.
+
+**Clients using `go-git` exclusively with trusted remotes (for example, GitHub or GitLab), and over a secure HTTPS connection, are not affected by this issue.** The risk arises when interacting with untrusted or misconfigured Git servers, or when using unsecured HTTP connections, which is not recommended. Such configurations also expose clients to a broader class of security risks beyond this issue, including credential interception and tampering of repository data.
+
+### Patches
+Users should upgrade to `v5.18.0`, or `v6.0.0-alpha.2`, in order to mitigate this vulnerability. Versions prior to v5 are likely to be affected, users are recommended to upgrade to a supported `go-git` version.
+
+The patched versions add support for configuring [followRedirects](https://git-scm.com/docs/git-config#Documentation/git-config.txt-httpfollowRedirects). In line with upstream behaviour, the default is now `initial`, while users can opt into `FollowRedirects` or `NoFollowRedirects` programmatically.
+
+### Credit
+Thanks to the 3 separate reports from @<!-- -->celinke97, @<!-- -->N0zoM1z0 and @<!-- -->AyushParkara. Thanks for finding and reporting this issue privately to the `go-git` project. :bow:
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-33762?s=github&n=v5&ns=github.com%2Fgo-git%2Fgo-git&t=golang&vr=%3C%3D5.17.0"><img alt="low 2.8: CVE--2026--33762" src="https://img.shields.io/badge/CVE--2026--33762-lightgrey?label=low%202.8&labelColor=fce1a9"/></a> <i>Improper Validation of Array Index</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=5.17.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.17.1</code></td></tr>
+<tr><td>CVSS Score</td><td><code>2.8</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:N/I:N/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.006%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+
+`go-git`’s index decoder for format version 4 fails to validate the path name prefix length before applying it to the previously decoded path name. A maliciously crafted index file can trigger an out-of-bounds slice operation, resulting in a runtime panic during normal index parsing.
+
+This issue only affects Git index format version 4. Earlier formats (`go-git` supports only `v2` and `v3`) are not vulnerable to this issue.
+
+An attacker able to supply a crafted `.git/index` file can cause applications using go-git to panic while reading the index. If the application does not recover from panics, this results in process termination, leading to a denial-of-service (DoS) condition.
+
+Exploitation requires the ability to modify or inject a Git index file within the local repository in disk. This typically implies write access to the `.git` directory.
+
+### Patches
+
+Users should upgrade to `v5.17.1`, or the latest `v6` [pseudo-version](https://go.dev/ref/mod#pseudo-versions), in order to mitigate this vulnerability.
+
+### Credit
+
+go-git maintainers thank @<!-- -->kq5y for finding and reporting this issue privately to the `go-git` project.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-45570?s=github&n=v5&ns=github.com%2Fgo-git%2Fgo-git&t=golang&vr=%3C%3D5.19.0"><img alt="low 2.3: CVE--2026--45570" src="https://img.shields.io/badge/CVE--2026--45570-lightgrey?label=low%202.3&labelColor=fce1a9"/></a> <i>Improper Encoding or Escaping of Output</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=5.19.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.19.1</code></td></tr>
+<tr><td>CVSS Score</td><td><code>2.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:N/VI:N/VA:N/SC:L/SI:L/SA:L</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+
+`go-git`'s SSH transport constructs the remote exec command by wrapping the repository path in single quotes without escaping single quotes embedded inside the path. This diverges from canonical Git, which shell-quotes the path through `sq_quote_buf` so that an embedded `'` becomes the `'\''` close-escape-reopen sequence and the whole path round-trips as a single quoted argument.
+
+A repository path containing a single quote can therefore break out of the quoted region in the exec command and be appended as additional shell tokens. On SSH servers that evaluate the exec command through a shell (for example a user account whose login shell is `/bin/sh` or `/bin/bash`, or a `ForceCommand` wrapper that re-evaluates `$SSH_ORIGINAL_COMMAND`), those additional tokens execute in that account's command-execution context. SSH servers that tokenize the exec command without shell evaluation, including the canonical `git-shell` setup, are not affected.
+
+The vulnerable behaviour is on the SSH server side, not in `go-git`: the same bytes can be produced by any SSH client. The change in `go-git` is defense-in-depth that restores parity with canonical Git's wire format and prevents `go-git` from being a vehicle for reaching shell-evaluating servers through attacker-influenced repository paths.
+
+### Patches
+
+Users should upgrade to a patched version in order to mitigate this issue. The fix ports `sq_quote_buf` from canonical Git into `go-git`'s SSH transport so that the wire output is byte-identical to what `git` itself would send for the same input.
+
+Versions prior to `v5` are likely to be affected, users are recommended to upgrade to a supported go-git version.
+
+### Credit
+
+Thanks to @<!-- -->N0zoM1z0 for reporting this to the `go-git` project. :bow:
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/go-git/go-billy/v5</strong> <code>5.6.2</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/go-git/go-billy/v5@5.6.2</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-44973?s=github&n=v5&ns=github.com%2Fgo-git%2Fgo-billy&t=golang&vr=%3C5.9.0"><img alt="high 8.1: CVE--2026--44973" src="https://img.shields.io/badge/CVE--2026--44973-lightgrey?label=high%208.1&labelColor=e25d68"/></a> <i>Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;5.9.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.9.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>8.1</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+Multiple path traversal issues exist across different components of `go-billy`. Insufficient path sanitization and boundary enforcement may allow crafted paths (e.g., using `..`) to escape intended base directories.
+
+While go-billy was not originally designed to provide a strong security boundary, some of these issues were inconsistent across some of the built-in implementations. This results in scenarios where applications relying on `go-billy` for some level of isolation may inadvertently expose access to unintended filesystem locations.
+
+The `osfs.ChrootOS` implementation is notably affected by this vulnerability and is now deprecated in `v5`, removed at `v6`. Users are recommended to move on to `osfs.BoundOS` instead: `osfs.New(path, WithBoundOS())`.
+
+Users requiring stronger security boundary enforcement are recommended to upgrade to `v6`, where the `osfs` implementation are backed by the [traversal-resistant](https://go.dev/blog/osroot) primitive [os.Root](https://pkg.go.dev/os#Root).
+
+### Patches
+Users should upgrade to a patched version in order to mitigate this vulnerability. Versions prior to `v5` are likely to be affected, users are recommended to upgrade to a supported `go-billy` version.
+
+### Credits
+Thanks to @<!-- -->faran66 and @<!-- -->vnykmshr for finding and separately reporting this issue privately to the go-git project. 🙇
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-44740?s=github&n=v5&ns=github.com%2Fgo-git%2Fgo-billy&t=golang&vr=%3C5.9.0"><img alt="medium 6.5: CVE--2026--44740" src="https://img.shields.io/badge/CVE--2026--44740-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Uncontrolled Recursion</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;5.9.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.9.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+Multiple components may improperly handle crafted or malformed input, resulting in panics, infinite loops, uncontrolled recursion, or excessive resource consumption.
+
+These issues arise from insufficient validation and missing safety mechanisms such as cycle detection, recursion limits, or defensive handling of unexpected states when processing untrusted repository data and filesystem structures.
+
+### Patches
+Users should upgrade to a patched version in order to mitigate this vulnerability. Versions prior to `v5` are likely to be affected, users are recommended to upgrade to a supported `go-billy` version.
+
+### Credits
+Thanks to @<!-- -->faran66 for finding and reporting this issue privately to the go-git project. 🙇
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>29.4.0+incompatible</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/docker/cli@29.4.0%2Bincompatible</code></small><br/>
@@ -630,10 +892,10 @@ Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Es
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/sys</strong> <code>0.43.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.43.0</code> (golang)</summary>
 
 <small><code>pkg:golang/golang.org/x/sys@0.43.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="unspecified : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
@@ -646,6 +908,33 @@ Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Es
 <blockquote>
 
 NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/cloudflare/circl</strong> <code>1.6.1</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/cloudflare/circl@1.6.1</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-1229?s=github&n=circl&ns=github.com%2Fcloudflare&t=golang&vr=%3C1.6.3"><img alt="low 2.9: CVE--2026--1229" src="https://img.shields.io/badge/CVE--2026--1229-lightgrey?label=low%202.9&labelColor=fce1a9"/></a> <i>Incorrect Calculation</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.6.3</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.6.3</code></td></tr>
+<tr><td>CVSS Score</td><td><code>2.9</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:H/AT:N/PR:N/UI:N/VC:L/VI:L/VA:L/SC:L/SI:L/SA:L/E:P/S:N/AU:Y/U:Amber</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.026%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The CombinedMult function in the CIRCL ecc/p384 package (secp384r1 curve) produces an incorrect value for specific inputs. The issue is fixed by using complete addition formulas.
+ECDH and ECDSA signing relying on this curve are not affected.
+
+The bug was fixed in **[v1.6.3](https://github.com/cloudflare/circl/releases/tag/v1.6.3)**.
 
 </blockquote>
 </details>
