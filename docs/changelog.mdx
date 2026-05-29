@@ -21,12 +21,19 @@ Monitoring test results across multiple tools and workflows can get noisy fast. 
 - Automatically process JUnit, JMeter, k6, and Artillery reports, extracting relevant metrics.
 - Filter and segment results by test case, test suite, endpoint, and other relevant dimensions.
 - Explore extended metrics with improved metric grouping in the Insights time-series picker.
+- Improved ordering of stacked segments to be consistent across columns.
 
 [Read more](TODO)
 
 ### AI Updates
 
 AI chats now surface clearer progress while work is in flight, and agents can request credentials securely when they need access to secrets — without putting values in the thread. Together, these changes make longer AI tasks easier to trust and follow from start to finish.
+
+- Testkube MCP Server now supports OAuth as the preferred authentication method.
+- Much improved configuration for custom models in on-Prem/Air-gapped deployments.
+- New "AI Analyze" actions in the Execution and Workflow views that default to use the corresponding default AI Agents included with Testkube
+- Display of Token Usage for Chats in the Chats Overview and Details panel.
+- The Open-Source Execution Viewer now allows for AI-generated summaries of test results so readers can quickly understand failures and what to investigate next — alongside the JUnit report browsing added in recent patches.
 
 #### Improvements
 
