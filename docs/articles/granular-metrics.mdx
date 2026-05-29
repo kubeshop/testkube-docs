@@ -72,7 +72,7 @@ by test case can highlight your slowest tests and tests that suddenly take signi
 
 ## Use Case: Performance Testing
 
-Granular metrics integrate with major performance testing tools. [k6](#k6-summary-integration), [Artillery](#artillery-report-integration), and [JMeter](#jmeter-statistics-integration) are currently supported; the sections below describe how to export reports and collect them as workflow artifacts for each tool.
+Granular metrics integrate with major performance testing tools. [k6](#k6-summary-integration), [Artillery](#artillery-report-integration), and [JMeter](#jmeter-statistics-integration) are currently supported; the sections below describe how to export reports and collect them as workflow artifacts for each tool. Ready-to-run workflows are in the [Basic K6](/articles/examples/k6-basic), [Basic Artillery](/articles/examples/artillery-basic), and [Basic JMeter](/articles/examples/jmeter-basic) examples.
 The metrics exported by each tool will differ, but you can chart the values you care about and see how they change over time.
 For example, charting `http_req_duration_p95_ms` segmented by **Scenario** helps you compare p95 latency across load profiles and spot regressions in a single scenario.
 
@@ -88,70 +88,8 @@ granular metrics in Testkube:
 Testkube detects k6 summary JSON files during artifact post-processing and registers them as `k6.summary` reports.
 The control plane then ingests the report into granular metric series.
 
-```yaml showLineNumbers title="K6 workflow with summary export"
-kind: TestWorkflow
-apiVersion: testworkflows.testkube.io/v1
-metadata:
-  name: k6-summary-example
-  namespace: testkube
-spec:
-  content:
-    files:
-      - path: /data/example.js
-        content: |-
-          import http from "k6/http";
-          import { check, sleep } from "k6";
-
-          export const options = {
-            scenarios: {
-              homepage: {
-                executor: "constant-vus",
-                exec: "homepage",
-                vus: 1,
-                duration: "10s",
-              },
-              docs: {
-                executor: "constant-vus",
-                exec: "docs",
-                vus: 1,
-                duration: "10s",
-              },
-            },
-            thresholds: {
-              "http_req_duration{scenario:homepage}": ["p(95)<2000"],
-              "http_req_duration{scenario:docs}": ["p(95)<2000"],
-              "http_reqs{scenario:homepage}": ["count>0"],
-              "http_reqs{scenario:docs}": ["count>0"],
-              "http_req_failed{scenario:homepage}": ["rate<0.5"],
-              "http_req_failed{scenario:docs}": ["rate<0.5"],
-            },
-          };
-
-          export function homepage() {
-            const res = http.get("https://test.k6.io");
-            check(res, { "homepage status is 200": (r) => r.status === 200 });
-            sleep(1);
-          }
-
-          export function docs() {
-            const res = http.get("https://test.k6.io/news.php");
-            check(res, { "docs status is 200": (r) => r.status === 200 });
-            sleep(1);
-          }
-  steps:
-    - name: Run k6
-      workingDir: /data
-      run:
-        image: grafana/k6:1.1.0
-        shell: |
-          mkdir -p /data/artifacts
-          k6 run example.js \
-            --summary-export /data/artifacts/summary.json
-      artifacts:
-        workingDir: /data/artifacts
-        paths:
-          - summary.json
-```
+For a complete workflow that exports `summary.json` and uploads it as an artifact, see the
+[Basic K6 Example](/articles/examples/k6-basic).
 
 After the workflow finishes, the summary file remains available as a normal artifact, and Testkube stores the
 detected k6 metrics as granular series.
@@ -189,77 +127,15 @@ For example, a tagged k6 summary metric can produce separate series for:
   endpoint and asks k6 to include those endpoint-tagged submetrics in the summary.
 
 k6 does not include every possible tag combination in `summary.json` automatically. If you need scenario-level or
-endpoint-level series in Insights, define the tag values and add thresholds for the metric/tag combinations you want
-to chart.
+endpoint-level series in Insights, define the tag values and add [thresholds](https://grafana.com/docs/k6/latest/using-k6/thresholds/)
+for the metric/tag combinations you want to chart—for example,
+`http_req_duration{scenario:homepage}` or `http_reqs{endpoint:my-operation}`.
 
-```js showLineNumbers title="k6 scenario-tagged summary metrics"
-export const options = {
-  scenarios: {
-    homepage: {
-      executor: "constant-vus",
-      exec: "homepage",
-      vus: 1,
-      duration: "10s",
-    },
-  },
-  thresholds: {
-    "http_req_duration{scenario:homepage}": ["p(95)<2000"],
-    "http_reqs{scenario:homepage}": ["count>0"],
-    "http_req_failed{scenario:homepage}": ["rate<0.5"],
-  },
-};
-```
+For endpoint-level metrics, tag each request (for example with `tags: { endpoint: "my-operation" }`) and add a
+matching threshold. The tag key can be any stable name, but `endpoint` is useful for API and UI performance tests
+because it lets Insights split latency by logical operation instead of by raw URL.
 
-For endpoint-level metrics, tag the request and add a threshold for that endpoint tag. The tag key can be any stable
-name, but `endpoint` is useful for API and UI performance tests because it lets Insights split latency by logical
-operation instead of by raw URL.
-
-```js showLineNumbers title="k6 endpoint-tagged summary metrics"
-import http from "k6/http";
-import { check } from "k6";
-
-export const options = {
-  thresholds: {
-    "http_req_duration{endpoint:test-workflow-with-executions-list}": [
-      "p(95)<1500",
-    ],
-    "http_reqs{endpoint:test-workflow-with-executions-list}": ["count>0"],
-    "http_req_failed{endpoint:test-workflow-with-executions-list}": [
-      "rate<0.5",
-    ],
-  },
-};
-
-export default function () {
-  const res = http.get(
-    "https://api.example.test/test-workflow-with-executions",
-    {
-      tags: { endpoint: "test-workflow-with-executions-list" },
-    },
-  );
-
-  check(res, { "status is 200": (r) => r.status === 200 });
-}
-```
-
-The exported `summary.json` then contains tagged metrics such as:
-
-```json title="summary.json excerpt"
-{
-  "metrics": {
-    "http_req_duration{endpoint:test-workflow-with-executions-list}": {
-      "avg": 73.29462443521597,
-      "min": 42.533486,
-      "med": 57.999752,
-      "max": 649.471687,
-      "p(90)": 109.167417,
-      "p(95)": 131.830345
-    }
-  }
-}
-```
-
-Testkube stores that as metric key `http_req_duration_p95_ms` with identity
+Testkube stores tagged summaries as metric keys such as `http_req_duration_p95_ms` with identity
 `endpoint=test-workflow-with-executions-list`, so the same measure can be segmented or filtered by **Endpoint** in
 Insights.
 
@@ -269,23 +145,9 @@ and make analysis harder.
 ### Distributed k6 Workflows
 
 For distributed k6 workflows, each worker should write a unique summary filename and upload it as an artifact.
-This avoids workers overwriting each other's summary file.
-
-```yaml showLineNumbers title="Distributed k6 summary artifacts"
-run:
-  image: grafana/k6:1.1.0
-  shell: |
-    mkdir -p /data/artifacts
-    k6 run k6-smoke-test.js \
-      --vus {{ config.vus }} \
-      --duration {{ shellquote(config.duration) }} \
-      --execution-segment {{ index }}/{{ count }}:{{ index + 1 }}/{{ count }} \
-      --summary-export /data/artifacts/summary-worker-{{ index + 1 }}.json
-artifacts:
-  workingDir: /data/artifacts
-  paths:
-    - "*.json"
-```
+This avoids workers overwriting each other's summary file. See the
+[Distributed K6 Example](/articles/examples/k6-distributed) for a workflow that exports per-worker
+`summary-worker-*.json` files alongside the HTML dashboard.
 
 Each uploaded k6 summary report is ingested into granular metric series for the workflow execution.
 
@@ -314,34 +176,8 @@ Testkube detects Artillery JSON files with numeric aggregate metrics under `coun
 `histograms` during artifact post-processing and registers them with the `artillery.report` report type. The control
 plane then ingests the report into granular metric series.
 
-```yaml showLineNumbers title="Artillery workflow with JSON report"
-kind: TestWorkflow
-apiVersion: testworkflows.testkube.io/v1
-metadata:
-  name: artillery-report-example
-  namespace: testkube
-spec:
-  content:
-    git:
-      uri: https://github.com/kubeshop/testkube
-      revision: main
-      paths:
-        - test/artillery/artillery-smoke-test.yaml
-  container:
-    workingDir: /data/repo/test/artillery
-  steps:
-    - name: Run Artillery
-      run:
-        image: artilleryio/artillery:2.0.9
-        shell: |
-          mkdir -p /data/artifacts
-          /home/node/artillery/bin/run run artillery-smoke-test.yaml \
-            -o /data/artifacts/artillery-report.json
-      artifacts:
-        workingDir: /data/artifacts
-        paths:
-          - artillery-report.json
-```
+For a complete workflow that writes an Artillery JSON report with `-o` and uploads it as an artifact, see the
+[Basic Artillery Example](/articles/examples/artillery-basic).
 
 After the workflow finishes, the report file remains available as a normal artifact, and Testkube stores the
 detected Artillery aggregate metrics as granular series.
@@ -383,16 +219,8 @@ Artillery metrics can use **Scenario** and **Transaction** as identity fields wh
 those dimensions. This lets Insights split or filter Artillery report metrics by the logical scenario or endpoint
 that produced the measurement.
 
-Scenario identities are created from named Artillery scenarios. For example, the following scenario name can appear
-in the JSON report as `vusers.created_by_name.homepage`, and Testkube stores the name as `scenario=homepage`:
-
-```yaml showLineNumbers title="Named Artillery scenario"
-scenarios:
-  - name: homepage
-    flow:
-      - get:
-          url: "/"
-```
+Scenario identities are created from named Artillery scenarios. For example, a scenario named `homepage` can appear
+in the JSON report as `vusers.created_by_name.homepage`, and Testkube stores the name as `scenario=homepage`.
 
 Transaction identities are created from endpoint-level Artillery metrics, such as
 `plugins.metrics-by-endpoint.response_time.//` and `plugins.metrics-by-endpoint.//.codes.200`. Testkube stores the
@@ -432,37 +260,8 @@ JMeter can generate a dashboard report with the `-e` and `-o` flags. That dashbo
 Testkube detects JMeter dashboard `statistics.json` files during artifact post-processing and registers them as
 `jmeter.statistics` reports. The control plane then ingests the report into granular metric series.
 
-```yaml showLineNumbers title="JMeter workflow with statistics report"
-kind: TestWorkflow
-apiVersion: testworkflows.testkube.io/v1
-metadata:
-  name: jmeter-statistics-example
-  namespace: testkube
-spec:
-  content:
-    git:
-      uri: https://github.com/kubeshop/testkube
-      revision: main
-      paths:
-        - test/jmeter/jmeter-executor-smoke.jmx
-  container:
-    workingDir: /data/repo/test/jmeter
-  steps:
-    - name: Run JMeter
-      shell: |
-        mkdir -p /data/artifacts
-        jmeter -n \
-          -t jmeter-executor-smoke.jmx \
-          -j /data/artifacts/jmeter.log \
-          -l /data/artifacts/jtl-report.jtl \
-          -e \
-          -o /data/artifacts/report
-      container:
-        image: alpine/jmeter:5.6
-      artifacts:
-        paths:
-          - /data/artifacts/**/*
-```
+For a complete workflow that runs JMeter with `-e -o` and uploads the dashboard directory (including
+`statistics.json`) as artifacts, see the [Basic JMeter Example](/articles/examples/jmeter-basic).
 
 After the workflow finishes, the dashboard files remain available as normal artifacts, and Testkube stores the
 detected JMeter statistics as granular series. The detected report file is typically
