@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:3251891cad673396694e3f0e2c6b0de68bc59e40d5691dd9763fedcc377cc3e6</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 6" src="https://img.shields.io/badge/high-6-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/medium-6-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/low-2-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>digest</td><td><code>sha256:3251891cad673396694e3f0e2c6b0de68bc59e40d5691dd9763fedcc377cc3e6</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 6" src="https://img.shields.io/badge/high-6-e25d68"/> <img alt="medium: 7" src="https://img.shields.io/badge/medium-7-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/low-2-fce1a9"/> <!-- unspecified: 0 --></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>78 MB</td></tr>
 <tr><td>packages</td><td>341</td></tr>
@@ -23,7 +23,7 @@ hide_table_of_contents: true
 <tr><td>Fixed version</td><td><code>29.3.1</code></td></tr>
 <tr><td>CVSS Score</td><td><code>8.8</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.009%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.008%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
 </table>
 
@@ -273,7 +273,7 @@ Mountpoint creation is now scoped to the container root using `os.Root` (Go 1.24
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/M-3-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/go-git/go-git/v5</strong> <code>5.16.5</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/M-4-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/go-git/go-git/v5</strong> <code>5.16.5</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/go-git/go-git/v5@5.16.5</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2026-45022?s=github&n=v5&ns=github.com%2Fgo-git%2Fgo-git&t=golang&vr=%3C5.19.0"><img alt="high 7.0: CVE--2026--45022" src="https://img.shields.io/badge/CVE--2026--45022-lightgrey?label=high%207.0&labelColor=e25d68"/></a> <i>Incorrect Behavior Order: Validate Before Canonicalize</i>
@@ -305,6 +305,36 @@ Users should upgrade to a patched version in order to mitigate this vulnerabilit
 Thanks to @<!-- -->bugbunny-research (https://bugbunny.ai/) for reporting this to `sigstore/gitsign`, and to @<!-- -->wlynch, @<!-- -->patzielinski and @<!-- -->adityasaky for coordinating the disclosure with the `go-git` project. :bow: :1st_place_medal: 
 
 Thanks to @<!-- -->wayphinder for reporting this to the `go-git` project. :bow:
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/GHSA-w5pp-99ch-qj29?s=github&n=v5&ns=github.com%2Fgo-git%2Fgo-git&t=golang&vr=%3C%3D5.19.0"><img alt="medium 6.5: GHSA--w5pp--99ch--qj29" src="https://img.shields.io/badge/GHSA--w5pp--99ch--qj29-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Uncontrolled Resource Consumption</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=5.19.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.19.1</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+Several denial-of-service issues were identified in `go-git` when parsing maliciously crafted Git repository data.
+
+An attacker may craft a malicious `.pack`, `.idx` or loose objects that causes an application using an affected version of `go-git` to panic or consume excessive resources.
+
+This can lead to denial of service in applications that use `go-git` to clone, fetch, open, or otherwise process untrusted repositories or Git object data.
+
+Exploitation requires the ability to alter read-only files such as `.pack` or `.idx` from the local repository's `.git/objects/pack/` directory. Alternatively, the user would need to be interacting with a malicious remote server, which is not recommended and exposes users to a broader class of security risks beyond this issue.
+
+### Patches
+Users should upgrade to a patched version in order to mitigate this vulnerability. Versions prior to `v5` are likely to be affected, users are recommended to upgrade to a supported `go-git` version.
+
+### Credits
+go-git thanks @<!-- -->kodareef5, @<!-- -->AyushParkara and @<!-- -->N0zoM1z0 for reporting this in four separate reports. 🙇
 
 </blockquote>
 </details>
@@ -350,7 +380,7 @@ Thanks to @<!-- -->kodareef5, @<!-- -->AyushParkara and @<!-- -->N0zoM1z0 for re
 <tr><td>Fixed version</td><td><code>5.17.1</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.006%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.005%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
 </table>
 
@@ -415,7 +445,7 @@ Thanks to the 3 separate reports from @<!-- -->celinke97, @<!-- -->N0zoM1z0 and 
 <tr><td>Fixed version</td><td><code>5.17.1</code></td></tr>
 <tr><td>CVSS Score</td><td><code>2.8</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.006%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.005%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
 </table>
 
@@ -490,6 +520,8 @@ Thanks to @<!-- -->N0zoM1z0 for reporting this to the `go-git` project. :bow:
 <tr><td>Fixed version</td><td><code>5.9.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>8.1</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.053%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
