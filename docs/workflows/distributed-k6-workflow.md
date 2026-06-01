@@ -38,7 +38,7 @@ spec:
             - name: K6_WEB_DASHBOARD
               value: "true"
             - name: K6_WEB_DASHBOARD_EXPORT
-              value: /data/k6-test-report.html
+              value: /data/artifacts/k6-test-report.html
           resources:
             requests:
               cpu: 128m
@@ -47,14 +47,17 @@ spec:
         run:
           image: grafana/k6:0.49.0
           shell: |
+            mkdir -p /data/artifacts
             k6 run k6-smoke-test.js \
               -e K6_ENV_FROM_PARAM=K6_ENV_FROM_PARAM_value \
               --vus {{ config.vus }} \
               --duration {{ shellquote(config.duration) }} \
-              --execution-segment {{ index }}/{{ count }}:{{ index + 1 }}/{{ count }}
+              --execution-segment {{ index }}/{{ count }}:{{ index + 1 }}/{{ count }} \
+              --summary-export /data/artifacts/summary-worker-{{ index + 1 }}.json
         artifacts:
-          workingDir: /data
+          workingDir: /data/artifacts
           paths:
             - '*.html'
+            - '*.json'
 
 ```

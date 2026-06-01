@@ -1,6 +1,6 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-import SimpleJMeter from "../../workflows/simple-jmeter-workflow.md"
+import SimpleJMeter from "../../workflows/simple-jmeter-workflow.md";
 
 # Basic JMeter Framework Example
 
@@ -11,7 +11,11 @@ sure to update the `name` and `namespace` for your environment if needed.
 - The `spec.content` property defines the location of the GitHub project
 - the `spec.steps` property defines a single step that runs the test and uploads the created reports.
 
-<SimpleJMeter/>
+<SimpleJMeter />
+
+The workflow runs JMeter with `-e -o /data/artifacts/report`, which generates the JMeter dashboard report. The
+dashboard includes `report/statistics.json`; when that file is uploaded as an artifact, Testkube can detect it as
+a `jmeter.statistics` report and ingest its aggregated values as [Granular Metrics](/articles/granular-metrics).
 
 After execution, you can see the output from the test executions under the executions panel tabs:
 
@@ -31,4 +35,3 @@ The uploaded report is available in the Artifacts tab:
 
 </TabItem>
 </Tabs>
-

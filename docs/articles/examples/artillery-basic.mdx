@@ -9,9 +9,14 @@ Below is a basic workflow for executing an Artillery test. You can paste this di
 sure to update the `name` and `namespace` for your environment if needed.
 
 - The `spec.content` property defines the location of the GitHub project.
-- The `spec.steps` property defines a single step that runs the `artillery` command.
+- The `spec.steps` property defines a single step that runs the `artillery` command and uploads the JSON report as
+  an artifact.
 
 <SimpleArtillery/>
+
+The workflow uses Artillery's `-o` option to write `/data/artifacts/artillery-report.json`. Testkube detects uploaded
+Artillery aggregate JSON reports as `artillery.report` and ingests counters, rates, summaries, and histograms as
+[Granular Metrics](/articles/granular-metrics).
 
 After execution, you can see the output from the executions under the executions panel tabs:
 

@@ -28,11 +28,13 @@ spec:
           - name: K6_WEB_DASHBOARD
             value: "true"
           - name: K6_WEB_DASHBOARD_EXPORT
-            value: k6-test-report.html
-        args:
-          - run
-          - example.js
+            value: /data/artifacts/k6-test-report.html
+        shell: |
+          mkdir -p /data/artifacts
+          k6 run example.js --summary-export /data/artifacts/summary.json
       artifacts:
+        workingDir: /data/artifacts
         paths:
+          - summary.json
           - k6-test-report.html
 ```

@@ -23,16 +23,16 @@ By integrating Test Insights into your testing workflow, your team can leverage 
 
 ## Using Test Insights
 
-Test Insights are available from the top menu, which will take you to a default "Execution Analysis" Board with 
+Test Insights are available from the top menu, which will take you to a default "Execution Analysis" Board with
 premade charts.
 
 ![Test Insights Overview](images/insights-overview.png)
 
-The "Your Boards" section contains all Boards created within your Organization. 
+The "Your Boards" section contains all Boards created within your Organization.
 
 :::note
 There is currently no way to limit access to individual boards for Organization members; everyone has access
-to all boards and can thus see all data within (which is read-only). 
+to all boards and can thus see all data within (which is read-only).
 
 If this is a concern you can disable Insights entirely for from the [Product Features Panel](/articles/organization-management#product-features).
 :::
@@ -63,16 +63,16 @@ with your testing activities.
 You can manage a board as follows:
 
 - **Create Board**: You can create a board by clicking on "Create new board".
-After filling in details such as name and description, you can add your first analysis.
+  After filling in details such as name and description, you can add your first analysis.
 
 - **Rearrange board**: Hover an analysis insight and in the top-right corner you can find a handle to drag and drop your analysis.
-You can move it around to a new row or put it in front or behind another analysis. You can only add up to three analysis per row.
-Responsiveness of boards are limited to larger screen sizes.
+  You can move it around to a new row or put it in front or behind another analysis. You can only add up to three analysis per row.
+  Responsiveness of boards are limited to larger screen sizes.
 
 - **Update Board**: You can go to the board's setting by clicking on the dotted menu. Here you can update both the name and the description.
 
 - **Delete Board**: You can go to the board's setting and delete the board in the danger zone at the bottom.
-Your board and all analysis will be removed, no execution data will be deleted.
+  Your board and all analysis will be removed, no execution data will be deleted.
 
 ## Working with Analyses
 
@@ -90,19 +90,19 @@ At the top you can see a Period Selector for selecting the last day, week, month
 The interval is automatically inferred depending on the size of the period.
 A period less than two days will have an hourly interval, then daily, and up to weekly when looking at a quarter.
 
-More to the right, you can see the Analysis Selector: it defaults to **Executions** time series, but you can also 
+More to the right, you can see the Analysis Selector: it defaults to **Executions** time series, but you can also
 select **Executions Bar Chart**, **Efficiency Quadrant Analysis** and **Pass/Fail Statistics** (all described below)
 
 ![Test Insights Select Analysis](images/insights-select-analysis.png)
 
 Under the period and analysis selector, you will find your selected chart with its controls on the right side.
-The controls vary depending on the selected chart and include the ability to filter executions on **Workflow name**, 
+The controls vary depending on the selected chart and include the ability to filter executions on **Workflow name**,
 **environment**, **status** and **labels** (both existence or specific label values).
 
 ![Test Insights Executions Filter](images/insights-executions-filter.png)
 
 :::tip
-Filtering on workflow name support regexes, so you could perfectly filter all workflows prefixed with `performance` 
+Filtering on workflow name support regexes, so you could perfectly filter all workflows prefixed with `performance`
 by adding a `performancy.*` filter.
 :::
 
@@ -114,25 +114,24 @@ The execution time series allows you to analyse your executions over time.
 
 ### Executions Measure
 
-The x-axis will always be the time, whereas the y-axis is defined by your **Measure**. Currently, 
-you can select one of the following:
-- **Execution count** - use this to see how many Workflows that were executed
-- **Execution duration** - use this to understand how much time your tests are taking.
-- **JUnit Case count**. - the number of JUnit tests execution based on extracted [JUnit Reports](/articles/test-workflows-reports).
-- **CPU Usage** - use this to analyze CPU consumption of your Workflow executions.
-- **Memory Usage** - use this to analyze Memory consumption of your Workflow executions.
-- **Network Usage** - use this to analyze Network usage of your Workflow executions.
-- **Disk Usage** - use this to analyze Disk usage of your Workflow executions.
+The x-axis will always be the time, whereas the y-axis is defined by your **Measure**. There are three categories of measures that are supported.
 
-:::tip
-Read more about Resource Metric Insights at [Resource Aggregates in Insights](/articles/resource-metrics#resource-aggregates-in-insights).
-:::
+- **Execution measures**: These measures give high level summary information about your executions.
+  - **Execution count**: Use this to see how many Workflows were executed
+  - **Execution duration**: Use this to understand how much time your tests are taking.
+  - **JUnit Case count**: The number of JUnit tests execution based on extracted [JUnit Reports](/articles/test-workflows-reports).
+- **Resource measures**: See resource usage across executions. Read more about [Resource Aggregates in Insights](/articles/resource-metrics#resource-aggregates-in-insights).
+  - **CPU Usage**: Use this to analyze CPU consumption of your Workflow executions.
+  - **Memory Usage**: Use this to analyze Memory consumption of your Workflow executions.
+  - **Network Usage**: Use this to analyze Network usage of your Workflow executions.
+  - **Disk Usage**: Use this to analyze Disk usage of your Workflow executions.
+- **Granular Metrics**: When [granular metrics](/articles/granular-metrics) are enable you will see additional measure options depending on the types of reports your workflows produce.
 
 ![Test Insights Executions Measure](images/insights-executions-measure.png)
 
 ### Executions Aggregate
 
-You can use the **Aggregate** to decide how to treat multiple executions of the same workflow within 
+You can use the **Aggregate** to decide how to treat multiple executions of the same workflow within
 each interval. For example, for the **Execution duration** you can aggregate on **sum**, **average**, **minimum** or **maximum**.
 
 :::note
@@ -154,14 +153,14 @@ by **workflow name** or by any of the **labels** found on the executions.
 Besides a graph view, the Executions time series analysis also comes with a table view.
 This is useful to see trend across a single segment.
 Currently, segmentation within a graph is also limited to 25 largest segments.
-For segmentation with a high cardinality, you can view the remaining segments within the table, which are 
+For segmentation with a high cardinality, you can view the remaining segments within the table, which are
 most often too tiny to see within the Graph View.
 
 You can click on either the segment name or a table cell value to drill down on the execution references that relate to this.
 Imagine that you filter on failed executions for a certain label, and you wonder which executions are failing.
 Drilling down easily allows you to analyse and troubleshoot these executions.
 
-For example - the following Analysis shows all Executions labeled `junit=true`, with February 7th highlighted when there 
+For example - the following Analysis shows all Executions labeled `junit=true`, with February 7th highlighted when there
 were 12 failed executions:
 
 ![Test Insights Select Drill-Down](images/insights-select-drilldown.png)
@@ -198,4 +197,3 @@ The pass/fail stats shows details about workflow executions that failed or passe
 These analysis are useful to quickly understand if certain workflows need attention.
 
 ![Test Insights - Efficiency Quadrant Analysis](images/insights-pass-fail.jpg)
-
