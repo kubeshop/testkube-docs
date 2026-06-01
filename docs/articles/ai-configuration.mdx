@@ -1,6 +1,6 @@
 # Testkube AI Configuration Reference
 
-This document provides a comprehensive reference for enabling and configuring Testkube AI functionality, 
+This document provides a comprehensive reference for enabling and configuring Testkube AI functionality,
 including the [AI Assistant](./ai-assistant-overview), [AI Agents](./ai-agents),
 [AI Agent Triggers](./ai-triggers), and related features.
 
@@ -16,10 +16,10 @@ The Testkube AI Assistant is disabled by default for new organizations.
 
 **How to enable:**
 
-1. **Via the Initial AI Assistant Prompt:** 
+1. **Via the Initial AI Assistant Prompt:**
    When you first access the AI Assistant, an initial prompt is displayed with action buttons that allow you to either enable the feature or keep it disabled.
 
-2. **Through Organization Settings:**  
+2. **Through Organization Settings:**
    Navigate to **Organization Settings** → **Product Features** tab and toggle **AI Assistant** on.
 
 Once enabled, the AI Assistant, AI Agents, and AI Agent Triggers will be available in your Testkube Dashboard.
@@ -44,25 +44,28 @@ For On-Prem installations, you can configure your own OpenAI API Key or use a di
 
 Self-hosted installations require additional infrastructure and configuration apart from the above Cloud Control Plane configuration.
 
-### Infrastructure Requirements
-
-#### PostgreSQL Database
-
-A PostgreSQL database is required for LangGraph checkpointing (conversation persistence). Configure the database connection 
-via `POSTGRES_URI` environment variable or Helm `db.secretRef` configuration.
+:::note PostgreSQL
+The AI service uses PostgreSQL for conversation persistence. It shares the control plane's PostgreSQL instance by default — no additional database setup is required.
+:::
 
 ### Helm Configuration
 
 Configure the following components in your `testkube-enterprise` Helm values:
 
 ```yaml
-# Enable the AI service
 testkube-ai-service:
   enabled: true  # Default: false
-  llmApi:
-    url: ""  # Optional - defaults to OpenAI API when omitted
-    secretRef: "<secret-name>"  # K8s secret storing LLM_API_KEY
-    secretRefKey: "LLM_API_KEY"  # Default key name
+  inference:
+    defaults:
+      secretRef: "<secret-name>"      # K8s secret storing the API key
+      secretRefKey: "api-key"         # Key within the secret
+    agent:
+      - model: gpt-4o
+        default: true
+    tasks:
+      model: gpt-4o-mini
+    embeddings:
+      model: text-embedding-3-small
 
 # Enable AI features in the UI
 testkube-cloud-ui:
@@ -77,147 +80,195 @@ Create a Kubernetes secret containing your LLM API key:
 
 ```bash
 kubectl -n <namespace> create secret generic <secret-name> \
-  --from-literal=LLM_API_KEY=<your-api-key>
+  --from-literal=api-key=<your-api-key>
 ```
 
 :::tip
 The secret must be in the same namespace as the Testkube control plane.
 :::
 
-### LLM Provider Options
+### The `inference:` Configuration Block
 
-Testkube supports any LLM service that implements the OpenAI API specification:
+The `inference:` block is the recommended way to configure LLM models for the AI service. It uses role-based keys to describe what each model is used for:
+
+| Role | Type | Purpose |
+|------|------|---------|
+| `agent` | Array | Reasoning models for AI Agents — user-selectable in the Copilot UI |
+| `tasks` | Object (optional) | Lightweight model for title generation, classification. Falls back to default agent model if omitted |
+| `embeddings` | Object (optional) | Embeddings model for vector search. **Omit to disable embeddings entirely** |
+
+#### Shared Defaults
+
+The `defaults` section provides shared values inherited by all models unless overridden at the model level:
+
+| Field | Description |
+|-------|-------------|
+| `url` | Base URL for LLM API (e.g., `https://proxy.internal/v1`). Defaults to OpenAI if omitted |
+| `apiKey` | API key (plain text — prefer `secretRef` for production) |
+| `secretRef` | K8s secret name |
+| `secretRefKey` | Key within the secret |
+| `extraHeaders` | Extra HTTP headers merged into all requests |
+| `queryParams` | Query parameters appended to all request URLs |
+
+#### Model Properties
+
+Each model entry (`agent`, `tasks`, `embeddings`) supports these fields in addition to inheriting from `defaults`:
+
+| Field | Description |
+|-------|-------------|
+| `model` | Model identifier sent in the API request body (e.g., `gpt-4o`) |
+| `url` | Custom endpoint URL (overrides `defaults.url`) |
+| `apiKey` | API key for this model (overrides `defaults.apiKey`) |
+| `secretRef` | K8s secret name (overrides `defaults.secretRef`) |
+| `secretRefKey` | Key within the secret (overrides `defaults.secretRefKey`) |
+| `extraHeaders` | Extra HTTP headers (replaces `defaults.extraHeaders` if set) |
+| `queryParams` | Query parameters (replaces `defaults.queryParams` if set) |
+| `temperature` | Temperature setting — agent and tasks only |
+| `label` | Human-readable name for the UI dropdown — agent only |
+| `default` | Mark which agent model is the default — agent only |
+
+:::info Override Semantics
+Per-model `extraHeaders` and `queryParams` **replace** the defaults entirely (not merged key-by-key). If you need both default and model-specific headers, repeat the shared ones in the per-model block.
+:::
+
+### LLM Provider Examples
 
 #### OpenAI (Direct)
 
-Leave `url` empty and provide the secret reference:
-
 ```yaml
-testkube-ai-service:
-  enabled: true
-  llmApi:
-    secretRef: "<secret-name>"
+inference:
+  defaults:
+    secretRef: "openai-secret"
+    secretRefKey: "api-key"
+  agent:
+    - model: gpt-4o
+      default: true
+  tasks:
+    model: gpt-4o-mini
+  embeddings:
+    model: text-embedding-3-small
 ```
 
-#### Self-Hosted or Third-Party LLMs
+#### Azure OpenAI — Separate Deployments
 
-For self-hosted models (vLLM, LiteLLM, OpenLLM) or commercial gateways:
+Azure OpenAI uses per-deployment URLs, header-based auth, and requires an `api-version` query parameter:
 
 ```yaml
-testkube-ai-service:
-  enabled: true
-  llmApi:
-    url: "http://your-llm-service:8000/v1"
-    secretRef: "<secret-name>"
+inference:
+  defaults:
+    extraHeaders:
+      api-key: "azure-shared-key"
+    queryParams:
+      api-version: "2024-02-01"
+  agent:
+    - model: gpt-4o
+      default: true
+      url: "https://myresource.openai.azure.com/openai/deployments/gpt-4o"
+  tasks:
+    model: gpt-4o-mini
+    url: "https://myresource.openai.azure.com/openai/deployments/gpt-4o-mini"
+  embeddings:
+    model: text-embedding-3-small
+    url: "https://myresource.openai.azure.com/openai/deployments/text-embedding-3-small"
+```
+
+#### vLLM / Local Deployment — No Embeddings
+
+When your LLM provider doesn't support the `/v1/embeddings` endpoint, omit the `embeddings` block to disable it:
+
+```yaml
+inference:
+  defaults:
+    url: "http://vllm.internal:8000/v1"
+  agent:
+    - model: meta-llama/Llama-3.1-70B
+      default: true
+      temperature: 0
+  tasks:
+    model: meta-llama/Llama-3.1-8B
+  # embeddings: omitted — embeddings features disabled
+```
+
+#### LiteLLM Proxy — Multiple Models
+
+```yaml
+inference:
+  defaults:
+    url: "https://litellm.corp.internal/v1"
+    apiKey: "proxy-master-key"
+  agent:
+    - model: openai/gpt-4o
+      default: true
+    - model: anthropic/claude-sonnet-4-20250514
+  tasks:
+    model: openai/gpt-4o-mini
+  embeddings:
+    model: openai/text-embedding-3-small
+```
+
+#### Mixed Providers — Different Keys and Endpoints Per Role
+
+```yaml
+inference:
+  agent:
+    - model: claude-sonnet-4-20250514
+      default: true
+      url: "https://api.anthropic.com/v1"
+      extraHeaders:
+        x-api-key: "sk-ant-..."
+        anthropic-version: "2023-06-01"
+    - model: gpt-4o
+      url: "https://api.openai.com/v1"
+      apiKey: "sk-proj-..."
+  tasks:
+    model: gpt-4o-mini
+    url: "https://api.openai.com/v1"
+    apiKey: "sk-proj-..."
+  embeddings:
+    model: text-embedding-3-small
+    url: "https://api.openai.com/v1"
+    apiKey: "sk-proj-..."
+```
+
+#### K8s Secrets for API Keys
+
+```yaml
+inference:
+  defaults:
+    url: "https://api.openai.com/v1"
+    secretRef: "ai-service-llm-keys"
+    secretRefKey: "openai-api-key"
+  agent:
+    - model: gpt-4o
+      default: true
+  tasks:
+    model: gpt-4o-mini
+  embeddings:
+    model: text-embedding-3-small
+    secretRef: "ai-service-embeddings-key"
+    secretRefKey: "api-key"
 ```
 
 #### Testkube Hosted LLM Proxy (Trials Only)
 
-For evaluation purposes, you can use the Testkube hosted proxy:
-
 ```yaml
 testkube-ai-service:
   enabled: true
-  llmApi:
-    url: "https://llm.testkube.io"
-    # No secretRef needed - authentication handled via license key
+  inference:
+    defaults:
+      url: "https://llm.testkube.io"
+    agent:
+      - model: gpt-4o
+        default: true
 ```
 
 :::warning
 The hosted proxy is intended **only for trials, demos, and onboarding**. It has usage limits and is not recommended for production workloads.
 :::
 
-### Advanced Model Configuration
+### Disabling Embeddings
 
-For more granular control over AI models, you can configure multiple models with different roles using the `models` array:
-
-```yaml
-testkube-ai-service:
-  enabled: true
-  models:
-    - name: gpt-5.2-codex       # Required - model identifier
-      type: primary             # Main model for AI Agents deep reasoning loop
-      temperature: 0            # Optional - temperature setting
-      url: ""                   # Optional - custom LLM endpoint
-      apiKey: ""                # Optional - direct API key
-      secretRef: ""             # Optional - K8s secret name
-      secretRefKey: ""          # Optional - key within the secret
-    - name: gpt-5-mini
-      type: lightweight         # Fast model for UI enrichment tasks
-      temperature: 1            # Optional - omit to use the model's default
-      secretRef: "llm-secrets"
-      secretRefKey: "OPENAI_API_KEY"
-```
-
-#### Model Types
-
-| Type | Purpose | Examples |
-|------|---------|----------|
-| `primary` | Used within the deep agentic reasoning loop for complex tasks like test analysis, workflow generation, and debugging | AI Agents sessions, complex Copilot queries |
-| `lightweight` | Used to enrich the UI with summaries, generate descriptions, and create titles | Execution summaries, workflow descriptions, conversation titles |
-
-If only one model is configured (or using the simple `model` property), it will be used for both primary and lightweight tasks.
-
-#### Model Properties
-
-Each model in the `models` array supports the following properties:
-
-| Property | Required | Description |
-|----------|----------|-------------|
-| `name` | Yes | Model identifier (e.g., `gpt-5.2-codex`, `gpt-4o`) |
-| `type` | No | `primary` or `lightweight`. First model defaults to `primary` if not specified |
-| `temperature` | No | Temperature setting (0-2). Omit to use the model's default. Some models like `gpt-5.2` only support the default value |
-| `url` | No | Custom LLM endpoint URL (defaults to global `llmApi.url` or OpenAI) |
-| `apiKey` | No | Direct API key value (not recommended for production) |
-| `secretRef` | No | Kubernetes secret name containing the API key |
-| `secretRefKey` | No | Key within the secret (defaults to `LLM_API_KEY`) |
-
-:::tip
-For most deployments, configure `secretRef` and `secretRefKey` to securely reference API keys stored in Kubernetes secrets.
-:::
-
-#### Configuration Priority
-
-Testkube evaluates model configuration in the following order (highest priority first):
-
-1. **`modelsFile`** — External YAML file (see below)
-2. **`models`** — Array of model configurations in Helm values
-3. **`model`** — Simple single model name
-
-Only the highest-priority configuration that is set will be used.
-
-#### Simple vs Advanced Configuration
-
-For simple deployments with a single model, use the `model` property:
-
-```yaml
-testkube-ai-service:
-  enabled: true
-  model: "gpt-5.2-codex"
-  llmApi:
-    secretRef: "llm-secrets"
-```
-
-For advanced deployments with multiple models or different LLM providers, use the `models` array as shown above.
-
-#### External Models File
-
-For deployments that manage configuration outside of Helm values, you can provide a models file directly:
-
-```yaml
-testkube-ai-service:
-  modelsFile:
-    enabled: true
-    content: |
-      models:
-        - name: gpt-5.2-codex
-          type: primary
-          temperature: 0
-        - name: gpt-5-mini
-          type: lightweight
-```
-
-This is useful when model configurations are managed by external tooling or stored separately from your Helm values.
+To disable embeddings (e.g., when your LLM provider doesn't support `/v1/embeddings`), simply omit the `embeddings` block from your `inference:` configuration. The AI service will skip vector store initialization and work without embedding-enhanced context.
 
 ### Authentication Configuration
 
@@ -242,8 +293,9 @@ For corporate proxies, inject proxy variables into the AI service pod:
 ```yaml
 testkube-ai-service:
   enabled: true
-  llmApi:
-    secretRef: "<secret-name>"
+  inference:
+    defaults:
+      secretRef: "<secret-name>"
   extraEnvVars:
     - name: HTTP_PROXY
       value: "http://proxy.domain:8080"
@@ -252,6 +304,66 @@ testkube-ai-service:
     - name: NO_PROXY
       value: ""
 ```
+
+---
+
+## Legacy Configuration (Deprecated)
+
+:::caution
+The `llmApi`, `model`, `models[]`, and `modelsFile` keys are deprecated and will be removed in a future release. Please migrate to the `inference:` block above. Existing deployments using these keys will continue to work — the system automatically maps them to the new format internally.
+:::
+
+<details>
+<summary>Legacy configuration reference (click to expand)</summary>
+
+### Legacy Simple Configuration
+
+```yaml
+testkube-ai-service:
+  enabled: true
+  llmApi:
+    secretRef: "<secret-name>"
+```
+
+### Legacy Models Array
+
+```yaml
+testkube-ai-service:
+  enabled: true
+  models:
+    - name: gpt-5.2-codex
+      type: primary
+      temperature: 0
+    - name: gpt-5-mini
+      type: lightweight
+  llmApi:
+    secretRef: "llm-secrets"
+```
+
+### Legacy Model Types
+
+| Type | New Equivalent | Purpose |
+|------|---------------|---------|
+| `primary` | `agent` | Main reasoning models |
+| `lightweight` | `tasks` | Quick UI enrichment tasks |
+
+### Legacy Configuration Priority
+
+1. **`modelsFile`** — External YAML file
+2. **`models`** — Array of model configurations
+3. **`model`** — Simple single model name
+
+### Legacy Environment Variables
+
+| Variable | New Equivalent | Description |
+|----------|---------------|-------------|
+| `LLM_API_KEY` | `INFERENCE_DEFAULT_API_KEY` | API key for LLM service |
+| `LLM_API_URL` | `inference.defaults.url` | Custom LLM endpoint |
+| `MODEL_NAME` | `inference.agent[0].model` | Model name |
+| `AI_MODELS_FILE` | `INFERENCE_CONFIG_FILE` | Path to model config file (different YAML schema — not a direct drop-in replacement) |
+| `LLM_EXTRA_HEADERS` | `inference.defaults.extraHeaders` | Extra HTTP headers |
+
+</details>
 
 ---
 
@@ -320,14 +432,12 @@ These are set on the Control Plane (cloud-api), not the AI service:
 | `API_BASE_URL` | Yes (for AI features) | External base URL of the cloud-api used by the AI service for callbacks (e.g. `https://api.example.com`) |
 | `MCP_ENABLED` | No | Set to `true` to enable MCP integration (default: `false`) |
 
-### LLM Configuration
+### Inference Configuration
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `LLM_API_KEY` | Conditional | Required if not using license key or custom LLM |
-| `LLM_API_URL` | No | Custom LLM endpoint (OpenAI-compatible) |
-| `MODEL_NAME` | No | Simple model name (e.g., `gpt-4o`, `gpt-5.2-codex`) |
-| `AI_MODELS_FILE` | No | Path to YAML file with advanced model configurations (takes precedence over `MODEL_NAME`) |
+| Variable | Description |
+|----------|-------------|
+| `INFERENCE_CONFIG_FILE` | Path to the inference configuration YAML file (set automatically by Helm) |
+| `INFERENCE_DEFAULT_API_KEY` | Default API key for inference (from `inference.defaults.secretRef`) |
 
 ### Authentication
 
@@ -351,7 +461,8 @@ These are set on the Control Plane (cloud-api), not the AI service:
 - [ ] LLM API key secret created in the correct namespace
 - [ ] Helm values configured:
   - [ ] `testkube-ai-service.enabled: true`
-  - [ ] `testkube-ai-service.llmApi.secretRef` set
+  - [ ] `testkube-ai-service.inference.defaults.secretRef` set
+  - [ ] `testkube-ai-service.inference.agent` configured with at least one model
   - [ ] `testkube-cloud-ui.ai.enabled: true`
   - [ ] `testkube-cloud-ui.ai.aiServiceApiUri` set
 - [ ] Control Plane environment variables set:
