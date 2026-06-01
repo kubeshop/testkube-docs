@@ -18,7 +18,7 @@ additional models available — see [Configuring AI Models](/articles/ai-models)
 
 ## On-Prem Users
 
-For On-Prem installations, you need to configure the AI service manually as described below - AND enable the AI Assistant 
+For On-Prem installations, you need to configure the AI service manually as described below - AND enable the AI Assistant
 in the Dashboard as described above.
 
 ### AI Service Helm Configuration
@@ -36,11 +36,19 @@ testkube-ai-service:
     secretRef:
       name: my-postgres-credentials     # Secret with DB credentials
       endpointKey: host                 # Key containing DB host
-      usernameKey: username             # Key containing DB username  
+      usernameKey: username             # Key containing DB username
       passwordKey: password             # Key containing DB password
-  llmApi:
-    secretRef: my-openai-secret
-    secretRefKey: OPENAI_API_KEY
+  inference:
+    defaults:
+      secretRef: my-openai-secret
+      secretRefKey: api-key
+    agent:
+      - model: gpt-4o
+        default: true
+    tasks:
+      model: gpt-4o-mini
+    embeddings:
+      model: text-embedding-3-small
 
 testkube-cloud-api:
   aiApiSubdomain: ai
@@ -59,11 +67,20 @@ For Azure OpenAI, self-hosted models, or other OpenAI-compatible APIs:
 
 ```yaml
 testkube-ai-service:
-  llmApi:
-    url: "https://my-company.openai.azure.com/openai/deployments/gpt-4o"
-    modelName: "gpt-4o"
-    secretRef: my-azure-openai-secret
-    secretRefKey: AZURE_OPENAI_KEY
+  inference:
+    defaults:
+      extraHeaders:
+        api-key: "your-azure-key"
+      queryParams:
+        api-version: "2024-02-01"
+    agent:
+      - model: gpt-4o
+        default: true
+        url: "https://my-company.openai.azure.com/openai/deployments/gpt-4o"
+    tasks:
+      model: gpt-4o-mini
+      url: "https://my-company.openai.azure.com/openai/deployments/gpt-4o-mini"
+    # Omit embeddings if your provider doesn't support /v1/embeddings
 ```
 
 ---
@@ -72,10 +89,10 @@ testkube-ai-service:
 
 | Setting | Default | Required for AI |
 |---------|---------|-----------------|
-| `testkube-ai-service.enabled` | `false` | ✅ Must be `true` |
-| `testkube-cloud-ui.ai.enabled` | `false` | ✅ Must be `true` |
-| `testkube-ai-service.db.*` | empty | ✅ PostgreSQL required |
-| `testkube-ai-service.llmApi.secretRef` | empty | ✅ OpenAI key required |
+| `testkube-ai-service.enabled` | `false` | Must be `true` |
+| `testkube-cloud-ui.ai.enabled` | `false` | Must be `true` |
+| `testkube-ai-service.postgres.*` | empty | PostgreSQL required |
+| `testkube-ai-service.inference.defaults.secretRef` | empty | API key required |
 | `postgresql.enabled` | `false` | Only if using bundled DB |
 
 ## Next Steps
