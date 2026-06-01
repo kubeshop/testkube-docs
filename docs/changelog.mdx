@@ -70,6 +70,10 @@ This release improves agent reliability for webhooks and execution-related flows
 
 ### Open Source Updates
 
+#### Templated Security Contexts
+
+TestWorkflowTemplates can now use integer config parameters in security context fields such as `runAsUser`, `runAsGroup`, and `fsGroup`. This lets reusable templates render valid Kubernetes pod and container security contexts while keeping those values configurable.
+
 #### AI Analysis in the Public Execution Viewer
 
 Sharing a workflow execution publicly is useful for debugging handoffs, but raw logs and reports still take time to interpret. The public execution viewer now includes AI-generated summaries of test results so readers can quickly understand failures and what to investigate next — alongside the JUnit report browsing added in recent patches.
