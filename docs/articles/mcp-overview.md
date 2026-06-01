@@ -40,9 +40,10 @@ Choose the setup method that works best for you:
 **The easiest way to get started** - Connect directly to the Testkube Control Plane without any local installation.
 
 - ✅ No installation required
+- ✅ OAuth authentication — just log in via browser, no API keys needed
 - ✅ Always available
 - ✅ Best for remote access and team collaboration
-- ✅ Works with any AI tool that supports SSE transport
+- ✅ Works with Claude Code, VS Code, Cursor, and other MCP clients
 
 **[Get Started with Hosted Endpoint →](./mcp-hosted)**
 

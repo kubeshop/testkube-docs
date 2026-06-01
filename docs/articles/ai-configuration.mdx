@@ -44,12 +44,9 @@ For On-Prem installations, you can configure your own OpenAI API Key or use a di
 
 Self-hosted installations require additional infrastructure and configuration apart from the above Cloud Control Plane configuration.
 
-### Infrastructure Requirements
-
-#### PostgreSQL Database
-
-A PostgreSQL database is required for LangGraph checkpointing (conversation persistence). Configure the database connection 
-via `POSTGRES_URI` environment variable or Helm `db.secretRef` configuration.
+:::note PostgreSQL
+The AI service uses PostgreSQL for conversation persistence (LangGraph checkpointing). It shares the control plane's PostgreSQL instance by default — no additional database infrastructure is required.
+:::
 
 ### Helm Configuration
 
