@@ -574,6 +574,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "Granular Metrics",
+                  id: "articles/granular-metrics",
+                },
+                {
+                  type: "doc",
                   label: "AI Analysis",
                   id: "articles/AI-test-insights",
                 },

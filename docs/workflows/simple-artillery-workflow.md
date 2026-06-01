@@ -19,5 +19,11 @@ spec:
   - name: Run Artillery tests
     run:
       image: artilleryio/artillery:2.0.9
-      shell: /home/node/artillery/bin/run run artillery-smoke-test.yaml
+      shell: |
+        mkdir -p /data/artifacts
+        /home/node/artillery/bin/run run artillery-smoke-test.yaml -o /data/artifacts/artillery-report.json
+    artifacts:
+      workingDir: /data/artifacts
+      paths:
+      - '*'
 ```

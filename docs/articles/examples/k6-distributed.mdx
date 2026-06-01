@@ -28,9 +28,12 @@ number of nodes
     * It runs K6 executable against that test case (`steps[0].parallel.run.shell`)
         * It passes number of Virtual Users and test duration via K6 parameters
         * It uses K6 [**--execution-segment**](https://grafana.com/docs/k6/latest/using-k6/k6-options/reference/#execution-segment) argument to select the fraction of tests to run
-    * It retrieves the generated HTML reports as artifacts
+    * It exports a per-worker `summary.json` with `--summary-export` and retrieves the generated HTML and JSON artifacts
 
 <DistributedK6/>
+
+Each worker uploads a unique `summary-worker-*.json` file. Testkube ingests these k6 summary reports as
+[granular metrics](/articles/granular-metrics).
 
 <Tabs>
 <TabItem value="logs" label="Log Output" default>
