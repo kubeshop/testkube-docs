@@ -47,6 +47,10 @@ In your IdP’s SCIM configuration:
 
 > ⚠️ The SCIM endpoint is organization-specific and will only manage users and teams for that organization.
 
+> ⚠️ Testkube identifies users by email. Map your IdP's `userName` to the user's email address (for example, `userPrincipalName` in Entra ID, or the Email field in Okta). If `userName` is set to anything else, Testkube can't reliably match users, and you end up with duplicate accounts or updates that silently do nothing.
+
+> 📘 The settings above are enough to connect. For full step-by-step setup — including how to assign roles and entitlements and which response format to use — follow the guide for your provider: [Okta](#okta) or [Microsoft Entra ID (Azure AD)](#microsoft-entra-id-azure-ad).
+
 ---
 
 ## Manage Permissions in Testkube
@@ -71,6 +75,8 @@ Testkube uses **URNs (Uniform Resource Names)** to define roles. A role URN spec
 
 All of the settings below are configured on your Identity Provider side, so each user should have a `roles` attribute containing an array of strings.
 
+> 💡 Always reference environments and resource groups by their **ID or slug**, never their display name. A URN built from a display name won't match an existing resource, so the role is dropped. For entitlements it's worse: Testkube creates a brand-new resource with that name instead of using the one you meant.
+
 ### Organization Roles
 
 Example:
@@ -81,6 +87,8 @@ Example:
   ]
 }
 ```
+
+Here `my-org` is your organization's ID or slug. Because the SCIM endpoint already targets a single organization, you can use `*` instead to mean "this organization" (see [Wildcards](#wildcards) below).
 
 Available roles:
 - **owner** – Full control over the organization and all resources
@@ -192,7 +200,7 @@ Result: User has read access everywhere, but full admin in `production`.
 
 ## Entitlements
 
-Entitlements assign users or teams to environments or resource groups.
+Entitlements assign users or teams to environments or resource groups. An entitlement grants membership with read access. For more than read access, also assign an environment or resource group role from [Role Management](#role-management).
 
 All of the settings below are configured on your Identity Provider side, so each user should have an `entitlements` attribute containing an array of strings.
 
@@ -207,7 +215,40 @@ Example:
 }
 ```
 
-> 💡 If a resource, configured by an entitlement, doesn’t exist, Testkube creates it automatically.
+> 💡 If an entitlement points to an environment or resource group that doesn't exist yet, Testkube creates it. To attach to an existing resource instead of creating a duplicate, reference it by its ID or slug, not its display name.
+
+---
+
+## Roles and Entitlements Format
+
+Identity providers don't agree on how to send multi-valued attributes like `roles` and `entitlements`. Testkube understands both shapes:
+
+| Shape | Example | Used by |
+|-------|---------|---------|
+| Simple (default) | `["urn:testkube:role:organization:*:admin"]` | Okta and most providers |
+| Complex ([RFC 7643](https://datatracker.ietf.org/doc/html/rfc7643#section-2.4)) | `[{"value": "urn:testkube:role:organization:*:admin"}]` | Microsoft Entra ID |
+
+Testkube accepts **both shapes on input**, so creating and updating users always works. The setting only changes the shape Testkube uses in its **responses** — the shape your IdP reads back when it imports users or reconciles state.
+
+**Pick the shape your IdP expects**, because the IdP parses Testkube's responses against its own schema and the wrong one breaks that read-back:
+
+- **Okta** expects strings, so keep the default (simple). If you switch an Okta organization to complex, Okta's user import fails with `Invalid value data type` — it receives objects where it expects strings.
+- **Entra ID** expects objects, so turn complex on. With the simple shape, Entra can't reconcile what it reads back against what it provisioned.
+
+Turn complex on under **Organization Management → Product Features → SCIM** by checking **Use RFC 7643 complex format for roles & entitlements**. The setting is per organization, so point Okta at a simple-format organization and Entra at a complex-format one.
+
+Example response with complex format on:
+
+```json
+{
+  "roles": [
+    {"value": "urn:testkube:role:organization:*:admin"}
+  ],
+  "entitlements": [
+    {"value": "urn:testkube:entitlement:environment:staging"}
+  ]
+}
+```
 
 ---
 
@@ -294,10 +335,12 @@ Afterwards enable SCIM integration in the desired organization via the dashboard
 - Check email matches IdP credentials
 - Review IdP provisioning logs
 
-### Roles not applied
-- Verify URN format (colons, segments)
-- Match environment/resource names exactly (case-sensitive)
-- Check wildcard usage
+### Roles or entitlements not applied
+- Make sure **Manage permissions in Testkube** is turned off. While it's on, Testkube ignores the `roles` and `entitlements` attributes from SCIM.
+- Check the URN format: `urn:testkube:role:<scope>:<id-or-slug>:<role>` and `urn:testkube:entitlement:<scope>:<id-or-slug>`.
+- Reference environments and resource groups by ID or slug, not display name.
+- Look for `ignoring all SCIM roles: no value matched the expected format` in the control plane API logs. The warning lists the values it rejected and the format it expected, which usually points straight at a malformed URN.
+- Entra ID only: if a role comes through as a friendly name like `Admin` instead of the URN, the app role's display name is still the friendly name. Entra sends the display name, not the value, so set the display name to the URN.
 
 ### SCIM request failures
 - Confirm bearer token is correct
@@ -382,3 +425,53 @@ This is done by defining extra attributes in Okta and mapping them to Testkube.
    * From **Okta User** → **Created SCIM Application**
    * And optionally back from **Created SCIM Application** → **Okta User** (if you want to sync values both ways).
 3. Save the mappings.
+
+#### Step 3. Set the Values on Users or Groups
+Mapping the attributes only tells Okta where to send them — you still set the actual URN values:
+
+- **Per user:** go to **Directory** → **People**, open a user, then **Profile** → **Edit Attributes**, and set `roles` and `entitlements` to the Testkube URNs (for example, `urn:testkube:role:organization:*:admin` and `urn:testkube:entitlement:environment:staging`).
+- **For many users at once:** set the values on an Okta **group**, then push the group to the app so everyone in it inherits the same roles and entitlements.
+
+Okta sends the values to Testkube on the next sync, or right away when you assign the user to the app.
+
+### Microsoft Entra ID (Azure AD)
+
+This guide integrates Microsoft Entra ID with Testkube for **SCIM provisioning**. Entra sends the complex attribute format, so turn on complex format for the organization first (see [Roles and Entitlements Format](#roles-and-entitlements-format)).
+
+#### Prerequisites
+- A Testkube Organization with SCIM enabled and **Use RFC 7643 complex format** turned on.
+- The organization's SCIM endpoint URL and bearer token from the Testkube UI.
+- Admin access to your Entra tenant.
+
+#### Step 1. Create the Enterprise Application
+1. In the **Microsoft Entra admin center**, go to **Enterprise applications** → **New application**.
+2. Click **Create your own application**, name it (for example, `Testkube SCIM`), and choose **Integrate any other application you don't find in the gallery (Non-gallery)**.
+
+#### Step 2. Connect Provisioning
+1. Open the app, go to **Provisioning**, and set **Provisioning Mode** to **Automatic**.
+2. Under **Admin Credentials**, enter:
+   - **Tenant URL** → your Testkube SCIM endpoint: `https://<testkube-domain>/organizations/<org_id>/scim`
+   - **Secret Token** → the Testkube SCIM bearer token.
+3. Click **Test Connection**. It should succeed; then save the configuration.
+
+#### Step 3. Match Users by Email
+Go to **Provisioning** → **Mappings** → **Provision Microsoft Entra ID Users** and confirm that `userName` is mapped from `userPrincipalName` and is set as the matching attribute. Testkube matches users by email, so this mapping is required.
+
+#### Step 4. Send Roles
+Entra builds the `roles` value from a user's **app role assignment**, and it sends the app role's **display name**, not its value. So the display name has to be the Testkube role URN.
+
+1. In **App registrations**, open your app (the non-gallery app you created also appears here), go to **App roles**, and create a role:
+   - **Display name** → the Testkube URN, for example `urn:testkube:role:organization:*:admin`
+   - **Value** → the same URN
+   - **Allowed member types** → Users/Groups
+2. Back in the app's **Provisioning** → **Mappings**, click **Add New Mapping**:
+   - **Mapping type** → Expression
+   - **Expression** → `SingleAppRoleAssignment([appRoleAssignments])`
+   - **Target attribute** → `roles[primary eq "True"].value`
+3. Go to **Users and groups**, add a user, and assign the app role you created.
+
+#### Step 5. Send Entitlements (optional)
+Entra has no built-in source for `entitlements`, and `entitlements` isn't in its default attribute list. To send them, open **Provisioning** → **Mappings** → **Show advanced options** → **Edit attribute list**, add `entitlements`, then map it from a constant value or a directory extension attribute that holds the URN. For most setups, granting environment and resource group access through **roles** (Step 4) is simpler than entitlements.
+
+#### Step 6. Provision
+Use **Provision on demand** to push a single user immediately, or **Start provisioning** for the scheduled sync. Confirm the user appears in Testkube with the expected role.
