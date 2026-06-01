@@ -13,11 +13,30 @@ Before configuring your AI tools, make sure you've set up the Testkube MCP Serve
 
 GitHub Copilot with Agent mode in VS Code provides excellent agentic capabilities for multi-step testing workflows.
 
-### Using the Hosted Endpoint (Recommended)
+### Using the Hosted Endpoint with OAuth (Recommended)
 
 1. **Create or edit your MCP configuration file:**
 
    **Location:** `~/Library/Application Support/Code/User/mcp.json` (macOS) or `%APPDATA%\Code\User\mcp.json` (Windows)
+
+   ```json
+   {
+     "servers": {
+       "testkube": {
+         "type": "http",
+         "url": "https://api.testkube.io/organizations/tkcorg_YOUR_ORG_ID/environments/tkcenv_YOUR_ENV_ID/mcp"
+       }
+     }
+   }
+   ```
+
+   Replace `tkcorg_YOUR_ORG_ID` and `tkcenv_YOUR_ENV_ID` with your actual values. No API token needed — VS Code handles OAuth authentication automatically via a browser login.
+
+   **[Learn more about the hosted endpoint →](./mcp-hosted)**
+
+### Using the Hosted Endpoint with API Token
+
+   If you prefer using an API token (e.g., for shared or automated setups):
 
    ```json
    {
@@ -36,8 +55,6 @@ GitHub Copilot with Agent mode in VS Code provides excellent agentic capabilitie
    ```
 
    Replace `tkcorg_YOUR_ORG_ID`, `tkcenv_YOUR_ENV_ID`, and `YOUR_API_TOKEN_HERE` with your actual values.
-   
-   **[Learn more about the hosted endpoint →](./mcp-hosted)**
 
 2. **Restart VS Code** to load the new configuration
 
@@ -147,8 +164,12 @@ Look at my recent test failures and help me understand what's causing them. Chec
 
 For direct interaction with Claude through the desktop application.
 
-:::warning Claude Desktop Limitation
-Claude Desktop's `claude_desktop_config.json` only supports **local stdio servers** (`command` + `args`). It does not support remote MCP servers configured directly in the config file. To connect to a remote MCP server, use the CLI or Docker options below, or add the server via **Settings → Integrations** in Claude Desktop.
+#### Using the Hosted Endpoint with OAuth
+
+You can add the Testkube MCP server via **Settings → Connectors → Add custom connector** in Claude Desktop. Paste the endpoint URL and Claude Desktop handles OAuth authentication automatically — you'll see a browser popup to log in.
+
+:::info
+Claude Desktop's `claude_desktop_config.json` only supports **local stdio servers** (`command` + `args`). To use the hosted endpoint with OAuth, add it as a custom connector via Settings → Connectors, or use the CLI/Docker options below.
 :::
 
 #### Using the CLI (Recommended)
@@ -203,10 +224,20 @@ Claude Desktop's `claude_desktop_config.json` only supports **local stdio server
 
 ### Claude Code
 
-Use the following to add the Docker MCP Server to Claude Code
+#### Using the Hosted Endpoint with OAuth (Recommended)
 
 ```bash
-claude mcp add testkube -- docker run --rm -i \ 
+claude mcp add --transport http testkube https://api.testkube.io/organizations/tkcorg_YOUR_ORG_ID/environments/tkcenv_YOUR_ENV_ID/mcp
+```
+
+Claude Code handles OAuth automatically — a browser window opens for you to log in. No tokens needed.
+
+**[Learn more about the hosted endpoint →](./mcp-hosted)**
+
+#### Using Docker
+
+```bash
+claude mcp add testkube -- docker run --rm -i \
    -e TK_ACCESS_TOKEN=${TK_ACCESS_TOKEN} \
    -e TK_ORG_ID=${TK_ORG_ID} \
    -e TK_ENV_ID=${TK_ENV_ID} \
