@@ -109,7 +109,6 @@ spec:
 - `tagsIgnore` (example: `["v*-rc*", "v0.*"]`) takes precedence over `tags`.
 - `paths` (example: `["src/**", "charts/**"]`) is an include filter and supports glob patterns (`/**` matches all descendants).
 - `pathsIgnore` (example: `["**/*.md", "docs/**"]`) excludes matching paths and takes precedence over `paths`.
-- `revision` is deprecated for git content triggers in favor of branch/tag filters (`revision: main` → `branches: ["main"]`, `revision: v1.2.3` → `tags: ["v1.2.3"]`).
 - The polling interval is configurable; by default Testkube checks the repository every 1 minute.
 - Testkube caches the last-seen commit per matching ref to detect new changes between polling cycles.
 - After API server restart or leader failover, each trigger is re-baselined to the current refs and commits pushed while the informer was down are not replayed.
