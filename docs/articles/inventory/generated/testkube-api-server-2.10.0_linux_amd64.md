@@ -3,19 +3,19 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:be5c0f4be887a85a4d0593c60425ef1491f27ba38605fe4b7a183a77127e7c01</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 9" src="https://img.shields.io/badge/critical-9-8b1924"/> <img alt="high: 16" src="https://img.shields.io/badge/high-16-e25d68"/> <img alt="medium: 28" src="https://img.shields.io/badge/medium-28-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/low-2-fce1a9"/> <!-- unspecified: 0 --></td></tr>
-<tr><td>platform</td><td>linux/arm64</td></tr>
-<tr><td>size</td><td>68 MB</td></tr>
-<tr><td>packages</td><td>270</td></tr>
+<tr><td>digest</td><td><code>sha256:2b30b216f0c5730fa771baecc341074ab952c156e6f8c2e58f1ee8646f248546</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 9" src="https://img.shields.io/badge/critical-9-8b1924"/> <img alt="high: 15" src="https://img.shields.io/badge/high-15-e25d68"/> <img alt="medium: 21" src="https://img.shields.io/badge/medium-21-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>platform</td><td>linux/amd64</td></tr>
+<tr><td>size</td><td>73 MB</td></tr>
+<tr><td>packages</td><td>268</td></tr>
 </table>
 </details></table>
 </details>
 
 <table>
 <tr><td valign="top">
-<details><summary><img alt="critical: 7" src="https://img.shields.io/badge/C-7-8b1924"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/M-4-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.50.0</code> (golang)</summary>
+<details><summary><img alt="critical: 7" src="https://img.shields.io/badge/C-7-8b1924"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/M-4-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.51.0</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/crypto@0.50.0</code></small><br/>
+<small><code>pkg:golang/golang.org/x/crypto@0.51.0</code></small><br/>
 
 ```dockerfile
 # api-server.Dockerfile (32:32)
@@ -249,7 +249,7 @@ SSH servers which use CertChecker as a public key callback without setting IsUse
 <tr><td valign="top">
 <details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 5" src="https://img.shields.io/badge/H-5-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libssl3</strong> <code>3.5.5-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/libssl3@3.5.5-r0?arch=aarch64&distro=alpine-3.23.3&upstream=openssl</code></small><br/>
+<small><code>pkg:apk/alpine/libssl3@3.5.5-r0?arch=x86_64&distro=alpine-3.23.3&upstream=openssl</code></small><br/>
 
 ```dockerfile
 # api-server.Dockerfile (29:29)
@@ -379,9 +379,9 @@ FROM ${ALPINE_IMAGE}
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 5" src="https://img.shields.io/badge/M-5-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.53.0</code> (golang)</summary>
+<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 5" src="https://img.shields.io/badge/M-5-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.54.0</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/net@0.53.0</code></small><br/>
+<small><code>pkg:golang/golang.org/x/net@0.54.0</code></small><br/>
 
 ```dockerfile
 # api-server.Dockerfile (32:32)
@@ -490,274 +490,6 @@ Parsing arbitrary HTML which is then rendered using Render can result in an unex
 <blockquote>
 
 Parsing arbitrary HTML which is then rendered using Render can result in an unexpected HTML tree. This can be leveraged to execute XSS attacks in applications that attempt to sanitize input HTML before rendering.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 3" src="https://img.shields.io/badge/H-3-e25d68"/> <img alt="medium: 12" src="https://img.shields.io/badge/M-12-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libcurl</strong> <code>8.17.0-r1</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/libcurl@8.17.0-r1?arch=aarch64&distro=alpine-3.23.3&upstream=curl</code></small><br/>
-
-```dockerfile
-# api-server.Dockerfile (30:30)
-RUN apk --no-cache add ca-certificates libssl3 git
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-6276?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.17.0-r1"><img alt="high : CVE--2026--6276" src="https://img.shields.io/badge/CVE--2026--6276-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=8.17.0-r1</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.013%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-5773?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.17.0-r1"><img alt="high : CVE--2026--5773" src="https://img.shields.io/badge/CVE--2026--5773-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=8.17.0-r1</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.019%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-3805?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C8.19.0-r0"><img alt="high : CVE--2026--3805" src="https://img.shields.io/badge/CVE--2026--3805-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;8.19.0-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>8.19.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.030%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-5545?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.17.0-r1"><img alt="medium : CVE--2026--5545" src="https://img.shields.io/badge/CVE--2026--5545-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=8.17.0-r1</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.037%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-3784?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C8.19.0-r0"><img alt="medium : CVE--2026--3784" src="https://img.shields.io/badge/CVE--2026--3784-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;8.19.0-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>8.19.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.023%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-1965?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C8.19.0-r0"><img alt="medium : CVE--2026--1965" src="https://img.shields.io/badge/CVE--2026--1965-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;8.19.0-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>8.19.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.073%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2025-14017?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C8.19.0-r0"><img alt="medium : CVE--2025--14017" src="https://img.shields.io/badge/CVE--2025--14017-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;8.19.0-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>8.19.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.004%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-6253?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.17.0-r1"><img alt="medium : CVE--2026--6253" src="https://img.shields.io/badge/CVE--2026--6253-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=8.17.0-r1</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.030%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-4873?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.17.0-r1"><img alt="medium : CVE--2026--4873" src="https://img.shields.io/badge/CVE--2026--4873-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=8.17.0-r1</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.014%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-7168?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.17.0-r1"><img alt="medium : CVE--2026--7168" src="https://img.shields.io/badge/CVE--2026--7168-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=8.17.0-r1</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.079%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-7009?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.17.0-r1"><img alt="medium : CVE--2026--7009" src="https://img.shields.io/badge/CVE--2026--7009-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=8.17.0-r1</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.013%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-6429?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.17.0-r1"><img alt="medium : CVE--2026--6429" src="https://img.shields.io/badge/CVE--2026--6429-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=8.17.0-r1</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.021%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-3783?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C8.19.0-r0"><img alt="medium : CVE--2026--3783" src="https://img.shields.io/badge/CVE--2026--3783-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;8.19.0-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>8.19.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.024%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2025-14819?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C8.19.0-r0"><img alt="medium : CVE--2025--14819" src="https://img.shields.io/badge/CVE--2025--14819-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;8.19.0-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>8.19.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.061%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2025-14524?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C8.19.0-r0"><img alt="medium : CVE--2025--14524" src="https://img.shields.io/badge/CVE--2025--14524-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;8.19.0-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>8.19.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.040%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
 
 </blockquote>
 </details>
@@ -1032,9 +764,158 @@ Mountpoint creation is now scoped to the container root using `os.Root` (Go 1.24
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/M-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libcurl</strong> <code>8.19.0-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/libcurl@8.19.0-r0?arch=x86_64&distro=alpine-3.23.3&upstream=curl</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (30:30)
+RUN apk --no-cache add ca-certificates libssl3 git
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-6276?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.19.0-r0"><img alt="high : CVE--2026--6276" src="https://img.shields.io/badge/CVE--2026--6276-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=8.19.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.013%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-5773?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.19.0-r0"><img alt="high : CVE--2026--5773" src="https://img.shields.io/badge/CVE--2026--5773-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=8.19.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.019%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-5545?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.19.0-r0"><img alt="medium : CVE--2026--5545" src="https://img.shields.io/badge/CVE--2026--5545-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=8.19.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.037%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-6253?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.19.0-r0"><img alt="medium : CVE--2026--6253" src="https://img.shields.io/badge/CVE--2026--6253-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=8.19.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.030%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-4873?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.19.0-r0"><img alt="medium : CVE--2026--4873" src="https://img.shields.io/badge/CVE--2026--4873-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=8.19.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.014%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-7168?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.19.0-r0"><img alt="medium : CVE--2026--7168" src="https://img.shields.io/badge/CVE--2026--7168-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=8.19.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.079%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-7009?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.19.0-r0"><img alt="medium : CVE--2026--7009" src="https://img.shields.io/badge/CVE--2026--7009-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=8.19.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.013%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-6429?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.19.0-r0"><img alt="medium : CVE--2026--6429" src="https://img.shields.io/badge/CVE--2026--6429-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=8.19.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.021%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>musl</strong> <code>1.2.5-r21</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/musl@1.2.5-r21?arch=aarch64&distro=alpine-3.23.3</code></small><br/>
+<small><code>pkg:apk/alpine/musl@1.2.5-r21?arch=x86_64&distro=alpine-3.23.3</code></small><br/>
 
 ```dockerfile
 # api-server.Dockerfile (29:29)
@@ -1079,39 +960,9 @@ FROM ${ALPINE_IMAGE}
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>git</strong> <code>2.52.0-r0</code> (apk)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>29.4.3+incompatible</code> (golang)</summary>
 
-<small><code>pkg:apk/alpine/git@2.52.0-r0?arch=aarch64&distro=alpine-3.23.3</code></small><br/>
-
-```dockerfile
-# api-server.Dockerfile (30:30)
-RUN apk --no-cache add ca-certificates libssl3 git
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2025-66413?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D2.52.0-r0"><img alt="high : CVE--2025--66413" src="https://img.shields.io/badge/CVE--2025--66413-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=2.52.0-r0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.058%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>29.4.0+incompatible</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/docker/cli@29.4.0%2Bincompatible</code></small><br/>
+<small><code>pkg:golang/github.com/docker/cli@29.4.3%2Bincompatible</code></small><br/>
 
 ```dockerfile
 # api-server.Dockerfile (32:32)
@@ -1139,9 +990,39 @@ Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Es
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>git</strong> <code>2.52.0-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/git@2.52.0-r0?arch=x86_64&distro=alpine-3.23.3</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (30:30)
+RUN apk --no-cache add ca-certificates libssl3 git
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-66413?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D2.52.0-r0"><img alt="high : CVE--2025--66413" src="https://img.shields.io/badge/CVE--2025--66413-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=2.52.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.058%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>zlib</strong> <code>1.3.1-r2</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/zlib@1.3.1-r2?arch=aarch64&distro=alpine-3.23.3</code></small><br/>
+<small><code>pkg:apk/alpine/zlib@1.3.1-r2?arch=x86_64&distro=alpine-3.23.3</code></small><br/>
 
 ```dockerfile
 # api-server.Dockerfile (29:29)
@@ -1186,173 +1067,9 @@ FROM ${ALPINE_IMAGE}
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/gofiber/fiber/v2</strong> <code>2.52.12</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/gofiber/fiber/v2@2.52.12</code></small><br/>
-
-```dockerfile
-# api-server.Dockerfile (32:32)
-COPY --from=build /app /bin/app
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-42554?s=github&n=v2&ns=github.com%2Fgofiber%2Ffiber&t=golang&vr=%3C%3D2.52.12"><img alt="medium 5.3: CVE--2026--42554" src="https://img.shields.io/badge/CVE--2026--42554-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=2.52.12</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.52.13</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:P/VC:N/VI:N/VA:N/SC:L/SI:L/SA:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.040%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-## Summary
-
-**Description**
-
-A Cross-Site Scripting (CWE-79) vulnerability in Go Fiber allows a remote attacker to inject arbitrary HTML/JavaScript by supplying `Accept: text/html` on any request whose handler passes attacker-influenced data to the AutoFormat() feature. This affects `github.com/gofiber/fiber/v3` (`DefaultRes.AutoFormat`) through version 3.1.0 and `github.com/gofiber/fiber/v2` (`Ctx.Format`) through version 2.52.12. 
-
-The developer opts into content negotiation by calling AutoFormat(), but does not opt into raw HTML emission for a particular request; Fiber chooses that branch from attacker-controlled Accept. Five of the six branches of the same method already escape. `JSON`, `XML`, `MsgPack`, and `CBOR` all route through encoders that neutralize markup; the txt branch emits `text/plain` and cannot execute. The html branch is the sole outlier in a method whose name (`AutoFormat`) and symmetrical structure actively telegraph "safe, format-agnostic reply."
-
-## Details
-The issue resides in `res.go` within `(*DefaultRes).AutoFormat()`. The method negotiates against the request Accept header, selects one of `html | json | txt | xml | msgpack | cbor`, and serializes the caller-supplied body accordingly.
-
-The "html" branch concatenates the stringified body directly into HTML markup with no output encoding:
-- `accept` comes from `r.c.Accepts(...)`, i.e. is fully attacker-controlled. An attacker can force the "html" branch on any `AutoFormat()` call regardless of which format the developer tested against.
-- `b` is produced from `body` via direct assignment (`string` / `[]byte`) or `fmt.Sprintf("%v", body)`. No `html.EscapeString` is applied.
-- The resulting string is sent as `text/html; charset=utf-8`, so browsers render it as active HTML.
-
-```go
-// res.go
-func (r *DefaultRes) AutoFormat(body any) error {
-
-    accept := r.c.DefaultReq.Accepts("html", "json", "txt", "xml", "msgpack", "cbor")
-
-    r.Type(accept)
-    var b string
-    switch val := body.(type) {
-    case string:
-        b = val
-    case []byte:
-        b = r.c.app.toString(val)
-    default:
-        b = fmt.Sprintf("%v", val)
-    }
-
-    switch accept {
-    case "txt":
-        return r.SendString(b)
-    case "json":
-        return r.JSON(body)
-    case "xml":
-        return r.XML(body)
-    case "html":
-        return r.SendString("<p>" + b + "</p>")
-    case "msgpack":
-        return r.MsgPack(body)
-    case "cbor":
-        return r.CBOR(body)
-    }
-    return r.SendString(b)
-}
-```
-## Impact
-
-This impacts all current v3 releases ≤ 3.1.0 containing `DefaultRes.AutoFormat`, and all current v2 releases ≤ 2.52.12 where the identical `"<p>" + b + "</p>"` construction exists in `(*Ctx).Format()`. Exploitation requires that an application call `c.AutoFormat(v)` where `v` (or a field stringified by `%v`) contains request-influenced data.
-
-A handler that uses `AutoFormat()` to serve multiple representations of the same data can be turned into an HTML XSS sink when the client sends `Accept: text/html`, even if the developer only tested the JSON path.
-
-This may result in:
-- **Reflected XSS** in the application's origin via any request-derived value reaching `AutoFormat`.
-- **Stored XSS** where the reflected value originates from persisted input later passed to `AutoFormat`.
-
-## Proposed Patch
-
-The injection surface is `r.Type("html")` followed by `r.SendString(b)` with unescaped caller data, where it constructs markup on the caller's behalf around a value whose HTML-ness the caller did not declare. A few options:
-- `AutoFormat()` should treat `body` as data, not markup, in the `"html"` branch and escape it before concatenating it into the framework-generated `<p>` wrapper. Callers that need raw negotiated HTML should use `Format()` with an explicit HTML handler.
-- Introduce a sibling method that escapes, leave `AutoFormat` alone for backward compatibility.
-
-HTML-escape the value in the "html" branch before concatenating it into the `<p>` wrapper.
-```go
-import "html"
-
-// ...
-case "html":
-    return r.SendString("<p>" + html.EscapeString(b) + "</p>")
-```
-
-`html.EscapeString` escapes `<`, `>`, `&`, `'`, `"`, which is sufficient for an element-text context. Apply the same change to v2's `(*Ctx).Format()`.
-
-## Proof of Concept
-
-```bash
-# Create project directory
-mkdir fiber-xss-poc && cd fiber-xss-poc
-
-# Initialize Go module
-go mod init fiber-xss-poc
-
-# Install Fiber v3
-go get github.com/gofiber/fiber/v3
-
-# Create the PoC file
-cat > main.go << 'EOF'
-package main
-
-import (
-	"github.com/gofiber/fiber/v3"
-)
-
-type User struct {
-	ID   int    `json:"id"`
-	Name string `json:"name"`
-}
-
-func main() {
-	app := fiber.New()
-	
-	app.Get("/api/user", func(c fiber.Ctx) error {
-		user := User{
-			ID:   1,
-			Name: c.Query("name", "anonymous"),
-		}
-		return c.AutoFormat(user)
-	})
-
-	app.Listen(":3000")
-}
-EOF
-
-# Run it
-go run main.go
-}
-```
-
-Benign JSON
-```bash
-curl -s 'http://127.0.0.1:3000/api/user?name=Alice' -H 'Accept: application/json'
-{"id":1,"name":"Alice"}
-```
-
-HTML sink enables XSS
-```bash
-curl -s 'http://127.0.0.1:3000/api/user?name=<script>alert(document.domain)</script>' -H 'Accept: text/html'
-<p>{1 <script>alert(document.domain)</script>}</p>
-```
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>ssl_client</strong> <code>1.37.0-r30</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/ssl_client@1.37.0-r30?arch=aarch64&distro=alpine-3.23.3&upstream=busybox</code></small><br/>
+<small><code>pkg:apk/alpine/ssl_client@1.37.0-r30?arch=x86_64&distro=alpine-3.23.3&upstream=busybox</code></small><br/>
 
 ```dockerfile
 # api-server.Dockerfile (29:29)
@@ -1374,36 +1091,6 @@ FROM ${ALPINE_IMAGE}
 <blockquote>
 
 
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.43.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/sys@0.43.0</code></small><br/>
-
-```dockerfile
-# api-server.Dockerfile (32:32)
-COPY --from=build /app /bin/app
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.013%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
 
 </blockquote>
 </details>
