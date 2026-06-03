@@ -157,7 +157,11 @@ spec:
 - `pathsIgnore` (example: `["**/*.md", "docs/**"]`) excludes matching paths and takes precedence over `paths`.
 - The polling interval is configurable; by default Testkube checks the repository every 1 minute.
 - Testkube caches the last-seen commit per matching ref to detect new changes between polling cycles.
-- For `git-pull-request`, Testkube also exports PR metadata variables:
+- Testkube also exports GIT and PR metadata variables for executed test workflows:
+	- `TESTKUBE_GIT_COMMIT`
+	- `TESTKUBE_GIT_REF`
+	- `TESTKUBE_GIT_BRANCH`
+	- `TESTKUBE_GIT_TAG`
   - `TESTKUBE_GIT_PR_NUMBER`
   - `TESTKUBE_GIT_PR_ACTION`
   - `TESTKUBE_GIT_PR_BASE_REF`
