@@ -159,20 +159,20 @@ supported simultaneously:
 
 1. **From the Control Plane** — using `testkube update agent <name> -l <key>=<value>` or the Dashboard.
 2. **From the runner Deployment** — by setting `runner.register.labels`, `runner.register.global`, or
-   `runner.register.groupName` in the Helm values (or the equivalent `RUNNER_LABELS_PREFIX`-prefixed
-   Deployment annotations and `RUNNER_GROUP` / `RUNNER_IS_GLOBAL` environment variables).
+   `runner.register.groupName` in the Helm values (or the equivalent `RUNNER_GROUP` / `RUNNER_IS_GLOBAL`
+   environment variables on the runner Deployment).
 
 When a runner restarts (for example after a Helm upgrade or rolling update of its Deployment) it
 reconnects to the Control Plane and may republish its registration metadata, but **only for the fields it
 is explicitly configured to manage**:
 
-| Runner-side configuration                                  | What gets refreshed on reconnect                          |
-|------------------------------------------------------------|-----------------------------------------------------------|
-| At least one annotation under `runner.testkube.io/`        | Labels are replaced with the runner's set                 |
-| No matching annotations                                    | Labels are **preserved** (the runner does not touch them) |
+| Runner-side configuration                                        | What gets refreshed on reconnect                          |
+|------------------------------------------------------------------|-----------------------------------------------------------|
+| At least one entry in `runner.register.labels`                   | Labels are replaced with the runner's set                 |
+| `runner.register.labels` is empty / unset                        | Labels are **preserved** (the runner does not touch them) |
 | `runner.register.global=true` or `runner.register.groupName` set | Runner mode is replaced with the runner's setting   |
-| Neither set (`Independent` defaults)                       | Runner mode is **preserved** (the runner does not touch it) |
-| Kubernetes API error reading the Deployment                | Labels are preserved (warning logged); mode follows the rules above |
+| Neither set (`Independent` defaults)                             | Runner mode is **preserved** (the runner does not touch it) |
+| Kubernetes API error reading the Deployment                      | Labels are preserved (warning logged); mode follows the rules above |
 
 This means CLI-managed agents keep working unchanged after upgrade: if you have not configured labels or
 mode in your runner's Helm values, the runner will not overwrite values you set with
@@ -185,7 +185,7 @@ corresponding Helm values and run `helm upgrade`:
 
 | Field        | Helm value                          | Runner env var          |
 |--------------|--------------------------------------|-------------------------|
-| Labels       | `runner.register.labels`             | (annotations under `RUNNER_LABELS_PREFIX`, default `runner.testkube.io/`) |
+| Labels       | `runner.register.labels`             | (label key prefix configurable via `RUNNER_LABELS_PREFIX`, default `runner.testkube.io/`) |
 | Runner group | `runner.register.groupName`          | `RUNNER_GROUP`          |
 | Global flag  | `runner.register.global`             | `RUNNER_IS_GLOBAL`      |
 

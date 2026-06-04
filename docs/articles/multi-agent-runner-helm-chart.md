@@ -72,7 +72,7 @@ so the runner pod restarts:
 |-------------------------------|----------------------------------------------------------------------|
 | `runner.register.global`      | Register the runner as a [Global Runner Agent](/articles/test-workflows-running#global-runner-agents). |
 | `runner.register.groupName`   | Register the runner as a [Grouped Runner Agent](/articles/test-workflows-running#grouped-runner-agents) (cannot be combined with `runner.register.global`). |
-| `runner.register.labels`      | Map of labels to publish to the Control Plane. Rendered onto the runner Deployment as annotations using `runner.register.labelPrefix` (default `runner.testkube.io/`). |
+| `runner.register.labels`      | Map of labels to publish to the Control Plane. Each key is published with `runner.register.labelPrefix` (default `runner.testkube.io/`) prepended. |
 
 Example:
 
