@@ -89,10 +89,11 @@ Runner Agents can be created in one of three different modes, impacting how they
 - **Global Runner Agents** do not need to be targeted by name but can be filtered by labels, the default Standalone Agent works as a Global Runner Agent.
 
 :::note
-A Runner Agent's mode (`--global` / `--group`) is not frozen at creation time — it is republished by the
-runner every time it reconnects to the Control Plane. To change the mode, update the corresponding Helm
-value or CLI flag on the runner Deployment and restart it; the new mode will take effect on reconnect.
-See [Updating Runner Agent labels and mode](/articles/agents-overview#updating-runner-agent-labels-and-mode).
+A Runner Agent's mode (`--global` / `--group`) can be changed in two ways: with `testkube update agent` /
+the Dashboard, or by setting `runner.register.global` / `runner.register.groupName` in the runner's Helm
+values and restarting the pod. Demoting a Global or Grouped runner back to Independent must be done via
+the CLI — clearing the Helm value alone will not demote it. See
+[Updating Runner Agent labels and mode](/articles/agents-overview#updating-runner-agent-labels-and-mode).
 :::
 
 ### Independent Runner Agents
@@ -173,9 +174,10 @@ Workflow via the CLI or Dashboard, or at design-time when defining Workflows, Cr
 Labels can be added to any type of Runner Agent with the `-l <name=value>` argument during creation, these
 can then be used to filter out Runner Agents that are used for execution.
 
-Labels are also republished by the runner on every reconnect, so updating the runner Deployment (or Helm
-values) and restarting the pod is enough to change the label set used for routing — see
-[Updating Runner Agent labels and mode](/articles/agents-overview#updating-runner-agent-labels-and-mode).
+Labels can be updated either with `testkube update agent <name> -l <key>=<value>` or by setting
+`runner.register.labels` in the runner's Helm values — see
+[Updating Runner Agent labels and mode](/articles/agents-overview#updating-runner-agent-labels-and-mode)
+for when each method takes effect.
 
 
 ```sh

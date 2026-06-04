@@ -210,10 +210,12 @@ $ testkube update agent my-runner -L myReadiness      # delete label
 ```
 
 :::note
-Labels and runner mode (`--global` / `--group`) are also republished by the runner itself on every
-reconnect to the Control Plane, sourced from its Deployment annotations and environment variables. If you
-manage your runners through Helm, the recommended way to change labels or mode is to update the Helm
-values and restart the runner — see [Updating Runner Agent labels and mode](/articles/agents-overview#updating-runner-agent-labels-and-mode).
+Labels and runner mode (`--global` / `--group`) can also be managed from the runner Deployment by setting
+`runner.register.labels` / `runner.register.global` / `runner.register.groupName` in the Helm values. When
+those values are set, the runner becomes the source of truth for the corresponding fields and will
+overwrite CLI changes on its next reconnect. When they are **not** set, CLI updates persist across runner
+restarts. See [Updating Runner Agent labels and mode](/articles/agents-overview#updating-runner-agent-labels-and-mode)
+for the full behavior.
 :::
 
 :::tip

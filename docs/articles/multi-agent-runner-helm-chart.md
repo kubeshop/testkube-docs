@@ -64,8 +64,9 @@ cloud:
 
 ## Updating runner labels and mode
 
-A Runner Agent's labels and mode are republished to the Control Plane every time the runner reconnects.
-To change them, update the corresponding Helm values and run `helm upgrade` so the runner pod restarts:
+If you want the runner Deployment itself to be the source of truth for labels and runner mode (instead of
+managing them through `testkube update agent`), set the corresponding Helm values and run `helm upgrade`
+so the runner pod restarts:
 
 | Helm value                    | Purpose                                                              |
 |-------------------------------|----------------------------------------------------------------------|
@@ -84,9 +85,15 @@ helm upgrade --install \
   my-runner oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube-runner --version <version>
 ```
 
-The Agents list in the Dashboard will reflect the new labels and runner mode once the runner reconnects.
-See [Updating Runner Agent labels and mode](/articles/agents-overview#updating-runner-agent-labels-and-mode)
-for details, including the failure-mode behavior when label collection fails at startup.
+Once the runner reconnects, the Agents list in the Dashboard will reflect the new values. From that point
+on, any change made through `testkube update agent` for those fields will be overwritten on the runner's
+next reconnect — pick a single source of truth per runner.
+
+If `runner.register.labels` / `runner.register.global` / `runner.register.groupName` are **not** set,
+the runner will not touch the corresponding stored values on reconnect, so existing CLI-managed agents
+remain unchanged after a Helm upgrade. See
+[Updating Runner Agent labels and mode](/articles/agents-overview#updating-runner-agent-labels-and-mode)
+for the complete behavior matrix.
 
 ## Self-registering Agent Helm install
 
