@@ -609,6 +609,34 @@ testkube-cloud-api:
     oauth: {} # check out the `testkube-cloud-api.api.oauth` block in the values.yaml for all available settings
 ```
 
+If you want to replace Dex by other Identity Provider, ensure you have a project or application configured following the instructions below:
+
+:::warning Important
+Some installations have customized the Testkube Control Plane URL sub-domains, by default is `dashboard`, `api`, `agent`, and `storage`. Take that in count to configure the **Redirect URL** and **Allowed External Redirect URLs**.
+:::
+
+* Type: Web Application.
+* Redirect URL: `https://api.<your-testkube-domain>/auth/callback`.
+* Allowed External Redirect URLs: `https://dashboard.<your-testkube-domain>`.
+* Scopes: openid, email, groups, profile, offline_access.
+
+Finally ensure your Identity Provider is well configured for Testkube platform with the following values:
+
+```yaml
+global:
+  dex:
+    issuer: <openid-configuration issuer-url>
+dex:
+  enabled: false
+testkube-cloud-api:
+  api:
+    oauth:
+      # If using a Kubernetes Secret the keys are: OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, OAUTH_ISSUER_URL, OAUTH_REDIRECT_URI
+      secretRef: ""
+      clientId: "<openid client-id>"
+      clientSecret: "<openid client-secret>"
+```
+
 ## Air-gapped Environments
 
 ### Offline License
