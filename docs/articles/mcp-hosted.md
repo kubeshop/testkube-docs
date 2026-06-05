@@ -180,6 +180,10 @@ After deploying with MCP enabled, you need to enable it for each environment:
 
 For self-hosted instances, use your custom control plane URL:
 
+If your control plane or connected MCP integrations rely on certificates signed
+by a private CA, configure trust using
+[Using a private certificate authority (CA)](/articles/private-ca).
+
 **With OAuth (recommended):**
 
 ```json
