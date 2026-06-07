@@ -8,6 +8,21 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Patch Release v2.10.2 (2026-06-07)
+
+Control Plane is available in Helm chart `v2.333.2` and the Agent is available in Helm chart `v2.10.1`.
+
+### Improvements
+
+- License calculations: improve and fix calculations for fixed and floating agents.
+- MCP server support custom certificates: custom CA is now configured as part of AI Service to trust in self-signed certificates.
+- Agent labels and mode: manage and update agent labels and mode from helm chart values.
+- TestWorkflow execution queue metrics: new metrics to monitor TestWorkflow execution queue which includes metadata information useful to know what TestWorkflow is in the list.
+
+### Fixes
+
+- Cron job target configuration: cron job configuration in TestWorkflow Template allow target property to schedule executions in specific agents. 
+
 ## Monthly Release v2.10.0 (2026-06-01)
 
 Control Plane is available in Helm chart `v2.333.0` and the Agent is available in Helm chart `v2.10.0`.
