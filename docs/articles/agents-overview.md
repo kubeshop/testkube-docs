@@ -99,8 +99,8 @@ The table has the following columns:
 
 - **Name**:  The name given to the agent on creation.
 - **Capabilities**: Capability icons for the agent.
-- **Labels**: Labels assigned to the Runner Agents on creation - [Read More](/articles/test-workflows-running#using-labels-for-runner-agent-selection)
-- **Runner Mode**: The Runner Mode of the agent if it is a Runner Agent - [Read More](/articles/test-workflows-running#runner-agent-modes)
+- **Labels**: Labels currently associated with the Runner Agent. Can be set with `testkube update agent` or via the runner's Helm values — see [Updating Runner Agent labels and mode](#updating-runner-agent-labels-and-mode) and [Using labels for Runner Agent selection](/articles/test-workflows-running#using-labels-for-runner-agent-selection).
+- **Runner Mode**: The Runner Mode of the agent if it is a Runner Agent. Can be changed with `testkube update agent` or via the runner's Helm values — see [Updating Runner Agent labels and mode](#updating-runner-agent-labels-and-mode) and [Runner Agent modes](/articles/test-workflows-running#runner-agent-modes).
 - **License**: The type of license assigned to the Agent if it is a Runner Agent - [Read More](#licensing-for-runner-agents)
 - **Agent ID**: the Agent ID
 - **Version**: The version of the Agent; a warning triangle will be shown if an updated version is available.
@@ -150,6 +150,65 @@ When this toggle is enabled, the Testkube Dashboard will no longer display sensi
 
 :::warning
 **Important:** This masking feature applies **only** to the Testkube Dashboard UI. Agent tokens or secret keys will still be visible in CLI outputs (e.g., when using `testkube create runner` or retrieving details for Helm chart installation as described in [Installing Runner Agent with Helm Charts](/articles/multi-agent-runner-helm-chart)) and in any direct API interactions.
+:::
+
+## Updating Runner Agent labels and mode
+
+A Runner Agent's labels and mode (`--global` / `--group`) can be managed in two ways, and both are
+supported simultaneously:
+
+1. **From the Control Plane** — using `testkube update agent <name> -l <key>=<value>` or the Dashboard.
+2. **From the runner Deployment** — by setting `runner.register.labels`, `runner.register.global`, or
+   `runner.register.groupName` in the Helm values (or the equivalent `RUNNER_GROUP` / `RUNNER_IS_GLOBAL`
+   environment variables on the runner Deployment).
+
+When a runner restarts (for example after a Helm upgrade or rolling update of its Deployment) it
+reconnects to the Control Plane and may republish its registration metadata, but **only for the fields it
+is explicitly configured to manage**:
+
+| Runner-side configuration                                        | What gets refreshed on reconnect                          |
+|------------------------------------------------------------------|-----------------------------------------------------------|
+| At least one entry in `runner.register.labels`                   | Labels are replaced with the runner's set                 |
+| `runner.register.labels` is empty / unset                        | Labels are **preserved** (the runner does not touch them) |
+| `runner.register.global=true` or `runner.register.groupName` set | Runner mode is replaced with the runner's setting   |
+| Neither set (`Independent` defaults)                             | Runner mode is **preserved** (the runner does not touch it) |
+| Kubernetes API error reading the Deployment                      | Labels are preserved (warning logged); mode follows the rules above |
+
+This means CLI-managed agents keep working unchanged after upgrade: if you have not configured labels or
+mode in your runner's Helm values, the runner will not overwrite values you set with
+`testkube update agent` or `testkube create agent --global` / `--group`.
+
+### Switching to Helm as the source of truth
+
+If you want the runner Deployment itself to be the source of truth for labels and/or mode, set the
+corresponding Helm values and run `helm upgrade`:
+
+| Field        | Helm value                          | Runner env var          |
+|--------------|--------------------------------------|-------------------------|
+| Labels       | `runner.register.labels`             | (label key prefix configurable via `RUNNER_LABELS_PREFIX`, default `runner.testkube.io/`) |
+| Runner group | `runner.register.groupName`          | `RUNNER_GROUP`          |
+| Global flag  | `runner.register.global`             | `RUNNER_IS_GLOBAL`      |
+
+Once the runner pod restarts and reconnects, the Agents list in the Dashboard will reflect the new values.
+From that point on, any change you make through the CLI will be **overwritten** the next time the runner
+reconnects — pick a single source of truth per runner.
+
+### Demoting a Global or Grouped runner to Independent
+
+Clearing `runner.register.global` / `runner.register.groupName` and reconnecting will **not** demote a
+runner to Independent: an empty policy snapshot is indistinguishable from "unset," so the runner does not
+touch the stored mode in that case (this prevents accidental downgrades during Helm value cleanups). To
+demote a runner explicitly, use:
+
+```sh
+$ testkube update agent <name> --runner-mode independent   # or use the Dashboard
+```
+
+:::note
+Upgrading from a release before this change ([kubeshop/testkube#7791](https://github.com/kubeshop/testkube/pull/7791))
+is safe for environments where labels and runner policy were managed via the CLI: those values are
+preserved on reconnect because the runner only refreshes fields it has been explicitly configured to
+publish.
 :::
 
 ## Agent Key Rotation

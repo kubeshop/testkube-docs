@@ -62,6 +62,39 @@ cloud:
   url: "agent.testkube.io:443"
 ```
 
+## Updating runner labels and mode
+
+If you want the runner Deployment itself to be the source of truth for labels and runner mode (instead of
+managing them through `testkube update agent`), set the corresponding Helm values and run `helm upgrade`
+so the runner pod restarts:
+
+| Helm value                    | Purpose                                                              |
+|-------------------------------|----------------------------------------------------------------------|
+| `runner.register.global`      | Register the runner as a [Global Runner Agent](/articles/test-workflows-running#global-runner-agents). |
+| `runner.register.groupName`   | Register the runner as a [Grouped Runner Agent](/articles/test-workflows-running#grouped-runner-agents) (cannot be combined with `runner.register.global`). |
+| `runner.register.labels`      | Map of labels to publish to the Control Plane. Each key is published with `runner.register.labelPrefix` (default `runner.testkube.io/`) prepended. |
+
+Example:
+
+```sh
+helm upgrade --install \
+  --namespace my-runner \
+  --reuse-values \
+  --set 'runner.register.groupName=eu-runners' \
+  --set 'runner.register.labels.region=europe' \
+  my-runner oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube-runner --version <version>
+```
+
+Once the runner reconnects, the Agents list in the Dashboard will reflect the new values. From that point
+on, any change made through `testkube update agent` for those fields will be overwritten on the runner's
+next reconnect — pick a single source of truth per runner.
+
+If `runner.register.labels` / `runner.register.global` / `runner.register.groupName` are **not** set,
+the runner will not touch the corresponding stored values on reconnect, so existing CLI-managed agents
+remain unchanged after a Helm upgrade. See
+[Updating Runner Agent labels and mode](/articles/agents-overview#updating-runner-agent-labels-and-mode)
+for the complete behavior matrix.
+
 ## Self-registering Agent Helm install
 
 Sometimes it may be desirable to allow Agents to create themselves automatically on deployment (without using the CLI),

@@ -209,6 +209,15 @@ $ testkube update agent my-runner -l myReadiness=true # add label
 $ testkube update agent my-runner -L myReadiness      # delete label
 ```
 
+:::note
+Labels and runner mode (`--global` / `--group`) can also be managed from the runner Deployment by setting
+`runner.register.labels` / `runner.register.global` / `runner.register.groupName` in the Helm values. When
+those values are set, the runner becomes the source of truth for the corresponding fields and will
+overwrite CLI changes on its next reconnect. When they are **not** set, CLI updates persist across runner
+restarts. See [Updating Runner Agent labels and mode](/articles/agents-overview#updating-runner-agent-labels-and-mode)
+for the full behavior.
+:::
+
 :::tip
 Check out [Using labels for filtering runners](/articles/test-workflows-running#using-labels-for-runner-agent-selection) to see examples
 for how to use labels for selecting Runner Agents for Workflow execution.
