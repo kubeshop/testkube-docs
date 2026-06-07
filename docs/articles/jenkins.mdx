@@ -1,23 +1,267 @@
 # Testkube Jenkins Pipelines
 
-The Testkube Jenkins integration streamlines the installation of Testkube, enabling the execution of any [Testkube CLI](https://docs.testkube.io/cli/testkube) command within Jenkins pipelines. This integration can be effortlessly integrated into your Jenkins setup, enhancing your continuous integration and delivery processes.
-This Jenkins integration offers a versatile solution for managing your pipeline workflows and is compatible with both commercial and open source deployments of Testkube. It allows Jenkins users to effectively utilize Testkube's capabilities within their CI/CD pipelines, providing a robust and flexible framework for test execution and automation.
+The Testkube Jenkins integration enables the execution of any [Testkube CLI](https://docs.testkube.io/cli/testkube) command within Jenkins pipelines. This integration is compatible with both commercial and open source deployments of Testkube, providing a robust and flexible framework for test execution and automation.
 
-### Testkube CLI Jenkins Plugin
+There are multiple ways to integrate Testkube with Jenkins depending on your setup:
 
-Install the Testkube CLI plugin by searching it in the "Available Plugins" section on Jenkins Plugins, or using the following url:
-[https://plugins.jenkins.io/testkube-cli](https://plugins.jenkins.io/testkube-cli)
+- **Jenkins on Kubernetes**: Use the `kubeshop/testkube-cli` Docker image as a container in your pod template.
+- **Jenkins on VMs**: Install the Testkube CLI directly on your Jenkins agents.
+- **Jenkins CLI Plugin**: Use the [Testkube CLI Jenkins Plugin](https://plugins.jenkins.io/testkube-cli) to automatically install and configure the CLI.
 
-## Testkube
-
-### How to configure Testkube CLI action for Testkube and run a Test Workflow
+## Prerequisites
 
 To use Jenkins CI/CD with [Testkube](https://app.testkube.io/), you need to create an [API token](https://docs.testkube.io/articles/organization-management#api-tokens).
 Then, pass the **organization** and **environment** IDs, along with the **token** and other parameters specific for your use case.
 
-If a test is already created, you can run it using the command `testkube run testworkflow TEST_WORKFLOW_NAME -f` . However, if you need to create a test in this workflow, please add a creation command, e.g.: `testkube create testworkflow -f EXAMPLE_FILE.yaml`.
+If a test is already created, you can run it using the command `testkube run testworkflow TEST_WORKFLOW_NAME -f`. However, if you need to create a test in this workflow, please add a creation command, e.g.: `testkube create testworkflow -f EXAMPLE_FILE.yaml`.
 
-You'll need to create a Jenkinsfile. This Jenkinsfile should define the stages and steps necessary to execute the workflow
+## Jenkins on Kubernetes
+
+If your Jenkins instance runs on Kubernetes (using the [Kubernetes plugin](https://plugins.jenkins.io/kubernetes/)), you can use the `kubeshop/testkube-cli` Docker image directly in your pipeline. This avoids the need to install the CLI binary during the pipeline run.
+
+:::info
+The pod template requires `securityContext.runAsUser: 1000` so that both the JNLP agent and the Testkube container share the same UID and can read/write the shared workspace volume. Additionally, the `HOME` environment variable must be set to a writable path (e.g., `/home/jenkins/agent`) so the CLI can store its configuration.
+:::
+
+### Testkube (Cloud)
+
+```groovy
+pipeline {
+    agent {
+        kubernetes {
+            yaml '''
+                apiVersion: v1
+                kind: Pod
+                spec:
+                  securityContext:
+                    runAsUser: 1000
+                  containers:
+                  - name: testkube
+                    image: kubeshop/testkube-cli:<version>
+                    command: ['sleep']
+                    args: ['infinity']
+                    env:
+                    - name: HOME
+                      value: /home/jenkins/agent
+            '''
+        }
+    }
+    environment {
+        TK_ORG = credentials("TK_ORG")
+        TK_ENV = credentials("TK_ENV")
+        TK_API_TOKEN = credentials("TK_API_TOKEN")
+    }
+    stages {
+        stage('Testing') {
+            steps {
+                container('testkube') {
+                    sh 'testkube set context --api-key $TK_API_TOKEN --org-id $TK_ORG --env-id $TK_ENV'
+                    sh 'testkube run testworkflow TEST_WORKFLOW_NAME -f'
+                }
+            }
+        }
+    }
+}
+```
+
+Replace `<version>` with the desired Testkube CLI version (e.g., `2.7.1`).
+
+### Testkube (Self-Hosted)
+
+For self-hosted Testkube instances running in the same cluster, point `--api-uri-override` to the in-cluster API service:
+
+```groovy
+pipeline {
+    agent {
+        kubernetes {
+            yaml '''
+                apiVersion: v1
+                kind: Pod
+                spec:
+                  securityContext:
+                    runAsUser: 1000
+                  containers:
+                  - name: testkube
+                    image: kubeshop/testkube-cli:<version>
+                    command: ['sleep']
+                    args: ['infinity']
+                    env:
+                    - name: HOME
+                      value: /home/jenkins/agent
+            '''
+        }
+    }
+    environment {
+        TK_ORG = credentials("TK_ORG")
+        TK_ENV = credentials("TK_ENV")
+        TK_API_TOKEN = credentials("TK_API_TOKEN")
+        TK_URL = 'https://api.mydomain:443'
+    }
+    stages {
+        stage('Testing') {
+            steps {
+                container('testkube') {
+                    sh 'testkube set context --api-key $TK_API_TOKEN --org-id $TK_ORG --env-id $TK_ENV --api-uri-override $TK_URL'
+                    sh 'testkube run testworkflow TEST_WORKFLOW_NAME -f'
+                }
+            }
+        }
+    }
+}
+```
+
+## Jenkins on VMs
+
+If your Jenkins agents run on virtual machines (or bare metal), you can install the Testkube CLI directly during the pipeline execution. This approach downloads the CLI binary and uses it to configure the context and run tests.
+
+### Testkube (Cloud)
+
+```groovy
+pipeline {
+    agent any
+
+    environment {
+        TK_ORG = credentials("TK_ORG")
+        TK_ENV = credentials("TK_ENV")
+        TK_API_TOKEN = credentials("TK_API_TOKEN")
+    }
+    stages {
+        stage('Setup and Run') {
+            steps {
+                sh '''
+                    # Install the Testkube CLI
+                    curl -sSLf https://get.testkube.io | sh
+
+                    # Configure the CLI context
+                    testkube set context --api-key $TK_API_TOKEN --org-id $TK_ORG --env-id $TK_ENV
+
+                    # Run a Test Workflow
+                    testkube run testworkflow TEST_WORKFLOW_NAME -f
+                '''
+            }
+        }
+    }
+}
+```
+
+### Testkube with EKS (Amazon Elastic Kubernetes Service)
+
+This workflow establishes a connection to an EKS cluster and runs a Test Workflow using the Testkube CLI. Please make sure that the following points are satisfied:
+- The **_AwsAccessKeyId_**, **_AwsSecretAccessKeyId_** secrets should contain your AWS IAM keys with proper permissions to connect to the EKS cluster.
+- The **_AwsRegion_** secret should contain the AWS region where EKS is deployed.
+- The **_EksClusterName_** secret points to the name of the EKS cluster you want to connect to.
+
+```groovy
+pipeline {
+    agent any
+
+    environment {
+        TK_ORG = credentials("TK_ORG")
+        TK_ENV = credentials("TK_ENV")
+        TK_API_TOKEN = credentials("TK_API_TOKEN")
+    }
+    stages {
+        stage('Setup and Run') {
+            steps {
+                script {
+                    // Setting up AWS credentials
+                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AwsAccessKeyId']]) {
+                        sh 'aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID'
+                        sh 'aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY'
+                        sh 'aws configure set region $AWS_REGION'
+                    }
+
+                    // Updating kubeconfig for EKS
+                    withCredentials([string(credentialsId: 'EksClusterName', variable: 'EKS_CLUSTER_NAME')]) {
+                        sh 'aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_REGION'
+                    }
+
+                    // Install the Testkube CLI
+                    sh 'curl -sSLf https://get.testkube.io | sh'
+
+                    // Configure the CLI context
+                    sh 'testkube set context --api-key $TK_API_TOKEN --org-id $TK_ORG --env-id $TK_ENV'
+
+                    // Run a Test Workflow
+                    sh 'testkube run testworkflow TEST_WORKFLOW_NAME -f'
+                }
+            }
+        }
+    }
+}
+```
+
+### Testkube with GKE (Google Kubernetes Engine)
+
+This example connects to a Kubernetes cluster in Google Cloud and runs a Test Workflow using the Testkube CLI. Please make sure that the following points are satisfied:
+
+- The **_GKE Service Account_** should be created prior in Google Cloud and added to Jenkins credentials along with **_GKE Project_** value.
+- The **_GKE Cluster Name_** and **_GKE Zone_** can be added as credentials in Jenkins.
+
+```groovy
+pipeline {
+    agent any
+
+    environment {
+        TK_ORG = credentials("TK_ORG")
+        TK_ENV = credentials("TK_ENV")
+        TK_API_TOKEN = credentials("TK_API_TOKEN")
+    }
+    stages {
+        stage('Setup and Run') {
+            steps {
+                script {
+                    // Activating GKE service account
+                    withCredentials([file(credentialsId: 'GKE_SA_KEY', variable: 'GKE_SA_KEY_FILE')]) {
+                        sh 'gcloud auth activate-service-account --key-file=$GKE_SA_KEY_FILE'
+                    }
+
+                    // Setting GCP project
+                    withCredentials([string(credentialsId: 'GKE_PROJECT', variable: 'GKE_PROJECT')]) {
+                        sh 'gcloud config set project $GKE_PROJECT'
+                    }
+
+                    // Configure Docker with gcloud as a credential helper
+                    sh 'gcloud --quiet auth configure-docker'
+
+                    // Get GKE cluster credentials
+                    withCredentials([
+                        string(credentialsId: 'GKE_CLUSTER_NAME', variable: 'GKE_CLUSTER_NAME'),
+                        string(credentialsId: 'GKE_ZONE', variable: 'GKE_ZONE')
+                    ]) {
+                        sh 'gcloud container clusters get-credentials $GKE_CLUSTER_NAME --zone $GKE_ZONE'
+                    }
+
+                    // Install the Testkube CLI
+                    sh 'curl -sSLf https://get.testkube.io | sh'
+
+                    // Configure the CLI context
+                    sh 'testkube set context --api-key $TK_API_TOKEN --org-id $TK_ORG --env-id $TK_ENV'
+
+                    // Run a Test Workflow
+                    sh 'testkube run testworkflow TEST_WORKFLOW_NAME -f'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Clean up
+            sh 'rm -f $GKE_SA_KEY_FILE'
+        }
+    }
+}
+```
+
+## Testkube CLI Jenkins Plugin
+
+Alternatively, you can use the Testkube CLI Jenkins Plugin, which automatically downloads, installs, and configures the Testkube CLI within your pipeline.
+
+Install the plugin by searching for it in the "Available Plugins" section on Jenkins, or using the following URL:
+[https://plugins.jenkins.io/testkube-cli](https://plugins.jenkins.io/testkube-cli)
+
+### Testkube (Cloud)
 
 ```groovy
 pipeline {
@@ -43,15 +287,7 @@ pipeline {
 }
 ```
 
-## Testkube Open Source
-
-### How to configure Testkube CLI action for TK OSS and run a Test Workflow
-
-To connect to the self-hosted instance, you need to have **kubectl** configured for accessing your Kubernetes cluster, and pass an optional namespace, if Testkube is not deployed in the default **testkube** namespace.
-
-If a test is already created, you can run it using the command `testkube run testworkflow TEST_WORKFLOW_NAME -f` . However, if you need to create a test in this workflow, please add a creation command, e.g.: `testkube create testworkflow -f EXAMPLE_FILE.yaml`.
-
-You'll need to create a Jenkinsfile. This Jenkinsfile should define the stages and steps necessary to execute the workflow
+### Testkube Open Source
 
 ```groovy
 pipeline {
@@ -73,112 +309,4 @@ pipeline {
 }
 ```
 
-The steps to connect to your Kubernetes cluster differ for each provider. You should check the docs of your Cloud provider for how to connect to the Kubernetes cluster from Jenkins CI/CD
-
-### How to configure Testkube CLI action for TK OSS and run a Test Workflow
-
-This workflow establishes a connection to EKS cluster and creates and runs a test using TK CLI. In this example we also use variables not
- to reveal sensitive data. Please make sure that the following points are satisfied:
-- The **_AwsAccessKeyId_**, **_AwsSecretAccessKeyId_** secrets should contain your AWS IAM keys with proper permissions to connect to EKS cluster.
-- The **_AwsRegion_** secret should contain AWS region where EKS is
-- The **EksClusterName** secret points to the name of EKS cluster you want to connect.
-
-You'll need to create a Jenkinsfile. This Jenkinsfile should define the stages and steps necessary to execute the workflow
-
-```groovy
-pipeline {
-    agent any
-
-    environment {
-        TK_ORG = credentials("TK_ORG")
-        TK_ENV = credentials("TK_ENV")
-        TK_API_TOKEN = credentials("TK_API_TOKEN")
-    }
-    stages {
-        stage('Setup Testkube') {
-            steps {
-                script {
-                    // Setting up AWS credentials
-                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AwsAccessKeyId']]) {
-                        sh 'aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID'
-                        sh 'aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY'
-                        sh 'aws configure set region $AWS_REGION'
-                    }
-
-                    // Updating kubeconfig for EKS
-                    withCredentials([string(credentialsId: 'EksClusterName', variable: 'EKS_CLUSTER_NAME')]) {
-                        sh 'aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_REGION'
-                    }
-
-                    // Installing and configuring Testkube based on env vars
-                    setupTestkube()
-
-                    // Running Testkube test
-                    sh 'testkube run testworkflow TEST_WORKFLOW_NAME -f'
-                }
-            }
-        }
-    }
-}
-```
-
-### How to connect to GKE (Google Kubernetes Engine) cluster and run a Test Workflow
-
-This example connects to a k8s cluster in Google Cloud, creates and runs a test using Testkube Jenkins workflow. Please make sure that the following points are satisfied:
-
-- The **_GKE Service Account_** should be created prior in Google Cloud and added to Jenkins variables along with **_GKE Project_** value;
-- The **_GKE Cluster Name_** and **_GKE Zone_** can be added as environmental variables in the workflow.
-  you'll need to create a Jenkinsfile. This Jenkinsfile should define the stages and steps necessary to execute the workflow
-
-```groovy
-pipeline {
-    agent any
-
-    environment {
-        TK_ORG = credentials("TK_ORG")
-        TK_ENV = credentials("TK_ENV")
-        TK_API_TOKEN = credentials("TK_API_TOKEN")
-    }
-    stages {
-        stage('Deploy to GKE') {
-            steps {
-                script {
-                    // Activating GKE service account
-                    withCredentials([file(credentialsId: 'GKE_SA_KEY', variable: 'GKE_SA_KEY_FILE')]) {
-                        sh 'gcloud auth activate-service-account --key-file=$GKE_SA_KEY_FILE'
-                    }
-
-                    // Setting GCP project
-                    withCredentials([string(credentialsId: 'GKE_PROJECT', variable: 'GKE_PROJECT')]) {
-                        sh 'gcloud config set project $GKE_PROJECT'
-                    }
-
-                    // Configure Docker with gcloud as a credential helper
-                    sh 'gcloud --quiet auth configure-docker'
-
-                    // Get GKE cluster credentials
-                    withCredentials([
-                        string(credentialsId: 'GKE_CLUSTER_NAME', variable: 'GKE_CLUSTER_NAME'),
-                        string(credentialsId: 'GKE_ZONE', variable: 'GKE_ZONE')
-                    ]) {
-                        sh 'gcloud container clusters get-credentials $GKE_CLUSTER_NAME --zone $GKE_ZONE'
-                    }
-
-                    // Installing and configuring Testkube based on env vars
-                    setupTestkube()
-
-                    // Running Testkube test
-                    sh 'testkube run testworkflow TEST_WORKFLOW_NAME -f'
-                }
-            }
-        }
-    }
-
-    post {
-        always {
-            // Clean up
-            sh 'rm -f $GKE_SA_KEY_FILE'
-        }
-    }
-}
-```
+The steps to connect to your Kubernetes cluster differ for each provider. You should check the docs of your Cloud provider for how to connect to the Kubernetes cluster from Jenkins CI/CD.
