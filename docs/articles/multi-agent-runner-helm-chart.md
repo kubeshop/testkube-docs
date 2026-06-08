@@ -19,19 +19,18 @@ After selecting the environment (unless you pass `--env env-id` parameter),
 it will display information with agent ID and secret key:
 
 ```
-ID:             tkcrun_55c1c5845a1fd20d9bf5de7737311959
+ID:             tkcagent_c5895d9cf5ac9497
 Name:           my-name
-Type:           Runner (reserved)
-Created:        25 Apr 25 10:18 +0200 (0s)
+Created:        08 Jun 26 16:20 -0400 (0s)
 Disabled:       no
-Secret Key:     tkckey_run_6kivz9hvgoxwd9ihqq9xyhihk1y3qzua
+Secret Key:     tkckey_agent_egxyk3yar22586sncd4zeguqmjrn3uqn
 Last Activity:  never
-Last Version:
-Last Namespace:
+Last Version:   
+Last Namespace: 
 Environments:
-    my-environment (tkcenv_9868d11cdb3ca577)
+    my-first-environment (tkcenv_f55409417bbb8618)
 Labels:
-   my-label: my-value
+   my-label = my-value
 Policy:
    Required Matching Labels: name
 ```
@@ -45,7 +44,8 @@ Use the following command to install the Helm Chart from OCI Registry:
      --namespace my-runner \
      --set 'runner.id=<your:tkcrun_:runner_id>' \
      --set 'runner.orgId=<your:tkcorg_:organization_id>' \
-     --set 'runner.secret=<your:tkckey_run_:key>' \
+     --set 'runner.envId=<your:tkcenv_:environment_id>' \
+     --set 'runner.secret=<your:tkckey_agent_:key>' \
      --set 'cloud.url=agent.testkube.io:443' \
      my-runner oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube-runner --version <version>
    ```
@@ -56,7 +56,8 @@ You can also use own `values.yaml` file, based on [our defaults](https://github.
 runner:
   id: "<your:tkcrun_:runner_id>"
   orgId: "<your:tkcorg_:organization_id>"
-  secret: "<your:tkckey_run_:key>"
+  envId: "<your:tkcenv_:environment_id>"
+  secret: "<your:tkckey_agent_:key>"
 
 cloud:
   url: "agent.testkube.io:443"
@@ -113,6 +114,7 @@ This enables you to install the Agent using only `helm`:
      --create-namespace \
      --namespace my-runner \
      --set 'runner.orgId=<your:tkcorg_:organization_id>' \
+     --set 'runner.orgId=<your:tkcenv_:environment_id>' \
      --set 'runner.register.token=<your:tkcapi_:key>' \
      --set 'cloud.url=agent.testkube.io:443' \
      --set 'runner.enabled=true' \
@@ -126,6 +128,7 @@ Or with a values file:
 runner:
   enabled: true
   orgId: "<your:tkcorg_:organization_id>"
+  envId: "<your:tkcenv_:environment_id>"
   register: 
     token: "<your:tkcapi_:key>"
   
