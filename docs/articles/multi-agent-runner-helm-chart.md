@@ -19,18 +19,18 @@ After selecting the environment (unless you pass `--env env-id` parameter),
 it will display information with agent ID and secret key:
 
 ```
-ID:             tkcagent_17e689aa347fb2cc
-Name:           test-agent
-Created:        08 Jun 26 16:13 -0400 (0s)
+ID:             tkcagent_c5895d9cf5ac9497
+Name:           my-name
+Created:        08 Jun 26 16:20 -0400 (0s)
 Disabled:       no
-Secret Key:     tkckey_agent_yplmsibblc3tqypmxuhu1shgdlcv3zhk
+Secret Key:     tkckey_agent_egxyk3yar22586sncd4zeguqmjrn3uqn
 Last Activity:  never
 Last Version:   
 Last Namespace: 
 Environments:
     my-first-environment (tkcenv_f55409417bbb8618)
 Labels:
-   my-label: my-value
+   my-label = my-value
 Policy:
    Required Matching Labels: name
 ```
