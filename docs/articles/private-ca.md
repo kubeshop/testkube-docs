@@ -121,3 +121,22 @@ However, if the containers specified as part of the workflow require the trust
 of your private CA then you will need to configure the container/pod in a
 similar way as shown in the global template to mount the CA bundle to the right
 location and/or, if necessary, specify an environment variable.
+
+## AI Agents and Connected MCP Servers
+
+If your AI Agents use Connected MCP Servers with certificates signed by a
+private CA (for example self-hosted MCP servers), setting
+`global.customCaSecretRef` and `global.customCaSecretKey` in the
+`testkube-enterprise` chart is also used for outbound MCP bridge connections in
+the AI service.
+
+With this configuration in place, Testkube forwards CA-related trust settings
+to the MCP bridge process, so requests to those MCP servers can validate
+private-CA certificates correctly.
+
+If you still see `certificate signed by unknown authority`, verify that:
+
+- the mounted CA bundle contains the full required chain,
+- `customCaSecretRef` points to the correct secret in the release namespace,
+- the key configured in `customCaSecretKey` matches the secret key containing
+  the CA bundle.
