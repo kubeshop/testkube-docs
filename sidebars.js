@@ -214,9 +214,20 @@ const sidebars = {
         },
         "articles/install/faq",
         {
-          type: "doc",
+          type: "category",
           label: "Upgrade & Uninstall",
-          id: "articles/upgrade-uninstall",
+          items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/upgrade-uninstall",
+            },
+            {
+              type: "doc",
+              label: "Post-Upgrade Runbook",
+              id: "articles/post-upgrade-runbook",
+            },
+          ],
         },
       ],
     },
