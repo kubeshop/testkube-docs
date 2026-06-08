@@ -3,9 +3,9 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:67d571ea701c94aa5e1d61194aa70c429699e11aa0fa07c14c06cdf0156242e5</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 8" src="https://img.shields.io/badge/critical-8-8b1924"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 11" src="https://img.shields.io/badge/medium-11-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
-<tr><td>platform</td><td>linux/amd64</td></tr>
-<tr><td>size</td><td>19 MB</td></tr>
+<tr><td>digest</td><td><code>sha256:24dcc1743795ba956d807b4ab1345a098520db1d62d849f8bb6eb15b73ce326e</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 8" src="https://img.shields.io/badge/critical-8-8b1924"/> <img alt="high: 3" src="https://img.shields.io/badge/high-3-e25d68"/> <img alt="medium: 9" src="https://img.shields.io/badge/medium-9-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>platform</td><td>linux/arm64</td></tr>
+<tr><td>size</td><td>17 MB</td></tr>
 <tr><td>packages</td><td>178</td></tr>
 </table>
 </details></table>
@@ -342,64 +342,6 @@ Parsing arbitrary HTML which is then rendered using Render can result in an unex
 <blockquote>
 
 Parsing arbitrary HTML which is then rendered using Render can result in an unexpected HTML tree. This can be leveraged to execute XSS attacks in applications that attempt to sanitize input HTML before rendering.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>stdlib</strong> <code>1.26.3</code> (golang)</summary>
-
-<small><code>pkg:golang/stdlib@1.26.3</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-42504?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.4"><img alt="high : CVE--2026--42504" src="https://img.shields.io/badge/CVE--2026--42504-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.4</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.26.4</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.042%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Decoding a maliciously-crafted MIME header containing many invalid encoded-words can consume excessive CPU.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-27145?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.4"><img alt="medium : CVE--2026--27145" src="https://img.shields.io/badge/CVE--2026--27145-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.4</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.26.4</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.009%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-(*x509.Certificate).VerifyHostname previously called matchHostnames in a loop over all DNS Subject Alternative Name (SAN) entries. This caused strings.Split(host, ".") to execute repeatedly on the same input hostname.
-
-With a large DNS SAN list, verification costs scaled quadratically based on the number of SAN entries multiplied by the hostname's label count. Because x509.Verify validates hostnames before building the certificate chain, this overhead occurred even for untrusted certificates.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-42507?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.4"><img alt="medium : CVE--2026--42507" src="https://img.shields.io/badge/CVE--2026--42507-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.4</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.26.4</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.029%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-When returning errors, functions in the net/textproto package would include its input as part of the error. This might allow an attacker to inject misleading content to errors that are printed or logged.
 
 </blockquote>
 </details>

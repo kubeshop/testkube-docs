@@ -997,7 +997,7 @@ Despite HTTP headers having a default limit of 1MB, the number of cookies that c
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.034%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1047,7 +1047,7 @@ tar.Reader does not set a maximum size on the number of sparse region data block
 <table>
 <tr><td>Affected range</td><td><code>>=1.24.0-0<br/><1.24.3</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.3</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.003%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.004%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
 </table>
 
@@ -1479,8 +1479,8 @@ The impact of this escape is limited to reading metadata provided by lstat from 
 <table>
 <tr><td>Affected range</td><td><code>&lt;=1.37.0-r13</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.060%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.069%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

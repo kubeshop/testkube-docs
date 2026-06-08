@@ -1013,7 +1013,7 @@ Despite HTTP headers having a default limit of 1MB, the number of cookies that c
 <tr><td>Affected range</td><td><code>&lt;1.24.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.8</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.034%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1652,7 +1652,7 @@ Switch to a "default deny" posture in your authorization policies (explicitly li
 <tr><td>Fixed version</td><td><code>1.43.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:L/AC:H/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.011%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.009%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
 </table>
 
@@ -2002,6 +2002,45 @@ Thanks to @<!-- -->N0zoM1z0 for reporting this to the `go-git` project. :bow:
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>musl</strong> <code>1.2.5-r9</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/musl@1.2.5-r9?os_name=alpine&os_version=3.21</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-40200?s=alpine&n=musl&ns=alpine&t=apk&osn=alpine&osv=3.21&vr=%3C1.2.5-r11"><img alt="high : CVE--2026--40200" src="https://img.shields.io/badge/CVE--2026--40200-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.2.5-r11</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.2.5-r11</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.020%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-6042?s=alpine&n=musl&ns=alpine&t=apk&osn=alpine&osv=3.21&vr=%3C1.2.5-r10"><img alt="medium : CVE--2026--6042" src="https://img.shields.io/badge/CVE--2026--6042-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.2.5-r10</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.2.5-r10</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.007%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/go-git/go-billy/v5</strong> <code>5.6.2</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/go-git/go-billy/v5@5.6.2</code></small><br/>
@@ -2067,39 +2106,99 @@ Thanks to @<!-- -->faran66 for finding and reporting this issue privately to the
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>musl</strong> <code>1.2.5-r9</code> (apk)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel</strong> <code>1.36.0</code> (golang)</summary>
 
-<small><code>pkg:apk/alpine/musl@1.2.5-r9?os_name=alpine&os_version=3.21</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-40200?s=alpine&n=musl&ns=alpine&t=apk&osn=alpine&osv=3.21&vr=%3C1.2.5-r11"><img alt="high : CVE--2026--40200" src="https://img.shields.io/badge/CVE--2026--40200-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+<small><code>pkg:golang/go.opentelemetry.io/otel@1.36.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-29181?s=github&n=otel&ns=go.opentelemetry.io&t=golang&vr=%3E%3D1.36.0%2C%3C%3D1.40.0"><img alt="high 7.5: CVE--2026--29181" src="https://img.shields.io/badge/CVE--2026--29181-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Uncontrolled Resource Consumption</i>
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;1.2.5-r11</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.2.5-r11</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.020%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>>=1.36.0<br/><=1.40.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.41.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.077%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
+multi-value `baggage:` header extraction parses each header field-value independently and aggregates members across values. this allows an attacker to amplify cpu and allocations by sending many `baggage:` header lines, even when each individual value is within the 8192-byte per-value parse limit.
+
+## severity
+
+HIGH (availability / remote request amplification)
+
+## relevant links
+
+- repository: https://github.com/open-telemetry/opentelemetry-go
+- pinned callsite: https://github.com/open-telemetry/opentelemetry-go/blob/1ee4a4126dbdd1bc79e9fae072fa488beffac52a/propagation/baggage.go#L58
+
+## vulnerability details
+
+**pins:** open-telemetry/opentelemetry-go@<!-- -->1ee4a4126dbdd1bc79e9fae072fa488beffac52a
+**as-of:** 2026-02-04
+**policy:** direct (no program scope provided)
+
+**callsite:** propagation/baggage.go:58 (`extractMultiBaggage`)
+**attacker control:** inbound HTTP request headers (many `baggage` field-values) → `propagation.HeaderCarrier.Values("baggage")` → repeated `baggage.Parse` + member aggregation
+
+### root cause
+
+`extractMultiBaggage` iterates over all `baggage` header field-values and parses each one independently, then appends members into a shared slice. the 8192-byte parsing cap applies per header value, but the multi-value path repeats that work once per header line (bounded only by the server/proxy header byte limit).
+
+### impact
+
+in a default `net/http` configuration (max header bytes 1mb), a single request with many `baggage:` header field-values can cause large per-request allocations and increased latency.
+
+example from the attached PoC harness (darwin/arm64; 80 values; 40 requests):
+
+- canonical: `per_req_alloc_bytes=10315458` and `p95_ms=7`
+- control: `per_req_alloc_bytes=133429` and `p95_ms=0`
+
+## proof of concept
+
+canonical:
+
+```bash
+mkdir -p poc
+unzip poc.zip -d poc
+cd poc
+make test
+```
+
+output (excerpt):
+
+```
+[CALLSITE_HIT]: propagation/baggage.go:58 extractMultiBaggage
+[PROOF_MARKER]: baggage_multi_value_amplification p95_ms=7 per_req_alloc_bytes=10315458 per_req_allocs=16165
+```
+
+control:
+
+```bash
+cd poc
+make control
+```
+
+control output (excerpt):
+
+```
+[NC_MARKER]: baggage_single_value_baseline p95_ms=0 per_req_alloc_bytes=133429 per_req_allocs=480
+```
+
+**expected:** multiple `baggage` header field-values should be semantically equivalent to a single comma-joined `baggage` value and should not multiply parsing/alloc work within the effective header byte budget.
+**actual:** multiple `baggage` header field-values trigger repeated parsing and member aggregation, causing high per-request allocations and increased latency even when each individual value is within 8192 bytes.
+
+## fix recommendation
+
+avoid repeated parsing across multi-values by enforcing a global budget and/or normalizing multi-values into a single value before parsing. one mitigation approach is to treat multi-values as a single comma-joined string and cap total parsed bytes (for example 8192 bytes total).
+
+**fix accepted when:** under the default PoC harness settings, canonical stays within 2x of control for `per_req_alloc_bytes` and `per_req_allocs`, and `p95_ms` stays below 2ms.
 
 
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-6042?s=alpine&n=musl&ns=alpine&t=apk&osn=alpine&osv=3.21&vr=%3C1.2.5-r10"><img alt="medium : CVE--2026--6042" src="https://img.shields.io/badge/CVE--2026--6042-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.2.5-r10</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.2.5-r10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.007%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
+[poc.zip](https://github.com/user-attachments/files/25079945/poc.zip)
+[PR_DESCRIPTION.md](https://github.com/user-attachments/files/25079946/PR_DESCRIPTION.md)
 
 </blockquote>
 </details>
@@ -2370,105 +2469,6 @@ https://github.com/russellhaering/goxmldsig/blob/main/validate.go
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel</strong> <code>1.36.0</code> (golang)</summary>
-
-<small><code>pkg:golang/go.opentelemetry.io/otel@1.36.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-29181?s=github&n=otel&ns=go.opentelemetry.io&t=golang&vr=%3E%3D1.36.0%2C%3C%3D1.40.0"><img alt="high 7.5: CVE--2026--29181" src="https://img.shields.io/badge/CVE--2026--29181-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Uncontrolled Resource Consumption</i>
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.36.0<br/><=1.40.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.41.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.077%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-multi-value `baggage:` header extraction parses each header field-value independently and aggregates members across values. this allows an attacker to amplify cpu and allocations by sending many `baggage:` header lines, even when each individual value is within the 8192-byte per-value parse limit.
-
-## severity
-
-HIGH (availability / remote request amplification)
-
-## relevant links
-
-- repository: https://github.com/open-telemetry/opentelemetry-go
-- pinned callsite: https://github.com/open-telemetry/opentelemetry-go/blob/1ee4a4126dbdd1bc79e9fae072fa488beffac52a/propagation/baggage.go#L58
-
-## vulnerability details
-
-**pins:** open-telemetry/opentelemetry-go@<!-- -->1ee4a4126dbdd1bc79e9fae072fa488beffac52a
-**as-of:** 2026-02-04
-**policy:** direct (no program scope provided)
-
-**callsite:** propagation/baggage.go:58 (`extractMultiBaggage`)
-**attacker control:** inbound HTTP request headers (many `baggage` field-values) → `propagation.HeaderCarrier.Values("baggage")` → repeated `baggage.Parse` + member aggregation
-
-### root cause
-
-`extractMultiBaggage` iterates over all `baggage` header field-values and parses each one independently, then appends members into a shared slice. the 8192-byte parsing cap applies per header value, but the multi-value path repeats that work once per header line (bounded only by the server/proxy header byte limit).
-
-### impact
-
-in a default `net/http` configuration (max header bytes 1mb), a single request with many `baggage:` header field-values can cause large per-request allocations and increased latency.
-
-example from the attached PoC harness (darwin/arm64; 80 values; 40 requests):
-
-- canonical: `per_req_alloc_bytes=10315458` and `p95_ms=7`
-- control: `per_req_alloc_bytes=133429` and `p95_ms=0`
-
-## proof of concept
-
-canonical:
-
-```bash
-mkdir -p poc
-unzip poc.zip -d poc
-cd poc
-make test
-```
-
-output (excerpt):
-
-```
-[CALLSITE_HIT]: propagation/baggage.go:58 extractMultiBaggage
-[PROOF_MARKER]: baggage_multi_value_amplification p95_ms=7 per_req_alloc_bytes=10315458 per_req_allocs=16165
-```
-
-control:
-
-```bash
-cd poc
-make control
-```
-
-control output (excerpt):
-
-```
-[NC_MARKER]: baggage_single_value_baseline p95_ms=0 per_req_alloc_bytes=133429 per_req_allocs=480
-```
-
-**expected:** multiple `baggage` header field-values should be semantically equivalent to a single comma-joined `baggage` value and should not multiply parsing/alloc work within the effective header byte budget.
-**actual:** multiple `baggage` header field-values trigger repeated parsing and member aggregation, causing high per-request allocations and increased latency even when each individual value is within 8192 bytes.
-
-## fix recommendation
-
-avoid repeated parsing across multi-values by enforcing a global budget and/or normalizing multi-values into a single value before parsing. one mitigation approach is to treat multi-values as a single comma-joined string and cap total parsed bytes (for example 8192 bytes total).
-
-**fix accepted when:** under the default PoC harness settings, canonical stays within 2x of control for `per_req_alloc_bytes` and `per_req_allocs`, and `p95_ms` stays below 2ms.
-
-
-[poc.zip](https://github.com/user-attachments/files/25079945/poc.zip)
-[PR_DESCRIPTION.md](https://github.com/user-attachments/files/25079946/PR_DESCRIPTION.md)
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>busybox</strong> <code>1.37.0-r12</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/busybox@1.37.0-r12?os_name=alpine&os_version=3.21</code></small><br/>
@@ -2477,8 +2477,8 @@ avoid repeated parsing across multi-values by enforcing a global budget and/or n
 <table>
 <tr><td>Affected range</td><td><code>&lt;=1.37.0-r13</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.060%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.069%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2603,44 +2603,6 @@ A vulnerability in the in-band key negotiation exists in the AWS S3 Crypto SDK f
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream</strong> <code>1.6.10</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream@1.6.10</code></small><br/>
-<a href="https://scout.docker.com/v/GHSA-xmrv-pmrh-hhx2?s=github&n=eventstream&ns=github.com%2Faws%2Faws-sdk-go-v2%2Faws%2Fprotocol&t=golang&vr=%3C1.7.8"><img alt="medium 5.9: GHSA--xmrv--pmrh--hhx2" src="https://img.shields.io/badge/GHSA--xmrv--pmrh--hhx2-lightgrey?label=medium%205.9&labelColor=fbb552"/></a> <i>Improper Input Validation</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.7.8</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.7.8</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5.9</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-**CVSSv3.1 Rating**: [Medium]
-**CVSSv3.1 Score**: [5.9]
-**CVSSv3.1 Vector String**: [CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H]
-
-## Summary and Impact
-An issue exists in the the EventStream header decoder in AWS SDK for Go v2 in versions predating [2026-03-23](https://github.com/aws/aws-sdk-go-v2/releases/tag/release-2026-03-23). An actor can send a malformed EventStream response frame containing a crafted header value type byte outside the valid range, which can cause the host process to terminate.
-
-Impacted versions: < [2026-03-23](https://github.com/aws/aws-sdk-go-v2/releases/tag/release-2026-03-23)
-
-## Patches
-This issue has been addressed in versions [2026-03-23](https://github.com/aws/aws-sdk-go-v2/releases/tag/release-2026-03-23) and above. We recommend upgrading to the latest version and ensuring any forked or derivative code is patched to incorporate the new fixes. 
-
-## Workarounds
-Not Applicable
-
-## References
-If you have any questions or comments about this advisory, we ask that you contact [AWS/Amazon] Security via our [vulnerability reporting page](https://aws.amazon.com/security/vulnerability-reporting) or directly via email to [aws-security@<!-- -->amazon.com](mailto:aws-security@<!-- -->amazon.com). Please do not create a public GitHub issue.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/azure/go-ntlmssp</strong> <code>0.0.0-20221128193559-754e69321358</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/azure/go-ntlmssp@0.0.0-20221128193559-754e69321358</code></small><br/>
@@ -2703,27 +2665,38 @@ If you have any questions or comments about this advisory, we ask that you conta
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/cloudflare/circl</strong> <code>1.6.1</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream</strong> <code>1.6.10</code> (golang)</summary>
 
-<small><code>pkg:golang/github.com/cloudflare/circl@1.6.1</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-1229?s=github&n=circl&ns=github.com%2Fcloudflare&t=golang&vr=%3C1.6.3"><img alt="low 2.9: CVE--2026--1229" src="https://img.shields.io/badge/CVE--2026--1229-lightgrey?label=low%202.9&labelColor=fce1a9"/></a> <i>Incorrect Calculation</i>
+<small><code>pkg:golang/github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream@1.6.10</code></small><br/>
+<a href="https://scout.docker.com/v/GHSA-xmrv-pmrh-hhx2?s=github&n=eventstream&ns=github.com%2Faws%2Faws-sdk-go-v2%2Faws%2Fprotocol&t=golang&vr=%3C1.7.8"><img alt="medium 5.9: GHSA--xmrv--pmrh--hhx2" src="https://img.shields.io/badge/GHSA--xmrv--pmrh--hhx2-lightgrey?label=medium%205.9&labelColor=fbb552"/></a> <i>Improper Input Validation</i>
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;1.6.3</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.6.3</code></td></tr>
-<tr><td>CVSS Score</td><td><code>2.9</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:H/AT:N/PR:N/UI:N/VC:L/VI:L/VA:L/SC:L/SI:L/SA:L/E:P/S:N/AU:Y/U:Amber</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.026%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.7.8</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.7.8</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.9</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-The CombinedMult function in the CIRCL ecc/p384 package (secp384r1 curve) produces an incorrect value for specific inputs. The issue is fixed by using complete addition formulas.
-ECDH and ECDSA signing relying on this curve are not affected.
+**CVSSv3.1 Rating**: [Medium]
+**CVSSv3.1 Score**: [5.9]
+**CVSSv3.1 Vector String**: [CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H]
 
-The bug was fixed in **[v1.6.3](https://github.com/cloudflare/circl/releases/tag/v1.6.3)**.
+## Summary and Impact
+An issue exists in the the EventStream header decoder in AWS SDK for Go v2 in versions predating [2026-03-23](https://github.com/aws/aws-sdk-go-v2/releases/tag/release-2026-03-23). An actor can send a malformed EventStream response frame containing a crafted header value type byte outside the valid range, which can cause the host process to terminate.
+
+Impacted versions: < [2026-03-23](https://github.com/aws/aws-sdk-go-v2/releases/tag/release-2026-03-23)
+
+## Patches
+This issue has been addressed in versions [2026-03-23](https://github.com/aws/aws-sdk-go-v2/releases/tag/release-2026-03-23) and above. We recommend upgrading to the latest version and ensuring any forked or derivative code is patched to incorporate the new fixes. 
+
+## Workarounds
+Not Applicable
+
+## References
+If you have any questions or comments about this advisory, we ask that you contact [AWS/Amazon] Security via our [vulnerability reporting page](https://aws.amazon.com/security/vulnerability-reporting) or directly via email to [aws-security@<!-- -->amazon.com](mailto:aws-security@<!-- -->amazon.com). Please do not create a public GitHub issue.
 
 </blockquote>
 </details>
@@ -2776,6 +2749,33 @@ If the method was called on an uninitialized point, the behavior was undefined. 
 <blockquote>
 
 NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/cloudflare/circl</strong> <code>1.6.1</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/cloudflare/circl@1.6.1</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-1229?s=github&n=circl&ns=github.com%2Fcloudflare&t=golang&vr=%3C1.6.3"><img alt="low 2.9: CVE--2026--1229" src="https://img.shields.io/badge/CVE--2026--1229-lightgrey?label=low%202.9&labelColor=fce1a9"/></a> <i>Incorrect Calculation</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.6.3</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.6.3</code></td></tr>
+<tr><td>CVSS Score</td><td><code>2.9</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:H/AT:N/PR:N/UI:N/VC:L/VI:L/VA:L/SC:L/SI:L/SA:L/E:P/S:N/AU:Y/U:Amber</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.026%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The CombinedMult function in the CIRCL ecc/p384 package (secp384r1 curve) produces an incorrect value for specific inputs. The issue is fixed by using complete addition formulas.
+ECDH and ECDSA signing relying on this curve are not affected.
+
+The bug was fixed in **[v1.6.3](https://github.com/cloudflare/circl/releases/tag/v1.6.3)**.
 
 </blockquote>
 </details>
