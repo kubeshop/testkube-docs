@@ -1,5 +1,7 @@
 # Upgrade & Uninstall
 
+For production and enterprise rollout validation after each upgrade, use the [Post-Upgrade Runbook](./post-upgrade-runbook).
+
 ## Upgrade Testkube
 
 Upgrading Testkube will upgrade the cluster components to the latest version. The following
