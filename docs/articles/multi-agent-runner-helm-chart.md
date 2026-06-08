@@ -114,7 +114,7 @@ This enables you to install the Agent using only `helm`:
      --create-namespace \
      --namespace my-runner \
      --set 'runner.orgId=<your:tkcorg_:organization_id>' \
-     --set 'runner.orgId=<your:tkcenv_:environment_id>' \
+     --set 'runner.envId=<your:tkcenv_:environment_id>' \
      --set 'runner.register.token=<your:tkcapi_:key>' \
      --set 'cloud.url=agent.testkube.io:443' \
      --set 'runner.enabled=true' \
