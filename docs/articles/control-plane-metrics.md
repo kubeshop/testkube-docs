@@ -15,6 +15,7 @@ Control Plane metrics are available in Testkube Cloud and Enterprise connected d
 - Path: `/metrics` on the Control Plane API service.
 - `TK_CLOUD_METRICS_ENABLED` controls control-plane metrics emission (default `true` in `v2.7+`).
 - `TK_SCHEDULER_METRICS_ENABLED` controls scheduler metrics emission (default `true`).
+- `TK_SCHEDULER_METRICS_INCLUDE_EXECUTION_ID` enables execution-identity queue metric emission (default `false`).
 
 ## Label Model (Control Plane)
 
@@ -31,6 +32,8 @@ Control Plane metrics are available in Testkube Cloud and Enterprise connected d
 | **Scheduler** | | | |
 | `testkube_scheduler_environment_queue_limit` | gauge | Configured queue limit for the environment | `environment_name` |
 | `testkube_scheduler_queued_executions` | gauge | Number of queued executions awaiting assignment | `environment_name` |
+| `testkube_scheduler_queued_executions_by_workflow` | gauge | Number of queued executions awaiting assignment, grouped by workflow name | `environment_name`, `workflow_name` |
+| `testkube_scheduler_queued_execution_info` | gauge | Identity metric for queued executions (value is always `1`); emitted only when `TK_SCHEDULER_METRICS_INCLUDE_EXECUTION_ID=true` | `environment_name`, `workflow_name`, `execution_id`, `execution_name` |
 | `testkube_scheduler_active_executions` | gauge | Number of currently active executions | `environment_name` |
 | `testkube_scheduler_queue_oldest_age_seconds` | gauge | Age in seconds of the oldest queued execution (0 when none) | `environment_name` |
 | `testkube_scheduler_runner_active_executions` | gauge | Active executions attributed to each runner | `environment_name`, `runner_id`, `runner_name` |
@@ -65,6 +68,20 @@ Control Plane metrics are available in Testkube Cloud and Enterprise connected d
 ```text
 # scheduler queue depth
 testkube_scheduler_queued_executions{environment_name="prod-env"} 4
+
+# queued executions by workflow
+testkube_scheduler_queued_executions_by_workflow{
+  environment_name="prod-env",
+  workflow_name="metrics-demo"
+} 2
+
+# queued execution identity (requires TK_SCHEDULER_METRICS_INCLUDE_EXECUTION_ID=true)
+testkube_scheduler_queued_execution_info{
+  environment_name="prod-env",
+  workflow_name="metrics-demo",
+  execution_id="01904b4d-4f8a-7f98-9dd7-991820db74d8",
+  execution_name="metrics-demo-42"
+} 1
 
 # workflow execution (control plane)
 testkube_testworkflow_executions_total{
