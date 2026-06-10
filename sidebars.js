@@ -1154,6 +1154,37 @@ const sidebars = {
         },
         {
           type: "category",
+          label: "AI Testing",
+          items: [
+            {
+              type: "doc",
+              label: "Promptfoo",
+              id: "articles/examples/promptfoo-basic",
+            },
+            {
+              type: "doc",
+              label: "DeepEval",
+              id: "articles/examples/deepeval-basic",
+            },
+            {
+              type: "doc",
+              label: "Inspect AI",
+              id: "articles/examples/inspect-ai-basic",
+            },
+            {
+              type: "doc",
+              label: "Ragas",
+              id: "articles/examples/ragas-basic",
+            },
+            {
+              type: "doc",
+              label: "LM Evaluation Harness",
+              id: "articles/examples/lm-eval-basic",
+            },
+          ],
+        },
+        {
+          type: "category",
           label: "Infrastructure Testing",
           items: [
             {
