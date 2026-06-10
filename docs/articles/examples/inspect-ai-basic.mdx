@@ -1,0 +1,25 @@
+import SimpleInspectAi from "../../workflows/simple-inspect-ai-workflow.md"
+
+# Basic Inspect AI Example
+
+[Inspect AI](https://inspect.aisi.org.uk/) is an open-source framework from the UK AI Safety Institute for
+evaluating large language models. The Workflow below defines a small inline evaluation task, runs it against
+an OpenAI model, and applies a quality gate that fails the Workflow if accuracy drops below a threshold.
+You can paste this directly into the YAML of an existing or new Workflow, just make sure to update the
+`name` and `namespace` for your environment if needed.
+
+- The `spec.content.files` property defines two inline files:
+  - `task.py` - an Inspect AI task with three samples that are scored with the `includes()` scorer.
+  - `gate.py` - a quality gate script that parses the Inspect log and fails the run if accuracy is below `0.5`.
+- The `spec.container` property defines the working directory, Python image, and environment variables for the
+  Workflow; the `OPENAI_API_KEY` is resolved using the [credential](/articles/credential-management) expression
+  so the key is never stored in the Workflow definition itself.
+- The **"Install, eval and gate"** step installs Inspect AI, runs the evaluation, and applies the quality gate -
+  turning a model evaluation into a pass/fail test result.
+- The **"Save logs"** step uploads the Inspect JSON logs as artifacts; the `always` condition makes sure the logs
+  are uploaded even if the evaluation or quality gate fails.
+
+<SimpleInspectAi/>
+
+After execution, the evaluation output and quality-gate result are shown in the Log Output tab, and the
+Inspect JSON logs are available under the Artifacts tab of the execution.
