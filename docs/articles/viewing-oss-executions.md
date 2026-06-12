@@ -28,7 +28,7 @@ An execution viewer page is read-only and includes:
 - **Step tree**: the execution's steps with per-step status and duration.
 - **Log Output**: finished execution logs for each step.
 - **Artifacts**: files uploaded by the execution (click to download).
-- **AI Analysis**: an on-demand AI breakdown of the execution, shown once it has finished. Click **Analyze with AI** to generate a brief with a summary, likely root causes, and suggested fixes.
+- **AI Analysis**: an on-demand AI breakdown of the execution, shown once it has finished. Click **Analyze with AI** to generate a brief with a summary, likely root causes, and suggested fixes. Analyses are limited to 5 per day.
 - **JUnit Reports**: a rendered view of the execution's JUnit test reports. Testkube parses each report into a pass / fail / error / skip summary and lists the suites and individual test cases (including failure messages and attachments); the raw report file can also be downloaded.
 
 ## Command flags
@@ -54,6 +54,7 @@ testkube view my-k6-test-12345 --wait --skip-artifacts --force
 | **Execution size**    | 10 MB   | Total for logs and artifacts combined. Use `--skip-artifacts` to share logs and metadata only. |
 | **Link lifetime**     | 4 hours | After this, the viewer returns `410 Gone`.                                                     |
 | **Active executions** | 50      | Creating a new public execution when you're at the cap evicts the oldest (FIFO).               |
+| **AI Analysis**       | 5 / day | Daily cap on AI analyses generated from the viewer.
 
 ## Privacy and security
 
