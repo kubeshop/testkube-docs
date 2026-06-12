@@ -1,6 +1,6 @@
 # Viewing Open Source Executions
 
-Open Source user can view Workflow execution details (step tree, logs, and artifacts) in a lightweight dashboard hosted by Testkube, no login or Testkube account required.
+Open Source user can view Workflow execution details (step tree, log output, AI analysis, artifacts, and JUnit reports) in a lightweight dashboard hosted by Testkube, no login or Testkube account required.
 
 :::note
 Using this feature with a commercial Testkube instance will open the standard Testkube Dashboard for the specified execution instead.
@@ -16,7 +16,7 @@ testkube view <executionId|executionName>
 
 The command accepts either the execution UUID or its name (for example `my-workflow-12345`). It prints a tokenized URL on `view.testkube.io` and opens it in your default browser.
 
-![Terminal output showing the generated view.testkube.io link after running `testkube view`](images/public-execution-viewer.png)
+![Terminal output showing the generated view.testkube.io link after running `testkube view`](images/public-execution-viewer-2.png)
 
 When the CLI is already connected to a Testkube Cloud / Control Plane context, `testkube view` opens the execution in the dashboard directly — no upload is performed.
 
@@ -24,10 +24,12 @@ When the CLI is already connected to a Testkube Cloud / Control Plane context, `
 
 An execution viewer page is read-only and includes:
 
-- Execution metadata (workflow name, status, started / finished times, duration, labels, tags).
-- The step tree with per-step status and duration.
-- Finished execution logs for each step.
-- Artifacts uploaded by the execution (click to download).
+- **Execution metadata**: workflow name, status, started / finished times, duration, labels, and tags.
+- **Step tree**: the execution's steps with per-step status and duration.
+- **Log Output**: finished execution logs for each step.
+- **Artifacts**: files uploaded by the execution (click to download).
+- **AI Analysis**: an on-demand AI breakdown of the execution, shown once it has finished. Click **Analyze with AI** to generate a brief with a summary, likely root causes, and suggested fixes.
+- **JUnit Reports**: a rendered view of the execution's JUnit test reports. Testkube parses each report into a pass / fail / error / skip summary and lists the suites and individual test cases (including failure messages and attachments); the raw report file can also be downloaded.
 
 ## Command flags
 
