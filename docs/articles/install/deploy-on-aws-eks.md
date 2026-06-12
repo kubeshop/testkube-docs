@@ -2,7 +2,7 @@
 
 This guide walks through deploying Testkube On-Prem on an existing **Amazon EKS** cluster. It covers
 prerequisites, S3 storage configuration with two authentication methods (EKS Pod Identity and IRSA),
-ingress setup, and production hardening.
+MongoDB Atlas connectivity, ingress setup, and production hardening.
 
 :::info
 A ready-to-use reference repository with all configuration files, IAM templates, and install scripts
@@ -19,6 +19,7 @@ You can clone it and customise the values files for your environment.
 | kubectl | configured for the target cluster |
 | [cert-manager](https://cert-manager.io/docs/installation/) *(recommended)* | 1.11+ |
 | [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/) *(recommended)* | 1.8+ |
+| MongoDB Atlas *(when using external MongoDB)* | Atlas cluster reachable from the EKS VPC |
 
 :::warning IMPORTANT
 Use the community [kubernetes/ingress-nginx](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx) chart —
@@ -114,6 +115,9 @@ global:
 Configure your identity provider connector under `dex.configTemplate.additionalConfig`.
 See [SSO / Identity Providers](/articles/auth) for detailed examples.
 
+If you use MongoDB Atlas instead of the chart-managed MongoDB, configure `global.mongo.dsn`
+with your Atlas connection string. See [Configure MongoDB Atlas](#6-configure-mongodb-atlas) below.
+
 ## 5. Configure S3 Storage
 
 Using AWS S3 instead of the default in-cluster MinIO is recommended for production EKS
@@ -202,12 +206,27 @@ SDK falls back to IAM-based authentication.
 EKS Pod Identity eliminates the need for OIDC provider configuration and service account annotations.
 The Pod Identity Agent runs as a DaemonSet and injects credentials directly into pods.
 
+Use this option when Testkube pods need AWS credentials for S3, or when MongoDB Atlas users authenticate
+with AWS IAM using `authMechanism=MONGODB-AWS`.
+
 **Step 1 — Install the Pod Identity Agent addon:**
 
 ```bash
 aws eks create-addon \
   --cluster-name <EKS_CLUSTER_NAME> \
   --addon-name eks-pod-identity-agent
+```
+
+Verify the addon is active:
+
+```bash
+aws eks describe-addon \
+  --cluster-name <EKS_CLUSTER_NAME> \
+  --addon-name eks-pod-identity-agent \
+  --query 'addon.status' \
+  --output text
+
+kubectl get pods -n kube-system -l app.kubernetes.io/name=eks-pod-identity-agent
 ```
 
 **Step 2 — Create the IAM Role:**
@@ -239,6 +258,16 @@ aws iam attach-role-policy \
   --policy-arn arn:aws:iam::<AWS_ACCOUNT_ID>:policy/TestkubeS3Access
 ```
 
+If the same role is also used for MongoDB Atlas AWS IAM authentication, configure a MongoDB Atlas
+database user for the IAM role ARN. AWS IAM authenticates the pod to AWS; Atlas database roles still
+control what that identity can do inside MongoDB.
+
+For Testkube migrations and runtime access, grant the Atlas database user at least:
+
+- `readWrite` on the Testkube database
+- `dbAdmin` on the Testkube database, or an equivalent custom role that allows index and collection
+  modification commands such as `collMod`
+
 **Step 3 — Create Pod Identity Associations:**
 
 ```bash
@@ -256,6 +285,69 @@ aws eks create-pod-identity-association \
 ```
 
 No service account annotations are needed — Pod Identity handles credential injection through the associations.
+
+Verify the associations:
+
+```bash
+aws eks list-pod-identity-associations \
+  --cluster-name <EKS_CLUSTER_NAME> \
+  --namespace testkube \
+  --query 'associations[].{serviceAccount:serviceAccount,roleArn:roleArn,associationId:associationId}' \
+  --output table
+```
+
+The service account names in the associations must match the Helm values:
+
+```yaml
+testkube-cloud-api:
+  serviceAccount:
+    name: testkube-enterprise-api
+
+testkube-worker-service:
+  serviceAccount:
+    name: testkube-worker-service
+```
+
+**Step 4 — Verify Pod Identity from inside the cluster:**
+
+After deployment, the API and worker pods should have Pod Identity environment variables injected:
+
+```bash
+kubectl -n testkube exec deploy/testkube-enterprise-api -- env | grep AWS_
+kubectl -n testkube exec deploy/testkube-enterprise-worker-service -- env | grep AWS_
+```
+
+For EKS Pod Identity, expect variables similar to:
+
+```text
+AWS_CONTAINER_CREDENTIALS_FULL_URI=http://169.254.170.23/v1/credentials
+AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE=/var/run/secrets/pods.eks.amazonaws.com/serviceaccount/eks-pod-identity-token
+AWS_REGION=<AWS_REGION>
+```
+
+If these variables are missing, check the addon, namespace, service account name, and Pod Identity association.
+
+Test role assumption from the API service account:
+
+```bash
+kubectl -n testkube run aws-identity-test \
+  --rm -i --restart=Never \
+  --image=amazon/aws-cli:2 \
+  --overrides='{"spec":{"serviceAccountName":"testkube-enterprise-api"}}' \
+  -- sts get-caller-identity
+```
+
+The returned ARN should be the IAM role associated with the service account.
+
+Test S3 access from the API service account:
+
+```bash
+kubectl -n testkube run s3-test \
+  --rm -i --restart=Never \
+  --image=amazon/aws-cli:2 \
+  --overrides='{"spec":{"serviceAccountName":"testkube-enterprise-api"}}' \
+  -- s3 ls s3://<S3_BUCKET_NAME>
+```
 
 ### Option B — IRSA (IAM Roles for Service Accounts)
 
@@ -322,7 +414,80 @@ testkube-worker-service:
       eks.amazonaws.com/role-arn: "arn:aws:iam::<AWS_ACCOUNT_ID>:role/TestkubeS3Role"
 ```
 
-## 6. Deploy
+## 6. Configure MongoDB Atlas
+
+Testkube requires MongoDB for control-plane data. For AWS deployments, MongoDB Atlas can be reached
+through public networking with Atlas IP access lists or through Atlas PrivateLink. PrivateLink is
+recommended for production.
+
+### MongoDB Atlas Connection String
+
+Set the MongoDB DSN in your Helm values:
+
+```yaml
+global:
+  mongo:
+    dsn: "mongodb+srv://<ATLAS_PRIVATE_ENDPOINT_HOST>/?authSource=%24external&authMechanism=MONGODB-AWS&connectTimeoutMS=30000&serverSelectionTimeoutMS=30000&socketTimeoutMS=30000&waitQueueTimeoutMS=30000"
+```
+
+Use `authMechanism=MONGODB-AWS` when Atlas database users are mapped to AWS IAM roles. The role must
+be available to the pod through EKS Pod Identity or IRSA.
+
+If you use a database name other than the chart default, also override the chart MongoDB database value
+for your deployment.
+
+### Atlas PrivateLink Checks
+
+If using Atlas PrivateLink, verify DNS from inside the `testkube` namespace:
+
+```bash
+kubectl -n testkube run dns-test \
+  --rm -i --restart=Never \
+  --image=busybox:1.36 \
+  -- nslookup <ATLAS_PRIVATE_ENDPOINT_HOST>
+```
+
+The lookup must return private endpoint records. `NXDOMAIN` means the Atlas private endpoint DNS name
+is not resolvable from the cluster.
+
+Verify TCP connectivity to the Atlas hosts and ports:
+
+```bash
+kubectl -n testkube run mongo-tcp-test \
+  --rm -i --restart=Never \
+  --image=nicolaka/netshoot \
+  -- nc -vz <ATLAS_PRIVATE_ENDPOINT_HOST> 1024
+```
+
+Repeat for the Atlas ports shown in the private endpoint connection string.
+
+### MongoDB AWS IAM Authentication Check
+
+Run `mongosh` with the same service account used by the API:
+
+```bash
+kubectl -n testkube run mongosh-api-test \
+  --rm -i --restart=Never \
+  --image=mongodb/mongodb-community-server:8.0-ubi8 \
+  --overrides='{"spec":{"serviceAccountName":"testkube-enterprise-api"}}' \
+  --command -- bash -lc \
+  'mongosh "mongodb+srv://<ATLAS_PRIVATE_ENDPOINT_HOST>/?authSource=%24external&authMechanism=MONGODB-AWS&connectTimeoutMS=30000&serverSelectionTimeoutMS=30000&socketTimeoutMS=30000&waitQueueTimeoutMS=30000" --eval "db.runCommand({ ping: 1 })"'
+```
+
+Expected result:
+
+```text
+{ ok: 1 }
+```
+
+Repeat the same test with `serviceAccountName` set to `testkube-worker-service` if worker pods also
+connect to MongoDB Atlas.
+
+If authentication succeeds but migrations fail with `not authorized ... collMod`, update the Atlas
+database user's roles. That error means the AWS identity authenticated successfully, but Atlas did not
+grant enough MongoDB privileges for schema or index migration.
+
+## 7. Deploy
 
 ```bash
 helm upgrade --install \
@@ -342,7 +507,7 @@ script that supports composable flags:
 ```
 :::
 
-## 7. DNS Setup
+## 8. DNS Setup
 
 Create DNS records (CNAME or Alias) pointing to your NGINX Ingress load balancer for each service:
 
@@ -361,7 +526,7 @@ kubectl get svc -n ingress-nginx ingress-nginx-controller \
   -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
 ```
 
-## 8. Verify the Installation
+## 9. Verify the Installation
 
 ```bash
 kubectl get pods -n testkube
@@ -537,7 +702,14 @@ kubectl get ds -n kube-system eks-pod-identity-agent
 # Check associations
 aws eks list-pod-identity-associations \
   --cluster-name <EKS_CLUSTER_NAME> --namespace testkube
+
+# Verify credentials are injected into the API pod
+kubectl -n testkube exec deploy/testkube-enterprise-api -- env | grep AWS_CONTAINER
 ```
+
+If the environment variables are present, run the `aws sts get-caller-identity` test pod from
+[Option A — EKS Pod Identity](#option-a--eks-pod-identity) to confirm the service account can assume
+the expected IAM role.
 
 **S3 permission errors (IRSA):**
 
@@ -553,6 +725,19 @@ aws eks describe-cluster --name <EKS_CLUSTER_NAME> \
 **gRPC connection issues:**
 - Verify HTTP/2 is supported end-to-end through your ingress / load balancer.
 - If using ALB, confirm the target group protocol and check for HTTP/2 support.
+
+**MongoDB Atlas connection errors:**
+
+- `lookup ... no such host` or `NXDOMAIN`: verify the Atlas PrivateLink DNS name and VPC DNS settings
+  from inside the cluster.
+- `server selection error` or timeout: verify PrivateLink endpoint status, security groups, subnet routing,
+  and Atlas endpoint approval.
+- `NoCredentialProviders` with `MONGODB-AWS`: verify Pod Identity or IRSA credentials are injected into
+  the pod.
+- `NoCredentialProviders` even though Pod Identity variables are injected: verify the Testkube image
+  supports EKS Pod Identity for MongoDB AWS IAM authentication.
+- `not authorized ... collMod`: grant the Atlas database user migration privileges such as `dbAdmin`
+  on the Testkube database.
 
 **License issues:**
 
