@@ -58,6 +58,15 @@ const sidebars = {
       value: "<hr class='sidebar-hr'/>",
     },
     {
+      type: "doc",
+      label: "Commercial Licensing",
+      id: "articles/licensing",
+    },
+    {
+      type: "html",
+      value: "<hr class='sidebar-hr'/>",
+    },
+    {
       type: "category",
       label: "Installation",
       items: [
@@ -1466,7 +1475,7 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "Licensing FAQ",
+          label: "Source Code Licensing FAQ",
           id: "articles/testkube-licensing-FAQ",
         },
         {
