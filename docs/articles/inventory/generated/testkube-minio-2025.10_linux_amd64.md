@@ -13,13 +13,13 @@ hide_table_of_contents: true
 
 <table>
 <tr><td valign="top">
-<details><summary><img alt="critical: 7" src="https://img.shields.io/badge/C-7-8b1924"/> <img alt="high: 3" src="https://img.shields.io/badge/H-3-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/M-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.37.0</code> (golang)</summary>
+<details><summary><img alt="critical: 7" src="https://img.shields.io/badge/C-7-8b1924"/> <img alt="high: 3" src="https://img.shields.io/badge/H-3-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/M-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.40.0</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/crypto@0.37.0</code></small><br/>
+<small><code>pkg:golang/golang.org/x/crypto@0.40.0</code></small><br/>
 
 ```dockerfile
-# minio-release.dockerfile (80:80)
-COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
+# minio-release.dockerfile (76:76)
+COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
 ```
 
 <br/>
@@ -302,13 +302,13 @@ SSH Agent servers do not validate the size of messages when processing new ident
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 7" src="https://img.shields.io/badge/C-7-8b1924"/> <img alt="high: 3" src="https://img.shields.io/badge/H-3-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/M-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.40.0</code> (golang)</summary>
+<details><summary><img alt="critical: 7" src="https://img.shields.io/badge/C-7-8b1924"/> <img alt="high: 3" src="https://img.shields.io/badge/H-3-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/M-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/crypto</strong> <code>0.37.0</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/crypto@0.40.0</code></small><br/>
+<small><code>pkg:golang/golang.org/x/crypto@0.37.0</code></small><br/>
 
 ```dockerfile
-# minio-release.dockerfile (76:76)
-COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
+# minio-release.dockerfile (80:80)
+COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
 ```
 
 <br/>
@@ -1100,7 +1100,7 @@ Minio a Allocation of Memory Without Limits or Throttling vulnerability in write
 <tr><td>CVSS Score</td><td><code>7.1</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.058%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1520,8 +1520,8 @@ COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0-0<br/><1.25.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.7</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.017%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.012%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1728,8 +1728,8 @@ Within HostnameError.Error(), when constructing an error string, there is no lim
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.045%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.025%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1766,8 +1766,8 @@ With a large DNS SAN list, verification costs scaled quadratically based on the 
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.043%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.019%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1946,8 +1946,8 @@ For example, the query "a1=x&a2=x&...&a10000=x&hidden=y" can forward the paramet
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.009%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.006%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2032,7 +2032,7 @@ When processing HTTP/2 SETTINGS frames, transport will enter an infinite loop of
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.061%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2200,7 +2200,7 @@ When processing HTTP/2 SETTINGS frames, transport will enter an infinite loop of
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.061%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2882,7 +2882,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 Issue summary: A specially crafted PKCS#7 or S/MIME signed message could trigger a use-after-free during PKCS#7 signature verification.  Impact summary: A use-after-free may result in process crashes, heap corruption, or potentially remote code execution.  When processing a PKCS#7 or S/MIME signed message, if the SignedData digestAlgorithms field is present as an empty ASN.1 SET, OpenSSL may incorrectly free a caller-owned BIO during PKCS7_verify(). A subsequent use of the BIO by the calling application results in a use-after-free condition.  In the common case this occurs when the application later calls BIO_free() on the BIO originally passed to PKCS7_verify(). Depending on allocator behavior and application-specific BIO usage patterns, this may result in a crash or other memory corruption. In some application contexts this may potentially be exploitable for remote code execution.  Applications that process PKCS#7 or S/MIME signed messages using OpenSSL PKCS#7 APIs may be affected. Applications using the CMS APIs for this processing are not affected.  The FIPS modules in 4.0, 3.6, 3.5, 3.4, and 3.0 are not affected by this issue, as the affected code is outside the OpenSSL FIPS module boundary.
 
 ---
-- openssl <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139674)
+- openssl 3.6.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139674)
 https://openssl-library.org/news/secadv/20260609.txt
 Fixed by: https://github.com/openssl/openssl/commit/9dfd688ad2290fc5075cacbc9bf0c9a93eefed54 (openssl-3.0.21)
 Fixed by: https://github.com/openssl/openssl/commit/18de9aba8294b5fb0915866cf3a1bb45f9599b8d (openssl-3.0.21)
@@ -2905,7 +2905,7 @@ Fixed by: https://github.com/openssl/openssl/commit/18de9aba8294b5fb0915866cf3a1
 Issue summary: A signed integer overflow when sizing the destination buffer for Unicode output in ASN1_mbstring_ncopy() can lead to a heap buffer overflow.  Impact summary: A heap buffer overflow may lead to a crash or possibly attacker controlled code execution or other undefined behaviour.  In ASN1_mbstring_copy() and ASN1_mbstring_ncopy() the destination size for Unicode output is computed in a signed int: by left shift of the input character count for BMPSTRING (UTF-16) and UNIVERSALSTRING (UTF-32), and by summing per-character byte counts for UTF8STRING. The calculation overflows when the input reaches around 2^30 characters. In the worst case (UNIVERSALSTRING at 2^30 characters) the size wraps to zero, OPENSSL_malloc(1) is called, and the subsequent character copy writes several gigabytes past the one-byte allocation.  X.509 certificate processing routes through ASN1_STRING_set_by_NID(), whose DIRSTRING_TYPE mask excludes UNIVERSALSTRING and whose per-NID size limits cap the input length; no network protocol or certificate-handling path in OpenSSL exercises the overflow. Triggering the bug requires an application that calls ASN1_mbstring_copy() or ASN1_mbstring_ncopy() directly, or registers a custom string type via ASN1_STRING_TABLE_add(), with attacker-controlled input on the order of half a gigabyte or more. For these reasons this issue was assigned Low severity.  The FIPS modules in 4.0, 3.6, 3.5, 3.4 and 3.0 are not affected by this issue, as the affected code is outside the OpenSSL FIPS module boundary.
 
 ---
-- openssl <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139674)
+- openssl 3.6.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139674)
 https://openssl-library.org/news/secadv/20260609.txt
 Fixed by: https://github.com/openssl/openssl/commit/bd17511070fb39a67bfa19682affb765e706a974 (openssl-3.0.21)
 
@@ -2948,7 +2948,7 @@ https://openssl-library.org/news/secadv/20260407.txt
 Issue summary: When CMS password-based decryption (RFC 3211 / PWRI key unwrap) processes attacker-supplied CMS data, an attacker-chosen stream-mode KEK cipher can trigger a heap out-of-bounds read in kek_unwrap_key().  Impact summary: A heap buffer over-read may trigger a crash which leads to Denial of Service for an application if the input buffer ends at a memory page boundary and the following page is unmapped. There is no information disclosure as the over-read bytes are not revealed to the attacker.  The key unwrapping function performs a check-byte test as specified in the RFC that reads 7 bytes from a heap allocation that is based on the wrapped key length from the message. There is a minimum length check based on the block length of the wrapping cipher. However the cipher is selected from an OID carried in the attacker's PWRI keyEncryptionAlgorithm with no requirement that the cipher be a block cipher. When an attacker selects a stream-mode cipher the guard will be ineffective and the allocated buffer containing the unwrapped key can be too small to fit the check-bytes specified in the RFC and a buffer over-read can happen.  Applications calling CMS_decrypt() or CMS_decrypt_set1_password() (equivalently openssl cms -decrypt -pwri_password ...) on untrusted CMS data are vulnerable to this issue. No password knowledge is required: the over-read happens during the unwrap attempt before any authentication succeeds.  The over-read is limited to a few bytes and is not written to output, so there is no information disclosure. Triggering a crash requires the allocation to border unmapped memory, which is unlikely with the normal allocator.  The FIPS modules are not affected by this issue.
 
 ---
-- openssl <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139674)
+- openssl 3.6.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139674)
 https://openssl-library.org/news/secadv/20260609.txt
 Fixed by: https://github.com/openssl/openssl/commit/eecbe330977e8d023aae1ca2d9bdbe983ef3fdc6 (openssl-3.0.21)
 
@@ -2970,7 +2970,7 @@ Fixed by: https://github.com/openssl/openssl/commit/eecbe330977e8d023aae1ca2d9bd
 Issue summary: Parsing a crafted DER-encoded ASN.1 structure with a primitive element whose content exceeds 2 gigabytes in length may cause a heap buffer over-read on 64-bit Unix and Unix-like platforms.  Impact summary: The heap buffer over-read may crash the application (Denial of Service) or to load into the decoded ASN.1 object contents of memory beyond the end of the input buffer.  More typically such ASN.1 elements would instead be truncated.  An integer truncation in OpenSSL's ASN.1 decoder causes the content length of an ASN.1 primitive element to be mishandled when it exceeds 2 gigabytes. In the worst case the truncated length is treated as a request to scan the binary content for a terminating zero byte, possibly causing OpenSSL to read either less than or beyond the end of the allocated buffer.  Applications that pass attacker-supplied data to d2i_X509(), d2i_PKCS7(), or any other d2i_* decoding function are affected. OpenSSL's own command-line tools are not vulnerable, as data read through the BIO layer is checked before it reaches the affected code. The issue only affects 64-bit Unix and Unix-like platforms; 32-bit platforms and 64-bit Windows are not affected.  The FIPS modules in 4.0, 3.6, 3.5, 3.4 and 3.0 are not affected by this issue, as the affected code is outside the OpenSSL FIPS module boundary.
 
 ---
-- openssl <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139674)
+- openssl 3.6.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139674)
 https://openssl-library.org/news/secadv/20260609.txt
 Fixed by: https://github.com/openssl/openssl/commit/cbe418ae978539cf14a398a207dba834c0e93e83 (openssl-3.0.21)
 
@@ -3055,7 +3055,7 @@ https://openssl-library.org/news/secadv/20260407.txt
 Issue summary: A specially crafted password-encrypted CMS message can trigger a NULL pointer dereference during CMS decryption.  Impact summary: This NULL pointer dereference leads to an application crash and a Denial of Service.  The CMS PasswordRecipientInfo.keyDerivationAlgorithm field is defined as OPTIONAL in the ASN.1 specification and may therefore be absent in specially crafted inputs. During the password-based CMS decryption the OpenSSL CMS implementation dereferences this field without first checking whether it was present.  An attacker who supplies such a CMS message to an application performing password-based CMS decryption can trigger an application crash, leading to a Denial of Service.  Applications that process password-encrypted CMS messages may be affected.  The FIPS modules in 4.0, 3.6, 3.5, 3.4, and 3.0 are not affected by this issue, as the affected code is outside the OpenSSL FIPS module boundary.
 
 ---
-- openssl <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139674)
+- openssl 3.6.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139674)
 https://openssl-library.org/news/secadv/20260609.txt
 Fixed by: https://github.com/openssl/openssl/commit/3ff64913615d648cfbb6a6f1cf5529ae7ea829d7 (openssl-3.0.21)
 Fixed by: https://github.com/openssl/openssl/commit/ba699b606969d20a108dda3cfe5422d4cc94eefb (openssl-3.0.21)
@@ -3078,7 +3078,7 @@ Fixed by: https://github.com/openssl/openssl/commit/ba699b606969d20a108dda3cfe54
 Issue summary: The implementations of AES-SIV (RFC 5297) and AES-GCM-SIV (RFC 8452) mishandle the authentication of AAD (Additional Authenticated Data) with an empty ciphertext allowing a forgery of such messages.  Impact summary: An attacker can forge empty messages with arbitrary AAD to the victim's application using these ciphers.  AES-SIV (RFC 5297) and AES-GCM-SIV (RFC 8452) are nonce-misuse-resistant AEAD modes: they accept a key, nonce, optional AAD (bytes that are authenticated but not encrypted), and plaintext, and produces ciphertext plus a 16-byte tag. On decrypt, `EVP_DecryptFinal_ex()` is documented to return success only if the tag is verified succesfully.  In OpenSSL's provider implementation of these ciphers, the expected tag is computed only when decryption function is invoked with non-empty data. If the caller supplies AAD and then calls `EVP_DecryptFinal_ex()` without invocation of the ciphertext update, which can happen when the received ciphertext length is zero, the tag is never recalculated and still holds its all-zeros value.  When AES-GCM-SIV is used, an attacker who sends arbitrary AAD, empty ciphertext, and all-zeros tag passes authentication under any key they do not know, single-shot. When AES-SIV is used, for mounting the attack it's necessary for the application to reuse the decryption context without resetting the key.  AES-SIV is implemented since OpenSSL 3.0. AES-GCM-SIV is implemented since OpenSSL 3.2.  No protocols implemented in OpenSSL itself (TLS/CMS/PKCS7/HPKE/QUIC) support either AES-GCM-SIV or AES-SIV. To mount an attack, the applications must implement their own protocol and use the EVP interface. Also they must skip the ciphertext update when a message with an empty ciphertext arrives.  The FIPS modules in 4.0, 3.6, 3.5, 3.4, and 3.0 are not affected by this issue, as these algorithms are not FIPS approved and the affected code is outside the OpenSSL FIPS module boundary.
 
 ---
-- openssl <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139674)
+- openssl 3.6.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139674)
 [bullseye] - openssl <not-affected> (Vulnerable code not present)
 https://openssl-library.org/news/secadv/20260609.txt
 Fixed by: https://github.com/openssl/openssl/commit/71e2a5d263518cf5866043bd60ee4994d59e53a3 (openssl-3.0.21)
@@ -3102,7 +3102,7 @@ AES-SIV is implemented since OpenSSL 3.0. AES-GCM-SIV is implemented since OpenS
 Issue summary: When an application drives an AES-OCB context through the public EVP_Cipher() one-shot interface, the application-supplied initialisation vector (IV) is silently discarded.  Impact summary: Every message encrypted under the same key uses the same effective nonce regardless of the IV supplied by the caller, resulting in (key, nonce) reuse and loss of confidentiality.  If the same code path is used to compute the authentication tag, the tag depends only on the (key, IV) pair and not on the plaintext or ciphertext, allowing universal forgery of arbitrary ciphertext from a single captured message.  OpenSSL provides two ways to drive a cipher: the documented streaming interface (EVP_CipherUpdate / EVP_CipherFinal_ex) and a lower-level one-shot, EVP_Cipher(), whose documentation explicitly recommends against use by applications in favour of EVP_CipherUpdate() and EVP_CipherFinal_ex().  The OCB provider's streaming handler flushes the application-supplied IV into the OCB context before processing data; the one-shot handler did not.  Every call to EVP_Cipher() on an AES-OCB context therefore ran with the all-zero key-derived offset state left by cipher initialisation, regardless of the caller's IV.  If EVP_EncryptFinal_ex() is subsequently used to obtain the authentication tag, the deferred IV setup runs at that point and clears the running checksum that should have been accumulated over the plaintext.  The resulting tag is a function of (key, IV) only and verifies against any ciphertext produced under the same (key, IV) pair.  The OpenSSL SSL/TLS implementation is not affected: AES-OCB is not a TLS cipher suite, and libssl does not call EVP_Cipher() in any case. Applications that drive AES-OCB through the documented streaming AEAD API (EVP_CipherUpdate / EVP_CipherFinal_ex) are not affected.  Only applications that combine the AES-OCB cipher with the EVP_Cipher() one-shot API are vulnerable.  The FIPS modules in 4.0, 3.6, 3.5, 3.4 and 3.0 are not affected by this issue, as AES-OCB is outside the OpenSSL FIPS module boundary.
 
 ---
-- openssl <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139674)
+- openssl 3.6.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139674)
 [bullseye] - openssl <not-affected> (see below)
 https://openssl-library.org/news/secadv/20260609.txt
 Fixed by: https://github.com/openssl/openssl/commit/323f0b6e7d530a4cb4336d50c88cb70f3ac2a451 (openssl-3.0.21)
@@ -3128,7 +3128,7 @@ and the AES-OCB one-shot rejects data submitted before the IV is set.
 Issue summary: When EVP_PKEY_derive_set_peer() is called with a DHX (X9.42) peer key, the peer key is not properly checked for the subgroup membership.  Impact summary: A malicious peer which presents an X9.42 key carrying the victim's p and g parameters, a forged q = r (a small prime factor of the cofactor (p−1)/q_local), and a public value Y of order r can recover the victim's private key after a small number of key exchange attempts.  When EVP_PKEY_derive_set_peer() is called with a DHX (X9.42) peer key, the subgroup membership check Y^q ≡ 1 (mod p) is performed using the peer's own q parameter, not the local key's q. The peer's domain parameters are then matched against the domain parameters of the private key, but the value of q is not compared.  A malicious peer who presents an X9.42 key carrying the victim's p, g, a forged q = r (a small prime factor of the cofactor), and a public value Y of order r passes all checks. The shared secret then takes only r distinct values, leaking priv mod r. Repeating for each small-prime factor of the cofactor and combining via CRT recovers the full private key (Lim–Lee / small-subgroup-confinement attack).  The realistic attack surface is narrow: principally CMP deployments with long-lived RA/CA DHX keys and bespoke enterprise or government applications using X9.42 DHX static keys with interactive protocols and therefore this issue was assigned Low severity.  The FIPS modules in 4.0, 3.6, 3.5, 3.4, and 3.0 are affected by this issue.
 
 ---
-- openssl <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139674)
+- openssl 3.6.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139674)
 [bullseye] - openssl <not-affected> (Vulnerable code introduced later)
 https://openssl-library.org/news/secadv/20260609.txt
 Fixed by: https://github.com/openssl/openssl/commit/7fbfde7677ed8808828bf00ff01c937ca04bdda2 (openssl-3.0.21)
@@ -3152,7 +3152,7 @@ Introduced with: https://github.com/openssl/openssl/commit/46eee7104d77f9d303e06
 Issue Summary: Cryptographic Message Services (CMS) processing fails to perform sufficient input validation on the cipher and tag length fields of AuthEnvelopedData containers, leading to various potential compromises.  Impact Summary: Attackers making use of these vulnerabilities may achieve key-equivalent functionality for a given CMS recipient and/or bypass integrity validation for a given message.  In one use case, an attacker may send a CMS message containing AuthEnvelopedData with the cipher specified as a non-AEAD cipher.  OpenSSL erroneously allows this selection, and attempts to decrypt and validate the message.  An on-path attacker who captures one legitimate AES-GCM AuthEnvelopedData addressed to the victim can re-emit it with the recipientInfos set left byte-for-byte intact, so the victim's private key still unwraps the genuine CEK (the content-encryption key), but with the inner OID rewritten to AES-256-OFB (Output Feedback Mode, an unauthenticated keystream mode) and with an attacker-chosen IV and ciphertext. The victim initializes AES-256-OFB under the real CEK, never consults the MAC field, and CMS_decrypt() returns success.  If the application under attack responds to the attacker with any indicator showing success or failure of the decryption effort, it is possible for the attacker to use this as an oracle to obtain key equivalent functionality for the CEK used for the chosen recipient of the message.  In another use case, an attacker can reduce the tag length of the chosen AEAD cipher for a given AuthEnvelopedData container to be a single byte long, allowing an attacker to brute force CMS decryption, producing an integrity bypass for applications that trust CMS_decrypt() to reject modified content.  The FIPS modules are not affected by this issue.
 
 ---
-- openssl <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139674)
+- openssl 3.6.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139674)
 [bullseye] - openssl <not-affected> (Vulnerable code introduced later)
 https://openssl-library.org/news/secadv/20260609.txt
 Fixed by: https://github.com/openssl/openssl/commit/03c1f4d45fb963aee7d5833390c507cd290182bc (openssl-3.0.21)
@@ -3272,7 +3272,7 @@ FROM debian:bookworm-slim
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.36-9+deb12u14</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.36-9+deb12u14</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.010%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.009%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
 </table>
 
@@ -3323,8 +3323,8 @@ Fixed by: https://sourceware.org/git/?p=glibc.git;a=commit;h=d6f08d1cf027f4eb2ba
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.36-9+deb12u14</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.36-9+deb12u14</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.023%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.018%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -3455,7 +3455,7 @@ https://sourceware.org/bugzilla/show_bug.cgi?id=24269
 <tr><td>Affected range</td><td><code>>0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>1.215%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>79th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>80th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -4108,6 +4108,60 @@ Fixed by: https://git.dpkg.org/cgit/dpkg/dpkg.git/commit/?id=6610297a62c0780dd0e
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/go-jose/go-jose/v4</strong> <code>4.1.0</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/go-jose/go-jose/v4@4.1.0</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (80:80)
+COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-34986?s=github&n=v4&ns=github.com%2Fgo-jose%2Fgo-jose&t=golang&vr=%3C4.1.4"><img alt="high 7.5: CVE--2026--34986" src="https://img.shields.io/badge/CVE--2026--34986-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Uncaught Exception</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;4.1.4</code></td></tr>
+<tr><td>Fixed version</td><td><code>4.1.4</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.036%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+
+Decrypting a JSON Web Encryption (JWE) object will panic if the `alg` field indicates a key wrapping algorithm ([one ending in `KW`](https://pkg.go.dev/github.com/go-jose/go-jose/v4#pkg-constants), with the exception of `A128GCMKW`, `A192GCMKW`, and `A256GCMKW`) and the `encrypted_key` field is empty. The panic happens when `cipher.KeyUnwrap()` in `key_wrap.go` attempts to allocate a slice with a zero or negative length based on the length of the `encrypted_key`.
+
+This code path is reachable from `ParseEncrypted()` / `ParseEncryptedJSON()` / `ParseEncryptedCompact()` followed by `Decrypt()` on the resulting object. Note that the parse functions take a list of accepted key algorithms. If the accepted key algorithms do not include any key wrapping algorithms, parsing will fail and the application will be unaffected.
+
+This panic is also reachable by calling `cipher.KeyUnwrap()` directly with any `ciphertext` parameter less than 16 bytes long, but calling this function directly is less common.
+
+Panics can lead to denial of service.
+
+### Fixed In
+
+4.1.4 and v3.0.5
+
+### Workarounds
+
+If the list of `keyAlgorithms` passed to `ParseEncrypted()` / `ParseEncryptedJSON()` / `ParseEncryptedCompact()` does not include key wrapping algorithms (those ending in `KW`), your application is unaffected.
+
+If your application uses key wrapping, you can prevalidate to the JWE objects to ensure the `encrypted_key` field is nonempty. If your application accepts JWE Compact Serialization, apply that validation to the corresponding field of that serialization (the data between the first and second `.`).
+
+### Thanks
+
+Thanks to Datadog's Security team for finding this issue.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>nghttp2</strong> <code>1.52.0-1+deb12u2</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/nghttp2@1.52.0-1%2Bdeb12u2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
@@ -4143,60 +4197,6 @@ nghttp2 is an implementation of the Hypertext Transfer Protocol version 2 in C. 
 - nghttp2 1.68.1-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1131369)
 https://github.com/nghttp2/nghttp2/security/advisories/GHSA-6933-cjhr-5qg6
 Fixed by: https://github.com/nghttp2/nghttp2/commit/5c7df8fa815ac1004d9ecb9d1f7595c4d37f46e1 (v1.68.1)
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/go-jose/go-jose/v4</strong> <code>4.1.0</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/go-jose/go-jose/v4@4.1.0</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (80:80)
-COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-34986?s=github&n=v4&ns=github.com%2Fgo-jose%2Fgo-jose&t=golang&vr=%3C4.1.4"><img alt="high 7.5: CVE--2026--34986" src="https://img.shields.io/badge/CVE--2026--34986-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Uncaught Exception</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;4.1.4</code></td></tr>
-<tr><td>Fixed version</td><td><code>4.1.4</code></td></tr>
-<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.035%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-### Impact
-
-Decrypting a JSON Web Encryption (JWE) object will panic if the `alg` field indicates a key wrapping algorithm ([one ending in `KW`](https://pkg.go.dev/github.com/go-jose/go-jose/v4#pkg-constants), with the exception of `A128GCMKW`, `A192GCMKW`, and `A256GCMKW`) and the `encrypted_key` field is empty. The panic happens when `cipher.KeyUnwrap()` in `key_wrap.go` attempts to allocate a slice with a zero or negative length based on the length of the `encrypted_key`.
-
-This code path is reachable from `ParseEncrypted()` / `ParseEncryptedJSON()` / `ParseEncryptedCompact()` followed by `Decrypt()` on the resulting object. Note that the parse functions take a list of accepted key algorithms. If the accepted key algorithms do not include any key wrapping algorithms, parsing will fail and the application will be unaffected.
-
-This panic is also reachable by calling `cipher.KeyUnwrap()` directly with any `ciphertext` parameter less than 16 bytes long, but calling this function directly is less common.
-
-Panics can lead to denial of service.
-
-### Fixed In
-
-4.1.4 and v3.0.5
-
-### Workarounds
-
-If the list of `keyAlgorithms` passed to `ParseEncrypted()` / `ParseEncryptedJSON()` / `ParseEncryptedCompact()` does not include key wrapping algorithms (those ending in `KW`), your application is unaffected.
-
-If your application uses key wrapping, you can prevalidate to the JWE objects to ensure the `encrypted_key` field is nonempty. If your application accepts JWE Compact Serialization, apply that validation to the corresponding field of that serialization (the data between the first and second `.`).
-
-### Thanks
-
-Thanks to Datadog's Security team for finding this issue.
 
 </blockquote>
 </details>
@@ -5037,7 +5037,7 @@ Built with OpenLDAP (only affects the legacy LDAP support)
 <table>
 <tr><td>Affected range</td><td><code>>0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.033%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.031%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
 </table>
 
@@ -5341,72 +5341,6 @@ https://lists.gnupg.org/pipermail/gcrypt-devel/2018-February/004401.html
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>util-linux</strong> <code>2.38.1-5+deb12u3</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/util-linux@2.38.1-5%2Bdeb12u3?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (36:36)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2025-14104?s=debian&n=util-linux&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2025--14104" src="https://img.shields.io/badge/CVE--2025--14104-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.009%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A flaw was found in util-linux. This vulnerability allows a heap buffer overread when processing 256-byte usernames, specifically within the `setpwnam()` function, affecting SUID (Set User ID) login-utils utilities writing to the password database.
-
----
-- util-linux 2.41.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1122058; unimportant)
-https://bugzilla.redhat.com/show_bug.cgi?id=2419369
-https://github.com/util-linux/util-linux/issues/3585
-https://github.com/util-linux/util-linux/pull/3586
-Fixed by: https://github.com/util-linux/util-linux/commit/aaa9e718c88d6916b003da7ebcfe38a3c88df8e6
-Fixed by: https://github.com/util-linux/util-linux/commit/9a36d77012c4c771f8d51eba46b6e62c29bf572a
-Affected code in setpwnam() is only used by chsh and chfn which are not build
-in any Debian released binary package from src:util-linux and explicitly configured
-as with --disable-chfn-chsh since 2.25-1.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2022-0563?s=debian&n=util-linux&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2022--0563" src="https://img.shields.io/badge/CVE--2022--0563-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.025%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A flaw was found in the util-linux chfn and chsh utilities when compiled with Readline support. The Readline library uses an "INPUTRC" environment variable to get a path to the library config file. When the library cannot parse the specified file, it prints an error message containing data from the file. This flaw allows an unprivileged user to read root-owned files, potentially leading to privilege escalation. This flaw affects util-linux versions prior to 2.37.4.
-
----
-- util-linux <unfixed> (unimportant)
-https://bugzilla.redhat.com/show_bug.cgi?id=2053151
-https://lore.kernel.org/util-linux/20220214110609.msiwlm457ngoic6w@<!-- -->ws.net.home/T/#u
-https://github.com/util-linux/util-linux/commit/faa5a3a83ad0cb5e2c303edbfd8cd823c9d94c17
-util-linux in Debian does build with readline support but chfn and chsh are provided
-by src:shadow and util-linux is configured with --disable-chfn-chsh
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>coreutils</strong> <code>9.1-1</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/coreutils@9.1-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
@@ -5473,9 +5407,9 @@ Neutralised by kernel hardening
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>sed</strong> <code>4.9-1</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>util-linux</strong> <code>2.38.1-5+deb12u3</code> (deb)</summary>
 
-<small><code>pkg:deb/debian/sed@4.9-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+<small><code>pkg:deb/debian/util-linux@2.38.1-5%2Bdeb12u3?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
 
 ```dockerfile
 # minio-release.dockerfile (36:36)
@@ -5484,27 +5418,55 @@ FROM debian:bookworm-slim
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2026-5958?s=debian&n=sed&ns=debian&t=deb&osn=debian&osv=12&vr=%3C4.9-1%2Bdeb12u1"><img alt="low : CVE--2026--5958" src="https://img.shields.io/badge/CVE--2026--5958-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2025-14104?s=debian&n=util-linux&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2025--14104" src="https://img.shields.io/badge/CVE--2025--14104-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;4.9-1+deb12u1</code></td></tr>
-<tr><td>Fixed version</td><td><code>4.9-1+deb12u1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.006%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.009%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-When sed is invoked with both -i (in-place edit) and --follow-symlinks, the function open_next_file() performs two separate, non-atomic filesystem operations on the same path:  1. resolves symlink to its target and stores the resolved path for determining when output is written, 2. opens the original symlink path (not the resolved one) to read the file.  Between these two calls there is a race window. If an attacker atomically replaces the symlink with a different target during that window, sed will: read content from the new (attacker-chosen) symlink target and write the processed result to the path recorded in step 1. This can lead to arbitrary file overwrite with attacker-controlled content in the context of the sed process.   This issue was fixed in version 4.10.
+A flaw was found in util-linux. This vulnerability allows a heap buffer overread when processing 256-byte usernames, specifically within the `setpwnam()` function, affecting SUID (Set User ID) login-utils utilities writing to the password database.
 
 ---
-- sed 4.9-3 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1134495)
-[trixie] - sed 4.9-2+deb13u1
-[bookworm] - sed 4.9-1+deb12u1
-[bullseye] - sed <postponed> (Minor issue; can be fixed in next update)
-https://gitweb.git.savannah.gnu.org/gitweb/?p=sed.git;a=commit;h=6b9b43c55ccd3beadbc0094b983c82bdb389f33b
-https://www.openwall.com/lists/oss-security/2026/05/13/1
+- util-linux 2.41.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1122058; unimportant)
+https://bugzilla.redhat.com/show_bug.cgi?id=2419369
+https://github.com/util-linux/util-linux/issues/3585
+https://github.com/util-linux/util-linux/pull/3586
+Fixed by: https://github.com/util-linux/util-linux/commit/aaa9e718c88d6916b003da7ebcfe38a3c88df8e6
+Fixed by: https://github.com/util-linux/util-linux/commit/9a36d77012c4c771f8d51eba46b6e62c29bf572a
+Affected code in setpwnam() is only used by chsh and chfn which are not build
+in any Debian released binary package from src:util-linux and explicitly configured
+as with --disable-chfn-chsh since 2.25-1.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2022-0563?s=debian&n=util-linux&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2022--0563" src="https://img.shields.io/badge/CVE--2022--0563-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.025%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A flaw was found in the util-linux chfn and chsh utilities when compiled with Readline support. The Readline library uses an "INPUTRC" environment variable to get a path to the library config file. When the library cannot parse the specified file, it prints an error message containing data from the file. This flaw allows an unprivileged user to read root-owned files, potentially leading to privilege escalation. This flaw affects util-linux versions prior to 2.37.4.
+
+---
+- util-linux <unfixed> (unimportant)
+https://bugzilla.redhat.com/show_bug.cgi?id=2053151
+https://lore.kernel.org/util-linux/20220214110609.msiwlm457ngoic6w@<!-- -->ws.net.home/T/#u
+https://github.com/util-linux/util-linux/commit/faa5a3a83ad0cb5e2c303edbfd8cd823c9d94c17
+util-linux in Debian does build with readline support but chfn and chsh are provided
+by src:shadow and util-linux is configured with --disable-chfn-chsh
 
 </blockquote>
 </details>
@@ -5546,6 +5508,36 @@ https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105039
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.32.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/sys@0.32.0</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (80:80)
+COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.013%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>apt</strong> <code>2.6.1</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/apt@2.6.1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
@@ -5574,44 +5566,6 @@ It was found that apt-key in apt, all versions, do not correctly validate gpg ke
 ---
 - apt <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=642480)
 Not exploitable in Debian, since no keyring URI is defined
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gnupg2</strong> <code>2.2.40-1.1+deb12u2</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/gnupg2@2.2.40-1.1%2Bdeb12u2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (36:36)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2022-3219?s=debian&n=gnupg2&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2022--3219" src="https://img.shields.io/badge/CVE--2022--3219-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.022%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-GnuPG can be made to spin on a relatively small input by (for example) crafting a public key with thousands of signatures attached, compressed down to just a few KB.
-
----
-- gnupg2 <unfixed> (unimportant)
-https://bugzilla.redhat.com/show_bug.cgi?id=2127010
-https://dev.gnupg.org/D556
-https://dev.gnupg.org/T5993
-https://www.openwall.com/lists/oss-security/2022/07/04/8
-GnuPG upstream is not implementing this change.
 
 </blockquote>
 </details>
@@ -5656,36 +5610,6 @@ If the method was called on an uninitialized point, the behavior was undefined. 
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.34.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/sys@0.34.0</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (76:76)
-COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.013%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>shadow</strong> <code>1:4.13+dfsg1-1+deb12u2</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/shadow@1%3A4.13%2Bdfsg1-1%2Bdeb12u2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
@@ -5721,13 +5645,89 @@ unknown usernames are not recorded on login failures
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.32.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>sed</strong> <code>4.9-1</code> (deb)</summary>
 
-<small><code>pkg:golang/golang.org/x/sys@0.32.0</code></small><br/>
+<small><code>pkg:deb/debian/sed@4.9-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
 
 ```dockerfile
-# minio-release.dockerfile (80:80)
-COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
+# minio-release.dockerfile (36:36)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-5958?s=debian&n=sed&ns=debian&t=deb&osn=debian&osv=12&vr=%3C4.9-1%2Bdeb12u1"><img alt="low : CVE--2026--5958" src="https://img.shields.io/badge/CVE--2026--5958-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;4.9-1+deb12u1</code></td></tr>
+<tr><td>Fixed version</td><td><code>4.9-1+deb12u1</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.006%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+When sed is invoked with both -i (in-place edit) and --follow-symlinks, the function open_next_file() performs two separate, non-atomic filesystem operations on the same path:  1. resolves symlink to its target and stores the resolved path for determining when output is written, 2. opens the original symlink path (not the resolved one) to read the file.  Between these two calls there is a race window. If an attacker atomically replaces the symlink with a different target during that window, sed will: read content from the new (attacker-chosen) symlink target and write the processed result to the path recorded in step 1. This can lead to arbitrary file overwrite with attacker-controlled content in the context of the sed process.   This issue was fixed in version 4.10.
+
+---
+- sed 4.9-3 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1134495)
+[trixie] - sed 4.9-2+deb13u1
+[bookworm] - sed 4.9-1+deb12u1
+[bullseye] - sed <postponed> (Minor issue; can be fixed in next update)
+https://gitweb.git.savannah.gnu.org/gitweb/?p=sed.git;a=commit;h=6b9b43c55ccd3beadbc0094b983c82bdb389f33b
+https://www.openwall.com/lists/oss-security/2026/05/13/1
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gnupg2</strong> <code>2.2.40-1.1+deb12u2</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/gnupg2@2.2.40-1.1%2Bdeb12u2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (36:36)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2022-3219?s=debian&n=gnupg2&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2022--3219" src="https://img.shields.io/badge/CVE--2022--3219-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.022%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+GnuPG can be made to spin on a relatively small input by (for example) crafting a public key with thousands of signatures attached, compressed down to just a few KB.
+
+---
+- gnupg2 <unfixed> (unimportant)
+https://bugzilla.redhat.com/show_bug.cgi?id=2127010
+https://dev.gnupg.org/D556
+https://dev.gnupg.org/T5993
+https://www.openwall.com/lists/oss-security/2022/07/04/8
+GnuPG upstream is not implementing this change.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.34.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/sys@0.34.0</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (76:76)
+COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
 ```
 
 <br/>
