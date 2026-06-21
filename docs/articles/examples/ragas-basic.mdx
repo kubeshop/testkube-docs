@@ -1,0 +1,24 @@
+import SimpleRagas from "../../workflows/simple-ragas-workflow.md"
+
+# Basic Ragas Example
+
+[Ragas](https://docs.ragas.io/) is an open-source framework for evaluating Retrieval-Augmented Generation (RAG)
+pipelines using metrics like faithfulness and response relevancy. The Workflow below evaluates a small inline
+dataset of question/answer/context samples and uploads the results as an artifact.
+You can paste this directly into the YAML of an existing or new Workflow, just make sure to update the
+`name` and `namespace` for your environment if needed.
+
+- The `spec.content.files` property defines an inline `ragas_eval.py` script that builds a two-sample evaluation
+  dataset and scores it with the `Faithfulness` and `ResponseRelevancy` metrics, using OpenAI for both the
+  judge LLM and embeddings.
+- The `spec.container` property defines the working directory, Python image, and environment variables for the
+  Workflow; the `OPENAI_API_KEY` is resolved using the [credential](/articles/credential-management) expression
+  so the key is never stored in the Workflow definition itself.
+- The **"Install and run Ragas"** step installs Ragas and its LangChain dependencies and runs the evaluation.
+- The **"Save results"** step uploads the JSON results as an artifact; the `always` condition makes sure the
+  results are uploaded even if the evaluation fails.
+
+<SimpleRagas/>
+
+After execution, the metric scores are shown in the Log Output tab, and the `ragas_results.json` file is
+available under the Artifacts tab of the execution.
