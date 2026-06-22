@@ -447,8 +447,7 @@ development or evaluation deployments.
 
 :::warning
 
-MongoDB is deprecated as the primary database and will be removed from Testkube by the end of 2026. Use
-this section only for legacy deployments or while migrating to PostgreSQL. See
+Use this section only for legacy deployments or while migrating to PostgreSQL. See
 [Mongo to Postgres Migration](/articles/convert).
 
 :::

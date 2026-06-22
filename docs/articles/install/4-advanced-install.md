@@ -500,7 +500,7 @@ You can easily connect PostgreSQL to an external database by creating a Kubernet
 
 :::warning Important
 
-MongoDB has been deprecated as the primary database and will be removed from Testkube by the end of 2026. Please plan your migration to PostgreSQL at your earliest convenience.
+MongoDB has been deprecated as the primary database. Please plan your migration to PostgreSQL at your earliest convenience.
 
 :::
 
