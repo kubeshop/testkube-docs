@@ -95,7 +95,7 @@ above to ensure that artifacts are collected, otherwise this step could be skipp
 ## JUnit Report Extraction
 
 Testkube automatically scans all artifacts for `.xml` files that are valid [JUnit XML reports](https://github.com/testmoapp/junitxml) and parses
-their contents. This parsed data is then made available via [JUnit Reports Visualization](/articles/test-workflows-reports) for detailed inspection 
+their contents. This parsed data is then made available via [JUnit Reports Visualization](/articles/test-workflows-reports) for detailed inspection
 and filtering of results.
 
 More specifically, Testkube extracts:
@@ -114,12 +114,8 @@ For a deep dive into how Testkube processes and visualizes JUnit reports, includ
 Testkube also scans uploaded JSON artifacts for supported performance-test reports and can ingest their aggregated
 values as [Granular Metrics](/articles/granular-metrics). The original files remain available as normal artifacts.
 
-Testkube also scans `.influx` and `.lp` artifact files for [InfluxDB Line Protocol](/articles/granular-metrics#custom-metrics-with-influx-line-protocol)
-records, which is the recommended way to capture custom metrics from your own scripts and tools.
-
 Supported report artifacts include:
 
-- Influx Line Protocol files with a `.influx` or `.lp` extension, registered as `influx.line_protocol` reports.
 - k6 `summary.json` exports created with `--summary-export`, registered as `k6.summary` reports.
 - Artillery JSON reports created with `-o <report-file>`, registered as `artillery.report`.
 - JMeter dashboard `statistics.json` files created with `-e -o <report-directory>`, registered as
@@ -133,3 +129,7 @@ For JMeter workflows, make sure the generated dashboard report directory is incl
 example, a command such as `jmeter -n -t test.jmx -l /data/artifacts/jtl-report.jtl -e -o /data/artifacts/report`
 creates `/data/artifacts/report/statistics.json`, which Testkube can detect when `/data/artifacts/**/*` is
 uploaded.
+
+## Influx Line Protocol
+
+Finally, Testkube will scan all files using the [InfluxDB Line Protocol](/articles/granular-metrics#custom-metrics-with-influx-line-protocol), to create custom metric series. Any file ending with `.influx` or `.lp` extension, will be registered as an `influx.line_protocol` report, and added to your metric series.
