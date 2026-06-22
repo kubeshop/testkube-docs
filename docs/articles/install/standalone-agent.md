@@ -157,10 +157,6 @@ When [minio](https://min.io/) is specified, logs will be stored as separate file
 
 ### MongoDB upgrade from 8.0.13 to 8.2.5
 
-:::note
-This section applies only to legacy MongoDB deployments. New installations use PostgreSQL by default.
-:::
-
 Starting with chart version `2.6.0`, MongoDB is upgraded to `8.2.3` and in the later versions to `8.2.5`.  This is a **breaking change** for installations that are not already running MongoDB `8.0.x`, because MongoDB requires the upgrade path to go through `8.0` before moving to `8.2.x`.
 
 To upgrade safely, you must first ensure they you on at least chart version `2.4.0`, which includes MongoDB `8.0.13`. Only after that should you upgrade to the latest chart version.

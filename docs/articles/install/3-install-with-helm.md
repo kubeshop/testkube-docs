@@ -30,12 +30,12 @@ Before you proceed with the installation, please ensure that you have the follow
 
 The following are production requirements for external dependencies:
 
-- **PostgreSQL** *(default database)*
+- **PostgreSQL**
   - At least 500 millicore
   - 1GB of memory
   - At least 5GB of storage (subject to increase as load increases)
   
-- **MongoDB** *(legacy deployments only)*
+- **MongoDB**
   - At least 1 CPU core
   - 2GB of memory
   - At least 10GB of storage (subject to increase as load increases)
