@@ -23,18 +23,31 @@ By integrating Test Insights into your testing workflow, your team can leverage 
 
 ## Using Test Insights
 
-Test Insights are available from the top menu, which will take you to a default "Execution Analysis" Board with
-premade charts.
+Test Insights are available from the top menu. The Insights sidebar helps you navigate between boards:
+
+- **All Boards** — a searchable grid of every board you can access in the Organization
+- **Execution Analysis** — the default board with premade charts
+- **Pinned Boards** — boards you have pinned for quick access
+- **Shared Boards** — boards shared across the Organization
+- **Private Boards** — boards visible only to you
 
 ![Test Insights Overview](images/insights-overview.png)
 
-The "Your Boards" section contains all Boards created within your Organization.
+Use **All Boards** to browse, search, and paginate through every board at a glance. Each card shows the board name,
+description, analysis count, and layout summary. Click a card to open the board.
+
+You can create a board from **+ Create a new board** at the bottom of the sidebar or from the **New Board** button on
+the All Boards page.
 
 :::note
-There is currently no way to limit access to individual boards for Organization members; everyone has access
-to all boards and can thus see all data within (which is read-only).
+Boards can be **shared across the Organization** or kept **private**. Private boards are visible only to their
+creator. Shared boards are visible to all Organization members, but only the creator or an Organization admin can
+edit or rearrange them. Deleting a shared board requires Organization admin permissions.
 
-If this is a concern you can disable Insights entirely for from the [Product Features Panel](/articles/organization-management#product-features).
+Pinning a board is personal — it adds the board to your **Pinned Boards** section without changing who can access it.
+
+If Insights should not be available in your Organization, disable it from the
+[Product Features Panel](/articles/organization-management#product-features).
 :::
 
 ## Boards
@@ -47,12 +60,22 @@ The default Execution Analysis board has three sections which all show data over
 
 The top part of the Execution Analysis module shows high-level execution metrics.
 
-Underneath you can find you can find a quick overview of execution count duration.
+Underneath you can find a quick overview of execution count and duration.
 You can either group your executions by status or workflow by using the selector.
 
 Lastly, the execution efficiency analysis shows tests by execution time and frequency. Tests that
 frequently run and take longer to execute appear in the top right quadrant, highlighting them as prime
 candidates for optimization to reduce testing bottlenecks, improve cycle times and optimize infrastructure costs
+
+### Board Visibility
+
+When you create or edit a board, you can choose its visibility:
+
+- **Shared across organization** — visible to all Organization members. The creator and Organization admins can edit
+  the board and its analyses. Organization admins can also reorder shared boards in the sidebar.
+- **Private** — visible only to you. You can edit and delete your private boards.
+
+Private and pinned boards show **Private** and **Pinned** badges on the board page and on cards in All Boards.
 
 ### Managing Custom Boards
 
@@ -62,17 +85,27 @@ with your testing activities.
 
 You can manage a board as follows:
 
-- **Create Board**: You can create a board by clicking on "Create new board".
-  After filling in details such as name and description, you can add your first analysis.
+- **Create Board**: Click **+ Create a new board** in the sidebar or **New Board** on the All Boards page.
+  In the creation dialog, set the name, slug, description, and visibility, then add your first analysis.
 
-- **Rearrange board**: Hover an analysis insight and in the top-right corner you can find a handle to drag and drop your analysis.
-  You can move it around to a new row or put it in front or behind another analysis. You can only add up to three analysis per row.
-  Responsiveness of boards are limited to larger screen sizes.
+- **Pin Board**: Pin a board from its actions menu (on the board page or on a card in All Boards) or from the pin
+  icon next to a board in the sidebar. Pinned boards appear under **Pinned Boards** for quick access.
 
-- **Update Board**: You can go to the board's setting by clicking on the dotted menu. Here you can update both the name and the description.
+- **Reorder shared boards**: Organization admins can drag shared boards in the sidebar to change their order for
+  everyone in the Organization.
 
-- **Delete Board**: You can go to the board's setting and delete the board in the danger zone at the bottom.
-  Your board and all analysis will be removed, no execution data will be deleted.
+- **Rearrange analyses**: Hover an analysis and use the handle in the top-right corner to drag and drop it.
+  You can move it to a new row or place it before or after another analysis. You can only add up to three analyses
+  per row. Board layouts are optimized for larger screen sizes.
+
+- **Duplicate analysis**: Open an analysis actions menu and choose **Duplicate Analysis** to copy its configuration
+  onto the same board.
+
+- **Update Board**: Click the board title on the board page to rename it inline, or open **Settings** from the actions
+  menu to update the name, slug, description, and visibility.
+
+- **Delete Board**: Use **Delete** in the board actions menu, or open **Settings** and delete the board in the danger
+  zone at the bottom. Your board and all analyses will be removed; no execution data will be deleted.
 
 ## Working with Analyses
 
@@ -80,7 +113,7 @@ You can add as many analyses to a board as needed; use the "Add a new analysis" 
 
 ![Test Insights add Analysis](images/insights-add-analysis.png)
 
-Adding a board takes you to the Analysis editor where you can configure what data to show and how to show it.
+Adding an analysis takes you to the Analysis editor where you can configure what data to show and how to show it.
 
 ### The anatomy of the Analysis Editor
 
