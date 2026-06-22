@@ -114,8 +114,12 @@ For a deep dive into how Testkube processes and visualizes JUnit reports, includ
 Testkube also scans uploaded JSON artifacts for supported performance-test reports and can ingest their aggregated
 values as [Granular Metrics](/articles/granular-metrics). The original files remain available as normal artifacts.
 
+Testkube also scans `.influx` and `.lp` artifact files for [InfluxDB Line Protocol](/articles/granular-metrics#custom-metrics-with-influx-line-protocol)
+records, which is the recommended way to capture custom metrics from your own scripts and tools.
+
 Supported report artifacts include:
 
+- Influx Line Protocol files with a `.influx` or `.lp` extension, registered as `influx.line_protocol` reports.
 - k6 `summary.json` exports created with `--summary-export`, registered as `k6.summary` reports.
 - Artillery JSON reports created with `-o <report-file>`, registered as `artillery.report`.
 - JMeter dashboard `statistics.json` files created with `-e -o <report-directory>`, registered as

@@ -4,6 +4,10 @@ Granular metrics let Testkube store tool-specific measurements as named time ser
 workflow status, duration, and resource usage. Granular metrics can be used to track metrics within a workflow (e.g.
 the performance of an individual test case) or as summary metrics for a workflow (e.g. maximum HTTP response time).
 
+To capture **custom metrics** from your own scripts or tools, write them in [InfluxDB Line Protocol](#custom-metrics-with-influx-line-protocol)
+format and upload the file as a workflow artifact. Testkube also ingests metrics automatically from JUnit reports and
+from supported performance-testing tools such as k6, Artillery, and JMeter.
+
 ## Configuration
 
 Granular metrics are **enabled by default**. The control plane worker service ingests supported reports from workflow
@@ -48,12 +52,13 @@ In addition to standard filtering and segmentation, granular metrics support seg
 Each series includes identity fields derived from the tool that produced the report. Below is a table of common identity fields
 for the supported report sources.
 
-| Report source     | Common identity fields             | Notes                                                                                                                                                                                                                                                           |
-| ----------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| JUnit report      | Testcase, Testsuite                | Test cases and suites are uniquely identified by their name. If you have the same test case name across multiple workflows they will be aggregated together (a workflow filter can help mitigate this issue).                                                   |
-| k6 summary        | Scenario, Endpoint, k6 metric tags | k6 only writes tagged submetrics to the summary when the script requests them, usually through thresholds. Global metrics such as total received bytes or max VUs may not have scenario or endpoint identity.                                                   |
-| Artillery report  | Scenario, Transaction              | Scenario identities come from named Artillery scenarios. Transaction identities come from endpoint-level metrics when the report includes them. Other aggregate metrics remain workflow-level when the report does not include scenario or transaction context. |
-| JMeter statistics | Transaction                        | JMeter dashboard statistics are keyed by transaction label, including `Total`.                                                                                                                                                                                  |
+| Report source           | Common identity fields             | Notes                                                                                                                                                                                                                                                           |
+| ----------------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| JUnit report            | Testcase, Testsuite                | Test cases and suites are uniquely identified by their name. If you have the same test case name across multiple workflows they will be aggregated together (a workflow filter can help mitigate this issue).                                                   |
+| Influx line protocol    | Tag keys from each line            | Each tag on a line protocol record becomes an identity field (for example `status=200` or `scenario=checkout`). Use stable, low-cardinality tag keys so segments remain readable in Insights.                                                                  |
+| k6 summary              | Scenario, Endpoint, k6 metric tags | k6 only writes tagged submetrics to the summary when the script requests them, usually through thresholds. Global metrics such as total received bytes or max VUs may not have scenario or endpoint identity.                                                   |
+| Artillery report        | Scenario, Transaction              | Scenario identities come from named Artillery scenarios. Transaction identities come from endpoint-level metrics when the report includes them. Other aggregate metrics remain workflow-level when the report does not include scenario or transaction context. |
+| JMeter statistics       | Transaction                        | JMeter dashboard statistics are keyed by transaction label, including `Total`.                                                                                                                                                                                  |
 
 ## Use Case: Granular Metrics for Test Results
 
@@ -70,9 +75,126 @@ Granular metrics are automatically ingested for JUnit output when you [create a 
 These metrics can be used to understand trends for individual tests over time. For example, viewing `test_duration_ms` segmented
 by test case can highlight your slowest tests and tests that suddenly take significantly longer than expected.
 
+## Custom Metrics with Influx Line Protocol
+
+[InfluxDB Line Protocol](https://docs.influxdata.com/influxdb/cloud/reference/syntax/line-protocol/) is the recommended
+way to capture custom metrics from any workflow step. Write one or more line protocol records to a file, upload it as
+an artifact, and Testkube ingests the numeric fields as granular metric series you can chart in
+[Insights](/articles/test-insights).
+
+This path works for any tool or script that can emit text metrics at the end of a run — custom load tests, application
+benchmarks, database query timings, or ad-hoc shell measurements — without waiting for a dedicated report integration.
+
+### Getting Started
+
+1. Write your metrics to a file using Influx Line Protocol syntax.
+2. Use a `.influx` or `.lp` file extension. Testkube only scans files with these extensions for line protocol content.
+3. Place the file in a directory covered by your step `artifacts.paths`.
+4. Run the workflow. The agent toolkit detects valid line protocol during artifact upload and registers the file as an
+   `influx.line_protocol` report. The control plane then ingests the metrics into granular series.
+
+```yaml title="example-custom-metrics.yaml"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: custom-metrics-example
+spec:
+  steps:
+  - name: Run checks and export metrics
+    shell: |
+      mkdir -p /data/artifacts
+      cat > /data/artifacts/custom-metrics.lp <<'EOF'
+      api_latency,endpoint=checkout,status=200 p95=245.5,avg=118.2
+      api_latency,endpoint=login,status=200 p95=189.0,avg=95.4
+      orders_processed value=42
+      EOF
+    artifacts:
+      paths:
+      - /data/artifacts/**/*
+```
+
+After the workflow finishes, the `.lp` file remains available as a normal artifact and the detected metrics appear in
+Insights under **Custom Report Metrics** (unless the metric key matches another Insights group, such as a latency key
+under **Request Latency**).
+
+### Line Format
+
+Each non-empty, non-comment line follows the standard line protocol shape:
+
+```text
+measurement[,tag_key=tag_value...] field_key=value[,field_key=value...] [timestamp]
+```
+
+- **Measurement** — becomes the base of the metric key (for example `api_latency`).
+- **Tags** — optional comma-separated `key=value` pairs after the measurement. Tags are stored as identity fields so
+  you can segment or filter by them in Insights.
+- **Fields** — one or more `key=value` pairs separated by commas. Each numeric field becomes its own metric series.
+- **Timestamp** — optional nanosecond Unix timestamp at the end of the line. When omitted, Testkube associates the
+  values with the workflow execution's finish time.
+- **Comments** — lines starting with `#` are ignored.
+
+Example records:
+
+```text
+http_req_duration,status=200,scenario=checkout value=118.5
+http_req_duration,status=200 avg=100,p95=200
+http_reqs value=1000
+cpu,host=server01 usage_user=0.10,usage_system=0.20 1670000000000000000
+```
+
+### Supported Field Types
+
+Testkube ingests numeric field values only:
+
+| Field syntax | Example    | Stored as   |
+| ------------ | ---------- | ----------- |
+| Float        | `value=42.5` | `42.5`    |
+| Integer      | `count=42i`  | `42`      |
+| Unsigned     | `count=42u`  | `42`      |
+
+String fields (quoted values) and boolean fields (`true` / `false`) are skipped. A file must contain at least one valid
+numeric record to be ingested; otherwise Testkube ignores it.
+
+### Metric Keys
+
+Testkube normalizes each measurement and field name into a stable metric key: `{measurement}_{field}` in lowercase with
+non-alphanumeric characters replaced by underscores.
+
+| Line protocol record | Testkube metric key |
+| -------------------- | ------------------- |
+| `http_req_duration,status=200 value=118.5` | `http_req_duration_value` (identity: `status=200`) |
+| `http_req_duration,status=200 avg=100,p95=200` | `http_req_duration_avg`, `http_req_duration_p95` |
+| `http_reqs value=1000` | `http_reqs_value` |
+| `orders_processed value=42` | `orders_processed_value` |
+
+When multiple lines in the same file contribute to the same metric key and identity (for example two workers writing the
+same tagged measurement), Testkube sums the values for that execution.
+
+### Segmentation and Filtering
+
+Tags on each line become identity fields, similar to k6 metric tags. For the record
+`api_latency,endpoint=checkout,status=200 p95=245.5`, you can segment or filter by **endpoint** or **status** in
+Insights when charting `api_latency_p95`.
+
+Use stable, low-cardinality tag keys — such as `endpoint`, `scenario`, or `service` — rather than unique IDs or raw
+URLs. High-cardinality tags create many series and make analysis harder.
+
+### Influx Line Protocol Troubleshooting
+
+If custom metrics do not appear in Insights:
+
+- Confirm the file uses a `.influx` or `.lp` extension. Other extensions are not scanned for line protocol.
+- Confirm the file is included in `artifacts.paths` and appears in the execution Artifacts tab.
+- Confirm each metric line has at least one numeric field. Lines with only string or boolean fields are ignored.
+- Confirm granular metrics ingestion is enabled on your deployment (see [Configuration](#configuration) above).
+- Check the workflow logs for `Processing InfluxDB line protocol report` messages during artifact upload.
+
 ## Use Case: Performance Testing
 
 Granular metrics integrate with major performance testing tools. [k6](#k6-summary-integration), [Artillery](#artillery-report-integration), and [JMeter](#jmeter-statistics-integration) are currently supported; the sections below describe how to export reports and collect them as workflow artifacts for each tool. Ready-to-run workflows are in the [Basic K6](/articles/examples/k6-basic), [Basic Artillery](/articles/examples/artillery-basic), and [Basic JMeter](/articles/examples/jmeter-basic) examples.
+
+For other tools, or when you need metrics that do not map to a built-in report format, use [Influx Line Protocol](#custom-metrics-with-influx-line-protocol) instead.
+
 The metrics exported by each tool will differ, but you can chart the values you care about and see how they change over time.
 For example, charting `http_req_duration_p95_ms` segmented by **Scenario** helps you compare p95 latency across load profiles and spot regressions in a single scenario.
 
