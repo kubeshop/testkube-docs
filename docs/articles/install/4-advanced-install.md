@@ -421,7 +421,9 @@ Testkube supports integrating with existing infrastructure components such as Po
 
 ### PostgreSQL
 
-Starting with release `2.9`, PostgreSQL will be used as the primary database instead of MongoDB. Since both options are currently supported, you must first disable MongoDB and then enable PostgreSQL in your `values.yaml` file. We strongly recommend using `CloudNativePG` instead of plain PostgreSQL, as it offloads much of the database management, and the installation of PostgreSQL by Bitnami will be deprecated by the end of 2026.
+PostgreSQL is the primary and default database for Testkube. New installations use PostgreSQL by default. For production environments, we strongly recommend using `CloudNativePG` instead of plain PostgreSQL, as it offloads much of the database management, and the installation of PostgreSQL by Bitnami will be deprecated by the end of 2026.
+
+If you are migrating from a legacy MongoDB deployment, disable MongoDB and enable PostgreSQL in your `values.yaml` file as shown below. Fresh installations already use PostgreSQL by default.
 The operator-based path has two parts:
 
 1. The `cloudnative-pg` operator, which manages PostgreSQL lifecycle in Kubernetes.
@@ -502,10 +504,9 @@ MongoDB has been deprecated as the primary database and will be removed from Tes
 
 :::
 
-Testkube uses [MongoDB](https://www.mongodb.com/) as a database for storing all the data.
-By default, it will install a MongoDB instance using the Bitnami MongoDB Helm chart.
+Testkube previously used [MongoDB](https://www.mongodb.com/) as its database. MongoDB is no longer installed by default and is retained only for legacy deployments and migration workflows.
 
-If you wish to use an existing MongoDB instance, you can configure the following values:
+If you still need to use an existing MongoDB instance, you can configure the following values:
 
 ```yaml
 mongodb:
@@ -531,6 +532,11 @@ testkube-api:
 ```
 
 #### MongoDB upgrade from 8.0.15 to 8.2.5
+
+:::note
+This section applies only to legacy MongoDB deployments. New installations use PostgreSQL by default.
+:::
+
 Starting with chart version `2.329.0`, MongoDB is upgraded to `8.2.3` and in the later versions to `8.2.5`.  This is a **breaking change** for installations that are not already running MongoDB `8.0.x`, because MongoDB requires the upgrade path to go through `8.0` before moving to `8.2.x`.
 
 To upgrade safely, you must first ensure they you on at least chart version `2.326.3`, which includes MongoDB `8.0.15`. Only after that should you upgrade to the latest chart version.

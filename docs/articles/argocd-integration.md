@@ -132,7 +132,10 @@ testkube-api:
     enabled: false
     
 mongodb:
-  enabled: false 
+  enabled: false
+
+postgresql:
+  enabled: false
   
 testkube-dashboard:
   enabled: false
