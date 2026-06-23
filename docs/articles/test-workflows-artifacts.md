@@ -95,7 +95,7 @@ above to ensure that artifacts are collected, otherwise this step could be skipp
 ## JUnit Report Extraction
 
 Testkube automatically scans all artifacts for `.xml` files that are valid [JUnit XML reports](https://github.com/testmoapp/junitxml) and parses
-their contents. This parsed data is then made available via [JUnit Reports Visualization](/articles/test-workflows-reports) for detailed inspection 
+their contents. This parsed data is then made available via [JUnit Reports Visualization](/articles/test-workflows-reports) for detailed inspection
 and filtering of results.
 
 More specifically, Testkube extracts:
@@ -129,3 +129,7 @@ For JMeter workflows, make sure the generated dashboard report directory is incl
 example, a command such as `jmeter -n -t test.jmx -l /data/artifacts/jtl-report.jtl -e -o /data/artifacts/report`
 creates `/data/artifacts/report/statistics.json`, which Testkube can detect when `/data/artifacts/**/*` is
 uploaded.
+
+## Influx Line Protocol
+
+Finally, Testkube will scan all files using the [InfluxDB Line Protocol](/articles/granular-metrics#custom-metrics-with-influx-line-protocol), to create custom metric series. Any file ending with `.influx` or `.lp` extension, will be registered as an `influx.line_protocol` report, and added to your metric series.

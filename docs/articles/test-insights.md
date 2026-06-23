@@ -91,22 +91,19 @@ The interval is automatically inferred depending on the size of the period.
 A period less than two days will have an hourly interval, then daily, and up to weekly when looking at a quarter.
 
 More to the right, you can see the Analysis Selector: it defaults to **Executions** time series, but you can also
-select **Executions Bar Chart**, **Efficiency Quadrant Analysis** and **Pass/Fail Statistics** (all described below)
+select **Executions Bar Chart**, **Efficiency Quadrant Analysis** and **Pass/Fail Statistics** (all described below).
 
-![Test Insights Select Analysis](images/insights-select-analysis.png)
+![Chart Type selector](images/insights-select-analysis.png)
 
 Under the period and analysis selector, you will find your selected chart with its controls on the right side.
 The controls vary depending on the selected chart and include the ability to filter executions on **Workflow name**,
-**environment**, **status** and **labels** (both existence or specific label values).
+**environment**, **status**, **labels**, and measure specific fields (such as test case name).
 
 ![Test Insights Executions Filter](images/insights-executions-filter.png)
 
 :::tip
-Filtering on workflow name support regexes, so you could perfectly filter all workflows prefixed with `performance`
-by adding a `performancy.*` filter.
+Workflow name, labels, and measure identity fields, support multiple filter operators such as `IS` (exact match) and `CONTAINS` for partial matches. Just click on the operator to switch.
 :::
-
-One limitation is that you currently cannot negate a filter literal yet.
 
 ## Executions Time Series
 
@@ -147,6 +144,35 @@ You can do this by the **status** to see which executions passed or failed,
 by **workflow name** or by any of the **labels** found on the executions.
 
 ![Test Insights Executions Segment](images/insights-executions-segment.png)
+
+### Chart Types
+
+The **Chart Type** selector in the analysis editor header controls how segmented execution data is visualized over time.
+Eight chart types are available:
+
+| Chart Type            | Description                                                                                                                                               |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Stacked Bar**       | The default. Segments are stacked within each time bucket to show totals and composition.                                                                 |
+| **Grouped Bar**       | Segments are drawn side-by-side within each bucket, making it easier to compare individual segment values.                                                |
+| **100% Stacked Bar**  | Each bucket is normalized to 100%, showing the relative share of each segment rather than absolute values.                                                |
+| **Stacked Line**      | A stacked area chart — the line equivalent of stacked bars. Useful for seeing how segment composition changes over time.                                  |
+| **Line**              | One independent line per segment. Each segment is scaled to its own peak, which highlights trends for individual segments.                                |
+| **100% Stacked Area** | A normalized area chart where each time bucket sums to 100%, showing segment share over time.                                                             |
+| **Heatmap**           | A time-by-segment grid where color intensity encodes value. Works well when you have many segments and stacked bars or lines become hard to read.         |
+| **Horizon**           | One small area chart per segment, stacked vertically as small multiples. All segments share a common scale so you can compare magnitudes across segments. |
+
+:::tip
+Use **100% Stacked Bar** or **100% Stacked Area** when you care about proportions (for example, the pass/fail mix) rather than absolute counts. Use **Heatmap** or **Horizon** when segmenting by a high-cardinality dimension such as workflow name or test case.
+:::
+
+Segmented charts display a color legend above the chart. Hovering a legend entry, a chart segment, or a row in the
+drilldown table cross-highlights that segment across every time bucket (dimming the rest), making it easy to follow a
+single segment through the full period.
+
+### Success Rate Overlay
+
+When your analysis is specifically looking at test counts (using the measure **Execution count** and segmenting by **Status**) an **Overlay** option appears in
+the controls panel. This will include an overlay showing the pass rate over time on top of the raw counts.
 
 ### Executions Table and Drill Down
 
