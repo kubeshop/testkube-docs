@@ -114,6 +114,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "Using Seaweed",
+                  id: "articles/using-seaweed",
+                },
+                {
+                  type: "doc",
                   label: "Using a Private CA",
                   id: "articles/private-ca",
                 },
