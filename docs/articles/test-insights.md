@@ -93,10 +93,7 @@ A period less than two days will have an hourly interval, then daily, and up to 
 More to the right, you can see the Analysis Selector: it defaults to **Executions** time series, but you can also
 select **Executions Bar Chart**, **Efficiency Quadrant Analysis** and **Pass/Fail Statistics** (all described below).
 
-When **Executions** is selected, a **Chart Type** selector appears next to the Analysis Selector. It lets you choose
-how the time series is rendered (stacked bars, lines, heatmap, and more). Your choice is saved with the analysis.
-
-![Test Insights Select Analysis](images/insights-select-analysis.png)
+![Chart Type selector](images/insights-select-analysis.png)
 
 Under the period and analysis selector, you will find your selected chart with its controls on the right side.
 The controls vary depending on the selected chart and include the ability to filter executions on **Workflow name**,
