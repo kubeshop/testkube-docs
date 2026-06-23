@@ -1,23 +1,21 @@
 # Commercial Licensing Overview
 
-This page explains Testkube's commercial licensing model for Cloud and On-Prem deployments. For source code licensing, including the MIT license and the Testkube Community License, see the [Source Code Licensing FAQ](/articles/testkube-licensing-FAQ).
+This page explains Testkube's commercial licensing model for Cloud and On-Prem Control Plane deployments. For Open Source licensing, including the MIT license and the Testkube Community License, see the [Open Source Licensing FAQ](/articles/testkube-licensing-FAQ).
 
 Commercial licensing is based on how your organization uses the Testkube Control Plane and the agents that execute work in your infrastructure. The exact limits and commercial terms depend on your plan, but the model is built around two main dimensions:
 
 - **Users**: people who can access your Testkube organization.
-- **Runner Agents**: agents that execute Test Workflows in your clusters or namespaces.
+- **Runner Agents**: agents that execute Test Workflows in your clusters or namespaces. Runner Agents are always deployed on-prem in your infrastructure.
 
-Testkube can be used as a managed Cloud service, deployed on-premises, or used in open source standalone mode. Cloud and On-Prem deployments use the commercial licensing model described on this page. Open source standalone mode follows the source code licensing model described in the [Source Code Licensing FAQ](/articles/testkube-licensing-FAQ).
+## Control Plane Deployment Options
 
-## Deployment Options
+### Cloud Hosted Control Plane
 
-### Testkube Cloud
-
-With Testkube Cloud, the Testkube team operates the Control Plane at [app.testkube.io](https://app.testkube.io). You create organizations, environments, workflows, and other resources in the hosted Dashboard, then deploy Testkube Agents into your own infrastructure when you need to execute workflows or connect to Kubernetes events.
+With Testkube Cloud, the Testkube team operates the Control Plane at [app.testkube.io](https://app.testkube.io). You create organizations, environments, workflows, and other resources in the hosted Dashboard, then deploy Testkube Runner Agents into your own infrastructure when you need to execute workflows or connect to Kubernetes events.
 
 Cloud licensing is managed by Testkube and applied to your organization. Depending on your plan, user licensing can be based on fixed seat limits or usage at the end of the billing period. See [Member Management](/articles/member-management#member-licensing-with-the-testkube-cloud-control-plane) for the current behavior described in the product documentation.
 
-### Testkube On-Prem
+### On-Prem Control Plane
 
 With Testkube On-Prem, you host the commercial Testkube Control Plane in your own infrastructure. This model is commonly used when you need stricter control over data residency, networking, identity, or platform operations.
 
@@ -33,7 +31,7 @@ Allow outbound HTTPS traffic to `license.testkube.io` on port `443` from the Tes
 
 The Testkube Agent can also run in standalone mode without connecting to the commercial Control Plane. In this mode, the agent stores and manages resources in the Kubernetes cluster where it runs and can be used through the CLI or Agent API.
 
-Standalone mode is the open source path for running Testkube without a commercial Control Plane. It is not licensed by commercial users, seats, or Runner Agent limits. Some advanced features require the commercial Control Plane or are covered by the Testkube Community License. See [Testkube Open Source](/articles/open-source) and the [Source Code Licensing FAQ](/articles/testkube-licensing-FAQ) for more details.
+Standalone mode is the open source path for running Testkube without a commercial Control Plane. It is not licensed by commercial users, seats, or Runner Agent limits. Some advanced features require the commercial Control Plane or are covered by the Testkube Community License. See [Testkube Open Source](/articles/open-source) and the [Open Source Licensing FAQ](/articles/testkube-licensing-FAQ) for more details.
 
 ## User Licensing
 
@@ -48,7 +46,7 @@ If a read-only user is later granted write access, Testkube counts that user aga
 
 For the detailed rules, constraints, and Cloud-specific member licensing options, see [Member Management](/articles/member-management#member-types).
 
-## Agent Licensing
+## Runner Agent Licensing
 
 Testkube uses agents to connect the Control Plane to your infrastructure. Only **Runner Agents** require an agent license because they execute Test Workflows.
 

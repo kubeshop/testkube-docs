@@ -40,8 +40,8 @@ are stored in the Control Plane rather than as CRDs - [Read More](/articles/test
 Migrating from a Standalone Agent deployment to utilizing the Testkube Control Plane is described
 at [Connecting to the Testkube Control Plane](/articles/install/standalone-agent#connecting-to-the-testkube-control-plane).
 
-## Source Code and Licensing
+## Open Source Licensing
 
 The source-code for the agent is available in the [Testkube GitHub repo](https://github.com/kubeshop/testkube)
 and is dual-licensed under the MIT license and the Testkube Community License (TCL).
-Read more in our [Source Code Licensing FAQ](testkube-licensing-FAQ).
+Read more in our [Open Source Licensing FAQ](testkube-licensing-FAQ).

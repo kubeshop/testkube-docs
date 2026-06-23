@@ -1,6 +1,6 @@
-# Source Code Licensing FAQ
+# Open Source Licensing FAQ
 
-This FAQ explains how Testkube source code is licensed, including the MIT license and the Testkube Community License (TCL). For the commercial model based on users, seats, and Runner Agents, see [Commercial Licensing](/articles/licensing).
+This FAQ explains how Testkube Open Source is licensed, including the MIT license and the Testkube Community License (TCL) for open source Agent functionality. For the commercial model based on users, seats, and Runner Agents, see [Commercial Licensing](/articles/licensing).
 
 ## Licenses
 
@@ -17,7 +17,7 @@ more information on the differences between Open Source and Commercial features.
 ## Commercial Functionality in the Codebase
 
 All functionality provided by the Testkube Control Plane and specific functionality provided by the Testkube Agent require a paid license from Testkube (see [pricing](https://testkube.io/pricing)).
-Commercial functionality included in the Testkube Agent is licensed under the TCL. This FAQ describes the source code licenses used for those components; commercial usage limits are described in [Commercial Licensing](/articles/licensing).
+Commercial functionality included in the Testkube Agent is licensed under the TCL. This FAQ describes the Open Source licenses used for those components; commercial usage limits are described in [Commercial Licensing](/articles/licensing).
 
 :::note
 You can find any feature's license by checking the code's file header in the Testkube repository.
