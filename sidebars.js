@@ -54,10 +54,6 @@ const sidebars = {
       id: "changelog",
     },
     {
-      type: "html",
-      value: "<hr class='sidebar-hr'/>",
-    },
-    {
       type: "category",
       label: "Installation",
       items: [
@@ -65,6 +61,11 @@ const sidebars = {
           type: "doc",
           label: "Overview",
           id: "articles/install/overview",
+        },
+        {
+          type: "doc",
+          label: "Commercial Licensing",
+          id: "articles/licensing",
         },
         {
           type: "category",
@@ -1466,7 +1467,7 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "Licensing FAQ",
+          label: "Open Source Licensing FAQ",
           id: "articles/testkube-licensing-FAQ",
         },
         {
