@@ -181,7 +181,9 @@ spec:
 Managing the GitHub integration (connect / add / remove installations) requires the
 organization **Admin** or **Owner** role. Admins whose effective permissions are capped
 to read-only (via the `maxRole` cap) cannot modify the integration. Reading the list of
-connected installations follows the same admin requirement.
+connected installations follows the same admin requirement. It's necessary to have permissions
+to install GitHub App into the targeted GitHub organization (it might require confirmation
+depending on your Github organization settings).
 
 ---
 
