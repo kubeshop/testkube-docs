@@ -355,17 +355,24 @@ ul:hover {
   backdrop-filter: none !important;
 }
 
-.pro-badge {
-  width: fit-content;
+/* PRO badge on sidebar categories (parent row only) */
+.theme-doc-sidebar-item-category.sidebar-pro-category
+  > .menu__list-item-collapsible
+  > .menu__link::before,
+/* PRO badge on individual doc links */
+.menu__list-item.sidebar-pro-category > .menu__link::before {
+  content: "PRO";
+  display: inline-block;
+  flex-shrink: 0;
+  margin-right: 0.4rem;
+  vertical-align: middle;
   background-color: var(--ifm-color-badge);
-  border: 1px var(--ifm-color-badge-border) solid;
+  border: 1px solid var(--ifm-color-badge-border);
   border-radius: 4px;
-
   color: var(--ifm-color-badge-border);
   font-size: 75%;
-
-  padding: 0.3rem;
-  margin-top: -10px;
+  padding: 0.15rem 0.3rem;
+  line-height: 1;
 }
 
 .sidebar-hr {

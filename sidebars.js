@@ -281,6 +281,7 @@ const sidebars = {
         {
           type: "category",
           label: "Testkube Dashboard",
+          className: "sidebar-pro-category",
           items: [
             {
               type: "doc",
