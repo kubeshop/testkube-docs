@@ -14,7 +14,34 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 
 ### AI Updates
 
+AI in Testkube is now easier to configure, faster, and safer to run.
+
+- Create AI agents from goals: describe what you want the agent to do, and Testkube generates the agent name, description, instructions, and recommended tools.    
+- Configure a default model per AI agent, so each agent can use the model best suited for its work.                                  
+- Choose the model when replying in an AI chat.                                                            
+- Cancel running AI chats from the UI.                                                                
+- AI chat titles now appear immediately and continue to improve in the background when needed.                                    
+- AI chat responses are faster thanks to improved streaming behavior and reduced per-request overhead.                                
+- AI triggers are safer: empty selectors no longer match every execution, wildcard matching is explicit, and trigger sessions can be rate-limited and manually stopped.                                                                              
+- MCP OAuth errors are clearer and include actionable guidance when the MCP endpoint is disabled.                   
+- Testkube MCP tool descriptions were trimmed to reduce prompt size and improve AI response performance.       
+- Self-hosted AI Service configuration is simpler: the service now discovers dashboard configuration from Control Plane public config and no longer requires several OIDC-related environment variables.
+
 ### Control Plane
+
+- Canonicalized metric names: k6, Artillery, and JMeter now share normalized `latency_p95_ms`, `throughput_rps`, and `errors_rate` alongside the
+   tool-specific names, so you can compare runs across tools in one chart and filter by source
+- Enhanced the Insights Board user experience with support for pinned boards, shared/privated boards, and search results by name
+- Improved the Usage & Billing experience with transparent consumption tracking for all plan levels, updated every hour
+- Added support for Influx Line Protocol for creation of custom metric series: [read more](articles/granular-metrics#custom-metrics-with-influx-line-protocol)
+- Added support for label and workflow filters searching for a substring (contains)
+- Added support for identity fields searching for a substring (contains)
+- Streamlined the migration onboarding experience, making it easier for Testkube Open Source users to get started with Testkube Cloud
+- Trial users of our Testkube Cloud control plane now get an automatically provisioned, cloud hosted runner set up for them so they can start running
+  test workflows straight away. Users can still add their own agents as well, of course.
+- Added a new maxRole ceiling that lets you lock a member's effective permissions to read-only regardless of the roles they hold on individual environments or teams [read more](articles/members-manangement#read-access-controls)
+- Testkube can now authenticate to GitHub through a single centralized Testkube GitHub App. One Testkube organization can connect to multiple GitHub organizations and access repositories across all of them: [read more](articles/github-app-auth)
+- Testkube can now observe a Git repository and trigger executions on repository events. This covers the full lifecycle from simple branch pushes to GitHub pull-request automation, with fine-grained filtering and rich Git context exposed to the triggered execution: [read more](articles/git-triggers)
 
 ### Agent
 
