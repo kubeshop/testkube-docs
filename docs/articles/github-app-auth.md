@@ -148,6 +148,7 @@ spec:
       # Repository owned by a connected GitHub organization
       uri: https://github.com/my-github-org/my-private-repo
       revision: main
+      authType: github
       # Optional: only fetch part of the repo
       paths:
         - tests/e2e
@@ -166,6 +167,7 @@ spec:
     git:
       uri: https://github.com/another-connected-org/shared-tests
       revision: v1.2.3
+      authType: github
 ```
 
 > Tip: the same mechanism applies anywhere a workflow resolves a `github.com` URL for a
