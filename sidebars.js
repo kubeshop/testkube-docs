@@ -28,31 +28,39 @@ const sidebars = {
       items: [
         {
           type: "doc",
-          label: "Overview",
-          id: "articles/tutorial/quickstart/overview",
+          label: "Testkube OSS",
+          id: "articles/getting-started-with-open-source",
         },
         {
-          type: "doc",
-          label: "Individual Evaluation",
-          id: "articles/tutorial/quickstart/individual-evaluation",
-        },
-        {
-          type: "doc",
-          label: "Team Evaluation",
-          id: "articles/tutorial/quickstart/team-evaluation",
-        },
-        {
-          type: "doc",
-          label: "Enterprise POC",
-          id: "articles/tutorial/quickstart/enterprise-poc",
+          type: "category",
+          label: "Testkube Pro",
+          className: "sidebar-pro-category",
+          items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/tutorial/quickstart/overview",
+            },
+            {
+              type: "doc",
+              label: "Individual Evaluation",
+              id: "articles/tutorial/quickstart/individual-evaluation",
+            },
+            {
+              type: "doc",
+              label: "Team Evaluation",
+              id: "articles/tutorial/quickstart/team-evaluation",
+            },
+            {
+              type: "doc",
+              label: "Enterprise POC",
+              id: "articles/tutorial/quickstart/enterprise-poc",
+            },
+          ],
         },
       ],
     },
-    {
-      type: "doc",
-      label: "Changelog",
-      id: "changelog",
-    },
+
     {
       type: "category",
       label: "Installation",
@@ -63,14 +71,35 @@ const sidebars = {
           id: "articles/install/overview",
         },
         {
-          type: "doc",
-          label: "Commercial Licensing",
-          id: "articles/licensing",
+          type: "category",
+          label: "Standalone Agent",
+          items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/install/standalone-agent",
+            },
+            {
+              type: "doc",
+              label: "Feature Comparison",
+              id: "articles/install/feature-comparison",
+            },
+            {
+              type: "doc",
+              label: "Local Kubernetes Install",
+              id: "articles/install/quickstart-no-k8s",
+            },
+            {
+              type: "doc",
+              label: "Switching to Cloud",
+              id: "articles/install/oss-to-cloud",
+            },
+          ],
         },
         {
           type: "category",
           label: "On-Prem Control Plane",
-          collapsed: false,
+          className: "sidebar-pro-category",
           items: [
             {
               type: "category",
@@ -173,33 +202,8 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Standalone Agent",
-          items: [
-            {
-              type: "doc",
-              label: "Overview",
-              id: "articles/install/standalone-agent",
-            },
-            {
-              type: "doc",
-              label: "Feature Comparison",
-              id: "articles/install/feature-comparison",
-            },
-            {
-              type: "doc",
-              label: "Local Kubernetes Install",
-              id: "articles/install/quickstart-no-k8s",
-            },
-            {
-              type: "doc",
-              label: "Switching to Cloud",
-              id: "articles/install/oss-to-cloud",
-            },
-          ],
-        },
-        {
-          type: "category",
           label: "Cloud Control Plane",
+          className: "sidebar-pro-category",
           items: [
             {
               type: "doc",
@@ -213,7 +217,6 @@ const sidebars = {
             },
           ],
         },
-        "articles/install/faq",
         {
           type: "category",
           label: "Upgrade & Uninstall",
@@ -230,6 +233,7 @@ const sidebars = {
             },
           ],
         },
+        "articles/install/faq",
       ],
     },
     {
@@ -477,6 +481,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "View Executions",
+              id: "articles/viewing-oss-executions",
+            },
+            {
+              type: "doc",
               label: "Workflow Best Practices",
               id: "articles/test-workflows-best-practices",
             },
@@ -562,7 +571,147 @@ const sidebars = {
         },
         {
           type: "category",
+          label: "Testkube CLI",
+          items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/cli",
+            },
+            {
+              type: "doc",
+              label: "Installing the CLI",
+              id: "articles/install/cli",
+            },
+            {
+              type: "doc",
+              label: "Managing CLI Context",
+              id: "articles/managing-cli-context",
+            },
+            {
+              type: "doc",
+              label: "Docker CLI",
+              id: "articles/testkube-cli-docker",
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Testkube Dashboard",
+          className: "sidebar-pro-category",
+          items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/testkube-dashboard-explore",
+            },
+            {
+              type: "category",
+              label: "Workflows",
+              collapsed: false,
+              items: [
+                {
+                  type: "doc",
+                  label: "Workflows Overview",
+                  id: "articles/testkube-dashboard-workflows-overview",
+                },
+                {
+                  type: "doc",
+                  label: "Workflow Wizard",
+                  id: "articles/test-workflows-create-wizard",
+                },
+                {
+                  type: "doc",
+                  label: "Workflow Details",
+                  id: "articles/testkube-dashboard-workflow-details",
+                },
+                {
+                  type: "doc",
+                  label: "Workflow Editor",
+                  id: "articles/testkube-dashboard-workflow-editor",
+                },
+                {
+                  type: "doc",
+                  label: "Execution Details",
+                  id: "articles/testkube-dashboard-execution-details",
+                },
+                {
+                  type: "doc",
+                  label: "Workflow Templates",
+                  id: "articles/testkube-dashboard-workflows-templates",
+                },
+              ],
+            },
+            {
+              type: "doc",
+              label: "Executions",
+              id: "articles/testkube-dashboard-executions",
+            },
+            {
+              type: "category",
+              label: "Integrations",
+              collapsed: false,
+              items: [
+                {
+                  type: "doc",
+                  label: "Overview",
+                  id: "articles/integrations-dashboard-explore",
+                },
+                {
+                  type: "doc",
+                  label: "Triggers",
+                  id: "articles/integrations-triggers",
+                },
+                {
+                  type: "doc",
+                  label: "Webhooks",
+                  id: "articles/integrations-webhooks",
+                },
+              ],
+            },
+            {
+              type: "doc",
+              label: "Custom Views",
+              id: "articles/testkube-dashboard-custom-views",
+            },
+            {
+              type: "doc",
+              label: "Global Settings",
+              id: "articles/settings-dashboard-explore",
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Testkube Environments",
+          className: "sidebar-pro-category",
+          items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/environment-management",
+            },
+            {
+              type: "doc",
+              label: "Testkube Agents",
+              id: "articles/agents-overview",
+            },
+            {
+              type: "doc",
+              label: "Agent Helm Chart",
+              id: "articles/multi-agent-runner-helm-chart",
+            },
+            {
+              type: "doc",
+              label: "Agent CLI Commands",
+              id: "articles/multi-agent-cli",
+            },
+          ],
+        },
+        {
+          type: "category",
           label: "Working with Results",
+          className: "sidebar-pro-category",
           items: [
             {
               type: "doc",
@@ -644,6 +793,7 @@ const sidebars = {
         {
           type: "category",
           label: "Administration",
+          className: "sidebar-pro-category",
           items: [
             {
               type: "doc",
@@ -691,37 +841,11 @@ const sidebars = {
               id: "articles/credential-management",
             },
           ],
-        },
-        ,
-        {
-          type: "category",
-          label: "Testkube CLI",
-          items: [
-            {
-              type: "doc",
-              label: "Overview",
-              id: "articles/cli",
-            },
-            {
-              type: "doc",
-              label: "Installing the CLI",
-              id: "articles/install/cli",
-            },
-            {
-              type: "doc",
-              label: "Managing CLI Context",
-              id: "articles/managing-cli-context",
-            },
-            {
-              type: "doc",
-              label: "Docker CLI",
-              id: "articles/testkube-cli-docker",
-            },
-          ],
-        },
+        },    
         {
           type: "category",
           label: "Testkube AI",
+          className: "sidebar-pro-category",
           items: [
             {
               type: "doc",
@@ -1374,6 +1498,21 @@ const sidebars = {
       items: [
         {
           type: "doc",
+          label: "Commercial Licensing",
+          id: "articles/licensing",
+        },
+        {
+          type: "doc",
+          label: "Open Source Licensing FAQ",
+          id: "articles/testkube-licensing-FAQ",
+        },
+        {
+          type: "doc",
+          label: "Contributing",
+          id: "articles/contributing",
+        },
+        {
+          type: "doc",
           label: "Architecture",
           id: "articles/architecture",
         },
@@ -1473,35 +1612,9 @@ const sidebars = {
       ],
     },
     {
-      type: "category",
-      label: "Open Source",
-      items: [
-        {
-          type: "doc",
-          label: "Overview",
-          id: "articles/open-source",
-        },
-        {
-          type: "doc",
-          label: "Getting Started",
-          id: "articles/getting-started-with-open-source",
-        },
-        {
-          type: "doc",
-          label: "View Executions",
-          id: "articles/viewing-oss-executions",
-        },
-        {
-          type: "doc",
-          label: "Open Source Licensing FAQ",
-          id: "articles/testkube-licensing-FAQ",
-        },
-        {
-          type: "doc",
-          label: "Contributing",
-          id: "articles/contributing",
-        },
-      ],
+      type: "doc",
+      label: "Changelog",
+      id: "changelog",
     },
     {
       type: "html",
