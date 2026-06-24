@@ -33,8 +33,8 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Testkube Pro",
-          className: "sidebar-pro-category",
+          label: "Testkube Commercial",
+          className: "sidebar-commercial-category",
           items: [
             {
               type: "doc",
@@ -99,7 +99,7 @@ const sidebars = {
         {
           type: "category",
           label: "On-Prem Control Plane",
-          className: "sidebar-pro-category",
+          className: "sidebar-commercial-category",
           items: [
             {
               type: "category",
@@ -203,7 +203,7 @@ const sidebars = {
         {
           type: "category",
           label: "Cloud Control Plane",
-          className: "sidebar-pro-category",
+          className: "sidebar-commercial-category",
           items: [
             {
               type: "doc",
@@ -598,7 +598,7 @@ const sidebars = {
         {
           type: "category",
           label: "Testkube Dashboard",
-          className: "sidebar-pro-category",
+          className: "sidebar-commercial-category",
           items: [
             {
               type: "doc",
@@ -684,7 +684,7 @@ const sidebars = {
         {
           type: "category",
           label: "Testkube Environments",
-          className: "sidebar-pro-category",
+          className: "sidebar-commercial-category",
           items: [
             {
               type: "doc",
@@ -711,7 +711,7 @@ const sidebars = {
         {
           type: "category",
           label: "Working with Results",
-          className: "sidebar-pro-category",
+          className: "sidebar-commercial-category",
           items: [
             {
               type: "doc",
@@ -793,7 +793,7 @@ const sidebars = {
         {
           type: "category",
           label: "Administration",
-          className: "sidebar-pro-category",
+          className: "sidebar-commercial-category",
           items: [
             {
               type: "doc",
@@ -845,7 +845,7 @@ const sidebars = {
         {
           type: "category",
           label: "Testkube AI",
-          className: "sidebar-pro-category",
+          className: "sidebar-commercial-category",
           items: [
             {
               type: "doc",
