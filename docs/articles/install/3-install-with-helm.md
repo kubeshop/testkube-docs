@@ -112,6 +112,12 @@ global:
 
 ### Domain
 
+#### Ingress API
+
+:::note
+For new installations, please refer to Gateway API section, as it Ingress API has been frozen. Existing installations can continue using Ingress, however, we recommend planning a migration at your earliest convenience.
+:::
+
 You should enable ingress and configure your domain to access Testkube services:
 
 ```yaml {3,4}
