@@ -547,6 +547,11 @@ const sidebars = {
               label: "Execution CRDs",
               id: "articles/test-executions",
             },
+            {
+              type: "doc",
+              label: "Git Events",
+              id: "articles/git-triggers",
+            },
           ],
         },
         {
