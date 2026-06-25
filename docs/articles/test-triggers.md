@@ -128,8 +128,11 @@ resourceRef:
 watches — set one, not both. Use `resource` for common built-ins (`pod`,
 `deployment`, etc.) and `resourceRef` for everything else.
 
-In the dashboard, choose **Custom Resource** in the K8s resource dropdown and
-the Group / Version / Kind selectors will guide you through valid options.
+In the dashboard, first pick the listener(s) that should watch the resource
+(see [Pinning Listener Agents](#pinning-listener-agents)), then choose **Custom
+Resource** in the K8s resource dropdown. The Group / Version / Kind selectors
+are populated from what those listeners can actually watch, so a resource only
+appears once a listener with access to it is selected.
 
 #### Granting Testkube access to your CRDs
 
@@ -211,12 +214,50 @@ spec:
         headers: test trigger condition probe headers to submit
 ```
 
+## Pinning Listener Agents
+
+By default a trigger is evaluated by every Listener Agent in your environment:
+any listener that sees a matching event fires it (broadcast). To pin a trigger
+to specific listeners instead, set `spec.listener` to match on their agent IDs:
+
+```yaml
+spec:
+  listener:
+    match:
+      id:
+        - <listener-agent-id>   # one or more listener agent IDs
+```
+
+Leave `listener` unset to keep the default broadcast behavior. You can find a
+listener's agent ID in the Testkube dashboard agent list.
+
+Pinning matters most for schema-aware triggers. When a trigger uses
+[match conditions](#match-conditions) or watches a
+[custom resource](#triggering-on-custom-resources-crds), Testkube validates the
+match paths against the schema the *pinned* listener discovered, and a listener
+only sees resources its ServiceAccount can watch (see
+[Granting Testkube access to your CRDs](#granting-testkube-access-to-your-crds)).
+A trigger with match conditions must therefore pin at least one listener, and
+you should pick one that can watch the resource you are matching on. This keeps
+validation and firing tied to the same listener, rather than validating against
+one listener's view of the cluster and firing on another.
+
+In the dashboard, the **Listener(s)** field at the top of the trigger form sets
+this. Picking a listener also scopes the Custom Resource picker and the field
+autocomplete to what that listener can watch.
+
 ## Match Conditions
 
 Sometimes you only want a trigger to fire when a specific field changes — not
 on every event for the resource. **Match conditions** let you do that. Each
 entry inspects a single field on the watched object; the trigger fires only
 when *all* entries are satisfied.
+
+:::info
+Match conditions are validated against the schema a specific listener
+discovered, so a trigger that uses them must [pin at least one
+listener](#pinning-listener-agents).
+:::
 
 For example, "fire when `.status.phase` becomes `Healthy`" or
 "fire when `.spec.paused` is `true`":
@@ -451,6 +492,10 @@ spec:
     kind: Rollout
   resourceSelector:
     namespace: default
+  listener:
+    match:
+      id:
+        - <listener-agent-id>   # a listener that can watch Rollouts
   event: modified
   match:
     - path: .status.phase
@@ -464,8 +509,11 @@ spec:
   disabled: false
 ```
 
-Before this trigger can fire, grant Testkube access to watch Rollouts. Add
-the resource to your Helm values:
+Because it uses match conditions, the trigger pins a listener via
+`spec.listener` (see [Pinning Listener Agents](#pinning-listener-agents)); use
+the ID of a listener that can watch Rollouts. Before the trigger can fire,
+grant that listener access to watch Rollouts by adding the resource to your
+Helm values:
 
 ```yaml
 # values.yaml
