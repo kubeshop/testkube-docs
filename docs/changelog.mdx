@@ -10,8 +10,6 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 
 ## Monthly Release v2.11.0 (2026-06-25)
 
-### What's new!
-
 ### AI Updates
 
 AI in Testkube is now easier to configure, faster, and safer to run.
@@ -49,12 +47,13 @@ AI in Testkube is now easier to configure, faster, and safer to run.
   - Improved the Usage & Billing experience with transparent consumption tracking for all plan levels, updated every hour
   - Added support for label and workflow filters searching for a substring (contains)
   - Added support for identity fields searching for a substring (contains)
+  - Added eight chart types in Insights for better analysis of execution metrics ([read more](/articles/test-insights#chart-types))
 
 - Metrics
 
   - Canonicalized metric names: k6, Artillery, and JMeter now share normalized `latency_p95_ms`, `throughput_rps`, and `errors_rate` alongside the
      tool-specific names, so you can compare runs across tools in one chart and filter by source
-  - Added support for Influx Line Protocol for creation of custom metric series. [read more](articles/granular-metrics#custom-metrics-with-influx-line-protocol)
+  - Added support for Influx Line Protocol for creation of custom metric series ([read more](articles/granular-metrics#custom-metrics-with-influx-line-protocol))
 
 - Helm Charts
 
