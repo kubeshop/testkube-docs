@@ -15,7 +15,7 @@ Before you proceed with the installation, please ensure that you have the follow
 - A Kubernetes cluster (version 1.21+)
 - [Helm](https://helm.sh/docs/intro/quickstart/) (version 3+)
 - (RECOMMENDED) [cert-manager](https://cert-manager.io/docs/installation/) (version 1.11+) - Used for TLS certificate management.
-- (RECOMMENDED) [NGINX Controller](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/) (version v1.8+) - Used for Ingress configuration.
+- (RECOMMENDED) [Gateway API](https://gateway-api.sigs.k8s.io/guides/getting-started/introduction/) (version 1.7.2+) or [NGINX Controller](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/) (version v1.8+) - Used for service exposure.
 - (OPTIONAL) [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator) (version 0.49+) - used for metrics collection
 - Own a public/private domain for creating Ingress rules.
 - License Key and/or License File, if offline access is required.
@@ -149,6 +149,7 @@ This gives you an alternative to the current Ingress-based exposure model and al
 - support cross-namespace routing
 - manage public TLS at the Gateway layer
 - migrate from NGINX Ingress to Gateway API without downtime
+
 NGINX and the Kubernetes Ingress API are still supported. However, the Ingress-based exposure model is planned to be deprecated by the end of 2026. New installations should prefer Gateway API where possible.
 
 **What Testkube creates in gateway mode**
@@ -165,10 +166,12 @@ When Gateway API is enabled, the chart can create:
 Before enabling Gateway API in Testkube, install and manage these components separately:
 - Gateway API CRDs
 - a Gateway controller, for example Traefik
-- cert-manager if you want the chart to manage the Gateway certificate
-Testkube does not install the Gateway API CRDs or the controller for you.
+- cert-manager, if you want the chart to manage the Gateway certificate.
+
+Testkube does not install the Gateway API CRDs or the controller for you. Make sure to also verify **HTTP/2** support when using Gateway API, especially if you expose components that depend on it, such as gRPC.
 
 **Values configuration**
+
 Use this when Testkube should create its own Gateway and Ingress should be disabled.
 ```yaml
 global:
@@ -214,17 +217,25 @@ testkube-cloud-api:
   gatewayAPI:
     createRESTHTTPRoute: true
     createGRPCRoute: true
-
+    
 testkube-cloud-ui:
   gatewayAPI:
     createHTTPRoute: true
-
+    
 testkube-ai-service:
+  gatewayAPI:
+    createHTTPRoute: true
+dex:
+  gatewayAPI:
+    createHTTPRoute: true    
+    
+minio:
   gatewayAPI:
     createHTTPRoute: true
 ```
 **Migration from Ingress without downtime**
 
+You can migrate gradually by creating Gateway API routes and keeping the existing Ingress resources active during the transition.
 ```yaml
 global:
   domain: example.com
@@ -271,12 +282,20 @@ testkube-cloud-api:
   gatewayAPI:
     createRESTHTTPRoute: true
     createGRPCRoute: true
-
+    
 testkube-cloud-ui:
   gatewayAPI:
     createHTTPRoute: true
-
+    
 testkube-ai-service:
+  gatewayAPI:
+    createHTTPRoute: true
+    
+dex:
+  gatewayAPI:
+    createHTTPRoute: true
+    
+minio:
   gatewayAPI:
     createHTTPRoute: true
 ```
