@@ -105,7 +105,7 @@ global:
 #### Ingress API
 
 :::note
-For new installations, please refer to Gateway API section, as it Ingress API has been frozen. Existing installations can continue using Ingress, however, we recommend planning a migration at your earliest convenience.
+For new installations, please refer to Gateway API section, as Ingress API has been frozen. Existing installations can continue using Ingress, however, we recommend planning a migration at your earliest convenience.
 :::
 
 Before the start make sure you're using the **correct Ingress controller**:
