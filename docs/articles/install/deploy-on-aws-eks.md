@@ -2,7 +2,7 @@
 
 This guide walks through deploying Testkube On-Prem on an existing **Amazon EKS** cluster. It covers
 prerequisites, S3 storage configuration with two authentication methods (EKS Pod Identity and IRSA),
-MongoDB Atlas connectivity, ingress setup, and production hardening.
+PostgreSQL connectivity, ingress setup, and production hardening.
 
 :::info
 A ready-to-use reference repository with all configuration files, IAM templates, and install scripts
@@ -19,7 +19,8 @@ You can clone it and customise the values files for your environment.
 | kubectl | configured for the target cluster |
 | [cert-manager](https://cert-manager.io/docs/installation/) *(recommended)* | 1.11+ |
 | [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/) *(recommended)* | 1.8+ |
-| MongoDB Atlas *(when using external MongoDB)* | Atlas cluster reachable from the EKS VPC |
+| PostgreSQL *(when using an external database)* | RDS, Aurora, or other PostgreSQL instance reachable from the EKS VPC |
+| MongoDB Atlas *(legacy deployments only)* | Atlas cluster reachable from the EKS VPC |
 
 :::warning IMPORTANT
 Use the community [kubernetes/ingress-nginx](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx) chart —
@@ -115,8 +116,12 @@ global:
 Configure your identity provider connector under `dex.configTemplate.additionalConfig`.
 See [SSO / Identity Providers](/articles/auth) for detailed examples.
 
-If you use MongoDB Atlas instead of the chart-managed MongoDB, configure `global.mongo.dsn`
-with your Atlas connection string. See [Configure MongoDB Atlas](#6-configure-mongodb-atlas) below.
+If you use an external PostgreSQL database instead of the chart-managed PostgreSQL, configure
+`global.postgres.dsn` or `global.postgres.secretRef` with your connection details. See
+[Configure the Database](#6-configure-the-database) below.
+
+For legacy MongoDB Atlas deployments, configure `global.mongo.dsn` with your Atlas connection string.
+See [MongoDB Atlas (legacy)](#mongodb-atlas-legacy) below.
 
 ## 5. Configure S3 Storage
 
@@ -206,8 +211,9 @@ SDK falls back to IAM-based authentication.
 EKS Pod Identity eliminates the need for OIDC provider configuration and service account annotations.
 The Pod Identity Agent runs as a DaemonSet and injects credentials directly into pods.
 
-Use this option when Testkube pods need AWS credentials for S3, or when MongoDB Atlas users authenticate
-with AWS IAM using `authMechanism=MONGODB-AWS`.
+Use this option when Testkube pods need AWS credentials for S3. If you are running a legacy MongoDB
+Atlas deployment with AWS IAM authentication (`authMechanism=MONGODB-AWS`), the same IAM role can also
+be used for Atlas access.
 
 **Step 1 — Install the Pod Identity Agent addon:**
 
@@ -414,11 +420,40 @@ testkube-worker-service:
       eks.amazonaws.com/role-arn: "arn:aws:iam::<AWS_ACCOUNT_ID>:role/TestkubeS3Role"
 ```
 
-## 6. Configure MongoDB Atlas
+## 6. Configure the Database
 
-Testkube requires MongoDB for control-plane data. For AWS deployments, MongoDB Atlas can be reached
-through public networking with Atlas IP access lists or through Atlas PrivateLink. PrivateLink is
-recommended for production.
+PostgreSQL is the default database for Testkube control-plane data. New Helm installations include a
+bundled PostgreSQL instance. For production EKS deployments, use Amazon RDS, Aurora PostgreSQL, or
+[CloudNativePG](/articles/install/advanced-install#postgresql).
+
+### External PostgreSQL (recommended for production)
+
+Point Testkube at your managed database using `global.postgres.dsn` or `global.postgres.secretRef`.
+See [Advanced Install - PostgreSQL](/articles/install/advanced-install#postgresql) for full configuration
+options.
+
+```yaml
+global:
+  postgres:
+    dsn: "postgresql://<USER>:<PASSWORD>@<RDS_ENDPOINT>:5432/<DATABASE>?sslmode=require"
+```
+
+### Chart-managed PostgreSQL
+
+The default Helm installation includes PostgreSQL. No additional database configuration is required for
+development or evaluation deployments.
+
+### MongoDB Atlas (legacy)
+
+:::warning
+
+Use this section only for legacy deployments or while migrating to PostgreSQL. See
+[Mongo to Postgres Migration](/articles/convert).
+
+:::
+
+For legacy AWS deployments, MongoDB Atlas can be reached through public networking with Atlas IP access
+lists or through Atlas PrivateLink. PrivateLink is recommended for production.
 
 ### MongoDB Atlas Connection String
 
@@ -675,13 +710,14 @@ testkube-cloud-api:
             topologyKey: "kubernetes.io/hostname"
 ```
 
-**Storage class:** Use `gp3` for EBS-backed PersistentVolumes (MongoDB, NATS):
+**Storage class:** Use `gp3` for EBS-backed PersistentVolumes (PostgreSQL, NATS):
 
 ```yaml
-mongodb:
-  persistence:
-    storageClass: "gp3"
-    size: 50Gi
+postgresql:
+  primary:
+    persistence:
+      storageClass: "gp3"
+      size: 50Gi
 ```
 
 ## Troubleshooting
@@ -726,7 +762,14 @@ aws eks describe-cluster --name <EKS_CLUSTER_NAME> \
 - Verify HTTP/2 is supported end-to-end through your ingress / load balancer.
 - If using ALB, confirm the target group protocol and check for HTTP/2 support.
 
-**MongoDB Atlas connection errors:**
+**PostgreSQL connection errors:**
+
+- `connection refused` or timeout: verify security groups, subnet routing, and that the RDS or Aurora
+  endpoint is reachable from the EKS VPC.
+- `password authentication failed`: verify credentials in `global.postgres.dsn` or the referenced secret.
+- `SSL required`: add `sslmode=require` (or your provider's required mode) to the PostgreSQL DSN.
+
+**MongoDB Atlas connection errors (legacy):**
 
 - `lookup ... no such host` or `NXDOMAIN`: verify the Atlas PrivateLink DNS name and VPC DNS settings
   from inside the cluster.
