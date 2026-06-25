@@ -227,6 +227,7 @@ testkube-cloud-ui:
 testkube-ai-service:
   gatewayAPI:
     createHTTPRoute: true
+    
 dex:
   gatewayAPI:
     createHTTPRoute: true    
