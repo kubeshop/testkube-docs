@@ -42,6 +42,7 @@ AI in Testkube is now easier to configure, faster, and safer to run.
 - Added a new maxRole ceiling that lets you lock a member's effective permissions to read-only regardless of the roles they hold on individual environments or teams [read more](articles/members-manangement#read-access-controls)
 - Testkube can now authenticate to GitHub through a single centralized Testkube GitHub App. One Testkube organization can connect to multiple GitHub organizations and access repositories across all of them: [read more](articles/github-app-auth)
 - Testkube can now observe a Git repository and trigger executions on repository events. This covers the full lifecycle from simple branch pushes to GitHub pull-request automation, with fine-grained filtering and rich Git context exposed to the triggered execution: [read more](articles/git-triggers)
+- Testkube's SCIM integration now supports the RFC 7643 complex format for roles and entitlements, improving provisioning with Microsoft Entra ID (Azure AD). Identity providers send these multi-valued attributes differently: Okta and most providers use simple string arrays, while Entra expects each value wrapped in an object. Testkube now handles both, and a per-organization setting lets you choose the format that matches your provider.
 
 ### Agent
 
