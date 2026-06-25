@@ -46,6 +46,8 @@ If a read-only user is later granted write access, Testkube counts that user aga
 
 For the detailed rules, constraints, and Cloud-specific member licensing options, see [Member Management](/articles/member-management#member-types).
 
+Org-wide Read tokens & the Read-only user cap keep the user/identity on a **read-only users** rather than consuming a full user.
+
 ## Runner Agent Licensing
 
 Testkube uses agents to connect the Control Plane to your infrastructure. Only **Runner Agents** require an agent license because they execute Test Workflows.
