@@ -75,16 +75,6 @@ The following are production requirements for Control Plane components:
 Control Plane can run with lower resources, but the above requirements will ensure a smooth usage of Testkube.
 :::
 
-:::note IMPORTANT
-Make sure you're using the **correct Ingress controller**.
-
-✅ Use: [kubernetes/ingress-nginx](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx)
-
-🚫 Do not use: [nginx/nginx-ingress (NGINX Inc.)](https://artifacthub.io/packages/helm/nginx/nginx-ingress)
-
-Using the wrong chart causes one of the Dex or API Ingresses to be ignored when they share the same hostname.
-:::
-
 ## Installing
 
 Install the Testkube Helm Chart:
@@ -117,6 +107,12 @@ global:
 :::note
 For new installations, please refer to Gateway API section, as it Ingress API has been frozen. Existing installations can continue using Ingress, however, we recommend planning a migration at your earliest convenience.
 :::
+
+Before the start make sure you're using the **correct Ingress controller**:
+✅ Use: [kubernetes/ingress-nginx](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx)
+🚫 Do not use: [nginx/nginx-ingress (NGINX Inc.)](https://artifacthub.io/packages/helm/nginx/nginx-ingress)
+
+Using the wrong chart causes one of the Dex or API Ingresses to be ignored when they share the same hostname.
 
 You should enable ingress and configure your domain to access Testkube services:
 
