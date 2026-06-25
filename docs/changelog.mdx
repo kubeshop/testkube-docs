@@ -29,23 +29,41 @@ AI in Testkube is now easier to configure, faster, and safer to run.
 
 ### Control Plane
 
-- Canonicalized metric names: k6, Artillery, and JMeter now share normalized `latency_p95_ms`, `throughput_rps`, and `errors_rate` alongside the
-   tool-specific names, so you can compare runs across tools in one chart and filter by source
-- Enhanced the Insights Board user experience with support for pinned boards, shared/privated boards, and search results by name
-- Improved the Usage & Billing experience with transparent consumption tracking for all plan levels, updated every hour
-- Added support for Influx Line Protocol for creation of custom metric series: [read more](articles/granular-metrics#custom-metrics-with-influx-line-protocol)
-- Added support for label and workflow filters searching for a substring (contains)
-- Added support for identity fields searching for a substring (contains)
-- Streamlined the migration onboarding experience, making it easier for Testkube Open Source users to get started with Testkube Cloud
-- Trial users of our Testkube Cloud control plane now get an automatically provisioned, cloud hosted runner set up for them so they can start running
-  test workflows straight away. Users can still add their own agents as well, of course.
-- Added a new maxRole ceiling that lets you lock a member's effective permissions to read-only regardless of the roles they hold on individual environments or teams [read more](articles/members-manangement#read-access-controls)
-- Testkube can now authenticate to GitHub through a single centralized Testkube GitHub App. One Testkube organization can connect to multiple GitHub organizations and access repositories across all of them: [read more](articles/github-app-auth)
-- Testkube can now observe a Git repository and trigger executions on repository events. This covers the full lifecycle from simple branch pushes to GitHub pull-request automation, with fine-grained filtering and rich Git context exposed to the triggered execution: [read more](articles/git-triggers)
-- Testkube's SCIM integration now supports the RFC 7643 complex format for roles and entitlements, improving provisioning with Microsoft Entra ID (Azure AD). Identity providers send these multi-valued attributes differently: Okta and most providers use simple string arrays, while Entra expects each value wrapped in an object. Testkube now handles both, and a per-organization setting lets you choose the format that matches your provider.
-- Test Triggers can now watch custom resources and fire on specific field changes, not just built-in Kubernetes events. Point a trigger at any CRD, such as Argo Rollouts, cert-manager, or your own, and add match conditions so it only runs when a field you care about changes, for example when a Rollout's `.status.phase` becomes `Healthy`. The dashboard discovers the resources each listener agent can watch, autocompletes their fields from the live schema, and lets you pin the trigger to the listener that should evaluate it.
+- General
+
+  - Testkube can now authenticate to GitHub through a single centralized Testkube GitHub App. One Testkube organization can connect to multiple GitHub organizations and access repositories across all of them ([read more](articles/github-app-auth))
+  - Testkube can now observe a Git repository and trigger executions on repository events. This covers the full lifecycle from simple branch pushes to GitHub pull-request automation, with fine-grained filtering and rich Git context exposed to the triggered execution ([read more](articles/git-triggers))
+  - Testkube's SCIM integration now supports the RFC 7643 complex format for roles and entitlements, improving provisioning with Microsoft Entra ID (Azure AD). Identity providers send these multi-valued attributes differently: Okta and most providers use simple string arrays, while Entra expects each value wrapped in an object. Testkube now handles both, and a per-organization setting lets you choose the format that matches your provider.
+  - Test Triggers can now watch custom resources and fire on specific field changes, not just built-in Kubernetes events. Point a trigger at any CRD, such as Argo Rollouts, cert-manager, or your own, and add match conditions so it only runs when a field you care about changes, for example when a Rollout's `.status.phase` becomes `Healthy`. The dashboard discovers the resources each listener agent can watch, autocompletes their fields from the live schema, and lets you pin the trigger to the listener that should evaluate it
+  - Added a new maxRole ceiling that lets you lock a member's effective permissions to read-only regardless of the roles they hold on individual environments or teams ([read more](articles/member-management#read-access-controls-org-wide-read-tokens--the-read-only-user-cap))
+
+- Onboarding
+
+  - Streamlined the migration onboarding experience, making it easier for Testkube Open Source users to get started with Testkube Cloud
+  - Trial users of our Testkube Cloud control plane now get an automatically provisioned, cloud hosted runner set up for them so they can start running
+    test workflows straight away. Users can still add their own agents as well, of course.
+
+- UX
+
+  - Enhanced the Insights Board user experience with support for pinned boards, shared/privated boards, and search results by name
+  - Improved the Usage & Billing experience with transparent consumption tracking for all plan levels, updated every hour
+  - Added support for label and workflow filters searching for a substring (contains)
+  - Added support for identity fields searching for a substring (contains)
+
+- Metrics
+
+  - Canonicalized metric names: k6, Artillery, and JMeter now share normalized `latency_p95_ms`, `throughput_rps`, and `errors_rate` alongside the
+     tool-specific names, so you can compare runs across tools in one chart and filter by source
+  - Added support for Influx Line Protocol for creation of custom metric series. [read more](articles/granular-metrics#custom-metrics-with-influx-line-protocol)
+
+- Helm Charts
+
+  - Added Gateway API support for Testkube Enterprise, including configuration for Gateway, HTTPRoute, HTTP-to-HTTPS redirect, BackendTLSPolicy, and certificate configuration options, and with migration guidance for moving from Ingress without downtime. The Gateway API integration works with any compatible Gateway controller, with Traefik provided as the primary example, although controller-specific behavior and configuration may vary. NGINX Ingress remains supported for existing installations, but Gateway API is recommended for new deployments.
 
 ### Agent
+- Runner lease coordination configuration:  New environment variables on the agent to control its Kubernetes lease coordination:
+    - `LEADER_ELECTION_DISABLED`  -> disables lease coordination for explicitly single-replica runner deployments . Default: `false`
+    - `LEASE_CHECK_INTERVAL`  ->  how often the agent checks/renews the lease (e.g. `30s`, `1m`). Default: `5s`
 
 ## Patch Release v2.10.3 (2026-06-09)
 
