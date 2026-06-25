@@ -10,6 +10,10 @@ For example, we could define a _TestTrigger_ which _runs_ a _Test_ when a _Confi
 In Testkube, Event Triggers allow you to trigger the execution of a Workflow based on Kubernetes Events - for example, when a Deployment is updated
 or an Ingress gets deleted.
 
+Beyond these built-in resources and events, a trigger can also watch your own
+custom resources, fire only when a specific field changes, and run on just the
+listener agents you choose.
+
 You can currently create/manage Event Triggers in the Testkube Dashboard or by interacting with corresponding Trigger custom resources
 via `kubectl`.
 
@@ -64,6 +68,36 @@ listener:
     # highlight-next-line
     deployment-location: eastern-usa
 ```
+
+## Pinning Listener Agents
+
+By default every Listener Agent in your environment evaluates a trigger, and
+whichever one sees a matching event fires it. That is usually what you want. To
+have a trigger handled by specific listeners only, pin it with `spec.listener`:
+
+```yaml
+spec:
+  listener:
+    match:
+      id:
+        - <listener-agent-id>   # one or more listener agent IDs
+```
+
+Leave `listener` out to keep the default broadcast behavior. If you author YAML
+directly you reference a listener by its agent ID; in the dashboard you pick
+listeners by name instead (see below).
+
+Pinning starts to matter once a trigger uses [match conditions](#match-conditions)
+or watches a [custom resource](#triggering-on-custom-resources-crds). Testkube
+checks your match paths against the schema the pinned listener reported for that
+resource, and a listener only knows about resources its ServiceAccount is allowed
+to watch (see [Granting Testkube access to your CRDs](#granting-testkube-access-to-your-crds)).
+So a trigger with match conditions has to name at least one listener, and it
+should be one that can actually see the resource you are matching on.
+
+In the dashboard this is the **Listener(s)** field at the top of the trigger
+form. Choosing a listener there also narrows the Custom Resource dropdown and the
+field autocomplete to what that listener can see.
 
 ## Selectors
 
@@ -128,8 +162,14 @@ resourceRef:
 watches — set one, not both. Use `resource` for common built-ins (`pod`,
 `deployment`, etc.) and `resourceRef` for everything else.
 
-In the dashboard, choose **Custom Resource** in the K8s resource dropdown and
-the Group / Version / Kind selectors will guide you through valid options.
+In the dashboard, first pick the listener(s) that should watch the resource
+(see [Pinning Listener Agents](#pinning-listener-agents)), then choose **Custom
+Resource** in the K8s resource dropdown. The Group / Version / Kind selectors
+are populated from what those listeners can actually watch, so a resource only
+appears once a listener with access to it is selected.
+
+To narrow a custom-resource trigger to specific names, namespaces, or labels,
+use the same [selectors](#selectors) you would for a built-in resource.
 
 #### Granting Testkube access to your CRDs
 
@@ -151,6 +191,10 @@ rbac:
     - apiGroups: ["kafka.strimzi.io"]
       resources: ["kafkatopics"]
 ```
+
+`resources` takes the lowercase, plural API name (`rollouts`), which is not the
+same as the `kind` you set in `resourceRef` (`Rollout`). Run
+`kubectl api-resources` if you are unsure of the right name.
 
 Each entry follows the same shape as Kubernetes RBAC `rules`. `verbs` is
 optional and defaults to `["get", "list", "watch"]` — the listener never
@@ -218,6 +262,12 @@ on every event for the resource. **Match conditions** let you do that. Each
 entry inspects a single field on the watched object; the trigger fires only
 when *all* entries are satisfied.
 
+:::info
+Match conditions are validated against the schema a specific listener
+discovered, so a trigger that uses them must [pin at least one
+listener](#pinning-listener-agents).
+:::
+
 For example, "fire when `.status.phase` becomes `Healthy`" or
 "fire when `.spec.paused` is `true`":
 
@@ -260,6 +310,9 @@ events, so they require `event: modified` on the trigger.
   booleans). Use `exists`, `not_exists`, or `changed` for arrays and objects.
 - **Numbers and booleans are compared as strings** — `value: "5"` matches
   `.spec.replicas: 5`; `value: "true"` matches `.spec.paused: true`.
+- **Not sure which fields a resource has?** The dashboard autocompletes paths
+  from its live schema. When writing YAML by hand, inspect a live object with
+  `kubectl get <resource> <name> -o yaml`.
 
 ## Targeting specific Runner Agents
 
@@ -449,9 +502,11 @@ spec:
     group: argoproj.io
     version: v1alpha1
     kind: Rollout
-  resourceSelector:
-    namespace: default
-  event: modified
+  listener:
+    match:
+      id:
+        - <listener-agent-id>   # a listener that can watch Rollouts
+  event: modified                # changed_to / changed_from / changed require this
   match:
     - path: .status.phase
       operator: changed_to
@@ -464,8 +519,11 @@ spec:
   disabled: false
 ```
 
-Before this trigger can fire, grant Testkube access to watch Rollouts. Add
-the resource to your Helm values:
+Because it uses match conditions, the trigger pins a listener via
+`spec.listener` (see [Pinning Listener Agents](#pinning-listener-agents)); use
+the ID of a listener that can watch Rollouts. Before the trigger can fire,
+grant that listener access to watch Rollouts by adding the resource to your
+Helm values:
 
 ```yaml
 # values.yaml
