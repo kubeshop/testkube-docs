@@ -51,8 +51,8 @@ RUN set -eux; \
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.319%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.385%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>30th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -68,8 +68,8 @@ Previously, CVE-2024-45337 fixed an authorization bypass for misused ssh server 
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.305%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.368%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -85,8 +85,8 @@ Previously, a revoked 'SignatureKey' belonging to a CA was not correctly checked
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.392%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.466%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>37th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -102,8 +102,8 @@ When writing data larger than 4GB in a single Write call on an SSH channel, an i
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.299%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.360%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -119,8 +119,8 @@ The in-memory keyring returned by NewKeyring() silently accepted keys with the C
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.330%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.397%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -136,8 +136,8 @@ When adding a key to a remote agent constraint extensions such as restrict-desti
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.309%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.373%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -153,8 +153,8 @@ The Verify() method for FIDO/U2F security key types (sk-ecdsa-sha2-nistp256@<!--
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.313%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.392%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -170,8 +170,8 @@ A malicious SSH peer could send unsolicited global request responses to fill an 
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.378%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.359%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -187,8 +187,8 @@ An incorrectly placed cast from bytes to int allowed for server-side panic in th
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.276%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.304%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -204,8 +204,8 @@ The RSA and DSA public key parsers did not enforce size limits on key parameters
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.204%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.196%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -221,7 +221,7 @@ An authenticated SSH client that repeatedly opened channels which were rejected 
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.173%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.175%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
@@ -238,8 +238,8 @@ When an SSH server authentication callback returned PartialSuccessError with non
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.325%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.313%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -255,7 +255,7 @@ For certain crafted inputs, a 'ed25519.PrivateKey' was created by casting malfor
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.208%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.210%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
@@ -285,7 +285,7 @@ SSH servers which use CertChecker as a public key callback without setting IsUse
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.222%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.227%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
 </table>
 
@@ -302,8 +302,8 @@ SSH servers which use CertChecker as a public key callback without setting IsUse
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.409%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>69th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>2.268%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>81st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -353,8 +353,8 @@ SSH servers which use CertChecker as a public key callback without setting IsUse
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.332%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.320%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -370,8 +370,8 @@ SSH servers which use CertChecker as a public key callback without setting IsUse
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.666%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.684%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -387,8 +387,8 @@ SSH servers which use CertChecker as a public key callback without setting IsUse
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.531%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.511%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -421,8 +421,8 @@ SSH servers which use CertChecker as a public key callback without setting IsUse
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.204%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.196%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -455,7 +455,7 @@ SSH servers which use CertChecker as a public key callback without setting IsUse
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.596%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.595%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
 </table>
 
@@ -472,8 +472,8 @@ SSH servers which use CertChecker as a public key callback without setting IsUse
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.255%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.272%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -506,8 +506,8 @@ SSH servers which use CertChecker as a public key callback without setting IsUse
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.252%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.259%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -523,8 +523,8 @@ SSH servers which use CertChecker as a public key callback without setting IsUse
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.351%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.364%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -575,8 +575,8 @@ RUN set -eux; \
 <table>
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.4</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.4</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.384%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>30th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.560%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -592,8 +592,8 @@ Decoding a maliciously-crafted MIME header containing many invalid encoded-words
 <table>
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.4</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.4</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.325%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.561%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -611,8 +611,8 @@ With a large DNS SAN list, verification costs scaled quadratically based on the 
 <table>
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.4</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.4</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.263%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.370%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

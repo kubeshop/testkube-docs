@@ -54,10 +54,6 @@ const sidebars = {
       id: "changelog",
     },
     {
-      type: "html",
-      value: "<hr class='sidebar-hr'/>",
-    },
-    {
       type: "category",
       label: "Installation",
       items: [
@@ -65,6 +61,11 @@ const sidebars = {
           type: "doc",
           label: "Overview",
           id: "articles/install/overview",
+        },
+        {
+          type: "doc",
+          label: "Commercial Licensing",
+          id: "articles/licensing",
         },
         {
           type: "category",
@@ -348,6 +349,11 @@ const sidebars = {
                   label: "Webhooks",
                   id: "articles/integrations-webhooks",
                 },
+                {
+                  type: "doc",
+                  label: "Github App Auth",
+                  id: "articles/github-app-auth",
+                },                
               ],
             },
             {
@@ -545,6 +551,11 @@ const sidebars = {
               type: "doc",
               label: "Execution CRDs",
               id: "articles/test-executions",
+            },
+            {
+              type: "doc",
+              label: "Git Events",
+              id: "articles/git-triggers",
             },
           ],
         },
@@ -1466,7 +1477,7 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "Licensing FAQ",
+          label: "Open Source Licensing FAQ",
           id: "articles/testkube-licensing-FAQ",
         },
         {

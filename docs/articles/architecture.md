@@ -142,12 +142,12 @@ Check the table to know each of the integrations between Testkube Components:
 |User Browser|Dex|User will reach Dex service for authentication process|5556|
 |User Browser|S3|User will reach Dex service for pulling test execution artifacts|9000|
 |Testkube Control Plane API|Dex|To verify user token and ensure authenticated access to Testkube platform|5556, 5557|
-|Testkube Control Plane API|MongoDB|To store the state of the whole platform objects (Test Workflows, Test Triggers, Webhooks, etc.)|27017 (If it's the default MongoDB deployed together with Testkube platform)|
+|Testkube Control Plane API|PostgreSQL|To store the state of the whole platform objects (Test Workflows, Test Triggers, Webhooks, etc.)|5432 (If it's the bundled PostgreSQL deployed together with Testkube platform)|
 |Testkube Control Plane API|NATS|To manage events happening into the platform|4222|
 |Testkube Control Plane API|S3|To store artifacts (test workflow execution results, logs, and metrics)|9000 (If is MinIO)| 
 |Testkube Control Plane API|_License Server **_|To validate license configured in instance, License Server is an external service managed by Testkube|443|
 |Worker Service|NATS|To manage events happening into the platform|4222|
-|Worker Service|MongoDB|To manage the state of the whole platform objects (Test Workflows, Test Triggers, Webhooks, etc.) generating metrics|27017 (If it's the default MongoDB deployed together with Testkube platform)|
+|Worker Service|PostgreSQL|To manage the state of the whole platform objects (Test Workflows, Test Triggers, Webhooks, etc.) generating metrics|5432 (If it's the bundled PostgreSQL deployed together with Testkube platform)|
 |Testkube Agent API|Testkube Control Plane API|To receive instructions on Test Workflow and other features execution in the specific environment and Kubernetes cluster|8089 (if HTTPS, 8443)|
 |Testkube Agent API|S3|To store artifacts (test workflow execution results, logs, and metrics)|9000 (If is MinIO)|
 |Testkube Agent API|NATS|To manage events happening into the platform|4222|
@@ -177,8 +177,8 @@ It provides 2 main interfaces:
 This component also integrates with:
 
 * **Dex:** using port `5556` and `5557` with TCP protocol.
-* **MongoDB:** using default port `27017` with TCP protocol.
 * **PostgreSQL:** using default port `5432` with TCP protocol.
+* **MongoDB:** using default port `27017` with TCP protocol (legacy deployments only).
 * **NATS**: using port `4222` with TCP protocol. It also apply to Testkube Agent API, unless it's configured to have embedded NATS.
 
 #### S3 or Object storage

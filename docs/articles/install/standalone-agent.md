@@ -239,25 +239,23 @@ Alternatively, these values can be read from Kubernetes secrets and set:
 
 To install the standalone agent Testkube on an Openshift cluster you will need to include the following configuration:
 
-1. Add security context for MongoDB to `values.yaml`:
+1. Add security context for PostgreSQL to `values.yaml`:
 
 ```yaml
-mongodb:
-  securityContext:
-    enabled: true
-    fsGroup: 1000650001
-    runAsUser: 1000650001
-  podSecurityContext:
-    enabled: false
-  containerSecurityContext:
-    enabled: true
-    runAsUser: 1000650001
-    runAsNonRoot: true
+postgresql:
+  primary:
+    podSecurityContext:
+      enabled: false
+    containerSecurityContext:
+      enabled: false
   volumePermissions:
     enabled: false
-  auth:
-    enabled: false
+  shmVolume:
+    chmod:
+      enabled: false
 ```
+
+If you are running a legacy MongoDB deployment on OpenShift, use the MongoDB security context settings in the [Helm chart values](https://github.com/kubeshop/helm-charts/blob/main/charts/testkube/values.yaml) instead.
 
 2. The Testkube Operator is deprecated and disabled by default. If your installation previously used it, ensure it is disabled in `values.yaml`:
 
@@ -272,11 +270,13 @@ testkube-operator:
 helm install testkube oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube --version <version> --create-namespace --namespace testkube --values values.yaml
 ```
 
-Please notice that since we've just installed MongoDB with a `testkube-mongodb` Helm release name, you are not required to reconfigure the Testkube API MongoDB connection URI. If you've installed with a different name/namespace, please adjust `--set testkube-api.mongodb.dsn: "mongodb://testkube-mongodb:27017"` to your MongoDB service.
+By default, the bundled PostgreSQL instance is reachable at `testkube-postgresql`. No additional database connection configuration is required unless you use a different release name or namespace.
 
-## Using PostgreSQL as a database
+## Database
 
-Starting with release `2.9`, PostgreSQL will be used as the primary database instead of MongoDB. Since both options are currently supported, you must first disable MongoDB and then enable PostgreSQL in your `values.yaml` file. We strongly recommend using `CloudNativePG` instead of plain PostgreSQL, as it offloads much of the database management, and the installation of PostgreSQL by Bitnami will be deprecated by the end of 2026.
+PostgreSQL is the primary and default database for Testkube. New installations use PostgreSQL by default. For production environments, we strongly recommend using `CloudNativePG` instead of plain PostgreSQL, as it offloads much of the database management, and the installation of PostgreSQL by Bitnami will be deprecated by the end of 2026.
+
+If you are migrating from a legacy MongoDB deployment, disable MongoDB and enable PostgreSQL in your `values.yaml` file as shown below. Fresh installations already use PostgreSQL by default.
 
 The operator-based path has two parts:
 

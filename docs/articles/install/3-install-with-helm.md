@@ -15,7 +15,7 @@ Before you proceed with the installation, please ensure that you have the follow
 - A Kubernetes cluster (version 1.21+)
 - [Helm](https://helm.sh/docs/intro/quickstart/) (version 3+)
 - (RECOMMENDED) [cert-manager](https://cert-manager.io/docs/installation/) (version 1.11+) - Used for TLS certificate management.
-- (RECOMMENDED) [NGINX Controller](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/) (version v1.8+) - Used for Ingress configuration.
+- (RECOMMENDED) [Gateway API](https://gateway-api.sigs.k8s.io/guides/getting-started/introduction/) (version 1.7.2+) or [NGINX Controller](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/) (version v1.8+) - Used for service exposure.
 - (OPTIONAL) [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator) (version 0.49+) - used for metrics collection
 - Own a public/private domain for creating Ingress rules.
 - License Key and/or License File, if offline access is required.
@@ -75,16 +75,6 @@ The following are production requirements for Control Plane components:
 Control Plane can run with lower resources, but the above requirements will ensure a smooth usage of Testkube.
 :::
 
-:::note IMPORTANT
-Make sure you're using the **correct Ingress controller**.
-
-✅ Use: [kubernetes/ingress-nginx](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx)
-
-🚫 Do not use: [nginx/nginx-ingress (NGINX Inc.)](https://artifacthub.io/packages/helm/nginx/nginx-ingress)
-
-Using the wrong chart causes one of the Dex or API Ingresses to be ignored when they share the same hostname.
-:::
-
 ## Installing
 
 Install the Testkube Helm Chart:
@@ -111,6 +101,18 @@ global:
 ```
 
 ### Domain
+
+#### Ingress API
+
+:::note
+For new installations, please refer to Gateway API section, as Ingress API has been frozen. Existing installations can continue using Ingress, however, we recommend planning a migration at your earliest convenience.
+:::
+
+Before the start make sure you're using the **correct Ingress controller**:
+✅ Use: [kubernetes/ingress-nginx](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx)
+🚫 Do not use: [nginx/nginx-ingress (NGINX Inc.)](https://artifacthub.io/packages/helm/nginx/nginx-ingress)
+
+Using the wrong chart causes one of the Dex or API Ingresses to be ignored when they share the same hostname.
 
 You should enable ingress and configure your domain to access Testkube services:
 
@@ -140,6 +142,185 @@ TLS should be terminated at the application-level instead of the ingress-level a
 
 Ensure that your gateway or proxy fully supports HTTP/2, as this is a fundamental requirement for enabling gRPC endpoints. Without HTTP/2 support, gRPC communication will not function properly.
 If you are deploying Testkube in an Azure environment, it is essential to use [Application Gateway for Containers](https://learn.microsoft.com/en-us/azure/application-gateway/for-containers/overview#load-balancing-features) rather than the standard Azure Application Gateway, as the latter [does not support gRPC protocol](https://github.com/Azure/application-gateway-kubernetes-ingress/issues/1015#issuecomment-2379609889).
+
+#### Gateway API 
+
+Starting with Testkube Enterprise `2.11.0`, Testkube supports exposing public endpoints through the Kubernetes Gateway API backed by Traefik.
+This gives you an alternative to the current Ingress-based exposure model and allows you to:
+- attach Testkube routes to a shared cluster-wide Gateway
+- support cross-namespace routing
+- manage public TLS at the Gateway layer
+- migrate from NGINX Ingress to Gateway API without downtime
+
+NGINX and the Kubernetes Ingress API are still supported. However, the Ingress-based exposure model is planned to be deprecated by the end of 2026. New installations should prefer Gateway API where possible.
+
+**What Testkube creates in gateway mode**
+
+When Gateway API is enabled, the chart can create:
+- a Gateway resource
+- a Certificate for the Gateway TLS listener when using cert-manager
+- HTTPRoute resources for 
+- HTTPRoute redirect resources for HTTP to HTTPS
+- BackendTLSPolicy resources for HTTPS and gRPCS backends when application TLS is enabled
+
+**Prerequisites**
+
+Before enabling Gateway API in Testkube, install and manage these components separately:
+- Gateway API CRDs
+- a Gateway controller, for example Traefik
+- cert-manager, if you want the chart to manage the Gateway certificate.
+
+Testkube does not install the Gateway API CRDs or the controller for you. Make sure to also verify **HTTP/2** support when using Gateway API, especially if you expose components that depend on it, such as gRPC.
+
+**Values configuration**
+
+Use this when Testkube should create its own Gateway and Ingress should be disabled.
+```yaml
+global:
+  domain: example.com
+
+  exposure:
+    mode: gateway
+
+  ingress:
+    enabled: false
+
+  certificateProvider: cert-manager
+
+  gatewayAPI:
+    createHTTPRoutes: true
+
+    gateway:
+      create: true
+      name: testkube-gateway
+      namespace: testkube-gateway
+      className: traefik
+      listener:
+        allowedRoutes:
+          namespaces:
+            from: All
+      httpListener:
+        allowedRoutes:
+          namespaces:
+            from: All
+
+    certificate:
+      create: true
+      issuerRef:
+        name: letsencrypt-gateway
+
+    httpToHttpsRedirect:
+      enabled: true
+
+    backendTLSPolicy:
+      enabled: true
+
+testkube-cloud-api:
+  gatewayAPI:
+    createRESTHTTPRoute: true
+    createGRPCRoute: true
+    
+testkube-cloud-ui:
+  gatewayAPI:
+    createHTTPRoute: true
+    
+testkube-ai-service:
+  gatewayAPI:
+    createHTTPRoute: true
+    
+dex:
+  gatewayAPI:
+    createHTTPRoute: true    
+    
+minio:
+  gatewayAPI:
+    createHTTPRoute: true
+```
+**Migration from Ingress without downtime**
+
+You can migrate gradually by creating Gateway API routes and keeping the existing Ingress resources active during the transition.
+```yaml
+global:
+  domain: example.com
+
+  exposure:
+    mode: gateway
+
+  ingress:
+    enabled: true
+
+  certificateProvider: cert-manager
+  certManager:
+    issuerRef: letsencrypt-prod
+
+  gatewayAPI:
+    createHTTPRoutes: true
+
+    gateway:
+      create: true
+      name: testkube-gateway
+      namespace: testkube-gateway
+      className: traefik
+      listener:
+        allowedRoutes:
+          namespaces:
+            from: All
+      httpListener:
+        allowedRoutes:
+          namespaces:
+            from: All
+
+    certificate:
+      create: true
+      issuerRef:
+        name: letsencrypt-gateway
+
+    httpToHttpsRedirect:
+      enabled: true
+
+    backendTLSPolicy:
+      enabled: true
+
+testkube-cloud-api:
+  gatewayAPI:
+    createRESTHTTPRoute: true
+    createGRPCRoute: true
+    
+testkube-cloud-ui:
+  gatewayAPI:
+    createHTTPRoute: true
+    
+testkube-ai-service:
+  gatewayAPI:
+    createHTTPRoute: true
+    
+dex:
+  gatewayAPI:
+    createHTTPRoute: true
+    
+minio:
+  gatewayAPI:
+    createHTTPRoute: true
+```
+After DNS cutover and validation, you can remove the old Ingress-based exposure and keep Gateway API as the only public entrypoint.
+At that stage, traffic should already be reaching Testkube through the Gateway, and the existing Ingress resources should no longer be needed. The final step is simply to disable Ingress creation in values:
+```yaml
+global:
+  ingress:
+    enabled: false
+```
+
+You can also attach Testkube routes to an existing Gateway instead of creating a new one from the chart. This is useful when your platform team manages a shared cluster Gateway and multiple applications attach their own HTTPRoute resources to it.
+In that model, Testkube does not create the Gateway resource. Instead, it only creates HTTPRoute resources that reference the existing Gateway by name and namespace.
+```yaml
+global:
+  gatewayAPI:
+    gateway:
+      create: false
+      name: shared-gateway
+      namespace: platform-gateway
+```
+When using a shared Gateway in another namespace, make sure that the Gateway listeners allow cross-namespace routes, for example by setting `allowedRoutes.namespaces.from: All` on the Gateway itself. Without that, Testkube routes created in a different namespace will not be allowed to attach.
 
 ### Auth
 
