@@ -57,15 +57,16 @@ The JUnit Report will automatically expand the first failed test - to make it ea
 :::
 
 
-### 3. Test Insights
+### 3. Functional Metrics in Test Insights
 
-The [Test Insights](/articles/test-insights) functionality allows you to analyse JUnit Case count over time, for example:
+The [Test Insights](/articles/test-insights) functionality allows you to analyse JUnit Case results over time, including filtering and segmenting 
+by Test Case and Test Suite, for example:
 
 ![JUnit results in Test Insights](images/test-insights-junit.png)
 
 This shows the JUnit Case count per day over the last month, broken down by test status. The table at the bottom 
 shows the individual numbers for each day, clicking on one of these numbers will list the corresponding Workflow 
-executions, allowing you to further drill down into each segment - [Read More](/articles/test-insights#executions-table-and-drill-down).
+executions, allowing you to further drill down into each segment - [Read More](/articles/functional-metrics-in-insights).
 
 ## Benefits of JUnit Report Visualization
 

@@ -1,0 +1,108 @@
+# Custom Metrics with Influx Line Protocol
+
+[InfluxDB Line Protocol](https://docs.influxdata.com/influxdb/cloud/reference/syntax/line-protocol/) is the recommended
+way to capture custom metrics from any workflow step. Write one or more line protocol records to a file, upload it as
+an artifact, and Testkube ingests the numeric fields as granular metric series you can chart in
+[Insights](/articles/test-insights).
+
+This path works for any tool or script that can emit text metrics at the end of a run: custom load tests, application
+benchmarks, database query timings, ad-hoc shell measurements, or anything else that can write to a file.
+
+## Getting Started
+
+1. Write your metrics to a file using Influx Line Protocol syntax.
+2. Use a `.influx` or `.lp` file extension. Testkube only scans files with these extensions for line protocol content.
+3. Place the file in a directory covered by your step `artifacts.paths`.
+4. Run the workflow. The agent toolkit detects valid line protocol during artifact upload and registers the file as an
+   `influx.line_protocol` report. The control plane then ingests the metrics into granular series.
+
+```yaml title="example-custom-metrics.yaml"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: custom-metrics-example
+spec:
+  steps:
+    - name: Run checks and export metrics
+      shell: |
+        mkdir -p /data/artifacts
+        cat > /data/artifacts/custom-metrics.lp <<'EOF'
+        api_latency,endpoint=checkout,status=200 p95=245.5,avg=118.2
+        api_latency,endpoint=login,status=200 p95=189.0,avg=95.4
+        orders_processed value=42
+        EOF
+      artifacts:
+        paths:
+          - /data/artifacts/**/*
+```
+
+After the workflow finishes, the `.lp` file remains available as a normal artifact and the detected metrics appear in
+Insights under **Custom Report Metrics**.
+
+## Line Format
+
+Each non-empty, non-comment line follows the standard line protocol shape:
+
+```text
+measurement[,tag_key=tag_value...] field_key=value[,field_key=value...]
+```
+
+- **Measurement** — becomes the base of the metric key (for example `api_latency`).
+- **Tags** — optional comma-separated `key=value` pairs after the measurement. Tags are stored as identity fields so
+  you can segment or filter by them in Insights.
+- **Fields** — one or more `key=value` pairs separated by commas. Each numeric field becomes its own metric series.
+- **Comments** — lines starting with `#` are ignored.
+
+Note: Custom timestamps are not currently supported. All metric series will use the execution timestamp.
+
+Example records:
+
+```text
+http_req_duration,status=200,scenario=checkout value=118.5
+http_req_duration,status=200 avg=100,p95=200
+http_reqs value=1000
+cpu,host=server01 usage_user=0.10,usage_system=0.20
+```
+
+## Supported Field Types
+
+Testkube ingests numeric field values only:
+
+| Field syntax | Example      | Stored as |
+| ------------ | ------------ | --------- |
+| Float        | `value=42.5` | `42.5`    |
+| Integer      | `count=42i`  | `42`      |
+| Unsigned     | `count=42u`  | `42`      |
+
+String fields (quoted values) and boolean fields (`true` / `false`) are skipped. A file must contain at least one valid
+numeric record to be ingested; otherwise Testkube ignores it.
+
+## Metric Keys
+
+Testkube normalizes each measurement and field name into a stable metric key: `{measurement}_{field}` in lowercase with
+non-alphanumeric characters replaced by underscores.
+
+| Line protocol record                           | Testkube metric key                                |
+| ---------------------------------------------- | -------------------------------------------------- |
+| `http_req_duration,status=200 value=118.5`     | `http_req_duration_value` (identity: `status=200`) |
+| `http_req_duration,status=200 avg=100,p95=200` | `http_req_duration_avg`, `http_req_duration_p95`   |
+| `http_reqs value=1000`                         | `http_reqs_value`                                  |
+| `orders_processed value=42`                    | `orders_processed_value`                           |
+
+When multiple lines in the same file contribute to the same metric key and identity (for example two workers writing the
+same tagged measurement), Testkube sums the values for that execution.
+
+## Segmentation and Filtering
+
+Tags on each line become identity fields, similar to k6 metric tags. Use stable, low-cardinality tag keys — such as `endpoint`, `scenario`, or `service` — rather than unique IDs or raw
+URLs. High-cardinality tags create many series and make analysis harder.
+
+## Influx Line Protocol Troubleshooting
+
+If custom metrics do not appear in Insights:
+
+- Confirm the file uses a `.influx` or `.lp` extension. Other extensions are not scanned for line protocol.
+- Confirm the file is included in `artifacts.paths` and appears in the execution Artifacts tab.
+- Confirm each metric line has at least one numeric field. Lines with only string or boolean fields are ignored.
+- Confirm granular metrics ingestion is enabled on your deployment (see [Configuration](#configuration) above).
+- Check the workflow logs for `Processing InfluxDB line protocol report` messages during artifact upload.
