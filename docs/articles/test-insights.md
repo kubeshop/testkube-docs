@@ -21,6 +21,76 @@ By integrating Test Insights into your testing workflow, your team can leverage 
 - **Improved Test Efficiency:** Identify and address inefficiencies in your testing process, leading
   to faster development cycles and higher quality software releases.
 
+## Default Metrics
+
+The default metrics exposed for analysis in Test Insights are the metrics collected at the Workflow Execution level:
+
+- Workflow Status
+- Execution Duration
+- Resource Usage - [Read More](/articles/resource-metrics-in-insights).
+
+## Granular Metrics
+
+Granular metrics let Testkube store tool-specific measurements as named time series, so you can track more than
+workflow status, duration, and resource usage. Granular metrics can be used to analyze metrics for 
+[individual Test Cases](/articles/functional-metrics-in-insights), [Performance Tests](/articles/performance-metrics-in-insights) or 
+any [Custom Metric](/articles/custom-metrics-in-insights) that you would like to track together with your test results.
+
+:::note
+Granular Metrics require Postgres as your Testkube Database - they are not supported on Testkube deployments using MongoDB.
+:::
+
+### Configuration
+
+Granular metrics are **enabled by default**. The control plane worker service ingests supported reports from workflow
+artifacts into time series after each execution completes.
+
+To explicitly enable or disable ingestion, set the `testkube-worker-service.granularMetrics.enabled` Helm value on your deployment:
+
+```yaml
+testkube-worker-service:
+  granularInsights:
+    enabled: false
+```
+
+Set the value to `false` to disable granular metrics ingestion, in which case the Insight module will not show
+granular measures for executions processed while ingestion is disabled.
+
+### Granular Metrics in Insights
+
+Once granular metrics are captured, they appear as measures in an [Executions Time Series](/articles/test-insights#executions-time-series) analysis. Granular metrics are grouped by category to make exploration easier.
+
+| Insights group          | Example metric keys                                                    |
+| ----------------------- | ---------------------------------------------------------------------- |
+| Junit Test Case Metrics | `test_duration_ms`, `test_count_failed`, `test_count_passed`           |
+| Request Latency         | `http_req_duration_p95_ms`, `response_time_mean_ms`, `latency_p99_ms`  |
+| Request Throughput      | `http_reqs_rate`, `http_request_rate`, `rps_mean`                      |
+| Traffic Volume          | `data_received_count`, `data_sent_count`, `received_kbytes_per_sec`    |
+| Request Errors          | `http_req_failed_rate`, `error_count`, `errors_etimedout`              |
+| Request Volume          | `http_reqs_count`, `sample_count`, `requests_completed`                |
+| Virtual Users           | `vus`, `vusers_created`, `virtual_users`                               |
+| Checks & Assertions     | `checks_passes`, `checks_fails`, `assertions_failed`                   |
+| Custom Report Metrics   | Any detected report metric that does not match one of the above groups |
+
+Insights chooses a default aggregate based on the selected metric key. Count-style metrics usually default to
+**sum**, while latency, rate, percentage, throughput, and byte-rate metrics default to **maximum** so the first chart
+highlights the highest observed value in each time bucket. You can still select another available aggregate when a
+different view is more useful.
+
+### Granular Metrics  Segmentation and Filtering
+
+In addition to standard filtering and segmentation, granular metrics support segmentation and filtering based on a set of _identity fields_.
+Each series includes identity fields derived from the tool that produced the report. Below is a table of common identity fields
+for the supported report sources.
+
+| Report source        | Common identity fields             | Notes                                                                                                                                                                                                                                                           |
+| -------------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| JUnit report         | Testcase, Testsuite                | Test cases and suites are uniquely identified by their name. If you have the same test case name across multiple workflows they will be aggregated together (a workflow filter can help mitigate this issue).                                                   |
+| Influx line protocol | Tag keys from each line            | Each tag on a line protocol record becomes an identity field (for example `status=200` or `scenario=checkout`). Use stable, low-cardinality tag keys so segments remain readable in Insights.                                                                   |
+| k6 summary           | Scenario, Endpoint, k6 metric tags | k6 only writes tagged submetrics to the summary when the script requests them, usually through thresholds. Global metrics such as total received bytes or max VUs may not have scenario or endpoint identity.                                                   |
+| Artillery report     | Scenario, Transaction              | Scenario identities come from named Artillery scenarios. Transaction identities come from endpoint-level metrics when the report includes them. Other aggregate metrics remain workflow-level when the report does not include scenario or transaction context. |
+| JMeter statistics    | Transaction                        | JMeter dashboard statistics are keyed by transaction label, including `Total`.                                                                                                                                                                                  |
+
 ## Using Test Insights
 
 Test Insights are available from the top menu. The Insights sidebar helps you navigate between boards:
@@ -256,3 +326,4 @@ The pass/fail stats shows details about workflow executions that failed or passe
 These analysis are useful to quickly understand if certain workflows need attention.
 
 ![Test Insights - Efficiency Quadrant Analysis](images/insights-pass-fail.jpg)
+

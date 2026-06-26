@@ -581,13 +581,8 @@ const sidebars = {
                 },
                 {
                   type: "doc",
-                  label: "Resource Metrics",
+                  label: "Resource Usage",
                   id: "articles/resource-metrics",
-                },
-                {
-                  type: "doc",
-                  label: "Granular Metrics",
-                  id: "articles/granular-metrics",
                 },
                 {
                   type: "doc",
@@ -598,20 +593,40 @@ const sidebars = {
             },
             {
               type: "category",
-              label: "Aggregated Results Analysis",
+              label: "Aggrageted Results - Test Insights",
               collapsed: false,
               items: [
                 {
                   type: "doc",
-                  label: "Test Insights",
+                  label: "Overview",
                   id: "articles/test-insights",
                 },
                 {
                   type: "doc",
-                  label: "Status Pages",
-                  id: "articles/status-pages",
+                  label: "Functional Metrics",
+                  id: "articles/functional-metrics-in-insights",
+                },
+                {
+                  type: "doc",
+                  label: "Performance Metrics",
+                  id: "articles/performance-metrics-in-insights",
+                },
+                {
+                  type: "doc",
+                  label: "Resource Metrics",
+                  id: "articles/resource-metrics-in-insights",
+                },
+                {
+                  type: "doc",
+                  label: "Custom Metrics",
+                  id: "articles/custom-metrics-in-insights",
                 },
               ],
+            },
+            {
+              type: "doc",
+              label: "Status Pages",
+              id: "articles/status-pages",
             },
           ],
         },
