@@ -8,6 +8,10 @@ For other tools, or when you need metrics that do not map to a built-in report f
 The metrics exported by each tool will differ, but you can chart the values you care about and see how they change over time.
 For example, charting `http_req_duration_p95_ms` segmented by **Scenario** helps you compare p95 latency across load profiles and spot regressions in a single scenario.
 
+On top of the tool-specific metrics, Testkube also derives a small set of [canonical, cross-tool metrics](#canonical-cross-tool-metrics)
+(latency, throughput, and error rate) so you can compare the same measure across k6, Artillery, and JMeter using one stable
+metric key.
+
 ## k6 Summary Integration
 
 k6 can export a machine-readable summary with the `--summary-export` flag. To make that summary available as
@@ -231,3 +235,78 @@ If JMeter metrics do not appear in Insights:
 - Confirm that the report directory is included in `artifacts.paths`.
 - Keep the `statistics.json` file non-empty and in JMeter dashboard statistics format.
 - Check the workflow execution artifacts to confirm the report directory was uploaded.
+
+## Canonical (Cross-Tool) Metrics
+
+Each performance tool reports latency, throughput, and errors with its own field names, units, and statistics. To let you
+compare the same measure across k6, Artillery, and JMeter - and across executions that switched tools — Testkube also derives a
+small, curated set of **canonical metrics** when it ingests a performance report.
+
+Canonical metrics are produced *in addition* to the raw per-tool series described above. The original tool-specific metrics
+are always preserved; the canonical layer simply adds normalized counterparts with stable keys and consistent units. Only a
+curated subset of metrics has a canonical counterpart—most raw keys (for example `http_req_blocked_*` or `iteration_duration_*`)
+intentionally have none.
+
+### Canonical Metric Keys
+
+Testkube currently derives three canonical metrics:
+
+| Canonical metric key | Meaning                         | Unit                |
+| -------------------- | ------------------------------- | ------------------- |
+| `latency_p95_ms`     | 95th-percentile request latency | milliseconds        |
+| `throughput_rps`     | Request throughput              | requests per second |
+| `errors_rate`        | Fraction of failed requests     | 0–1 fraction        |
+
+Every canonical series records which tool produced it in a `source_tool` identity field (`k6`, `artillery`, or `jmeter`), so the
+same canonical key can keep one series per tool instead of merging measurements from different tools.
+
+### How Each Tool Maps to Canonical Metrics
+
+| Source tool | Source metric                                       | Canonical metric | Notes                                  |
+| ----------- | --------------------------------------------------- | ---------------- | -------------------------------------- |
+| k6          | `http_req_duration_p95_ms`                          | `latency_p95_ms` | percentile reported by the tool        |
+| k6          | `http_reqs_rate`                                    | `throughput_rps` |                                        |
+| k6          | `http_req_failed_rate`                              | `errors_rate`    | already a 0–1 fraction                 |
+| Artillery   | `latency_p95_ms` (Artillery v1.x)                   | `latency_p95_ms` | percentile reported by the tool        |
+| Artillery   | `http_response_time_p95_ms` (Artillery v2.x)        | `latency_p95_ms` | percentile reported by the tool        |
+| Artillery   | `rps_mean`                                          | `throughput_rps` |                                        |
+| Artillery   | derived: sum of `errors_*` ÷ `requests_completed`   | `errors_rate`    | computed when no direct field exists   |
+| JMeter      | `response_time_percentile_2_ms` (JMeter `pct2ResTime`) | `latency_p95_ms` | p95 assumed; see Percentile Provenance |
+| JMeter      | `throughput`                                        | `throughput_rps` |                                        |
+| JMeter      | `error_pct`                                         | `errors_rate`    | scaled from 0–100 % to a 0–1 fraction  |
+
+### Units and Scaling
+
+Canonical metrics use one unit per metric regardless of the source tool:
+
+- Latency is stored in milliseconds.
+- Throughput is stored in requests per second.
+- `errors_rate` is a 0–1 fraction. Tools that report a percentage (for example JMeter's `errorPct`, which is 0–100) are scaled
+  by `1/100` so they line up with tools that already report a fraction (for example k6's `http_req_failed`).
+
+### Derived Errors Rate (Artillery)
+
+Artillery aggregate reports do not include a single error-rate field. When a direct field is missing, Testkube derives
+`errors_rate` by summing every raw `errors_*` counter (for example `errors_etimedout` and `errors_econnrefused`) and dividing by
+`requests_completed`. For example, 10 `ECONNREFUSED` plus 5 `ETIMEDOUT` over 100 completed requests yields `errors_rate = 0.15`.
+The derivation is skipped when `requests_completed` is missing or zero.
+
+### Percentile Provenance
+
+Tools differ in how precisely they report percentiles, so each canonical `latency_p95_ms` series is annotated with a
+`percentile_source` identity field:
+
+- `reported` — the tool reported the p95 value directly (k6 and Artillery).
+- `default_assumed` — the value comes from a configurable percentile slot that defaults to p95. JMeter's `pct2ResTime` is the
+  second configured percentile, which defaults to the 95th but can be changed in JMeter's percentile configuration, so Testkube
+  records that the p95 mapping is assumed rather than guaranteed.
+- `config_read` — reserved for cases where the percentile is confirmed from the tool's configuration.
+
+Use `percentile_source` to decide how strictly to compare p95 latency across tools. A `default_assumed` JMeter series is only a
+true p95 if the JMeter percentile configuration still uses the default slots.
+
+### Distributed and Sharded Reports
+
+Per-artifact identity fields (such as `reportRef` and `reportFile`) are intentionally dropped from canonical series. This lets
+distributed runs—where each worker uploads its own report file—collapse into a single canonical series per tool, rather than one
+series per uploaded file. The raw per-file series remain available if you need to inspect an individual worker.

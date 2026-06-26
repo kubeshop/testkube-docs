@@ -32,7 +32,7 @@ AI in Testkube is now easier to configure, faster, and safer to run.
 ### Test & Git Triggers
 
 - Testkube can now observe a Git repository and trigger executions on repository events. This covers the full lifecycle from simple branch pushes to GitHub pull-request automation, with fine-grained filtering and rich Git context exposed to the triggered execution ([read more](articles/git-triggers))
-- Test Triggers can now watch custom resources and fire on specific field changes, not just built-in Kubernetes events. Point a trigger at any CRD, such as Argo Rollouts, cert-manager, or your own, and add match conditions so it only runs when a field you care about changes, for example when a Rollout's `.status.phase` becomes `Healthy`. The dashboard discovers the resources each listener agent can watch, autocompletes their fields from the live schema, and lets you pin the trigger to the listener that should evaluate it
+- Test Triggers can now watch custom resources and fire on specific field changes, not just built-in Kubernetes events ([read more](articles/test-triggers#triggering-on-custom-resources-crds)). Point a trigger at any CRD, such as Argo Rollouts, cert-manager, or your own, and add match conditions so it only runs when a field you care about changes, for example when a Rollout's `.status.phase` becomes `Healthy`. The dashboard discovers the resources each listener agent can watch, autocompletes their fields from the live schema, and lets you pin the trigger to the listener that should evaluate it
 
 ### Onboarding
 
@@ -42,15 +42,16 @@ AI in Testkube is now easier to configure, faster, and safer to run.
 
 ### Insights Updates
 
-- Enhanced the Insights Board user experience with support for pinned boards, shared/privated boards, and search results by name
+- Enhanced the Insights Board user experience with support for pinned boards, shared/privated boards, and search results by name - ([read more](/articles/test-insights#managing-custom-boards))
 - Added support for label and workflow filters searching for a substring (contains)
 - Added support for identity fields searching for a substring (contains)
-- Added a default Insights Board at the Workflow level with a default set of charts
+- Added a default Insights Board at the Workflow level with a default set of charts - ([read more](/articles/test-insights#the-default-workflow-insights-board)  )
 - Added eight chart types in Insights for better analysis of execution metrics ([read more](/articles/test-insights#chart-types))
-- Metrics
+- Granular Metrics
+  - Native parsing of k6, Artillery, and JMeter metrics into Insights - ([read more](/articles/performance-metrics-in-insights))
   - Canonicalized metric names: k6, Artillery, and JMeter now share normalized `latency_p95_ms`, `throughput_rps`, and `errors_rate` alongside the
-     tool-specific names, so you can compare runs across tools in one chart and filter by source
-  - Added support for Influx Line Protocol for creation of custom metric series ([read more](articles/granular-metrics#custom-metrics-with-influx-line-protocol))
+     tool-specific names, so you can compare runs across tools in one chart and filter by source - ([read more](/articles/performance-metrics-in-insights#canonical-cross-tool-metrics))
+  - Added support for Influx Line Protocol for creation of custom metric series - [read more](articles/granular-metrics#custom-metrics-with-influx-line-protocol)
 
 ### Operations & Security
 
