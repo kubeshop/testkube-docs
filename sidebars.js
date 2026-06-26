@@ -349,6 +349,11 @@ const sidebars = {
                   label: "Webhooks",
                   id: "articles/integrations-webhooks",
                 },
+                {
+                  type: "doc",
+                  label: "Github App Auth",
+                  id: "articles/github-app-auth",
+                },                
               ],
             },
             {
@@ -546,6 +551,11 @@ const sidebars = {
               type: "doc",
               label: "Execution CRDs",
               id: "articles/test-executions",
+            },
+            {
+              type: "doc",
+              label: "Git Events",
+              id: "articles/git-triggers",
             },
           ],
         },

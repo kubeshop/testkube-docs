@@ -47,6 +47,9 @@ Testkube decouples test definition from execution, providing flexibility to trig
 - **Using Execution CRDs:**
   Trigger tests by creating corresponding [Execution CRDs](/articles/test-executions).
 
+- **Git Event Triggers:**  
+  React to Git events using [Triggers](../articles/git-triggers).  
+
 ![CI/CD Integrations](../img/concepts-cicd-integrations.png)
 
 ## Further Reading
