@@ -603,7 +603,7 @@ const sidebars = {
             },
             {
               type: "category",
-              label: "Aggrageted Results - Test Insights",
+              label: "Aggrageted Results - Insights",
               collapsed: false,
               items: [
                 {

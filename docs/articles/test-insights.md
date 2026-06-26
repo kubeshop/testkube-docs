@@ -21,23 +21,24 @@ By integrating Test Insights into your testing workflow, your team can leverage 
 - **Improved Test Efficiency:** Identify and address inefficiencies in your testing process, leading
   to faster development cycles and higher quality software releases.
 
-## Default Metrics
+## Workflow Metrics
 
-The default metrics exposed for analysis in Test Insights are the metrics collected at the Workflow Execution level:
+The default metrics exposed for analysis in Test Insights are the metrics collected for each Workflow Execution:
 
 - Workflow Status
 - Execution Duration
 - Resource Usage - [Read More](/articles/resource-metrics-in-insights).
 
+These can be further filtered and segmented as described below.
+
 ## Granular Metrics
 
-Granular metrics let Testkube store tool-specific measurements as named time series, so you can track more than
-workflow status, duration, and resource usage. Granular metrics can be used to analyze metrics for 
-[individual Test Cases](/articles/functional-metrics-in-insights), [Performance Tests](/articles/performance-metrics-in-insights) or 
+Testkube stores tool-specific measurements as named time series data on top of the Workflow metrics outlined above. By default Testkube extracts and exposes granular metrics for 
+[individual Test Cases](/articles/functional-metrics-in-insights) and [Performance Tests](/articles/performance-metrics-in-insights), but you can provide Testkube with 
 any [Custom Metric](/articles/custom-metrics-in-insights) that you would like to track together with your test results.
 
 :::note
-Granular Metrics require Postgres as your Testkube Database - they are not supported on Testkube deployments using MongoDB.
+Granular Metrics requires Postgres as your Testkube Database - they are not supported on Testkube deployments using MongoDB.
 :::
 
 ### Configuration
@@ -56,7 +57,7 @@ testkube-worker-service:
 Set the value to `false` to disable granular metrics ingestion, in which case the Insight module will not show
 granular measures for executions processed while ingestion is disabled.
 
-### Granular Metrics in Insights
+### Built in Granular Metrics
 
 Once granular metrics are captured, they appear as measures in an [Executions Time Series](/articles/test-insights#executions-time-series) analysis. Granular metrics are grouped by category to make exploration easier.
 
@@ -77,7 +78,7 @@ Insights chooses a default aggregate based on the selected metric key. Count-sty
 highlights the highest observed value in each time bucket. You can still select another available aggregate when a
 different view is more useful.
 
-### Granular Metrics  Segmentation and Filtering
+### Segmentation and Filtering
 
 In addition to standard filtering and segmentation, granular metrics support segmentation and filtering based on a set of _identity fields_.
 Each series includes identity fields derived from the tool that produced the report. Below is a table of common identity fields
@@ -93,7 +94,7 @@ for the supported report sources.
 
 ## Using Test Insights
 
-Test Insights are available from the top menu. The Insights sidebar helps you navigate between boards:
+Test Insights are available from the top and left navigation menus. The Insights sidebar helps you navigate between boards:
 
 - **All Boards** — a searchable grid of every board you can access in the Organization
 - **Execution Analysis** — the default board with premade charts
@@ -120,9 +121,9 @@ If Insights should not be available in your Organization, disable it from the
 [Product Features Panel](/articles/organization-management#product-features).
 :::
 
-## Boards
+## Insights Boards
 
-### Default Board: Execution Analysis
+### The Default Execution Analysis Board
 
 The default Execution Analysis board has three sections which all show data over the last month:
 
@@ -327,3 +328,19 @@ These analysis are useful to quickly understand if certain workflows need attent
 
 ![Test Insights - Efficiency Quadrant Analysis](images/insights-pass-fail.jpg)
 
+:::tip
+Pass/Fail stats can also be overlayed over Execution charts as [described above](#success-rate-overlay).
+:::
+
+## The Default Workflow Insights Board
+
+A fixed Insights board is also available at the Workflow level, containing default chart to visualize general
+functional and operational metrics for the Workflow:
+
+![Workflow Insights](images/workflow-insights.png)
+
+### Customizing 
+
+Opening an analysis on this boart allows you to customize the anlaysis as outlined above but any changes must be saved to a separate Insights Board, as indicated by the notice on the top:
+
+![Scratch Workflow Analyais](images/scratch-workflow-analysis.png)
