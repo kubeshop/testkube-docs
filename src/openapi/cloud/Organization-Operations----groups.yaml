@@ -256,3 +256,164 @@ paths:
     parameters:
       - $ref: './components.yaml#/components/parameters/ID'
       - $ref: './components.yaml#/components/parameters/GroupID'
+  /organizations/{id}/groups/{groupID}/credentials:
+    get:
+      summary: List credentials in the resource group
+      description: >-
+        List credentials in the resource group. Use filter=all to include
+        organization-level credentials that are not overridden by
+        resource-group-level credentials.
+      operationId: listResourceGroupCredentials
+      parameters:
+        - name: filter
+          in: query
+          description: >-
+            Optional filter to include organization-level credentials. Use 'all'
+            to merge org and resource group credentials, excluding org
+            credentials that are overridden by resource group credentials with
+            the same name.
+          schema:
+            type: string
+            enum:
+              - all
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  elements:
+                    type: array
+                    items:
+                      $ref: './components.yaml#/components/schemas/Credential'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    post:
+      summary: Create a new credential in the resource group
+      description: Create a new credential in the resource group.
+      operationId: createResourceGroupCredential
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: The identifier for the credential.
+                  type: string
+                type:
+                  description: >-
+                    The type of credential (secret, variable, vault, or
+                    vault_ref). Defaults to secret if not specified.
+                  type: string
+                  enum:
+                    - secret
+                    - variable
+                    - vault
+                    - vault_ref
+                base64:
+                  description: Base64-encoded value for the credential.
+                  type: string
+                source:
+                  description: The source that created this credential (e.g. 'ai-agent').
+                  type: string
+                  maxLength: 50
+              required:
+                - name
+        required: true
+      responses:
+        '201':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Credential'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+        '409':
+          $ref: './components.yaml#/components/responses/Conflict'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/GroupID'
+  /organizations/{id}/groups/{groupID}/credentials/{credentialName}:
+    get:
+      summary: Get credential in the resource group
+      description: >-
+        Get credential details. Variables will include their decrypted value,
+        secrets will not.
+      operationId: getResourceGroupCredential
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/Credential'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    delete:
+      summary: Delete credential in the resource group
+      description: Delete credential in the resource group.
+      operationId: deleteResourceGroupCredential
+      responses:
+        '204':
+          $ref: './components.yaml#/components/responses/NoContent'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    patch:
+      summary: Update value of the credential in the resource group
+      description: Update value of the credential in the resource group.
+      operationId: updateResourceGroupCredential
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                base64:
+                  description: Base64-encoded value for the credential.
+                  type: string
+              required:
+                - base64
+        required: true
+      responses:
+        '204':
+          $ref: './components.yaml#/components/responses/NoContent'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/GroupID'
+      - $ref: './components.yaml#/components/parameters/CredentialName'

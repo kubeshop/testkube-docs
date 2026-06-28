@@ -55,13 +55,66 @@ paths:
       - $ref: './components.yaml#/components/parameters/ID'
       - $ref: './components.yaml#/components/parameters/StartDateTime'
       - $ref: './components.yaml#/components/parameters/EndDateTime'
-      - $ref: './components.yaml#/components/parameters/Measure'
+      - $ref: './components.yaml#/components/parameters/OptionalMeasure'
       - $ref: './components.yaml#/components/parameters/Aggregate'
       - $ref: './components.yaml#/components/parameters/Segment'
+      - $ref: './components.yaml#/components/parameters/SeriesID'
+      - $ref: './components.yaml#/components/parameters/SeriesIdentityFilters'
       - $ref: './components.yaml#/components/parameters/Selector'
       - $ref: './components.yaml#/components/parameters/Status'
       - $ref: './components.yaml#/components/parameters/Workflow'
       - $ref: './components.yaml#/components/parameters/Environment'
+  /organizations/{id}/insights/series/catalog:
+    get:
+      summary: List granular insight series catalog
+      description: List granular insight series catalog.
+      operationId: listInsightSeriesCatalog
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/InsightSeriesCatalog'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/Environment'
+      - $ref: './components.yaml#/components/parameters/Workflow'
+      - $ref: './components.yaml#/components/parameters/SeriesSource'
+      - $ref: './components.yaml#/components/parameters/SeriesMetricKey'
+      - $ref: './components.yaml#/components/parameters/SeriesIdentityFilters'
+      - $ref: './components.yaml#/components/parameters/OptionalQuery'
+      - $ref: './components.yaml#/components/parameters/Page'
+      - $ref: './components.yaml#/components/parameters/PageSize'
+  /organizations/{id}/insights/series/catalog/metric-keys:
+    get:
+      summary: List granular insight series metric keys
+      description: List distinct granular insight series metric keys.
+      operationId: listInsightSeriesMetricKeys
+      responses:
+        '200':
+          $ref: './components.yaml#/components/responses/InsightSeriesMetricKeys'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: './components.yaml#/components/parameters/Environment'
+      - $ref: './components.yaml#/components/parameters/Workflow'
+      - $ref: './components.yaml#/components/parameters/SeriesSource'
+      - $ref: './components.yaml#/components/parameters/SeriesIdentityFilters'
+      - $ref: './components.yaml#/components/parameters/OptionalQuery'
+      - $ref: './components.yaml#/components/parameters/Page'
+      - $ref: './components.yaml#/components/parameters/PageSize'
   /organizations/{id}/insights/series/executions:
     get:
       summary: Get execution references

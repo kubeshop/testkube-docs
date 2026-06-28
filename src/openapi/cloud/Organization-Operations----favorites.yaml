@@ -1,0 +1,73 @@
+openapi: 3.0.1
+info:
+  title: Testkube API Docs
+  description: >-
+    See the <a href='/openapi/overview'>Overview</a> for more information and
+    the link to OpenAPI spec.
+servers:
+  - url: https://api.testkube.io
+    description: Testkube Cloud Control Plane API Endpoint
+  - url: https://<your-testkube-api-host>
+    description: Testkube On-Prem API Endpoint
+paths:
+  /organizations/{id}/favorites:
+    put:
+      summary: Create or return a favorite
+      description: >-
+        Creates a favorite for an entity, or returns the existing favorite for
+        the same scope.
+      operationId: putFavorite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/FavoriteReq'
+        required: true
+      responses:
+        '200':
+          description: Favorite already exists
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Favorite'
+        '201':
+          description: Favorite created
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Favorite'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    delete:
+      summary: Delete a favorite
+      description: Removes a favorite by entity, entity id, and scope.
+      operationId: deleteFavorite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/FavoriteReq'
+        required: true
+      responses:
+        '204':
+          description: Favorite deleted
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '404':
+          $ref: './components.yaml#/components/responses/NotFoundError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'

@@ -15,9 +15,42 @@ paths:
       summary: List board summaries
       description: Lists the summaries of the boards in your organization.
       operationId: listBoards
+      parameters:
+        - name: name
+          in: query
+          description: Filter boards by name (case-insensitive substring match)
+          schema:
+            type: string
+        - name: private
+          in: query
+          description: Return only private boards owned by the current user.
+          schema:
+            type: boolean
+        - name: shared
+          in: query
+          description: Return only shared organization boards.
+          schema:
+            type: boolean
+        - name: userFavorite
+          in: query
+          description: Return only boards favorited by the current user.
+          schema:
+            type: boolean
+        - name: orgFavorite
+          in: query
+          description: Return only boards favorited at the organization level.
+          schema:
+            type: boolean
+        - $ref: './components.yaml#/components/parameters/Page'
+        - $ref: './components.yaml#/components/parameters/PageSize'
       responses:
         '200':
           description: Response
+          headers:
+            Link:
+              $ref: './components.yaml#/components/headers/link'
+            Total-Count:
+              $ref: './components.yaml#/components/headers/total-count'
           content:
             application/json:
               schema:
@@ -49,6 +82,10 @@ paths:
                 description:
                   description: The description of the new board
                   type: string
+                isPrivate:
+                  description: When true, the board is only visible to the creator.
+                  type: boolean
+                  default: false
               required:
                 - name
         required: true
@@ -121,6 +158,11 @@ paths:
                 slug:
                   description: The new slug of this board.
                   type: string
+                isPrivate:
+                  description: >-
+                    When set, toggles whether the board is private to the
+                    current user or shared with the organization.
+                  type: boolean
                 layout: {}
                 content:
                   description: A patch for the content of this board.
@@ -161,3 +203,29 @@ paths:
     parameters:
       - $ref: './components.yaml#/components/parameters/ID'
       - $ref: './components.yaml#/components/parameters/BoardID'
+  /organizations/{id}/boards/shared-order:
+    patch:
+      summary: Reorder shared boards
+      description: >-
+        Sets the sidebar navigation order for shared organization boards.
+        Requires organization admin.
+      operationId: reorderSharedBoards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/ReorderSharedBoardsReq'
+        required: true
+      responses:
+        '204':
+          $ref: './components.yaml#/components/responses/NoContent'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'

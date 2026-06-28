@@ -83,19 +83,23 @@ paths:
                   type: string
                 type:
                   description: >-
-                    The type of credential (secret, variable, or vault).
-                    Defaults to secret if not specified.
+                    The type of credential (secret, variable, vault, or
+                    vault_ref). Defaults to secret if not specified.
                   type: string
                   enum:
                     - secret
                     - variable
                     - vault
+                    - vault_ref
                 base64:
                   description: Base64-encoded value for the credential.
                   type: string
+                source:
+                  description: The source that created this credential (e.g. 'ai-agent').
+                  type: string
+                  maxLength: 50
               required:
                 - name
-                - base64
         required: true
       responses:
         '201':
@@ -172,6 +176,8 @@ paths:
       responses:
         '204':
           $ref: './components.yaml#/components/responses/NoContent'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
         '401':
           $ref: './components.yaml#/components/responses/UnauthorizedError'
         '403':

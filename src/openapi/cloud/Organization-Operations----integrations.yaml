@@ -1,0 +1,119 @@
+openapi: 3.0.1
+info:
+  title: Testkube API Docs
+  description: >-
+    See the <a href='/openapi/overview'>Overview</a> for more information and
+    the link to OpenAPI spec.
+servers:
+  - url: https://api.testkube.io
+    description: Testkube Cloud Control Plane API Endpoint
+  - url: https://<your-testkube-api-host>
+    description: Testkube On-Prem API Endpoint
+paths:
+  /organizations/{id}/integrations/github/connect:
+    get:
+      summary: Get GitHub App connect URL
+      description: Returns a signed GitHub App installation URL for the organization.
+      operationId: getGitHubConnectURL
+      responses:
+        '200':
+          description: GitHub App installation URL
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/GithubConnectURL'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '500':
+          $ref: './components.yaml#/components/responses/InternalServerError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+  /organizations/{id}/integrations/github/installations:
+    get:
+      summary: List GitHub App installations
+      description: Lists GitHub App installations connected to the organization.
+      operationId: listGitHubInstallations
+      responses:
+        '200':
+          description: Connected GitHub App installations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yaml#/components/schemas/GithubInstallation'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '500':
+          $ref: './components.yaml#/components/responses/InternalServerError'
+      security:
+        - BearerAuth: []
+    post:
+      summary: Add GitHub App installation manually
+      description: >-
+        Manually adds a GitHub App installation to the organization by providing
+        the GitHub organization name and installation ID.
+      operationId: addGitHubInstallation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/GithubInstallation'
+        required: true
+      responses:
+        '200':
+          description: GitHub App installation added
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/GithubInstallation'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '409':
+          description: GitHub organization already connected
+          content:
+            application/problem+json:
+              schema:
+                $ref: './components.yaml#/components/schemas/Problem'
+        '500':
+          $ref: './components.yaml#/components/responses/InternalServerError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+  /organizations/{id}/integrations/github/installations/{githubOrg}:
+    delete:
+      summary: Remove GitHub App installation
+      description: Removes a connected GitHub App installation from the organization.
+      operationId: deleteGitHubInstallation
+      responses:
+        '204':
+          $ref: './components.yaml#/components/responses/NoContent'
+        '401':
+          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '403':
+          $ref: './components.yaml#/components/responses/ForbiddenError'
+        '500':
+          $ref: './components.yaml#/components/responses/InternalServerError'
+      security:
+        - BearerAuth: []
+    parameters:
+      - $ref: './components.yaml#/components/parameters/ID'
+      - name: githubOrg
+        in: path
+        description: GitHub organization login.
+        required: true
+        schema:
+          type: string
