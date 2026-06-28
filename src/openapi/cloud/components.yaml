@@ -1,5 +1,215 @@
 components:
   schemas:
+    AIAgentTrigger:
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the trigger
+          type: string
+        name:
+          description: Human-readable display name of the trigger
+          type: string
+        environmentId:
+          description: Environment the trigger belongs to
+          type: string
+        assistantId:
+          description: Assistant that will handle triggered sessions
+          type: string
+        assistantName:
+          description: >-
+            Display name of the associated assistant (populated in list
+            responses)
+          type: string
+        enabled:
+          description: Whether the trigger is active
+          type: boolean
+        events:
+          description: >-
+            Event types that activate this trigger (e.g.
+            end-testworkflow-failed)
+          type: array
+          items:
+            type: string
+        selector:
+          description: >-
+            Label selector to filter which workflow executions this trigger
+            applies to.
+
+
+            - An empty or missing selector matches *no* executions (safety
+            default).
+
+            - Use `"*"` to match *all* executions in the environment.
+
+            - Otherwise, provide comma-separated `key=value` pairs (e.g.
+            `team=payments,env=prod`).
+              The UI uses colon notation (`key:value`) and normalizes it to `=` internally.
+          type: string
+          example: team=payments
+        promptTemplate:
+          description: >-
+            Go template rendered with execution context as the session
+            instructions
+          type: string
+        triggerMode:
+          description: Controls when the trigger fires
+          type: string
+          enum:
+            - every_match
+            - on_state_change
+        apiTokenId:
+          description: ID of the API token used for authentication when the trigger fires
+          type: string
+        apiTokenOwned:
+          description: >-
+            Whether the API token was auto-generated (true) or user-selected
+            (false)
+          type: boolean
+        maxSessionsPerHour:
+          description: >-
+            Maximum number of AI sessions this trigger can create per hour. 0
+            means unlimited.
+          type: integer
+          example: 10
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - environmentId
+        - assistantId
+        - enabled
+        - events
+    AIAgentTriggerCreate:
+      type: object
+      properties:
+        assistantId:
+          description: ID of the AI assistant this trigger belongs to
+          type: string
+        name:
+          description: Human-readable display name of the trigger
+          type: string
+        enabled:
+          description: Whether the trigger is active
+          type: boolean
+        events:
+          description: Event types that activate this trigger
+          type: array
+          items:
+            type: string
+        selector:
+          description: >-
+            Label selector to filter which workflow executions this trigger
+            applies to.
+
+
+            - An empty or missing selector matches *no* executions (safety
+            default).
+
+            - Use `"*"` to match *all* executions in the environment.
+
+            - Otherwise, provide comma-separated `key=value` pairs (e.g.
+            `team=payments,env=prod`).
+              The UI uses colon notation (`key:value`) and normalizes it to `=` internally.
+          type: string
+          example: team=payments
+        promptTemplate:
+          description: >-
+            Go template rendered with execution context as the session
+            instructions
+          type: string
+        triggerMode:
+          description: Controls when the trigger fires
+          type: string
+          enum:
+            - every_match
+            - on_state_change
+        apiTokenId:
+          description: Existing API token ID to use (if omitted, one is auto-generated)
+          type: string
+        apiTokenRole:
+          description: >-
+            Permission level for the auto-generated token (default 'run').
+            Ignored when apiTokenId is provided.
+          type: string
+          enum:
+            - read
+            - run
+            - write
+        maxSessionsPerHour:
+          description: >-
+            Maximum number of AI sessions this trigger can create per hour. 0
+            means unlimited.
+          type: integer
+          example: 10
+      required:
+        - name
+        - enabled
+        - events
+        - assistantId
+    AIAgentTriggerList:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/AIAgentTrigger'
+    AIAgentTriggerUpdate:
+      type: object
+      properties:
+        assistantId:
+          description: Change the AI assistant that handles triggered sessions
+          type: string
+        name:
+          description: Human-readable display name of the trigger
+          type: string
+        enabled:
+          description: Whether the trigger is active
+          type: boolean
+        events:
+          description: Event types that activate this trigger
+          type: array
+          items:
+            type: string
+        selector:
+          description: >-
+            Label selector to filter which workflow executions this trigger
+            applies to.
+
+
+            - An empty or missing selector matches *no* executions (safety
+            default).
+
+            - Use `"*"` to match *all* executions in the environment.
+
+            - Otherwise, provide comma-separated `key=value` pairs (e.g.
+            `team=payments,env=prod`).
+              The UI uses colon notation (`key:value`) and normalizes it to `=` internally.
+          type: string
+          example: team=payments
+        promptTemplate:
+          description: >-
+            Go template rendered with execution context as the session
+            instructions
+          type: string
+        triggerMode:
+          description: Controls when the trigger fires
+          type: string
+          enum:
+            - every_match
+            - on_state_change
+        apiTokenId:
+          description: Swap to a different API token (if omitted, keeps current token)
+          type: string
+        maxSessionsPerHour:
+          description: >-
+            Maximum number of AI sessions this trigger can create per hour. 0
+            means unlimited.
+          type: integer
+          example: 10
     AIAssistant:
       type: object
       properties:
@@ -31,6 +241,22 @@ components:
         updatedAt:
           type: string
           format: date-time
+        isDefault:
+          description: Whether this is a system-default assistant that cannot be deleted
+          type: boolean
+        maxTokens:
+          description: >-
+            Maximum tokens this agent can consume per billing period. 0 means no
+            per-agent limit.
+          type: integer
+          format: int64
+          example: 100000
+        defaultModel:
+          description: >-
+            Default model to pre-select when starting a chat with this agent.
+            Empty string means use the platform default.
+          type: string
+          example: gpt-4o
       required:
         - id
         - name
@@ -56,6 +282,19 @@ components:
           type: object
           additionalProperties:
             type: string
+        maxTokens:
+          description: >-
+            Maximum tokens this agent can consume per billing period. 0 means no
+            per-agent limit.
+          type: integer
+          format: int64
+          example: 100000
+        defaultModel:
+          description: >-
+            Default model to pre-select when starting a chat with this agent.
+            Empty string means use the platform default.
+          type: string
+          example: gpt-4o
       required:
         - name
         - instructions
@@ -88,6 +327,133 @@ components:
           type: object
           additionalProperties:
             type: string
+        maxTokens:
+          description: >-
+            Maximum tokens this agent can consume per billing period. 0 means no
+            per-agent limit.
+          type: integer
+          format: int64
+          example: 100000
+        defaultModel:
+          description: >-
+            Default model to pre-select when starting a chat with this agent.
+            Empty string means use the platform default.
+          type: string
+          example: gpt-4o
+    AIBriefExecution:
+      description: >-
+        AI-generated brief of a shared TestWorkflow execution. Generated once
+        per share and cached in the share's object storage.
+      type: object
+      properties:
+        summary:
+          description: One-paragraph plain-language summary of what failed and why.
+          type: string
+        rootCauses:
+          description: Likely root causes, ordered by likelihood.
+          type: array
+          items:
+            type: string
+        suggestedFixes:
+          type: array
+          items:
+            type: object
+            properties:
+              label:
+                description: Short title for the fix.
+                type: string
+              detail:
+                description: Plain-language explanation of the fix.
+                type: string
+              code:
+                description: Optional code snippet illustrating the fix.
+                type: string
+              language:
+                description: Language hint for the code snippet (e.g. yaml, sh, js).
+                type: string
+            required:
+              - label
+              - detail
+      required:
+        - summary
+    AIBriefQuota:
+      description: |
+        Daily AI brief generation quota state for a single installation.
+        Used by the public-execution viewer to render a rate-limit
+        banner before the user attempts a generation.
+      type: object
+      properties:
+        used:
+          description: >-
+            Number of LLM-path AI brief generations used today by this
+            installation. Green-run shortcuts and cache hits do not count.
+          type: integer
+        limit:
+          description: Total LLM-path generations allowed per day for this installation.
+          type: integer
+        remaining:
+          description: >-
+            Generations still available today (limit - used). Zero means the
+            banner should be shown.
+          type: integer
+        resetsAt:
+          description: >-
+            UTC timestamp at which the counter resets (midnight UTC of the next
+            day).
+          type: string
+          format: date-time
+      required:
+        - used
+        - limit
+        - remaining
+        - resetsAt
+    AIBriefRateLimitProblem:
+      description: |
+        Problem+JSON response body returned with HTTP 429 when an AI
+        brief generation is blocked by the daily quota. Extends the
+        standard Problem fields with quota context so the client can
+        render an informative banner.
+      type: object
+      properties:
+        type:
+          description: A URI reference that identifies the problem type.
+          type: string
+        title:
+          description: Short, human-readable summary of the problem.
+          type: string
+        status:
+          description: HTTP status code (429).
+          type: integer
+        detail:
+          description: Human-readable explanation specific to this occurrence.
+          type: string
+        instance:
+          description: A URI reference identifying the specific occurrence of the problem.
+          type: string
+        code:
+          description: >-
+            Machine-readable error code (always "ai_brief_rate_limited" for this
+            response).
+          type: string
+        limit:
+          description: The daily LLM-path generation limit that was hit.
+          type: integer
+        used:
+          description: >-
+            The current usage count (equal to or greater than limit at the time
+            of the 429).
+          type: integer
+        resetsAt:
+          description: UTC timestamp at which the counter resets.
+          type: string
+          format: date-time
+      required:
+        - status
+        - title
+        - code
+        - limit
+        - used
+        - resetsAt
     AWSElasticBlockStoreVolumeSource:
       description: >-
         awsElasticBlockStore represents an AWS Disk resource that is attached to
@@ -517,18 +883,37 @@ components:
         model:
           description: LLM model name used for generation
           type: string
+        purpose:
+          description: >-
+            Product surface or policy path for this session. Older sessions
+            without a stored purpose are returned as chat.
+          allOf:
+            - $ref: '#/components/schemas/SessionPurpose'
+        contributorIds:
+          description: IDs of users who have contributed to this session
+          type: array
+          items:
+            type: string
+        runspaceId:
+          description: >-
+            Runspace currently bound to this session, when the session owns a
+            workspace
+          type: string
+        runspaceStatus:
+          $ref: '#/components/schemas/SessionRunspaceStatus'
       required:
         - id
         - assistantId
         - status
-    AssistantSessionCreate:
+    AssistantSessionUpdate:
       type: object
       properties:
-        instructions:
-          description: Instructions/prompt for this session
+        name:
+          description: New display name for the session
           type: string
-        executionContext:
-          $ref: '#/components/schemas/ExecutionContext'
+          maxLength: 100
+      required:
+        - name
     AuditLogDistinctSubjects:
       description: >-
         A key-value map where keys are entity types and values are distinct
@@ -669,6 +1054,18 @@ components:
         updatedAt:
           type: string
           format: date-time
+        creator:
+          description: The user who created this board.
+          type: string
+        shared:
+          description: Whether this board is shared with the organization.
+          type: boolean
+        isUserFavorite:
+          description: Whether the current user has favorited this board.
+          type: boolean
+        isOrgFavorite:
+          description: Whether this board is favorited at the organization level.
+          type: boolean
         layout: {}
         content:
           description: The content of this board.
@@ -692,6 +1089,18 @@ components:
         - shared
         - content
         - layout
+    BoardLayoutSummary:
+      type: object
+      properties:
+        rows:
+          description: Number of layout rows on the board.
+          type: integer
+        cells:
+          description: Number of analysis slots in the layout.
+          type: integer
+      required:
+        - rows
+        - cells
     BoardSummary:
       type: object
       properties:
@@ -713,13 +1122,33 @@ components:
         updatedAt:
           type: string
           format: date-time
+        creator:
+          description: The user who created this board.
+          type: string
+        shared:
+          description: Whether this board is shared with the organization.
+          type: boolean
+        isUserFavorite:
+          description: Whether the current user has favorited this board.
+          type: boolean
+        isOrgFavorite:
+          description: Whether this board is favorited at the organization level.
+          type: boolean
+        analysisCount:
+          description: Number of analyses on the board.
+          type: integer
+        layoutSummary:
+          $ref: '#/components/schemas/BoardLayoutSummary'
       required:
         - id
         - slug
         - name
         - createdAt
         - updatedAt
+        - creator
         - shared
+        - analysisCount
+        - layoutSummary
     BoxedBoolean:
       type: object
       properties:
@@ -773,6 +1202,17 @@ components:
             type: string
         nodePublishSecretRef:
           $ref: '#/components/schemas/LocalObjectReference'
+    Capabilities:
+      type: object
+      properties:
+        add:
+          type: array
+          items:
+            type: string
+        drop:
+          type: array
+          items:
+            type: string
     CephFSVolumeSource:
       description: >-
         cephFS represents a Ceph FS mount on the host that shares a pod's
@@ -819,6 +1259,38 @@ components:
           $ref: '#/components/schemas/BoxedString'
         resourceClaimTemplateName:
           $ref: '#/components/schemas/BoxedString'
+    ClusterResource:
+      description: One GVK the cluster exposes, with the agent's watch permission.
+      type: object
+      properties:
+        group:
+          description: API group (empty for core resources like Pod, Service).
+          type: string
+          example: argoproj.io
+        version:
+          type: string
+          example: v1alpha1
+        kind:
+          type: string
+          example: Rollout
+        resource:
+          description: Plural resource name as used in RBAC rules.
+          type: string
+          example: rollouts
+        namespaced:
+          description: Cluster-scoped resources (Node, ClusterRole, ...) have this false.
+          type: boolean
+        canWatch:
+          description: >-
+            True when the agent ServiceAccount holds list+watch on this
+            resource.
+          type: boolean
+      required:
+        - version
+        - kind
+        - resource
+        - namespaced
+        - canWatch
     Collaborator:
       type: object
       properties:
@@ -846,6 +1318,16 @@ components:
           type: string
         memberCount:
           description: The number of members in this team. Null in case of a user.
+          type: integer
+        maxRole:
+          description: >-
+            The optional max-role cap applied to this user collaborator. Null in
+            case of a team.
+          type: string
+        readOnlyCappedCount:
+          description: >-
+            The number of team members whose permissions are capped to
+            read-only. Null in case of a user.
           type: integer
       required:
         - id
@@ -958,28 +1440,35 @@ components:
         optional:
           description: optional specify whether the ConfigMap or its keys must be defined
           type: boolean
-    ConfigSummary:
-      type: object
-      properties:
-        exists:
-          type: boolean
-        overrides:
-          type: boolean
-        sensitive:
-          type: boolean
-        truncated:
-          type: boolean
-      required:
-        - exists
-        - overrides
-        - sensitive
-        - truncated
     ContentGitAuthType:
       description: auth type for git requests
       type: string
       enum:
         - basic
         - header
+    CreateRunspaceRequest:
+      type: object
+      properties:
+        image:
+          description: Container image to run in the runspace.
+          type: string
+        cpuRequest:
+          description: Requested CPU for the runspace workload.
+          type: string
+        memoryRequest:
+          description: Requested memory for the runspace workload.
+          type: string
+        workspaceSize:
+          description: Requested persistent workspace size.
+          type: string
+        labels:
+          description: Labels to apply to the runspace.
+          type: object
+          additionalProperties:
+            type: string
+        shutdownPolicy:
+          description: Shutdown policy for the runspace.
+          type: string
     Credential:
       type: object
       properties:
@@ -987,12 +1476,13 @@ components:
           description: The identifier for the credential.
           type: string
         type:
-          description: The type of credential (secret, variable, or vault).
+          description: The type of credential (secret, variable, vault, or vault_ref).
           type: string
           enum:
             - secret
             - variable
             - vault
+            - vault_ref
         value:
           description: >-
             The value of the credential (only included for variables, not
@@ -1006,6 +1496,9 @@ components:
         environmentId:
           description: Environment ID where the credential is restricted to.
           type: string
+        resourceGroupId:
+          description: Resource group ID where the credential is restricted to.
+          type: string
         workflowName:
           description: Workflow Name where the credential is restricted to.
           type: string
@@ -1016,6 +1509,10 @@ components:
           description: When it has been read last time by execution.
           type: string
           format: date-time
+        source:
+          description: The source that created this credential (e.g. 'ai-agent').
+          type: string
+          maxLength: 50
         createdAt:
           description: When it has been created last time.
           type: string
@@ -1156,6 +1653,12 @@ components:
           description: Whether this environment is the source of truth in CP.
           type: boolean
           example: true
+        hostedRunnerProvisioning:
+          description: >-
+            Whether a hosted runner is currently being provisioned for this
+            environment.
+          type: boolean
+          example: false
       required:
         - status
     EnvVar:
@@ -1226,6 +1729,13 @@ components:
               description: Human- and URL friendly identifier
               type: string
               example: demo-environment
+            onboarding:
+              description: >-
+                When true on create, signals the env was created during the
+                new-user onboarding flow. Server-side gating still applies; the
+                flag alone does not grant any privileged behavior.
+              type: boolean
+              example: true
             connected:
               description: State of the agent connection
               type: boolean
@@ -1433,25 +1943,6 @@ components:
         - write
         - admin
         - artifact
-    EnvironmentUsage:
-      type: object
-      properties:
-        organizationId:
-          description: organization id
-          type: string
-        environmentId:
-          description: environment id
-          type: string
-        usersCount:
-          description: number of users in an environment
-          type: integer
-        stats:
-          $ref: '#/components/schemas/UsageStats'
-      required:
-        - organizationId
-        - environmentId
-        - usersCount
-        - stats
     EnvironmentVersion:
       type: object
       properties:
@@ -1577,6 +2068,7 @@ components:
         - testsuite
         - executor
         - trigger
+        - workflowtrigger
         - webhook
         - webhooktemplate
         - testexecution
@@ -1626,26 +2118,6 @@ components:
     EventType:
       type: string
       enum:
-        - start-test
-        - end-test-success
-        - end-test-failed
-        - end-test-aborted
-        - end-test-timeout
-        - become-test-up
-        - become-test-down
-        - become-test-failed
-        - become-test-aborted
-        - become-test-timeout
-        - start-testsuite
-        - end-testsuite-success
-        - end-testsuite-failed
-        - end-testsuite-aborted
-        - end-testsuite-timeout
-        - become-testsuite-up
-        - become-testsuite-down
-        - become-testsuite-failed
-        - become-testsuite-aborted
-        - become-testsuite-timeout
         - queue-testworkflow
         - start-testworkflow
         - end-testworkflow-success
@@ -1868,27 +2340,6 @@ components:
         workflowName:
           description: Name of the workflow (if applicable)
           type: string
-    ExecutionContextTypeV2:
-      type: string
-      enum:
-        - ui
-        - cli
-        - ci/cd
-        - cron
-        - testtrigger
-        - kubernetesobject
-        - execution
-    ExecutionContextV2:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ExecutionContextTypeV2'
-        id:
-          type: string
-        name:
-          type: string
-      required:
-        - type
     ExecutionCore:
       description: test execution core
       type: object
@@ -1980,49 +2431,6 @@ components:
         - status
         - duration
         - runAt
-    ExecutionReferenceV2:
-      type: object
-      properties:
-        id:
-          type: string
-        number:
-          type: integer
-        name:
-          type: string
-        status:
-          $ref: '#/components/schemas/ExecutionStatusV2'
-        durationMs:
-          type: integer
-        runnerId:
-          type: string
-        assignedAt:
-          type: string
-          format: date-time
-        startedAt:
-          type: string
-          format: date-time
-        finishedAt:
-          type: string
-          format: date-time
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-        resourceAggregations:
-          type: boolean
-        config:
-          $ref: '#/components/schemas/ConfigSummary'
-        reports:
-          $ref: '#/components/schemas/ReportsSummary'
-        silentMode:
-          $ref: '#/components/schemas/SilentMode'
-      required:
-        - id
-        - number
-        - name
-        - status
-        - scheduledAt
-        - resourceAggregations
     ExecutionRefs:
       type: object
       properties:
@@ -2324,15 +2732,6 @@ components:
         - timeout
         - skipped
         - canceled
-    ExecutionStatusV2:
-      type: string
-      enum:
-        - queued
-        - running
-        - paused
-        - passed
-        - failed
-        - aborted
     ExecutionStepResult:
       description: execution result data
       type: object
@@ -2444,50 +2843,6 @@ components:
           type: array
           items:
             type: string
-    ExecutionTargetV2:
-      type: object
-      properties:
-        match:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-        not:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-        replicate:
-          type: array
-          items:
-            type: string
-    ExecutionTotalsV2:
-      type: object
-      properties:
-        queued:
-          type: integer
-        running:
-          type: integer
-        paused:
-          type: integer
-        passed:
-          type: integer
-        failed:
-          type: integer
-        aborted:
-          type: integer
-        canceled:
-          type: integer
-      required:
-        - queued
-        - running
-        - paused
-        - passed
-        - failed
-        - aborted
-        - canceled
     ExecutionUpdateRequest:
       description: test execution request update body
       type: object
@@ -2792,6 +3147,48 @@ components:
       allOf:
         - $ref: '#/components/schemas/Executor'
         - $ref: '#/components/schemas/ObjectRef'
+    Favorite:
+      type: object
+      properties:
+        id:
+          description: Server-generated favorite id (tkcfav_…)
+          type: string
+        organizationId:
+          type: string
+        entity:
+          type: string
+        entityId:
+          type: string
+        userScoped:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - organizationId
+        - entity
+        - entityId
+        - userScoped
+        - createdAt
+    FavoriteReq:
+      type: object
+      properties:
+        userScoped:
+          description: >-
+            true = favorite for the current user; false = organization-level
+            favorite
+          type: boolean
+        entity:
+          description: Entity type (e.g. boards)
+          type: string
+        entityId:
+          description: ID of the favorited entity
+          type: string
+      required:
+        - entity
+        - entityId
+        - userScoped
     Features:
       type: object
       properties:
@@ -2807,6 +3204,15 @@ components:
             - s3
             - minio
             - gcs
+        credentialBackends:
+          type: array
+          items:
+            type: string
+            enum:
+              - variable
+              - secret
+              - vault
+              - vault_ref
       required:
         - testkubeMode
         - storageType
@@ -2890,6 +3296,54 @@ components:
           type: integer
         service:
           $ref: '#/components/schemas/BoxedString'
+    GenerateAIAssistantConfigRequest:
+      type: object
+      properties:
+        goal:
+          description: Natural-language description of what the user wants the agent to do
+          type: string
+          example: Monitor flaky tests and alert on Slack when flakiness exceeds 20%
+      required:
+        - goal
+    GenerateAIAssistantConfigResponse:
+      type: object
+      properties:
+        name:
+          description: Suggested display name for the agent
+          type: string
+        description:
+          description: Short description of the agent's purpose
+          type: string
+        instructions:
+          description: Generated system prompt instructions
+          type: string
+        recommendedTools:
+          description: Names of Testkube MCP tools relevant to this agent's goal
+          type: array
+          items:
+            type: string
+      required:
+        - name
+        - instructions
+    GithubConnectURL:
+      type: object
+      properties:
+        connectUrl:
+          type: string
+          format: uri
+      required:
+        - connectUrl
+    GithubInstallation:
+      type: object
+      properties:
+        githubOrg:
+          type: string
+        installationId:
+          type: integer
+          format: int64
+      required:
+        - githubOrg
+        - installationId
     GroupedExecutionCountByGrouping:
       description: >-
         An array of touples of string and int32 representing the execution
@@ -3006,6 +3460,73 @@ components:
         - Always
         - Never
         - IfNotPresent
+    ImportArchiveAccepted:
+      type: object
+      properties:
+        importId:
+          description: Identifier of the queued import job
+          type: string
+          format: uuid
+      required:
+        - importId
+    ImportJobStatus:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum:
+            - queued
+            - processing
+            - completed
+            - failed
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportJobStep'
+        error:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - id
+        - status
+        - steps
+        - createdAt
+        - updatedAt
+    ImportJobStep:
+      type: object
+      properties:
+        key:
+          type: string
+          enum:
+            - executions
+            - sequences
+            - logs
+        status:
+          type: string
+          enum:
+            - pending
+            - in_progress
+            - completed
+            - failed
+        processed:
+          type: integer
+        total:
+          type: integer
+      required:
+        - key
+        - status
     Incident:
       allOf:
         - $ref: '#/components/schemas/BasicObjectWithOptionalID'
@@ -3061,6 +3582,56 @@ components:
             $ref: '#/components/schemas/Incident'
       required:
         - elements
+    InsightSeriesCatalogItem:
+      type: object
+      properties:
+        seriesId:
+          type: string
+        organizationId:
+          type: string
+        environmentId:
+          type: string
+        workflowName:
+          type: string
+        source:
+          type: string
+        metricKey:
+          type: string
+        identity:
+          type: object
+          additionalProperties: true
+      required:
+        - seriesId
+        - organizationId
+        - environmentId
+        - workflowName
+        - source
+        - metricKey
+        - identity
+    InsightSeriesCatalogResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/InsightSeriesCatalogItem'
+        hasMore:
+          type: boolean
+      required:
+        - items
+        - hasMore
+    InsightSeriesMetricKeysResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: string
+        hasMore:
+          type: boolean
+      required:
+        - items
+        - hasMore
     Invite:
       type: object
       properties:
@@ -3095,6 +3666,11 @@ components:
           description: >-
             The role that will be assigned to the user when he accepts the
             meeting.
+          type: string
+        maxRole:
+          description: >-
+            Optional max-role cap applied to the invitee's
+            environment/resource-group permissions on acceptance.
           type: string
         envRole:
           description: >-
@@ -3133,6 +3709,17 @@ components:
         declinedAt:
           type: string
           format: date-time
+        acceptedByUserId:
+          description: >-
+            User id that actually accepted the invite. Differs from the invitee
+            id when the invite is non-strict and accepted by a user whose
+            primary email is different from invite.email.
+          type: string
+        acceptedByEmail:
+          description: >-
+            Primary email of the accepting user at accept time. Captured as it
+            was, not kept in sync if the user later changes their primary email.
+          type: string
       required:
         - id
         - organization
@@ -3869,6 +4456,10 @@ components:
           $ref: '#/components/schemas/MemberStatus'
         role:
           $ref: '#/components/schemas/MemberRole'
+        maxRole:
+          description: Optional max role cap for environment/resource-group permissions
+          type: string
+          example: read
         inviteID:
           description: Current Invite ID
           type: string
@@ -3893,11 +4484,14 @@ components:
         - admin
         - biller
         - member
+        - org-wide-read
     MemberRoleChange:
       type: object
       properties:
         role:
           $ref: '#/components/schemas/MemberRole'
+        maxRole:
+          type: string
       required:
         - role
     MemberStatus:
@@ -4017,83 +4611,6 @@ components:
       required:
         - environments
         - latestAgentVersion
-    OrganizationUsage:
-      type: object
-      properties:
-        organizationId:
-          description: organization id
-          type: string
-        stats:
-          $ref: '#/components/schemas/UsageStats'
-        environmentsCount:
-          description: number of environments in organization
-          type: integer
-        usersCount:
-          description: number of users in organization
-          type: integer
-        persistentRunnersCount:
-          description: number of persistent runners in organization
-          type: integer
-        environments:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnvironmentUsage'
-        maxTestResults:
-          description: Max number of test results
-          type: integer
-          example: 12
-        usedTestResults:
-          description: number of used test results
-          type: integer
-          example: 12
-        maxReadOnlyUsers:
-          description: Max number of read-only users
-          type: integer
-          example: 12
-        usedReadOnlyUsers:
-          description: number of used read-only users
-          type: integer
-          example: 12
-        maxFullUsers:
-          description: Max number of full users
-          type: integer
-          example: 12
-        usedFullUsers:
-          description: number of used full users
-          type: integer
-          example: 12
-        ssoAllowed:
-          description: Is custom SSO allowed
-          type: boolean
-        rbacAllowed:
-          description: Is custom RBAC allowed
-          type: boolean
-        maxConcurrentFloatingRunners:
-          description: Max number of floating runners running in parallel
-          type: integer
-          example: 3
-        maxPersistentRunners:
-          description: Max number of persistent runners
-          type: integer
-          example: 3
-        isTrial:
-          description: is current license trial
-          type: boolean
-          default: false
-        licenseType:
-          description: license type
-          type: string
-          example: trial
-        licenseExpiration:
-          description: expiration date
-          type: string
-          format: date-time
-          example: '2006-01-02T15:04:05Z'
-      required:
-        - organizationId
-        - stats
-        - environmentsCount
-        - usersCount
     Organizations:
       type: object
       properties:
@@ -4187,18 +4704,34 @@ components:
           description: Max number of floating runners running in parallel
           type: integer
           example: 3
+        graceMaxConcurrentFloatingRunners:
+          description: Grace limit for floating runners running in parallel
+          type: integer
+          example: 1
         maxPersistentRunners:
           description: Max number of persistent runners
           type: integer
           example: 3
+        graceMaxPersistentRunners:
+          description: Grace limit for persistent runners
+          type: integer
+          example: 1
         maxUsers:
           description: Max number of users
           type: integer
           example: 12
+        graceMaxUsers:
+          description: Grace limit for users
+          type: integer
+          example: 2
         maxReadOnlyUsers:
           description: Max read-only number of users
           type: integer
           example: 12
+        graceMaxReadOnlyUsers:
+          description: Grace limit for read-only users
+          type: integer
+          example: 2
         maxTestResults:
           description: Max number of test results
           type: integer
@@ -4223,11 +4756,19 @@ components:
           description: Limits for weekly AI analysis per organization
           type: integer
           example: 2
+        maxAiTokensPerPeriod:
+          description: Maximum AI tokens per billing period. -1 means unlimited.
+          type: integer
+          format: int64
+          example: 1000000
         ssoAllowed:
           description: Is custom SSO allowed
           type: boolean
         rbacAllowed:
           description: Is custom RBAC allowed
+          type: boolean
+        granularMetricsEnabled:
+          description: Is granular metrics collection allowed
           type: boolean
         usedUsers:
           description: number of used full users
@@ -4263,6 +4804,125 @@ components:
         - Locked
         - Blocked
       example: Active
+    PlanUsage:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        licenseKey:
+          type: string
+        type:
+          type: string
+        edition:
+          type: string
+        source:
+          type: string
+        productType:
+          type: string
+        status:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        signupDate:
+          type: string
+          format: date-time
+        firstTestWorkflowExecutionDate:
+          type: string
+          format: date-time
+        lastTestWorkflowExecutionDate:
+          type: string
+          format: date-time
+        primaryEmail:
+          type: string
+        memberHubspotIds:
+          type: array
+          items:
+            type: string
+        version:
+          type: string
+        usersLicensed:
+          type: integer
+        fixedAgentsLicensed:
+          type: integer
+        readOnlyUsersLicensed:
+          type: integer
+        floatingAgentsLicensed:
+          type: integer
+        organizationsLicensed:
+          type: integer
+        environmentsLicensed:
+          type: integer
+        testWorkflowExecutionsLicensed:
+          type: integer
+        testWorkflowExecutionsConsumed:
+          type: integer
+        testWorkflowsConsumed:
+          type: integer
+        usersConsumed:
+          type: integer
+        fixedAgentsConsumed:
+          type: integer
+        aiSessionsConsumed:
+          type: integer
+        weeklyActiveUsers:
+          type: integer
+        monthlyActiveUsers:
+          type: integer
+        weeklyFloatingActive:
+          type: integer
+        monthlyFloatingActive:
+          type: integer
+        connectedFloatingAgents:
+          type: integer
+        readOnlyUsersConsumed:
+          type: integer
+        environmentsConsumed:
+          type: integer
+        organizationsConsumed:
+          type: integer
+        floatingAgentsConsumed:
+          type: integer
+        graceMaxConcurrentFloatingRunners:
+          type: integer
+        graceMaxPersistentRunners:
+          type: integer
+        graceMaxUsers:
+          type: integer
+        graceMaxReadOnlyUsers:
+          type: integer
+    PlanUsageGracePeriod:
+      type: object
+      properties:
+        inGracePeriod:
+          type: boolean
+        hasGraceLimits:
+          type: boolean
+        gracePeriodDays:
+          type: integer
+      required:
+        - inGracePeriod
+        - hasGraceLimits
+    PlanUsageSnapshot:
+      type: object
+      properties:
+        plan:
+          $ref: '#/components/schemas/PlanUsage'
+        organizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Usage'
+        gracePeriod:
+          $ref: '#/components/schemas/PlanUsageGracePeriod'
+      required:
+        - plan
+        - organizations
+        - gracePeriod
     PodAffinity:
       type: object
       properties:
@@ -4358,9 +5018,9 @@ components:
         windowsOptions:
           $ref: '#/components/schemas/WindowsSecurityContextOptions'
         runAsUser:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: '#/components/schemas/TemplatableBoxedInteger'
         runAsGroup:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: '#/components/schemas/TemplatableBoxedInteger'
         runAsNonRoot:
           $ref: '#/components/schemas/BoxedBoolean'
         supplementalGroups:
@@ -4371,7 +5031,7 @@ components:
         supplementalGroupsPolicy:
           $ref: '#/components/schemas/BoxedString'
         fsGroup:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: '#/components/schemas/TemplatableBoxedInteger'
         sysctls:
           type: array
           items:
@@ -4640,6 +5300,57 @@ components:
                     type: string
                 required:
                   - path
+    PublicConfig:
+      type: object
+      properties:
+        dashboardUrl:
+          description: URL of the Testkube dashboard
+          type: string
+        services:
+          $ref: '#/components/schemas/PublicConfigServices'
+        capabilities:
+          $ref: '#/components/schemas/PublicConfigCapabilities'
+      required:
+        - services
+        - capabilities
+    PublicConfigAIService:
+      type: object
+      properties:
+        enabled:
+          description: Whether the AI service is available
+          type: boolean
+        url:
+          description: Public URL of the AI service for browser-side calls
+          type: string
+      required:
+        - enabled
+    PublicConfigCapabilities:
+      type: object
+      properties:
+        postgresEnabled:
+          description: >-
+            Whether the control plane uses PostgreSQL (gates features like LLM
+            providers)
+          type: boolean
+        mcpEnabled:
+          description: Whether MCP features are enabled
+          type: boolean
+        isOffline:
+          description: >-
+            Whether the control plane is offline (Enterprise mode with offline
+            license activation)
+          type: boolean
+      required:
+        - postgresEnabled
+        - mcpEnabled
+        - isOffline
+    PublicConfigServices:
+      type: object
+      properties:
+        ai:
+          $ref: '#/components/schemas/PublicConfigAIService'
+      required:
+        - ai
     PublicInfo:
       type: object
       properties:
@@ -4679,6 +5390,16 @@ components:
         - min
         - max
         - avg
+    ReorderSharedBoardsReq:
+      type: object
+      properties:
+        boardIds:
+          description: Ordered list of shared board IDs for sidebar navigation.
+          type: array
+          items:
+            type: string
+      required:
+        - boardIds
     Report:
       type: object
       properties:
@@ -4694,28 +5415,6 @@ components:
       required:
         - id
         - kind
-    ReportsSummary:
-      type: object
-      properties:
-        total:
-          type: integer
-        failed:
-          type: integer
-        errored:
-          type: integer
-        skipped:
-          type: integer
-        passed:
-          type: integer
-        summary:
-          $ref: '#/components/schemas/TestWorkflowReportSummary'
-      required:
-        - total
-        - failed
-        - errored
-        - skipped
-        - passed
-        - summary
     Repository:
       description: repository representation for tests in git repositories
       type: object
@@ -4881,6 +5580,19 @@ components:
       nullable: true
       allOf:
         - $ref: '#/components/schemas/ResourceRequest'
+    ResumeAiSessionRunspaceResponse:
+      type: object
+      properties:
+        runspace:
+          $ref: '#/components/schemas/Runspace'
+        restoredCheckpoint:
+          $ref: '#/components/schemas/RunspaceCheckpoint'
+        runspaceStatus:
+          $ref: '#/components/schemas/SessionRunspaceStatus'
+      required:
+        - runspace
+        - restoredCheckpoint
+        - runspaceStatus
     RoleFeatures:
       type: object
       properties:
@@ -4958,6 +5670,99 @@ components:
           type: string
       required:
         - type
+    Runspace:
+      type: object
+      properties:
+        id:
+          type: string
+        organizationId:
+          type: string
+        environmentId:
+          type: string
+        status:
+          type: string
+        statusMessage:
+          type: string
+        sandboxName:
+          type: string
+        bridgeConnected:
+          type: boolean
+        controllerReady:
+          type: boolean
+        workspacePath:
+          type: string
+        workspaceVolumeName:
+          type: string
+        workspaceSize:
+          type: string
+        bootstrapToken:
+          description: Populated only on create responses.
+          type: string
+        spec:
+          $ref: '#/components/schemas/RunspaceSpec'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - organizationId
+        - environmentId
+        - status
+        - spec
+        - createdAt
+        - updatedAt
+    RunspaceCheckpoint:
+      type: object
+      properties:
+        runspaceId:
+          type: string
+        workspacePath:
+          type: string
+        format:
+          type: string
+        objectPrefix:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        sizeBytes:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum:
+            - created
+            - failed
+        failureDetails:
+          type: string
+      required:
+        - runspaceId
+        - workspacePath
+        - format
+        - objectPrefix
+        - createdAt
+        - sizeBytes
+        - status
+    RunspaceSpec:
+      type: object
+      properties:
+        image:
+          type: string
+        cpuRequest:
+          type: string
+        memoryRequest:
+          type: string
+        workspaceSize:
+          type: string
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        shutdownPolicy:
+          type: string
     SELinuxOptions:
       type: object
       properties:
@@ -4969,84 +5774,6 @@ components:
           type: string
         level:
           type: string
-    ScheduleRequestContextTypeV2:
-      type: string
-      enum:
-        - ui
-        - cli
-        - ci/cd
-    ScheduleRequestContextV2:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ScheduleRequestContextTypeV2'
-        id:
-          type: string
-        name:
-          type: string
-      required:
-        - type
-    ScheduleRequestExecutionSelectorByWorkflowLabelsV2:
-      type: object
-      properties:
-        labels:
-          type: object
-          additionalProperties:
-            type: string
-      required:
-        - labels
-    ScheduleRequestExecutionSelectorByWorkflowNameV2:
-      type: object
-      properties:
-        name:
-          type: string
-      required:
-        - name
-    ScheduleRequestExecutionSelectorV2:
-      type: object
-      oneOf:
-        - $ref: >-
-            #/components/schemas/ScheduleRequestExecutionSelectorByWorkflowNameV2
-        - $ref: >-
-            #/components/schemas/ScheduleRequestExecutionSelectorByWorkflowLabelsV2
-    ScheduleRequestExecutionV2:
-      type: object
-      properties:
-        selector:
-          $ref: '#/components/schemas/ScheduleRequestExecutionSelectorV2'
-        config:
-          type: object
-          additionalProperties:
-            type: string
-        executionName:
-          type: string
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-        targets:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExecutionTargetV2'
-      required:
-        - selector
-    ScheduleRequestV2:
-      type: object
-      properties:
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-        context:
-          $ref: '#/components/schemas/ScheduleRequestContextV2'
-        disableWebhooks:
-          type: boolean
-        executions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScheduleRequestExecutionV2'
-      required:
-        - executions
     Scope:
       type: object
       properties:
@@ -5298,18 +6025,30 @@ components:
     SecurityContext:
       type: object
       properties:
+        capabilities:
+          $ref: '#/components/schemas/Capabilities'
         privileged:
           $ref: '#/components/schemas/BoxedBoolean'
+        seLinuxOptions:
+          $ref: '#/components/schemas/SELinuxOptions'
+        windowsOptions:
+          $ref: '#/components/schemas/WindowsSecurityContextOptions'
         runAsUser:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: '#/components/schemas/TemplatableBoxedInteger'
         runAsGroup:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: '#/components/schemas/TemplatableBoxedInteger'
         runAsNonRoot:
           $ref: '#/components/schemas/BoxedBoolean'
         readOnlyRootFilesystem:
           $ref: '#/components/schemas/BoxedBoolean'
         allowPrivilegeEscalation:
           $ref: '#/components/schemas/BoxedBoolean'
+        procMount:
+          $ref: '#/components/schemas/BoxedString'
+        seccompProfile:
+          $ref: '#/components/schemas/SeccompProfile'
+        appArmorProfile:
+          $ref: '#/components/schemas/AppArmorProfile'
     ServeArtifact:
       type: object
       properties:
@@ -5368,8 +6107,6 @@ components:
           deprecated: true
         secret:
           $ref: '#/components/schemas/SecretConfig'
-        features:
-          $ref: '#/components/schemas/Features'
         executionNamespaces:
           description: execution namespaces
           type: array
@@ -5382,80 +6119,6 @@ components:
           example: 2.1.2
       required:
         - version
-    SessionDetail:
-      description: Detailed session including message history from LangGraph
-      type: object
-      properties:
-        id:
-          description: Unique identifier of the session
-          type: string
-        assistantId:
-          description: ID of the AI assistant
-          type: string
-        assistantName:
-          description: Name of the AI assistant
-          type: string
-        name:
-          description: Generated session name based on user input
-          type: string
-        status:
-          $ref: '#/components/schemas/SessionStatus'
-        instructions:
-          description: Instructions/prompt for this session
-          type: string
-        executionContext:
-          $ref: '#/components/schemas/ExecutionContext'
-        error:
-          description: Error message if the session failed
-          type: string
-        messages:
-          description: Conversation message history from LangGraph checkpoint
-          type: array
-          items:
-            $ref: '#/components/schemas/SessionMessage'
-        toolCalls:
-          description: Tool calls made during this session (stored in cloud-api)
-          type: array
-          items:
-            $ref: '#/components/schemas/SessionToolCall'
-        startedAt:
-          description: When the session started executing
-          type: string
-          format: date-time
-        finishedAt:
-          description: When the session finished
-          type: string
-          format: date-time
-        createdBy:
-          $ref: '#/components/schemas/SessionMessageActor'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        isArchived:
-          description: Whether this session has been archived
-          type: boolean
-        inputTokens:
-          description: Total input (prompt) tokens consumed across all invocations
-          type: integer
-          format: int64
-        outputTokens:
-          description: Total output (completion) tokens consumed across all invocations
-          type: integer
-          format: int64
-        totalTokens:
-          description: Total tokens consumed (input + output) across all invocations
-          type: integer
-          format: int64
-        model:
-          description: LLM model name used for generation
-          type: string
-      required:
-        - id
-        - assistantId
-        - status
     SessionList:
       type: object
       properties:
@@ -5466,61 +6129,10 @@ components:
         hasNextPage:
           description: Whether there are more pages available
           type: boolean
-    SessionMessage:
-      description: A message in the session conversation history
-      type: object
-      properties:
-        id:
-          description: Unique identifier of the message
-          type: string
-        role:
-          description: Role of the message sender
-          type: string
-          enum:
-            - user
-            - assistant
-            - tool
-        content:
-          description: Message content
-          type: string
-        sources:
-          description: Documentation sources for assistant messages
-          type: array
-          items:
-            $ref: '#/components/schemas/SessionSource'
-        timestamp:
-          description: Unix timestamp when message was created
-          type: integer
-          format: int64
-        toolCalls:
-          description: Tool calls made by assistant in this message
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                description: Tool call ID
-                type: string
-              name:
-                description: Tool name
-                type: string
-              arguments:
-                description: Tool arguments as JSON string
-                type: string
-        toolCallId:
-          description: For tool messages, the ID of the tool call this responds to
-          type: string
-        toolName:
-          description: For tool messages, the name of the tool
-          type: string
-        actor:
-          $ref: '#/components/schemas/SessionMessageActor'
-      required:
-        - id
-        - role
-        - content
     SessionMessageActor:
-      description: The actor (user or API token) that sent a message or created a session
+      description: >-
+        The actor (user, API token, or AI agent trigger) that sent a message or
+        created a session
       type: object
       properties:
         type:
@@ -5529,6 +6141,7 @@ components:
           enum:
             - user
             - api-token
+            - trigger
         id:
           description: Unique identifier of the actor (user ID or token ID)
           type: string
@@ -5538,23 +6151,34 @@ components:
       required:
         - type
         - id
-    SessionSource:
-      description: Documentation source reference attached to a session message
+    SessionPurpose:
+      description: Product surface or policy path for an assistant session
+      type: string
+      enum:
+        - chat
+        - test-authoring
+    SessionRunspaceStatus:
       type: object
       properties:
-        label:
-          description: Human-readable source label
+        state:
           type: string
-        link:
-          description: Documentation link path
+          enum:
+            - not_applicable
+            - ready
+            - resume_required
+            - unavailable
+        runspaceId:
           type: string
-        file:
-          description: Source file identifier
+        reason:
           type: string
+        checkpointAvailable:
+          type: boolean
+        updatedAt:
+          type: string
+          format: date-time
       required:
-        - label
-        - link
-        - file
+        - state
+        - checkpointAvailable
     SessionStatus:
       description: Status of an assistant session
       type: string
@@ -5564,6 +6188,7 @@ components:
         - waiting_approval
         - completed
         - failed
+        - canceled
     SessionToolCall:
       type: object
       properties:
@@ -5631,10 +6256,12 @@ components:
             - insightsEnabled
             - currentOnboardingStep
             - salesOnboardingStatus
+            - hostedRunnerEligibility
             - pinnedEnvironments
             - pinnedAgents
             - scimEnabled
             - scimManagePermissionsInTestkube
+            - scimRolesEntitlementsFormat
             - eventsEnabled
         valueType:
           description: value type for given settings
@@ -5673,6 +6300,57 @@ components:
             $ref: '#/components/schemas/Setting'
       required:
         - elements
+    Share:
+      type: object
+      properties:
+        id:
+          description: Unique identifier of the share record
+          type: string
+        token:
+          description: Public token used to access the shared execution
+          type: string
+        executionId:
+          description: ID of the shared test workflow execution
+          type: string
+        workflowName:
+          description: Name of the test workflow that was executed
+          type: string
+        status:
+          description: Status of the execution (passed, failed, etc.)
+          type: string
+        installationId:
+          description: >-
+            Anonymous identifier of the Testkube installation that created the
+            share
+          type: string
+        createdAt:
+          description: Timestamp when the share was created
+          type: string
+          format: date-time
+        expiresAt:
+          description: >-
+            Timestamp when the share will expire (createdAt + server-side view
+            TTL)
+          type: string
+          format: date-time
+      required:
+        - token
+        - executionId
+        - workflowName
+        - createdAt
+    ShareArtifact:
+      type: object
+      properties:
+        name:
+          description: Artifact filename (relative path)
+          type: string
+        size:
+          description: File size in bytes
+          type: integer
+          format: int64
+      required:
+        - name
+        - size
     SilentMode:
       description: >-
         controls what aspects of an execution should be silent (not
@@ -5682,18 +6360,23 @@ components:
         webhooks:
           description: disable webhooks for this execution
           type: boolean
+          default: false
         insights:
-          description: disable insights/analytics for this execution
+          description: exclude from insights and analytics dashboards
           type: boolean
+          default: false
         health:
-          description: disable health checks for this execution
+          description: exclude from health and flakiness calculations
           type: boolean
+          default: false
         metrics:
-          description: disable metrics collection for this execution
+          description: exclude from prometheus metrics
           type: boolean
+          default: false
         cdevents:
           description: disable CDEvents for this execution
           type: boolean
+          default: false
     SlavesMeta:
       description: Slave data for executing tests in distributed environment
       type: object
@@ -6025,6 +6708,13 @@ components:
       required:
         - id
         - email
+    TemplatableBoxedInteger:
+      type: object
+      properties:
+        value:
+          type: string
+      required:
+        - value
     Template:
       description: Golang based template
       type: object
@@ -7093,16 +7783,33 @@ components:
           description: label selector for events
         resource:
           $ref: '#/components/schemas/TestTriggerResources'
+        resourceRef:
+          $ref: '#/components/schemas/TestTriggerResourceRef'
         resourceSelector:
           $ref: '#/components/schemas/TestTriggerSelector'
         event:
           description: listen for event for selected resource
           type: string
           example: modified
+        match:
+          description: Match filters which object changes fire the trigger (ANDed).
+          type: array
+          items:
+            $ref: '#/components/schemas/TestTriggerFieldCondition'
+        listener:
+          $ref: '#/components/schemas/ExecutionTarget'
+          description: |
+            Selects which listener agent(s) watch the cluster and fire this
+            trigger, using the same match selector as the action target (e.g.
+            match.id). Empty means broadcast (every listener fires). Required
+            when match is set: schema-aware validation runs against a specific
+            listener's cluster-resources snapshot.
         conditionSpec:
           $ref: '#/components/schemas/TestTriggerConditionSpec'
         probeSpec:
           $ref: '#/components/schemas/TestTriggerProbeSpec'
+        contentSelector:
+          $ref: '#/components/schemas/TestTriggerContentSelector'
         action:
           $ref: '#/components/schemas/TestTriggerActions'
         actionParameters:
@@ -7200,6 +7907,109 @@ components:
         - 'True'
         - 'False'
         - Unknown
+    TestTriggerContentGit:
+      type: object
+      properties:
+        uri:
+          description: URI of the git repository to watch.
+          type: string
+        branches:
+          description: >-
+            Branch name patterns to watch (glob supported, e.g. "main",
+            "release/*"). If empty, all branches are watched.
+          type: array
+          items:
+            type: string
+        branchesIgnore:
+          description: >-
+            Branch name patterns to exclude (glob supported). Takes precedence
+            over branches.
+          type: array
+          items:
+            type: string
+        paths:
+          description: paths to watch for changes (glob supported)
+          type: array
+          items:
+            type: string
+        pathsIgnore:
+          description: >-
+            Path patterns to exclude (glob supported). Takes precedence over
+            paths.
+          type: array
+          items:
+            type: string
+        tags:
+          description: Tag name patterns to watch (glob supported, e.g. "v*", "v1.*").
+          type: array
+          items:
+            type: string
+        tagsIgnore:
+          description: >-
+            Tag name patterns to exclude (glob supported). Takes precedence over
+            tags.
+          type: array
+          items:
+            type: string
+        username:
+          description: plain text username to fetch with
+          type: string
+        usernameFrom:
+          $ref: '#/components/schemas/EnvVarSource'
+        token:
+          description: >-
+            plain text token to fetch with. Warning: this credential is stored
+            in plain text in the trigger spec; prefer tokenFrom instead.
+          type: string
+        tokenFrom:
+          $ref: '#/components/schemas/EnvVarSource'
+        sshKey:
+          description: >-
+            plain text SSH private key to fetch with. Warning: this credential
+            is stored in plain text in the trigger spec; prefer sshKeyFrom
+            instead.
+          type: string
+        sshKeyFrom:
+          $ref: '#/components/schemas/EnvVarSource'
+        authType:
+          type: string
+          enum:
+            - basic
+            - header
+        pullRequest:
+          $ref: '#/components/schemas/TestTriggerContentGitPullRequest'
+      required:
+        - uri
+    TestTriggerContentGitPullRequest:
+      description: Pull request trigger configuration for GitHub API polling.
+      type: object
+      properties:
+        types:
+          description: >-
+            PR activity types to watch (e.g. "opened", "synchronize",
+            "reopened", "closed"). If empty, all types are watched.
+          type: array
+          items:
+            type: string
+        branches:
+          description: >-
+            Base branch name patterns to watch (glob supported). If empty, PRs
+            targeting any base branch are watched.
+          type: array
+          items:
+            type: string
+        branchesIgnore:
+          description: >-
+            Base branch name patterns to exclude (glob supported). Takes
+            precedence over branches.
+          type: array
+          items:
+            type: string
+    TestTriggerContentSelector:
+      type: object
+      properties:
+        git:
+          $ref: '#/components/schemas/TestTriggerContentGit'
     TestTriggerExecutions:
       description: supported test resources for test triggers
       type: string
@@ -7207,6 +8017,33 @@ components:
         - test
         - testsuite
         - testworkflow
+    TestTriggerFieldCondition:
+      type: object
+      properties:
+        path:
+          description: >-
+            Dot-path to the field in the watched resource, e.g.
+            ".spec.replicas".
+          type: string
+        operator:
+          $ref: '#/components/schemas/TestTriggerFieldOperator'
+        value:
+          description: Value to compare against for value-based operators.
+          type: string
+      required:
+        - path
+        - operator
+    TestTriggerFieldOperator:
+      description: supported comparison operators for TestTrigger match conditions
+      type: string
+      enum:
+        - equals
+        - not_equals
+        - exists
+        - not_exists
+        - changed
+        - changed_to
+        - changed_from
     TestTriggerKeyMap:
       type: object
       properties:
@@ -7328,6 +8165,23 @@ components:
           type: integer
           format: int32
           example: 1
+    TestTriggerResourceRef:
+      type: object
+      properties:
+        group:
+          description: Group is the API group (empty for core resources like Pod, Service).
+          type: string
+          example: apps
+        version:
+          description: Version is the API version.
+          type: string
+          example: v1
+        kind:
+          description: Kind is the resource kind.
+          type: string
+          example: Deployment
+      required:
+        - kind
     TestTriggerResources:
       description: supported kubernetes resources for test triggers
       type: string
@@ -7340,6 +8194,7 @@ components:
         - ingress
         - event
         - configmap
+        - content
     TestTriggerSelector:
       type: object
       properties:
@@ -7800,6 +8655,15 @@ components:
           description: timestamp for the notification if available
           type: string
           format: date-time
+        seqNo:
+          description: monotonic application-event cursor for resumable log streams
+          type: integer
+          format: int32
+        eventType:
+          description: >-
+            stream event type, such as log, output, result, ready, heartbeat, or
+            resume_unavailable
+          type: string
         result:
           $ref: '#/components/schemas/TestWorkflowResult'
         ref:
@@ -7948,6 +8812,9 @@ components:
           description: test workflow execution generation
           type: integer
           format: int64
+        error:
+          description: error message if the execution failed
+          type: string
     TestWorkflowExecutionStepResourceAggregations:
       description: Step-based resource metrics aggregations (by measurement and field)
       type: object
@@ -8072,6 +8939,9 @@ components:
     TestWorkflowIndependentStep:
       type: object
       properties:
+        id:
+          description: stable identifier for referencing this step in expressions
+          type: string
         name:
           description: readable name for the step
           type: string
@@ -8302,6 +9172,8 @@ components:
           type: string
         securityContext:
           $ref: '#/components/schemas/PodSecurityContext'
+        disableFsGroupDefaulting:
+          $ref: '#/components/schemas/BoxedBoolean'
         hostname:
           type: string
         subdomain:
@@ -8408,6 +9280,10 @@ components:
           type: string
           enum:
             - junit
+            - k6.summary
+            - artillery.report
+            - jmeter.statistics
+            - influx.line_protocol
           example: junit
         file:
           description: file path to full report in artifact storage
@@ -8644,6 +9520,9 @@ components:
         ref:
           description: step reference
           type: string
+        id:
+          description: stable step identifier for expressions
+          type: string
         name:
           description: step name
           type: string
@@ -8703,6 +9582,8 @@ components:
             $ref: '#/components/schemas/TestWorkflowEvent'
         execution:
           $ref: '#/components/schemas/TestWorkflowExecutionSchema'
+        timeouts:
+          $ref: '#/components/schemas/TestWorkflowTimeouts'
         pvcs:
           type: object
           additionalProperties:
@@ -8732,6 +9613,9 @@ components:
     TestWorkflowStep:
       type: object
       properties:
+        id:
+          description: stable identifier for referencing this step in expressions
+          type: string
         name:
           description: readable name for the step
           type: string
@@ -9358,10 +10242,26 @@ components:
             $ref: '#/components/schemas/TestWorkflowEvent'
         execution:
           $ref: '#/components/schemas/TestWorkflowExecutionSchema'
+        timeouts:
+          $ref: '#/components/schemas/TestWorkflowTimeouts'
         pvcs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/TestWorkflowPvcConfig'
+    TestWorkflowTimeouts:
+      description: configures timeout behavior for a workflow (queue, initialization)
+      type: object
+      properties:
+        queue:
+          description: >-
+            maximum time the execution may spend in queue before starting (e.g.
+            30s, 5m)
+          type: string
+        initialization:
+          description: >-
+            maximum time for initialization/transitioning before steps run (e.g.
+            60s, 2m)
+          type: string
     TestWorkflowWithExecution:
       type: object
       properties:
@@ -9429,8 +10329,8 @@ components:
           format: int64
         value:
           description: The value of this data point.
-          type: integer
-          format: int64
+          type: number
+          format: double
         segments:
           $ref: '#/components/schemas/TimeSeriesSegments'
       required:
@@ -9444,8 +10344,8 @@ components:
           type: string
         value:
           description: The value of this segment.
-          type: integer
-          format: int64
+          type: number
+          format: double
       required:
         - label
         - value
@@ -9467,6 +10367,7 @@ components:
                 - api
                 - artifact
                 - scim
+                - mcp
               example: user
             token:
               description: Raw token value
@@ -9578,90 +10479,110 @@ components:
           description: Namespace is the namespace of resource being referenced
       allOf:
         - $ref: '#/components/schemas/TypedLocalObjectReference'
-    UsageStats:
+    Usage:
       type: object
       properties:
-        executionsCountTests:
-          description: number of Test executions
+        id:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        organizationId:
+          type: string
+        organizationName:
+          type: string
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        firstExecutionDate:
+          type: string
+          format: date-time
+        lastExecutionDate:
+          type: string
+          format: date-time
+        environmentsCount:
           type: integer
-          format: int64
-        executionsCountTestsuites:
-          description: number of Testsuite executions
+        additionalEnvironmentsCount:
           type: integer
-          format: int64
-        executionsCountTotal:
-          description: number of total Test and Testsuite executions
+        maxEnvironmentsCount:
           type: integer
-          format: int64
-        logsCountTests:
-          description: number of Test log files
+        usersCount:
           type: integer
-          format: int64
-        logsCountTestsuites:
-          description: number of Testsuite log files
+        additionalUsersCount:
           type: integer
-          format: int64
-        logsCountTotal:
-          description: number of total Test and Testsuite log files
+        maxUsersCount:
           type: integer
-          format: int64
-        logsSizeTests:
-          description: size in bytes of Test logs
+        graceMaxUsers:
           type: integer
-          format: int64
-        logsSizeTestsuites:
-          description: size in bytes of Testsuite logs
+        readOnlyUsersCount:
           type: integer
-          format: int64
-        logsSizeTotal:
-          description: size in bytes of all logs
+        additionalReadOnlyUsersCount:
           type: integer
-          format: int64
-        artifactsCountTests:
-          description: number of Test log files
+        maxReadOnlyUsersCount:
           type: integer
-          format: int64
-        artifactsCountTestsuites:
-          description: number of Testsuite log files
+        graceMaxReadOnlyUsers:
           type: integer
-          format: int64
-        artifactsCountTotal:
-          description: number of total Test and Testsuite log files
+        floatingRunnersCount:
           type: integer
-          format: int64
-        artifactsSizeTests:
-          description: size in bytes of Test artifacts
+        additionalFloatingRunnersCount:
           type: integer
-          format: int64
-        artifactsSizeTestsuites:
-          description: size in bytes of Testsuite artifacts
+        maxFloatingRunnersCount:
           type: integer
-          format: int64
-        artifactsSizeTotal:
-          description: size in bytes of all artifacts
+        weeklyActiveFloatingAgentsCount:
           type: integer
-          format: int64
-        storageSizeTotal:
-          description: size in bytes of all artifacts and logs
+        monthlyActiveFloatingAgentsCount:
           type: integer
-          format: int64
-      required:
-        - executionsCountTests
-        - executionsCountTestsuites
-        - executionsCountTotal
-        - logsCountTests
-        - logsCountTestsuites
-        - logsCountTotal
-        - logsSizeTests
-        - logsSizeTestsuites
-        - logsSizeTotal
-        - artifactsCountTests
-        - artifactsCountTestsuites
-        - artifactsCountTotal
-        - artifactsSizeTests
-        - artifactsSizeTestsuites
-        - artifactsSizeTotal
-        - storageSizeTotal
+        connectedFloatingAgentsCount:
+          type: integer
+        graceMaxConcurrentFloatingRunners:
+          type: integer
+        organizationsCount:
+          type: integer
+        additionalOrganizationsCount:
+          type: integer
+        maxOrganizationsCount:
+          type: integer
+        aiSessionsCount:
+          type: integer
+        additionalAiSessionsCount:
+          type: integer
+        maxAiSessionsCount:
+          type: integer
+        persistentRunnersCount:
+          type: integer
+        maxPersistentRunnersCount:
+          type: integer
+        graceMaxPersistentRunners:
+          type: integer
+        testWorkflowsCount:
+          type: integer
+        testResultsCount:
+          type: integer
+        additionalTestResultsCount:
+          type: integer
+        additionalThousandsTestResultsCount:
+          type: integer
+        maxTestResultsCount:
+          type: integer
+        storage:
+          type: integer
+        additionalStorage:
+          type: integer
+        maxStorage:
+          type: integer
+        subscriptionId:
+          type: string
+        statusUpdated:
+          type: boolean
+        statusUpdateTime:
+          type: string
+          format: date-time
     UserPreferences:
       type: object
       properties:
@@ -9675,15 +10596,6 @@ components:
       required:
         - id
         - values
-    UserReference:
-      type: object
-      properties:
-        name:
-          type: string
-        email:
-          type: string
-      required:
-        - email
     Variable:
       type: object
       properties:
@@ -9911,6 +10823,8 @@ components:
           $ref: '#/components/schemas/WebhookTemplateRef'
         sync:
           $ref: '#/components/schemas/Syncable'
+        target:
+          $ref: '#/components/schemas/ExecutionTarget'
       required:
         - name
     WebhookConfig:
@@ -10024,6 +10938,8 @@ components:
             $ref: '#/components/schemas/WebhookParameterSchema'
         sync:
           $ref: '#/components/schemas/Syncable'
+        target:
+          $ref: '#/components/schemas/ExecutionTarget'
       required:
         - name
     WebhookTemplateCreateRequest:
@@ -10211,6 +11127,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Incidents'
+    InsightSeriesCatalog:
+      description: Granular insight series catalog
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InsightSeriesCatalogResponse'
+    InsightSeriesMetricKeys:
+      description: Granular insight series metric keys
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InsightSeriesMetricKeysResponse'
     InternalServerError:
       description: 500 Internal Server Error
       content:
@@ -10337,12 +11265,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/InvoiceDetails'
-    OrganizationUsage:
-      description: successful operation for organization usage
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OrganizationUsage'
     Organizations:
       description: successful operation for organizations
       content:
@@ -10382,6 +11304,12 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/Problem'
+    PlanUsageSnapshot:
+      description: successful operation for plan usage
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PlanUsageSnapshot'
     RoleFeatures:
       description: Role Features
       content:
@@ -10473,6 +11401,13 @@ components:
           schema:
             $ref: '#/components/schemas/Views'
   parameters:
+    AIAgentTriggerID:
+      name: triggerId
+      in: path
+      description: Unique identifier of the AI agent trigger
+      required: true
+      schema:
+        type: string
     AIAssistantID:
       name: assistantId
       in: path
@@ -10498,13 +11433,6 @@ components:
       name: sessionId
       in: path
       description: Unique identifier of the assistant session
-      required: true
-      schema:
-        type: string
-    AIToolCallID:
-      name: toolCallId
-      in: path
-      description: Unique identifier of the tool call
       required: true
       schema:
         type: string
@@ -10745,12 +11673,6 @@ components:
       description: The test definition's kind, either 'test', 'suite' or 'workflow'.
       schema:
         type: string
-    LastDays:
-      name: lastDays
-      in: query
-      description: how many last days should be filtered
-      schema:
-        type: integer
     LastNDays:
       name: last
       in: query
@@ -10810,6 +11732,22 @@ components:
       description: skip some items in list of resources
       schema:
         type: integer
+    OptionalMeasure:
+      name: measure
+      in: query
+      description: >-
+        The y-axis to measure within the time series. For organization insights
+        series queries, this may be an execution-level measure or a granular
+        metric key when seriesId is absent.
+      schema:
+        type: string
+      example: execution-count
+    OptionalQuery:
+      name: q
+      in: query
+      description: The query for this operation.
+      schema:
+        type: string
     OptionalTestName:
       name: testName
       in: query
@@ -10864,12 +11802,21 @@ components:
       description: Filter by runner/agent ID
       schema:
         type: string
+    RunspaceID:
+      name: runspaceId
+      in: path
+      description: unique id of the runspace
+      required: true
+      schema:
+        type: string
     Segment:
       name: segment
       in: query
       description: >-
         Creates a breakdown for each time series metric for the given segment
-        property.
+        property. Granular insight series queries support workflow, status, or
+        any stable identity field key such as testsuite, testcase, scenario, or
+        route.
       schema:
         type: string
       example: status
@@ -10882,6 +11829,41 @@ components:
       schema:
         type: string
       example: kubernetes.io/app=demo
+    SeriesID:
+      name: seriesId
+      in: query
+      description: >-
+        Comma-separated granular insight series IDs to include in the time
+        series.
+      schema:
+        type: string
+      example: sha256:7bc0c4...
+    SeriesIdentityFilters:
+      name: identityFilters
+      in: query
+      description: >-
+        JSON object of granular insight series identity filters. Keys are
+        identity field names and values are arrays of strings. Plain strings
+        match exactly (case-insensitive). Strings prefixed with `~` match
+        partially via regex. Multiple identity keys are combined with AND;
+        multiple values for the same key are combined with OR.
+      schema:
+        type: string
+      example: '{"testsuite":["CheckoutSuite"],"testcase":["~expired"]}'
+    SeriesMetricKey:
+      name: metricKey
+      in: query
+      description: Granular insight series metric key filter.
+      schema:
+        type: string
+      example: test_duration_ms
+    SeriesSource:
+      name: source
+      in: query
+      description: Granular insight series source filter.
+      schema:
+        type: string
+      example: junit
     Since:
       name: since
       in: query
@@ -11172,7 +12154,7 @@ components:
               name:
                 description: API Token name
                 type: string
-                example: Organization Read-only token
+                example: Organization org-wide-read token
               expiration:
                 description: Expiration represented as duration string
                 type: string
@@ -11187,6 +12169,19 @@ components:
                   - identifier: tkcorg_xxxxxxxxxx
                     resource: org
                     role: admin
+              labels:
+                description: API token labels for ownership and filtering
+                type: object
+                additionalProperties:
+                  type: string
+                example:
+                  purpose: automation
+                  team: platform
+              meta:
+                description: Additional API token metadata
+                type: object
+                additionalProperties:
+                  type: string
             required:
               - name
       required: true
@@ -11223,6 +12218,11 @@ components:
       example: >-
         <https://api.testkube.io/resource?page=3>; rel="next",
         <https://api.testkube.io/resource?page=1>; rel="previous"
+    total-count:
+      description: Total number of items matching the filter, ignoring pagination.
+      schema:
+        type: integer
+        format: int64
   securitySchemes:
     BearerAuth:
       type: http

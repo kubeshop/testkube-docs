@@ -81,6 +81,11 @@ paths:
                     The role that will be assigned to the person's environments
                     after accepting.
                   type: string
+                maxRole:
+                  description: >-
+                    Optional max-role cap applied to all invitees'
+                    environment/resource-group permissions.
+                  type: string
               required:
                 - emails
         required: true
@@ -100,9 +105,17 @@ paths:
                     type: array
                     items:
                       type: string
+                  notsent:
+                    description: >-
+                      Emails for which the invite was created but the
+                      notification could not be delivered.
+                    type: array
+                    items:
+                      type: string
                 required:
                   - invites
                   - failed
+                  - notsent
         '400':
           $ref: './components.yaml#/components/responses/BadRequestError'
         '401':
@@ -111,6 +124,8 @@ paths:
           $ref: './components.yaml#/components/responses/ForbiddenError'
         '429':
           $ref: './components.yaml#/components/responses/TooManyRequests'
+        '500':
+          $ref: './components.yaml#/components/responses/InternalServerError'
       security:
         - BearerAuth: []
     parameters:
@@ -149,6 +164,11 @@ paths:
                   description: >-
                     The role that will be assigned to the person after
                     accepting.
+                  type: string
+                maxRole:
+                  description: >-
+                    Optional max-role cap applied to the invitee's
+                    environment/resource-group permissions.
                   type: string
                 teams:
                   description: >-

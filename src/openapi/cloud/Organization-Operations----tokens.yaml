@@ -17,9 +17,41 @@ paths:
       operationId: listAPITokens
       parameters:
         - $ref: './components.yaml#/components/parameters/Limit'
+        - name: label
+          in: query
+          description: >
+            Exact token label filters in key=value form. Repeat this parameter
+            to require multiple labels.
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+              pattern: ^[^=]+=[^=]+$
+          example:
+            - team=platform
+            - purpose=automation
+        - name: excludeLabel
+          in: query
+          description: >
+            Exact token label exclusions in key=value form. Repeat this
+            parameter to exclude tokens with any of the provided labels. Tokens
+            missing an excluded label are kept.
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+              pattern: ^[^=]+=[^=]+$
+          example:
+            - visibility=hidden
       responses:
         '200':
           $ref: './components.yaml#/components/responses/Tokens'
+        '400':
+          $ref: './components.yaml#/components/responses/BadRequestError'
         '401':
           $ref: './components.yaml#/components/responses/UnauthorizedError'
         '404':

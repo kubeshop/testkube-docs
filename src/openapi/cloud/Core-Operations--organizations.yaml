@@ -37,6 +37,8 @@ paths:
           $ref: './components.yaml#/components/responses/BadRequestError'
         '401':
           $ref: './components.yaml#/components/responses/UnauthorizedError'
+        '429':
+          $ref: './components.yaml#/components/responses/TooManyRequests'
       security:
         - BearerAuth: []
   /organizations/{id}:

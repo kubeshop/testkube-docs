@@ -295,6 +295,9 @@ splitOpenAPIByPaths(
         "debug",
         "secrets",
         "uploads",
+        "export",
+        "import",
+        "cluster-resources",
         "repositories",
         "preview-test-workflow",
         "test-suites",
@@ -375,6 +378,9 @@ splitOpenAPIByPaths(
           "debug",
           "secrets",
           "uploads",
+          "export",
+          "import",
+          "cluster-resources",
           "repositories",
           "preview-test-workflow",
           "test-suites",
@@ -428,6 +434,7 @@ splitOpenAPIByPaths(
           "/agent-analytics",
           "/features",
           "/settings",
+          "/plan-usage",
           "/events"
         ].filter((str) => opPath.includes(str)).length > 0
       )

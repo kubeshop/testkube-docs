@@ -3683,8 +3683,6 @@ components:
           deprecated: true
         secret:
           $ref: '#/components/schemas/SecretConfig'
-        features:
-          $ref: '#/components/schemas/Features'
         executionNamespaces:
           type: array
           description: execution namespaces
@@ -4781,6 +4779,8 @@ components:
           $ref: '#/components/schemas/WebhookTemplateRef'
         sync:
           $ref: '#/components/schemas/Syncable'
+        target:
+          $ref: '#/components/schemas/ExecutionTarget'
     WebhookTemplate:
       description: CRD based webhook data template
       type: object
@@ -4850,6 +4850,8 @@ components:
             $ref: '#/components/schemas/WebhookParameterSchema'
         sync:
           $ref: '#/components/schemas/Syncable'
+        target:
+          $ref: '#/components/schemas/ExecutionTarget'
     Event:
       description: Event data
       type: object
@@ -4900,6 +4902,7 @@ components:
         - testsuite
         - executor
         - trigger
+        - workflowtrigger
         - webhook
         - webhooktemplate
         - testexecution
@@ -4910,26 +4913,6 @@ components:
     EventType:
       type: string
       enum:
-        - start-test
-        - end-test-success
-        - end-test-failed
-        - end-test-aborted
-        - end-test-timeout
-        - become-test-up
-        - become-test-down
-        - become-test-failed
-        - become-test-aborted
-        - become-test-timeout
-        - start-testsuite
-        - end-testsuite-success
-        - end-testsuite-failed
-        - end-testsuite-aborted
-        - end-testsuite-timeout
-        - become-testsuite-up
-        - become-testsuite-down
-        - become-testsuite-failed
-        - become-testsuite-aborted
-        - become-testsuite-timeout
         - queue-testworkflow
         - start-testworkflow
         - end-testworkflow-success
@@ -5045,14 +5028,6 @@ components:
             - logline1
             - logline2
             - logline3
-    Features:
-      type: object
-      required:
-        - logsV2
-      properties:
-        logsV2:
-          type: boolean
-          description: Log processing version 2
     TestTrigger:
       type: object
       required:
@@ -5091,16 +5066,33 @@ components:
           description: label selector for events
         resource:
           $ref: '#/components/schemas/TestTriggerResources'
+        resourceRef:
+          $ref: '#/components/schemas/TestTriggerResourceRef'
         resourceSelector:
           $ref: '#/components/schemas/TestTriggerSelector'
         event:
           type: string
           description: listen for event for selected resource
           example: modified
+        match:
+          type: array
+          description: Match filters which object changes fire the trigger (ANDed).
+          items:
+            $ref: '#/components/schemas/TestTriggerFieldCondition'
+        listener:
+          description: |
+            Selects which listener agent(s) watch the cluster and fire this
+            trigger, using the same match selector as the action target (e.g.
+            match.id). Empty means broadcast (every listener fires). Required
+            when match is set: schema-aware validation runs against a specific
+            listener's cluster-resources snapshot.
+          $ref: '#/components/schemas/ExecutionTarget'
         conditionSpec:
           $ref: '#/components/schemas/TestTriggerConditionSpec'
         probeSpec:
           $ref: '#/components/schemas/TestTriggerProbeSpec'
+        contentSelector:
+          $ref: '#/components/schemas/TestTriggerContentSelector'
         action:
           $ref: '#/components/schemas/TestTriggerActions'
         actionParameters:
@@ -5168,6 +5160,153 @@ components:
           $ref: >-
             https://raw.githubusercontent.com/garethr/kubernetes-json-schema/master/v1.7.8/_definitions.json#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector
           description: label selector for Kubernetes resources
+    TestTriggerResourceRef:
+      type: object
+      required:
+        - kind
+      properties:
+        group:
+          type: string
+          description: Group is the API group (empty for core resources like Pod, Service).
+          example: apps
+        version:
+          type: string
+          description: Version is the API version.
+          example: v1
+        kind:
+          type: string
+          description: Kind is the resource kind.
+          example: Deployment
+    TestTriggerFieldCondition:
+      type: object
+      required:
+        - path
+        - operator
+      properties:
+        path:
+          type: string
+          description: >-
+            Dot-path to the field in the watched resource, e.g.
+            ".spec.replicas".
+        operator:
+          $ref: '#/components/schemas/TestTriggerFieldOperator'
+        value:
+          type: string
+          description: Value to compare against for value-based operators.
+    TestTriggerFieldOperator:
+      type: string
+      description: supported comparison operators for TestTrigger match conditions
+      enum:
+        - equals
+        - not_equals
+        - exists
+        - not_exists
+        - changed
+        - changed_to
+        - changed_from
+    TestTriggerContentSelector:
+      type: object
+      properties:
+        git:
+          $ref: '#/components/schemas/TestTriggerContentGit'
+    TestTriggerContentGit:
+      type: object
+      required:
+        - uri
+      properties:
+        uri:
+          type: string
+          description: URI of the git repository to watch.
+        branches:
+          type: array
+          description: >-
+            Branch name patterns to watch (glob supported, e.g. "main",
+            "release/*"). If empty, all branches are watched.
+          items:
+            type: string
+        branchesIgnore:
+          type: array
+          description: >-
+            Branch name patterns to exclude (glob supported). Takes precedence
+            over branches.
+          items:
+            type: string
+        paths:
+          type: array
+          description: paths to watch for changes (glob supported)
+          items:
+            type: string
+        pathsIgnore:
+          type: array
+          description: >-
+            Path patterns to exclude (glob supported). Takes precedence over
+            paths.
+          items:
+            type: string
+        tags:
+          type: array
+          description: Tag name patterns to watch (glob supported, e.g. "v*", "v1.*").
+          items:
+            type: string
+        tagsIgnore:
+          type: array
+          description: >-
+            Tag name patterns to exclude (glob supported). Takes precedence over
+            tags.
+          items:
+            type: string
+        username:
+          type: string
+          description: plain text username to fetch with
+        usernameFrom:
+          $ref: '#/components/schemas/EnvVarSource'
+        token:
+          type: string
+          description: >-
+            plain text token to fetch with. Warning: this credential is stored
+            in plain text in the trigger spec; prefer tokenFrom instead.
+        tokenFrom:
+          $ref: '#/components/schemas/EnvVarSource'
+        sshKey:
+          type: string
+          description: >-
+            plain text SSH private key to fetch with. Warning: this credential
+            is stored in plain text in the trigger spec; prefer sshKeyFrom
+            instead.
+        sshKeyFrom:
+          $ref: '#/components/schemas/EnvVarSource'
+        authType:
+          type: string
+          enum:
+            - basic
+            - header
+        pullRequest:
+          $ref: '#/components/schemas/TestTriggerContentGitPullRequest'
+    TestTriggerContentGitPullRequest:
+      type: object
+      description: Pull request trigger configuration for GitHub API polling.
+      properties:
+        types:
+          type: array
+          description: >-
+            PR activity types to watch (e.g. "opened", "synchronize",
+            "reopened", "closed"). If empty, all types are watched.
+          items:
+            type: string
+        branches:
+          type: array
+          description: >-
+            Base branch name patterns to watch (glob supported). If empty, PRs
+            targeting any base branch are watched.
+          items:
+            type: string
+        branchesIgnore:
+          type: array
+          description: >-
+            Base branch name patterns to exclude (glob supported). Takes
+            precedence over branches.
+          items:
+            type: string
     TestTriggerResources:
       description: supported kubernetes resources for test triggers
       type: string
@@ -5180,6 +5319,7 @@ components:
         - ingress
         - event
         - configmap
+        - content
     TestTriggerExecutions:
       description: supported test resources for test triggers
       type: string
@@ -5966,6 +6106,15 @@ components:
           type: string
           format: date-time
           description: timestamp for the notification if available
+        seqNo:
+          type: integer
+          format: int32
+          description: monotonic application-event cursor for resumable log streams
+        eventType:
+          type: string
+          description: >-
+            stream event type, such as log, output, result, ready, heartbeat, or
+            resume_unavailable
         result:
           $ref: '#/components/schemas/TestWorkflowResult'
         ref:
@@ -6231,6 +6380,9 @@ components:
         ref:
           type: string
           description: step reference
+        id:
+          type: string
+          description: stable step identifier for expressions
         name:
           type: string
           description: step name
@@ -6323,6 +6475,9 @@ components:
             parallelism:
               type: integer
               description: how many resources could be scheduled in parallel
+            failFast:
+              type: boolean
+              description: abort remaining parallel workers on first failure
             description:
               type: string
               description: worker description to display
@@ -6351,6 +6506,9 @@ components:
             parallelism:
               type: integer
               description: how many resources could be scheduled in parallel
+            failFast:
+              type: boolean
+              description: abort remaining parallel workers on first failure
             description:
               type: string
               description: worker description to display
@@ -6469,6 +6627,20 @@ components:
           $ref: '#/components/schemas/BoxedBoolean'
         isolatedContainers:
           $ref: '#/components/schemas/BoxedBoolean'
+    TestWorkflowTimeouts:
+      type: object
+      description: configures timeout behavior for a workflow (queue, initialization)
+      properties:
+        queue:
+          type: string
+          description: >-
+            maximum time the execution may spend in queue before starting (e.g.
+            30s, 5m)
+        initialization:
+          type: string
+          description: >-
+            maximum time for initialization/transitioning before steps run (e.g.
+            60s, 2m)
     TestWorkflowSpec:
       type: object
       properties:
@@ -6512,6 +6684,8 @@ components:
             $ref: '#/components/schemas/TestWorkflowEvent'
         execution:
           $ref: '#/components/schemas/TestWorkflowExecutionSchema'
+        timeouts:
+          $ref: '#/components/schemas/TestWorkflowTimeouts'
         pvcs:
           type: object
           additionalProperties:
@@ -6555,6 +6729,8 @@ components:
             $ref: '#/components/schemas/TestWorkflowEvent'
         execution:
           $ref: '#/components/schemas/TestWorkflowExecutionSchema'
+        timeouts:
+          $ref: '#/components/schemas/TestWorkflowTimeouts'
         pvcs:
           type: object
           additionalProperties:
@@ -6598,6 +6774,9 @@ components:
     TestWorkflowIndependentStep:
       type: object
       properties:
+        id:
+          type: string
+          description: stable identifier for referencing this step in expressions
         name:
           type: string
           description: readable name for the step
@@ -6663,6 +6842,9 @@ components:
     TestWorkflowStep:
       type: object
       properties:
+        id:
+          type: string
+          description: stable identifier for referencing this step in expressions
         name:
           type: string
           description: readable name for the step
@@ -7156,6 +7338,8 @@ components:
           type: string
         securityContext:
           $ref: '#/components/schemas/PodSecurityContext'
+        disableFsGroupDefaulting:
+          $ref: '#/components/schemas/BoxedBoolean'
         hostname:
           type: string
         subdomain:
@@ -7457,6 +7641,9 @@ components:
           type: integer
           format: int64
           description: test workflow execution generation
+        error:
+          type: string
+          description: error message if the execution failed
     TestWorkflowTagValue:
       type: object
       description: tag values to pass to the test workflow execution
@@ -7514,6 +7701,7 @@ components:
       enum:
         - basic
         - header
+        - github
     BoxedStringList:
       type: object
       properties:
@@ -7535,6 +7723,13 @@ components:
       properties:
         value:
           type: integer
+      required:
+        - value
+    TemplatableBoxedInteger:
+      type: object
+      properties:
+        value:
+          type: string
       required:
         - value
     BoxedBoolean:
@@ -7595,18 +7790,41 @@ components:
     SecurityContext:
       type: object
       properties:
+        capabilities:
+          $ref: '#/components/schemas/Capabilities'
         privileged:
           $ref: '#/components/schemas/BoxedBoolean'
+        seLinuxOptions:
+          $ref: '#/components/schemas/SELinuxOptions'
+        windowsOptions:
+          $ref: '#/components/schemas/WindowsSecurityContextOptions'
         runAsUser:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: '#/components/schemas/TemplatableBoxedInteger'
         runAsGroup:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: '#/components/schemas/TemplatableBoxedInteger'
         runAsNonRoot:
           $ref: '#/components/schemas/BoxedBoolean'
         readOnlyRootFilesystem:
           $ref: '#/components/schemas/BoxedBoolean'
         allowPrivilegeEscalation:
           $ref: '#/components/schemas/BoxedBoolean'
+        procMount:
+          $ref: '#/components/schemas/BoxedString'
+        seccompProfile:
+          $ref: '#/components/schemas/SeccompProfile'
+        appArmorProfile:
+          $ref: '#/components/schemas/AppArmorProfile'
+    Capabilities:
+      type: object
+      properties:
+        add:
+          type: array
+          items:
+            type: string
+        drop:
+          type: array
+          items:
+            type: string
     PodSecurityContext:
       type: object
       properties:
@@ -7615,9 +7833,9 @@ components:
         windowsOptions:
           $ref: '#/components/schemas/WindowsSecurityContextOptions'
         runAsUser:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: '#/components/schemas/TemplatableBoxedInteger'
         runAsGroup:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: '#/components/schemas/TemplatableBoxedInteger'
         runAsNonRoot:
           $ref: '#/components/schemas/BoxedBoolean'
         supplementalGroups:
@@ -7628,7 +7846,7 @@ components:
         supplementalGroupsPolicy:
           $ref: '#/components/schemas/BoxedString'
         fsGroup:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: '#/components/schemas/TemplatableBoxedInteger'
         sysctls:
           type: array
           items:
@@ -8775,6 +8993,38 @@ components:
       type: string
       enum:
         - kubernetes
+    ClusterResource:
+      description: One GVK the cluster exposes, with the agent's watch permission.
+      type: object
+      required:
+        - version
+        - kind
+        - resource
+        - namespaced
+        - canWatch
+      properties:
+        group:
+          type: string
+          description: API group (empty for core resources like Pod, Service).
+          example: argoproj.io
+        version:
+          type: string
+          example: v1alpha1
+        kind:
+          type: string
+          example: Rollout
+        resource:
+          type: string
+          description: Plural resource name as used in RBAC rules.
+          example: rollouts
+        namespaced:
+          type: boolean
+          description: Cluster-scoped resources (Node, ClusterRole, ...) have this false.
+        canWatch:
+          type: boolean
+          description: >-
+            True when the agent ServiceAccount holds list+watch on this
+            resource.
     Syncable:
       description: >
         source information about resources that may have been synced from
