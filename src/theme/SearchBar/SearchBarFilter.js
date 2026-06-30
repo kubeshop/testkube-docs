@@ -40,16 +40,6 @@ export default function SearchBarFilter({
             onOptionClick("indexPrefix: reference-doc");
           }}
         />
-
-        <SearchOption
-          label="Legacy"
-          optionKey="indexPrefix: legacy-doc"
-          currentIndexPrefix={currentIndexPrefix}
-          onClick={(label) => {
-            setCurrentOption(label);
-            onOptionClick("indexPrefix: legacy-doc");
-          }}
-        />
         <Tooltip />
       </div>
     </div>
@@ -81,9 +71,6 @@ function Tooltip() {
         </div>
         <div>
           <b>Reference</b> - CRD, CLI and OpenAPI reference documentation.
-        </div>
-        <div>
-          <b>Legacy</b> - Legacy Test/Suite/Executor documentation.
         </div>
       </div>
     </div>
