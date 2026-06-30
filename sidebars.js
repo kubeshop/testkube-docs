@@ -28,7 +28,7 @@ const sidebars = {
       items: [
         {
           type: "doc",
-          label: "Testkube OSS",
+          label: "Testkube Open Source",
           id: "articles/getting-started-with-open-source",
         },
         {
@@ -311,21 +311,25 @@ const sidebars = {
               type: "doc",
               label: "Services",
               id: "articles/test-workflows-services",
+              className: "sidebar-commercial-category",
             },
             {
               type: "doc",
               label: "Parallelization",
               id: "articles/test-workflows-parallel",
+              className: "sidebar-commercial-category",
             },
             {
               type: "doc",
               label: "Sharding & Matrix Params",
               id: "articles/test-workflows-matrix-and-sharding",
+              className: "sidebar-commercial-category",
             },
             {
               type: "doc",
               label: "Concurrency & Queueing",
               id: "articles/test-workflows-concurrency-queueing",
+              className: "sidebar-commercial-category",
             },
             {
               type: "doc",
@@ -346,6 +350,7 @@ const sidebars = {
               type: "doc",
               label: "Workflow Orchestration",
               id: "articles/test-workflows-test-suites",
+              className: "sidebar-commercial-category",
             },
             {
               type: "doc",
@@ -944,6 +949,7 @@ const sidebars = {
                   type: "doc",
                   label: "Distributed",
                   id: "articles/examples/k6-distributed",
+                  className: "sidebar-commercial-category",
                 },
                 {
                   type: "link",
@@ -975,6 +981,7 @@ const sidebars = {
                   type: "doc",
                   label: "Distributed",
                   id: "articles/examples/jmeter-distributed",
+                  className: "sidebar-commercial-category",
                 },
                 {
                   type: "doc",
@@ -1001,6 +1008,7 @@ const sidebars = {
                   type: "doc",
                   label: "Distributed",
                   id: "articles/examples/locust-distributed",
+                  className: "sidebar-commercial-category",
                 },
               ],
             },
@@ -1028,11 +1036,13 @@ const sidebars = {
                   type: "doc",
                   label: "Sharded",
                   id: "articles/examples/cypress-sharded",
+                  className: "sidebar-commercial-category",
                 },
                 {
                   type: "link",
                   label: "Scaling Cypress Tests",
                   href: "https://testkube.io/learn/scaling-cypress-tests-parallelise-your-end-to-end-tests-with-testkube",
+                  className: "sidebar-commercial-category",
                 },
               ],
             },
@@ -1049,6 +1059,7 @@ const sidebars = {
                   type: "doc",
                   label: "Sharded",
                   id: "articles/examples/playwright-sharded",
+                  className: "sidebar-commercial-category",
                 },
                 {
                   type: "doc",
@@ -1065,11 +1076,13 @@ const sidebars = {
                   type: "doc",
                   label: "Basic",
                   id: "articles/examples/selenium-basic",
+                  className: "sidebar-commercial-category",
                 },
                 {
                   type: "doc",
                   label: "Advanced",
                   id: "articles/examples/selenium-advanced",
+                  className: "sidebar-commercial-category",
                 },
                 {
                   type: "link",
@@ -1080,6 +1093,7 @@ const sidebars = {
                   type: "link",
                   label: "Selenium Grid with Testkube",
                   href: "https://testkube.io/learn/faster-smarter-selenium-testing-with-testkube-on-kubernetes",
+                  className: "sidebar-commercial-category",
                 },
               ],
             },
@@ -1096,6 +1110,7 @@ const sidebars = {
                   type: "doc",
                   label: "Parallelized",
                   id: "articles/examples/robot-framework-parallel",
+                  className: "sidebar-commercial-category",
                 },
                 {
                   type: "link",
@@ -1178,6 +1193,7 @@ const sidebars = {
               type: "doc",
               label: "TestContainers",
               id: "articles/examples/test-containers-basic",
+              className: "sidebar-commercial-category",
             },
             {
               type: "link",
@@ -1386,16 +1402,6 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "Open Source Licensing FAQ",
-          id: "articles/testkube-licensing-FAQ",
-        },
-        {
-          type: "doc",
-          label: "Contributing",
-          id: "articles/contributing",
-        },
-        {
-          type: "doc",
           label: "Architecture",
           id: "articles/architecture",
         },
@@ -1492,6 +1498,22 @@ const sidebars = {
             },
           ],
         },
+        {
+          type: "category",
+          label: "Open Source",
+          items: [
+            {
+              type: "doc",
+              label: "Contributing",
+              id: "articles/contributing",
+            },
+            {
+              type: "doc",
+              label: "Open Source Licensing FAQ",
+              id: "articles/testkube-licensing-FAQ",
+            },
+          ],
+        },
       ],
     },
     {
@@ -1504,135 +1526,9 @@ const sidebars = {
       value: "<hr class='sidebar-hr'/>",
     },
     {
-      type: "category",
-      label: "Legacy Documentation",
-      link: {
-        type: "doc",
-        id: "articles/legacy-features",
-      },
-      items: [
-        {
-          type: "doc",
-          label: "Legacy Deprecation",
-          id: "articles/legacy-deprecation",
-        },
-        {
-          type: "doc",
-          label: "Cached Test Results",
-          id: "articles/cached-results",
-        },
-        {
-          type: "doc",
-          label: "Creating Your First Test",
-          id: "articles/creating-first-test",
-        },
-        {
-          type: "doc",
-          label: "Test Sources",
-          id: "articles/test-sources",
-        },
-        {
-          type: "doc",
-          label: "Artifact Mgmt",
-          id: "articles/artifacts",
-        },
-        {
-          type: "category",
-          label: "Tests",
-          items: [
-            "articles/creating-tests",
-            "articles/running-tests",
-            "articles/getting-tests-results",
-            "articles/adding-tests-variables",
-            "articles/adding-timeout",
-          ],
-        },
-        {
-          type: "category",
-          label: "Test Suites",
-          items: [
-            "articles/creating-test-suites",
-            "articles/running-test-suites",
-            "articles/getting-test-suites-results",
-          ],
-        },
-        {
-          type: "category",
-          label: "Test Types",
-          items: [
-            "test-types/executor-artillery",
-            "test-types/executor-curl",
-            "test-types/executor-cypress",
-            "test-types/executor-ginkgo",
-            "test-types/executor-gradle",
-            "test-types/executor-jmeter",
-            "test-types/executor-k6",
-            "test-types/executor-kubepug",
-            "test-types/executor-kubent",
-            "test-types/executor-maven",
-            "test-types/executor-playwright",
-            "test-types/executor-postman",
-            "test-types/executor-pytest",
-            "test-types/executor-soapui",
-            "test-types/executor-tracetest",
-            "test-types/executor-zap",
-            "test-types/prebuilt-executor",
-            "test-types/container-executor",
-            "test-types/executor-distributed-jmeter",
-          ],
-        },
-        {
-          type: "category",
-          label: "Legacy Tests",
-          items: [
-            {
-              type: "doc",
-              label: "Distributed JMeter",
-              id: "test-types/executor-distributed-jmeter",
-            },
-            {
-              type: "doc",
-              label: "Container Executor",
-              id: "test-types/container-executor",
-            },
-            {
-              type: "doc",
-              label: "Pre-built Executor",
-              id: "test-types/prebuilt-executor",
-            },
-          ],
-        },
-        { type: "doc", label: "Deprecations", id: "articles/deprecations" },
-        {
-          type: "doc",
-          label: "Generating Test CRDs",
-          id: "articles/generate-test-crds",
-        },
-        {
-          type: "doc",
-          label: "Variables and Secrets",
-          id: "articles/adding-tests-secrets",
-        },
-
-        {
-          type: "doc",
-          label: "Dashboard Settings",
-          id: "articles/testkube-dashboard-general-settings",
-        },
-
-        { type: "doc", label: "Templates", id: "articles/templates" },
-        "articles/legacy-architecture",
-        {
-          type: "category",
-          label: "Legacy CLI Commands",
-          items: [
-            {
-              type: "autogenerated",
-              dirName: "legacy-cli",
-            },
-          ],
-        },
-      ],
+      type: "html",
+      value:
+        "<div class='sidebar-legend'><span class='sidebar-legend-icon'></span><span>= Commercial Only</span></div>",
     },
   ],
 };
