@@ -67,9 +67,34 @@ With OAuth, you just provide the endpoint URL. No headers, no tokens — your MC
 
 ### Claude Code
 
+Adding the server and authenticating are two separate steps.
+
+**1. Register the server.** This only saves the configuration — it does not authenticate:
+
 ```bash
 claude mcp add --transport http testkube https://api.testkube.io/organizations/{organization_id}/environments/{environment_id}/mcp
 ```
+
+**2. Check the status.** Running `claude mcp list` shows the server as `Needs authentication`:
+
+```bash
+claude mcp list
+# testkube: https://api.testkube.io/organizations/.../mcp (HTTP) - ! Needs authentication
+```
+
+:::info `Needs authentication` is expected
+This status is **not** an error. `claude mcp add` only registers the endpoint — it does not sign you in. The endpoint correctly responds that a login is required, and Claude Code surfaces that as `Needs authentication` until you complete the next step.
+:::
+
+**3. Authenticate.** Start Claude Code, then open the MCP manager and sign in:
+
+```bash
+claude
+```
+
+Inside the session, run `/mcp`, select **testkube**, choose **Authenticate**, and complete the login in the browser window that opens. Claude Code stores the token, so you won't need to repeat this in future sessions.
+
+**4. Confirm.** Back in Claude Code, the server status changes to `connected` and the Testkube tools become available. You can verify any time with `/mcp`.
 
 ### VS Code (GitHub Copilot)
 
