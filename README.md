@@ -170,7 +170,7 @@ Follow these steps:
 5. Run the below command in the root of the above cloned project, which should generate updated .mdx files in this repo:
 
 ```
-./crd-ref-docs --source-path=<path to cloned testkube repo>/api --config=config.yaml --renderer=mdx --output-path=<path to testkube-docs repo>/docs/articles/crds/ --output-mode=version
+./crd-ref-docs --source-path=<path to cloned testkube repo>/api --config=<path to testkube-docs repo>/config.yaml --renderer=mdx --output-path=<path to testkube-docs repo>/docs/articles/crds/ --output-mode=version
 ```
 
 6. Make sure the links and info in `/docs/articles/crds.md` is correct and up to date
