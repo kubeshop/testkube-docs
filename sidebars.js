@@ -1514,6 +1514,11 @@ const sidebars = {
             },
           ],
         },
+        {
+          type: "doc",
+          label: "Legacy Deprecations",
+          id: "articles/legacy-deprecation",
+        },
       ],
     },
     {
