@@ -1412,16 +1412,6 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "tests.testkube.io/v2",
-              id: "articles/crds/tests.testkube.io-v2",
-            },
-            {
-              type: "doc",
-              label: "tests.testkube.io/v3",
-              id: "articles/crds/tests.testkube.io-v3",
-            },
-            {
-              type: "doc",
               label: "executor.testkube.io/v1",
               id: "articles/crds/executor.testkube.io-v1",
             },

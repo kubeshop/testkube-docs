@@ -2,11 +2,7 @@
   <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
-# Testkube API Reference
-
-import LegacyWarning from '../_legacy-warning.mdx';
-
-<LegacyWarning />
+# API Reference
 
 ## Packages
 - [tests.testkube.io/v1](#teststestkubeiov1)
@@ -17,20 +13,6 @@ import LegacyWarning from '../_legacy-warning.mdx';
 Package v1 contains API Schema definitions for the testkube v1 API group
 
 ### Resource Types
-- [Script](#script)
-- [ScriptList](#scriptlist)
-- [Template](#template)
-- [TemplateList](#templatelist)
-- [Test](#test)
-- [TestExecution](#testexecution)
-- [TestExecutionList](#testexecutionlist)
-- [TestList](#testlist)
-- [TestSource](#testsource)
-- [TestSourceList](#testsourcelist)
-- [TestSuite](#testsuite)
-- [TestSuiteExecution](#testsuiteexecution)
-- [TestSuiteExecutionList](#testsuiteexecutionlist)
-- [TestSuiteList](#testsuitelist)
 - [TestTrigger](#testtrigger)
 - [TestTriggerList](#testtriggerlist)
 
@@ -79,6 +61,22 @@ _Appears in:_
 | `sidecarScraper` _boolean_ | run scraper as pod sidecar container |  |  |
 
 
+### AssertionResult
+
+
+
+execution result data
+
+
+
+_Appears in:_
+- [ExecutionStepResult](#executionstepresult)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ |  |  |  |
+| `status` _string_ |  |  |  |
+| `errorMessage` _string_ |  |  |  |
 
 
 ### EnvReference
@@ -224,7 +222,7 @@ _Appears in:_
 
 ### ExecutionResultReports
 
-_Underlying type:_ _[struct\{Junit string "json:\"junit,omitempty\""}](#struct{junit-string-"json:\"junit,omitempty\""})_
+
 
 
 
@@ -233,6 +231,9 @@ _Underlying type:_ _[struct\{Junit string "json:\"junit,omitempty\""}](#struct{j
 _Appears in:_
 - [ExecutionResult](#executionresult)
 
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `junit` _string_ |  |  |  |
 
 
 ### ExecutionStatus
@@ -259,7 +260,7 @@ _Appears in:_
 
 ### ExecutionStepResult
 
-_Underlying type:_ _[struct\{Name string "json:\"name\""; Duration string "json:\"duration,omitempty\""; Status string "json:\"status\""; AssertionResults []AssertionResult "json:\"assertionResults,omitempty\""}](#struct{name-string-"json:\"name\"";-duration-string-"json:\"duration,omitempty\"";-status-string-"json:\"status\"";-assertionresults-[]assertionresult-"json:\"assertionresults,omitempty\""})_
+
 
 execution result data
 
@@ -268,6 +269,30 @@ execution result data
 _Appears in:_
 - [ExecutionResult](#executionresult)
 
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ | step name |  |  |
+| `duration` _string_ |  |  |  |
+| `status` _string_ | execution step status |  |  |
+| `assertionResults` _[AssertionResult](#assertionresult) array_ |  |  |  |
+
+
+### GitAuthType
+
+_Underlying type:_ _string_
+
+GitAuthType defines git auth type
+
+_Validation:_
+- Enum: [basic header]
+
+_Appears in:_
+- [Repository](#repository)
+
+| Field | Description |
+| --- | --- |
+| `basic` | GitAuthTypeBasic for git basic auth requests<br /> |
+| `header` | GitAuthTypeHeader for git header auth requests<br /> |
 
 
 
@@ -312,7 +337,7 @@ _Appears in:_
 
 ### PodResourcesRequest
 
-_Underlying type:_ _[struct\{Requests *ResourceRequest "json:\"requests,omitempty\""; Limits *ResourceRequest "json:\"limits,omitempty\""}](#struct{requests-*resourcerequest-"json:\"requests,omitempty\"";-limits-*resourcerequest-"json:\"limits,omitempty\""})_
+
 
 pod resources request specification
 
@@ -321,11 +346,15 @@ pod resources request specification
 _Appears in:_
 - [PodRequest](#podrequest)
 
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `requests` _[ResourceRequest](#resourcerequest)_ |  |  |  |
+| `limits` _[ResourceRequest](#resourcerequest)_ |  |  |  |
 
 
 ### Repository
 
-_Underlying type:_ _[struct\{Type_ string "json:\"type,omitempty\""; Uri string "json:\"uri,omitempty\""; Branch string "json:\"branch,omitempty\""; Commit string "json:\"commit,omitempty\""; Path string "json:\"path,omitempty\""; UsernameSecret *SecretRef "json:\"usernameSecret,omitempty\""; TokenSecret *SecretRef "json:\"tokenSecret,omitempty\""; CertificateSecret string "json:\"certificateSecret,omitempty\""; WorkingDir string "json:\"workingDir,omitempty\""; AuthType GitAuthType "json:\"authType,omitempty\""}](#struct{type_-string-"json:\"type,omitempty\"";-uri-string-"json:\"uri,omitempty\"";-branch-string-"json:\"branch,omitempty\"";-commit-string-"json:\"commit,omitempty\"";-path-string-"json:\"path,omitempty\"";-usernamesecret-*secretref-"json:\"usernamesecret,omitempty\"";-tokensecret-*secretref-"json:\"tokensecret,omitempty\"";-certificatesecret-string-"json:\"certificatesecret,omitempty\"";-workingdir-string-"json:\"workingdir,omitempty\"";-authtype-gitauthtype-"json:\"authtype,omitempty\""})_
+
 
 Repository represents VCS repo, currently we're handling Git only
 
@@ -334,6 +363,18 @@ Repository represents VCS repo, currently we're handling Git only
 _Appears in:_
 - [TestContent](#testcontent)
 
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `type` _string_ | VCS repository type |  |  |
+| `uri` _string_ | uri of content file or git directory |  |  |
+| `branch` _string_ | branch/tag name for checkout |  |  |
+| `commit` _string_ | commit id (sha) for checkout |  |  |
+| `path` _string_ | if needed we can checkout particular path (dir or file) in case of BIG/mono repositories |  |  |
+| `usernameSecret` _[SecretRef](#secretref)_ |  |  |  |
+| `tokenSecret` _[SecretRef](#secretref)_ |  |  |  |
+| `certificateSecret` _string_ | git auth certificate secret for private repositories |  |  |
+| `workingDir` _string_ | if provided we checkout the whole repository and run test from this directory |  |  |
+| `authType` _[GitAuthType](#gitauthtype)_ | auth type for git requests |  | Enum: [basic header] <br /> |
 
 
 ### RepositoryParameters
@@ -355,6 +396,21 @@ _Appears in:_
 | `workingDir` _string_ | if provided we checkout the whole repository and run test from this directory |  |  |
 
 
+### ResourceRequest
+
+
+
+resource request specification
+
+
+
+_Appears in:_
+- [PodResourcesRequest](#podresourcesrequest)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `cpu` _string_ | requested cpu units |  |  |
+| `memory` _string_ | requested memory units |  |  |
 
 
 ### RunningContext
@@ -400,83 +456,26 @@ _Appears in:_
 | `` |  |
 
 
-### Script
-
-
-
-Script is the Schema for the scripts API
-
-
-
-_Appears in:_
-- [ScriptList](#scriptlist)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `apiVersion` _string_ | `tests.testkube.io/v1` | | |
-| `kind` _string_ | `Script` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
-| `spec` _[ScriptSpec](#scriptspec)_ |  |  |  |
-| `status` _[ScriptStatus](#scriptstatus)_ |  |  |  |
-
-
-### ScriptList
-
-
-
-ScriptList contains a list of Script
 
 
 
 
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `apiVersion` _string_ | `tests.testkube.io/v1` | | |
-| `kind` _string_ | `ScriptList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
-| `items` _[Script](#script) array_ |  |  |  |
-
-
-### ScriptSpec
+### SecretRef
 
 
 
-ScriptSpec defines the desired state of Script
+Testkube internal reference for secret storage in Kubernetes secrets
 
 
 
 _Appears in:_
-- [Script](#script)
+- [Repository](#repository)
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `type` _string_ | script type |  |  |
-| `name` _string_ | script execution custom name |  |  |
-| `params` _object (keys:string, values:string)_ | execution params passed to executor |  |  |
-| `content` _string_ | script content as string (content depends from executor) |  |  |
-| `input-type` _string_ | script content type can be:  - direct content - created from file, - git repo directory checkout in case when test is some kind of project or have more than one file, |  |  |
-| `repository` _[Repository](#repository)_ | repository details if exists |  |  |
-| `tags` _string array_ |  |  |  |
-
-
-### ScriptStatus
-
-
-
-ScriptStatus defines the observed state of Script
-
-
-
-_Appears in:_
-- [Script](#script)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `last_execution` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ |  |  |  |
-| `executions_count` _integer_ |  |  |  |
-
-
+| `namespace` _string_ | object kubernetes namespace |  |  |
+| `name` _string_ | object name |  |  |
+| `key` _string_ | object key |  |  |
 
 
 ### SuiteExecution
@@ -534,71 +533,7 @@ _Appears in:_
 | `timeout` |  |
 
 
-### Template
 
-
-
-Template is the Schema for the Templates API
-
-
-
-_Appears in:_
-- [TemplateList](#templatelist)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `apiVersion` _string_ | `tests.testkube.io/v1` | | |
-| `kind` _string_ | `Template` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
-| `spec` _[TemplateSpec](#templatespec)_ |  |  |  |
-| `status` _[TemplateStatus](#templatestatus)_ |  |  |  |
-
-
-### TemplateList
-
-
-
-TemplateList contains a list of Template
-
-
-
-
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `apiVersion` _string_ | `tests.testkube.io/v1` | | |
-| `kind` _string_ | `TemplateList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
-| `items` _[Template](#template) array_ |  |  |  |
-
-
-### TemplateSpec
-
-
-
-TemplateSpec defines the desired state of Template
-
-
-
-_Appears in:_
-- [Template](#template)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `type` _[TemplateType](#templatetype)_ |  |  | Enum: [job container cronjob scraper pvc webhook pod] <br /> |
-| `body` _string_ | template body to use |  |  |
-
-
-### TemplateStatus
-
-
-
-TemplateStatus defines the observed state of Template
-
-
-
-_Appears in:_
-- [Template](#template)
 
 
 
@@ -623,26 +558,6 @@ _Appears in:_
 | `pvc` |  |
 | `webhook` |  |
 | `pod` |  |
-
-
-### Test
-
-
-
-Test is the Schema for the tests API
-
-
-
-_Appears in:_
-- [TestList](#testlist)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `apiVersion` _string_ | `tests.testkube.io/v1` | | |
-| `kind` _string_ | `Test` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
-| `spec` _[TestSpec](#testspec)_ |  |  |  |
-| `status` _[TestStatus](#teststatus)_ |  |  |  |
 
 
 ### TestContent
@@ -701,163 +616,11 @@ _Appears in:_
 | `git` |  |
 
 
-### TestExecution
 
 
 
-TestExecution is the Schema for the testexecutions API
 
 
-
-_Appears in:_
-- [TestExecutionList](#testexecutionlist)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `apiVersion` _string_ | `tests.testkube.io/v1` | | |
-| `kind` _string_ | `TestExecution` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
-| `spec` _[TestExecutionSpec](#testexecutionspec)_ |  |  |  |
-| `status` _[TestExecutionStatus](#testexecutionstatus)_ |  |  |  |
-
-
-### TestExecutionList
-
-
-
-TestExecutionList contains a list of TestExecution
-
-
-
-
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `apiVersion` _string_ | `tests.testkube.io/v1` | | |
-| `kind` _string_ | `TestExecutionList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
-| `items` _[TestExecution](#testexecution) array_ |  |  |  |
-
-
-### TestExecutionSpec
-
-
-
-TestExecutionSpec defines the desired state of TestExecution
-
-
-
-_Appears in:_
-- [TestExecution](#testexecution)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `test` _[ObjectRef](#objectref)_ |  |  |  |
-| `executionRequest` _[ExecutionRequest](#executionrequest)_ |  |  |  |
-
-
-### TestExecutionStatus
-
-
-
-TestExecutionStatus defines the observed state of TestExecution
-
-
-
-_Appears in:_
-- [TestExecution](#testexecution)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `latestExecution` _[Execution](#execution)_ | INSERT ADDITIONAL STATUS FIELD - define observed state of cluster<br />Important: Run "make" to regenerate code after modifying this file |  |  |
-| `generation` _integer_ | test execution generation |  |  |
-
-
-### TestList
-
-
-
-TestList contains a list of Test
-
-
-
-
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `apiVersion` _string_ | `tests.testkube.io/v1` | | |
-| `kind` _string_ | `TestList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
-| `items` _[Test](#test) array_ |  |  |  |
-
-
-### TestSource
-
-
-
-TestSource is the Schema for the testsources API
-
-
-
-_Appears in:_
-- [TestSourceList](#testsourcelist)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `apiVersion` _string_ | `tests.testkube.io/v1` | | |
-| `kind` _string_ | `TestSource` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
-| `spec` _[TestSourceSpec](#testsourcespec)_ |  |  |  |
-| `status` _[TestSourceStatus](#testsourcestatus)_ |  |  |  |
-
-
-### TestSourceList
-
-
-
-TestSourceList contains a list of TestSource
-
-
-
-
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `apiVersion` _string_ | `tests.testkube.io/v1` | | |
-| `kind` _string_ | `TestSourceList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
-| `items` _[TestSource](#testsource) array_ |  |  |  |
-
-
-### TestSourceSpec
-
-
-
-TestSourceSpec defines the desired state of TestSource
-
-
-
-_Appears in:_
-- [TestSource](#testsource)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `type` _[TestSourceType](#testsourcetype)_ |  |  | Enum: [string file-uri git-file git-dir git] <br /> |
-| `repository` _[Repository](#repository)_ | repository of test content |  |  |
-| `data` _string_ | test content body |  |  |
-| `uri` _string_ | uri of test content |  |  |
-
-
-### TestSourceStatus
-
-
-
-TestSourceStatus defines the observed state of TestSource
-
-
-
-_Appears in:_
-- [TestSource](#testsource)
 
 
 
@@ -882,37 +645,7 @@ _Appears in:_
 | `git` |  |
 
 
-### TestSpec
 
-
-
-TestSpec defines the desired state of Test
-
-
-
-_Appears in:_
-- [Test](#test)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `before` _[TestStepSpec](#teststepspec) array_ | Before steps is list of scripts which will be sequentially orchestrated |  |  |
-| `steps` _[TestStepSpec](#teststepspec) array_ | Steps is list of scripts which will be sequentially orchestrated |  |  |
-| `after` _[TestStepSpec](#teststepspec) array_ | After steps is list of scripts which will be sequentially orchestrated |  |  |
-| `repeats` _integer_ |  |  |  |
-| `description` _string_ |  |  |  |
-| `tags` _string array_ |  |  |  |
-
-
-### TestStatus
-
-
-
-TestStatus defines the observed state of Test
-
-
-
-_Appears in:_
-- [Test](#test)
 
 
 
@@ -970,26 +703,6 @@ _Appears in:_
 
 
 
-### TestSuite
-
-
-
-TestSuite is the Schema for the testsuites API
-
-
-
-_Appears in:_
-- [TestSuiteList](#testsuitelist)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `apiVersion` _string_ | `tests.testkube.io/v1` | | |
-| `kind` _string_ | `TestSuite` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
-| `spec` _[TestSuiteSpec](#testsuitespec)_ |  |  |  |
-| `status` _[TestSuiteStatus](#testsuitestatus)_ |  |  |  |
-
-
 ### TestSuiteBatchStep
 
 
@@ -1027,44 +740,6 @@ _Appears in:_
 | `duration` _string_ | step duration |  |  |
 
 
-### TestSuiteExecution
-
-
-
-TestSuiteExecution is the Schema for the testsuiteexecutions API
-
-
-
-_Appears in:_
-- [TestSuiteExecutionList](#testsuiteexecutionlist)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `apiVersion` _string_ | `tests.testkube.io/v1` | | |
-| `kind` _string_ | `TestSuiteExecution` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
-| `spec` _[TestSuiteExecutionSpec](#testsuiteexecutionspec)_ |  |  |  |
-| `status` _[TestSuiteExecutionStatus](#testsuiteexecutionstatus)_ |  |  |  |
-
-
-### TestSuiteExecutionList
-
-
-
-TestSuiteExecutionList contains a list of TestSuiteExecution
-
-
-
-
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `apiVersion` _string_ | `tests.testkube.io/v1` | | |
-| `kind` _string_ | `TestSuiteExecutionList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
-| `items` _[TestSuiteExecution](#testsuiteexecution) array_ |  |  |  |
-
-
 ### TestSuiteExecutionRequest
 
 
@@ -1097,91 +772,11 @@ _Appears in:_
 | `disableWebhooks` _boolean_ | whether webhooks should be disabled for this execution |  |  |
 
 
-### TestSuiteExecutionSpec
-
-
-
-TestSuiteExecutionSpec defines the desired state of TestSuiteExecution
-
-
-
-_Appears in:_
-- [TestSuiteExecution](#testsuiteexecution)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `testSuite` _[ObjectRef](#objectref)_ |  |  |  |
-| `executionRequest` _[TestSuiteExecutionRequest](#testsuiteexecutionrequest)_ |  |  |  |
-
-
-### TestSuiteExecutionStatus
-
-
-
-TestSuiteExecutionStatus defines the observed state of TestSuiteExecution
-
-
-
-_Appears in:_
-- [TestSuiteExecution](#testsuiteexecution)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `latestExecution` _[SuiteExecution](#suiteexecution)_ | INSERT ADDITIONAL STATUS FIELD - define observed state of cluster<br />Important: Run "make" to regenerate code after modifying this file |  |  |
-| `generation` _integer_ | test status execution generation |  |  |
-
-
-### TestSuiteList
-
-
-
-TestSuiteList contains a list of TestSuite
 
 
 
 
 
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `apiVersion` _string_ | `tests.testkube.io/v1` | | |
-| `kind` _string_ | `TestSuiteList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
-| `items` _[TestSuite](#testsuite) array_ |  |  |  |
-
-
-### TestSuiteSpec
-
-
-
-TestSuiteSpec defines the desired state of TestSuite
-
-
-
-_Appears in:_
-- [TestSuite](#testsuite)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `before` _[TestSuiteStepSpec](#testsuitestepspec) array_ | Before steps is list of tests which will be sequentially orchestrated |  |  |
-| `steps` _[TestSuiteStepSpec](#testsuitestepspec) array_ | Steps is list of tests which will be sequentially orchestrated |  |  |
-| `after` _[TestSuiteStepSpec](#testsuitestepspec) array_ | After steps is list of tests which will be sequentially orchestrated |  |  |
-| `repeats` _integer_ |  |  |  |
-| `description` _string_ |  |  |  |
-| `schedule` _string_ | schedule in cron job format for scheduled test execution |  |  |
-| `params` _object (keys:string, values:string)_ | DEPRECATED execution params passed to executor |  |  |
-| `variables` _object (keys:string, values:[Variable](#variable))_ | Variables are new params with secrets attached |  |  |
-
-
-### TestSuiteStatus
-
-
-
-TestSuiteStatus defines the observed state of TestSuite
-
-
-
-_Appears in:_
-- [TestSuite](#testsuite)
 
 
 
@@ -1474,6 +1069,70 @@ _Appears in:_
 | `Unknown` |  |
 
 
+### TestTriggerContentGitPullRequest
+
+
+
+TestTriggerContentGitPullRequest defines pull request trigger configuration.
+
+
+
+_Appears in:_
+- [TestTriggerContentGitSpec](#testtriggercontentgitspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `types` _string array_ | Types is a list of PR activity types to watch (e.g. "opened", "synchronize", "reopened", "closed").<br />If empty, all types are watched. |  |  |
+| `branches` _string array_ | Branches is a list of base branch name patterns to watch (glob supported).<br />If empty, PRs targeting any base branch are watched. |  |  |
+| `branchesIgnore` _string array_ | BranchesIgnore is a list of base branch name patterns to exclude (glob supported).<br />Takes precedence over Branches when both match. |  |  |
+
+
+### TestTriggerContentGitSpec
+
+
+
+TestTriggerContentGitSpec defines git repository configuration for content triggers
+
+
+
+_Appears in:_
+- [TestTriggerContentSelector](#testtriggercontentselector)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `uri` _string_ | URI of the git repository |  |  |
+| `branches` _string array_ | Branches is a list of branch name patterns to watch (glob supported, e.g. "main", "release/*").<br />If empty, all branches are watched. |  |  |
+| `branchesIgnore` _string array_ | BranchesIgnore is a list of branch name patterns to exclude (glob supported).<br />Takes precedence over Branches when both match. |  |  |
+| `paths` _string array_ | Paths is a list of file/directory paths to watch for changes (glob supported).<br />If empty, all paths are watched. |  |  |
+| `pathsIgnore` _string array_ | PathsIgnore is a list of file/directory path patterns to exclude (glob supported).<br />Takes precedence over Paths when both match. |  |  |
+| `tags` _string array_ | Tags is a list of tag name patterns to watch (glob supported, e.g. "v*", "v1.*").<br />If empty, tag events are not watched unless Branches is also empty (watch all). |  |  |
+| `tagsIgnore` _string array_ | TagsIgnore is a list of tag name patterns to exclude (glob supported).<br />Takes precedence over Tags when both match. |  |  |
+| `username` _string_ | Plain text username to fetch with |  |  |
+| `usernameFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_ | External username to fetch with |  |  |
+| `token` _string_ | Plain text token to fetch with.<br />Warning: this stores sensitive credentials directly in the CRD spec, which may be persisted in etcd<br />and exposed through Kubernetes API reads or logs. Prefer TokenFrom instead. |  |  |
+| `tokenFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_ | External token to fetch with. Preferred for sensitive credentials. |  |  |
+| `sshKey` _string_ | Plain text SSH private key to fetch with.<br />Warning: this stores sensitive credentials directly in the CRD spec, which may be persisted in etcd<br />and exposed through Kubernetes API reads or logs. Prefer SshKeyFrom instead. |  |  |
+| `sshKeyFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_ | External SSH private key to fetch with. Preferred for sensitive credentials. |  |  |
+| `authType` _[GitAuthType](#gitauthtype)_ | Authorization type for the credentials |  |  |
+| `pullRequest` _[TestTriggerContentGitPullRequest](#testtriggercontentgitpullrequest)_ | PullRequest specifies pull request trigger configuration.<br />When set, the informer uses the GitHub API to poll for PR events. |  |  |
+
+
+### TestTriggerContentSelector
+
+
+
+TestTriggerContentSelector defines what content to watch for trigger events
+
+
+
+_Appears in:_
+- [TestTriggerSpec](#testtriggerspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `git` _[TestTriggerContentGitSpec](#testtriggercontentgitspec)_ | Git specifies a git repository to watch for changes |  |  |
+
+
 ### TestTriggerEvent
 
 _Underlying type:_ _string_
@@ -1481,7 +1140,7 @@ _Underlying type:_ _string_
 TestTriggerEvent defines event for test triggers
 
 _Validation:_
-- Enum: [created modified deleted deployment-scale-update deployment-image-update deployment-env-update deployment-containers-modified deployment-generation-modified deployment-resource-modified event-start-test event-end-test-success event-end-test-failed event-end-test-aborted event-end-test-timeout event-start-testsuite event-end-testsuite-success event-end-testsuite-failed event-end-testsuite-aborted event-end-testsuite-timeout event-queue-testworkflow event-start-testworkflow event-end-testworkflow-success event-end-testworkflow-failed event-end-testworkflow-aborted event-created event-updated event-deleted]
+- Enum: [created modified deleted git-push git-tag-push git-pull-request deployment-scale-update deployment-image-update deployment-env-update deployment-containers-modified deployment-generation-modified deployment-resource-modified event-start-test event-end-test-success event-end-test-failed event-end-test-aborted event-end-test-timeout event-start-testsuite event-end-testsuite-success event-end-testsuite-failed event-end-testsuite-aborted event-end-testsuite-timeout event-queue-testworkflow event-start-testworkflow event-end-testworkflow-success event-end-testworkflow-failed event-end-testworkflow-aborted event-end-testworkflow-canceled event-end-testworkflow-not-passed event-created event-updated event-deleted]
 
 _Appears in:_
 - [TestTriggerSpec](#testtriggerspec)
@@ -1491,6 +1150,9 @@ _Appears in:_
 | `created` |  |
 | `modified` |  |
 | `deleted` |  |
+| `git-push` |  |
+| `git-tag-push` |  |
+| `git-pull-request` |  |
 | `deployment-scale-update` |  |
 | `deployment-image-update` |  |
 | `deployment-env-update` |  |
@@ -1512,6 +1174,8 @@ _Appears in:_
 | `event-end-testworkflow-success` |  |
 | `event-end-testworkflow-failed` |  |
 | `event-end-testworkflow-aborted` |  |
+| `event-end-testworkflow-canceled` |  |
+| `event-end-testworkflow-not-passed` |  |
 | `event-created` |  |
 | `event-updated` |  |
 | `event-deleted` |  |
@@ -1599,7 +1263,7 @@ _Underlying type:_ _string_
 TestTriggerResource defines resource for test triggers
 
 _Validation:_
-- Enum: [pod deployment statefulset daemonset service ingress event configmap]
+- Enum: [pod deployment statefulset daemonset service ingress event configmap content]
 
 _Appears in:_
 - [TestTriggerSpec](#testtriggerspec)
@@ -1614,6 +1278,25 @@ _Appears in:_
 | `ingress` |  |
 | `event` |  |
 | `configmap` |  |
+| `content` |  |
+
+
+### TestTriggerResourceRef
+
+
+
+TestTriggerResourceRef identifies a K8s resource by GVK.
+
+
+
+_Appears in:_
+- [TestTriggerSpec](#testtriggerspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `group` _string_ | Group is the API group (empty for core resources like Pod, Service). |  |  |
+| `version` _string_ | Version is the API version. |  |  |
+| `kind` _string_ | Kind is the resource kind (e.g. Deployment, KafkaTopic). |  |  |
 
 
 ### TestTriggerSelector
@@ -1649,11 +1332,16 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `resource` _[TestTriggerResource](#testtriggerresource)_ | For which Resource do we monitor Event which triggers an Action on certain conditions |  | Enum: [pod deployment statefulset daemonset service ingress event configmap] <br /> |
+| `selector` _[LabelSelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#labelselector-v1-meta)_ | Selector is used to select events which trigger an action |  |  |
+| `resource` _[TestTriggerResource](#testtriggerresource)_ | For which Resource do we monitor Event which triggers an Action on certain conditions |  | Enum: [pod deployment statefulset daemonset service ingress event configmap content] <br /> |
+| `resourceRef` _[TestTriggerResourceRef](#testtriggerresourceref)_ | ResourceRef specifies a resource to watch by Group/Version/Kind.<br />Works for any K8s resource including CRDs. Mutually exclusive with Resource. |  |  |
 | `resourceSelector` _[TestTriggerSelector](#testtriggerselector)_ | ResourceSelector identifies which Kubernetes Objects should be watched |  |  |
-| `event` _[TestTriggerEvent](#testtriggerevent)_ | On which Event for a Resource should an Action be triggered |  | Enum: [created modified deleted deployment-scale-update deployment-image-update deployment-env-update deployment-containers-modified deployment-generation-modified deployment-resource-modified event-start-test event-end-test-success event-end-test-failed event-end-test-aborted event-end-test-timeout event-start-testsuite event-end-testsuite-success event-end-testsuite-failed event-end-testsuite-aborted event-end-testsuite-timeout event-queue-testworkflow event-start-testworkflow event-end-testworkflow-success event-end-testworkflow-failed event-end-testworkflow-aborted event-created event-updated event-deleted] <br /> |
+| `event` _[TestTriggerEvent](#testtriggerevent)_ | On which Event for a Resource should an Action be triggered |  | Enum: [created modified deleted git-push git-tag-push git-pull-request deployment-scale-update deployment-image-update deployment-env-update deployment-containers-modified deployment-generation-modified deployment-resource-modified event-start-test event-end-test-success event-end-test-failed event-end-test-aborted event-end-test-timeout event-start-testsuite event-end-testsuite-success event-end-testsuite-failed event-end-testsuite-aborted event-end-testsuite-timeout event-queue-testworkflow event-start-testworkflow event-end-testworkflow-success event-end-testworkflow-failed event-end-testworkflow-aborted event-end-testworkflow-canceled event-end-testworkflow-not-passed event-created event-updated event-deleted] <br /> |
+| `match` _[WorkflowTriggerFieldCondition](#workflowtriggerfieldcondition) array_ | Match filters which object changes fire the trigger.<br />Each entry evaluates a dot-path on the watched object (e.g. ".status.currentStepIndex",<br />".spec.template.spec.containers.0.image") with an operator. All entries must pass (AND logic). |  |  |
+| `listener` _[Target](#target)_ | Listener selects which listener agent(s) watch the cluster for matching<br />events and fire the trigger, using the same match selector as the action<br />target (e.g. match.id). When empty, every listener-capable agent in the<br />environment that picks up the CRD will fire it (broadcast). Required when<br />match[] is set, because schema-aware match validation is only sound when<br />the firing listener is known at create time: the picker and validator ran<br />against that listener's cluster-resources snapshot, and a different<br />listener may have a different CRD inventory or RBAC. |  |  |
 | `conditionSpec` _[TestTriggerConditionSpec](#testtriggerconditionspec)_ | What resource conditions should be matched |  |  |
 | `probeSpec` _[TestTriggerProbeSpec](#testtriggerprobespec)_ | What resource probes should be matched |  |  |
+| `contentSelector` _[TestTriggerContentSelector](#testtriggercontentselector)_ | ContentSelector identifies which content should be watched for changes |  |  |
 | `action` _[TestTriggerAction](#testtriggeraction)_ | Action represents what needs to be executed for selected Execution |  | Enum: [run] <br /> |
 | `actionParameters` _[TestTriggerActionParameters](#testtriggeractionparameters)_ |  |  |  |
 | `execution` _[TestTriggerExecution](#testtriggerexecution)_ | Execution identifies for which test execution should an Action be executed |  | Enum: [test testsuite testworkflow] <br /> |

@@ -161,16 +161,20 @@ Once run, the generated/updated files need to be committed back to the repo for 
 CRD references docs at are generated from the corresponding GoLang types using a fork of the
 https://github.com/elastic/crd-ref-docs project, available at https://github.com/kubeshop/crd-ref-docs.
 
-The customized Markdown templates are in this repositories [src/crd-templates](src/crd-templates) folder
-
 Follow these steps:
 
-1. Ensure you have pulled the [testkube-operator](https://github.com/kubeshop/testkube-operator) submodule `main` branch to make sure you have the latest types available locally.
-2. Make sure you have go tooling installed.
-3. Set the desired Kubernetes Version to use for outgoing links to reference docs in the `config.yaml` file (at least v1.28)
-4. Run `go generate gen-crds.go`.
-5. Make sure the links and info in `/docs/articles/crds.md` is correct and up to date
-6. Add the deprecation warning after the main headline in all files containing deprecated APIs:
+1. Make sure you have go tooling installed.
+2. Clone the above repo and build the binary with `go build -o crd-ref-docs`.
+3. Ensure you have cloned/pulled the [testkube](https://github.com/kubeshop/testkube)  `main` branch to make sure you have the latest types available locally (in the /api folder).
+4. Set the desired Kubernetes Version to use for outgoing links to reference docs in the `config.yaml` file (at least v1.28)
+5. Run the below command in the root of the above cloned project, which should generate updated .mdx files in this repo:
+
+```
+./crd-ref-docs --source-path=<path to cloned testkube repo>/api --config=<path to testkube-docs repo>/config.yaml --renderer=mdx --output-path=<path to testkube-docs repo>/docs/articles/crds/ --output-mode=version
+```
+
+6. Make sure the links and info in `/docs/articles/crds.md` is correct and up to date
+7. Add the following deprecation warning after the main headline in all files containing deprecated APIs (all except `testworkflows.testkube.io-v1.mdx`):
    ```markdown
     # Testkube API Reference
     

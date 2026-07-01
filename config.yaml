@@ -1,5 +1,25 @@
 # This file is a configuration for crd-ref-docs used to generate documentation from CRD specs.
 processor:
+  # RE2 regular expressions matched against the group-version string (<group>/<version>).
+  # The tests.testkube.io v2 and v3 API versions are fully deprecated, so drop them wholesale
+  # (this also removes their sub-types, avoiding empty generated files). v1 is left intact.
+  ignoreGroupVersions:
+    - '^tests\.testkube\.io/v[23]$'
+  # RE2 regular expressions describing types that should be excluded from the generated documentation.
+  # These are matched against the fully-qualified type name (<package path>.<TypeName>), so each pattern
+  # is anchored with a leading "\." to match the exact kind name and a trailing "(List)?$" to also catch
+  # its generated List type. Everything below is a deprecated (legacy) Testkube CRD kind; only the
+  # testworkflows.testkube.io group (TestWorkflow / TestWorkflowTemplate / TestWorkflowExecution) is current.
+  ignoreTypes:
+    - '\.Test(List)?$'            # testsuite.testkube.io (v1/v2/v3)
+    - '\.TestSuite(List)?$'            # testsuite.testkube.io (v1/v2/v3)
+    - '\.TestSuiteExecution(List)?$'   # testsuiteexecution.testkube.io
+    - '\.TestExecution(List)?$'        # testexecution.testkube.io
+    - '\.TestSource(List)?$'           # testsource.testkube.io
+    - '\.WorkflowTrigger(List)?$'      # workflowtriggers.testkube.io
+    - '\.Template(List)?$'             # template.testkube.io
+    - '\.Script(List)?$'               # tests.testkube.io (Script, v1/v2)
+    - '\.Executor(List)?$'             # executor.testkube.io (Executor)
   ignoreFields:
     - "TypeMeta$"
 render:
