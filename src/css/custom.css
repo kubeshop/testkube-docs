@@ -355,17 +355,48 @@ ul:hover {
   backdrop-filter: none !important;
 }
 
-.pro-badge {
-  width: fit-content;
-  background-color: var(--ifm-color-badge);
-  border: 1px var(--ifm-color-badge-border) solid;
-  border-radius: 4px;
+/* Commercial badge on sidebar categories (parent row only) */
+.theme-doc-sidebar-item-category.sidebar-commercial-category
+  > .menu__list-item-collapsible
+  > .menu__link > span {
+  flex: 0 1 auto;
+}
 
-  color: var(--ifm-color-badge-border);
-  font-size: 75%;
+.theme-doc-sidebar-item-category.sidebar-commercial-category
+  > .menu__list-item-collapsible
+  > .menu__link::before {
+  content: "";
+  display: inline-block;
+  flex-shrink: 0;
+  order: 1;
+  width: 16px;
+  height: 16px;
+  margin-left: 0.45rem;
+  vertical-align: middle;
+  background: url("/img/logo.svg") no-repeat center / contain;
+}
 
-  padding: 0.3rem;
-  margin-top: -10px;
+.theme-doc-sidebar-item-category.sidebar-commercial-category
+  > .menu__list-item-collapsible
+  > .menu__link.menu__link--sublist-caret::after {
+  order: 2;
+  margin-left: auto;
+}
+
+/* Commercial badge on individual doc links */
+.menu__list-item.sidebar-commercial-category > .menu__link > span {
+  flex: 0 1 auto;
+}
+
+.menu__list-item.sidebar-commercial-category > .menu__link::after {
+  content: "";
+  display: inline-block;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-left: 0.45rem;
+  vertical-align: middle;
+  background: url("/img/logo.svg") no-repeat center / contain;
 }
 
 .sidebar-hr {
@@ -373,6 +404,24 @@ ul:hover {
   border: none;
   height: 1px;
   background-color: var(--ifm-color-gray-400);
+}
+
+/* Legend explaining the commercial badge used on sidebar items */
+.sidebar-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 5px 12px 12px 12px;
+  font-size: 0.75rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.sidebar-legend-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  background: url("/img/logo.svg") no-repeat center / contain;
 }
 
 @media screen and (max-width: 996px) {
