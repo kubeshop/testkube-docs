@@ -1,6 +1,6 @@
 :::info
 
-Based on chart `testkube-enterprise` as of version `2.334.0` on 01-07-2026
+Based on chart `testkube-enterprise` as of version `2.334.0` on 02-07-2026
 
 :::
 
@@ -12,6 +12,6 @@ Based on chart `testkube-enterprise` as of version `2.334.0` on 01-07-2026
 | kubeshop/testkube-enterprise-ui:2.11.0 | Testkube dashboard. | [View Report](./testkube-enterprise-ui-2.11.0_linux_amd64.md) | [View Report](./testkube-enterprise-ui-2.11.0_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-enterprise-ui/2.11.0/images/sha256-2331daee57006eef26cdac04c9d96df6939872131eaba375072dc95da6dfd513?context=explore) |
 | kubeshop/testkube-enterprise-worker-service:2.11.0 | Testkube worker service used for background processing. | [View Report](./testkube-enterprise-worker-service-2.11.0_linux_amd64.md) | [View Report](./testkube-enterprise-worker-service-2.11.0_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-enterprise-worker-service/2.11.0/images/sha256-b5d09b5fe5e2df41f9f7fe84a74d282df47557910456c98461149e2274b82007?context=explore) |
 | kubeshop/testkube-migration:2.11.0 | Used to run migrations for MongoDB. | [View Report](./testkube-migration-2.11.0_linux_amd64.md) | [View Report](./testkube-migration-2.11.0_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-migration/2.11.0/images/sha256-93d76161a0bd7ea189b8a98031c292cb5f5b4e88d98ffad5e68e875ccd650825?context=explore) |
-| kubeshop/testkube-minio:2025.10 | n/a | [View Report](./testkube-minio-2025.10_linux_amd64.md) | [View Report](./testkube-minio-2025.10_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-minio/2025.10/images/sha256-909758579645bacf0967d2abb062caf74aa5dac14a04c571e666907de23157ff?context=explore) |
+| kubeshop/testkube-minio:2025.10 | n/a | [View Report](./testkube-minio-2025.10_linux_amd64.md) | [View Report](./testkube-minio-2025.10_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-minio/2025.10/images/sha256-3ead6200c5c747d9da671abd9ac3f78f824b8af019c5884729bcaa2bf3e4ac08?context=explore) |
 | nats:2.11.3-alpine | NATS message broker. | [View Report](./nats-2.11.3-alpine_linux_amd64.md) | [View Report](./nats-2.11.3-alpine_linux_arm64.md) | [View Image](https://hub.docker.com/layers/library/nats/2.11.3-alpine/images/sha256-f6be324fcee27f2a91178d74f77bb4ba3e5a9d2e72ba7d6871f45d14aadca40a?context=explore) |
 | natsio/nats-server-config-reloader:0.22.4 | NATS config reloader. | [View Report](./nats-server-config-reloader-0.22.4_linux_amd64.md) | [View Report](./nats-server-config-reloader-0.22.4_linux_arm64.md) | [View Image](https://hub.docker.com/layers/natsio/nats-server-config-reloader/0.22.4/images/sha256-5ae766be4cda24e82446512651c04f9700e5846b9efb36c57384d484f19d16dd?context=explore) |
