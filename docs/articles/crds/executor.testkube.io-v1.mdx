@@ -2,11 +2,7 @@
   <meta name="docsearch:indexPrefix" content="reference-doc" />
 </head>
 
-# Testkube API Reference
-
-import LegacyWarning from '../_legacy-warning.mdx';
-
-<LegacyWarning />
+# API Reference
 
 ## Packages
 - [executor.testkube.io/v1](#executortestkubeiov1)
@@ -17,8 +13,6 @@ import LegacyWarning from '../_legacy-warning.mdx';
 Package v1 contains API Schema definitions for the executor v1 API group
 
 ### Resource Types
-- [Executor](#executor)
-- [ExecutorList](#executorlist)
 - [Webhook](#webhook)
 - [WebhookList](#webhooklist)
 - [WebhookTemplate](#webhooktemplate)
@@ -76,44 +70,6 @@ _Appears in:_
 | `become-testworkflow-not-passed` |  |
 
 
-### Executor
-
-
-
-Executor is the Schema for the executors API
-
-
-
-_Appears in:_
-- [ExecutorList](#executorlist)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `apiVersion` _string_ | `executor.testkube.io/v1` | | |
-| `kind` _string_ | `Executor` | | |
-| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
-| `spec` _[ExecutorSpec](#executorspec)_ |  |  |  |
-| `status` _[ExecutorStatus](#executorstatus)_ |  |  |  |
-
-
-### ExecutorList
-
-
-
-ExecutorList contains a list of Executor
-
-
-
-
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `apiVersion` _string_ | `executor.testkube.io/v1` | | |
-| `kind` _string_ | `ExecutorList` | | |
-| `metadata` _[ListMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
-| `items` _[Executor](#executor) array_ |  |  |  |
-
-
 ### ExecutorMeta
 
 
@@ -132,45 +88,7 @@ _Appears in:_
 | `tooltips` _object (keys:string, values:string)_ | executor tooltips |  |  |
 
 
-### ExecutorSpec
 
-
-
-ExecutorSpec defines the desired state of Executor
-
-
-
-_Appears in:_
-- [Executor](#executor)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `types` _string array_ | Types defines what types can be handled by executor e.g. "postman/collection", ":curl/command" etc |  |  |
-| `executor_type` _[ExecutorType](#executortype)_ | ExecutorType one of "rest" for rest openapi based executors or "job" which will be default runners for testkube<br />or "container" for container executors |  | Enum: [job container] <br /> |
-| `uri` _string_ | URI for rest based executors |  |  |
-| `image` _string_ | Image for kube-job |  |  |
-| `args` _string array_ | executor binary arguments |  |  |
-| `command` _string array_ | executor default binary command |  |  |
-| `imagePullSecrets` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#localobjectreference-v1-core) array_ | container executor default image pull secrets |  |  |
-| `features` _[Feature](#feature) array_ | Features list of possible features which executor handles |  | Enum: [artifacts junit-report] <br /> |
-| `content_types` _[ScriptContentType](#scriptcontenttype) array_ | ContentTypes list of handled content types |  | Enum: [string file-uri git-file git-dir git] <br /> |
-| `job_template` _string_ | Job template to launch executor |  |  |
-| `jobTemplateReference` _string_ | name of the template resource |  |  |
-| `meta` _[ExecutorMeta](#executormeta)_ | Meta data about executor |  |  |
-| `slaves` _[SlavesMeta](#slavesmeta)_ | Slaves data to run test in distributed environment |  |  |
-| `useDataDirAsWorkingDir` _boolean_ | use data dir as working dir for executor |  |  |
-
-
-### ExecutorStatus
-
-
-
-ExecutorStatus defines the observed state of Executor
-
-
-
-_Appears in:_
-- [Executor](#executor)
 
 
 
@@ -370,6 +288,7 @@ _Appears in:_
 | `config` _object (keys:string, values:[WebhookConfigValue](#webhookconfigvalue))_ | webhook configuration |  |  |
 | `parameters` _[WebhookParameterSchema](#webhookparameterschema) array_ | webhook parameters |  |  |
 | `webhookTemplateRef` _[WebhookTemplateRef](#webhooktemplateref)_ | webhook template reference |  |  |
+| `target` _[Target](#target)_ | Target helps decide on which agent the webhook is executed. |  |  |
 
 
 ### WebhookStatus
@@ -462,6 +381,7 @@ _Appears in:_
 | `disabled` _boolean_ | Disabled will disable the webhook |  |  |
 | `config` _object (keys:string, values:[WebhookConfigValue](#webhookconfigvalue))_ | webhook configuration |  |  |
 | `parameters` _[WebhookParameterSchema](#webhookparameterschema) array_ | webhook parameters |  |  |
+| `target` _[Target](#target)_ | Target helps decide on which agent the webhook is executed. |  |  |
 
 
 ### WebhookTemplateStatus

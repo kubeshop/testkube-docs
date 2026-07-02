@@ -12,14 +12,8 @@ types for use with [Standalone Agent](/articles/install/standalone-agent) and [G
 The following Resource Group/Versions are available (click for documentation)
 
 - [testworkflows.test.io/v1](crds/testworkflows.testkube.io-v1.mdx)
-- [tests.testkube.io/v1](crds/tests.testkube.io-v1.mdx) (Partially deprecated)
-- [tests.testkube.io/v2](crds/tests.testkube.io-v2.mdx) (Deprecated)
-- [tests.testkube.io/v3](crds/tests.testkube.io-v3.mdx) (Deprecated)
-- [executor.testkube.io/v1](crds/executor.testkube.io-v1.mdx) (Partially deprecated)
-
-:::tip
-More detailed schema docs are also available at https://doc.crds.dev/github.com/kubeshop/testkube-operator
-:::
+- [tests.testkube.io/v1](crds/tests.testkube.io-v1.mdx) 
+- [executor.testkube.io/v1](crds/executor.testkube.io-v1.mdx) 
 
 The current CRD definitions can be found in the [kubeshop/testkube](https://github.com/kubeshop/testkube) repository.
 
@@ -48,6 +42,10 @@ testworkflows.testworkflows.testkube.io            2024-05-31T09:53:09Z
 testworkflowtemplates.testworkflows.testkube.io    2024-05-31T09:53:09Z
 webhooks.executor.testkube.io                      2024-05-31T09:53:09Z
 ```
+
+:::note
+Depending on your Testkube version you might still have legacy Testkube CRDs in your installation, as in the list above.
+:::
 
 To check details on one of the CRDs, use `describe`:
 
