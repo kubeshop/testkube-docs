@@ -401,6 +401,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Finding Your Git Provider Token",
+              id: "articles/git-provider-tokens",
+            },
+            {
+              type: "doc",
               label: "Sharing Data Between Steps",
               id: "articles/test-workflows-step-sharing",
             },
