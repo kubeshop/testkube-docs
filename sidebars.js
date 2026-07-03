@@ -23,6 +23,11 @@ const sidebars = {
       id: "index",
     },
     {
+      type: "doc",
+      label: "Open Source",
+      id: "articles/open-source",
+    },
+    {
       type: "category",
       label: "Quickstart",
       items: [
