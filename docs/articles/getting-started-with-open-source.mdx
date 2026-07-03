@@ -1,0 +1,315 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Getting Started with Testkube Open Source
+
+## Prerequisites
+
+Before you begin, make sure you have the following in place:
+
+- **A Kubernetes cluster** (version 1.21+) - a local cluster (e.g. [kind](https://kind.sigs.k8s.io/), [minikube](https://minikube.sigs.k8s.io/), Docker Desktop) works fine for trying things out.
+- **[kubectl](https://kubernetes.io/docs/tasks/tools/)** installed and configured to point at your cluster.
+- **[Helm](https://helm.sh/docs/intro/quickstart/)** (version 3+) - only required if you install the agent with Helm (step 2).
+- **Outbound internet access from the cluster** - the example Test Workflow below clones a public Git repository and pulls the `grafana/k6` container image.
+
+## 1. Install the Testkube CLI
+
+Install the Testkube CLI for your platform (you can skip this step for now if you're using Helm, but the CLI is still needed for later steps):
+
+<Tabs groupId="cli-install">
+<TabItem value="macos" label="MacOS" default>
+
+Install the Testkube CLI with [brew](https://brew.sh/):
+
+```sh
+brew install testkube
+```
+
+</TabItem>
+<TabItem value="windows" label="Windows">
+
+Install the Testkube CLI with [Chocolatey](https://chocolatey.org):
+
+```sh
+choco source add --name=kubeshop_repo --source=https://chocolatey.kubeshop.io/chocolatey
+choco install testkube -y
+```
+
+</TabItem>
+<TabItem value="ubuntu" label="Ubuntu">
+
+Install the Testkube CLI on Ubuntu:
+
+```sh
+sudo apt-get update && sudo apt-get install -y gnupg wget
+sudo install -m 0755 -d /etc/apt/keyrings
+wget -qO- https://repo.testkube.io/key.pub | sudo gpg --dearmor -o /etc/apt/keyrings/testkube.gpg
+echo "deb [signed-by=/etc/apt/keyrings/testkube.gpg] https://repo.testkube.io/linux linux main" | sudo tee /etc/apt/sources.list.d/testkube.list
+sudo apt-get update
+sudo apt-get install -y testkube
+```
+
+</TabItem>
+<TabItem value="script" label="Script">
+
+Install the Testkube CLI with curl:
+
+```bash
+curl -sSLf https://get.testkube.io | sh
+```
+
+</TabItem>
+<TabItem value="manual" label="Manual Download">
+
+1. Download the binary for the version and platform of your choice [here](https://github.com/kubeshop/testkube/releases).
+2. Unpack it. For example, in Linux use `tar -zxvf testkube_1.5.1_Linux_x86_64.tar.gz`.
+3. Move it to a location in the PATH, renaming it to `testkube` so it matches the commands used
+   throughout this guide. For example:
+
+```sh
+mv testkube_1.5.1_Linux_x86_64/kubectl-testkube /usr/local/bin/testkube
+```
+
+For Windows, you will need to unpack the binary and add it to the `%PATH%` as well.
+
+:::tip
+The binary is also a `kubectl` plugin. If you instead install it as `kubectl-testkube`, you can
+run every command in this guide as `kubectl testkube ...` (e.g. `kubectl testkube init`).
+:::
+
+</TabItem>
+</Tabs>
+
+## 2. Install the Testkube Standalone Agent
+
+Deploy the Standalone Agent into your cluster using either the CLI or Helm:
+
+<Tabs groupId="agent-install">
+<TabItem value="cli" label="Testkube CLI" default>
+
+```sh
+testkube init
+```
+
+By default this installs the agent into the `testkube` namespace of your
+current Kubernetes context.
+
+</TabItem>
+<TabItem value="helm" label="Helm">
+
+```sh
+helm repo add kubeshop https://kubeshop.github.io/helm-charts
+helm repo update
+
+helm upgrade --install testkube kubeshop/testkube \
+  --create-namespace \
+  --namespace testkube \
+  --set installCRDs=true
+```
+
+If the `testkube` namespace does not exist, it will be created for you. The
+[Helm Chart Docs](https://github.com/kubeshop/helm-charts/tree/main/charts/testkube#testkube)
+list all available [values properties](https://github.com/kubeshop/helm-charts/tree/main/charts/testkube#values).
+
+</TabItem>
+</Tabs>
+
+See the [Standalone Agent documentation](./install/standalone-agent) for advanced installation
+scenarios (OpenShift, AWS, external databases, etc.).
+
+After installation, you can check the status of the deployed components to ensure everything is running correctly.
+
+```sh
+➜  ~ kubectl get all -n testkube
+NAME                                           READY   STATUS              RESTARTS   AGE
+pod/testkube-api-server-65474f5d74-vplz4       0/1     Running             0          31s
+pod/testkube-minio-testkube-7674cd8774-bxczj   1/1     Running             0          31s
+pod/testkube-mongodb-5f96c8f7b4-8rck8          0/1     Init:0/1            0          31s
+pod/testkube-nats-0                            0/2     ContainerCreating   0          31s
+
+NAME                                      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
+service/testkube-api-server               ClusterIP   10.96.164.155   <none>        8088/TCP,8089/TCP            31s
+service/testkube-minio-service-testkube   ClusterIP   10.96.55.207    <none>        9000/TCP,9090/TCP,9443/TCP   31s
+service/testkube-mongodb                  ClusterIP   10.96.109.29    <none>        27017/TCP                    31s
+service/testkube-nats                     ClusterIP   10.96.23.107    <none>        4222/TCP                     31s
+service/testkube-nats-headless            ClusterIP   None            <none>        4222/TCP,8222/TCP            31s
+
+NAME                                      READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/testkube-api-server       0/1     1            0           31s
+deployment.apps/testkube-minio-testkube   1/1     1            1           31s
+deployment.apps/testkube-mongodb          0/1     1            0           31s
+
+NAME                                                 DESIRED   CURRENT   READY   AGE
+replicaset.apps/testkube-api-server-65474f5d74       1         1         0       31s
+replicaset.apps/testkube-minio-testkube-7674cd8774   1         1         1       31s
+replicaset.apps/testkube-mongodb-5f96c8f7b4          1         1         0       31s
+
+NAME                             READY   AGE
+statefulset.apps/testkube-nats   0/1     31s
+```
+
+## 3. Create a Test Workflow
+
+Testkube uses [Test Workflows](/articles/test-workflows) to define how to run your tests, here is an example using a k6 test:
+
+```yaml
+kind: TestWorkflow
+apiVersion: testworkflows.testkube.io/v1
+metadata:
+  name: ephemeral-test
+  namespace: testkube
+spec:
+  content:
+    git:
+      uri: https://github.com/cerebro1/testkube-ephemeral
+      revision: main
+      paths:
+      - k6/testkube.js
+  container:
+    workingDir: /data/repo/k6/
+    image: grafana/k6:0.49.0
+  steps:
+    - name: Run test
+      shell: |
+        k6 run testkube.js
+```
+
+Save the above manifest in `testworkflow.yaml`. 
+Run the following command to create a Test Workflow on the cluster using the Testkube CLI:
+
+```
+testkube create testworkflow -f testworkflow.yaml
+```
+
+Alternatively, you can use kubectl to apply the Test Workflow:
+
+```
+kubectl apply -f testworkflow.yaml
+```
+
+## 4. Verify the Deployment of Test Workflow
+
+Run the following command to verify:
+
+```
+testkube get testworkflows
+```
+
+**Expected output:**
+
+```
+NAME           | DESCRIPTION | CREATED                       | LABELS  | STATUS | EXECUTION ID  
+---------------+-------------+-------------------------------+---------+--------+---------------
+ephemeral-test |             | 2025-02-17 14:51:10 +0000 UTC | test=k6 |
+```
+
+## 5. Execute your Test Workflow
+
+The [Testkube CLI](/articles/cli) provides a `run` command to execute a Test Workflow. 
+Let us go ahead and execute the `ephemeral-test` Test Workflow.
+
+```
+testkube run testworkflow ephemeral-test
+```
+
+**Expected output:**
+
+```   
+Context:  (2.1.88)   Namespace: testkube
+----------------------------------------
+
+Test Workflow Execution:
+Name:                 ephemeral-test
+Execution ID:         67b34e1e29a84abec76e0a14
+Execution name:       ephemeral-test-1
+Execution namespace:  
+Execution number:     1
+Requested at:         2025-02-17 14:56:30.314865414 +0000 UTC
+Disabled webhooks:    false
+Status:               queued
+
+$ Watch test workflow execution until complete \
+    kubectl testkube watch twe 67b34e1e29a84abec76e0a14
+$ Use following command to get test workflow execution details \
+    kubectl testkube get twe 67b34e1e29a84abec76e0a14
+```
+
+:::tip
+Use the `-f` flag to immediately follow an execution when creating it - [Read More](/cli/testkube-run-testworkflow).
+:::
+
+## 6. View Test Workflow execution status
+
+You can monitor the test execution process by watching the status:
+```	
+testkube watch twe <execution_id>
+```
+Replace `<execution_id>` with the Execution ID provided in the output of `testkube run` command.
+
+Use the following command to get Test Workflow status:
+```
+testkube get testworkflows
+```
+**Expected output:**
+
+```
+Context:  (2.1.88)   Namespace: testkube
+----------------------------------------
+
+NAME           | DESCRIPTION | CREATED                       | LABELS  | STATUS | EXECUTION ID              
+---------------+-------------+-------------------------------+---------+--------+---------------------------
+ephemeral-test |             | 2025-02-17 14:51:10 +0000 UTC | test=k6 | passed | 67b34e1e29a84abec76e0a14  
+```
+
+The Test Workflow has been successfully executed.  Testkube performs the following steps in Test Workflow execution:
+
+* Initializes the environment.
+* Clones the GitHub repository.
+* Runs the shell command for the k6 test execution.
+* Uploads the artifacts if found.
+
+
+## 7. View Test Logs & Artifacts
+
+Testkube manages the logs and artifacts produced by your tests and makes them available via CLI. 
+To access extensive logs of Test Workflow execution, you can use the below command with the EXECUTION ID.
+
+```
+testkube get twe <execution_id>
+```
+
+For retrieving artifacts you can use 
+
+```
+testkube download artifacts <execution_id>
+```
+
+## 8. View the Execution in the Execution Viewer
+
+In Standalone mode there is no built-in dashboard, but you can open any execution in a lightweight,
+read-only viewer hosted by Testkube - no login or Testkube account required. Run:
+
+```
+testkube view <execution_id>
+```
+
+This uploads the execution's metadata, logs, and artifacts and prints a shareable link on
+`view.testkube.io` (and opens it in your browser). The viewer shows the step tree, log output,
+artifacts, JUnit reports, and an on-demand AI analysis of the execution.
+
+:::note
+Anyone with the link can view the execution, and links expire after a few hours. Use `--skip-artifacts`
+to share logs and metadata only - see [Viewing Open Source Executions](/articles/viewing-oss-executions)
+for all options, limits, and privacy details.
+:::
+
+## Next Steps
+
+Congrats on getting up and running with Testkube, now you can
+
+- Read more about [Test Workflows](/articles/test-workflows) to learn how to run any type of test with Testkube.
+- Head over to the [Examples & Guides](/articles/examples/overview) for sample Test Workflows with popular testing tools.
+- Check out the [Getting Started with Testkube Open Source](https://testkube.io/blog/getting-started-with-testkube-open-source) blogpost to further see how you can use the Standalone Agent with GitHub Actions
+- Go through the [CLI Reference](/cli/testkube) to see available CLI commands.
+- Head over to the [Testkube Slack](https://join.slack.com/t/testkubeworkspace/shared_invite/zt-3kfpny0gx-apPMq9_Swu4KG3uwz6Bk2g) to ask questions and get answers.
+
