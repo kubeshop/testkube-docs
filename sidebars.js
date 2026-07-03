@@ -646,7 +646,7 @@ const sidebars = {
             },
             {
               type: "category",
-              label: "Aggrageted Results - Insights",
+              label: "Aggregated Results - Insights",
               collapsed: false,
               items: [
                 {

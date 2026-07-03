@@ -193,7 +193,7 @@ scratch leveraging Test Workflow Templates for a variety of tools such as K6, Po
 4. View the status and logs of the Workflow as it is executing.
 
 ```bash
-kubectl apply -f my-workflow.yaml && kubectl testkube run tw my-test --watch
+kubectl apply -f my-workflow.yaml && testkube run tw my-test --watch
 ```
 
 </TabItem>
@@ -217,16 +217,16 @@ kubectl apply -f my-workflow.yaml && kubectl testkube run tw my-test --watch
 
 ```bash
 # List recent executions.
-kubectl testkube get twe
+testkube get twe
 
 # List artifacts of this execution.
-kubectl testkube get artifacts 664dbae9924211bb076bd58e
+testkube get artifacts 664dbae9924211bb076bd58e
 
 # Download the artifact of this execution.
-kubectl testkube download artifact 6655cc6d7d0abf889e531168 junit.xml .
+testkube download artifact 6655cc6d7d0abf889e531168 junit.xml .
 
 # Download the logs of this execution.
-kubectl testkube get twe 664dbae9924211bb076bd58e --logs-only
+testkube get twe 664dbae9924211bb076bd58e --logs-only
 ```
 
 </TabItem>

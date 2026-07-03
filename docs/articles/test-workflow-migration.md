@@ -6,7 +6,7 @@ Legacy Tests and Test Suites have been deprecated and removed from Testkube as o
 
 ## Introduction
 
-In order to simplify migration from Tests and Test Suites to Test Workflows you can use `kubectl testkube migrate` Testkube 
+In order to simplify migration from Tests and Test Suites to Test Workflows you can use `testkube migrate` Testkube 
 CLI command. It generates the corresponding Test Workflow and Test Workflow Template resources from your existing Test, 
 Test Suite and Executor resources. You will need to check created CRDs and apply them to your Kubernetes cluster.
 
@@ -49,7 +49,7 @@ spec:
 ```
 
 ```sh
-kubectl testkube migrate test postman-executor-smoke
+testkube migrate test postman-executor-smoke
 ```
 
 Resulted Test Workflow CRD
@@ -130,7 +130,7 @@ spec:
 ```
 
 ```sh
-kubectl testkube migrate test container-executor-k6-smoke
+testkube migrate test container-executor-k6-smoke
 ```
 
 Resulted Test Workflow and Test Workflow Template CRD
@@ -207,7 +207,7 @@ spec:
 ```
 
 ```sh
-kubectl testkube migrate testsuite executor-container-k6-smoke-tests
+testkube migrate testsuite executor-container-k6-smoke-tests
 ```
 
 Resulted Test Workflow CRD

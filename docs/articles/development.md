@@ -33,7 +33,7 @@ If you want to debug an API server locally, you can run a local kube-proxy which
 make run-proxy
 ```
 
-And when calling any of `kubectl testkube` subcommands, pass the direct client flag (`-cdirect`)
+And when calling any of `testkube` subcommands, pass the direct client flag (`-cdirect`)
 
 
 ### Installing Local Executors
@@ -53,7 +53,7 @@ This will register Custom Resources for the following test types:
 Create a `Test` Custom Resource with one of the types above to be executed on the given executor:
 
 ```sh
-kubectl testkube create test --file my_collection_file.json --name my-test-name --type local-postman/collection
+testkube create test --file my_collection_file.json --name my-test-name --type local-postman/collection
 ```
 
 To summarize: `type` is the single relation between `Test` and `Executor`.
