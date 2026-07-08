@@ -3,9 +3,9 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:884b791970a57e9db389411d3485e956ca6d23f8d783e31387876b1ef550ffe5</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 2" src="https://img.shields.io/badge/critical-2-8b1924"/> <img alt="high: 19" src="https://img.shields.io/badge/high-19-e25d68"/> <img alt="medium: 16" src="https://img.shields.io/badge/medium-16-fbb552"/> <img alt="low: 8" src="https://img.shields.io/badge/low-8-fce1a9"/> <img alt="unspecified: 13" src="https://img.shields.io/badge/unspecified-13-lightgrey"/></td></tr>
-<tr><td>platform</td><td>linux/arm64</td></tr>
-<tr><td>size</td><td>49 MB</td></tr>
+<tr><td>digest</td><td><code>sha256:51926a0222e9323f7879cdc9bfc50144ea38e3f12a85351d678cedad6a3009fe</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 2" src="https://img.shields.io/badge/critical-2-8b1924"/> <img alt="high: 19" src="https://img.shields.io/badge/high-19-e25d68"/> <img alt="medium: 15" src="https://img.shields.io/badge/medium-15-fbb552"/> <img alt="low: 6" src="https://img.shields.io/badge/low-6-fce1a9"/> <img alt="unspecified: 6" src="https://img.shields.io/badge/unspecified-6-lightgrey"/></td></tr>
+<tr><td>platform</td><td>linux/amd64</td></tr>
+<tr><td>size</td><td>53 MB</td></tr>
 <tr><td>packages</td><td>217</td></tr>
 </table>
 </details></table>
@@ -15,7 +15,7 @@ hide_table_of_contents: true
 <tr><td valign="top">
 <details><summary><img alt="critical: 2" src="https://img.shields.io/badge/C-2-8b1924"/> <img alt="high: 13" src="https://img.shields.io/badge/H-13-e25d68"/> <img alt="medium: 5" src="https://img.shields.io/badge/M-5-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>libssl3</strong> <code>3.5.5-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/libssl3@3.5.5-r0?arch=aarch64&distro=alpine-3.23.3&upstream=openssl</code></small><br/>
+<small><code>pkg:apk/alpine/libssl3@3.5.5-r0?arch=x86_64&distro=alpine-3.23.3&upstream=openssl</code></small><br/>
 
 ```dockerfile
 # tw-toolkit.Dockerfile (24:24)
@@ -400,9 +400,9 @@ FROM ${ALPINE_IMAGE}
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/M-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libcurl</strong> <code>8.19.0-r0</code> (apk)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/M-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 5" src="https://img.shields.io/badge/U-5-lightgrey"/><strong>libcurl</strong> <code>8.19.0-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/libcurl@8.19.0-r0?arch=aarch64&distro=alpine-3.23.3&upstream=curl</code></small><br/>
+<small><code>pkg:apk/alpine/libcurl@8.19.0-r0?arch=x86_64&distro=alpine-3.23.3&upstream=curl</code></small><br/>
 
 ```dockerfile
 # tw-toolkit.Dockerfile (25:25)
@@ -546,12 +546,97 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 
 </blockquote>
 </details>
+
+<a href="https://scout.docker.com/v/CVE-2026-9547?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.19.0-r0"><img alt="unspecified : CVE--2026--9547" src="https://img.shields.io/badge/CVE--2026--9547-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=8.19.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.187%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-9546?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.19.0-r0"><img alt="unspecified : CVE--2026--9546" src="https://img.shields.io/badge/CVE--2026--9546-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=8.19.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.206%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-9545?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.19.0-r0"><img alt="unspecified : CVE--2026--9545" src="https://img.shields.io/badge/CVE--2026--9545-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=8.19.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.134%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-9080?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.19.0-r0"><img alt="unspecified : CVE--2026--9080" src="https://img.shields.io/badge/CVE--2026--9080-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=8.19.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.206%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-9079?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D8.19.0-r0"><img alt="unspecified : CVE--2026--9079" src="https://img.shields.io/badge/CVE--2026--9079-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=8.19.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.250%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
 </details></td></tr>
 
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 3" src="https://img.shields.io/badge/L-3-fce1a9"/> <!-- unspecified: 0 --><strong>openssh-keygen</strong> <code>10.2_p1-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/openssh-keygen@10.2_p1-r0?arch=aarch64&distro=alpine-3.23.3&upstream=openssh</code></small><br/>
+<small><code>pkg:apk/alpine/openssh-keygen@10.2_p1-r0?arch=x86_64&distro=alpine-3.23.3&upstream=openssh</code></small><br/>
 
 ```dockerfile
 # tw-toolkit.Dockerfile (25:25)
@@ -649,7 +734,7 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>musl</strong> <code>1.2.5-r21</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/musl@1.2.5-r21?arch=aarch64&distro=alpine-3.23.3</code></small><br/>
+<small><code>pkg:apk/alpine/musl@1.2.5-r21?arch=x86_64&distro=alpine-3.23.3</code></small><br/>
 
 ```dockerfile
 # tw-toolkit.Dockerfile (24:24)
@@ -696,7 +781,7 @@ FROM ${ALPINE_IMAGE}
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>git</strong> <code>2.52.0-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/git@2.52.0-r0?arch=aarch64&distro=alpine-3.23.3</code></small><br/>
+<small><code>pkg:apk/alpine/git@2.52.0-r0?arch=x86_64&distro=alpine-3.23.3</code></small><br/>
 
 ```dockerfile
 # tw-toolkit.Dockerfile (25:25)
@@ -754,277 +839,9 @@ Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Es
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <img alt="unspecified: 12" src="https://img.shields.io/badge/U-12-lightgrey"/><strong>libexpat</strong> <code>2.7.5-r0</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/libexpat@2.7.5-r0?arch=aarch64&distro=alpine-3.23.3&upstream=expat</code></small><br/>
-
-```dockerfile
-# tw-toolkit.Dockerfile (25:25)
-RUN apk --no-cache add ca-certificates libssl3 git openssh-client
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-50219?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C2.8.2-r0"><img alt="medium : CVE--2026--50219" src="https://img.shields.io/badge/CVE--2026--50219-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.8.2-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.8.2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.218%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-45186?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C2.8.1-r0"><img alt="low : CVE--2026--45186" src="https://img.shields.io/badge/CVE--2026--45186-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.8.1-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.8.1-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.428%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-41080?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C2.8.1-r0"><img alt="low : CVE--2026--41080" src="https://img.shields.io/badge/CVE--2026--41080-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.8.1-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.8.1-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.379%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>30th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-56412?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C2.8.2-r0"><img alt="unspecified : CVE--2026--56412" src="https://img.shields.io/badge/CVE--2026--56412-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.8.2-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.8.2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.105%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-56411?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C2.8.2-r0"><img alt="unspecified : CVE--2026--56411" src="https://img.shields.io/badge/CVE--2026--56411-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.8.2-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.8.2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.110%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-56410?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C2.8.2-r0"><img alt="unspecified : CVE--2026--56410" src="https://img.shields.io/badge/CVE--2026--56410-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.8.2-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.8.2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.110%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-56409?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C2.8.2-r0"><img alt="unspecified : CVE--2026--56409" src="https://img.shields.io/badge/CVE--2026--56409-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.8.2-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.8.2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.098%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-56408?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C2.8.2-r0"><img alt="unspecified : CVE--2026--56408" src="https://img.shields.io/badge/CVE--2026--56408-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.8.2-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.8.2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.102%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-56407?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C2.8.2-r0"><img alt="unspecified : CVE--2026--56407" src="https://img.shields.io/badge/CVE--2026--56407-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.8.2-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.8.2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.102%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-56406?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C2.8.2-r0"><img alt="unspecified : CVE--2026--56406" src="https://img.shields.io/badge/CVE--2026--56406-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.8.2-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.8.2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.102%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-56405?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C2.8.2-r0"><img alt="unspecified : CVE--2026--56405" src="https://img.shields.io/badge/CVE--2026--56405-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.8.2-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.8.2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.102%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-56404?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C2.8.2-r0"><img alt="unspecified : CVE--2026--56404" src="https://img.shields.io/badge/CVE--2026--56404-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.8.2-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.8.2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.102%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-56403?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C2.8.2-r0"><img alt="unspecified : CVE--2026--56403" src="https://img.shields.io/badge/CVE--2026--56403-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.8.2-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.8.2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.102%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-56132?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C2.8.2-r0"><img alt="unspecified : CVE--2026--56132" src="https://img.shields.io/badge/CVE--2026--56132-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.8.2-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.8.2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.088%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-56131?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C2.8.2-r0"><img alt="unspecified : CVE--2026--56131" src="https://img.shields.io/badge/CVE--2026--56131-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.8.2-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.8.2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.102%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>zlib</strong> <code>1.3.1-r2</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/zlib@1.3.1-r2?arch=aarch64&distro=alpine-3.23.3</code></small><br/>
+<small><code>pkg:apk/alpine/zlib@1.3.1-r2?arch=x86_64&distro=alpine-3.23.3</code></small><br/>
 
 ```dockerfile
 # tw-toolkit.Dockerfile (24:24)
@@ -1071,7 +888,7 @@ FROM ${ALPINE_IMAGE}
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>ssl_client</strong> <code>1.37.0-r30</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/ssl_client@1.37.0-r30?arch=aarch64&distro=alpine-3.23.3&upstream=busybox</code></small><br/>
+<small><code>pkg:apk/alpine/ssl_client@1.37.0-r30?arch=x86_64&distro=alpine-3.23.3&upstream=busybox</code></small><br/>
 
 ```dockerfile
 # tw-toolkit.Dockerfile (24:24)
@@ -1101,7 +918,7 @@ FROM ${ALPINE_IMAGE}
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>nghttp2-libs</strong> <code>1.69.0-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/nghttp2-libs@1.69.0-r0?arch=aarch64&distro=alpine-3.23.3&upstream=nghttp2</code></small><br/>
+<small><code>pkg:apk/alpine/nghttp2-libs@1.69.0-r0?arch=x86_64&distro=alpine-3.23.3&upstream=nghttp2</code></small><br/>
 
 ```dockerfile
 # tw-toolkit.Dockerfile (25:25)
