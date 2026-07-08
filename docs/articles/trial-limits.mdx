@@ -1,0 +1,82 @@
+---
+title: Trial Limits & Demo Data
+description: What to expect during the Testkube trial - the trial limits, the resources on the hosted runner, and the demo data we pre-seed into your environment.
+unlisted: true
+---
+
+# Trial Limits & Demo Data
+
+When you start a Testkube trial you get a fully hosted environment, so you can
+explore the product without installing anything. To keep it free and instant to
+spin up, the trial runs with a few limits that don't apply to a self-hosted or
+paid Testkube deployment.
+
+This page explains those limits and the demo data we pre-seed into your trial
+environment.
+
+:::info
+These limits apply **only to the trial**. When you move to a paid plan and
+connect your own infrastructure, they no longer apply - you run with your own
+resources and your own quotas.
+:::
+
+## Trial duration and limits
+
+The Testkube trial lasts **30 days** from the day you start it. During the trial,
+your account is limited to:
+
+| Limit | Trial value |
+| --- | --- |
+| Duration | 30 days |
+| Environments | 1 |
+| Agents | 1 (fixed) |
+| Users | 3 |
+
+When the 30 days are up, the trial is **paused** - but your data stays put.
+Your workflows, executions, and results are all still there, ready for when you
+pick things back up. To keep going, just [reach out to our team](https://testkube.io/contact)
+and we'll help you continue with Testkube.
+
+## The hosted trial runner
+
+Trial environments come with an automatically provisioned, cloud-hosted runner,
+so you can run Test Workflows straight away - no agent to install.
+
+:::warning
+The hosted trial runner is meant for **evaluation only**. It's a shared,
+lightweight environment and is **not sized for production workloads**. For real
+testing at scale, connect your own [runner/agent](/articles/agents-overview)
+on infrastructure you control.
+:::
+
+### Resource limits
+
+The hosted runner is capped at the following resources:
+
+| Resource | Trial limit |
+| --- | --- |
+| CPU | 2 cores |
+| Memory | 2Gi |
+
+Because the runner is on a shared cluster and lightweight, executions may be queued or run
+slower during busy periods. That's expected on the trial and doesn't reflect
+how Testkube performs on dedicated infrastructure.
+
+## Pre-seeded demo data
+
+So you can see Testkube in action without building anything first, we
+**pre-seed your trial environment with demo data**. Example workflows and their
+results are already there when you first log in, so the dashboard, execution
+history, and insights are populated from the start.
+
+Feel free to explore, edit, re-run, or delete any of it - it's there purely to
+give you a realistic starting point for your evaluation.
+
+## Moving beyond the trial
+
+When you're ready for real workloads, connect your own agent so executions run
+on your infrastructure instead of the shared hosted runner:
+
+- [Testkube Agents overview](/articles/agents-overview)
+- [Environment management](/articles/environment-management)
+- [Talk to our team](https://testkube.io/contact) about extending or upgrading your trial
