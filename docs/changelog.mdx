@@ -59,7 +59,7 @@ AI in Testkube is now easier to configure, faster, and safer to run.
   - Native parsing of k6, Artillery, and JMeter metrics into Insights - ([read more](/articles/performance-metrics-in-insights))
   - Canonicalized metric names: k6, Artillery, and JMeter now share normalized `latency_p95_ms`, `throughput_rps`, and `errors_rate` alongside the
      tool-specific names, so you can compare runs across tools in one chart and filter by source - ([read more](/articles/performance-metrics-in-insights#canonical-cross-tool-metrics))
-  - Added support for Influx Line Protocol for creation of custom metric series - [read more](articles/granular-metrics#custom-metrics-with-influx-line-protocol)
+  - Added support for Influx Line Protocol for creation of custom metric series - [read more](articles/custom-metrics-in-insights)
 
 ### Operations & Security
 
@@ -394,7 +394,7 @@ Fixed the naming of the GitOps Agent Kubernetes resource to allow multiple insta
 #### PostgreSQL
 
 - Added an option to source the PostgreSQL DSN from a Kubernetes secret.
-- Added support for running PostgreSQL with CloudNativePG while keeping the existing bundled PostgreSQL deployment for backward compatibility. This includes support for installing the CloudNativePG operator and provisioning an operator-managed PostgreSQL cluster. Read more: [PostgreSQL](/articles/install/standalone-agent#using-postgresql-as-a-database)
+- Added support for running PostgreSQL with CloudNativePG while keeping the existing bundled PostgreSQL deployment for backward compatibility. This includes support for installing the CloudNativePG operator and provisioning an operator-managed PostgreSQL cluster. Read more: [PostgreSQL](/articles/install/standalone-agent#database)
 
 #### Upgrade 3rd party images and helm charts
 

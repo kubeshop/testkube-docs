@@ -559,6 +559,10 @@ const redirects = [
     to: "/articles/metrics",
   },
   {
+    from: "/articles/granular-metrics",
+    to: "/articles/test-insights",
+  },
+  {
     from: "/articles/slack-integration-webhooks",
     to: "/articles/slack-integration",
   },

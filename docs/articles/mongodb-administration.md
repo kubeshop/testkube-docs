@@ -21,7 +21,7 @@ kubectl testkube install --set mongo.enabled=false
 3. [Update MongoDB details for the api-server in the Helm values with valid connection string](/articles/install/advanced-install#mongodb).
 
 :::tip
-For new installations, prefer PostgreSQL and the guidance in [advanced install](/articles/install/advanced-install#postgresql) or [standalone agent PostgreSQL setup](/articles/install/standalone-agent#using-postgresql-as-a-database).
+For new installations, prefer PostgreSQL and the guidance in [advanced install](/articles/install/advanced-install#postgresql) or [standalone agent PostgreSQL setup](/articles/install/standalone-agent#database).
 :::
 
 ### SSL Connections

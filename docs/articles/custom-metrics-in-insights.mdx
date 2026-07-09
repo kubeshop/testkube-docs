@@ -106,5 +106,5 @@ If custom metrics do not appear in Insights:
 - Confirm the file uses a `.influx` or `.lp` extension. Other extensions are not scanned for line protocol.
 - Confirm the file is included in `artifacts.paths` and appears in the execution Artifacts tab.
 - Confirm each metric line has at least one numeric field. Lines with only string or boolean fields are ignored.
-- Confirm granular metrics ingestion is enabled on your deployment (see [Configuration](#configuration) above).
+- Confirm granular metrics ingestion is enabled on your deployment (requires Testkube Agent and Control Plane version `2.11.0` or later; see [Getting Started](#getting-started) above).
 - Check the workflow logs for `Processing InfluxDB line protocol report` messages during artifact upload.
