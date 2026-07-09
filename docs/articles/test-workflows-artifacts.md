@@ -112,7 +112,7 @@ For a deep dive into how Testkube processes and visualizes JUnit reports, includ
 ## Performance Report Extraction
 
 Testkube also scans uploaded JSON artifacts for supported performance-test reports and can ingest their aggregated
-values as [Granular Metrics](/articles/granular-metrics). The original files remain available as normal artifacts.
+values as [Performance Metrics](/articles/performance-metrics-in-insights). The original files remain available as normal artifacts.
 
 Supported report artifacts include:
 
@@ -132,4 +132,4 @@ uploaded.
 
 ## Influx Line Protocol
 
-Finally, Testkube will scan all files using the [InfluxDB Line Protocol](/articles/granular-metrics#custom-metrics-with-influx-line-protocol), to create custom metric series. Any file ending with `.influx` or `.lp` extension, will be registered as an `influx.line_protocol` report, and added to your metric series.
+Finally, Testkube will scan all files using the [InfluxDB Line Protocol](/articles/custom-metrics-in-insights), to create custom metric series. Any file ending with `.influx` or `.lp` extension, will be registered as an `influx.line_protocol` report, and added to your metric series.

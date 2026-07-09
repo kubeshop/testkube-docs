@@ -226,7 +226,7 @@ The x-axis will always be the time, whereas the y-axis is defined by your **Meas
   - **Memory Usage**: Use this to analyze Memory consumption of your Workflow executions.
   - **Network Usage**: Use this to analyze Network usage of your Workflow executions.
   - **Disk Usage**: Use this to analyze Disk usage of your Workflow executions.
-- **Granular Metrics**: When [granular metrics](/articles/granular-metrics) are enable you will see additional measure options depending on the types of reports your workflows produce.
+- **Granular Metrics**: When [granular metrics](/articles/performance-metrics-in-insights) are enable you will see additional measure options depending on the types of reports your workflows produce.
 
 ![Test Insights Executions Measure](images/insights-executions-measure.png)
 
