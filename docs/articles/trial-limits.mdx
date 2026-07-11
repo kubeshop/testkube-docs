@@ -39,10 +39,11 @@ and we'll help you continue with Testkube.
 ## The hosted trial runner
 
 Trial environments come with an automatically provisioned, cloud-hosted runner,
-so you can run Test Workflows straight away - no agent to install.
+so you can run Test Workflows straight away - no agent to install. You can at any time connect 
+your own runner in your own infrastructure. 
 
 :::warning
-The hosted trial runner is meant for **evaluation only**. It's a shared,
+The hosted trial runner is meant for **evaluation only**. It's a
 lightweight environment and is **not sized for production workloads**. For real
 testing at scale, connect your own [runner/agent](/articles/agents-overview)
 on infrastructure you control.
@@ -57,7 +58,7 @@ The hosted runner is capped at the following resources:
 | CPU | 2 cores |
 | Memory | 2Gi |
 
-Because the runner is on a shared cluster and lightweight, executions may be queued or run
+Because the runner is on a lightweight cluster, executions may be queued or run
 slower during busy periods. That's expected on the trial and doesn't reflect
 how Testkube performs on dedicated infrastructure.
 
