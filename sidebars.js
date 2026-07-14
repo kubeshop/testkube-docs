@@ -217,11 +217,6 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Trial Limits",
-              id: "articles/trial-limits",
-            },
-            {
-              type: "doc",
               label: "Custom SSO",
               id: "articles/custom-sso",
             },
@@ -1518,6 +1513,11 @@ const sidebars = {
               id: "articles/testkube-licensing-FAQ",
             },
           ],
+        },
+        {
+          type: "doc",
+          label: "Trial Limits",
+          id: "articles/trial-limits",
         },
         {
           type: "doc",
