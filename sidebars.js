@@ -1516,6 +1516,11 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "Trial Limits",
+          id: "articles/trial-limits",
+        },
+        {
+          type: "doc",
           label: "Legacy Deprecations",
           id: "articles/legacy-deprecation",
         },
