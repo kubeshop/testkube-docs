@@ -141,7 +141,7 @@ hide_table_of_contents: true
 <tr><td>Affected range</td><td><code>&lt;8.20.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.20.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.519%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
