@@ -10,6 +10,13 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 
 ## Patch Release v2.11.3 (2026-07-17)
 
+Control Plane is available in Helm chart `v2.334.3`.
+
+### Fixes
+
+- Fixed an issue with mongo to postgres migration
+- Fixed an issue where the AI service would be unable to communicate with the Control Plane
+
 ## Patch Release v2.11.1 (2026-07-02)
 
 Control Plane is available in Helm chart `v2.334.1`.
@@ -28,15 +35,15 @@ This is a major release with lots of new features and improvements!
 
 AI in Testkube is now easier to configure, faster, and safer to run.
 
-- Create AI agents from goals: describe what you want the agent to do, and Testkube generates the agent name, description, instructions, and recommended tools.    
-- Configure a default model per AI agent, so each agent can use the model best suited for its work.                                  
-- Choose the model when replying in an AI chat.                                                            
-- Cancel running AI chats from the UI.                                                                
-- AI chat titles now appear immediately and continue to improve in the background when needed.                                    
-- AI chat responses are faster thanks to improved streaming behavior and reduced per-request overhead.                                
-- AI triggers are safer: empty selectors no longer match every execution, wildcard matching is explicit, and trigger sessions can be rate-limited and manually stopped.                                                                              
-- MCP OAuth errors are clearer and include actionable guidance when the MCP endpoint is disabled.                   
-- Testkube MCP tool descriptions were trimmed to reduce prompt size and improve AI response performance.       
+- Create AI agents from goals: describe what you want the agent to do, and Testkube generates the agent name, description, instructions, and recommended tools.   
+- Configure a default model per AI agent, so each agent can use the model best suited for its work.                                 
+- Choose the model when replying in an AI chat.                                                           
+- Cancel running AI chats from the UI.                                                               
+- AI chat titles now appear immediately and continue to improve in the background when needed.                                   
+- AI chat responses are faster thanks to improved streaming behavior and reduced per-request overhead.                               
+- AI triggers are safer: empty selectors no longer match every execution, wildcard matching is explicit, and trigger sessions can be rate-limited and manually stopped.                                                                             
+- MCP OAuth errors are clearer and include actionable guidance when the MCP endpoint is disabled.                  
+- Testkube MCP tool descriptions were trimmed to reduce prompt size and improve AI response performance.      
 - Self-hosted AI Service configuration is simpler: the service now discovers dashboard configuration from Control Plane public config and no longer requires several OIDC-related environment variables.
 
 ### Test & Git Triggers
@@ -55,12 +62,12 @@ AI in Testkube is now easier to configure, faster, and safer to run.
 - Enhanced the Insights Board user experience with support for pinned boards, shared/privated boards, and search results by name - ([read more](/articles/test-insights#managing-custom-boards))
 - Added support for label and workflow filters searching for a substring (contains)
 - Added support for identity fields searching for a substring (contains)
-- Added a default Insights Board at the Workflow level with a default set of charts - ([read more](/articles/test-insights#the-default-workflow-insights-board)  )
+- Added a default Insights Board at the Workflow level with a default set of charts - ([read more](/articles/test-insights#the-default-workflow-insights-board) )
 - Added eight chart types in Insights for better analysis of execution metrics ([read more](/articles/test-insights#chart-types))
 - Granular Metrics
   - Native parsing of k6, Artillery, and JMeter metrics into Insights - ([read more](/articles/performance-metrics-in-insights))
   - Canonicalized metric names: k6, Artillery, and JMeter now share normalized `latency_p95_ms`, `throughput_rps`, and `errors_rate` alongside the
-     tool-specific names, so you can compare runs across tools in one chart and filter by source - ([read more](/articles/performance-metrics-in-insights#canonical-cross-tool-metrics))
+    tool-specific names, so you can compare runs across tools in one chart and filter by source - ([read more](/articles/performance-metrics-in-insights#canonical-cross-tool-metrics))
   - Added support for Influx Line Protocol for creation of custom metric series - [read more](articles/custom-metrics-in-insights)
 
 ### Operations & Security
@@ -73,9 +80,10 @@ AI in Testkube is now easier to configure, faster, and safer to run.
   - Added Gateway API support for Testkube Enterprise, including configuration for Gateway, HTTPRoute, HTTP-to-HTTPS redirect, BackendTLSPolicy, and certificate configuration options, and with migration guidance for moving from Ingress without downtime. The Gateway API integration works with any compatible Gateway controller, with Traefik provided as the primary example, although controller-specific behavior and configuration may vary. NGINX Ingress remains supported for existing installations, but Gateway API is recommended for new deployments.
 
 ### Runner Agent
+
 - Runner lease coordination configuration:  New environment variables on the agent to control its Kubernetes lease coordination:
-    - `LEADER_ELECTION_DISABLED`  -> disables lease coordination for explicitly single-replica runner deployments . Default: `false`
-    - `LEASE_CHECK_INTERVAL`  ->  how often the agent checks/renews the lease (e.g. `30s`, `1m`). Default: `5s`
+  - `LEADER_ELECTION_DISABLED`  -> disables lease coordination for explicitly single-replica runner deployments . Default: `false`
+  - `LEASE_CHECK_INTERVAL`  ->  how often the agent checks/renews the lease (e.g. `30s`, `1m`). Default: `5s`
 
 ## Patch Release v2.10.3 (2026-06-09)
 
