@@ -132,7 +132,7 @@ global:
       type: RuntimeDefault
 ```
 
-Configure the following values in the `testkube` chart:
+Configure the following values in the `testkube` and `testkube-runner` charts:
 
 ```yaml
 global:
@@ -155,29 +155,29 @@ global:
       drop: ["ALL"]
     seccompProfile:
       type: RuntimeDefault
-  testWorkflows:
-    globalTemplate:
-     enabled: true
-     spec:
-       pod:
-         securityContext:
-           allowPrivilegeEscalation: false
-           runAsNonRoot: true
-           runAsUser: 1000
-           runAsGroup: 1000
-           fsGroup: 1000
-           capabilities:
-             drop: ["ALL"]
-           seccompProfile:
-             type: RuntimeDefault
-       container:
-         securityContext:
-           allowPrivilegeEscalation: false
-           runAsNonRoot: true
-           runAsUser: 1000
-           runAsGroup: 1000
-           capabilities:
-             drop: ["ALL"]
-           seccompProfile:
-             type: RuntimeDefault
+globalTemplate:
+ enabled: true
+ inline: true
+ spec:
+   pod:
+     securityContext:
+       allowPrivilegeEscalation: false
+       runAsNonRoot: true
+       runAsUser: 1000
+       runAsGroup: 1000
+       fsGroup: 1000
+       capabilities:
+         drop: ["ALL"]
+       seccompProfile:
+         type: RuntimeDefault
+   container:
+     securityContext:
+       allowPrivilegeEscalation: false
+       runAsNonRoot: true
+       runAsUser: 1000
+       runAsGroup: 1000
+       capabilities:
+         drop: ["ALL"]
+       seccompProfile:
+         type: RuntimeDefault
 ```

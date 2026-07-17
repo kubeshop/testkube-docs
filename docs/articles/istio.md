@@ -54,17 +54,16 @@ testkube-api:
 
 #### Define a Global Test Workflows Template
 
-Chart `testkube`:
+Chart `testkube-runner`:
 
 ```yaml
-global:
-    testWorkflows:
-        globalTemplate:
-            enabled: true
-            spec:
-                pod:
-                    annotations:
-                        sidecar.istio.io/inject: "false"
+globalTemplate:
+    enabled: true
+    inline: true
+    spec:
+        pod:
+            annotations:
+                sidecar.istio.io/inject: "false"
 ```
 
 #### Hold the API Server Until Istio's Proxy Is Ready
