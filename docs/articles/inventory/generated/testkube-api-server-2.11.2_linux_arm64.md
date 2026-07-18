@@ -725,7 +725,7 @@ RUN apk --no-cache add ca-certificates libssl3 git
 <tr><td>Affected range</td><td><code>&lt;8.20.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.20.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.414%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -742,7 +742,7 @@ RUN apk --no-cache add ca-certificates libssl3 git
 <tr><td>Affected range</td><td><code>&lt;8.20.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.20.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.639%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1014,7 +1014,7 @@ RUN apk --no-cache add ca-certificates libssl3 git
 <tr><td>Affected range</td><td><code>&lt;=8.19.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.574%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>43rd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1159,36 +1159,6 @@ FROM ${ALPINE_IMAGE}
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>git</strong> <code>2.52.0-r0</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/git@2.52.0-r0?arch=aarch64&distro=alpine-3.23.3</code></small><br/>
-
-```dockerfile
-# api-server.Dockerfile (30:30)
-RUN apk --no-cache add ca-certificates libssl3 git
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2025-66413?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D2.52.0-r0"><img alt="high : CVE--2025--66413" src="https://img.shields.io/badge/CVE--2025--66413-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=2.52.0-r0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.268%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>29.5.3+incompatible</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/docker/cli@29.5.3%2Bincompatible</code></small><br/>
@@ -1213,6 +1183,36 @@ COPY --from=build /app /bin/app
 <blockquote>
 
 Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Escalation on Windows in github.com/docker/cli
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>git</strong> <code>2.52.0-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/git@2.52.0-r0?arch=aarch64&distro=alpine-3.23.3</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (30:30)
+RUN apk --no-cache add ca-certificates libssl3 git
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-66413?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D2.52.0-r0"><img alt="high : CVE--2025--66413" src="https://img.shields.io/badge/CVE--2025--66413-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=2.52.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.268%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
 
 </blockquote>
 </details>
@@ -1314,7 +1314,7 @@ COPY --from=build /app /bin/app
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.455%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.463%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>37th percentile</code></td></tr>
 </table>
 

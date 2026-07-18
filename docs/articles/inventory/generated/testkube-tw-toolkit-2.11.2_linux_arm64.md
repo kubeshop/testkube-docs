@@ -451,7 +451,7 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 <tr><td>Affected range</td><td><code>&lt;8.20.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.20.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.414%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -468,7 +468,7 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 <tr><td>Affected range</td><td><code>&lt;8.20.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.20.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.639%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -740,7 +740,7 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 <tr><td>Affected range</td><td><code>&lt;=8.19.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.574%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>43rd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1248,36 +1248,6 @@ FROM ${ALPINE_IMAGE}
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>nghttp2-libs</strong> <code>1.69.0-r0</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/nghttp2-libs@1.69.0-r0?arch=aarch64&distro=alpine-3.23.3&upstream=nghttp2</code></small><br/>
-
-```dockerfile
-# tw-toolkit.Dockerfile (25:25)
-RUN apk --no-cache add ca-certificates libssl3 git openssh-client
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-58055?s=alpine&n=nghttp2&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D1.69.0-r0"><img alt="unspecified : CVE--2026--58055" src="https://img.shields.io/badge/CVE--2026--58055-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=1.69.0-r0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.202%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/crypto</strong> <code>0.53.0</code> (golang)</summary>
 
 <small><code>pkg:golang/golang.org/x/crypto@0.53.0</code></small><br/>
@@ -1316,6 +1286,36 @@ RUN apk --no-cache add ca-certificates libssl3 git openssh-client
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.34.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.34.8-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>nghttp2-libs</strong> <code>1.69.0-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/nghttp2-libs@1.69.0-r0?arch=aarch64&distro=alpine-3.23.3&upstream=nghttp2</code></small><br/>
+
+```dockerfile
+# tw-toolkit.Dockerfile (25:25)
+RUN apk --no-cache add ca-certificates libssl3 git openssh-client
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-58055?s=alpine&n=nghttp2&ns=alpine&t=apk&osn=alpine&osv=3.23&vr=%3C%3D1.69.0-r0"><img alt="unspecified : CVE--2026--58055" src="https://img.shields.io/badge/CVE--2026--58055-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=1.69.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.202%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

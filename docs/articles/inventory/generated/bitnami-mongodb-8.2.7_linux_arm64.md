@@ -307,7 +307,7 @@ SSH servers parsing GSSAPI authentication requests do not validate the number of
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.484%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -804,8 +804,8 @@ During chain building, the amount of work that is done is not correctly limited 
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.8</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.520%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.728%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -838,8 +838,8 @@ Within HostnameError.Error(), when constructing an error string, there is no lim
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.761%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.945%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>78th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1148,7 +1148,7 @@ For example, the query "a1=x&a2=x&...&a10000=x&hidden=y" can forward the paramet
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.276%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1508,8 +1508,8 @@ During chain building, the amount of work that is done is not correctly limited 
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.8</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.520%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.728%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1542,8 +1542,8 @@ Within HostnameError.Error(), when constructing an error string, there is no lim
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.24.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.12</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.761%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.945%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>78th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1835,7 +1835,7 @@ For example, the query "a1=x&a2=x&...&a10000=x&hidden=y" can forward the paramet
 <tr><td>Affected range</td><td><code>&lt;1.24.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.12</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.276%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2086,7 +2086,7 @@ Parsing arbitrary HTML which is then rendered using Render can result in an unex
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.178%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2103,7 +2103,7 @@ Parsing arbitrary HTML which is then rendered using Render can result in an unex
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.178%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2120,7 +2120,7 @@ Parsing arbitrary HTML which is then rendered using Render can result in an unex
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.178%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2275,7 +2275,7 @@ Parsing arbitrary HTML which is then rendered using Render can result in an unex
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.178%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2292,7 +2292,7 @@ Parsing arbitrary HTML which is then rendered using Render can result in an unex
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.178%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2309,7 +2309,7 @@ Parsing arbitrary HTML which is then rendered using Render can result in an unex
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.178%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2495,8 +2495,8 @@ During chain building, the amount of work that is done is not correctly limited 
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.8</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.520%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.728%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -3724,7 +3724,7 @@ FROM mongo:8.2.7
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.484%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -3938,7 +3938,7 @@ FROM mongo:8.2.7
 <tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:H/A:N</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.414%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -4025,7 +4025,7 @@ When asked to both use a `.netrc` file for credentials and to follow HTTP redire
 <tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.639%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -4556,57 +4556,6 @@ https://cheatsheetseries.owasp.org/cheatsheets/Prototype_Pollution_Prevention_Ch
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>gzip</strong> <code>1.12-1ubuntu3.1</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/gzip@1.12-1ubuntu3.1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (51:51)
-FROM mongo:8.2.7
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-41992?s=ubuntu&n=gzip&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1.12-1ubuntu3.2"><img alt="medium 7.5: CVE--2026--41992" src="https://img.shields.io/badge/CVE--2026--41992-lightgrey?label=medium%207.5&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.12-1ubuntu3.2</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.12-1ubuntu3.2</code></td></tr>
-<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.294%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-GNU gzip contains a global buffer overflow vulnerability in the LZH decompression logic caused by improper reuse of shared global state between different decompression formats within a single execution. GNU gzip maintains a global array that is shared across the LZ77, LZW, and LZH decompression routines and is not reinitialized between files processed in the same invocation. By decompressing a specially crafted LZW file followed by a specially crafted LZH file in a single gzip -d command, an attacker can poison the shared global state and subsequently trigger an out‑of‑bounds read in the LZH decoder. The LZH decompression logic follows stale values left in the shared array, causing reads past the end of the allocated global buffer.  This issue has been fixed in the commit 63dbf6b3b9e6e781df1a6a64e609b10e23969681
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-41991?s=ubuntu&n=gzip&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1.12-1ubuntu3.2"><img alt="medium 4.7: CVE--2026--41991" src="https://img.shields.io/badge/CVE--2026--41991-lightgrey?label=medium%204.7&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.12-1ubuntu3.2</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.12-1ubuntu3.2</code></td></tr>
-<tr><td>CVSS Score</td><td><code>4.7</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:N/I:H/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.105%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-GNU gzip contains a vulnerability in the gzexe utility related to insecure temporary file handling. When the mktemp utility is not available in the user’s PATH, gzexe falls back to constructing a temporary file path based solely on the process ID (PID). This predictable filename is created without exclusive access or existence checks. A local attacker can pre‑create the predicted temporary file path as a symbolic link pointing to an arbitrary file writable by the victim. When gzexe runs, it follows the symlink and overwrites the target file, resulting in a time‑of‑check to time‑of‑use (TOCTOU) condition that allows arbitrary file overwrite.  This issue has been fixed in the commit 4e6f8b24ab823146ab8776f0b7fe486ab34d4269
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>perl</strong> <code>5.38.2-3.2ubuntu0.2</code> (deb)</summary>
 
 <small><code>pkg:deb/ubuntu/perl@5.38.2-3.2ubuntu0.2?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
@@ -4652,6 +4601,104 @@ Perl versions through 5.43.10 have a heap buffer overflow when compiling regular
 <blockquote>
 
 Archive::Tar versions before 3.08 for Perl extract symlinks with attacker controlled targets outside the extraction directory.  _make_special_file() passes the tar header's linkname to symlink() without validating it against absolute paths or .. segments. The secure-extract mode check that guards regular file extraction does not cover the symlink target.  A subsequent open through the extracted name reads or writes the attacker chosen path.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>nghttp2</strong> <code>1.59.0-1ubuntu0.2</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/nghttp2@1.59.0-1ubuntu0.2?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (51:51)
+FROM mongo:8.2.7
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-58055?s=ubuntu&n=nghttp2&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1.59.0-1ubuntu0.4"><img alt="medium : CVE--2026--58055" src="https://img.shields.io/badge/CVE--2026--58055-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.59.0-1ubuntu0.4</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.59.0-1ubuntu0.4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.202%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+nghttp2's nghttpx proxy through 1.69.0 forwards an HTTP/1.1 Upgrade request that also carries a Content-Length header and body onto reusable keep-alive backend connections, re-adding the Upgrade and Connection headers while passing Content-Length verbatim. A backend that resolves the resulting ambiguous message in the attacker's favor enables HTTP request/response smuggling and cross-client response-queue poisoning.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-27135?s=ubuntu&n=nghttp2&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1.59.0-1ubuntu0.3"><img alt="medium : CVE--2026--27135" src="https://img.shields.io/badge/CVE--2026--27135-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.59.0-1ubuntu0.3</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.59.0-1ubuntu0.3</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.775%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+nghttp2 is an implementation of the Hypertext Transfer Protocol version 2 in C. Prior to version 1.68.1, the nghttp2 library stops reading the incoming data when user facing public API `nghttp2_session_terminate_session` or `nghttp2_session_terminate_session2` is called by the application. They might be called internally by the library when it detects the situation that is subject to connection error. Due to the missing internal state validation, the library keeps reading the rest of the data after one of those APIs is called. Then receiving a malformed frame that causes FRAME_SIZE_ERROR causes assertion failure. nghttp2 v1.68.1 adds missing state validation to avoid assertion failure. No known workarounds are available.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>gzip</strong> <code>1.12-1ubuntu3.1</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/gzip@1.12-1ubuntu3.1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (51:51)
+FROM mongo:8.2.7
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-41992?s=ubuntu&n=gzip&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1.12-1ubuntu3.2"><img alt="medium 7.5: CVE--2026--41992" src="https://img.shields.io/badge/CVE--2026--41992-lightgrey?label=medium%207.5&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.12-1ubuntu3.2</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.12-1ubuntu3.2</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.294%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+GNU gzip contains a global buffer overflow vulnerability in the LZH decompression logic caused by improper reuse of shared global state between different decompression formats within a single execution. GNU gzip maintains a global array that is shared across the LZ77, LZW, and LZH decompression routines and is not reinitialized between files processed in the same invocation. By decompressing a specially crafted LZW file followed by a specially crafted LZH file in a single gzip -d command, an attacker can poison the shared global state and subsequently trigger an out‑of‑bounds read in the LZH decoder. The LZH decompression logic follows stale values left in the shared array, causing reads past the end of the allocated global buffer.  This issue has been fixed in the commit 63dbf6b3b9e6e781df1a6a64e609b10e23969681
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-41991?s=ubuntu&n=gzip&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1.12-1ubuntu3.2"><img alt="medium 4.7: CVE--2026--41991" src="https://img.shields.io/badge/CVE--2026--41991-lightgrey?label=medium%204.7&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.12-1ubuntu3.2</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.12-1ubuntu3.2</code></td></tr>
+<tr><td>CVSS Score</td><td><code>4.7</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:N/I:H/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.105%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+GNU gzip contains a vulnerability in the gzexe utility related to insecure temporary file handling. When the mktemp utility is not available in the user’s PATH, gzexe falls back to constructing a temporary file path based solely on the process ID (PID). This predictable filename is created without exclusive access or existence checks. A local attacker can pre‑create the predicted temporary file path as a symbolic link pointing to an arbitrary file writable by the victim. When gzexe runs, it follows the symlink and overwrites the target file, resulting in a time‑of‑check to time‑of‑use (TOCTOU) condition that allows arbitrary file overwrite.  This issue has been fixed in the commit 4e6f8b24ab823146ab8776f0b7fe486ab34d4269
 
 </blockquote>
 </details>
@@ -4755,10 +4802,10 @@ FROM mongo:8.2.7
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2026-5704?s=ubuntu&n=tar&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1.35%2Bdfsg-3ubuntu0.1"><img alt="medium 5.5: CVE--2026--5704" src="https://img.shields.io/badge/CVE--2026--5704-lightgrey?label=medium%205.5&labelColor=fbb552"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-5704?s=ubuntu&n=tar&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1.35%2Bdfsg-3ubuntu0.3"><img alt="medium 5.5: CVE--2026--5704" src="https://img.shields.io/badge/CVE--2026--5704-lightgrey?label=medium%205.5&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;1.35+dfsg-3ubuntu0.1</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.35+dfsg-3ubuntu0.3</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.35+dfsg-3ubuntu0.1</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:H/A:N</code></td></tr>
@@ -4793,9 +4840,9 @@ GNU Tar through 1.35 allows file overwrite via directory traversal in crafted TA
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>nghttp2</strong> <code>1.59.0-1ubuntu0.2</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>libgcrypt20</strong> <code>1.10.3-2build1</code> (deb)</summary>
 
-<small><code>pkg:deb/ubuntu/nghttp2@1.59.0-1ubuntu0.2?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+<small><code>pkg:deb/ubuntu/libgcrypt20@1.10.3-2build1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
 
 ```dockerfile
 # mongo-8.dockerfile (51:51)
@@ -4804,36 +4851,36 @@ FROM mongo:8.2.7
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2026-58055?s=ubuntu&n=nghttp2&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1.59.0-1ubuntu0.4"><img alt="medium : CVE--2026--58055" src="https://img.shields.io/badge/CVE--2026--58055-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-41989?s=ubuntu&n=libgcrypt20&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1.10.3-2ubuntu0.1"><img alt="medium : CVE--2026--41989" src="https://img.shields.io/badge/CVE--2026--41989-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;1.59.0-1ubuntu0.4</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.59.0-1ubuntu0.4</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.202%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.10.3-2ubuntu0.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.10.3-2ubuntu0.1</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.182%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-nghttp2's nghttpx proxy through 1.69.0 forwards an HTTP/1.1 Upgrade request that also carries a Content-Length header and body onto reusable keep-alive backend connections, re-adding the Upgrade and Connection headers while passing Content-Length verbatim. A backend that resolves the resulting ambiguous message in the attacker's favor enables HTTP request/response smuggling and cross-client response-queue poisoning.
+Libgcrypt before 1.12.2 sometimes allows a heap-based buffer overflow and denial of service via crafted ECDH ciphertext to gcry_pk_decrypt.
 
 </blockquote>
 </details>
 
-<a href="https://scout.docker.com/v/CVE-2026-27135?s=ubuntu&n=nghttp2&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1.59.0-1ubuntu0.3"><img alt="medium : CVE--2026--27135" src="https://img.shields.io/badge/CVE--2026--27135-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+<a href="https://scout.docker.com/v/CVE-2024-2236?s=ubuntu&n=libgcrypt20&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="low : CVE--2024--2236" src="https://img.shields.io/badge/CVE--2024--2236-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;1.59.0-1ubuntu0.3</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.59.0-1ubuntu0.3</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.775%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>1.114%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>62nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-nghttp2 is an implementation of the Hypertext Transfer Protocol version 2 in C. Prior to version 1.68.1, the nghttp2 library stops reading the incoming data when user facing public API `nghttp2_session_terminate_session` or `nghttp2_session_terminate_session2` is called by the application. They might be called internally by the library when it detects the situation that is subject to connection error. Due to the missing internal state validation, the library keeps reading the rest of the data after one of those APIs is called. Then receiving a malformed frame that causes FRAME_SIZE_ERROR causes assertion failure. nghttp2 v1.68.1 adds missing state validation to avoid assertion failure. No known workarounds are available.
+A timing-based side-channel flaw was found in libgcrypt's RSA implementation. This issue may allow a remote attacker to initiate a Bleichenbacher-style attack, which can lead to the decryption of RSA ciphertexts.
 
 </blockquote>
 </details>
@@ -4889,53 +4936,6 @@ In systemd 259, systemd-journald can send ANSI escape sequences to the terminals
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>libgcrypt20</strong> <code>1.10.3-2build1</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/libgcrypt20@1.10.3-2build1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (51:51)
-FROM mongo:8.2.7
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-41989?s=ubuntu&n=libgcrypt20&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1.10.3-2ubuntu0.1"><img alt="medium : CVE--2026--41989" src="https://img.shields.io/badge/CVE--2026--41989-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.10.3-2ubuntu0.1</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.10.3-2ubuntu0.1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.182%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Libgcrypt before 1.12.2 sometimes allows a heap-based buffer overflow and denial of service via crafted ECDH ciphertext to gcry_pk_decrypt.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2024-2236?s=ubuntu&n=libgcrypt20&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="low : CVE--2024--2236" src="https://img.shields.io/badge/CVE--2024--2236-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>1.114%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>62nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A timing-based side-channel flaw was found in libgcrypt's RSA implementation. This issue may allow a remote attacker to initiate a Bleichenbacher-style attack, which can lead to the decryption of RSA ciphertexts.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>dpkg</strong> <code>1.22.6ubuntu6.5</code> (deb)</summary>
 
 <small><code>pkg:deb/ubuntu/dpkg@1.22.6ubuntu6.5?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
@@ -4966,6 +4966,36 @@ It was discovered that dpkg-deb (a component of dpkg, the Debian package managem
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>p11-kit</strong> <code>0.25.3-4ubuntu2.1</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/p11-kit@0.25.3-4ubuntu2.1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (51:51)
+FROM mongo:8.2.7
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-13757?s=ubuntu&n=p11-kit&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2026--13757" src="https://img.shields.io/badge/CVE--2026--13757-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.137%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A flaw was found in p11-kit. The RPC message attribute parsing functions p11_rpc_message_get_attribute() and p11_rpc_message_get_attribute_array_value() form a mutually-recursive call chain with no recursion depth limit when processing nested CKA_WRAP_TEMPLATE, CKA_UNWRAP_TEMPLATE, and CKA_DERIVE_TEMPLATE attributes. An unauthenticated attacker with local access to the p11-kit RPC Unix domain socket can send a specially crafted request with deeply nested template attributes, causing stack exhaustion and crashing the p11-kit server process and its dependent services.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.mongodb.org/mongo-driver</strong> <code>1.17.3</code> (golang)</summary>
 
 <small><code>pkg:golang/go.mongodb.org/mongo-driver@1.17.3</code></small><br/>
@@ -4984,6 +5014,36 @@ It was discovered that dpkg-deb (a component of dpkg, the Debian package managem
 <blockquote>
 
 The mongo-go-driver repository contains CGo bindings for GSSAPI (Kerberos) authentication on Linux and macOS. The C wrapper implementation contains a heap out-of-bounds read vulnerability due to incorrect assumptions about string termination in the GSSAPI standard. Since GSSAPI buffers are not guaranteed to be null-terminated or have extra padding, this results in reading one byte past the allocated heap buffer.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>util-linux</strong> <code>2.39.3-9ubuntu6.5</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/util-linux@2.39.3-9ubuntu6.5?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (51:51)
+FROM mongo:8.2.7
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-27456?s=ubuntu&n=util-linux&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2026--27456" src="https://img.shields.io/badge/CVE--2026--27456-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.118%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+util-linux is a random collection of Linux utilities. Prior to version 2.41.4, a TOCTOU (Time-of-Check-Time-of-Use) vulnerability has been identified in the SUID binary /usr/bin/mount from util-linux. The mount binary, when setting up loop devices, validates the source file path with user privileges via fork() + setuid() + realpath(), but subsequently re-canonicalizes and opens it with root privileges (euid=0) without verifying that the path has not been replaced between both operations. Neither O_NOFOLLOW, nor inode comparison, nor post-open fstat() are employed. This allows a local unprivileged user to replace the source file with a symlink pointing to any root-owned file or device during the race window, causing the SUID binary to open and mount it as root. Exploitation requires an /etc/fstab entry with user,loop options whose path points to a directory where the attacker has write permission, and that /usr/bin/mount has the SUID bit set (the default configuration on virtually all Linux distributions). The impact is unauthorized read access to root-protected files and block devices, including backup images, disk volumes, and any file containing a valid filesystem. This issue has been patched in version 2.41.4.
 
 </blockquote>
 </details>
@@ -5061,66 +5121,6 @@ In libexpat through 2.7.3, a crafted file with an approximate size of 2 MiB can 
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>p11-kit</strong> <code>0.25.3-4ubuntu2.1</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/p11-kit@0.25.3-4ubuntu2.1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (51:51)
-FROM mongo:8.2.7
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-13757?s=ubuntu&n=p11-kit&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2026--13757" src="https://img.shields.io/badge/CVE--2026--13757-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.137%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A flaw was found in p11-kit. The RPC message attribute parsing functions p11_rpc_message_get_attribute() and p11_rpc_message_get_attribute_array_value() form a mutually-recursive call chain with no recursion depth limit when processing nested CKA_WRAP_TEMPLATE, CKA_UNWRAP_TEMPLATE, and CKA_DERIVE_TEMPLATE attributes. An unauthenticated attacker with local access to the p11-kit RPC Unix domain socket can send a specially crafted request with deeply nested template attributes, causing stack exhaustion and crashing the p11-kit server process and its dependent services.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>util-linux</strong> <code>2.39.3-9ubuntu6.5</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/util-linux@2.39.3-9ubuntu6.5?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (51:51)
-FROM mongo:8.2.7
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-27456?s=ubuntu&n=util-linux&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2026--27456" src="https://img.shields.io/badge/CVE--2026--27456-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.118%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-util-linux is a random collection of Linux utilities. Prior to version 2.41.4, a TOCTOU (Time-of-Check-Time-of-Use) vulnerability has been identified in the SUID binary /usr/bin/mount from util-linux. The mount binary, when setting up loop devices, validates the source file path with user privileges via fork() + setuid() + realpath(), but subsequently re-canonicalizes and opens it with root privileges (euid=0) without verifying that the path has not been replaced between both operations. Neither O_NOFOLLOW, nor inode comparison, nor post-open fstat() are employed. This allows a local unprivileged user to replace the source file with a symlink pointing to any root-owned file or device during the race window, causing the SUID binary to open and mount it as root. Exploitation requires an /etc/fstab entry with user,loop options whose path points to a directory where the attacker has write permission, and that /usr/bin/mount has the SUID bit set (the default configuration on virtually all Linux distributions). The impact is unauthorized read access to root-protected files and block devices, including backup images, disk volumes, and any file containing a valid filesystem. This issue has been patched in version 2.41.4.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>sed</strong> <code>4.9-2build1</code> (deb)</summary>
 
 <small><code>pkg:deb/ubuntu/sed@4.9-2build1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
@@ -5151,9 +5151,9 @@ When sed is invoked with both -i (in-place edit) and --follow-symlinks, the func
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>ncurses</strong> <code>6.4+20240113-1ubuntu2</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>shadow</strong> <code>1:4.13+dfsg1-4ubuntu3.2</code> (deb)</summary>
 
-<small><code>pkg:deb/ubuntu/ncurses@6.4%2B20240113-1ubuntu2?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+<small><code>pkg:deb/ubuntu/shadow@1%3A4.13%2Bdfsg1-4ubuntu3.2?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
 
 ```dockerfile
 # mongo-8.dockerfile (51:51)
@@ -5162,21 +5162,19 @@ FROM mongo:8.2.7
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2025-69720?s=ubuntu&n=ncurses&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C6.4%2B20240113-1ubuntu2.1"><img alt="low 7.8: CVE--2025--69720" src="https://img.shields.io/badge/CVE--2025--69720-lightgrey?label=low%207.8&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2024-56433?s=ubuntu&n=shadow&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="low : CVE--2024--56433" src="https://img.shields.io/badge/CVE--2024--56433-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;6.4+20240113-1ubuntu2.1</code></td></tr>
-<tr><td>Fixed version</td><td><code>6.4+20240113-1ubuntu2.1</code></td></tr>
-<tr><td>CVSS Score</td><td><code>7.8</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.414%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.400%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-The infocmp command-line tool in ncurses before 6.5-20251213 has a stack-based buffer overflow in analyze_string in progs/infocmp.c.
+shadow-utils (aka shadow) 4.4 through 4.17.0 establishes a default /etc/subuid behavior (e.g., uid 100000 through 165535 for the first user account) that can realistically conflict with the uids of users defined on locally administered networks, potentially leading to account takeover, e.g., by leveraging newuidmap for access to an NFS home directory (or same-host resources in the case of remote logins by these local network users). NOTE: it may also be argued that system administrators should not have assigned uids, within local networks, that are within the range that can occur in /etc/subuid.
 
 </blockquote>
 </details>
@@ -5237,36 +5235,6 @@ FROM mongo:8.2.7
 <blockquote>
 
 NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>shadow</strong> <code>1:4.13+dfsg1-4ubuntu3.2</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/shadow@1%3A4.13%2Bdfsg1-4ubuntu3.2?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (51:51)
-FROM mongo:8.2.7
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2024-56433?s=ubuntu&n=shadow&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="low : CVE--2024--56433" src="https://img.shields.io/badge/CVE--2024--56433-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.400%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-shadow-utils (aka shadow) 4.4 through 4.17.0 establishes a default /etc/subuid behavior (e.g., uid 100000 through 165535 for the first user account) that can realistically conflict with the uids of users defined on locally administered networks, potentially leading to account takeover, e.g., by leveraging newuidmap for access to an NFS home directory (or same-host resources in the case of remote logins by these local network users). NOTE: it may also be argued that system administrators should not have assigned uids, within local networks, that are within the range that can occur in /etc/subuid.
 
 </blockquote>
 </details>
@@ -5361,6 +5329,38 @@ FROM mongo:8.2.7
 <blockquote>
 
 XZ Utils provide a general-purpose data-compression library plus command-line tools. Prior to version 5.8.3, if lzma_index_decoder() was used to decode an Index that contained no Records, the resulting lzma_index was left in a state where where a subsequent lzma_index_append() would allocate too little memory, and a buffer overflow would occur. This issue has been patched in version 5.8.3.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>ncurses</strong> <code>6.4+20240113-1ubuntu2</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/ncurses@6.4%2B20240113-1ubuntu2?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (51:51)
+FROM mongo:8.2.7
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-69720?s=ubuntu&n=ncurses&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C6.4%2B20240113-1ubuntu2.1"><img alt="low 7.8: CVE--2025--69720" src="https://img.shields.io/badge/CVE--2025--69720-lightgrey?label=low%207.8&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;6.4+20240113-1ubuntu2.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>6.4+20240113-1ubuntu2.1</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.8</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.414%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The infocmp command-line tool in ncurses before 6.5-20251213 has a stack-based buffer overflow in analyze_string in progs/infocmp.c.
 
 </blockquote>
 </details>

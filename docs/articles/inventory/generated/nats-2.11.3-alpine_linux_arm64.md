@@ -336,7 +336,7 @@ SSH servers parsing GSSAPI authentication requests do not validate the number of
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.484%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -577,8 +577,8 @@ During chain building, the amount of work that is done is not correctly limited 
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.8</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.520%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.728%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -611,8 +611,8 @@ Within HostnameError.Error(), when constructing an error string, there is no lim
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.24.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.12</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.761%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.945%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>78th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -972,7 +972,7 @@ For example, the query "a1=x&a2=x&...&a10000=x&hidden=y" can forward the paramet
 <tr><td>Affected range</td><td><code>&lt;1.24.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.12</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.276%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1397,7 +1397,7 @@ For example, 'root.Open("symlink/")' will open "symlink" even when "symlink" is 
 <tr><td>Affected range</td><td><code>&lt;3.3.6-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.3.6-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.403%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

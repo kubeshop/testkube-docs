@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:dda390c4b1298d1b1f9250c03bca50052b0a8dae43e4cdcf1a26467fdc1bce36</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/medium-3-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 3" src="https://img.shields.io/badge/unspecified-3-lightgrey"/></td></tr>
-<tr><td>platform</td><td>linux/arm64</td></tr>
-<tr><td>size</td><td>75 MB</td></tr>
-<tr><td>packages</td><td>343</td></tr>
+<tr><td>digest</td><td><code>sha256:7072dbc8de7aab0ccf9470c160c7ed5f63e3e33ba38cf106ac64662a268c54cf</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/medium-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
+<tr><td>platform</td><td>linux/amd64</td></tr>
+<tr><td>size</td><td>54 MB</td></tr>
+<tr><td>packages</td><td>290</td></tr>
 </table>
 </details></table>
 </details>
@@ -295,120 +295,6 @@ Mountpoint creation is now scoped to the container root using `os.Root` (Go 1.24
 <blockquote>
 
 Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Escalation on Windows in github.com/docker/cli
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/gofiber/fiber/v2</strong> <code>2.52.13</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/gofiber/fiber/v2@2.52.13</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-45045?s=github&n=v2&ns=github.com%2Fgofiber%2Ffiber&t=golang&vr=%3C%3D2.52.13"><img alt="medium 5.3: CVE--2026--45045" src="https://img.shields.io/badge/CVE--2026--45045-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Authentication Bypass by Spoofing</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=2.52.13</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.455%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>37th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-## Summary
-
-The `BalancerForward` proxy helper in GoFiber uses `Header.Add()` instead of `Header.Set()` when injecting the `X-Real-IP` header. This appends the real client IP as a second header value rather than replacing any attacker-supplied value. Upstream servers that read the first `X-Real-IP` header (nginx, Express, most HTTP servers) use the attacker's spoofed IP for logging, rate limiting, and access control.
-
-## Vulnerable Code
-
-**File:** `middleware/proxy/proxy.go`, lines 270-285
-
-```go
-func BalancerForward(servers []string, clients ...*fasthttp.Client) fiber.Handler {
-    r := &roundrobin{
-        current: 0,
-        pool:    servers,
-    }
-    return func(c fiber.Ctx) error {
-        server := r.get()
-        if !strings.HasPrefix(server, "http") {
-            server = "http://" + server
-        }
-        c.Request().Header.Add("X-Real-IP", c.IP())   // line 282: Add, not Set
-        return Do(c, server+c.OriginalURL(), clients...)
-    }
-}
-```
-
-## Data Flow
-
-1. Attacker sends request with `X-Real-IP: 10.0.0.1` (spoofed internal IP)
-2. `BalancerForward` handler executes at line 282
-3. `c.Request().Header.Add("X-Real-IP", c.IP())` APPENDS the real IP as a second header
-4. Upstream server receives: `X-Real-IP: 10.0.0.1` AND `X-Real-IP: <real-attacker-ip>`
-5. Most HTTP servers (nginx, Node.js, Apache) read the FIRST value
-6. Upstream uses `10.0.0.1` for all IP-dependent logic
-
-## Impact
-
-- **Rate limit bypass:** IP-based rate limiting at the upstream uses the spoofed IP, allowing unlimited requests
-- **IP ACL bypass:** Internal IP allowlists (e.g., admin panels restricted to `10.0.0.0/8`) can be bypassed
-- **Audit log poisoning:** Security logs record the spoofed IP, making incident investigation unreliable
-- **Geolocation bypass:** IP-based geofencing or region restrictions are circumvented
-
-## Fix
-
-Replace `Header.Add()` with `Header.Set()` at line 282:
-
-```go
-c.Request().Header.Set("X-Real-IP", c.IP())
-```
-
-`Header.Set()` replaces any existing header value, ensuring only the real client IP is forwarded.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/U-2-lightgrey"/><strong>stdlib</strong> <code>1.26.4</code> (golang)</summary>
-
-<small><code>pkg:golang/stdlib@1.26.4</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-42505?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.5"><img alt="unspecified : CVE--2026--42505" src="https://img.shields.io/badge/CVE--2026--42505-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.5</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.26.5</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.413%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Handshakes which used Encrypted Client Hello could be de-anonymized by a passive network observer due to a disclosure of pre-shared key identities in the unencrypted client hello.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-39822?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.5"><img alt="unspecified : CVE--2026--39822" src="https://img.shields.io/badge/CVE--2026--39822-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.5</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.26.5</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.183%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-On Unix systems, opening a file in an os.Root improperly follows symlinks to locations outside of the Root when the final path component of the a path is a symbolic link and the path ends in /.
-
-For example, 'root.Open("symlink/")' will open "symlink" even when "symlink" is a symbolic link pointing outside of the root.
 
 </blockquote>
 </details>

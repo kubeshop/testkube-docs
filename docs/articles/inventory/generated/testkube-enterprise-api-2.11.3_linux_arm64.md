@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:e969037f11032a2306f3173419dbd4746ace205f0c95992bff0ef2ea79ed9f66</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/medium-3-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 3" src="https://img.shields.io/badge/unspecified-3-lightgrey"/></td></tr>
-<tr><td>platform</td><td>linux/amd64</td></tr>
-<tr><td>size</td><td>60 MB</td></tr>
-<tr><td>packages</td><td>331</td></tr>
+<tr><td>digest</td><td><code>sha256:9e83c720cd4ee3cdf845bf25516d6e33b1aa94c61fbafde68d91fdc77814aace</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/medium-3-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
+<tr><td>platform</td><td>linux/arm64</td></tr>
+<tr><td>size</td><td>75 MB</td></tr>
+<tr><td>packages</td><td>343</td></tr>
 </table>
 </details></table>
 </details>
@@ -311,7 +311,7 @@ Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Es
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.455%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.463%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>37th percentile</code></td></tr>
 </table>
 
@@ -368,47 +368,6 @@ c.Request().Header.Set("X-Real-IP", c.IP())
 ```
 
 `Header.Set()` replaces any existing header value, ensuring only the real client IP is forwarded.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/U-2-lightgrey"/><strong>stdlib</strong> <code>1.26.4</code> (golang)</summary>
-
-<small><code>pkg:golang/stdlib@1.26.4</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-42505?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.5"><img alt="unspecified : CVE--2026--42505" src="https://img.shields.io/badge/CVE--2026--42505-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.5</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.26.5</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.413%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Handshakes which used Encrypted Client Hello could be de-anonymized by a passive network observer due to a disclosure of pre-shared key identities in the unencrypted client hello.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-39822?s=golang&n=stdlib&t=golang&vr=%3E%3D1.26.0-0%2C%3C1.26.5"><img alt="unspecified : CVE--2026--39822" src="https://img.shields.io/badge/CVE--2026--39822-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.5</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.26.5</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.183%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-On Unix systems, opening a file in an os.Root improperly follows symlinks to locations outside of the Root when the final path component of the a path is a symbolic link and the path ends in /.
-
-For example, 'root.Open("symlink/")' will open "symlink" even when "symlink" is a symbolic link pointing outside of the root.
 
 </blockquote>
 </details>
