@@ -121,7 +121,7 @@ A malicious container can redirect a volume bind mount to an arbitrary host path
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>CVSS Score</td><td><code>7.2</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:R/S:C/C:H/I:H/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.153%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.154%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
 </table>
 
