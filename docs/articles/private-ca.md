@@ -30,36 +30,36 @@ Configure the following value in the `testkube-enterprise` chart:
 
 ```yaml
 global:
-    customCaSecretRef: <secret name>
-    customCaSecretKey: "ca.crt"
-    certificateProvider: ""
+  customCaSecretRef: <secret name>
+  customCaSecretKey: "ca.crt"
+  certificateProvider: ""
 ```
 
 Configure the following values in the `testkube-runner` chart:
 
 ```yaml
 globalTemplate:
-    enabled: true
-    inline: true
-    spec:
-        pod:
-            volumes:
-                - name: testkube-enterprise-ca
-                  secret:
-                      secretName: <secret name>
-                      defaultMode: 420
-        container:
-            env:
-                - name: SSL_CERT_DIR
-                  value: /etc/testkube/certs/
-                - name: GIT_SSL_CAINFO
-                  value: /etc/testkube/certs/testkube-custom-ca.pem
-            volumeMounts:
-                - name: testkube-enterprise-ca
-                  mountPath: /etc/testkube/certs/testkube-custom-ca.pem
-                  # NOTE: If you overrode the key name using customCaSecretKey,
-                  # then you should also update this subPath value.
-                  subPath: ca.crt
+  enabled: true
+  inline: true
+  spec:
+    pod:
+      volumes:
+          - name: testkube-enterprise-ca
+            secret:
+                secretName: <secret name>
+                defaultMode: 420
+    container:
+      env:
+          - name: SSL_CERT_DIR
+            value: /etc/testkube/certs/
+          - name: GIT_SSL_CAINFO
+            value: /etc/testkube/certs/testkube-custom-ca.pem
+      volumeMounts:
+          - name: testkube-enterprise-ca
+            mountPath: /etc/testkube/certs/testkube-custom-ca.pem
+            # NOTE: If you overrode the key name using customCaSecretKey,
+            # then you should also update this subPath value.
+            subPath: ca.crt
 testkube-api:
   cloud:
     tls:
