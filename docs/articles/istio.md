@@ -48,23 +48,22 @@ Chart `testkube`:
 
 ```yaml
 testkube-api:
-    jobPodAnnotations:
-        sidecar.istio.io/inject: "false"
+  jobPodAnnotations:
+    sidecar.istio.io/inject: "false"
 ```
 
 #### Define a Global Test Workflows Template
 
-Chart `testkube`:
+Chart `testkube-runner`:
 
 ```yaml
-global:
-    testWorkflows:
-        globalTemplate:
-            enabled: true
-            spec:
-                pod:
-                    annotations:
-                        sidecar.istio.io/inject: "false"
+globalTemplate:
+  enabled: true
+  inline: true
+  spec:
+    pod:
+       annotations:
+         sidecar.istio.io/inject: "false"
 ```
 
 #### Hold the API Server Until Istio's Proxy Is Ready
@@ -75,8 +74,8 @@ Chart `testkube-enterprise`:
 
 ```yaml
 testkube-cloud-api:
-    podAnnotations:
-        proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+  podAnnotations:
+    proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
 ```
 
 #### Hold the Worker Service Until Istio's Proxy Is Ready
@@ -87,6 +86,6 @@ Chart `testkube-enterprise`:
 
 ```yaml
 testkube-worker-service:
-    podAnnotations:
-        proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+  podAnnotations:
+    proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
 ```
