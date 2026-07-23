@@ -8,6 +8,43 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Release v2.12.0 (2026-07-23)
+
+This is a major release with lots of new features and improvements!
+
+Control Plane is available in Helm chart `v2.335.0` and the Agent is available in Helm chart `v2.12.0`.
+
+### AI
+
+- Private AI chats. Start a private chat to keep the conversation visible only to you, then make it public when you're ready to share it with your team. Making a chat public is permanent.
+- AI chats in workflow and execution context. Workflow details now include an AI Chats tab, while the existing execution tab now shows any chat where an agent inspected that workflow or execution, not only chats started by triggers, making related analysis easier to find and continue.
+
+### Insights & Analytics
+
+- Added support for execution drilldown on all metrics
+- Added support for filtering or segmenting by execution tags in time series analysis
+- Extended available segments for dynamic and custom metrics
+
+### Operations & Security
+
+- Login and signup are now separate pages.
+
+### Improvements
+
+- Registration token rotation: from the Testkube CLI, it is now possible to rotate the registration token that agents use to self-register with the Control Plane. Once updated, the token must be updated in all locations where it is used: values.yaml files and/or secret stores.
+- Testkube CLI supports `--limit` for queries: the CLI now allows the `--limit` parameter for the Test Workflow `get` method to return more than 100 objects.
+- CVEs resolution: all vulnerabilities (CVEs) reported in previous versions of the images have been resolved, for both the Control Plane and Agent artifact groups.
+
+### Other
+
+- Added ability to filter executions based on actor and execution time
+- Improved error messages when editing workflow and other definitions via YAML
+- Added extra details to logs pertaining to workflow, execution, and runner metadata
+- Replaced outdated Grafana dashboard metrics with their current corresponding ones
+- Added an option to expose Prometheus metrics for runners
+- Improved runner logging to reduce false error messages
+
+
 ## Patch Release v2.11.3 (2026-07-17)
 
 Control Plane is available in Helm chart `v2.334.3`.
