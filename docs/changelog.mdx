@@ -29,6 +29,12 @@ Control Plane is available in Helm chart `v2.335.0` and the Agent is available i
 
 - Login and signup are now separate pages.
 
+### Improvements
+
+- Registration token rotation: from the Testkube CLI, it is now possible to rotate the registration token that agents use to self-register with the Control Plane. Once updated, the token must be updated in all locations where it is used: values.yaml files and/or secret stores.
+- Testkube CLI supports `--limit` for queries: the CLI now allows the `--limit` parameter for the Test Workflow `get` method to return more than 100 objects.
+- CVEs resolution: all vulnerabilities (CVEs) reported in previous versions of the images have been resolved, for both the Control Plane and Agent artifact groups.
+
 ### Other
 
 - Added ability to filter executions based on actor and execution time
