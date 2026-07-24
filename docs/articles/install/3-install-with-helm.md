@@ -1,7 +1,7 @@
 # Testkube Production Install with Helm
 
-The main Testkube Helm Charts includes both the Testkube Control Plane and Testkube Agent charts and 
-let you set up a customized Testkube instance tailored to your environment. See the list of 
+The main Testkube Helm Charts includes both the Testkube Control Plane and Testkube Agent charts and
+let you set up a customized Testkube instance tailored to your environment. See the list of
 included [components](/articles/helm-components).
 
 :::info
@@ -34,7 +34,6 @@ The following are production requirements for external dependencies:
   - At least 500 millicore
   - 1GB of memory
   - At least 5GB of storage (subject to increase as load increases)
-  
 - **MongoDB**
   - At least 1 CPU core
   - 2GB of memory
@@ -89,9 +88,13 @@ helm upgrade --install \
 
 ## General Settings
 
+:::info
+If you prefer a guided experience, the [Testkube Initializer](https://initializer.testkube.io) can help you configure your installation.
+:::
+
 ### License
 
-You will have to set a license key to get started with Testkube. You can also opt to use [a shared secret for your license][secret-license]. 
+You will have to set a license key to get started with Testkube. You can also opt to use [a shared secret for your license][secret-license].
 
 **[Schedule time with our Solutions Engineering team](https://testkube.io/demo)** to get your license and answers to any questions you have.
 
@@ -126,7 +129,7 @@ global:
 By default, the following services will be exposed. You can also choose to override the subdomain for each service.
 
 | Service        | Default            | Override                      |
-|----------------|--------------------|-------------------------------|
+| -------------- | ------------------ | ----------------------------- |
 | Dashboard      | dashboard.$domain  | global.uiSubdomain            |
 | REST API       | api.$domain        | global.restApiSubdomain       |
 | Dex            | api.$domain/idp    | global.restApiSubdomain       |
@@ -143,10 +146,11 @@ TLS should be terminated at the application-level instead of the ingress-level a
 Ensure that your gateway or proxy fully supports HTTP/2, as this is a fundamental requirement for enabling gRPC endpoints. Without HTTP/2 support, gRPC communication will not function properly.
 If you are deploying Testkube in an Azure environment, it is essential to use [Application Gateway for Containers](https://learn.microsoft.com/en-us/azure/application-gateway/for-containers/overview#load-balancing-features) rather than the standard Azure Application Gateway, as the latter [does not support gRPC protocol](https://github.com/Azure/application-gateway-kubernetes-ingress/issues/1015#issuecomment-2379609889).
 
-#### Gateway API 
+#### Gateway API
 
 Starting with Testkube Enterprise `2.11.0`, Testkube supports exposing public endpoints through the Kubernetes Gateway API backed by Traefik.
 This gives you an alternative to the current Ingress-based exposure model and allows you to:
+
 - attach Testkube routes to a shared cluster-wide Gateway
 - support cross-namespace routing
 - manage public TLS at the Gateway layer
@@ -157,15 +161,17 @@ NGINX and the Kubernetes Ingress API are still supported. However, the Ingress-b
 **What Testkube creates in gateway mode**
 
 When Gateway API is enabled, the chart can create:
+
 - a Gateway resource
 - a Certificate for the Gateway TLS listener when using cert-manager
-- HTTPRoute resources for 
+- HTTPRoute resources for
 - HTTPRoute redirect resources for HTTP to HTTPS
 - BackendTLSPolicy resources for HTTPS and gRPCS backends when application TLS is enabled
 
 **Prerequisites**
 
 Before enabling Gateway API in Testkube, install and manage these components separately:
+
 - Gateway API CRDs
 - a Gateway controller, for example Traefik
 - cert-manager, if you want the chart to manage the Gateway certificate.
@@ -175,6 +181,7 @@ Testkube does not install the Gateway API CRDs or the controller for you. Make s
 **Values configuration**
 
 Use this when Testkube should create its own Gateway and Ingress should be disabled.
+
 ```yaml
 global:
   domain: example.com
@@ -219,26 +226,28 @@ testkube-cloud-api:
   gatewayAPI:
     createRESTHTTPRoute: true
     createGRPCRoute: true
-    
+
 testkube-cloud-ui:
   gatewayAPI:
     createHTTPRoute: true
-    
+
 testkube-ai-service:
   gatewayAPI:
     createHTTPRoute: true
-    
+
 dex:
   gatewayAPI:
-    createHTTPRoute: true    
-    
+    createHTTPRoute: true
+
 minio:
   gatewayAPI:
     createHTTPRoute: true
 ```
+
 **Migration from Ingress without downtime**
 
 You can migrate gradually by creating Gateway API routes and keeping the existing Ingress resources active during the transition.
+
 ```yaml
 global:
   domain: example.com
@@ -285,25 +294,27 @@ testkube-cloud-api:
   gatewayAPI:
     createRESTHTTPRoute: true
     createGRPCRoute: true
-    
+
 testkube-cloud-ui:
   gatewayAPI:
     createHTTPRoute: true
-    
+
 testkube-ai-service:
   gatewayAPI:
     createHTTPRoute: true
-    
+
 dex:
   gatewayAPI:
     createHTTPRoute: true
-    
+
 minio:
   gatewayAPI:
     createHTTPRoute: true
 ```
+
 After DNS cutover and validation, you can remove the old Ingress-based exposure and keep Gateway API as the only public entrypoint.
 At that stage, traffic should already be reaching Testkube through the Gateway, and the existing Ingress resources should no longer be needed. The final step is simply to disable Ingress creation in values:
+
 ```yaml
 global:
   ingress:
@@ -312,6 +323,7 @@ global:
 
 You can also attach Testkube routes to an existing Gateway instead of creating a new one from the chart. This is useful when your platform team manages a shared cluster Gateway and multiple applications attach their own HTTPRoute resources to it.
 In that model, Testkube does not create the Gateway resource. Instead, it only creates HTTPRoute resources that reference the existing Gateway by name and namespace.
+
 ```yaml
 global:
   gatewayAPI:
@@ -320,6 +332,7 @@ global:
       name: shared-gateway
       namespace: platform-gateway
 ```
+
 When using a shared Gateway in another namespace, make sure that the Gateway listeners allow cross-namespace routes, for example by setting `allowedRoutes.namespaces.from: All` on the Gateway itself. Without that, Testkube routes created in a different namespace will not be allowed to attach.
 
 ### Auth
@@ -353,16 +366,17 @@ dex:
 ```
 
 Another example of using Google’s OpenID Connect provider that performs authorization based on groups membership:
+
 ```yaml
 testkube-cloud-api:
   additionalEnv:
     OAUTH_GROUPS_SCOPE: "true"
-  
+
 dex:
   volumes:
-  - name: google-auth-volume
-    secret:
-      secretName: google-auth-secret #secret with the SA JSON key file
+    - name: google-auth-volume
+      secret:
+        secretName: google-auth-secret #secret with the SA JSON key file
   volumeMounts:
     - name: google-auth-volume
       readOnly: true
@@ -370,22 +384,21 @@ dex:
   configTemplate:
     additionalConfig: |
     connectors:
-    - type: google
-      id: google
-      name: Google
-      config:
-      clientID: $GOOGLE_CLIENT_ID
-      clientSecret: $GOOGLE_CLIENT_SECRET
-      redirectURI: <dex endpoint>/idp/callback
-      serviceAccountFilePath: /home/googleAuth.json #path from volumeMount
-      groups:
-        - <group-name>
-      domainToAdminEmail:
-        "*": <email of a Google Workspace user>
-      
+      - type: google
+        id: google
+        name: Google
+        config:
+        clientID: $GOOGLE_CLIENT_ID
+        clientSecret: $GOOGLE_CLIENT_SECRET
+        redirectURI: <dex endpoint>/idp/callback
+        serviceAccountFilePath: /home/googleAuth.json #path from volumeMount
+        groups:
+          - <group-name>
+        domainToAdminEmail:
+          "*": <email of a Google Workspace user>
 ```
-Please note that it is required to create a k8s secret with a service account JSON key file and mount it to Dex pod. Follow official [documentation](https://dexidp.io/docs/connectors/google/) to see full configuration.
 
+Please note that it is required to create a k8s secret with a service account JSON key file and mount it to Dex pod. Follow official [documentation](https://dexidp.io/docs/connectors/google/) to see full configuration.
 
 Alternatively, you can use [a local database with static users](/articles/auth#static-users) which acts as a virtual identity provider for evaluations.
 
@@ -400,8 +413,8 @@ See [Credentials Encryption][advanced-credentials] in the custom installation gu
 
 ### Prometheus Metrics
 
-Testkube exposes Prometheus metrics on the `/metrics` endpoint and uses a `ServiceMonitor` resource to expose 
-them to Prometheus. In order for this to work, you need to have `Prometheus Operator` installed in your cluster 
+Testkube exposes Prometheus metrics on the `/metrics` endpoint and uses a `ServiceMonitor` resource to expose
+them to Prometheus. In order for this to work, you need to have `Prometheus Operator` installed in your cluster
 so that the `ServiceMonitor` resource can be created.
 
 Use the following configuration to enable metrics:
@@ -442,7 +455,7 @@ This secret is referenced by the `global.enterpriseLicenseSecretRef` setting. Fo
 
 ## Advanced Settings
 
-Check out the [custom installation][advanced] guide to learn more about our advanced settings, including 
+Check out the [custom installation][advanced] guide to learn more about our advanced settings, including
 organization management, custom ingress controllers, production environments, and more.
 
 [advanced]: /articles/install/advanced-install

@@ -136,6 +136,11 @@ const config = {
             href: "https://github.com/kubeshop/testkube-marketplace",
           },
           {
+            label: "Initializer",
+            position: "right",
+            href: "https://initializer.testkube.io",
+          },
+          {
             type: "html",
             position: "right",
             value: `<iframe src="https://ghbtns.com/github-btn.html?user=kubeshop&repo=testkube&type=star&count=true&color=dark" style='margin-top: 6px' frameborder="0" scrolling="0" width="110" height="20" title="GitHub"></iframe>`,
