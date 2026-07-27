@@ -35,28 +35,6 @@ Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Es
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>github.com/gofiber/fiber/v3</strong> <code>3.3.0</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/gofiber/fiber/v3@3.3.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-53624?s=golang&n=v3&ns=github.com%2Fgofiber%2Ffiber&t=golang&vr=%3C3.4.0"><img alt="unspecified : CVE--2026--53624" src="https://img.shields.io/badge/CVE--2026--53624-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;3.4.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>3.4.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.178%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-GoFiber never set HSTS header in helmet middleware due to incorrect protocol check in github.com/gofiber/fiber
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/crypto</strong> <code>0.54.0</code> (golang)</summary>
 
 <small><code>pkg:golang/golang.org/x/crypto@0.54.0</code></small><br/>
@@ -73,6 +51,28 @@ GoFiber never set HSTS header in helmet middleware due to incorrect protocol che
 The golang.org/x/crypto/openpgp package is unsafe by design, has numerous known security issues, is not maintained, and should not be used.
 
 If you are required to interoperate with OpenPGP systems and need a maintained package, consider github.com/ProtonMail/go-crypto/openpgp which is a maintained fork that aims to be a drop-in replacement for this package.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>github.com/gofiber/fiber/v3</strong> <code>3.3.0</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/gofiber/fiber/v3@3.3.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-53624?s=golang&n=v3&ns=github.com%2Fgofiber%2Ffiber&t=golang&vr=%3C3.4.0"><img alt="unspecified : CVE--2026--53624" src="https://img.shields.io/badge/CVE--2026--53624-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;3.4.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>3.4.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.178%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+GoFiber never set HSTS header in helmet middleware due to incorrect protocol check in github.com/gofiber/fiber
 
 </blockquote>
 </details>
