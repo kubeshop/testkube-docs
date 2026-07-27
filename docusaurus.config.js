@@ -8,6 +8,7 @@ const darkCodeTheme = require("./src/themes/prism-testkube-dark");
 const redirects = require("./redirects");
 const agentRedocSpecs = require("./src/openapi/agent/redoc-specs");
 const cloudRedocSpecs = require("./src/openapi/cloud/redoc-specs");
+const isProduction = process.env.NODE_ENV === "production";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -60,12 +61,16 @@ const config = {
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
-        gtag: {
-          trackingID: "G-G7HWN1EDK5",
-        },
-        googleTagManager: {
-          containerId: "GTM-PQK4DKN",
-        },
+        gtag: isProduction
+          ? {
+              trackingID: "G-G7HWN1EDK5",
+            }
+          : undefined,
+        googleTagManager: isProduction
+          ? {
+              containerId: "GTM-PQK4DKN",
+            }
+          : undefined,
         sitemap: {
           createSitemapItems: async (params) => {
             const lowPrioPaths = [
