@@ -1,0 +1,23 @@
+import SimplePromptfoo from "../../workflows/simple-promptfoo-workflow.md"
+
+# Basic Promptfoo Example
+
+[Promptfoo](https://www.promptfoo.dev/) is a popular open-source tool for evaluating and red-teaming LLM
+applications using declarative test cases. The Workflow below runs the official Promptfoo
+[getting-started example](https://github.com/promptfoo/promptfoo/tree/main/examples/getting-started)
+and uploads the generated reports as artifacts.
+You can paste this directly into the YAML of an existing or new Workflow, just make sure to update the
+`name` and `namespace` for your environment if needed.
+
+- The `spec.content` property checks out the getting-started example from the Promptfoo GitHub repository.
+- The `spec.container` property defines the working directory, Node.js image, and environment variables for the Workflow;
+  the `OPENAI_API_KEY` is resolved using the [credential](/articles/credential-management) expression so the key
+  is never stored in the Workflow definition itself.
+- The **"Run promptfoo eval"** step runs the evaluation and writes both JSON and HTML reports.
+- The **"Save report"** step uploads the reports as artifacts; the `always` condition makes sure the reports
+  are uploaded even if the evaluation fails.
+
+<SimplePromptfoo/>
+
+After execution, the JSON and HTML reports are available under the Artifacts tab of the execution,
+and the evaluation output is shown in the Log Output tab.
