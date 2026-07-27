@@ -7,7 +7,7 @@ import TabItem from "@theme/TabItem";
 Testkube provides official [Backstage](https://backstage.io) plugins that bring test execution visibility directly into your developer portal. The integration consists of two plugins:
 
 - **UI plugin** (`@testkube/backstage-plugin`) — adds a Testkube dashboard page and entity-level test summary tabs to your Backstage frontend.
-- **Backend plugin** (`@testkube/backstage-plugin-backend`) — exposes a `testkube` backend service that proxies requests to the Testkube API and provides metadata endpoints used by the UI plugin.
+- **Backend plugin** (`@testkube/backstage-plugin-backend`) — proxies requests to the Testkube API, provides metadata used by the UI plugin, and optionally adds a Scaffolder quality-gate action.
 
 The source code and a working example app are available at [github.com/kubeshop/testkube-backstage-plugin](https://github.com/kubeshop/testkube-backstage-plugin).
 
@@ -15,11 +15,12 @@ The source code and a working example app are available at [github.com/kubeshop/
 
 - **Testkube Dashboard** — a global page with an overview of the latest test workflow executions, including success/failure metrics, execution times, statuses, and workflow names.
 - **Testkube Entity Page** — an entity-level tab showing test workflows related to a specific catalog entity (filtered by annotation). It includes:
-  - Metrics panels (success/failure rate, failed executions, total executions).
   - Test workflow list with last execution info (duration, date, status).
   - View workflow definitions in YAML.
   - View execution logs and execution history.
-  - Trigger test workflow runs directly from Backstage.
+  - Run workflows directly when connected to a Standalone Agent, or open the workflow in the Testkube Dashboard when using Enterprise.
+- **Enterprise navigation** — select an organization and environment and open the corresponding Testkube Dashboard, executions, or Test Workflows page.
+- **Scaffolder quality gate** — run one or more Test Workflows during template execution, wait for their results, and fail the template step if any workflow does not pass.
 
 ## Installation
 
@@ -75,9 +76,7 @@ testkube:
 ```
 
 <Admonition type="warning" title="API Token Permissions">
-  Use an [API token](/articles/api-token-management) with **read-only** access. Avoid embedding tokens with write
-  permissions directly in configuration files — use environment variables
-  instead.
+  Use an [API token](/articles/api-token-management) with the minimum required permissions. Read-only access is sufficient for dashboard visibility. If you enable the Scaffolder quality gate, the token must also be able to execute Test Workflows. Always load tokens from environment variables rather than storing them in configuration or template inputs.
 </Admonition>
 
 <Admonition type="info" title="Enterprise Requirements">
@@ -105,7 +104,41 @@ kubectl port-forward svc/testkube-api-server -n testkube 8088:8088
 </TabItem>
 </Tabs>
 
-## Adding the Testkube Dashboard Page
+### Custom CA Certificates
+
+If the Testkube API uses a certificate signed by a private CA, configure the backend with the CA certificate:
+
+```yaml
+testkube:
+  apiUrl: "https://testkube.internal.example.com"
+  caFilePath: "/etc/ssl/certs/internal-ca.pem"
+```
+
+You can disable certificate verification with `skipTlsVerify: true`, but a custom CA is preferred. If both options are configured, `skipTlsVerify` takes precedence.
+
+## Frontend Setup
+
+<Tabs>
+<TabItem value="new-frontend" label="New Frontend System" default>
+
+Import the plugin from its `/alpha` entry point and add it to the app features in `packages/app/src/App.tsx`:
+
+```tsx
+import { createApp } from "@backstage/frontend-defaults";
+import catalogPlugin from "@backstage/plugin-catalog/alpha";
+import testkubePlugin from "@testkube/backstage-plugin/alpha";
+
+export default createApp({
+  features: [catalogPlugin, testkubePlugin],
+});
+```
+
+This registers the Testkube Dashboard at `/testkube` and adds Testkube content to catalog entities containing the `testkube.io/labels` annotation. Add a navigation item through your Backstage app's navigation module if you want the page displayed in the sidebar.
+
+</TabItem>
+<TabItem value="legacy-frontend" label="Legacy Frontend System">
+
+### Adding the Testkube Dashboard Page
 
 Edit `packages/app/src/App.tsx` to add the Testkube dashboard route:
 
@@ -153,7 +186,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
 
 </Admonition>
 
-## Adding the Entity Page Tab
+### Adding the Entity Page Tab
 
 To show test workflows related to a specific catalog entity, edit `packages/app/src/components/catalog/EntityPage.tsx`:
 
@@ -189,7 +222,10 @@ The **Tests Summary** tab will only appear for entities that have the `testkube.
 
 ![Backstage Testkube Entity Page](../img/backstage-entity-page.png)
 
-### Annotating Catalog Entities
+</TabItem>
+</Tabs>
+
+## Annotating Catalog Entities
 
 Add the `testkube.io/labels` annotation to any catalog entity to link it with Testkube test workflows. The annotation value should match the labels applied to your test workflows:
 
@@ -208,9 +244,60 @@ spec:
 
 This entity will display only test workflows that have the label `app=testkube-website`.
 
+## Scaffolder Quality Gate
+
+The optional Scaffolder module adds the `testkube:run-test-workflows` action. It is available for Testkube Enterprise and requires the Scaffolder backend plugin to already be installed.
+
+Register the module alongside the Testkube backend plugin:
+
+```ts
+backend.add(import("@backstage/plugin-scaffolder-backend"));
+backend.add(import("@testkube/backstage-plugin-backend"));
+backend.add(import("@testkube/backstage-plugin-backend/scaffolder"));
+```
+
+The action requires `orgId` and `envId`, plus at least one explicitly named workflow or a Kubernetes label selector:
+
+```yaml
+- id: testkube
+  name: Run Testkube quality gate
+  action: testkube:run-test-workflows
+  input:
+    workflows:
+      - name: api-smoke-test
+        config:
+          workers: "2"
+        target:
+          match:
+            environment: [staging]
+          not:
+            region: [legacy]
+          replicate: [runner-1, runner-2]
+      - name: browser-smoke-test
+
+    # You can use a selector instead of, or together with, explicit workflows.
+    selector: app=backend,environment=staging
+
+    tags:
+      component: payments
+
+    orgId: tkcorg_XXXXXXXXX
+    envId: tkcenv_XXXXXXXXX
+    timeoutSeconds: 1800
+```
+
+Explicit workflows that also match the selector run only once and retain their `config` and `target` settings. All selected workflows start concurrently, and the action waits until every execution finishes. Only `passed` is considered successful; failed, aborted, timed-out, or unstartable executions fail the Scaffolder step.
+
+The action outputs:
+
+- `status` — `green` when all executions pass, otherwise `red`.
+- `results` — the workflow name, execution ID, Testkube status, green/red status, and Testkube Dashboard link for every execution.
+
+Every execution is tagged with `executedFrom: backstage` and the Backstage `taskId`. Additional `tags` supplied to the action are applied to every selected workflow.
+
 ## Backend API Endpoints
 
-The backend plugin registers an HTTP router for the `testkube` service with the following endpoints:
+For troubleshooting, the backend plugin registers an HTTP router for the `testkube` service with the following endpoints:
 
 | Endpoint                                 | Description                                                            |
 | ---------------------------------------- | ---------------------------------------------------------------------- |
