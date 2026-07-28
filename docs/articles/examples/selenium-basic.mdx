@@ -1,12 +1,12 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-import SimpleSelenium from "../../workflows/simple-selenium-workflow.md"
+import SimpleSelenium from "../../workflows/simple-selenium-workflow.md";
 
 # Basic Selenium Example
 
-import RequiresCommercialWorkflows from "../_commercial-workflows-note.mdx"
+import RequiresCommercialWorkflows from "../_commercial-workflows-note.mdx";
 
-<RequiresCommercialWorkflows/>
+<RequiresCommercialWorkflows />
 
 Below is a basic workflow for executing a Selenium test with maven - the test itself is written in Java and available
 on GitHub. You can paste this directly into the YAML of an existing or new test, just make
@@ -16,7 +16,7 @@ sure to update the `name` and `namespace` for your environment if needed.
 - The `spec.services.chrome` property starts the Chrome engine as a Service which Selenium then uses for running the test (read more about [Services](../test-workflows-services))
 - the `spec.steps` property defines a single step that runs the test using the started Chrome engine and uploads the created reports.
 
-<SimpleSelenium/>
+<SimpleSelenium />
 
 After execution, you can see the output from the test executions under the executions panel tabs:
 
@@ -44,4 +44,3 @@ Clicking the HTML report opens it in your browser:
 
 </TabItem>
 </Tabs>
-

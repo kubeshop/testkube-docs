@@ -13,6 +13,7 @@
        The Agent is **Open-Source** and can be deployed both Standalone and connected to the Control Plane - [Read More](/articles/open-source).
 
        **Agents are _always_ deployed by you in your own infrastructure.**
+
   </div>
   <div style={{ flex: 1 }}>
     <div style={{ textAlign: 'center' }}>
@@ -26,10 +27,10 @@
 You can deploy Testkube in one of the following ways:
 
 | Deployment Option         | &nbsp;&nbsp;&nbsp;Licensing&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Agent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Control&nbsp;Plane&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;Dashboard&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
-|---------------------------|:---------------------------------------------:|:-----------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------:|:---------------------------------------------------------------:|
-| **On-Prem Control Plane** |   [Commercial](https://testkube.io/pricing)   |                                             Hosted by you                                             |                                                   Hosted by you                                                    |                       ✅                       |                                ✅                                |
-| **Cloud Control Plane**   |   [Commercial](https://testkube.io/pricing)   |                                             Hosted by you                                             |                                                 Hosted by Testkube                                                 |                       ✅                       |                                ✅                                |
-| **Standalone Agent**      |     [Open Source](/articles/open-source)      |                                             Hosted by you                                             |                                                         ❌                                                          |                       ❌                       |                                ✅                                |
+| ------------------------- | :-------------------------------------------: | :---------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------: | :-------------------------------------------: | :-------------------------------------------------------------: |
+| **On-Prem Control Plane** |   [Commercial](https://testkube.io/pricing)   |                                             Hosted by you                                             |                                                   Hosted by you                                                    |                      ✅                       |                               ✅                                |
+| **Cloud Control Plane**   |   [Commercial](https://testkube.io/pricing)   |                                             Hosted by you                                             |                                                 Hosted by Testkube                                                 |                      ✅                       |                               ✅                                |
+| **Standalone Agent**      |     [Open Source](/articles/open-source)      |                                             Hosted by you                                             |                                                         ❌                                                         |                      ❌                       |                               ✅                                |
 
 The high-level deployment architecture and how to get started with each of these is described below.
 
@@ -45,7 +46,7 @@ The default installation deploys the Control Plane. Install Testkube Runners sep
 You can install a preconfigured version of Testkube On-Prem [with the CLI][install-cli] for an out-of-the-box experience
 or install [with Helm][install-helm] for more configurability in production scenarios.
 
-A trial license will be required during installation - **[schedule time with our Solutions Engineering team](https://testkube.io/demo)** to get 
+A trial license will be required during installation - **[schedule time with our Solutions Engineering team](https://testkube.io/demo)** to get
 your license and answers to any questions you have.
 
 A high-level deployment architecture for Testkube On-Prem is shown below.
@@ -86,7 +87,7 @@ Check out [Helm Components](/articles/helm-components) to see all the actual com
 
 When using the Testkube Cloud Control Plane (available at https://app.testkube.io), the Control Plane is managed by the Testkube team. You can create Environments and manage Resources (Workflows, Triggers, etc.) directly from the Dashboard. You then deploy [Testkube Agents](/articles/agents-overview) in your infrastructure when you want to execute Workflows, listen for events, etc.
 
-A trial account will be required for evaluating the Cloud Control Plane - **[schedule time with our Solutions Engineering team](https://testkube.io/demo)** to get 
+A trial account will be required for evaluating the Cloud Control Plane - **[schedule time with our Solutions Engineering team](https://testkube.io/demo)** to get
 your account and answers to any questions you have.
 
 Once onboarded, you will be prompted to create an initial Testkube Environment, which will provide you with the required CLI/Helm commands to

@@ -1,6 +1,6 @@
 # Atlassian Jira
 
-You can use Webhooks to create issues in Atlassian JIRA projects, but you will first need to use the [JIRA REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v3/) 
+You can use Webhooks to create issues in Atlassian JIRA projects, but you will first need to use the [JIRA REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v3/)
 to look up the project id and issuetype id for your target JIRA Project and type of issue you want to create.
 
 ## Looking up JIRA Project and IssueType ids
@@ -12,9 +12,9 @@ Follow these steps:
 3. Use the [Get Project Issue Type](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-projects/#api-rest-api-3-project-projectid-hierarchy-get) operation to find the
    `id` of the type of issue that you want to create with the Webhook.
 
-## Create a WebhookTemplate for creating Issues 
+## Create a WebhookTemplate for creating Issues
 
-The actual Webhook configuration will be in a [WebhookTemplate](/articles/webhooks#webhook-templates) so it can be reused for multiple Webhooks. 
+The actual Webhook configuration will be in a [WebhookTemplate](/articles/webhooks#webhook-templates) so it can be reused for multiple Webhooks.
 
 In this example we will add parameters for
 
@@ -26,7 +26,7 @@ In this example we will add parameters for
 
 Any Webhook using this WebhookTemplate will be able to override these values as needed.
 
-- The `payloadTemplate` specifies the content to send to the [Create Issue](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/#api-rest-api-3-issue-post) operation, 
+- The `payloadTemplate` specifies the content to send to the [Create Issue](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/#api-rest-api-3-issue-post) operation,
   read more about [Webhook Payloads](/articles/webhooks#webhook-payload) to see how you can configure this.
 - Specify the `uri` for your JIRA instance (you could even put this in a parameter if you want to create issues in different JIRA instances).
 - The template will trigger on the `end-testworkflow-failed` event, you can of course change this to whatever suits your needs, or even make it configurable via a corresponding parameter.
@@ -62,7 +62,7 @@ spec:
       required: true
       example: "ABCDE"
   events:
-  - end-testworkflow-failed
+    - end-testworkflow-failed
   uri: https://kubeshop.atlassian.net/rest/api/3/issue
   payloadTemplate: |
     {
@@ -103,7 +103,7 @@ spec:
   headers:
     Accept: application/json
     Content-Type: application/json
-    Authorization: "Basic {{ index .Config \"token\" }}"
+    Authorization: 'Basic {{ index .Config "token" }}'
 ```
 
 ## Save the JIRA API Token to a Secret
@@ -124,7 +124,7 @@ data:
 ## Create Webhook(s) for creating issues
 
 We can now create any number of Webhooks that use the above WebhookTemplate, with corresponding input values to override the default values as needed:
- 
+
 ```yaml
 apiVersion: executor.testkube.io/v1
 kind: Webhook
@@ -152,7 +152,7 @@ spec:
 In the above example, you might not want to create JIRA Issues for all `end-testworkflow-failed` events in your Testkube Environment, in
 which case you can use [Resource Selectors](/articles/webhooks#resource-selector-labels) to narrow this down.
 
-For example, adding the below selector will result in only failed executions for Workflows labeled with `priority: p0` to trigger this Webhook and 
+For example, adding the below selector will result in only failed executions for Workflows labeled with `priority: p0` to trigger this Webhook and
 creating a corresponding JIRA.
 
 ```

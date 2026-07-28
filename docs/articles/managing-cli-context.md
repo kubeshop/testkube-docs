@@ -1,6 +1,6 @@
 # Managing CLI Context
 
-The Testkube CLI can be configured to connect to either a Standalone OSS Testkube Agent or 
+The Testkube CLI can be configured to connect to either a Standalone OSS Testkube Agent or
 a commercial Testkube Control Plane hosted either on-premise or in the cloud.
 
 :::note
@@ -9,10 +9,10 @@ Check out the [CLI Configuration File](/articles/cli-config-reference) documenta
 
 ## Connecting to a Standalone Testkube Agent
 
-The easiest way to connect the CLI to a standalone Testkube Agent is to make sure your current kubectl context is pointing 
+The easiest way to connect the CLI to a standalone Testkube Agent is to make sure your current kubectl context is pointing
 to the cluster where the Testkube Agent is deployed and then running
 
-```sh 
+```sh
 testkube set context --kubeconfig
 ```
 
@@ -22,9 +22,9 @@ If the Agent is not in the default testkube namespace, you can use the `--namesp
 
 ## Connecting to a Testkube Control Plane
 
-If you're using a commercial Testkube instance, you can use the `testkube login` command to 
-authenticate and connect the CLI with your Testkube Control Plane, which ensures that CLI commands 
-apply to the correct Testkube Environment and security context. 
+If you're using a commercial Testkube instance, you can use the `testkube login` command to
+authenticate and connect the CLI with your Testkube Control Plane, which ensures that CLI commands
+apply to the correct Testkube Environment and security context.
 
 When the CLI is installed, authenticate with your Testkube Control Plane:
 
@@ -39,13 +39,12 @@ If it's a self-hosted Testkube instance, you must specify the API URL to make su
 testkube login https://api.mycompany.com
 ```
 
-
 :::note
 If your self-hosted Testkube instance uses custom subdomains, check the override parameters using `testkube login --help` to connect to your instance correctly.
 :::
 
-This will prompt to open a browser window to sign in and authenticate with the Testkube Dashboard. Once authenticated, 
-the CLI will prompt for the Testkube Organisation and Environment to use with CLI commands. 
+This will prompt to open a browser window to sign in and authenticate with the Testkube Dashboard. Once authenticated,
+the CLI will prompt for the Testkube Organisation and Environment to use with CLI commands.
 
 ![CLI Authentication](images/cli-auth.png)
 
@@ -73,4 +72,3 @@ use this token to authenticate and gain access to corresponding Testkube resourc
 
 When the token is created, you're ready to change the Testkube CLI context using the
 [`testkube set context`](/cli/testkube-set-context) command.
-

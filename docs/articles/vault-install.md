@@ -10,7 +10,7 @@ the CSI provider.
 Throughout this guide:
 
 - The examples will assume that your Vault has a v2
-key-value secrets engine mounted at `kv/`.
+  key-value secrets engine mounted at `kv/`.
 - The specified Helm values will be from the root of the specified chart.
 - Configurations that will need to be replaced with actual values can be
   identified by the use of `<>`.
@@ -39,9 +39,9 @@ logger:
   level: debug
   format: json
 storage:
-    type: kubernetes
-    config:
-      inCluster: true
+  type: kubernetes
+  config:
+    inCluster: true
 issuer: <idp url>
 enablePasswordDB: true
 staticPasswords:
@@ -74,7 +74,7 @@ dex:
   podAnnotations:
     vault.hashicorp.com/agent-inject: "true"
     vault.hashicorp.com/secret-volume-path: /etc/dex
-    vault.hashicorp.com/role: 'dex'
+    vault.hashicorp.com/role: "dex"
     vault.hashicorp.com/agent-inject-secret-config.yaml: kv/dex/config
     vault.hashicorp.com/agent-inject-template-config.yaml: |
       {{`{{- with secret "kv/dex/config" }}{{ .Data.data.config }}{{ end -}}`}}
@@ -125,7 +125,7 @@ minio:
   podAnnotations:
     vault.hashicorp.com/agent-inject: "true"
     vault.hashicorp.com/secret-volume-path: /opt/bitnami/minio/secrets
-    vault.hashicorp.com/role: 'minio'
+    vault.hashicorp.com/role: "minio"
     vault.hashicorp.com/agent-inject-secret-root-user: kv/minio/credentials
     vault.hashicorp.com/agent-inject-secret-root-password: kv/minio/credentials
     # NOTE: These templates need to be double escaped as Minio runs this through tpl.
@@ -163,7 +163,7 @@ Create a secret `kv/control-plane/license` with the license key:
 
 ```json
 {
-  "key": "********",
+  "key": "********"
 }
 ```
 
@@ -185,7 +185,7 @@ testkube-cloud-api:
     name: vault-control-plane
   podAnnotations:
     vault.hashicorp.com/agent-inject: "true"
-    vault.hashicorp.com/role: 'control_plane'
+    vault.hashicorp.com/role: "control_plane"
     vault.hashicorp.com/secret-volume-path-license.key: /etc/testkube/secrets
     vault.hashicorp.com/agent-inject-secret-license.key: kv/control-plane/license
     vault.hashicorp.com/agent-inject-template-license.key: |
@@ -223,7 +223,7 @@ testkube-cloud-api:
     name: vault-control-plane
   podAnnotations:
     vault.hashicorp.com/agent-inject: "true"
-    vault.hashicorp.com/role: 'control_plane'
+    vault.hashicorp.com/role: "control_plane"
     vault.hashicorp.com/secret-volume-path-license.key: /etc/testkube/secrets
     vault.hashicorp.com/agent-inject-secret-license.key: kv/control-plane/license
     vault.hashicorp.com/agent-inject-template-license.key: |
@@ -254,7 +254,7 @@ testkube-cloud-api:
     name: vault-control-plane
   podAnnotations:
     vault.hashicorp.com/agent-inject: "true"
-    vault.hashicorp.com/role: 'control_plane'
+    vault.hashicorp.com/role: "control_plane"
     vault.hashicorp.com/secret-volume-path-minio-config.json: /etc/testkube/secrets
     vault.hashicorp.com/agent-inject-secret-minio-config.json: kv/minio/credentials
     vault.hashicorp.com/agent-inject-secret-minio-config.json: kv/minio/credentials
@@ -268,7 +268,7 @@ testkube-worker-service:
     name: vault-control-plane
   podAnnotations:
     vault.hashicorp.com/agent-inject: "true"
-    vault.hashicorp.com/role: 'control_plane'
+    vault.hashicorp.com/role: "control_plane"
     vault.hashicorp.com/secret-volume-path-minio-config.json: /etc/testkube/secrets
     vault.hashicorp.com/agent-inject-secret-minio-config.json: kv/minio/credentials
     vault.hashicorp.com/agent-inject-secret-minio-config.json: kv/minio/credentials
@@ -302,7 +302,6 @@ secrets engine in Vault.
 To the `control_plane` role, add a policy that allows reading the above created
 secret.
 
-
 ```hcl
 path "kv/data/certs/ca" {
   capabilities = ["read"]
@@ -319,7 +318,7 @@ testkube-cloud-api:
     name: vault-control-plane
   podAnnotations:
     vault.hashicorp.com/agent-inject: "true"
-    vault.hashicorp.com/role: 'control_plane'
+    vault.hashicorp.com/role: "control_plane"
     vault.hashicorp.com/secret-volume-path-ca.pem: /etc/testkube/certs
     vault.hashicorp.com/agent-inject-secret-ca.pem: kv/certs/ca
     vault.hashicorp.com/agent-inject-template-ca.pem: |
@@ -347,7 +346,7 @@ testkube-api:
     name: vault-agent
   podAnnotations:
     vault.hashicorp.com/agent-inject: "true"
-    vault.hashicorp.com/role: 'agent'
+    vault.hashicorp.com/role: "agent"
     vault.hashicorp.com/secret-volume-path-ca.pem: /etc/testkube/certs
     vault.hashicorp.com/agent-inject-secret-ca.pem: kv/certs/ca
     vault.hashicorp.com/agent-inject-template-ca.pem: |
@@ -371,23 +370,23 @@ globalTemplate:
         vault.hashicorp.com/agent-init-first: "true"
         vault.hashicorp.com/agent-enable-quit: "true"
         vault.hashicorp.com/agent-cache-listener-port: "8200"
-        vault.hashicorp.com/role: 'agent'
+        vault.hashicorp.com/role: "agent"
         vault.hashicorp.com/secret-volume-path-ca.pem: /etc/testkube/certs
         vault.hashicorp.com/agent-inject-secret-ca.pem: kv/certs/ca
         # NOTE: These templates need to be double escaped as workflows will run this through a template engine.
         vault.hashicorp.com/agent-inject-template-ca.pem: '{{`{{"{{- with secret \"kv/certs/ca\" -}}{{ .Data.data.ca }}{{- end -}}"}}`}}'
     container:
       env:
-      - name: SSL_CERT_DIR
-        value: /etc/testkube/certs/
-      # If your Git repositories are also served using certificates from the same private CA
-      # then include the following environment variable also.
-      - name: GIT_SSL_CAINFO
-        value: /etc/testkube/certs/ca.pem
+        - name: SSL_CERT_DIR
+          value: /etc/testkube/certs/
+        # If your Git repositories are also served using certificates from the same private CA
+        # then include the following environment variable also.
+        - name: GIT_SSL_CAINFO
+          value: /etc/testkube/certs/ca.pem
     after:
-    - name: 'Send quit signal to Vault agent'
-      condition: always
-      shell: 'while ! wget --post-data "" -O - http://localhost:8200/agent/v1/quit; do sleep 1; done'
+      - name: "Send quit signal to Vault agent"
+        condition: always
+        shell: 'while ! wget --post-data "" -O - http://localhost:8200/agent/v1/quit; do sleep 1; done'
 ```
 
 :::warning

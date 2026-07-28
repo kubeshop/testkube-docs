@@ -1,12 +1,12 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-import AdvancedSelenium from "../../workflows/advanced-selenium-workflow.md"
+import AdvancedSelenium from "../../workflows/advanced-selenium-workflow.md";
 
 # Advanced Selenium Example
 
-import RequiresCommercialWorkflows from "../_commercial-workflows-note.mdx"
+import RequiresCommercialWorkflows from "../_commercial-workflows-note.mdx";
 
-<RequiresCommercialWorkflows/>
+<RequiresCommercialWorkflows />
 
 Below is an advanced workflow for executing a Selenium test with maven and 3 browser engines; chrome, edge and firefox.
 The test itself is written in Java and available on GitHub. You can paste this directly into the YAML of an existing or new test,
@@ -22,7 +22,7 @@ just make sure to update the `name` and `namespace` for your environment if need
 Check out [this article](https://testkube.io/learn/faster-smarter-selenium-testing-with-testkube-on-kubernetes) to learn how to use Selenium Grid with Testkube under Kubernetes.
 :::
 
-<AdvancedSelenium/>
+<AdvancedSelenium />
 
 After execution, you can see the output from the test executions under the executions panel tabs:
 
@@ -44,12 +44,10 @@ The uploaded report is available in the Artifacts tab:
 
 <TabItem value="junit-report" label="JUnit Report" default>
 
-  Clicking the JUnit Reports tab shows parsed JUnit results:
+Clicking the JUnit Reports tab shows parsed JUnit results:
 
-  ![Selenium HTML Report](images/advanced-selenium-junit.png)
+![Selenium HTML Report](images/advanced-selenium-junit.png)
 
 </TabItem>
 
-
 </Tabs>
-

@@ -11,13 +11,13 @@ spec:
   container:
     image: ghcr.io/kyverno/chainsaw:latest
   pod:
-    serviceAccountName: chainsaw-service-account  
+    serviceAccountName: chainsaw-service-account
   steps:
-  - name: Run test
-    shell: |
-      chainsaw test --report-format XML --report-path /data/repo --report-name chainsaw-report /data/repo/chainsaw-test/basic-test
-    artifacts:
-      paths:
-        - /data/repo/chainsaw-report.xml
+    - name: Run test
+      shell: |
+        chainsaw test --report-format XML --report-path /data/repo --report-name chainsaw-report /data/repo/chainsaw-test/basic-test
+      artifacts:
+        paths:
+          - /data/repo/chainsaw-report.xml
 status: {}
 ```

@@ -18,6 +18,7 @@ images according to their needs using the concepts in this guide.
 ## Example: Repackaging Testkube Using Red Hat UBI
 
 ### Simple Repackaging Example
+
 This example shows how to run the `testkube-api-server` on a Red Hat UBI image:
 
 ```dockerfile showLineNumbers

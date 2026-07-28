@@ -78,11 +78,11 @@ See [Licensing for Runner Agents](/articles/agents-overview#licensing-for-runner
 
 At a high level:
 
-| Licensed item | Counted when |
-| --- | --- |
-| Full user | A member has write access to at least one Testkube resource, resource group, or environment. |
-| Read-only user | A member has access to Testkube but does not have write access. |
-| Fixed Runner Agent | A Runner Agent is created with a fixed license. |
+| Licensed item         | Counted when                                                                                                  |
+| --------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Full user             | A member has write access to at least one Testkube resource, resource group, or environment.                  |
+| Read-only user        | A member has access to Testkube but does not have write access.                                               |
+| Fixed Runner Agent    | A Runner Agent is created with a fixed license.                                                               |
 | Floating Runner Agent | A floating license is available for concurrent workflow execution by Runner Agents assigned to floating mode. |
 
 The exact limits shown in the Dashboard come from your Testkube plan or license key.

@@ -1,15 +1,15 @@
 # Kubernetes Triggers
 
-The Testkube Dashboard allows you to create and manage the Kubernetes Triggers available in your 
+The Testkube Dashboard allows you to create and manage the Kubernetes Triggers available in your
 Environments.
 
 :::tip
 Check out the [Kubernetes Event Triggers](/articles/test-triggers) document to learn how Event Triggers work
-in Testkube. 
+in Testkube.
 :::
 
-Triggers are defined under an Environment and are managed from the "Kubernetes Triggers" tab in the Integrations 
-panel: 
+Triggers are defined under an Environment and are managed from the "Kubernetes Triggers" tab in the Integrations
+panel:
 
 ![Triggers](../img/integrations-triggers.png)
 
@@ -23,8 +23,8 @@ Select the **Create a new trigger** button to create a new Kubernetes Trigger:
 
 :::tip
 The wizard to create a Trigger only exposes basic Trigger configurations, for more advanced [condition and action
-configuration](/articles/test-triggers#resource-conditions) you can modify the generated YAML directly in the 
-[Definition tab](/articles/integrations-triggers#definition) for your Trigger. 
+configuration](/articles/test-triggers#resource-conditions) you can modify the generated YAML directly in the
+[Definition tab](/articles/integrations-triggers#definition) for your Trigger.
 :::
 
 ### New Trigger Condition
@@ -52,7 +52,7 @@ Once the condition has been specified, you need to specify what action to take w
 Selecting a Trigger from the list of Triggers shows its Settings.
 
 :::note
-As with the wizard above to create a Trigger, the Settings tab only exposes basic Trigger configurations, for more 
+As with the wizard above to create a Trigger, the Settings tab only exposes basic Trigger configurations, for more
 advanced condition and action configuration you can modify the generated YAML directly in the [Definition tab](/articles/integrations-triggers#definition) for your Trigger.
 :::
 

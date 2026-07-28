@@ -13,7 +13,6 @@ initialization and a sidecar container to periodically update that secret.
 Either container can be disabled, but we will focus on the configuration which
 enables both.
 
-
 To make the workflow workloads compatible with Vault's injector, we can utilize
 this workflow template:
 
@@ -34,9 +33,9 @@ spec:
       vault.hashicorp.com/agent-enable-quit: "true"
       vault.hashicorp.com/agent-cache-listener-port: "{{ config.port }}"
   after:
-  - name: 'Send quit signal to Vault agent'
-    condition: always
-    shell: 'while ! wget --post-data "" -O - http://localhost:{{ config.port }}/agent/v1/quit; do sleep 1; done'
+    - name: "Send quit signal to Vault agent"
+      condition: always
+      shell: 'while ! wget --post-data "" -O - http://localhost:{{ config.port }}/agent/v1/quit; do sleep 1; done'
 ```
 
 This workflow template:
@@ -44,11 +43,11 @@ This workflow template:
 - Enables the sidecar injection.
 - Makes sure that the Vault init container is ahead of other init containers. This is
   required to have access to secrets within workflow steps as workflows run in
-sequence within init containers.
+  sequence within init containers.
 - Configures the agent server running within the sidecar.
 - Calls the agent's quit endpoint after all steps of the workflow have
   completed. Otherwise, the sidecar container would never exit and the
-workflow would run indefinitely.
+  workflow would run indefinitely.
 
 One can then reuse this workflow template in workflows requiring secret
 injections (the example builds on Vault's great tutorial
@@ -72,7 +71,7 @@ spec:
       # highlight-end
   # highlight-start
   use:
-    - name: 'vault-secret-injection'
+    - name: "vault-secret-injection"
   # highlight-end
   steps:
     - name: Check secret injection
@@ -115,8 +114,8 @@ spec:
       vault.hashicorp.com/agent-inject-secret-database-config.txt: internal/data/database/config
       vault.hashicorp.com/role: internal-app
   use:
-    - name: 'vault-secret-injection'
-  # highlight-start
+    - name: "vault-secret-injection"
+      # highlight-start
       config:
         port: "8201"
   # highlight-end
@@ -170,7 +169,7 @@ spec:
       # highlight-next-line
       traffic.sidecar.istio.io/excludeOutboundPorts: "{{ config.port }}"
   after:
-  - name: 'Send quit signal to Vault agent'
-    condition: always
-    shell: 'while ! wget --post-data "" -O - http://localhost:{{ config.port }}/agent/v1/quit; do sleep 1; done'
+    - name: "Send quit signal to Vault agent"
+      condition: always
+      shell: 'while ! wget --post-data "" -O - http://localhost:{{ config.port }}/agent/v1/quit; do sleep 1; done'
 ```

@@ -128,7 +128,7 @@ async function splitOpenAPIByPaths(
       },
     ],
     paths: {},
-    components: components || {}
+    components: components || {},
   };
 
   // now create new openapi file for each mapping
@@ -139,7 +139,8 @@ async function splitOpenAPIByPaths(
       openapi: openapi.openapi || "3.0.0",
       info: {
         title: "Testkube API Docs",
-        description: "See the <a href='/openapi/overview'>Overview</a> for more information and the link to OpenAPI spec.",
+        description:
+          "See the <a href='/openapi/overview'>Overview</a> for more information and the link to OpenAPI spec.",
       },
       servers: [
         {
@@ -208,7 +209,11 @@ async function splitOpenAPIByPaths(
     console.log("written " + mdxFilePath);
 
     // add generated file to redoc config and sidebar
-    redocSpecs.push({ spec: outputFile, url: '/openapi/' + mergedSpecFile, id: fileName });
+    redocSpecs.push({
+      spec: outputFile,
+      url: "/openapi/" + mergedSpecFile,
+      id: fileName,
+    });
   });
 
   // build sidebars
@@ -259,7 +264,10 @@ async function splitOpenAPIByPaths(
 
   // write merged openapi spec
   let mergedOpenApiYaml = yaml.dump(mergedOpenAPI, { sortKeys: false });
-  fs.writeFileSync( path.join(mergedSpecFolder, mergedSpecFile), mergedOpenApiYaml);
+  fs.writeFileSync(
+    path.join(mergedSpecFolder, mergedSpecFile),
+    mergedOpenApiYaml
+  );
 }
 
 // Core OpenAPI definition goes into agent folder
@@ -335,7 +343,7 @@ splitOpenAPIByPaths(
     version: "1.0.0",
   },
   (opPath) => {
-    console.log( "mapping path " + opPath)
+    console.log("mapping path " + opPath);
     // only show these in the docs
     let segments = opPath.split("/");
     if (
@@ -409,15 +417,19 @@ splitOpenAPIByPaths(
         "/organizations/{id}/environments/{environmentID}/".length
       );
 
-      if (p.startsWith("collaborators") || p.startsWith("credentials") || 
-         p.startsWith("executions") || p.startsWith("test-workflow-executions") || p.startsWith("test-workflows") ) {
-      
+      if (
+        p.startsWith("collaborators") ||
+        p.startsWith("credentials") ||
+        p.startsWith("executions") ||
+        p.startsWith("test-workflow-executions") ||
+        p.startsWith("test-workflows")
+      ) {
         return {
           basePath: "../" + p.split("/")[0],
           submenu: "Environment Operations",
         };
       }
-  
+
       return null;
     }
 
@@ -435,7 +447,7 @@ splitOpenAPIByPaths(
           "/features",
           "/settings",
           "/plan-usage",
-          "/events"
+          "/events",
         ].filter((str) => opPath.includes(str)).length > 0
       )
         return null;

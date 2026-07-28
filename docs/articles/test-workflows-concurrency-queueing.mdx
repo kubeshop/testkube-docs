@@ -3,9 +3,9 @@ import TabItem from "@theme/TabItem";
 
 # Workflow Concurrency & Queueing
 
-import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx"
+import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx";
 
-<RequiresCommercialWorkflows/>
+<RequiresCommercialWorkflows />
 
 By default, Testkube allows multiple executions within the same workflow to run concurrently.
 This means that multiple instances of the same execution can run at the same time, performing the same tests.
@@ -80,7 +80,7 @@ Once the threshold is met, further executions will be queued until this runner f
 Executions might be queued because there are no matching runner candidates or due to concurrency policies and limits.
 The total queue size has a maximum capacity after which newly scheduled executions will immediately abort.
 
-By default an environment has a queue limit of 1000. 
+By default an environment has a queue limit of 1000.
 
 :::tip
 You can configure the Runner Concurrency Limit and the Environment Queue Limit in the  

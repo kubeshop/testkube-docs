@@ -35,7 +35,8 @@ The webhook can be created using the Dashboard, CLI, or a Custom Resource.
 <TabItem value="dash" label="Dashboard">
 The Testkube Dashboard allows you to create Webhooks interactively from the Integrations / Webhooks tab - [Read More](/articles/integrations-webhooks#creating-a-new-webhook):
 
-  ![Create New Webhook](../img/create-new-webhook.png)
+![Create New Webhook](../img/create-new-webhook.png)
+
 </TabItem>
 
 <TabItem value="cli" label="CLI">
@@ -139,7 +140,7 @@ Webhook payload can be configured - in this example, `event id`:
 <TabItem value="dash" label="Dashboard">
 When you have selected an existing Webhook, its payload can be configured in Webhook Settings/Action tab - [Read More](/articles/integrations-webhooks#action--payload)
 
-  ![Webhook Action](../img/existing-webhook-action.png)
+![Webhook Action](../img/existing-webhook-action.png)
 
 </TabItem>
 
@@ -207,18 +208,23 @@ However, any of these [supported Event Variables](#supported-event-variables) ca
 For example, the following payload:
 
 ```json
-{"text": "Event {{ .Type_ }} - Test '{{ .TestWorkflowExecution.TestName }}' execution ({{ .TestWorkflowExecution.Number }}) finished with '{{ .TestWorkflowExecution.ExecutionResult.Status }}' status"}
+{
+  "text": "Event {{ .Type_ }} - Test '{{ .TestWorkflowExecution.TestName }}' execution ({{ .TestWorkflowExecution.Number }}) finished with '{{ .TestWorkflowExecution.ExecutionResult.Status }}' status"
+}
 ```
 
 will result in:
 
 ```json
-{"text": "Event end-testworkflow-success - Test 'postman-executor-smoke' execution (948) finished with 'passed' status"}
+{
+  "text": "Event end-testworkflow-success - Test 'postman-executor-smoke' execution (948) finished with 'passed' status"
+}
 ```
 
 ### Helper methods
 
 We also provide special helper methods to use in the webhook template:
+
 - `testworkflowstatustostring` is the method to convert a pointer to a test workflow status to a string type.
 
 Usage example:
@@ -591,9 +597,7 @@ Here is Webhook JSON payload example
           "git": {
             "uri": "https://github.com/kubeshop/testkube",
             "revision": "main",
-            "paths": [
-              "test/pytest/pytest-project"
-            ]
+            "paths": ["test/pytest/pytest-project"]
           }
         },
         "container": {
@@ -618,9 +622,7 @@ Here is Webhook JSON payload example
             "name": "Run test",
             "shell": "pip install -r requirements.txt\nmkdir /data/artifacts\npytest tests/success --junit-xml=/data/artifacts/pytest-report.xml\n",
             "artifacts": {
-              "paths": [
-                "/data/artifacts/**"
-              ]
+              "paths": ["/data/artifacts/**"]
             }
           }
         ]
@@ -644,9 +646,7 @@ Here is Webhook JSON payload example
           "git": {
             "uri": "https://github.com/kubeshop/testkube",
             "revision": "main",
-            "paths": [
-              "test/pytest/pytest-project"
-            ]
+            "paths": ["test/pytest/pytest-project"]
           }
         },
         "container": {
@@ -671,9 +671,7 @@ Here is Webhook JSON payload example
             "name": "Run test",
             "shell": "pip install -r requirements.txt\nmkdir /data/artifacts\npytest tests/success --junit-xml=/data/artifacts/pytest-report.xml\n",
             "artifacts": {
-              "paths": [
-                "/data/artifacts/**"
-              ]
+              "paths": ["/data/artifacts/**"]
             }
           }
         ]
@@ -717,7 +715,7 @@ metadata:
   namespace: testkube
 spec:
   events:
-  - end-testworkflow-success
+    - end-testworkflow-success
   uri: https://webhook.site
 ```
 
@@ -842,8 +840,8 @@ To enable a webhook again, you can either set the field `disabled` to `"false"` 
 
 ### Disabling for Workflow Executions
 
-Disabling webhooks can also be done directly when executing a TestWorkflow. This way the notifications can be disabled temporarily 
-during running the execution. The CLI offers the flag `--disable-webhooks`, the API the parameter `disableWebhooks`. When not set 
+Disabling webhooks can also be done directly when executing a TestWorkflow. This way the notifications can be disabled temporarily
+during running the execution. The CLI offers the flag `--disable-webhooks`, the API the parameter `disableWebhooks`. When not set
 explicitly, webhooks will be enabled by default.
 
 <Tabs>
@@ -891,7 +889,11 @@ testkube update webhook --name example-webhook
   "name": "example-webhook",
   "namespace": "testkube",
   "uri": "https://webhook.url/",
-  "events": ["start-testworkflow", "end-testworkflow-success", "end-testworkflow-failed"],
+  "events": [
+    "start-testworkflow",
+    "end-testworkflow-success",
+    "end-testworkflow-failed"
+  ],
   "disabled": false
 }
 ```

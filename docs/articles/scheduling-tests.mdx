@@ -21,18 +21,17 @@ metadata:
   namespace: testkube
 spec:
   events:
-  - cronjob:
-      cron: 0 3 * * *
-      timezone: America/New_York
+    - cronjob:
+        cron: 0 3 * * *
+        timezone: America/New_York
 ...
 ```
 
-
 :::tip
-Testkube uses the same scheduling format as Kubernetes Cron jobs. For details on the cron expression syntax, 
+Testkube uses the same scheduling format as Kubernetes Cron jobs. For details on the cron expression syntax,
 refer to the [Wikipedia Cron format](https://en.wikipedia.org/wiki/Cron) for details.
 
-The timezone value in Testkube is also based on the tz database, consistent with Kubernetes Cron jobs. 
+The timezone value in Testkube is also based on the tz database, consistent with Kubernetes Cron jobs.
 If no timezone is specified, Testkube will fall back to the cluster’s local time (usually the system time of the node running the job).
 For a list of supported time zones, see the [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for details.
 :::
@@ -65,14 +64,14 @@ usage and scales efficiently, even with a large number of scheduled Test Workflo
 The built-in scheduler can be toggled with Helm chart values:
 
 ```yaml
-    cronJobs:
-      ## Should it manage cron jobs
-      enabled: true
+cronJobs:
+  ## Should it manage cron jobs
+  enabled: true
 ```
 
 and
 
 ```yaml
-  # -- Agent cron jobs for scheduling test, suites, workflows
-  agentCronJobs: true
+# -- Agent cron jobs for scheduling test, suites, workflows
+agentCronJobs: true
 ```

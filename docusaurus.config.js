@@ -1,4 +1,4 @@
-import path from 'path';
+import path from "path";
 
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
@@ -12,8 +12,7 @@ const cloudRedocSpecs = require("./src/openapi/cloud/redoc-specs");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Testkube Documentation",
-  tagline:
-    "The open testing platform for AI-driven engineering teams",
+  tagline: "The open testing platform for AI-driven engineering teams",
   url: "https://docs.testkube.io",
   baseUrl: "/",
   onBrokenLinks: "throw",
@@ -21,13 +20,13 @@ const config = {
   markdown: {
     format: "detect",
     hooks: {
-      onBrokenMarkdownLinks: 'warn',
-      onBrokenMarkdownImages: 'warn',
+      onBrokenMarkdownLinks: "warn",
+      onBrokenMarkdownImages: "warn",
     },
     mermaid: true,
   },
 
-  themes: ['@docusaurus/theme-mermaid'],
+  themes: ["@docusaurus/theme-mermaid"],
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -75,7 +74,7 @@ const config = {
               "/cli/",
             ];
 
-            const {defaultCreateSitemapItems, ...rest} = params;
+            const { defaultCreateSitemapItems, ...rest } = params;
             const items = await defaultCreateSitemapItems(rest);
             items.forEach((item) => {
               lowPrioPaths.forEach((path) => {
@@ -98,14 +97,14 @@ const config = {
           primaryColor: "#818cf8",
           options: {
             hideDownloadButtons: true,
-          }
+          },
         },
       },
     ],
   ],
 
   themeConfig:
-  /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
       navbar: {
         logo: {
@@ -225,8 +224,8 @@ const config = {
       },
       mermaid: {
         theme: {
-          light: 'neutral',
-          dark: 'dark',
+          light: "neutral",
+          dark: "dark",
         },
       },
     },
@@ -247,8 +246,8 @@ const config = {
 
           return undefined; // Return a falsy value: no redirect created
         },
-      }
-    ]
+      },
+    ],
   ],
 };
 

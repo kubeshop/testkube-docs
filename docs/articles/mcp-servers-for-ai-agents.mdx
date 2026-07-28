@@ -1,7 +1,7 @@
 # Connected MCP Servers for AI Agents
 
 For an AI Agent to have access to MCP Server(s) to perform its tasks, these MCP Servers need to be connected to the
-Testkube platform. Once connected, they can be used by an AI Agent as described in [Configuring MCP Servers](/articles/defining-ai-agents#configuring-mcp-servers).  
+Testkube platform. Once connected, they can be used by an AI Agent as described in [Configuring MCP Servers](/articles/defining-ai-agents#configuring-mcp-servers).
 
 Connected MCP Servers are shown in the Connected MCP Servers panel:
 
@@ -56,6 +56,7 @@ Add custom headers that are sent with every request to the MCP Server. This is t
 for servers that use API keys or bearer tokens.
 
 For example, to authenticate with the GitHub MCP Server:
+
 - **Header name**: `Authorization`
 - **Header value**: `Bearer <your-github-token>`
 
@@ -66,6 +67,7 @@ tokens manually. Select **OAuth** as the authentication method and follow the au
 to grant Testkube access to the MCP Server on your behalf.
 
 OAuth is particularly useful for services where:
+
 - Tokens are short-lived and need automatic refresh
 - You want to use your existing user identity rather than a service account token
 - The MCP Server provider requires OAuth for API access
@@ -74,7 +76,7 @@ OAuth is particularly useful for services where:
 
 ## Configuring an MCP Server
 
-Configure an existing (or newly added) MCP Server by selecting it from the list of MCP Servers. The provided 
+Configure an existing (or newly added) MCP Server by selecting it from the list of MCP Servers. The provided
 panel has fields for:
 
 - **Name** (read-only): the name of the MCP Server
@@ -88,7 +90,7 @@ panel has fields for:
 
 ### MCP Server Tools
 
-The list of tools available in an MCP Server is shown in the "Tools" section of the MCP Server panel. These tools can then 
+The list of tools available in an MCP Server is shown in the "Tools" section of the MCP Server panel. These tools can then
 be made available to AI Agents as described in [Defining AI Agents](/articles/defining-ai-agents#configuring-mcp-server-tools).
 
 ![MCP Server Tools](images/mcp-server-tools.png)

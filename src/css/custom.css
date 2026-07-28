@@ -74,8 +74,8 @@ html[data-theme="dark"] {
   --ifm-color-content: #cbd5e1;
   --ifm-color-content-secondary: #94a3b8;
 
-  --ifm-breadcrumb-separator-filter: invert(64%) sepia(11%) saturate(0%) hue-rotate(149deg) brightness(99%)
-    contrast(95%);
+  --ifm-breadcrumb-separator-filter: invert(64%) sepia(11%) saturate(0%)
+    hue-rotate(149deg) brightness(99%) contrast(95%);
 
   --ifm-code-background: #1e293b;
 
@@ -358,7 +358,8 @@ ul:hover {
 /* Commercial badge on sidebar categories (parent row only) */
 .theme-doc-sidebar-item-category.sidebar-commercial-category
   > .menu__list-item-collapsible
-  > .menu__link > span {
+  > .menu__link
+  > span {
   flex: 0 1 auto;
 }
 

@@ -1,5 +1,5 @@
-import SimpleMaven from "../../workflows/simple-maven-workflow.md"
-import SimpleMavenFromTemplate from "../../workflows/simple-maven-workflow-from-template.md"
+import SimpleMaven from "../../workflows/simple-maven-workflow.md";
+import SimpleMavenFromTemplate from "../../workflows/simple-maven-workflow-from-template.md";
 
 # Basic Maven Example
 
@@ -10,7 +10,7 @@ YAML of an existing or new test, just make sure to update the `name` and `namesp
 - the `spec.container` property defines default constraints for any container created in this workflow
 - the `spec.steps` property defines a single step that runs the `mvn:test`
 
-<SimpleMaven/>
+<SimpleMaven />
 
 After execution, you can see the log output from the test executions under the executions panel tabs:
 
@@ -22,6 +22,7 @@ created by the Maven Surefire plugin.
 :::
 
 ## Basic Maven from Template
+
 Below is an example workflow for executing a Maven project using an official Testkube Template.
 
-<SimpleMavenFromTemplate/>
+<SimpleMavenFromTemplate />

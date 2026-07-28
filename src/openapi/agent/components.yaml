@@ -51,7 +51,7 @@ components:
           type: array
           description: List of test/testsuite executions
           items:
-            $ref: '#/components/schemas/ExecutionsMetricsExecutions'
+            $ref: "#/components/schemas/ExecutionsMetricsExecutions"
     ExecutionsMetricsExecutions:
       type: object
       properties:
@@ -78,7 +78,7 @@ components:
         execution variables passed to executor converted to vars for usage in
         tests
       additionalProperties:
-        $ref: '#/components/schemas/Variable'
+        $ref: "#/components/schemas/Variable"
       example:
         var1:
           name: var1
@@ -96,11 +96,11 @@ components:
         value:
           type: string
         type:
-          $ref: '#/components/schemas/VariableType'
+          $ref: "#/components/schemas/VariableType"
         secretRef:
-          $ref: '#/components/schemas/SecretRef'
+          $ref: "#/components/schemas/SecretRef"
         configMapRef:
-          $ref: '#/components/schemas/ConfigMapRef'
+          $ref: "#/components/schemas/ConfigMapRef"
     VariableType:
       type: string
       enum:
@@ -169,7 +169,7 @@ components:
         before:
           type: array
           items:
-            $ref: '#/components/schemas/TestSuiteBatchStep'
+            $ref: "#/components/schemas/TestSuiteBatchStep"
           description: Run these batch steps before whole suite
           example:
             - stopOnFailure: true
@@ -178,7 +178,7 @@ components:
         steps:
           type: array
           items:
-            $ref: '#/components/schemas/TestSuiteBatchStep'
+            $ref: "#/components/schemas/TestSuiteBatchStep"
           description: Batch steps to run
           example:
             - stopOnFailure: true
@@ -187,7 +187,7 @@ components:
         after:
           type: array
           items:
-            $ref: '#/components/schemas/TestSuiteBatchStep'
+            $ref: "#/components/schemas/TestSuiteBatchStep"
           description: Run these batch steps after whole suite
           example:
             - stopOnFailure: true
@@ -204,7 +204,7 @@ components:
         schedule:
           type: string
           description: schedule to run test suite
-          example: '* * * * *'
+          example: "* * * * *"
         repeats:
           type: integer
           default: 1
@@ -213,9 +213,9 @@ components:
           type: string
           format: date-time
         executionRequest:
-          $ref: '#/components/schemas/TestSuiteExecutionRequest'
+          $ref: "#/components/schemas/TestSuiteExecutionRequest"
         status:
-          $ref: '#/components/schemas/TestSuiteStatus'
+          $ref: "#/components/schemas/TestSuiteStatus"
         readOnly:
           type: boolean
           description: if test suite is offline and cannot be executed
@@ -237,7 +237,7 @@ components:
         before:
           type: array
           items:
-            $ref: '#/components/schemas/TestSuiteStepV2'
+            $ref: "#/components/schemas/TestSuiteStepV2"
           description: Run this step before whole suite
           example:
             - stopTestOnFailure: true
@@ -247,7 +247,7 @@ components:
         steps:
           type: array
           items:
-            $ref: '#/components/schemas/TestSuiteStepV2'
+            $ref: "#/components/schemas/TestSuiteStepV2"
           description: Steps to run
           example:
             - stopTestOnFailure: true
@@ -257,7 +257,7 @@ components:
         after:
           type: array
           items:
-            $ref: '#/components/schemas/TestSuiteStepV2'
+            $ref: "#/components/schemas/TestSuiteStepV2"
           description: Run this step after whole suite
           example:
             - stopTestOnFailure: true
@@ -275,7 +275,7 @@ components:
         schedule:
           type: string
           description: schedule to run test suite
-          example: '* * * * *'
+          example: "* * * * *"
         repeats:
           type: integer
           default: 1
@@ -284,9 +284,9 @@ components:
           type: string
           format: date-time
         executionRequest:
-          $ref: '#/components/schemas/TestSuiteExecutionRequest'
+          $ref: "#/components/schemas/TestSuiteExecutionRequest"
         status:
-          $ref: '#/components/schemas/TestSuiteStatus'
+          $ref: "#/components/schemas/TestSuiteStatus"
     TestSuiteStepType:
       type: string
       enum:
@@ -302,11 +302,11 @@ components:
           type: boolean
           default: true
         downloadArtifacts:
-          $ref: '#/components/schemas/DownloadArtifactOptions'
+          $ref: "#/components/schemas/DownloadArtifactOptions"
         execute:
           type: array
           items:
-            $ref: '#/components/schemas/TestSuiteStep'
+            $ref: "#/components/schemas/TestSuiteStep"
     DownloadArtifactOptions:
       description: options to download artifacts from previous steps
       type: object
@@ -337,7 +337,7 @@ components:
           example: 1s
           description: delay duration in time units
         executionRequest:
-          $ref: '#/components/schemas/TestSuiteStepExecutionRequest'
+          $ref: "#/components/schemas/TestSuiteStepExecutionRequest"
           description: test suite step execution request parameters
     TestSuiteStepV2:
       type: object
@@ -350,12 +350,12 @@ components:
           type: boolean
           default: true
         execute:
-          $ref: '#/components/schemas/TestSuiteStepExecuteTestV2'
+          $ref: "#/components/schemas/TestSuiteStepExecuteTestV2"
         delay:
-          $ref: '#/components/schemas/TestSuiteStepDelayV2'
+          $ref: "#/components/schemas/TestSuiteStepDelayV2"
     TestSuiteStepExecuteTestV2:
       allOf:
-        - $ref: '#/components/schemas/ObjectRef'
+        - $ref: "#/components/schemas/ObjectRef"
     TestSuiteStepDelayV2:
       type: object
       required:
@@ -383,10 +383,10 @@ components:
           description: execution name
           example: test-suite1.needlessly-sweet-imp
         testSuite:
-          $ref: '#/components/schemas/ObjectRef'
+          $ref: "#/components/schemas/ObjectRef"
           description: object name and namespace
         status:
-          $ref: '#/components/schemas/TestSuiteExecutionStatus'
+          $ref: "#/components/schemas/TestSuiteExecutionStatus"
         envs:
           deprecated: true
           type: object
@@ -396,10 +396,10 @@ components:
           additionalProperties:
             type: string
           example:
-            record: 'true'
+            record: "true"
             prefix: some-
         variables:
-          $ref: '#/components/schemas/Variables'
+          $ref: "#/components/schemas/Variables"
         secretUUID:
           type: string
           description: secret uuid
@@ -425,13 +425,13 @@ components:
           type: array
           description: steps execution results
           items:
-            $ref: '#/components/schemas/TestSuiteStepExecutionResultV2'
+            $ref: "#/components/schemas/TestSuiteStepExecutionResultV2"
             description: test execution results
         executeStepResults:
           type: array
           description: batch steps execution results
           items:
-            $ref: '#/components/schemas/TestSuiteBatchStepExecutionResult'
+            $ref: "#/components/schemas/TestSuiteBatchStepExecutionResult"
             description: test execution results
         labels:
           type: object
@@ -442,7 +442,7 @@ components:
             env: prod
             app: backend
         runningContext:
-          $ref: '#/components/schemas/RunningContext'
+          $ref: "#/components/schemas/RunningContext"
           description: running context for the test suite execution
         testSuiteExecutionName:
           type: string
@@ -460,20 +460,20 @@ components:
         - testSuite
       properties:
         testSuite:
-          $ref: '#/components/schemas/ObjectRef'
+          $ref: "#/components/schemas/ObjectRef"
           description: test suite name and namespace
         executionRequest:
-          $ref: '#/components/schemas/TestSuiteExecutionRequest'
+          $ref: "#/components/schemas/TestSuiteExecutionRequest"
           description: test suite execution request parameters
         status:
-          $ref: '#/components/schemas/TestSuiteExecutionStatusCR'
+          $ref: "#/components/schemas/TestSuiteExecutionStatusCR"
           description: test suite execution status
     TestSuiteExecutionStatusCR:
       type: object
       description: test suite execution status
       properties:
         latestExecution:
-          $ref: '#/components/schemas/TestSuiteExecution'
+          $ref: "#/components/schemas/TestSuiteExecution"
         generation:
           type: integer
           format: int64
@@ -493,12 +493,12 @@ components:
       type: object
       properties:
         step:
-          $ref: '#/components/schemas/TestSuiteStep'
+          $ref: "#/components/schemas/TestSuiteStep"
         test:
-          $ref: '#/components/schemas/ObjectRef'
+          $ref: "#/components/schemas/ObjectRef"
           description: object name and namespace
         execution:
-          $ref: '#/components/schemas/Execution'
+          $ref: "#/components/schemas/Execution"
           description: >-
             test step execution, NOTE: the execution output will be empty,
             retrieve it directly form the test execution
@@ -507,23 +507,23 @@ components:
       type: object
       properties:
         step:
-          $ref: '#/components/schemas/TestSuiteStepV2'
+          $ref: "#/components/schemas/TestSuiteStepV2"
         test:
-          $ref: '#/components/schemas/ObjectRef'
+          $ref: "#/components/schemas/ObjectRef"
           description: object name and namespace
         execution:
-          $ref: '#/components/schemas/Execution'
+          $ref: "#/components/schemas/Execution"
           description: test step execution
     TestSuiteBatchStepExecutionResult:
       description: execution result returned from executor
       type: object
       properties:
         step:
-          $ref: '#/components/schemas/TestSuiteBatchStep'
+          $ref: "#/components/schemas/TestSuiteBatchStep"
         execute:
           type: array
           items:
-            $ref: '#/components/schemas/TestSuiteStepExecutionResult'
+            $ref: "#/components/schemas/TestSuiteStepExecutionResult"
         startTime:
           type: string
           description: step start time
@@ -544,13 +544,13 @@ components:
         - results
       properties:
         totals:
-          $ref: '#/components/schemas/ExecutionsTotals'
+          $ref: "#/components/schemas/ExecutionsTotals"
         filtered:
-          $ref: '#/components/schemas/ExecutionsTotals'
+          $ref: "#/components/schemas/ExecutionsTotals"
         results:
           type: array
           items:
-            $ref: '#/components/schemas/TestSuiteExecutionSummary'
+            $ref: "#/components/schemas/TestSuiteExecutionSummary"
     TestSuiteExecutionSummary:
       description: Test execution summary
       type: object
@@ -574,7 +574,7 @@ components:
           description: name of the test suite
           example: test-suite1
         status:
-          $ref: '#/components/schemas/TestSuiteExecutionStatus'
+          $ref: "#/components/schemas/TestSuiteExecutionStatus"
         startTime:
           type: string
           description: test suite execution start time
@@ -586,7 +586,7 @@ components:
         duration:
           type: string
           description: test suite execution duration
-          example: '00:00:09'
+          example: "00:00:09"
         durationMs:
           type: integer
           description: test suite execution duration in ms
@@ -594,7 +594,7 @@ components:
         execution:
           type: array
           items:
-            $ref: '#/components/schemas/TestSuiteBatchStepExecutionSummary'
+            $ref: "#/components/schemas/TestSuiteBatchStepExecutionSummary"
         labels:
           type: object
           description: test suite and execution labels
@@ -623,9 +623,9 @@ components:
           description: test name
           example: test1
         status:
-          $ref: '#/components/schemas/ExecutionStatus'
+          $ref: "#/components/schemas/ExecutionStatus"
         type:
-          $ref: '#/components/schemas/TestSuiteStepType'
+          $ref: "#/components/schemas/TestSuiteStepType"
     TestSuiteBatchStepExecutionSummary:
       description: Test suite batch execution summary
       type: object
@@ -633,13 +633,13 @@ components:
         execute:
           type: array
           items:
-            $ref: '#/components/schemas/TestSuiteStepExecutionSummary'
+            $ref: "#/components/schemas/TestSuiteStepExecutionSummary"
     TestSuiteStatus:
       type: object
       description: test suite status
       properties:
         latestExecution:
-          $ref: '#/components/schemas/TestSuiteExecutionCore'
+          $ref: "#/components/schemas/TestSuiteExecutionCore"
     TestSuiteExecutionCore:
       type: object
       description: test suite execution core
@@ -658,7 +658,7 @@ components:
           description: test suite execution end time
           format: date-time
         status:
-          $ref: '#/components/schemas/TestSuiteExecutionStatus'
+          $ref: "#/components/schemas/TestSuiteExecutionStatus"
     Test:
       type: object
       properties:
@@ -679,7 +679,7 @@ components:
           description: test type
           example: postman/collection
         content:
-          $ref: '#/components/schemas/TestContent'
+          $ref: "#/components/schemas/TestContent"
           description: test content
         source:
           type: string
@@ -688,7 +688,7 @@ components:
         created:
           type: string
           format: date-time
-          example: '2022-07-30T06:54:15Z'
+          example: "2022-07-30T06:54:15Z"
         labels:
           type: object
           description: test labels
@@ -700,7 +700,7 @@ components:
         schedule:
           type: string
           description: schedule to run test
-          example: '* * * * *'
+          example: "* * * * *"
         readOnly:
           type: boolean
           description: if test is offline and cannot be executed
@@ -712,29 +712,29 @@ components:
           example:
             - settings/config.txt
         executionRequest:
-          $ref: '#/components/schemas/ExecutionRequest'
+          $ref: "#/components/schemas/ExecutionRequest"
         status:
-          $ref: '#/components/schemas/TestStatus'
+          $ref: "#/components/schemas/TestStatus"
     TestExecutionCR:
       type: object
       required:
         - test
       properties:
         test:
-          $ref: '#/components/schemas/ObjectRef'
+          $ref: "#/components/schemas/ObjectRef"
           description: test name and namespace
         executionRequest:
-          $ref: '#/components/schemas/ExecutionRequest'
+          $ref: "#/components/schemas/ExecutionRequest"
           description: test execution request parameters
         status:
-          $ref: '#/components/schemas/TestExecutionStatusCR'
+          $ref: "#/components/schemas/TestExecutionStatusCR"
           description: test execution status
     TestExecutionStatusCR:
       type: object
       description: test execution status
       properties:
         latestExecution:
-          $ref: '#/components/schemas/Execution'
+          $ref: "#/components/schemas/Execution"
         generation:
           type: integer
           format: int64
@@ -758,7 +758,7 @@ components:
             - git-dir
             - git
         repository:
-          $ref: '#/components/schemas/Repository'
+          $ref: "#/components/schemas/Repository"
         data:
           type: string
           description: test content data as string
@@ -771,24 +771,24 @@ components:
       type: object
       properties:
         repository:
-          $ref: '#/components/schemas/RepositoryParameters'
+          $ref: "#/components/schemas/RepositoryParameters"
     TestContentUpdate:
       description: test content update body
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/TestContent'
+        - $ref: "#/components/schemas/TestContent"
     TestContentUpdateRequest:
       description: test content update request body
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/TestContentRequest'
+        - $ref: "#/components/schemas/TestContentRequest"
     TestSource:
       description: Test source resource for shared test content
       type: object
       allOf:
-        - $ref: '#/components/schemas/TestContent'
+        - $ref: "#/components/schemas/TestContent"
       properties:
         name:
           type: string
@@ -808,7 +808,7 @@ components:
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/TestContent'
+        - $ref: "#/components/schemas/TestContent"
       properties:
         name:
           type: string
@@ -827,7 +827,7 @@ components:
       description: test source create request body
       type: object
       allOf:
-        - $ref: '#/components/schemas/TestContent'
+        - $ref: "#/components/schemas/TestContent"
       properties:
         name:
           type: string
@@ -847,7 +847,7 @@ components:
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/TestContent'
+        - $ref: "#/components/schemas/TestContent"
       properties:
         name:
           type: string
@@ -867,7 +867,7 @@ components:
       description: test status
       properties:
         latestExecution:
-          $ref: '#/components/schemas/ExecutionCore'
+          $ref: "#/components/schemas/ExecutionCore"
     ExecutionCore:
       type: object
       description: test execution core
@@ -890,7 +890,7 @@ components:
           description: test end time
           format: date-time
         status:
-          $ref: '#/components/schemas/ExecutionStatus'
+          $ref: "#/components/schemas/ExecutionStatus"
     Execution:
       type: object
       description: test execution
@@ -935,7 +935,7 @@ components:
           additionalProperties:
             type: string
           example:
-            record: 'true'
+            record: "true"
             prefix: some-
         command:
           type: array
@@ -948,10 +948,10 @@ components:
           type: array
           description: additional arguments/flags passed to executor binary
           example:
-            - '--concurrency'
-            - '2'
-            - '--remote'
-            - '--some'
+            - "--concurrency"
+            - "2"
+            - "--remote"
+            - "--some"
             - blabla
           items:
             type: string
@@ -963,7 +963,7 @@ components:
             - override
             - replace
         variables:
-          $ref: '#/components/schemas/Variables'
+          $ref: "#/components/schemas/Variables"
         isVariablesFileUploaded:
           type: boolean
           description: >-
@@ -986,7 +986,7 @@ components:
           readOnly: true
           example: 7934600f-b367-48dd-b981-4353304362fb
         content:
-          $ref: '#/components/schemas/TestContent'
+          $ref: "#/components/schemas/TestContent"
         startTime:
           type: string
           description: test start time
@@ -1004,7 +1004,7 @@ components:
           description: test duration in milliseconds
           example: 10000
         executionResult:
-          $ref: '#/components/schemas/ExecutionResult'
+          $ref: "#/components/schemas/ExecutionResult"
           description: result get from executor
         labels:
           type: object
@@ -1026,7 +1026,7 @@ components:
           description: minio bucket name to get uploads from
           example: execution-c01d7cf6-ec3f-47f0-9556-a5d6e9009a43
         artifactRequest:
-          $ref: '#/components/schemas/ArtifactRequest'
+          $ref: "#/components/schemas/ArtifactRequest"
           description: configuration parameters for storing test artifacts
         preRunScript:
           type: string
@@ -1043,7 +1043,7 @@ components:
           type: boolean
           description: run scripts using source command (container executor only)
         runningContext:
-          $ref: '#/components/schemas/RunningContext'
+          $ref: "#/components/schemas/RunningContext"
           description: running context for the test execution
         containerShell:
           type: string
@@ -1063,7 +1063,7 @@ components:
           items:
             type: string
         slavePodRequest:
-          $ref: '#/components/schemas/PodRequest'
+          $ref: "#/components/schemas/PodRequest"
           description: configuration parameters for executed slave pods
         executionNamespace:
           type: string
@@ -1103,13 +1103,13 @@ components:
         - results
       properties:
         totals:
-          $ref: '#/components/schemas/ExecutionsTotals'
+          $ref: "#/components/schemas/ExecutionsTotals"
         filtered:
-          $ref: '#/components/schemas/ExecutionsTotals'
+          $ref: "#/components/schemas/ExecutionsTotals"
         results:
           type: array
           items:
-            $ref: '#/components/schemas/ExecutionSummary'
+            $ref: "#/components/schemas/ExecutionSummary"
     ExecutionSummary:
       description: Execution summary
       type: object
@@ -1146,7 +1146,7 @@ components:
           description: the type of test for this execution
           example: postman/collection
         status:
-          $ref: '#/components/schemas/ExecutionStatus'
+          $ref: "#/components/schemas/ExecutionStatus"
         startTime:
           type: string
           description: test execution start time
@@ -1158,7 +1158,7 @@ components:
         duration:
           type: string
           description: calculated test duration
-          example: '00:00:13'
+          example: "00:00:13"
         durationMs:
           type: integer
           description: calculated test duration in ms
@@ -1172,7 +1172,7 @@ components:
             env: prod
             app: backend
         runningContext:
-          $ref: '#/components/schemas/RunningContext'
+          $ref: "#/components/schemas/RunningContext"
           description: running context for the test execution
     ExecutionStatus:
       type: string
@@ -1192,7 +1192,7 @@ components:
         - status
       properties:
         status:
-          $ref: '#/components/schemas/ExecutionStatus'
+          $ref: "#/components/schemas/ExecutionStatus"
         output:
           type: string
           description: >-
@@ -1213,7 +1213,7 @@ components:
         steps:
           type: array
           items:
-            $ref: '#/components/schemas/ExecutionStepResult'
+            $ref: "#/components/schemas/ExecutionStepResult"
           description: execution steps (for collection of requests)
         reports:
           type: object
@@ -1244,7 +1244,7 @@ components:
         assertionResults:
           type: array
           items:
-            $ref: '#/components/schemas/AssertionResult'
+            $ref: "#/components/schemas/AssertionResult"
     AssertionResult:
       description: execution result data
       type: object
@@ -1337,7 +1337,7 @@ components:
           description: disable secret creation for tests and test sources
           deprecated: true
         secret:
-          $ref: '#/components/schemas/SecretConfig'
+          $ref: "#/components/schemas/SecretConfig"
         executionNamespaces:
           type: array
           description: execution namespaces
@@ -1385,9 +1385,9 @@ components:
           type: string
           description: git auth token for private repositories
         usernameSecret:
-          $ref: '#/components/schemas/SecretRef'
+          $ref: "#/components/schemas/SecretRef"
         tokenSecret:
-          $ref: '#/components/schemas/SecretRef'
+          $ref: "#/components/schemas/SecretRef"
         certificateSecret:
           type: string
           description: >-
@@ -1435,13 +1435,13 @@ components:
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/Repository'
+        - $ref: "#/components/schemas/Repository"
     RepositoryUpdateParameters:
       description: repository update parameters for tests in git repositories
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/RepositoryParameters'
+        - $ref: "#/components/schemas/RepositoryParameters"
     ArtifactRequest:
       description: artifact request body with test artifacts
       type: object
@@ -1484,13 +1484,13 @@ components:
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/ArtifactRequest'
+        - $ref: "#/components/schemas/ArtifactRequest"
     PodRequest:
       description: pod request body
       type: object
       properties:
         resources:
-          $ref: '#/components/schemas/PodResourcesRequest'
+          $ref: "#/components/schemas/PodResourcesRequest"
           description: pod resources request parameters
         podTemplate:
           type: string
@@ -1503,23 +1503,23 @@ components:
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/PodRequest'
+        - $ref: "#/components/schemas/PodRequest"
     PodResourcesRequest:
       description: pod resources request specification
       type: object
       properties:
         requests:
-          $ref: '#/components/schemas/ResourceRequest'
+          $ref: "#/components/schemas/ResourceRequest"
           description: pod resources requests
         limits:
-          $ref: '#/components/schemas/ResourceRequest'
+          $ref: "#/components/schemas/ResourceRequest"
           description: pod resources limits
     PodResourcesUpdateRequest:
       description: pod resources update request specification
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/PodResourcesRequest'
+        - $ref: "#/components/schemas/PodResourcesRequest"
     ResourceRequest:
       description: resource request specification
       type: object
@@ -1537,7 +1537,7 @@ components:
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/ResourceRequest'
+        - $ref: "#/components/schemas/ResourceRequest"
     ExecutionRequest:
       description: test execution request body
       type: object
@@ -1566,7 +1566,7 @@ components:
           additionalProperties:
             type: string
           example:
-            users: '3'
+            users: "3"
             prefix: some-
         namespace:
           type: string
@@ -1582,7 +1582,7 @@ components:
             variables file content - need to be in format for particular
             executor (e.g. postman envs file)
         variables:
-          $ref: '#/components/schemas/Variables'
+          $ref: "#/components/schemas/Variables"
         testSecretUUID:
           type: string
           description: test secret uuid
@@ -1606,9 +1606,9 @@ components:
           items:
             type: string
           example:
-            - '--repeats'
-            - '5'
-            - '--insecure'
+            - "--repeats"
+            - "5"
+            - "--insecure"
         args_mode:
           type: string
           description: usage mode for arguments
@@ -1624,7 +1624,7 @@ components:
           type: array
           description: container image pull secrets
           items:
-            $ref: '#/components/schemas/LocalObjectReference'
+            $ref: "#/components/schemas/LocalObjectReference"
         envs:
           deprecated: true
           type: object
@@ -1634,7 +1634,7 @@ components:
           additionalProperties:
             type: string
           example:
-            record: 'true'
+            record: "true"
             prefix: some-
         secretEnvs:
           deprecated: true
@@ -1683,7 +1683,7 @@ components:
           description: minio bucket name to get uploads from
           example: execution-c01d7cf6-ec3f-47f0-9556-a5d6e9009a43
         artifactRequest:
-          $ref: '#/components/schemas/ArtifactRequest'
+          $ref: "#/components/schemas/ArtifactRequest"
           description: configuration parameters for storing test artifacts
         jobTemplate:
           type: string
@@ -1698,7 +1698,7 @@ components:
           type: string
           description: name of the template resource
         contentRequest:
-          $ref: '#/components/schemas/TestContentRequest'
+          $ref: "#/components/schemas/TestContentRequest"
           description: adjusting parameters for test content
         preRunScript:
           type: string
@@ -1730,14 +1730,14 @@ components:
           type: array
           description: config map references
           items:
-            $ref: '#/components/schemas/EnvReference'
+            $ref: "#/components/schemas/EnvReference"
         envSecrets:
           type: array
           description: secret references
           items:
-            $ref: '#/components/schemas/EnvReference'
+            $ref: "#/components/schemas/EnvReference"
         runningContext:
-          $ref: '#/components/schemas/RunningContext'
+          $ref: "#/components/schemas/RunningContext"
           description: running context for the test execution
         testExecutionName:
           type: string
@@ -1753,7 +1753,7 @@ components:
           items:
             type: string
         slavePodRequest:
-          $ref: '#/components/schemas/PodRequest'
+          $ref: "#/components/schemas/PodRequest"
           description: configuration parameters for executed slave pods
         executionNamespace:
           type: string
@@ -1776,10 +1776,10 @@ components:
           additionalProperties:
             type: string
           example:
-            users: '3'
+            users: "3"
             prefix: some-
         variables:
-          $ref: '#/components/schemas/Variables'
+          $ref: "#/components/schemas/Variables"
         command:
           type: array
           description: executor image command
@@ -1793,9 +1793,9 @@ components:
           items:
             type: string
           example:
-            - '--repeats'
-            - '5'
-            - '--insecure'
+            - "--repeats"
+            - "5"
+            - "--insecure"
         args_mode:
           type: string
           description: usage mode for arguments
@@ -1843,7 +1843,7 @@ components:
           type: string
           description: name of the template resource
         runningContext:
-          $ref: '#/components/schemas/RunningContext'
+          $ref: "#/components/schemas/RunningContext"
           description: running context for the test execution
         disableWebhooks:
           type: boolean
@@ -1857,7 +1857,7 @@ components:
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/ExecutionRequest'
+        - $ref: "#/components/schemas/ExecutionRequest"
     TestSuiteExecutionRequest:
       description: test suite execution request body
       type: object
@@ -1875,7 +1875,7 @@ components:
           description: test kubernetes namespace ("testkube" when not set)
           example: testkube
         variables:
-          $ref: '#/components/schemas/Variables'
+          $ref: "#/components/schemas/Variables"
         secretUUID:
           type: string
           description: secret uuid
@@ -1887,7 +1887,7 @@ components:
           additionalProperties:
             type: string
           example:
-            users: '3'
+            users: "3"
             prefix: some-
         executionLabels:
           type: object
@@ -1895,7 +1895,7 @@ components:
           additionalProperties:
             type: string
           example:
-            users: '3'
+            users: "3"
             prefix: some-
         sync:
           type: boolean
@@ -1914,10 +1914,10 @@ components:
           description: duration in seconds the test suite may be active, until its stopped
           example: 1
         contentRequest:
-          $ref: '#/components/schemas/TestContentRequest'
+          $ref: "#/components/schemas/TestContentRequest"
           description: adjusting parameters for test content
         runningContext:
-          $ref: '#/components/schemas/RunningContext'
+          $ref: "#/components/schemas/RunningContext"
           description: running context for the test suite execution
         jobTemplate:
           type: string
@@ -1963,18 +1963,18 @@ components:
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/TestSuiteExecutionRequest'
+        - $ref: "#/components/schemas/TestSuiteExecutionRequest"
     TestUpsertRequest:
       description: test create request body
       type: object
       allOf:
-        - $ref: '#/components/schemas/Test'
+        - $ref: "#/components/schemas/Test"
     TestUpdateRequest:
       description: test update request body
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/Test'
+        - $ref: "#/components/schemas/Test"
     TestSuiteUpsertRequest:
       description: test suite create request body
       type: object
@@ -1982,8 +1982,8 @@ components:
         - name
         - namespace
       allOf:
-        - $ref: '#/components/schemas/TestSuite'
-        - $ref: '#/components/schemas/ObjectRef'
+        - $ref: "#/components/schemas/TestSuite"
+        - $ref: "#/components/schemas/ObjectRef"
     TestSuiteUpsertRequestV2:
       description: test suite create request body
       type: object
@@ -1991,22 +1991,22 @@ components:
         - name
         - namespace
       allOf:
-        - $ref: '#/components/schemas/TestSuiteV2'
-        - $ref: '#/components/schemas/ObjectRef'
+        - $ref: "#/components/schemas/TestSuiteV2"
+        - $ref: "#/components/schemas/ObjectRef"
     TestSuiteUpdateRequest:
       description: test suite update body
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/TestSuite'
-        - $ref: '#/components/schemas/ObjectRef'
+        - $ref: "#/components/schemas/TestSuite"
+        - $ref: "#/components/schemas/ObjectRef"
     TestSuiteUpdateRequestV2:
       description: test suite update body
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/TestSuiteV2'
-        - $ref: '#/components/schemas/ObjectRef'
+        - $ref: "#/components/schemas/TestSuiteV2"
+        - $ref: "#/components/schemas/ObjectRef"
     TestTriggerUpsertRequest:
       description: test trigger create or update request body
       type: object
@@ -2016,8 +2016,8 @@ components:
         - execution
         - testSelector
       allOf:
-        - $ref: '#/components/schemas/TestTrigger'
-        - $ref: '#/components/schemas/ObjectRef'
+        - $ref: "#/components/schemas/TestTrigger"
+        - $ref: "#/components/schemas/ObjectRef"
     ExecutorUpsertRequest:
       description: executor create request body
       type: object
@@ -2026,37 +2026,37 @@ components:
         - namespace
         - types
       allOf:
-        - $ref: '#/components/schemas/Executor'
-        - $ref: '#/components/schemas/ObjectRef'
+        - $ref: "#/components/schemas/Executor"
+        - $ref: "#/components/schemas/ObjectRef"
     ExecutorUpdateRequest:
       description: executor update request body
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/Executor'
-        - $ref: '#/components/schemas/ObjectRef'
+        - $ref: "#/components/schemas/Executor"
+        - $ref: "#/components/schemas/ObjectRef"
     WebhookCreateRequest:
       description: webhook create request body
       type: object
       allOf:
-        - $ref: '#/components/schemas/Webhook'
+        - $ref: "#/components/schemas/Webhook"
     WebhookUpdateRequest:
       description: webhook update request body
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/Webhook'
+        - $ref: "#/components/schemas/Webhook"
     WebhookTemplateCreateRequest:
       description: webhook template create request body
       type: object
       allOf:
-        - $ref: '#/components/schemas/WebhookTemplate'
+        - $ref: "#/components/schemas/WebhookTemplate"
     WebhookTemplateUpdateRequest:
       description: webhook template update request body
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/WebhookTemplate'
+        - $ref: "#/components/schemas/WebhookTemplate"
     Executor:
       description: CRD based executor data
       type: object
@@ -2070,12 +2070,12 @@ components:
           description: Image for kube-job
           type: string
         slaves:
-          $ref: '#/components/schemas/SlavesMeta'
+          $ref: "#/components/schemas/SlavesMeta"
         imagePullSecrets:
           type: array
           description: container image pull secrets
           items:
-            $ref: '#/components/schemas/LocalObjectReference'
+            $ref: "#/components/schemas/LocalObjectReference"
         command:
           type: array
           description: executor image command
@@ -2089,9 +2089,9 @@ components:
           items:
             type: string
           example:
-            - '--repeats'
-            - '5'
-            - '--insecure'
+            - "--repeats"
+            - "5"
+            - "--insecure"
         types:
           description: >-
             Types defines what types can be handled by executor e.g.
@@ -2130,7 +2130,7 @@ components:
               - artifacts
               - junit-report
         meta:
-          $ref: '#/components/schemas/ExecutorMeta'
+          $ref: "#/components/schemas/ExecutorMeta"
         useDataDirAsWorkingDir:
           type: boolean
           description: use data dir as working dir for executor
@@ -2144,9 +2144,9 @@ components:
           description: Executor name
           type: string
         executor:
-          $ref: '#/components/schemas/Executor'
+          $ref: "#/components/schemas/Executor"
         executions:
-          $ref: '#/components/schemas/ExecutionsResult'
+          $ref: "#/components/schemas/ExecutionsResult"
     ExecutorOutput:
       description: CRD based executor data
       type: object
@@ -2165,13 +2165,13 @@ components:
           type: string
           description: Message/event data passed from executor (like log lines etc)
         result:
-          $ref: '#/components/schemas/ExecutionResult'
+          $ref: "#/components/schemas/ExecutionResult"
           description: Execution result when job is finished
         time:
           type: string
           format: date-time
           description: Timestamp of log
-          example: '2018-03-20T09:12:28Z'
+          example: "2018-03-20T09:12:28Z"
     LogV2:
       description: Log format version 2
       type: object
@@ -2183,7 +2183,7 @@ components:
           type: string
           format: date-time
           description: Timestamp of log
-          example: '2018-03-20T09:12:28Z'
+          example: "2018-03-20T09:12:28Z"
         content:
           type: string
           description: Message/event data passed from executor (like log lines etc)
@@ -2215,7 +2215,7 @@ components:
           example:
             argsl: passed command arguments
         v1:
-          $ref: '#/components/schemas/LogV1'
+          $ref: "#/components/schemas/LogV1"
           description: >-
             Old output - for backwards compatibility - will be removed for
             non-structured logs
@@ -2226,7 +2226,7 @@ components:
         - type
       properties:
         result:
-          $ref: '#/components/schemas/ExecutionResult'
+          $ref: "#/components/schemas/ExecutionResult"
           description: output for previous log format
     ExecutorMeta:
       description: Executor meta data
@@ -2252,7 +2252,7 @@ components:
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/ExecutorMeta'
+        - $ref: "#/components/schemas/ExecutorMeta"
     SlavesMeta:
       description: Slave data for executing tests in distributed environment
       type: object
@@ -2299,9 +2299,9 @@ components:
         - actor
       properties:
         interface:
-          $ref: '#/components/schemas/TestWorkflowRunningContextInterface'
+          $ref: "#/components/schemas/TestWorkflowRunningContextInterface"
         actor:
-          $ref: '#/components/schemas/TestWorkflowRunningContextActor'
+          $ref: "#/components/schemas/TestWorkflowRunningContextActor"
     TestWorkflowRunningContextInterface:
       description: running context interface for test workflow execution
       type: object
@@ -2312,7 +2312,7 @@ components:
           type: string
           description: interface name
         type:
-          $ref: '#/components/schemas/TestWorkflowRunningContextInterfaceType'
+          $ref: "#/components/schemas/TestWorkflowRunningContextInterfaceType"
     TestWorkflowRunningContextActor:
       description: running context actor for test workflow execution
       type: object
@@ -2335,7 +2335,7 @@ components:
           type: string
           description: reference test workflow execution id
         type:
-          $ref: '#/components/schemas/TestWorkflowRunningContextActorType'
+          $ref: "#/components/schemas/TestWorkflowRunningContextActorType"
     TestWorkflowRunningContextInterfaceType:
       description: supported interfaces for test workflow running context
       type: string
@@ -2386,11 +2386,11 @@ components:
         created:
           type: string
           format: date-time
-          example: '2022-07-30T06:54:15Z'
+          example: "2022-07-30T06:54:15Z"
         updated:
           type: string
           format: date-time
-          example: '2022-07-30T06:54:15Z'
+          example: "2022-07-30T06:54:15Z"
         disabled:
           type: boolean
           description: whether webhook is disabled
@@ -2404,7 +2404,7 @@ components:
         events:
           type: array
           items:
-            $ref: '#/components/schemas/EventType'
+            $ref: "#/components/schemas/EventType"
         selector:
           type: string
           description: Labels to filter for tests and test suites
@@ -2425,17 +2425,17 @@ components:
           example:
             Content-Type: application/xml
         config:
-          $ref: '#/components/schemas/WebhookConfig'
+          $ref: "#/components/schemas/WebhookConfig"
         parameters:
           type: array
           items:
-            $ref: '#/components/schemas/WebhookParameterSchema'
+            $ref: "#/components/schemas/WebhookParameterSchema"
         webhookTemplateRef:
-          $ref: '#/components/schemas/WebhookTemplateRef'
+          $ref: "#/components/schemas/WebhookTemplateRef"
         sync:
-          $ref: '#/components/schemas/Syncable'
+          $ref: "#/components/schemas/Syncable"
         target:
-          $ref: '#/components/schemas/ExecutionTarget'
+          $ref: "#/components/schemas/ExecutionTarget"
     WebhookTemplate:
       description: CRD based webhook data template
       type: object
@@ -2454,7 +2454,7 @@ components:
         events:
           type: array
           items:
-            $ref: '#/components/schemas/EventType'
+            $ref: "#/components/schemas/EventType"
         selector:
           type: string
           description: Labels to filter for tests and test suites
@@ -2498,15 +2498,15 @@ components:
             - true
             - false
         config:
-          $ref: '#/components/schemas/WebhookConfig'
+          $ref: "#/components/schemas/WebhookConfig"
         parameters:
           type: array
           items:
-            $ref: '#/components/schemas/WebhookParameterSchema'
+            $ref: "#/components/schemas/WebhookParameterSchema"
         sync:
-          $ref: '#/components/schemas/Syncable'
+          $ref: "#/components/schemas/Syncable"
         target:
-          $ref: '#/components/schemas/ExecutionTarget'
+          $ref: "#/components/schemas/ExecutionTarget"
     Event:
       description: Event data
       type: object
@@ -2526,18 +2526,18 @@ components:
           description: ID for event group
           type: string
         resource:
-          $ref: '#/components/schemas/EventResource'
+          $ref: "#/components/schemas/EventResource"
         resourceId:
           type: string
           description: ID of resource
         type:
-          $ref: '#/components/schemas/EventType'
+          $ref: "#/components/schemas/EventType"
         testExecution:
-          $ref: '#/components/schemas/Execution'
+          $ref: "#/components/schemas/Execution"
         testSuiteExecution:
-          $ref: '#/components/schemas/TestSuiteExecution'
+          $ref: "#/components/schemas/TestSuiteExecution"
         testWorkflowExecution:
-          $ref: '#/components/schemas/TestWorkflowExecution'
+          $ref: "#/components/schemas/TestWorkflowExecution"
         clusterName:
           type: string
           description: cluster name of event
@@ -2607,9 +2607,9 @@ components:
         - test
       properties:
         test:
-          $ref: '#/components/schemas/Test'
+          $ref: "#/components/schemas/Test"
         latestExecution:
-          $ref: '#/components/schemas/Execution'
+          $ref: "#/components/schemas/Execution"
     TestWithExecutionSummary:
       description: Test with latest Execution result summary
       type: object
@@ -2617,9 +2617,9 @@ components:
         - test
       properties:
         test:
-          $ref: '#/components/schemas/Test'
+          $ref: "#/components/schemas/Test"
         latestExecution:
-          $ref: '#/components/schemas/ExecutionSummary'
+          $ref: "#/components/schemas/ExecutionSummary"
     TestSuiteWithExecution:
       description: Test suite with latest execution result
       type: object
@@ -2627,9 +2627,9 @@ components:
         - testSuite
       properties:
         testSuite:
-          $ref: '#/components/schemas/TestSuite'
+          $ref: "#/components/schemas/TestSuite"
         latestExecution:
-          $ref: '#/components/schemas/TestSuiteExecution'
+          $ref: "#/components/schemas/TestSuiteExecution"
     TestSuiteWithExecutionSummary:
       description: Test suite with latest execution result
       type: object
@@ -2637,9 +2637,9 @@ components:
         - testSuite
       properties:
         testSuite:
-          $ref: '#/components/schemas/TestSuite'
+          $ref: "#/components/schemas/TestSuite"
         latestExecution:
-          $ref: '#/components/schemas/TestSuiteExecutionSummary'
+          $ref: "#/components/schemas/TestSuiteExecutionSummary"
     Config:
       description: Testkube API config data structure
       type: object
@@ -2720,11 +2720,11 @@ components:
             https://raw.githubusercontent.com/garethr/kubernetes-json-schema/master/v1.7.8/_definitions.json#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector
           description: label selector for events
         resource:
-          $ref: '#/components/schemas/TestTriggerResources'
+          $ref: "#/components/schemas/TestTriggerResources"
         resourceRef:
-          $ref: '#/components/schemas/TestTriggerResourceRef'
+          $ref: "#/components/schemas/TestTriggerResourceRef"
         resourceSelector:
-          $ref: '#/components/schemas/TestTriggerSelector'
+          $ref: "#/components/schemas/TestTriggerSelector"
         event:
           type: string
           description: listen for event for selected resource
@@ -2733,7 +2733,7 @@ components:
           type: array
           description: Match filters which object changes fire the trigger (ANDed).
           items:
-            $ref: '#/components/schemas/TestTriggerFieldCondition'
+            $ref: "#/components/schemas/TestTriggerFieldCondition"
         listener:
           description: |
             Selects which listener agent(s) watch the cluster and fire this
@@ -2741,23 +2741,23 @@ components:
             match.id). Empty means broadcast (every listener fires). Required
             when match is set: schema-aware validation runs against a specific
             listener's cluster-resources snapshot.
-          $ref: '#/components/schemas/ExecutionTarget'
+          $ref: "#/components/schemas/ExecutionTarget"
         conditionSpec:
-          $ref: '#/components/schemas/TestTriggerConditionSpec'
+          $ref: "#/components/schemas/TestTriggerConditionSpec"
         probeSpec:
-          $ref: '#/components/schemas/TestTriggerProbeSpec'
+          $ref: "#/components/schemas/TestTriggerProbeSpec"
         contentSelector:
-          $ref: '#/components/schemas/TestTriggerContentSelector'
+          $ref: "#/components/schemas/TestTriggerContentSelector"
         action:
-          $ref: '#/components/schemas/TestTriggerActions'
+          $ref: "#/components/schemas/TestTriggerActions"
         actionParameters:
-          $ref: '#/components/schemas/TestTriggerActionParameters'
+          $ref: "#/components/schemas/TestTriggerActionParameters"
         execution:
-          $ref: '#/components/schemas/TestTriggerExecutions'
+          $ref: "#/components/schemas/TestTriggerExecutions"
         testSelector:
-          $ref: '#/components/schemas/TestTriggerSelector'
+          $ref: "#/components/schemas/TestTriggerSelector"
         concurrencyPolicy:
-          $ref: '#/components/schemas/TestTriggerConcurrencyPolicies'
+          $ref: "#/components/schemas/TestTriggerConcurrencyPolicies"
         disabled:
           type: boolean
           description: whether test trigger is disabled
@@ -2766,7 +2766,7 @@ components:
             - true
             - false
         sync:
-          $ref: '#/components/schemas/Syncable'
+          $ref: "#/components/schemas/Syncable"
     LocalObjectReference:
       description: Reference to Kubernetes object
       type: object
@@ -2780,7 +2780,7 @@ components:
         - reference
       properties:
         reference:
-          $ref: '#/components/schemas/LocalObjectReference'
+          $ref: "#/components/schemas/LocalObjectReference"
         mount:
           type: boolean
           description: whether we shoud mount resource
@@ -2844,7 +2844,7 @@ components:
             Dot-path to the field in the watched resource, e.g.
             ".spec.replicas".
         operator:
-          $ref: '#/components/schemas/TestTriggerFieldOperator'
+          $ref: "#/components/schemas/TestTriggerFieldOperator"
         value:
           type: string
           description: Value to compare against for value-based operators.
@@ -2863,7 +2863,7 @@ components:
       type: object
       properties:
         git:
-          $ref: '#/components/schemas/TestTriggerContentGit'
+          $ref: "#/components/schemas/TestTriggerContentGit"
     TestTriggerContentGit:
       type: object
       required:
@@ -2914,14 +2914,14 @@ components:
           type: string
           description: plain text username to fetch with
         usernameFrom:
-          $ref: '#/components/schemas/EnvVarSource'
+          $ref: "#/components/schemas/EnvVarSource"
         token:
           type: string
           description: >-
             plain text token to fetch with. Warning: this credential is stored
             in plain text in the trigger spec; prefer tokenFrom instead.
         tokenFrom:
-          $ref: '#/components/schemas/EnvVarSource'
+          $ref: "#/components/schemas/EnvVarSource"
         sshKey:
           type: string
           description: >-
@@ -2929,14 +2929,14 @@ components:
             is stored in plain text in the trigger spec; prefer sshKeyFrom
             instead.
         sshKeyFrom:
-          $ref: '#/components/schemas/EnvVarSource'
+          $ref: "#/components/schemas/EnvVarSource"
         authType:
           type: string
           enum:
             - basic
             - header
         pullRequest:
-          $ref: '#/components/schemas/TestTriggerContentGitPullRequest'
+          $ref: "#/components/schemas/TestTriggerContentGitPullRequest"
     TestTriggerContentGitPullRequest:
       type: object
       description: Pull request trigger configuration for GitHub API polling.
@@ -2992,18 +2992,18 @@ components:
       type: object
       properties:
         config:
-          $ref: '#/components/schemas/TestWorkflowConfigValue'
+          $ref: "#/components/schemas/TestWorkflowConfigValue"
         tags:
-          $ref: '#/components/schemas/TestWorkflowTagValue'
+          $ref: "#/components/schemas/TestWorkflowTagValue"
         target:
-          $ref: '#/components/schemas/ExecutionTarget'
+          $ref: "#/components/schemas/ExecutionTarget"
     TestTriggerConditionSpec:
       type: object
       properties:
         conditions:
           type: array
           items:
-            $ref: '#/components/schemas/TestTriggerCondition'
+            $ref: "#/components/schemas/TestTriggerCondition"
           description: list of test trigger conditions
         timeout:
           type: integer
@@ -3025,7 +3025,7 @@ components:
         - type
       properties:
         status:
-          $ref: '#/components/schemas/TestTriggerConditionStatuses'
+          $ref: "#/components/schemas/TestTriggerConditionStatuses"
         type:
           type: string
           description: test trigger condition
@@ -3045,8 +3045,8 @@ components:
       description: supported kubernetes condition statuses for test triggers
       type: string
       enum:
-        - 'True'
-        - 'False'
+        - "True"
+        - "False"
         - Unknown
     TestTriggerProbeSpec:
       type: object
@@ -3054,7 +3054,7 @@ components:
         probes:
           type: array
           items:
-            $ref: '#/components/schemas/TestTriggerProbe'
+            $ref: "#/components/schemas/TestTriggerProbe"
           description: list of test trigger probes
         timeout:
           type: integer
@@ -3185,7 +3185,7 @@ components:
         batch:
           type: array
           items:
-            $ref: '#/components/schemas/TestSourceUpsertRequest'
+            $ref: "#/components/schemas/TestSourceUpsertRequest"
     TestSourceBatchResult:
       description: Test source batch result
       type: object
@@ -3234,7 +3234,7 @@ components:
           description: template namespace
           example: testkube
         type:
-          $ref: '#/components/schemas/TemplateType'
+          $ref: "#/components/schemas/TemplateType"
         body:
           type: string
           description: template body to use
@@ -3262,13 +3262,13 @@ components:
       description: template create request body
       type: object
       allOf:
-        - $ref: '#/components/schemas/Template'
+        - $ref: "#/components/schemas/Template"
     TemplateUpdateRequest:
       description: template update request body
       type: object
       nullable: true
       allOf:
-        - $ref: '#/components/schemas/Template'
+        - $ref: "#/components/schemas/Template"
     Secret:
       description: Secret with keys
       type: object
@@ -3290,16 +3290,16 @@ components:
         createdAt:
           type: string
           format: date-time
-          example: '2022-07-30T06:54:15Z'
+          example: "2022-07-30T06:54:15Z"
         updatedAt:
           type: string
           format: date-time
-          example: '2022-07-30T06:54:15Z'
+          example: "2022-07-30T06:54:15Z"
         controlled:
           type: boolean
           description: is this Secret controlled by Testkube
         owner:
-          $ref: '#/components/schemas/SecretOwner'
+          $ref: "#/components/schemas/SecretOwner"
         labels:
           type: object
           description: labels associated with the secret
@@ -3333,7 +3333,7 @@ components:
           type: string
           description: secret namespace
         owner:
-          $ref: '#/components/schemas/SecretOwner'
+          $ref: "#/components/schemas/SecretOwner"
         labels:
           type: object
           description: labels associated with the secret
@@ -3353,7 +3353,7 @@ components:
           description: secret name
           example: git-secret
         owner:
-          $ref: '#/components/schemas/SecretOwner'
+          $ref: "#/components/schemas/SecretOwner"
         labels:
           type: object
           description: labels associated with the secret
@@ -3439,20 +3439,20 @@ components:
         created:
           type: string
           format: date-time
-          example: '2022-07-30T06:54:15Z'
+          example: "2022-07-30T06:54:15Z"
         updated:
           type: string
           format: date-time
-          example: '2022-07-30T06:54:15Z'
+          example: "2022-07-30T06:54:15Z"
         spec:
-          $ref: '#/components/schemas/TestWorkflowSpec'
+          $ref: "#/components/schemas/TestWorkflowSpec"
         readOnly:
           type: boolean
           description: if test workflow is offline and cannot be executed
         status:
-          $ref: '#/components/schemas/TestWorkflowStatusSummary'
+          $ref: "#/components/schemas/TestWorkflowStatusSummary"
         sync:
-          $ref: '#/components/schemas/Syncable'
+          $ref: "#/components/schemas/Syncable"
     TestWorkflowExecutionRequest:
       type: object
       properties:
@@ -3460,9 +3460,9 @@ components:
           type: string
           description: custom execution name
         config:
-          $ref: '#/components/schemas/TestWorkflowConfigValue'
+          $ref: "#/components/schemas/TestWorkflowConfigValue"
         runtime:
-          $ref: '#/components/schemas/TestWorkflowExecutionRuntime'
+          $ref: "#/components/schemas/TestWorkflowExecutionRuntime"
           description: runtime configuration for the test workflow execution
         testWorkflowExecutionName:
           type: string
@@ -3472,14 +3472,14 @@ components:
           description: whether webhooks on the execution of this test workflow are disabled
           default: false
         silentMode:
-          $ref: '#/components/schemas/SilentMode'
+          $ref: "#/components/schemas/SilentMode"
         tags:
-          $ref: '#/components/schemas/TestWorkflowTagValue'
+          $ref: "#/components/schemas/TestWorkflowTagValue"
         target:
-          $ref: '#/components/schemas/ExecutionTarget'
+          $ref: "#/components/schemas/ExecutionTarget"
         runningContext:
           description: running context for the test workflow execution (Pro edition only)
-          $ref: '#/components/schemas/TestWorkflowRunningContext'
+          $ref: "#/components/schemas/TestWorkflowRunningContext"
         parentExecutionIds:
           type: array
           description: parent execution ids
@@ -3511,27 +3511,27 @@ components:
       type: object
       properties:
         workflow:
-          $ref: '#/components/schemas/TestWorkflow'
+          $ref: "#/components/schemas/TestWorkflow"
         latestExecution:
-          $ref: '#/components/schemas/TestWorkflowExecution'
+          $ref: "#/components/schemas/TestWorkflowExecution"
     TestWorkflowWithExecutionSummary:
       type: object
       properties:
         workflow:
-          $ref: '#/components/schemas/TestWorkflow'
+          $ref: "#/components/schemas/TestWorkflow"
         latestExecution:
-          $ref: '#/components/schemas/TestWorkflowExecutionSummary'
+          $ref: "#/components/schemas/TestWorkflowExecutionSummary"
     TestWorkflowExecutionsResult:
       type: object
       properties:
         totals:
-          $ref: '#/components/schemas/ExecutionsTotals'
+          $ref: "#/components/schemas/ExecutionsTotals"
         filtered:
-          $ref: '#/components/schemas/ExecutionsTotals'
+          $ref: "#/components/schemas/ExecutionsTotals"
         results:
           type: array
           items:
-            $ref: '#/components/schemas/TestWorkflowExecutionSummary'
+            $ref: "#/components/schemas/TestWorkflowExecutionSummary"
       required:
         - totals
         - filtered
@@ -3553,9 +3553,9 @@ components:
           type: string
           description: identifier of the runner where it has been executed
         runnerTarget:
-          $ref: '#/components/schemas/ExecutionTarget'
+          $ref: "#/components/schemas/ExecutionTarget"
         runnerOriginalTarget:
-          $ref: '#/components/schemas/ExecutionTarget'
+          $ref: "#/components/schemas/ExecutionTarget"
         name:
           type: string
           description: execution name
@@ -3585,27 +3585,27 @@ components:
           type: array
           description: structured tree of steps
           items:
-            $ref: '#/components/schemas/TestWorkflowSignature'
+            $ref: "#/components/schemas/TestWorkflowSignature"
         result:
-          $ref: '#/components/schemas/TestWorkflowResult'
+          $ref: "#/components/schemas/TestWorkflowResult"
         output:
           type: array
           description: >-
             additional information from the steps, like referenced executed
             tests or artifacts
           items:
-            $ref: '#/components/schemas/TestWorkflowOutput'
+            $ref: "#/components/schemas/TestWorkflowOutput"
         reports:
           type: array
           description: generated reports from the steps, like junit
           items:
-            $ref: '#/components/schemas/TestWorkflowReport'
+            $ref: "#/components/schemas/TestWorkflowReport"
         resourceAggregations:
-          $ref: '#/components/schemas/TestWorkflowExecutionResourceAggregationsReport'
+          $ref: "#/components/schemas/TestWorkflowExecutionResourceAggregationsReport"
         workflow:
-          $ref: '#/components/schemas/TestWorkflow'
+          $ref: "#/components/schemas/TestWorkflow"
         resolvedWorkflow:
-          $ref: '#/components/schemas/TestWorkflow'
+          $ref: "#/components/schemas/TestWorkflow"
         testWorkflowExecutionName:
           type: string
           description: test workflow execution name started the test workflow execution
@@ -3617,16 +3617,16 @@ components:
             - true
             - false
         silentMode:
-          $ref: '#/components/schemas/SilentMode'
+          $ref: "#/components/schemas/SilentMode"
         tags:
-          $ref: '#/components/schemas/TestWorkflowTagValue'
+          $ref: "#/components/schemas/TestWorkflowTagValue"
         runningContext:
           description: running context for the test workflow execution (Pro edition only)
-          $ref: '#/components/schemas/TestWorkflowRunningContext'
+          $ref: "#/components/schemas/TestWorkflowRunningContext"
         configParams:
-          $ref: '#/components/schemas/TestWorkflowExecutionConfig'
+          $ref: "#/components/schemas/TestWorkflowExecutionConfig"
         runtime:
-          $ref: '#/components/schemas/TestWorkflowExecutionRuntime'
+          $ref: "#/components/schemas/TestWorkflowExecutionRuntime"
       required:
         - id
         - name
@@ -3665,28 +3665,28 @@ components:
             when the execution result's status has changed last time (queued,
             passed, failed)
         result:
-          $ref: '#/components/schemas/TestWorkflowResultSummary'
+          $ref: "#/components/schemas/TestWorkflowResultSummary"
         workflow:
-          $ref: '#/components/schemas/TestWorkflowSummary'
+          $ref: "#/components/schemas/TestWorkflowSummary"
         tags:
-          $ref: '#/components/schemas/TestWorkflowTagValue'
+          $ref: "#/components/schemas/TestWorkflowTagValue"
         runningContext:
           description: running context for the test workflow execution (Pro edition only)
-          $ref: '#/components/schemas/TestWorkflowRunningContext'
+          $ref: "#/components/schemas/TestWorkflowRunningContext"
         configParams:
-          $ref: '#/components/schemas/TestWorkflowExecutionConfig'
+          $ref: "#/components/schemas/TestWorkflowExecutionConfig"
         runtime:
-          $ref: '#/components/schemas/TestWorkflowExecutionRuntime'
+          $ref: "#/components/schemas/TestWorkflowExecutionRuntime"
         reports:
           type: array
           description: generated reports from the steps, like junit
           items:
-            $ref: '#/components/schemas/TestWorkflowReport'
+            $ref: "#/components/schemas/TestWorkflowReport"
         resourceAggregations:
-          $ref: '#/components/schemas/TestWorkflowExecutionResourceAggregationsReport'
+          $ref: "#/components/schemas/TestWorkflowExecutionResourceAggregationsReport"
         silentMode:
           description: execution mode to determine which events to skip
-          $ref: '#/components/schemas/SilentMode'
+          $ref: "#/components/schemas/SilentMode"
       required:
         - id
         - name
@@ -3707,14 +3707,14 @@ components:
           additionalProperties:
             type: string
         health:
-          $ref: '#/components/schemas/TestWorkflowExecutionHealth'
+          $ref: "#/components/schemas/TestWorkflowExecutionHealth"
     TestWorkflowResultSummary:
       type: object
       properties:
         status:
-          $ref: '#/components/schemas/TestWorkflowStatus'
+          $ref: "#/components/schemas/TestWorkflowStatus"
         predictedStatus:
-          $ref: '#/components/schemas/TestWorkflowStatus'
+          $ref: "#/components/schemas/TestWorkflowStatus"
         queuedAt:
           type: string
           format: date-time
@@ -3753,7 +3753,7 @@ components:
       description: test workflow status
       properties:
         health:
-          $ref: '#/components/schemas/TestWorkflowExecutionHealth'
+          $ref: "#/components/schemas/TestWorkflowExecutionHealth"
     TestWorkflowExecutionNotification:
       type: object
       properties:
@@ -3771,7 +3771,7 @@ components:
             stream event type, such as log, output, result, ready, heartbeat, or
             resume_unavailable
         result:
-          $ref: '#/components/schemas/TestWorkflowResult'
+          $ref: "#/components/schemas/TestWorkflowResult"
         ref:
           type: string
           description: step reference, if related to some specific step
@@ -3781,7 +3781,7 @@ components:
             log content, if it's just a log. note, that it includes 30 chars
             timestamp + space
         output:
-          $ref: '#/components/schemas/TestWorkflowOutput'
+          $ref: "#/components/schemas/TestWorkflowOutput"
         temporary:
           type: boolean
           description: should it be considered temporary only for execution time
@@ -3814,7 +3814,7 @@ components:
           type: string
           description: file path to full report in artifact storage
         summary:
-          $ref: '#/components/schemas/TestWorkflowReportSummary'
+          $ref: "#/components/schemas/TestWorkflowReportSummary"
     TestWorkflowReportSummary:
       type: object
       properties:
@@ -3846,7 +3846,7 @@ components:
         step:
           type: array
           items:
-            $ref: '#/components/schemas/TestWorkflowExecutionStepResourceAggregations'
+            $ref: "#/components/schemas/TestWorkflowExecutionStepResourceAggregations"
       description: >
         TestWorkflowExecutionResourceAggregationsReport provides resource usage
         aggregations
@@ -3906,7 +3906,7 @@ components:
 
           for a specific field (e.g. millicores, used...).
         additionalProperties:
-          $ref: '#/components/schemas/TestWorkflowExecutionResourceAggregations'
+          $ref: "#/components/schemas/TestWorkflowExecutionResourceAggregations"
     TestWorkflowExecutionResourceAggregationsScope:
       type: string
       enum:
@@ -3945,9 +3945,9 @@ components:
       type: object
       properties:
         status:
-          $ref: '#/components/schemas/TestWorkflowStatus'
+          $ref: "#/components/schemas/TestWorkflowStatus"
         predictedStatus:
-          $ref: '#/components/schemas/TestWorkflowStatus'
+          $ref: "#/components/schemas/TestWorkflowStatus"
         queuedAt:
           type: string
           format: date-time
@@ -3978,13 +3978,13 @@ components:
         pauses:
           type: array
           items:
-            $ref: '#/components/schemas/TestWorkflowPause'
+            $ref: "#/components/schemas/TestWorkflowPause"
         initialization:
-          $ref: '#/components/schemas/TestWorkflowStepResult'
+          $ref: "#/components/schemas/TestWorkflowStepResult"
         steps:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/TestWorkflowStepResult'
+            $ref: "#/components/schemas/TestWorkflowStepResult"
       required:
         - status
         - predictedStatus
@@ -4014,7 +4014,7 @@ components:
         errorMessage:
           type: string
         status:
-          $ref: '#/components/schemas/TestWorkflowStepStatus'
+          $ref: "#/components/schemas/TestWorkflowStepStatus"
         exitCode:
           type: number
         queuedAt:
@@ -4053,7 +4053,7 @@ components:
         children:
           type: array
           items:
-            $ref: '#/components/schemas/TestWorkflowSignature'
+            $ref: "#/components/schemas/TestWorkflowSignature"
     TestWorkflowStatus:
       type: string
       enum:
@@ -4110,22 +4110,22 @@ components:
         created:
           type: string
           format: date-time
-          example: '2022-07-30T06:54:15Z'
+          example: "2022-07-30T06:54:15Z"
         updated:
           type: string
           format: date-time
-          example: '2022-07-30T06:54:15Z'
+          example: "2022-07-30T06:54:15Z"
         spec:
-          $ref: '#/components/schemas/TestWorkflowTemplateSpec'
+          $ref: "#/components/schemas/TestWorkflowTemplateSpec"
         sync:
-          $ref: '#/components/schemas/Syncable'
+          $ref: "#/components/schemas/Syncable"
     TestWorkflowStepParallel:
       type: object
       allOf:
-        - $ref: '#/components/schemas/TestWorkflowSpec'
-        - $ref: '#/components/schemas/TestWorkflowStepExecuteStrategy'
-        - $ref: '#/components/schemas/TestWorkflowStepControl'
-        - $ref: '#/components/schemas/TestWorkflowStepOperations'
+        - $ref: "#/components/schemas/TestWorkflowSpec"
+        - $ref: "#/components/schemas/TestWorkflowStepExecuteStrategy"
+        - $ref: "#/components/schemas/TestWorkflowStepControl"
+        - $ref: "#/components/schemas/TestWorkflowStepOperations"
         - properties:
             parallelism:
               type: integer
@@ -4137,26 +4137,26 @@ components:
               type: string
               description: worker description to display
             logs:
-              $ref: '#/components/schemas/BoxedString'
+              $ref: "#/components/schemas/BoxedString"
             transfer:
               type: array
               description: list of files to send to parallel steps
               items:
-                $ref: '#/components/schemas/TestWorkflowStepParallelTransfer'
+                $ref: "#/components/schemas/TestWorkflowStepParallelTransfer"
             fetch:
               type: array
               description: list of files to fetch from parallel steps
               items:
-                $ref: '#/components/schemas/TestWorkflowStepParallelFetch'
+                $ref: "#/components/schemas/TestWorkflowStepParallelFetch"
             template:
-              $ref: '#/components/schemas/TestWorkflowTemplateRef'
+              $ref: "#/components/schemas/TestWorkflowTemplateRef"
     TestWorkflowIndependentStepParallel:
       type: object
       allOf:
-        - $ref: '#/components/schemas/TestWorkflowTemplateSpec'
-        - $ref: '#/components/schemas/TestWorkflowStepExecuteStrategy'
-        - $ref: '#/components/schemas/TestWorkflowStepControl'
-        - $ref: '#/components/schemas/TestWorkflowStepOperations'
+        - $ref: "#/components/schemas/TestWorkflowTemplateSpec"
+        - $ref: "#/components/schemas/TestWorkflowStepExecuteStrategy"
+        - $ref: "#/components/schemas/TestWorkflowStepControl"
+        - $ref: "#/components/schemas/TestWorkflowStepOperations"
         - properties:
             parallelism:
               type: integer
@@ -4168,22 +4168,22 @@ components:
               type: string
               description: worker description to display
             logs:
-              $ref: '#/components/schemas/BoxedString'
+              $ref: "#/components/schemas/BoxedString"
             transfer:
               type: array
               description: list of files to send to parallel steps
               items:
-                $ref: '#/components/schemas/TestWorkflowStepParallelTransfer'
+                $ref: "#/components/schemas/TestWorkflowStepParallelTransfer"
             fetch:
               type: array
               description: list of files to fetch from parallel steps
               items:
-                $ref: '#/components/schemas/TestWorkflowStepParallelFetch'
+                $ref: "#/components/schemas/TestWorkflowStepParallelFetch"
     TestWorkflowIndependentServiceSpec:
       type: object
       allOf:
-        - $ref: '#/components/schemas/TestWorkflowStepExecuteStrategy'
-        - $ref: '#/components/schemas/TestWorkflowStepRun'
+        - $ref: "#/components/schemas/TestWorkflowStepExecuteStrategy"
+        - $ref: "#/components/schemas/TestWorkflowStepRun"
         - properties:
             description:
               type: string
@@ -4195,38 +4195,38 @@ components:
               type: array
               description: list of files to send to parallel steps
               items:
-                $ref: '#/components/schemas/TestWorkflowStepParallelTransfer'
+                $ref: "#/components/schemas/TestWorkflowStepParallelTransfer"
             content:
-              $ref: '#/components/schemas/TestWorkflowContent'
+              $ref: "#/components/schemas/TestWorkflowContent"
             pod:
-              $ref: '#/components/schemas/TestWorkflowPodConfig'
+              $ref: "#/components/schemas/TestWorkflowPodConfig"
             logs:
-              $ref: '#/components/schemas/BoxedString'
+              $ref: "#/components/schemas/BoxedString"
             restartPolicy:
               type: string
             readinessProbe:
-              $ref: '#/components/schemas/Probe'
+              $ref: "#/components/schemas/Probe"
             pvcs:
               type: object
               additionalProperties:
-                $ref: '#/components/schemas/TestWorkflowPvcConfig'
+                $ref: "#/components/schemas/TestWorkflowPvcConfig"
     TestWorkflowServiceSpec:
       type: object
       allOf:
-        - $ref: '#/components/schemas/TestWorkflowStepExecuteStrategy'
-        - $ref: '#/components/schemas/TestWorkflowIndependentServiceSpec'
+        - $ref: "#/components/schemas/TestWorkflowStepExecuteStrategy"
+        - $ref: "#/components/schemas/TestWorkflowIndependentServiceSpec"
         - properties:
             use:
               type: array
               items:
-                $ref: '#/components/schemas/TestWorkflowTemplateRef'
+                $ref: "#/components/schemas/TestWorkflowTemplateRef"
     TestWorkflowStepExecuteStrategy:
       type: object
       properties:
         count:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         maxCount:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         matrix:
           type: object
           description: matrix of parameters to spawn instances
@@ -4257,9 +4257,9 @@ components:
           type: string
           description: path to save the files to
         files:
-          $ref: '#/components/schemas/TestWorkflowTarballFilePattern'
+          $ref: "#/components/schemas/TestWorkflowTarballFilePattern"
         mount:
-          $ref: '#/components/schemas/BoxedBoolean'
+          $ref: "#/components/schemas/BoxedBoolean"
       required:
         - from
     TestWorkflowStepParallelFetch:
@@ -4272,16 +4272,16 @@ components:
           type: string
           description: path to save the files to
         files:
-          $ref: '#/components/schemas/TestWorkflowTarballFilePattern'
+          $ref: "#/components/schemas/TestWorkflowTarballFilePattern"
       required:
         - from
     TestWorkflowSystem:
       type: object
       properties:
         pureByDefault:
-          $ref: '#/components/schemas/BoxedBoolean'
+          $ref: "#/components/schemas/BoxedBoolean"
         isolatedContainers:
-          $ref: '#/components/schemas/BoxedBoolean'
+          $ref: "#/components/schemas/BoxedBoolean"
     TestWorkflowTimeouts:
       type: object
       description: configures timeout behavior for a workflow (queue, initialization)
@@ -4302,94 +4302,94 @@ components:
         use:
           type: array
           items:
-            $ref: '#/components/schemas/TestWorkflowTemplateRef'
+            $ref: "#/components/schemas/TestWorkflowTemplateRef"
         concurrency:
-          $ref: '#/components/schemas/TestWorkflowConcurrencyPolicy'
+          $ref: "#/components/schemas/TestWorkflowConcurrencyPolicy"
         config:
-          $ref: '#/components/schemas/TestWorkflowConfigSchema'
+          $ref: "#/components/schemas/TestWorkflowConfigSchema"
         system:
-          $ref: '#/components/schemas/TestWorkflowSystem'
+          $ref: "#/components/schemas/TestWorkflowSystem"
         content:
-          $ref: '#/components/schemas/TestWorkflowContent'
+          $ref: "#/components/schemas/TestWorkflowContent"
         services:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/TestWorkflowServiceSpec'
+            $ref: "#/components/schemas/TestWorkflowServiceSpec"
         container:
-          $ref: '#/components/schemas/TestWorkflowContainerConfig'
+          $ref: "#/components/schemas/TestWorkflowContainerConfig"
         job:
-          $ref: '#/components/schemas/TestWorkflowJobConfig'
+          $ref: "#/components/schemas/TestWorkflowJobConfig"
         pod:
-          $ref: '#/components/schemas/TestWorkflowPodConfig'
+          $ref: "#/components/schemas/TestWorkflowPodConfig"
         setup:
           type: array
           items:
-            $ref: '#/components/schemas/TestWorkflowStep'
+            $ref: "#/components/schemas/TestWorkflowStep"
         steps:
           type: array
           items:
-            $ref: '#/components/schemas/TestWorkflowStep'
+            $ref: "#/components/schemas/TestWorkflowStep"
         after:
           type: array
           items:
-            $ref: '#/components/schemas/TestWorkflowStep'
+            $ref: "#/components/schemas/TestWorkflowStep"
         events:
           type: array
           items:
-            $ref: '#/components/schemas/TestWorkflowEvent'
+            $ref: "#/components/schemas/TestWorkflowEvent"
         execution:
-          $ref: '#/components/schemas/TestWorkflowExecutionSchema'
+          $ref: "#/components/schemas/TestWorkflowExecutionSchema"
         timeouts:
-          $ref: '#/components/schemas/TestWorkflowTimeouts'
+          $ref: "#/components/schemas/TestWorkflowTimeouts"
         pvcs:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/TestWorkflowPvcConfig'
+            $ref: "#/components/schemas/TestWorkflowPvcConfig"
     TestWorkflowTemplateSpec:
       type: object
       properties:
         concurrency:
-          $ref: '#/components/schemas/TestWorkflowConcurrencyPolicy'
+          $ref: "#/components/schemas/TestWorkflowConcurrencyPolicy"
         config:
-          $ref: '#/components/schemas/TestWorkflowConfigSchema'
+          $ref: "#/components/schemas/TestWorkflowConfigSchema"
         system:
-          $ref: '#/components/schemas/TestWorkflowSystem'
+          $ref: "#/components/schemas/TestWorkflowSystem"
         content:
-          $ref: '#/components/schemas/TestWorkflowContent'
+          $ref: "#/components/schemas/TestWorkflowContent"
         services:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/TestWorkflowIndependentServiceSpec'
+            $ref: "#/components/schemas/TestWorkflowIndependentServiceSpec"
         container:
-          $ref: '#/components/schemas/TestWorkflowContainerConfig'
+          $ref: "#/components/schemas/TestWorkflowContainerConfig"
         job:
-          $ref: '#/components/schemas/TestWorkflowJobConfig'
+          $ref: "#/components/schemas/TestWorkflowJobConfig"
         pod:
-          $ref: '#/components/schemas/TestWorkflowPodConfig'
+          $ref: "#/components/schemas/TestWorkflowPodConfig"
         setup:
           type: array
           items:
-            $ref: '#/components/schemas/TestWorkflowIndependentStep'
+            $ref: "#/components/schemas/TestWorkflowIndependentStep"
         steps:
           type: array
           items:
-            $ref: '#/components/schemas/TestWorkflowIndependentStep'
+            $ref: "#/components/schemas/TestWorkflowIndependentStep"
         after:
           type: array
           items:
-            $ref: '#/components/schemas/TestWorkflowIndependentStep'
+            $ref: "#/components/schemas/TestWorkflowIndependentStep"
         events:
           type: array
           items:
-            $ref: '#/components/schemas/TestWorkflowEvent'
+            $ref: "#/components/schemas/TestWorkflowEvent"
         execution:
-          $ref: '#/components/schemas/TestWorkflowExecutionSchema'
+          $ref: "#/components/schemas/TestWorkflowExecutionSchema"
         timeouts:
-          $ref: '#/components/schemas/TestWorkflowTimeouts'
+          $ref: "#/components/schemas/TestWorkflowTimeouts"
         pvcs:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/TestWorkflowPvcConfig'
+            $ref: "#/components/schemas/TestWorkflowPvcConfig"
     TestWorkflowStepControl:
       type: object
       properties:
@@ -4405,7 +4405,7 @@ components:
             is the step optional, so the failure won't affect the TestWorkflow
             result
         retry:
-          $ref: '#/components/schemas/TestWorkflowRetryPolicy'
+          $ref: "#/components/schemas/TestWorkflowRetryPolicy"
         timeout:
           type: string
           description: maximum time this step may take
@@ -4421,11 +4421,11 @@ components:
           type: string
           description: script to run in a default shell for the container
         run:
-          $ref: '#/components/schemas/TestWorkflowStepRun'
+          $ref: "#/components/schemas/TestWorkflowStepRun"
         execute:
-          $ref: '#/components/schemas/TestWorkflowStepExecute'
+          $ref: "#/components/schemas/TestWorkflowStepExecute"
         artifacts:
-          $ref: '#/components/schemas/TestWorkflowStepArtifacts'
+          $ref: "#/components/schemas/TestWorkflowStepArtifacts"
     TestWorkflowIndependentStep:
       type: object
       properties:
@@ -4441,7 +4441,7 @@ components:
             expression to declare under which conditions the step should be run;
             defaults to "passed", except artifacts where it defaults to "always"
         pure:
-          $ref: '#/components/schemas/BoxedBoolean'
+          $ref: "#/components/schemas/BoxedBoolean"
         paused:
           type: boolean
           description: should the step be paused initially
@@ -4454,7 +4454,7 @@ components:
             is the step optional, so the failure won't affect the TestWorkflow
             result
         retry:
-          $ref: '#/components/schemas/TestWorkflowRetryPolicy'
+          $ref: "#/components/schemas/TestWorkflowRetryPolicy"
         timeout:
           type: string
           description: maximum time this step may take
@@ -4464,36 +4464,36 @@ components:
             ^((0|[1-9][0-9]*)h)?((0|[1-9][0-9]*)m)?((0|[1-9][0-9]*)s)?((0|[1-9][0-9]*)ms)?$
           description: delay before the step
         content:
-          $ref: '#/components/schemas/TestWorkflowContent'
+          $ref: "#/components/schemas/TestWorkflowContent"
         services:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/TestWorkflowIndependentServiceSpec'
+            $ref: "#/components/schemas/TestWorkflowIndependentServiceSpec"
         shell:
           type: string
           description: script to run in a default shell for the container
         run:
-          $ref: '#/components/schemas/TestWorkflowStepRun'
+          $ref: "#/components/schemas/TestWorkflowStepRun"
         workingDir:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         container:
-          $ref: '#/components/schemas/TestWorkflowContainerConfig'
+          $ref: "#/components/schemas/TestWorkflowContainerConfig"
         execute:
-          $ref: '#/components/schemas/TestWorkflowStepExecute'
+          $ref: "#/components/schemas/TestWorkflowStepExecute"
         artifacts:
-          $ref: '#/components/schemas/TestWorkflowStepArtifacts'
+          $ref: "#/components/schemas/TestWorkflowStepArtifacts"
         parallel:
-          $ref: '#/components/schemas/TestWorkflowIndependentStepParallel'
+          $ref: "#/components/schemas/TestWorkflowIndependentStepParallel"
         setup:
           type: array
           description: nested setup steps to run
           items:
-            $ref: '#/components/schemas/TestWorkflowIndependentStep'
+            $ref: "#/components/schemas/TestWorkflowIndependentStep"
         steps:
           type: array
           description: nested steps to run
           items:
-            $ref: '#/components/schemas/TestWorkflowIndependentStep'
+            $ref: "#/components/schemas/TestWorkflowIndependentStep"
     TestWorkflowStep:
       type: object
       properties:
@@ -4509,7 +4509,7 @@ components:
             expression to declare under which conditions the step should be run;
             defaults to "passed", except artifacts where it defaults to "always"
         pure:
-          $ref: '#/components/schemas/BoxedBoolean'
+          $ref: "#/components/schemas/BoxedBoolean"
         paused:
           type: boolean
           description: should the step be paused initially
@@ -4525,11 +4525,11 @@ components:
           type: array
           description: list of TestWorkflowTemplates to use
           items:
-            $ref: '#/components/schemas/TestWorkflowTemplateRef'
+            $ref: "#/components/schemas/TestWorkflowTemplateRef"
         template:
-          $ref: '#/components/schemas/TestWorkflowTemplateRef'
+          $ref: "#/components/schemas/TestWorkflowTemplateRef"
         retry:
-          $ref: '#/components/schemas/TestWorkflowRetryPolicy'
+          $ref: "#/components/schemas/TestWorkflowRetryPolicy"
         timeout:
           type: string
           description: maximum time this step may take
@@ -4539,36 +4539,36 @@ components:
             ^((0|[1-9][0-9]*)h)?((0|[1-9][0-9]*)m)?((0|[1-9][0-9]*)s)?((0|[1-9][0-9]*)ms)?$
           description: delay before the step
         content:
-          $ref: '#/components/schemas/TestWorkflowContent'
+          $ref: "#/components/schemas/TestWorkflowContent"
         services:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/TestWorkflowServiceSpec'
+            $ref: "#/components/schemas/TestWorkflowServiceSpec"
         shell:
           type: string
           description: script to run in a default shell for the container
         run:
-          $ref: '#/components/schemas/TestWorkflowStepRun'
+          $ref: "#/components/schemas/TestWorkflowStepRun"
         workingDir:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         container:
-          $ref: '#/components/schemas/TestWorkflowContainerConfig'
+          $ref: "#/components/schemas/TestWorkflowContainerConfig"
         execute:
-          $ref: '#/components/schemas/TestWorkflowStepExecute'
+          $ref: "#/components/schemas/TestWorkflowStepExecute"
         artifacts:
-          $ref: '#/components/schemas/TestWorkflowStepArtifacts'
+          $ref: "#/components/schemas/TestWorkflowStepArtifacts"
         parallel:
-          $ref: '#/components/schemas/TestWorkflowStepParallel'
+          $ref: "#/components/schemas/TestWorkflowStepParallel"
         setup:
           type: array
           description: nested setup steps to run
           items:
-            $ref: '#/components/schemas/TestWorkflowStep'
+            $ref: "#/components/schemas/TestWorkflowStep"
         steps:
           type: array
           description: nested steps to run
           items:
-            $ref: '#/components/schemas/TestWorkflowStep'
+            $ref: "#/components/schemas/TestWorkflowStep"
     TestWorkflowStepExecute:
       type: object
       properties:
@@ -4584,16 +4584,16 @@ components:
           type: array
           description: tests to schedule
           items:
-            $ref: '#/components/schemas/TestWorkflowStepExecuteTestRef'
+            $ref: "#/components/schemas/TestWorkflowStepExecuteTestRef"
         workflows:
           type: array
           description: workflows to schedule
           items:
-            $ref: '#/components/schemas/TestWorkflowStepExecuteTestWorkflowRef'
+            $ref: "#/components/schemas/TestWorkflowStepExecuteTestWorkflowRef"
     TestWorkflowStepExecuteTestWorkflowRef:
       type: object
       allOf:
-        - $ref: '#/components/schemas/TestWorkflowStepExecuteStrategy'
+        - $ref: "#/components/schemas/TestWorkflowStepExecuteStrategy"
         - properties:
             name:
               type: string
@@ -4607,18 +4607,18 @@ components:
             tarball:
               type: object
               additionalProperties:
-                $ref: '#/components/schemas/TestWorkflowTarballRequest'
+                $ref: "#/components/schemas/TestWorkflowTarballRequest"
             config:
-              $ref: '#/components/schemas/TestWorkflowConfigValue'
+              $ref: "#/components/schemas/TestWorkflowConfigValue"
             selector:
-              $ref: '#/components/schemas/LabelSelector'
+              $ref: "#/components/schemas/LabelSelector"
               description: label selector for test workflow
             target:
-              $ref: '#/components/schemas/ExecutionTarget'
+              $ref: "#/components/schemas/ExecutionTarget"
     TestWorkflowStepExecuteTestRef:
       type: object
       allOf:
-        - $ref: '#/components/schemas/TestWorkflowStepExecuteStrategy'
+        - $ref: "#/components/schemas/TestWorkflowStepExecuteStrategy"
         - properties:
             name:
               type: string
@@ -4627,15 +4627,15 @@ components:
               type: string
               description: test execution description to display
             count:
-              $ref: '#/components/schemas/BoxedString'
+              $ref: "#/components/schemas/BoxedString"
             maxCount:
-              $ref: '#/components/schemas/BoxedString'
+              $ref: "#/components/schemas/BoxedString"
             executionRequest:
-              $ref: '#/components/schemas/TestWorkflowStepExecuteTestExecutionRequest'
+              $ref: "#/components/schemas/TestWorkflowStepExecuteTestExecutionRequest"
             tarball:
               type: object
               additionalProperties:
-                $ref: '#/components/schemas/TestWorkflowTarballRequest'
+                $ref: "#/components/schemas/TestWorkflowTarballRequest"
     TestWorkflowTarballRequest:
       type: object
       properties:
@@ -4643,7 +4643,7 @@ components:
           type: string
           description: path to load the files from
         files:
-          $ref: '#/components/schemas/TestWorkflowTarballFilePattern'
+          $ref: "#/components/schemas/TestWorkflowTarballFilePattern"
       required:
         - from
     TestWorkflowTarballFilePattern:
@@ -4668,7 +4668,7 @@ components:
           additionalProperties:
             type: string
           example:
-            users: '3'
+            users: "3"
             prefix: some-
         isVariablesFileUploaded:
           type: boolean
@@ -4680,7 +4680,7 @@ components:
             variables file content - need to be in format for particular
             executor (e.g. postman envs file)
         variables:
-          $ref: '#/components/schemas/Variables'
+          $ref: "#/components/schemas/Variables"
         testSecretUUID:
           type: string
           description: test secret uuid
@@ -4699,9 +4699,9 @@ components:
           items:
             type: string
           example:
-            - '--repeats'
-            - '5'
-            - '--insecure'
+            - "--repeats"
+            - "5"
+            - "--insecure"
         argsMode:
           type: string
           description: usage mode for arguments
@@ -4717,7 +4717,7 @@ components:
           type: array
           description: container image pull secrets
           items:
-            $ref: '#/components/schemas/LocalObjectReference'
+            $ref: "#/components/schemas/LocalObjectReference"
         sync:
           type: boolean
           description: whether to start execution sync or async
@@ -4739,7 +4739,7 @@ components:
           description: duration in seconds the test may be active, until its stopped
           example: 1
         artifactRequest:
-          $ref: '#/components/schemas/ArtifactRequest'
+          $ref: "#/components/schemas/ArtifactRequest"
           description: configuration parameters for storing test artifacts
         jobTemplate:
           type: string
@@ -4771,12 +4771,12 @@ components:
           type: array
           description: config map references
           items:
-            $ref: '#/components/schemas/EnvReference'
+            $ref: "#/components/schemas/EnvReference"
         envSecrets:
           type: array
           description: secret references
           items:
-            $ref: '#/components/schemas/EnvReference'
+            $ref: "#/components/schemas/EnvReference"
         executionNamespace:
           type: string
           description: namespace for test execution (Pro edition only)
@@ -4784,9 +4784,9 @@ components:
       type: object
       properties:
         workingDir:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         compress:
-          $ref: '#/components/schemas/TestWorkflowStepArtifactsCompression'
+          $ref: "#/components/schemas/TestWorkflowStepArtifactsCompression"
         paths:
           type: array
           description: file paths to fetch from the container
@@ -4838,15 +4838,15 @@ components:
       type: object
       properties:
         git:
-          $ref: '#/components/schemas/TestWorkflowContentGit'
+          $ref: "#/components/schemas/TestWorkflowContentGit"
         files:
           type: array
           items:
-            $ref: '#/components/schemas/TestWorkflowContentFile'
+            $ref: "#/components/schemas/TestWorkflowContentFile"
         tarball:
           type: array
           items:
-            $ref: '#/components/schemas/TestWorkflowContentTarball'
+            $ref: "#/components/schemas/TestWorkflowContentTarball"
     TestWorkflowContentGit:
       type: object
       properties:
@@ -4860,19 +4860,19 @@ components:
           type: string
           description: plain text username to fetch with
         usernameFrom:
-          $ref: '#/components/schemas/EnvVarSource'
+          $ref: "#/components/schemas/EnvVarSource"
         token:
           type: string
           description: plain text token to fetch with
         tokenFrom:
-          $ref: '#/components/schemas/EnvVarSource'
+          $ref: "#/components/schemas/EnvVarSource"
         sshKey:
           type: string
           description: plain text SSH private key to fetch with
         sshKeyFrom:
-          $ref: '#/components/schemas/EnvVarSource'
+          $ref: "#/components/schemas/EnvVarSource"
         authType:
-          $ref: '#/components/schemas/ContentGitAuthType'
+          $ref: "#/components/schemas/ContentGitAuthType"
         mountPath:
           type: string
           description: >-
@@ -4897,9 +4897,9 @@ components:
           type: string
           description: plain-text content to put inside
         contentFrom:
-          $ref: '#/components/schemas/EnvVarSource'
+          $ref: "#/components/schemas/EnvVarSource"
         mode:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: "#/components/schemas/BoxedInteger"
       required:
         - path
     TestWorkflowContentTarball:
@@ -4912,7 +4912,7 @@ components:
           type: string
           description: path where the tarball should be extracted
         mount:
-          $ref: '#/components/schemas/BoxedBoolean'
+          $ref: "#/components/schemas/BoxedBoolean"
       required:
         - url
         - path
@@ -4923,7 +4923,7 @@ components:
           type: string
           description: TestWorkflow name to include
         config:
-          $ref: '#/components/schemas/TestWorkflowConfigValue'
+          $ref: "#/components/schemas/TestWorkflowConfigValue"
       required:
         - name
     TestWorkflowTemplateRef:
@@ -4933,7 +4933,7 @@ components:
           type: string
           description: TestWorkflowTemplate name to include
         config:
-          $ref: '#/components/schemas/TestWorkflowConfigValue'
+          $ref: "#/components/schemas/TestWorkflowConfigValue"
       required:
         - name
     TestWorkflowJobConfig:
@@ -4953,7 +4953,7 @@ components:
           type: string
           description: namespace for execution of test workflow
         activeDeadlineSeconds:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: "#/components/schemas/BoxedInteger"
     TestWorkflowPodConfig:
       type: object
       properties:
@@ -4971,7 +4971,7 @@ components:
           type: array
           description: secret references for pulling images
           items:
-            $ref: '#/components/schemas/LocalObjectReference'
+            $ref: "#/components/schemas/LocalObjectReference"
         serviceAccountName:
           type: string
           description: default service account name for the containers
@@ -4984,126 +4984,126 @@ components:
           type: array
           description: volumes to append to the pod
           items:
-            $ref: '#/components/schemas/Volume'
+            $ref: "#/components/schemas/Volume"
         activeDeadlineSeconds:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: "#/components/schemas/BoxedInteger"
         dnsPolicy:
           type: string
         nodeName:
           type: string
         securityContext:
-          $ref: '#/components/schemas/PodSecurityContext'
+          $ref: "#/components/schemas/PodSecurityContext"
         disableFsGroupDefaulting:
-          $ref: '#/components/schemas/BoxedBoolean'
+          $ref: "#/components/schemas/BoxedBoolean"
         hostname:
           type: string
         subdomain:
           type: string
         affinity:
-          $ref: '#/components/schemas/Affinity'
+          $ref: "#/components/schemas/Affinity"
         tolerations:
           type: array
           items:
-            $ref: '#/components/schemas/Toleration'
+            $ref: "#/components/schemas/Toleration"
         hostAliases:
           type: array
           items:
-            $ref: '#/components/schemas/HostAlias'
+            $ref: "#/components/schemas/HostAlias"
         priorityClassName:
           type: string
         priority:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: "#/components/schemas/BoxedInteger"
         dnsConfig:
-          $ref: '#/components/schemas/PodDNSConfig'
+          $ref: "#/components/schemas/PodDNSConfig"
         preemptionPolicy:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         topologySpreadConstraints:
           type: array
           items:
-            $ref: '#/components/schemas/TopologySpreadConstraint'
+            $ref: "#/components/schemas/TopologySpreadConstraint"
         schedulingGates:
           type: array
           items:
-            $ref: '#/components/schemas/PodSchedulingGate'
+            $ref: "#/components/schemas/PodSchedulingGate"
         resourceClaims:
           type: array
           items:
-            $ref: '#/components/schemas/PodResourceClaim'
+            $ref: "#/components/schemas/PodResourceClaim"
         hostPID:
-          $ref: '#/components/schemas/BoxedBoolean'
+          $ref: "#/components/schemas/BoxedBoolean"
     TestWorkflowContainerConfig:
       type: object
       properties:
         workingDir:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         image:
           type: string
           description: image to be used for the container
         imagePullPolicy:
-          $ref: '#/components/schemas/ImagePullPolicy'
+          $ref: "#/components/schemas/ImagePullPolicy"
         env:
           type: array
           description: environment variables to append to the container
           items:
-            $ref: '#/components/schemas/EnvVar'
+            $ref: "#/components/schemas/EnvVar"
         envFrom:
           type: array
           description: external environment variables to append to the container
           items:
-            $ref: '#/components/schemas/EnvFromSource'
+            $ref: "#/components/schemas/EnvFromSource"
         command:
-          $ref: '#/components/schemas/BoxedStringList'
+          $ref: "#/components/schemas/BoxedStringList"
         args:
-          $ref: '#/components/schemas/BoxedStringList'
+          $ref: "#/components/schemas/BoxedStringList"
         resources:
-          $ref: '#/components/schemas/TestWorkflowResources'
+          $ref: "#/components/schemas/TestWorkflowResources"
         securityContext:
-          $ref: '#/components/schemas/SecurityContext'
+          $ref: "#/components/schemas/SecurityContext"
         volumeMounts:
           type: array
           description: volumes to mount to the container
           items:
-            $ref: '#/components/schemas/VolumeMount'
+            $ref: "#/components/schemas/VolumeMount"
     TestWorkflowStepRun:
       type: object
       properties:
         workingDir:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         image:
           type: string
           description: image to be used for the container
         imagePullPolicy:
-          $ref: '#/components/schemas/ImagePullPolicy'
+          $ref: "#/components/schemas/ImagePullPolicy"
         env:
           type: array
           description: environment variables to append to the container
           items:
-            $ref: '#/components/schemas/EnvVar'
+            $ref: "#/components/schemas/EnvVar"
         envFrom:
           type: array
           description: external environment variables to append to the container
           items:
-            $ref: '#/components/schemas/EnvFromSource'
+            $ref: "#/components/schemas/EnvFromSource"
         command:
-          $ref: '#/components/schemas/BoxedStringList'
+          $ref: "#/components/schemas/BoxedStringList"
         args:
-          $ref: '#/components/schemas/BoxedStringList'
+          $ref: "#/components/schemas/BoxedStringList"
         shell:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         resources:
-          $ref: '#/components/schemas/TestWorkflowResources'
+          $ref: "#/components/schemas/TestWorkflowResources"
         securityContext:
-          $ref: '#/components/schemas/SecurityContext'
+          $ref: "#/components/schemas/SecurityContext"
         volumeMounts:
           type: array
           description: volumes to mount to the container
           items:
-            $ref: '#/components/schemas/VolumeMount'
+            $ref: "#/components/schemas/VolumeMount"
     TestWorkflowExecutionConfig:
       type: object
       description: map of configuration values used in the test workflow execution
       additionalProperties:
-        $ref: '#/components/schemas/TestWorkflowExecutionConfigValue'
+        $ref: "#/components/schemas/TestWorkflowExecutionConfigValue"
     TestWorkflowExecutionConfigValue:
       type: object
       description: configuration values used in the test workflow execution
@@ -5160,14 +5160,14 @@ components:
       type: object
       description: configuration definition
       additionalProperties:
-        $ref: '#/components/schemas/TestWorkflowParameterSchema'
+        $ref: "#/components/schemas/TestWorkflowParameterSchema"
     TestWorkflowResources:
       type: object
       properties:
         limits:
-          $ref: '#/components/schemas/TestWorkflowResourcesList'
+          $ref: "#/components/schemas/TestWorkflowResourcesList"
         requests:
-          $ref: '#/components/schemas/TestWorkflowResourcesList'
+          $ref: "#/components/schemas/TestWorkflowResourcesList"
     TestWorkflowResourcesList:
       type: object
       properties:
@@ -5194,7 +5194,7 @@ components:
           type: string
           description: human-readable description for the property
         type:
-          $ref: '#/components/schemas/TestWorkflowParameterType'
+          $ref: "#/components/schemas/TestWorkflowParameterType"
         enum:
           type: array
           description: list of acceptable values
@@ -5204,7 +5204,7 @@ components:
           type: string
           description: example value for the parameter
         default:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         format:
           type: string
           description: predefined format for the string
@@ -5212,19 +5212,19 @@ components:
           type: string
           description: regular expression to match
         minLength:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: "#/components/schemas/BoxedInteger"
         maxLength:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: "#/components/schemas/BoxedInteger"
         minimum:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: "#/components/schemas/BoxedInteger"
         maximum:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: "#/components/schemas/BoxedInteger"
         exclusiveMinimum:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: "#/components/schemas/BoxedInteger"
         exclusiveMaximum:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: "#/components/schemas/BoxedInteger"
         multipleOf:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: "#/components/schemas/BoxedInteger"
         sensitive:
           type: boolean
           default: false
@@ -5243,7 +5243,7 @@ components:
       type: object
       properties:
         cronjob:
-          $ref: '#/components/schemas/TestWorkflowCronJobConfig'
+          $ref: "#/components/schemas/TestWorkflowCronJobConfig"
     TestWorkflowCronJobConfig:
       type: object
       description: cron job configuration
@@ -5253,7 +5253,7 @@ components:
         cron:
           type: string
           description: cron schedule to run a test workflow
-          example: '* * * * *'
+          example: "* * * * *"
         labels:
           type: object
           description: labels to attach to the cron job
@@ -5265,11 +5265,11 @@ components:
           additionalProperties:
             type: string
         config:
-          $ref: '#/components/schemas/TestWorkflowConfigValue'
+          $ref: "#/components/schemas/TestWorkflowConfigValue"
         target:
-          $ref: '#/components/schemas/ExecutionTarget'
+          $ref: "#/components/schemas/ExecutionTarget"
         timezone:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
           description: cron timezone
           example: America/New_York
     TestWorkflowExecutionCR:
@@ -5278,20 +5278,20 @@ components:
         - testWorkflow
       properties:
         testWorkflow:
-          $ref: '#/components/schemas/ObjectRef'
+          $ref: "#/components/schemas/ObjectRef"
           description: test workflow name and namespace
         executionRequest:
-          $ref: '#/components/schemas/TestWorkflowExecutionRequest'
+          $ref: "#/components/schemas/TestWorkflowExecutionRequest"
           description: test workflow execution request parameters
         status:
-          $ref: '#/components/schemas/TestWorkflowExecutionStatusCR'
+          $ref: "#/components/schemas/TestWorkflowExecutionStatusCR"
           description: test workflow execution status
     TestWorkflowExecutionStatusCR:
       type: object
       description: test workflow execution status
       properties:
         latestExecution:
-          $ref: '#/components/schemas/TestWorkflowExecution'
+          $ref: "#/components/schemas/TestWorkflowExecution"
         generation:
           type: integer
           format: int64
@@ -5335,9 +5335,9 @@ components:
       description: test workflow execution configuration
       properties:
         tags:
-          $ref: '#/components/schemas/TestWorkflowTagValue'
+          $ref: "#/components/schemas/TestWorkflowTagValue"
         target:
-          $ref: '#/components/schemas/ExecutionTarget'
+          $ref: "#/components/schemas/ExecutionTarget"
         silent:
           type: boolean
           description: >-
@@ -5349,7 +5349,7 @@ components:
       type: object
       properties:
         tags:
-          $ref: '#/components/schemas/TestWorkflowTagValue'
+          $ref: "#/components/schemas/TestWorkflowTagValue"
     ContentGitAuthType:
       type: string
       description: auth type for git requests
@@ -5404,13 +5404,13 @@ components:
       type: object
       properties:
         global:
-          $ref: '#/components/schemas/BoxedBoolean'
+          $ref: "#/components/schemas/BoxedBoolean"
         name:
           type: string
         value:
           type: string
         valueFrom:
-          $ref: '#/components/schemas/EnvVarSource'
+          $ref: "#/components/schemas/EnvVarSource"
     ConfigMapEnvSource:
       type: object
       properties:
@@ -5439,36 +5439,36 @@ components:
         prefix:
           type: string
         configMapRef:
-          $ref: '#/components/schemas/ConfigMapEnvSource'
+          $ref: "#/components/schemas/ConfigMapEnvSource"
         secretRef:
-          $ref: '#/components/schemas/SecretEnvSource'
+          $ref: "#/components/schemas/SecretEnvSource"
     SecurityContext:
       type: object
       properties:
         capabilities:
-          $ref: '#/components/schemas/Capabilities'
+          $ref: "#/components/schemas/Capabilities"
         privileged:
-          $ref: '#/components/schemas/BoxedBoolean'
+          $ref: "#/components/schemas/BoxedBoolean"
         seLinuxOptions:
-          $ref: '#/components/schemas/SELinuxOptions'
+          $ref: "#/components/schemas/SELinuxOptions"
         windowsOptions:
-          $ref: '#/components/schemas/WindowsSecurityContextOptions'
+          $ref: "#/components/schemas/WindowsSecurityContextOptions"
         runAsUser:
-          $ref: '#/components/schemas/TemplatableBoxedInteger'
+          $ref: "#/components/schemas/TemplatableBoxedInteger"
         runAsGroup:
-          $ref: '#/components/schemas/TemplatableBoxedInteger'
+          $ref: "#/components/schemas/TemplatableBoxedInteger"
         runAsNonRoot:
-          $ref: '#/components/schemas/BoxedBoolean'
+          $ref: "#/components/schemas/BoxedBoolean"
         readOnlyRootFilesystem:
-          $ref: '#/components/schemas/BoxedBoolean'
+          $ref: "#/components/schemas/BoxedBoolean"
         allowPrivilegeEscalation:
-          $ref: '#/components/schemas/BoxedBoolean'
+          $ref: "#/components/schemas/BoxedBoolean"
         procMount:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         seccompProfile:
-          $ref: '#/components/schemas/SeccompProfile'
+          $ref: "#/components/schemas/SeccompProfile"
         appArmorProfile:
-          $ref: '#/components/schemas/AppArmorProfile'
+          $ref: "#/components/schemas/AppArmorProfile"
     Capabilities:
       type: object
       properties:
@@ -5484,36 +5484,36 @@ components:
       type: object
       properties:
         seLinuxOptions:
-          $ref: '#/components/schemas/SELinuxOptions'
+          $ref: "#/components/schemas/SELinuxOptions"
         windowsOptions:
-          $ref: '#/components/schemas/WindowsSecurityContextOptions'
+          $ref: "#/components/schemas/WindowsSecurityContextOptions"
         runAsUser:
-          $ref: '#/components/schemas/TemplatableBoxedInteger'
+          $ref: "#/components/schemas/TemplatableBoxedInteger"
         runAsGroup:
-          $ref: '#/components/schemas/TemplatableBoxedInteger'
+          $ref: "#/components/schemas/TemplatableBoxedInteger"
         runAsNonRoot:
-          $ref: '#/components/schemas/BoxedBoolean'
+          $ref: "#/components/schemas/BoxedBoolean"
         supplementalGroups:
           type: array
           items:
             type: integer
             format: int64
         supplementalGroupsPolicy:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         fsGroup:
-          $ref: '#/components/schemas/TemplatableBoxedInteger'
+          $ref: "#/components/schemas/TemplatableBoxedInteger"
         sysctls:
           type: array
           items:
-            $ref: '#/components/schemas/Sysctl'
+            $ref: "#/components/schemas/Sysctl"
         fsGroupChangePolicy:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         seccompProfile:
-          $ref: '#/components/schemas/SeccompProfile'
+          $ref: "#/components/schemas/SeccompProfile"
         appArmorProfile:
-          $ref: '#/components/schemas/AppArmorProfile'
+          $ref: "#/components/schemas/AppArmorProfile"
         seLinuxChangePolicy:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
     SELinuxOptions:
       type: object
       properties:
@@ -5529,13 +5529,13 @@ components:
       type: object
       properties:
         gmsaCredentialSpecName:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         gmsaCredentialSpec:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         runAsUserName:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         hostProcess:
-          $ref: '#/components/schemas/BoxedBoolean'
+          $ref: "#/components/schemas/BoxedBoolean"
     Sysctl:
       type: object
       properties:
@@ -5549,14 +5549,14 @@ components:
         type:
           type: string
         localhostProfile:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
     AppArmorProfile:
       type: object
       properties:
         type:
           type: string
         localhostProfile:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
     Toleration:
       type: object
       properties:
@@ -5569,7 +5569,7 @@ components:
         effect:
           type: string
         tolerationSeconds:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: "#/components/schemas/BoxedInteger"
     HostAlias:
       type: object
       properties:
@@ -5589,13 +5589,13 @@ components:
         whenUnsatisfiable:
           type: string
         labelSelector:
-          $ref: '#/components/schemas/LabelSelector'
+          $ref: "#/components/schemas/LabelSelector"
         minDomains:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: "#/components/schemas/BoxedInteger"
         nodeAffinityPolicy:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         nodeTaintsPolicy:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         matchLabelKeys:
           type: array
           items:
@@ -5611,14 +5611,14 @@ components:
         name:
           type: string
         source:
-          $ref: '#/components/schemas/ClaimSource'
+          $ref: "#/components/schemas/ClaimSource"
     ClaimSource:
       type: object
       properties:
         resourceClaimName:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         resourceClaimTemplateName:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
     NodeSelectorRequirement:
       type: object
       properties:
@@ -5636,47 +5636,47 @@ components:
         matchExpressions:
           type: array
           items:
-            $ref: '#/components/schemas/NodeSelectorRequirement'
+            $ref: "#/components/schemas/NodeSelectorRequirement"
         matchFields:
           type: array
           items:
-            $ref: '#/components/schemas/NodeSelectorRequirement'
+            $ref: "#/components/schemas/NodeSelectorRequirement"
     NodeSelector:
       type: object
       properties:
         nodeSelectorTerms:
           type: array
           items:
-            $ref: '#/components/schemas/NodeSelectorTerm'
+            $ref: "#/components/schemas/NodeSelectorTerm"
     PreferredSchedulingTerm:
       type: object
       properties:
         weight:
           type: integer
         preference:
-          $ref: '#/components/schemas/NodeSelectorTerm'
+          $ref: "#/components/schemas/NodeSelectorTerm"
       required:
         - preference
     NodeAffinity:
       type: object
       properties:
         requiredDuringSchedulingIgnoredDuringExecution:
-          $ref: '#/components/schemas/NodeSelector'
+          $ref: "#/components/schemas/NodeSelector"
         preferredDuringSchedulingIgnoredDuringExecution:
           type: array
           items:
-            $ref: '#/components/schemas/PreferredSchedulingTerm'
+            $ref: "#/components/schemas/PreferredSchedulingTerm"
     PodAffinity:
       type: object
       properties:
         requiredDuringSchedulingIgnoredDuringExecution:
           type: array
           items:
-            $ref: '#/components/schemas/PodAffinityTerm'
+            $ref: "#/components/schemas/PodAffinityTerm"
         preferredDuringSchedulingIgnoredDuringExecution:
           type: array
           items:
-            $ref: '#/components/schemas/WeightedPodAffinityTerm'
+            $ref: "#/components/schemas/WeightedPodAffinityTerm"
     LabelSelectorRequirement:
       type: object
       properties:
@@ -5698,12 +5698,12 @@ components:
         matchExpressions:
           type: array
           items:
-            $ref: '#/components/schemas/LabelSelectorRequirement'
+            $ref: "#/components/schemas/LabelSelectorRequirement"
     PodAffinityTerm:
       type: object
       properties:
         labelSelector:
-          $ref: '#/components/schemas/LabelSelector'
+          $ref: "#/components/schemas/LabelSelector"
         namespaces:
           type: array
           items:
@@ -5711,25 +5711,25 @@ components:
         topologyKey:
           type: string
         namespaceSelector:
-          $ref: '#/components/schemas/LabelSelector'
+          $ref: "#/components/schemas/LabelSelector"
     WeightedPodAffinityTerm:
       type: object
       properties:
         weight:
           type: integer
         podAffinityTerm:
-          $ref: '#/components/schemas/PodAffinityTerm'
+          $ref: "#/components/schemas/PodAffinityTerm"
       required:
         - podAffinityTerm
     Affinity:
       type: object
       properties:
         nodeAffinity:
-          $ref: '#/components/schemas/NodeAffinity'
+          $ref: "#/components/schemas/NodeAffinity"
         podAffinity:
-          $ref: '#/components/schemas/PodAffinity'
+          $ref: "#/components/schemas/PodAffinity"
         podAntiAffinity:
-          $ref: '#/components/schemas/PodAffinity'
+          $ref: "#/components/schemas/PodAffinity"
     PodDNSConfig:
       type: object
       properties:
@@ -5744,14 +5744,14 @@ components:
         options:
           type: array
           items:
-            $ref: '#/components/schemas/PodDNSConfigOption'
+            $ref: "#/components/schemas/PodDNSConfigOption"
     PodDNSConfigOption:
       type: object
       properties:
         name:
           type: string
         value:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
     Probe:
       type: object
       description: >-
@@ -5769,15 +5769,15 @@ components:
         failureThreshold:
           type: integer
         terminationGracePeriodSeconds:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: "#/components/schemas/BoxedInteger"
         exec:
-          $ref: '#/components/schemas/ExecAction'
+          $ref: "#/components/schemas/ExecAction"
         httpGet:
-          $ref: '#/components/schemas/HTTPGetAction'
+          $ref: "#/components/schemas/HTTPGetAction"
         tcpSocket:
-          $ref: '#/components/schemas/TCPSocketAction'
+          $ref: "#/components/schemas/TCPSocketAction"
         grpc:
-          $ref: '#/components/schemas/GRPCAction'
+          $ref: "#/components/schemas/GRPCAction"
     ExecAction:
       type: object
       properties:
@@ -5804,7 +5804,7 @@ components:
         httpHeaders:
           type: array
           items:
-            $ref: '#/components/schemas/HTTPHeader'
+            $ref: "#/components/schemas/HTTPHeader"
     HTTPHeader:
       type: object
       properties:
@@ -5825,7 +5825,7 @@ components:
         port:
           type: integer
         service:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
     VolumeMount:
       description: VolumeMount describes a mounting of a Volume within a container.
       properties:
@@ -5835,7 +5835,7 @@ components:
             Must not contain ':'.
           type: string
         mountPropagation:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         name:
           description: This must match the Name of a Volume.
           type: string
@@ -5878,7 +5878,7 @@ components:
             https://kubernetes.io/docs/concepts/storage/volumes#hostpath
           type: string
         type:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
       required:
         - path
       type: object
@@ -5895,7 +5895,7 @@ components:
             https://kubernetes.io/docs/concepts/storage/volumes#emptydir
           type: string
         sizeLimit:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
       type: object
     GCEPersistentDiskVolumeSource:
       description: >-
@@ -5984,7 +5984,7 @@ components:
         https://kubernetes.io/docs/concepts/storage/volumes#secret
       properties:
         defaultMode:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: "#/components/schemas/BoxedInteger"
         items:
           description: >-
             items If unspecified, each key-value pair in the Data field of the
@@ -6002,7 +6002,7 @@ components:
                 description: key is the key to project.
                 type: string
               mode:
-                $ref: '#/components/schemas/BoxedInteger'
+                $ref: "#/components/schemas/BoxedInteger"
               path:
                 description: >-
                   path is the relative path of the file to map the key to. May
@@ -6101,7 +6101,7 @@ components:
             https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
           type: string
         secretRef:
-          $ref: '#/components/schemas/LocalObjectReference'
+          $ref: "#/components/schemas/LocalObjectReference"
         user:
           description: >-
             user is optional: User is the rados user name, default is admin More
@@ -6136,7 +6136,7 @@ components:
       description: configMap represents a configMap that should populate this volume
       properties:
         defaultMode:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: "#/components/schemas/BoxedInteger"
         items:
           description: >-
             items if unspecified, each key-value pair in the Data field of the
@@ -6154,7 +6154,7 @@ components:
                 description: key is the key to project.
                 type: string
               mode:
-                $ref: '#/components/schemas/BoxedInteger'
+                $ref: "#/components/schemas/BoxedInteger"
               path:
                 description: >-
                   path is the relative path of the file to map the key to. May
@@ -6182,7 +6182,7 @@ components:
         to the pod.
       properties:
         cachingMode:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         diskName:
           description: diskName is the Name of the data disk in the blob storage
           type: string
@@ -6190,9 +6190,9 @@ components:
           description: diskURI is the URI of data disk in the blob storage
           type: string
         fsType:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         kind:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         readOnly:
           description: >-
             readOnly Defaults to false (read/write). ReadOnly here will force
@@ -6212,9 +6212,9 @@ components:
           type: string
           description: driver is the name of the CSI driver that handles this volume.
         readOnly:
-          $ref: '#/components/schemas/BoxedBoolean'
+          $ref: "#/components/schemas/BoxedBoolean"
         fsType:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         volumeAttributes:
           type: object
           description: >-
@@ -6224,13 +6224,13 @@ components:
           additionalProperties:
             type: string
         nodePublishSecretRef:
-          $ref: '#/components/schemas/LocalObjectReference'
+          $ref: "#/components/schemas/LocalObjectReference"
     ProjectedVolumeSource:
       type: object
       description: Represents a projected volume source
       properties:
         defaultMode:
-          $ref: '#/components/schemas/BoxedInteger'
+          $ref: "#/components/schemas/BoxedInteger"
         sources:
           description: >-
             sources is the list of volume projections. Each entry in this list
@@ -6248,16 +6248,16 @@ components:
                   auto-updating file.
                 properties:
                   labelSelector:
-                    $ref: '#/components/schemas/LabelSelector'
+                    $ref: "#/components/schemas/LabelSelector"
                   name:
-                    $ref: '#/components/schemas/BoxedString'
+                    $ref: "#/components/schemas/BoxedString"
                   optional:
-                    $ref: '#/components/schemas/BoxedBoolean'
+                    $ref: "#/components/schemas/BoxedBoolean"
                   path:
                     description: Relative path from the volume root to write the bundle.
                     type: string
                   signerName:
-                    $ref: '#/components/schemas/BoxedString'
+                    $ref: "#/components/schemas/BoxedString"
                 required:
                   - path
               configMap:
@@ -6282,7 +6282,7 @@ components:
                           description: key is the key to project.
                           type: string
                         mode:
-                          $ref: '#/components/schemas/BoxedInteger'
+                          $ref: "#/components/schemas/BoxedInteger"
                         path:
                           description: >-
                             path is the relative path of the file to map the key
@@ -6302,7 +6302,7 @@ components:
                       TODO: Add other useful fields. apiVersion, kind, uid?
                     type: string
                   optional:
-                    $ref: '#/components/schemas/BoxedBoolean'
+                    $ref: "#/components/schemas/BoxedBoolean"
               downwardAPI:
                 type: object
                 description: downwardAPI information about the downwardAPI data to project
@@ -6315,9 +6315,9 @@ components:
                         the file containing the pod field
                       properties:
                         fieldRef:
-                          $ref: '#/components/schemas/FieldRef'
+                          $ref: "#/components/schemas/FieldRef"
                         mode:
-                          $ref: '#/components/schemas/BoxedInteger'
+                          $ref: "#/components/schemas/BoxedInteger"
                         path:
                           description: >-
                             path is the relative path of the file to map the key
@@ -6326,7 +6326,7 @@ components:
                             '..'.
                           type: string
                         resourceFieldRef:
-                          $ref: '#/components/schemas/ResourceFieldRef'
+                          $ref: "#/components/schemas/ResourceFieldRef"
                       required:
                         - path
                       type: object
@@ -6353,7 +6353,7 @@ components:
                           description: key is the key to project.
                           type: string
                         mode:
-                          $ref: '#/components/schemas/BoxedInteger'
+                          $ref: "#/components/schemas/BoxedInteger"
                         path:
                           description: >-
                             path is the relative path of the file to map the key
@@ -6373,7 +6373,7 @@ components:
                       TODO: Add other useful fields. apiVersion, kind, uid?
                     type: string
                   optional:
-                    $ref: '#/components/schemas/BoxedBoolean'
+                    $ref: "#/components/schemas/BoxedBoolean"
               serviceAccountToken:
                 type: object
                 description: >-
@@ -6389,7 +6389,7 @@ components:
                       to the identifier of the apiserver.
                     type: string
                   expirationSeconds:
-                    $ref: '#/components/schemas/BoxedInteger'
+                    $ref: "#/components/schemas/BoxedInteger"
                   path:
                     description: >-
                       path is the path relative to the mount point of the file
@@ -6408,31 +6408,31 @@ components:
         name:
           type: string
         hostPath:
-          $ref: '#/components/schemas/HostPathVolumeSource'
+          $ref: "#/components/schemas/HostPathVolumeSource"
         emptyDir:
-          $ref: '#/components/schemas/EmptyDirVolumeSource'
+          $ref: "#/components/schemas/EmptyDirVolumeSource"
         gcePersistentDisk:
-          $ref: '#/components/schemas/GCEPersistentDiskVolumeSource'
+          $ref: "#/components/schemas/GCEPersistentDiskVolumeSource"
         awsElasticBlockStore:
-          $ref: '#/components/schemas/AWSElasticBlockStoreVolumeSource'
+          $ref: "#/components/schemas/AWSElasticBlockStoreVolumeSource"
         secret:
-          $ref: '#/components/schemas/SecretVolumeSource'
+          $ref: "#/components/schemas/SecretVolumeSource"
         nfs:
-          $ref: '#/components/schemas/NFSVolumeSource'
+          $ref: "#/components/schemas/NFSVolumeSource"
         persistentVolumeClaim:
-          $ref: '#/components/schemas/PersistentVolumeClaimVolumeSource'
+          $ref: "#/components/schemas/PersistentVolumeClaimVolumeSource"
         cephfs:
-          $ref: '#/components/schemas/CephFSVolumeSource'
+          $ref: "#/components/schemas/CephFSVolumeSource"
         azureFile:
-          $ref: '#/components/schemas/AzureFileVolumeSource'
+          $ref: "#/components/schemas/AzureFileVolumeSource"
         azureDisk:
-          $ref: '#/components/schemas/AzureDiskVolumeSource'
+          $ref: "#/components/schemas/AzureDiskVolumeSource"
         configMap:
-          $ref: '#/components/schemas/ConfigMapVolumeSource'
+          $ref: "#/components/schemas/ConfigMapVolumeSource"
         csi:
-          $ref: '#/components/schemas/CSIVolumeSource'
+          $ref: "#/components/schemas/CSIVolumeSource"
         projected:
-          $ref: '#/components/schemas/ProjectedVolumeSource'
+          $ref: "#/components/schemas/ProjectedVolumeSource"
       required:
         - name
     VolumeSource:
@@ -6461,9 +6461,9 @@ components:
               description: Specify whether the ConfigMap or its key must be defined
               type: boolean
         fieldRef:
-          $ref: '#/components/schemas/FieldRef'
+          $ref: "#/components/schemas/FieldRef"
         resourceFieldRef:
-          $ref: '#/components/schemas/ResourceFieldRef'
+          $ref: "#/components/schemas/ResourceFieldRef"
         secretKeyRef:
           type: object
           required:
@@ -6513,13 +6513,13 @@ components:
         requests.memory and requests.ephemeral-storage) are currently supported.
       properties:
         containerName:
-          description: 'Container name: required for volumes, optional for env vars'
+          description: "Container name: required for volumes, optional for env vars"
           type: string
         divisor:
           type: string
           pattern: ^[0-9]+(m|[GMK]i)$
         resource:
-          description: 'Required: resource to select'
+          description: "Required: resource to select"
           type: string
     TestWorkflowPvcConfig:
       type: object
@@ -6536,15 +6536,15 @@ components:
             Volume mode indicates the consumption of the volume as either a
             filesystem or block device. More info:
             https://kubernetes.io/docs/concepts/storage/persistent-volumes/#volume-mode
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         resources:
           description: Resources required for pvc
-          $ref: '#/components/schemas/TestWorkflowResources'
+          $ref: "#/components/schemas/TestWorkflowResources"
         storageClassName:
           description: >-
             Storage class name specifies the name of a StorageClass. More info:
             https://kubernetes.io/docs/concepts/storage/storage-classes/
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         volumeName:
           description: Volume name is used to identify the volume
           type: string
@@ -6552,24 +6552,24 @@ components:
           description: >-
             Only the volumes whose labels match the selector can be bound to the
             claim
-          $ref: '#/components/schemas/LabelSelector'
+          $ref: "#/components/schemas/LabelSelector"
         dataSource:
           description: >-
             Data source field can be used to specify either: * An existing
             VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot) * An
             existing PVC (PersistentVolumeClaim)
-          $ref: '#/components/schemas/TypedLocalObjectReference'
+          $ref: "#/components/schemas/TypedLocalObjectReference"
         dataSourceRef:
           description: >-
             Data source reference specifies the object from which to populate
             the volume with data, if a non-empty volume is desired
-          $ref: '#/components/schemas/TypedObjectReference'
+          $ref: "#/components/schemas/TypedObjectReference"
         volumeAttributesClassName:
           description: >-
             Volume attributes class name may be used to set the
             VolumeAttributesClass used by this claim. More info:
             https://kubernetes.io/docs/concepts/storage/persistent-volumes#volumeattributesclass
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
     TypedLocalObjectReference:
       description: >-
         TypedLocalObjectReference contains enough information to let you locate
@@ -6578,7 +6578,7 @@ components:
       properties:
         apiGroup:
           description: api group is the group for the resource being referenced
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         kind:
           description: kind is the type of resource being referenced
           type: string
@@ -6591,11 +6591,11 @@ components:
         typed referenced object inside the specified namespace
       type: object
       allOf:
-        - $ref: '#/components/schemas/TypedLocalObjectReference'
+        - $ref: "#/components/schemas/TypedLocalObjectReference"
       properties:
         namespace:
           description: Namespace is the namespace of resource being referenced
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
     WebhookParameterSchema:
       type: object
       description: parameter definition
@@ -6614,7 +6614,7 @@ components:
           description: example value for the parameter
           type: string
         default:
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         pattern:
           type: string
           description: regular expression to match
@@ -6626,15 +6626,15 @@ components:
       properties:
         value:
           description: public value to use in webhook template
-          $ref: '#/components/schemas/BoxedString'
+          $ref: "#/components/schemas/BoxedString"
         secret:
           description: private value stored in secret to use in webhook template
-          $ref: '#/components/schemas/SecretRef'
+          $ref: "#/components/schemas/SecretRef"
     WebhookConfig:
       type: object
       description: configuration values
       additionalProperties:
-        $ref: '#/components/schemas/WebhookConfigValue'
+        $ref: "#/components/schemas/WebhookConfigValue"
     WebhookTemplateRef:
       type: object
       properties:
@@ -6691,12 +6691,12 @@ components:
       properties:
         creationSource:
           description: the original source from which the resource was created
-          $ref: '#/components/schemas/Source'
+          $ref: "#/components/schemas/Source"
         lastModificationSource:
           description: >-
             the source from which the last modification of the resource
             originated
-          $ref: '#/components/schemas/Source'
+          $ref: "#/components/schemas/Source"
     Problem:
       description: problem response in case of error
       type: object
@@ -6734,7 +6734,7 @@ components:
       name: test
       schema:
         type: string
-        default: ''
+        default: ""
       description: test namespaced name to filter
       required: false
     Type:
@@ -6742,7 +6742,7 @@ components:
       name: type
       schema:
         type: string
-        default: ''
+        default: ""
       description: object type
       required: false
     TextSearch:
@@ -6750,7 +6750,7 @@ components:
       name: textSearch
       schema:
         type: string
-        default: ''
+        default: ""
       description: text to search in name and test name
       required: false
     ID:
@@ -6826,14 +6826,14 @@ components:
       in: query
       name: status
       schema:
-        $ref: '#/components/schemas/TestSuiteExecutionStatus'
+        $ref: "#/components/schemas/TestSuiteExecutionStatus"
       description: optional status filter containing multiple values separated by comma
       required: false
     ExecutionsStatusFilter:
       in: query
       name: status
       schema:
-        $ref: '#/components/schemas/ExecutionStatus'
+        $ref: "#/components/schemas/ExecutionStatus"
       description: optional status filter containing multiple values separated by comma
       required: false
     Selector:

@@ -15,17 +15,17 @@ enabled and Istio 1.19+, it is highly recommended that Istio be configured to
 use native sidecars. Without native sidecars, Istio has several issues which can
 be put in the following buckets:
 
--   Networking from within other init containers either bypasses the proxy by
-    default (non-CNI) or [should be
-    configured](https://istio.io/latest/docs/setup/additional-setup/cni/#compatibility-with-application-init-containers)
-    to bypass the proxy (CNI plugin).
--   Containers [must wait for the proxy to be
-    ready](https://github.com/istio/istio/issues/11130), otherwise, network requests
-    may fail.
--   Containers, [especially within batch
-    jobs](https://github.com/istio/istio/issues/6324), must signal to the proxy
-    that they have completed, otherwise, the proxy never exits and the job never
-    completes.
+- Networking from within other init containers either bypasses the proxy by
+  default (non-CNI) or [should be
+  configured](https://istio.io/latest/docs/setup/additional-setup/cni/#compatibility-with-application-init-containers)
+  to bypass the proxy (CNI plugin).
+- Containers [must wait for the proxy to be
+  ready](https://github.com/istio/istio/issues/11130), otherwise, network requests
+  may fail.
+- Containers, [especially within batch
+  jobs](https://github.com/istio/istio/issues/6324), must signal to the proxy
+  that they have completed, otherwise, the proxy never exits and the job never
+  completes.
 
 ## Compatibility with Istio
 
@@ -62,8 +62,8 @@ globalTemplate:
   inline: true
   spec:
     pod:
-       annotations:
-         sidecar.istio.io/inject: "false"
+      annotations:
+        sidecar.istio.io/inject: "false"
 ```
 
 #### Hold the API Server Until Istio's Proxy Is Ready

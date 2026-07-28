@@ -9,7 +9,7 @@ This guide shows two ways to publish your own Test Workflow Templates so they ap
 
 ## Option A: Apply a template with kubectl
 
-1) Create a `TestWorkflowTemplate` with the required labels so it shows up in the wizard:
+1. Create a `TestWorkflowTemplate` with the required labels so it shows up in the wizard:
 
 ### Required Labels and Wizard Mapping
 
@@ -19,6 +19,7 @@ The Testkube Dashboard wizard uses specific labels to organize and display templ
 - **`testkube.io/wizard: enabled`**: Makes the template visible in the Dashboard wizard. Without this label, the template won't appear in the UI.
 
 **Optional annotations** that enhance the template card:
+
 - **`testkube.io/categories`**: Groups templates in the wizard (e.g., "Load & Performance", "API Testing", "Samples")
 - **`testkube.io/description`**: Short description shown on the template card
 - **`testkube.io/icon`**: Icon identifier for the template (e.g., "artillery", "postman")
@@ -32,20 +33,20 @@ kind: TestWorkflowTemplate
 metadata:
   name: sample--echo--v1
   labels:
-    testkube.io/name: Echo-Sample   # must be a valid label (no spaces)
+    testkube.io/name: Echo-Sample # must be a valid label (no spaces)
     testkube.io/wizard: enabled
   annotations:
     testkube.io/categories: Samples
     testkube.io/description: Minimal echo step
 spec:
   steps:
-  - name: Echo-hello
-    run:
-      image: alpine:3.20
-      shell: echo hello
+    - name: Echo-hello
+      run:
+        image: alpine:3.20
+        shell: echo hello
 ```
 
-2) Apply it in the same namespace where Testkube is installed:
+2. Apply it in the same namespace where Testkube is installed:
 
 ```bash
 kubectl apply -n <your-namespace> -f sample--echo--v1.yaml
@@ -59,6 +60,7 @@ kubectl apply -n <your-namespace> -f sample--echo--v1.yaml
 Use this when you want to version, enable/disable, and roll out templates via GitOps/Helm.
 
 ### 1) Chart layout
+
 ```
 my-custom-templates/
   Chart.yaml
@@ -68,6 +70,7 @@ my-custom-templates/
 ```
 
 ### 2) Example `values.yaml`
+
 ```yaml
 templates:
   - name: sample--curl--v1
@@ -80,6 +83,7 @@ templates:
 ```
 
 ### 3) `templates/templates.yaml`
+
 ```yaml
 {{- range .Values.templates }}
 {{- if .enabled }}
@@ -110,6 +114,7 @@ spec:
 The Helm hooks ensure templates are created after install/upgrade of this chart.
 
 ### 4) Install in your Testkube namespace
+
 ```bash
 helm upgrade --install my-templates ./my-custom-templates -n <your-namespace> --wait
 ```
@@ -119,5 +124,6 @@ After installation, the new templates appear in the Dashboard under the Template
 ---
 
 ### Verify
+
 - Dashboard → Test Workflow Templates: you should see the new cards (e.g. Echo-Sample, Curl-Sample).
 - CLI: `kubectl get testworkflowtemplates -n <your-namespace>` should list your resources.

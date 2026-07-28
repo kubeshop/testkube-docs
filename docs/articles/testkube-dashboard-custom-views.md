@@ -2,7 +2,7 @@
 
 Custom Views allow you to save reusable sets of search criteria and filters such that you do not need to repeatedly
 enter the same information. When you enter frequently used search or filter criteria, you can save
-those settings. 
+those settings.
 
 Saved views appear in the left navigation pane under **PRIVATE VIEWS** (for your use only) or **SHARED VIEWS** (available to team members).
 This feature helps you work more efficiently by reducing repetitive steps and allowing you to streamline how you
@@ -28,4 +28,3 @@ To establish a Custom View:
    The view becomes visible in the left navigation pane and associated with the **Visibility** you designated. You
    can hover over the view in the left pane, select the vertical dots (More Options), and choose **Delete** to remove.
    ![Custom Views](../articles/images/testkube-dashboard-custom-views-navpane-s.png)
-   

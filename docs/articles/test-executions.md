@@ -1,6 +1,6 @@
 # Testkube Execution CRDs
 
-Testkube allows you to automatically trigger the execution of a Test Workflow by creating or 
+Testkube allows you to automatically trigger the execution of a Test Workflow by creating or
 updating a corresponding Test Workflow Execution CRD.
 
 ## Usage
@@ -25,7 +25,7 @@ Check out the [TestWorkflowExecution CRD Reference](/articles/crds/testworkflows
 ## Specifying Configuration Parameters
 
 Add configuration parameters to the execution request to override the default values set in the Test Workflow using
-the `spec.executionRequest.config` field. 
+the `spec.executionRequest.config` field.
 
 The below example runs the TestWorkflow with the `browser` configuration parameter set to `chrome`
 
@@ -69,6 +69,7 @@ With the introduction of [Runner Agents](/articles/agents-overview#runner-agents
 which Runner(s) a Workflow should execute on. For example
 
 ```yaml
+
 ...
 spec:
   executionRequest:

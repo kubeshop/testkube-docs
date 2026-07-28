@@ -739,7 +739,7 @@ const sidebars = {
               id: "articles/credential-management",
             },
           ],
-        },    
+        },
         {
           type: "category",
           label: "Testkube AI",

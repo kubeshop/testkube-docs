@@ -3,18 +3,18 @@
 **Workflow Execution Details** provides a comprehensive view of a Workflow execution to include the steps, logs, artifacts, and configuration – helping you understand
 outcomes and troubleshoot any potential issues.
 
-To view **Workflow Execution Details**, you must choose a Workflow execution then select **Open Details & Logs**. Selecting a single step/runtime instance or the entire execution 
+To view **Workflow Execution Details**, you must choose a Workflow execution then select **Open Details & Logs**. Selecting a single step/runtime instance or the entire execution
 facilitates your ability to view progress and pinpoint any failures within the overall Workflow.
 
 ![Open Details & Logs](../articles/images/workflow-execution-details-open-details-and-logs.png)
 
-After you select **Open Details & Logs**, you have access to the **Log Output**, **Artifacts**, **Resource Usage**, **Flowchart**, **CLI Commands**, 
-**Events**, and **Workflow Definition** tabs that – upon selection – provide additional insight specific to the Workflow execution you selected. There will also be a **JUnit Reports** tab 
+After you select **Open Details & Logs**, you have access to the **Log Output**, **Artifacts**, **Resource Usage**, **Flowchart**, **CLI Commands**,
+**Events**, and **Workflow Definition** tabs that – upon selection – provide additional insight specific to the Workflow execution you selected. There will also be a **JUnit Reports** tab
 when Testkube detects corresponding JUnit reports. For additional information, read [Reports](../articles/test-workflows-reports#1-execution-overview-tab).
 
 ## Log Output
 
-This tab displays the **Log Output** for this execution, providing runtime messages such as *Initializing*, *Clone Git Repository*, and *Run Test*. 
+This tab displays the **Log Output** for this execution, providing runtime messages such as _Initializing_, _Clone Git Repository_, and _Run Test_.
 For additional information, read [Log Collection](../articles/logs-and-artifacts.md#log-collection).
 
 ![Log Output](../articles/images/workflow-execution-details-log-output.png)
@@ -37,8 +37,9 @@ For additional information, read [Artifacts](/articles/logs-and-artifacts#artifa
 ![Artifacts](../articles/images/workflow-execution-details-artifacts.png)
 
 ## Resource Usage
+
 This tab displays **CPU** and **Memory** consumption during execution, which helps you both identify performance issues and optimize resource allocation. You can hover
-over each graph to gain additional insight, such as **CPU** *Container Usage* and *Container Requests* along with *Outgoing Traffic* and *Incoming Traffic* relative 
+over each graph to gain additional insight, such as **CPU** _Container Usage_ and _Container Requests_ along with _Outgoing Traffic_ and _Incoming Traffic_ relative
 to **Network Traffic**.
 
 **CPU** and **Memory**
@@ -63,7 +64,7 @@ This tab shows CLI commands that you can use to interact with this Workflow exec
 
 ## Events
 
-This tab captures significant lifecycle actions (such as *Start*, *Completion*, and *Failure*) that occurred during execution runtime. 
+This tab captures significant lifecycle actions (such as _Start_, _Completion_, and _Failure_) that occurred during execution runtime.
 
 :::note
 You must enable this feature under **Organization Management**/**Product Features**/**Scheduler Events**.

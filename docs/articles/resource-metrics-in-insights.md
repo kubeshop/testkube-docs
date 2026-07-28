@@ -17,7 +17,7 @@ Selecting a Metric value further allows you to select which aggregate to use in 
 The following aggregates are available for each metric across selected Executions:
 
 | Metric        | Metric Aggregate | Insights Aggregate | Description                                                 |
-|---------------|------------------|--------------------|-------------------------------------------------------------|
+| ------------- | ---------------- | ------------------ | ----------------------------------------------------------- |
 | CPU Usage     | Millicores min   | min                | The min CPU Usage for all selected Executions               |
 |               |                  | max                | The highest min CPU Usage for all selected Executions       |
 |               | Millicores max   | min                | The smallest max CPU Usage for all selected Executions      |
@@ -54,4 +54,3 @@ The following aggregates are available for each metric across selected Execution
 |               |                  | max                | The max bytes written for all selected Executions           |
 |               | Write avg        | average            | The average avg bytes written for all selected Executions   |
 |               | Write total      | sum                | The total bytes written for all selected Executions         |
-

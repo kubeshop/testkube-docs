@@ -30,22 +30,22 @@ paths:
         and may be filtered or limited by the parameters provided.
       operationId: listApplicationAuditLogs
       parameters:
-        - $ref: './components.yaml#/components/parameters/ID'
-        - $ref: './components.yaml#/components/parameters/Limit'
-        - $ref: './components.yaml#/components/parameters/EnvironmentIDQP'
-        - $ref: './components.yaml#/components/parameters/StartDateTime'
-        - $ref: './components.yaml#/components/parameters/EndDateTime'
-        - $ref: './components.yaml#/components/parameters/Subject'
-        - $ref: './components.yaml#/components/parameters/EventType'
-        - $ref: './components.yaml#/components/parameters/Page'
-        - $ref: './components.yaml#/components/parameters/PageSize'
+        - $ref: "./components.yaml#/components/parameters/ID"
+        - $ref: "./components.yaml#/components/parameters/Limit"
+        - $ref: "./components.yaml#/components/parameters/EnvironmentIDQP"
+        - $ref: "./components.yaml#/components/parameters/StartDateTime"
+        - $ref: "./components.yaml#/components/parameters/EndDateTime"
+        - $ref: "./components.yaml#/components/parameters/Subject"
+        - $ref: "./components.yaml#/components/parameters/EventType"
+        - $ref: "./components.yaml#/components/parameters/Page"
+        - $ref: "./components.yaml#/components/parameters/PageSize"
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/PaginatedApplicationAuditLog'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        "200":
+          $ref: "./components.yaml#/components/responses/PaginatedApplicationAuditLog"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
       security:
         - BearerAuth: []
   /organizations/{id}/audit/export:
@@ -71,20 +71,20 @@ paths:
         application resources.
       operationId: exportApplicationAuditLog
       parameters:
-        - $ref: './components.yaml#/components/parameters/ID'
-        - $ref: './components.yaml#/components/parameters/EnvironmentIDQP'
-        - $ref: './components.yaml#/components/parameters/StartDateTime'
-        - $ref: './components.yaml#/components/parameters/EndDateTime'
-        - $ref: './components.yaml#/components/parameters/Subject'
-        - $ref: './components.yaml#/components/parameters/EventType'
-        - $ref: './components.yaml#/components/parameters/ExportFormat'
+        - $ref: "./components.yaml#/components/parameters/ID"
+        - $ref: "./components.yaml#/components/parameters/EnvironmentIDQP"
+        - $ref: "./components.yaml#/components/parameters/StartDateTime"
+        - $ref: "./components.yaml#/components/parameters/EndDateTime"
+        - $ref: "./components.yaml#/components/parameters/Subject"
+        - $ref: "./components.yaml#/components/parameters/EventType"
+        - $ref: "./components.yaml#/components/parameters/ExportFormat"
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/ExportedApplicationAuditLog'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        "200":
+          $ref: "./components.yaml#/components/responses/ExportedApplicationAuditLog"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
       security:
         - BearerAuth: []
   /organizations/{id}/audit/filters/subject:
@@ -103,18 +103,18 @@ paths:
         performed the action.
       operationId: getAuditLogSubjectFilterValues
       parameters:
-        - $ref: './components.yaml#/components/parameters/ID'
-        - $ref: './components.yaml#/components/parameters/EnvironmentIDQP'
-        - $ref: './components.yaml#/components/parameters/StartDateTime'
-        - $ref: './components.yaml#/components/parameters/EndDateTime'
-        - $ref: './components.yaml#/components/parameters/EventType'
+        - $ref: "./components.yaml#/components/parameters/ID"
+        - $ref: "./components.yaml#/components/parameters/EnvironmentIDQP"
+        - $ref: "./components.yaml#/components/parameters/StartDateTime"
+        - $ref: "./components.yaml#/components/parameters/EndDateTime"
+        - $ref: "./components.yaml#/components/parameters/EventType"
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/AuditLogSubjectFilterValues'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        "200":
+          $ref: "./components.yaml#/components/responses/AuditLogSubjectFilterValues"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
       security:
         - BearerAuth: []
   /organizations/{id}/audit/keymap:
@@ -139,11 +139,11 @@ paths:
         logged operations.
       operationId: getApplicationAuditLogKeymap
       parameters:
-        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: "./components.yaml#/components/parameters/ID"
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/ApplicationAuditLogKeymap'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        "200":
+          $ref: "./components.yaml#/components/responses/ApplicationAuditLogKeymap"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
       security:
         - BearerAuth: []

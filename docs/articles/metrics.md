@@ -13,34 +13,34 @@ No metrics are produced until at least one Workflow has been executed since the 
 
 ## Available Metrics
 
-| Metric | Agent Capabilities* | Description | Labels |
-|--------|------------|-------------|--------|
-| **Workflow Executions** | | | |
-| `testkube_testworkflow_executions_count` | Webhook + Runner | Total number of test workflow executions | `name`, `result`, `labels`, `testworkflow_uri`, `triggered_by`, `tags` |
-| `testkube_testworkflow_executions_duration_ms` | Webhook + Runner | Duration of test workflow executions | `name`, `result`, `labels`, `testworkflow_uri`, `triggered_by`, `tags` |
-| `testkube_testworkflow_aborts_count` | Runner | Total number of test workflow aborts | `result` |
-| **Workflow Execution Steps** | | | |
-| `testkube_testworkflow_execution_steps_count` | Webhook + Runner | Total number of test workflow execution steps | `workflow_name`, `step_name`, `status` |
-| `testkube_testworkflow_execution_steps_duration_ms` | Webhook + Runner | Duration of test workflow execution steps | `workflow_name`, `step_name`, `status` |
-| `testkube_testworkflow_execution_steps_start_time_ms` | Runner | Start time of test workflow execution steps | `workflow_name`, `step_name`, `status` |
-| `testkube_testworkflow_execution_steps_finish_time_ms` | Runner | Finish time of test workflow execution steps | `workflow_name`, `step_name`, `status` |
-| **Workflow Lifecycle (CRUD)** | | | |
-| `testkube_testworkflow_creations_count` | Runner | Total number of test workflows created | `result` |
-| `testkube_testworkflow_updates_count` | Runner | Total number of test workflows updated | `result` |
-| `testkube_testworkflow_deletes_count` | Runner | Total number of test workflows deleted | `result` |
-| **Workflow Templates** | | | |
-| `testkube_testworkflowtemplate_creations_count` | Runner | Total number of test workflow templates created | `result` |
-| `testkube_testworkflowtemplate_updates_count` | Runner | Total number of test workflow templates updated | `result` |
-| `testkube_testworkflowtemplate_deletes_count` | Runner | Total number of test workflow templates deleted | `result` |
-| **Triggers** | | | |
-| `testkube_testtriggers_creations_count` | Runner | Total number of test trigger created events | `result` |
-| `testkube_testtriggers_updates_count` | Runner | Total number of test trigger updated events | `result` |
-| `testkube_testtriggers_deletes_count` | Runner | Total number of test trigger deleted events | `result` |
-| `testkube_testtriggers_bulk_updates_count` | Runner | Total number of test trigger bulk update events | `result` |
-| `testkube_testtriggers_bulk_deletes_count` | Runner | Total number of test trigger bulk delete events | `result` |
-| `testkube_testtrigger_event_count` | Runner | Total number of test trigger events | `name`, `resource`, `eventType`, `causes` |
-| **Webhooks** | | | |
-| `testkube_webhook_executions_count` | Runner + Webhook | Total number of webhook executions | `name`, `eventType`, `result` |
+| Metric                                                 | Agent Capabilities* | Description                                     | Labels                                                                 |
+| ------------------------------------------------------ | ------------------- | ----------------------------------------------- | ---------------------------------------------------------------------- |
+| **Workflow Executions**                                |                     |                                                 |                                                                        |
+| `testkube_testworkflow_executions_count`               | Webhook + Runner    | Total number of test workflow executions        | `name`, `result`, `labels`, `testworkflow_uri`, `triggered_by`, `tags` |
+| `testkube_testworkflow_executions_duration_ms`         | Webhook + Runner    | Duration of test workflow executions            | `name`, `result`, `labels`, `testworkflow_uri`, `triggered_by`, `tags` |
+| `testkube_testworkflow_aborts_count`                   | Runner              | Total number of test workflow aborts            | `result`                                                               |
+| **Workflow Execution Steps**                           |                     |                                                 |                                                                        |
+| `testkube_testworkflow_execution_steps_count`          | Webhook + Runner    | Total number of test workflow execution steps   | `workflow_name`, `step_name`, `status`                                 |
+| `testkube_testworkflow_execution_steps_duration_ms`    | Webhook + Runner    | Duration of test workflow execution steps       | `workflow_name`, `step_name`, `status`                                 |
+| `testkube_testworkflow_execution_steps_start_time_ms`  | Runner              | Start time of test workflow execution steps     | `workflow_name`, `step_name`, `status`                                 |
+| `testkube_testworkflow_execution_steps_finish_time_ms` | Runner              | Finish time of test workflow execution steps    | `workflow_name`, `step_name`, `status`                                 |
+| **Workflow Lifecycle (CRUD)**                          |                     |                                                 |                                                                        |
+| `testkube_testworkflow_creations_count`                | Runner              | Total number of test workflows created          | `result`                                                               |
+| `testkube_testworkflow_updates_count`                  | Runner              | Total number of test workflows updated          | `result`                                                               |
+| `testkube_testworkflow_deletes_count`                  | Runner              | Total number of test workflows deleted          | `result`                                                               |
+| **Workflow Templates**                                 |                     |                                                 |                                                                        |
+| `testkube_testworkflowtemplate_creations_count`        | Runner              | Total number of test workflow templates created | `result`                                                               |
+| `testkube_testworkflowtemplate_updates_count`          | Runner              | Total number of test workflow templates updated | `result`                                                               |
+| `testkube_testworkflowtemplate_deletes_count`          | Runner              | Total number of test workflow templates deleted | `result`                                                               |
+| **Triggers**                                           |                     |                                                 |                                                                        |
+| `testkube_testtriggers_creations_count`                | Runner              | Total number of test trigger created events     | `result`                                                               |
+| `testkube_testtriggers_updates_count`                  | Runner              | Total number of test trigger updated events     | `result`                                                               |
+| `testkube_testtriggers_deletes_count`                  | Runner              | Total number of test trigger deleted events     | `result`                                                               |
+| `testkube_testtriggers_bulk_updates_count`             | Runner              | Total number of test trigger bulk update events | `result`                                                               |
+| `testkube_testtriggers_bulk_deletes_count`             | Runner              | Total number of test trigger bulk delete events | `result`                                                               |
+| `testkube_testtrigger_event_count`                     | Runner              | Total number of test trigger events             | `name`, `resource`, `eventType`, `causes`                              |
+| **Webhooks**                                           |                     |                                                 |                                                                        |
+| `testkube_webhook_executions_count`                    | Runner + Webhook    | Total number of webhook executions              | `name`, `eventType`, `result`                                          |
 
 (* = these are the Agent capabilities required for the metric to be available and updated.)
 
@@ -68,8 +68,8 @@ metadata:
     app: prometheus
 spec:
   endpoints:
-  - interval: 10s
-    port: http
+    - interval: 10s
+      port: http
   selector:
     matchLabels:
       app.kubernetes.io/name: api-server

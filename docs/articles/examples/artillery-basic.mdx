@@ -1,7 +1,7 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-import SimpleArtillery from "../../workflows/simple-artillery-workflow.md"
-import SimpleArtilleryFromTemplate from "../../workflows/simple-artillery-workflow-from-template.md"
+import SimpleArtillery from "../../workflows/simple-artillery-workflow.md";
+import SimpleArtilleryFromTemplate from "../../workflows/simple-artillery-workflow-from-template.md";
 
 # Basic Artillery Example
 
@@ -12,7 +12,7 @@ sure to update the `name` and `namespace` for your environment if needed.
 - The `spec.steps` property defines a single step that runs the `artillery` command and uploads the JSON report as
   an artifact.
 
-<SimpleArtillery/>
+<SimpleArtillery />
 
 The workflow uses Artillery's `-o` option to write `/data/artifacts/artillery-report.json`. Testkube detects uploaded
 Artillery aggregate JSON reports as `artillery.report` and ingests counters, rates, summaries, and histograms as
@@ -31,6 +31,7 @@ The log output from the Artillery execution:
 </Tabs>
 
 ## Basic Artillery from Template
+
 Below is an example workflow for executing the Artillery test using an official Testkube Template.
 
-<SimpleArtilleryFromTemplate/>
+<SimpleArtilleryFromTemplate />

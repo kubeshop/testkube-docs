@@ -1,11 +1,10 @@
-import LegacyWarning from '../articles/_legacy-warning.mdx';
+import LegacyWarning from "../articles/_legacy-warning.mdx";
 
 # Prebuilt Testkube Executor
 
 <LegacyWarning />
 
 **The new and recommended way of running custom images is to use [Container Executors](container-executor.mdx).**
-
 
 To use a testing framework that is not on the currently supported framework list for Testkube, you can create your custom executor and configure it to run any type of tests that you need. These custom test types can be added to your Testkube installation and/or contributed to our repo. We are very happy to receive executor contributions from our community.
 
@@ -39,7 +38,7 @@ See the implementation example here: <https://github.com/exu/testkube-executor-e
 
 If you are familiar with the `go` programming language, use our template repository for new executors:
 
-1. Create a new repository from the template -  [testkube-executor-template](https://github.com/kubeshop/testkube-executor-template).
+1. Create a new repository from the template - [testkube-executor-template](https://github.com/kubeshop/testkube-executor-template).
 2. Clone the newly created repo.
 3. Rename the go module from `testkube-executor-template` to the new name and run `go mod tidy`.
 
@@ -157,20 +156,20 @@ spec:
     - name: secret_name
   # add k8s secret name to pull images from private repositories
   types:
-  - example/test
+    - example/test
   # your custom type registered (used when creating and running your testkube tests)
   content_types:
-  - string                               # test content as string
-  - file-uri                             # http based file content
-  - git                                  # file or git stored in Git
+    - string # test content as string
+    - file-uri # http based file content
+    - git # file or git stored in Git
   features:
-  - artifacts                            # executor can have artifacts after test run (e.g. videos, screenshots)
-  - junit-report                         # executor can have junit xml based results
+    - artifacts # executor can have artifacts after test run (e.g. videos, screenshots)
+    - junit-report # executor can have junit xml based results
   meta:
-   iconURI: http://mydomain.com/icon.jpg # URI to executor icon
-   docsURI: http://mydomain.com/docs     # URI to executor docs
-   tooltips:
-    name: please enter executor name     # tooltip for executor fields
+    iconURI: http://mydomain.com/icon.jpg # URI to executor icon
+    docsURI: http://mydomain.com/docs # URI to executor docs
+    tooltips:
+      name: please enter executor name # tooltip for executor fields
 ```
 
 Finally, create and run your custom tests by passing `URI` as the test content:

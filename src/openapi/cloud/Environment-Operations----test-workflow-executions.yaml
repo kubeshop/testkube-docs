@@ -16,54 +16,54 @@ paths:
       description: Get Test Workflow artifact with artifactID
       operationId: getTestWorkflowArtifactPost
       requestBody:
-        $ref: './components.yaml#/components/requestBodies/ServeArtifact'
+        $ref: "./components.yaml#/components/requestBodies/ServeArtifact"
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/ArtifactURL'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "200":
+          $ref: "./components.yaml#/components/responses/ArtifactURL"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/ExecutionID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/ExecutionID"
   /organizations/{id}/environments/{environmentID}/test-workflow-executions/{executionID}/artifacts/{artifactID}:
     get:
       summary: Get Test Workflow artifact
       description: Get Test Workflow artifact
       operationId: getTestWorkflowArtifact
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/ArtifactURL'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "200":
+          $ref: "./components.yaml#/components/responses/ArtifactURL"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/ExecutionID'
-      - $ref: './components.yaml#/components/parameters/ArtifactID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/ExecutionID"
+      - $ref: "./components.yaml#/components/parameters/ArtifactID"
   /organizations/{id}/environments/{environmentID}/test-workflow-executions/{executionID}/download-artifact/{artifactID}:
     get:
       summary: Download test workflow artifact
       description: Download test workflow artifact
       operationId: downloadTestWorkflowArtifact
       responses:
-        '307':
+        "307":
           description: Redirection to download artifact
           headers:
             Location:
@@ -71,94 +71,94 @@ paths:
               schema:
                 type: string
                 format: uri
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
-        '500':
-          $ref: './components.yaml#/components/responses/InternalServerError'
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
+        "500":
+          $ref: "./components.yaml#/components/responses/InternalServerError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/ExecutionID'
-      - $ref: './components.yaml#/components/parameters/ArtifactID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/ExecutionID"
+      - $ref: "./components.yaml#/components/parameters/ArtifactID"
   /organizations/{id}/environments/{environmentID}/test-workflow-executions/{executionID}/logs:
     get:
       summary: Get Test Workflow logs URL
       description: Get Test Workflow logs URL
       operationId: getTestWorkflowLogsURL
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/ArtifactURL'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "200":
+          $ref: "./components.yaml#/components/responses/ArtifactURL"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/ExecutionID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/ExecutionID"
   /organizations/{id}/environments/{environmentID}/test-workflow-executions/{executionID}/serve-artifact:
     post:
       summary: Serve artifact
       description: Serve artifact
       operationId: serveTestWorkflowArtifactPost
       requestBody:
-        $ref: './components.yaml#/components/requestBodies/ServeArtifact'
+        $ref: "./components.yaml#/components/requestBodies/ServeArtifact"
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/ArtifactURL'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "200":
+          $ref: "./components.yaml#/components/responses/ArtifactURL"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/ExecutionID'
-      - $ref: './components.yaml#/components/parameters/OptionalTestName'
-      - $ref: './components.yaml#/components/parameters/FilterTestsuiteName'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/ExecutionID"
+      - $ref: "./components.yaml#/components/parameters/OptionalTestName"
+      - $ref: "./components.yaml#/components/parameters/FilterTestsuiteName"
   /organizations/{id}/environments/{environmentID}/test-workflow-executions/{executionID}/serve-artifact/{artifactID}:
     get:
       summary: Serve Test Workflow artifact
       description: Serve Test workflow artifact
       operationId: serveTestWorkflowArtifact
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/ArtifactURL'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "200":
+          $ref: "./components.yaml#/components/responses/ArtifactURL"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/ExecutionID'
-      - $ref: './components.yaml#/components/parameters/ArtifactID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/ExecutionID"
+      - $ref: "./components.yaml#/components/parameters/ArtifactID"
   /organizations/{id}/environments/{environmentID}/test-workflow-executions/summaries:
     get:
       summary: Get execution summaries in bulk
@@ -188,7 +188,7 @@ paths:
             maximum: 100
             default: 50
       responses:
-        '200':
+        "200":
           description: Map of execution ID to JSON summary
           content:
             application/json:
@@ -197,16 +197,16 @@ paths:
                 type: object
                 additionalProperties:
                   type: string
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '500':
-          $ref: './components.yaml#/components/responses/InternalServerError'
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "500":
+          $ref: "./components.yaml#/components/responses/InternalServerError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"

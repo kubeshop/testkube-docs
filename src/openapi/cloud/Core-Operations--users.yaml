@@ -16,42 +16,42 @@ paths:
       description: Get API info like current version
       operationId: getUserSettings
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/Settings'
-        '500':
-          $ref: './components.yaml#/components/responses/InternalServerError'
+        "200":
+          $ref: "./components.yaml#/components/responses/Settings"
+        "500":
+          $ref: "./components.yaml#/components/responses/InternalServerError"
     patch:
       summary: Update setting for given parameter
       description: Update setting for given user
       operationId: updateUserSettings
       requestBody:
-        $ref: './components.yaml#/components/requestBodies/SettingUpsert'
+        $ref: "./components.yaml#/components/requestBodies/SettingUpsert"
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/Setting'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '405':
-          $ref: './components.yaml#/components/responses/MethodNotAllowedError'
-        '500':
-          $ref: './components.yaml#/components/responses/InternalServerError'
+        "200":
+          $ref: "./components.yaml#/components/responses/Setting"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "405":
+          $ref: "./components.yaml#/components/responses/MethodNotAllowedError"
+        "500":
+          $ref: "./components.yaml#/components/responses/InternalServerError"
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: "./components.yaml#/components/parameters/ID"
   /users/preferences:
     post:
       summary: Create user preferences
       description: Create user preferences
       operationId: createUserPreferences
       requestBody:
-        $ref: './components.yaml#/components/requestBodies/Preferences'
+        $ref: "./components.yaml#/components/requestBodies/Preferences"
       responses:
-        '201':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
+        "201":
+          $ref: "./components.yaml#/components/responses/NoContent"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
       security:
         - BearerAuth: []

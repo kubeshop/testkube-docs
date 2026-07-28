@@ -54,7 +54,7 @@ testkube view my-k6-test-12345 --wait --skip-artifacts --force
 | **Execution size**    | 10 MB   | Total for logs and artifacts combined. Use `--skip-artifacts` to share logs and metadata only. |
 | **Link lifetime**     | 4 hours | After this, the viewer returns `410 Gone`.                                                     |
 | **Active executions** | 50      | Creating a new public execution when you're at the cap evicts the oldest (FIFO).               |
-| **AI Analysis**       | 5 / day | Daily cap on AI analyses generated from the viewer.
+| **AI Analysis**       | 5 / day | Daily cap on AI analyses generated from the viewer.                                            |
 
 ## Privacy and security
 

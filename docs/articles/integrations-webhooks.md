@@ -1,11 +1,11 @@
 # Integrations Webhooks
 
 Webhooks are event-driven and invoke HTTP endpoints exposed by external systems, such as CI/CD tools, GitHub, Slack, or other services. You might
-create a Webhook, for example, to notify your team if a critical API test fails so the team can fix the issue immediately. If this test finishes with a *Failed* status,
-Testkube (based on your Webhook configuration) sends an HTTP POST request to a Slack Webhook URL which then posts a message in the *Alerts* channel. The Slack Webhook URL is a private entrance (of sorts) to the *Alerts* channel,
-automatically turning data into a chat message for your team. This allows Testkube to communicate with Slack without the need for you to manually copy/paste this message. 
+create a Webhook, for example, to notify your team if a critical API test fails so the team can fix the issue immediately. If this test finishes with a _Failed_ status,
+Testkube (based on your Webhook configuration) sends an HTTP POST request to a Slack Webhook URL which then posts a message in the _Alerts_ channel. The Slack Webhook URL is a private entrance (of sorts) to the _Alerts_ channel,
+automatically turning data into a chat message for your team. This allows Testkube to communicate with Slack without the need for you to manually copy/paste this message.
 
-You can create and manage **Webhooks** in your **Environment** via the **Testkube Dashboard**, selecting **Integrations** from the left navigation pane then proceeding to the **Webhooks** tab. 
+You can create and manage **Webhooks** in your **Environment** via the **Testkube Dashboard**, selecting **Integrations** from the left navigation pane then proceeding to the **Webhooks** tab.
 For additional information, read [Webhooks](/articles/webhooks).
 
 ![Webhooks](../articles/images/testkube-dashboard-integrations-webhooks.png)
@@ -18,19 +18,19 @@ You can select **Add a new Webhook** to access the **Create a Webhook** modal.
 
 The **Create a Webhook** modal displays:
 
-* **Name** – Unique identifier that must represent a valid Kubernetes name, as Webhooks are stored as Custom Resource Definitions (CRDs) in your cluster.
-* **Resource Identifier** – The *who* watched, such as a specific test. Resources follow the official Kubernetes selector pattern. Multiple selectors are grouped by the **AND** operator.
-* **Triggered events** – The *what* or specific Kubernetes action that causes the Testkube Webhook to run, such as a *Failed* test status.
+- **Name** – Unique identifier that must represent a valid Kubernetes name, as Webhooks are stored as Custom Resource Definitions (CRDs) in your cluster.
+- **Resource Identifier** – The _who_ watched, such as a specific test. Resources follow the official Kubernetes selector pattern. Multiple selectors are grouped by the **AND** operator.
+- **Triggered events** – The _what_ or specific Kubernetes action that causes the Testkube Webhook to run, such as a _Failed_ test status.
 
 **EXAMPLE**
 
-When a Testkube test finishes with a *Failed* status, Testkube sends an HTTP POST request to a Slack Webhook URL which then posts a message in your *Alerts* Slack channel to notify team members.
+When a Testkube test finishes with a _Failed_ status, Testkube sends an HTTP POST request to a Slack Webhook URL which then posts a message in your _Alerts_ Slack channel to notify team members.
 For additional information, read [Slack Integration](../articles/slack-integration.mdx).
 
 1. Enter the **Name**, **Resource identifier**, and **Triggered events**.
 1. Select **Next**.
 1. **Name** auto-populates from the **Name** field on previous screen.
-1. Enter the **URI** or digital *mailing address* of the external app where Testkube should send the update, such as a Slack channel.
+1. Enter the **URI** or digital _mailing address_ of the external app where Testkube should send the update, such as a Slack channel.
 1. Select **Submit**.
 
 ![Create Webhook](../articles/images/testkube-dashboard-integrations-webhooks-modal-a.png)
@@ -47,7 +47,7 @@ You can select an existing Webhook to view its **Settings**, which provides acce
 generated YAML directly in the [Definition](/articles/integrations-webhooks#definition) associated with the Webhook you selected.
 :::
 
-### General 
+### General
 
 The **General** setting allows you to access **Name**, **Enable/Disable this Webhook**, and **Delete this webhook**.
 
@@ -59,15 +59,15 @@ You can disable a Webhook for specific Workflow Executions. For additional infor
 
 ### Condition
 
-You must define the **Condition** that must be satisfied such that there are *calls* to this Webhook. This setting includes **Webhook condition**, **Resource identifier**,
+You must define the **Condition** that must be satisfied such that there are _calls_ to this Webhook. This setting includes **Webhook condition**, **Resource identifier**,
 and **Triggered events**.
 
 ![Webhook Condition](../articles/images/testkube-dashboard-integrations-webhooks-settings-condition.png)
 
 ### Action & Payload
 
-**Action** defines the target URI associated with this Webhook. The **Custom Payload** field allows you to 
-customize the payload you will send with each request. In the context of our Example, the payload is the Slack message sent to team members. For additional information, 
+**Action** defines the target URI associated with this Webhook. The **Custom Payload** field allows you to
+customize the payload you will send with each request. In the context of our Example, the payload is the Slack message sent to team members. For additional information,
 read [Webhook-Payload](/articles/webhooks#webhook-payload). This setting also displays **Headers** (customizable and can be sent with each request) and **Add a new variable**.
 
 ![Webhook Action](../articles/images/testkube-dashboard-integrations-webhooks-settings-action.png)
@@ -83,8 +83,8 @@ This setting identifies the **Resource Group** that contains this Webhook. For a
 This setting displays the underlying YAML for your Webhook, enabling you to manually configure the Webhook as opposed to navigating each **Setting**.
 
 :::tip
-If you want to hide the Webhook YAML definition in the Dashboard because it contains sensitive information, you can 
-enable Webhooks URL Masking under [Organization Product Features](/articles/organization-management#product-features) 
+If you want to hide the Webhook YAML definition in the Dashboard because it contains sensitive information, you can
+enable Webhooks URL Masking under [Organization Product Features](/articles/organization-management#product-features)
 which hides the **Definition** tab under the Webhook Settings.
 :::
 
@@ -97,11 +97,13 @@ Instead of hard coding these sensitive values into your Webhook definition,
 Testkube allows you to securely inject them from **Credentials** using the `{{credentials(<NAME>)}}` template function.
 
 You can reference **Credentials** in:
-* Webhook URL
-* Headers
-* Payload template
+
+- Webhook URL
+- Headers
+- Payload template
 
 Example:
+
 ```yaml
 apiVersion: executor.testkube.io/v1
 kind: Webhook

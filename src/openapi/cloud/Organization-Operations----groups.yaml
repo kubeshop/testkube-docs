@@ -16,18 +16,18 @@ paths:
       description: Lists the projects in an organization.
       operationId: listResourceGroups
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/ResourceGroup'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
+                  $ref: "./components.yaml#/components/schemas/ResourceGroup"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
       security:
         - BearerAuth: []
     post:
@@ -53,38 +53,38 @@ paths:
                 - name
         required: true
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/ResourceGroup'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
+                $ref: "./components.yaml#/components/schemas/ResourceGroup"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: "./components.yaml#/components/parameters/ID"
   /organizations/{id}/groups/{groupID}:
     get:
       summary: Get a resource group
       description: Get a resource group by its `id`.
       operationId: getResourceGroup
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/ResourceGroup'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+                $ref: "./components.yaml#/components/schemas/ResourceGroup"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     delete:
@@ -92,16 +92,16 @@ paths:
       description: Deletes a resource group.
       operationId: deleteResourceGroup
       responses:
-        '204':
+        "204":
           description: Delete Success
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     patch:
@@ -122,45 +122,45 @@ paths:
                   type: string
         required: true
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/ResourceGroup'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+                $ref: "./components.yaml#/components/schemas/ResourceGroup"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/GroupID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/GroupID"
   /organizations/{id}/groups/{groupID}/collaborators:
     get:
       summary: Lists all collaborators for this resource group
       description: Lists all collaborators for this resource group.
       operationId: listResourceGroupCollaborators
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Collaborator'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+                  $ref: "./components.yaml#/components/schemas/Collaborator"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     post:
@@ -186,7 +186,7 @@ paths:
                 - role
         required: true
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
@@ -196,21 +196,21 @@ paths:
                   collaborators:
                     type: array
                     items:
-                      $ref: './components.yaml#/components/schemas/Collaborator'
+                      $ref: "./components.yaml#/components/schemas/Collaborator"
                   failed:
                     type: array
                     items:
                       type: string
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
-        '429':
-          $ref: './components.yaml#/components/responses/TooManyRequests'
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
+        "429":
+          $ref: "./components.yaml#/components/responses/TooManyRequests"
       security:
         - BearerAuth: []
     delete:
@@ -232,7 +232,7 @@ paths:
                 - collaborators
         required: true
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
@@ -243,19 +243,19 @@ paths:
                     type: array
                     items:
                       type: string
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/GroupID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/GroupID"
   /organizations/{id}/groups/{groupID}/credentials:
     get:
       summary: List credentials in the resource group
@@ -277,7 +277,7 @@ paths:
             enum:
               - all
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
@@ -287,13 +287,13 @@ paths:
                   elements:
                     type: array
                     items:
-                      $ref: './components.yaml#/components/schemas/Credential'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+                      $ref: "./components.yaml#/components/schemas/Credential"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     post:
@@ -330,27 +330,27 @@ paths:
                 - name
         required: true
       responses:
-        '201':
+        "201":
           description: Response
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/Credential'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
-        '409':
-          $ref: './components.yaml#/components/responses/Conflict'
+                $ref: "./components.yaml#/components/schemas/Credential"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
+        "409":
+          $ref: "./components.yaml#/components/responses/Conflict"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/GroupID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/GroupID"
   /organizations/{id}/groups/{groupID}/credentials/{credentialName}:
     get:
       summary: Get credential in the resource group
@@ -359,14 +359,14 @@ paths:
         secrets will not.
       operationId: getResourceGroupCredential
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/Credential'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "200":
+          $ref: "./components.yaml#/components/responses/Credential"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     delete:
@@ -374,14 +374,14 @@ paths:
       description: Delete credential in the resource group.
       operationId: deleteResourceGroupCredential
       responses:
-        '204':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "204":
+          $ref: "./components.yaml#/components/responses/NoContent"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     patch:
@@ -401,19 +401,19 @@ paths:
                 - base64
         required: true
       responses:
-        '204':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "204":
+          $ref: "./components.yaml#/components/responses/NoContent"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/GroupID'
-      - $ref: './components.yaml#/components/parameters/CredentialName'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/GroupID"
+      - $ref: "./components.yaml#/components/parameters/CredentialName"

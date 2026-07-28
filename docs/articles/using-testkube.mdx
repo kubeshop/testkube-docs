@@ -5,108 +5,127 @@ import clsx from "clsx";
 
 This part of the documentation shows how to use the major features of Testkube.
 
-export const DocCardList = (input) => (<>
+export const DocCardList = (input) => (
+  <>
     <section className={clsx("row indent--min")}>
       <article key="1" className="col padding--sm intro__card">
-        <DocCard item={{
-          icon: "🌍",
-          label: "Testkube Environments",
-          description:
-            "Learn about managing Testkube Environments, Agents, and how to configure them for your infrastructure.",
-          href: "/articles/environment-management",
-          type: "intro",
-        }}/>
+        <DocCard
+          item={{
+            icon: "🌍",
+            label: "Testkube Environments",
+            description:
+              "Learn about managing Testkube Environments, Agents, and how to configure them for your infrastructure.",
+            href: "/articles/environment-management",
+            type: "intro",
+          }}
+        />
       </article>
       <article key="2" className="col padding--sm intro__card">
-        <DocCard item={{
-          icon: "📊",
-          label: "Testkube Dashboard",
-          description:
-            "Learn about the high-level structure and functionality available in the Testkube Dashboard.",
-          href: "/articles/testkube-dashboard-explore",
-          type: "intro",
-        }}/>
+        <DocCard
+          item={{
+            icon: "📊",
+            label: "Testkube Dashboard",
+            description:
+              "Learn about the high-level structure and functionality available in the Testkube Dashboard.",
+            href: "/articles/testkube-dashboard-explore",
+            type: "intro",
+          }}
+        />
       </article>
     </section>
     <section className={clsx("row indent--min")}>
       <article key="3" className="col padding--sm intro__card">
-        <DocCard item={{
-          icon: "⚙️",
-          label: "Test Workflows",
-          description:
-            "Learn about the rich syntax of Test Workflows and Workflow Templates for defining how to run your tests.",
-          href: "/articles/test-workflows",
-          type: "intro",
-        }}/>
+        <DocCard
+          item={{
+            icon: "⚙️",
+            label: "Test Workflows",
+            description:
+              "Learn about the rich syntax of Test Workflows and Workflow Templates for defining how to run your tests.",
+            href: "/articles/test-workflows",
+            type: "intro",
+          }}
+        />
       </article>
       <article key="4" className="col padding--sm intro__card">
-        <DocCard item={{
-          icon: "🚀",
-          label: "Triggering Test Workflows",
-          description:
-            "Learn about triggering Test Workflows from CI/CD, on Kubernetes Events, Cron-styled scheduling, etc.",
-          href: "/articles/triggering-overview",
-          type: "intro",
-        }}/>
+        <DocCard
+          item={{
+            icon: "🚀",
+            label: "Triggering Test Workflows",
+            description:
+              "Learn about triggering Test Workflows from CI/CD, on Kubernetes Events, Cron-styled scheduling, etc.",
+            href: "/articles/triggering-overview",
+            type: "intro",
+          }}
+        />
       </article>
     </section>
     <section className={clsx("row indent--min")}>
       <article key="5" className="col padding--sm intro__card">
-        <DocCard item={{
-          icon: "📈",
-          label: "Working with Results",
-          description:
-            "Learn about working with test execution Logs, Artifacts, and Analysis features.",
-          href: "/articles/results-overview",
-          type: "intro",
-        }}/>
+        <DocCard
+          item={{
+            icon: "📈",
+            label: "Working with Results",
+            description:
+              "Learn about working with test execution Logs, Artifacts, and Analysis features.",
+            href: "/articles/results-overview",
+            type: "intro",
+          }}
+        />
       </article>
       <article key="6" className="col padding--sm intro__card">
-        <DocCard item={{
-          icon: "👥",
-          label: "Administration",
-          description:
-            "Learn how to manage Organizations, Environments, Users, and Access Control.",
-          href: "/articles/administration-overview",
-          type: "intro",
-        }}/>
+        <DocCard
+          item={{
+            icon: "👥",
+            label: "Administration",
+            description:
+              "Learn how to manage Organizations, Environments, Users, and Access Control.",
+            href: "/articles/administration-overview",
+            type: "intro",
+          }}
+        />
       </article>
     </section>
     <section className={clsx("row indent--min")}>
       <article key="7" className="col padding--sm intro__card">
-        <DocCard item={{
-          icon: "💻",
-          label: "Testkube CLI",
-          description:
-            "Learn how to use the Testkube CLI to interact with your Testkube environments.",
-          href: "/articles/cli",
-          type: "intro",
-        }}/>
+        <DocCard
+          item={{
+            icon: "💻",
+            label: "Testkube CLI",
+            description:
+              "Learn how to use the Testkube CLI to interact with your Testkube environments.",
+            href: "/articles/cli",
+            type: "intro",
+          }}
+        />
       </article>
       <article key="8" className="col padding--sm intro__card">
-        <DocCard item={{
-          icon: "🤖",
-          label: "Testkube AI",
-          description:
-            "Learn about Testkube's AI Agents, AI Assistant, and the Testkube MCP Server.",
-          href: "/articles/ai-architecture",
-          type: "intro",
-        }}/>
+        <DocCard
+          item={{
+            icon: "🤖",
+            label: "Testkube AI",
+            description:
+              "Learn about Testkube's AI Agents, AI Assistant, and the Testkube MCP Server.",
+            href: "/articles/ai-architecture",
+            type: "intro",
+          }}
+        />
       </article>
     </section>
     <section className={clsx("row indent--min")}>
       <article key="9" className="col padding--sm intro__card">
-        <DocCard item={{
-          icon: "✅",
-          label: "Best Practices",
-          description:
-            "Learn about best practices for managing environments, access control, and local development.",
-          href: "/articles/environments-best-practices",
-          type: "intro",
-        }}/>
+        <DocCard
+          item={{
+            icon: "✅",
+            label: "Best Practices",
+            description:
+              "Learn about best practices for managing environments, access control, and local development.",
+            href: "/articles/environments-best-practices",
+            type: "intro",
+          }}
+        />
       </article>
     </section>
   </>
 );
 
-<DocCardList/>
+<DocCardList />

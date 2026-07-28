@@ -1,6 +1,6 @@
 # Workflow YAML Editor
 
-This Definition panel under the Workflow settings provides a powerful YAML editor for editing your Workflows. 
+This Definition panel under the Workflow settings provides a powerful YAML editor for editing your Workflows.
 
 :::tip
 The editor uses the same editing component as VS-Code, so any editing features you are
@@ -29,6 +29,7 @@ after saving, the corresponding Execution Details will be opened automatically.
 ## Template Inlining
 
 The below screenshot shows the Inline-Templates view in Full-screen mode:
+
 - the left panel shows the actual workflow with the `use` clause
 - the right part shows the steps inlined by the `official--artillery--v1` template
 
@@ -36,10 +37,10 @@ The below screenshot shows the Inline-Templates view in Full-screen mode:
 
 ## Workflow Specific Editor Intelligence
 
-The Workflow YAML editor in the Definition panel described above the has a number of 
+The Workflow YAML editor in the Definition panel described above the has a number of
 features that help you work specifically with Workflow YAML:
 
-### Documentation Hovers 
+### Documentation Hovers
 
 Helps you understand the purpose/usage of the corresponding Workflow property.
 
@@ -77,5 +78,3 @@ Testkube stores the current health metrics of a Workflow under the status proper
 ![Ignored Editor Changes](images/ignored-editor-changes.png)
 
 Any changes made to this section will be ignored when saving.
-
-

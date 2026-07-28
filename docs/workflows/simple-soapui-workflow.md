@@ -24,6 +24,5 @@ spec:
         image: smartbear/soapuios-testrunner:5.7.2
         env:
           - name: COMMAND_LINE
-            value: -r /data/repo/test/soapui/soapui-smoke-test.xml 
-
+            value: -r /data/repo/test/soapui/soapui-smoke-test.xml
 ```

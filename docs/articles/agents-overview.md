@@ -1,10 +1,10 @@
 # Testkube Agents
 
-A Testkube Environment can contain any number of Agents to perform specific tasks. Agents are added to an Environment 
+A Testkube Environment can contain any number of Agents to perform specific tasks. Agents are added to an Environment
 via the Dashboard (see below) and then deployed into their target cluster/namespace using either the provided CLI or Helm commands.
 
 :::tip
-The Agents described here are related to the Test Orchestration capabilities of Testkube, not to be confused with [Testkube AI Agents](/articles/ai-agents), 
+The Agents described here are related to the Test Orchestration capabilities of Testkube, not to be confused with [Testkube AI Agents](/articles/ai-agents),
 which allow you to run Agentic workloads in your Testkube Environment.
 :::
 
@@ -24,11 +24,12 @@ A Testkube Agent can have any of the following 4 capabilities
 4. **Webhook Agents** - are deployed to from where you want to emit Webhook/CDEvents - [Read More](#webhook-agents).
 
 :::note
-### Naming - Agents vs Capabilities 
 
-Since an Agent can technically have any combination of these capabilities enabled, we will use the terms **capability** and **agent** somewhat 
-interchangeably - i.e. a "Runner Agent" is the same as an "Agent with the Runner Capability", while an Agent with both the Listener and Webhook capabilities is both 
-a Listener Agent and a Webhook Agent. 
+### Naming - Agents vs Capabilities
+
+Since an Agent can technically have any combination of these capabilities enabled, we will use the terms **capability** and **agent** somewhat
+interchangeably - i.e. a "Runner Agent" is the same as an "Agent with the Runner Capability", while an Agent with both the Listener and Webhook capabilities is both
+a Listener Agent and a Webhook Agent.
 :::
 
 ### Runner Agents
@@ -54,7 +55,7 @@ Runner Agents require a license - [Read More](#licensing-for-runner-agents).
 
 ### Listener Agents
 
-Listener Agents are created and deployed to clusters/namespaces where you want to listen for Kubernetes Events to trigger [Test Triggers](/articles/test-triggers). 
+Listener Agents are created and deployed to clusters/namespaces where you want to listen for Kubernetes Events to trigger [Test Triggers](/articles/test-triggers).
 
 Use-cases for deploying Listener Agents:
 
@@ -63,7 +64,7 @@ Use-cases for deploying Listener Agents:
 
 Having multiple/separate Listener Agents from Runner Agents allows you to listen for changes in clusters separate
 from where you might want to run your tests, for example, if tests need to run from outside a cluster to validation connectivity
-or network performance, you could listen for events using a Listener Agent in cluster A, which would trigger the execution of Workflow 
+or network performance, you could listen for events using a Listener Agent in cluster A, which would trigger the execution of Workflow
 on a Runner Agent deployed in cluster B.
 
 Read more about how TestTriggers map to Listener Agents at [Listener Agents with TestTriggers](/articles/test-triggers#listener-agents-with-testtriggers).
@@ -97,7 +98,7 @@ Agents are managed in the Agents tab under the Environment Settings:
 
 The table has the following columns:
 
-- **Name**:  The name given to the agent on creation.
+- **Name**: The name given to the agent on creation.
 - **Capabilities**: Capability icons for the agent.
 - **Labels**: Labels currently associated with the Runner Agent. Can be set with `testkube update agent` or via the runner's Helm values — see [Updating Runner Agent labels and mode](#updating-runner-agent-labels-and-mode) and [Using labels for Runner Agent selection](/articles/test-workflows-running#using-labels-for-runner-agent-selection).
 - **Runner Mode**: The Runner Mode of the agent if it is a Runner Agent. Can be changed with `testkube update agent` or via the runner's Helm values — see [Updating Runner Agent labels and mode](#updating-runner-agent-labels-and-mode) and [Runner Agent modes](/articles/test-workflows-running#runner-agent-modes).
@@ -122,7 +123,7 @@ Selecting "Helm" as the tool for installation will show corresponding commands:
 
 ![Connect New Agent with Helm Dialog](images/add-new-helm-agent.png)
 
-Selecting "GitOps" as the tool for installation will show the YAML to use when auto-provisioning the Agent as part of a 
+Selecting "GitOps" as the tool for installation will show the YAML to use when auto-provisioning the Agent as part of a
 GitOps deployment - [Read More](/articles/multi-agent-runner-helm-chart#self-registering-agent-helm-install).
 
 ![Connect New Agent with GitOps Dialog](images/add-new-gitops-agent.png)
@@ -166,12 +167,12 @@ When a runner restarts (for example after a Helm upgrade or rolling update of it
 reconnects to the Control Plane and may republish its registration metadata, but **only for the fields it
 is explicitly configured to manage**:
 
-| Runner-side configuration                                        | What gets refreshed on reconnect                          |
-|------------------------------------------------------------------|-----------------------------------------------------------|
-| At least one entry in `runner.register.labels`                   | Labels are replaced with the runner's set                 |
-| `runner.register.labels` is empty / unset                        | Labels are **preserved** (the runner does not touch them) |
-| `runner.register.global=true` or `runner.register.groupName` set | Runner mode is replaced with the runner's setting   |
-| Neither set (`Independent` defaults)                             | Runner mode is **preserved** (the runner does not touch it) |
+| Runner-side configuration                                        | What gets refreshed on reconnect                                    |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------- |
+| At least one entry in `runner.register.labels`                   | Labels are replaced with the runner's set                           |
+| `runner.register.labels` is empty / unset                        | Labels are **preserved** (the runner does not touch them)           |
+| `runner.register.global=true` or `runner.register.groupName` set | Runner mode is replaced with the runner's setting                   |
+| Neither set (`Independent` defaults)                             | Runner mode is **preserved** (the runner does not touch it)         |
 | Kubernetes API error reading the Deployment                      | Labels are preserved (warning logged); mode follows the rules above |
 
 This means CLI-managed agents keep working unchanged after upgrade: if you have not configured labels or
@@ -183,11 +184,11 @@ mode in your runner's Helm values, the runner will not overwrite values you set 
 If you want the runner Deployment itself to be the source of truth for labels and/or mode, set the
 corresponding Helm values and run `helm upgrade`:
 
-| Field        | Helm value                          | Runner env var          |
-|--------------|--------------------------------------|-------------------------|
-| Labels       | `runner.register.labels`             | (label key prefix configurable via `RUNNER_LABELS_PREFIX`, default `runner.testkube.io/`) |
-| Runner group | `runner.register.groupName`          | `RUNNER_GROUP`          |
-| Global flag  | `runner.register.global`             | `RUNNER_IS_GLOBAL`      |
+| Field        | Helm value                  | Runner env var                                                                            |
+| ------------ | --------------------------- | ----------------------------------------------------------------------------------------- |
+| Labels       | `runner.register.labels`    | (label key prefix configurable via `RUNNER_LABELS_PREFIX`, default `runner.testkube.io/`) |
+| Runner group | `runner.register.groupName` | `RUNNER_GROUP`                                                                            |
+| Global flag  | `runner.register.global`    | `RUNNER_IS_GLOBAL`                                                                        |
 
 Once the runner pod restarts and reconnects, the Agents list in the Dashboard will reflect the new values.
 From that point on, any change you make through the CLI will be **overwritten** the next time the runner

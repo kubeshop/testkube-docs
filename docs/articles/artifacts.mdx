@@ -1,6 +1,6 @@
-import LegacyWarning from '../articles/_legacy-warning.mdx';
+import LegacyWarning from "../articles/_legacy-warning.mdx";
 
-# Artifacts 
+# Artifacts
 
 <LegacyWarning />
 
@@ -12,16 +12,16 @@ The executor will scrape the files and store them in [Minio](https://min.io/). T
 
 The available configuration parameters in Helm charts are:
 
-| Parameter                              | Is optional | Default                              | Default                                               |
-| -------------------------------------- | ----------- | ------------------------------------ | ----------------------------------------------------- |
-| testkube-api.storage.endpoint          | yes         | testkube-minio-service-testkube:9000 | URL of the S3 bucket                                  |
-| testkube-api.storage.accessKeyId       | yes         | minio                                | Access Key ID                                         |
-| testkube-api.storage.accessKey         | yes         | minio123                             | Access Key                                            |
-| testkube-api.storage.location          | yes         |                                      | Region                                                |
-| testkube-api.storage.token             | yes         |                                      | S3 Token                                              |
-| testkube-api.storage.SSL               | yes         | false                                | Indicates whether SSL communication is to be enabled. |
-| testkube-api.storage.scrapperEnabled   | yes         | true                                 | Indicates whether executors should scrape artifacts.  |
-| testkube-api.storage.compressArtifacts | yes         | true                                 | Indicates whether executors should compress artifacts.|
+| Parameter                              | Is optional | Default                              | Default                                                |
+| -------------------------------------- | ----------- | ------------------------------------ | ------------------------------------------------------ |
+| testkube-api.storage.endpoint          | yes         | testkube-minio-service-testkube:9000 | URL of the S3 bucket                                   |
+| testkube-api.storage.accessKeyId       | yes         | minio                                | Access Key ID                                          |
+| testkube-api.storage.accessKey         | yes         | minio123                             | Access Key                                             |
+| testkube-api.storage.location          | yes         |                                      | Region                                                 |
+| testkube-api.storage.token             | yes         |                                      | S3 Token                                               |
+| testkube-api.storage.SSL               | yes         | false                                | Indicates whether SSL communication is to be enabled.  |
+| testkube-api.storage.scrapperEnabled   | yes         | true                                 | Indicates whether executors should scrape artifacts.   |
+| testkube-api.storage.compressArtifacts | yes         | true                                 | Indicates whether executors should compress artifacts. |
 
 The API Server accepts the following environment variables:
 
@@ -32,7 +32,7 @@ STORAGE_ACCESSKEYID
 STORAGE_SECRETACCESSKEY
 STORAGE_LOCATION
 STORAGE_REGION
-STORAGE_TOKEN 
+STORAGE_TOKEN
 STORAGE_SSL
 SCRAPPERENABLED
 COMPRESSARTIFACTS
@@ -56,7 +56,6 @@ Alternatively, these values can be read from Kubernetes secrets and set:
 ## Collecting Test Artifacts
 
 For executors that produce files during test execution, Testkube supports collecting (scraping) these artifacts and storing them in our S3 compatible file storage. In case of prebuilt Testkube executors, we automatically use a pod data volume for storing and scraping artifacts, in case of container executors it's necessary to provide artifact volume parameters. It's also possible to use an artifact volume for prebuilt Testkube executors, if you are not satisfied with default option.
-
 
 You can override the default volume mount path in the `Test` definition:
 
@@ -83,31 +82,36 @@ spec:
   type: cypress/project
 ```
 
-If you set the `volumeMountPath` to the `/data` Testkube will set one volume as main for all pods 
+If you set the `volumeMountPath` to the `/data` Testkube will set one volume as main for all pods
 
-Just keep in mind that all values need to be set: 
+Just keep in mind that all values need to be set:
+
 ```yaml
-      sharedBetweenPods: true
-      storageClassName: standard-rwx
-      volumeMountPath: /data
+sharedBetweenPods: true
+storageClassName: standard-rwx
+volumeMountPath: /data
 ```
+
 `storageClassName` should be one which can support `ReadWriteMany` access mode, like NFS or similar one.
 Consider checking your Kubernetes provider documentation for more information about which storage classes supports it.
 Keep in mind that the NFS based volumes can be significantly slower than local storage.
 
 You can omit using explicit value of `storageClassName` in the `Test` definition and use instead:
+
 ```yaml
-      useDefaultStorageClassName: true
+useDefaultStorageClassName: true
 ```
+
 In this case it's necessary to supply `defaultStorageClassName` value in your helm chart values during installation.
 
 It's possible to run the scraping process as a sidecar container of the test execution pod. Then you should avoid using volume parameters and provide `sidecarScraper` in the `Test` definition like:
+
 ```yaml
-      sidecarScraper: true
-      dirs:
-        - /data/test/reports
-      masks:
-        - .*\.txt,result.*
+sidecarScraper: true
+dirs:
+  - /data/test/reports
+masks:
+  - .*\.txt,result.*
 ```
 
 You need to save test related files into specified directories on the dynamically created volume. They will be uploaded from there to Testkube file storage and available later for downloading using standard Testkube CLI or Testkube Dashboard commands. For example:

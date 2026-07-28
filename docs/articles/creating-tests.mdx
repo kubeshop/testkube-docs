@@ -1,4 +1,4 @@
-import LegacyWarning from '../articles/_legacy-warning.mdx';
+import LegacyWarning from "../articles/_legacy-warning.mdx";
 
 # Creating Tests
 
@@ -413,11 +413,11 @@ spec:
     spec:
       containers:
         - name: "{{ .Name }}"
-          image: {{ .Image }}
+          image: { { .Image } }
           imagePullPolicy: Always
           command:
             - "/bin/runner"
-            - '{{ .Jsn }}'
+            - "{{ .Jsn }}"
           resources:
             limits:
               memory: 128Mi
@@ -429,6 +429,7 @@ We also provide special helper methods to use in the job template:
 `vartypeptrtostring` is the method to convert a pointer to a variable type to a string type.
 
 Usage example:
+
 ```yaml
 {{- range $key, $value := .Variables }}
   {{ if eq ($value.Type_ | vartypeptrtostring) "basic" }}
@@ -465,12 +466,12 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: "{{ .Name }}"
-  namespace: {{ .Namespace }}
+  namespace: { { .Namespace } }
   ownerReferences:
-  - apiVersion: batch/v1
-    kind: job
-    name: {{ .JobName }}
-    uid: {{ .JobUID }}
+    - apiVersion: batch/v1
+      kind: job
+      name: { { .JobName } }
+      uid: { { .JobUID } }
   labels:
     distributed: jmeter
 ```
@@ -521,7 +522,7 @@ Provide the script when you create or run the test using `--prerun-script` and `
 testkube create test --file test/postman/LocalHealth.postman_collection.json --name script-test --type postman/collection --prerun-script pre_script.sh --postrun-script post_script.sh --secret-env SSL_CERT=your-k8s-secret
 ```
 
-For container executors you can define `--source-scripts` flag in order to run both scripts using `source` command in the same shell. 
+For container executors you can define `--source-scripts` flag in order to run both scripts using `source` command in the same shell.
 
 ### Adjusting Scraping Parameters
 
@@ -545,7 +546,7 @@ spec:
   executionRequest:
     artifactRequest:
       dirs:
-        - test/reports 
+        - test/reports
       storageBucket: jmeter-artifacts
       omitFolderPerExecution: true
 ```
@@ -607,7 +608,7 @@ testkube create test --file test/postman/LocalHealth.postman_collection.json --n
 
 ### Run the Test in a Different Execution Namespace
 
-When you need to run the test in a namespace different from the Testkube installation one, you can use a special Test CRD field `executionNamespace`, for example: 
+When you need to run the test in a namespace different from the Testkube installation one, you can use a special Test CRD field `executionNamespace`, for example:
 
 ```yaml
 apiVersion: tests.testkube.io/v3
@@ -631,15 +632,15 @@ spec:
 You need to define execution namespaces in your helm chart values. It's possible to generate all required RBAC or just manually supply them.
 
 ```yaml
-  executionNamespaces: []
-       # -- Namespace for test execution  
-  #  - namespace: default 
-       # -- Whether to generate RBAC for testkube api server or use manually provided 
-  #    generateAPIServerRBAC: true
-       # -- Job service account name for test jobs 
-  #    jobServiceAccountName: tests-job-default
-       # -- Whether to generate RBAC for test job or use manually provided 
-  #    generateTestJobRBAC: true
+executionNamespaces: []
+  # -- Namespace for test execution
+#  - namespace: default
+# -- Whether to generate RBAC for testkube api server or use manually provided
+#    generateAPIServerRBAC: true
+# -- Job service account name for test jobs
+#    jobServiceAccountName: tests-job-default
+# -- Whether to generate RBAC for test job or use manually provided
+#    generateTestJobRBAC: true
 ```
 
 ## Summary

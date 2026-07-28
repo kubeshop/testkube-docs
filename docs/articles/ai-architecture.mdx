@@ -1,7 +1,7 @@
 # Testkube AI Architecture
 
-This document provides a high-level overview of the architecture powering Testkube's AI capabilities, 
-including the AI Assistant, AI Agents, and AI Agent Triggers. Understanding this architecture helps 
+This document provides a high-level overview of the architecture powering Testkube's AI capabilities,
+including the AI Assistant, AI Agents, and AI Agent Triggers. Understanding this architecture helps
 you leverage these features effectively and understand their capabilities and limitations.
 
 ## Overview
@@ -114,7 +114,7 @@ Testkube's AI features are built on a modern agentic AI architecture that combin
 
 ### LangGraph Agent Framework
 
-The AI Service uses [LangGraph](https://langchain-ai.github.io/langgraph/), an open-source framework for building 
+The AI Service uses [LangGraph](https://langchain-ai.github.io/langgraph/), an open-source framework for building
 stateful, multi-actor AI applications. The agent is built using LangGraph's `createAgent` with a middleware
 stack that provides:
 
@@ -130,10 +130,10 @@ stack that provides:
 
 ### Model Context Protocol (MCP)
 
-[MCP](https://modelcontextprotocol.io/) is an open standard for connecting AI assistants to external tools and data sources. 
+[MCP](https://modelcontextprotocol.io/) is an open standard for connecting AI assistants to external tools and data sources.
 Testkube uses MCP to:
 
-- **Expose Testkube Functionality**: The built-in Testkube MCP Server provides tools for managing workflows, 
+- **Expose Testkube Functionality**: The built-in Testkube MCP Server provides tools for managing workflows,
   analyzing executions, and retrieving artifacts
 - **Enable Extensibility**: Connect external MCP servers (GitHub, Jira, Slack, etc.) to extend AI capabilities
 - **Standardize Tool Interfaces**: Use a consistent protocol for tool discovery, invocation, and response handling
@@ -161,8 +161,8 @@ See [Configuring AI Models](/articles/ai-models) for details on adding custom LL
 
 ## Testkube MCP Tools
 
-The Testkube MCP Server exposes a comprehensive set of tools that allow AI Agents to interact with your 
-Testkube environment. These tools are automatically available to the AI Assistant and can be enabled 
+The Testkube MCP Server exposes a comprehensive set of tools that allow AI Agents to interact with your
+Testkube environment. These tools are automatically available to the AI Assistant and can be enabled
 for custom AI Agents.
 
 The available tools cover:
@@ -215,7 +215,7 @@ See [AI Agent Triggers](/articles/ai-triggers) for configuration details, includ
 
 ## Human-in-the-Loop (HITL) Approval
 
-For security and control, certain tool operations require human approval before execution. This is particularly 
+For security and control, certain tool operations require human approval before execution. This is particularly
 important for tools that can modify data or perform sensitive operations.
 
 ### How HITL Works
@@ -232,7 +232,7 @@ important for tools that can modify data or perform sensitive operations.
 
 ### Configuring Tool Approval
 
-When [defining AI Agents](/articles/defining-ai-agents#configuring-mcp-server-tools), you can configure 
+When [defining AI Agents](/articles/defining-ai-agents#configuring-mcp-server-tools), you can configure
 which tools require approval:
 
 - **Auto-approved Tools**: Execute immediately without user intervention (suitable for read-only operations)
@@ -245,14 +245,14 @@ which tools require approval:
 
 Sessions (also called "Chats") can be created through several paths:
 
-| Path | How it works |
-|------|-------------|
-| **AI Assistant** | User opens the AI Assistant panel and sends a message |
-| **AI Chats panel** | User starts a new chat from the Chats panel, selecting an agent and providing a prompt |
-| **AI Analyze button** | User clicks "AI Analyze" on a failed execution, which pre-fills the prompt with execution context |
-| **Agent configuration** | User clicks "Run Agent" from an agent's configuration page |
-| **AI Agent Trigger** | Worker Service creates a session automatically when a trigger fires, then calls the AI Service's internal endpoint |
-| **From within a chat** | The AI Assistant can trigger a new agent session on the user's behalf using the `trigger_agent_session` tool |
+| Path                    | How it works                                                                                                       |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **AI Assistant**        | User opens the AI Assistant panel and sends a message                                                              |
+| **AI Chats panel**      | User starts a new chat from the Chats panel, selecting an agent and providing a prompt                             |
+| **AI Analyze button**   | User clicks "AI Analyze" on a failed execution, which pre-fills the prompt with execution context                  |
+| **Agent configuration** | User clicks "Run Agent" from an agent's configuration page                                                         |
+| **AI Agent Trigger**    | Worker Service creates a session automatically when a trigger fires, then calls the AI Service's internal endpoint |
+| **From within a chat**  | The AI Assistant can trigger a new agent session on the user's behalf using the `trigger_agent_session` tool       |
 
 ### State Persistence
 
@@ -268,7 +268,7 @@ and stored alongside other organizational data.
 
 ## External MCP Server Integration
 
-One of the most powerful features of Testkube's AI architecture is the ability to connect external MCP servers, 
+One of the most powerful features of Testkube's AI architecture is the ability to connect external MCP servers,
 extending the AI's capabilities beyond Testkube itself.
 
 ### Authentication Methods

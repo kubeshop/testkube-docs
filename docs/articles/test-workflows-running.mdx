@@ -3,9 +3,9 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-## Overview 
+## Overview
 
-Workflows can be triggered to execute in any of the ways described in [Triggering Test Workflows](/articles/triggering-overview). When triggered, 
+Workflows can be triggered to execute in any of the ways described in [Triggering Test Workflows](/articles/triggering-overview). When triggered,
 Workflows execute either on the default Standalone Agent or dedicated Runner Agents connected to an Environment - [Read More about Agents](/articles/agents-overview),
 
 Check out the [High-level Architecture](/articles/test-workflows-high-level-architecture) to understand how Workflows
@@ -179,7 +179,6 @@ Labels can be updated either with `testkube update agent <name> -l <key>=<value>
 [Updating Runner Agent labels and mode](/articles/agents-overview#updating-runner-agent-labels-and-mode)
 for when each method takes effect.
 
-
 ```sh
 # run Workflow on a Runner Agent in the staging-runners group with the region=europe label
 testkube run testworkflow my-k6-test --target group=staging-runners --target region=europe
@@ -301,7 +300,6 @@ The default (full-capability) agent works as a Global Runner Agent (described ab
 
 The ID is shown in the list of Agents (see below), the Name is the same `xxxx` prefixed with tkcenv instead.
 
-
 ### Queuing of Workflow Executions
 
 When requesting to run a Workflow on a specific Runner Agent, either by name or label(s), and no
@@ -312,17 +310,18 @@ You can abort queued executions using the corresponding [CLI Command](/cli/testk
 
 ## Silent Executions
 
-Silent Executions let you run Workflows and Tests without recording the execution in Insights, 
+Silent Executions let you run Workflows and Tests without recording the execution in Insights,
 generating metrics, triggering CDEvents or Webhooks, or affecting Workflow health.
 This is useful when you want to test or debug your pipelines without polluting analytics dashboards, reports, or automated signals.
 
 Silent Execution mode is available both in the Dashboard and CLI.
 
-> Note: Silent Executions are currently not support for nested Workflows which are run via `execute`  command.
+> Note: Silent Executions are currently not support for nested Workflows which are run via `execute` command.
 
 ### When to use Silent Executions
 
 Silent Executions are ideal when you want to run tests without leaving traces in your analytics or automation pipeline, such as:
+
 - Local development and debugging
 - Trial runs before production usage
 - Internal verification or smoke checks
@@ -333,7 +332,7 @@ Silent Executions behave exactly like normal executions — they run on Agents, 
 ### Running Silent Executions in the Dashboard
 
 You can run a Workflow silently from the Workflow details page.
-Click the dropdown button next to the **Run now** button and select the **Run as silent execution checkbox**, 
+Click the dropdown button next to the **Run now** button and select the **Run as silent execution checkbox**,
 then click on the **Run now** button.
 
 ![Run as silent execution](images/silent-execution.png)
@@ -348,11 +347,12 @@ testkube run testworkflow my-k6-test --silent
 
 ### Silent Workflows
 
-Introduced with Testkube 2.6.0, you can also set a Workflow to always run executions silently instead of having to flag each individual execution. 
+Introduced with Testkube 2.6.0, you can also set a Workflow to always run executions silently instead of having to flag each individual execution.
 
 Simply add the following to your Workflow definition:
 
 ```yaml
+
 ...
 spec:
   execution:
@@ -361,6 +361,6 @@ spec:
 ```
 
 :::tip
-Use this when you want to silence/mute a Workflow temporarily, for example if you know it will fail or is flaky for some reason that 
+Use this when you want to silence/mute a Workflow temporarily, for example if you know it will fail or is flaky for some reason that
 can't be handled at the moment.
 :::

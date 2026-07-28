@@ -147,6 +147,7 @@ pipeline {
 ### Testkube with EKS (Amazon Elastic Kubernetes Service)
 
 This workflow establishes a connection to an EKS cluster and runs a Test Workflow using the Testkube CLI. Please make sure that the following points are satisfied:
+
 - The **_AwsAccessKeyId_**, **_AwsSecretAccessKeyId_** secrets should contain your AWS IAM keys with proper permissions to connect to the EKS cluster.
 - The **_AwsRegion_** secret should contain the AWS region where EKS is deployed.
 - The **_EksClusterName_** secret points to the name of the EKS cluster you want to connect to.

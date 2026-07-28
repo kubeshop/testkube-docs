@@ -4,14 +4,15 @@ To improve the end-user experience, Testkube collects anonymous telemetry data a
 
 Participation in this program is optional. You may [opt-out](#how-to-opt-out) if you'd prefer not to share any information.
 
-The data collected is always anonymous, not traceable to the source, and only used in aggregate form. 
+The data collected is always anonymous, not traceable to the source, and only used in aggregate form.
 
 ## Dashboard telemetry
 
 The Testkube Dashboard collects user consent and then sends telemetry to the following services:
-* app.posthog.com
-* api.segment.io
-* google analytics
+
+- app.posthog.com
+- api.segment.io
+- google analytics
 
 ## API-server telemetry
 
@@ -49,13 +50,13 @@ To opt out of the Testkube telemetry collection:
 testkube disable telemetry
 ```
 
-To *opt in*:
+To _opt in_:
 
 ```sh
 testkube enable telemetry
 ```
 
-To check the current *status*:
+To check the current _status_:
 
 ```sh
 testkube status telemetry

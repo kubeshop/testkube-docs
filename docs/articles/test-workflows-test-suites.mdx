@@ -3,9 +3,9 @@ import TabItem from "@theme/TabItem";
 
 # Advanced Workflow Orchestration
 
-import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx"
+import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx";
 
-<RequiresCommercialWorkflows/>
+<RequiresCommercialWorkflows />
 
 ## Overview
 
@@ -15,15 +15,15 @@ to create a Workflow that orchestrates the execution of other Workflows, both in
 The possibility to orchestrate the execution of other Workflows from within a Workflow gives you great flexibility in how you can
 use Testkube to modularize and execute your tests:
 
-* Break down complex Workflows into smaller, reusable steps.
-* Fetch input data before (i.e. by using `curl`/`wget` to download data, or fetching Git repository).
-* Run setup operations (i.e. start shared instance of database, or generate API key).
-* Process the results (i.e. by notifying about the status).
-* Run other tests based on the previous results.
-* Trigger Workflows in other environments.
-* Nest Workflows - Workflow triggering Workflow(s), triggering other Workflow(s).
-* Run any number of Workflows both in sequence or parallel.
-* Run Workflows based on labels - for dynamic selection of which Workflows to run.
+- Break down complex Workflows into smaller, reusable steps.
+- Fetch input data before (i.e. by using `curl`/`wget` to download data, or fetching Git repository).
+- Run setup operations (i.e. start shared instance of database, or generate API key).
+- Process the results (i.e. by notifying about the status).
+- Run other tests based on the previous results.
+- Trigger Workflows in other environments.
+- Nest Workflows - Workflow triggering Workflow(s), triggering other Workflow(s).
+- Run any number of Workflows both in sequence or parallel.
+- Run Workflows based on labels - for dynamic selection of which Workflows to run.
 
 ## `execute` Syntax
 
@@ -31,7 +31,7 @@ You have to use `execute` operation in the step, and provide definition of the T
 
 For each Workflow to execute, you have to provide its `name` and optionally `config` values.
 
-This example runs two Workflows - `example-distributed-k6` and `example-sharded-cypress` in parallel, providing configuration values for 
+This example runs two Workflows - `example-distributed-k6` and `example-sharded-cypress` in parallel, providing configuration values for
 the `example-distributed-k6` Workflow:
 
 ```yaml
@@ -41,16 +41,16 @@ metadata:
   name: example-test-suite
 spec:
   steps:
-  - execute:
-      workflows:
-      - name: example-distributed-k6
-        description: Run {{ index + 1 }} of {{ count }}
-        count: 2
-        config:
-          vus: 8
-          duration: 1s
-          workers: 2
-      - name: example-sharded-cypress
+    - execute:
+        workflows:
+          - name: example-distributed-k6
+            description: Run {{ index + 1 }} of {{ count }}
+            count: 2
+            config:
+              vus: 8
+              duration: 1s
+              workers: 2
+          - name: example-sharded-cypress
 ```
 
 :::tip
@@ -100,19 +100,19 @@ metadata:
   name: example-sequential-test-suite
 spec:
   steps:
-  - execute:
-      parallelism: 1
-      workflows:
-      - name: example-distributed-k6
-        count: 2
-        config:
-          vus: 8
-          duration: 1s
-          workers: 2
-      - name: example-sharded-cypress
-      tests:
-      - name: example-test
-        count: 5
+    - execute:
+        parallelism: 1
+        workflows:
+          - name: example-distributed-k6
+            count: 2
+            config:
+              vus: 8
+              duration: 1s
+              workers: 2
+          - name: example-sharded-cypress
+        tests:
+          - name: example-test
+            count: 5
 ```
 
 </TabItem>
@@ -129,6 +129,7 @@ In case you don't know an exact list of workflows to be executed inside of the s
 This list will be generated during test workflow execution. You have 2 options to choose:
 
 Either using labels themselves
+
 ```yaml
 kind: TestWorkflow
 apiVersion: testworkflows.testkube.io/v1
@@ -136,15 +137,16 @@ metadata:
   name: tw-suite-dynamic-labels
 spec:
   steps:
-  - execute:
-      parallelism: 2
-      workflows:
-        - selector:
-            matchLabels:
-              core-tests: workflows
+    - execute:
+        parallelism: 2
+        workflows:
+          - selector:
+              matchLabels:
+                core-tests: workflows
 ```
 
 Or using Kubernetes label expressions
+
 ```yaml
 kind: TestWorkflow
 apiVersion: testworkflows.testkube.io/v1
@@ -152,15 +154,15 @@ metadata:
   name: tw-suite-dynamic-expressions
 spec:
   steps:
-  - execute:
-      parallelism: 2
-      workflows:
-        - selector:
-            matchExpressions:
-            - key: core-tests
-              operator: In
-              values:
-              - workflows
+    - execute:
+        parallelism: 2
+        workflows:
+          - selector:
+              matchExpressions:
+                - key: core-tests
+                  operator: In
+                  values:
+                    - workflows
 ```
 
 ### Targeting specific Runner Agents
@@ -169,14 +171,15 @@ With the introduction of [Runner Agents](/articles/agents-overview#runner-agents
 workflow specified in the `execute` command, for example:
 
 ```yaml
+
 ...
-  - execute:
-      workflows:
+- execute:
+    workflows:
       - name: k6-base
         target:
           match:
             name:
-            - load-runner-agent
+              - load-runner-agent
       - name: e2e-test
 ```
 
@@ -184,11 +187,13 @@ Will run the `k6-base` test on a Runner Agent named `load-runner-agent` while ru
 Workflow is running on. For more details, see our guide on [Runner Agent Targeting](/articles/test-workflows-running#runner-agent-targeting).
 
 ## Nesting workflows
+
 Workflows can be nested, a Workflow can execute other Workflow(s) executing other Workflow(s). [**Parallelism**](#controlling-the-concurrency-level) can then be used to control the execution flow.
 
 Example:
 
 Tool-specific workflow (in this case k6 - executing multiple workflows for different cases)
+
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
@@ -196,18 +201,19 @@ metadata:
   name: k6-workflow-suite
 spec:
   steps:
-  - execute:
-      parallelism: 2
-      workflows:
-      - name: k6-workflow-smoke
-      - name: k6-workflow-smoke-template
-      - name: k6-workflow-smoke-template-without-checkout-step
-      - name: k6-workflow-smoke-artifacts
-      - name: distributed-k6-workflow-smoke
-      - name: distributed-k6-workflow-smoke-artifacts
+    - execute:
+        parallelism: 2
+        workflows:
+          - name: k6-workflow-smoke
+          - name: k6-workflow-smoke-template
+          - name: k6-workflow-smoke-template-without-checkout-step
+          - name: k6-workflow-smoke-artifacts
+          - name: distributed-k6-workflow-smoke
+          - name: distributed-k6-workflow-smoke-artifacts
 ```
 
 That can be executed from another workflow
+
 ```yaml
 kind: TestWorkflow
 apiVersion: testworkflows.testkube.io/v1
@@ -215,18 +221,18 @@ metadata:
   name: tw-suite-full
 spec:
   steps:
-  - execute:
-      parallelism: 2
-      workflows:
-      - name: artillery-workflow-suite
-      - name: cypress-workflow-suite
-      - name: gradle-workflow-suite
-      - name: jmeter-workflow-suite
-      - name: k6-workflow-suite # workflow from the example
-      - name: maven-workflow-suite
-      - name: playwright-workflow-suite
-      - name: postman-workflow-suite
-      - name: soapui-workflow-suite
+    - execute:
+        parallelism: 2
+        workflows:
+          - name: artillery-workflow-suite
+          - name: cypress-workflow-suite
+          - name: gradle-workflow-suite
+          - name: jmeter-workflow-suite
+          - name: k6-workflow-suite # workflow from the example
+          - name: maven-workflow-suite
+          - name: playwright-workflow-suite
+          - name: postman-workflow-suite
+          - name: soapui-workflow-suite
 ```
 
 ## Passing Input Parameters
@@ -237,15 +243,16 @@ when executing a Workflow as described above by adding a `config` property that 
 In the below example the `example-distributed-k6` Workflow is executed with specified values for `vus`, `duration` and `workers` parameters:
 
 ```yaml
+
 ...
-  steps:
+steps:
   - execute:
       workflows:
-      - name: example-distributed-k6
-        config:
-          vus: 8
-          duration: 1s
-          workers: 2
+        - name: example-distributed-k6
+          config:
+            vus: 8
+            duration: 1s
+            workers: 2
 ```
 
 ### Passing Specific files
@@ -265,16 +272,16 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-      - test/k6/k6-smoke-test-without-envs.js
+        - test/k6/k6-smoke-test-without-envs.js
   steps:
-  - execute:
-      workflows:
-      - name: example-distributed-k6
-        config:
-          vus: 8
-          duration: 1s
-          workers: 2
-          script: '{{ file("/data/repo/test/k6/k6-smoke-test-without-envs.js") }}'
+    - execute:
+        workflows:
+          - name: example-distributed-k6
+            config:
+              vus: 8
+              duration: 1s
+              workers: 2
+              script: '{{ file("/data/repo/test/k6/k6-smoke-test-without-envs.js") }}'
 ```
 
 ### Multiple files transfer
@@ -293,16 +300,16 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-      - test/k6/k6-smoke-test-without-envs.js
+        - test/k6/k6-smoke-test-without-envs.js
   steps:
-  - execute:
-      workflows:
-      - name: example-test-reading-files
-        tarball:
-          scripts:
-            from: /data/repo
-        config:
-          input: '{{ tarball.scripts.url }}'
+    - execute:
+        workflows:
+          - name: example-test-reading-files
+            tarball:
+              scripts:
+                from: /data/repo
+            config:
+              input: "{{ tarball.scripts.url }}"
 ```
 
 You can later use i.e. `content.tarball` to unpack them in destination test:
@@ -314,13 +321,13 @@ metadata:
   name: example-test-reading-files
 spec:
   config:
-    input: {type: string}
+    input: { type: string }
   content:
     tarball:
-    - url: "{{ config.input }}" # extract provided tarball
-      path: "/data/repo"        # to local /data/repo directory (or any other)
+      - url: "{{ config.input }}" # extract provided tarball
+        path: "/data/repo" # to local /data/repo directory (or any other)
   steps:
-  - shell: tree /data/repo
+    - shell: tree /data/repo
 ```
 
 ### Matrix and sharding
@@ -329,6 +336,3 @@ The `execute` operation supports matrix and sharding, to run multiple replicas a
 It is supported by regular matrix/sharding properties (`matrix`, `shards`, `count` and `maxCount`) for each Test Workflow or Test reference.
 
 You can read more about it in the general [**Matrix and Sharding**](./test-workflows-matrix-and-sharding.mdx) documentation.
-
-
-

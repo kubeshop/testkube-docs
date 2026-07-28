@@ -38,13 +38,13 @@ You can add your own models to make them available for AI Chats. This is useful 
 
 Select the **Add Model** button to open the model configuration modal with the following fields:
 
-| Field | Description |
-|-------|-------------|
-| **Name** | A name for the model provider (must be unique and comply with Kubernetes naming conventions). |
-| **Provider** | The model provider — `OpenAI` for direct OpenAI API access, or `OpenAI Compatible` for any service that implements the OpenAI API specification (e.g., Azure OpenAI, LiteLLM, vLLM). |
-| **Base URL** | The API endpoint URL. Required for `OpenAI Compatible` providers; leave empty for direct OpenAI access. |
-| **Credentials** | Select an existing API key credential or create a new one. The API key is stored securely as a Kubernetes secret. |
-| **Models** | Model identifiers to make available. For `OpenAI Compatible` providers, each model can optionally have its own custom endpoint URL. |
+| Field           | Description                                                                                                                                                                          |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Name**        | A name for the model provider (must be unique and comply with Kubernetes naming conventions).                                                                                        |
+| **Provider**    | The model provider — `OpenAI` for direct OpenAI API access, or `OpenAI Compatible` for any service that implements the OpenAI API specification (e.g., Azure OpenAI, LiteLLM, vLLM). |
+| **Base URL**    | The API endpoint URL. Required for `OpenAI Compatible` providers; leave empty for direct OpenAI access.                                                                              |
+| **Credentials** | Select an existing API key credential or create a new one. The API key is stored securely as a Kubernetes secret.                                                                    |
+| **Models**      | Model identifiers to make available. For `OpenAI Compatible` providers, each model can optionally have its own custom endpoint URL.                                                  |
 
 ![Add AI Model](images/add-model-provider.png)
 

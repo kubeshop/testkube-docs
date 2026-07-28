@@ -1,6 +1,6 @@
-# Test Workflows CLI Commands 
+# Test Workflows CLI Commands
 
-Test Workflows can be created and managed either through the [Testkube CLI](/articles/cli) or from the 
+Test Workflows can be created and managed either through the [Testkube CLI](/articles/cli) or from the
 [Dashboard](/articles/testkube-dashboard-workflows-overview).
 
 :::tip
@@ -12,6 +12,7 @@ Workflows as CRDs, which will then be synced to the Control Plane:
 ```shell
 kubectl apply -f EXAMPLE_FILE.yaml
 ```
+
 :::
 
 ## Create
@@ -26,6 +27,7 @@ for your existing tests using in your Git Repositories.
 :::
 
 ## Get
+
 The Test Workflow details can be displayed using `testkube get testworkflow` command using the Test Workflow name:
 
 ```shell
@@ -33,6 +35,7 @@ testkube get testworkflow TEST_WORKFLOW_NAME
 ```
 
 ### Filtering by Labels
+
 Test Workflows can also be filtered using labels with `--label`:
 
 ```shell
@@ -40,26 +43,27 @@ testkube get testworkflow --label example=label
 ```
 
 ## Run
+
 The Test Workflow can be run using the `testkube run testworkflow` command using Test Workflow name:
 
 ```shell
 testkube run testworkflow TEST_WORKFLOW_NAME
 ```
 
-This will start the Workflow execution asynchronously. 
+This will start the Workflow execution asynchronously.
 
-If you instead want to follow the execution and see its log output as it runs, you can add the `-f` option: 
+If you instead want to follow the execution and see its log output as it runs, you can add the `-f` option:
 
 ```shell
 testkube run testworkflow TEST_WORKFLOW_NAME -f
 ```
 
 :::tip
-With the introduction of [Runner Agents](/articles/agents-overview#runner-agents) it is possible to add a 
+With the introduction of [Runner Agents](/articles/agents-overview#runner-agents) it is possible to add a
 `--target` argument to specify on which Runner a Workflow should be run - [Read More](/articles/test-workflows-running#runner-agent-targeting).
 :::
 
-## ReRun 
+## ReRun
 
 A previous Test Workflow execution can be rerun using the `testkube rerun twe` command providing Test Workflow execution id:
 
@@ -68,7 +72,7 @@ testkube rerun twe EXECUTION_ID
 ```
 
 :::note
-If the previous execution explicitly targeted a Runner that is no longer available, the execution will be queued 
+If the previous execution explicitly targeted a Runner that is no longer available, the execution will be queued
 until a corresponding Runner is available - [Read More](/articles/test-workflows-running#queuing-of-workflow-executions).
 :::
 
@@ -145,6 +149,7 @@ Status:
 ```
 
 ## Delete
+
 The Test Workflow can be deleted using the `testkube delete testworkflow` command using the Test Workflow name:
 
 ```shell

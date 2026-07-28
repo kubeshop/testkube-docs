@@ -28,7 +28,7 @@ testkube upgrade
 
 ## Uninstalling Testkube
 
-You can follow one of the two procedures below to uninstall Testkube. You might need to repeat this process in case you deployed the 
+You can follow one of the two procedures below to uninstall Testkube. You might need to repeat this process in case you deployed the
 control plane and one or more agents in different clusters or namespaces.
 
 ### Uninstalling with the Testkube CLI
@@ -39,7 +39,7 @@ You can use the CLI to uninstall Testkube:
 testkube purge
 ```
 
-If you installed testkube in another namespace than the default `testkube` namespace, make sure to pass that namespace as 
+If you installed testkube in another namespace than the default `testkube` namespace, make sure to pass that namespace as
 an argument to the `purge` command. Learn more [here](https://docs.testkube.io/cli/testkube-purge) or execute `testkube purge --help`.
 
 ```go
@@ -55,10 +55,12 @@ helm uninstall testkube
 ```
 
 :::tip
+
 ### Give us Feedback please!
 
-If you're uninstalling Testkube we’re really sad to see you go. Did Testkube not meet your expectations? We’re keen on feedback, please feel free 
+If you're uninstalling Testkube we’re really sad to see you go. Did Testkube not meet your expectations? We’re keen on feedback, please feel free
 to [share your thoughts][contact] and we will look into making Testkube better for everyone - Thank you!
 
 [contact]: https://testkubeworkspace.slack.com/ssb/redirect#/shared-invite/email
+
 :::

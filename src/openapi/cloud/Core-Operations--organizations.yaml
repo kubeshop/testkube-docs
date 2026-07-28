@@ -16,12 +16,12 @@ paths:
       description: List organizations
       operationId: listOrganizations
       parameters:
-        - $ref: './components.yaml#/components/parameters/Limit'
+        - $ref: "./components.yaml#/components/parameters/Limit"
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/Organizations'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        "200":
+          $ref: "./components.yaml#/components/responses/Organizations"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
       security:
         - BearerAuth: []
     post:
@@ -29,16 +29,16 @@ paths:
       description: Create organization
       operationId: createOrganization
       requestBody:
-        $ref: './components.yaml#/components/requestBodies/Organization'
+        $ref: "./components.yaml#/components/requestBodies/Organization"
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/Organization'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '429':
-          $ref: './components.yaml#/components/responses/TooManyRequests'
+        "200":
+          $ref: "./components.yaml#/components/responses/Organization"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "429":
+          $ref: "./components.yaml#/components/responses/TooManyRequests"
       security:
         - BearerAuth: []
   /organizations/{id}:
@@ -47,16 +47,16 @@ paths:
       description: Get organization by ID
       operationId: getOrganization
       responses:
-        '200':
+        "200":
           description: get organization response body
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/Organization'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+                $ref: "./components.yaml#/components/schemas/Organization"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     delete:
@@ -64,10 +64,10 @@ paths:
       description: Deletes organization
       operationId: deleteOrganization
       responses:
-        '204':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        "204":
+          $ref: "./components.yaml#/components/responses/NoContent"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
       security:
         - BearerAuth: []
     patch:
@@ -75,15 +75,15 @@ paths:
       description: Update organization with given request body
       operationId: updateOrganization
       requestBody:
-        $ref: './components.yaml#/components/requestBodies/Organization'
+        $ref: "./components.yaml#/components/requestBodies/Organization"
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/Organization'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
+        "200":
+          $ref: "./components.yaml#/components/responses/Organization"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: "./components.yaml#/components/parameters/ID"

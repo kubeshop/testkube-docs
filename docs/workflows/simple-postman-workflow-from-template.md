@@ -12,13 +12,13 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-      - test/postman/postman-executor-smoke.postman_collection.json
+        - test/postman/postman-executor-smoke.postman_collection.json
   container:
     workingDir: /data/repo/test/postman
   steps:
-  - name: Run from
-    template:
-      name: official/postman/v1
-      config:
-        run: "newman run postman-executor-smoke.postman_collection.json --env-var TESTKUBE_POSTMAN_PARAM=TESTKUBE_POSTMAN_PARAM_value"
+    - name: Run from
+      template:
+        name: official/postman/v1
+        config:
+          run: "newman run postman-executor-smoke.postman_collection.json --env-var TESTKUBE_POSTMAN_PARAM=TESTKUBE_POSTMAN_PARAM_value"
 ```

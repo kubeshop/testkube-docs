@@ -12,18 +12,18 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-      - test/artillery/artillery-smoke-test.yaml
+        - test/artillery/artillery-smoke-test.yaml
   container:
     workingDir: /data/repo/test/artillery
   steps:
-  - name: Run Artillery tests
-    run:
-      image: artilleryio/artillery:2.0.9
-      shell: |
-        mkdir -p /data/artifacts
-        /home/node/artillery/bin/run run artillery-smoke-test.yaml -o /data/artifacts/artillery-report.json
-    artifacts:
-      workingDir: /data/artifacts
-      paths:
-      - '*'
+    - name: Run Artillery tests
+      run:
+        image: artilleryio/artillery:2.0.9
+        shell: |
+          mkdir -p /data/artifacts
+          /home/node/artillery/bin/run run artillery-smoke-test.yaml -o /data/artifacts/artillery-report.json
+      artifacts:
+        workingDir: /data/artifacts
+        paths:
+          - "*"
 ```

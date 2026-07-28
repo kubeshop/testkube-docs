@@ -22,7 +22,7 @@ spec:
   job:
     labels:
       some-label: some-value
-      variadic-label: '{{ execution.id }}'
+      variadic-label: "{{ execution.id }}"
     annotations:
       example.io/some-annotation: some-text
 ```
@@ -50,7 +50,7 @@ spec:
 ```
 
 :::tip
-Check out [Ephemeral Namespaces](/articles/ephemeral-environments) for an example of how to use 
+Check out [Ephemeral Namespaces](/articles/ephemeral-environments) for an example of how to use
 the `namespace` property in an ephemeral environment scenario.
 :::
 
@@ -67,7 +67,7 @@ spec:
   pod:
     labels:
       some-label: some-value
-      variadic-label: '{{ execution.id }}'
+      variadic-label: "{{ execution.id }}"
     annotations:
       example.io/some-annotation: some-text
 ```
@@ -121,9 +121,9 @@ spec:
 
 With this setting:
 
-* explicit `pod.securityContext.fsGroup` still wins
-* Testkube stops inferring pod `fsGroup` from image metadata
-* Testkube stops injecting the fallback default `fsGroup: 1001`
+- explicit `pod.securityContext.fsGroup` still wins
+- Testkube stops inferring pod `fsGroup` from image metadata
+- Testkube stops injecting the fallback default `fsGroup: 1001`
 
 This is especially useful on OpenShift when the Security Context Constraints should assign the group automatically.
 
@@ -133,10 +133,10 @@ This is especially useful on OpenShift when the Security Context Constraints sho
 
 Testkube does **not** currently infer or default:
 
-* pod `securityContext.runAsUser`
-* pod `securityContext.runAsNonRoot`
-* container `securityContext.runAsUser`
-* container `securityContext.runAsNonRoot`
+- pod `securityContext.runAsUser`
+- pod `securityContext.runAsNonRoot`
+- container `securityContext.runAsUser`
+- container `securityContext.runAsNonRoot`
 
 For these fields, Testkube only passes through what you define explicitly in the workflow.
 
@@ -150,18 +150,18 @@ spec:
 
 If you do not set those fields:
 
-* Testkube does not synthesize values for them
-* the container image's own default `USER` may still apply at runtime
-* your cluster policy, such as OpenShift SCCs or other admission controls, may also inject or enforce them
+- Testkube does not synthesize values for them
+- the container image's own default `USER` may still apply at runtime
+- your cluster policy, such as OpenShift SCCs or other admission controls, may also inject or enforce them
 
 Testkube does inspect image metadata, but for this security-context path it only uses the numeric **group** portion of the image `USER` field when calculating `runAsGroup` / `fsGroup`.
 It does **not** take the image user ID and copy it into `runAsUser`.
 
 In other words:
 
-* image `USER 1001:1001` can influence `runAsGroup` / `fsGroup`
-* it does not cause Testkube to write `runAsUser: 1001`
-* static files or other workflow content are not used for security-context inference
+- image `USER 1001:1001` can influence `runAsGroup` / `fsGroup`
+- it does not cause Testkube to write `runAsUser: 1001`
+- static files or other workflow content are not used for security-context inference
 
 ### Examples
 
@@ -189,13 +189,13 @@ spec:
 ```yaml
 spec:
   steps:
-  - name: Run shards
-    parallel:
-      count: 4
-      pod:
-        disableFsGroupDefaulting: true
-      shell: |
-        echo "worker {{ index + 1 }}/{{ count }}"
+    - name: Run shards
+      parallel:
+        count: 4
+        pod:
+          disableFsGroupDefaulting: true
+        shell: |
+          echo "worker {{ index + 1 }}/{{ count }}"
 ```
 
 If you define both `spec.pod` and `steps[].parallel.pod`, the parallel step pod settings override the inherited root pod settings for those workers.
@@ -221,18 +221,18 @@ You can design Kubernetes' [**Affinity and anti-affinity**](https://kubernetes.i
 ```yaml
 pod:
   labels:
-    sync-execution: '{{ workflow.name }}-execution'
+    sync-execution: "{{ workflow.name }}-execution"
   affinity:
     # Ensure no other {{ workflow.name }} execution on same node
     podAntiAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
-      - topologyKey: kubernetes.io/hostname
-        labelSelector:
-          matchExpressions:
-          - key: sync-execution
-            operator: In
-            values:
-            - '{{ workflow.name }}-execution'
+        - topologyKey: kubernetes.io/hostname
+          labelSelector:
+            matchExpressions:
+              - key: sync-execution
+                operator: In
+                values:
+                  - "{{ workflow.name }}-execution"
 ```
 
 ### Example: Distribute Evenly Across Nodes
@@ -243,15 +243,15 @@ you may use [**Pod Topology Spread Constraints**](https://kubernetes.io/docs/con
 ```yaml
 pod:
   topologySpreadConstraints:
-  - maxSkew: 1
-    topologyKey: kubernetes.io/hostname
-    whenUnsatisfiable: ScheduleAnyway
-    labelSelector:
-      matchLabels:
-        # execution level - for distributing parallel workers of execution
-        distribute-evenly: '{{execution.id}}-worker'
-        # Test Workflow level - for distributing parallel executions
-        # distribute-evenly: '{{workflow.name}}-execution'
+    - maxSkew: 1
+      topologyKey: kubernetes.io/hostname
+      whenUnsatisfiable: ScheduleAnyway
+      labelSelector:
+        matchLabels:
+          # execution level - for distributing parallel workers of execution
+          distribute-evenly: "{{execution.id}}-worker"
+          # Test Workflow level - for distributing parallel executions
+          # distribute-evenly: '{{workflow.name}}-execution'
 ```
 
 ### Example: Mount Custom Volume
@@ -261,17 +261,17 @@ You can easily attach [**Volumes**](https://kubernetes.io/docs/concepts/storage/
 ```yaml
 pod:
   volumes:
-  - name: some-name
-    ephemeral:
-      volumeClaimTemplate:
-        storageClassName: standard
-        resources:
-          requests:
-            storage: 1Gi
+    - name: some-name
+      ephemeral:
+        volumeClaimTemplate:
+          storageClassName: standard
+          resources:
+            requests:
+              storage: 1Gi
 container:
   volumeMounts:
-  - name: some-name
-    mountPath: /mnt/some/name
+    - name: some-name
+      mountPath: /mnt/some/name
 ```
 
 ### Example: Use PersistentVolumeClaim
@@ -290,12 +290,12 @@ pvcs:
 
 pod:
   volumes:
-  - name: some-name
-    persistentVolumeClaim:
-      claimName: "{{ pvcs.someName.name }}"
+    - name: some-name
+      persistentVolumeClaim:
+        claimName: "{{ pvcs.someName.name }}"
 
 container:
   volumeMounts:
-  - name: some-name
-    mountPath: /mnt/some/name
+    - name: some-name
+      mountPath: /mnt/some/name
 ```

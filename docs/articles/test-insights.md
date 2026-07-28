@@ -33,8 +33,8 @@ These can be further filtered and segmented as described below.
 
 ## Granular Metrics
 
-Testkube stores tool-specific measurements as named time series data on top of the Workflow metrics outlined above. By default Testkube extracts and exposes granular metrics for 
-[individual Test Cases](/articles/functional-metrics-in-insights) and [Performance Tests](/articles/performance-metrics-in-insights), but you can provide Testkube with 
+Testkube stores tool-specific measurements as named time series data on top of the Workflow metrics outlined above. By default Testkube extracts and exposes granular metrics for
+[individual Test Cases](/articles/functional-metrics-in-insights) and [Performance Tests](/articles/performance-metrics-in-insights), but you can provide Testkube with
 any [Custom Metric](/articles/custom-metrics-in-insights) that you would like to track together with your test results.
 
 :::note
@@ -339,7 +339,7 @@ functional and operational metrics for the Workflow:
 
 ![Workflow Insights](images/workflow-insights.png)
 
-### Customizing 
+### Customizing
 
 Opening an analysis on this boart allows you to customize the anlaysis as outlined above but any changes must be saved to a separate Insights Board, as indicated by the notice on the top:
 

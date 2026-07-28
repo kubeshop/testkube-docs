@@ -1,6 +1,6 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-import SimpleRestAssured from "../../workflows/simple-restassured-workflow.md"
+import SimpleRestAssured from "../../workflows/simple-restassured-workflow.md";
 
 # Basic REST Assured Example
 
@@ -12,7 +12,7 @@ YAML of an existing or new test, just make sure to update the `name` and `namesp
 - The `spec.steps` property defines a single step that runs the `gradle --no-daemon` test command.
 - The `spec.steps[0].artifacts` property defines from where to upload junit and html reports.
 
-<SimpleRestAssured/>
+<SimpleRestAssured />
 
 After execution, you can see the output from the test executions under the executions panel tabs:
 
@@ -21,7 +21,7 @@ After execution, you can see the output from the test executions under the execu
 
     The log output from the REST Assured execution:
 
-   ![REST Assured Log Output](images/basic-rest-assured-log-output.png)
+![REST Assured Log Output](images/basic-rest-assured-log-output.png)
 
   </TabItem>
   <TabItem value="junit" label="JUnit Report" default>
@@ -47,8 +47,6 @@ After execution, you can see the output from the test executions under the execu
 
   </TabItem>
 </Tabs>
-
-
 
 :::tip
 Read more about running REST Assured Tests with Testkube at https://testkube.io/learn/api-testing-using-restassured-and-testkube

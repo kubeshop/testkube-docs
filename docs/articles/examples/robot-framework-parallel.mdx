@@ -1,14 +1,14 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-import ParallelRobotFramework from "../../workflows/parallel-robot-framework-workflow.md"
+import ParallelRobotFramework from "../../workflows/parallel-robot-framework-workflow.md";
 
 # Parallelized Robot Framework Example
 
-import RequiresCommercialWorkflows from "../_commercial-workflows-note.mdx"
+import RequiresCommercialWorkflows from "../_commercial-workflows-note.mdx";
 
-<RequiresCommercialWorkflows/>
+<RequiresCommercialWorkflows />
 
-Below is a simple workflow for executing a Robot Framework test on three browsers running 
+Below is a simple workflow for executing a Robot Framework test on three browsers running
 in parallel instead of sequentially. You can paste this directly into the YAML of an existing or new test, just make
 sure to update the `name` and `namespace` for your environment if needed.
 
@@ -18,7 +18,7 @@ sure to update the `name` and `namespace` for your environment if needed.
 - The `spec.steps.[0].parallel.matrix` defines a browser property with values for each browser
 - The `spec.steps.[0].parallel.steps.[0].shell` property runs the robot test for a specific browser
 
-<ParallelRobotFramework/>
+<ParallelRobotFramework />
 
 After execution, you can see the output from the test executions under the executions panel tabs:
 
@@ -46,4 +46,3 @@ Clicking the HTML report opens it in your browser:
 
 </TabItem>
 </Tabs>
-

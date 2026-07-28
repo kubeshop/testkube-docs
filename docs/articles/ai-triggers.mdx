@@ -3,7 +3,7 @@
 AI Agent Triggers allow you to automatically run AI agents in response to workflow execution events — for example,
 triggering failure analysis when a test fails, or running a release readiness check when all tests pass.
 
-Triggers turn AI agents from interactive chat assistants into **automated pipeline components** that react to 
+Triggers turn AI agents from interactive chat assistants into **automated pipeline components** that react to
 events in your testing infrastructure without human intervention.
 
 ## How Triggers Work
@@ -25,24 +25,23 @@ Navigate to **Integrations → AI Triggers** in the Testkube Dashboard and click
 
 ![AI Triggers](images/create-ai-trigger-step-1.png)
 
-
-| Field | Description | Required |
-|-------|-------------|----------|
-| **Name** | A unique name for the trigger (must be a valid Kubernetes resource name) | Yes |
-| **Trigger Events** | Which execution outcomes activate the trigger | Yes |
-| **Label Selector** | Filter which workflows can activate the trigger based on their labels | No |
-| **Trigger Mode** | When to fire: every match or only on state changes | Yes |
+| Field              | Description                                                              | Required |
+| ------------------ | ------------------------------------------------------------------------ | -------- |
+| **Name**           | A unique name for the trigger (must be a valid Kubernetes resource name) | Yes      |
+| **Trigger Events** | Which execution outcomes activate the trigger                            | Yes      |
+| **Label Selector** | Filter which workflows can activate the trigger based on their labels    | No       |
+| **Trigger Mode**   | When to fire: every match or only on state changes                       | Yes      |
 
 #### Trigger Events
 
 Select one or more events that should activate the trigger:
 
-| Event | Fires when |
-|-------|------------|
-| **Test Workflow Failed** | A workflow execution finishes with a `failed` status |
-| **Test Workflow Success** | A workflow execution finishes with a `passed` status |
-| **Test Workflow Aborted** | A workflow execution is aborted |
-| **Test Workflow Canceled** | A workflow execution is canceled |
+| Event                      | Fires when                                           |
+| -------------------------- | ---------------------------------------------------- |
+| **Test Workflow Failed**   | A workflow execution finishes with a `failed` status |
+| **Test Workflow Success**  | A workflow execution finishes with a `passed` status |
+| **Test Workflow Aborted**  | A workflow execution is aborted                      |
+| **Test Workflow Canceled** | A workflow execution is canceled                     |
 
 :::tip
 The most common setup is triggering on **Test Workflow Failed** to automatically analyze failures.
@@ -59,15 +58,16 @@ selector will fire the trigger.
 - Multiple labels are combined with AND logic — all must match
 
 **Examples:**
+
 - `suite=critical` — only trigger for workflows labeled with `suite=critical`
 - `team=backend, type=api` — only trigger for backend team API test workflows
-- *(empty)* — trigger for all workflows
+- _(empty)_ — trigger for all workflows
 
 #### Trigger Mode
 
-| Mode | Behavior |
-|------|----------|
-| **Every match** | Fires every time a matching event occurs. Use this when you want analysis on every failure regardless of history. |
+| Mode                | Behavior                                                                                                                                                                                                                                                             |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Every match**     | Fires every time a matching event occurs. Use this when you want analysis on every failure regardless of history.                                                                                                                                                    |
 | **On state change** | Fires only when the execution status differs from the previous execution of the same workflow. For example, if a workflow goes from passing to failing, or from failing to passing. Use this to avoid repeated triggers for workflows that are consistently failing. |
 
 :::note
@@ -75,41 +75,39 @@ selector will fire the trigger.
 of the same workflow. The first execution of a workflow is always considered a state change.
 :::
 
-
 ### Step 2 - Agent, Prompt Template & API Token
 
 ![AI Triggers](images/create-ai-trigger-step-2.png)
 
-| Field | Description | Required |
-|-------|-------------|----------|
-| **Name** | A unique name for the trigger (must be a valid Kubernetes resource name) | Yes |
-| **AI Agent** | The AI agent to run when the trigger fires | Yes |
-| **API Token** | The API token to use for authentication when the trigger fires | Yes |
-| **Prompt Template** | Instructions sent to the agent, with template variables for execution context | No |
+| Field               | Description                                                                   | Required |
+| ------------------- | ----------------------------------------------------------------------------- | -------- |
+| **Name**            | A unique name for the trigger (must be a valid Kubernetes resource name)      | Yes      |
+| **AI Agent**        | The AI agent to run when the trigger fires                                    | Yes      |
+| **API Token**       | The API token to use for authentication when the trigger fires                | Yes      |
+| **Prompt Template** | Instructions sent to the agent, with template variables for execution context | No       |
 
-#### Trigger API Tokens 
+#### Trigger API Tokens
 
 AI Agent Triggers require an API token to authenticate the automatically created sessions. When creating a trigger,
 Testkube generates a dedicated API token. This token is used internally to start the AI agent session
 on behalf of the trigger. You can also use an existing API token by selecting it from the dropdown.
 
 :::warning
-If the API token associated with a trigger is deleted or expires, the trigger will stop firing. 
+If the API token associated with a trigger is deleted or expires, the trigger will stop firing.
 Check the trigger's API token configuration if sessions are not being created as expected.
 :::
-
 
 #### Prompt Template
 
 The prompt template defines the instructions sent to the AI agent when the trigger fires. You can use
 Go template variables to include execution context:
 
-| Variable | Description | Example value |
-|----------|-------------|---------------|
-| `{{.WorkflowName}}` | Name of the workflow that was executed | `my-api-tests` |
-| `{{.ExecutionName}}` | Name of the specific execution | `my-api-tests-42` |
-| `{{.ExecutionID}}` | Unique ID of the execution | `6721a3b2...` |
-| `{{.Status}}` | Final status of the execution | `failed` |
+| Variable             | Description                            | Example value     |
+| -------------------- | -------------------------------------- | ----------------- |
+| `{{.WorkflowName}}`  | Name of the workflow that was executed | `my-api-tests`    |
+| `{{.ExecutionName}}` | Name of the specific execution         | `my-api-tests-42` |
+| `{{.ExecutionID}}`   | Unique ID of the execution             | `6721a3b2...`     |
+| `{{.Status}}`        | Final status of the execution          | `failed`          |
 
 **Default template** (used when no custom template is provided):
 
@@ -141,7 +139,7 @@ This example sets up a trigger that automatically runs the **Troubleshoot** agen
    - **Trigger Mode**: Every match
    - **Prompt Template**:
      ```
-     A critical test workflow has failed. Analyze execution {{.ExecutionID}} of {{.WorkflowName}} 
+     A critical test workflow has failed. Analyze execution {{.ExecutionID}} of {{.WorkflowName}}
      and provide a root cause analysis with suggested fixes.
      ```
 3. Click **Create Trigger**
@@ -157,7 +155,7 @@ workflow starts failing:
 1. **Name**: `detect-new-failures`
 2. **AI Agent**: Select your preferred analysis agent
 3. **Trigger Events**: Test Workflow Failed
-4. **Label Selector**: *(leave empty for all workflows)*
+4. **Label Selector**: _(leave empty for all workflows)_
 5. **Trigger Mode**: On state change
 6. **Prompt Template**:
    ```
@@ -191,11 +189,11 @@ metadata:
     schedule: daily
 spec:
   events:
-  - cronjob:
-      cron: "0 8 * * *"
+    - cronjob:
+        cron: "0 8 * * *"
   steps:
-  - name: noop
-    shell: 'echo "AI agent scheduler tick"'
+    - name: noop
+      shell: 'echo "AI agent scheduler tick"'
 ```
 
 :::tip
@@ -255,12 +253,12 @@ metadata:
     schedule: weekly
 spec:
   events:
-  - cronjob:
-      cron: "0 9 * * 1"
-      timezone: America/New_York
+    - cronjob:
+        cron: "0 9 * * 1"
+        timezone: America/New_York
   steps:
-  - name: noop
-    shell: 'echo "Weekly AI agent scheduler tick"'
+    - name: noop
+      shell: 'echo "Weekly AI agent scheduler tick"'
 ```
 
 **Trigger configuration:**
@@ -283,6 +281,7 @@ spec:
 ### Viewing Triggers
 
 All triggers are listed at **Integrations → AI Triggers**. Each trigger card shows:
+
 - The trigger name and enabled/disabled status
 - The linked AI agent
 - The configured events (Failed, Success, Aborted, Canceled)
@@ -308,7 +307,7 @@ Testkube generates a dedicated API token. This token is used internally to start
 on behalf of the trigger.
 
 :::warning
-If the API token associated with a trigger is deleted or expires, the trigger will stop firing. 
+If the API token associated with a trigger is deleted or expires, the trigger will stop firing.
 Check the trigger's API token configuration if sessions are not being created as expected.
 :::
 

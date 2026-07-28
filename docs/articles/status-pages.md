@@ -12,9 +12,9 @@ Testkube Status Pages is a feature within the Testkube software that allows you 
 
 ### Key Benefits
 
-* Transparency: Keep all stakeholders informed about the status of your software.
-* Efficiency: Quickly detect and respond to issues, minimizing downtime.
-* Customization: Tailor your status page to match your brand and information needs.
+- Transparency: Keep all stakeholders informed about the status of your software.
+- Efficiency: Quickly detect and respond to issues, minimizing downtime.
+- Customization: Tailor your status page to match your brand and information needs.
 
 ## Getting Started
 
@@ -111,26 +111,26 @@ The Status Page rendered is unique for each Testkube environment. You can only h
 
 Below that you will see a list of the services with multiple ways to represent their state. On the top left is the name of the service. Top right is current status - this is calculated based on the last bar of the chart below. The possible values are:
 
-* Operational (green): All tests passed in the last instance of the configured time scale.
-* Partial Outage (orange): At least one test failed and one test succeeded in the last instance of the configured time scale.
-* Major Outage (red): All tests failed in the last instance of the configured time scale.
-* Unknown (grey): No data at all or some tests were not executed in the last instance of the configured time scale.
+- Operational (green): All tests passed in the last instance of the configured time scale.
+- Partial Outage (orange): At least one test failed and one test succeeded in the last instance of the configured time scale.
+- Major Outage (red): All tests failed in the last instance of the configured time scale.
+- Unknown (grey): No data at all or some tests were not executed in the last instance of the configured time scale.
 
 Another value is Operability. This is the percentage of successful test executions compared to all test executions in the timeline covered. Tests aborted or still running are not considered successful tests.
 
 Below this, there is a color-coded visualization of the test execution results. The time covered by each bar is defined by the configured time scale. On hover you will see each bar and the test execution results in that time frame. The end date for this chart is the current date. The start date is either three months or three days before the current date, depending on the time scale. The time scale is not configurable in this view, only in the management view. The colors are similar to the service status colors:
 
-* Red: All tests failed in the time range of the bar.
-* Orange: At least one test failed and one test passed in the time range of the bar.
-* Green: All tests succeeded in the time range of the bar.
-* Grey: At least one of the tests configured in the service didn't run in the time range of the bar.
+- Red: All tests failed in the time range of the bar.
+- Orange: At least one test failed and one test passed in the time range of the bar.
+- Green: All tests succeeded in the time range of the bar.
+- Grey: At least one of the tests configured in the service didn't run in the time range of the bar.
 
 On hover, you will see exactly which tests failed, passed or did not run, with the same colors:
 
-* Red: All executions failed.
-* Orange: At least one execution failed and one execution succeeded.
-* Green: All executions succeeded.
-* Grey: No executions.
+- Red: All executions failed.
+- Orange: At least one execution failed and one execution succeeded.
+- Green: All executions succeeded.
+- Grey: No executions.
 
 Make sure the names of the tests are easily understood by your users, as they will be public once you publish this page. To ensure that the status of your service will be always reflected, set up scheduled runs of your tests.
 
@@ -150,11 +150,11 @@ On the top of each individual incident there is the start date. The incidents ar
 
 The title of the incident will be colored based on the configured severity:
 
-* critical: red
-* major: red
-* minor: orange
-* low: yellow
-* info: white
+- critical: red
+- major: red
+- minor: orange
+- low: yellow
+- info: white
 
 The interpretation of the severity is up to the decision of the team, just make sure everyone is well-informed and has agreed to it.
 

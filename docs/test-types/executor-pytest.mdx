@@ -1,4 +1,4 @@
-import LegacyWarning from '../articles/_legacy-warning.mdx';
+import LegacyWarning from "../articles/_legacy-warning.mdx";
 
 # Pytest
 
@@ -8,6 +8,7 @@ This is a simple python based executor for pytest framework https://docs.pytest.
 You can run pytest with Testkube to use it in your automated tests for your Kubernetes clusters.
 
 ## Usage
+
 Before starting, please switch your current folder to /contrib/container/pytest
 
 ### Step 1 - Add the executor to Testkube.
@@ -19,7 +20,7 @@ Before starting, please switch your current folder to /contrib/container/pytest
 ### Step 2 - Build the executor Docker image.
 
 Current Docker image is based on Python 3.8.17 and a few basic modules, like pipenv, pytest and requests.
-Feel free to change the python version, install missing dependencies, etc. Docker image should be placed in your 
+Feel free to change the python version, install missing dependencies, etc. Docker image should be placed in your
 favourite docker image registry, like local Docker image registry for Minikube, Kind, etc or Cloud provider one.
 
 ```sh
@@ -28,7 +29,7 @@ docker build -t pytest-executor -f Dockerfile
 
 ### Step 3 - Create a test.
 
-```sh 
+```sh
 kubectl apply -f pytest_test.yaml
 ```
 

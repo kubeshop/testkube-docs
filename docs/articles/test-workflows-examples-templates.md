@@ -1,6 +1,6 @@
 # Test Workflows Examples - Templates
 
-*It’s common to expose a snippet of configuration that could be reused across other TestWorkflows.*
+_It’s common to expose a snippet of configuration that could be reused across other TestWorkflows._
 
 ## TestWorkflowTemplate
 
@@ -24,10 +24,10 @@ metadata:
   name: close-istio
 spec:
   after:
-  - name: 'Close Istio sidecar'
-    condition: always
-    shell: 'touch /pod_control/job_finished'
-```    
+    - name: "Close Istio sidecar"
+      condition: always
+      shell: "touch /pod_control/job_finished"
+```
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -36,10 +36,10 @@ metadata:
   name: overview--example-15
 spec:
   use:
-  - name: 'close-istio'
+    - name: "close-istio"
 
   steps:
-  - shell: 'tree /usr/bin'
+    - shell: "tree /usr/bin"
 ```
 
 ## Configuration
@@ -60,15 +60,15 @@ spec:
   config:
     version:
       type: string
-      default: '1.32.3'
+      default: "1.32.3"
     workers:
       type: integer
       default: 2
 
   steps:
-  - run:
-      image: 'mcr.microsoft.com/playwright:v{{ config.version }}'
-      shell: 'npm ci && npx playwright test --workers {{ config.workers }}'
+    - run:
+        image: "mcr.microsoft.com/playwright:v{{ config.version }}"
+        shell: "npm ci && npx playwright test --workers {{ config.workers }}"
 ```
 
 ```yaml
@@ -79,29 +79,29 @@ metadata:
 spec:
   content:
     git:
-      uri: 'https://github.com/kubeshop/testkube'
+      uri: "https://github.com/kubeshop/testkube"
       paths:
-      - 'test/playwright/playwright-project'
+        - "test/playwright/playwright-project"
 
   container:
-    workingDir: '/data/repo/test/playwright/playwright-project'
+    workingDir: "/data/repo/test/playwright/playwright-project"
 
   steps:
-  - template:
-      name: 'playwright'
-      config:
-        version: '1.33.3'
+    - template:
+        name: "playwright"
+        config:
+          version: "1.33.3"
 ```
 
 ## Isolation (Expansion)
 
-*There are 3 ways to include the TestWorkflowTemplate, that differ with the level of isolation (or rather - expansion).*
+_There are 3 ways to include the TestWorkflowTemplate, that differ with the level of isolation (or rather - expansion)._
 
 ### Top Level - Use
 
 A template can be included with the top-level use (array) clause - this way it will be included in the TestWorkflow, and all its defaults will be available in the whole TestWorkflow.
 
-*This is the only place where constructs like Job and Pod setup can be specified.*
+_This is the only place where constructs like Job and Pod setup can be specified._
 
 ### Step Level - Use
 
@@ -118,20 +118,18 @@ metadata:
   name: overview--example-17
 spec:
   use:
-  - name: 'close-istio'
-  - name: 'append-serviceaccount'
+    - name: "close-istio"
+    - name: "append-serviceaccount"
 
   steps:
-  - use:
-    - name: 'obtain-aws-credentials-envs'
-    shell: 'echo $AWS_ACCESS_KEY_ID'
+    - use:
+        - name: "obtain-aws-credentials-envs"
+      shell: "echo $AWS_ACCESS_KEY_ID"
 
-  - content:
-      git:
-        uri: 'https://github.com/kubeshop/testkube'
-    workingDir: '/data/repo'
-    template:
-    - name: 'cypress'
-```    
-
-
+    - content:
+        git:
+          uri: "https://github.com/kubeshop/testkube"
+      workingDir: "/data/repo"
+      template:
+        - name: "cypress"
+```

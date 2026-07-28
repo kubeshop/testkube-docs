@@ -56,16 +56,15 @@ Example with inlined attachments - images will be shown in a small hover-popup:
 The JUnit Report will automatically expand the first failed test - to make it easy to navigate your failed tests for troubleshooting.
 :::
 
-
 ### 3. Functional Metrics in Test Insights
 
-The [Test Insights](/articles/test-insights) functionality allows you to analyse JUnit Case results over time, including filtering and segmenting 
+The [Test Insights](/articles/test-insights) functionality allows you to analyse JUnit Case results over time, including filtering and segmenting
 by Test Case and Test Suite, for example:
 
 ![JUnit results in Test Insights](images/test-insights-junit.png)
 
-This shows the JUnit Case count per day over the last month, broken down by test status. The table at the bottom 
-shows the individual numbers for each day, clicking on one of these numbers will list the corresponding Workflow 
+This shows the JUnit Case count per day over the last month, broken down by test status. The table at the bottom
+shows the individual numbers for each day, clicking on one of these numbers will list the corresponding Workflow
 executions, allowing you to further drill down into each segment - [Read More](/articles/functional-metrics-in-insights).
 
 ## Benefits of JUnit Report Visualization
@@ -77,7 +76,7 @@ The enhanced visualization of JUnit reports in Testkube offers several advantage
 3. **Efficient Troubleshooting**: Quickly identify and focus on failed tests or error messages.
 4. **Improved Workflow**: Seamlessly integrate JUnit report analysis into your testing and development process.
 
-By leveraging these visualization features, teams can more effectively monitor test outcomes, identify issues, 
+By leveraging these visualization features, teams can more effectively monitor test outcomes, identify issues,
 and maintain the quality of their software throughout the development lifecycle.
 
 ## Creating JUnit Reports
@@ -257,7 +256,7 @@ Read more in the [mocha-junit-reporter docs](https://www.npmjs.com/package/mocha
 ## Conclusion
 
 Testkube's JUnit report processing and visualization features provide a powerful toolset for managing and analyzing test
-results. By automatically extracting data from JUnit XML reports and presenting it in both summary and detailed views, 
+results. By automatically extracting data from JUnit XML reports and presenting it in both summary and detailed views,
 Testkube enables teams to gain valuable insights into their test workflows quickly and efficiently.
 
 :::tip

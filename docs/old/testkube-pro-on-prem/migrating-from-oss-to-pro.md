@@ -15,19 +15,19 @@ At this point there are two options to deploy Testkube Pro On-Prem:
 
 **Multi-cluster Installation:**
 
-- *Description:* This option enables the connection of multiple Agents from different Kubernetes clusters. It allows you to consolidate all tests in a unified Dashboard, organized by Environments.
+- _Description:_ This option enables the connection of multiple Agents from different Kubernetes clusters. It allows you to consolidate all tests in a unified Dashboard, organized by Environments.
 
-- *Requirements:* A domain name and certificates are necessary as the installation exposes Testkube endpoints to the outside world.
+- _Requirements:_ A domain name and certificates are necessary as the installation exposes Testkube endpoints to the outside world.
 
-- *Benefit:* Offers a comprehensive view across clusters and environments.
+- _Benefit:_ Offers a comprehensive view across clusters and environments.
 
 **One-cluster Installation:**
 
-- *Description:* With this option, you can connect only one Agent (e.g. your existing Testkube Core OSS) within the same Kubernetes cluster. Access to the Dashboard is achieved through port-forwarding to localhost.
+- _Description:_ With this option, you can connect only one Agent (e.g. your existing Testkube Core OSS) within the same Kubernetes cluster. Access to the Dashboard is achieved through port-forwarding to localhost.
 
-- *Requirements:* No domain names or certificates are required for this approach.
+- _Requirements:_ No domain names or certificates are required for this approach.
 
-- *Benefit:* Simplified setup suitable for a single-cluster environment without the need for external exposure.
+- _Benefit:_ Simplified setup suitable for a single-cluster environment without the need for external exposure.
 
 ## Multi-cluster Installation
 
@@ -44,6 +44,7 @@ Testkube Pro On-Prem requires the NGINX Controller and it is the only supported 
 Create a `values.yaml` with your domain and certificate configuration. Additionally include a secretRef to the secret with the license that was created earlier:
 
 `values.yaml`
+
 ```yaml
 global:
   domain: you-domain.it.com
@@ -52,7 +53,6 @@ global:
   certificateProvider: "cert-manager"
   certManager:
     issuerRef: letsencrypt
-
 ```
 
 ### Auth
@@ -60,18 +60,18 @@ global:
 Testkube Pro On-Prem utilizes [Dex](https://dexidp.io/) for authentication and authorization. For detailed instruction on configuring Dex, please refer to the [Identity Provider](https://docs.testkube.io/testkube-pro-on-prem/articles/auth) document. You may start with creating static users if you do not have any Identity Provider. Here is an example of usage:
 
 `values.yaml`
+
 ```yaml
 dex:
- configTemplate:
-   additionalConfig: |
-     enablePasswordDB: true
-     staticPasswords:
-       - email: "admin@example.com"
-         # bcrypt hash of the string "password": $(echo password | htpasswd -BinC 10 admin | cut -d: -f2)
-         hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W"
-         username: "admin"
-         userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"
-
+  configTemplate:
+    additionalConfig: |
+      enablePasswordDB: true
+      staticPasswords:
+        - email: "admin@example.com"
+          # bcrypt hash of the string "password": $(echo password | htpasswd -BinC 10 admin | cut -d: -f2)
+          hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W"
+          username: "admin"
+          userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"
 ```
 
 ### Deployment

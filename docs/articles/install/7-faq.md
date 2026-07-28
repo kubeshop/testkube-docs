@@ -2,13 +2,13 @@
 
 ## Can Testkube be deployed on OpenShift?
 
-Yes, OpenShift is supported - [Read More](/articles/install/standalone-agent#deploying-on-openshift). 
-You might need to tweak the configuration a bit to fit the security requirements. 
+Yes, OpenShift is supported - [Read More](/articles/install/standalone-agent#deploying-on-openshift).
+You might need to tweak the configuration a bit to fit the security requirements.
 Feel free to contact us on Slack if it does not work out so we can help.
 
 ## Can Testkube OSS be migrated to join a control plane?
 
-Yes, you can choose to get started with just the standalone agent. Once you are ready to use a control plane, 
+Yes, you can choose to get started with just the standalone agent. Once you are ready to use a control plane,
 you can join it with a control plane as described [here][migrate-oss].
 
 ## Do I have to have my own Kubernetes Cluster to evaluate Testkube
@@ -29,12 +29,12 @@ If that doesn't work for you please [get in touch](https://testkube.io/contact),
 
 ## Can I use Testkube to test applications or services that are not running in Kubernetes
 
-Yes, you can use Testkube to test any applications or components as long as the cluster the Testkube agent 
+Yes, you can use Testkube to test any applications or components as long as the cluster the Testkube agent
 is running in has network access to the applications or components to be tested.
 
 ## How do I expose Testkube to the Internet?
 
-To expose Testkube to the Internet, you will need to create an Ingress for both the Testkube API and the 
+To expose Testkube to the Internet, you will need to create an Ingress for both the Testkube API and the
 Testkube Dashboard. Check the installation instructions [here][install-ingress] for different configurations.
 
 ## Access the Service Under Test (SUT) Using Testkube

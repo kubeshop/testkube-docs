@@ -3,14 +3,14 @@ import TabItem from "@theme/TabItem";
 
 # Test Workflows - Parallel Steps
 
-import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx"
+import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx";
 
-<RequiresCommercialWorkflows/>
+<RequiresCommercialWorkflows />
 
 It is often desirable to spread the execution of a test across multiple nodes, for example, to generate extended load with
 a performance testing tool, or to speed up execution of a test by breaking it into smaller parts (i.e. sharding).
 
-Test Workflows have `parallel` steps, that allow you to distribute your test even dynamically, and among multiple cluster 
+Test Workflows have `parallel` steps, that allow you to distribute your test even dynamically, and among multiple cluster
 nodes, which can further be combined with [**matrix and sharding**](./test-workflows-matrix-and-sharding.mdx) to break
 down execution into multiple parallel steps.
 
@@ -21,19 +21,20 @@ To declare the parallel step, you need to specify the step with `parallel` claus
 ### Basic configuration
 
 It allows to provide:
-* similar properties as any other kind of step, i.e. `container`, `run`, `shell` or `steps`
-* general Test Workflow properties, like `job`, `pod` or `content`
-* [**matrix and sharding**](./test-workflows-matrix-and-sharding.mdx) properties
-* `parallelism` to define maximum number of instances to run at once
-* `description` that may provide human-readable information for each instance separately
+
+- similar properties as any other kind of step, i.e. `container`, `run`, `shell` or `steps`
+- general Test Workflow properties, like `job`, `pod` or `content`
+- [**matrix and sharding**](./test-workflows-matrix-and-sharding.mdx) properties
+- `parallelism` to define maximum number of instances to run at once
+- `description` that may provide human-readable information for each instance separately
 
 ### Fetching logs
 
 By default the logs for the parallel steps are saved. To disable them or make them conditional, you can use `logs` property.
 It takes an expression condition, so you can dynamically choose whether it should be saved or not. Often you will use:
 
-* `logs: never` to never store the logs
-* `logs: failed` to store logs only if the step has failed
+- `logs: never` to never store the logs
+- `logs: failed` to store logs only if the step has failed
 
 ![example-parallel-log.png](../img/example-parallel-log.png)
 
@@ -51,10 +52,10 @@ spec:
   pod:
     disableFsGroupDefaulting: true
   steps:
-  - name: Run tests
-    parallel:
-      count: 4
-      shell: npm test
+    - name: Run tests
+      parallel:
+        count: 4
+        shell: npm test
 ```
 
 Or, if you only want to change the worker pods:
@@ -62,12 +63,12 @@ Or, if you only want to change the worker pods:
 ```yaml
 spec:
   steps:
-  - name: Run tests
-    parallel:
-      count: 4
-      pod:
-        disableFsGroupDefaulting: true
-      shell: npm test
+    - name: Run tests
+      parallel:
+        count: 4
+        pod:
+          disableFsGroupDefaulting: true
+        shell: npm test
 ```
 
 See [Job and Pod Configuration](./test-workflows-job-and-pod.md#fsgroup-and-runasgroup-defaulting) for the full security-context defaulting rules.
@@ -80,8 +81,8 @@ Similarly to regular steps, you can configure things like `timeout` (`timeout: 3
 
 By default, all parallel workers run to completion regardless of individual failures. You can set `failFast: true` on a `parallel` step to abort remaining workers as soon as one fails.
 
-* When `failFast` is **not set** (or `false`), every worker runs to completion — failures are reported after all workers finish
-* When `failFast: true`, the first worker failure cancels all other running workers (marked as aborted) and skips any queued-but-not-started workers
+- When `failFast` is **not set** (or `false`), every worker runs to completion — failures are reported after all workers finish
+- When `failFast: true`, the first worker failure cancels all other running workers (marked as aborted) and skips any queued-but-not-started workers
 
 :::info
 
@@ -101,17 +102,17 @@ metadata:
   name: example-parallel-fail-fast
 spec:
   steps:
-  - name: Run tests
-    parallel:
-      count: 4
-      failFast: true
-      container:
-        image: alpine:latest
-      shell: |
-        if [ "{{ index }}" = "0" ]; then
-          sleep 2 && echo "Worker {{ index }}: failing" && exit 1
-        fi
-        echo "Worker {{ index }}: running" && sleep 30
+    - name: Run tests
+      parallel:
+        count: 4
+        failFast: true
+        container:
+          image: alpine:latest
+        shell: |
+          if [ "{{ index }}" = "0" ]; then
+            sleep 2 && echo "Worker {{ index }}: failing" && exit 1
+          fi
+          echo "Worker {{ index }}: running" && sleep 30
 ```
 
 </TabItem>
@@ -126,16 +127,16 @@ metadata:
   name: example-parallel-no-fail-fast
 spec:
   steps:
-  - name: Run tests
-    parallel:
-      count: 4
-      container:
-        image: alpine:latest
-      shell: |
-        if [ "{{ index }}" = "0" ]; then
-          echo "Worker {{ index }}: failing" && exit 1
-        fi
-        echo "Worker {{ index }}: passing" && sleep 5
+    - name: Run tests
+      parallel:
+        count: 4
+        container:
+          image: alpine:latest
+        shell: |
+          if [ "{{ index }}" = "0" ]; then
+            echo "Worker {{ index }}: failing" && exit 1
+          fi
+          echo "Worker {{ index }}: passing" && sleep 5
 ```
 
 </TabItem>
@@ -166,20 +167,20 @@ and then distribute it across the parallel steps.
 
 To do so, you can use `transfer` property. It takes list of files to transfer:
 
-* `{ from: "/data/repo/build" }` will copy the `/data/repo/build` directory from execution's Pod into `/data/repo/build` in the instance's Pod
-* `{ from: "/data/repo/build", to: "/out" }` will copy the `/data/repo/build` directory from execution's Pod into `/out` in the instance's Pod
-* `{ from: "/data/repo/build", to: "/out", "files": ["**/*.json"] }` will copy only JSON files from the `/data/repo/build` directory from execution's Pod into `/out` in the instance's Pod
+- `{ from: "/data/repo/build" }` will copy the `/data/repo/build` directory from execution's Pod into `/data/repo/build` in the instance's Pod
+- `{ from: "/data/repo/build", to: "/out" }` will copy the `/data/repo/build` directory from execution's Pod into `/out` in the instance's Pod
+- `{ from: "/data/repo/build", to: "/out", "files": ["**/*.json"] }` will copy only JSON files from the `/data/repo/build` directory from execution's Pod into `/out` in the instance's Pod
 
 #### Example
 
 The example below will:
 
-* Clone the Git repository (`content`)
-* Install the Node.js dependencies (`steps[0].shell`)
-* Run Playwright tests (`steps[1].parallel`)
-  * Specify 2 instances of that step (`steps[1].parallel.count`)
-  * Copy the `/data/repo` along with already installed `node_modules` (`steps[1].parallel.transfer`)
-  * Run the Playwright test with customized `--shard` parameter for each instance (`1/2` and `2/2` respectively, via `steps[1].parallel.shell`)
+- Clone the Git repository (`content`)
+- Install the Node.js dependencies (`steps[0].shell`)
+- Run Playwright tests (`steps[1].parallel`)
+  - Specify 2 instances of that step (`steps[1].parallel.count`)
+  - Copy the `/data/repo` along with already installed `node_modules` (`steps[1].parallel.transfer`)
+  - Run the Playwright test with customized `--shard` parameter for each instance (`1/2` and `2/2` respectively, via `steps[1].parallel.shell`)
 
 <Tabs>
 <TabItem value="yaml" label="YAML" default>
@@ -194,21 +195,21 @@ spec:
     git:
       uri: https://github.com/kubeshop/testkube
       paths:
-      - test/playwright/playwright-project
+        - test/playwright/playwright-project
   container:
     image: mcr.microsoft.com/playwright:v1.32.3-focal
     workingDir: /data/repo/test/playwright/playwright-project
 
   steps:
-  - name: Install dependencies
-    shell: 'npm ci'
+    - name: Install dependencies
+      shell: "npm ci"
 
-  - name: Run tests
-    parallel:
-      count: 2
-      transfer:
-      - from: /data/repo
-      shell: 'npx playwright test --shard {{ index + 1 }}/{{ count }}'
+    - name: Run tests
+      parallel:
+        count: 2
+        transfer:
+          - from: /data/repo
+        shell: "npx playwright test --shard {{ index + 1 }}/{{ count }}"
 ```
 
 </TabItem>
@@ -239,24 +240,24 @@ metadata:
   name: example-parallel-with-static-files
 spec:
   steps:
-  - parallel:
-      count: 2
-      content:
-        files:
-        - path: /k6.js
-          content: |
-            import http from 'k6/http';
-            export const options = {
-              thresholds: {
-                http_req_failed: ['rate<0.01'],
-              }
-            };
-            export default function () {
-              http.get('https://testkube.io/');
-            }
-      run:
-        image: grafana/k6:latest
-        shell: "k6 run /k6.js --iterations 100"
+    - parallel:
+        count: 2
+        content:
+          files:
+            - path: /k6.js
+              content: |
+                import http from 'k6/http';
+                export const options = {
+                  thresholds: {
+                    http_req_failed: ['rate<0.01'],
+                  }
+                };
+                export default function () {
+                  http.get('https://testkube.io/');
+                }
+        run:
+          image: grafana/k6:latest
+          shell: "k6 run /k6.js --iterations 100"
 ```
 
 ## Synchronising the parallel steps execution
@@ -279,25 +280,25 @@ metadata:
   name: example-parallel-with-static-files
 spec:
   steps:
-  - parallel:
-      count: 2
-      paused: true
-      content:
-        files:
-        - path: /k6.js
-          content: |
-            import http from 'k6/http';
-            export const options = {
-              thresholds: {
-                http_req_failed: ['rate<0.01'],
-              }
-            };
-            export default function () {
-              http.get('https://testkube.io/');
-            }
-      run:
-        image: grafana/k6:latest
-        shell: "k6 run /k6.js --iterations 100"
+    - parallel:
+        count: 2
+        paused: true
+        content:
+          files:
+            - path: /k6.js
+              content: |
+                import http from 'k6/http';
+                export const options = {
+                  thresholds: {
+                    http_req_failed: ['rate<0.01'],
+                  }
+                };
+                export default function () {
+                  http.get('https://testkube.io/');
+                }
+        run:
+          image: grafana/k6:latest
+          shell: "k6 run /k6.js --iterations 100"
 ```
 
 </TabItem>
@@ -330,29 +331,29 @@ spec:
     git:
       uri: https://github.com/kubeshop/testkube
       paths:
-      - test/playwright/playwright-project
+        - test/playwright/playwright-project
   container:
     image: mcr.microsoft.com/playwright:v1.32.3-focal
     workingDir: /data/repo/test/playwright/playwright-project
 
   steps:
-  - name: Install dependencies
-    shell: 'npm ci'
+    - name: Install dependencies
+      shell: "npm ci"
 
-  - name: Run tests
-    parallel:
-      count: 2
-      transfer:
-      - from: /data/repo
-      container:
-        env:
-        - name: PLAYWRIGHT_HTML_REPORT
-          value: /data/out/playwright-report
-      shell: 'npx playwright test --output /data/out --shard {{ index + 1 }}/{{ count }}'
-      artifacts:
-        workingDir: /data/out
-        paths:
-        - '**/*'
+    - name: Run tests
+      parallel:
+        count: 2
+        transfer:
+          - from: /data/repo
+        container:
+          env:
+            - name: PLAYWRIGHT_HTML_REPORT
+              value: /data/out/playwright-report
+        shell: "npx playwright test --output /data/out --shard {{ index + 1 }}/{{ count }}"
+        artifacts:
+          workingDir: /data/out
+          paths:
+            - "**/*"
 ```
 
 </TabItem>
@@ -388,34 +389,34 @@ spec:
     git:
       uri: https://github.com/kubeshop/testkube
       paths:
-      - test/playwright/playwright-project
+        - test/playwright/playwright-project
   container:
     image: mcr.microsoft.com/playwright:v1.32.3-focal
     workingDir: /data/repo/test/playwright/playwright-project
 
   steps:
-  - name: Install dependencies
-    shell: 'npm ci'
+    - name: Install dependencies
+      shell: "npm ci"
 
-  - name: Run tests
-    parallel:
-      count: 2
-      transfer:
-      - from: /data/repo
-      fetch:
-      - from: /data/out
-        to: /data/artifacts/instance-{{ index }}
-      container:
-        env:
-        - name: PLAYWRIGHT_HTML_REPORT
-          value: /data/out/playwright-report
-      shell: 'npx playwright test --output /data/out --shard {{ index + 1 }}/{{ count }}'
+    - name: Run tests
+      parallel:
+        count: 2
+        transfer:
+          - from: /data/repo
+        fetch:
+          - from: /data/out
+            to: /data/artifacts/instance-{{ index }}
+        container:
+          env:
+            - name: PLAYWRIGHT_HTML_REPORT
+              value: /data/out/playwright-report
+        shell: "npx playwright test --output /data/out --shard {{ index + 1 }}/{{ count }}"
 
-  - condition: always
-    artifacts:
-      workingDir: /data/artifacts
-      paths:
-      - '**/*'
+    - condition: always
+      artifacts:
+        workingDir: /data/artifacts
+        paths:
+          - "**/*"
 ```
 
 </TabItem>
@@ -450,15 +451,15 @@ Playwright provides nice toolset for sharding, which can be used easily with the
 
 The example below:
 
-* Load the Git repository with Playwright test (`content`)
-* Install the project dependencies (`steps[0].shell`)
-* Run the Playwright tests split to 2 shards (`steps[1].parallel`)
-  * Reserve 1 CPU and 1GB RAM for each shard (`steps[1].parallel.container.resources`)
-  * Copy the repository and `node_modules` inside (`steps[1].parallel.transfer`)
-  * Run Playwright test - with `blob` reporter, and with specific shard segment (`steps[1].parallel.shell`)
-  * Fetch the Blob reporter's data to corresponding directory on Execution's pod (`steps[1].parallel.fetch`)
-* Merge the reports using Playwright's tooling (`steps[2].shell`)
-* Save the merged report as an artifact (`steps[2].artifacts`)
+- Load the Git repository with Playwright test (`content`)
+- Install the project dependencies (`steps[0].shell`)
+- Run the Playwright tests split to 2 shards (`steps[1].parallel`)
+  - Reserve 1 CPU and 1GB RAM for each shard (`steps[1].parallel.container.resources`)
+  - Copy the repository and `node_modules` inside (`steps[1].parallel.transfer`)
+  - Run Playwright test - with `blob` reporter, and with specific shard segment (`steps[1].parallel.shell`)
+  - Fetch the Blob reporter's data to corresponding directory on Execution's pod (`steps[1].parallel.fetch`)
+- Merge the reports using Playwright's tooling (`steps[2].shell`)
+- Save the merged report as an artifact (`steps[2].artifacts`)
 
 <Tabs>
 <TabItem value="yaml" label="YAML" default>
@@ -473,37 +474,37 @@ spec:
     git:
       uri: https://github.com/kubeshop/testkube
       paths:
-      - test/playwright/playwright-project
+        - test/playwright/playwright-project
   container:
     image: mcr.microsoft.com/playwright:v1.38.0-focal
     workingDir: /data/repo/test/playwright/playwright-project
 
   steps:
-  - name: Install dependencies
-    shell: 'npm install --save-dev @playwright/test@1.38.0 && npm ci'
+    - name: Install dependencies
+      shell: "npm install --save-dev @playwright/test@1.38.0 && npm ci"
 
-  - name: Run tests
-    parallel:
-      count: 2
-      transfer:
-      - from: /data/repo
-      fetch:
-      - from: /data/repo/test/playwright/playwright-project/blob-report
-        to: /data/reports
-      container:
-        resources:
-          requests:
-            cpu: 1
-            memory: 1Gi
-      shell: |
-        npx playwright test --reporter blob --shard {{ index + 1 }}/{{ count }}
+    - name: Run tests
+      parallel:
+        count: 2
+        transfer:
+          - from: /data/repo
+        fetch:
+          - from: /data/repo/test/playwright/playwright-project/blob-report
+            to: /data/reports
+        container:
+          resources:
+            requests:
+              cpu: 1
+              memory: 1Gi
+        shell: |
+          npx playwright test --reporter blob --shard {{ index + 1 }}/{{ count }}
 
-  - name: Merge reports
-    condition: always
-    shell: 'npx playwright merge-reports --reporter=html /data/reports'
-    artifacts:
-      paths:
-      - 'playwright-report/**'
+    - name: Merge reports
+      condition: always
+      shell: "npx playwright merge-reports --reporter=html /data/reports"
+      artifacts:
+        paths:
+          - "playwright-report/**"
 ```
 
 </TabItem>
@@ -528,15 +529,15 @@ While the example here is not a perfect solution, it's sharding the Cypress test
 
 The example below:
 
-* Load the Cypress tests from the Git repository (`content`)
-* Sets the working directory to the tests one (`container.workingDir`)
-* Install the project dependencies (`steps[0].shell`)
-* Run Cypress tests with dynamic sharding (`steps[1].parallel`)
-  * The shards will be built off the test files in `cypress/e2e` directory (`steps[1].parallel.shards.testFiles`)
-  * It will have maximum of 5 shards (`steps[1].parallel.maxCount`)
-    * When there is less than or equal to 5 test files, it will run 1 shard per test file
-    * When there will be more than 5 test files, it will distribute them across 5 shards
-  * Each shard will run only selected test files with `--spec` Cypress' argument (`steps[1].parallel.run.args`)
+- Load the Cypress tests from the Git repository (`content`)
+- Sets the working directory to the tests one (`container.workingDir`)
+- Install the project dependencies (`steps[0].shell`)
+- Run Cypress tests with dynamic sharding (`steps[1].parallel`)
+  - The shards will be built off the test files in `cypress/e2e` directory (`steps[1].parallel.shards.testFiles`)
+  - It will have maximum of 5 shards (`steps[1].parallel.maxCount`)
+    - When there is less than or equal to 5 test files, it will run 1 shard per test file
+    - When there will be more than 5 test files, it will distribute them across 5 shards
+  - Each shard will run only selected test files with `--spec` Cypress' argument (`steps[1].parallel.run.args`)
 
 <Tabs>
 <TabItem value="yaml" label="YAML" default>
@@ -551,37 +552,37 @@ spec:
     git:
       uri: https://github.com/kubeshop/testkube
       paths:
-      - test/cypress/cypress-13
+        - test/cypress/cypress-13
   container:
     image: cypress/included:13.6.4
     workingDir: /data/repo/test/cypress/cypress-13
 
   steps:
-  - name: Install dependencies
-    shell: 'npm ci'
+    - name: Install dependencies
+      shell: "npm ci"
 
-  - name: Run tests
-    parallel:
-      maxCount: 5
-      shards:
-        testFiles: 'glob("cypress/e2e/**/*.js")'
-      description: '{{ join(map(shard.testFiles, "relpath(_.value, \"cypress/e2e\")"), ", ") }}'
-      transfer:
-      - from: /data/repo
-      container:
-        resources:
-          requests:
-            cpu: 1
-            memory: 1Gi
-        env:
-        - name: CYPRESS_CUSTOM_ENV
-          value: CYPRESS_CUSTOM_ENV_value
-      run:
-        args:
-        - --env
-        - NON_CYPRESS_ENV=NON_CYPRESS_ENV_value
-        - --spec
-        - '{{ join(shard.testFiles, ",") }}'
+    - name: Run tests
+      parallel:
+        maxCount: 5
+        shards:
+          testFiles: 'glob("cypress/e2e/**/*.js")'
+        description: '{{ join(map(shard.testFiles, "relpath(_.value, \"cypress/e2e\")"), ", ") }}'
+        transfer:
+          - from: /data/repo
+        container:
+          resources:
+            requests:
+              cpu: 1
+              memory: 1Gi
+          env:
+            - name: CYPRESS_CUSTOM_ENV
+              value: CYPRESS_CUSTOM_ENV_value
+        run:
+          args:
+            - --env
+            - NON_CYPRESS_ENV=NON_CYPRESS_ENV_value
+            - --spec
+            - '{{ join(shard.testFiles, ",") }}'
 ```
 
 </TabItem>
@@ -606,20 +607,20 @@ but it's much more powerful and flexible.
 
 The example below:
 
-* Takes optional run configuration parameters (`config`)
-  * `vus` to declare Virtual Users to distribute
-  * `duration` to declare Load Test time
-  * `workers` to declare number of K6 instances to create
-* Load the K6 script from Git repository (`content`)
-* Run distributed K6 tests (`steps[0].parallel`)
-  * It's using built-in `distribute/evenly` Test Workflow Template, that sets [`pod.topologySpreadConstraints`](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/) to distribute pods evenly across nodes (`steps[0].parallel.use`)
-  * It's creating as many K6 workers as has been declared in `workers` config (`steps[0].parallel.count`)
-  * It copies the test case from Git repository into workers (`steps[0].parallel.transfer`)
-  * It reserves 1/8 CPU and 128MB for each worker (`steps[0].parallel.container.resources`)
-  * It ensures that all workers will start load tests at the same time, when all are ready (`steps[0].parallel.paused`)
-  * It runs K6 executable against that test case (`steps[0].parallel.run.shell`)
-    * It passes number of Virtual Users and test duration via K6 parameters
-    * It uses K6 [**--execution-segment**](https://grafana.com/docs/k6/latest/using-k6/k6-options/reference/#execution-segment) argument to select the fraction of tests to run
+- Takes optional run configuration parameters (`config`)
+  - `vus` to declare Virtual Users to distribute
+  - `duration` to declare Load Test time
+  - `workers` to declare number of K6 instances to create
+- Load the K6 script from Git repository (`content`)
+- Run distributed K6 tests (`steps[0].parallel`)
+  - It's using built-in `distribute/evenly` Test Workflow Template, that sets [`pod.topologySpreadConstraints`](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/) to distribute pods evenly across nodes (`steps[0].parallel.use`)
+  - It's creating as many K6 workers as has been declared in `workers` config (`steps[0].parallel.count`)
+  - It copies the test case from Git repository into workers (`steps[0].parallel.transfer`)
+  - It reserves 1/8 CPU and 128MB for each worker (`steps[0].parallel.container.resources`)
+  - It ensures that all workers will start load tests at the same time, when all are ready (`steps[0].parallel.paused`)
+  - It runs K6 executable against that test case (`steps[0].parallel.run.shell`)
+    - It passes number of Virtual Users and test duration via K6 parameters
+    - It uses K6 [**--execution-segment**](https://grafana.com/docs/k6/latest/using-k6/k6-options/reference/#execution-segment) argument to select the fraction of tests to run
 
 <Tabs>
 <TabItem value="yaml" label="YAML" default>
@@ -633,41 +634,41 @@ metadata:
     core-tests: workflows
 spec:
   config:
-    vus: {type: integer, default: 100}
-    duration: {type: string, default: '5s'}
-    workers: {type: integer, default: 10}
+    vus: { type: integer, default: 100 }
+    duration: { type: string, default: "5s" }
+    workers: { type: integer, default: 10 }
   content:
     git:
       uri: https://github.com/kubeshop/testkube
       paths:
-      - test/k6/k6-smoke-test.js
+        - test/k6/k6-smoke-test.js
 
   steps:
-  - name: Run test
-    parallel:
-      count: 'config.workers'
-      transfer:
-      - from: /data/repo
-      use:
-      - name: distribute/evenly
-      container:
-        workingDir: /data/repo/test/k6
-        resources:
-          requests:
-            cpu: 128m
-            memory: 128Mi
-        env:
-        - name: K6_SYSTEM_ENV
-          value: K6_SYSTEM_ENV_value
-      paused: true
-      run:
-        image: grafana/k6:0.49.0
-        shell: |
-          k6 run k6-smoke-test.js \
-            -e K6_ENV_FROM_PARAM=K6_ENV_FROM_PARAM_value \
-            --vus {{ config.vus }} \
-            --duration {{ shellquote(config.duration) }} \
-            --execution-segment {{ index }}/{{ count }}:{{ index + 1 }}/{{ count }}
+    - name: Run test
+      parallel:
+        count: "config.workers"
+        transfer:
+          - from: /data/repo
+        use:
+          - name: distribute/evenly
+        container:
+          workingDir: /data/repo/test/k6
+          resources:
+            requests:
+              cpu: 128m
+              memory: 128Mi
+          env:
+            - name: K6_SYSTEM_ENV
+              value: K6_SYSTEM_ENV_value
+        paused: true
+        run:
+          image: grafana/k6:0.49.0
+          shell: |
+            k6 run k6-smoke-test.js \
+              -e K6_ENV_FROM_PARAM=K6_ENV_FROM_PARAM_value \
+              --vus {{ config.vus }} \
+              --duration {{ shellquote(config.duration) }} \
+              --execution-segment {{ index }}/{{ count }}:{{ index + 1 }}/{{ count }}
 ```
 
 </TabItem>

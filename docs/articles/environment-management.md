@@ -2,7 +2,7 @@
 
 ## What is an Environment?
 
-A _Testkube Environment_ is a grouping of Workflows, Workflow Templates, Triggers and Webhooks - and their 
+A _Testkube Environment_ is a grouping of Workflows, Workflow Templates, Triggers and Webhooks - and their
 corresponding artifacts, logs, and execution results.
 
 You can create multiple environments within your Testkube Organization (see below) to organize your resources and usage
@@ -11,15 +11,15 @@ if you are looking for a way to control access to Resources, [Resource Groups](/
 a better approach).
 
 A Testkube Environment can contain any number of [Testkube Agents](/articles/agents-overview), which are responsible
-for executing Workflows, listening to Kubernetes events, syncing resources via GitOps, and emitting webhooks. 
+for executing Workflows, listening to Kubernetes events, syncing resources via GitOps, and emitting webhooks.
 
 :::info
-Testkube Resources are stored and managed in the Testkube Control Plane - [Read More](/articles/testkube-resource-management). 
+Testkube Resources are stored and managed in the Testkube Control Plane - [Read More](/articles/testkube-resource-management).
 Agents are deployed into your clusters for running Workflows, listening to events, and other capabilities - [Read More](/articles/agents-overview).
 :::
 
-Your existing Environments are available from the Environment dropdown on the top of the Testkube Dashboard (see 
-screenshot below), selecting an Environment will focus the Testkube Dashboard on the resources in that Environment - 
+Your existing Environments are available from the Environment dropdown on the top of the Testkube Dashboard (see
+screenshot below), selecting an Environment will focus the Testkube Dashboard on the resources in that Environment -
 [Read More](/articles/testkube-dashboard-explore).
 
 ## Creating a New Environment
@@ -71,8 +71,8 @@ a prompt for a unique environment name:
 ### Environment connection
 
 :::tip
-As of Testkube v2.7, you can create an Environment and manage its Resources (Workflows, Triggers, etc.) 
-directly from the Dashboard without deploying an Agent first. You only need to deploy an Agent when you 
+As of Testkube v2.7, you can create an Environment and manage its Resources (Workflows, Triggers, etc.)
+directly from the Dashboard without deploying an Agent first. You only need to deploy an Agent when you
 want to execute Workflows or listen for Kubernetes events - [Read More](/articles/testkube-resource-management).
 :::
 
@@ -177,7 +177,7 @@ This panel allows you to configure the Queueing & Concurrency settings for your 
 ![Queueing & Concurrency Panel](images/env-concurrency-panel.png)
 
 :::tip
-Check out [Concurrency & Queueing](/articles/test-workflows-concurrency-queueing) to learn more about this functionality.   
+Check out [Concurrency & Queueing](/articles/test-workflows-concurrency-queueing) to learn more about this functionality.  
 :::
 
 ### Product Features

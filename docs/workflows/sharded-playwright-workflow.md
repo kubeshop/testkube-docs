@@ -14,7 +14,7 @@ spec:
     workingDir: /data/repo/test/playwright/playwright-project
   steps:
     - name: Install dependencies
-      shell: 'npm install --save-dev @playwright/test@1.38.0 && npm ci'
+      shell: "npm install --save-dev @playwright/test@1.38.0 && npm ci"
     - name: Run tests
       parallel:
         count: 2
@@ -32,8 +32,8 @@ spec:
           npx playwright test --reporter blob --shard {{ index + 1 }}/{{ count }} --trace on
     - name: Merge reports
       condition: always
-      shell: 'npx playwright merge-reports --reporter=html /data/reports'
+      shell: "npx playwright merge-reports --reporter=html /data/reports"
       artifacts:
         paths:
-          - 'playwright-report/**'
+          - "playwright-report/**"
 ```

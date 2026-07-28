@@ -16,7 +16,7 @@ paths:
       description: accept email invite
       operationId: acceptOrganizationEmailInvite
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
@@ -27,14 +27,14 @@ paths:
                     type: string
                 required:
                   - org
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       deprecated: true
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/InviteID'
+      - $ref: "./components.yaml#/components/parameters/InviteID"

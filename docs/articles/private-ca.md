@@ -44,22 +44,22 @@ globalTemplate:
   spec:
     pod:
       volumes:
-          - name: testkube-enterprise-ca
-            secret:
-                secretName: <secret name>
-                defaultMode: 420
+        - name: testkube-enterprise-ca
+          secret:
+            secretName: <secret name>
+            defaultMode: 420
     container:
       env:
-          - name: SSL_CERT_DIR
-            value: /etc/testkube/certs/
-          - name: GIT_SSL_CAINFO
-            value: /etc/testkube/certs/testkube-custom-ca.pem
+        - name: SSL_CERT_DIR
+          value: /etc/testkube/certs/
+        - name: GIT_SSL_CAINFO
+          value: /etc/testkube/certs/testkube-custom-ca.pem
       volumeMounts:
-          - name: testkube-enterprise-ca
-            mountPath: /etc/testkube/certs/testkube-custom-ca.pem
-            # NOTE: If you overrode the key name using customCaSecretKey,
-            # then you should also update this subPath value.
-            subPath: ca.crt
+        - name: testkube-enterprise-ca
+          mountPath: /etc/testkube/certs/testkube-custom-ca.pem
+          # NOTE: If you overrode the key name using customCaSecretKey,
+          # then you should also update this subPath value.
+          subPath: ca.crt
 testkube-api:
   cloud:
     tls:
@@ -68,6 +68,7 @@ testkube-api:
 ```
 
 If you create Ingress configurations, add a secret with the certificate that was signed by the CA to each Ingress manifest.
+
 ```shell
 testkube-cloud-api:
   api:
@@ -90,7 +91,9 @@ minio:
     tls:
       tlsSecret: <another secret name>
 ```
+
 ##
+
 If you create an Istio Gateway, you need to deploy a certificate for all required domains there.
 
 ## Pulling from Git repositories

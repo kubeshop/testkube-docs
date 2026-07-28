@@ -1,12 +1,12 @@
 # Remote Workflow Execution
 
-In a complex Testkube installation it might be desirable to schedule and synchronize the execution 
-of Workflows across multiple Environments. Let's look at how Test Workflows can use 
+In a complex Testkube installation it might be desirable to schedule and synchronize the execution
+of Workflows across multiple Environments. Let's look at how Test Workflows can use
 the Testkube CLI to achieve this.
 
 ## Using the CLI to trigger remote Workflows
 
-You can automate the Testkube CLI in your Test Workflows to trigger the execution of a Workflow in another 
+You can automate the Testkube CLI in your Test Workflows to trigger the execution of a Workflow in another
 Environment and collect its results - allowing you to potentially aggregate executions and results from multiple
 environments in a single "Controller Environment".
 
@@ -43,16 +43,16 @@ spec:
     workflowToRun:
       type: string
   steps:
-  - run:
-      image: kubeshop/testkube-cli:latest
-      shell: |
-        testkube set context \
-          --api-key {{ shellquote(config.apiToken) }} \
-          --root-domain {{ shellquote(config.rootDomain) }} \
-          --org-id {{ shellquote(config.organizationId) }} \
-          --env-id {{ shellquote(config.environmentId) }}
+    - run:
+        image: kubeshop/testkube-cli:latest
+        shell: |
+          testkube set context \
+            --api-key {{ shellquote(config.apiToken) }} \
+            --root-domain {{ shellquote(config.rootDomain) }} \
+            --org-id {{ shellquote(config.organizationId) }} \
+            --env-id {{ shellquote(config.environmentId) }}
 
-        testkube run tw {{ shellquote(config.workflowToRun) }} -f
+          testkube run tw {{ shellquote(config.workflowToRun) }} -f
 ```
 
 :::tip
@@ -85,22 +85,24 @@ and the subsequent call to `testkube run tw`.
 If the target Workflow generates artifacts, we can modify the shell command above as follows:
 
 ```yaml
-...
-      shell: |
-        testkube set context \
-          --api-key {{ shellquote(config.apiToken) }} \
-          --root-domain {{ shellquote(config.rootDomain) }} \
-          --org-id {{ shellquote(config.organizationId) }} \
-          --env-id {{ shellquote(config.environmentId) }}
 
-        mkdir /data/artifacts
-        testkube run tw {{ shellquote(config.workflowToRun) }} -f -d --download-dir /data/artifacts 
-      artifacts:  
-        paths:
-        - /data/artifacts/**/*
+...
+shell: |
+  testkube set context \
+    --api-key {{ shellquote(config.apiToken) }} \
+    --root-domain {{ shellquote(config.rootDomain) }} \
+    --org-id {{ shellquote(config.organizationId) }} \
+    --env-id {{ shellquote(config.environmentId) }}
+
+  mkdir /data/artifacts
+  testkube run tw {{ shellquote(config.workflowToRun) }} -f -d --download-dir /data/artifacts
+artifacts:
+  paths:
+    - /data/artifacts/**/*
 ```
 
 The following changes were made:
+
 - a `mkdir /data/artifacts` command to create a folder for artifacts.
 - additional `-d --download-dir /data/artifacts` arguments to the `testkube run tw` command.
 - an `artifacts` property telling Testkube where to find the downloaded artifacts [Learn More](/articles/test-workflows-artifacts).
@@ -130,25 +132,25 @@ metadata:
   name: multi-environment-e2e-test
 spec:
   steps:
-  - execute:
-      workflows:
-      - name: e2e-test
-        config:
-          targetUrl: <internal-hostname>
-      - name: run-remote-workflow
-        config:
-          apiToken: tkcapi_XXXX
-          environmentId: tkcenv_XXXX
-          organizationId: tkcorg_XXXX
-          targetUrl: <external-hostname>
-          workflowToRun: basic-load
-      - name: run-remote-workflow
-        config:
-          apiToken: tkcapi_YYYY
-          environmentId: tkcenv_YYYY
-          organizationId: tkcorg_YYYY
-          targetUrl: <external-hostname>
-          workflowToRun: basic-load
+    - execute:
+        workflows:
+          - name: e2e-test
+            config:
+              targetUrl: <internal-hostname>
+          - name: run-remote-workflow
+            config:
+              apiToken: tkcapi_XXXX
+              environmentId: tkcenv_XXXX
+              organizationId: tkcorg_XXXX
+              targetUrl: <external-hostname>
+              workflowToRun: basic-load
+          - name: run-remote-workflow
+            config:
+              apiToken: tkcapi_YYYY
+              environmentId: tkcenv_YYYY
+              organizationId: tkcorg_YYYY
+              targetUrl: <external-hostname>
+              workflowToRun: basic-load
 ```
 
 The above example executes
@@ -157,8 +159,6 @@ The above example executes
 - two `basic-load` tests in separate Testkube Environments, each putting load on the same application to be tested.
 
 The purpose of this specific setup is to validate that our application is fully functional when under load from two
-external sources, but you could for example create similar scenarios where multiple tests are combined both 
+external sources, but you could for example create similar scenarios where multiple tests are combined both
 in sequence and in parallel to ensure that your target applications and services perform in line with their requirements
 under complex usage scenarios.
-
- 

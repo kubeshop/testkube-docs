@@ -6,7 +6,7 @@ personal access token per repository. One Testkube organization can connect to
 **multiple GitHub organizations** and clone private repositories across all of them
 from your Test Workflows — no long-lived secrets stored in workflow specs.
 
-- **What you connect:** GitHub organizations (each maps to a GitHub App *installation*).
+- **What you connect:** GitHub organizations (each maps to a GitHub App _installation_).
 - **What you get:** short-lived, per-repository GitHub App installation tokens minted
   on demand when a Test Workflow clones a repo from a connected org.
 - **Who can manage it:** organization **Admins/Owners** (see [Permissions](#permissions)).
@@ -45,28 +45,30 @@ specific repository being cloned.
 ## Prerequisites
 
 ### Testkube Cloud
+
 The Testkube GitHub App is already provisioned for you. Skip to
 [Connect a GitHub organization](#connect-a-github-organization).
 
 ### Self-hosted / Enterprise
+
 A platform admin must configure the GitHub App once, via Helm
 (`testkube-cloud-api` → `api.github`):
 
-| Helm value (`api.github.*`) | Env var | Description |
-| --- | --- | --- |
-| `appId` | `GITHUB_APP_ID` | Numeric GitHub App ID. |
-| `appSlug` | `GITHUB_APP_SLUG` | App slug used to build the installation URL (`github.com/apps/<slug>`). |
-| `privateKeyPath` | `GITHUB_PRIVATE_KEY_FILE` | Path to the mounted GitHub App private key (`.pem`). |
-| `installationId` | `GITHUB_INSTALLATION_ID` | Optional. Comma-separated static installation id(s) used as a fallback. |
+| Helm value (`api.github.*`) | Env var                   | Description                                                             |
+| --------------------------- | ------------------------- | ----------------------------------------------------------------------- |
+| `appId`                     | `GITHUB_APP_ID`           | Numeric GitHub App ID.                                                  |
+| `appSlug`                   | `GITHUB_APP_SLUG`         | App slug used to build the installation URL (`github.com/apps/<slug>`). |
+| `privateKeyPath`            | `GITHUB_PRIVATE_KEY_FILE` | Path to the mounted GitHub App private key (`.pem`).                    |
+| `installationId`            | `GITHUB_INSTALLATION_ID`  | Optional. Comma-separated static installation id(s) used as a fallback. |
 
 ```yaml
 # values.yaml (excerpt)
 testkube-cloud-api:
   api:
     github:
-      appId: '123456'
-      appSlug: 'my-testkube-app'
-      privateKeyPath: '/tmp/github/private-key.pem'
+      appId: "123456"
+      appSlug: "my-testkube-app"
+      privateKeyPath: "/tmp/github/private-key.pem"
       # installationId: '987654'   # optional static fallback
 ```
 
@@ -92,7 +94,7 @@ the install flow:
 
 1. In **Settings → GitHub**, click **Add GitHub Organization**.
 2. Enter the **GitHub Organization** name and its **Installation ID**
-   (GitHub → Org → *Settings → GitHub Apps → Configure*; the installation ID is the
+   (GitHub → Org → _Settings → GitHub Apps → Configure_; the installation ID is the
    trailing number in the configure URL, e.g. `.../installations/12345678`).
 3. Submit. The org is added to the list (a duplicate org returns a conflict).
 
@@ -121,12 +123,12 @@ curl -X DELETE -H "Authorization: Bearer $TK_TOKEN" \
   https://$TK_API/organizations/$ORG_ID/integrations/github/installations/my-github-org
 ```
 
-| Method & path | Operation |
-| --- | --- |
-| `GET /organizations/{id}/integrations/github/connect` | Get signed installation URL |
-| `GET /organizations/{id}/integrations/github/installations` | List connected installations |
-| `POST /organizations/{id}/integrations/github/installations` | Add an installation manually |
-| `DELETE /organizations/{id}/integrations/github/installations/{githubOrg}` | Remove a connected org |
+| Method & path                                                              | Operation                    |
+| -------------------------------------------------------------------------- | ---------------------------- |
+| `GET /organizations/{id}/integrations/github/connect`                      | Get signed installation URL  |
+| `GET /organizations/{id}/integrations/github/installations`                | List connected installations |
+| `POST /organizations/{id}/integrations/github/installations`               | Add an installation manually |
+| `DELETE /organizations/{id}/integrations/github/installations/{githubOrg}` | Remove a connected org       |
 
 ---
 
@@ -189,13 +191,13 @@ depending on your Github organization settings).
 
 ## Troubleshooting
 
-| Symptom | Cause / fix |
-| --- | --- |
-| `GitHub App has not been configured.` | The instance has no GitHub App configured. Set `api.github.appId`, `appSlug`, and the private key (self-hosted/Enterprise). |
-| Connect button does nothing / no install URL | `appSlug` is not set, so the installation URL cannot be built. |
+| Symptom                                             | Cause / fix                                                                                                                                                                                    |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GitHub App has not been configured.`               | The instance has no GitHub App configured. Set `api.github.appId`, `appSlug`, and the private key (self-hosted/Enterprise).                                                                    |
+| Connect button does nothing / no install URL        | `appSlug` is not set, so the installation URL cannot be built.                                                                                                                                 |
 | Clone fails with auth / not-found on a private repo | The repo's GitHub org isn't connected, **or** the installation wasn't granted access to that repository. Re-run **Connect** and grant the repo, or add the repo to the installation in GitHub. |
-| `409 Conflict` when adding an org | That GitHub org is already connected (matching is case-insensitive). |
-| Wrong/None token for a repo | The repository owner doesn't match any connected installation and no static `GITHUB_INSTALLATION_ID` fallback is configured. |
+| `409 Conflict` when adding an org                   | That GitHub org is already connected (matching is case-insensitive).                                                                                                                           |
+| Wrong/None token for a repo                         | The repository owner doesn't match any connected installation and no static `GITHUB_INSTALLATION_ID` fallback is configured.                                                                   |
 
 ---
 

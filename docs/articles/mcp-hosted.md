@@ -31,6 +31,7 @@ The hosted MCP endpoint supports two authentication methods:
 OAuth lets MCP clients authenticate through your browser — no tokens to create or manage. Your MCP client handles discovery and authentication automatically. You just see a browser popup to log in.
 
 This is the recommended approach for individual users because:
+
 - No API keys to create, copy, or rotate
 - Per-user identity for seat tracking and audit trails
 - Works with your existing SSO provider (Google, GitHub, SAML, etc.)
@@ -189,7 +190,7 @@ testkube-cloud-ui:
 To enable OAuth authentication for the MCP endpoint, add the MCP OAuth callback URL to your Dex configuration's `redirectURIs` for the `testkube-enterprise` client:
 
 ```yaml
-- 'https://your-api-domain.example.com/mcp/auth/callback'
+- "https://your-api-domain.example.com/mcp/auth/callback"
 ```
 
 ### Step 3: Enable MCP per Environment

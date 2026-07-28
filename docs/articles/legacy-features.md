@@ -7,9 +7,8 @@ Legacy functionality described in this document will be EOL and removed from Tes
 :::
 
 :::danger
-Legacy functionality **has been deprecated and removed** from Testkube as of the December 2025 release - [Read More](/articles/legacy-deprecation). 
+Legacy functionality **has been deprecated and removed** from Testkube as of the December 2025 release - [Read More](/articles/legacy-deprecation).
 :::
-
 
 ## The move to Test Workflows
 
@@ -18,37 +17,37 @@ short when users needed to run different version/commands/configurations for the
 in the need to either create/manage custom executors or use the more generic Container Executor. Furthermore, supporting
 more advanced test execution like parallelization and sharding was not possible.
 
-Read more about this transition and on how to get started with Test Workflows 
+Read more about this transition and on how to get started with Test Workflows
 on [the Testkube blog](https://testkube.io/learn/getting-started-with-test-workflows-for-kubernetes-testing).
 
 ## Replacing Tests/Executors/Suites with Test Workflows
 
-[Test Workflows](test-workflows) is Testkube's replacement for Tests/Executors/TestSuites, as it provides both a 
-smooth initial onboarding experience for quickly running basic tests/suites, while allowing for customization 
+[Test Workflows](test-workflows) is Testkube's replacement for Tests/Executors/TestSuites, as it provides both a
+smooth initial onboarding experience for quickly running basic tests/suites, while allowing for customization
 for real-life scenarios without extensive overhead. Workflows also provides advanced features like
-[parallelization](test-workflows-parallel.mdx), [sharding](test-workflows-matrix-and-sharding.mdx), 
+[parallelization](test-workflows-parallel.mdx), [sharding](test-workflows-matrix-and-sharding.mdx),
 [services](test-workflows-services.mdx), etc. that were not possible with the legacy approach.
 
-Test Workflows also provide a powerful replacement for [Test Suites](test-workflows-test-suites.mdx), with 
+Test Workflows also provide a powerful replacement for [Test Suites](test-workflows-test-suites.mdx), with
 far greater flexibility in regard to orchestrating multiple tests.
 
 ## Replacing Sources/Templates with Workflow Templates
 
-[Workflow Templates](test-workflow-templates) provide a generic approach to building configurations that can be 
-shared/re-used across workflows, which allows them to replace both Sources and Templates. 
+[Workflow Templates](test-workflow-templates) provide a generic approach to building configurations that can be
+shared/re-used across workflows, which allows them to replace both Sources and Templates.
 
 ## Migrating to Test Workflows
 
-The Testkube CLI contains a migration command to help you migrate existing Tests to their Test Workflow counterpart - 
+The Testkube CLI contains a migration command to help you migrate existing Tests to their Test Workflow counterpart -
 [Test Workflow Migration](test-workflow-migration).
 
 ## Enabling Legacy Tests Dashboard functionality
 
-The Testkube Dashboard will by default hide functionality related to legacy Tests/Executors/etc, unless if 
-your current environment contains legacy Test/TestSuite resources, in which case the corresponding functionality 
+The Testkube Dashboard will by default hide functionality related to legacy Tests/Executors/etc, unless if
+your current environment contains legacy Test/TestSuite resources, in which case the corresponding functionality
 will be made available.
 
-Legacy Test functionality can also be toggled manually in the Environment Settings / Product Features tab. Below 
+Legacy Test functionality can also be toggled manually in the Environment Settings / Product Features tab. Below
 we see Legacy Test Support disabled for the current environment:
 
 ![Legacy Tests Disabled](../img/legacy-tests-disabled.png)
@@ -59,8 +58,8 @@ Enabling Legacy Test Support makes the corresponding tabs/panels available in th
 
 ## Disabling Legacy Tests Agent functionality
 
-Testkube Agents have this feature enabled by default, which means the agent will keep performing all supported operations 
-with these Legacy Tests and Suites even if the [Dashboard functionality](#enabling-legacy-tests-dashboard-functionality) is disabled. To fully disable it's necessary 
+Testkube Agents have this feature enabled by default, which means the agent will keep performing all supported operations
+with these Legacy Tests and Suites even if the [Dashboard functionality](#enabling-legacy-tests-dashboard-functionality) is disabled. To fully disable it's necessary
 to use a flag in the Testkube Agent deployment, use the following snippet to change your `values.yaml`:
 
 ```yaml

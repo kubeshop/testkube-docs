@@ -15,7 +15,7 @@
   color: var(--announcementBar-color);
 }
 
-.announcement[aria-disabled=true] {
+.announcement[aria-disabled="true"] {
   z-index: 0;
 }
 

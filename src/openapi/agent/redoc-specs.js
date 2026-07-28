@@ -1,1 +1,42 @@
-module.exports = [{"spec":"src/openapi/agent/default--triggers.yaml","url":"/openapi/testkube-agent-openapi.yaml","id":"default--triggers"},{"spec":"src/openapi/agent/default--executions.yaml","url":"/openapi/testkube-agent-openapi.yaml","id":"default--executions"},{"spec":"src/openapi/agent/default--webhooks.yaml","url":"/openapi/testkube-agent-openapi.yaml","id":"default--webhooks"},{"spec":"src/openapi/agent/default--webhook-templates.yaml","url":"/openapi/testkube-agent-openapi.yaml","id":"default--webhook-templates"},{"spec":"src/openapi/agent/default--test-workflows.yaml","url":"/openapi/testkube-agent-openapi.yaml","id":"default--test-workflows"},{"spec":"src/openapi/agent/default--test-workflow-with-executions.yaml","url":"/openapi/testkube-agent-openapi.yaml","id":"default--test-workflow-with-executions"},{"spec":"src/openapi/agent/default--test-workflow-executions.yaml","url":"/openapi/testkube-agent-openapi.yaml","id":"default--test-workflow-executions"},{"spec":"src/openapi/agent/default--test-workflow-templates.yaml","url":"/openapi/testkube-agent-openapi.yaml","id":"default--test-workflow-templates"}]
+module.exports = [
+  {
+    spec: "src/openapi/agent/default--triggers.yaml",
+    url: "/openapi/testkube-agent-openapi.yaml",
+    id: "default--triggers",
+  },
+  {
+    spec: "src/openapi/agent/default--executions.yaml",
+    url: "/openapi/testkube-agent-openapi.yaml",
+    id: "default--executions",
+  },
+  {
+    spec: "src/openapi/agent/default--webhooks.yaml",
+    url: "/openapi/testkube-agent-openapi.yaml",
+    id: "default--webhooks",
+  },
+  {
+    spec: "src/openapi/agent/default--webhook-templates.yaml",
+    url: "/openapi/testkube-agent-openapi.yaml",
+    id: "default--webhook-templates",
+  },
+  {
+    spec: "src/openapi/agent/default--test-workflows.yaml",
+    url: "/openapi/testkube-agent-openapi.yaml",
+    id: "default--test-workflows",
+  },
+  {
+    spec: "src/openapi/agent/default--test-workflow-with-executions.yaml",
+    url: "/openapi/testkube-agent-openapi.yaml",
+    id: "default--test-workflow-with-executions",
+  },
+  {
+    spec: "src/openapi/agent/default--test-workflow-executions.yaml",
+    url: "/openapi/testkube-agent-openapi.yaml",
+    id: "default--test-workflow-executions",
+  },
+  {
+    spec: "src/openapi/agent/default--test-workflow-templates.yaml",
+    url: "/openapi/testkube-agent-openapi.yaml",
+    id: "default--test-workflow-templates",
+  },
+];

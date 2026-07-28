@@ -1,1 +1,34 @@
-module.exports = [{"type":"doc","label":"/triggers","id":"openapi/agent/default--triggers"},{"type":"doc","label":"/executions","id":"openapi/agent/default--executions"},{"type":"doc","label":"/webhooks","id":"openapi/agent/default--webhooks"},{"type":"doc","label":"/webhook-templates","id":"openapi/agent/default--webhook-templates"},{"type":"doc","label":"/test-workflows","id":"openapi/agent/default--test-workflows"},{"type":"doc","label":"/test-workflow-with-executions","id":"openapi/agent/default--test-workflow-with-executions"},{"type":"doc","label":"/test-workflow-executions","id":"openapi/agent/default--test-workflow-executions"},{"type":"doc","label":"/test-workflow-templates","id":"openapi/agent/default--test-workflow-templates"}]
+module.exports = [
+  { type: "doc", label: "/triggers", id: "openapi/agent/default--triggers" },
+  {
+    type: "doc",
+    label: "/executions",
+    id: "openapi/agent/default--executions",
+  },
+  { type: "doc", label: "/webhooks", id: "openapi/agent/default--webhooks" },
+  {
+    type: "doc",
+    label: "/webhook-templates",
+    id: "openapi/agent/default--webhook-templates",
+  },
+  {
+    type: "doc",
+    label: "/test-workflows",
+    id: "openapi/agent/default--test-workflows",
+  },
+  {
+    type: "doc",
+    label: "/test-workflow-with-executions",
+    id: "openapi/agent/default--test-workflow-with-executions",
+  },
+  {
+    type: "doc",
+    label: "/test-workflow-executions",
+    id: "openapi/agent/default--test-workflow-executions",
+  },
+  {
+    type: "doc",
+    label: "/test-workflow-templates",
+    id: "openapi/agent/default--test-workflow-templates",
+  },
+];

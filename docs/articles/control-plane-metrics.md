@@ -27,41 +27,41 @@ Control Plane metrics are available in Testkube Cloud and Enterprise connected d
 
 ## Available Metrics
 
-| Metric | Type | Description | Labels |
-|--------|------|-------------|--------|
-| **Scheduler** | | | |
-| `testkube_scheduler_environment_queue_limit` | gauge | Configured queue limit for the environment | `environment_name` |
-| `testkube_scheduler_queued_executions` | gauge | Number of queued executions awaiting assignment | `environment_name` |
-| `testkube_scheduler_queued_executions_by_workflow` | gauge | Number of queued executions awaiting assignment, grouped by workflow name | `environment_name`, `workflow_name` |
-| `testkube_scheduler_queued_execution_info` | gauge | Identity metric for queued executions (value is always `1`); emitted only when `TK_SCHEDULER_METRICS_INCLUDE_EXECUTION_ID=true` | `environment_name`, `workflow_name`, `execution_id`, `execution_name` |
-| `testkube_scheduler_active_executions` | gauge | Number of currently active executions | `environment_name` |
-| `testkube_scheduler_queue_oldest_age_seconds` | gauge | Age in seconds of the oldest queued execution (0 when none) | `environment_name` |
-| `testkube_scheduler_runner_active_executions` | gauge | Active executions attributed to each runner | `environment_name`, `runner_id`, `runner_name` |
-| **Workflow Executions** | | | |
-| `testkube_testworkflow_executions_total` | counter | Total number of test workflow executions | `environment_name`, `workflow_name`, `workflow_result`, `triggered_by`, `runner_id`, `runner_name` |
-| `testkube_testworkflow_executions_duration_seconds` | histogram | Duration of test workflow executions | `environment_name`, `workflow_name`, `workflow_result`, `triggered_by`, `runner_id`, `runner_name` |
-| `testkube_testworkflow_aborts_total` | counter | Total number of test workflow aborts | `environment_name`, `workflow_name`, `workflow_result`, `triggered_by`, `runner_id`, `runner_name` |
-| **Workflow Execution Steps** | | | |
-| `testkube_testworkflow_execution_steps_total` | counter | Total number of test workflow execution steps | execution labels + `step_name`, `step_status` |
-| `testkube_testworkflow_execution_steps_duration_seconds` | histogram | Duration of test workflow execution steps | execution labels + `step_name`, `step_status` |
-| `testkube_testworkflow_execution_steps_start_time_seconds` | histogram | Start time of test workflow execution steps | execution labels + `step_name`, `step_status` |
-| `testkube_testworkflow_execution_steps_finish_time_seconds` | histogram | Finish time of test workflow execution steps | execution labels + `step_name`, `step_status` |
-| **Workflow Lifecycle (CRUD)** | | | |
-| `testkube_testworkflow_creations_total` | counter | Total number of test workflows created | `environment_name`, `result` |
-| `testkube_testworkflow_updates_total` | counter | Total number of test workflows updated | `environment_name`, `result` |
-| `testkube_testworkflow_deletes_total` | counter | Total number of test workflows deleted | `environment_name`, `result` |
-| **Workflow Templates** | | | |
-| `testkube_testworkflowtemplate_creations_total` | counter | Total number of test workflow templates created | `environment_name`, `workflow_template`, `result` |
-| `testkube_testworkflowtemplate_updates_total` | counter | Total number of test workflow templates updated | `environment_name`, `workflow_template`, `result` |
-| `testkube_testworkflowtemplate_deletes_total` | counter | Total number of test workflow templates deleted | `environment_name`, `workflow_template`, `result` |
-| **Triggers** | | | |
-| `testkube_testtrigger_creations_total` | counter | Total number of test trigger created events | `environment_name`, `result` |
-| `testkube_testtrigger_updates_total` | counter | Total number of test trigger updated events | `environment_name`, `result` |
-| `testkube_testtrigger_deletes_total` | counter | Total number of test trigger deleted events | `environment_name`, `result` |
-| `testkube_testtrigger_bulk_updates_total` | counter | Total number of test trigger bulk update events | `environment_name`, `result` |
-| `testkube_testtrigger_bulk_deletes_total` | counter | Total number of test trigger bulk delete events | `environment_name`, `result` |
-| **Webhooks** | | | |
-| `testkube_webhook_executions_total` | counter | Total number of webhook executions | `environment_name`, `webhook_name`, `event_type`, `result` |
+| Metric                                                      | Type      | Description                                                                                                                     | Labels                                                                                             |
+| ----------------------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| **Scheduler**                                               |           |                                                                                                                                 |                                                                                                    |
+| `testkube_scheduler_environment_queue_limit`                | gauge     | Configured queue limit for the environment                                                                                      | `environment_name`                                                                                 |
+| `testkube_scheduler_queued_executions`                      | gauge     | Number of queued executions awaiting assignment                                                                                 | `environment_name`                                                                                 |
+| `testkube_scheduler_queued_executions_by_workflow`          | gauge     | Number of queued executions awaiting assignment, grouped by workflow name                                                       | `environment_name`, `workflow_name`                                                                |
+| `testkube_scheduler_queued_execution_info`                  | gauge     | Identity metric for queued executions (value is always `1`); emitted only when `TK_SCHEDULER_METRICS_INCLUDE_EXECUTION_ID=true` | `environment_name`, `workflow_name`, `execution_id`, `execution_name`                              |
+| `testkube_scheduler_active_executions`                      | gauge     | Number of currently active executions                                                                                           | `environment_name`                                                                                 |
+| `testkube_scheduler_queue_oldest_age_seconds`               | gauge     | Age in seconds of the oldest queued execution (0 when none)                                                                     | `environment_name`                                                                                 |
+| `testkube_scheduler_runner_active_executions`               | gauge     | Active executions attributed to each runner                                                                                     | `environment_name`, `runner_id`, `runner_name`                                                     |
+| **Workflow Executions**                                     |           |                                                                                                                                 |                                                                                                    |
+| `testkube_testworkflow_executions_total`                    | counter   | Total number of test workflow executions                                                                                        | `environment_name`, `workflow_name`, `workflow_result`, `triggered_by`, `runner_id`, `runner_name` |
+| `testkube_testworkflow_executions_duration_seconds`         | histogram | Duration of test workflow executions                                                                                            | `environment_name`, `workflow_name`, `workflow_result`, `triggered_by`, `runner_id`, `runner_name` |
+| `testkube_testworkflow_aborts_total`                        | counter   | Total number of test workflow aborts                                                                                            | `environment_name`, `workflow_name`, `workflow_result`, `triggered_by`, `runner_id`, `runner_name` |
+| **Workflow Execution Steps**                                |           |                                                                                                                                 |                                                                                                    |
+| `testkube_testworkflow_execution_steps_total`               | counter   | Total number of test workflow execution steps                                                                                   | execution labels + `step_name`, `step_status`                                                      |
+| `testkube_testworkflow_execution_steps_duration_seconds`    | histogram | Duration of test workflow execution steps                                                                                       | execution labels + `step_name`, `step_status`                                                      |
+| `testkube_testworkflow_execution_steps_start_time_seconds`  | histogram | Start time of test workflow execution steps                                                                                     | execution labels + `step_name`, `step_status`                                                      |
+| `testkube_testworkflow_execution_steps_finish_time_seconds` | histogram | Finish time of test workflow execution steps                                                                                    | execution labels + `step_name`, `step_status`                                                      |
+| **Workflow Lifecycle (CRUD)**                               |           |                                                                                                                                 |                                                                                                    |
+| `testkube_testworkflow_creations_total`                     | counter   | Total number of test workflows created                                                                                          | `environment_name`, `result`                                                                       |
+| `testkube_testworkflow_updates_total`                       | counter   | Total number of test workflows updated                                                                                          | `environment_name`, `result`                                                                       |
+| `testkube_testworkflow_deletes_total`                       | counter   | Total number of test workflows deleted                                                                                          | `environment_name`, `result`                                                                       |
+| **Workflow Templates**                                      |           |                                                                                                                                 |                                                                                                    |
+| `testkube_testworkflowtemplate_creations_total`             | counter   | Total number of test workflow templates created                                                                                 | `environment_name`, `workflow_template`, `result`                                                  |
+| `testkube_testworkflowtemplate_updates_total`               | counter   | Total number of test workflow templates updated                                                                                 | `environment_name`, `workflow_template`, `result`                                                  |
+| `testkube_testworkflowtemplate_deletes_total`               | counter   | Total number of test workflow templates deleted                                                                                 | `environment_name`, `workflow_template`, `result`                                                  |
+| **Triggers**                                                |           |                                                                                                                                 |                                                                                                    |
+| `testkube_testtrigger_creations_total`                      | counter   | Total number of test trigger created events                                                                                     | `environment_name`, `result`                                                                       |
+| `testkube_testtrigger_updates_total`                        | counter   | Total number of test trigger updated events                                                                                     | `environment_name`, `result`                                                                       |
+| `testkube_testtrigger_deletes_total`                        | counter   | Total number of test trigger deleted events                                                                                     | `environment_name`, `result`                                                                       |
+| `testkube_testtrigger_bulk_updates_total`                   | counter   | Total number of test trigger bulk update events                                                                                 | `environment_name`, `result`                                                                       |
+| `testkube_testtrigger_bulk_deletes_total`                   | counter   | Total number of test trigger bulk delete events                                                                                 | `environment_name`, `result`                                                                       |
+| **Webhooks**                                                |           |                                                                                                                                 |                                                                                                    |
+| `testkube_webhook_executions_total`                         | counter   | Total number of webhook executions                                                                                              | `environment_name`, `webhook_name`, `event_type`, `result`                                         |
 
 ## Examples
 
@@ -142,24 +142,24 @@ Agent-only legacy test and test-suite metric families (`testkube_test_*`, `testk
 
 ### Full Mapping Reference
 
-| Agent Metric | Control-Plane Metric |
-|---|---|
-| `testkube_testworkflow_executions_count` | `testkube_testworkflow_executions_total` |
-| `testkube_testworkflow_executions_duration_ms` | `testkube_testworkflow_executions_duration_seconds` |
-| `testkube_testworkflow_aborts_count` | `testkube_testworkflow_aborts_total` |
-| `testkube_testworkflow_execution_steps_count` | `testkube_testworkflow_execution_steps_total` |
-| `testkube_testworkflow_execution_steps_duration_ms` | `testkube_testworkflow_execution_steps_duration_seconds` |
-| `testkube_testworkflow_execution_steps_start_time_ms` | `testkube_testworkflow_execution_steps_start_time_seconds` |
+| Agent Metric                                           | Control-Plane Metric                                        |
+| ------------------------------------------------------ | ----------------------------------------------------------- |
+| `testkube_testworkflow_executions_count`               | `testkube_testworkflow_executions_total`                    |
+| `testkube_testworkflow_executions_duration_ms`         | `testkube_testworkflow_executions_duration_seconds`         |
+| `testkube_testworkflow_aborts_count`                   | `testkube_testworkflow_aborts_total`                        |
+| `testkube_testworkflow_execution_steps_count`          | `testkube_testworkflow_execution_steps_total`               |
+| `testkube_testworkflow_execution_steps_duration_ms`    | `testkube_testworkflow_execution_steps_duration_seconds`    |
+| `testkube_testworkflow_execution_steps_start_time_ms`  | `testkube_testworkflow_execution_steps_start_time_seconds`  |
 | `testkube_testworkflow_execution_steps_finish_time_ms` | `testkube_testworkflow_execution_steps_finish_time_seconds` |
-| `testkube_testworkflow_creations_count` | `testkube_testworkflow_creations_total` |
-| `testkube_testworkflow_updates_count` | `testkube_testworkflow_updates_total` |
-| `testkube_testworkflow_deletes_count` | `testkube_testworkflow_deletes_total` |
-| `testkube_testworkflowtemplate_creations_count` | `testkube_testworkflowtemplate_creations_total` |
-| `testkube_testworkflowtemplate_updates_count` | `testkube_testworkflowtemplate_updates_total` |
-| `testkube_testworkflowtemplate_deletes_count` | `testkube_testworkflowtemplate_deletes_total` |
-| `testkube_testtrigger_creations_count` | `testkube_testtrigger_creations_total` |
-| `testkube_testtriggers_updates_count` | `testkube_testtrigger_updates_total` |
-| `testkube_testtriggers_deletes_count` | `testkube_testtrigger_deletes_total` |
-| `testkube_testtriggers_bulk_updates_count` | `testkube_testtrigger_bulk_updates_total` |
-| `testkube_testtriggers_bulk_deletes_count` | `testkube_testtrigger_bulk_deletes_total` |
-| `testkube_webhook_executions_count` | `testkube_webhook_executions_total` |
+| `testkube_testworkflow_creations_count`                | `testkube_testworkflow_creations_total`                     |
+| `testkube_testworkflow_updates_count`                  | `testkube_testworkflow_updates_total`                       |
+| `testkube_testworkflow_deletes_count`                  | `testkube_testworkflow_deletes_total`                       |
+| `testkube_testworkflowtemplate_creations_count`        | `testkube_testworkflowtemplate_creations_total`             |
+| `testkube_testworkflowtemplate_updates_count`          | `testkube_testworkflowtemplate_updates_total`               |
+| `testkube_testworkflowtemplate_deletes_count`          | `testkube_testworkflowtemplate_deletes_total`               |
+| `testkube_testtrigger_creations_count`                 | `testkube_testtrigger_creations_total`                      |
+| `testkube_testtriggers_updates_count`                  | `testkube_testtrigger_updates_total`                        |
+| `testkube_testtriggers_deletes_count`                  | `testkube_testtrigger_deletes_total`                        |
+| `testkube_testtriggers_bulk_updates_count`             | `testkube_testtrigger_bulk_updates_total`                   |
+| `testkube_testtriggers_bulk_deletes_count`             | `testkube_testtrigger_bulk_deletes_total`                   |
+| `testkube_webhook_executions_count`                    | `testkube_webhook_executions_total`                         |

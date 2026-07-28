@@ -73,7 +73,7 @@ spec:
       condition: config.rerunFailed
       shell: npx playwright@1.52.0 test --last-failed --pass-with-no-tests
     - name: Run all tests
-      condition: '!config.rerunFailed'
+      condition: "!config.rerunFailed"
       shell: npx playwright@1.52.0 test
     - name: Upload artifacts
       artifacts:

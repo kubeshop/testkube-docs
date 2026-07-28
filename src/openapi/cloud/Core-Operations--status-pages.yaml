@@ -22,31 +22,31 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/StatusPage'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
-        '500':
-          $ref: './components.yaml#/components/responses/InternalServerError'
+                $ref: "./components.yaml#/components/schemas/StatusPage"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
+        "500":
+          $ref: "./components.yaml#/components/responses/InternalServerError"
   /status-pages/{statusPageID}/incidents:
     get:
       summary: Get incidents for status page
       description: Returns the list of incidents for the given statusPageID
       operationId: getPublicIncidentsByStatusPageID
       parameters:
-        - $ref: './components.yaml#/components/parameters/StatusPageID'
+        - $ref: "./components.yaml#/components/parameters/StatusPageID"
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/Incidents'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
-        '500':
-          $ref: './components.yaml#/components/responses/InternalServerError'
+        "200":
+          $ref: "./components.yaml#/components/responses/Incidents"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
+        "500":
+          $ref: "./components.yaml#/components/responses/InternalServerError"

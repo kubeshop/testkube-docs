@@ -28,9 +28,9 @@ The next screen will show the differences between the two steps:
 
 ## Artifact Collection
 
-Workflows that produce artifacts can be configured to upload those to Testkube's Artifact storage - [Read More](test-workflows-artifacts). These 
+Workflows that produce artifacts can be configured to upload those to Testkube's Artifact storage - [Read More](test-workflows-artifacts). These
 could be, for example, videos, logs, html-reports, JUnit XML reports, etc. - anything that you want to make available
-for inspecting or troubleshooting a test execution. 
+for inspecting or troubleshooting a test execution.
 
 Uploaded artifacts are available under the "Artifacts" folder:
 
@@ -46,8 +46,3 @@ For example, below shows the HTML report available in the screenshot above:
 You can retrieve logs and artifacts using the Testkube CLI also using the [get testworkflowexecution](/cli/testkube-get-testworkflowexecution).
 and [get artifact](/cli/testkube-get-artifact) commands.
 :::
-
-
-
-
-

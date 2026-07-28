@@ -16,7 +16,7 @@ paths:
       description: List agents used in the organization.
       operationId: listAgents
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
@@ -26,13 +26,13 @@ paths:
                   elements:
                     type: array
                     items:
-                      $ref: './components.yaml#/components/schemas/Agent'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+                      $ref: "./components.yaml#/components/schemas/Agent"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     post:
@@ -62,9 +62,9 @@ paths:
                   description: Capabilities enabled for this agent.
                   type: array
                   items:
-                    $ref: './components.yaml#/components/schemas/AgentCapability'
+                    $ref: "./components.yaml#/components/schemas/AgentCapability"
                 runnerPolicy:
-                  $ref: './components.yaml#/components/schemas/AgentRunnerPolicy'
+                  $ref: "./components.yaml#/components/schemas/AgentRunnerPolicy"
                 floating:
                   type: boolean
               required:
@@ -72,56 +72,56 @@ paths:
                 - environments
         required: true
       responses:
-        '201':
+        "201":
           description: Response
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: './components.yaml#/components/schemas/Agent'
+                  - $ref: "./components.yaml#/components/schemas/Agent"
                   - type: object
                     properties:
                       secretKey:
                         type: string
                     required:
                       - secretKey
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentIDQP'
-      - $ref: './components.yaml#/components/parameters/AgentCapabilityQP'
-      - $ref: './components.yaml#/components/parameters/Limit'
-      - $ref: './components.yaml#/components/parameters/Offset'
-      - $ref: './components.yaml#/components/parameters/Page'
-      - $ref: './components.yaml#/components/parameters/PageSize'
-      - $ref: './components.yaml#/components/parameters/IncludeDeleted'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentIDQP"
+      - $ref: "./components.yaml#/components/parameters/AgentCapabilityQP"
+      - $ref: "./components.yaml#/components/parameters/Limit"
+      - $ref: "./components.yaml#/components/parameters/Offset"
+      - $ref: "./components.yaml#/components/parameters/Page"
+      - $ref: "./components.yaml#/components/parameters/PageSize"
+      - $ref: "./components.yaml#/components/parameters/IncludeDeleted"
   /organizations/{id}/agents/{agentID}:
     get:
       summary: Get agent from the organization
       description: Get agent from the organization.
       operationId: getAgent
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/Agent'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+                $ref: "./components.yaml#/components/schemas/Agent"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     delete:
@@ -129,14 +129,14 @@ paths:
       description: Delete agent in the organization.
       operationId: deleteAgent
       responses:
-        '204':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "204":
+          $ref: "./components.yaml#/components/responses/NoContent"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     patch:
@@ -169,52 +169,52 @@ paths:
                     type: string
         required: true
       responses:
-        '204':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "204":
+          $ref: "./components.yaml#/components/responses/NoContent"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/AgentName'
-      - $ref: './components.yaml#/components/parameters/IncludeDeleted'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/AgentName"
+      - $ref: "./components.yaml#/components/parameters/IncludeDeleted"
   /organizations/{id}/agents/{agentID}/commands:
     get:
-      summary: '[internal] Get commands for this super agent'
+      summary: "[internal] Get commands for this super agent"
       description: >-
         Get commands for this super agent. This endpoint is deprecated and will
         be removed in the near future.
       operationId: getSuperAgentCommands
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/SuperAgentCommands'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+                $ref: "./components.yaml#/components/schemas/SuperAgentCommands"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/AgentName'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/AgentName"
   /organizations/{id}/agents/{agentID}/secret-key:
     get:
       summary: Get the secret key for selected agent.
       description: Get the secret key for selected agent.
       operationId: getAgentSecretKey
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
@@ -225,12 +225,12 @@ paths:
                     type: string
                 required:
                   - secretKey
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     delete:
@@ -238,7 +238,7 @@ paths:
       description: Regenerate the secret key for selected agent.
       operationId: regenerateAgentSecretKey
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
@@ -249,14 +249,14 @@ paths:
                     type: string
                 required:
                   - secretKey
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/AgentName'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/AgentName"

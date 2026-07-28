@@ -17,7 +17,7 @@ listener agents you choose.
 You can currently create/manage Event Triggers in the Testkube Dashboard or by interacting with corresponding Trigger custom resources
 via `kubectl`.
 
-## Creating Test Triggers 
+## Creating Test Triggers
 
 Select the Integrations tab (lightning bolt icon) on the left on the Testkube Dashboard to access the "Triggers"
 panel which shows a list of Triggers in your Environment.
@@ -33,14 +33,15 @@ Triggers are ultimately defined as Customer Resources in your cluster - [TestTri
 
 ## Listener Agents with TestTriggers
 
-Testkube uses [Listener Agents](/articles/agents-overview#listener-agents) 
-to listen for Kubernetes events that will be matched against your TestTriggers. Your Testkube Environment can have any number of 
+Testkube uses [Listener Agents](/articles/agents-overview#listener-agents)
+to listen for Kubernetes events that will be matched against your TestTriggers. Your Testkube Environment can have any number of
 Listener Agents, deployed to whichever namespaces/clusters you need to listen for events.
 
 The Listener Agent and Standalone Agent by default behave somewhat differently when it comes to listening for events:
-- Listener Agents by default listen for events only in the namespace they are deployed to, if you need to listen for events from 
+
+- Listener Agents by default listen for events only in the namespace they are deployed to, if you need to listen for events from
   additional namespaces, you can configure this as described at [Listening in additional namespaces](/articles/multi-agent-runner-helm-chart#listening-in-additional-namespaces).
-- The Standalone Agent listens for events in all namespaces, you can configure this as described at 
+- The Standalone Agent listens for events in all namespaces, you can configure this as described at
   [Multi-namespace Agent Installation](/articles/install/advanced-install#multi-namespace-agent-installation).
 
 ### Listener Agent Event Labels
@@ -80,7 +81,7 @@ spec:
   listener:
     match:
       id:
-        - <listener-agent-id>   # one or more listener agent IDs
+        - <listener-agent-id> # one or more listener agent IDs
 ```
 
 Leave `listener` out to keep the default broadcast behavior. If you author YAML
@@ -153,9 +154,9 @@ your own CRDs. You select the resource by its API Group, Version, and Kind:
 
 ```yaml
 resourceRef:
-  group: argoproj.io       # the API group; use "" for core resources like Pod or Service
-  version: v1alpha1        # the API version
-  kind: Rollout            # the resource kind
+  group: argoproj.io # the API group; use "" for core resources like Pod or Service
+  version: v1alpha1 # the API version
+  kind: Rollout # the resource kind
 ```
 
 `resourceRef` and the older `resource` field both pick what the trigger
@@ -260,7 +261,7 @@ spec:
 Sometimes you only want a trigger to fire when a specific field changes — not
 on every event for the resource. **Match conditions** let you do that. Each
 entry inspects a single field on the watched object; the trigger fires only
-when *all* entries are satisfied.
+when _all_ entries are satisfied.
 
 :::info
 Match conditions are validated against the schema a specific listener
@@ -288,7 +289,7 @@ Each entry has three parts:
 ### Operators
 
 | Operator       | Fires when…                                                                |
-|----------------|----------------------------------------------------------------------------|
+| -------------- | -------------------------------------------------------------------------- |
 | `equals`       | the field currently equals `value`                                         |
 | `not_equals`   | the field currently does not equal `value`                                 |
 | `exists`       | the field is present on the object (no `value` needed)                     |
@@ -344,7 +345,7 @@ spec:
     target:
       match:
         name:
-          - '{{ .Agent.Name }}'
+          - "{{ .Agent.Name }}"
 ```
 
 - Target by agent labels (e.g., environment):
@@ -378,10 +379,10 @@ Available template fields (Go templates and JSONPath):
 - `Agent.Name` (string)
 - `Agent.Labels` (map) — access with `{{ index .Agent.Labels "<key>" }}`
 - `EventLabels` (map) — includes auto-populated keys:
-    - `testkube.io/agent-name`, `testkube.io/agent-namespace`
-    - `testkube.io/resource-name`, `testkube.io/resource-namespace`
-    - `testkube.io/resource-kind`, `testkube.io/resource-group`, `testkube.io/resource-version`
-    - plus any pairs from `EVENT_LABELS`, e.g., `cluster:dev` → `{{ index .EventLabels "cluster" }}`
+  - `testkube.io/agent-name`, `testkube.io/agent-namespace`
+  - `testkube.io/resource-name`, `testkube.io/resource-namespace`
+  - `testkube.io/resource-kind`, `testkube.io/resource-group`, `testkube.io/resource-version`
+  - plus any pairs from `EVENT_LABELS`, e.g., `cluster:dev` → `{{ index .EventLabels "cluster" }}`
 - `Namespace` (string) — namespace of the resource that emitted the event
 - `Object` — the full Kubernetes object for the event
 
@@ -426,7 +427,7 @@ spec:
 - **Event** - `created`, `modified`, `deleted`
   - For deployments - `deployment-scale-update`, `deployment-image-update`, `deployment-env-update`, `deployment-containers-modified`,
     `deployment-generation-modified`, `deployment-resource-modified`
-  - For Testkube events - `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`, 
+  - For Testkube events - `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`,
     `event-end-testworkflow-failed`, `event-end-testworkflow-aborted`, `event-created`, `event-updated`, `event-deleted`
 - **Execution** - `testworkflow`
 - **ConcurrencyPolicy** - `allow`, `forbid`, `replace`
@@ -483,6 +484,7 @@ spec:
     namespace: frontend
   disabled: false
 ```
+
 ### On an Argo Rollout becoming Healthy
 
 A common pattern with [Argo Rollouts](https://argoproj.github.io/argo-rollouts/)
@@ -505,8 +507,8 @@ spec:
   listener:
     match:
       id:
-        - <listener-agent-id>   # a listener that can watch Rollouts
-  event: modified                # changed_to / changed_from / changed require this
+        - <listener-agent-id> # a listener that can watch Rollouts
+  event: modified # changed_to / changed_from / changed require this
   match:
     - path: .status.phase
       operator: changed_to

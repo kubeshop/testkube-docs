@@ -16,43 +16,43 @@ paths:
       description: List test workflows from the kubernetes cluster with latest execution
       operationId: listTestWorkflowWithExecutions
       parameters:
-        - $ref: './components.yaml#/components/parameters/Selector'
+        - $ref: "./components.yaml#/components/parameters/Selector"
       responses:
-        '200':
+        "200":
           description: successful list operation
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/TestWorkflowWithExecutionSummary'
+                  $ref: "./components.yaml#/components/schemas/TestWorkflowWithExecutionSummary"
             text/yaml:
               schema:
                 type: string
-        '400':
+        "400":
           description: problem with selector parsing - probably some bad input occurs
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '402':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "402":
           description: missing Pro subscription for a commercial feature
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '502':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "502":
           description: problem communicating with kubernetes cluster
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
+                  $ref: "./components.yaml#/components/schemas/Problem"
     parameters:
       - name: id
         in: path
@@ -74,41 +74,41 @@ paths:
         execution
       operationId: getTestWorkflowWithExecution
       parameters:
-        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: "./components.yaml#/components/parameters/ID"
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/TestWorkflowWithExecution'
+                $ref: "./components.yaml#/components/schemas/TestWorkflowWithExecution"
             text/yaml:
               schema:
                 type: string
-        '402':
+        "402":
           description: missing Pro subscription for a commercial feature
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '404':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "404":
           description: the resource has not been found
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '502':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "502":
           description: problem communicating with kubernetes cluster
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
+                  $ref: "./components.yaml#/components/schemas/Problem"
     parameters:
       - name: id
         in: path
@@ -128,9 +128,9 @@ paths:
       description: List test workflow execution tags for all executed test workflows
       operationId: listTestWorkflowWithExecutionTags
       parameters:
-        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: "./components.yaml#/components/parameters/ID"
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
@@ -146,15 +146,15 @@ paths:
                   env:
                     - prod
                   toDelete:
-                    - 'yes'
-        '502':
+                    - "yes"
+        "502":
           description: problem communicating with kubernetes cluster
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
+                  $ref: "./components.yaml#/components/schemas/Problem"
     parameters:
       - name: id
         in: path

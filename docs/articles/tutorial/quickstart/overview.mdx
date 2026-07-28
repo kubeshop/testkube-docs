@@ -7,15 +7,16 @@ export function KV({items}) {
   const row  = { margin: '0 0 .35rem', fontSize: '0.95rem', lineHeight: 1.5 };
   const key  = { fontWeight: 700 }; // bold label
 
-  return (
-    <div style={wrap}>
-      {items.map(([k, v]) => (
-        <p key={k} style={row}>
-          <span style={key}>{k}:</span> {v}
-        </p>
-      ))}
-    </div>
-  );
+return (
+
+<div style={wrap}>
+{items.map(([k, v]) => (
+<p key={k} style={row}>
+<span style={key}>{k}:</span> {v}
+</p>
+))}
+</div>
+);
 }
 
 # Quickstart Overview
@@ -58,6 +59,7 @@ export const QuickstartCardList = (input) => (
         <DocCard item={item} />
       </article>
     ))}
+
   </section>
 );
 
@@ -91,6 +93,7 @@ export const QuickstartCardList2 = (input) => (
         <DocCard item={item} />
       </article>
     ))}
+
   </section>
 );
 
@@ -124,6 +127,7 @@ export const QuickstartCardList3 = (input) => (
         <DocCard item={item} />
       </article>
     ))}
+
   </section>
 );
 
@@ -131,7 +135,7 @@ export const QuickstartCardList3 = (input) => (
 
 ## 2. Schedule a call with our Solutions Engineering team
 
-Once you've decided on your path (or if you're not sure), [Schedule time with our Solutions Engineering team!](https://testkube.io/demo) to get your evaluation license 
+Once you've decided on your path (or if you're not sure), [Schedule time with our Solutions Engineering team!](https://testkube.io/demo) to get your evaluation license
 and get answers to any outstanding questions.
 
 :::info
