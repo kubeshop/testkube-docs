@@ -13,7 +13,13 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
-    "split-openapis": "tsc && npx tsx src/scripts/split-openapis.ts"
+    "split-openapis": "tsc && npx tsx src/scripts/split-openapis.ts",
+    "prepare": "husky",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,md,mdx,yml,yaml,css}": "prettier --write --ignore-unknown"
   },
   "dependencies": {
     "@docusaurus/core": "^3.10.1",
@@ -36,7 +42,10 @@
     "@docusaurus/tsconfig": "^3.10.1",
     "@types/js-yaml": "4.0.9",
     "baseline-browser-mapping": "^2.9.18",
+    "husky": "^9.1.7",
     "js-yaml": "4.1.0",
+    "lint-staged": "^17.2.0",
+    "prettier": "^3.9.6",
     "tsx": "4.11.0",
     "typescript": "5.4.5"
   },

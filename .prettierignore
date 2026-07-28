@@ -1,0 +1,14 @@
+build
+.docusaurus
+node_modules
+package-lock.json
+
+# Generated documentation
+docs/cli
+docs/crd
+docs/inventory
+docs/openapi
+docs/articles/inventory/generated
+
+# Generated assets and outputs
+static/openapi
