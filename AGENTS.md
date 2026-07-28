@@ -45,6 +45,7 @@
 1. Install dependencies: `npm install`
 2. Start dev server: `npm run start` (defaults to port 3000, use `-- --port XXXX` to change)
 3. Preview at: http://localhost:3000
+4. Install git hooks locally after dependencies are installed: `npm run prepare`
 
 ### Adding New Documentation
 
@@ -60,15 +61,26 @@
      ]
    }
    ```
-3. Test locally: `npm run start`
-4. Build to check for errors: `npm run build` (catches broken links, etc.)
-5. Commit and create PR
+3. Format changes before committing: `npm run format` (or verify only with `npm run format:check`)
+4. Test locally: `npm run start`
+5. Build to check for errors: `npm run build` (catches broken links, etc.)
+6. Commit and create PR
+
+### Formatting
+
+- Prettier is the repository formatter
+- `npm run format` formats the repo
+- `npm run format:check` validates formatting without writing changes
+- `pre-commit` runs `lint-staged`, which formats staged `js`, `jsx`, `ts`, `tsx`, `json`, `md`, `mdx`, `yml`, `yaml`, and `css` files
+- CI checks Prettier formatting on changed files only, to avoid requiring a repo-wide reformat
+- Generated content is excluded through `.prettierignore`, including `docs/cli/`, `docs/crd/`, `docs/openapi/`, `docs/articles/inventory/generated/`, and `static/openapi/`
 
 ## Documentation Patterns
 
 ### Styling
 
 - **Admonitions**: Use Docusaurus [admonitions](https://docusaurus.io/docs/markdown-features/admonitions) for warnings/info messages:
+
   ```mdx
   :::warning
   This is a warning message
@@ -76,11 +88,13 @@
   ```
 
 - **Code Block Titles**: Use Docusaurus [code block titles](https://docusaurus.io/docs/markdown-features/code-blocks#code-title):
+
   ````mdx
   ```js title="file.js"
   // code content
   ```
   ````
+
   **Don't** put the filename above the code block as plain text.
 
 - **Tabs**: Use tabs for multi-option content (e.g., installation methods). Note: Headlines inside tab content appear in navigation but won't work as direct links unless under the default/first tab.
@@ -89,8 +103,8 @@
 
 - Deprecated APIs should include a legacy warning banner:
   ```mdx
-  import LegacyWarning from '../_legacy-warning.mdx';
-  
+  import LegacyWarning from "../_legacy-warning.mdx";
+
   <LegacyWarning />
   ```
 
@@ -138,6 +152,7 @@
   ---
   title: Page Title
   ---
+
   <meta name="docsearch:indexPrefix" content="Reference" />
   ```
 
@@ -170,6 +185,7 @@
 ## Tips
 
 - Always run `npm run build` before committing to catch broken links and build errors
+- Run `npm run format` before committing documentation changes to keep diffs consistent
 - Update `sidebars.js` when adding new documentation files
 - Use MDX (`.mdx`) for rich content with React components
 - Use Markdown (`.md`) for simple text-only documentation
