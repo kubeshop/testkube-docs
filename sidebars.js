@@ -894,6 +894,11 @@ const sidebars = {
               ],
             },
             {
+              type: "doc",
+              label: "Testkube Skills",
+              id: "articles/testkube-skills",
+            },
+            {
               type: "category",
               label: "Reference",
               items: [

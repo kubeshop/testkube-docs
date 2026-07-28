@@ -23,6 +23,12 @@ More specifically, it allows you and your AI agents to:
 :::
 
 :::tip
+The MCP Server gives your agent access to Testkube. To also teach it *how* to use Testkube — discovering
+tests in a repository, authoring valid TestWorkflow YAML, diagnosing failed executions — install the
+[Testkube Agent Skills](/articles/testkube-skills). The two work well together.
+:::
+
+:::tip
 When used with agentic AI tools like GitHub Copilot with Claude Sonnet 4 in VS Code or Cursor, the Testkube MCP enables:
 
 - **Multi-step Problem Solving:** AI agents can run multiple tools in sequence to solve complex testing scenarios.
