@@ -3,10 +3,10 @@ import TabItem from "@theme/TabItem";
 
 # Testkube Agent Skills
 
-**Testkube Agent Skills** teach your AI coding agent how to create, run, and debug tests on
-Kubernetes with Testkube. Instead of explaining TestWorkflow syntax or CLI conventions to your
-agent on every request, you install a set of skills once and the agent picks up the right one when
-it needs it.
+**Testkube Agent Skills** teach your AI coding agent what Testkube is and how to create, run, and
+debug tests on Kubernetes with it. Instead of explaining the platform, TestWorkflow syntax, or CLI
+conventions to your agent on every request, you install a set of skills once and the agent picks up
+the right one when it needs it.
 
 The skills are open source (MIT) and live at
 [github.com/kubeshop/testkube-skills](https://github.com/kubeshop/testkube-skills). They follow the
@@ -26,6 +26,23 @@ Skills work against both Testkube Cloud and open source environments. One of the
 you.
 
 ## Available Skills
+
+### Start Here
+
+One general skill acts as the entry point. It carries the platform knowledge the others assume, and
+routes to whichever specialist fits the request.
+
+| Skill | What it does | Use when |
+|-------|--------------|----------|
+| `testkube` | Explains what Testkube is, how Control Plane and open source standalone differ, and the core concepts — TestWorkflows, templates, executions, agents, triggers, webhooks, expressions. Carries a curated index of the documentation, CLI orientation, and decision trees that route to the specialist skills. | Your agent needs context on Testkube itself, you are asking where something is documented, or you want to run tests somewhere local execution cannot reach and are not sure what to reach for. |
+
+It orients and routes — it never installs, authors YAML, or runs executions itself. Two behaviors
+are worth calling out:
+
+- For topics no skill covers — webhooks, triggers, integrations, resource CRUD — it points at the
+  relevant documentation page and `testkube ... --help` rather than guessing.
+- When your tests should simply be run locally, it says so and stops. Asking an agent to "run my k6
+  tests" on your own machine should get you `k6 run`, not a Kubernetes cluster.
 
 ### Setup
 
@@ -69,6 +86,8 @@ for it or when the output path ends in `.md`.
 
 ```mermaid
 flowchart LR
+  entry["testkube<br/>orientation + routing"]
+
   subgraph setup [Setup]
     direction TB
     cli["installing-testkube-cli<br/>install / verify CLI"]
@@ -87,10 +106,15 @@ flowchart LR
     disc --> manifest --> author --> wf --> runner --> report
   end
 
+  entry --> setup
+  entry --> chain
   setup -. prerequisites for .-> chain
 ```
 
-Get the tooling ready first: `installing-testkube-cli` makes sure the `testkube` command exists,
+Start with `testkube` when you do not yet know which skill you need — it works out what the request
+actually requires and hands off.
+
+From there, get the tooling ready first: `installing-testkube-cli` makes sure the `testkube` command exists,
 and `installing-testkube-oss-agent` gives you something to run against — skip it if you already
 have a Testkube Cloud or open source environment.
 
@@ -130,6 +154,7 @@ The quickest path — no clone required. In Claude Code, add the marketplace and
 Installed this way, the skills are namespaced:
 
 ```
+/testkube-skills:testkube
 /testkube-skills:installing-testkube-cli
 /testkube-skills:installing-testkube-oss-agent
 /testkube-skills:test-discovery
@@ -150,6 +175,7 @@ git clone https://github.com/kubeshop/testkube-skills
 cd testkube-skills
 mkdir -p ~/.claude/skills
 
+cp -r plugins/testkube-skills/skills/testkube ~/.claude/skills/
 cp -r plugins/testkube-skills/skills/installing-testkube-cli ~/.claude/skills/
 cp -r plugins/testkube-skills/skills/installing-testkube-oss-agent ~/.claude/skills/
 cp -r plugins/testkube-skills/skills/test-discovery ~/.claude/skills/
@@ -172,6 +198,7 @@ git clone https://github.com/kubeshop/testkube-skills /tmp/testkube-skills
 
 mkdir -p .github/skills
 SKILLS=/tmp/testkube-skills/plugins/testkube-skills/skills
+cp -r $SKILLS/testkube .github/skills/
 cp -r $SKILLS/installing-testkube-cli .github/skills/
 cp -r $SKILLS/installing-testkube-oss-agent .github/skills/
 cp -r $SKILLS/test-discovery .github/skills/
@@ -212,6 +239,7 @@ Point Cursor at this repository or marketplace to install `testkube-skills`.
 Invoke a skill directly with a slash command and a short instruction:
 
 ```text
+/testkube What is Testkube and where do I start?
 /installing-testkube-cli Install the Testkube CLI if it isn't already present
 /installing-testkube-oss-agent Spin up a local OSS Testkube environment
 /test-discovery Analyze the repository at /path/to/repo
@@ -228,6 +256,13 @@ Find the tests in this repo and get them running in Testkube
 
 ```text
 My checkout tests keep failing in Testkube. Figure out why.
+```
+
+You do not have to mention Testkube at all. The `testkube` skill also picks up requests to run
+tests somewhere a local run cannot reach:
+
+```text
+Run my k6 load test against the staging cluster, not my laptop
 ```
 
 ### From Zero to a Running Test
