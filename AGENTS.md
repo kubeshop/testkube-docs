@@ -86,7 +86,7 @@ Article slugs are linked from outside this repo, so a rename is never just a fil
      to: "/articles/new-slug",
    },
    ```
-   Note these are *client-side* redirects — the old URL keeps returning HTTP 200 and serves a
+   Note these are _client-side_ redirects — the old URL keeps returning HTTP 200 and serves a
    meta-refresh stub. Any external link checker that only inspects status codes will report the
    stale slug as healthy.
 2. **Update `sidebars.js`** to point at the new file.
