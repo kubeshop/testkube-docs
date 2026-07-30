@@ -155,7 +155,7 @@ Help me debug my last failed workflow execution
 ```
 
 ```text
-Create a new test workflow for my Python API and run it 
+Create a new test workflow for my Python API and run it
 ```
 
 ```text

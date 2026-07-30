@@ -1,6 +1,6 @@
 # Execution Tags
 
-Execution tags let you label, filter, and organize your test executions. Tags are key-value pairs 
+Execution tags let you label, filter, and organize your test executions. Tags are key-value pairs
 that can be set when an execution is triggered, or added and modified after an execution has completed,
 making them useful both for upfront categorization and for post-hoc analysis.
 
@@ -16,14 +16,14 @@ You can add tags to a workflow execution by setting the `execution.tags` field i
 kind: TestWorkflow
 apiVersion: testworkflows.testkube.io/v1
 metadata:
-   name: execution-tags-sample
-   labels:
-      docs: example
+  name: execution-tags-sample
+  labels:
+    docs: example
 spec:
-   execution:
-      tags:
-         service: '{{config.serviceUnderTest}}'
-         url: '{{config.targetUrl}}'
+  execution:
+    tags:
+      service: "{{config.serviceUnderTest}}"
+      url: "{{config.targetUrl}}"
 ```
 
 ### From the CLI
@@ -41,7 +41,7 @@ see more at [Action Parameters](/articles/test-triggers#action-parameters).
 
 ### Via the REST API
 
-When triggering a TestWorkflow execution via the REST API using the `executeTestWorkflow` operation, it is possible to specify 
+When triggering a TestWorkflow execution via the REST API using the `executeTestWorkflow` operation, it is possible to specify
 tags using the `tags` property - [Read More](https://docs.testkube.io/openapi/cloud/Agent-Operations----test-workflows#operation/executeTestWorkflow).
 
 ## Editing Tags After Execution
@@ -100,13 +100,13 @@ spec:
       default: https://testkube.io
   execution:
     tags:
-      service: '{{config.serviceUnderTest}}'
-      url: '{{config.targetUrl}}'
+      service: "{{config.serviceUnderTest}}"
+      url: "{{config.targetUrl}}"
   steps:
-  - name: Run curl
-    container:
-      image: curlimages/curl:8.7.1
-    shell: curl -s -I {{ config.targetUrl }}
+    - name: Run curl
+      container:
+        image: curlimages/curl:8.7.1
+      shell: curl -s -I {{ config.targetUrl }}
 ```
 
 #### How It Works
@@ -119,7 +119,7 @@ spec:
 
 3. Each execution of this workflow will be tagged with these values.
 4. Importantly, you can change the config values on each run, allowing you to use the same workflow definition for testing different services and URLs.
-   
+
 ### Using Tags for Filtering
 
 You can run this workflow multiple times with different values for `serviceUnderTest` and `targetUrl`. For example:
@@ -150,11 +150,11 @@ spec:
       default: main
   execution:
     tags:
-      branch: '{{ config.branch }}'
+      branch: "{{ config.branch }}"
   content:
     git:
       uri: https://github.com/kubeshop/testkube
-      revision: '{{ config.branch }}'
+      revision: "{{ config.branch }}"
   steps:
     - shell: echo running tests
 ```
@@ -183,7 +183,7 @@ Executions View as shown above.
 
 ### Post-Execution Failure Categorization
 
-Tags don't have to be set at execution time. A powerful pattern is to tag executions *after*
+Tags don't have to be set at execution time. A powerful pattern is to tag executions _after_
 they complete — for example, an AI agent or CI pipeline step that inspects failed executions
 and categorizes the root cause.
 

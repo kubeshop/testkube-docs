@@ -39,9 +39,9 @@ testkube-api:
   # Create a priority class for Testkube, i.e. high
   priorityClassName: high
   tolerations:
-  - key: testkube
-    operator: Exists
-    effect: NoSchedule
+    - key: testkube
+      operator: Exists
+      effect: NoSchedule
 nats:
   config:
     cluster:
@@ -49,9 +49,9 @@ nats:
       replicas: 3
   podTemplate:
     topologySpreadConstraints:
-    - maxSkew: 1
-      topologyKey: zone
-      whenUnsatisfiable: DoNotSchedule
+      - maxSkew: 1
+        topologyKey: zone
+        whenUnsatisfiable: DoNotSchedule
 ```
 
 ### Control Plane
@@ -63,51 +63,51 @@ testkube-cloud-api:
   replicaCount: 3
   # Spread replicas across zones
   topologySpreadConstraints:
-  - maxSkew: 1
-    topologyKey: zone
-    whenUnsatisfiable: DoNotSchedule
-    labelSelector:
-      matchLabels:
-        app.kubernetes.io/name: testkube-cloud-api
+    - maxSkew: 1
+      topologyKey: zone
+      whenUnsatisfiable: DoNotSchedule
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/name: testkube-cloud-api
   priorityClassName: high
   tolerations:
-  - key: testkube
-    operator: Exists
-    effect: NoSchedule
+    - key: testkube
+      operator: Exists
+      effect: NoSchedule
 testkube-cloud-ui:
   replicaCount: 3
   topologySpreadConstraints:
-  - maxSkew: 1
-    topologyKey: zone
-    whenUnsatisfiable: DoNotSchedule
-    labelSelector:
-      matchLabels:
-        app.kubernetes.io/name: testkube-cloud-ui
+    - maxSkew: 1
+      topologyKey: zone
+      whenUnsatisfiable: DoNotSchedule
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/name: testkube-cloud-ui
   priorityClassName: high
   tolerations:
-  - key: testkube
-    operator: Exists
-    effect: NoSchedule
+    - key: testkube
+      operator: Exists
+      effect: NoSchedule
 testkube-worker-service:
   priorityClassName: high
   tolerations:
-  - key: testkube
-    operator: Exists
-    effect: NoSchedule
+    - key: testkube
+      operator: Exists
+      effect: NoSchedule
 dex:
   replicaCount: 3
   topologySpreadConstraints:
-  - maxSkew: 1
-    topologyKey: zone
-    whenUnsatisfiable: DoNotSchedule
-    labelSelector:
-      matchLabels:
-        app.kubernetes.io/name: dex
+    - maxSkew: 1
+      topologyKey: zone
+      whenUnsatisfiable: DoNotSchedule
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/name: dex
   priorityClassName: high
   tolerations:
-  - key: testkube
-    operator: Exists
-    effect: NoSchedule
+    - key: testkube
+      operator: Exists
+      effect: NoSchedule
 nats:
   config:
     cluster:
@@ -115,23 +115,23 @@ nats:
       replicas: 3
   podTemplate:
     topologySpreadConstraints:
-    - maxSkew: 1
-      topologyKey: zone
-      whenUnsatisfiable: DoNotSchedule
+      - maxSkew: 1
+        topologyKey: zone
+        whenUnsatisfiable: DoNotSchedule
 ```
 
 ## Caveats
 
 - The agent under the current architecture can only run as a single instance.
   Coordinating multiple replicas would require implementing leader election, but
-electing a new leader would mostly likely take longer than spawning a new pod on
-a different node and reconnecting.
+  electing a new leader would mostly likely take longer than spawning a new pod on
+  a different node and reconnecting.
 - The operator can only run as a single instance, but it is responsible for
   running a periodic reconciliation process which at most could be delayed while
-a new pod spawns on a different node.
+  a new pod spawns on a different node.
 - Setting up PostgreSQL for high availability is outside of the scope of this
   guide, but in production deployments we highly recommend utilizing a managed service
-or operator-backed deployment for PostgreSQL. MongoDB-based legacy deployments should continue using an [external MongoDB cluster](./mongodb-administration#using-an-external-mongodb-instance).
+  or operator-backed deployment for PostgreSQL. MongoDB-based legacy deployments should continue using an [external MongoDB cluster](./mongodb-administration#using-an-external-mongodb-instance).
 - Dex should be backed by an highly available data storage like
   [etcd](https://dexidp.io/docs/configuration/storage/#etcd).
 - The NATS chart is currently missing the ability to specify `tolerations` and

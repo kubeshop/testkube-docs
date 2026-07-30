@@ -8,16 +8,16 @@ Popular policy engines like [Open Policy Agent (OPA)](https://www.openpolicyagen
 
 Kyverno is a policy engine that allows you to create policies as YAML-based declarative Kubernetes resources and enforce policies as a Kubernetes admission controller. Here are the different types of policies it supports:
 
-* A [validate policy](https://kyverno.io/docs/writing-policies/validate/) defines a set of required criteria that a Kubernetes resource must meet during creation. The policy checks whether the resource configuration matches predefined standards or constraints. Kyverno offers different modes of policy enforcement:  
-  * Enforce: Blocks resources that don't meet policy requirements  
-  * Audit: Allows resource creation but logs violations
+- A [validate policy](https://kyverno.io/docs/writing-policies/validate/) defines a set of required criteria that a Kubernetes resource must meet during creation. The policy checks whether the resource configuration matches predefined standards or constraints. Kyverno offers different modes of policy enforcement:
+  - Enforce: Blocks resources that don't meet policy requirements
+  - Audit: Allows resource creation but logs violations
 
-* A [mutate policy](https://kyverno.io/docs/writing-policies/mutate/) identifies resources that violate the predefined standards and makes precise changes to the resource being created.
+- A [mutate policy](https://kyverno.io/docs/writing-policies/mutate/) identifies resources that violate the predefined standards and makes precise changes to the resource being created.
 
 In our demo, we'll showcase two practical policy implementation scenarios that address common challenges in Test Workflow management:
 
-* Validating container image tags to ensure consistency and security for test execution.  
-* Automatically adding standardized labels to Test Workflow to ensure consistent scheduling and reporting.
+- Validating container image tags to ensure consistency and security for test execution.
+- Automatically adding standardized labels to Test Workflow to ensure consistent scheduling and reporting.
 
 We will dig deeper into what these demonstrations are once we have met the requirements and have a cluster ready.
 
@@ -31,67 +31,67 @@ One common requirement is ensuring that all Test Workflows use properly tagged i
 
 Validate Policy allows us to check for non-compliant resources with the `latest` image tag and control their creation on the cluster. We can deny or allow their creation with a warning if they violate the policy. In this demo, here are the things we plan to do:
 
-1. **Create a validate policy** that filters incoming requests for Test Workflow creation and defines rules to check the resource configuration does not use the `latest` image tag.  
+1. **Create a validate policy** that filters incoming requests for Test Workflow creation and defines rules to check the resource configuration does not use the `latest` image tag.
 2. **Enforce policy on Test Workflow** by deploying first the policy and then the Test Workflow on the cluster.
 
 ### Create Validate Policy
 
 In this policy, we have defined that for a Test Workflow, check the usage of `latest` image tag and warn in case of violation.
 
-```yaml  
-apiVersion: kyverno.io/v1  
-kind: ClusterPolicy  
-metadata:  
-  name: check-all-image-tags  
-spec:  
-  emitWarning: true  
-  rules: 
-    - name: validate-step-image  
-      match:  
-        resources:  
-          kinds:  
-            - TestWorkflow  
-      validate:  
-        failureAction: Audit  
-        foreach:  
-          - list: "request.object.spec.steps"  
-            pattern:  
-              =(container):  
-                =(image): "!*:latest"  
-          - list: "request.object.spec.steps"  
-            pattern:  
-              =(run):  
-                =(image): "!*:latest"  
-    - name: validate-container-image  
-      match:  
-        resources:  
-          kinds:  
-            - TestWorkflow  
-      validate:  
-        failureAction: Audit  
-        pattern:  
-           spec:  
-             =(container):  
-                =(image): "!*:latest"  
+```yaml
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: check-all-image-tags
+spec:
+  emitWarning: true
+  rules:
+    - name: validate-step-image
+      match:
+        resources:
+          kinds:
+            - TestWorkflow
+      validate:
+        failureAction: Audit
+        foreach:
+          - list: "request.object.spec.steps"
+            pattern:
+              =(container):
+                =(image): "!*:latest"
+          - list: "request.object.spec.steps"
+            pattern:
+              =(run):
+                =(image): "!*:latest"
+    - name: validate-container-image
+      match:
+        resources:
+          kinds:
+            - TestWorkflow
+      validate:
+        failureAction: Audit
+        pattern:
+          spec:
+            =(container):
+              =(image): "!*:latest"
 ```
 
 Let us understand the above policy:
 
-* **spec.emitWarning**: Set to true to print the warning message. By default, all the violations of a policy are logged in the policy report.
+- **spec.emitWarning**: Set to true to print the warning message. By default, all the violations of a policy are logged in the policy report.
 
-* **spec.rules.match.resources.kinds**: Set to TestWorkflow to only intercept and apply this policy on Test Workflows.
+- **spec.rules.match.resources.kinds**: Set to TestWorkflow to only intercept and apply this policy on Test Workflows.
 
-* **spec.rules.validate**: Define multiple validate rules that check for image tag in the `spec.steps` and `spec`.
+- **spec.rules.validate**: Define multiple validate rules that check for image tag in the `spec.steps` and `spec`.
 
-* **spec.rules.validate.pattern or spec.rules.validate.foreach.pattern:** Define the pattern to match like `spec.steps.container.image`, `spec.steps.run.image` or `spec.container.image`. The [equality anchor](https://kyverno.io/docs/writing-policies/validate/#anchors) `=()` helps ensure that the match processing happens only if tag exists.
+- **spec.rules.validate.pattern or spec.rules.validate.foreach.pattern:** Define the pattern to match like `spec.steps.container.image`, `spec.steps.run.image` or `spec.container.image`. The [equality anchor](https://kyverno.io/docs/writing-policies/validate/#anchors) `=()` helps ensure that the match processing happens only if tag exists.
 
-* **spec.rules.validate.failureAction**: Set to Audit to only warn on non-compliance and allow Test Workflow creation. It can be set to `Enforce` to disallow the creation of resources for non-compliance.
+- **spec.rules.validate.failureAction**: Set to Audit to only warn on non-compliance and allow Test Workflow creation. It can be set to `Enforce` to disallow the creation of resources for non-compliance.
 
 Save the policy in [validate-all-image-tags.yaml](https://github.com/cerebro1/testkube-policies/blob/main/validate-all-image-tags/validate-all-image-tags.yaml) and apply it on the cluster.
 
 ```
-$ kubectl apply -f validate-all-image-tags.yaml   
-clusterpolicy.kyverno.io/check-all-image-tags configured  
+$ kubectl apply -f validate-all-image-tags.yaml
+clusterpolicy.kyverno.io/check-all-image-tags configured
 ```
 
 The policy is successfully deployed on a Kubernetes cluster. Kyverno Reports Controller will require permission to create a [policy report](https://kyverno.io/docs/policy-reports/) so make sure you have [customized permissions](https://kyverno.io/docs/installation/customization/#customizing-permissions) to allow `kyverno-reports-controller` Service Account access to security-critical resources.
@@ -100,39 +100,39 @@ The policy is successfully deployed on a Kubernetes cluster. Kyverno Reports Con
 
 We have taken a sample Test Workflow and created two versions of it. Let us go ahead and apply these on the cluster.
 
-* [tw-image-run-versioned.yaml](https://github.com/cerebro1/testkube-policies/blob/main/validate-all-image-tags/tw-image-run-versioned.yaml): Uses a version as an image tag in `spec.steps.run.image`  
-    
-  ```yaml  
-   steps:  
-      - name: Run k6 tests  
-        run:  
-          image: grafana/k6:0.54.0  
-          shell: k6 run k6.js --iterations 100  
-  ```  
-  Apply the versioned image tag Test Workflow on the cluster.  
-    
-  ```  
-  $ kubectl apply -f tw-image-run-versioned.yaml   
-  testworkflow.testworkflows.testkube.io/testkube-run-versioned created  
-  ```  
-    
-  This TestWorkflow successfully passed the policy check and has been created on the cluster.  
-    
-* [tw-image-run-latest.yaml](https://github.com/cerebro1/testkube-policies/blob/main/validate-all-image-tags/tw-image-run-latest.yaml): Uses latest as an image tag in `spec.steps.run.image`
+- [tw-image-run-versioned.yaml](https://github.com/cerebro1/testkube-policies/blob/main/validate-all-image-tags/tw-image-run-versioned.yaml): Uses a version as an image tag in `spec.steps.run.image`
 
   ```yaml
-   steps:
-      - name: Run k6 tests
-        run:
-          image: grafana/k6:latest
-          shell: k6 run k6.js --iterations 100
+  steps:
+    - name: Run k6 tests
+      run:
+        image: grafana/k6:0.54.0
+        shell: k6 run k6.js --iterations 100
+  ```
+
+  Apply the versioned image tag Test Workflow on the cluster.
+
+  ```
+  $ kubectl apply -f tw-image-run-versioned.yaml
+  testworkflow.testworkflows.testkube.io/testkube-run-versioned created
+  ```
+
+  This TestWorkflow successfully passed the policy check and has been created on the cluster.
+
+- [tw-image-run-latest.yaml](https://github.com/cerebro1/testkube-policies/blob/main/validate-all-image-tags/tw-image-run-latest.yaml): Uses latest as an image tag in `spec.steps.run.image`
+
+  ```yaml
+  steps:
+    - name: Run k6 tests
+      run:
+        image: grafana/k6:latest
+        shell: k6 run k6.js --iterations 100
   ```
 
   Apply the latest image tag Test Workflow on the cluster.
 
-
   ```
-  $ kubectl apply -f tw-image-run-latest.yaml 
+  $ kubectl apply -f tw-image-run-latest.yaml
   Warning: policy check-all-image-tags.validate-step-image: validation failure: validation error: rule validate-step-image failed at path /run/image/
   testworkflow.testworkflows.testkube.io/testkube-run-latest created
   ```
@@ -143,18 +143,19 @@ We have taken a sample Test Workflow and created two versions of it. Let us go a
 
 You can manage and view the policies running on your cluster using `kubectl`.
 
-1. Get the policies created on the cluster.  
-   ```  
-   kubectl get clusterpolicy  
-   NAME                   ADMISSION   BACKGROUND   READY   AGE     MESSAGE  
-   check-all-image-tags   true        true         True    5h37m   Ready  
-   ```  
-     
-2. Check events for a policy.  
-   ```  
-   $ kubectl events --for clusterpolicy/check-all-image-tags  
-   LAST SEEN   TYPE      REASON            OBJECT                               MESSAGE  
-   28m         Warning   PolicyViolation   ClusterPolicy/check-all-image-tags   TestWorkflow testkube/testkube-run-latest: \[validate-step-image\] fail; validation failure: validation error: rule validate-step-image failed at path /run/image/  
+1. Get the policies created on the cluster.
+
+   ```
+   kubectl get clusterpolicy
+   NAME                   ADMISSION   BACKGROUND   READY   AGE     MESSAGE
+   check-all-image-tags   true        true         True    5h37m   Ready
+   ```
+
+2. Check events for a policy.
+   ```
+   $ kubectl events --for clusterpolicy/check-all-image-tags
+   LAST SEEN   TYPE      REASON            OBJECT                               MESSAGE
+   28m         Warning   PolicyViolation   ClusterPolicy/check-all-image-tags   TestWorkflow testkube/testkube-run-latest: \[validate-step-image\] fail; validation failure: validation error: rule validate-step-image failed at path /run/image/
    ```
 
 The above output shows event was logged regarding Test Workflow which is non-compliant with this policy. You can also enable [Policy Reporter UI](https://kyverno.github.io/policy-reporter/#policy-reporter-ui) to manage policies running on your cluster.
@@ -169,39 +170,40 @@ In this use case, we are going to discuss another common real-world example wher
 
 In this policy, we have defined that for a Test Workflow, add a specific label if it does not exist in the resource configuration.
 
-```yaml  
-apiVersion: kyverno.io/v1  
-kind: ClusterPolicy  
-metadata:  
-  name: mutate-testworkflow-label  
-spec:  
-  rules:  
-    - name: add-mutated-label  
-      match:  
-        resources:  
-          kinds:  
-            - TestWorkflow  
-      mutate:  
-        patchStrategicMerge:  
-          metadata:  
-            labels:  
-              +(testkube.io/policy-test): kyverno  
-```  
+```yaml
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: mutate-testworkflow-label
+spec:
+  rules:
+    - name: add-mutated-label
+      match:
+        resources:
+          kinds:
+            - TestWorkflow
+      mutate:
+        patchStrategicMerge:
+          metadata:
+            labels:
+              +(testkube.io/policy-test): kyverno
+```
+
 Let us understand the above policy:
 
-* **spec.rules.match.resources.kinds**: Set to TestWorkflow to only intercept and apply this policy on Test Workflows.
+- **spec.rules.match.resources.kinds**: Set to TestWorkflow to only intercept and apply this policy on Test Workflows.
 
-* **spec.rules.mutate**: Define mutate rule within this.
+- **spec.rules.mutate**: Define mutate rule within this.
 
-* **spec.rules.mutate.patchStrategicMerge**: Defines the content that will be merged to the element using [Strategic Merge Patch](https://kyverno.io/docs/writing-policies/mutate/#strategic-merge-patch).
+- **spec.rules.mutate.patchStrategicMerge**: Defines the content that will be merged to the element using [Strategic Merge Patch](https://kyverno.io/docs/writing-policies/mutate/#strategic-merge-patch).
 
-* **+()**: Conditional logic that adds the label `[testkube.io/policy-test=kyverno](http://testkube.io/policy-test=kyverno)\` only if it does not exist in resource configuration.
+- **+()**: Conditional logic that adds the label `[testkube.io/policy-test=kyverno](http://testkube.io/policy-test=kyverno)\` only if it does not exist in resource configuration.
 
 Save the policy in [mutate-custom-label.yaml](https://github.com/cerebro1/testkube-policies/blob/main/mutate-custom-labels/mutate-custom-label.yaml) and apply it on the cluster.
 
-```  
-$ kubectl apply -f mutate-custom-label.yaml  
-clusterpolicy.kyverno.io/mutate-testworkflow-label created  
+```
+$ kubectl apply -f mutate-custom-label.yaml
+clusterpolicy.kyverno.io/mutate-testworkflow-label created
 ```
 
 The policy is successfully deployed on a Kubernetes cluster. Kyverno Reports Controller will require permission to create a [policy report](https://kyverno.io/docs/policy-reports/) so make sure you have [customized permissions](https://kyverno.io/docs/installation/customization/#customizing-permissions) to allow `kyverno-reports-controller` Service Account access to security-critical resources.
@@ -211,20 +213,20 @@ The policy is successfully deployed on a Kubernetes cluster. Kyverno Reports Con
 We have taken a sample Test Workflow: [tw-without-label.yaml](https://github.com/cerebro1/testkube-policies/blob/main/mutate-custom-labels/tw-without-label.yaml), which does not contain the expected label. Let us go ahead and apply these on the cluster.
 
 ```yaml
-apiVersion: testworkflows.testkube.io/v1  
-kind: TestWorkflow  
-metadata:  
-  name: jmeter-missing-label  
-  namespace: testkube  
-  labels:  
-    docs: example  
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: jmeter-missing-label
+  namespace: testkube
+  labels:
+    docs: example
 ```
 
 Apply the Test Workflow without the expected label on the cluster.
 
-```  
-$ kubectl apply -f tw-without-label.yaml   
-testworkflow.testworkflows.testkube.io/jmeter-missing-label created  
+```
+$ kubectl apply -f tw-without-label.yaml
+testworkflow.testworkflows.testkube.io/jmeter-missing-label created
 ```
 
 The Test Workflow is successfully applied on the cluster. Since the Kyverno policy to mutate labels already is deployed on the cluster, the Test Workflow specifications should have been updated.
@@ -233,17 +235,17 @@ The Test Workflow is successfully applied on the cluster. Since the Kyverno poli
 
 Using the Testkube CLI, we can check the Test Workflow details as shown below:
 
-```  
+```
 $ kubectl testkube get tw jmeter-missing-label
 
-Context: cloud (2.1.60)   Namespace: testkube   Org: xxxxxxxxxxxxxxxx  Env: xxxxxxxxxxxxxxxxxx  
--------------------------------------------------------------------------------------------------------------------------  
-Test Workflow:  
-Name:      jmeter-missing-label  
-Namespace: testkube  
+Context: cloud (2.1.60)   Namespace: testkube   Org: xxxxxxxxxxxxxxxx  Env: xxxxxxxxxxxxxxxxxx
+-------------------------------------------------------------------------------------------------------------------------
+Test Workflow:
+Name:      jmeter-missing-label
+Namespace: testkube
 Created:   2025-01-23 18:10:11 +0000 UTC
 
-Labels:    docs=example, testkube.io/policy-test=kyverno  
+Labels:    docs=example, testkube.io/policy-test=kyverno
 ```
 
 In the Labels, you can verify that the custom label has been added successfully.
@@ -255,52 +257,52 @@ Access the Test Workflow in the Testkube Dashboard.
 Trigger the first execution of Test Workflow from the Dashboard or you can use CLI as shown below:
 
 ```
-$ kubectl testkube start tw jmeter-missing-label  
-…  
-Test Workflow Execution:  
-Name:                 jmeter-missing-label  
-Execution ID:         6792f7c35eae71edfaea514c  
-Execution name:       jmeter-missing-label-1  
-Execution namespace:    
-Execution number:     1  
-Requested at:         2025-01-24 02:15:31.484376794 +0000 UTC  
-…  
+$ kubectl testkube start tw jmeter-missing-label
+…
+Test Workflow Execution:
+Name:                 jmeter-missing-label
+Execution ID:         6792f7c35eae71edfaea514c
+Execution name:       jmeter-missing-label-1
+Execution namespace:
+Execution number:     1
+Requested at:         2025-01-24 02:15:31.484376794 +0000 UTC
+…
 Status:               queued
 
-$ Watch test workflow execution until complete \\  
-	kubectl testkube watch twe 6792f7c35eae71edfaea514c  
-$ Use following command to get test workflow execution details \\  
-	kubectl testkube get twe 6792f7c35eae71edfaea514c  
+$ Watch test workflow execution until complete \\
+	kubectl testkube watch twe 6792f7c35eae71edfaea514c
+$ Use following command to get test workflow execution details \\
+	kubectl testkube get twe 6792f7c35eae71edfaea514c
 ```
 
 Check the status of execution using the commands mentioned in the above output:
 
-```  
+```
 $ kubectl testkube get twe 6792f7c35eae71edfaea514c
 
-Context: cloud (2.1.60)   Namespace: testkube   Org: xxxxxxxxxxxx   Env: xxxx  
---------------------------------------------------------------------  
-Test Workflow Execution:  
-Name:                 jmeter-missing-label  
-Execution ID:         6792f7c35eae71edfaea514c  
-Execution name:       jmeter-missing-label-1  
-Execution namespace:    
-Execution number:     1  
-Requested at:         2025-01-24 02:15:31.484 +0000 UTC  
-Disabled webhooks:    false  
-Running context:       
-Interface:             
-  Type:               cli  
-Status:               passed  
-…  
-Duration:             48.826s  
-Getting logs for test workflow execution 6792f7c35eae71edfaea514c  
-…  
-Found and uploaded 129 files (3.0 MB).  
-Took 6.888s.  
-Test Workflow URI: https://app.testkube.io/organization/xxxx/test-workflows/jmeter-missing-label  
-Test Workflow Execution URI: https://app.testkube.io/organization/xxx/jmeter-missing-label/xxxx  
-• passed in 7.904s  
+Context: cloud (2.1.60)   Namespace: testkube   Org: xxxxxxxxxxxx   Env: xxxx
+--------------------------------------------------------------------
+Test Workflow Execution:
+Name:                 jmeter-missing-label
+Execution ID:         6792f7c35eae71edfaea514c
+Execution name:       jmeter-missing-label-1
+Execution namespace:
+Execution number:     1
+Requested at:         2025-01-24 02:15:31.484 +0000 UTC
+Disabled webhooks:    false
+Running context:
+Interface:
+  Type:               cli
+Status:               passed
+…
+Duration:             48.826s
+Getting logs for test workflow execution 6792f7c35eae71edfaea514c
+…
+Found and uploaded 129 files (3.0 MB).
+Took 6.888s.
+Test Workflow URI: https://app.testkube.io/organization/xxxx/test-workflows/jmeter-missing-label
+Test Workflow Execution URI: https://app.testkube.io/organization/xxx/jmeter-missing-label/xxxx
+• passed in 7.904s
 ```
 
 Use the above links to view the Test Workflow in the Testkube Dashboard.  
@@ -312,7 +314,7 @@ For Test Workflows that contain the expected label, Kyverno will not add to them
 
 The above examples just hint at the possibilities for using policies to enforce consistent and scalable usage of Testkube Workflows across teams and projects. Given the extensive functionality of Workflows, other examples could be:
 
-- A policy to enforce correct usage of [Workflow Resource Constraints](https://docs.testkube.io/articles/test-workflows#resources) within defined limits  
-- A policy to ensure only allowed [git repositories/branches](https://docs.testkube.io/articles/test-workflows-content#git-repository) are used for test scripts  
-- A policy to ensure that [test parallelisation](https://docs.testkube.io/articles/test-workflows-parallel) or sharding does not use more than X nodes  
+- A policy to enforce correct usage of [Workflow Resource Constraints](https://docs.testkube.io/articles/test-workflows#resources) within defined limits
+- A policy to ensure only allowed [git repositories/branches](https://docs.testkube.io/articles/test-workflows-content#git-repository) are used for test scripts
+- A policy to ensure that [test parallelisation](https://docs.testkube.io/articles/test-workflows-parallel) or sharding does not use more than X nodes
 - A policy to ensure that [artifacts](https://docs.testkube.io/articles/test-workflows-artifacts) are collected from all test executions, etc.

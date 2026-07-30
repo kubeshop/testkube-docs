@@ -12,12 +12,11 @@ resource usage and optimize accordingly. This functionality allows you to identi
 Testkube samples the following metrics and calculates aggregates for each Workflow Step that runs a container command:
 
 | Metric          | Value Types | Aggregates                         | Description                                      |
-|-----------------|-------------|------------------------------------|--------------------------------------------------|
-| CPU             | millicores  | min, max, avg, total               | CPU usage in millicores over time                 |
+| --------------- | ----------- | ---------------------------------- | ------------------------------------------------ |
+| CPU             | millicores  | min, max, avg, total               | CPU usage in millicores over time                |
 | Memory          | bytes       | min, max, avg, total               | Memory usage in bytes over time                  |
 | Network Traffic | bytes       | sent/received min, max, avg, total | Network traffic (read/write) in bytes per second |
 | Disk IO         | bytes       | read/write min, max, avg, total    | Disk operations (read/write) in bytes per second |
-
 
 :::note
 The default sampling frequency is 1 second, please note that for short running tests (less than 3 seconds), this
@@ -31,6 +30,7 @@ Collected metrics and related metadata is visualized in the "Resource Usage" tab
 ![Basic Resource Usage](images/basic-resource-usage.png)
 
 There are four charts:
+
 - **CPU** - shows CPU usage over time for each pod/node, with CPU requests and limits as dashed and dotted lines respectively.
 - **Memory** - shows memory usage over time for each pod/node, with Memory requests and limits as dashed and dotted lines respectively.
 - **Network Traffic** - shows ingoing/outgoing network traffic over time.
@@ -38,24 +38,26 @@ There are four charts:
 
 The y-axis is logarithmic for the CPU and Memory charts, linear for Network and Disk Usage.
 
-Moving the pointer over the chart will automatically highlight and show details for the corresponding data-point, as shown 
-for the selected 10:21:08 timestamp above. 
+Moving the pointer over the chart will automatically highlight and show details for the corresponding data-point, as shown
+for the selected 10:21:08 timestamp above.
 
 The corresponding Workflow for the execution above had the following Resource Request defined:
 
 ```yaml
+
 ...
-  container:
-    workingDir: /data/repo/test/pytest/pytest-project
-    image: python:3.12.6-alpine3.20
-    resources:
-      requests:
-        cpu: 256m
-        memory: 256Mi
+container:
+  workingDir: /data/repo/test/pytest/pytest-project
+  image: python:3.12.6-alpine3.20
+  resources:
+    requests:
+      cpu: 256m
+      memory: 256Mi
 ...
 ```
 
 As you can see in the chart:
+
 - the CPU usage was well above the requested 256m for the initial seconds, but dropped below for the rest of the execution
 - the memory usage was far below the requested 256Mi during the entire execution
 - there were early spikes for both network traffic and disk usage, which were expected for the underlying test itself.
@@ -65,14 +67,15 @@ Since the Workflow had no Resource Limits defined, the default limits for CPU an
 The below example runs a Cypress test that has both requests and limits defined as follows:
 
 ```yaml
+
 ...
-    resources:
-      limits:
-        cpu: 2
-        memory: 2Gi
-      requests:
-        cpu: 2
-        memory: 2Gi
+resources:
+  limits:
+    cpu: 2
+    memory: 2Gi
+  requests:
+    cpu: 2
+    memory: 2Gi
 ...
 ```
 
@@ -86,7 +89,7 @@ For Workflows with multiple steps, these are separated by purple lines, for exam
 
 ![Multi-Step Resource Usage](images/multi-step-resource-usage.png)
 
-This Workflow has 5 steps, each indicated with a vertical dotted line in the charts. Hovering over a specific line 
+This Workflow has 5 steps, each indicated with a vertical dotted line in the charts. Hovering over a specific line
 shows the name of the step on the top of the chart.
 
 ### Visualisation of parallel Nodes
@@ -107,7 +110,7 @@ been deselected to show only Worker Reads in the graph:
 
 ## Aggregate Visualisation
 
-Hovering the Resource-Metric indicator in the Execution details and Execution list displays that executions average 
+Hovering the Resource-Metric indicator in the Execution details and Execution list displays that executions average
 and peak value for each metric.
 
 Execution Details:
@@ -137,7 +140,7 @@ Selecting a Metric value further allows you to select which aggregate to use in 
 The following aggregates are available for each metric across selected Executions:
 
 | Metric        | Metric Aggregate | Insights Aggregate | Description                                                 |
-|---------------|------------------|--------------------|-------------------------------------------------------------|
+| ------------- | ---------------- | ------------------ | ----------------------------------------------------------- |
 | CPU Usage     | Millicores min   | min                | The min CPU Usage for all selected Executions               |
 |               |                  | max                | The highest min CPU Usage for all selected Executions       |
 |               | Millicores max   | min                | The smallest max CPU Usage for all selected Executions      |
@@ -174,4 +177,3 @@ The following aggregates are available for each metric across selected Execution
 |               |                  | max                | The max bytes written for all selected Executions           |
 |               | Write avg        | average            | The average avg bytes written for all selected Executions   |
 |               | Write total      | sum                | The total bytes written for all selected Executions         |
-

@@ -11,7 +11,12 @@
         theme: {
           extend: {
             colors: {
-              tk: { purple: "#6366f1", dark: "#0f172a", panel: "#1e293b", code: "#0d1117" },
+              tk: {
+                purple: "#6366f1",
+                dark: "#0f172a",
+                panel: "#1e293b",
+                code: "#0d1117",
+              },
             },
             fontFamily: { mono: ["JetBrains Mono", "monospace"] },
           },
@@ -112,18 +117,33 @@
       }
     </style>
   </head>
-  <body class="bg-tk-dark text-slate-200 h-screen flex flex-col overflow-hidden">
+  <body
+    class="bg-tk-dark text-slate-200 h-screen flex flex-col overflow-hidden"
+  >
     <!-- Header -->
-    <header class="flex items-center justify-between px-6 py-3 border-b border-slate-700/50 flex-shrink-0">
-      <a href="https://testkube.io" target="_blank" class="flex items-center gap-3 no-underline">
-        <img src="/img/logo.large.svg" alt="Testkube" height="28" style="height: 28px" />
+    <header
+      class="flex items-center justify-between px-6 py-3 border-b border-slate-700/50 flex-shrink-0"
+    >
+      <a
+        href="https://testkube.io"
+        target="_blank"
+        class="flex items-center gap-3 no-underline"
+      >
+        <img
+          src="/img/logo.large.svg"
+          alt="Testkube"
+          height="28"
+          style="height: 28px"
+        />
         <h1 class="text-lg font-semibold text-white" style="margin: 0">
           Walkthrough of TestWorkflow concepts.
         </h1>
       </a>
       <div class="flex items-center gap-4">
         <span id="stageCounter" class="text-sm text-slate-400"></span>
-        <span class="text-xs text-slate-500 border border-slate-700 px-2 py-1 rounded">
+        <span
+          class="text-xs text-slate-500 border border-slate-700 px-2 py-1 rounded"
+        >
           Arrow keys or Space to navigate
         </span>
       </div>
@@ -139,8 +159,13 @@
     <main class="flex flex-1 overflow-hidden">
       <!-- YAML Panel -->
       <div class="w-[45%] border-r border-slate-700/50 flex flex-col">
-        <div class="flex items-center justify-between px-4 py-2 border-b border-slate-700/30 bg-tk-code">
-          <span id="yamlTitle" class="text-sm font-medium text-slate-300"></span>
+        <div
+          class="flex items-center justify-between px-4 py-2 border-b border-slate-700/30 bg-tk-code"
+        >
+          <span
+            id="yamlTitle"
+            class="text-sm font-medium text-slate-300"
+          ></span>
           <span class="text-xs text-slate-500">YAML</span>
         </div>
         <div class="flex-1 overflow-auto bg-tk-code p-4">
@@ -150,11 +175,21 @@
 
       <!-- Diagram Panel -->
       <div class="w-[55%] flex flex-col">
-        <div class="flex items-center justify-between px-4 py-2 border-b border-slate-700/30 bg-tk-panel">
-          <span class="text-sm font-medium text-slate-300">Pipeline Visualization</span>
-          <span id="diagramBadge" class="text-xs px-2 py-0.5 rounded-full bg-tk-purple/20 text-tk-purple"></span>
+        <div
+          class="flex items-center justify-between px-4 py-2 border-b border-slate-700/30 bg-tk-panel"
+        >
+          <span class="text-sm font-medium text-slate-300"
+            >Pipeline Visualization</span
+          >
+          <span
+            id="diagramBadge"
+            class="text-xs px-2 py-0.5 rounded-full bg-tk-purple/20 text-tk-purple"
+          ></span>
         </div>
-        <div id="diagram" class="flex-1 overflow-hidden bg-tk-panel flex items-center justify-center p-4"></div>
+        <div
+          id="diagram"
+          class="flex-1 overflow-hidden bg-tk-panel flex items-center justify-center p-4"
+        ></div>
       </div>
     </main>
 
@@ -167,7 +202,14 @@
         onclick="prev()"
         class="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-sm font-medium transition-colors"
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <path d="M15 18l-6-6 6-6" />
         </svg>
         Prev
@@ -181,7 +223,14 @@
         class="flex items-center gap-2 px-4 py-2 rounded-lg bg-tk-purple hover:bg-indigo-400 text-white text-sm font-medium transition-colors"
       >
         Next
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <path d="M9 18l6-6-6-6" />
         </svg>
       </button>
@@ -195,8 +244,12 @@
         // ── Stage 1: The Simplest Test ──
         {
           title: "The Simplest Test",
-          concept: "A TestWorkflow is a Kubernetes CRD. <code>kubectl apply</code> it and run your tests.",
-          readMore: { label: "TestWorkflows Overview", url: "/articles/test-workflows" },
+          concept:
+            "A TestWorkflow is a Kubernetes CRD. <code>kubectl apply</code> it and run your tests.",
+          readMore: {
+            label: "TestWorkflows Overview",
+            url: "/articles/test-workflows",
+          },
           yaml: `apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata:
@@ -210,9 +263,34 @@ spec:
         npx playwright test --reporter=list`,
           diagram: {
             nodes: [
-              { id: "start", label: "Start", x: 100, y: 150, w: 90, h: 44, type: "start" },
-              { id: "test", label: "Run e2e tests", x: 300, y: 150, w: 160, h: 44, type: "step", icon: "play" },
-              { id: "end", label: "Pass / Fail", x: 570, y: 150, w: 120, h: 44, type: "end" },
+              {
+                id: "start",
+                label: "Start",
+                x: 100,
+                y: 150,
+                w: 90,
+                h: 44,
+                type: "start",
+              },
+              {
+                id: "test",
+                label: "Run e2e tests",
+                x: 300,
+                y: 150,
+                w: 160,
+                h: 44,
+                type: "step",
+                icon: "play",
+              },
+              {
+                id: "end",
+                label: "Pass / Fail",
+                x: 570,
+                y: 150,
+                w: 120,
+                h: 44,
+                type: "end",
+              },
             ],
             edges: [
               ["start", "test"],
@@ -226,7 +304,10 @@ spec:
           title: "Add Configuration",
           concept:
             "<code>spec.config</code> makes the same workflow reusable — pass different base URLs per environment.",
-          readMore: { label: "Parameterization", url: "/articles/test-workflows-examples-configuration" },
+          readMore: {
+            label: "Parameterization",
+            url: "/articles/test-workflows-examples-configuration",
+          },
           yaml: `apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata:
@@ -244,10 +325,43 @@ spec:
         BASE_URL={{ config.baseUrl }} npx playwright test --reporter=list`,
           diagram: {
             nodes: [
-              { id: "config", label: "Config: baseUrl", x: 280, y: 60, w: 170, h: 40, type: "config" },
-              { id: "start", label: "Start", x: 100, y: 150, w: 90, h: 44, type: "start" },
-              { id: "test", label: "Run e2e tests", x: 300, y: 150, w: 160, h: 44, type: "step", icon: "play" },
-              { id: "end", label: "Pass / Fail", x: 570, y: 150, w: 120, h: 44, type: "end" },
+              {
+                id: "config",
+                label: "Config: baseUrl",
+                x: 280,
+                y: 60,
+                w: 170,
+                h: 40,
+                type: "config",
+              },
+              {
+                id: "start",
+                label: "Start",
+                x: 100,
+                y: 150,
+                w: 90,
+                h: 44,
+                type: "start",
+              },
+              {
+                id: "test",
+                label: "Run e2e tests",
+                x: 300,
+                y: 150,
+                w: 160,
+                h: 44,
+                type: "step",
+                icon: "play",
+              },
+              {
+                id: "end",
+                label: "Pass / Fail",
+                x: 570,
+                y: 150,
+                w: 120,
+                h: 44,
+                type: "end",
+              },
             ],
             edges: [
               ["start", "test"],
@@ -262,7 +376,10 @@ spec:
           title: "Fetch Tests from Git",
           concept:
             "<code>spec.content.git</code> clones your test repo automatically — tests live in source control, not inline.",
-          readMore: { label: "Content", url: "/articles/test-workflows-content" },
+          readMore: {
+            label: "Content",
+            url: "/articles/test-workflows-content",
+          },
           yaml: `apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata:
@@ -287,11 +404,53 @@ spec:
         BASE_URL={{ config.baseUrl }} npx playwright test --reporter=list`,
           diagram: {
             nodes: [
-              { id: "config", label: "Config: baseUrl", x: 310, y: 55, w: 170, h: 38, type: "config" },
-              { id: "git", label: "Git Clone", x: 60, y: 150, w: 120, h: 44, type: "source" },
-              { id: "install", label: "npm ci", x: 240, y: 150, w: 110, h: 44, type: "step", icon: "shell" },
-              { id: "test", label: "Run e2e tests", x: 420, y: 150, w: 160, h: 44, type: "step", icon: "play" },
-              { id: "end", label: "Pass / Fail", x: 650, y: 150, w: 120, h: 44, type: "end" },
+              {
+                id: "config",
+                label: "Config: baseUrl",
+                x: 310,
+                y: 55,
+                w: 170,
+                h: 38,
+                type: "config",
+              },
+              {
+                id: "git",
+                label: "Git Clone",
+                x: 60,
+                y: 150,
+                w: 120,
+                h: 44,
+                type: "source",
+              },
+              {
+                id: "install",
+                label: "npm ci",
+                x: 240,
+                y: 150,
+                w: 110,
+                h: 44,
+                type: "step",
+                icon: "shell",
+              },
+              {
+                id: "test",
+                label: "Run e2e tests",
+                x: 420,
+                y: 150,
+                w: 160,
+                h: 44,
+                type: "step",
+                icon: "play",
+              },
+              {
+                id: "end",
+                label: "Pass / Fail",
+                x: 650,
+                y: 150,
+                w: 120,
+                h: 44,
+                type: "end",
+              },
             ],
             edges: [
               ["git", "install"],
@@ -305,7 +464,8 @@ spec:
         // ── Stage 4: Testing Against External Services ──
         {
           title: "Testing Against External Services",
-          concept: "Tests hit a staging app. This works — but if staging is down or busy, your tests are flaky.",
+          concept:
+            "Tests hit a staging app. This works — but if staging is down or busy, your tests are flaky.",
           yaml: `apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata:
@@ -330,15 +490,73 @@ spec:
         BASE_URL={{ config.baseUrl }} npx playwright test --reporter=list`,
           diagram: {
             boxes: [
-              { id: "wf-boundary", label: "Testkube Cluster", x: 20, y: 30, w: 530, h: 200, style: "boundary" },
-              { id: "staging", label: "Staging Environment", x: 590, y: 30, w: 220, h: 200, style: "external" },
+              {
+                id: "wf-boundary",
+                label: "Testkube Cluster",
+                x: 20,
+                y: 30,
+                w: 530,
+                h: 200,
+                style: "boundary",
+              },
+              {
+                id: "staging",
+                label: "Staging Environment",
+                x: 590,
+                y: 30,
+                w: 220,
+                h: 200,
+                style: "external",
+              },
             ],
             nodes: [
-              { id: "git", label: "Git Clone", x: 40, y: 120, w: 110, h: 44, type: "source" },
-              { id: "install", label: "npm ci", x: 190, y: 120, w: 100, h: 44, type: "step", icon: "shell" },
-              { id: "test", label: "Run e2e tests", x: 340, y: 120, w: 160, h: 44, type: "step", icon: "play" },
-              { id: "app", label: "App Server", x: 620, y: 80, w: 140, h: 44, type: "external" },
-              { id: "db", label: "PostgreSQL", x: 620, y: 155, w: 140, h: 44, type: "external" },
+              {
+                id: "git",
+                label: "Git Clone",
+                x: 40,
+                y: 120,
+                w: 110,
+                h: 44,
+                type: "source",
+              },
+              {
+                id: "install",
+                label: "npm ci",
+                x: 190,
+                y: 120,
+                w: 100,
+                h: 44,
+                type: "step",
+                icon: "shell",
+              },
+              {
+                id: "test",
+                label: "Run e2e tests",
+                x: 340,
+                y: 120,
+                w: 160,
+                h: 44,
+                type: "step",
+                icon: "play",
+              },
+              {
+                id: "app",
+                label: "App Server",
+                x: 620,
+                y: 80,
+                w: 140,
+                h: 44,
+                type: "external",
+              },
+              {
+                id: "db",
+                label: "PostgreSQL",
+                x: 620,
+                y: 155,
+                w: 140,
+                h: 44,
+                type: "external",
+              },
             ],
             edges: [
               ["git", "install"],
@@ -348,7 +566,9 @@ spec:
               ["test", "app", "cross"],
               ["app", "db", "service"],
             ],
-            annotations: [{ text: "coupled to staging", x: 600, y: 60, color: "#f87171" }],
+            annotations: [
+              { text: "coupled to staging", x: 600, y: 60, color: "#f87171" },
+            ],
           },
         },
 
@@ -357,7 +577,10 @@ spec:
           title: "Bring the App Into the Workflow",
           concept:
             "<code>spec.services</code> runs your app as an ephemeral container. Readiness probes ensure it is healthy before tests run.",
-          readMore: { label: "Services", url: "/articles/test-workflows-services" },
+          readMore: {
+            label: "Services",
+            url: "/articles/test-workflows-services",
+          },
           yaml: `apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata:
@@ -402,11 +625,53 @@ spec:
               },
             ],
             nodes: [
-              { id: "app", label: "App Server", x: 360, y: 55, w: 150, h: 44, type: "service" },
-              { id: "git", label: "Git Clone", x: 40, y: 150, w: 110, h: 44, type: "source" },
-              { id: "install", label: "npm ci", x: 200, y: 150, w: 100, h: 44, type: "step", icon: "shell" },
-              { id: "test", label: "Run e2e tests", x: 360, y: 150, w: 160, h: 44, type: "step", icon: "play" },
-              { id: "end", label: "Tear Down", x: 580, y: 150, w: 110, h: 44, type: "end" },
+              {
+                id: "app",
+                label: "App Server",
+                x: 360,
+                y: 55,
+                w: 150,
+                h: 44,
+                type: "service",
+              },
+              {
+                id: "git",
+                label: "Git Clone",
+                x: 40,
+                y: 150,
+                w: 110,
+                h: 44,
+                type: "source",
+              },
+              {
+                id: "install",
+                label: "npm ci",
+                x: 200,
+                y: 150,
+                w: 100,
+                h: 44,
+                type: "step",
+                icon: "shell",
+              },
+              {
+                id: "test",
+                label: "Run e2e tests",
+                x: 360,
+                y: 150,
+                w: 160,
+                h: 44,
+                type: "step",
+                icon: "play",
+              },
+              {
+                id: "end",
+                label: "Tear Down",
+                x: 580,
+                y: 150,
+                w: 110,
+                h: 44,
+                type: "end",
+              },
             ],
             edges: [
               ["git", "install"],
@@ -416,7 +681,12 @@ spec:
             links: [["app", "test", "service"]],
             annotations: [
               { text: "httpGet /health:3000", x: 370, y: 42, color: "#22c55e" },
-              { text: "{{ services.app.0.ip }}:3000", x: 340, y: 118, color: "#fde68a" },
+              {
+                text: "{{ services.app.0.ip }}:3000",
+                x: 340,
+                y: 118,
+                color: "#fde68a",
+              },
             ],
           },
         },
@@ -426,7 +696,10 @@ spec:
           title: "Add a Database Service",
           concept:
             "Your app needs a database — add it as another service. The app connects to the DB, Playwright tests the app.",
-          readMore: { label: "Services", url: "/articles/test-workflows-services" },
+          readMore: {
+            label: "Services",
+            url: "/articles/test-workflows-services",
+          },
           yaml: `apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata:
@@ -485,12 +758,62 @@ spec:
               },
             ],
             nodes: [
-              { id: "db", label: "PostgreSQL", x: 180, y: 50, w: 140, h: 44, type: "service" },
-              { id: "app", label: "App Server", x: 400, y: 50, w: 150, h: 44, type: "service" },
-              { id: "git", label: "Git Clone", x: 40, y: 165, w: 110, h: 44, type: "source" },
-              { id: "install", label: "npm ci", x: 200, y: 165, w: 100, h: 44, type: "step", icon: "shell" },
-              { id: "test", label: "e2e tests", x: 370, y: 165, w: 140, h: 44, type: "step", icon: "play" },
-              { id: "end", label: "Tear Down", x: 580, y: 165, w: 110, h: 44, type: "end" },
+              {
+                id: "db",
+                label: "PostgreSQL",
+                x: 180,
+                y: 50,
+                w: 140,
+                h: 44,
+                type: "service",
+              },
+              {
+                id: "app",
+                label: "App Server",
+                x: 400,
+                y: 50,
+                w: 150,
+                h: 44,
+                type: "service",
+              },
+              {
+                id: "git",
+                label: "Git Clone",
+                x: 40,
+                y: 165,
+                w: 110,
+                h: 44,
+                type: "source",
+              },
+              {
+                id: "install",
+                label: "npm ci",
+                x: 200,
+                y: 165,
+                w: 100,
+                h: 44,
+                type: "step",
+                icon: "shell",
+              },
+              {
+                id: "test",
+                label: "e2e tests",
+                x: 370,
+                y: 165,
+                w: 140,
+                h: 44,
+                type: "step",
+                icon: "play",
+              },
+              {
+                id: "end",
+                label: "Tear Down",
+                x: 580,
+                y: 165,
+                w: 110,
+                h: 44,
+                type: "end",
+              },
             ],
             edges: [
               ["git", "install"],
@@ -504,7 +827,12 @@ spec:
             annotations: [
               { text: "pg_isready", x: 195, y: 38, color: "#22c55e" },
               { text: "GET /health", x: 420, y: 38, color: "#22c55e" },
-              { text: "All ephemeral — created and destroyed per execution", x: 180, y: 230, color: "#94a3b8" },
+              {
+                text: "All ephemeral — created and destroyed per execution",
+                x: 180,
+                y: 230,
+                color: "#94a3b8",
+              },
             ],
           },
         },
@@ -514,7 +842,10 @@ spec:
           title: "Collect Artifacts",
           concept:
             "<code>artifacts</code> saves Playwright HTML reports, traces, and screenshots — viewable in the Testkube dashboard.",
-          readMore: { label: "Artifacts", url: "/articles/test-workflows-artifacts" },
+          readMore: {
+            label: "Artifacts",
+            url: "/articles/test-workflows-artifacts",
+          },
           yaml: `apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata:
@@ -577,13 +908,71 @@ spec:
               },
             ],
             nodes: [
-              { id: "db", label: "PostgreSQL", x: 150, y: 50, w: 130, h: 44, type: "service" },
-              { id: "app", label: "App Server", x: 350, y: 50, w: 140, h: 44, type: "service" },
-              { id: "git", label: "Git Clone", x: 40, y: 165, w: 100, h: 44, type: "source" },
-              { id: "install", label: "npm ci", x: 185, y: 165, w: 90, h: 44, type: "step", icon: "shell" },
-              { id: "test", label: "e2e tests", x: 330, y: 165, w: 130, h: 44, type: "step", icon: "play" },
-              { id: "artifacts", label: "Artifacts", x: 520, y: 165, w: 120, h: 44, type: "artifact" },
-              { id: "end", label: "Tear Down", x: 700, y: 165, w: 100, h: 44, type: "end" },
+              {
+                id: "db",
+                label: "PostgreSQL",
+                x: 150,
+                y: 50,
+                w: 130,
+                h: 44,
+                type: "service",
+              },
+              {
+                id: "app",
+                label: "App Server",
+                x: 350,
+                y: 50,
+                w: 140,
+                h: 44,
+                type: "service",
+              },
+              {
+                id: "git",
+                label: "Git Clone",
+                x: 40,
+                y: 165,
+                w: 100,
+                h: 44,
+                type: "source",
+              },
+              {
+                id: "install",
+                label: "npm ci",
+                x: 185,
+                y: 165,
+                w: 90,
+                h: 44,
+                type: "step",
+                icon: "shell",
+              },
+              {
+                id: "test",
+                label: "e2e tests",
+                x: 330,
+                y: 165,
+                w: 130,
+                h: 44,
+                type: "step",
+                icon: "play",
+              },
+              {
+                id: "artifacts",
+                label: "Artifacts",
+                x: 520,
+                y: 165,
+                w: 120,
+                h: 44,
+                type: "artifact",
+              },
+              {
+                id: "end",
+                label: "Tear Down",
+                x: 700,
+                y: 165,
+                w: 100,
+                h: 44,
+                type: "end",
+              },
             ],
             edges: [
               ["git", "install"],
@@ -595,7 +984,14 @@ spec:
               ["db", "app", "service"],
               ["app", "test", "service"],
             ],
-            annotations: [{ text: "HTML report, traces, screenshots", x: 500, y: 145, color: "#fde68a" }],
+            annotations: [
+              {
+                text: "HTML report, traces, screenshots",
+                x: 500,
+                y: 145,
+                color: "#fde68a",
+              },
+            ],
           },
         },
 
@@ -604,7 +1000,10 @@ spec:
           title: "Parallel Cross-Browser Testing",
           concept:
             "<code>parallel.matrix</code> runs tests across Chromium and Firefox simultaneously — each in its own Pod.",
-          readMore: { label: "Sharding & Matrix Params", url: "/articles/test-workflows-matrix-and-sharding" },
+          readMore: {
+            label: "Sharding & Matrix Params",
+            url: "/articles/test-workflows-matrix-and-sharding",
+          },
           yaml: `apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata:
@@ -686,15 +1085,89 @@ spec:
               },
             ],
             nodes: [
-              { id: "db", label: "PostgreSQL", x: 110, y: 40, w: 120, h: 40, type: "service" },
-              { id: "app", label: "App Server", x: 290, y: 40, w: 130, h: 40, type: "service" },
-              { id: "git", label: "Git Clone", x: 20, y: 145, w: 95, h: 42, type: "source" },
-              { id: "install", label: "npm ci", x: 150, y: 145, w: 80, h: 42, type: "step", icon: "shell" },
-              { id: "fan", label: "Distribute", x: 270, y: 145, w: 100, h: 42, type: "parallel" },
-              { id: "chromium", label: "Chromium", x: 420, y: 100, w: 110, h: 42, type: "worker" },
-              { id: "firefox", label: "Firefox", x: 420, y: 190, w: 110, h: 42, type: "worker" },
-              { id: "merge", label: "Merge", x: 580, y: 145, w: 90, h: 42, type: "step", icon: "shell" },
-              { id: "artifacts", label: "Artifacts", x: 710, y: 145, w: 110, h: 42, type: "artifact" },
+              {
+                id: "db",
+                label: "PostgreSQL",
+                x: 110,
+                y: 40,
+                w: 120,
+                h: 40,
+                type: "service",
+              },
+              {
+                id: "app",
+                label: "App Server",
+                x: 290,
+                y: 40,
+                w: 130,
+                h: 40,
+                type: "service",
+              },
+              {
+                id: "git",
+                label: "Git Clone",
+                x: 20,
+                y: 145,
+                w: 95,
+                h: 42,
+                type: "source",
+              },
+              {
+                id: "install",
+                label: "npm ci",
+                x: 150,
+                y: 145,
+                w: 80,
+                h: 42,
+                type: "step",
+                icon: "shell",
+              },
+              {
+                id: "fan",
+                label: "Distribute",
+                x: 270,
+                y: 145,
+                w: 100,
+                h: 42,
+                type: "parallel",
+              },
+              {
+                id: "chromium",
+                label: "Chromium",
+                x: 420,
+                y: 100,
+                w: 110,
+                h: 42,
+                type: "worker",
+              },
+              {
+                id: "firefox",
+                label: "Firefox",
+                x: 420,
+                y: 190,
+                w: 110,
+                h: 42,
+                type: "worker",
+              },
+              {
+                id: "merge",
+                label: "Merge",
+                x: 580,
+                y: 145,
+                w: 90,
+                h: 42,
+                type: "step",
+                icon: "shell",
+              },
+              {
+                id: "artifacts",
+                label: "Artifacts",
+                x: 710,
+                y: 145,
+                w: 110,
+                h: 42,
+                type: "artifact",
+              },
             ],
             edges: [
               ["git", "install"],
@@ -709,7 +1182,14 @@ spec:
               ["db", "app", "service"],
               ["app", "fan", "service"],
             ],
-            annotations: [{ text: "matrix: [chromium, firefox]", x: 390, y: 85, color: "#c084fc" }],
+            annotations: [
+              {
+                text: "matrix: [chromium, firefox]",
+                x: 390,
+                y: 85,
+                color: "#c084fc",
+              },
+            ],
           },
         },
 
@@ -718,7 +1198,10 @@ spec:
           title: "Schedule It",
           concept:
             "<code>spec.events</code> triggers on a cron schedule — continuous e2e quality assurance, no CI pipeline needed.",
-          readMore: { label: "Scheduled Execution", url: "/articles/scheduling-tests" },
+          readMore: {
+            label: "Scheduled Execution",
+            url: "/articles/scheduling-tests",
+          },
           yaml: `apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata:
@@ -803,16 +1286,98 @@ spec:
               },
             ],
             nodes: [
-              { id: "cron", label: "Every 6h", x: 20, y: 40, w: 100, h: 38, type: "trigger" },
-              { id: "db", label: "PostgreSQL", x: 140, y: 40, w: 110, h: 40, type: "service" },
-              { id: "app", label: "App Server", x: 310, y: 40, w: 120, h: 40, type: "service" },
-              { id: "git", label: "Git Clone", x: 20, y: 150, w: 90, h: 42, type: "source" },
-              { id: "install", label: "npm ci", x: 150, y: 150, w: 80, h: 42, type: "step", icon: "shell" },
-              { id: "fan", label: "Distribute", x: 270, y: 150, w: 100, h: 42, type: "parallel" },
-              { id: "chromium", label: "Chromium", x: 420, y: 105, w: 105, h: 42, type: "worker" },
-              { id: "firefox", label: "Firefox", x: 420, y: 195, w: 105, h: 42, type: "worker" },
-              { id: "merge", label: "Merge", x: 575, y: 150, w: 85, h: 42, type: "step", icon: "shell" },
-              { id: "artifacts", label: "Artifacts", x: 710, y: 150, w: 110, h: 42, type: "artifact" },
+              {
+                id: "cron",
+                label: "Every 6h",
+                x: 20,
+                y: 40,
+                w: 100,
+                h: 38,
+                type: "trigger",
+              },
+              {
+                id: "db",
+                label: "PostgreSQL",
+                x: 140,
+                y: 40,
+                w: 110,
+                h: 40,
+                type: "service",
+              },
+              {
+                id: "app",
+                label: "App Server",
+                x: 310,
+                y: 40,
+                w: 120,
+                h: 40,
+                type: "service",
+              },
+              {
+                id: "git",
+                label: "Git Clone",
+                x: 20,
+                y: 150,
+                w: 90,
+                h: 42,
+                type: "source",
+              },
+              {
+                id: "install",
+                label: "npm ci",
+                x: 150,
+                y: 150,
+                w: 80,
+                h: 42,
+                type: "step",
+                icon: "shell",
+              },
+              {
+                id: "fan",
+                label: "Distribute",
+                x: 270,
+                y: 150,
+                w: 100,
+                h: 42,
+                type: "parallel",
+              },
+              {
+                id: "chromium",
+                label: "Chromium",
+                x: 420,
+                y: 105,
+                w: 105,
+                h: 42,
+                type: "worker",
+              },
+              {
+                id: "firefox",
+                label: "Firefox",
+                x: 420,
+                y: 195,
+                w: 105,
+                h: 42,
+                type: "worker",
+              },
+              {
+                id: "merge",
+                label: "Merge",
+                x: 575,
+                y: 150,
+                w: 85,
+                h: 42,
+                type: "step",
+                icon: "shell",
+              },
+              {
+                id: "artifacts",
+                label: "Artifacts",
+                x: 710,
+                y: 150,
+                w: 110,
+                h: 42,
+                type: "artifact",
+              },
             ],
             edges: [
               ["git", "install"],
@@ -837,7 +1402,10 @@ spec:
           yamlLabel: "TestTrigger CRD",
           concept:
             "A <code>TestTrigger</code> watches K8s resources. When your app deploys, tests run automatically — real event-driven testing.",
-          readMore: { label: "Kubernetes Event Triggers", url: "/articles/test-triggers" },
+          readMore: {
+            label: "Kubernetes Event Triggers",
+            url: "/articles/test-triggers",
+          },
           yaml: `apiVersion: tests.testkube.io/v1
 kind: TestTrigger
 metadata:
@@ -861,7 +1429,15 @@ spec:
   concurrencyPolicy: allow`,
           diagram: {
             boxes: [
-              { id: "cluster", label: "Kubernetes Cluster", x: 10, y: 5, w: 640, h: 310, style: "boundary" },
+              {
+                id: "cluster",
+                label: "Kubernetes Cluster",
+                x: 10,
+                y: 5,
+                w: 640,
+                h: 310,
+                style: "boundary",
+              },
               {
                 id: "wf-box",
                 label: "TestWorkflow: e2e-tests",
@@ -873,7 +1449,15 @@ spec:
               },
             ],
             nodes: [
-              { id: "deploy-src", label: "Deployment: webapp", x: 200, y: 25, w: 220, h: 44, type: "deployment" },
+              {
+                id: "deploy-src",
+                label: "Deployment: webapp",
+                x: 200,
+                y: 25,
+                w: 220,
+                h: 44,
+                type: "deployment",
+              },
               {
                 id: "trigger",
                 label: "TestTrigger: on-app-deploy",
@@ -883,12 +1467,62 @@ spec:
                 h: 44,
                 type: "trigger-k8s",
               },
-              { id: "db", label: "PostgreSQL", x: 50, y: 195, w: 110, h: 36, type: "service" },
-              { id: "app", label: "App Server", x: 50, y: 245, w: 110, h: 36, type: "service" },
-              { id: "git", label: "Git Clone", x: 190, y: 195, w: 90, h: 36, type: "source" },
-              { id: "install", label: "npm ci", x: 300, y: 195, w: 75, h: 36, type: "step", icon: "shell" },
-              { id: "test", label: "e2e tests", x: 395, y: 195, w: 100, h: 36, type: "step", icon: "play" },
-              { id: "artifacts", label: "Artifacts", x: 515, y: 195, w: 95, h: 36, type: "artifact" },
+              {
+                id: "db",
+                label: "PostgreSQL",
+                x: 50,
+                y: 195,
+                w: 110,
+                h: 36,
+                type: "service",
+              },
+              {
+                id: "app",
+                label: "App Server",
+                x: 50,
+                y: 245,
+                w: 110,
+                h: 36,
+                type: "service",
+              },
+              {
+                id: "git",
+                label: "Git Clone",
+                x: 190,
+                y: 195,
+                w: 90,
+                h: 36,
+                type: "source",
+              },
+              {
+                id: "install",
+                label: "npm ci",
+                x: 300,
+                y: 195,
+                w: 75,
+                h: 36,
+                type: "step",
+                icon: "shell",
+              },
+              {
+                id: "test",
+                label: "e2e tests",
+                x: 395,
+                y: 195,
+                w: 100,
+                h: 36,
+                type: "step",
+                icon: "play",
+              },
+              {
+                id: "artifacts",
+                label: "Artifacts",
+                x: 515,
+                y: 195,
+                w: 95,
+                h: 36,
+                type: "artifact",
+              },
             ],
             edges: [
               ["git", "install"],
@@ -939,7 +1573,15 @@ spec:
     }`,
           diagram: {
             boxes: [
-              { id: "cluster", label: "Kubernetes Cluster", x: 10, y: 5, w: 640, h: 380, style: "boundary" },
+              {
+                id: "cluster",
+                label: "Kubernetes Cluster",
+                x: 10,
+                y: 5,
+                w: 640,
+                h: 380,
+                style: "boundary",
+              },
               {
                 id: "wf-box",
                 label: "TestWorkflow: e2e-tests",
@@ -951,7 +1593,15 @@ spec:
               },
             ],
             nodes: [
-              { id: "deploy-src", label: "Deployment: webapp", x: 220, y: 25, w: 200, h: 40, type: "deployment" },
+              {
+                id: "deploy-src",
+                label: "Deployment: webapp",
+                x: 220,
+                y: 25,
+                w: 200,
+                h: 40,
+                type: "deployment",
+              },
               {
                 id: "trigger",
                 label: "TestTrigger: on-app-deploy",
@@ -961,14 +1611,80 @@ spec:
                 h: 40,
                 type: "trigger-k8s",
               },
-              { id: "db", label: "PostgreSQL", x: 50, y: 178, w: 100, h: 32, type: "service" },
-              { id: "app", label: "App Server", x: 50, y: 218, w: 100, h: 32, type: "service" },
-              { id: "git", label: "Git Clone", x: 180, y: 185, w: 85, h: 32, type: "source" },
-              { id: "install", label: "npm ci", x: 285, y: 185, w: 70, h: 32, type: "step", icon: "shell" },
-              { id: "test", label: "e2e tests", x: 375, y: 185, w: 95, h: 32, type: "step", icon: "play" },
-              { id: "artifacts", label: "Artifacts", x: 490, y: 185, w: 85, h: 32, type: "artifact" },
-              { id: "webhook", label: "Webhook: Slack", x: 200, y: 290, w: 180, h: 44, type: "webhook" },
-              { id: "slack", label: "Slack", x: 200, y: 355, w: 100, h: 40, type: "slack" },
+              {
+                id: "db",
+                label: "PostgreSQL",
+                x: 50,
+                y: 178,
+                w: 100,
+                h: 32,
+                type: "service",
+              },
+              {
+                id: "app",
+                label: "App Server",
+                x: 50,
+                y: 218,
+                w: 100,
+                h: 32,
+                type: "service",
+              },
+              {
+                id: "git",
+                label: "Git Clone",
+                x: 180,
+                y: 185,
+                w: 85,
+                h: 32,
+                type: "source",
+              },
+              {
+                id: "install",
+                label: "npm ci",
+                x: 285,
+                y: 185,
+                w: 70,
+                h: 32,
+                type: "step",
+                icon: "shell",
+              },
+              {
+                id: "test",
+                label: "e2e tests",
+                x: 375,
+                y: 185,
+                w: 95,
+                h: 32,
+                type: "step",
+                icon: "play",
+              },
+              {
+                id: "artifacts",
+                label: "Artifacts",
+                x: 490,
+                y: 185,
+                w: 85,
+                h: 32,
+                type: "artifact",
+              },
+              {
+                id: "webhook",
+                label: "Webhook: Slack",
+                x: 200,
+                y: 290,
+                w: 180,
+                h: 44,
+                type: "webhook",
+              },
+              {
+                id: "slack",
+                label: "Slack",
+                x: 200,
+                y: 355,
+                w: 100,
+                h: 40,
+                type: "slack",
+              },
             ],
             edges: [
               ["git", "install"],
@@ -983,7 +1699,9 @@ spec:
               ["wf-box", "webhook", "arrow-down"],
               ["webhook", "slack", "arrow-down"],
             ],
-            annotations: [{ text: "on failure", x: 390, y: 280, color: "#f87171" }],
+            annotations: [
+              { text: "on failure", x: 390, y: 280, color: "#f87171" },
+            ],
           },
         },
 
@@ -993,7 +1711,10 @@ spec:
           yamlLabel: "MCP Tool Calls",
           concept:
             "AI agents connect to Testkube via <strong>MCP</strong>. They fetch logs, analyze failures, and tag executions — automated triage at scale.",
-          readMore: { label: "Testkube MCP Server", url: "/articles/mcp-overview" },
+          readMore: {
+            label: "Testkube MCP Server",
+            url: "/articles/mcp-overview",
+          },
           yaml: `# AI Agent receives: "e2e-tests execution failed"
 # Agent uses Testkube MCP tools:
 
@@ -1015,7 +1736,15 @@ spec:
       priority: "high"`,
           diagram: {
             boxes: [
-              { id: "cluster", label: "Kubernetes Cluster", x: 10, y: 5, w: 640, h: 420, style: "boundary" },
+              {
+                id: "cluster",
+                label: "Kubernetes Cluster",
+                x: 10,
+                y: 5,
+                w: 640,
+                h: 420,
+                style: "boundary",
+              },
               {
                 id: "wf-box",
                 label: "TestWorkflow: e2e-tests",
@@ -1027,7 +1756,15 @@ spec:
               },
             ],
             nodes: [
-              { id: "deploy-src", label: "Deployment: webapp", x: 230, y: 22, w: 190, h: 36, type: "deployment" },
+              {
+                id: "deploy-src",
+                label: "Deployment: webapp",
+                x: 230,
+                y: 22,
+                w: 190,
+                h: 36,
+                type: "deployment",
+              },
               {
                 id: "trigger",
                 label: "TestTrigger: on-app-deploy",
@@ -1037,17 +1774,107 @@ spec:
                 h: 36,
                 type: "trigger-k8s",
               },
-              { id: "db", label: "PostgreSQL", x: 50, y: 155, w: 95, h: 30, type: "service" },
-              { id: "app", label: "App Server", x: 50, y: 190, w: 95, h: 30, type: "service" },
-              { id: "git", label: "Git Clone", x: 175, y: 165, w: 80, h: 28, type: "source" },
-              { id: "install", label: "npm ci", x: 275, y: 165, w: 65, h: 28, type: "step", icon: "shell" },
-              { id: "test", label: "e2e tests", x: 360, y: 165, w: 90, h: 28, type: "step", icon: "play" },
-              { id: "artifacts", label: "Artifacts", x: 470, y: 165, w: 80, h: 28, type: "artifact" },
-              { id: "webhook", label: "Webhook: Slack", x: 80, y: 260, w: 160, h: 40, type: "webhook" },
-              { id: "slack", label: "Slack", x: 100, y: 320, w: 90, h: 36, type: "slack" },
-              { id: "ai-agent", label: "AI Agent", x: 350, y: 260, w: 130, h: 40, type: "ai-agent" },
-              { id: "mcp", label: "Testkube MCP", x: 350, y: 320, w: 140, h: 40, type: "mcp" },
-              { id: "tag", label: "Tagged Execution", x: 320, y: 388, w: 200, h: 36, type: "tag" },
+              {
+                id: "db",
+                label: "PostgreSQL",
+                x: 50,
+                y: 155,
+                w: 95,
+                h: 30,
+                type: "service",
+              },
+              {
+                id: "app",
+                label: "App Server",
+                x: 50,
+                y: 190,
+                w: 95,
+                h: 30,
+                type: "service",
+              },
+              {
+                id: "git",
+                label: "Git Clone",
+                x: 175,
+                y: 165,
+                w: 80,
+                h: 28,
+                type: "source",
+              },
+              {
+                id: "install",
+                label: "npm ci",
+                x: 275,
+                y: 165,
+                w: 65,
+                h: 28,
+                type: "step",
+                icon: "shell",
+              },
+              {
+                id: "test",
+                label: "e2e tests",
+                x: 360,
+                y: 165,
+                w: 90,
+                h: 28,
+                type: "step",
+                icon: "play",
+              },
+              {
+                id: "artifacts",
+                label: "Artifacts",
+                x: 470,
+                y: 165,
+                w: 80,
+                h: 28,
+                type: "artifact",
+              },
+              {
+                id: "webhook",
+                label: "Webhook: Slack",
+                x: 80,
+                y: 260,
+                w: 160,
+                h: 40,
+                type: "webhook",
+              },
+              {
+                id: "slack",
+                label: "Slack",
+                x: 100,
+                y: 320,
+                w: 90,
+                h: 36,
+                type: "slack",
+              },
+              {
+                id: "ai-agent",
+                label: "AI Agent",
+                x: 350,
+                y: 260,
+                w: 130,
+                h: 40,
+                type: "ai-agent",
+              },
+              {
+                id: "mcp",
+                label: "Testkube MCP",
+                x: 350,
+                y: 320,
+                w: 140,
+                h: 40,
+                type: "mcp",
+              },
+              {
+                id: "tag",
+                label: "Tagged Execution",
+                x: 320,
+                y: 388,
+                w: 200,
+                h: 36,
+                type: "tag",
+              },
             ],
             edges: [
               ["git", "install"],
@@ -1067,9 +1894,24 @@ spec:
             ],
             annotations: [
               { text: "on failure", x: 10, y: 250, color: "#f87171" },
-              { text: "fetch_execution_logs", x: 500, y: 340, color: "#a5b4fc" },
-              { text: "update_execution_tags", x: 500, y: 355, color: "#a5b4fc" },
-              { text: "failure-category: ui-regression", x: 325, y: 380, color: "#fde68a" },
+              {
+                text: "fetch_execution_logs",
+                x: 500,
+                y: 340,
+                color: "#a5b4fc",
+              },
+              {
+                text: "update_execution_tags",
+                x: 500,
+                y: 355,
+                color: "#a5b4fc",
+              },
+              {
+                text: "failure-category: ui-regression",
+                x: 325,
+                y: 380,
+                color: "#fde68a",
+              },
             ],
           },
         },
@@ -1079,7 +1921,10 @@ spec:
           title: "Under the Hood: The Job",
           concept:
             "Testkube creates a <strong>Kubernetes Job</strong> for the test and <strong>separate Jobs</strong> for each service. All managed, all cleaned up.",
-          readMore: { label: "High-level Architecture", url: "/articles/test-workflows-high-level-architecture" },
+          readMore: {
+            label: "High-level Architecture",
+            url: "/articles/test-workflows-high-level-architecture",
+          },
           yaml: `apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata:
@@ -1153,9 +1998,33 @@ spec:
           - playwright-report/**`,
           diagram: {
             boxes: [
-              { id: "crd", label: "TestWorkflow CRD: e2e-tests", x: 20, y: 15, w: 350, h: 42, style: "header" },
-              { id: "controller", label: "Testkube Controller", x: 20, y: 75, w: 350, h: 36, style: "controller" },
-              { id: "main-job", label: "Main Job (backoffLimit: 0)", x: 20, y: 140, w: 350, h: 105, style: "k8s-job" },
+              {
+                id: "crd",
+                label: "TestWorkflow CRD: e2e-tests",
+                x: 20,
+                y: 15,
+                w: 350,
+                h: 42,
+                style: "header",
+              },
+              {
+                id: "controller",
+                label: "Testkube Controller",
+                x: 20,
+                y: 75,
+                w: 350,
+                h: 36,
+                style: "controller",
+              },
+              {
+                id: "main-job",
+                label: "Main Job (backoffLimit: 0)",
+                x: 20,
+                y: 140,
+                w: 350,
+                h: 105,
+                style: "k8s-job",
+              },
               {
                 id: "svc-job-db",
                 label: "Service Job: PostgreSQL",
@@ -1176,9 +2045,33 @@ spec:
               },
             ],
             nodes: [
-              { id: "pod", label: "Pod (test steps)", x: 45, y: 170, w: 300, h: 50, type: "k8s-pod" },
-              { id: "svc-pod-db", label: "Pod :5432", x: 445, y: 155, w: 150, h: 24, type: "k8s-pod-small" },
-              { id: "svc-pod-app", label: "Pod :3000", x: 445, y: 220, w: 150, h: 24, type: "k8s-pod-small" },
+              {
+                id: "pod",
+                label: "Pod (test steps)",
+                x: 45,
+                y: 170,
+                w: 300,
+                h: 50,
+                type: "k8s-pod",
+              },
+              {
+                id: "svc-pod-db",
+                label: "Pod :5432",
+                x: 445,
+                y: 155,
+                w: 150,
+                h: 24,
+                type: "k8s-pod-small",
+              },
+              {
+                id: "svc-pod-app",
+                label: "Pod :3000",
+                x: 445,
+                y: 220,
+                w: 150,
+                h: 24,
+                type: "k8s-pod-small",
+              },
             ],
             edges: [],
             links: [
@@ -1186,10 +2079,25 @@ spec:
               ["controller", "main-job", "arrow-down"],
             ],
             annotations: [
-              { text: "watches CRD, creates resources", x: 100, y: 105, color: "#94a3b8" },
+              {
+                text: "watches CRD, creates resources",
+                x: 100,
+                y: 105,
+                color: "#94a3b8",
+              },
               { text: "restartPolicy: Never", x: 55, y: 235, color: "#94a3b8" },
-              { text: "readiness: pg_isready", x: 440, y: 185, color: "#22c55e" },
-              { text: "readiness: GET /health", x: 440, y: 250, color: "#22c55e" },
+              {
+                text: "readiness: pg_isready",
+                x: 440,
+                y: 185,
+                color: "#22c55e",
+              },
+              {
+                text: "readiness: GET /health",
+                x: 440,
+                y: 250,
+                color: "#22c55e",
+              },
             ],
           },
         },
@@ -1199,7 +2107,10 @@ spec:
           title: "Under the Hood: Init Containers",
           concept:
             "Steps become <strong>init containers</strong> in a single Pod — sequential execution, shared <code>/data</code> filesystem.",
-          readMore: { label: "High-level Architecture", url: "/articles/test-workflows-high-level-architecture" },
+          readMore: {
+            label: "High-level Architecture",
+            url: "/articles/test-workflows-high-level-architecture",
+          },
           yaml: `apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata:
@@ -1273,7 +2184,15 @@ spec:
           - playwright-report/**`,
           diagram: {
             boxes: [
-              { id: "pod-box", label: "Main Pod", x: 20, y: 15, w: 600, h: 260, style: "k8s-pod-detail" },
+              {
+                id: "pod-box",
+                label: "Main Pod",
+                x: 20,
+                y: 15,
+                w: 600,
+                h: 260,
+                style: "k8s-pod-detail",
+              },
               {
                 id: "volume",
                 label: "Shared Volume: /data (emptyDir)",
@@ -1317,8 +2236,18 @@ spec:
             links: [["init1", "main", "arrow-right"]],
             annotations: [
               { text: "sequential", x: 110, y: 120, color: "#94a3b8" },
-              { text: "runs after all init containers complete", x: 310, y: 45, color: "#94a3b8" },
-              { text: "The /init process reads actions from Pod annotations", x: 40, y: 210, color: "#a5b4fc" },
+              {
+                text: "runs after all init containers complete",
+                x: 310,
+                y: 45,
+                color: "#94a3b8",
+              },
+              {
+                text: "The /init process reads actions from Pod annotations",
+                x: 40,
+                y: 210,
+                color: "#a5b4fc",
+              },
             ],
           },
         },
@@ -1328,7 +2257,10 @@ spec:
           title: "The Complete Picture",
           concept:
             "One YAML file. Testkube handles all K8s orchestration — Jobs, Pods, init containers, services, cleanup, and results.",
-          readMore: { label: "TestWorkflows Overview", url: "/articles/test-workflows" },
+          readMore: {
+            label: "TestWorkflows Overview",
+            url: "/articles/test-workflows",
+          },
           yaml: `apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata:
@@ -1402,10 +2334,42 @@ spec:
           - playwright-report/**`,
           diagram: {
             boxes: [
-              { id: "yaml-box", label: "TestWorkflow YAML", x: 20, y: 10, w: 250, h: 32, style: "header" },
-              { id: "ctrl", label: "Testkube Controller", x: 20, y: 58, w: 250, h: 30, style: "controller" },
-              { id: "main-job", label: "Main Job", x: 20, y: 110, w: 340, h: 140, style: "k8s-job" },
-              { id: "svc-area", label: "Service Jobs", x: 400, y: 110, w: 230, h: 140, style: "k8s-job" },
+              {
+                id: "yaml-box",
+                label: "TestWorkflow YAML",
+                x: 20,
+                y: 10,
+                w: 250,
+                h: 32,
+                style: "header",
+              },
+              {
+                id: "ctrl",
+                label: "Testkube Controller",
+                x: 20,
+                y: 58,
+                w: 250,
+                h: 30,
+                style: "controller",
+              },
+              {
+                id: "main-job",
+                label: "Main Job",
+                x: 20,
+                y: 110,
+                w: 340,
+                h: 140,
+                style: "k8s-job",
+              },
+              {
+                id: "svc-area",
+                label: "Service Jobs",
+                x: 400,
+                y: 110,
+                w: 230,
+                h: 140,
+                style: "k8s-job",
+              },
               {
                 id: "results",
                 label: "Control Plane: Logs, Artifacts, Reports",
@@ -1417,13 +2381,69 @@ spec:
               },
             ],
             nodes: [
-              { id: "pod", label: "Pod", x: 40, y: 130, w: 300, h: 100, type: "k8s-pod-nested" },
-              { id: "i0", label: "Init 0\nGit Clone", x: 55, y: 145, w: 80, h: 40, type: "k8s-init-sm" },
-              { id: "i1", label: "Init 1\nnpm ci", x: 150, y: 145, w: 80, h: 40, type: "k8s-init-sm" },
-              { id: "mC", label: "Main\nPlaywright", x: 245, y: 145, w: 80, h: 40, type: "k8s-main-sm" },
-              { id: "vol", label: "/data", x: 130, y: 200, w: 60, h: 20, type: "k8s-volume" },
-              { id: "svc-db", label: "PostgreSQL\nPod :5432", x: 420, y: 130, w: 100, h: 44, type: "k8s-svc-pod" },
-              { id: "svc-app", label: "App Server\nPod :3000", x: 530, y: 130, w: 100, h: 44, type: "k8s-svc-pod" },
+              {
+                id: "pod",
+                label: "Pod",
+                x: 40,
+                y: 130,
+                w: 300,
+                h: 100,
+                type: "k8s-pod-nested",
+              },
+              {
+                id: "i0",
+                label: "Init 0\nGit Clone",
+                x: 55,
+                y: 145,
+                w: 80,
+                h: 40,
+                type: "k8s-init-sm",
+              },
+              {
+                id: "i1",
+                label: "Init 1\nnpm ci",
+                x: 150,
+                y: 145,
+                w: 80,
+                h: 40,
+                type: "k8s-init-sm",
+              },
+              {
+                id: "mC",
+                label: "Main\nPlaywright",
+                x: 245,
+                y: 145,
+                w: 80,
+                h: 40,
+                type: "k8s-main-sm",
+              },
+              {
+                id: "vol",
+                label: "/data",
+                x: 130,
+                y: 200,
+                w: 60,
+                h: 20,
+                type: "k8s-volume",
+              },
+              {
+                id: "svc-db",
+                label: "PostgreSQL\nPod :5432",
+                x: 420,
+                y: 130,
+                w: 100,
+                h: 44,
+                type: "k8s-svc-pod",
+              },
+              {
+                id: "svc-app",
+                label: "App Server\nPod :3000",
+                x: 530,
+                y: 130,
+                w: 100,
+                h: 44,
+                type: "k8s-svc-pod",
+              },
             ],
             edges: [
               ["i0", "i1"],
@@ -1436,7 +2456,12 @@ spec:
             ],
             annotations: [
               { text: "kubectl apply / API", x: 100, y: 49, color: "#94a3b8" },
-              { text: "creates K8s resources", x: 100, y: 100, color: "#94a3b8" },
+              {
+                text: "creates K8s resources",
+                x: 100,
+                y: 100,
+                color: "#94a3b8",
+              },
               { text: "results flow", x: 200, y: 266, color: "#94a3b8" },
             ],
           },
@@ -1458,15 +2483,21 @@ spec:
         renderProgressBar();
 
         // Counter
-        document.getElementById("stageCounter").textContent = `Stage ${currentStage + 1} / ${stages.length}`;
+        document.getElementById("stageCounter").textContent =
+          `Stage ${currentStage + 1} / ${stages.length}`;
 
         // YAML
-        document.getElementById("yamlTitle").textContent = stage.yamlLabel || stage.title;
+        document.getElementById("yamlTitle").textContent =
+          stage.yamlLabel || stage.title;
         renderYaml(stage);
 
         // Diagram
         document.getElementById("diagramBadge").textContent =
-          currentStage >= 12 ? "Kubernetes Internals" : currentStage >= 9 ? "Ecosystem" : "Pipeline";
+          currentStage >= 12
+            ? "Kubernetes Internals"
+            : currentStage >= 9
+              ? "Ecosystem"
+              : "Pipeline";
         renderDiagram(stage);
 
         // Concept
@@ -1476,8 +2507,10 @@ spec:
         document.getElementById("conceptText").innerHTML =
           `<span class="text-tk-purple font-semibold">${stage.title}:</span> ${stage.concept}${readMoreHtml}`;
 
-        document.getElementById("prevBtn").style.visibility = currentStage === 0 ? "hidden" : "visible";
-        document.getElementById("nextBtn").style.visibility = currentStage === stages.length - 1 ? "hidden" : "visible";
+        document.getElementById("prevBtn").style.visibility =
+          currentStage === 0 ? "hidden" : "visible";
+        document.getElementById("nextBtn").style.visibility =
+          currentStage === stages.length - 1 ? "hidden" : "visible";
 
         history.replaceState(null, "", `#${currentStage + 1}`);
       }
@@ -1496,7 +2529,8 @@ spec:
               : "w-2.5 h-2.5 rounded-full bg-slate-600";
           html += `<button onclick="goTo(${i})" class="${dotClass} cursor-pointer hover:scale-125 transition-transform" title="Stage ${i + 1}: ${stages[i].title}"></button>`;
           if (i < stages.length - 1) {
-            const lineClass = i < currentStage ? "bg-tk-purple" : "bg-slate-700";
+            const lineClass =
+              i < currentStage ? "bg-tk-purple" : "bg-slate-700";
             html += `<div class="w-6 h-0.5 ${lineClass}"></div>`;
           }
         }
@@ -1511,17 +2545,25 @@ spec:
           .replace(/>/g, "&gt;")
           .split("\n")
           .map((line) => {
-            if (line.trim().startsWith("#")) return `<span class="yc">${line}</span>`;
+            if (line.trim().startsWith("#"))
+              return `<span class="yc">${line}</span>`;
             line = line.replace(/(\{\{.*?\}\})/g, '<span class="ye">$1</span>');
-            line = line.replace(/^(\s*)([\w.-]+)(\s*:\s*)(.*)$/, (m, indent, key, colon, val) => {
-              if (val.startsWith('"') || val.startsWith("'")) {
-                return `${indent}<span class="yk">${key}</span>${colon}<span class="ys">${val}</span>`;
+            line = line.replace(
+              /^(\s*)([\w.-]+)(\s*:\s*)(.*)$/,
+              (m, indent, key, colon, val) => {
+                if (val.startsWith('"') || val.startsWith("'")) {
+                  return `${indent}<span class="yk">${key}</span>${colon}<span class="ys">${val}</span>`;
+                }
+                if (
+                  /^\d+[mgGMiKk]*$/.test(val.trim()) ||
+                  val.trim() === "true" ||
+                  val.trim() === "false"
+                ) {
+                  return `${indent}<span class="yk">${key}</span>${colon}<span class="yn">${val}</span>`;
+                }
+                return `${indent}<span class="yk">${key}</span>${colon}<span class="yv">${val}</span>`;
               }
-              if (/^\d+[mgGMiKk]*$/.test(val.trim()) || val.trim() === "true" || val.trim() === "false") {
-                return `${indent}<span class="yk">${key}</span>${colon}<span class="yn">${val}</span>`;
-              }
-              return `${indent}<span class="yk">${key}</span>${colon}<span class="yv">${val}</span>`;
-            });
+            );
             line = line.replace(/^(\s*)(- )/, '$1<span class="yd">- </span>');
             return line;
           })
@@ -1536,7 +2578,10 @@ spec:
         const dp = Array.from({ length: m + 1 }, () => new Uint16Array(n + 1));
         for (let i = 1; i <= m; i++) {
           for (let j = 1; j <= n; j++) {
-            dp[i][j] = prev[i - 1] === curr[j - 1] ? dp[i - 1][j - 1] + 1 : Math.max(dp[i - 1][j], dp[i][j - 1]);
+            dp[i][j] =
+              prev[i - 1] === curr[j - 1]
+                ? dp[i - 1][j - 1] + 1
+                : Math.max(dp[i - 1][j], dp[i][j - 1]);
           }
         }
         // Backtrack to find which curr lines are matched
@@ -1559,10 +2604,13 @@ spec:
       }
 
       function renderYaml(stage) {
-        const prevYaml = currentStage > 0 ? stages[currentStage - 1].yaml : null;
+        const prevYaml =
+          currentStage > 0 ? stages[currentStage - 1].yaml : null;
         const lines = stage.yaml.split("\n");
         const prevLines = prevYaml ? prevYaml.split("\n") : [];
-        const isNewFlags = prevYaml ? diffNewLines(prevLines, lines) : lines.map(() => true);
+        const isNewFlags = prevYaml
+          ? diffNewLines(prevLines, lines)
+          : lines.map(() => true);
 
         const html = lines
           .map((line, i) => {
@@ -1588,8 +2636,16 @@ spec:
         worker: { fill: "#3b0764", stroke: "#c084fc", text: "#e9d5ff" },
         external: { fill: "#1c1917", stroke: "#f87171", text: "#fca5a5" },
         "k8s-pod": { fill: "#172554", stroke: "#3b82f6", text: "#93c5fd" },
-        "k8s-pod-small": { fill: "#1e293b", stroke: "#3b82f6", text: "#93c5fd" },
-        "k8s-pod-nested": { fill: "#0f172a", stroke: "#3b82f6", text: "#93c5fd" },
+        "k8s-pod-small": {
+          fill: "#1e293b",
+          stroke: "#3b82f6",
+          text: "#93c5fd",
+        },
+        "k8s-pod-nested": {
+          fill: "#0f172a",
+          stroke: "#3b82f6",
+          text: "#93c5fd",
+        },
         "k8s-init": { fill: "#1e1b4b", stroke: "#6366f1", text: "#c7d2fe" },
         "k8s-main": { fill: "#14532d", stroke: "#22c55e", text: "#86efac" },
         "k8s-init-sm": { fill: "#1e1b4b", stroke: "#6366f1", text: "#c7d2fe" },
@@ -1599,16 +2655,66 @@ spec:
       };
 
       const boxStyles = {
-        boundary: { fill: "none", stroke: "#475569", dash: "8 4", text: "#64748b" },
-        "boundary-active": { fill: "rgba(99,102,241,0.04)", stroke: "#6366f1", dash: "8 4", text: "#818cf8" },
-        external: { fill: "rgba(248,113,113,0.05)", stroke: "#f87171", dash: "6 4", text: "#f87171" },
-        header: { fill: "#1e1b4b", stroke: "#6366f1", dash: null, text: "#c7d2fe" },
-        controller: { fill: "#172554", stroke: "#3b82f6", dash: null, text: "#93c5fd" },
-        "k8s-job": { fill: "rgba(59,130,246,0.06)", stroke: "#3b82f6", dash: "6 3", text: "#60a5fa" },
-        "k8s-service-job": { fill: "rgba(34,197,94,0.06)", stroke: "#22c55e", dash: "6 3", text: "#4ade80" },
-        "k8s-pod-detail": { fill: "rgba(59,130,246,0.08)", stroke: "#3b82f6", dash: null, text: "#60a5fa" },
-        volume: { fill: "#1c1917", stroke: "#f59e0b", dash: "4 2", text: "#fde68a" },
-        results: { fill: "#1e1b4b", stroke: "#6366f1", dash: null, text: "#c7d2fe" },
+        boundary: {
+          fill: "none",
+          stroke: "#475569",
+          dash: "8 4",
+          text: "#64748b",
+        },
+        "boundary-active": {
+          fill: "rgba(99,102,241,0.04)",
+          stroke: "#6366f1",
+          dash: "8 4",
+          text: "#818cf8",
+        },
+        external: {
+          fill: "rgba(248,113,113,0.05)",
+          stroke: "#f87171",
+          dash: "6 4",
+          text: "#f87171",
+        },
+        header: {
+          fill: "#1e1b4b",
+          stroke: "#6366f1",
+          dash: null,
+          text: "#c7d2fe",
+        },
+        controller: {
+          fill: "#172554",
+          stroke: "#3b82f6",
+          dash: null,
+          text: "#93c5fd",
+        },
+        "k8s-job": {
+          fill: "rgba(59,130,246,0.06)",
+          stroke: "#3b82f6",
+          dash: "6 3",
+          text: "#60a5fa",
+        },
+        "k8s-service-job": {
+          fill: "rgba(34,197,94,0.06)",
+          stroke: "#22c55e",
+          dash: "6 3",
+          text: "#4ade80",
+        },
+        "k8s-pod-detail": {
+          fill: "rgba(59,130,246,0.08)",
+          stroke: "#3b82f6",
+          dash: null,
+          text: "#60a5fa",
+        },
+        volume: {
+          fill: "#1c1917",
+          stroke: "#f59e0b",
+          dash: "4 2",
+          text: "#fde68a",
+        },
+        results: {
+          fill: "#1e1b4b",
+          stroke: "#6366f1",
+          dash: null,
+          text: "#c7d2fe",
+        },
       };
 
       function renderDiagram(stage) {
@@ -1622,7 +2728,10 @@ spec:
           minY = Infinity,
           maxX = 0,
           maxY = 0;
-        const allRects = [...(d.nodes || []), ...(d.boxes || []).map((b) => ({ x: b.x, y: b.y, w: b.w, h: b.h }))];
+        const allRects = [
+          ...(d.nodes || []),
+          ...(d.boxes || []).map((b) => ({ x: b.x, y: b.y, w: b.w, h: b.h })),
+        ];
         allRects.forEach((n) => {
           minX = Math.min(minX, n.x);
           minY = Math.min(minY, n.y);
@@ -1681,9 +2790,13 @@ spec:
         // Links
         if (d.links) {
           d.links.forEach(([fromId, toId, style]) => {
-            const fromNode = d.nodes ? d.nodes.find((n) => n.id === fromId) : null;
+            const fromNode = d.nodes
+              ? d.nodes.find((n) => n.id === fromId)
+              : null;
             const toNode = d.nodes ? d.nodes.find((n) => n.id === toId) : null;
-            const fromBox = d.boxes ? d.boxes.find((b) => b.id === fromId) : null;
+            const fromBox = d.boxes
+              ? d.boxes.find((b) => b.id === fromId)
+              : null;
             const toBox = d.boxes ? d.boxes.find((b) => b.id === toId) : null;
             const from = fromNode || fromBox;
             const to = toNode || toBox;
@@ -1747,7 +2860,11 @@ spec:
           } else if (n.type === "k8s-pod-small" || n.type === "k8s-volume") {
             svg += `<rect x="${n.x}" y="${n.y}" width="${n.w}" height="${h}" rx="4" fill="${c.fill}" stroke="${c.stroke}" stroke-width="1"/>`;
             svg += `<text x="${n.x + n.w / 2}" y="${n.y + h / 2 + 4}" fill="${c.text}" font-size="9" text-anchor="middle">${escSvg(n.label)}</text>`;
-          } else if (n.type.startsWith("k8s-init") || n.type.startsWith("k8s-main") || n.type === "k8s-svc-pod") {
+          } else if (
+            n.type.startsWith("k8s-init") ||
+            n.type.startsWith("k8s-main") ||
+            n.type === "k8s-svc-pod"
+          ) {
             svg += `<rect x="${n.x}" y="${n.y}" width="${n.w}" height="${h}" rx="5" fill="${c.fill}" stroke="${c.stroke}" stroke-width="1.2"/>`;
             const lines = n.label.split("\n");
             lines.forEach((line, li) => {
@@ -1763,7 +2880,11 @@ spec:
 
             let iconX = n.x + 12;
             const iconY = n.y + h / 2;
-            const hasIcon = n.icon || ["service", "source", "artifact", "trigger", "external"].includes(n.type);
+            const hasIcon =
+              n.icon ||
+              ["service", "source", "artifact", "trigger", "external"].includes(
+                n.type
+              );
 
             if (hasIcon) {
               svg += getIcon(n, iconX, iconY, c.text);
@@ -1792,7 +2913,11 @@ spec:
         // Annotations
         if (d.annotations) {
           d.annotations.forEach((a, i) => {
-            const delay = ((d.boxes ? d.boxes.length : 0) + (d.nodes ? d.nodes.length : 0)) * 0.05 + i * 0.06;
+            const delay =
+              ((d.boxes ? d.boxes.length : 0) +
+                (d.nodes ? d.nodes.length : 0)) *
+                0.05 +
+              i * 0.06;
             svg += `<text x="${a.x}" y="${a.y}" fill="${a.color}" font-size="10" font-style="italic" class="node-enter" style="animation-delay: ${delay}s; opacity: 0">${escSvg(a.text)}</text>`;
           });
         }
@@ -1802,7 +2927,10 @@ spec:
       }
 
       function escSvg(t) {
-        return t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        return t
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
       }
 
       function getIcon(n, x, y, color) {
@@ -1860,7 +2988,9 @@ spec:
 
       loadFromHash();
       render();
-      window.addEventListener("resize", () => renderDiagram(stages[currentStage]));
+      window.addEventListener("resize", () =>
+        renderDiagram(stages[currentStage])
+      );
     </script>
   </body>
 </html>

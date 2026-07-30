@@ -16,35 +16,35 @@ paths:
       description: List webhooks available in cluster
       operationId: listWebhooks
       parameters:
-        - $ref: './components.yaml#/components/parameters/Selector'
+        - $ref: "./components.yaml#/components/parameters/Selector"
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Webhook'
+                  $ref: "./components.yaml#/components/schemas/Webhook"
             text/yaml:
               schema:
                 type: string
-        '400':
+        "400":
           description: problem with input for CRD generation
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '502':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "502":
           description: problem with read information from kubernetes cluster
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
+                  $ref: "./components.yaml#/components/schemas/Problem"
     post:
       summary: Create new webhook
       description: Create new webhook based on variables passed in request
@@ -55,24 +55,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: './components.yaml#/components/schemas/WebhookCreateRequest'
+              $ref: "./components.yaml#/components/schemas/WebhookCreateRequest"
           text/yaml:
             schema:
               type: string
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             text/yaml:
               schema:
                 type: string
-        '201':
+        "201":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/Webhook'
-        '400':
+                $ref: "./components.yaml#/components/schemas/Webhook"
+        "400":
           description: >-
             problem with webhook definition - probably some bad input occurs
             (invalid JSON body or similar)
@@ -81,109 +81,109 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '502':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "502":
           description: problem with communicating with kubernetes cluster
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
+                  $ref: "./components.yaml#/components/schemas/Problem"
     delete:
       summary: Delete webhooks
       description: Deletes labeled webhooks
       operationId: deleteWebhooks
       parameters:
-        - $ref: './components.yaml#/components/parameters/Selector'
+        - $ref: "./components.yaml#/components/parameters/Selector"
       responses:
-        '204':
+        "204":
           description: no content
-        '502':
+        "502":
           description: problem with read information from kubernetes cluster
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
+                  $ref: "./components.yaml#/components/schemas/Problem"
   /webhooks/{id}:
     delete:
       parameters:
-        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: "./components.yaml#/components/parameters/ID"
       summary: Delete webhook
       description: Deletes webhook by its name
       operationId: deleteWebhook
       responses:
-        '204':
+        "204":
           description: webhook deleted successfuly
-        '404':
+        "404":
           description: webhook not found
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '502':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "502":
           description: problem with communicating with kubernetes cluster
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
+                  $ref: "./components.yaml#/components/schemas/Problem"
     get:
       parameters:
-        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: "./components.yaml#/components/parameters/ID"
       summary: Get webhook details
       description: Returns webhook
       operationId: getWebhook
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/Webhook'
+                $ref: "./components.yaml#/components/schemas/Webhook"
             text/yaml:
               schema:
                 type: string
-        '400':
+        "400":
           description: problem with input for CRD generation
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '404':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "404":
           description: webhook not found
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '500':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "500":
           description: problem with getting webhook data
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '502':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "502":
           description: problem with communicating with kubernetes cluster
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
+                  $ref: "./components.yaml#/components/schemas/Problem"
     patch:
       parameters:
-        - $ref: './components.yaml#/components/parameters/ID'
+        - $ref: "./components.yaml#/components/parameters/ID"
       summary: Update new webhook
       description: Update new webhook based on variables passed in request
       operationId: updateWebhook
@@ -193,18 +193,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: './components.yaml#/components/schemas/WebhookUpdateRequest'
+              $ref: "./components.yaml#/components/schemas/WebhookUpdateRequest"
           text/yaml:
             schema:
               type: string
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/Webhook'
-        '400':
+                $ref: "./components.yaml#/components/schemas/Webhook"
+        "400":
           description: >-
             problem with webhook definition - probably some bad input occurs
             (invalid JSON body or similar)
@@ -213,20 +213,20 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '404':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "404":
           description: webhook not found
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '502':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "502":
           description: problem with communicating with kubernetes cluster
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
+                  $ref: "./components.yaml#/components/schemas/Problem"

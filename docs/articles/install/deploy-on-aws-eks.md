@@ -12,15 +12,15 @@ You can clone it and customise the values files for your environment.
 
 ## Prerequisites
 
-| Requirement | Version |
-|---|---|
-| Amazon EKS | 1.21+ (1.24+ for Pod Identity) |
-| Helm | 3+ |
-| kubectl | configured for the target cluster |
-| [cert-manager](https://cert-manager.io/docs/installation/) *(recommended)* | 1.11+ |
-| [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/) *(recommended)* | 1.8+ |
-| PostgreSQL *(when using an external database)* | RDS, Aurora, or other PostgreSQL instance reachable from the EKS VPC |
-| MongoDB Atlas *(legacy deployments only)* | Atlas cluster reachable from the EKS VPC |
+| Requirement                                                                             | Version                                                              |
+| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Amazon EKS                                                                              | 1.21+ (1.24+ for Pod Identity)                                       |
+| Helm                                                                                    | 3+                                                                   |
+| kubectl                                                                                 | configured for the target cluster                                    |
+| [cert-manager](https://cert-manager.io/docs/installation/) _(recommended)_              | 1.11+                                                                |
+| [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/) _(recommended)_ | 1.8+                                                                 |
+| PostgreSQL _(when using an external database)_                                          | RDS, Aurora, or other PostgreSQL instance reachable from the EKS VPC |
+| MongoDB Atlas _(legacy deployments only)_                                               | Atlas cluster reachable from the EKS VPC                             |
 
 :::warning IMPORTANT
 Use the community [kubernetes/ingress-nginx](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx) chart —
@@ -128,9 +128,9 @@ See [MongoDB Atlas (legacy)](#mongodb-atlas-legacy) below.
 Using AWS S3 instead of the default in-cluster MinIO is recommended for production EKS
 deployments. Two authentication methods are available — choose one:
 
-| Method | When to use |
-|---|---|
-| **EKS Pod Identity** *(recommended)* | EKS 1.24+. Simpler setup, no OIDC provider needed. |
+| Method                                    | When to use                                                                     |
+| ----------------------------------------- | ------------------------------------------------------------------------------- |
+| **EKS Pod Identity** _(recommended)_      | EKS 1.24+. Simpler setup, no OIDC provider needed.                              |
 | **IRSA** (IAM Roles for Service Accounts) | EKS 1.21+, legacy clusters, or when the Pod Identity Agent cannot be installed. |
 
 ### Common Steps
@@ -540,19 +540,20 @@ script that supports composable flags:
 ./install.sh --with-pod-identity --production
 ./install.sh --with-s3 --with-alb --production
 ```
+
 :::
 
 ## 8. DNS Setup
 
 Create DNS records (CNAME or Alias) pointing to your NGINX Ingress load balancer for each service:
 
-| Record | Default subdomain |
-|---|---|
-| Dashboard | `dashboard.<domain>` |
-| REST API | `api.<domain>` |
-| gRPC API | `agent.<domain>` |
+| Record     | Default subdomain     |
+| ---------- | --------------------- |
+| Dashboard  | `dashboard.<domain>`  |
+| REST API   | `api.<domain>`        |
+| gRPC API   | `agent.<domain>`      |
 | WebSockets | `websockets.<domain>` |
-| Storage | `storage.<domain>` |
+| Storage    | `storage.<domain>`    |
 
 Get the load balancer hostname:
 
@@ -670,6 +671,7 @@ creating unnecessary cert-manager Certificate resources:
 global:
   certificateProvider: ""
 ```
+
 :::
 
 ## Production Hardening
@@ -759,6 +761,7 @@ aws eks describe-cluster --name <EKS_CLUSTER_NAME> \
 ```
 
 **gRPC connection issues:**
+
 - Verify HTTP/2 is supported end-to-end through your ingress / load balancer.
 - If using ALB, confirm the target group protocol and check for HTTP/2 support.
 

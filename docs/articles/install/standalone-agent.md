@@ -1,15 +1,15 @@
-# The Testkube Agent 
+# The Testkube Agent
 
 ## Overview
 
-The Testkube Agent is 100% Open Source and includes the Testkube execution and orchestration engine 
-(with some [limitations](#agent-limitations-in-standalone-mode)). It is _always_ hosted in your infrastructure and 
+The Testkube Agent is 100% Open Source and includes the Testkube execution and orchestration engine
+(with some [limitations](#agent-limitations-in-standalone-mode)). It is _always_ hosted in your infrastructure and
 can be deployed in two modes:
 
 - **Standalone Mode** - not connected to a Testkube Control Plane.
 - **Connected Mode** - connected to a Testkube Control Plane.
 
-This document shows how to use the Agent in Standalone mode, see the corresponding documentation for 
+This document shows how to use the Agent in Standalone mode, see the corresponding documentation for
 [On Prem](/articles/install/overview#on-prem-control-plane) and [Cloud](/articles/install/cloud-overview)
 deployment of the Testkube Control Plane to learn how to use the Agent in Connected Mode.
 
@@ -19,7 +19,7 @@ See the [Feature Comparison](feature-comparison) to understand the differences i
 
 ## Running in Standalone Mode
 
-When running the Agent in Standalone Mode there is no [Dashboard](/articles/testkube-dashboard-explore) and it has to be managed entirely through the [Testkube CLI](/articles/cli). 
+When running the Agent in Standalone Mode there is no [Dashboard](/articles/testkube-dashboard-explore) and it has to be managed entirely through the [Testkube CLI](/articles/cli).
 
 The following functionality is available directly in the agent in Standalone Mode
 
@@ -41,7 +41,7 @@ Testkube Control Plane:
 - **Concurrency Policies** with `concurrency` - see [Concurrency](/articles/test-workflows-concurrency-queueing)
 
 :::tip
-Deploying the Testkube Agent in Standalone Mode provides **extensive** test execution capabilities even 
+Deploying the Testkube Agent in Standalone Mode provides **extensive** test execution capabilities even
 without these features available, check out the [Open Source Overview](/articles/open-source) to get started.
 :::
 
@@ -113,7 +113,7 @@ helm delete --namespace testkube testkube kubeshop/testkube
 
 ## Deployment Architecture
 
-A high-level deployment architecture for Standalone Agent is shown below. 
+A high-level deployment architecture for Standalone Agent is shown below.
 
 ![Deployment with standalone agent](../../img/architecture-standalone.jpeg)
 
@@ -121,9 +121,9 @@ The Testkube CRDs are described in [Testkube Custom Resources](/articles/crds).
 
 ## Connecting to the Testkube Control Plane
 
-You can connect a standalone Agent to an instance of the Testkube Control Plane to leverage 
+You can connect a standalone Agent to an instance of the Testkube Control Plane to leverage
 corresponding functionality (see [Feature Comparison](feature-comparison)).
-All Workflow/Trigger/Webhook definitions will be preserved, but historical test execution results and 
+All Workflow/Trigger/Webhook definitions will be preserved, but historical test execution results and
 artifacts won't be copied to the control plane.
 
 After connecting, your agent appears in the Control Plane as a single agent with all four capabilities (Runner, Listener, GitOps, Webhook) enabled by default - [Read More](/articles/testkube-resource-management).
@@ -157,7 +157,7 @@ When [minio](https://min.io/) is specified, logs will be stored as separate file
 
 ### MongoDB upgrade from 8.0.13 to 8.2.5
 
-Starting with chart version `2.6.0`, MongoDB is upgraded to `8.2.3` and in the later versions to `8.2.5`.  This is a **breaking change** for installations that are not already running MongoDB `8.0.x`, because MongoDB requires the upgrade path to go through `8.0` before moving to `8.2.x`.
+Starting with chart version `2.6.0`, MongoDB is upgraded to `8.2.3` and in the later versions to `8.2.5`. This is a **breaking change** for installations that are not already running MongoDB `8.0.x`, because MongoDB requires the upgrade path to go through `8.0` before moving to `8.2.x`.
 
 To upgrade safely, you must first ensure they you on at least chart version `2.4.0`, which includes MongoDB `8.0.13`. Only after that should you upgrade to the latest chart version.
 
@@ -174,6 +174,7 @@ mongodb:
   preUpgradeFCVJob:
     enabled: true
 ```
+
 **How it works**
 
 When the FCV jobs are enabled:
@@ -187,7 +188,6 @@ If your installation is still on MongoDB `7.x`, do not upgrade directly to a cha
 :::
 
 The FCV jobs are configurable and can also be used for future supported MongoDB upgrades by changing the compatibility values in the chart.
-
 
 ### Artifact Storage
 
@@ -284,16 +284,17 @@ The operator-based path has two parts:
 2. A `Cluster` custom resource, created by the `postgresqlCluster` chart values.
 
 To enable this, update your `values.yaml` as follows:
+
 ```yaml
 mongodb:
   enabled: false #disables MongoDB chart installation
-  
+
 cloudnative-pg:
   enabled: true #install the CloudNativePG operator
-  
+
 postgresqlCluster:
   enabled: true #creates a CloudNativePG Cluster resource
-  
+
 testkube-api:
   mongodb:
     enabled: false #disable MongoDB connection for API
@@ -328,7 +329,7 @@ The resource model changes from a Helm-managed PostgreSQL `StatefulSet` to an op
 
 ### Using an external PostgreSQL instance
 
-You can easily connect PostgreSQL to an external database by creating a Kubernetes secret with the database connection details and wiring it into `testkube-api.postgresql.secretName`. 
+You can easily connect PostgreSQL to an external database by creating a Kubernetes secret with the database connection details and wiring it into `testkube-api.postgresql.secretName`.
 
 ### New installation with CloudNativePG Operator
 
@@ -339,23 +340,22 @@ First, install the operator and its CRDs only:
 
 ```yaml
 helm upgrade --install testkube oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube --version <version> \
-  -n testkube \
-  --create-namespace \
-  -f values.yaml \
-  --set postgresqlCluster.enabled=false
+-n testkube \
+--create-namespace \
+-f values.yaml \
+--set postgresqlCluster.enabled=false
 ```
 
 Once the CRDs are installed and registered in the cluster, run Helm again with the PostgreSQL cluster enabled:
 
 ```yaml
 helm upgrade --install testkube oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube --version <version> \
-  -n testkube \
-  -f values.yaml \
-  --set postgresqlCluster.enabled=true
+-n testkube \
+-f values.yaml \
+--set postgresqlCluster.enabled=true
 ```
 
 This second step allows Helm to create the PostgreSQL Cluster resource after the required CRD is available.
-
 
 ## Deploying on AWS
 

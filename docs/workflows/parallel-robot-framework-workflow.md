@@ -21,7 +21,8 @@ spec:
         container:
           image: marketsquare/robotframework-browser:latest
         steps:
-          - shell: robot --variable BROWSER:{{ matrix.browser }} --outputdir /data/output-{{matrix.browser}}
+          - shell:
+              robot --variable BROWSER:{{ matrix.browser }} --outputdir /data/output-{{matrix.browser}}
               --reporttitle "{{ matrix.browser }} Report" /data/repo/testkube_io.robot
             artifacts:
               paths:

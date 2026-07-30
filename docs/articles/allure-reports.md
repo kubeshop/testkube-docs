@@ -1,7 +1,7 @@
 # Using Allure Reports in your Workflows
 
-Allure Reports is a popular [open-source tool](https://github.com/allure-framework/allure2) for generating reports for individual test results, and 
-can be easily added to any Test Workflow in Testkube to generate corresponding reports for your 
+Allure Reports is a popular [open-source tool](https://github.com/allure-framework/allure2) for generating reports for individual test results, and
+can be easily added to any Test Workflow in Testkube to generate corresponding reports for your
 Tests Executions.
 
 ## PyTest Example
@@ -22,7 +22,7 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-      - test/pytest/pytest-project
+        - test/pytest/pytest-project
   container:
     workingDir: /data/repo/test/pytest/pytest-project
     image: python:3.12.6-alpine3.20
@@ -31,35 +31,35 @@ spec:
         cpu: 256m
         memory: 256Mi
   steps:
-  - name: Run test
-    shell: |
-      pip install -r requirements.txt
-      mkdir /data/artifacts
-      pytest tests/success --junit-xml=/data/artifacts/pytest-report.xml
-  - name: generate-allure-report
-    run:
-      image: tobix/allure-cli:latest
-      env:
-      - name: ALLURE_NO_ANALYTICS
-        value: "1"
-      args:
-      - generate
-      - /data/artifacts
-      - -o
-      - /data/artifacts/allure-report
-      - --clean
-  - name: upload-artifacts
-    condition: always
-    artifacts:
-      paths:
-      - /data/artifacts/allure-report/**
+    - name: Run test
+      shell: |
+        pip install -r requirements.txt
+        mkdir /data/artifacts
+        pytest tests/success --junit-xml=/data/artifacts/pytest-report.xml
+    - name: generate-allure-report
+      run:
+        image: tobix/allure-cli:latest
+        env:
+          - name: ALLURE_NO_ANALYTICS
+            value: "1"
+        args:
+          - generate
+          - /data/artifacts
+          - -o
+          - /data/artifacts/allure-report
+          - --clean
+    - name: upload-artifacts
+      condition: always
+      artifacts:
+        paths:
+          - /data/artifacts/allure-report/**
 ```
 
 :::tip
 Add `condition: failed` to the `generate-allure-report` step if you only want to generate reports for failed tests.
 :::
 
-Running this Workflow results in the following Log Output: 
+Running this Workflow results in the following Log Output:
 
 ![Allure Log Output](images/allure-log-output.png)
 

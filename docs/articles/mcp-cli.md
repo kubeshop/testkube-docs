@@ -172,6 +172,7 @@ The Testkube MCP Server running from the CLI supports two transport modes for co
 **Default transport mode** - Uses standard input/output streams for communication.
 
 **Configuration:**
+
 ```json
 {
   "servers": {
@@ -209,7 +210,16 @@ The Testkube MCP Server running from the CLI supports two transport modes for co
   "servers": {
     "testkube": {
       "command": "testkube",
-      "args": ["mcp", "serve", "--transport", "shttp", "--shttp-host", "localhost", "--shttp-port", "8080"],
+      "args": [
+        "mcp",
+        "serve",
+        "--transport",
+        "shttp",
+        "--shttp-host",
+        "localhost",
+        "--shttp-port",
+        "8080"
+      ],
       "type": "shttp"
     }
   }
@@ -260,14 +270,14 @@ When starting the MCP Server with shttp - the mcp endpoint is available at `http
 
 Choose the transport mode based on your use case:
 
-| Use Case | Recommended Mode | Reason |
-|----------|------------------|---------|
-| Local development | stdio | Simple, secure, no network setup |
-| Desktop AI tools | stdio | Native support, better performance |
-| Docker containers | shttp | Network accessible, container-friendly |
-| Remote AI tools | shttp | Network communication required |
-| Production deployments | shttp + TLS | Secure, scalable, enterprise-ready |
-| CI/CD pipelines | shttp | Network accessible, automation-friendly |
+| Use Case               | Recommended Mode | Reason                                  |
+| ---------------------- | ---------------- | --------------------------------------- |
+| Local development      | stdio            | Simple, secure, no network setup        |
+| Desktop AI tools       | stdio            | Native support, better performance      |
+| Docker containers      | shttp            | Network accessible, container-friendly  |
+| Remote AI tools        | shttp            | Network communication required          |
+| Production deployments | shttp + TLS      | Secure, scalable, enterprise-ready      |
+| CI/CD pipelines        | shttp            | Network accessible, automation-friendly |
 
 ### Environment Variable Mode
 

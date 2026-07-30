@@ -135,24 +135,24 @@ Despite the Testkube components visible in the diagram above, in the following t
 
 Check the table to know each of the integrations between Testkube Components:
 
-|Consumer|Provider|Description|Component port in use|
-|--------|--------|-----------|---------------------|
-|User Browser|Testkube Dashboard|Users will reach Testkube Dashboard|8080|
-|User Browser|Testkube Control Plane API|Users will reach directly Testkube Control Plane API|8088 (if HTTPS, 9443)|
-|User Browser|Dex|User will reach Dex service for authentication process|5556|
-|User Browser|S3|User will reach Dex service for pulling test execution artifacts|9000|
-|Testkube Control Plane API|Dex|To verify user token and ensure authenticated access to Testkube platform|5556, 5557|
-|Testkube Control Plane API|PostgreSQL|To store the state of the whole platform objects (Test Workflows, Test Triggers, Webhooks, etc.)|5432 (If it's the bundled PostgreSQL deployed together with Testkube platform)|
-|Testkube Control Plane API|NATS|To manage events happening into the platform|4222|
-|Testkube Control Plane API|S3|To store artifacts (test workflow execution results, logs, and metrics)|9000 (If is MinIO)| 
-|Testkube Control Plane API|_License Server **_|To validate license configured in instance, License Server is an external service managed by Testkube|443|
-|Worker Service|NATS|To manage events happening into the platform|4222|
-|Worker Service|PostgreSQL|To manage the state of the whole platform objects (Test Workflows, Test Triggers, Webhooks, etc.) generating metrics|5432 (If it's the bundled PostgreSQL deployed together with Testkube platform)|
-|Testkube Agent API|Testkube Control Plane API|To receive instructions on Test Workflow and other features execution in the specific environment and Kubernetes cluster|8089 (if HTTPS, 8443)|
-|Testkube Agent API|S3|To store artifacts (test workflow execution results, logs, and metrics)|9000 (If is MinIO)|
-|Testkube Agent API|NATS|To manage events happening into the platform|4222|
+| Consumer                   | Provider                   | Description                                                                                                              | Component port in use                                                          |
+| -------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| User Browser               | Testkube Dashboard         | Users will reach Testkube Dashboard                                                                                      | 8080                                                                           |
+| User Browser               | Testkube Control Plane API | Users will reach directly Testkube Control Plane API                                                                     | 8088 (if HTTPS, 9443)                                                          |
+| User Browser               | Dex                        | User will reach Dex service for authentication process                                                                   | 5556                                                                           |
+| User Browser               | S3                         | User will reach Dex service for pulling test execution artifacts                                                         | 9000                                                                           |
+| Testkube Control Plane API | Dex                        | To verify user token and ensure authenticated access to Testkube platform                                                | 5556, 5557                                                                     |
+| Testkube Control Plane API | PostgreSQL                 | To store the state of the whole platform objects (Test Workflows, Test Triggers, Webhooks, etc.)                         | 5432 (If it's the bundled PostgreSQL deployed together with Testkube platform) |
+| Testkube Control Plane API | NATS                       | To manage events happening into the platform                                                                             | 4222                                                                           |
+| Testkube Control Plane API | S3                         | To store artifacts (test workflow execution results, logs, and metrics)                                                  | 9000 (If is MinIO)                                                             |
+| Testkube Control Plane API | _License Server **_        | To validate license configured in instance, License Server is an external service managed by Testkube                    | 443                                                                            |
+| Worker Service             | NATS                       | To manage events happening into the platform                                                                             | 4222                                                                           |
+| Worker Service             | PostgreSQL                 | To manage the state of the whole platform objects (Test Workflows, Test Triggers, Webhooks, etc.) generating metrics     | 5432 (If it's the bundled PostgreSQL deployed together with Testkube platform) |
+| Testkube Agent API         | Testkube Control Plane API | To receive instructions on Test Workflow and other features execution in the specific environment and Kubernetes cluster | 8089 (if HTTPS, 8443)                                                          |
+| Testkube Agent API         | S3                         | To store artifacts (test workflow execution results, logs, and metrics)                                                  | 9000 (If is MinIO)                                                             |
+| Testkube Agent API         | NATS                       | To manage events happening into the platform                                                                             | 4222                                                                           |
 
-_** Only for installation using Online Testkube License._
+_\** Only for installation using Online Testkube License._
 
 For some specific integration Testkube Control Plane API must be exposed and available for the Consumer if it's in the same or out of the Testkube network, check all the different integrations [here](./integrations.md).
 
@@ -164,11 +164,11 @@ By default, Testkube Control Plane API requires network access to domain `licens
 
 It provides 2 main interfaces:
 
-* **Testkube Dashboard:** users from their local/remote workstations reach this component that exposes a graphic user interface through port `443` with TCP protocol.
-* **Testkube Control Plane API:** this component exposes 3 types of service:
-    * **REST service:** users who are using Testkube Dashboard must have network access to this service exposed through port `443` with TCP protocol.
-    * **WebSocker service:** users who are using Testkube Dashboard must have network access to this service exposed through port `443` with WebSocket protocol.
-    * **gRPC service:** Testkube Agent API connects to Testkube Control Plane API through port `443` when agent is running in other cluster, direct to service port `9443` when it's in the same cluster, in both cases using gRPC protocol.
+- **Testkube Dashboard:** users from their local/remote workstations reach this component that exposes a graphic user interface through port `443` with TCP protocol.
+- **Testkube Control Plane API:** this component exposes 3 types of service:
+  - **REST service:** users who are using Testkube Dashboard must have network access to this service exposed through port `443` with TCP protocol.
+  - **WebSocker service:** users who are using Testkube Dashboard must have network access to this service exposed through port `443` with WebSocket protocol.
+  - **gRPC service:** Testkube Agent API connects to Testkube Control Plane API through port `443` when agent is running in other cluster, direct to service port `9443` when it's in the same cluster, in both cases using gRPC protocol.
 
 > **Important!**
 >
@@ -176,28 +176,28 @@ It provides 2 main interfaces:
 
 This component also integrates with:
 
-* **Dex:** using port `5556` and `5557` with TCP protocol.
-* **PostgreSQL:** using default port `5432` with TCP protocol.
-* **MongoDB:** using default port `27017` with TCP protocol (legacy deployments only).
-* **NATS**: using port `4222` with TCP protocol. It also apply to Testkube Agent API, unless it's configured to have embedded NATS.
+- **Dex:** using port `5556` and `5557` with TCP protocol.
+- **PostgreSQL:** using default port `5432` with TCP protocol.
+- **MongoDB:** using default port `27017` with TCP protocol (legacy deployments only).
+- **NATS**: using port `4222` with TCP protocol. It also apply to Testkube Agent API, unless it's configured to have embedded NATS.
 
 #### S3 or Object storage
 
 As the graph above shows, several components of the Testkube architecture integrates with S3 service:
 
-|Component|Behavior|Description|
-|---------|------------|-------|
-|Testkube Control Plane API|Read/Write/Delete|<ul><li>To access execution artifacts and logs.</li><li>To save executions resource metrics.</li><li>To rotate old logs and artifacts.</li></ul>|
-|Testkube Agent API|Read/Write|To publish and access execution artifacts and logs|
-|Users (from Testkube CLI)|Read|To access execution artifacts and logs|
+| Component                  | Behavior          | Description                                                                                                                                      |
+| -------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Testkube Control Plane API | Read/Write/Delete | <ul><li>To access execution artifacts and logs.</li><li>To save executions resource metrics.</li><li>To rotate old logs and artifacts.</li></ul> |
+| Testkube Agent API         | Read/Write        | To publish and access execution artifacts and logs                                                                                               |
+| Users (from Testkube CLI)  | Read              | To access execution artifacts and logs                                                                                                           |
 
 Only Testkube Control Plane API manages access/secret keys to authenticate against S3 service, all other components use [presigned URLs](https://min.io/docs/minio/linux/integrations/presigned-put-upload-via-browser.html) generated by Testkube Control Plane API.
 
 Requirements to ensure this integration is working properly:
 
-* Testkube Control Plane API has the right access/secret keys configured, as well as network access.
-* Testkube Agents API have network access from the cluster and namespace where they are deployed, if execution namespaces is configured, ensure those namespaces have network access as well.
-* Users who is running Testkube CLI from their local/remote workstations must have network access.
+- Testkube Control Plane API has the right access/secret keys configured, as well as network access.
+- Testkube Agents API have network access from the cluster and namespace where they are deployed, if execution namespaces is configured, ensure those namespaces have network access as well.
+- Users who is running Testkube CLI from their local/remote workstations must have network access.
 
 ## Components - Workflow Job
 

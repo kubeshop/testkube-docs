@@ -2,7 +2,7 @@
 
 ## Overview
 
-Testkube can automatically highlight relevant keywords in your logs to help you with faster debugging. 
+Testkube can automatically highlight relevant keywords in your logs to help you with faster debugging.
 To use this feature, open execution details.
 
 On this screen, all the lines that may be relevant will be highlighted in the interface.
@@ -20,7 +20,7 @@ By default, all the categories are active.
 ![log-highlighting-filtering.png](../img/log-highlighting-filtering.png)
 
 :::tip
-You can manage filter Categories and Keywords under the corresponding 
+You can manage filter Categories and Keywords under the corresponding
 [Environment Keyword Handling](/articles/environment-management#keyword-handling) tab.
 :::
 

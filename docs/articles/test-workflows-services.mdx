@@ -3,14 +3,15 @@ import TabItem from "@theme/TabItem";
 
 # Test Workflows - Services
 
-import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx"
+import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx";
 
-<RequiresCommercialWorkflows/>
+<RequiresCommercialWorkflows />
 
 Often if your use-case is more complex, you may need additional services for the Tests you are running. Common use cases are:
-* Database, i.e. [**MongoDB**](https://hub.docker.com/_/mongo) or [**PostgreSQL**](https://hub.docker.com/r/bitnami/postgresql)
-* Workers, i.e. [**remote JMeter workers**](https://hub.docker.com/r/alpine/jmeter) or [**Selenium Grid's remote browsers**](https://hub.docker.com/r/selenium/standalone-firefox)
-* Service under test, i.e. your API to run E2E tests against it
+
+- Database, i.e. [**MongoDB**](https://hub.docker.com/_/mongo) or [**PostgreSQL**](https://hub.docker.com/r/bitnami/postgresql)
+- Workers, i.e. [**remote JMeter workers**](https://hub.docker.com/r/alpine/jmeter) or [**Selenium Grid's remote browsers**](https://hub.docker.com/r/selenium/standalone-firefox)
+- Service under test, i.e. your API to run E2E tests against it
 
 Testkube allows you to run such services for the Test Workflow, communicate with them and debug smoothly.
 
@@ -43,7 +44,6 @@ You may want to use services in [Test Workflow Template](./test-workflows-exampl
 
 :::
 
-
 <Tabs>
 <TabItem value="yaml" label="YAML" default>
 
@@ -58,21 +58,21 @@ spec:
       timeout: 5m
       image: mongo:latest
       env:
-      - name: MONGO_INITDB_ROOT_USERNAME
-        value: root
-      - name: MONGO_INITDB_ROOT_PASSWORD
-        value: p4ssw0rd
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: root
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: p4ssw0rd
       readinessProbe:
         tcpSocket:
           port: 27017
         periodSeconds: 1
   steps:
-  - name: Check if it is running
-    run:
-      image: mongo:latest
-      shell: |
-        echo Connecting to MongoDB at {{ services.db.0.ip }}
-        mongosh -u root -p p4ssw0rd {{ services.db.0.ip }} --eval 'db.serverStatus().localTime'
+    - name: Check if it is running
+      run:
+        image: mongo:latest
+        shell: |
+          echo Connecting to MongoDB at {{ services.db.0.ip }}
+          mongosh -u root -p p4ssw0rd {{ services.db.0.ip }} --eval 'db.serverStatus().localTime'
 ```
 
 </TabItem>
@@ -87,24 +87,25 @@ spec:
 
 To connect to create services, you can simply use `services.<SVC_NAME>.<INDEX>.ip` expression in the place you need its address (i.e. environment variable, or shell command).
 
-* `services.db.0.ip` will return `string` - IP of the 1st instance of the `db` service
-* `services.db.*.ip` will return `[]string` - list of IPs of all the `db` service instances
+- `services.db.0.ip` will return `string` - IP of the 1st instance of the `db` service
+- `services.db.*.ip` will return `[]string` - list of IPs of all the `db` service instances
 
 ### Basic configuration
 
 The service allows similar fields as the `run` command, i.e.:
-* `image`, `env`, `volumeMounts`, `resources` - to configure the container
-* `command`, `args` - to specify command to run
-* `shell` - to specify script to run (instead of `command`/`args`)
-* `description` that may provide human-readable information for each instance separately
+
+- `image`, `env`, `volumeMounts`, `resources` - to configure the container
+- `command`, `args` - to specify command to run
+- `shell` - to specify script to run (instead of `command`/`args`)
+- `description` that may provide human-readable information for each instance separately
 
 ### Fetching logs
 
 By default we are not saving the logs for the services. If you would like to fetch the logs, you can use `logs` property.
 It takes an expression condition, so you can dynamically choose whether it should be saved or not. Often you will use:
 
-* `logs: always` to always store the logs
-* `logs: failed` to store the logs only if the Test Workflow has failed
+- `logs: always` to always store the logs
+- `logs: failed` to store the logs only if the Test Workflow has failed
 
 ### Pod configuration
 
@@ -120,30 +121,29 @@ spec:
     db:
       pod:
         tolerations:
-        - key: pool
-          operator: Equal
-          value: system
-          effect: NoSchedule
+          - key: pool
+            operator: Equal
+            value: system
+            effect: NoSchedule
       timeout: 6m
       image: mongo:latest
       env:
-      - name: MONGO_INITDB_ROOT_USERNAME
-        value: root
-      - name: MONGO_INITDB_ROOT_PASSWORD
-        value: p4ssw0rd
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: root
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: p4ssw0rd
       readinessProbe:
         tcpSocket:
           port: 27017
         periodSeconds: 1
   steps:
-  - name: Check if it is running
-    run:
-      image: mongo:latest
-      shell: |
-        echo Connecting to MongoDB at {{services.db.0.ip}}
-        mongosh -u root -p p4ssw0rd {{services.db.0.ip}} --eval 'db.serverStatus().localTime'
+    - name: Check if it is running
+      run:
+        image: mongo:latest
+        shell: |
+          echo Connecting to MongoDB at {{services.db.0.ip}}
+          mongosh -u root -p p4ssw0rd {{services.db.0.ip}} --eval 'db.serverStatus().localTime'
 ```
-
 
 ### Lifecycle
 
@@ -167,7 +167,7 @@ You can read more about it in the general [**Matrix and Sharding**](./test-workf
 Services can also be defined on the step level, making them available only within the corresponding step, which enables
 
 - Service isolation across steps
-- Service dependencies, for example, if your step-level service(s) need to connect to a Workflow-level service. 
+- Service dependencies, for example, if your step-level service(s) need to connect to a Workflow-level service.
 
 The following example shows a Workflow that starts a Selenium Hub service at the Workflow level and
 then starts two Selenium Chrome-Nodes as step-level services, connecting to the Selenium Hub service using `{{ services.hub.0.ip }}`
@@ -181,8 +181,8 @@ metadata:
 description: "Selenium Java + Hub + Chrome Nodes"
 spec:
   config:
-    chromeNodes: {type: integer, default: 2}
-    junitParallelism: {type: integer, default: 4}
+    chromeNodes: { type: integer, default: 2 }
+    junitParallelism: { type: integer, default: 4 }
   content:
     git:
       uri: https://github.com/kubeshop/testkube
@@ -229,36 +229,36 @@ spec:
             periodSeconds: 1
           env:
             - name: SE_EVENT_BUS_HOST
-              value: '{{ services.hub.0.ip }}'
+              value: "{{ services.hub.0.ip }}"
             - name: SE_EVENT_BUS_PUBLISH_PORT
               value: "4442"
             - name: SE_EVENT_BUS_SUBSCRIBE_PORT
               value: "4443"
       steps:
-      - name: Run test
-        run:
-          env:
-            - name: REMOTE_WEBDRIVER_URL
-              value: 'http://{{ services.hub.0.ip }}:4444/wd/hub'
-            - name: BROWSER
-              value: 'chrome'
-            - name: JUNIT_JUPITER_EXECUTION_PARALLEL_ENABLED
-              value: "true"
-            - name: JUNIT_JUPITER_EXECUTION_PARALLEL_MODE_DEFAULT
-              value: concurrent
-            - name: JUNIT_JUPITER_EXECUTION_PARALLEL_MODE_CLASSES_DEFAULT
-              value: concurrent
-            - name: JUNIT_JUPITER_EXECUTION_PARALLEL_CONFIG_STRATEGY
-              value: fixed
-            - name: JUNIT_JUPITER_EXECUTION_PARALLEL_CONFIG_FIXED_PARALLELISM
-              value: "{{ config.junitParallelism }}"
-          shell: |
-            mvn test
-            mvn surefire-report:report
-        artifacts:
-          paths:
-            - target/site/**/*
-            - target/surefire-reports/**/*
+        - name: Run test
+          run:
+            env:
+              - name: REMOTE_WEBDRIVER_URL
+                value: "http://{{ services.hub.0.ip }}:4444/wd/hub"
+              - name: BROWSER
+                value: "chrome"
+              - name: JUNIT_JUPITER_EXECUTION_PARALLEL_ENABLED
+                value: "true"
+              - name: JUNIT_JUPITER_EXECUTION_PARALLEL_MODE_DEFAULT
+                value: concurrent
+              - name: JUNIT_JUPITER_EXECUTION_PARALLEL_MODE_CLASSES_DEFAULT
+                value: concurrent
+              - name: JUNIT_JUPITER_EXECUTION_PARALLEL_CONFIG_STRATEGY
+                value: fixed
+              - name: JUNIT_JUPITER_EXECUTION_PARALLEL_CONFIG_FIXED_PARALLELISM
+                value: "{{ config.junitParallelism }}"
+            shell: |
+              mvn test
+              mvn surefire-report:report
+          artifacts:
+            paths:
+              - target/site/**/*
+              - target/surefire-reports/**/*
 ```
 
 The output of this execution looks as follows:
@@ -283,9 +283,9 @@ and then distribute it to the services.
 
 To do so, you can use `transfer` property. It takes list of files to transfer:
 
-* `{ from: "/data/repo/build" }` will copy the `/data/repo/build` directory from execution's Pod into `/data/repo/build` in the service's Pod
-* `{ from: "/data/repo/build", to: "/out" }` will copy the `/data/repo/build` directory from execution's Pod into `/out` in the service's Pod
-* `{ from: "/data/repo/build", to: "/out", "files": ["**/*.json"] }` will copy only JSON files from the `/data/repo/build` directory from execution's Pod into `/out` in the service's Pod
+- `{ from: "/data/repo/build" }` will copy the `/data/repo/build` directory from execution's Pod into `/data/repo/build` in the service's Pod
+- `{ from: "/data/repo/build", to: "/out" }` will copy the `/data/repo/build` directory from execution's Pod into `/out` in the service's Pod
+- `{ from: "/data/repo/build", to: "/out", "files": ["**/*.json"] }` will copy only JSON files from the `/data/repo/build` directory from execution's Pod into `/out` in the service's Pod
 
 #### Example
 
@@ -310,27 +310,27 @@ spec:
         memory: 2Gi
 
   steps:
-  - name: Build the application
-    run:
-      image: node:21
-      shell: npm i && npm run build
+    - name: Build the application
+      run:
+        image: node:21
+        shell: npm i && npm run build
 
-  - name: Test the application
-    services:
-      server:
-        timeout: 1m
-        transfer:
-        - from: /data/repo/build
-          to: /usr/share/nginx/html
-        image: nginx:1.25.4
-        logs: always
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 80
-          periodSeconds: 1
-    steps:
-    - shell: wget -q -O - {{ services.server.0.ip }}
+    - name: Test the application
+      services:
+        server:
+          timeout: 1m
+          transfer:
+            - from: /data/repo/build
+              to: /usr/share/nginx/html
+          image: nginx:1.25.4
+          logs: always
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 1
+      steps:
+        - shell: wget -q -O - {{ services.server.0.ip }}
 ```
 
 </TabItem>
@@ -359,17 +359,17 @@ spec:
       timeout: 5m
       content:
         files:
-        - path: /etc/nginx/nginx.conf
-          content: |
-            events { worker_connections 1024; }
-            http {
-              server {
-                listen 8888;
-                location / { root /www; }
+          - path: /etc/nginx/nginx.conf
+            content: |
+              events { worker_connections 1024; }
+              http {
+                server {
+                  listen 8888;
+                  location / { root /www; }
+                }
               }
-            }
-        - path: /www/index.html
-          content: "foo-bar"
+          - path: /www/index.html
+            content: "foo-bar"
       image: nginx:1.25.4
       readinessProbe:
         httpGet:
@@ -377,7 +377,7 @@ spec:
           port: 8888
         periodSeconds: 1
   steps:
-  - shell: wget -q -O - {{ services.http.0.ip }}:8888
+    - shell: wget -q -O - {{ services.http.0.ip }}:8888
 ```
 
 </TabItem>
@@ -396,13 +396,13 @@ You can easily run JMeter with distributed remote workers, that could be even sp
 
 The example below:
 
-* Read JMX configuration from Git repository (`spec.content.git`)
-* Start 5 remote workers (`spec.services.slave.count`)
-  * Distribute them evenly across nodes (`spec.services.slave.use[0]` - `distribute/evenly` template is setting common [`pod.topologySpreadConstraints`](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/))
-  * Reserve 1/8 CPU and 128MB memory for each instance (`spec.services.slave.container.resources`)
-  * Wait until they will accept connection at port 1099 (`spec.services.slave.readinessProbe`)
-* Run JMeter controller against all the remote workers (`spec.services.steps[0].run`)
-  * It uses `{{ services.slave.*.ip }}` as an argument - `services.slave.*.ip` will return list of IPs, and they will be joined by comma (`,`) to convert to text
+- Read JMX configuration from Git repository (`spec.content.git`)
+- Start 5 remote workers (`spec.services.slave.count`)
+  - Distribute them evenly across nodes (`spec.services.slave.use[0]` - `distribute/evenly` template is setting common [`pod.topologySpreadConstraints`](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/))
+  - Reserve 1/8 CPU and 128MB memory for each instance (`spec.services.slave.container.resources`)
+  - Wait until they will accept connection at port 1099 (`spec.services.slave.readinessProbe`)
+- Run JMeter controller against all the remote workers (`spec.services.steps[0].run`)
+  - It uses `{{ services.slave.*.ip }}` as an argument - `services.slave.*.ip` will return list of IPs, and they will be joined by comma (`,`) to convert to text
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -415,21 +415,21 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-      - test/jmeter/jmeter-executor-smoke.jmx
+        - test/jmeter/jmeter-executor-smoke.jmx
   container:
     workingDir: /data/repo/test/jmeter
   services:
     slave:
       use:
-      - name: distribute/evenly
+        - name: distribute/evenly
       count: 5
       timeout: 30s
       image: alpine/jmeter:5.6
       command:
-      - jmeter-server
-      - -Dserver.rmi.localport=60000
-      - -Dserver_port=1099
-      - -Jserver.rmi.ssl.disable=true
+        - jmeter-server
+        - -Dserver.rmi.localport=60000
+        - -Dserver_port=1099
+        - -Jserver.rmi.ssl.disable=true
       container:
         resources:
           requests:
@@ -440,14 +440,14 @@ spec:
           port: 1099
         periodSeconds: 1
   steps:
-  - name: Run tests
-    run:
-      image: alpine/jmeter:5.6
-      shell: |
-        jmeter -n \
-          -X -Jserver.rmi.ssl.disable=true -Jclient.rmi.localport=7000 \
-          -R {{ services.slave.*.ip }} \
-          -t jmeter-executor-smoke.jmx
+    - name: Run tests
+      run:
+        image: alpine/jmeter:5.6
+        shell: |
+          jmeter -n \
+            -X -Jserver.rmi.ssl.disable=true -Jclient.rmi.localport=7000 \
+            -R {{ services.slave.*.ip }} \
+            -t jmeter-executor-smoke.jmx
 ```
 
 ### Selenium tests with multiple remote browsers
@@ -456,17 +456,17 @@ You can initialize multiple remote browsers, and then [**run tests against them 
 
 The example below:
 
-* Clone the test code (`content`)
-* Start 3 instances of `remote` service (`services.remote`)
-  * Each instance have different browser used (`image` of `services.remote.matrix.browser` passed to `services.remote.image`)
-  * Each instance expose the driver name in their description (`driver` of `services.remote.matrix.browser` passed to `services.remote.description`)
-  * Wait until the browser is ready to connect (`services.remote.readinessProbe`)
-  * Always save the browser logs (`services.remote.logs`)
-* Run tests in parallel for each of the browser (`steps[0].parallel`)
-  * Run for each `remote` service instance (`steps[0].parallel.matrix.browser`)
-  * Transfer the code from the repository to the parallel step (`steps[0].parallel.transfer`)
-  * Sets the environment variables based on the service instance's description and IP (`steps[0].parallel.container.env`)
-  * Run tests (`steps[0].parallel.shell`)
+- Clone the test code (`content`)
+- Start 3 instances of `remote` service (`services.remote`)
+  - Each instance have different browser used (`image` of `services.remote.matrix.browser` passed to `services.remote.image`)
+  - Each instance expose the driver name in their description (`driver` of `services.remote.matrix.browser` passed to `services.remote.description`)
+  - Wait until the browser is ready to connect (`services.remote.readinessProbe`)
+  - Always save the browser logs (`services.remote.logs`)
+- Run tests in parallel for each of the browser (`steps[0].parallel`)
+  - Run for each `remote` service instance (`steps[0].parallel.matrix.browser`)
+  - Transfer the code from the repository to the parallel step (`steps[0].parallel.transfer`)
+  - Sets the environment variables based on the service instance's description and IP (`steps[0].parallel.container.env`)
+  - Run tests (`steps[0].parallel.shell`)
 
 <Tabs>
 <TabItem value="yaml" label="YAML" default>
@@ -481,17 +481,17 @@ spec:
     git:
       uri: https://github.com/cerebro1/selenium-testkube.git
       paths:
-      - selenium-java
+        - selenium-java
   services:
     remote:
       matrix:
         browser:
-        - driver: chrome
-          image: selenium/standalone-chrome:4.21.0-20240517
-        - driver: edge
-          image: selenium/standalone-edge:4.21.0-20240517
-        - driver: firefox
-          image: selenium/standalone-firefox:4.21.0-20240517
+          - driver: chrome
+            image: selenium/standalone-chrome:4.21.0-20240517
+          - driver: edge
+            image: selenium/standalone-edge:4.21.0-20240517
+          - driver: firefox
+            image: selenium/standalone-firefox:4.21.0-20240517
       logs: always
       image: "{{ matrix.browser.image }}"
       description: "{{ matrix.browser.driver }}"
@@ -501,21 +501,21 @@ spec:
           port: 4444
         periodSeconds: 1
   steps:
-  - name: Run cross-browser tests
-    parallel:
-      matrix:
-        browser: 'services.remote'
-      transfer:
-      - from: /data/repo/selenium-java
-      container:
-        workingDir: /data/repo/selenium-java
-        image: maven:3.9.6-eclipse-temurin-22-alpine
-        env:
-        - name: SELENIUM_BROWSER
-          value: '{{ matrix.browser.description }}'
-        - name: SELENIUM_HOST
-          value: '{{ matrix.browser.ip }}:4444'
-      shell: mvn test
+    - name: Run cross-browser tests
+      parallel:
+        matrix:
+          browser: "services.remote"
+        transfer:
+          - from: /data/repo/selenium-java
+        container:
+          workingDir: /data/repo/selenium-java
+          image: maven:3.9.6-eclipse-temurin-22-alpine
+          env:
+            - name: SELENIUM_BROWSER
+              value: "{{ matrix.browser.description }}"
+            - name: SELENIUM_HOST
+              value: "{{ matrix.browser.ip }}:4444"
+        shell: mvn test
 ```
 
 </TabItem>
@@ -533,12 +533,12 @@ As an example, unit tests won't cover if there is a syntax error in SQL query, o
 
 The example below:
 
-* Start single MongoDB instance as `db` service (`services.db`)
-  * Configure initial credentials to `root`/`p4ssw0rd` (`services.db.env`)
-  * Wait until the MongoDB accept connections (`services.db.readinessProbe`)
-* Run integration tests (`steps[0].run`)
-  * Configure `API_MONGO_DSN` environment variable to point to MongoDB (`steps[0].run.env[0]`)
-  * Install local dependencies and run tests (`steps[0].run.shell`)
+- Start single MongoDB instance as `db` service (`services.db`)
+  - Configure initial credentials to `root`/`p4ssw0rd` (`services.db.env`)
+  - Wait until the MongoDB accept connections (`services.db.readinessProbe`)
+- Run integration tests (`steps[0].run`)
+  - Configure `API_MONGO_DSN` environment variable to point to MongoDB (`steps[0].run.env[0]`)
+  - Install local dependencies and run tests (`steps[0].run.shell`)
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -554,10 +554,10 @@ spec:
     db:
       image: mongo:latest
       env:
-      - name: MONGO_INITDB_ROOT_USERNAME
-        value: root
-      - name: MONGO_INITDB_ROOT_PASSWORD
-        value: p4ssw0rd
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: root
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: p4ssw0rd
       readinessProbe:
         tcpSocket:
           port: 27017
@@ -569,8 +569,8 @@ spec:
       run:
         image: golang:1.22.3-bookworm
         env:
-        - name: API_MONGO_DSN
-          value: mongodb://root:p4ssw0rd@{{services.db.0.ip}}:27017
+          - name: API_MONGO_DSN
+            value: mongodb://root:p4ssw0rd@{{services.db.0.ip}}:27017
         shell: |
           apt-get update
           apt-get install -y ca-certificates libssl3 git skopeo

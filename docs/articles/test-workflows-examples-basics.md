@@ -277,11 +277,12 @@ It’s possible to automatically retry the step on a failure (or any other condi
 
 Steps can have individual `timeout` values to constrain their execution time. If the timeout is exceeded, the step and containing Workflow fail accordingly.
 
-The regex-pattern for the timeout is  
+The regex-pattern for the timeout is
 
 ```
 ^((0|[1-9][0-9]*)h)?((0|[1-9][0-9]*)m)?((0|[1-9][0-9]*)s)?((0|[1-9][0-9]*)ms)?$
 ```
+
 so valid values include `10s`, `1m`, `1h30m`, `500ms`, etc.
 
 :::tip
@@ -290,7 +291,7 @@ If you want to ensure that steps _after_ a step with a timeout always execute, e
 
 ### Step Delay
 
-It is possible to delay the execution of the step with the `delay` property, which follows the same 
+It is possible to delay the execution of the step with the `delay` property, which follows the same
 syntax as the `timeout` property above.
 
 For example, the following step will be executed after 10 seconds.
@@ -311,10 +312,10 @@ spec:
 
 ### Provide Static Files
 
-Apart from the Git repository and regular commands, a Test Workflow can use static files directly from the 
+Apart from the Git repository and regular commands, a Test Workflow can use static files directly from the
 spec - [Read More](/articles/test-workflows-content#static-files).
 
-These files are mounted from a ConfigMap automatically (unless, instead of content, there is **`contentFrom`** used 
+These files are mounted from a ConfigMap automatically (unless, instead of content, there is **`contentFrom`** used
 with a similar schema as Kubernetes’ **`env.\*.valueFrom`**).
 
 _When the path is relative, it will be mounted in the container’s working directory._
@@ -418,7 +419,7 @@ Read more about Workflow orchestration at [Workflow Orchestration](/articles/tes
 ### Configuring the Job
 
 By using the **`job`** property, you can configure labels, annotations and execution namespace of the Job.
-In case of supplying a namespace, you will need to define execution namespaces in your Helm chart values - [Read More](/articles/install/advanced-install#namespaces-for-test-execution). 
+In case of supplying a namespace, you will need to define execution namespaces in your Helm chart values - [Read More](/articles/install/advanced-install#namespaces-for-test-execution).
 It's possible to generate all required RBAC or just manually supply them.
 
 ```yaml
@@ -461,7 +462,8 @@ Read more about Job and Pod configurations at [Pod & Job](/articles/test-workflo
 :::
 
 ## Additional Test Workflow Examples
-Additional Test Workflow examples can be found under the [Examples and Guides](/articles/examples/overview) 
+
+Additional Test Workflow examples can be found under the [Examples and Guides](/articles/examples/overview)
 section in this documentation, and in the Testkube repository.
 
 - [Cypress](https://github.com/kubeshop/testkube/blob/develop/test/cypress/crd-workflow/smoke.yaml)

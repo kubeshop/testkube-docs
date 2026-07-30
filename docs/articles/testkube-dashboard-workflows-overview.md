@@ -2,7 +2,7 @@
 
 The **Workflows Overview** displays all Workflows (automated tests) in the **Environment** you selected. You can **Add a new Test Workflow**
 and view and add **Workflow Templates**. You can also select individual Workflows to view details such as **Pass/Fail Ratio**, **Failed Executions**,
-and **Total Executions**. 
+and **Total Executions**.
 
 ## Views
 
@@ -14,4 +14,3 @@ You can **Search** and **Filter** your Workflows to narrow the output. You can a
 read [Custom Views](../articles/testkube-dashboard-custom-views.md).
 
 ![Workflows Overview](images/workflows-overview.png)
-

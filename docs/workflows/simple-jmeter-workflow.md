@@ -12,15 +12,15 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-      - test/jmeter/jmeter-executor-smoke.jmx
+        - test/jmeter/jmeter-executor-smoke.jmx
   container:
     workingDir: /data/repo/test/jmeter
   steps:
-  - name: Run tests
-    shell: mkdir -p /data/artifacts && jmeter -n -t jmeter-executor-smoke.jmx -j /data/artifacts/jmeter.log -o /data/artifacts/report -l /data/artifacts/jtl-report.jtl -e
-    container:
-      image: alpine/jmeter:5.6
-    artifacts:
-      paths:
-      - '/data/artifacts/**/*'
+    - name: Run tests
+      shell: mkdir -p /data/artifacts && jmeter -n -t jmeter-executor-smoke.jmx -j /data/artifacts/jmeter.log -o /data/artifacts/report -l /data/artifacts/jtl-report.jtl -e
+      container:
+        image: alpine/jmeter:5.6
+      artifacts:
+        paths:
+          - "/data/artifacts/**/*"
 ```

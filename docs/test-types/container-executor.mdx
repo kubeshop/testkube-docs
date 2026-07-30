@@ -1,6 +1,6 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-import LegacyWarning from '../articles/_legacy-warning.mdx';
+import LegacyWarning from "../articles/_legacy-warning.mdx";
 
 # Container Executor
 
@@ -157,6 +157,7 @@ You can provide the image, args, command, and image pull secrets in the HTTP Req
 </Tabs>
 
 ## Creating and Configuring a Container Executor: Playwright
+
 Despite having the dedicated [Playwright executor](executor-playwright.mdx), you may want to use a version that isn't supported. That's where you can use the Container executor. It allows you to use any Playwright image you may need.
 
 The example Playwright project uses Playwright `1.31.1`: https://github.com/kubeshop/testkube/tree/main/test/playwright/playwright-project
@@ -182,7 +183,6 @@ In this case you will need to set the Command that will be executed.
 Command: `/bin/sh -c`
 Arguments: `npm install; npx playwright test`
 
-
 </TabItem>
 
 <TabItem value="cli" label="CLI">
@@ -196,6 +196,7 @@ Custom Container Executor can also be created with Testkube CLI using `testkube 
 - `--args` (arguments - in this case `npm install; npx playwright test`)
 
 So, the final command may look like this:
+
 ```sh
 testkube create executor --name container-executor-playwright --executor-type container --image mcr.microsoft.com/playwright:v1.31.1-focal --types executor-playwright/test --command "/bin/sh" --command "-c" --args "npm install; npx playwright test"
 ```
@@ -215,10 +216,10 @@ spec:
   image: mcr.microsoft.com/playwright:v1.31.1-focal
   command: ["/bin/sh", "-c"]
   args:
-  - "npm install; npx --yes playwright@1.31.1 test"
+    - "npm install; npx --yes playwright@1.31.1 test"
   executor_type: container
   types:
-  - container-executor-playwright-v1.31.1/test
+    - container-executor-playwright-v1.31.1/test
 ```
 
 Test CRD:

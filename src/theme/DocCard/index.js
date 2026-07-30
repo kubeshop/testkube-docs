@@ -1,9 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
-import {
-  findFirstCategoryLink,
-} from "@docusaurus/theme-common/internal";
+import { findFirstCategoryLink } from "@docusaurus/theme-common/internal";
 import isInternalUrl from "@docusaurus/isInternalUrl";
 import { translate } from "@docusaurus/Translate";
 import styles from "./styles.module.css";
@@ -43,8 +41,10 @@ export function CardLayout({ href, icon, logo, title, description }) {
       </h2>
       {description && (
         <div className={styles.cardDescription}>
-          {typeof description === 'string' ? (
-            <p className="text--truncate" title={description}>{description}</p>
+          {typeof description === "string" ? (
+            <p className="text--truncate" title={description}>
+              {description}
+            </p>
           ) : (
             description
           )}
@@ -137,8 +137,8 @@ function CardLink({ item }) {
   const icon = executorLogo
     ? undefined
     : isInternalUrl(item.href)
-    ? "📄️"
-    : "🔗";
+      ? "📄️"
+      : "🔗";
   return (
     <CardLayout
       href={item.href}
@@ -176,7 +176,7 @@ function CardIntro({ item }) {
 
 function CardToolIcons({ item }) {
   const executorLogo = testExecutorLogo.get(item.href);
-  const icon = executorLogo
+  const icon = executorLogo;
   return (
     <CardLayout
       href={item.href}

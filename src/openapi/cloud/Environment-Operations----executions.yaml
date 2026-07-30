@@ -16,114 +16,114 @@ paths:
       description: Get recent executions
       operationId: listExecutions
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/ExecutionRefs'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
+        "200":
+          $ref: "./components.yaml#/components/responses/ExecutionRefs"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/Kind'
-      - $ref: './components.yaml#/components/parameters/Page'
-      - $ref: './components.yaml#/components/parameters/PageSize'
-      - $ref: './components.yaml#/components/parameters/Selector'
-      - $ref: './components.yaml#/components/parameters/TextSearch'
-      - $ref: './components.yaml#/components/parameters/Status'
-      - $ref: './components.yaml#/components/parameters/TagSelector'
-      - $ref: './components.yaml#/components/parameters/Runner'
-      - $ref: './components.yaml#/components/parameters/Health'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/Kind"
+      - $ref: "./components.yaml#/components/parameters/Page"
+      - $ref: "./components.yaml#/components/parameters/PageSize"
+      - $ref: "./components.yaml#/components/parameters/Selector"
+      - $ref: "./components.yaml#/components/parameters/TextSearch"
+      - $ref: "./components.yaml#/components/parameters/Status"
+      - $ref: "./components.yaml#/components/parameters/TagSelector"
+      - $ref: "./components.yaml#/components/parameters/Runner"
+      - $ref: "./components.yaml#/components/parameters/Health"
   /organizations/{id}/environments/{environmentID}/executions/{executionID}/artifact-archive:
     get:
       summary: Get artifact archive
       description: Get artifact archive
       operationId: getArtifactArchive
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/ArtifactURL'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
-        '410':
-          $ref: './components.yaml#/components/responses/GoneError'
+        "200":
+          $ref: "./components.yaml#/components/responses/ArtifactURL"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
+        "410":
+          $ref: "./components.yaml#/components/responses/GoneError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/ExecutionID'
-      - $ref: './components.yaml#/components/parameters/OptionalTestName'
-      - $ref: './components.yaml#/components/parameters/FilterTestsuiteName'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/ExecutionID"
+      - $ref: "./components.yaml#/components/parameters/OptionalTestName"
+      - $ref: "./components.yaml#/components/parameters/FilterTestsuiteName"
   /organizations/{id}/environments/{environmentID}/executions/{executionID}/artifacts:
     post:
       summary: Get artifact
       description: Get artifact
       operationId: getArtifactPost
       requestBody:
-        $ref: './components.yaml#/components/requestBodies/ServeArtifact'
+        $ref: "./components.yaml#/components/requestBodies/ServeArtifact"
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/ArtifactURL'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
-        '410':
-          $ref: './components.yaml#/components/responses/GoneError'
+        "200":
+          $ref: "./components.yaml#/components/responses/ArtifactURL"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
+        "410":
+          $ref: "./components.yaml#/components/responses/GoneError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/ExecutionID'
-      - $ref: './components.yaml#/components/parameters/OptionalTestName'
-      - $ref: './components.yaml#/components/parameters/FilterTestsuiteName'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/ExecutionID"
+      - $ref: "./components.yaml#/components/parameters/OptionalTestName"
+      - $ref: "./components.yaml#/components/parameters/FilterTestsuiteName"
   /organizations/{id}/environments/{environmentID}/executions/{executionID}/artifacts/{artifactID}:
     get:
       summary: Get artifact
       description: Get artifact
       operationId: getArtifact
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/ArtifactURL'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
-        '410':
-          $ref: './components.yaml#/components/responses/GoneError'
+        "200":
+          $ref: "./components.yaml#/components/responses/ArtifactURL"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
+        "410":
+          $ref: "./components.yaml#/components/responses/GoneError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/ExecutionID'
-      - $ref: './components.yaml#/components/parameters/ArtifactID'
-      - $ref: './components.yaml#/components/parameters/OptionalTestName'
-      - $ref: './components.yaml#/components/parameters/FilterTestsuiteName'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/ExecutionID"
+      - $ref: "./components.yaml#/components/parameters/ArtifactID"
+      - $ref: "./components.yaml#/components/parameters/OptionalTestName"
+      - $ref: "./components.yaml#/components/parameters/FilterTestsuiteName"
   /organizations/{id}/environments/{environmentID}/executions/{executionID}/download-artifact/{artifactID}:
     get:
       summary: Download artifact
       description: Download artifact
       operationId: downloadArtifact
       responses:
-        '307':
+        "307":
           description: Redirection to download artifact
           headers:
             Location:
@@ -131,51 +131,51 @@ paths:
               schema:
                 type: string
                 format: uri
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
-        '410':
-          $ref: './components.yaml#/components/responses/GoneError'
-        '500':
-          $ref: './components.yaml#/components/responses/InternalServerError'
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
+        "410":
+          $ref: "./components.yaml#/components/responses/GoneError"
+        "500":
+          $ref: "./components.yaml#/components/responses/InternalServerError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/ExecutionID'
-      - $ref: './components.yaml#/components/parameters/ArtifactID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/ExecutionID"
+      - $ref: "./components.yaml#/components/parameters/ArtifactID"
   /organizations/{id}/environments/{environmentID}/executions/{executionID}/events:
     get:
       summary: Get events that regard this execution.
       description: Get events that regard this execution
       operationId: getExecutionEvents
       responses:
-        '200':
+        "200":
           description: Testkube event
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/TestkubeEvent'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+                  $ref: "./components.yaml#/components/schemas/TestkubeEvent"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/ExecutionID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/ExecutionID"
       - name: series
         in: query
         description: Whether to group isomorphic events or keep a flat list of events.
@@ -187,44 +187,44 @@ paths:
       description: Returns JUnit report for the specified execution
       operationId: getExecutionJUnitReports
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/JUnitReports'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
-        '500':
-          $ref: './components.yaml#/components/responses/InternalServerError'
+        "200":
+          $ref: "./components.yaml#/components/responses/JUnitReports"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
+        "500":
+          $ref: "./components.yaml#/components/responses/InternalServerError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/ExecutionID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/ExecutionID"
   /organizations/{id}/environments/{environmentID}/executions/{executionID}/logs:
     get:
       summary: Get Testkube Pro logs for execution
       description: Get Logs separately from execution
       operationId: getExecutionLogs
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/Logs'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
-        '410':
-          $ref: './components.yaml#/components/responses/GoneError'
+        "200":
+          $ref: "./components.yaml#/components/responses/Logs"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
+        "410":
+          $ref: "./components.yaml#/components/responses/GoneError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/ExecutionID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/ExecutionID"
       - name: from
         in: query
         description: line number from which logs should be returned
@@ -243,52 +243,52 @@ paths:
       description: Serve artifact
       operationId: serveArtifactPost
       requestBody:
-        $ref: './components.yaml#/components/requestBodies/ServeArtifact'
+        $ref: "./components.yaml#/components/requestBodies/ServeArtifact"
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/ArtifactURL'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
-        '410':
-          $ref: './components.yaml#/components/responses/GoneError'
+        "200":
+          $ref: "./components.yaml#/components/responses/ArtifactURL"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
+        "410":
+          $ref: "./components.yaml#/components/responses/GoneError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/ExecutionID'
-      - $ref: './components.yaml#/components/parameters/OptionalTestName'
-      - $ref: './components.yaml#/components/parameters/FilterTestsuiteName'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/ExecutionID"
+      - $ref: "./components.yaml#/components/parameters/OptionalTestName"
+      - $ref: "./components.yaml#/components/parameters/FilterTestsuiteName"
   /organizations/{id}/environments/{environmentID}/executions/{executionID}/serve-artifact/{artifactID}:
     get:
       summary: Serve artifact
       description: Serve artifact
       operationId: serveArtifact
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/ArtifactURL'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
-        '410':
-          $ref: './components.yaml#/components/responses/GoneError'
+        "200":
+          $ref: "./components.yaml#/components/responses/ArtifactURL"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
+        "410":
+          $ref: "./components.yaml#/components/responses/GoneError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/ExecutionID'
-      - $ref: './components.yaml#/components/parameters/ArtifactID'
-      - $ref: './components.yaml#/components/parameters/OptionalTestName'
-      - $ref: './components.yaml#/components/parameters/FilterTestsuiteName'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/ExecutionID"
+      - $ref: "./components.yaml#/components/parameters/ArtifactID"
+      - $ref: "./components.yaml#/components/parameters/OptionalTestName"
+      - $ref: "./components.yaml#/components/parameters/FilterTestsuiteName"

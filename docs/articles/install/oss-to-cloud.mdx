@@ -30,24 +30,24 @@ If `agent-name` is omitted the agent is registered as **default-oss**.
 
 ### Key flags
 
-| Flag | Description |
-|------|-------------|
-| `--api-key`, `-k` | **(Required)** API key for authenticating with Testkube Pro. |
-| `--org-id` | **(Required)** Testkube Pro organization ID. |
-| `--env-id` | **(Required)** Testkube Pro environment ID. |
-| `--agent-uri` | **(Required)** gRPC URI of the Testkube Pro agent endpoint. |
-| `--skip-export` | Skip the automatic data export/import step. Your data stays in the local database and can be exported manually later. |
-| `--since` | Export only executions created after the specified date. Useful for large datasets that would exceed size limits. Accepts `YYYY-MM-DD` or `YYYY-MM-DDTHH:MM:SSZ`. Example: `--since 2025-01-01`. |
-| `--dry-run` | Render Helm commands without executing them. Skips all post-install steps (scale-down, data import). |
-| `--root-domain` | Override the default Testkube Pro root domain (advanced). |
-| `--runner` | Enable the runner component (enabled by default during connect). |
-| `--listener` | Enable the listener component (enabled by default during connect). |
-| `--gitops` | Enable the GitOps capability (enabled by default during connect). |
-| `--webhooks` | Enable the webhooks capability (enabled by default during connect). |
-| `--global` | Register the agent as a global agent (enabled by default during connect). |
-| `--create` | Auto-create the agent in the control plane (enabled by default during connect). |
-| `--version` | Specify the agent chart version (defaults to latest). |
-| `--execution-namespace`, `-N` | Namespace for running test executions (defaults to the installation namespace). |
+| Flag                          | Description                                                                                                                                                                                      |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `--api-key`, `-k`             | **(Required)** API key for authenticating with Testkube Pro.                                                                                                                                     |
+| `--org-id`                    | **(Required)** Testkube Pro organization ID.                                                                                                                                                     |
+| `--env-id`                    | **(Required)** Testkube Pro environment ID.                                                                                                                                                      |
+| `--agent-uri`                 | **(Required)** gRPC URI of the Testkube Pro agent endpoint.                                                                                                                                      |
+| `--skip-export`               | Skip the automatic data export/import step. Your data stays in the local database and can be exported manually later.                                                                            |
+| `--since`                     | Export only executions created after the specified date. Useful for large datasets that would exceed size limits. Accepts `YYYY-MM-DD` or `YYYY-MM-DDTHH:MM:SSZ`. Example: `--since 2025-01-01`. |
+| `--dry-run`                   | Render Helm commands without executing them. Skips all post-install steps (scale-down, data import).                                                                                             |
+| `--root-domain`               | Override the default Testkube Pro root domain (advanced).                                                                                                                                        |
+| `--runner`                    | Enable the runner component (enabled by default during connect).                                                                                                                                 |
+| `--listener`                  | Enable the listener component (enabled by default during connect).                                                                                                                               |
+| `--gitops`                    | Enable the GitOps capability (enabled by default during connect).                                                                                                                                |
+| `--webhooks`                  | Enable the webhooks capability (enabled by default during connect).                                                                                                                              |
+| `--global`                    | Register the agent as a global agent (enabled by default during connect).                                                                                                                        |
+| `--create`                    | Auto-create the agent in the control plane (enabled by default during connect).                                                                                                                  |
+| `--version`                   | Specify the agent chart version (defaults to latest).                                                                                                                                            |
+| `--execution-namespace`, `-N` | Namespace for running test executions (defaults to the installation namespace).                                                                                                                  |
 
 ### Examples
 
@@ -121,11 +121,11 @@ testkube pro disconnect
 
 ### Key flags
 
-| Flag | Default | Description |
-|------|---------|-------------|
-| `--minio-replicas` | `1` | Number of MinIO replicas to restore. |
-| `--mongo-replicas` | `1` | Number of MongoDB replicas to restore. |
-| `--postgres-replicas` | `1` | Number of PostgreSQL replicas to restore. |
+| Flag                  | Default | Description                               |
+| --------------------- | ------- | ----------------------------------------- |
+| `--minio-replicas`    | `1`     | Number of MinIO replicas to restore.      |
+| `--mongo-replicas`    | `1`     | Number of MongoDB replicas to restore.    |
+| `--postgres-replicas` | `1`     | Number of PostgreSQL replicas to restore. |
 
 > **Tip:** If your OSS installation used custom replica counts before connecting, pass the original values so that disconnect restores them correctly. For example: `--mongo-replicas 3`.
 
@@ -168,22 +168,22 @@ You can switch between modes as many times as needed.
 
 ## Prerequisites
 
-| Requirement | Details |
-|-------------|---------|
-| **Testkube CLI** | Latest version with `pro connect` / `pro disconnect` support. |
-| **kubectl** | Configured and pointing to the target cluster. |
-| **helm** | Required for agent installation and uninstallation (v3+). |
-| **Testkube OSS** | An existing Testkube OSS installation in the cluster. |
+| Requirement         | Details                                                                                                               |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| **Testkube CLI**    | Latest version with `pro connect` / `pro disconnect` support.                                                         |
+| **kubectl**         | Configured and pointing to the target cluster.                                                                        |
+| **helm**            | Required for agent installation and uninstallation (v3+).                                                             |
+| **Testkube OSS**    | An existing Testkube OSS installation in the cluster.                                                                 |
 | **Pro credentials** | API key, cp root domain, organization ID, and environment ID from your Testkube Pro account (for `pro connect` only). |
 
 ---
 
 ## Quick reference
 
-| Action | Command |
-|--------|---------|
-| Connect to Pro (full data migration) | `testkube pro connect --api-key <key> --org-id <org> --env-id <env> --root-domain <domain>` |
-| Connect to Pro (skip data migration) | `testkube pro connect --api-key <key> --org-id <org> --env-id <env> --root-domain <domain> --skip-export` |
-| Connect to Pro (recent data only) | `testkube pro connect --api-key <key> --org-id <org> --env-id <env> --root-domain <domain> --since 2025-01-01` |
-| Disconnect from Pro | `testkube pro disconnect` |
-| Disconnect with custom replicas | `testkube pro disconnect --mongo-replicas 3 --minio-replicas 2` |
+| Action                               | Command                                                                                                        |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| Connect to Pro (full data migration) | `testkube pro connect --api-key <key> --org-id <org> --env-id <env> --root-domain <domain>`                    |
+| Connect to Pro (skip data migration) | `testkube pro connect --api-key <key> --org-id <org> --env-id <env> --root-domain <domain> --skip-export`      |
+| Connect to Pro (recent data only)    | `testkube pro connect --api-key <key> --org-id <org> --env-id <env> --root-domain <domain> --since 2025-01-01` |
+| Disconnect from Pro                  | `testkube pro disconnect`                                                                                      |
+| Disconnect with custom replicas      | `testkube pro disconnect --mongo-replicas 3 --minio-replicas 2`                                                |

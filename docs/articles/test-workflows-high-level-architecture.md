@@ -13,9 +13,9 @@ After the Test Workflow execution is finished, all the created resources are del
 
 The Agent Server is responsible for controlling the Test Workflow execution. It:
 
-* creates all the required resources,
-* watches for their status and sends all the results to the storage or the Control Plane,
-* and, destroys resources after they are no longer needed.
+- creates all the required resources,
+- watches for their status and sends all the results to the storage or the Control Plane,
+- and, destroys resources after they are no longer needed.
 
 The Test Workflows are resilient to Agent Server downtime. After the Agent Server is restarted,
 you are able to recover all Test Workflow information, as long as the execution Kubernetes resources are still intact.
@@ -83,20 +83,20 @@ To avoid issues with the reduced isolation, by default we are merging together o
 If you want part of your `shell` or `run` steps to allow merging with other `shell`/`run` steps, you have to specify `pure: true` for them.
 This way, they will be acknowledged as free of side effects and will be merged with next or previous step when it is possible.
 
-When the steps are marked as pure, they are merged as long as they can live in the same container. It means that they need to have the same volumes mounted, same security context (user), and **most importantly the same image**. 
+When the steps are marked as pure, they are merged as long as they can live in the same container. It means that they need to have the same volumes mounted, same security context (user), and **most importantly the same image**.
 
 ```yaml
 spec:
   steps:
-  # container 1
-  - shell: echo 'Hello world 1'
-    pure: true
-  - shell: echo 'Hello world 2'
-  # container 2
-  - shell: echo 'Hello world 3'
-  - shell: echo 'Hello world 4'
-    pure: true
-  - shell: echo 'Hello world 5'
+    # container 1
+    - shell: echo 'Hello world 1'
+      pure: true
+    - shell: echo 'Hello world 2'
+    # container 2
+    - shell: echo 'Hello world 3'
+    - shell: echo 'Hello world 4'
+      pure: true
+    - shell: echo 'Hello world 5'
 ```
 
 :::info
@@ -125,9 +125,10 @@ The `/init` process is responsible for all the preparation, execution of actual 
 ## Fetching Image Metadata from the Container Registry
 
 To build the proper Pod and Init Process, we need to know the most important details of the image, like:
-* **Working Directory (`workingDir` / [`WORKDIR`](https://docs.docker.com/reference/dockerfile/#workdir)):** to change current working directory between operations in a single container.
-* **Command (`command` / [`ENTRYPOINT`](https://docs.docker.com/reference/dockerfile/#entrypoint) and `args` / [`CMD`](https://docs.docker.com/reference/dockerfile/#cmd)):** to wrap with the Init Process.
-* **User and Group (`securityContext.runAsUser/runAsGroup` / [`USER`](https://docs.docker.com/reference/dockerfile/#user)):** to configure the file system.
+
+- **Working Directory (`workingDir` / [`WORKDIR`](https://docs.docker.com/reference/dockerfile/#workdir)):** to change current working directory between operations in a single container.
+- **Command (`command` / [`ENTRYPOINT`](https://docs.docker.com/reference/dockerfile/#entrypoint) and `args` / [`CMD`](https://docs.docker.com/reference/dockerfile/#cmd)):** to wrap with the Init Process.
+- **User and Group (`securityContext.runAsUser/runAsGroup` / [`USER`](https://docs.docker.com/reference/dockerfile/#user)):** to configure the file system.
 
 Kubernetes doesn't have a direct mechanism to get this metadata. To obtain it, we need to fetch the data from the Container Registry when it is needed.
 
@@ -147,8 +148,8 @@ In the case you are using private AWS Elastic Container Registry (ECR), as its [
 
 If you are running agent into AWS Elastic Kubernetes Service (EKS):
 
-* Configure your EKS cluster to manage [IAM roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html).
-* Create a [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create) allowing the following actions over your private registry: `ecr:GetAuthorizationToken`, `ecr:CreateRepository`, `ecr:BatchImportUpstreamImage`, `ecr:BatchGetImage`, `ecr:BatchCheckLayerAvailability`, `ecr:CompleteLayerUpload`, and `ecr:GetDownloadUrlForLayer`.
+- Configure your EKS cluster to manage [IAM roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html).
+- Create a [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create) allowing the following actions over your private registry: `ecr:GetAuthorizationToken`, `ecr:CreateRepository`, `ecr:BatchImportUpstreamImage`, `ecr:BatchGetImage`, `ecr:BatchCheckLayerAvailability`, `ecr:CompleteLayerUpload`, and `ecr:GetDownloadUrlForLayer`.
 
 :::note
 
@@ -156,27 +157,26 @@ The actions `ecr:CreateRepository` and `ecr:CompleteLayerUpload` are only needed
 
 :::
 
-* Assign IAM Role to `testkube-api-server` service account with annotation: `eks.amazonaws.com/role-arn=<iam-role-arn>`. 
+- Assign IAM Role to `testkube-api-server` service account with annotation: `eks.amazonaws.com/role-arn=<iam-role-arn>`.
 
-    ```yaml
-    testkube-api:
-      serviceAccount:
-        annotations:
-          eks.amazonaws.com/role-arn=<iam-role-arn>
-    ```
+  ```yaml
+  testkube-api:
+    serviceAccount:
+      annotations: eks.amazonaws.com/role-arn=<iam-role-arn>
+  ```
 
-* If you want to force Testkube Agent to use your custom service account, 
+- If you want to force Testkube Agent to use your custom service account,
 
-    ```yaml
-    testkube-api:
-      serviceAccount:
-        create: false
-        name: <custom-service-account-name>
-    ```
+  ```yaml
+  testkube-api:
+    serviceAccount:
+      create: false
+      name: <custom-service-account-name>
+  ```
 
 If you are running agent from any other Kubernetes distribution than EKS:
 
-* Create an [IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html), create and assign an [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create) allowing the following actions over your private registry: `ecr:GetAuthorizationToken`, `ecr:CreateRepository`, `ecr:BatchImportUpstreamImage`, `ecr:BatchGetImage`, `ecr:BatchCheckLayerAvailability`, `ecr:CompleteLayerUpload`, and `ecr:GetDownloadUrlForLayer`.
+- Create an [IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html), create and assign an [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create) allowing the following actions over your private registry: `ecr:GetAuthorizationToken`, `ecr:CreateRepository`, `ecr:BatchImportUpstreamImage`, `ecr:BatchGetImage`, `ecr:BatchCheckLayerAvailability`, `ecr:CompleteLayerUpload`, and `ecr:GetDownloadUrlForLayer`.
 
 :::note
 
@@ -184,29 +184,29 @@ The actions `ecr:CreateRepository` and `ecr:CompleteLayerUpload` are only needed
 
 :::
 
-* Generate an access key for that user.
-* Save key ID and access key in your Secret Management tool that syncs values to your Kubernetes cluster, or directly create the Kubernetes Secret in the Testkube Agent namespace.
-* Finally, configure Testkube agent to take those values as environment variables form secret:
+- Generate an access key for that user.
+- Save key ID and access key in your Secret Management tool that syncs values to your Kubernetes cluster, or directly create the Kubernetes Secret in the Testkube Agent namespace.
+- Finally, configure Testkube agent to take those values as environment variables form secret:
 
-    ```yaml
-    testkube-api:
-      extraEnvVars:
-        - name: AWS_ACCESS_KEY_ID
-          valueFrom:
-            secretKeyRef:
-              name: <secret-name>
-              key: AWS_ACCESS_KEY_ID
-        - name: AWS_SECRET_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              name: <secret-name>
-              key: AWS_SECRET_ACCESS_KEY
-        - name: AWS_DEFAULT_REGION
-          valueFrom:
-            secretKeyRef:
-              name: <secret-name>
-              key: AWS_DEFAULT_REGION
-    ```
+  ```yaml
+  testkube-api:
+    extraEnvVars:
+      - name: AWS_ACCESS_KEY_ID
+        valueFrom:
+          secretKeyRef:
+            name: <secret-name>
+            key: AWS_ACCESS_KEY_ID
+      - name: AWS_SECRET_ACCESS_KEY
+        valueFrom:
+          secretKeyRef:
+            name: <secret-name>
+            key: AWS_SECRET_ACCESS_KEY
+      - name: AWS_DEFAULT_REGION
+        valueFrom:
+          secretKeyRef:
+            name: <secret-name>
+            key: AWS_DEFAULT_REGION
+  ```
 
 #### Using Google Cloud Artifact Registry
 
@@ -220,49 +220,49 @@ In the case you are using Google Cloud Artifact Registry (GCAR), as its [authori
 
 In any of both solution you first must have the Google Service Account with right role or permission:
 
-* Create a Google [Service Account](https://cloud.google.com/iam/docs/service-accounts-create), it must belong to the Google project in which the Artifact Registry is located.
-* Assign the role Artifact Registry Reader to your Google Service Account:
+- Create a Google [Service Account](https://cloud.google.com/iam/docs/service-accounts-create), it must belong to the Google project in which the Artifact Registry is located.
+- Assign the role Artifact Registry Reader to your Google Service Account:
 
-    ```bash
-    gcloud artifacts repositories add-iam-policy-binding <artifact-repository-name> \
-        --location=<region-id> --project=<project-id> \
-        --member=serviceAccount:<service-account-email> \
-        --role="roles/artifactregistry.reader"
-    ```
+  ```bash
+  gcloud artifacts repositories add-iam-policy-binding <artifact-repository-name> \
+      --location=<region-id> --project=<project-id> \
+      --member=serviceAccount:<service-account-email> \
+      --role="roles/artifactregistry.reader"
+  ```
 
 To link with a Kubernetes Service Account you must be running Testkube Agent into a Google Cloud Kubernetes Engine (GKE), then follow these instructions:
 
-* Ensure [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#enable_on_clusters_and_node_pools) is enabled in your cluster.
-* Link Google [Service Account to the Testkube Agent Service Account](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#kubernetes-sa-to-iam), by default it creates one called `testkube-api-server`, but ensure your Testkube Agent installation is not customizing that behavior.
-* Annotate Testkube Agent Service Account, use the snippet below as reference to update your `values.yaml`:
+- Ensure [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#enable_on_clusters_and_node_pools) is enabled in your cluster.
+- Link Google [Service Account to the Testkube Agent Service Account](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#kubernetes-sa-to-iam), by default it creates one called `testkube-api-server`, but ensure your Testkube Agent installation is not customizing that behavior.
+- Annotate Testkube Agent Service Account, use the snippet below as reference to update your `values.yaml`:
 
-    ```yaml
-    testkube-api:
-      serviceAccount:
-        annotations:
-          iam.gke.io/gcp-service-account: <google-service-account-email>
-    ```
+  ```yaml
+  testkube-api:
+    serviceAccount:
+      annotations:
+        iam.gke.io/gcp-service-account: <google-service-account-email>
+  ```
 
 If you prefer to use Service Account Access Key then:
 
-* Create [Service Account Access Key](https://cloud.google.com/iam/docs/keys-create-delete#creating) and download credential JSON.
-* Create a Kubernetes Secret with the credential JSON.
-* Finally configure Testkube Agent to mount credential JSON, use the following snippet to update your `values.yaml`:
+- Create [Service Account Access Key](https://cloud.google.com/iam/docs/keys-create-delete#creating) and download credential JSON.
+- Create a Kubernetes Secret with the credential JSON.
+- Finally configure Testkube Agent to mount credential JSON, use the following snippet to update your `values.yaml`:
 
-    ```yaml
-    testkube-api:
-      extraEnvVars:
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /google/credentials.json
-      additionalVolumes:
-        - name: google-credentials
-          secret:
-            secretName: <google-credentials-secret-name>
-      additionalVolumeMounts:
-        - name: google-credentials
-          mountPath: /google/
-          readOnly: true
-    ```
+  ```yaml
+  testkube-api:
+    extraEnvVars:
+      - name: GOOGLE_APPLICATION_CREDENTIALS
+        value: /google/credentials.json
+    additionalVolumes:
+      - name: google-credentials
+        secret:
+          secretName: <google-credentials-secret-name>
+    additionalVolumeMounts:
+      - name: google-credentials
+        mountPath: /google/
+        readOnly: true
+  ```
 
 ### Avoid Fetching Image Metadata
 

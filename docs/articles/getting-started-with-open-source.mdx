@@ -164,7 +164,7 @@ spec:
       uri: https://github.com/cerebro1/testkube-ephemeral
       revision: main
       paths:
-      - k6/testkube.js
+        - k6/testkube.js
   container:
     workingDir: /data/repo/k6/
     image: grafana/k6:0.49.0
@@ -174,7 +174,7 @@ spec:
         k6 run testkube.js
 ```
 
-Save the above manifest in `testworkflow.yaml`. 
+Save the above manifest in `testworkflow.yaml`.
 Run the following command to create a Test Workflow on the cluster using the Testkube CLI:
 
 ```
@@ -198,14 +198,14 @@ testkube get testworkflows
 **Expected output:**
 
 ```
-NAME           | DESCRIPTION | CREATED                       | LABELS  | STATUS | EXECUTION ID  
+NAME           | DESCRIPTION | CREATED                       | LABELS  | STATUS | EXECUTION ID
 ---------------+-------------+-------------------------------+---------+--------+---------------
 ephemeral-test |             | 2025-02-17 14:51:10 +0000 UTC | test=k6 |
 ```
 
 ## 5. Execute your Test Workflow
 
-The [Testkube CLI](/articles/cli) provides a `run` command to execute a Test Workflow. 
+The [Testkube CLI](/articles/cli) provides a `run` command to execute a Test Workflow.
 Let us go ahead and execute the `ephemeral-test` Test Workflow.
 
 ```
@@ -214,7 +214,7 @@ testkube run testworkflow ephemeral-test
 
 **Expected output:**
 
-```   
+```
 Context:  (2.1.88)   Namespace: testkube
 ----------------------------------------
 
@@ -222,7 +222,7 @@ Test Workflow Execution:
 Name:                 ephemeral-test
 Execution ID:         67b34e1e29a84abec76e0a14
 Execution name:       ephemeral-test-1
-Execution namespace:  
+Execution namespace:
 Execution number:     1
 Requested at:         2025-02-17 14:56:30.314865414 +0000 UTC
 Disabled webhooks:    false
@@ -241,44 +241,47 @@ Use the `-f` flag to immediately follow an execution when creating it - [Read Mo
 ## 6. View Test Workflow execution status
 
 You can monitor the test execution process by watching the status:
-```	
+
+```
 testkube watch twe <execution_id>
 ```
+
 Replace `<execution_id>` with the Execution ID provided in the output of `testkube run` command.
 
 Use the following command to get Test Workflow status:
+
 ```
 testkube get testworkflows
 ```
+
 **Expected output:**
 
 ```
 Context:  (2.1.88)   Namespace: testkube
 ----------------------------------------
 
-NAME           | DESCRIPTION | CREATED                       | LABELS  | STATUS | EXECUTION ID              
+NAME           | DESCRIPTION | CREATED                       | LABELS  | STATUS | EXECUTION ID
 ---------------+-------------+-------------------------------+---------+--------+---------------------------
-ephemeral-test |             | 2025-02-17 14:51:10 +0000 UTC | test=k6 | passed | 67b34e1e29a84abec76e0a14  
+ephemeral-test |             | 2025-02-17 14:51:10 +0000 UTC | test=k6 | passed | 67b34e1e29a84abec76e0a14
 ```
 
-The Test Workflow has been successfully executed.  Testkube performs the following steps in Test Workflow execution:
+The Test Workflow has been successfully executed. Testkube performs the following steps in Test Workflow execution:
 
-* Initializes the environment.
-* Clones the GitHub repository.
-* Runs the shell command for the k6 test execution.
-* Uploads the artifacts if found.
-
+- Initializes the environment.
+- Clones the GitHub repository.
+- Runs the shell command for the k6 test execution.
+- Uploads the artifacts if found.
 
 ## 7. View Test Logs & Artifacts
 
-Testkube manages the logs and artifacts produced by your tests and makes them available via CLI. 
+Testkube manages the logs and artifacts produced by your tests and makes them available via CLI.
 To access extensive logs of Test Workflow execution, you can use the below command with the EXECUTION ID.
 
 ```
 testkube get twe <execution_id>
 ```
 
-For retrieving artifacts you can use 
+For retrieving artifacts you can use
 
 ```
 testkube download artifacts <execution_id>
@@ -312,4 +315,3 @@ Congrats on getting up and running with Testkube, now you can
 - Check out the [Getting Started with Testkube Open Source](https://testkube.io/blog/getting-started-with-testkube-open-source) blogpost to further see how you can use the Standalone Agent with GitHub Actions
 - Go through the [CLI Reference](/cli/testkube) to see available CLI commands.
 - Head over to the [Testkube Slack](https://join.slack.com/t/testkubeworkspace/shared_invite/zt-3kfpny0gx-apPMq9_Swu4KG3uwz6Bk2g) to ask questions and get answers.
-

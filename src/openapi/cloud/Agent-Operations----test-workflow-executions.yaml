@@ -16,93 +16,93 @@ paths:
       description: List test workflow executions
       operationId: listTestWorkflowExecutions
       parameters:
-        - $ref: './components.yaml#/components/parameters/ID'
-        - $ref: './components.yaml#/components/parameters/TagSelector'
-        - $ref: './components.yaml#/components/parameters/ActorName'
-        - $ref: './components.yaml#/components/parameters/ActorType'
+        - $ref: "./components.yaml#/components/parameters/ID"
+        - $ref: "./components.yaml#/components/parameters/TagSelector"
+        - $ref: "./components.yaml#/components/parameters/ActorName"
+        - $ref: "./components.yaml#/components/parameters/ActorType"
       responses:
-        '200':
+        "200":
           description: successful list operation
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/TestWorkflowExecutionsResult'
+                  $ref: "./components.yaml#/components/schemas/TestWorkflowExecutionsResult"
             text/yaml:
               schema:
                 type: string
-        '400':
+        "400":
           description: problem with selector parsing - probably some bad input occurs
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '402':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "402":
           description: missing Pro subscription for a commercial feature
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '502':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "502":
           description: problem communicating with kubernetes cluster
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
+                  $ref: "./components.yaml#/components/schemas/Problem"
     post:
       summary: Execute test workflows
       description: Execute test workflows in the kubernetes cluster
       operationId: executeTestWorkflows
       parameters:
-        - $ref: './components.yaml#/components/parameters/Selector'
-        - $ref: './components.yaml#/components/parameters/ConcurrencyLevel'
+        - $ref: "./components.yaml#/components/parameters/Selector"
+        - $ref: "./components.yaml#/components/parameters/ConcurrencyLevel"
       requestBody:
         description: test workflow execution request
         content:
           application/json:
             schema:
-              $ref: './components.yaml#/components/schemas/TestWorkflowExecutionRequest'
+              $ref: "./components.yaml#/components/schemas/TestWorkflowExecutionRequest"
         required: true
       responses:
-        '200':
+        "200":
           description: successful execution
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/TestWorkflowExecution'
-        '400':
+                  $ref: "./components.yaml#/components/schemas/TestWorkflowExecution"
+        "400":
           description: problem with body parsing - probably some bad input occurs
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '402':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "402":
           description: missing Pro subscription for a commercial feature
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '502':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "502":
           description: problem communicating with kubernetes cluster
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
+                  $ref: "./components.yaml#/components/schemas/Problem"
     parameters:
       - name: id
         in: path
@@ -122,43 +122,43 @@ paths:
       description: Get test workflow execution details
       operationId: getTestWorkflowExecution
       parameters:
-        - $ref: './components.yaml#/components/parameters/executionID'
+        - $ref: "./components.yaml#/components/parameters/executionID"
       responses:
-        '200':
+        "200":
           description: successful list operation
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/TestWorkflowExecution'
+                  $ref: "./components.yaml#/components/schemas/TestWorkflowExecution"
             text/yaml:
               schema:
                 type: string
-        '400':
+        "400":
           description: problem with selector parsing - probably some bad input occurs
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '402':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "402":
           description: missing Pro subscription for a commercial feature
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '502':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "502":
           description: problem communicating with kubernetes cluster
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
+                  $ref: "./components.yaml#/components/schemas/Problem"
     parameters:
       - name: id
         in: path
@@ -178,35 +178,35 @@ paths:
       description: Abort test workflow execution
       operationId: abortTestWorkflowExecution
       parameters:
-        - $ref: './components.yaml#/components/parameters/executionID'
-        - $ref: './components.yaml#/components/parameters/ForceAgent'
+        - $ref: "./components.yaml#/components/parameters/executionID"
+        - $ref: "./components.yaml#/components/parameters/ForceAgent"
       responses:
-        '204':
+        "204":
           description: no content
-        '400':
+        "400":
           description: problem with selector parsing - probably some bad input occurs
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '402':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "402":
           description: missing Pro subscription for a commercial feature
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '502':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "502":
           description: problem communicating with kubernetes cluster
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
+                  $ref: "./components.yaml#/components/schemas/Problem"
     parameters:
       - name: id
         in: path
@@ -226,40 +226,40 @@ paths:
       description: Download the artifact archive from the given execution
       operationId: downloadTestWorkflowArtifactArchive
       parameters:
-        - $ref: './components.yaml#/components/parameters/executionID'
-        - $ref: './components.yaml#/components/parameters/Mask'
+        - $ref: "./components.yaml#/components/parameters/executionID"
+        - $ref: "./components.yaml#/components/parameters/Mask"
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/octet-stream:
               schema:
                 type: string
                 format: binary
-        '402':
+        "402":
           description: missing Pro subscription for a commercial feature
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '404':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "404":
           description: execution not found
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '500':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "500":
           description: problem with getting artifact archive from storage
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
+                  $ref: "./components.yaml#/components/schemas/Problem"
     parameters:
       - name: id
         in: path
@@ -279,40 +279,40 @@ paths:
       description: Returns artifacts of the given executionID
       operationId: getTestWorkflowExecutionArtifacts
       parameters:
-        - $ref: './components.yaml#/components/parameters/executionID'
+        - $ref: "./components.yaml#/components/parameters/executionID"
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Artifact'
-        '402':
+                  $ref: "./components.yaml#/components/schemas/Artifact"
+        "402":
           description: missing Pro subscription for a commercial feature
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '404':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "404":
           description: execution not found
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '500':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "500":
           description: problem with getting execution's artifacts from storage
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
+                  $ref: "./components.yaml#/components/schemas/Problem"
     parameters:
       - name: id
         in: path
@@ -332,40 +332,40 @@ paths:
       description: Download the artifact file from the given execution
       operationId: downloadTestWorkflowArtifact
       parameters:
-        - $ref: './components.yaml#/components/parameters/executionID'
-        - $ref: './components.yaml#/components/parameters/Filename'
+        - $ref: "./components.yaml#/components/parameters/executionID"
+        - $ref: "./components.yaml#/components/parameters/Filename"
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/octet-stream:
               schema:
                 type: string
                 format: binary
-        '402':
+        "402":
           description: missing Pro subscription for a commercial feature
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '404':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "404":
           description: execution not found
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '500':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "500":
           description: problem with getting artifacts from storage
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
+                  $ref: "./components.yaml#/components/schemas/Problem"
     parameters:
       - name: id
         in: path
@@ -385,37 +385,37 @@ paths:
       description: Rerun test workflow execution
       operationId: rerunTestWorkflowExecution
       parameters:
-        - $ref: './components.yaml#/components/parameters/executionID'
+        - $ref: "./components.yaml#/components/parameters/executionID"
       requestBody:
         description: test workflow running context
         content:
           application/json:
             schema:
-              $ref: './components.yaml#/components/schemas/TestWorkflowRunningContext'
+              $ref: "./components.yaml#/components/schemas/TestWorkflowRunningContext"
         required: true
       responses:
-        '200':
+        "200":
           description: successful execution
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/TestWorkflowExecution'
-        '400':
+                $ref: "./components.yaml#/components/schemas/TestWorkflowExecution"
+        "400":
           description: problem with body parsing - probably some bad input occurs
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
-        '502':
+                  $ref: "./components.yaml#/components/schemas/Problem"
+        "502":
           description: problem communicating with kubernetes cluster
           content:
             application/problem+json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Problem'
+                  $ref: "./components.yaml#/components/schemas/Problem"
     parameters:
       - name: id
         in: path

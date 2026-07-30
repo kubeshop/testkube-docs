@@ -1,11 +1,12 @@
 # Testkube Resource Management
 
 Testkube defines a number of Resources for its core functionality:
+
 - TestWorkflows / TestWorkflowTemplates for defining how to run and orchestrate your tests - [Read More](/articles/test-workflows).
 - Webhooks / WebhookTemplates for integrating external tools into the TestWorkflow lifecycle - [Read More](/articles/webhooks).
 - TestTriggers for integrating Test Orchestration with Kubernetes Events - [Read More](/articles/test-triggers).
 
-While these were all originally stored as CRDs where the Testkube Agent was deployed (see below), starting in Testkube `v2.7` these resources are stored directly in the Testkube Control Plane. As a consequence, the concept of a "superagent" has been retired in favor of discrete Agents/capabilities - [Read More](/articles/agents-overview). 
+While these were all originally stored as CRDs where the Testkube Agent was deployed (see below), starting in Testkube `v2.7` these resources are stored directly in the Testkube Control Plane. As a consequence, the concept of a "superagent" has been retired in favor of discrete Agents/capabilities - [Read More](/articles/agents-overview).
 
 :::note
 Resources can still be provided to the Testkube Control Plane using CRDs in a GitOps setup, see [GitOps with Testkube](/articles/gitops-overview).
@@ -18,11 +19,11 @@ Resources can still be provided to the Testkube Control Plane using CRDs in a Gi
 Up until version 2.7.0 of the Testkube, all Testkube Resources available in an Environment were stored and managed as CRDs in the
 namespace where the initial Environment Agent ("Superagent") was deployed. This design works well for [standalone agent deployments](/articles/install/standalone-agent), but became increasingly problematic for complex deployments when connecting the Agent to the Testkube Control Plane:
 
-- Whenever the Agent became unavailable (for example for networking reasons), the Control Plane and Dashboard would no longer have access to 
+- Whenever the Agent became unavailable (for example for networking reasons), the Control Plane and Dashboard would no longer have access to
   the Testkube Resources in that Environment, resulting in the "Read Only" behaviour in the Dashboard.
-- Any action in the Testkube Dashboard that involved the retrieval/update of a Testkube Resources (for example updating a Workflow), would require 
+- Any action in the Testkube Dashboard that involved the retrieval/update of a Testkube Resources (for example updating a Workflow), would require
   a round-trip to the Agent where the Resource was actually stored - which in large deployment would result in sluggish and sometimes fragile functionality.
-- Performing bulk actions on Testkube Resources in the Dashboard (for example search or find/replace across Workflows) was not technically feasible as all 
+- Performing bulk actions on Testkube Resources in the Dashboard (for example search or find/replace across Workflows) was not technically feasible as all
   Resources would first have to be retrieved from the Agent, and updating them atomically would not be possible.
 - RBAC controls for Testkube Resources in the Testkube Dashboard could be bypassed by modifying corresponding Kubernetes resources directly with kubectl/etc.
 
@@ -52,7 +53,7 @@ flowchart LR
 
 The new architecture introduced with 2.7.0 moves the storage and management of all Testkube Resources from the Agent to the Control Plane itself, resulting in:
 
-- An agent is no longer required to create and manage an Environment and its resources in the Testkube Dashboard, it is first when you actually want to 
+- An agent is no longer required to create and manage an Environment and its resources in the Testkube Dashboard, it is first when you actually want to
   run a Workflow, or start listening to Kubernetes Events that you will need to deploy a Runner or Listener Agent - [Read More about Testkube Agents](/articles/agents-overview)
 - The Dashboard will no longer exhibit "Read Only" behaviour - it is always connected to the Control Plane where all Resources are stored.
 - Latency and reliability for working with Testkube Resources in large deployments should be greatly improved.
@@ -91,7 +92,7 @@ The Testkube Resources migrated are
 This gives existing environments a consistent starting point when moving to Control Plane ownership.
 
 Once migrated, the (Super)Agent will show up in the list of Agents as an Agent with all 4 agent capabilities enabled; runner, listener, gitops and webhook.
-This is functionality equivalent to its pre-migration state, so users can continue using Testkube as before without having to perform any further tasks 
+This is functionality equivalent to its pre-migration state, so users can continue using Testkube as before without having to perform any further tasks
 for the migration to finish.
 
 :::tip
@@ -111,7 +112,7 @@ For most users, this change simplifies day-to-day operations:
 - Webhooks and Kubernetes-event triggers continue to execute through agents via the agent capability model (for triggers, see [Listener Agents](/articles/agents-overview#listener-agents)).
 - Control Plane metrics are available by default for observability (see [Control Plane Metrics](/articles/control-plane-metrics)).
 
-Furthermore, the fact that Testkube Resources are now natively managed in the Control Plane will provide significant performance and stability improvements to the 
+Furthermore, the fact that Testkube Resources are now natively managed in the Control Plane will provide significant performance and stability improvements to the
 Testkube Dashboard in large-scale deployments.
 
 ### Scheduling Changes
@@ -139,5 +140,5 @@ The "webhook capability" naming is currently an internal implementation detail a
 
 ### Prometheus Metrics
 
-Runner and Webhook Agents expose the Prometheus metrics as before, while the Control Plane itself exposes its own (improved) metrics for Testkube monitoring, 
+Runner and Webhook Agents expose the Prometheus metrics as before, while the Control Plane itself exposes its own (improved) metrics for Testkube monitoring,
 read more at [Control Plane Metrics](/articles/control-plane-metrics).

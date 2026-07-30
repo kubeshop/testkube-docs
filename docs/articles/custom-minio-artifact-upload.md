@@ -12,14 +12,14 @@ a dedicated step to your Workflow for this:
   run:
     image: minio/mc:latest
     env:
-    - name: MINIO_URL
-      value: some-url
-    - name: MINIO_ACCESSKEY
-      value: some-accesskey
-    - name: MINIO_SECRETKEY
-      value: some-secretkey
-    - name: MINIO_BUCKET
-      value: some-bucket
+      - name: MINIO_URL
+        value: some-url
+      - name: MINIO_ACCESSKEY
+        value: some-accesskey
+      - name: MINIO_SECRETKEY
+        value: some-secretkey
+      - name: MINIO_BUCKET
+        value: some-bucket
     shell: |
       /usr/bin/mc config host add minio "$MINIO_URL" "$MINIO_ACCESSKEY" "$MINIO_SECRETKEY"
       /usr/bin/mc mb "minio/$MINIO_BUCKET" || true

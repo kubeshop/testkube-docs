@@ -16,18 +16,18 @@ paths:
       description: List environments from the active organization
       operationId: listEnvironments
       parameters:
-        - $ref: './components.yaml#/components/parameters/Limit'
+        - $ref: "./components.yaml#/components/parameters/Limit"
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/Environments'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "200":
+          $ref: "./components.yaml#/components/responses/Environments"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     post:
@@ -35,12 +35,12 @@ paths:
       description: Create test environment
       operationId: createEnvironment
       requestBody:
-        $ref: './components.yaml#/components/requestBodies/Environment'
+        $ref: "./components.yaml#/components/requestBodies/Environment"
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/Environment'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
+        "200":
+          $ref: "./components.yaml#/components/responses/Environment"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
       security:
         - BearerAuth: []
     delete:
@@ -48,30 +48,30 @@ paths:
       description: Deletes all or labeled environments
       operationId: deleteEnvironments
       parameters:
-        - $ref: './components.yaml#/components/parameters/Name'
+        - $ref: "./components.yaml#/components/parameters/Name"
       responses:
-        '204':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
+        "204":
+          $ref: "./components.yaml#/components/responses/NoContent"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: "./components.yaml#/components/parameters/ID"
   /organizations/{id}/environments/{environmentID}:
     get:
       summary: Get environment by ID
       description: Get test environment by ID from CRD in kubernetes cluster
       operationId: getEnvironment
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/Environment'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
+        "200":
+          $ref: "./components.yaml#/components/responses/Environment"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
       security:
         - BearerAuth: []
     delete:
@@ -79,12 +79,12 @@ paths:
       description: Deletes a test environment
       operationId: deleteEnvironment
       responses:
-        '204':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
+        "204":
+          $ref: "./components.yaml#/components/responses/NoContent"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
       security:
         - BearerAuth: []
     patch:
@@ -92,18 +92,18 @@ paths:
       description: Update environment with given request body
       operationId: updateEnvironment
       requestBody:
-        $ref: './components.yaml#/components/requestBodies/Environment'
+        $ref: "./components.yaml#/components/requestBodies/Environment"
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/Environment'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
+        "200":
+          $ref: "./components.yaml#/components/responses/Environment"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"

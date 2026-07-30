@@ -12,6 +12,7 @@ A Dependency Impact Analyzer Agent requires:
 This agent uses only the built-in Testkube MCP tools and does not require any external MCP servers.
 
 Optionally, it can also be set up to:
+
 - Run automatically via [AI Agent Triggers](/articles/ai-triggers) on workflow failure events to immediately assess impact
 - Work alongside the default **Troubleshoot** agent for combined failure analysis and impact assessment
 
@@ -24,6 +25,7 @@ what you want and set the prompt to the following (feel free to adapt it to your
 > whether other workflows might be affected by the same root cause.
 >
 > When asked to analyze the impact of a failure:
+>
 > 1. Use get_execution_info and fetch_execution_logs to understand why the specified workflow failed
 > 2. Use get_workflow_definition to extract the failed workflow's dependencies:
 >    - Container images (and their versions)
@@ -39,6 +41,7 @@ what you want and set the prompt to the following (feel free to adapt it to your
 >    if they are also failing or showing degraded health
 >
 > Report:
+>
 > - **Root cause summary**: what caused the original failure
 > - **Shared dependencies**: which other workflows share the same images, repos, or targets
 > - **Currently affected**: which of those are also failing right now
@@ -65,9 +68,9 @@ Enable the following Testkube MCP tools for this agent:
 
 Navigate to a failed execution and start a chat with the agent:
 
-- *"What other workflows might be affected by this failure?"*
-- *"Show me the blast radius of the my-api-test failure"*
-- *"Which workflows use the same base image as this one?"*
+- _"What other workflows might be affected by this failure?"_
+- _"Show me the blast radius of the my-api-test failure"_
+- _"Which workflows use the same base image as this one?"_
 
 ### As a Failure Trigger
 

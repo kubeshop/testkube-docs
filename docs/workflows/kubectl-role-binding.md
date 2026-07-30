@@ -5,21 +5,30 @@ kind: ClusterRole
 metadata:
   name: testkube-kubectl-role
 rules:
-- apiGroups: [""]
-  resources: ["pods", "services", "deployments", "nodes", "namespaces", "configmaps", "secrets"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: ["apps"]
-  resources: ["deployments", "replicasets", "daemonsets", "statefulsets"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: ["extensions"]
-  resources: ["deployments", "replicasets", "daemonsets", "statefulsets"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: ["networking.k8s.io"]
-  resources: ["ingresses", "networkpolicies"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: ["batch"]
-  resources: ["jobs", "cronjobs"]
-  verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources:
+      [
+        "pods",
+        "services",
+        "deployments",
+        "nodes",
+        "namespaces",
+        "configmaps",
+        "secrets",
+      ]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["apps"]
+    resources: ["deployments", "replicasets", "daemonsets", "statefulsets"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["extensions"]
+    resources: ["deployments", "replicasets", "daemonsets", "statefulsets"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["networking.k8s.io"]
+    resources: ["ingresses", "networkpolicies"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["batch"]
+    resources: ["jobs", "cronjobs"]
+    verbs: ["get", "list", "watch"]
 ---
 # Create a RoleBinding for the testkube namespace
 apiVersion: rbac.authorization.k8s.io/v1
@@ -28,9 +37,9 @@ metadata:
   name: testkube-kubectl-binding
   namespace: testkube
 subjects:
-- kind: ServiceAccount
-  name: testkube-api-server-tests-job
-  namespace: testkube
+  - kind: ServiceAccount
+    name: testkube-api-server-tests-job
+    namespace: testkube
 roleRef:
   kind: ClusterRole
   name: testkube-kubectl-role

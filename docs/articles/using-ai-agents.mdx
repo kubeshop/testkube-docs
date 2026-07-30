@@ -3,7 +3,7 @@
 An ongoing interaction with a Testkube AI Agent is called a "Chat". Testkube allows you to have multiple Chats
 ongoing at the same time, triggered by different mechanisms in the Testkube Dashboard - [See below](#initiating-a-chat).
 
-Testkube saves all Chats and makes them available in the **AI Chats** panel accessible from the left-side 
+Testkube saves all Chats and makes them available in the **AI Chats** panel accessible from the left-side
 Dashboard menu, making it easy to review old interactions and follow up on them if needed.
 
 The Chats panel provides a full-featured chat interface — you can create new chats, select existing ones,
@@ -18,22 +18,22 @@ Chats can be filtered by their AI Agent and if they are waiting for tool approva
 
 ## Chat Details
 
-Selecting a Chat will bring up the Chat Details panel to the right. This panel shows the ongoing conversation with the 
-AI Agent, starting with the initial prompt and followed by MCP Tool calls, agent output and interactions that 
+Selecting a Chat will bring up the Chat Details panel to the right. This panel shows the ongoing conversation with the
+AI Agent, starting with the initial prompt and followed by MCP Tool calls, agent output and interactions that
 users have had with the Agent via follow-up prompts.
 
 ![AI Chat Details](images/ai-chat-details.png)
 
 ### MCP Tool Calls
 
-Each MCP Tool call that an Agent performs is shown separately in the Chat details, with the possibility to see the 
+Each MCP Tool call that an Agent performs is shown separately in the Chat details, with the possibility to see the
 input/output for that particular interaction:
 
 ![AI Chat MCP Tool Calls](images/ai-chat-mcp-tool-calls.png)
 
 ### MCP Tool Approval
 
-Calls to MCP Tools that require approval in line with the configured approval policy 
+Calls to MCP Tools that require approval in line with the configured approval policy
 (see [Configuring MCP Server Tools](/articles/defining-ai-agents#configuring-mcp-server-tools) ) will suspend the
 execution of the Chat until approval is either granted or denied.
 
@@ -44,7 +44,7 @@ In the example below, the `list_commits` tool in the GitHub MCP Server requires 
 ### User Input
 
 The bottom of this view shows an input prompt that can be used to provide follow-up prompts to the Agent once it has
-completed its current task. 
+completed its current task.
 
 ![AI Chat User Input](images/ai-chat-user-input.png)
 
@@ -85,9 +85,9 @@ failed Executions.
 
 ![AI Analyze in Executions List](images/ai-analyze-in-executions-list.png)
 
-Selecting this button will prompt you to initiate a Chat with a selected AI Agent. 
+Selecting this button will prompt you to initiate a Chat with a selected AI Agent.
 
-The default prompt will contain the names of the failed Execution and its Workflow, an Agent will automatically 
-discover and use these values if its prompt requires them. 
+The default prompt will contain the names of the failed Execution and its Workflow, an Agent will automatically
+discover and use these values if its prompt requires them.
 
 ![Default AI Analyze Prompt](images/default-ai-analyze-prompt.png)

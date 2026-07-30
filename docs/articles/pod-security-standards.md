@@ -3,8 +3,8 @@
 Kubernetes allows one to apply security policies to pods and enforce them with
 [a built-in
 controller](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
-at the namespace level. Defined as [*Pod Security
-Standards*](https://kubernetes.io/docs/concepts/security/pod-security-standards/),
+at the namespace level. Defined as [_Pod Security
+Standards_](https://kubernetes.io/docs/concepts/security/pod-security-standards/),
 there are three builtin profiles ranging from most permissive to most
 restrictive.
 
@@ -26,7 +26,6 @@ pod is scheduled to a specific set of nodes (i.e. same AZ or host) by possibly
 specifying a `nodeSelector`.
 
 :::
-
 
 ### Control Plane
 
@@ -156,28 +155,28 @@ global:
     seccompProfile:
       type: RuntimeDefault
 globalTemplate:
- enabled: true
- inline: true
- spec:
-   pod:
-     securityContext:
-       allowPrivilegeEscalation: false
-       runAsNonRoot: true
-       runAsUser: 1000
-       runAsGroup: 1000
-       fsGroup: 1000
-       capabilities:
-         drop: ["ALL"]
-       seccompProfile:
-         type: RuntimeDefault
-   container:
-     securityContext:
-       allowPrivilegeEscalation: false
-       runAsNonRoot: true
-       runAsUser: 1000
-       runAsGroup: 1000
-       capabilities:
-         drop: ["ALL"]
-       seccompProfile:
-         type: RuntimeDefault
+  enabled: true
+  inline: true
+  spec:
+    pod:
+      securityContext:
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        capabilities:
+          drop: ["ALL"]
+        seccompProfile:
+          type: RuntimeDefault
+    container:
+      securityContext:
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        capabilities:
+          drop: ["ALL"]
+        seccompProfile:
+          type: RuntimeDefault
 ```

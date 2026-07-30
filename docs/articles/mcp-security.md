@@ -20,12 +20,14 @@ This means the MCP Server operates within your existing security boundaries - it
 The hosted MCP endpoint supports OAuth authentication via the [MCP authorization spec](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization). MCP clients like Claude Code, VS Code, and Cursor handle the OAuth flow automatically — you just see a browser popup to log in through your organization's identity provider (Google, GitHub, SAML, etc.).
 
 **Advantages:**
+
 - No API keys to create, copy, or rotate
 - Per-user identity — each user authenticates individually
 - Enables seat-based licensing and audit trails
 - Works with existing SSO providers via Dex
 
 **How it works:**
+
 1. Your MCP client discovers the OAuth metadata at `/.well-known/oauth-protected-resource`
 2. The client registers itself (via CIMD or DCR) and redirects you to log in
 3. After login, the gateway issues a short-lived access token and refresh token

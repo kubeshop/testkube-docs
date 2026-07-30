@@ -35,7 +35,6 @@ make run-proxy
 
 And when calling any of `testkube` subcommands, pass the direct client flag (`-cdirect`)
 
-
 ### Installing Local Executors
 
 Install development executors by running them from the [Testkube project](https://github.com/kubeshop/testkube):

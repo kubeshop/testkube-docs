@@ -584,11 +584,13 @@ const redirects = [
   },
   // Copilot to AI Assistant redirects
   {
-    from: ["/articles/copilot-overview",
+    from: [
+      "/articles/copilot-overview",
       "/articles/copilot-can-help",
       "/articles/copilot-is-different",
       "/articles/ai-assistant-can-help",
-      "/articles/ai-assistant-is-different"],
+      "/articles/ai-assistant-is-different",
+    ],
     to: "/articles/ai-assistant-overview",
   },
   {

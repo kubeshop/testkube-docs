@@ -1,5 +1,5 @@
 import Admonition from "@theme/Admonition";
-import LegacyWarning from '../articles/_legacy-warning.mdx';
+import LegacyWarning from "../articles/_legacy-warning.mdx";
 
 # Ginkgo
 
@@ -7,14 +7,14 @@ import LegacyWarning from '../articles/_legacy-warning.mdx';
 
 Our dedicated Ginkgo executor allows running Ginkgo tests with Testkube - directly from your Git repository.
 
-* Default command for this executor: `ginkgo`
-* Default arguments for this executor command: `-r` `-p` `--randomize-all` `--randomize-suites` `--keep-going` `--trace` `--junit-report` `<reportFile>` `<envVars>` `<runPath>`
+- Default command for this executor: `ginkgo`
+- Default arguments for this executor command: `-r` `-p` `--randomize-all` `--randomize-suites` `--keep-going` `--trace` `--junit-report` `<reportFile>` `<envVars>` `<runPath>`
 
 Parameters in `<>` are calculated at test execution:
 
-* `<reportFile>` - report file set by `GinkgoJunitReport`, `report.xml` by default
-* `<envVars>` - list of environment variables
-* `<runPath>` - project path set by `GinkoTestPackage`, location of the test files by default
+- `<reportFile>` - report file set by `GinkgoJunitReport`, `report.xml` by default
+- `<envVars>` - list of environment variables
+- `<runPath>` - project path set by `GinkoTestPackage`, location of the test files by default
 
 [See more at "Redefining the Prebuilt Executor Command and Arguments" on the Creating Test page.](../articles/creating-tests.mdx#redefining-the-prebuilt-executor-command-and-arguments)
 
@@ -23,13 +23,23 @@ export const ExecutorInfo = () => {
     <div>
       <Admonition type="info" icon="🎓" title="What is Ginkgo?">
         <ul>
-          <li><a href="https://onsi.github.io/ginkgo/">Ginkgo</a> is a popular general purpose testing framework for the Go programming language that, when paired with <a href="https://github.com/onsi/gomega">Gomega</a>, provides a powerful way to write your tests.</li>
-          <li>Built on top of Go's testing infrastructure, it lets you write more expressive tests for different use cases: unit tests, integration tests, performance tests, and more.</li>
+          <li>
+            <a href="https://onsi.github.io/ginkgo/">Ginkgo</a> is a popular
+            general purpose testing framework for the Go programming language
+            that, when paired with{" "}
+            <a href="https://github.com/onsi/gomega">Gomega</a>, provides a
+            powerful way to write your tests.
+          </li>
+          <li>
+            Built on top of Go's testing infrastructure, it lets you write more
+            expressive tests for different use cases: unit tests, integration
+            tests, performance tests, and more.
+          </li>
         </ul>
       </Admonition>
     </div>
   );
-}
+};
 
 <ExecutorInfo />
 
@@ -62,8 +72,7 @@ var _ = Describe("Smoke", func() {
 })
 ```
 
-
-The default Ginkgo executor: 
+The default Ginkgo executor:
 
 ```yaml
 apiVersion: executor.testkube.io/v1
@@ -73,17 +82,16 @@ metadata:
   namespace: testkube
 spec:
   features:
-  - artifacts
-  - junit-report
+    - artifacts
+    - junit-report
   image: kubeshop/testkube-ginkgo-executor:0.0.4
   types:
-  - ginkgo/test
+    - ginkgo/test
 ```
-
 
 ## **Create a New Ginkgo-based Test**
 
-### Write a Ginkgo Test 
+### Write a Ginkgo Test
 
 We'll try to check if there are any executors registered on the Testkube demo cluster. To do that we need to check the `/v1/executors`
 endpoint. Results should have at least one Executor registered.
@@ -128,7 +136,8 @@ func GetTestkubeExecutors(body io.ReadCloser) ([]testkube.ExecutorDetails, error
 
 ```
 
-The test is run in the standard Ginkgo bootstrapped project. 
+The test is run in the standard Ginkgo bootstrapped project.
+
 ```
 go mod init testkube-ginkgo-example
 ginkgo bootstrap
@@ -138,7 +147,7 @@ Everything was pushed to the Git repository.
 
 You can also look at the code in our [examples](https://github.com/kubeshop/testkube-executor-ginkgo/tree/main/examples/testkube-api).
 
-### Add Test to Testkube 
+### Add Test to Testkube
 
 To add a Ginkgo test to Testkube you need to call the `create test` command. We'll assume that our test is in a Git repository.
 
@@ -146,13 +155,12 @@ To add a Ginkgo test to Testkube you need to call the `create test` command. We'
 kubectl testkube create test --git-uri https://github.com/kubeshop/testkube-executor-ginkgo.git --git-path examples/testkube-api --type ginkgo/test --name ginkgo-example-test --git-branch main
 ```
 
-
 ## **Running a Test**
 
 Let's pass the env variable to our test run:
 
 ```bash
- tk run test ginkgo-example-test -f                     
+ tk run test ginkgo-example-test -f
 
 Type:              ginkgo/test
 Name:              ginkgo-example-test
@@ -162,7 +170,7 @@ Execution number:  3
 Status:            running
 Start time:        2022-08-05 10:06:05.467437617 +0000 UTC
 
-... other logs 
+... other logs
 
 Running in parallel across 7 processes
 •
@@ -187,7 +195,7 @@ $ kubectl testkube get execution 62eceb8df4732077cee099cf
 
 ## **Getting Test Results**
 
-We can always get back to the test results: 
+We can always get back to the test results:
 
 ```bash
 kubectl testkube get execution 62eceb8df4732077cee099cf

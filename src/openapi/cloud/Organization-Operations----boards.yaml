@@ -41,26 +41,26 @@ paths:
           description: Return only boards favorited at the organization level.
           schema:
             type: boolean
-        - $ref: './components.yaml#/components/parameters/Page'
-        - $ref: './components.yaml#/components/parameters/PageSize'
+        - $ref: "./components.yaml#/components/parameters/Page"
+        - $ref: "./components.yaml#/components/parameters/PageSize"
       responses:
-        '200':
+        "200":
           description: Response
           headers:
             Link:
-              $ref: './components.yaml#/components/headers/link'
+              $ref: "./components.yaml#/components/headers/link"
             Total-Count:
-              $ref: './components.yaml#/components/headers/total-count'
+              $ref: "./components.yaml#/components/headers/total-count"
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/BoardSummary'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
+                  $ref: "./components.yaml#/components/schemas/BoardSummary"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
       security:
         - BearerAuth: []
     post:
@@ -90,38 +90,38 @@ paths:
                 - name
         required: true
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/Board'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
+                $ref: "./components.yaml#/components/schemas/Board"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: "./components.yaml#/components/parameters/ID"
   /organizations/{id}/boards/{boardID}:
     get:
       summary: Get a board
       description: Get a board by its `id` or `slug`.
       operationId: getBoard
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/Board'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+                $ref: "./components.yaml#/components/schemas/Board"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     delete:
@@ -129,14 +129,14 @@ paths:
       description: Deletes a board.
       operationId: deleteBoard
       responses:
-        '204':
+        "204":
           description: Delete Success
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     patch:
@@ -184,25 +184,25 @@ paths:
                     - content_kind
         required: true
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/Board'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+                $ref: "./components.yaml#/components/schemas/Board"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/BoardID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/BoardID"
   /organizations/{id}/boards/shared-order:
     patch:
       summary: Reorder shared boards
@@ -214,18 +214,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: './components.yaml#/components/schemas/ReorderSharedBoardsReq'
+              $ref: "./components.yaml#/components/schemas/ReorderSharedBoardsReq"
         required: true
       responses:
-        '204':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
+        "204":
+          $ref: "./components.yaml#/components/responses/NoContent"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: "./components.yaml#/components/parameters/ID"

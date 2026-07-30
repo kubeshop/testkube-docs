@@ -6,7 +6,7 @@ developers to build, test, and deploy across cloud providers and on-premise syst
 The Testkube Tekton integration facilitates the installation of Testkube and allows the execution of any [Testkube CLI](https://docs.testkube.io/cli/testkube)
 command within a Tekton pipeline.The integration offers a versatile approach to align with your pipeline requirements and is compatible with Testkube,
 Testkube On-Prem, and the open-source Testkube platform. It enables Tekton users to leverage the powerful features of Testkube directly within their
-  CI/CD pipelines, ensuring efficient and flexible Test Workflow execution.
+CI/CD pipelines, ensuring efficient and flexible Test Workflow execution.
 
 ## Pre-requisites
 
@@ -39,25 +39,25 @@ spec:
   description: >-
     Run testkube cli commands with tekton
   params:
-  - name: tkc-env
-    description: testkube cloud environment name
-    type: string
-  - name: tkc-org
-    description: testkube cloud org name
-    type: string
-  - name: api-key
-    description: api key for testkube account
-    type: string
-  - name: tkc-command
-    description: Command to run with testkube
-    type: string
+    - name: tkc-env
+      description: testkube cloud environment name
+      type: string
+    - name: tkc-org
+      description: testkube cloud org name
+      type: string
+    - name: api-key
+      description: api key for testkube account
+      type: string
+    - name: tkc-command
+      description: Command to run with testkube
+      type: string
   steps:
-  - name: run-testkube-cli
-    image: "kubeshop/testkube-cli:latest"
-    script: |
-      #!/bin/sh
-      testkube set context -c cloud --env-id $(params.tkc-env) --org-id $(params.tkc-org) -k $(params.api-key)
-      testkube $(params.tkc-command)
+    - name: run-testkube-cli
+      image: "kubeshop/testkube-cli:latest"
+      script: |
+        #!/bin/sh
+        testkube set context -c cloud --env-id $(params.tkc-env) --org-id $(params.tkc-org) -k $(params.api-key)
+        testkube $(params.tkc-command)
 ```
 
 ### Create Tekton Pipeline
@@ -68,35 +68,36 @@ This Tekton Pipeline configures the CI/CD pipeline.
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: testkube-pipeline  # Name of the Pipeline
+  name: testkube-pipeline # Name of the Pipeline
 spec:
-  params:                  # Parameters that the Pipeline expects
-  - name: tkc-env
-    description: testkube cloud environment name
-    type: string
-  - name: tkc-org
-    description: testkube cloud org name
-    type: string
-  - name: api-key
-    description: "The API key for Testkube"
-    type: string
-  - name: tkc-command
-    description: Command to run with testkube
-    type: string
-  tasks:                   # Tasks to be executed as part of this Pipeline
+  params: # Parameters that the Pipeline expects
+    - name: tkc-env
+      description: testkube cloud environment name
+      type: string
+    - name: tkc-org
+      description: testkube cloud org name
+      type: string
+    - name: api-key
+      description: "The API key for Testkube"
+      type: string
+    - name: tkc-command
+      description: Command to run with testkube
+      type: string
+  tasks: # Tasks to be executed as part of this Pipeline
     - name: testkube-cli
-      taskRef:             # Reference to a previously defined Task
-        name: testkube     # Name of the Task being referenced is 'testkube'
+      taskRef: # Reference to a previously defined Task
+        name: testkube # Name of the Task being referenced is 'testkube'
       params:
-      - name: tkc-env
-        value: $(params.tkc-env)
-      - name: tkc-org
-        value: $(params.tkc-org)
-      - name: api-key
-        value: $(params.api-key)
-      - name: tkc-command
-        value: $(params.tkc-command)
+        - name: tkc-env
+          value: $(params.tkc-env)
+        - name: tkc-org
+          value: $(params.tkc-org)
+        - name: api-key
+          value: $(params.api-key)
+        - name: tkc-command
+          value: $(params.tkc-command)
 ```
+
 ### Create a Tekton PipelineRun
 
 This Tekton PipelineRun instantiate the `Pipeline`. The Testkube CLI command can be added to `tkc-command` parameter. This example runs a Test Workflow.
@@ -122,6 +123,3 @@ spec:
 
 It is recommended that sensitive values should never be stored as plaintext in workflow files, but rather as Secrets.
 Secrets can be configured at the organization, repository, or environment level, and allow you to store sensitive information in Tekton.
-
-
-

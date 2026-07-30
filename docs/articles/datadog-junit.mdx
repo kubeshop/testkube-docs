@@ -45,7 +45,7 @@ spec:
       type string
       default: /data/repo/**/*
   steps:
-  - name: Upload JUnit to Datadog        
+  - name: Upload JUnit to Datadog
     run:
       image: datadog/ci:latest
       env:
@@ -80,7 +80,7 @@ metadata:
   name: cypress-tests-with-datadog-upload
   namespace: testkube
 spec:
-  config:                              
+  config:
     service:
       description: Name of the service or library being tested
       type: string
@@ -115,9 +115,9 @@ The same approach works for any tool that ships results via a containerized CLI:
 
 1. Build or choose a container image that contains the CLI.
 2. Create a template that
-    - passes any configurable parameters to the command via parameterization
-    - injects authentication and any other environment variables via `env`
-    - executes the CLI with arguments that reference `{{ config.* }}` placeholders.
+   - passes any configurable parameters to the command via parameterization
+   - injects authentication and any other environment variables via `env`
+   - executes the CLI with arguments that reference `{{ config.* }}` placeholders.
 3. Use a step-level template reference to call the command
 
 ---

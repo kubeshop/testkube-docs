@@ -3,13 +3,13 @@ import TabItem from "@theme/TabItem";
 
 # Test Workflows - Matrix and Sharding
 
-import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx"
+import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx";
 
-<RequiresCommercialWorkflows/>
+<RequiresCommercialWorkflows />
 
-It is often desirable to run a test for multiple scenarios or environments, for example to distribute load or to verify 
-your application for different input. This is traditionally achieved by defining configuration matrixes for 
-each scenario and running all permutations. 
+It is often desirable to run a test for multiple scenarios or environments, for example to distribute load or to verify
+your application for different input. This is traditionally achieved by defining configuration matrixes for
+each scenario and running all permutations.
 
 Furthermore, it is common to split tests into multiple executions that run in parallel ("shards") to speed up the execution.
 
@@ -23,7 +23,7 @@ small and/or short-lasting tests, sharding will often not decrease overall execu
 
 ## Usage
 
-Matrix and sharding features are supported in [**Services (`services`)**](./test-workflows-services), and both [**Composite (`execute`)**](./test-workflows-test-suites) 
+Matrix and sharding features are supported in [**Services (`services`)**](./test-workflows-services), and both [**Composite (`execute`)**](./test-workflows-test-suites)
 and [**Parallel Step (`parallel`)**](./test-workflows-parallel) operations.
 
 <Tabs>
@@ -39,12 +39,12 @@ spec:
     remote:
       matrix:
         browser:
-        - driver: chrome
-          image: selenium/standalone-chrome:4.21.0-20240517
-        - driver: edge
-          image: selenium/standalone-edge:4.21.0-20240517
-        - driver: firefox
-          image: selenium/standalone-firefox:4.21.0-20240517
+          - driver: chrome
+            image: selenium/standalone-chrome:4.21.0-20240517
+          - driver: edge
+            image: selenium/standalone-edge:4.21.0-20240517
+          - driver: firefox
+            image: selenium/standalone-firefox:4.21.0-20240517
       image: "{{ matrix.browser.image }}"
       description: "{{ matrix.browser.driver }}"
       readinessProbe:
@@ -53,7 +53,7 @@ spec:
           port: 4444
         periodSeconds: 1
   steps:
-  - shell: 'echo {{ shellquote(join(map(services.remote, "tojson(_.value)"), "\n")) }}'
+    - shell: 'echo {{ shellquote(join(map(services.remote, "tojson(_.value)"), "\n")) }}'
 ```
 
 </TabItem>
@@ -66,15 +66,15 @@ metadata:
   name: example-matrix-test-suite
 spec:
   steps:
-  - execute:
-      workflows:
-      - name: k6-workflow-smoke
-        matrix:
-          target:
-          - https://testkube.io
-          - https://docs.testkube.io
-        config:
-          target: "{{ matrix.target }}"
+    - execute:
+        workflows:
+          - name: k6-workflow-smoke
+            matrix:
+              target:
+                - https://testkube.io
+                - https://docs.testkube.io
+            config:
+              target: "{{ matrix.target }}"
 ```
 
 </TabItem>
@@ -90,21 +90,21 @@ spec:
     git:
       uri: https://github.com/kubeshop/testkube
       paths:
-      - test/playwright/playwright-project
+        - test/playwright/playwright-project
   container:
     image: mcr.microsoft.com/playwright:v1.32.3-focal
     workingDir: /data/repo/test/playwright/playwright-project
 
   steps:
-  - name: Install dependencies
-    shell: 'npm ci'
+    - name: Install dependencies
+      shell: "npm ci"
 
-  - name: Run tests
-    parallel:
-      count: 2
-      transfer:
-      - from: /data/repo
-      shell: 'npx playwright test --shard {{ index + 1 }}/{{ count }}'
+    - name: Run tests
+      parallel:
+        count: 2
+        transfer:
+          - from: /data/repo
+        shell: "npx playwright test --shard {{ index + 1 }}/{{ count }}"
 ```
 
 </TabItem>
@@ -114,9 +114,9 @@ spec:
 
 This feature allows you to provide few properties:
 
-* `matrix` to run the operation for different combinations
-* `count`/`maxCount` to replicate or distribute the operation
-* `shards` to provide the dataset to distribute among replicas
+- `matrix` to run the operation for different combinations
+- `count`/`maxCount` to replicate or distribute the operation
+- `shards` to provide the dataset to distribute among replicas
 
 Both `matrix` and `shards` can be used together - all the sharding (`shards` + `count`/`maxCount`) will be replicated for each `matrix` combination.
 
@@ -129,20 +129,20 @@ In example:
 ```yaml
 parallel:
   matrix:
-    image: ['node:20', 'node:21', 'node:22']
-    memory: ['1Gi', '2Gi']
+    image: ["node:20", "node:21", "node:22"]
+    memory: ["1Gi", "2Gi"]
   container:
     resources:
       requests:
-        memory: '{{ matrix.memory }}'
+        memory: "{{ matrix.memory }}"
   run:
-    image: '{{ matrix.image }}'
+    image: "{{ matrix.image }}"
 ```
 
 Will instantiate 6 copies:
 
 | `index` | `matrixIndex` | `matrix.image` | `matrix.memory` | `shardIndex` |
-|---------|---------------|----------------|-----------------|--------------|
+| ------- | ------------- | -------------- | --------------- | ------------ |
 | `0`     | `0`           | `"node:20"`    | `"1Gi"`         | `0`          |
 | `1`     | `1`           | `"node:20"`    | `"2Gi"`         | `0`          |
 | `2`     | `2`           | `"node:21"`    | `"1Gi"`         | `0`          |
@@ -154,7 +154,7 @@ The matrix properties can be a static list of values, like:
 
 ```yaml
 matrix:
-  browser: [ 'chrome', 'firefox', '{{ config.another }}' ]
+  browser: ["chrome", "firefox", "{{ config.another }}"]
 ```
 
 or could be dynamic one, using [**Test Workflow's expressions**](test-workflows-expressions):
@@ -168,10 +168,10 @@ matrix:
 
 Often you may want to distribute the load, to speed up the execution. To do so, you can use `shards` and `count`/`maxCount` properties.
 
-* `shards` is a map of data to split across different instances
-* `count`/`maxCount` are describing the number of instances to start
-  * `count` defines static number of instances (always)
-  * `maxCount` defines maximum number of instances (will be lower if there is not enough data in `shards` to split)
+- `shards` is a map of data to split across different instances
+- `count`/`maxCount` are describing the number of instances to start
+  - `count` defines static number of instances (always)
+  - `maxCount` defines maximum number of instances (will be lower if there is not enough data in `shards` to split)
 
 Similarly to `matrix`, the `shards` may contain a static list, or [**Test Workflow's expression**](test-workflows-expressions), see examples below:
 
@@ -185,6 +185,7 @@ parallel:
   run:
     image: grafana/k6:latest
 ```
+
 </TabItem>
 <TabItem value="count-shard" label={<span>Static sharding (<code>count</code> + <code>shards</code>)</span>} default>
 
@@ -193,7 +194,12 @@ parallel:
   count: 2
   description: "{{ index + 1 }} instance of {{ count }}"
   shards:
-    url: ["https://testkube.io", "https://docs.testkube.io", "https://app.testkube.io"]
+    url:
+      [
+        "https://testkube.io",
+        "https://docs.testkube.io",
+        "https://app.testkube.io",
+      ]
   run:
     # shard.url for 1st instance == ["https://testkube.io", "https://docs.testkube.io"]
     # shard.url for 2nd instance == ["https://app.testkube.io"]
@@ -216,13 +222,12 @@ parallel:
 </TabItem>
 </Tabs>
 
-
 :::tip
-While running tests in parallel shards, each run can result in its own report or artifacts, which need to be 
+While running tests in parallel shards, each run can result in its own report or artifacts, which need to be
 captured and possibly merged into a single report.
 
-Sometimes this can be handled directly by the tool (like Playwright's [merge-report](https://playwright.dev/docs/test-sharding#merging-reports-from-multiple-shards), 
-see the [Sharded Playwright Example](/articles/examples/playwright-sharded)), but sometimes handling that in 
+Sometimes this can be handled directly by the tool (like Playwright's [merge-report](https://playwright.dev/docs/test-sharding#merging-reports-from-multiple-shards),
+see the [Sharded Playwright Example](/articles/examples/playwright-sharded)), but sometimes handling that in
 custom ways may be needed.
 :::
 
@@ -230,9 +235,9 @@ custom ways may be needed.
 
 Besides having the `matrix.<key>` and `shard.<key>` there are some counter variables available in Test Workflow's expressions:
 
-* `index` and `count` - counters for total instances
-* `matrixIndex` and `matrixCount` - counters for the combinations
-* `shardIndex` and `shardCount` - counters for the shards
+- `index` and `count` - counters for total instances
+- `matrixIndex` and `matrixCount` - counters for the combinations
+- `shardIndex` and `shardCount` - counters for the shards
 
 ### Matrix and sharding together
 
@@ -244,13 +249,18 @@ matrix:
   memory: ["1Gi", "2Gi"]
 count: 2
 shards:
-  url: ["https://testkube.io", "https://docs.testkube.io", "https://app.testkube.io"]
+  url:
+    [
+      "https://testkube.io",
+      "https://docs.testkube.io",
+      "https://app.testkube.io",
+    ]
 ```
 
 Will start 8 instances:
 
 | `index` | `matrixIndex` | `matrix.browser` | `matrix.memory` | `shardIndex` | `shard.url`                                           |
-|---------|---------------|------------------|-----------------|--------------|-------------------------------------------------------|
+| ------- | ------------- | ---------------- | --------------- | ------------ | ----------------------------------------------------- |
 | `0`     | `0`           | `"chrome"`       | `"1Gi"`         | `0`          | `["https://testkube.io", "https://docs.testkube.io"]` |
 | `1`     | `0`           | `"chrome"`       | `"1Gi"`         | `1`          | `["https://app.testkube.io"]`                         |
 | `2`     | `1`           | `"chrome"`       | `"2Gi"`         | `0`          | `["https://testkube.io", "https://docs.testkube.io"]` |
@@ -262,14 +272,15 @@ Will start 8 instances:
 
 ## Dynamic Sharding
 
-Individual tests that are spread across shards can have varying execution times, potentially leading to a situation where 
-some shards take much longer to execute than others. A common approach to solve this is to statically define which tests that 
-go into which shard, based on previous execution times. While Testkube currently does not support this approach natively, 
-an alternative approach is available that will work for any kind of sharding mechanism. 
+Individual tests that are spread across shards can have varying execution times, potentially leading to a situation where
+some shards take much longer to execute than others. A common approach to solve this is to statically define which tests that
+go into which shard, based on previous execution times. While Testkube currently does not support this approach natively,
+an alternative approach is available that will work for any kind of sharding mechanism.
 
 To implement dynamic sharding in a parallel step:
+
 - Set the number of shards very high (preferably to the number of testcases, but NOT higher)
-- Set the number of parallel workers to a lower value (higher than 1), which will be the actual number of 
+- Set the number of parallel workers to a lower value (higher than 1), which will be the actual number of
   parallel workers that will be used to execute the tests.
 
 Testkube will still create individual nodes for each shard, but only the specified number of parallel workers will execute
@@ -287,9 +298,9 @@ For example, with Playwright tests, hooking into Playwrights native sharding mec
     count: 20 # keeping this one high, to have a high number of shards - every test could be a separate shard
     parallelism: 3 # keeping this low to execute up to 3 "workers" at a time
     transfer:
-    - from: /data/repo
+      - from: /data/repo
     run:
-      shell: 'npx playwright test  --shard={{ index + 1 }}/{{ count }}' # sharding
+      shell: "npx playwright test  --shard={{ index + 1 }}/{{ count }}" # sharding
 ```
 
 :::tip
@@ -309,13 +320,13 @@ This example is for Cypress, where we use the `shards` property to split test fi
       testFiles: glob("cypress/e2e/**/*.js")
     description: '{{join(map(shard.testFiles,"relpath(_.value, \"cypress/e2e\")"),",)}}'
     transfer:
-    - from: /data/repo
+      - from: /data/repo
     run:
       args:
-      - --env
-      - NON_CYPRESS_ENV=NON_CYPRESS_ENV_value
-      - --spec
-      - '{{join(shard.testFiles,",")}}'
+        - --env
+        - NON_CYPRESS_ENV=NON_CYPRESS_ENV_value
+        - --spec
+        - '{{join(shard.testFiles,",")}}'
 ```
 
 :::tip

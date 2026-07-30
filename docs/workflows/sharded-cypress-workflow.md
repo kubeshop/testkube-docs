@@ -15,7 +15,7 @@ spec:
 
   steps:
     - name: Install dependencies
-      shell: 'npm ci'
+      shell: "npm ci"
 
     - name: Run tests
       parallel:

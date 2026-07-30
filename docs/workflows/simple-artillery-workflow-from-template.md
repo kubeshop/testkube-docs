@@ -10,21 +10,21 @@ spec:
   container:
     workingDir: /data/repo/test/artillery
   steps:
-  - name: Run from template
-    content:
-      git:
-        uri: https://github.com/kubeshop/testkube
-        revision: main
+    - name: Run from template
+      content:
+        git:
+          uri: https://github.com/kubeshop/testkube
+          revision: main
+          paths:
+            - test/artillery/artillery-smoke-test.yaml
+      workingDir: /data/repo/test/artillery
+      template:
+        name: official/artillery/v1
+        config:
+          version: 2.0.9
+          run: "mkdir -p /data/artifacts && artillery run artillery-smoke-test.yaml -o /data/artifacts/artillery-report.json"
+      artifacts:
+        workingDir: /data/artifacts
         paths:
-        - test/artillery/artillery-smoke-test.yaml
-    workingDir: /data/repo/test/artillery
-    template:
-      name: official/artillery/v1
-      config:
-        version: 2.0.9
-        run: "mkdir -p /data/artifacts && artillery run artillery-smoke-test.yaml -o /data/artifacts/artillery-report.json"
-    artifacts:
-      workingDir: /data/artifacts
-      paths:
-      - '*'
+          - "*"
 ```

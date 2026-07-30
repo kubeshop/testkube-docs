@@ -16,14 +16,14 @@ spec:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-      - test/locust/locust-project
+        - test/locust/locust-project
   services:
     master:
       count: 1
       logs: always
       timeout: 30s
       transfer:
-      - from: /data/repo/test/locust/locust-project
+        - from: /data/repo/test/locust/locust-project
       image: locustio/locust:2.32.3
       shell: |
         mkdir /data/artifacts
@@ -35,18 +35,19 @@ spec:
           port: 5557
         periodSeconds: 1
   steps:
-  - name: Run test
-    parallel:
-      count: config.workers
-      transfer:
-      - from: /data/repo
-      use:
-      - name: distribute/evenly
-      container:
-        workingDir: /data/repo/test/locust/locust-project
-      paused: true
-      run:
-        image: locustio/locust:2.32.3
-        shell: locust -f - --worker --master-host {{ services.master.0.ip }} --processes
-          {{ config.workers }}
+    - name: Run test
+      parallel:
+        count: config.workers
+        transfer:
+          - from: /data/repo
+        use:
+          - name: distribute/evenly
+        container:
+          workingDir: /data/repo/test/locust/locust-project
+        paused: true
+        run:
+          image: locustio/locust:2.32.3
+          shell:
+            locust -f - --worker --master-host {{ services.master.0.ip }} --processes
+            {{ config.workers }}
 ```

@@ -28,18 +28,18 @@ paths:
               - declined
               - failed
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: './components.yaml#/components/schemas/Invite'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
+                  $ref: "./components.yaml#/components/schemas/Invite"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
       security:
         - BearerAuth: []
     post:
@@ -90,7 +90,7 @@ paths:
                 - emails
         required: true
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
@@ -100,7 +100,7 @@ paths:
                   invites:
                     type: array
                     items:
-                      $ref: './components.yaml#/components/schemas/Invite'
+                      $ref: "./components.yaml#/components/schemas/Invite"
                   failed:
                     type: array
                     items:
@@ -116,38 +116,38 @@ paths:
                   - invites
                   - failed
                   - notsent
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '429':
-          $ref: './components.yaml#/components/responses/TooManyRequests'
-        '500':
-          $ref: './components.yaml#/components/responses/InternalServerError'
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "429":
+          $ref: "./components.yaml#/components/responses/TooManyRequests"
+        "500":
+          $ref: "./components.yaml#/components/responses/InternalServerError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: "./components.yaml#/components/parameters/ID"
   /organizations/{id}/invites/{inviteID}:
     get:
       summary: Get organization invite
       description: Get an invite for an organization with given id.
       operationId: getInvite
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/Invite'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+                $ref: "./components.yaml#/components/schemas/Invite"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     patch:
@@ -191,62 +191,62 @@ paths:
                   type: string
         required: true
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/Invite'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+                $ref: "./components.yaml#/components/schemas/Invite"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/InviteID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/InviteID"
   /organizations/{id}/invites/{inviteID}/resend:
     post:
       summary: Resend organization invite
       description: Resend an invite for an organization with given id.
       operationId: resendInvite
       responses:
-        '201':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "201":
+          $ref: "./components.yaml#/components/responses/NoContent"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/InviteID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/InviteID"
   /organizations/{id}/invites/{inviteID}/revoke:
     post:
       summary: Revoke organization invite
       description: Revoke an invite for an organization with given id.
       operationId: revokeInvite
       responses:
-        '201':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "201":
+          $ref: "./components.yaml#/components/responses/NoContent"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/InviteID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/InviteID"

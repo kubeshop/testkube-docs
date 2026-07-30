@@ -21,5 +21,5 @@ spec:
       workingDir: /data/repo/build/reports
       artifacts:
         paths:
-          - '**/*'
+          - "**/*"
 ```

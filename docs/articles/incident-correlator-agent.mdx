@@ -13,6 +13,7 @@ An Incident Correlator Agent requires:
 This agent uses only the built-in Testkube MCP tools and does not require any external MCP servers.
 
 Optionally, it can also be set up to:
+
 - Run automatically via [AI Agent Triggers](/articles/ai-triggers) on workflow failure events
 - Tag correlated executions with an incident ID using `update_execution_tags`
 
@@ -25,6 +26,7 @@ what you want and set the prompt to the following (feel free to adapt it to your
 > if they are isolated test issues or part of a broader systemic incident.
 >
 > When triggered or asked to investigate:
+>
 > 1. Use query_executions to find all failed executions within a recent time window (e.g. last 2 hours)
 > 2. Use get_execution_info for each failure to gather metadata (workflow name, status, timing, labels)
 > 3. Use fetch_execution_logs for a sample of failures to look for common error patterns
@@ -32,6 +34,7 @@ what you want and set the prompt to the following (feel free to adapt it to your
 > 5. Use list_agents to check if failures are concentrated on specific agents/clusters
 >
 > Analyze the failures for correlation signals:
+>
 > - **Temporal clustering**: Multiple workflows failing within a narrow time window
 > - **Common errors**: Same error message or error pattern across different workflows
 > - **Infrastructure signals**: OOM kills, network errors, or timeout patterns appearing simultaneously
@@ -39,6 +42,7 @@ what you want and set the prompt to the following (feel free to adapt it to your
 > - **Label correlation**: Failures affecting workflows with shared labels (e.g. same team, same target service)
 >
 > Classify the situation:
+>
 > - **Systemic incident**: Correlated failures indicating a shared root cause (infrastructure outage,
 >   dependency failure, cluster issue). Identify the likely root cause.
 > - **Independent failures**: Unrelated failures that happened to coincide. Note the coincidence but
@@ -46,6 +50,7 @@ what you want and set the prompt to the following (feel free to adapt it to your
 > - **Partial correlation**: Some failures are related while others are independent. Group them accordingly.
 >
 > For systemic incidents, provide:
+>
 > - A summary of the incident scope (how many workflows, which teams/labels affected)
 > - The common failure pattern and likely root cause
 > - Recommended immediate action (e.g. check cluster health, verify dependency availability)
@@ -91,9 +96,9 @@ workflows rather than every individual failure.
 
 Start a chat with the agent during an incident:
 
-- *"We're seeing a lot of failures right now — are they related?"*
-- *"Group all failures from the last hour and tell me if there's a common cause"*
-- *"Is the cluster having issues? Multiple teams are reporting test failures"*
+- _"We're seeing a lot of failures right now — are they related?"_
+- _"Group all failures from the last hour and tell me if there's a common cause"_
+- _"Is the cluster having issues? Multiple teams are reporting test failures"_
 
 ## Enhancing with External MCP Servers
 

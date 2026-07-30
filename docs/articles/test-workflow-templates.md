@@ -21,8 +21,8 @@ Templates are flexible and can be used is various ways:
 ### Create a Template
 
 You can manage your templates under _Workflows > Workflow Templates_ within the Dashboard ([Read More](/articles/testkube-dashboard-workflows-templates))
-or create a TestWorkflowTemplate Custom Resource in your Kubernetes cluster using the [Testkube CLI](/cli/testkube-create-testworkflowtemplate). 
-This custom resources follows the same structure as a Test Workflow, with the additional ability to define configuration parameters that 
+or create a TestWorkflowTemplate Custom Resource in your Kubernetes cluster using the [Testkube CLI](/cli/testkube-create-testworkflowtemplate).
+This custom resources follows the same structure as a Test Workflow, with the additional ability to define configuration parameters that
 can be specified when the template is used.
 
 > To learn how to create and publish your own custom templates that appear in the Dashboard wizard, see [Creating your own Workflow Templates](/articles/examples/create-your-own-examples).
@@ -163,18 +163,17 @@ spec:
 # my-workflow-w
 spec:
   use:
-  - name: my-template-a
-  - name: my-template-b
+    - name: my-template-a
+    - name: my-template-b
   steps:
-  - shell: echo 1
+    - shell: echo 1
 
 # Merged workflow
 spec:
   pod:
     serviceAccountName: tests-restricted
   steps:
-  - shell: echo 1
-
+    - shell: echo 1
 ```
 
 **Inlining the same list will cause items to be added.**
@@ -187,27 +186,27 @@ This implicates that items on the workflow are always located before those of te
 # my-template-a
 spec:
   steps:
-  - shell: echo 1
+    - shell: echo 1
 
 # my-template-b
 spec:
   steps:
-  - shell: echo 2
+    - shell: echo 2
 
 # my-workflow-w
 spec:
   use:
-  - name: my-template-a
-  - name: my-template-b
+    - name: my-template-a
+    - name: my-template-b
   steps:
-  - shell: echo 3
+    - shell: echo 3
 
 # Merged workflow
 spec:
   steps:
-  - shell: echo 3
-  - shell: echo 1
-  - shell: echo 2
+    - shell: echo 3
+    - shell: echo 1
+    - shell: echo 2
 ```
 
 **Inlining within run will work (almost) exactly the same as top-level.**
@@ -329,28 +328,28 @@ To illustrate, the resulting execution order below is: w1, b1, a1, b2, w2, a2, b
 # my-template-a
 spec:
   steps:
-  - shell: echo a1
+    - shell: echo a1
   after:
-  - shell: echo a2
+    - shell: echo a2
 
 # my-template-b
 spec:
   setup:
-  - shell: echo b1
+    - shell: echo b1
   steps:
-  - shell: echo b2
+    - shell: echo b2
   after:
-  - shell: echo b3
+    - shell: echo b3
 
 # my-workflow-w
 spec:
   use:
-  - name: my-template-a
-  - name: my-template-b
+    - name: my-template-a
+    - name: my-template-b
   setup:
-  - shell: echo w1
+    - shell: echo w1
   steps:
-  - shell: echo w2
+    - shell: echo w2
 ```
 
 ## Global Templates
@@ -398,7 +397,7 @@ example Test Workflows using them:
 - Playwright [See Example](examples/playwright-basic.mdx#basic-playwright-from-template)
 - Postman [See Example](examples/postman-basic.mdx#basic-postman-from-template)
 
-You can also see these in the Testkube Dashboard under the [Workflow Templates](/articles/testkube-dashboard-workflows-templates) 
+You can also see these in the Testkube Dashboard under the [Workflow Templates](/articles/testkube-dashboard-workflows-templates)
 tab.
 
 ## Examples

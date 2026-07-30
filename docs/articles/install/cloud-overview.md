@@ -5,7 +5,7 @@ by the Testkube team at https://app.testkube.io. You can create Environments and
 
 ## Getting Started
 
-To get started with the Cloud Control Plane, go to https://app.testkube.io and sign up for a trial account. During the onboarding, 
+To get started with the Cloud Control Plane, go to https://app.testkube.io and sign up for a trial account. During the onboarding,
 you will be prompted to create an initial Testkube Environment. You can start creating Workflows and other resources right away. When you are ready to execute your Workflows, you can deploy [Testkube Agents](/articles/agents-overview) in your infrastructure using the provided CLI/Helm commands. You can then add as many Environments and Agents as you need - [Read More](/articles/environment-management#creating-a-new-environment).
 
 For local deployment of the Agent (for example during evaluation) you can create your own local Kubernetes cluster - [Read More](quickstart-no-k8s).
@@ -30,16 +30,18 @@ Test executions will need to send artifacts and logs to a Cloud Storage bucket
 on GCP so egress traffic to the `storage.googleapis.com` host on port `443`
 should also be allowed.
 
-Testkube includes a background service that checks the latest Agent version by 
-querying the GitHub Releases API. In environments with restricted egress, 
-allow access to `api.github.com` or disable the check by setting 
+Testkube includes a background service that checks the latest Agent version by
+querying the GitHub Releases API. In environments with restricted egress,
+allow access to `api.github.com` or disable the check by setting
 `DISABLE_AGENT_VERSION_CHECK=true` on the Testkube Enterprise API:
+
 ```yaml
 testkube-cloud-api:
   additionalEnv:
     DISABLE_AGENT_VERSION_CHECK: true
 ```
-The check is informational only and does not affect core functionality. 
+
+The check is informational only and does not affect core functionality.
 For offline installations, it is disabled by default.
 
 ### Ingress

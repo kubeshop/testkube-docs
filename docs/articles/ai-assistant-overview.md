@@ -71,12 +71,12 @@ Changing the agent or model takes effect for new messages in the current convers
 
 Every Testkube environment comes with a set of pre-configured AI Agents ready to use:
 
-| Agent | Purpose |
-|-------|---------|
-| **Testkube Helper** | General-purpose assistant with access to all Testkube MCP tools. Ask it anything about your workflows, executions, or environment. |
-| **Troubleshoot** | Specialized in analyzing failed executions — examines logs, artifacts, and execution history to identify root causes and suggest fixes. |
+| Agent                 | Purpose                                                                                                                                                  |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Testkube Helper**   | General-purpose assistant with access to all Testkube MCP tools. Ask it anything about your workflows, executions, or environment.                       |
+| **Troubleshoot**      | Specialized in analyzing failed executions — examines logs, artifacts, and execution history to identify root causes and suggest fixes.                  |
 | **Design & Optimize** | Helps create new Test Workflows and optimize existing ones — generates workflow definitions, suggests improvements, and applies changes (with approval). |
-| **Analyze & Report** | Summarizes execution trends, workflow health, and metrics across your environment into actionable reports. |
+| **Analyze & Report**  | Summarizes execution trends, workflow health, and metrics across your environment into actionable reports.                                               |
 
 These agents are automatically provisioned and cannot be deleted. You can create additional agents
 tailored to your specific needs — see [Defining AI Agents](/articles/defining-ai-agents) and
@@ -89,4 +89,3 @@ tailored to your specific needs — see [Defining AI Agents](/articles/defining-
 - [AI Agent Triggers](/articles/ai-triggers) — Automate agent execution based on workflow events or schedules
 - [Configuring AI Models](/articles/ai-models) — Add custom models
 - [Example Agents](/articles/ai-agent-examples-overview) — Ready-to-use agent configurations for QA and DevOps
-

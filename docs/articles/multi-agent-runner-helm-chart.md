@@ -25,8 +25,8 @@ Created:        08 Jun 26 16:20 -0400 (0s)
 Disabled:       no
 Secret Key:     tkckey_agent_egxyk3yar22586sncd4zeguqmjrn3uqn
 Last Activity:  never
-Last Version:   
-Last Namespace: 
+Last Version:
+Last Namespace:
 Environments:
     my-first-environment (tkcenv_f55409417bbb8618)
 Labels:
@@ -38,17 +38,18 @@ Policy:
 ### Helm install
 
 Use the following command to install the Helm Chart from OCI Registry:
-   ```sh
-   helm upgrade --install \
-     --create-namespace \
-     --namespace my-runner \
-     --set 'runner.id=<your:tkcrun_:runner_id>' \
-     --set 'runner.orgId=<your:tkcorg_:organization_id>' \
-     --set 'runner.envId=<your:tkcenv_:environment_id>' \
-     --set 'runner.secret=<your:tkckey_agent_:key>' \
-     --set 'cloud.url=agent.testkube.io:443' \
-     my-runner oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube-runner --version <version>
-   ```
+
+```sh
+helm upgrade --install \
+  --create-namespace \
+  --namespace my-runner \
+  --set 'runner.id=<your:tkcrun_:runner_id>' \
+  --set 'runner.orgId=<your:tkcorg_:organization_id>' \
+  --set 'runner.envId=<your:tkcenv_:environment_id>' \
+  --set 'runner.secret=<your:tkckey_agent_:key>' \
+  --set 'cloud.url=agent.testkube.io:443' \
+  my-runner oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube-runner --version <version>
+```
 
 You can also use own `values.yaml` file, based on [our defaults](https://github.com/kubeshop/helm-charts/blob/main/charts/testkube-runner/values.yaml):
 
@@ -69,11 +70,11 @@ If you want the runner Deployment itself to be the source of truth for labels an
 managing them through `testkube update agent`), set the corresponding Helm values and run `helm upgrade`
 so the runner pod restarts:
 
-| Helm value                    | Purpose                                                              |
-|-------------------------------|----------------------------------------------------------------------|
-| `runner.register.global`      | Register the runner as a [Global Runner Agent](/articles/test-workflows-running#global-runner-agents). |
-| `runner.register.groupName`   | Register the runner as a [Grouped Runner Agent](/articles/test-workflows-running#grouped-runner-agents) (cannot be combined with `runner.register.global`). |
-| `runner.register.labels`      | Map of labels to publish to the Control Plane. Each key is published with `runner.register.labelPrefix` (default `runner.testkube.io/`) prepended. |
+| Helm value                  | Purpose                                                                                                                                                     |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `runner.register.global`    | Register the runner as a [Global Runner Agent](/articles/test-workflows-running#global-runner-agents).                                                      |
+| `runner.register.groupName` | Register the runner as a [Grouped Runner Agent](/articles/test-workflows-running#grouped-runner-agents) (cannot be combined with `runner.register.global`). |
+| `runner.register.labels`    | Map of labels to publish to the Control Plane. Each key is published with `runner.register.labelPrefix` (default `runner.testkube.io/`) prepended.          |
 
 Example:
 
@@ -121,7 +122,7 @@ This enables you to install the Agent using only `helm`:
      --set 'listener.enabled=true' \
      my-runner oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube-runner --version <version>
    ```
-   
+
 Or with a values file:
 
 ```yaml
@@ -129,9 +130,9 @@ runner:
   enabled: true
   orgId: "<your:tkcorg_:organization_id>"
   envId: "<your:tkcenv_:environment_id>"
-  register: 
+  register:
     token: "<your:tkcapi_:key>"
-  
+
 listener:
   enabled: true
 
@@ -188,7 +189,7 @@ In your `values.yaml` file:
 ```yaml
 execution:
   additionalNamespaces:
-    'custom-namespace':
+    "custom-namespace":
       serviceAccount:
         autoCreate: false # set 'true' to allow parallel steps & services
         # name: my-custom-service-account # you can also use your own service account
@@ -214,20 +215,20 @@ globalTemplate:
   enabled: true
   inline: true
   spec:
-   pod:
-     securityContext:
-     enabled: true
-     fsGroup: 1000650001
-     runAsUser: 1000650001
-   container:
-     securityContext:
-       runAsUser: 1000650001
-       runAsNonRoot: true
+    pod:
+      securityContext:
+      enabled: true
+      fsGroup: 1000650001
+      runAsUser: 1000650001
+    container:
+      securityContext:
+        runAsUser: 1000650001
+        runAsNonRoot: true
 ```
 
 ### Register as a floating Runner Agent
 
-Self-registering Runner Agents are by default assigned a fixed license, if you wish to assign them a floating license 
+Self-registering Runner Agents are by default assigned a fixed license, if you wish to assign them a floating license
 instead you can do as follows:
 
 ```yaml
@@ -260,8 +261,8 @@ See the [Chainsaw Example](/articles/examples/chainsaw-basic) to see how a custo
 
 #### Example: Using the same namespace for Runner Agent and Executions
 
-By default, we deploy both Runner Agent and Executions to the same namespace the Helm Chart is released to. 
-Then, `agent-sa-testkube` and `exec-sa-testkube` are deployed in that namespace. `agent-sa-testkube` has wider permissions and is used by Runner Agent, 
+By default, we deploy both Runner Agent and Executions to the same namespace the Helm Chart is released to.
+Then, `agent-sa-testkube` and `exec-sa-testkube` are deployed in that namespace. `agent-sa-testkube` has wider permissions and is used by Runner Agent,
 `exec-sa-testkube` has smaller permissions and is used by Executions.
 
 #### Example: Avoid ServiceAccount for the executions
@@ -275,12 +276,12 @@ execution:
       autoCreate: false
 ```
 
-This way, the executions will use default or specified ServiceAccount, that likely won't have access to i.e. reading pods (in opposite to auto-created one). 
+This way, the executions will use default or specified ServiceAccount, that likely won't have access to i.e. reading pods (in opposite to auto-created one).
 This blocks the ability of using `services` and `parallel` though, unless you will provide service account name in the spec with
 
 ```yaml
-  pod: 
-    serviceAccountName: "my-name-or-i-e-agent-sa-testkube"
+pod:
+  serviceAccountName: "my-name-or-i-e-agent-sa-testkube"
 ```
 
 :::tip
@@ -289,8 +290,8 @@ Read more about Workflow `pod` configuration at [Test Workflows - Job and Pod Co
 
 #### Example: Run executions in a different namespace than the Runner Agent
 
-For better security, you may isolate the executions to be running in a different namespace than the Runner Agent. This way, you ensure that they 
-cannot read Runner Agent's data (like Agent Token), or anything else. Also, this could help to deploy multiple Runner Agents in the same namespace 
+For better security, you may isolate the executions to be running in a different namespace than the Runner Agent. This way, you ensure that they
+cannot read Runner Agent's data (like Agent Token), or anything else. Also, this could help to deploy multiple Runner Agents in the same namespace
 while having the executions for each of them in a different one.
 
 To achieve that, you can use such Helm Chart values:
@@ -302,6 +303,7 @@ execution:
 ```
 
 In such case:
+
 - `agent-sa-testkube` ServiceAccount will still be deployed in the Helm Chart release namespace,
 - `exec-sa-testkube` ServiceAccount will be deployed in `my-namespace-where-only-executions-should-run` namespace
 
@@ -319,11 +321,11 @@ execution:
 
 #### Example: Multiple Namespaces
 
-To allow Runner Agent to support  
+To allow Runner Agent to support
 
 ```yaml
-  job:
-    namespace: "non-default-namespace"
+job:
+  namespace: "non-default-namespace"
 ```
 
 in the Test Workflow's spec (see [Test Workflows - Job and Pod Configuration](/articles/test-workflows-job-and-pod)), you can provide additional namespaces alongside the default one:
@@ -340,7 +342,7 @@ execution:
 
 ### Listening in additional namespaces
 
-Listener Agents only listen for events in the namespace where they are deployed by default. You can configure 
+Listener Agents only listen for events in the namespace where they are deployed by default. You can configure
 additional namespaces to listen to by setting the `additionalNamespaces` value in the Helm Chart:
 
 ```yaml

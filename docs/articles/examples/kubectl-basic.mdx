@@ -1,7 +1,7 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-import KubectlWorkflow from "../../workflows/kubectl-workflow.md"
-import KubectlRoleBinding from "../../workflows/kubectl-role-binding.md"
+import KubectlWorkflow from "../../workflows/kubectl-workflow.md";
+import KubectlRoleBinding from "../../workflows/kubectl-role-binding.md";
 
 # Validating Kubernetes Clusters with Kubectl
 
@@ -19,7 +19,7 @@ The Testkube service account (`testkube-api-server-tests-job`) needs appropriate
 
 Apply the following YAML to grant the necessary permissions:
 
-<KubectlRoleBinding/>
+<KubectlRoleBinding />
 
 ### Step 2: Verify Service Account
 
@@ -43,7 +43,7 @@ Below is a basic workflow for executing kubectl commands. You can paste this dir
 - Each step uses the `bitnami/kubectl` image which includes kubectl and necessary tools
 - Commands are executed using the `shell` property
 
-<KubectlWorkflow/>
+<KubectlWorkflow />
 
 ## Common Use Cases
 
@@ -192,4 +192,3 @@ Below is a basic workflow for executing kubectl commands. You can paste this dir
     kubectl config view
     kubectl cluster-info
 ```
-

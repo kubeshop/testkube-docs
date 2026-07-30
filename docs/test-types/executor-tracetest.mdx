@@ -1,5 +1,5 @@
 import Admonition from "@theme/Admonition";
-import LegacyWarning from '../articles/_legacy-warning.mdx';
+import LegacyWarning from "../articles/_legacy-warning.mdx";
 
 # Tracetest
 
@@ -7,23 +7,41 @@ import LegacyWarning from '../articles/_legacy-warning.mdx';
 
 Testkube supports running trace-based tests with Tracetest.
 
-<iframe width="100%" height="250" src="https://www.youtube.com/embed/nAp3zYgykok" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe
+  width="100%"
+  height="250"
+  src="https://www.youtube.com/embed/nAp3zYgykok"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
 
 export const ExecutorInfo = () => {
   return (
     <div>
       <Admonition type="info" icon="🎓" title="What is Tracetest?">
         <ul>
-          <li><a href="https://tracetest.io/">Tracetest</a> is a OpenTelemetry based tool that helps you develop and test your distributed applications. It assists you in the development process by enabling you to trigger your code and see the trace as you add OTel instrumentation.</li>
+          <li>
+            <a href="https://tracetest.io/">Tracetest</a> is a OpenTelemetry
+            based tool that helps you develop and test your distributed
+            applications. It assists you in the development process by enabling
+            you to trigger your code and see the trace as you add OTel
+            instrumentation.
+          </li>
         </ul>
         <b>What can I do with Tracetest?</b>
         <ul>
-          <li>Tracetest uses your existing OpenTelemetry traces to power trace-based testing with assertions against your trace data at every point of the request transaction.</li>
+          <li>
+            Tracetest uses your existing OpenTelemetry traces to power
+            trace-based testing with assertions against your trace data at every
+            point of the request transaction.
+          </li>
         </ul>
       </Admonition>
     </div>
   );
-}
+};
 
 <ExecutorInfo />
 
@@ -32,12 +50,13 @@ By using the Testkube Tracetest Executor you can now add Tracetest to the native
 ## **Running a Tracetest Test**
 
 In order to run Tracetest tests using Testkube, you will need to have the following in your Kubernetes cluster:
+
 1. Testkube
 2. Tracetest
 3. An OpenTelemetry Instrumented Service
 
 To install Tracetest, refer to
-[Tracetest's documentation](https://docs.tracetest.io/getting-started/installation/). 
+[Tracetest's documentation](https://docs.tracetest.io/getting-started/installation/).
 
 To create the test in Testkube, you'll need to export your Tracetest `Test Definition`. An example of an exported Tracetest definition looks like the following:
 
@@ -53,13 +72,13 @@ spec:
       url: http://demo-pokemon-api.demo/pokemon?take=20&skip=0
       method: GET
       headers:
-      - key: Content-Type
-        value: application/json
+        - key: Content-Type
+          value: application/json
   specs:
-  - name: Database queries less than 500 ms
-    selector: span[tracetest.span.type="database"]
-    assertions:
-    - attr:tracetest.span.duration  <  500ms
+    - name: Database queries less than 500 ms
+      selector: span[tracetest.span.type="database"]
+      assertions:
+        - attr:tracetest.span.duration  <  500ms
 ```
 
 ### **Add Test to Testkube**

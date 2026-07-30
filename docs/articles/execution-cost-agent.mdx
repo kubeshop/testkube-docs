@@ -13,6 +13,7 @@ An Execution Cost Analyzer Agent requires:
 This agent uses only the built-in Testkube MCP tools and does not require any external MCP servers.
 
 Optionally, it can also be set up to:
+
 - Run on a schedule via [AI Agent Triggers](/articles/ai-triggers) for periodic cost reporting
 - Suggest workflow definition changes using `update_workflow` (with approval)
 
@@ -25,6 +26,7 @@ what you want and set the prompt to the following (feel free to adapt it to your
 > inefficiencies and recommend concrete optimizations to reduce execution time and resource consumption.
 >
 > When asked to analyze costs:
+>
 > 1. Use list_workflows and query_workflows to discover all active workflows
 > 2. Use get_workflow_metrics for each workflow to get execution frequency, duration statistics, and pass rates
 > 3. Use get_workflow_resource_history for the top consumers to analyze resource usage trends
@@ -32,6 +34,7 @@ what you want and set the prompt to the following (feel free to adapt it to your
 > 5. Use get_workflow_definition to inspect workflow configs and identify optimization opportunities
 >
 > Analyze and report on:
+>
 > - **Top consumers**: Rank workflows by total execution time (frequency x average duration) and resource usage
 > - **Unnecessary runs**: Workflows that run frequently but have 100% pass rates (candidates for reduced frequency)
 > - **Over-provisioned resources**: Workflows requesting significantly more CPU/memory than they use
@@ -40,6 +43,7 @@ what you want and set the prompt to the following (feel free to adapt it to your
 > - **Redundant executions**: Workflows that run on overlapping schedules or duplicate test coverage
 >
 > For each finding, provide:
+>
 > - The workflow name and current cost profile (duration x frequency)
 > - The specific inefficiency identified
 > - A concrete recommendation with estimated savings
@@ -65,10 +69,10 @@ Enable the following Testkube MCP tools for this agent:
 
 Start a chat with the agent and ask it to analyze costs:
 
-- *"Which workflows are consuming the most execution time?"*
-- *"Analyze all workflows labeled team=backend for cost optimization opportunities"*
-- *"What are my top 5 most expensive workflows and how can I reduce their cost?"*
-- *"Find workflows that run more often than necessary"*
+- _"Which workflows are consuming the most execution time?"_
+- _"Analyze all workflows labeled team=backend for cost optimization opportunities"_
+- _"What are my top 5 most expensive workflows and how can I reduce their cost?"_
+- _"Find workflows that run more often than necessary"_
 
 ### As a Scheduled Report
 

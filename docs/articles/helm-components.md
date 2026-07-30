@@ -3,56 +3,57 @@
 The Testkube On-Prem Helm Chart consists of the following components.
 
 :::tip
-Check out the [Installation Overview](/articles/install/overview) to see how these components fit into the 
-Testkube architecture and the [Custom Installation](/articles/install/advanced-install) guide for how to configure these components 
+Check out the [Installation Overview](/articles/install/overview) to see how these components fit into the
+Testkube architecture and the [Custom Installation](/articles/install/advanced-install) guide for how to configure these components
 for your specific needs.
 :::
 
 ## Testkube Control Plane
 
 The central component that manages connected Agents.
-* API - A service which runs the REST, Agent gRPC and Websocket APIs for interacting with the Control Plane.
-    * Docker image - [kubeshop/testkube-enterprise-api](https://hub.docker.com/r/kubeshop/testkube-enterprise-api)
-* Dashboard - The web-based UI for managing tests, environments, and users.
-    * Docker image - [kubeshop/testkube-enterprise-ui](https://hub.docker.com/r/kubeshop/testkube-enterprise-ui)
-* Worker Service - A service which handles async operations for artifacts and test executions.
-    * Docker image - [kubeshop/testkube-enterprise-worker-service](https://hub.docker.com/r/kubeshop/testkube-enterprise-worker-service)
-* Dex - A service that is used as an identity provider.
-    * Docker image - [kubeshop/dex](https://hub.docker.com/r/kubeshop/dex)
-* Minio - It is a database that is used for storing artifacts.
-    * Helm chart - Maintained in the [testkube-thirdparty-artifacts](https://github.com/kubeshop/testkube-thirdparty-artifacts) repository.
-    * Docker image - [kubeshop/testkube-minio](https://hub.docker.com/r/kubeshop/testkube-minio)
-* PostgreSQL - It is the primary database used for storing Testkube data.
-    * Recommended deployment - Use the native [CloudNativePG](https://cloudnative-pg.io/) operator for PostgreSQL lifecycle management in Kubernetes.
-    * Helm chart - If needed, supporting artifacts are maintained in the [testkube-thirdparty-artifacts](https://github.com/kubeshop/testkube-thirdparty-artifacts) repository for legacy or transitional setups.
-    * Docker image - [kubeshop/testkube-postgres](https://hub.docker.com/r/kubeshop/testkube-postgres)
-* MongoDB - Legacy database support retained for existing installations and migration workflows.
-    * Helm chart - Maintained in the [testkube-thirdparty-artifacts](https://github.com/kubeshop/testkube-thirdparty-artifacts) repository.
-    * Docker image - [kubeshop/bitnami-mongodb](https://hub.docker.com/r/kubeshop/bitnami-mongodb)
-* NATS - It is a service that is used as a message broker for communication between API and Agents.
-    * Helm chart - Maintained in the [testkube-thirdparty-artifacts](https://github.com/kubeshop/testkube-thirdparty-artifacts) repository.
-    * Docker image - [NATS](https://hub.docker.com/_/nats/tags)
-* Additional images used for running jobs during the chart install:
-    * [kubectl](https://hub.docker.com/r/bitnami/kubectl)
-    * [mongosh](https://hub.docker.com/r/alpine/mongosh) for legacy MongoDB operations
-    * [db-migrations](https://hub.docker.com/repository/docker/kubeshop/testkube-enterprise-api-migrations/tags)
-    * [nats-reloader](https://hub.docker.com/r/natsio/nats-server-config-reloader)
-    * [natsBox](https://hub.docker.com/r/natsio/nats-box)
-    * [promExporter](https://hub.docker.com/r/natsio/prometheus-nats-exporter)
+
+- API - A service which runs the REST, Agent gRPC and Websocket APIs for interacting with the Control Plane.
+  - Docker image - [kubeshop/testkube-enterprise-api](https://hub.docker.com/r/kubeshop/testkube-enterprise-api)
+- Dashboard - The web-based UI for managing tests, environments, and users.
+  - Docker image - [kubeshop/testkube-enterprise-ui](https://hub.docker.com/r/kubeshop/testkube-enterprise-ui)
+- Worker Service - A service which handles async operations for artifacts and test executions.
+  - Docker image - [kubeshop/testkube-enterprise-worker-service](https://hub.docker.com/r/kubeshop/testkube-enterprise-worker-service)
+- Dex - A service that is used as an identity provider.
+  - Docker image - [kubeshop/dex](https://hub.docker.com/r/kubeshop/dex)
+- Minio - It is a database that is used for storing artifacts.
+  - Helm chart - Maintained in the [testkube-thirdparty-artifacts](https://github.com/kubeshop/testkube-thirdparty-artifacts) repository.
+  - Docker image - [kubeshop/testkube-minio](https://hub.docker.com/r/kubeshop/testkube-minio)
+- PostgreSQL - It is the primary database used for storing Testkube data.
+  - Recommended deployment - Use the native [CloudNativePG](https://cloudnative-pg.io/) operator for PostgreSQL lifecycle management in Kubernetes.
+  - Helm chart - If needed, supporting artifacts are maintained in the [testkube-thirdparty-artifacts](https://github.com/kubeshop/testkube-thirdparty-artifacts) repository for legacy or transitional setups.
+  - Docker image - [kubeshop/testkube-postgres](https://hub.docker.com/r/kubeshop/testkube-postgres)
+- MongoDB - Legacy database support retained for existing installations and migration workflows.
+  - Helm chart - Maintained in the [testkube-thirdparty-artifacts](https://github.com/kubeshop/testkube-thirdparty-artifacts) repository.
+  - Docker image - [kubeshop/bitnami-mongodb](https://hub.docker.com/r/kubeshop/bitnami-mongodb)
+- NATS - It is a service that is used as a message broker for communication between API and Agents.
+  - Helm chart - Maintained in the [testkube-thirdparty-artifacts](https://github.com/kubeshop/testkube-thirdparty-artifacts) repository.
+  - Docker image - [NATS](https://hub.docker.com/_/nats/tags)
+- Additional images used for running jobs during the chart install:
+  - [kubectl](https://hub.docker.com/r/bitnami/kubectl)
+  - [mongosh](https://hub.docker.com/r/alpine/mongosh) for legacy MongoDB operations
+  - [db-migrations](https://hub.docker.com/repository/docker/kubeshop/testkube-enterprise-api-migrations/tags)
+  - [nats-reloader](https://hub.docker.com/r/natsio/nats-server-config-reloader)
+  - [natsBox](https://hub.docker.com/r/natsio/nats-box)
+  - [promExporter](https://hub.docker.com/r/natsio/prometheus-nats-exporter)
 
 ## Testkube Agent
 
 A lightweight component that connects to the Control Plane and executes test runs.
 
-* API - a service that runs REST APIs and establishes a connection between Agent and a Control Plane
-    * Helm chart - Bundled as a subchart in the [kubeshop/testkube](https://github.com/kubeshop/helm-charts/tree/main/charts/testkube) Helm charts
-    * Docker image - [kubeshop/testkube-api-server](https://hub.docker.com/r/kubeshop/testkube-api-server)
-* NATS - a message broker.
-    * Helm chart - Used as a NATS subchart in the [kubeshop/testkube](https://github.com/kubeshop/helm-charts/tree/main/charts/testkube) Helm chart.
-    * Docker image - [NATS](https://hub.docker.com/_/nats/tags)
-* Additional images used for running jobs during the chart install:
-    * [kubectl](https://hub.docker.com/r/bitnami/kubectl)
-    * [nats-reloader](https://hub.docker.com/r/natsio/nats-server-config-reloader)
-* Images used to run TestWorkflows:
-    * [testkube-tw-toolkit](https://hub.docker.com/r/kubeshop/testkube-tw-toolkit)
-    * [testkube-tw-init](https://hub.docker.com/r/kubeshop/testkube-tw-init)
+- API - a service that runs REST APIs and establishes a connection between Agent and a Control Plane
+  - Helm chart - Bundled as a subchart in the [kubeshop/testkube](https://github.com/kubeshop/helm-charts/tree/main/charts/testkube) Helm charts
+  - Docker image - [kubeshop/testkube-api-server](https://hub.docker.com/r/kubeshop/testkube-api-server)
+- NATS - a message broker.
+  - Helm chart - Used as a NATS subchart in the [kubeshop/testkube](https://github.com/kubeshop/helm-charts/tree/main/charts/testkube) Helm chart.
+  - Docker image - [NATS](https://hub.docker.com/_/nats/tags)
+- Additional images used for running jobs during the chart install:
+  - [kubectl](https://hub.docker.com/r/bitnami/kubectl)
+  - [nats-reloader](https://hub.docker.com/r/natsio/nats-server-config-reloader)
+- Images used to run TestWorkflows:
+  - [testkube-tw-toolkit](https://hub.docker.com/r/kubeshop/testkube-tw-toolkit)
+  - [testkube-tw-init](https://hub.docker.com/r/kubeshop/testkube-tw-init)

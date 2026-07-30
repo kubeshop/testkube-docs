@@ -1,4 +1,4 @@
-import LegacyWarning from '../articles/_legacy-warning.mdx';
+import LegacyWarning from "../articles/_legacy-warning.mdx";
 
 # KubePug
 
@@ -7,12 +7,12 @@ import LegacyWarning from '../articles/_legacy-warning.mdx';
 [KubePug](https://github.com/kubepug/kubepug) is a kubectl plugin checking for deprecated Kubernetes clusters or deprecated versions of Kubernetes manifests. It can connect to both your cluster directly and it can run on input files.
 For security, Testkube only supports scanning input files via the KubePug executor.
 
-* Default command for this executor: `kubepug`
-* Default arguments for this executor command: `--format=json` `--input-file` `<runPath>`
+- Default command for this executor: `kubepug`
+- Default arguments for this executor command: `--format=json` `--input-file` `<runPath>`
 
 Parameters in `<>` are calculated at test execution:
 
-* `<runPath>` - location of test files
+- `<runPath>` - location of test files
 
 [See more at "Redefining the Prebuilt Executor Command and Arguments" on the Creating Test page.](../articles/creating-tests.mdx#redefining-the-prebuilt-executor-command-and-arguments)
 
@@ -27,9 +27,9 @@ Example input file:
 ```yaml
 apiVersion: v1
 conditions:
-- message: '{"health":"true"}'
-  status: "True"
-  type: Healthy
+  - message: '{"health":"true"}'
+    status: "True"
+    type: Healthy
 kind: ComponentStatus
 metadata:
   creationTimestamp: null

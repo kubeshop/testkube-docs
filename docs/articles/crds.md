@@ -1,25 +1,25 @@
 # Testkube Custom Resources
 
 :::info
-As of Testkube v2.7, Testkube Resources are stored in the Control Plane - [Read More](/articles/testkube-resource-management). 
-CRDs are still used by the [GitOps Agent](/articles/agents-overview#gitops-agents) to sync resources from Kubernetes 
+As of Testkube v2.7, Testkube Resources are stored in the Control Plane - [Read More](/articles/testkube-resource-management).
+CRDs are still used by the [GitOps Agent](/articles/agents-overview#gitops-agents) to sync resources from Kubernetes
 into the Control Plane and by the [Standalone Agent](/articles/install/standalone-agent) for local resource management.
 :::
 
-Testkube defines several [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) 
+Testkube defines several [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
 types for use with [Standalone Agent](/articles/install/standalone-agent) and [GitOps Agent](/articles/agents-overview#gitops-agents) deployments.
 
 The following Resource Group/Versions are available (click for documentation)
 
 - [testworkflows.test.io/v1](crds/testworkflows.testkube.io-v1.mdx)
-- [tests.testkube.io/v1](crds/tests.testkube.io-v1.mdx) 
-- [executor.testkube.io/v1](crds/executor.testkube.io-v1.mdx) 
+- [tests.testkube.io/v1](crds/tests.testkube.io-v1.mdx)
+- [executor.testkube.io/v1](crds/executor.testkube.io-v1.mdx)
 
 The current CRD definitions can be found in the [kubeshop/testkube](https://github.com/kubeshop/testkube) repository.
 
 ## Checking installed CRDs
 
-You can always check the list of all CRDs using `kubectl` configured to point to your Kubernetes cluster 
+You can always check the list of all CRDs using `kubectl` configured to point to your Kubernetes cluster
 with Testkube installed:
 
 ```sh

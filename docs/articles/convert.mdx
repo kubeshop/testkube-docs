@@ -9,10 +9,10 @@ a single run.
 
 ## Prerequisites
 
-| Requirement | Details |
-|---|---|
-| **MongoDB** | A running MongoDB instance containing the source data. The utility connects using the standard MongoDB connection string. |
-| **PostgreSQL** | An empty (or partially migrated) PostgreSQL database. The utility automatically applies any pending Goose schema migrations before writing data. |
+| Requirement                     | Details                                                                                                                                                                    |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **MongoDB**                     | A running MongoDB instance containing the source data. The utility connects using the standard MongoDB connection string.                                                  |
+| **PostgreSQL**                  | An empty (or partially migrated) PostgreSQL database. The utility automatically applies any pending Goose schema migrations before writing data.                           |
 | **Credentials master password** | The same master password that was used to encrypt secrets in the source database. It is required to re-encrypt credentials for PostgreSQL. Must be at least 32 characters. |
 
 ## Quick start
@@ -34,33 +34,33 @@ both. When both are provided the CLI flag takes precedence.
 
 ### Connection settings
 
-| Environment variable | CLI flag | Default | Description |
-|---|---|---|---|
-| `API_MONGO_DSN` | `-mongo_dsn` | *(empty)* | MongoDB connection string. |
-| `API_MONGO_DB` | `-mongo_db` | `testkubecloud` | MongoDB database name. |
-| `API_MONGO_MIN_POOL_SIZE` | `-mongo_min_pool_size` | `0` | Minimum connection pool size for MongoDB. |
-| `API_MONGO_MAX_POOL_SIZE` | `-mongo_max_pool_size` | `100` | Maximum connection pool size for MongoDB. |
-| `API_MONGO_MAX_CONNECTING` | `-mongo_max_connecting` | `2` | Maximum number of connections being established concurrently. |
-| `API_MONGO_READ_PREFERENCE` | `-mongo_read_preference` | `secondaryPreferred` | MongoDB read preference. |
-| `API_MONGO_CONNECTION_TIMEOUT` | `-mongo_connection_timeout` | `5s` | Timeout for establishing a MongoDB connection. |
-| `API_MONGO_CONNECTION_DELAY` | `-mongo_connection_delay` | `1s` | Delay between MongoDB connection retry attempts. |
-| `API_MONGO_CONNECTION_ATTEMPTS` | `-mongo_connection_attempts` | `120` | Number of MongoDB connection retry attempts. |
-| `API_POSTGRES_URL` | `-postgres_url` | *(empty)* | PostgreSQL connection string. |
-| `CREDENTIALS_MASTER_PASSWORD` | `-credentials_master_password` | *(empty)* | Master password for credential encryption/signing. |
+| Environment variable            | CLI flag                       | Default              | Description                                                   |
+| ------------------------------- | ------------------------------ | -------------------- | ------------------------------------------------------------- |
+| `API_MONGO_DSN`                 | `-mongo_dsn`                   | _(empty)_            | MongoDB connection string.                                    |
+| `API_MONGO_DB`                  | `-mongo_db`                    | `testkubecloud`      | MongoDB database name.                                        |
+| `API_MONGO_MIN_POOL_SIZE`       | `-mongo_min_pool_size`         | `0`                  | Minimum connection pool size for MongoDB.                     |
+| `API_MONGO_MAX_POOL_SIZE`       | `-mongo_max_pool_size`         | `100`                | Maximum connection pool size for MongoDB.                     |
+| `API_MONGO_MAX_CONNECTING`      | `-mongo_max_connecting`        | `2`                  | Maximum number of connections being established concurrently. |
+| `API_MONGO_READ_PREFERENCE`     | `-mongo_read_preference`       | `secondaryPreferred` | MongoDB read preference.                                      |
+| `API_MONGO_CONNECTION_TIMEOUT`  | `-mongo_connection_timeout`    | `5s`                 | Timeout for establishing a MongoDB connection.                |
+| `API_MONGO_CONNECTION_DELAY`    | `-mongo_connection_delay`      | `1s`                 | Delay between MongoDB connection retry attempts.              |
+| `API_MONGO_CONNECTION_ATTEMPTS` | `-mongo_connection_attempts`   | `120`                | Number of MongoDB connection retry attempts.                  |
+| `API_POSTGRES_URL`              | `-postgres_url`                | _(empty)_            | PostgreSQL connection string.                                 |
+| `CREDENTIALS_MASTER_PASSWORD`   | `-credentials_master_password` | _(empty)_            | Master password for credential encryption/signing.            |
 
 ### Migration tuning
 
-| Environment variable | CLI flag | Default | Description |
-|---|---|---|---|
-| `CONVERT_BATCH_SIZE` | `-convert_batch_size` | `1000` | Number of records fetched per batch during record-level migrations (users, organisations, environments, etc.). |
-| `CONVERT_BULK_READ_SIZE` | `-convert_bulk_read_size` | `10000` | Number of records fetched per batch during bulk migrations (usage, audit logs, events, executions, etc.). |
-| `CONVERT_BULK_WRITE_SIZE` | `-convert_bulk_write_size` | `100000` | Number of records written per batch during bulk migrations. |
-| `CONVERT_WORKERS` | `-convert_parallel_workers` | `10` | Number of parallel workers used for record-level migration processing. |
-| `CONVERT_DRY_RUN` | `-convert_dry_run` | `false` | When `true`, reads and transforms data but does **not** write to PostgreSQL. Useful for validating the migration before committing. |
-| `CONVERT_SKIP_EXISTING` | `-convert_skip_existing` | `false` | When `true`, silently skips records that already exist in PostgreSQL instead of failing. Useful for resuming an interrupted migration. |
-| `CONVERT_WORK_DIR` | `-convert_work_dir` | *(empty – current directory)* | Directory used for writing error report files. |
-| `CONVERT_SKIP_INTEGRITY_ERRORS` | `-convert_skip_integrity_errors` | `false` | When `true`, skips records that fail integrity checks (e.g. orphaned references) instead of aborting. |
-| `CONVERT_SINCE` | `-convert_since` | *(empty – all records)* | Only include usage records created on or after this date. Format: `YYYY-MM-DD`. |
+| Environment variable            | CLI flag                         | Default                       | Description                                                                                                                            |
+| ------------------------------- | -------------------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `CONVERT_BATCH_SIZE`            | `-convert_batch_size`            | `1000`                        | Number of records fetched per batch during record-level migrations (users, organisations, environments, etc.).                         |
+| `CONVERT_BULK_READ_SIZE`        | `-convert_bulk_read_size`        | `10000`                       | Number of records fetched per batch during bulk migrations (usage, audit logs, events, executions, etc.).                              |
+| `CONVERT_BULK_WRITE_SIZE`       | `-convert_bulk_write_size`       | `100000`                      | Number of records written per batch during bulk migrations.                                                                            |
+| `CONVERT_WORKERS`               | `-convert_parallel_workers`      | `10`                          | Number of parallel workers used for record-level migration processing.                                                                 |
+| `CONVERT_DRY_RUN`               | `-convert_dry_run`               | `false`                       | When `true`, reads and transforms data but does **not** write to PostgreSQL. Useful for validating the migration before committing.    |
+| `CONVERT_SKIP_EXISTING`         | `-convert_skip_existing`         | `false`                       | When `true`, silently skips records that already exist in PostgreSQL instead of failing. Useful for resuming an interrupted migration. |
+| `CONVERT_WORK_DIR`              | `-convert_work_dir`              | _(empty – current directory)_ | Directory used for writing error report files.                                                                                         |
+| `CONVERT_SKIP_INTEGRITY_ERRORS` | `-convert_skip_integrity_errors` | `false`                       | When `true`, skips records that fail integrity checks (e.g. orphaned references) instead of aborting.                                  |
+| `CONVERT_SINCE`                 | `-convert_since`                 | _(empty – all records)_       | Only include usage records created on or after this date. Format: `YYYY-MM-DD`.                                                        |
 
 ## What gets migrated
 
@@ -72,56 +72,56 @@ These collections are read from MongoDB, transformed, and inserted into
 PostgreSQL one batch at a time. Each batch is processed by a pool of parallel
 workers.
 
-| Data | MongoDB collection |
-|---|---|
-| Users | `users` |
-| Organisations | `organizations` |
-| Environments | `environments` |
-| Agents | `agents` |
-| Boards | `boards` |
-| Config | `config` |
-| Credentials | `credentials` |
-| Organisation domains | `organization_domains` |
-| Status pages | `status_pages` |
-| Incidents | `incidents` |
-| Invites | `invites` |
-| Metadata | `metadata` |
-| Resource groups | `resource_groups` |
-| Settings | `settings` |
-| Tokens | `tokens` |
-| Trackers | `trackers` |
-| Views | `views` |
-| Payments history | `organizations` (embedded) |
-| Cron schedules | `cron_schedules` |
-| AI assistants | `ai_assistants` (per org) |
-| LLM providers | `ai_llm_providers` (per org) |
-| MCP servers | `ai_mcp_servers` (per org) |
-| MCP server tokens | `ai_mcp_server_tokens` (per org) |
-| MCP server tools | `ai_mcp_server_tools` (per org) |
-| AI agent triggers | `ai_agent_triggers` (per org) |
-| Assistant sessions | `ai_sessions` (per org) |
-| Session tool calls | `ai_session_tool_calls` (per org) |
-| Agent configs | per org/env |
-| Test workflows | per org/env |
-| Test workflow templates | per org/env |
-| Test triggers | per org/env |
-| Webhooks | per org/env |
-| Webhook templates | per org/env |
+| Data                    | MongoDB collection                |
+| ----------------------- | --------------------------------- |
+| Users                   | `users`                           |
+| Organisations           | `organizations`                   |
+| Environments            | `environments`                    |
+| Agents                  | `agents`                          |
+| Boards                  | `boards`                          |
+| Config                  | `config`                          |
+| Credentials             | `credentials`                     |
+| Organisation domains    | `organization_domains`            |
+| Status pages            | `status_pages`                    |
+| Incidents               | `incidents`                       |
+| Invites                 | `invites`                         |
+| Metadata                | `metadata`                        |
+| Resource groups         | `resource_groups`                 |
+| Settings                | `settings`                        |
+| Tokens                  | `tokens`                          |
+| Trackers                | `trackers`                        |
+| Views                   | `views`                           |
+| Payments history        | `organizations` (embedded)        |
+| Cron schedules          | `cron_schedules`                  |
+| AI assistants           | `ai_assistants` (per org)         |
+| LLM providers           | `ai_llm_providers` (per org)      |
+| MCP servers             | `ai_mcp_servers` (per org)        |
+| MCP server tokens       | `ai_mcp_server_tokens` (per org)  |
+| MCP server tools        | `ai_mcp_server_tools` (per org)   |
+| AI agent triggers       | `ai_agent_triggers` (per org)     |
+| Assistant sessions      | `ai_sessions` (per org)           |
+| Session tool calls      | `ai_session_tool_calls` (per org) |
+| Agent configs           | per org/env                       |
+| Test workflows          | per org/env                       |
+| Test workflow templates | per org/env                       |
+| Test triggers           | per org/env                       |
+| Webhooks                | per org/env                       |
+| Webhook templates       | per org/env                       |
 
 ### Phase 2 – Bulk migrations
 
 High-volume collections are migrated using optimised bulk readers and writers.
 These run sequentially after the record-level phase.
 
-| Data |
-|---|
-| Usage records |
-| Audit log events |
-| Application audit events |
-| Events |
-| Reporting data |
+| Data                                   |
+| -------------------------------------- |
+| Usage records                          |
+| Audit log events                       |
+| Application audit events               |
+| Events                                 |
+| Reporting data                         |
 | Test workflow executions (per org/env) |
-| Sequences (per org/env) |
+| Sequences (per org/env)                |
 
 ## Examples
 
@@ -298,6 +298,7 @@ testkube-cloud-api:
     mongoToPostgresMigration:
       enabled: true
 ```
+
 ### After the migration succeeds
 
 After the Job completes successfully:

@@ -24,6 +24,7 @@ in the Dashboard as described above.
 ### AI Service Helm Configuration
 
 **Prerequisites:**
+
 - OpenAI API key (or compatible LLM API)
 - PostgreSQL database (for conversation persistence) - this can live alongside your main Testkube PostgreSQL database.
 
@@ -34,10 +35,10 @@ testkube-ai-service:
     # Database name (defaults to 'ai' if empty)
     database: "testkube_ai"
     secretRef:
-      name: my-postgres-credentials     # Secret with DB credentials
-      endpointKey: host                 # Key containing DB host
-      usernameKey: username             # Key containing DB username
-      passwordKey: password             # Key containing DB password
+      name: my-postgres-credentials # Secret with DB credentials
+      endpointKey: host # Key containing DB host
+      usernameKey: username # Key containing DB username
+      passwordKey: password # Key containing DB password
   inference:
     defaults:
       secretRef: my-openai-secret
@@ -87,13 +88,13 @@ testkube-ai-service:
 
 ### Default Values Reference
 
-| Setting | Default | Required for AI |
-|---------|---------|-----------------|
-| `testkube-ai-service.enabled` | `false` | Must be `true` |
-| `testkube-cloud-ui.ai.enabled` | `false` | Must be `true` |
-| `testkube-ai-service.postgres.*` | empty | PostgreSQL required |
-| `testkube-ai-service.inference.defaults.secretRef` | empty | API key required |
-| `postgresql.enabled` | `false` | Only if using bundled DB |
+| Setting                                            | Default | Required for AI          |
+| -------------------------------------------------- | ------- | ------------------------ |
+| `testkube-ai-service.enabled`                      | `false` | Must be `true`           |
+| `testkube-cloud-ui.ai.enabled`                     | `false` | Must be `true`           |
+| `testkube-ai-service.postgres.*`                   | empty   | PostgreSQL required      |
+| `testkube-ai-service.inference.defaults.secretRef` | empty   | API key required         |
+| `postgresql.enabled`                               | `false` | Only if using bundled DB |
 
 ## Next Steps
 

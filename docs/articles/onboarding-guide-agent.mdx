@@ -21,6 +21,7 @@ what you want and set the prompt to the following (feel free to adapt it to your
 > to use them.
 >
 > Use these tools to gather information:
+>
 > - list_workflows to discover all available workflows
 > - get_workflow_definition to inspect what a workflow does (images, steps, test type, git source)
 > - get_workflow_metrics to show how often a workflow runs, its pass rate, and health
@@ -30,6 +31,7 @@ what you want and set the prompt to the following (feel free to adapt it to your
 > - build_dashboard_url to generate links to the dashboard for specific workflows or executions
 >
 > When helping someone get oriented:
+>
 > 1. Start with a high-level overview: how many workflows exist, how they're organized (labels, resource groups),
 >    what types of tests are run (API, browser, performance, etc.)
 > 2. Highlight the most important workflows: highest execution frequency, critical test suites, recently active
@@ -56,12 +58,12 @@ Enable the following Testkube MCP tools for this agent:
 
 Start a chat with the agent and ask it questions:
 
-- *"Give me an overview of our test suite"*
-- *"What kinds of tests do we run?"*
-- *"What tests do we have for the payments service?"*
-- *"Which are our most important test workflows?"*
-- *"How are our tests organized?"*
-- *"Show me the dashboard for the smoke test suite"*
+- _"Give me an overview of our test suite"_
+- _"What kinds of tests do we run?"_
+- _"What tests do we have for the payments service?"_
+- _"Which are our most important test workflows?"_
+- _"How are our tests organized?"_
+- _"Show me the dashboard for the smoke test suite"_
 
 This agent is read-only and safe for any team member to use — it will never modify workflows or trigger executions.
 
@@ -73,7 +75,7 @@ Connect additional [MCP Servers](/articles/mcp-servers-for-ai-agents) to make on
   the actual test code, and explain how the tests relate to the codebase. New team members get the
   full picture without switching between tools.
 - **Confluence / Notion** — Pull in team documentation, runbooks, and ADRs so the agent can answer
-  questions like *"What's the testing strategy for the payments service?"* with context beyond just
+  questions like _"What's the testing strategy for the payments service?"_ with context beyond just
   the workflows.
 - **Slack** — Point new members to relevant channels and recent discussions about the test
   infrastructure.

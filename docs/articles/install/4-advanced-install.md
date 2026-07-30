@@ -16,6 +16,7 @@ and to sign the tokens that allow runners to securely retrieve credentials durin
 
 :::warning Important
 Without a master password configured:
+
 - Only plaintext **Variable** credentials can be created — encrypted **Secret** credentials will be rejected.
 - Workflow executions that use credentials will fail because the runner cannot obtain a valid execution token.
 
@@ -30,16 +31,16 @@ starting with v1.13.0, when execution-token based runner authentication was intr
 
 It is used in multiple control-plane paths, not just secret storage:
 
-* Deriving encryption keys for **Secret** credential values
-* Creating and validating **Agent secret keys** for Runner and GitOps agent authentication
-* Signing execution tokens that runners use during workflow execution
+- Deriving encryption keys for **Secret** credential values
+- Creating and validating **Agent secret keys** for Runner and GitOps agent authentication
+- Signing execution tokens that runners use during workflow execution
 
 All of these use the same runtime secret value:
 
-* Environment variable: `CREDENTIALS_MASTER_PASSWORD`
-* Helm values:
-  * `global.credentials.masterPassword.secretKeyRef` (recommended)
-  * `global.credentials.masterPassword.value` (not recommended for production)
+- Environment variable: `CREDENTIALS_MASTER_PASSWORD`
+- Helm values:
+  - `global.credentials.masterPassword.secretKeyRef` (recommended)
+  - `global.credentials.masterPassword.value` (not recommended for production)
 
 If you see the following log message:
 
@@ -89,8 +90,8 @@ derive crypto material, and without it existing encrypted records cannot be decr
 
 For on-prem, this is a critical operational dependency:
 
-* Never rotate it casually
-* If it is lost, encrypted secrets must be recreated and agent secrets reissued
+- Never rotate it casually
+- If it is lost, encrypted secrets must be recreated and agent secrets reissued
 
 `POST /organizations/<organizationId>/agents/<agentIdOrName>/regenerate` regenerates an agent secret key for
 affected agents.
@@ -139,6 +140,7 @@ Over time, as the number of test executions increases, storage space may become 
 
 To manage storage efficiently, Testkube provides an automatic cleanup feature.
 You can configure the cleanup policy using the following Helm parameters:
+
 ```yaml
 testkube-cloud-api:
   api:
@@ -148,8 +150,8 @@ testkube-cloud-api:
         maxStorageSizeGb: 10
 ```
 
-* `retentionDays`: Defines the number of days to retain artifacts. Artifacts older than this period will be automatically deleted.
-* `maxStorageSizeGb`: Sets the maximum allowable storage size in gigabytes. When the storage exceeds this limit, the oldest artifacts will be removed until the storage size is within the specified limit.
+- `retentionDays`: Defines the number of days to retain artifacts. Artifacts older than this period will be automatically deleted.
+- `maxStorageSizeGb`: Sets the maximum allowable storage size in gigabytes. When the storage exceeds this limit, the oldest artifacts will be removed until the storage size is within the specified limit.
 
 ## TLS
 
@@ -219,7 +221,7 @@ testkube-cloud-ui:
 
 testkube-ai-service:
   ingress:
-    annotations: 
+    annotations:
       nginx.ingress.kubernetes.io/configuration-snippet: *securityHeaders
 ```
 
@@ -229,7 +231,7 @@ It's possible to implement same headers with other ingress controllers or traffi
 
 ### Bootstrap Member Mapping
 
-By default, Testkube will automatically add new users as members to the default Organizations when they get invited. 
+By default, Testkube will automatically add new users as members to the default Organizations when they get invited.
 You can change the bootstrap configuration to change this behavior programmatically.
 
 The simplified configuration is as follows. It creates a default org and environment and new users will automatically join as admin members:
@@ -243,8 +245,8 @@ testkube-cloud-api:
       bootstrapAdmin: <you@example.com>
 ```
 
-Alternatively, you can use the full advanced configuration for more options. The following example creates an organization with 
-two environments. New users will automatically join as members of the default organizations and be added to specified environments 
+Alternatively, you can use the full advanced configuration for more options. The following example creates an organization with
+two environments. New users will automatically join as members of the default organizations and be added to specified environments
 and teams. Note that this will only happen on the first sign in. Afterwards, you can manage users through Testkube's dashboard, unless
 you use SCIM to manage your SSO integration - [Read More](/articles/scim).
 
@@ -358,8 +360,8 @@ spec:
     - conditions:
         - prefix: /
       timeoutPolicy:
-        idle: 60s        # OK to set
-        response: infinity  # MUST be infinity for gRPC streaming
+        idle: 60s # OK to set
+        response: infinity # MUST be infinity for gRPC streaming
       services:
         - name: testkube-enterprise-api
           port: 8089
@@ -367,18 +369,18 @@ spec:
 ```
 
 **Why?**
+
 - `timeoutPolicy.response` covers the time from the end of the client request to the end of the upstream response. Envoy defaults this to 15s, which is not compatible with streaming responses (like gRPC streams) and will kill the connection.
 - See [Contour HTTPProxy docs](https://projectcontour.io/docs/v1.4.0/httpproxy/) and [Envoy timeout FAQ](https://www.envoyproxy.io/docs/envoy/latest/faq/configuration/timeouts#route-timeouts) for more details.
 
-
-## Multi-namespace Agent Installation 
+## Multi-namespace Agent Installation
 
 It is possible to deploy multiple Testkube Agent instances into the same Kubernetes cluster. Please put the following configuration to your `values.yaml` when deploying another agent:
 
 ```yaml
 testkube-api:
   multinamespace:
-     enabled: true
+    enabled: true
 ```
 
 By default, a [Listener Agent](/articles/agents-overview#listener-agents) monitors events across the entire Kubernetes cluster to trigger the execution of a Test Workflow with the [Kubernetes Event Triggers](/articles/test-triggers)
@@ -394,7 +396,7 @@ testkube-agent:
       - namespace3
 ```
 
-Note: The naming is a bit counterintuitive, but this instructs Testkube to stop watching all namespaces and to only observe the namespaces listed under `additionalNamespaces` _in 
+Note: The naming is a bit counterintuitive, but this instructs Testkube to stop watching all namespaces and to only observe the namespaces listed under `additionalNamespaces` _in
 addition to_ the namespace where Testkube is installed. No ClusterRole will be created, instead you will have Roles for each specified namespace.
 
 ## Kubernetes Namespaces
@@ -407,8 +409,8 @@ The Testkube agent creates Kubernetes jobs when executing a test workflow. By de
 testkube-agent:
   testkube-api:
     executionNamespaces:
-      - namespace: ns1 
-      - namespace: ns2 
+      - namespace: ns1
+      - namespace: ns2
 ```
 
 ### Namespaces for Testkube Custom Resources
@@ -435,35 +437,36 @@ To enable this, update your `values.yaml` as follows:
 global:
   postgres:
     secretRef: #credentials k8s secret that connects the services to Postgres database
-      name: 'testkube-enterprise-postgresql-app'
-      endpointKey: 'host'
-      usernameKey: 'username'
-      passwordKey: 'password'
-      
+      name: "testkube-enterprise-postgresql-app"
+      endpointKey: "host"
+      usernameKey: "username"
+      passwordKey: "password"
+
 cloudnative-pg:
   enabled: true #install the CloudNativePG operator
-  
+
 postgresqlCluster:
   enabled: true #creates a CloudNativePG Cluster resource
-  
+
 mongodb:
   enabled: false #disables MongoDB chart installation
-  
-testkube-cloud-api: 
+
+testkube-cloud-api:
   api:
     mongo:
       enabled: false #disable MongoDB for the cloud API service
     postgres:
       enabled: true #enable PostgreSQL for the cloud API service
-      dsn: '' #leave empty when connection details come from global.postgres.secretRef
+      dsn: "" #leave empty when connection details come from global.postgres.secretRef
 testkube-worker-service:
   api:
     mongo:
       enabled: false #disable MongoDB for the worker service
     postgres:
       enabled: true #enable PostgreSQL for the worker service
-      dsn: '' #leave empty when connection details come from global.postgres.secretRef
+      dsn: "" #leave empty when connection details come from global.postgres.secretRef
 ```
+
 :::note
 `global.postgres` provides shared connection settings only. You still need the testkube-cloud-api.api and testkube-worker-service.api blocks to explicitly switch those services from MongoDB to PostgreSQL, and dsn: "" ensures they inherit correct global PostgreSQL config.
 :::
@@ -477,7 +480,8 @@ Do not enable both `postgresql.enabled` (standard chart installation) and `postg
 :::
 
 #### Migrating Testkube Enterprise PostgreSQL to the CloudNativePG Operator
-Moving from the bundled Bitnami PostgreSQL chart to CloudNativePG is a breaking infrastructure change for existing installations. 
+
+Moving from the bundled Bitnami PostgreSQL chart to CloudNativePG is a breaking infrastructure change for existing installations.
 
 The resource model changes from a Helm-managed PostgreSQL `StatefulSet` to an operator-managed PostgreSQL `Cluster`, so this is not a direct in-place database upgrade.
 
@@ -492,7 +496,7 @@ The resource model changes from a Helm-managed PostgreSQL `StatefulSet` to an op
 
 **Treat this migration as a database migration, not just a Helm upgrade.**
 
-#### Using an external PostgreSQL instance 
+#### Using an external PostgreSQL instance
 
 You can easily connect PostgreSQL to an external database by creating a Kubernetes secret with the database connection details and wiring it into `global.postgres.secretRef`. Optionally, you can also use `global.postgres.dsn` instead of separate secret-based fields.
 
@@ -533,7 +537,7 @@ testkube-api:
 
 #### MongoDB upgrade from 8.0.15 to 8.2.5
 
-Starting with chart version `2.329.0`, MongoDB is upgraded to `8.2.3` and in the later versions to `8.2.5`.  This is a **breaking change** for installations that are not already running MongoDB `8.0.x`, because MongoDB requires the upgrade path to go through `8.0` before moving to `8.2.x`.
+Starting with chart version `2.329.0`, MongoDB is upgraded to `8.2.3` and in the later versions to `8.2.5`. This is a **breaking change** for installations that are not already running MongoDB `8.0.x`, because MongoDB requires the upgrade path to go through `8.0` before moving to `8.2.x`.
 
 To upgrade safely, you must first ensure they you on at least chart version `2.326.3`, which includes MongoDB `8.0.15`. Only after that should you upgrade to the latest chart version.
 
@@ -550,6 +554,7 @@ mongodb:
   preUpgradeFCVJob:
     enabled: true
 ```
+
 **How it works**
 
 When the FCV jobs are enabled:
@@ -617,10 +622,10 @@ If you want to replace Dex by other Identity Provider, ensure you have a project
 Some installations have customized the Testkube Control Plane URL sub-domains, by default is `dashboard`, `api`, `agent`, and `storage`. Take that in count to configure the **Redirect URL** and **Allowed External Redirect URLs**.
 :::
 
-* Type: Web Application.
-* Redirect URL: `https://api.<your-testkube-domain>/auth/callback`.
-* Allowed External Redirect URLs: `https://dashboard.<your-testkube-domain>`.
-* Scopes: openid, email, groups, profile, offline_access.
+- Type: Web Application.
+- Redirect URL: `https://api.<your-testkube-domain>/auth/callback`.
+- Allowed External Redirect URLs: `https://dashboard.<your-testkube-domain>`.
+- Scopes: openid, email, groups, profile, offline_access.
 
 Finally ensure your Identity Provider is well configured for Testkube platform with the following values:
 

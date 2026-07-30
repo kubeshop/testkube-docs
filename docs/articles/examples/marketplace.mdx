@@ -9,21 +9,21 @@ and more — ready to deploy and run in minutes.
 
 The Marketplace organizes workflows by infrastructure type:
 
-| Category | Components | Examples |
-|----------|------------|----------|
-| **Databases** | PostgreSQL, MySQL, MongoDB, Redis | Connectivity checks, health validation |
-| **Messaging** | Kafka, RabbitMQ, NATS | Broker connectivity, topic validation |
-| **Networking** | Ingress controllers, Service mesh | Endpoint health, ingress validation |
-| **Storage** | MinIO, Elasticsearch, Persistent Volumes | PVC binding, attachment checks |
-| **Observability** | Prometheus, Grafana, Jaeger | Monitoring stack validation |
-| **Security** | Vault, cert-manager | Certificate and secret management checks |
-| **Kubernetes Core** | Pods, StatefulSets, Namespaces | Resource health, namespace scoping |
+| Category            | Components                               | Examples                                 |
+| ------------------- | ---------------------------------------- | ---------------------------------------- |
+| **Databases**       | PostgreSQL, MySQL, MongoDB, Redis        | Connectivity checks, health validation   |
+| **Messaging**       | Kafka, RabbitMQ, NATS                    | Broker connectivity, topic validation    |
+| **Networking**      | Ingress controllers, Service mesh        | Endpoint health, ingress validation      |
+| **Storage**         | MinIO, Elasticsearch, Persistent Volumes | PVC binding, attachment checks           |
+| **Observability**   | Prometheus, Grafana, Jaeger              | Monitoring stack validation              |
+| **Security**        | Vault, cert-manager                      | Certificate and secret management checks |
+| **Kubernetes Core** | Pods, StatefulSets, Namespaces           | Resource health, namespace scoping       |
 
 ## Using the Marketplace from the Dashboard
 
-The Testkube Dashboard includes a built-in wizard for browsing and importing workflows directly from the Marketplace 
+The Testkube Dashboard includes a built-in wizard for browsing and importing workflows directly from the Marketplace
 When creating a new TestWorkflow, select **"Create from Marketplace"** to browse available workflows, see their
-documentation, and configure parameters before deploying - 
+documentation, and configure parameters before deploying -
 see [Create From Catalog](/articles/test-workflows-create-wizard#infrastructure-validation) for more details.
 
 ![Create From Marketplace](images/marketplace-create-from-catalog.png)
@@ -199,30 +199,30 @@ spec:
       description: "Redis database number"
 
   steps:
-  - name: "Validate Redis Connectivity"
-    run:
-      image: docker.io/library/redis:7-alpine@sha256:ee64a64...
-      shell: |
-        echo "Target: {{ config.host }}:{{ config.port }}"
+    - name: "Validate Redis Connectivity"
+      run:
+        image: docker.io/library/redis:7-alpine@sha256:ee64a64...
+        shell: |
+          echo "Target: {{ config.host }}:{{ config.port }}"
 
-        REDIS_ARGS="-h {{ config.host }} -p {{ config.port }} -n {{ config.db }}"
+          REDIS_ARGS="-h {{ config.host }} -p {{ config.port }} -n {{ config.db }}"
 
-        # PING test
-        RESULT=$(redis-cli $REDIS_ARGS PING 2>&1)
-        if [ "$RESULT" = "PONG" ]; then
-          echo "✓ PING successful"
-        else
-          echo "✗ PING failed: $RESULT"
-          exit 1
-        fi
+          # PING test
+          RESULT=$(redis-cli $REDIS_ARGS PING 2>&1)
+          if [ "$RESULT" = "PONG" ]; then
+            echo "✓ PING successful"
+          else
+            echo "✗ PING failed: $RESULT"
+            exit 1
+          fi
 
-        # SET / GET / DEL operations
-        TEST_KEY="testkube:validation:$(date +%s)"
-        redis-cli $REDIS_ARGS SET "$TEST_KEY" "test-value" EX 60
-        redis-cli $REDIS_ARGS GET "$TEST_KEY"
-        redis-cli $REDIS_ARGS DEL "$TEST_KEY"
+          # SET / GET / DEL operations
+          TEST_KEY="testkube:validation:$(date +%s)"
+          redis-cli $REDIS_ARGS SET "$TEST_KEY" "test-value" EX 60
+          redis-cli $REDIS_ARGS GET "$TEST_KEY"
+          redis-cli $REDIS_ARGS DEL "$TEST_KEY"
 
-        echo "✓ Redis Connectivity Validation Passed"
+          echo "✓ Redis Connectivity Validation Passed"
 ```
 
 All Marketplace workflows follow this pattern: standardized metadata labels and annotations for discovery,
@@ -234,20 +234,20 @@ Marketplace workflows use standardized metadata so they can be indexed and filte
 
 ### Labels
 
-| Label | Purpose | Values |
-|-------|---------|--------|
-| `marketplace.testkube.io/category` | Infrastructure type | `databases`, `messaging`, `networking`, `storage`, `observability`, `security`, `other` |
-| `marketplace.testkube.io/component` | Specific component | `redis`, `postgresql`, `kafka`, etc. |
-| `marketplace.testkube.io/validation-type` | What's being validated | `connectivity`, `health`, `performance`, `security` |
+| Label                                     | Purpose                | Values                                                                                  |
+| ----------------------------------------- | ---------------------- | --------------------------------------------------------------------------------------- |
+| `marketplace.testkube.io/category`        | Infrastructure type    | `databases`, `messaging`, `networking`, `storage`, `observability`, `security`, `other` |
+| `marketplace.testkube.io/component`       | Specific component     | `redis`, `postgresql`, `kafka`, etc.                                                    |
+| `marketplace.testkube.io/validation-type` | What's being validated | `connectivity`, `health`, `performance`, `security`                                     |
 
 ### Annotations
 
-| Annotation | Purpose |
-|------------|---------|
+| Annotation                             | Purpose                                    |
+| -------------------------------------- | ------------------------------------------ |
 | `marketplace.testkube.io/display-name` | Human-readable name shown in the Dashboard |
-| `marketplace.testkube.io/description` | What the workflow validates |
-| `marketplace.testkube.io/icon` | Icon URL for UI display |
-| `marketplace.testkube.io/tags` | Search keywords |
+| `marketplace.testkube.io/description`  | What the workflow validates                |
+| `marketplace.testkube.io/icon`         | Icon URL for UI display                    |
+| `marketplace.testkube.io/tags`         | Search keywords                            |
 
 ## Security
 

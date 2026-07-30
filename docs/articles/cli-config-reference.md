@@ -13,14 +13,14 @@ The Testkube CLI stores its configuration in a `~/.testkube/config.json` file wi
    "dashboardName":"testkube-dashboard",
    "dashboardPort":8080,
    "cloudContext":{
-      
+
    },
    "master":{
       "features":{
          "LogsV2":false
       },
       "uris":{
-         
+
       }
    }
 }

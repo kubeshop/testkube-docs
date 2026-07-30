@@ -17,11 +17,11 @@ The [Testkube Agent](https://github.com/kubeshop/testkube) is the core open-sour
 
 The repository includes detailed guides that cover everything you need to contribute effectively:
 
-| Guide | What it covers |
-|-------|---------------|
+| Guide                                                                             | What it covers                                                                                      |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | [CONTRIBUTING.md](https://github.com/kubeshop/testkube/blob/main/CONTRIBUTING.md) | Contribution workflow, coding standards, commit conventions, PR process, and a codebase walkthrough |
-| [DEVELOPMENT.md](https://github.com/kubeshop/testkube/blob/main/DEVELOPMENT.md) | Local development setup with Tilt, live reload, debugging, and day-to-day workflows |
-| [ARCHITECTURE.md](https://github.com/kubeshop/testkube/blob/main/ARCHITECTURE.md) | High-level system design — API server, controllers, storage layer, event system, CRDs, and CLI |
+| [DEVELOPMENT.md](https://github.com/kubeshop/testkube/blob/main/DEVELOPMENT.md)   | Local development setup with Tilt, live reload, debugging, and day-to-day workflows                 |
+| [ARCHITECTURE.md](https://github.com/kubeshop/testkube/blob/main/ARCHITECTURE.md) | High-level system design — API server, controllers, storage layer, event system, CRDs, and CLI      |
 
 ## Finding Something to Work On
 

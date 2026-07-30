@@ -16,18 +16,18 @@ paths:
       description: Deletes test workflow executions
       operationId: deleteTestWorkflowExecutions
       responses:
-        '204':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
+        "204":
+          $ref: "./components.yaml#/components/responses/NoContent"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/TestWorkflowName'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/TestWorkflowName"
   /organizations/{id}/environments/{environmentID}/test-workflows/{testWorkflowName}/credentials:
     get:
       summary: List credentials for the test workflow
@@ -49,7 +49,7 @@ paths:
             enum:
               - all
       responses:
-        '200':
+        "200":
           description: Response
           content:
             application/json:
@@ -59,13 +59,13 @@ paths:
                   elements:
                     type: array
                     items:
-                      $ref: './components.yaml#/components/schemas/Credential'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+                      $ref: "./components.yaml#/components/schemas/Credential"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     post:
@@ -102,28 +102,28 @@ paths:
                 - name
         required: true
       responses:
-        '201':
+        "201":
           description: Response
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/Credential'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
-        '409':
-          $ref: './components.yaml#/components/responses/Conflict'
+                $ref: "./components.yaml#/components/schemas/Credential"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
+        "409":
+          $ref: "./components.yaml#/components/responses/Conflict"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/TestWorkflowName'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/TestWorkflowName"
   /organizations/{id}/environments/{environmentID}/test-workflows/{testWorkflowName}/credentials/{credentialName}:
     get:
       summary: Get credential for the test workflow
@@ -132,14 +132,14 @@ paths:
         secrets will not.
       operationId: getWorkflowCredential
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/Credential'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "200":
+          $ref: "./components.yaml#/components/responses/Credential"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     delete:
@@ -147,14 +147,14 @@ paths:
       description: Delete credential for the specified test workflow.
       operationId: deleteWorkflowCredential
       responses:
-        '204':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "204":
+          $ref: "./components.yaml#/components/responses/NoContent"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     patch:
@@ -174,23 +174,23 @@ paths:
                 - base64
         required: true
       responses:
-        '204':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "204":
+          $ref: "./components.yaml#/components/responses/NoContent"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
-      - $ref: './components.yaml#/components/parameters/TestWorkflowName'
-      - $ref: './components.yaml#/components/parameters/CredentialName'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"
+      - $ref: "./components.yaml#/components/parameters/TestWorkflowName"
+      - $ref: "./components.yaml#/components/parameters/CredentialName"
   /organizations/{id}/environments/{environmentID}/test-workflows/definitions:
     get:
       summary: Get workflow definitions in bulk
@@ -215,7 +215,7 @@ paths:
             maximum: 100
             default: 50
       responses:
-        '200':
+        "200":
           description: Map of workflow name to YAML definition
           content:
             application/json:
@@ -224,16 +224,16 @@ paths:
                 type: object
                 additionalProperties:
                   type: string
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '500':
-          $ref: './components.yaml#/components/responses/InternalServerError'
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "500":
+          $ref: "./components.yaml#/components/responses/InternalServerError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/EnvironmentID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/EnvironmentID"

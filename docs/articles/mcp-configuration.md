@@ -4,10 +4,11 @@ This guide provides configuration examples for integrating the Testkube MCP Serv
 
 :::tip
 Before configuring your AI tools, make sure you've set up the Testkube MCP Server using one of these methods:
+
 - **[Hosted Endpoint](./mcp-hosted)** (Recommended - no installation required)
 - **[CLI Setup](./mcp-cli)** (For local development)
 - **[Docker Setup](./mcp-docker)** (For containerized deployments)
-:::
+  :::
 
 ## GitHub Copilot (VS Code)
 
@@ -36,25 +37,25 @@ GitHub Copilot with Agent mode in VS Code provides excellent agentic capabilitie
 
 ### Using the Hosted Endpoint with API Token
 
-   If you prefer using an API token (e.g., for shared or automated setups):
+If you prefer using an API token (e.g., for shared or automated setups):
 
-   ```json
-   {
-     "mcpServers": {
-       "testkube": {
-         "url": "https://api.testkube.io/organizations/tkcorg_YOUR_ORG_ID/environments/tkcenv_YOUR_ENV_ID/mcp",
-         "transport": {
-           "type": "sse"
-         },
-         "headers": {
-           "Authorization": "Bearer YOUR_API_TOKEN_HERE"
-         }
-       }
-     }
-   }
-   ```
+```json
+{
+  "mcpServers": {
+    "testkube": {
+      "url": "https://api.testkube.io/organizations/tkcorg_YOUR_ORG_ID/environments/tkcenv_YOUR_ENV_ID/mcp",
+      "transport": {
+        "type": "sse"
+      },
+      "headers": {
+        "Authorization": "Bearer YOUR_API_TOKEN_HERE"
+      }
+    }
+  }
+}
+```
 
-   Replace `tkcorg_YOUR_ORG_ID`, `tkcenv_YOUR_ENV_ID`, and `YOUR_API_TOKEN_HERE` with your actual values.
+Replace `tkcorg_YOUR_ORG_ID`, `tkcenv_YOUR_ENV_ID`, and `YOUR_API_TOKEN_HERE` with your actual values.
 
 2. **Restart VS Code** to load the new configuration
 
@@ -158,7 +159,7 @@ Create a test workflow that checks my REST API endpoints, then run it and show m
 Look at my recent test failures and help me understand what's causing them. Check the logs and artifacts.
 ```
 
-## Claude 
+## Claude
 
 ### Claude Desktop
 
@@ -205,11 +206,18 @@ Claude Desktop's `claude_desktop_config.json` only supports **local stdio server
        "testkube": {
          "command": "docker",
          "args": [
-           "run", "--rm", "-i",
-           "-e", "TK_ACCESS_TOKEN=YOUR_API_TOKEN_HERE",
-           "-e", "TK_ORG_ID=tkcorg_YOUR_ORG_ID",
-           "-e", "TK_ENV_ID=tkcenv_YOUR_ENV_ID",
-           "kubeshop/testkube-mcp-server:latest", "mcp", "serve"
+           "run",
+           "--rm",
+           "-i",
+           "-e",
+           "TK_ACCESS_TOKEN=YOUR_API_TOKEN_HERE",
+           "-e",
+           "TK_ORG_ID=tkcorg_YOUR_ORG_ID",
+           "-e",
+           "TK_ENV_ID=tkcenv_YOUR_ENV_ID",
+           "kubeshop/testkube-mcp-server:latest",
+           "mcp",
+           "serve"
          ]
        }
      }

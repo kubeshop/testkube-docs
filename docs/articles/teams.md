@@ -22,7 +22,7 @@ Select the [Create a new team] button in the overview above, you will be prompte
 ## Team Settings
 
 Selecting an existing team or creating a new one takes you to the Team Settings page which allows you to configure
-the name, description, and Team Members (the slug cannot be changed). There is also an option to delete the Team at 
+the name, description, and Team Members (the slug cannot be changed). There is also an option to delete the Team at
 the bottom.
 
 ![Team Details](images/team-details.png)

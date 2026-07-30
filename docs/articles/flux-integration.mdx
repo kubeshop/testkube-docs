@@ -22,18 +22,18 @@ flowchart LR
         app["apps/"]
         tests["tests/"]
     end
-    
+
     subgraph flux["Flux"]
         ks1["App Kustomization"]
         ks2["Tests Kustomization"]
     end
-    
+
     subgraph cluster["Cluster"]
         deploy["Deployments"]
         tw["TestWorkflows"]
         trigger["TestTriggers"]
     end
-    
+
     app --> ks1 --> deploy
     tests --> ks2 --> tw
     tests --> ks2 --> trigger

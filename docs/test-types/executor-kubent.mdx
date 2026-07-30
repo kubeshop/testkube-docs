@@ -1,4 +1,4 @@
-import LegacyWarning from '../articles/_legacy-warning.mdx';
+import LegacyWarning from "../articles/_legacy-warning.mdx";
 
 # Kube no trouble
 
@@ -34,9 +34,9 @@ metadata:
   name: kubent-reader
   namespace: testkube
 rules:
-- apiGroups: ["*"]
-  resources: ["*"]
-  verbs: ["get", "list"]
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["get", "list"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -44,9 +44,9 @@ metadata:
   name: kubent-read-everything
   namespace: testkube
 subjects:
-- kind: ServiceAccount
-  name: kubent
-  namespace: testkube
+  - kind: ServiceAccount
+    name: kubent
+    namespace: testkube
 roleRef:
   kind: ClusterRole
   name: kubent-reader
@@ -64,7 +64,7 @@ Testkube allows you to override the Job template that will be used to run the te
 ```yaml title="job-template.yaml"
 apiVersion: batch/v1
 kind: Job
-metadata: 
+metadata:
   name: "{{ .Name }}"
   namespace: "{{ .Namespace }}"
 spec:
@@ -83,7 +83,7 @@ testkube update executor --name kubent-executor --job-template job-template.yaml
 
 ### Step 4 - Create a test
 
-```sh 
+```sh
 testkube create test --name kubent-test --type kubent
 ```
 

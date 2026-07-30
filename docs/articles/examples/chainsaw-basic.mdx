@@ -1,6 +1,7 @@
-import SimpleChainsaw from "../../workflows/simple-chainsaw-workflow.md"
+import SimpleChainsaw from "../../workflows/simple-chainsaw-workflow.md";
 
 # Basic Chainsaw Example
+
 [Chainsaw](https://github.com/kyverno/chainsaw.git) is an open-source tool initially developed to define and run Kyverno end-to-end tests. It can test any Kubernetes objects.
 
 Below is a simple workflow for executing a Chainsaw test available on [GitHub](https://github.com/cerebro1/chainsaw-testkube-demo.git). You can paste this directly into the
@@ -8,10 +9,10 @@ YAML of an existing or new test, just make sure to update the `name` and `namesp
 
 - The `spec.content` property defines the path to the Chainsaw test in a GitHub repository.
 - The `spec.container` property uses the official Chainsaw image to set up test environment.
-- The `spec.steps` property defines a single step that runs the `chainsaw test <test path>` test command which generates a 
+- The `spec.steps` property defines a single step that runs the `chainsaw test <test path>` test command which generates a
   JUnit-style XML Report which Testkube can visualise accordingly ([Read More](/articles/test-workflows-reports))
 
-<SimpleChainsaw/>
+<SimpleChainsaw />
 
 After execution, you can see the log output from the Chainsaw execution under the "Log Output" panel:
 
@@ -21,11 +22,11 @@ If your test produced a JUnit report it is available under the JUnit Report tab 
 
 ## Using a custom ServiceAccount
 
-Chainsaw tests attempt to create a temporary namespace to which they deploy resources to be asserted. The default 
+Chainsaw tests attempt to create a temporary namespace to which they deploy resources to be asserted. The default
 ServiceAccount used by Testkube to run Workflows does not have permissions to create/get/delete namespaces, requiring
 you to define a corresponding ServiceAccount and use that in your Chainsaw Workflow (as shown on lines 12-13 in the example above).
 
-Use kubectl to apply the following configuration to the cluster where the Testkube Agent is running. 
+Use kubectl to apply the following configuration to the cluster where the Testkube Agent is running.
 
 ```yaml
 apiVersion: v1
@@ -45,7 +46,7 @@ rules:
       - delete
       - get
     apiGroups:
-      - ''
+      - ""
     resources:
       - namespaces
 ---

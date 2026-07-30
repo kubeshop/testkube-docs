@@ -40,11 +40,11 @@ image: "mcr.microsoft.com/playwright:v{{ config.version }}"
 By surrounding embedded expressions within brackets `[ ]`, you can dynamically generate array property values. In the example below, the `git.content` paths are taken from a comma-separate config value:
 
 ```yaml
- content:
-    git:
-      uri: https://github.com/kubeshop/testkube
-      revision: main
-      paths: ["{{ split(config.paths) }}"]
+content:
+  git:
+    uri: https://github.com/kubeshop/testkube
+    revision: main
+    paths: ["{{ split(config.paths) }}"]
 ```
 
 ### Configurable K6 Script

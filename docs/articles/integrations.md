@@ -1,6 +1,7 @@
 # Testkube Integrations Overview
 
-Testkube can be integrated into existing workflows and infrastructure in several ways, including 
+Testkube can be integrated into existing workflows and infrastructure in several ways, including
+
 - Native integrations
 - The [Testkube CLI](/articles/install/cli).
 - The [Testkube API](/openapi/overview).

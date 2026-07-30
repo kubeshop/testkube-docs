@@ -6,9 +6,9 @@ Usually, if possible and reasonable we try to keep backward compatibility.
 
 ## List of Testkube Deprecations
 
-### Since `v1.16.16` Internal `/results` Route 
+### Since `v1.16.16` Internal `/results` Route
 
-The reason for deprecation was a Fiber (https://gofiber.io/) security update disallowing the use of `Mount` in a simple way. 
+The reason for deprecation was a Fiber (https://gofiber.io/) security update disallowing the use of `Mount` in a simple way.
 Also **route** is not used by Testkube internally anymore.
 
 As a workaround users who want to configure their own ingresses should use the `/` route instead.

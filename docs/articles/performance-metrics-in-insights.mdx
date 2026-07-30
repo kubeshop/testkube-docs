@@ -1,6 +1,6 @@
 # Performance Metrics
 
-Testkube automatically collects performance metrics from major performance testing tools; [k6](#k6-summary-integration), 
+Testkube automatically collects performance metrics from major performance testing tools; [k6](#k6-summary-integration),
 [Artillery](#artillery-report-integration), and [JMeter](#jmeter-statistics-integration) are currently supported; the sections below describe how to export reports and collect them as workflow artifacts for each tool. Ready-to-run workflows are in the [Basic K6](/articles/examples/k6-basic), [Basic Artillery](/articles/examples/artillery-basic), and [Basic JMeter](/articles/examples/jmeter-basic) examples.
 
 For other tools, or when you need metrics that do not map to a built-in report format, use [Influx Line Protocol](/articles/custom-metrics-in-insights) instead.
@@ -242,7 +242,7 @@ Each performance tool reports latency, throughput, and errors with its own field
 compare the same measure across k6, Artillery, and JMeter - and across executions that switched tools — Testkube also derives a
 small, curated set of **canonical metrics** when it ingests a performance report.
 
-Canonical metrics are produced *in addition* to the raw per-tool series described above. The original tool-specific metrics
+Canonical metrics are produced _in addition_ to the raw per-tool series described above. The original tool-specific metrics
 are always preserved; the canonical layer simply adds normalized counterparts with stable keys and consistent units. Only a
 curated subset of metrics has a canonical counterpart—most raw keys (for example `http_req_blocked_*` or `iteration_duration_*`)
 intentionally have none.
@@ -262,18 +262,18 @@ same canonical key can keep one series per tool instead of merging measurements 
 
 ### How Each Tool Maps to Canonical Metrics
 
-| Source tool | Source metric                                       | Canonical metric | Notes                                  |
-| ----------- | --------------------------------------------------- | ---------------- | -------------------------------------- |
-| k6          | `http_req_duration_p95_ms`                          | `latency_p95_ms` | percentile reported by the tool        |
-| k6          | `http_reqs_rate`                                    | `throughput_rps` |                                        |
-| k6          | `http_req_failed_rate`                              | `errors_rate`    | already a 0–1 fraction                 |
-| Artillery   | `latency_p95_ms` (Artillery v1.x)                   | `latency_p95_ms` | percentile reported by the tool        |
-| Artillery   | `http_response_time_p95_ms` (Artillery v2.x)        | `latency_p95_ms` | percentile reported by the tool        |
-| Artillery   | `rps_mean`                                          | `throughput_rps` |                                        |
-| Artillery   | derived: sum of `errors_*` ÷ `requests_completed`   | `errors_rate`    | computed when no direct field exists   |
+| Source tool | Source metric                                          | Canonical metric | Notes                                  |
+| ----------- | ------------------------------------------------------ | ---------------- | -------------------------------------- |
+| k6          | `http_req_duration_p95_ms`                             | `latency_p95_ms` | percentile reported by the tool        |
+| k6          | `http_reqs_rate`                                       | `throughput_rps` |                                        |
+| k6          | `http_req_failed_rate`                                 | `errors_rate`    | already a 0–1 fraction                 |
+| Artillery   | `latency_p95_ms` (Artillery v1.x)                      | `latency_p95_ms` | percentile reported by the tool        |
+| Artillery   | `http_response_time_p95_ms` (Artillery v2.x)           | `latency_p95_ms` | percentile reported by the tool        |
+| Artillery   | `rps_mean`                                             | `throughput_rps` |                                        |
+| Artillery   | derived: sum of `errors_*` ÷ `requests_completed`      | `errors_rate`    | computed when no direct field exists   |
 | JMeter      | `response_time_percentile_2_ms` (JMeter `pct2ResTime`) | `latency_p95_ms` | p95 assumed; see Percentile Provenance |
-| JMeter      | `throughput`                                        | `throughput_rps` |                                        |
-| JMeter      | `error_pct`                                         | `errors_rate`    | scaled from 0–100 % to a 0–1 fraction  |
+| JMeter      | `throughput`                                           | `throughput_rps` |                                        |
+| JMeter      | `error_pct`                                            | `errors_rate`    | scaled from 0–100 % to a 0–1 fraction  |
 
 ### Units and Scaling
 

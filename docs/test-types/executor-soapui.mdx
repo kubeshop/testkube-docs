@@ -1,5 +1,5 @@
 import Admonition from "@theme/Admonition";
-import LegacyWarning from '../articles/_legacy-warning.mdx';
+import LegacyWarning from "../articles/_legacy-warning.mdx";
 
 # SoapUI
 
@@ -7,12 +7,12 @@ import LegacyWarning from '../articles/_legacy-warning.mdx';
 
 [SoapUI](https://www.soapui.org) is an open-source tool used for the end-to-end testing of REST, SOAP and GraphQL APIs, as well as JMS, JDBC and other web services. Testkube supports the SoapUI executor implementation.
 
-* Default command for this executor: `/bin/sh` `/usr/local/SmartBear/EntryPoint.sh`
-* Default arguments for this executor command: `<runPath>`
+- Default command for this executor: `/bin/sh` `/usr/local/SmartBear/EntryPoint.sh`
+- Default arguments for this executor command: `<runPath>`
 
 Parameters in `<>` are calculated at test execution:
 
-* `<runPath>` - path to the test files
+- `<runPath>` - path to the test files
 
 [See more at "Redefining the Prebuilt Executor Command and Arguments" on the Creating Test page.](../articles/creating-tests.mdx#redefining-the-prebuilt-executor-command-and-arguments)
 
@@ -21,16 +21,19 @@ Parameters in `<>` are calculated at test execution:
 Testkube supports the [SoapUI](https://www.soapui.org) executor implementation.
 
 export const ExecutorInfo = () => {
-   return (
+  return (
     <div>
       <Admonition type="info" icon="🎓" title="What is SoapUI?">
         <ul>
-          <li>SoapUI is an open-source tool used for end-to-end testing of REST, SOAP and GraphQL APIs, as well as JMS, JDBC and other web services.</li>
+          <li>
+            SoapUI is an open-source tool used for end-to-end testing of REST,
+            SOAP and GraphQL APIs, as well as JMS, JDBC and other web services.
+          </li>
         </ul>
       </Admonition>
     </div>
   );
-}
+};
 
 ## **Running a SoapUI Test**
 

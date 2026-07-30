@@ -9,8 +9,9 @@ are also documented in the [CLI Reference](/cli/testkube).
 
 ## Prerequisites
 
-To be able to use these commands, you'll need to be on the latest version of 
-- the Testkube Control-Plane 
+To be able to use these commands, you'll need to be on the latest version of
+
+- the Testkube Control-Plane
 - the Testkube Agent in your existing Environments
 - the Testkube CLI
 
@@ -26,11 +27,12 @@ The configuration of a new Agent for an Environment is broken into two steps:
    that installation to a created Agent in the Environment.
 
 :::note
-Since you will often do both at the same time, these two commands can be rolled into one by adding the `--create` 
+Since you will often do both at the same time, these two commands can be rolled into one by adding the `--create`
 flag to the `install` command.
 :::
 
 The reason for this separation is to enable the following use-cases:
+
 - Reusing Agent installations in different namespaces/clusters for the same Agent definition in the Environment.
 - Retrieving the secret-key required for connecting an Agent installation to an Environment when installing an Agent with
   the Helm Chart.
@@ -68,7 +70,7 @@ Once an Agent has been defined on the Testkube Control Plane with the `create` c
 Use the `testkube install agent <name>` to do this, for example:
 
 ```sh
-$ testkube install agent staging-runner 
+$ testkube install agent staging-runner
 ```
 
 :::note
@@ -99,11 +101,11 @@ You can also install Agents from a Helm Chart - [Read More](/articles/multi-agen
 
 ### Agent Namespaces
 
-Agents are installed in a namespace in your current cluster, the `install` command will either prompt you or you can specify 
+Agents are installed in a namespace in your current cluster, the `install` command will either prompt you or you can specify
 the namespace with the --namespace argument
 
 :::tip
-You can install multiple Agents in the same namespace if needed, for example, to target different applications 
+You can install multiple Agents in the same namespace if needed, for example, to target different applications
 :::
 
 ## Updating an Agent
@@ -201,7 +203,7 @@ the `create` and `install ... --create` commands.
 ### Updating Runner Agent Labels
 
 You can add as many labels as you want to your Runner Agents to help you target them for your executions, for example,
-when creating a Runner Agent for an ephemeral use-case, you might label it with some identifier of that ephemeral 
+when creating a Runner Agent for an ephemeral use-case, you might label it with some identifier of that ephemeral
 instance which you can then use to target your Workflow Executions to that Runner Agent.
 
 ```sh

@@ -39,9 +39,10 @@ testkube create testworkflow -f EXAMPLE_FILE.yaml
 testkube run testworkflow TEST_WORKFLOW_NAME -f
 ```
 
-Check the webhook sink to see the CDEvent emitted by Testkube. An event like the following should have been emitted: 
+Check the webhook sink to see the CDEvent emitted by Testkube. An event like the following should have been emitted:
 <!-- Please check the code outputs. This may require update -->
-```json 
+
+```json
 {
   "context": {
     "version": "0.2.0",
@@ -75,5 +76,3 @@ Check the webhook sink to see the CDEvent emitted by Testkube. An event like the
 For more information about CDEvents, please visit the [CDEvents](https://cdevents.dev/) website.
 
 To know more about the Testing Events specification, please visit the [Testing Events](https://github.com/cdevents/spec/blob/main/testing-events.md) page.
-
-

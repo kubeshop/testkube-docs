@@ -6,8 +6,8 @@ Legacy Tests and Test Suites have been deprecated and removed from Testkube as o
 
 ## Introduction
 
-In order to simplify migration from Tests and Test Suites to Test Workflows you can use `testkube migrate` Testkube 
-CLI command. It generates the corresponding Test Workflow and Test Workflow Template resources from your existing Test, 
+In order to simplify migration from Tests and Test Suites to Test Workflows you can use `testkube migrate` Testkube
+CLI command. It generates the corresponding Test Workflow and Test Workflow Template resources from your existing Test,
 Test Suite and Executor resources. You will need to check created CRDs and apply them to your Kubernetes cluster.
 
 The command contains 2 subcommands: `test` and `testsuite`. It's possible to migrate all
@@ -15,7 +15,7 @@ existing resources or only particular resource.
 
 ## Test Migration
 
-Tests are migrated to Test Workflows and by default a Test Workflow Template is generated for 
+Tests are migrated to Test Workflows and by default a Test Workflow Template is generated for
 the Executor connected to the Test. Testkube Test Workflows are not generated for official
 Testkube Test Workflow Templates (K6, Postman, Cypress and Playwright ones)
 
@@ -70,19 +70,20 @@ spec:
       uri: https://github.com/kubeshop/testkube.git
       revision: main
       paths:
-      - test/postman/postman-executor-smoke.postman_collection.json
+        - test/postman/postman-executor-smoke.postman_collection.json
   job:
     labels:
       core-tests: executors
       executor: postman-executor
       test-type: postman-collection
   steps:
-  - name: Run tests
-    template:
-      name: official--postman--beta
-      config:
-        run: newman run --env-var TESTKUBE_POSTMAN_PARAM=TESTKUBE_POSTMAN_PARAM_value
-          /data/repo/test/postman/postman-executor-smoke.postman_collection.json
+    - name: Run tests
+      template:
+        name: official--postman--beta
+        config:
+          run:
+            newman run --env-var TESTKUBE_POSTMAN_PARAM=TESTKUBE_POSTMAN_PARAM_value
+            /data/repo/test/postman/postman-executor-smoke.postman_collection.json
 ```
 
 ### Example - Test Workflow and Test Workflow Template for K6 Container Executor Test
@@ -97,12 +98,11 @@ metadata:
   namespace: testkube
 spec:
   types:
-  - container-executor-k6-0.43.1/test
+    - container-executor-k6-0.43.1/test
   executor_type: container
   image: grafana/k6:0.43.1
 
 ---
-
 apiVersion: tests.testkube.io/v3
 kind: Test
 metadata:
@@ -147,7 +147,6 @@ spec:
   pod: {}
 
 ---
-
 kind: TestWorkflow
 apiVersion: testworkflows.testkube.io/v1
 metadata:
@@ -159,13 +158,13 @@ metadata:
     test-type: container-executor-k6-0-43-1-test
 spec:
   use:
-  - name: container-executor-k6-0.43.1
+    - name: container-executor-k6-0.43.1
   content:
     git:
       uri: https://github.com/kubeshop/testkube
       revision: main
       paths:
-      - test/k6/k6-smoke-test-without-envs.js
+        - test/k6/k6-smoke-test-without-envs.js
   container:
     workingDir: /data/repo/test/k6
   job:
@@ -175,16 +174,16 @@ spec:
       test-type: container-executor-k6-0-43-1-test
     activeDeadlineSeconds: 180
   steps:
-  - name: Run tests
-    run:
-      args:
-      - run
-      - k6-smoke-test-without-envs.js
+    - name: Run tests
+      run:
+        args:
+          - run
+          - k6-smoke-test-without-envs.js
 ```
 
 ## Test Suite Migration
 
-Test Suites are migrated to Test Workflows, by default Test Workflows are not generated for 
+Test Suites are migrated to Test Workflows, by default Test Workflows are not generated for
 the Tests used in the Test Suites.
 
 Original Test Suite CRD
@@ -200,10 +199,9 @@ metadata:
 spec:
   description: "container executor k6 smoke tests"
   steps:
-  - stopOnFailure: false
-    execute:
-    - test: k6-executor-smoke
-
+    - stopOnFailure: false
+      execute:
+        - test: k6-executor-smoke
 ```
 
 ```sh
@@ -226,11 +224,11 @@ spec:
     labels:
       core-tests: executors
   steps:
-  - name: Run test workflows
-    optional: true
-    steps:
-    - name: Run tests
-      execute:
-        workflows:
-        - name: k6-executor-smoke
+    - name: Run test workflows
+      optional: true
+      steps:
+        - name: Run tests
+          execute:
+            workflows:
+              - name: k6-executor-smoke
 ```

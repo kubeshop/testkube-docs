@@ -21,29 +21,29 @@ paths:
         content:
           application/json:
             schema:
-              $ref: './components.yaml#/components/schemas/FavoriteReq'
+              $ref: "./components.yaml#/components/schemas/FavoriteReq"
         required: true
       responses:
-        '200':
+        "200":
           description: Favorite already exists
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/Favorite'
-        '201':
+                $ref: "./components.yaml#/components/schemas/Favorite"
+        "201":
           description: Favorite created
           content:
             application/json:
               schema:
-                $ref: './components.yaml#/components/schemas/Favorite'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+                $ref: "./components.yaml#/components/schemas/Favorite"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     delete:
@@ -54,20 +54,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: './components.yaml#/components/schemas/FavoriteReq'
+              $ref: "./components.yaml#/components/schemas/FavoriteReq"
         required: true
       responses:
-        '204':
+        "204":
           description: Favorite deleted
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: "./components.yaml#/components/parameters/ID"

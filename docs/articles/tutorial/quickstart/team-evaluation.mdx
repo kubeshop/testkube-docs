@@ -6,11 +6,11 @@ import TabItem from "@theme/TabItem";
 In this tutorial you will learn how to get started with Testkube, run your first Test Workflow, inspect its executions, and
 integrate it with your CI/CD pipeline(s).
 
-If you don't already have a license or Testkube Cloud account, **[schedule time with our Solutions Engineering team](https://testkube.io/demo)** to get your license/account 
+If you don't already have a license or Testkube Cloud account, **[schedule time with our Solutions Engineering team](https://testkube.io/demo)** to get your license/account
 and answers to any questions you have.
 
 :::note
-This demo installation is for a **team evaluation**, using a Kubernetes cluster a real Kubernetes cluster. Customization of the deployment may be required (ex. using S3) but can be implemented over time. 
+This demo installation is for a **team evaluation**, using a Kubernetes cluster a real Kubernetes cluster. Customization of the deployment may be required (ex. using S3) but can be implemented over time.
 
 For evaluations suitable for **individual usage**, please follow the [Individual Evaluation quickstart guide](/articles/tutorial/quickstart/individual-evaluation). \
 For information on conducting **enterprise proof of concepts**, please review the [Enterprise POC guide](/articles/tutorial/quickstart/enterprise-poc).
@@ -19,6 +19,7 @@ For information on conducting **enterprise proof of concepts**, please review th
 ## 1. Install or Sign in to Testkube
 
 Testkube has flexibility in its deployments (learn more in the [Installation Overview](/articles/install/overview)).
+
 - **Testkube On-Prem** runs both the Control Plane and Test Execution Agents in your infrastructure.
 - **Testkube Cloud Control Plane** runs the Control Plane in our cloud and the Test Execution Agents in your infrastructure.
 
@@ -27,6 +28,7 @@ Testkube has flexibility in its deployments (learn more in the [Installation Ove
 
 1. [Install the Testkube CLI](/articles/install/cli)
 2. Deploy Testkube via Helm:
+
 ```bash
 helm upgrade --install \
   --create-namespace \
@@ -34,7 +36,8 @@ helm upgrade --install \
    -f values.yaml \
   testkube oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube-enterprise --version <version>
 ```
-*For more information on baseline configuration of the Testkube Control Plane deployment, please visit [our base installation documentation ][base-install]*
+
+_For more information on baseline configuration of the Testkube Control Plane deployment, please visit [our base installation documentation ][base-install]_
 
 3. Run the `testkube dashboard` command to open Testkube without configuring Ingress.
 4. Log in to Testkube with the credentials from the second step.
@@ -46,14 +49,14 @@ You will now see the Testkube Dashboard for the default environment created in y
 </TabItem>
 <TabItem value="cloud" label="Testkube Cloud Control Plane">
 
-  1. Sign in to the [Testkube Cloud Control Plane](https://app.testkube.io).
-  2. Click on the `Let's get started` button.
-  3. Enter an environment name and click `Create environment`.
-  4. Run the provided commands in your terminal to install the Testkube Agent.
+1. Sign in to the [Testkube Cloud Control Plane](https://app.testkube.io).
+2. Click on the `Let's get started` button.
+3. Enter an environment name and click `Create environment`.
+4. Run the provided commands in your terminal to install the Testkube Agent.
 
-  You will now see the Testkube Dashboard for your new environment:
+You will now see the Testkube Dashboard for your new environment:
 
-  ![The dashboard](./img/new-environment-dashboard.png)
+![The dashboard](./img/new-environment-dashboard.png)
 
 </TabItem>
 </Tabs>
@@ -183,10 +186,11 @@ For example, if I want to run this test every time my deployment's image updates
 
 :::info
 Testkube currently shows instructions for GitHub Actions, GitLab CI, CircleCI, Jenkins, Azure DevOps, Tekton and ArgoCD, but can
-  be integrated into any CI/CD pipeline by automating the [Testkube CLI](/articles/cli) or the [Testkube API](/openapi/overview).
+be integrated into any CI/CD pipeline by automating the [Testkube CLI](/articles/cli) or the [Testkube API](/openapi/overview).
 
-  Read more about [Testkube Integrations](/articles/integrations)
+Read more about [Testkube Integrations](/articles/integrations)
 :::
+
 </TabItem>
 
 <TabItem value="cron" label="Trigger on a schedule">
@@ -215,15 +219,15 @@ Learn more about [Scheduled Execution](/articles/scheduling-tests) in the docume
 
 <TabItem value="kubernetes" label="Trigger on a Kubernetes event">
 
-  1. Use the sidebar on the left to browse to your triggers.
-  2. Click the `Create a new trigger` button.
-  3. Follow the instructions on the form.
+1. Use the sidebar on the left to browse to your triggers.
+2. Click the `Create a new trigger` button.
+3. Follow the instructions on the form.
 
-  ![create-trigger](./img/create-trigger.png)
+![create-trigger](./img/create-trigger.png)
 
-  :::info
-  Learn more about [Kubernetes Event Triggers](/articles/test-triggers) in the documentation.
-  :::
+:::info
+Learn more about [Kubernetes Event Triggers](/articles/test-triggers) in the documentation.
+:::
 
 </TabItem>
 
@@ -237,7 +241,6 @@ Other ways to trigger a Test Workflow in Testkube include:
 - From another Workflow - as described in [Test Workflows - Test Suites](/articles/test-workflows-test-suites)
 
 </TabItem>
-
 
 </Tabs>
 
@@ -256,10 +259,11 @@ To learn how to do this we recommend you either:
 
 :::tip
 Want to speak with a human? Don't hesitate to reach out for help by:
+
 - [Scheduling time with our Solutions Engineering team](https://testkube.io/demo)
 - Joining our [Slack Community](https://bit.ly/testkube-slack)
 - [Reaching out to sales](https://testkube.io/contact)
-:::
+  :::
 
 [testkube-installing]: /articles/install/overview
 [upnext-tutorial]: /articles/tutorial/example

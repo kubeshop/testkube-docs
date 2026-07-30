@@ -40,6 +40,20 @@ Also make sure the documentation builds ok locally before opening a PR - this wi
 npm run build
 ```
 
+To keep documentation diffs clean and consistent, format your changes before committing:
+
+```bash
+npm run format
+```
+
+You can also check formatting without writing changes:
+
+```bash
+npm run format:check
+```
+
+Prettier is also run automatically on staged files via the `pre-commit` hook, and CI checks formatting for changed files in pull requests and pushes to `main`.
+
 5. You can preview the changes locally in your browser: http://localhost:3000
 
 ### How to style the docs
@@ -118,6 +132,23 @@ vale --minAlertLevel error docs/articles/     # show only errors (spelling, etc.
 - **Vale vocabulary**: Add accepted terms to `.vale/styles/config/vocabularies/Testkube/accept.txt`
 - **Vale rules**: Disable noisy rules in `.vale.ini` by adding e.g. `Google.Passive = NO` under `[*.{md,mdx}]`
 
+## Formatting
+
+This repo uses [Prettier](https://prettier.io/) for consistent formatting across documentation and supporting config files.
+
+### Commands
+
+```bash
+npm run format
+npm run format:check
+```
+
+### Scope
+
+- Prettier formats supported staged files through `lint-staged` during `pre-commit`
+- CI runs `prettier --check` on changed files only
+- Generated documentation and generated OpenAPI outputs are excluded via `.prettierignore`
+
 ## Search Indexing
 
 For search, we've indexed all the pages into 3 distinct categories `Main`, `Reference` and `Legacy`.
@@ -165,7 +196,7 @@ Follow these steps:
 
 1. Make sure you have go tooling installed.
 2. Clone the above repo and build the binary with `go build -o crd-ref-docs`.
-3. Ensure you have cloned/pulled the [testkube](https://github.com/kubeshop/testkube)  `main` branch to make sure you have the latest types available locally (in the /api folder).
+3. Ensure you have cloned/pulled the [testkube](https://github.com/kubeshop/testkube) `main` branch to make sure you have the latest types available locally (in the /api folder).
 4. Set the desired Kubernetes Version to use for outgoing links to reference docs in the `config.yaml` file (at least v1.28)
 5. Run the below command in the root of the above cloned project, which should generate updated .mdx files in this repo:
 
@@ -176,13 +207,13 @@ Follow these steps:
 6. Make sure the links and info in `/docs/articles/crds.md` is correct and up to date
 7. Add the following deprecation warning after the main headline in all files containing deprecated APIs (all except `testworkflows.testkube.io-v1.mdx`):
    ```markdown
-    # Testkube API Reference
-    
-    import LegacyWarning from '../\_legacy-warning.mdx';
-    
+   # Testkube API Reference
+
+   import LegacyWarning from '../\_legacy-warning.mdx';
+
     <LegacyWarning />
    ```
-7. Create a branch, commit and create a PR
+8. Create a branch, commit and create a PR
 
 ## Updating the CLI Reference docs
 

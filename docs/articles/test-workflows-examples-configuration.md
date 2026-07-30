@@ -30,13 +30,13 @@ spec:
       default: 2
       sensitive: true # <- Marked as sensitive
     printTree:
-      type: boolean   # <- No default, marked as required
+      type: boolean # <- No default, marked as required
     targetDomain:
-      type: string 
-      enum:           # <- Generates a drop-down list to select from at execution
-      - prod.acme.eu
-      - staging.acme.eu
-      - dev.acme.eu
+      type: string
+      enum: # <- Generates a drop-down list to select from at execution
+        - prod.acme.eu
+        - staging.acme.eu
+        - dev.acme.eu
       default: dev.acme.eu
 ```
 
@@ -132,9 +132,11 @@ spec:
   steps:
     - shell: |
         echo "Secret value: {{credential("MY_SUPER_SECRET")}}" 
-        echo "Sanitized secret: {{ shellquote(credential("MY_SUPER_SECRET")) }}" 
+        echo "Sanitized secret: {{ shellquote(credential("MY_SUPER_SECRET")) }}"
 ```
+
 :::
+
 ## Combining `config` and `env`
 
 For enhanced flexibility, you can combine configuration parameters with environment parameters. This allows you to define parameters in `config` and then inject them into your container as environment variables.
@@ -184,7 +186,7 @@ When you click **Run now** in the UI, you will be prompted to enter values for a
 You can pass parameter values via the CLI in two ways:
 
 1. **Configuration parameters** – override `config` values declared in the workflow schema.
-2. **Environment variables** – define or override runtime environment variables for the execution.  
+2. **Environment variables** – define or override runtime environment variables for the execution.
 
 #### Overriding Configuration Parameters
 

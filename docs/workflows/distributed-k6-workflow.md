@@ -57,7 +57,6 @@ spec:
         artifacts:
           workingDir: /data/artifacts
           paths:
-            - '*.html'
-            - '*.json'
-
+            - "*.html"
+            - "*.json"
 ```

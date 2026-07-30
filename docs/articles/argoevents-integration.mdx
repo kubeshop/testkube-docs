@@ -1,12 +1,12 @@
 # Integrating Testkube with Argo Events
 
 Tools like [Argo Events](https://argoproj.github.io/argo-events/) help capture Kubernetes resource lifecycle events, such as CREATE, UPDATE, or DELETE.
- It is capable of detecting and responding to a wide range of cluster events. These events can then be integrated into cloud-native test orchestration
- platforms like [Testkube](https://testkube.io/), allowing teams to automatically run tests that validate the impact of changes, ensuring faster feedback
-  and safer deployments.
+It is capable of detecting and responding to a wide range of cluster events. These events can then be integrated into cloud-native test orchestration
+platforms like [Testkube](https://testkube.io/), allowing teams to automatically run tests that validate the impact of changes, ensuring faster feedback
+and safer deployments.
 
 This document describes how you can use Testkube with Argo Events. As a prerequisite, you should have good understanding
-of Testkube, [Argo Events](https://argoproj.github.io/argo-events/#documentation) and GitOps principles. 
+of Testkube, [Argo Events](https://argoproj.github.io/argo-events/#documentation) and GitOps principles.
 
 :::tip
 For a high-level introduction to using Testkube with Argo Events including a step-by-step tutorial, please check out
@@ -15,10 +15,10 @@ our integration blogpost.
 
 ## Prerequisites
 
-* A Kubernetes cluster with [Testkube Installed](/articles/install/overview).
-* A Kubernetes cluster with [Argo Events installed](https://argoproj.github.io/argo-events/installation/).
-* [Testkube API Token generated](/articles/api-token-management) and stored as a `secret` in `argo-events` namespace.
-* A Test Workflow created and execution [webhook generated](/openapi/cloud/Agent-Operations----test-workflows#operation/abortAllTestWorkflowExecutions).
+- A Kubernetes cluster with [Testkube Installed](/articles/install/overview).
+- A Kubernetes cluster with [Argo Events installed](https://argoproj.github.io/argo-events/installation/).
+- [Testkube API Token generated](/articles/api-token-management) and stored as a `secret` in `argo-events` namespace.
+- A Test Workflow created and execution [webhook generated](/openapi/cloud/Agent-Operations----test-workflows#operation/abortAllTestWorkflowExecutions).
 
 [Here](https://github.com/kubeshop/testkube-examples/tree/main/ArgoEvents) is an example GitHub repository with all required configuration manifests.
 
@@ -95,45 +95,45 @@ Configure an [EventSource](https://argoproj.github.io/argo-events/concepts/event
 apiVersion: argoproj.io/v1alpha1
 kind: EventSource
 metadata:
- name: configmap-eventsource
- namespace: argo-events
+  name: configmap-eventsource
+  namespace: argo-events
 spec:
- template:
-   serviceAccountName: argo-events-sa
-   container:
-     resources:
-       requests:
-         cpu: "100m"
-         memory: "128Mi"
-       limits:
-         cpu: "500m"
-         memory: "512Mi"
- eventBusName: default
- resource:
-   demo-configmap:
-     namespace: default
-     group: ""
-     version: v1
-     resource: configmaps
-     eventTypes:
-       - ADD
-       - UPDATE
-       - DELETE
-     filter:
-       labels:
-         - key: watch
-           value: "true"
+  template:
+    serviceAccountName: argo-events-sa
+    container:
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+        limits:
+          cpu: "500m"
+          memory: "512Mi"
+  eventBusName: default
+  resource:
+    demo-configmap:
+      namespace: default
+      group: ""
+      version: v1
+      resource: configmaps
+      eventTypes:
+        - ADD
+        - UPDATE
+        - DELETE
+      filter:
+        labels:
+          - key: watch
+            value: "true"
 ```
 
 ### 5. Create a Sensor
 
 Configure a [Sensor](https://argoproj.github.io/argo-events/concepts/sensor/) that:
 
-* Connects to the EventSource resource and provides details of the Kubernetes resource under watch.
+- Connects to the EventSource resource and provides details of the Kubernetes resource under watch.
 
-* Sets Testkube Test Workflow execution webhook as http trigger with headers containing Testkube API Token as `secret`.
+- Sets Testkube Test Workflow execution webhook as http trigger with headers containing Testkube API Token as `secret`.
 
-* Adds a label to the Test Workflow with the name of the resources for which the event is triggered.
+- Adds a label to the Test Workflow with the name of the resources for which the event is triggered.
 
 You can customize the `Sensor` configuration based on your use case.
 
@@ -141,77 +141,77 @@ You can customize the `Sensor` configuration based on your use case.
 apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
- name: configmap-webhook-sensor
- namespace: argo-events
+  name: configmap-webhook-sensor
+  namespace: argo-events
 spec:
- template:
-   serviceAccountName: argo-events-sa
-   container:
-     resources:
-       requests:
-         cpu: "100m"
-         memory: "128Mi"
-       limits:
-         cpu: "500m"
-         memory: "512Mi"
- eventBusName: default
- dependencies:
- - name: configmap-dep
-   eventSourceName: configmap-eventsource
-   eventName: demo-configmap
-   filters:
-     data:
-     - path: body.metadata.labels.watch
-       type: string
-       value:
-       - "true"
- triggers:
- - template:
-     name: testkube-webhook-trigger
-     conditions: "configmap-dep"
-     http:
-       url: https://api.testkube.io/organizations/tkcorg_b8ddc820d498888/environments/tkcenv_94cb6305566666/agent/test-workflows/<Test_Workflow_Name>/executions
-       payload:
-       - src:
-           dependencyName: configmap-dep
-           dataKey: body.metadata.name
-         dest: tags.ArgoEventConfigMapUpdate
-       method: POST
-       headers:
-         Content-Type: application/json
-       secureHeaders:
-         - name: Authorization
-           valueFrom:
-             secretKeyRef:
-               name: <testkube-auth-secret>
-               key: <TESTKUBE_API_TOKEN>
-     retryStrategy:
-       steps: 3
-       duration: 10s
-       backoff:
-         duration: 6s
-         factor: 2
-         jitter: 0.1
+  template:
+    serviceAccountName: argo-events-sa
+    container:
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+        limits:
+          cpu: "500m"
+          memory: "512Mi"
+  eventBusName: default
+  dependencies:
+    - name: configmap-dep
+      eventSourceName: configmap-eventsource
+      eventName: demo-configmap
+      filters:
+        data:
+          - path: body.metadata.labels.watch
+            type: string
+            value:
+              - "true"
+  triggers:
+    - template:
+        name: testkube-webhook-trigger
+        conditions: "configmap-dep"
+        http:
+          url: https://api.testkube.io/organizations/tkcorg_b8ddc820d498888/environments/tkcenv_94cb6305566666/agent/test-workflows/<Test_Workflow_Name>/executions
+          payload:
+            - src:
+                dependencyName: configmap-dep
+                dataKey: body.metadata.name
+              dest: tags.ArgoEventConfigMapUpdate
+          method: POST
+          headers:
+            Content-Type: application/json
+          secureHeaders:
+            - name: Authorization
+              valueFrom:
+                secretKeyRef:
+                  name: <testkube-auth-secret>
+                  key: <TESTKUBE_API_TOKEN>
+        retryStrategy:
+          steps: 3
+          duration: 10s
+          backoff:
+            duration: 6s
+            factor: 2
+            jitter: 0.1
 ```
 
 ### 6. Verify
 
 a. Verify using the following command that the EventSource and Sensor are running:
 
-```sh  
-$ kubectl get eventsource,sensor -n argo-events  
-NAME                                            AGE  
+```sh
+$ kubectl get eventsource,sensor -n argo-events
+NAME                                            AGE
 eventsource.argoproj.io/configmap-eventsource   50m
 
-NAME                                          AGE  
-sensor.argoproj.io/configmap-webhook-sensor   10m  
+NAME                                          AGE
+sensor.argoproj.io/configmap-webhook-sensor   10m
 ```
 
 b. Update the ConfigMap to trigger the execution of the TestWorkflow.
 
-```sh  
-$ kubectl patch configmap demo-config -n default --type merge -p '{"data":{"dummyKey":"test-'"$(date +%s)"'"}}'  
-configmap/demo-config patched  
+```sh
+$ kubectl patch configmap demo-config -n default --type merge -p '{"data":{"dummyKey":"test-'"$(date +%s)"'"}}'
+configmap/demo-config patched
 ```
 
 c. View Sensor logs to verify that Testkube Test Workflow is triggered.
@@ -244,16 +244,16 @@ Test Workflow Execution:
 Name:                 configmap-k6
 Execution ID:         6852a23726359da589bcb641
 Execution name:       configmap-k6-2
-Execution namespace:  
+Execution namespace:
 Execution number:     2
 Requested at:         2025-06-18 11:25:43.041 +0000 UTC
 Disabled webhooks:    false
 
 Tags:                 ArgoEventConfigMapUpdate=demo-config
-Running context:     
-Interface:             
+Running context:
+Interface:
   Type:                 api
-Actor:                 
+Actor:
   Name:                 noreply@testkube.io
   Email:                noreply@testkube.io
   Type:                 user

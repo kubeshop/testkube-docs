@@ -16,7 +16,7 @@ paths:
       description: Lists API Tokens for an Organization
       operationId: listAPITokens
       parameters:
-        - $ref: './components.yaml#/components/parameters/Limit'
+        - $ref: "./components.yaml#/components/parameters/Limit"
         - name: label
           in: query
           description: >
@@ -48,14 +48,14 @@ paths:
           example:
             - visibility=hidden
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/Tokens'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "200":
+          $ref: "./components.yaml#/components/responses/Tokens"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     post:
@@ -63,20 +63,20 @@ paths:
       description: Creates an API Token for an Organization
       operationId: createAPIToken
       requestBody:
-        $ref: './components.yaml#/components/requestBodies/Token'
+        $ref: "./components.yaml#/components/requestBodies/Token"
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/Token'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '402':
-          $ref: './components.yaml#/components/responses/PaymentRequiredError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
+        "200":
+          $ref: "./components.yaml#/components/responses/Token"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "402":
+          $ref: "./components.yaml#/components/responses/PaymentRequiredError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
+      - $ref: "./components.yaml#/components/parameters/ID"
   /organizations/{id}/tokens/{tokenID}:
     get:
       summary: Get API Token
@@ -85,16 +85,16 @@ paths:
         retrieved, other token types will return Forbidden.
       operationId: getOrganizationToken
       responses:
-        '200':
-          $ref: './components.yaml#/components/responses/Token'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
-        '404':
-          $ref: './components.yaml#/components/responses/NotFoundError'
+        "200":
+          $ref: "./components.yaml#/components/responses/Token"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
+        "404":
+          $ref: "./components.yaml#/components/responses/NotFoundError"
       security:
         - BearerAuth: []
     delete:
@@ -102,16 +102,16 @@ paths:
       description: Deletes an API Token for an Organization
       operationId: deleteAPIToken
       responses:
-        '204':
-          $ref: './components.yaml#/components/responses/NoContent'
-        '400':
-          $ref: './components.yaml#/components/responses/BadRequestError'
-        '401':
-          $ref: './components.yaml#/components/responses/UnauthorizedError'
-        '403':
-          $ref: './components.yaml#/components/responses/ForbiddenError'
+        "204":
+          $ref: "./components.yaml#/components/responses/NoContent"
+        "400":
+          $ref: "./components.yaml#/components/responses/BadRequestError"
+        "401":
+          $ref: "./components.yaml#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "./components.yaml#/components/responses/ForbiddenError"
       security:
         - BearerAuth: []
     parameters:
-      - $ref: './components.yaml#/components/parameters/ID'
-      - $ref: './components.yaml#/components/parameters/TokenID'
+      - $ref: "./components.yaml#/components/parameters/ID"
+      - $ref: "./components.yaml#/components/parameters/TokenID"

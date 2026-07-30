@@ -9,42 +9,44 @@ To avoid this issue, it is recommended to use the Git CLI directly for cloning t
 ### Example Workflow Adjustment
 
 #### Before Adjustment (Issue Prone):
+
 ```yaml
 trigger:
-- main
+  - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 stages:
-- stage: Test
-  jobs:
-  - job: RunTestkube
-    steps:
-      - task: SetupTestkube@1
-      - script: |
-          testkube create test --name test-name --test-content-type git-file --git-uri <git-repo> --git-path test-path
-          testkube run test test-name
-        displayName: Run Testkube Test
+  - stage: Test
+    jobs:
+      - job: RunTestkube
+        steps:
+          - task: SetupTestkube@1
+          - script: |
+              testkube create test --name test-name --test-content-type git-file --git-uri <git-repo> --git-path test-path
+              testkube run test test-name
+            displayName: Run Testkube Test
 ```
 
 #### After Adjustment (Recommended Solution):
+
 ```yaml
 trigger:
-- main
+  - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 stages:
-- stage: Test
-  jobs:
-  - job: RunTestkube
-    steps:
-      - task: SetupTestkube@1
-      - script: |
-          git clone <git-repo>
-          testkube create test --name test-name -f test-path
-          testkube run test test-name
-        displayName: Run Testkube Test
+  - stage: Test
+    jobs:
+      - job: RunTestkube
+        steps:
+          - task: SetupTestkube@1
+          - script: |
+              git clone <git-repo>
+              testkube create test --name test-name -f test-path
+              testkube run test test-name
+            displayName: Run Testkube Test
 ```

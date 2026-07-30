@@ -42,6 +42,6 @@ spec:
           - test
       artifacts:
         paths:
-        - reports/**/*
-        - test-results/**/*
+          - reports/**/*
+          - test-results/**/*
 ```

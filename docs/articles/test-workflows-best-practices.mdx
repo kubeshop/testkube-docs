@@ -32,18 +32,18 @@ container:
 ### Set Appropriate Resource Requests
 
 Every workflow should declare [resource requests](/articles/test-workflows-job-and-pod) to help the Kubernetes scheduler place pods correctly
-and avoid noisy-neighbor problems. You can use the [Resource Usage](/articles/testkube-dashboard-execution-details#resource-usage) tab in 
+and avoid noisy-neighbor problems. You can use the [Resource Usage](/articles/testkube-dashboard-execution-details#resource-usage) tab in
 the Testkube Dashboard to monitor resource usage and help you adjust requests and limits accordingly.
 
 Use these as starting-point guidelines:
 
-| Test Category | CPU | Memory |
-|---|---|---|
-| Minimal (curl, scripts) | `32m` – `128m` | `32Mi` – `128Mi` |
-| API tests (Postman, REST) | `128m` – `256m` | `128Mi` – `256Mi` |
-| Build tools (Maven, Gradle) | `512m` | `512Mi` |
-| Browser / UI tests | `1500m` | `1500Mi` – `2Gi` |
-| Performance tests (heavy load) | `2` – `15` | `2Gi` – `25Gi` |
+| Test Category                  | CPU             | Memory            |
+| ------------------------------ | --------------- | ----------------- |
+| Minimal (curl, scripts)        | `32m` – `128m`  | `32Mi` – `128Mi`  |
+| API tests (Postman, REST)      | `128m` – `256m` | `128Mi` – `256Mi` |
+| Build tools (Maven, Gradle)    | `512m`          | `512Mi`           |
+| Browser / UI tests             | `1500m`         | `1500Mi` – `2Gi`  |
+| Performance tests (heavy load) | `2` – `15`      | `2Gi` – `25Gi`    |
 
 ```yaml
 container:
@@ -106,7 +106,7 @@ steps:
       my-test-command --report /data/artifacts/report.html
     steps:
       - name: Save artifacts
-        condition: always 
+        condition: always
         workingDir: /data/artifacts
         artifacts:
           paths:
@@ -127,7 +127,7 @@ that comfortably covers the expected test duration with some buffer.
 
 ```yaml
 job:
-  activeDeadlineSeconds: 600  # 10 minutes
+  activeDeadlineSeconds: 600 # 10 minutes
 ```
 
 For individual steps that should be shorter than the overall job, use step-level timeouts:
@@ -451,7 +451,7 @@ steps:
 ```yaml
 events:
   - cronjob:
-      cron: "0 */4 * * *"    # Every 4 hours
+      cron: "0 */4 * * *" # Every 4 hours
       timezone: Europe/Warsaw
 ```
 
@@ -603,7 +603,13 @@ services:
     count: 3
     image: alpine/jmeter:5.6
     run:
-      args: ["-s", "-Dserver.rmi.localport=60000", "-Dserver_port=1099", "-Jserver.rmi.ssl.disable=true"]
+      args:
+        [
+          "-s",
+          "-Dserver.rmi.localport=60000",
+          "-Dserver_port=1099",
+          "-Jserver.rmi.ssl.disable=true",
+        ]
     readinessProbe:
       tcpSocket:
         port: 1099
@@ -744,4 +750,3 @@ run:
 - [Test Workflow Overview](/articles/test-workflows)
 - [Basic Examples](/articles/test-workflows-examples-basics)
 - [Tool-Specific Examples](/articles/examples/overview)
-

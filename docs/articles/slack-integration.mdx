@@ -26,7 +26,6 @@ Click **And New Webhook to Workspace** and choose the private channel that we cr
 
 Copy the webhook URL from the next screen and keep it handy, as we’ll need it while creating a webhook in Testkube.
 
-
 ## Creating a Webhook For Slack
 
 Testkube allows you to create Webhooks using the Dashboard as well as the CLI.
@@ -36,11 +35,13 @@ Testkube allows you to create Webhooks using the Dashboard as well as the CLI.
 Navigate to the Webhooks section and **Create a new webhook**. Provide a name and choose the **Resource Identifier** as test-type: curl-test which refers to the cURL test. For **Triggered events**,choose **end-testworkflow-success**.
 
 <Admonition type="tip" title="Failed Tests">
-    If you want to be notified about failures as well, don't forget adding events like `end-testworkflow-failed` or `end-testworkflow-aborted`.
+  If you want to be notified about failures as well, don't forget adding events
+  like `end-testworkflow-failed` or `end-testworkflow-aborted`.
 </Admonition>
 
 <Admonition type="info" title="Legacy Tests and Test Suites">
-    If you need support for legacy Tests and Test Suites too, you should consider also `end-test-success` and `end-testsuite-success` events.
+  If you need support for legacy Tests and Test Suites too, you should consider
+  also `end-test-success` and `end-testsuite-success` events.
 </Admonition>
 
 ![Slack Webhook 1](../img/slack-webhook-1.png)
@@ -94,6 +95,7 @@ We have successfully configured the Slack webhook and will now receive events in
         ```
 
     </details>
+
 </Admonition>
 
 ## Using the CLI
@@ -131,5 +133,13 @@ When the test passes, you’ll get a notification in the Slack channel with the 
 
 Watch the following video to see these steps in action:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/MSyZNGDsnLE" title="Configure Slack webhooks for Kubernetes Tests Notifications" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/MSyZNGDsnLE"
+  title="Configure Slack webhooks for Kubernetes Tests Notifications"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+></iframe>

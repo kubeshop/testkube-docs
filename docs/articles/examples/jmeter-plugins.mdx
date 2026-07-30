@@ -6,11 +6,11 @@ Plugins extend basic Jmeter testing capabilities with attractive features to sup
 - Extend existing Jmeter container images to include plugins
 - Store plugins with your tests, and instruct the Jmeter runtime engine to scan the corresponding directories
 
-This article will explore the setup for the third option. Stay tuned for an article on building your own container image! 
+This article will explore the setup for the third option. Stay tuned for an article on building your own container image!
 
 ### Background
 
-[As stated in the Jmeter documentation](https://jmeter.apache.org/usermanual/get-started.html#classpath), Jmeter automatically find classes from jars in the `JMETER_HOME/lib` (utility jars) and `JMETER_HOME/lib/ext` (components and plugins) directories. However if you store your utility, component, and plugin jars outside of these directories, you will need to instruct Jmeter to scan the directories in which they live using `search_paths` and `plugin_dependency_paths`. 
+[As stated in the Jmeter documentation](https://jmeter.apache.org/usermanual/get-started.html#classpath), Jmeter automatically find classes from jars in the `JMETER_HOME/lib` (utility jars) and `JMETER_HOME/lib/ext` (components and plugins) directories. However if you store your utility, component, and plugin jars outside of these directories, you will need to instruct Jmeter to scan the directories in which they live using `search_paths` and `plugin_dependency_paths`.
 
 ### Workflow
 
@@ -38,23 +38,22 @@ spec:
   container:
     workingDir: /data/repo/jmeter-tests/
   steps:
-  - name: Run tests
-    container:
-      image: alpine/jmeter:5.6
-    shell: |
-      jmeter -n -t Sanity_Script_TestKube.jmx \
-      -Lorg.apache.jmeter.util=INFO \
-      -Jplugin_dependency_paths=/data/repo/jmeter-tests/lib \
-      -Jsearch_paths=/data/repo/jmeter-tests/lib/ext \
-      -j /data/artifacts/jmeter.log \
-      -o /data/artifacts/report \
-      -l /data/artifacts/jtl-report.jtl \
-      -e
-    artifacts:
-      paths:
-      - /data/artifacts/**/*
+    - name: Run tests
+      container:
+        image: alpine/jmeter:5.6
+      shell: |
+        jmeter -n -t Sanity_Script_TestKube.jmx \
+        -Lorg.apache.jmeter.util=INFO \
+        -Jplugin_dependency_paths=/data/repo/jmeter-tests/lib \
+        -Jsearch_paths=/data/repo/jmeter-tests/lib/ext \
+        -j /data/artifacts/jmeter.log \
+        -o /data/artifacts/report \
+        -l /data/artifacts/jtl-report.jtl \
+        -e
+      artifacts:
+        paths:
+          - /data/artifacts/**/*
 status: {}
-
 ```
 
 ### Explanation

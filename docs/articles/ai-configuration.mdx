@@ -54,11 +54,11 @@ Configure the following components in your `testkube-enterprise` Helm values:
 
 ```yaml
 testkube-ai-service:
-  enabled: true  # Default: false
+  enabled: true # Default: false
   inference:
     defaults:
-      secretRef: "<secret-name>"      # K8s secret storing the API key
-      secretRefKey: "api-key"         # Key within the secret
+      secretRef: "<secret-name>" # K8s secret storing the API key
+      secretRefKey: "api-key" # Key within the secret
     agent:
       - model: gpt-4o
         default: true
@@ -70,7 +70,7 @@ testkube-ai-service:
 # Enable AI features in the UI
 testkube-cloud-ui:
   ai:
-    enabled: true  # Default: false
+    enabled: true # Default: false
     aiServiceApiUri: "https://ai.<your-domain>"
 ```
 
@@ -91,41 +91,41 @@ The secret must be in the same namespace as the Testkube control plane.
 
 The `inference:` block is the recommended way to configure LLM models for the AI service. It uses role-based keys to describe what each model is used for:
 
-| Role | Type | Purpose |
-|------|------|---------|
-| `agent` | Array | Reasoning models for AI Agents — user-selectable in the Copilot UI |
-| `tasks` | Object (optional) | Lightweight model for title generation, classification. Falls back to default agent model if omitted |
-| `embeddings` | Object (optional) | Embeddings model for vector search. **Omit to disable embeddings entirely** |
+| Role         | Type              | Purpose                                                                                              |
+| ------------ | ----------------- | ---------------------------------------------------------------------------------------------------- |
+| `agent`      | Array             | Reasoning models for AI Agents — user-selectable in the Copilot UI                                   |
+| `tasks`      | Object (optional) | Lightweight model for title generation, classification. Falls back to default agent model if omitted |
+| `embeddings` | Object (optional) | Embeddings model for vector search. **Omit to disable embeddings entirely**                          |
 
 #### Shared Defaults
 
 The `defaults` section provides shared values inherited by all models unless overridden at the model level:
 
-| Field | Description |
-|-------|-------------|
-| `url` | Base URL for LLM API (e.g., `https://proxy.internal/v1`). Defaults to OpenAI if omitted |
-| `apiKey` | API key (plain text — prefer `secretRef` for production) |
-| `secretRef` | K8s secret name |
-| `secretRefKey` | Key within the secret |
-| `extraHeaders` | Extra HTTP headers merged into all requests |
-| `queryParams` | Query parameters appended to all request URLs |
+| Field          | Description                                                                             |
+| -------------- | --------------------------------------------------------------------------------------- |
+| `url`          | Base URL for LLM API (e.g., `https://proxy.internal/v1`). Defaults to OpenAI if omitted |
+| `apiKey`       | API key (plain text — prefer `secretRef` for production)                                |
+| `secretRef`    | K8s secret name                                                                         |
+| `secretRefKey` | Key within the secret                                                                   |
+| `extraHeaders` | Extra HTTP headers merged into all requests                                             |
+| `queryParams`  | Query parameters appended to all request URLs                                           |
 
 #### Model Properties
 
 Each model entry (`agent`, `tasks`, `embeddings`) supports these fields in addition to inheriting from `defaults`:
 
-| Field | Description |
-|-------|-------------|
-| `model` | Model identifier sent in the API request body (e.g., `gpt-4o`) |
-| `url` | Custom endpoint URL (overrides `defaults.url`) |
-| `apiKey` | API key for this model (overrides `defaults.apiKey`) |
-| `secretRef` | K8s secret name (overrides `defaults.secretRef`) |
-| `secretRefKey` | Key within the secret (overrides `defaults.secretRefKey`) |
-| `extraHeaders` | Extra HTTP headers (replaces `defaults.extraHeaders` if set) |
-| `queryParams` | Query parameters (replaces `defaults.queryParams` if set) |
-| `temperature` | Temperature setting — agent and tasks only |
-| `label` | Human-readable name for the UI dropdown — agent only |
-| `default` | Mark which agent model is the default — agent only |
+| Field          | Description                                                    |
+| -------------- | -------------------------------------------------------------- |
+| `model`        | Model identifier sent in the API request body (e.g., `gpt-4o`) |
+| `url`          | Custom endpoint URL (overrides `defaults.url`)                 |
+| `apiKey`       | API key for this model (overrides `defaults.apiKey`)           |
+| `secretRef`    | K8s secret name (overrides `defaults.secretRef`)               |
+| `secretRefKey` | Key within the secret (overrides `defaults.secretRefKey`)      |
+| `extraHeaders` | Extra HTTP headers (replaces `defaults.extraHeaders` if set)   |
+| `queryParams`  | Query parameters (replaces `defaults.queryParams` if set)      |
+| `temperature`  | Temperature setting — agent and tasks only                     |
+| `label`        | Human-readable name for the UI dropdown — agent only           |
+| `default`      | Mark which agent model is the default — agent only             |
 
 :::info Override Semantics
 Per-model `extraHeaders` and `queryParams` **replace** the defaults entirely (not merged key-by-key). If you need both default and model-specific headers, repeat the shared ones in the per-model block.
@@ -274,10 +274,10 @@ To disable embeddings (e.g., when your LLM provider doesn't support `/v1/embeddi
 
 The AI service requires OAuth/OIDC authentication. Configure one of the following:
 
-| Option | Environment Variable | Description |
-|--------|---------------------|-------------|
-| OIDC Discovery (recommended) | `OIDC_CONFIGURATION_URL` | Auto-discovers endpoints from Dex |
-| Manual configuration | `OAUTH_JWKS_URL` + `OAUTH_ISSUER` | Provide both URLs manually |
+| Option                       | Environment Variable              | Description                       |
+| ---------------------------- | --------------------------------- | --------------------------------- |
+| OIDC Discovery (recommended) | `OIDC_CONFIGURATION_URL`          | Auto-discovers endpoints from Dex |
+| Manual configuration         | `OAUTH_JWKS_URL` + `OAUTH_ISSUER` | Provide both URLs manually        |
 
 When using Dex (default), authentication is automatically configured via the global Dex issuer settings.
 
@@ -342,10 +342,10 @@ testkube-ai-service:
 
 ### Legacy Model Types
 
-| Type | New Equivalent | Purpose |
-|------|---------------|---------|
-| `primary` | `agent` | Main reasoning models |
-| `lightweight` | `tasks` | Quick UI enrichment tasks |
+| Type          | New Equivalent | Purpose                   |
+| ------------- | -------------- | ------------------------- |
+| `primary`     | `agent`        | Main reasoning models     |
+| `lightweight` | `tasks`        | Quick UI enrichment tasks |
 
 ### Legacy Configuration Priority
 
@@ -355,13 +355,13 @@ testkube-ai-service:
 
 ### Legacy Environment Variables
 
-| Variable | New Equivalent | Description |
-|----------|---------------|-------------|
-| `LLM_API_KEY` | `INFERENCE_DEFAULT_API_KEY` | API key for LLM service |
-| `LLM_API_URL` | `inference.defaults.url` | Custom LLM endpoint |
-| `MODEL_NAME` | `inference.agent[0].model` | Model name |
-| `AI_MODELS_FILE` | `INFERENCE_CONFIG_FILE` | Path to model config file (different YAML schema — not a direct drop-in replacement) |
-| `LLM_EXTRA_HEADERS` | `inference.defaults.extraHeaders` | Extra HTTP headers |
+| Variable            | New Equivalent                    | Description                                                                          |
+| ------------------- | --------------------------------- | ------------------------------------------------------------------------------------ |
+| `LLM_API_KEY`       | `INFERENCE_DEFAULT_API_KEY`       | API key for LLM service                                                              |
+| `LLM_API_URL`       | `inference.defaults.url`          | Custom LLM endpoint                                                                  |
+| `MODEL_NAME`        | `inference.agent[0].model`        | Model name                                                                           |
+| `AI_MODELS_FILE`    | `INFERENCE_CONFIG_FILE`           | Path to model config file (different YAML schema — not a direct drop-in replacement) |
+| `LLM_EXTRA_HEADERS` | `inference.defaults.extraHeaders` | Extra HTTP headers                                                                   |
 
 </details>
 
@@ -373,11 +373,11 @@ testkube-ai-service:
 
 Where your data is processed depends on your LLM configuration:
 
-| Configuration | Data Residency |
-|--------------|----------------|
-| Self-hosted LLM | Data never leaves your infrastructure. Supports air-gapped deployments and full compliance with data residency requirements. |
+| Configuration                       | Data Residency                                                                                                                              |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Self-hosted LLM                     | Data never leaves your infrastructure. Supports air-gapped deployments and full compliance with data residency requirements.                |
 | Third-party provider (your API key) | Queries and Testkube context (logs, workflow names, execution details) are sent to the provider's API. Review their data handling policies. |
-| Testkube hosted proxy | For trials/demos only. **Do not use for production or sensitive environments.** |
+| Testkube hosted proxy               | For trials/demos only. **Do not use for production or sensitive environments.**                                                             |
 
 ### Disabling Telemetry
 
@@ -401,13 +401,13 @@ AI functionality supports fully disconnected deployments when using self-hosted 
 
 ## Feature Flags Reference
 
-| Flag/Setting | Location | Default | Purpose |
-|-------------|----------|---------|---------|
-| `testkube-ai-service.enabled` | Helm | `false` | Deploy AI service |
-| `testkube-cloud-ui.ai.enabled` | Helm | `false` | Enable UI AI features |
-| `MCP_ENABLED` | Control Plane env | `false` | Enable MCP integration |
-| `AI_SERVICE_URL` | Control Plane env | `""` | AI service URL — required for AI Agent Triggers and session execution |
-| `aiCopilotEnabled` | User settings (API) | `false` | Per-user AI toggle |
+| Flag/Setting                   | Location            | Default | Purpose                                                               |
+| ------------------------------ | ------------------- | ------- | --------------------------------------------------------------------- |
+| `testkube-ai-service.enabled`  | Helm                | `false` | Deploy AI service                                                     |
+| `testkube-cloud-ui.ai.enabled` | Helm                | `false` | Enable UI AI features                                                 |
+| `MCP_ENABLED`                  | Control Plane env   | `false` | Enable MCP integration                                                |
+| `AI_SERVICE_URL`               | Control Plane env   | `""`    | AI service URL — required for AI Agent Triggers and session execution |
+| `aiCopilotEnabled`             | User settings (API) | `false` | Per-user AI toggle                                                    |
 
 ---
 
@@ -417,35 +417,35 @@ The following environment variables can be configured for the AI service:
 
 ### Required Variables
 
-| Variable | Description |
-|----------|-------------|
-| `CONTROL_PLANE_ENDPOINT` | URL endpoint for the Testkube Control Plane |
-| `POSTGRES_URI` | PostgreSQL connection string for LangGraph checkpointing |
+| Variable                 | Description                                              |
+| ------------------------ | -------------------------------------------------------- |
+| `CONTROL_PLANE_ENDPOINT` | URL endpoint for the Testkube Control Plane              |
+| `POSTGRES_URI`           | PostgreSQL connection string for LangGraph checkpointing |
 
 ### Control Plane Variables
 
 These are set on the Control Plane (cloud-api), not the AI service:
 
-| Variable | Required | Description |
-|----------|----------|-------------|
+| Variable         | Required              | Description                                                                                                                  |
+| ---------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `AI_SERVICE_URL` | Yes (for AI features) | Base URL of the AI service (e.g. `http://testkube-enterprise-ai-service:9090`). Required for AI Agent sessions and triggers. |
-| `API_BASE_URL` | Yes (for AI features) | External base URL of the cloud-api used by the AI service for callbacks (e.g. `https://api.example.com`) |
-| `MCP_ENABLED` | No | Set to `true` to enable MCP integration (default: `false`) |
+| `API_BASE_URL`   | Yes (for AI features) | External base URL of the cloud-api used by the AI service for callbacks (e.g. `https://api.example.com`)                     |
+| `MCP_ENABLED`    | No                    | Set to `true` to enable MCP integration (default: `false`)                                                                   |
 
 ### Inference Configuration
 
-| Variable | Description |
-|----------|-------------|
-| `INFERENCE_CONFIG_FILE` | Path to the inference configuration YAML file (set automatically by Helm) |
-| `INFERENCE_DEFAULT_API_KEY` | Default API key for inference (from `inference.defaults.secretRef`) |
+| Variable                    | Description                                                               |
+| --------------------------- | ------------------------------------------------------------------------- |
+| `INFERENCE_CONFIG_FILE`     | Path to the inference configuration YAML file (set automatically by Helm) |
+| `INFERENCE_DEFAULT_API_KEY` | Default API key for inference (from `inference.defaults.secretRef`)       |
 
 ### Authentication
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `OIDC_CONFIGURATION_URL` | Conditional | OIDC discovery URL (recommended) |
-| `OAUTH_JWKS_URL` | Conditional | JWK set document URL (if not using OIDC discovery) |
-| `OAUTH_ISSUER` | Conditional | OAuth issuer URL (if not using OIDC discovery) |
+| Variable                 | Required    | Description                                        |
+| ------------------------ | ----------- | -------------------------------------------------- |
+| `OIDC_CONFIGURATION_URL` | Conditional | OIDC discovery URL (recommended)                   |
+| `OAUTH_JWKS_URL`         | Conditional | JWK set document URL (if not using OIDC discovery) |
+| `OAUTH_ISSUER`           | Conditional | OAuth issuer URL (if not using OIDC discovery)     |
 
 ---
 

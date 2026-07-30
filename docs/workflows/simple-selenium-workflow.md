@@ -30,7 +30,7 @@ spec:
           - name: SELENIUM_BROWSER
             value: chrome
           - name: SELENIUM_HOST
-            value: '{{ services.chrome.0.ip }}:4444'
+            value: "{{ services.chrome.0.ip }}:4444"
         shell: |
           mvn test
           mvn surefire-report:report
@@ -38,5 +38,4 @@ spec:
         paths:
           - target/site/**/*
           - target/surefire-reports/**/*
-
 ```

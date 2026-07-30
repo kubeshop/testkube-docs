@@ -4,12 +4,11 @@
 
 ![Workflow Details](../articles/images/workflow-details-select-workflow.png)
 
-
 ## Running a Workflow
 
 After you select a Workflow, you can view its details via the **Overview**, **Executions**, **CLI Commands**, **CI/CD Integration**, and **Settings** tabs.
 You can also access **Run now** (top right) to run the Workflow immediately. The **Run now** drop-down list box
-includes **Run as silent execution**. You can select this checkbox to run silent Executions, which do not trigger webhooks, events, or metrics collection. Therefore, the Execution completes normally; however, 
+includes **Run as silent execution**. You can select this checkbox to run silent Executions, which do not trigger webhooks, events, or metrics collection. Therefore, the Execution completes normally; however,
 it is excluded from integrations, notifications, and monitoring systems that would otherwise respond to this run.
 
 While you can select **Run now** from various tabs, it is common to run Workflows via **CI/CD Integration** and from **Scheduling** located within the **Settings** tab.
@@ -18,7 +17,7 @@ Workflows execute one or more tests; Composite Workflows execute one or more Wor
 is based on the testing tool you use.
 
 :::info
-A **Runner Agent** acts as the test Execution engine and runs within the Kubernetes cluster to spin up pods, facilitate the testing defined in Testkube, 
+A **Runner Agent** acts as the test Execution engine and runs within the Kubernetes cluster to spin up pods, facilitate the testing defined in Testkube,
 and report results. You can use multiple **Runner Agents** in your **Environment**. For additional information, read [Runner Agents](/articles/agents-overview#runner-agents).
 :::
 
@@ -34,7 +33,7 @@ Upon selection, the **Resource Usage**, **Artifacts** and **Content Sources** ic
 
 ![Resource Usage, Artifacts, Content Sources](../articles/images/workflow-details-overview-icons-middle.png)
 
-More results are available (lower page) along with a Reports visualization option. JUnit Reports, for example, generate based on the content of your YAML file. Adding arguments 
+More results are available (lower page) along with a Reports visualization option. JUnit Reports, for example, generate based on the content of your YAML file. Adding arguments
 specific to JUnit reports trigger this report generation.
 
 ![Overview More Results](../articles/images/workflow-details-overview-lower-more-results.png)
@@ -53,15 +52,14 @@ You can identify and select a Workflow Execution then choose More Options (three
 You can also select an Execution from the list to view Execution-specific details. These details open in a new modal that contains the **Log Output**, **JUnit Reports**, **Artifacts**, **Resource Usage**, **Flowchart**, **CLI Commands**,
 **Events**, and **Workflow Definition** tabs. **Run again** allows you to re-execute the Workflow.
 
-![Executions – Select More Tabs](../articles/images/workflow-details-executions-select-for-more-tabs.png) 
+![Executions – Select More Tabs](../articles/images/workflow-details-executions-select-for-more-tabs.png)
 
 ### Multi-Agent Executions
 
 For Executions that use multiple [Runner Agents](/articles/agents-overview#runner-agents),
-an expandable section includes those Executions. Use the arrows to expand and collapse these Executions. 
+an expandable section includes those Executions. Use the arrows to expand and collapse these Executions.
 
 ![Multi-agent Executions List](images/multi-agent-executions-list.png)
-
 
 ## CLI Commands Tab
 
@@ -81,9 +79,9 @@ You commonly run Workflows via this tab and **Scheduling**, accessible via **Set
 
 ## Workflow Settings Tabs
 
-The **Settings** tab is the primary interface for building the YAML **Definition**, encompassing configurable settings such as **General**, **Execution**, **Test Content**, **Resource Usage**, 
-**Variables & Secrets**, **Resource Group**, **Scheduling**, and **Definition**. More specifically, configuring these settings dynamically generates and updates the YAML visible 
-via **Definition**. For example, designating **333** in the **CPU** field in the **Resource Limits** section of **Resource Usage** populates the corresponding *resource/limits* 
+The **Settings** tab is the primary interface for building the YAML **Definition**, encompassing configurable settings such as **General**, **Execution**, **Test Content**, **Resource Usage**,
+**Variables & Secrets**, **Resource Group**, **Scheduling**, and **Definition**. More specifically, configuring these settings dynamically generates and updates the YAML visible
+via **Definition**. For example, designating **333** in the **CPU** field in the **Resource Limits** section of **Resource Usage** populates the corresponding _resource/limits_
 in the YAML file. You can configure **Definition** using the **Settings** configurations, or you can edit the YAML **Definition** directly.
 
 ![General](../articles/images/workflow-details-settings-general.png)
@@ -92,9 +90,9 @@ in the YAML file. You can configure **Definition** using the **Settings** config
 
 The **General** setting allows you to update:
 
-* **Test Workflow name** – Title or designation you use to identify the Workflow.
-* **Labels** – Tag you add to the Workflow for actions such as filtering and searching.
-* **Timeout** – Workflow Execution expiration.
+- **Test Workflow name** – Title or designation you use to identify the Workflow.
+- **Labels** – Tag you add to the Workflow for actions such as filtering and searching.
+- **Timeout** – Workflow Execution expiration.
 
 **General** also allows you to **Delete this Test Workflow** and **Purge Past Executions**; the latter makes database/storage space available
 if you have several old Executions for this Workflow.
@@ -107,7 +105,7 @@ Instead, you must create a copy of the Workflow with the new name and delete the
 :::warning
 
 The **Execution** setting only applies to Workflows that use a single image and a single step – generally recommended when
-editing the Workflow YAML directly in the **Definition** setting to ensure changes are compatible with 
+editing the Workflow YAML directly in the **Definition** setting to ensure changes are compatible with
 other constructs in your Workflow.
 
 :::
@@ -119,7 +117,7 @@ Collectively, you can use these settings to run your tests.
 
 ### Test Content
 
-The **Test Content** setting only applies to Workflows that use a content Source for their tests. Use the **Definition** setting to 
+The **Test Content** setting only applies to Workflows that use a content Source for their tests. Use the **Definition** setting to
 edit the Workflow YAML directly if your Workflow uses more than one Source for its tests.
 
 ![Test Content Settings](../articles/images/workflow-details-settings-test-content.png)
@@ -148,7 +146,7 @@ The **Resource Group** setting allows you to assign this Workflow to a Resource 
 
 ### Scheduling
 
-The **Scheduling** setting allows you to configure a single schedule for your Workflow, designating *when* and *how often* the Workflow runs. If you want to define
+The **Scheduling** setting allows you to configure a single schedule for your Workflow, designating _when_ and _how often_ the Workflow runs. If you want to define
 multiple schedules, you can do so directly in the Workflow YAML via the **Definition** setting.
 
 You commonly run Workflows via this setting and the **CI/CD Integration** tab.
@@ -161,6 +159,6 @@ For additional information, read [Scheduling Workflows](/articles/scheduling-tes
 
 The **Definition** setting provides a powerful YAML editor for modifying your Workflows. As you designate various configurations via **General**, **Execution**, **Test Content**, **Resource Usage**,
 **Variables & Secrets**, **Resource Group**, and **Scheduling**, your specifications are automatically reflected in the YAML file. These settings, therefore, dynamically build this file. Some changes, however, you must make
-manually in the YAML file itself. For additional information, read [Workflow YAML Editor](testkube-dashboard-workflow-editor). 
+manually in the YAML file itself. For additional information, read [Workflow YAML Editor](testkube-dashboard-workflow-editor).
 
 ![Definition Settings](../articles/images/workflow-details-settings-definition.png)
