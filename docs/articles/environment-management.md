@@ -115,6 +115,32 @@ Manage your Environment Agents here - [Read More](/articles/agents-overview).
 
 ![Testkube Agents Panel](images/testkube-agents-panel.png)
 
+#### Registration Token Rotation
+
+Each Environment has a registration token that is used by new Testkube Agents when they register with the Control Plane.
+Already registered Agents use their own agent keys, so rotating the registration token does not disconnect or require
+reinstalling existing Agents.
+
+Organization admins and owners can rotate the registration token with the Testkube CLI:
+
+```sh
+testkube agent rotate-registration-token [environment-id]
+```
+
+If you omit `[environment-id]`, the CLI uses the Environment ID from your current Testkube context. The command prints
+the new registration token once, together with the grace period and the time when the previous token expires.
+
+By default, the previous token remains valid for new Agent registrations for 24 hours. You can customize this window
+with `--grace-period`, up to a maximum of 168 hours, or use `--grace-period 0s` for immediate rotation:
+
+```sh
+testkube agent rotate-registration-token tkcenv_xxxxx --grace-period 24h
+```
+
+After rotating the token, update `runner.register.token` or the Kubernetes Secret referenced by
+`runner.register.tokenSecret` before the previous token expires. Agents that try to register with an expired previous
+token must be updated to use the new value of `TESTKUBE_PRO_AGENT_REGISTRATION_TOKEN`.
+
 ### Environment Members
 
 You can assign environment-specific roles to [Teams](/articles/teams) or individual [Members](/articles/organization-management#members) of your organization to control which
