@@ -75,6 +75,29 @@
 - CI checks Prettier formatting on changed files only, to avoid requiring a repo-wide reformat
 - Generated content is excluded through `.prettierignore`, including `docs/cli/`, `docs/crd/`, `docs/openapi/`, `docs/articles/inventory/generated/`, and `static/openapi/`
 
+### Renaming or Removing Documentation
+
+Article slugs are linked from outside this repo, so a rename is never just a file move.
+
+1. **Add a `redirects.js` entry** mapping the old path to the new one:
+   ```js
+   {
+     from: "/articles/old-slug",
+     to: "/articles/new-slug",
+   },
+   ```
+   Note these are *client-side* redirects — the old URL keeps returning HTTP 200 and serves a
+   meta-refresh stub. Any external link checker that only inspects status codes will report the
+   stale slug as healthy.
+2. **Update `sidebars.js`** to point at the new file.
+3. Run `npm run build` — it catches in-repo links you missed. It cannot see links from other repos.
+4. **Consider external consumers.** [`kubeshop/testkube-skills`](https://github.com/kubeshop/testkube-skills)
+   ships an AI agent skill containing a curated index of `docs.testkube.io` article URLs. Its
+   `docs-index` job runs weekly and will flag the stale slug on its own, but fixing it in the same
+   PR saves a round trip.
+
+Deleting a page without a redirect breaks every external link to it. Prefer a redirect to a deletion.
+
 ## Documentation Patterns
 
 ### Styling
