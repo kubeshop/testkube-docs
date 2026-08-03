@@ -32,8 +32,8 @@ you.
 One general skill acts as the entry point. It carries the platform knowledge the others assume, and
 routes to whichever specialist fits the request.
 
-| Skill | What it does | Use when |
-|-------|--------------|----------|
+| Skill      | What it does                                                                                                                                                                                                                                                                                                  | Use when                                                                                                                                                                                       |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `testkube` | Explains what Testkube is, how Control Plane and open source standalone differ, and the core concepts — TestWorkflows, templates, executions, agents, triggers, webhooks, expressions. Carries a curated index of the documentation, CLI orientation, and decision trees that route to the specialist skills. | Your agent needs context on Testkube itself, you are asking where something is documented, or you want to run tests somewhere local execution cannot reach and are not sure what to reach for. |
 
 It orients and routes — it never installs, authors YAML, or runs executions itself. Two behaviors
@@ -48,10 +48,10 @@ are worth calling out:
 
 These two get your tooling ready. Skip them if you already have a working CLI and an environment.
 
-| Skill | What it does | Use when |
-|-------|--------------|----------|
-| `installing-testkube-cli` | Installs, upgrades, or verifies the Testkube CLI (`testkube` / `tk` / `kubectl-testkube`) on Linux, macOS, and Windows via the install script, Homebrew, APT, Chocolatey, or a manual download. | The CLI is missing (`testkube: command not found`), a specific version is required, or another skill needs to shell out to `testkube`. |
-| `installing-testkube-oss-agent` | Checks prerequisites, creates a cluster (k3d by default when a fresh local one is needed), and deploys a Testkube open source standalone agent into the `testkube` namespace. | You need a local open source environment to run tests against and none is running yet. |
+| Skill                           | What it does                                                                                                                                                                                    | Use when                                                                                                                               |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `installing-testkube-cli`       | Installs, upgrades, or verifies the Testkube CLI (`testkube` / `tk` / `kubectl-testkube`) on Linux, macOS, and Windows via the install script, Homebrew, APT, Chocolatey, or a manual download. | The CLI is missing (`testkube: command not found`), a specific version is required, or another skill needs to shell out to `testkube`. |
+| `installing-testkube-oss-agent` | Checks prerequisites, creates a cluster (k3d by default when a fresh local one is needed), and deploys a Testkube open source standalone agent into the `testkube` namespace.                   | You need a local open source environment to run tests against and none is running yet.                                                 |
 
 Both skills are conservative by design: they check for an existing installation first and reuse it
 rather than replacing it, and they confirm each step with you before changing anything.
@@ -62,11 +62,11 @@ minikube, kind, k3d, or remote — and reuses that too.
 
 These three are the working loop: find the tests, turn them into a workflow, run it.
 
-| Skill | What it does | Use when |
-|-------|--------------|----------|
-| `test-discovery` | Walks a cloned repository, detects language and framework from marker files and content signals, and groups findings into suites — each with evidence, a confidence level, a framework version resolved from lock files, and a suggested container image. | You have a repository locally and need to know what tests exist, what runs them, and with which command. |
-| `testworkflow-author` | Creates and validates TestWorkflow YAML: shell steps, container run steps, `execute` composition, templates, services, artifacts, config parameters, and cron triggers. Reads lock files to pin dependency versions and match container images. | You are writing a TestWorkflow, choosing step types, or configuring workflow behavior. |
-| `testworkflow-runner` | Runs executions and diagnoses them — create, run, monitor, retrieve logs, download artifacts, and analyze root causes against a failure pattern reference of exit codes, symptoms, and fixes. | A workflow has been authored and needs to run, or a previous execution failed and needs explaining. |
+| Skill                 | What it does                                                                                                                                                                                                                                              | Use when                                                                                                 |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `test-discovery`      | Walks a cloned repository, detects language and framework from marker files and content signals, and groups findings into suites — each with evidence, a confidence level, a framework version resolved from lock files, and a suggested container image. | You have a repository locally and need to know what tests exist, what runs them, and with which command. |
+| `testworkflow-author` | Creates and validates TestWorkflow YAML: shell steps, container run steps, `execute` composition, templates, services, artifacts, config parameters, and cron triggers. Reads lock files to pin dependency versions and match container images.           | You are writing a TestWorkflow, choosing step types, or configuring workflow behavior.                   |
+| `testworkflow-runner` | Runs executions and diagnoses them — create, run, monitor, retrieve logs, download artifacts, and analyze root causes against a failure pattern reference of exit codes, symptoms, and fixes.                                                             | A workflow has been authored and needs to run, or a previous execution failed and needs explaining.      |
 
 Each skill stays inside its lane, which keeps the agent predictable:
 
@@ -296,7 +296,7 @@ If the run fails, `testworkflow-runner` reports the root cause and hands the fin
 ## Using Skills with the MCP Server
 
 Skills and the [Testkube MCP Server](/articles/mcp-overview) compose well. With both installed,
-your agent knows *how* to work with Testkube and can *act* on your environment directly — querying
+your agent knows _how_ to work with Testkube and can _act_ on your environment directly — querying
 executions, reading logs, and running workflows without shelling out to the CLI.
 
 - [Testkube MCP Server Overview](/articles/mcp-overview) — what the MCP Server offers and how to
