@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:3406d7ccddc34fe4f3eac7bda4e9a04e4d843edd80a918ebf5301e9f225d7b88</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/high-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/medium-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/low-2-fce1a9"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:3406d7ccddc34fe4f3eac7bda4e9a04e4d843edd80a918ebf5301e9f225d7b88</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/high-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/medium-0-lightgrey"/> <img alt="low: 3" src="https://img.shields.io/badge/low-3-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>76 MB</td></tr>
 <tr><td>packages</td><td>86</td></tr>
@@ -13,7 +13,7 @@ hide_table_of_contents: true
 
 <table>
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>libxml2</strong> <code>2.13.9-r2</code> (apk)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 3" src="https://img.shields.io/badge/L-3-fce1a9"/> <!-- unspecified: 0 --><strong>libxml2</strong> <code>2.13.9-r2</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/libxml2@2.13.9-r2?os_name=alpine&os_version=3.24</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2026-0989?s=alpine&n=libxml2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C%3D2.13.9-r2"><img alt="low : CVE--2026--0989" src="https://img.shields.io/badge/CVE--2026--0989-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
@@ -50,7 +50,7 @@ hide_table_of_contents: true
 </blockquote>
 </details>
 
-<a href="https://scout.docker.com/v/CVE-2026-11979?s=alpine&n=libxml2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C%3D2.13.9-r2"><img alt="unspecified : CVE--2026--11979" src="https://img.shields.io/badge/CVE--2026--11979-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-11979?s=alpine&n=libxml2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C%3D2.13.9-r2"><img alt="low : CVE--2026--11979" src="https://img.shields.io/badge/CVE--2026--11979-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
 <tr><td>Affected range</td><td><code>&lt;=2.13.9-r2</code></td></tr>
