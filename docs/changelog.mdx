@@ -8,6 +8,19 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Patch Release v2.11.3 (2026-08-04)
+
+Control Plane is available in Helm chart `v2.335.1`.
+
+### Improvements
+
+Testkube CLI: The new testkube pro export usage command simplifies exporting usage data from air-gapped Enterprise installations. It automatically detects the Control Plane configuration and creates a ZIP file that customers can review and share with Testkube when requested.
+
+### Fixes
+
+- Testkube AI security: Strengthened authorization across Testkube AI, MCP servers, and AI agents to ensure access consistently reflects each user’s permissions.
+- PostgreSQL support: Test Workflows without executions are now visible to all users with the appropriate permissions, and pagination now displays the correct number of pages.
+
 ## Release v2.12.0 (2026-07-23)
 
 This is a major release with lots of new features and improvements!
