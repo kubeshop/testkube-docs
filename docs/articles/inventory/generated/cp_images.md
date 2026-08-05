@@ -1,13 +1,13 @@
 :::info
 
-Based on chart `testkube-enterprise` as of version `2.335.0` on 04-08-2026
+Based on chart `testkube-enterprise` as of version `2.335.0` on 05-08-2026
 
 :::
 
 | Image | Description | Vulnerability Report (`linux/amd64`) | Vulnerability Report (`linux/arm64`) | Docker Image |
 |-------|-------------|----------------------------------------|----------------------------------------|--------------|
 | kubeshop/bitnami-mongodb:8.3.4 | Database used by the Testkube control plane. | [View Report](./bitnami-mongodb-8.3.4_linux_amd64.md) | [View Report](./bitnami-mongodb-8.3.4_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/bitnami-mongodb/8.3.4/images/sha256-5a5f562b3276f9cf50ad4405dd208479cb4270896b99e29d54f5c45b4cc517af?context=explore) |
-| kubeshop/dex:2.45.1 | Identity provider used by the Testkube control plane. | [View Report](./dex-2.45.1_linux_amd64.md) | [View Report](./dex-2.45.1_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/dex/2.45.1/images/sha256-980509fd40c4862a54293cdbe1c5f850306fdf46752d5af8d8433b220d7284ea?context=explore) |
+| kubeshop/dex:2.45.1 | Identity provider used by the Testkube control plane. | [View Report](./dex-2.45.1_linux_amd64.md) | [View Report](./dex-2.45.1_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/dex/2.45.1/images/sha256-e486f8480d9801d78fd810d1bbf91068e9907f0c78e7aa9fc485dca1e8f99c31?context=explore) |
 | kubeshop/testkube-enterprise-api:2.12.0 | API server for the Testkube control plane. | [View Report](./testkube-enterprise-api-2.12.0_linux_amd64.md) | [View Report](./testkube-enterprise-api-2.12.0_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-enterprise-api/2.12.0/images/sha256-821ba0f44edaa4952b96889bab80a129622bf48b6652e1673693eddaa09480ac?context=explore) |
 | kubeshop/testkube-enterprise-ui:2.12.0 | Testkube dashboard. | [View Report](./testkube-enterprise-ui-2.12.0_linux_amd64.md) | [View Report](./testkube-enterprise-ui-2.12.0_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-enterprise-ui/2.12.0/images/sha256-3406d7ccddc34fe4f3eac7bda4e9a04e4d843edd80a918ebf5301e9f225d7b88?context=explore) |
 | kubeshop/testkube-enterprise-worker-service:2.12.0 | Testkube worker service used for background processing. | [View Report](./testkube-enterprise-worker-service-2.12.0_linux_amd64.md) | [View Report](./testkube-enterprise-worker-service-2.12.0_linux_arm64.md) | [View Image](https://hub.docker.com/layers/kubeshop/testkube-enterprise-worker-service/2.12.0/images/sha256-1a08772dcde4468f6ef5e6817593b97820c5c4605f4328e8b5f43623db12dcf1?context=explore) |
