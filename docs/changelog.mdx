@@ -8,6 +8,19 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Patch Release v2.11.3 (2026-08-04)
+
+Control Plane is available in Helm chart `v2.335.1`.
+
+### Improvements
+
+Testkube CLI: testkube pro export usage — one command to pull legacy usage data from air-gapped Enterprise installs. Auto-detects your CP config; you get a zip to send us.
+
+### Fixes
+
+- Testkube AI secuity: user token is sent for all methods forcing MCP and AI Agents to only have access to those resources the user has.
+- Postgres Support: Test Workflows wihtout executions now are visible for all roles that are allowed to work with them. Test Workflows pagination now shows the right number of pages.
+
 ## Release v2.12.0 (2026-07-23)
 
 This is a major release with lots of new features and improvements!
@@ -52,6 +65,20 @@ Control Plane is available in Helm chart `v2.334.3`.
 
 - Fixed an issue with mongo to postgres migration
 - Fixed an issue where the AI service would be unable to communicate with the Control Plane
+
+## Patch Release v2.11.2 (2026-07-07)
+
+Control Plane is available in Helm chart `v2.334.2` and the Agent is available in Helm chart `v2.11.1`.
+
+### Improvements
+
+- Use PostgreSQL as default database for Testkube Standalone agent.
+- Adds environment variables to configure defaults for all internally injected runner containers.
+
+### Fixes
+
+- Resolve Docker credentials whose keys use a URL scheme prefix (e.g., https://index.docker.io/v1/), which is the format written by the legacy Docker credential-store and tools like Artifactory. Previously only an exact key match or a path-prefix match was attempted; now scheme-stripped, v1/v2-suffix-aware matching is added as a final fallback.
+- Migration MongoDB to PostgreSQL: schema fixes for missing table.
 
 ## Patch Release v2.11.1 (2026-07-02)
 
