@@ -342,6 +342,7 @@ Afterwards enable SCIM integration in the desired organization via the dashboard
 - Reference environments and resource groups by ID or slug, not display name.
 - Look for `ignoring all SCIM roles: no value matched the expected format` in the control plane API logs. The warning lists the values it rejected and the format it expected, which usually points straight at a malformed URN.
 - Entra ID only: if a role comes through as a friendly name like `Admin` instead of the URN, the app role's display name is still the friendly name. Entra sends the display name, not the value, so set the display name to the URN.
+- Okta only: if a user is in more than one Okta group and only the values from one group arrive, the app attributes still use the default **Use Group Priority** option. Select **Combine values across groups** on the `roles` and `entitlements` attributes (see [Users in Multiple Okta Groups](#users-in-multiple-okta-groups)).
 
 ### SCIM request failures
 
@@ -448,6 +449,27 @@ Mapping the attributes only tells Okta where to send them — you still set the 
 
 Okta sends the values to Testkube on the next sync, or right away when you assign the user to the app.
 
+#### Users in Multiple Okta Groups
+
+By default, Okta applies the **Use Group Priority** option to app attributes. When a user gets the app through more than one group, Okta sends the `roles` and `entitlements` values from the highest priority group only. The values from the other groups are not sent, so the user does not get that access in Testkube.
+
+If you model access with several groups, for example one group per environment or per resource group, switch both attributes to combine mode:
+
+1. Go to **Directory** → **Profile Editor** and select the Testkube SCIM application.
+2. Edit the `roles` attribute and select **Combine values across groups** as the group priority option. Save.
+3. Repeat for the `entitlements` attribute.
+
+Okta then sends the union of the values from all groups that assign the app to the user. When you remove a user from a group, Okta recomputes the combined values and pushes a profile update. Testkube then removes the access that is no longer listed.
+
+Note these constraints:
+
+- The option is available only for array attributes (the string array type from Step 1). It is not available for attributes with the **User personal** scope.
+- Okta combines the values that you set on the group **app assignments**. Okta does not combine attributes on the Okta group profile itself.
+- A direct (individual) app assignment overrides the values from group assignments. Assign the application through groups only.
+- Give each resource one role across all groups of a user. When two groups set a different role for the same environment or resource group, for example `read` and `admin`, Testkube applies the first value in the array, and the order is not guaranteed.
+
+Keep the default **Use Group Priority** option when every user gets the app from a single group.
+
 ### Microsoft Entra ID (Azure AD)
 
 This guide integrates Microsoft Entra ID with Testkube for **SCIM provisioning**. Entra sends the complex attribute format, so turn on complex format for the organization first (see [Roles and Entitlements Format](#roles-and-entitlements-format)).
@@ -477,17 +499,47 @@ Go to **Provisioning** → **Mappings** → **Provision Microsoft Entra ID Users
 
 #### Step 4. Send Roles
 
-Entra builds the `roles` value from a user's **app role assignment**, and it sends the app role's **display name**, not its value. So the display name has to be the Testkube role URN.
+Entra builds the `roles` value from a user's **app role assignments**, and it sends the app role's **display name**, not its value. So the display name has to be the Testkube role URN.
+
+First create the app roles:
 
 1. In **App registrations**, open your app (the non-gallery app you created also appears here), go to **App roles**, and create a role:
    - **Display name** → the Testkube URN, for example `urn:testkube:role:organization:*:admin`
    - **Value** → the same URN
    - **Allowed member types** → Users/Groups
-2. Back in the app's **Provisioning** → **Mappings**, click **Add New Mapping**:
+2. Repeat for every URN you want to assign.
+
+Then map the app roles to the SCIM `roles` attribute. Pick the mapping that matches your setup.
+
+**One role per user: `SingleAppRoleAssignment`**
+
+Use this mapping when every user holds exactly one app role.
+
+1. In the app's **Provisioning** → **Mappings**, click **Add New Mapping**:
    - **Mapping type** → Expression
    - **Expression** → `SingleAppRoleAssignment([appRoleAssignments])`
    - **Target attribute** → `roles[primary eq "True"].value`
-3. Go to **Users and groups**, add a user, and assign the app role you created.
+2. Go to **Users and groups**, add a user, and assign the app role you created.
+
+When a user holds more than one app role, this mapping sends only one of them, and Entra gives no guarantee which one. Use the next mapping instead.
+
+**Multiple roles per user: `AssertiveAppRoleAssignmentsComplex`**
+
+Use this mapping when users can hold several app roles at once, for example when each Entra group assigns its own app role and users belong to several groups.
+
+1. In **Provisioning** → **Mappings**, open **Show advanced options** → **Edit attribute list**, and add `roles` as a multi-valued attribute if it is not in the list.
+2. Click **Add New Mapping**:
+   - **Mapping type** → Expression
+   - **Expression** → `AssertiveAppRoleAssignmentsComplex([appRoleAssignments])`
+   - **Target attribute** → `roles`
+3. Remove the `SingleAppRoleAssignment` mapping if it exists. The two mappings must not target `roles` at the same time.
+4. Go to **Users and groups**, and assign users or groups to the app roles. Entra sends all roles of a user, from all assignments, as one array.
+
+Notes on the complex mappings:
+
+- `AssertiveAppRoleAssignmentsComplex` sends a PATCH replace operation, so a role you remove in Entra is also removed in Testkube. The similar `AppRoleAssignmentsComplex` expression only adds roles and never removes them. Do not use it, because Testkube then keeps roles that you already removed in Entra.
+- The complex expressions do not work with the provisioning scope **Sync all users and groups**. Set the scope to **Sync only assigned users and groups**.
+- Give each resource one role across all app roles of a user. When two app roles set a different role for the same environment or resource group, Testkube applies the first value in the array.
 
 #### Step 5. Send Entitlements (optional)
 
