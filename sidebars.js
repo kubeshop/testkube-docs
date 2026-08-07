@@ -158,6 +158,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "Offline usage export",
+                  id: "articles/usage-export-job",
+                },
+                {
+                  type: "doc",
                   label: "High Availability Configuration",
                   id: "articles/ha",
                 },
