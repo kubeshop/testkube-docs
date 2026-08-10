@@ -23,6 +23,8 @@ hide_table_of_contents: true
 <tr><td>Fixed version</td><td><code>5.19.2</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.1</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:H/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.292%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -65,6 +67,8 @@ We would also like to thank @<!-- -->HughLewis20, who independently reported the
 <tr><td>Fixed version</td><td><code>5.19.2</code></td></tr>
 <tr><td>CVSS Score</td><td><code>6.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:N/I:H/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.349%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
