@@ -251,10 +251,16 @@ Each of these definitions supports a corresponding `target` property:
 
 ```yaml
 target:
+  schedulerPolicy: OnlyWhenMatches # optional
   match: [<label>: <values>]
   not: [<label>: <values>]
   replicate: [<labels>]
 ```
+
+`schedulerPolicy: OnlyWhenMatches` is available anywhere this shared `target` structure is accepted, including Workflows,
+WorkflowTemplates, Workflow CronJobs, Triggers, execution CRDs, and API execution requests. It prevents creation of an
+execution when no existing, non-deleted Runner Agent in that environment matches the normalized target. Without the field,
+targeted executions retain their existing queueing behavior.
 
 The following targets a specific Runner Agent by name:
 
