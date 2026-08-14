@@ -10,7 +10,7 @@ For users of the Testkube Cloud Control Plane, AI features are enabled as follow
   2. Navigate to **Organization Settings** → **Product Features** tab and toggle **AI Assistant** on.
 
 :::info
-The default LLM used by AI functionality in Testkube Cloud is OpenAI's [GPT-5.2-Codex](https://openai.com/index/introducing-gpt-5-2-codex/).
+The default LLM used by AI functionality in Testkube Cloud is OpenAI's GPT-5.2.
 
 You can add your own models (OpenAI, Azure OpenAI, or any OpenAI-compatible service) to make
 additional models available — see [Configuring AI Models](/articles/ai-models).
@@ -44,10 +44,10 @@ testkube-ai-service:
       secretRef: my-openai-secret
       secretRefKey: api-key
     agent:
-      - model: gpt-4o
+      - model: gpt-5.2
         default: true
     tasks:
-      model: gpt-4o-mini
+      model: gpt-5-mini
     embeddings:
       model: text-embedding-3-small
 
@@ -75,12 +75,12 @@ testkube-ai-service:
       queryParams:
         api-version: "2024-02-01"
     agent:
-      - model: gpt-4o
+      - model: gpt-5.2
         default: true
-        url: "https://my-company.openai.azure.com/openai/deployments/gpt-4o"
+        url: "https://my-company.openai.azure.com/openai/deployments/gpt-5.2"
     tasks:
-      model: gpt-4o-mini
-      url: "https://my-company.openai.azure.com/openai/deployments/gpt-4o-mini"
+      model: gpt-5-mini
+      url: "https://my-company.openai.azure.com/openai/deployments/gpt-5-mini"
     # Omit embeddings if your provider doesn't support /v1/embeddings
 ```
 
