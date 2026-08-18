@@ -219,9 +219,14 @@ testSelector:
   nameRegex: TestWorkflow name regex (for example, "test.*")
   labelSelector:
     matchLabels: map of key-value pairs
+    matchExpressions:
+      - key: label name
+        operator: [In | NotIn | Exists | DoesNotExist]
+        values: list of values
 ```
 
-Note: labelSelector.matchExpressions will be supported in a future release.
+`labelSelector.matchExpressions` is supported for TestWorkflow target selection and follows the
+standard Kubernetes label selector semantics.
 
 ## Resource Conditions
 
