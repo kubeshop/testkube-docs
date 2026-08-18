@@ -1,0 +1,164 @@
+# Git Integration
+
+**Git Integration** connects a GitHub repository to a Testkube environment so PR activity runs your Test Workflows and results post back on the PR as check-runs.
+
+:::note
+Available on Testkube Cloud and on-prem Control Plane. On-prem requires the GitHub integration enabled in the Helm chart and a GitHub App configured against the target organization. See [Using GitHub Apps with Testkube](/articles/github-actions#using-github-apps-with-testkube).
+:::
+
+## What it does
+
+For every event received from GitHub, Git Integration:
+
+1. Matches the event to your configured integration.
+2. Runs the Workflows selected for the repository against the commit that produced the event.
+3. Posts execution status back to the PR (check-run) or commit (status).
+
+Workflows that run can be:
+
+- **Existing Workflows** already in the environment, attached during onboarding.
+- **Auto-generated Workflows** materialized from frameworks detected in the repo (Playwright, Cypress, Jest, Go, JMeter, Artillery, and others).
+
+## Prerequisites
+
+- A Testkube environment with an agent connected. See [Agents Overview](/articles/agents-overview).
+- On on-prem, the GitHub integration enabled in `values.yaml`.
+- The Testkube GitHub App installed on the target repository.
+- The user onboarding must have `admin` access to the repo.
+
+## Installing the GitHub App
+
+On Testkube Cloud, open **Integrations → Git Integration** and click **Connect my first repository**. GitHub asks which organization and which repos the App may access.
+
+On on-prem, the operator creates the App during deployment. See [Using GitHub Apps with Testkube](/articles/github-actions#using-github-apps-with-testkube).
+
+Required App permissions:
+
+- **Contents**: read
+- **Metadata**: read
+- **Pull requests**: read & write
+- **Checks**: read & write
+- **Issues**: read (for the `@testkube` comment trigger)
+
+## Onboarding a repository
+
+From the dashboard, open **Integrations → Git Integration → Onboard repository**:
+
+1. Pick the org and repo (only repos the App is installed on show up).
+2. Review detected frameworks. Include the ones you want auto-generated, exclude the rest.
+3. Optionally attach existing Workflows already in your environment.
+4. Confirm. Testkube persists the selection, materializes one auto-gen Workflow per selected framework, and starts receiving webhook events.
+
+## What triggers a run
+
+| Event | Action | Notes |
+|---|---|---|
+| `pull_request` | `opened` | `draft == false` |
+| `pull_request` | `ready_for_review` | |
+| `pull_request` | `synchronize` | new commit pushed to the PR head |
+| `issue_comment` | `created` on a PR | body must mention `@testkube` (editing a comment does not count) |
+| `push` | | branches matched by config |
+| `tag push` | | tag globs matched by config |
+| `release` | `published` / `prereleased` | prereleases opt-in |
+
+Toggle event types per integration from the dashboard configuration panel.
+
+## Configuring event triggers with `.testkube/git-integration.yml`
+
+Drop this file on the repo default branch to declare which Workflows run on which events:
+
+```yaml
+workflows:
+  - name: unit-smoke
+    required: true
+    on:
+      pull_request: {}
+  - name: e2e-nightly
+    on:
+      push:
+        branches: ["main"]
+```
+
+Fields:
+
+- `workflows[].name` — Test Workflow name in the environment.
+- `workflows[].required` — a failing run blocks the aggregate check.
+- `workflows[].on.<event>` — per-event filter. Empty block matches any event of that kind.
+
+The file is ignored for PRs originating from **forks** to avoid running untrusted YAML from external contributors.
+
+## Auto-generated Workflows
+
+Every auto-gen Workflow is labelled so Git Integration can reconcile it:
+
+| Label / Annotation | Value |
+|---|---|
+| `testkube.io/git-integration-integration-id` | ID of the owning integration |
+| `testkube.io/git-integration-framework` | Detected framework (e.g. `playwright`) |
+| `testkube.io/git-integration-provider` | `github` |
+| `testkube.io/git-integration-managed` (annotation) | set to `"false"` to detach |
+| `testkube.io/managed-by` | `git-integration` |
+
+### Detaching a generated Workflow
+
+Add `testkube.io/git-integration-managed: "false"` as an annotation on the Workflow to opt it out of reconcile:
+
+- Testkube no longer overwrites your edits on rescan.
+- The Workflow is not deleted when the integration is removed.
+- It keeps running on every triggering event until you remove it from the integration selection.
+
+Re-set the annotation to `"true"` (or remove it) to bring the Workflow back under management.
+
+### Event parameters available to your Workflows
+
+Declare the ones you need under `spec.config`:
+
+| Key | Meaning |
+|---|---|
+| `PR_NUMBER` | PR number. Empty on push/tag/release. |
+| `PR_SHA` | Head commit SHA of the PR. |
+| `PR_BASE_REF` | Base branch of the PR (e.g. `main`). |
+| `PR_HEAD_REF` | Head branch of the PR. |
+| `PR_AUTHOR` | GitHub login of the PR author. |
+| `revision` | Commit SHA of the event, used by content steps to clone at that revision. |
+
+Workflows that do not declare these ignore them.
+
+## Filtering executions by Git Integration
+
+Every execution scheduled by Git Integration carries `actor.type = gitintegration`. The **Executions** page has a **Git Integration** filter chip that returns those runs. The synthesized per-PR parent (`ql-parent-*`) is hidden from the list by design — the filter returns the child workflow executions that ran against the PR.
+
+## Re-scanning a repository
+
+Framework detection is refreshed in two cases:
+
+- **Automatic** — when a PR event touches a stack anchor (`package.json`, `go.mod`, `pom.xml`, `requirements.txt`, `playwright.config.ts`, `cypress.config.ts`), Git Integration re-runs detection on the PR head and updates the set of auto-gen Workflows before executing.
+- **Manual** — remove the integration from the dashboard and onboard again. A one-click **Rescan** button is on the roadmap.
+
+## Results on GitHub
+
+Each run reports a single aggregate **check-run** on the PR (or a commit status on push/tag/release). Clicking it opens the execution details in Testkube.
+
+- Any **failed** required Workflow marks the check-run failed.
+- **Cancelled** / **aborted** marks it neutral.
+- Executions that never start (queued indefinitely, agent disconnected) time out after the environment's queue timeout and mark the check-run as failed with a "did not run" reason.
+
+## Troubleshooting
+
+**The check-run never appears on the PR**
+Confirm the GitHub App has **Checks: write** on the repo. If the dashboard shows events as `dispatch_failed`, the agent logs will typically show `403 Resource not accessible by integration` — update App permissions and re-trigger.
+
+**`@testkube` comment did nothing**
+The parser accepts `action: created` only. Editing an existing comment doesn't count — delete and post a new one. The body must contain `testkube`.
+
+**A generated Workflow keeps coming back after I delete it**
+Delete alone doesn't remove it from the desired state. Either remove the framework from the integration selection in the dashboard, or set `testkube.io/git-integration-managed=false` on it and then delete.
+
+**Generated Workflow runs in the wrong namespace**
+Auto-gen Workflows land in the namespace of the agent registered with the environment. With multiple agents, point manual `testkube run testworkflow` calls at the same namespace, or attach the Workflow to the intended agent.
+
+## Related
+
+- [Integrations Overview](/articles/integrations-dashboard-explore)
+- [Kubernetes Event Triggers](/articles/integrations-triggers)
+- [Webhooks](/articles/integrations-webhooks)

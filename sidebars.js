@@ -562,6 +562,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "Git Integration",
+                  id: "articles/git-integration",
+                },
+                {
+                  type: "doc",
                   label: "Triggers",
                   id: "articles/integrations-triggers",
                 },
