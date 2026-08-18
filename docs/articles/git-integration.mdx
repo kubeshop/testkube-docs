@@ -64,6 +64,32 @@ From the dashboard, open **Integrations > Git Integration > Onboard repository**
 
 Toggle event types per integration from the dashboard configuration panel.
 
+## Configuration
+
+Every integration has a **Configuration** panel that controls PR feedback, AI analysis, and merge gating.
+
+### Pull request feedback
+
+Chooses how the PR comment looks:
+
+- **Condensed** (default): title, brief pass/fail, collapsible executed Workflows, a short collapsible AI analysis, and a link back to the dashboard.
+- **Detailed**: everything in Condensed, plus a pipeline phase breakdown and a longer collapsible AI analysis section.
+
+### GitHub Checks
+
+- **Block pull requests when executions fail**: when on, a failed required Workflow marks the aggregate check-run as failed and blocks merge (if branch protection requires the check to pass). Off means the check-run still reports the result, but does not block.
+
+### AI Summary
+
+Adds an AI-generated execution summary to the PR comment.
+
+- **Enable AI analysis on pull requests**: master toggle for the block.
+- **Agent**: the AI agent that produces the summary. Only agents available in the environment show up.
+- **Model**: model used by the agent. Leave on **Platform default** unless you need to pin a specific one.
+- **Run when**:
+  - **On fail or abort**: only run the summary when the execution does not pass, useful for keeping AI cost tied to real signal.
+  - **Always**: run after every execution on a PR.
+
 ## Auto-generated Workflows
 
 Every auto-gen Workflow is labelled so Git Integration can reconcile it:
