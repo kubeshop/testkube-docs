@@ -45,9 +45,10 @@ Required App permissions:
 From the dashboard, open **Integrations > Git Integration > Onboard repository**:
 
 1. Pick the org and repo (only repos the App is installed on show up).
-2. Review detected frameworks. Include the ones you want auto-generated, exclude the rest.
-3. Optionally attach existing Workflows already in your environment.
-4. Confirm. Testkube persists the selection, materializes one auto-gen Workflow per selected framework, and starts receiving webhook events.
+2. Choose what runs against it:
+   - **Attach existing Workflows** already in this environment, or
+   - **Scan the repo** and let Testkube propose a starting point based on the detected stack (Playwright, Cypress, Jest, Go, JMeter, Artillery, and others). Detection is best-effort, review and adjust the proposed set before confirming.
+3. Confirm. Testkube persists the selection, materializes one auto-gen Workflow per selected framework (for the scan path), and starts receiving webhook events.
 
 ## What triggers a run
 
