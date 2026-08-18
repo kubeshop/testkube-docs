@@ -17,12 +17,13 @@ Control Plane is available in Helm chart `v2.335.2` and the Agent is available i
 - Hide AI Panel: Hide the AI panel on the home page when the AI feature is disabled for the organization.
 
 **Prometheus metrics:**
+
 - TestWorkflow execution metrics now include `workflow_namespace`.
 - Webhook CRUD operations now emit Prometheus counters for create, update, and delete events.
 - GitOps/sync-based TestWorkflow and TestTrigger CRUD operations now appear in Prometheus metrics, including error outcomes.
 - A new `testkube_testtrigger_events_total` metric tracks workflow executions started by a `TestTrigger`, labeled by trigger name.
 - Optional metadata metrics can now export custom TestWorkflow labels through `testkube_testworkflow_custom_label_info`.
-For more details about Prometheus metrics and exposition format, see the [Prometheus documentation](https://prometheus.io/docs/introduction/overview/).
+  For more details, see the [Control Plane Metrics documentation](/articles/control-plane-metrics).
 
 ### Fixes
 
