@@ -146,6 +146,60 @@ Each run reports a single aggregate **check-run** on the PR (or a commit status 
 - **Cancelled** / **aborted** marks it neutral.
 - Executions that never start (queued indefinitely, agent disconnected) time out after the environment's queue timeout and mark the check-run as failed with a "did not run" reason.
 
+## Tips and recipes
+
+### I just want to re-run without pushing anything
+
+Comment `@testkube` on the PR. GitHub emits an `issue_comment` event and Git Integration runs the selected Workflows against the PR's current head. Useful for retrying a flake, re-checking after a base-branch fix, or triggering a run on a PR that opened before the integration was added.
+
+Notes:
+
+- Only newly created comments trigger a run, editing an existing one is ignored.
+- The body must contain the string `testkube`.
+- The comment does not need to be the first one, any subsequent `@testkube` re-triggers the run.
+
+### Can I replace my GitHub Actions test job with a Test Workflow?
+
+Yes. You can keep Actions for build, lint, and deploy, and move the test run itself onto a Test Workflow that Git Integration executes. History, filtering, and AI summaries then live on the Testkube side and the aggregate check-run replaces your Actions test job.
+
+Minimal example, a Playwright job that today lives in `.github/workflows/e2e.yml`:
+
+```yaml
+name: e2e
+on: [pull_request]
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - run: npx playwright test
+```
+
+Same job as a Test Workflow attached to Git Integration:
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: pr-e2e
+spec:
+  config:
+    revision: { type: string }
+  content:
+    git:
+      uri: https://github.com/<org>/<repo>.git
+      revision: "{{ config.revision }}"
+  container:
+    image: mcr.microsoft.com/playwright:v1.62.1-jammy
+    workingDir: /data/repo
+  steps:
+    - shell: npm ci
+    - shell: npx playwright test
+```
+
+Attach the Workflow during onboarding (or from the integration configuration panel later). On the next PR event, Testkube clones the head commit, runs the steps, and reports one aggregate check-run back to GitHub.
+
 ## Troubleshooting
 
 **The check-run never appears on the PR**
