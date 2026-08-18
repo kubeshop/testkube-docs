@@ -274,7 +274,15 @@ Any other model name returns an invalid-model error from the proxy. This include
 `gpt-5.2` / `gpt-5-mini`.
 
 :::warning
-The hosted proxy is intended **only for trials, demos, and onboarding**. It has usage limits and is not recommended for production workloads.
+The hosted proxy requires an **active trial license**, and this is enforced. When a license converts to a
+commercial plan or passes its expiry date, the proxy stops serving it and the AI service falls back to
+whatever model credentials you have configured. Set up your own provider before a trial ends, otherwise
+AI features stop working.
+
+License changes take up to an hour to take effect, in both directions, so access can briefly outlast a
+converted license or lag behind a renewal.
+
+The proxy also has usage limits and is not recommended for production workloads.
 :::
 
 ### Disabling Embeddings
