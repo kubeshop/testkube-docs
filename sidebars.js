@@ -579,7 +579,7 @@ const sidebars = {
                   type: "doc",
                   label: "Github App Auth",
                   id: "articles/github-app-auth",
-                },  
+                },
               ],
             },
             {

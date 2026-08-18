@@ -51,15 +51,15 @@ From the dashboard, open **Integrations → Git Integration → Onboard reposito
 
 ## What triggers a run
 
-| Event | Action | Notes |
-|---|---|---|
-| `pull_request` | `opened` | `draft == false` |
-| `pull_request` | `ready_for_review` | |
-| `pull_request` | `synchronize` | new commit pushed to the PR head |
-| `issue_comment` | `created` on a PR | body must mention `@testkube` (editing a comment does not count) |
-| `push` | | branches matched by config |
-| `tag push` | | tag globs matched by config |
-| `release` | `published` / `prereleased` | prereleases opt-in |
+| Event           | Action                      | Notes                                                            |
+| --------------- | --------------------------- | ---------------------------------------------------------------- |
+| `pull_request`  | `opened`                    | `draft == false`                                                 |
+| `pull_request`  | `ready_for_review`          |                                                                  |
+| `pull_request`  | `synchronize`               | new commit pushed to the PR head                                 |
+| `issue_comment` | `created` on a PR           | body must mention `@testkube` (editing a comment does not count) |
+| `push`          |                             | branches matched by config                                       |
+| `tag push`      |                             | tag globs matched by config                                      |
+| `release`       | `published` / `prereleased` | prereleases opt-in                                               |
 
 Toggle event types per integration from the dashboard configuration panel.
 
@@ -91,13 +91,13 @@ The file is ignored for PRs originating from **forks** to avoid running untruste
 
 Every auto-gen Workflow is labelled so Git Integration can reconcile it:
 
-| Label / Annotation | Value |
-|---|---|
-| `testkube.io/git-integration-integration-id` | ID of the owning integration |
-| `testkube.io/git-integration-framework` | Detected framework (e.g. `playwright`) |
-| `testkube.io/git-integration-provider` | `github` |
-| `testkube.io/git-integration-managed` (annotation) | set to `"false"` to detach |
-| `testkube.io/managed-by` | `git-integration` |
+| Label / Annotation                                 | Value                                  |
+| -------------------------------------------------- | -------------------------------------- |
+| `testkube.io/git-integration-integration-id`       | ID of the owning integration           |
+| `testkube.io/git-integration-framework`            | Detected framework (e.g. `playwright`) |
+| `testkube.io/git-integration-provider`             | `github`                               |
+| `testkube.io/git-integration-managed` (annotation) | set to `"false"` to detach             |
+| `testkube.io/managed-by`                           | `git-integration`                      |
 
 ### Detaching a generated Workflow
 
@@ -113,14 +113,14 @@ Re-set the annotation to `"true"` (or remove it) to bring the Workflow back unde
 
 Declare the ones you need under `spec.config`:
 
-| Key | Meaning |
-|---|---|
-| `PR_NUMBER` | PR number. Empty on push/tag/release. |
-| `PR_SHA` | Head commit SHA of the PR. |
-| `PR_BASE_REF` | Base branch of the PR (e.g. `main`). |
-| `PR_HEAD_REF` | Head branch of the PR. |
-| `PR_AUTHOR` | GitHub login of the PR author. |
-| `revision` | Commit SHA of the event, used by content steps to clone at that revision. |
+| Key           | Meaning                                                                   |
+| ------------- | ------------------------------------------------------------------------- |
+| `PR_NUMBER`   | PR number. Empty on push/tag/release.                                     |
+| `PR_SHA`      | Head commit SHA of the PR.                                                |
+| `PR_BASE_REF` | Base branch of the PR (e.g. `main`).                                      |
+| `PR_HEAD_REF` | Head branch of the PR.                                                    |
+| `PR_AUTHOR`   | GitHub login of the PR author.                                            |
+| `revision`    | Commit SHA of the event, used by content steps to clone at that revision. |
 
 Workflows that do not declare these ignore them.
 
