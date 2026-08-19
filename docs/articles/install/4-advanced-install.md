@@ -646,6 +646,8 @@ testkube-cloud-api:
 
 ## Air-gapped Environments
 
+Testkube supports two air-gapped patterns, and they need different setups. In the first, an internal registry proxy such as Artifactory or a pull-through cache can still reach `docker.io` upstream. In the second, the environment is fully disconnected with no upstream path at all, so every image must be sideloaded into an internal registry. For the fully-disconnected case, follow the end-to-end [Air-Gapped and Offline Installation](/articles/install/air-gapped) guide.
+
 ### Offline License
 
 By default, Testkube will work with licenses that require internet connectivity. These licenses have the following format: `XXXXXX-XXXXXX-XXXXXX-XXXXXX-XXXXXX-V3`. However, if you want to use Testkube in offline environments you will need to use an offline license.
@@ -662,7 +664,11 @@ global:
 
 ### Artifactory and Other Registry Proxies
 
-By default, Testkube will pull images from the [docker.io](https://docker.io) registry. You can override the image of each individual service.
+This applies when your proxy can still reach `docker.io` upstream, for example an Artifactory virtual repository or a pull-through cache. By default, Testkube will pull images from the [docker.io](https://docker.io) registry. You can override the image of each individual service.
+
+### Fully Disconnected Environments
+
+If nothing in your environment can reach `docker.io`, even through a proxy, you must sideload every required image into an internal registry and point Testkube at it. The [Air-Gapped and Offline Installation](/articles/install/air-gapped) guide walks through the complete image manifest (Control Plane and Runner), the registry overrides, and the Runner pre-staging step that is easy to miss.
 
 [contact]: https://testkube.io/contact
 [guide-mongo-ssl]: /articles/mongodb-administration
