@@ -27,6 +27,32 @@ spec:
 ...
 ```
 
+### Skip schedules without a matching Runner Agent
+
+When the same Workflow is synchronized to multiple environments, add `schedulerPolicy: OnlyWhenMatches` to each targeted
+schedule. The Control Plane creates an execution only in environments containing a matching Runner Agent:
+
+```yaml
+spec:
+  events:
+    - cronjob:
+        cron: "0 3 * * *"
+        target:
+          schedulerPolicy: OnlyWhenMatches
+          match:
+            environment:
+              - production
+```
+
+Offline Runner Agents count as matches so the execution can wait for them to reconnect. Deleted or nonexistent runners do
+not count. Omitting `schedulerPolicy` keeps the existing behavior and creates a queued execution even when no runner matches.
+
+:::warning
+`OnlyWhenMatches` requires PostgreSQL and must be enabled only after every Control Plane replica and the Agent CRDs have been
+upgraded to a version that supports it. Older components ignore, prune, or reject the field; rolling back temporarily restores
+the previous queueing behavior.
+:::
+
 :::tip
 Testkube uses the same scheduling format as Kubernetes Cron jobs. For details on the cron expression syntax,
 refer to the [Wikipedia Cron format](https://en.wikipedia.org/wiki/Cron) for details.
