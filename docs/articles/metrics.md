@@ -44,6 +44,11 @@ No metrics are produced until at least one Workflow has been executed since the 
 
 (* = these are the Agent capabilities required for the metric to be available and updated.)
 
+For TestTrigger-driven executions, these metrics reflect triggers whose workflow selectors use either
+`labelSelector.matchLabels` or `labelSelector.matchExpressions`. This lets you filter target
+TestWorkflows with standard Kubernetes label selector operators such as `In`, `NotIn`, `Exists`,
+and `DoesNotExist`. For selector examples, see [Test Triggers](/articles/test-triggers#test-selector).
+
 ### Example Prometheus Output
 
 ```promql
