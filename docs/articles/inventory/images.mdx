@@ -12,6 +12,12 @@ This list does not include images used within individual Workflows.
 
 :::
 
+:::info Mirroring for air-gapped installs
+
+This inventory is the authoritative manifest for [fully-disconnected installs](/articles/install/air-gapped). Mirror **both** charts below into your internal registry. The **Agent Chart** images are pulled when you create a Runner Agent, after the Control Plane is installed, so a bundle staged from the Control Plane alone will miss them.
+
+:::
+
 ## Agent Chart
 
 Helm chart location: `oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube-runner`

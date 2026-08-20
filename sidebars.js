@@ -193,6 +193,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "Air-Gapped & Offline Install",
+                  id: "articles/install/air-gapped",
+                },
+                {
+                  type: "doc",
                   label: "Image Inventory",
                   id: "articles/inventory/images",
                 },
@@ -574,7 +579,7 @@ const sidebars = {
                   type: "doc",
                   label: "Github App Auth",
                   id: "articles/github-app-auth",
-                },  
+                },
               ],
             },
             {

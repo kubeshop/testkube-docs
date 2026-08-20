@@ -24,7 +24,7 @@ Testkube deployment options at [Installation Overview](/articles/install/overvie
 
 ## Can I run Testkube in an air-gapped environment
 
-Yes, you can download and install Testkube in your air-gapped environment as long as it has access to dockerhub (for example via artifactory) to retrieve the Testkube images.
+Yes. Testkube supports two air-gapped patterns. If an internal registry proxy such as Artifactory or a pull-through cache can still reach `docker.io` upstream, override the registry so images resolve through your proxy. If the environment is fully disconnected with no upstream path at all, sideload the complete image set into an internal registry and point Testkube at it. Both paths, including the full image manifest and the Runner pre-staging step, are covered in [Air-Gapped and Offline Installation](/articles/install/air-gapped).
 If that doesn't work for you please [get in touch](https://testkube.io/contact), and we will help you install Testkube as required.
 
 ## Can I use Testkube to test applications or services that are not running in Kubernetes
