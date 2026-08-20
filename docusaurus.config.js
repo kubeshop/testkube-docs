@@ -51,7 +51,7 @@ const config = {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: "https://github.com/kubeshop/testkube-docs/tree/main/docs",
+          editUrl: "https://github.com/kubeshop/testkube-docs/tree/main/",
           // Generating BreadCrumbs for the docs
           breadcrumbs: false,
         },

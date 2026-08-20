@@ -216,7 +216,7 @@ One exception is that the whole `pod` object will be removed beforehand.
 
 ```yaml title="Example inlining the same list"
 apiVersion: testworkflows.testkube.io/v1
-kind: TestWorkflow
+kind: TestWorkflowTemplate
 metadata:
   name: my-template
 spec:
