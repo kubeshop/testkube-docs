@@ -16,7 +16,7 @@ For every event received from GitHub, Git Integration:
 
 Workflows that run can be:
 
-- **Existing Workflows** already in the environment, attached during onboarding.
+- **Existing Workflows** already in the environment, attached when the repository is connected.
 - **Auto-generated Workflows** materialized from frameworks detected in the repo (Playwright, Cypress, k6, Postman, JMeter, Maven, Gradle, Go, Node).
 
 ## Prerequisites
@@ -24,7 +24,7 @@ Workflows that run can be:
 - A Testkube environment with an agent connected. See [Agents Overview](/articles/agents-overview).
 - On on-prem, the GitHub integration enabled in `values.yaml`.
 - The Testkube GitHub App installed on the target repository.
-- The user onboarding must have `admin` access to the repo.
+- The user connecting the repository must have `admin` access to it.
 
 ## Installing the GitHub App
 
@@ -40,9 +40,9 @@ Required App permissions:
 - **Checks**: read & write
 - **Issues**: read (for the `@testkube` comment trigger)
 
-## Onboarding a repository
+## Connecting a repository
 
-From the dashboard, open **Integrations > Git Integration > Onboard repository**:
+From the dashboard, open **Integrations > Git Integration > Connect repository**:
 
 1. Pick the org and repo (only repos the App is installed on show up).
 2. Choose what runs against it:
@@ -207,7 +207,7 @@ spec:
     - shell: npx playwright test
 ```
 
-Attach the Workflow during onboarding (or from the integration configuration panel later). On the next PR event, Testkube clones the head commit, runs the steps, and reports one aggregate check-run back to GitHub.
+Attach the Workflow when connecting the repository (or from the integration configuration panel later). On the next PR event, Testkube clones the head commit, runs the steps, and reports one aggregate check-run back to GitHub.
 
 ## Troubleshooting
 
