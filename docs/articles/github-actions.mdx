@@ -224,6 +224,54 @@ testkube-cloud-api:
 3. (Re)-Deploy Testkube
 4. You are now ready to [use your GitHub App to clone your content][workflow-content-github-app]!
 
+### Additional configuration for the GitHub integration
+
+The [GitHub integration](/articles/git-integration) (repository connections that run Test Workflows on PR events and post check-runs back) reuses the same GitHub App configured above, but needs extra App permissions, event subscriptions, and Helm values on top of what content cloning requires.
+
+**App permissions** (add on top of `Contents: read`, `Metadata: read`):
+
+- **Pull requests**: read & write, to post the aggregate PR comment.
+- **Checks**: read & write, to write the aggregate check-run that gates merge.
+- **Issues**: read, so the `@testkube` re-run comment trigger receives the `issue_comment` event.
+
+**Subscribe to events** on the App:
+
+- `Pull request`, `Push`, `Release`, `Issue comment`.
+
+**Webhook URL**: point the App webhook at `https://<control-plane-host>/api/v1/github/webhooks` (the path served by `testkube-cloud-api`). Generate a webhook secret and keep it for the values below.
+
+**Additional Helm values** on `testkube-cloud-api`:
+
+```yaml
+testkube-cloud-api:
+  api:
+    github:
+      appId: "your_application_id"
+      appSlug: "your-app-slug" # from the GitHub App URL, used to build install links from the dashboard
+      installationId: "your_installation_id"
+      privateKeyRef: "testkube-github"
+      # webhook signature validation for PR/push/release deliveries
+      webhookSecret: "your_webhook_secret"
+      # or, if you keep the secret in a Kubernetes Secret:
+      webhookSecretRef: "testkube-github-webhook"
+      webhookSecretKey: "webhook-secret"
+```
+
+**Enable the GitHub integration worker** (a separate deployment that runs the repo-scan and webhook pipelines):
+
+```yaml
+testkube-git-provider-onboarding-worker:
+  gitIntegration: true
+  github:
+    appId: "your_application_id"
+    appSlug: "your-app-slug"
+    privateKeySecretRef:
+      name: "testkube-github"
+      key: "key.pem"
+```
+
+Once the worker pod is running, users with `admin` on a repository can connect it from **Integrations > Git Integration > Connect repository** in the dashboard.
+
 ### Multiple GitHub Organizations
 
 If you need to authenticate across multiple GitHub organizations, you can install the same application in each organization and then update `values.yaml` with a comma-separated list of IDs (for example, `installationId: "your_installation_id1,your_installation_id2"`).
