@@ -1281,9 +1281,16 @@ const sidebars = {
       items: [
         {
           type: "category",
+          label: "Version Control",
+          items: [
+            { type: "doc", label: "GitHub", id: "articles/git-integration" },
+          ],
+        },
+        {
+          type: "category",
           label: "CI/CD Pipelines",
           items: [
-            { type: "doc", label: "GitHub", id: "articles/github-actions" },
+            { type: "doc", label: "GitHub Actions", id: "articles/github-actions" },
             { type: "doc", label: "GitLab", id: "articles/gitlab" },
             {
               type: "doc",
