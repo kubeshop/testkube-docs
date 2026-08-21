@@ -17,7 +17,7 @@ For every event received from GitHub, Git Integration:
 Workflows that run can be:
 
 - **Existing Workflows** already in the environment, attached during onboarding.
-- **Auto-generated Workflows** materialized from frameworks detected in the repo (Playwright, Cypress, Jest, Go, JMeter, Artillery, and others).
+- **Auto-generated Workflows** materialized from frameworks detected in the repo (Playwright, Cypress, k6, Postman, JMeter, Maven, Gradle, Go, Node).
 
 ## Prerequisites
 
@@ -47,7 +47,7 @@ From the dashboard, open **Integrations > Git Integration > Onboard repository**
 1. Pick the org and repo (only repos the App is installed on show up).
 2. Choose what runs against it:
    - **Attach existing Workflows** already in this environment, or
-   - **Scan the repo** and let Testkube propose a starting point based on the detected stack (Playwright, Cypress, Jest, Go, JMeter, Artillery, and others). Detection is best-effort, review and adjust the proposed set before confirming.
+   - **Scan the repo** and let Testkube propose a starting point based on the detected stack (Playwright, Cypress, k6, Postman, JMeter, Maven, Gradle, Go, Node). Detection is best-effort, review and adjust the proposed set before confirming.
 3. Confirm. Testkube persists the selection, materializes one auto-gen Workflow per selected framework (for the scan path), and starts receiving webhook events.
 
 ## What triggers a run
@@ -126,14 +126,14 @@ Re-set the annotation to `"true"` (or remove it) to bring the Workflow back unde
 
 Declare the ones you need under `spec.config`:
 
-| Key           | Meaning                                                                   |
-| ------------- | ------------------------------------------------------------------------- |
-| `PR_NUMBER`   | PR number. Empty on push/tag/release.                                     |
-| `PR_SHA`      | Head commit SHA of the PR.                                                |
-| `PR_BASE_REF` | Base branch of the PR (e.g. `main`).                                      |
-| `PR_HEAD_REF` | Head branch of the PR.                                                    |
-| `PR_AUTHOR`   | GitHub login of the PR author.                                            |
-| `revision`    | Commit SHA of the event, used by content steps to clone at that revision. |
+| Key           | Meaning                                                                                                                                                               |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PR_NUMBER`   | PR number. Empty on push/tag/release.                                                                                                                                 |
+| `PR_SHA`      | Head commit SHA of the PR.                                                                                                                                            |
+| `PR_BASE_REF` | Base branch of the PR (e.g. `main`).                                                                                                                                  |
+| `PR_HEAD_REF` | Head branch of the PR.                                                                                                                                                |
+| `PR_AUTHOR`   | GitHub login of the PR author.                                                                                                                                        |
+| `revision`    | Git ref for the event (commit SHA on push, `refs/pull/<n>/head` on PRs), consumed as-is by `spec.content.git.revision` so the clone step checks out the right commit. |
 
 Workflows that do not declare these ignore them.
 
@@ -143,18 +143,17 @@ Every execution scheduled by Git Integration carries `actor.type = gitintegratio
 
 ## Re-scanning a repository
 
-Framework detection is refreshed in two cases:
+Framework detection is refreshed automatically when a PR event touches a stack anchor: `go.mod`, `package.json`, `pom.xml`, `build.gradle`, `build.gradle.kts`, `Cargo.toml`, `requirements.txt`, `pyproject.toml`, `Pipfile`, `Gemfile`, or `composer.json`. Git Integration re-runs detection on the PR head and updates the set of auto-gen Workflows before executing.
 
-- **Automatic**: when a PR event touches a stack anchor (`package.json`, `go.mod`, `pom.xml`, `requirements.txt`, `playwright.config.ts`, `cypress.config.ts`), Git Integration re-runs detection on the PR head and updates the set of auto-gen Workflows before executing.
-- **Manual**: remove the integration from the dashboard and onboard again. A one-click **Rescan** button is on the roadmap.
+There is no dashboard button for a manual rescan today. To force one when needed, disconnect the integration and connect again; the connection flow re-runs detection.
 
 ## Results on GitHub
 
 Each run reports a single aggregate **check-run** on the PR (or a commit status on push/tag/release). Clicking it opens the execution details in Testkube.
 
-- Any **failed** required Workflow marks the check-run failed.
-- **Cancelled** / **aborted** marks it neutral.
+- Any Workflow that does not pass (failed, aborted, cancelled, timed out) marks the aggregate check-run as **failure**.
 - Executions that never start (queued indefinitely, agent disconnected) time out after the environment's queue timeout and mark the check-run as failed with a "did not run" reason.
+- Runs superseded by a newer push on the same PR are silently skipped, they do not overwrite the check-run.
 
 ## Tips and recipes
 
