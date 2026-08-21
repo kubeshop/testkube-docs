@@ -1,6 +1,6 @@
-# Git Integration
+# Advanced Git Integration
 
-**Git Integration** connects a GitHub repository to a Testkube environment so PR activity runs your Test Workflows and results post back on the PR as check-runs.
+**Advanced Git Integration** connects a GitHub repository to a Testkube environment so PR activity runs your Test Workflows and results post back on the PR as check-runs.
 
 :::note
 Available on Testkube Cloud and on-prem Control Plane. On-prem requires the GitHub integration enabled in the Helm chart and a GitHub App configured against the target organization. See [Using GitHub Apps with Testkube](/articles/github-actions#using-github-apps-with-testkube).
@@ -8,7 +8,7 @@ Available on Testkube Cloud and on-prem Control Plane. On-prem requires the GitH
 
 ## What it does
 
-For every event received from GitHub, Git Integration:
+For every event received from GitHub, Advanced Git Integration:
 
 1. Matches the event to your configured integration.
 2. Runs the Workflows selected for the repository against the commit that produced the event.
@@ -102,7 +102,7 @@ When AI Summary is on, Testkube creates one **AI session** per pull request. It 
 
 ## Auto-generated Workflows
 
-Every auto-gen Workflow is labelled so Git Integration can reconcile it:
+Every auto-gen Workflow is labelled so Advanced Git Integration can reconcile it:
 
 | Label / Annotation                                 | Value                                  |
 | -------------------------------------------------- | -------------------------------------- |
@@ -137,13 +137,13 @@ Declare the ones you need under `spec.config`:
 
 Workflows that do not declare these ignore them.
 
-## Filtering executions by Git Integration
+## Filtering executions by Advanced Git Integration
 
-Every execution scheduled by Git Integration carries `actor.type = gitintegration`. The **Executions** page has a **Git Integration** filter chip that returns those runs.
+Every execution scheduled by Advanced Git Integration carries `actor.type = gitintegration`. The **Executions** page has a **Git Integration** filter chip that returns those runs.
 
 ## Re-scanning a repository
 
-Framework detection is refreshed automatically when a PR event touches a stack anchor: `go.mod`, `package.json`, `pom.xml`, `build.gradle`, `build.gradle.kts`, `Cargo.toml`, `requirements.txt`, `pyproject.toml`, `Pipfile`, `Gemfile`, or `composer.json`. Git Integration re-runs detection on the PR head and updates the set of auto-gen Workflows before executing.
+Framework detection is refreshed automatically when a PR event touches a stack anchor: `go.mod`, `package.json`, `pom.xml`, `build.gradle`, `build.gradle.kts`, `Cargo.toml`, `requirements.txt`, `pyproject.toml`, `Pipfile`, `Gemfile`, or `composer.json`. Advanced Git Integration re-runs detection on the PR head and updates the set of auto-gen Workflows before executing.
 
 There is no dashboard button for a manual rescan today. To force one when needed, disconnect the integration and connect again; the connection flow re-runs detection.
 
@@ -159,7 +159,7 @@ Each run reports a single aggregate **check-run** on the PR (or a commit status 
 
 ### I just want to re-run without pushing anything
 
-Comment `@testkube` on the PR. GitHub emits an `issue_comment` event and Git Integration runs the selected Workflows against the PR's current head. Useful for retrying a flake, re-checking after a base-branch fix, or triggering a run on a PR that opened before the integration was added.
+Comment `@testkube` on the PR. GitHub emits an `issue_comment` event and Advanced Git Integration runs the selected Workflows against the PR's current head. Useful for retrying a flake, re-checking after a base-branch fix, or triggering a run on a PR that opened before the integration was added.
 
 Notes:
 
@@ -169,7 +169,7 @@ Notes:
 
 ### Can I replace my GitHub Actions test job with a Test Workflow?
 
-Yes. You can keep Actions for build, lint, and deploy, and move the test run itself onto a Test Workflow that Git Integration executes. History, filtering, and AI summaries then live on the Testkube side and the aggregate check-run replaces your Actions test job.
+Yes. You can keep Actions for build, lint, and deploy, and move the test run itself onto a Test Workflow that Advanced Git Integration executes. History, filtering, and AI summaries then live on the Testkube side and the aggregate check-run replaces your Actions test job.
 
 Minimal example, a Playwright job that today lives in `.github/workflows/e2e.yml`:
 
@@ -185,7 +185,7 @@ jobs:
       - run: npx playwright test
 ```
 
-Same job as a Test Workflow attached to Git Integration:
+Same job as a Test Workflow attached to Advanced Git Integration:
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1

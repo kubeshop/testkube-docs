@@ -562,7 +562,7 @@ const sidebars = {
                 },
                 {
                   type: "doc",
-                  label: "Git Integration",
+                  label: "Advanced Git Integration",
                   id: "articles/git-integration",
                 },
                 {
