@@ -132,7 +132,7 @@ FROM alpine/kubectl:1.36.2
 <tr><td>Affected range</td><td><code>&lt;8.21.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.21.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.325%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>26th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
