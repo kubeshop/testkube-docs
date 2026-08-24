@@ -737,8 +737,8 @@ FROM alpine/kubectl:1.36.2
 <table>
 <tr><td>Affected range</td><td><code>>=1.41.0<br/><1.42.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.42.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.237%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.336%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -775,6 +775,34 @@ FROM alpine/kubectl:1.36.2
 <blockquote>
 
 NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>c-ares</strong> <code>1.34.6-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/c-ares@1.34.6-r0?os_name=alpine&os_version=3.24</code></small><br/>
+
+```dockerfile
+# kubectl-release.dockerfile (5:5)
+FROM alpine/kubectl:1.36.2
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-33630?s=alpine&n=c-ares&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.34.8-r0"><img alt="unspecified : CVE--2026--33630" src="https://img.shields.io/badge/CVE--2026--33630-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.34.8-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.34.8-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
 
 </blockquote>
 </details>
@@ -835,34 +863,6 @@ FROM alpine/kubectl:1.36.2
 <blockquote>
 
 A norm.Iter can enter an infinite loop when handling input containing invalid UTF-8 bytes.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>c-ares</strong> <code>1.34.6-r0</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/c-ares@1.34.6-r0?os_name=alpine&os_version=3.24</code></small><br/>
-
-```dockerfile
-# kubectl-release.dockerfile (5:5)
-FROM alpine/kubectl:1.36.2
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-33630?s=alpine&n=c-ares&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.34.8-r0"><img alt="unspecified : CVE--2026--33630" src="https://img.shields.io/badge/CVE--2026--33630-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.34.8-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.34.8-r0</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
 
 </blockquote>
 </details>
