@@ -9,7 +9,7 @@ Test Authoring provides an isolated, persistent workspace where you can create, 
 
 :::info Version availability
 
-You need Testkube Enterprise **2.14 or later**, with Test Authoring included in your Enterprise license. If you are not sure whether your license includes Test Authoring, contact your Testkube account representative or [Testkube Support](https://testkube.io/contact) before installation.
+You need Testkube Enterprise **2.13 or later**, with Test Authoring included in your Enterprise license. If you are not sure whether your license includes Test Authoring, contact your Testkube account representative or [Testkube Support](https://testkube.io/contact) before installation.
 
 :::
 
