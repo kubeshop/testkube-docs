@@ -99,13 +99,19 @@ Chooses how the PR comment looks:
 
 {/* @screenshot: /img/git-integration/pr-comment-condensed.png Condensed PR comment as it renders on GitHub */}
 
+![Condensed PR comment posted by the Testkube integration](/img/git-integration/pr-comment-condensed.png)
+
 {/* @screenshot: /img/git-integration/pr-comment-detailed.png Detailed PR comment side-by-side or below the Condensed one, phase breakdown expanded */}
+
+![Detailed PR comment with pipeline phases and AI Analysis section](/img/git-integration/pr-comment-detailed.png)
 
 ### GitHub Checks
 
 - **Block pull requests when executions fail**: when on, a failed required Workflow marks the aggregate check-run as failed and blocks merge (if branch protection requires the check to pass). Off means the check-run still reports the result, but does not block.
 
 {/* @screenshot: /img/git-integration/check-run-blocked.png GitHub PR with the aggregate Testkube check-run marked failed and the Merge button blocked by branch protection */}
+
+![PR merge status widget with the required Testkube check failing and the Merge button disabled](/img/git-integration/check-run-blocked.png)
 
 ### AI Summary
 
@@ -133,6 +139,8 @@ When AI Summary is on, Testkube creates one **AI session** per pull request. It 
 - Both entry points land on the same conversation under the environment's **Chats** section. From there you can keep asking follow-ups, inspect the assistant's reasoning, or dig into the tool calls it made against your executions.
 
 {/* @screenshot: /img/git-integration/ai-session-pr-link.png PR comment scrolled to the AI Analysis block with the "Continue analysis in Testkube" link highlighted */}
+
+![Detailed PR comment with the "Continue analysis in Testkube" link highlighted](/img/git-integration/ai-session-pr-link.png)
 
 {/* @screenshot: /img/git-integration/ai-session-chat.png the AI chat view in Testkube after landing from the PR link, showing the running conversation */}
 
@@ -197,7 +205,11 @@ Each run reports a single aggregate **check-run** on the PR (or a commit status 
 
 {/* @screenshot: /img/git-integration/pr-check-run-passed.png PR Checks tab showing the aggregate Testkube check-run passing, with per-Workflow rows underneath */}
 
+![PR Checks tab with the Testkube check-run passing](/img/git-integration/pr-check-run-passed.png)
+
 {/* @screenshot: /img/git-integration/pr-check-run-failed.png the same view with a failed Workflow so the aggregate is red and the failure surfaces */}
+
+![PR Checks tab with a failed Testkube Workflow and a red aggregate check-run](/img/git-integration/pr-check-run-failed.png)
 
 - Any Workflow that does not pass (failed, aborted, cancelled, timed out) marks the aggregate check-run as **failure**.
 - Executions that never start (queued indefinitely, agent disconnected) time out after the environment's queue timeout and mark the check-run as failed with a "did not run" reason.
