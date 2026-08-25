@@ -36,6 +36,8 @@ On Testkube Cloud, open **Integrations > Git Integration** and click **Connect m
 
 {/* @screenshot: /img/git-integration/install-app-empty-state.png dashboard empty state with the "Connect my first repository" call to action */}
 
+![Empty state on the GitHub Repositories tab with the "Connect my first repository" call to action](/img/git-integration/install-app-empty-state.png)
+
 {/* @screenshot: /img/git-integration/github-app-install.png GitHub's App installation screen showing the org picker and repository access selector */}
 
 On on-prem, the operator creates the App during deployment. See [Using GitHub Apps with Testkube](/articles/github-actions#using-github-apps-with-testkube).
@@ -58,9 +60,13 @@ From the dashboard, open **Integrations > Git Integration > Connect repository**
    - **Scan the repo** and let Testkube propose a starting point based on the detected stack (Playwright, Cypress, k6, Postman, JMeter, Maven, Gradle, Go, Node). Detection is best-effort, review and adjust the proposed set before confirming.
 3. Confirm. Testkube persists the selection, materializes one auto-gen Workflow per selected framework (for the scan path), and starts receiving webhook events.
 
-{/* @screenshot: /img/git-integration/connect-repository-picker.png Connect repository wizard, org + repo picker step */}
+{/* @screenshot: /img/git-integration/connect-repository-picker.png Connect repository wizard, workflow selection step listing existing Workflows in the environment */}
+
+![Connect repository wizard step showing existing TestWorkflows to attach](/img/git-integration/connect-repository-picker.png)
 
 {/* @screenshot: /img/git-integration/connect-repository-scan.png scan result showing detected frameworks with checkboxes to review */}
+
+![Connect repository wizard scan result with detected frameworks](/img/git-integration/connect-repository-scan.png)
 
 ## What triggers a run
 
