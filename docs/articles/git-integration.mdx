@@ -8,6 +8,8 @@ Available on Testkube Cloud and on-prem Control Plane. On-prem requires the GitH
 
 {/* @screenshot: /img/git-integration/overview.png dashboard Integrations, GitHub, repository list with one connected repository */}
 
+![Integrations page listing a connected GitHub repository](/img/git-integration/overview.png)
+
 ## What it does
 
 For every event received from GitHub, the integration:
@@ -76,6 +78,8 @@ Toggle event types per integration from the dashboard configuration panel.
 
 {/* @screenshot: /img/git-integration/event-triggers-panel.png repository Configuration tab, event-triggers section with the pull_request, push, tag, release, issue_comment toggles */}
 
+![Content configuration panel with pull request toggles, comment mode, and silent executions checkbox](/img/git-integration/event-triggers-panel.png)
+
 ## Configuration
 
 Every integration has a **Configuration** panel that controls PR feedback, AI analysis, and merge gating.
@@ -110,6 +114,8 @@ Adds an AI-generated execution summary to the PR comment.
 
 {/* @screenshot: /img/git-integration/ai-summary-config.png Configuration panel AI Summary section with agent, model, and Run when controls */}
 
+![AI Configuration tab with agent, model, and run-when controls](/img/git-integration/ai-summary-config.png)
+
 ## AI sessions
 
 When AI Summary is on, Testkube creates one **AI session** per pull request. It is the assistant conversation that produces the **AI Analysis** block posted on the PR comment.
@@ -127,6 +133,8 @@ When AI Summary is on, Testkube creates one **AI session** per pull request. It 
 ## Auto-generated Workflows
 
 {/* @screenshot: /img/git-integration/auto-gen-workflows-list.png repository Workflows tab listing the auto-gen Workflows with their framework badges */}
+
+![Connected Workflows tab listing the auto-generated Workflows for the repository](/img/git-integration/auto-gen-workflows-list.png)
 
 Every auto-gen Workflow is labelled so the GitHub integration can reconcile it:
 
@@ -168,6 +176,8 @@ Workflows that do not declare these ignore them.
 Every execution scheduled by the GitHub integration carries `actor.type = gitintegration`. The **Executions** page has a **Git Integration** filter chip that returns those runs.
 
 {/* @screenshot: /img/git-integration/executions-filter-chip.png Executions list with the Git Integration filter chip applied, results scoped to gitintegration actor */}
+
+![Executions page with the Git Integration actor filter chip applied](/img/git-integration/executions-filter-chip.png)
 
 ## Re-scanning a repository
 
