@@ -2,7 +2,7 @@
 
 Test Authoring provides an AI-assisted workspace for creating, updating, and running tests in Testkube.
 Each authoring session is connected to an isolated environment called a **Runspace**, where the authoring
-agent can inspect files, make changes, and run the test while you review its progress in the Dashboard.
+agent can inspect files, make changes, and run tests while you review its progress in the Dashboard.
 
 ## Authoring session flow
 
@@ -35,8 +35,8 @@ When you start Test Authoring:
 7. Testkube can checkpoint an idle session and remove its active workload. When the session is resumed, a
    replacement Runspace restores the saved workspace.
 
-One active Runspace is bound to an authoring session at a time. A resumed session can therefore use a new
-Runspace while preserving the files saved in its checkpoint.
+Each authoring session has one active Runspace. When you resume a session, Testkube may create a new
+Runspace and restore the files from its checkpoint.
 
 ## Main components
 
@@ -51,8 +51,8 @@ Runspace while preserving the files saved in its checkpoint.
 | **[LiteLLM](https://docs.litellm.ai/) gateway**                                  | Routes model requests, applies model selection and per-Runspace limits, and keeps provider credentials outside Runspaces.                 |
 | **Persistent storage**                                                           | Holds workspace files and private agent state so the session can be checkpointed or resumed according to the configured retention policy. |
 
-The exact deployment layout differs between Testkube Cloud and Testkube On-Prem, but the component roles
-and Runspace isolation boundary are the same.
+The component responsibilities and Runspace isolation boundary are the same in Testkube Cloud and
+Testkube On-Prem.
 
 ## Security and isolation
 
