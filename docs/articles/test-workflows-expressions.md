@@ -635,8 +635,8 @@ The reference is an `as` alias, a Workflow name, an execution ID, or `"parent"` 
 
 ```yaml
 - shell: |
-    echo "sibling token: {{ execution(config.producerId).outputs.token }}"
-    echo "parent seed: {{ execution("parent").outputs.seed }}"
+    echo 'sibling token: {{ execution(config.producerId).outputs.token }}'
+    echo 'parent seed: {{ execution("parent").outputs.seed }}'
 ```
 
 Example using file and glob functions:

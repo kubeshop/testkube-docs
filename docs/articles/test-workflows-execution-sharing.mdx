@@ -50,8 +50,8 @@ spec:
 
     - name: Read what it published
       shell: |
-        echo "token: {{ execution("p").outputs.token }}"
-        echo "status: {{ execution("p").status }}"
+        echo 'token: {{ execution("p").outputs.token }}'
+        echo 'status: {{ execution("p").status }}'
 ```
 
 `execution()` returns a map:
@@ -87,7 +87,7 @@ Reading up uses the reserved `parent` reference:
 steps:
   - name: Read a value the parent published
     shell: |
-      echo "seed: {{ execution("parent").outputs.seed }}"
+      echo 'seed: {{ execution("parent").outputs.seed }}'
 ```
 
 Reading sideways needs the sibling's execution ID, because a Workflow only knows by name the Workflows it ran itself. The parent has both IDs, so it passes one down as configuration:
@@ -105,7 +105,7 @@ steps:
       workflows:
         - name: consumer
           config:
-            producerId: "{{ execution(\"p\").id }}"
+            producerId: '{{ execution("p").id }}'
 ```
 
 ```yaml title="consumer.yaml"
@@ -116,7 +116,7 @@ spec:
   steps:
     - name: Read the sibling's output
       shell: |
-        echo "{{ execution(config.producerId).outputs.token }}"
+        echo '{{ execution(config.producerId).outputs.token }}'
 ```
 
 ### Fan-out
@@ -134,9 +134,9 @@ steps:
 
   - name: Read each one
     shell: |
-      echo "{{ execution("shards", 0).outputs.duration }}"
-      echo "{{ execution("shards", 1).outputs.duration }}"
-      echo "{{ execution("shards", 2).outputs.duration }}"
+      echo '{{ execution("shards", 0).outputs.duration }}'
+      echo '{{ execution("shards", 1).outputs.duration }}'
+      echo '{{ execution("shards", 2).outputs.duration }}'
 ```
 
 With no index, the first instance is addressed. An execution ID always addresses exactly one execution, whatever its position, so no index is needed with one.
@@ -263,15 +263,15 @@ spec:
 
     - name: Read the producer's output
       shell: |
-        test "{{ execution("p").outputs.token }}" = "token-from-producer"
+        test '{{ execution("p").outputs.token }}' = 'token-from-producer'
 
     - name: Run the consumer with the producer's output and identity
       execute:
         workflows:
           - name: consumer
             config:
-              token: "{{ execution(\"p\").outputs.token }}"
-              producerId: "{{ execution(\"p\").id }}"
+              token: '{{ execution("p").outputs.token }}'
+              producerId: '{{ execution("p").id }}'
 ```
 
 The consumer reads its parent's value, its parent's artifact, and its sibling's data:
@@ -294,7 +294,7 @@ spec:
 
     - name: Read a value the parent published
       shell: |
-        test "{{ execution("parent").outputs.seed }}" = "seed-from-parent"
+        test '{{ execution("parent").outputs.seed }}' = 'seed-from-parent'
 
     - name: Read a file the parent produced
       shell: |
@@ -302,5 +302,5 @@ spec:
 
     - name: Read the sibling's output
       shell: |
-        test "{{ execution(config.producerId).outputs.token }}" = "token-from-producer"
+        test '{{ execution(config.producerId).outputs.token }}' = 'token-from-producer'
 ```
