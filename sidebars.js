@@ -776,6 +776,11 @@ const sidebars = {
               id: "articles/ai-assistant-overview",
             },
             {
+              type: "doc",
+              label: "Test Authoring",
+              id: "articles/test-authoring-overview",
+            },
+            {
               type: "category",
               label: "AI Agents",
               items: [
