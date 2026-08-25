@@ -14,7 +14,9 @@ Three things cross it:
 
 ## Publishing Output Values
 
-An execution publishes values the same way a step does: write to `/testkube/outputs/<key>`. The value is readable by later steps of the same Workflow **and** by the Workflow that ran it.
+An execution publishes values the same way a step does: write to `/testkube/outputs/<key>`.
+
+Publishing has no direction. The value is recorded on the execution that produced it, and anyone allowed to read that execution can read its outputs — so the same write serves a Workflow reading what it ran, a Workflow reading the one that ran it, and two Workflows of one suite reading each other. [References](#references) covers who is allowed.
 
 ```yaml title="producer.yaml"
 apiVersion: testworkflows.testkube.io/v1
@@ -29,7 +31,9 @@ spec:
         echo -n "token-from-producer" > /testkube/outputs/token
 ```
 
-Nothing in the producer declares that the value leaves the Workflow — every output is readable by whoever ran it.
+Nothing in the producer declares that the value may leave the Workflow. Every output is readable outside it, with one exception: a value holding a secret, covered in [Sensitive Values](#sensitive-values).
+
+An execution records its outputs **at the end of each step**, which is what makes ordering matter when a Workflow publishes for the Workflows it is about to run. A reader sees what the producing execution had published by then, and nothing later.
 
 ## Reading Another Execution's Data
 
@@ -66,7 +70,19 @@ spec:
 | `status`   | Final status                                                        |
 | `outputs`  | Map of the values the execution published                           |
 
-Outputs are only complete once an execution finishes. An `async` execution has not published anything yet by the time the step continues.
+### When Outputs Are Available
+
+An output that was never published resolves to an **empty string**, not an error. Check for one you cannot do without:
+
+```yaml
+- shell: |
+    test -n '{{ execution("p").outputs.token }}' || { echo "producer published no token"; exit 1; }
+```
+
+Two cases produce an empty value from an execution that looks like it should have one:
+
+- **`async` entries.** An asynchronous execution is not waited for, so this Workflow never collects its outputs. Reads stay empty for the rest of the run, however the execution is addressed. Drop `async` if you need to read what it published.
+- **An execution that is still running.** Reading one this Workflow did not run itself — the `parent`, a sibling by execution ID — answers with whatever that execution has published so far, which may be incomplete.
 
 ### References
 
@@ -89,6 +105,22 @@ steps:
     shell: |
       echo 'seed: {{ execution("parent").outputs.seed }}'
 ```
+
+A parent publishes for its children like any other execution, but the ordering has to work out: the step that writes the value must **finish before the step that runs the children starts**, because outputs are recorded when a step ends.
+
+```yaml title="suite.yaml"
+steps:
+  - name: Publish for the children
+    shell: |
+      echo -n "seed-from-parent" > /testkube/outputs/seed
+
+  - name: Run them
+    execute:
+      workflows:
+        - name: consumer
+```
+
+Publish in a later step and the children read an empty value, with nothing to indicate why.
 
 Reading sideways needs the sibling's execution ID, because a Workflow only knows by name the Workflows it ran itself. The parent has both IDs, so it passes one down as configuration:
 
