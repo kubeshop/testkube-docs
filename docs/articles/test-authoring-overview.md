@@ -43,16 +43,16 @@ Runspace while preserving the files saved in its checkpoint.
 
 ## Main components
 
-| Component                    | Responsibility                                                                                                                            |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| **Test Authoring UI**        | Provides the chat, file navigation, test output, and session controls in the Testkube Dashboard.                                          |
-| **Testkube Control Plane**   | Owns session metadata and lifecycle, provisions Runspaces, issues scoped credentials, and coordinates checkpoints and cleanup.            |
-| **Agent Sandbox controller** | Trusted cluster infrastructure that creates and manages the Kubernetes workloads and storage used by Runspaces.                           |
-| **Runspace**                 | The isolated environment where the authoring agent reads and changes files and runs tools or tests.                                       |
-| **Runspace Bridge**          | Maintains the authenticated connection between a Runspace and the AI Service and carries agent events and workspace operations.           |
-| **Testkube AI Service**      | Coordinates the authoring conversation and communicates with the agent running in the Runspace.                                           |
-| **LiteLLM gateway**          | Routes model requests, applies model selection and per-Runspace limits, and keeps provider credentials outside Runspaces.                 |
-| **Persistent storage**       | Holds workspace files and private agent state so the session can be checkpointed or resumed according to the configured retention policy. |
+| Component                                                                        | Responsibility                                                                                                                            |
+| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **Test Authoring UI**                                                            | Provides the chat, file navigation, test output, and session controls in the Testkube Dashboard.                                          |
+| **Testkube Control Plane**                                                       | Owns session metadata and lifecycle, provisions Runspaces, issues scoped credentials, and coordinates checkpoints and cleanup.            |
+| **[Agent Sandbox](https://github.com/kubernetes-sigs/agent-sandbox) controller** | Trusted cluster infrastructure that creates and manages the Kubernetes workloads and storage used by Runspaces.                           |
+| **Runspace**                                                                     | The isolated environment where the authoring agent reads and changes files and runs tools or tests.                                       |
+| **Runspace Bridge**                                                              | Maintains the authenticated connection between a Runspace and the AI Service and carries agent events and workspace operations.           |
+| **Testkube AI Service**                                                          | Coordinates the authoring conversation and communicates with the agent running in the Runspace.                                           |
+| **[LiteLLM](https://docs.litellm.ai/) gateway**                                  | Routes model requests, applies model selection and per-Runspace limits, and keeps provider credentials outside Runspaces.                 |
+| **Persistent storage**                                                           | Holds workspace files and private agent state so the session can be checkpointed or resumed according to the configured retention policy. |
 
 The exact deployment layout differs between Testkube Cloud and Testkube On-Prem, but the component roles
 and Runspace isolation boundary are the same.
@@ -69,7 +69,7 @@ Testkube configures Runspace workloads with the following protections:
   and temporary volumes.
 - Host networking, host PID, and host IPC access are disabled.
 - The Runspace ServiceAccount does not mount a Kubernetes API token.
-- NetworkPolicies deny unsolicited ingress and restrict egress to required Testkube and AI services, DNS,
+- [NetworkPolicies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) deny unsolicited ingress and restrict egress to required Testkube and AI services, DNS,
   and destinations allowed by the installation's network policy.
 - The AI provider credential remains behind the LiteLLM gateway. Each Runspace receives a separate virtual
   key with configurable model, budget, request, and token limits.
@@ -78,10 +78,12 @@ Testkube configures Runspace workloads with the following protections:
 - Workspace and private agent-state data use separate persistent volumes and follow the configured
   checkpoint and cleanup lifecycle.
 
-These controls rely on the Kubernetes cluster enforcing NetworkPolicy and Pod Security settings.
+These controls rely on the Kubernetes cluster enforcing NetworkPolicy and
+[Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/).
 Administrators should also use encrypted storage, restrict access to the Runspace and Agent Sandbox
-controller namespaces, and enable the runtime's default seccomp profile where it is compatible with the
-tools used by their authoring sessions.
+controller namespaces, and enable the
+[RuntimeDefault seccomp profile](https://kubernetes.io/docs/reference/node/seccomp/) where it is compatible
+with the tools used by their authoring sessions.
 
 The Agent Sandbox controller is trusted infrastructure with the Kubernetes permissions needed to create
 and manage sandbox resources. Users and Runspace ServiceAccounts should not be granted access to its roles
