@@ -1,27 +1,83 @@
 ---
-title: Test Authoring on Testkube On-Prem
-slug: /articles/test-authoring-on-prem-install
+title: AI Test Creation
+slug: /articles/ai-test-creation
 ---
 
-# Test Authoring on Testkube On-Prem
+# AI Test Creation
 
-Test Authoring provides an isolated, persistent workspace where you can create, run, and save tests with an AI agent. On an on-prem installation, the Testkube Enterprise Helm chart installs and connects the AI Service, an internal LiteLLM gateway, the Agent Sandbox controller, and the Runspace runtime.
+AI Test Creation provides an isolated, persistent workspace where you can create, update, run, and save tests with an AI agent. Each session is connected to an environment called a **Runspace**, where the agent can inspect files, make changes, and run tests while you review its progress in the Testkube Dashboard.
 
-:::info Version availability
+:::warning Early Access Program only
 
-You need Testkube Enterprise **2.13 or later**, with Test Authoring included in your Enterprise license. If you are not sure whether your license includes Test Authoring, contact your Testkube account representative or [Testkube Support](https://testkube.io/contact) before installation.
+AI Test Creation is currently available only to customers accepted into the Testkube AI Early Access Program (EAP). [Apply for EAP access](https://testkube.io/eap).
 
 :::
 
-## Before you enable Test Authoring
+## How AI Test Creation works
+
+### Session flow
+
+```mermaid
+flowchart LR
+    User["User"] --> Dashboard["AI Test Creation in the Dashboard"]
+    Dashboard --> API["Testkube Control Plane"]
+    API --> Sandbox["Agent Sandbox controller"]
+    Sandbox --> Runspace["Isolated Runspace"]
+
+    Runspace --> Bridge["Runspace Bridge"]
+    Bridge <--> AI["Testkube AI Service"]
+    Runspace --> Gateway["LiteLLM gateway"]
+    Gateway --> Provider["Configured AI provider"]
+    Runspace --> Testkube["Scoped Testkube APIs"]
+    Runspace --> Storage["Persistent workspace and agent state"]
+```
+
+When you start an AI Test Creation session:
+
+1. The Testkube Control Plane creates the session and provisions a Runspace for it.
+2. The Agent Sandbox controller creates the isolated Kubernetes workload and its persistent storage.
+3. The Runspace Bridge opens an authenticated outbound connection to the Testkube AI Service and starts the AI agent inside the Runspace.
+4. The agent examines the test files, updates the workspace, and runs tools or tests in that environment.
+5. Model requests go through the LiteLLM gateway to the configured AI provider. The Runspace uses its own limited model-access key rather than the provider credential.
+6. For a TestBundle, the Runspace can use a workflow-scoped Testkube token to update and run the workflow associated with that bundle.
+7. Testkube can checkpoint an idle session and remove its active workload. When the session is resumed, a replacement Runspace restores the saved workspace.
+
+Each session has one active Runspace. When you resume a session, Testkube may create a new Runspace and restore the files from its checkpoint.
+
+### Main components
+
+| Component                                                                        | Responsibility                                                                                                                            |
+| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **AI Test Creation UI**                                                          | Provides the chat, file navigation, test output, and session controls in the Testkube Dashboard.                                          |
+| **Testkube Control Plane**                                                       | Owns session metadata and lifecycle, provisions Runspaces, issues scoped credentials, and coordinates checkpoints and cleanup.            |
+| **[Agent Sandbox](https://github.com/kubernetes-sigs/agent-sandbox) controller** | Trusted cluster infrastructure that creates and manages the Kubernetes workloads and storage used by Runspaces.                           |
+| **Runspace**                                                                     | The isolated environment where the AI agent reads and changes files and runs tools or tests.                                              |
+| **Runspace Bridge**                                                              | Maintains the authenticated connection between a Runspace and the AI Service and carries agent events and workspace operations.           |
+| **Testkube AI Service**                                                          | Coordinates the AI Test Creation conversation and communicates with the agent running in the Runspace.                                    |
+| **[LiteLLM](https://docs.litellm.ai/) gateway**                                  | Routes model requests, applies model selection and per-Runspace limits, and keeps provider credentials outside Runspaces.                 |
+| **Persistent storage**                                                           | Holds workspace files and private agent state so the session can be checkpointed or resumed according to the configured retention policy. |
+
+The component responsibilities and Runspace isolation boundary are the same in Testkube Cloud and Testkube On-Prem. The Runspace is the primary security boundary for a session and is separate from the Testkube Control Plane, Agent Sandbox controller, and other Runspaces. See [Secure AI Sandbox configuration](#secure-ai-sandbox-configuration) for the controls that enforce this boundary on-prem.
+
+## Install AI Test Creation on Testkube On-Prem
+
+On an on-prem installation, the Testkube Enterprise Helm chart installs and connects the AI Service, an internal LiteLLM gateway, the Agent Sandbox controller, and the Runspace runtime.
+
+:::info Version availability
+
+You need Testkube Enterprise **2.13 or later**, with AI Test Creation included in your Enterprise license. If you are not sure whether your license includes AI Test Creation, contact your Testkube account representative or [Testkube Support](https://testkube.io/contact) before installation.
+
+:::
+
+## Before you enable AI Test Creation
 
 Confirm the following requirements:
 
-- There is only one Test Authoring-enabled Enterprise release in the Kubernetes cluster. The Agent Sandbox CRDs are cluster-scoped and its controller has cluster-wide ownership; an install or upgrade preflight rejects a second active owner.
+- There is only one AI Test Creation-enabled Enterprise release in the Kubernetes cluster. The Agent Sandbox CRDs are cluster-scoped and its controller has cluster-wide ownership; an install or upgrade preflight rejects a second active owner.
 - The cluster meets the [base installation requirements](/articles/install/install-with-helm#prerequisites), has a default `StorageClass` or an explicitly configured one, and uses a CNI that enforces Kubernetes `NetworkPolicy` resources.
 - One supported PostgreSQL path is configured: the bundled PostgreSQL chart, the CloudNativePG cluster, or an external PostgreSQL database for LiteLLM.
 - The cluster can reach an OpenAI or OpenAI-compatible inference endpoint.
-- Your registry policy allows all [eight Test Authoring image repositories](#private-registry-and-air-gapped-installations), including images used by Helm hook jobs and dynamically created Runspaces.
+- Your registry policy allows all [eight AI Test Creation image repositories](#private-registry-and-air-gapped-installations), including images used by Helm hook jobs and dynamically created Runspaces.
 
 The chart creates a dedicated Runspace namespace. By default it is `<release-name>-runspaces`. The Agent Sandbox controller uses a separate controller namespace. Only one Agent Sandbox controller can manage the cluster.
 
@@ -30,7 +86,7 @@ The chart creates a dedicated Runspace namespace. By default it is `<release-nam
 Create a Secret containing your OpenAI API key in the same namespace as the Enterprise release:
 
 ```bash
-kubectl create secret generic testkube-authoring-provider \
+kubectl create secret generic testkube-ai-test-creation-provider \
   --namespace testkube \
   --from-literal=OPENAI_API_KEY='<openai-api-key>'
 ```
@@ -44,7 +100,7 @@ global:
   ai:
     inference:
       defaults:
-        secretRef: testkube-authoring-provider
+        secretRef: testkube-ai-test-creation-provider
         secretRefKey: OPENAI_API_KEY
       agent:
         - model: <model-id>
@@ -63,13 +119,13 @@ helm upgrade --install \
   --version <chart-version>
 ```
 
-`global.testAuthoring.enabled: true` is the single Test Authoring installation switch. It enables and connects the Test Authoring backend and UI, AI Service, internal LiteLLM gateway, Agent Sandbox controller, Runspace bridge, required RBAC, namespace isolation, and lifecycle cleanup. You do not need to enable those components separately.
+`global.testAuthoring.enabled: true` is the single AI Test Creation installation switch. It enables and connects the AI Test Creation backend and UI, AI Service, internal LiteLLM gateway, Agent Sandbox controller, Runspace bridge, required RBAC, namespace isolation, and lifecycle cleanup. You do not need to enable those components separately.
 
 The chart validates the configuration before install and upgrade. Inline `apiKey` values are rejected. Keep credentials in a Kubernetes Secret and use `secretRef` and `secretRefKey`.
 
 ### Selecting a provider model
 
-Test Authoring initially supports OpenAI and OpenAI-compatible endpoints. Add one model under `global.ai.inference.agent` and mark it with `default: true`.
+AI Test Creation initially supports OpenAI and OpenAI-compatible endpoints. Add one model under `global.ai.inference.agent` and mark it with `default: true`.
 
 Although `default: true` is optional when the list contains only one model, setting it explicitly makes the intended default clear. If you configure multiple models, exactly one of them must have `default: true`.
 
@@ -84,7 +140,7 @@ global:
   ai:
     inference:
       defaults:
-        secretRef: testkube-authoring-provider
+        secretRef: testkube-ai-test-creation-provider
         secretRefKey: OPENAI_API_KEY
         url: https://llm.example.com/v1
       agent:
@@ -99,20 +155,20 @@ The default per-Runspace virtual-key budget is `1` provider currency unit. When 
 
 ## PostgreSQL configuration
 
-Test Authoring's internal LiteLLM gateway requires PostgreSQL. Use exactly one of these paths:
+The internal LiteLLM gateway for AI Test Creation requires PostgreSQL. Use exactly one of these paths:
 
 1. `postgresql.enabled: true` for the bundled PostgreSQL chart.
 2. `postgresqlCluster.enabled: true` for the CloudNativePG-managed cluster.
 3. `global.testAuthoring.litellm.database.existingSecret` for an external database.
 
-When a chart-managed PostgreSQL server is enabled, the authoring hooks create a dedicated `litellm` role and database and run the LiteLLM schema migrations. The application does not receive the PostgreSQL administrator credentials.
+When a chart-managed PostgreSQL server is enabled, the installation hooks create a dedicated `litellm` role and database and run the LiteLLM schema migrations. The application does not receive the PostgreSQL administrator credentials.
 
 ### External PostgreSQL
 
 Create a dedicated database and principal with permission to create and migrate the LiteLLM schema. Store its complete PostgreSQL DSN in a Secret:
 
 ```bash
-kubectl create secret generic testkube-authoring-litellm-db \
+kubectl create secret generic testkube-ai-test-creation-litellm-db \
   --namespace testkube \
   --from-literal=DATABASE_URL='<postgresql-dsn>'
 ```
@@ -125,7 +181,7 @@ global:
     enabled: true
     litellm:
       database:
-        existingSecret: testkube-authoring-litellm-db
+        existingSecret: testkube-ai-test-creation-litellm-db
         existingSecretKey: DATABASE_URL
 ```
 
@@ -153,9 +209,9 @@ The chart mounts this CA for the AI Service, the LiteLLM provider connection, an
 
 ## Secure AI Sandbox configuration
 
-Each Test Authoring session runs in a dedicated Runspace in `<release-name>-runspaces` by default. The chart creates the namespace, security labels, NetworkPolicies, resource limits, a tokenless ServiceAccount, and the RBAC required to provision Sandboxes.
+Each AI Test Creation session runs in a dedicated Runspace in `<release-name>-runspaces` by default. The chart creates the namespace, security labels, NetworkPolicies, resource limits, a tokenless ServiceAccount, and the RBAC required to provision Sandboxes.
 
-Before using Test Authoring with sensitive code or data, confirm that your cluster enforces Kubernetes `NetworkPolicy` resources and Pod Security Admission. Use an encrypted `StorageClass` for Runspace PVCs and limit administrative access to the Runspace and Agent Sandbox controller namespaces.
+Before using AI Test Creation with sensitive code or data, confirm that your cluster enforces Kubernetes `NetworkPolicy` resources and Pod Security Admission. Use an encrypted `StorageClass` for Runspace PVCs and limit administrative access to the Runspace and Agent Sandbox controller namespaces.
 
 ### Pod and container isolation
 
@@ -185,7 +241,7 @@ global:
       seccompProfileEnabled: true
 ```
 
-Enable this for production after testing the browser and other tools used by your authoring sessions. Some browser runtimes create Linux user namespaces and may require syscalls blocked by the runtime's default seccomp profile. If that happens, keep this setting disabled until you have a compatible runtime profile; do not remove the non-root, read-only filesystem, capability, or privilege-escalation controls.
+Enable this for production after testing the browser and other tools used by your AI Test Creation sessions. Some browser runtimes create Linux user namespaces and may require syscalls blocked by the runtime's default seccomp profile. If that happens, keep this setting disabled until you have a compatible runtime profile; do not remove the non-root, read-only filesystem, capability, or privilege-escalation controls.
 
 The Agent Sandbox controller is separate from user Runspaces. Its namespace enforces `restricted` Pod Security, and its pod runs non-root with `RuntimeDefault` seccomp, a read-only root filesystem, no privilege escalation, and all capabilities dropped. The controller requires its Kubernetes API token and cluster-scoped RBAC to create and manage Sandbox resources. Do not bind users or Runspace ServiceAccounts to the controller's roles.
 
@@ -201,7 +257,7 @@ The chart creates namespace-wide and per-Runspace default-deny policies for both
 
 No inbound connection to a Runspace is allowed by the generated policy. This boundary is effective only when the cluster CNI enforces Kubernetes NetworkPolicy.
 
-Public HTTP and HTTPS egress is enabled so authoring tools can reach package registries, source repositories, and test targets. Add sensitive public destinations to `deniedEgressCIDRs`. If a Runspace must reach a private provider, proxy, repository, or test endpoint, add only the required IPv4 CIDRs to `additionalEgressCIDRs`:
+Public HTTP and HTTPS egress is enabled so AI Test Creation tools can reach package registries, source repositories, and test targets. Add sensitive public destinations to `deniedEgressCIDRs`. If a Runspace must reach a private provider, proxy, repository, or test endpoint, add only the required IPv4 CIDRs to `additionalEgressCIDRs`:
 
 ```yaml title="values.yaml"
 global:
@@ -274,9 +330,9 @@ Omit `additionalEgressCIDRs` when Runspaces do not need private network access. 
 
 ## Private registry and air-gapped installations
 
-The general [image inventory](/articles/inventory/images) covers the complete Enterprise installation. Enabling Test Authoring adds or exercises these eight repositories:
+The general [image inventory](/articles/inventory/images) covers the complete Enterprise installation. Enabling AI Test Creation adds or exercises these eight repositories:
 
-| Image used by Test Authoring                | Default source reference                                                                                                                                       | Override values                                                                                                                                     |
+| Image used by AI Test Creation              | Default source reference                                                                                                                                       | Override values                                                                                                                                     |
 | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Control Plane API and Runspace provisioning | `docker.io/kubeshop/testkube-enterprise-api:<VERSION>`                                                                                                         | `testkube-cloud-api.image.registry`, `.repository`, `.tag`, `.digest`                                                                               |
 | API database migration job                  | `docker.io/kubeshop/testkube-migration:<VERSION>`                                                                                                              | `testkube-cloud-api.migrationImage.registry`, `.repository`, `.tag`, `.digest`                                                                      |

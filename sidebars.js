@@ -128,11 +128,6 @@ const sidebars = {
               items: [
                 {
                   type: "doc",
-                  label: "Test Authoring",
-                  id: "articles/install/test-authoring",
-                },
-                {
-                  type: "doc",
                   label: "SSO / Identity Provides",
                   id: "articles/auth",
                 },
@@ -917,6 +912,11 @@ const sidebars = {
               type: "category",
               label: "Reference",
               items: [
+                {
+                  type: "doc",
+                  label: "AI Test Creation",
+                  id: "articles/ai-test-creation",
+                },
                 {
                   type: "doc",
                   label: "Configuration",
