@@ -1285,7 +1285,11 @@ const sidebars = {
           type: "category",
           label: "CI/CD Pipelines",
           items: [
-            { type: "doc", label: "GitHub Actions", id: "articles/github-actions" },
+            {
+              type: "doc",
+              label: "GitHub Actions",
+              id: "articles/github-actions",
+            },
             { type: "doc", label: "GitLab", id: "articles/gitlab" },
             {
               type: "doc",
