@@ -914,11 +914,6 @@ const sidebars = {
               items: [
                 {
                   type: "doc",
-                  label: "AI Test Creation",
-                  id: "articles/ai-test-creation",
-                },
-                {
-                  type: "doc",
                   label: "Configuration",
                   id: "articles/ai-configuration",
                 },
@@ -926,6 +921,11 @@ const sidebars = {
                   type: "doc",
                   label: "Architecture",
                   id: "articles/ai-architecture",
+                },
+                {
+                  type: "doc",
+                  label: "AI Test Creation EAP",
+                  id: "articles/ai-test-creation",
                 },
               ],
             },
