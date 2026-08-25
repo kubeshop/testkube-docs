@@ -602,6 +602,43 @@ The expressions language includes many functions that help manipulate and cast v
   </tbody>
 </table>
 
+### Execution Data Functions
+
+These read data produced by other Test Workflow executions - the ones the current Workflow ran with `execute`, the one that ran it, and its siblings. See [Sharing Data Between Executions](/articles/test-workflows-execution-sharing) for the full picture.
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Returns</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>execution</code></td>
+      <td>map</td>
+      <td>Returns data about another execution - its <code>id</code>, <code>name</code>, <code>workflow</code>, <code>alias</code>, <code>index</code>, <code>status</code> and <code>outputs</code>. Takes a reference and an optional position within a fan-out group</td>
+      <td><code>execution("p").outputs.token</code> might return <code>"abc123"</code>; <code>execution("shards", 2).status</code> might return <code>"passed"</code></td>
+    </tr>
+    <tr>
+      <td><code>read_artifact</code></td>
+      <td>string</td>
+      <td>Returns the contents of a single artifact of another execution, up to 1 MiB</td>
+      <td><code>read_artifact("parent", "fixtures/data.json")</code> might return <code>'{"cases":3}'</code></td>
+    </tr>
+  </tbody>
+</table>
+
+The reference is an `as` alias, a Workflow name, an execution ID, or `"parent"` for the execution that ran the current one:
+
+```yaml
+- shell: |
+    echo "sibling token: {{ execution(config.producerId).outputs.token }}"
+    echo "parent seed: {{ execution("parent").outputs.seed }}"
+```
+
 Example using file and glob functions:
 
 ```yaml

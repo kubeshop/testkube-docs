@@ -240,6 +240,11 @@ spec:
 Configuration parameters defined for a Workflow (see [Parameterization](/articles/test-workflows-examples-configuration)) can be passed/overridden
 when executing a Workflow as described above by adding a `config` property that specifies the desired values.
 
+:::tip
+`config` passes data **into** an execution. To read data back **out** of one - the values it published, or the
+artifacts it produced - see [Sharing Data Between Executions](/articles/test-workflows-execution-sharing).
+:::
+
 In the below example the `example-distributed-k6` Workflow is executed with specified values for `vus`, `duration` and `workers` parameters:
 
 ```yaml
