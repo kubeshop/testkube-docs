@@ -4,9 +4,6 @@ Test Authoring provides an AI-assisted workspace for creating, updating, and run
 Each authoring session is connected to an isolated environment called a **Runspace**, where the authoring
 agent can inspect files, make changes, and run the test while you review its progress in the Dashboard.
 
-This page describes the main components and trust boundaries. It intentionally focuses on the stable
-runtime model rather than individual integrations or every implementation detail.
-
 ## Authoring session flow
 
 ```mermaid
