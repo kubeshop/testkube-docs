@@ -117,6 +117,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "Test Authoring",
+                  id: "articles/install/test-authoring",
+                },
+                {
+                  type: "doc",
                   label: "Custom Installation",
                   id: "articles/install/advanced-install",
                 },

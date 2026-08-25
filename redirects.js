@@ -595,7 +595,7 @@ const redirects = [
   },
   {
     from: "/articles/copilot-on-prem-install",
-    to: "/articles/ai-configuration",
+    to: "/articles/test-authoring-on-prem-install",
   },
   {
     from: "/articles/ai-assistant-on-prem-install",
