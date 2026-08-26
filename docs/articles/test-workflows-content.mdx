@@ -357,6 +357,43 @@ spec:
       revision: "{{ config.branch }}"
 ```
 
+### Clone Verbosity
+
+Control how much logging the Git clone produces with `content.git.verbosity`.
+Allowed values are `quiet`, `normal`, and `verbose`. If omitted, the clone defaults to `verbose`.
+
+```yaml
+spec:
+  content:
+    git:
+      uri: https://github.com/kubeshop/testkube.git
+      verbosity: quiet
+```
+
+### Clone Retry
+
+Git clone retries transient failures in-process. Configure the policy with `content.git.retry`:
+
+- `count` — maximum attempts (default `5`, minimum `1`, maximum `20`)
+- `delay` — base delay between attempts (for example `"100ms"` or `"1s"`); exponential backoff is applied.
+  May use a [Test Workflow Expression](./test-workflows-expressions.md); the value is validated after resolution.
+  The base delay is capped at `30s`.
+
+```yaml
+spec:
+  content:
+    git:
+      uri: https://github.com/kubeshop/testkube.git
+      retry:
+        count: 10
+        delay: 1s
+```
+
+:::info
+This is separate from [step-level `retry`](/articles/test-workflows-examples-basics#retry-mechanism), which retries an entire Workflow step.
+`content.git.retry` only retries the Git operations inside the clone.
+:::
+
 ## Using multiple Git repositories
 
 There are a few different ways to do it.
