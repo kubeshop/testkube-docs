@@ -14,10 +14,18 @@ Control Plane is available in Helm chart `TBD` and the Agent is available in Hel
 
 ### AI
 
+- Direct links to chat messages. Every message in an AI chat now has its own link, so you can point a colleague at a single answer instead of the whole conversation.
+- Agents link their sources. When an agent inspects an execution or a workflow to answer you, its reply now links straight to it, so you can check the run behind the explanation.
+
 ### Insights & Analytics
 
 - Test case health: Insights now tracks the health of individual test cases. This can be used to identify flaky tests or view health of a test case over time.
 - Updated coloring of heatmap to more closely align with chosen metrics/values.
+
+### Operations & Security
+
+- Testkube AI authorization: AI, MCP and agent endpoints now share a single set of authorization guards, with caller identity resolved through the Control Plane. Permission enforcement is consistent across every AI surface and easier to audit.
+- Helm: the AI service internal secrets are now configurable from the umbrella chart.
 
 ### Improvements
 
@@ -28,6 +36,7 @@ Control Plane is available in Helm chart `TBD` and the Agent is available in Hel
 
 - Added support for explicit GitOps agent ownership - [read more](/articles/gitops-overview#gitops-resource-ownership)
 - Fixed an issue where errors were not displayed properly when creating a new workflow using the workflow wizard.
+- Testkube's own MCP server is now published in the public MCP Registry with its hosted endpoint, so clients looking for remote MCP servers can find and connect to it.
 
 ## Patch Release v2.12.2 (2026-08-18)
 
