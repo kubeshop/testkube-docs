@@ -240,11 +240,15 @@ The [GitHub integration](/articles/git-integration) (repository connections that
 
 **Webhook URL**: point the App webhook at `https://<control-plane-host>/api/v1/github/webhooks` (the path served by `testkube-cloud-api`). Generate a webhook secret and keep it for the values below.
 
-**Additional Helm values** on `testkube-cloud-api`:
+**Additional Helm values** on `testkube-cloud-api` (the feature is off by default and every endpoint returns "not configured" until `features.gitIntegration` is on, so the flag has to land alongside the App credentials):
 
 ```yaml
 testkube-cloud-api:
   api:
+    features:
+      # turns on the GitHub integration endpoints, pipeline consumers, and the dashboard tab.
+      # required — without it the App credentials below are read but the feature stays disabled.
+      gitIntegration: true
     github:
       appId: "your_application_id"
       appSlug: "your-app-slug" # from the GitHub App URL, used to build install links from the dashboard
