@@ -10,6 +10,25 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 
 ## Release v2.13.1 (2026-08-27)
 
+Control Plane is available in Helm chart `TBD` and the Agent is available in Helm chart `TBD`.
+
+### AI
+
+### Insights & Analytics
+
+- Test case health: Insights now tracks the health of individual test cases. This can be used to identify flaky tests or view health of a test case over time.
+- Updated coloring of heatmap to more closely align with chosen metrics/values.
+
+### Improvements
+
+- Added an option to rerun an execution using the latest workflow definition (but reusing the same execution parameters)
+- Added two new options when using `spec.content.git`: `verbosity` to control log levels and `retry` to control retry behavior - [read more](/articles/test-workflows-content#clone-verbosity)
+
+### Other
+
+- Added support for explicit GitOps agent ownership - [read more](/articles/gitops-overview#gitops-resource-ownership)
+- Fixed an issue where errors were not displayed properly when creating a new workflow using the workflow wizard.
+
 ## Patch Release v2.12.2 (2026-08-18)
 
 Control Plane is available in Helm chart `v2.335.2` and the Agent is available in Helm chart `v2.12.2`.
