@@ -217,6 +217,23 @@ Each run reports a single aggregate **check-run** on the PR (or a commit status 
 - Executions that never start (queued indefinitely, agent disconnected) time out after the environment's queue timeout and mark the check-run as failed with a "did not run" reason.
 - Runs superseded by a newer push on the same PR are silently skipped, they do not overwrite the check-run.
 
+## Re-running a check
+
+Every re-trigger path routes through the same pipeline:
+
+- **Re-run** on a single check in the PR's Checks tab
+- **Re-run failed** or **Re-run all** on the check-suite header
+- **Run again** on a Testkube execution in the dashboard (only for executions scheduled by the GitHub integration)
+- Comment `@testkube` on the PR
+
+None of these replay the original run's snapshot. The pipeline resolves the Workflow against the current integration state and schedules fresh:
+
+- The latest Workflow YAML wins if it changed between runs.
+- A Workflow detached from the integration between runs is dropped, its historical result stays visible in the sticky comment but no new execution runs for it.
+- Config parameters come from the PR event context, not from the original execution's config.
+
+Practical framing: re-run means "run this again against the current head, with the current definitions", not "replay this exact run".
+
 ## Tips and recipes
 
 ### I just want to re-run without pushing anything
