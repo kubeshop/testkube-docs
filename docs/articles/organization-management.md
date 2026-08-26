@@ -60,6 +60,7 @@ This tab allows you to configure Organization-level Product Features:
 - **AI Assistant** - Toggle the AI Assistant feature for your organization [Read More](/articles/ai-assistant-overview).
 - **Webhooks URL Masking** - Toggle Webhooks URL masking - [Read More](/articles/webhooks#url-masking).
 - **Agent Token Masking** - Toggle Agent Token masking - [Read More](/articles/agents-overview#agent-token-masking).
+- **GitOps Resource Ownership** - Toggle exclusive GitOps Agent ownership of synced resources - [Read More](/articles/gitops-overview#gitops-resource-ownership).
 
 ![Organization Product Features](../img/organization-product-features.png)
 

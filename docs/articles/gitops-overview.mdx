@@ -84,7 +84,35 @@ The GitOps Agent will currently overwrite any existing/conflicting Testkube Reso
 
 - If you make changes to a Resource via the Testkube Dashboard or any other mechanism, those changes will be overwritten when a new version of the Resource is detected
   and synced by a GitOps Agent.
-- If you have multiple GitOps Agents syncing the same Testkube Resources into the same Testkube Environment, these will overwrite each other.
+- If you have multiple GitOps Agents syncing the same Testkube Resources into the same Testkube Environment, these will overwrite each other unless
+  [GitOps Resource Ownership](#gitops-resource-ownership) is enabled.
+
+### GitOps Resource Ownership
+
+When several GitOps Agents sync into the same Environment, they can target the same resource name and silently overwrite each other.
+**GitOps Resource Ownership** makes that exclusive: the first GitOps Agent to sync a resource claims it, and create, update, and delete
+syncs from other GitOps Agents are rejected until you transfer ownership.
+
+Enable it under **Organization Management → Product Features → GitOps Resource Ownership**. The feature is off by default.
+
+Ownership applies to all resource types synced by the GitOps Agent: TestWorkflows, TestWorkflow Templates, TestTriggers,
+WorkflowTriggers, Webhooks, and Webhook Templates.
+
+#### Transferring Ownership
+
+To assign or transfer ownership, set the `testkube.io/gitops-owner` annotation on the Kubernetes CRD to the target Agent ID
+(not the agent name):
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: api-integration-tests
+  annotations:
+    testkube.io/gitops-owner: "<agent-id>"
+```
+
+The Agent ID is shown in the Agents list under Environment Settings.
 
 ### Deleting Resources
 
