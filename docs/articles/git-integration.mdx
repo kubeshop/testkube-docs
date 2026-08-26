@@ -6,8 +6,6 @@ The **GitHub integration** connects a GitHub repository to a Testkube environmen
 Available on Testkube Cloud and on-prem Control Plane. On-prem requires the GitHub integration enabled in the Helm chart and a GitHub App configured against the target organization. See [Using GitHub Apps with Testkube](/articles/github-actions#using-github-apps-with-testkube).
 :::
 
-{/* @screenshot: /img/git-integration/overview.png dashboard Integrations, GitHub, repository list with one connected repository */}
-
 ![Integrations page listing a connected GitHub repository](../img/git-integration/overview.png)
 
 ## What it does
@@ -34,11 +32,7 @@ Workflows that run can be:
 
 On Testkube Cloud, open **Integrations > Git Integration** and click **Connect my first repository**. GitHub asks which organization and which repos the App may access.
 
-{/* @screenshot: /img/git-integration/install-app-empty-state.png dashboard empty state with the "Connect my first repository" call to action */}
-
 ![Empty state on the GitHub Repositories tab with the "Connect my first repository" call to action](../img/git-integration/install-app-empty-state.png)
-
-{/* @screenshot: /img/git-integration/github-app-install.png GitHub's App installation screen showing the org picker and repository access selector */}
 
 ![GitHub App installation screen with permissions and the repository access selector](../img/git-integration/github-app-install.png)
 
@@ -62,11 +56,7 @@ From the dashboard, open **Integrations > Git Integration > Connect repository**
    - **Scan the repo** and let Testkube propose a starting point based on the detected stack (Playwright, Cypress, k6, Postman, JMeter, Maven, Gradle, Go, Node). Detection is best-effort, review and adjust the proposed set before confirming.
 3. Confirm. Testkube persists the selection, materializes one auto-gen Workflow per selected framework (for the scan path), and starts receiving webhook events.
 
-{/* @screenshot: /img/git-integration/connect-repository-picker.png Connect repository wizard, workflow selection step listing existing Workflows in the environment */}
-
 ![Connect repository wizard step showing existing TestWorkflows to attach](../img/git-integration/connect-repository-picker.png)
-
-{/* @screenshot: /img/git-integration/connect-repository-scan.png scan result showing detected frameworks with checkboxes to review */}
 
 ![Connect repository wizard scan result with detected frameworks](../img/git-integration/connect-repository-scan.png)
 
@@ -84,8 +74,6 @@ From the dashboard, open **Integrations > Git Integration > Connect repository**
 
 Toggle event types per integration from the dashboard configuration panel.
 
-{/* @screenshot: /img/git-integration/event-triggers-panel.png repository Configuration tab, event-triggers section with the pull_request, push, tag, release, issue_comment toggles */}
-
 ![Content configuration panel with pull request toggles, comment mode, and silent executions checkbox](../img/git-integration/event-triggers-panel.png)
 
 ## Configuration
@@ -99,19 +87,13 @@ Chooses how the PR comment looks:
 - **Condensed** (default): title, brief pass/fail, collapsible executed Workflows, a short collapsible AI analysis, and a link back to the dashboard.
 - **Detailed**: everything in Condensed, plus a pipeline phase breakdown and a longer collapsible AI analysis section.
 
-{/* @screenshot: /img/git-integration/pr-comment-condensed.png Condensed PR comment as it renders on GitHub */}
-
 ![Condensed PR comment posted by the Testkube integration](../img/git-integration/pr-comment-condensed.png)
-
-{/* @screenshot: /img/git-integration/pr-comment-detailed.png Detailed PR comment side-by-side or below the Condensed one, phase breakdown expanded */}
 
 ![Detailed PR comment with pipeline phases and AI Analysis section](../img/git-integration/pr-comment-detailed.png)
 
 ### GitHub Checks
 
 - **Block pull requests when executions fail**: when on, a failed required Workflow marks the aggregate check-run as failed and blocks merge (if branch protection requires the check to pass). Off means the check-run still reports the result, but does not block.
-
-{/* @screenshot: /img/git-integration/check-run-blocked.png GitHub PR with the aggregate Testkube check-run marked failed and the Merge button blocked by branch protection */}
 
 ![PR merge status widget with the required Testkube check failing and the Merge button disabled](../img/git-integration/check-run-blocked.png)
 
@@ -126,8 +108,6 @@ Adds an AI-generated execution summary to the PR comment.
   - **On fail or abort**: only run the summary when the execution does not pass, useful for keeping AI cost tied to real signal.
   - **Always**: run after every execution on a PR.
 
-{/* @screenshot: /img/git-integration/ai-summary-config.png Configuration panel AI Summary section with agent, model, and Run when controls */}
-
 ![AI Configuration tab with agent, model, and run-when controls](../img/git-integration/ai-summary-config.png)
 
 ## AI sessions
@@ -140,15 +120,9 @@ When AI Summary is on, Testkube creates one **AI session** per pull request. It 
   - From the dashboard, open the integration's **GitHub events** tab. Events whose analysis produced a session show a **View chat** link in the AI Session column.
 - Both entry points land on the same conversation under the environment's **Chats** section. From there you can keep asking follow-ups, inspect the assistant's reasoning, or dig into the tool calls it made against your executions.
 
-{/* @screenshot: /img/git-integration/ai-session-pr-link.png PR comment scrolled to the AI Analysis block with the "Continue analysis in Testkube" link highlighted */}
-
 ![Detailed PR comment with the "Continue analysis in Testkube" link highlighted](../img/git-integration/ai-session-pr-link.png)
 
-{/* @screenshot: /img/git-integration/ai-session-chat.png the AI chat view in Testkube after landing from the PR link, showing the running conversation */}
-
 ## Auto-generated Workflows
-
-{/* @screenshot: /img/git-integration/auto-gen-workflows-list.png repository Workflows tab listing the auto-gen Workflows with their framework badges */}
 
 ![Connected Workflows tab listing the auto-generated Workflows for the repository](../img/git-integration/auto-gen-workflows-list.png)
 
@@ -191,8 +165,6 @@ Workflows that do not declare these ignore them.
 
 Every execution scheduled by the GitHub integration carries `actor.type = gitintegration`. The **Executions** page has a **Git Integration** filter chip that returns those runs.
 
-{/* @screenshot: /img/git-integration/executions-filter-chip.png Executions list with the Git Integration filter chip applied, results scoped to gitintegration actor */}
-
 ![Executions page with the Git Integration actor filter chip applied](../img/git-integration/executions-filter-chip.png)
 
 ## Re-scanning a repository
@@ -205,11 +177,7 @@ There is no dashboard button for a manual rescan today. To force one when needed
 
 Each run reports a single aggregate **check-run** on the PR (or a commit status on push/tag/release). Clicking it opens the execution details in Testkube.
 
-{/* @screenshot: /img/git-integration/pr-check-run-passed.png PR Checks tab showing the aggregate Testkube check-run passing, with per-Workflow rows underneath */}
-
 ![PR Checks tab with the Testkube check-run passing](../img/git-integration/pr-check-run-passed.png)
-
-{/* @screenshot: /img/git-integration/pr-check-run-failed.png the same view with a failed Workflow so the aggregate is red and the failure surfaces */}
 
 ![PR Checks tab with a failed Testkube Workflow and a red aggregate check-run](../img/git-integration/pr-check-run-failed.png)
 
