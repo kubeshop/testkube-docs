@@ -922,6 +922,11 @@ const sidebars = {
                   label: "Architecture",
                   id: "articles/ai-architecture",
                 },
+                {
+                  type: "doc",
+                  label: "AI Test Creation EAP",
+                  id: "articles/ai-test-creation",
+                },
               ],
             },
           ],
