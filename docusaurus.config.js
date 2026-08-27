@@ -154,7 +154,7 @@ const config = {
       announcementBar: {
         id: "testkube-2100-release",
         content:
-          '<b>Testkube 2.11.0 is out! Improved insights and metrics, more responsive AI chat, Gateway API support, and much more! <a href="/changelog">Read More</a></b>',
+          '<b>Testkube 2.13.0 is out! New Advanced GitHub Integration, test case level flakiness, and much more! <a href="/changelog">Read More</a></b>',
         backgroundColor: "#8951ff",
         textColor: "#fff",
       },
