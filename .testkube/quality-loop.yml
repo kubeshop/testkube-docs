@@ -2,15 +2,15 @@
 #
 # | workflow       | when                         | branches      | listens to |
 # |----------------|------------------------------|---------------|------------|
-# | lint-prettier  | pull_request + push to main  | any PR base;  | all files  |
+# | docs-prettier  | pull_request + push to main  | any PR base;  | all files  |
 # |                |                              | push `main`   |            |
 #
-# TestWorkflow `lint-prettier` is created on the GitHub integration, not in this folder.
+# TestWorkflow `docs-prettier` is created on the GitHub integration, not in this folder.
 workflows:
-  - name: lint-prettier
+  - name: docs-prettier
     on: [pull_request]
     required: true
-  - name: lint-prettier
+  - name: docs-prettier
     on: [push]
     branches: [main]
     required: true
