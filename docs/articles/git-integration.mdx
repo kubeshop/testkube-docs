@@ -2,6 +2,10 @@
 
 The **GitHub integration** connects a GitHub repository to a Testkube environment so PR activity runs your Test Workflows and results post back on the PR as check-runs.
 
+:::warning Version requirements
+Requires both the Control Plane and the Runner agent on version **2.14 or later**. Older runners can render incomplete data in the Running Context and the Resource Usage chart of child executions triggered through the integration. Bump the agent version if either component is behind.
+:::
+
 :::note
 Available on Testkube Cloud and on-prem Control Plane. On-prem requires the GitHub integration enabled in the Helm chart and a GitHub App configured against the target organization. See [Using GitHub Apps with Testkube](/articles/github-actions#using-github-apps-with-testkube).
 :::
