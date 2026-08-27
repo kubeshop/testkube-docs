@@ -8,6 +8,44 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Release v2.13.1 (2026-08-27)
+
+Control Plane is available in Helm chart `v2.13.1` and the Agent is available in Helm chart `v2.336.1`.
+
+## Advanced GitHub Integration
+
+- Connect a GitHub repository to an environment. Testkube can generate Test Workflows from the repo, or use ones you already have, then run them on pull requests, pushes, tags, and releases.
+- Results land on the pull request. Testkube comments pass/fail with the workflows that ran, can add an AI summary of failures, and can fail a GitHub Check so branch protection blocks the merge.
+- Read more about using the advance GitHub Integration [here](/articles/git-integration).
+
+### AI
+
+- Direct links to chat messages. Every message in an AI chat now has its own link, so you can point a colleague at a single answer instead of the whole conversation.
+- Agents link their sources. When an agent inspects an execution or a workflow to answer you, its reply now links straight to it, so you can check the run behind the explanation.
+
+### Insights & Analytics
+
+- Test case health: Insights now tracks the health of individual test cases. This can be used to identify flaky tests or view health of a test case over time.
+- Updated coloring of heatmap to more closely align with chosen metrics/values.
+- Fixed an issue with JUnit reports not being correctly identified and parsed
+
+### Operations & Security
+
+- Testkube AI authorization: AI, MCP and agent endpoints now share a single set of authorization guards, with caller identity resolved through the Control Plane. Permission enforcement is consistent across every AI surface and easier to audit.
+- Helm: the AI service internal secrets are now configurable from the umbrella chart.
+
+### Improvements
+
+- Added an option to rerun an execution using the latest workflow definition (but reusing the same execution parameters)
+- Added two new options when using `spec.content.git`: `verbosity` to control log levels and `retry` to control retry behavior - [read more](/articles/test-workflows-content#clone-verbosity)
+
+### Other
+
+- Added support for explicit GitOps agent ownership - [read more](/articles/gitops-overview#gitops-resource-ownership)
+- Fixed an issue where errors were not displayed properly when creating a new workflow using the workflow wizard.
+- Testkube's own MCP server is now published in the public MCP Registry with its hosted endpoint, so clients looking for remote MCP servers can find and connect to it.
+- Webhooks ignore silent executions. A failed silent run was still used as the previous workflow state, so the next passing run could fire become-testworkflow-up. Silent executions are now excluded from webhook status and state transitions.
+
 ## Patch Release v2.12.2 (2026-08-18)
 
 Control Plane is available in Helm chart `v2.335.2` and the Agent is available in Helm chart `v2.12.2`.
