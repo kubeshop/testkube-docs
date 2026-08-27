@@ -1,0 +1,16 @@
+# Quality Loop event map (replaces .github/workflows/prettier.yml).
+#
+# | workflow       | when                         | branches      | listens to |
+# |----------------|------------------------------|---------------|------------|
+# | lint-prettier  | pull_request + push to main  | any PR base;  | all files  |
+# |                |                              | push `main`   |            |
+#
+# TestWorkflow `lint-prettier` is created on the GitHub integration, not in this folder.
+workflows:
+  - name: lint-prettier
+    on: [pull_request]
+    required: true
+  - name: lint-prettier
+    on: [push]
+    branches: [main]
+    required: true
