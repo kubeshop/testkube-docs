@@ -15,6 +15,12 @@ AI Test Creation is currently available only to customers accepted into the Test
 
 Some implementation identifiers still use `runspace`, including API fields, Helm values, generated resource names, and the Runspace Bridge component. This page uses **Sandbox** for the environment shown to users and preserves those implementation identifiers exactly where you need to configure or operate them.
 
+:::info Agent sandboxing
+
+AI Test Creation uses the open-source [Kubernetes SIGs agent-sandbox](https://github.com/kubernetes-sigs/agent-sandbox) project to create and manage the isolated Kubernetes Sandbox where each AI agent runs. The Testkube Helm chart installs the agent-sandbox controller and connects its lifecycle to AI Test Creation sessions.
+
+:::
+
 ## How AI Test Creation works
 
 ### Session flow
