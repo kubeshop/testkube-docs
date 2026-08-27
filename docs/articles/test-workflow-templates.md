@@ -178,9 +178,8 @@ spec:
 
 **Inlining the same list will cause items to be added.**
 
-To illustrate, the `serviceAccountName` within workflow will always be `test-restricted`.
-Note that the workflow is the base on which templates gets added.
-This implicates that items on the workflow are always located before those of templates.
+Template `setup` and `steps` are prepended to the workflow lists, in the order they appear in `use`.
+Workflow items therefore run after the template items.
 
 ```yaml title="Example inlining the same list"
 # my-template-a
@@ -204,9 +203,9 @@ spec:
 # Merged workflow
 spec:
   steps:
-    - shell: echo 3
     - shell: echo 1
     - shell: echo 2
+    - shell: echo 3
 ```
 
 **Inlining within run will work (almost) exactly the same as top-level.**
@@ -318,11 +317,11 @@ Next time when using a template within a step, start by thinking whether you wan
 ### Control Ordering
 
 Template merging adds items to lists.
-This means that templates steps will run after workflow steps.
-Workflows and Templates provide `setup` and `after` to help you further control that order.
-It allows your templates to setup or tear down.
+`setup` and `steps` from templates run before the corresponding workflow lists.
+`after` from templates is appended and runs in reverse `use` order, so the last listed template tears down first.
+This lets templates wrap a workflow: set up first, tear down last.
 
-To illustrate, the resulting execution order below is: w1, b1, a1, b2, w2, a2, b3
+To illustrate, the resulting execution order below is: b1, w1, a1, b2, w2, b3, a2
 
 ```yaml title="Example with setup and after"
 # my-template-a
@@ -350,6 +349,19 @@ spec:
     - shell: echo w1
   steps:
     - shell: echo w2
+
+# Merged workflow
+spec:
+  setup:
+    - shell: echo b1
+    - shell: echo w1
+  steps:
+    - shell: echo a1
+    - shell: echo b2
+    - shell: echo w2
+  after:
+    - shell: echo b3
+    - shell: echo a2
 ```
 
 ## Global Templates
