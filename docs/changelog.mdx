@@ -35,7 +35,6 @@ Control Plane is available in Helm chart `TBD` and the Agent is available in Hel
 
 ### Improvements
 
-- Sticky PR comment on GitHub now consolidates every re-run on the same commit. Re-running a single failed workflow no longer drops the other workflows from the comment; the merged view shows the newest result per workflow across all runs on the same commit, and the gate follows the merged list.
 - Added an option to rerun an execution using the latest workflow definition (but reusing the same execution parameters)
 - Added two new options when using `spec.content.git`: `verbosity` to control log levels and `retry` to control retry behavior - [read more](/articles/test-workflows-content#clone-verbosity)
 
