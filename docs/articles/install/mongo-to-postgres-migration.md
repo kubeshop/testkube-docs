@@ -155,6 +155,9 @@ Enable PostgreSQL, disable MongoDB, and turn the job off so it does not run agai
 upgrade.
 
 ```yaml title="values.yaml"
+mongodb:
+  enabled: false # disable the bundled MongoDB subchart if you installed it via the chart
+
 testkube-api:
   mongodb:
     enabled: false
