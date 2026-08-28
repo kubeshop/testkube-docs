@@ -1,4 +1,4 @@
-# Migrating the Agent from MongoDB to PostgreSQL
+# Migrating the Standalone Agent from MongoDB to PostgreSQL
 
 PostgreSQL is the primary database for the Testkube agent, and MongoDB is kept only for
 existing deployments. Pointing an agent that has been running on MongoDB at PostgreSQL does
