@@ -96,6 +96,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Mongo to Postgres Migration",
+              id: "articles/install/mongo-to-postgres-migration",
+            },
+            {
+              type: "doc",
               label: "Switching to Cloud",
               id: "articles/install/oss-to-cloud",
             },
