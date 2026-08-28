@@ -2,9 +2,9 @@
 
 PostgreSQL is the primary database for the Testkube agent, and MongoDB is kept only for
 existing deployments. Pointing an agent that has been running on MongoDB at PostgreSQL does
-not carry its data across: the new database starts empty, so past Test Workflow executions
-disappear from the dashboard, and execution numbering restarts at 1 and collides with the
-names of executions you already have.
+not carry its data across: the new database starts empty, so `testkube get
+testworkflowexecution` stops returning any past Test Workflow execution, and execution
+numbering restarts at 1 and collides with the names of executions you already have.
 
 The `convert` tool moves that data. It is a one-shot job you run during the cutover, either
 through the Helm chart or as a binary against the two databases directly.
@@ -163,7 +163,7 @@ testkube-api:
     enabled: false
   postgresql:
     enabled: true
-    dsn: "postgres://testkube:postgres5432@testkube-postgresql:5432/backend?sslmode=disable"
+    dsn: "postgresql://<USER>:<PASSWORD>@testkube-postgresql:5432/backend?sslmode=disable"
 
 convert:
   enabled: false
@@ -185,14 +185,35 @@ did not take effect.
 
 ## Step 6: Confirm the cutover
 
-In the dashboard:
+The standalone agent has no dashboard of its own, so confirm from the CLI. The agent is
+reading from PostgreSQL by now, so anything it lists came across in the migration.
 
-- Historical executions are listed with the right statuses and durations.
-- Opening one shows its full step tree, logs, reports and artifacts.
-- A newly triggered execution continues the old numbering instead of restarting at 1. This is
-  the check that tells you the `sequences` collection came across.
+```bash
+# Historical executions, with their statuses and durations.
+testkube get testworkflowexecution --limit 10
 
-## Running the tool as a CLI
+# One execution in full, including its step tree.
+testkube get testworkflowexecution <executionName>
+```
+
+Then trigger something. This is the check that tells you the `sequences` collection came
+across: the new execution's name should continue the old numbering rather than ending in `-1`.
+
+```bash
+testkube run testworkflow <name>
+```
+
+To confirm logs, artifacts and JUnit reports resolve — they stayed in object storage, and only
+their references were migrated — open an execution in the hosted read-only viewer:
+
+```bash
+testkube view <executionName>
+```
+
+See [Viewing Open Source Executions](/articles/viewing-oss-executions) for what that page
+shows.
+
+## Running the convert tool outside the cluster
 
 The same binary runs outside the cluster, which is useful for rehearsing a cutover against a
 copy of your data or for migrating without touching the Helm release.
@@ -205,7 +226,7 @@ docker run --rm --network host \
   docker.io/kubeshop/testkube-convert:<version> \
   --mongo-dsn mongodb://localhost:27017 \
   --mongo-db testkube \
-  --postgres-dsn 'postgres://testkube:postgres5432@localhost:5432/backend?sslmode=disable' \
+  --postgres-dsn 'postgresql://<USER>:<PASSWORD>@localhost:5432/backend?sslmode=disable' \
   --dry-run
 ```
 
