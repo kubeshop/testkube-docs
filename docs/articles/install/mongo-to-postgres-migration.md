@@ -61,7 +61,7 @@ testkube-api:
   postgresql:
     # Leave disabled for now: the agent keeps writing to MongoDB until the final switch.
     enabled: false
-    dsn: "postgres://testkube:postgres5432@testkube-postgresql:5432/backend?sslmode=disable"
+    dsn: "postgresql://<USER>:<PASSWORD>@testkube-postgresql:5432/backend?sslmode=disable"
 
 # Deploy the bundled PostgreSQL, or point the DSN above at your own instance.
 postgresql:
