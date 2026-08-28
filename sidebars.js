@@ -96,7 +96,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Mongo to Postgres Migration",
+              label: "MongoDB to PostgreSQL Migration (Agent)",
               id: "articles/install/mongo-to-postgres-migration",
             },
             {
