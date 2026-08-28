@@ -23,7 +23,7 @@ More specifically, it allows you and your AI agents to:
 :::
 
 :::tip
-The MCP Server gives your agent access to Testkube. To also teach an agent *how* to use Testkube — discovering
+The MCP Server gives your agent access to Testkube. To also teach an agent _how_ to use Testkube — discovering
 tests in a repository, authoring valid TestWorkflow YAML, diagnosing failed executions — install the
 [Testkube Agent Skills](/articles/testkube-skills). The two work well together.
 :::
