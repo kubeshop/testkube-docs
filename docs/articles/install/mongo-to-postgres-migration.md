@@ -12,7 +12,7 @@ through the Helm chart or as a binary against the two databases directly.
 :::note
 This page covers the **standalone agent** and its `testkube` chart. To migrate an on-prem
 Control Plane, use the separate control-plane utility described in
-[Mongo to Postgres Migration](/articles/convert) — it migrates organizations, environments and
+[Mongo to Postgres Migration (Control Plane)](/articles/convert) — it migrates organizations, environments and
 credentials, none of which exist in a standalone agent.
 :::
 
