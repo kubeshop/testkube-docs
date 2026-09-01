@@ -472,7 +472,7 @@ spec:
 
 ### Supported Values
 
-- **Resource** - `pod`, `deployment`, `statefulset`, `daemonset`, `service`, `ingress`, `event`, `configmap`
+- **Resource** - `pod`, `deployment`, `statefulset`, `daemonset`, `service`, `ingress`, `event`, `configmap`, `content`
 - **Action** - `run`
 - **Event** / **Events** - `created`, `modified`, `deleted`
   - For deployments - `deployment-scale-update`, `deployment-image-update`, `deployment-env-update`, `deployment-containers-modified`,
