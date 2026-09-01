@@ -145,6 +145,7 @@ spec:
 
 - Use `event: git-push` for branch refs and `event: git-tag-push` for tag refs.
 - Use `event: git-pull-request` to watch pull request activity from GitHub API polling.
+- To watch more than one of them with a single trigger, list them under `events` instead of `event` (see [Events](/articles/test-triggers#events)). A `content` trigger may list only git events, and the filters that apply are the union of those the listed events use — a trigger on both `git-push` and `git-pull-request` honours `branches` and `pullRequest.*`.
 - `branches` (example: `["main", "release/*"]`) supports glob patterns. If empty, all branches are watched.
 - `branchesIgnore` (example: `["main-hotfix/*", "legacy/*"]`) takes precedence over `branches`.
 - `tags` (example: `["v*", "release-*"]`) supports glob patterns for tag refs.

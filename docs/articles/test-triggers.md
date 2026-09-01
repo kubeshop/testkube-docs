@@ -228,6 +228,49 @@ testSelector:
 `labelSelector.matchExpressions` is supported for TestWorkflow target selection and follows the
 standard Kubernetes label selector semantics.
 
+## Events
+
+A trigger declares what it fires on with either `event` (a single event) or
+`events` (a list of them). Exactly one of the two has to be set — a trigger
+that sets both, or neither, is rejected.
+
+Use `event` when the trigger watches for one thing:
+
+```yaml
+spec:
+  event: modified
+```
+
+Use `events` to fire on any of several events, instead of maintaining one
+near-identical trigger per event:
+
+```yaml
+spec:
+  events:
+    - created
+    - modified
+```
+
+The list is an OR — the trigger fires when **any** of the listed events occurs.
+Everything else in the spec still has to hold exactly as it would for a
+single-event trigger: the selectors, [match conditions](#match-conditions),
+[resource conditions](#resource-conditions) and [probes](#resource-probes) are
+all evaluated the same way, whichever event fired.
+
+Rules that restrict which event a trigger may use apply to **every** entry in
+`events`, not just one of them:
+
+- With a `changed`, `changed_to`, or `changed_from`
+  [match condition](#match-conditions), the list may contain `modified` and
+  nothing else — those operators cannot mean anything on any other event.
+- A `content` trigger may list only [git events](/articles/git-triggers).
+
+:::note
+`kubectl get testtriggers` prints an **Event** column read from `.spec.event`,
+so it is blank for a trigger that uses `events`. Run
+`kubectl get testtrigger <name> -o yaml` to see the list.
+:::
+
 ## Resource Conditions
 
 Resource Conditions allows triggers to be defined based on the status conditions for a specific resource.
@@ -304,7 +347,9 @@ Each entry has three parts:
 | `changed_from` | the field changed away from `value` (requires `event: modified`)           |
 
 `changed`, `changed_to`, and `changed_from` are only meaningful on update
-events, so they require `event: modified` on the trigger.
+events, so they require `event: modified` on the trigger. A trigger that uses
+the [`events`](#events) list must list `modified` and nothing else — one
+unsatisfiable event rejects the trigger even alongside a valid one.
 
 ### Tips
 
@@ -429,11 +474,13 @@ spec:
 
 - **Resource** - `pod`, `deployment`, `statefulset`, `daemonset`, `service`, `ingress`, `event`, `configmap`
 - **Action** - `run`
-- **Event** - `created`, `modified`, `deleted`
+- **Event** / **Events** - `created`, `modified`, `deleted`
   - For deployments - `deployment-scale-update`, `deployment-image-update`, `deployment-env-update`, `deployment-containers-modified`,
     `deployment-generation-modified`, `deployment-resource-modified`
+  - For git content - `git-push`, `git-tag-push`, `git-pull-request`
   - For Testkube events - `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`,
     `event-end-testworkflow-failed`, `event-end-testworkflow-aborted`, `event-created`, `event-updated`, `event-deleted`
+  - `event` takes one of these values, `events` takes a list of them — see [Events](#events)
 - **Execution** - `testworkflow`
 - **ConcurrencyPolicy** - `allow`, `forbid`, `replace`
 
@@ -487,6 +534,35 @@ spec:
   testSelector:
     name: sanity-test
     namespace: frontend
+  disabled: false
+```
+
+### On ConfigMap Creation or Update
+
+A trigger that has to react to more than one event lists them under `events`
+rather than being duplicated once per event. Here the `config-validation`
+workflow runs whenever a ConfigMap labelled `testkube.io/watch: "true"` is
+either created or modified:
+
+```yaml
+apiVersion: tests.testkube.io/v1
+kind: TestTrigger
+metadata:
+  name: testtrigger-configmap-changed
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      testkube.io/resource-kind: ConfigMap
+      testkube.io/watch: "true"
+  events:
+    - created
+    - modified
+  action: run
+  execution: testworkflow
+  testSelector:
+    name: config-validation
+    namespace: default
   disabled: false
 ```
 
