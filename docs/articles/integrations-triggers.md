@@ -34,7 +34,7 @@ You will initially be prompted for
 - the **Name** of the Trigger - must be a valid Kubernetes resource name.
 - the **K8s Resource** kind to monitor for events.
 - the **Resources Identifier** for which resources to monitor, can either be a list of Kubernetes Labels or a specific resource name.
-- the **Triggered event** to listen for.
+- the **Triggered events** to listen for. Pick a single event, or several to fire the trigger when any of them happens.
 
 ![Create New Trigger Modal 1](../img/create-new-trigger-modal-1.png)
 
