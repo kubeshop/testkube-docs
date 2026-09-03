@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:0b7057f8007fb7d1f671604f98799e7b6492e4a13fa5ab53de6416b16ec39832</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 9" src="https://img.shields.io/badge/high-9-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/medium-3-fbb552"/> <img alt="low: 3" src="https://img.shields.io/badge/low-3-fce1a9"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:0b7057f8007fb7d1f671604f98799e7b6492e4a13fa5ab53de6416b16ec39832</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 2" src="https://img.shields.io/badge/critical-2-8b1924"/> <img alt="high: 9" src="https://img.shields.io/badge/high-9-e25d68"/> <img alt="medium: 3" src="https://img.shields.io/badge/medium-3-fbb552"/> <img alt="low: 3" src="https://img.shields.io/badge/low-3-fce1a9"/> <img alt="unspecified: 11" src="https://img.shields.io/badge/unspecified-11-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>80 MB</td></tr>
 <tr><td>packages</td><td>86</td></tr>
@@ -13,7 +13,7 @@ hide_table_of_contents: true
 
 <table>
 <tr><td valign="top">
-<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 7" src="https://img.shields.io/badge/H-7-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>openssl</strong> <code>3.5.7-r0</code> (apk)</summary>
+<details><summary><img alt="critical: 2" src="https://img.shields.io/badge/C-2-8b1924"/> <img alt="high: 7" src="https://img.shields.io/badge/H-7-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>openssl</strong> <code>3.5.7-r0</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/openssl@3.5.7-r0?os_name=alpine&os_version=3.24</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2026-63073?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C3.5.8-r0"><img alt="critical : CVE--2026--63073" src="https://img.shields.io/badge/CVE--2026--63073-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
@@ -21,8 +21,25 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.409%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.929%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>58th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-75803?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C3.5.8-r0"><img alt="critical : CVE--2026--75803" src="https://img.shields.io/badge/CVE--2026--75803-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.116%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -168,23 +185,6 @@ hide_table_of_contents: true
 
 </blockquote>
 </details>
-
-<a href="https://scout.docker.com/v/CVE-2026-75803?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C3.5.8-r0"><img alt="unspecified : CVE--2026--75803" src="https://img.shields.io/badge/CVE--2026--75803-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.116%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
 </details></td></tr>
 
 <tr><td valign="top">
@@ -305,6 +305,161 @@ hide_table_of_contents: true
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.148%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 10" src="https://img.shields.io/badge/U-10-lightgrey"/><strong>curl</strong> <code>8.21.0-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/curl@8.21.0-r0?os_name=alpine&os_version=3.24</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-82209?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C8.22.0-r0"><img alt="unspecified : CVE--2026--82209" src="https://img.shields.io/badge/CVE--2026--82209-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.22.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.22.0-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-82208?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C8.22.0-r0"><img alt="unspecified : CVE--2026--82208" src="https://img.shields.io/badge/CVE--2026--82208-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.22.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.22.0-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-80256?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C8.22.0-r0"><img alt="unspecified : CVE--2026--80256" src="https://img.shields.io/badge/CVE--2026--80256-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.22.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.22.0-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-80255?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C8.22.0-r0"><img alt="unspecified : CVE--2026--80255" src="https://img.shields.io/badge/CVE--2026--80255-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.22.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.22.0-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-80231?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C8.22.0-r0"><img alt="unspecified : CVE--2026--80231" src="https://img.shields.io/badge/CVE--2026--80231-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.22.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.22.0-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-80230?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C8.22.0-r0"><img alt="unspecified : CVE--2026--80230" src="https://img.shields.io/badge/CVE--2026--80230-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.22.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.22.0-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-80229?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C8.22.0-r0"><img alt="unspecified : CVE--2026--80229" src="https://img.shields.io/badge/CVE--2026--80229-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.22.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.22.0-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-19931?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C8.22.0-r0"><img alt="unspecified : CVE--2026--19931" src="https://img.shields.io/badge/CVE--2026--19931-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.22.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.22.0-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-18924?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C8.22.0-r0"><img alt="unspecified : CVE--2026--18924" src="https://img.shields.io/badge/CVE--2026--18924-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.22.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.22.0-r0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-13608?s=alpine&n=curl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C8.22.0-r0"><img alt="unspecified : CVE--2026--13608" src="https://img.shields.io/badge/CVE--2026--13608-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.22.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.22.0-r0</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
