@@ -1,0 +1,338 @@
+# Sharing Data Between Executions
+
+import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx";
+
+<RequiresCommercialWorkflows />
+
+[Sharing Data Between Steps](/articles/test-workflows-step-sharing) covers passing values and files between steps of one Workflow, which all run in the same pod. When a Workflow runs other Workflows with [`execute`](/articles/test-workflows-test-suites), each one is a separate execution in its own pod — so a different mechanism is needed to pass data across that boundary.
+
+Three things cross it:
+
+- **output values** — small strings, read with `execution()`
+- **artifact contents** — a single file read into an expression with `read_artifact()`
+- **artifact files** — downloaded to disk with a `fetch` block
+
+## Publishing Output Values
+
+An execution publishes values the same way a step does: write to `/testkube/outputs/<key>`.
+
+Publishing has no direction. The value is recorded on the execution that produced it, and anyone allowed to read that execution can read its outputs — so the same write serves a Workflow reading what it ran, a Workflow reading the one that ran it, and two Workflows of one suite reading each other. [References](#references) covers who is allowed.
+
+```yaml title="producer.yaml"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: producer
+spec:
+  steps:
+    - name: Publish a token
+      id: publish
+      shell: |
+        echo -n "token-from-producer" > /testkube/outputs/token
+```
+
+Nothing in the producer declares that the value may leave the Workflow. Every output is readable outside it, with one exception: a value holding a secret, covered in [Sensitive Values](#sensitive-values).
+
+An execution records its outputs **at the end of each step**, which is what makes ordering matter when a Workflow publishes for the Workflows it is about to run. A reader sees what the producing execution had published by then, and nothing later.
+
+## Reading Another Execution's Data
+
+The `execution()` function returns data about another execution.
+
+```yaml title="suite.yaml"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: suite
+spec:
+  steps:
+    - name: Run the producer
+      execute:
+        workflows:
+          - name: producer
+            as: p
+
+    - name: Read what it published
+      shell: |
+        echo 'token: {{ execution("p").outputs.token }}'
+        echo 'status: {{ execution("p").status }}'
+```
+
+`execution()` returns a map:
+
+| Field      | Description                                                         |
+| ---------- | ------------------------------------------------------------------- |
+| `id`       | Execution ID                                                        |
+| `name`     | Execution name                                                      |
+| `workflow` | Name of the Workflow that ran                                       |
+| `alias`    | The `as` value, empty when not aliased                              |
+| `index`    | Position within a matrix, shard or `count` fan-out, `0` when single |
+| `status`   | Final status                                                        |
+| `outputs`  | Map of the values the execution published                           |
+
+### When Outputs Are Available
+
+An output that was never published resolves to an **empty string**, not an error. Check for one you cannot do without:
+
+```yaml
+- shell: |
+    test -n '{{ execution("p").outputs.token }}' || { echo "producer published no token"; exit 1; }
+```
+
+Two cases produce an empty value from an execution that looks like it should have one:
+
+- **`async` entries.** An asynchronous execution is not waited for, so this Workflow never collects its outputs. Reads stay empty for the rest of the run, however the execution is addressed. Drop `async` if you need to read what it published.
+- **An execution that is still running.** Reading one this Workflow did not run itself — the `parent`, a sibling by execution ID — answers with whatever that execution has published so far, which may be incomplete.
+
+### References
+
+The first argument identifies the execution. Four forms work:
+
+| Reference     | Reaches                                                               |
+| ------------- | --------------------------------------------------------------------- |
+| `as` alias    | An entry you gave an explicit `as`                                    |
+| Workflow name | An entry that ran that Workflow                                       |
+| Execution ID  | Any execution you are allowed to read, including ones you did not run |
+| `"parent"`    | The execution that ran the current one                                |
+
+An execution can read **up** to the Workflow that ran it, **down** to the Workflows it ran, and **sideways** to Workflows run by the same parent. Anything outside that family is refused.
+
+Reading up uses the reserved `parent` reference:
+
+```yaml
+steps:
+  - name: Read a value the parent published
+    shell: |
+      echo 'seed: {{ execution("parent").outputs.seed }}'
+```
+
+A parent publishes for its children like any other execution, but the ordering has to work out: the step that writes the value must **finish before the step that runs the children starts**, because outputs are recorded when a step ends.
+
+```yaml title="suite.yaml"
+steps:
+  - name: Publish for the children
+    shell: |
+      echo -n "seed-from-parent" > /testkube/outputs/seed
+
+  - name: Run them
+    execute:
+      workflows:
+        - name: consumer
+```
+
+Publish in a later step and the children read an empty value, with nothing to indicate why.
+
+Reading sideways needs the sibling's execution ID, because a Workflow only knows by name the Workflows it ran itself. The parent has both IDs, so it passes one down as configuration:
+
+```yaml title="suite.yaml"
+steps:
+  - name: Run the producer
+    execute:
+      workflows:
+        - name: producer
+          as: p
+
+  - name: Run the consumer, telling it about the producer
+    execute:
+      workflows:
+        - name: consumer
+          config:
+            producerId: '{{ execution("p").id }}'
+```
+
+```yaml title="consumer.yaml"
+spec:
+  config:
+    producerId:
+      type: string
+  steps:
+    - name: Read the sibling's output
+      shell: |
+        echo '{{ execution(config.producerId).outputs.token }}'
+```
+
+### Fan-out
+
+An entry that spawns several instances through `count`, `matrix` or `shards` forms one group, addressed by position with a second argument:
+
+```yaml
+steps:
+  - name: Run three shards
+    execute:
+      workflows:
+        - name: producer
+          as: shards
+          count: 3
+
+  - name: Read each one
+    shell: |
+      echo '{{ execution("shards", 0).outputs.duration }}'
+      echo '{{ execution("shards", 1).outputs.duration }}'
+      echo '{{ execution("shards", 2).outputs.duration }}'
+```
+
+With no index, the first instance is addressed. An execution ID always addresses exactly one execution, whatever its position, so no index is needed with one.
+
+:::note
+If two entries can be addressed by the same reference — an aliased selector covering a Workflow, plus a separate unaliased entry running the same Workflow — the reference is ambiguous and the expression fails rather than picking one. Give one of them a unique `as`.
+:::
+
+## Reading an Artifact
+
+`read_artifact()` reads one file from another execution's artifacts into an expression.
+
+```yaml
+steps:
+  - name: Read a fixture the parent produced
+    shell: |
+      echo '{{ read_artifact("parent", "fixtures/data.json") }}'
+```
+
+The path is relative to the artifact root of the execution and must name a single file. The reference works exactly as it does in `execution()`.
+
+Artifacts are uploaded when the step that produced them ends, so they are readable as soon as that step finishes — an execution does not have to be complete.
+
+## Downloading Artifacts to Disk
+
+For anything larger than an expression should carry, a `fetch` block downloads files onto the pod's filesystem.
+
+```yaml
+steps:
+  - name: Run the producer and pull its results down
+    execute:
+      workflows:
+        - name: producer
+          as: p
+          fetch:
+            - paths:
+                - "results/**"
+              to: /data/from-producer
+```
+
+| Field   | Description                                                                 |
+| ------- | --------------------------------------------------------------------------- |
+| `from`  | Which execution to download from; defaults to the executions the entry runs |
+| `paths` | Artifact path patterns, relative to the execution's artifact root           |
+| `to`    | Directory to download into                                                  |
+
+`from` accepts the same references as `execution()`, so a `fetch` can also pull from `parent` or from an execution ID handed down as configuration.
+
+When the entry fans out, include `{{ index }}` in `to` to keep each instance's files apart:
+
+```yaml
+execute:
+  workflows:
+    - name: producer
+      count: 3
+      fetch:
+        - paths: ["results/**"]
+          to: /data/shard-{{ index }}
+```
+
+## Choosing a Mechanism
+
+| Data                                    | Use                             |
+| --------------------------------------- | ------------------------------- |
+| A short string: a token, an ID, a count | Output value with `execution()` |
+| One small file you want as a value      | `read_artifact()`               |
+| Many files, or large ones               | `fetch`                         |
+
+## Limits
+
+- **Output values** are capped at 4096 bytes each. A larger file in `/testkube/outputs` is skipped with a warning — publish it as an artifact instead.
+- **`read_artifact()`** is capped at 1 MiB. Use `fetch` for anything larger.
+- **Output values are strings.** Write JSON and parse it in the consumer if you need structure.
+
+## Sensitive Values
+
+An output whose value contains a secret — anything Testkube masks in logs, such as a resolved `credential()` or a `sensitive` config parameter — **is not published outside the Workflow that produced it**.
+
+Output values reach the execution record through the log stream, which is obfuscated on its way out. Publishing a secret there would either corrupt it, since part of it would be masked, or leak it into a record that everyone who can read the execution can read. So the value stays where it was produced:
+
+- inside the producing Workflow, later steps read it in full with `{{ step.<id>.outputs.<key> }}`;
+- outside it, the value is withheld, and a Workflow that tries to consume it **fails with an error naming the output** rather than silently receiving nothing.
+
+The producer's log says which output was withheld, and what a consumer will see instead:
+
+```
+warn: step output "token" holds a sensitive value, so it is not published outside this
+workflow: a workflow reading it gets <testkube:withheld output token of workflow
+producer> and fails
+```
+
+To pass a secret between executions, give both Workflows access to the same secret rather than routing it through an output — or, when the value is a file, store it as an artifact and read it with `read_artifact()`, which does not travel through the log stream.
+
+## Full Example
+
+A suite that publishes a value, runs a producer, reads what it published, and hands the producer's identity to a consumer so it can reach its sibling:
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: data-exchange-suite
+spec:
+  steps:
+    - name: Publish a value for the children
+      id: seed
+      shell: |
+        echo -n "seed-from-parent" > /testkube/outputs/seed
+        mkdir -p /data/fixtures
+        echo -n '{"cases":3}' > /data/fixtures/data.json
+      artifacts:
+        workingDir: /data
+        paths:
+          - "fixtures/**"
+
+    - name: Run the producer, pulling its artifacts down
+      execute:
+        workflows:
+          - name: producer
+            as: p
+            fetch:
+              - paths: ["results/**"]
+                to: /data/from-producer
+
+    - name: Read the producer's output
+      shell: |
+        test '{{ execution("p").outputs.token }}' = 'token-from-producer'
+
+    - name: Run the consumer with the producer's output and identity
+      execute:
+        workflows:
+          - name: consumer
+            config:
+              token: '{{ execution("p").outputs.token }}'
+              producerId: '{{ execution("p").id }}'
+```
+
+The consumer reads its parent's value, its parent's artifact, and its sibling's data:
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: consumer
+spec:
+  config:
+    token:
+      type: string
+    producerId:
+      type: string
+  steps:
+    - name: Read what the parent passed down
+      shell: |
+        test "{{ config.token }}" = "token-from-producer"
+
+    - name: Read a value the parent published
+      shell: |
+        test '{{ execution("parent").outputs.seed }}' = 'seed-from-parent'
+
+    - name: Read a file the parent produced
+      shell: |
+        test '{{ read_artifact("parent", "fixtures/data.json") }}' = '{"cases":3}'
+
+    - name: Read the sibling's output
+      shell: |
+        test '{{ execution(config.producerId).outputs.token }}' = 'token-from-producer'
+```
