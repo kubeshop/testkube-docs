@@ -80,7 +80,7 @@ When the lockfile changes, the exact key misses but `npm-` matches the most rece
 
 ### Invalidating a Key
 
-An entry is immutable for its lifetime: once a key holds something, that is what every later run restores, and no rerun can replace it. So when you change _what_ a step caches without changing the inputs the key hashes, add a version segment and bump it:
+An entry is immutable for its lifetime: once a key holds something, that is what every later run restores, and no rerun can replace it. "For its lifetime" is the operative phrase — entries expire after a day by default, after which the key is free again — but waiting on that is not a workflow. When you change _what_ a step caches without changing the inputs the key hashes, add a version segment and bump it:
 
 ```yaml
 key: 'npm-v2-{{ hash_files("package-lock.json") }}'
@@ -182,6 +182,48 @@ shell: |
 A build cache is only worth caching if the step actually compiles something. `go mod download` populates the module cache and leaves `GOCACHE` untouched, so a step that only downloads will store an empty build cache — and, because entries are immutable, that empty entry answers every later run.
 
 Testkube refuses to store an archive with no entries for this reason, logging `cache: not saving "<key>": nothing was found under <paths>`. If you see that, the paths are wrong or the step never wrote to them.
+
+## Configuration
+
+Caching needs nothing configured to work — a workflow with a `cache` block caches. These settings govern how long entries survive and where they live, and they are set on the control plane rather than in a workflow.
+
+| Helm value                             | Environment variable       | Chart default        | Description                                                                                                                          |
+| -------------------------------------- | -------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `testkube-api.storage.cacheExpiration` | `STORAGE_CACHE_EXPIRATION` | `1`                  | Days a cache entry survives. `0` disables expiry and leaves entries to `expiration`.                                                 |
+| `testkube-api.storage.expiration`      | `STORAGE_EXPIRATION`       | `0`                  | Days **any** object in the bucket survives, caches included. `0` disables it.                                                        |
+| `testkube-api.storage.bucket`          | `STORAGE_BUCKET`           | `testkube-artifacts` | The bucket caches share with artifacts and logs. The binary's own default differs (`testkube-logs`); the chart sets this explicitly. |
+
+Caches live under a `.tkcache/v1` prefix inside that bucket. That prefix is how the cache lifecycle rule targets them without touching artifacts, and it is what to filter on if you write a bucket policy of your own.
+
+```yaml title="values.yaml"
+testkube-api:
+  storage:
+    # A day. Entries are keyed on lockfile contents, so one still wanted is
+    # rewritten by the next run that misses it.
+    cacheExpiration: 1
+```
+
+### Cache Expiration
+
+`cacheExpiration` defaults to one day. A cache entry is disposable by construction — it is keyed on the contents of a lockfile, so an entry that is still wanted is rewritten by the next run that misses it, and one that is not is dead weight in the bucket.
+
+Days are the finest granularity an object store's lifecycle offers, so `1` is the shortest expiry that can be expressed. It means 24 hours, not a rounding of it.
+
+Raise it if your workflows run less often than they expire. A nightly or weekly workflow will find its cache gone every time under a one-day expiry: it pays the packing and upload cost on every run and never collects. Set `cacheExpiration` past the longest gap between runs of the workflows you care about, or `0` to disable expiry entirely.
+
+:::note
+`expiration` is a separate setting and stays opt-in, because its rule is **unfiltered**: it governs every object in the bucket, artifacts and logs included. `cacheExpiration` is confined to the cache prefix and can only ever delete caches. That is the reason one carries a default and the other does not.
+:::
+
+### How the Two Interact
+
+Both are implemented as bucket lifecycle rules, so when both are set the **earlier expiry wins**. A cache TTL can bring eviction forward but never postpone it past `expiration`, and the API server logs a warning at startup if you configure `cacheExpiration` longer than `expiration`.
+
+### Lifecycle Rules You Manage Yourself
+
+Testkube reads the bucket's existing lifecycle before applying its own rules and carries through every rule it did not write, matched by rule ID. A lifecycle managed by Terraform, a bucket policy, or a cloud console is left intact.
+
+If that existing configuration cannot be read, Testkube writes nothing and logs an error rather than replacing what it could not see. Caches then simply are not expired, which is recoverable; a bucket whose retention silently changed is not.
 
 ## Limitations
 
