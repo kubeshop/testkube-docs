@@ -429,10 +429,10 @@ Mute patterns cannot be applied to it; the step log says so and only the pass re
 **A test case with both `<failure>` and `<error>`** resolves to `errored`. The precedence is fixed:
 errored > failed > skipped > passed.
 
-**Put `testCases` on the step that runs the tool.** It is read by `run` and `shell`, so a policy on a
-step that only groups nested `steps:`, or on a `parallel:` block, is validated and then has no effect
-— it is not currently reported as a mistake. A step with both `run` and `artifacts` is fine: the
-policy lands on the container that ran the tool.
+**`testCases` belongs on the step that runs the tool.** It is read by `run` and `shell`, so a policy
+on a step that only groups nested `steps:`, or on a `parallel:` block, is refused when the workflow
+is processed — with a message naming where to move it. A step with both `run` and `artifacts` is
+fine: the policy lands on the container that ran the tool, not the one that uploads its output.
 
 **`condition` cannot filter test cases.** A step's `condition` skips the whole step. Running "only
 these test cases" requires the tool to run with a filter, which is why `select` shapes arguments for
