@@ -347,6 +347,12 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Muting & Re-running Test Cases",
+              id: "articles/test-workflows-test-cases",
+              className: "sidebar-commercial-category",
+            },
+            {
+              type: "doc",
               label: "Concurrency & Queueing",
               id: "articles/test-workflows-concurrency-queueing",
               className: "sidebar-commercial-category",

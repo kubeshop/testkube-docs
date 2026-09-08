@@ -67,6 +67,13 @@ This shows the JUnit Case count per day over the last month, broken down by test
 shows the individual numbers for each day, clicking on one of these numbers will list the corresponding Workflow
 executions, allowing you to further drill down into each segment - [Read More](/articles/functional-metrics-in-insights).
 
+## Acting on Individual Test Cases
+
+Reading a report is one thing; deciding what it means for the step is another. A step can mute test
+cases whose failure is expected, set a pass requirement over the rest, and narrow a retry to only the
+test cases that did not pass — see
+[Muting & Re-running Test Cases](/articles/test-workflows-test-cases).
+
 ## Benefits of JUnit Report Visualization
 
 The enhanced visualization of JUnit reports in Testkube offers several advantages:
