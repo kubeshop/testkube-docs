@@ -266,7 +266,28 @@ The path is also available as `{{ testCases.selectedFile }}`.
 | `testCases.selecting`      | whether this run was narrowed                  |
 | `testCases.selectedFile`   | the path `select.write` wrote, empty otherwise |
 
-`$TK_SELECTED_TESTS_COUNT` carries the count for a shell that would rather not write an expression.
+For a shell that would rather not write an expression, the same values arrive as environment
+variables:
+
+| Variable                  | Value                                          |
+| ------------------------- | ---------------------------------------------- |
+| `TK_SELECTED_TESTS`       | the selected entries, **one per line**         |
+| `TK_SELECTED_TESTS_COUNT` | how many entries                               |
+| `TK_SELECTED_TESTS_FILE`  | the path `select.write` wrote, empty otherwise |
+
+The entries are newline-separated because a test case name may contain a space or a comma —
+parameterized names routinely do — so any other separator would split one name in half. Read them
+with `while read` or `xargs -d '\n'`:
+
+```yaml
+run:
+  shell: |
+    if [ "$TK_SELECTED_TESTS_COUNT" -gt 0 ]; then
+      printf '%s\n' "$TK_SELECTED_TESTS" | xargs -d '\n' pytest --junitxml=reports/out.xml
+    else
+      pytest --junitxml=reports/out.xml
+    fi
+```
 
 ## Re-running from the CLI
 
@@ -325,12 +346,28 @@ fully muted failure does not burn retries.
 suite names and class renames all move the address. Use the implicit name-only matching described
 above, and `as` to project away the unstable part.
 
-:::warning
-A narrowing retry can hide a shrinking suite. If your runner spells a test differently than the
-report does, the filter matches nothing, the tool runs zero tests, exits zero, and the step passes.
-Check the per-step counts (`testkube get testworkflowexecution`, or the Reports tab) against what you
-expect the retry to have run.
-:::
+**A narrowed run that tested nothing fails.** If your runner spells a test differently than the report
+does, the filter matches nothing, the tool runs zero tests and exits zero — and every count then looks
+like a pass, because the only thing that failed is the thing that never ran. So the verdict checks the
+test cases the run was narrowed to against the report it produced. If the report names none of them,
+the step fails whatever the exit code said:
+
+```
+2 test cases: 0 passed, 2 failed, 2 unexpected — this run was narrowed to 2 test cases and the
+report names none of them, so nothing was actually tested; check that the selection reaches your
+runner in the shape it expects
+```
+
+If only _some_ are missing it is reported and not fatal, since a suite can legitimately lose a test
+between runs:
+
+```
+… — 1 selected test cases did not run. Selected but absent from the report: s/c/test_deleted
+```
+
+This check applies to selections drawn from a report. An explicit `select.cases` list, or
+`--test-case` from the CLI, is text in your runner's own shape, so there is no address to check it
+against.
 
 **Mute patterns that match nothing are reported.** A pattern matching no test case is dead quarantine
 config, and it is named in the step log and the execution record. This is what stops mute lists
