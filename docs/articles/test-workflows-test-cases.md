@@ -193,6 +193,42 @@ judges.
     args: ["{{ testCases.selected }}"]
 ```
 
+### Re-running another execution's failures
+
+`select.from` names where the previous results come from. It defaults to `self` — this execution,
+read off the pod's disk — and otherwise takes any reference
+[`execution()`](/articles/test-workflows-expressions) takes:
+
+| `from`      | Reads                                              |
+| ----------- | -------------------------------------------------- |
+| `self`      | this execution's own report on disk (the default)  |
+| `rerun`     | the execution this one is a rerun of               |
+| `parent`    | the execution that scheduled this one              |
+| _reference_ | an execution id, workflow name, or `execute` alias |
+
+Anything other than `self` reads that execution's **artifacts**, so `select.paths` has to say which
+of them hold the report — a report is one artifact among many and Testkube cannot guess. A step that
+names a remote source without paths is refused when the workflow is processed.
+
+```yaml title="rerun-a-previous-execution.yaml"
+- name: Re-run what the last run failed
+  testCases:
+    report:
+      paths: ["reports/out.xml"]
+    select:
+      from: rerun
+      paths: ["reports/out.xml"] # where to find it among that execution's artifacts
+      empty: skip # nothing failed there, so there is nothing to re-run
+  run:
+    command: [pytest, "--junitxml=reports/out.xml"]
+    args: ["{{ testCases.selected }}"]
+```
+
+A reference that does not resolve **fails the step**. Running the whole suite because Testkube could
+not find the execution you named would be the wrong answer delivered confidently. The other
+execution having produced no matching report is different, and is not an error: that is the same
+"nothing to narrow to" as a missing local report, so `select.empty` decides.
+
 ### Shaping the selection for your runner
 
 `as` projects each entry; `testcase.id`, `.suite`, `.classname`, `.name` and `.status` are in scope.
@@ -304,6 +340,20 @@ Both require the workflow to have at least one step declaring `testCases.select`
 above: without it there is nothing to tell Testkube how the selected names reach your runner, and the
 whole suite would run. The request is refused rather than silently running everything.
 
+**`--only-failed` needs no change to a workflow already written for a narrowing retry.** A step left
+on the default `from: self` is seeded from the execution being rerun whenever it finds no report of
+its own — which is exactly the first attempt. So the workflow from
+[Narrowing a retry](#narrowing-a-retry) does the right thing on both:
+
+- attempt 1 has no report yet, so it takes the failures of the execution you reran
+- attempt 2 has attempt 1's report, and takes its failures instead
+
+The two can never disagree, which is why neither has to be configured. Point `from` at `rerun`
+explicitly only when you want the original execution's failures on _every_ attempt.
+
+`--test-case` is different: those names are text in your runner's own shape, so they are the
+selection outright. Passing both means the explicit list wins and nothing is derived from a report.
+
 ## What you see
 
 `testkube get testworkflowexecution` reports each step's test report:
@@ -388,6 +438,5 @@ policy lands on the container that ran the tool.
 these test cases" requires the tool to run with a filter, which is why `select` shapes arguments for
 it. The only step-skipping path is `select.empty: skip`.
 
-**Reading another execution's report is not available yet.** `select.from` accepts `self` today.
-Narrowing a rerun from the CLI works because the control plane carries the selection to the pod; a
-workflow cannot yet point `select` at an arbitrary previous execution.
+**Reading another execution's report needs artifact read access.** The control plane grants it; a
+deployment whose control plane predates the capability says so rather than failing obscurely.
