@@ -325,7 +325,7 @@ run:
     fi
 ```
 
-## Re-running from the CLI
+## From the CLI
 
 ```bash
 # re-run only the test cases that did not pass
@@ -334,11 +334,20 @@ testkube rerun testworkflowexecution <execution-id> --only-failed
 # re-run only the matching test cases (repeatable)
 testkube rerun testworkflowexecution <execution-id> \
   --test-case 'Payments/**' --test-case 'test_flaky_*'
+
+# start a fresh run of only the matching test cases
+testkube run testworkflow payments-suite \
+  --test-case 'Payments/**' --test-case 'test_flaky_*'
 ```
 
-Both require the workflow to have at least one step declaring `testCases.select`, for the reason
-above: without it there is nothing to tell Testkube how the selected names reach your runner, and the
-whole suite would run. The request is refused rather than silently running everything.
+All of these require the workflow to have at least one step declaring `testCases.select`, for the
+reason above: without it there is nothing to tell Testkube how the selected names reach your runner,
+and the whole suite would run. The request is refused rather than silently running everything.
+
+`--test-case` is capped at 1,000 names (64 KB), and going over is refused rather than truncated — a
+caller who asked for 5,000 specific tests and silently got 1,000 would read the result as those
+tests having passed. A selection that large belongs in the workflow's own `select` block, which
+resolves it inside the pod with no such limit.
 
 **`--only-failed` needs no change to a workflow already written for a narrowing retry.** A step left
 on the default `from: self` is seeded from the execution being rerun whenever it finds no report of
@@ -352,7 +361,9 @@ The two can never disagree, which is why neither has to be configured. Point `fr
 explicitly only when you want the original execution's failures on _every_ attempt.
 
 `--test-case` is different: those names are text in your runner's own shape, so they are the
-selection outright. Passing both means the explicit list wins and nothing is derived from a report.
+selection outright — no report is read, which is also why it works on a fresh run where there is no
+previous execution at all. Passing both means the explicit list wins and nothing is derived from a
+report.
 
 ## What you see
 
