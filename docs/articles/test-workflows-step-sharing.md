@@ -22,7 +22,9 @@ steps:
       echo "Using token: {{step.setup.outputs.token}}"
 ```
 
-One file per key — the entire file content becomes the string value of the expression.
+One file per key — the entire file content becomes the string value of the expression, up to 4096 bytes. A larger file is skipped with a warning; use a step results directory or an artifact for those.
+
+Output values also cross the execution boundary: a Workflow that ran this one reads them with `execution()`. See [Sharing Data Between Executions](/articles/test-workflows-execution-sharing).
 
 ## Step Results Directories
 
@@ -74,4 +76,5 @@ steps:
 ## Notes
 
 - Output values are strings. Write JSON if you need structured data and parse it in the consuming step.
-- Both mechanisms work within a single pod. They are not available across parallel workers in separate pods — use the `transfer` property for that (see [Parallelization](/articles/test-workflows-parallel)).
+- Step results directories work within a single pod. They are not available across parallel workers in separate pods — use the `transfer` property for that (see [Parallelization](/articles/test-workflows-parallel)).
+- An output value holding a secret stays inside the Workflow that produced it. Later steps read it in full; a Workflow that ran this one cannot — see [Sensitive Values](/articles/test-workflows-execution-sharing#sensitive-values).
