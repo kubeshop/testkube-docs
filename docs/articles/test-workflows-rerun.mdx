@@ -104,6 +104,24 @@ A rerun reads the previous report out of the previous run's **artifacts**, so th
       - "junit/**"
 ```
 
+This is the case that has to keep working when the step **fails** — a run with no report leaves the next rerun nothing to narrow down from, and a failing run is exactly when there is something to narrow down to. An `artifacts` block on the same step as the command is safe here: Testkube uploads it unconditionally, after the command, whatever the command's exit code.
+
+That guarantee belongs to the block, not to the step. Move the upload into a **step of its own** and it is an ordinary step, skipped by default when an earlier one failed, so it needs saying explicitly:
+
+```yaml
+- name: Run the tests
+  shell: |
+    # your test runner, writing /data/junit/report.xml
+- name: Save the report
+  condition: always
+  workingDir: /data
+  artifacts:
+    paths:
+      - "junit/**"
+```
+
+Either shape works; the one thing that does not is a separate upload step without `condition: always`.
+
 ### 2. Select the failed cases
 
 ```yaml
@@ -116,7 +134,7 @@ A rerun reads the previous report out of the previous run's **artifacts**, so th
     tr -d '\n' < /data/previous.xml \
       | sed 's|<testcase|\n<testcase|g' \
       | grep -E '<failure|<error' \
-      | sed 's|>.*||' \
+      | sed -E 's#<(failure|error).*##' \
       | awk '
           match($0, /[[:space:]]name="[^"]*"/)      { n = substr($0, RSTART+7,  RLENGTH-8)  }
           match($0, /[[:space:]]classname="[^"]*"/) { c = substr($0, RSTART+12, RLENGTH-13) }
@@ -133,7 +151,7 @@ What each part is doing:
 - **`shellquote()`** is how the report gets into a file intact. `read_artifact()` returns it as one multi-line string, which would otherwise be re-parsed by the shell as it is substituted into the script; `shellquote()` wraps it as a single literal argument, so no quote, backtick or `$` in the XML can be interpreted.
 - **`tr -d '\n'`** joins the document onto one line, because a failing `<testcase>` spans several — its `<failure>` body sits between the tags. `sed` then puts one `<testcase>` per line.
 - **`grep -E '<failure|<error'`** keeps only the cases that failed or errored. Skipped and passing cases have no such child.
-- **`sed 's|>.*||'`** trims each line back to the `<testcase` attributes, so a message inside the failure body cannot be mistaken for one.
+- **`sed -E 's#<(failure|error).*##'`** trims each line back to the `<testcase` attributes, so a `name=` inside the failure body cannot be mistaken for the case's own. It cuts at the child element rather than at the first `>`: a raw `>` is legal inside an attribute value, so cutting at `>` would truncate `name="a > b"` mid-value and drop that case from the selection without a word. `<` is _not_ legal there — it has to be `&lt;` — so `<failure` and `<error` only ever appear as the child they look like.
 - **The `awk` block** picks out `name` and `classname` **one at a time**. Real reports do not agree on the order of the two, and matching them together in one pattern silently produces garbage on the reports that put `name` first. The leading `[[:space:]]` is what stops `name="…"` from matching the tail of `classname="…"`.
 - **The last `sed`** turns the five XML entities back into the characters they stand for. A test called `A & B` is written `name="A &amp; B"`, and a filter built from the escaped form selects nothing. It has to run **after** the attributes have been picked out, not before: decoding `&quot;` into a `"` while it is still inside `name="…"` ends the attribute early and truncates the name.
 
@@ -178,10 +196,20 @@ So there are three cases, not one recipe.
 # which reads "no filter" as "run everything".
 [ -s /data/selected.txt ] || { echo "no failed cases to rerun"; exit 0; }
 
-# Gradle takes the dotted form as-is, one flag per case
-gradle test $(sed 's/^/--tests /' /data/selected.txt | tr '\n' ' ')
+# Gradle takes the dotted form as-is, one --tests flag per case. Build the
+# arguments one at a time and keep each one quoted: a case name holding a space
+# would otherwise split into two arguments, and one holding [ ] - a parameterized
+# test such as test[1] - would be expanded against the filenames in the
+# working directory, quietly filtering on whatever it happened to match.
+set --
+while IFS= read -r case; do
+  [ -n "$case" ] || continue
+  set -- "$@" --tests "$case"
+done < /data/selected.txt
+gradle test "$@"
 
-# Maven Surefire separates the method with '#', and takes a comma-separated list
+# Maven Surefire separates the method with '#', and takes a comma-separated
+# list, which is one already-quoted argument
 mvn test -Dtest="$(sed 's/\.\([^.]*\)$/#\1/' /data/selected.txt | paste -sd,)"
 ```
 
@@ -250,7 +278,7 @@ spec:
         tr -d '\n' < /data/previous.xml \
           | sed 's|<testcase|\n<testcase|g' \
           | grep -E '<failure|<error' \
-          | sed 's|>.*||' \
+          | sed -E 's#<(failure|error).*##' \
           | awk '
               match($0, /[[:space:]]name="[^"]*"/)      { n = substr($0, RSTART+7,  RLENGTH-8)  }
               match($0, /[[:space:]]classname="[^"]*"/) { c = substr($0, RSTART+12, RLENGTH-13) }
