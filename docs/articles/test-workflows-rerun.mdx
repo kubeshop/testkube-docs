@@ -136,6 +136,7 @@ Every tool takes its own filter. The selection above is one `classname.name` per
 
 ```shell
 # An alternation, for the tools that filter by pattern
+[ -s /data/selected.txt ] || { echo "no failed cases to rerun"; exit 0; }
 PATTERN=$(paste -sd'|' /data/selected.txt)
 npx playwright test --grep "$PATTERN"     # Playwright
 go test ./... -run "$PATTERN"             # Go
