@@ -122,6 +122,7 @@ A rerun reads the previous report out of the previous run's **artifacts**, so th
           match($0, /[[:space:]]classname="[^"]*"/) { c = substr($0, RSTART+12, RLENGTH-13) }
           { if (n != "") print (c == "" ? n : c "." n); n = ""; c = "" }
         ' \
+      | sed -e 's/&lt;/</g' -e 's/&gt;/>/g' -e 's/&quot;/"/g' -e "s/&apos;/'/g" -e 's/&amp;/\&/g' \
       | sort -u > /data/selected.txt
 
     cat /data/selected.txt
@@ -134,8 +135,24 @@ What each part is doing:
 - **`grep -E '<failure|<error'`** keeps only the cases that failed or errored. Skipped and passing cases have no such child.
 - **`sed 's|>.*||'`** trims each line back to the `<testcase` attributes, so a message inside the failure body cannot be mistaken for one.
 - **The `awk` block** picks out `name` and `classname` **one at a time**. Real reports do not agree on the order of the two, and matching them together in one pattern silently produces garbage on the reports that put `name` first. The leading `[[:space:]]` is what stops `name="…"` from matching the tail of `classname="…"`.
+- **The last `sed`** turns the five XML entities back into the characters they stand for. A test called `A & B` is written `name="A &amp; B"`, and a filter built from the escaped form selects nothing. It has to run **after** the attributes have been picked out, not before: decoding `&quot;` into a `"` while it is still inside `name="…"` ends the attribute early and truncates the name.
 
-`read_artifact()` is capped at 1 MiB, which is ample for a JUnit report of a few thousand cases. A larger one has to be downloaded with the CLI instead.
+Two limits of doing this with text tools rather than an XML parser: a **numeric** character reference (`&#38;`) is not decoded by the `sed` above, and an attribute value spanning a newline inside the tag would not be matched. Both are rare in generated reports; if your suite hits either, parse the report with a real XML parser — `xmllint --xpath` or a few lines of Python — rather than extending the pipeline.
+
+A report over `read_artifact()`'s 1 MiB cap does not have to go through the CLI. A [`fetch`](/articles/test-workflows-execution-sharing#downloading-artifacts-to-disk) block downloads artifacts to disk inside the Workflow, and its `from` takes the same references, `rerun` included:
+
+```yaml
+- name: Run the tests, pulling the previous report down first
+  execute:
+    workflows:
+      - name: my-tests
+        fetch:
+          - from: rerun
+            paths: ["junit/**"]
+            to: /data/previous
+```
+
+Note where that sits: `fetch` belongs to an entry of an `execute` step, so it comes free when the rerun runs its tests as a separate Workflow, and is awkward when it does not — there is no standalone fetch step. Reach for the CLI only if neither `read_artifact()` nor `fetch` fits.
 
 ### 3. Hand the selection to the runner
 
@@ -178,14 +195,22 @@ npx playwright test --grep "$PATTERN"    # Playwright
 npx jest -t "$PATTERN"                   # Jest
 ```
 
-Titles go into a regular expression here, so a title containing `(`, `[`, `+`, `.` or `*` must be escaped first — and if your reporter is configured to write something other than the plain title into `name`, adjust the selection to match what it writes.
+**This form selects at least the failed cases, and sometimes more.** `--grep` and `-t` take an **unanchored** regular expression matched against a test's full title, so:
+
+- a title that contains another selected title also matches — select `foo` and `foobar` runs too;
+- a title repeated in another file or `describe` block matches there as well, because `name` alone carries no suite context;
+- a title containing `.`, `(`, `[`, `+`, `*` or `?` is read as a pattern, so it matches loosely or not at all.
+
+A rerun that runs a superset still repeats everything that failed, so it stays _correct_ — it is just not minimal, and the extra cases cost time. Use this recipe when your test titles are unique within the suite and free of regex metacharacters, and treat it as approximate otherwise.
+
+When that does not hold, do not try to rebuild an exact pattern from the report. Carry the **runner's own** record of what failed instead, which is what the next paragraph describes and what Playwright's `--last-failed` does; a reporter emitting JSON rather than JUnit is also easier to filter exactly. And if your reporter is configured to write something other than the plain title into `name`, adjust the selection to match what it writes.
 
 **Go and pytest do not take either form.** Go's `-run` matches a test name _within a package_, so the package from `classname` is an argument and the name from `name` is the pattern — two fields used separately, not concatenated. pytest wants a node ID, and a dotted `classname` like `tests.api.TestUser` does not say where the module path ends and the class begins, so the node ID cannot be reconstructed from it in general.
 
 For these, carry the **runner's own** record of what failed instead of re-deriving it from the report — Go's package/name pair kept as its own file, or pytest's `.pytest_cache`, stored as an artifact and read back on the rerun so that `--last-failed` picks it up. That is the same shape as the Playwright variant below, and it is the more reliable option for any tool that has such a record.
 
 :::note
-Treat the commands above as the shape of the step, not as drop-in lines. Run your suite once, look at the `<testcase>` attributes your reporter actually writes, and confirm the values you select are the ones your filter accepts. The parser in step 2 also does not decode XML entities, so a test name containing `&amp;` or `&gt;` reaches the filter escaped.
+Treat the commands above as the shape of the step, not as drop-in lines. Run your suite once, look at the `<testcase>` attributes your reporter actually writes, and confirm the values you select are the ones your filter accepts.
 :::
 
 Some runners have their own notion of a previous run and need no parsing at all — Playwright's `--last-failed` reads `test-results/.last-run.json`, which a rerun can pull straight out of the previous execution's artifacts. [Playwright - Rerun Failed Tests](/articles/examples/playwright-rerun) is a worked example of that variant.
@@ -231,6 +256,7 @@ spec:
               match($0, /[[:space:]]classname="[^"]*"/) { c = substr($0, RSTART+12, RLENGTH-13) }
               { if (n != "") print (c == "" ? n : c "." n); n = ""; c = "" }
             ' \
+          | sed -e 's/&lt;/</g' -e 's/&gt;/>/g' -e 's/&quot;/"/g' -e "s/&apos;/'/g" -e 's/&amp;/\&/g' \
           | sort -u > /data/selected.txt
 
         cat /data/selected.txt
