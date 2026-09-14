@@ -67,6 +67,32 @@ The save still runs only if the step passed, and for a parent that means **every
 
 Every child sees the restored paths: the volumes are mounted on the step, not on one command inside it.
 
+## Caching in Parallel Steps
+
+A cache caches the pod it is declared in. That is the whole rule, and it is the one thing to know before combining a cache with `parallel`, because parallel workers run in pods of their own.
+
+Declare the cache **on** the parallel step, not around it:
+
+```yaml
+steps:
+  - name: Test in parallel
+    parallel:
+      count: 4
+      cache:
+        key: 'npm-{{ hash_files("package-lock.json") }}'
+        paths:
+          - /root/.npm/_cacache
+      shell: npm test -- --shard={{ index }}/{{ count }}
+```
+
+A cache on an ancestor of a parallel step does not reach the workers. It restores into the pod that launches them and saves from it, which is not where the work happens — a worker inherits the parent's container configuration without its volume mounts, so there is nothing there for it to find. The cache will appear to run and do nothing for the workers.
+
+:::note
+All workers share one cache scope, and it is the same scope the parent workflow uses — a worker execution is submitted under the parent's workflow name. So workers that resolve the same key share one entry.
+
+On a cold run that means every worker misses, every worker packs, and one upload wins while the rest report `was stored by another execution first` and carry on. That is expected: the entry they were all about to store is the one that got stored. Later runs hit.
+:::
+
 ## Fields
 
 | Field         | Description                                                                                                                 |
