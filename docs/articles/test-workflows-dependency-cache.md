@@ -142,7 +142,31 @@ Bump the `restoreKeys` prefix along with the key. Leaving it at `npm-` would kee
 `scope: environment` widens a trust boundary, not just a cache. Any workflow that may write that scope can influence what every other workflow in the environment restores, and a restored dependency tree is code that later runs. Use it where every workflow in the environment is equally trusted; keep the default otherwise.
 :::
 
-Entries being immutable limits the damage: the first writer of a key wins, and a later run cannot swap out what it stored.
+Immutability limits the damage: the first writer of a key wins, and a later run cannot swap out what it stored. That depends on the object store — see [Immutability Depends on the Store](#immutability-depends-on-the-store), and prefer `scope: workflow` where it does not hold.
+
+## Immutability Depends on the Store
+
+Entries are immutable because the upload is signed with a condition the store applies only while the key is unused — so of two executions saving one key, exactly one upload lands. That is a property of the store, not of Testkube, and the stores differ:
+
+| Store                  | Conditional upload                                                                      |
+| ---------------------- | --------------------------------------------------------------------------------------- |
+| MinIO (bundled)        | Applied                                                                                 |
+| MinIO (self-managed)   | Applied from a recent release; older builds ignore the header                           |
+| AWS S3                 | Applied                                                                                 |
+| Google Cloud Storage   | **Not applied** through the S3-compatible endpoint — GCS wants a different precondition |
+| An S3-compatible proxy | Depends entirely on the proxy                                                           |
+
+A store that does not apply it accepts the second upload and overwrites. There is no error and no warning at the time, which is why the control plane **asks once at startup** and logs one of three answers — applied, ignored, or could not tell. Check that line before relying on the guarantee.
+
+### What Degrades Without It
+
+Less than the word "immutable" suggests, and in one specific place.
+
+Nothing changes in ordinary operation. A save is skipped entirely when the restore was an exact hit, and the control plane checks whether the key already exists before granting an upload at all — so a second save normally never happens. The condition only decides the outcome when two executions pass both of those checks concurrently.
+
+When they do, the later upload wins instead of being refused. Both resolved the same content-derived key, so both are storing trees built from the same inputs; usually the two are equivalent and the only cost is the wasted upload.
+
+**Where it matters is `scope: environment`.** The guarantee there is that a workflow able to write a shared scope can only ever _seed_ a key, never replace what another workflow already stored. Without it, that workflow can replace a tree at any time by racing a save — and a restored dependency tree is code that then runs. On a store that does not apply the condition, keep the default `scope: workflow`, where the writer and the reader are the same workflow.
 
 ## Mounting
 
