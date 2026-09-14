@@ -314,6 +314,12 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Sharing Data Between Executions",
+              id: "articles/test-workflows-execution-sharing",
+              className: "sidebar-commercial-category",
+            },
+            {
+              type: "doc",
               label: "Artifacts",
               id: "articles/test-workflows-artifacts",
             },
