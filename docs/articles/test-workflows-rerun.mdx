@@ -25,7 +25,7 @@ testkube rerun twe EXECUTION_ID --latest
 This matters when you add rerun handling to a Workflow after an execution has already failed: that execution's snapshot does not contain the new steps, so rerunning it without `--latest` runs the old definition.
 
 :::note
-An execution whose Workflow declares a `sensitive` config parameter cannot be rerun — the value was never stored, so there is nothing to replay. The rerun is refused with `can't rerun test workflow execution with sensitive prameters`.
+An execution whose Workflow declares a `sensitive` config parameter cannot be rerun — the value was never stored, so there is nothing to replay. The rerun is refused with `can't rerun test workflow execution with sensitive parameters`.
 :::
 
 ## Execution Lineage
@@ -65,14 +65,21 @@ testkube get twe EXECUTION_ID -o json
 ```yaml
 steps:
   - name: Read the previous run
+    # Nothing here resolves on an original run, so the step only runs on a rerun.
+    condition: 'execution.lineage.baseId != ""'
     shell: |
       echo 'previous execution: {{ execution("rerun").id }}'
       echo 'previous status:     {{ execution("rerun").status }}'
-      echo 'previous output:     {{ execution("rerun").outputs.summary }}'
-      echo 'previous report:     {{ read_artifact("rerun", "junit/report.xml") }}'
+
+      # An output value and a report are text from your test run, so they go
+      # through shellquote() - see below.
+      printf 'previous output: %s\n' {{ shellquote(execution("rerun").outputs.summary) }}
+      printf '%s' {{ shellquote(read_artifact("rerun", "junit/report.xml")) }} > /data/previous.xml
 ```
 
 So a rerun reaches everything [Sharing Data Between Executions](/articles/test-workflows-execution-sharing) describes — output values, artifact contents, the execution's status — about the run it descends from.
+
+The `id` and `status` are values Testkube produced, so they are safe to drop straight into a quoted string. An **output value or a report is not** — it is whatever your tests wrote, and a single quote in a test name or a failure message ends the string it was substituted into, leaving the rest of the report to be read as shell syntax. Pass those through [`shellquote()`](/articles/test-workflows-expressions#execution-data-functions), which wraps the value as one literal argument.
 
 Two things to keep in mind:
 
@@ -259,8 +266,11 @@ spec:
           - "junit/**"
 
     - name: Fail if anything failed
+      # Both tags, matching what the selection step treats as a case to repeat.
+      # Checking only <failure> would report an errored run as passed, and the
+      # rerun would then find nothing to narrow down to.
       shell: |
-        grep -q '<failure' /data/junit/report.xml && { echo "there are failures to rerun"; exit 1; }
+        grep -Eq '<failure|<error' /data/junit/report.xml && { echo "there are failures to rerun"; exit 1; }
         echo "all selected cases passed"
 ```
 
@@ -273,9 +283,10 @@ original run, attempt 1
     <testcase name="ShouldFail" classname="suite"><failure message="not fixed yet">boom</failure></testcase>
 there are failures to rerun
 
-$ testkube rerun twe rerun-junit-1 -f
+# Rerun it by the execution ID the run above reported
+$ testkube rerun twe 615d7e1ab046f8fbd3d955d6 -f
 ...
-rerun of rerun-junit-1, attempt 2
+rerun of 615d7e1ab046f8fbd3d955d6, attempt 2
 suite.ShouldFail
     <testcase name="ShouldFail" classname="suite"/>
 all selected cases passed

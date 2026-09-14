@@ -652,10 +652,18 @@ The reference is an `as` alias, a Workflow name, an execution ID, or one of two 
 - shell: |
     echo 'sibling token: {{ execution(config.producerId).outputs.token }}'
     echo 'parent seed: {{ execution("parent").outputs.seed }}'
-    echo 'previous report: {{ read_artifact("rerun", "junit/report.xml") }}'
 ```
 
-`"rerun"` resolves only on a rerun, so guard a step that uses it with a condition on `execution.lineage.baseId`.
+`"rerun"` resolves **only on a rerun**. On an original run it has nothing to point at, and the step fails while its expressions are being resolved - whichever branch its script would have taken. So it belongs in a step of its own, guarded by a condition:
+
+```yaml
+- name: Read the report of the run this is a rerun of
+  condition: 'execution.lineage.baseId != ""'
+  shell: |
+    printf '%s' {{ shellquote(read_artifact("rerun", "junit/report.xml")) }} > /data/previous.xml
+```
+
+A report is arbitrary text produced by your tests, so it goes through `shellquote` rather than straight into a quoted string: a single quote anywhere in it would otherwise close the string it was substituted into and leave the remainder to be read as shell syntax. See [Rerunning Failed Tests](/articles/test-workflows-rerun) for what to do with it.
 
 Example using file and glob functions:
 
