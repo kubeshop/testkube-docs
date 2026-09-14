@@ -147,7 +147,7 @@ JUnit XML fixes the shape of a report, not the meaning of its fields. What a wri
 
 So there are three cases, not one recipe.
 
-**The JVM tools take the joined value directly.** `classname.name` is their identifier, and `/data/selected.txt` from step 2 can be used as it stands:
+**Gradle takes the joined value directly.** For Gradle, `classname.name` is the identifier and `/data/selected.txt` can be used as-is:
 
 ```shell
 # An empty selection means everything passed. Never hand it to the runner,
