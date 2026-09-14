@@ -43,6 +43,30 @@ cache: saved "npm-6c3f…" (37 MB in 665ms, 368ms packing and 286ms uploading)
 
 Save runs only when the step passed. That is deliberate: publishing a half-finished install under a content-hash key would have every later run restore the broken tree, with no way for anyone to invalidate it.
 
+## Caching Around Several Steps
+
+A `cache` block can sit on a step that has children rather than a command of its own. The restore runs before the first child and the save after the last one, so a single cache covers an install and everything that depends on it:
+
+```yaml
+steps:
+  - name: Build and test
+    cache:
+      key: 'mvn-{{ hash_files("pom.xml") }}'
+      paths:
+        - /root/.m2/repository
+    steps:
+      - name: Install dependencies
+        shell: mvn dependency:go-offline
+      - name: Test
+        shell: mvn test
+```
+
+This is usually what you want. Caching each step separately packs and uploads the same tree more than once, and the restore only has to happen before the first thing that reads it.
+
+The save still runs only if the step passed, and for a parent that means **every child passed**. A failing test leaves the previous entry in place rather than publishing the tree it produced — which matters more than it sounds, because an entry is immutable, so a tree published by a failed build could not be corrected afterwards.
+
+Every child sees the restored paths: the volumes are mounted on the step, not on one command inside it.
+
 ## Fields
 
 | Field         | Description                                                                                                                 |
@@ -65,6 +89,22 @@ key: 'npm-{{ hash_files("package-lock.json") }}'
 `hash_files()` digests the _contents_ of the matched files, so editing a dependency produces a different key and the stale tree is never restored. Prefer it over `hash(glob(...))`, which digests the matched _paths_ and therefore does not change when a file's contents do.
 
 Keys are resolved inside the pod, after the repository is checked out — a key that hashes a lockfile cannot be computed before the file exists.
+
+### Every Part of a Key Has to Resolve
+
+A key is refused when any expression in it evaluates to an empty string, and the step then runs uncached:
+
+```yaml
+# Refused when package-lock.json does not exist: hash_files() matches nothing,
+# the key resolves to "npm-" and identifies no particular dependency set.
+key: 'npm-{{ hash_files("package-lock.json") }}'
+```
+
+This is the check that stops a whole class of silent misbehaviour. Without it the key above is a perfectly valid `npm-`, and every run in that state shares one entry — one that sits exactly where the `npm-` restore prefix points, so it becomes a candidate for runs that _do_ have a lockfile, and that can never be corrected because entries are immutable.
+
+The usual cause is a path that does not match what you expect — a lockfile in a subdirectory while `workingDir` points elsewhere, or a checkout that did not include it. The refusal names the expression that came back empty.
+
+`restoreKeys` are deliberately exempt. A restore key is a prefix and is meant to match broadly; the problem above is a _key_ that has become indistinguishable from one.
 
 ### Restore Keys
 
