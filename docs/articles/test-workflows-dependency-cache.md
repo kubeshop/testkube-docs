@@ -144,6 +144,34 @@ restoreKeys:
 
 When the lockfile changes, the exact key misses but `npm-` matches the most recent previous entry. The install then has most of what it needs and fetches only the difference — and because a partial hit still saves under the exact key afterwards, the next run hits exactly.
 
+#### Restore Keys Reach Across Git Revisions
+
+A cache scope is one per workflow. It does not include the git revision, so every run of a workflow shares one set of entries whether it ran for the default branch, a tag, or a pull request.
+
+:::warning
+A restore key lets a run for one revision restore an entry written by a run for another. If your workflow is triggered on pull requests, a pull request's run can write an entry that a later run for your default branch restores — and the run that wrote it executed code from the pull request.
+:::
+
+The mechanism is the prefix, not the key. A pull request run stores under its own exact key; a later run for the default branch misses its exact key, the restore prefix matches the pull request's entry, and the most recently saved match wins.
+
+Two things that look like protections and are not:
+
+- **An exact key narrows this but does not close it.** A pull request that changes the lockfile produces a new key and stores an entry under it. When that pull request merges, the default branch's lockfile hashes to that same key and gets an exact hit on an entry a pre-merge run wrote. Merging the _code_ is reviewed; inheriting the _cache entry_ is not, and the entry's contents need not correspond to the lockfile that named it.
+- **Immutability does not help.** It stops an entry being replaced, not being written first, and the attack only needs to be first. It also means a poisoned entry cannot be corrected by a later legitimate run — it stays until it expires.
+
+#### What This Means In Practice
+
+The exposure depends on whether the cached content is verified when it is used:
+
+| Cache                                            | Verified on use                                                        | Risk with restore keys                                       |
+| ------------------------------------------------ | ---------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `_cacache`, `cache/download`, `~/.m2/repository` | Yes — against the integrity hashes in the consuming run's own lockfile | Low: a substituted entry fails verification and is refetched |
+| `GOCACHE`, `ccache` and other build caches       | No — compiled output is trusted on a key match                         | **High: a substituted entry is used as-is**                  |
+
+So the rule for a workflow triggered on pull requests: **do not combine `restoreKeys` with a build cache.** Use an exact key there, or leave the build cache out of `paths` and cache only the download store, which is the larger win in any case — see [Cache the Store, Not the Tree](#cache-the-store-not-the-tree).
+
+If that trade is not acceptable, run the cached workflow only for trusted revisions, and give pull requests a separate workflow without a cache.
+
 ### Invalidating a Key
 
 An entry is immutable for its lifetime: once a key holds something, that is what every later run restores, and no rerun can replace it. "For its lifetime" is the operative phrase — entries expire after a day by default, after which the key is free again — but waiting on that is not a workflow. When you change _what_ a step caches without changing the inputs the key hashes, add a version segment and bump it:
@@ -168,7 +196,9 @@ Bump the `restoreKeys` prefix along with the key. Leaving it at `npm-` would kee
 `scope: environment` widens a trust boundary, not just a cache. Any workflow that may write that scope can influence what every other workflow in the environment restores, and a restored dependency tree is code that later runs. Use it where every workflow in the environment is equally trusted; keep the default otherwise.
 :::
 
-Immutability limits the damage: the first writer of a key wins, and a later run cannot swap out what it stored. That depends on the object store — see [Immutability Depends on the Store](#immutability-depends-on-the-store), and prefer `scope: workflow` where it does not hold.
+Immutability limits the damage: the first writer of a key wins, and a later run cannot swap out what it stored. Whether that holds depends on the object store — see [Immutability Depends on the Store](#immutability-depends-on-the-store), and prefer `scope: workflow` where it does not.
+
+A scope also covers every git revision that runs the workflow, which matters most when restore keys are in play — see [Restore Keys Reach Across Git Revisions](#restore-keys-reach-across-git-revisions).
 
 ## Immutability Depends on the Store
 
