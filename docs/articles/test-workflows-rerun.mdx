@@ -50,7 +50,9 @@ Two properties are worth knowing:
 - **An original run is its own `rootId`.** It is not empty. So "every run of this chain" is a single condition that includes the original, and a chain root is visible in its own chain.
 - **The values are derived by the control plane**, not taken from the request. A rerun names its base and nothing else; the root and the attempt number follow from that base's own lineage. A caller cannot claim a chain it does not belong to, and the base is checked to be in the caller's Environment before it is honoured.
 
-`execution.lineage` is resolved while the Workflow is being built, before any container starts, so it can drive a step `condition` — which is how the example below keeps its rerun-only step out of an original run's way.
+`execution.lineage` is resolved **in the pod**, when the step runs — unlike `execution.id` and the rest of `execution.*`, which are substituted while the Workflow is being prepared. That is deliberate: a rerun replays the definition as it was resolved for the execution it descends from, so a lineage substituted at preparation time would be the _original's_ lineage, and every rerun would believe it was an original run. Step `condition` is resolved in the pod as well, which is what lets one branch on lineage — as the example below does to keep its rerun-only step out of an original run's way.
+
+The trade-off is that lineage cannot be used where a value has to be a literal before the pod exists, such as an image tag or a resource limit.
 
 The same values are on the execution record, as `lineage` on `TestWorkflowExecution`:
 
