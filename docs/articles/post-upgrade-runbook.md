@@ -106,6 +106,27 @@ kubectl logs -n "$NS" deploy/testkube-enterprise-api --tail=300 | grep -Ei "oidc
 - [ ] Worker can reach object storage
 - [ ] Upload/download artifacts from a real run works
 - [ ] No credential/provider errors in worker logs
+- [ ] Object store credentials can **read** the bucket lifecycle, not only write it
+
+```bash
+# A bucket lifecycle is replaced wholesale, so Testkube reads the existing configuration
+# before writing in order to preserve rules it did not write. That read is a permission
+# earlier versions did not need, and it is now attempted on every installation because
+# the dependency cache expiry defaults to one day. If it is denied, nothing is written:
+# an existing rule stays in the bucket but stops being maintained, and the cache rule is
+# never applied.
+kubectl logs -n "$NS" deploy/testkube-api-server --tail=300 | grep -Ei "expiration policy|lifecycle" || true
+```
+
+Grant the read if that line appears:
+
+| Store                | Read                           | Write                          |
+| -------------------- | ------------------------------ | ------------------------------ |
+| AWS S3               | `s3:GetLifecycleConfiguration` | `s3:PutLifecycleConfiguration` |
+| MinIO                | same action names              | same                           |
+| Google Cloud Storage | `storage.buckets.get`          | `storage.buckets.update`       |
+
+Both S3 actions are bucket-scoped, so a policy whose `Resource` is only `arn:aws:s3:::your-bucket/*` does not carry them however permissive its object actions are — that is the policy shape this most often catches.
 
 ```bash
 kubectl logs -n "$NS" deploy/testkube-worker-service --tail=300

@@ -345,6 +345,8 @@ Testkube reads the bucket's existing lifecycle before applying its own rules and
 
 If that existing configuration cannot be read, Testkube writes nothing and logs an error rather than replacing what it could not see. Caches then simply are not expired, which is recoverable; a bucket whose retention silently changed is not.
 
+Reading it needs a permission that earlier versions did not: `s3:GetLifecycleConfiguration` on S3 and MinIO, `storage.buckets.get` on GCS. Both S3 actions are bucket-scoped, so a policy whose `Resource` is only `arn:aws:s3:::your-bucket/*` does not carry them however permissive its object actions are. Note also that `cacheExpiration` defaults to `1`, so the lifecycle is read and written on every installation rather than only those that configure an expiration.
+
 ## Limitations
 
 **Cached paths must be concrete at bundle time.** Testkube decides which volumes to mount before the pod starts, while the toolkit resolves the paths inside it. A `paths` entry — or a `workingDir` — containing an expression that can only be resolved in the pod is rejected when the workflow is built, because the two would otherwise disagree and the cache would silently do nothing. Config, workflow and execution values are fine; they are already substituted by then.
