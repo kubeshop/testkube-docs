@@ -161,33 +161,19 @@ It reads the report as text, so three report shapes are out of its reach:
 
 - **A case whose own log contains the text `<failure` or `<error`.** Inside a CDATA section or an XML comment those are ordinary characters, so a `<system-out><![CDATA[parsing <failure .../>]]></system-out>` on a **passing** case is matched by the `grep` and that case is selected and rerun. The selection is therefore a superset: never missing a failure, but able to repeat a test that passed.
 - **A numeric character reference** (`&#38;`) — the decoding `sed` covers only the five named entities.
-- **An attribute value spanning a newline** inside the `<testcase` tag, which the `awk` patterns do not match.
+- **An attribute value spanning a newline** inside the `<testcase` tag. This one still matches, which is what makes it worth knowing: `tr -d '\n'` has already **deleted** the newline, so a case named `spans a⏎newline` is selected as `spans anewline` — the two halves run together. An XML parser keeps the two apart, so the filter built from the collapsed value does not name the case the report was describing.
 
 None of the three is common in generated reports, and the first only bites a suite whose tests log XML. If yours does, select with a real XML parser instead of extending this pipeline — any language's standard XML library gets all three right, decoding entities, ignoring CDATA and comments, and not caring about attribute order. Give it the same rule the pipeline implements: every `testcase` element having a `failure` or `error` child, reported as `classname` and `name`.
 
-A report over `read_artifact()`'s 1 MiB cap does not have to go through the CLI. A [`fetch`](/articles/test-workflows-execution-sharing#downloading-artifacts-to-disk) block downloads artifacts to disk inside the Workflow, and its `from` takes the same references, `rerun` included:
+#### When the report is larger than 1 MiB
 
-`from: rerun` is resolved the same way the reference is everywhere else, so it fails on an original run for the same reason — which means the `execute` step carrying it needs the same condition, and the original run needs a branch of its own:
+`read_artifact()` is capped at 1 MiB, which is a lot of JUnit — a few thousand cases — so most suites never meet this. Above it, the selection needs the report on disk, and the honest answer is that there is no tidy in-Workflow route today:
 
-```yaml
-- name: Run the tests, pulling the previous report down first
-  condition: 'execution.lineage.baseId != ""'
-  execute:
-    workflows:
-      - name: my-tests
-        fetch:
-          - from: rerun
-            paths: ["junit/**"]
-            to: /data/previous
+- [`fetch`](/articles/test-workflows-execution-sharing#downloading-artifacts-to-disk) **cannot pre-load a file for a run.** It belongs to an entry of an `execute` step and runs **after** that entry's executions finish, writing onto the pod that scheduled them. So `fetch` collects a report once the tests are over; it cannot hand one to tests that have not started, and a child Workflow never sees it.
+- **`testkube download artifact` in the step** does work, and is what the [Playwright example](/articles/examples/playwright-rerun) does. The cost is that the CLI needs an API token in the Workflow, which is exactly what the `rerun` reference otherwise saves you.
+- **Selecting from the runner's own record** sidesteps the size question, because that record is small however large the report is. For a suite big enough to have a 1 MiB report, this is usually the better shape anyway.
 
-- name: Run the tests
-  condition: 'execution.lineage.baseId == ""'
-  execute:
-    workflows:
-      - name: my-tests
-```
-
-Two things to note about where that sits. The `rerun` reference has to stay out of any step that runs on both kinds of execution, `fetch` included — so the price of this route is the duplicated `execute` entry above. And `fetch` belongs to an entry of an `execute` step: it comes free when the rerun runs its tests as a separate Workflow, and is awkward when it does not, because there is no standalone fetch step. Reach for the CLI only if neither `read_artifact()` nor `fetch` fits.
+So treat the 1 MiB cap as the in-pod limit it is, rather than something `fetch` routes around.
 
 ### 3. Hand the selection to the runner
 
@@ -206,27 +192,35 @@ JUnit XML fixes the shape of a report, not the meaning of its fields. What a wri
 
 So there are three cases, not one recipe.
 
-**The JVM tools identify a case by class and method**, which is exactly what `classname` and `name` hold, so `/data/selected.txt` already names the right cases. Gradle takes the joined `classname.name` as it stands; Maven wants a `#` between the two:
+Each block below is a **complete step script for one runner**, not a sequence to paste together — take the one you need.
+
+**The JVM tools identify a case by class and method**, which is exactly what `classname` and `name` hold, so `/data/selected.txt` already names the right cases.
+
+Gradle takes the joined `classname.name` as it stands, one `--tests` flag per case:
 
 ```shell
 # An empty selection means everything passed. Never hand it to the runner,
 # which reads "no filter" as "run everything".
 [ -s /data/selected.txt ] || { echo "no failed cases to rerun"; exit 0; }
 
-# Gradle takes the dotted form as-is, one --tests flag per case. Build the
-# arguments one at a time and keep each one quoted: a case name holding a space
-# would otherwise split into two arguments, and one holding [ ] - a parameterized
-# test such as test[1] - would be expanded against the filenames in the
-# working directory, quietly filtering on whatever it happened to match.
+# Build the arguments one at a time and keep each one quoted: a case name
+# holding a space would otherwise split into two arguments, and one holding
+# [ ] - a parameterized test such as test[1] - would be expanded against the
+# filenames in the working directory, quietly filtering on whatever it matched.
 set --
 while IFS= read -r case; do
   [ -n "$case" ] || continue
   set -- "$@" --tests "$case"
 done < /data/selected.txt
 gradle test "$@"
+```
 
-# Maven Surefire separates the method with '#', and takes a comma-separated
-# list, which is one already-quoted argument
+Maven Surefire separates the method with a `#`, and takes the whole selection as one comma-separated argument:
+
+```shell
+[ -s /data/selected.txt ] || { echo "no failed cases to rerun"; exit 0; }
+
+# Already one quoted argument, so it needs no set -- treatment
 mvn test -Dtest="$(sed 's/\.\([^.]*\)$/#\1/' /data/selected.txt | paste -sd,)"
 ```
 
@@ -236,8 +230,10 @@ mvn test -Dtest="$(sed 's/\.\([^.]*\)$/#\1/' /data/selected.txt | paste -sd,)"
 [ -s /data/selected.txt ] || { echo "no failed cases to rerun"; exit 0; }
 
 PATTERN=$(paste -sd'|' /data/selected.txt)
-npx playwright test --grep "$PATTERN"    # Playwright
-npx jest -t "$PATTERN"                   # Jest
+
+npx playwright test --grep "$PATTERN"
+# Jest takes the same pattern, with its own flag:
+#   npx jest -t "$PATTERN"
 ```
 
 **This form selects at least the failed cases, and sometimes more.** `--grep` and `-t` take an **unanchored** regular expression matched against a test's full title, so:
