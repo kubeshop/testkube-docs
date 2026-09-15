@@ -320,6 +320,12 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Rerunning Failed Tests",
+              id: "articles/test-workflows-rerun",
+              className: "sidebar-commercial-category",
+            },
+            {
+              type: "doc",
               label: "Artifacts",
               id: "articles/test-workflows-artifacts",
             },

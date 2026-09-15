@@ -86,16 +86,19 @@ Two cases produce an empty value from an execution that looks like it should hav
 
 ### References
 
-The first argument identifies the execution. Four forms work:
+The first argument identifies the execution. Five forms work:
 
-| Reference     | Reaches                                                               |
-| ------------- | --------------------------------------------------------------------- |
-| `as` alias    | An entry you gave an explicit `as`                                    |
-| Workflow name | An entry that ran that Workflow                                       |
-| Execution ID  | Any execution you are allowed to read, including ones you did not run |
-| `"parent"`    | The execution that ran the current one                                |
+| Reference     | Reaches                                                                                                    |
+| ------------- | ---------------------------------------------------------------------------------------------------------- |
+| `as` alias    | An entry you gave an explicit `as`                                                                         |
+| Workflow name | An entry that ran that Workflow                                                                            |
+| Execution ID  | Any execution you are allowed to read, including ones you did not run                                      |
+| `"parent"`    | The execution that ran the current one                                                                     |
+| `"rerun"`     | The execution the current one is a rerun of — see [Rerunning Failed Tests](/articles/test-workflows-rerun) |
 
 An execution can read **up** to the Workflow that ran it, **down** to the Workflows it ran, and **sideways** to Workflows run by the same parent. Anything outside that family is refused.
+
+`parent` and `rerun` are reserved. If the same Workflow also runs something under one of those names, the reference is refused rather than silently resolving to one of the two, and the error says to rename the alias.
 
 Reading up uses the reserved `parent` reference:
 

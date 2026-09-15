@@ -65,10 +65,10 @@ With the introduction of [Runner Agents](/articles/agents-overview#runner-agents
 
 ## ReRun
 
-A previous Test Workflow execution can be rerun using the `testkube rerun twe` command providing Test Workflow execution id:
+A previous Test Workflow execution can be rerun using the `testkube run twe` command providing Test Workflow execution id:
 
 ```shell
-testkube rerun twe EXECUTION_ID
+testkube run twe EXECUTION_ID
 ```
 
 :::note
