@@ -150,17 +150,28 @@ What each part is doing:
 
 - **`shellquote()`** is how the report gets into a file intact. `read_artifact()` returns it as one multi-line string, which would otherwise be re-parsed by the shell as it is substituted into the script; `shellquote()` wraps it as a single literal argument, so no quote, backtick or `$` in the XML can be interpreted.
 - **`tr -d '\n'`** joins the document onto one line, because a failing `<testcase>` spans several — its `<failure>` body sits between the tags. `sed` then puts one `<testcase>` per line.
-- **`grep -E '<failure|<error'`** keeps only the cases that failed or errored. Skipped and passing cases have no such child.
-- **`sed -E 's#<(failure|error).*##'`** trims each line back to the `<testcase` attributes, so a `name=` inside the failure body cannot be mistaken for the case's own. It cuts at the child element rather than at the first `>`: a raw `>` is legal inside an attribute value, so cutting at `>` would truncate `name="a > b"` mid-value and drop that case from the selection without a word. `<` is _not_ legal there — it has to be `&lt;` — so `<failure` and `<error` only ever appear as the child they look like.
+- **`grep -E '<failure|<error'`** keeps the cases that failed or errored. Skipped and passing cases have no such child — but this is a text match, not an XML query, so it can also keep a passing case whose own log happens to contain that text. See the limits below.
+- **`sed -E 's#<(failure|error).*##'`** trims each line back to the `<testcase` attributes, so a `name=` inside the failure body cannot be mistaken for the case's own. It cuts at the child element rather than at the first `>` because a raw `>` **is** legal inside an attribute value: cutting at `>` truncates `name="a > b"` mid-value, leaves the attribute unterminated, and drops that case from the selection without a word. Cutting at `<failure` cannot land inside the attributes, since `<` is the one character an attribute value may never hold unescaped.
 - **The `awk` block** picks out `name` and `classname` **one at a time**. Real reports do not agree on the order of the two, and matching them together in one pattern silently produces garbage on the reports that put `name` first. The leading `[[:space:]]` is what stops `name="…"` from matching the tail of `classname="…"`.
 - **The last `sed`** turns the five XML entities back into the characters they stand for. A test called `A & B` is written `name="A &amp; B"`, and a filter built from the escaped form selects nothing. It has to run **after** the attributes have been picked out, not before: decoding `&quot;` into a `"` while it is still inside `name="…"` ends the attribute early and truncates the name.
 
-Two limits of doing this with text tools rather than an XML parser: a **numeric** character reference (`&#38;`) is not decoded by the `sed` above, and an attribute value spanning a newline inside the tag would not be matched. Both are rare in generated reports; if your suite hits either, parse the report with a real XML parser — `xmllint --xpath` or a few lines of Python — rather than extending the pipeline.
+#### What this pipeline does not handle
+
+It reads the report as text, so three report shapes are out of its reach:
+
+- **A case whose own log contains the text `<failure` or `<error`.** Inside a CDATA section or an XML comment those are ordinary characters, so a `<system-out><![CDATA[parsing <failure .../>]]></system-out>` on a **passing** case is matched by the `grep` and that case is selected and rerun. The selection is therefore a superset: never missing a failure, but able to repeat a test that passed.
+- **A numeric character reference** (`&#38;`) — the decoding `sed` covers only the five named entities.
+- **An attribute value spanning a newline** inside the `<testcase` tag, which the `awk` patterns do not match.
+
+None of the three is common in generated reports, and the first only bites a suite whose tests log XML. If yours does, select with a real XML parser instead of extending this pipeline — any language's standard XML library gets all three right, decoding entities, ignoring CDATA and comments, and not caring about attribute order. Give it the same rule the pipeline implements: every `testcase` element having a `failure` or `error` child, reported as `classname` and `name`.
 
 A report over `read_artifact()`'s 1 MiB cap does not have to go through the CLI. A [`fetch`](/articles/test-workflows-execution-sharing#downloading-artifacts-to-disk) block downloads artifacts to disk inside the Workflow, and its `from` takes the same references, `rerun` included:
 
+`from: rerun` is resolved the same way the reference is everywhere else, so it fails on an original run for the same reason — which means the `execute` step carrying it needs the same condition, and the original run needs a branch of its own:
+
 ```yaml
 - name: Run the tests, pulling the previous report down first
+  condition: 'execution.lineage.baseId != ""'
   execute:
     workflows:
       - name: my-tests
@@ -168,9 +179,15 @@ A report over `read_artifact()`'s 1 MiB cap does not have to go through the CLI.
           - from: rerun
             paths: ["junit/**"]
             to: /data/previous
+
+- name: Run the tests
+  condition: 'execution.lineage.baseId == ""'
+  execute:
+    workflows:
+      - name: my-tests
 ```
 
-Note where that sits: `fetch` belongs to an entry of an `execute` step, so it comes free when the rerun runs its tests as a separate Workflow, and is awkward when it does not — there is no standalone fetch step. Reach for the CLI only if neither `read_artifact()` nor `fetch` fits.
+Two things to note about where that sits. The `rerun` reference has to stay out of any step that runs on both kinds of execution, `fetch` included — so the price of this route is the duplicated `execute` entry above. And `fetch` belongs to an entry of an `execute` step: it comes free when the rerun runs its tests as a separate Workflow, and is awkward when it does not, because there is no standalone fetch step. Reach for the CLI only if neither `read_artifact()` nor `fetch` fits.
 
 ### 3. Hand the selection to the runner
 
