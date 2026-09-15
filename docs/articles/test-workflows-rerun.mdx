@@ -11,7 +11,7 @@ Nothing has to be passed in and nothing has to be remembered between runs — th
 ## Rerunning an Execution
 
 ```shell
-testkube rerun testworkflowexecution EXECUTION_ID
+testkube run testworkflowexecution EXECUTION_ID
 ```
 
 `twe` is the short form, and `-f` follows the log output — see [ReRun](/articles/test-workflows-creating#rerun) for the command and [Running Workflows](/articles/test-workflows-running) for the dashboard.
@@ -19,7 +19,7 @@ testkube rerun testworkflowexecution EXECUTION_ID
 By default a rerun replays the Workflow definition **as it was resolved for the original execution**, with the original parameter set. Add `--latest` to run the current definition instead, keeping the parameters:
 
 ```shell
-testkube rerun twe EXECUTION_ID --latest
+testkube run twe EXECUTION_ID --latest
 ```
 
 This matters when you add rerun handling to a Workflow after an execution has already failed: that execution's snapshot does not contain the new steps, so rerunning it without `--latest` runs the old definition.
@@ -135,10 +135,16 @@ Either shape works; the one thing that does not is a separate upload step withou
       | sed 's|<testcase|\n<testcase|g' \
       | grep -E '<failure|<error' \
       | sed -E 's#<(failure|error).*##' \
-      | awk '
-          match($0, /[[:space:]]name="[^"]*"/)      { n = substr($0, RSTART+7,  RLENGTH-8)  }
-          match($0, /[[:space:]]classname="[^"]*"/) { c = substr($0, RSTART+12, RLENGTH-13) }
-          { if (n != "") print (c == "" ? n : c "." n); n = ""; c = "" }
+      | awk -v SQ="'" '
+          function val(s, k,   r) {
+            r = "[[:space:]]" k "=\"[^\"]*\""
+            if (match(s, r)) return substr(s, RSTART + length(k) + 3, RLENGTH - length(k) - 4)
+            r = "[[:space:]]" k "=" SQ "[^" SQ "]*" SQ
+            if (match(s, r)) return substr(s, RSTART + length(k) + 3, RLENGTH - length(k) - 4)
+            return ""
+          }
+          { n = val($0, "name"); c = val($0, "classname")
+            if (n != "") print (c == "" ? n : c "." n) }
         ' \
       | sed -e 's/&lt;/</g' -e 's/&gt;/>/g' -e 's/&quot;/"/g' -e "s/&apos;/'/g" -e 's/&amp;/\&/g' \
       | sort -u > /data/selected.txt
@@ -152,28 +158,44 @@ What each part is doing:
 - **`tr -d '\n'`** joins the document onto one line, because a failing `<testcase>` spans several — its `<failure>` body sits between the tags. `sed` then puts one `<testcase>` per line.
 - **`grep -E '<failure|<error'`** keeps the cases that failed or errored. Skipped and passing cases have no such child — but this is a text match, not an XML query, so it can also keep a passing case whose own log happens to contain that text. See the limits below.
 - **`sed -E 's#<(failure|error).*##'`** trims each line back to the `<testcase` attributes, so a `name=` inside the failure body cannot be mistaken for the case's own. It cuts at the child element rather than at the first `>` because a raw `>` **is** legal inside an attribute value: cutting at `>` truncates `name="a > b"` mid-value, leaves the attribute unterminated, and drops that case from the selection without a word. Cutting at `<failure` cannot land inside the attributes, since `<` is the one character an attribute value may never hold unescaped.
-- **The `awk` block** picks out `name` and `classname` **one at a time**. Real reports do not agree on the order of the two, and matching them together in one pattern silently produces garbage on the reports that put `name` first. The leading `[[:space:]]` is what stops `name="…"` from matching the tail of `classname="…"`.
+- **The `awk` block** picks out `name` and `classname` **one at a time, each tried with both quote characters**. Real reports do not agree on the order of the two, and matching them together in one pattern silently produces garbage on the reports that put `name` first; XML also allows `name='x'` as readily as `name="x"`, and a pattern that knows only one of the two leaves the selection empty on a report that uses the other. The leading `[[:space:]]` is what stops `name=` from matching the tail of `classname=`, and `SQ` carries the apostrophe in, since the `awk` program itself is inside single quotes.
 - **The last `sed`** turns the five XML entities back into the characters they stand for. A test called `A & B` is written `name="A &amp; B"`, and a filter built from the escaped form selects nothing. It has to run **after** the attributes have been picked out, not before: decoding `&quot;` into a `"` while it is still inside `name="…"` ends the attribute early and truncates the name.
 
 #### What this pipeline does not handle
 
-It reads the report as text, so three report shapes are out of its reach:
+It reads the report as text, so two report shapes are out of its reach:
 
 - **A case whose own log contains the text `<failure` or `<error`.** Inside a CDATA section or an XML comment those are ordinary characters, so a `<system-out><![CDATA[parsing <failure .../>]]></system-out>` on a **passing** case is matched by the `grep` and that case is selected and rerun. The selection is therefore a superset: never missing a failure, but able to repeat a test that passed.
 - **A numeric character reference** (`&#38;`) — the decoding `sed` covers only the five named entities.
 - **An attribute value spanning a newline** inside the `<testcase` tag. This one still matches, which is what makes it worth knowing: `tr -d '\n'` has already **deleted** the newline, so a case named `spans a⏎newline` is selected as `spans anewline` — the two halves run together. An XML parser keeps the two apart, so the filter built from the collapsed value does not name the case the report was describing.
 
-None of the three is common in generated reports, and the first only bites a suite whose tests log XML. If yours does, select with a real XML parser instead of extending this pipeline — any language's standard XML library gets all three right, decoding entities, ignoring CDATA and comments, and not caring about attribute order. Give it the same rule the pipeline implements: every `testcase` element having a `failure` or `error` child, reported as `classname` and `name`.
+Neither is common in generated reports, and the first only bites a suite whose tests log XML. If yours does, select with a real XML parser instead of extending this pipeline — any language's standard XML library gets both right, along with everything the pipeline handles by hand: decoding entities, ignoring CDATA and comments, accepting either quote character, and not caring about attribute order. Give it the same rule the pipeline implements: every `testcase` element having a `failure` or `error` child, reported as `classname` and `name`.
 
 #### When the report is larger than 1 MiB
 
 `read_artifact()` is capped at 1 MiB, which is a lot of JUnit — a few thousand cases — so most suites never meet this. Above it, the selection needs the report on disk, and the honest answer is that there is no tidy in-Workflow route today:
 
-- [`fetch`](/articles/test-workflows-execution-sharing#downloading-artifacts-to-disk) **cannot pre-load a file for a run.** It belongs to an entry of an `execute` step and runs **after** that entry's executions finish, writing onto the pod that scheduled them. So `fetch` collects a report once the tests are over; it cannot hand one to tests that have not started, and a child Workflow never sees it.
-- **`testkube download artifact` in the step** does work, and is what the [Playwright example](/articles/examples/playwright-rerun) does. The cost is that the CLI needs an API token in the Workflow, which is exactly what the `rerun` reference otherwise saves you.
+- **A `fetch` on the test entry itself is too late.** [`fetch`](/articles/test-workflows-execution-sharing#downloading-artifacts-to-disk) belongs to an entry of an `execute` step and runs **after** that entry's executions finish, writing onto the pod that scheduled them. So hanging `fetch: [{from: rerun, …}]` off the entry that runs your tests collects the report once those tests are over, and the child never sees it.
+- **A `fetch` on an earlier entry is not.** The download lands on the scheduling pod, so an `execute` step placed _before_ the tests can stage the report there for the later steps of the same Workflow to read:
+
+  ```yaml
+  - name: Stage the previous report
+    condition: 'execution.lineage.baseId != ""'
+    execute:
+      workflows:
+        - name: a-trivial-workflow
+          fetch:
+            - from: rerun
+              paths: ["junit/**"]
+              to: /data/previous
+  ```
+
+  The cost is the throwaway execution: `fetch` has no step of its own, so it needs an entry to hang off, and that entry runs a Workflow whose result you do not want. Keep the `rerun` reference behind the condition here as everywhere else.
+
+- **`testkube download artifact` in the step** avoids the throwaway run, and is what the [Playwright example](/articles/examples/playwright-rerun) does. The cost is an API token in the Workflow, which is what the `rerun` reference otherwise saves you.
 - **Selecting from the runner's own record** sidesteps the size question, because that record is small however large the report is. For a suite big enough to have a 1 MiB report, this is usually the better shape anyway.
 
-So treat the 1 MiB cap as the in-pod limit it is, rather than something `fetch` routes around.
+So the 1 MiB cap bounds `read_artifact()`, not the Workflow: there are routes past it, each with a price.
 
 ### 3. Hand the selection to the runner
 
@@ -236,13 +258,15 @@ npx playwright test --grep "$PATTERN"
 #   npx jest -t "$PATTERN"
 ```
 
-**This form selects at least the failed cases, and sometimes more.** `--grep` and `-t` take an **unanchored** regular expression matched against a test's full title, so:
+**This form is approximate in both directions.** `--grep` and `-t` take an **unanchored** regular expression matched against a test's full title, so:
 
 - a title that contains another selected title also matches — select `foo` and `foobar` runs too;
 - a title repeated in another file or `describe` block matches there as well, because `name` alone carries no suite context;
 - a title containing `.`, `(`, `[`, `+`, `*` or `?` is read as a pattern, so it matches loosely or not at all.
 
-A rerun that runs a superset still repeats everything that failed, so it stays _correct_ — it is just not minimal, and the extra cases cost time. Use this recipe when your test titles are unique within the suite and free of regex metacharacters, and treat it as approximate otherwise.
+The first two only add cases: a rerun that runs a superset still repeats everything that failed, so it stays _correct_, just not minimal, and the extra cases cost time. **The third can also drop one** — a failed title read as a pattern may match nothing, and that case is then not repeated at all, which is the one outcome a rerun is supposed to prevent.
+
+So this recipe holds only where its assumption does: **test titles unique within the suite and free of regex metacharacters**. Anywhere else, treat it as approximate in both directions rather than as "the failed cases".
 
 When that does not hold, do not try to rebuild an exact pattern from the report. Carry the **runner's own** record of what failed instead, which is what the next paragraph describes and what Playwright's `--last-failed` does; a reporter emitting JSON rather than JUnit is also easier to filter exactly. And if your reporter is configured to write something other than the plain title into `name`, adjust the selection to match what it writes.
 
@@ -292,10 +316,16 @@ spec:
           | sed 's|<testcase|\n<testcase|g' \
           | grep -E '<failure|<error' \
           | sed -E 's#<(failure|error).*##' \
-          | awk '
-              match($0, /[[:space:]]name="[^"]*"/)      { n = substr($0, RSTART+7,  RLENGTH-8)  }
-              match($0, /[[:space:]]classname="[^"]*"/) { c = substr($0, RSTART+12, RLENGTH-13) }
-              { if (n != "") print (c == "" ? n : c "." n); n = ""; c = "" }
+          | awk -v SQ="'" '
+              function val(s, k,   r) {
+                r = "[[:space:]]" k "=\"[^\"]*\""
+                if (match(s, r)) return substr(s, RSTART + length(k) + 3, RLENGTH - length(k) - 4)
+                r = "[[:space:]]" k "=" SQ "[^" SQ "]*" SQ
+                if (match(s, r)) return substr(s, RSTART + length(k) + 3, RLENGTH - length(k) - 4)
+                return ""
+              }
+              { n = val($0, "name"); c = val($0, "classname")
+                if (n != "") print (c == "" ? n : c "." n) }
             ' \
           | sed -e 's/&lt;/</g' -e 's/&gt;/>/g' -e 's/&quot;/"/g' -e "s/&apos;/'/g" -e 's/&amp;/\&/g' \
           | sort -u > /data/selected.txt
@@ -351,7 +381,7 @@ original run, attempt 1
 there are failures to rerun
 
 # Rerun it by the execution ID the run above reported
-$ testkube rerun twe 615d7e1ab046f8fbd3d955d6 -f
+$ testkube run twe 615d7e1ab046f8fbd3d955d6 -f
 ...
 rerun of 615d7e1ab046f8fbd3d955d6, attempt 2
 suite.ShouldFail
