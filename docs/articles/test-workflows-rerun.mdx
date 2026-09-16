@@ -28,6 +28,31 @@ This matters when you add rerun handling to a Workflow after an execution has al
 An execution whose Workflow declares a `sensitive` config parameter cannot be rerun — the value was never stored, so there is nothing to replay. The rerun is refused with `can't rerun test workflow execution with sensitive parameters`.
 :::
 
+### Rerunning from inside a Workflow
+
+An [`execute`](/articles/test-workflows-test-suites) entry can schedule a rerun as well, by naming the execution it descends from:
+
+```yaml
+steps:
+  - name: Run the tests
+    execute:
+      workflows:
+        - name: my-tests
+          as: first
+    negative: true
+
+  - name: Repeat just what failed
+    execute:
+      workflows:
+        - name: my-tests
+          baseExecutionId: '{{ execution("first").id }}'
+```
+
+The scheduled execution gets the lineage, so inside it `execution("rerun")` resolves back to the first run and the narrowing below works exactly as it does for a rerun started from the CLI. Two differences from the CLI are worth knowing:
+
+- It runs the Workflow's **current definition**, not the base's stored snapshot — the equivalent of `--latest`.
+- The base must be an execution the scheduling run may itself read: its own, its parent, one of its children, a sibling from the same parent, or its own base. Naming one it could not otherwise reach is refused, so this cannot be used to read an execution through a child.
+
 ## Execution Lineage
 
 Every execution records where it sits in a chain of reruns, readable inside the Workflow as `execution.lineage`:
