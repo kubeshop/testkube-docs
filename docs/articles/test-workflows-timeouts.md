@@ -3,6 +3,7 @@
 Testkube supports multiple timeout mechanisms, each handling a different stage of execution:
 
 - Queue timeout for waiting executions
+- Initialization timeout for a pod that does not start
 - Step timeout for individual workflow steps
 - Job/pod runtime limits at the Kubernetes layer
 - System-level safeguards for very long-running executions
@@ -47,6 +48,35 @@ When `spec.timeouts.queue` is set, it takes precedence over installation-level d
 
 If `spec.timeouts.queue` is not set, scheduler cleanup falls back to the installation-level setting (`SCHEDULER_MAX_QUEUED_TIME`).
 
+## Initialization timeout
+
+`spec.timeouts.initialization` limits the time from the creation of the Kubernetes Job until the first step container starts. When the time passes, the runner aborts the execution and keeps the cause that Kubernetes reported.
+
+The time covers everything that happens before the first step runs: the scheduling of the pod, the image pulls, the mount of the volumes, and the start of an injected sidecar. The field has no default. Without it, a pod that cannot start waits for `spec.job.activeDeadlineSeconds`, or for the system safeguards described below, which act only after many hours.
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: init-timeout-example
+spec:
+  timeouts:
+    initialization: 2m
+  steps:
+    - name: run-tests
+      shell: echo "hello"
+```
+
+The execution ends as `aborted`. The message names the runner, the timeout, and the cause that Kubernetes reported, for example:
+
+```
+The execution has been aborted. (by the runner: the first step did not start before the initialization timeout of the workflow: no node can run the pod: 0/2 nodes are available)
+```
+
+The value is a Go duration and it must be positive, for example `90s`, `2m` or `1h30m`. A value without a unit, such as `60`, fails the execution before it starts.
+
+Parallel workers read the same field, because the runner enforces the timeout for every pod it watches.
+
 ## Step timeout
 
 Use `steps[*].timeout` to limit how long an individual step can run before that step is aborted.
@@ -83,6 +113,7 @@ For the current behavior and lifecycle details, see [Concurrency & Queueing](/ar
 ## Which timeout to use
 
 - Use `spec.timeouts.queue` for waiting time before execution starts.
+- Use `spec.timeouts.initialization` for the time until the first step container starts.
 - Use `steps[*].timeout` for per-step runtime control.
 - Use `spec.job.activeDeadlineSeconds` for Kubernetes wall-clock enforcement.
 - Keep installation defaults (`SCHEDULER_*`) as environment-wide guardrails.
@@ -92,3 +123,4 @@ For the current behavior and lifecycle details, see [Concurrency & Queueing](/ar
 - [Workflow Best Practices](/articles/test-workflows-best-practices)
 - [Concurrency & Queueing](/articles/test-workflows-concurrency-queueing)
 - [Job & Pod Configuration](/articles/test-workflows-job-and-pod)
+- [Failure Reasons](/articles/test-workflows-failure-reasons)

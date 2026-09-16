@@ -364,6 +364,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Failure Reasons",
+              id: "articles/test-workflows-failure-reasons",
+            },
+            {
+              type: "doc",
               label: "Job & Pod Configuration",
               id: "articles/test-workflows-job-and-pod",
             },
