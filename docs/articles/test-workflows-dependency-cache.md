@@ -144,33 +144,46 @@ restoreKeys:
 
 When the lockfile changes, the exact key misses but `npm-` matches the most recent previous entry. The install then has most of what it needs and fetches only the difference — and because a partial hit still saves under the exact key afterwards, the next run hits exactly.
 
-#### Restore Keys Reach Across Git Revisions
+#### Pull Requests Read the Shared Cache but Write Their Own
 
-A cache scope is one per workflow. It does not include the git revision, so every run of a workflow shares one set of entries whether it ran for the default branch, a tag, or a pull request.
+A pull request's run executes code its author proposed, and it has not been reviewed yet. Without a separation, that run could store an entry which a later run for your default branch restored through a restore-key prefix — and a restored dependency tree is code that then runs.
 
-:::warning
-A restore key lets a run for one revision restore an entry written by a run for another. If your workflow is triggered on pull requests, a pull request's run can write an entry that a later run for your default branch restores — and the run that wrote it executed code from the pull request.
+So a scope is split into namespaces by provenance:
+
+| Run                                                       | Writes            | Reads                        |
+| --------------------------------------------------------- | ----------------- | ---------------------------- |
+| Pull request                                              | Its own namespace | Its own, then the shared one |
+| Everything else — a push, a tag, a schedule, a manual run | The shared one    | The shared one               |
+
+A pull request therefore still starts from whatever the default branch has already built: its restore checks its own namespace first, and falls back to the shared one on a miss. What it saves afterwards goes only into its own namespace, where no trusted run will ever look — not by an exact key, and not by a restore-key prefix, because the prefix query is rooted at the namespace.
+
+This is decided from what the trigger recorded on the execution, not from anything the run itself sends, so the workflow cannot choose which namespace it writes.
+
+**A pull request gets its own namespace, keyed by its number.** All of its runs share it, so the second push to a branch still hits what the first one cached. A pull request can poison its own namespace, which costs it nothing that it did not already control.
+
+:::note
+The cost is one cold cache per pull request's first run, and one more after it merges: entries written under a pull request are not visible to the default branch, so the first run after the merge saves the shared entry itself.
 :::
 
-The mechanism is the prefix, not the key. A pull request run stores under its own exact key; a later run for the default branch misses its exact key, the restore prefix matches the pull request's entry, and the most recently saved match wins.
+#### What Still Needs Care
 
-Two things that look like protections and are not:
+**The separation depends on Testkube knowing the run is a pull request's.** It does when the execution was started by a Testkube git trigger that reported pull request metadata. A run started some other way — manually against a pull request's branch, or by an external CI system calling the API — is treated as trusted and writes the shared namespace. If you build pull requests through your own pipeline rather than a git trigger, this protection is not in play and the rest of this section applies to you.
 
-- **An exact key narrows this but does not close it.** A pull request that changes the lockfile produces a new key and stores an entry under it. When that pull request merges, the default branch's lockfile hashes to that same key and gets an exact hit on an entry a pre-merge run wrote. Merging the _code_ is reviewed; inheriting the _cache entry_ is not, and the entry's contents need not correspond to the lockfile that named it.
-- **Immutability does not help.** It stops an entry being replaced, not being written first, and the attack only needs to be first. It also means a poisoned entry cannot be corrected by a later legitimate run — it stays until it expires.
+**`scope: environment` widens who may write the shared namespace.** The namespaces separate pull requests from trusted runs; they do not separate trusted workflows from each other. See [Scope](#scope).
 
-#### What This Means In Practice
-
-The exposure depends on whether the cached content is verified when it is used:
+Where the protection is not in play, the exposure depends on whether the cached content is verified when it is used:
 
 | Cache                                            | Verified on use                                                        | Risk with restore keys                                       |
 | ------------------------------------------------ | ---------------------------------------------------------------------- | ------------------------------------------------------------ |
 | `_cacache`, `cache/download`, `~/.m2/repository` | Yes — against the integrity hashes in the consuming run's own lockfile | Low: a substituted entry fails verification and is refetched |
 | `GOCACHE`, `ccache` and other build caches       | No — compiled output is trusted on a key match                         | **High: a substituted entry is used as-is**                  |
 
-So the rule for a workflow triggered on pull requests: **do not combine `restoreKeys` with a build cache.** Use an exact key there, or leave the build cache out of `paths` and cache only the download store, which is the larger win in any case — see [Cache the Store, Not the Tree](#cache-the-store-not-the-tree).
+Two things that look like protections there and are not:
 
-If that trade is not acceptable, run the cached workflow only for trusted revisions, and give pull requests a separate workflow without a cache.
+- **An exact key narrows the exposure but does not close it.** A run that changes the lockfile produces a new key and stores an entry under it. Once that change lands, the default branch's lockfile hashes to the same key and gets an exact hit on an entry the earlier run wrote. Merging the _code_ is reviewed; inheriting the _cache entry_ is not, and the entry's contents need not correspond to the lockfile that named it.
+- **Immutability does not help.** It stops an entry being replaced, not being written first, and being first is all this needs. It also means a bad entry cannot be corrected by a later legitimate run — it stays until it expires.
+
+So, for untrusted revisions reaching a cache without the namespace split: **do not combine `restoreKeys` with a build cache.** Use an exact key there, or leave the build cache out of `paths` and cache only the download store, which is the larger win in any case — see [Cache the Store, Not the Tree](#cache-the-store-not-the-tree).
 
 ### Invalidating a Key
 
@@ -198,7 +211,7 @@ Bump the `restoreKeys` prefix along with the key. Leaving it at `npm-` would kee
 
 Immutability limits the damage: the first writer of a key wins, and a later run cannot swap out what it stored. Whether that holds depends on the object store — see [Immutability Depends on the Store](#immutability-depends-on-the-store), and prefer `scope: workflow` where it does not.
 
-A scope also covers every git revision that runs the workflow, which matters most when restore keys are in play — see [Restore Keys Reach Across Git Revisions](#restore-keys-reach-across-git-revisions).
+A scope covers every git revision that runs the workflow, except that a pull request's runs are separated into their own namespace — see [Pull Requests Read the Shared Cache but Write Their Own](#pull-requests-read-the-shared-cache-but-write-their-own).
 
 ## Immutability Depends on the Store
 
@@ -364,6 +377,8 @@ Reading it needs a permission that earlier versions did not: `s3:GetLifecycleCon
 **A restore only writes to the declared cached paths.** An entry written by another workflow under `scope: environment` cannot place files anywhere else in the container. An archive that tries is treated as a failed restore: the paths are cleared and the step reports a miss.
 
 **A single execution cannot tell a hit from a miss.** A step's cache is saved after the step passes, so nothing in that same run can observe it, and an install rebuilds its output whether or not the restore brought anything back. Asserting that a cache actually works takes two executions of the same workflow — see the `tw-cache-roundtrip` example in the Testkube repository.
+
+**A pull request's entries are not shared with anything else.** Its first run and the first run after it merges both start cold. Only a run started by a git trigger that reported pull request metadata is recognised as one — see [Pull Requests Read the Shared Cache but Write Their Own](#pull-requests-read-the-shared-cache-but-write-their-own).
 
 **A control plane without dependency-cache support answers every restore with a miss.** Workflows written against one that supports it still run against one that does not; the log line says which.
 
