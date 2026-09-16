@@ -54,6 +54,10 @@ Two properties are worth knowing:
 
 The trade-off is that lineage cannot be used where a value has to be a literal before the pod exists, such as an image tag or a resource limit.
 
+:::warning
+The flip side is worth knowing before you write a check against lineage: on a rerun, **`{{ execution.id }}` holds the ID of the run the snapshot came from**, not the rerun's own. It was substituted when that definition was prepared, and the rerun replays it. So `execution.lineage.rootId == execution.id` is true on a rerun just as it is on an original, and comparing the two tells you nothing about where the run sits in its chain. Compare the lineage fields with each other instead — those are the ones resolved per execution.
+:::
+
 The same values are on the execution record, as `lineage` on `TestWorkflowExecution`:
 
 ```shell
