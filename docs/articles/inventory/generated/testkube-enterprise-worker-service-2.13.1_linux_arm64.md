@@ -301,7 +301,7 @@ If you are required to interoperate with OpenPGP systems and need a maintained p
 <tr><td>Affected range</td><td><code>>=19.03.0+incompatible</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.472%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -322,6 +322,8 @@ Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Es
 <table>
 <tr><td>Affected range</td><td><code>>=1.83.0<br/><1.83.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.83.2</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.685%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
