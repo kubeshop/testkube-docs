@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:a8b2ae450c635964f645ee82b3d25e6e7479e6988f023306345690904ebefab9</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 6" src="https://img.shields.io/badge/high-6-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/medium-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:a8b2ae450c635964f645ee82b3d25e6e7479e6988f023306345690904ebefab9</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 6" src="https://img.shields.io/badge/high-6-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/medium-2-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/arm64</td></tr>
 <tr><td>size</td><td>78 MB</td></tr>
 <tr><td>packages</td><td>342</td></tr>
@@ -292,6 +292,28 @@ If you are required to interoperate with OpenPGP systems and need a maintained p
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>29.6.2+incompatible</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/docker/cli@29.6.2%2Bincompatible</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2025-15558?s=golang&n=cli&ns=github.com%2Fdocker&t=golang&vr=%3E%3D19.03.0%2Bincompatible"><img alt="high : CVE--2025--15558" src="https://img.shields.io/badge/CVE--2025--15558-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=19.03.0+incompatible</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.472%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Escalation on Windows in github.com/docker/cli
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/grpc</strong> <code>1.83.1</code> (golang)</summary>
 
 <small><code>pkg:golang/google.golang.org/grpc@1.83.1</code></small><br/>
@@ -326,22 +348,111 @@ The issue has been addressed in `master` (and backported to `1.83.2` and `1.82.2
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>29.6.2+incompatible</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc</strong> <code>1.44.0</code> (golang)</summary>
 
-<small><code>pkg:golang/github.com/docker/cli@29.6.2%2Bincompatible</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-15558?s=golang&n=cli&ns=github.com%2Fdocker&t=golang&vr=%3E%3D19.03.0%2Bincompatible"><img alt="high : CVE--2025--15558" src="https://img.shields.io/badge/CVE--2025--15558-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+<small><code>pkg:golang/go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc@1.44.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-81870?s=github&n=otlptracegrpc&ns=go.opentelemetry.io%2Fotel%2Fexporters%2Fotlp%2Fotlptrace&t=golang&vr=%3E%3D1.5.0%2C%3C%3D1.44.0"><img alt="low 2.0: CVE--2026--81870" src="https://img.shields.io/badge/CVE--2026--81870-lightgrey?label=low%202.0&labelColor=fce1a9"/></a> <i>Exposure of Sensitive Information to an Unauthorized Actor</i>
 
 <table>
-<tr><td>Affected range</td><td><code>>=19.03.0+incompatible</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.472%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>>=1.5.0<br/><=1.44.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.45.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>2</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Escalation on Windows in github.com/docker/cli
+### Summary
+
+OpenTelemetry Go versions 1.5.0 through 1.44.0 can include trace exporter endpoint configuration in an internal diagnostic log emitted when an SDK `TracerProvider` is created. The default OpenTelemetry logger does not emit this event. Exposure requires an application to install a logger that enables OpenTelemetry's internal Info-level diagnostics and for someone other than the intended audience to have access to those logs.
+
+The logged configuration can disclose the address of the trace collector and whether the OTLP/HTTP connection is configured as insecure. The Zipkin exporter logs its complete collector URL, so credentials in URL userinfo or tokens in the query string are also disclosed if an application embeds them there. OTLP authentication headers, TLS key material, and exported span data are not included in this log.
+
+Exporter `MarshalLog` implementations that caused this configuration to be included in internal logs were introduced by [`a1fff3c`](https://github.com/open-telemetry/opentelemetry-go/commit/a1fff3c2588c783d1f3f6fd2315aa2660fc6d330).
+
+### Details
+
+When `sdk/trace.NewTracerProvider` constructs a provider, it records a `TracerProvider created` internal Info event containing the provider configuration. In affected versions, the configuration's `MarshalLog` methods recursively include:
+
+1. the provider's span processors;
+2. each processor's span exporter; and
+3. for the OTLP trace exporter, its client configuration.
+
+This causes the following values to be present in the event:
+
+- OTLP trace gRPC: the configured endpoint;
+- OTLP trace HTTP: the configured endpoint and the `Insecure` flag; and
+- Zipkin: the complete collector URL.
+
+OpenTelemetry Go does not emit this event with its default logger, which only emits errors. An application must explicitly configure a sufficiently verbose logger with `otel.SetLogger`. The required `logr` verbosity is version-dependent:
+
+- versions 1.5.0 through 1.14.x use `V(1)` for this Info event; and
+- versions 1.15.0 through 1.44.0 use `V(4)`.
+
+OTLP header configuration is not part of the marshaled object, so credentials supplied with `WithHeaders` or the corresponding environment variables are not exposed. The documented OTLP `WithEndpoint` input is a collector address rather than a credential-bearing URL. The higher-risk case is therefore the Zipkin collector URL, which is retained and logged in full, or an application passing sensitive data in an OTLP endpoint outside the documented format.
+
+### Proof of concept
+
+The following program demonstrates the behavior with OpenTelemetry Go 1.44.0. It deliberately places credentials and a token in the Zipkin collector URL and enables internal Info logging:
+
+```go
+package main
+
+import (
+	"bytes"
+	"context"
+	"fmt"
+
+	"github.com/go-logr/logr/funcr"
+	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/exporters/zipkin"
+	sdktrace "go.opentelemetry.io/otel/sdk/trace"
+)
+
+func main() {
+	var logs bytes.Buffer
+	otel.SetLogger(funcr.New(func(_, args string) {
+		_, _ = logs.WriteString(args)
+	}, funcr.Options{Verbosity: 4}))
+
+	exporter, err := zipkin.New(
+		"http://user:pass@<!-- -->zipkin.internal:9411/api/v2/spans?token=secret",
+	)
+	if err != nil {
+		panic(err)
+	}
+
+	tp := sdktrace.NewTracerProvider(sdktrace.WithBatcher(exporter))
+	_ = tp.Shutdown(context.Background())
+
+	fmt.Println(logs.String())
+}
+```
+
+The `TracerProvider created` event contains:
+
+```text
+http://user:pass@<!-- -->zipkin.internal:9411/api/v2/spans?token=secret
+```
+
+For versions before 1.15.0, set `funcr.Options{Verbosity: 1}` instead.
+
+### Impact
+
+This is a conditional disclosure through application logs. Affected applications must enable verbose OpenTelemetry internal diagnostics and configure a trace exporter containing information they do not intend to expose to readers of those logs. In that configuration, a person or system with log access can learn the trace collector address and internal network topology. If credentials or tokens are embedded directly in a Zipkin collector URL, those values can also be recovered from the logs.
+
+There is no exposure with the default OpenTelemetry logger, and the vulnerable log is generated from local application configuration rather than remotely supplied span data. OTLP authentication headers, certificate or private-key contents, and telemetry payloads are not logged by this path.
+
+### Remediation
+
+Upgrade the affected OpenTelemetry Go modules to version 1.45.0 or later. The fix in [`3a1412d`](https://github.com/open-telemetry/opentelemetry-go/commit/3a1412d2b3bc4e4231fbeac2ed42117ae541bb38) stops recursively marshaling exporter and client configuration and records their types instead.
+
+If an immediate upgrade is not possible:
+
+- keep OpenTelemetry internal logging below the Info verbosity described above;
+- do not embed credentials or tokens in exporter endpoint URLs; use authentication headers or another supported credential mechanism; and
+- restrict access to existing logs and rotate any credentials that may already have been recorded.
 
 </blockquote>
 </details>
