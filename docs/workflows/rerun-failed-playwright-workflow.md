@@ -76,6 +76,11 @@ spec:
       condition: "!config.rerunFailed"
       shell: npx playwright@1.52.0 test
     - name: Upload artifacts
+      # A separate upload step is skipped by default once a test step has
+      # failed, which is the run whose results a rerun needs - without this,
+      # test-results/.last-run.json never reaches the artifacts and
+      # --last-failed has nothing to read next time.
+      condition: always
       artifacts:
         paths:
           - playwright-report/**/*

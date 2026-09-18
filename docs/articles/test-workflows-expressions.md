@@ -244,6 +244,21 @@ The expressions language provides several built-in variables. Some of these are 
       <td>Scheduled execution date/time</td>
     </tr>
     <tr>
+      <td><code>execution.lineage.baseId</code></td>
+      <td>✅</td>
+      <td>ID of the execution this one is a rerun of; empty on an original run - see <a href="/articles/test-workflows-rerun">Rerunning Failed Tests</a></td>
+    </tr>
+    <tr>
+      <td><code>execution.lineage.rootId</code></td>
+      <td>✅</td>
+      <td>ID of the first execution in the chain of reruns; an original run's own ID</td>
+    </tr>
+    <tr>
+      <td><code>execution.lineage.attempt</code></td>
+      <td>✅</td>
+      <td><code>1</code> on an original run, one more than the base's on a rerun</td>
+    </tr>
+    <tr>
       <td><code>resource.id</code></td>
       <td>✅</td>
       <td>Unique ID for parallel steps or services</td>
@@ -631,13 +646,24 @@ These read data produced by other Test Workflow executions - the ones the curren
   </tbody>
 </table>
 
-The reference is an `as` alias, a Workflow name, an execution ID, or `"parent"` for the execution that ran the current one:
+The reference is an `as` alias, a Workflow name, an execution ID, or one of two reserved words - `"parent"` for the execution that ran the current one, and `"rerun"` for the execution the current one is a [rerun](/articles/test-workflows-rerun) of:
 
 ```yaml
 - shell: |
     echo 'sibling token: {{ execution(config.producerId).outputs.token }}'
     echo 'parent seed: {{ execution("parent").outputs.seed }}'
 ```
+
+`"rerun"` resolves **only on a rerun**. On an original run it has nothing to point at, and the step fails while its expressions are being resolved - whichever branch its script would have taken. So it belongs in a step of its own, guarded by a condition:
+
+```yaml
+- name: Read the report of the run this is a rerun of
+  condition: 'execution.lineage.baseId != ""'
+  shell: |
+    printf '%s' {{ shellquote(read_artifact("rerun", "junit/report.xml")) }} > /data/previous.xml
+```
+
+A report is arbitrary text produced by your tests, so it goes through `shellquote` rather than straight into a quoted string: a single quote anywhere in it would otherwise close the string it was substituted into and leave the remainder to be read as shell syntax. See [Rerunning Failed Tests](/articles/test-workflows-rerun) for what to do with it.
 
 Example using file and glob functions:
 

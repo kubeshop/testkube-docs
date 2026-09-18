@@ -186,6 +186,19 @@ workflow specified in the `execute` command, for example:
 Will run the `k6-base` test on a Runner Agent named `load-runner-agent` while running the e2e-test on the Runner Agent the containing
 Workflow is running on. For more details, see our guide on [Runner Agent Targeting](/articles/test-workflows-running#runner-agent-targeting).
 
+### Rerunning a previous execution
+
+An entry can be scheduled as a **rerun** of an earlier execution rather than as a fresh one, by naming that execution's ID:
+
+```yaml
+- execute:
+    workflows:
+      - name: e2e-test
+        baseExecutionId: '{{ execution("first").id }}'
+```
+
+The scheduled execution then resolves `execution("rerun")` back to that one, which is what lets a Workflow read the previous run's report and repeat only the test cases that failed. See [Rerunning Failed Tests](/articles/test-workflows-rerun#rerunning-from-inside-a-workflow) for the full pattern, the difference from a rerun started on the CLI, and the rule on which executions may be named.
+
 ## Nesting workflows
 
 Workflows can be nested, a Workflow can execute other Workflow(s) executing other Workflow(s). [**Parallelism**](#controlling-the-concurrency-level) can then be used to control the execution flow.

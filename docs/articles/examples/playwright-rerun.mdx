@@ -7,11 +7,9 @@ to cut down overall execution times when working with flaky tests and/or when yo
 has been fixed and rerunning all tests is not necessary - [Read More](https://playwright.dev/docs/running-tests#run-last-failed-tests).
 
 :::note
-Since all testing tools have different approaches to rerunning failed tests, Testkube does not have a native "Rerun failed tests" functionality.
-That being said, it is certainly possible to create Workflows that tap into the corresponding functionality in the testing tool at hand,
-with some custom scripting and/or configuration parameters.
+Testing tools disagree on how a failed test is named and filtered, so translating "what failed" into a filter stays the Workflow's job. What a Workflow no longer has to work out is _which_ execution to narrow down from: Testkube records the execution a rerun descends from and exposes it as the reserved `rerun` reference, so `read_artifact("rerun", "test-results/.last-run.json")` reaches the previous run's results with no API token, no CLI call and no execution ID passed in - see [Rerunning Failed Tests](/articles/test-workflows-rerun).
 
-The below Workflow is an example of how to achieve this for Playwright tests.
+The Workflow below predates that reference and is kept for the case it still covers: picking up the failures of a **previous, unrelated execution** on a fresh run, rather than on a rerun of that execution. For narrowing an actual rerun, prefer the `rerun` reference.
 :::
 
 ## Workflow Overview

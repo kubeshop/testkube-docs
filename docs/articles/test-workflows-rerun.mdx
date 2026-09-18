@@ -1,0 +1,427 @@
+# Rerunning Failed Tests
+
+import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx";
+
+<RequiresCommercialWorkflows />
+
+A rerun is a new execution that knows which execution it came from. That one fact is what a Workflow needs to narrow itself down to the test cases that failed last time: it reads the previous run's report out of that run's artifacts, turns it into a filter, and hands the filter to the test runner.
+
+Nothing has to be passed in and nothing has to be remembered between runs — the Workflow is written once and asks "which run am I a rerun of?" every time it starts.
+
+## Rerunning an Execution
+
+```shell
+testkube run testworkflowexecution EXECUTION_ID
+```
+
+`twe` is the short form, and `-f` follows the log output — see [ReRun](/articles/test-workflows-creating#rerun) for the command and [Running Workflows](/articles/test-workflows-running) for the dashboard.
+
+By default a rerun replays the Workflow definition **as it was resolved for the original execution**, with the original parameter set. Add `--latest` to run the current definition instead, keeping the parameters:
+
+```shell
+testkube run twe EXECUTION_ID --latest
+```
+
+This matters when you add rerun handling to a Workflow after an execution has already failed: that execution's snapshot does not contain the new steps, so rerunning it without `--latest` runs the old definition.
+
+:::note
+An execution whose Workflow declares a `sensitive` config parameter cannot be rerun — the value was never stored, so there is nothing to replay. The rerun is refused with `can't rerun test workflow execution with sensitive parameters`.
+:::
+
+### Rerunning from inside a Workflow
+
+An [`execute`](/articles/test-workflows-test-suites) entry can schedule a rerun as well, by naming the execution it descends from:
+
+```yaml
+steps:
+  - name: Run the tests
+    execute:
+      workflows:
+        - name: my-tests
+          as: first
+    negative: true
+
+  - name: Repeat just what failed
+    execute:
+      workflows:
+        - name: my-tests
+          baseExecutionId: '{{ execution("first").id }}'
+```
+
+The scheduled execution gets the lineage, so inside it `execution("rerun")` resolves back to the first run and the narrowing below works exactly as it does for a rerun started from the CLI. Two differences from the CLI are worth knowing:
+
+- It runs the Workflow's **current definition**, not the base's stored snapshot — the equivalent of `--latest`.
+- The base must be an execution the scheduling run may itself read: its own, its parent, one of its children, a sibling from the same parent, or its own base. Naming one it could not otherwise reach is refused, so this cannot be used to read an execution through a child.
+
+## Execution Lineage
+
+Every execution records where it sits in a chain of reruns, readable inside the Workflow as `execution.lineage`:
+
+| Field     | Description                                                        |
+| --------- | ------------------------------------------------------------------ |
+| `baseId`  | The execution this one is a rerun of; **empty on an original run** |
+| `rootId`  | The first execution of the chain; an original run's own ID         |
+| `attempt` | `1` on an original run, one more than the base's on a rerun        |
+
+```yaml
+steps:
+  - name: Say where this run sits
+    shell: |
+      echo 'attempt {{ execution.lineage.attempt }} of chain {{ execution.lineage.rootId }}'
+```
+
+Two properties are worth knowing:
+
+- **An original run is its own `rootId`.** It is not empty. So "every run of this chain" is a single condition that includes the original, and a chain root is visible in its own chain.
+- **The values are derived by the control plane**, not taken from the request. A rerun names its base and nothing else; the root and the attempt number follow from that base's own lineage. A caller cannot claim a chain it does not belong to, and the base is checked to be in the caller's Environment before it is honoured.
+
+`execution.lineage` is resolved **in the pod**, when the step runs — unlike `execution.id` and the rest of `execution.*`, which are substituted while the Workflow is being prepared. That is deliberate: a rerun replays the definition as it was resolved for the execution it descends from, so a lineage substituted at preparation time would be the _original's_ lineage, and every rerun would believe it was an original run. Step `condition` is resolved in the pod as well, which is what lets one branch on lineage — as the example below does to keep its rerun-only step out of an original run's way.
+
+The trade-off is that lineage cannot be used where a value has to be a literal before the pod exists, such as an image tag or a resource limit.
+
+:::warning
+The flip side is worth knowing before you write a check against lineage: on a rerun, **`{{ execution.id }}` holds the ID of the run the snapshot came from**, not the rerun's own. It was substituted when that definition was prepared, and the rerun replays it. So `execution.lineage.rootId == execution.id` is true on a rerun just as it is on an original, and comparing the two tells you nothing about where the run sits in its chain. Compare the lineage fields with each other instead — those are the ones resolved per execution.
+:::
+
+The same values are on the execution record, as `lineage` on `TestWorkflowExecution`:
+
+```shell
+testkube get twe EXECUTION_ID -o json
+```
+
+## The `rerun` Reference
+
+`rerun` is a reserved execution reference, alongside [`parent`](/articles/test-workflows-execution-sharing#references). It addresses the execution the current one is a rerun of, and works everywhere a reference works:
+
+```yaml
+steps:
+  - name: Read the previous run
+    # Nothing here resolves on an original run, so the step only runs on a rerun.
+    condition: 'execution.lineage.baseId != ""'
+    shell: |
+      echo 'previous execution: {{ execution("rerun").id }}'
+      echo 'previous status:     {{ execution("rerun").status }}'
+
+      # An output value and a report are text from your test run, so they go
+      # through shellquote() - see below.
+      printf 'previous output: %s\n' {{ shellquote(execution("rerun").outputs.summary) }}
+      printf '%s' {{ shellquote(read_artifact("rerun", "junit/report.xml")) }} > /data/previous.xml
+```
+
+So a rerun reaches everything [Sharing Data Between Executions](/articles/test-workflows-execution-sharing) describes — output values, artifact contents, the execution's status — about the run it descends from.
+
+The `id` and `status` are values Testkube produced, so they are safe to drop straight into a quoted string. An **output value or a report is not** — it is whatever your tests wrote, and a single quote in a test name or a failure message ends the string it was substituted into, leaving the rest of the report to be read as shell syntax. Pass those through [`shellquote()`](/articles/test-workflows-expressions#execution-data-functions), which wraps the value as one literal argument.
+
+Two things to keep in mind:
+
+- **On an original run there is nothing to resolve.** `execution("rerun")` fails with `cannot resolve execution("rerun"): this execution is not a rerun of another one`. Guard any step that uses it with a condition on `execution.lineage.baseId`, and keep the reference out of steps that run either way — a step's expressions are resolved when the step runs, so a **skipped** step never resolves them, but a step that runs will resolve every expression in its script whether or not the shell reaches that line.
+- **`rerun` is reserved.** If the same Workflow also runs something aliased `as: rerun`, the reference is refused rather than silently picking one of the two, and the error says to rename the alias.
+
+## Rerunning Only the Test Cases That Failed
+
+The pattern has three parts: read the previous report, turn it into a list of test cases, hand the list to the runner as a filter.
+
+### 1. Publish the report as an artifact
+
+A rerun reads the previous report out of the previous run's **artifacts**, so the run that produces it has to upload it:
+
+```yaml
+- name: Run the tests
+  shell: |
+    # your test runner, writing /data/junit/report.xml
+  artifacts:
+    workingDir: /data
+    paths:
+      - "junit/**"
+```
+
+This is the case that has to keep working when the step **fails** — a run with no report leaves the next rerun nothing to narrow down from, and a failing run is exactly when there is something to narrow down to. An `artifacts` block on the same step as the command is safe here: Testkube uploads it unconditionally, after the command, whatever the command's exit code.
+
+That guarantee belongs to the block, not to the step. Move the upload into a **step of its own** and it is an ordinary step, skipped by default when an earlier one failed, so it needs saying explicitly:
+
+```yaml
+- name: Run the tests
+  shell: |
+    # your test runner, writing /data/junit/report.xml
+- name: Save the report
+  condition: always
+  workingDir: /data
+  artifacts:
+    paths:
+      - "junit/**"
+```
+
+Either shape works; the one thing that does not is a separate upload step without `condition: always`.
+
+### 2. Select the failed cases
+
+```yaml
+- name: Select only the cases the previous run failed
+  condition: 'execution.lineage.baseId != ""'
+  shell: |
+    set -e
+    printf '%s' {{ shellquote(read_artifact("rerun", "junit/report.xml")) }} > /data/previous.xml
+
+    tr -d '\n' < /data/previous.xml \
+      | sed 's|<testcase|\n<testcase|g' \
+      | grep -E '<failure|<error' \
+      | sed -E 's#<(failure|error).*##' \
+      | awk -v SQ="'" '
+          function val(s, k,   r) {
+            r = "[[:space:]]" k "=\"[^\"]*\""
+            if (match(s, r)) return substr(s, RSTART + length(k) + 3, RLENGTH - length(k) - 4)
+            r = "[[:space:]]" k "=" SQ "[^" SQ "]*" SQ
+            if (match(s, r)) return substr(s, RSTART + length(k) + 3, RLENGTH - length(k) - 4)
+            return ""
+          }
+          { n = val($0, "name"); c = val($0, "classname")
+            if (n != "") print (c == "" ? n : c "." n) }
+        ' \
+      | sed -e 's/&lt;/</g' -e 's/&gt;/>/g' -e 's/&quot;/"/g' -e "s/&apos;/'/g" -e 's/&amp;/\&/g' \
+      | sort -u > /data/selected.txt
+
+    cat /data/selected.txt
+```
+
+What each part is doing:
+
+- **`shellquote()`** is how the report gets into a file intact. `read_artifact()` returns it as one multi-line string, which would otherwise be re-parsed by the shell as it is substituted into the script; `shellquote()` wraps it as a single literal argument, so no quote, backtick or `$` in the XML can be interpreted.
+- **`tr -d '\n'`** joins the document onto one line, because a failing `<testcase>` spans several — its `<failure>` body sits between the tags. `sed` then puts one `<testcase>` per line.
+- **`grep -E '<failure|<error'`** keeps the cases that failed or errored. Skipped and passing cases have no such child — but this is a text match, not an XML query, so it can also keep a passing case whose own log happens to contain that text. See the limits below.
+- **`sed -E 's#<(failure|error).*##'`** trims each line back to the `<testcase` attributes, so a `name=` inside the failure body cannot be mistaken for the case's own. It cuts at the child element rather than at the first `>` because a raw `>` **is** legal inside an attribute value: cutting at `>` truncates `name="a > b"` mid-value, leaves the attribute unterminated, and drops that case from the selection without a word. Cutting at `<failure` cannot land inside the attributes, since `<` is the one character an attribute value may never hold unescaped.
+- **The `awk` block** picks out `name` and `classname` **one at a time, each tried with both quote characters**. Real reports do not agree on the order of the two, and matching them together in one pattern silently produces garbage on the reports that put `name` first; XML also allows `name='x'` as readily as `name="x"`, and a pattern that knows only one of the two leaves the selection empty on a report that uses the other. The leading `[[:space:]]` is what stops `name=` from matching the tail of `classname=`, and `SQ` carries the apostrophe in, since the `awk` program itself is inside single quotes.
+- **The last `sed`** turns the five XML entities back into the characters they stand for. A test called `A & B` is written `name="A &amp; B"`, and a filter built from the escaped form selects nothing. It has to run **after** the attributes have been picked out, not before: decoding `&quot;` into a `"` while it is still inside `name="…"` ends the attribute early and truncates the name.
+
+#### What this pipeline does not handle
+
+It reads the report as text, so two report shapes are out of its reach:
+
+- **A case whose own log contains the text `<failure` or `<error`.** Inside a CDATA section or an XML comment those are ordinary characters, so a `<system-out><![CDATA[parsing <failure .../>]]></system-out>` on a **passing** case is matched by the `grep` and that case is selected and rerun. The selection is therefore a superset: never missing a failure, but able to repeat a test that passed.
+- **A numeric character reference** (`&#38;`) — the decoding `sed` covers only the five named entities.
+- **An attribute value spanning a newline** inside the `<testcase` tag. This one still matches, which is what makes it worth knowing: `tr -d '\n'` has already **deleted** the newline, so a case named `spans a⏎newline` is selected as `spans anewline` — the two halves run together. An XML parser keeps the two apart, so the filter built from the collapsed value does not name the case the report was describing.
+
+Neither is common in generated reports, and the first only bites a suite whose tests log XML. If yours does, select with a real XML parser instead of extending this pipeline — any language's standard XML library gets both right, along with everything the pipeline handles by hand: decoding entities, ignoring CDATA and comments, accepting either quote character, and not caring about attribute order. Give it the same rule the pipeline implements: every `testcase` element having a `failure` or `error` child, reported as `classname` and `name`.
+
+#### When the report is larger than 1 MiB
+
+`read_artifact()` is capped at 1 MiB, which is a lot of JUnit — a few thousand cases — so most suites never meet this. Above it, the selection needs the report on disk, and the honest answer is that there is no tidy in-Workflow route today:
+
+- **A `fetch` on the test entry itself is too late.** [`fetch`](/articles/test-workflows-execution-sharing#downloading-artifacts-to-disk) belongs to an entry of an `execute` step and runs **after** that entry's executions finish, writing onto the pod that scheduled them. So hanging `fetch: [{from: rerun, …}]` off the entry that runs your tests collects the report once those tests are over, and the child never sees it.
+- **A `fetch` on an earlier entry is not.** The download lands on the scheduling pod, so an `execute` step placed _before_ the tests can stage the report there for the later steps of the same Workflow to read:
+
+  ```yaml
+  - name: Stage the previous report
+    condition: 'execution.lineage.baseId != ""'
+    execute:
+      workflows:
+        - name: a-trivial-workflow
+          fetch:
+            - from: rerun
+              paths: ["junit/**"]
+              to: /data/previous
+  ```
+
+  The cost is the throwaway execution: `fetch` has no step of its own, so it needs an entry to hang off, and that entry runs a Workflow whose result you do not want. Keep the `rerun` reference behind the condition here as everywhere else.
+
+- **`testkube download artifact` in the step** avoids the throwaway run, and is what the [Playwright example](/articles/examples/playwright-rerun) does. The cost is an API token in the Workflow, which is what the `rerun` reference otherwise saves you.
+- **Selecting from the runner's own record** sidesteps the size question, because that record is small however large the report is. For a suite big enough to have a 1 MiB report, this is usually the better shape anyway.
+
+So the 1 MiB cap bounds `read_artifact()`, not the Workflow: there are routes past it, each with a price.
+
+### 3. Hand the selection to the runner
+
+This is the step that is **specific to your test tool**, and the reason Testkube supplies the previous execution rather than a ready-made list of test cases.
+
+JUnit XML fixes the shape of a report, not the meaning of its fields. What a writer puts in `classname` and `name`, and what the matching runner's filter expects back, differ per tool:
+
+| Tool                 | `classname`                      | `name`                    | Its filter matches                    |
+| -------------------- | -------------------------------- | ------------------------- | ------------------------------------- |
+| Maven Surefire       | Fully-qualified class            | Method                    | `Class#method`                        |
+| Gradle               | Fully-qualified class            | Method                    | `Class.method`                        |
+| Playwright `junit`   | File and `describe` titles       | Test title                | The title, as a pattern               |
+| Jest `jest-junit`    | Ancestor titles (configurable)   | Test title (configurable) | The title, as a pattern               |
+| Go `go-junit-report` | Package                          | `TestFoo`, `TestFoo/sub`  | The test name, within a package       |
+| pytest `--junitxml`  | Dotted module, plus class if any | Function                  | A node ID: `path/to/file.py::…::name` |
+
+So there are three cases, not one recipe.
+
+Each block below is a **complete step script for one runner**, not a sequence to paste together — take the one you need.
+
+**The JVM tools identify a case by class and method**, which is exactly what `classname` and `name` hold, so `/data/selected.txt` already names the right cases.
+
+Gradle takes the joined `classname.name` as it stands, one `--tests` flag per case:
+
+```shell
+# An empty selection means everything passed. Never hand it to the runner,
+# which reads "no filter" as "run everything".
+[ -s /data/selected.txt ] || { echo "no failed cases to rerun"; exit 0; }
+
+# Build the arguments one at a time and keep each one quoted: a case name
+# holding a space would otherwise split into two arguments, and one holding
+# [ ] - a parameterized test such as test[1] - would be expanded against the
+# filenames in the working directory, quietly filtering on whatever it matched.
+set --
+while IFS= read -r case; do
+  [ -n "$case" ] || continue
+  set -- "$@" --tests "$case"
+done < /data/selected.txt
+gradle test "$@"
+```
+
+Maven Surefire separates the method with a `#`, and takes the whole selection as one comma-separated argument:
+
+```shell
+[ -s /data/selected.txt ] || { echo "no failed cases to rerun"; exit 0; }
+
+# Already one quoted argument, so it needs no set -- treatment
+mvn test -Dtest="$(sed 's/\.\([^.]*\)$/#\1/' /data/selected.txt | paste -sd,)"
+```
+
+**The pattern matchers want the test title alone**, not the joined value — a Playwright `classname` is a file and `describe` path, and prefixing it turns a working title into a pattern that matches nothing. Select only `name` by changing one expression in step 2's `awk` block, `print (c == "" ? n : c "." n)` to `print n`:
+
+```shell
+[ -s /data/selected.txt ] || { echo "no failed cases to rerun"; exit 0; }
+
+PATTERN=$(paste -sd'|' /data/selected.txt)
+
+npx playwright test --grep "$PATTERN"
+# Jest takes the same pattern, with its own flag:
+#   npx jest -t "$PATTERN"
+```
+
+**This form is approximate in both directions.** `--grep` and `-t` take an **unanchored** regular expression matched against a test's full title, so:
+
+- a title that contains another selected title also matches — select `foo` and `foobar` runs too;
+- a title repeated in another file or `describe` block matches there as well, because `name` alone carries no suite context;
+- a title containing `.`, `(`, `[`, `+`, `*` or `?` is read as a pattern, so it matches loosely or not at all.
+
+The first two only add cases: a rerun that runs a superset still repeats everything that failed, so it stays _correct_, just not minimal, and the extra cases cost time. **The third can also drop one** — a failed title read as a pattern may match nothing, and that case is then not repeated at all, which is the one outcome a rerun is supposed to prevent.
+
+So this recipe holds only where its assumption does: **test titles unique within the suite and free of regex metacharacters**. Anywhere else, treat it as approximate in both directions rather than as "the failed cases".
+
+When that does not hold, do not try to rebuild an exact pattern from the report. Carry the **runner's own** record of what failed instead, which is what the next paragraph describes and what Playwright's `--last-failed` does; a reporter emitting JSON rather than JUnit is also easier to filter exactly. And if your reporter is configured to write something other than the plain title into `name`, adjust the selection to match what it writes.
+
+**Go and pytest do not take either form.** Go's `-run` matches a test name _within a package_, so the package from `classname` is an argument and the name from `name` is the pattern — two fields used separately, not concatenated. pytest wants a node ID, and a dotted `classname` like `tests.api.TestUser` does not say where the module path ends and the class begins, so the node ID cannot be reconstructed from it in general.
+
+For these, carry the **runner's own** record of what failed instead of re-deriving it from the report — Go's package/name pair kept as its own file, or pytest's `.pytest_cache`, stored as an artifact and read back on the rerun so that `--last-failed` picks it up. That is the same shape as the Playwright variant below, and it is the more reliable option for any tool that has such a record.
+
+:::note
+Treat the commands above as the shape of the step, not as drop-in lines. Run your suite once, look at the `<testcase>` attributes your reporter actually writes, and confirm the values you select are the ones your filter accepts.
+:::
+
+Some runners have their own notion of a previous run and need no parsing at all — Playwright's `--last-failed` reads `test-results/.last-run.json`, which a rerun can pull straight out of the previous execution's artifacts. [Playwright - Rerun Failed Tests](/articles/examples/playwright-rerun) is a worked example of that variant.
+
+## Full Example
+
+Run this Workflow once — it fails — then rerun the execution. The rerun runs one test case instead of three, and passes.
+
+```yaml title="rerun-junit.yaml"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: rerun-junit
+spec:
+  container:
+    workingDir: /data
+  steps:
+    - name: Select the whole suite
+      condition: 'execution.lineage.baseId == ""'
+      shell: |
+        set -e
+        echo "original run, attempt {{ execution.lineage.attempt }}"
+        cat > /data/selected.txt <<'ALL'
+        suite.ShouldPass
+        suite.ShouldAlsoPass
+        suite.ShouldFail
+        ALL
+
+    - name: Select only the cases the previous run failed
+      condition: 'execution.lineage.baseId != ""'
+      shell: |
+        set -e
+        echo "rerun of {{ execution.lineage.baseId }}, attempt {{ execution.lineage.attempt }}"
+
+        printf '%s' {{ shellquote(read_artifact("rerun", "junit/report.xml")) }} > /data/previous.xml
+
+        tr -d '\n' < /data/previous.xml \
+          | sed 's|<testcase|\n<testcase|g' \
+          | grep -E '<failure|<error' \
+          | sed -E 's#<(failure|error).*##' \
+          | awk -v SQ="'" '
+              function val(s, k,   r) {
+                r = "[[:space:]]" k "=\"[^\"]*\""
+                if (match(s, r)) return substr(s, RSTART + length(k) + 3, RLENGTH - length(k) - 4)
+                r = "[[:space:]]" k "=" SQ "[^" SQ "]*" SQ
+                if (match(s, r)) return substr(s, RSTART + length(k) + 3, RLENGTH - length(k) - 4)
+                return ""
+              }
+              { n = val($0, "name"); c = val($0, "classname")
+                if (n != "") print (c == "" ? n : c "." n) }
+            ' \
+          | sed -e 's/&lt;/</g' -e 's/&gt;/>/g' -e 's/&quot;/"/g' -e "s/&apos;/'/g" -e 's/&amp;/\&/g' \
+          | sort -u > /data/selected.txt
+
+        cat /data/selected.txt
+        [ -s /data/selected.txt ] || { echo "a rerun found no failed cases to repeat"; exit 1; }
+
+    - name: Run the selected cases
+      # A real runner takes /data/selected.txt as a filter. This stand-in writes
+      # the report a runner would write.
+      shell: |
+        set -e
+        mkdir -p /data/junit
+        {
+          echo '<testsuites>'
+          echo '  <testsuite name="suite">'
+          while read -r id; do
+            [ -n "$id" ] || continue
+            CLASS=${id%.*}
+            NAME=${id##*.}
+            if [ "$NAME" = "ShouldFail" ] && [ -z '{{ execution.lineage.baseId }}' ]; then
+              echo "    <testcase name=\"$NAME\" classname=\"$CLASS\"><failure message=\"not fixed yet\">boom</failure></testcase>"
+            else
+              echo "    <testcase name=\"$NAME\" classname=\"$CLASS\"/>"
+            fi
+          done < /data/selected.txt
+          echo '  </testsuite>'
+          echo '</testsuites>'
+        } > /data/junit/report.xml
+
+        cat /data/junit/report.xml
+      artifacts:
+        workingDir: /data
+        paths:
+          - "junit/**"
+
+    - name: Fail if anything failed
+      # Both tags, matching what the selection step treats as a case to repeat.
+      # Checking only <failure> would report an errored run as passed, and the
+      # rerun would then find nothing to narrow down to.
+      shell: |
+        grep -Eq '<failure|<error' /data/junit/report.xml && { echo "there are failures to rerun"; exit 1; }
+        echo "all selected cases passed"
+```
+
+```shell
+$ testkube run testworkflow rerun-junit -f
+...
+original run, attempt 1
+    <testcase name="ShouldPass" classname="suite"/>
+    <testcase name="ShouldAlsoPass" classname="suite"/>
+    <testcase name="ShouldFail" classname="suite"><failure message="not fixed yet">boom</failure></testcase>
+there are failures to rerun
+
+# Rerun it by the execution ID the run above reported
+$ testkube run twe 615d7e1ab046f8fbd3d955d6 -f
+...
+rerun of 615d7e1ab046f8fbd3d955d6, attempt 2
+suite.ShouldFail
+    <testcase name="ShouldFail" classname="suite"/>
+all selected cases passed
+```
+
+## Notes
+
+- **A rerun of a rerun keeps the original root.** `attempt` keeps counting (`3`, `4`, …) and `rootId` still names the first run, so a chain of narrowing reruns stays one chain.
+- **Reruns are not a retry policy.** A rerun is started by a person, a trigger, or the API; to repeat a step automatically within one execution, use [`retry`](/articles/test-workflows-best-practices#use-retries-for-flaky-steps) instead.
+- **The narrowing lives in the Workflow.** Testkube supplies the base execution and access to its results; which test cases those translate into is the Workflow's decision, because only it knows what the runner's filter looks like.
