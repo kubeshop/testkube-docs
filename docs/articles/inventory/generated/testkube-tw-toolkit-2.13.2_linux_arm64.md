@@ -315,7 +315,7 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git ope
 <tr><td>Affected range</td><td><code>&lt;8.22.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.22.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.566%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -411,7 +411,7 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git ope
 <tr><td>Affected range</td><td><code>&lt;2.8.4-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.8.4-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.586%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -475,7 +475,7 @@ COPY --from=build /app/testworkflow-init /init
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.315%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -494,7 +494,7 @@ Now, we add an atomic established state, set when a channel becomes usable. Unti
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.378%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -614,8 +614,8 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git ope
 <table>
 <tr><td>Affected range</td><td><code>&lt;=10.48-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.102%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.214%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -631,8 +631,8 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git ope
 <table>
 <tr><td>Affected range</td><td><code>&lt;=10.48-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.221%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.212%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -648,7 +648,7 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git ope
 <table>
 <tr><td>Affected range</td><td><code>&lt;=10.48-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.105%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.108%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
 </table>
 
