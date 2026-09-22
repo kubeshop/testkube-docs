@@ -8,6 +8,19 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Patch Release v2.13.2 (2026-09-22)
+
+Control Plane is available in Helm chart `v2.336.2` and the Agent is available in Helm chart `v2.13.3`.
+
+### Fixes
+
+- Workflow template Definition view no longer hangs. Switching between template tabs now keeps the loaded template instead of resetting it, so the Definition and Resource Group views open normally again.
+- Template updates now answer with the updated template on source-of-truth environments.
+
+### Improvements
+
+- On-prem trial telemetry: license installation and validation activity is now tracked, and CLI `init demo` telemetry uses the license identity.
+
 ## Release v2.13.1 (2026-08-27)
 
 > Advanced GitHub-native integration, test case-level Health metrics and Insights, plus many smaller improvements and fixes.
