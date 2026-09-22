@@ -326,7 +326,14 @@ testkube-ai-service:
 `apiMode` selects the endpoint the AI service calls for a model: `chat_completions` (`/v1/chat/completions`) or `responses` (`/v1/responses`).
 Set it under `defaults` for every model and override it per model.
 
-When it is not set, models call Chat Completions, except models that cannot work there, which switch to the Responses API automatically:
+The AI service picks the endpoint in this order:
+
+1. The model's own `apiMode`, when set. This is the only way to force Chat Completions on a model that needs the Responses API.
+2. `responses` for models that cannot work on Chat Completions (listed below), even when `defaults.apiMode` is `chat_completions`.
+3. `defaults.apiMode`, when set.
+4. `chat_completions`, today's default.
+
+Models that switch to the Responses API automatically:
 
 - Any model with a thinking level configured (`defaultReasoningEffort` or `reasoningEfforts`). Since GPT-5.4, OpenAI only accepts tool calls with a reasoning effort on `/v1/responses`.
 - OpenAI `gpt-5.6-*` models (Sol, Luna, Terra) and `gpt-6-*` models (Astra).
@@ -346,7 +353,7 @@ If yours does not, keep `apiMode: chat_completions` for the models behind it.
 
 #### Examples
 
-Pin today's behaviour for every model (recommended before upgrading):
+Pin today's behaviour for every model (recommended before upgrading). Sol still uses the Responses API because it has thinking levels:
 
 ```yaml
 testkube-ai-service:
@@ -359,7 +366,6 @@ testkube-ai-service:
       - model: gpt-5.6-sol
         defaultReasoningEffort: medium
         reasoningEfforts: [low, medium, high]
-        apiMode: responses
 ```
 
 Opt in to the Responses API for all models, except one served by a proxy without `/v1/responses`:
@@ -396,6 +402,7 @@ testkube-ai-service:
 OpenAI recommends the Responses API for all new projects, and the unset default will become `responses` in a later Testkube release.
 The AI service logs a warning at startup while `defaults.apiMode` is unset.
 Set `defaults.apiMode: chat_completions` to keep today's behaviour, or `responses` to opt in now.
+Models that need the Responses API keep using it either way.
 :::
 
 ### Disabling Embeddings
