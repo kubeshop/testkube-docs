@@ -122,21 +122,21 @@ The `defaults` section provides shared values inherited by all models unless ove
 
 Each model entry (`agent`, `tasks`, `embeddings`) supports these fields in addition to inheriting from `defaults`:
 
-| Field              | Description                                                                                                   |
-| ------------------ | ------------------------------------------------------------------------------------------------------------- |
-| `model`            | Model identifier sent in the API request body (e.g., `gpt-5.2`)                                               |
-| `url`              | Custom endpoint URL (overrides `defaults.url`)                                                                |
-| `apiKey`           | API key for this model (overrides `defaults.apiKey`)                                                          |
-| `secretRef`        | K8s secret name (overrides `defaults.secretRef`)                                                              |
-| `secretRefKey`     | Key within the secret (overrides `defaults.secretRefKey`)                                                     |
-| `extraHeaders`     | Extra HTTP headers (replaces `defaults.extraHeaders` if set)                                                  |
-| `queryParams`      | Query parameters (replaces `defaults.queryParams` if set)                                                     |
-| `temperature`      | Temperature setting — agent and tasks only                                                                    |
-| `label`            | Human-readable name for the UI dropdown — agent only                                                          |
-| `default`          | Mark which agent model is the default — agent only                                                            |
-| `reasoningEffort`  | Thinking level used unless the user picks one — agent and tasks only. See [Thinking Levels](#thinking-levels) |
-| `reasoningEfforts` | Thinking levels users may pick in the dashboard, in dropdown order — agent only                               |
-| `apiMode`          | `responses` or `chat_completions`; overrides `defaults.apiMode` — agent and tasks only                        |
+| Field                    | Description                                                                                                   |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| `model`                  | Model identifier sent in the API request body (e.g., `gpt-5.2`)                                               |
+| `url`                    | Custom endpoint URL (overrides `defaults.url`)                                                                |
+| `apiKey`                 | API key for this model (overrides `defaults.apiKey`)                                                          |
+| `secretRef`              | K8s secret name (overrides `defaults.secretRef`)                                                              |
+| `secretRefKey`           | Key within the secret (overrides `defaults.secretRefKey`)                                                     |
+| `extraHeaders`           | Extra HTTP headers (replaces `defaults.extraHeaders` if set)                                                  |
+| `queryParams`            | Query parameters (replaces `defaults.queryParams` if set)                                                     |
+| `temperature`            | Temperature setting — agent and tasks only                                                                    |
+| `label`                  | Human-readable name for the UI dropdown — agent only                                                          |
+| `default`                | Mark which agent model is the default — agent only                                                            |
+| `defaultReasoningEffort` | Thinking level used unless the user picks one — agent and tasks only. See [Thinking Levels](#thinking-levels) |
+| `reasoningEfforts`       | Thinking levels users may pick in the dashboard, in dropdown order — agent only                               |
+| `apiMode`                | `responses` or `chat_completions`; overrides `defaults.apiMode` — agent and tasks only                        |
 
 :::info Override Semantics
 Per-model `extraHeaders` and `queryParams` **replace** the defaults entirely (not merged key-by-key). If you need both default and model-specific headers, repeat the shared ones in the per-model block.
@@ -301,10 +301,10 @@ The proxy also has usage limits and is not recommended for production workloads.
 Reasoning models accept a thinking level (OpenAI's `reasoning_effort`): `none`, `minimal`, `low`, `medium`, `high`, `xhigh` or `max`.
 Check which values your model accepts.
 
-- `reasoningEffort` sets the level the AI service uses when the user does not pick one.
+- `defaultReasoningEffort` sets the level the AI service uses when the user does not pick one.
 - `reasoningEfforts` lists the levels users may pick. The dashboard shows a thinking level dropdown next to the model dropdown, in AI Chats and in AI Test Authoring, only for models that list one.
-  The order in the list is the order in the dropdown. If `reasoningEffort` is not in the list, the first listed level becomes the default.
-- Omit `reasoningEfforts` to keep the level fixed at `reasoningEffort`.
+  The order in the list is the order in the dropdown. If `defaultReasoningEffort` is not in the list, the first listed level becomes the default.
+- Omit `reasoningEfforts` to keep the level fixed at `defaultReasoningEffort`.
 
 ```yaml
 testkube-ai-service:
@@ -314,11 +314,11 @@ testkube-ai-service:
         default: true
       - model: gpt-5.6-sol
         label: "GPT-5.6 Sol"
-        reasoningEffort: medium
+        defaultReasoningEffort: medium
         reasoningEfforts: [low, medium, high]
       - model: gpt-6-astra
         label: "GPT-6 Astra"
-        reasoningEffort: high
+        defaultReasoningEffort: high
 ```
 
 ### API Mode
@@ -328,7 +328,7 @@ Set it under `defaults` for every model and override it per model.
 
 When it is not set, models call Chat Completions, except models that cannot work there, which switch to the Responses API automatically:
 
-- Any model with a thinking level configured (`reasoningEffort` or `reasoningEfforts`). Since GPT-5.4, OpenAI only accepts tool calls with a reasoning effort on `/v1/responses`.
+- Any model with a thinking level configured (`defaultReasoningEffort` or `reasoningEfforts`). Since GPT-5.4, OpenAI only accepts tool calls with a reasoning effort on `/v1/responses`.
 - OpenAI `gpt-5.6-*` models (Sol, Luna, Terra) and `gpt-6-*` models (Astra).
 
 #### Models that require `apiMode: responses`
@@ -357,7 +357,7 @@ testkube-ai-service:
       - model: gpt-5.2
         default: true
       - model: gpt-5.6-sol
-        reasoningEffort: medium
+        defaultReasoningEffort: medium
         reasoningEfforts: [low, medium, high]
         apiMode: responses
 ```
@@ -373,7 +373,7 @@ testkube-ai-service:
       - model: gpt-5.2
         default: true
       - model: gpt-6-astra
-        reasoningEffort: high
+        defaultReasoningEffort: high
       - model: my-proxy/llama-3.3-70b
         url: https://proxy.internal/v1
         apiMode: chat_completions
