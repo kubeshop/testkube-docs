@@ -4,6 +4,13 @@ This document provides a comprehensive reference for enabling and configuring Te
 including the [AI Assistant](./ai-assistant-overview), [AI Agents](./ai-agents),
 [AI Agent Triggers](./ai-triggers), and related features.
 
+:::warning Upcoming default change for on-prem installations
+The AI service calls OpenAI-compatible providers through Chat Completions (`/v1/chat/completions`) unless a model needs the Responses API (`/v1/responses`).
+A later release will make `responses` the default for every model.
+To keep your current behaviour across upgrades, set `inference.defaults.apiMode: chat_completions` now.
+See [API Mode](#api-mode) for details, the list of models that already require the Responses API, and examples.
+:::
+
 ## Cloud Control Plane Users
 
 For users of the Testkube Cloud Control Plane, enabling AI functionality is straightforward:
@@ -109,23 +116,27 @@ The `defaults` section provides shared values inherited by all models unless ove
 | `secretRefKey` | Key within the secret                                                                   |
 | `extraHeaders` | Extra HTTP headers merged into all requests                                             |
 | `queryParams`  | Query parameters appended to all request URLs                                           |
+| `apiMode`      | `responses` or `chat_completions` for every model, see [API Mode](#api-mode)            |
 
 #### Model Properties
 
 Each model entry (`agent`, `tasks`, `embeddings`) supports these fields in addition to inheriting from `defaults`:
 
-| Field          | Description                                                     |
-| -------------- | --------------------------------------------------------------- |
-| `model`        | Model identifier sent in the API request body (e.g., `gpt-5.2`) |
-| `url`          | Custom endpoint URL (overrides `defaults.url`)                  |
-| `apiKey`       | API key for this model (overrides `defaults.apiKey`)            |
-| `secretRef`    | K8s secret name (overrides `defaults.secretRef`)                |
-| `secretRefKey` | Key within the secret (overrides `defaults.secretRefKey`)       |
-| `extraHeaders` | Extra HTTP headers (replaces `defaults.extraHeaders` if set)    |
-| `queryParams`  | Query parameters (replaces `defaults.queryParams` if set)       |
-| `temperature`  | Temperature setting — agent and tasks only                      |
-| `label`        | Human-readable name for the UI dropdown — agent only            |
-| `default`      | Mark which agent model is the default — agent only              |
+| Field                    | Description                                                                                                   |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| `model`                  | Model identifier sent in the API request body (e.g., `gpt-5.2`)                                               |
+| `url`                    | Custom endpoint URL (overrides `defaults.url`)                                                                |
+| `apiKey`                 | API key for this model (overrides `defaults.apiKey`)                                                          |
+| `secretRef`              | K8s secret name (overrides `defaults.secretRef`)                                                              |
+| `secretRefKey`           | Key within the secret (overrides `defaults.secretRefKey`)                                                     |
+| `extraHeaders`           | Extra HTTP headers (replaces `defaults.extraHeaders` if set)                                                  |
+| `queryParams`            | Query parameters (replaces `defaults.queryParams` if set)                                                     |
+| `temperature`            | Temperature setting — agent and tasks only                                                                    |
+| `label`                  | Human-readable name for the UI dropdown — agent only                                                          |
+| `default`                | Mark which agent model is the default — agent only                                                            |
+| `defaultReasoningEffort` | Thinking level used unless the user picks one — agent and tasks only. See [Thinking Levels](#thinking-levels) |
+| `reasoningEfforts`       | Thinking levels users may pick in the dashboard, in dropdown order — agent only                               |
+| `apiMode`                | `responses` or `chat_completions`; overrides `defaults.apiMode` — agent and tasks only                        |
 
 :::info Override Semantics
 Per-model `extraHeaders` and `queryParams` **replace** the defaults entirely (not merged key-by-key). If you need both default and model-specific headers, repeat the shared ones in the per-model block.
@@ -283,6 +294,115 @@ License changes take up to an hour to take effect, in both directions, so access
 converted license or lag behind a renewal.
 
 The proxy also has usage limits and is not recommended for production workloads.
+:::
+
+### Thinking Levels
+
+Reasoning models accept a thinking level (OpenAI's `reasoning_effort`): `none`, `minimal`, `low`, `medium`, `high`, `xhigh` or `max`.
+Check which values your model accepts.
+
+- `defaultReasoningEffort` sets the level the AI service uses when the user does not pick one.
+- `reasoningEfforts` lists the levels users may pick. The dashboard shows a thinking level dropdown next to the model dropdown, in AI Chats and in AI Test Authoring, only for models that list one.
+  The order in the list is the order in the dropdown. If `defaultReasoningEffort` is not in the list, the first listed level becomes the default.
+- Omit `reasoningEfforts` to keep the level fixed at `defaultReasoningEffort`.
+
+```yaml
+testkube-ai-service:
+  inference:
+    agent:
+      - model: gpt-5.2
+        default: true
+      - model: gpt-5.6-sol
+        label: "GPT-5.6 Sol"
+        defaultReasoningEffort: medium
+        reasoningEfforts: [low, medium, high]
+      - model: gpt-6-astra
+        label: "GPT-6 Astra"
+        defaultReasoningEffort: high
+```
+
+### API Mode
+
+`apiMode` selects the endpoint the AI service calls for a model: `chat_completions` (`/v1/chat/completions`) or `responses` (`/v1/responses`).
+Set it under `defaults` for every model and override it per model.
+
+The AI service picks the endpoint in this order:
+
+1. The model's own `apiMode`, when set. This is the only way to force Chat Completions on a model that needs the Responses API.
+2. `responses` for models that cannot work on Chat Completions (listed below), even when `defaults.apiMode` is `chat_completions`.
+3. `defaults.apiMode`, when set.
+4. `chat_completions`, today's default.
+
+Models that switch to the Responses API automatically:
+
+- Any model with a thinking level configured (`defaultReasoningEffort` or `reasoningEfforts`). Since GPT-5.4, OpenAI only accepts tool calls with a reasoning effort on `/v1/responses`.
+- OpenAI `gpt-5.6-*` models (Sol, Luna, Terra) and `gpt-6-*` models (Astra).
+
+#### Models that require `apiMode: responses`
+
+OpenAI serves some models only on `/v1/responses`. The AI service does not detect these by name, so set `apiMode: responses` on them explicitly:
+
+| Model family                                            | Example identifiers                                   |
+| ------------------------------------------------------- | ----------------------------------------------------- |
+| Codex models                                            | `gpt-5.3-codex`, `gpt-5-codex`, `codex-mini-latest`   |
+| Pro reasoning models                                    | `gpt-5.2-pro`, `gpt-5.4-pro`, `gpt-5.5-pro`, `o3-pro` |
+| Any model that returns `only supported in v1/responses` | Check the error returned by your provider             |
+
+Most proxies and local servers serve `/v1/responses` today, including LiteLLM, vLLM, Ollama, LM Studio, OpenRouter and Azure OpenAI.
+If yours does not, keep `apiMode: chat_completions` for the models behind it.
+
+#### Examples
+
+Pin today's behaviour for every model (recommended before upgrading). Sol still uses the Responses API because it has thinking levels:
+
+```yaml
+testkube-ai-service:
+  inference:
+    defaults:
+      apiMode: chat_completions
+    agent:
+      - model: gpt-5.2
+        default: true
+      - model: gpt-5.6-sol
+        defaultReasoningEffort: medium
+        reasoningEfforts: [low, medium, high]
+```
+
+Opt in to the Responses API for all models, except one served by a proxy without `/v1/responses`:
+
+```yaml
+testkube-ai-service:
+  inference:
+    defaults:
+      apiMode: responses
+    agent:
+      - model: gpt-5.2
+        default: true
+      - model: gpt-6-astra
+        defaultReasoningEffort: high
+      - model: my-proxy/llama-3.3-70b
+        url: https://proxy.internal/v1
+        apiMode: chat_completions
+```
+
+Add a Responses-only model while keeping the Chat Completions default:
+
+```yaml
+testkube-ai-service:
+  inference:
+    agent:
+      - model: gpt-5.2
+        default: true
+      - model: gpt-5.3-codex
+        label: "GPT-5.3 Codex"
+        apiMode: responses
+```
+
+:::warning Default change ahead
+OpenAI recommends the Responses API for all new projects, and the unset default will become `responses` in a later Testkube release.
+The AI service logs a warning at startup while `defaults.apiMode` is unset.
+Set `defaults.apiMode: chat_completions` to keep today's behaviour, or `responses` to opt in now.
+Models that need the Responses API keep using it either way.
 :::
 
 ### Disabling Embeddings
