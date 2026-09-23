@@ -60,22 +60,25 @@ spec:
 
 `execution()` returns a map:
 
-| Field          | Description                                                                   |
-| -------------- | ----------------------------------------------------------------------------- |
-| `id`           | Execution ID                                                                  |
-| `name`         | Execution name                                                                |
-| `workflow`     | Name of the Workflow that ran                                                 |
-| `alias`        | The `as` value, empty when not aliased                                        |
-| `index`        | Position within a matrix, shard or `count` fan-out, `0` when single           |
-| `status`       | Final status                                                                  |
-| `outputs`      | Map of the values the execution published                                     |
-| `errorMessage` | Message of the initialization step, empty when it has none                    |
-| `errorReason`  | Reason code of the initialization step, empty when it has none                |
-| `stepErrors`   | Map of the step messages, keyed by step reference                             |
-| `stepReasons`  | Map of the step reason codes, keyed by step reference                         |
-| `stepAttempts` | Map of the number of attempts per step, for the steps that ran more than once |
+| Field          | Description                                                                                 |
+| -------------- | ------------------------------------------------------------------------------------------- |
+| `id`           | Execution ID                                                                                |
+| `name`         | Execution name                                                                              |
+| `workflow`     | Name of the Workflow that ran                                                               |
+| `alias`        | The `as` value, empty when not aliased                                                      |
+| `index`        | Position within a matrix, shard or `count` fan-out, `0` when single                         |
+| `status`       | Final status                                                                                |
+| `outputs`      | Map of the values the execution published                                                   |
+| `errorMessage` | Message of the initialization step, empty when it has none                                  |
+| `errorReason`  | Reason code of the initialization step, empty when it has none                              |
+| `stepErrors`   | Map of the step messages, keyed by step reference                                           |
+| `stepReasons`  | Map of the step reason codes, keyed by step reference                                       |
+| `stepAttempts` | Map of the number of attempts per step, for the steps that ran more than once               |
+| `statusType`   | The type of the status details, for example `init-failure`. Empty when the execution passed |
+| `statusReason` | The reason code of the status details, for example `unschedulable`                          |
+| `statusStep`   | The reference of the step that holds the cause, empty for the initialization step           |
 
-The error fields tell a suite why a child execution failed. The [reason codes](/articles/test-workflows-failure-reasons) do not change between versions, while the message is text for people. So an assert compares the code when the failure has one:
+The error fields tell a suite why a child execution failed. The [reason codes](/articles/test-workflows-failure-reasons) do not change between versions, while the message is text for people. So an assert compares the code when the failure has one. The [status details](/articles/test-workflows-failure-reasons#the-status-details-of-an-execution) give the same answer for every failure, in three fields:
 
 ```yaml
 - name: Check why the child failed
