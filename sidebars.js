@@ -331,6 +331,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Dependency Caching",
+              id: "articles/test-workflows-dependency-cache",
+            },
+            {
+              type: "doc",
               label: "Expression Language",
               id: "articles/test-workflows-expressions",
             },
