@@ -86,7 +86,7 @@ Once you've set up the Testkube MCP Server, configure your AI tools:
 
 ## Available Tools
 
-The MCP server provides 30 tools for comprehensive Testkube management:
+The MCP server provides tools for comprehensive Testkube management:
 
 ### Workflow Management
 
@@ -136,6 +136,26 @@ The MCP server provides 30 tools for comprehensive Testkube management:
 - `get_workflow_schema` - Get the YAML schema for TestWorkflow definitions
 - `get_execution_schema` - Get the YAML schema for TestWorkflowExecution data
 
+### Insights Boards
+
+Create, view and update [Insights boards](/articles/test-insights). Boards belong to the organization rather than to one environment, and a report narrows itself to environments through its own filters.
+
+- `list_boards` - List the boards visible to you (shared and private)
+- `get_board` - Get a board with its reports and layout
+- `create_board` - Create an empty board, shared with the organization by default
+- `update_board` - Change a board's name, description, slug, visibility or layout
+- `add_board_report` - Add a Pass/Fail, Executions, Workflows or Time Series report
+- `update_board_report` - Change a report's name, description, kind or settings
+- `remove_board_report` - Remove a report from a board
+- `delete_board` - Delete a board and all of its reports
+- `render_board` - Return the numbers each report shows. By default every report uses its own environment filter, as in the Dashboard; set `scope` to `environment` to limit every report to the MCP session's environment
+
+:::note
+Board tools require a signed-in user. They work with the hosted MCP endpoint when you connect with your user account, and with the CLI after `testkube login`. They do not work with an API token, including an API token passed to the Docker container as `TK_ACCESS_TOKEN`.
+:::
+
+Deleting a shared board requires the organization admin role, as it does in the Dashboard.
+
 ### Utility Tools
 
 - `build_dashboard_url` - Generate dashboard URLs
@@ -164,6 +184,10 @@ Show me test execution trends for the past week and identify failing patterns
 
 ```text
 Analyze the logs of execution "api-tests-123" and suggest fixes
+```
+
+```text
+Create an Insights board with the pass/fail ratio and average duration of my API workflows over the last month
 ```
 
 ## Need Help?
