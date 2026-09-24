@@ -156,7 +156,7 @@ Board tools require a signed-in user. They work with the hosted MCP endpoint whe
 
 Deleting a shared board requires the organization admin role, as it does in the Dashboard.
 
-Board changes made through MCP never overwrite a change someone else made in the meantime. Each change is applied only to the version of the board the tool read. If the board changed first, for example because someone edited it in the Dashboard, the tool reads it again and reapplies your change on top, and it reports an error without changing anything if the board keeps changing. This needs a Control Plane that tracks board versions; with an older one, a change overwrites the board as it was read.
+Changes to a board made through MCP never overwrite a change someone else made in the meantime. Each change is applied only to the version of the board the tool read. If the board changed first, for example because someone edited it in the Dashboard, the tool reads it again and reapplies your change on top, and it reports an error without changing anything if the board keeps changing. This needs a Control Plane that tracks board versions; with an older one, a change overwrites the board as it was read. Deleting a board is different: it removes the board and everything on it, including changes made since the tool read it, as deleting in the Dashboard does.
 
 ### Utility Tools
 
