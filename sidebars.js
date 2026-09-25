@@ -96,6 +96,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "MongoDB to PostgreSQL Migration (Standalone Agent)",
+              id: "articles/install/mongo-to-postgres-migration",
+            },
+            {
+              type: "doc",
               label: "Switching to Cloud",
               id: "articles/install/oss-to-cloud",
             },
