@@ -79,6 +79,8 @@ results or use specialized models for different tasks.
 
 ## Further Reading
 
+- [Alternative Model Providers](/articles/ai-model-proxies) — Connect Claude through LiteLLM or serve local models with vLLM
+
 - [AI Configuration Reference](/articles/ai-configuration) — Helm-based model configuration for On-Prem installations
 - [AI Assistant Overview](/articles/ai-assistant-overview) — Using the AI Assistant in the Dashboard
 - [AI Agents Overview](/articles/ai-agents) — Creating and managing AI Agents
