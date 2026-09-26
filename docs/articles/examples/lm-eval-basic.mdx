@@ -1,0 +1,23 @@
+import SimpleLmEval from "../../workflows/simple-lm-eval-workflow.md"
+
+# Basic LM Evaluation Harness Example
+
+The [LM Evaluation Harness](https://github.com/EleutherAI/lm-evaluation-harness) from EleutherAI is the
+de-facto standard for benchmarking language models against academic tasks (it powers the Open LLM Leaderboard).
+The Workflow below runs a small slice of the `gsm8k` math benchmark against an OpenAI model through the
+harness's API model interface and uploads the results as artifacts.
+You can paste this directly into the YAML of an existing or new Workflow, just make sure to update the
+`name` and `namespace` for your environment if needed.
+
+- The `spec.container` property defines the working directory, Python image, and environment variables for the
+  Workflow; the `OPENAI_API_KEY` is resolved using the [credential](/articles/credential-management) expression
+  so the key is never stored in the Workflow definition itself.
+- The **"Install and run lm-eval"** step installs the harness with API support and runs the `gsm8k` task,
+  limited to 5 samples to keep the example fast and inexpensive - remove the `--limit` flag for a full benchmark run.
+- The **"Save results"** step uploads the JSON result files as artifacts; the `always` condition makes sure the
+  results are uploaded even if the benchmark fails.
+
+<SimpleLmEval/>
+
+After execution, the benchmark scores are shown in the Log Output tab, and the result files are available
+under the Artifacts tab of the execution.

@@ -1,0 +1,27 @@
+import ParallelDeepEval from "../../workflows/parallel-deepeval-workflow.md"
+
+# DeepEval Example - Comparing Models in Parallel
+
+[DeepEval](https://deepeval.com/) is an open-source LLM evaluation framework that integrates with pytest,
+making it a natural fit for treating LLM evaluations as regular tests. The Workflow below runs the same
+DeepEval test suite against three different OpenAI models in parallel using a
+[matrix](/articles/test-workflows-matrix-and-sharding), and ingests the generated JUnit reports so each
+model's results show up as structured test results in Testkube.
+You can paste this directly into the YAML of an existing or new Workflow, just make sure to update the
+`name` and `namespace` for your environment if needed.
+
+- The `spec.content` property checks out the DeepEval test suite from GitHub.
+- The `spec.container` property defines the working directory, Python image, and environment variables for the
+  Workflow; the `OPENAI_API_KEY` is resolved using the [credential](/articles/credential-management) expression
+  so the key is never stored in the Workflow definition itself.
+- The **"Run tests"** step uses `parallel.matrix` to fan out three executions - one per model - each with the
+  `OPENAI_MODEL_NAME` environment variable set to the corresponding matrix value.
+- Each parallel execution installs DeepEval, runs the test suite, and uploads the generated JUnit XML report
+  as an artifact, which Testkube automatically picks up as test results.
+- The `job.activeDeadlineSeconds` property puts an upper bound on the total execution time.
+
+<ParallelDeepEval/>
+
+After execution, each parallel run is shown separately in the execution view with its own log output, and the
+JUnit reports give a per-model breakdown of which evaluations passed or failed - making it easy to compare
+how different models perform against the same quality criteria.
