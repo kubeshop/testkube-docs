@@ -56,8 +56,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.929%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>59th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.159%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>66th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -73,8 +73,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.6-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.6-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.243%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.325%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -91,7 +91,7 @@ FROM alpine:3.23.3
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.221%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -107,8 +107,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.607%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.203%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -124,8 +124,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>3.566%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>89th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>2.167%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>81st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -141,8 +141,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.804%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>55th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.701%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -158,8 +158,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.6-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.6-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.671%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.943%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>59th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -175,8 +175,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.707%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.973%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>60th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -192,8 +192,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.350%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>70th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.823%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>78th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -209,8 +209,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.480%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.778%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -226,8 +226,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.676%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.009%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>62nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -243,8 +243,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.524%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>43rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.311%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>69th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -260,8 +260,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.704%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.395%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -277,8 +277,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.165%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>66th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.778%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -294,8 +294,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.049%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>63rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.778%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -311,8 +311,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.025%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>62nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.311%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>69th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -328,8 +328,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.6-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.6-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.030%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>62nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.448%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>36th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -345,8 +345,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.6-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.6-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.805%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>55th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>2.435%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>84th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -362,8 +362,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.6-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.6-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.805%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>55th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>2.435%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>84th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -379,8 +379,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.6-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.6-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.885%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>58th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>2.501%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>84th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -396,8 +396,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.481%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>73rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.537%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>74th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -413,8 +413,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.984%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>61st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.021%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>62nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -431,7 +431,7 @@ FROM alpine:3.23.3
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.729%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>53rd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -447,8 +447,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.235%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.182%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -464,8 +464,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.6-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.6-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.435%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>37th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.489%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -481,8 +481,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.495%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.560%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -498,8 +498,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.557%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.426%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -515,8 +515,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.060%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>63rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.110%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>64th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -532,8 +532,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.401%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.239%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -549,8 +549,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.439%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.236%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -566,8 +566,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.503%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.258%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -583,8 +583,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.580%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.295%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -613,8 +613,8 @@ COPY --from=deps /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0-0<br/><1.25.7</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.7</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.778%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.856%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -630,8 +630,8 @@ During session resumption in crypto/tls, if the underlying Config has its Client
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.13</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.13</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.692%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -649,8 +649,8 @@ This behavior can lead to privilege escalation in programs using the idna packag
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.12</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.232%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.182%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -669,7 +669,7 @@ For example, 'root.Open("symlink/")' will open "symlink" even when "symlink" is 
 <tr><td>Affected range</td><td><code>&lt;1.25.13</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.13</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -686,7 +686,7 @@ Handshake messages, such as KeyUpdate, are always considered as state-advancing,
 <tr><td>Affected range</td><td><code>&lt;1.25.13</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.13</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -703,7 +703,7 @@ Previously, DecodeElement would reset the depth counter causing it to never fire
 <tr><td>Affected range</td><td><code>&lt;1.25.13</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.13</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -720,7 +720,7 @@ When a server is configured to support unencrypted HTTP/2, it reads a few bytes 
 <tr><td>Affected range</td><td><code>&lt;1.25.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.11</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.560%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -753,7 +753,7 @@ Pathological inputs could cause DoS through consumePhrase when parsing an email 
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.588%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.620%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
 </table>
 
@@ -770,8 +770,8 @@ The Dial and LookupPort functions panic on Windows when provided with an input c
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.784%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>55th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.868%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -788,7 +788,7 @@ Well-crafted inputs reaching ParseAddress, ParseAddressList, and ParseDate were 
 <tr><td>Affected range</td><td><code>&lt;1.25.13</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.13</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -804,8 +804,8 @@ Enforce a recursion limit in Unmarshal to prevent stack exhaustion when parsing 
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.781%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>55th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.868%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -821,8 +821,8 @@ When processing HTTP/2 SETTINGS frames, transport will enter an infinite loop of
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.813%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>56th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.878%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -838,8 +838,8 @@ When using LookupCNAME with the cgo DNS resolver, a very long CNAME response can
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.621%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.670%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -857,8 +857,8 @@ This only affects TLS 1.3.
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.355%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.372%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -876,8 +876,8 @@ This only affects validation of otherwise trusted certificate chains, issued by 
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.615%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.704%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -893,8 +893,8 @@ During chain building, the amount of work that is done is not correctly limited 
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.8</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.728%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>53rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.803%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>55th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -910,8 +910,8 @@ url.Parse insufficiently validated the host/authority component and accepted som
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.11</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.591%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.573%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -929,8 +929,8 @@ With a large DNS SAN list, verification costs scaled quadratically based on the 
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.292%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.171%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -949,7 +949,7 @@ The Linux fchmodat syscall silently ignores the AT_SYMLINK_NOFOLLOW flag, which 
 <tr><td>Affected range</td><td><code>&lt;1.25.13</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.13</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.310%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -965,7 +965,7 @@ Previously, pathological inputs could close an unescaped '/' early, allowing for
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.371%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.393%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
 </table>
 
@@ -982,8 +982,8 @@ If a trusted template author were to write a <script> tag containing an empty 't
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.314%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.333%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -999,8 +999,8 @@ CVE-2026-27142 fixed a vulnerability in which URLs were not correctly escaped in
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.290%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.333%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1018,8 +1018,8 @@ These issues could cause actions within JS template literals to be incorrectly o
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.8</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.328%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>26th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.333%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1037,8 +1037,8 @@ A new GODEBUG setting has been added, htmlmetacontenturlescape, which can be use
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.13</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.13</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.518%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>43rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.550%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1056,8 +1056,8 @@ Now, path resolution operates on a byte buffer using index-based backtracking fo
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.290%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.182%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1073,8 +1073,8 @@ tar.Reader can allocate an unbounded amount of memory when reading a maliciously
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.11</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.370%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.412%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1090,8 +1090,8 @@ When returning errors, functions in the net/textproto package would include its 
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.12</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.382%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.413%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1107,7 +1107,7 @@ Handshakes which used Encrypted Client Hello could be de-anonymized by a passive
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.390%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.413%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
 </table>
 
@@ -1128,8 +1128,8 @@ For example, the query "a1=x&a2=x&...&a10000=x&hidden=y" can forward the paramet
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.8</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.8</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.201%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.114%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1187,7 +1187,7 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.2.5-r23</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.2.5-r23</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.166%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.171%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
@@ -1204,8 +1204,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.2.5-r22</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.2.5-r22</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.236%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.160%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1261,8 +1261,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.3.2-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.3.2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.424%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>36th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.419%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1278,8 +1278,8 @@ FROM alpine:3.23.3
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.3.2-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.3.2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.227%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.187%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1336,7 +1336,7 @@ FROM alpine:3.23.3
 <tr><td>Affected range</td><td><code>&lt;=1.37.0-r30</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.291%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1365,8 +1365,8 @@ COPY --from=deps /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.114%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.158%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

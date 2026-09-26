@@ -29,8 +29,8 @@ FROM nats:2.14.3-alpine
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.929%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>59th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.159%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>66th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -47,7 +47,7 @@ FROM nats:2.14.3-alpine
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.221%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -63,8 +63,8 @@ FROM nats:2.14.3-alpine
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.350%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>70th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.823%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>78th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -80,8 +80,8 @@ FROM nats:2.14.3-alpine
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.480%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.778%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -97,8 +97,8 @@ FROM nats:2.14.3-alpine
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.676%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.009%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>62nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -114,8 +114,8 @@ FROM nats:2.14.3-alpine
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.524%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>43rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.311%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>69th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -131,8 +131,8 @@ FROM nats:2.14.3-alpine
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.481%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>73rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.537%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>74th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -148,8 +148,8 @@ FROM nats:2.14.3-alpine
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.984%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>61st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.021%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>62nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -166,7 +166,7 @@ FROM nats:2.14.3-alpine
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.729%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>53rd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -182,8 +182,8 @@ FROM nats:2.14.3-alpine
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.495%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.560%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -212,8 +212,8 @@ FROM nats:2.14.3-alpine
 <table>
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.692%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -231,8 +231,8 @@ This behavior can lead to privilege escalation in programs using the idna packag
 <table>
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.5</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.5</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.232%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.182%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -251,7 +251,7 @@ For example, 'root.Open("symlink/")' will open "symlink" even when "symlink" is 
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -268,7 +268,7 @@ Handshake messages, such as KeyUpdate, are always considered as state-advancing,
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -285,7 +285,7 @@ Previously, DecodeElement would reset the depth counter causing it to never fire
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -301,8 +301,8 @@ When a server is configured to support unencrypted HTTP/2, it reads a few bytes 
 <table>
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.549%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.630%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -319,7 +319,7 @@ Parsing an invalid SVCB or HTTPS RR can panic when the size of a parameter value
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -336,7 +336,7 @@ Enforce a recursion limit in Unmarshal to prevent stack exhaustion when parsing 
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.310%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -352,8 +352,8 @@ Previously, pathological inputs could close an unescaped '/' early, allowing for
 <table>
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.518%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>43rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.550%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -371,8 +371,8 @@ Now, path resolution operates on a byte buffer using index-based backtracking fo
 <table>
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.5</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.5</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.382%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.413%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -401,8 +401,8 @@ FROM nats:2.14.3-alpine
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.315%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -420,8 +420,8 @@ Now, we add an atomic established state, set when a channel becomes usable. Unti
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.378%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.620%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -439,8 +439,8 @@ Now, we handle all RFC 4254 channel messages; global requests are handled explic
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.325%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>26th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.574%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -487,7 +487,7 @@ FROM nats:2.14.3-alpine
 <tr><td>Affected range</td><td><code>&lt;=1.37.0-r20</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.291%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
