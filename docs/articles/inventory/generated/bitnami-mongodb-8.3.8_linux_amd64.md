@@ -32,7 +32,7 @@ FROM mongo:8.3.8
 <tr><td>CVSS Score</td><td><code>10</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:L</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.602%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -146,7 +146,7 @@ The Verify() method for FIDO/U2F security key types (sk-ecdsa-sha2-nistp256@<!--
 <tr><td>CVSS Score</td><td><code>9.1</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:H</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.621%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -162,8 +162,8 @@ A malicious SSH peer could send unsolicited global request responses to fill an 
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.431%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -181,8 +181,8 @@ Now, we add an atomic established state, set when a channel becomes usable. Unti
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.620%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -200,8 +200,8 @@ Now, we handle all RFC 4254 channel messages; global requests are handled explic
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.574%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.437%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -315,7 +315,7 @@ For certain crafted inputs, a 'ed25519.PrivateKey' was created by casting malfor
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.662%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -364,7 +364,7 @@ COPY --from=builder /usr/local/bin/mongo* /usr/local/bin/bsondump /usr/bin/
 <tr><td>CVSS Score</td><td><code>10</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:L</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.602%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -478,7 +478,7 @@ The Verify() method for FIDO/U2F security key types (sk-ecdsa-sha2-nistp256@<!--
 <tr><td>CVSS Score</td><td><code>9.1</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:H</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.621%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -494,8 +494,8 @@ A malicious SSH peer could send unsolicited global request responses to fill an 
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.431%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -513,8 +513,8 @@ Now, we add an atomic established state, set when a channel becomes usable. Unti
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.620%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -532,8 +532,8 @@ Now, we handle all RFC 4254 channel messages; global requests are handled explic
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.574%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.437%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -647,7 +647,7 @@ For certain crafted inputs, a 'ed25519.PrivateKey' was created by casting malfor
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.662%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -711,7 +711,7 @@ During session resumption in crypto/tls, if the underlying Config has its Client
 <tr><td>Affected range</td><td><code>&lt;1.25.13</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.13</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1007,8 +1007,8 @@ Within HostnameError.Error(), when constructing an error string, there is no lim
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.24.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.12</code></td></tr>
-<tr><td>EPSS Score</td><td><code>2.175%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>82nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>2.326%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>83rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1100,8 +1100,8 @@ This affects programs which validate arbitrary certificate chains.
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.11</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.573%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.591%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1119,8 +1119,8 @@ With a large DNS SAN list, verification costs scaled quadratically based on the 
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.24.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.12</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.683%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.749%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>53rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1352,8 +1352,8 @@ For example, the query "a1=x&a2=x&...&a10000=x&hidden=y" can forward the paramet
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.24.12</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.24.12</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.313%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.329%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1504,7 +1504,7 @@ FROM mongo:8.3.8
 <tr><td>Affected range</td><td><code>&lt;1.25.13</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.13</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1711,8 +1711,8 @@ When using LookupCNAME with the cgo DNS resolver, a very long CNAME response can
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.11</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.573%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.591%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1908,7 +1908,7 @@ RUN apt-get update && \
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2044,159 +2044,6 @@ Now, path resolution operates on a byte buffer using index-based backtracking fo
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 5" src="https://img.shields.io/badge/M-5-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.48.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/net@0.48.0</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (125:125)
-COPY --from=builder /usr/local/bin/mongo* /usr/local/bin/bsondump /usr/bin/
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-39821?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.55.0"><img alt="critical : CVE--2026--39821" src="https://img.shields.io/badge/CVE--2026--39821-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-The ToASCII and ToUnicode functions incorrectly accept Punycode-encoded labels that decode to an ASCII-only label. For example, ToUnicode("xn--example-.com") incorrectly returns the name "example.com" rather than an error.
-
-This behavior can lead to privilege escalation in programs using the idna package. For example, a program which performs privilege checks on the ASCII hostname may reject "example.com" but permit "xn--example-.com". If that program subsequently converts the ASCII hostname to Unicode, it will inadvertently permits access to the Unicode name "example.com".
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-46600?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.56.0"><img alt="high : CVE--2026--46600" src="https://img.shields.io/badge/CVE--2026--46600-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.630%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Parsing an invalid SVCB or HTTPS RR can panic when the size of a parameter value overflows the message buffer.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-33814?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.53.0"><img alt="high : CVE--2026--33814" src="https://img.shields.io/badge/CVE--2026--33814-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.53.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.53.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.868%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-When processing HTTP/2 SETTINGS frames, transport will enter an infinite loop of writing CONTINUATION frames if it receives a SETTINGS_MAX_FRAME_SIZE with a value of 0.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-25680?s=github&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.55.0"><img alt="medium 6.5: CVE--2026--25680" src="https://img.shields.io/badge/CVE--2026--25680-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Uncontrolled Resource Consumption</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.460%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>37th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-In Go Net (`golang.org/x/net`) before verion 0.55.0, parsing arbitrary HTML can consume excessive CPU time, possibly leading to denial of service.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-42506?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.55.0"><img alt="medium : CVE--2026--42506" src="https://img.shields.io/badge/CVE--2026--42506-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.333%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Parsing arbitrary HTML which is then rendered using Render can result in an unexpected HTML tree. This can be leveraged to execute XSS attacks in applications that attempt to sanitize input HTML before rendering.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-42502?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.55.0"><img alt="medium : CVE--2026--42502" src="https://img.shields.io/badge/CVE--2026--42502-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.223%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Parsing arbitrary HTML which is then rendered using Render can result in an unexpected HTML tree. This can be leveraged to execute XSS attacks in applications that attempt to sanitize input HTML before rendering.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-27136?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.55.0"><img alt="medium : CVE--2026--27136" src="https://img.shields.io/badge/CVE--2026--27136-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.223%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Parsing arbitrary HTML which is then rendered using Render can result in an unexpected HTML tree. This can be leveraged to execute XSS attacks in applications that attempt to sanitize input HTML before rendering.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-25681?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.55.0"><img alt="medium : CVE--2026--25681" src="https://img.shields.io/badge/CVE--2026--25681-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.223%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Parsing arbitrary HTML which is then rendered using Render can result in an unexpected HTML tree. This can be leveraged to execute XSS attacks in applications that attempt to sanitize input HTML before rendering.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 5" src="https://img.shields.io/badge/M-5-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.47.0</code> (golang)</summary>
 
 <small><code>pkg:golang/golang.org/x/net@0.47.0</code></small><br/>
@@ -2214,7 +2061,7 @@ FROM mongo:8.3.8
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2303,7 +2150,7 @@ Parsing arbitrary HTML which is then rendered using Render can result in an unex
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.223%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2320,7 +2167,7 @@ Parsing arbitrary HTML which is then rendered using Render can result in an unex
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.223%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2337,7 +2184,160 @@ Parsing arbitrary HTML which is then rendered using Render can result in an unex
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.223%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Parsing arbitrary HTML which is then rendered using Render can result in an unexpected HTML tree. This can be leveraged to execute XSS attacks in applications that attempt to sanitize input HTML before rendering.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 5" src="https://img.shields.io/badge/M-5-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.48.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/net@0.48.0</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (125:125)
+COPY --from=builder /usr/local/bin/mongo* /usr/local/bin/bsondump /usr/bin/
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-39821?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.55.0"><img alt="critical : CVE--2026--39821" src="https://img.shields.io/badge/CVE--2026--39821-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The ToASCII and ToUnicode functions incorrectly accept Punycode-encoded labels that decode to an ASCII-only label. For example, ToUnicode("xn--example-.com") incorrectly returns the name "example.com" rather than an error.
+
+This behavior can lead to privilege escalation in programs using the idna package. For example, a program which performs privilege checks on the ASCII hostname may reject "example.com" but permit "xn--example-.com". If that program subsequently converts the ASCII hostname to Unicode, it will inadvertently permits access to the Unicode name "example.com".
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-46600?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.56.0"><img alt="high : CVE--2026--46600" src="https://img.shields.io/badge/CVE--2026--46600-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.630%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Parsing an invalid SVCB or HTTPS RR can panic when the size of a parameter value overflows the message buffer.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-33814?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.53.0"><img alt="high : CVE--2026--33814" src="https://img.shields.io/badge/CVE--2026--33814-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.53.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.53.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.868%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+When processing HTTP/2 SETTINGS frames, transport will enter an infinite loop of writing CONTINUATION frames if it receives a SETTINGS_MAX_FRAME_SIZE with a value of 0.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-25680?s=github&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.55.0"><img alt="medium 6.5: CVE--2026--25680" src="https://img.shields.io/badge/CVE--2026--25680-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Uncontrolled Resource Consumption</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.460%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>37th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+In Go Net (`golang.org/x/net`) before verion 0.55.0, parsing arbitrary HTML can consume excessive CPU time, possibly leading to denial of service.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-42506?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.55.0"><img alt="medium : CVE--2026--42506" src="https://img.shields.io/badge/CVE--2026--42506-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.333%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Parsing arbitrary HTML which is then rendered using Render can result in an unexpected HTML tree. This can be leveraged to execute XSS attacks in applications that attempt to sanitize input HTML before rendering.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-42502?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.55.0"><img alt="medium : CVE--2026--42502" src="https://img.shields.io/badge/CVE--2026--42502-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.223%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Parsing arbitrary HTML which is then rendered using Render can result in an unexpected HTML tree. This can be leveraged to execute XSS attacks in applications that attempt to sanitize input HTML before rendering.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-27136?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.55.0"><img alt="medium : CVE--2026--27136" src="https://img.shields.io/badge/CVE--2026--27136-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.223%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Parsing arbitrary HTML which is then rendered using Render can result in an unexpected HTML tree. This can be leveraged to execute XSS attacks in applications that attempt to sanitize input HTML before rendering.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-25681?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.55.0"><img alt="medium : CVE--2026--25681" src="https://img.shields.io/badge/CVE--2026--25681-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.223%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2872,8 +2872,8 @@ RUN apt-get update && \
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.431%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2891,8 +2891,8 @@ Now, we add an atomic established state, set when a channel becomes usable. Unti
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.620%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2910,8 +2910,8 @@ Now, we handle all RFC 4254 channel messages; global requests are handled explic
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.574%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.437%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -3567,7 +3567,7 @@ IO::Uncompress::Unzip versions before 2.220 for Perl allow CPU exhaustion via pe
 <tr><td>Affected range</td><td><code>&lt;5.38.2-3.2ubuntu0.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>5.38.2-3.2ubuntu0.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.418%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -3699,7 +3699,7 @@ Converting crafted SHIFT_JISX0213 input to UCS-4 or the internal wide character 
 <tr><td>Affected range</td><td><code>&lt;2.39-0ubuntu8.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.39-0ubuntu8.9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.331%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -3774,115 +3774,6 @@ Calling strfmon and strfmon_l in the GNU C Library version 2.38 to 2.44 can writ
 <blockquote>
 
 Passing an effectively empty string to the `,ccs=` syntax extension of the mode argument in the `fopen` function in the GNU C Library version 2.45 or earlier may result in a heap buffer overflow when the mode string input to the function is attacker controlled.    This usage pattern is not seen in applications in common GNU/Linux distributions and applications that process user-supplied values for `ccs` should not pass them through without validation.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 6" src="https://img.shields.io/badge/M-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>util-linux</strong> <code>2.39.3-9ubuntu6.5</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/util-linux@2.39.3-9ubuntu6.5?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (57:57)
-FROM mongo:8.3.8
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-13595?s=ubuntu&n=util-linux&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C2.39.3-9ubuntu6.6"><img alt="medium 5.3: CVE--2026--13595" src="https://img.shields.io/badge/CVE--2026--13595-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.39.3-9ubuntu6.6</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.39.3-9ubuntu6.6</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:L/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.168%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A flaw was found in the libblkid library of util-linux. During nested partition probing, the BSD, Minix, Solaris x86, and UnixWare partition probers cache a raw pointer to a parent partition entry in a dynamically allocated array. When subsequent partition additions cause the array to be reallocated, this pointer becomes stale, leading to a heap use-after-free read. An attacker who can present a crafted block device image (for example, via USB insertion or a loop-mounted disk image) can trigger this flaw without user interaction, as libblkid is invoked automatically by udev/udisks as root on block-device hot-plug events. This could lead to limited information disclosure or denial of service.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-53615?s=ubuntu&n=util-linux&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C2.39.3-9ubuntu6.6"><img alt="medium : CVE--2026--53615" src="https://img.shields.io/badge/CVE--2026--53615-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.39.3-9ubuntu6.6</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.39.3-9ubuntu6.6</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-[Integer Overflow or Wraparound in libblkid/src/partitions/dos.c]
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-53614?s=ubuntu&n=util-linux&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C2.39.3-9ubuntu6.6"><img alt="medium : CVE--2026--53614" src="https://img.shields.io/badge/CVE--2026--53614-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.39.3-9ubuntu6.6</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.39.3-9ubuntu6.6</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-[Local Privilege Escalation via LIBMOUNT_FORCE_MOUNT2 Environment Variable - nosuid/noexec Bypass in SUID mount(8)]
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-53613?s=ubuntu&n=util-linux&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C2.39.3-9ubuntu6.6"><img alt="medium : CVE--2026--53613" src="https://img.shields.io/badge/CVE--2026--53613-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.39.3-9ubuntu6.6</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.39.3-9ubuntu6.6</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-[Local Privilege Escalation via TOCTOU in mount(8) - Target Path Redirection]
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-53612?s=ubuntu&n=util-linux&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C2.39.3-9ubuntu6.6"><img alt="medium : CVE--2026--53612" src="https://img.shields.io/badge/CVE--2026--53612-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.39.3-9ubuntu6.6</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.39.3-9ubuntu6.6</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-[Local Privilege Escalation via TOCTOU in mount(8) hook_owner.c chmod/chown]
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-27456?s=ubuntu&n=util-linux&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C2.39.3-9ubuntu6.6"><img alt="medium : CVE--2026--27456" src="https://img.shields.io/badge/CVE--2026--27456-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.39.3-9ubuntu6.6</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.39.3-9ubuntu6.6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.103%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-util-linux is a random collection of Linux utilities. Prior to version 2.41.4, a TOCTOU (Time-of-Check-Time-of-Use) vulnerability has been identified in the SUID binary /usr/bin/mount from util-linux. The mount binary, when setting up loop devices, validates the source file path with user privileges via fork() + setuid() + realpath(), but subsequently re-canonicalizes and opens it with root privileges (euid=0) without verifying that the path has not been replaced between both operations. Neither O_NOFOLLOW, nor inode comparison, nor post-open fstat() are employed. This allows a local unprivileged user to replace the source file with a symlink pointing to any root-owned file or device during the race window, causing the SUID binary to open and mount it as root. Exploitation requires an /etc/fstab entry with user,loop options whose path points to a directory where the attacker has write permission, and that /usr/bin/mount has the SUID bit set (the default configuration on virtually all Linux distributions). The impact is unauthorized read access to root-protected files and block devices, including backup images, disk volumes, and any file containing a valid filesystem. This issue has been patched in version 2.41.4.
 
 </blockquote>
 </details>
@@ -4010,6 +3901,115 @@ A flaw was found in libssh. A remote authenticated peer can advertise a zero max
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 6" src="https://img.shields.io/badge/M-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>util-linux</strong> <code>2.39.3-9ubuntu6.5</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/util-linux@2.39.3-9ubuntu6.5?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (57:57)
+FROM mongo:8.3.8
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-13595?s=ubuntu&n=util-linux&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C2.39.3-9ubuntu6.6"><img alt="medium 5.3: CVE--2026--13595" src="https://img.shields.io/badge/CVE--2026--13595-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.39.3-9ubuntu6.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.39.3-9ubuntu6.6</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:L/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.168%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A flaw was found in the libblkid library of util-linux. During nested partition probing, the BSD, Minix, Solaris x86, and UnixWare partition probers cache a raw pointer to a parent partition entry in a dynamically allocated array. When subsequent partition additions cause the array to be reallocated, this pointer becomes stale, leading to a heap use-after-free read. An attacker who can present a crafted block device image (for example, via USB insertion or a loop-mounted disk image) can trigger this flaw without user interaction, as libblkid is invoked automatically by udev/udisks as root on block-device hot-plug events. This could lead to limited information disclosure or denial of service.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-53615?s=ubuntu&n=util-linux&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C2.39.3-9ubuntu6.6"><img alt="medium : CVE--2026--53615" src="https://img.shields.io/badge/CVE--2026--53615-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.39.3-9ubuntu6.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.39.3-9ubuntu6.6</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+[Integer Overflow or Wraparound in libblkid/src/partitions/dos.c]
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-53614?s=ubuntu&n=util-linux&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C2.39.3-9ubuntu6.6"><img alt="medium : CVE--2026--53614" src="https://img.shields.io/badge/CVE--2026--53614-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.39.3-9ubuntu6.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.39.3-9ubuntu6.6</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+[Local Privilege Escalation via LIBMOUNT_FORCE_MOUNT2 Environment Variable - nosuid/noexec Bypass in SUID mount(8)]
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-53613?s=ubuntu&n=util-linux&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C2.39.3-9ubuntu6.6"><img alt="medium : CVE--2026--53613" src="https://img.shields.io/badge/CVE--2026--53613-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.39.3-9ubuntu6.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.39.3-9ubuntu6.6</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+[Local Privilege Escalation via TOCTOU in mount(8) - Target Path Redirection]
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-53612?s=ubuntu&n=util-linux&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C2.39.3-9ubuntu6.6"><img alt="medium : CVE--2026--53612" src="https://img.shields.io/badge/CVE--2026--53612-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.39.3-9ubuntu6.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.39.3-9ubuntu6.6</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+[Local Privilege Escalation via TOCTOU in mount(8) hook_owner.c chmod/chown]
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-27456?s=ubuntu&n=util-linux&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C2.39.3-9ubuntu6.6"><img alt="medium : CVE--2026--27456" src="https://img.shields.io/badge/CVE--2026--27456-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.39.3-9ubuntu6.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.39.3-9ubuntu6.6</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.118%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+util-linux is a random collection of Linux utilities. Prior to version 2.41.4, a TOCTOU (Time-of-Check-Time-of-Use) vulnerability has been identified in the SUID binary /usr/bin/mount from util-linux. The mount binary, when setting up loop devices, validates the source file path with user privileges via fork() + setuid() + realpath(), but subsequently re-canonicalizes and opens it with root privileges (euid=0) without verifying that the path has not been replaced between both operations. Neither O_NOFOLLOW, nor inode comparison, nor post-open fstat() are employed. This allows a local unprivileged user to replace the source file with a symlink pointing to any root-owned file or device during the race window, causing the SUID binary to open and mount it as root. Exploitation requires an /etc/fstab entry with user,loop options whose path points to a directory where the attacker has write permission, and that /usr/bin/mount has the SUID bit set (the default configuration on virtually all Linux distributions). The impact is unauthorized read access to root-protected files and block devices, including backup images, disk volumes, and any file containing a valid filesystem. This issue has been patched in version 2.41.4.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 5" src="https://img.shields.io/badge/M-5-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>curl</strong> <code>8.5.0-2ubuntu10.11</code> (deb)</summary>
 
 <small><code>pkg:deb/ubuntu/curl@8.5.0-2ubuntu10.11?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
@@ -4027,7 +4027,7 @@ FROM mongo:8.3.8
 <tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.15</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.15</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.517%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -4663,68 +4663,6 @@ zlib before 1.3.2 allows CPU consumption via crc32_combine64 and crc32_combine_g
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>attr</strong> <code>1:2.5.2-1build1.1</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/attr@1%3A2.5.2-1build1.1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (57:57)
-FROM mongo:8.3.8
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-54371?s=ubuntu&n=attr&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1%3A2.5.2-1ubuntu0.1"><img alt="medium : CVE--2026--54371" src="https://img.shields.io/badge/CVE--2026--54371-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1:2.5.2-1ubuntu0.1</code></td></tr>
-<tr><td>Fixed version</td><td><code>1:2.5.2-1ubuntu0.1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.179%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-attr before version 2.6.0 contains a symlink traversal vulnerability in the getfattr and setfattr utilities that allows local attackers to escalate privileges by replacing a pathname component with a symbolic link during directory hierarchy traversal. Attackers who control a pathname component can redirect getfattr and setfattr operations to arbitrary files by substituting a symlink, leading to local privilege escalation when getfattr or setfattr is invoked by a privileged process over an attacker-controlled path.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.mongodb.org/mongo-driver</strong> <code>1.17.3</code> (golang)</summary>
-
-<small><code>pkg:golang/go.mongodb.org/mongo-driver@1.17.3</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (125:125)
-COPY --from=builder /usr/local/bin/mongo* /usr/local/bin/bsondump /usr/bin/
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-2303?s=github&n=mongo-driver&ns=go.mongodb.org&t=golang&vr=%3C1.17.7"><img alt="medium 6.9: CVE--2026--2303" src="https://img.shields.io/badge/CVE--2026--2303-lightgrey?label=medium%206.9&labelColor=fbb552"/></a> <i>Permissive List of Allowed Inputs</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.17.7</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.17.7</code></td></tr>
-<tr><td>CVSS Score</td><td><code>6.9</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:P/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.232%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-The mongo-go-driver repository contains CGo bindings for GSSAPI (Kerberos) authentication on Linux and macOS. The C wrapper implementation contains a heap out-of-bounds read vulnerability due to incorrect assumptions about string termination in the GSSAPI standard. Since GSSAPI buffers are not guaranteed to be null-terminated or have extra padding, this results in reading one byte past the allocated heap buffer.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>sqlite3</strong> <code>3.45.1-1ubuntu2.7</code> (deb)</summary>
 
 <small><code>pkg:deb/ubuntu/sqlite3@3.45.1-1ubuntu2.7?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
@@ -4794,6 +4732,68 @@ Buffer Overflow vulnerability in SQLite affected version source snapshots/builds
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>diffutils</strong> <code>1:3.10-1build1</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/diffutils@1%3A3.10-1build1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (57:57)
+FROM mongo:8.3.8
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-53910?s=ubuntu&n=diffutils&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1%3A3.10-1ubuntu0.1"><img alt="medium : CVE--2026--53910" src="https://img.shields.io/badge/CVE--2026--53910-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1:3.10-1ubuntu0.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>1:3.10-1ubuntu0.1</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.332%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+diff3 tool from GNU diffutils is vulnerable to a heap‑based buffer overflow due to multiple signed integer overflows in line‑mapping calculations. Incorrect arithmetic in mapping line ranges can result in corrupted values being used for memory allocation and loop bounds. When processing crafted diff output, these overflows may cause the application to allocate insufficient memory and subsequently perform out‑of‑bounds writes during internal processing. An attacker who can control the output of the diff program used by diff3 (e.g. via --diff-program pointing to a malicious script) can trigger out-of-bounds writes, resulting in a crash and potentially remote code execution depending on the environment.   This issue has been fixed in commit 9ff04d5b84743e331e80b589335a52c5480d1815  NOTE: The project maintainers claim that this is not a security issue. They state that the worst outcome this issue can cause is a crash of diff and that it cannot be used to escalate privileges.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.mongodb.org/mongo-driver</strong> <code>1.17.3</code> (golang)</summary>
+
+<small><code>pkg:golang/go.mongodb.org/mongo-driver@1.17.3</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (125:125)
+COPY --from=builder /usr/local/bin/mongo* /usr/local/bin/bsondump /usr/bin/
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-2303?s=github&n=mongo-driver&ns=go.mongodb.org&t=golang&vr=%3C1.17.7"><img alt="medium 6.9: CVE--2026--2303" src="https://img.shields.io/badge/CVE--2026--2303-lightgrey?label=medium%206.9&labelColor=fbb552"/></a> <i>Permissive List of Allowed Inputs</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.17.7</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.17.7</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.9</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:P/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.232%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The mongo-go-driver repository contains CGo bindings for GSSAPI (Kerberos) authentication on Linux and macOS. The C wrapper implementation contains a heap out-of-bounds read vulnerability due to incorrect assumptions about string termination in the GSSAPI standard. Since GSSAPI buffers are not guaranteed to be null-terminated or have extra padding, this results in reading one byte past the allocated heap buffer.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>pcre2</strong> <code>10.42-4ubuntu2.1</code> (deb)</summary>
 
 <small><code>pkg:deb/ubuntu/pcre2@10.42-4ubuntu2.1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
@@ -4812,8 +4812,8 @@ FROM mongo:8.3.8
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>CVSS Score</td><td><code>7.8</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.176%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.126%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -4856,39 +4856,9 @@ It was discovered that dpkg-deb (a component of dpkg, the Debian package managem
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>diffutils</strong> <code>1:3.10-1build1</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>attr</strong> <code>1:2.5.2-1build1.1</code> (deb)</summary>
 
-<small><code>pkg:deb/ubuntu/diffutils@1%3A3.10-1build1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (57:57)
-FROM mongo:8.3.8
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-53910?s=ubuntu&n=diffutils&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1%3A3.10-1ubuntu0.1"><img alt="medium : CVE--2026--53910" src="https://img.shields.io/badge/CVE--2026--53910-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1:3.10-1ubuntu0.1</code></td></tr>
-<tr><td>Fixed version</td><td><code>1:3.10-1ubuntu0.1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.332%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-diff3 tool from GNU diffutils is vulnerable to a heap‑based buffer overflow due to multiple signed integer overflows in line‑mapping calculations. Incorrect arithmetic in mapping line ranges can result in corrupted values being used for memory allocation and loop bounds. When processing crafted diff output, these overflows may cause the application to allocate insufficient memory and subsequently perform out‑of‑bounds writes during internal processing. An attacker who can control the output of the diff program used by diff3 (e.g. via --diff-program pointing to a malicious script) can trigger out-of-bounds writes, resulting in a crash and potentially remote code execution depending on the environment.   This issue has been fixed in commit 9ff04d5b84743e331e80b589335a52c5480d1815  NOTE: The project maintainers claim that this is not a security issue. They state that the worst outcome this issue can cause is a crash of diff and that it cannot be used to escalate privileges.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>shadow</strong> <code>1:4.13+dfsg1-4ubuntu3.2</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/shadow@1%3A4.13%2Bdfsg1-4ubuntu3.2?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+<small><code>pkg:deb/ubuntu/attr@1%3A2.5.2-1build1.1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
 
 ```dockerfile
 # mongo-8.dockerfile (57:57)
@@ -4897,109 +4867,19 @@ FROM mongo:8.3.8
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2024-56433?s=ubuntu&n=shadow&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="low : CVE--2024--56433" src="https://img.shields.io/badge/CVE--2024--56433-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-54371?s=ubuntu&n=attr&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1%3A2.5.2-1ubuntu0.1"><img alt="medium : CVE--2026--54371" src="https://img.shields.io/badge/CVE--2026--54371-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.423%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1:2.5.2-1ubuntu0.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>1:2.5.2-1ubuntu0.1</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.179%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-shadow-utils (aka shadow) 4.4 through 4.17.0 establishes a default /etc/subuid behavior (e.g., uid 100000 through 165535 for the first user account) that can realistically conflict with the uids of users defined on locally administered networks, potentially leading to account takeover, e.g., by leveraging newuidmap for access to an NFS home directory (or same-host resources in the case of remote logins by these local network users). NOTE: it may also be argued that system administrators should not have assigned uids, within local networks, that are within the range that can occur in /etc/subuid.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.40.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/sys@0.40.0</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (125:125)
-COPY --from=builder /usr/local/bin/mongo* /usr/local/bin/bsondump /usr/bin/
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.158%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.33.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/sys@0.33.0</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (132:132)
-RUN chmod -R g+rwX /opt/bitnami
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.158%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.38.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/sys@0.38.0</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (57:57)
-FROM mongo:8.3.8
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.158%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
+attr before version 2.6.0 contains a symlink traversal vulnerability in the getfattr and setfattr utilities that allows local attackers to escalate privileges by replacing a pathname component with a symbolic link during directory hierarchy traversal. Attackers who control a pathname component can redirect getfattr and setfattr operations to arbitrary files by substituting a symlink, leading to local privilege escalation when getfattr or setfattr is invoked by a privileged process over an attacker-controlled path.
 
 </blockquote>
 </details>
@@ -5036,39 +4916,39 @@ A vulnerability has been found in GNU ncurses up to 6.5-20250322 and classified 
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>bzip2</strong> <code>1.0.8-5.1build0.1</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.33.0</code> (golang)</summary>
 
-<small><code>pkg:deb/ubuntu/bzip2@1.0.8-5.1build0.1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+<small><code>pkg:golang/golang.org/x/sys@0.33.0</code></small><br/>
 
 ```dockerfile
-# mongo-8.dockerfile (57:57)
-FROM mongo:8.3.8
+# mongo-8.dockerfile (132:132)
+RUN chmod -R g+rwX /opt/bitnami
 ```
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2026-42250?s=ubuntu&n=bzip2&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1.0.8-5.1ubuntu0.1"><img alt="low : CVE--2026--42250" src="https://img.shields.io/badge/CVE--2026--42250-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;1.0.8-5.1ubuntu0.1</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.0.8-5.1ubuntu0.1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.182%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.158%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-bzip2 contains an off‑by‑one error in the bzip2recover utility. When processing a specially crafted file, the application performs an out‑of‑bounds write to a global buffer, resulting in memory corruption and a crash (denial of service).  This issue was fixed in bzip2 patch 35d122a3df8b0cc4082a4d89fdc6ee99f375fe67
+NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
 
 </blockquote>
 </details>
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>coreutils</strong> <code>9.4-3ubuntu6.2</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>shadow</strong> <code>1:4.13+dfsg1-4ubuntu3.2</code> (deb)</summary>
 
-<small><code>pkg:deb/ubuntu/coreutils@9.4-3ubuntu6.2?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+<small><code>pkg:deb/ubuntu/shadow@1%3A4.13%2Bdfsg1-4ubuntu3.2?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
 
 ```dockerfile
 # mongo-8.dockerfile (57:57)
@@ -5077,19 +4957,19 @@ FROM mongo:8.3.8
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2025-5278?s=ubuntu&n=coreutils&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C9.4-3ubuntu6.3"><img alt="low : CVE--2025--5278" src="https://img.shields.io/badge/CVE--2025--5278-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2024-56433?s=ubuntu&n=shadow&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="low : CVE--2024--56433" src="https://img.shields.io/badge/CVE--2024--56433-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;9.4-3ubuntu6.3</code></td></tr>
-<tr><td>Fixed version</td><td><code>9.4-3ubuntu6.3</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.288%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.423%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-A flaw was found in GNU Coreutils. The sort utility's begfield() function is vulnerable to a heap buffer under-read. The program may access memory outside the allocated buffer if a user runs a crafted command using the traditional key format. A malicious input could lead to a crash or leak sensitive data.
+shadow-utils (aka shadow) 4.4 through 4.17.0 establishes a default /etc/subuid behavior (e.g., uid 100000 through 165535 for the first user account) that can realistically conflict with the uids of users defined on locally administered networks, potentially leading to account takeover, e.g., by leveraging newuidmap for access to an NFS home directory (or same-host resources in the case of remote logins by these local network users). NOTE: it may also be argued that system administrators should not have assigned uids, within local networks, that are within the range that can occur in /etc/subuid.
 
 </blockquote>
 </details>
@@ -5128,13 +5008,13 @@ In systemd 259, systemd-journald can send ANSI escape sequences to the terminals
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.1.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.40.0</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/sys@0.1.0</code></small><br/>
+<small><code>pkg:golang/golang.org/x/sys@0.40.0</code></small><br/>
 
 ```dockerfile
-# mongo-8.dockerfile (57:57)
-FROM mongo:8.3.8
+# mongo-8.dockerfile (125:125)
+COPY --from=builder /usr/local/bin/mongo* /usr/local/bin/bsondump /usr/bin/
 ```
 
 <br/>
@@ -5152,6 +5032,36 @@ FROM mongo:8.3.8
 <blockquote>
 
 NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>coreutils</strong> <code>9.4-3ubuntu6.2</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/coreutils@9.4-3ubuntu6.2?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (57:57)
+FROM mongo:8.3.8
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-5278?s=ubuntu&n=coreutils&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C9.4-3ubuntu6.3"><img alt="low : CVE--2025--5278" src="https://img.shields.io/badge/CVE--2025--5278-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;9.4-3ubuntu6.3</code></td></tr>
+<tr><td>Fixed version</td><td><code>9.4-3ubuntu6.3</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.288%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A flaw was found in GNU Coreutils. The sort utility's begfield() function is vulnerable to a heap buffer under-read. The program may access memory outside the allocated buffer if a user runs a crafted command using the traditional key format. A malicious input could lead to a crash or leak sensitive data.
 
 </blockquote>
 </details>
@@ -5218,39 +5128,9 @@ CMS (Cryptographic Message Syntax) parsing in gpgsm in GnuPG through 2.5.20 mish
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/text</strong> <code>0.33.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>bzip2</strong> <code>1.0.8-5.1build0.1</code> (deb)</summary>
 
-<small><code>pkg:golang/golang.org/x/text@0.33.0</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (125:125)
-COPY --from=builder /usr/local/bin/mongo* /usr/local/bin/bsondump /usr/bin/
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-56852?s=golang&n=text&ns=golang.org%2Fx&t=golang&vr=%3C0.39.0"><img alt="unspecified : CVE--2026--56852" src="https://img.shields.io/badge/CVE--2026--56852-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.39.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.39.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.475%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A norm.Iter can enter an infinite loop when handling input containing invalid UTF-8 bytes.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/text</strong> <code>0.31.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/text@0.31.0</code></small><br/>
+<small><code>pkg:deb/ubuntu/bzip2@1.0.8-5.1build0.1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
 
 ```dockerfile
 # mongo-8.dockerfile (57:57)
@@ -5259,19 +5139,79 @@ FROM mongo:8.3.8
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2026-56852?s=golang&n=text&ns=golang.org%2Fx&t=golang&vr=%3C0.39.0"><img alt="unspecified : CVE--2026--56852" src="https://img.shields.io/badge/CVE--2026--56852-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-42250?s=ubuntu&n=bzip2&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1.0.8-5.1ubuntu0.1"><img alt="low : CVE--2026--42250" src="https://img.shields.io/badge/CVE--2026--42250-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;0.39.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.39.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.475%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.0.8-5.1ubuntu0.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.0.8-5.1ubuntu0.1</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.182%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-A norm.Iter can enter an infinite loop when handling input containing invalid UTF-8 bytes.
+bzip2 contains an off‑by‑one error in the bzip2recover utility. When processing a specially crafted file, the application performs an out‑of‑bounds write to a global buffer, resulting in memory corruption and a crash (denial of service).  This issue was fixed in bzip2 patch 35d122a3df8b0cc4082a4d89fdc6ee99f375fe67
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.38.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/sys@0.38.0</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (57:57)
+FROM mongo:8.3.8
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.158%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.1.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/sys@0.1.0</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (57:57)
+FROM mongo:8.3.8
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.158%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
 
 </blockquote>
 </details>
@@ -5367,6 +5307,66 @@ RUN apt-get update && \
 <blockquote>
 
 Providing a specially crafted dictionary to s2.NewDict and using it to encode data can make the encoder read out of bounds.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/text</strong> <code>0.31.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/text@0.31.0</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (57:57)
+FROM mongo:8.3.8
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-56852?s=golang&n=text&ns=golang.org%2Fx&t=golang&vr=%3C0.39.0"><img alt="unspecified : CVE--2026--56852" src="https://img.shields.io/badge/CVE--2026--56852-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.39.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.39.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.475%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A norm.Iter can enter an infinite loop when handling input containing invalid UTF-8 bytes.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/text</strong> <code>0.33.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/text@0.33.0</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (125:125)
+COPY --from=builder /usr/local/bin/mongo* /usr/local/bin/bsondump /usr/bin/
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-56852?s=golang&n=text&ns=golang.org%2Fx&t=golang&vr=%3C0.39.0"><img alt="unspecified : CVE--2026--56852" src="https://img.shields.io/badge/CVE--2026--56852-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.39.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.39.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.475%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A norm.Iter can enter an infinite loop when handling input containing invalid UTF-8 bytes.
 
 </blockquote>
 </details>

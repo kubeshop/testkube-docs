@@ -240,7 +240,7 @@ COPY --from=deps /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

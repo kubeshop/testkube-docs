@@ -213,7 +213,7 @@ FROM nats:2.14.3-alpine
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -401,8 +401,8 @@ FROM nats:2.14.3-alpine
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.431%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -420,8 +420,8 @@ Now, we add an atomic established state, set when a channel becomes usable. Unti
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.620%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -439,8 +439,8 @@ Now, we handle all RFC 4254 channel messages; global requests are handled explic
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.574%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.437%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

@@ -235,7 +235,7 @@ RUN set -eux; \
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -409,8 +409,8 @@ RUN set -eux; \
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.431%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -428,8 +428,8 @@ Now, we add an atomic established state, set when a channel becomes usable. Unti
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.620%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

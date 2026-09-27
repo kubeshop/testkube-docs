@@ -213,8 +213,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.8.5-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.8.5-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.476%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.366%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -235,8 +235,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;=10.48-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.350%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>26th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.278%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -252,8 +252,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;=10.48-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.358%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.268%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -269,7 +269,7 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;=10.48-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.155%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.156%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
 </table>
 

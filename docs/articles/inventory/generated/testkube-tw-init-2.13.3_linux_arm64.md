@@ -29,8 +29,8 @@ COPY --from=build /app/testworkflow-init /init
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.431%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -48,8 +48,8 @@ Now, we add an atomic established state, set when a channel becomes usable. Unti
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.620%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -129,8 +129,8 @@ COPY --from=build /app/testworkflow-init /init
 <tr><td>Fixed version</td><td><code>1.83.2</code></td></tr>
 <tr><td>CVSS Score</td><td><code>8.7</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.715%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

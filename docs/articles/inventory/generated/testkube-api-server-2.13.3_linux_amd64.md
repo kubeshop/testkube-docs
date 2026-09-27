@@ -247,7 +247,7 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
 <tr><td>Affected range</td><td><code>&lt;8.22.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.22.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.517%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -393,8 +393,8 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.8.5-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.8.5-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.476%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.366%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -491,8 +491,8 @@ COPY --from=build /app /bin/app
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.431%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -510,8 +510,8 @@ Now, we add an atomic established state, set when a channel becomes usable. Unti
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.620%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -591,8 +591,8 @@ COPY --from=build /app /bin/app
 <tr><td>Fixed version</td><td><code>1.83.2</code></td></tr>
 <tr><td>CVSS Score</td><td><code>8.7</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.715%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -633,8 +633,8 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
 <table>
 <tr><td>Affected range</td><td><code>&lt;=10.48-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.350%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>26th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.278%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -650,8 +650,8 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
 <table>
 <tr><td>Affected range</td><td><code>&lt;=10.48-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.358%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.268%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -667,38 +667,8 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
 <table>
 <tr><td>Affected range</td><td><code>&lt;=10.48-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.155%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.156%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>nghttp2-libs</strong> <code>1.69.0-r0</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/nghttp2-libs@1.69.0-r0?arch=x86_64&distro=alpine-3.24.1&upstream=nghttp2</code></small><br/>
-
-```dockerfile
-# api-server.Dockerfile (34:34)
-RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-58055?s=alpine&n=nghttp2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.70.0-r0"><img alt="unspecified : CVE--2026--58055" src="https://img.shields.io/badge/CVE--2026--58055-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.70.0-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.70.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.319%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -733,6 +703,36 @@ COPY --from=build /app /bin/app
 <blockquote>
 
 In github.com/chrismellard/docker-credential-acr-env/pkg/credhelper, the regular expression used by isACRRegistry to validate Azure Container Registry hostnames is unanchored. As a result, arbitrary hostnames containing the substring ".azurecr.io" (such as evil.azurecr.io.attacker.com) are treated as valid ACR registries, causing ACRCredHelper.Get to send the Azure Active Directory (AAD) access token to attacker-controlled hosts.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>nghttp2-libs</strong> <code>1.69.0-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/nghttp2-libs@1.69.0-r0?arch=x86_64&distro=alpine-3.24.1&upstream=nghttp2</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (34:34)
+RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-58055?s=alpine&n=nghttp2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.70.0-r0"><img alt="unspecified : CVE--2026--58055" src="https://img.shields.io/badge/CVE--2026--58055-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.70.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.70.0-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.319%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
 
 </blockquote>
 </details>

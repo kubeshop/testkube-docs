@@ -247,7 +247,7 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git ope
 <tr><td>Affected range</td><td><code>&lt;8.22.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.22.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.517%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -393,8 +393,8 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git ope
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.8.5-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.8.5-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.476%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.366%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -491,8 +491,8 @@ COPY --from=build /app/testworkflow-init /init
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.431%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -510,8 +510,8 @@ Now, we add an atomic established state, set when a channel becomes usable. Unti
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.620%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -537,6 +537,50 @@ Now, we handle all RFC 4254 channel messages; global requests are handled explic
 The golang.org/x/crypto/openpgp package is unsafe by design, has numerous known security issues, is not maintained, and should not be used.
 
 If you are required to interoperate with OpenPGP systems and need a maintained package, consider github.com/ProtonMail/go-crypto/openpgp which is a maintained fork that aims to be a drop-in replacement for this package.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/grpc</strong> <code>1.83.1</code> (golang)</summary>
+
+<small><code>pkg:golang/google.golang.org/grpc@1.83.1</code></small><br/>
+
+```dockerfile
+# tw-toolkit.Dockerfile (34:34)
+COPY --from=build /app/testworkflow-init /init
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-84445?s=github&n=grpc&ns=google.golang.org&t=golang&vr=%3E%3D1.83.0%2C%3C1.83.2"><img alt="high 8.7: CVE--2026--84445" src="https://img.shields.io/badge/CVE--2026--84445-lightgrey?label=high%208.7&labelColor=e25d68"/></a> <i>Improper Validation of Array Index</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.83.0<br/><1.83.2</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.83.2</code></td></tr>
+<tr><td>CVSS Score</td><td><code>8.7</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A vulnerability exists in gRPC-Go servers configured with `xds.NewGRPCServer()` where a crafted request missing both `:authority` and `Host` headers can cause a server panic, resulting in a Denial of Service (DoS).
+
+Servers built with `xds.NewGRPCServer` install an xDS routing interceptor on every RPC. This interceptor looks up the request’s `:authority` header to pick a virtual host. The HTTP/2 server transport previously accepted requests that had neither `:authority` nor `Host`. When this happened, the xDS routing interceptor attempted to access the first element of an empty slice of authorities, leading to an index out of bounds panic. Since the per-RPC goroutine does not recover from panics, the entire server process would terminate.
+
+This panic occurs in the interceptor pipeline, meaning the transport credentials handshake (TLS, mTLS, or ALTS) and HTTP/2 connection establishment must complete successfully before the crafted request can reach this logic.
+- Insecure/Standard TLS: If the server permits insecure (plaintext) connections or standard credentials (where client certs are not checked), any unauthenticated remote attacker can trigger the crash.
+- mTLS / ALTS: If strict transport-level authentication is enforced at the network edge or transport layer (e.g., requiring a valid client certificate), the attacker must possess valid transport credentials to initiate the stream and trigger the panic.
+
+### Impact
+An attacker can cause a complete outage of the gRPC server by sending a request missing both `:authority` and `Host` headers, provided they can successfully establish a transport connection.
+
+### Patches
+The issue has been addressed in `master` (and backported to `1.84.0`, `1.83.2` and `1.82.2`). The fix updates the HTTP/2 transport layer to reject requests missing both `:authority` and `Host` headers early, maintaining consistency with and other gRPC language implementations.
 
 </blockquote>
 </details>
@@ -573,50 +617,6 @@ Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Es
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/grpc</strong> <code>1.83.1</code> (golang)</summary>
-
-<small><code>pkg:golang/google.golang.org/grpc@1.83.1</code></small><br/>
-
-```dockerfile
-# tw-toolkit.Dockerfile (34:34)
-COPY --from=build /app/testworkflow-init /init
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-84445?s=github&n=grpc&ns=google.golang.org&t=golang&vr=%3E%3D1.83.0%2C%3C1.83.2"><img alt="high 8.7: CVE--2026--84445" src="https://img.shields.io/badge/CVE--2026--84445-lightgrey?label=high%208.7&labelColor=e25d68"/></a> <i>Improper Validation of Array Index</i>
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.83.0<br/><1.83.2</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.83.2</code></td></tr>
-<tr><td>CVSS Score</td><td><code>8.7</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.715%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A vulnerability exists in gRPC-Go servers configured with `xds.NewGRPCServer()` where a crafted request missing both `:authority` and `Host` headers can cause a server panic, resulting in a Denial of Service (DoS).
-
-Servers built with `xds.NewGRPCServer` install an xDS routing interceptor on every RPC. This interceptor looks up the request’s `:authority` header to pick a virtual host. The HTTP/2 server transport previously accepted requests that had neither `:authority` nor `Host`. When this happened, the xDS routing interceptor attempted to access the first element of an empty slice of authorities, leading to an index out of bounds panic. Since the per-RPC goroutine does not recover from panics, the entire server process would terminate.
-
-This panic occurs in the interceptor pipeline, meaning the transport credentials handshake (TLS, mTLS, or ALTS) and HTTP/2 connection establishment must complete successfully before the crafted request can reach this logic.
-- Insecure/Standard TLS: If the server permits insecure (plaintext) connections or standard credentials (where client certs are not checked), any unauthenticated remote attacker can trigger the crash.
-- mTLS / ALTS: If strict transport-level authentication is enforced at the network edge or transport layer (e.g., requiring a valid client certificate), the attacker must possess valid transport credentials to initiate the stream and trigger the panic.
-
-### Impact
-An attacker can cause a complete outage of the gRPC server by sending a request missing both `:authority` and `Host` headers, provided they can successfully establish a transport connection.
-
-### Patches
-The issue has been addressed in `master` (and backported to `1.84.0`, `1.83.2` and `1.82.2`). The fix updates the HTTP/2 transport layer to reject requests missing both `:authority` and `Host` headers early, maintaining consistency with and other gRPC language implementations.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>pcre2</strong> <code>10.47-r1</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/pcre2@10.47-r1?arch=aarch64&distro=alpine-3.24.1</code></small><br/>
@@ -633,8 +633,8 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git ope
 <table>
 <tr><td>Affected range</td><td><code>&lt;=10.48-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.350%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>26th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.278%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -650,8 +650,8 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git ope
 <table>
 <tr><td>Affected range</td><td><code>&lt;=10.48-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.358%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.268%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -667,38 +667,8 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git ope
 <table>
 <tr><td>Affected range</td><td><code>&lt;=10.48-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.155%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.156%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>nghttp2-libs</strong> <code>1.69.0-r0</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/nghttp2-libs@1.69.0-r0?arch=aarch64&distro=alpine-3.24.1&upstream=nghttp2</code></small><br/>
-
-```dockerfile
-# tw-toolkit.Dockerfile (31:31)
-RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git openssh-client
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-58055?s=alpine&n=nghttp2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.70.0-r0"><img alt="unspecified : CVE--2026--58055" src="https://img.shields.io/badge/CVE--2026--58055-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.70.0-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.70.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.319%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -733,6 +703,36 @@ COPY --from=build /app/testworkflow-init /init
 <blockquote>
 
 In github.com/chrismellard/docker-credential-acr-env/pkg/credhelper, the regular expression used by isACRRegistry to validate Azure Container Registry hostnames is unanchored. As a result, arbitrary hostnames containing the substring ".azurecr.io" (such as evil.azurecr.io.attacker.com) are treated as valid ACR registries, causing ACRCredHelper.Get to send the Azure Active Directory (AAD) access token to attacker-controlled hosts.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>nghttp2-libs</strong> <code>1.69.0-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/nghttp2-libs@1.69.0-r0?arch=aarch64&distro=alpine-3.24.1&upstream=nghttp2</code></small><br/>
+
+```dockerfile
+# tw-toolkit.Dockerfile (31:31)
+RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git openssh-client
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-58055?s=alpine&n=nghttp2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.70.0-r0"><img alt="unspecified : CVE--2026--58055" src="https://img.shields.io/badge/CVE--2026--58055-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.70.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.70.0-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.319%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
 
 </blockquote>
 </details>
