@@ -12,7 +12,7 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 
 > GitHub support and multiple chats for AI Test Creation, clearer execution failure diagnostics, and new workflow capabilities for dependency caching and data sharing.
 
-Control Plane is available in Helm chart `v2.337.0` and the Agent is available in Helm chart `v2.14.0`.
+Control Plane is available in Helm chart `v2.337.0` and the Runner is available in Helm chart `v2.14.0`.
 
 ### AI Test Creation
 
@@ -39,8 +39,8 @@ AI Test Creation is now generally available. See [AI Test Creation](/articles/ai
 
 ### Members & Audit Logs
 
-- Manage members with server-side search, filtering and pagination, a member detail page, organization display names, and bulk actions. Invitations have a dedicated tab.
-- Search audit logs by text alongside the existing filters to find relevant activity more quickly.
+- Expanded member management page with new filtering, bulk operations, and clearer member details.
+- Search audit logs by name or ID to quickly identify all actions related to a resource.
 
 ### AI
 
@@ -49,11 +49,13 @@ AI Test Creation is now generally available. See [AI Test Creation](/articles/ai
 
 ### Operations & Improvements
 
-- The dashboard and CLI now use Runner terminology more consistently, with support for the new `execution` capability alongside compatibility handling for existing runners.
+- Replaced all references to Agent with Runner. This includes pages and titles within the UI as well as flags and commands from the CLI. The agent commands/pages have been marked as deprecated and will be removed in the next major version.
+- Added support for the `execution `capability, replacing the deprecated `runner` capability.
 - On-prem Sandbox CPU and memory requests and limits are configurable. An optional prewarmed Sandbox pool can reduce startup work for new authoring sessions.
 - Improved completion and cancellation handling, including workflows whose test containers have finished while a sidecar is still running, and stale queued executions that should retain their history when aborted.
 - Improved resilience of artifact transfers, webhook delivery and cleanup during transient failures. Invalid GitOps resources no longer cause continuous retries.
-- Added CLI login options to select an organization and environment by name, and clearer errors when a command would otherwise prompt without an interactive terminal.
+- Added new options --org-name and --env-name to `login`
+- Support --client=direct against a control plane.
 
 ## Patch Release v2.13.3 (2026-09-22)
 
