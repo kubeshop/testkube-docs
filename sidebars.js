@@ -936,6 +936,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "Alternative Model Providers",
+                  id: "articles/ai-model-proxies",
+                },
+                {
+                  type: "doc",
                   label: "Architecture",
                   id: "articles/ai-architecture",
                 },

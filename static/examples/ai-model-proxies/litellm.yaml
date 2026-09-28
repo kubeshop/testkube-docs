@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: litellm
+data:
+  config.yaml: |
+    model_list:
+      - model_name: claude-sonnet-5
+        litellm_params:
+          model: anthropic/claude-sonnet-5
+          api_key: os.environ/ANTHROPIC_API_KEY
+    general_settings:
+      master_key: os.environ/LITELLM_MASTER_KEY
+    litellm_settings:
+      request_timeout: 60
+      num_retries: 0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: litellm
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: litellm }
+  template:
+    metadata:
+      labels: { app: litellm }
+    spec:
+      enableServiceLinks: false
+      containers:
+        - name: litellm
+          image: ghcr.io/berriai/litellm:1.102.1@sha256:87f34979b9f8cb274fac90ca8a4fdda07d8480de22755562a26adeb95ce20d02
+          args: ["--config", "/etc/litellm/config.yaml", "--port", "4000"]
+          env:
+            - name: ANTHROPIC_API_KEY
+              valueFrom:
+                secretKeyRef: { name: anthropic-api, key: api-key }
+            - name: LITELLM_MASTER_KEY
+              valueFrom:
+                secretKeyRef: { name: proxy-auth, key: api-key }
+          ports:
+            - { name: http, containerPort: 4000 }
+          resources:
+            requests: { cpu: 250m, memory: 512Mi }
+            limits: { cpu: "1", memory: 1Gi }
+          startupProbe:
+            httpGet: { path: /health/liveliness, port: http }
+            periodSeconds: 5
+            failureThreshold: 60
+          readinessProbe:
+            httpGet: { path: /health/readiness, port: http }
+            periodSeconds: 10
+          volumeMounts:
+            - { name: config, mountPath: /etc/litellm, readOnly: true }
+      volumes:
+        - name: config
+          configMap: { name: litellm }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: litellm
+spec:
+  selector: { app: litellm }
+  ports:
+    - { port: 4000, targetPort: http }
