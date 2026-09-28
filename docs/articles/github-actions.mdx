@@ -287,4 +287,30 @@ The benefit is strict isolation across tenants.
 
 This is not yet supported. Please reach out to us should you be interested in this functionality on Testkube Cloud Control Plane or should you need to separate installations within your On Prem deployment.
 
+### Troubleshooting GitHub App permissions
+
+The permissions above are not interchangeable: cloning needs `Contents: read` and
+`Metadata: read`, and the extra grants exist only for the GitHub integration.
+
+**`fatal: could not read Username for 'https://github.com': terminal prompts disabled`**
+
+Git printing this during a clone step means it was handed no credentials at all, so the
+App token was never issued. The usual cause is a mismatch between the permissions the
+Control Plane asks GitHub for and the ones the installation was actually granted: GitHub
+refuses to issue the token at all when the request is not a subset of the grant, and
+answers `The permissions requested are not granted to this installation.` Since the clone
+then runs unauthenticated, the message you see is the one from Git, not the one from
+GitHub.
+
+Check the installation's own permissions rather than the App's, as they can differ:
+
+```
+https://github.com/organizations/<org>/settings/installations/<installation_id>
+```
+
+**Changing App permissions does not update existing installations.** Adding a permission
+puts the installation into a pending state until an organization owner accepts it, and
+until then it keeps the permission set it had. Removing one applies without acceptance.
+This is worth knowing when a permission change appears to have no effect.
+
 [workflow-content-github-app]: /articles/test-workflows-content#using-github-app
