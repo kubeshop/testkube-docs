@@ -244,7 +244,7 @@ FROM alpine:3.23.3
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>1.311%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>69th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>70th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -312,7 +312,7 @@ FROM alpine:3.23.3
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>1.311%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>69th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>70th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -516,7 +516,7 @@ FROM alpine:3.23.3
 <tr><td>Affected range</td><td><code>&lt;3.5.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.7-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>1.110%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>64th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>65th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -630,8 +630,8 @@ During session resumption in crypto/tls, if the underlying Config has its Client
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.13</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.13</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.692%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -754,7 +754,7 @@ Pathological inputs could cause DoS through consumePhrase when parsing an email 
 <tr><td>Affected range</td><td><code>&lt;1.25.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.620%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -804,8 +804,8 @@ Enforce a recursion limit in Unmarshal to prevent stack exhaustion when parsing 
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.868%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.781%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -858,7 +858,7 @@ This only affects TLS 1.3.
 <tr><td>Affected range</td><td><code>&lt;1.25.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.372%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

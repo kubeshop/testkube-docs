@@ -13,338 +13,6 @@ hide_table_of_contents: true
 
 <table>
 <tr><td valign="top">
-<details><summary><img alt="critical: 7" src="https://img.shields.io/badge/C-7-8b1924"/> <img alt="high: 5" src="https://img.shields.io/badge/H-5-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/M-4-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/crypto</strong> <code>0.45.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/crypto@0.45.0</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (57:57)
-FROM mongo:8.3.8
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-46595?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="critical 10.0: CVE--2026--46595" src="https://img.shields.io/badge/CVE--2026--46595-lightgrey?label=critical%2010.0&labelColor=8b1924"/></a> <i>Incorrect Implementation of Authentication Algorithm</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>10</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.602%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Previously, CVE-2024-45337 fixed an authorization bypass for misused ssh server configurations; if any other type of callback is passed other than public key, then the source-address validation would be skipped.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-42508?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="critical 9.1: CVE--2026--42508" src="https://img.shields.io/badge/CVE--2026--42508-lightgrey?label=critical%209.1&labelColor=8b1924"/></a> <i>Improper Certificate Validation</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>9.1</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.654%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Previously, a revoked 'SignatureKey' belonging to a CA was not correctly checked for revocation. Now, both the 'key' and 'key.SignatureKey' are checked for @<!-- -->revoked.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-39834?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="critical 9.1: CVE--2026--39834" src="https://img.shields.io/badge/CVE--2026--39834-lightgrey?label=critical%209.1&labelColor=8b1924"/></a> <i>Integer Overflow or Wraparound</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>9.1</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.637%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-When writing data larger than 4GB in a single Write call on an SSH channel, an integer overflow in the internal payload size calculation caused the write loop to spin indefinitely, sending empty packets without making progress. The size comparison now uses int64 to prevent truncation.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-39833?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="critical 9.1: CVE--2026--39833" src="https://img.shields.io/badge/CVE--2026--39833-lightgrey?label=critical%209.1&labelColor=8b1924"/></a> <i>Missing Authorization</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>9.1</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.487%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-The in-memory keyring returned by NewKeyring() silently accepted keys with the ConfirmBeforeUse constraint but never enforced it. The key would sign without any confirmation prompt, with no indication to the caller that the constraint was not in effect. NewKeyring() now returns an error when unsupported constraints are requested.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-39832?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="critical 9.1: CVE--2026--39832" src="https://img.shields.io/badge/CVE--2026--39832-lightgrey?label=critical%209.1&labelColor=8b1924"/></a> <i>Improper Preservation of Permissions</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>9.1</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.716%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-When adding a key to a remote agent constraint extensions such as restrict-destination-v00@<!-- -->openssh.com were not serialized in the request. Destination restrictions were silently stripped when forwarding keys, allowing unrestricted use of the key on the remote host. The client now serializes all constraint extensions. Additionally, the in-memory keyring returned by NewKeyring() now rejects keys with unsupported constraint extensions instead of silently ignoring them.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-39831?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="critical 9.1: CVE--2026--39831" src="https://img.shields.io/badge/CVE--2026--39831-lightgrey?label=critical%209.1&labelColor=8b1924"/></a> <i>Missing Authorization</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>9.1</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.487%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-The Verify() method for FIDO/U2F security key types (sk-ecdsa-sha2-nistp256@<!-- -->openssh.com, sk-ssh-ed25519@<!-- -->openssh.com) did not check the User Presence flag. Signatures generated without physical touch were accepted, allowing unattended use of a hardware security key. To restore the previous behavior, return a "no-touch-required" extension in Permissions.Extensions from PublicKeyCallback.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-39830?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="critical 9.1: CVE--2026--39830" src="https://img.shields.io/badge/CVE--2026--39830-lightgrey?label=critical%209.1&labelColor=8b1924"/></a> <i>Improper Restriction of Operations within the Bounds of a Memory Buffer</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>9.1</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.621%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A malicious SSH peer could send unsolicited global request responses to fill an internal buffer, blocking the connection's read loop. The blocked goroutine could not be released by calling Close(), resulting in a resource leak per connection. Unsolicited global responses are now discarded.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-78662?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.56.0"><img alt="high : CVE--2026--78662" src="https://img.shields.io/badge/CVE--2026--78662-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.431%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Previously, a channel registered in the mux's chanList is not usable until it is established. A malicious peer was able flood the channel's incomingRequests, deadlocking the entire connection.
-
-Now, we add an atomic established state, set when a channel becomes usable. Until such a time, handlePacket drops every packet other than the open confirmation/failure, without blocking and without tearing down the connection.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-56855?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.56.0"><img alt="high : CVE--2026--56855" src="https://img.shields.io/badge/CVE--2026--56855-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Previously, after a channel has been established, a malicious peer could send crafted messages that would deadlock the entire connection.
-
-Now, we handle all RFC 4254 channel messages; global requests are handled explicitly. Then, treat all other messages as a protocol error and tear the connection down instead of buffering and blocking.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-56854?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.55.0"><img alt="high : CVE--2026--56854" src="https://img.shields.io/badge/CVE--2026--56854-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.437%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-The source-address critical option in the Permissions returned by an authentication callback was only enforced for the PublicKeyCallback and VerifiedPublicKeyCallback paths, extending the fix for CVE-2026-46595. Permissions returned by the PasswordCallback, KeyboardInteractiveCallback, NoClientAuthCallback, and GSSAPIWithMICConfig.AllowLogin callbacks were not validated against the client's remote address, so a source-address restriction set by those callbacks was silently ignored. The check is now applied to the Permissions returned by any authentication callback.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-46597?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="high 7.5: CVE--2026--46597" src="https://img.shields.io/badge/CVE--2026--46597-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Incorrect Type Conversion or Cast</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.620%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-An incorrectly placed cast from bytes to int allowed for server-side panic in the AES-GCM packet decoder for well-crafted inputs.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-39829?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="high 7.5: CVE--2026--39829" src="https://img.shields.io/badge/CVE--2026--39829-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Improper Validation of Specified Quantity in Input</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.623%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-The RSA and DSA public key parsers did not enforce size limits on key parameters. A crafted public key with an excessively large modulus or DSA parameter could cause several minutes of CPU consumption during signature verification. This could be triggered by unauthenticated clients during public key authentication. RSA moduli are now limited to 8192 bits, and DSA parameters are validated per FIPS 186-2.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-39827?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="medium 6.5: CVE--2026--39827" src="https://img.shields.io/badge/CVE--2026--39827-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Improper Enforcement of Message Integrity During Transmission in a Communication Channel</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.281%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-An authenticated SSH client that repeatedly opened channels which were rejected by the server caused unbounded memory growth, eventually crashing the server process and affecting all connected users. Rejected channels are now properly removed from the connection's internal state and released for garbage collection.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-39828?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="medium 6.3: CVE--2026--39828" src="https://img.shields.io/badge/CVE--2026--39828-lightgrey?label=medium%206.3&labelColor=fbb552"/></a> <i>Improper Preservation of Permissions</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>6.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.539%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>43rd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-When an SSH server authentication callback returned PartialSuccessError with non-nil Permissions, those permissions were silently discarded, potentially dropping certificate restrictions such as force-command after a second factor succeeded. Returning non-nil Permissions with PartialSuccessError now results in a connection error.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-46598?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="medium 5.3: CVE--2026--46598" src="https://img.shields.io/badge/CVE--2026--46598-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Improper Validation of Array Index</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.515%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-For certain crafted inputs, a 'ed25519.PrivateKey' was created by casting malformed wire bytes, leading to a panic when used.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-39835?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="medium 5.3: CVE--2026--39835" src="https://img.shields.io/badge/CVE--2026--39835-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Improper Certificate Validation</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.662%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-SSH servers which use CertChecker as a public key callback without setting IsUserAuthority or IsHostAuthority could be caused to panic by a client presenting a certificate. CertChecker now returns an error instead of panicking when these callbacks are nil.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/GO-2026-5932?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3E%3D0"><img alt="unspecified : GO--2026--5932" src="https://img.shields.io/badge/GO--2026--5932-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-The golang.org/x/crypto/openpgp package is unsafe by design, has numerous known security issues, is not maintained, and should not be used.
-
-If you are required to interoperate with OpenPGP systems and need a maintained package, consider github.com/ProtonMail/go-crypto/openpgp which is a maintained fork that aims to be a drop-in replacement for this package.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 7" src="https://img.shields.io/badge/C-7-8b1924"/> <img alt="high: 5" src="https://img.shields.io/badge/H-5-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/M-4-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/crypto</strong> <code>0.47.0</code> (golang)</summary>
 
 <small><code>pkg:golang/golang.org/x/crypto@0.47.0</code></small><br/>
@@ -533,7 +201,7 @@ Now, we handle all RFC 4254 channel messages; global requests are handled explic
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.437%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>36th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -552,7 +220,7 @@ The source-address critical option in the Permissions returned by an authenticat
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.620%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -628,7 +296,339 @@ When an SSH server authentication callback returned PartialSuccessError with non
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.515%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+For certain crafted inputs, a 'ed25519.PrivateKey' was created by casting malformed wire bytes, leading to a panic when used.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-39835?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="medium 5.3: CVE--2026--39835" src="https://img.shields.io/badge/CVE--2026--39835-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Improper Certificate Validation</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.662%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+SSH servers which use CertChecker as a public key callback without setting IsUserAuthority or IsHostAuthority could be caused to panic by a client presenting a certificate. CertChecker now returns an error instead of panicking when these callbacks are nil.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/GO-2026-5932?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3E%3D0"><img alt="unspecified : GO--2026--5932" src="https://img.shields.io/badge/GO--2026--5932-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The golang.org/x/crypto/openpgp package is unsafe by design, has numerous known security issues, is not maintained, and should not be used.
+
+If you are required to interoperate with OpenPGP systems and need a maintained package, consider github.com/ProtonMail/go-crypto/openpgp which is a maintained fork that aims to be a drop-in replacement for this package.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 7" src="https://img.shields.io/badge/C-7-8b1924"/> <img alt="high: 5" src="https://img.shields.io/badge/H-5-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/M-4-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/crypto</strong> <code>0.45.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/crypto@0.45.0</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (57:57)
+FROM mongo:8.3.8
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-46595?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="critical 10.0: CVE--2026--46595" src="https://img.shields.io/badge/CVE--2026--46595-lightgrey?label=critical%2010.0&labelColor=8b1924"/></a> <i>Incorrect Implementation of Authentication Algorithm</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>10</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.602%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Previously, CVE-2024-45337 fixed an authorization bypass for misused ssh server configurations; if any other type of callback is passed other than public key, then the source-address validation would be skipped.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-42508?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="critical 9.1: CVE--2026--42508" src="https://img.shields.io/badge/CVE--2026--42508-lightgrey?label=critical%209.1&labelColor=8b1924"/></a> <i>Improper Certificate Validation</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>9.1</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.654%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Previously, a revoked 'SignatureKey' belonging to a CA was not correctly checked for revocation. Now, both the 'key' and 'key.SignatureKey' are checked for @<!-- -->revoked.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-39834?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="critical 9.1: CVE--2026--39834" src="https://img.shields.io/badge/CVE--2026--39834-lightgrey?label=critical%209.1&labelColor=8b1924"/></a> <i>Integer Overflow or Wraparound</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>9.1</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.637%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+When writing data larger than 4GB in a single Write call on an SSH channel, an integer overflow in the internal payload size calculation caused the write loop to spin indefinitely, sending empty packets without making progress. The size comparison now uses int64 to prevent truncation.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-39833?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="critical 9.1: CVE--2026--39833" src="https://img.shields.io/badge/CVE--2026--39833-lightgrey?label=critical%209.1&labelColor=8b1924"/></a> <i>Missing Authorization</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>9.1</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.487%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The in-memory keyring returned by NewKeyring() silently accepted keys with the ConfirmBeforeUse constraint but never enforced it. The key would sign without any confirmation prompt, with no indication to the caller that the constraint was not in effect. NewKeyring() now returns an error when unsupported constraints are requested.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-39832?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="critical 9.1: CVE--2026--39832" src="https://img.shields.io/badge/CVE--2026--39832-lightgrey?label=critical%209.1&labelColor=8b1924"/></a> <i>Improper Preservation of Permissions</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>9.1</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.716%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+When adding a key to a remote agent constraint extensions such as restrict-destination-v00@<!-- -->openssh.com were not serialized in the request. Destination restrictions were silently stripped when forwarding keys, allowing unrestricted use of the key on the remote host. The client now serializes all constraint extensions. Additionally, the in-memory keyring returned by NewKeyring() now rejects keys with unsupported constraint extensions instead of silently ignoring them.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-39831?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="critical 9.1: CVE--2026--39831" src="https://img.shields.io/badge/CVE--2026--39831-lightgrey?label=critical%209.1&labelColor=8b1924"/></a> <i>Missing Authorization</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>9.1</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.487%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The Verify() method for FIDO/U2F security key types (sk-ecdsa-sha2-nistp256@<!-- -->openssh.com, sk-ssh-ed25519@<!-- -->openssh.com) did not check the User Presence flag. Signatures generated without physical touch were accepted, allowing unattended use of a hardware security key. To restore the previous behavior, return a "no-touch-required" extension in Permissions.Extensions from PublicKeyCallback.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-39830?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="critical 9.1: CVE--2026--39830" src="https://img.shields.io/badge/CVE--2026--39830-lightgrey?label=critical%209.1&labelColor=8b1924"/></a> <i>Improper Restriction of Operations within the Bounds of a Memory Buffer</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>9.1</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.621%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A malicious SSH peer could send unsolicited global request responses to fill an internal buffer, blocking the connection's read loop. The blocked goroutine could not be released by calling Close(), resulting in a resource leak per connection. Unsolicited global responses are now discarded.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-78662?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.56.0"><img alt="high : CVE--2026--78662" src="https://img.shields.io/badge/CVE--2026--78662-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.431%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Previously, a channel registered in the mux's chanList is not usable until it is established. A malicious peer was able flood the channel's incomingRequests, deadlocking the entire connection.
+
+Now, we add an atomic established state, set when a channel becomes usable. Until such a time, handlePacket drops every packet other than the open confirmation/failure, without blocking and without tearing down the connection.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-56855?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.56.0"><img alt="high : CVE--2026--56855" src="https://img.shields.io/badge/CVE--2026--56855-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Previously, after a channel has been established, a malicious peer could send crafted messages that would deadlock the entire connection.
+
+Now, we handle all RFC 4254 channel messages; global requests are handled explicitly. Then, treat all other messages as a protocol error and tear the connection down instead of buffering and blocking.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-56854?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.55.0"><img alt="high : CVE--2026--56854" src="https://img.shields.io/badge/CVE--2026--56854-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.437%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>36th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The source-address critical option in the Permissions returned by an authentication callback was only enforced for the PublicKeyCallback and VerifiedPublicKeyCallback paths, extending the fix for CVE-2026-46595. Permissions returned by the PasswordCallback, KeyboardInteractiveCallback, NoClientAuthCallback, and GSSAPIWithMICConfig.AllowLogin callbacks were not validated against the client's remote address, so a source-address restriction set by those callbacks was silently ignored. The check is now applied to the Permissions returned by any authentication callback.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-46597?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="high 7.5: CVE--2026--46597" src="https://img.shields.io/badge/CVE--2026--46597-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Incorrect Type Conversion or Cast</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.620%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+An incorrectly placed cast from bytes to int allowed for server-side panic in the AES-GCM packet decoder for well-crafted inputs.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-39829?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="high 7.5: CVE--2026--39829" src="https://img.shields.io/badge/CVE--2026--39829-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Improper Validation of Specified Quantity in Input</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.623%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The RSA and DSA public key parsers did not enforce size limits on key parameters. A crafted public key with an excessively large modulus or DSA parameter could cause several minutes of CPU consumption during signature verification. This could be triggered by unauthenticated clients during public key authentication. RSA moduli are now limited to 8192 bits, and DSA parameters are validated per FIPS 186-2.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-39827?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="medium 6.5: CVE--2026--39827" src="https://img.shields.io/badge/CVE--2026--39827-lightgrey?label=medium%206.5&labelColor=fbb552"/></a> <i>Improper Enforcement of Message Integrity During Transmission in a Communication Channel</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.281%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+An authenticated SSH client that repeatedly opened channels which were rejected by the server caused unbounded memory growth, eventually crashing the server process and affecting all connected users. Rejected channels are now properly removed from the connection's internal state and released for garbage collection.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-39828?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="medium 6.3: CVE--2026--39828" src="https://img.shields.io/badge/CVE--2026--39828-lightgrey?label=medium%206.3&labelColor=fbb552"/></a> <i>Improper Preservation of Permissions</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.539%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>43rd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+When an SSH server authentication callback returned PartialSuccessError with non-nil Permissions, those permissions were silently discarded, potentially dropping certificate restrictions such as force-command after a second factor succeeded. Returning non-nil Permissions with PartialSuccessError now results in a connection error.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-46598?s=github&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.52.0"><img alt="medium 5.3: CVE--2026--46598" src="https://img.shields.io/badge/CVE--2026--46598-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Improper Validation of Array Index</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.52.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.52.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.515%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -710,8 +710,8 @@ During session resumption in crypto/tls, if the underlying Config has its Client
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.13</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.13</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.692%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -834,7 +834,7 @@ Pathological inputs could cause DoS through consumePhrase when parsing an email 
 <tr><td>Affected range</td><td><code>&lt;1.25.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.620%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -884,8 +884,8 @@ Enforce a recursion limit in Unmarshal to prevent stack exhaustion when parsing 
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.868%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.781%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -938,7 +938,7 @@ This only affects TLS 1.3.
 <tr><td>Affected range</td><td><code>&lt;1.25.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.372%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1503,8 +1503,8 @@ FROM mongo:8.3.8
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.13</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.13</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.692%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1627,7 +1627,7 @@ Pathological inputs could cause DoS through consumePhrase when parsing an email 
 <tr><td>Affected range</td><td><code>&lt;1.25.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.10</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.620%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1677,8 +1677,8 @@ Enforce a recursion limit in Unmarshal to prevent stack exhaustion when parsing 
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.868%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.781%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1907,8 +1907,8 @@ RUN apt-get update && \
 <table>
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.692%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2044,13 +2044,13 @@ Now, path resolution operates on a byte buffer using index-based backtracking fo
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 5" src="https://img.shields.io/badge/M-5-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.47.0</code> (golang)</summary>
+<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 5" src="https://img.shields.io/badge/M-5-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.48.0</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/net@0.47.0</code></small><br/>
+<small><code>pkg:golang/golang.org/x/net@0.48.0</code></small><br/>
 
 ```dockerfile
-# mongo-8.dockerfile (57:57)
-FROM mongo:8.3.8
+# mongo-8.dockerfile (125:125)
+COPY --from=builder /usr/local/bin/mongo* /usr/local/bin/bsondump /usr/bin/
 ```
 
 <br/>
@@ -2060,8 +2060,8 @@ FROM mongo:8.3.8
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.692%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2096,8 +2096,8 @@ Parsing an invalid SVCB or HTTPS RR can panic when the size of a parameter value
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.53.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.53.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.868%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.781%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2197,13 +2197,13 @@ Parsing arbitrary HTML which is then rendered using Render can result in an unex
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 5" src="https://img.shields.io/badge/M-5-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.48.0</code> (golang)</summary>
+<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 5" src="https://img.shields.io/badge/M-5-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.47.0</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/net@0.48.0</code></small><br/>
+<small><code>pkg:golang/golang.org/x/net@0.47.0</code></small><br/>
 
 ```dockerfile
-# mongo-8.dockerfile (125:125)
-COPY --from=builder /usr/local/bin/mongo* /usr/local/bin/bsondump /usr/bin/
+# mongo-8.dockerfile (57:57)
+FROM mongo:8.3.8
 ```
 
 <br/>
@@ -2213,8 +2213,8 @@ COPY --from=builder /usr/local/bin/mongo* /usr/local/bin/bsondump /usr/bin/
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.692%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2249,8 +2249,8 @@ Parsing an invalid SVCB or HTTPS RR can panic when the size of a parameter value
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.53.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.53.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.868%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.781%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2911,7 +2911,7 @@ Now, we handle all RFC 4254 channel messages; global requests are handled explic
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.437%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>36th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -3018,7 +3018,7 @@ libexpat before 2.8.4 lacks handler call depth tracking with custom encoding cal
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.563%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -3584,7 +3584,7 @@ Perl versions from 5.9.4 before 5.41.9 produce incorrect regular expression matc
 <tr><td>Affected range</td><td><code>&lt;5.38.2-3.2ubuntu0.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>5.38.2-3.2ubuntu0.6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.256%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -3648,7 +3648,7 @@ FROM mongo:8.3.8
 <tr><td>Affected range</td><td><code>>=0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.265%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -3799,7 +3799,7 @@ FROM mongo:8.3.8
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:L/I:N/A:H</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.168%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -4026,8 +4026,8 @@ FROM mongo:8.3.8
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.15</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.15</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.517%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.373%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -4043,8 +4043,8 @@ When libpsl support is enabled, libcurl fails to enforce the Public Suffix List 
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.15</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.15</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.550%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.371%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -4163,7 +4163,7 @@ jq is a command-line JSON processor. In 1.8.2rc1 and earlier, the ordinary modul
 <tr><td>CVSS Score</td><td><code>5.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.150%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -4417,60 +4417,13 @@ Issue summary: The OpenSSL Certificate Management Protocol (CMP) caches addition
 <tr><td>Affected range</td><td><code>&lt;3.0.13-0ubuntu3.15</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.0.13-0ubuntu3.15</code></td></tr>
 <tr><td>EPSS Score</td><td><code>1.311%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>69th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>70th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
 Issue summary: Receiving a DTLS record for a future epoch while a handshake is in progress causes OpenSSL to buffer far more memory than the record itself requires.  Impact summary: A peer can use a small amount of network traffic to make an OpenSSL DTLS endpoint retain a disproportionately large amount of memory, which may lead to a Denial of Service.  CWE: CWE-405: Asymmetric Resource Consumption (Amplification)  Description: While a DTLS handshake is in progress, a peer may legitimately have already moved on to the next epoch (for example, having sent its ChangeCipherSpec and Finished messages) before the local endpoint has processed the same transition, typically because of reordering on the underlying UDP transport. OpenSSL buffers such early records so that they can be processed once the local endpoint catches up.  Buffering a record currently retains the entire read buffer it arrived in, which is sized to hold the largest possible DTLS record (around 16 kilobytes), rather than just the bytes that make up the record itself. Up to 100 such records may be buffered per connection. As a result, a peer that sends a stream of small forged records claiming to belong to the next epoch can cause an OpenSSL DTLS endpoint to retain around 1.7 megabytes of memory, despite sending only a small fraction of that amount of data over the network.  An attacker therefore gains a memory amplification factor of around 1200, and can multiply the effect across as many associations as it is able to open, making this a remote memory exhaustion Denial of Service risk for DTLS servers. Since the memory retained per connection remains bounded, and any limit an application already places on the number of concurrent associations also bounds the total exposure, this issue has been assessed as Low severity.  FIPS impact: no  No FIPS modules are affected by this issue as the affected code is outside the OpenSSL FIPS module boundary.  OpenSSL 4.0, 3.6, 3.5, 3.4, 3.0, 1.1.1 and 1.0.2 are vulnerable to this issue.  OpenSSL 4.0 users should upgrade to OpenSSL 4.0.2. OpenSSL 3.6 users should upgrade to OpenSSL 3.6.4. OpenSSL 3.5 users should upgrade to OpenSSL 3.5.8. OpenSSL 3.4 users should upgrade to OpenSSL 3.4.7. OpenSSL 3.0 users should upgrade to OpenSSL 3.0.22.  Premium support customers only: OpenSSL 1.1.1 users should upgrade to OpenSSL 1.1.1zi OpenSSL 1.0.2 users should upgrade to OpenSSL 1.0.2zr  This issue was reported on 18 May 2026 by Amazon Web Services. The fix has been developed by Matt Caswell.  -- cut (non-publishing metadata for internal use) -- Reported by: Amazon Web Services Fixed by: Matt Caswell
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>tar</strong> <code>1.35+dfsg-3ubuntu0.4</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/tar@1.35%2Bdfsg-3ubuntu0.4?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (57:57)
-FROM mongo:8.3.8
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-18508?s=ubuntu&n=tar&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2026--18508" src="https://img.shields.io/badge/CVE--2026--18508-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.141%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A flaw was found in GNU tar. When extracting an archive with the --one-top-level option, hardlink targets are not confined to the designated top-level directory and may resolve relative to the extraction working directory. A crafted archive can create hardlinks that escape the intended boundary and, when combined with a preexisting symbolic link under the working directory, may allow writing outside that boundary during a single extraction.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-18477?s=ubuntu&n=tar&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2026--18477" src="https://img.shields.io/badge/CVE--2026--18477-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.080%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A TOCTOU (Time-of-Check Time-of-Use) vulnerability in GNU tar's incremental dumpdir 'X' rename handling allows a local attacker with write access to a directory being backed up to influence the restore process if the attacker has access to the system where the restore is being performed. During restoration, files or directories may be created, renamed or overwritten outside the intended extraction directory. This could lead to unauthorized file modification or, in some cases, privilege escalation. Exploitation does not require the attacker to modify or craft the archive, and standard backup and restore workflows—including extracting into a newly created directory without using the -P option do not mitigate the issue.
 
 </blockquote>
 </details>
@@ -4561,6 +4514,53 @@ The incremental HTML parser (html.parser.HTMLParser) allows for CPU denial-of-se
 <blockquote>
 
 In the Tarfile.extract() function, the filter parameter is not passed properly when extracting hardlinks. An affected system that extracts content from untrusted tar files could end up writing files with an unexpected uid/gid despite the user passing filter='data' to the extract() function.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>tar</strong> <code>1.35+dfsg-3ubuntu0.4</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/tar@1.35%2Bdfsg-3ubuntu0.4?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (57:57)
+FROM mongo:8.3.8
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-18508?s=ubuntu&n=tar&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2026--18508" src="https://img.shields.io/badge/CVE--2026--18508-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.141%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A flaw was found in GNU tar. When extracting an archive with the --one-top-level option, hardlink targets are not confined to the designated top-level directory and may resolve relative to the extraction working directory. A crafted archive can create hardlinks that escape the intended boundary and, when combined with a preexisting symbolic link under the working directory, may allow writing outside that boundary during a single extraction.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-18477?s=ubuntu&n=tar&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2026--18477" src="https://img.shields.io/badge/CVE--2026--18477-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.080%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A TOCTOU (Time-of-Check Time-of-Use) vulnerability in GNU tar's incremental dumpdir 'X' rename handling allows a local attacker with write access to a directory being backed up to influence the restore process if the attacker has access to the system where the restore is being performed. During restoration, files or directories may be created, renamed or overwritten outside the intended extraction directory. This could lead to unauthorized file modification or, in some cases, privilege escalation. Exploitation does not require the attacker to modify or craft the archive, and standard backup and restore workflows—including extracting into a newly created directory without using the -P option do not mitigate the issue.
 
 </blockquote>
 </details>
@@ -4663,36 +4663,6 @@ zlib before 1.3.2 allows CPU consumption via crc32_combine64 and crc32_combine_g
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>dpkg</strong> <code>1.22.6ubuntu6.6</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/dpkg@1.22.6ubuntu6.6?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (57:57)
-FROM mongo:8.3.8
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-2219?s=ubuntu&n=dpkg&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2026--2219" src="https://img.shields.io/badge/CVE--2026--2219-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.418%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-It was discovered that dpkg-deb (a component of dpkg, the Debian package management system) does not properly validate the end of the data stream when uncompressing a zstd-compressed .deb archive, which may result in denial of service (infinite loop spinning the CPU).
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>diffutils</strong> <code>1:3.10-1build1</code> (deb)</summary>
 
 <small><code>pkg:deb/ubuntu/diffutils@1%3A3.10-1build1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
@@ -4717,36 +4687,6 @@ FROM mongo:8.3.8
 <blockquote>
 
 diff3 tool from GNU diffutils is vulnerable to a heap‑based buffer overflow due to multiple signed integer overflows in line‑mapping calculations. Incorrect arithmetic in mapping line ranges can result in corrupted values being used for memory allocation and loop bounds. When processing crafted diff output, these overflows may cause the application to allocate insufficient memory and subsequently perform out‑of‑bounds writes during internal processing. An attacker who can control the output of the diff program used by diff3 (e.g. via --diff-program pointing to a malicious script) can trigger out-of-bounds writes, resulting in a crash and potentially remote code execution depending on the environment.   This issue has been fixed in commit 9ff04d5b84743e331e80b589335a52c5480d1815  NOTE: The project maintainers claim that this is not a security issue. They state that the worst outcome this issue can cause is a crash of diff and that it cannot be used to escalate privileges.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>attr</strong> <code>1:2.5.2-1build1.1</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/attr@1%3A2.5.2-1build1.1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (57:57)
-FROM mongo:8.3.8
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-54371?s=ubuntu&n=attr&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1%3A2.5.2-1ubuntu0.1"><img alt="medium : CVE--2026--54371" src="https://img.shields.io/badge/CVE--2026--54371-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1:2.5.2-1ubuntu0.1</code></td></tr>
-<tr><td>Fixed version</td><td><code>1:2.5.2-1ubuntu0.1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.179%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-attr before version 2.6.0 contains a symlink traversal vulnerability in the getfattr and setfattr utilities that allows local attackers to escalate privileges by replacing a pathname component with a symbolic link during directory hierarchy traversal. Attackers who control a pathname component can redirect getfattr and setfattr operations to arbitrary files by substituting a symlink, leading to local privilege escalation when getfattr or setfattr is invoked by a privileged process over an attacker-controlled path.
 
 </blockquote>
 </details>
@@ -4811,6 +4751,36 @@ FROM mongo:8.3.8
 <blockquote>
 
 In PCRE2 before 10.48, pcre2_jit_match mishandles a previously copied subject being passed in as a context. An incorrect free operation can occur.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>dpkg</strong> <code>1.22.6ubuntu6.6</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/dpkg@1.22.6ubuntu6.6?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (57:57)
+FROM mongo:8.3.8
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-2219?s=ubuntu&n=dpkg&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2026--2219" src="https://img.shields.io/badge/CVE--2026--2219-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.418%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+It was discovered that dpkg-deb (a component of dpkg, the Debian package management system) does not properly validate the end of the data stream when uncompressing a zstd-compressed .deb archive, which may result in denial of service (infinite loop spinning the CPU).
 
 </blockquote>
 </details>
@@ -4886,6 +4856,66 @@ Buffer Overflow vulnerability in SQLite affected version source snapshots/builds
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>attr</strong> <code>1:2.5.2-1build1.1</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/attr@1%3A2.5.2-1build1.1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (57:57)
+FROM mongo:8.3.8
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-54371?s=ubuntu&n=attr&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1%3A2.5.2-1ubuntu0.1"><img alt="medium : CVE--2026--54371" src="https://img.shields.io/badge/CVE--2026--54371-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1:2.5.2-1ubuntu0.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>1:2.5.2-1ubuntu0.1</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.179%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+attr before version 2.6.0 contains a symlink traversal vulnerability in the getfattr and setfattr utilities that allows local attackers to escalate privileges by replacing a pathname component with a symbolic link during directory hierarchy traversal. Attackers who control a pathname component can redirect getfattr and setfattr operations to arbitrary files by substituting a symlink, leading to local privilege escalation when getfattr or setfattr is invoked by a privileged process over an attacker-controlled path.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.33.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/sys@0.33.0</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (132:132)
+RUN chmod -R g+rwX /opt/bitnami
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.158%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>shadow</strong> <code>1:4.13+dfsg1-4ubuntu3.2</code> (deb)</summary>
 
 <small><code>pkg:deb/ubuntu/shadow@1%3A4.13%2Bdfsg1-4ubuntu3.2?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
@@ -4910,6 +4940,36 @@ FROM mongo:8.3.8
 <blockquote>
 
 shadow-utils (aka shadow) 4.4 through 4.17.0 establishes a default /etc/subuid behavior (e.g., uid 100000 through 165535 for the first user account) that can realistically conflict with the uids of users defined on locally administered networks, potentially leading to account takeover, e.g., by leveraging newuidmap for access to an NFS home directory (or same-host resources in the case of remote logins by these local network users). NOTE: it may also be argued that system administrators should not have assigned uids, within local networks, that are within the range that can occur in /etc/subuid.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gnupg2</strong> <code>2.4.4-2ubuntu17.4</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/gnupg2@2.4.4-2ubuntu17.4?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (57:57)
+FROM mongo:8.3.8
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-57062?s=ubuntu&n=gnupg2&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C2.4.4-2ubuntu17.6"><img alt="low : CVE--2026--57062" src="https://img.shields.io/badge/CVE--2026--57062-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.4.4-2ubuntu17.6</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.4.4-2ubuntu17.6</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.149%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+CMS (Cryptographic Message Syntax) parsing in gpgsm in GnuPG through 2.5.20 mishandles the CMS format for AES-GCM because aes-ICVlen is supposed to be 12 bytes but 4 bytes is accepted. NOTE: this is related to CVE-2026-34182.
 
 </blockquote>
 </details>
@@ -4948,6 +5008,36 @@ In systemd 259, systemd-journald can send ANSI escape sequences to the terminals
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.38.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/sys@0.38.0</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (57:57)
+FROM mongo:8.3.8
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.158%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>ncurses</strong> <code>6.4+20240113-1ubuntu2.1</code> (deb)</summary>
 
 <small><code>pkg:deb/ubuntu/ncurses@6.4%2B20240113-1ubuntu2.1?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
@@ -4972,36 +5062,6 @@ FROM mongo:8.3.8
 <blockquote>
 
 A vulnerability has been found in GNU ncurses up to 6.5-20250322 and classified as problematic. This vulnerability affects the function postprocess_termcap of the file tinfo/parse_entry.c. The manipulation leads to stack-based buffer overflow. The attack needs to be approached locally. Upgrading to version 6.5-20250329 is able to address this issue. It is recommended to upgrade the affected component.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.1.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/sys@0.1.0</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (57:57)
-FROM mongo:8.3.8
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.158%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
 
 </blockquote>
 </details>
@@ -5068,9 +5128,9 @@ bzip2 contains an off‑by‑one error in the bzip2recover utility. When process
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.38.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>coreutils</strong> <code>9.4-3ubuntu6.2</code> (deb)</summary>
 
-<small><code>pkg:golang/golang.org/x/sys@0.38.0</code></small><br/>
+<small><code>pkg:deb/ubuntu/coreutils@9.4-3ubuntu6.2?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
 
 ```dockerfile
 # mongo-8.dockerfile (57:57)
@@ -5079,19 +5139,19 @@ FROM mongo:8.3.8
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2025-5278?s=ubuntu&n=coreutils&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C9.4-3ubuntu6.3"><img alt="low : CVE--2025--5278" src="https://img.shields.io/badge/CVE--2025--5278-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.158%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;9.4-3ubuntu6.3</code></td></tr>
+<tr><td>Fixed version</td><td><code>9.4-3ubuntu6.3</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.288%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
+A flaw was found in GNU Coreutils. The sort utility's begfield() function is vulnerable to a heap buffer under-read. The program may access memory outside the allocated buffer if a user runs a crafted command using the traditional key format. A malicious input could lead to a crash or leak sensitive data.
 
 </blockquote>
 </details>
@@ -5128,43 +5188,13 @@ NewNTUnicodeString does not check for string length overflow. When provided with
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>coreutils</strong> <code>9.4-3ubuntu6.2</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.1.0</code> (golang)</summary>
 
-<small><code>pkg:deb/ubuntu/coreutils@9.4-3ubuntu6.2?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
+<small><code>pkg:golang/golang.org/x/sys@0.1.0</code></small><br/>
 
 ```dockerfile
 # mongo-8.dockerfile (57:57)
 FROM mongo:8.3.8
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2025-5278?s=ubuntu&n=coreutils&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C9.4-3ubuntu6.3"><img alt="low : CVE--2025--5278" src="https://img.shields.io/badge/CVE--2025--5278-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;9.4-3ubuntu6.3</code></td></tr>
-<tr><td>Fixed version</td><td><code>9.4-3ubuntu6.3</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.288%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A flaw was found in GNU Coreutils. The sort utility's begfield() function is vulnerable to a heap buffer under-read. The program may access memory outside the allocated buffer if a user runs a crafted command using the traditional key format. A malicious input could lead to a crash or leak sensitive data.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.33.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/sys@0.33.0</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (132:132)
-RUN chmod -R g+rwX /opt/bitnami
 ```
 
 <br/>
@@ -5182,36 +5212,6 @@ RUN chmod -R g+rwX /opt/bitnami
 <blockquote>
 
 NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gnupg2</strong> <code>2.4.4-2ubuntu17.4</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/gnupg2@2.4.4-2ubuntu17.4?os_distro=noble&os_name=ubuntu&os_version=24.04</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (57:57)
-FROM mongo:8.3.8
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-57062?s=ubuntu&n=gnupg2&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C2.4.4-2ubuntu17.6"><img alt="low : CVE--2026--57062" src="https://img.shields.io/badge/CVE--2026--57062-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;2.4.4-2ubuntu17.6</code></td></tr>
-<tr><td>Fixed version</td><td><code>2.4.4-2ubuntu17.6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.149%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-CMS (Cryptographic Message Syntax) parsing in gpgsm in GnuPG through 2.5.20 mishandles the CMS format for AES-GCM because aes-ICVlen is supposed to be 12 bytes but 4 bytes is accepted. NOTE: this is related to CVE-2026-34182.
 
 </blockquote>
 </details>
@@ -5240,36 +5240,6 @@ COPY --from=builder /usr/local/bin/mongo* /usr/local/bin/bsondump /usr/bin/
 <blockquote>
 
 Providing a specially crafted dictionary to s2.NewDict and using it to encode data can make the encoder read out of bounds.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/text</strong> <code>0.31.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/text@0.31.0</code></small><br/>
-
-```dockerfile
-# mongo-8.dockerfile (57:57)
-FROM mongo:8.3.8
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-56852?s=golang&n=text&ns=golang.org%2Fx&t=golang&vr=%3C0.39.0"><img alt="unspecified : CVE--2026--56852" src="https://img.shields.io/badge/CVE--2026--56852-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.39.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.39.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.475%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A norm.Iter can enter an infinite loop when handling input containing invalid UTF-8 bytes.
 
 </blockquote>
 </details>
@@ -5360,7 +5330,37 @@ COPY --from=builder /usr/local/bin/mongo* /usr/local/bin/bsondump /usr/bin/
 <tr><td>Affected range</td><td><code>&lt;0.39.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.39.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.475%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A norm.Iter can enter an infinite loop when handling input containing invalid UTF-8 bytes.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/text</strong> <code>0.31.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/text@0.31.0</code></small><br/>
+
+```dockerfile
+# mongo-8.dockerfile (57:57)
+FROM mongo:8.3.8
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-56852?s=golang&n=text&ns=golang.org%2Fx&t=golang&vr=%3C0.39.0"><img alt="unspecified : CVE--2026--56852" src="https://img.shields.io/badge/CVE--2026--56852-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.39.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.39.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.475%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

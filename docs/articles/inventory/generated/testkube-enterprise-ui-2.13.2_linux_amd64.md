@@ -21,8 +21,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;=2.13.9-r2</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.210%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.157%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -38,8 +38,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;=2.13.9-r2</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.185%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.194%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -55,8 +55,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;=2.13.9-r2</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.215%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.157%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -89,8 +89,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;=2.13.9-r2</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.180%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.132%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -106,8 +106,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;=2.13.9-r2</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.200%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.186%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

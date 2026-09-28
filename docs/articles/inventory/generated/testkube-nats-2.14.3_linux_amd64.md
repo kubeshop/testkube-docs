@@ -115,7 +115,7 @@ FROM nats:2.14.3-alpine
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>1.311%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>69th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>70th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -212,8 +212,8 @@ FROM nats:2.14.3-alpine
 <table>
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.692%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -440,7 +440,7 @@ Now, we handle all RFC 4254 channel messages; global requests are handled explic
 <tr><td>Affected range</td><td><code>&lt;0.55.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.55.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.437%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>36th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

@@ -115,7 +115,7 @@ FROM ${ALPINE_IMAGE}
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>1.311%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>69th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>70th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -246,8 +246,8 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.22.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.22.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.517%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.373%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -280,8 +280,8 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.22.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.22.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.655%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.478%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -314,8 +314,8 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.22.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.22.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.550%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.371%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -331,8 +331,8 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.22.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.22.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.873%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.563%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
