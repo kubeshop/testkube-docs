@@ -133,6 +133,8 @@ Per-model `extraHeaders` and `queryParams` **replace** the defaults entirely (no
 
 ### LLM Provider Examples
 
+For Kubernetes deployment examples and verification commands, see [Alternative Model Providers](/articles/ai-model-proxies).
+
 #### OpenAI (Direct)
 
 ```yaml
@@ -195,28 +197,32 @@ inference:
 inference:
   defaults:
     url: "https://litellm.corp.internal/v1"
-    apiKey: "proxy-master-key"
+    secretRef: "proxy-auth"
+    secretRefKey: "api-key"
   agent:
     - model: openai/gpt-5.2
       default: true
-    - model: anthropic/claude-sonnet-4-20250514
+    - model: claude-sonnet-5
   tasks:
     model: openai/gpt-5-mini
   embeddings:
     model: openai/text-embedding-3-small
 ```
 
+The model names above must match the proxy's configured `model_name` aliases; provider prefixes are not automatically exposed.
+
 #### Mixed Providers — Different Keys and Endpoints Per Role
+
+Claude uses LiteLLM to translate the OpenAI-compatible requests to Anthropic's API; setting Anthropic headers on its native endpoint does not perform that translation.
 
 ```yaml
 inference:
   agent:
-    - model: claude-sonnet-4-20250514
+    - model: claude-sonnet-5
       default: true
-      url: "https://api.anthropic.com/v1"
-      extraHeaders:
-        x-api-key: "sk-ant-..."
-        anthropic-version: "2023-06-01"
+      url: "https://litellm.corp.internal/v1"
+      secretRef: "proxy-auth"
+      secretRefKey: "api-key"
     - model: gpt-5.2
       url: "https://api.openai.com/v1"
       apiKey: "sk-proj-..."

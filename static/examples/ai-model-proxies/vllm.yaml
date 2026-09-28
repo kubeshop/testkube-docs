@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm
+spec:
+  replicas: 1
+  strategy: { type: Recreate }
+  selector:
+    matchLabels: { app: vllm }
+  template:
+    metadata:
+      labels: { app: vllm }
+    spec:
+      enableServiceLinks: false
+      nodeSelector:
+        kubernetes.io/arch: arm64
+      containers:
+        - name: vllm
+          image: vllm/vllm-openai-cpu:v0.27.0-arm64@sha256:d8ad98d4aa9ae41674b825d505184d55c2ef1f4a9c77e732e53c5caf9a9e5d51
+          args:
+            - Qwen/Qwen2.5-0.5B-Instruct
+            - --served-model-name=local-chat
+            - --dtype=float32
+            - --max-model-len=2048
+            - --max-num-seqs=2
+          env:
+            - name: VLLM_API_KEY
+              valueFrom:
+                secretKeyRef: { name: proxy-auth, key: api-key }
+            - { name: VLLM_CPU_KVCACHE_SPACE, value: "1" }
+            - { name: VLLM_CPU_OMP_THREADS_BIND, value: "0-3" }
+            - { name: HF_HOME, value: /models }
+          ports:
+            - { name: http, containerPort: 8000 }
+          resources:
+            requests: { cpu: "2", memory: 3Gi }
+            limits: { cpu: "4", memory: 6Gi }
+          startupProbe:
+            httpGet: { path: /health, port: http }
+            periodSeconds: 10
+            failureThreshold: 90
+          readinessProbe:
+            httpGet: { path: /health, port: http }
+            periodSeconds: 10
+          volumeMounts:
+            - { name: models, mountPath: /models }
+            - { name: shm, mountPath: /dev/shm }
+      volumes:
+        - name: models
+          emptyDir: { sizeLimit: 5Gi }
+        - name: shm
+          emptyDir: { medium: Memory, sizeLimit: 1Gi }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vllm
+spec:
+  selector: { app: vllm }
+  ports:
+    - { port: 8000, targetPort: http }
