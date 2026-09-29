@@ -156,6 +156,14 @@ The Test Workflow can be deleted using the `testkube delete testworkflow` comman
 testkube delete testworkflow TEST_WORKFLOW_NAME
 ```
 
+:::note
+
+Deleting a Test Workflow doesn't stop executions that are already running, and it detaches their execution history
+from the Test Workflow - see
+[**Deleting a Test Workflow During Execution**](/articles/test-workflows-high-level-architecture#deleting-a-test-workflow-during-execution).
+
+:::
+
 ## Using `tw` Alias
 
 The `tw` alias can be used instead of `testworkflow` in all of the commands shown above, for example:

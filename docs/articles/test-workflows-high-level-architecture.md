@@ -113,6 +113,39 @@ spec:
 
 ![Pure Workflow Containers](./images/pure-workflow-containers.png)
 
+### Deleting a Test Workflow During Execution
+
+Deleting a Test Workflow is not the same as cancelling its executions.
+The Job and Pod created for an execution reference the Test Workflow only through a label, and not through an
+[**owner reference**](https://kubernetes.io/docs/concepts/overview/working-with-objects/owners-dependents/),
+so Kubernetes doesn't cascade the deletion - executions that are already running continue until they finish.
+
+| Component                                  | What happens                                             |
+| ------------------------------------------ | -------------------------------------------------------- |
+| Execution Job and Pod                      | Keep running to completion, then are cleaned up as usual |
+| Live results and logs in the Control Plane | Stop being recorded                                      |
+| Dashboard                                  | The execution in progress doesn't appear                 |
+| CLI session started with `-f`              | Keeps streaming log output until the execution ends      |
+| Existing execution history                 | Orphaned from the deleted Test Workflow                  |
+
+The CLI and the Dashboard differ here because they read the execution from different places.
+A CLI session following an execution with `testkube run testworkflow TEST_WORKFLOW_NAME -f` streams notifications
+for that execution directly from the Pod, which the deletion leaves running.
+The Dashboard instead lists executions under the Test Workflow they belong to, and that Test Workflow is gone.
+
+:::note
+
+Execution history from before the deletion is still reachable through the deleted Test Workflow entry -
+see [**Cached TestWorkflow Results**](/articles/cached-results#accessing-results-for-deleted-workflows).
+Purging past executions removes that history permanently.
+Creating a new Test Workflow with the same name doesn't reattach it, so the new Test Workflow starts with no execution history.
+
+:::
+
+To stop the tests themselves, cancel the executions with
+[**`testkube cancel testworkflowexecutions`**](/cli/testkube-cancel-testworkflowexecutions)
+before you [**delete the Test Workflow**](/articles/test-workflows-creating#delete).
+
 ## Init Process
 
 To perform advanced orchestration, Test Workflows are using their own [**Init Process**](https://en.wikipedia.org/wiki/Init).
