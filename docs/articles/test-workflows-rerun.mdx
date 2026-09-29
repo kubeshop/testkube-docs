@@ -199,17 +199,36 @@ Tools with a `--last-failed` mode already keep a record of the previous run. The
     printf '%s' {{ shellquote(read_artifact("rerun", "test-results/.last-run.json")) }} > test-results/.last-run.json
 
 - name: Tests
-  shell: npx playwright test {{ execution.lineage.baseId != "" ? "--last-failed --pass-with-no-tests" : "" }}
+  condition: 'execution.lineage.baseId == ""'
+  shell: npx playwright test
+  artifacts:
+    paths:
+      - "test-results/**"
+
+- name: Tests (rerun)
+  condition: 'execution.lineage.baseId != ""'
+  shell: |
+    if [ '{{ execution("rerun").status }}' = "passed" ]; then
+      echo "the previous execution passed - nothing to repeat"
+      exit 0
+    fi
+    # Deliberately no --pass-with-no-tests: past the check above, the base
+    # failed, so an empty selection means it failed before any test was given
+    # an ID - a globalSetup error, say. Letting Playwright report "no tests
+    # found" surfaces that, where the flag would exit green having run nothing.
+    npx playwright test --last-failed
   artifacts:
     paths:
       - "test-results/**"
 ```
 
-`--pass-with-no-tests` is the `--last-failed` form of [the empty-selection rule](#hand-the-list-to-the-runner). A rerun can legitimately find nothing to repeat — the base execution may have failed at a later step, or timed out, without any test recording a failure — and `--last-failed` then selects no tests, which Playwright treats as an error. The flag says that an empty selection is an acceptable outcome rather than a broken invocation.
+Two test steps rather than one, because `execution("rerun")` cannot be resolved on an original run — a step that runs resolves every expression in its script, whether or not the shell reaches that line — and because the rerun has a decision to make that the original does not.
+
+That decision is [the empty-selection rule](#hand-the-list-to-the-runner) in its `--last-failed` form. An empty selection has the same two causes here as everywhere else, and only the base's status tells them apart: the base passed, so there is nothing to repeat; or it failed without naming a test, in which case passing would bury the original failure and repeat none of it. `--pass-with-no-tests` accepts both indiscriminately, so it is no substitute for the status check — and once the check has taken the first case, the only empty selection that can still reach Playwright is the one that should not pass.
 
 The flag and the state file differ per tool — Playwright's `--last-failed` reads `test-results/.last-run.json`, pytest's `--last-failed` reads its `.pytest_cache` directory, Jest's `--onlyFailures` reads its cache. Check what yours writes and carry exactly that; where the state is a directory rather than a single file, restore it with `fetch` or `testkube download artifact`, since `read_artifact()` reads one file.
 
-[Playwright - Rerun Failed Tests](/articles/examples/playwright-rerun) is this pattern end to end.
+[Playwright - Rerun Failed Tests](/articles/examples/playwright-rerun) is this pattern end to end. It reaches the empty-selection question by a different route — driven by a config flag rather than by lineage, with an explicit step that fails when no previous results were found — so read the two together rather than mixing them.
 
 ### Have the tool write the list
 
