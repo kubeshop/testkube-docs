@@ -178,7 +178,7 @@ This path requires an Enterprise chart with `global.testAuthoring.litellm.enable
 
 ### Prepare the gateway and credentials
 
-Your existing gateway must have PostgreSQL-backed [virtual-key management](https://docs.litellm.ai/docs/proxy/virtual_keys) enabled. Its administrator remains responsible for the database, schema migrations, encryption key, model configuration, provider credentials, and upgrades.
+Your existing gateway must have PostgreSQL-backed [virtual-key management](https://docs.litellm.ai/docs/proxy/virtual_keys) enabled.
 
 Configure an authoring model in LiteLLM with an OpenAI-compatible chat completions endpoint, streaming and tool-calling support, and `model_info.mode: chat`. Testkube uses the LiteLLM `model_name` alias, such as `authoring-model`; the gateway maps it to the configured provider model. Configure accurate pricing in LiteLLM if you use per-Sandbox spend limits.
 
