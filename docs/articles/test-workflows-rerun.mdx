@@ -185,11 +185,13 @@ Tools with a `--last-failed` mode already keep a record of the previous run. The
     printf '%s' {{ shellquote(read_artifact("rerun", "test-results/.last-run.json")) }} > test-results/.last-run.json
 
 - name: Tests
-  shell: npx playwright test {{ execution.lineage.baseId != "" ? "--last-failed" : "" }}
+  shell: npx playwright test {{ execution.lineage.baseId != "" ? "--last-failed --pass-with-no-tests" : "" }}
   artifacts:
     paths:
       - "test-results/**"
 ```
+
+`--pass-with-no-tests` is the `--last-failed` form of [the empty-selection rule](#hand-the-list-to-the-runner). A rerun can legitimately find nothing to repeat — the base execution may have failed at a later step, or timed out, without any test recording a failure — and `--last-failed` then selects no tests, which Playwright treats as an error. The flag says that an empty selection is an acceptable outcome rather than a broken invocation.
 
 The flag and the state file differ per tool — Playwright's `--last-failed` reads `test-results/.last-run.json`, pytest's `--last-failed` reads its `.pytest_cache` directory, Jest's `--onlyFailures` reads its cache. Check what yours writes and carry exactly that; where the state is a directory rather than a single file, restore it with `fetch` or `testkube download artifact`, since `read_artifact()` reads one file.
 
@@ -202,13 +204,22 @@ Most frameworks can run code when a test finishes — a pytest hook, a Playwrigh
 pytest, in `conftest.py`:
 
 ```python
+failed = {}  # node ID -> None, keeping insertion order and dropping duplicates
+
+
 def pytest_runtest_logreport(report):
-    if report.failed and report.when in ("setup", "call"):
-        with open("/data/failed.txt", "a") as fh:
-            fh.write(report.nodeid + "\n")
+    if report.failed:
+        failed[report.nodeid] = None
+
+
+def pytest_sessionfinish(session, exitstatus):
+    with open("/data/failed.txt", "w") as fh:
+        fh.writelines(nodeid + "\n" for nodeid in failed)
 ```
 
 `report.nodeid` is `tests/test_api.py::TestUser::test_login` — precisely what pytest accepts back as an argument. Nothing to parse, no translation table, and names containing spaces, dots or brackets come through untouched.
+
+Two details the short version of this hook gets wrong. **Every phase counts**: pytest reports each test up to three times, as `setup`, `call` and `teardown`, and a fixture that blows up on the way out fails only in `teardown` — filtering to `call` drops those tests from the rerun silently. **A test can fail twice**, in `call` and again in `teardown`, so the IDs need deduplicating or the rerun schedules it twice. Collecting into a dict and writing once at the end handles both, and writing rather than appending means the file cannot accumulate across runs if the workspace is reused.
 
 Prefer this route whenever the tool has no `--last-failed` of its own: it is the only one where the IDs are produced by the same tool that will consume them.
 
