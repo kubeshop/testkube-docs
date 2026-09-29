@@ -168,7 +168,7 @@ The default per-Sandbox virtual-key budget is `1` provider currency unit. When a
 
 ## Use an existing LiteLLM gateway
 
-Use this configuration when your organization already operates LiteLLM, including an instance that routes requests to Anthropic. Testkube connects directly to that gateway and creates a limited virtual key for each Sandbox. Provider credentials stay in your LiteLLM deployment.
+Use this configuration when your organization already operates LiteLLM. Testkube connects directly to that gateway and creates a limited virtual key for each Sandbox. Provider credentials stay in your LiteLLM deployment.
 
 :::info Chart support
 
@@ -180,7 +180,7 @@ This path requires an Enterprise chart with `global.testAuthoring.litellm.enable
 
 Your existing gateway must have PostgreSQL-backed [virtual-key management](https://docs.litellm.ai/docs/proxy/virtual_keys) enabled. Its administrator remains responsible for the database, schema migrations, encryption key, model configuration, provider credentials, and upgrades.
 
-Configure an authoring model in LiteLLM with an OpenAI-compatible chat completions endpoint, streaming and tool-calling support, and `model_info.mode: chat`. For an Anthropic route, Testkube uses the LiteLLM `model_name` alias, such as `authoring-model`; the gateway maps it to the Anthropic provider model. Configure accurate pricing in LiteLLM if you use per-Sandbox spend limits.
+Configure an authoring model in LiteLLM with an OpenAI-compatible chat completions endpoint, streaming and tool-calling support, and `model_info.mode: chat`. Testkube uses the LiteLLM `model_name` alias, such as `authoring-model`; the gateway maps it to the configured provider model. Configure accurate pricing in LiteLLM if you use per-Sandbox spend limits.
 
 Create two separate credentials in LiteLLM:
 
