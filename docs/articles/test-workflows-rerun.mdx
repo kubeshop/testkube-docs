@@ -144,8 +144,9 @@ The first run writes the record, the rerun reads it through the [`rerun` referen
 ```yaml
 - name: Run the tests
   shell: |
-    run-my-tests || true   # writes failed.txt, one ID per line
+    run-my-tests; status=$?   # writes failed.txt, one ID per line
     cp failed.txt /testkube/outputs/failed
+    exit $status
 ```
 
 The rerun reads it as `{{ execution("rerun").outputs.failed }}`. Keep one ID per line rather than flattening them onto one — a test name containing a space is common, and a space-separated list cannot be split back apart correctly.
@@ -155,7 +156,7 @@ The rerun reads it as `{{ execution("rerun").outputs.failed }}`. Keep one ID per
 ```yaml
 - name: Run the tests
   shell: |
-    run-my-tests || true   # writes failed.txt
+    run-my-tests   # writes failed.txt; its exit status is the step's
   artifacts:
     paths:
       - "failed.txt"
@@ -163,7 +164,9 @@ The rerun reads it as `{{ execution("rerun").outputs.failed }}`. Keep one ID per
 
 The rerun reads it as `{{ read_artifact("rerun", "failed.txt") }}`.
 
-Two things to get right either way:
+Three things to get right either way:
+
+- **Let the failure through.** Whatever the step does after the tests — copying the list to `/testkube/outputs`, converting a report — must not become the step's exit status, or the run that failed is reported as passed and nobody goes looking for it to rerun. Capture the status first and re-exit with it, as the output example above does; `run-my-tests || true` is the way to get this wrong.
 
 - **The record has to survive a failing step**, which is exactly the run that has something to record. An `artifacts` block on the **same** step as the command is safe — Testkube uploads it after the command whatever its exit code. A **separate** upload step is an ordinary step and is skipped when an earlier one failed, so it needs `condition: always`.
 - **Read it only on a rerun.** `read_artifact("rerun", …)` and `execution("rerun")` fail on an original run, which has no base. Guard the step with `condition: 'execution.lineage.baseId != ""'`.
@@ -236,9 +239,12 @@ PY
 **A JSON reporter with `jq`** is easier than either, and most tools have one. Go's is built in:
 
 ```shell
-go test -json ./... | tee /data/run.json
+go test -json ./... > /data/run.json; status=$?
 jq -r 'select(.Action == "fail" and .Test) | "\(.Package) \(.Test)"' /data/run.json > /data/failed.txt
+exit $status
 ```
+
+Note the redirect rather than `| tee`: a pipeline reports the status of its **last** command, so `go test ... | tee` reports `tee`'s success, and the `jq` after it would leave the step green with every test failing. Capture the status before anything else runs.
 
 If you get to choose the reporter, choose JSON.
 
@@ -321,8 +327,11 @@ spec:
     - name: Run the selected cases
       # A real runner takes /data/selected.txt as a filter and records its own
       # failures. This stand-in fails ShouldFail on the first attempt only.
+      #
+      # The step exits with the failure, so the execution is red and there is
+      # something to rerun. The artifacts block is on this same step, which is
+      # what gets failed.txt uploaded anyway.
       shell: |
-        set -e
         : > /data/failed.txt
         while IFS= read -r case; do
           [ -n "$case" ] || continue
@@ -333,16 +342,14 @@ spec:
             echo "PASS $case"
           fi
         done < /data/selected.txt
-      artifacts:
-        paths:
-          - "failed.txt"
 
-    - name: Fail if anything failed
-      shell: |
         [ -s /data/failed.txt ] || { echo "everything passed"; exit 0; }
         echo "recorded for the next rerun:"
         cat /data/failed.txt
         exit 1
+      artifacts:
+        paths:
+          - "failed.txt"
 ```
 
 ```shell
