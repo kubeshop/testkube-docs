@@ -164,7 +164,11 @@ The rerun reads it as `{{ execution("rerun").outputs.failed }}`. Keep one ID per
 ```yaml
 - name: Run the tests
   shell: |
-    run-my-tests   # writes failed.txt; its exit status is the step's
+    # Same reason as above, and one more: a run that dies before its reporter
+    # writes anything would otherwise upload no artifact at all.
+    : > failed.txt
+
+    run-my-tests   # records the IDs it failed; its exit status is the step's
   artifacts:
     paths:
       - "failed.txt"
@@ -172,7 +176,9 @@ The rerun reads it as `{{ execution("rerun").outputs.failed }}`. Keep one ID per
 
 The rerun reads it as `{{ read_artifact("rerun", "failed.txt") }}`.
 
-Three things to get right either way:
+Four things to get right either way:
+
+- **Always publish the record, even empty.** A build or collection error kills the run before the hook or reporter writes a line, so without the `: >` the artifact never exists — and a missing artifact is not an empty one. `read_artifact()` fails outright on a file the base never uploaded, which means the step dies at the read and the empty-record handling below never gets to run. Create the file before the tests, and the worst case becomes an empty record, which the rest of the page knows what to do with.
 
 - **Let the failure through, in both directions.** Two things in one of these steps can fail — the tests, and the publishing of their record — and the step has to report either. Whatever runs after the tests must not _become_ the step's status, or a failed run is reported as passed and nobody goes looking for it to rerun: capture the status first and re-exit with it, as the output example above does (`run-my-tests || true` is the way to get this wrong). Equally, a publishing command that fails must not be _swallowed_ by a passing test status: a green run whose record never arrived cannot be narrowed later, and the next rerun silently has nothing to work from. Fail on the publish, then exit with the tests' status.
 
