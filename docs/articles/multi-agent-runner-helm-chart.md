@@ -108,7 +108,7 @@ the Runner itself first starts.
 This enables you to install the Runner using only `helm`:
 
 1. Retrieve the helm instructions including the Runner join token for the target environment:
-   ![Create self-registering Runner UI](images/create-runner-helm.png)
+   ![Create self-registering Runner UI](images/add-new-agent-helm.png)
 2. Install the Helm Chart:
    ```sh
    helm upgrade --install \
