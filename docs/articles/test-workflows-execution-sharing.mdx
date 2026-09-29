@@ -60,15 +60,28 @@ spec:
 
 `execution()` returns a map:
 
-| Field      | Description                                                         |
-| ---------- | ------------------------------------------------------------------- |
-| `id`       | Execution ID                                                        |
-| `name`     | Execution name                                                      |
-| `workflow` | Name of the Workflow that ran                                       |
-| `alias`    | The `as` value, empty when not aliased                              |
-| `index`    | Position within a matrix, shard or `count` fan-out, `0` when single |
-| `status`   | Final status                                                        |
-| `outputs`  | Map of the values the execution published                           |
+| Field          | Description                                                                   |
+| -------------- | ----------------------------------------------------------------------------- |
+| `id`           | Execution ID                                                                  |
+| `name`         | Execution name                                                                |
+| `workflow`     | Name of the Workflow that ran                                                 |
+| `alias`        | The `as` value, empty when not aliased                                        |
+| `index`        | Position within a matrix, shard or `count` fan-out, `0` when single           |
+| `status`       | Final status                                                                  |
+| `outputs`      | Map of the values the execution published                                     |
+| `errorMessage` | Message of the initialization step, empty when it has none                    |
+| `errorReason`  | Reason code of the initialization step, empty when it has none                |
+| `stepErrors`   | Map of the step messages, keyed by step reference                             |
+| `stepReasons`  | Map of the step reason codes, keyed by step reference                         |
+| `stepAttempts` | Map of the number of attempts per step, for the steps that ran more than once |
+
+The error fields tell a suite why a child execution failed. The [reason codes](/articles/test-workflows-failure-reasons) do not change between versions, while the message is text for people. So an assert compares the code when the failure has one:
+
+```yaml
+- name: Check why the child failed
+  shell: |
+    [ '{{ execution("p").errorReason }}' = 'unschedulable' ] || { echo 'unexpected reason'; exit 1; }
+```
 
 ### When Outputs Are Available
 
