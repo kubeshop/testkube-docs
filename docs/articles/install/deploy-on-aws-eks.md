@@ -220,7 +220,7 @@ be used for Atlas access.
 ```bash
 aws eks create-addon \
   --cluster-name <EKS_CLUSTER_NAME> \
-  --addon-name eks-pod-identity-runner
+  --addon-name eks-pod-identity-agent
 ```
 
 Verify the addon is active:
@@ -228,11 +228,11 @@ Verify the addon is active:
 ```bash
 aws eks describe-addon \
   --cluster-name <EKS_CLUSTER_NAME> \
-  --addon-name eks-pod-identity-runner \
+  --addon-name eks-pod-identity-agent \
   --query 'addon.status' \
   --output text
 
-kubectl get pods -n kube-system -l app.kubernetes.io/name=eks-pod-identity-runner
+kubectl get pods -n kube-system -l app.kubernetes.io/name=eks-pod-identity-agent
 ```
 
 **Step 2 — Create the IAM Role:**
@@ -551,7 +551,7 @@ Create DNS records (CNAME or Alias) pointing to your NGINX Ingress load balancer
 | ---------- | --------------------- |
 | Dashboard  | `dashboard.<domain>`  |
 | REST API   | `api.<domain>`        |
-| gRPC API   | `runner.<domain>`     |
+| gRPC API   | `agent.<domain>`      |
 | WebSockets | `websockets.<domain>` |
 | Storage    | `storage.<domain>`    |
 
@@ -574,7 +574,7 @@ All pods should reach `Running` status. The Dashboard should be accessible at `h
 ## Using AWS ALB Instead of NGINX
 
 If you prefer the AWS Load Balancer Controller over NGINX Ingress, you need to configure ALB annotations
-for each Ingress resource. Testkube exposes the gRPC endpoint (`runner.<domain>`) through a **separate
+for each Ingress resource. Testkube exposes the gRPC endpoint (`agent.<domain>`) through a **separate
 Ingress** from the REST API, so it needs its own ALB configuration with `backend-protocol-version: "GRPC"`.
 
 ```yaml
@@ -735,7 +735,7 @@ kubectl logs <pod-name> -n testkube
 
 ```bash
 # Verify the addon is running
-kubectl get ds -n kube-system eks-pod-identity-runner
+kubectl get ds -n kube-system eks-pod-identity-agent
 
 # Check associations
 aws eks list-pod-identity-associations \

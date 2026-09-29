@@ -133,7 +133,7 @@ By default, the following services will be exposed. You can also choose to overr
 | Dashboard      | dashboard.$domain  | global.uiSubdomain            |
 | REST API       | api.$domain        | global.restApiSubdomain       |
 | Dex            | api.$domain/idp    | global.restApiSubdomain       |
-| gRPC API       | runner.$domain     | global.grpcApiSubdomain       |
+| gRPC API       | agent.$domain      | global.grpcApiSubdomain       |
 | WebSockets API | websockets.$domain | global.websocketsApiSubdomain |
 | Storage API    | storage.$domain    | global.storageApiSubdomain    |
 
