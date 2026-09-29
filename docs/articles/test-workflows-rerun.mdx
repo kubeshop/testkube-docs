@@ -360,12 +360,21 @@ spec:
     - name: Take only what the previous run failed
       condition: 'execution.lineage.baseId != ""'
       shell: |
-        printf '%s' {{ shellquote(read_artifact("rerun", "failed.txt")) }} > /data/selected.txt
-        # An empty record means the base failed without naming a case - a build
-        # error, say - so repeat the whole suite rather than nothing.
-        [ -s /data/selected.txt ] ||
-          printf '%s\n' suite.ShouldPass suite.ShouldAlsoPass suite.ShouldFail > /data/selected.txt
         echo "rerun of {{ execution.lineage.baseId }}, attempt {{ execution.lineage.attempt }}"
+        printf '%s' {{ shellquote(read_artifact("rerun", "failed.txt")) }} > /data/selected.txt
+
+        # An empty record has two causes, and only the base's status tells them
+        # apart: a run that passed recorded nothing because nothing failed, and
+        # a run that failed recorded nothing because it never got as far as a
+        # test case. Repeat everything only in the second case.
+        if [ ! -s /data/selected.txt ]; then
+          if [ '{{ execution("rerun").status }}' = "passed" ]; then
+            echo "the previous execution passed - nothing to repeat"
+          else
+            echo "no cases recorded - taking the whole suite"
+            printf '%s\n' suite.ShouldPass suite.ShouldAlsoPass suite.ShouldFail > /data/selected.txt
+          fi
+        fi
 
     - name: Run the selected cases
       # A real runner takes /data/selected.txt as a filter and records its own
