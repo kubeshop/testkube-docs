@@ -4,9 +4,9 @@ import RequiresCommercialWorkflows from "./_commercial-workflows-note.mdx";
 
 <RequiresCommercialWorkflows />
 
-A rerun is a new execution that knows which execution it came from. That one fact is what a Workflow needs to narrow itself down to the test cases that failed last time: it reads the previous run's report out of that run's artifacts, turns it into a filter, and hands the filter to the test runner.
+A rerun is a new execution that knows which execution it came from. That one fact is what a Workflow needs to narrow itself down to the test cases that failed last time: it reads the record the previous run left behind — the test tool's own `--last-failed` state, a list of test IDs, or a report — turns that into a filter, and hands the filter to the test runner.
 
-Nothing has to be passed in and nothing has to be remembered between runs — the Workflow is written once and asks "which run am I a rerun of?" every time it starts.
+Nothing has to be passed in on the command line: the Workflow is written once and asks "which run am I a rerun of?" every time it starts. What does have to exist is that record. The run that fails writes it as an artifact or an output, and the rerun reads it back off the execution it came from — so the Workflow carries its own state forward, rather than depending on anything kept outside it.
 
 ## Rerunning an Execution
 
@@ -257,6 +257,8 @@ exit $status
 
 Note the redirect rather than `| tee`: a pipeline reports the status of its **last** command, so `go test ... | tee` reports `tee`'s success, and the `jq` after it would leave the step green with every test failing. Capture the status before anything else runs.
 
+Note also what the filter cannot name. `select(… and .Test)` keeps only failures belonging to a test, so a package that fails to **build** — reported as a failed package with no `.Test` — produces no line at all. That is unavoidable, since there is no test ID to rerun; what matters is that it does not turn into a silent pass. The captured exit status keeps the producing run red, and the empty-list guard below is what stops the rerun reporting success for a suite it never ran.
+
 If you get to choose the reporter, choose JSON.
 
 Join the fields the way your filter wants them, which is not the same everywhere. JUnit XML fixes the shape of a report, not the meaning of its fields:
@@ -276,11 +278,24 @@ Two rows of that table are why the earlier routes are worth the effort. **Patter
 
 Two rules, whichever route produced the list.
 
-**An empty list means everything passed.** Never hand it to the runner, which reads "no filter" as "run everything":
+**An empty list does not mean everything passed.** Never hand it to the runner, which reads "no filter" as "run everything" — but do not read it as "nothing to do" either. A run also records nothing when it failed _before_ any test case could fail: a compile or collection error, a crashed reporter or hook, or a failure with no test attached to it, which is what the Go filter above drops when it requires `.Test` and a package fails to build.
+
+The previous execution's own status is what separates the two:
 
 ```shell
-[ -s /data/failed.txt ] || { echo "nothing failed last time"; exit 0; }
+if [ ! -s /data/failed.txt ]; then
+  if [ '{{ execution("rerun").status }}' = "passed" ]; then
+    echo "the previous execution passed - nothing to repeat"
+    exit 0
+  fi
+  # It failed without naming a case, so the failure was not a test failure.
+  # Repeat everything rather than nothing.
+  echo "previous execution failed with no test cases recorded - running the whole suite"
+  exec run-my-tests
+fi
 ```
+
+Falling back to the full suite is the safe default because the alternative — exiting 0 — reports a rerun as green without having run a thing. Failing the step instead is also defensible when you would rather a person looked at why the base recorded nothing; what is not defensible is passing.
 
 **Quote every name.** A name with a space splits into two arguments; one with `[ ]` — a parameterized `test[1]` — is expanded against the filenames in the working directory and quietly filters on whatever it matched.
 
@@ -333,6 +348,10 @@ spec:
       condition: 'execution.lineage.baseId != ""'
       shell: |
         printf '%s' {{ shellquote(read_artifact("rerun", "failed.txt")) }} > /data/selected.txt
+        # An empty record means the base failed without naming a case - a build
+        # error, say - so repeat the whole suite rather than nothing.
+        [ -s /data/selected.txt ] ||
+          printf '%s\n' suite.ShouldPass suite.ShouldAlsoPass suite.ShouldFail > /data/selected.txt
         echo "rerun of {{ execution.lineage.baseId }}, attempt {{ execution.lineage.attempt }}"
 
     - name: Run the selected cases
