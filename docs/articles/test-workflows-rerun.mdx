@@ -144,8 +144,16 @@ The first run writes the record, the rerun reads it through the [`rerun` referen
 ```yaml
 - name: Run the tests
   shell: |
-    run-my-tests; status=$?   # writes failed.txt, one ID per line
-    cp failed.txt /testkube/outputs/failed
+    # Create it up front so a clean run publishes an empty record rather than
+    # no record: "the file is missing" and "nothing failed" must not look alike.
+    : > failed.txt
+
+    run-my-tests; status=$?   # records the IDs it failed, one per line
+
+    # Publishing has a status of its own. Exiting with a passing test status
+    # after this failed would report a run whose record never reached the rerun.
+    cp failed.txt /testkube/outputs/failed || exit 1
+
     exit $status
 ```
 
@@ -166,7 +174,7 @@ The rerun reads it as `{{ read_artifact("rerun", "failed.txt") }}`.
 
 Three things to get right either way:
 
-- **Let the failure through.** Whatever the step does after the tests — copying the list to `/testkube/outputs`, converting a report — must not become the step's exit status, or the run that failed is reported as passed and nobody goes looking for it to rerun. Capture the status first and re-exit with it, as the output example above does; `run-my-tests || true` is the way to get this wrong.
+- **Let the failure through, in both directions.** Two things in one of these steps can fail — the tests, and the publishing of their record — and the step has to report either. Whatever runs after the tests must not _become_ the step's status, or a failed run is reported as passed and nobody goes looking for it to rerun: capture the status first and re-exit with it, as the output example above does (`run-my-tests || true` is the way to get this wrong). Equally, a publishing command that fails must not be _swallowed_ by a passing test status: a green run whose record never arrived cannot be narrowed later, and the next rerun silently has nothing to work from. Fail on the publish, then exit with the tests' status.
 
 - **The record has to survive a failing step**, which is exactly the run that has something to record. An `artifacts` block on the **same** step as the command is safe — Testkube uploads it after the command whatever its exit code. A **separate** upload step is an ordinary step and is skipped when an earlier one failed, so it needs `condition: always`.
 - **Read it only on a rerun.** `read_artifact("rerun", …)` and `execution("rerun")` fail on an original run, which has no base. Guard the step with `condition: 'execution.lineage.baseId != ""'`.
@@ -251,7 +259,12 @@ PY
 
 ```shell
 go test -json ./... > /data/run.json; status=$?
-jq -r 'select(.Action == "fail" and .Test) | "\(.Package) \(.Test)"' /data/run.json > /data/failed.txt
+
+# jq fails on malformed input, or is missing from the image entirely. Either
+# way the list is absent or half written, which is not a passing run.
+jq -r 'select(.Action == "fail" and .Test) | "\(.Package) \(.Test)"' \
+  /data/run.json > /data/failed.txt || exit 1
+
 exit $status
 ```
 
