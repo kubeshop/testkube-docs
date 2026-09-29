@@ -12,15 +12,15 @@ In the environments section, you can see the list of your existing environments.
 
 ![Existing Environments](../img/existing-environments-062024.png)
 
-GREEN status means that at least one [Agent](/articles/agents-overview) in your Environment is connected successfully.
+GREEN status means that at least one [Runner](/articles/agents-overview) in your Environment is connected successfully.
 
 In the case of a RED status, you can try to debug the issues with the command below:
 
 ```sh
-testkube agent debug
+testkube runner debug
 ```
 
-Run this on your cluster where the given agent is installed.
+Run this on your cluster where the given runner is installed.
 
 Read more about [Environment Management](/articles/environment-management).
 
@@ -59,8 +59,8 @@ This tab allows you to configure Organization-level Product Features:
 - **Global Insights** - Toggle Global Insights of your Workflow executions - [Read More](/articles/test-insights).
 - **AI Assistant** - Toggle the AI Assistant feature for your organization [Read More](/articles/ai-assistant-overview).
 - **Webhooks URL Masking** - Toggle Webhooks URL masking - [Read More](/articles/webhooks#url-masking).
-- **Agent Token Masking** - Toggle Agent Token masking - [Read More](/articles/agents-overview#agent-token-masking).
-- **GitOps Resource Ownership** - Toggle exclusive GitOps Agent ownership of synced resources - [Read More](/articles/gitops-overview#gitops-resource-ownership).
+- **Runner token masking** - Toggle Runner token masking - [Read More](/articles/agents-overview#agent-token-masking).
+- **GitOps Resource Ownership** - Toggle exclusive runner with the GitOps capability ownership of synced resources - [Read More](/articles/gitops-overview#gitops-resource-ownership).
 
 ![Organization Product Features](../img/organization-product-features.png)
 
@@ -74,8 +74,8 @@ Usage shows
 
 - Members - the number of Member Seats currently used from your license/plan.
 - Environments - the number of Testkube Environments currently created against the number in your license/plan.
-- Fixed Agents - the number of Runner Agents using a Fixed License - [Read More](/articles/agents-overview#licensing-for-runner-agents).
-- Concurrent Floating Runner Agents - the number of Agents assigned a Floating license concurrently running Workflows over the last 30 days - [Read More](/articles/agents-overview#licensing-for-runner-agents).
+- Fixed Runners - the number of runners using a Fixed License - [Read More](/articles/agents-overview#licensing-for-runner-agents).
+- Concurrent Floating runners - the number of Runners assigned a Floating license concurrently running Workflows over the last 30 days - [Read More](/articles/agents-overview#licensing-for-runner-agents).
 
 :::tip
 For more details about the Testkube offerings, check out the Testkube [Pricing Page](https://testkube.io/pricing).

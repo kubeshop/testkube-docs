@@ -10,9 +10,9 @@ for your specific needs.
 
 ## Testkube Control Plane
 
-The central component that manages connected Agents.
+The central component that manages connected Runners.
 
-- API - A service which runs the REST, Agent gRPC and Websocket APIs for interacting with the Control Plane.
+- API - A service which runs the REST, Runner gRPC and Websocket APIs for interacting with the Control Plane.
   - Docker image - [kubeshop/testkube-enterprise-api](https://hub.docker.com/r/kubeshop/testkube-enterprise-api)
 - Dashboard - The web-based UI for managing tests, environments, and users.
   - Docker image - [kubeshop/testkube-enterprise-ui](https://hub.docker.com/r/kubeshop/testkube-enterprise-ui)
@@ -30,7 +30,7 @@ The central component that manages connected Agents.
 - MongoDB - Legacy database support retained for existing installations and migration workflows.
   - Helm chart - Maintained in the [testkube-thirdparty-artifacts](https://github.com/kubeshop/testkube-thirdparty-artifacts) repository.
   - Docker image - [kubeshop/bitnami-mongodb](https://hub.docker.com/r/kubeshop/bitnami-mongodb)
-- NATS - It is a service that is used as a message broker for communication between API and Agents.
+- NATS - It is a service that is used as a message broker for communication between API and Runners.
   - Helm chart - Maintained in the [testkube-thirdparty-artifacts](https://github.com/kubeshop/testkube-thirdparty-artifacts) repository.
   - Docker image - [NATS](https://hub.docker.com/_/nats/tags)
 - Additional images used for running jobs during the chart install:
@@ -41,11 +41,11 @@ The central component that manages connected Agents.
   - [natsBox](https://hub.docker.com/r/natsio/nats-box)
   - [promExporter](https://hub.docker.com/r/natsio/prometheus-nats-exporter)
 
-## Testkube Agent
+## Testkube Runner {#testkube-agent}
 
 A lightweight component that connects to the Control Plane and executes test runs.
 
-- API - a service that runs REST APIs and establishes a connection between Agent and a Control Plane
+- API - a service that runs REST APIs and establishes a connection between Runner and a Control Plane
   - Helm chart - Bundled as a subchart in the [kubeshop/testkube](https://github.com/kubeshop/helm-charts/tree/main/charts/testkube) Helm charts
   - Docker image - [kubeshop/testkube-api-server](https://hub.docker.com/r/kubeshop/testkube-api-server)
 - NATS - a message broker.

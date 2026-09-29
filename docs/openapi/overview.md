@@ -2,19 +2,19 @@
 
 Testkube exposes two REST APIs that can be consumed accordingly:
 
-- The Agent API exposed by the [Standalone Agent](/articles/install/standalone-agent)
+- The Runner API exposed by the [Standalone Runner](/articles/install/standalone-agent)
 - The Control Plane API exposed by the [Testkube Control-Plane](/articles/install/overview) (both cloud and on-prem)
 
 :::tip
 The OpenAPI definitions for these APIs are available at
-- [Standalone Agent OpenAPI](/openapi/testkube-agent-openapi.yaml)
+- [Standalone Runner OpenAPI](/openapi/testkube-agent-openapi.yaml)
 - [Control Plane OpenAPI](/openapi/testkube-control-plane-openapi.yaml)
 :::
 
-## Agent API
+## Runner API {#agent-api}
 
-The Agent API provides programmatic access to most features exposed
-by the agent itself when it is running in [standalone mode](/articles/install/standalone-agent). This is the same API used by 
+The Runner API provides programmatic access to most features exposed
+by the Runner itself when it is running in [standalone mode](/articles/install/standalone-agent). This is the same API used by
 the Testkube CLI for most of its commands. 
 
 By default, this API does not require any authentication for any of its operations - so be careful in giving access.
@@ -23,13 +23,13 @@ By default, this API does not require any authentication for any of its operatio
 
 The Control Plane API provides programmatic access 
 to features both specific the control-plane itself, and acts as a proxy for making
-authenticated calls to connected environment agents. 
+authenticated calls to connected Runners. 
 
 The operations exposed by the control plane are here divided into the following categories:
 
 - **Core Operations**: High-level control plane operations. 
-- **Agent Operations**: Proxied Agent operations for a specific environment, these are the same as the Core Agent operations, 
-  but with organization and environment identifiers.
+- **Agent Operations**: Proxied Runner operations for a specific environment. These match the Runner API operations,
+  but with organization and environment identifiers. The reference still labels this group Agent Operations.
 - **Organization Operations**: Operations for a specific organization defined in the Control Plane.
 - **Environment Operations**: Operations for a specific environment defined within an organization.
 

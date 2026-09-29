@@ -47,11 +47,11 @@ The manifest is split across two charts. A fully-disconnected install must mirro
 
 Database images depend on your chosen backend. New installations default to PostgreSQL, so mirror the PostgreSQL images you deploy (the CloudNativePG operator and its PostgreSQL image, or the bundled chart image). Legacy installations that still run MongoDB must mirror the MongoDB image (`kubeshop/bitnami-mongodb`). See [Bring Your Own Infra](/articles/install/advanced-install#bring-your-own-infra).
 
-### Agent / Runner chart (`testkube-runner`)
+### Runner chart (`testkube-runner`) {#agent-runner-chart-testkube-runner}
 
 | Image                                | Purpose                                     |
 | ------------------------------------ | ------------------------------------------- |
-| `kubeshop/testkube-api-server`       | Runner Agent API server                     |
+| `kubeshop/testkube-api-server`       | runner API server                           |
 | `kubeshop/testkube-tw-init`          | Initializes a Test Workflow execution       |
 | `kubeshop/testkube-tw-toolkit`       | Runs steps within a Test Workflow execution |
 | `nats`                               | NATS message broker                         |
@@ -108,13 +108,13 @@ global:
 
 Follow [Install with Helm](/articles/install/install-with-helm) for the rest of the Control Plane configuration (domain, TLS, ingress, and storage). Every image the install pulls should now resolve from your internal registry.
 
-## Step 4: Create and install Runner Agents
+## Step 4: Create and install runners {#step-4-create-and-install-runner-agents}
 
 :::warning The Runner is a separate pre-staging step
-Runner images are pulled when you **create an Agent**, not when you install the Control Plane. Installing the Control Plane succeeds without ever touching the Agent / Runner images, so a bundle staged from the Control Plane install alone will look complete and then fail the first time you add a Runner. Pre-stage the [Agent / Runner chart images](#agent--runner-chart-testkube-runner) as part of Step 1, before you create any Agent.
+Runner images are pulled when you **create a Runner**, not when you install the Control Plane. Installing the Control Plane succeeds without ever touching the Runner / Runner images, so a bundle staged from the Control Plane install alone will look complete and then fail the first time you add a Runner. Pre-stage the [Runner / Runner chart images](#agent--runner-chart-testkube-runner) as part of Step 1, before you create any Runner.
 :::
 
-Testkube Agents are always deployed by you in your own infrastructure, and the On-Prem Control Plane ships without a Runner by default. After the Control Plane is running, create a Runner Agent and install it with the same internal-registry values:
+Testkube Runners are always deployed by you in your own infrastructure, and the On-Prem Control Plane ships without a Runner by default. After the Control Plane is running, create a runner and install it with the same internal-registry values:
 
 ```yaml
 runner:
@@ -129,14 +129,14 @@ global:
     - name: internal-registry
 ```
 
-See [Installing Testkube Agent with Helm Charts](/articles/multi-agent-runner-helm-chart) for the full Runner setup, including how to obtain the runner ID and secret.
+See [Installing Testkube Runner with Helm Charts](/articles/multi-agent-runner-helm-chart) for the full Runner setup, including how to obtain the runner ID and secret.
 
 ## Verify completeness
 
 Confirm nothing still points at `docker.io` before you hand the environment off:
 
 - Watch for `ImagePullBackOff` or `ErrImagePull` on Control Plane pods, Runner pods, and the first Test Workflow execution. Each one points at an image you have not mirrored yet.
-- A Control Plane that starts cleanly does not prove the bundle is complete. Create a Runner and run a real Test Workflow, so the Agent and workflow images are exercised too.
+- A Control Plane that starts cleanly does not prove the bundle is complete. Create a Runner and run a real Test Workflow, so the Runner and workflow images are exercised too.
 - Re-check the [Image Inventory](/articles/inventory/images) whenever you upgrade. Tags change between releases, and a new tag is a new image to mirror.
 
 If a fully-disconnected install does not work for your setup, [get in touch](https://testkube.io/contact) and we will help you install Testkube as required.

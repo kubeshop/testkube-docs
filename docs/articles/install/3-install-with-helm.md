@@ -1,6 +1,6 @@
 # Testkube Production Install with Helm
 
-The main Testkube Helm Charts includes both the Testkube Control Plane and Testkube Agent charts and
+The main Testkube Helm Charts includes both the Testkube Control Plane and Testkube Runner charts and
 let you set up a customized Testkube instance tailored to your environment. See the list of
 included [components](/articles/helm-components).
 
@@ -133,7 +133,7 @@ By default, the following services will be exposed. You can also choose to overr
 | Dashboard      | dashboard.$domain  | global.uiSubdomain            |
 | REST API       | api.$domain        | global.restApiSubdomain       |
 | Dex            | api.$domain/idp    | global.restApiSubdomain       |
-| gRPC API       | agent.$domain      | global.grpcApiSubdomain       |
+| gRPC API       | runner.$domain     | global.grpcApiSubdomain       |
 | WebSockets API | websockets.$domain | global.websocketsApiSubdomain |
 | Storage API    | storage.$domain    | global.storageApiSubdomain    |
 

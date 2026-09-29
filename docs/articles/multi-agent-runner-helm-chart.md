@@ -1,22 +1,22 @@
-# Installing Testkube Agent with Helm Charts
+# Installing Testkube Runner with Helm Charts {#installing-testkube-agent-with-helm-charts}
 
-You can install a Testkube Runner or Listener Agents using the `kubeshop/testkube-runner` Helm Chart. The Standalone
-Agent is installed as described at [Installing the Standalone Agent](/articles/install/standalone-agent#installing-the-standalone-agent).
+You can install a Testkube Runner or runners with the listener capability using the `kubeshop/testkube-runner` Helm Chart. The Standalone
+Runner is installed as described at [Installing the Standalone Runner](/articles/install/standalone-agent#installing-the-standalone-agent).
 
 ## Basic installation
 
-Make sure you've read about Testkube Agents at [Agents Overview](/articles/agents-overview) before diving into the installation.
+Make sure you've read about Testkube Runners at [Runners Overview](/articles/agents-overview) before diving into the installation.
 
-### Creating Agent for Helm Charts
+### Creating Runner for Helm Charts {#creating-agent-for-helm-charts}
 
-To create an Agent with both the runner and listener capability, you can run `testkube create agent` command, like:
+To create a Runner with both the runner and listener capability, you can run `testkube create runner` command, like:
 
 ```sh
-testkube create agent my-name --label my-label=my-value
+testkube create runner my-name --label my-label=my-value
 ```
 
 After selecting the environment (unless you pass `--env env-id` parameter),
-it will display information with agent ID and secret key:
+it will display information with runner ID and secret key:
 
 ```
 ID:             tkcagent_c5895d9cf5ac9497
@@ -67,14 +67,14 @@ cloud:
 ## Updating runner labels and mode
 
 If you want the runner Deployment itself to be the source of truth for labels and runner mode (instead of
-managing them through `testkube update agent`), set the corresponding Helm values and run `helm upgrade`
+managing them through `testkube update runner`), set the corresponding Helm values and run `helm upgrade`
 so the runner pod restarts:
 
-| Helm value                  | Purpose                                                                                                                                                     |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `runner.register.global`    | Register the runner as a [Global Runner Agent](/articles/test-workflows-running#global-runner-agents).                                                      |
-| `runner.register.groupName` | Register the runner as a [Grouped Runner Agent](/articles/test-workflows-running#grouped-runner-agents) (cannot be combined with `runner.register.global`). |
-| `runner.register.labels`    | Map of labels to publish to the Control Plane. Each key is published with `runner.register.labelPrefix` (default `runner.testkube.io/`) prepended.          |
+| Helm value                  | Purpose                                                                                                                                               |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `runner.register.global`    | Register the runner as a [Global runner](/articles/test-workflows-running#global-runner-agents).                                                      |
+| `runner.register.groupName` | Register the runner as a [Grouped runner](/articles/test-workflows-running#grouped-runner-agents) (cannot be combined with `runner.register.global`). |
+| `runner.register.labels`    | Map of labels to publish to the Control Plane. Each key is published with `runner.register.labelPrefix` (default `runner.testkube.io/`) prepended.    |
 
 Example:
 
@@ -87,28 +87,28 @@ helm upgrade --install \
   my-runner oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube-runner --version <version>
 ```
 
-Once the runner reconnects, the Agents list in the Dashboard will reflect the new values. From that point
-on, any change made through `testkube update agent` for those fields will be overwritten on the runner's
+Once the runner reconnects, the Runners list in the Dashboard will reflect the new values. From that point
+on, any change made through `testkube update runner` for those fields will be overwritten on the runner's
 next reconnect — pick a single source of truth per runner.
 
 If `runner.register.labels` / `runner.register.global` / `runner.register.groupName` are **not** set,
-the runner will not touch the corresponding stored values on reconnect, so existing CLI-managed agents
+the runner will not touch the corresponding stored values on reconnect, so existing CLI-managed runners
 remain unchanged after a Helm upgrade. See
-[Updating Runner Agent labels and mode](/articles/agents-overview#updating-runner-agent-labels-and-mode)
+[Updating runner labels and mode](/articles/agents-overview#updating-runner-agent-labels-and-mode)
 for the complete behavior matrix.
 
-## Self-registering Agent Helm install
+## Self-registering Runner Helm install {#self-registering-agent-helm-install}
 
-Sometimes it may be desirable to allow Agents to create themselves automatically on deployment (without using the CLI),
+Sometimes it may be desirable to allow Runners to create themselves automatically on deployment (without using the CLI),
 for example when using an ephemeral testing environment that is programmatically created.
 
-Each environment has an Agent Join Token assigned to it. This API key can be used for creating Agents automatically when
-the Agent itself first starts.
+Each environment has a Runner Join Token assigned to it. This API key can be used for creating Runners automatically when
+the Runner itself first starts.
 
-This enables you to install the Agent using only `helm`:
+This enables you to install the Runner using only `helm`:
 
-1. Retrieve the helm instructions including the Agent join token for the target environment:
-   ![Create self-registering Agent UI](images/create-runner-helm.png)
+1. Retrieve the helm instructions including the Runner join token for the target environment:
+   ![Create self-registering Runner UI](images/create-runner-helm.png)
 2. Install the Helm Chart:
    ```sh
    helm upgrade --install \
@@ -140,20 +140,20 @@ cloud:
   url: "agent.testkube.io:443"
 ```
 
-### Limitations of self-registering Agents
+### Limitations of self-registering Runners {#limitations-of-self-registering-agents}
 
-- Self-registering Agents must be able to create Kubernetes `Secrets` in their namespace.
-  These secrets are used to store the agent's ID and connection key which are generated during registration.
-  If the Agent cannot create a `Secret` it will self-register every time it starts up.
-- Agents will not deregister themselves during `helm uninstall`. Instead, self-registered Agents must be manually removed using the UI or CLI.
+- Self-registering Runners must be able to create Kubernetes `Secrets` in their namespace.
+  These secrets are used to store the runner's ID and connection key which are generated during registration.
+  If the Runner cannot create a `Secret` it will self-register every time it starts up.
+- Runners will not deregister themselves during `helm uninstall`. Instead, self-registered Runners must be manually removed using the UI or CLI.
 
-## Runner Agent Cookbook
+## Runner Cookbook {#runner-agent-cookbook}
 
 There are common things that you may want to set up in your values.
 
-### Install Runner Agent in one namespace and run executions in another
+### Install runner in one namespace and run executions in another {#install-runner-agent-in-one-namespace-and-run-executions-in-another}
 
-To separate concerns, you may separate your Runner Agents from the execution:
+To separate concerns, you may separate your runners from the execution:
 
 ```yaml
 execution:
@@ -182,7 +182,7 @@ Read more about [ServiceAccounts below](#service-accounts)
 
 ### Support additional namespaces
 
-You can also allow the Runner Agent to schedule in multiple namespaces.
+You can also allow the runner to schedule in multiple namespaces.
 
 In your `values.yaml` file:
 
@@ -205,10 +205,10 @@ spec:
 
 ### Setting Global Template
 
-For each Runner Agent, you may set a custom Global Template.
-It will be used as the foundation for every execution in this Runner Agent.
+For each runner, you may set a custom Global Template.
+It will be used as the foundation for every execution in this runner.
 
-It's useful, for example, to set up OpenShift's security context that will be separate for each Runner Agent:
+It's useful, for example, to set up OpenShift's security context that will be separate for each runner:
 
 ```yaml
 globalTemplate:
@@ -226,9 +226,9 @@ globalTemplate:
         runAsNonRoot: true
 ```
 
-### Register as a floating Runner Agent
+### Register as a floating runner {#register-as-a-floating-runner-agent}
 
-Self-registering Runner Agents are by default assigned a fixed license, if you wish to assign them a floating license
+Self-registering runners are by default assigned a fixed license, if you wish to assign them a floating license
 instead you can do as follows:
 
 ```yaml
@@ -238,17 +238,17 @@ runner:
 ```
 
 :::tip
-Read more about floating licenses at [Licensing for Runner Agents](/articles/agents-overview#licensing-for-runner-agents)
+Read more about floating licenses at [Licensing for runners](/articles/agents-overview#licensing-for-runner-agents)
 :::
 
 ### Service Accounts
 
-The Runner Agent Helm Chart creates two kinds of ServiceAccounts:
+The runner Helm Chart creates two kinds of ServiceAccounts:
 
 - `exec-sa-testkube` - ServiceAccount for the Execution Pods; it allows the Execution to schedule and monitor Pods for `services` and `parallel` syntaxes.
-- `agent-sa-testkube` - ServiceAccount for Agent Pods; it allows the Runner Agent to (1) create pods for executions, and (2) read configmaps/secrets in own namespace.
+- `runner-sa-testkube` - ServiceAccount for Runner Pods; it allows the runner to (1) create pods for executions, and (2) read configmaps/secrets in own namespace.
 
-The `agent-sa-testkube` ServiceAccount needs to be in the Runner Agent's namespace, as it's used by the Runner Agent's Pod.
+The `runner-sa-testkube` ServiceAccount needs to be in the runner's namespace, as it's used by the runner's Pod.
 The `exec-sa-testkube` ServiceAccounts are deployed to the namespaces where the executions will run as they need to use them in the above situations.
 
 :::note
@@ -259,10 +259,10 @@ The `-testkube` suffix in the ServiceAccount names above and below might differ 
 See the [Chainsaw Example](/articles/examples/chainsaw-basic) to see how a custom ServiceAccount can be used in your Workflow.
 :::
 
-#### Example: Using the same namespace for Runner Agent and Executions
+#### Example: Using the same namespace for runner and Executions {#example-using-the-same-namespace-for-runner-agent-and-executions}
 
-By default, we deploy both Runner Agent and Executions to the same namespace the Helm Chart is released to.
-Then, `agent-sa-testkube` and `exec-sa-testkube` are deployed in that namespace. `agent-sa-testkube` has wider permissions and is used by Runner Agent,
+By default, we deploy both runner and Executions to the same namespace the Helm Chart is released to.
+Then, `runner-sa-testkube` and `exec-sa-testkube` are deployed in that namespace. `runner-sa-testkube` has wider permissions and is used by runner,
 `exec-sa-testkube` has smaller permissions and is used by Executions.
 
 #### Example: Avoid ServiceAccount for the executions
@@ -288,10 +288,10 @@ pod:
 Read more about Workflow `pod` configuration at [Test Workflows - Job and Pod Configuration](/articles/test-workflows-job-and-pod).
 :::
 
-#### Example: Run executions in a different namespace than the Runner Agent
+#### Example: Run executions in a different namespace than the runner {#example-run-executions-in-a-different-namespace-than-the-runner-agent}
 
-For better security, you may isolate the executions to be running in a different namespace than the Runner Agent. This way, you ensure that they
-cannot read Runner Agent's data (like Agent Token), or anything else. Also, this could help to deploy multiple Runner Agents in the same namespace
+For better security, you may isolate the executions to be running in a different namespace than the runner. This way, you ensure that they
+cannot read runner's data (like Runner token), or anything else. Also, this could help to deploy multiple runners in the same namespace
 while having the executions for each of them in a different one.
 
 To achieve that, you can use such Helm Chart values:
@@ -304,7 +304,7 @@ execution:
 
 In such case:
 
-- `agent-sa-testkube` ServiceAccount will still be deployed in the Helm Chart release namespace,
+- `runner-sa-testkube` ServiceAccount will still be deployed in the Helm Chart release namespace,
 - `exec-sa-testkube` ServiceAccount will be deployed in `my-namespace-where-only-executions-should-run` namespace
 
 #### Example: Full Security
@@ -321,7 +321,7 @@ execution:
 
 #### Example: Multiple Namespaces
 
-To allow Runner Agent to support
+To allow runner to support
 
 ```yaml
 job:
@@ -338,11 +338,11 @@ execution:
         autoCreate: true
 ```
 
-## Listener Agent Cookbook
+## Listener cookbook {#listener-agent-cookbook}
 
 ### Listening in additional namespaces
 
-Listener Agents only listen for events in the namespace where they are deployed by default. You can configure
+Runners with the listener capability only listen for events in the namespace where they are deployed by default. You can configure
 additional namespaces to listen to by setting the `additionalNamespaces` value in the Helm Chart:
 
 ```yaml
@@ -363,4 +363,4 @@ listener:
   watchAllNamespaces: true
 ```
 
-This makes the Listener Agent watch every namespace in the cluster. Use this when you need full coverage or when namespaces are created dynamically.
+This makes the runner with the listener capability watch every namespace in the cluster. Use this when you need full coverage or when namespaces are created dynamically.

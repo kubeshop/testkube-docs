@@ -77,7 +77,7 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Standalone Agent",
+          label: "Standalone Runner",
           items: [
             {
               type: "doc",
@@ -623,17 +623,17 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Testkube Agents",
+              label: "Testkube Runners",
               id: "articles/agents-overview",
             },
             {
               type: "doc",
-              label: "Agent Helm Chart",
+              label: "Runner Helm Chart",
               id: "articles/multi-agent-runner-helm-chart",
             },
             {
               type: "doc",
-              label: "Agent CLI Commands",
+              label: "Runner CLI Commands",
               id: "articles/multi-agent-cli",
             },
           ],
@@ -1433,7 +1433,7 @@ const sidebars = {
           type: "category",
           label: "Observability & Reporting",
           items: [
-            { type: "doc", label: "Agent Metrics", id: "articles/metrics" },
+            { type: "doc", label: "Runner Metrics", id: "articles/metrics" },
             {
               type: "doc",
               label: "Control Plane Metrics",
@@ -1525,7 +1525,7 @@ const sidebars = {
             },
             {
               type: "category",
-              label: "Agent API",
+              label: "Runner API",
               items: agentRedocSidebar,
             },
             {

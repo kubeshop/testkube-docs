@@ -165,9 +165,9 @@ spec:
                     - workflows
 ```
 
-### Targeting specific Runner Agents
+### Targeting specific runners {#targeting-specific-runner-agents}
 
-With the introduction of [Runner Agents](/articles/agents-overview#runner-agents) it is possible to specify target Runner Agents for each
+With the introduction of [runners](/articles/agents-overview#runner-agents) it is possible to specify target runners for each
 workflow specified in the `execute` command, for example:
 
 ```yaml
@@ -183,8 +183,8 @@ workflow specified in the `execute` command, for example:
       - name: e2e-test
 ```
 
-Will run the `k6-base` test on a Runner Agent named `load-runner-agent` while running the e2e-test on the Runner Agent the containing
-Workflow is running on. For more details, see our guide on [Runner Agent Targeting](/articles/test-workflows-running#runner-agent-targeting).
+Will run the `k6-base` test on a runner named `load-runner-runner` while running the e2e-test on the runner the containing
+Workflow is running on. For more details, see our guide on [Runner targeting](/articles/test-workflows-running#runner-agent-targeting).
 
 ### Rerunning a previous execution
 

@@ -19,9 +19,9 @@ from your Test Workflows — no long-lived secrets stored in workflow specs.
 TestWorkflow (content.git: https://github.com/<connected-org>/<repo>)
         │
         ▼
-Testkube Agent  ──(GetGitHubToken, repo URL)──►  Control plane
+Testkube Runner  ──(GetGitHubToken, repo URL)──►  Control plane
         ▲                                              │
-        │                                              │ 1. derive org from the authenticated agent
+        │                                              │ 1. derive org from the authenticated runner
         │                                              │ 2. find the installation for <connected-org>
         │                                              │ 3. verify the installation can access <repo>
         └──────────  short-lived token  ◄─────────────┘ 4. mint an installation access token
@@ -31,7 +31,7 @@ git clone with the installation token
 ```
 
 The control plane never trusts a caller-supplied organization id — the organization is
-derived from the authenticated agent, and the installation token is scoped to the
+derived from the authenticated runner, and the installation token is scoped to the
 specific repository being cloned.
 
 **Token resolution order** (first match wins):
@@ -136,7 +136,7 @@ curl -X DELETE -H "Authorization: Bearer $TK_TOKEN" \
 
 Once a GitHub org is connected, reference its repositories by URL in `content.git`.
 **Do not** put a token or username in the spec — when the repository belongs to a
-connected GitHub org and no credentials are supplied, the Testkube agent automatically
+connected GitHub org and no credentials are supplied, the Testkube runner automatically
 requests a short-lived installation token scoped to that repo and uses it to clone.
 
 ```yaml

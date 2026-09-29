@@ -1,23 +1,23 @@
 # Managing CLI Context
 
-The Testkube CLI can be configured to connect to either a Standalone OSS Testkube Agent or
+The Testkube CLI can be configured to connect to either a Standalone OSS Testkube Runner or
 a commercial Testkube Control Plane hosted either on-premise or in the cloud.
 
 :::note
 Check out the [CLI Configuration File](/articles/cli-config-reference) documentation for more details on the CLI configuration.
 :::
 
-## Connecting to a Standalone Testkube Agent
+## Connecting to a Standalone Testkube Runner {#connecting-to-a-standalone-testkube-agent}
 
-The easiest way to connect the CLI to a standalone Testkube Agent is to make sure your current kubectl context is pointing
-to the cluster where the Testkube Agent is deployed and then running
+The easiest way to connect the CLI to a standalone Testkube Runner is to make sure your current kubectl context is pointing
+to the cluster where the Testkube Runner is deployed and then running
 
 ```sh
 testkube set context --kubeconfig
 ```
 
 :::tip
-If the Agent is not in the default testkube namespace, you can use the `--namespace` flag to specify the namespace.
+If the Runner is not in the default testkube namespace, you can use the `--namespace` flag to specify the namespace.
 :::
 
 ## Connecting to a Testkube Control Plane

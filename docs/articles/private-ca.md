@@ -10,7 +10,7 @@ To get started we need to create a bundle containing all the CA certificates we
 would like the installation to trust.
 
 After that you will need to create a secret with the CA bundle under the
-`ca.crt` key in the namespace(s) with the Helm releases both for the agent and
+`ca.crt` key in the namespace(s) with the Helm releases both for the runner and
 the control plane.
 
 ```sh

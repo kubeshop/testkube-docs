@@ -30,9 +30,9 @@ a `NoSchedule` effect.
 
 ## Example Configuration
 
-### Operator and Agent
+### Operator and Runner {#operator-and-agent}
 
-Example values for the `testkube` chart for the agent:
+Example values for the `testkube` chart for the runner:
 
 ```yaml {2-3}
 testkube-api:
@@ -122,7 +122,7 @@ nats:
 
 ## Caveats
 
-- The agent under the current architecture can only run as a single instance.
+- The runner under the current architecture can only run as a single instance.
   Coordinating multiple replicas would require implementing leader election, but
   electing a new leader would mostly likely take longer than spawning a new pod on
   a different node and reconnecting.

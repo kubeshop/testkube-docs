@@ -10,12 +10,12 @@ of Testkube accordingly, for example, you can create a separate environment for 
 if you are looking for a way to control access to Resources, [Resource Groups](/articles/resource-groups) might be
 a better approach).
 
-A Testkube Environment can contain any number of [Testkube Agents](/articles/agents-overview), which are responsible
+A Testkube Environment can contain any number of [Testkube Runners](/articles/agents-overview), which are responsible
 for executing Workflows, listening to Kubernetes events, syncing resources via GitOps, and emitting webhooks.
 
 :::info
 Testkube Resources are stored and managed in the Testkube Control Plane - [Read More](/articles/testkube-resource-management).
-Agents are deployed into your clusters for running Workflows, listening to events, and other capabilities - [Read More](/articles/agents-overview).
+Runners are deployed into your clusters for running Workflows, listening to events, and other capabilities - [Read More](/articles/agents-overview).
 :::
 
 Your existing Environments are available from the Environment dropdown on the top of the Testkube Dashboard (see
@@ -36,7 +36,7 @@ You can create an Environment from the "Environments" panel in the [Organization
 
 When creating a new environment in the Testkube Cloud Control Plane, you will first be prompted with the following options:
 
-1. **I have a K8s Cluster** - select this if you have a cluster where you can install the Testkube Agent for your
+1. **I have a K8s Cluster** - select this if you have a cluster where you can install the Testkube Runner for your
    environment.
 2. **No Cluster at hand** - setting up a local cluster for evaluation purposes is straightforward, for example using [kind](https://kind.sigs.k8s.io/)
    or [minikube](https://minikube.sigs.k8s.io/docs/). Alternatively, you can use our sandbox environment for exploring Testkube functionality with having to install anything.
@@ -72,20 +72,20 @@ a prompt for a unique environment name:
 
 :::tip
 As of Testkube v2.7, you can create an Environment and manage its Resources (Workflows, Triggers, etc.)
-directly from the Dashboard without deploying an Agent first. You only need to deploy an Agent when you
+directly from the Dashboard without deploying a Runner first. You only need to deploy a Runner when you
 want to execute Workflows or listen for Kubernetes events - [Read More](/articles/testkube-resource-management).
 :::
 
 After providing the environment name you will be prompted as shown below to [Install the CLI](/articles/install/cli)
 (do this only if you haven't already done so) and then run a CLI command to install a
-[Testkube Agent](/articles/agents-overview) for your environment, the provided command will automatically
-connect the Agent to your Control Plane.
+[Testkube Runner](/articles/agents-overview) for your environment, the provided command will automatically
+connect the Runner to your Control Plane.
 
 ![New Environment Connection](../img/new-environment-connection.png)
 
-Running the provided Testkube CLI command in your terminal will install the agent and connect it to the created environment:
+Running the provided Testkube CLI command in your terminal will install the runner and connect it to the created environment:
 
-![Environment CLI Agent Installation](../img/environment-cli-agent-install.png)
+![Environment CLI Runner Installation](../img/environment-cli-agent-install.png)
 
 Once connected, you should see a corresponding status update in the dialog above to indicate that the installation
 was successful.
@@ -109,36 +109,36 @@ Find the general settings for your environment on the **General** tab. You can a
 
 Manage your Environment Credentials here - [Read More](/articles/credential-management).
 
-### Agents
+### Runners {#agents}
 
-Manage your Environment Agents here - [Read More](/articles/agents-overview).
+Manage your Environment Runners here - [Read More](/articles/agents-overview).
 
-![Testkube Agents Panel](images/testkube-agents-panel.png)
+![Testkube Runners Panel](images/testkube-agents-panel.png)
 
 #### Registration Token Rotation
 
-Each Environment has a registration token that is used by new Testkube Agents when they register with the Control Plane.
-Already registered Agents use their own agent keys, so rotating the registration token does not disconnect or require
-reinstalling existing Agents.
+Each Environment has a registration token that is used by new Testkube Runners when they register with the Control Plane.
+Already registered Runners use their own runner keys, so rotating the registration token does not disconnect or require
+reinstalling existing Runners.
 
 Organization admins and owners can rotate the registration token with the Testkube CLI:
 
 ```sh
-testkube agent rotate-registration-token [environment-id]
+testkube runner rotate-registration-token [environment-id]
 ```
 
 If you omit `[environment-id]`, the CLI uses the Environment ID from your current Testkube context. The command prints
 the new registration token once, together with the grace period and the time when the previous token expires.
 
-By default, the previous token remains valid for new Agent registrations for 24 hours. You can customize this window
+By default, the previous token remains valid for new Runner registrations for 24 hours. You can customize this window
 with `--grace-period`, up to a maximum of 168 hours, or use `--grace-period 0s` for immediate rotation:
 
 ```sh
-testkube agent rotate-registration-token tkcenv_xxxxx --grace-period 24h
+testkube runner rotate-registration-token tkcenv_xxxxx --grace-period 24h
 ```
 
 After rotating the token, update `runner.register.token` or the Kubernetes Secret referenced by
-`runner.register.tokenSecret` before the previous token expires. Agents that try to register with an expired previous
+`runner.register.tokenSecret` before the previous token expires. Runners that try to register with an expired previous
 token must be updated to use the new value of `TESTKUBE_PRO_AGENT_REGISTRATION_TOKEN`.
 
 ### Environment Members

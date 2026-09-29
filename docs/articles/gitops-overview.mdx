@@ -23,12 +23,12 @@ GitOps with Testkube addresses this by:
 - **Supporting declarative execution** - TestWorkflowExecution CRDs allow you to trigger tests declaratively,
   perfect for GitOps reconciliation loops.
 
-## The Testkube GitOps Agent
+## The Testkube Runner with the GitOps capability {#the-testkube-gitops-agent}
 
 Although Testkube Resources are stored in the Testkube Control Plane, they can still be provided and managed as CRDs in an external/GitOps setup by using
-the GitOps Agent introduced with Testkube 2.7.0.
+the runner with the GitOps capability introduced with Testkube 2.7.0.
 
-Once deployed, a GitOps-Agent will monitor its namespace for any Testkube Resources and copy those to the connected Environment in the Control-Plane.
+Once deployed, a GitOps-Runner will monitor its namespace for any Testkube Resources and copy those to the connected Environment in the Control-Plane.
 Coupled with a GitOps tool like ArgoCD or Flux, this can be used to effectively sync Testkube Resources from any number of Git repositories
 and deployments/namespaces into your Testkube Environment(s).
 
@@ -44,11 +44,11 @@ flowchart LR
         ARGO[GitOps Tool<br/>ArgoCD / Flux]
         subgraph Namespace A
             CRD_A[(CRDs)]
-            SA_A[GitOps Agent]
+            SA_A[runner with the GitOps capability]
         end
         subgraph Namespace B
             CRD_B[(CRDs)]
-            SA_B[GitOps Agent]
+            SA_B[runner with the GitOps capability]
         end
     end
 
@@ -69,39 +69,39 @@ flowchart LR
 ```
 
 :::tip
-Read more about different types of Testkube Agents at [Testkube Agents](/articles/agents-overview).
+Read more about different types of Testkube Runners at [Testkube Runners](/articles/agents-overview).
 :::
 
 ### Unidirectional Sync
 
-Syncing is uni-directional, i.e. from GitOps Agent to Control Plane only - changes in the Control Plane are not synced back to the Resource in the Agent Namespace.
+Syncing is uni-directional, i.e. from runner with the GitOps capability to Control Plane only - changes in the Control Plane are not synced back to the Resource in the Runner Namespace.
 
 Synced resources are left in the monitored namespace to enable the deletion behaviour described below.
 
 ### Resource Update Behaviour
 
-The GitOps Agent will currently overwrite any existing/conflicting Testkube Resources already in the Control Plane:
+The runner with the GitOps capability will currently overwrite any existing/conflicting Testkube Resources already in the Control Plane:
 
 - If you make changes to a Resource via the Testkube Dashboard or any other mechanism, those changes will be overwritten when a new version of the Resource is detected
-  and synced by a GitOps Agent.
-- If you have multiple GitOps Agents syncing the same Testkube Resources into the same Testkube Environment, these will overwrite each other unless
+  and synced by a runner with the GitOps capability.
+- If you have multiple runners with the GitOps capability syncing the same Testkube Resources into the same Testkube Environment, these will overwrite each other unless
   [GitOps Resource Ownership](#gitops-resource-ownership) is enabled.
 
 ### GitOps Resource Ownership
 
-When several GitOps Agents sync into the same Environment, they can target the same resource name and silently overwrite each other.
-**GitOps Resource Ownership** makes that exclusive: the first GitOps Agent to sync a resource claims it, and create, update, and delete
-syncs from other GitOps Agents are rejected until you transfer ownership.
+When several runners with the GitOps capability sync into the same Environment, they can target the same resource name and silently overwrite each other.
+**GitOps Resource Ownership** makes that exclusive: the first runner with the GitOps capability to sync a resource claims it, and create, update, and delete
+syncs from other runners with the GitOps capability are rejected until you transfer ownership.
 
 Enable it under **Organization Management → Product Features → GitOps Resource Ownership**. The feature is off by default.
 
-Ownership applies to all resource types synced by the GitOps Agent: TestWorkflows, TestWorkflow Templates, TestTriggers,
+Ownership applies to all resource types synced by the runner with the GitOps capability: TestWorkflows, TestWorkflow Templates, TestTriggers,
 WorkflowTriggers, Webhooks, and Webhook Templates.
 
 #### Transferring Ownership
 
-To assign or transfer ownership, set the `testkube.io/gitops-owner` annotation on the Kubernetes CRD to the target Agent ID
-(not the agent name):
+To assign or transfer ownership, set the `testkube.io/gitops-owner` annotation on the Kubernetes CRD to the target Runner ID
+(not the runner name):
 
 ```yaml
 apiVersion: testworkflows.testkube.io/v1
@@ -112,21 +112,21 @@ metadata:
     testkube.io/gitops-owner: "<agent-id>"
 ```
 
-The Agent ID is shown in the Agents list under Environment Settings.
+The Runner ID is shown in the Runners list under Environment Settings.
 
 ### Deleting Resources
 
-A GitOps Agent will only delete Resources in the Control Plane if those are initially available and deleted locally, i.e. it won't delete
+A runner with the GitOps capability will only delete Resources in the Control Plane if those are initially available and deleted locally, i.e. it won't delete
 resources not initially available in its namespace. For example:
 
-> A GitOps Agent is deployed into Namespace A which contains Workflow B. The Testkube Environment the Agent is connected to already contains another Workflow C.
+> A runner with the GitOps capability is deployed into Namespace A which contains Workflow B. The Testkube Environment the Runner is connected to already contains another Workflow C.
 >
-> - the Agent will sync Workflow B to the Environment, Workflow C will be left as is
-> - if Workflow B is deleted from Namespace A, the Agent will delete it from the Testkube Environment also
+> - the Runner will sync Workflow B to the Environment, Workflow C will be left as is
+> - if Workflow B is deleted from Namespace A, the Runner will delete it from the Testkube Environment also
 
 ### Temporarily Pausing GitOps Sync
 
-If you need to temporarily protect a Testkube resource from being changed by the GitOps sync agent,
+If you need to temporarily protect a Testkube resource from being changed by the GitOps sync runner,
 add the `testkube.io/no-gitops-sync` annotation to the resource:
 
 ```yaml
@@ -143,7 +143,7 @@ When the value is set to `"true"`, Control Plane sync for that resource is skipp
 - Update/create sync requests are accepted but ignored.
 - Delete sync requests are accepted but ignored.
 
-This applies to all resource types synced by the GitOps Agent: TestWorkflows, TestWorkflow Templates,
+This applies to all resource types synced by the runner with the GitOps capability: TestWorkflows, TestWorkflow Templates,
 TestTriggers, Webhooks, and Webhook Templates.
 
 #### Where to Place the Annotation
@@ -154,7 +154,7 @@ You can add the annotation in **either** location depending on your use case:
   Plane. Useful when a resource exists in the cluster for other purposes but should not appear in the
   Testkube Environment.
 - **On the resource in the Control Plane** (via the Dashboard or API) -- protects the Control Plane
-  copy from being overwritten or deleted by any GitOps Agent. Useful when you need to make temporary
+  copy from being overwritten or deleted by any runner with the GitOps capability. Useful when you need to make temporary
   manual edits in the Control Plane without having them reverted on the next reconciliation cycle.
 
 :::info
@@ -168,9 +168,9 @@ To re-enable sync, remove the annotation (or set it to `"false"`) and then apply
 resource state again from Git. If the annotation was set on the Control Plane resource, you also
 need to remove or update it there (via the Dashboard or API) before syncs will be applied again.
 
-### Enable GitOps Agent via Helm
+### Enable a Runner with the GitOps capability via Helm {#enable-gitops-agent-via-helm}
 
-Enable Kubernetes-to-Control-Plane sync in your agent Helm values.
+Enable Kubernetes-to-Control-Plane sync in your runner Helm values.
 
 If you install the full `testkube` chart:
 
@@ -181,7 +181,7 @@ testkube-api:
       syncKubernetesToCloud: true
 ```
 
-For self-registering Runner Agents (`testkube-runner` chart):
+For self-registering runners (`testkube-runner` chart):
 
 ```yaml
 gitops:

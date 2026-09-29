@@ -8,11 +8,11 @@
 
     1. The **Testkube Control Plane**, which includes the [Dashboard](/articles/testkube-dashboard-explore), Storage for Resources/Results/Logs/Artifacts, Scheduling, User/Role mgmt, Insights, 3rd party integrations, etc.
 
-    2. One or more **Testkube Agents** with specific [capabilities](/articles/agents-overview): executing Test Workflows (Runner), listening for Kubernetes Events (Listener), syncing CRDs via GitOps (GitOps), and emitting Webhooks/CDEvents (Webhook).
+    2. One or more **Testkube Runners** with specific [capabilities](/articles/agents-overview): executing Test Workflows (execution), listening for Kubernetes Events (listener), syncing CRDs via GitOps (gitops), and emitting Webhooks/CDEvents (webhooks).
 
-       The Agent is **Open-Source** and can be deployed both Standalone and connected to the Control Plane - [Read More](/articles/open-source).
+       The Runner is **Open-Source** and can be deployed both Standalone and connected to the Control Plane - [Read More](/articles/open-source).
 
-       **Agents are _always_ deployed by you in your own infrastructure.**
+       **Runners are _always_ deployed by you in your own infrastructure.**
 
   </div>
   <div style={{ flex: 1 }}>
@@ -26,11 +26,11 @@
 
 You can deploy Testkube in one of the following ways:
 
-| Deployment Option         | &nbsp;&nbsp;&nbsp;Licensing&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Agent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Control&nbsp;Plane&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;Dashboard&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
-| ------------------------- | :-------------------------------------------: | :---------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------: | :-------------------------------------------: | :-------------------------------------------------------------: |
-| **On-Prem Control Plane** |   [Commercial](https://testkube.io/pricing)   |                                             Hosted by you                                             |                                                   Hosted by you                                                    |                      ✅                       |                               ✅                                |
-| **Cloud Control Plane**   |   [Commercial](https://testkube.io/pricing)   |                                             Hosted by you                                             |                                                 Hosted by Testkube                                                 |                      ✅                       |                               ✅                                |
-| **Standalone Agent**      |     [Open Source](/articles/open-source)      |                                             Hosted by you                                             |                                                         ❌                                                         |                      ❌                       |                               ✅                                |
+| Deployment Option         | &nbsp;&nbsp;&nbsp;Licensing&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runner&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Control&nbsp;Plane&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;Dashboard&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+| ------------------------- | :-------------------------------------------: | :----------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------: | :-------------------------------------------: | :-------------------------------------------------------------: |
+| **On-Prem Control Plane** |   [Commercial](https://testkube.io/pricing)   |                                             Hosted by you                                              |                                                   Hosted by you                                                    |                      ✅                       |                               ✅                                |
+| **Cloud Control Plane**   |   [Commercial](https://testkube.io/pricing)   |                                             Hosted by you                                              |                                                 Hosted by Testkube                                                 |                      ✅                       |                               ✅                                |
+| **Standalone Runner**     |     [Open Source](/articles/open-source)      |                                             Hosted by you                                              |                                                         ❌                                                         |                      ❌                       |                               ✅                                |
 
 The high-level deployment architecture and how to get started with each of these is described below.
 
@@ -63,8 +63,8 @@ flowchart TB
             S3[("MinIO")]
             NATS["NATS"]
         end
-        subgraph "Runner Agent(s) - installed separately"
-            AgentAPI["Agent API"]
+        subgraph "Runner(s) - installed separately"
+            AgentAPI["Runner API"]
             WF["Workflow Jobs"]
         end
     end
@@ -85,13 +85,13 @@ Check out [Helm Components](/articles/helm-components) to see all the actual com
 
 ## Cloud Control Plane
 
-When using the Testkube Cloud Control Plane (available at https://app.testkube.io), the Control Plane is managed by the Testkube team. You can create Environments and manage Resources (Workflows, Triggers, etc.) directly from the Dashboard. You then deploy [Testkube Agents](/articles/agents-overview) in your infrastructure when you want to execute Workflows, listen for events, etc.
+When using the Testkube Cloud Control Plane (available at https://app.testkube.io), the Control Plane is managed by the Testkube team. You can create Environments and manage Resources (Workflows, Triggers, etc.) directly from the Dashboard. You then deploy [Testkube Runners](/articles/agents-overview) in your infrastructure when you want to execute Workflows, listen for events, etc.
 
 A trial account will be required for evaluating the Cloud Control Plane - **[schedule time with our Solutions Engineering team](https://testkube.io/demo)** to get
 your account and answers to any questions you have.
 
 Once onboarded, you will be prompted to create an initial Testkube Environment, which will provide you with the required CLI/Helm commands to
-deploy the corresponding Testkube Agent in your infrastructure - [Read More](/articles/environment-management#creating-a-new-environment)
+deploy the corresponding Testkube Runner in your infrastructure - [Read More](/articles/environment-management#creating-a-new-environment)
 
 A high-level deployment architecture for the Testkube Cloud Control Plane is shown below.
 
@@ -103,10 +103,10 @@ flowchart LR
 
     subgraph Your Infrastructure
         subgraph Cluster 1
-            A1["Agent - Runner, Listener"]
+            A1["Runner - Execution, Listener"]
         end
         subgraph Cluster N
-            AN["Agent - Runner, GitOps, Webhook"]
+            AN["Runner - Execution, GitOps, Webhook"]
         end
     end
 
@@ -119,12 +119,12 @@ Even when using the Testkube Cloud Control Plane, your actual tests are never ru
 logs and artifacts will be stored.
 :::
 
-## Standalone Agent
+## Standalone Runner {#standalone-agent}
 
-The Testkube Agent is Open Source and can be deployed without being connected to the Testkube
+The Testkube Runner is Open Source and can be deployed without being connected to the Testkube
 Control Plane. All management and test execution tasks are done through the [Testkube CLI](/articles/cli).
 
-- Learn more about how to [deploy the Standalone Agent][deploy-standalone].
+- Learn more about how to [deploy the Standalone Runner][deploy-standalone].
 
 ```mermaid
 flowchart TB
@@ -132,7 +132,7 @@ flowchart TB
 
     subgraph Your Kubernetes Cluster
         subgraph Testkube Namespace
-            AgentAPI["Agent API"]
+            AgentAPI["Runner API"]
             DB[("PostgreSQL")]
             S3[("MinIO")]
             NATS["NATS"]

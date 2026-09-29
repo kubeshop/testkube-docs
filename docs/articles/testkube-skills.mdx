@@ -32,9 +32,9 @@ you.
 One general skill acts as the entry point. It carries the platform knowledge the others assume, and
 routes to whichever specialist fits the request.
 
-| Skill      | What it does                                                                                                                                                                                                                                                                                                  | Use when                                                                                                                                                                                       |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `testkube` | Explains what Testkube is, how Control Plane and open source standalone differ, and the core concepts — TestWorkflows, templates, executions, agents, triggers, webhooks, expressions. Carries a curated index of the documentation, CLI orientation, and decision trees that route to the specialist skills. | Your agent needs context on Testkube itself, you are asking where something is documented, or you want to run tests somewhere local execution cannot reach and are not sure what to reach for. |
+| Skill      | What it does                                                                                                                                                                                                                                                                                                   | Use when                                                                                                                                                                                       |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `testkube` | Explains what Testkube is, how Control Plane and open source standalone differ, and the core concepts — TestWorkflows, templates, executions, runners, triggers, webhooks, expressions. Carries a curated index of the documentation, CLI orientation, and decision trees that route to the specialist skills. | Your agent needs context on Testkube itself, you are asking where something is documented, or you want to run tests somewhere local execution cannot reach and are not sure what to reach for. |
 
 It orients and routes — it never installs, authors YAML, or runs executions itself. Two behaviors
 are worth calling out:
@@ -51,11 +51,11 @@ These two get your tooling ready. Skip them if you already have a working CLI an
 | Skill                           | What it does                                                                                                                                                                                    | Use when                                                                                                                               |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | `installing-testkube-cli`       | Installs, upgrades, or verifies the Testkube CLI (`testkube` / `tk` / `kubectl-testkube`) on Linux, macOS, and Windows via the install script, Homebrew, APT, Chocolatey, or a manual download. | The CLI is missing (`testkube: command not found`), a specific version is required, or another skill needs to shell out to `testkube`. |
-| `installing-testkube-oss-agent` | Checks prerequisites, creates a cluster (k3d by default when a fresh local one is needed), and deploys a Testkube open source standalone agent into the `testkube` namespace.                   | You need a local open source environment to run tests against and none is running yet.                                                 |
+| `installing-testkube-oss-agent` | Checks prerequisites, creates a cluster (k3d by default when a fresh local one is needed), and deploys a Testkube open source Standalone Runner into the `testkube` namespace.                  | You need a local open source environment to run tests against and none is running yet.                                                 |
 
 Both skills are conservative by design: they check for an existing installation first and reuse it
 rather than replacing it, and they confirm each step with you before changing anything.
-`installing-testkube-oss-agent` detects an existing agent in the current cluster of any type —
+`installing-testkube-oss-agent` detects an existing runner in the current cluster of any type —
 minikube, kind, k3d, or remote — and reuses that too.
 
 ### Core Chain
@@ -137,7 +137,7 @@ what happened. You can also enter the chain at any point — for example, invoke
 If you plan to use `installing-testkube-oss-agent`, you also need a Kubernetes cluster with
 `kubectl` access, or Docker so the skill can create a k3d cluster for you. Standalone open source
 mode is CLI-driven and has no dashboard — see
-[Standalone Agent](/articles/install/standalone-agent) for what that includes.
+[Standalone Runner](/articles/install/standalone-agent) for what that includes.
 
 ## Installation
 

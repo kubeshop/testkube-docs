@@ -20,8 +20,8 @@ For information on conducting **enterprise proof of concepts**, please review th
 
 Testkube has flexibility in its deployments (learn more in the [Installation Overview](/articles/install/overview)).
 
-- **Testkube On-Prem** runs both the Control Plane and Test Execution Agents in your infrastructure.
-- **Testkube Cloud Control Plane** runs the Control Plane in our cloud and the Test Execution Agents in your infrastructure.
+- **Testkube On-Prem** runs both the Control Plane and Test Execution Runners in your infrastructure.
+- **Testkube Cloud Control Plane** runs the Control Plane in our cloud and the Test Execution Runners in your infrastructure.
 
 <Tabs groupId="tutorial-install-cli">
 <TabItem value="on-prem" label="Testkube On-Prem" default>
@@ -52,7 +52,7 @@ You will now see the Testkube Dashboard for the default environment created in y
 1. Sign in to the [Testkube Cloud Control Plane](https://app.testkube.io).
 2. Click on the `Let's get started` button.
 3. Enter an environment name and click `Create environment`.
-4. Run the provided commands in your terminal to install the Testkube Agent.
+4. Run the provided commands in your terminal to install the Testkube Runner.
 
 You will now see the Testkube Dashboard for your new environment:
 
@@ -77,7 +77,7 @@ kind: TestWorkflow
 metadata:
   # The workflow will have a name that you define here.
   name: my-test
-  # By default, workflows should be applied to the namespace of the Testkube agent.
+  # By default, workflows should be applied to the namespace of the Testkube Runner.
   namespace: testkube
   # Labels allow you to filter and group within the Dashboard and CLI.
   labels:

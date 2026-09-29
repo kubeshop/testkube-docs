@@ -28,8 +28,8 @@ to run these tests would allow you to run them using the same tools and infrastr
 To achieve this with Testkube, you need
 
 - a local Kubernetes cluster, for example Minikube or Kind
-- a Testkube Runner Agent deployed in this cluster
-- a Test Workflow that runs your tests on this agent, against your service/app under test
+- a Testkube runner deployed in this cluster
+- a Test Workflow that runs your tests on this runner, against your service/app under test
 - your tests in a git repository
 
 ![Local Test Execution with Testkube](images/local-test-exec-with-testkube.png)
@@ -69,12 +69,12 @@ To allow Testkube to bypass (or override) the retrieval of tests from git, we ca
 
 ## Sample Setup with Minikube
 
-Start by installing Minikube in your local environment and deploying a [Testkube Runner Agent](/articles/agents-overview#runner-agents)
+Start by installing Minikube in your local environment and deploying a [Testkube runner](/articles/agents-overview#runner-agents)
 in the created Minikube cluster.
 
 :::tip
-If you don't want to use a regular fixed or floating license for your local development agent, the Enterprise
-plan for the Testkube Control Plane includes special licensing of local development agents - [Get in touch](https://testkube.io/contact).
+If you don't want to use a regular fixed or floating license for your local development runner, the Enterprise
+plan for the Testkube Control Plane includes special licensing of local development runners - [Get in touch](https://testkube.io/contact).
 :::
 
 ### Mapping a local folder to a volume
@@ -176,11 +176,11 @@ overwritten with the local test sources from the mapped volume.
 
 ### Running the Workflow
 
-Running the Workflow on the Runner Agent with the mount available will execute as below:
+Running the Workflow on the runner with the mount available will execute as below:
 
 ![Output from Local Dev Override](images/local-dev-override-output.png)
 
-If the mount is not available because it hasn't been set or the Workflow is running on a Runner Agent that doesn't have
+If the mount is not available because it hasn't been set or the Workflow is running on a runner that doesn't have
 the mounted volume (for example in CI/CD or a production environment), the step will fail silently:
 
 ![Output from Local Dev Override when disabled](images/local-dev-override-missing.png)

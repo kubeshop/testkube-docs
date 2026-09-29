@@ -128,10 +128,10 @@ See [MongoDB Atlas (legacy)](#mongodb-atlas-legacy) below.
 Using AWS S3 instead of the default in-cluster MinIO is recommended for production EKS
 deployments. Two authentication methods are available — choose one:
 
-| Method                                    | When to use                                                                     |
-| ----------------------------------------- | ------------------------------------------------------------------------------- |
-| **EKS Pod Identity** _(recommended)_      | EKS 1.24+. Simpler setup, no OIDC provider needed.                              |
-| **IRSA** (IAM Roles for Service Accounts) | EKS 1.21+, legacy clusters, or when the Pod Identity Agent cannot be installed. |
+| Method                                    | When to use                                                                      |
+| ----------------------------------------- | -------------------------------------------------------------------------------- |
+| **EKS Pod Identity** _(recommended)_      | EKS 1.24+. Simpler setup, no OIDC provider needed.                               |
+| **IRSA** (IAM Roles for Service Accounts) | EKS 1.21+, legacy clusters, or when the Pod Identity Runner cannot be installed. |
 
 ### Common Steps
 
@@ -209,18 +209,18 @@ SDK falls back to IAM-based authentication.
 ### Option A — EKS Pod Identity
 
 EKS Pod Identity eliminates the need for OIDC provider configuration and service account annotations.
-The Pod Identity Agent runs as a DaemonSet and injects credentials directly into pods.
+The Pod Identity Runner runs as a DaemonSet and injects credentials directly into pods.
 
 Use this option when Testkube pods need AWS credentials for S3. If you are running a legacy MongoDB
 Atlas deployment with AWS IAM authentication (`authMechanism=MONGODB-AWS`), the same IAM role can also
 be used for Atlas access.
 
-**Step 1 — Install the Pod Identity Agent addon:**
+**Step 1 — Install the Pod Identity Runner addon:**
 
 ```bash
 aws eks create-addon \
   --cluster-name <EKS_CLUSTER_NAME> \
-  --addon-name eks-pod-identity-agent
+  --addon-name eks-pod-identity-runner
 ```
 
 Verify the addon is active:
@@ -228,11 +228,11 @@ Verify the addon is active:
 ```bash
 aws eks describe-addon \
   --cluster-name <EKS_CLUSTER_NAME> \
-  --addon-name eks-pod-identity-agent \
+  --addon-name eks-pod-identity-runner \
   --query 'addon.status' \
   --output text
 
-kubectl get pods -n kube-system -l app.kubernetes.io/name=eks-pod-identity-agent
+kubectl get pods -n kube-system -l app.kubernetes.io/name=eks-pod-identity-runner
 ```
 
 **Step 2 — Create the IAM Role:**
@@ -551,7 +551,7 @@ Create DNS records (CNAME or Alias) pointing to your NGINX Ingress load balancer
 | ---------- | --------------------- |
 | Dashboard  | `dashboard.<domain>`  |
 | REST API   | `api.<domain>`        |
-| gRPC API   | `agent.<domain>`      |
+| gRPC API   | `runner.<domain>`     |
 | WebSockets | `websockets.<domain>` |
 | Storage    | `storage.<domain>`    |
 
@@ -574,7 +574,7 @@ All pods should reach `Running` status. The Dashboard should be accessible at `h
 ## Using AWS ALB Instead of NGINX
 
 If you prefer the AWS Load Balancer Controller over NGINX Ingress, you need to configure ALB annotations
-for each Ingress resource. Testkube exposes the gRPC endpoint (`agent.<domain>`) through a **separate
+for each Ingress resource. Testkube exposes the gRPC endpoint (`runner.<domain>`) through a **separate
 Ingress** from the REST API, so it needs its own ALB configuration with `backend-protocol-version: "GRPC"`.
 
 ```yaml
@@ -623,7 +623,7 @@ dex:
 
 :::warning
 The `grpcIngress` section is critical — without `backend-protocol-version: "GRPC"`, ALB defaults to
-HTTP/1.1 which breaks gRPC communication. Agents will fail to connect to the control plane.
+HTTP/1.1 which breaks gRPC communication. Runners will fail to connect to the control plane.
 :::
 
 ### TLS Certificates with ALB
@@ -735,7 +735,7 @@ kubectl logs <pod-name> -n testkube
 
 ```bash
 # Verify the addon is running
-kubectl get ds -n kube-system eks-pod-identity-agent
+kubectl get ds -n kube-system eks-pod-identity-runner
 
 # Check associations
 aws eks list-pod-identity-associations \

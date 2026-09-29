@@ -77,4 +77,4 @@ The execution page is reachable by anyone with the link. Confirm only if that's 
 
 - [Testkube Open Source Overview](/articles/open-source)
 - [Getting Started with Open Source](/articles/getting-started-with-open-source)
-- [Standalone Agent Installation](/articles/install/standalone-agent)
+- [Standalone Runner Installation](/articles/install/standalone-agent)

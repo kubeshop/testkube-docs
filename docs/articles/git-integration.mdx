@@ -3,7 +3,7 @@
 The **GitHub integration** connects a GitHub repository to a Testkube environment so PR activity runs your Test Workflows and results post back on the PR as check-runs.
 
 :::warning Version requirements
-Requires both the Control Plane and the Runner agent on version **2.13.1 or later**. Older runners can render incomplete data in the Running Context and the Resource Usage chart of child executions triggered through the integration.
+Requires both the Control Plane and the Runner on version **2.13.1 or later**. Older runners can render incomplete data in the Running Context and the Resource Usage chart of child executions triggered through the integration.
 :::
 
 :::note
@@ -27,7 +27,7 @@ Workflows that run can be:
 
 ## Prerequisites
 
-- A Testkube environment with an agent connected. See [Agents Overview](/articles/agents-overview).
+- A Testkube environment with a runner connected. See [Runners Overview](/articles/agents-overview).
 - On on-prem, the GitHub integration enabled in `values.yaml`.
 - The Testkube GitHub App installed on the target repository.
 - The user connecting the repository must have `admin` access to it.
@@ -186,7 +186,7 @@ Each run reports a single aggregate **check-run** on the PR (or a commit status 
 ![PR Checks tab with a failed Testkube Workflow and a red aggregate check-run](../img/git-integration/pr-check-run-failed.png)
 
 - Any Workflow that does not pass (failed, aborted, cancelled, timed out) marks the aggregate check-run as **failure**.
-- Executions that never start (queued indefinitely, agent disconnected) time out after the environment's queue timeout and mark the check-run as failed with a "did not run" reason.
+- Executions that never start (queued indefinitely, runner disconnected) time out after the environment's queue timeout and mark the check-run as failed with a "did not run" reason.
 - Runs superseded by a newer push on the same PR are silently skipped, they do not overwrite the check-run.
 
 ## Re-running a check
@@ -263,7 +263,7 @@ Attach the Workflow when connecting the repository (or from the integration conf
 ## Troubleshooting
 
 **The check-run never appears on the PR**
-Confirm the GitHub App has **Checks: write** on the repo. If the dashboard shows events as `dispatch_failed`, the agent logs will typically show `403 Resource not accessible by integration`. Update App permissions and re-trigger.
+Confirm the GitHub App has **Checks: write** on the repo. If the dashboard shows events as `dispatch_failed`, the runner logs will typically show `403 Resource not accessible by integration`. Update App permissions and re-trigger.
 
 **`@testkube` comment did nothing**
 The parser accepts `action: created` only. Editing an existing comment doesn't count (delete and post a new one). The body must contain `testkube`.
@@ -272,7 +272,7 @@ The parser accepts `action: created` only. Editing an existing comment doesn't c
 Delete alone doesn't remove it from the desired state. Either remove the framework from the integration selection in the dashboard, or set `testkube.io/git-integration-managed=false` on it and then delete.
 
 **Generated Workflow runs in the wrong namespace**
-Auto-gen Workflows land in the namespace of the agent registered with the environment. With multiple agents, point manual `testkube run testworkflow` calls at the same namespace, or attach the Workflow to the intended agent.
+Auto-gen Workflows land in the namespace of the runner registered with the environment. With multiple runners, point manual `testkube run testworkflow` calls at the same namespace, or attach the Workflow to the intended runner.
 
 ## Related
 
