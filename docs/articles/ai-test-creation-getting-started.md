@@ -5,23 +5,28 @@ slug: /articles/ai-test-creation-getting-started
 
 # Create your first test with AI
 
-In this guide, you will use AI Test Creation to write a Playwright test, run it with Testkube, and add another test case through chat. You will test the public [Playwright TodoMVC demo](https://demo.playwright.dev/todomvc/), so you do not need an application or GitHub repository of your own to get started.
+Use AI Test Creation to describe a test, review the generated code and results, and add coverage through chat.
+
+You can follow this guide with your own application and testing framework, or try the example prompts for the public [Playwright TodoMVC demo](https://demo.playwright.dev/todomvc/). The demo needs no application or GitHub repository of your own. The screenshots show that example; your generated files and conversation will reflect the task you choose.
 
 ## Before you start
 
 You need:
 
-- Access to AI Test Creation in your Testkube organization. If your organization uses Test Creation seats, ask an administrator to assign one to you.
-- An environment where you can create and run Test Workflows, with a connected runner available to execute the test.
-- Network access from the test environment to the demo application and the package and container registries used by Playwright.
+- A Testkube plan or license that includes AI Test Creation, with the feature enabled for your organization. If your organization requires Test Creation seats, an administrator must also assign one to you.
+- Permission to create tests and run them in your environment, with a connected runner available for execution.
 
-For a self-hosted installation, an administrator must first [enable AI Test Creation](/articles/ai-test-creation#install-ai-test-creation-on-testkube-on-prem).
+Your test environment must be able to reach the application and dependencies needed by your chosen tests.
+
+For a self-hosted installation, an administrator must also complete the [AI Test Creation setup](/articles/ai-test-creation#install-ai-test-creation-on-testkube-on-prem). Installation configuration does not replace the plan or license requirement.
 
 ## 1. Describe the test you want to create
 
 Open the Testkube Dashboard, select your environment, and open **Test Catalog** from the navigation menu.
 
-Enter the following prompt in **Describe your test**:
+In **Describe your test**, describe one small scenario for your application. Include its URL, your preferred testing framework, the actions to perform, and the expected result. Say whether you want the AI to run the test too.
+
+To try the TodoMVC example, you can use this prompt:
 
 ```text
 Create a Playwright test in TypeScript for https://demo.playwright.dev/todomvc/.
@@ -29,7 +34,7 @@ Create a Playwright test in TypeScript for https://demo.playwright.dev/todomvc/.
 Add a todo called "Write my first AI test", verify it appears in the list,
 mark it complete, and verify that no active todos remain.
 
-Use Chromium, create the Testkube workflow needed to run it, and run the test.
+Use Chromium, set up what is needed to run the test in Testkube, and run it.
 Use a fresh browser context so the test can run repeatedly.
 ```
 
@@ -39,50 +44,45 @@ Select the arrow button (**Create test**) to submit your request.
 
 :::tip Write a specific first prompt
 
-Include the application URL, the testing framework, the actions to perform, and the result to verify. Start with one small scenario; you can add more coverage after the first test runs.
+Describe an observable result, such as a confirmation message appearing or an API returning the expected response. You can add more coverage after the first test runs. To extend tests already in a repository, follow [Work with a GitHub repository](/articles/ai-test-creation-github).
 
 :::
 
 ## 2. Follow the AI's progress
 
-Testkube creates a **Test Bundle** and opens its first chat. The bundle groups your test authoring work; the chat is where you ask the AI to create or change tests. A **Test Workflow** defines how Testkube runs those tests.
+Testkube creates a **Test Bundle** and opens its first chat. The bundle groups related test creation work; the chat is where you discuss the task, answer questions, and ask for changes.
 
-The AI may ask you to confirm details before it proceeds. For example, if it asks for a workflow name, use `todomvc-playwright-tests` or another name that is not already used in your environment.
+The AI may ask you to clarify the expected behaviour, test data, or how you want it to proceed. You can state your preference in the initial prompt or a follow-up. For example, ask it to propose the test cases and wait for your approval before editing, or to implement the agreed scenario, run it, and investigate failures.
 
-Follow the progress in the chat as the AI creates the test files and workflow. If it asks a question, answer it in the same chat. Wait for the requested work to finish before starting a separate run.
+Follow the progress in the chat and answer any questions there. Keep follow-ups about the same test in that conversation. You can start a separate chat for another task while this one is working; see [Work with Test Bundles and multiple chats](/articles/ai-test-creation-test-bundles).
 
-## 3. Review the generated test and workflow
+## 3. Review the generated tests
 
-In the **Navigator**, expand the file tree and select the generated Playwright test file. File names can vary between sessions.
+The **Navigator** shows the test files created during your task, or the repository files if you imported existing tests. Expand the file tree and select a file to inspect its contents. File names and structure depend on your framework and request.
 
 ![Navigator showing the generated Playwright files and the selected test in the file viewer](../img/ai-test-creation-getting-started-files.png)
 
-Check that the test:
+Check that the tests:
 
-- Opens `https://demo.playwright.dev/todomvc/`.
-- Creates the todo with the text from your prompt.
-- Asserts that the todo appears.
-- Marks it complete and checks that no active todos remain.
+- Exercise the application and scenario you requested.
+- Assert the expected result, rather than only performing actions.
+- Set up the required test data and can run repeatedly.
+- Preserve existing coverage when extending a test suite.
 
-Select **Workflow** in the Navigator to inspect how the test is executed. Check the container image, dependency installation, and Playwright command.
+For the TodoMVC example, this means checking that the test creates the requested todo, verifies it appears, marks it complete, and asserts that no active todos remain.
 
 Use the chat to request changes to the generated files. For example:
 
 ```text
-Explain the assertions in this test and how it starts with an empty todo list.
+Explain how this test verifies the requested behaviour and how it keeps
+its test data independent of earlier runs.
 ```
 
-## 4. Run the test and inspect the result
+## 4. Inspect the test results
 
-The first prompt asks the AI to run the test. Review that execution before running it again.
+If you asked the AI to run the tests, inspect the execution result and **Execution Logs**. Otherwise, ask it to run them when you are ready. You can also start an execution with **Run tests** at the top of the bundle.
 
-To start another execution yourself:
-
-1. Select **Run tests** at the top of the bundle. Use the adjacent dropdown if you need to select a runner.
-2. Open **Execution Logs** in the Navigator to follow the output.
-3. Select **Open Workflow** to inspect the workflow's executions and confirm the execution status.
-
-A successful run should show that the Playwright test passed. Read the result and assertions as well as the status to confirm that the test checked the behaviour you requested.
+Check which tests ran, whether they passed, and any failure details. Confirm that the assertions cover your requested behaviour. The screenshot shows a passing execution of the TodoMVC example.
 
 ![Execution log showing the TodoMVC test passing in Chromium](../img/ai-test-creation-getting-started-result.png)
 
@@ -93,15 +93,11 @@ Inspect the latest failed execution and explain why it failed. Fix the cause
 and run the test again. Keep the assertions that check the requested behaviour.
 ```
 
-:::note If Run tests is unavailable
-
-Wait for the workflow to be created and any current execution to finish. If no runner is available, connect a runner to the environment before trying again.
-
-:::
-
 ## 5. Add another test case
 
-Continue in the same chat to extend the test:
+Continue in the same chat to add another scenario or an edge case for your application. Describe the new expected behaviour and ask the AI to preserve the existing tests.
+
+If you are following the TodoMVC example, you could add a deletion test:
 
 ```text
 Add a second Playwright test that creates a todo called "Review the results",
@@ -109,15 +105,13 @@ deletes it, and verifies that the todo list is empty. Keep the first test.
 Run both tests and show me the results.
 ```
 
-Review the updated file, then inspect the new execution and confirm that both tests pass. If the new case fails, repeat the inspection and repair step above. You should now have coverage for both completing and deleting a todo.
+Review the updated files and execution results, including the existing tests. If a test fails, continue the inspection and repair loop in the same chat. In the TodoMVC example, the two tests now cover completing and deleting a todo.
 
-## Continue with your own application
-
-Once the example works, start a new bundle for your own application. Replace the demo URL and describe a specific user journey and its expected result.
+## Continue building coverage
 
 - Use **Attached Context** to add reusable project guidance, such as test conventions, business rules, and test data requirements.
 - Follow [Work with Test Bundles and multiple chats](/articles/ai-test-creation-test-bundles) to organize related tasks and understand what is shared between chats.
 - To work with existing tests, follow [Work with a GitHub repository](/articles/ai-test-creation-github) to import a repository, review changes, and open a pull request.
-- Use **Open Workflow** to continue configuring execution. See [scheduling](/articles/scheduling-tests), [GitHub Actions](/articles/github-actions), and the [Playwright workflow example](/articles/examples/playwright-basic).
+- To configure or automate execution, use **Open Workflow** and see [scheduling](/articles/scheduling-tests), [GitHub Actions](/articles/github-actions), and the [Playwright workflow example](/articles/examples/playwright-basic).
 
 For the architecture and self-hosted configuration behind this workflow, see [AI Test Creation](/articles/ai-test-creation).
