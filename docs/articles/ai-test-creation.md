@@ -272,17 +272,6 @@ An existing gateway on another port, such as 4000, needs an additional Kubernete
 
 For a private certificate authority, configure the [custom CA](#custom-certificate-authorities) and ensure the Sandbox runtime also trusts the gateway certificate. Do not disable TLS verification to work around a trust failure.
 
-### Verify the connection
-
-Install or upgrade the Enterprise release using the Helm command in [Minimal configuration](#minimal-configuration), with the external gateway values above. Then verify:
-
-1. The rendered release contains no bundled LiteLLM Deployment or migration job, and the Control Plane references the external management Secret and URL.
-2. The management credential can list chat models, create a temporary virtual key with the configured model and limits, and revoke it by alias. A Management API key type alone is not proof that its owner has these permissions.
-3. A new Test Creation session starts a Sandbox and can complete a model request with streaming and tool calls. Check the existing gateway's records for the `testkube-runspace-` key alias and intended model.
-4. Deleting the test session revokes its Sandbox key. Confirm that the revoked key can no longer make a model request.
-
-Before switching an existing installation from bundled to external LiteLLM, finish and delete active Test Creation sessions while the old gateway is still configured, and verify that their keys are revoked. Keys created by one gateway cannot be reused on another. Do not delete the old gateway's retained Secrets or database until cleanup is confirmed.
-
 ## PostgreSQL configuration
 
 This section applies to the bundled LiteLLM gateway. When using an existing gateway, its operator manages the database and Testkube does not run its migrations.
