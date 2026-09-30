@@ -268,8 +268,6 @@ global:
 
 The gateway must be reachable from the Control Plane, AI Service, and Sandbox namespace. For a public HTTPS gateway, the Sandbox's normal public web egress applies. For a private gateway on port 80 or 443, add the necessary destination CIDRs under `global.testAuthoring.runspace.networkPolicy.additionalEgressCIDRs`; see [network isolation and egress](#network-isolation-and-egress).
 
-An existing gateway on another port, such as 4000, needs an additional Kubernetes NetworkPolicy in the Sandbox namespace allowing that destination and port. The built-in port-4000 rule selects Testkube's bundled LiteLLM labels and does not automatically match an independently deployed gateway. If you route through a Kubernetes Service, account for the destination pod port after service translation and any ingress policy on the gateway namespace.
-
 For a private certificate authority, configure the [custom CA](#custom-certificate-authorities) and ensure the Sandbox runtime also trusts the gateway certificate. Do not disable TLS verification to work around a trust failure.
 
 ## PostgreSQL configuration
