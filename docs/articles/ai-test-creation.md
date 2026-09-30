@@ -262,7 +262,7 @@ global:
           default: true
 ```
 
-`litellm.enabled: false` disables the bundled LiteLLM Deployment, Service, configuration, database bootstrap and migration jobs, and LiteLLM secret generation. It keeps the rest of Test Creation enabled. Do not supply a LiteLLM database DSN or encryption salt to Testkube for this mode. Testkube does not configure models or pricing on the existing gateway. The rest of your Enterprise installation still needs its normal database configuration.
+`litellm.enabled: false` disables the bundled LiteLLM instance.
 
 ### Allow network access
 
