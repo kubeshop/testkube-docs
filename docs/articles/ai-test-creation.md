@@ -210,7 +210,7 @@ curl --fail --silent --show-error "$LITELLM_URL/key/generate" \
   | jq --exit-status --join-output '.key' > litellm-inference-key
 ```
 
-Use an existing dedicated identity if your administrator has already provisioned one. These commands require `curl` and `jq`; the key types and access-control rules must be supported by your LiteLLM version. The route allowlist limits this administrator-owned management key to the operations Testkube needs.
+Use an existing dedicated identity if your administrator has already provisioned one.
 
 Restrict the management key's `models` allowlist to the authoring alias, as shown above, and verify that `/model/info` with this key returns only that chat model. This lets other applications keep using other models on the same gateway. Testkube discovers the Sandbox model from that response, preferring the first chat model marked `db_model: true`, then the first chat model. If your LiteLLM version or access-control configuration returns additional models, resolve that visibility before enabling Test Creation; the AI Service's `default: true` setting does not change Sandbox discovery order.
 
