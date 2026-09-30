@@ -170,12 +170,6 @@ The default per-Sandbox virtual-key budget is `1` provider currency unit. When a
 
 Use this configuration when your organization already operates LiteLLM. Testkube connects directly to that gateway and creates a limited virtual key for each Sandbox. Provider credentials stay in your LiteLLM deployment.
 
-:::info Chart support
-
-This path requires an Enterprise chart with `global.testAuthoring.litellm.enabled` and `global.testAuthoring.litellm.external.url`. Check the values of the chart version you plan to install. Older charts always install the bundled gateway when Test Creation is enabled; setting only `global.ai.inference.defaults.url` on those charts forwards requests through a second gateway.
-
-:::
-
 ### Prepare the gateway and credentials
 
 Your existing gateway must have PostgreSQL-backed [virtual-key management](https://docs.litellm.ai/docs/proxy/virtual_keys) enabled.
