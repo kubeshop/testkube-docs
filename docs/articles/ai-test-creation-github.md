@@ -140,3 +140,5 @@ If a pull request already exists for the chat's branch, the dialog shows its lin
 | Every commit is already on the branch                  | Open the existing pull request or make and review another change before pushing again.                                                                 |
 
 For organization-level connection problems, see [GitHub App troubleshooting](/articles/github-app-auth#troubleshooting). To automate the resulting workflow, see [GitHub Actions](/articles/github-actions) or [scheduling tests](/articles/scheduling-tests).
+
+To start another task using the same repository setup, follow [Work with Test Bundles and multiple chats](/articles/ai-test-creation-test-bundles).

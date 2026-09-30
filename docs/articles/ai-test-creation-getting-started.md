@@ -116,6 +116,7 @@ Review the updated file, then inspect the new execution and confirm that both te
 Once the example works, start a new bundle for your own application. Replace the demo URL and describe a specific user journey and its expected result.
 
 - Use **Attached Context** to add reusable project guidance, such as test conventions, business rules, and test data requirements.
+- Follow [Work with Test Bundles and multiple chats](/articles/ai-test-creation-test-bundles) to organize related tasks and understand what is shared between chats.
 - To work with existing tests, follow [Work with a GitHub repository](/articles/ai-test-creation-github) to import a repository, review changes, and open a pull request.
 - Use **Open Workflow** to continue configuring execution. See [scheduling](/articles/scheduling-tests), [GitHub Actions](/articles/github-actions), and the [Playwright workflow example](/articles/examples/playwright-basic).
 
