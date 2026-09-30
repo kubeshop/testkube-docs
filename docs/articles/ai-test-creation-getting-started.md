@@ -7,7 +7,7 @@ slug: /articles/ai-test-creation-getting-started
 
 Use AI Test Creation to describe a test, review the generated code and results, and add coverage through chat.
 
-You can follow this guide with your own application and testing framework, or try the example prompts for the public [Playwright TodoMVC demo](https://demo.playwright.dev/todomvc/). The demo needs no application or GitHub repository of your own. The screenshots show that example; your generated files and conversation will reflect the task you choose.
+You can follow this guide with your own application and testing framework, or try the example prompts for the public [Playwright TodoMVC demo](https://demo.playwright.dev/todomvc/). The demo needs no application or GitHub repository of your own.
 
 ## Before you start
 
