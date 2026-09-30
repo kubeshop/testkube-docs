@@ -794,6 +794,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Work with a GitHub repository",
+              id: "articles/ai-test-creation-github",
+            },
+            {
+              type: "doc",
               label: "AI Assistant",
               id: "articles/ai-assistant-overview",
             },

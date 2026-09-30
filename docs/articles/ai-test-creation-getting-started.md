@@ -116,7 +116,7 @@ Review the updated file, then inspect the new execution and confirm that both te
 Once the example works, start a new bundle for your own application. Replace the demo URL and describe a specific user journey and its expected result.
 
 - Use **Attached Context** to add reusable project guidance, such as test conventions, business rules, and test data requirements.
-- To work with existing tests, [connect GitHub](/articles/github-app-auth#connect-a-github-organization), then configure a repository in the bundle's **Settings**. Repository setup is fixed per bundle, so choose the repository and target branch before extending its tests. After reviewing the changes, use **Push changes** and follow the GitHub link to open a pull request.
+- To work with existing tests, follow [Work with a GitHub repository](/articles/ai-test-creation-github) to import a repository, review changes, and open a pull request.
 - Use **Open Workflow** to continue configuring execution. See [scheduling](/articles/scheduling-tests), [GitHub Actions](/articles/github-actions), and the [Playwright workflow example](/articles/examples/playwright-basic).
 
 For the architecture and self-hosted configuration behind this workflow, see [AI Test Creation](/articles/ai-test-creation).
