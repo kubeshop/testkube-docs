@@ -232,7 +232,7 @@ kubectl create secret generic testkube-litellm-inference \
   --from-file=INFERENCE_KEY=./litellm-inference-key
 ```
 
-Protect these files and remove them after loading the Secrets, or use your normal secret-management process. The management key is used only by the Control Plane. Sandboxes receive their own generated virtual keys, not this management key or your provider credentials.
+The management key is used only by the Control Plane. Sandboxes receive their own generated virtual keys, not this management key or your provider credentials.
 
 ### Configure Testkube
 
