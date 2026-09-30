@@ -13,7 +13,7 @@ The screenshots use the public [kubeshop/tests-examples](https://github.com/kube
 
 You need:
 
-- A Testkube plan or license that includes AI Test Creation, with the feature enabled for your organization and a Test Creation seat assigned if your organization requires one.
+- A Testkube plan or license that includes AI Test Creation, with the feature enabled for your organization.
 - Permission to create and update Test Bundles and run Test Workflows in your environment.
 - A GitHub repository available through your organization's Testkube GitHub App connection. The app also needs repository write access when you push changes.
 - A connected runner and access to the application, dependencies, and container images needed by your tests.

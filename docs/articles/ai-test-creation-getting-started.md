@@ -13,7 +13,7 @@ You can follow this guide with your own application and testing framework, or tr
 
 You need:
 
-- A Testkube plan or license that includes AI Test Creation, with the feature enabled for your organization. If your organization requires Test Creation seats, an administrator must also assign one to you.
+- A Testkube plan or license that includes AI Test Creation, with the feature enabled for your organization.
 - Permission to create tests and run them in your environment, with a connected runner available for execution.
 
 Your test environment must be able to reach the application and dependencies needed by your chosen tests.
