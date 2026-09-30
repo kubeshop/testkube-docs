@@ -262,8 +262,6 @@ global:
           default: true
 ```
 
-Use the **management base URL without `/v1`** for `external.url`: Testkube appends `/model/info`, `/key/generate`, or `/key/delete`. The AI Service uses the same gateway's OpenAI-compatible `/v1` URL with the inference key. Sandboxes use `/v1` with their individual virtual keys. Both the Control Plane and Sandboxes must be able to reach this gateway.
-
 `litellm.enabled: false` disables the bundled LiteLLM Deployment, Service, configuration, database bootstrap and migration jobs, and LiteLLM secret generation. It keeps the rest of Test Creation enabled. Do not supply a LiteLLM database DSN or encryption salt to Testkube for this mode. Testkube does not configure models or pricing on the existing gateway. The rest of your Enterprise installation still needs its normal database configuration.
 
 If other inference roles, such as task or embedding models, override the default URL or credentials, configure those roles to use the same gateway as appropriate. Keep the management key out of all inference configuration.
