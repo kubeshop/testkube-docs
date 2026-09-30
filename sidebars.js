@@ -789,6 +789,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Create your first test with AI",
+              id: "articles/ai-test-creation-getting-started",
+            },
+            {
+              type: "doc",
               label: "AI Assistant",
               id: "articles/ai-assistant-overview",
             },
