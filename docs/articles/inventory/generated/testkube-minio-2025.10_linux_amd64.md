@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:3ead6200c5c747d9da671abd9ac3f78f824b8af019c5884729bcaa2bf3e4ac08</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 19" src="https://img.shields.io/badge/critical-19-8b1924"/> <img alt="high: 89" src="https://img.shields.io/badge/high-89-e25d68"/> <img alt="medium: 69" src="https://img.shields.io/badge/medium-69-fbb552"/> <img alt="low: 60" src="https://img.shields.io/badge/low-60-fce1a9"/> <img alt="unspecified: 10" src="https://img.shields.io/badge/unspecified-10-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:3ead6200c5c747d9da671abd9ac3f78f824b8af019c5884729bcaa2bf3e4ac08</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 19" src="https://img.shields.io/badge/critical-19-8b1924"/> <img alt="high: 90" src="https://img.shields.io/badge/high-90-e25d68"/> <img alt="medium: 72" src="https://img.shields.io/badge/medium-72-fbb552"/> <img alt="low: 63" src="https://img.shields.io/badge/low-63-fce1a9"/> <img alt="unspecified: 11" src="https://img.shields.io/badge/unspecified-11-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>90 MB</td></tr>
 <tr><td>packages</td><td>416</td></tr>
@@ -89,7 +89,7 @@ When writing data larger than 4GB in a single Write call on an SSH channel, an i
 <tr><td>CVSS Score</td><td><code>9.1</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.487%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -127,7 +127,7 @@ When adding a key to a remote agent constraint extensions such as restrict-desti
 <tr><td>CVSS Score</td><td><code>9.1</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.487%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1080,8 +1080,8 @@ When processing HTTP/2 SETTINGS frames, transport will enter an infinite loop of
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.878%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.813%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>55th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1097,8 +1097,8 @@ When using LookupCNAME with the cgo DNS resolver, a very long CNAME response can
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.670%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.621%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1116,8 +1116,8 @@ This only affects TLS 1.3.
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.372%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.355%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1135,8 +1135,8 @@ This only affects validation of otherwise trusted certificate chains, issued by 
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.704%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.615%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1205,8 +1205,8 @@ While the maximum size of query parameters in URLs is generally limited by the m
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.604%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.647%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1222,8 +1222,8 @@ The ParseAddress function constructs domain-literal address components through r
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.617%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.661%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1241,8 +1241,8 @@ This affects programs which parse untrusted PEM inputs.
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.356%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.381%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>30th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1260,8 +1260,8 @@ This affects programs which validate arbitrary certificate chains.
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.3</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.3</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.379%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.406%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1332,8 +1332,8 @@ An excluded subdomain constraint in a certificate chain does not restrict the us
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.25.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.171%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.292%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1565,8 +1565,8 @@ During the TLS 1.3 handshake if multiple messages are sent in records that span 
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.518%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.556%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1582,8 +1582,8 @@ The Reader.ReadResponse function constructs a response string through repeated s
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.436%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.468%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1599,8 +1599,8 @@ When Conn.Handshake fails during ALPN negotiation the error contains attacker co
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.527%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.565%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1616,8 +1616,8 @@ Despite HTTP headers having a default limit of 1MB, the number of cookies that c
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.518%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.556%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1633,8 +1633,8 @@ Parsing a maliciously crafted DER payload could allocate large amounts of memory
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.436%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.468%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1650,8 +1650,8 @@ The Parse function permits values other than IPv6 addresses to be included in sq
 <table>
 <tr><td>Affected range</td><td><code>>=1.25.0<br/><1.25.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.25.2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.413%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.443%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>36th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2596,7 +2596,7 @@ If upgrading is not immediately possible:
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 2" src="https://img.shields.io/badge/C-2-8b1924"/> <img alt="high: 4" src="https://img.shields.io/badge/H-4-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/M-4-fbb552"/> <img alt="low: 3" src="https://img.shields.io/badge/L-3-fce1a9"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/U-2-lightgrey"/><strong>perl</strong> <code>5.36.0-7+deb12u3</code> (deb)</summary>
+<details><summary><img alt="critical: 2" src="https://img.shields.io/badge/C-2-8b1924"/> <img alt="high: 4" src="https://img.shields.io/badge/H-4-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/M-4-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/U-2-lightgrey"/><strong>perl</strong> <code>5.36.0-7+deb12u3</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/perl@5.36.0-7%2Bdeb12u3?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
 
@@ -2701,6 +2701,7 @@ Pod::Text versions before 6.1.1 for Perl allow CPU and memory exhaustion formatt
 
 ---
 - perl <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1148455)
+[trixie] - perl <no-dsa> (Minor issue)
 - podlators-perl <removed>
 https://lists.security.metacpan.org/cve-announce/msg/43682367/
 Fixed by: https://github.com/rra/podlators/commit/70510174f69eb54aa6d617bde4e1402cd9b7c61f (release/v6.1.1)
@@ -2854,34 +2855,6 @@ Perl versions from 5.9.4 before 5.41.9 produce incorrect regular expression matc
 https://lists.security.metacpan.org/cve-announce/msg/42658992/
 https://github.com/Perl/perl5/issues/22892
 Fixed by: https://github.com/Perl/perl5/commit/1a21abacaf6f684928bae8baaa153733c8c238eb (v5.41.9)
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-48961?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2026--48961" src="https://img.shields.io/badge/CVE--2026--48961-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.407%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-IO::Compress versions from 2.207 before 2.220 for Perl ship a zipdetails CLI tool that crashes with undefined subroutine on Info-ZIP Unix Extra Field with 8-byte UID or GID.  When decode_ux() in bin/zipdetails handles an Info-ZIP Unix Extra Field (tag 0x7875) with UID Size or GID Size set to 8, causing zipdetails to decode an 8-byte UID or GID value, it dispatches through decodeLitteEndian(), which calls a misnamed helper unpackValueQ. The actual function defined in the same file is unpackValue_Q (with underscore); the call raises 'Undefined subroutine &main::unpackValueQ' and the script exits with status 255.  Library callers of IO::Compress and IO::Uncompress are not affected; the defect is in the bundled CLI tool.
-
----
-- libio-compress-perl 2.220-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138052)
-[trixie] - libio-compress-perl 2.213-1+deb13u1
-[bookworm] - libio-compress-perl <not-affected> (Vulnerable code introduced later)
-[bullseye] - libio-compress-perl <not-affected> (Vulnerable code introduced later)
-- perl 5.40.1-8 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138855)
-[trixie] - perl 5.40.1-6+deb13u1
-https://lists.security.metacpan.org/cve-announce/msg/40434383/
-Introduced with: https://github.com/pmqs/IO-Compress/commit/ddfe67584a228877e5d28840da75ff32e435a5e3 (v2.207)
-Fixed by: https://github.com/pmqs/IO-Compress/commit/33c89d03d6e746ed2ead4f2f6570d47864c61bc7 (v2.220)
 
 </blockquote>
 </details>
@@ -3234,8 +3207,8 @@ When processing HTTP/2 SETTINGS frames, transport will enter an infinite loop of
 <table>
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.3</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.3</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.878%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>57th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.813%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>55th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -3251,8 +3224,8 @@ When using LookupCNAME with the cgo DNS resolver, a very long CNAME response can
 <table>
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.670%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.621%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -3270,8 +3243,8 @@ This only affects TLS 1.3.
 <table>
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.372%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.355%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -3289,8 +3262,8 @@ This only affects validation of otherwise trusted certificate chains, issued by 
 <table>
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.704%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.615%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -3359,8 +3332,8 @@ With a large DNS SAN list, verification costs scaled quadratically based on the 
 <table>
 <tr><td>Affected range</td><td><code>>=1.26.0-0<br/><1.26.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.171%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.292%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -3591,7 +3564,7 @@ The impact of this escape is limited to reading metadata provided by lstat from 
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 3" src="https://img.shields.io/badge/H-3-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>openssl</strong> <code>3.0.20-1~deb12u2</code> (deb)</summary>
+<details><summary><img alt="critical: 1" src="https://img.shields.io/badge/C-1-8b1924"/> <img alt="high: 4" src="https://img.shields.io/badge/H-4-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/M-4-fbb552"/> <img alt="low: 4" src="https://img.shields.io/badge/L-4-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>openssl</strong> <code>3.0.20-1~deb12u2</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/openssl@3.0.20-1~deb12u2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
 
@@ -3631,6 +3604,25 @@ https://github.com/openssl/openssl/commit/3621257986e27e540bf96a11570929a6e5a9e0
 https://github.com/openssl/openssl/commit/bdeb0cd994d915342787f117ee75044f0dc36f34 (openssl-3.5.8)
 https://github.com/openssl/openssl/commit/119ab9555dc62275bbd71f6f49529b1a44feba42 (openssl-3.0.22)
 https://openssl-library.org/news/secadv/20260825.txt
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-84782?s=debian&n=openssl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="high : CVE--2026--84782" src="https://img.shields.io/badge/CVE--2026--84782-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Issue summary: The DTLS retransmission logic does not correctly handle a handshake message write that is suspended part-way through. The retransmitted message can be read past the message buffer and the retransmission overwrites the internal state the suspended write needs to resume correctly.  Impact summary: The retransmitted message can disclose a heap memory to the peer as plaintext handshake data or cause a crash and a Denial of Service when the read reaches an unmapped memory region.  CWE: CWE-125: Out-of-bounds Read  Description: DTLS handshake messages can be written out in multiple fragments, and a write can suspend mid-message (returning WANT_WRITE) if the underlying transport temporarily cannot accept more data. While such a write is suspended, the DTLS retransmission timer may independently fire and ask the retransmission logic to resend an earlier, already-acknowledged-as-sent message from its retransmit queue.  The retransmission logic reused the same internal buffer and position tracking as the message that was still being written, without resetting the position back to the start of the message being retransmitted. As a result the retransmission was read starting from wherever the suspended write had left off, producing a mislabelled message whose body was leftover bytes from the other, larger message still in flight - content that was never meant to be sent at that point, and which could run past the end of the allocated buffer.  Separately, even when the retransmission is positioned correctly, allowing it to run to completion while another write is suspended overwrites the same shared bookkeeping that the suspended write depends on to resume. When the application later resumes the suspended write (via a subsequent SSL_read(), SSL_write(), SSL_accept(), or SSL_connect() call), it finds that bookkeeping in a state inconsistent with the message and aborts the process in a debugging build.  The fix resets the retransmission's read position to the start of the message before resending, and skips retransmission entirely whenever a handshake write is still suspended, deferring to the next call that resumes it instead.  FIPS impact: no The affected code is outside the FIPS module boundary.
+
+---
+- openssl 3.6.5-1
+https://openssl-library.org/news/secadv/20260929.txt
 
 </blockquote>
 </details>
@@ -3760,6 +3752,82 @@ Introduced with: https://github.com/openssl/openssl/commit/a61b7f2fa6de3bf8d5b14
 </blockquote>
 </details>
 
+<a href="https://scout.docker.com/v/CVE-2026-75806?s=debian&n=openssl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="medium : CVE--2026--75806" src="https://img.shields.io/badge/CVE--2026--75806-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Issue summary: An established DTLS 1.2 association using an AEAD cipher suite can be terminated by a single unauthenticated datagram whose encrypted fragment is shorter than the mandatory explicit IV and authentication tag overhead.  Impact summary: An attacker who can send a datagram that is routed to an existing DTLS 1.2 association can tear that association down without knowing any key material. This is a Denial of Service limited to the targeted association. There is no memory safety or confidentiality impact.  CWE: CWE-1284: Improper Validation of Specified Quantity in Input  Description: In TLS 1.2 and DTLS 1.2 every record protected by an AEAD cipher suite carries an explicit IV followed by the ciphertext and an authentication tag. When decrypting such a record the record layer passed the record length to the cipher implementation before checking that the record was long enough to contain the explicit IV and the tag. For a record shorter than that overhead the cipher implementation rejected the impossible length, and the record layer treated this as an internal failure and raised a fatal internal_error alert instead of treating the record as one that failed authentication.  In TLS 1.2 the same record causes a fatal internal_error alert instead of the expected bad_record_mac alert. Since any undecryptable record already terminates a TLS connection, this is a protocol conformance issue rather than a security issue in TLS.  The fix validates the record length against the explicit IV and tag length before any AEAD processing, so that TLS reports bad_record_mac and DTLS silently discards the record.  FIPS impact: no The affected code is outside the FIPS module boundary.
+
+---
+- openssl 3.6.5-1
+https://openssl-library.org/news/secadv/20260929.txt
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-75805?s=debian&n=openssl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="medium : CVE--2026--75805" src="https://img.shields.io/badge/CVE--2026--75805-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Issue summary: A CMP client that requests certificate revocation on the basis of a PKCS#10 CSR may dereference a NULL pointer and terminate abnormally when processing a crafted revocation response.   Impact summary: The NULL pointer dereference happens on a read which  leads to a crash and a Denial of Service for the affected client application.  CWE: CWE-476: NULL-pointer dereference  Description: A CMP client revoking a certificate has to tell the server which certificate to revoke, and may do so by supplying a PKCS#10 CSR instead of the certificate itself or its issuer name and serial number. This is 'openssl cmp -cmd rr -csr <file>' on the command line, or OSSL_CMP_exec_RR_ses() with the certificate supplied via OSSL_CMP_CTX_set1_p10CSR() through the API.  A CSR does not contain the issuer name and serial number of the certificate, so the client does not send them. A server may optionally name the certificate it revoked in its response, and the client then compares that name against what it sent. Having sent neither an issuer name nor a serial number, it has nothing to compare against, and a server returning a specially crafted name causes the client to read from a NULL pointer and crash.  The revocation response is checked for valid message protection before the affected code is reached, so an attacker must be a malicious or compromised CMP server, or a man-in-the-middle in possession of the secret used for message protection. Clients that identify the certificate to be revoked by a certificate or by issuer and serial number rather than by a PKCS#10 CSR are not affected.  FIPS impact: no No FIPS modules are affected by this issue, as the CMP protocol implementation is outside the OpenSSL FIPS module boundary.
+
+---
+- openssl 3.6.5-1
+https://openssl-library.org/news/secadv/20260929.txt
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-77696?s=debian&n=openssl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2026--77696" src="https://img.shields.io/badge/CVE--2026--77696-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Issue summary: SM2 signature generation uses non-constant-time arithmetic on secret values, forming a timing side-channel.  Impact summary: An attacker able to measure SM2 signing times may learn information about the per-signature secret nonce, which over many signatures can, via a lattice / Hidden Number Problem attack, lead to recovery of the private key.  CWE: CWE-208: Observable Timing Discrepancy  Description: SM2 signature generation computes the signature value using variable-time BIGNUM operations on the secret nonce and the private key, so the time taken to produce an SM2 signature depends on these secret values, forming a timing side-channel.  Applications performing SM2 signature generation are affected on all platforms.  FIPS Impact: no SM2 is not a FIPS algorithm.
+
+---
+- openssl 3.6.5-1
+https://openssl-library.org/news/secadv/20260929.txt
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-54872?s=debian&n=openssl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2026--54872" src="https://img.shields.io/badge/CVE--2026--54872-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Issue summary: The generic elliptic-curve scalar multiplication used for ECDSA and SM2 signature operations with curves that do not have a dedicated implementation leaks information about the secret nonce through timing.  Impact summary: An attacker able to measure signing times may learn information about the per-signature secret nonce, which over many signatures can, via a lattice / Hidden Number Problem attack, lead to recovery of the private key.  CWE: CWE-208: Observable Timing Discrepancy  Description: The generic elliptic-curve scalar multiplication used for curves that do not have a dedicated constant-time implementation pads the secret scalar with non-constant-time BIGNUM operations, so the time taken depends on the value of the secret scalar derived from the ECDSA and SM2 nonce.  The leak is very small; observing it requires a large number of measurements. The effect is largest for curves whose group order lies on a machine-word boundary, such as brainpoolP384r1.  Applications using ECDSA signing over the Brainpool and other generic prime curves, and SM2 signing on platforms that use the generic implementation, are vulnerable to this issue.  The NIST curves P-256, P-384 and P-521 use dedicated constant-time implementations and are not affected.  FIPS Impact: no The FIPS modules are not affected: the approved NIST curves used in the FIPS provider have dedicated constant-time implementations and do not use the affected code path.
+
+---
+- openssl 3.6.5-1
+https://openssl-library.org/news/secadv/20260929.txt
+
+</blockquote>
+</details>
+
 <a href="https://scout.docker.com/v/CVE-2025-27587?s=debian&n=openssl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2025--27587" src="https://img.shields.io/badge/CVE--2025--27587-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
@@ -3804,6 +3872,25 @@ http://www.eecs.umich.edu/~valeria/research/publications/DATE10RSA.pdf
 https://github.com/openssl/openssl/discussions/24540
 Fault injection based attacks are not within OpenSSLs threat model according
 to the security policy: https://www.openssl.org/policies/general/security-policy.html
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-35189?s=debian&n=openssl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="unspecified : CVE--2026--35189" src="https://img.shields.io/badge/CVE--2026--35189-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Issue summary: A certificate with many nameRelativeToCRLIssuer CRL distribution points causes disproportionate heap growth when OpenSSL caches X.509 extensions.  Impact summary: Receiving a crafted certificate from a malicious peer can lead to significant memory pressure and possible Denial of Service in clients or in servers that solicit client certificates.  CWE: CWE-770: Allocation of Resources Without Limits or Throttling  Description: A certificate or a set of certificates that fits under the limit for size of certificates accepted from the peer (~100 KiB) can result in allocation of several hundred MiB of resident memory on the receiving side during a normal TLS handshake.  This may be enough to crash the client or server, if multiple concurrent connections lead to similarly large memory allocations.  The fix postpones processing of the CRL distribution points extensions in certificates to the time when the processed value is required for CRL processing. This avoids keeping large memory allocations for a long time when such certificates are received.  FIPS impact: no The affected code is outside the FIPS module boundary.
+
+---
+- openssl 3.6.5-1
+https://openssl-library.org/news/secadv/20260929.txt
 
 </blockquote>
 </details>
@@ -4328,7 +4415,7 @@ This behavior is enabled by default. A temporary escape hatch is provided via th
 <tr><td>CVSS Score</td><td><code>6.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:L/VI:L/VA:N/SC:N/SI:N/SA:N</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.311%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -5405,7 +5492,7 @@ Built with OpenLDAP (only affects the legacy LDAP support)
 <tr><td>Affected range</td><td><code>>0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.399%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -5474,6 +5561,104 @@ curl in Debian not built with wolfSSL support
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>zlib</strong> <code>1:1.2.13.dfsg-1</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/zlib@1%3A1.2.13.dfsg-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (44:44)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-85091?s=debian&n=zlib&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="high : CVE--2026--85091" src="https://img.shields.io/badge/CVE--2026--85091-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.592%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+zlib versions 1.3.1.2 through 1.3.2 contain a heap buffer overflow vulnerability in the gz_vacate() function when processing non-blocking gzwrite() operations with stale external buffer pointers. Attackers can trigger the overflow by calling gzprintf() or gzvprintf() after a write stall, causing an unchecked memmove() to write beyond the internal input buffer boundary.
+
+---
+- zlib <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1146895)
+https://gist.github.com/thesmartshadow/e0b9481792afb7c31e86fee1ff084490
+https://github.com/madler/zlib/issues/1310
+Fixed by: https://github.com/madler/zlib/commit/df84af25dc1942490e1d1c899a07619152a46148
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.etcd.io/etcd/client/pkg/v3</strong> <code>3.5.21</code> (golang)</summary>
+
+<small><code>pkg:golang/go.etcd.io/etcd/client/pkg/v3@3.5.21</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (91:91)
+COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-73500?s=golang&n=v3&ns=go.etcd.io%2Fetcd%2Fclient%2Fpkg&t=golang&vr=%3C3.5.33"><img alt="high : CVE--2026--73500" src="https://img.shields.io/badge/CVE--2026--73500-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;3.5.33</code></td></tr>
+<tr><td>Fixed version</td><td><code>3.5.33</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.697%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+In go.etcd.io/etcd/client/pkg/v3 before 3.5.33, 3.6.14, and 3.7.1, TLS handshakes on listeners created by NewTLSListener do not enforce a handshake deadline. An unauthenticated network attacker who connects to an etcd TLS listener without sending a ClientHello causes a goroutine and a tracking map entry to block indefinitely. Opening many such connections exhausts memory, leading to a denial of service.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/buger/jsonparser</strong> <code>1.1.1</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/buger/jsonparser@1.1.1</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (91:91)
+COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-32285?s=github&n=jsonparser&ns=github.com%2Fbuger&t=golang&vr=%3C%3D1.1.1"><img alt="high 7.5: CVE--2026--32285" src="https://img.shields.io/badge/CVE--2026--32285-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Out-of-bounds Read</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=1.1.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.1.2</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.973%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>60th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The Delete function fails to properly validate offsets when processing malformed JSON input. This can lead to a negative slice index and a runtime panic, allowing a denial of service attack.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/go-jose/go-jose/v4</strong> <code>4.1.3</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/go-jose/go-jose/v4@4.1.3</code></small><br/>
@@ -5535,36 +5720,6 @@ Thanks to Datadog's Security team for finding this issue.
 ```dockerfile
 # minio-release.dockerfile (87:87)
 COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-73500?s=golang&n=v3&ns=go.etcd.io%2Fetcd%2Fclient%2Fpkg&t=golang&vr=%3C3.5.33"><img alt="high : CVE--2026--73500" src="https://img.shields.io/badge/CVE--2026--73500-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;3.5.33</code></td></tr>
-<tr><td>Fixed version</td><td><code>3.5.33</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.697%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-In go.etcd.io/etcd/client/pkg/v3 before 3.5.33, 3.6.14, and 3.7.1, TLS handshakes on listeners created by NewTLSListener do not enforce a handshake deadline. An unauthenticated network attacker who connects to an etcd TLS listener without sending a ClientHello causes a goroutine and a tracking map entry to block indefinitely. Opening many such connections exhausts memory, leading to a denial of service.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.etcd.io/etcd/client/pkg/v3</strong> <code>3.5.21</code> (golang)</summary>
-
-<small><code>pkg:golang/go.etcd.io/etcd/client/pkg/v3@3.5.21</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (91:91)
-COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
 ```
 
 <br/>
@@ -5695,75 +5850,7 @@ avoid repeated parsing across multi-values by enforcing a global budget and/or n
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>zlib</strong> <code>1:1.2.13.dfsg-1</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/zlib@1%3A1.2.13.dfsg-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (44:44)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-85091?s=debian&n=zlib&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="high : CVE--2026--85091" src="https://img.shields.io/badge/CVE--2026--85091-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.592%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-zlib versions 1.3.1.2 through 1.3.2 contain a heap buffer overflow vulnerability in the gz_vacate() function when processing non-blocking gzwrite() operations with stale external buffer pointers. Attackers can trigger the overflow by calling gzprintf() or gzvprintf() after a write stall, causing an unchecked memmove() to write beyond the internal input buffer boundary.
-
----
-- zlib <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1146895)
-https://gist.github.com/thesmartshadow/e0b9481792afb7c31e86fee1ff084490
-https://github.com/madler/zlib/issues/1310
-Fixed by: https://github.com/madler/zlib/commit/df84af25dc1942490e1d1c899a07619152a46148
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/buger/jsonparser</strong> <code>1.1.1</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/buger/jsonparser@1.1.1</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (91:91)
-COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-32285?s=github&n=jsonparser&ns=github.com%2Fbuger&t=golang&vr=%3C%3D1.1.1"><img alt="high 7.5: CVE--2026--32285" src="https://img.shields.io/badge/CVE--2026--32285-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Out-of-bounds Read</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=1.1.1</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.1.2</code></td></tr>
-<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.973%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>60th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-The Delete function fails to properly validate offsets when processing malformed JSON input. This can lead to a negative slice index and a runtime panic, allowing a denial of service attack.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 8" src="https://img.shields.io/badge/L-8-fce1a9"/> <!-- unspecified: 0 --><strong>glibc</strong> <code>2.36-9+deb12u14</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 9" src="https://img.shields.io/badge/L-9-fce1a9"/> <!-- unspecified: 0 --><strong>glibc</strong> <code>2.36-9+deb12u14</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/glibc@2.36-9%2Bdeb12u14?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
 
@@ -5793,6 +5880,28 @@ A time-of-check to time-of-use (TOCTOU) race condition in the dynamic loader (ld
 [trixie] - glibc <no-dsa> (Minor issue)
 https://sourceware.org/git/?p=glibc.git;a=blob;f=advisories/GLIBC-SA-2026-0022
 Fixed by: https://sourceware.org/git/?p=glibc.git;a=commit;h=ed0c137b97eb940b4b64981e84ed806d3276edd9
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-97399?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2026--97399" src="https://img.shields.io/badge/CVE--2026--97399-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.292%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The strncasecmp function in the GNU C Library 2.24 and later optimized for the Power8 architecture may read one byte beyond the input size limit, which may crash a program when that byte is not readable.  This condition may happen when the input strings to the strncasecmp function are attacker controlled in an application and they match all the way up to the edge of their page and the neighbouring page is either not mapped or is not readable.
+
+---
+- glibc <unfixed>
+https://sourceware.org/bugzilla/show_bug.cgi?id=34683
+https://sourceware.org/git/?p=glibc.git;a=blob;f=advisories/GLIBC-SA-2026-0024
 
 </blockquote>
 </details>
@@ -5979,6 +6088,62 @@ glob need to impose limits for themselves
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>dash</strong> <code>0.5.12-2</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/dash@0.5.12-2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (44:44)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-102473?s=debian&n=dash&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="medium : CVE--2026--102473" src="https://img.shields.io/badge/CVE--2026--102473-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.130%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A flaw was found in dash. When built without libc fnmatch, the internal pmatch() matcher implements * by unbounded recursion over candidate positions. A local user who can plant filenames, or otherwise feed that matcher, can make a short multi-star pattern such as *.*.*.*.*.tar.gz consume excessive CPU.
+
+---
+- dash <unfixed>
+https://bugzilla.redhat.com/show_bug.cgi?id=2543005
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-102474?s=debian&n=dash&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2026--102474" src="https://img.shields.io/badge/CVE--2026--102474-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.144%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A flaw was found in dash. The printf builtin reserves four bytes before converting a Unicode \u or \U escape, but the multi-byte token can need five or six bytes. A local user who can supply such an escape to dash printf or echo %b, including through dash -c and a positional argument, can write one or two bytes past that reservation.
+
+---
+- dash <unfixed> (unimportant)
+https://bugzilla.redhat.com/show_bug.cgi?id=2543004
+Negligible security impact
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>tar</strong> <code>1.34+dfsg-1.2+deb12u1</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/tar@1.34%2Bdfsg-1.2%2Bdeb12u1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
@@ -6036,9 +6201,9 @@ need to give -p as a command line flag
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/eclipse/paho.mqtt.golang</strong> <code>1.5.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.mongodb.org/mongo-driver</strong> <code>1.17.3</code> (golang)</summary>
 
-<small><code>pkg:golang/github.com/eclipse/paho.mqtt.golang@1.5.0</code></small><br/>
+<small><code>pkg:golang/go.mongodb.org/mongo-driver@1.17.3</code></small><br/>
 
 ```dockerfile
 # minio-release.dockerfile (91:91)
@@ -6047,23 +6212,21 @@ COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2025-10543?s=github&n=paho.mqtt.golang&ns=github.com%2Feclipse&t=golang&vr=%3C1.5.1"><img alt="medium 6.3: CVE--2025--10543" src="https://img.shields.io/badge/CVE--2025--10543-lightgrey?label=medium%206.3&labelColor=fbb552"/></a> <i>Numeric Truncation Error</i>
+<a href="https://scout.docker.com/v/CVE-2026-2303?s=github&n=mongo-driver&ns=go.mongodb.org&t=golang&vr=%3C1.17.7"><img alt="medium 6.9: CVE--2026--2303" src="https://img.shields.io/badge/CVE--2026--2303-lightgrey?label=medium%206.9&labelColor=fbb552"/></a> <i>Permissive List of Allowed Inputs</i>
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;1.5.1</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.5.1</code></td></tr>
-<tr><td>CVSS Score</td><td><code>6.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.227%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.17.7</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.17.7</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.9</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:P/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.237%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-In Eclipse Paho Go MQTT v3.1 library (paho.mqtt.golang) versions <=1.5.0 UTF-8 encoded strings, passed into the library, may be incorrectly encoded if their length exceeds 65535 bytes. This may lead to unexpected content in packets sent to the server (for example, part of an MQTT topic may leak into the message body in a PUBLISH packet).
-
-The issue arises because the length of the data passed in was converted from an int64/int32 (depending upon CPU) to an int16 without checks for overflows. The int16 length was then written, followed by the data (e.g. topic). This meant that when the data (e.g. topic) was over 65535 bytes then the amount of data written exceeds what the length field indicates. This could lead to a corrupt packet, or mean that the excess data leaks into another field (e.g. topic leaks into message body).
+The mongo-go-driver repository contains CGo bindings for GSSAPI (Kerberos) authentication on Linux and macOS. The C wrapper implementation contains a heap out-of-bounds read vulnerability due to incorrect assumptions about string termination in the GSSAPI standard. Since GSSAPI buffers are not guaranteed to be null-terminated or have extra padding, this results in reading one byte past the allocated heap buffer.
 
 </blockquote>
 </details>
@@ -6102,9 +6265,9 @@ go-ntlmssp is a Go package that provides NTLM/Negotiate authentication over HTTP
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.mongodb.org/mongo-driver</strong> <code>1.17.3</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/eclipse/paho.mqtt.golang</strong> <code>1.5.0</code> (golang)</summary>
 
-<small><code>pkg:golang/go.mongodb.org/mongo-driver@1.17.3</code></small><br/>
+<small><code>pkg:golang/github.com/eclipse/paho.mqtt.golang@1.5.0</code></small><br/>
 
 ```dockerfile
 # minio-release.dockerfile (91:91)
@@ -6113,21 +6276,23 @@ COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2026-2303?s=github&n=mongo-driver&ns=go.mongodb.org&t=golang&vr=%3C1.17.7"><img alt="medium 6.9: CVE--2026--2303" src="https://img.shields.io/badge/CVE--2026--2303-lightgrey?label=medium%206.9&labelColor=fbb552"/></a> <i>Permissive List of Allowed Inputs</i>
+<a href="https://scout.docker.com/v/CVE-2025-10543?s=github&n=paho.mqtt.golang&ns=github.com%2Feclipse&t=golang&vr=%3C1.5.1"><img alt="medium 6.3: CVE--2025--10543" src="https://img.shields.io/badge/CVE--2025--10543-lightgrey?label=medium%206.3&labelColor=fbb552"/></a> <i>Numeric Truncation Error</i>
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;1.17.7</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.17.7</code></td></tr>
-<tr><td>CVSS Score</td><td><code>6.9</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:P/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.232%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.5.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.5.1</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.227%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-The mongo-go-driver repository contains CGo bindings for GSSAPI (Kerberos) authentication on Linux and macOS. The C wrapper implementation contains a heap out-of-bounds read vulnerability due to incorrect assumptions about string termination in the GSSAPI standard. Since GSSAPI buffers are not guaranteed to be null-terminated or have extra padding, this results in reading one byte past the allocated heap buffer.
+In Eclipse Paho Go MQTT v3.1 library (paho.mqtt.golang) versions <=1.5.0 UTF-8 encoded strings, passed into the library, may be incorrectly encoded if their length exceeds 65535 bytes. This may lead to unexpected content in packets sent to the server (for example, part of an MQTT topic may leak into the message body in a PUBLISH packet).
+
+The issue arises because the length of the data passed in was converted from an int64/int32 (depending upon CPU) to an int16 without checks for overflows. The int16 length was then written, followed by the data (e.g. topic). This meant that when the data (e.g. topic) was over 65535 bytes then the amount of data written exceeds what the length field indicates. This could lead to a corrupt packet, or mean that the excess data leaks into another field (e.g. topic leaks into message body).
 
 </blockquote>
 </details>
@@ -6275,118 +6440,6 @@ Debian builds with GNUTLS, not NSS
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 4" src="https://img.shields.io/badge/L-4-fce1a9"/> <!-- unspecified: 0 --><strong>coreutils</strong> <code>9.1-1</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/coreutils@9.1-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (44:44)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-56392?s=debian&n=coreutils&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2026--56392" src="https://img.shields.io/badge/CVE--2026--56392-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.186%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-GNU coreutils unexpand is vulnerable to a heap-based buffer overflow due to an integer overflow during buffer allocation when processing large tab stop (-t) values. The multiplication used to calculate the allocation size can wrap around, resulting in an undersized buffer. When processing crafted input, subsequent writes exceed the allocated memory, leading to an out‑of‑bounds heap write.  When running GNU coreutils unexpand with attacker-provided large tab stop (-t) arguments, this behavior leads to a crash and potentially achieve a heap write primitive depending on memory layout.           This issue has been fixed in the commit b60a159fdc5bfcf9988d3a4cb6f53abe8ad5d35d
-
----
-- coreutils <unfixed> (unimportant)
-Fixed by: https://git.savannah.gnu.org/cgit/coreutils.git/commit/?id=b60a159fdc5bfcf9988d3a4cb6f53abe8ad5d35d
-https://www.openwall.com/lists/oss-security/2026/07/25/2
-Negligible security impact
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-56391?s=debian&n=coreutils&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2026--56391" src="https://img.shields.io/badge/CVE--2026--56391-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.171%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-GNU coreutils uniq is vulnerable to an out‑of‑bounds read due to incorrect handling of multibyte input when the -w (--check-chars) option is used. The find_field() function miscalculates the byte length of characters by repeatedly processing a fixed pointer instead of advancing through the input, resulting in an inflated length value.  This incorrect length is later used in a memcmp operation, causing reads beyond the allocated buffer when processing crafted multibyte input.  When running GNU coreutils uniq with attacker-provided arguments, this behavior leads to a crash and potential adjacent heap memory exposure.   This issue has been fixed in the commit d64e35a8a4c0e4608321433e0d84d917e4e36371.
-
----
-- coreutils <unfixed> (unimportant)
-Fixed by: https://git.savannah.gnu.org/cgit/coreutils.git/commit/?id=d64e35a8a4c0e4608321433e0d84d917e4e36371
-https://www.openwall.com/lists/oss-security/2026/07/25/2
-Negligible security impact
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2025-5278?s=debian&n=coreutils&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2025--5278" src="https://img.shields.io/badge/CVE--2025--5278-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.288%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A flaw was found in GNU Coreutils. The sort utility's begfield() function is vulnerable to a heap buffer under-read. The program may access memory outside the allocated buffer if a user runs a crafted command using the traditional key format. A malicious input could lead to a crash or leak sensitive data.
-
----
-- coreutils <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1106733; unimportant)
-https://bugzilla.redhat.com/show_bug.cgi?id=2368764
-https://lists.gnu.org/archive/html/bug-coreutils/2025-05/msg00036.html
-https://lists.gnu.org/archive/html/bug-coreutils/2025-05/msg00040.html
-https://cgit.git.savannah.gnu.org/cgit/coreutils.git/commit/?id=8c9602e3a145e9596dc1a63c6ed67865814b6633
-https://www.openwall.com/lists/oss-security/2025/05/27/2
-https://debbugs.gnu.org/cgi/bugreport.cgi?bug=78507
-Crash in CLI tool, no security impact
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2017-18018?s=debian&n=coreutils&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2017--18018" src="https://img.shields.io/badge/CVE--2017--18018-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.345%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-In GNU Coreutils through 8.29, chown-core.c in chown and chgrp does not prevent replacement of a plain file with a symlink during use of the POSIX "-R -L" options, which allows local users to modify the ownership of arbitrary files by leveraging a race condition.
-
----
-- coreutils <unfixed> (unimportant)
-http://lists.gnu.org/archive/html/coreutils/2017-12/msg00045.html
-https://www.openwall.com/lists/oss-security/2018/01/04/3
-Documentation patches proposed:
-https://lists.gnu.org/archive/html/coreutils/2017-12/msg00072.html
-https://lists.gnu.org/archive/html/coreutils/2017-12/msg00073.html
-Neutralised by kernel hardening
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 4" src="https://img.shields.io/badge/L-4-fce1a9"/> <!-- unspecified: 0 --><strong>krb5</strong> <code>1.20.1-2+deb12u5</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/krb5@1.20.1-2%2Bdeb12u5?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
@@ -6496,6 +6549,118 @@ An issue was discovered in MIT Kerberos 5 (aka krb5) through 1.16. There is a va
 https://github.com/poojamnit/Kerberos-V5-1.16-Vulnerabilities/tree/master/Integer%20Overflow
 non-issue, codepath is only run on trusted input, potential integer
 overflow is non-issue
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 4" src="https://img.shields.io/badge/L-4-fce1a9"/> <!-- unspecified: 0 --><strong>coreutils</strong> <code>9.1-1</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/coreutils@9.1-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (44:44)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-56392?s=debian&n=coreutils&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2026--56392" src="https://img.shields.io/badge/CVE--2026--56392-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.186%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+GNU coreutils unexpand is vulnerable to a heap-based buffer overflow due to an integer overflow during buffer allocation when processing large tab stop (-t) values. The multiplication used to calculate the allocation size can wrap around, resulting in an undersized buffer. When processing crafted input, subsequent writes exceed the allocated memory, leading to an out‑of‑bounds heap write.  When running GNU coreutils unexpand with attacker-provided large tab stop (-t) arguments, this behavior leads to a crash and potentially achieve a heap write primitive depending on memory layout.           This issue has been fixed in the commit b60a159fdc5bfcf9988d3a4cb6f53abe8ad5d35d
+
+---
+- coreutils <unfixed> (unimportant)
+Fixed by: https://git.savannah.gnu.org/cgit/coreutils.git/commit/?id=b60a159fdc5bfcf9988d3a4cb6f53abe8ad5d35d
+https://www.openwall.com/lists/oss-security/2026/07/25/2
+Negligible security impact
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-56391?s=debian&n=coreutils&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2026--56391" src="https://img.shields.io/badge/CVE--2026--56391-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.171%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+GNU coreutils uniq is vulnerable to an out‑of‑bounds read due to incorrect handling of multibyte input when the -w (--check-chars) option is used. The find_field() function miscalculates the byte length of characters by repeatedly processing a fixed pointer instead of advancing through the input, resulting in an inflated length value.  This incorrect length is later used in a memcmp operation, causing reads beyond the allocated buffer when processing crafted multibyte input.  When running GNU coreutils uniq with attacker-provided arguments, this behavior leads to a crash and potential adjacent heap memory exposure.   This issue has been fixed in the commit d64e35a8a4c0e4608321433e0d84d917e4e36371.
+
+---
+- coreutils <unfixed> (unimportant)
+Fixed by: https://git.savannah.gnu.org/cgit/coreutils.git/commit/?id=d64e35a8a4c0e4608321433e0d84d917e4e36371
+https://www.openwall.com/lists/oss-security/2026/07/25/2
+Negligible security impact
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2025-5278?s=debian&n=coreutils&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2025--5278" src="https://img.shields.io/badge/CVE--2025--5278-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.288%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A flaw was found in GNU Coreutils. The sort utility's begfield() function is vulnerable to a heap buffer under-read. The program may access memory outside the allocated buffer if a user runs a crafted command using the traditional key format. A malicious input could lead to a crash or leak sensitive data.
+
+---
+- coreutils <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1106733; unimportant)
+https://bugzilla.redhat.com/show_bug.cgi?id=2368764
+https://lists.gnu.org/archive/html/bug-coreutils/2025-05/msg00036.html
+https://lists.gnu.org/archive/html/bug-coreutils/2025-05/msg00040.html
+https://cgit.git.savannah.gnu.org/cgit/coreutils.git/commit/?id=8c9602e3a145e9596dc1a63c6ed67865814b6633
+https://www.openwall.com/lists/oss-security/2025/05/27/2
+https://debbugs.gnu.org/cgi/bugreport.cgi?bug=78507
+Crash in CLI tool, no security impact
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2017-18018?s=debian&n=coreutils&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2017--18018" src="https://img.shields.io/badge/CVE--2017--18018-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.345%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>26th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+In GNU Coreutils through 8.29, chown-core.c in chown and chgrp does not prevent replacement of a plain file with a symlink during use of the POSIX "-R -L" options, which allows local users to modify the ownership of arbitrary files by leveraging a race condition.
+
+---
+- coreutils <unfixed> (unimportant)
+http://lists.gnu.org/archive/html/coreutils/2017-12/msg00045.html
+https://www.openwall.com/lists/oss-security/2018/01/04/3
+Documentation patches proposed:
+https://lists.gnu.org/archive/html/coreutils/2017-12/msg00072.html
+https://lists.gnu.org/archive/html/coreutils/2017-12/msg00073.html
+Neutralised by kernel hardening
 
 </blockquote>
 </details>
@@ -6763,9 +6928,47 @@ https://lists.gnupg.org/pipermail/gcrypt-devel/2018-February/004401.html
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>apt</strong> <code>2.6.1</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>filippo.io/edwards25519</strong> <code>1.1.0</code> (golang)</summary>
 
-<small><code>pkg:deb/debian/apt@2.6.1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+<small><code>pkg:golang/filippo.io/edwards25519@1.1.0</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (91:91)
+COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-26958?s=github&n=edwards25519&ns=filippo.io&t=golang&vr=%3C1.1.1"><img alt="low 1.7: CVE--2026--26958" src="https://img.shields.io/badge/CVE--2026--26958-lightgrey?label=low%201.7&labelColor=fce1a9"/></a> <i>Improper Initialization</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.1.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.1.1</code></td></tr>
+<tr><td>CVSS Score</td><td><code>1.7</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:H/AT:P/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N/E:U</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.445%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>36th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+`(*Point).MultiScalarMult` failed to initialize its receiver.
+
+If the method was called on an initialized point that is not the identity point, MultiScalarMult produced an incorrect result.
+
+If the method was called on an uninitialized point, the behavior was undefined. In particular, if the receiver was the zero value, MultiScalarMult returned an invalid point that compared Equal to every point.
+
+*Note that MultiScalarMult is a rarely used advanced API. For example, if you only depend on `filippo.io/edwards25519` via `github.com/go-sql-driver/mysql`, **you are not affected**. If you were notified of this issue despite not being affected, consider switching to a vulnerability scanner that is more precise and respectful of your attention, like [govulncheck](https://go.dev/doc/tutorial/govulncheck).*
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>shadow</strong> <code>1:4.13+dfsg1-1+deb12u2</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/shadow@1%3A4.13%2Bdfsg1-1%2Bdeb12u2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
 
 ```dockerfile
 # minio-release.dockerfile (44:44)
@@ -6774,23 +6977,164 @@ FROM debian:bookworm-slim
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2011-3374?s=debian&n=apt&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2011--3374" src="https://img.shields.io/badge/CVE--2011--3374-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2007-5686?s=debian&n=shadow&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2007--5686" src="https://img.shields.io/badge/CVE--2007--5686-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
 <tr><td>Affected range</td><td><code>>0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>1.191%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>67th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.942%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>59th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-It was found that apt-key in apt, all versions, do not correctly validate gpg keys with the master keyring, leading to a potential man-in-the-middle attack.
+initscripts in rPath Linux 1 sets insecure permissions for the /var/log/btmp file, which allows local users to obtain sensitive information regarding authentication attempts.  NOTE: because sshd detects the insecure permissions and does not log certain events, this also prevents sshd from logging failed authentication attempts by remote attackers.
 
 ---
-- apt <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=642480)
-Not exploitable in Debian, since no keyring URI is defined
+- shadow <unfixed> (unimportant)
+See #290803, on Debian LOG_UNKFAIL_ENAB in login.defs is set to no so
+unknown usernames are not recorded on login failures
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gcc-12</strong> <code>12.2.0-14+deb12u1</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/gcc-12@12.2.0-14%2Bdeb12u1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (44:44)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2022-27943?s=debian&n=gcc-12&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2022--27943" src="https://img.shields.io/badge/CVE--2022--27943-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.906%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>58th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+libiberty/rust-demangle.c in GNU GCC 11.2 allows stack consumption in demangle_const, as demonstrated by nm-new.
+
+---
+- gcc-12 <unfixed> (unimportant)
+Negligible security impact
+https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105039
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.33.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/sys@0.33.0</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (87:87)
+COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.158%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gnupg2</strong> <code>2.2.40-1.1+deb12u2</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/gnupg2@2.2.40-1.1%2Bdeb12u2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (44:44)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2022-3219?s=debian&n=gnupg2&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2022--3219" src="https://img.shields.io/badge/CVE--2022--3219-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.293%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+GnuPG can be made to spin on a relatively small input by (for example) crafting a public key with thousands of signatures attached, compressed down to just a few KB.
+
+---
+- gnupg2 <unfixed> (unimportant)
+https://bugzilla.redhat.com/show_bug.cgi?id=2127010
+https://dev.gnupg.org/D556
+https://dev.gnupg.org/T5993
+https://www.openwall.com/lists/oss-security/2022/07/04/8
+GnuPG upstream is not implementing this change.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>xz-utils</strong> <code>5.4.1-1</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/xz-utils@5.4.1-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (44:44)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-34743?s=debian&n=xz-utils&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.4.1-1%2Bdeb12u1"><img alt="low : CVE--2026--34743" src="https://img.shields.io/badge/CVE--2026--34743-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;5.4.1-1+deb12u1</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.4.1-1+deb12u1</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.573%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+XZ Utils provide a general-purpose data-compression library plus command-line tools. Prior to version 5.8.3, if lzma_index_decoder() was used to decode an Index that contained no Records, the resulting lzma_index was left in a state where where a subsequent lzma_index_append() would allocate too little memory, and a buffer overflow would occur. This issue has been patched in version 5.8.3.
+
+---
+- xz-utils 5.8.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1132497)
+[trixie] - xz-utils 5.8.1-1+deb13u1
+[bookworm] - xz-utils 5.4.1-1+deb12u1
+https://tukaani.org/xz/index-append-overflow.html
+Fixed by: https://github.com/tukaani-project/xz/commit/c8c22869e780ff57c96b46939c3d79ff99395f87 (v5.8.3)
 
 </blockquote>
 </details>
@@ -6827,6 +7171,70 @@ diff3 tool from GNU diffutils is vulnerable to a heap‑based buffer overflow 
 Fixed by: https://cgit.git.savannah.gnu.org/cgit/diffutils.git/commit/?id=73ed7ce85cc78effb94daf028c9af6b4e5252e50
 Fixed by: https://cgit.git.savannah.gnu.org/cgit/diffutils.git/commit/?id=9ff04d5b84743e331e80b589335a52c5480d1815
 Negligible security impact.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.39.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/sys@0.39.0</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (87:87)
+COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.158%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>apt</strong> <code>2.6.1</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/apt@2.6.1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (44:44)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2011-3374?s=debian&n=apt&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2011--3374" src="https://img.shields.io/badge/CVE--2011--3374-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>1.191%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>67th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+It was found that apt-key in apt, all versions, do not correctly validate gpg keys with the master keyring, leading to a potential man-in-the-middle attack.
+
+---
+- apt <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=642480)
+Not exploitable in Debian, since no keyring URI is defined
 
 </blockquote>
 </details>
@@ -6919,157 +7327,9 @@ all versions vulnerable, backport required for wheezy
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>xz-utils</strong> <code>5.4.1-1</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/text</strong> <code>0.32.0</code> (golang)</summary>
 
-<small><code>pkg:deb/debian/xz-utils@5.4.1-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (44:44)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-34743?s=debian&n=xz-utils&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.4.1-1%2Bdeb12u1"><img alt="low : CVE--2026--34743" src="https://img.shields.io/badge/CVE--2026--34743-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;5.4.1-1+deb12u1</code></td></tr>
-<tr><td>Fixed version</td><td><code>5.4.1-1+deb12u1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.573%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-XZ Utils provide a general-purpose data-compression library plus command-line tools. Prior to version 5.8.3, if lzma_index_decoder() was used to decode an Index that contained no Records, the resulting lzma_index was left in a state where where a subsequent lzma_index_append() would allocate too little memory, and a buffer overflow would occur. This issue has been patched in version 5.8.3.
-
----
-- xz-utils 5.8.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1132497)
-[trixie] - xz-utils 5.8.1-1+deb13u1
-[bookworm] - xz-utils 5.4.1-1+deb12u1
-https://tukaani.org/xz/index-append-overflow.html
-Fixed by: https://github.com/tukaani-project/xz/commit/c8c22869e780ff57c96b46939c3d79ff99395f87 (v5.8.3)
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>shadow</strong> <code>1:4.13+dfsg1-1+deb12u2</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/shadow@1%3A4.13%2Bdfsg1-1%2Bdeb12u2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (44:44)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2007-5686?s=debian&n=shadow&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2007--5686" src="https://img.shields.io/badge/CVE--2007--5686-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.942%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>59th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-initscripts in rPath Linux 1 sets insecure permissions for the /var/log/btmp file, which allows local users to obtain sensitive information regarding authentication attempts.  NOTE: because sshd detects the insecure permissions and does not log certain events, this also prevents sshd from logging failed authentication attempts by remote attackers.
-
----
-- shadow <unfixed> (unimportant)
-See #290803, on Debian LOG_UNKFAIL_ENAB in login.defs is set to no so
-unknown usernames are not recorded on login failures
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gnupg2</strong> <code>2.2.40-1.1+deb12u2</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/gnupg2@2.2.40-1.1%2Bdeb12u2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (44:44)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2022-3219?s=debian&n=gnupg2&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2022--3219" src="https://img.shields.io/badge/CVE--2022--3219-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.293%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-GnuPG can be made to spin on a relatively small input by (for example) crafting a public key with thousands of signatures attached, compressed down to just a few KB.
-
----
-- gnupg2 <unfixed> (unimportant)
-https://bugzilla.redhat.com/show_bug.cgi?id=2127010
-https://dev.gnupg.org/D556
-https://dev.gnupg.org/T5993
-https://www.openwall.com/lists/oss-security/2022/07/04/8
-GnuPG upstream is not implementing this change.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>filippo.io/edwards25519</strong> <code>1.1.0</code> (golang)</summary>
-
-<small><code>pkg:golang/filippo.io/edwards25519@1.1.0</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (91:91)
-COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-26958?s=github&n=edwards25519&ns=filippo.io&t=golang&vr=%3C1.1.1"><img alt="low 1.7: CVE--2026--26958" src="https://img.shields.io/badge/CVE--2026--26958-lightgrey?label=low%201.7&labelColor=fce1a9"/></a> <i>Improper Initialization</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.1.1</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.1.1</code></td></tr>
-<tr><td>CVSS Score</td><td><code>1.7</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:H/AT:P/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N/E:U</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.445%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>36th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-`(*Point).MultiScalarMult` failed to initialize its receiver.
-
-If the method was called on an initialized point that is not the identity point, MultiScalarMult produced an incorrect result.
-
-If the method was called on an uninitialized point, the behavior was undefined. In particular, if the receiver was the zero value, MultiScalarMult returned an invalid point that compared Equal to every point.
-
-*Note that MultiScalarMult is a rarely used advanced API. For example, if you only depend on `filippo.io/edwards25519` via `github.com/go-sql-driver/mysql`, **you are not affected**. If you were notified of this issue despite not being affected, consider switching to a vulnerability scanner that is more precise and respectful of your attention, like [govulncheck](https://go.dev/doc/tutorial/govulncheck).*
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.33.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/sys@0.33.0</code></small><br/>
+<small><code>pkg:golang/golang.org/x/text@0.32.0</code></small><br/>
 
 ```dockerfile
 # minio-release.dockerfile (87:87)
@@ -7078,84 +7338,19 @@ COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-56852?s=golang&n=text&ns=golang.org%2Fx&t=golang&vr=%3C0.39.0"><img alt="unspecified : CVE--2026--56852" src="https://img.shields.io/badge/CVE--2026--56852-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.158%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.39.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.39.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.475%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gcc-12</strong> <code>12.2.0-14+deb12u1</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/gcc-12@12.2.0-14%2Bdeb12u1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (44:44)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2022-27943?s=debian&n=gcc-12&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2022--27943" src="https://img.shields.io/badge/CVE--2022--27943-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.906%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>58th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-libiberty/rust-demangle.c in GNU GCC 11.2 allows stack consumption in demangle_const, as demonstrated by nm-new.
-
----
-- gcc-12 <unfixed> (unimportant)
-Negligible security impact
-https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105039
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.39.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/sys@0.39.0</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (87:87)
-COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.158%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
+A norm.Iter can enter an infinite loop when handling input containing invalid UTF-8 bytes.
 
 </blockquote>
 </details>
@@ -7184,36 +7379,6 @@ COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
 <blockquote>
 
 Providing a specially crafted dictionary to s2.NewDict and using it to encode data can make the encoder read out of bounds.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/text</strong> <code>0.32.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/text@0.32.0</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (87:87)
-COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-56852?s=golang&n=text&ns=golang.org%2Fx&t=golang&vr=%3C0.39.0"><img alt="unspecified : CVE--2026--56852" src="https://img.shields.io/badge/CVE--2026--56852-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.39.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.39.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.475%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A norm.Iter can enter an infinite loop when handling input containing invalid UTF-8 bytes.
 
 </blockquote>
 </details>

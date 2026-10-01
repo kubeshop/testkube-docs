@@ -315,7 +315,7 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
 <tr><td>Affected range</td><td><code>&lt;8.22.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.22.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.371%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -393,8 +393,8 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.8.5-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.8.5-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.366%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.403%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -410,8 +410,8 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.8.4-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.8.4-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.609%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.353%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>26th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -427,7 +427,7 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.8.4-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.8.4-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.745%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.742%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>53rd percentile</code></td></tr>
 </table>
 
@@ -444,8 +444,8 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.8.4-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.8.4-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.452%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>37th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.287%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -461,8 +461,8 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.8.4-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.8.4-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.148%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.107%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -543,36 +543,6 @@ If you are required to interoperate with OpenPGP systems and need a maintained p
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>29.6.2+incompatible</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/docker/cli@29.6.2%2Bincompatible</code></small><br/>
-
-```dockerfile
-# api-server.Dockerfile (36:36)
-COPY --from=build /app /bin/app
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2025-15558?s=golang&n=cli&ns=github.com%2Fdocker&t=golang&vr=%3E%3D19.03.0%2Bincompatible"><img alt="high : CVE--2025--15558" src="https://img.shields.io/badge/CVE--2025--15558-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=19.03.0+incompatible</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.472%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Escalation on Windows in github.com/docker/cli
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/grpc</strong> <code>1.83.1</code> (golang)</summary>
 
 <small><code>pkg:golang/google.golang.org/grpc@1.83.1</code></small><br/>
@@ -617,6 +587,36 @@ The issue has been addressed in `master` (and backported to `1.84.0`, `1.83.2` a
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>29.6.2+incompatible</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/docker/cli@29.6.2%2Bincompatible</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (36:36)
+COPY --from=build /app /bin/app
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2025-15558?s=golang&n=cli&ns=github.com%2Fdocker&t=golang&vr=%3E%3D19.03.0%2Bincompatible"><img alt="high : CVE--2025--15558" src="https://img.shields.io/badge/CVE--2025--15558-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=19.03.0+incompatible</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.472%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Escalation on Windows in github.com/docker/cli
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>pcre2</strong> <code>10.47-r1</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/pcre2@10.47-r1?arch=x86_64&distro=alpine-3.24.1</code></small><br/>
@@ -628,10 +628,10 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2026-89157?s=alpine&n=pcre2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C%3D10.48-r0"><img alt="medium : CVE--2026--89157" src="https://img.shields.io/badge/CVE--2026--89157-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-89157?s=alpine&n=pcre2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C10.48-r0"><img alt="medium : CVE--2026--89157" src="https://img.shields.io/badge/CVE--2026--89157-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;=10.48-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;10.48-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.278%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
@@ -645,10 +645,10 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
 </blockquote>
 </details>
 
-<a href="https://scout.docker.com/v/CVE-2026-89160?s=alpine&n=pcre2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C%3D10.48-r0"><img alt="low : CVE--2026--89160" src="https://img.shields.io/badge/CVE--2026--89160-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-89160?s=alpine&n=pcre2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C10.48-r0"><img alt="low : CVE--2026--89160" src="https://img.shields.io/badge/CVE--2026--89160-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;=10.48-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;10.48-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.268%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
@@ -662,13 +662,43 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
 </blockquote>
 </details>
 
-<a href="https://scout.docker.com/v/CVE-2026-89162?s=alpine&n=pcre2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C%3D10.48-r0"><img alt="low : CVE--2026--89162" src="https://img.shields.io/badge/CVE--2026--89162-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-89162?s=alpine&n=pcre2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C10.48-r0"><img alt="low : CVE--2026--89162" src="https://img.shields.io/badge/CVE--2026--89162-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;=10.48-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;10.48-r0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.156%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>nghttp2-libs</strong> <code>1.69.0-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/nghttp2-libs@1.69.0-r0?arch=x86_64&distro=alpine-3.24.1&upstream=nghttp2</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (34:34)
+RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-58055?s=alpine&n=nghttp2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.70.0-r0"><img alt="unspecified : CVE--2026--58055" src="https://img.shields.io/badge/CVE--2026--58055-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.70.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.70.0-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.319%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -703,36 +733,6 @@ COPY --from=build /app /bin/app
 <blockquote>
 
 In github.com/chrismellard/docker-credential-acr-env/pkg/credhelper, the regular expression used by isACRRegistry to validate Azure Container Registry hostnames is unanchored. As a result, arbitrary hostnames containing the substring ".azurecr.io" (such as evil.azurecr.io.attacker.com) are treated as valid ACR registries, causing ACRCredHelper.Get to send the Azure Active Directory (AAD) access token to attacker-controlled hosts.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>nghttp2-libs</strong> <code>1.69.0-r0</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/nghttp2-libs@1.69.0-r0?arch=x86_64&distro=alpine-3.24.1&upstream=nghttp2</code></small><br/>
-
-```dockerfile
-# api-server.Dockerfile (34:34)
-RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-58055?s=alpine&n=nghttp2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.70.0-r0"><img alt="unspecified : CVE--2026--58055" src="https://img.shields.io/badge/CVE--2026--58055-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.70.0-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.70.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.319%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
 
 </blockquote>
 </details>
