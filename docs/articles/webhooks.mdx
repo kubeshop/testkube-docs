@@ -410,6 +410,64 @@ For Test Workflows:
 - become-testworkflow-failed (from any state to failed one)
 - become-testworkflow-aborted (from any state to aborted one)
 
+### Events for the Cause of a Failure
+
+When a Test Workflow execution does not pass, Testkube records the cause of the failure and sorts it into a type. Use these events to call a webhook for one type of failure only. For example, send infrastructure failures to the platform team and test failures to the team that owns the test.
+
+| Event                                     | Testkube calls the webhook when                                                                                                         | Status details type |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| `end-testworkflow-test-failure`           | A step of the test fails, for example a test command that exits with a code that is not zero.                                           | `step-failure`      |
+| `end-testworkflow-infrastructure-failure` | The infrastructure stops the execution, for example when a container runs out of memory, a node shuts down, or a step runs out of time. | `execution-failure` |
+| `end-testworkflow-configuration-error`    | The execution cannot start, for example when the image cannot be pulled, a secret is missing, or the workflow definition is not valid.  | `init-failure`      |
+
+Keep these rules in mind:
+
+- These events need Testkube Agent 2.14.0 or later. An earlier agent does not send them.
+- Each of these events is a part of `end-testworkflow-not-passed`. A webhook gets one call for each event in its list that matches. For example, a webhook that lists `end-testworkflow-failed` and `end-testworkflow-test-failure` gets two calls for one failed test.
+- No event of this kind exists for an execution that a person cancels. Use `end-testworkflow-canceled` for these executions.
+- No event of this kind exists for an execution without a known cause, which has the type `unknown`. Use `end-testworkflow-not-passed` to get these executions too.
+- In the payload, `Type_` is the event that the webhook lists, for example `end-testworkflow-infrastructure-failure`.
+
+The payload carries the cause in the [status details](#status-details-of-the-result) of the execution. This webhook sends a message for every infrastructure failure, with the code of the cause:
+
+<Tabs>
+<TabItem value="cli" label="CLI">
+
+Create the payload template in `template.json`:
+
+```json
+{
+  "text": "{{ .TestWorkflowExecution.Name }} stopped: {{ .TestWorkflowExecution.Result.StatusDetails.Reason }}"
+}
+```
+
+Then create the webhook:
+
+```sh
+testkube create webhook --name infrastructure-alerts --events end-testworkflow-infrastructure-failure --payload-template template.json --uri <YOUR_ENDPOINT_URL>
+```
+
+</TabItem>
+
+<TabItem value="crd" label="Custom Resource">
+
+```yaml title="webhook.yaml"
+apiVersion: executor.testkube.io/v1
+kind: Webhook
+metadata:
+  name: infrastructure-alerts
+  namespace: testkube
+spec:
+  uri: <YOUR_ENDPOINT_URL>
+  events:
+    - end-testworkflow-infrastructure-failure
+  payloadTemplate: |
+    {"text": "{{ .TestWorkflowExecution.Name }} stopped: {{ .TestWorkflowExecution.Result.StatusDetails.Reason }}"}
+```
+
+</TabItem>
+</Tabs>
+
 ## Supported Event Variables
 
 ### Event-specific variables
@@ -453,6 +511,39 @@ The full TestWorkflow data model can be found [here](https://github.com/kubeshop
 - `Result.FinishedAt` - TestWorkflow execution finished time(for example, `2024-11-15 11:24:37.129 +0000 UTC`)
 - `Result.Duration` - TestWorkflow execution duration (for example, `8.504s`)
 - `Result.Status` - TestWorkflow execution status (for example, `passed`)
+- `Result.StatusDetails` - the cause of a failure. It is empty when the execution passes. See [Status Details of the Result](#status-details-of-the-result).
+
+#### Status Details of the Result
+
+When an execution does not pass, `Result.StatusDetails` tells you why:
+
+- `Result.StatusDetails.Type_` - the type of the cause: `init-failure`, `execution-failure`, `step-failure`, `user-cancel`, or `unknown`. The field name ends with an underscore.
+- `Result.StatusDetails.Reason` - a short code for the cause, for example `exit-code`, `oom-killed`, or `image-pull-failed`. The codes do not change between versions, so your tools can compare them.
+- `Result.StatusDetails.Step` - the reference of the step that holds the cause. It is empty when no step holds the cause, for example when the execution does not start.
+- `Result.StatusDetails.Message` - the cause in words.
+
+For every type and reason code and what it means, see [Failure Reasons](/articles/test-workflows-failure-reasons#the-status-details-of-an-execution).
+
+The default payload carries the same object in JSON, with names in lowercase:
+
+```json
+"result": {
+  "status": "failed",
+  "statusDetails": {
+    "type": "step-failure",
+    "reason": "exit-code",
+    "step": "rg9wpxa"
+  }
+}
+```
+
+The object is empty for an execution that passes. It can also be empty for an execution from an agent earlier than 2.14.0. Use `with` in a template, so that the template also works when the object is empty:
+
+```json
+{
+  "text": "{{ .TestWorkflowExecution.Name }} did not pass{{ with .TestWorkflowExecution.Result.StatusDetails }} ({{ .Type_ }}, {{ .Reason }}){{ end }}"
+}
+```
 
 The full TestWorkflowResult data model can be found [here](https://github.com/kubeshop/testkube/blob/main/pkg/api/v1/testkube/model_test_workflow_result.go).
 
