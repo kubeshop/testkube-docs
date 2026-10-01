@@ -44,7 +44,7 @@ licensed either within a fixed limit, or based on active member count at the end
 - **Pay-as-you-go** member licensing counts the number of members at the end of each
   billing cycle and bills you for that number of members. Please note that Pay-as-you-go licensing always invoices
   all members as full members even if there might a certain number of read-only members at a given point in time.
-  Pay-as-you-go licensing is indicated by an infinity-sign in the number of members count:
+  Pay-as-you-go licensing is indicated by **Unlimited seats** on the member count cards:
 
 ![Pay-as-you-go Member Count](images/infinite-org-members.png)
 
@@ -85,25 +85,56 @@ For Testkube On-Prem deployments you can configure default organizations, enviro
 
 ## Manage existing Members
 
-Manage existing members in the list of members at the bottom of the tab. Use the menu to the right for
-each member to delete them or change their role.
+The Members tab lists everyone in the organization with their role, teams, resource groups and
+environments. Search by name or email, filter by role, team, resource group or environment, and
+sort by name or last activity. **Export** downloads the filtered list as CSV, including each
+grant's level and whether it is direct or inherited.
 
 ![Organization Members](../img/org-members-list.png)
 
-Use the menu to the right to Update or Remove a member and view their details.
+Select a row to open that member's page. Use the menu on the right to change their organization
+role, rename them, opem member's page or remove them.
 
-### Understanding Members' Permissions
+### Display names
 
-Use the "Show Member Details" option shows the breakdown for the Members' Consolidated Permissions shown in the table:
+Members are identified by email by default. Use **Change display
+name** on the row menu, or on the member page, to give someone a name inside this organization.
+
+### Member page
+
+A member's page shows everything they can reach in one place: organization role, read-only cap,
+teams, resource groups and environments. Each grant shows its level and where it comes from —
+granted directly, or inherited from a team.
 
 ![Member Permissions](images/member-permissions.png)
 
-## Manage pending Invites
+Grants can be added and changed from here, so you do not have to visit each environment or
+resource group separately.
 
-Manage pending member invites in the lists at the bottom of the tab. Use the menu to the right for
-each invite to update, revoke or resent the invite.
+### Bulk actions
+
+Tick several members to act on all of them at once: change their organization role, add them to a
+team or resource group, grant environment access, or remove them from the organization.
+
+![Bulk actions](images/member-bulk-actions.png)
+
+The selection covers the members on the current page and is cleared when you change page, filter
+or sort.
+
+## Manage Invitations
+
+The Invites tab lists invitations with their status — pending, accepted, declined, revoked or
+failed (past its expiry). Filter by status or search by email.
 
 ![Organization Invites](../img/organization-invites.png)
+
+The menu on each row offers:
+
+- **Pending** — Update the role, teams and environments the invitation grants; Resend the email;
+  or Revoke it.
+- **Failed, declined or revoked** — **Invite again**, which opens the invite form filled in from
+  the old invitation so you can send a fresh one. Resending is not offered, because the original
+  link can no longer be accepted.
 
 ## Read access controls: Org-wide Read tokens & the Read-only user cap
 
@@ -128,6 +159,10 @@ reduced to **read**, regardless of:
 Effective role = **min(granted role, cap)**. This is enforced everywhere access is
 checked, so you can lock a member down to read without editing each individual grant —
 useful for auditors, temporary read-only access, or revoking write access in one place.
+
+Where a cap lowers a grant, the member page shows the capped level with the granted level
+underneath — for example `read`, with `granted write` below it — so you can see what the member
+would have without the cap, and what removing it would restore.
 
 ### Choosing between them
 

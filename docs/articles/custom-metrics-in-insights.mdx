@@ -8,14 +8,14 @@ an artifact, and Testkube ingests the numeric fields as granular metric series y
 This path works for any tool or script that can emit text metrics at the end of a run: custom load tests, application
 benchmarks, database query timings, ad-hoc shell measurements, or anything else that can write to a file.
 
-Note: This feature requires Testkube Agent and Control Plane version `2.11.0` or later.
+Note: This feature requires Testkube Runner and Control Plane version `2.11.0` or later.
 
 ## Getting Started
 
 1. Write your metrics to a file using Influx Line Protocol syntax.
 2. Use a `.influx` or `.lp` file extension. Testkube only scans files with these extensions for line protocol content.
 3. Place the file in a directory covered by your step `artifacts.paths`.
-4. Run the workflow. The agent toolkit detects valid line protocol during artifact upload and registers the file as an
+4. Run the workflow. The runner toolkit detects valid line protocol during artifact upload and registers the file as an
    `influx.line_protocol` report. The control plane then ingests the metrics into granular series.
 
 ```yaml title="example-custom-metrics.yaml"
@@ -106,5 +106,5 @@ If custom metrics do not appear in Insights:
 - Confirm the file uses a `.influx` or `.lp` extension. Other extensions are not scanned for line protocol.
 - Confirm the file is included in `artifacts.paths` and appears in the execution Artifacts tab.
 - Confirm each metric line has at least one numeric field. Lines with only string or boolean fields are ignored.
-- Confirm granular metrics ingestion is enabled on your deployment (requires Testkube Agent and Control Plane version `2.11.0` or later; see [Getting Started](#getting-started) above).
+- Confirm granular metrics ingestion is enabled on your deployment (requires Testkube Runner and Control Plane version `2.11.0` or later; see [Getting Started](#getting-started) above).
 - Check the workflow logs for `Processing InfluxDB line protocol report` messages during artifact upload.

@@ -32,7 +32,7 @@ starting with v1.13.0, when execution-token based runner authentication was intr
 It is used in multiple control-plane paths, not just secret storage:
 
 - Deriving encryption keys for **Secret** credential values
-- Creating and validating **Agent secret keys** for Runner and GitOps agent authentication
+- Creating and validating **Runner secret keys** for Runner and runner with the GitOps capability authentication
 - Signing execution tokens that runners use during workflow execution
 
 All of these use the same runtime secret value:
@@ -45,10 +45,10 @@ All of these use the same runtime secret value:
 If you see the following log message:
 
 ```text
-cannot fetch agent ... error="missing master password for secret keys"
+cannot fetch runner ... error="missing master password for secret keys"
 ```
 
-the control plane attempted to create or read agent secret-key crypto state without the password being set.
+the control plane attempted to create or read runner secret-key crypto state without the password being set.
 
 ### Configuring the Master Password
 
@@ -91,10 +91,10 @@ derive crypto material, and without it existing encrypted records cannot be decr
 For on-prem, this is a critical operational dependency:
 
 - Never rotate it casually
-- If it is lost, encrypted secrets must be recreated and agent secrets reissued
+- If it is lost, encrypted secrets must be recreated and runner secrets reissued
 
-`POST /organizations/<organizationId>/agents/<agentIdOrName>/regenerate` regenerates an agent secret key for
-affected agents.
+`POST /organizations/<organizationId>/runners/<runnerIdOrName>/regenerate` regenerates a Runner secret key for
+affected runners.
 
 ## Disabling Credentials
 
@@ -157,8 +157,8 @@ testkube-cloud-api:
 
 ### Self-signed certificates
 
-If the Testkube On-Prem Control Plane components are behind a Load Balancer utilizing self-signed certificates, additional configuration must be provided to the Agent Helm chart during installation.
-Use one of the following methods to configure the Agent Helm chart to trust the self-signed certificates:
+If the Testkube On-Prem Control Plane components are behind a Load Balancer utilizing self-signed certificates, additional configuration must be provided to the Runner Helm chart during installation.
+Use one of the following methods to configure the Runner Helm chart to trust the self-signed certificates:
 
 1. Inject the custom CA certificate
 
@@ -343,7 +343,7 @@ To use your own ingress controller, reach out to our support team and we'll glad
 
 ### Contour Ingress Controller
 
-Testkube can be exposed using [Contour](https://projectcontour.io/) as an ingress controller, which supports gRPC and HTTP/2 natively. When configuring Contour, you will typically use an `HTTPProxy` resource. For gRPC streaming APIs (such as those used by the Testkube Agent), it is critical to set `timeoutPolicy.response` to `infinity` to avoid breaking long-lived gRPC streams. Users **cannot** set a finite `timeoutPolicy.response`, as this will cause Envoy (used by Contour) to terminate gRPC streams prematurely.
+Testkube can be exposed using [Contour](https://projectcontour.io/) as an ingress controller, which supports gRPC and HTTP/2 natively. When configuring Contour, you will typically use an `HTTPProxy` resource. For gRPC streaming APIs (such as those used by the Testkube Runner), it is critical to set `timeoutPolicy.response` to `infinity` to avoid breaking long-lived gRPC streams. Users **cannot** set a finite `timeoutPolicy.response`, as this will cause Envoy (used by Contour) to terminate gRPC streams prematurely.
 
 Example configuration:
 
@@ -373,9 +373,9 @@ spec:
 - `timeoutPolicy.response` covers the time from the end of the client request to the end of the upstream response. Envoy defaults this to 15s, which is not compatible with streaming responses (like gRPC streams) and will kill the connection.
 - See [Contour HTTPProxy docs](https://projectcontour.io/docs/v1.4.0/httpproxy/) and [Envoy timeout FAQ](https://www.envoyproxy.io/docs/envoy/latest/faq/configuration/timeouts#route-timeouts) for more details.
 
-## Multi-namespace Agent Installation
+## Multi-namespace Runner Installation {#multi-namespace-agent-installation}
 
-It is possible to deploy multiple Testkube Agent instances into the same Kubernetes cluster. Please put the following configuration to your `values.yaml` when deploying another agent:
+It is possible to deploy multiple Testkube Runner instances into the same Kubernetes cluster. Please put the following configuration to your `values.yaml` when deploying another runner:
 
 ```yaml
 testkube-api:
@@ -383,8 +383,8 @@ testkube-api:
     enabled: true
 ```
 
-By default, a [Listener Agent](/articles/agents-overview#listener-agents) monitors events across the entire Kubernetes cluster to trigger the execution of a Test Workflow with the [Kubernetes Event Triggers](/articles/test-triggers)
-functionality. You might want to limit the namespaces that the Listener Agent observes due to security restrictions, in which case you can use the `multinamespace` configuration:
+By default, a [runner with the listener capability](/articles/agents-overview#listener-agents) monitors events across the entire Kubernetes cluster to trigger the execution of a Test Workflow with the [Kubernetes Event Triggers](/articles/test-triggers)
+functionality. You might want to limit the namespaces that the runner with the listener capability observes due to security restrictions, in which case you can use the `multinamespace` configuration:
 
 ```yaml {3-7}
 testkube-agent:
@@ -403,7 +403,7 @@ addition to_ the namespace where Testkube is installed. No ClusterRole will be c
 
 ### Namespaces for Test Execution
 
-The Testkube agent creates Kubernetes jobs when executing a test workflow. By default, the job will be spawned within the namespace where Testkube is installed. You can opt to [run tests in a different namespace](/articles/creating-tests#run-the-test-in-a-different-execution-namespace), in which case you will have to allow this by configuring these namespaces in `executionNamespaces`.
+The Testkube runner creates Kubernetes jobs when executing a test workflow. By default, the job will be spawned within the namespace where Testkube is installed. You can opt to [run tests in a different namespace](/articles/creating-tests#run-the-test-in-a-different-execution-namespace), in which case you will have to allow this by configuring these namespaces in `executionNamespaces`.
 
 ```yaml {3}
 testkube-agent:
@@ -415,7 +415,7 @@ testkube-agent:
 
 ### Namespaces for Testkube Custom Resources
 
-As of Testkube v2.7, Testkube Resources are stored in the Control Plane - [Read More](/articles/testkube-resource-management). If you are using a [GitOps Agent](/articles/agents-overview#gitops-agents) to sync Testkube CRDs from your cluster into the Control Plane, the agent will watch for custom Testkube resources within the namespace where it is installed. It is currently unsupported to change this behaviour.
+As of Testkube v2.7, Testkube Resources are stored in the Control Plane - [Read More](/articles/testkube-resource-management). If you are using a [runner with the GitOps capability](/articles/agents-overview#gitops-agents) to sync Testkube CRDs from your cluster into the Control Plane, the runner will watch for custom Testkube resources within the namespace where it is installed. It is currently unsupported to change this behaviour.
 
 ## Bring Your Own Infra
 
@@ -571,7 +571,7 @@ The FCV jobs are configurable and can also be used for future supported MongoDB 
 
 ### NATS
 
-Testkube uses [NATS](https://nats.io/) as a message broker for communication between API and Agents.
+Testkube uses [NATS](https://nats.io/) as a message broker for communication between API and Runners.
 
 If you wish to use an existing NATS instance, you can configure the following values:
 
@@ -619,7 +619,7 @@ testkube-cloud-api:
 If you want to replace Dex by other Identity Provider, ensure you have a project or application configured following the instructions below:
 
 :::warning Important
-Some installations have customized the Testkube Control Plane URL sub-domains, by default is `dashboard`, `api`, `agent`, and `storage`. Take that in count to configure the **Redirect URL** and **Allowed External Redirect URLs**.
+Some installations have customized the Testkube Control Plane URL sub-domains, by default is `dashboard`, `api`, `runner`, and `storage`. Take that in count to configure the **Redirect URL** and **Allowed External Redirect URLs**.
 :::
 
 - Type: Web Application.

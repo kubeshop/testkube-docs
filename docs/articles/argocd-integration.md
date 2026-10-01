@@ -13,10 +13,10 @@ our [GitOps blogpost](https://testkube.io/blog/a-gitops-powered-kubernetes-testi
 Testkube stores its core resources (Workflows, Triggers, etc.) as Custom Resources in the Testkube Control Plane. This makes
 it straightforward to manage them using a GitOps approach with a tool like ArgoCD.
 
-To use Testkube Resources in the synced cluster, the target namespace will need to have a Testkube GitOps Agent installed, which will
+To use Testkube Resources in the synced cluster, the target namespace will need to have a Testkube runner with the GitOps capability installed, which will
 copy resources to the Testkube Control Plane as described in [GitOps with Testkube](/articles/gitops-overview).
 
-Once the Testkube GitOps Agent has synced Testkube resources to the Control Plane, they will be available for execution/triggering/etc.
+Once the Testkube runner with the GitOps capability has synced Testkube resources to the Control Plane, they will be available for execution/triggering/etc.
 
 :::note
 In line with GitOps principles, any changes that you make to Testkube Resources in your cluster via the Testkube CLI or
@@ -39,15 +39,15 @@ sequenceDiagram
     participant K8s as Kubernetes
     participant Hook as PostSync Job
     participant TK as Testkube CLI
-    participant Agent as Testkube Agent
+    participant Runner as Testkube Runner
 
     Argo->>K8s: Sync application resources
     K8s-->>Argo: Sync successful
     Argo->>Hook: Execute PostSync hook
     Hook->>TK: testkube run tw api-tests
-    TK->>Agent: Trigger execution
-    Agent->>Agent: Run tests
-    Agent-->>TK: Execution complete
+    TK->>Runner: Trigger execution
+    Runner->>Runner: Run tests
+    Runner-->>TK: Execution complete
     TK-->>Hook: Exit code 0/1
     Hook-->>Argo: Hook result
 ```
@@ -60,13 +60,13 @@ React to resource changes regardless of how they were applied:
 sequenceDiagram
     participant Argo as ArgoCD
     participant K8s as Kubernetes
-    participant Agent as Testkube Agent
+    participant Runner as Testkube Runner
 
     Argo->>K8s: Sync Deployment
-    K8s->>Agent: Deployment modified event
-    Agent->>Agent: Match TestTrigger conditions
-    Agent->>K8s: Create test Job
-    Note over Agent,K8s: Tests run independently of ArgoCD
+    K8s->>Runner: Deployment modified event
+    Runner->>Runner: Match TestTrigger conditions
+    Runner->>K8s: Create test Job
+    Note over Runner,K8s: Tests run independently of ArgoCD
 ```
 
 ### Avoiding pruning of intermediate Testkube Resources
@@ -89,19 +89,19 @@ You can create a [Workflow Template](/articles/test-workflow-templates) that add
 them manually.
 :::
 
-## Using Testkube Runner Agents with ArgoCD
+## Using Testkube runners with ArgoCD {#using-testkube-runner-agents-with-argocd}
 
-Since a [Testkube Runner Agent](/articles/agents-overview#runner-agents) needs to be installed in the target namespace for your Argo Application(s), you will need to either
+Since a [Testkube runner](/articles/agents-overview#runner-agents) needs to be installed in the target namespace for your Argo Application(s), you will need to either
 
-1. Preinstall a Runner Agent in the target namespace and disable pruning in ArgoCD.
-2. Include the Testkube Runner Agent manifests or Helm Chart in your ArgoCD Application.
+1. Preinstall a runner in the target namespace and disable pruning in ArgoCD.
+2. Include the Testkube runner manifests or Helm Chart in your ArgoCD Application.
 
-### Pre-install the Runner Agent and disable Pruning
+### Pre-install the runner and disable Pruning {#pre-install-the-runner-agent-and-disable-pruning}
 
 This option is more suited for long-lived namespaces - for example a dedicated namespace for a staging or development environment.
 
-When pre-installing the Runner Agent in your target namespace, it is important to NOT select the `prune` option when auto-syncing your
-Application with Argo, otherwise Argo will remove the Agent from your namespace when syncing.
+When pre-installing the runner in your target namespace, it is important to NOT select the `prune` option when auto-syncing your
+Application with Argo, otherwise Argo will remove the Runner from your namespace when syncing.
 
 ![ArgoCD disable prune auto-syncing](images/argocd-disable-prune-autosync.png)
 
@@ -109,15 +109,15 @@ Same applies to manual synchronization - do NOT select the `prune` option:
 
 ![ArgoCD disable prune manual sync](images/argocd-disable-prune-manual-sync.png)
 
-### Include the Runner Agent in your GitOps Repo
+### Include the runner in your GitOps Repo {#include-the-runner-agent-in-your-gitops-repo}
 
-For ephemeral namespaces it can be more convenient to include the Agent manifests in your GitOps repo so the Agent
+For ephemeral namespaces it can be more convenient to include the Runner manifests in your GitOps repo so the Runner
 gets installed and synced together with any other resources you are managing with ArgoCD. You can simply use `helm template`
 with the [Testkube Helm Chart](/articles/multi-agent-runner-helm-chart) to generate the manifests to be added to your repository.
 
-### Connecting the Runner Agent to a Control Plane
+### Connecting the runner to a Control Plane {#connecting-the-runner-agent-to-a-control-plane}
 
-To connect the Runner Agent to a Testkube Control Plane (for storing results, troubleshooting, etc),
+To connect the runner to a Testkube Control Plane (for storing results, troubleshooting, etc),
 your values file will require at least the following properties:
 
 ```yaml
@@ -140,7 +140,7 @@ testkube-dashboard:
   enabled: false
 ```
 
-You can find the corresponding values in the [Environment Settings](/articles/environment-management#general) for the Testkube Environment that the Agent should connect
+You can find the corresponding values in the [Environment Settings](/articles/environment-management#general) for the Testkube Environment that the Runner should connect
 to:
 
 ## Triggering Workflow Executions
@@ -203,7 +203,7 @@ The Job first sets the Testkube CLI context and then simply invokes the `testkub
 - the `root-domain` should be `testkube.io` if you're using Testkube Cloud, or your local Testkube API endpoint for on-prem installations.
 
 :::tip
-If you need to target a specific Runner Agent in your commands, see [Runner Agent Targeting](/articles/test-workflows-running#runner-agent-targeting).
+If you need to target a specific runner in your commands, see [Runner targeting](/articles/test-workflows-running#runner-agent-targeting).
 :::
 
 ### Trigger using a Kubernetes Event Trigger

@@ -5,7 +5,7 @@ for TestWorkflow lifecycle changes and resource operations. This allows you to i
 monitoring systems, or any automation that watches Kubernetes Events.
 
 :::note
-As of Testkube 2.7.0, you need a **Webhook Agent** in your Testkube Environment to emit Kubernetes Events - [Read More](/articles/agents-overview#webhook-agents)
+As of Testkube 2.7.0, you need a **runner with the webhooks capability** in your Testkube Environment to emit Kubernetes Events - [Read More](/articles/agents-overview#webhook-agents)
 :::
 
 ## Enabling Kubernetes Events
@@ -55,7 +55,7 @@ Not all event types apply to every resource. Events are emitted as follows:
 - **TestWorkflow execution events** (queued, started, succeed, failed, aborted, canceled) are emitted for **TestWorkflows** only. Each event is tied to a specific TestWorkflow and its execution. The Kubernetes Event’s **InvolvedObject** points to that TestWorkflow resource so you can correlate events with a workflow by name and namespace.
 
 - **Resource lifecycle events** (created, updated, deleted) are emitted when the following Testkube resources change:
-  - **TestWorkflows** — when a workflow is created, updated, or deleted (via the **agent’s** API or CLI). The Kubernetes Event’s **InvolvedObject** references the TestWorkflow resource (name, namespace).
+  - **TestWorkflows** — when a workflow is created, updated, or deleted (via the **runner’s** API or CLI). The Kubernetes Event’s **InvolvedObject** references the TestWorkflow resource (name, namespace).
   - **TestWorkflow templates** — when a workflow template is created, updated, or deleted. The Kubernetes Event’s **InvolvedObject** references the TestWorkflowTemplate resource (name, namespace).
   - **Triggers** (TestTrigger) — when a trigger is created, updated, or deleted
   - **Webhooks** — when a webhook is created, updated, or deleted
@@ -74,7 +74,7 @@ Each Kubernetes Event created by Testkube has the following structure:
 | Field                   | Value                                                                                                                                                                                                                                                                                                                                        |
 | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Name**                | `testkube-event-<event-id>`                                                                                                                                                                                                                                                                                                                  |
-| **Namespace**           | The Testkube agent namespace                                                                                                                                                                                                                                                                                                                 |
+| **Namespace**           | The Testkube runner namespace                                                                                                                                                                                                                                                                                                                |
 | **Type**                | `Normal`                                                                                                                                                                                                                                                                                                                                     |
 | **Reason**              | The Testkube event type (e.g. `start-testworkflow`)                                                                                                                                                                                                                                                                                          |
 | **Action**              | A human-readable action (e.g. `started`)                                                                                                                                                                                                                                                                                                     |

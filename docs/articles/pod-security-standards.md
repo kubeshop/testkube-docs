@@ -62,9 +62,9 @@ spec:
             claimName: nats-enterprise-pvc
 ```
 
-### Agent
+### Runner {#agent}
 
-In each namespace hosting an agent installation `kubectl apply` a job similar to
+In each namespace hosting a runner installation `kubectl apply` a job similar to
 this:
 
 ```yaml {5-6,14-15,24-25}
@@ -72,7 +72,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: nats-chown-job
-  # Specify the namespace of your agent installation
+  # Specify the namespace of your runner installation
   namespace: testkube-agent
 spec:
   ttlSecondsAfterFinished: 86400
@@ -92,7 +92,7 @@ spec:
       volumes:
         - name: nats-pvc
           persistentVolumeClaim:
-            # Specify the name of the PVC for your agent's NATS installation
+            # Specify the name of the PVC for your runner's NATS installation
             claimName: nats-pvc
 ```
 

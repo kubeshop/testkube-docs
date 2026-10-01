@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:c136c263e5a46278d5281e61b4abec4b796e9761e7aee4e472f3a514f72b32d7</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/medium-6-fbb552"/> <img alt="low: 7" src="https://img.shields.io/badge/low-7-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:c136c263e5a46278d5281e61b4abec4b796e9761e7aee4e472f3a514f72b32d7</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/medium-6-fbb552"/> <img alt="low: 7" src="https://img.shields.io/badge/low-7-fce1a9"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>80 MB</td></tr>
 <tr><td>packages</td><td>86</td></tr>
@@ -213,8 +213,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.8.5-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.8.5-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.366%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.403%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -230,10 +230,10 @@ hide_table_of_contents: true
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>pcre2</strong> <code>10.48-r0</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/pcre2@10.48-r0?os_name=alpine&os_version=3.24</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-89157?s=alpine&n=pcre2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C%3D10.48-r0"><img alt="medium : CVE--2026--89157" src="https://img.shields.io/badge/CVE--2026--89157-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-89157?s=alpine&n=pcre2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr="><img alt="medium : CVE--2026--89157" src="https://img.shields.io/badge/CVE--2026--89157-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;=10.48-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;/code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.278%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
@@ -247,10 +247,10 @@ hide_table_of_contents: true
 </blockquote>
 </details>
 
-<a href="https://scout.docker.com/v/CVE-2026-89160?s=alpine&n=pcre2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C%3D10.48-r0"><img alt="low : CVE--2026--89160" src="https://img.shields.io/badge/CVE--2026--89160-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-89160?s=alpine&n=pcre2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr="><img alt="low : CVE--2026--89160" src="https://img.shields.io/badge/CVE--2026--89160-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;=10.48-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;/code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.268%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
@@ -264,10 +264,10 @@ hide_table_of_contents: true
 </blockquote>
 </details>
 
-<a href="https://scout.docker.com/v/CVE-2026-89162?s=alpine&n=pcre2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C%3D10.48-r0"><img alt="low : CVE--2026--89162" src="https://img.shields.io/badge/CVE--2026--89162-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-89162?s=alpine&n=pcre2&ns=alpine&t=apk&osn=alpine&osv=3.24&vr="><img alt="low : CVE--2026--89162" src="https://img.shields.io/badge/CVE--2026--89162-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;=10.48-r0</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;/code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.156%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
@@ -293,6 +293,26 @@ hide_table_of_contents: true
 <tr><td>Fixed version</td><td><code>1.70.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.319%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>libpng</strong> <code>1.6.58-r1</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/libpng@1.6.58-r1?os_name=alpine&os_version=3.24</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-46675?s=alpine&n=libpng&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.6.59-r0"><img alt="unspecified : CVE--2026--46675" src="https://img.shields.io/badge/CVE--2026--46675-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.6.59-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.6.59-r0</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

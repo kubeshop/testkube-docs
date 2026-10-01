@@ -13,7 +13,7 @@ vLLM cannot host Claude or translate requests to Anthropic. LiteLLM performs tha
 
 For Testkube, first [enable AI](/articles/ai-configuration). The examples below independently test the model endpoint on Kubernetes; they do not install Testkube. You need `kubectl`, Python 3, registry access, and outbound HTTPS. LiteLLM additionally needs an Anthropic API key with access to `claude-sonnet-5`; inference is billable.
 
-The vLLM example targets an ARM64 CPU cluster with approximately 8 GiB available memory. Its tiny `Qwen/Qwen2.5-0.5B-Instruct` model is a connectivity fixture, not a recommended Testkube agent model. For other hardware, use the corresponding [vLLM image and installation instructions](https://docs.vllm.ai/en/latest/getting_started/installation/).
+The vLLM example targets an ARM64 CPU cluster with approximately 8 GiB available memory. Its tiny `Qwen/Qwen2.5-0.5B-Instruct` model is a connectivity fixture, not a recommended model for Testkube AI agents. For other hardware, use the corresponding [vLLM image and installation instructions](https://docs.vllm.ai/en/latest/getting_started/installation/).
 
 Download [litellm.yaml](/examples/ai-model-proxies/litellm.yaml), [vllm.yaml](/examples/ai-model-proxies/vllm.yaml), and [smoke.py](/examples/ai-model-proxies/smoke.py) into your working directory, saving them with the filenames shown. The manifests pin image versions/digests and include resource limits, startup/readiness probes, and internal Services. Run one server at a time on small clusters. These single-replica resource limits are for testing, not production sizing.
 

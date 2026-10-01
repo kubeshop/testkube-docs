@@ -5,7 +5,7 @@ The Testkube Jenkins integration enables the execution of any [Testkube CLI](htt
 There are multiple ways to integrate Testkube with Jenkins depending on your setup:
 
 - **Jenkins on Kubernetes**: Use the `kubeshop/testkube-cli` Docker image as a container in your pod template.
-- **Jenkins on VMs**: Install the Testkube CLI directly on your Jenkins agents.
+- **Jenkins on VMs**: Install the Testkube CLI directly on your Jenkins runners.
 - **Jenkins CLI Plugin**: Use the [Testkube CLI Jenkins Plugin](https://plugins.jenkins.io/testkube-cli) to automatically install and configure the CLI.
 
 ## Prerequisites
@@ -20,14 +20,14 @@ If a test is already created, you can run it using the command `testkube run tes
 If your Jenkins instance runs on Kubernetes (using the [Kubernetes plugin](https://plugins.jenkins.io/kubernetes/)), you can use the `kubeshop/testkube-cli` Docker image directly in your pipeline. This avoids the need to install the CLI binary during the pipeline run.
 
 :::info
-The pod template requires `securityContext.runAsUser: 1000` so that both the JNLP agent and the Testkube container share the same UID and can read/write the shared workspace volume. Additionally, the `HOME` environment variable must be set to a writable path (e.g., `/home/jenkins/agent`) so the CLI can store its configuration.
+The pod template requires `securityContext.runAsUser: 1000` so that both the JNLP runner and the Testkube container share the same UID and can read/write the shared workspace volume. Additionally, the `HOME` environment variable must be set to a writable path (e.g., `/home/jenkins/runner`) so the CLI can store its configuration.
 :::
 
 ### Testkube (Cloud)
 
 ```groovy
 pipeline {
-    agent {
+    runner {
         kubernetes {
             yaml '''
                 apiVersion: v1
@@ -42,7 +42,7 @@ pipeline {
                     args: ['infinity']
                     env:
                     - name: HOME
-                      value: /home/jenkins/agent
+                      value: /home/jenkins/runner
             '''
         }
     }
@@ -72,7 +72,7 @@ For self-hosted Testkube instances running in the same cluster, point `--api-uri
 
 ```groovy
 pipeline {
-    agent {
+    runner {
         kubernetes {
             yaml '''
                 apiVersion: v1
@@ -87,7 +87,7 @@ pipeline {
                     args: ['infinity']
                     env:
                     - name: HOME
-                      value: /home/jenkins/agent
+                      value: /home/jenkins/runner
             '''
         }
     }
@@ -112,13 +112,13 @@ pipeline {
 
 ## Jenkins on VMs
 
-If your Jenkins agents run on virtual machines (or bare metal), you can install the Testkube CLI directly during the pipeline execution. This approach downloads the CLI binary and uses it to configure the context and run tests.
+If your Jenkins runners run on virtual machines (or bare metal), you can install the Testkube CLI directly during the pipeline execution. This approach downloads the CLI binary and uses it to configure the context and run tests.
 
 ### Testkube (Cloud)
 
 ```groovy
 pipeline {
-    agent any
+    runner any
 
     environment {
         TK_ORG = credentials("TK_ORG")
@@ -154,7 +154,7 @@ This workflow establishes a connection to an EKS cluster and runs a Test Workflo
 
 ```groovy
 pipeline {
-    agent any
+    runner any
 
     environment {
         TK_ORG = credentials("TK_ORG")
@@ -201,7 +201,7 @@ This example connects to a Kubernetes cluster in Google Cloud and runs a Test Wo
 
 ```groovy
 pipeline {
-    agent any
+    runner any
 
     environment {
         TK_ORG = credentials("TK_ORG")
@@ -266,7 +266,7 @@ Install the plugin by searching for it in the "Available Plugins" section on Jen
 
 ```groovy
 pipeline {
-    agent any
+    runner any
 
     environment {
         TK_ORG = credentials("TK_ORG")
@@ -292,7 +292,7 @@ pipeline {
 
 ```groovy
 pipeline {
-    agent any
+    runner any
 
     environment {
         TK_NAMESPACE = 'custom-testkube-namespace'

@@ -33,6 +33,6 @@ The Test Workflow is the bread and butter of Testkube. It's a Kubernetes Custom 
 
 ![A diagram showing how Testkube works](./img/how-does-it-work.png)
 
-When Test Workflows are triggered, the Testkube Agent will spawn a Kubernetes Job.
+When Test Workflows are triggered, the Testkube Runner will spawn a Kubernetes Job.
 The Kubernetes scheduler will then create a pod which runs the workflow.
 All steps are sequentially executed as containers within the same pod and thus share the file system.

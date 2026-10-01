@@ -1,17 +1,17 @@
-# The Testkube Agent
+# The Testkube Runner {#the-testkube-agent}
 
 ## Overview
 
-The Testkube Agent is 100% Open Source and includes the Testkube execution and orchestration engine
+The Testkube Runner is 100% Open Source and includes the Testkube execution and orchestration engine
 (with some [limitations](#agent-limitations-in-standalone-mode)). It is _always_ hosted in your infrastructure and
 can be deployed in two modes:
 
 - **Standalone Mode** - not connected to a Testkube Control Plane.
 - **Connected Mode** - connected to a Testkube Control Plane.
 
-This document shows how to use the Agent in Standalone mode, see the corresponding documentation for
+This document shows how to use the Runner in Standalone mode, see the corresponding documentation for
 [On Prem](/articles/install/overview#on-prem-control-plane) and [Cloud](/articles/install/cloud-overview)
-deployment of the Testkube Control Plane to learn how to use the Agent in Connected Mode.
+deployment of the Testkube Control Plane to learn how to use the Runner in Connected Mode.
 
 :::tip
 See the [Feature Comparison](feature-comparison) to understand the differences in functionality between these two modes.
@@ -19,19 +19,19 @@ See the [Feature Comparison](feature-comparison) to understand the differences i
 
 ## Running in Standalone Mode
 
-When running the Agent in Standalone Mode there is no [Dashboard](/articles/testkube-dashboard-explore) and it has to be managed entirely through the [Testkube CLI](/articles/cli).
+When running the Runner in Standalone Mode there is no [Dashboard](/articles/testkube-dashboard-explore) and it has to be managed entirely through the [Testkube CLI](/articles/cli).
 
-The following functionality is available directly in the agent in Standalone Mode
+The following functionality is available directly in the runner in Standalone Mode
 
 - **Test Workflows** : Manage Workflows and Templates, Run/Schedule executions (see below for limitations).
 - **Logs/Artifacts** : Retrieve Workflow executions, logs, artifacts via CLI or API.
-- **Webhooks** : Manage Webhooks that the Agent executes.
-- **Event Triggers** : Manage Event Triggers that the Agent reacts to.
+- **Webhooks** : Manage Webhooks that the Runner executes.
+- **Event Triggers** : Manage Event Triggers that the Runner reacts to.
 - **Tests, TestSuites, Sources, Executors** : Deprecated - but still available during a transition period - [Read More](/articles/legacy-features).
 
-### Agent Limitations in Standalone Mode
+### Runner Limitations in Standalone Mode {#agent-limitations-in-standalone-mode}
 
-The following Workflow features are _not_ available when using the Open Source Agent without connecting it to a
+The following Workflow features are _not_ available when using the Open Source Runner without connecting it to a
 Testkube Control Plane:
 
 - **Complex Test Orchestration** with `execute` - see [Test Suites](/articles/test-workflows-test-suites.mdx)
@@ -41,13 +41,13 @@ Testkube Control Plane:
 - **Concurrency Policies** with `concurrency` - see [Concurrency](/articles/test-workflows-concurrency-queueing)
 
 :::tip
-Deploying the Testkube Agent in Standalone Mode provides **extensive** test execution capabilities even
+Deploying the Testkube Runner in Standalone Mode provides **extensive** test execution capabilities even
 without these features available, check out the [Open Source Overview](/articles/open-source) to get started.
 :::
 
-## Installing the Standalone Agent
+## Installing the Standalone Runner {#installing-the-standalone-agent}
 
-The following steps are required to install the Standalone Agent into a Kubernetes Cluster:
+The following steps are required to install the Standalone Runner into a Kubernetes Cluster:
 
 - Create a Testkube namespace.
 - Deploy the Testkube API (see below).
@@ -60,7 +60,7 @@ Testkube OSS is here to help you to powering your development and testing workfl
 
 ### With the CLI
 
-You can install the standalone agent by executing the following command.
+You can install the standalone runner by executing the following command.
 By default it will install within the `testkube` namespace for your
 current Kubernetes context.
 
@@ -95,17 +95,17 @@ The [Helm Chart Docs](https://github.com/kubeshop/helm-charts/tree/main/charts/t
 
 ## Upgrading
 
-See [upgrade][upgrade] for instructions on how to upgrade the standalone agent.
+See [upgrade][upgrade] for instructions on how to upgrade the standalone runner.
 
 ## Uninstalling
 
-### With the CLI
+### With the CLI {#with-the-cli}
 
 ```sh
 testkube purge
 ```
 
-### With Helm
+### With Helm {#with-helm}
 
 ```sh
 helm delete --namespace testkube testkube kubeshop/testkube
@@ -113,20 +113,20 @@ helm delete --namespace testkube testkube kubeshop/testkube
 
 ## Deployment Architecture
 
-A high-level deployment architecture for Standalone Agent is shown below.
+A high-level deployment architecture for Standalone Runner is shown below.
 
-![Deployment with standalone agent](../../img/architecture-standalone.jpeg)
+![Deployment with standalone runner](../../img/architecture-standalone.jpeg)
 
 The Testkube CRDs are described in [Testkube Custom Resources](/articles/crds).
 
 ## Connecting to the Testkube Control Plane
 
-You can connect a standalone Agent to an instance of the Testkube Control Plane to leverage
+You can connect a standalone Runner to an instance of the Testkube Control Plane to leverage
 corresponding functionality (see [Feature Comparison](feature-comparison)).
 All Workflow/Trigger/Webhook definitions will be preserved, but historical test execution results and
 artifacts won't be copied to the control plane.
 
-After connecting, your agent appears in the Control Plane as a single agent with all four capabilities (Runner, Listener, GitOps, Webhook) enabled by default - [Read More](/articles/testkube-resource-management).
+After connecting, your runner appears in the Control Plane as a single runner with all four capabilities (Runner, Listener, GitOps, Webhook) enabled by default - [Read More](/articles/testkube-resource-management).
 
 The following command which will guide you through the migration process:
 
@@ -237,7 +237,7 @@ Alternatively, these values can be read from Kubernetes secrets and set:
 
 ### Deploying on OpenShift
 
-To install the standalone agent Testkube on an Openshift cluster you will need to include the following configuration:
+To install the standalone runner Testkube on an Openshift cluster you will need to include the following configuration:
 
 1. Add security context for PostgreSQL to `values.yaml`:
 

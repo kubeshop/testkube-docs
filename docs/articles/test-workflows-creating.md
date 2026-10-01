@@ -6,7 +6,7 @@ Test Workflows can be created and managed either through the [Testkube CLI](/art
 :::tip
 
 As of Testkube v2.7, Workflows are stored in the Testkube Control Plane - [Read More](/articles/testkube-resource-management).
-If you are using a [GitOps Agent](/articles/agents-overview#gitops-agents), you can also use `kubectl apply` to create
+If you are using a [runner with the GitOps capability](/articles/agents-overview#gitops-agents), you can also use `kubectl apply` to create
 Workflows as CRDs, which will then be synced to the Control Plane:
 
 ```shell
@@ -59,7 +59,7 @@ testkube run testworkflow TEST_WORKFLOW_NAME -f
 ```
 
 :::tip
-With the introduction of [Runner Agents](/articles/agents-overview#runner-agents) it is possible to add a
+With the introduction of [runners](/articles/agents-overview#runner-agents) it is possible to add a
 `--target` argument to specify on which Runner a Workflow should be run - [Read More](/articles/test-workflows-running#runner-agent-targeting).
 :::
 

@@ -160,22 +160,22 @@ testkube_webhook_creations_total{
 } 1
 ```
 
-## Agent to Control-Plane Mapping
+## Runner to Control-Plane Mapping {#agent-to-control-plane-mapping}
 
-Every [Agent metric](/articles/metrics) has a corresponding Control Plane metric. The mapping follows a small set of
+Every [Runner metric](/articles/metrics) has a corresponding Control Plane metric. The mapping follows a small set of
 consistent conventions described below.
 
 ### Naming Conventions
 
-- **Counter suffix**: Agent metrics ending in `_count` become `_total` on the Control Plane (e.g. `testkube_testworkflow_executions_count` → `testkube_testworkflow_executions_total`).
-- **Trigger name normalization**: Agent trigger metrics using the plural `testtriggers` become singular `testtrigger` on the Control Plane (e.g. `testkube_testtriggers_updates_count` → `testkube_testtrigger_updates_total`).
-- **Duration units**: Agent timing metrics in milliseconds (`_ms`) become histograms in seconds (`_seconds`) on the Control Plane for cross-replica aggregation (e.g. `testkube_testworkflow_executions_duration_ms` → `testkube_testworkflow_executions_duration_seconds`).
+- **Counter suffix**: Runner metrics ending in `_count` become `_total` on the Control Plane (e.g. `testkube_testworkflow_executions_count` → `testkube_testworkflow_executions_total`).
+- **Trigger name normalization**: Runner trigger metrics using the plural `testtriggers` become singular `testtrigger` on the Control Plane (e.g. `testkube_testtriggers_updates_count` → `testkube_testtrigger_updates_total`).
+- **Duration units**: Runner timing metrics in milliseconds (`_ms`) become histograms in seconds (`_seconds`) on the Control Plane for cross-replica aggregation (e.g. `testkube_testworkflow_executions_duration_ms` → `testkube_testworkflow_executions_duration_seconds`).
 
 ### Label Changes
 
 All Control Plane metrics gain `environment_name` for environment-level scoping. Beyond that:
 
-- **Workflow execution and step metrics** gain `runner_id`, `runner_name`, and `workflow_namespace` for finer scoping, and rename agent labels for clarity: `name` → `workflow_name`, `result` → `workflow_result`, `status` → `step_status`.
+- **Workflow execution and step metrics** gain `runner_id`, `runner_name`, and `workflow_namespace` for finer scoping, and rename runner labels for clarity: `name` → `workflow_name`, `result` → `workflow_result`, `status` → `step_status`.
 - **`triggered_by`** is normalized to one of `manual`, `schedule`, or `trigger`.
 - **High-cardinality labels are dropped**: `labels`, `tags`, `testworkflow_uri`, and trigger `causes` are not carried to the Control Plane.
 - **CRUD counters** use only `environment_name` and `result` (workflow names are omitted to keep cardinality bounded). Template metrics additionally include `workflow_template`.
@@ -184,11 +184,11 @@ All Control Plane metrics gain `environment_name` for environment-level scoping.
 
 ### Metrics Not Mapped
 
-Agent-only legacy test and test-suite metric families (`testkube_test_*`, `testkube_testsuite_*`) do not have Control Plane equivalents.
+Runner-only legacy test and test-suite metric families (`testkube_test_*`, `testkube_testsuite_*`) do not have Control Plane equivalents.
 
 ### Full Mapping Reference
 
-| Agent Metric                                           | Control-Plane Metric                                        |
+| Runner Metric                                          | Control-Plane Metric                                        |
 | ------------------------------------------------------ | ----------------------------------------------------------- |
 | `testkube_testworkflow_executions_count`               | `testkube_testworkflow_executions_total`                    |
 | `testkube_testworkflow_executions_duration_ms`         | `testkube_testworkflow_executions_duration_seconds`         |

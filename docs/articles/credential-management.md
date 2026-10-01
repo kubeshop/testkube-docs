@@ -164,7 +164,7 @@ When you create a credential with type **Vault**, Testkube:
 2. Stores a reference to that Vault path in its database (the actual secret value is never stored in Testkube)
 3. At workflow execution time, the Control Plane reads the secret from Vault and passes it to the runner
 
-All Vault access goes through the Control Plane. Agents and runners never talk to Vault directly.
+All Vault access goes through the Control Plane. Runners and runners never talk to Vault directly.
 
 ### Prerequisites
 

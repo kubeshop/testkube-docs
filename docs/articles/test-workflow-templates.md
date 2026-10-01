@@ -369,7 +369,7 @@ spec:
 Sometimes, you may want to prepare company-wide configuration that will be applied to all Test Workflows.
 In example, it may be used to add proper labels, security, or other infrastructure setup.
 
-To configure a global template, adjust the `testkube-runner` Helm chart values for your Runner Agent installation, specifically `globalTemplate`:
+To configure a global template, adjust the `testkube-runner` Helm chart values for your runner installation, specifically `globalTemplate`:
 
 ```yaml
 globalTemplate:
@@ -392,7 +392,7 @@ globalTemplate:
 ```
 
 This example will result in Testkube looking for a TestWorkflowTemplate named `my-external-global-template` in the
-Runner Agent namespace when executing your Test Workflows.
+runner namespace when executing your Test Workflows.
 
 ## Official Templates
 
