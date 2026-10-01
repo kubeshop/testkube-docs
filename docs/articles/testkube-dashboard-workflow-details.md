@@ -17,8 +17,8 @@ Workflows execute one or more tests; Composite Workflows execute one or more Wor
 is based on the testing tool you use.
 
 :::info
-A **Runner Agent** acts as the test Execution engine and runs within the Kubernetes cluster to spin up pods, facilitate the testing defined in Testkube,
-and report results. You can use multiple **Runner Agents** in your **Environment**. For additional information, read [Runner Agents](/articles/agents-overview#runner-agents).
+A **runner** acts as the test Execution engine and runs within the Kubernetes cluster to spin up pods, facilitate the testing defined in Testkube,
+and report results. You can use multiple **runners** in your **Environment**. For additional information, read [runners](/articles/agents-overview#runner-agents).
 :::
 
 ![Run Now](images/workflow-details-run-now.png)
@@ -54,12 +54,12 @@ You can also select an Execution from the list to view Execution-specific detail
 
 ![Executions – Select More Tabs](../articles/images/workflow-details-executions-select-for-more-tabs.png)
 
-### Multi-Agent Executions
+### Multi-runner Executions {#multi-agent-executions}
 
-For Executions that use multiple [Runner Agents](/articles/agents-overview#runner-agents),
+For Executions that use multiple [runners](/articles/agents-overview#runner-agents),
 an expandable section includes those Executions. Use the arrows to expand and collapse these Executions.
 
-![Multi-agent Executions List](images/multi-agent-executions-list.png)
+![Multi-runner Executions List](images/multi-agent-executions-list.png)
 
 ## CLI Commands Tab
 

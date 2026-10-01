@@ -35,7 +35,7 @@ You can select an Execution to examine its details, view logs, and troubleshoot 
 
 A Testkube **Pending execution** is a test that is slated to run. There could be several reasons
 a test Execution has a **Pending** status. For example, the test could be awaiting other Executions because
-there are too many tests running, or the Execution might be waiting for the requested Runner Agent to become available.
+there are too many tests running, or the Execution might be waiting for the requested runner to become available.
 
 You can **Reset all filters** to remove filters.
 

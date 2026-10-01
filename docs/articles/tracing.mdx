@@ -1,6 +1,6 @@
 # Distributed Tracing (OpenTelemetry)
 
-Testkube exports distributed traces via OpenTelemetry over HTTP using the `otlptracehttp` exporter for both the Control Plane and the Testkube Agent. This lets you visualize and troubleshoot requests end-to-end using backends such as Grafana Tempo, Jaeger.
+Testkube exports distributed traces via OpenTelemetry over HTTP using the `otlptracehttp` exporter for both the Control Plane and the Testkube Runner. This lets you visualize and troubleshoot requests end-to-end using backends such as Grafana Tempo, Jaeger.
 
 ## Environment variables
 
@@ -16,7 +16,7 @@ Configure tracing using these environment variables:
 - **OTLP_SERVICE_NAME**: Logical service name used in traces
   - Type: string
   - Default: `testkube`
-  - Tip: Set distinct names per component/agent to separate services in your tracing UI
+  - Tip: Set distinct names per component/runner to separate services in your tracing UI
 - **TRACING_SAMPLE_RATE**: Probability sampler between 0.0 and 1.0
   - Type: float
   - Default: `1.0` (sample all)
@@ -41,9 +41,9 @@ testkube-cloud-api:
     TRACING_SAMPLE_RATE: "0.2"
 ```
 
-## Testkube Agent (Kubernetes)
+## Testkube Runner (Kubernetes) {#testkube-agent-kubernetes}
 
-Set the same variables on the Agent so workflow execution paths are traced as well:
+Set the same variables on the Runner so workflow execution paths are traced as well:
 
 ```yaml
 # values.yaml

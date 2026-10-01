@@ -4,7 +4,7 @@ Use this runbook immediately after a Testkube Enterprise upgrade.
 
 This runbook is intended for on-premises installations where your team performs the upgrade.
 
-For SaaS Control Plane users, Control Plane upgrades are managed by the Testkube Engineering team. In that model, customer validation should focus on agent upgrades and agent connectivity/execution health.
+For SaaS Control Plane users, Control Plane upgrades are managed by the Testkube Engineering team. In that model, customer validation should focus on runner upgrades and runner connectivity/execution health.
 
 This checklist uses common operational tools such as `kubectl`, `helm`, `curl`, and log inspection from the Kubernetes workloads. Depending on how your platform is managed, you may use other tooling to verify the same checks, such as Argo CD, Flux, Rancher, Lens, or your cloud provider's Kubernetes console.
 
@@ -21,13 +21,13 @@ If your installation is managed through GitOps, use your delivery tool as the so
 
 ## SaaS Control Plane Users
 
-If you use Testkube SaaS Control Plane, use this reduced checklist after your agent upgrade:
+If you use Testkube SaaS Control Plane, use this reduced checklist after your runner upgrade:
 
-- [ ] Agent pods are Running/Ready in each connected cluster
-- [ ] Agents reconnect and show healthy in the Control Plane
-- [ ] One smoke execution runs successfully through the upgraded agent
+- [ ] Runner pods are Running/Ready in each connected cluster
+- [ ] Runners reconnect and show healthy in the Control Plane
+- [ ] One smoke execution runs successfully through the upgraded runner
 - [ ] Artifacts/results are visible in the Control Plane UI
-- [ ] No auth/TLS/network errors in agent logs
+- [ ] No auth/TLS/network errors in runner logs
 
 ## Operator Inputs
 
@@ -149,7 +149,7 @@ kubectl logs -n "$NS" deploy/testkube-worker-service --tail=300 | grep -Ei "nats
 Use at least one representative TestWorkflow that reflects your real setup. Prefer a workflow that exercises orchestration behavior such as sequential steps, dependencies, parallel stages, artifacts, and external integrations.
 
 - [ ] Start a representative TestWorkflow from the UI, CLI, or API
-- [ ] Confirm it is scheduled and picked up by the expected agent/worker
+- [ ] Confirm it is scheduled and picked up by the expected runner/worker
 - [ ] Confirm all orchestration stages progress as expected
 - [ ] Confirm step-level status, logs, and final result are visible in the UI
 - [ ] Confirm artifacts, reports, and outputs are stored and downloadable
@@ -176,10 +176,10 @@ curl -I https://<ui-host>
 curl -I https://<api-host>/health
 ```
 
-## 9) Agent Connectivity (if applicable)
+## 9) Runner Connectivity (if applicable) {#9-agent-connectivity-if-applicable}
 
-- [ ] Existing agents reconnect
-- [ ] One run from agent cluster executes successfully
+- [ ] Existing runners reconnect
+- [ ] One run from runner cluster executes successfully
 - [ ] Events and status updates visible in UI/API
 
 ## 10) Feature-Specific Validation

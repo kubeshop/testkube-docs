@@ -6,9 +6,9 @@ Testkube is open source and we welcome contributions of all kinds — code, docu
 Check out [First Contributions](https://github.com/firstcontributions/first-contributions) for a gentle introduction to the contribution workflow.
 :::
 
-## The Testkube Agent Repository
+## The Testkube Runner Repository {#the-testkube-agent-repository}
 
-The [Testkube Agent](https://github.com/kubeshop/testkube) is the core open-source component that runs inside Kubernetes clusters. It contains:
+The [Testkube Runner](https://github.com/kubeshop/testkube) is the core open-source component that runs inside Kubernetes clusters. It contains:
 
 - **API Server** — the main service that manages Test Workflows, executions, webhooks, and storage
 - **CLI** (`kubectl-testkube`) — the command-line interface for interacting with Testkube - [Read More](/articles/cli)

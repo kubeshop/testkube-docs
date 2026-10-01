@@ -77,7 +77,7 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Standalone Agent",
+          label: "Standalone Runner",
           items: [
             {
               type: "doc",
@@ -375,6 +375,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Failure Reasons",
+              id: "articles/test-workflows-failure-reasons",
+            },
+            {
+              type: "doc",
               label: "Job & Pod Configuration",
               id: "articles/test-workflows-job-and-pod",
             },
@@ -623,17 +628,17 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Testkube Agents",
+              label: "Testkube Runners",
               id: "articles/agents-overview",
             },
             {
               type: "doc",
-              label: "Agent Helm Chart",
+              label: "Runner Helm Chart",
               id: "articles/multi-agent-runner-helm-chart",
             },
             {
               type: "doc",
-              label: "Agent CLI Commands",
+              label: "Runner CLI Commands",
               id: "articles/multi-agent-cli",
             },
           ],
@@ -786,6 +791,32 @@ const sidebars = {
               type: "doc",
               label: "Configuration",
               id: "articles/ai-enabling",
+            },
+            {
+              type: "category",
+              label: "AI Test Creation",
+              items: [
+                {
+                  type: "doc",
+                  label: "Create your first test with AI",
+                  id: "articles/ai-test-creation-getting-started",
+                },
+                {
+                  type: "doc",
+                  label: "Work with a GitHub repository",
+                  id: "articles/ai-test-creation-github",
+                },
+                {
+                  type: "doc",
+                  label: "Work with Test Bundles and multiple chats",
+                  id: "articles/ai-test-creation-test-bundles",
+                },
+                {
+                  type: "doc",
+                  label: "Installation reference",
+                  id: "articles/ai-test-creation",
+                },
+              ],
             },
             {
               type: "doc",
@@ -943,11 +974,6 @@ const sidebars = {
                   type: "doc",
                   label: "Architecture",
                   id: "articles/ai-architecture",
-                },
-                {
-                  type: "doc",
-                  label: "AI Test Creation EAP",
-                  id: "articles/ai-test-creation",
                 },
               ],
             },
@@ -1433,7 +1459,7 @@ const sidebars = {
           type: "category",
           label: "Observability & Reporting",
           items: [
-            { type: "doc", label: "Agent Metrics", id: "articles/metrics" },
+            { type: "doc", label: "Runner Metrics", id: "articles/metrics" },
             {
               type: "doc",
               label: "Control Plane Metrics",
@@ -1525,7 +1551,7 @@ const sidebars = {
             },
             {
               type: "category",
-              label: "Agent API",
+              label: "Runner API",
               items: agentRedocSidebar,
             },
             {

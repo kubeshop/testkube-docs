@@ -8,6 +8,55 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Release v2.14.0 (2026-10-01)
+
+> GitHub support and multiple chats for AI Test Creation, clearer execution failure diagnostics, and new workflow capabilities for dependency caching and data sharing.
+
+Control Plane is available in Helm chart `v2.337.0` and the Runner is available in Helm chart `v2.14.0`.
+
+### AI Test Creation
+
+- Work with a GitHub repository inside a Test Bundle. Import the repository, review file changes, and push the chat's commits back to GitHub. [Read more](/articles/ai-test-creation-github).
+- Test Bundles now support multiple chats, each with its own changes. Explore different approaches or work on separate test updates within the same bundle. [Read more](/articles/ai-test-creation-test-bundles).
+- Add shared context to a Test Bundle to give every chat the same project guidance and instructions. [Read more](/articles/ai-test-creation-test-bundles#4-add-guidance-for-all-chats).
+- Review changes with file diffs and highlights showing what has changed since your last push. [Read more](/articles/ai-test-creation-github#4-review-the-changes-and-run-the-tests).
+
+AI Test Creation is now generally available. See [Create your first test with AI](/articles/ai-test-creation-getting-started) to get started.
+
+### Workflows
+
+- Cache dependency directories between executions with a step-level `cache` block. Use file-content hashes for keys, fallback restore keys, and workflow or environment scope. A cache miss or transfer failure leaves the step free to install its dependencies normally. [Read more](/articles/test-workflows-dependency-cache).
+- Share output values and artifacts between related Workflow executions. Suites can read child outputs, read artifact contents in expressions, and fetch artifact files into another execution. [Read more](/articles/test-workflows-execution-sharing).
+- Build workflows that rerun only previously failed test cases. Execution lineage identifies the original run, the previous attempt and the attempt number; workflows can use the previous report to select what to rerun. [Read more](/articles/test-workflows-rerun).
+- Configure multiple Kubernetes events in one TestTrigger. Existing single-event trigger definitions remain supported. [Read more](/articles/test-triggers).
+
+### Execution Diagnostics & Insights
+
+- Execution status now explains whether a run ended because of a test failure, infrastructure failure, configuration error or user cancellation. Cause details are available in the dashboard, CLI and MCP tools, including clearer initialization, timeout and retry information.
+- Filter executions and segment Insights by failure cause. Workflow health and charts use consistent failure counting, with user cancellations excluded from failures.
+- Subscribe webhooks to specific failure categories. GitHub checks and pull-request comments now include the cause of failed workflow executions, making it easier to distinguish test failures from infrastructure or configuration problems.
+- Link directly to an individual JUnit test case in a report.
+
+### Members & Audit Logs
+
+- Expanded member management page with new filtering, bulk operations, and clearer member details.
+- Search audit logs by name or ID to quickly identify all actions related to a resource.
+
+### AI
+
+- Choose the thinking level for models that support it. The dashboard AI panel can now be resized and collapsed, and AI chats and Test Bundles receive shorter, context-aware titles.
+- Where AI usage controls are enabled, administrators can review session and MCP usage, manage Test Creation seats, and see clearer warnings as usage approaches a plan limit. Availability and enforcement depend on the installation and plan configuration.
+
+### Operations & Improvements
+
+- Replaced all references to Agent with Runner. This includes pages and titles within the UI as well as flags and commands from the CLI. The agent commands/pages have been marked as deprecated and will be removed in the next major version.
+- Added support for the `execution `capability, replacing the deprecated `runner` capability.
+- On-prem Sandbox CPU and memory requests and limits are configurable. An optional prewarmed Sandbox pool can reduce startup work for new authoring sessions.
+- Improved completion and cancellation handling, including workflows whose test containers have finished while a sidecar is still running, and stale queued executions that should retain their history when aborted.
+- Improved resilience of artifact transfers, webhook delivery and cleanup during transient failures. Invalid GitOps resources no longer cause continuous retries.
+- Added new options --org-name and --env-name to `login`
+- Support --client=direct against a control plane.
+
 ## Patch Release v2.13.3 (2026-09-22)
 
 Agent only. The Agent is available in Helm chart `v2.13.3`; the Control Plane stays on `v2.336.2`.

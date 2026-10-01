@@ -69,7 +69,7 @@ ENTRYPOINT ["/toolkit"]
 
 ## Dockerfile Sources
 
-- [Testkube Agent Dockerfiles](https://github.com/kubeshop/testkube/tree/main/build/_local)
+- [Testkube Runner Dockerfiles](https://github.com/kubeshop/testkube/tree/main/build/_local)
 - [Testkube Control Plane Dockerfiles](https://github.com/kubeshop/testkube-cloud-api/tree/main/build/_local)
 
 ### UI Dockerfile

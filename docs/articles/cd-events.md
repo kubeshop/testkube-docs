@@ -5,7 +5,7 @@
 As of the 1.12 release, Testkube can emit standard CDEvents to a webhook endpoint. This can be used to integrate with any CD tool that supports the CDEvents standard.
 
 :::note
-As of Testkube 2.7.0, you need a **Webhook Agent** in your Testkube Environment to emit CDEvents - [Read More](/articles/agents-overview#webhook-agents)
+As of Testkube 2.7.0, you need a **runner with the webhooks capability** in your Testkube Environment to emit CDEvents - [Read More](/articles/agents-overview#webhook-agents)
 :::
 
 :::warning As of Testkube 2.7.0 — resource lifecycle

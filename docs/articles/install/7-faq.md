@@ -8,7 +8,7 @@ Feel free to contact us on Slack if it does not work out so we can help.
 
 ## Can Testkube OSS be migrated to join a control plane?
 
-Yes, you can choose to get started with just the standalone agent. Once you are ready to use a control plane,
+Yes, you can choose to get started with just the standalone runner. Once you are ready to use a control plane,
 you can join it with a control plane as described [here][migrate-oss].
 
 ## Do I have to have my own Kubernetes Cluster to evaluate Testkube
@@ -18,7 +18,7 @@ Testkube functionality. For running your own tests you can install your own [Kub
 
 ## Do I have to provide any infrastructure of my own to run Testkube in production
 
-Yes, Testkube Agents _always_ run in your own cluster(s)/infrastructure for executing your tests.
+Yes, Testkube Runners _always_ run in your own cluster(s)/infrastructure for executing your tests.
 The Control Plane containing the Dashboard and Resource storage can be hosted either by us or by you. Read more about the
 Testkube deployment options at [Installation Overview](/articles/install/overview)
 
@@ -29,7 +29,7 @@ If that doesn't work for you please [get in touch](https://testkube.io/contact),
 
 ## Can I use Testkube to test applications or services that are not running in Kubernetes
 
-Yes, you can use Testkube to test any applications or components as long as the cluster the Testkube agent
+Yes, you can use Testkube to test any applications or components as long as the cluster the Testkube runner
 is running in has network access to the applications or components to be tested.
 
 ## How do I expose Testkube to the Internet?

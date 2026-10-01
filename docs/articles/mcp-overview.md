@@ -8,7 +8,7 @@ AI-driven remediation using the Testkube MCP Server with Github and Vs-Code.
 ## Overview
 
 The **Testkube MCP Server** brings Testkube's test orchestration capabilities directly into your
-development environment and AI-powered workflows, enabling AI assistants and agents to interact directly
+development environment and AI-powered workflows, enabling AI assistants and runners to interact directly
 with your Testkube workflows, executions, and artifacts.
 
 More specifically, it allows you and your AI agents to:
@@ -23,7 +23,7 @@ More specifically, it allows you and your AI agents to:
 :::
 
 :::tip
-The MCP Server gives your agent access to Testkube. To also teach an agent _how_ to use Testkube — discovering
+The MCP Server gives your runner access to Testkube. To also teach a runner _how_ to use Testkube — discovering
 tests in a repository, authoring valid TestWorkflow YAML, diagnosing failed executions — install the
 [Testkube Agent Skills](/articles/testkube-skills). The two work well together.
 :::
@@ -32,7 +32,7 @@ tests in a repository, authoring valid TestWorkflow YAML, diagnosing failed exec
 When used with agentic AI tools like GitHub Copilot with Claude Sonnet 4 in VS Code or Cursor, the Testkube MCP enables:
 
 - **Multi-step Problem Solving:** AI agents can run multiple tools in sequence to solve complex testing scenarios.
-- **Automated Debugging:** Agents can analyze failures, examine logs, and suggest fixes.
+- **Automated Debugging:** Runners can analyze failures, examine logs, and suggest fixes.
 - **Intelligent Test Management:** Automated workflow creation, execution, and result analysis.
 
 :::
@@ -105,9 +105,9 @@ The MCP server provides tools for comprehensive Testkube management:
 - `create_workflowtemplate` - Create new workflow template
 - `update_workflowtemplate` - Update existing workflow template
 
-### Agent Management
+### Runner Management {#agent-management}
 
-- `list_agents` - List available agents for workflow execution targeting - [Read More](/articles/test-workflows-running#runner-agent-targeting)
+- `list_agents` - List available runners for workflow execution targeting - [Read More](/articles/test-workflows-running#runner-agent-targeting)
 
 ### Execution Management
 

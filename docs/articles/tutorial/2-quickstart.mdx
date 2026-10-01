@@ -8,12 +8,12 @@ In this tutorial you will learn how to get started with Testkube, run your first
 **[Schedule time with our Solutions Engineering team](https://testkube.io/demo)** to get your trial license and answers to any questions you have.
 
 :::note
-Testkube is composed of two core components. The first is the Control Plane, which exposes the UI Dashboard, and facilitates management of Test Workflows, data, users, etc. The second component is the Test Execution Agent. One or more Agents can connect to a Control Plane, usually with one Agent per cluster, and do the work of running tests (scheduling jobs and managing pods). Learn more about our product architecture in the [Installation Overview](https://www.notion.so/articles/install/overview).
+Testkube is composed of two core components. The first is the Control Plane, which exposes the UI Dashboard, and facilitates management of Test Workflows, data, users, etc. The second component is the Test Execution Runner. One or more Runners can connect to a Control Plane, usually with one Runner per cluster, and do the work of running tests (scheduling jobs and managing pods). Learn more about our product architecture in the [Installation Overview](https://www.notion.so/articles/install/overview).
 
 The Testkube Control Plane has flexibility in its deployment:
 
 - **Testkube On-Prem** runs the Control Plane in your infrastructure. Install Testkube Runners separately when you want to execute tests.
-- **Testkube Cloud Control Plane** runs the Control Plane in our cloud and the Test Execution Agents in your infrastructure.
+- **Testkube Cloud Control Plane** runs the Control Plane in our cloud and the Test Execution Runners in your infrastructure.
 
 With that in mind, we have a few recommendations on how to start with Testkube:
 
@@ -49,7 +49,7 @@ You will now see the Testkube Dashboard for the default environment created in y
 1. Sign in to the [Testkube Cloud Control Plane](https://app.testkube.io).
 2. Click on the `Let's get started` button.
 3. Enter an environment name and click `Create environment`.
-4. Run the provided commands in your terminal to install the Testkube Agent.
+4. Run the provided commands in your terminal to install the Testkube Runner.
 
 You will now see the Testkube Dashboard for your new environment:
 
@@ -71,7 +71,7 @@ those steps require your own environment.
 2. Once authenticated, [go to the sandbox environment.](https://app.testkube.io/demo-environment) - (there are multiple in-app
    prompts for this also).
 
-You will now see the Dashboard without having to install an agent, and are free to explore/run existing Workflows,
+You will now see the Dashboard without having to install a runner, and are free to explore/run existing Workflows,
 look at execution results, etc.
 
 ![The dashboard](./img/demo-environment-dashboard.png)
@@ -95,7 +95,7 @@ kind: TestWorkflow
 metadata:
   # The workflow will have a name that you define here.
   name: my-test
-  # By default, workflows should be applied to the namespace of the Testkube agent.
+  # By default, workflows should be applied to the namespace of the Testkube Runner.
   namespace: testkube
   # Labels allow you to filter and group within the Dashboard and CLI.
   labels:

@@ -1,6 +1,6 @@
 # Uninstalling
 
-You can follow one of the two procedures below to uninstall Testkube. You might need to repeat this process in case you deployed the control plane and one or more agents in different clusters or namespaces.
+You can follow one of the two procedures below to uninstall Testkube. You might need to repeat this process in case you deployed the control plane and one or more runners in different clusters or namespaces.
 
 ### Uninstalling with the Testkube CLI
 

@@ -7,12 +7,6 @@ slug: /articles/ai-test-creation
 
 AI Test Creation provides an isolated, persistent workspace where you can create, update, run, and save tests with an AI agent. Each session is connected to an environment called a **Sandbox**, where the agent can inspect files, make changes, and run tests while you review its progress in the Testkube Dashboard.
 
-:::warning Early Access Program only
-
-AI Test Creation is currently available only to customers accepted into the Testkube AI Early Access Program (EAP). [Apply for EAP access](https://testkube.io/eap).
-
-:::
-
 Some implementation identifiers still use `runspace`, including API fields, Helm values, generated resource names, and the Runspace Bridge component. This page uses **Sandbox** for the environment shown to users and preserves those implementation identifiers exactly where you need to configure or operate them.
 
 :::info Agent sandboxing
@@ -34,7 +28,8 @@ flowchart LR
 
     Sandbox --> Bridge["Runspace Bridge"]
     Bridge <--> AI["Testkube AI Service"]
-    Sandbox --> Gateway["LiteLLM gateway"]
+    API -->|Manage Sandbox keys| Gateway["LiteLLM gateway: bundled or existing"]
+    Sandbox -->|Limited virtual key| Gateway
     Gateway --> Provider["Configured AI provider"]
     Sandbox --> Testkube["Scoped Testkube APIs"]
     Sandbox --> Storage["Persistent workspace and agent state"]
@@ -49,6 +44,8 @@ When you start an AI Test Creation session:
 5. Model requests go through the LiteLLM gateway to the configured AI provider. The Sandbox uses its own limited model-access key rather than the provider credential.
 6. For a TestBundle, the Sandbox can use a workflow-scoped Testkube token to update and run the workflow associated with that bundle.
 7. Testkube can checkpoint an idle session and remove its active workload. When the session is resumed, a replacement Sandbox restores the saved workspace.
+
+The LiteLLM gateway in this diagram is bundled by default. If you already operate LiteLLM, you can [connect Test Creation to that instance](#use-an-existing-litellm-gateway) and disable the bundled gateway. The same instance can serve both the AI Service and Sandboxes; configure their credentials separately.
 
 Each session has one active Sandbox. When you resume a session, Testkube may create a new Sandbox and restore the files from its checkpoint.
 
@@ -69,7 +66,7 @@ The component responsibilities and Sandbox isolation boundary are the same in Te
 
 ## Install AI Test Creation on Testkube On-Prem
 
-On an on-prem installation, the Testkube Enterprise Helm chart installs and connects the AI Service, an internal LiteLLM gateway, the Agent Sandbox controller, and the Sandbox runtime.
+On an on-prem installation, the Testkube Enterprise Helm chart installs and connects the AI Service, the Agent Sandbox controller, and the Sandbox runtime. For model access, choose the default bundled LiteLLM gateway or [use an existing LiteLLM gateway](#use-an-existing-litellm-gateway).
 
 :::info Version availability
 
@@ -83,13 +80,15 @@ Confirm the following requirements:
 
 - There is only one AI Test Creation-enabled Enterprise release in the Kubernetes cluster. The Agent Sandbox CRDs are cluster-scoped and its controller has cluster-wide ownership; an install or upgrade preflight rejects a second active owner.
 - The cluster meets the [base installation requirements](/articles/install/install-with-helm#prerequisites), has a default `StorageClass` or an explicitly configured one, and uses a CNI that enforces Kubernetes `NetworkPolicy` resources.
-- One supported PostgreSQL path is configured: the bundled PostgreSQL chart, the CloudNativePG cluster, or an external PostgreSQL database for LiteLLM.
+- For the bundled LiteLLM gateway, one supported PostgreSQL path is configured: the bundled PostgreSQL chart, the CloudNativePG cluster, or an external PostgreSQL database. For an existing gateway, its operator manages PostgreSQL and enables virtual-key management.
 - The cluster can reach an OpenAI or OpenAI-compatible inference endpoint.
 - Your registry policy allows all [eight AI Test Creation image repositories](#private-registry-and-air-gapped-installations), including images used by Helm hook jobs and dynamically created Sandboxes.
 
 The chart creates a dedicated Sandbox namespace. Its generated name is `<release-name>-runspaces` by default. The Agent Sandbox controller uses a separate controller namespace. Only one Agent Sandbox controller can manage the cluster.
 
 ## Minimal configuration
+
+This configuration installs the bundled LiteLLM gateway. If you already run LiteLLM, use the [existing gateway configuration](#use-an-existing-litellm-gateway) instead.
 
 Create a Secret containing your OpenAI API key in the same namespace as the Enterprise release:
 
@@ -127,7 +126,7 @@ helm upgrade --install \
   --version <chart-version>
 ```
 
-`global.testAuthoring.enabled: true` is the single AI Test Creation installation switch. It enables and connects the AI Test Creation backend and UI, AI Service, internal LiteLLM gateway, Agent Sandbox controller, Runspace Bridge, required RBAC, namespace isolation, and lifecycle cleanup. You do not need to enable those components separately.
+`global.testAuthoring.enabled: true` is the single AI Test Creation installation switch. It enables and connects the AI Test Creation backend and UI, AI Service, bundled LiteLLM gateway by default, Agent Sandbox controller, Runspace Bridge, required RBAC, namespace isolation, and lifecycle cleanup. You do not need to enable those components separately.
 
 The chart validates the configuration before install and upgrade. Inline `apiKey` values are rejected. Keep credentials in a Kubernetes Secret and use `secretRef` and `secretRefKey`.
 
@@ -161,7 +160,107 @@ global:
 
 The default per-Sandbox virtual-key budget is `1` provider currency unit. When a custom endpoint is used with a positive budget, both `litellm.inputCostPerToken` and `litellm.outputCostPerToken` are required and must be finite, non-negative numbers. If you cannot provide pricing and accept having no spend budget, set `global.testAuthoring.litellm.virtualKey.maxBudget: 0`.
 
+## Use an existing LiteLLM gateway
+
+Use this configuration when your organization already operates LiteLLM. Testkube connects directly to that gateway and creates a limited virtual key for each Sandbox. Provider credentials stay in your LiteLLM deployment.
+
+### Prepare the gateway and credentials
+
+Your existing gateway must have PostgreSQL-backed [virtual-key management](https://docs.litellm.ai/docs/proxy/virtual_keys) enabled.
+
+Configure an authoring model in LiteLLM with an OpenAI-compatible chat completions endpoint, streaming and tool-calling support, and `model_info.mode: chat`. Testkube uses the LiteLLM `model_name` alias, such as `authoring-model`; the gateway maps it to the configured provider model. Configure accurate pricing in LiteLLM if you use per-Sandbox spend limits.
+
+Create two separate credentials in LiteLLM:
+
+| Credential         | Used by                | Required access                                                                                       |
+| ------------------ | ---------------------- | ----------------------------------------------------------------------------------------------------- |
+| Management API key | Testkube Control Plane | `GET /model/info`, `POST /key/generate`, and `POST /key/delete`, including deletion by `key_aliases`. |
+| Inference API key  | Testkube AI Service    | Inference for the configured model through `/v1`, including streaming and tool calls.                 |
+
+The **Management API** key type must have sufficient management permissions under your LiteLLM version's access-control rules. A key that can call models is not sufficient. Its owner must be allowed to create and revoke the Sandbox keys; use an administrator-owned management credential and restrict its allowed routes to the three listed above. Verify these operations before enabling Test Creation. See [LiteLLM access control](https://docs.litellm.ai/docs/proxy/access_control).
+
+For example, a LiteLLM administrator can create a dedicated management identity and the two keys below. Set `LITELLM_URL` to the gateway base URL and `LITELLM_ADMIN_KEY` to an administrator credential for this setup operation. Replace `authoring-model` with your existing LiteLLM model alias.
+
+```bash
+set -o pipefail
+umask 077
+
+curl --fail --silent --show-error "$LITELLM_URL/user/new" \
+  --header "Authorization: Bearer $LITELLM_ADMIN_KEY" \
+  --header 'Content-Type: application/json' \
+  --data '{"user_id":"testkube-key-manager","user_role":"proxy_admin","auto_create_key":false}' \
+  > /dev/null
+
+curl --fail --silent --show-error "$LITELLM_URL/key/generate" \
+  --header "Authorization: Bearer $LITELLM_ADMIN_KEY" \
+  --header 'Content-Type: application/json' \
+  --data '{"user_id":"testkube-key-manager","key_alias":"testkube-management","key_type":"management","models":["authoring-model"],"allowed_routes":["/model/info","/key/generate","/key/delete"]}' \
+  | jq --exit-status --join-output '.key' > litellm-management-key
+
+curl --fail --silent --show-error "$LITELLM_URL/key/generate" \
+  --header "Authorization: Bearer $LITELLM_ADMIN_KEY" \
+  --header 'Content-Type: application/json' \
+  --data '{"key_alias":"testkube-inference","key_type":"llm_api","models":["authoring-model"]}' \
+  | jq --exit-status --join-output '.key' > litellm-inference-key
+```
+
+Use an existing dedicated identity if your administrator has already provisioned one.
+
+Restrict the management key's `models` allowlist to the authoring alias, as shown above, and verify that `/model/info` with this key returns only that chat model. This lets other applications keep using other models on the same gateway. Testkube discovers the Sandbox model from that response, preferring the first chat model marked `db_model: true`, then the first chat model. If your LiteLLM version or access-control configuration returns additional models, resolve that visibility before enabling Test Creation; the AI Service's `default: true` setting does not change Sandbox discovery order.
+
+Store the credentials in separate Kubernetes Secrets in the Enterprise release namespace. The following commands read files containing the key values:
+
+```bash
+kubectl create secret generic testkube-litellm-management \
+  --namespace testkube \
+  --from-file=MANAGEMENT_KEY=./litellm-management-key
+
+kubectl create secret generic testkube-litellm-inference \
+  --namespace testkube \
+  --from-file=INFERENCE_KEY=./litellm-inference-key
+```
+
+The management key is used only by the Control Plane. Sandboxes receive their own generated virtual keys, not this management key or your provider credentials.
+
+### Configure Testkube
+
+```yaml title="values.yaml"
+global:
+  testAuthoring:
+    enabled: true
+    litellm:
+      enabled: false
+      external:
+        url: https://llm.example.com
+      adminSecret:
+        existingSecret: testkube-litellm-management
+        key: MANAGEMENT_KEY
+      virtualKey:
+        maxBudget: 1
+        rpmLimit: 30
+        tpmLimit: 200000
+  ai:
+    inference:
+      defaults:
+        url: https://llm.example.com/v1
+        secretRef: testkube-litellm-inference
+        secretRefKey: INFERENCE_KEY
+      agent:
+        - model: authoring-model
+          default: true
+```
+
+`litellm.enabled: false` disables the bundled LiteLLM instance.
+
+### Allow network access
+
+The gateway must be reachable from the Control Plane, AI Service, and Sandbox namespace. For a public HTTPS gateway, the Sandbox's normal public web egress applies. For a private gateway on port 80 or 443, add the necessary destination CIDRs under `global.testAuthoring.runspace.networkPolicy.additionalEgressCIDRs`; see [network isolation and egress](#network-isolation-and-egress).
+
+For a private certificate authority, configure the [custom CA](#custom-certificate-authorities) and ensure the Sandbox runtime also trusts the gateway certificate. Do not disable TLS verification to work around a trust failure.
+
 ## PostgreSQL configuration
+
+This section applies to the bundled LiteLLM gateway. When using an existing gateway, its operator manages the database and Testkube does not run its migrations.
 
 The internal LiteLLM gateway for AI Test Creation requires PostgreSQL. Use exactly one of these paths:
 

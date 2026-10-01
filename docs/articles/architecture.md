@@ -3,7 +3,7 @@
 Testkube contains two sub-systems:
 
 - A **Control Plane** which includes the Dashboard, Storage for Resources/Results/Artifacts, Scheduling, Cluster Federation, etc - [Read More](/articles/testkube-resource-management)
-- One or more **Agents** running in your cluster(s) that execute Test Workflows, listen for Kubernetes events, sync resources via GitOps, and emit webhooks/CDEvents - [Read More](/articles/agents-overview)
+- One or more **Runners** running in your cluster(s) that execute Test Workflows, listen for Kubernetes events, sync resources via GitOps, and emit webhooks/CDEvents - [Read More](/articles/agents-overview)
 
 Check out the [Installation Overview](/articles/install/overview) document for more details on
 how Testkube can be deployed, and the [Workflow Architecture](/articles/test-workflows-high-level-architecture)
@@ -12,7 +12,7 @@ document for an overview of how the Workflow engine works.
 ## System Overview
 
 The Control Plane is the source of truth for all [Testkube Resources](/articles/testkube-resource-management) and is always accessible,
-even when no agents are connected. Agents are deployed into your Kubernetes clusters and connect
+even when no runners are connected. Runners are deployed into your Kubernetes clusters and connect
 to the Control Plane via gRPC to execute workflows, listen for events, sync resources, and emit webhooks.
 
 When using Testkube Cloud, the Control Plane is hosted by Testkube. For on-prem installations,
@@ -29,11 +29,11 @@ flowchart TB
     end
 
     subgraph Cluster A
-        A1["Agent - Runner / Listener"]
+        A1["Runner - Execution / Listener"]
     end
 
     subgraph Cluster B
-        A2["Agent - Runner / GitOps / Webhook"]
+        A2["Runner - Execution / GitOps / Webhook"]
     end
 
     Users --> Dashboard
@@ -50,20 +50,20 @@ flowchart TB
     style Dashboard fill:#d5f5e3,stroke:#27ae60
 ```
 
-## Agent Capabilities
+## Runner Capabilities {#agent-capabilities}
 
-Agents connect to the Control Plane via gRPC and can have one or more capabilities enabled.
+Runners connect to the Control Plane via gRPC and can have one or more capabilities enabled.
 The following diagram shows the data flow for each capability type.
-See [Testkube Agents](/articles/agents-overview) for full details.
+See [Testkube Runners](/articles/agents-overview) for full details.
 
 ```mermaid
 flowchart LR
     CP["Control Plane"]
 
-    Runner["Runner Agent"]
-    Listener["Listener Agent"]
-    GitOps["GitOps Agent"]
-    Webhook["Webhook Agent"]
+    Runner["Execution"]
+    Listener["Listener"]
+    GitOps["GitOps"]
+    Webhook["Webhooks"]
 
     CP -- "dispatch workflow" --> Runner
     Runner -- "results, logs" --> CP
@@ -108,7 +108,7 @@ flowchart TB
     LS["License Server - on-prem only"]
 
     subgraph Kubernetes Cluster
-        AgentAPI["Agent API"]
+        AgentAPI["Runner API"]
         WF["Workflow Jobs"]
     end
 
@@ -148,9 +148,9 @@ Check the table to know each of the integrations between Testkube Components:
 | Testkube Control Plane API | _License Server **_        | To validate license configured in instance, License Server is an external service managed by Testkube                    | 443                                                                            |
 | Worker Service             | NATS                       | To manage events happening into the platform                                                                             | 4222                                                                           |
 | Worker Service             | PostgreSQL                 | To manage the state of the whole platform objects (Test Workflows, Test Triggers, Webhooks, etc.) generating metrics     | 5432 (If it's the bundled PostgreSQL deployed together with Testkube platform) |
-| Testkube Agent API         | Testkube Control Plane API | To receive instructions on Test Workflow and other features execution in the specific environment and Kubernetes cluster | 8089 (if HTTPS, 8443)                                                          |
-| Testkube Agent API         | S3                         | To store artifacts (test workflow execution results, logs, and metrics)                                                  | 9000 (If is MinIO)                                                             |
-| Testkube Agent API         | NATS                       | To manage events happening into the platform                                                                             | 4222                                                                           |
+| Testkube Runner API        | Testkube Control Plane API | To receive instructions on Test Workflow and other features execution in the specific environment and Kubernetes cluster | 8089 (if HTTPS, 8443)                                                          |
+| Testkube Runner API        | S3                         | To store artifacts (test workflow execution results, logs, and metrics)                                                  | 9000 (If is MinIO)                                                             |
+| Testkube Runner API        | NATS                       | To manage events happening into the platform                                                                             | 4222                                                                           |
 
 _\** Only for installation using Online Testkube License._
 
@@ -168,7 +168,7 @@ It provides 2 main interfaces:
 - **Testkube Control Plane API:** this component exposes 3 types of service:
   - **REST service:** users who are using Testkube Dashboard must have network access to this service exposed through port `443` with TCP protocol.
   - **WebSocker service:** users who are using Testkube Dashboard must have network access to this service exposed through port `443` with WebSocket protocol.
-  - **gRPC service:** Testkube Agent API connects to Testkube Control Plane API through port `443` when agent is running in other cluster, direct to service port `9443` when it's in the same cluster, in both cases using gRPC protocol.
+  - **gRPC service:** Testkube Runner API connects to Testkube Control Plane API through port `443` when runner is running in other cluster, direct to service port `9443` when it's in the same cluster, in both cases using gRPC protocol.
 
 > **Important!**
 >
@@ -179,7 +179,7 @@ This component also integrates with:
 - **Dex:** using port `5556` and `5557` with TCP protocol.
 - **PostgreSQL:** using default port `5432` with TCP protocol.
 - **MongoDB:** using default port `27017` with TCP protocol (legacy deployments only).
-- **NATS**: using port `4222` with TCP protocol. It also apply to Testkube Agent API, unless it's configured to have embedded NATS.
+- **NATS**: using port `4222` with TCP protocol. It also apply to Testkube Runner API, unless it's configured to have embedded NATS.
 
 #### S3 or Object storage
 
@@ -188,7 +188,7 @@ As the graph above shows, several components of the Testkube architecture integr
 | Component                  | Behavior          | Description                                                                                                                                      |
 | -------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Testkube Control Plane API | Read/Write/Delete | <ul><li>To access execution artifacts and logs.</li><li>To save executions resource metrics.</li><li>To rotate old logs and artifacts.</li></ul> |
-| Testkube Agent API         | Read/Write        | To publish and access execution artifacts and logs                                                                                               |
+| Testkube Runner API        | Read/Write        | To publish and access execution artifacts and logs                                                                                               |
 | Users (from Testkube CLI)  | Read              | To access execution artifacts and logs                                                                                                           |
 
 Only Testkube Control Plane API manages access/secret keys to authenticate against S3 service, all other components use [presigned URLs](https://min.io/docs/minio/linux/integrations/presigned-put-upload-via-browser.html) generated by Testkube Control Plane API.
@@ -196,7 +196,7 @@ Only Testkube Control Plane API manages access/secret keys to authenticate again
 Requirements to ensure this integration is working properly:
 
 - Testkube Control Plane API has the right access/secret keys configured, as well as network access.
-- Testkube Agents API have network access from the cluster and namespace where they are deployed, if execution namespaces is configured, ensure those namespaces have network access as well.
+- Testkube Runner APIs have network access from the cluster and namespace where they are deployed, if execution namespaces is configured, ensure those namespaces have network access as well.
 - Users who is running Testkube CLI from their local/remote workstations must have network access.
 
 ## Components - Workflow Job

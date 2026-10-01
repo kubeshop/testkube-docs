@@ -28,7 +28,7 @@ your account is limited to:
 | ------------ | ----------- |
 | Duration     | 30 days     |
 | Environments | 1           |
-| Agents       | 2 (fixed)   |
+| Runners      | 2 (fixed)   |
 | Users        | 3           |
 
 When the 30 days are up, the trial is **paused** - but your data stays put.
@@ -39,13 +39,13 @@ and we'll help you continue with Testkube.
 ## The hosted trial runner
 
 Trial environments come with an automatically provisioned, cloud-hosted runner,
-so you can run Test Workflows straight away - no agent to install. You can at any time connect
+so you can run Test Workflows straight away - no runner to install. You can at any time connect
 your own runner in your own infrastructure.
 
 :::warning
 The hosted trial runner is meant for **evaluation only**. It's a
 lightweight environment and is **not sized for production workloads**. For real
-testing at scale, connect your own [runner/agent](/articles/agents-overview)
+testing at scale, connect your own [runner/runner](/articles/agents-overview)
 on infrastructure you control.
 :::
 
@@ -74,9 +74,9 @@ give you a realistic starting point for your evaluation.
 
 ## Moving beyond the trial
 
-When you're ready for real workloads, connect your own agent so executions run
+When you're ready for real workloads, connect your own runner so executions run
 on your infrastructure instead of the shared hosted runner:
 
-- [Testkube Agents overview](/articles/agents-overview)
+- [Testkube Runners overview](/articles/agents-overview)
 - [Environment management](/articles/environment-management)
 - [Talk to our team](https://testkube.io/contact) about extending or upgrading your trial

@@ -48,7 +48,7 @@ import TwoColumns from "@site/src/components/TwoColumns";
   </p>
   <p>
 
-    Testkube consists of a <b>Control Plane</b> and any number of <b>Testkube Agents</b>. The Control Plane exposes
+    Testkube consists of a <b>Control Plane</b> and any number of <b>Testkube Runners</b>. The Control Plane exposes
     a <b>Dashboard</b> for easy and centralized access to most Testkube features.
 
   </p>
@@ -60,8 +60,8 @@ import TwoColumns from "@site/src/components/TwoColumns";
 />
 
 - The Control Plane can be running either in the Cloud or On-Prem - [Read more](/articles/install/overview).
-- Agents are deployed in your infrastructure to execute tests, listen for Kubernetes events, sync resources, and more - [Read more](/articles/agents-overview).
-- The Agents are 100% Open Source and can also be run standalone without the Control Plane - [Read more](/articles/install/standalone-agent).
+- Runners are deployed in your infrastructure to execute tests, listen for Kubernetes events, sync resources, and more - [Read more](/articles/agents-overview).
+- The Runners are 100% Open Source and can also be run standalone without the Control Plane - [Read more](/articles/install/standalone-agent).
 
 :::tip
 Testkube has recently introduced the concept of [AI Agents](/articles/ai-agents) - check them out to see how AI can help with troubleshooting, analysis, and remediation of your tests.
@@ -134,9 +134,9 @@ export const LearnMoreCardList = (input) => (
       },
       {
         icon: "🛠",
-        label: "Open Source Agent",
+        label: "Open Source Runner",
         description:
-          "Learn about the Testkube Agent which is 100% Open Source.",
+          "Learn about the Testkube Runner which is 100% Open Source.",
         href: "/articles/install/standalone-agent",
         type: "intro",
       },
