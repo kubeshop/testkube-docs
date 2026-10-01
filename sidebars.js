@@ -788,6 +788,27 @@ const sidebars = {
               id: "articles/ai-enabling",
             },
             {
+              type: "category",
+              label: "AI Test Creation",
+              items: [
+                {
+                  type: "doc",
+                  label: "Create your first test with AI",
+                  id: "articles/ai-test-creation-getting-started",
+                },
+                {
+                  type: "doc",
+                  label: "Work with a GitHub repository",
+                  id: "articles/ai-test-creation-github",
+                },
+                {
+                  type: "doc",
+                  label: "Work with Test Bundles and multiple chats",
+                  id: "articles/ai-test-creation-test-bundles",
+                },
+              ],
+            },
+            {
               type: "doc",
               label: "AI Assistant",
               id: "articles/ai-assistant-overview",
