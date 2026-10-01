@@ -6,12 +6,12 @@ Testkube CLI provides two commands to seamlessly switch your existing Testkube i
 
 ## `testkube pro connect`
 
-Upgrades your Testkube OSS installation to **Pro mode** by connecting it to the Testkube Control Plane. The command automatically migrates your historical execution data, installs a cloud runner agent, and scales down the OSS services that are no longer needed.
+Upgrades your Testkube OSS installation to **Pro mode** by connecting it to the Testkube Control Plane. The command automatically migrates your historical execution data, installs a cloud runner, and scales down the OSS services that are no longer needed.
 
 ### What happens when you run `pro connect`
 
-1. **Data export** — All TestWorkflow execution data (metadata, logs, and workflow sequence numbers) is exported from the local agent as a `.tar.gz` archive.
-2. **Agent installation** — A cloud runner agent is installed into the cluster via Helm, with all capabilities enabled (runner, listener, GitOps, webhooks).
+1. **Data export** — All TestWorkflow execution data (metadata, logs, and workflow sequence numbers) is exported from the local runner as a `.tar.gz` archive.
+2. **Runner installation** — A cloud runner is installed into the cluster via Helm, with all capabilities enabled (runner, listener, GitOps, webhooks).
 3. **OSS services scale-down** — The standalone API server, MinIO, NATS, and the active database (MongoDB or PostgreSQL) are scaled to zero replicas. Nothing is deleted; the resources stay in the cluster for a potential rollback.
 4. **Data import** — The exported archive is uploaded to the Testkube Control Plane. Processing happens asynchronously and may take a few minutes depending on the volume of data.
 5. **CLI context switch** — The local CLI configuration is updated to point to the Pro environment.
@@ -19,14 +19,14 @@ Upgrades your Testkube OSS installation to **Pro mode** by connecting it to the 
 ### Usage
 
 ```bash
-testkube pro connect [agent-name] \
+testkube pro connect [runner-name] \
   --api-key <key> \
   --org-id <organization-id> \
   --env-id <environment-id> \
   --root-domain <cp-root-domain>
 ```
 
-If `agent-name` is omitted the agent is registered as **default-oss**.
+If `runner-name` is omitted the runner is registered as **default-oss**.
 
 ### Key flags
 
@@ -35,18 +35,18 @@ If `agent-name` is omitted the agent is registered as **default-oss**.
 | `--api-key`, `-k`             | **(Required)** API key for authenticating with Testkube Pro.                                                                                                                                     |
 | `--org-id`                    | **(Required)** Testkube Pro organization ID.                                                                                                                                                     |
 | `--env-id`                    | **(Required)** Testkube Pro environment ID.                                                                                                                                                      |
-| `--agent-uri`                 | **(Required)** gRPC URI of the Testkube Pro agent endpoint.                                                                                                                                      |
+| `--runner-uri`                | **(Required)** gRPC URI of the Testkube Pro runner endpoint.                                                                                                                                     |
 | `--skip-export`               | Skip the automatic data export/import step. Your data stays in the local database and can be exported manually later.                                                                            |
 | `--since`                     | Export only executions created after the specified date. Useful for large datasets that would exceed size limits. Accepts `YYYY-MM-DD` or `YYYY-MM-DDTHH:MM:SSZ`. Example: `--since 2025-01-01`. |
 | `--dry-run`                   | Render Helm commands without executing them. Skips all post-install steps (scale-down, data import).                                                                                             |
 | `--root-domain`               | Override the default Testkube Pro root domain (advanced).                                                                                                                                        |
-| `--runner`                    | Enable the runner component (enabled by default during connect).                                                                                                                                 |
+| `--execution`                 | Enable the execution capability (enabled by default during connect).                                                                                                                             |
 | `--listener`                  | Enable the listener component (enabled by default during connect).                                                                                                                               |
 | `--gitops`                    | Enable the GitOps capability (enabled by default during connect).                                                                                                                                |
 | `--webhooks`                  | Enable the webhooks capability (enabled by default during connect).                                                                                                                              |
-| `--global`                    | Register the agent as a global agent (enabled by default during connect).                                                                                                                        |
-| `--create`                    | Auto-create the agent in the control plane (enabled by default during connect).                                                                                                                  |
-| `--version`                   | Specify the agent chart version (defaults to latest).                                                                                                                                            |
+| `--global`                    | Register the runner as a global runner (enabled by default during connect).                                                                                                                      |
+| `--create`                    | Auto-create the runner in the control plane (enabled by default during connect).                                                                                                                 |
+| `--version`                   | Specify the runner chart version (defaults to latest).                                                                                                                                           |
 | `--execution-namespace`, `-N` | Namespace for running test executions (defaults to the installation namespace).                                                                                                                  |
 
 ### Examples
@@ -104,12 +104,12 @@ testkube pro connect \
 
 ## `testkube pro disconnect`
 
-Reverts your Testkube installation from **Pro mode** back to **OSS (standalone) mode**. The command uninstalls the cloud runner agent, removes the agent record from the control plane, restores the previously scaled-down OSS services, and resets the CLI context.
+Reverts your Testkube installation from **Pro mode** back to **OSS (standalone) mode**. The command uninstalls the cloud runner, removes the runner record from the control plane, restores the previously scaled-down OSS services, and resets the CLI context.
 
 ### What happens when you run `pro disconnect`
 
 1. **Runner uninstall** — The cloud runner Helm release that was installed by `pro connect` is removed.
-2. **Agent cleanup** — The agent record is deleted from the Testkube Control Plane.
+2. **Runner cleanup** — The runner record is deleted from the Testkube Control Plane.
 3. **OSS services restore** — The API server, MinIO, NATS, and the active database are scaled back up to their configured replica counts.
 4. **CLI context reset** — The local CLI configuration is switched back to kubeconfig mode and all Pro-related settings are cleared.
 
@@ -148,7 +148,7 @@ testkube pro disconnect \
 ### Error handling
 
 - **Runner uninstall failure** — Reported as a warning; disconnect continues to restore OSS services.
-- **Agent deletion failure** — Reported as a warning; disconnect continues.
+- **Runner deletion failure** — Reported as a warning; disconnect continues.
 - **Scale-up failure** — Failures when restoring individual services are reported but do not abort the disconnect.
 - **Config save failure** — If the CLI config file cannot be updated, you are given instructions to manually remove the Pro context fields.
 
@@ -172,7 +172,7 @@ You can switch between modes as many times as needed.
 | ------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | **Testkube CLI**    | Latest version with `pro connect` / `pro disconnect` support.                                                         |
 | **kubectl**         | Configured and pointing to the target cluster.                                                                        |
-| **helm**            | Required for agent installation and uninstallation (v3+).                                                             |
+| **helm**            | Required for runner installation and uninstallation (v3+).                                                            |
 | **Testkube OSS**    | An existing Testkube OSS installation in the cluster.                                                                 |
 | **Pro credentials** | API key, cp root domain, organization ID, and environment ID from your Testkube Pro account (for `pro connect` only). |
 

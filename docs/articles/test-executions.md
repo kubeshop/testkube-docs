@@ -63,9 +63,9 @@ spec:
 
 Read more about execution tags at [Execution Tags](/articles/execution-tags).
 
-## Targeting specific Runner Agents
+## Targeting specific runners {#targeting-specific-runner-agents}
 
-With the introduction of [Runner Agents](/articles/agents-overview#runner-agents) you can optionally specify
+With the introduction of [runners](/articles/agents-overview#runner-agents) you can optionally specify
 which Runner(s) a Workflow should execute on. For example
 
 ```yaml
@@ -80,4 +80,4 @@ spec:
 ...
 ```
 
-Will run on any Global Runner Agent with the `application: accounting` label, For more details, see our guide on [Runner Agent Targeting](/articles/test-workflows-running#runner-agent-targeting).
+Will run on any Global runner with the `application: accounting` label, For more details, see our guide on [Runner targeting](/articles/test-workflows-running#runner-agent-targeting).

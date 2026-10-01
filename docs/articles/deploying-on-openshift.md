@@ -124,7 +124,7 @@ Then, create a Kubernetes secret containing the CA bundle:
 kubectl -n <namespace> create secret generic <secret-name> --from-file=ca.crt=<path-to-ca-bundle>
 ```
 
-Ensure this secret is created in the namespace where the **Control Plane** and **Agent** are running, so they can use it for secure communication.
+Ensure this secret is created in the namespace where the **Control Plane** and **Runner** are running, so they can use it for secure communication.
 
 ## Prepare Testkube Helm Charts for Deployment
 
@@ -171,7 +171,7 @@ oc create route edge testkube-enterprise-minio --service=testkube-enterprise-min
 oc create route edge testkube-enterprise-dex --service=testkube-enterprise-dex --port=5556 --cert=tls.crt --key=tls.key --ca-cert=ca-chain.crt  --hostname=api.openshift.testkube.dev --namespace testkube-control-plane --path=/idp
 ```
 
-**_GRPC (Agent endpoint)_**
+**_GRPC (Runner endpoint)_**
 
 The [gRPC protocol relies on HTTP/2](https://www.redhat.com/en/blog/grpc-or-http/2-ingress-connectivity-in-openshift) for communication. The connection from HAProxy to the application pod can use HTTP/2 only for re-encrypt or passthrough routes and not for edge-terminated or insecure routes. We suggest to use _passthrough_:
 

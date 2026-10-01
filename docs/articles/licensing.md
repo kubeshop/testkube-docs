@@ -2,16 +2,16 @@
 
 This page explains Testkube's commercial licensing model for Cloud and On-Prem Control Plane deployments. For Open Source licensing, including the MIT license and the Testkube Community License, see the [Open Source Licensing FAQ](/articles/testkube-licensing-FAQ).
 
-Commercial licensing is based on how your organization uses the Testkube Control Plane and the agents that execute work in your infrastructure. The exact limits and commercial terms depend on your plan, but the model is built around two main dimensions:
+Commercial licensing is based on how your organization uses the Testkube Control Plane and the runners that execute work in your infrastructure. The exact limits and commercial terms depend on your plan, but the model is built around two main dimensions:
 
 - **Users**: people who can access your Testkube organization.
-- **Runner Agents**: agents that execute Test Workflows in your clusters or namespaces. Runner Agents are always deployed on-prem in your infrastructure.
+- **runners**: runners that execute Test Workflows in your clusters or namespaces. runners are always deployed on-prem in your infrastructure.
 
 ## Control Plane Deployment Options
 
 ### Cloud Hosted Control Plane
 
-With Testkube Cloud, the Testkube team operates the Control Plane at [app.testkube.io](https://app.testkube.io). You create organizations, environments, workflows, and other resources in the hosted Dashboard, then deploy Testkube Runner Agents into your own infrastructure when you need to execute workflows or connect to Kubernetes events.
+With Testkube Cloud, the Testkube team operates the Control Plane at [app.testkube.io](https://app.testkube.io). You create organizations, environments, workflows, and other resources in the hosted Dashboard, then deploy Testkube runners into your own infrastructure when you need to execute workflows or connect to Kubernetes events.
 
 Cloud licensing is managed by Testkube and applied to your organization. Depending on your plan, user licensing can be based on fixed seat limits or usage at the end of the billing period. See [Member Management](/articles/member-management#member-licensing-with-the-testkube-cloud-control-plane) for the current behavior described in the product documentation.
 
@@ -29,9 +29,9 @@ Allow outbound HTTPS traffic to `license.testkube.io` on port `443` from the Tes
 
 ### Testkube Open Source
 
-The Testkube Agent can also run in standalone mode without connecting to the commercial Control Plane. In this mode, the agent stores and manages resources in the Kubernetes cluster where it runs and can be used through the CLI or Agent API.
+The Testkube Runner can also run in standalone mode without connecting to the commercial Control Plane. In this mode, the runner stores and manages resources in the Kubernetes cluster where it runs and can be used through the CLI or Runner API.
 
-Standalone mode is the open source path for running Testkube without a commercial Control Plane. It is not licensed by commercial users, seats, or Runner Agent limits. Some advanced features require the commercial Control Plane or are covered by the Testkube Community License. See [Testkube Open Source](/articles/open-source) and the [Open Source Licensing FAQ](/articles/testkube-licensing-FAQ) for more details.
+Standalone mode is the open source path for running Testkube without a commercial Control Plane. It is not licensed by commercial users, seats, or runner limits. Some advanced features require the commercial Control Plane or are covered by the Testkube Community License. See [Testkube Open Source](/articles/open-source) and the [Open Source Licensing FAQ](/articles/testkube-licensing-FAQ) for more details.
 
 ## User Licensing
 
@@ -48,42 +48,42 @@ For the detailed rules, constraints, and Cloud-specific member licensing options
 
 Org-wide Read tokens & the Read-only user cap keep the user/identity on a **read-only users** rather than consuming a full user.
 
-## Runner Agent Licensing
+## Runner Licensing {#runner-agent-licensing}
 
-Testkube uses agents to connect the Control Plane to your infrastructure. Only **Runner Agents** require an agent license because they execute Test Workflows.
+Testkube uses runners to connect the Control Plane to your infrastructure. Only **runners** require a runner license because they execute Test Workflows.
 
-Other agent capabilities do not require a Runner Agent license:
+Other runner capabilities do not require a runner license:
 
-- **Listener Agents** listen for Kubernetes events.
-- **GitOps Agents** synchronize Testkube resources from Kubernetes into the Control Plane.
-- **Webhook Agents** emit webhooks, CDEvents, and Kubernetes events.
+- **runners with the listener capability** listen for Kubernetes events.
+- **runners with the GitOps capability** synchronize Testkube resources from Kubernetes into the Control Plane.
+- **runners with the webhooks capability** emit webhooks, CDEvents, and Kubernetes events.
 
-Runner Agent licenses can be assigned as **fixed** or **floating**.
+runner licenses can be assigned as **fixed** or **floating**.
 
-### Fixed Runner Agents
+### Fixed runners {#fixed-runner-agents}
 
-A fixed Runner Agent license is assigned to a specific Runner Agent. That agent can run workflows independently whenever it is online and available.
+A fixed runner license is assigned to a specific runner. That runner can run workflows independently whenever it is online and available.
 
-Fixed licenses are useful for long-lived agents that represent stable execution capacity, such as a runner dedicated to a production, staging, or shared platform cluster.
+Fixed licenses are useful for long-lived runners that represent stable execution capacity, such as a runner dedicated to a production, staging, or shared platform cluster.
 
-### Floating Runner Agents
+### Floating runners {#floating-runner-agents}
 
-A floating Runner Agent license is shared across multiple Runner Agents and controls how many of those agents can execute workflows concurrently. For example, if an organization has two floating Runner Agent licenses assigned across several agents, two floating agents can execute workflows at the same time and additional executions will queue until capacity is available.
+A floating runner license is shared across multiple runners and controls how many of those runners can execute workflows concurrently. For example, if an organization has two floating runner licenses assigned across several runners, two floating runners can execute workflows at the same time and additional executions will queue until capacity is available.
 
-Floating licenses are useful for dynamic infrastructure, ephemeral environments, preview environments, and other cases where the number of connected agents changes over time.
+Floating licenses are useful for dynamic infrastructure, ephemeral environments, preview environments, and other cases where the number of connected runners changes over time.
 
-See [Licensing for Runner Agents](/articles/agents-overview#licensing-for-runner-agents) for the current Runner Agent behavior, including how to assign floating licenses.
+See [Licensing for runners](/articles/agents-overview#licensing-for-runner-agents) for the current runner behavior, including how to assign floating licenses.
 
 ## What Counts Toward a License
 
 At a high level:
 
-| Licensed item         | Counted when                                                                                                  |
-| --------------------- | ------------------------------------------------------------------------------------------------------------- |
-| Full user             | A member has write access to at least one Testkube resource, resource group, or environment.                  |
-| Read-only user        | A member has access to Testkube but does not have write access.                                               |
-| Fixed Runner Agent    | A Runner Agent is created with a fixed license.                                                               |
-| Floating Runner Agent | A floating license is available for concurrent workflow execution by Runner Agents assigned to floating mode. |
+| Licensed item   | Counted when                                                                                            |
+| --------------- | ------------------------------------------------------------------------------------------------------- |
+| Full user       | A member has write access to at least one Testkube resource, resource group, or environment.            |
+| Read-only user  | A member has access to Testkube but does not have write access.                                         |
+| Fixed runner    | A runner is created with a fixed license.                                                               |
+| Floating runner | A floating license is available for concurrent workflow execution by runners assigned to floating mode. |
 
 The exact limits shown in the Dashboard come from your Testkube plan or license key.
 
@@ -94,7 +94,7 @@ When sizing a Testkube license, consider:
 - How many people need to create, update, run, or administer workflows.
 - How many people only need to view workflow definitions, executions, reports, or dashboards.
 - How many stable clusters or namespaces need dedicated workflow execution capacity.
-- Whether you use ephemeral environments or dynamic runner fleets that benefit from floating Runner Agent licenses.
-- Whether your organization will use Testkube Cloud, an on-prem Control Plane, standalone OSS agents, or a mix of these models.
+- Whether you use ephemeral environments or dynamic runner fleets that benefit from floating runner licenses.
+- Whether your organization will use Testkube Cloud, an on-prem Control Plane, standalone OSS runners, or a mix of these models.
 
 If you are not sure which model fits your setup, [contact Testkube](https://testkube.io/contact) to review your deployment architecture and license requirements.

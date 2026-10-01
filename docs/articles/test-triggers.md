@@ -12,7 +12,7 @@ or an Ingress gets deleted.
 
 Beyond these built-in resources and events, a trigger can also watch your own
 custom resources, fire only when a specific field changes, and run on just the
-listener agents you choose.
+runners with the listener capability you choose.
 
 You can currently create/manage Event Triggers in the Testkube Dashboard or by interacting with corresponding Trigger custom resources
 via `kubectl`.
@@ -31,25 +31,25 @@ trigger as described at [create Test Triggers](/articles/integrations-triggers#c
 Triggers are ultimately defined as Customer Resources in your cluster - [TestTrigger Reference](/articles/crds/tests.testkube.io-v1#testtrigger)
 :::
 
-## Listener Agents with TestTriggers
+## Listener capability with TestTriggers {#listener-agents-with-testtriggers}
 
-Testkube uses [Listener Agents](/articles/agents-overview#listener-agents)
+Testkube uses [runners with the listener capability](/articles/agents-overview#listener-agents)
 to listen for Kubernetes events that will be matched against your TestTriggers. Your Testkube Environment can have any number of
-Listener Agents, deployed to whichever namespaces/clusters you need to listen for events.
+runners with the listener capability, deployed to whichever namespaces/clusters you need to listen for events.
 
-The Listener Agent and Standalone Agent by default behave somewhat differently when it comes to listening for events:
+The runner with the listener capability and Standalone Runner by default behave somewhat differently when it comes to listening for events:
 
-- Listener Agents by default listen for events only in the namespace they are deployed to, if you need to listen for events from
+- runners with the listener capability by default listen for events only in the namespace they are deployed to, if you need to listen for events from
   additional namespaces, you can configure this as described at [Listening in additional namespaces](/articles/multi-agent-runner-helm-chart#listening-in-additional-namespaces).
-- The Standalone Agent listens for events in all namespaces, you can configure this as described at
-  [Multi-namespace Agent Installation](/articles/install/advanced-install#multi-namespace-agent-installation).
+- The Standalone Runner listens for events in all namespaces, you can configure this as described at
+  [Multi-namespace Runner Installation](/articles/install/advanced-install#multi-namespace-agent-installation).
 
-### Listener Agent Event Labels
+### Listener event labels {#listener-agent-event-labels}
 
-Events captured by a specific Listener Agents are annotated with a number of testkube.io specific labels:
+Events captured by a specific runners with the listener capability are annotated with a number of testkube.io specific labels:
 
-- `testkube.io/agent-name` - the name of the Listener Agent
-- `testkube.io/agent-namespace` - the namespace of the Listener Agent
+- `testkube.io/runner-name` - the name of the runner with the listener capability
+- `testkube.io/runner-namespace` - the namespace of the runner with the listener capability
 - `testkube.io/resource-name` - the name of the resource triggering the event
 - `testkube.io/resource-namespace` - the namespace of the resource triggering the event
 - `testkube.io/resource-kind` - the kind (i.e. `Deployment`) of the resource triggering the event
@@ -60,8 +60,8 @@ See below how you can select on these labels to define Listener-specific trigger
 
 ### Custom Event Labels
 
-During agent installation one can also specify custom labels which will be emitted with each event from the
-Listener Agent by using the following values in the `testkube-runner` Helm chart:
+During runner installation one can also specify custom labels which will be emitted with each event from the
+runner with the listener capability by using the following values in the `testkube-runner` Helm chart:
 
 ```yaml
 listener:
@@ -70,9 +70,9 @@ listener:
     deployment-location: eastern-usa
 ```
 
-## Pinning Listener Agents
+## Pinning a listener {#pinning-listener-agents}
 
-By default every Listener Agent in your environment evaluates a trigger, and
+By default every runner with the listener capability in your environment evaluates a trigger, and
 whichever one sees a matching event fires it. That is usually what you want. To
 have a trigger handled by specific listeners only, pin it with `spec.listener`:
 
@@ -81,11 +81,11 @@ spec:
   listener:
     match:
       id:
-        - <listener-agent-id> # one or more listener agent IDs
+        - <listener-runner-id> # one or more listener runner IDs
 ```
 
 Leave `listener` out to keep the default broadcast behavior. If you author YAML
-directly you reference a listener by its agent ID; in the dashboard you pick
+directly you reference a listener by its runner ID; in the dashboard you pick
 listeners by name instead (see below).
 
 Pinning starts to matter once a trigger uses [match conditions](#match-conditions)
@@ -106,7 +106,7 @@ Triggers use selectors to determine which events should trigger the action and w
 
 ### Event Selector
 
-Each event that is emitted by a listener agent has labels on it which could be
+Each event that is emitted by a runner with the listener capability has labels on it which could be
 used for selection of a triggering event using the `selector` field:
 
 ```yaml
@@ -136,7 +136,7 @@ resource: Kinds of resources to match (possible values, `pod`, `deployment`, `st
 resourceSelector:
   name: Kubernetes object name
   nameRegex: Kubernetes object name regex (for example, "app.*")
-  namespace: Kubernetes object namespace (default is agent's namespace)
+  namespace: Kubernetes object namespace (default is the runner's namespace)
   namespaceRegex: Kubernetes object namespace regex( for example, "test.*")
   labelSelector:
     matchLabels: map of key-value pairs
@@ -164,7 +164,7 @@ watches — set one, not both. Use `resource` for common built-ins (`pod`,
 `deployment`, etc.) and `resourceRef` for everything else.
 
 In the dashboard, first pick the listener(s) that should watch the resource
-(see [Pinning Listener Agents](#pinning-listener-agents)), then choose **Custom
+(see [Pinning runners with the listener capability](#pinning-listener-agents)), then choose **Custom
 Resource** in the K8s resource dropdown. The Group / Version / Kind selectors
 are populated from what those listeners can actually watch, so a resource only
 appears once a listener with access to it is selected.
@@ -314,7 +314,7 @@ when _all_ entries are satisfied.
 :::info
 Match conditions are validated against the schema a specific listener
 discovered, so a trigger that uses them must [pin at least one
-listener](#pinning-listener-agents).
+listener](#pinning-listener-runners).
 :::
 
 For example, "fire when `.status.phase` becomes `Healthy`" or
@@ -365,10 +365,10 @@ unsatisfiable event rejects the trigger even alongside a valid one.
   from its live schema. When writing YAML by hand, inspect a live object with
   `kubectl get <resource> <name> -o yaml`.
 
-## Targeting specific Runner Agents
+## Targeting specific runners {#targeting-specific-runner-agents}
 
-With the introduction of [Runner Agents](/articles/agents-overview#runner-agents) you can optionally specify
-which Runner Agent(s) a Triggered execution should run on. For example
+With the introduction of [runners](/articles/agents-overview#runner-agents) you can optionally specify
+which runner(s) a Triggered execution should run on. For example
 
 ```yaml
 spec:
@@ -379,14 +379,14 @@ spec:
 ...
 ```
 
-Will trigger an Execution on any Global Runner Agent with the `application: accounting` label, For more details,
-see our guide on [Runner Agent Targeting](/articles/test-workflows-running#runner-agent-targeting).
+Will trigger an Execution on any Global runner with the `application: accounting` label, For more details,
+see our guide on [Runner targeting](/articles/test-workflows-running#runner-agent-targeting).
 
 ### Template-based target selection
 
 You can resolve values in `target.match` at runtime using Go templates or JSONPath.
 
-- Run on the same agent that handled the event:
+- Run on the same runner that handled the event:
 
 ```yaml
 spec:
@@ -398,7 +398,7 @@ spec:
           - "{{ .Agent.Name }}"
 ```
 
-- Target by agent labels (e.g., environment):
+- Target by runner labels (e.g., environment):
 
 ```yaml
 spec:
@@ -410,7 +410,7 @@ spec:
           - '{{ index .Agent.Labels "env" }}'
 ```
 
-Note: Add/update agent labels via CLI: `testkube update agent <agent-name> --label env=eu-west1`.
+Note: Add/update runner labels via CLI: `testkube update runner <runner-name> --label env=eu-west1`.
 
 - Provide custom event labels via environment variable and reference them in templates:
 
@@ -422,14 +422,14 @@ env:
 
 Then reference in a template as `{{ index .EventLabels "cluster" }}`.
 
-Tip: To inspect the full event data, run the agent with `DEBUG=true`.
+Tip: To inspect the full event data, run the runner with `DEBUG=true`.
 
 Available template fields (Go templates and JSONPath):
 
-- `Agent.Name` (string)
-- `Agent.Labels` (map) — access with `{{ index .Agent.Labels "<key>" }}`
+- `Runner.Name` (string)
+- `Runner.Labels` (map) — access with `{{ index .Runner.Labels "<key>" }}`
 - `EventLabels` (map) — includes auto-populated keys:
-  - `testkube.io/agent-name`, `testkube.io/agent-namespace`
+  - `testkube.io/runner-name`, `testkube.io/runner-namespace`
   - `testkube.io/resource-name`, `testkube.io/resource-namespace`
   - `testkube.io/resource-kind`, `testkube.io/resource-group`, `testkube.io/resource-version`
   - plus any pairs from `EVENT_LABELS`, e.g., `cluster:dev` → `{{ index .EventLabels "cluster" }}`
@@ -439,7 +439,7 @@ Available template fields (Go templates and JSONPath):
 JSONPath scope:
 
 - In `actionParameters`, JSONPath is evaluated against the resource object, so fields can be referenced directly, e.g., `jsonpath={.metadata.name}`.
-- In `target.match`, JSONPath is evaluated against the full event. To reach resource fields, prefix with `.Object`, e.g., `jsonpath={.Object.metadata.name}`. To reach agent or labels: `jsonpath={.Agent.Name}` or `jsonpath={.EventLabels.cluster}`.
+- In `target.match`, JSONPath is evaluated against the full event. To reach resource fields, prefix with `.Object`, e.g., `jsonpath={.Object.metadata.name}`. To reach runner or labels: `jsonpath={.Runner.Name}` or `jsonpath={.EventLabels.cluster}`.
 
 ## Action Parameters
 
@@ -588,7 +588,7 @@ spec:
   listener:
     match:
       id:
-        - <listener-agent-id> # a listener that can watch Rollouts
+        - <listener-runner-id> # a listener that can watch Rollouts
   event: modified # changed_to / changed_from / changed require this
   match:
     - path: .status.phase
@@ -603,7 +603,7 @@ spec:
 ```
 
 Because it uses match conditions, the trigger pins a listener via
-`spec.listener` (see [Pinning Listener Agents](#pinning-listener-agents)); use
+`spec.listener` (see [Pinning runners with the listener capability](#pinning-listener-agents)); use
 the ID of a listener that can watch Rollouts. Before the trigger can fire,
 grant that listener access to watch Rollouts by adding the resource to your
 Helm values:
@@ -662,7 +662,7 @@ Testkube uses [Informers](https://pkg.go.dev/k8s.io/client-go/informers) to watc
 on certain actions on the watched Kubernetes resources.
 
 Informers are a reliable, scalable and fault-tolerant Kubernetes concept where each informer registers handlers with the
-Kubernetes API and gets notified by Kubernetes on each event on the watched resources. Only the super-agent is able to register handlers with a Kubernetes API server, limiting our watched resources to the cluster in which the super-agent is deployed.
+Kubernetes API and gets notified by Kubernetes on each event on the watched resources. Only the super-runner is able to register handlers with a Kubernetes API server, limiting our watched resources to the cluster in which the super-runner is deployed.
 
 ## API
 

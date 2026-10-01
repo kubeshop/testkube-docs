@@ -11,13 +11,13 @@ After the Test Workflow execution is finished, all the created resources are del
 
 ### Controller
 
-The Agent Server is responsible for controlling the Test Workflow execution. It:
+The Runner Server is responsible for controlling the Test Workflow execution. It:
 
 - creates all the required resources,
 - watches for their status and sends all the results to the storage or the Control Plane,
 - and, destroys resources after they are no longer needed.
 
-The Test Workflows are resilient to Agent Server downtime. After the Agent Server is restarted,
+The Test Workflows are resilient to Runner Server downtime. After the Runner Server is restarted,
 you are able to recover all Test Workflow information, as long as the execution Kubernetes resources are still intact.
 
 ### Job
@@ -140,13 +140,13 @@ When the image you are using is stored in the private registry, you may need to 
 
 :::note
 
-Supported only for Testkube Agent API version `2.1.162` or higher, and Testkube Helm Chart version `2.1.254` or higher.
+Supported only for Testkube Runner API version `2.1.162` or higher, and Testkube Helm Chart version `2.1.254` or higher.
 
 :::
 
 In the case you are using private AWS Elastic Container Registry (ECR), as its [authorization tokens](https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry_auth.html#registry-auth-token) are only valid for 12 hours, you can ensure persistent Testkube access by configuring a Service Account with IAM Role or Environment Variables, follow these steps:
 
-If you are running agent into AWS Elastic Kubernetes Service (EKS):
+If you are running runner into AWS Elastic Kubernetes Service (EKS):
 
 - Configure your EKS cluster to manage [IAM roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html).
 - Create a [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create) allowing the following actions over your private registry: `ecr:GetAuthorizationToken`, `ecr:CreateRepository`, `ecr:BatchImportUpstreamImage`, `ecr:BatchGetImage`, `ecr:BatchCheckLayerAvailability`, `ecr:CompleteLayerUpload`, and `ecr:GetDownloadUrlForLayer`.
@@ -165,7 +165,7 @@ The actions `ecr:CreateRepository` and `ecr:CompleteLayerUpload` are only needed
       annotations: eks.amazonaws.com/role-arn=<iam-role-arn>
   ```
 
-- If you want to force Testkube Agent to use your custom service account,
+- If you want to force Testkube Runner to use your custom service account,
 
   ```yaml
   testkube-api:
@@ -174,7 +174,7 @@ The actions `ecr:CreateRepository` and `ecr:CompleteLayerUpload` are only needed
       name: <custom-service-account-name>
   ```
 
-If you are running agent from any other Kubernetes distribution than EKS:
+If you are running runner from any other Kubernetes distribution than EKS:
 
 - Create an [IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html), create and assign an [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create) allowing the following actions over your private registry: `ecr:GetAuthorizationToken`, `ecr:CreateRepository`, `ecr:BatchImportUpstreamImage`, `ecr:BatchGetImage`, `ecr:BatchCheckLayerAvailability`, `ecr:CompleteLayerUpload`, and `ecr:GetDownloadUrlForLayer`.
 
@@ -185,8 +185,8 @@ The actions `ecr:CreateRepository` and `ecr:CompleteLayerUpload` are only needed
 :::
 
 - Generate an access key for that user.
-- Save key ID and access key in your Secret Management tool that syncs values to your Kubernetes cluster, or directly create the Kubernetes Secret in the Testkube Agent namespace.
-- Finally, configure Testkube agent to take those values as environment variables form secret:
+- Save key ID and access key in your Secret Management tool that syncs values to your Kubernetes cluster, or directly create the Kubernetes Secret in the Testkube Runner namespace.
+- Finally, configure Testkube runner to take those values as environment variables form secret:
 
   ```yaml
   testkube-api:
@@ -212,7 +212,7 @@ The actions `ecr:CreateRepository` and `ecr:CompleteLayerUpload` are only needed
 
 :::note
 
-Supported only for Testkube Agent API version `2.1.162` or higher, and Testkube Helm Chart version `2.1.254` or higher.
+Supported only for Testkube Runner API version `2.1.162` or higher, and Testkube Helm Chart version `2.1.254` or higher.
 
 :::
 
@@ -230,11 +230,11 @@ In any of both solution you first must have the Google Service Account with righ
       --role="roles/artifactregistry.reader"
   ```
 
-To link with a Kubernetes Service Account you must be running Testkube Agent into a Google Cloud Kubernetes Engine (GKE), then follow these instructions:
+To link with a Kubernetes Service Account you must be running Testkube Runner into a Google Cloud Kubernetes Engine (GKE), then follow these instructions:
 
 - Ensure [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#enable_on_clusters_and_node_pools) is enabled in your cluster.
-- Link Google [Service Account to the Testkube Agent Service Account](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#kubernetes-sa-to-iam), by default it creates one called `testkube-api-server`, but ensure your Testkube Agent installation is not customizing that behavior.
-- Annotate Testkube Agent Service Account, use the snippet below as reference to update your `values.yaml`:
+- Link Google [Service Account to the Testkube Runner Service Account](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#kubernetes-sa-to-iam), by default it creates one called `testkube-api-server`, but ensure your Testkube Runner installation is not customizing that behavior.
+- Annotate Testkube Runner Service Account, use the snippet below as reference to update your `values.yaml`:
 
   ```yaml
   testkube-api:
@@ -247,7 +247,7 @@ If you prefer to use Service Account Access Key then:
 
 - Create [Service Account Access Key](https://cloud.google.com/iam/docs/keys-create-delete#creating) and download credential JSON.
 - Create a Kubernetes Secret with the credential JSON.
-- Finally configure Testkube Agent to mount credential JSON, use the following snippet to update your `values.yaml`:
+- Finally configure Testkube Runner to mount credential JSON, use the following snippet to update your `values.yaml`:
 
   ```yaml
   testkube-api:

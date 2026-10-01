@@ -42,7 +42,7 @@ The collected data looks like this.
 
 ## How to Opt Out?
 
-### Testkube CLI and Agent
+### Testkube CLI and Runner {#testkube-cli-and-agent}
 
 To opt out of the Testkube telemetry collection:
 

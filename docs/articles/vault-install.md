@@ -137,7 +137,7 @@ minio:
 
 ## Control Plane
 
-The control plane exposes the central API for the agents and
+The control plane exposes the central API for the runners and
 the dashboard. The worker service is a part of the control plane which performs
 long-running tasks such as processing artifacts.
 
@@ -325,17 +325,17 @@ testkube-cloud-api:
       {{`{{- with secret "kv/certs/ca" }}{{ .Data.data.ca }}{{ end -}}`}}
 ```
 
-## Agent
+## Runner {#agent}
 
-### Private Certificate Authority (CA)
+### Private Certificate Authority (CA) {#private-certificate-authority-ca}
 
-Assuming the agent has access to the same Vault as the control plane, to build
+Assuming the runner has access to the same Vault as the control plane, to build
 on the above direction for injection of the private CA into the control plane,
 create a service account, `vault-agent`, bound to a Vault
 role, and `agent` with a policy that allows reading the CA secret.
 
 In the `testkube` chart, configure the following values to properly inject the
-private CA certificate into the agent workload:
+private CA certificate into the runner workload:
 
 ```yaml
 testkube-api:
