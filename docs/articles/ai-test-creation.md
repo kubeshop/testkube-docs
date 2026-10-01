@@ -7,12 +7,6 @@ slug: /articles/ai-test-creation
 
 AI Test Creation provides an isolated, persistent workspace where you can create, update, run, and save tests with an AI agent. Each session is connected to an environment called a **Sandbox**, where the agent can inspect files, make changes, and run tests while you review its progress in the Testkube Dashboard.
 
-:::warning Early Access Program only
-
-AI Test Creation is currently available only to customers accepted into the Testkube AI Early Access Program (EAP). [Apply for EAP access](https://testkube.io/eap).
-
-:::
-
 Some implementation identifiers still use `runspace`, including API fields, Helm values, generated resource names, and the Runspace Bridge component. This page uses **Sandbox** for the environment shown to users and preserves those implementation identifiers exactly where you need to configure or operate them.
 
 :::info Agent sandboxing

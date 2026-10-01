@@ -806,6 +806,11 @@ const sidebars = {
                   label: "Work with Test Bundles and multiple chats",
                   id: "articles/ai-test-creation-test-bundles",
                 },
+                {
+                  type: "doc",
+                  label: "Installation reference",
+                  id: "articles/ai-test-creation",
+                },
               ],
             },
             {
@@ -964,11 +969,6 @@ const sidebars = {
                   type: "doc",
                   label: "Architecture",
                   id: "articles/ai-architecture",
-                },
-                {
-                  type: "doc",
-                  label: "AI Test Creation EAP",
-                  id: "articles/ai-test-creation",
                 },
               ],
             },
