@@ -20,6 +20,12 @@ Your test environment must be able to reach the application and dependencies nee
 
 For a self-hosted installation, an administrator must also complete the [AI Test Creation setup](/articles/ai-test-creation#install-ai-test-creation-on-testkube-on-prem). Installation configuration does not replace the plan or license requirement.
 
+:::tip Try it without installing anything
+
+[Start a Testkube trial](https://testkube.io/get-started) to try AI Test Creation with a cloud runner—no installation required.
+
+:::
+
 ## 1. Describe the test you want to create
 
 Open the Testkube Dashboard, select your environment, and open **Test Catalog** from the navigation menu.
