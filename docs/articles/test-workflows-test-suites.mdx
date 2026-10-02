@@ -19,7 +19,7 @@ use Testkube to modularize and execute your tests:
 - Fetch input data before (i.e. by using `curl`/`wget` to download data, or fetching Git repository).
 - Run setup operations (i.e. start shared instance of database, or generate API key).
 - Process the results (i.e. by notifying about the status).
-- Run other tests based on the previous results.
+- Run other tests based on the previous results. See [Branching on an earlier Workflow](#branching-on-an-earlier-workflow).
 - Trigger Workflows in other environments.
 - Nest Workflows - Workflow triggering Workflow(s), triggering other Workflow(s).
 - Run any number of Workflows both in sequence or parallel.
@@ -198,6 +198,87 @@ An entry can be scheduled as a **rerun** of an earlier execution rather than as 
 ```
 
 The scheduled execution then resolves `execution("rerun")` back to that one, which is what lets a Workflow read the previous run's report and repeat only the test cases that failed. See [Rerunning Failed Tests](/articles/test-workflows-rerun#rerunning-from-inside-a-workflow) for the full pattern, the difference from a rerun started on the CLI, and the rule on which executions may be named.
+
+## Branching on an earlier Workflow
+
+A suite can run one Workflow after an earlier one passes, and a different Workflow after it fails. The suite's result is the result of the branch that ran.
+
+The earlier Workflow publishes the result the branch should follow. Mark its test step `optional: true`, so that step's failure leaves the Workflow `passed`, and have a later step write the test step's own status to `/testkube/outputs`. The test step can publish how long it ran the same way. The suite reads both with `execution()`.
+
+```yaml title="postman-check.yaml"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: postman-check
+spec:
+  content:
+    git:
+      uri: https://github.com/kubeshop/testkube
+      revision: main
+      paths:
+        - test/postman/postman-executor-smoke-without-envs.postman_collection.json
+  container:
+    workingDir: /data/repo/test/postman
+  steps:
+    - name: Run Postman
+      id: postman
+      optional: true
+      run:
+        image: postman/newman:6-alpine
+        shell: |
+          start=$(date +%s)
+          newman run postman-executor-smoke-without-envs.postman_collection.json
+          code=$?
+          echo -n "$(( $(date +%s) - start ))" > /testkube/outputs/durationSeconds
+          exit $code
+    - name: Publish the result
+      shell: |
+        echo -n '{{ step.postman.status }}' > /testkube/outputs/status
+```
+
+`step.postman.status` is `passed`, `failed`, or `timeout`. The Workflow result stays `passed` in each case, so the suite records this execution as passed and chooses the branch from the published status. `durationSeconds` is how many seconds the Postman step ran.
+
+The suite copies those outputs into a step of its own. The following conditions read `step.postman_result.outputs`. `execution()` resolves in the shell step that performs the copy. See [The Result of an Earlier Step](/articles/test-workflows-step-sharing#the-result-of-an-earlier-step) and [Sharing Data Between Executions](/articles/test-workflows-execution-sharing).
+
+```yaml title="branching-suite.yaml"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: branching-suite
+spec:
+  steps:
+    - name: Run Postman
+      execute:
+        workflows:
+          - name: postman-check
+            as: postman
+
+    - name: Record the Postman result
+      id: postman_result
+      shell: |
+        echo -n '{{ execution("postman").outputs.status }}' > /testkube/outputs/status
+        echo -n '{{ execution("postman").outputs.durationSeconds }}' > /testkube/outputs/durationSeconds
+
+    - name: Run k6 after a passing Postman run
+      condition: 'step.postman_result.outputs.status == "passed"'
+      execute:
+        workflows:
+          - name: k6-on-pass
+
+    - name: Run k6 after any other Postman result
+      condition: 'step.postman_result.outputs.status != "passed"'
+      execute:
+        workflows:
+          - name: k6-on-fail
+```
+
+`as: postman` is the name `execution()` uses for that run. `k6-on-pass` and `k6-on-fail` are ordinary Workflows. One of the two steps runs. The other is skipped, which leaves the suite result unchanged. The Postman Workflow passed, so the suite's result is the result of the k6 Workflow that ran. A `failed` or `timeout` Postman step takes the second branch.
+
+Output values are strings. A condition that compares the duration converts it with `int()`:
+
+```yaml
+condition: 'step.postman_result.outputs.status == "passed" && int(step.postman_result.outputs.durationSeconds) < 60'
+```
 
 ## Nesting workflows
 
