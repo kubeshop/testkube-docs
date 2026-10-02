@@ -166,13 +166,15 @@ An execution that does not pass carries `result.statusDetails`. The object says 
 
 The dashboard shows the type and the reason in a tooltip on the status icon of an execution, in the executions list and in the execution detail.
 
-| Type                | Label in the dashboard | Meaning                                                                                   |
-| ------------------- | ---------------------- | ----------------------------------------------------------------------------------------- |
-| `init-failure`      | Configuration error    | The execution failed before the test ran. In most cases you can fix it yourself           |
-| `execution-failure` | Infrastructure failure | The infrastructure stopped the execution while the test ran                               |
-| `step-failure`      | Test failure           | The test ran and reported a failure                                                       |
-| `user-cancel`       | Canceled by the user   | A person stopped the execution. The health of the workflow does not count it as a failure |
-| `unknown`           | Unknown cause          | No signal explains the result                                                             |
+| Type                | Label in the dashboard | Meaning                                                                                   | Webhook event                             |
+| ------------------- | ---------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------- |
+| `init-failure`      | Configuration error    | The execution failed before the test ran. In most cases you can fix it yourself           | `end-testworkflow-configuration-error`    |
+| `execution-failure` | Infrastructure failure | The infrastructure stopped the execution while the test ran                               | `end-testworkflow-infrastructure-failure` |
+| `step-failure`      | Test failure           | The test ran and reported a failure                                                       | `end-testworkflow-test-failure`           |
+| `user-cancel`       | Canceled by the user   | A person stopped the execution. The health of the workflow does not count it as a failure | `end-testworkflow-canceled`               |
+| `unknown`           | Unknown cause          | No signal explains the result                                                             | `end-testworkflow-not-passed`             |
+
+The first three events call a webhook only for executions of that type. A cancel by a person and an unknown cause have no event of their own, so use the general event in the table. See [Calling a Webhook for One Type](#calling-a-webhook-for-one-type).
 
 ### Filtering a List by the Type
 
@@ -211,6 +213,16 @@ A workflow reads the type, the code, and the step of another execution with `exe
 ```
 
 `execution()` does not resolve in the `condition` of a step. Read the value in a `shell` step, as above. See [Sharing Data Between Executions](/articles/test-workflows-execution-sharing).
+
+### Calling a Webhook for One Type
+
+To call a webhook only for one type of failure, list its event in the webhook:
+
+- `end-testworkflow-configuration-error` for `init-failure`
+- `end-testworkflow-infrastructure-failure` for `execution-failure`
+- `end-testworkflow-test-failure` for `step-failure`
+
+These events need Testkube Agent 2.14.0 or later. For the rules and an example, see [Events for the Cause of a Failure](/articles/webhooks#events-for-the-cause-of-a-failure).
 
 ### Reading the Type in a Webhook Template
 
