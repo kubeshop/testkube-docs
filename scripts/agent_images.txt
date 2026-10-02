@@ -1,5 +1,6 @@
-kubeshop/testkube-api-server:2.13.3
-kubeshop/testkube-tw-init:2.13.3
-kubeshop/testkube-tw-toolkit:2.13.3
-nats:2.14.5-alpine
+kubeshop/testkube-api-server:2.14.0
+kubeshop/testkube-kubectl:1.36.3
+kubeshop/testkube-tw-init:2.14.0
+kubeshop/testkube-tw-toolkit:2.14.0
+nats:2.15.0-alpine
 natsio/nats-server-config-reloader:0.24.0
