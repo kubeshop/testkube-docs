@@ -58,6 +58,8 @@ spec:
         echo 'status: {{ execution("p").status }}'
 ```
 
+To run a different Workflow depending on that status, and to take the suite's result from the branch that ran, publish the result as an output and condition the next step on it. See [Branching on an earlier Workflow](/articles/test-workflows-test-suites#branching-on-an-earlier-workflow).
+
 `execution()` returns a map:
 
 | Field          | Description                                                                                 |

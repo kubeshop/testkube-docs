@@ -91,7 +91,7 @@ steps:
 
 Two events end the whole execution, so no later step runs and no step can read their result: a signal that kills the process of a step, and Kubernetes that kills the container, for example when it uses more memory than its limit. Testkube then records the cause in the result of the execution, as the reason code `process-killed` or `oom-killed`. A cause that Kubernetes reports before the pod starts, for example a pod that no node can run, is also in the result of the execution. See [Failure Reasons](/articles/test-workflows-failure-reasons).
 
-The function `execution()` reads another execution. It resolves in a `shell`, in a command, and in a `retry` condition, but not in the `condition` of a step. To branch on the result of another execution, read it in a `shell` step, write the answer to `/testkube/outputs`, and use that output in the condition of the next step.
+The function `execution()` reads another execution. It resolves in a `shell`, in a command, and in a `retry` condition, but not in the `condition` of a step. To branch on the result of another execution, read it in a `shell` step, write the answer to `/testkube/outputs`, and use that output in the condition of the next step. A suite uses this to run one Workflow or another from an earlier result, and to take its own result from the branch that ran. See [Branching on an earlier Workflow](/articles/test-workflows-test-suites#branching-on-an-earlier-workflow).
 
 ## Full Example
 
