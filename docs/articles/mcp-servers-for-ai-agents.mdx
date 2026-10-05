@@ -40,6 +40,26 @@ The modal prompts you for:
 If the provided MCP Server can be accessed successfully, it will be added to the list of MCP Servers for further
 configuration (see below).
 
+### Server URL requirements
+
+The URL must use HTTPS, and its host must not resolve into a private range. Both rules stop
+someone registering an address that only the Control Plane can reach, such as a cloud
+metadata endpoint or a service on its internal network.
+
+This rejects the address of a service running in the same cluster, which is typically plain
+HTTP on a private IP. For self-hosted deployments, name the hosts you trust and only those
+are exempt:
+
+```yaml
+global:
+  trustedHosts:
+    - my-mcp.my-namespace.svc.cluster.local
+```
+
+Every other host is still checked, so listing one service does not open up the rest. Set it
+where you deploy the Control Plane rather than per environment, since it is a decision for
+whoever runs the cluster.
+
 :::tip Private CA / self-signed certificates
 For self-hosted deployments, if your MCP Server uses a certificate signed by a
 private CA, configure private CA trust using the
