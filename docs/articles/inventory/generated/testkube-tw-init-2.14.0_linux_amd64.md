@@ -13,28 +13,6 @@ hide_table_of_contents: true
 
 <table>
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/grpc</strong> <code>1.84.0</code> (golang)</summary>
-
-<small><code>pkg:golang/google.golang.org/grpc@1.84.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-84445?s=golang&n=grpc&ns=google.golang.org&t=golang&vr=%3E%3D1.84.0-dev%2C%3C1.85.0-dev.0.20260825072537-93e31b48545e"><img alt="high : CVE--2026--84445" src="https://img.shields.io/badge/CVE--2026--84445-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.84.0-dev<br/><1.85.0-dev.0.20260825072537-93e31b48545e</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.85.0-dev.0.20260825072537-93e31b48545e</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-In google.golang.org/grpc, servers configured with xDS routing can panic when processing requests that lack both :authority and Host headers. The HTTP/2 transport layer accepted requests missing these headers, and the xDS server routing interceptor attempted to index the empty authority slice, causing an unhandled panic and terminating the server.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>29.7.2+incompatible</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/docker/cli@29.7.2%2Bincompatible</code></small><br/>
@@ -51,6 +29,28 @@ In google.golang.org/grpc, servers configured with xDS routing can panic when pr
 <blockquote>
 
 Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Escalation on Windows in github.com/docker/cli
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/grpc</strong> <code>1.84.0</code> (golang)</summary>
+
+<small><code>pkg:golang/google.golang.org/grpc@1.84.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-84445?s=golang&n=grpc&ns=google.golang.org&t=golang&vr=%3E%3D1.84.0-dev%2C%3C1.85.0-dev.0.20260825072537-93e31b48545e"><img alt="high : CVE--2026--84445" src="https://img.shields.io/badge/CVE--2026--84445-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.84.0-dev<br/><1.85.0-dev.0.20260825072537-93e31b48545e</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.85.0-dev.0.20260825072537-93e31b48545e</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+In google.golang.org/grpc, servers configured with xDS routing can panic when processing requests that lack both :authority and Host headers. The HTTP/2 transport layer accepted requests missing these headers, and the xDS server routing interceptor attempted to index the empty authority slice, causing an unhandled panic and terminating the server.
 
 </blockquote>
 </details>
