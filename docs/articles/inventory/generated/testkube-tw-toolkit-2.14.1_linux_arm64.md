@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:0893249629e168d7960d5b7d42fcea11cc2f42c2a3b1e7dac4554555db1ff87e</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/medium-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:c70584d7480e8372739e4d4d8504136e14164460338ca436ee891dfa0b8990fd</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/high-2-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/medium-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/arm64</td></tr>
-<tr><td>size</td><td>17 MB</td></tr>
-<tr><td>packages</td><td>175</td></tr>
+<tr><td>size</td><td>52 MB</td></tr>
+<tr><td>packages</td><td>213</td></tr>
 </table>
 </details></table>
 </details>
@@ -18,7 +18,7 @@ hide_table_of_contents: true
 <small><code>pkg:golang/github.com/docker/cli@29.7.2%2Bincompatible</code></small><br/>
 
 ```dockerfile
-# tw-init.Dockerfile (22:22)
+# tw-toolkit.Dockerfile (34:34)
 COPY --from=build /app/testworkflow-init /init
 ```
 
@@ -48,7 +48,7 @@ Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Es
 <small><code>pkg:golang/google.golang.org/grpc@1.84.0</code></small><br/>
 
 ```dockerfile
-# tw-init.Dockerfile (22:22)
+# tw-toolkit.Dockerfile (34:34)
 COPY --from=build /app/testworkflow-init /init
 ```
 
@@ -78,7 +78,7 @@ In google.golang.org/grpc, servers configured with xDS routing can panic when pr
 <small><code>pkg:golang/golang.org/x/crypto@0.57.0</code></small><br/>
 
 ```dockerfile
-# tw-init.Dockerfile (22:22)
+# tw-toolkit.Dockerfile (34:34)
 COPY --from=build /app/testworkflow-init /init
 ```
 
@@ -108,7 +108,7 @@ If you are required to interoperate with OpenPGP systems and need a maintained p
 <small><code>pkg:golang/github.com/chrismellard/docker-credential-acr-env@0.0.0-20230304212654-82a0ddb27589</code></small><br/>
 
 ```dockerfile
-# tw-init.Dockerfile (22:22)
+# tw-toolkit.Dockerfile (34:34)
 COPY --from=build /app/testworkflow-init /init
 ```
 

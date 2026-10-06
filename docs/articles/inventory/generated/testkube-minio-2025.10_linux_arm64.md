@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:e75fb3348827cf5a32b19757114e412c26417de33f1a03919bbd90d1e11b8952</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 19" src="https://img.shields.io/badge/critical-19-8b1924"/> <img alt="high: 93" src="https://img.shields.io/badge/high-93-e25d68"/> <img alt="medium: 72" src="https://img.shields.io/badge/medium-72-fbb552"/> <img alt="low: 64" src="https://img.shields.io/badge/low-64-fce1a9"/> <img alt="unspecified: 10" src="https://img.shields.io/badge/unspecified-10-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:e75fb3348827cf5a32b19757114e412c26417de33f1a03919bbd90d1e11b8952</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 21" src="https://img.shields.io/badge/critical-21-8b1924"/> <img alt="high: 94" src="https://img.shields.io/badge/high-94-e25d68"/> <img alt="medium: 72" src="https://img.shields.io/badge/medium-72-fbb552"/> <img alt="low: 65" src="https://img.shields.io/badge/low-65-fce1a9"/> <img alt="unspecified: 10" src="https://img.shields.io/badge/unspecified-10-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/arm64</td></tr>
 <tr><td>size</td><td>85 MB</td></tr>
 <tr><td>packages</td><td>416</td></tr>
@@ -339,6 +339,446 @@ SSH servers which use CertChecker as a public key callback without setting IsUse
 The golang.org/x/crypto/openpgp package is unsafe by design, has numerous known security issues, is not maintained, and should not be used.
 
 If you are required to interoperate with OpenPGP systems and need a maintained package, consider github.com/ProtonMail/go-crypto/openpgp which is a maintained fork that aims to be a drop-in replacement for this package.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 4" src="https://img.shields.io/badge/C-4-8b1924"/> <img alt="high: 5" src="https://img.shields.io/badge/H-5-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/M-4-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/U-2-lightgrey"/><strong>perl</strong> <code>5.36.0-7+deb12u3</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/perl@5.36.0-7%2Bdeb12u3?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (44:44)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-8376?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.36.0-7%2Bdeb12u4"><img alt="critical : CVE--2026--8376" src="https://img.shields.io/badge/CVE--2026--8376-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;5.36.0-7+deb12u4</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.36.0-7+deb12u4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.481%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Perl versions before 5.40.5-RC1, from 5.41.0 before 5.42.3-RC1, from 5.43.0 before 5.43.11 have a heap buffer overflow when compiling regular expressions with a repeated fixed string on 32-bit builds.  Perl_study_chunk in regcomp_study.c checked the size of the joined substring buffer in characters rather than bytes. For a quantified fixed substring with a large minimum count, the byte length mincount * l could overflow SSize_t, producing an undersized SvGROW allocation; the subsequent copy writes past the end of the buffer.  A caller that compiles an attacker-controlled regular expression on a 32-bit perl build triggers a heap buffer overflow at compile time.
+
+---
+- perl 5.40.1-8 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1137345)
+[trixie] - perl 5.40.1-6+deb13u1
+[bullseye] - perl <postponed> (Minor issue; can be fixed in point release)
+https://github.com/Perl/perl5/pull/24433
+https://lists.security.metacpan.org/cve-announce/msg/40396161/
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-42496?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.36.0-7%2Bdeb12u4"><img alt="critical : CVE--2026--42496" src="https://img.shields.io/badge/CVE--2026--42496-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;5.36.0-7+deb12u4</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.36.0-7+deb12u4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.430%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Archive::Tar versions before 3.08 for Perl extract symlinks with attacker controlled targets outside the extraction directory.  _make_special_file() passes the tar header's linkname to symlink() without validating it against absolute paths or .. segments. The secure-extract mode check that guards regular file extraction does not cover the symlink target.  A subsequent open through the extracted name reads or writes the attacker chosen path.
+
+---
+[experimental] - perl 5.44.0-1
+- perl 5.42.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138860)
+[trixie] - perl 5.40.1-6+deb13u1
+https://lists.security.metacpan.org/cve-announce/msg/40396459/
+https://github.com/jib/archive-tar-new/commit/17c873492a05eddc0de18c1485e0b2cccd5a9158 (3.08)
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-13221?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.36.0-7%2Bdeb12u4"><img alt="critical : CVE--2026--13221" src="https://img.shields.io/badge/CVE--2026--13221-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;5.36.0-7+deb12u4</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.36.0-7+deb12u4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.432%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Perl versions before 5.40.5-RC1, from 5.41.0 before 5.42.3-RC1, from 5.43.0 before 5.43.10 produce silently incorrect regular expression matches when an alternation of more than 65535 fixed string branches is compiled into a trie in Perl_study_chunk.  When such branches are combined into a trie, the delta between the first branch and the shared tail is stored in a 16-bit field. A branch count above 65535 overflows the field, and the trie's match decision table is truncated with no warning or error.  A pattern of this shape produces false positive matches (matching strings it should not) and false negative matches (failing to match strings it should). When such a pattern gates an access or filtering decision, the result is wrong.
+
+---
+[experimental] - perl 5.44.0-1
+- perl 5.42.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1142037)
+[trixie] - perl 5.40.1-6+deb13u1
+https://lists.security.metacpan.org/cve-announce/msg/41780104/
+https://github.com/Perl/perl5/issues/23388
+Introduced with: https://github.com/Perl/perl5/commit/acababb42be12ff2986b73c1bfa963b70bb5d54e (v5.37.10)
+Fixed by: https://github.com/Perl/perl5/commit/03f74bbbd3a68350d926ee93d56ee4808c28c4c7 (v5.43.10)
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-12087?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.36.0-7%2Bdeb12u4"><img alt="critical : CVE--2026--12087" src="https://img.shields.io/badge/CVE--2026--12087-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;5.36.0-7+deb12u4</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.36.0-7+deb12u4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.374%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Socket versions before 2.041 for Perl have an out-of-bounds heap read.  In Socket.xs, pack_ip_mreq_source() checks the length of its source argument before the argument is read, so the check tests the byte length carried over from the preceding multiaddr argument instead. Both addresses occupy a 4-byte field, so a valid multiaddr lets a source of any length pass the check, and the source is then copied into the 4-byte imr_sourceaddr field with a fixed-size copy. A source shorter than 4 bytes is not rejected, and the copy reads up to 3 bytes past the end of its buffer.  Calling pack_ip_mreq_source() with a source value shorter than 4 bytes copies adjacent heap memory into the returned packed structure.
+
+---
+- libsocket-perl 2.041-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1146063)
+[trixie] - libsocket-perl 2.038-1+deb13u1
+[bookworm] - libsocket-perl <postponed> (Minor issue; up-to-3-byte heap over-read, only reachable when a script passes attacker-controlled source to pack_ip_mreq_source())
+[bullseye] - libsocket-perl <postponed> (Minor issue; up-to-3-byte heap over-read, only reachable when a script passes attacker-controlled source to pack_ip_mreq_source())
+[experimental] - perl 5.44.0-1
+- perl 5.42.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1140152)
+[trixie] - perl 5.40.1-6+deb13u1
+https://lists.security.metacpan.org/cve-announce/msg/41020451/
+Fixed by: https://github.com/Perl/perl5/commit/de19a0b0ad1900fef976c5c1400bd8f11ec6c6cb (v5.43.11)
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-57432?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.36.0-7%2Bdeb12u4"><img alt="high : CVE--2026--57432" src="https://img.shields.io/badge/CVE--2026--57432-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;5.36.0-7+deb12u4</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.36.0-7+deb12u4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.211%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Perl versions before 5.40.5-RC1, from 5.41.0 before 5.42.3-RC1, from 5.43.0 before 5.43.11 have an integer overflow in S_measure_struct leading to an out-of-bounds heap read in pack and unpack.  S_measure_struct adds each item's size times its repeat count to a running total with no overflow check, so a large repeat count in a pack or unpack template wraps the signed SSize_t total negative. The @, X, and x position codes then guard their moves with a signed length comparison that passes when the length is negative, advancing the buffer pointer out of bounds.  A template derived from untrusted input can read heap memory past the buffer and return it to the caller.
+
+---
+- perl 5.40.1-8 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138905; bug #1142036)
+[trixie] - perl 5.40.1-6+deb13u1
+https://lists.security.metacpan.org/cve-announce/msg/41780102/
+Fixed by: https://github.com/Perl/perl5/commit/5f7eb6bbbe0510964e3fb1d6bb691e5445913e55 (v5.43.11)
+Fixed by: https://github.com/Perl/perl5/commit/40754edc72dd3e513d758153c0e2f0215897740e (v5.43.11)
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-82560?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="high : CVE--2026--82560" src="https://img.shields.io/badge/CVE--2026--82560-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.630%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Pod::Text versions before 6.1.1 for Perl allow CPU and memory exhaustion formatting a POD document whose =over nesting drives the margin to the output width.  Each =over adds its indent to the margin, which wrap() subtracts from the output width to get the space available for text. When that space reaches zero, the line-splitting substitution matches the empty string, and the loop consumes no input while appending the margin padding on every pass.  Formatting an attacker-supplied POD document never returns, and the output grows until memory is exhausted.
+
+---
+- perl <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1148455)
+[trixie] - perl <no-dsa> (Minor issue)
+- podlators-perl <removed>
+https://lists.security.metacpan.org/cve-announce/msg/43682367/
+Fixed by: https://github.com/rra/podlators/commit/70510174f69eb54aa6d617bde4e1402cd9b7c61f (release/v6.1.1)
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-48959?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.36.0-7%2Bdeb12u4"><img alt="high : CVE--2026--48959" src="https://img.shields.io/badge/CVE--2026--48959-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;5.36.0-7+deb12u4</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.36.0-7+deb12u4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.609%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+IO::Uncompress::Unzip versions before 2.220 for Perl allow CPU exhaustion via per-byte read loop in fastForward.  fastForward() compares length $offset (the digit count of the offset, 1 to 19) against the chunk size $c instead of $offset itself, so $c shrinks from 16 KiB to 1-19 bytes per iteration.  Extracting a named entry from an attacker supplied zip via IO::Uncompress::Unzip->new($zip, Name => $target) drives a per-byte read loop scaling with the entry's compressed size, up to the non-Zip64 4 GiB cap.
+
+---
+- libio-compress-perl 2.220-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138051)
+[trixie] - libio-compress-perl 2.213-1+deb13u1
+- perl 5.40.1-8 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138856)
+[trixie] - perl 5.40.1-6+deb13u1
+https://lists.security.metacpan.org/cve-announce/msg/40434381/
+Fixed by: https://github.com/pmqs/IO-Compress/commit/68db44076f4c1a86a2ffe53a958eac6cabaf72e2 (v2.220)
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-42497?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.36.0-7%2Bdeb12u4"><img alt="high : CVE--2026--42497" src="https://img.shields.io/badge/CVE--2026--42497-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;5.36.0-7+deb12u4</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.36.0-7+deb12u4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.471%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Archive::Tar versions before 3.08 for Perl extract hardlinks to attacker controlled paths outside the extraction directory.  _make_special_file() passes the tar header's linkname to link() without validating it against absolute paths or .. segments, creating a hardlink that shares the victim file's inode.  A subsequent write through the extracted name modifies the victim file, and the post-extraction chmod, chown, and utime block in _extract_file() (guarded only against symlinks via -l) applies the tar header's mode, owner, and timestamps to the shared inode during extraction alone.
+
+---
+[experimental] - perl 5.44.0-1
+- perl 5.42.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138859)
+[trixie] - perl 5.40.1-6+deb13u1
+https://lists.security.metacpan.org/cve-announce/msg/40396457/
+https://github.com/jib/archive-tar-new/commit/17c873492a05eddc0de18c1485e0b2cccd5a9158 (3.08)
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-48962?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.36.0-7%2Bdeb12u4"><img alt="high : CVE--2026--48962" src="https://img.shields.io/badge/CVE--2026--48962-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;5.36.0-7+deb12u4</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.36.0-7+deb12u4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.495%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+IO::Compress versions before 2.220 for Perl can execute arbitrary code in File::GlobMapper via an attacker-controlled output glob.  _parseOutputGlob() wraps the caller-supplied output glob string in double quotes and stores it in the parser state; _getFiles() then runs the stored expression through eval STRING. A literal double quote in the output glob closes the dquote wrapper, and the characters that follow are evaluated as Perl.  Arbitrary Perl in the output glob executes at the calling process's privilege.
+
+---
+- libio-compress-perl 2.220-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138055)
+[trixie] - libio-compress-perl 2.213-1+deb13u1
+- perl 5.40.1-8 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138854)
+[trixie] - perl 5.40.1-6+deb13u1
+https://lists.security.metacpan.org/cve-announce/msg/40434385/
+Fixed by: https://github.com/pmqs/IO-Compress/commit/f2db247bf90d4cc7ee2710be384946081f3b4610 (v2.220)
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-7010?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.36.0-7%2Bdeb12u4"><img alt="medium : CVE--2026--7010" src="https://img.shields.io/badge/CVE--2026--7010-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;5.36.0-7+deb12u4</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.36.0-7+deb12u4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.360%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+HTTP::Tiny versions before 0.093 for Perl do not validate CRLF in HTTP request lines or control field header values.  The unvalidated inputs are the method and URI in the request line, the URL host that becomes the `Host:` header, and HTTP/1.1 control data field values.  An attacker who controls one of these inputs, for example a user supplied URL passed to a webhook or URL fetch endpoint, can inject additional headers and smuggle requests to the upstream server.
+
+---
+- libhttp-tiny-perl 0.092-2 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1146064)
+[trixie] - libhttp-tiny-perl 0.090-1+deb13u1
+[bookworm] - libhttp-tiny-perl <no-dsa> (Minor issue)
+- perl 5.40.1-8 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138858)
+[trixie] - perl 5.40.1-6+deb13u1
+https://lists.security.metacpan.org/cve-announce/msg/39952806/
+Fixed by: https://github.com/Perl-Toolchain-Gang/HTTP-Tiny/commit/d73c7651e82ace02693842df55928b6c3ae7c38d (release-0.093)
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-15534?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="medium : CVE--2026--15534" src="https://img.shields.io/badge/CVE--2026--15534-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.256%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Perl versions through 5.45.1 have out-of-bounds heap reads and writes during regular expression matching via an undersized superlinear cache in S_regmatch.  The regex engine's superlinear cache holds one bit per subject position for each participating WHILEM node, so the bit count is the subject length plus one times the number of nodes. Nothing checks that product for positive overflow of the signed 32-bit count: a 286331153 byte subject matched against a pattern with 15 participating nodes stores the count as 14, leaving a two byte cache. The cache is then indexed from the real match position and node number, so reads go past the end of the allocation, and on failure CACHEsayNO sets a bit past it.  A caller that matches an attacker controlled subject of this size against a pattern of this shape can crash the process or corrupt heap memory.
+
+---
+- perl <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1144413)
+[trixie] - perl <postponed> (Wait for exposure unstable and coordinate with Perl maintainers)
+https://lists.security.metacpan.org/cve-announce/msg/42536248/
+Fixed by: https://github.com/Perl/perl5/commit/568e6fd238867bb9e99fa3f47cba3169009239e0
+Fixed by: https://github.com/Perl/perl5/commit/54cf3d44cbbedd17d774e9a37921963e8fd5d0cb
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2025-15649?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.36.0-7%2Bdeb12u4"><img alt="medium : CVE--2025--15649" src="https://img.shields.io/badge/CVE--2025--15649-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;5.36.0-7+deb12u4</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.36.0-7+deb12u4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.127%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+IO::Uncompress::Unzip versions before 2.215 for Perl propagate uncaught exception when parsing zip header with malformed DOS date.  _dosToUnixTime() decodes the local-file-header last-modification date field and calls Time::Local::timelocal() without an eval guard. A header whose date field decodes to an out-of-range month, day, or hour causes timelocal() to die.  The exception propagates out of IO::Uncompress::Unzip->new($file) where callers expect undef plus $UnzipError.
+
+---
+- libio-compress-perl 2.217-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1146065)
+[trixie] - libio-compress-perl 2.213-1+deb13u1
+- perl 5.40.1-8 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138863)
+[trixie] - perl 5.40.1-6+deb13u1
+https://lists.security.metacpan.org/cve-announce/msg/40434380/
+https://github.com/pmqs/IO-Compress/issues/65
+Fixed by: https://github.com/pmqs/IO-Compress/commit/fd28c1d2374eee9811f6d0c5bddc0957abdf1da8 (v2.215)
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-19487?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.36.0-7%2Bdeb12u4"><img alt="medium : CVE--2026--19487" src="https://img.shields.io/badge/CVE--2026--19487-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;5.36.0-7+deb12u4</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.36.0-7+deb12u4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.418%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Perl versions from 5.9.4 before 5.41.9 produce incorrect regular expression match results when a stale failure flag ends the Aho-Corasick prescan early in S_find_byclass.  The prescan walks the subject for positions where the full pattern could match, and the engine tries it from the leftmost one recorded. A failing transition sets the failed flag, and a later successful transition does not clear it, so the prescan reads the stale flag as a failure and stops before it can record a candidate that starts earlier. It takes a subject where one candidate is recorded and a later character then forces a fallback through a fail link that succeeds.  Example:    "ABCDE" =~ m/ABCF|BCDE|C/;    # matches C at offset 2, not BCDE   "ABCDE" =~ m/ABCF|BCDE|C(G)/; # no match, BCDE missed  An alternation like this can miss input it should match, or match it on the wrong branch, so an access or filtering decision made from the result can be wrong.
+
+---
+- perl 5.42.2-3 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1144668)
+[trixie] - perl 5.40.1-6+deb13u1
+https://lists.security.metacpan.org/cve-announce/msg/42658992/
+https://github.com/Perl/perl5/issues/22892
+Fixed by: https://github.com/Perl/perl5/commit/1a21abacaf6f684928bae8baaa153733c8c238eb (v5.41.9)
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2023-31486?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2023--31486" src="https://img.shields.io/badge/CVE--2023--31486-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>1.742%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>77th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+HTTP::Tiny before 0.083, a Perl core module since 5.13.9 and available standalone on CPAN, has an insecure default TLS configuration where users must opt in to verify certificates.
+
+---
+- libhttp-tiny-perl 0.088-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=962407; unimportant)
+[experimental] - perl 5.38.0~rc2-1
+- perl 5.38.2-2 (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=954089)
+https://www.openwall.com/lists/oss-security/2023/04/18/14
+https://github.com/chansen/p5-http-tiny/issues/134
+https://blog.hackeriet.no/perl-http-tiny-insecure-tls-default-affects-cpan-modules/
+https://hackeriet.github.io/cpan-http-tiny-overview/
+Applications need to explicitly opt in to enable verification.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2011-4116?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2011--4116" src="https://img.shields.io/badge/CVE--2011--4116-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.524%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+_is_safe in the File::Temp module for Perl does not properly handle symlinks.
+
+---
+- perl <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=776268)
+http://thread.gmane.org/gmane.comp.security.oss.general/6174/focus=6177
+https://github.com/Perl-Toolchain-Gang/File-Temp/issues/14
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-7017?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.36.0-7%2Bdeb12u4"><img alt="unspecified : CVE--2026--7017" src="https://img.shields.io/badge/CVE--2026--7017-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;5.36.0-7+deb12u4</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.36.0-7+deb12u4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.247%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+HTTP::Tiny versions before 0.095 for Perl forward credential headers to cross-origin redirect targets.  When the server returns a 3xx redirect, `_maybe_redirect` follows the `Location:` header and `_prepare_headers_and_cb` re-merges the caller's `headers` argument into the new request, without checking whether the redirect target shares an origin with the original URL. Caller-supplied `Authorization`, `Cookie` and `Proxy-Authorization` headers are therefore re-sent to whatever host the redirect names, across scheme, host or port boundaries, and including `https` to `http` downgrades that expose them in plaintext on the wire.  The HTTP::Tiny POD note that "Authorization headers will not be included in a redirected request" applied only to the URL-userinfo Basic-auth path, not to headers passed explicitly by the caller.
+
+---
+- libhttp-tiny-perl 0.096-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1141638)
+[trixie] - libhttp-tiny-perl 0.090-1+deb13u1
+[bookworm] - libhttp-tiny-perl <postponed> (Minor issue; leak requires caller-supplied credential headers and an attacker-influenced redirect)
+[experimental] - perl 5.44.0-1
+- perl 5.42.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1141639)
+[trixie] - perl 5.40.1-6+deb13u1
+https://lists.security.metacpan.org/cve-announce/msg/41618211/
+https://github.com/Perl-Toolchain-Gang/HTTP-Tiny/pull/36
+Fixed by: https://github.com/Perl-Toolchain-Gang/HTTP-Tiny/commit/84984ef3930ddd4afcf5eb83b40d3cee200739c3 (release-0.095)
+Fixed by: https://github.com/Perl-Toolchain-Gang/HTTP-Tiny/commit/e7a03aedf2395158f2b0d3bad2df943349227bb3 (release-0.095)
+Fixed by: https://github.com/Perl-Toolchain-Gang/HTTP-Tiny/commit/8f32ca89e21c3ad0422adc698fa6ad17a193f55f (release-0.095)
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-57433?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.36.0-7%2Bdeb12u4"><img alt="unspecified : CVE--2026--57433" src="https://img.shields.io/badge/CVE--2026--57433-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;5.36.0-7+deb12u4</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.36.0-7+deb12u4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.357%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Storable versions before 3.41 for Perl have a signed integer overflow when deserializing a crafted SX_HOOK record.  retrieve_hook_common reads a signed 32-bit item count from an SX_HOOK record and calls av_extend with that count plus one. A count of I32_MAX wraps the addition to a negative value.  A crafted blob passed to thaw or retrieve triggers the overflow; av_extend receives the negative count and dies with a panic, terminating the deserialization.
+
+---
+- perl 5.40.1-8 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138906; bug #1142035)
+[trixie] - perl 5.40.1-6+deb13u1
+- libstorable-perl <removed>
+https://lists.security.metacpan.org/cve-announce/msg/41780100/
+Fixed by: https://github.com/Perl/perl5/commit/e4f681784bcdeaa91ff02a2fa4cdcae5c46779d7 (v5.43.11)
 
 </blockquote>
 </details>
@@ -1800,7 +2240,7 @@ brew install minio/aistor/minio
 <tr><td>CVSS Score</td><td><code>9.1</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.541%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>43rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -2590,374 +3030,6 @@ If upgrading is not immediately possible:
 - [CWE-22 — Improper Limitation of a Pathname to a Restricted Directory](https://cwe.mitre.org/data/definitions/22.html)
 - [CVE-2022-35919 — MinIO admin-authenticated path traversal in server-update endpoint (same class, different channel)](https://github.com/minio/minio/security/advisories/GHSA-gr9v-6pcm-rqvg)
 - [MinIO AIStor](https://min.io/aistor)
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 2" src="https://img.shields.io/badge/C-2-8b1924"/> <img alt="high: 4" src="https://img.shields.io/badge/H-4-e25d68"/> <img alt="medium: 4" src="https://img.shields.io/badge/M-4-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/U-2-lightgrey"/><strong>perl</strong> <code>5.36.0-7+deb12u3</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/perl@5.36.0-7%2Bdeb12u3?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (44:44)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-13221?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="critical : CVE--2026--13221" src="https://img.shields.io/badge/CVE--2026--13221-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.432%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Perl versions before 5.40.5-RC1, from 5.41.0 before 5.42.3-RC1, from 5.43.0 before 5.43.10 produce silently incorrect regular expression matches when an alternation of more than 65535 fixed string branches is compiled into a trie in Perl_study_chunk.  When such branches are combined into a trie, the delta between the first branch and the shared tail is stored in a 16-bit field. A branch count above 65535 overflows the field, and the trie's match decision table is truncated with no warning or error.  A pattern of this shape produces false positive matches (matching strings it should not) and false negative matches (failing to match strings it should). When such a pattern gates an access or filtering decision, the result is wrong.
-
----
-[experimental] - perl 5.44.0-1
-- perl 5.42.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1142037)
-[trixie] - perl 5.40.1-6+deb13u1
-https://lists.security.metacpan.org/cve-announce/msg/41780104/
-https://github.com/Perl/perl5/issues/23388
-Introduced with: https://github.com/Perl/perl5/commit/acababb42be12ff2986b73c1bfa963b70bb5d54e (v5.37.10)
-Fixed by: https://github.com/Perl/perl5/commit/03f74bbbd3a68350d926ee93d56ee4808c28c4c7 (v5.43.10)
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-12087?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="critical : CVE--2026--12087" src="https://img.shields.io/badge/CVE--2026--12087-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.374%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Socket versions before 2.041 for Perl have an out-of-bounds heap read.  In Socket.xs, pack_ip_mreq_source() checks the length of its source argument before the argument is read, so the check tests the byte length carried over from the preceding multiaddr argument instead. Both addresses occupy a 4-byte field, so a valid multiaddr lets a source of any length pass the check, and the source is then copied into the 4-byte imr_sourceaddr field with a fixed-size copy. A source shorter than 4 bytes is not rejected, and the copy reads up to 3 bytes past the end of its buffer.  Calling pack_ip_mreq_source() with a source value shorter than 4 bytes copies adjacent heap memory into the returned packed structure.
-
----
-- libsocket-perl 2.041-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1146063)
-[trixie] - libsocket-perl 2.038-1+deb13u1
-[bookworm] - libsocket-perl <postponed> (Minor issue; up-to-3-byte heap over-read, only reachable when a script passes attacker-controlled source to pack_ip_mreq_source())
-[bullseye] - libsocket-perl <postponed> (Minor issue; up-to-3-byte heap over-read, only reachable when a script passes attacker-controlled source to pack_ip_mreq_source())
-[experimental] - perl 5.44.0-1
-- perl 5.42.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1140152)
-[trixie] - perl 5.40.1-6+deb13u1
-https://lists.security.metacpan.org/cve-announce/msg/41020451/
-Fixed by: https://github.com/Perl/perl5/commit/de19a0b0ad1900fef976c5c1400bd8f11ec6c6cb (v5.43.11)
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-57432?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="high : CVE--2026--57432" src="https://img.shields.io/badge/CVE--2026--57432-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.211%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Perl versions before 5.40.5-RC1, from 5.41.0 before 5.42.3-RC1, from 5.43.0 before 5.43.11 have an integer overflow in S_measure_struct leading to an out-of-bounds heap read in pack and unpack.  S_measure_struct adds each item's size times its repeat count to a running total with no overflow check, so a large repeat count in a pack or unpack template wraps the signed SSize_t total negative. The @, X, and x position codes then guard their moves with a signed length comparison that passes when the length is negative, advancing the buffer pointer out of bounds.  A template derived from untrusted input can read heap memory past the buffer and return it to the caller.
-
----
-- perl 5.40.1-8 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138905; bug #1142036)
-[trixie] - perl 5.40.1-6+deb13u1
-https://lists.security.metacpan.org/cve-announce/msg/41780102/
-Fixed by: https://github.com/Perl/perl5/commit/5f7eb6bbbe0510964e3fb1d6bb691e5445913e55 (v5.43.11)
-Fixed by: https://github.com/Perl/perl5/commit/40754edc72dd3e513d758153c0e2f0215897740e (v5.43.11)
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-82560?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="high : CVE--2026--82560" src="https://img.shields.io/badge/CVE--2026--82560-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.630%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>48th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Pod::Text versions before 6.1.1 for Perl allow CPU and memory exhaustion formatting a POD document whose =over nesting drives the margin to the output width.  Each =over adds its indent to the margin, which wrap() subtracts from the output width to get the space available for text. When that space reaches zero, the line-splitting substitution matches the empty string, and the loop consumes no input while appending the margin padding on every pass.  Formatting an attacker-supplied POD document never returns, and the output grows until memory is exhausted.
-
----
-- perl <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1148455)
-[trixie] - perl <no-dsa> (Minor issue)
-- podlators-perl <removed>
-https://lists.security.metacpan.org/cve-announce/msg/43682367/
-Fixed by: https://github.com/rra/podlators/commit/70510174f69eb54aa6d617bde4e1402cd9b7c61f (release/v6.1.1)
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-48959?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="high : CVE--2026--48959" src="https://img.shields.io/badge/CVE--2026--48959-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.609%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-IO::Uncompress::Unzip versions before 2.220 for Perl allow CPU exhaustion via per-byte read loop in fastForward.  fastForward() compares length $offset (the digit count of the offset, 1 to 19) against the chunk size $c instead of $offset itself, so $c shrinks from 16 KiB to 1-19 bytes per iteration.  Extracting a named entry from an attacker supplied zip via IO::Uncompress::Unzip->new($zip, Name => $target) drives a per-byte read loop scaling with the entry's compressed size, up to the non-Zip64 4 GiB cap.
-
----
-- libio-compress-perl 2.220-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138051)
-[trixie] - libio-compress-perl 2.213-1+deb13u1
-- perl 5.40.1-8 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138856)
-[trixie] - perl 5.40.1-6+deb13u1
-https://lists.security.metacpan.org/cve-announce/msg/40434381/
-Fixed by: https://github.com/pmqs/IO-Compress/commit/68db44076f4c1a86a2ffe53a958eac6cabaf72e2 (v2.220)
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-48962?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="high : CVE--2026--48962" src="https://img.shields.io/badge/CVE--2026--48962-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.495%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-IO::Compress versions before 2.220 for Perl can execute arbitrary code in File::GlobMapper via an attacker-controlled output glob.  _parseOutputGlob() wraps the caller-supplied output glob string in double quotes and stores it in the parser state; _getFiles() then runs the stored expression through eval STRING. A literal double quote in the output glob closes the dquote wrapper, and the characters that follow are evaluated as Perl.  Arbitrary Perl in the output glob executes at the calling process's privilege.
-
----
-- libio-compress-perl 2.220-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138055)
-[trixie] - libio-compress-perl 2.213-1+deb13u1
-- perl 5.40.1-8 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138854)
-[trixie] - perl 5.40.1-6+deb13u1
-https://lists.security.metacpan.org/cve-announce/msg/40434385/
-Fixed by: https://github.com/pmqs/IO-Compress/commit/f2db247bf90d4cc7ee2710be384946081f3b4610 (v2.220)
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-7010?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="medium : CVE--2026--7010" src="https://img.shields.io/badge/CVE--2026--7010-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.360%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-HTTP::Tiny versions before 0.093 for Perl do not validate CRLF in HTTP request lines or control field header values.  The unvalidated inputs are the method and URI in the request line, the URL host that becomes the `Host:` header, and HTTP/1.1 control data field values.  An attacker who controls one of these inputs, for example a user supplied URL passed to a webhook or URL fetch endpoint, can inject additional headers and smuggle requests to the upstream server.
-
----
-- libhttp-tiny-perl 0.092-2 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1146064)
-[trixie] - libhttp-tiny-perl 0.090-1+deb13u1
-[bookworm] - libhttp-tiny-perl <no-dsa> (Minor issue)
-- perl 5.40.1-8 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138858)
-[trixie] - perl 5.40.1-6+deb13u1
-https://lists.security.metacpan.org/cve-announce/msg/39952806/
-Fixed by: https://github.com/Perl-Toolchain-Gang/HTTP-Tiny/commit/d73c7651e82ace02693842df55928b6c3ae7c38d (release-0.093)
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-15534?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="medium : CVE--2026--15534" src="https://img.shields.io/badge/CVE--2026--15534-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.256%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Perl versions through 5.45.1 have out-of-bounds heap reads and writes during regular expression matching via an undersized superlinear cache in S_regmatch.  The regex engine's superlinear cache holds one bit per subject position for each participating WHILEM node, so the bit count is the subject length plus one times the number of nodes. Nothing checks that product for positive overflow of the signed 32-bit count: a 286331153 byte subject matched against a pattern with 15 participating nodes stores the count as 14, leaving a two byte cache. The cache is then indexed from the real match position and node number, so reads go past the end of the allocation, and on failure CACHEsayNO sets a bit past it.  A caller that matches an attacker controlled subject of this size against a pattern of this shape can crash the process or corrupt heap memory.
-
----
-- perl <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1144413)
-[trixie] - perl <postponed> (Wait for exposure unstable and coordinate with Perl maintainers)
-https://lists.security.metacpan.org/cve-announce/msg/42536248/
-Fixed by: https://github.com/Perl/perl5/commit/568e6fd238867bb9e99fa3f47cba3169009239e0
-Fixed by: https://github.com/Perl/perl5/commit/54cf3d44cbbedd17d774e9a37921963e8fd5d0cb
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2025-15649?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="medium : CVE--2025--15649" src="https://img.shields.io/badge/CVE--2025--15649-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.127%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-IO::Uncompress::Unzip versions before 2.215 for Perl propagate uncaught exception when parsing zip header with malformed DOS date.  _dosToUnixTime() decodes the local-file-header last-modification date field and calls Time::Local::timelocal() without an eval guard. A header whose date field decodes to an out-of-range month, day, or hour causes timelocal() to die.  The exception propagates out of IO::Uncompress::Unzip->new($file) where callers expect undef plus $UnzipError.
-
----
-- libio-compress-perl 2.217-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1146065)
-[trixie] - libio-compress-perl 2.213-1+deb13u1
-- perl 5.40.1-8 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138863)
-[trixie] - perl 5.40.1-6+deb13u1
-https://lists.security.metacpan.org/cve-announce/msg/40434380/
-https://github.com/pmqs/IO-Compress/issues/65
-Fixed by: https://github.com/pmqs/IO-Compress/commit/fd28c1d2374eee9811f6d0c5bddc0957abdf1da8 (v2.215)
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-19487?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="medium : CVE--2026--19487" src="https://img.shields.io/badge/CVE--2026--19487-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.418%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Perl versions from 5.9.4 before 5.41.9 produce incorrect regular expression match results when a stale failure flag ends the Aho-Corasick prescan early in S_find_byclass.  The prescan walks the subject for positions where the full pattern could match, and the engine tries it from the leftmost one recorded. A failing transition sets the failed flag, and a later successful transition does not clear it, so the prescan reads the stale flag as a failure and stops before it can record a candidate that starts earlier. It takes a subject where one candidate is recorded and a later character then forces a fallback through a fail link that succeeds.  Example:    "ABCDE" =~ m/ABCF|BCDE|C/;    # matches C at offset 2, not BCDE   "ABCDE" =~ m/ABCF|BCDE|C(G)/; # no match, BCDE missed  An alternation like this can miss input it should match, or match it on the wrong branch, so an access or filtering decision made from the result can be wrong.
-
----
-- perl 5.42.2-3 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1144668)
-[trixie] - perl <no-dsa> (Minor issue)
-https://lists.security.metacpan.org/cve-announce/msg/42658992/
-https://github.com/Perl/perl5/issues/22892
-Fixed by: https://github.com/Perl/perl5/commit/1a21abacaf6f684928bae8baaa153733c8c238eb (v5.41.9)
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2023-31486?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2023--31486" src="https://img.shields.io/badge/CVE--2023--31486-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>1.742%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>77th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-HTTP::Tiny before 0.083, a Perl core module since 5.13.9 and available standalone on CPAN, has an insecure default TLS configuration where users must opt in to verify certificates.
-
----
-- libhttp-tiny-perl 0.088-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=962407; unimportant)
-[experimental] - perl 5.38.0~rc2-1
-- perl 5.38.2-2 (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=954089)
-https://www.openwall.com/lists/oss-security/2023/04/18/14
-https://github.com/chansen/p5-http-tiny/issues/134
-https://blog.hackeriet.no/perl-http-tiny-insecure-tls-default-affects-cpan-modules/
-https://hackeriet.github.io/cpan-http-tiny-overview/
-Applications need to explicitly opt in to enable verification.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2011-4116?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2011--4116" src="https://img.shields.io/badge/CVE--2011--4116-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.524%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-_is_safe in the File::Temp module for Perl does not properly handle symlinks.
-
----
-- perl <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=776268)
-http://thread.gmane.org/gmane.comp.security.oss.general/6174/focus=6177
-https://github.com/Perl-Toolchain-Gang/File-Temp/issues/14
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-7017?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="unspecified : CVE--2026--7017" src="https://img.shields.io/badge/CVE--2026--7017-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.247%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-HTTP::Tiny versions before 0.095 for Perl forward credential headers to cross-origin redirect targets.  When the server returns a 3xx redirect, `_maybe_redirect` follows the `Location:` header and `_prepare_headers_and_cb` re-merges the caller's `headers` argument into the new request, without checking whether the redirect target shares an origin with the original URL. Caller-supplied `Authorization`, `Cookie` and `Proxy-Authorization` headers are therefore re-sent to whatever host the redirect names, across scheme, host or port boundaries, and including `https` to `http` downgrades that expose them in plaintext on the wire.  The HTTP::Tiny POD note that "Authorization headers will not be included in a redirected request" applied only to the URL-userinfo Basic-auth path, not to headers passed explicitly by the caller.
-
----
-- libhttp-tiny-perl 0.096-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1141638)
-[trixie] - libhttp-tiny-perl 0.090-1+deb13u1
-[bookworm] - libhttp-tiny-perl <postponed> (Minor issue; leak requires caller-supplied credential headers and an attacker-influenced redirect)
-[experimental] - perl 5.44.0-1
-- perl 5.42.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1141639)
-[trixie] - perl 5.40.1-6+deb13u1
-https://lists.security.metacpan.org/cve-announce/msg/41618211/
-https://github.com/Perl-Toolchain-Gang/HTTP-Tiny/pull/36
-Fixed by: https://github.com/Perl-Toolchain-Gang/HTTP-Tiny/commit/84984ef3930ddd4afcf5eb83b40d3cee200739c3 (release-0.095)
-Fixed by: https://github.com/Perl-Toolchain-Gang/HTTP-Tiny/commit/e7a03aedf2395158f2b0d3bad2df943349227bb3 (release-0.095)
-Fixed by: https://github.com/Perl-Toolchain-Gang/HTTP-Tiny/commit/8f32ca89e21c3ad0422adc698fa6ad17a193f55f (release-0.095)
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-57433?s=debian&n=perl&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="unspecified : CVE--2026--57433" src="https://img.shields.io/badge/CVE--2026--57433-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.357%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Storable versions before 3.41 for Perl have a signed integer overflow when deserializing a crafted SX_HOOK record.  retrieve_hook_common reads a signed 32-bit item count from an SX_HOOK record and calls av_extend with that count plus one. A count of I32_MAX wraps the addition to a negative value.  A crafted blob passed to thaw or retrieve triggers the overflow; av_extend receives the negative count and dies with a panic, terminating the deserialization.
-
----
-- perl 5.40.1-8 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138906; bug #1142035)
-[trixie] - perl 5.40.1-6+deb13u1
-- libstorable-perl <removed>
-https://lists.security.metacpan.org/cve-announce/msg/41780100/
-Fixed by: https://github.com/Perl/perl5/commit/e4f681784bcdeaa91ff02a2fa4cdcae5c46779d7 (v5.43.11)
 
 </blockquote>
 </details>
@@ -4317,8 +4389,8 @@ Fixed by: https://github.com/PCRE2Project/pcre2/commit/c932e70451eafef922ebef364
 <table>
 <tr><td>Affected range</td><td><code>&lt;10.42-1+deb12u2</code></td></tr>
 <tr><td>Fixed version</td><td><code>10.42-1+deb12u2</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.206%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.214%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -5438,8 +5510,8 @@ Fixed by: https://github.com/curl/curl/commit/e3d7401a32a46516c9e5ee877e613e62ed
 <table>
 <tr><td>Affected range</td><td><code>&lt;7.88.1-10+deb12u15</code></td></tr>
 <tr><td>Fixed version</td><td><code>7.88.1-10+deb12u15</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.739%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>53rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.756%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -5464,8 +5536,8 @@ Fixed by: https://github.com/curl/curl/commit/cd046f6c93b39d673a58c18648d8906e95
 <table>
 <tr><td>Affected range</td><td><code>&lt;7.88.1-10+deb12u15</code></td></tr>
 <tr><td>Fixed version</td><td><code>7.88.1-10+deb12u15</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.665%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.680%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -5539,8 +5611,8 @@ Fixed by: https://github.com/curl/curl/commit/0b8dbbc63c98777e4584cb9fbd71df3464
 <table>
 <tr><td>Affected range</td><td><code>>0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.486%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.480%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -5563,8 +5635,8 @@ Debian builds with libssh2 for SSH backend
 <table>
 <tr><td>Affected range</td><td><code>>0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.537%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>43rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.550%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -5587,7 +5659,7 @@ Debian builds with libssh2 for SSH backend
 <table>
 <tr><td>Affected range</td><td><code>>0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.116%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.114%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
 </table>
 
@@ -5675,6 +5747,192 @@ https://curl.se/docs/CVE-2024-2379.html
 Introduced by: https://github.com/curl/curl/commit/5d044ad9480a9f556f4b6a252d7533b1ba7fe57e (curl-8_6_0)
 Fixed by: https://github.com/curl/curl/commit/aedbbdf18e689a5eee8dc39600914f5eda6c409c (curl-8_7_0)
 curl in Debian not built with wolfSSL support
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>zlib</strong> <code>1:1.2.13.dfsg-1</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/zlib@1%3A1.2.13.dfsg-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (44:44)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-85091?s=debian&n=zlib&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="high : CVE--2026--85091" src="https://img.shields.io/badge/CVE--2026--85091-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.592%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+zlib versions 1.3.1.2 through 1.3.2 contain a heap buffer overflow vulnerability in the gz_vacate() function when processing non-blocking gzwrite() operations with stale external buffer pointers. Attackers can trigger the overflow by calling gzprintf() or gzvprintf() after a write stall, causing an unchecked memmove() to write beyond the internal input buffer boundary.
+
+---
+- zlib <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1146895)
+https://gist.github.com/thesmartshadow/e0b9481792afb7c31e86fee1ff084490
+https://github.com/madler/zlib/issues/1310
+https://github.com/madler/zlib/pull/1317
+Fixed by: https://github.com/madler/zlib/commit/df84af25dc1942490e1d1c899a07619152a46148
+Discussion on affected range: https://github.com/madler/zlib/issues/1310#issuecomment-5979623265
+Support non-blocking devices in the gz* routines introduced with:
+https://github.com/madler/zlib/commit/81cc0bebedd935daeb81b0b6e475d8786b51af3d (v1.3.1.2)
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.etcd.io/etcd/client/pkg/v3</strong> <code>3.5.21</code> (golang)</summary>
+
+<small><code>pkg:golang/go.etcd.io/etcd/client/pkg/v3@3.5.21</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (91:91)
+COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-73500?s=golang&n=v3&ns=go.etcd.io%2Fetcd%2Fclient%2Fpkg&t=golang&vr=%3C3.5.33"><img alt="high : CVE--2026--73500" src="https://img.shields.io/badge/CVE--2026--73500-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;3.5.33</code></td></tr>
+<tr><td>Fixed version</td><td><code>3.5.33</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.697%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+In go.etcd.io/etcd/client/pkg/v3 before 3.5.33, 3.6.14, and 3.7.1, TLS handshakes on listeners created by NewTLSListener do not enforce a handshake deadline. An unauthenticated network attacker who connects to an etcd TLS listener without sending a ClientHello causes a goroutine and a tracking map entry to block indefinitely. Opening many such connections exhausts memory, leading to a denial of service.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.etcd.io/etcd/client/pkg/v3</strong> <code>3.5.19</code> (golang)</summary>
+
+<small><code>pkg:golang/go.etcd.io/etcd/client/pkg/v3@3.5.19</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (87:87)
+COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-73500?s=golang&n=v3&ns=go.etcd.io%2Fetcd%2Fclient%2Fpkg&t=golang&vr=%3C3.5.33"><img alt="high : CVE--2026--73500" src="https://img.shields.io/badge/CVE--2026--73500-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;3.5.33</code></td></tr>
+<tr><td>Fixed version</td><td><code>3.5.33</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.697%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+In go.etcd.io/etcd/client/pkg/v3 before 3.5.33, 3.6.14, and 3.7.1, TLS handshakes on listeners created by NewTLSListener do not enforce a handshake deadline. An unauthenticated network attacker who connects to an etcd TLS listener without sending a ClientHello causes a goroutine and a tracking map entry to block indefinitely. Opening many such connections exhausts memory, leading to a denial of service.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/go-jose/go-jose/v4</strong> <code>4.1.3</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/go-jose/go-jose/v4@4.1.3</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (91:91)
+COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-34986?s=github&n=v4&ns=github.com%2Fgo-jose%2Fgo-jose&t=golang&vr=%3C4.1.4"><img alt="high 7.5: CVE--2026--34986" src="https://img.shields.io/badge/CVE--2026--34986-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Uncaught Exception</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;4.1.4</code></td></tr>
+<tr><td>Fixed version</td><td><code>4.1.4</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.651%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+### Impact
+
+Decrypting a JSON Web Encryption (JWE) object will panic if the `alg` field indicates a key wrapping algorithm ([one ending in `KW`](https://pkg.go.dev/github.com/go-jose/go-jose/v4#pkg-constants), with the exception of `A128GCMKW`, `A192GCMKW`, and `A256GCMKW`) and the `encrypted_key` field is empty. The panic happens when `cipher.KeyUnwrap()` in `key_wrap.go` attempts to allocate a slice with a zero or negative length based on the length of the `encrypted_key`.
+
+This code path is reachable from `ParseEncrypted()` / `ParseEncryptedJSON()` / `ParseEncryptedCompact()` followed by `Decrypt()` on the resulting object. Note that the parse functions take a list of accepted key algorithms. If the accepted key algorithms do not include any key wrapping algorithms, parsing will fail and the application will be unaffected.
+
+This panic is also reachable by calling `cipher.KeyUnwrap()` directly with any `ciphertext` parameter less than 16 bytes long, but calling this function directly is less common.
+
+Panics can lead to denial of service.
+
+### Fixed In
+
+4.1.4 and v3.0.5
+
+### Workarounds
+
+If the list of `keyAlgorithms` passed to `ParseEncrypted()` / `ParseEncryptedJSON()` / `ParseEncryptedCompact()` does not include key wrapping algorithms (those ending in `KW`), your application is unaffected.
+
+If your application uses key wrapping, you can prevalidate to the JWE objects to ensure the `encrypted_key` field is nonempty. If your application accepts JWE Compact Serialization, apply that validation to the corresponding field of that serialization (the data between the first and second `.`).
+
+### Thanks
+
+Thanks to Datadog's Security team for finding this issue.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/buger/jsonparser</strong> <code>1.1.1</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/buger/jsonparser@1.1.1</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (91:91)
+COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-32285?s=github&n=jsonparser&ns=github.com%2Fbuger&t=golang&vr=%3C%3D1.1.1"><img alt="high 7.5: CVE--2026--32285" src="https://img.shields.io/badge/CVE--2026--32285-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Out-of-bounds Read</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=1.1.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.1.2</code></td></tr>
+<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.973%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>61st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The Delete function fails to properly validate offsets when processing malformed JSON input. This can lead to a negative slice index and a runtime panic, allowing a denial of service attack.
 
 </blockquote>
 </details>
@@ -5782,192 +6040,6 @@ avoid repeated parsing across multi-values by enforcing a global budget and/or n
 
 [poc.zip](https://github.com/user-attachments/files/25079945/poc.zip)
 [PR_DESCRIPTION.md](https://github.com/user-attachments/files/25079946/PR_DESCRIPTION.md)
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.etcd.io/etcd/client/pkg/v3</strong> <code>3.5.19</code> (golang)</summary>
-
-<small><code>pkg:golang/go.etcd.io/etcd/client/pkg/v3@3.5.19</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (87:87)
-COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-73500?s=golang&n=v3&ns=go.etcd.io%2Fetcd%2Fclient%2Fpkg&t=golang&vr=%3C3.5.33"><img alt="high : CVE--2026--73500" src="https://img.shields.io/badge/CVE--2026--73500-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;3.5.33</code></td></tr>
-<tr><td>Fixed version</td><td><code>3.5.33</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.697%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-In go.etcd.io/etcd/client/pkg/v3 before 3.5.33, 3.6.14, and 3.7.1, TLS handshakes on listeners created by NewTLSListener do not enforce a handshake deadline. An unauthenticated network attacker who connects to an etcd TLS listener without sending a ClientHello causes a goroutine and a tracking map entry to block indefinitely. Opening many such connections exhausts memory, leading to a denial of service.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/go-jose/go-jose/v4</strong> <code>4.1.3</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/go-jose/go-jose/v4@4.1.3</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (91:91)
-COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-34986?s=github&n=v4&ns=github.com%2Fgo-jose%2Fgo-jose&t=golang&vr=%3C4.1.4"><img alt="high 7.5: CVE--2026--34986" src="https://img.shields.io/badge/CVE--2026--34986-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Uncaught Exception</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;4.1.4</code></td></tr>
-<tr><td>Fixed version</td><td><code>4.1.4</code></td></tr>
-<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.651%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-### Impact
-
-Decrypting a JSON Web Encryption (JWE) object will panic if the `alg` field indicates a key wrapping algorithm ([one ending in `KW`](https://pkg.go.dev/github.com/go-jose/go-jose/v4#pkg-constants), with the exception of `A128GCMKW`, `A192GCMKW`, and `A256GCMKW`) and the `encrypted_key` field is empty. The panic happens when `cipher.KeyUnwrap()` in `key_wrap.go` attempts to allocate a slice with a zero or negative length based on the length of the `encrypted_key`.
-
-This code path is reachable from `ParseEncrypted()` / `ParseEncryptedJSON()` / `ParseEncryptedCompact()` followed by `Decrypt()` on the resulting object. Note that the parse functions take a list of accepted key algorithms. If the accepted key algorithms do not include any key wrapping algorithms, parsing will fail and the application will be unaffected.
-
-This panic is also reachable by calling `cipher.KeyUnwrap()` directly with any `ciphertext` parameter less than 16 bytes long, but calling this function directly is less common.
-
-Panics can lead to denial of service.
-
-### Fixed In
-
-4.1.4 and v3.0.5
-
-### Workarounds
-
-If the list of `keyAlgorithms` passed to `ParseEncrypted()` / `ParseEncryptedJSON()` / `ParseEncryptedCompact()` does not include key wrapping algorithms (those ending in `KW`), your application is unaffected.
-
-If your application uses key wrapping, you can prevalidate to the JWE objects to ensure the `encrypted_key` field is nonempty. If your application accepts JWE Compact Serialization, apply that validation to the corresponding field of that serialization (the data between the first and second `.`).
-
-### Thanks
-
-Thanks to Datadog's Security team for finding this issue.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>zlib</strong> <code>1:1.2.13.dfsg-1</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/zlib@1%3A1.2.13.dfsg-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (44:44)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-85091?s=debian&n=zlib&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="high : CVE--2026--85091" src="https://img.shields.io/badge/CVE--2026--85091-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.592%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-zlib versions 1.3.1.2 through 1.3.2 contain a heap buffer overflow vulnerability in the gz_vacate() function when processing non-blocking gzwrite() operations with stale external buffer pointers. Attackers can trigger the overflow by calling gzprintf() or gzvprintf() after a write stall, causing an unchecked memmove() to write beyond the internal input buffer boundary.
-
----
-- zlib <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1146895)
-https://gist.github.com/thesmartshadow/e0b9481792afb7c31e86fee1ff084490
-https://github.com/madler/zlib/issues/1310
-https://github.com/madler/zlib/pull/1317
-Fixed by: https://github.com/madler/zlib/commit/df84af25dc1942490e1d1c899a07619152a46148
-Discussion on affected range: https://github.com/madler/zlib/issues/1310#issuecomment-5979623265
-Support non-blocking devices in the gz* routines introduced with:
-https://github.com/madler/zlib/commit/81cc0bebedd935daeb81b0b6e475d8786b51af3d (v1.3.1.2)
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/buger/jsonparser</strong> <code>1.1.1</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/buger/jsonparser@1.1.1</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (91:91)
-COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-32285?s=github&n=jsonparser&ns=github.com%2Fbuger&t=golang&vr=%3C%3D1.1.1"><img alt="high 7.5: CVE--2026--32285" src="https://img.shields.io/badge/CVE--2026--32285-lightgrey?label=high%207.5&labelColor=e25d68"/></a> <i>Out-of-bounds Read</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=1.1.1</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.1.2</code></td></tr>
-<tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.973%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>61st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-The Delete function fails to properly validate offsets when processing malformed JSON input. This can lead to a negative slice index and a runtime panic, allowing a denial of service attack.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.etcd.io/etcd/client/pkg/v3</strong> <code>3.5.21</code> (golang)</summary>
-
-<small><code>pkg:golang/go.etcd.io/etcd/client/pkg/v3@3.5.21</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (91:91)
-COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-73500?s=golang&n=v3&ns=go.etcd.io%2Fetcd%2Fclient%2Fpkg&t=golang&vr=%3C3.5.33"><img alt="high : CVE--2026--73500" src="https://img.shields.io/badge/CVE--2026--73500-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;3.5.33</code></td></tr>
-<tr><td>Fixed version</td><td><code>3.5.33</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.697%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-In go.etcd.io/etcd/client/pkg/v3 before 3.5.33, 3.6.14, and 3.7.1, TLS handshakes on listeners created by NewTLSListener do not enforce a handshake deadline. An unauthenticated network attacker who connects to an etcd TLS listener without sending a ClientHello causes a goroutine and a tracking map entry to block indefinitely. Opening many such connections exhausts memory, leading to a denial of service.
 
 </blockquote>
 </details>
@@ -6509,6 +6581,121 @@ Debian builds with GNUTLS, not NSS
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 4" src="https://img.shields.io/badge/L-4-fce1a9"/> <!-- unspecified: 0 --><strong>krb5</strong> <code>1.20.1-2+deb12u5</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/krb5@1.20.1-2%2Bdeb12u5?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (62:70)
+RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    jq \
+    curl \
+    procps \
+    bash \
+  && apt-get autoremove -y \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-11850?s=debian&n=krb5&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2026--11850" src="https://img.shields.io/badge/CVE--2026--11850-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.271%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+An integer underflow vulnerability was found in MIT krb5 in the berval2tl_data() function in plugins/kdb/ldap/libkdb_ldap/ldap_principal2.c. The function performs an unsigned subtraction (bv_len - 2) without a prior bounds check. When bv_len is 0 or 1, the subtraction wraps to a large value which is then truncated to uint16_t, yielding 0xFFFE (65534) or 0xFFFF (65535). The subsequent malloc succeeds and memcpy reads up to 65534 bytes from a 0-1 byte buffer, resulting in a heap out-of-bounds read. The attack vector involves a malicious or compromised LDAP KDB backend returning a krbExtraData attribute with bv_len < 2, triggering the underflow when the KDC or kadmind reads principal data.
+
+---
+- krb5 1.22.1-3 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139821; unimportant)
+https://krbdev.mit.edu/rt/Ticket/Display.html?id=9206
+https://github.com/krb5/krb5/commit/2a5fd83d4436583f2ddc0e193269a4d800ee45c4
+No security impact, doesn't cross any security boundary, see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139821
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2024-26461?s=debian&n=krb5&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2024--26461" src="https://img.shields.io/badge/CVE--2024--26461-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>1.128%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>65th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Kerberos 5 (aka krb5) 1.21.2 contains a memory leak vulnerability in /krb5/src/lib/gssapi/krb5/k5sealv3.c.
+
+---
+- krb5 <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1098754; unimportant)
+https://github.com/LuMingYinDetect/krb5_defects/blob/main/krb5_detect_2.md
+Fixed by: https://github.com/krb5/krb5/commit/c5f9c816107f70139de11b38aa02db2f1774ee0d
+Codepath cannot be triggered via API calls, negligible security impact
+https://mailman.mit.edu/pipermail/kerberos/2024-March/023095.html
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2024-26458?s=debian&n=krb5&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2024--26458" src="https://img.shields.io/badge/CVE--2024--26458-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.815%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>56th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Kerberos 5 (aka krb5) 1.21.2 contains a memory leak in /krb5/src/lib/rpc/pmap_rmt.c.
+
+---
+- krb5 <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1098754; unimportant)
+https://github.com/LuMingYinDetect/krb5_defects/blob/main/krb5_detect_1.md
+Fixed by: https://github.com/krb5/krb5/commit/c5f9c816107f70139de11b38aa02db2f1774ee0d
+Unused codepath, negligible security impact
+https://mailman.mit.edu/pipermail/kerberos/2024-March/023095.html
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2018-5709?s=debian&n=krb5&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2018--5709" src="https://img.shields.io/badge/CVE--2018--5709-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>2.049%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>81st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+An issue was discovered in MIT Kerberos 5 (aka krb5) through 1.16. There is a variable "dbentry->n_key_data" in kadmin/dbutil/dump.c that can store 16-bit data but unknowingly the developer has assigned a "u4" variable to it, which is for 32-bit data. An attacker can use this vulnerability to affect other artifacts of the database as we know that a Kerberos database dump file contains trusted data.
+
+---
+- krb5 <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=889684)
+https://github.com/poojamnit/Kerberos-V5-1.16-Vulnerabilities/tree/master/Integer%20Overflow
+non-issue, codepath is only run on trusted input, potential integer
+overflow is non-issue
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 4" src="https://img.shields.io/badge/L-4-fce1a9"/> <!-- unspecified: 0 --><strong>coreutils</strong> <code>9.1-1</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/coreutils@9.1-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
@@ -6717,121 +6904,6 @@ systemd, when updating file permissions, allows local users to change the permis
 [wheezy] - systemd <not-affected> (/etc/tmpfiles.d not supported in Wheezy)
 https://bugzilla.redhat.com/show_bug.cgi?id=859060
 only relevant to systems running systemd along with selinux
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 4" src="https://img.shields.io/badge/L-4-fce1a9"/> <!-- unspecified: 0 --><strong>krb5</strong> <code>1.20.1-2+deb12u5</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/krb5@1.20.1-2%2Bdeb12u5?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (62:70)
-RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
-    ca-certificates \
-    jq \
-    curl \
-    procps \
-    bash \
-  && apt-get autoremove -y \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-11850?s=debian&n=krb5&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2026--11850" src="https://img.shields.io/badge/CVE--2026--11850-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.271%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-An integer underflow vulnerability was found in MIT krb5 in the berval2tl_data() function in plugins/kdb/ldap/libkdb_ldap/ldap_principal2.c. The function performs an unsigned subtraction (bv_len - 2) without a prior bounds check. When bv_len is 0 or 1, the subtraction wraps to a large value which is then truncated to uint16_t, yielding 0xFFFE (65534) or 0xFFFF (65535). The subsequent malloc succeeds and memcpy reads up to 65534 bytes from a 0-1 byte buffer, resulting in a heap out-of-bounds read. The attack vector involves a malicious or compromised LDAP KDB backend returning a krbExtraData attribute with bv_len < 2, triggering the underflow when the KDC or kadmind reads principal data.
-
----
-- krb5 1.22.1-3 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139821; unimportant)
-https://krbdev.mit.edu/rt/Ticket/Display.html?id=9206
-https://github.com/krb5/krb5/commit/2a5fd83d4436583f2ddc0e193269a4d800ee45c4
-No security impact, doesn't cross any security boundary, see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1139821
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2024-26461?s=debian&n=krb5&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2024--26461" src="https://img.shields.io/badge/CVE--2024--26461-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>1.128%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>65th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Kerberos 5 (aka krb5) 1.21.2 contains a memory leak vulnerability in /krb5/src/lib/gssapi/krb5/k5sealv3.c.
-
----
-- krb5 <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1098754; unimportant)
-https://github.com/LuMingYinDetect/krb5_defects/blob/main/krb5_detect_2.md
-Fixed by: https://github.com/krb5/krb5/commit/c5f9c816107f70139de11b38aa02db2f1774ee0d
-Codepath cannot be triggered via API calls, negligible security impact
-https://mailman.mit.edu/pipermail/kerberos/2024-March/023095.html
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2024-26458?s=debian&n=krb5&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2024--26458" src="https://img.shields.io/badge/CVE--2024--26458-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.815%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>56th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Kerberos 5 (aka krb5) 1.21.2 contains a memory leak in /krb5/src/lib/rpc/pmap_rmt.c.
-
----
-- krb5 <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1098754; unimportant)
-https://github.com/LuMingYinDetect/krb5_defects/blob/main/krb5_detect_1.md
-Fixed by: https://github.com/krb5/krb5/commit/c5f9c816107f70139de11b38aa02db2f1774ee0d
-Unused codepath, negligible security impact
-https://mailman.mit.edu/pipermail/kerberos/2024-March/023095.html
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2018-5709?s=debian&n=krb5&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2018--5709" src="https://img.shields.io/badge/CVE--2018--5709-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>2.049%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>81st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-An issue was discovered in MIT Kerberos 5 (aka krb5) through 1.16. There is a variable "dbentry->n_key_data" in kadmin/dbutil/dump.c that can store 16-bit data but unknowingly the developer has assigned a "u4" variable to it, which is for 32-bit data. An attacker can use this vulnerability to affect other artifacts of the database as we know that a Kerberos database dump file contains trusted data.
-
----
-- krb5 <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=889684)
-https://github.com/poojamnit/Kerberos-V5-1.16-Vulnerabilities/tree/master/Integer%20Overflow
-non-issue, codepath is only run on trusted input, potential integer
-overflow is non-issue
 
 </blockquote>
 </details>
@@ -7054,152 +7126,7 @@ https://lists.gnupg.org/pipermail/gcrypt-devel/2018-February/004401.html
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>diffutils</strong> <code>1:3.8-4</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/diffutils@1%3A3.8-4?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (44:44)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-53910?s=debian&n=diffutils&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2026--53910" src="https://img.shields.io/badge/CVE--2026--53910-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.332%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-diff3 tool from GNU diffutils is vulnerable to a heap‑based buffer overflow due to multiple signed integer overflows in line‑mapping calculations. Incorrect arithmetic in mapping line ranges can result in corrupted values being used for memory allocation and loop bounds. When processing crafted diff output, these overflows may cause the application to allocate insufficient memory and subsequently perform out‑of‑bounds writes during internal processing.  An attacker who can control the output of the diff program used by diff3 (e.g. via --diff-program pointing to a malicious script) can trigger out-of-bounds writes, resulting in a crash and potentially remote code execution depending on the environment.   This issue has been fixed in commit 9ff04d5b84743e331e80b589335a52c5480d1815   NOTE: The project maintainers claim that this is not a security issue. They state that the worst outcome this issue can cause is a crash of diff and that it cannot be used to escalate privileges.
-
----
-- diffutils <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1142675; unimportant)
-Fixed by: https://cgit.git.savannah.gnu.org/cgit/diffutils.git/commit/?id=73ed7ce85cc78effb94daf028c9af6b4e5252e50
-Fixed by: https://cgit.git.savannah.gnu.org/cgit/diffutils.git/commit/?id=9ff04d5b84743e331e80b589335a52c5480d1815
-Negligible security impact.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>filippo.io/edwards25519</strong> <code>1.1.0</code> (golang)</summary>
-
-<small><code>pkg:golang/filippo.io/edwards25519@1.1.0</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (91:91)
-COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-26958?s=github&n=edwards25519&ns=filippo.io&t=golang&vr=%3C1.1.1"><img alt="low 1.7: CVE--2026--26958" src="https://img.shields.io/badge/CVE--2026--26958-lightgrey?label=low%201.7&labelColor=fce1a9"/></a> <i>Improper Initialization</i>
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.1.1</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.1.1</code></td></tr>
-<tr><td>CVSS Score</td><td><code>1.7</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:H/AT:P/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N/E:U</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.445%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>37th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-`(*Point).MultiScalarMult` failed to initialize its receiver.
-
-If the method was called on an initialized point that is not the identity point, MultiScalarMult produced an incorrect result.
-
-If the method was called on an uninitialized point, the behavior was undefined. In particular, if the receiver was the zero value, MultiScalarMult returned an invalid point that compared Equal to every point.
-
-*Note that MultiScalarMult is a rarely used advanced API. For example, if you only depend on `filippo.io/edwards25519` via `github.com/go-sql-driver/mysql`, **you are not affected**. If you were notified of this issue despite not being affected, consider switching to a vulnerability scanner that is more precise and respectful of your attention, like [govulncheck](https://go.dev/doc/tutorial/govulncheck).*
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>xz-utils</strong> <code>5.4.1-1</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/xz-utils@5.4.1-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (44:44)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-34743?s=debian&n=xz-utils&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.4.1-1%2Bdeb12u1"><img alt="low : CVE--2026--34743" src="https://img.shields.io/badge/CVE--2026--34743-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;5.4.1-1+deb12u1</code></td></tr>
-<tr><td>Fixed version</td><td><code>5.4.1-1+deb12u1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.573%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-XZ Utils provide a general-purpose data-compression library plus command-line tools. Prior to version 5.8.3, if lzma_index_decoder() was used to decode an Index that contained no Records, the resulting lzma_index was left in a state where where a subsequent lzma_index_append() would allocate too little memory, and a buffer overflow would occur. This issue has been patched in version 5.8.3.
-
----
-- xz-utils 5.8.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1132497)
-[trixie] - xz-utils 5.8.1-1+deb13u1
-[bookworm] - xz-utils 5.4.1-1+deb12u1
-https://tukaani.org/xz/index-append-overflow.html
-Fixed by: https://github.com/tukaani-project/xz/commit/c8c22869e780ff57c96b46939c3d79ff99395f87 (v5.8.3)
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>apt</strong> <code>2.6.1</code> (deb)</summary>
-
-<small><code>pkg:deb/debian/apt@2.6.1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
-
-```dockerfile
-# minio-release.dockerfile (44:44)
-FROM debian:bookworm-slim
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2011-3374?s=debian&n=apt&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2011--3374" src="https://img.shields.io/badge/CVE--2011--3374-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>1.191%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>67th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-It was found that apt-key in apt, all versions, do not correctly validate gpg keys with the master keyring, leading to a potential man-in-the-middle attack.
-
----
-- apt <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=642480)
-Not exploitable in Debian, since no keyring URI is defined
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>gnupg2</strong> <code>2.2.40-1.1+deb12u2</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>gnupg2</strong> <code>2.2.40-1.1+deb12u2</code> (deb)</summary>
 
 <small><code>pkg:deb/debian/gnupg2@2.2.40-1.1%2Bdeb12u2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
 
@@ -7209,6 +7136,24 @@ FROM debian:bookworm-slim
 ```
 
 <br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-105712?s=debian&n=gnupg2&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2026--105712" src="https://img.shields.io/badge/CVE--2026--105712-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+- gnupg2 <unfixed>
+https://static.dev.gnupg.org/T8159.html
+Fixed by: https://github.com/gpg/gnupg/commit/7a2692fe5e580ae3bbb2a47abc4baaf1af65aa88 (gnupg-2.5.19)
+https://lists.gnupg.org/pipermail/gnupg-announce/2026q2/000504.html
+
+</blockquote>
+</details>
 
 <a href="https://scout.docker.com/v/CVE-2022-3219?s=debian&n=gnupg2&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2022--3219" src="https://img.shields.io/badge/CVE--2022--3219-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
@@ -7231,6 +7176,41 @@ https://dev.gnupg.org/D556
 https://dev.gnupg.org/T5993
 https://www.openwall.com/lists/oss-security/2022/07/04/8
 GnuPG upstream is not implementing this change.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>shadow</strong> <code>1:4.13+dfsg1-1+deb12u2</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/shadow@1%3A4.13%2Bdfsg1-1%2Bdeb12u2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (44:44)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2007-5686?s=debian&n=shadow&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2007--5686" src="https://img.shields.io/badge/CVE--2007--5686-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.942%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>60th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+initscripts in rPath Linux 1 sets insecure permissions for the /var/log/btmp file, which allows local users to obtain sensitive information regarding authentication attempts.  NOTE: because sshd detects the insecure permissions and does not log certain events, this also prevents sshd from logging failed authentication attempts by remote attackers.
+
+---
+- shadow <unfixed> (unimportant)
+See #290803, on Debian LOG_UNKFAIL_ENAB in login.defs is set to no so
+unknown usernames are not recorded on login failures
 
 </blockquote>
 </details>
@@ -7323,30 +7303,37 @@ all versions vulnerable, backport required for wheezy
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.39.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>xz-utils</strong> <code>5.4.1-1</code> (deb)</summary>
 
-<small><code>pkg:golang/golang.org/x/sys@0.39.0</code></small><br/>
+<small><code>pkg:deb/debian/xz-utils@5.4.1-1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
 
 ```dockerfile
-# minio-release.dockerfile (87:87)
-COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
+# minio-release.dockerfile (44:44)
+FROM debian:bookworm-slim
 ```
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-34743?s=debian&n=xz-utils&ns=debian&t=deb&osn=debian&osv=12&vr=%3C5.4.1-1%2Bdeb12u1"><img alt="low : CVE--2026--34743" src="https://img.shields.io/badge/CVE--2026--34743-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.158%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;5.4.1-1+deb12u1</code></td></tr>
+<tr><td>Fixed version</td><td><code>5.4.1-1+deb12u1</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.573%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
+XZ Utils provide a general-purpose data-compression library plus command-line tools. Prior to version 5.8.3, if lzma_index_decoder() was used to decode an Index that contained no Records, the resulting lzma_index was left in a state where where a subsequent lzma_index_append() would allocate too little memory, and a buffer overflow would occur. This issue has been patched in version 5.8.3.
+
+---
+- xz-utils 5.8.3-1 (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1132497)
+[trixie] - xz-utils 5.8.1-1+deb13u1
+[bookworm] - xz-utils 5.4.1-1+deb12u1
+https://tukaani.org/xz/index-append-overflow.html
+Fixed by: https://github.com/tukaani-project/xz/commit/c8c22869e780ff57c96b46939c3d79ff99395f87 (v5.8.3)
 
 </blockquote>
 </details>
@@ -7383,9 +7370,47 @@ NewNTUnicodeString does not check for string length overflow. When provided with
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>shadow</strong> <code>1:4.13+dfsg1-1+deb12u2</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>filippo.io/edwards25519</strong> <code>1.1.0</code> (golang)</summary>
 
-<small><code>pkg:deb/debian/shadow@1%3A4.13%2Bdfsg1-1%2Bdeb12u2?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+<small><code>pkg:golang/filippo.io/edwards25519@1.1.0</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (91:91)
+COPY --from=build /build/minio/minio /opt/bitnami/common/bin/minio
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-26958?s=github&n=edwards25519&ns=filippo.io&t=golang&vr=%3C1.1.1"><img alt="low 1.7: CVE--2026--26958" src="https://img.shields.io/badge/CVE--2026--26958-lightgrey?label=low%201.7&labelColor=fce1a9"/></a> <i>Improper Initialization</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.1.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.1.1</code></td></tr>
+<tr><td>CVSS Score</td><td><code>1.7</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:H/AT:P/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N/E:U</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.445%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>37th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+`(*Point).MultiScalarMult` failed to initialize its receiver.
+
+If the method was called on an initialized point that is not the identity point, MultiScalarMult produced an incorrect result.
+
+If the method was called on an uninitialized point, the behavior was undefined. In particular, if the receiver was the zero value, MultiScalarMult returned an invalid point that compared Equal to every point.
+
+*Note that MultiScalarMult is a rarely used advanced API. For example, if you only depend on `filippo.io/edwards25519` via `github.com/go-sql-driver/mysql`, **you are not affected**. If you were notified of this issue despite not being affected, consider switching to a vulnerability scanner that is more precise and respectful of your attention, like [govulncheck](https://go.dev/doc/tutorial/govulncheck).*
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>diffutils</strong> <code>1:3.8-4</code> (deb)</summary>
+
+<small><code>pkg:deb/debian/diffutils@1%3A3.8-4?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
 
 ```dockerfile
 # minio-release.dockerfile (44:44)
@@ -7394,33 +7419,68 @@ FROM debian:bookworm-slim
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2007-5686?s=debian&n=shadow&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2007--5686" src="https://img.shields.io/badge/CVE--2007--5686-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-53910?s=debian&n=diffutils&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2026--53910" src="https://img.shields.io/badge/CVE--2026--53910-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
 <tr><td>Affected range</td><td><code>>0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.942%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>60th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.332%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-initscripts in rPath Linux 1 sets insecure permissions for the /var/log/btmp file, which allows local users to obtain sensitive information regarding authentication attempts.  NOTE: because sshd detects the insecure permissions and does not log certain events, this also prevents sshd from logging failed authentication attempts by remote attackers.
+diff3 tool from GNU diffutils is vulnerable to a heap‑based buffer overflow due to multiple signed integer overflows in line‑mapping calculations. Incorrect arithmetic in mapping line ranges can result in corrupted values being used for memory allocation and loop bounds. When processing crafted diff output, these overflows may cause the application to allocate insufficient memory and subsequently perform out‑of‑bounds writes during internal processing.  An attacker who can control the output of the diff program used by diff3 (e.g. via --diff-program pointing to a malicious script) can trigger out-of-bounds writes, resulting in a crash and potentially remote code execution depending on the environment.   This issue has been fixed in commit 9ff04d5b84743e331e80b589335a52c5480d1815   NOTE: The project maintainers claim that this is not a security issue. They state that the worst outcome this issue can cause is a crash of diff and that it cannot be used to escalate privileges.
 
 ---
-- shadow <unfixed> (unimportant)
-See #290803, on Debian LOG_UNKFAIL_ENAB in login.defs is set to no so
-unknown usernames are not recorded on login failures
+- diffutils <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1142675; unimportant)
+Fixed by: https://cgit.git.savannah.gnu.org/cgit/diffutils.git/commit/?id=73ed7ce85cc78effb94daf028c9af6b4e5252e50
+Fixed by: https://cgit.git.savannah.gnu.org/cgit/diffutils.git/commit/?id=9ff04d5b84743e331e80b589335a52c5480d1815
+Negligible security impact.
 
 </blockquote>
 </details>
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>github.com/klauspost/compress</strong> <code>1.18.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>apt</strong> <code>2.6.1</code> (deb)</summary>
 
-<small><code>pkg:golang/github.com/klauspost/compress@1.18.0</code></small><br/>
+<small><code>pkg:deb/debian/apt@2.6.1?os_distro=bookworm&os_name=debian&os_version=12</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (44:44)
+FROM debian:bookworm-slim
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2011-3374?s=debian&n=apt&ns=debian&t=deb&osn=debian&osv=12&vr=%3E0"><img alt="low : CVE--2011--3374" src="https://img.shields.io/badge/CVE--2011--3374-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>1.191%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>67th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+It was found that apt-key in apt, all versions, do not correctly validate gpg keys with the master keyring, leading to a potential man-in-the-middle attack.
+
+---
+- apt <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=642480)
+Not exploitable in Debian, since no keyring URI is defined
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.39.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/sys@0.39.0</code></small><br/>
 
 ```dockerfile
 # minio-release.dockerfile (87:87)
@@ -7429,17 +7489,19 @@ COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
 
 <br/>
 
-<a href="https://scout.docker.com/v/GHSA-259r-337f-4rfw?s=golang&n=compress&ns=github.com%2Fklauspost&t=golang&vr=%3E%3D1.16.0%2C%3C1.18.7"><img alt="unspecified : GHSA--259r--337f--4rfw" src="https://img.shields.io/badge/GHSA--259r--337f--4rfw-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>>=1.16.0<br/><1.18.7</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.18.7</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.158%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-Providing a specially crafted dictionary to s2.NewDict and using it to encode data can make the encoder read out of bounds.
+NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
 
 </blockquote>
 </details>
@@ -7470,6 +7532,34 @@ COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
 <blockquote>
 
 A norm.Iter can enter an infinite loop when handling input containing invalid UTF-8 bytes.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>github.com/klauspost/compress</strong> <code>1.18.0</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/klauspost/compress@1.18.0</code></small><br/>
+
+```dockerfile
+# minio-release.dockerfile (87:87)
+COPY --from=build /build/mc/mc /opt/bitnami/common/bin/mc
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/GHSA-259r-337f-4rfw?s=golang&n=compress&ns=github.com%2Fklauspost&t=golang&vr=%3E%3D1.16.0%2C%3C1.18.7"><img alt="unspecified : GHSA--259r--337f--4rfw" src="https://img.shields.io/badge/GHSA--259r--337f--4rfw-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.16.0<br/><1.18.7</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.18.7</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Providing a specially crafted dictionary to s2.NewDict and using it to encode data can make the encoder read out of bounds.
 
 </blockquote>
 </details>

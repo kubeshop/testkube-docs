@@ -3,10 +3,10 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:2e00c61e5d1b7e115853260c0aef091fcb38c5b2b6e0107c5b00a1ea625d4e29</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 6" src="https://img.shields.io/badge/high-6-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/medium-2-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:d5985250cea83174646c730fa2855f89e78ad82dfa0291c26b396df7b6332502</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/medium-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/unspecified-2-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
-<tr><td>size</td><td>85 MB</td></tr>
-<tr><td>packages</td><td>342</td></tr>
+<tr><td>size</td><td>62 MB</td></tr>
+<tr><td>packages</td><td>329</td></tr>
 </table>
 </details></table>
 </details>
@@ -232,69 +232,31 @@ Mountpoint creation is now scoped to the container root using `os.Root` (Go 1.24
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/crypto</strong> <code>0.55.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/grpc</strong> <code>1.84.0</code> (golang)</summary>
 
-<small><code>pkg:golang/golang.org/x/crypto@0.55.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-78662?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.56.0"><img alt="high : CVE--2026--78662" src="https://img.shields.io/badge/CVE--2026--78662-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+<small><code>pkg:golang/google.golang.org/grpc@1.84.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-84445?s=golang&n=grpc&ns=google.golang.org&t=golang&vr=%3E%3D1.84.0-dev%2C%3C1.85.0-dev.0.20260825072537-93e31b48545e"><img alt="high : CVE--2026--84445" src="https://img.shields.io/badge/CVE--2026--84445-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.431%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>>=1.84.0-dev<br/><1.85.0-dev.0.20260825072537-93e31b48545e</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.85.0-dev.0.20260825072537-93e31b48545e</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-Previously, a channel registered in the mux's chanList is not usable until it is established. A malicious peer was able flood the channel's incomingRequests, deadlocking the entire connection.
-
-Now, we add an atomic established state, set when a channel becomes usable. Until such a time, handlePacket drops every packet other than the open confirmation/failure, without blocking and without tearing down the connection.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-56855?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.56.0"><img alt="high : CVE--2026--56855" src="https://img.shields.io/badge/CVE--2026--56855-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.56.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.56.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.500%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Previously, after a channel has been established, a malicious peer could send crafted messages that would deadlock the entire connection.
-
-Now, we handle all RFC 4254 channel messages; global requests are handled explicitly. Then, treat all other messages as a protocol error and tear the connection down instead of buffering and blocking.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/GO-2026-5932?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3E%3D0"><img alt="unspecified : GO--2026--5932" src="https://img.shields.io/badge/GO--2026--5932-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-The golang.org/x/crypto/openpgp package is unsafe by design, has numerous known security issues, is not maintained, and should not be used.
-
-If you are required to interoperate with OpenPGP systems and need a maintained package, consider github.com/ProtonMail/go-crypto/openpgp which is a maintained fork that aims to be a drop-in replacement for this package.
+In google.golang.org/grpc, servers configured with xDS routing can panic when processing requests that lack both :authority and Host headers. The HTTP/2 transport layer accepted requests missing these headers, and the xDS server routing interceptor attempted to index the empty authority slice, causing an unhandled panic and terminating the server.
 
 </blockquote>
 </details>
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>29.6.2+incompatible</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>29.7.2+incompatible</code> (golang)</summary>
 
-<small><code>pkg:golang/github.com/docker/cli@29.6.2%2Bincompatible</code></small><br/>
+<small><code>pkg:golang/github.com/docker/cli@29.7.2%2Bincompatible</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2025-15558?s=golang&n=cli&ns=github.com%2Fdocker&t=golang&vr=%3E%3D19.03.0%2Bincompatible"><img alt="high : CVE--2025--15558" src="https://img.shields.io/badge/CVE--2025--15558-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
@@ -314,149 +276,22 @@ Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Es
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>google.golang.org/grpc</strong> <code>1.83.1</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/crypto</strong> <code>0.57.0</code> (golang)</summary>
 
-<small><code>pkg:golang/google.golang.org/grpc@1.83.1</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-84445?s=github&n=grpc&ns=google.golang.org&t=golang&vr=%3E%3D1.83.0%2C%3C1.83.2"><img alt="high 8.7: CVE--2026--84445" src="https://img.shields.io/badge/CVE--2026--84445-lightgrey?label=high%208.7&labelColor=e25d68"/></a> <i>Improper Validation of Array Index</i>
+<small><code>pkg:golang/golang.org/x/crypto@0.57.0</code></small><br/>
+<a href="https://scout.docker.com/v/GO-2026-5932?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3E%3D0"><img alt="unspecified : GO--2026--5932" src="https://img.shields.io/badge/GO--2026--5932-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>>=1.83.0<br/><1.83.2</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.83.2</code></td></tr>
-<tr><td>CVSS Score</td><td><code>8.7</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.641%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-A vulnerability exists in gRPC-Go servers configured with `xds.NewGRPCServer()` where a crafted request missing both `:authority` and `Host` headers can cause a server panic, resulting in a Denial of Service (DoS).
+The golang.org/x/crypto/openpgp package is unsafe by design, has numerous known security issues, is not maintained, and should not be used.
 
-Servers built with `xds.NewGRPCServer` install an xDS routing interceptor on every RPC. This interceptor looks up the request’s `:authority` header to pick a virtual host. The HTTP/2 server transport previously accepted requests that had neither `:authority` nor `Host`. When this happened, the xDS routing interceptor attempted to access the first element of an empty slice of authorities, leading to an index out of bounds panic. Since the per-RPC goroutine does not recover from panics, the entire server process would terminate.
-
-This panic occurs in the interceptor pipeline, meaning the transport credentials handshake (TLS, mTLS, or ALTS) and HTTP/2 connection establishment must complete successfully before the crafted request can reach this logic.
-- Insecure/Standard TLS: If the server permits insecure (plaintext) connections or standard credentials (where client certs are not checked), any unauthenticated remote attacker can trigger the crash.
-- mTLS / ALTS: If strict transport-level authentication is enforced at the network edge or transport layer (e.g., requiring a valid client certificate), the attacker must possess valid transport credentials to initiate the stream and trigger the panic.
-
-### Impact
-An attacker can cause a complete outage of the gRPC server by sending a request missing both `:authority` and `Host` headers, provided they can successfully establish a transport connection.
-
-### Patches
-The issue has been addressed in `master` (and backported to `1.84.0`, `1.83.2` and `1.82.2`). The fix updates the HTTP/2 transport layer to reject requests missing both `:authority` and `Host` headers early, maintaining consistency with and other gRPC language implementations.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc</strong> <code>1.44.0</code> (golang)</summary>
-
-<small><code>pkg:golang/go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc@1.44.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-81870?s=github&n=otlptracegrpc&ns=go.opentelemetry.io%2Fotel%2Fexporters%2Fotlp%2Fotlptrace&t=golang&vr=%3E%3D1.5.0%2C%3C%3D1.44.0"><img alt="low 2.0: CVE--2026--81870" src="https://img.shields.io/badge/CVE--2026--81870-lightgrey?label=low%202.0&labelColor=fce1a9"/></a> <i>Exposure of Sensitive Information to an Unauthorized Actor</i>
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.5.0<br/><=1.44.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.45.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>2</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.195%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-### Summary
-
-OpenTelemetry Go versions 1.5.0 through 1.44.0 can include trace exporter endpoint configuration in an internal diagnostic log emitted when an SDK `TracerProvider` is created. The default OpenTelemetry logger does not emit this event. Exposure requires an application to install a logger that enables OpenTelemetry's internal Info-level diagnostics and for someone other than the intended audience to have access to those logs.
-
-The logged configuration can disclose the address of the trace collector and whether the OTLP/HTTP connection is configured as insecure. The Zipkin exporter logs its complete collector URL, so credentials in URL userinfo or tokens in the query string are also disclosed if an application embeds them there. OTLP authentication headers, TLS key material, and exported span data are not included in this log.
-
-Exporter `MarshalLog` implementations that caused this configuration to be included in internal logs were introduced by [`a1fff3c`](https://github.com/open-telemetry/opentelemetry-go/commit/a1fff3c2588c783d1f3f6fd2315aa2660fc6d330).
-
-### Details
-
-When `sdk/trace.NewTracerProvider` constructs a provider, it records a `TracerProvider created` internal Info event containing the provider configuration. In affected versions, the configuration's `MarshalLog` methods recursively include:
-
-1. the provider's span processors;
-2. each processor's span exporter; and
-3. for the OTLP trace exporter, its client configuration.
-
-This causes the following values to be present in the event:
-
-- OTLP trace gRPC: the configured endpoint;
-- OTLP trace HTTP: the configured endpoint and the `Insecure` flag; and
-- Zipkin: the complete collector URL.
-
-OpenTelemetry Go does not emit this event with its default logger, which only emits errors. An application must explicitly configure a sufficiently verbose logger with `otel.SetLogger`. The required `logr` verbosity is version-dependent:
-
-- versions 1.5.0 through 1.14.x use `V(1)` for this Info event; and
-- versions 1.15.0 through 1.44.0 use `V(4)`.
-
-OTLP header configuration is not part of the marshaled object, so credentials supplied with `WithHeaders` or the corresponding environment variables are not exposed. The documented OTLP `WithEndpoint` input is a collector address rather than a credential-bearing URL. The higher-risk case is therefore the Zipkin collector URL, which is retained and logged in full, or an application passing sensitive data in an OTLP endpoint outside the documented format.
-
-### Proof of concept
-
-The following program demonstrates the behavior with OpenTelemetry Go 1.44.0. It deliberately places credentials and a token in the Zipkin collector URL and enables internal Info logging:
-
-```go
-package main
-
-import (
-	"bytes"
-	"context"
-	"fmt"
-
-	"github.com/go-logr/logr/funcr"
-	"go.opentelemetry.io/otel"
-	"go.opentelemetry.io/otel/exporters/zipkin"
-	sdktrace "go.opentelemetry.io/otel/sdk/trace"
-)
-
-func main() {
-	var logs bytes.Buffer
-	otel.SetLogger(funcr.New(func(_, args string) {
-		_, _ = logs.WriteString(args)
-	}, funcr.Options{Verbosity: 4}))
-
-	exporter, err := zipkin.New(
-		"http://user:pass@<!-- -->zipkin.internal:9411/api/v2/spans?token=secret",
-	)
-	if err != nil {
-		panic(err)
-	}
-
-	tp := sdktrace.NewTracerProvider(sdktrace.WithBatcher(exporter))
-	_ = tp.Shutdown(context.Background())
-
-	fmt.Println(logs.String())
-}
-```
-
-The `TracerProvider created` event contains:
-
-```text
-http://user:pass@<!-- -->zipkin.internal:9411/api/v2/spans?token=secret
-```
-
-For versions before 1.15.0, set `funcr.Options{Verbosity: 1}` instead.
-
-### Impact
-
-This is a conditional disclosure through application logs. Affected applications must enable verbose OpenTelemetry internal diagnostics and configure a trace exporter containing information they do not intend to expose to readers of those logs. In that configuration, a person or system with log access can learn the trace collector address and internal network topology. If credentials or tokens are embedded directly in a Zipkin collector URL, those values can also be recovered from the logs.
-
-There is no exposure with the default OpenTelemetry logger, and the vulnerable log is generated from local application configuration rather than remotely supplied span data. OTLP authentication headers, certificate or private-key contents, and telemetry payloads are not logged by this path.
-
-### Remediation
-
-Upgrade the affected OpenTelemetry Go modules to version 1.45.0 or later. The fix in [`3a1412d`](https://github.com/open-telemetry/opentelemetry-go/commit/3a1412d2b3bc4e4231fbeac2ed42117ae541bb38) stops recursively marshaling exporter and client configuration and records their types instead.
-
-If an immediate upgrade is not possible:
-
-- keep OpenTelemetry internal logging below the Info verbosity described above;
-- do not embed credentials or tokens in exporter endpoint URLs; use authentication headers or another supported credential mechanism; and
-- restrict access to existing logs and rotate any credentials that may already have been recorded.
+If you are required to interoperate with OpenPGP systems and need a maintained package, consider github.com/ProtonMail/go-crypto/openpgp which is a maintained fork that aims to be a drop-in replacement for this package.
 
 </blockquote>
 </details>
