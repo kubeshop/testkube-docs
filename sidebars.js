@@ -1387,6 +1387,7 @@ const sidebars = {
               label: "Argo Rollouts",
               id: "articles/argorollouts-integration",
             },
+            { type: "doc", label: "Kargo", id: "articles/kargo-integration" },
             {
               type: "link",
               label: "Keptn",

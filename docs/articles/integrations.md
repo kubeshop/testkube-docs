@@ -40,6 +40,7 @@ Use Testkube in GitOps-managed Kubernetes environments:
 Use Testkube for validation in progressive delivery strategies:
 
 - [Argo Rollouts](/articles/argorollouts-integration) - Learn how to use Testkube with Progressive Delivery in Argo Rollouts.
+- [Kargo](/articles/kargo-integration) - Learn how to use Testkube to verify a version before Kargo promotes it to the next Stage.
 - [Keptn](https://testkube.io/learn/leveraging-testkube-as-a-quality-gate-in-multi-stage-deployments-with-keptn) - Leveraging Testkube as a Quality Gate in Multi-Stage Deployments with Keptn.
 
 ## Event-Driven Automation
