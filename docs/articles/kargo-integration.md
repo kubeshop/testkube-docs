@@ -3,6 +3,11 @@
 This document describes how you can use Testkube with [Kargo](https://docs.kargo.io/) to verify a new version of your application in one Stage before Kargo lets it move on to the next. As a prerequisite, you should have a good understanding
 of Testkube, Kargo and ArgoCD.
 
+:::note
+Verification is how Kargo adds a QUALITY GATE to your delivery pipeline. A new version moves on to the next Stage only after the checks in its
+current Stage pass. With Testkube as the verification, the QUALITY GATE is a Test Workflow that runs in the cluster of the Stage being verified.
+:::
+
 ## Overview
 
 Kargo promotes versions of your application, called Freight, through a series of Stages, for example from `staging` to `prod`. A Stage can define a
