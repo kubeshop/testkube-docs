@@ -103,6 +103,7 @@ These codes name a problem of the infrastructure while the test ran. Their type 
 | `job-deleted`            | Something deleted the Job of the execution while it ran                                         | Who deletes Jobs in the namespace, for example a cleanup policy                                                |
 | `service-not-ready`      | A service of a step did not become ready                                                        | The readiness probe of the service, and its log                                                                |
 | `artifact-upload-failed` | The artifacts could not be uploaded                                                             | The object storage of the installation, and its credentials                                                    |
+| `git-unreachable`        | The clone step could not reach the server of the repository                                     | The address of the repository, and the network and proxy of the cluster                                        |
 | `fail-fast`              | Another parallel worker failed, so this one stopped                                             | The worker that failed first                                                                                   |
 
 ### The Test Decides the Result
