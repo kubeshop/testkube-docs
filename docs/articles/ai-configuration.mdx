@@ -101,34 +101,38 @@ The `inference:` block is the recommended way to configure LLM models for the AI
 
 The `defaults` section provides shared values inherited by all models unless overridden at the model level:
 
-| Field          | Description                                                                             |
-| -------------- | --------------------------------------------------------------------------------------- |
-| `url`          | Base URL for LLM API (e.g., `https://proxy.internal/v1`). Defaults to OpenAI if omitted |
-| `apiKey`       | API key (plain text — prefer `secretRef` for production)                                |
-| `secretRef`    | K8s secret name                                                                         |
-| `secretRefKey` | Key within the secret                                                                   |
-| `extraHeaders` | Extra HTTP headers merged into all requests                                             |
-| `queryParams`  | Query parameters appended to all request URLs                                           |
+| Field          | Description                                                                                                                              |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `provider`     | `openai` (default) for OpenAI and OpenAI-compatible endpoints, or `anthropic` for the [Anthropic Messages API](#anthropic-claude-models) |
+| `url`          | Base URL for LLM API (e.g., `https://proxy.internal/v1`). Defaults to OpenAI, or to Anthropic for `provider: anthropic`, if omitted      |
+| `apiKey`       | API key (plain text — prefer `secretRef` for production)                                                                                 |
+| `secretRef`    | K8s secret name                                                                                                                          |
+| `secretRefKey` | Key within the secret                                                                                                                    |
+| `extraHeaders` | Extra HTTP headers merged into all requests                                                                                              |
+| `queryParams`  | Query parameters appended to all request URLs                                                                                            |
+| `extraBody`    | Fields merged into every request body, e.g. gateway routing options                                                                      |
 
 #### Model Properties
 
 Each model entry (`agent`, `tasks`, `embeddings`) supports these fields in addition to inheriting from `defaults`:
 
-| Field          | Description                                                     |
-| -------------- | --------------------------------------------------------------- |
-| `model`        | Model identifier sent in the API request body (e.g., `gpt-5.2`) |
-| `url`          | Custom endpoint URL (overrides `defaults.url`)                  |
-| `apiKey`       | API key for this model (overrides `defaults.apiKey`)            |
-| `secretRef`    | K8s secret name (overrides `defaults.secretRef`)                |
-| `secretRefKey` | Key within the secret (overrides `defaults.secretRefKey`)       |
-| `extraHeaders` | Extra HTTP headers (replaces `defaults.extraHeaders` if set)    |
-| `queryParams`  | Query parameters (replaces `defaults.queryParams` if set)       |
-| `temperature`  | Temperature setting — agent and tasks only                      |
-| `label`        | Human-readable name for the UI dropdown — agent only            |
-| `default`      | Mark which agent model is the default — agent only              |
+| Field          | Description                                                                       |
+| -------------- | --------------------------------------------------------------------------------- |
+| `model`        | Model identifier sent in the API request body (e.g., `gpt-5.2`)                   |
+| `url`          | Custom endpoint URL (overrides `defaults.url`)                                    |
+| `apiKey`       | API key for this model (overrides `defaults.apiKey`)                              |
+| `secretRef`    | K8s secret name (overrides `defaults.secretRef`)                                  |
+| `secretRefKey` | Key within the secret (overrides `defaults.secretRefKey`)                         |
+| `extraHeaders` | Extra HTTP headers (replaces `defaults.extraHeaders` if set)                      |
+| `queryParams`  | Query parameters (replaces `defaults.queryParams` if set)                         |
+| `provider`     | `openai` or `anthropic` (overrides `defaults.provider`) — agent and tasks only    |
+| `extraBody`    | Request body fields (replaces `defaults.extraBody` if set) — agent and tasks only |
+| `temperature`  | Temperature setting — agent and tasks only                                        |
+| `label`        | Human-readable name for the UI dropdown — agent only                              |
+| `default`      | Mark which agent model is the default — agent only                                |
 
 :::info Override Semantics
-Per-model `extraHeaders` and `queryParams` **replace** the defaults entirely (not merged key-by-key). If you need both default and model-specific headers, repeat the shared ones in the per-model block.
+Per-model `extraHeaders`, `queryParams` and `extraBody` **replace** the defaults entirely (not merged key-by-key). If you need both default and model-specific headers, repeat the shared ones in the per-model block.
 :::
 
 ### LLM Provider Examples
@@ -213,7 +217,7 @@ The model names above must match the proxy's configured `model_name` aliases; pr
 
 #### Mixed Providers — Different Keys and Endpoints Per Role
 
-Claude uses LiteLLM to translate the OpenAI-compatible requests to Anthropic's API; setting Anthropic headers on its native endpoint does not perform that translation.
+Here Claude uses LiteLLM to translate the OpenAI-compatible requests to Anthropic's API; setting Anthropic headers on its native endpoint does not perform that translation. To call Claude through Anthropic's own API instead, set `provider: anthropic` (see [Anthropic Claude Models](#anthropic-claude-models)).
 
 ```yaml
 inference:
@@ -290,6 +294,104 @@ converted license or lag behind a renewal.
 
 The proxy also has usage limits and is not recommended for production workloads.
 :::
+
+### Anthropic Claude Models
+
+The AI service can call Claude models through the native Anthropic Messages API, either directly at
+`api.anthropic.com` or through a gateway that serves the Messages API, such as OpenRouter or LiteLLM.
+Set `provider: anthropic` on the model, or in `defaults` for every model:
+
+- **Inheritance**: a model's `provider` falls back to `defaults.provider`, then to `openai`.
+- **`url`**: omit it to call Anthropic directly. For a gateway, use its Anthropic API base, without `/v1/messages`
+  (for example `https://openrouter.ai/api`).
+- **Model names**: use the identifier your endpoint expects, for example `claude-sonnet-5-5` on Anthropic or
+  `anthropic/claude-sonnet-5.5` on OpenRouter.
+- **Reasoning effort**: `defaultReasoningEffort` and `reasoningEfforts` accept `low`, `medium`, `high`, `xhigh` and
+  `max` for Claude models, sent as Claude's `output_config.effort`. Other values are ignored with a warning.
+- **`temperature`**: leave it unset for Claude models.
+- **`apiMode`**: applies to the `openai` provider only and is ignored for `anthropic` models.
+
+:::note Moderation and embeddings
+Anthropic has no moderation or embeddings API, so `provider` does not apply to them. The `embeddings` model
+always uses an OpenAI-compatible endpoint: keep an OpenAI-compatible `embeddings` model, or omit the block to
+[disable embeddings](#disabling-embeddings). Input moderation, when enabled, calls OpenAI's moderation endpoint
+and still needs an OpenAI API key, whatever provider the chat models use.
+:::
+
+#### Anthropic Claude (Direct)
+
+Create the secret with your Anthropic API key, then reference it from `defaults`:
+
+```yaml
+inference:
+  defaults:
+    provider: anthropic
+    secretRef: "anthropic-secret"
+    secretRefKey: "api-key"
+  agent:
+    - model: claude-sonnet-5-5
+      label: "Claude Sonnet 5.5"
+      default: true
+      defaultReasoningEffort: medium
+      reasoningEfforts: [low, medium, high]
+    - model: claude-opus-5-5
+      label: "Claude Opus 5.5"
+  tasks:
+    model: claude-haiku-4-5
+  # embeddings: omitted — Anthropic has no embeddings API
+```
+
+#### Claude Through a Gateway (OpenRouter)
+
+Some gateways route a Claude request to one of several hosting providers unless the request body names one.
+Use `extraBody` to add those fields to every request. With OpenRouter, this pins requests to Anthropic itself:
+
+```yaml
+inference:
+  defaults:
+    provider: anthropic
+    url: "https://openrouter.ai/api"
+    secretRef: "openrouter-secret"
+    secretRefKey: "api-key"
+    extraBody:
+      provider:
+        order: [anthropic]
+        allow_fallbacks: false
+  agent:
+    - model: anthropic/claude-sonnet-5.5
+      default: true
+  tasks:
+    model: anthropic/claude-haiku-4.5
+```
+
+Direct Anthropic and LiteLLM setups do not need `extraBody`.
+
+#### Mixed OpenAI and Anthropic Catalog
+
+`defaults.provider` sets the provider for every model that does not set its own, so a catalog can offer
+OpenAI and Claude models side by side, each with its own key:
+
+```yaml
+inference:
+  defaults:
+    provider: openai
+    secretRef: "openai-secret"
+    secretRefKey: "api-key"
+  agent:
+    - model: gpt-5.2
+      default: true
+    - model: claude-sonnet-5-5
+      label: "Claude Sonnet 5.5"
+      provider: anthropic
+      secretRef: "anthropic-secret"
+      secretRefKey: "api-key"
+  tasks:
+    model: gpt-5-mini
+  embeddings:
+    model: text-embedding-3-small
+```
+
+Users can switch between the OpenAI and Claude models in the same chat.
 
 ### Disabling Embeddings
 
