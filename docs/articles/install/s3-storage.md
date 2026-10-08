@@ -11,6 +11,7 @@ Configure IAM role with the following permissions:
   "Version": "2012-10-17",
   "Statement":
     [
+      { "Effect": "Allow", "Action": "s3:ListAllMyBuckets", "Resource": "*" },
       {
         "Effect": "Allow",
         "Action": ["s3:ListBucket", "s3:GetBucketLocation"],
@@ -24,6 +25,10 @@ Configure IAM role with the following permissions:
     ],
 }
 ```
+
+The Control Plane API readiness check calls the S3 `ListBuckets` operation, which requires `s3:ListAllMyBuckets`. This permission allows listing bucket names in the account; object access remains restricted by the bucket-specific statements above.
+
+Without this permission, `/health/readiness` returns HTTP 500 with an unhealthy `minio` component and an error mentioning `s3:ListAllMyBuckets`. The component is named `minio` because the API uses an S3-compatible client, including when storage is AWS S3.
 
 ## 2. Establish Trust Relationship
 

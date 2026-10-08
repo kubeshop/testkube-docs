@@ -24,6 +24,11 @@ Control Plane is available in Helm chart `v2.337.1` and the Agent is available i
 
 Control Plane is available in Helm chart `v2.337.0` and the Runner is available in Helm chart `v2.14.0`.
 
+### Upgrade notes
+
+- The Control Plane API readiness probe now uses `/health/readiness`, which checks dependencies. AWS S3 installations must allow `s3:ListAllMyBuckets` on the API's IAM role. See [S3 with IAM Authentication](/articles/install/s3-storage).
+- PostgreSQL installations using separate migration and runtime roles should verify default privileges and access to newly created tables. See the [Post-Upgrade Runbook](/articles/post-upgrade-runbook).
+
 ### AI Test Creation
 
 - Work with a GitHub repository inside a Test Bundle. Import the repository, review file changes, and push the chat's commits back to GitHub. [Read more](/articles/ai-test-creation-github).

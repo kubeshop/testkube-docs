@@ -66,6 +66,16 @@ kubectl get sts -n "$NS"
 kubectl get po -n "$NS" --sort-by=.metadata.creationTimestamp
 ```
 
+### API readiness and S3 permissions
+
+The Control Plane chart shipped with application version 2.14.0 uses `/health/readiness` for the API readiness probe. Earlier chart versions used `/health`, which checks liveness.
+
+The readiness endpoint checks dependencies, including object storage. For AWS S3, verify that the IAM role used by the API allows `s3:ListAllMyBuckets`. A role limited to operations on the configured bucket can support artifact access while still failing this readiness check.
+
+See [Installation with S3 Storage and IAM Authentication](/articles/install/s3-storage) for the required policy.
+
+After updating the policy, confirm that `/health/readiness` returns HTTP 200 and the API pods become Ready.
+
 ## 2) Migration and Database Verification
 
 - [ ] DB migrations completed successfully (if enabled)
@@ -77,6 +87,18 @@ kubectl get jobs -n "$NS" | grep -i migration || true
 kubectl logs -n "$NS" deploy/testkube-enterprise-api --tail=300
 kubectl describe deploy testkube-enterprise-api -n "$NS"
 ```
+
+### PostgreSQL grants for new tables
+
+When migrations and runtime services use different database roles, successful migrations do not guarantee that runtime services can access newly created tables.
+
+Before upgrading, verify that the role creating tables has default privileges configured for the appropriate runtime roles. After upgrading, verify access to new tables using each runtime role.
+
+Application version 2.14.1 includes `ai_mcp_calls` and `ai_session_windows`. A warning such as `permission denied for table ai_mcp_calls (SQLSTATE 42501)` means the calling role lacks access. Failed usage-count queries omit the affected AI usage counts.
+
+Ask your database administrator to check table ownership, role membership, and grants. Grant `SELECT` to roles that query usage, and `INSERT` or `DELETE` to roles that record or prune usage.
+
+`ALTER DEFAULT PRIVILEGES` applies only to future objects created by the specified role. Existing tables require explicit grants.
 
 ## 3) License and Enterprise Mode
 
