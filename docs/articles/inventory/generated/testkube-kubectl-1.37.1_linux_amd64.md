@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:44fe2be8bf804aae8f9f550f4b60841d0b7e02bb8136fbf6057ebe5dc4ccf002</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/high-1-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/medium-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <!-- unspecified: 0 --></td></tr>
+<tr><td>digest</td><td><code>sha256:44fe2be8bf804aae8f9f550f4b60841d0b7e02bb8136fbf6057ebe5dc4ccf002</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/high-1-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/medium-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>26 MB</td></tr>
 <tr><td>packages</td><td>127</td></tr>
@@ -30,7 +30,7 @@ FROM alpine/kubectl:1.37.1
 <tr><td>Affected range</td><td><code>&lt;1.3.2-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.3.2-r1</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.592%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -59,8 +59,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>>=0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.689%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.703%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -84,6 +84,34 @@ Kubernetes GitRepo Volume Inadvertent Local Repository Access in k8s.io/kubernet
 <blockquote>
 
 Kubernetes kube-apiserver Vulnerable to Race Condition in k8s.io/kubernetes
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/text</strong> <code>0.40.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/text@0.40.0</code></small><br/>
+
+```dockerfile
+# kubectl-release.dockerfile (5:5)
+FROM alpine/kubectl:1.37.1
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-56851?s=golang&n=text&ns=golang.org%2Fx&t=golang&vr=%3C0.41.0"><img alt="unspecified : CVE--2026--56851" src="https://img.shields.io/badge/CVE--2026--56851-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.41.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.41.0</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The Nickname profile can panic with an out-of-bounds slice error when transforming crafted input into a short destination buffer.
 
 </blockquote>
 </details>
