@@ -6487,13 +6487,6 @@ components:
         isDefault:
           description: Whether this is a system-default assistant that cannot be deleted
           type: boolean
-        maxTokens:
-          description: >-
-            Maximum tokens this agent can consume per billing period. 0 means no
-            per-agent limit.
-          type: integer
-          format: int64
-          example: 100000
         defaultModel:
           description: >-
             Default model to pre-select when starting a chat with this agent.
@@ -6525,13 +6518,6 @@ components:
           type: object
           additionalProperties:
             type: string
-        maxTokens:
-          description: >-
-            Maximum tokens this agent can consume per billing period. 0 means no
-            per-agent limit.
-          type: integer
-          format: int64
-          example: 100000
         defaultModel:
           description: >-
             Default model to pre-select when starting a chat with this agent.
@@ -6570,13 +6556,6 @@ components:
           type: object
           additionalProperties:
             type: string
-        maxTokens:
-          description: >-
-            Maximum tokens this agent can consume per billing period. 0 means no
-            per-agent limit.
-          type: integer
-          format: int64
-          example: 100000
         defaultModel:
           description: >-
             Default model to pre-select when starting a chat with this agent.
@@ -10991,19 +10970,6 @@ components:
           description: Data retention limits in days
           type: integer
           example: 7
-        weeklyAiAnalysis:
-          description: Limits for daily AI analysis per organization
-          type: integer
-          example: 14
-        dailyAiAnalysis:
-          description: Limits for weekly AI analysis per organization
-          type: integer
-          example: 2
-        maxAiTokensPerPeriod:
-          description: Maximum AI tokens per billing period. -1 means unlimited.
-          type: integer
-          format: int64
-          example: 1000000
         ssoAllowed:
           description: Is custom SSO allowed
           type: boolean
@@ -16792,8 +16758,6 @@ components:
         maxOrganizationsCount:
           type: integer
         aiSessionsCount:
-          type: integer
-        additionalAiSessionsCount:
           type: integer
         maxAiSessionsCount:
           type: integer
