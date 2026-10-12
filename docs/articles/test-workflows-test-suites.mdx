@@ -31,6 +31,27 @@ You have to use `execute` operation in the step, and provide definition of the T
 
 For each Workflow to execute, you have to provide its `name` and optionally `config` values.
 
+:::important Workflow orchestration compatibility change
+
+Starting with Testkube 2.14.0, separate entries in the same `execute.workflows` block must have distinct execution references. An entry uses its `as` alias when provided; otherwise, it uses the Workflow name.
+
+Existing Workflows that list the same Workflow more than once without distinct references will fail with `duplicated execution reference`. This validation applies even when the Workflow does not use `execution()` or share data between executions.
+
+Before upgrading from 2.13.x, give repeated entries distinct aliases:
+
+```yaml
+execute:
+  workflows:
+    - name: my-workflow
+      as: my-workflow-a
+    - name: my-workflow
+      as: my-workflow-b
+```
+
+Aliases must also be distinct from the references of other entries in that block. A single entry expanded through `count`, `matrix`, or `shards` remains supported without assigning an alias to each instance.
+
+:::
+
 This example runs two Workflows - `example-distributed-k6` and `example-sharded-cypress` in parallel, providing configuration values for
 the `example-distributed-k6` Workflow:
 
