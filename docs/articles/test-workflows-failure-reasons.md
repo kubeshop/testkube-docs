@@ -30,6 +30,8 @@ When a person cancels an execution, the sentence names only the person: `The exe
 
 When Kubernetes ends the container, nobody decided a stop. The parentheses then hold the reason that Kubernetes gave, for example `The execution has been aborted. (OOMKilled)`.
 
+This sentence is the message of the step. The [status details](#the-status-details-of-an-execution) keep only the cause, and they name the step when the cause alone does not say where it happened, for example `The step "Run test" ran out of memory.`
+
 ## Actors
 
 The actor is the component that decided the stop.
@@ -101,6 +103,7 @@ These codes name a problem of the infrastructure while the test ran. Their type 
 | `job-deleted`            | Something deleted the Job of the execution while it ran                                         | Who deletes Jobs in the namespace, for example a cleanup policy                                                |
 | `service-not-ready`      | A service of a step did not become ready                                                        | The readiness probe of the service, and its log                                                                |
 | `artifact-upload-failed` | The artifacts could not be uploaded                                                             | The object storage of the installation, and its credentials                                                    |
+| `git-unreachable`        | The clone step could not reach the server of the repository                                     | The address of the repository, and the network and proxy of the cluster                                        |
 | `fail-fast`              | Another parallel worker failed, so this one stopped                                             | The worker that failed first                                                                                   |
 
 ### The Test Decides the Result
@@ -153,14 +156,23 @@ A step with `retry` reports the number of attempts in `attempts`. A step that ra
 
 An execution that does not pass carries `result.statusDetails`. The object says which layer failed, names the cause with a code, and keeps the message that explains it. The runner or the control plane writes it once, when the execution ends.
 
-| Field     | Meaning                                                                                       |
-| --------- | --------------------------------------------------------------------------------------------- |
-| `type`    | The layer that failed. One of the five values in the table below                              |
-| `reason`  | The code of the cause. One of the codes in the Reason Codes section above                     |
-| `message` | The text that explains the cause, as Testkube wrote it                                        |
-| `step`    | The reference of the step that holds the cause. Empty when the initialization step holds it   |
-| `actor`   | The component that decided the stop. Empty when no component decided it                       |
-| `user`    | The name and the email of the person who asked for the stop. Present only when a person asked |
+| Field     | Meaning                                                                                                                                                                                                                       |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`    | The layer that failed. One of the five values in the table below                                                                                                                                                              |
+| `reason`  | The code of the cause. One of the codes in the Reason Codes section above                                                                                                                                                     |
+| `message` | The cause in words, without the status and the reason that other fields hold. It names the step when the cause alone does not say where. Empty when the type and the reason say everything, for example when a person cancels |
+| `step`    | The reference of the step that holds the cause. Empty when the initialization step holds it                                                                                                                                   |
+| `actor`   | The component that decided the stop. Empty when no component decided it                                                                                                                                                       |
+| `user`    | The name and the email of the person who asked for the stop. Present only when a person asked                                                                                                                                 |
+
+For example, an execution that does not start because no node can run its pod has these two messages:
+
+| Field                                | Message                                                                                                                                                                             |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `result.initialization.errorMessage` | `The execution has been aborted. (by the runner: the first step did not start before the initialization timeout of the workflow: no node can run the pod: 0/2 nodes are available)` |
+| `result.statusDetails.message`       | `the first step did not start before the initialization timeout of the workflow: 0/2 nodes are available`                                                                           |
+
+When a step of the test fails without a message of its own, the message names the step and its exit code, for example `The step "Run tests" exited with code 1.`
 
 ### Types
 
