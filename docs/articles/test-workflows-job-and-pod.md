@@ -40,7 +40,7 @@ spec:
 
 ### Execution Namespace
 
-You may select a different namespace for execution, if Testkube is [**configured to work with it**](/articles/install/advanced-install#namespaces-for-test-execution).
+Set `spec.job.namespace` to select the Kubernetes namespace where the Workflow execution Job and Pod run. If omitted, the runner uses its configured default execution namespace. This property selects the execution namespace; it does not change the namespace of the TestWorkflow custom resource.
 
 ```yaml
 spec:
@@ -48,6 +48,11 @@ spec:
     # schedule the execution in `another-testkube-zone` namespace
     namespace: another-testkube-zone
 ```
+
+The target namespace must exist, and the runner must have the required permissions to create and manage execution resources there. Configure access using the Helm settings for your runner installation:
+
+- For the `testkube-agent.testkube-api` chart configuration, use `executionNamespaces` as described in [Namespaces for Test Execution](/articles/install/advanced-install#namespaces-for-test-execution).
+- For the standalone `testkube-runner` chart, use `execution.additionalNamespaces` as described in [Support additional namespaces](/articles/multi-agent-runner-helm-chart#support-additional-namespaces).
 
 :::tip
 Check out [Ephemeral Namespaces](/articles/ephemeral-environments) for an example of how to use
