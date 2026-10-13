@@ -31,6 +31,21 @@ _Appears in:_
 | --------------- | ------------- | ------- | ---------------------------------------- |
 | `name` _string_ | artifact name |         | MinLength: 1 <br />Required: \{\} <br /> |
 
+### CacheScope
+
+_Underlying type:_ _string_
+
+CacheScope declares how widely a cache entry is shared.
+
+_Appears in:_
+
+- [StepCache](#stepcache)
+
+| Field         | Description                                                                                                                                                                                                                                  |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `workflow`    | CacheScopeWorkflow shares an entry only with other executions of the same workflow.<br />                                                                                                                                                    |
+| `environment` | CacheScopeEnvironment shares an entry with every workflow in the environment.<br />Any workflow that may write such an entry can influence what every other<br />workflow restores, so this widens a trust boundary, not just a cache.<br /> |
+
 ### ConcurrencyPolicy
 
 ConcurrencyPolicy defines a policy for running and queueing concurrent executions.
@@ -46,6 +61,27 @@ _Appears in:_
 | `group` _string_             | Group ongoing executions by this identifier instead of by workflow name.<br />Use the group identifier if you want the control concurrency across workflows                                                                                                                                                                                                      |         |            |
 | `max` _integer_              | The maximum amount of concurrent executions for this workflow or group.<br />The scheduler will check the amount of ongoing executions for this workflow or group and only<br />schedule this workflow when the amount is below its given maximum. When using a group identifier, it is<br />recommended to keep the maximum in sync through a WorkflowTemplate. |         |            |
 | `cancelInProgress` _boolean_ | Whether the oldest in progress execution should be cancelled to be replaced with the latest queued one.                                                                                                                                                                                                                                                          |         |            |
+
+### ConfigValue
+
+_Underlying type:_ _string_
+
+_Validation:_
+
+- XIntOrString: {}
+
+_Appears in:_
+
+- [CronJobConfig](#cronjobconfig)
+- [IndependentServiceSpec](#independentservicespec)
+- [ParameterSchema](#parameterschema)
+- [Resources](#resources)
+- [ServiceSpec](#servicespec)
+- [StepExecuteStrategy](#stepexecutestrategy)
+- [StepExecuteTest](#stepexecutetest)
+- [StepExecuteWorkflow](#stepexecuteworkflow)
+- [TemplateRef](#templateref)
+- [TestWorkflowExecutionRequest](#testworkflowexecutionrequest)
 
 ### ContainerConfig
 
@@ -112,20 +148,55 @@ _Appears in:_
 
 - [Content](#content)
 
-| Field                                                                                                                      | Description                                                                                      | Default | Validation |
-| -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------- | ---------- |
-| `uri` _string_                                                                                                             | uri for the Git repository                                                                       |         |            |
-| `revision` _string_                                                                                                        | branch, commit or a tag name to fetch                                                            |         |            |
-| `username` _string_                                                                                                        | plain text username to fetch with                                                                |         |            |
-| `usernameFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_ | external username to fetch with                                                                  |         |            |
-| `token` _string_                                                                                                           | plain text token to fetch with                                                                   |         |            |
-| `tokenFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_    | external token to fetch with                                                                     |         |            |
-| `sshKey` _string_                                                                                                          | plain text SSH private key to fetch with                                                         |         |            |
-| `sshKeyFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_   | external SSH private key to fetch with                                                           |         |            |
-| `authType` _[GitAuthType](#gitauthtype)_                                                                                   | authorization type for the credentials                                                           |         |            |
-| `mountPath` _string_                                                                                                       | where to mount the fetched repository contents (defaults to "repo" directory in the data volume) |         |            |
-| `cone` _boolean_                                                                                                           | enable cone mode for sparse checkout with paths                                                  |         |            |
-| `paths` _string array_                                                                                                     | paths to fetch for the sparse checkout                                                           |         |            |
+| Field                                                                                                                      | Description                                                                                      | Default | Validation                          |
+| -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------- | ----------------------------------- |
+| `uri` _string_                                                                                                             | uri for the Git repository                                                                       |         |                                     |
+| `revision` _string_                                                                                                        | branch, commit or a tag name to fetch                                                            |         |                                     |
+| `username` _string_                                                                                                        | plain text username to fetch with                                                                |         |                                     |
+| `usernameFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_ | external username to fetch with                                                                  |         |                                     |
+| `token` _string_                                                                                                           | plain text token to fetch with                                                                   |         |                                     |
+| `tokenFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_    | external token to fetch with                                                                     |         |                                     |
+| `sshKey` _string_                                                                                                          | plain text SSH private key to fetch with                                                         |         |                                     |
+| `sshKeyFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_   | external SSH private key to fetch with                                                           |         |                                     |
+| `authType` _[GitAuthType](#gitauthtype)_                                                                                   | authorization type for the credentials                                                           |         |                                     |
+| `mountPath` _string_                                                                                                       | where to mount the fetched repository contents (defaults to "repo" directory in the data volume) |         |                                     |
+| `cone` _boolean_                                                                                                           | enable cone mode for sparse checkout with paths                                                  |         |                                     |
+| `paths` _string array_                                                                                                     | paths to fetch for the sparse checkout                                                           |         |                                     |
+| `verbosity` _[ContentGitVerbosity](#contentgitverbosity)_                                                                  | logging level for the clone. Omit defaults to verbose.                                           |         | Enum: [quiet normal verbose] <br /> |
+| `retry` _[ContentGitRetry](#contentgitretry)_                                                                              | in-process retry policy for transient git failures during clone                                  |         |                                     |
+
+### ContentGitRetry
+
+ContentGitRetry is an in-process retry policy for transient git failures during clone.
+
+_Appears in:_
+
+- [ContentGit](#contentgit)
+
+| Field             | Description                                                                                                                                    | Default | Validation                          |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ----------------------------------- |
+| `count` _integer_ | max attempts for transient git failures (default 5, max 20)                                                                                    |         | Maximum: 20 <br />Minimum: 1 <br /> |
+| `delay` _string_  | base delay between attempts; exponential backoff applies (e.g. "100ms", "1s").<br />May be an expression template; validated after resolution. |         |                                     |
+
+### ContentGitVerbosity
+
+_Underlying type:_ _string_
+
+ContentGitVerbosity controls git and toolkit logging during clone.
+
+_Validation:_
+
+- Enum: [quiet normal verbose]
+
+_Appears in:_
+
+- [ContentGit](#contentgit)
+
+| Field     | Description |
+| --------- | ----------- |
+| `quiet`   |             |
+| `normal`  |             |
+| `verbose` |             |
 
 ### ContentTarball
 
@@ -147,14 +218,14 @@ _Appears in:_
 
 - [Event](#event)
 
-| Field                                                                                                                                               | Description                                                      | Default | Validation |
-| --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------- | ---------- |
-| `cron` _string_                                                                                                                                     | cron schedule to run a test workflow                             |         |            |
-| `labels` _object (keys:string, values:string)_                                                                                                      | labels to attach to the cron job                                 |         |            |
-| `annotations` _object (keys:string, values:string)_                                                                                                 | annotations to attach to the cron job                            |         |            |
-| `config` _object (keys:string, values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util))_ | configuration to pass for the workflow                           |         |            |
-| `target` _[Target](#target)_                                                                                                                        | Targets helps decide on which runner the execution is scheduled. |         |            |
-| `timezone` _string_                                                                                                                                 | cron timezone                                                    |         |            |
+| Field                                                               | Description                                                      | Default | Validation |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------- | ------- | ---------- |
+| `cron` _string_                                                     | cron schedule to run a test workflow                             |         |            |
+| `labels` _object (keys:string, values:string)_                      | labels to attach to the cron job                                 |         |            |
+| `annotations` _object (keys:string, values:string)_                 | annotations to attach to the cron job                            |         |            |
+| `config` _object (keys:string, values:[ConfigValue](#configvalue))_ | configuration to pass for the workflow                           |         |            |
+| `target` _[Target](#target)_                                        | Targets helps decide on which runner the execution is scheduled. |         |            |
+| `timezone` _string_                                                 | cron timezone                                                    |         |            |
 
 ### DynamicList
 
@@ -216,32 +287,32 @@ _Appears in:_
 - [ServiceSpec](#servicespec)
 - [TestWorkflowTemplateSpec](#testworkflowtemplatespec)
 
-| Field                                                                                                                                                                     | Description                                                                                             | Default | Validation |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------- | ---------- |
-| `matrix` _object (keys:string, values:[DynamicList](#dynamiclist))_                                                                                                       | matrix of parameters to spawn instances (static)                                                        |         |            |
-| `count` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_                                                     | static number of sharded instances to spawn                                                             |         |            |
-| `maxCount` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_                                                  | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |         |            |
-| `shards` _object (keys:string, values:[DynamicList](#dynamiclist))_                                                                                                       | parameters that should be distributed across sharded instances                                          |         |            |
-| `description` _string_                                                                                                                                                    | service description to display                                                                          |         |            |
-| `logs` _string_                                                                                                                                                           | should save logs for the service (false if not specified)                                               |         |            |
-| `timeout` _string_                                                                                                                                                        | maximum time until reaching readiness                                                                   |         |            |
-| `transfer` _[StepParallelTransfer](#stepparalleltransfer) array_                                                                                                          | instructions for transferring files                                                                     |         |            |
-| `content` _[Content](#content)_                                                                                                                                           | global content that should be fetched into all containers                                               |         |            |
-| `pod` _[PodConfig](#podconfig)_                                                                                                                                           | configuration for the scheduled pod                                                                     |         |            |
-| `workingDir` _string_                                                                                                                                                     | override default working directory in the image (empty string to default WORKDIR for the image)         |         |            |
-| `image` _string_                                                                                                                                                          | image to be used for the container                                                                      |         |            |
-| `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#pullpolicy-v1-core)_                                                 | pulling policy for the image                                                                            |         |            |
-| `env` _[EnvVar](#envvar) array_                                                                                                                                           | environment variables to append to the container                                                        |         |            |
-| `envFrom` _[EnvFromSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envfromsource-v1-core) array_                                             | external environment variables to append to the container                                               |         |            |
-| `command` _string_                                                                                                                                                        | override default command in the image (empty string to default ENTRYPOINT of the image)                 |         |            |
-| `args` _string_                                                                                                                                                           | override default command in the image (empty string to default CMD of the image)                        |         |            |
-| `resources` _[Resources](#resources)_                                                                                                                                     | expected resources for the container                                                                    |         |            |
-| `securityContext` _[WorkflowSecurityContext](#workflowsecuritycontext)_                                                                                                   | security context for the container                                                                      |         |            |
-| `volumeMounts` _[VolumeMount](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#volumemount-v1-core) array_                                            | volume mounts to append to the container                                                                |         |            |
-| `shell` _string_                                                                                                                                                          | script to run in a default shell for the container                                                      |         |            |
-| `restartPolicy` _[ServiceRestartPolicy](#servicerestartpolicy)_                                                                                                           | Restart policy for the main container in the pod. One of OnFailure or Never.                            |         |            |
-| `readinessProbe` _[Probe](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#probe-v1-core)_                                                            | Probe to check if the service has started correctly                                                     |         |            |
-| `pvcs` _object (keys:string, values:[PersistentVolumeClaimSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#persistentvolumeclaimspec-v1-core))_ | list of accompanying permanent volume claims                                                            |         |            |
+| Field                                                                                                                                                                     | Description                                                                                             | Default | Validation                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------- | ------------------------- |
+| `matrix` _object (keys:string, values:[DynamicList](#dynamiclist))_                                                                                                       | matrix of parameters to spawn instances (static)                                                        |         |                           |
+| `count` _[ConfigValue](#configvalue)_                                                                                                                                     | static number of sharded instances to spawn                                                             |         | XIntOrString: \{\} <br /> |
+| `maxCount` _[ConfigValue](#configvalue)_                                                                                                                                  | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |         | XIntOrString: \{\} <br /> |
+| `shards` _object (keys:string, values:[DynamicList](#dynamiclist))_                                                                                                       | parameters that should be distributed across sharded instances                                          |         |                           |
+| `description` _string_                                                                                                                                                    | service description to display                                                                          |         |                           |
+| `logs` _string_                                                                                                                                                           | should save logs for the service (false if not specified)                                               |         |                           |
+| `timeout` _string_                                                                                                                                                        | maximum time until reaching readiness                                                                   |         |                           |
+| `transfer` _[StepParallelTransfer](#stepparalleltransfer) array_                                                                                                          | instructions for transferring files                                                                     |         |                           |
+| `content` _[Content](#content)_                                                                                                                                           | global content that should be fetched into all containers                                               |         |                           |
+| `pod` _[PodConfig](#podconfig)_                                                                                                                                           | configuration for the scheduled pod                                                                     |         |                           |
+| `workingDir` _string_                                                                                                                                                     | override default working directory in the image (empty string to default WORKDIR for the image)         |         |                           |
+| `image` _string_                                                                                                                                                          | image to be used for the container                                                                      |         |                           |
+| `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#pullpolicy-v1-core)_                                                 | pulling policy for the image                                                                            |         |                           |
+| `env` _[EnvVar](#envvar) array_                                                                                                                                           | environment variables to append to the container                                                        |         |                           |
+| `envFrom` _[EnvFromSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envfromsource-v1-core) array_                                             | external environment variables to append to the container                                               |         |                           |
+| `command` _string_                                                                                                                                                        | override default command in the image (empty string to default ENTRYPOINT of the image)                 |         |                           |
+| `args` _string_                                                                                                                                                           | override default command in the image (empty string to default CMD of the image)                        |         |                           |
+| `resources` _[Resources](#resources)_                                                                                                                                     | expected resources for the container                                                                    |         |                           |
+| `securityContext` _[WorkflowSecurityContext](#workflowsecuritycontext)_                                                                                                   | security context for the container                                                                      |         |                           |
+| `volumeMounts` _[VolumeMount](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#volumemount-v1-core) array_                                            | volume mounts to append to the container                                                                |         |                           |
+| `shell` _string_                                                                                                                                                          | script to run in a default shell for the container                                                      |         |                           |
+| `restartPolicy` _[ServiceRestartPolicy](#servicerestartpolicy)_                                                                                                           | Restart policy for the main container in the pod. One of OnFailure or Never.                            |         |                           |
+| `readinessProbe` _[Probe](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#probe-v1-core)_                                                            | Probe to check if the service has started correctly                                                     |         |                           |
+| `pvcs` _object (keys:string, values:[PersistentVolumeClaimSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#persistentvolumeclaimspec-v1-core))_ | list of accompanying permanent volume claims                                                            |         |                           |
 
 ### IndependentStep
 
@@ -271,6 +342,7 @@ _Appears in:_
 | `run` _[StepRun](#steprun)_                                                                 | run specific container in the current step                                                                                                                                                                                                                                                 |         |                                                                                                       |
 | `execute` _[StepExecute](#stepexecute)_                                                     | execute other Testkube resources                                                                                                                                                                                                                                                           |         |                                                                                                       |
 | `artifacts` _[StepArtifacts](#stepartifacts)_                                               | scrape artifacts from the volumes                                                                                                                                                                                                                                                          |         |                                                                                                       |
+| `cache` _[StepCache](#stepcache)_                                                           | dependency cache to restore before and save after this step's operations                                                                                                                                                                                                                   |         |                                                                                                       |
 | `parallel` _[IndependentStepParallel](#independentstepparallel)_                            | instructions for parallel execution                                                                                                                                                                                                                                                        |         |                                                                                                       |
 | `steps` _[IndependentStep](#independentstep) array_                                         | sub-steps to run                                                                                                                                                                                                                                                                           |         | Schemaless: \{\} <br />                                                                               |
 
@@ -331,23 +403,23 @@ _Appears in:_
 - [TestWorkflowSpecBase](#testworkflowspecbase)
 - [TestWorkflowTemplateSpec](#testworkflowtemplatespec)
 
-| Field                                                                                                                   | Description                                                | Default | Validation                                   |
-| ----------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- | ------- | -------------------------------------------- |
-| `description` _string_                                                                                                  | parameter description                                      |         |                                              |
-| `type` _[ParameterType](#parametertype)_                                                                                | type of the parameter                                      | string  | Enum: [string integer number boolean] <br /> |
-| `enum` _string array_                                                                                                   | the list of allowed values, when limited                   |         |                                              |
-| `example` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_ | exemplary value                                            |         |                                              |
-| `default` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_ | default value - if not provided, the parameter is required |         | XIntOrString: \{\} <br />                    |
-| `sensitive` _boolean_                                                                                                   | whether this value should be stored in the secret          |         |                                              |
-| `format` _string_                                                                                                       | predefined format for the string                           |         |                                              |
-| `pattern` _string_                                                                                                      | regular expression to match                                |         |                                              |
-| `minLength` _integer_                                                                                                   | minimum length for the string                              |         |                                              |
-| `maxLength` _integer_                                                                                                   | maximum length for the string                              |         |                                              |
-| `minimum` _integer_                                                                                                     | minimum value for the number (inclusive)                   |         |                                              |
-| `maximum` _integer_                                                                                                     | maximum value for the number (inclusive)                   |         |                                              |
-| `exclusiveMinimum` _integer_                                                                                            | minimum value for the number (exclusive)                   |         |                                              |
-| `exclusiveMaximum` _integer_                                                                                            | maximum value for the number (exclusive)                   |         |                                              |
-| `multipleOf` _integer_                                                                                                  | the number needs to be multiple of this value              |         |                                              |
+| Field                                    | Description                                                | Default | Validation                                   |
+| ---------------------------------------- | ---------------------------------------------------------- | ------- | -------------------------------------------- |
+| `description` _string_                   | parameter description                                      |         |                                              |
+| `type` _[ParameterType](#parametertype)_ | type of the parameter                                      | string  | Enum: [string integer number boolean] <br /> |
+| `enum` _string array_                    | the list of allowed values, when limited                   |         |                                              |
+| `example` _[ConfigValue](#configvalue)_  | exemplary value                                            |         | XIntOrString: \{\} <br />                    |
+| `default` _[ConfigValue](#configvalue)_  | default value - if not provided, the parameter is required |         | XIntOrString: \{\} <br />                    |
+| `sensitive` _boolean_                    | whether this value should be stored in the secret          |         |                                              |
+| `format` _string_                        | predefined format for the string                           |         |                                              |
+| `pattern` _string_                       | regular expression to match                                |         |                                              |
+| `minLength` _integer_                    | minimum length for the string                              |         |                                              |
+| `maxLength` _integer_                    | maximum length for the string                              |         |                                              |
+| `minimum` _integer_                      | minimum value for the number (inclusive)                   |         |                                              |
+| `maximum` _integer_                      | maximum value for the number (inclusive)                   |         |                                              |
+| `exclusiveMinimum` _integer_             | minimum value for the number (exclusive)                   |         |                                              |
+| `exclusiveMaximum` _integer_             | maximum value for the number (exclusive)                   |         |                                              |
+| `multipleOf` _integer_                   | the number needs to be multiple of this value              |         |                                              |
 
 ### ParameterStringSchema
 
@@ -427,10 +499,10 @@ _Appears in:_
 - [ServiceSpec](#servicespec)
 - [StepRun](#steprun)
 
-| Field                                                                                                                                                                                                                                                    | Description                         | Default | Validation |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | ------- | ---------- |
-| `limits` _object (keys:[ResourceName](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#resourcename-v1-core), values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util))_   | resource limits for the container   |         |            |
-| `requests` _object (keys:[ResourceName](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#resourcename-v1-core), values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util))_ | resource requests for the container |         |            |
+| Field                                                                                                                                                                    | Description                         | Default | Validation |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------- | ------- | ---------- |
+| `limits` _object (keys:[ResourceName](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#resourcename-v1-core), values:[ConfigValue](#configvalue))_   | resource limits for the container   |         |            |
+| `requests` _object (keys:[ResourceName](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#resourcename-v1-core), values:[ConfigValue](#configvalue))_ | resource requests for the container |         |            |
 
 ### RetryPolicy
 
@@ -466,33 +538,33 @@ _Appears in:_
 - [Step](#step)
 - [TestWorkflowSpec](#testworkflowspec)
 
-| Field                                                                                                                                                                     | Description                                                                                             | Default | Validation |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------- | ---------- |
-| `use` _[TemplateRef](#templateref) array_                                                                                                                                 | multiple templates to include in this step                                                              |         |            |
-| `matrix` _object (keys:string, values:[DynamicList](#dynamiclist))_                                                                                                       | matrix of parameters to spawn instances (static)                                                        |         |            |
-| `count` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_                                                     | static number of sharded instances to spawn                                                             |         |            |
-| `maxCount` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_                                                  | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |         |            |
-| `shards` _object (keys:string, values:[DynamicList](#dynamiclist))_                                                                                                       | parameters that should be distributed across sharded instances                                          |         |            |
-| `description` _string_                                                                                                                                                    | service description to display                                                                          |         |            |
-| `logs` _string_                                                                                                                                                           | should save logs for the service (false if not specified)                                               |         |            |
-| `timeout` _string_                                                                                                                                                        | maximum time until reaching readiness                                                                   |         |            |
-| `transfer` _[StepParallelTransfer](#stepparalleltransfer) array_                                                                                                          | instructions for transferring files                                                                     |         |            |
-| `content` _[Content](#content)_                                                                                                                                           | global content that should be fetched into all containers                                               |         |            |
-| `pod` _[PodConfig](#podconfig)_                                                                                                                                           | configuration for the scheduled pod                                                                     |         |            |
-| `workingDir` _string_                                                                                                                                                     | override default working directory in the image (empty string to default WORKDIR for the image)         |         |            |
-| `image` _string_                                                                                                                                                          | image to be used for the container                                                                      |         |            |
-| `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#pullpolicy-v1-core)_                                                 | pulling policy for the image                                                                            |         |            |
-| `env` _[EnvVar](#envvar) array_                                                                                                                                           | environment variables to append to the container                                                        |         |            |
-| `envFrom` _[EnvFromSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envfromsource-v1-core) array_                                             | external environment variables to append to the container                                               |         |            |
-| `command` _string_                                                                                                                                                        | override default command in the image (empty string to default ENTRYPOINT of the image)                 |         |            |
-| `args` _string_                                                                                                                                                           | override default command in the image (empty string to default CMD of the image)                        |         |            |
-| `resources` _[Resources](#resources)_                                                                                                                                     | expected resources for the container                                                                    |         |            |
-| `securityContext` _[WorkflowSecurityContext](#workflowsecuritycontext)_                                                                                                   | security context for the container                                                                      |         |            |
-| `volumeMounts` _[VolumeMount](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#volumemount-v1-core) array_                                            | volume mounts to append to the container                                                                |         |            |
-| `shell` _string_                                                                                                                                                          | script to run in a default shell for the container                                                      |         |            |
-| `restartPolicy` _[ServiceRestartPolicy](#servicerestartpolicy)_                                                                                                           | Restart policy for the main container in the pod. One of OnFailure or Never.                            |         |            |
-| `readinessProbe` _[Probe](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#probe-v1-core)_                                                            | Probe to check if the service has started correctly                                                     |         |            |
-| `pvcs` _object (keys:string, values:[PersistentVolumeClaimSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#persistentvolumeclaimspec-v1-core))_ | list of accompanying permanent volume claims                                                            |         |            |
+| Field                                                                                                                                                                     | Description                                                                                             | Default | Validation                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------- | ------------------------- |
+| `use` _[TemplateRef](#templateref) array_                                                                                                                                 | multiple templates to include in this step                                                              |         |                           |
+| `matrix` _object (keys:string, values:[DynamicList](#dynamiclist))_                                                                                                       | matrix of parameters to spawn instances (static)                                                        |         |                           |
+| `count` _[ConfigValue](#configvalue)_                                                                                                                                     | static number of sharded instances to spawn                                                             |         | XIntOrString: \{\} <br /> |
+| `maxCount` _[ConfigValue](#configvalue)_                                                                                                                                  | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |         | XIntOrString: \{\} <br /> |
+| `shards` _object (keys:string, values:[DynamicList](#dynamiclist))_                                                                                                       | parameters that should be distributed across sharded instances                                          |         |                           |
+| `description` _string_                                                                                                                                                    | service description to display                                                                          |         |                           |
+| `logs` _string_                                                                                                                                                           | should save logs for the service (false if not specified)                                               |         |                           |
+| `timeout` _string_                                                                                                                                                        | maximum time until reaching readiness                                                                   |         |                           |
+| `transfer` _[StepParallelTransfer](#stepparalleltransfer) array_                                                                                                          | instructions for transferring files                                                                     |         |                           |
+| `content` _[Content](#content)_                                                                                                                                           | global content that should be fetched into all containers                                               |         |                           |
+| `pod` _[PodConfig](#podconfig)_                                                                                                                                           | configuration for the scheduled pod                                                                     |         |                           |
+| `workingDir` _string_                                                                                                                                                     | override default working directory in the image (empty string to default WORKDIR for the image)         |         |                           |
+| `image` _string_                                                                                                                                                          | image to be used for the container                                                                      |         |                           |
+| `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#pullpolicy-v1-core)_                                                 | pulling policy for the image                                                                            |         |                           |
+| `env` _[EnvVar](#envvar) array_                                                                                                                                           | environment variables to append to the container                                                        |         |                           |
+| `envFrom` _[EnvFromSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envfromsource-v1-core) array_                                             | external environment variables to append to the container                                               |         |                           |
+| `command` _string_                                                                                                                                                        | override default command in the image (empty string to default ENTRYPOINT of the image)                 |         |                           |
+| `args` _string_                                                                                                                                                           | override default command in the image (empty string to default CMD of the image)                        |         |                           |
+| `resources` _[Resources](#resources)_                                                                                                                                     | expected resources for the container                                                                    |         |                           |
+| `securityContext` _[WorkflowSecurityContext](#workflowsecuritycontext)_                                                                                                   | security context for the container                                                                      |         |                           |
+| `volumeMounts` _[VolumeMount](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#volumemount-v1-core) array_                                            | volume mounts to append to the container                                                                |         |                           |
+| `shell` _string_                                                                                                                                                          | script to run in a default shell for the container                                                      |         |                           |
+| `restartPolicy` _[ServiceRestartPolicy](#servicerestartpolicy)_                                                                                                           | Restart policy for the main container in the pod. One of OnFailure or Never.                            |         |                           |
+| `readinessProbe` _[Probe](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#probe-v1-core)_                                                            | Probe to check if the service has started correctly                                                     |         |                           |
+| `pvcs` _object (keys:string, values:[PersistentVolumeClaimSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#persistentvolumeclaimspec-v1-core))_ | list of accompanying permanent volume claims                                                            |         |                           |
 
 ### Step
 
@@ -523,6 +595,7 @@ _Appears in:_
 | `run` _[StepRun](#steprun)_                                           | run specific container in the current step                                                                                                                                                                                                                                                 |         |                                                                                                       |
 | `execute` _[StepExecute](#stepexecute)_                               | execute other Testkube resources                                                                                                                                                                                                                                                           |         |                                                                                                       |
 | `artifacts` _[StepArtifacts](#stepartifacts)_                         | scrape artifacts from the volumes                                                                                                                                                                                                                                                          |         |                                                                                                       |
+| `cache` _[StepCache](#stepcache)_                                     | dependency cache to restore before and save after this step's operations                                                                                                                                                                                                                   |         |                                                                                                       |
 | `template` _[TemplateRef](#templateref)_                              | single template to run in this step                                                                                                                                                                                                                                                        |         |                                                                                                       |
 | `parallel` _[StepParallel](#stepparallel)_                            | instructions for parallel execution                                                                                                                                                                                                                                                        |         |                                                                                                       |
 | `steps` _[Step](#step) array_                                         | sub-steps to run                                                                                                                                                                                                                                                                           |         | Schemaless: \{\} <br />                                                                               |
@@ -540,6 +613,31 @@ _Appears in:_
 | `workingDir` _string_                                    | working directory to override, so it will be used as a base dir |         |            |
 | `compress` _[ArtifactCompression](#artifactcompression)_ | compression options for the artifacts                           |         |            |
 | `paths` _string array_                                   | paths to fetch from the container                               |         |            |
+
+### StepCache
+
+StepCache restores directories from object storage before the step's operations run
+and saves them back once the step has passed, so that dependency installs survive
+between executions.
+
+A cache is only ever an optimization: a miss, a corrupt entry, storage that cannot be
+reached, or a control plane too old to serve caches all degrade the step to an
+uncached run rather than failing it.
+
+_Appears in:_
+
+- [IndependentStep](#independentstep)
+- [Step](#step)
+- [StepOperations](#stepoperations)
+
+| Field                               | Description                                                                                                                                                                                                                                            | Default | Validation                                                    |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- | ------------------------------------------------------------- |
+| `key` _string_                      | key to store the entry under, usually derived from a lockfile,<br />e.g. 'npm-\{\{ hash_files("package-lock.json") \}\}'                                                                                                                               |         | MaxLength: 512 <br />MinLength: 1 <br />Required: \{\} <br /> |
+| `restoreKeys` _string array_        | key prefixes to fall back to when there is no entry for the exact key,<br />tried in order, where the most recently saved match wins                                                                                                                   |         | MaxItems: 10 <br />                                           |
+| `paths` _string array_              | paths to store in the cache, relative to the working directory                                                                                                                                                                                         |         | MinItems: 1 <br />Required: \{\} <br />                       |
+| `workingDir` _string_               | working directory to override, so it will be used as a base dir                                                                                                                                                                                        |         |                                                               |
+| `scope` _[CacheScope](#cachescope)_ | how widely the entry is shared (defaults to workflow)                                                                                                                                                                                                  |         | Enum: [workflow environment] <br />                           |
+| `mount` _boolean_                   | should a volume be mounted at every cached path that is not part of one already<br />(true if not specified); a path outside any volume would otherwise be restored<br />into a container's own filesystem, where the step that needs it cannot see it |         |                                                               |
 
 ### StepControl
 
@@ -583,6 +681,20 @@ _Appears in:_
 | `tests` _[StepExecuteTest](#stepexecutetest) array_             | tests to run                                                                               |         |            |
 | `workflows` _[StepExecuteWorkflow](#stepexecuteworkflow) array_ | workflows to run                                                                           |         |            |
 
+### StepExecuteFetch
+
+StepExecuteFetch downloads artifacts produced by an executed test workflow.
+
+_Appears in:_
+
+- [StepExecuteWorkflow](#stepexecuteworkflow)
+
+| Field                  | Description                                                                                                                                                   | Default | Validation |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ---------- |
+| `from` _string_        | execution to download the artifacts from, defaults to the one being executed                                                                                  |         |            |
+| `paths` _string array_ | artifact paths to download, relative to the artifact root of the execution                                                                                    |         |            |
+| `to` _string_          | directory to download the artifacts to; when the entry fans out over a matrix or<br />shards, include \{\{ index \}\} to keep each instance's artifacts apart |         |            |
+
 ### StepExecuteStrategy
 
 _Appears in:_
@@ -592,12 +704,12 @@ _Appears in:_
 - [StepExecuteTest](#stepexecutetest)
 - [StepExecuteWorkflow](#stepexecuteworkflow)
 
-| Field                                                                                                                    | Description                                                                                             | Default | Validation |
-| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- | ------- | ---------- |
-| `matrix` _object (keys:string, values:[DynamicList](#dynamiclist))_                                                      | matrix of parameters to spawn instances (static)                                                        |         |            |
-| `count` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_    | static number of sharded instances to spawn                                                             |         |            |
-| `maxCount` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_ | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |         |            |
-| `shards` _object (keys:string, values:[DynamicList](#dynamiclist))_                                                      | parameters that should be distributed across sharded instances                                          |         |            |
+| Field                                                               | Description                                                                                             | Default | Validation                |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------- | ------------------------- |
+| `matrix` _object (keys:string, values:[DynamicList](#dynamiclist))_ | matrix of parameters to spawn instances (static)                                                        |         |                           |
+| `count` _[ConfigValue](#configvalue)_                               | static number of sharded instances to spawn                                                             |         | XIntOrString: \{\} <br /> |
+| `maxCount` _[ConfigValue](#configvalue)_                            | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |         | XIntOrString: \{\} <br /> |
+| `shards` _object (keys:string, values:[DynamicList](#dynamiclist))_ | parameters that should be distributed across sharded instances                                          |         |                           |
 
 ### StepExecuteTest
 
@@ -605,16 +717,16 @@ _Appears in:_
 
 - [StepExecute](#stepexecute)
 
-| Field                                                                                                                    | Description                                                                                             | Default | Validation |
-| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- | ------- | ---------- |
-| `name` _string_                                                                                                          | test name to run                                                                                        |         |            |
-| `description` _string_                                                                                                   | test execution description to display                                                                   |         |            |
-| `matrix` _object (keys:string, values:[DynamicList](#dynamiclist))_                                                      | matrix of parameters to spawn instances (static)                                                        |         |            |
-| `count` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_    | static number of sharded instances to spawn                                                             |         |            |
-| `maxCount` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_ | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |         |            |
-| `shards` _object (keys:string, values:[DynamicList](#dynamiclist))_                                                      | parameters that should be distributed across sharded instances                                          |         |            |
-| `tarball` _object (keys:string, values:[TarballRequest](#tarballrequest))_                                               | pack some data from the original file system to serve them down                                         |         |            |
-| `executionRequest` _[TestExecutionRequest](#testexecutionrequest)_                                                       | pass the execution request overrides                                                                    |         |            |
+| Field                                                                      | Description                                                                                             | Default | Validation                |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------- | ------------------------- |
+| `name` _string_                                                            | test name to run                                                                                        |         |                           |
+| `description` _string_                                                     | test execution description to display                                                                   |         |                           |
+| `matrix` _object (keys:string, values:[DynamicList](#dynamiclist))_        | matrix of parameters to spawn instances (static)                                                        |         |                           |
+| `count` _[ConfigValue](#configvalue)_                                      | static number of sharded instances to spawn                                                             |         | XIntOrString: \{\} <br /> |
+| `maxCount` _[ConfigValue](#configvalue)_                                   | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |         | XIntOrString: \{\} <br /> |
+| `shards` _object (keys:string, values:[DynamicList](#dynamiclist))_        | parameters that should be distributed across sharded instances                                          |         |                           |
+| `tarball` _object (keys:string, values:[TarballRequest](#tarballrequest))_ | pack some data from the original file system to serve them down                                         |         |                           |
+| `executionRequest` _[TestExecutionRequest](#testexecutionrequest)_         | pass the execution request overrides                                                                    |         |                           |
 
 ### StepExecuteWorkflow
 
@@ -622,19 +734,22 @@ _Appears in:_
 
 - [StepExecute](#stepexecute)
 
-| Field                                                                                                                                               | Description                                                                                             | Default | Validation |
-| --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------- | ---------- |
-| `name` _string_                                                                                                                                     | workflow name to run                                                                                    |         |            |
-| `selector` _[LabelSelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#labelselector-v1-meta)_                            | selector is used to identify a group of test workflows based on their metadata labels                   |         |            |
-| `description` _string_                                                                                                                              | test workflow execution description to display                                                          |         |            |
-| `matrix` _object (keys:string, values:[DynamicList](#dynamiclist))_                                                                                 | matrix of parameters to spawn instances (static)                                                        |         |            |
-| `count` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_                               | static number of sharded instances to spawn                                                             |         |            |
-| `maxCount` _[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util)_                            | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values |         |            |
-| `shards` _object (keys:string, values:[DynamicList](#dynamiclist))_                                                                                 | parameters that should be distributed across sharded instances                                          |         |            |
-| `executionName` _string_                                                                                                                            | unique execution name to use                                                                            |         |            |
-| `tarball` _object (keys:string, values:[TarballRequest](#tarballrequest))_                                                                          | pack some data from the original file system to serve them down                                         |         |            |
-| `config` _object (keys:string, values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util))_ | configuration to pass for the workflow                                                                  |         |            |
-| `target` _[Target](#target)_                                                                                                                        | Targets helps decide on which runner the execution is scheduled.                                        |         |            |
+| Field                                                                                                                    | Description                                                                                                                                                                                                                  | Default | Validation                |
+| ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ------------------------- |
+| `name` _string_                                                                                                          | workflow name to run                                                                                                                                                                                                         |         |                           |
+| `selector` _[LabelSelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#labelselector-v1-meta)_ | selector is used to identify a group of test workflows based on their metadata labels                                                                                                                                        |         |                           |
+| `as` _string_                                                                                                            | name to reference this execution by in the execution() expression, defaults to the workflow name                                                                                                                             |         |                           |
+| `description` _string_                                                                                                   | test workflow execution description to display                                                                                                                                                                               |         |                           |
+| `matrix` _object (keys:string, values:[DynamicList](#dynamiclist))_                                                      | matrix of parameters to spawn instances (static)                                                                                                                                                                             |         |                           |
+| `count` _[ConfigValue](#configvalue)_                                                                                    | static number of sharded instances to spawn                                                                                                                                                                                  |         | XIntOrString: \{\} <br /> |
+| `maxCount` _[ConfigValue](#configvalue)_                                                                                 | dynamic number of sharded instances to spawn - it will be lowered if there is not enough sharded values                                                                                                                      |         | XIntOrString: \{\} <br /> |
+| `shards` _object (keys:string, values:[DynamicList](#dynamiclist))_                                                      | parameters that should be distributed across sharded instances                                                                                                                                                               |         |                           |
+| `executionName` _string_                                                                                                 | unique execution name to use                                                                                                                                                                                                 |         |                           |
+| `tarball` _object (keys:string, values:[TarballRequest](#tarballrequest))_                                               | pack some data from the original file system to serve them down                                                                                                                                                              |         |                           |
+| `config` _object (keys:string, values:[ConfigValue](#configvalue))_                                                      | configuration to pass for the workflow                                                                                                                                                                                       |         |                           |
+| `fetch` _[StepExecuteFetch](#stepexecutefetch) array_                                                                    | instructions for downloading artifacts produced by executed test workflows                                                                                                                                                   |         |                           |
+| `baseExecutionId` _string_                                                                                               | id of the execution to record this one as a rerun of, so that it resolves<br />execution("rerun"). Runs the current definition, not the base's snapshot.<br />The base must be one the scheduling execution may itself read. |         |                           |
+| `target` _[Target](#target)_                                                                                             | Targets helps decide on which runner the execution is scheduled.                                                                                                                                                             |         |                           |
 
 ### StepMeta
 
@@ -657,13 +772,14 @@ _Appears in:_
 - [IndependentStep](#independentstep)
 - [Step](#step)
 
-| Field                                         | Description                                        | Default | Validation                                                                                            |
-| --------------------------------------------- | -------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------- |
-| `delay` _string_                              | delay before the step                              |         | Pattern: `^((0\|[1-9][0-9]*)h)?((0\|[1-9][0-9]*)m)?((0\|[1-9][0-9]*)s)?((0\|[1-9][0-9]*)ms)?$` <br /> |
-| `shell` _string_                              | script to run in a default shell for the container |         |                                                                                                       |
-| `run` _[StepRun](#steprun)_                   | run specific container in the current step         |         |                                                                                                       |
-| `execute` _[StepExecute](#stepexecute)_       | execute other Testkube resources                   |         |                                                                                                       |
-| `artifacts` _[StepArtifacts](#stepartifacts)_ | scrape artifacts from the volumes                  |         |                                                                                                       |
+| Field                                         | Description                                                              | Default | Validation                                                                                            |
+| --------------------------------------------- | ------------------------------------------------------------------------ | ------- | ----------------------------------------------------------------------------------------------------- |
+| `delay` _string_                              | delay before the step                                                    |         | Pattern: `^((0\|[1-9][0-9]*)h)?((0\|[1-9][0-9]*)m)?((0\|[1-9][0-9]*)s)?((0\|[1-9][0-9]*)ms)?$` <br /> |
+| `shell` _string_                              | script to run in a default shell for the container                       |         |                                                                                                       |
+| `run` _[StepRun](#steprun)_                   | run specific container in the current step                               |         |                                                                                                       |
+| `execute` _[StepExecute](#stepexecute)_       | execute other Testkube resources                                         |         |                                                                                                       |
+| `artifacts` _[StepArtifacts](#stepartifacts)_ | scrape artifacts from the volumes                                        |         |                                                                                                       |
+| `cache` _[StepCache](#stepcache)_             | dependency cache to restore before and save after this step's operations |         |                                                                                                       |
 
 ### StepParallel
 
@@ -744,10 +860,10 @@ _Appears in:_
 - [Step](#step)
 - [TestWorkflowSpec](#testworkflowspec)
 
-| Field                                                                                                                                               | Description                          | Default | Validation |
-| --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ | ------- | ---------- |
-| `name` _string_                                                                                                                                     | name of the template to include      |         |            |
-| `config` _object (keys:string, values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util))_ | trait configuration values if needed |         |            |
+| Field                                                               | Description                          | Default | Validation |
+| ------------------------------------------------------------------- | ------------------------------------ | ------- | ---------- |
+| `name` _string_                                                     | name of the template to include      |         |            |
+| `config` _object (keys:string, values:[ConfigValue](#configvalue))_ | trait configuration values if needed |         |            |
 
 ### TestExecutionRequest
 
@@ -827,25 +943,26 @@ _Appears in:_
 
 - [TestWorkflowExecutionStatus](#testworkflowexecutionstatus)
 
-| Field                                                                                                                        | Description                                                                        | Default | Validation              |
-| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------- | ----------------------- |
-| `id` _string_                                                                                                                | unique execution identifier                                                        |         |                         |
-| `name` _string_                                                                                                              | execution name                                                                     |         |                         |
-| `namespace` _string_                                                                                                         | execution namespace                                                                |         |                         |
-| `number` _integer_                                                                                                           | sequence number for the execution                                                  |         |                         |
-| `scheduledAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_                    | when the execution has been scheduled to run                                       |         |                         |
-| `statusAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_                       | when the execution result's status has changed last time (queued, passed, failed)  |         |                         |
-| `signature` _[TestWorkflowSignature](#testworkflowsignature) array_                                                          | structured tree of steps                                                           |         |                         |
-| `result` _[TestWorkflowResult](#testworkflowresult)_                                                                         |                                                                                    |         |                         |
-| `output` _[TestWorkflowOutput](#testworkflowoutput) array_                                                                   | additional information from the steps, like referenced executed tests or artifacts |         |                         |
-| `reports` _[TestWorkflowReport](#testworkflowreport) array_                                                                  | generated reports from the steps, like junit                                       |         |                         |
-| `resourceAggregations` _[TestWorkflowExecutionResourceAggregationsReport](#testworkflowexecutionresourceaggregationsreport)_ | resource metrics aggregations (min, max, avg, stddev)                              |         |                         |
-| `workflow` _[TestWorkflow](#testworkflow)_                                                                                   |                                                                                    |         | Schemaless: \{\} <br /> |
-| `resolvedWorkflow` _[TestWorkflow](#testworkflow)_                                                                           |                                                                                    |         | Schemaless: \{\} <br /> |
-| `testWorkflowExecutionName` _string_                                                                                         | test workflow execution name started the test workflow execution                   |         |                         |
-| `disableWebhooks` _boolean_                                                                                                  | whether webhooks should be disabled for this execution                             |         |                         |
-| `tags` _object (keys:string, values:string)_                                                                                 | test workflow execution tags                                                       |         |                         |
-| `runningContext` _[TestWorkflowRunningContext](#testworkflowrunningcontext)_                                                 | running context for the test workflow execution (Pro edition only)                 |         |                         |
+| Field                                                                                                                        | Description                                                                                                                                     | Default | Validation              |
+| ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ----------------------- |
+| `id` _string_                                                                                                                | unique execution identifier                                                                                                                     |         |                         |
+| `name` _string_                                                                                                              | execution name                                                                                                                                  |         |                         |
+| `namespace` _string_                                                                                                         | execution namespace                                                                                                                             |         |                         |
+| `number` _integer_                                                                                                           | sequence number for the execution                                                                                                               |         |                         |
+| `scheduledAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_                    | when the execution has been scheduled to run                                                                                                    |         |                         |
+| `statusAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_                       | when the execution result's status has changed last time (queued, passed, failed)                                                               |         |                         |
+| `signature` _[TestWorkflowSignature](#testworkflowsignature) array_                                                          | structured tree of steps                                                                                                                        |         |                         |
+| `result` _[TestWorkflowResult](#testworkflowresult)_                                                                         |                                                                                                                                                 |         |                         |
+| `output` _[TestWorkflowOutput](#testworkflowoutput) array_                                                                   | additional information from the steps, like referenced executed tests or artifacts                                                              |         |                         |
+| `reports` _[TestWorkflowReport](#testworkflowreport) array_                                                                  | generated reports from the steps, like junit                                                                                                    |         |                         |
+| `resourceAggregations` _[TestWorkflowExecutionResourceAggregationsReport](#testworkflowexecutionresourceaggregationsreport)_ | resource metrics aggregations (min, max, avg, stddev)                                                                                           |         |                         |
+| `workflow` _[TestWorkflow](#testworkflow)_                                                                                   |                                                                                                                                                 |         | Schemaless: \{\} <br /> |
+| `resolvedWorkflow` _[TestWorkflow](#testworkflow)_                                                                           |                                                                                                                                                 |         | Schemaless: \{\} <br /> |
+| `testWorkflowExecutionName` _string_                                                                                         | test workflow execution name started the test workflow execution                                                                                |         |                         |
+| `disableWebhooks` _boolean_                                                                                                  | whether webhooks should be disabled for this execution                                                                                          |         |                         |
+| `tags` _object (keys:string, values:string)_                                                                                 | test workflow execution tags                                                                                                                    |         |                         |
+| `runningContext` _[TestWorkflowRunningContext](#testworkflowrunningcontext)_                                                 | running context for the test workflow execution (Pro edition only)                                                                              |         |                         |
+| `lineage` _[TestWorkflowExecutionLineage](#testworkflowexecutionlineage)_                                                    | where this execution sits in its chain of reruns. Recorded on every<br />execution: an original run is its own root at attempt 1, with no base. |         |                         |
 
 ### TestWorkflowExecutionHealth
 
@@ -860,6 +977,29 @@ _Appears in:_
 | `passRate` _float_      | Recency-weighted fraction of executions that passed (value between 0.0 and 1.0).                               |         |            |
 | `flipRate` _float_      | Fraction of status changes among consecutive executions without recency weighting (value between 0.0 and 1.0). |         |            |
 | `overallHealth` _float_ | Combined health score, computed as passRate \* (1 - flipRate) (value between 0.0 and 1.0).                     |         |            |
+
+### TestWorkflowExecutionLineage
+
+TestWorkflowExecutionLineage records where a rerun came from, so that a
+workflow can read the run it descends from and a reader can follow the chain
+back to its origin.
+
+Recorded on every execution, which is what makes the reserved
+execution("rerun") reference resolve inside the pod after any rerun.
+
+Derived by the scheduler from the base execution: a caller supplies the base
+and nothing else, because a client able to assert a root or an attempt number
+could forge a chain.
+
+_Appears in:_
+
+- [TestWorkflowExecutionDetails](#testworkflowexecutiondetails)
+
+| Field               | Description                                                                                                                   | Default | Validation |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------- | ---------- |
+| `baseId` _string_   | the execution this one is a rerun of; empty for an original run                                                               |         |            |
+| `rootId` _string_   | the first execution in the chain. An original run is its own root, so<br />that every execution of a chain shares one rootId. |         |            |
+| `attempt` _integer_ | 1 for an original run, one more than the base for a rerun                                                                     |         |            |
 
 ### TestWorkflowExecutionList
 
@@ -880,31 +1020,25 @@ _Appears in:_
 
 - [TestWorkflowExecutionSpec](#testworkflowexecutionspec)
 
-| Field                                                                                                                                               | Description                                                        | Default | Validation |
-| --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------- | ---------- |
-| `name` _string_                                                                                                                                     | custom execution name                                              |         |            |
-| `config` _object (keys:string, values:[IntOrString](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#intorstring-intstr-util))_ |                                                                    |         |            |
-| `testWorkflowExecutionName` _string_                                                                                                                | test workflow execution name started the test workflow execution   |         |            |
-| `disableWebhooks` _boolean_                                                                                                                         | whether webhooks should be disabled for this execution             |         |            |
-| `tags` _object (keys:string, values:string)_                                                                                                        | test workflow execution tags                                       |         |            |
-| `runningContext` _[TestWorkflowRunningContext](#testworkflowrunningcontext)_                                                                        | running context for the test workflow execution (Pro edition only) |         |            |
-| `target` _[Target](#target)_                                                                                                                        | Targets helps decide on which runner the execution is scheduled.   |         |            |
+| Field                                                                        | Description                                                        | Default | Validation |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------- | ---------- |
+| `name` _string_                                                              | custom execution name                                              |         |            |
+| `config` _object (keys:string, values:[ConfigValue](#configvalue))_          |                                                                    |         |            |
+| `testWorkflowExecutionName` _string_                                         | test workflow execution name started the test workflow execution   |         |            |
+| `disableWebhooks` _boolean_                                                  | whether webhooks should be disabled for this execution             |         |            |
+| `tags` _object (keys:string, values:string)_                                 | test workflow execution tags                                       |         |            |
+| `runningContext` _[TestWorkflowRunningContext](#testworkflowrunningcontext)_ | running context for the test workflow execution (Pro edition only) |         |            |
+| `target` _[Target](#target)_                                                 | Targets helps decide on which runner the execution is scheduled.   |         |            |
 
 ### TestWorkflowExecutionResourceAggregations
+
+_Underlying type:_ _[struct\{Total float64 "json:\"total,omitempty\""; Min float64 "json:\"min,omitempty\""; Max float64 "json:\"max,omitempty\""; Avg float64 "json:\"avg,omitempty\""; StdDev float64 "json:\"stddev,omitempty\""}](#struct{total-float64-"json:"total,omitempty"";-min-float64-"json:"min,omitempty"";-max-float64-"json:"max,omitempty"";-avg-float64-"json:"avg,omitempty"";-stddev-float64-"json:"stddev,omitempty""})_
 
 TestWorkflowExecutionResourceAggregations contains resource metrics aggregations
 
 _Appears in:_
 
 - [TestWorkflowExecutionResourceAggregationsByField](#testworkflowexecutionresourceaggregationsbyfield)
-
-| Field            | Description | Default | Validation |
-| ---------------- | ----------- | ------- | ---------- |
-| `total` _float_  |             |         |            |
-| `min` _float_    |             |         |            |
-| `max` _float_    |             |         |            |
-| `avg` _float_    |             |         |            |
-| `stddev` _float_ |             |         |            |
 
 ### TestWorkflowExecutionResourceAggregationsByField
 
@@ -1100,6 +1234,7 @@ _Appears in:_
 | `pauses` _[TestWorkflowPause](#testworkflowpause) array_                                                 |                                                            |         |                                                            |
 | `initialization` _[TestWorkflowStepResult](#testworkflowstepresult)_                                     |                                                            |         |                                                            |
 | `steps` _object (keys:string, values:[TestWorkflowStepResult](#testworkflowstepresult))_                 |                                                            |         |                                                            |
+| `statusDetails` _[TestWorkflowStatusDetails](#testworkflowstatusdetails)_                                |                                                            |         |                                                            |
 
 ### TestWorkflowResultSummary
 
@@ -1121,6 +1256,7 @@ _Appears in:_
 | `durationMs` _integer_                                                                                   | Duration in milliseconds                             |         |                                                            |
 | `totalDurationMs` _integer_                                                                              | Duration in milliseconds (incl. pause)               |         |                                                            |
 | `pausedMs` _integer_                                                                                     | Pause duration in milliseconds                       |         |                                                            |
+| `statusDetails` _[TestWorkflowStatusDetails](#testworkflowstatusdetails)_                                |                                                      |         |                                                            |
 
 ### TestWorkflowRunningContext
 
@@ -1145,14 +1281,14 @@ _Appears in:_
 
 - [TestWorkflowRunningContext](#testworkflowrunningcontext)
 
-| Field                                                                                | Description                                            | Default | Validation                                                                      |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------ | ------- | ------------------------------------------------------------------------------- |
-| `name` _string_                                                                      | actor name                                             |         |                                                                                 |
-| `email` _string_                                                                     | actor email                                            |         |                                                                                 |
-| `executionId` _string_                                                               | test workflow execution id                             |         |                                                                                 |
-| `executionPath` _string_                                                             | all test workflow execution ids starting from the root |         |                                                                                 |
-| `executionReference` _string_                                                        | reference test workflow execution id                   |         |                                                                                 |
-| `type` _[TestWorkflowRunningContextActorType](#testworkflowrunningcontextactortype)_ |                                                        |         | Enum: [cron testtrigger user testworkflow testworkflowexecution program] <br /> |
+| Field                                                                                | Description                                            | Default | Validation                                                                                     |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------ | ------- | ---------------------------------------------------------------------------------------------- |
+| `name` _string_                                                                      | actor name                                             |         |                                                                                                |
+| `email` _string_                                                                     | actor email                                            |         |                                                                                                |
+| `executionId` _string_                                                               | test workflow execution id                             |         |                                                                                                |
+| `executionPath` _string_                                                             | all test workflow execution ids starting from the root |         |                                                                                                |
+| `executionReference` _string_                                                        | reference test workflow execution id                   |         |                                                                                                |
+| `type` _[TestWorkflowRunningContextActorType](#testworkflowrunningcontextactortype)_ |                                                        |         | Enum: [cron testtrigger user testworkflow testworkflowexecution program gitintegration] <br /> |
 
 ### TestWorkflowRunningContextActorType
 
@@ -1162,7 +1298,7 @@ supported actors for test workflow running context
 
 _Validation:_
 
-- Enum: [cron testtrigger user testworkflow testworkflowexecution program]
+- Enum: [cron testtrigger user testworkflow testworkflowexecution program gitintegration]
 
 _Appears in:_
 
@@ -1176,6 +1312,7 @@ _Appears in:_
 | `testworkflow`          |             |
 | `testworkflowexecution` |             |
 | `program`               |             |
+| `gitintegration`        |             |
 
 ### TestWorkflowRunningContextInterface
 
@@ -1303,6 +1440,38 @@ _Appears in:_
 | `failed`  |             |
 | `aborted` |             |
 
+### TestWorkflowStatusDetails
+
+TestWorkflowStatusDetails gives the reason why an execution did not pass. It is
+present on every terminal status except passed.
+
+_Appears in:_
+
+- [TestWorkflowResult](#testworkflowresult)
+- [TestWorkflowResultSummary](#testworkflowresultsummary)
+
+| Field                                                                    | Description                                                                             | Default | Validation                                                                     |
+| ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------ |
+| `type` _string_                                                          | the layer that failed                                                                   |         | Enum: [init-failure execution-failure step-failure user-cancel unknown] <br /> |
+| `reason` _string_                                                        | code of the cause, for example unschedulable or oom-killed                              |         |                                                                                |
+| `message` _string_                                                       | the message of the step that holds the cause, verbatim                                  |         |                                                                                |
+| `step` _string_                                                          | reference of the step that holds the cause; empty when the initialization step holds it |         |                                                                                |
+| `actor` _string_                                                         | code of the component that decided the stop, for example user or control-plane          |         |                                                                                |
+| `user` _[TestWorkflowStatusDetailsUser](#testworkflowstatusdetailsuser)_ | the person who canceled the execution; the control plane fills it                       |         |                                                                                |
+
+### TestWorkflowStatusDetailsUser
+
+TestWorkflowStatusDetailsUser is the person who canceled the execution.
+
+_Appears in:_
+
+- [TestWorkflowStatusDetails](#testworkflowstatusdetails)
+
+| Field            | Description | Default | Validation |
+| ---------------- | ----------- | ------- | ---------- |
+| `name` _string_  |             |         |            |
+| `email` _string_ |             |         |            |
+
 ### TestWorkflowStatusSummary
 
 TestWorkflowStatusSummary contains information about the TestWorkflow status.
@@ -1325,14 +1494,16 @@ _Appears in:_
 
 - [TestWorkflowResult](#testworkflowresult)
 
-| Field                                                                                                    | Description                     | Default | Validation |
-| -------------------------------------------------------------------------------------------------------- | ------------------------------- | ------- | ---------- |
-| `errorMessage` _string_                                                                                  |                                 |         |            |
-| `status` _[TestWorkflowStepStatus](#testworkflowstepstatus)_                                             |                                 |         |            |
-| `exitCode` _integer_                                                                                     |                                 |         |            |
-| `queuedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_   | when the container was created  |         |            |
-| `startedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_  | when the container was started  |         |            |
-| `finishedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the container was finished |         |            |
+| Field                                                                                                    | Description                                                                                                  | Default | Validation |
+| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------- | ---------- |
+| `errorMessage` _string_                                                                                  |                                                                                                              |         |            |
+| `errorReason` _string_                                                                                   | code of the cause in the error message, for example unschedulable; empty when the message has no known cause |         |            |
+| `status` _[TestWorkflowStepStatus](#testworkflowstepstatus)_                                             |                                                                                                              |         |            |
+| `exitCode` _integer_                                                                                     |                                                                                                              |         |            |
+| `attempts` _integer_                                                                                     | number of attempts that the step started, empty when the init process reported none                          |         |            |
+| `queuedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_   | when the container was created                                                                               |         |            |
+| `startedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_  | when the container was started                                                                               |         |            |
+| `finishedAt` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta)_ | when the container was finished                                                                              |         |            |
 
 ### TestWorkflowStepStatus
 
@@ -1447,10 +1618,10 @@ _Appears in:_
 - [TestWorkflowSpecBase](#testworkflowspecbase)
 - [TestWorkflowTemplateSpec](#testworkflowtemplatespec)
 
-| Field                     | Description                                                    | Default | Validation |
-| ------------------------- | -------------------------------------------------------------- | ------- | ---------- |
-| `queue` _string_          | maximum time the execution may spend in queue before starting  |         |            |
-| `initialization` _string_ | maximum time for initialization/transitioning before steps run |         |            |
+| Field                     | Description                                                                                                                                                                                                   | Default | Validation |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ---------- |
+| `queue` _string_          | maximum time the execution may spend in queue before starting                                                                                                                                                 |         |            |
+| `initialization` _string_ | maximum time from the job creation until the first step container starts, as a Go duration (for example 2m).<br />When it ends, the runner aborts the execution and keeps the cause that Kubernetes reported. |         |            |
 
 ### WorkflowInt64OrString
 

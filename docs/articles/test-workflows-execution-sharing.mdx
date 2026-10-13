@@ -104,6 +104,12 @@ Two cases produce an empty value from an execution that looks like it should hav
 
 ### References
 
+:::important Workflow orchestration compatibility change
+
+Starting with Testkube 2.14.0, separate entries in one `execute.workflows` block must have distinct references. An entry uses its `as` alias when provided; otherwise, it uses the Workflow name. Duplicate references are rejected before child executions are started, even if no expression reads their data. See [Advanced Workflow Orchestration](/articles/test-workflows-test-suites#execute-syntax) for an example using distinct aliases.
+
+:::
+
 The first argument identifies the execution. Five forms work:
 
 | Reference     | Reaches                                                                                                    |
