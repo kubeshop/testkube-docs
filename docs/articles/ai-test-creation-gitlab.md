@@ -13,7 +13,7 @@ If the GitLab settings page is unavailable, ask your Testkube administrator to e
 
 ## 1. Connect with OAuth (recommended)
 
-Use a group-owned OAuth application so your team manages the application in GitLab. OAuth is available on GitLab.com Free and on self-managed GitLab. Testkube renews OAuth access tokens automatically.
+Use a group-owned OAuth application so your team manages the application in GitLab. Testkube renews OAuth access tokens automatically.
 
 1. In Testkube, open **Organization Management → GitLab → Connect GitLab** and select **OAuth**.
 2. Copy the displayed **Callback URL**. Keep this form open.
@@ -47,8 +47,6 @@ Choose a token for the repositories you want to connect:
 | Group access token    | Repositories in a group and its subgroups | Group → **Settings → Access tokens**                        |
 | Project access token  | One project                               | Project → **Settings → Access tokens**                      |
 | Personal access token | Repositories your user account can access | Avatar → **Edit profile → Access → Personal access tokens** |
-
-Group and project tokens use a GitLab bot identity. On **GitLab.com**, they require Premium or Ultimate; on **GitLab Self-Managed**, they are available with any license. See GitLab's [group token](https://docs.gitlab.com/user/group/settings/group_access_tokens/) and [project token](https://docs.gitlab.com/user/project/settings/project_access_tokens/) documentation.
 
 Create a token with a descriptive name, an expiration date, and these scopes:
 
