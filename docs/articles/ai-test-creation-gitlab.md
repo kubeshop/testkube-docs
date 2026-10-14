@@ -30,11 +30,11 @@ Use a group-owned OAuth application so your team manages the application in GitL
 5. Select **Save application** and copy the **Application ID** and **Secret**. Store the secret securely when GitLab displays it.
 6. Return to Testkube. Enter a **Connection name**, your **GitLab instance URL** (`https://gitlab.com` or your self-managed HTTPS URL), the **Application ID**, and the **Client secret**.
 7. Select **Connect with OAuth**. Sign in to GitLab with the account whose repository access you want to use, then authorize the application.
-8. After returning to Testkube, enable the repositories the organization should be allowed to use.
+8. After returning to Testkube, follow [Enable repositories](#2-enable-repositories) below.
 
 The scopes allow Testkube to discover repositories (`read_api`) and clone, pull, and push over HTTPS (`write_repository`). The broader `api` scope is unnecessary for this flow. See [GitLab OAuth application setup](https://docs.gitlab.com/integration/oauth_provider/#create-a-group-owned-application) and [OAuth availability](https://docs.gitlab.com/api/oauth2/).
 
-The group owns the application, but the connection uses the authorizing user's permissions. Application ownership does not restrict access to that group's repositories; select the repositories Testkube can use in its GitLab settings. GitLab's branch protection and user permissions still apply.
+Sign in with a GitLab account that can access the repositories you want to use. Pushes follow that account's permissions and GitLab's branch protection rules.
 
 ### Alternative: connect with an access token
 
@@ -57,12 +57,23 @@ For a group or project token, select the **Developer** role to push to ordinary 
 
 The broader `api` scope is unnecessary for this import and push flow. See [GitLab token scopes](https://docs.gitlab.com/security/tokens/access_token_scopes/).
 
-1. Open your organization's **GitLab** settings, select **Connect GitLab**, and choose **Use an access token**.
+1. Open your organization's **GitLab** settings, select **Connect GitLab**, and choose **Access token**.
 2. Enter a **Connection name** and **GitLab instance URL**: `https://gitlab.com`, or your self-managed GitLab HTTPS URL.
 3. Paste the token into **Access token** and select **Connect with token**.
-4. Enable the repositories Testkube should be allowed to use.
+4. Follow [Enable repositories](#2-enable-repositories) below.
 
-## 2. Import, author, and push
+## 2. Enable repositories
+
+Connecting GitLab does not automatically enable its repositories. You must manually enable each repository you want to use in Test Creation. This applies to both OAuth and access-token connections.
+
+1. Open **Organization Management → GitLab**. If you have multiple connections, select the one you just added under **Connection**.
+2. Under **Repositories**, find the repository you want to use. Use **Search GitLab repositories** to filter the list.
+3. In the **Repository access** column, turn on the repository's switch and confirm it shows **Enabled**. The change is saved automatically.
+4. Repeat for each repository you want to make available.
+
+Enabled repositories appear in Test Creation's repository picker. Repositories left **Disabled** are unavailable through this connection.
+
+## 3. Import, author, and push
 
 From **Test Catalog**, start a task such as:
 
