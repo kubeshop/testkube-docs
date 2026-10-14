@@ -29,6 +29,7 @@
   - `theme/` - Custom theme components (Navbar, SearchBar, CodeBlock, etc.)
   - `themes/` - Custom Prism syntax highlighting themes
 - `static/` - Static assets (images, OpenAPI files)
+- `scripts/` - `image.sh` and its image lists, which the `update-image-inventory` workflow runs to regenerate `docs/articles/inventory/generated/`
 - `sidebars.js` - Sidebar navigation configuration
 
 ## Key Files
@@ -72,7 +73,7 @@
 - `npm run format` formats the repo
 - `npm run format:check` validates formatting without writing changes
 - `pre-commit` runs `lint-staged`, which formats staged `js`, `jsx`, `ts`, `tsx`, `json`, `md`, `mdx`, `yml`, `yaml`, and `css` files
-- CI checks Prettier formatting on changed files only, to avoid requiring a repo-wide reformat
+- The `docs-prettier` pull request check runs `npm run format:check` over the whole repository (see "Verifying a change")
 - Generated content is excluded through `.prettierignore`, including `docs/cli/`, `docs/crd/`, `docs/openapi/`, `docs/articles/inventory/generated/`, and `static/openapi/`
 
 ### Renaming or Removing Documentation
@@ -157,11 +158,11 @@ Deleting a page without a redirect breaks every external link to it. Prefer a re
 
 ### CRD Reference Docs
 
-- Generated from Go types using [kubeshop/crd-ref-docs](https://github.com/kubeshop/crd-ref-docs) fork
-- **Update process**:
-  1. Ensure `testkube-operator` submodule is up to date (pull `main` branch)
-  2. Set Kubernetes version in `config.yaml` (at least v1.28)
-  3. Run `go generate gen-crds.go`
+- Generated from the Go types in the [testkube repository](https://github.com/kubeshop/testkube)'s `api/` folder, using the [kubeshop/crd-ref-docs](https://github.com/kubeshop/crd-ref-docs) fork
+- **Update process** (the full steps are in `README.md`, "Updating the CRD Reference Docs"):
+  1. Build `crd-ref-docs` from the fork, and pull the testkube repo's `main`
+  2. Set the Kubernetes version for outgoing links in `config.yaml` (at least v1.28)
+  3. Run `crd-ref-docs --source-path=<testkube>/api --config=config.yaml --renderer=mdx --output-path=docs/articles/crds/ --output-mode=version`
   4. Verify links in `/docs/articles/crds.md` are correct
   5. Add deprecation warnings to deprecated API docs (see Legacy Content above)
   6. Commit and create PR
@@ -181,11 +182,25 @@ Deleting a page without a redirect breaks every external link to it. Prefer a re
 
 ## Build & Deployment
 
-- **Build**: `npm run build` (uses increased memory: `NODE_OPTIONS="--max_old_space_size=16384"`)
+- **Build**: `npm run build` (uses increased memory: `NODE_OPTIONS="--max_old_space_size=20000"`)
 - **Type checking**: `npm run typecheck`
 - **Clear cache**: `npm run clear`
 - **Serve built site**: `npm run serve`
 - Site is automatically deployed with Vercel.
+
+## Verifying a change
+
+Run these before committing:
+
+```bash
+npm run format:check   # Prettier, what the pull request check runs
+npm run typecheck      # tsc
+npm run build          # Docusaurus build; fails on broken in-repo links
+```
+
+The pull request check is not a GitHub Action. It is the `docs-prettier` TestWorkflow, which lives in the testkube repository in `test/testkube/oss-tests/gh-quality-loop.yaml` and is started by the Testkube GitHub integration. It takes a `revision` config input and checks out this repository at that revision, so the branch must be pushed here first. To run it yourself, use the Testkube MCP server: `run_workflow` with `workflowName: docs-prettier` and `config: {"revision": "<branch or commit SHA>"}`, then `wait_for_executions` and, on failure, `fetch_execution_logs`.
+
+The build and the type check are not part of the pull request check, so run them locally. `.vale.ini` and `_typos.toml` configure Vale and typos, but neither runs in CI or in a hook yet.
 
 ## Custom Components
 
