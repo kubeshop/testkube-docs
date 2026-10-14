@@ -93,7 +93,7 @@ grant's level and whether it is direct or inherited.
 ![Organization Members](../img/org-members-list.png)
 
 Select a row to open that member's page. Use the menu on the right to change their organization
-role, rename them, opem member's page or remove them.
+role, rename them, open member's page or remove them.
 
 ### Display names
 

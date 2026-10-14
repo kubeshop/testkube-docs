@@ -343,7 +343,7 @@ Control Plane is available in Helm chart `v2.333.2` and the Agent is available i
 - User limits in Dashboard: members page correctly shows the user limit.
 - TestTrigger templates: support JSON-style field names (e.g. `.metadata.labels`) for built-in resources, matching `resourceRef`.
 - Cron job target configuration: cron job configuration in TestWorkflow Template allow target property to schedule executions in specific agents.
-- TestWorkflow multiple target conditions: moving from OR to AND for all target conditions defined in a TestWorflow execution.
+- TestWorkflow multiple target conditions: moving from OR to AND for all target conditions defined in a TestWorkflow execution.
 
 ## Monthly Release v2.10.0 (2026-06-01)
 
@@ -680,7 +680,7 @@ Control Plane is available in Helm chart `v2.331.2` and the Agent is available i
 - New! Testkube on-prem installations no longer require `testkube-agent`. New environments start with the Control Plane owning Testkube Resource management by default.
 - `testkube init demo` no longer installs the agent bundle.
 - SCIM Server lock contention: write lock contention now returns 409 instead of 429. This is the correct status per RFC 7644 Table 9 for POST/PUT/PATCH/DELETE conflicts. The library passes it through, and IdPs treat it as retriable.
-- Follow long Test Workflow executions: include a keepalived signal to avoid timeouts while following long Test Workflow executions from CLI and integration plaforms.
+- Follow long Test Workflow executions: include a keepalive signal to avoid timeouts while following long Test Workflow executions from CLI and integration platforms.
 - SSO Authentication: fix SSO login failure caused by sending static "sso" as connector_id.
 
 ### Agent v2.8.2
@@ -1411,7 +1411,7 @@ This release is available in Helm Chart v2.321.4
 
 ### Improvements
 
-- Fixed an issue where the Workflow wizard shows an empty preview whe combining multiple templates
+- Fixed an issue where the Workflow wizard shows an empty preview when combining multiple templates
 - Security updates in upstream dependencies.
 
 ## Doc Update (2025-06-05)

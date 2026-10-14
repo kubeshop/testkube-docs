@@ -16,9 +16,17 @@ extend-exclude = [
     "*.gif",
 ]
 
+[default]
+# Hex execution and span IDs in sample CLI output, and base64 secret values.
+extend-ignore-re = [
+    '\b[0-9a-f]{16,}\b',
+    '\b[A-Za-z0-9+/]{40,}={0,2}',
+]
+
 [default.extend-words]
 iam = "iam"
 daa = "daa"
+overlayed = "overlayed"
 
 [default.extend-identifiers]
 # Docker image hashes
