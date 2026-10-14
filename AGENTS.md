@@ -193,14 +193,18 @@ Deleting a page without a redirect breaks every external link to it. Prefer a re
 Run these before committing:
 
 ```bash
-npm run format:check   # Prettier, what the pull request check runs
+npm run format:check   # Prettier over the whole repository
+npm run lint:typos     # typos over the whole repository (needs the typos binary)
+npm run lint:vale      # Vale on the lines your branch adds (needs vale; run `vale sync` once)
 npm run typecheck      # tsc
 npm run build          # Docusaurus build; fails on broken in-repo links
 ```
 
-The pull request check is not a GitHub Action. It is the `docs-prettier` TestWorkflow, which lives in the testkube repository in `test/testkube/oss-tests/gh-quality-loop.yaml` and is started by the Testkube GitHub integration. It takes a `revision` config input and checks out this repository at that revision, so the branch must be pushed here first. To run it yourself, use the Testkube MCP server: `run_workflow` with `workflowName: docs-prettier` and `config: {"revision": "<branch or commit SHA>"}`, then `wait_for_executions` and, on failure, `fetch_execution_logs`.
+`lint:vale` compares your branch, including uncommitted edits, with `origin/main`, so fetch it first. It prints warnings and fails only on errors. Existing pages carry thousands of Vale alerts, which is why it checks added lines and not whole files. When it flags a product or technology name the docs use on purpose, add the name to `.vale/styles/config/vocabularies/Testkube/accept.txt` rather than rewording. A lower-case entry there makes Vale demand lower case everywhere, so write `[Cc]onfig` or `(?i)json` for words that appear in both cases. A false positive from typos goes in `_typos.toml`.
 
-The build and the type check are not part of the pull request check, so run them locally. `.vale.ini` and `_typos.toml` configure Vale and typos, but neither runs in CI or in a hook yet.
+The pull request checks are not GitHub Actions. They are the `docs-prettier`, `docs-typos` and `docs-vale` TestWorkflows, which live in the testkube repository in `test/testkube/oss-tests/gh-quality-loop.yaml` and are started by the Testkube GitHub integration. Each takes a `revision` config input and checks out this repository at that revision, so the branch must be pushed here first. To run one yourself, use the Testkube MCP server: `run_workflow` with the `workflowName` and `config: {"revision": "<branch or commit SHA>"}`, then `wait_for_executions` and, on failure, `fetch_execution_logs`.
+
+The build and the type check are not part of the pull request checks, so run them locally.
 
 ## Custom Components
 
