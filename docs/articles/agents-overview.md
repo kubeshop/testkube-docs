@@ -85,7 +85,7 @@ Testkube has the capability to emit different types of events for integrating wi
 
 These are all emitted by a dedicated runner with the webhooks capability which you can deploy anywhere in your infrastructure from where you want these events to be emitted.
 
-Even if you have multiple runners with the webhooks capability, only the first one will actually be used to emit Webhooks. Dedicated targeting for that capability is planned for a later Testkube release.
+Each runner with the webhooks capability emits the webhooks that match its configuration. If multiple runners in the same Environment match the same webhook, each runner emits it, resulting in multiple deliveries of the same event.
 
 :::note
 For the emitting of CDEvents and Kubernetes Events, that corresponding functionality needs to be enabled further as described in the documents linked above.
