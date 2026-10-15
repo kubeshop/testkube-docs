@@ -238,7 +238,7 @@ The [GitHub integration](/articles/git-integration) (repository connections that
 
 - `Pull request`, `Push`, `Release`, `Issue comment`.
 
-**Webhook URL**: point the App webhook at `https://<control-plane-host>/api/v1/github/webhooks` (the path served by `testkube-cloud-api`). Generate a webhook secret and keep it for the values below.
+**Webhook URL**: point the App webhook at `https://<api-host>/integrations/github/webhook`, where `<api-host>` is the REST API host of your Control Plane (by default `api.<your-domain>`). Generate a webhook secret and keep it for the values below — the endpoint validates GitHub's `X-Hub-Signature-256` signature against it and does not accept bearer tokens.
 
 **Additional Helm values** on `testkube-cloud-api` (the feature is off by default and every endpoint returns "not configured" until `features.gitIntegration` is on, so the flag has to land alongside the App credentials):
 
