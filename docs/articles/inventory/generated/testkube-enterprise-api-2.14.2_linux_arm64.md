@@ -3,9 +3,9 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:fb3e89bc53c295116198fcf167408d40fbe03ce2c841d82101085eb6d8af4260</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 3" src="https://img.shields.io/badge/critical-3-8b1924"/> <img alt="high: 14" src="https://img.shields.io/badge/high-14-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/medium-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 6" src="https://img.shields.io/badge/unspecified-6-lightgrey"/></td></tr>
-<tr><td>platform</td><td>linux/amd64</td></tr>
-<tr><td>size</td><td>87 MB</td></tr>
+<tr><td>digest</td><td><code>sha256:e451bab9fa973da5abcf6b341629b670dd059c85c7732dddfc9a60f613c88a2e</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 3" src="https://img.shields.io/badge/critical-3-8b1924"/> <img alt="high: 14" src="https://img.shields.io/badge/high-14-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/medium-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 6" src="https://img.shields.io/badge/unspecified-6-lightgrey"/></td></tr>
+<tr><td>platform</td><td>linux/arm64</td></tr>
+<tr><td>size</td><td>81 MB</td></tr>
 <tr><td>packages</td><td>342</td></tr>
 </table>
 </details></table>
@@ -111,7 +111,7 @@ The impact of this misbehavior is mostly limited to potential request smuggling,
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -273,7 +273,7 @@ The HTTP/2 server can refund connection-level flow control twice for the same da
 <tr><td>Affected range</td><td><code>&lt;0.60.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.60.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

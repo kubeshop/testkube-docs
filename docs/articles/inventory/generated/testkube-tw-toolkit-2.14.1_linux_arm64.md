@@ -119,7 +119,7 @@ The impact of this misbehavior is mostly limited to potential request smuggling,
 <tr><td>Affected range</td><td><code>>=1.27.0-0<br/><1.27.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.27.2</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -289,7 +289,7 @@ The HTTP/2 server can refund connection-level flow control twice for the same da
 <tr><td>Affected range</td><td><code>&lt;0.60.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.60.0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -387,7 +387,7 @@ RUN apk --no-cache upgrade && apk --no-cache add ca-certificates libssl3 git ope
 <tr><td>Affected range</td><td><code>&lt;2.9.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.9.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.348%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>26th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

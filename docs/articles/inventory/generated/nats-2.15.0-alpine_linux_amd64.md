@@ -141,7 +141,7 @@ The impact of this misbehavior is mostly limited to potential request smuggling,
 <tr><td>Affected range</td><td><code>>=1.27.0-0<br/><1.27.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.27.2</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
