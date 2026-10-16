@@ -794,6 +794,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Usage, seats, and limits",
+              id: "articles/ai-usage",
+            },
+            {
+              type: "doc",
               label: "Configuration",
               id: "articles/ai-enabling",
             },
