@@ -335,6 +335,58 @@ global:
 
 When using a shared Gateway in another namespace, make sure that the Gateway listeners allow cross-namespace routes, for example by setting `allowedRoutes.namespaces.from: All` on the Gateway itself. Without that, Testkube routes created in a different namespace will not be allowed to attach.
 
+**Self-signed certificates**
+
+Gateway API supports TLS termination using certificates issued by a private CA, including self-signed certificates.
+
+Create two Secrets in the Gateway namespace. The TLS Secret contains the server certificate and key; the CA Secret contains the certificate that clients must trust. When an Agent runs in another namespace, create a copy of the CA Secret in that Agent namespace as well.
+
+```bash
+kubectl -n testkube create secret tls testkube-gateway-tls \
+  --cert=tls.crt \
+  --key=tls.key
+
+kubectl -n testkube create secret generic testkube-gateway-ca \
+  --from-file=ca.crt=ca.crt
+```
+
+Configure the Enterprise chart to create an isolated Gateway that uses the pre-created TLS Secret. Keep `certificate.create` disabled so cert-manager does not replace the private certificate.
+
+```yaml
+global:
+  exposure:
+    mode: gateway
+  ingress:
+    enabled: false
+  customCaSecretRef: testkube-gateway-ca
+  customCaSecretKey: ca.crt
+  gatewayAPI:
+    createHTTPRoutes: true
+    gateway:
+      create: true
+      name: testkube-gateway
+      namespace: testkube
+      className: traefik
+      listener:
+        tls:
+          secretName: testkube-gateway-tls
+    certificate:
+      create: false
+    httpToHttpsRedirect:
+      enabled: true
+```
+
+Configure an Agent to trust the same CA. The Secret referenced below must be in the Agent release namespace.
+
+```yaml
+testkube-api:
+  cloud:
+    tls:
+      enabled: true
+      customCaSecretRef: testkube-gateway-ca
+      customCaSecretKey: ca.crt
+```
+
 ### Auth
 
 You will have to configure how your users can access Testkube. Testkube uses Dex which supports [the most popular identity providers](https://dexidp.io/docs/connectors/). You can find a OIDC example for Google below:
