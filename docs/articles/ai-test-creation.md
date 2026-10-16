@@ -132,7 +132,7 @@ The chart validates the configuration before install and upgrade. Inline `apiKey
 
 ### Selecting a provider model
 
-AI Test Creation initially supports OpenAI and OpenAI-compatible endpoints. Add one model under `global.ai.inference.agent` and mark it with `default: true`.
+AI Test Creation supports OpenAI, OpenAI-compatible endpoints and Anthropic Claude models. Add one model under `global.ai.inference.agent` and mark it with `default: true`.
 
 Although `default: true` is optional when the list contains only one model, setting it explicitly makes the intended default clear. If you configure multiple models, exactly one of them must have `default: true`.
 
@@ -159,6 +159,25 @@ global:
 ```
 
 The default per-Sandbox virtual-key budget is `1` provider currency unit. When a custom endpoint is used with a positive budget, both `litellm.inputCostPerToken` and `litellm.outputCostPerToken` are required and must be finite, non-negative numbers. If you cannot provide pricing and accept having no spend budget, set `global.testAuthoring.litellm.virtualKey.maxBudget: 0`.
+
+For an Anthropic Claude model, set `provider: anthropic` and store your Anthropic API key in the Secret. The bundled LiteLLM gateway then routes the model as `anthropic/<model>`, and both the AI Service and the AI Sandbox agents call it through the Anthropic Messages API:
+
+```yaml title="values.yaml"
+global:
+  testAuthoring:
+    enabled: true
+  ai:
+    inference:
+      defaults:
+        provider: anthropic
+        secretRef: testkube-ai-test-creation-provider
+        secretRefKey: ANTHROPIC_API_KEY
+      agent:
+        - model: claude-sonnet-5-5
+          default: true
+```
+
+See [Anthropic Claude Models](/articles/ai-configuration#anthropic-claude-models) for the other Claude settings.
 
 ## Use an existing LiteLLM gateway
 
