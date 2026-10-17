@@ -818,6 +818,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "Work with a GitLab repository",
+                  id: "articles/ai-test-creation-gitlab",
+                },
+                {
+                  type: "doc",
                   label: "Work with Test Bundles and multiple chats",
                   id: "articles/ai-test-creation-test-bundles",
                 },
