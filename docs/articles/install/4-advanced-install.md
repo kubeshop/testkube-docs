@@ -403,15 +403,27 @@ addition to_ the namespace where Testkube is installed. No ClusterRole will be c
 
 ### Namespaces for Test Execution
 
-The Testkube runner creates Kubernetes jobs when executing a test workflow. By default, the job will be spawned within the namespace where Testkube is installed. You can opt to [run tests in a different namespace](/articles/creating-tests#run-the-test-in-a-different-execution-namespace), in which case you will have to allow this by configuring these namespaces in `executionNamespaces`.
+The Testkube runner creates Kubernetes Jobs when executing a Test Workflow. To run a Workflow in a different namespace, set `spec.job.namespace` in the Workflow definition. See [Execution Namespace](/articles/test-workflows-job-and-pod#execution-namespace) for an example. If this property is omitted, the runner uses its configured default execution namespace.
+
+Selecting a namespace in the Workflow does not grant the runner access to it. For the `testkube-agent.testkube-api` chart configuration, configure the target namespaces in `executionNamespaces`. The following example generates the required RBAC and execution ServiceAccounts:
 
 ```yaml {3}
 testkube-agent:
   testkube-api:
     executionNamespaces:
       - namespace: ns1
+        generateAPIServerRBAC: true
+        jobServiceAccountName: testkube-execution
+        generateTestJobRBAC: true
       - namespace: ns2
+        generateAPIServerRBAC: true
+        jobServiceAccountName: testkube-execution
+        generateTestJobRBAC: true
 ```
+
+If you manage RBAC yourself, provide the required permissions and execution ServiceAccounts instead of enabling these generation flags.
+
+For the standalone `testkube-runner` Helm chart, use `execution.additionalNamespaces` instead. See [Support additional namespaces](/articles/multi-agent-runner-helm-chart#support-additional-namespaces) for the corresponding configuration.
 
 ### Namespaces for Testkube Custom Resources
 
