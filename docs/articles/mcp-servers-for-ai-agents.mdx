@@ -139,9 +139,10 @@ Testkube serves that document from your own installation, at:
 <your Testkube API URL>/.well-known/oauth-client
 ```
 
-It is off until you set the client ID URL in your installation's configuration. Leave it unset and
-Testkube keeps asking providers to register it, which is the right behaviour when the document
-cannot be reached from the public internet.
+It is off until you set that address in your installation's configuration, with the
+`ai.oauthClientIdUrl` Helm value or the `MCP_OAUTH_CLIENT_ID_URL` environment variable. Leave it
+unset and Testkube keeps asking providers to register it, which is the right behaviour when the
+document cannot be reached from the public internet.
 
 ##### On a self-hosted installation
 
@@ -150,7 +151,8 @@ Testkube installation itself stays private.
 
 1. Expose `/.well-known/oauth-client` publicly on a domain you control, for example with a path rule
    on your load balancer that forwards only that path to Testkube.
-2. Set the client ID URL in your Testkube configuration to that public address.
+2. Set `ai.oauthClientIdUrl` to that public address, which may differ from your API address: the
+   provider fetches this one from the internet, while your API only has to answer your own network.
 
 The rest of the sign-in needs no inbound access: the provider sends the user's browser back to
 Testkube, and the browser is already inside your network, while Testkube calls the provider's token
