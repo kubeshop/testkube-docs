@@ -14,13 +14,13 @@ Run these before committing:
 npm run format         # Prettier over the whole repository (writes changes)
 npm run format:check   # the same without writing; this is what docs-prettier runs
 npm run lint:typos     # typos over the whole repository (needs the typos binary)
-npm run lint:vale      # Vale on the lines your branch adds (needs vale; run `vale sync` once)
+npm run lint:vale      # Vale on the lines your branch adds under docs/ (needs vale; run `vale sync` once)
 npm run typecheck      # tsc
 npm run build          # Docusaurus build; fails on broken in-repo links
 ```
 
 - `npm run build` sets `NODE_OPTIONS="--max_old_space_size=20000"`. It is the check that catches broken links and build errors, and it is not a pull request check, so always run it, as well as the type check, locally.
-- `lint:vale` compares your branch, including uncommitted edits, with `origin/main`, so fetch it first. It prints warnings and fails only on errors. Existing pages carry thousands of Vale alerts, which is why it checks added lines and not whole files.
+- `lint:vale` compares your branch, including uncommitted edits, with `origin/main`, so fetch it first. It checks only pages under `docs/`, not contributor files such as this one. It prints warnings and fails only on errors. Existing pages carry thousands of Vale alerts, which is why it checks added lines and not whole files.
 - `docs-prettier` (section 6) runs `npm run format:check` over the whole repository, not only the files you changed. Over 11 merged pull requests between 1 and 15 October 2026 it took a median of 54 seconds (45 to 106), including `npm ci`.
 - The `pre-commit` hook (`.husky/pre-commit`) runs `lint-staged`, which formats staged `js`, `jsx`, `ts`, `tsx`, `json`, `md`, `mdx`, `yml`, `yaml` and `css` files with Prettier.
 
@@ -34,37 +34,37 @@ npm run build          # Docusaurus build; fails on broken in-repo links
 
 ## 3. Repository map
 
-| Path | What it owns |
-| --- | --- |
-| `docs/` | All documentation content (MDX and Markdown files) |
-| `docs/articles/` | Main documentation articles |
-| `docs/articles/crds/` | Testkube CRD docs (generated) |
-| `docs/articles/examples/` | Testkube examples in docs |
-| `docs/articles/images/` | Image assets |
-| `docs/articles/install/` | Installation guides |
-| `docs/articles/inventory/` | Testkube Docker image inventory; `generated/` is generated |
-| `docs/articles/tutorial/` | Tutorials |
-| `docs/cli/` | CLI reference documentation (generated) |
-| `docs/legacy-cli/` | Legacy CLI documentation |
-| `docs/openapi/` | OpenAPI reference documentation (generated) |
-| `docs/test-types/` | Legacy Test Executor documentation |
-| `docs/workflows/` | Sample TestWorkflows used in the documentation |
-| `docs/img/` | Images and assets for documentation |
-| `src/components/` | Reusable React components: `Card/` (documentation cards), `CardWrapper/` (card container), `CommercialBadge/`, `LegacyBanner/` (legacy content warnings), `LegacyCliBanner/` (legacy CLI warnings), `TwoColumns/` (two-column layout) |
-| `src/theme/` | Custom Docusaurus theme components: `Navbar/` (navigation bar), `SearchBar/` (search with the index filter), `CodeBlock/` (code block with copy button), `DocCard/` (documentation card styling), `AnnouncementBar/`, `NotFound/` |
-| `src/themes/` | Custom Prism syntax highlighting themes (light, dark, mirage) |
-| `src/css/custom.css` | Site-wide CSS |
-| `src/openapi/` | OpenAPI spec files and generated sidebar configs (generated) |
-| `src/scripts/` | Build scripts (`split-openapis.ts`) |
-| `static/` | Static assets (images, OpenAPI files); `static/openapi/` is generated |
-| `scripts/` | `image.sh` and its image lists (`agent_images.txt`, `cp_images.txt`), which the `update-image-inventory` workflow runs to regenerate `docs/articles/inventory/generated/` |
-| `docusaurus.config.js` | Main Docusaurus configuration |
-| `sidebars.js` | Sidebar navigation structure; must be updated when adding new docs. It includes the generated `src/openapi/*/redoc-sidebar.js` |
-| `redirects.js` | Client-side redirects from old slugs |
-| `config.yaml` | The `crd-ref-docs` configuration, including the Kubernetes version for outgoing links |
-| `_typos.toml`, `.vale.ini`, `.vale/` | typos and Vale configuration and the Vale vocabulary |
-| `package.json` | Dependencies and npm scripts |
-| `.env` | Environment variables (if needed) |
+| Path                                 | What it owns                                                                                                                                                                                                                          |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `docs/`                              | All documentation content (MDX and Markdown files)                                                                                                                                                                                    |
+| `docs/articles/`                     | Main documentation articles                                                                                                                                                                                                           |
+| `docs/articles/crds/`                | Testkube CRD docs (generated)                                                                                                                                                                                                         |
+| `docs/articles/examples/`            | Testkube examples in docs                                                                                                                                                                                                             |
+| `docs/articles/images/`              | Image assets                                                                                                                                                                                                                          |
+| `docs/articles/install/`             | Installation guides                                                                                                                                                                                                                   |
+| `docs/articles/inventory/`           | Testkube Docker image inventory; `generated/` is generated                                                                                                                                                                            |
+| `docs/articles/tutorial/`            | Tutorials                                                                                                                                                                                                                             |
+| `docs/cli/`                          | CLI reference documentation (generated)                                                                                                                                                                                               |
+| `docs/legacy-cli/`                   | Legacy CLI documentation                                                                                                                                                                                                              |
+| `docs/openapi/`                      | OpenAPI reference documentation (generated)                                                                                                                                                                                           |
+| `docs/test-types/`                   | Legacy Test Executor documentation                                                                                                                                                                                                    |
+| `docs/workflows/`                    | Sample TestWorkflows used in the documentation                                                                                                                                                                                        |
+| `docs/img/`                          | Images and assets for documentation                                                                                                                                                                                                   |
+| `src/components/`                    | Reusable React components: `Card/` (documentation cards), `CardWrapper/` (card container), `CommercialBadge/`, `LegacyBanner/` (legacy content warnings), `LegacyCliBanner/` (legacy CLI warnings), `TwoColumns/` (two-column layout) |
+| `src/theme/`                         | Custom Docusaurus theme components: `Navbar/` (navigation bar), `SearchBar/` (search with the index filter), `CodeBlock/` (code block with copy button), `DocCard/` (documentation card styling), `AnnouncementBar/`, `NotFound/`     |
+| `src/themes/`                        | Custom Prism syntax highlighting themes (light, dark, mirage)                                                                                                                                                                         |
+| `src/css/custom.css`                 | Site-wide CSS                                                                                                                                                                                                                         |
+| `src/openapi/`                       | OpenAPI spec files and generated sidebar configs (generated)                                                                                                                                                                          |
+| `src/scripts/`                       | Build scripts (`split-openapis.ts`)                                                                                                                                                                                                   |
+| `static/`                            | Static assets (images, OpenAPI files); `static/openapi/` is generated                                                                                                                                                                 |
+| `scripts/`                           | `image.sh` and its image lists (`agent_images.txt`, `cp_images.txt`), which the `update-image-inventory` workflow runs to regenerate `docs/articles/inventory/generated/`                                                             |
+| `docusaurus.config.js`               | Main Docusaurus configuration                                                                                                                                                                                                         |
+| `sidebars.js`                        | Sidebar navigation structure; must be updated when adding new docs. It includes the generated `src/openapi/*/redoc-sidebar.js`                                                                                                        |
+| `redirects.js`                       | Client-side redirects from old slugs                                                                                                                                                                                                  |
+| `config.yaml`                        | The `crd-ref-docs` configuration, including the Kubernetes version for outgoing links                                                                                                                                                 |
+| `_typos.toml`, `.vale.ini`, `.vale/` | typos and Vale configuration and the Vale vocabulary                                                                                                                                                                                  |
+| `package.json`                       | Dependencies and npm scripts                                                                                                                                                                                                          |
+| `.env`                               | Environment variables (if needed)                                                                                                                                                                                                     |
 
 The site is deployed automatically with Vercel.
 
@@ -72,12 +72,12 @@ The site is deployed automatically with Vercel.
 
 Generated content is excluded from Prettier through `.prettierignore`, which lists `docs/cli/`, `docs/crd/`, `docs/openapi/`, `docs/articles/inventory/generated/` and `static/openapi/`.
 
-| Generated | From | How |
-| --- | --- | --- |
-| `docs/openapi/`, `src/openapi/`, `static/openapi/` | The Testkube agent and Control Plane OpenAPI specs | `npm run split-openapis` |
-| `docs/cli/` | The CLI in the [testkube repository](https://github.com/kubeshop/testkube) | `make docs` there, then copy |
-| `docs/articles/crds/` | The Go types in the testkube repository's `api/` folder | `crd-ref-docs` from the [kubeshop/crd-ref-docs](https://github.com/kubeshop/crd-ref-docs) fork |
-| `docs/articles/inventory/generated/` | `scripts/image.sh` and its image lists | The `update-image-inventory` GitHub Action, daily at 00:00 UTC, which commits to `main` |
+| Generated                                          | From                                                                       | How                                                                                            |
+| -------------------------------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `docs/openapi/`, `src/openapi/`, `static/openapi/` | The Testkube agent and Control Plane OpenAPI specs                         | `npm run split-openapis`                                                                       |
+| `docs/cli/`                                        | The CLI in the [testkube repository](https://github.com/kubeshop/testkube) | `make docs` there, then copy                                                                   |
+| `docs/articles/crds/`                              | The Go types in the testkube repository's `api/` folder                    | `crd-ref-docs` from the [kubeshop/crd-ref-docs](https://github.com/kubeshop/crd-ref-docs) fork |
+| `docs/articles/inventory/generated/`               | `scripts/image.sh` and its image lists                                     | The `update-image-inventory` GitHub Action, daily at 00:00 UTC, which commits to `main`        |
 
 **OpenAPI reference.** `npm run split-openapis` needs the `TESTKUBE_OPENAPI_GITHUB_ACCESS_TOKEN` env var for the Control Plane API. The script:
 
@@ -193,7 +193,7 @@ title: Page Title
 ### Formatting and wording
 
 - Prettier is the repository formatter (`.prettierrc.json`). Run `npm run format` before committing documentation changes to keep diffs consistent.
-- When Vale flags a product or technology name the docs use on purpose, add the name to `.vale/styles/config/vocabularies/Testkube/accept.txt` rather than rewording. A lower-case entry there makes Vale demand lower case everywhere, so write `[Cc]onfig` or `(?i)json` for words that appear in both cases.
+- When Vale flags a product or technology name the docs use on purpose, add the name to `.vale/styles/config/vocabularies/Testkube/accept.txt` rather than rewording. A lower-case entry there makes Vale demand lower case everywhere, so write `(?i)json` for a word that appears in both cases, as the file does.
 - A false positive from typos goes in `_typos.toml`.
 
 ### Pull requests
@@ -211,11 +211,11 @@ Titles of the recent merged pull requests follow [Conventional Commits](https://
 
 The pull request checks are not GitHub Actions. They are TestWorkflows in the testkube repository, in `test/testkube/oss-tests/gh-quality-loop.yaml`, and the Testkube GitHub integration starts them; they report as check runs from `testkubebot`. Each takes a `revision` config input (default `main`) and checks out this repository at that revision, so push the branch here first.
 
-| Workflow | What it runs | Time (median, 11 merged PRs, 1 to 15 October 2026) |
-| --- | --- | --- |
-| `docs-prettier` | `npm ci`, then `npm run format:check` | 54 s |
-| `docs-typos` | typos over the whole repository | no runs in that period |
-| `docs-vale` | Vale on the lines the branch adds | no runs in that period |
+| Workflow        | What it runs                                    | Time (median, 11 merged PRs, 1 to 15 October 2026) |
+| --------------- | ----------------------------------------------- | -------------------------------------------------- |
+| `docs-prettier` | `npm ci`, then `npm run format:check`           | 54 s                                               |
+| `docs-typos`    | typos over the whole repository                 | no runs in that period                             |
+| `docs-vale`     | Vale on the lines the branch adds under `docs/` | no runs in that period                             |
 
 Vercel also posts a `Vercel Preview Comments` check run. The build and the type check are not pull request checks (section 1).
 
