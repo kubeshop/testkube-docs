@@ -99,6 +99,13 @@ OAuth is particularly useful for services where:
 Before anyone can sign in, the provider has to recognise Testkube as a registered application, which
 means a **client ID** and usually a **client secret**.
 
+Testkube looks for one in this order and stops at the first that applies:
+
+1. The client an administrator entered on that MCP Server.
+2. This installation's [client metadata document](#letting-providers-identify-testkube-by-url),
+   where one is configured and the provider reads them.
+3. A client the provider issues on the spot, through dynamic registration.
+
 Most providers hand those out automatically: Testkube asks for them the first time someone connects,
 and every later connect reuses the same application. You do nothing.
 
@@ -144,6 +151,12 @@ It is off until you set that address in your installation's configuration, with 
 unset and Testkube keeps asking providers to register it, which is the right behaviour when the
 document cannot be reached from the public internet.
 
+Two things decide whether it is actually used. The provider has to announce that it reads these
+documents, in its own OAuth metadata; one that does not is registered the usual way, even with the
+setting filled in. And the MCP Server must not already have a client, whether an administrator
+entered it or the provider issued one earlier. Those keep what they have, so turning this on
+changes nothing for servers people have already connected to.
+
 ##### On a self-hosted installation
 
 The document is a small static file, so the provider only has to reach **that one path**. Your
@@ -153,6 +166,9 @@ Testkube installation itself stays private.
    on your load balancer that forwards only that path to Testkube.
 2. Set `ai.oauthClientIdUrl` to that public address, which may differ from your API address: the
    provider fetches this one from the internet, while your API only has to answer your own network.
+
+The document names both addresses. Its `client_id` is the public one you set, while `redirect_uris`
+and `client_uri` stay your API address, because that is where the provider sends the user back.
 
 The rest of the sign-in needs no inbound access: the provider sends the user's browser back to
 Testkube, and the browser is already inside your network, while Testkube calls the provider's token
