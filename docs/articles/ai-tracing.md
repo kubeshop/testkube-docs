@@ -73,12 +73,11 @@ The endpoint must use HTTPS and resolve to a public address. Testkube refuses pr
 - **Replace a secret:** enter a new secret access key or header value and save. Leaving the secret field empty keeps the saved one. Switching to another provider asks for its credentials again.
 - **Stop:** select **Delete** under **Delete the trace destination**. Testkube stops sending and deletes the saved credentials and headers. Traces already sent stay in your tool.
 
-Changes reach the AI service within a minute. AI work that is already running finishes on the previous destination.
+A new destination applies within seconds, and changes to a saved one within a minute. AI work that is already running finishes on the destination it started with.
 
 ## How traces are sent
 
 - Spans are batched and sent a few seconds after they end. A trace can arrive in more than one batch.
-- The AI service never waits for the destination settings. After it restarts, the first AI turn of your organization is not traced while it reads them.
 - If the destination can't be reached or refuses a batch, that batch is dropped and not retried. Sending traces never slows down or fails an AI turn.
 - Secrets are stored encrypted and are never shown again in the dashboard.
 - Each organization's traces go only to that organization's destination.
