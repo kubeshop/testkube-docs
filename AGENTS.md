@@ -11,8 +11,7 @@ The seven sections below are: verifying a change, reproducing a bug, the reposit
 Run these before committing:
 
 ```bash
-npm run format         # Prettier over the whole repository (writes changes)
-npm run format:check   # the same without writing; this is what docs-prettier runs
+npm run format:check   # Prettier over the whole repository, without writing; this is what docs-prettier runs
 npm run lint:typos     # typos over the whole repository (needs the typos binary)
 npm run lint:vale      # Vale on the lines your branch adds under docs/ (needs vale; run `vale sync` once)
 npm run typecheck      # tsc
@@ -21,6 +20,7 @@ npm run build          # Docusaurus build; fails on broken in-repo links
 
 - `npm run build` sets `NODE_OPTIONS="--max_old_space_size=20000"`. It is the check that catches broken links and build errors, and it is not a pull request check, so always run it, as well as the type check, locally.
 - `lint:vale` compares your branch, including uncommitted edits, with `origin/main`, so fetch it first. It checks only pages under `docs/`, not contributor files such as this one. It prints warnings and fails only on errors. Existing pages carry thousands of Vale alerts, which is why it checks added lines and not whole files.
+- `npm run format` is the fix, not the check: it rewrites every file Prettier would change, so run it only after `format:check` reports something.
 - `docs-prettier` (section 6) runs `npm run format:check` over the whole repository, not only the files you changed. Over 11 merged pull requests between 1 and 15 October 2026 it took a median of 54 seconds (45 to 106), including `npm ci`.
 - The `pre-commit` hook (`.husky/pre-commit`) runs `lint-staged`, which formats staged `js`, `jsx`, `ts`, `tsx`, `json`, `md`, `mdx`, `yml`, `yaml` and `css` files with Prettier.
 
@@ -192,7 +192,7 @@ title: Page Title
 
 ### Formatting and wording
 
-- Prettier is the repository formatter (`.prettierrc.json`). Run `npm run format` before committing documentation changes to keep diffs consistent.
+- Prettier is the repository formatter (`.prettierrc.json`). Check with `npm run format:check` before committing, and run `npm run format` to fix what it reports.
 - When Vale flags a product or technology name the docs use on purpose, add the name to `.vale/styles/config/vocabularies/Testkube/accept.txt` rather than rewording. A lower-case entry there makes Vale demand lower case everywhere, so write `(?i)json` for a word that appears in both cases, as the file does.
 - A false positive from typos goes in `_typos.toml`.
 
