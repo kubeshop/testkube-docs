@@ -1,4 +1,6 @@
-// Runs Vale on the docs a branch changes and reports only the alerts on lines it adds.
+// Runs Vale on the pages under docs/ a branch changes and reports only the alerts on lines it adds.
+// Files outside docs/ (README.md, AGENTS.md) are for contributors, not the site, and name
+// repositories, paths and commands that the Vale rules would flag.
 //
 //   node scripts/vale-changed-lines.mjs [base]    (default base: origin/main)
 //
@@ -37,8 +39,8 @@ const diff = git(
   "--diff-filter=AMR",
   mergeBase,
   "--",
-  "*.md",
-  "*.mdx"
+  "docs/*.md",
+  "docs/*.mdx"
 );
 
 // file -> set of added line numbers
