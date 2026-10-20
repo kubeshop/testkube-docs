@@ -31,15 +31,17 @@ Not traced yet: the specialist agents that write tests inside a sandbox, and AI 
 
 Spans follow the [OpenTelemetry semantic conventions for generative AI](https://opentelemetry.io/docs/specs/semconv/gen-ai/), so tools that understand them show model calls, tokens and tools without extra setup. Testkube identifiers use the `testkube.*` prefix.
 
-| Span                                  | Always included                                                                                                  | Only with **Include prompts and responses** |
-| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| `invoke_agent`, the turn              | Organization, Environment, session, AI Agent, user, kind of work, status, model, input, output and cached tokens | –                                           |
-| `chat <model>`, each model call       | Requested and responding model, provider, input, output and cached tokens, finish reason, duration, error type   | Input and output messages                   |
-| `execute_tool <tool>`, each tool call | Tool name, call ID, duration, error type                                                                         | Tool arguments and result                   |
-| `moderate`, a separate trace          | Whether the message was blocked, and the category                                                                | –                                           |
+| Span                                  | Always included                                                                                                  | Only with **Include tool inputs and outputs** |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| `invoke_agent`, the turn              | Organization, Environment, session, AI Agent, user, kind of work, status, model, input, output and cached tokens | –                                             |
+| `chat <model>`, each model call       | Requested and responding model, provider, input, output and cached tokens, finish reason, duration, error type   | –                                             |
+| `execute_tool <tool>`, each tool call | Tool name, call ID, duration, error type                                                                         | Tool arguments and result                     |
+| `moderate`, a separate trace          | Whether the message was blocked, and the category                                                                | –                                             |
 
-:::warning Prompts and responses
-**Include prompts and responses** adds what people and AI Agents wrote, and the inputs and outputs of tools. These can contain secrets, logs and customer data. Turn it on only when your destination is allowed to hold that data. Each value is cut to 32,000 characters.
+Traces never contain prompts or AI responses: not what people wrote in chats, not AI Agent instructions, and not what the AI answered. Error messages are left out too; a failed call only shows its error type.
+
+:::warning Tool inputs and outputs
+**Include tool inputs and outputs** adds what each tool was given and returned, such as logs, workflow definitions and query results. These can contain secrets and customer data, and tool arguments are written by the AI, so they can repeat what someone asked for. Turn it on only when your destination is allowed to hold that data. Each value is cut to 32,000 characters. When one AI Agent hands work to another, only the outcome of the handoff is included.
 :::
 
 ## Send traces to AWS CloudWatch
@@ -50,7 +52,7 @@ Testkube sends traces to the AWS X-Ray OTLP endpoint of the region you choose, s
 2. Create an access key for an IAM user that can only write traces, for example with the `AWSXrayWriteOnlyAccess` managed policy. Don't reuse a key with wider permissions.
 3. In Testkube, open **Organization management → AI tracing**.
 4. Choose **AWS CloudWatch** and enter the **AWS region**, **Access key ID** and **Secret access key**.
-5. Choose whether to **Include prompts and responses**.
+5. Choose whether to **Include tool inputs and outputs**.
 6. Select **Send test trace**, then look for `testkube test trace` in CloudWatch → **Transaction Search**.
 7. Save.
 
@@ -106,4 +108,4 @@ The Testkube AI service sends the traces, so its pods need outbound HTTPS to you
 | The test trace fails with a timeout or connection error   | The AI service can't reach the destination. Check outbound network rules and proxies.        |
 | Testing says the AI service is not available              | The control plane can't reach the AI service, or the AI internal secret is missing.          |
 | The test trace works but chats send nothing               | **Send traces** is off, or the last save was less than a minute ago.                         |
-| Traces arrive without prompts or tool results             | **Include prompts and responses** is off. This is the default.                               |
+| Traces arrive without tool arguments or results           | **Include tool inputs and outputs** is off. This is the default.                             |
