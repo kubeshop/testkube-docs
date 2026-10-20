@@ -2,7 +2,7 @@
 
 The Docusaurus site for the Testkube documentation at https://docs.testkube.io: user guides, API references, CLI documentation and conceptual pages, written in Markdown and MDX (Markdown with React components).
 
-Owner: `@kubeshop/testkube-docs` for `docs/` and every `*.md` file, per `.github/CODEOWNERS`. Everything else falls to the last `*` line, `@kubeshop/testkube-frontend`; an earlier `*` line names `@kubeshop/testkube-backend`, and the later line overrides it. The file also assigns `/assets/`, `/licenses/` and `LICENSE` to `@kubeshop/testkube-docs` and `/test/` to `@kubeshop/testkube-qa`, but none of those exist in this repository.
+Owner: `@kubeshop/testkube-docs` for `docs/` and every `*.md` file, per `.github/CODEOWNERS`, except under `.github/`. The last matching line wins, and the file ends with `/.github/` and `.builds-*`, both `@kubeshop/testkube-devops`: those paths, the workflows and any Markdown in them included, belong to DevOps. Everything else falls to the last `*` line, `@kubeshop/testkube-frontend`; an earlier `*` line names `@kubeshop/testkube-backend`, and the later line overrides it. The file also assigns `/assets/`, `/licenses/` and `LICENSE` to `@kubeshop/testkube-docs` and `/test/` to `@kubeshop/testkube-qa`, but none of those exist in this repository.
 
 The seven sections below are: verifying a change, reproducing a bug, the repository map, the conventions reviewers enforce, what never to do, the pull request checks, and the skills and how to start the dev server.
 
@@ -211,11 +211,11 @@ Titles of the recent merged pull requests follow [Conventional Commits](https://
 
 The pull request checks are not GitHub Actions. They are TestWorkflows in the testkube repository, in `test/testkube/oss-tests/gh-quality-loop.yaml`, and the Testkube GitHub integration starts them; they report as check runs from `testkubebot`. Each takes a `revision` config input (default `main`) and checks out this repository at that revision, so push the branch here first.
 
-| Workflow        | What it runs                                    | Time (median, 11 merged PRs, 1 to 15 October 2026) |
-| --------------- | ----------------------------------------------- | -------------------------------------------------- |
-| `docs-prettier` | `npm ci`, then `npm run format:check`           | 54 s                                               |
-| `docs-typos`    | typos over the whole repository                 | no runs in that period                             |
-| `docs-vale`     | Vale on the lines the branch adds under `docs/` | no runs in that period                             |
+| Workflow        | What it runs                          | Time (median, 11 merged PRs, 1 to 15 October 2026) |
+| --------------- | ------------------------------------- | -------------------------------------------------- |
+| `docs-prettier` | `npm ci`, then `npm run format:check` | 54 s                                               |
+
+The typos and Vale checks are not pull request checks yet: `gh-quality-loop.yaml` on `main` defines no workflow for them. Run `npm run lint:typos` and `npm run lint:vale` yourself (section 1).
 
 Vercel also posts a `Vercel Preview Comments` check run. The build and the type check are not pull request checks (section 1).
 
