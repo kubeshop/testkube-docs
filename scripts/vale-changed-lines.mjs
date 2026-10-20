@@ -71,9 +71,15 @@ const vale = spawnSync("vale", ["--output=JSON", ...added.keys()], {
   encoding: "utf8",
   maxBuffer: 64 << 20,
 });
-// Vale exits 1 when it finds an error-level alert and 2 when it cannot run.
-if (vale.error || vale.status > 1) {
-  console.error(vale.error?.message ?? vale.stderr);
+// Vale exits 1 when it finds an error-level alert and 2 when it cannot run. A null
+// status means a signal ended it before it finished, so its output is incomplete.
+if (vale.error || vale.status === null || vale.status > 1) {
+  console.error(
+    vale.error?.message ??
+      (vale.status === null
+        ? `vale was terminated by ${vale.signal}`
+        : vale.stderr)
+  );
   process.exit(2);
 }
 
