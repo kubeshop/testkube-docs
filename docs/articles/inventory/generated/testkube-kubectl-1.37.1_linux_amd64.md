@@ -369,8 +369,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.634%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.655%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -822,7 +822,7 @@ Kubernetes GitRepo Volume Inadvertent Local Repository Access in k8s.io/kubernet
 <tr><td>Affected range</td><td><code>>=1.3.0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.320%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
