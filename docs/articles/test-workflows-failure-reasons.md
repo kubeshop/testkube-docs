@@ -183,10 +183,15 @@ The dashboard shows the type and the reason in a tooltip on the status icon of a
 | `init-failure`      | Configuration error    | The execution failed before the test ran. In most cases you can fix it yourself           | `end-testworkflow-configuration-error`    |
 | `execution-failure` | Infrastructure failure | The infrastructure stopped the execution while the test ran                               | `end-testworkflow-infrastructure-failure` |
 | `step-failure`      | Test failure           | The test ran and reported a failure                                                       | `end-testworkflow-test-failure`           |
-| `user-cancel`       | Canceled by the user   | A person stopped the execution. The health of the workflow does not count it as a failure | `end-testworkflow-canceled`               |
-| `unknown`           | Unknown cause          | No signal explains the result                                                             | `end-testworkflow-not-passed`             |
+| `user-cancel`       | Canceled by the user   | A person stopped the execution. The health of the workflow does not count it as a failure | None of its own                           |
+| `unknown`           | Unknown cause          | No signal explains the result                                                             | None of its own                           |
 
-The first three events call a webhook only for executions of that type. A cancel by a person and an unknown cause have no event of their own, so use the general event in the table. See [Calling a Webhook for One Type](#calling-a-webhook-for-one-type).
+The first three events call a webhook only for executions of that type. A cancel by a person and an unknown cause have no event of their own:
+
+- `end-testworkflow-canceled` calls a webhook for every canceled execution, not only for a cancel by a person. Some stops by a person end as aborted, and they send `end-testworkflow-aborted`.
+- `end-testworkflow-not-passed` calls a webhook for every execution that does not pass, of all five types.
+
+To act on one of these two types, listen to `end-testworkflow-not-passed` and read the type in the webhook template. See [Calling a Webhook for One Type](#calling-a-webhook-for-one-type) and [Reading the Type in a Webhook Template](#reading-the-type-in-a-webhook-template).
 
 ### Filtering a List by the Type
 
