@@ -99,7 +99,7 @@ work as direct links from external sources unless they are under the default/fir
 
 ## Spell & Grammar Checking
 
-This repo uses [Vale](https://vale.sh/) for grammar/style linting and [typos](https://github.com/cburber/typos) for auto-fixing common spelling mistakes.
+This repo uses [Vale](https://vale.sh/) for grammar/style linting and [typos](https://github.com/crate-ci/typos) for auto-fixing common spelling mistakes.
 
 ### Setup
 
