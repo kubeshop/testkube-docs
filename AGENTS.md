@@ -6,7 +6,12 @@ Owner: `@kubeshop/testkube-docs` owns `docs/` and `*.md`, and `@kubeshop/testkub
 
 ## 1. Verifying a change
 
-Run these before committing. Every one runs everywhere, on a developer host or in a sandbox; none needs Docker. `lint:typos` and `lint:vale` need the `typos` and `vale` binaries (run `vale sync` once).
+Run these before committing. Every one runs everywhere, on a developer host or in a sandbox; none needs Docker. `npm install` does not install the `typos` and `vale` binaries that `lint:typos` and `lint:vale` run. Install them once:
+
+- typos: `brew install typos-cli` on macOS, `pip install typos` elsewhere.
+- vale: `brew install vale` on macOS, `go install github.com/errata-ai/vale/v3/cmd/vale@latest` elsewhere; then `vale sync` once, to download the styles.
+
+When a binary is absent, skip its check and report in the pull request that it did not run.
 
 | Command                | What it checks                                                                         | Passes when                                                                                                     |
 | ---------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
