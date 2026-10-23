@@ -94,6 +94,94 @@ OAuth is particularly useful for services where:
 
 <!-- Screenshot placeholder: OAuth authentication flow -->
 
+#### Providing an OAuth Client
+
+Before anyone can sign in, the provider has to recognise Testkube as a registered application, which
+means a **client ID** and usually a **client secret**.
+
+Testkube looks for one in this order and stops at the first that applies:
+
+1. The client an administrator entered on that MCP Server.
+2. This installation's [client metadata document](#letting-providers-identify-testkube-by-url),
+   where one is configured and the provider reads them.
+3. A client the provider issues on the spot, through dynamic registration.
+
+Most providers hand those out automatically: Testkube asks for them the first time someone connects,
+and every later connect reuses the same application. You do nothing.
+
+Some providers do not offer that, GitHub among them, and expect an administrator to create the
+application by hand. Connecting to one of those without a client fails with **Sign-in not set up**.
+To fix it, open the MCP Server and fill in **Client ID** and **Client secret** under **OAuth client**.
+
+To create the application at the provider, you will need Testkube's callback URL:
+
+```
+<your Testkube API URL>/ai/mcp-servers/oauth/callback
+```
+
+On Testkube Cloud that is `https://api.testkube.io/ai/mcp-servers/oauth/callback`. On a self-hosted
+installation, replace the host with your own API address, the same one your installation is
+configured with.
+
+:::note
+The client secret is never shown again once saved. The field displays a placeholder instead, and
+leaving it untouched keeps the stored value. To replace the secret, type the new one over the
+placeholder. Clearing both fields removes the client and lets the provider issue one automatically
+again, where it supports that.
+:::
+
+Changing the MCP Server's URL clears the stored client, because an application registered with one
+provider means nothing at another.
+
+#### Letting Providers Identify Testkube by URL
+
+Some providers accept a **Client ID Metadata Document** instead of a registered application. The
+client ID is then a public HTTPS URL, and the provider reads a small JSON document at that address
+to learn who Testkube is. Nothing is created at the provider and there is no secret to store or
+rotate, however many people connect.
+
+Testkube serves that document from your own installation, at:
+
+```
+<your Testkube API URL>/.well-known/oauth-client
+```
+
+It is off until you set that address in your installation's configuration, with the
+`ai.oauthClientIdUrl` Helm value or the `MCP_OAUTH_CLIENT_ID_URL` environment variable. Leave it
+unset and Testkube keeps asking providers to register it, which is the right behaviour when the
+document cannot be reached from the public internet.
+
+Two things decide whether it is actually used. The provider has to announce that it reads these
+documents, in its own OAuth metadata; one that does not is registered the usual way, even with the
+setting filled in. And the MCP Server must not already have a client, whether an administrator
+entered it or the provider issued one earlier. Those keep what they have, so turning this on
+changes nothing for servers people have already connected to.
+
+##### On a self-hosted installation
+
+The document is a small static file, so the provider only has to reach **that one path**. Your
+Testkube installation itself stays private.
+
+1. Expose `/.well-known/oauth-client` publicly on a domain you control, for example with a path rule
+   on your load balancer that forwards only that path to Testkube.
+2. Set `ai.oauthClientIdUrl` to that public address, which may differ from your API address: the
+   provider fetches this one from the internet, while your API only has to answer your own network.
+
+The document names both addresses. Its `client_id` is the public one you set, while `redirect_uris`
+and `client_uri` stay your API address, because that is where the provider sends the user back.
+
+The rest of the sign-in needs no inbound access: the provider sends the user's browser back to
+Testkube, and the browser is already inside your network, while Testkube calls the provider's token
+endpoint outbound.
+
+:::warning
+Set the client ID URL only once the document is reachable. If a provider cannot fetch it, sign-in
+fails where automatic registration would have worked.
+:::
+
+Pick the address carefully. The URL is the identity: changing it later invalidates every
+authorization people have already granted, and everyone has to sign in again.
+
 ## Configuring an MCP Server
 
 Configure an existing (or newly added) MCP Server by selecting it from the list of MCP Servers. The provided
