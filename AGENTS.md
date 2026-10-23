@@ -2,7 +2,7 @@
 
 The Docusaurus site for the Testkube documentation at https://docs.testkube.io: user guides, API references, CLI documentation and conceptual pages, written in Markdown and MDX (Markdown with React components).
 
-Owner: `@kubeshop/testkube-docs` for `docs/` and every `*.md` file, per `.github/CODEOWNERS`, except under `.github/`. The last matching line wins, and the file ends with `/.github/` and `.builds-*`, both `@kubeshop/testkube-devops`: those paths, the workflows and any Markdown in them included, belong to DevOps. Everything else falls to the last `*` line, `@kubeshop/testkube-frontend`; an earlier `*` line names `@kubeshop/testkube-backend`, and the later line overrides it. The file also assigns `/assets/`, `/licenses/` and `LICENSE` to `@kubeshop/testkube-docs` and `/test/` to `@kubeshop/testkube-qa`, but none of those exist in this repository.
+Owner: `@kubeshop/testkube-docs` owns `docs/` and `*.md`, and `@kubeshop/testkube-devops` owns `.github/` (per `.github/CODEOWNERS`).
 
 ## 1. Verifying a change
 
