@@ -154,9 +154,8 @@ import LegacyWarning from "../_legacy-warning.mdx";
 
 Search uses Algolia with three indexes: `Main` (the default, for every page not explicitly in another index), `Reference` and `Legacy`. `README.md`, "Search Indexing", shows the meta tag that puts a page in another index.
 
-### Formatting and wording
+### When Vale or typos flags a word on purpose
 
-- Prettier is the repository formatter (`.prettierrc.json`). Check with `npm run format:check` before committing, and run `npm run format` to fix what it reports.
 - When Vale flags a product or technology name the docs use on purpose, add the name to `.vale/styles/config/vocabularies/Testkube/accept.txt` rather than rewording. A lower-case entry there makes Vale demand lower case everywhere, so write `(?i)json` for a word that appears in both cases, as the file does.
 - A false positive from typos goes in `_typos.toml`.
 
