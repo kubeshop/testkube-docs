@@ -366,7 +366,7 @@ logs for `skipped applying invite`:
 | `no-longer-pending` | The invite was accepted, revoked, declined or expired before it could be applied. |
 | `limit-denied` | Applying it would exceed the organization's user or seat limit. |
 | `write-failed` | Saving the organization failed. The invite stays pending and the next sign-in retries. |
-| `nothing-applicable` | A Team or Environment on the invite no longer exists. Whatever could be applied was, and the invite stays pending so you can see it did not fully apply. |
+| `partially-applied` | Something on the invite could not be applied: a Team or Environment no longer exists, or an Environment is already held at a different role. Whatever could be applied was, and the invite stays pending so you can see it did not fully apply. The `skipped` field names each one, prefixed `team:`, `env:` or `env-role:`. |
 
 A successful application logs `applied invite at sign-in` with the invite and organization ids.
 
