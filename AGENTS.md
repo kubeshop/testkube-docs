@@ -74,7 +74,6 @@ When a binary is absent, skip its check and report in the pull request that it d
 | `config.yaml`                        | The `crd-ref-docs` configuration, including the Kubernetes version for outgoing links                                                                                                                                                 |
 | `_typos.toml`, `.vale.ini`, `.vale/` | typos and Vale configuration and the Vale vocabulary                                                                                                                                                                                  |
 | `package.json`                       | Dependencies and npm scripts                                                                                                                                                                                                          |
-| `.env`                               | Environment variables (if needed)                                                                                                                                                                                                     |
 
 The site is deployed automatically with Vercel.
 
