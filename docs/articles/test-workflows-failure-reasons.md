@@ -233,11 +233,7 @@ A workflow reads the type, the code, and the step of another execution with `exe
 
 ### Calling a Webhook for One Type
 
-To call a webhook only for one type of failure, list its event in the webhook:
-
-- `end-testworkflow-configuration-error` for `init-failure`
-- `end-testworkflow-infrastructure-failure` for `execution-failure`
-- `end-testworkflow-test-failure` for `step-failure`
+To call a webhook only for one type of failure, list the event of the type in the webhook. The table in [Types](#types) names the event of each type.
 
 These events need Testkube Agent 2.14.0 or later. For the rules and an example, see [Events for the Cause of a Failure](/articles/webhooks#events-for-the-cause-of-a-failure).
 
