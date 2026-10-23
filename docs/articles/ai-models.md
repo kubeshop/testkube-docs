@@ -38,13 +38,13 @@ You can add your own models to make them available for AI Chats. This is useful 
 
 Select the **Add Model** button to open the model configuration modal with the following fields:
 
-| Field           | Description                                                                                                                                                                          |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Name**        | A name for the model provider (must be unique and comply with Kubernetes naming conventions).                                                                                        |
-| **Provider**    | The model provider — `OpenAI` for direct OpenAI API access, or `OpenAI Compatible` for any service that implements the OpenAI API specification (e.g., Azure OpenAI, LiteLLM, vLLM). |
-| **Base URL**    | The API endpoint URL. Required for `OpenAI Compatible` providers; leave empty for direct OpenAI access.                                                                              |
-| **Credentials** | Select an existing API key credential or create a new one. The API key is stored securely as a Kubernetes secret.                                                                    |
-| **Models**      | Model identifiers to make available. For `OpenAI Compatible` providers, each model can optionally have its own custom endpoint URL.                                                  |
+| Field           | Description                                                                                                                                                                                                                                   |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Name**        | A name for the model provider (must be unique and comply with Kubernetes naming conventions).                                                                                                                                                 |
+| **Provider**    | The model provider — `OpenAI` for direct OpenAI API access, `Anthropic` for Claude models through the Anthropic API, or `OpenAI Compatible` for any service that implements the OpenAI API specification (e.g., Azure OpenAI, LiteLLM, vLLM). |
+| **Base URL**    | The API endpoint URL. Required for `OpenAI Compatible` providers; not used for `OpenAI` and `Anthropic`, which call their own APIs.                                                                                                           |
+| **Credentials** | Select an existing API key credential or create a new one. The API key is stored securely as a Kubernetes secret.                                                                                                                             |
+| **Models**      | Model identifiers to make available. For `OpenAI Compatible` providers, each model can optionally have its own custom endpoint URL.                                                                                                           |
 
 ![Add AI Model](images/add-model-provider.png)
 
@@ -53,6 +53,7 @@ Select the **Add Model** button to open the model configuration modal with the f
 After adding a model, configure the model names that you want to make available:
 
 - For **OpenAI** providers, use model names like `gpt-5.2`, `gpt-5-mini`, etc.
+- For **Anthropic** providers, use Claude model names like `claude-sonnet-5-5`, `claude-haiku-4-5`, etc.
 - For **OpenAI Compatible** providers, use the model identifiers expected by your service (e.g., `anthropic/claude-opus-4.6`, `google/gemini-3-flash`). You can also set a custom endpoint URL per model — useful for Azure OpenAI where each model has its own deployment URL.
 
 ### Extra Headers and Query Parameters
