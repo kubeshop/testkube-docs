@@ -19,7 +19,7 @@ npm run build          # Docusaurus build; fails on broken in-repo links
 - `npm run build` sets `NODE_OPTIONS="--max_old_space_size=20000"`. It is the check that catches broken links and build errors, and it is not a pull request check, so always run it, as well as the type check, locally.
 - `lint:vale` compares your branch, including uncommitted edits, with `origin/main`, so fetch it first. It checks only pages under `docs/`, not contributor files such as this one. It prints warnings and fails only on errors. Existing pages carry thousands of Vale alerts, which is why it checks added lines and not whole files.
 - `npm run format` is the fix, not the check: it rewrites every file Prettier would change, so run it only after `format:check` reports something.
-- `docs-prettier` (section 6) runs `npm run format:check` over the whole repository, not only the files you changed. Over 11 merged pull requests between 1 and 15 October 2026 it took a median of 54 seconds (45 to 106), including `npm ci`.
+- `docs-prettier` (section 6) runs `npm run format:check` over the whole repository, not only the files you changed.
 - The `pre-commit` hook (`.husky/pre-commit`) runs `lint-staged`, which formats staged `js`, `jsx`, `ts`, `tsx`, `json`, `md`, `mdx`, `yml`, `yaml` and `css` files with Prettier.
 
 ## 2. Reproducing a bug
@@ -209,9 +209,9 @@ Titles of the recent merged pull requests follow [Conventional Commits](https://
 
 The pull request checks are not GitHub Actions. They are TestWorkflows in the testkube repository, in `test/testkube/oss-tests/gh-quality-loop.yaml`, and the Testkube GitHub integration starts them; they report as check runs from `testkubebot`. Each takes a `revision` config input (default `main`) and checks out this repository at that revision, so push the branch here first.
 
-| Workflow        | What it runs                          | Time (median, 11 merged PRs, 1 to 15 October 2026) |
-| --------------- | ------------------------------------- | -------------------------------------------------- |
-| `docs-prettier` | `npm ci`, then `npm run format:check` | 54 s                                               |
+| Workflow        | What it runs                          |
+| --------------- | ------------------------------------- |
+| `docs-prettier` | `npm ci`, then `npm run format:check` |
 
 The typos and Vale checks are not pull request checks yet: `gh-quality-loop.yaml` on `main` defines no workflow for them. Run `npm run lint:typos` and `npm run lint:vale` yourself (section 1).
 
