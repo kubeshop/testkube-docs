@@ -24,7 +24,7 @@ When a binary is absent, skip its check and report in the pull request that it d
 - `npm run build` raises Node's heap limit itself. It is the check that catches broken links and build errors, and it is not a pull request check, so always run it, as well as the type check, locally.
 - `lint:vale` compares your branch, including uncommitted edits, with `origin/main`, so fetch it first. It checks only pages under `docs/`, not contributor files such as this one. It prints warnings and fails only on errors. Existing pages carry many Vale alerts, which is why it checks added lines and not whole files.
 - `npm run format` is the fix, not the check: it rewrites every file Prettier would change, so run it only after `format:check` reports something.
-- `docs-prettier` (section 6) runs `npm run format:check` over the whole repository, not only the files you changed.
+- `docs-prettier` (section 6) runs `npm run format:check` over the whole repository, not only the files you changed, and takes about one minute.
 - The `pre-commit` hook (`.husky/pre-commit`) runs `lint-staged`, which formats staged `js`, `jsx`, `ts`, `tsx`, `json`, `md`, `mdx`, `yml`, `yaml` and `css` files with Prettier.
 
 ## 2. Never do these
