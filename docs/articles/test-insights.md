@@ -341,6 +341,6 @@ functional and operational metrics for the Workflow:
 
 ### Customizing
 
-Opening an analysis on this boart allows you to customize the anlaysis as outlined above but any changes must be saved to a separate Insights Board, as indicated by the notice on the top:
+Opening an analysis on this board allows you to customize the analysis as outlined above but any changes must be saved to a separate Insights Board, as indicated by the notice on the top:
 
 ![Scratch Workflow Analyais](images/scratch-workflow-analysis.png)
