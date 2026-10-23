@@ -4,8 +4,6 @@ The Docusaurus site for the Testkube documentation at https://docs.testkube.io: 
 
 Owner: `@kubeshop/testkube-docs` for `docs/` and every `*.md` file, per `.github/CODEOWNERS`, except under `.github/`. The last matching line wins, and the file ends with `/.github/` and `.builds-*`, both `@kubeshop/testkube-devops`: those paths, the workflows and any Markdown in them included, belong to DevOps. Everything else falls to the last `*` line, `@kubeshop/testkube-frontend`; an earlier `*` line names `@kubeshop/testkube-backend`, and the later line overrides it. The file also assigns `/assets/`, `/licenses/` and `LICENSE` to `@kubeshop/testkube-docs` and `/test/` to `@kubeshop/testkube-qa`, but none of those exist in this repository.
 
-The seven sections below are: verifying a change, reproducing a bug, the repository map, the conventions reviewers enforce, what never to do, the pull request checks, and the skills and how to start the dev server.
-
 ## 1. Verifying a change
 
 Run these before committing:
