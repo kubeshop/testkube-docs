@@ -217,7 +217,7 @@ The typos and Vale checks are not pull request checks yet: `gh-quality-loop.yaml
 
 Vercel also posts a `Vercel Preview Comments` check run. The build and the type check are not pull request checks (section 1).
 
-Argo CD syncs `gh-quality-loop.yaml` from the testkube repository's `main` into the "GitHub Advanced Integration" environment of the Testkube OSS organization on Prod US (organization `tkcorg_2f14949f54f2e2d8`, environment `tkcenv_98c3a7b4da95e4e8`; testkube-deployment `envs/prd-agents/apps/testkube-runner-github-advanced-integration.yaml`), so a merged change to the workflows applies to every pull request at once. To run one yourself, use the Testkube MCP server connected to that environment (`https://api.testkube.io/organizations/tkcorg_2f14949f54f2e2d8/environments/tkcenv_98c3a7b4da95e4e8/mcp`):
+Argo CD syncs `gh-quality-loop.yaml` from the testkube repository's `main` into the "GitHub Advanced Integration" environment of the Testkube OSS organization on Prod US (`app.testkube.io`; testkube-deployment `envs/prd-agents/apps/testkube-runner-github-advanced-integration.yaml`), so a merged change to the workflows applies to every pull request at once. To run one yourself, use the Testkube MCP server connected to that environment: `testkube mcp serve` from a CLI logged in to it, or its remote endpoint, `https://api.testkube.io/organizations/<organization ID>/environments/<environment ID>/mcp`, with the IDs from the environment's dashboard URL (`/organization/<organization ID>/environment/<environment ID>/`):
 
 1. `run_workflow` with `workflowName` and `config: {"revision": "<branch or commit SHA>"}`. It returns the execution ID.
 2. `wait_for_executions` with `executionIds`.
