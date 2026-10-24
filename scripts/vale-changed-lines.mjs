@@ -9,13 +9,14 @@
 // tree, so uncommitted edits count too. Exits 1 when an added line has an error-level alert.
 import { execFileSync, spawnSync } from "node:child_process";
 
-// Generated pages, matching .prettierignore and _typos.toml.
+// Generated pages, the same list as _typos.toml. Only inventory/generated/ is generated;
+// the hand-written inventory pages beside it are checked.
 const GENERATED = [
   "docs/cli/",
   "docs/legacy-cli/",
   "docs/openapi/",
   "docs/crd/",
-  "docs/articles/inventory/",
+  "docs/articles/inventory/generated/",
   "docs/articles/crds/",
 ];
 
