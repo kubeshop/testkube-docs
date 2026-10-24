@@ -799,6 +799,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "AI tracing",
+              id: "articles/ai-tracing",
+            },
+            {
+              type: "doc",
               label: "Configuration",
               id: "articles/ai-enabling",
             },
