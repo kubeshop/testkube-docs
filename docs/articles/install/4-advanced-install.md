@@ -320,6 +320,56 @@ testkube-cloud-api:
       # passwordSecretRef: <secret name>
 ```
 
+#### Applying invites at sign-in
+
+Without SMTP, nobody receives an invite email. The Team and Environment chosen on the invite are
+stored on it and are only applied when the invite is accepted, so users who sign in through SSO
+keep their pending invite and never get those assignments.
+
+Enable this to apply a user's pending invites when they sign in, matched on their email address:
+
+```yaml
+testkube-cloud-api:
+  api:
+    features:
+      applyInvitesOnSignIn: true
+```
+
+It is off by default, because it grants organization, Team and Environment access with no action
+from the user. What to expect when it is on:
+
+- Invites are matched on the user's email address, compared without regard to case.
+- A user who is not yet an organization member joins on the invite's full terms. A user who is
+  already a member gets the invited Team and Environment added, and the role they already have is
+  left unchanged.
+- It runs on every sign-in, not only the first, so someone invited after they already have an
+  account is covered too.
+- Only pending invites are applied. Invites expire seven days after they are created, so invite
+  people close to when they will first sign in.
+- A pending invite stays live until it expires. If you change your mind about someone's Team or
+  Environment, revoke the outstanding invite as well as changing their assignment, or the old one
+  will be added back the next time they sign in.
+- Moving an existing member to a different Team is not covered. An invite cannot be created for
+  someone who already belongs to the organization, so that stays a manual change.
+
+#### Why a sign-in applied nothing
+
+Each skipped invite is logged by the control plane with a `reason`. Search the `testkube-cloud-api`
+logs for `skipped applying invite`:
+
+| Reason | What it means |
+| --- | --- |
+| `org-missing` | The organization on the invite no longer exists. |
+| `scim-managed` | SCIM manages this organization's permissions, so Testkube does not write them. |
+| `scim-status-unreadable` | The SCIM setting could not be read. Nothing is applied rather than risk writing into an IdP-managed organization. |
+| `lock-unavailable` | Another writer held the organization, most likely a SCIM sync. The next sign-in retries. |
+| `no-longer-pending` | The invite was accepted, revoked, declined or expired before it could be applied. |
+| `limit-denied` | Applying it would exceed the organization's user or seat limit. |
+| `write-failed` | Saving the organization failed. The invite stays pending and the next sign-in retries. |
+| `partially-applied` | A Team or Environment on the invite no longer exists. Whatever could be applied was, and the invite stays pending so you can see it did not fully apply. The `skipped` field names each one, prefixed `team:` or `env:`. |
+
+A successful application logs `applied invite at sign-in` with the invite and organization ids.
+
 ## Custom Ingress Controller
 
 By default, Testkube uses the NGINX Ingress Controller to ensure the reliable functioning of gRPC and Websockets protocols.
