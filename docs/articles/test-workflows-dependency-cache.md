@@ -368,7 +368,7 @@ The object store remains the index. It still holds one small object per entry �
 
 ### Enabling It
 
-Create the claim first; the chart does not create it. It must exist in the agent's namespace **and** in every namespace executions run in, and claims in different namespaces must expose the same backing storage.
+Create the claim first; the chart does not create it. It must exist in the agent's namespace **and** in every namespace executions run in, and claims in different namespaces must expose the same backing storage. A pod that names a claim missing from its namespace is never scheduled: the agent itself, or an execution, stays `Pending`, and nothing about it reaches a step's log — see [Troubleshooting](#troubleshooting).
 
 ```yaml title="step-cache-claim.yaml"
 apiVersion: v1
@@ -411,7 +411,18 @@ Nothing changes in a workflow. The same `cache` block stores to the volume when 
 
 `ReadWriteOnce` also works where every one of those pods runs on one node, because it limits a volume to a node, not to a pod. That covers single-node clusters such as k3d, kind, minikube and Docker Desktop, so the feature can be tried — and tested — on an ordinary cluster with its default StorageClass. On a multi-node cluster with a `ReadWriteOnce` claim, a pod scheduled to another node cannot mount it and does not start.
 
-The agent creates each execution's directory on the volume itself, so a step running as a non-root user can write to it. The agent therefore needs write access to the share: an NFS export that squashes the agent's user leaves the volume unusable, and every save falls back to the object store.
+### Permissions on the Volume
+
+The agent writes to the top of the volume: an identity file, `.volume-id`, and an `inbox` directory holding one directory per execution. It creates each execution's directory before the pod starts, with mode `0777`, so a step can save into it whichever user it runs as. Steps need no write access anywhere else.
+
+So the requirement is on the volume's root directory alone: writable by the user the agent's writes arrive as, and readable and searchable by everyone else, since every restore reads through it — `0755` owned by that user, or `0775` with a group it shares, both work. The agent runs as UID `1001` unless its `securityContext` says otherwise. On NFS, access is checked against the UID and GID the server maps a request to, so check the mapped identity, not the pod's:
+
+- With the default `root_squash`, a non-root agent is not remapped at all, and the export's root directory needs to be writable by UID `1001` or by a group it belongs to.
+- With `all_squash`, or with an agent running as root under `root_squash`, the agent's requests arrive as the export's anonymous user (`anonuid`/`anongid`, often `65534`). Make the directory writable by that user and squashing works as intended — there is no need to turn it off.
+
+Steps under `all_squash` also write as the anonymous user, which is fine: what they write is made readable by every user, and the agent removes it through the `0777` directories above it.
+
+If the agent cannot write its identity file, it logs `could not read or write the step cache volume's identity` at startup and does not use the volume at all: every cache goes to the object store, exactly as without the volume.
 
 ### What Gets Logged
 
@@ -422,16 +433,36 @@ cache: saved "npm-6c3f…" to the shared volume (40 MB in 210ms, 190ms copying a
 cache: hit for "npm-6c3f…" (40 MB in 95ms)
 ```
 
-A cache never fails a step because of the volume. When the volume is full, an entry exceeds a limit, or the copy fails, the save falls back to the object store and logs why:
+Once a pod is running, the volume never fails a step. When the volume is full, an entry exceeds a limit, or the copy fails, the save falls back to the object store and logs why:
 
 ```
 cache: the shared volume would not take "npm-6c3f…": <reason>
 cache: storing "npm-6c3f…" in the object store instead
 ```
 
-`cache: not using the shared volume: <reason>` means the pod was meant to use the volume and could not open it — usually a claim missing from the execution namespace, or a share the step's user cannot write to.
+`cache: not using the shared volume: <reason>` means the volume was mounted in the pod but could not be opened or written to: a share that refuses the step's mapped user, a read-only export, or a full volume. The step then uses the object store.
 
 Entries are keyed per volume. Agents that share one volume share its entries; an agent on a different volume, such as a runner in another cluster, keeps entries of its own under the same keys. Entries stored in the object store before the volume was enabled are not reused and expire as usual, so the first run after enabling it starts cold.
+
+### Troubleshooting
+
+Problems show up in one of two places, depending on whether the pod started.
+
+**The pod never starts.** A claim missing from a namespace, or one that cannot be attached — a `ReadWriteOnce` volume already attached to another node, say — is a Kubernetes scheduling or mount failure. The pod stays `Pending` or `ContainerCreating`, and nothing inside it runs, so there is no step log to read and no fallback to the object store. Look at the pod's events instead:
+
+```sh
+kubectl get pods -n <namespace>
+kubectl describe pod -n <namespace> <pod>   # Events: FailedScheduling, FailedMount, FailedAttachVolume
+```
+
+This applies to the agent's own pod as well as to execution pods, since both mount the claim.
+
+**The pod runs but the volume is not used.** These are runtime filesystem failures, and they are reported in the step's log, where the cache falls back to the object store:
+
+- `cache: not using the shared volume: <reason>` — mounted, but not readable or writable by the step's (mapped) user. See [Permissions on the Volume](#permissions-on-the-volume).
+- `cache: the shared volume would not take "<key>": <reason>` — the volume filled up or refused the copy partway through.
+
+If every step saves to the object store and none of them logs either line, check the agent's startup log for the identity message under [Permissions on the Volume](#permissions-on-the-volume).
 
 ### Retention
 
