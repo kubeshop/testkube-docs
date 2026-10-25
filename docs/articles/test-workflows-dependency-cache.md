@@ -360,6 +360,100 @@ If that existing configuration cannot be read, Testkube writes nothing and logs 
 
 Reading it needs a permission that earlier versions did not: `s3:GetLifecycleConfiguration` on S3 and MinIO, `storage.buckets.get` on GCS. Both S3 actions are bucket-scoped, so a policy whose `Resource` is only `arn:aws:s3:::your-bucket/*` does not carry them however permissive its object actions are. Note also that `cacheExpiration` defaults to `1`, so the lifecycle is read and written on every installation rather than only those that configure an expiration.
 
+## Shared Volume
+
+By default every entry is stored whole in the object store, so each restore downloads an archive over HTTP and unpacks it. Point Testkube at a PersistentVolumeClaim and the entries live on that volume instead: a restore becomes a local directory copy, with nothing to download and nothing to unpack, which matters most for large stores of many files.
+
+The object store remains the index. It still holds one small object per entry — a pointer to a directory on the volume — and it still decides who may store which key, so [scopes](#scope), the [pull request namespaces](#pull-requests-read-the-shared-cache-but-write-their-own) and [immutability](#immutability-depends-on-the-store) behave exactly as they do without a volume. Nothing about who may write an entry moves onto the volume.
+
+### Enabling It
+
+Create the claim first; the chart does not create it. It must exist in the agent's namespace **and** in every namespace executions run in, and claims in different namespaces must expose the same backing storage.
+
+```yaml title="step-cache-claim.yaml"
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: testkube-step-cache
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 50Gi
+```
+
+Then enable it on the chart that runs executions — `testkube-api` for a standalone agent or a superagent, `testkube-runner` for a runner agent:
+
+```yaml title="values.yaml"
+testkube-api:
+  stepCacheVolume:
+    enabled: true
+    claimName: testkube-step-cache
+```
+
+Both charts mount the claim on their own Deployment as well as on execution pods, because the agent is what expires old entries — see [Retention](#retention).
+
+| Helm value                             | Environment variable                        | Default                    | Description                                                                                      |
+| -------------------------------------- | ------------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------ |
+| `stepCacheVolume.enabled`              | —                                           | `false`                    | Store entries on the volume. Requires `claimName`.                                               |
+| `stepCacheVolume.claimName`            | `TESTKUBE_STEP_CACHE_VOLUME_CLAIM`          | `""`                       | The existing claim. Empty keeps every entry in the object store.                                 |
+| `stepCacheVolume.mountPath`            | `TESTKUBE_STEP_CACHE_VOLUME_MOUNT_PATH`     | `/var/testkube/step-cache` | Where the agent itself mounts the volume, to sweep it.                                           |
+| `stepCacheVolume.retentionDays`        | `TESTKUBE_STEP_CACHE_VOLUME_RETENTION_DAYS` | `7`                        | Days an execution's entries survive on the volume. Raised automatically, see below.              |
+| `stepCacheVolume.sweepInterval`        | `TESTKUBE_STEP_CACHE_VOLUME_SWEEP_INTERVAL` | `1h`                       | How often expired entries are removed.                                                           |
+| `stepCacheVolume.objectExpirationDays` | `STORAGE_CACHE_EXPIRATION`                  | `1`                        | Runner chart only: how long the Control Plane keeps a cache object. See [Retention](#retention). |
+
+Nothing changes in a workflow. The same `cache` block stores to the volume when the agent has one and to the object store when it does not.
+
+### Access Mode
+
+`ReadWriteMany` is what a multi-node cluster needs, since the agent and every execution pod mount the same claim from whichever node they run on — NFS, CephFS, EFS, Azure Files, Filestore and similar.
+
+`ReadWriteOnce` also works where every one of those pods runs on one node, because it limits a volume to a node, not to a pod. That covers single-node clusters such as k3d, kind, minikube and Docker Desktop, so the feature can be tried — and tested — on an ordinary cluster with its default StorageClass. On a multi-node cluster with a `ReadWriteOnce` claim, a pod scheduled to another node cannot mount it and does not start.
+
+The agent creates each execution's directory on the volume itself, so a step running as a non-root user can write to it. The agent therefore needs write access to the share: an NFS export that squashes the agent's user leaves the volume unusable, and every save falls back to the object store.
+
+### What Gets Logged
+
+A save to the volume says so, and a restore from it reads like any other hit:
+
+```
+cache: saved "npm-6c3f…" to the shared volume (40 MB in 210ms, 190ms copying and 20ms storing)
+cache: hit for "npm-6c3f…" (40 MB in 95ms)
+```
+
+A cache never fails a step because of the volume. When the volume is full, an entry exceeds a limit, or the copy fails, the save falls back to the object store and logs why:
+
+```
+cache: the shared volume would not take "npm-6c3f…": <reason>
+cache: storing "npm-6c3f…" in the object store instead
+```
+
+`cache: not using the shared volume: <reason>` means the pod was meant to use the volume and could not open it — usually a claim missing from the execution namespace, or a share the step's user cannot write to.
+
+Entries are keyed per volume. Agents that share one volume share its entries; an agent on a different volume, such as a runner in another cluster, keeps entries of its own under the same keys. Entries stored in the object store before the volume was enabled are not reused and expire as usual, so the first run after enabling it starts cold.
+
+### Retention
+
+The agent, not the Control Plane, removes old entries from the volume, because the Control Plane is not necessarily in the same cluster. It deletes an execution's entries `retentionDays` after they were written, checking every `sweepInterval`, and never while that execution is still running.
+
+An entry must outlive the object pointing at it, or that key keeps answering with a hit that restores nothing until the object expires. So `retentionDays` is raised at startup to the cache objects' lifetime plus a margin of a little over two days, and a warning is logged when that happens:
+
+- **Standalone agent:** the lifetime is the earlier of [`cacheExpiration` and `expiration`](#how-the-two-interact), which the agent applies to its own bucket.
+- **Agent or runner connected to a Control Plane:** the agent cannot read the Control Plane's bucket, so it has to be told. Set `testkube-api.storage.cacheExpiration`, or `stepCacheVolume.objectExpirationDays` on the runner chart, to the cache expiration your Control Plane uses.
+
+:::note
+The margin covers the store rounding a lifecycle rule up to a UTC midnight and removing objects some time after that. No store promises how long that delay can be, so a store known to lag needs a longer `retentionDays`. The cost of getting it wrong is a cold cache for that key, never a wrong one.
+:::
+
+### Security
+
+:::warning
+**Everything on the volume is readable by every execution in the cluster.** The object store still decides who may _write_ an entry, so a pull request cannot poison what a trusted run restores — but every workflow can read what every other workflow cached, whatever its scope.
+:::
+
+The save runs inside the step's own container, so the step's own command holds a writable mount of its execution's directory on the volume. A workflow can therefore write there directly, bypassing the cache's size and file-count limits, and can leave files the agent cannot remove. Enable the volume only where every workflow that can run on the agent is trusted with it. Where that is not the case, keep entries in the object store, which grants each upload separately and shares no filesystem.
+
 ## Limitations
 
 **Cached paths must be concrete at bundle time.** Testkube decides which volumes to mount before the pod starts, while the toolkit resolves the paths inside it. A `paths` entry — or a `workingDir` — containing an expression that can only be resolved in the pod is rejected when the workflow is built, because the two would otherwise disagree and the cache would silently do nothing. Config, workflow and execution values are fine; they are already substituted by then.
@@ -368,7 +462,7 @@ Reading it needs a permission that earlier versions did not: `s3:GetLifecycleCon
 
 **Entries cannot be replaced.** See [Invalidating a Key](#invalidating-a-key).
 
-**An archive is capped at 5 GiB.** A larger one is skipped with a message rather than stored.
+**An archive is capped at 5 GiB.** A larger one is skipped with a message rather than stored. On a [shared volume](#shared-volume) the same limit applies to the uncompressed tree, and a larger one falls back to the object store.
 
 **A key is at most 512 characters, and `restoreKeys` holds at most 10 prefixes.** At least one `paths` entry is required.
 
