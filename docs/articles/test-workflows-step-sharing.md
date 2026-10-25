@@ -125,4 +125,5 @@ steps:
 - Output values are strings. Write JSON if you need structured data and parse it in the consuming step.
 - `{{step.<id>.exitCode}}` is a number. The other step expressions are strings.
 - Step results directories work within a single pod. They are not available across parallel workers in separate pods — use the `transfer` property for that (see [Parallelization](/articles/test-workflows-parallel)).
+- A worker of a parallel step publishes output values the same way, and the steps after the parallel step read them with `parallel("<id>", <index>).outputs.<key>` (see [Reading values from parallel steps](/articles/test-workflows-parallel#reading-values-from-parallel-steps)).
 - An output value holding a secret stays inside the Workflow that produced it. Later steps read it in full; a Workflow that ran this one cannot — see [Sensitive Values](/articles/test-workflows-execution-sharing#sensitive-values).

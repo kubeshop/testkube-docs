@@ -619,7 +619,7 @@ The expressions language includes many functions that help manipulate and cast v
 
 ### Execution Data Functions
 
-These read data produced by other Test Workflow executions - the ones the current Workflow ran with `execute`, the one that ran it, and its siblings. See [Sharing Data Between Executions](/articles/test-workflows-execution-sharing) for the full picture.
+These read data produced by other Test Workflow executions - the ones the current Workflow ran with `execute`, the one that ran it, and its siblings. `parallel` reads the workers of a parallel step of the current execution. See [Sharing Data Between Executions](/articles/test-workflows-execution-sharing) for the full picture.
 
 <table>
   <thead>
@@ -642,6 +642,12 @@ These read data produced by other Test Workflow executions - the ones the curren
       <td>string</td>
       <td>Returns the contents of a single artifact of another execution, up to 1 MiB</td>
       <td><code>read_artifact("parent", "fixtures/data.json")</code> might return <code>'{"cases":3}'</code></td>
+    </tr>
+    <tr>
+      <td><code>parallel</code></td>
+      <td>map</td>
+      <td>Returns what a worker of an earlier <code>parallel</code> step published - its <code>index</code>, <code>status</code> and <code>outputs</code>. Takes the <code>id</code> of the parallel step and the index of the worker. See <a href="/articles/test-workflows-parallel#reading-values-from-parallel-steps">Reading values from parallel steps</a></td>
+      <td><code>parallel("shard", 0).outputs.duration</code> might return <code>"12"</code>; <code>parallel("shard", 2).status</code> might return <code>"failed"</code></td>
     </tr>
   </tbody>
 </table>
