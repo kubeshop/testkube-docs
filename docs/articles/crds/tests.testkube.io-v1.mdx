@@ -909,6 +909,56 @@ _Appears in:_
 | `authType` _[GitAuthType](#gitauthtype)_                                                                                   | Authorization type for the credentials                                                                                                                                                                                               |         |            |
 | `pullRequest` _[TestTriggerContentGitPullRequest](#testtriggercontentgitpullrequest)_                                      | PullRequest specifies pull request trigger configuration.<br />When set, the informer uses the GitHub API to poll for PR events.                                                                                                     |         |            |
 
+### TestTriggerContentHTTPHeaderSource
+
+TestTriggerContentHTTPHeaderSource is a request header whose value is read from a Secret or ConfigMap
+
+_Appears in:_
+
+- [TestTriggerContentHTTPSpec](#testtriggercontenthttpspec)
+
+| Field                                                                                                                   | Description                                 | Default | Validation |
+| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- | ------- | ---------- |
+| `name` _string_                                                                                                         | Name of the header                          |         |            |
+| `valueFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#envvarsource-v1-core)_ | ValueFrom is the source of the header value |         |            |
+
+### TestTriggerContentHTTPSelect
+
+TestTriggerContentHTTPSelect chooses the part of an HTTP response that a content trigger watches.
+At most one field can be set.
+
+_Appears in:_
+
+- [TestTriggerContentHTTPSpec](#testtriggercontenthttpspec)
+
+| Field               | Description                                                                                                                          | Default | Validation |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------- | ---------- |
+| `jsonPath` _string_ | JSONPath is a dot-path into the JSON response body (e.g. ".data.version").<br />An object or array is compared by its JSON encoding. |         |            |
+| `header` _string_   | Header is the name of a response header whose value is watched (e.g. ETag)                                                           |         |            |
+
+### TestTriggerContentHTTPSpec
+
+TestTriggerContentHTTPSpec defines an HTTP endpoint that a content trigger polls. The trigger
+fires its http-changed event when the selected value of the response changes.
+
+_Appears in:_
+
+- [TestTriggerContentSelector](#testtriggercontentselector)
+
+| Field                                                                                                          | Description                                                                                                                                                  | Default | Validation                                            |
+| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- | ----------------------------------------------------- |
+| `url` _string_                                                                                                 | URL of the endpoint to poll (http or https)                                                                                                                  |         |                                                       |
+| `method` _string_                                                                                              | Method is the HTTP method of the request, GET by default                                                                                                     |         | Enum: [GET HEAD POST PUT PATCH DELETE OPTIONS] <br /> |
+| `headers` _object (keys:string, values:string)_                                                                | Headers sent with every request.<br />Warning: these are stored in plain text in the trigger spec. Prefer HeadersFrom for credentials.                       |         |                                                       |
+| `headersFrom` _[TestTriggerContentHTTPHeaderSource](#testtriggercontenthttpheadersource) array_                | HeadersFrom sends headers whose values are read from a Secret or ConfigMap in the trigger's<br />namespace on every poll. Preferred for credentials.         |         |                                                       |
+| `body` _string_                                                                                                | Body sent with every request, e.g. for a POST or GraphQL endpoint                                                                                            |         |                                                       |
+| `interval` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#duration-v1-meta)_ | Interval between polls, 1m by default and at least 10s                                                                                                       |         | Format: duration <br />Type: string <br />            |
+| `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#duration-v1-meta)_  | Timeout of one request, 10s by default                                                                                                                       |         | Format: duration <br />Type: string <br />            |
+| `insecureSkipVerify` _boolean_                                                                                 | InsecureSkipVerify skips the verification of the server's TLS certificate                                                                                    |         |                                                       |
+| `expectedStatus` _integer array_                                                                               | ExpectedStatus lists the status codes of a successful poll, 200 by default.<br />A response with any other code is a failed poll, never a change.            |         |                                                       |
+| `select` _[TestTriggerContentHTTPSelect](#testtriggercontenthttpselect)_                                       | Select chooses the part of the response that is watched. When omitted, the whole body is.                                                                    |         |                                                       |
+| `fireOnFirstObservation` _boolean_                                                                             | FireOnFirstObservation fires the trigger on the first successful poll. By default the first<br />poll only records the value to compare later polls against. |         |                                                       |
+
 ### TestTriggerContentSelector
 
 TestTriggerContentSelector defines what content to watch for trigger events
@@ -917,9 +967,10 @@ _Appears in:_
 
 - [TestTriggerSpec](#testtriggerspec)
 
-| Field                                                           | Description                                         | Default | Validation |
-| --------------------------------------------------------------- | --------------------------------------------------- | ------- | ---------- |
-| `git` _[TestTriggerContentGitSpec](#testtriggercontentgitspec)_ | Git specifies a git repository to watch for changes |         |            |
+| Field                                                              | Description                                                                       | Default | Validation |
+| ------------------------------------------------------------------ | --------------------------------------------------------------------------------- | ------- | ---------- |
+| `git` _[TestTriggerContentGitSpec](#testtriggercontentgitspec)_    | Git specifies a git repository to watch for changes                               |         |            |
+| `http` _[TestTriggerContentHTTPSpec](#testtriggercontenthttpspec)_ | HTTP specifies an HTTP endpoint to poll for changes. Mutually exclusive with Git. |         |            |
 
 ### TestTriggerEvent
 
@@ -929,7 +980,7 @@ TestTriggerEvent defines event for test triggers
 
 _Validation:_
 
-- Enum: [created modified deleted git-push git-tag-push git-pull-request deployment-scale-update deployment-image-update deployment-env-update deployment-containers-modified deployment-generation-modified deployment-resource-modified event-start-test event-end-test-success event-end-test-failed event-end-test-aborted event-end-test-timeout event-start-testsuite event-end-testsuite-success event-end-testsuite-failed event-end-testsuite-aborted event-end-testsuite-timeout event-queue-testworkflow event-start-testworkflow event-end-testworkflow-success event-end-testworkflow-failed event-end-testworkflow-aborted event-end-testworkflow-canceled event-end-testworkflow-not-passed event-created event-updated event-deleted]
+- Enum: [created modified deleted git-push git-tag-push git-pull-request http-changed deployment-scale-update deployment-image-update deployment-env-update deployment-containers-modified deployment-generation-modified deployment-resource-modified event-start-test event-end-test-success event-end-test-failed event-end-test-aborted event-end-test-timeout event-start-testsuite event-end-testsuite-success event-end-testsuite-failed event-end-testsuite-aborted event-end-testsuite-timeout event-queue-testworkflow event-start-testworkflow event-end-testworkflow-success event-end-testworkflow-failed event-end-testworkflow-aborted event-end-testworkflow-canceled event-end-testworkflow-not-passed event-created event-updated event-deleted]
 
 _Appears in:_
 
@@ -943,6 +994,7 @@ _Appears in:_
 | `git-push`                          |             |
 | `git-tag-push`                      |             |
 | `git-pull-request`                  |             |
+| `http-changed`                      |             |
 | `deployment-scale-update`           |             |
 | `deployment-image-update`           |             |
 | `deployment-env-update`             |             |
