@@ -263,7 +263,10 @@ Rules that restrict which event a trigger may use apply to **every** entry in
 - With a `changed`, `changed_to`, or `changed_from`
   [match condition](#match-conditions), the list may contain `modified` and
   nothing else — those operators cannot mean anything on any other event.
-- A `content` trigger may list only [git events](/articles/git-triggers).
+- A `content` trigger lists either [git events](/articles/git-triggers)
+  (`git-push`, `git-tag-push`, `git-pull-request`) with `contentSelector.git`,
+  or `http-changed` with [`contentSelector.http`](/articles/http-triggers) —
+  never a mix of the two, and nothing else.
 
 :::note
 `kubectl get testtriggers` prints an **Event** column read from `.spec.event`,
@@ -314,7 +317,9 @@ when _all_ entries are satisfied.
 :::info
 Match conditions are validated against the schema a specific listener
 discovered, so a trigger that uses them must [pin at least one
-listener](#pinning-listener-runners).
+listener](#pinning-listener-agents). The exception is an
+[HTTP content trigger](/articles/http-triggers), whose match conditions read
+the polled response rather than a Kubernetes object, so it needs no listener.
 :::
 
 For example, "fire when `.status.phase` becomes `Healthy`" or
@@ -349,7 +354,9 @@ Each entry has three parts:
 `changed`, `changed_to`, and `changed_from` are only meaningful on update
 events, so they require `event: modified` on the trigger. A trigger that uses
 the [`events`](#events) list must list `modified` and nothing else — one
-unsatisfiable event rejects the trigger even alongside a valid one.
+unsatisfiable event rejects the trigger even alongside a valid one. An
+[HTTP content trigger](/articles/http-triggers) can also use them with
+`event: http-changed`, which carries the previously polled value.
 
 ### Tips
 
@@ -478,6 +485,7 @@ spec:
   - For deployments - `deployment-scale-update`, `deployment-image-update`, `deployment-env-update`, `deployment-containers-modified`,
     `deployment-generation-modified`, `deployment-resource-modified`
   - For git content - `git-push`, `git-tag-push`, `git-pull-request`
+  - For HTTP content - `http-changed`
   - For Testkube events - `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`,
     `event-end-testworkflow-failed`, `event-end-testworkflow-aborted`, `event-created`, `event-updated`, `event-deleted`
   - `event` takes one of these values, `events` takes a list of them — see [Events](#events)

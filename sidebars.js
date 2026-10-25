@@ -502,6 +502,11 @@ const sidebars = {
               label: "Git Events",
               id: "articles/git-triggers",
             },
+            {
+              type: "doc",
+              label: "HTTP Events",
+              id: "articles/http-triggers",
+            },
           ],
         },
         {
