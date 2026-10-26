@@ -1,0 +1,13 @@
+{
+  "announcements": [
+    {
+      "id": "6ad30cf9a40d2f5f367d8fd8",
+      "title": "October 2026 Release: Sort and Route Failed Tests",
+      "version": "2.14.0",
+      "publishDate": "2026-10-06T00:00:00.000Z",
+      "summary": "Know why a test failed before you open a log. October brings failure categories, webhook routing by failure type, dependency caching, and AI Test Creation for on-prem.",
+      "body": "<p>Release Alert! 🚀</p><p>Hello wonderful humans! <strong>The October 2026 release is live!</strong> Here’s what’s new:</p><p>🔍 <strong>See what kind of failures you are dealing with:</strong><br>Failure categories now show up in the executions list, so you can tell without opening the logs. Filter by failure type or route notifications to different places—for example, infrastructure failures to one Slack channel and test failures to another. See the failure categories.</p><p>🤖 <strong>AI Test Creation is now available on-prem</strong><br>Describe a test in plain language, and Testkube generates it, runs it in your environment, and opens a pull request with the result. More on AI Test Creation.</p><p>💥 <strong>Less clicking for admins</strong><br>We’ve reworked organization-level user and permission management to make finding users, changing permissions, and making bulk updates easier. (video demo here)</p><p><strong>Cache dependencies between runs</strong><br>Reuse dependencies and other intermediate output across executions, with configurable cache keys and expiration times. Caching docs.</p><p><strong>A few more additions:</strong></p><ul><li><strong>Testkube for GitHub:</strong> see Testkube results directly in GitHub with our new Chrome extension. Install it here.</li><li><strong>Audit logs:</strong> search by resource name or ID to find related actions.</li><li><strong>Agent → Runner:</strong> the component that runs your tests is now called the Runner, to avoid confusion with AI Agents. Existing agent commands still work. Details.</li><li><strong>JUnit reports:</strong> link directly to a specific test case in a report.</li></ul>",
+      "link": null
+    }
+  ]
+}
