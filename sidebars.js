@@ -799,6 +799,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Token Limits and Pauses",
+              id: "articles/ai-token-limits",
+            },
+            {
+              type: "doc",
               label: "Configuration",
               id: "articles/ai-enabling",
             },

@@ -84,6 +84,10 @@ There are two caps, and either one can stop a call:
 
 A refused call does not consume a unit. The same counters cover every organization on the plan. On the usage block above, the rate is the line under **MCP calls**.
 
+## Token limits
+
+Separately from the plan, Organization and Environment admins can cap the AI tokens a Member, an AI Agent, an Environment or the Organization uses, and pause AI at any of those levels. Read more in [AI token limits and pauses](ai-token-limits).
+
 ## Prices
 
 What you pay, and how large each allowance is, lives on the plan. This page does not quote either. Read the allowance on **Usage & Billing**. When it says Unlimited, there is no cap on that meter. When it shows a count, that count is the cap until the reset date. Raising a cap, adding seats, or moving to a different plan is a conversation with Testkube, not a control in the dashboard.
