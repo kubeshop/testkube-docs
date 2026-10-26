@@ -240,15 +240,28 @@ The [GitHub integration](/articles/git-integration) (repository connections that
 
 **Webhook URL**: point the App webhook at `https://<control-plane-host>/api/v1/github/webhooks` (the path served by `testkube-cloud-api`). Generate a webhook secret and keep it for the values below.
 
-**Additional Helm values** on `testkube-cloud-api` (the feature is off by default and every endpoint returns "not configured" until `features.gitIntegration` is on, so the flag has to land alongside the App credentials):
+**Additional Helm values**. The feature is off by default and every endpoint returns "not configured" until it is switched on, so the flag has to land alongside the App credentials. One switch covers every component that takes part in the integration:
+
+```yaml
+global:
+  features:
+    # turns on the GitHub integration endpoints, pipeline consumers, and the dashboard tab,
+    # and lets the worker service resume the pipeline for executions the control plane stops.
+    # required: without it the App credentials below are read but the feature stays disabled.
+    gitIntegration: true
+```
+
+:::note
+
+Earlier releases took this per component, as `testkube-cloud-api.api.features.gitIntegration` and `testkube-git-provider-onboarding-worker.gitIntegration`. Both still work, so an existing values file keeps running, but they do not reach the worker service. Prefer the global switch.
+
+:::
+
+Then the App credentials on `testkube-cloud-api`:
 
 ```yaml
 testkube-cloud-api:
   api:
-    features:
-      # turns on the GitHub integration endpoints, pipeline consumers, and the dashboard tab.
-      # required — without it the App credentials below are read but the feature stays disabled.
-      gitIntegration: true
     github:
       appId: "your_application_id"
       appSlug: "your-app-slug" # from the GitHub App URL, used to build install links from the dashboard
@@ -265,7 +278,6 @@ testkube-cloud-api:
 
 ```yaml
 testkube-git-provider-onboarding-worker:
-  gitIntegration: true
   github:
     appId: "your_application_id"
     appSlug: "your-app-slug"
