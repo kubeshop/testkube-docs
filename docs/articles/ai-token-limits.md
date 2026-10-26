@@ -12,7 +12,7 @@ Token limits are yours to set. They are separate from the [AI sessions and MCP c
 :::info
 Token limits and pauses are part of AI governance. They don't need RBAC in your license.
 
-On a self-hosted control plane, AI governance is on by default (`global.features.aiGovernance`) and needs PostgreSQL.
+On a self-hosted control plane, AI governance needs PostgreSQL.
 :::
 
 ## How token limits work
