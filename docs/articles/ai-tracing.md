@@ -10,7 +10,7 @@ AI tracing sends OpenTelemetry traces of your organization's AI work to your own
 Testkube sends the traces as they happen and keeps no copy of them.
 
 :::info Availability
-AI tracing is part of AI governance. It is in **Organization management → AI tracing** when AI governance is turned on for your installation, and saving a destination needs a control plane that stores its data in PostgreSQL. Only organization admins and owners can see and change it. For self-hosted control planes, see [Self-hosted control planes](#self-hosted-control-planes).
+AI tracing is part of AI governance. It is in **Organization management → AI Governance → Tracing**, and saving a destination needs a control plane that stores its data in PostgreSQL. Only organization admins and owners can see and change it. For self-hosted control planes, see [Self-hosted control planes](#self-hosted-control-planes).
 :::
 
 ## What is traced
@@ -50,17 +50,19 @@ Testkube sends traces to the AWS X-Ray OTLP endpoint of the region you choose, s
 
 1. In the AWS console, turn on **CloudWatch Transaction Search** in the region you will send traces to. AWS refuses traces sent to the OTLP endpoint without it.
 2. Create an access key for an IAM user that can only write traces, for example with the `AWSXrayWriteOnlyAccess` managed policy. Don't reuse a key with wider permissions.
-3. In Testkube, open **Organization management → AI tracing**.
+3. In Testkube, open **Organization management → AI Governance → Tracing**.
 4. Choose **AWS CloudWatch** and enter the **AWS region**, **Access key ID** and **Secret access key**.
 5. Choose whether to **Include tool inputs and outputs**.
 6. Select **Send test trace**, then look for `testkube test trace` in CloudWatch → **Transaction Search**.
 7. Save.
 
+![The Tracing tab of AI Governance with an AWS CloudWatch destination](images/ai-governance-tracing.png)
+
 ## Send traces to an OTLP endpoint
 
 Any tool or OpenTelemetry Collector that accepts OTLP over HTTP can receive the traces.
 
-1. Open **Organization management → AI tracing** and choose **OTLP endpoint**.
+1. Open **Organization management → AI Governance → Tracing** and choose **OTLP endpoint**.
 2. Enter the **Traces endpoint**: the full HTTPS URL, usually ending in `/v1/traces`, for example `https://collector.example.com/v1/traces`.
 3. Add the **Headers** your tool needs, such as an API key.
 4. Select **Send test trace** and check that the span arrived, then save.
@@ -94,7 +96,7 @@ The Testkube AI service sends the traces, so its pods need outbound HTTPS to you
 
 | What you see                                              | What to check                                                                                |
 | --------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| **AI tracing** is not in Organization management          | AI governance is off for your installation, or you are not an organization admin or owner.   |
+| **AI Governance** or its **Tracing** tab is missing       | You are not an organization admin or owner.                                                  |
 | The test trace fails with `answered 403` from CloudWatch  | The access key can't write to X-Ray, or **Transaction Search** is off in that region.        |
 | The test trace fails with `resolves to a private address` | The endpoint's host points to a private network. Use an address reachable over the internet. |
 | The test trace fails with a timeout or connection error   | The AI service can't reach the destination. Check outbound network rules and proxies.        |
