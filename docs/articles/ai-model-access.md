@@ -10,7 +10,7 @@ By default everyone can use every model of an Environment. You can limit a Membe
 :::info
 Model access is part of AI governance and needs RBAC in your license. Without RBAC, everyone can use every model.
 
-On a self-hosted control plane, AI governance is on by default (`global.features.aiGovernance`) and needs PostgreSQL.
+On a self-hosted control plane, AI governance needs PostgreSQL.
 :::
 
 ## How model access works
