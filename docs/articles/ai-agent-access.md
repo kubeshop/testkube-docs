@@ -10,7 +10,7 @@ Every AI Agent has an access setting that decides who can use it and see its cha
 :::info
 AI Agent access is part of AI governance and needs RBAC in your license. Without RBAC, every member who can chat can use every AI Agent. Access settings that were saved before stay stored and apply again once RBAC is back.
 
-On a self-hosted control plane, AI governance is on by default (`global.features.aiGovernance`) and needs PostgreSQL.
+On a self-hosted control plane, AI governance needs PostgreSQL.
 :::
 
 ## Who can use an AI Agent
