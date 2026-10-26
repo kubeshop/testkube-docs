@@ -1,0 +1,41 @@
+# Mirrors the Webflow "Release Announcements" collection into static/release-announcements.json
+# (see src/scripts/sync-release-announcements.ts). Commits to main only when the file changes,
+# which triggers the regular Vercel deployment.
+name: Sync release announcements
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"
+
+concurrency: release-announcements
+
+jobs:
+  sync:
+    name: Sync release announcements
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          ssh-key: ${{ secrets.DEPLOY_KEY }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fetch release announcements from Webflow
+        run: npx --yes tsx@4.11.0 src/scripts/sync-release-announcements.ts
+        env:
+          WEBFLOW_API_TOKEN: ${{ secrets.WEBFLOW_API_TOKEN }}
+          WEBFLOW_COLLECTION_ID: ${{ secrets.WEBFLOW_COLLECTION_ID }}
+
+      - name: Commit the updates
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs: update release announcements"
+          branch: main
+          file_pattern: static/release-announcements.json

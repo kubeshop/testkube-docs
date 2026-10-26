@@ -52,8 +52,13 @@ Example with inlined attachments - images will be shown in a small hover-popup:
 
 ![Example with inlined JUnit Attachments](images/inlined-junit-attachments.png)
 
-:::tip
-The JUnit Report will automatically expand the first failed test - to make it easy to navigate your failed tests for troubleshooting.
+:::note
+If you do not see inline attachments, ensure that your properties use the exact name `attachment`.
+
+```
+<property name="attachment" value="screenshots/…/(attempt 2).png" />
+```
+
 :::
 
 ### 3. Functional Metrics in Test Insights
