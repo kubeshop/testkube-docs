@@ -86,15 +86,7 @@ A new destination applies within seconds, and changes to a saved one within a mi
 
 ## Self-hosted control planes
 
-Turn on AI governance for every component in your `testkube-enterprise` Helm values:
-
-```yaml title="values.yaml"
-global:
-  features:
-    aiGovernance: true
-```
-
-The control plane must use PostgreSQL. The control plane and the AI service share the AI internal secret, which the chart generates unless you set `global.ai.internalSecret.existingSecret`. The AI service uses it to read the trace destination, and the control plane uses it to ask the AI service to send a test trace. The control plane finds the AI service at `https://<aiApiSubdomain>.<domain>`; set `global.ai.serviceUrl` if yours is elsewhere.
+AI tracing is part of AI governance, which every self-hosted control plane with the AI service includes. The control plane must use PostgreSQL. The control plane and the AI service share the AI internal secret, which the chart generates unless you set `global.ai.internalSecret.existingSecret`. The AI service uses it to read the trace destination, and the control plane uses it to ask the AI service to send a test trace. The control plane finds the AI service at `https://<aiApiSubdomain>.<domain>`; set `global.ai.serviceUrl` if yours is elsewhere.
 
 The Testkube AI service sends the traces, so its pods need outbound HTTPS to your destination: `xray.<region>.amazonaws.com` for CloudWatch, or your OTLP endpoint. If outbound traffic goes through a proxy, set it on the AI service as described in [Network Requirements](/articles/ai-configuration#network-requirements).
 
