@@ -19,7 +19,12 @@ For each trigger, Testkube polls the configured URL on a configurable interval (
 
 It compares that value with the value it observed on the previous poll, and when it differs it emits a synthetic `http-changed` content event and runs the selected workflow.
 
-The first successful poll only records a baseline to compare later polls against — it does not run anything unless `fireOnFirstObservation` is set. A poll that fails (a network error, a timeout, an unexpected status code, a response that is not JSON, or a missing field or header) is never treated as a change: the trigger keeps the last value it observed and tries again on the next poll.
+The first successful poll only records a baseline to compare later polls against — it does not run anything unless `fireOnFirstObservation` is set. A poll that fails is never treated as a change: the trigger keeps the last value it observed and tries again on the next poll. Any poll fails on a network error, a timeout or an unexpected status code. What else fails depends on what is watched:
+
+- with `select.jsonPath`, a body that is not JSON or does not contain the field,
+- with `select.header`, a response without that header.
+
+Without `select` any response body can be watched, including plain text and binary content, and a header can be watched whatever the body holds — so neither needs a JSON endpoint.
 
 Polling runs on the leader instance of the Testkube agent, so a trigger is polled once even when several agent replicas are running.
 
