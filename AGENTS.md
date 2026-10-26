@@ -6,7 +6,7 @@ Owner: `@kubeshop/testkube-docs` owns `docs/` and `*.md`, and `@kubeshop/testkub
 
 ## 1. Verifying a change
 
-Run these before committing. Every one runs everywhere, on a developer host or in a sandbox; none needs Docker. `npm install` does not install the `typos` and `vale` binaries that `lint:typos` and `lint:vale` run. Install the versions the `docs-typos` and `docs-vale` checks pin (in the testkube repository's `test/testkube/oss-tests/gh-quality-loop.yaml`), so a local run matches CI:
+Run these before committing. Every one runs everywhere, on a developer host or in a sandbox; none needs Docker. `npm install` does not install the `typos` and `vale` binaries that `lint:typos` and `lint:vale` run. Install these versions. The `docs-typos` and `docs-vale` checks read them from the two lines below, so a local run matches CI; change a version only here:
 
 - typos: `pip install typos==1.50.2`.
 - vale: `go install github.com/errata-ai/vale/v3/cmd/vale@v3.22.0`, then `vale sync` once, to download the styles.
