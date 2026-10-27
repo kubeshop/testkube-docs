@@ -23,25 +23,25 @@ Events in the Audit Log can be filtered using various parameters to focus on spe
 - **Event Type**: For example, filter for actions like **Environment Deleted** or **Test Workflow Executed**.
 - **Environment**: Focus on a specific environment within the organization.
 - **Actor**: Filter by the specific user or service that initiated the event.
-- **Source**: Filter by where the event came from: **UI**, **CLI**, an **API token**, a **GitOps Agent** or **MCP**.
+- **Source**: Filter by where the event came from: **UI**, **CLI**, **API Token**, **GitOps Agent** or **MCP**. A call made with an API token through MCP has the **MCP** source.
 
 ### Sharing a filtered view
 
-The filters and the page you're on are kept in the URL, so a bookmarked or shared link opens the same view. For example, adding `?source=mcp` to the Audit log's address shows only the events that came through MCP. **Organization Management** → **AI Governance** → **Audit** opens that view.
+The filters and the page you're on are kept in the URL, so a bookmarked or shared link opens the same view. For example, adding `?source=mcp` to the Audit log's address shows only the events that came through MCP. **Organization Management** → **AI Governance** → **Audit** opens that view. That tab is only there for people who can see both AI Governance and the Audit log.
 
 ## AI and MCP events
 
 Each tool call through an Environment's [MCP endpoint](/articles/mcp-hosted) is recorded as an **MCP Tool Called** event. It records:
 
 - The tool that was called, who called it, and the Environment.
-- Whether the call succeeded and, when it failed, the reason, cut to 500 characters.
-- How long the call took.
+- Whether the call succeeded, failed, or was refused before it ran (for example over a limit), and the reason, cut to 500 characters.
+- How long the call took, for calls that ran.
 - How the caller signed in: an API token or OAuth.
-- The tool's identifier arguments, such as workflow, execution, template, file, Resource Group, report and board names, cut to 200 characters.
+- The tool's identifier arguments, such as workflow, template, execution, file, Resource Group, report, board and insight series names or IDs, cut to 200 characters.
 
 Workflow YAML, run configuration, tags, filters and log searches can hold secrets, so they're never recorded.
 
-In the list, the event reads **Executed MCP Tool** followed by the tool's name, and ends with **which failed** when the call failed.
+In the list, the event reads **Executed MCP Tool** followed by the tool's name, and ends with **which failed** when the call failed. Hover it for the reason. Refused calls don't show **which failed**.
 
 Every event recorded while serving a tool call has the **MCP** source, including the actions the tool takes. A workflow run started through MCP is recorded as **Test Workflow Executed** with the **MCP** source, next to its **MCP Tool Called** event.
 
