@@ -453,7 +453,7 @@ kubectl create secret generic testkube-mcp-encryption \
 
 Create the Secret in the namespace you install Testkube into. If it's missing, the pods that read it don't start.
 
-The control plane API and the worker service both read it, and they must use the same key. Set it for both:
+The control plane API, the worker service and the Git provider onboarding worker all read it, and they must use the same key. Set it for all three:
 
 ```yaml title="values.yaml"
 testkube-cloud-api:
@@ -463,13 +463,17 @@ testkube-cloud-api:
 testkube-worker-service:
   ai:
     encryptionSecretRef: testkube-mcp-encryption
+
+testkube-git-provider-onboarding-worker:
+  ai:
+    encryptionSecretRef: testkube-mcp-encryption
 ```
 
-The worker service runs AI Triggers. If its key is missing or different, it can't read an AI Agent's stored keys, and triggers that use those AI Agents fail to sign in to their MCP Servers.
+The worker service runs AI Triggers. If its key is missing or different, it can't read an AI Agent's stored keys, and triggers that use those AI Agents fail to sign in to their MCP Servers. The Git provider onboarding worker runs GitHub PR analysis, and the same applies to it.
 
 For local testing you can set `ai.encryptionKey` to the value itself instead of a Secret. Use `encryptionSecretRef` in production.
 
-The key is read when a service starts, so restart the control plane API and the worker service after you set or change it. Adding a key to an install that ran without one is safe: values stored before keep working, and they're encrypted the next time they're saved.
+The key is read when a service starts, so restart the control plane API, the worker service and the Git provider onboarding worker after you set or change it. Adding a key to an install that ran without one is safe: values stored before keep working, and they're encrypted the next time they're saved.
 
 Changing the key makes what was stored with the old key unreadable: AI Agent keys, MCP Server headers and OAuth client secrets have to be entered again, and people have to sign in to their MCP Servers again.
 
