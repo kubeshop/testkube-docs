@@ -43,7 +43,7 @@ Some chats only follow the AI Agent's models:
 
 Only Organization admins and owners can add or remove models for Members and AI Agents. Environment admins can see a model's AI Agents but can't change model access or see its Members.
 
-The Environment's default AI Agent always uses every model: its **Models** card can't be changed.
+The **Models** card of the Environment's default AI Agent can't be changed.
 
 ## Give models to a Member
 
