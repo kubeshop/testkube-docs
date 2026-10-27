@@ -4,7 +4,7 @@ extend-exclude = [
     "docs/legacy-cli/",
     "docs/openapi/",
     "docs/crd/",
-    "docs/articles/inventory/",
+    "docs/articles/inventory/generated/",
     "docs/articles/crds/",
     "node_modules/",
     "build/",
@@ -16,9 +16,19 @@ extend-exclude = [
     "*.gif",
 ]
 
+[default]
+# Hex execution and span IDs in sample CLI output, and base64 secret values.
+extend-ignore-re = [
+    '\b[0-9a-f]{16,}\b',
+    '\b[A-Za-z0-9+/]{40,}={0,2}',
+    # JMeter's serialized ResponseAssertion property name, misspelled in JMeter itself.
+    'Asserion\.test_strings',
+]
+
 [default.extend-words]
 iam = "iam"
 daa = "daa"
+overlayed = "overlayed"
 
 [default.extend-identifiers]
 # Docker image hashes

@@ -64,7 +64,7 @@ lifecycle
 [Ff]rontend
 [Bb]ackend
 [Cc]anary
-rollout[s]?
+[Rr]ollout[s]?
 [Cc]oncurrency
 [Ss]harding
 [Oo]nboarding
@@ -77,7 +77,7 @@ OAuth
 API[s]?
 JUnit
 JMeter
-[Jj]meter
+[Jj][Mm]eter
 NUnit
 xUnit
 Gradle
@@ -86,12 +86,13 @@ Okta
 HAProxy
 hostname[s]?
 passthrough
+[Kk]eepalive[s]?
 [Cc]ron
 repo[s]?
 stdout
 stderr
 stdin
-config[s]?
+[Cc]onfig[s]?
 [Pp]laintext
 [Pp]arallelization
 [Pp]arallelisation
@@ -123,9 +124,9 @@ Rego
 tooltip[s]?
 clsx
 const
-json
-http[s]?
-openapi
+(?i)json
+(?i)https?
+(?i)openapi
 golang
 VU[s]?
 Dockerfile[s]?
@@ -168,8 +169,8 @@ Nginx
 [Mm]illicores
 [Dd]ockerhub
 YAML[s]?
-xml
-html
+(?i)xml
+(?i)html
 args
 bool
 cpu
@@ -203,5 +204,5 @@ Ollama
 Tracetest
 Blackbox
 tz
-mcp
+(?i)mcp
 shttp

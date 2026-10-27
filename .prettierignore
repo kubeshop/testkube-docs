@@ -5,10 +5,11 @@ package-lock.json
 
 # Generated documentation
 docs/cli
+docs/legacy-cli
 docs/crd
-docs/inventory
 docs/openapi
 docs/articles/inventory/generated
+docs/articles/crds
 
 # Generated assets and outputs
 static/openapi

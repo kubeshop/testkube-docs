@@ -17,7 +17,9 @@
     "sync-release-announcements": "tsx src/scripts/sync-release-announcements.ts",
     "prepare": "husky",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "lint:vale": "node scripts/vale-changed-lines.mjs",
+    "lint:typos": "typos"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,md,mdx,yml,yaml,css}": "prettier --write --ignore-unknown"
