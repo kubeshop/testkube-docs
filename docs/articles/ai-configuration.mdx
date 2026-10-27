@@ -435,12 +435,13 @@ AI governance gives Organization admins control over how AI is used: who can use
 | AI Agent access and model access     | PostgreSQL and RBAC in your license |
 | Token limits, pauses and token usage | PostgreSQL                          |
 | AI tracing                           | PostgreSQL                          |
+| Keys stored on AI Agents             | PostgreSQL                          |
 
 Without RBAC, everyone who can chat can use every AI Agent and every model. Access settings saved before stay stored and apply again once RBAC is back.
 
 ### MCP Encryption Key
 
-The control plane encrypts what AI Agents use to sign in to MCP Servers: the keys stored on AI Agents, MCP Server headers, people's MCP sign-ins and the OAuth state of a sign-in in progress. Set a key so these are stored encrypted. Without one they're stored as they are, and the control plane logs a warning.
+The control plane encrypts what AI Agents use to sign in to MCP Servers: the keys stored on AI Agents, MCP Server headers and OAuth client secrets, people's MCP sign-ins, and the OAuth state of a sign-in in progress. Set a key so these are stored encrypted. Without one they're stored as they are, and the control plane logs a warning at startup. A key that isn't valid base64 or isn't 32 bytes is ignored the same way.
 
 The key is a base64-encoded 32-byte value. Create it in a Kubernetes Secret under the key `encryption-key`:
 
@@ -449,6 +450,8 @@ kubectl create secret generic testkube-mcp-encryption \
   --namespace <testkube-namespace> \
   --from-literal=encryption-key="$(openssl rand -base64 32)"
 ```
+
+Create the Secret in the namespace you install Testkube into. If it's missing, the pods that read it don't start.
 
 The control plane API and the worker service both read it, and they must use the same key. Set it for both:
 
@@ -466,7 +469,9 @@ The worker service runs AI Triggers. If its key is missing or different, it can'
 
 For local testing you can set `ai.encryptionKey` to the value itself instead of a Secret. Use `encryptionSecretRef` in production.
 
-Changing the key makes what was stored with the old key unreadable: AI Agent keys have to be entered again and people have to sign in to their MCP Servers again.
+The key is read when a service starts, so restart the control plane API and the worker service after you set or change it. Adding a key to an install that ran without one is safe: values stored before keep working, and they're encrypted the next time they're saved.
+
+Changing the key makes what was stored with the old key unreadable: AI Agent keys, MCP Server headers and OAuth client secrets have to be entered again, and people have to sign in to their MCP Servers again.
 
 ### Network Requirements
 
