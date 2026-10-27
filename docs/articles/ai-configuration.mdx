@@ -432,7 +432,7 @@ Ensure your firewall allows traffic to:
 
 - **LLM endpoint** — OpenAI API or your custom LLM service
 - **Testkube AI Service API** — The deployed AI service endpoint
-- **Trace destinations** — When an organization uses [AI tracing](/articles/ai-tracing), the AI service sends traces to AWS X-Ray (`xray.<region>.amazonaws.com`) or the organization's OTLP endpoint
+- **Trace destinations** — When an organization uses [AI tracing](/articles/ai-tracing), the AI service sends traces to AWS X-Ray (`xray.<region>.amazonaws.com`, or `.amazonaws.com.cn` in China regions) or the organization's OTLP endpoint
 
 For corporate proxies, inject proxy variables into the AI service pod:
 

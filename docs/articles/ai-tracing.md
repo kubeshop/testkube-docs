@@ -10,7 +10,7 @@ AI tracing sends OpenTelemetry traces of your organization's AI work to your own
 Testkube sends the traces as they happen and keeps no copy of them.
 
 :::info Availability
-AI tracing is part of AI governance. It is in **Organization management → AI Governance → Tracing**, and saving a destination needs a control plane that stores its data in PostgreSQL. Only organization admins and owners can see and change it. For self-hosted control planes, see [Self-hosted control planes](#self-hosted-control-planes).
+AI tracing is part of AI governance. It is in **Organization Management → AI Governance → Tracing**, and it needs a control plane that stores its data in PostgreSQL. Only organization admins and owners can see and change it. For self-hosted control planes, see [Self-hosted control planes](#self-hosted-control-planes).
 :::
 
 ## What is traced
@@ -21,7 +21,8 @@ Every turn the Testkube AI service runs for your organization:
 - AI test creation
 - [AI Agent Triggers](/articles/ai-triggers)
 - AI Agents that hand work to other AI Agents
-- Session titles, commit messages for AI test creation, and the summaries made when a long chat is shortened
+
+Each trace also includes the model calls that name the session, write the commit message for AI test creation, and shorten a long chat.
 
 Moderation checks are sent as their own short trace. They show whether a message was blocked and why, never the message.
 
@@ -50,7 +51,7 @@ Testkube sends traces to the AWS X-Ray OTLP endpoint of the region you choose, s
 
 1. In the AWS console, turn on **CloudWatch Transaction Search** in the region you will send traces to. AWS refuses traces sent to the OTLP endpoint without it.
 2. Create an access key for an IAM user that can only write traces, for example with the `AWSXrayWriteOnlyAccess` managed policy. Don't reuse a key with wider permissions.
-3. In Testkube, open **Organization management → AI Governance → Tracing**.
+3. In Testkube, open **Organization Management → AI Governance → Tracing**.
 4. Choose **AWS CloudWatch** and enter the **AWS region**, **Access key ID** and **Secret access key**.
 5. Choose whether to **Include tool inputs and outputs**.
 6. Select **Send test trace**, then look for `testkube test trace` in CloudWatch → **Transaction Search**.
@@ -62,7 +63,7 @@ Testkube sends traces to the AWS X-Ray OTLP endpoint of the region you choose, s
 
 Any tool or OpenTelemetry Collector that accepts OTLP over HTTP can receive the traces.
 
-1. Open **Organization management → AI Governance → Tracing** and choose **OTLP endpoint**.
+1. Open **Organization Management → AI Governance → Tracing** and choose **OTLP endpoint**.
 2. Enter the **Traces endpoint**: the full HTTPS URL, usually ending in `/v1/traces`, for example `https://collector.example.com/v1/traces`.
 3. Add the **Headers** your tool needs, such as an API key.
 4. Select **Send test trace** and check that the span arrived, then save.
@@ -77,29 +78,30 @@ The endpoint must use HTTPS and resolve to a public address. Testkube refuses pr
 - **Replace a secret:** enter a new secret access key or header value and save. Leaving the secret field empty keeps the saved one. Switching to another provider asks for its credentials again.
 - **Stop:** select **Delete** under **Delete the trace destination**. Testkube stops sending and deletes the saved credentials and headers. Traces already sent stay in your tool.
 
-A new destination applies within seconds, and changes to a saved one within a minute. AI work that is already running finishes on the destination it started with.
+A new destination applies within seconds, and changes to a saved one within a minute, on each AI service instance. AI work that is already running finishes on the destination it started with.
 
 ## How traces are sent
 
 - Spans are batched and sent a few seconds after they end. A trace can arrive in more than one batch.
-- If the destination can't be reached or refuses a batch, that batch is dropped and not retried. Sending traces never slows down or fails an AI turn.
-- Secrets are stored encrypted and are never shown again in the dashboard.
+- If the destination can't be reached or refuses a batch, that batch is dropped and not retried. Sending traces never fails an AI turn, and adds at most a second to an organization's first turn on each AI service instance.
+- Secrets are stored encrypted and are never shown again in the dashboard. Header values are always masked, even ones that aren't secret.
 - Each organization's traces go only to that organization's destination.
 
 ## Self-hosted control planes
 
-AI tracing is part of AI governance, which every self-hosted control plane with the AI service includes. The control plane must use PostgreSQL. The control plane and the AI service share the AI internal secret, which the chart generates unless you set `global.ai.internalSecret.existingSecret`. The AI service uses it to read the trace destination, and the control plane uses it to ask the AI service to send a test trace. The control plane finds the AI service at `https://<aiApiSubdomain>.<domain>`; set `global.ai.serviceUrl` if yours is elsewhere.
+AI tracing is part of AI governance, which every self-hosted control plane with the AI service includes. The control plane must use PostgreSQL. The control plane and the AI service share the AI internal secret, which the chart generates when `sharedSecretGenerator.enabled` is true. Otherwise, create it yourself and set `global.ai.internalSecret.existingSecret`. The AI service uses it to read the trace destination, and the control plane uses it to ask the AI service to send a test trace. The control plane finds the AI service at `https://<aiApiSubdomain>.<domain>`; set `global.ai.serviceUrl` if yours is elsewhere.
 
-The Testkube AI service sends the traces, so its pods need outbound HTTPS to your destination: `xray.<region>.amazonaws.com` for CloudWatch, or your OTLP endpoint. If outbound traffic goes through a proxy, set it on the AI service as described in [Network Requirements](/articles/ai-configuration#network-requirements).
+The Testkube AI service sends the traces, so its pods need outbound HTTPS to your destination: `xray.<region>.amazonaws.com` (`.amazonaws.com.cn` in China regions) for CloudWatch, or your OTLP endpoint. If outbound traffic goes through a proxy, set it on the AI service as described in [Network Requirements](/articles/ai-configuration#network-requirements).
 
 ## Troubleshooting
 
-| What you see                                              | What to check                                                                                |
-| --------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| **AI Governance** or its **Tracing** tab is missing       | You are not an organization admin or owner.                                                  |
-| The test trace fails with `answered 403` from CloudWatch  | The access key can't write to X-Ray, or **Transaction Search** is off in that region.        |
-| The test trace fails with `resolves to a private address` | The endpoint's host points to a private network. Use an address reachable over the internet. |
-| The test trace fails with a timeout or connection error   | The AI service can't reach the destination. Check outbound network rules and proxies.        |
-| Testing says the AI service is not available              | The control plane can't reach the AI service, or the AI internal secret is missing.          |
-| The test trace works but chats send nothing               | **Send traces** is off, or the last save was less than a minute ago.                         |
-| Traces arrive without tool arguments or results           | **Include tool inputs and outputs** is off. This is the default.                             |
+| What you see                                                                         | What to check                                                                                                          |
+| ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| **AI Governance** or its **Tracing** tab is missing                                  | You are not an organization admin or owner, or the control plane doesn't use PostgreSQL.                               |
+| The test trace fails with `answered 403` from CloudWatch                             | The access key can't write to X-Ray, or **Transaction Search** is off in that region.                                  |
+| The test trace fails with `resolves to a private address`                            | The endpoint's host points to a private network. Use an address reachable over the internet.                           |
+| The test trace fails with a timeout or connection error                              | The AI service can't reach the destination. Check outbound network rules and proxies.                                  |
+| Testing says it needs the AI service, or the AI service could not send the test span | The control plane can't reach the AI service, or the AI internal secret is missing.                                    |
+| Traces only arrive for chats that admins run                                         | The AI internal secret is missing, so the AI service can only read the destination with an admin's or owner's sign-in. |
+| The test trace works but chats send nothing                                          | **Send traces** is off, or the last save was less than a minute ago.                                                   |
+| Traces arrive without tool arguments or results                                      | **Include tool inputs and outputs** is off. This is the default.                                                       |
