@@ -29,8 +29,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.493%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.553%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -46,8 +46,8 @@ On Windows, when the target of Root.Mkdir or Root.MkdirAll is a junction pointin
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.574%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.622%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -63,8 +63,8 @@ The HTTP/2 server can refund connection-level flow control twice for the same da
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.420%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.490%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -80,8 +80,8 @@ HTTP/2 servers could end up crashing due to inadvertently modifying its HPACK en
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.394%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>32nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.519%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -99,8 +99,8 @@ We now reject these as malformed and curb the memory amplification vector as a r
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.404%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.511%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>43rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -116,8 +116,8 @@ Parsing a multipart form can bypass memory limits and read an arbitrarily long l
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.315%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.414%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -135,8 +135,8 @@ The impact of this misbehavior is mostly limited to potential request smuggling,
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.614%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -152,8 +152,8 @@ A malicious HTTP/2 peer can cause excessive CPU consumption in the client or ser
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.379%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.480%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -169,8 +169,8 @@ When parsing a Range header containing a large number of small ranges, FileServe
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.303%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.425%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>37th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -186,8 +186,8 @@ Historically, we have been rather lax about malformed framing-related headers in
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.570%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.627%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -203,8 +203,8 @@ When "Trailer" headers are sent by a client, the HTTP server internally uses the
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.309%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.473%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -220,8 +220,8 @@ When http.Transport sends an HTTP/1 CONNECT request with a non-empty Request.Bod
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.202%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.289%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -239,8 +239,8 @@ We now ensure that valid keyword uses are escaped and non-keyword uses are not e
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.202%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.289%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -258,8 +258,8 @@ We now ensure that template-literal expression entries correctly reset context v
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.145%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.299%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -290,8 +290,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.60.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.60.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.574%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.622%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -307,8 +307,8 @@ The HTTP/2 server can refund connection-level flow control twice for the same da
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.60.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.60.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.420%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.490%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -324,8 +324,8 @@ HTTP/2 servers could end up crashing due to inadvertently modifying its HPACK en
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.60.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.60.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.614%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>49th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -341,8 +341,8 @@ A malicious HTTP/2 peer can cause excessive CPU consumption in the client or ser
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.60.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.60.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.303%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.425%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>37th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -358,8 +358,8 @@ Historically, we have been rather lax about malformed framing-related headers in
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.60.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.60.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.570%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.627%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -388,8 +388,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.2.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.2.1-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.710%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>53rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>32.782%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>98th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -418,8 +418,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.855%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>58th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.284%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>70th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -435,8 +435,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.275%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.195%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -452,8 +452,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.330%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.279%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -469,8 +469,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.281%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.297%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -486,8 +486,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.291%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.212%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -503,8 +503,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.291%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.212%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -520,8 +520,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.291%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.212%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -537,8 +537,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.308%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.282%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -554,8 +554,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.291%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.212%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -571,7 +571,7 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.181%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.172%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
@@ -588,8 +588,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.275%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.201%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -605,8 +605,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.206%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.182%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -622,8 +622,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.291%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.219%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -639,8 +639,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.291%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.260%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -656,8 +656,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.291%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.219%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -673,8 +673,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.173%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>6th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.179%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -690,8 +690,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.291%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.219%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -707,8 +707,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.311%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>23rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.262%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -724,8 +724,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.291%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.219%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -741,8 +741,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.139%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.126%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>2nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -758,8 +758,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.275%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.207%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -775,8 +775,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.248%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.259%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -792,8 +792,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.291%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.197%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -809,8 +809,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.259%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>17th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.241%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -839,8 +839,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.3.2-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.3.2-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.356%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.469%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -869,8 +869,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.41.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.41.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.335%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>26th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.466%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -917,7 +917,7 @@ Kubernetes GitRepo Volume Inadvertent Local Repository Access in k8s.io/kubernet
 <tr><td>Affected range</td><td><code>>=1.3.0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.320%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
