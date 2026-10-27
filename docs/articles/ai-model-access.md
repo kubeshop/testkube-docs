@@ -31,26 +31,30 @@ A Member's models apply in every Environment of the Organization. An AI Agent's 
 Some chats only follow the AI Agent's models:
 
 - Organization admins and owners, and Environment admins, aren't limited by their own Member models.
-- AI Triggers and API tokens have no Member models, so only the AI Agent's models apply.
+- Chats started with an API token, including AI Triggers and the quality loop, only follow the AI Agent's models.
 
 ## What people see in chats
 
 - **The model picker** in a chat only lists the models the person may use with that AI Agent.
-- **A model that's no longer allowed.** If a chat's model is removed from a list, the chat moves to an allowed model on its next message: the default model when it's allowed, otherwise another allowed one.
-- **No model left.** If the two lists have no model in common, the chat can't run and shows that no model the person may use is available. Add a model to one of the lists, or remove the lists that don't overlap.
+- **A model that's no longer allowed.** If a chat's model is removed from a list, the chat moves to an allowed model on its next message: Testkube's default model when it's allowed, otherwise another allowed one.
+- **No model left.** If the two lists have no model in common, the chat can't run and shows that no model the person may use is available. Ask an Organization admin to add a model both lists share.
 
 ## Who can change model access
 
-Only Organization admins and owners can add or remove models for Members and AI Agents.
+Only Organization admins and owners can add or remove models for Members and AI Agents. Environment admins can see a model's AI Agents but can't change model access or see its Members.
+
+The Environment's default AI Agent always uses every model: its **Models** card can't be changed.
 
 ## Give models to a Member
 
-1. Go to **Organization management** → **Members** and open the Member.
+1. Go to **Organization Management** → **Members** and open the Member.
 2. In the **Models** card, select **Add models** and pick the models.
 
 ![The Models card of a Member, listing the models they can use](images/ai-model-access-member.png)
 
 To give the Member every model again, remove all models from the card.
+
+Deleting a model provider removes its models from every list. A Member or AI Agent whose only models came from that provider can then use every model.
 
 ## Give models to an AI Agent
 
@@ -77,12 +81,12 @@ Use **Add AI Agents** and **Add members** to limit more of them to the model, or
 
 ## Review models across an Environment
 
-**Organization management** → **AI Governance** → **Models** lists the models of one Environment. It's for Organization admins and owners.
+**Organization Management** → **AI Governance** → **Models** lists the models of one Environment. It's for Organization admins and owners.
 
 - **Environment** picks the Environment.
 - **Provider** picks the model provider, starting with Testkube's own models.
-- Each model shows its ID and type, and the Environment's default model is marked.
-- Select a model to open its details page and see who is limited to it.
+- Each model shows its ID and type, and Testkube's default model is marked.
+- With RBAC in your license, select a model to open its details page and see who is limited to it.
 
 ![AI Governance Models tab with an Environment and provider selected](images/ai-governance-models.png)
 
