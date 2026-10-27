@@ -534,6 +534,7 @@ Ensure your firewall allows traffic to:
 
 - **LLM endpoint** — OpenAI API or your custom LLM service
 - **Testkube AI Service API** — The deployed AI service endpoint
+- **Trace destinations** — When an organization uses [AI tracing](/articles/ai-tracing), the AI service sends traces to AWS X-Ray (`xray.<region>.amazonaws.com`, or `.amazonaws.com.cn` in China regions) or the organization's OTLP endpoint
 
 For corporate proxies, inject proxy variables into the AI service pod:
 
@@ -648,13 +649,13 @@ AI functionality supports fully disconnected deployments when using self-hosted 
 
 ## Feature Flags Reference
 
-| Flag/Setting                   | Location            | Default | Purpose                                                               |
-| ------------------------------ | ------------------- | ------- | --------------------------------------------------------------------- |
-| `testkube-ai-service.enabled`  | Helm                | `false` | Deploy AI service                                                     |
-| `testkube-cloud-ui.ai.enabled` | Helm                | `false` | Enable UI AI features                                                 |
-| `MCP_ENABLED`                  | Control Plane env   | `false` | Enable MCP integration                                                |
-| `AI_SERVICE_URL`               | Control Plane env   | `""`    | AI service URL — required for AI Agent Triggers and session execution |
-| `aiCopilotEnabled`             | User settings (API) | `false` | Per-user AI toggle                                                    |
+| Flag/Setting                   | Location            | Default | Purpose                                                                                       |
+| ------------------------------ | ------------------- | ------- | --------------------------------------------------------------------------------------------- |
+| `testkube-ai-service.enabled`  | Helm                | `false` | Deploy AI service                                                                             |
+| `testkube-cloud-ui.ai.enabled` | Helm                | `false` | Enable UI AI features                                                                         |
+| `MCP_ENABLED`                  | Control Plane env   | `false` | Enable MCP integration                                                                        |
+| `AI_SERVICE_URL`               | Control Plane env   | `""`    | AI service URL — required for AI Agent Triggers, session execution and AI tracing test traces |
+| `aiCopilotEnabled`             | User settings (API) | `false` | Per-user AI toggle                                                                            |
 
 ---
 
