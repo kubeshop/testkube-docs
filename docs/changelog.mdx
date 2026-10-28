@@ -14,16 +14,26 @@ Control Plane is available in Helm chart `vTBD` and the Runner is available in H
 
 ### AI Test Creation
 
+- **GitLab repositories in Test Bundles:** Import a GitLab repository into a Test Bundle, review a chat's changes and push them back to GitLab with a link to open a merge request, just as with GitHub. Connect GitLab with OAuth or an access token in the organization settings under **Git**, which now holds both GitHub and GitLab.
+- **AI Agent Delegation in Test Bundles:** Test Bundles can now delegate tasks to AI Agents, with access to MCP tools through delegated permissions. This enables a wide range of workflows, from bringing external context into a test bundle and splitting work across agents to keeping task management systems up to date. Admins can configure which AI Agents are available by default for new Test Bundles in **AI Settings** → **Test Catalog**, and customize them for individual bundles in **Settings** → **AI Agents**.
+- Start a new chat from any branch of the bundle's repository. The **New chat** dialog lets you write the first prompt and pick the model and the branch to start from, and pushes target that branch. Each chat runs its own files, and shows only its own executions.
 - New Test Bundle layout: the chat sits next to **Files**, **Changes**, and **Past Executions** tabs, and **Settings** in the bundle header holds **General**, **Git repository**, **AI Agents**, and **Attached Context**. [Read more](/articles/ai-test-creation-test-bundles#1-open-your-test-bundle).
 - Review a chat's changes as a list of changed files with expandable diffs, inline or side by side, and push them from the **Changes** tab. [Read more](/articles/ai-test-creation-github#4-review-the-changes-and-run-the-tests).
 - See an execution's artifacts, such as reports and screenshots, in the **Artifacts** tab next to **Log Output**.
 - Rename and delete chats, and copy a link to a chat. Opening a Test Bundle reopens the last chat you worked in. [Read more](/articles/ai-test-creation-test-bundles#3-switch-between-tasks).
-- Choose the AI Agents new Test Bundles start with in **AI Settings** → **Test Catalog**, and change them per bundle in **Settings** → **AI Agents**.
 - A Test Workflow's **Test Catalog** tab lists the Test Bundles and chats that use it, and an execution started from a Test Bundle shows its bundle and chat.
+- Test Bundles created without a repository can place their tests in a folder of an existing repository when you connect one later.
+- Generated Playwright projects produce JUnit, HTML and trace reports, which appear in **Artifacts**.
 - Importing a repository from a chat now requires being a participant in that chat and having a Test Creation seat, and the import is recorded in the audit log.
 
 ### AI
 
+- Test Authoring now uses the model and thinking level selected for the chat for its work in the Sandbox.
+- Claude models are supported natively, with thinking levels and structured output, directly or through a gateway such as OpenRouter. [Read more](/articles/ai-models).
+- Pick the model and its thinking level from one searchable list.
+- The **MCP Server** tab adds one-click install for Cursor and VS Code and setup steps for Codex and Copilot CLI. [Read more](/articles/mcp-configuration).
+- Analyze a finished execution in a local AI tool, such as Claude Code, Codex or Cursor: **Open in** in the execution header opens the tool with a prompt about that run, which you review before sending.
+- The AI Assistant and MCP tools can list, read, create and edit Insights boards.
 - New AI chats are private by default. You can make a chat public when you start it.
 - If the selected model is unavailable, a chat falls back to the default model instead of failing.
 
@@ -31,6 +41,10 @@ Control Plane is available in Helm chart `vTBD` and the Runner is available in H
 
 - A Test Workflow's definition refreshes after an AI Agent updates it, without discarding your unsaved edits.
 - Runners connected during a session now appear in the **Run tests** runner list.
+- Test Authoring no longer starts a run when no Runner can take it, and says so in the chat.
+- Repository imports explain when the GitHub App cannot access the repository, with a link to its repository access settings.
+- Test Authoring Sandboxes reach the Control Plane API when `serveHTTPS` is enabled.
+- MCP clients no longer get intermittent sign-in errors after their access token refreshes.
 
 ## Patch Release v2.14.2 (2026-10-14)
 
