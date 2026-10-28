@@ -8,6 +8,30 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Release v2.15.0 (2026-10-29)
+
+Control Plane is available in Helm chart `vTBD` and the Runner is available in Helm chart `v2.15.0`.
+
+### AI Test Creation
+
+- New Test Bundle layout: the chat sits next to **Files**, **Changes**, and **Past Executions** tabs, and **Settings** in the bundle header holds **General**, **Git repository**, **AI Agents**, and **Attached Context**. [Read more](/articles/ai-test-creation-test-bundles#1-open-your-test-bundle).
+- Review a chat's changes as a list of changed files with expandable diffs, inline or side by side, and push them from the **Changes** tab. [Read more](/articles/ai-test-creation-github#4-review-the-changes-and-run-the-tests).
+- See an execution's artifacts, such as reports and screenshots, in the **Artifacts** tab next to **Log Output**.
+- Rename and delete chats, and copy a link to a chat. Opening a Test Bundle reopens the last chat you worked in. [Read more](/articles/ai-test-creation-test-bundles#3-switch-between-tasks).
+- Choose the AI Agents new Test Bundles start with in **AI Settings** → **Test Catalog**, and change them per bundle in **Settings** → **AI Agents**.
+- A Test Workflow's **Test Catalog** tab lists the Test Bundles and chats that use it, and an execution started from a Test Bundle shows its bundle and chat.
+- Importing a repository from a chat now requires being a participant in that chat and having a Test Creation seat, and the import is recorded in the audit log.
+
+### AI
+
+- New AI chats are private by default. You can make a chat public when you start it.
+- If the selected model is unavailable, a chat falls back to the default model instead of failing.
+
+### Fixes
+
+- A Test Workflow's definition refreshes after an AI Agent updates it, without discarding your unsaved edits.
+- Runners connected during a session now appear in the **Run tests** runner list.
+
 ## Patch Release v2.14.2 (2026-10-14)
 
 Control Plane is available in Helm chart `v2.337.2` and the Agent is available in Helm chart `v2.14.2`.
