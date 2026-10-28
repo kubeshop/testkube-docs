@@ -804,6 +804,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "AI tracing",
+              id: "articles/ai-tracing",
+            },
+            {
+              type: "doc",
               label: "Configuration",
               id: "articles/ai-enabling",
             },
@@ -859,6 +864,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "AI Agent Access",
+                  id: "articles/ai-agent-access",
+                },
+                {
+                  type: "doc",
                   label: "Connected MCP Servers",
                   id: "articles/mcp-servers-for-ai-agents",
                 },
@@ -866,6 +876,11 @@ const sidebars = {
                   type: "doc",
                   label: "Configuring AI Models",
                   id: "articles/ai-models",
+                },
+                {
+                  type: "doc",
+                  label: "Model Access",
+                  id: "articles/ai-model-access",
                 },
                 {
                   type: "doc",
