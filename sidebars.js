@@ -874,6 +874,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "Model Access",
+                  id: "articles/ai-model-access",
+                },
+                {
+                  type: "doc",
                   label: "AI Agent Triggers",
                   id: "articles/ai-triggers",
                 },

@@ -78,6 +78,11 @@ results or use specialized models for different tasks.
 
 ![Select AI Model in Chat](images/select-ai-model-in-chat.png)
 
+## Model Access
+
+Organization admins and owners can limit which models Members and AI Agents can use. Read more in
+[Model access](ai-model-access).
+
 ## Further Reading
 
 - [Alternative Model Providers](/articles/ai-model-proxies) — Connect Claude through LiteLLM or serve local models with vLLM
