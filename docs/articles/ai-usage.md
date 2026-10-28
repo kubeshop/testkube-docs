@@ -121,6 +121,10 @@ Hover the ring for the details:
 
 AI sessions and token limits are separate. AI sessions are the plan's allowance and Testkube sets them. Token limits are set by your organization's admins. Either one can stop a chat.
 
+## Token limits
+
+Separately from the plan, Organization and Environment admins can cap the AI tokens a Member, an AI Agent, an Environment or the Organization uses, and pause AI at any of those levels. Read more in [AI token limits and pauses](ai-token-limits).
+
 ## Prices
 
 What you pay, and how large each allowance is, lives on the plan. This page does not quote either. Read the allowance on **Usage & Billing**. When it says Unlimited, there is no cap on that meter. When it shows a count, that count is the cap until the reset date. Raising a cap, adding seats, or moving to a different plan is a conversation with Testkube, not a control in the dashboard.
