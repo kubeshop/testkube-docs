@@ -17,9 +17,9 @@ configure one manually by providing its URL and authentication details.
 Select the **Browse Registry** button to open the MCP Server Registry — a curated catalog of popular
 MCP Servers that you can add with minimal configuration.
 
-Browse or search for the server you need (e.g. GitHub, Slack, Jira, Linear), select it, and follow the
-prompts to provide the required authentication credentials. The server URL and available tools are
-pre-configured from the registry entry.
+Browse or search for the server you need (e.g. GitHub, Slack, Jira, Linear) and select it. The server URL
+and transport are pre-configured from the registry entry. How an AI Agent signs in to it is set on the AI Agent:
+see [Signing in to MCP Servers](#signing-in-to-mcp-servers).
 
 ![Browse MCP Registry](images/browse-mcp-registry.png)
 
@@ -33,7 +33,8 @@ The modal prompts you for:
 - **Name**: the name of the MCP Server
 - **Description**: an optional description of what the MCP Server does and can be used for
 - **Server URL**: the URL of the MCP Server
-- **Authentication**: how to authenticate with the MCP Server (see [Authentication](#authentication) below)
+- **Transport**: how Testkube talks to the server. Check the server's documentation if you are unsure
+- **OAuth registration**: a **Client ID** and **Client secret**, only for services that can't register Testkube themselves (see [OAuth client](#oauth-client) below)
 
 ![Add MCP Server](images/add-mcp-server.png)
 
@@ -66,33 +67,50 @@ private CA, configure private CA trust using the
 [Using a private certificate authority (CA)](/articles/private-ca) guide.
 :::
 
-## Authentication
+## Signing in to MCP Servers
 
-Testkube supports two methods for authenticating with MCP Servers:
+An MCP Server doesn't hold a key of its own. Each AI Agent that uses it chooses how it signs in, in the **Sign-in**
+field when the server is added to the AI Agent, or later in the AI Agent's MCP configuration:
 
-### Header-Based Authentication
+| Sign-in                  | How the AI Agent signs in                                                                                 | Runs with nobody present |
+| ------------------------ | --------------------------------------------------------------------------------------------------------- | ------------------------ |
+| **Shared key**           | With header values stored on the AI Agent, such as `Authorization: Bearer <token>`, or with a Credential. | Yes                      |
+| **Each person signs in** | Everyone who chats with the AI Agent signs in with their own account through OAuth.                       | No                       |
+| **None**                 | Without a credential, for servers that don't need one.                                                    | Yes                      |
 
-Add custom headers that are sent with every request to the MCP Server. This is the most common method
-for servers that use API keys or bearer tokens.
+### Shared key
 
-For example, to authenticate with the GitHub MCP Server:
+The key belongs to the AI Agent, so every chat with it uses the same account. Choose **Enter a key** to type
+header values, or **Use a Credential** to pick or create an Environment [Credential](/articles/credential-management).
+Stored values are never shown again: the AI Agent shows only the header names or the Credential's name, and
+**Replace key** overwrites them.
 
-- **Header name**: `Authorization`
-- **Header value**: `Bearer <your-github-token>`
+Use a shared key for a service account, and for AI Agents that [AI Triggers](/articles/ai-triggers) or
+[GitHub PR analysis](/articles/git-integration#ai-summary) run.
 
-### OAuth Authentication
+An AI Agent set to a shared key with no key entered reaches the server without a credential and is refused. Its
+card and chats warn that the key is missing.
 
-For MCP Servers that support OAuth, you can authenticate using an OAuth flow instead of managing
-tokens manually. Select **OAuth** as the authentication method and follow the authorization prompt
-to grant Testkube access to the MCP Server on your behalf.
+### Each person signs in
 
-OAuth is particularly useful for services where:
+Each person who chats with the AI Agent uses their own account on the service, through OAuth. Testkube refreshes
+short-lived tokens for them. In a chat, **MCP Server connections** under the chat input lists the AI Agent's MCP
+Servers and their state. Select **Connect** to sign in, or **Disconnect** to sign out.
 
-- Tokens are short-lived and need automatic refresh
-- You want to use your existing user identity rather than a service account token
-- The MCP Server provider requires OAuth for API access
+![Adding an MCP Server to an AI Agent with Sign-in set to Each person signs in](images/mcp-sign-in-each-person.png)
 
-<!-- Screenshot placeholder: OAuth authentication flow -->
+Because these AI Agents need a person to sign in, AI Triggers and GitHub PR analysis can't use them:
+
+- Their AI Agent pickers don't offer them, and say why.
+- Switching an AI Agent to **Each person signs in** is refused while an AI Trigger uses it. Give the AI Agent a
+  shared key for that server, or delete those AI Triggers first.
+
+### OAuth client
+
+Testkube registers itself with most OAuth services on its own. Some services, such as GitHub, don't allow that, so
+an admin registers an OAuth app with the service and enters its **Client ID** and **Client secret** on the MCP
+Server, under **OAuth registration** when adding it, or in its **OAuth client** card later. Leave both fields empty
+for every other service.
 
 #### Providing an OAuth Client
 
@@ -190,7 +208,9 @@ panel has fields for:
 - **Name** (read-only): the name of the MCP Server
 - **Description**: an optional description of what the MCP Server does and can be used for
 - **Server URL**: the URL of the MCP Server
-- **Authentication**: headers or OAuth configuration for authenticating with the MCP Server
+- **Transport**: how Testkube talks to the MCP Server
+- **OAuth client**: the Client ID and Client secret, only for services that need one
+- **AI Agents**: the AI Agents that use the MCP Server, and how each one signs in
 - **Tools**: a list of the tools available in the MCP Server
 - **Delete**: option to delete the MCP Server
 

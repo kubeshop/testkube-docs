@@ -273,12 +273,12 @@ extending the AI's capabilities beyond Testkube itself.
 
 ### Authentication Methods
 
-External MCP servers support two authentication methods:
+Each AI Agent chooses how it signs in to each external MCP server:
 
-- **Header-based**: Custom headers (e.g. `Authorization: Bearer <token>`) sent with every request
-- **OAuth**: OAuth flow managed by the Control Plane — tokens are stored securely and refreshed automatically
+- **Shared key**: header values (e.g. `Authorization: Bearer <token>`) or a Credential stored on the AI Agent, sent with every request
+- **Each person signs in**: an OAuth flow managed by the Control Plane for each person who chats with the AI Agent — tokens are stored securely and refreshed automatically
 
-See [Connected MCP Servers](/articles/mcp-servers-for-ai-agents#authentication) for details.
+See [Signing in to MCP Servers](/articles/mcp-servers-for-ai-agents#signing-in-to-mcp-servers) for details.
 
 ### MCP Server Registry
 
