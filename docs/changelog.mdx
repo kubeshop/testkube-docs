@@ -55,7 +55,7 @@ Control who can use AI, with which models and how much, from **Organization mana
 - New AI chats are private by default. You can make a chat public when you start it.
 - If the selected model is unavailable, a chat falls back to the default model instead of failing.
 
-### Fixes
+### Fixes & Improvements
 
 - A Test Workflow's definition refreshes after an AI Agent updates it, without discarding your unsaved edits.
 - Runners connected during a session now appear in the **Run tests** runner list.
@@ -64,6 +64,9 @@ Control who can use AI, with which models and how much, from **Organization mana
 - Test Authoring Sandboxes reach the Control Plane API when `serveHTTPS` is enabled.
 - MCP clients no longer get intermittent sign-in errors after their access token refreshes.
 - MCP Servers that answer notifications with `204 No Content` now connect.
+- CVEs clean up: resolved all CVEs for which fixes are available.
+- Upgrade NATS and Dex: now NATS is in version `2.14.9` and Dex in version `2.46.1`.
+- Removal of emSign root certificate: removed eMudhra intermediate CAs and other risky certificates.
 
 ## Patch Release v2.14.2 (2026-10-14)
 
