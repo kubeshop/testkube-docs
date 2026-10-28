@@ -799,18 +799,39 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Token Limits and Pauses",
-              id: "articles/ai-token-limits",
-            },
-            {
-              type: "doc",
-              label: "AI tracing",
-              id: "articles/ai-tracing",
-            },
-            {
-              type: "doc",
               label: "Configuration",
               id: "articles/ai-enabling",
+            },
+            {
+              type: "category",
+              label: "AI Governance",
+              items: [
+                {
+                  type: "doc",
+                  label: "Overview",
+                  id: "articles/ai-governance",
+                },
+                {
+                  type: "doc",
+                  label: "AI Agent Access",
+                  id: "articles/ai-agent-access",
+                },
+                {
+                  type: "doc",
+                  label: "Model Access",
+                  id: "articles/ai-model-access",
+                },
+                {
+                  type: "doc",
+                  label: "Token Limits and Pauses",
+                  id: "articles/ai-token-limits",
+                },
+                {
+                  type: "doc",
+                  label: "AI tracing",
+                  id: "articles/ai-tracing",
+                },
+              ],
             },
             {
               type: "category",
@@ -864,11 +885,6 @@ const sidebars = {
                 },
                 {
                   type: "doc",
-                  label: "AI Agent Access",
-                  id: "articles/ai-agent-access",
-                },
-                {
-                  type: "doc",
                   label: "Connected MCP Servers",
                   id: "articles/mcp-servers-for-ai-agents",
                 },
@@ -876,11 +892,6 @@ const sidebars = {
                   type: "doc",
                   label: "Configuring AI Models",
                   id: "articles/ai-models",
-                },
-                {
-                  type: "doc",
-                  label: "Model Access",
-                  id: "articles/ai-model-access",
                 },
                 {
                   type: "doc",
