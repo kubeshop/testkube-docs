@@ -859,6 +859,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "AI Agent Access",
+                  id: "articles/ai-agent-access",
+                },
+                {
+                  type: "doc",
                   label: "Connected MCP Servers",
                   id: "articles/mcp-servers-for-ai-agents",
                 },
