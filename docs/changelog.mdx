@@ -12,10 +12,14 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 
 Control Plane is available in Helm chart `vTBD` and the Runner is available in Helm chart `v2.15.0`.
 
+### Upgrade notes
+
+- Self-hosted: give the worker service and the Git provider onboarding worker the same MCP encryption key as the API (`ai.encryptionSecretRef`), or GitHub PR analysis can't read the keys AI Agents sign in with. [Read more](/articles/ai-configuration).
+
 ### AI Test Creation
 
 - **GitLab repositories in Test Bundles:** Import a GitLab repository into a Test Bundle, review a chat's changes and push them back to GitLab with a link to open a merge request, just as with GitHub. Connect GitLab with OAuth or an access token in the organization settings under **Git**, which now holds both GitHub and GitLab.
-- **AI Agent Delegation in Test Bundles:** Test Bundles can now delegate tasks to AI Agents, with access to MCP tools through delegated permissions. This enables a wide range of workflows, from bringing external context into a test bundle and splitting work across agents to keeping task management systems up to date. Admins can configure which AI Agents are available by default for new Test Bundles in **AI Settings** → **Test Catalog**, and customize them for individual bundles in **Settings** → **AI Agents**.
+- **AI Agent Delegation in Test Bundles:** Test Bundles can now delegate tasks to AI Agents, with access to MCP tools through delegated permissions. This enables a wide range of workflows, from bringing external context into a test bundle and splitting work across agents to keeping task management systems up to date. Admins can configure which AI Agents are available by default for new Test Bundles in **AI Settings** → **Test Catalog**, and customize them for individual bundles in **Settings** → **AI Agents**. Private AI Agents can't be added to a Test Bundle or to the defaults for new bundles, and making an AI Agent private removes it from the bundles that use it.
 - Start a new chat from any branch of the bundle's repository. The **New chat** dialog lets you write the first prompt and pick the model and the branch to start from, and pushes target that branch. Each chat runs its own files, and shows only its own executions.
 - New Test Bundle layout: the chat sits next to **Files**, **Changes**, and **Past Executions** tabs, and **Settings** in the bundle header holds **General**, **Git repository**, **AI Agents**, and **Attached Context**. [Read more](/articles/ai-test-creation-test-bundles#1-open-your-test-bundle).
 - Review a chat's changes as a list of changed files with expandable diffs, inline or side by side, and push them from the **Changes** tab. [Read more](/articles/ai-test-creation-github#4-review-the-changes-and-run-the-tests).
@@ -25,6 +29,20 @@ Control Plane is available in Helm chart `vTBD` and the Runner is available in H
 - Test Bundles created without a repository can place their tests in a folder of an existing repository when you connect one later.
 - Generated Playwright projects produce JUnit, HTML and trace reports, which appear in **Artifacts**.
 - Importing a repository from a chat now requires being a participant in that chat and having a Test Creation seat, and the import is recorded in the audit log.
+
+### AI Governance
+
+Control who can use AI, with which models and how much, from **Organization management** → **AI Governance**, which brings Access, Models, Limits, Tracing and the Audit log for every Environment into one place.
+
+- **AI Agent access:** Make an AI Agent Public or Private, or limit it to Roles or Resource Groups. Members only see and use the AI Agents they have access to, and the Chats page lists only chats with those AI Agents. [Read more](/articles/ai-agent-access).
+- **Model access:** Limit which models an AI Agent or a Member can use. Chats only offer the models a person may use, and a chat on any other model is refused with a clear message. [Read more](/articles/ai-model-access).
+- **Token limits and pauses:** Set token limits for the organization, an Environment, an AI Agent or a Member; the lowest limit that applies wins. Reaching a limit stops the chat mid-turn and refuses new chats and AI Triggers until it resets. Pause and resume AI for the whole organization. [Read more](/articles/ai-token-limits).
+- **Token usage:** **AI Usage** shows tokens used per Environment, AI Agent, Member and model, and the usage ring shows tokens used against the limit as you chat. [Read more](/articles/ai-usage).
+- **AI tracing:** Send a trace of each AI turn to AWS CloudWatch or an OTLP endpoint, and send a test trace to check the setup. [Read more](/articles/ai-tracing).
+- **Audit log:** MCP tool calls are recorded as **MCP Tool Called**, with the tool and the MCP Server. Filters are kept in the URL, so you can share a filtered view. [Read more](/articles/audit-logs#sharing-a-filtered-view).
+- **MCP sign-in per AI Agent:** Each MCP Server an AI Agent uses has its own sign-in: a shared key, which can come from a Credential; each person signs in with OAuth; or none. MCP Servers now hold only their name, URL and OAuth client, and existing keys move to the AI Agents that use them. Under the chat input, each server's connection state is shown, and people are asked to connect when a server needs their own sign-in.
+- OAuth MCP Servers that don't support dynamic client registration accept a client ID and secret entered by an admin.
+- AI Triggers and GitHub PR analysis can't use an AI Agent whose MCP Server needs each person to sign in; the picker greys it out.
 
 ### AI
 
@@ -45,6 +63,7 @@ Control Plane is available in Helm chart `vTBD` and the Runner is available in H
 - Repository imports explain when the GitHub App cannot access the repository, with a link to its repository access settings.
 - Test Authoring Sandboxes reach the Control Plane API when `serveHTTPS` is enabled.
 - MCP clients no longer get intermittent sign-in errors after their access token refreshes.
+- MCP Servers that answer notifications with `204 No Content` now connect.
 
 ## Patch Release v2.14.2 (2026-10-14)
 
