@@ -73,6 +73,28 @@ Control who can use AI, with which models and how much, from **Organization mana
 - Upgrade NATS and Dex: now NATS is in version `2.14.9` and Dex in version `2.46.1`.
 - Removal of emSign root certificate: removed eMudhra intermediate CAs and other risky certificates.
 
+### Runner & CLI
+
+#### Features
+
+- **HTTP Event Triggers:** A TestTrigger can poll an HTTP endpoint and run a Test Workflow when the response changes: a JSON field, a response header such as `ETag`, or the whole body. [Read more](/articles/http-triggers).
+- **MongoDB to PostgreSQL migration for the standalone agent:** The `convert` job copies past Test Workflow executions and execution numbers from MongoDB to PostgreSQL, and resumes where it stopped if interrupted. [Read more](/articles/install/mongo-to-postgres-migration).
+
+#### Improvements
+
+- `testkube upgrade --reuse-values` keeps the values set at install time instead of resetting them to the chart defaults. [Read more](/articles/upgrade-uninstall#using-testkubes-cli).
+- `testkube diagnostics agent` checks that the Runner's API server pods are ready and names the reason when one is not. Use `--output json` to read the results from scripts.
+- File flags of the CLI accept `-` to read from standard input, for example `cat payload.json | testkube create webhook --payload-template -`. This covers webhook and webhook template payloads, `create testworkflow` and `create testworkflowtemplate` with `--file`, and `agent install --global-template-path`.
+- `--verbose` shows the telemetry payload the CLI sends.
+- A burst of scheduled executions, for example many cron triggers in the same minute, no longer stops a standalone agent from starting executions.
+
+#### Fixes
+
+- Restored caches keep the modification times of their files, so tools such as the Go build cache can trim old entries and the cache no longer grows on every save.
+- With more than one API server replica, an execution started twice is no longer declined while it runs.
+- The init process closes connections on its control port that send anything other than a pause or resume command, so a TLS probe or a port scanner can no longer pause a step.
+- Execution notification streams stop when the client disconnects, and the CLI's watch commands use them.
+
 ## Patch Release v2.14.2 (2026-10-14)
 
 Control Plane is available in Helm chart `v2.337.2` and the Agent is available in Helm chart `v2.14.2`.
