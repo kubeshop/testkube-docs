@@ -261,9 +261,15 @@ Rules that restrict which event a trigger may use apply to **every** entry in
 `events`, not just one of them:
 
 - With a `changed`, `changed_to`, or `changed_from`
-  [match condition](#match-conditions), the list may contain `modified` and
-  nothing else — those operators cannot mean anything on any other event.
-- A `content` trigger may list only [git events](/articles/git-triggers).
+  [match condition](#match-conditions), every event has to carry the previous
+  value: `modified` for a trigger on a Kubernetes resource, `http-changed` for
+  an [HTTP content trigger](/articles/http-triggers). The list may contain that
+  event and nothing else — those operators cannot mean anything on any other
+  event.
+- A `content` trigger lists either [git events](/articles/git-triggers)
+  (`git-push`, `git-tag-push`, `git-pull-request`) with `contentSelector.git`,
+  or `http-changed` with [`contentSelector.http`](/articles/http-triggers) —
+  never a mix of the two, and nothing else.
 
 :::note
 `kubectl get testtriggers` prints an **Event** column read from `.spec.event`,
@@ -314,7 +320,9 @@ when _all_ entries are satisfied.
 :::info
 Match conditions are validated against the schema a specific listener
 discovered, so a trigger that uses them must [pin at least one
-listener](#pinning-listener-runners).
+listener](#pinning-listener-agents). The exception is an
+[HTTP content trigger](/articles/http-triggers), whose match conditions read
+the polled response rather than a Kubernetes object, so it needs no listener.
 :::
 
 For example, "fire when `.status.phase` becomes `Healthy`" or
@@ -336,19 +344,25 @@ Each entry has three parts:
 
 ### Operators
 
-| Operator       | Fires when…                                                                |
-| -------------- | -------------------------------------------------------------------------- |
-| `equals`       | the field currently equals `value`                                         |
-| `not_equals`   | the field currently does not equal `value`                                 |
-| `exists`       | the field is present on the object (no `value` needed)                     |
-| `not_exists`   | the field is absent from the object (no `value` needed)                    |
-| `changed`      | the field changed from any value to any other (requires `event: modified`) |
-| `changed_to`   | the field changed to `value` (requires `event: modified`)                  |
-| `changed_from` | the field changed away from `value` (requires `event: modified`)           |
+| Operator       | Fires when…                                               |
+| -------------- | --------------------------------------------------------- |
+| `equals`       | the field currently equals `value`                        |
+| `not_equals`   | the field currently does not equal `value`                |
+| `exists`       | the field is present on the object (no `value` needed)    |
+| `not_exists`   | the field is absent from the object (no `value` needed)   |
+| `changed`      | the field changed from any value to any other (see below) |
+| `changed_to`   | the field changed to `value` (see below)                  |
+| `changed_from` | the field changed away from `value` (see below)           |
 
-`changed`, `changed_to`, and `changed_from` are only meaningful on update
-events, so they require `event: modified` on the trigger. A trigger that uses
-the [`events`](#events) list must list `modified` and nothing else — one
+`changed`, `changed_to`, and `changed_from` compare the new value with the
+previous one, so they are only meaningful on an event that carries both:
+
+- `modified`, for a trigger on a Kubernetes resource,
+- `http-changed`, for an [HTTP content trigger](/articles/http-triggers), which
+  carries the previously polled value.
+
+This applies whether the trigger names its event with `event` or lists them
+under [`events`](#events): every listed event must be that one, and one
 unsatisfiable event rejects the trigger even alongside a valid one.
 
 ### Tips
@@ -478,6 +492,7 @@ spec:
   - For deployments - `deployment-scale-update`, `deployment-image-update`, `deployment-env-update`, `deployment-containers-modified`,
     `deployment-generation-modified`, `deployment-resource-modified`
   - For git content - `git-push`, `git-tag-push`, `git-pull-request`
+  - For HTTP content - `http-changed`
   - For Testkube events - `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`,
     `event-end-testworkflow-failed`, `event-end-testworkflow-aborted`, `event-created`, `event-updated`, `event-deleted`
   - `event` takes one of these values, `events` takes a list of them — see [Events](#events)

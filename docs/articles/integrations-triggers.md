@@ -47,6 +47,21 @@ Once the condition has been specified, you need to specify what action to take w
 
 ![Create New Trigger Modal 2](../img/create-new-trigger-modal-2.png)
 
+### Content Triggers
+
+To run a workflow when a Git repository or an HTTP endpoint changes, rather than on a Kubernetes event, create a
+content trigger:
+
+1. In the condition step, pick **Content** as the resource, and choose the **Triggered events**: one or more git
+   events (`git-push`, `git-tag-push`, `git-pull-request`) to watch a repository, or `http-changed` to watch an HTTP
+   endpoint.
+2. Specify the action as described above.
+3. A third step asks for the source to watch:
+   - **Content Git** for git events - the repository URI, credentials and the branch, tag, path and pull request
+     filters described in [Git Event Triggers](/articles/git-triggers).
+   - **Content HTTP** for `http-changed` - the URL, method, headers, body, polling interval and the part of the
+     response to watch, described in [HTTP Content Triggers](/articles/http-triggers).
+
 ## Trigger Settings
 
 Selecting a Trigger from the list of Triggers shows its Settings.
@@ -73,6 +88,11 @@ The **General** tab allows you to modify the name of the Trigger and delete it i
 **Trigger Action** allows you to configure the action to be performed in Testkube once the conditions are met.
 
 ![Trigger Action](../img/existing-trigger-action.png)
+
+### Content Git / Content HTTP
+
+For a content trigger, the **Content Git** or **Content HTTP** tab allows you to edit the repository or HTTP endpoint
+the trigger watches, with the same fields as the third step of the wizard.
 
 ### Resource Group
 
