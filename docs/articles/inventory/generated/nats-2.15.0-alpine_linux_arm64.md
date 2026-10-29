@@ -139,7 +139,7 @@ Parsing a multipart form can bypass memory limits and read an arbitrarily long l
 <tr><td>Affected range</td><td><code>>=1.27.0-0<br/><1.27.2</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.27.2</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.414%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>36th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -298,7 +298,7 @@ To defend against the narrower set of cases that may remain affected, a denylist
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>zlib</strong> <code>1.3.2-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/zlib@1.3.2-r0?os_name=alpine&os_version=3.22</code></small><br/>
+<small><code>pkg:apk/alpine/zlib@1.3.2-r0?arch=aarch64&os_name=alpine&os_version=3.22</code></small><br/>
 
 ```dockerfile
 # 2.15.x/alpine3.22/Dockerfile (0:0)
@@ -328,7 +328,7 @@ To defend against the narrower set of cases that may remain affected, a denylist
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>busybox</strong> <code>1.37.0-r20</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/busybox@1.37.0-r20?os_name=alpine&os_version=3.22</code></small><br/>
+<small><code>pkg:apk/alpine/busybox@1.37.0-r20?arch=aarch64&os_name=alpine&os_version=3.22</code></small><br/>
 
 ```dockerfile
 # 2.15.x/alpine3.22/Dockerfile (0:0)
@@ -410,7 +410,7 @@ If you are required to interoperate with OpenPGP systems and need a maintained p
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>musl</strong> <code>1.2.5-r12</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/musl@1.2.5-r12?os_name=alpine&os_version=3.22</code></small><br/>
+<small><code>pkg:apk/alpine/musl@1.2.5-r12?arch=aarch64&os_name=alpine&os_version=3.22</code></small><br/>
 
 ```dockerfile
 # 2.15.x/alpine3.22/Dockerfile (0:0)

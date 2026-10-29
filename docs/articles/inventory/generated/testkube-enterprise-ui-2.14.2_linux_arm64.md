@@ -15,7 +15,7 @@ hide_table_of_contents: true
 <tr><td valign="top">
 <details><summary><img alt="critical: 3" src="https://img.shields.io/badge/C-3-8b1924"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>nginx</strong> <code>1.30.5-r1</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/nginx@1.30.5-r1?os_name=alpine&os_version=3.24</code></small><br/>
+<small><code>pkg:apk/alpine/nginx@1.30.5-r1?arch=aarch64&os_name=alpine&os_version=3.24</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2026-97205?s=alpine&n=nginx&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.30.6-r0"><img alt="critical : CVE--2026--97205" src="https://img.shields.io/badge/CVE--2026--97205-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
 
 <table>
@@ -122,7 +122,7 @@ hide_table_of_contents: true
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>musl</strong> <code>1.2.6-r2</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/musl@1.2.6-r2?os_name=alpine&os_version=3.24</code></small><br/>
+<small><code>pkg:apk/alpine/musl@1.2.6-r2?arch=aarch64&os_name=alpine&os_version=3.24</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2026-107891?s=alpine&n=musl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.2.6-r6"><img alt="unspecified : CVE--2026--107891" src="https://img.shields.io/badge/CVE--2026--107891-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
