@@ -502,6 +502,11 @@ const sidebars = {
               label: "Git Events",
               id: "articles/git-triggers",
             },
+            {
+              type: "doc",
+              label: "HTTP Events",
+              id: "articles/http-triggers",
+            },
           ],
         },
         {
@@ -801,6 +806,37 @@ const sidebars = {
               type: "doc",
               label: "Configuration",
               id: "articles/ai-enabling",
+            },
+            {
+              type: "category",
+              label: "AI Governance",
+              items: [
+                {
+                  type: "doc",
+                  label: "Overview",
+                  id: "articles/ai-governance",
+                },
+                {
+                  type: "doc",
+                  label: "AI Agent Access",
+                  id: "articles/ai-agent-access",
+                },
+                {
+                  type: "doc",
+                  label: "Model Access",
+                  id: "articles/ai-model-access",
+                },
+                {
+                  type: "doc",
+                  label: "Token Limits and Pauses",
+                  id: "articles/ai-token-limits",
+                },
+                {
+                  type: "doc",
+                  label: "AI tracing",
+                  id: "articles/ai-tracing",
+                },
+              ],
             },
             {
               type: "category",

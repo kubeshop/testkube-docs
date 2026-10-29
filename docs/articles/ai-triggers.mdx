@@ -86,6 +86,11 @@ of the same workflow. The first execution of a workflow is always considered a s
 | **API Token**       | The API token to use for authentication when the trigger fires                | Yes      |
 | **Prompt Template** | Instructions sent to the agent, with template variables for execution context | No       |
 
+A trigger runs with nobody present, so it can't use an AI Agent that
+[signs in to an MCP Server as each person](/articles/mcp-servers-for-ai-agents#each-person-signs-in). The
+**AI Agent** picker doesn't offer those AI Agents and says why. Give the AI Agent a shared key for that server,
+or pick another one.
+
 #### Trigger API Tokens
 
 AI Agent Triggers require an API token to authenticate the automatically created sessions. When creating a trigger,
@@ -310,6 +315,15 @@ on behalf of the trigger.
 If the API token associated with a trigger is deleted or expires, the trigger will stop firing.
 Check the trigger's API token configuration if sessions are not being created as expected.
 :::
+
+### When a Trigger Doesn't Start a Run
+
+A trigger that matches an execution still doesn't start a run when:
+
+- **A token limit is reached or AI is paused** for its AI Agent, its Environment or the Organization. The trigger's
+  chats show a failed chat with the reason. See [AI token limits and pauses](/articles/ai-token-limits).
+- **Its AI Agent signs in to an MCP Server as each person.** Give the AI Agent a shared key for that server, or
+  point the trigger at another AI Agent.
 
 ## Best Practices
 

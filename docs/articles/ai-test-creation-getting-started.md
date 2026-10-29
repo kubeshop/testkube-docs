@@ -64,9 +64,9 @@ Follow the progress in the chat and answer any questions there. Keep follow-ups 
 
 ## 3. Review the generated tests
 
-The **Navigator** shows the test files created during your task, or the repository files if you imported existing tests. Expand the file tree and select a file to inspect its contents. File names and structure depend on your framework and request.
+The **Files** tab shows the test files created during your task, or the repository files if you imported existing tests. Expand the file tree and select a file to inspect its contents. File names and structure depend on your framework and request.
 
-![Navigator showing the generated Playwright files and the selected test in the file viewer](../img/ai-test-creation-getting-started-files.png)
+![Files tab showing the generated Playwright files and the selected test in the file viewer](../img/ai-test-creation-getting-started-files.png)
 
 Check that the tests:
 
@@ -86,7 +86,7 @@ its test data independent of earlier runs.
 
 ## 4. Inspect the test results
 
-If you asked the AI to run the tests, inspect the execution result and **Execution Logs**. Otherwise, ask it to run them when you are ready. You can also start an execution with **Run tests** at the top of the bundle.
+If you asked the AI to run the tests, inspect the execution result in **Log Output**. Files the execution saved, such as reports and screenshots, are listed in **Artifacts**. Otherwise, ask it to run them when you are ready. You can also start an execution with **Run tests** at the top of the bundle. Earlier runs are listed in the **Past Executions** tab.
 
 Check which tests ran, whether they passed, and any failure details. Confirm that the assertions cover your requested behaviour. The screenshot shows a passing execution of the TodoMVC example.
 
@@ -115,7 +115,7 @@ Review the updated files and execution results, including the existing tests. If
 
 ## Continue building coverage
 
-- Use **Attached Context** to add reusable project guidance, such as test conventions, business rules, and test data requirements.
+- Use **Settings** → **Attached Context** to add reusable project guidance, such as test conventions, business rules, and test data requirements.
 - Follow [Work with Test Bundles and multiple chats](/articles/ai-test-creation-test-bundles) to organize related tasks and understand what is shared between chats.
 - To work with existing tests, follow [Work with a GitHub repository](/articles/ai-test-creation-github) to import a repository, review changes, and open a pull request.
 - To configure or automate execution, use **Open Workflow** and see [scheduling](/articles/scheduling-tests), [GitHub Actions](/articles/github-actions), and the [Playwright workflow example](/articles/examples/playwright-basic).

@@ -108,7 +108,7 @@ Chooses how the PR comment looks:
 Adds an AI-generated execution summary to the PR comment.
 
 - **Enable AI analysis on pull requests**: master toggle for the block.
-- **Agent**: the AI agent that produces the summary. Only agents available in the environment show up.
+- **Agent**: the AI agent that produces the summary. Only agents available in the environment show up. Analysis runs with nobody present, so AI agents that [sign in to an MCP Server as each person](/articles/mcp-servers-for-ai-agents#each-person-signs-in) can't be picked. If the chosen agent is later changed to sign in that way, analysis is skipped until it has a shared key or another agent is picked.
 - **Model**: model used by the agent. Leave on **Platform default** unless you need to pin a specific one.
 - **Run when**:
   - **On fail or abort**: only run the summary when the execution does not pass, useful for keeping AI cost tied to real signal.
@@ -266,6 +266,9 @@ Attach the Workflow when connecting the repository (or from the integration conf
 
 **The check-run never appears on the PR**
 Confirm the GitHub App has **Checks: write** on the repo. If the dashboard shows events as `dispatch_failed`, the runner logs will typically show `403 Resource not accessible by integration`. Update App permissions and re-trigger.
+
+**The PR comment has no AI analysis**
+Check that AI analysis is on and that its agent doesn't sign in to an MCP Server as each person. When an AI token limit is reached or AI is paused, the **AI Analysis** row says "Skipped: an AI token limit is reached or AI is paused. Ask an Organization admin." See [AI token limits and pauses](/articles/ai-token-limits).
 
 **`@testkube` comment did nothing**
 The parser accepts `action: created` only. Editing an existing comment doesn't count (delete and post a new one). The body must contain `testkube`.
