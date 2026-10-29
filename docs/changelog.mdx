@@ -69,6 +69,8 @@ Control who can use AI, with which models and how much, from **Organization mana
 - Test Authoring Sandboxes reach the Control Plane API when `serveHTTPS` is enabled.
 - MCP clients no longer get intermittent sign-in errors after their access token refreshes.
 - MCP Servers that answer notifications with `204 No Content` now connect.
+- Runners with only the GitOps capability are no longer marked as disconnected in the Control Plane.
+- Prometheus metrics have lower cardinality. Per-step execution metrics stay off unless `testkube-cloud-api.api.features.workflowStepMetricsEnabled` is enabled (`TK_WORKFLOW_STEP_METRICS_ENABLED`), and HTTP handler metrics use the route template instead of a separate series for each endpoint.
 - CVEs clean up: resolved all CVEs for which fixes are available.
 - Upgrade NATS and Dex: now NATS is in version `2.14.9` and Dex in version `2.46.1`.
 - Removal of emSign root certificate: removed eMudhra intermediate CAs and other risky certificates.
