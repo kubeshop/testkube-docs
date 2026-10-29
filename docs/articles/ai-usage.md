@@ -1,6 +1,6 @@
 ---
 title: AI usage, seats, and limits
-description: Where to find AI usage, what a test creation seat allows, and what an AI session and an MCP call count as.
+description: Where to find AI usage, what a test creation seat allows, what an AI session and an MCP call count as, and how many AI tokens are used.
 ---
 
 # AI usage, seats, and limits
@@ -13,14 +13,16 @@ These seats are not the [full and read-only member seats](/articles/member-manag
 
 ## Where to look
 
-| What you want                                     | Where it is                                                                                              |
-| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| Who has a test creation seat                      | Organization management → **Members**. The **Test creation** column is a check or a dash                 |
-| Grant or remove one person's seat                 | Open that member. **Test creation** is a switch                                                          |
-| Grant or remove seats for the whole organization  | Environment → **AI Settings** → **Test Creation Seats**. Only people who can manage members see this tab |
-| How many sessions the chat you have open has used | The ring on the chat header. Hover it for the period total                                               |
-| Sessions, MCP calls, and seat count for the plan  | Organization management → **Usage & Billing** (labeled **Usage** on a self-hosted control plane)         |
-| The same meters, next to agents and models        | Environment → **AI Settings** → **Usage**. This tab is there when the plan includes the AI add-on        |
+| What you want                                     | Where it is                                                                                                                   |
+| ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Who has a test creation seat                      | Organization Management → **Members**. The **Test creation** column is a check or a dash                                      |
+| Grant or remove one person's seat                 | Open that member. **Test creation** is a switch                                                                               |
+| Grant or remove seats for the whole organization  | Environment → **AI Settings** → **Test Creation Seats**. Only people who can manage members see this tab                      |
+| How many sessions the chat you have open has used | The ring next to the chat input. Hover it for the period total                                                                |
+| Sessions, MCP calls, and seat count for the plan  | Organization Management → **Usage & Billing** (labeled **Usage** on a self-hosted control plane)                              |
+| The same meters, next to agents and models        | Environment → **AI Settings** → **Usage**. It shows AI token usage, plus the plan meters when the plan includes the AI add-on |
+| AI tokens used, by AI Agent, Member or model      | The **AI Token Usage** chart on **Usage & Billing**, or on **AI Settings** → **Usage** for one Environment                    |
+| How close a chat is to a token limit              | The ring next to the chat input. Hover it for the chat's tokens and the limit hit first                                       |
 
 The plan totals, including the AI usage block, are on **Usage & Billing**:
 
@@ -69,7 +71,7 @@ An AI session is 15 minutes of continued use of one chat, not the chat itself.
 - A new chat always starts a new session.
 - A long chat can therefore count as several sessions. Leaving a chat idle does not, by itself, open another one. The next message does, once the 15 minutes have passed.
 
-The ring on the chat header is that chat's sessions. The usage page is the total for the plan during the current period, across every organization that shares the plan. Both show the date the period resets. When the allowance is used up, a new session is refused until the period resets or the allowance is raised. Messages that stay inside an already open window are not a new session.
+The ring next to the chat input is that chat's sessions. The usage page is the total for the plan during the current period, across every organization that shares the plan. Both show the date the period resets. When the allowance is used up, a new session is refused until the period resets or the allowance is raised. Messages that stay inside an already open window are not a new session.
 
 ![Chat usage ring with sessions, MCP calls, and the reset date](./images/ai-usage-chat-ring.png)
 
@@ -83,6 +85,45 @@ There are two caps, and either one can stop a call:
 - **The rolling rate.** How many tool calls are allowed in a short window. The usage page states the window under **MCP calls** (for example, per minute). A burst can be refused while the period allowance still has room. The next call is allowed when that window has moved on.
 
 A refused call does not consume a unit. The same counters cover every organization on the plan. On the usage block above, the rate is the line under **MCP calls**.
+
+## AI token usage
+
+The **AI Token Usage** chart shows how many AI tokens were used per day, or per week starting on Monday for ranges longer than 92 days. Days are in UTC. A token count is input plus output: cached input counts as input, and reasoning counts as output. It's on **Usage & Billing** for the whole organization, for people who can see the plan's usage.
+
+- **Date range.** Last 7, 14, 30 or 90 days, or a custom range of up to 104 weeks. **Last 14 days** is the default.
+- **Split by.** Stack each day by **AI Agent**, **Member**, **Model** or **Environment**, or choose **None** for one total. Split by AI Agent, usage that didn't go through an AI Agent shows as **No AI Agent**. **AI Agent** is the default. The chart shows up to 10 series and folds the rest into **Other**. Deleted AI Agents and Members show under their ID. A trend line follows the total.
+- **Filters.** Narrow the chart to an **Environment**, a **Member**, a **Model** or an **AI Agent**. The Member filter lists API tokens separately from people.
+
+![AI Token Usage chart split by AI Agent](./images/ai-token-usage-chart.png)
+
+Tokens count from every chat, AI Trigger run and GitHub PR analysis. Some AI work isn't counted, such as chat titles and context compaction.
+
+### One Environment
+
+Environment → **AI Settings** → **Usage** shows the same chart for that Environment only, under the Environment's token limit. The Environment filter and the Environment split aren't there. Anyone with a role in that Environment, including Read, sees everyone's usage there. People without a role see a message asking them to request one from an Environment admin.
+
+![AI Settings Usage tab with the Environment's token limit and token usage](./images/ai-token-usage-environment.png)
+
+## The usage ring and token limits
+
+When token limits apply to a chat, the ring next to the chat input shows how close the chat is to the limit it will hit first. On metered plans, it shows whichever is closer to its cap: AI sessions or that token limit.
+
+- **Which limit.** A paused level counts first, then a limit that's already reached, then the limit with the fewest tokens left. That can be your own limit, the AI Agent's, the Environment's or the organization's.
+- **Colors.** The ring turns amber from 80% of that limit and red when it's reached or AI is paused.
+
+Hover the ring for the details:
+
+- **Current chat.** The tokens this chat has used, and on metered plans its AI session window.
+- **Plan usage.** AI sessions and MCP calls on metered plans, with the reset date.
+- **Token limits.** The limit hit first, with tokens used, the limit, the percentage and when it resets, or **Limit reached** or **Paused**. **Show _N_ more limits** lists the other limits that apply, and **Show less** hides them.
+
+![Usage ring tooltip with the chat's tokens, plan usage, and the Environment limit at 81% above the other limits](./images/ai-usage-ring-tokens.png)
+
+AI sessions and token limits are separate. AI sessions are the plan's allowance and Testkube sets them. Token limits are set by your organization's admins. Either one can stop a chat.
+
+## Token limits
+
+Separately from the plan, Organization and Environment admins can cap the AI tokens a Member, an AI Agent, an Environment or the Organization uses, and pause AI at any of those levels. Read more in [AI token limits and pauses](ai-token-limits).
 
 ## Prices
 
