@@ -31,6 +31,32 @@ Test Execution **Status** symbols:
 
 You can select an Execution to examine its details, view logs, and troubleshoot issues.
 
+## Timeline View
+
+The **Timeline** view shows when your Executions ran and how they overlap. Use the toggle next to **Live data** to switch between the
+**List** of Executions and the **Timeline**. The **Timeline** uses the same search, filters, and Custom Views as the list, and a Custom View
+remembers which of the two you saved it in.
+
+Each Workflow has its own row, and each Execution is a bar that starts and ends when the Execution did. Bars are colored by **Status**,
+and running Executions grow up to the "now" line. Executions that overlap stack into separate lanes. Workflows with many overlapping
+Executions show a compact strip that you can click to expand into separate lanes.
+
+![Timeline View](../articles/images/testkube-dashboard-executions-timeline.png)
+
+Hover over a bar to see the Execution's details, and select it to open the Execution. Hover anywhere else on the timeline to see which
+Executions were running at that moment.
+
+![Timeline View Execution Details](../articles/images/testkube-dashboard-executions-timeline-hover.png)
+
+To move through time, drag the timeline sideways or use the **Earlier** and **Later** buttons. Hold Shift and drag across a period to zoom
+in on it, or use the **Zoom in** and **Zoom out** buttons. **Back to now** returns to the current time. **Full screen** shows only the
+timeline, which is useful on a monitoring screen.
+
+The **Resource usage** panel below the timeline shows the CPU or memory used by the Executions in the selected period, grouped by
+Workflow or by Runner. The panel loads the most recent Executions first; select **Load all** to include every Execution in the period.
+
+![Timeline View Resource Usage](../articles/images/testkube-dashboard-executions-timeline-resource-usage.png)
+
 ## Pending Executions
 
 A Testkube **Pending execution** is a test that is slated to run. There could be several reasons
