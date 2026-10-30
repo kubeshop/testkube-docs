@@ -53,6 +53,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Troubleshoot the Local Trial",
+              id: "articles/tutorial/quickstart/troubleshoot-local-trial",
+            },
+            {
+              type: "doc",
               label: "Team Evaluation",
               id: "articles/tutorial/quickstart/team-evaluation",
             },
