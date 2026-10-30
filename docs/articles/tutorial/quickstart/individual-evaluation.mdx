@@ -1,73 +1,65 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-import CliInstallation from "../../_cli_installation.mdx";
+# Try Testkube on your machine
 
-# Testkube Individual Evaluation
+Install Testkube On-Prem on your own computer with one command.
 
-This step-by-step tutorial provides you with a simplified Testkube On Prem installation that deploys the Testkube Control Plane
-in less than 10 minutes.
+## Before you start
 
-:::note
-This demo installation is for a **single/local user only**, on a individual workstation. It does not create an Ingress configuration, and is not configured to be used by others.
-It comes with a preconfigured admin account, Organization and Environment for running your tests.
+- A Testkube license key. You get it by email after you [sign up for the trial][get-license].
+- macOS or Linux. On Windows, use [WSL 2][wsl].
+- [Docker][docker], running, with at least 4 CPUs, 6 GB of memory, and 10 GB of free disk. On Docker Desktop, change these
+  in **Settings > Resources**.
 
-For evaluations suitable for **team usage**, please follow the [Team Evaluation quickstart guide][team-evaluation-quickstart]. \
-For information on conducting **enterprise proof of concepts**, please review the [Enterprise POC guide](/articles/tutorial/quickstart/enterprise-poc).
-:::
-
-## 1. Prerequisites
-
-Before you can get started with the quickstart deployment, you will need the following:
-
-- A running local Kubernetes cluster like [Minikube][minikube-docs]
-- Docker CLI authenticated against Docker Hub (or a registry mirroring Docker Hub)
-- The Testkube CLI for the quickstarter. For instructions, see the next section.
-- [The kubectl CLI][install-kubectl] to run commands against Kubernetes clusters (optional).
-
-A trial license will be required during installation - **[schedule time with our Solutions Engineering team](https://testkube.io/demo)** to get your license and
-answers to any questions you have.
-
-## 2. Install the Testkube CLI
-
-You can choose one of the following methods to install the CLI:
-
-<CliInstallation />
-
-## 3. Run the Testkube Installer
-
-The installer will complete these steps:
-
-- Check if you have chosen the right Kubernetes environment.
-- Ask for some information, such as the trial license requested as noted above.
-- Install Testkube's Control Plane.
-- If you want to run workflows in this demo, install a Testkube Runner separately using the `testkube install runner` flow.
-
-The whole process takes 3-5 minutes and can be started with the following command:
+## Run the installer
 
 ```bash
-testkube init demo
+curl -fsSL https://trial.testkube.io | TESTKUBE_LICENSE=<key> bash
 ```
 
-Once installed, you will be asked if you want to `testkube dashboard` to conveniently access all relevant services on your localhost.
-You can always execute this yourself afterward should you close this terminal after installation. The admin in this demo has
-the following e-mail and password: `admin@example.com/password`.
+Replace `<key>` with the license key from your email.
 
-:::info
-In case of issues with the license, please try `testkube diag license` command for license validation.
-:::
+The installer checks your machine, creates its own cluster inside Docker and installs Testkube there. Your own Kubernetes
+setup is not changed. The first run takes 5 to 10 minutes, mostly downloads.
 
-## 4. Create and Run a Testkube Workflow
+## Open Testkube
 
-Navigate to the Test Workflows catalogue, and click "Add a new Test Workflow" to select a pre-built workflow from our library of examples. Click "save and run" to start the Test Workflow
+When the installer finishes, it opens the dashboard and shows how to log in. To see the address and login again later,
+run:
+
+```bash
+testkube status local
+```
+
+## Run your first workflow
+
+1. Open **Test Workflows** and select **Add a new Test Workflow**.
+2. Pick an example from the catalogue.
+3. Select **Save and run**.
+
+After a minute, the execution shows as passed, with its logs.
 
 ![Create your first workflow](./img/create-your-first-workflow.gif)
 
-## 5. See the Results
+## Manage your trial
 
-Once the Execution of the Test Workflow completes, click into the execution
+```bash
+testkube status local      # see if Testkube is running, its address and login
+testkube uninstall local   # remove Testkube, keep your data
+```
 
-[install-kubectl]: https://kubernetes.io/docs/tasks/tools/
-[install-helm]: https://helm.sh/docs/intro/install/
-[install-oss]: /articles/install/standalone-agent
+:::warning
+`testkube uninstall local --delete-data` also deletes your test results and settings. You cannot undo this.
+:::
+
+## Next steps
+
+- [Create your own Test Workflows][create-workflows]
+- Install in a Kubernetes cluster you already have: run the installer and choose that option.
+- [Try Testkube with your team][team-evaluation-quickstart]
+- [Talk to an engineer][contact]
+
+[get-license]: https://testkube.io/get-started/on-prem
+[wsl]: https://learn.microsoft.com/en-us/windows/wsl/install
+[docker]: https://docs.docker.com/get-started/get-docker/
+[create-workflows]: /articles/test-workflows-create-wizard
 [team-evaluation-quickstart]: /articles/tutorial/quickstart/team-evaluation
-[minikube-docs]: https://minikube.sigs.k8s.io/docs/
+[contact]: https://testkube.io/contact
