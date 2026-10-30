@@ -165,7 +165,8 @@ Then attach the permission policies that the role needs.
 
 ### 3. Exchange the Token {#aws-exchange-the-token}
 
-The simplest option is to exchange the token once, at the start of the step, and export the temporary credentials:
+The simplest option is to exchange the token once, at the start of the step, and export the temporary credentials.
+Request a session that lasts for the whole step: the exported credentials are not renewed, so AWS calls fail once they expire.
 
 ```yaml
 spec:
@@ -182,7 +183,7 @@ spec:
           --role-arn arn:aws:iam::123456789012:role/testkube-e2e \
           --role-session-name "testkube-{{ execution.id }}" \
           --web-identity-token "$TK_IDENTITY_TOKEN" \
-          --duration-seconds 3600 \
+          --duration-seconds 7200 \
           --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]' \
           --output text)
         export AWS_ACCESS_KEY_ID=$(printf '%s' "$creds" | cut -f1)
@@ -191,7 +192,15 @@ spec:
         aws sts get-caller-identity
 ```
 
-`--duration-seconds` can go up to the role's maximum session duration, so this option also suits steps that run for a long time.
+Set `--duration-seconds` to cover the longest the step can run (the example allows two hours).
+It cannot exceed the role's maximum session duration, which is one hour by default and can be raised to 12 hours:
+
+```bash
+aws iam update-role --role-name testkube-e2e --max-session-duration 43200
+```
+
+Work that can take longer than the role's maximum session duration must be split into several steps.
+Each step that calls `identity_token()` gets a fresh token and exchanges it for its own session.
 
 Alternatively, let the AWS CLI or SDK assume the role itself. Their web identity provider reads the token from the file in
 `AWS_WEB_IDENTITY_TOKEN_FILE`, so write the token to that file when the step starts:
@@ -221,9 +230,9 @@ The SDK re-reads `AWS_WEB_IDENTITY_TOKEN_FILE` every time its AWS session expire
 The token in the file was issued when the step started and expires 10 minutes later, so the refresh fails.
 
 - The first AWS call must happen within 10 minutes of the step starting.
-- A step that runs longer than the AWS session must exchange the token up front, as in the first example,
-  instead of relying on the SDK refresh.
-- Split long work into several steps: each step that calls `identity_token()` gets its own fresh token.
+- Use this option only for steps that finish within the first AWS session the SDK opens.
+  For longer steps, exchange the token up front with a `--duration-seconds` that covers the step, as in the first example.
+- Work longer than the role's maximum session duration must be split into several steps, each with its own token.
 
 :::
 
