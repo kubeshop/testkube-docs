@@ -206,3 +206,5 @@ Blackbox
 tz
 (?i)mcp
 shttp
+Mixpanel
+Podman
