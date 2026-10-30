@@ -33,8 +33,16 @@ spec:
         aws sts assume-role-with-web-identity \
           --role-arn arn:aws:iam::123456789012:role/testkube-e2e \
           --role-session-name testkube \
-          --web-identity-token "$AWS_WEB_IDENTITY_TOKEN"
+          --web-identity-token "$AWS_WEB_IDENTITY_TOKEN" \
+          --query 'AssumedRoleUser.Arn' \
+          --output text
 ```
+
+:::warning Keep Exchanged Credentials Out of the Logs
+Testkube masks the identity token, but not the cloud credentials you exchange it for.
+`assume-role-with-web-identity` returns an access key, secret key and session token, so print only non-secret fields
+with `--query`, or capture the response in a variable as in [Exchange the Token](#aws-exchange-the-token).
+:::
 
 - `identity_token()` takes exactly one argument: the audience, as a non-empty string.
 - The expression is resolved inside the step's pod when the step starts, never while the Workflow is processed.
