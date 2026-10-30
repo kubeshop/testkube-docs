@@ -15,12 +15,12 @@ On a self-hosted control plane, AI governance needs PostgreSQL.
 
 ## Who can use an AI Agent
 
-| Access          | Who can use the AI Agent and see its shared chats                                                                |
-| --------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Public          | Every member who can chat in the Environment. This is the default.                                               |
-| Roles           | Members whose Environment role is one of the chosen roles or higher.                                             |
-| Resource Groups | Members of the chosen [Resource Groups](resource-groups), including their teams.                                 |
-| Private         | Only the AI Agent's creator, and whoever made it private. Private AI Agents ignore any roles or Resource Groups. |
+| Access          | Who can use the AI Agent and see its shared chats                                                                                                                               |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Public          | Every member who can chat in the Environment. This is the default.                                                                                                              |
+| Roles           | Members whose Environment role is one of the chosen roles or higher.                                                                                                            |
+| Resource Groups | Members of the chosen [Resource Groups](resource-groups), including their teams.                                                                                                |
+| Private         | Only the AI Agent's creator and the members linked to it, such as whoever made it private, plus the admins listed below. Private AI Agents ignore any roles or Resource Groups. |
 
 Environment roles go from lowest to highest: Read, Run, Write, Admin. An AI Agent open to the Run role is also open to members with Write or Admin.
 
