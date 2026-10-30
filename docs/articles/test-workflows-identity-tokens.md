@@ -45,13 +45,12 @@ spec:
 
 > Make sure the audience is quoted inside the `identity_token()` function.
 
-:::info Control Plane Only
-Identity tokens are issued by the Testkube Control Plane. In a [Standalone Runner](/articles/install/standalone-agent)
-the expression fails with `identity tokens are not supported in the standalone version`.
-
-If the Control Plane has no signing key configured, the expression fails with
-`identity tokens are not configured in this Control Plane`. Testkube Enterprise (on-prem) users enable the feature
-as described in [Self-Managed Enterprise Configuration](#self-managed-enterprise-configuration).
+:::info Signing Key Required
+Identity tokens are issued by the Control Plane, or by the [Standalone Agent](/articles/install/standalone-agent) itself.
+If it has no signing key configured, the expression fails with
+`identity tokens are not configured in this Control Plane`. Enable the feature as described in
+[Self-Managed Enterprise Configuration](#self-managed-enterprise-configuration) or
+[Standalone Agent Configuration](#standalone-agent-configuration).
 :::
 
 ## Token Contents
@@ -103,6 +102,10 @@ The examples below use `https://api.testkube.io`.
 The workflow name alone is not unique: two Environments can each have a Workflow with the same name.
 Always match the full `sub` claim, or at least the Organization and Environment IDs, when granting access.
 You can find both IDs in the Dashboard URL (`/organization/<organization ID>/environment/<environment ID>/`).
+
+A Standalone Agent has no Organization or Environment, so both IDs are empty
+(`organization::environment::workflow:<workflow name>`) unless the agent is configured with them.
+Its tokens are told apart from other installations by their issuer.
 :::
 
 ## AWS
@@ -375,8 +378,43 @@ Replacing the key invalidates the tokens already issued with the old one.
 As tokens live for 10 minutes, rotating the key only affects executions that are exchanging a token at that moment.
 :::
 
+## Standalone Agent Configuration
+
+The [Standalone Agent](/articles/install/standalone-agent) signs identity tokens itself once it has a signing key.
+It publishes the discovery documents on its own API, so the cloud provider must reach that API over HTTPS:
+expose it, for example through an Ingress, and use that public URL as the issuer.
+
+Generate a key and store it in a Kubernetes Secret, as for [Enterprise](#self-managed-enterprise-configuration):
+
+```bash
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out private-key.pem
+
+kubectl create secret generic testkube-identity-token-key \
+  --namespace testkube \
+  --from-file=private-key.pem
+```
+
+Then set these values of the `testkube` Helm chart:
+
+```yaml
+testkube-api:
+  identityToken:
+    # The public URL of the agent API
+    issuer: https://testkube.example.com
+    # The Secret holding the key, and the key of the file in it
+    privateKeySecretRef: testkube-identity-token-key
+    privateKeySecretKey: private-key.pem
+```
+
+The chart mounts the key and sets `IDENTITY_TOKEN_ISSUER` and `IDENTITY_TOKEN_PRIVATE_KEY_FILE` on the agent API.
+
+:::note Execution Tokens
+The Standalone Agent does not authenticate the pods that call it, so it gives each execution a secret derived from the
+signing key and issues identity tokens only to the pods that present it. Rotating the key therefore also stops running
+executions from getting new tokens; start them again after a rotation.
+:::
+
 ## Limitations
 
-- Identity tokens require a Testkube Control Plane; they are not available in the [Standalone Runner](/articles/install/standalone-agent#agent-limitations-in-standalone-mode).
-- The Control Plane signs with a single key, and the JWKS publishes only that key.
+- The Control Plane, or the Standalone Agent, signs with a single key, and the JWKS publishes only that key.
 - A token always carries the same claims for a given Workflow; narrowing permissions per run is not supported yet.
