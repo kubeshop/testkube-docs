@@ -46,8 +46,8 @@ Check: `docker info` works without `sudo`. Then run the installer again.
 
 ### `docker` not found in WSL
 
-On Windows, Docker Desktop must share Docker with your WSL distro. In Docker Desktop, open **Settings > Resources > WSL
-integration**, turn on your distro, then run the installer again.
+On Windows, Docker Desktop must share Docker with your WSL distribution. In Docker Desktop, open **Settings > Resources > WSL
+integration**, turn on your distribution, then run the installer again.
 
 ### `docker` not supported yet
 
@@ -80,7 +80,7 @@ To keep them after a restart, add the same two settings to `/etc/sysctl.conf`.
 ### `network` can't reach a site
 
 The installer downloads tools, charts, and images from the sites it lists. If you use a proxy, set `HTTPS_PROXY` in your
-shell and in Docker's proxy settings, then run the installer again. A firewall must allow those sites.
+shell and in the Docker proxy settings, then run the installer again. A firewall must allow those sites.
 
 ### Docker Hub's download limit was reached
 
@@ -141,7 +141,7 @@ The install took too long, usually because downloads are slow. Finished download
 
 ## License
 
-### `license` cannot reach license.testkube.io
+### `license` cannot reach `license.testkube.io`
 
 Testkube checks your license at `license.testkube.io` and cannot run without it. Check your network, proxy, or firewall,
 then run the installer again.
