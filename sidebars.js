@@ -785,6 +785,11 @@ const sidebars = {
               label: "Credential Management",
               id: "articles/credential-management",
             },
+            {
+              type: "doc",
+              label: "Identity Tokens",
+              id: "articles/test-workflows-identity-tokens",
+            },
           ],
         },
         {

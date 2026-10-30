@@ -90,6 +90,12 @@ in the place where the credential value should be injected.
 
 > Make sure the credential name is quoted inside the `credential()` function!
 
+:::tip Cloud Provider Access Without Stored Keys
+To access AWS, Google Cloud or Azure, you don't need to store a long-lived access key as a credential.
+The `identity_token()` expression gives each step a short-lived token that the cloud provider exchanges for
+temporary credentials - see [Identity Tokens](/articles/test-workflows-identity-tokens).
+:::
+
 ## Example
 
 ### Organization-scoped
