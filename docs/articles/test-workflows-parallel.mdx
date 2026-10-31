@@ -309,6 +309,60 @@ spec:
 </TabItem>
 </Tabs>
 
+## Reading values from parallel steps
+
+A worker can return a value to the steps that run after the `parallel` step. The worker writes it to
+`/testkube/outputs/<key>`, the same way any step publishes an [output value](/articles/test-workflows-step-sharing#output-values).
+A later step reads it with the `parallel()` function, which takes the `id` of the parallel step and the index of the worker:
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: example-parallel-outputs
+spec:
+  container:
+    image: alpine:3.22.0
+  steps:
+    - name: Run the shards
+      id: shard
+      parallel:
+        matrix:
+          name: [alpha, beta, gamma]
+        steps:
+          - name: Measure
+            shell: |
+              echo -n "{{ matrix.name }}" > /testkube/outputs/name
+              echo -n "$(( {{ index }} * 10 ))" > /testkube/outputs/duration
+
+    - name: Aggregate the shards
+      shell: |
+        total=$(( {{ parallel("shard", 0).outputs.duration }} + {{ parallel("shard", 1).outputs.duration }} + {{ parallel("shard", 2).outputs.duration }} ))
+        echo "{{ parallel("shard", 2).outputs.name }} ended with {{ parallel("shard", 2).status }}"
+        echo "total duration: $total"
+```
+
+`parallel("<id>", <index>)` returns a map:
+
+| Field     | Description                                                                                                     |
+| --------- | --------------------------------------------------------------------------------------------------------------- |
+| `index`   | The index of the worker, the same value as `{{ index }}` inside the worker.                                     |
+| `status`  | How the worker ended, for example `passed`, `failed` or `aborted`. It is empty for a worker that never started. |
+| `outputs` | The output values of every step of the worker. When two steps write the same key, the later step wins.          |
+
+The rules:
+
+- The reference is the `id` of the parallel step. A step without an `id` gets one derived from its `name`, so name or identify the parallel step you want to read.
+- The index is required. It follows the order of the workers, the same as `{{ index }}`, not the order in which they finish. An index outside the number of workers, or an unknown `id`, fails the step that reads it.
+- A worker that failed keeps the values it published, so an aggregate can still read every shard. Set `optional: true` on the parallel step when the failure of a worker must not fail the workflow, and `condition: always` on the step that reads the values.
+- `parallel()` also resolves in the `condition` of a step, so a later step can run only when a worker passed, for example `condition: 'parallel("shard", 0).status == "passed"'`. This differs from `execution()`, which does not resolve in a condition.
+- Inside a worker, `parallel()` reads the parallel steps that finished before the current one, and any parallel step the worker runs itself. When a parallel step inside the worker has the same `id` as one in the parent, the worker reads its own.
+- A step inside the worker needs a `name` or an `id` to publish output values. The short form `parallel: { shell: ... }` creates an unnamed step, so use `steps` with a named step instead.
+- The values are available to the steps that run after the parallel step, in the same Workflow. They are not saved on the execution, so a Workflow that ran this one cannot read them with `execution()`. To publish an aggregate, write it to `/testkube/outputs` in a later step. See [Sharing Data Between Executions](/articles/test-workflows-execution-sharing).
+- An output value holding a secret is replaced by a withheld marker, as when it crosses to another execution. See [Sensitive Values](/articles/test-workflows-execution-sharing#sensitive-values).
+
+Use output values for small values, up to 4096 bytes each. To bring back reports or other files, use the methods below.
+
 ## Reading files from parallel steps
 
 In the opposite to copying the files into the parallel steps pod, you may want to read reports or other data **from** them too.
