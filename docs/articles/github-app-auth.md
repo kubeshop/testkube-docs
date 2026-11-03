@@ -189,11 +189,73 @@ depending on your Github organization settings).
 
 ---
 
+## IP allow lists
+
+A GitHub organization or enterprise
+[IP allow list](https://docs.github.com/en/enterprise-cloud@latest/admin/configuring-settings/hardening-security-for-your-enterprise/restricting-network-traffic-to-your-enterprise-with-an-ip-allow-list)
+rejects API calls from addresses that are not on it. The Cloud Control Plane calls
+GitHub to connect an organization, verify an installation ID, and mint clone tokens.
+When the allow list blocks those calls, setup fails with an error such as
+`Unable to verify GitHub installation ID`.
+
+Turning on **Enable IP allow list configuration for installed GitHub Apps** only
+copies addresses that the app has registered with GitHub. The Testkube GitHub App
+has none registered. Add the addresses below yourself.
+
+An enterprise allow list is inherited by the organizations in that enterprise. An
+organization allow list covers only that organization. Add a short description such
+as `Testkube Cloud Control Plane` so the entries are easy to find when this list
+changes.
+
+:::warning Addresses can change
+Testkube Cloud has no reserved static egress range. These addresses can change
+during maintenance. This section is the current list. When it changes, update every
+allow list that was copied from here.
+:::
+
+Add each address as its own allow-list entry. GitHub accepts the address on its own
+or in CIDR notation with a `/32` prefix, including addresses that end in `.0`.
+
+```text title="Cloud Control Plane outbound addresses"
+35.185.102.137
+34.26.87.233
+35.227.73.183
+34.139.254.142
+34.148.148.14
+34.148.179.134
+35.196.142.167
+35.185.84.175
+34.73.135.0
+35.185.34.115
+34.24.117.13
+35.231.39.2
+35.196.225.217
+35.237.122.26
+34.138.32.142
+34.26.122.116
+34.155.5.219
+34.163.209.39
+34.163.232.204
+35.185.85.186
+```
+
+Last updated: 2026-10-21.
+
+The same addresses are used for other outbound calls from the Cloud Control Plane,
+such as webhooks and status callbacks.
+
+A self-hosted Control Plane calls GitHub from the egress addresses of the cluster it
+runs in. Allow those addresses. The list above applies to the Testkube Cloud
+Control Plane.
+
+---
+
 ## Troubleshooting
 
 | Symptom                                             | Cause / fix                                                                                                                                                                                    |
 | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `GitHub App has not been configured.`               | The instance has no GitHub App configured. Set `api.github.appId`, `appSlug`, and the private key (self-hosted/Enterprise).                                                                    |
+| `Unable to verify GitHub installation ID`           | GitHub rejected the installation check. If an IP allow list is enabled, add the [outbound addresses](#ip-allow-lists). Confirm the ID and that the app is installed.                           |
 | Connect button does nothing / no install URL        | `appSlug` is not set, so the installation URL cannot be built.                                                                                                                                 |
 | Clone fails with auth / not-found on a private repo | The repo's GitHub org isn't connected, **or** the installation wasn't granted access to that repository. Re-run **Connect** and grant the repo, or add the repo to the installation in GitHub. |
 | `409 Conflict` when adding an org                   | That GitHub org is already connected (matching is case-insensitive).                                                                                                                           |

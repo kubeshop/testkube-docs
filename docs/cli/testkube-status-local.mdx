@@ -1,0 +1,36 @@
+---
+title: "testkube status local"
+---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
+## testkube status local
+
+Show whether the local Testkube trial runs, and its login
+
+```
+testkube status local [flags]
+```
+
+### Options
+
+```
+  -h, --help   help for local
+```
+
+### Options inherited from parent commands
+
+```
+  -a, --api-uri string          api uri, default value read from config if set (default "http://localhost:8088")
+  -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
+      --header stringToString   headers for direct client key value pair: --header name=value (default [])
+      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
+      --skip-tls                skip TLS certificate verification for backend HTTPS connections
+      --verbose                 show additional debug messages
+```
+
+### SEE ALSO
+
+* [testkube status](testkube-status.mdx)	 - Show status of feature or resource
+

@@ -161,6 +161,12 @@ testkube create webhook --name example-webhook --events start-testworkflow --eve
 
 Where `<YOUR_ENDPOINT_URL>` should be replaced with the HTTPS endpoint URL where you want to receive the webhook events.
 
+You can also pass `-` to read the template from standard input:
+
+```sh
+cat template.json | testkube create webhook --name example-webhook --events start-testworkflow --payload-template - --uri <YOUR_ENDPOINT_URL>
+```
+
 ```sh title="Expected output:"
 Webhook created example-webhook 🥇
 ```

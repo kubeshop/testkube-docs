@@ -17,9 +17,9 @@ configure one manually by providing its URL and authentication details.
 Select the **Browse Registry** button to open the MCP Server Registry — a curated catalog of popular
 MCP Servers that you can add with minimal configuration.
 
-Browse or search for the server you need (e.g. GitHub, Slack, Jira, Linear), select it, and follow the
-prompts to provide the required authentication credentials. The server URL and available tools are
-pre-configured from the registry entry.
+Browse or search for the server you need (e.g. GitHub, Slack, Jira, Linear) and select it. The server URL
+and transport are pre-configured from the registry entry. How an AI Agent signs in to it is set on the AI Agent:
+see [Signing in to MCP Servers](#signing-in-to-mcp-servers).
 
 ![Browse MCP Registry](images/browse-mcp-registry.png)
 
@@ -33,7 +33,8 @@ The modal prompts you for:
 - **Name**: the name of the MCP Server
 - **Description**: an optional description of what the MCP Server does and can be used for
 - **Server URL**: the URL of the MCP Server
-- **Authentication**: how to authenticate with the MCP Server (see [Authentication](#authentication) below)
+- **Transport**: how Testkube talks to the server. Check the server's documentation if you are unsure
+- **OAuth registration**: a **Client ID** and **Client secret**, only for services that can't register Testkube themselves (see [OAuth client](#oauth-client) below)
 
 ![Add MCP Server](images/add-mcp-server.png)
 
@@ -66,33 +67,138 @@ private CA, configure private CA trust using the
 [Using a private certificate authority (CA)](/articles/private-ca) guide.
 :::
 
-## Authentication
+## Signing in to MCP Servers
 
-Testkube supports two methods for authenticating with MCP Servers:
+An MCP Server doesn't hold a key of its own. Each AI Agent that uses it chooses how it signs in, in the **Sign-in**
+field when the server is added to the AI Agent, or later in the AI Agent's MCP configuration:
 
-### Header-Based Authentication
+| Sign-in                  | How the AI Agent signs in                                                                                 | Runs with nobody present |
+| ------------------------ | --------------------------------------------------------------------------------------------------------- | ------------------------ |
+| **Shared key**           | With header values stored on the AI Agent, such as `Authorization: Bearer <token>`, or with a Credential. | Yes                      |
+| **Each person signs in** | Everyone who chats with the AI Agent signs in with their own account through OAuth.                       | No                       |
+| **None**                 | Without a credential, for servers that don't need one.                                                    | Yes                      |
 
-Add custom headers that are sent with every request to the MCP Server. This is the most common method
-for servers that use API keys or bearer tokens.
+### Shared key
 
-For example, to authenticate with the GitHub MCP Server:
+The key belongs to the AI Agent, so every chat with it uses the same account. Choose **Enter a key** to type
+header values, or **Use a Credential** to pick or create an Environment [Credential](/articles/credential-management).
+Stored values are never shown again: the AI Agent shows only the header names or the Credential's name, and
+**Replace key** overwrites them.
 
-- **Header name**: `Authorization`
-- **Header value**: `Bearer <your-github-token>`
+Use a shared key for a service account, and for AI Agents that [AI Triggers](/articles/ai-triggers) or
+[GitHub PR analysis](/articles/git-integration#ai-summary) run.
 
-### OAuth Authentication
+An AI Agent set to a shared key with no key entered reaches the server without a credential and is refused. Its
+card and chats warn that the key is missing.
 
-For MCP Servers that support OAuth, you can authenticate using an OAuth flow instead of managing
-tokens manually. Select **OAuth** as the authentication method and follow the authorization prompt
-to grant Testkube access to the MCP Server on your behalf.
+### Each person signs in
 
-OAuth is particularly useful for services where:
+Each person who chats with the AI Agent uses their own account on the service, through OAuth. Testkube refreshes
+short-lived tokens for them. In a chat, **MCP Server connections** under the chat input lists the AI Agent's MCP
+Servers and their state. Select **Connect** to sign in, or **Disconnect** to sign out.
 
-- Tokens are short-lived and need automatic refresh
-- You want to use your existing user identity rather than a service account token
-- The MCP Server provider requires OAuth for API access
+![Adding an MCP Server to an AI Agent with Sign-in set to Each person signs in](images/mcp-sign-in-each-person.png)
 
-<!-- Screenshot placeholder: OAuth authentication flow -->
+Because these AI Agents need a person to sign in, AI Triggers and GitHub PR analysis can't use them:
+
+- Their AI Agent pickers don't offer them, and say why.
+- Switching an AI Agent to **Each person signs in** is refused while an AI Trigger uses it. Give the AI Agent a
+  shared key for that server, or delete those AI Triggers first.
+
+### OAuth client
+
+Testkube registers itself with most OAuth services on its own. Some services, such as GitHub, don't allow that, so
+an admin registers an OAuth app with the service and enters its **Client ID** and **Client secret** on the MCP
+Server, under **OAuth registration** when adding it, or in its **OAuth client** card later. Leave both fields empty
+for every other service.
+
+#### Providing an OAuth Client
+
+Before anyone can sign in, the provider has to recognise Testkube as a registered application, which
+means a **client ID** and usually a **client secret**.
+
+Testkube looks for one in this order and stops at the first that applies:
+
+1. The client an administrator entered on that MCP Server.
+2. This installation's [client metadata document](#letting-providers-identify-testkube-by-url),
+   where one is configured and the provider reads them.
+3. A client the provider issues on the spot, through dynamic registration.
+
+Most providers hand those out automatically: Testkube asks for them the first time someone connects,
+and every later connect reuses the same application. You do nothing.
+
+Some providers do not offer that, GitHub among them, and expect an administrator to create the
+application by hand. Connecting to one of those without a client fails with **Sign-in not set up**.
+To fix it, open the MCP Server and fill in **Client ID** and **Client secret** under **OAuth client**.
+
+To create the application at the provider, you will need Testkube's callback URL:
+
+```
+<your Testkube API URL>/ai/mcp-servers/oauth/callback
+```
+
+On Testkube Cloud that is `https://api.testkube.io/ai/mcp-servers/oauth/callback`. On a self-hosted
+installation, replace the host with your own API address, the same one your installation is
+configured with.
+
+:::note
+The client secret is never shown again once saved. The field displays a placeholder instead, and
+leaving it untouched keeps the stored value. To replace the secret, type the new one over the
+placeholder. Clearing both fields removes the client and lets the provider issue one automatically
+again, where it supports that.
+:::
+
+Changing the MCP Server's URL clears the stored client, because an application registered with one
+provider means nothing at another.
+
+#### Letting Providers Identify Testkube by URL
+
+Some providers accept a **Client ID Metadata Document** instead of a registered application. The
+client ID is then a public HTTPS URL, and the provider reads a small JSON document at that address
+to learn who Testkube is. Nothing is created at the provider and there is no secret to store or
+rotate, however many people connect.
+
+Testkube serves that document from your own installation, at:
+
+```
+<your Testkube API URL>/.well-known/oauth-client
+```
+
+It is off until you set that address in your installation's configuration, with the
+`ai.oauthClientIdUrl` Helm value or the `MCP_OAUTH_CLIENT_ID_URL` environment variable. Leave it
+unset and Testkube keeps asking providers to register it, which is the right behaviour when the
+document cannot be reached from the public internet.
+
+Two things decide whether it is actually used. The provider has to announce that it reads these
+documents, in its own OAuth metadata; one that does not is registered the usual way, even with the
+setting filled in. And the MCP Server must not already have a client, whether an administrator
+entered it or the provider issued one earlier. Those keep what they have, so turning this on
+changes nothing for servers people have already connected to.
+
+##### On a self-hosted installation
+
+The document is a small static file, so the provider only has to reach **that one path**. Your
+Testkube installation itself stays private.
+
+1. Expose `/.well-known/oauth-client` publicly on a domain you control, for example with a path rule
+   on your load balancer that forwards only that path to Testkube.
+2. Set `ai.oauthClientIdUrl` to that public address, which may differ from your API address: the
+   provider fetches this one from the internet, while your API only has to answer your own network.
+
+The document names both addresses. Its `client_id` is the public one you set, while `redirect_uris`
+and `client_uri` stay your API address, because that is where the provider sends the user back.
+
+The rest of the sign-in needs no inbound access: the provider sends the user's browser back to
+Testkube, and the browser is already inside your network, while Testkube calls the provider's token
+endpoint outbound.
+
+:::warning
+Set the client ID URL only once the document is reachable. If a provider cannot fetch it, sign-in
+fails where automatic registration would have worked.
+:::
+
+Pick the address carefully. The URL is the identity: changing it later invalidates every
+authorization people have already granted, and everyone has to sign in again.
 
 ## Configuring an MCP Server
 
@@ -102,7 +208,9 @@ panel has fields for:
 - **Name** (read-only): the name of the MCP Server
 - **Description**: an optional description of what the MCP Server does and can be used for
 - **Server URL**: the URL of the MCP Server
-- **Authentication**: headers or OAuth configuration for authenticating with the MCP Server
+- **Transport**: how Testkube talks to the MCP Server
+- **OAuth client**: the Client ID and Client secret, only for services that need one
+- **AI Agents**: the AI Agents that use the MCP Server, and how each one signs in
 - **Tools**: a list of the tools available in the MCP Server
 - **Delete**: option to delete the MCP Server
 

@@ -26,6 +26,13 @@ Simple usage:
 testkube upgrade
 ```
 
+By default, `testkube upgrade` resets every value you set at install time and do not pass again to its chart default.
+Add `--reuse-values` to keep the values of your release and change only the settings of the flags you pass:
+
+```sh
+testkube upgrade --reuse-values
+```
+
 ## Uninstalling Testkube
 
 You can follow one of the two procedures below to uninstall Testkube. You might need to repeat this process in case you deployed the

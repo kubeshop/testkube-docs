@@ -96,7 +96,7 @@ If you prefer a guided experience, the [Testkube Initializer](https://initialize
 
 You will have to set a license key to get started with Testkube. You can also opt to use [a shared secret for your license][secret-license].
 
-**[Schedule time with our Solutions Engineering team](https://testkube.io/demo)** to get your license and answers to any questions you have.
+[Sign up for a trial](https://testkube.io/get-started/on-prem) and we email you a license key.
 
 ```yaml {2}
 global:

@@ -38,7 +38,7 @@ For a more detailed examination of your JUnit reports, navigate to the Reports t
 - A comprehensive view of all processed reports
 - A search bar for filtering test suites and test cases
 - Options to filter results by "passed", "skipped or "failed" status
-- Inlining of artifacts related to passed or failed excecutions
+- Inlining of artifacts related to passed or failed executions
 
 This detailed view allows for in-depth analysis of test results and easy navigation through large sets of test data.
 
@@ -52,8 +52,13 @@ Example with inlined attachments - images will be shown in a small hover-popup:
 
 ![Example with inlined JUnit Attachments](images/inlined-junit-attachments.png)
 
-:::tip
-The JUnit Report will automatically expand the first failed test - to make it easy to navigate your failed tests for troubleshooting.
+:::note
+If you do not see inline attachments, ensure that your properties use the exact name `attachment`.
+
+```
+<property name="attachment" value="screenshots/…/(attempt 2).png" />
+```
+
 :::
 
 ### 3. Functional Metrics in Test Insights

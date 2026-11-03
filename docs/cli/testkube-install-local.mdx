@@ -1,0 +1,56 @@
+---
+title: "testkube install local"
+---
+<head>
+  <meta name="docsearch:indexPrefix" content="reference-doc" />
+</head>
+
+## testkube install local
+
+Install Testkube on this machine
+
+### Synopsis
+
+Sets up a Testkube trial in its own cluster inside Docker.
+Needs Docker and the license key from your trial email.
+The first run takes 5 to 10 minutes. Your own tools and clusters are not changed.
+
+Already have a Kubernetes cluster? To install Testkube there, run:
+  testkube init demo
+
+To remove it later:
+  testkube uninstall local
+
+```
+testkube install local [flags]
+```
+
+### Examples
+
+```
+  testkube install local
+  testkube install local --license <key>
+```
+
+### Options
+
+```
+  -h, --help             help for local
+  -l, --license string   Testkube license key from your trial email (or set TESTKUBE_LICENSE)
+```
+
+### Options inherited from parent commands
+
+```
+  -a, --api-uri string          api uri, default value read from config if set (default "http://localhost:8088")
+  -c, --client string           client used for connecting to Testkube API one of proxy|direct|cluster (default "proxy")
+      --header stringToString   headers for direct client key value pair: --header name=value (default [])
+      --namespace string        Kubernetes namespace, default value read from config if set (default "testkube")
+      --skip-tls                skip TLS certificate verification for backend HTTPS connections
+      --verbose                 show additional debug messages
+```
+
+### SEE ALSO
+
+* [testkube install](testkube-install.mdx)	 - Install a local Testkube trial, a runner, or the CRDs
+
