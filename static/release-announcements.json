@@ -1,6 +1,15 @@
 {
   "announcements": [
     {
+      "id": "6aea0c8e52578dfd42d73e1a",
+      "title": "November 2026 Release: Governance for AI Agents",
+      "version": "2.15.0",
+      "publishDate": "2026-11-03T00:00:00.000Z",
+      "summary": "Govern how AI agents work in your testing. November brings model constraints, agent access controls, token limits, AI auditing, GitLab support in AI Test Creation, and a new timeline view.",
+      "body": "<p><strong>Testkube November 2026 release is live</strong></p><p>This month is about governance for AI agents. If you have been waiting for the controls before letting agents loose on your testing, they are here.</p><p><strong>Governance for AI agents</strong><br>Four new controls, all under a new AI Governance area in org settings:</p><ul><li><strong>Model constraints:</strong> limit which models an agent (or a member) may use</li><li><strong>Agent access:</strong> make an agent private while you build it, limit it by role, or assign it to a resource group</li><li><strong>Token limits:</strong> cap what a member, agent, environment or org can spend per hour, week or month. The first limit reached blocks further use until the window resets. Works with models that report token usage.</li><li><strong>AI auditing:</strong> filter the audit log to MCP tool calls, export as JSON, and send AI session traces to CloudWatch or any OTLP endpoint via OpenTelemetry</li></ul><p>New chats are also private by default now. You can make one public, but not the other way round.</p><p><strong>GitLab support</strong><br>AI Test Creation and the advanced Git integration now work with GitLab as well as GitHub, including running tests when a merge request opens.</p><p><strong>Your agents inside test creation</strong><br>Test creation sessions can now use the AI agents you have defined. Pull a requirement from your tracker and refine a test against it, or take an action in another tool as part of the session. Any tool with an MCP server can take part.</p><p><strong>Timeline view</strong><br>A new view of executions over time, with CPU and memory consumption plotted above it and a per-Runner breakdown. Real time, full screen, shareable by link.</p><p><strong>Also</strong></p><ul><li>Search across all logs of an execution from one view</li><li>A clearer review and push flow in AI Test Creation</li></ul><p>Full details in Ole’s post: <a href=\"https://testkube.io/blog/testkube-november-2026-release-ai-agent-governance\">November 2026 Release: Governance for AI Agents</a></p>",
+      "link": "https://testkube.io/blog/testkube-november-2026-release-ai-agent-governance"
+    },
+    {
       "id": "6ad30cf9a40d2f5f367d8fd8",
       "title": "October 2026 Release: Sort and Route Failed Tests",
       "version": "2.14.0",
