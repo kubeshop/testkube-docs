@@ -19,6 +19,26 @@ For additional information, read [Log Collection](../articles/logs-and-artifacts
 
 ![Log Output](../articles/images/workflow-execution-details-log-output.png)
 
+### Searching the Logs
+
+Select the **Search** icon in the log toolbar, or press Ctrl+F (Cmd+F on macOS) after clicking into the log, to search the log. The toolbar shows
+how many matches there are. Press Enter to go to the next match and Shift+Enter to go to the previous one, or use the arrows next to the count.
+Press Escape to close the search.
+
+![Search the Logs](../articles/images/workflow-execution-details-log-search.png)
+
+### Viewing All Logs
+
+When you select a single step, the log shows only that step. Select the **Show all logs** icon (a globe) in the log toolbar to see the logs
+of every step together, and select it again to return to the selected step.
+
+### Copying Lines
+
+The **Copy** button in the log toolbar copies the whole log. Select the arrow next to it and choose **Copy highlighted lines** to copy only
+the lines marked by [Log Highlighting](../articles/log-highlighting.md).
+
+![Copy Highlighted Lines](../articles/images/workflow-execution-details-log-copy-highlighted.png)
+
 ## Comparing Logs across Executions
 
 You can select the **Compare to another execution step** drop-down list box to choose another execution, comparing a second execution step to the first one you selected.

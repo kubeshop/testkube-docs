@@ -9,6 +9,10 @@ Testkube's **OpenAI Compatible** provider can connect to models beyond OpenAI wh
 
 vLLM cannot host Claude or translate requests to Anthropic. LiteLLM performs that translation. Neither option guarantees every model supports Testkube's tools, streaming, or structured output requirements; test your intended AI workflow before adoption.
 
+:::tip
+Testkube can also call Claude through the native Anthropic Messages API, without translating requests: choose the **Anthropic** provider in the Dashboard, or set `provider: anthropic` in the Helm `inference:` block. See [Anthropic Claude Models](/articles/ai-configuration#anthropic-claude-models).
+:::
+
 ## Prerequisites
 
 For Testkube, first [enable AI](/articles/ai-configuration). The examples below independently test the model endpoint on Kubernetes; they do not install Testkube. You need `kubectl`, Python 3, registry access, and outbound HTTPS. LiteLLM additionally needs an Anthropic API key with access to `claude-sonnet-5`; inference is billable.

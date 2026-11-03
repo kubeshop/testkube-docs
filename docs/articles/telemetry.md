@@ -1,10 +1,26 @@
 # Telemetry
 
-To improve the end-user experience, Testkube collects anonymous telemetry data about usage.
+To improve Testkube, we collect telemetry about how it is used. Most of it is anonymous. The local trial installer is the
+exception: it is linked to your trial license and its email. You can [opt out](#how-to-opt-out) of both.
 
-Participation in this program is optional. You may [opt-out](#how-to-opt-out) if you'd prefer not to share any information.
+## Local trial installer
 
-The data collected is always anonymous, not traceable to the source, and only used in aggregate form.
+When you install the local trial, the installer reports how the install went:
+
+- your system: operating system, CPU type, Docker version and resources
+- each step's result and duration, and why a step failed
+- your trial license, its email, and a machine ID
+
+This lets us see why an install failed, fix it, and offer you help. We never collect your tests, test results, or
+secrets. The data goes to our analytics providers: PostHog, Segment, and Mixpanel.
+
+To opt out, set `DO_NOT_TRACK=1` when you install:
+
+```sh
+curl -fsSL https://trial.testkube.io | DO_NOT_TRACK=1 TESTKUBE_LICENSE=<key> bash
+```
+
+For how we handle personal data, see our [Privacy Policy](https://testkube.io/privacy-policy).
 
 ## Dashboard telemetry
 
@@ -49,6 +65,8 @@ To opt out of the Testkube telemetry collection:
 ```sh
 testkube disable telemetry
 ```
+
+Or set `DO_NOT_TRACK=1` in your shell. This also covers the local trial installer.
 
 To _opt in_:
 

@@ -42,7 +42,7 @@ In the **Set up GitHub repository** card:
 
 ![GitHub repository picker with the public tests-examples repository and main branch selected](../img/ai-test-creation-github-setup.png)
 
-The repository's files become available in the **Navigator**. Ask the AI to identify the existing test framework, test directory, and command used to run the tests before making changes.
+The repository's files become available in the **Files** tab. Ask the AI to identify the existing test framework, test directory, and command used to run the tests before making changes.
 
 :::note Choose the repository before you start editing
 
@@ -52,7 +52,7 @@ The target branch is the starting point for your work and the destination for th
 
 :::
 
-For an existing bundle with the Navigator available, you can also open **Settings → GitHub repository**, choose **Repository** and **Target branch/ref**, and select **Set up repository**. Review and confirm the selection. Wait for any active chat in the bundle to finish before setting up the repository.
+For an existing bundle, you can also open **Settings** → **Git repository**, choose **Repository** and **Target branch/ref**, and select **Set up repository**. Review and confirm the selection. Wait for any active chat in the bundle to finish before setting up the repository.
 
 After setup, this section shows the repository and target branch for the bundle:
 
@@ -79,9 +79,9 @@ For your own repository, replace the directory and scenario with the behaviour y
 
 ## 4. Review the changes and run the tests
 
-Select the changed test file in the **Navigator**. When the original content is available, the file viewer shows a diff so you can inspect additions and removals. Newly created files appear as additions.
+Open the **Changes** tab. It lists every changed file with its added and removed lines. Expand a file to see its diff, inline or side by side. Newly created files appear as additions.
 
-![Added whitespace-only TodoMVC test highlighted in the diff viewer](../img/ai-test-creation-github-diff.png)
+![Changes tab listing the changed files, with a side-by-side diff of add-todo.spec.ts that adds a whitespace-trimming test](../img/ai-test-creation-github-diff.png)
 
 Check that the change:
 
@@ -89,9 +89,9 @@ Check that the change:
 - Follows the repository's existing fixtures, helpers, and naming conventions.
 - Preserves existing coverage and avoids unrelated file changes.
 
-Use the chat to request corrections. The file viewer is for reviewing the code; ask the AI to make edits.
+Use the chat to request corrections. The **Files** and **Changes** tabs are for reviewing the code; ask the AI to make edits.
 
-The example prompt asks the AI to run the new test. Inspect **Execution Logs** and use **Open Workflow** to confirm the execution status. To run it again yourself, select **Run tests** and choose a runner if needed.
+The example prompt asks the AI to run the new test. Inspect **Log Output** and **Artifacts**, and use **Open Workflow** to confirm the execution status. To run it again yourself, select **Run tests** and choose a runner if needed.
 
 If the test fails, continue in the same chat:
 
@@ -105,7 +105,7 @@ Before pushing, also ask the AI to run the relevant existing tests and review th
 
 ## 5. Push the changes to GitHub
 
-Wait for the AI to finish, then select **Push changes** at the top of the bundle.
+Wait for the AI to finish, then select **Push changes** in the **Changes** tab.
 
 Review the repository, the chat's publishing branch, and the commits listed in the dialog. Testkube uses a branch with a `testkube/` prefix for the chat's work. Select **Push** to send the commits to GitHub.
 

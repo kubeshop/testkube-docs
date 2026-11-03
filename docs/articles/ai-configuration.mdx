@@ -108,15 +108,17 @@ The `inference:` block is the recommended way to configure LLM models for the AI
 
 The `defaults` section provides shared values inherited by all models unless overridden at the model level:
 
-| Field          | Description                                                                             |
-| -------------- | --------------------------------------------------------------------------------------- |
-| `url`          | Base URL for LLM API (e.g., `https://proxy.internal/v1`). Defaults to OpenAI if omitted |
-| `apiKey`       | API key (plain text — prefer `secretRef` for production)                                |
-| `secretRef`    | K8s secret name                                                                         |
-| `secretRefKey` | Key within the secret                                                                   |
-| `extraHeaders` | Extra HTTP headers merged into all requests                                             |
-| `queryParams`  | Query parameters appended to all request URLs                                           |
-| `apiMode`      | `responses` or `chat_completions` for every model, see [API Mode](#api-mode)            |
+| Field          | Description                                                                                                                              |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `provider`     | `openai` (default) for OpenAI and OpenAI-compatible endpoints, or `anthropic` for the [Anthropic Messages API](#anthropic-claude-models) |
+| `url`          | Base URL for LLM API (e.g., `https://proxy.internal/v1`). Defaults to OpenAI, or to Anthropic for `provider: anthropic`, if omitted      |
+| `apiKey`       | API key (plain text — prefer `secretRef` for production)                                                                                 |
+| `secretRef`    | K8s secret name                                                                                                                          |
+| `secretRefKey` | Key within the secret                                                                                                                    |
+| `extraHeaders` | Extra HTTP headers merged into all requests                                                                                              |
+| `queryParams`  | Query parameters appended to all request URLs                                                                                            |
+| `apiMode`      | `responses` or `chat_completions` for every model, see [API Mode](#api-mode)                                                             |
+| `extraBody`    | Fields merged into every request body, e.g. gateway routing options                                                                      |
 
 #### Model Properties
 
@@ -131,6 +133,8 @@ Each model entry (`agent`, `tasks`, `embeddings`) supports these fields in addit
 | `secretRefKey`           | Key within the secret (overrides `defaults.secretRefKey`)                                                     |
 | `extraHeaders`           | Extra HTTP headers (replaces `defaults.extraHeaders` if set)                                                  |
 | `queryParams`            | Query parameters (replaces `defaults.queryParams` if set)                                                     |
+| `provider`               | `openai` or `anthropic` (overrides `defaults.provider`) — agent and tasks only                                |
+| `extraBody`              | Request body fields (replaces `defaults.extraBody` if set) — agent and tasks only                             |
 | `temperature`            | Temperature setting — agent and tasks only                                                                    |
 | `label`                  | Human-readable name for the UI dropdown — agent only                                                          |
 | `default`                | Mark which agent model is the default — agent only                                                            |
@@ -139,7 +143,7 @@ Each model entry (`agent`, `tasks`, `embeddings`) supports these fields in addit
 | `apiMode`                | `responses` or `chat_completions`; overrides `defaults.apiMode` — agent and tasks only                        |
 
 :::info Override Semantics
-Per-model `extraHeaders` and `queryParams` **replace** the defaults entirely (not merged key-by-key). If you need both default and model-specific headers, repeat the shared ones in the per-model block.
+Per-model `extraHeaders`, `queryParams` and `extraBody` **replace** the defaults entirely (not merged key-by-key). If you need both default and model-specific headers, repeat the shared ones in the per-model block.
 :::
 
 ### LLM Provider Examples
@@ -224,7 +228,7 @@ The model names above must match the proxy's configured `model_name` aliases; pr
 
 #### Mixed Providers — Different Keys and Endpoints Per Role
 
-Claude uses LiteLLM to translate the OpenAI-compatible requests to Anthropic's API; setting Anthropic headers on its native endpoint does not perform that translation.
+Here Claude uses LiteLLM to translate the OpenAI-compatible requests to Anthropic's API; setting Anthropic headers on its native endpoint does not perform that translation. To call Claude through Anthropic's own API instead, set `provider: anthropic` (see [Anthropic Claude Models](#anthropic-claude-models)).
 
 ```yaml
 inference:
@@ -411,6 +415,104 @@ Set `defaults.apiMode: chat_completions` to keep today's behaviour, or `response
 Models that need the Responses API keep using it either way.
 :::
 
+### Anthropic Claude Models
+
+The AI service can call Claude models through the native Anthropic Messages API, either directly at
+`api.anthropic.com` or through a gateway that serves the Messages API, such as OpenRouter or LiteLLM.
+Set `provider: anthropic` on the model, or in `defaults` for every model:
+
+- **Inheritance**: a model's `provider` falls back to `defaults.provider`, then to `openai`.
+- **`url`**: omit it to call Anthropic directly. For a gateway, use its Anthropic API base, without `/v1/messages`
+  (for example `https://openrouter.ai/api`).
+- **Model names**: use the identifier your endpoint expects, for example `claude-sonnet-5-5` on Anthropic or
+  `anthropic/claude-sonnet-5.5` on OpenRouter.
+- **[Reasoning effort](#thinking-levels)**: `defaultReasoningEffort` and `reasoningEfforts` accept `low`, `medium`, `high`, `xhigh` and
+  `max` for Claude models, sent as Claude's `output_config.effort`. Other values are ignored with a warning.
+- **`temperature`**: leave it unset for Claude models.
+- **[`apiMode`](#api-mode)**: applies to the `openai` provider only and is ignored for `anthropic` models.
+
+:::note Moderation and embeddings
+Anthropic has no moderation or embeddings API, so `provider` does not apply to them. The `embeddings` model
+always uses an OpenAI-compatible endpoint: keep an OpenAI-compatible `embeddings` model, or omit the block to
+[disable embeddings](#disabling-embeddings). Input moderation, when enabled, calls OpenAI's moderation endpoint
+and still needs an OpenAI API key, whatever provider the chat models use.
+:::
+
+#### Anthropic Claude (Direct)
+
+Create the secret with your Anthropic API key, then reference it from `defaults`:
+
+```yaml
+inference:
+  defaults:
+    provider: anthropic
+    secretRef: "anthropic-secret"
+    secretRefKey: "api-key"
+  agent:
+    - model: claude-sonnet-5-5
+      label: "Claude Sonnet 5.5"
+      default: true
+      defaultReasoningEffort: medium
+      reasoningEfforts: [low, medium, high]
+    - model: claude-opus-5-5
+      label: "Claude Opus 5.5"
+  tasks:
+    model: claude-haiku-4-5
+  # embeddings: omitted — Anthropic has no embeddings API
+```
+
+#### Claude Through a Gateway (OpenRouter)
+
+Some gateways route a Claude request to one of several hosting providers unless the request body names one.
+Use `extraBody` to add those fields to every request. With OpenRouter, this pins requests to Anthropic itself:
+
+```yaml
+inference:
+  defaults:
+    provider: anthropic
+    url: "https://openrouter.ai/api"
+    secretRef: "openrouter-secret"
+    secretRefKey: "api-key"
+    extraBody:
+      provider:
+        order: [anthropic]
+        allow_fallbacks: false
+  agent:
+    - model: anthropic/claude-sonnet-5.5
+      default: true
+  tasks:
+    model: anthropic/claude-haiku-4.5
+```
+
+Direct Anthropic and LiteLLM setups do not need `extraBody`.
+
+#### Mixed OpenAI and Anthropic Catalog
+
+`defaults.provider` sets the provider for every model that does not set its own, so a catalog can offer
+OpenAI and Claude models side by side, each with its own key:
+
+```yaml
+inference:
+  defaults:
+    provider: openai
+    secretRef: "openai-secret"
+    secretRefKey: "api-key"
+  agent:
+    - model: gpt-5.2
+      default: true
+    - model: claude-sonnet-5-5
+      label: "Claude Sonnet 5.5"
+      provider: anthropic
+      secretRef: "anthropic-secret"
+      secretRefKey: "api-key"
+  tasks:
+    model: gpt-5-mini
+  embeddings:
+    model: text-embedding-3-small
+```
+
+Users can switch between the OpenAI and Claude models in the same chat.
+
 ### Disabling Embeddings
 
 To disable embeddings (e.g., when your LLM provider doesn't support `/v1/embeddings`), simply omit the `embeddings` block from your `inference:` configuration. The AI service will skip vector store initialization and work without embedding-enhanced context.
@@ -426,12 +528,64 @@ The AI service requires OAuth/OIDC authentication. Configure one of the followin
 
 When using Dex (default), authentication is automatically configured via the global Dex issuer settings.
 
+### AI Governance
+
+AI governance gives Organization admins control over how AI is used: who can use each AI Agent and model, token limits and pauses, token usage, AI tracing, and MCP events in the Audit log. It's part of every self-hosted control plane with the AI service, so there's nothing to turn on. What each part needs:
+
+| Feature                              | Needs                               |
+| ------------------------------------ | ----------------------------------- |
+| AI Agent access and model access     | PostgreSQL and RBAC in your license |
+| Token limits, pauses and token usage | PostgreSQL                          |
+| AI tracing                           | PostgreSQL                          |
+| Keys stored on AI Agents             | PostgreSQL                          |
+
+Without RBAC, everyone who can chat can use every AI Agent and every model. Access settings saved before stay stored and apply again once RBAC is back.
+
+### MCP Encryption Key
+
+The control plane encrypts what AI Agents use to sign in to MCP Servers: the keys stored on AI Agents, MCP Server headers and OAuth client secrets, people's MCP sign-ins, and the OAuth state of a sign-in in progress. Set a key so these are stored encrypted. Without one they're stored as they are, and the control plane logs a warning at startup. A key that isn't valid base64 or isn't 32 bytes is ignored the same way.
+
+The key is a base64-encoded 32-byte value. Create it in a Kubernetes Secret under the key `encryption-key`:
+
+```bash
+kubectl create secret generic testkube-mcp-encryption \
+  --namespace <testkube-namespace> \
+  --from-literal=encryption-key="$(openssl rand -base64 32)"
+```
+
+Create the Secret in the namespace you install Testkube into. If it's missing, the pods that read it don't start.
+
+The control plane API, the worker service and the Git provider onboarding worker all read it, and they must use the same key. Set it for all three:
+
+```yaml title="values.yaml"
+testkube-cloud-api:
+  ai:
+    encryptionSecretRef: testkube-mcp-encryption
+
+testkube-worker-service:
+  ai:
+    encryptionSecretRef: testkube-mcp-encryption
+
+testkube-git-provider-onboarding-worker:
+  ai:
+    encryptionSecretRef: testkube-mcp-encryption
+```
+
+The worker service runs AI Triggers. If its key is missing or different, it can't read an AI Agent's stored keys, and triggers that use those AI Agents fail to sign in to their MCP Servers. The Git provider onboarding worker runs GitHub PR analysis, and the same applies to it.
+
+For local testing you can set `ai.encryptionKey` to the value itself instead of a Secret. Use `encryptionSecretRef` in production.
+
+The key is read when a service starts, so restart the control plane API, the worker service and the Git provider onboarding worker after you set or change it. Adding a key to an install that ran without one is safe: values stored before keep working, and they're encrypted the next time they're saved.
+
+Changing the key makes what was stored with the old key unreadable: AI Agent keys, MCP Server headers and OAuth client secrets have to be entered again, and people have to sign in to their MCP Servers again.
+
 ### Network Requirements
 
 Ensure your firewall allows traffic to:
 
 - **LLM endpoint** — OpenAI API or your custom LLM service
 - **Testkube AI Service API** — The deployed AI service endpoint
+- **Trace destinations** — When an organization uses [AI tracing](/articles/ai-tracing), the AI service sends traces to AWS X-Ray (`xray.<region>.amazonaws.com`, or `.amazonaws.com.cn` in China regions) or the organization's OTLP endpoint
 
 For corporate proxies, inject proxy variables into the AI service pod:
 
@@ -546,13 +700,13 @@ AI functionality supports fully disconnected deployments when using self-hosted 
 
 ## Feature Flags Reference
 
-| Flag/Setting                   | Location            | Default | Purpose                                                               |
-| ------------------------------ | ------------------- | ------- | --------------------------------------------------------------------- |
-| `testkube-ai-service.enabled`  | Helm                | `false` | Deploy AI service                                                     |
-| `testkube-cloud-ui.ai.enabled` | Helm                | `false` | Enable UI AI features                                                 |
-| `MCP_ENABLED`                  | Control Plane env   | `false` | Enable MCP integration                                                |
-| `AI_SERVICE_URL`               | Control Plane env   | `""`    | AI service URL — required for AI Agent Triggers and session execution |
-| `aiCopilotEnabled`             | User settings (API) | `false` | Per-user AI toggle                                                    |
+| Flag/Setting                   | Location            | Default | Purpose                                                                                       |
+| ------------------------------ | ------------------- | ------- | --------------------------------------------------------------------------------------------- |
+| `testkube-ai-service.enabled`  | Helm                | `false` | Deploy AI service                                                                             |
+| `testkube-cloud-ui.ai.enabled` | Helm                | `false` | Enable UI AI features                                                                         |
+| `MCP_ENABLED`                  | Control Plane env   | `false` | Enable MCP integration                                                                        |
+| `AI_SERVICE_URL`               | Control Plane env   | `""`    | AI service URL — required for AI Agent Triggers, session execution and AI tracing test traces |
+| `aiCopilotEnabled`             | User settings (API) | `false` | Per-user AI toggle                                                                            |
 
 ---
 

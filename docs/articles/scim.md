@@ -329,9 +329,9 @@ Then enable SCIM for the organization in the dashboard.
 
 ## Troubleshooting
 
-### Users cannot log in
+### Users don't see the organization after logging in
 
-- Make sure the user is provisioned via SCIM.
+- Make sure the user is provisioned via SCIM. Users who are not provisioned can still log in, but they are not added to the organization.
 - Check that the email matches the IdP credentials.
 - Review the IdP provisioning logs.
 

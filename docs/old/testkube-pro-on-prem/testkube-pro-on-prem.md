@@ -6,6 +6,6 @@ Enter your information in the form and click **Download**.
 
 ![Download Testkube Pro On-Prem](../../img/enterprise-download-form.png)
 
-Once you submit the form you will receive an email with an Pro On-Prem license and installion instructions.
+Once you submit the form you will receive an email with an Pro On-Prem license and installation instructions.
 
 Visit our additional documentation to [install and use Helm Charts](https://docs.testkube.io/testkube-pro-on-prem/articles/usage-guide) and [configure Identity Providers](https://docs.testkube.io/testkube-pro-on-prem/articles/auth).

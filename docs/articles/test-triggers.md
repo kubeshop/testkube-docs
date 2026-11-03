@@ -263,7 +263,8 @@ Rules that restrict which event a trigger may use apply to **every** entry in
 - With a `changed`, `changed_to`, or `changed_from`
   [match condition](#match-conditions), the list may contain `modified` and
   nothing else — those operators cannot mean anything on any other event.
-- A `content` trigger may list only [git events](/articles/git-triggers).
+- A `content` trigger may list only [git events](/articles/git-triggers), or
+  only `http-changed` when it watches an [HTTP endpoint](/articles/http-triggers).
 
 :::note
 `kubectl get testtriggers` prints an **Event** column read from `.spec.event`,
@@ -478,6 +479,7 @@ spec:
   - For deployments - `deployment-scale-update`, `deployment-image-update`, `deployment-env-update`, `deployment-containers-modified`,
     `deployment-generation-modified`, `deployment-resource-modified`
   - For git content - `git-push`, `git-tag-push`, `git-pull-request`
+  - For HTTP content - `http-changed`
   - For Testkube events - `event-queue-testworkflow`, `event-start-testworkflow`, `event-end-testworkflow-success`,
     `event-end-testworkflow-failed`, `event-end-testworkflow-aborted`, `event-created`, `event-updated`, `event-deleted`
   - `event` takes one of these values, `events` takes a list of them — see [Events](#events)
