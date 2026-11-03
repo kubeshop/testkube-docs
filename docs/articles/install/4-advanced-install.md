@@ -340,8 +340,9 @@ from the user. What to expect when it is on:
 
 - Invites are matched on the user's email address, compared without regard to case.
 - A user who is not yet an organization member joins on the invite's full terms. A user who is
-  already a member gets the invited Team and Environment added, and the role they already have is
-  left unchanged.
+  already a member gets the invited Team and Environment added, and their organization role is left
+  unchanged. On an Environment they already have, the more privileged of the two roles wins, so
+  applying an invite can raise their access but never reduce it.
 - It runs on every sign-in, not only the first, so someone invited after they already have an
   account is covered too.
 - Only pending invites are applied. Invites expire seven days after they are created, so invite
@@ -365,6 +366,7 @@ logs for `skipped applying invite`:
 | `lock-unavailable`       | Another writer held the organization, most likely a SCIM sync. The next sign-in retries.                                                                                                                                 |
 | `no-longer-pending`      | The invite was accepted, revoked, declined or expired before it could be applied.                                                                                                                                        |
 | `limit-denied`           | Applying it would exceed the organization's user or seat limit.                                                                                                                                                          |
+| `member-lookup-failed`   | Resolving the user's existing membership or their test-creation seat failed. Nothing is applied and the invite stays pending, so the next sign-in retries.                                                               |
 | `write-failed`           | Saving the organization failed. The invite stays pending and the next sign-in retries.                                                                                                                                   |
 | `partially-applied`      | A Team or Environment on the invite no longer exists. Whatever could be applied was, and the invite stays pending so you can see it did not fully apply. The `skipped` field names each one, prefixed `team:` or `env:`. |
 
