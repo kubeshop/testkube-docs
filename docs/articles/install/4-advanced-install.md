@@ -357,16 +357,16 @@ from the user. What to expect when it is on:
 Each skipped invite is logged by the control plane with a `reason`. Search the `testkube-cloud-api`
 logs for `skipped applying invite`:
 
-| Reason | What it means |
-| --- | --- |
-| `org-missing` | The organization on the invite no longer exists. |
-| `scim-managed` | SCIM manages this organization's permissions, so Testkube does not write them. |
-| `scim-status-unreadable` | The SCIM setting could not be read. Nothing is applied rather than risk writing into an IdP-managed organization. |
-| `lock-unavailable` | Another writer held the organization, most likely a SCIM sync. The next sign-in retries. |
-| `no-longer-pending` | The invite was accepted, revoked, declined or expired before it could be applied. |
-| `limit-denied` | Applying it would exceed the organization's user or seat limit. |
-| `write-failed` | Saving the organization failed. The invite stays pending and the next sign-in retries. |
-| `partially-applied` | A Team or Environment on the invite no longer exists. Whatever could be applied was, and the invite stays pending so you can see it did not fully apply. The `skipped` field names each one, prefixed `team:` or `env:`. |
+| Reason                   | What it means                                                                                                                                                                                                            |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `org-missing`            | The organization on the invite no longer exists.                                                                                                                                                                         |
+| `scim-managed`           | SCIM manages this organization's permissions, so Testkube does not write them.                                                                                                                                           |
+| `scim-status-unreadable` | The SCIM setting could not be read. Nothing is applied rather than risk writing into an IdP-managed organization.                                                                                                        |
+| `lock-unavailable`       | Another writer held the organization, most likely a SCIM sync. The next sign-in retries.                                                                                                                                 |
+| `no-longer-pending`      | The invite was accepted, revoked, declined or expired before it could be applied.                                                                                                                                        |
+| `limit-denied`           | Applying it would exceed the organization's user or seat limit.                                                                                                                                                          |
+| `write-failed`           | Saving the organization failed. The invite stays pending and the next sign-in retries.                                                                                                                                   |
+| `partially-applied`      | A Team or Environment on the invite no longer exists. Whatever could be applied was, and the invite stays pending so you can see it did not fully apply. The `skipped` field names each one, prefixed `team:` or `env:`. |
 
 A successful application logs `applied invite at sign-in` with the invite and organization ids.
 
