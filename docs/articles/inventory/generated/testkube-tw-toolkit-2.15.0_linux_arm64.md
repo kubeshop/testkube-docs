@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:4f76f776b0adb3075445f9e1fbf68d61d6b9fd1771c362c4b22297e095f7bc11</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/high-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/medium-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 6" src="https://img.shields.io/badge/unspecified-6-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:4f76f776b0adb3075445f9e1fbf68d61d6b9fd1771c362c4b22297e095f7bc11</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 5" src="https://img.shields.io/badge/high-5-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/medium-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 6" src="https://img.shields.io/badge/unspecified-6-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/arm64</td></tr>
 <tr><td>size</td><td>49 MB</td></tr>
 <tr><td>packages</td><td>212</td></tr>
@@ -12,6 +12,87 @@ hide_table_of_contents: true
 </details>
 
 <table>
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/H-4-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libexpat</strong> <code>2.9.0-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/libexpat@2.9.0-r0?arch=aarch64&distro=alpine-3.24.3&upstream=expat</code></small><br/>
+
+```dockerfile
+# tw-toolkit.Dockerfile (31:31)
+RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' libssl3 git openssh-client "libexpat>=2.9.0-r0" "zlib>=1.3.2-r1" "brotli-libs>=1.2.1-r0" "libcurl>=8.23.0-r0"
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-115506?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C2.10.0-r0"><img alt="high : CVE--2026--115506" src="https://img.shields.io/badge/CVE--2026--115506-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.10.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.10.0-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.455%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-118370?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C2.10.0-r0"><img alt="high : CVE--2026--118370" src="https://img.shields.io/badge/CVE--2026--118370-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.10.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.10.0-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.442%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-117610?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C2.10.0-r0"><img alt="high : CVE--2026--117610" src="https://img.shields.io/badge/CVE--2026--117610-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.10.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.10.0-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.425%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>37th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-113351?s=alpine&n=expat&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C2.10.0-r0"><img alt="high : CVE--2026--113351" src="https://img.shields.io/badge/CVE--2026--113351-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.10.0-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.10.0-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.474%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
 <tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>29.7.2+incompatible</code> (golang)</summary>
 
@@ -94,9 +175,9 @@ Accumulate coalesced text in per-node byte slices during parsing and materialize
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>musl-utils</strong> <code>1.2.6-r3</code> (apk)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>musl</strong> <code>1.2.6-r3</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/musl-utils@1.2.6-r3?arch=aarch64&distro=alpine-3.24.3&upstream=musl</code></small><br/>
+<small><code>pkg:apk/alpine/musl@1.2.6-r3?arch=aarch64&distro=alpine-3.24.3</code></small><br/>
 
 ```dockerfile
 # tw-toolkit.Dockerfile (30:30)
@@ -122,30 +203,28 @@ FROM ${ALPINE_IMAGE}
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/crypto</strong> <code>0.57.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>musl-utils</strong> <code>1.2.6-r3</code> (apk)</summary>
 
-<small><code>pkg:golang/golang.org/x/crypto@0.57.0</code></small><br/>
+<small><code>pkg:apk/alpine/musl-utils@1.2.6-r3?arch=aarch64&distro=alpine-3.24.3&upstream=musl</code></small><br/>
 
 ```dockerfile
-# tw-toolkit.Dockerfile (34:34)
-COPY --from=build /app/testworkflow-init /init
+# tw-toolkit.Dockerfile (30:30)
+FROM ${ALPINE_IMAGE}
 ```
 
 <br/>
 
-<a href="https://scout.docker.com/v/GO-2026-5932?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3E%3D0"><img alt="unspecified : GO--2026--5932" src="https://img.shields.io/badge/GO--2026--5932-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+<a href="https://scout.docker.com/v/CVE-2026-107891?s=alpine&n=musl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.2.6-r6"><img alt="unspecified : CVE--2026--107891" src="https://img.shields.io/badge/CVE--2026--107891-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.2.6-r6</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.2.6-r6</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-The golang.org/x/crypto/openpgp package is unsafe by design, has numerous known security issues, is not maintained, and should not be used.
 
-If you are required to interoperate with OpenPGP systems and need a maintained package, consider github.com/ProtonMail/go-crypto/openpgp which is a maintained fork that aims to be a drop-in replacement for this package.
 
 </blockquote>
 </details>
@@ -180,28 +259,30 @@ In github.com/chrismellard/docker-credential-acr-env/pkg/credhelper, the regular
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>musl</strong> <code>1.2.6-r3</code> (apk)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/crypto</strong> <code>0.57.0</code> (golang)</summary>
 
-<small><code>pkg:apk/alpine/musl@1.2.6-r3?arch=aarch64&distro=alpine-3.24.3</code></small><br/>
+<small><code>pkg:golang/golang.org/x/crypto@0.57.0</code></small><br/>
 
 ```dockerfile
-# tw-toolkit.Dockerfile (30:30)
-FROM ${ALPINE_IMAGE}
+# tw-toolkit.Dockerfile (34:34)
+COPY --from=build /app/testworkflow-init /init
 ```
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2026-107891?s=alpine&n=musl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.2.6-r6"><img alt="unspecified : CVE--2026--107891" src="https://img.shields.io/badge/CVE--2026--107891-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+<a href="https://scout.docker.com/v/GO-2026-5932?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.58.1-0.20261009181718-2f1f834330b2"><img alt="unspecified : GO--2026--5932" src="https://img.shields.io/badge/GO--2026--5932-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;1.2.6-r6</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.2.6-r6</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;0.58.1-0.20261009181718-2f1f834330b2</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.58.1-0.20261009181718-2f1f834330b2</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
+The golang.org/x/crypto/openpgp package is unsafe by design, has numerous known security issues, is not maintained, and should not be used.
 
+If you are required to interoperate with OpenPGP systems and need a maintained package, consider github.com/ProtonMail/go-crypto/openpgp which is a maintained fork that aims to be a drop-in replacement for this package.
 
 </blockquote>
 </details>
