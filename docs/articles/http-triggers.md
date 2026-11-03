@@ -9,6 +9,10 @@ Typical use cases include:
 - validating a release as soon as a package registry, artifact store or release feed advertises a new version
 - reacting to configuration or feature flag changes exposed through an HTTP or GraphQL API
 
+:::note
+HTTP Content Triggers require Runner version `2.15.0` or later.
+:::
+
 ## How HTTP Content Triggers work
 
 For each trigger, Testkube polls the configured URL on a configurable interval (1 minute by default). On each poll it sends the request, checks the response status, and extracts the watched value from the response:
