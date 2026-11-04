@@ -70,7 +70,7 @@ kubectl get po -n "$NS" --sort-by=.metadata.creationTimestamp
 
 The Control Plane chart shipped with application version 2.14.0 uses `/health/readiness` for the API readiness probe. Earlier chart versions used `/health`, which checks liveness.
 
-The readiness endpoint checks dependencies, including object storage. For AWS S3, verify that the IAM role used by the API allows `s3:ListAllMyBuckets`. A role limited to operations on the configured bucket can support artifact access while still failing this readiness check.
+The readiness endpoint checks dependencies, including object storage. For AWS S3, verify that the IAM role used by the API allows `s3:ListBucket` on the configured bucket. On 2.14.x only, the role must also allow `s3:ListAllMyBuckets`; from 2.15.0, the readiness check needs only permissions on the configured bucket.
 
 See [Installation with S3 Storage and IAM Authentication](/articles/install/s3-storage) for the required policy.
 

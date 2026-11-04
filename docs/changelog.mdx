@@ -17,6 +17,7 @@ Control Plane is available in Helm chart `v2.338.0` and the Runner is available 
 ### Upgrade notes
 
 - Self-hosted: give the worker service and the Git provider onboarding worker the same MCP encryption key as the API (`ai.encryptionSecretRef`), or GitHub PR analysis can't read the keys AI Agents sign in with. [Read more](/articles/ai-configuration).
+- AWS S3: the Control Plane API readiness check now checks only the configured bucket, so the API's IAM role no longer needs `s3:ListAllMyBuckets`, which 2.14.x required. You can remove it after upgrading. See [S3 with IAM Authentication](/articles/install/s3-storage).
 
 ### AI Test Creation
 
