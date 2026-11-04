@@ -208,3 +208,9 @@ tz
 shttp
 Mixpanel
 Podman
+gVisor
+Kata
+JSONPatch
+(?i)autogen
+sandboxed
+runtimes

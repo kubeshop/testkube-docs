@@ -28,7 +28,7 @@ Other runtimes that Kubernetes selects through a RuntimeClass, such as Kata Cont
 The samples use Kyverno. Any admission controller that can both mutate and validate pods can implement the same three jobs:
 
 - **Assign the runtime.** Add the gVisor runtime class to every pod created in the sandbox namespace.
-- **Enforce the runtime.** Reject any pod in the sandbox namespace that does not have the gVisor runtime class. If the mutation is skipped or misconfigured, the pod is rejected instead of starting on the node kernel.
+- **Enforce the runtime.** Reject any pod in the sandbox namespace that does not have the gVisor runtime class. If the mutation is skipped or configured incorrectly, the pod is rejected instead of starting on the node kernel.
 - **Place the pod.** If only some nodes run gVisor, add a node selector and a toleration that match those nodes, so the scheduler places sandbox pods only where the gVisor runtime exists. Add placement in the policy, not in the RuntimeClass's scheduling rules: Kubernetes applies those rules before the policy assigns the runtime class, so they never take effect.
 
 ### Kyverno policies
@@ -36,6 +36,8 @@ The samples use Kyverno. Any admission controller that can both mutate and valid
 The following sample implements the three jobs with a Kyverno MutatingPolicy and ValidatingPolicy. Both policies match pods created in `testkube-sandbox`, selected by the namespace's `kubernetes.io/metadata.name` label. In the MutatingPolicy, the first patch sets `runtimeClassName`; the second and third add the node selector and toleration, either into the pod's existing values or as new fields when the pod has none. The ValidatingPolicy's single expression denies any pod whose `runtimeClassName` is not `gvisor`.
 
 Replace the example label and taint `sandbox.example.com/runtime=gvisor` with the ones on your gVisor nodes. If every node runs gVisor, keep only the first patch, the one that sets `runtimeClassName`.
+
+If your RuntimeClass defines `overhead`, add a patch that sets `/spec/overhead` to the same values. Kubernetes compares the pod's overhead with the RuntimeClass's after the policy runs, and rejects the pod if they differ.
 
 ```yaml title="testkube-sandbox-policies.yaml"
 apiVersion: v1
@@ -130,14 +132,16 @@ execution:
     namespace: testkube-sandbox
 ```
 
-To change an installed runner without editing its values file, run `helm upgrade` with `--reuse-values`, which keeps the existing values and changes only `execution.default.namespace`. Use your runner's release name, namespace and chart version:
+Create the sandbox namespace before you change the runner. The chart creates the execution ServiceAccount, Role and RoleBinding in that namespace, but not the namespace itself.
+
+To change an installed runner without editing its values file, run `helm upgrade` with `--reuse-values`, which keeps the existing values and changes only `execution.default.namespace`. Use your runner's release name and namespace, and the chart version the runner already runs, which `helm list -n my-runner` shows. Combining `--reuse-values` with a newer chart version can fail when the newer chart adds values.
 
 ```sh
-helm upgrade --install \
+helm upgrade \
   --namespace my-runner \
   --reuse-values \
   --set 'execution.default.namespace=testkube-sandbox' \
-  my-runner oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube-runner --version <version>
+  my-runner oci://us-east1-docker.pkg.dev/testkube-cloud-372110/testkube/testkube-runner --version <installed-version>
 ```
 
 A workflow that sets no `job.namespace` now runs in the sandbox namespace, under gVisor.
@@ -156,7 +160,7 @@ To check the policies before you run a workflow, run a server-side dry run of a 
 kubectl run probe --image=alpine -n testkube-sandbox --dry-run=server -o jsonpath='{.spec.runtimeClassName}'
 ```
 
-To check the runtime from inside the containers, run the following workflow. It sets no `job.namespace`, so it reaches the sandbox namespace only through the runner configuration. The workflow also starts a service and two parallel workers, so it covers every type of pod a Test Workflow creates. Each check step prints the kernel version from `uname -r`; under gVisor it reports a kernel such as `4.19.0-gvisor`. The step then looks for gVisor in the `dmesg` output and prints `RESULT: under gVisor`, or prints `RESULT: NOT gVisor` and fails. The middle step fetches the nginx page from the service, which shows that a sandboxed service is reachable.
+To check the runtime from inside the containers, run the following workflow. It sets no `job.namespace`, so it reaches the sandbox namespace only through the runner configuration. The workflow also starts a service and two parallel workers, so it covers every type of pod a Test Workflow creates. Each check step prints the kernel version from `uname -r`, which under gVisor differs from the node's kernel version. The step then looks for gVisor in the `dmesg` output, which decides the result, and prints `RESULT: under gVisor`, or prints `RESULT: NOT gVisor` and fails. The middle step fetches the Nginx page from the service, which shows that a sandboxed service is reachable.
 
 ```yaml title="sandbox-check.yaml"
 apiVersion: testworkflows.testkube.io/v1
@@ -199,7 +203,7 @@ kubectl get pods -n testkube-sandbox -o custom-columns=NAME:.metadata.name,RUNTI
 ## After setup
 
 - **No per-workflow changes.** Every workflow this runner executes that sets no `job.namespace` runs in the sandbox, including workflows created later.
-- **Workflows cannot opt out.** A workflow that names a namespace the runner does not allow is rejected, as described in [Configure the runner](#configure-the-runner).
+- **Workflows cannot leave the sandbox namespace.** A workflow that names a namespace the runner does not allow is rejected, as described in [Configure the runner](#configure-the-runner). The sandbox isolates the node kernel only; to limit network access, Kubernetes API access and host access as well, see [Harden the sandbox namespace](#harden-the-sandbox-namespace).
 - **The sandbox is per runner.** Workflows that run on any other runner in the environment run without the sandbox, unless that runner is configured the same way. To sandbox only some workflows, give them a dedicated runner and target it, as described in [Runner Targeting](/articles/test-workflows-running#runner-agent-targeting).
 - **New images.** Before you rely on the sandbox for a new image, run `sandbox-check` with that image.
 - **New gVisor nodes.** When you add gVisor nodes, give them the same label and taint, so sandbox pods can be placed on them.
@@ -208,7 +212,7 @@ kubectl get pods -n testkube-sandbox -o custom-columns=NAME:.metadata.name,RUNTI
 
 - **Performance.** gVisor adds overhead to system calls and I/O. Expect slower runs for tests that make many system calls or read and write heavily, and set execution timeouts with that in mind.
 - **Compatibility.** Testkube's setup and toolkit containers, services and parallel workers run under gVisor. gVisor does not implement every Linux system call, so images that need privileged access, Docker-in-Docker or a browser may not run. Check each image with `sandbox-check` before you rely on it.
-- **Scope.** Only the sandbox namespace is covered. Namespaces under `execution.additionalNamespaces` run without gVisor unless they carry the same admission policies. The runner pod itself stays in its own namespace and is not sandboxed.
+- **Scope.** The sandbox covers only the sandbox namespace, and only the node kernel. Namespaces under `execution.additionalNamespaces` run without gVisor unless they carry the same admission policies, and the runner pod itself stays in its own namespace and is not sandboxed. gVisor does not restrict the network or the Kubernetes API; [Harden the sandbox namespace](#harden-the-sandbox-namespace) covers both.
 - **Availability.** With `failurePolicy: Fail`, no sandboxed execution can start while Kyverno is unavailable. Run Kyverno with enough replicas that an outage of one pod does not stop executions.
 
 :::warning
@@ -216,6 +220,22 @@ kubectl get pods -n testkube-sandbox -o custom-columns=NAME:.metadata.name,RUNTI
 The runner's [Global Template](/articles/multi-agent-runner-helm-chart#setting-global-template) can also set `job.namespace` for workflows that set none. It sets only a default: a workflow's own `job.namespace` overrides it, and that workflow's pods run outside the sandbox namespace without gVisor. Do not use the Global Template to isolate executions.
 
 :::
+
+### Harden the sandbox namespace
+
+gVisor isolates the node kernel. Pods in the sandbox namespace still use the cluster network, the execution ServiceAccount and any pod settings a workflow requests. To limit those as well:
+
+- **Enforce Pod Security Standards.** Label the namespace so Kubernetes rejects pods that request `hostPath` volumes, host namespaces or privileged mode. Run `sandbox-check` after you add the label.
+
+  ```sh
+  kubectl label namespace testkube-sandbox pod-security.kubernetes.io/enforce=baseline
+  ```
+
+- **Restrict egress.** Add a NetworkPolicy that blocks egress your tests do not need, including the cloud metadata endpoint `169.254.169.254`. A default-deny policy also blocks the services and test targets your workflows reach, so allow those explicitly and run `sandbox-check` afterwards. NetworkPolicies take effect only if the cluster's network plugin enforces them.
+
+  <!-- REVIEW: confirm which destinations the Testkube toolkit in execution pods needs to reach, so the egress item can list them. -->
+
+- **Limit the execution ServiceAccount.** By default, execution pods use a ServiceAccount that can read pods, jobs and events. [Disable access to Kubernetes from executions](/articles/multi-agent-runner-helm-chart#disable-access-to-kubernetes-from-executions) removes that access, but it also disables services and parallel steps, so `sandbox-check` fails. Use it for runners whose workflows use neither.
 
 ## Troubleshooting
 
@@ -236,6 +256,10 @@ The MutatingPolicy uses `ApplyConfiguration`. Switch it to `patchType: JSONPatch
 ### The execution fails before any pod starts, with a Job rejected by `testkube-sandbox-gvisor-validate`
 
 Autogen is on. Set `autogen.podControllers.controllers: []` on both policies.
+
+### Pods are rejected with `Pod's Overhead doesn't match RuntimeClass's defined Overhead`
+
+Your RuntimeClass defines `overhead`, and the MutatingPolicy does not set it. Add a patch that sets `/spec/overhead` to the RuntimeClass's values.
 
 ### Pods are rejected although the policies look correct
 

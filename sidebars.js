@@ -653,7 +653,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "Sandboxed Container Runtimes",
+              label: "Sandboxed Container Runtime",
               id: "articles/test-workflows-sandboxed-runtime",
             },
             {
