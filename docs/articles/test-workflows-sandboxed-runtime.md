@@ -16,17 +16,17 @@ Other runtimes that Kubernetes selects through a RuntimeClass, such as Kata Cont
 
 ## Where Testkube meets the sandbox
 
-The setup spans Testkube, Kubernetes, an admission policy engine and the sandboxed runtime. Each row below is a point where Testkube's behaviour decides what another system must do. The steps on this page implement every row with Kyverno and gVisor; with other tools, the right-hand columns are what to agree with whoever owns them.
+The setup spans five systems: the Testkube runner, an admission policy engine, Kubernetes, the container runtime and network policy. Each row in the following table is a point where Testkube's behavior decides what one of the other systems must do. The steps implement every row with Kyverno and gVisor; with other tools, the last two columns are what to agree with whoever owns each system.
 
-| Interface point          | What Testkube does                                                                                                                                                                                       | What the sandbox setup must do                                                                                                                           | Owned by                          |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
-| Execution namespace      | The runner creates execution pods in `execution.default.namespace`, or in a namespace a workflow names if it is listed under `execution.additionalNamespaces`. It rejects any other namespace.           | Every namespace the runner allows carries the same admission policies.                                                                                   | Runner Helm values                |
-| Jobs and pods            | The runner creates a Job for each execution, and the Job creates the pod. Services and parallel workers are further pods, created from inside the execution.                                             | The policies act on pods, not on Jobs, and on every pod created in the namespace.                                                                        | Admission policy engine           |
-| Containers in each pod   | Every execution pod includes Testkube's setup and toolkit containers alongside your test containers.                                                                                                     | The runtime applies to all of them. Testkube's containers run under gVisor with shell steps, services and parallel workers.                              | Container runtime                 |
-| Node placement           | Testkube schedules execution pods like any other pods.                                                                                                                                                   | If only some nodes run gVisor, sandbox pods get a node selector and toleration for those nodes.                                                          | Admission policy engine           |
-| Execution ServiceAccount | Execution pods use a ServiceAccount that can create, change and delete pods, jobs, secrets, configmaps and persistent volume claims in the namespace. Testkube needs it for services and parallel steps. | Code in the sandbox can start new pods, so the namespace must stop those pods from requesting host access.                                               | Kubernetes Pod Security Admission |
-| Pod settings             | A workflow can set pod-level fields, including volumes.                                                                                                                                                  | gVisor passes `hostPath` volumes through to the node's real files, so the namespace rejects them. The Pod Security Standards `baseline` level does this. | Kubernetes Pod Security Admission |
-| Network                  | Executions connect to the applications under test and to the Testkube components described in [Testkube Architecture](/articles/architecture).                                                           | gVisor does not restrict the network. Any egress policy keeps those connections open.                                                                    | Network policy                    |
+| Interface point          | What Testkube does                                                                                                                                                                                       | What the sandbox setup must do                                                                                                                           | Owned by                |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| Jobs and pods            | The runner creates a Job for each execution, and the Job creates the pod. Services and parallel workers are further pods, created from inside the execution.                                             | The policies act on pods, not on Jobs, and on every pod created in the namespace.                                                                        | Admission policy engine |
+| Node placement           | The Kubernetes scheduler places execution pods like any other pods, using the node selectors and tolerations the workflow sets.                                                                          | If only some nodes run gVisor, sandbox pods get a node selector and toleration for those nodes.                                                          | Admission policy engine |
+| Pod settings             | A workflow can set pod-level fields, including volumes.                                                                                                                                                  | gVisor passes `hostPath` volumes through to the node's real files, so the namespace rejects them. The Pod Security Standards `baseline` level does this. | Kubernetes              |
+| Execution ServiceAccount | Execution pods use a ServiceAccount that can create, change and delete pods, jobs, secrets, configmaps and persistent volume claims in the namespace. Testkube needs it for services and parallel steps. | Code in the sandbox can start new pods, so the namespace must stop those pods from requesting host access. The same `baseline` level does this.          | Kubernetes              |
+| Execution namespace      | The runner creates execution pods in `execution.default.namespace`, or in a namespace a workflow names if it is listed under `execution.additionalNamespaces`. It rejects any other namespace.           | Every namespace the runner allows carries the same admission policies and Pod Security label.                                                            | Testkube runner         |
+| Containers in each pod   | Every execution pod includes Testkube's setup and toolkit containers alongside your test containers.                                                                                                     | The runtime applies to all of them. Testkube's containers run under gVisor with shell steps, services and parallel workers.                              | Container runtime       |
+| Network                  | Executions connect to the applications under test and to the Testkube components described in [Testkube Architecture](/articles/architecture).                                                           | gVisor does not restrict the network. Any egress policy keeps those connections open.                                                                    | Network policy          |
 
 ## Prerequisites
 
@@ -37,13 +37,13 @@ The setup spans Testkube, Kubernetes, an admission policy engine and the sandbox
 
 ## Create the sandbox namespace and admission policies
 
-The following sample creates the sandbox namespace and two Kyverno policies, covering the namespace, pod, placement and pod-settings rows of [Where Testkube meets the sandbox](#where-testkube-meets-the-sandbox):
+The following sample creates the sandbox namespace and two Kyverno policies. Together they cover the Jobs and pods, node placement, pod settings and execution ServiceAccount rows of [Where Testkube meets the sandbox](#where-testkube-meets-the-sandbox):
 
 - The Namespace carries the Pod Security Standards `baseline` label.
 - The MutatingPolicy matches pods created in `testkube-sandbox`, selected by the namespace's `kubernetes.io/metadata.name` label. Its first patch sets `runtimeClassName`; the second and third add the node selector and toleration, either into the pod's existing values or as new fields when the pod has none.
 - The ValidatingPolicy matches the same pods, and its single expression denies any pod whose `runtimeClassName` is not `gvisor`, so a pod the mutation misses is rejected instead of starting on the node kernel.
 
-Replace the example label and taint `sandbox.example.com/runtime=gvisor` with the ones on your gVisor nodes. If every node runs gVisor, keep only the first patch, the one that sets `runtimeClassName`.
+Replace the example label and taint `sandbox.example.com/runtime=gvisor` with the ones on your gVisor nodes. If every node runs gVisor, keep only the first patch, the one that sets `runtimeClassName`. If only some nodes run gVisor, keep all three: without the placement patches, a sandbox pod can land on a node without gVisor and never start, while the execution stays in the running state (see [Troubleshooting](#an-execution-stays-in-running-without-progress)).
 
 ```yaml title="testkube-sandbox-policies.yaml"
 apiVersion: v1
@@ -166,7 +166,7 @@ To check the policies before you run a workflow, run a server-side dry run of a 
 kubectl run probe --image=alpine -n testkube-sandbox --dry-run=server -o jsonpath='{.spec.runtimeClassName}'
 ```
 
-To check the runtime from inside the containers, run the following workflow. It sets no `job.namespace`, so it reaches the sandbox namespace only through the runner configuration. The workflow also starts a service and two parallel workers, so it covers every type of pod a Test Workflow creates. Each check step prints the kernel version from `uname -r`, which under gVisor differs from the node's kernel version. The step then looks for gVisor in the `dmesg` output, which decides the result, and prints `RESULT: under gVisor`, or prints `RESULT: NOT gVisor` and fails. The middle step fetches the Nginx page from the service and fails if the page does not arrive.
+To check the runtime from inside the containers, run the following workflow. It sets no `job.namespace`, so it reaches the sandbox namespace only through the runner configuration. The workflow also starts a service and two parallel workers, so it covers every type of pod a Test Workflow creates.
 
 ```yaml title="sandbox-check.yaml"
 apiVersion: testworkflows.testkube.io/v1
@@ -200,6 +200,11 @@ spec:
           dmesg | grep -qi gvisor && echo "RESULT: worker under gVisor" || (echo "RESULT: NOT gVisor" && exit 1)
 ```
 
+A passing run shows the following:
+
+- **Main pod and each worker:** the kernel version from `uname -r`, which under gVisor differs from the node's, followed by `RESULT: under gVisor` or `RESULT: worker under gVisor`. The `dmesg` check decides the result; without gVisor, the step prints `RESULT: NOT gVisor` and fails.
+- **Service step:** the title of the Nginx page. The step fails if the page does not arrive.
+
 To see the same result from the cluster side while the workflow runs, list the pods in the sandbox namespace. The `RUNTIME` column shows `gvisor` for every pod, and if only some nodes run gVisor, the `NODE` column shows only those nodes.
 
 ```sh
@@ -212,19 +217,20 @@ kubectl get pods -n testkube-sandbox -o custom-columns=NAME:.metadata.name,RUNTI
 - **The sandbox is per runner.** Workflows that run on any other runner in the environment run without the sandbox, unless that runner is configured the same way. To sandbox only some workflows, give them a dedicated runner and target it, as described in [Runner Targeting](/articles/test-workflows-running#runner-agent-targeting).
 - **New images.** Before you rely on the sandbox for a new image, run `sandbox-check` with that image.
 - **New gVisor nodes.** When you add gVisor nodes, give them the same label and taint, so sandbox pods can be placed on them.
+- **Where the setup stops.** The sandbox covers execution pods in the sandbox namespace on this runner. [Considerations](#considerations) lists what it leaves to the other systems.
 
 ## Considerations
 
-The setup covers the rows in [Where Testkube meets the sandbox](#where-testkube-meets-the-sandbox). The following points are not covered by it, and each is worth raising with whoever owns the system it names.
+The setup covers the rows in [Where Testkube meets the sandbox](#where-testkube-meets-the-sandbox). It leaves the following points to the system named in brackets, so raise each one with whoever owns that system.
 
-- **Additional namespaces (runner).** If the runner also lists namespaces under `execution.additionalNamespaces`, a workflow can run in one of those instead, without gVisor unless that namespace carries the same admission policies.
-- **The runner pod (runner).** The runner stays in its own namespace and is not sandboxed. Only execution pods are.
-- **Network egress (network policy).** gVisor does not restrict outbound traffic. A NetworkPolicy can block destinations tests do not need, for example the cloud metadata endpoint `169.254.169.254`, which on cloud-hosted nodes can return the node's cloud credentials. Keep the connections listed in the network row open, run `sandbox-check` afterwards, and check that the cluster's network plugin enforces NetworkPolicies.
-- **Kubernetes API access (Kubernetes).** The execution ServiceAccount can still create and read objects in the sandbox namespace, including secrets. [Disable access to Kubernetes from executions](/articles/multi-agent-runner-helm-chart#disable-access-to-kubernetes-from-executions) removes that access, but it also disables services and parallel steps, so `sandbox-check` fails. Use it for runners whose workflows use neither.
-- **Stricter pod security (Kubernetes).** The `restricted` Pod Security level also requires non-root containers, which many test images do not support.
-- **Compatibility (runtime).** gVisor does not implement every Linux system call, so some images, such as those that run a browser, may not run. Images that need privileged mode, such as Docker-in-Docker, are rejected by the `baseline` label. Check each image with `sandbox-check` before you rely on it.
-- **Performance (runtime).** gVisor adds overhead to system calls and I/O. Expect slower runs for tests that make many system calls or read and write heavily, and set execution timeouts with that in mind.
 - **Availability (admission policy engine).** With `failurePolicy: Fail`, no sandboxed execution can start while Kyverno is unavailable. Run Kyverno with enough replicas that an outage of one pod does not stop executions.
+- **Stricter pod security (Kubernetes).** The `restricted` Pod Security level also requires non-root containers, which many test images do not support. Move to it only if your test images run as non-root, and run `sandbox-check` after the change.
+- **Kubernetes API access (Kubernetes).** The execution ServiceAccount can still create and read objects in the sandbox namespace, including secrets. [Disable access to Kubernetes from executions](/articles/multi-agent-runner-helm-chart#disable-access-to-kubernetes-from-executions) removes that access, but it also disables services and parallel steps, so `sandbox-check` fails. Use it for runners whose workflows use neither.
+- **Additional namespaces (Testkube runner).** If the runner also lists namespaces under `execution.additionalNamespaces`, a workflow can run in one of those instead, without gVisor unless that namespace carries the same admission policies. Give every listed namespace the same admission policies and Pod Security label, or leave the list empty.
+- **The runner pod (Testkube runner).** The runner stays in its own namespace and is not sandboxed; only execution pods are. Test code runs in execution pods, not in the runner pod, so no action is needed unless your policy requires every pod in the cluster to run sandboxed.
+- **Compatibility (container runtime).** gVisor does not implement every Linux system call, so some images, such as those that run a browser, may not run. Images that need privileged mode, such as Docker-in-Docker, are rejected by the `baseline` label. Check each image with `sandbox-check` before you rely on it.
+- **Performance (container runtime).** gVisor adds overhead to system calls and I/O. Expect slower runs for tests that make many system calls or read and write heavily, and set execution timeouts with that in mind.
+- **Network egress (network policy).** gVisor does not restrict outbound traffic. A NetworkPolicy can block destinations tests do not need, for example the cloud metadata endpoint `169.254.169.254`, which on cloud-hosted nodes can return the node's cloud credentials. Keep the connections listed in the network row open, run `sandbox-check` afterwards, and check that the cluster's network plugin enforces NetworkPolicies.
 
 :::warning
 
