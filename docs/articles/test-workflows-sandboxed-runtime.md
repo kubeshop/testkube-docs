@@ -146,8 +146,6 @@ helm upgrade \
 
 A workflow that sets no `job.namespace` now runs in the sandbox namespace, under gVisor.
 
-<!-- REVIEW: engineering to confirm the runner only accepts its default and additional namespaces, and that the runner's own namespace is not implicitly allowed. -->
-
 The runner only runs executions in its default namespace and the namespaces listed under [`execution.additionalNamespaces`](/articles/multi-agent-runner-helm-chart#support-additional-namespaces). A workflow that sets `job.namespace` to any other namespace, including the runner's own, is rejected with `namespace <name> not supported`.
 
 Do not also list the sandbox namespace under `execution.additionalNamespaces`; it is already covered as the default.
@@ -231,9 +229,7 @@ gVisor isolates the node kernel. Pods in the sandbox namespace still use the clu
   kubectl label namespace testkube-sandbox pod-security.kubernetes.io/enforce=baseline
   ```
 
-- **Restrict egress.** Add a NetworkPolicy that blocks egress your tests do not need, including the cloud metadata endpoint `169.254.169.254`. A default-deny policy also blocks the services and test targets your workflows reach, so allow those explicitly and run `sandbox-check` afterwards. NetworkPolicies take effect only if the cluster's network plugin enforces them.
-
-  <!-- REVIEW: confirm which destinations the Testkube toolkit in execution pods needs to reach, so the egress item can list them. -->
+- **Restrict egress.** Limit outbound traffic from the sandbox namespace with a NetworkPolicy, for example to block the cloud metadata endpoint `169.254.169.254`, which on cloud-hosted nodes can return the node's cloud credentials. Make sure the policy still allows connections to the applications under test and to the Testkube components that executions use, described in [Testkube Architecture](/articles/architecture), then run `sandbox-check` to confirm executions still work. NetworkPolicies take effect only if the cluster's network plugin enforces them.
 
 - **Limit the execution ServiceAccount.** By default, execution pods use a ServiceAccount that can read pods, jobs and events. [Disable access to Kubernetes from executions](/articles/multi-agent-runner-helm-chart#disable-access-to-kubernetes-from-executions) removes that access, but it also disables services and parallel steps, so `sandbox-check` fails. Use it for runners whose workflows use neither.
 
