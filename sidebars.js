@@ -653,6 +653,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Sandboxed Container Runtimes",
+              id: "articles/test-workflows-sandboxed-runtime",
+            },
+            {
+              type: "doc",
               label: "Runner CLI Commands",
               id: "articles/multi-agent-cli",
             },

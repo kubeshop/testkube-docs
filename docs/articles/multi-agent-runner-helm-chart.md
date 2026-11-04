@@ -161,6 +161,10 @@ execution:
     namespace: my-execution-namespace
 ```
 
+### Run executions in a sandboxed container runtime
+
+You can run Test Workflow executions in a sandboxed container runtime, such as gVisor or Kata Containers, by combining `execution.default.namespace` with admission policies that assign the runtime class to every pod in the execution namespace. Policy engines such as Kyverno can do this without any change to your workflows. [Running Test Workflows in a sandboxed container runtime](./test-workflows-sandboxed-runtime.md) walks through a complete example using gVisor and Kyverno.
+
 ### Disable access to Kubernetes from executions
 
 By default, your executions will use a ServiceAccount that has access to pods, jobs, and events.
