@@ -30,7 +30,7 @@ RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' 
 <tr><td>Affected range</td><td><code>&lt;2.10.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.10.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.455%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
