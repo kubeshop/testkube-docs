@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:9e6fa3478429bf4534ff92610f9c24cdf27e107e58a296afd8fd8dd96cfcdb70</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 9" src="https://img.shields.io/badge/critical-9-8b1924"/> <img alt="high: 18" src="https://img.shields.io/badge/high-18-e25d68"/> <img alt="medium: 50" src="https://img.shields.io/badge/medium-50-fbb552"/> <img alt="low: 24" src="https://img.shields.io/badge/low-24-fce1a9"/> <img alt="unspecified: 3" src="https://img.shields.io/badge/unspecified-3-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:9e6fa3478429bf4534ff92610f9c24cdf27e107e58a296afd8fd8dd96cfcdb70</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 9" src="https://img.shields.io/badge/critical-9-8b1924"/> <img alt="high: 21" src="https://img.shields.io/badge/high-21-e25d68"/> <img alt="medium: 51" src="https://img.shields.io/badge/medium-51-fbb552"/> <img alt="low: 24" src="https://img.shields.io/badge/low-24-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>717 MB</td></tr>
 <tr><td>packages</td><td>195</td></tr>
@@ -288,7 +288,7 @@ When an SSH server authentication callback returned PartialSuccessError with non
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.412%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>36th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -337,7 +337,7 @@ If you are required to interoperate with OpenPGP systems and need a maintained p
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 2" src="https://img.shields.io/badge/C-2-8b1924"/> <img alt="high: 6" src="https://img.shields.io/badge/H-6-e25d68"/> <img alt="medium: 5" src="https://img.shields.io/badge/M-5-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 2" src="https://img.shields.io/badge/U-2-lightgrey"/><strong>golang.org/x/net</strong> <code>0.48.0</code> (golang)</summary>
+<details><summary><img alt="critical: 2" src="https://img.shields.io/badge/C-2-8b1924"/> <img alt="high: 7" src="https://img.shields.io/badge/H-7-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/M-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>golang.org/x/net</strong> <code>0.48.0</code> (golang)</summary>
 
 <small><code>pkg:golang/golang.org/x/net@0.48.0</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2026-39821?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.55.0"><img alt="critical : CVE--2026--39821" src="https://img.shields.io/badge/CVE--2026--39821-lightgrey?label=critical%20&labelColor=8b1924"/></a> 
@@ -406,6 +406,25 @@ HTTP/2 servers could end up crashing due to inadvertently modifying its HPACK en
 <blockquote>
 
 A malicious HTTP/2 peer can cause excessive CPU consumption in the client or server by opening a large number of streams and then sending many small SETTINGS frames containing SETTINGS_INITIAL_WINDOW_SIZE values.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-78661?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.62.0"><img alt="high : CVE--2026--78661" src="https://img.shields.io/badge/CVE--2026--78661-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.62.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.62.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.185%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+When coalescing adjacent text nodes in addText and fosterParent, appending to an existing TextNode's Data via string concatenation (n.Data += text) reallocated and copied the accumulated string on every token. Inputs containing many short text runs separated by ignored end tags (such as "a</x>") caused O(n^2) allocations and byte copies.
+
+Accumulate coalesced text in per-node byte slices during parsing and materialize Data strings once at the end of parse.
 
 </blockquote>
 </details>
@@ -497,6 +516,25 @@ In Go Net (`golang.org/x/net`) before verion 0.55.0, parsing arbitrary HTML can 
 </blockquote>
 </details>
 
+<a href="https://scout.docker.com/v/CVE-2026-97045?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.62.0"><img alt="medium : CVE--2026--97045" src="https://img.shields.io/badge/CVE--2026--97045-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.62.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.62.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.202%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+In childTextNodesAreLiteral, walking up the tree previously stopped at the nearest foreign ancestor once an HTML integration point was found. However, that integration point may itself be a descendant of an element that was foster-parented into a foreign namespace (such as <mglyph> or <malignmark> fostered under <mtext>), causing a parser to resolve the subtree in a different foreign namespace upon re-parsing the rendered output.
+
+Continue walking the full ancestor chain and verify that every transition from a non-empty namespace occurs at an HTML integration point before emitting literal text.
+
+</blockquote>
+</details>
+
 <a href="https://scout.docker.com/v/CVE-2026-42506?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.55.0"><img alt="medium : CVE--2026--42506" src="https://img.shields.io/badge/CVE--2026--42506-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
@@ -561,44 +599,6 @@ Parsing arbitrary HTML which is then rendered using Render can result in an unex
 <blockquote>
 
 Parsing arbitrary HTML which is then rendered using Render can result in an unexpected HTML tree. This can be leveraged to execute XSS attacks in applications that attempt to sanitize input HTML before rendering.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-97045?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.62.0"><img alt="unspecified : CVE--2026--97045" src="https://img.shields.io/badge/CVE--2026--97045-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.62.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.62.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.202%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-In childTextNodesAreLiteral, walking up the tree previously stopped at the nearest foreign ancestor once an HTML integration point was found. However, that integration point may itself be a descendant of an element that was foster-parented into a foreign namespace (such as <mglyph> or <malignmark> fostered under <mtext>), causing a parser to resolve the subtree in a different foreign namespace upon re-parsing the rendered output.
-
-Continue walking the full ancestor chain and verify that every transition from a non-empty namespace occurs at an HTML integration point before emitting literal text.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-78661?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.62.0"><img alt="unspecified : CVE--2026--78661" src="https://img.shields.io/badge/CVE--2026--78661-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.62.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.62.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.185%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-When coalescing adjacent text nodes in addText and fosterParent, appending to an existing TextNode's Data via string concatenation (n.Data += text) reallocated and copied the accumulated string on every token. Inputs containing many short text runs separated by ignored end tags (such as "a</x>") caused O(n^2) allocations and byte copies.
-
-Accumulate coalesced text in per-node byte slices during parsing and materialize Data strings once at the end of parse.
 
 </blockquote>
 </details>
@@ -763,7 +763,7 @@ on the **current** releases of each line, not on the version originally scanned.
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.541%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1103,24 +1103,20 @@ The Nickname profile can panic with an out-of-bounds slice error when transformi
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libbrotli1</strong> <code>1.1.0-2build2</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libapt-pkg6.0t64</strong> <code>2.8.3</code> (deb)</summary>
 
-<small><code>pkg:deb/ubuntu/libbrotli1@1.1.0-2build2?arch=amd64&distro=ubuntu-24.04&upstream=brotli</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-111497?s=ubuntu&n=brotli&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1.1.0-2ubuntu0.1"><img alt="high 9.8: CVE--2026--111497" src="https://img.shields.io/badge/CVE--2026--111497-lightgrey?label=high%209.8&labelColor=e25d68"/></a> 
+<small><code>pkg:deb/ubuntu/libapt-pkg6.0t64@2.8.3?arch=amd64&distro=ubuntu-24.04&upstream=apt</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-109518?s=ubuntu&n=apt&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C2.8.4ubuntu0.1"><img alt="high : CVE--2026--109518" src="https://img.shields.io/badge/CVE--2026--109518-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;1.1.0-2ubuntu0.1</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.1.0-2ubuntu0.1</code></td></tr>
-<tr><td>CVSS Score</td><td><code>9.8</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>82.641%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>100th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.8.4ubuntu0.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.8.4ubuntu0.1</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-A buffer overflow vulnerability in the Brotli decoder (c/dec/decode.c) in Google Brotli versions 1.0.3 through 1.2.0 on all platforms allows a remote unauthenticated attacker to corrupt adjacent decoder state memory, disclose sensitive memory contents, cause a denial of service, or potentially execute arbitrary code using a crafted Brotli-compressed stream.      Users need to update any Brotli libraries or binaries between 1.0.3 through 1.2.0 to the latest available version: 1.0.10 or 1.1.1 or 1.2.1.
+On Debian, Ubuntu, and derivative Linux distributions, an on-path attacker who can manipulate the HTTP traffic (including a malicious mirror or proxy) between an APT client and an archive server triggered by a package install can trick the client into installing an attacker-controlled unverified package and achieve remote code execution with root privileges.
 
 </blockquote>
 </details>
@@ -1256,6 +1252,50 @@ Or use `uint` for the repeat field and validate against `uint(len(dict))`.
 
 ## Credits
 Christopher Linke / https://github.com/celinke97/
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>apt</strong> <code>2.8.3</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/apt@2.8.3?arch=amd64&distro=ubuntu-24.04</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-109518?s=ubuntu&n=apt&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C2.8.4ubuntu0.1"><img alt="high : CVE--2026--109518" src="https://img.shields.io/badge/CVE--2026--109518-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.8.4ubuntu0.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.8.4ubuntu0.1</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+On Debian, Ubuntu, and derivative Linux distributions, an on-path attacker who can manipulate the HTTP traffic (including a malicious mirror or proxy) between an APT client and an archive server triggered by a package install can trick the client into installing an attacker-controlled unverified package and achieve remote code execution with root privileges.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libbrotli1</strong> <code>1.1.0-2build2</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/libbrotli1@1.1.0-2build2?arch=amd64&distro=ubuntu-24.04&upstream=brotli</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-111497?s=ubuntu&n=brotli&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1.1.0-2ubuntu0.1"><img alt="high 9.8: CVE--2026--111497" src="https://img.shields.io/badge/CVE--2026--111497-lightgrey?label=high%209.8&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.1.0-2ubuntu0.1</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.1.0-2ubuntu0.1</code></td></tr>
+<tr><td>CVSS Score</td><td><code>9.8</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>82.641%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>100th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A buffer overflow vulnerability in the Brotli decoder (c/dec/decode.c) in Google Brotli versions 1.0.3 through 1.2.0 on all platforms allows a remote unauthenticated attacker to corrupt adjacent decoder state memory, disclose sensitive memory contents, cause a denial of service, or potentially execute arbitrary code using a crafted Brotli-compressed stream.      Users need to update any Brotli libraries or binaries between 1.0.3 through 1.2.0 to the latest available version: 1.0.10 or 1.1.1 or 1.2.1.
 
 </blockquote>
 </details>
@@ -1411,7 +1451,7 @@ PCRE2 before 10.49, when there is an attacker-controlled regular expression and 
 <details><summary>Description</summary>
 <blockquote>
 
-Improper certificate validation in gnutls v3.8.13 causes the application to accept certificates containing invalid extensions.
+GnuTLS v3.8.13 does not reject a critical keyUsage extension when it cannot be processed, such as when extnValue is an ASN.1 NULL (05 00) instead of a BIT STRING. NOTE: the Supplier does not consider this an actionable security vulnerability because of its "threat model doesn't consider attacks only possible by modifying anything within the trust boundary (private keys, trusted certificate authorities and their issued certificates including intermediate CAs, etc.)" policy.
 
 </blockquote>
 </details>
@@ -1428,7 +1468,7 @@ Improper certificate validation in gnutls v3.8.13 causes the application to acce
 <details><summary>Description</summary>
 <blockquote>
 
-An issue in gnutls v3.8.13 causes legitimate CA certificates to be rejected, leading to a Denial of Service (DoS).
+Rejected reason: ** REJECT ** DO NOT USE THIS CANDIDATE NUMBER. ConsultIDs: none. Reason: This candidate was withdrawn by its CNA. Further investigation showed that it was not a security issue. Notes: none.
 
 </blockquote>
 </details>
@@ -1445,7 +1485,7 @@ An issue in gnutls v3.8.13 causes legitimate CA certificates to be rejected, lea
 <details><summary>Description</summary>
 <blockquote>
 
-Improper certificate validation in gnutls v3.8.13 causes the application to reject legitimate certificates for valid users, leading to a Denial of Service (DoS).
+GnuTLS v3.8.13 does not properly enforce name constraints, as demonstrated by a permitted subtree violation for "EE O=Evil accepted although outside permitted O=Good." NOTE: the Supplier does not consider this an actionable security vulnerability because of its "threat model doesn't consider attacks only possible by modifying anything within the trust boundary (private keys, trusted certificate authorities and their issued certificates including intermediate CAs, etc.)" policy.
 
 </blockquote>
 </details>
@@ -1462,7 +1502,7 @@ Improper certificate validation in gnutls v3.8.13 causes the application to reje
 <details><summary>Description</summary>
 <blockquote>
 
-Incomplete X.509 implementation in GnuTLS v3.8.13 allows attackers controlling a subordinate Certificate Authority to bypass cross-domain PKI restrictions and issue unauthorized certificates.
+In GnuTLS v3.8.13, an excluded msUPN/SRV otherName is never checked. NOTE: the Supplier does not consider this an actionable security vulnerability because of its "threat model doesn't consider attacks only possible by modifying anything within the trust boundary (private keys, trusted certificate authorities and their issued certificates including intermediate CAs, etc.)" policy.
 
 </blockquote>
 </details>
@@ -1479,7 +1519,7 @@ Incomplete X.509 implementation in GnuTLS v3.8.13 allows attackers controlling a
 <details><summary>Description</summary>
 <blockquote>
 
-A hostname verification bypass in GnuTLS v3.8.13 allows attackers to circumvent the Common Name fallback mechanism and eavesdrop on communications via a crafted certificate.
+GnuTLS v3.8.13 can perhaps unexpectedly trust a certificate on the basis of Common Name when Subject Alternative Name has an SRV otherName (1.3.6.1.5.5.7.8.7) whose value is an OCTET STRING. NOTE: the Supplier does not consider this an actionable security vulnerability because of its "threat model doesn't consider attacks only possible by modifying anything within the trust boundary (private keys, trusted certificate authorities and their issued certificates including intermediate CAs, etc.)" policy.
 
 </blockquote>
 </details>
@@ -1496,7 +1536,7 @@ A hostname verification bypass in GnuTLS v3.8.13 allows attackers to circumvent 
 <details><summary>Description</summary>
 <blockquote>
 
-An issue in gnutls v.3.8.13 allows an attacker to obtain sensitive information via failing to reject end-entity X.509 certificates that contain a contradictory combination of Key Usage (KU) and Extended Key Usage (EKU)
+GnuTLS v3.8.13 does not reject end-entity X.509 certificates that contain a contradictory combination of Key Usage (KU) and Extended Key Usage (EKU). NOTE: the Supplier does not consider this an actionable security vulnerability because of its "threat model doesn't consider attacks only possible by modifying anything within the trust boundary (private keys, trusted certificate authorities and their issued certificates including intermediate CAs, etc.)" policy.
 
 </blockquote>
 </details>
@@ -1695,9 +1735,9 @@ jq is a command-line JSON processor. In 1.8.1 and earlier, Top-level jq programs
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libc-bin</strong> <code>2.39-0ubuntu8.9</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libc6</strong> <code>2.39-0ubuntu8.9</code> (deb)</summary>
 
-<small><code>pkg:deb/ubuntu/libc-bin@2.39-0ubuntu8.9?arch=amd64&distro=ubuntu-24.04&upstream=glibc</code></small><br/>
+<small><code>pkg:deb/ubuntu/libc6@2.39-0ubuntu8.9?arch=amd64&distro=ubuntu-24.04&upstream=glibc</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2026-89092?s=ubuntu&n=glibc&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2026--89092" src="https://img.shields.io/badge/CVE--2026--89092-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
@@ -1773,6 +1813,45 @@ A TOCTOU (Time-of-Check Time-of-Use) vulnerability in GNU tar's incremental dump
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libc-bin</strong> <code>2.39-0ubuntu8.9</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/libc-bin@2.39-0ubuntu8.9?arch=amd64&distro=ubuntu-24.04&upstream=glibc</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-89092?s=ubuntu&n=glibc&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2026--89092" src="https://img.shields.io/badge/CVE--2026--89092-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.240%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The nscd service in the GNU C Library 2.3.4 onwards may crash due to a stack overflow when a malicious DNS server returns too large a response for a DNS query, resulting in degraded DNS resolution for the system.    Exploitation of this bug needs a system that has nscd enabled and using an untrusted DNS server for name resolution, with the compromised DNS server being capable of processing records large enough to result in a stack overflow in an nscd thread stack.  During experimentation, bind 9 was unable to handle large records, but that could change in future or with a different name server.  In typical installations, nscd is executed in an isolated context as its own user without a shell, due to which any compromise of that service is isolated.    There is a remote possibility of nscd cache corruption if an attacker manages to get the stack pointer into a desired point in the heap, potentially resulting in other caches in nscd being overwritten with corrupt data through the stack overflow, until the buggy code path eventually results in a crash.    Finally, a crash in nscd may result in performance degradation when resolving names, but it does not result in a denial of service.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-18374?s=ubuntu&n=glibc&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2026--18374" src="https://img.shields.io/badge/CVE--2026--18374-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.144%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Passing an effectively empty string to the `,ccs=` syntax extension of the mode argument in the `fopen` function in the GNU C Library version 2.45 or earlier may result in a heap buffer overflow when the mode string input to the function is attacker controlled.    This usage pattern is not seen in applications in common GNU/Linux distributions and applications that process user-supplied values for `ccs` should not pass them through without validation.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>dash</strong> <code>0.5.12-6ubuntu5</code> (deb)</summary>
 
 <small><code>pkg:deb/ubuntu/dash@0.5.12-6ubuntu5?arch=amd64&distro=ubuntu-24.04</code></small><br/>
@@ -1812,48 +1891,79 @@ A flaw was found in dash. When built without libc fnmatch, the internal pmatch()
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libc6</strong> <code>2.39-0ubuntu8.9</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>zlib1g</strong> <code>1:1.3.dfsg-3.1ubuntu2.2</code> (deb)</summary>
 
-<small><code>pkg:deb/ubuntu/libc6@2.39-0ubuntu8.9?arch=amd64&distro=ubuntu-24.04&upstream=glibc</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-89092?s=ubuntu&n=glibc&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2026--89092" src="https://img.shields.io/badge/CVE--2026--89092-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+<small><code>pkg:deb/ubuntu/zlib1g@1%3A1.3.dfsg-3.1ubuntu2.2?arch=amd64&distro=ubuntu-24.04&upstream=zlib</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-85091?s=ubuntu&n=zlib&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1%3A1.3.dfsg-3.1ubuntu2.3"><img alt="medium : CVE--2026--85091" src="https://img.shields.io/badge/CVE--2026--85091-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.240%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>15th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1:1.3.dfsg-3.1ubuntu2.3</code></td></tr>
+<tr><td>Fixed version</td><td><code>1:1.3.dfsg-3.1ubuntu2.3</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.469%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-The nscd service in the GNU C Library 2.3.4 onwards may crash due to a stack overflow when a malicious DNS server returns too large a response for a DNS query, resulting in degraded DNS resolution for the system.    Exploitation of this bug needs a system that has nscd enabled and using an untrusted DNS server for name resolution, with the compromised DNS server being capable of processing records large enough to result in a stack overflow in an nscd thread stack.  During experimentation, bind 9 was unable to handle large records, but that could change in future or with a different name server.  In typical installations, nscd is executed in an isolated context as its own user without a shell, due to which any compromise of that service is isolated.    There is a remote possibility of nscd cache corruption if an attacker manages to get the stack pointer into a desired point in the heap, potentially resulting in other caches in nscd being overwritten with corrupt data through the stack overflow, until the buggy code path eventually results in a crash.    Finally, a crash in nscd may result in performance degradation when resolving names, but it does not result in a denial of service.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-18374?s=ubuntu&n=glibc&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2026--18374" src="https://img.shields.io/badge/CVE--2026--18374-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.144%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Passing an effectively empty string to the `,ccs=` syntax extension of the mode argument in the `fopen` function in the GNU C Library version 2.45 or earlier may result in a heap buffer overflow when the mode string input to the function is attacker controlled.    This usage pattern is not seen in applications in common GNU/Linux distributions and applications that process user-supplied values for `ccs` should not pass them through without validation.
+zlib versions 1.3.1.2 through 1.3.2 contain a heap buffer overflow vulnerability in the gz_vacate() function when processing non-blocking gzwrite() operations with stale external buffer pointers. Attackers can trigger the overflow by calling gzprintf() or gzvprintf() after a write stall, causing an unchecked memmove() to write beyond the internal input buffer boundary.
 
 </blockquote>
 </details>
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libsasl2-modules</strong> <code>2.1.28+dfsg1-5ubuntu3.1</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.mongodb.org/mongo-driver</strong> <code>1.17.3</code> (golang)</summary>
 
-<small><code>pkg:deb/ubuntu/libsasl2-modules@2.1.28%2Bdfsg1-5ubuntu3.1?arch=amd64&distro=ubuntu-24.04&upstream=cyrus-sasl2</code></small><br/>
+<small><code>pkg:golang/go.mongodb.org/mongo-driver@1.17.3</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-2303?s=github&n=mongo-driver&ns=go.mongodb.org&t=golang&vr=%3C1.17.7"><img alt="medium 6.9: CVE--2026--2303" src="https://img.shields.io/badge/CVE--2026--2303-lightgrey?label=medium%206.9&labelColor=fbb552"/></a> <i>Permissive List of Allowed Inputs</i>
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.17.7</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.17.7</code></td></tr>
+<tr><td>CVSS Score</td><td><code>6.9</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:P/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.318%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+The mongo-go-driver repository contains CGo bindings for GSSAPI (Kerberos) authentication on Linux and macOS. The C wrapper implementation contains a heap out-of-bounds read vulnerability due to incorrect assumptions about string termination in the GSSAPI standard. Since GSSAPI buffers are not guaranteed to be null-terminated or have extra padding, this results in reading one byte past the allocated heap buffer.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libexpat1</strong> <code>2.6.1-2ubuntu0.6</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/libexpat1@2.6.1-2ubuntu0.6?arch=amd64&distro=ubuntu-24.04&upstream=expat</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2025-66382?s=ubuntu&n=expat&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium 5.5: CVE--2025--66382" src="https://img.shields.io/badge/CVE--2025--66382-lightgrey?label=medium%205.5&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>CVSS Score</td><td><code>5.5</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.217%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+In libexpat through 2.7.3, a crafted file with an approximate size of 2 MiB can lead to dozens of seconds of processing time.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libsasl2-modules-db</strong> <code>2.1.28+dfsg1-5ubuntu3.1</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/libsasl2-modules-db@2.1.28%2Bdfsg1-5ubuntu3.1?arch=amd64&distro=ubuntu-24.04&upstream=cyrus-sasl2</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2026-107161?s=ubuntu&n=cyrus-sasl2&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2026--107161" src="https://img.shields.io/badge/CVE--2026--107161-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
@@ -1895,55 +2005,33 @@ It was discovered that dpkg-deb (a component of dpkg, the Debian package managem
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.mongodb.org/mongo-driver</strong> <code>1.17.3</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>stdlib</strong> <code>1.26.9</code> (golang)</summary>
 
-<small><code>pkg:golang/go.mongodb.org/mongo-driver@1.17.3</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-2303?s=github&n=mongo-driver&ns=go.mongodb.org&t=golang&vr=%3C1.17.7"><img alt="medium 6.9: CVE--2026--2303" src="https://img.shields.io/badge/CVE--2026--2303-lightgrey?label=medium%206.9&labelColor=fbb552"/></a> <i>Permissive List of Allowed Inputs</i>
+<small><code>pkg:golang/stdlib@1.26.9</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-111943?s=golang&n=stdlib&t=golang&vr=%3C1.26.10"><img alt="medium : CVE--2026--111943" src="https://img.shields.io/badge/CVE--2026--111943-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;1.17.7</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.17.7</code></td></tr>
-<tr><td>CVSS Score</td><td><code>6.9</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:P/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.318%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;1.26.10</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.26.10</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.396%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-The mongo-go-driver repository contains CGo bindings for GSSAPI (Kerberos) authentication on Linux and macOS. The C wrapper implementation contains a heap out-of-bounds read vulnerability due to incorrect assumptions about string termination in the GSSAPI standard. Since GSSAPI buffers are not guaranteed to be null-terminated or have extra padding, this results in reading one byte past the allocated heap buffer.
+On most platforms, Go uses the given system root certificates. However, in some narrower cases, the system trust stores may not be updated without further action.
+
+To defend against the narrower set of cases that may remain affected, a denylist was added in crypto/x509 to return an error when calling Verify with any of the known intermediate certificates that are no longer considered to be trustworthy.
 
 </blockquote>
 </details>
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>zlib1g</strong> <code>1:1.3.dfsg-3.1ubuntu2.2</code> (deb)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libsasl2-modules</strong> <code>2.1.28+dfsg1-5ubuntu3.1</code> (deb)</summary>
 
-<small><code>pkg:deb/ubuntu/zlib1g@1%3A1.3.dfsg-3.1ubuntu2.2?arch=amd64&distro=ubuntu-24.04&upstream=zlib</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-85091?s=ubuntu&n=zlib&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C1%3A1.3.dfsg-3.1ubuntu2.3"><img alt="medium : CVE--2026--85091" src="https://img.shields.io/badge/CVE--2026--85091-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1:1.3.dfsg-3.1ubuntu2.3</code></td></tr>
-<tr><td>Fixed version</td><td><code>1:1.3.dfsg-3.1ubuntu2.3</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.469%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-zlib versions 1.3.1.2 through 1.3.2 contain a heap buffer overflow vulnerability in the gz_vacate() function when processing non-blocking gzwrite() operations with stale external buffer pointers. Attackers can trigger the overflow by calling gzprintf() or gzvprintf() after a write stall, causing an unchecked memmove() to write beyond the internal input buffer boundary.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libsasl2-modules-db</strong> <code>2.1.28+dfsg1-5ubuntu3.1</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/libsasl2-modules-db@2.1.28%2Bdfsg1-5ubuntu3.1?arch=amd64&distro=ubuntu-24.04&upstream=cyrus-sasl2</code></small><br/>
+<small><code>pkg:deb/ubuntu/libsasl2-modules@2.1.28%2Bdfsg1-5ubuntu3.1?arch=amd64&distro=ubuntu-24.04&upstream=cyrus-sasl2</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2026-107161?s=ubuntu&n=cyrus-sasl2&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium : CVE--2026--107161" src="https://img.shields.io/badge/CVE--2026--107161-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
@@ -1979,212 +2067,6 @@ A heap-based buffer overflow flaw was found in Cyrus SASL. The add_to_challenge(
 <blockquote>
 
 A heap-based buffer overflow flaw was found in Cyrus SASL. The add_to_challenge() function in the DIGEST-MD5 plugin computes the size of the buffer needed for a challenge/response field before DIGEST-MD5 quoting is applied, but does not recompute that size when quoting (escaping special characters) makes the value longer. The under-sized buffer is then passed to strcat(), causing a heap-based out-of-bounds write whose size depends on attacker-controlled input. A malicious or on-path DIGEST-MD5 (or HTTP Digest) server can trigger this flaw in a connecting client by supplying a crafted challenge field, such as realm or nonce, most likely resulting in a crash of the client application.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libexpat1</strong> <code>2.6.1-2ubuntu0.6</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/libexpat1@2.6.1-2ubuntu0.6?arch=amd64&distro=ubuntu-24.04&upstream=expat</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2025-66382?s=ubuntu&n=expat&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="medium 5.5: CVE--2025--66382" src="https://img.shields.io/badge/CVE--2025--66382-lightgrey?label=medium%205.5&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>CVSS Score</td><td><code>5.5</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.217%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-In libexpat through 2.7.3, a crafted file with an approximate size of 2 MiB can lead to dozens of seconds of processing time.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>stdlib</strong> <code>1.26.9</code> (golang)</summary>
-
-<small><code>pkg:golang/stdlib@1.26.9</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-111943?s=golang&n=stdlib&t=golang&vr=%3C1.26.10"><img alt="medium : CVE--2026--111943" src="https://img.shields.io/badge/CVE--2026--111943-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.26.10</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.26.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.396%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-On most platforms, Go uses the given system root certificates. However, in some narrower cases, the system trust stores may not be updated without further action.
-
-To defend against the narrower set of cases that may remain affected, a denylist was added in crypto/x509 to return an error when calling Verify with any of the known intermediate certificates that are no longer considered to be trustworthy.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 9" src="https://img.shields.io/badge/L-9-fce1a9"/> <!-- unspecified: 0 --><strong>curl</strong> <code>8.5.0-2ubuntu10.15</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/curl@8.5.0-2ubuntu10.15?arch=amd64&distro=ubuntu-24.04</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-94266?s=ubuntu&n=curl&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C8.5.0-2ubuntu10.16"><img alt="low : CVE--2026--94266" src="https://img.shields.io/badge/CVE--2026--94266-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.16</code></td></tr>
-<tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.16</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.556%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-libcurl could accidentally return a URL for `curl_easy_getinfo()`'s `CURLINFO_EFFECTIVE_URL` option containing credentials, even though neither the URL provided to libcurl nor the redirected URL did.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-92391?s=ubuntu&n=curl&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C8.5.0-2ubuntu10.16"><img alt="low : CVE--2026--92391" src="https://img.shields.io/badge/CVE--2026--92391-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.16</code></td></tr>
-<tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.16</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.166%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>67th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-A deeply nested multipart MIME structure constructed via the public API causes a stack overflow in libcurl during normal cleanup operations. An excessive recursion depth within `curl_mime_free` leads to unbounded stack frame allocation during structure traversal, ultimately crashing the host process.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-92389?s=ubuntu&n=curl&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C8.5.0-2ubuntu10.16"><img alt="low : CVE--2026--92389" src="https://img.shields.io/badge/CVE--2026--92389-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.16</code></td></tr>
-<tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.16</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.721%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-libcurl's TFTP state machine fails to validate state transitions against the requested transfer direction, accepting opening server responses for both reads and writes interchangeably. A malicious TFTP server can respond to a download request in a way that forces the client into transmit mode, prompting libcurl to consume and transmit data from the handle's persistent `CURLOPT_READDATA` pointer - including data remaining from unrelated prior operations, such as an HTTP POST request executed on a reused handle.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-92388?s=ubuntu&n=curl&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C8.5.0-2ubuntu10.16"><img alt="low : CVE--2026--92388" src="https://img.shields.io/badge/CVE--2026--92388-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.16</code></td></tr>
-<tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.16</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.699%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>53rd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-When an FTP wildcard `LIST` operation fails, libcurl omits the restoration path meant for successful listings, leaving the write callback set to the internal listing parser and the write callback data pointing directly to the easy handle. Subsequent reuse of this handle triggers an immediate crash, and cloning it via `curl_easy_duphandle()` copies this corrupted state into the duplicate. If the original handle is subsequently freed, executing a transfer on the cloned handle causes a heap use-after-free read against the dangling handle reference; alternatively, reusing the original or cloned handle while changing only  `CURLOPT_WRITEDATA` (and omitting `CURLOPT_WRITEFUNCTION`) results in type confusion, forcing the internal parser to interpret incoming server response bytes into memory at the application-supplied write data pointer.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-87864?s=ubuntu&n=curl&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C8.5.0-2ubuntu10.16"><img alt="low : CVE--2026--87864" src="https://img.shields.io/badge/CVE--2026--87864-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.16</code></td></tr>
-<tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.16</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.828%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>58th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Enabling `CURLOPT_CRLF` causes curl to advertise the raw input byte count in the `IMAP APPEND {N}` literal while transmitting line-ending expanded data. The server reads only $N$ bytes for the payload, causing the remaining overflow bytes to be interpreted and executed as pipelined IMAP commands within the authenticated session.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-87863?s=ubuntu&n=curl&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C8.5.0-2ubuntu10.16"><img alt="low : CVE--2026--87863" src="https://img.shields.io/badge/CVE--2026--87863-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.16</code></td></tr>
-<tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.16</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.828%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>58th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-An authenticated HTTPS origin can supply an HSTS `max-age` value that the parser accepts, but time serialization later fails to process. On 64-bit systems, extreme max-age values compute an absolute expiry within standard time integer limits that exceeds calendar time structure bounds. During cache saves, the original HSTS file is truncated before writing a temporary replacement; when serialization fails, the temporary file is deleted, leaving an empty or partial cache. Because the save error is silently ignored during cleanup, curl exits successfully despite the data loss.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-87862?s=ubuntu&n=curl&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C8.5.0-2ubuntu10.16"><img alt="low : CVE--2026--87862" src="https://img.shields.io/badge/CVE--2026--87862-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.16</code></td></tr>
-<tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.16</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.995%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>63rd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Importing a `includeSubDomains` parent HSTS entry before a longer-lived child entry, silently drops the child. Consequently, when the parent expires, the child's valid HSTS policy is lost, causing curl to issue unencrypted HTTP requests rather than upgrading to HTTPS.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-86414?s=ubuntu&n=curl&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C8.5.0-2ubuntu10.16"><img alt="low : CVE--2026--86414" src="https://img.shields.io/badge/CVE--2026--86414-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.16</code></td></tr>
-<tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.16</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.676%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-An HTTP proxy can trick libcurl into sending the origin's credentials (Basic password, or a Negotiate/Kerberos ticket) to the proxy itself, by answering the `CONNECT` tunnel request with 401 `WWW-Authenticate:` instead of the expected 407 `Proxy-Authenticate:`.
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-86409?s=ubuntu&n=curl&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C8.5.0-2ubuntu10.16"><img alt="low : CVE--2026--86409" src="https://img.shields.io/badge/CVE--2026--86409-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.16</code></td></tr>
-<tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.16</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.096%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>66th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Setting `CURLOPT_AWS_SIGV4` to NULL but does not disable SigV4 authentication, contrary to expectations and documentation. A subsequent transfer on the same handle still sends an `Authorization: AWS4-HMAC-SHA256` header to whatever URL isset next, leaking state information.
 
 </blockquote>
 </details>
@@ -2349,6 +2231,188 @@ Setting `CURLOPT_AWS_SIGV4` to NULL but does not disable SigV4 authentication, c
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 9" src="https://img.shields.io/badge/L-9-fce1a9"/> <!-- unspecified: 0 --><strong>curl</strong> <code>8.5.0-2ubuntu10.15</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/curl@8.5.0-2ubuntu10.15?arch=amd64&distro=ubuntu-24.04</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-94266?s=ubuntu&n=curl&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C8.5.0-2ubuntu10.16"><img alt="low : CVE--2026--94266" src="https://img.shields.io/badge/CVE--2026--94266-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.16</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.16</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.556%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+libcurl could accidentally return a URL for `curl_easy_getinfo()`'s `CURLINFO_EFFECTIVE_URL` option containing credentials, even though neither the URL provided to libcurl nor the redirected URL did.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-92391?s=ubuntu&n=curl&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C8.5.0-2ubuntu10.16"><img alt="low : CVE--2026--92391" src="https://img.shields.io/badge/CVE--2026--92391-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.16</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.16</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.166%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>67th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+A deeply nested multipart MIME structure constructed via the public API causes a stack overflow in libcurl during normal cleanup operations. An excessive recursion depth within `curl_mime_free` leads to unbounded stack frame allocation during structure traversal, ultimately crashing the host process.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-92389?s=ubuntu&n=curl&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C8.5.0-2ubuntu10.16"><img alt="low : CVE--2026--92389" src="https://img.shields.io/badge/CVE--2026--92389-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.16</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.16</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.721%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+libcurl's TFTP state machine fails to validate state transitions against the requested transfer direction, accepting opening server responses for both reads and writes interchangeably. A malicious TFTP server can respond to a download request in a way that forces the client into transmit mode, prompting libcurl to consume and transmit data from the handle's persistent `CURLOPT_READDATA` pointer - including data remaining from unrelated prior operations, such as an HTTP POST request executed on a reused handle.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-92388?s=ubuntu&n=curl&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C8.5.0-2ubuntu10.16"><img alt="low : CVE--2026--92388" src="https://img.shields.io/badge/CVE--2026--92388-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.16</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.16</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.699%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>53rd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+When an FTP wildcard `LIST` operation fails, libcurl omits the restoration path meant for successful listings, leaving the write callback set to the internal listing parser and the write callback data pointing directly to the easy handle. Subsequent reuse of this handle triggers an immediate crash, and cloning it via `curl_easy_duphandle()` copies this corrupted state into the duplicate. If the original handle is subsequently freed, executing a transfer on the cloned handle causes a heap use-after-free read against the dangling handle reference; alternatively, reusing the original or cloned handle while changing only  `CURLOPT_WRITEDATA` (and omitting `CURLOPT_WRITEFUNCTION`) results in type confusion, forcing the internal parser to interpret incoming server response bytes into memory at the application-supplied write data pointer.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-87864?s=ubuntu&n=curl&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C8.5.0-2ubuntu10.16"><img alt="low : CVE--2026--87864" src="https://img.shields.io/badge/CVE--2026--87864-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.16</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.16</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.828%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>58th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Enabling `CURLOPT_CRLF` causes curl to advertise the raw input byte count in the `IMAP APPEND {N}` literal while transmitting line-ending expanded data. The server reads only $N$ bytes for the payload, causing the remaining overflow bytes to be interpreted and executed as pipelined IMAP commands within the authenticated session.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-87863?s=ubuntu&n=curl&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C8.5.0-2ubuntu10.16"><img alt="low : CVE--2026--87863" src="https://img.shields.io/badge/CVE--2026--87863-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.16</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.16</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.828%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>58th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+An authenticated HTTPS origin can supply an HSTS `max-age` value that the parser accepts, but time serialization later fails to process. On 64-bit systems, extreme max-age values compute an absolute expiry within standard time integer limits that exceeds calendar time structure bounds. During cache saves, the original HSTS file is truncated before writing a temporary replacement; when serialization fails, the temporary file is deleted, leaving an empty or partial cache. Because the save error is silently ignored during cleanup, curl exits successfully despite the data loss.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-87862?s=ubuntu&n=curl&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C8.5.0-2ubuntu10.16"><img alt="low : CVE--2026--87862" src="https://img.shields.io/badge/CVE--2026--87862-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.16</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.16</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.995%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>63rd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Importing a `includeSubDomains` parent HSTS entry before a longer-lived child entry, silently drops the child. Consequently, when the parent expires, the child's valid HSTS policy is lost, causing curl to issue unencrypted HTTP requests rather than upgrading to HTTPS.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-86414?s=ubuntu&n=curl&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C8.5.0-2ubuntu10.16"><img alt="low : CVE--2026--86414" src="https://img.shields.io/badge/CVE--2026--86414-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.16</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.16</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.676%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+An HTTP proxy can trick libcurl into sending the origin's credentials (Basic password, or a Negotiate/Kerberos ticket) to the proxy itself, by answering the `CONNECT` tunnel request with 401 `WWW-Authenticate:` instead of the expected 407 `Proxy-Authenticate:`.
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-86409?s=ubuntu&n=curl&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3C8.5.0-2ubuntu10.16"><img alt="low : CVE--2026--86409" src="https://img.shields.io/badge/CVE--2026--86409-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;8.5.0-2ubuntu10.16</code></td></tr>
+<tr><td>Fixed version</td><td><code>8.5.0-2ubuntu10.16</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.096%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>66th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Setting `CURLOPT_AWS_SIGV4` to NULL but does not disable SigV4 authentication, contrary to expectations and documentation. A subsequent transfer on the same handle still sends an `Authorization: AWS4-HMAC-SHA256` header to whatever URL isset next, leaking state information.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>libsystemd0</strong> <code>255.4-1ubuntu8.17</code> (deb)</summary>
+
+<small><code>pkg:deb/ubuntu/libsystemd0@255.4-1ubuntu8.17?arch=amd64&distro=ubuntu-24.04&upstream=systemd</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-40228?s=ubuntu&n=systemd&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="low 3.3: CVE--2026--40228" src="https://img.shields.io/badge/CVE--2026--40228-lightgrey?label=low%203.3&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>CVSS Score</td><td><code>3.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.173%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+In systemd 259, systemd-journald can send ANSI escape sequences to the terminals of arbitrary users when a "logger -p emerg" command is executed, if ForwardToWall=yes is set.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>libudev1</strong> <code>255.4-1ubuntu8.17</code> (deb)</summary>
 
 <small><code>pkg:deb/ubuntu/libudev1@255.4-1ubuntu8.17?arch=amd64&distro=ubuntu-24.04&upstream=systemd</code></small><br/>
@@ -2395,28 +2459,6 @@ shadow-utils (aka shadow) 4.4 through 4.17.0 establishes a default /etc/subuid b
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.40.0</code> (golang)</summary>
-
-<small><code>pkg:golang/golang.org/x/sys@0.40.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.114%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.33.0</code> (golang)</summary>
 
 <small><code>pkg:golang/golang.org/x/sys@0.33.0</code></small><br/>
@@ -2439,30 +2481,6 @@ NewNTUnicodeString does not check for string length overflow. When provided with
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>libsystemd0</strong> <code>255.4-1ubuntu8.17</code> (deb)</summary>
-
-<small><code>pkg:deb/ubuntu/libsystemd0@255.4-1ubuntu8.17?arch=amd64&distro=ubuntu-24.04&upstream=systemd</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-40228?s=ubuntu&n=systemd&ns=ubuntu&t=deb&osn=ubuntu&osv=24.04&vr=%3E%3D0"><img alt="low 3.3: CVE--2026--40228" src="https://img.shields.io/badge/CVE--2026--40228-lightgrey?label=low%203.3&labelColor=fce1a9"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>CVSS Score</td><td><code>3.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.173%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-In systemd 259, systemd-journald can send ANSI escape sequences to the terminals of arbitrary users when a "logger -p emerg" command is executed, if ForwardToWall=yes is set.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>passwd</strong> <code>1:4.13+dfsg1-4ubuntu3.2</code> (deb)</summary>
 
 <small><code>pkg:deb/ubuntu/passwd@1%3A4.13%2Bdfsg1-4ubuntu3.2?arch=amd64&distro=ubuntu-24.04&upstream=shadow</code></small><br/>
@@ -2479,6 +2497,28 @@ In systemd 259, systemd-journald can send ANSI escape sequences to the terminals
 <blockquote>
 
 shadow-utils (aka shadow) 4.4 through 4.17.0 establishes a default /etc/subuid behavior (e.g., uid 100000 through 165535 for the first user account) that can realistically conflict with the uids of users defined on locally administered networks, potentially leading to account takeover, e.g., by leveraging newuidmap for access to an NFS home directory (or same-host resources in the case of remote logins by these local network users). NOTE: it may also be argued that system administrators should not have assigned uids, within local networks, that are within the range that can occur in /etc/subuid.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>golang.org/x/sys</strong> <code>0.40.0</code> (golang)</summary>
+
+<small><code>pkg:golang/golang.org/x/sys@0.40.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-39824?s=golang&n=sys&ns=golang.org%2Fx&t=golang&vr=%3C0.44.0"><img alt="low : CVE--2026--39824" src="https://img.shields.io/badge/CVE--2026--39824-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;0.44.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>0.44.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.114%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>1st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+NewNTUnicodeString does not check for string length overflow. When provided with a string that overflows the maximum size of a NTUnicodeString (a 16-bit number of bytes), it returns a truncated string rather than an error.
 
 </blockquote>
 </details>
