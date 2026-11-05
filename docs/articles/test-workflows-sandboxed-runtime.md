@@ -171,6 +171,19 @@ The steps on this page assume every node in the cluster runs gVisor. If gVisor r
 
 To place them, give the gVisor nodes a label and a `NoSchedule` taint, and add a `scheduling` section to the gVisor RuntimeClass with a node selector for that label and a toleration for that taint. Kubernetes then adds both to every pod that uses the RuntimeClass, including pods whose runtime class the MutatingPolicy sets, so the sandbox policies stay as they are. Give any gVisor nodes you add later the same label and taint. [RuntimeClass scheduling](https://kubernetes.io/docs/concepts/containers/runtime-class/#scheduling) describes how Kubernetes combines these with a pod's own node selector and tolerations.
 
+For example, with nodes labelled and tainted `sandbox.example.com/runtime=gvisor`, the RuntimeClass's `scheduling` section looks like this:
+
+```yaml
+scheduling:
+  nodeSelector:
+    sandbox.example.com/runtime: gvisor
+  tolerations:
+    - key: sandbox.example.com/runtime
+      operator: Equal
+      value: gvisor
+      effect: NoSchedule
+```
+
 ### Other points to consider
 
 - **Network access.** gVisor does not restrict network access. A NetworkPolicy on the sandbox namespace can block destinations tests do not need, such as the cloud metadata endpoint at `169.254.169.254`, as long as the cluster's network plugin enforces NetworkPolicies. Keep connections to the applications under test and to the Testkube components described in [Testkube Architecture](/articles/architecture) open, and run `sandbox-check` after adding the policy.
