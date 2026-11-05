@@ -111,7 +111,7 @@ execution:
 
 Apply the change the way you apply other changes to the runner's values.
 
-Every Test Workflow this runner executes now runs in the sandbox namespace by default, under gVisor. A workflow can still name a different namespace with `job.namespace`; see [Considerations for production rollouts](#considerations-for-production-rollouts).
+Every Test Workflow this runner executes now runs in the sandbox namespace by default, under gVisor. A workflow can run in another namespace only if the runner allows it under `execution.additionalNamespaces`, and pods there run without gVisor unless that namespace has the same policies. See [Considerations for production rollouts](#considerations-for-production-rollouts).
 
 ## Verify the sandbox
 
@@ -169,11 +169,11 @@ Executions on this runner now run under gVisor, isolated from the node kernel. F
 
 The steps on this page assume every node in the cluster runs gVisor. If gVisor runs only on a dedicated set of nodes, sandbox pods must also be placed on those nodes. Otherwise a pod can land on a node without gVisor and never start, while its execution stays in running with no error.
 
-To place them, give the gVisor nodes a label and a `NoSchedule` taint, then extend the MutatingPolicy to add a matching node selector and toleration to every pod in the sandbox namespace. Write these additions as JSONPatch operations, because Kyverno rejects every pod in the namespace if they are written as ApplyConfiguration. Add to any node selector and tolerations a pod already has rather than replacing them, because workflows can set their own.
+To place them, give the gVisor nodes a label and a `NoSchedule` taint, and add a `scheduling` section to the gVisor RuntimeClass with a node selector for that label and a toleration for that taint. Kubernetes then adds both to every pod that uses the RuntimeClass, including pods whose runtime class the MutatingPolicy sets, so the sandbox policies stay as they are. Give any gVisor nodes you add later the same label and taint. [RuntimeClass scheduling](https://kubernetes.io/docs/concepts/containers/runtime-class/#scheduling) describes how Kubernetes combines these with a pod's own node selector and tolerations.
 
 ### Other points to consider
 
-- **Network access.** gVisor does not restrict network access. A NetworkPolicy on the sandbox namespace can block destinations tests do not need, such as the cloud metadata endpoint. Keep connections to the applications under test and to the Testkube components described in [Testkube Architecture](/articles/architecture) open, and run `sandbox-check` after adding one.
+- **Network access.** gVisor does not restrict network access. A NetworkPolicy on the sandbox namespace can block destinations tests do not need, such as the cloud metadata endpoint at `169.254.169.254`, as long as the cluster's network plugin enforces NetworkPolicies. Keep connections to the applications under test and to the Testkube components described in [Testkube Architecture](/articles/architecture) open, and run `sandbox-check` after adding the policy.
 - **Kubernetes API access.** Execution pods use a ServiceAccount that can manage pods, secrets and other objects in the sandbox namespace, which Testkube needs for services and parallel steps. For runners whose workflows use neither, [Disable access to Kubernetes from executions](/articles/multi-agent-runner-helm-chart#disable-access-to-kubernetes-from-executions) removes that access.
 - **Other runners and namespaces.** The sandbox covers execution pods this runner creates in the sandbox namespace. Workflows on other runners, workflows sent to a namespace listed under `execution.additionalNamespaces` without the same policies, and the runner pod itself run without gVisor. To sandbox only some workflows, give them a dedicated runner and target it, as described in [Runner Targeting](/articles/test-workflows-running#runner-agent-targeting).
 - **Compatibility.** gVisor does not implement every Linux system call, so some images, such as those that run a browser, may not run. The `baseline` label rejects images that need privileged mode, such as Docker-in-Docker. Run `sandbox-check` with an image before you rely on it.
@@ -190,7 +190,7 @@ To place them, give the gVisor nodes a label and a `NoSchedule` taint, then exte
 kubectl get events -n testkube-sandbox
 ```
 
-If the event is there, the node has no gVisor. Install gVisor on it, or place sandbox pods only on your gVisor nodes, as described under gVisor on selected nodes only.
+If the event is there, the node has no gVisor. Install gVisor on it. If gVisor runs only on selected nodes, check that those nodes carry the label and taint named in the gVisor RuntimeClass's `scheduling` section.
 
 **Pods are rejected although the policies look correct.** Check that Kyverno is running. With `failurePolicy: Fail`, Kubernetes rejects pods in the sandbox namespace while Kyverno is unavailable. If Kyverno is running, read the rejection message: a pod that requests a setting the `baseline` label forbids, such as a `hostPath` volume, is rejected by Pod Security, and the message names the setting.
 
