@@ -92,9 +92,9 @@ Apply the file:
 kubectl apply -f testkube-sandbox-policies.yaml
 ```
 
-### Settings in the sample that are required
+### Settings in the policies that are required
 
-Two settings in this sample are required:
+Two settings in the policies are required:
 
 - **Autogen off on both policies** (`autogen.podControllers.controllers: []`). Without it, Kyverno also checks the Jobs Testkube creates and rejects them, so no test pod ever starts.
 - **`failurePolicy: Fail`.** If Kyverno is unavailable, pods in the sandbox namespace are rejected rather than started without gVisor.
@@ -156,10 +156,10 @@ A passing run shows the following:
 
 ## What you've accomplished
 
-Executions on this runner now run under gVisor, isolated from the node kernel. From here:
+Executions on this runner now run under gVisor by default, isolated from the node kernel. From here:
 
 - **No per-workflow changes.** Every workflow this runner executes that sets no `job.namespace` runs in the sandbox, including workflows created later.
-- **New images.** Before you rely on the sandbox for a new image, run `sandbox-check` with that image.
+- **New images.** Before you rely on the sandbox for a new image, run a workflow that uses that image on this runner.
 - **New nodes.** Nodes you add to the cluster need gVisor too, so that sandbox pods can run on them.
 - **Where the setup stops.** The sandbox covers execution pods this runner creates in the sandbox namespace. [Considerations for production rollouts](#considerations-for-production-rollouts) covers other runners and namespaces, network access and Kubernetes API access.
 
@@ -189,7 +189,7 @@ scheduling:
 - **Network access.** gVisor does not restrict network access. A NetworkPolicy on the sandbox namespace can block destinations tests do not need, such as the cloud metadata endpoint at `169.254.169.254`, as long as the cluster's network plugin enforces NetworkPolicies. Keep connections to the applications under test and to the Testkube components described in [Testkube Architecture](/articles/architecture) open, and run `sandbox-check` after adding the policy.
 - **Kubernetes API access.** Execution pods use a ServiceAccount that can manage pods, secrets and other objects in the sandbox namespace, which Testkube needs for services and parallel steps. For runners whose workflows use neither, [Disable access to Kubernetes from executions](/articles/multi-agent-runner-helm-chart#disable-access-to-kubernetes-from-executions) removes that access.
 - **Other runners and namespaces.** The sandbox covers execution pods this runner creates in the sandbox namespace. Workflows on other runners, workflows sent to a namespace listed under `execution.additionalNamespaces` without the same policies, and the runner pod itself run without gVisor. To sandbox only some workflows, give them a dedicated runner and target it, as described in [Runner Targeting](/articles/test-workflows-running#runner-agent-targeting).
-- **Compatibility.** gVisor does not implement every Linux system call, so some images, such as those that run a browser, may not run. The `baseline` label rejects images that need privileged mode, such as Docker-in-Docker. Run `sandbox-check` with an image before you rely on it.
+- **Compatibility.** gVisor does not implement every Linux system call, so some images, such as those that run a browser, may not run. The `baseline` label rejects pods that request privileged mode, which Docker-in-Docker needs. Run a workflow that uses an image on this runner before you rely on it.
 - **Performance.** gVisor adds overhead to system calls and I/O. Expect slower runs for tests that make many system calls or read and write heavily, and set execution timeouts with that in mind.
 - **Kyverno availability.** With `failurePolicy: Fail`, no sandboxed execution can start while Kyverno is unavailable. Run Kyverno with more than one replica, so that losing one pod does not stop executions.
 - **Other runtimes and admission controllers.** Testkube's part of this setup does not depend on gVisor or Kyverno, so the same approach applies to other sandboxed runtimes such as Kata Containers, and to other admission controllers that can both change and reject pods. Adapt the policy and verification steps using that tool's documentation.
