@@ -590,6 +590,35 @@ The expressions language includes many functions that help manipulate and cast v
   </tbody>
 </table>
 
+### Credential Functions
+
+These are resolved inside the step's pod when the step runs, and their values are masked in the logs.
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Returns</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>credential</code></td>
+      <td>string</td>
+      <td>Returns the value of a <a href="/articles/credential-management">credential</a> stored in the Control Plane</td>
+      <td><code>credential("my-api-key")</code> might return <code>"s3cr3t"</code></td>
+    </tr>
+    <tr>
+      <td><code>identity_token</code></td>
+      <td>string</td>
+      <td>Returns a short-lived signed <a href="/articles/test-workflows-identity-tokens">identity token</a> (JWT) for the current execution, scoped to the audience passed in, to exchange for temporary cloud credentials. Requires the Control Plane</td>
+      <td><code>identity_token("sts.amazonaws.com")</code> might return <code>"eyJhbGciOiJSUzI1NiIs..."</code></td>
+    </tr>
+  </tbody>
+</table>
+
 ### File System Functions
 
 <table>
