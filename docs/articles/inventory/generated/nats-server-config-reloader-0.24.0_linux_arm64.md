@@ -83,7 +83,7 @@ The HTTP/2 server can refund connection-level flow control twice for the same da
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.676%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>53rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
