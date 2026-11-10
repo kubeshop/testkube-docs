@@ -135,7 +135,8 @@ Executions created while step 3 was running are not in PostgreSQL yet, and execu
 were still in progress when step 3 copied them hold an unfinished result there. Scale the
 agent down, then run the job once more. It copies the new executions and copies again every
 execution that has finished since, so each one carries its final status, steps and reports.
-This is the only part of the cutover that needs downtime, and it is short because the second
+Executions still running when you scale the agent down stay unfinished in PostgreSQL, and the
+agent picks them up again when it starts on PostgreSQL in step 5. This is the only part of the cutover that needs downtime, and it is short because the second
 pass resumes where the first stopped rather than starting over.
 
 ```sh
