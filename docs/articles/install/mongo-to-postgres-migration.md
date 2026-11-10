@@ -243,8 +243,8 @@ The tool is built to be run more than once.
 - **Interrupted runs resume.** Each batch commits its data and its progress in the same
   transaction, so a job that is killed mid-run continues from the last committed batch instead
   of starting over or writing anything twice. The job's `backoffLimit` exists for this reason.
-- **Finished runs are cheap to repeat.** A second run copies only what changed: executions
-  created since the last run, and executions that were unfinished when copied and have
+- **Finished runs are cheap to repeat.** A second run copies only two kinds of executions: those
+  created since the last run, and those that were unfinished when copied and have
   finished in MongoDB since. That is what makes the two-pass cutover above work. An execution
   still unfinished in MongoDB is left alone, so after a cutover that followed step 4, a run
   does not overwrite what the agent has written to PostgreSQL.
