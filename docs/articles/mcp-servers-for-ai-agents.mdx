@@ -72,11 +72,12 @@ private CA, configure private CA trust using the
 An MCP Server doesn't hold a key of its own. Each AI Agent that uses it chooses how it signs in, in the **Sign-in**
 field when the server is added to the AI Agent, or later in the AI Agent's MCP configuration:
 
-| Sign-in                  | How the AI Agent signs in                                                                                 | Runs with nobody present |
-| ------------------------ | --------------------------------------------------------------------------------------------------------- | ------------------------ |
-| **Shared key**           | With header values stored on the AI Agent, such as `Authorization: Bearer <token>`, or with a Credential. | Yes                      |
-| **Each person signs in** | Everyone who chats with the AI Agent signs in with their own account through OAuth.                       | No                       |
-| **None**                 | Without a credential, for servers that don't need one.                                                    | Yes                      |
+| Sign-in                           | How the AI Agent signs in                                                                                 | Runs with nobody present             |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| **Shared key**                    | With header values stored on the AI Agent, such as `Authorization: Bearer <token>`, or with a Credential. | Yes                                  |
+| **Each person signs in**          | Everyone who chats with the AI Agent signs in with their own account through OAuth.                       | No                                   |
+| **Through the identity provider** | Your own identity provider turns whoever is asking into a token for that server.                          | Yes, as the AI Agent's own principal |
+| **None**                          | Without a credential, for servers that don't need one.                                                    | Yes                                  |
 
 ### Shared key
 
@@ -104,6 +105,18 @@ Because these AI Agents need a person to sign in, AI Triggers and GitHub PR anal
 - Their AI Agent pickers don't offer them, and say why.
 - Switching an AI Agent to **Each person signs in** is refused while an AI Trigger uses it. Give the AI Agent a
   shared key for that server, or delete those AI Triggers first.
+
+### Through the identity provider
+
+Your own identity provider converts whoever is asking into a token for that MCP Server, so the server
+authorizes the person rather than the AI Agent. Nobody enrols and Testkube stores no key for it. A run
+with nobody present goes as the AI Agent's own principal at that provider.
+
+It suits your own services, which already validate your provider's tokens. Third-party SaaS stays on
+**Each person signs in**, because it trusts its own accounts rather than your provider.
+
+Setting it up takes an identity admin at your provider and an organization admin in Testkube. See
+[Reaching MCP Servers as the person asking](/articles/ai-identity-provider-sign-in).
 
 ### OAuth client
 
