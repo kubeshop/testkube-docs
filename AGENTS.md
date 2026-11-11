@@ -165,7 +165,7 @@ import LegacyWarning from "../_legacy-warning.mdx";
 
 - **A Markdown version of every page**, at the page's URL plus `.md` (`/articles/test-workflows.md`, and `/index.md` for the home page). `to-markdown.js` converts the page source: it inlines imported Markdown partials, turns tabs, admonitions and card lists into plain Markdown, drops other JSX and images, and makes links absolute. The Redoc pages under `/openapi/agent/` and `/openapi/cloud/` have none.
 - **`/llms.txt`**, which lists the pages of the `main` sidebar in sidebar order, each with a link to its Markdown version and the `description` from its frontmatter, under one section per top-level sidebar category and one per category directly inside it. The introduction at the top is `src/plugins/llms-txt/header.md`. The plugin's options in `docusaurus.config.js` leave the generated CLI, OpenAPI and CRD pages out and link to them from the closing "Optional" section.
-- **`/llms-full/<section>.txt`**, one file per section of `llms.txt` with the Markdown of every page in that section. Each section of `llms.txt` ends with a link to its file.
+- **`/llms-full/<section>.txt`**, one file per section of `llms.txt` with the Markdown of every page in that section. Each section of `llms.txt` ends with a link to its file, and `/llms-full.txt` is an index of them with page counts and sizes.
 
 `vercel.json` sends an `X-Robots-Tag: noindex` header for the `.md` files and `/llms-full/`, so that search engines do not index them as duplicates of the HTML pages.
 

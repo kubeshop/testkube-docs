@@ -189,6 +189,8 @@ module.exports = function llmsTxtPlugin(context, options) {
         [...markdown.keys()].map((permalink) => [pageUrl(permalink), permalink])
       );
       await fs.mkdir(path.join(outDir, "llms-full"), { recursive: true });
+      /** The section files, for the index in llms-full.txt. @type {string[]} */
+      const fullFiles = [];
 
       /**
        * Adds a section to llms.txt. The Markdown of its pages is also written
@@ -213,11 +215,18 @@ module.exports = function llmsTxtPlugin(context, options) {
             .replace(/[^a-z0-9]+/g, "-")
             .replace(/^-|-$/g, "");
           const file = `/llms-full/${slug}.txt`;
-          await fs.writeFile(
-            path.join(outDir, file),
-            `${[`# Testkube Documentation: ${title}`, ...pages].join(
-              "\n\n---\n\n"
-            )}\n`
+          const content = `${[
+            `# Testkube Documentation: ${title}`,
+            ...pages,
+          ].join("\n\n---\n\n")}\n`;
+          await fs.writeFile(path.join(outDir, file), content);
+          const count = `${pages.length} ${pages.length === 1 ? "page" : "pages"}`;
+          const size = Math.max(
+            1,
+            Math.round(Buffer.byteLength(content) / 1024)
+          );
+          fullFiles.push(
+            `- [${title}](${siteUrl}${file}): ${count}, ${size} KB`
           );
           list.push(
             `- [All "${title}" pages in one file](${siteUrl}${file}): The full Markdown of the ${pages.length} ${pages.length === 1 ? "page" : "pages"} listed in this section.`
@@ -308,6 +317,18 @@ module.exports = function llmsTxtPlugin(context, options) {
             ""
           )})`
       );
+      // llms-full.txt is the conventional URL for the whole documentation in
+      // one file. That would be about 2 MB here, so it is an index of the
+      // section files instead.
+      await fs.writeFile(
+        path.join(outDir, "llms-full.txt"),
+        `${[
+          "# Testkube Documentation: full text by section",
+          `> The full Markdown of the Testkube documentation, split into one file per section of [llms.txt](${siteUrl}/llms.txt). Read llms.txt first to find the section you need: it describes every page.`,
+          fullFiles.join("\n"),
+        ].join("\n\n")}\n`
+      );
+
       await fs.writeFile(
         path.join(outDir, "llms.txt"),
         `${[header.trim(), ...sections].join("\n\n")}\n`
