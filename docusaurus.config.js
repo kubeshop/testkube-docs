@@ -276,7 +276,15 @@ const config = {
         sidebar: "main",
         // Generated reference pages, linked from the "Optional" section instead
         excludePrefixes: ["/cli/", "/openapi/", "/articles/crds/"],
+        // Rendered by Redoc from the OpenAPI specs, which are linked below
+        markdownExcludePrefixes: ["/openapi/agent/", "/openapi/cloud/"],
         optional: [
+          {
+            title: "Full documentation in one file",
+            path: "/llms-full.txt",
+            description:
+              "The Markdown of every page listed above, without the CLI, OpenAPI and CRD references.",
+          },
           {
             title: "CLI Commands Reference",
             path: "/cli/testkube",
