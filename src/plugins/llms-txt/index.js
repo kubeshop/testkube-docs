@@ -13,6 +13,10 @@
  * content such as the CLI, OpenAPI and CRD pages) are left out, and `optional`
  * adds a closing "Optional" section that points at those references instead.
  *
+ * Every page is also written as Markdown, at its URL plus ".md", and llms.txt
+ * links to that version. Each section's pages are written to one file too,
+ * /llms-full/<section>.txt, linked at the end of the section.
+ *
  * The build warns about every listed page that has no `description`.
  */
 
@@ -151,8 +155,6 @@ module.exports = function llmsTxtPlugin(context, options) {
         await fs.mkdir(path.dirname(file), { recursive: true });
         await fs.writeFile(file, content);
       }
-      /** The pages listed in llms.txt, in order. @type {string[]} */
-      const listed = [];
       /** @type {string[]} */
       const undescribed = [];
 
@@ -164,7 +166,6 @@ module.exports = function llmsTxtPlugin(context, options) {
           return null;
         if (seen.has(doc.permalink)) return null;
         seen.add(doc.permalink);
-        if (markdown.has(doc.permalink)) listed.push(doc.permalink);
 
         const sourcePath = doc.source.replace(/^@site\//, "");
         const title =
@@ -183,11 +184,46 @@ module.exports = function llmsTxtPlugin(context, options) {
 
       /** @type {string[]} */
       const sections = [];
-      /** @param {string} title @param {string[]} lines */
-      const addSection = (title, lines) => {
-        if (lines.length) {
-          sections.push([`## ${title}`, "", ...lines].join("\n"));
+      /** @type {Map<string, string>} */
+      const permalinkByUrl = new Map(
+        [...markdown.keys()].map((permalink) => [pageUrl(permalink), permalink])
+      );
+      await fs.mkdir(path.join(outDir, "llms-full"), { recursive: true });
+
+      /**
+       * Adds a section to llms.txt. The Markdown of its pages is also written
+       * to one file, /llms-full/<section>.txt, which the section links to.
+       * @param {string} title
+       * @param {string[]} lines
+       * @param {boolean} [withFullFile]
+       */
+      const addSection = async (title, lines, withFullFile = true) => {
+        if (!lines.length) return;
+        const pages = lines.flatMap((line) => {
+          const url = line.match(/\]\((\S+?)\)/)?.[1] ?? "";
+          const permalink = permalinkByUrl.get(url);
+          const content = permalink && markdown.get(permalink);
+          return content ? [`Source: ${url}\n\n${content.trim()}`] : [];
+        });
+        const list = [...lines];
+        if (withFullFile && pages.length) {
+          const slug = title
+            .toLowerCase()
+            .replace(/&/g, "and")
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, "");
+          const file = `/llms-full/${slug}.txt`;
+          await fs.writeFile(
+            path.join(outDir, file),
+            `${[`# Testkube Documentation: ${title}`, ...pages].join(
+              "\n\n---\n\n"
+            )}\n`
+          );
+          list.push(
+            `- [All "${title}" pages in one file](${siteUrl}${file}): The full Markdown of the ${pages.length} ${pages.length === 1 ? "page" : "pages"} listed in this section.`
+          );
         }
+        sections.push([`## ${title}`, "", ...list].join("\n"));
       };
 
       /**
@@ -223,7 +259,7 @@ module.exports = function llmsTxtPlugin(context, options) {
       const topLevelPages = sidebar.filter(
         (/** @type {any} */ item) => item.type !== "category"
       );
-      addSection("Overview", await listPages(topLevelPages));
+      await addSection("Overview", await listPages(topLevelPages));
 
       for (const category of sidebar) {
         if (category.type !== "category") continue;
@@ -238,18 +274,19 @@ module.exports = function llmsTxtPlugin(context, options) {
             });
           }
         );
-        addSection(category.label, lines);
+        await addSection(category.label, lines);
         for (const subsection of subsections) {
-          addSection(subsection.title, subsection.lines);
+          await addSection(subsection.title, subsection.lines);
         }
       }
 
-      addSection(
+      await addSection(
         "Optional",
         optional.map(({ title, path: urlPath, description }) => {
           const link = `- [${title}](${pageUrl(urlPath)})`;
           return description ? `${link}: ${description}` : link;
-        })
+        }),
+        false
       );
 
       if (undescribed.length) {
@@ -267,16 +304,6 @@ module.exports = function llmsTxtPlugin(context, options) {
       await fs.writeFile(
         path.join(outDir, "llms.txt"),
         `${[header.trim(), ...sections].join("\n\n")}\n`
-      );
-
-      // llms-full.txt: the introduction and every listed page in one file.
-      const pages = listed.map((permalink) => {
-        const content = /** @type {string} */ (markdown.get(permalink));
-        return `Source: ${pageUrl(permalink)}\n\n${content.trim()}`;
-      });
-      await fs.writeFile(
-        path.join(outDir, "llms-full.txt"),
-        `${[header.trim(), ...pages].join("\n\n---\n\n")}\n`
       );
     },
   };

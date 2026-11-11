@@ -280,12 +280,6 @@ const config = {
         markdownExcludePrefixes: ["/openapi/agent/", "/openapi/cloud/"],
         optional: [
           {
-            title: "Full documentation in one file",
-            path: "/llms-full.txt",
-            description:
-              "The Markdown of every page listed above, without the CLI, OpenAPI and CRD references.",
-          },
-          {
             title: "CLI Commands Reference",
             path: "/cli/testkube",
             description: "Every `testkube` CLI command and its flags.",
