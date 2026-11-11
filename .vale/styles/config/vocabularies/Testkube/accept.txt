@@ -28,6 +28,7 @@ Prometheus
 Jaeger
 OpenTelemetry
 OTEL
+Entra
 Datadog
 [Ww]ebhook[s]?
 [Nn]amespace[s]?
