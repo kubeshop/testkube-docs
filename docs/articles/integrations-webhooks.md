@@ -1,3 +1,7 @@
+---
+description: Create and manage Webhooks in the Dashboard, setting the condition, target URI, custom payload and headers, Resource Group and YAML Definition, and injecting Credentials.
+---
+
 # Integrations Webhooks
 
 Webhooks are event-driven and invoke HTTP endpoints exposed by external systems, such as CI/CD tools, GitHub, Slack, or other services. You might

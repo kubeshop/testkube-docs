@@ -1,3 +1,7 @@
+---
+description: How Testkube extracts JUnit XML reports from artifacts and shows them in the execution Overview, Reports tab and Insights, with commands to produce reports from Playwright, Cypress, Pytest, Go and other tools.
+---
+
 # JUnit Processing and Visualization
 
 Testkube provides comprehensive support for processing and visualizing JUnit XML reports generated during Test Workflows.  

@@ -1,3 +1,7 @@
+---
+description: Save search and filter criteria as private or shared Custom Views in the Workflow Catalog and the Executions dashboard.
+---
+
 # Custom Views
 
 Custom Views allow you to save reusable sets of search criteria and filters such that you do not need to repeatedly

@@ -248,6 +248,34 @@ const config = {
         },
       },
     ],
+    [
+      require.resolve("./src/plugins/llms-txt"),
+      {
+        sidebar: "main",
+        // Generated reference pages, linked from the "Optional" section instead
+        excludePrefixes: ["/cli/", "/openapi/", "/articles/crds/"],
+        optional: [
+          {
+            title: "CLI Commands Reference",
+            path: "/cli/testkube",
+            description: "Every `testkube` CLI command and its flags.",
+          },
+          {
+            title: "OpenAPI Definitions",
+            path: "/openapi/overview",
+            description: "The Runner API and the Control Plane API.",
+          },
+          {
+            title: "Runner API OpenAPI specification",
+            path: "/openapi/testkube-agent-openapi.yaml",
+          },
+          {
+            title: "Control Plane API OpenAPI specification",
+            path: "/openapi/testkube-control-plane-openapi.yaml",
+          },
+        ],
+      },
+    ],
   ],
 };
 

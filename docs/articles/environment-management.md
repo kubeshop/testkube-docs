@@ -1,3 +1,7 @@
+---
+description: Create a Testkube Environment and manage its settings, including Runners and registration token rotation, Members and roles, keyword handling, queueing and concurrency limits, and the MCP Server.
+---
+
 # Environment Management
 
 ## What is an Environment?

@@ -1,3 +1,7 @@
+---
+description: List of the ways to trigger a Test Workflow, from the Dashboard, CI/CD, schedules, Kubernetes and Git events, Execution CRDs, the CLI, the REST API or another Workflow, with links to each.
+---
+
 # Triggering Test Workflows
 
 Workflows defined in Testkube can be triggered by a number of mechanisms:

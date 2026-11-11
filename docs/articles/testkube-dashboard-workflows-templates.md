@@ -1,3 +1,7 @@
+---
+description: View, edit and create Workflow Templates in the Dashboard, including template settings and the Git Content, Static Content, Testing Tool and Import from YAML options.
+---
+
 # Workflow Templates
 
 **Workflow Templates** are reusable configuration blocks for your Workflows that you can use to ensure your Workflows follow specific patterns or best practices, such as when using tools like Playwright and Selenium.

@@ -1,3 +1,7 @@
+---
+description: Configure a TestTrigger that polls an HTTP endpoint and runs a Test Workflow when a JSON field, response header or the body hash changes, with examples and field defaults.
+---
+
 # HTTP Event Triggers
 
 HTTP Event Triggers let you run Test Workflows when the response of an HTTP endpoint changes. They are useful when the thing you want to react to is exposed over HTTP rather than in a Git repository or a Kubernetes resource.

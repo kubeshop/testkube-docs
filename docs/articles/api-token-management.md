@@ -1,3 +1,7 @@
+---
+description: Create API Tokens for machine-to-machine access from CI pipelines and services, and choose between admin and member roles with Read, Run or Write permissions per Environment.
+---
+
 # API Token Management
 
 Sometimes you need machine-to-machine authorization to run tests in CI pipelines or call particular actions from your services.

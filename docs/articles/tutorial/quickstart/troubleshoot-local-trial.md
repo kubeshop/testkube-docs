@@ -1,3 +1,7 @@
+---
+description: Fixes for each failed step of the local trial installer, covering Docker, CPU and memory, network, the kind cluster, Testkube services and the license, plus how to start over.
+---
+
 # Troubleshoot the local trial
 
 When an install step fails, the installer shows a red row, such as `docker  not answering`, with the fix below it. This

@@ -1,3 +1,7 @@
+---
+description: Where Testkube fits in the software testing lifecycle (STLC), with the five steps of test execution it handles (define, trigger, scale, troubleshoot, analyze) and who is involved in each.
+---
+
 # Testkube in the STLC
 
 ## Overview of the STLC

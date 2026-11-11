@@ -22,7 +22,7 @@ When a binary is absent, skip its check and report in the pull request that it d
 | `npm run build`        | the Docusaurus build, which fails on broken in-repo links                              | it prints `[SUCCESS] Generated static files in "build".`                                                        |
 
 - `npm run build` raises Node's heap limit itself. It is the check that catches broken links and build errors, and it is not a pull request check, so always run it, as well as the type check, locally.
-- `lint:vale` compares your branch, including uncommitted edits, with `origin/main`, so fetch it first. It checks only pages under `docs/`, not contributor files such as this one. It prints warnings and fails only on errors. Existing pages carry many Vale alerts, which is why it checks added lines and not whole files.
+- `lint:vale` compares your branch, including uncommitted edits, with `origin/main`, so fetch it first. It checks only pages under `docs/`, not contributor files such as this one. It prints warnings and fails only on errors. It skips alerts inside backticks on a frontmatter line, because Vale does not treat those as code there. Existing pages carry many Vale alerts, which is why it checks added lines and not whole files.
 - `npm run format` is the fix, not the check: it rewrites every file Prettier would change, so run it only after `format:check` reports something.
 - `docs-prettier` (section 6) runs `npm run format:check` over the whole repository, not only the files you changed, and takes about one minute.
 - The `pre-commit` hook (`.husky/pre-commit`) runs `lint-staged`, which formats staged `js`, `jsx`, `ts`, `tsx`, `json`, `md`, `mdx`, `yml`, `yaml` and `css` files with Prettier.
@@ -65,6 +65,7 @@ When a binary is absent, skip its check and report in the pull request that it d
 | `src/themes/`                        | Custom Prism syntax highlighting themes (light, dark, mirage)                                                                                                                                                                         |
 | `src/css/custom.css`                 | Site-wide CSS                                                                                                                                                                                                                         |
 | `src/openapi/`                       | OpenAPI spec files and generated sidebar configs (generated)                                                                                                                                                                          |
+| `src/plugins/llms-txt/`              | The local plugin that writes `/llms.txt` at build time, and `header.md`, its hand-written introduction                                                                                                                                |
 | `src/scripts/`                       | Build scripts (`split-openapis.ts`)                                                                                                                                                                                                   |
 | `static/`                            | Static assets (images, OpenAPI files); `static/openapi/` is generated                                                                                                                                                                 |
 | `scripts/`                           | `image.sh` and its image lists (`agent_images.txt`, `cp_images.txt`), which the `update-image-inventory` workflow runs to regenerate `docs/articles/inventory/generated/`; `vale-changed-lines.mjs`, behind `npm run lint:vale`       |
@@ -99,7 +100,13 @@ Generated content is excluded from Prettier through `.prettierignore`, which lis
 ### Adding a page
 
 1. Create or edit files in `docs/`: `.mdx` for rich content with React components, `.md` for simple text-only Markdown.
-2. **Update `sidebars.js`** to add the new document to navigation:
+2. **Give the page a `description` in its frontmatter**: one sentence that says what the whole page covers, not its opening line. It is the page's entry in `/llms.txt` (see "llms.txt" below) and its meta description. The build warns about a listed page without one. Put commands, flags and configuration keys in backticks (`testkube upgrade`, `fsGroup`): `lint:vale` skips alerts inside backticks in frontmatter.
+   ```md
+   ---
+   description: Send OpenTelemetry traces of your organization's AI work to AWS CloudWatch or any OTLP endpoint.
+   ---
+   ```
+3. **Update `sidebars.js`** to add the new document to navigation:
    ```js
    {
      type: "category",
@@ -110,7 +117,7 @@ Generated content is excluded from Prettier through `.prettierignore`, which lis
      ]
    }
    ```
-3. Format, test locally and build (section 1), then commit and create a PR.
+4. Format, test locally and build (section 1), then commit and create a PR.
 
 Keep images in `docs/img/` and reference them with relative paths.
 
@@ -149,6 +156,10 @@ import LegacyWarning from "../_legacy-warning.mdx";
 
 <LegacyWarning />
 ```
+
+### llms.txt
+
+`src/plugins/llms-txt/` writes `/llms.txt` into the build output (`npm run build` only, not the dev server). It lists the pages of the `main` sidebar in sidebar order, each with the `description` from its frontmatter, under one section per top-level sidebar category and one per category directly inside it. The introduction at the top is `src/plugins/llms-txt/header.md`. The plugin's options in `docusaurus.config.js` leave the generated CLI, OpenAPI and CRD pages out and link to them from the closing "Optional" section.
 
 ### Search indexes
 

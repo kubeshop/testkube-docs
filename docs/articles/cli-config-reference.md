@@ -1,3 +1,7 @@
+---
+description: Structure of the `config.json` file in which the Testkube CLI stores its configuration, with a pointer to the `testkube config` command for changing it.
+---
+
 # CLI Configuration File
 
 The Testkube CLI stores its configuration in a `~/.testkube/config.json` file with the following structure:

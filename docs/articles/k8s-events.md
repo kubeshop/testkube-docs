@@ -1,3 +1,7 @@
+---
+description: Reference for the Kubernetes Events Testkube emits for TestWorkflow executions and resource lifecycle changes, with the Helm value that enables them, their structure and kubectl queries.
+---
+
 # Kubernetes Events
 
 Testkube can emit native [Kubernetes Events](https://kubernetes.io/docs/reference/kubernetes-api/cluster-resources/event-v1/)

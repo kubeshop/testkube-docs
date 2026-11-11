@@ -1,3 +1,7 @@
+---
+description: Upload JUnit XML reports from a Test Workflow to Datadog Test Visibility with a reusable TestWorkflowTemplate that runs `datadog-ci junit upload`, a pattern that also fits other CLI tools.
+---
+
 # Datadog
 
 Datadog’s CI / Test Visibility product can ingest JUnit XML reports so you can visualize test performance and flake rate straight from your CI/CD pipelines. However, if you’re trying to [decouple test execution from CI/CD automation](https://testkube.io/learn/stop-running-tests-with-your-ci-cd-tool), you may want to send JUnit reports to Data Dog directly from a Testkube TestWorkflow execution. This guide shows how to upload those reports immediately after a TestWorkflow finishes by using a reusable **TestWorkflowTemplate**.

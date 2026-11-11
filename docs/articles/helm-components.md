@@ -1,3 +1,7 @@
+---
+description: List of the components and Docker images that the Testkube On-Prem Helm Chart installs for the Control Plane and the Runner, including Dex, MinIO, PostgreSQL and NATS.
+---
+
 # Helm Components
 
 The Testkube On-Prem Helm Chart consists of the following components.

@@ -1,3 +1,7 @@
+---
+description: Create a Test Workflow in the Dashboard with the five-step Wizard and automatic test discovery, from an example, by combining existing Workflows, from the Marketplace or from YAML.
+---
+
 # Workflow Wizard
 
 The **Workflow Wizard** guides you through creating and managing Testkube Workflows – streamlining test setup

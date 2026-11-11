@@ -214,3 +214,7 @@ JSONPatch
 (?i)autogen
 sandboxed
 runtimes
+Kargo
+Entra
+JWT[s]?
+URN[s]?

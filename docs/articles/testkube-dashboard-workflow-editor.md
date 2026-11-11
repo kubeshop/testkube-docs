@@ -1,3 +1,7 @@
+---
+description: Features of the Dashboard YAML editor for Workflows, from toolbar actions and the inline-templates diff view to autocomplete, documentation hovers, error markers and template links.
+---
+
 # Workflow YAML Editor
 
 This Definition panel under the Workflow settings provides a powerful YAML editor for editing your Workflows.

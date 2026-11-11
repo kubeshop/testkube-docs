@@ -1,3 +1,7 @@
+---
+description: Deploy Testkube On-Prem on Amazon EKS with S3 storage through EKS Pod Identity or IRSA, RDS or Aurora PostgreSQL, Nginx or ALB ingress, production hardening and troubleshooting.
+---
+
 # Deploying on AWS EKS
 
 This guide walks through deploying Testkube On-Prem on an existing **Amazon EKS** cluster. It covers

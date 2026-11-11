@@ -1,3 +1,7 @@
+---
+description: Use keyword highlighting in execution logs to jump between relevant lines, choose the active highlight categories and add custom keyword categories.
+---
+
 # Log Highlighting
 
 ## Overview

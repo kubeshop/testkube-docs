@@ -1,3 +1,7 @@
+---
+description: Tour of the Organization Management panels, covering Environments, Members, Teams, Resource Groups, API Tokens, Product Features, Usage and Billing, Settings and the Audit Log.
+---
+
 # Organization Management
 
 To manage your organization settings click "Organization Management" from organizations drop-down menu:

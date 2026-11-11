@@ -1,3 +1,7 @@
+---
+description: Generate Test Workflows and Test Workflow Templates from legacy Tests, Test Suites and Executors with the `testkube migrate` command, with before and after examples.
+---
+
 # Migrating Tests, Test Suites and Executors to Test Workflows and Test Workflow Templates
 
 :::danger

@@ -1,3 +1,7 @@
+---
+description: How commercial Testkube licensing works for Cloud and On-Prem Control Plane deployments, covering full and read-only users, fixed and floating Runner licenses and license validation.
+---
+
 # Commercial Licensing Overview
 
 This page explains Testkube's commercial licensing model for Cloud and On-Prem Control Plane deployments. For Open Source licensing, including the MIT license and the Testkube Community License, see the [Open Source Licensing FAQ](/articles/testkube-licensing-FAQ).

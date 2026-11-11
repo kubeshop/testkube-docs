@@ -1,3 +1,7 @@
+---
+description: Reference for the Prometheus metrics the Control Plane exposes, including scheduler queue metrics, the settings that enable them, their labels and the mapping from Runner metrics.
+---
+
 # Control Plane Metrics
 
 This page consolidates Testkube Control Plane Prometheus metrics, including scheduler metrics.

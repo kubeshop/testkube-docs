@@ -1,3 +1,7 @@
+---
+description: On-Prem Helm settings for the master password, artifact cleanup, TLS, organization bootstrap, custom ingress, namespaces, external PostgreSQL, NATS, MinIO or Dex, and offline licenses.
+---
+
 # Customizing your Testkube On-Prem Installation
 
 A variety of advanced topics to further customize your Testkube On Prem deployment.

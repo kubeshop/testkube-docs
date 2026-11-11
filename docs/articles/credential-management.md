@@ -1,3 +1,7 @@
+---
+description: Store Secret, Variable and Vault credentials at Organization, Environment, Resource Group or Workflow scope, use them with credential(), and set up the on-prem Vault backend.
+---
+
 # Testkube Credentials
 
 ## What Are Credentials?

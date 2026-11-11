@@ -1,3 +1,7 @@
+---
+description: Validate Canary and Blue-Green deployments in Argo Rollouts with an AnalysisTemplate whose Kubernetes Job runs a Test Workflow through the Testkube CLI.
+---
+
 # Using Testkube with Argo Rollouts
 
 This document describes how you can use Testkube with [Argo Rollouts](https://argo-rollouts.readthedocs.io/en/stable/). As a prerequisite, you should have a good understanding

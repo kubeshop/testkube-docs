@@ -1,3 +1,7 @@
+---
+description: Configure the On-Prem Control Plane to store artifacts in AWS S3 with IAM role authentication, including the IAM policy, trust relationship, Helm values and bucket CORS.
+---
+
 # Installation with S3 Storage and IAM Authentication
 
 To use S3 as storage, the steps are as follows:

@@ -1,3 +1,7 @@
+---
+description: Run the Testkube MCP Server locally with `testkube mcp serve`, authenticate by login or API key, and choose between stdio and shttp transports, with environment variable mode and troubleshooting.
+---
+
 # Testkube MCP Server with CLI
 
 Run the Testkube MCP Server locally using the Testkube CLI. This approach is ideal for local development and when you need full control over the MCP server process.
