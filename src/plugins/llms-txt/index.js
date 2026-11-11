@@ -297,9 +297,16 @@ module.exports = function llmsTxtPlugin(context, options) {
         );
       }
 
-      const header = await fs.readFile(
-        path.join(__dirname, "header.md"),
-        "utf8"
+      // The links in the introduction go to the Markdown versions too.
+      const header = (
+        await fs.readFile(path.join(__dirname, "header.md"), "utf8")
+      ).replace(
+        /\]\(([^)\s]+)\)/g,
+        (_match, href) =>
+          `](${resolveLink(
+            href.startsWith(siteUrl) ? href.slice(siteUrl.length) || "/" : href,
+            ""
+          )})`
       );
       await fs.writeFile(
         path.join(outDir, "llms.txt"),
