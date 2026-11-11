@@ -66,6 +66,7 @@ When a binary is absent, skip its check and report in the pull request that it d
 | `src/css/custom.css`                 | Site-wide CSS                                                                                                                                                                                                                         |
 | `src/openapi/`                       | OpenAPI spec files and generated sidebar configs (generated)                                                                                                                                                                          |
 | `src/plugins/llms-txt/`              | The local plugin that writes `/llms.txt` at build time, and `header.md`, its hand-written introduction                                                                                                                                |
+| `src/plugins/noindex/`               | The local plugin that adds a `noindex` robots meta tag to built pages under the URL prefixes set in `docusaurus.config.js`                                                                                                            |
 | `src/scripts/`                       | Build scripts (`split-openapis.ts`)                                                                                                                                                                                                   |
 | `static/`                            | Static assets (images, OpenAPI files); `static/openapi/` is generated                                                                                                                                                                 |
 | `scripts/`                           | `image.sh` and its image lists (`agent_images.txt`, `cp_images.txt`), which the `update-image-inventory` workflow runs to regenerate `docs/articles/inventory/generated/`; `vale-changed-lines.mjs`, behind `npm run lint:vale`       |
@@ -160,6 +161,8 @@ import LegacyWarning from "../_legacy-warning.mdx";
 ### llms.txt
 
 `src/plugins/llms-txt/` writes `/llms.txt` into the build output (`npm run build` only, not the dev server). It lists the pages of the `main` sidebar in sidebar order, each with the `description` from its frontmatter, under one section per top-level sidebar category and one per category directly inside it. The introduction at the top is `src/plugins/llms-txt/header.md`. The plugin's options in `docusaurus.config.js` leave the generated CLI, OpenAPI and CRD pages out and link to them from the closing "Optional" section.
+
+`static/robots.txt` does not disallow the generated CLI and CRD reference pages, so that agents can fetch them. `src/plugins/noindex/` keeps them out of search results by adding a `noindex` robots meta tag to those pages in the build output. To hide another section from search engines, add its prefix there and not a `Disallow` rule.
 
 ### Search indexes
 

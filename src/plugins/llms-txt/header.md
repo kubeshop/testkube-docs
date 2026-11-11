@@ -8,6 +8,10 @@ Key concepts for working with Testkube:
 - **The Control Plane** stores Testkube resources and execution results, and exposes the Testkube Dashboard. It runs either in the cloud, hosted by Testkube, or on-prem in your own infrastructure. See [Installation overview](https://docs.testkube.io/articles/install/overview).
 - **Testkube Runners** are deployed in your infrastructure to run tests, listen to Kubernetes events, sync resources and send webhooks. The Runner is open source and can also run standalone, without a Control Plane. See [Testkube Runners](https://docs.testkube.io/articles/agents-overview) and [Testkube Open Source](https://docs.testkube.io/articles/open-source).
 - **The Testkube CLI** (`testkube`) manages a Testkube installation and its resources, and runs Test Workflows. See [Installing the Testkube CLI](https://docs.testkube.io/articles/install/cli) and the [CLI Commands Reference](https://docs.testkube.io/cli/testkube).
-- **The Testkube MCP Server** lets AI assistants and agents work with Test Workflows, executions and artifacts. See [Testkube MCP Server](https://docs.testkube.io/articles/mcp-overview).
+
+If you are an AI agent working with Testkube, two tools give you more than these pages do:
+
+- Connect to the [Testkube MCP Server](https://docs.testkube.io/articles/mcp-overview) to list, run and inspect Test Workflows, executions and artifacts directly. The Control Plane hosts an [MCP endpoint](https://docs.testkube.io/articles/mcp-hosted), and `testkube mcp serve` runs one locally.
+- Install the [Testkube Agent Skills](https://docs.testkube.io/articles/testkube-skills) for guidance on creating, running and debugging tests with Testkube.
 
 Some features are available only in Testkube Commercial. The [Feature Comparison](https://docs.testkube.io/articles/install/feature-comparison) lists the differences between Testkube Commercial and Testkube Open Source.
