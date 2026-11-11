@@ -18,6 +18,7 @@
 
 const fs = require("fs/promises");
 const path = require("path");
+const { toMarkdown } = require("./to-markdown");
 
 /**
  * @typedef {{title: string, path: string, description?: string}} OptionalLink
@@ -25,6 +26,7 @@ const path = require("path");
  *   sidebar?: string,
  *   excludePrefixes?: string[],
  *   optional?: OptionalLink[],
+ *   markdownExcludePrefixes?: string[],
  * }} PluginOptions
  */
 
@@ -52,6 +54,7 @@ module.exports = function llmsTxtPlugin(context, options) {
     sidebar: sidebarId = "main",
     excludePrefixes = [],
     optional = [],
+    markdownExcludePrefixes = [],
   } = options;
   const siteUrl = context.siteConfig.url.replace(/\/$/, "");
 
@@ -75,6 +78,81 @@ module.exports = function llmsTxtPlugin(context, options) {
       /** @type {Map<string, any>} */
       const docsById = new Map(version.docs.map((doc) => [doc.id, doc]));
       const seen = new Set();
+
+      // Every page is also published as Markdown, at its URL plus ".md"
+      // ("/index.md" for the home page), and llms.txt links to that version.
+      /** @type {Map<string, any>} */
+      const markdownDocs = new Map();
+      /** @type {Map<string, string>} */
+      const permalinkBySource = new Map();
+      for (const doc of version.docs) {
+        if (doc.unlisted || doc.draft) continue;
+        const file = path.join(
+          context.siteDir,
+          doc.source.replace(/^@site\//, "")
+        );
+        permalinkBySource.set(file, doc.permalink);
+        if (
+          !markdownExcludePrefixes.some((prefix) =>
+            doc.permalink.startsWith(prefix)
+          )
+        ) {
+          markdownDocs.set(doc.permalink, { ...doc, file });
+        }
+      }
+      /** @param {string} permalink */
+      const markdownPath = (permalink) =>
+        `${permalink === "/" ? "/index" : permalink}.md`;
+      /** The URL of a page: its Markdown version when it has one. */
+      const pageUrl = (/** @type {string} */ permalink) =>
+        siteUrl +
+        (markdownDocs.has(permalink) ? markdownPath(permalink) : permalink);
+
+      /**
+       * Makes a link in a page absolute. A link to a source file
+       * ("./other.md") or to a page ("/articles/other") becomes the URL of
+       * that page's Markdown version.
+       * @param {string} href
+       * @param {string} fromFile
+       */
+      const resolveLink = (href, fromFile) => {
+        if (/^([a-z][a-z0-9+.-]*:|#|\/\/)/i.test(href)) return href;
+        const [, target, suffix] = /** @type {RegExpMatchArray} */ (
+          href.match(/^([^?#]*)(.*)$/)
+        );
+        const fromPermalink = permalinkBySource.get(fromFile) ?? "/";
+        let permalink;
+        if (/\.mdx?$/.test(target)) {
+          const file = target.startsWith("/")
+            ? path.join(context.siteDir, "docs", target)
+            : path.resolve(path.dirname(fromFile), target);
+          permalink = permalinkBySource.get(file);
+        }
+        permalink ??= new URL(
+          target.replace(/\.mdx?$/, ""),
+          `${siteUrl}${fromPermalink}`
+        ).pathname;
+        if (permalink.length > 1) permalink = permalink.replace(/\/$/, "");
+        return pageUrl(permalink) + suffix;
+      };
+
+      /** The Markdown of each page, by permalink. @type {Map<string, string>} */
+      const markdown = new Map();
+      for (const [permalink, doc] of markdownDocs) {
+        let content = toMarkdown(doc.file, {
+          siteDir: context.siteDir,
+          resolveLink,
+        });
+        if (!/^# /m.test(content.replace(/^(```|~~~)[\s\S]*?^\1/gm, ""))) {
+          content = `# ${doc.title}\n\n${content}`;
+        }
+        markdown.set(permalink, content);
+        const file = path.join(outDir, markdownPath(permalink));
+        await fs.mkdir(path.dirname(file), { recursive: true });
+        await fs.writeFile(file, content);
+      }
+      /** The pages listed in llms.txt, in order. @type {string[]} */
+      const listed = [];
       /** @type {string[]} */
       const undescribed = [];
 
@@ -86,6 +164,7 @@ module.exports = function llmsTxtPlugin(context, options) {
           return null;
         if (seen.has(doc.permalink)) return null;
         seen.add(doc.permalink);
+        if (markdown.has(doc.permalink)) listed.push(doc.permalink);
 
         const sourcePath = doc.source.replace(/^@site\//, "");
         const title =
@@ -94,7 +173,7 @@ module.exports = function llmsTxtPlugin(context, options) {
             await fs.readFile(path.join(context.siteDir, sourcePath), "utf8")
           ) ??
           doc.title;
-        const link = `- [${title}](${siteUrl}${doc.permalink})`;
+        const link = `- [${title}](${pageUrl(doc.permalink)})`;
         if (!doc.frontMatter.description) {
           undescribed.push(sourcePath);
           return link;
@@ -168,7 +247,7 @@ module.exports = function llmsTxtPlugin(context, options) {
       addSection(
         "Optional",
         optional.map(({ title, path: urlPath, description }) => {
-          const link = `- [${title}](${siteUrl}${urlPath})`;
+          const link = `- [${title}](${pageUrl(urlPath)})`;
           return description ? `${link}: ${description}` : link;
         })
       );
@@ -188,6 +267,16 @@ module.exports = function llmsTxtPlugin(context, options) {
       await fs.writeFile(
         path.join(outDir, "llms.txt"),
         `${[header.trim(), ...sections].join("\n\n")}\n`
+      );
+
+      // llms-full.txt: the introduction and every listed page in one file.
+      const pages = listed.map((permalink) => {
+        const content = /** @type {string} */ (markdown.get(permalink));
+        return `Source: ${pageUrl(permalink)}\n\n${content.trim()}`;
+      });
+      await fs.writeFile(
+        path.join(outDir, "llms-full.txt"),
+        `${[header.trim(), ...pages].join("\n\n---\n\n")}\n`
       );
     },
   };

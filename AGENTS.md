@@ -65,7 +65,7 @@ When a binary is absent, skip its check and report in the pull request that it d
 | `src/themes/`                        | Custom Prism syntax highlighting themes (light, dark, mirage)                                                                                                                                                                         |
 | `src/css/custom.css`                 | Site-wide CSS                                                                                                                                                                                                                         |
 | `src/openapi/`                       | OpenAPI spec files and generated sidebar configs (generated)                                                                                                                                                                          |
-| `src/plugins/llms-txt/`              | The local plugin that writes `/llms.txt` at build time, and `header.md`, its hand-written introduction                                                                                                                                |
+| `src/plugins/llms-txt/`              | The local plugin that writes `/llms.txt`, `/llms-full.txt` and a Markdown version of every page at build time; `header.md` is the hand-written introduction                                                                           |
 | `src/plugins/noindex/`               | The local plugin that adds a `noindex` robots meta tag to built pages under the URL prefixes set in `docusaurus.config.js`                                                                                                            |
 | `src/scripts/`                       | Build scripts (`split-openapis.ts`)                                                                                                                                                                                                   |
 | `static/`                            | Static assets (images, OpenAPI files); `static/openapi/` is generated                                                                                                                                                                 |
@@ -101,7 +101,7 @@ Generated content is excluded from Prettier through `.prettierignore`, which lis
 ### Adding a page
 
 1. Create or edit files in `docs/`: `.mdx` for rich content with React components, `.md` for simple text-only Markdown.
-2. **Give the page a `description` in its frontmatter**: one sentence that says what the whole page covers, not its opening line. It is the page's entry in `/llms.txt` (see "llms.txt" below) and its meta description. The build warns about a listed page without one. Put commands, flags and configuration keys in backticks (`testkube upgrade`, `fsGroup`): `lint:vale` skips alerts inside backticks in frontmatter.
+2. **Give the page a `description` in its frontmatter**: one sentence that says what the whole page covers, not its opening line. It is the page's entry in `/llms.txt` (see "llms.txt and Markdown pages" below) and its meta description. The build warns about a listed page without one. Put commands, flags and configuration keys in backticks (`testkube upgrade`, `fsGroup`): `lint:vale` skips alerts inside backticks in frontmatter.
    ```md
    ---
    description: Send OpenTelemetry traces of your organization's AI work to AWS CloudWatch or any OTLP endpoint.
@@ -158,9 +158,15 @@ import LegacyWarning from "../_legacy-warning.mdx";
 <LegacyWarning />
 ```
 
-### llms.txt
+### llms.txt and Markdown pages
 
-`src/plugins/llms-txt/` writes `/llms.txt` into the build output (`npm run build` only, not the dev server). It lists the pages of the `main` sidebar in sidebar order, each with the `description` from its frontmatter, under one section per top-level sidebar category and one per category directly inside it. The introduction at the top is `src/plugins/llms-txt/header.md`. The plugin's options in `docusaurus.config.js` leave the generated CLI, OpenAPI and CRD pages out and link to them from the closing "Optional" section.
+`src/plugins/llms-txt/` writes three things into the build output (`npm run build` only, not the dev server):
+
+- **A Markdown version of every page**, at the page's URL plus `.md` (`/articles/test-workflows.md`, and `/index.md` for the home page). `to-markdown.js` converts the page source: it inlines imported Markdown partials, turns tabs, admonitions and card lists into plain Markdown, drops other JSX and images, and makes links absolute. The Redoc pages under `/openapi/agent/` and `/openapi/cloud/` have none.
+- **`/llms.txt`**, which lists the pages of the `main` sidebar in sidebar order, each with a link to its Markdown version and the `description` from its frontmatter, under one section per top-level sidebar category and one per category directly inside it. The introduction at the top is `src/plugins/llms-txt/header.md`. The plugin's options in `docusaurus.config.js` leave the generated CLI, OpenAPI and CRD pages out and link to them from the closing "Optional" section.
+- **`/llms-full.txt`**, the introduction followed by the Markdown of every page that `llms.txt` lists.
+
+When a page uses a new MDX component, check its Markdown version in `build/` after a build: a component the converter does not know is dropped, with any text inside it.
 
 `static/robots.txt` does not disallow the generated CLI and CRD reference pages, so that agents can fetch them. `src/plugins/noindex/` keeps them out of search results by adding a `noindex` robots meta tag to those pages in the build output. To hide another section from search engines, add its prefix there and not a `Disallow` rule.
 
