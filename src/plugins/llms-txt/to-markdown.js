@@ -64,6 +64,8 @@ function toMarkdown(file, options, depth = 0) {
   let inHead = false;
   let inJsxTag = false; // inside a multi-line component tag
   let jsxDepth = 0;
+  let inHtmlTag = ""; // inside a multi-line <div>, <iframe> or <img> tag
+  let htmlDepth = 0;
   let inComment = false;
   /** Markers of the open admonitions, innermost last. @type {string[]} */
   const admonitions = [];
@@ -98,9 +100,29 @@ function toMarkdown(file, options, depth = 0) {
     );
     let count = 0;
     for (const [, , label, between, , href] of cards) {
-      const description = between.match(/description:\s*(["'`])([\s\S]+?)\1/);
       const link = `- [${label}](${options.resolveLink(href, file)})`;
-      emit(description ? `${link}: ${description[2].trim()}` : link);
+      const description = between.match(/description:\s*(["'`])([\s\S]+?)\1/);
+      if (description) {
+        emit(`${link}: ${description[2].trim()}`);
+      } else {
+        // A description written as JSX: keep its prose, and list the
+        // ['key', 'value'] pairs it passes to a component.
+        const prose = between
+          .split("\n")
+          .map((line) => line.replace(/<[^>]*>/g, "").trim())
+          .filter(
+            (line) =>
+              /^[A-Za-z]/.test(line) &&
+              !/[{}[\]=]/.test(line) &&
+              !/^\w+:\s*\(?$/.test(line)
+          )
+          .join(" ");
+        emit(prose ? `${link}: ${prose}` : link);
+        const pairs = between.matchAll(
+          /\[\s*(["'])(.+?)\1\s*,\s*(["'])(.+?)\3\s*\]/g
+        );
+        for (const [, , key, , value] of pairs) emit(`  - ${key}: ${value}`);
+      }
       count++;
     }
     if (count) emit("");
@@ -176,6 +198,19 @@ function toMarkdown(file, options, depth = 0) {
       continue;
     }
 
+    if (inHtmlTag) {
+      htmlDepth += bracketDelta(line);
+      if (htmlDepth <= 0 && />\s*$/.test(trimmed)) {
+        const opensLayout =
+          /^(div|section|article)$/.test(inHtmlTag) &&
+          !/\/>\s*$/.test(trimmed) &&
+          !trimmed.includes(`</${inHtmlTag}>`);
+        if (opensLayout) layoutDepth++;
+        inHtmlTag = "";
+      }
+      continue;
+    }
+
     if (inJsxTag) {
       // The tag ends where its braces are balanced again. Prose passed to
       // the component in a prop is kept.
@@ -236,11 +271,23 @@ function toMarkdown(file, options, depth = 0) {
         continue;
       }
       if (!closing && name === "TabItem") {
-        const label = rest.match(/label=["']([^"']+)["']/);
+        // The label is a string, or JSX: label={<span>Text (<code>x</code>)</span>}
+        const label =
+          rest.match(/label=["']([^"']+)["']/)?.[1] ??
+          rest
+            .match(/label=\{([^]*)\}/)?.[1]
+            .replace(/<code>(.*?)<\/code>/g, "`$1`")
+            .replace(/<[^>]*>/g, "")
+            .trim();
         if (label) {
-          emit(`**${label[1]}**`);
+          emit(`**${label}**`);
           emit("");
         }
+        if (!/>\s*$/.test(trimmed)) {
+          inJsxTag = true;
+          jsxDepth = bracketDelta(line);
+        }
+        continue;
       }
       if (!closing && name === "Admonition") {
         const type = rest.match(/type=["'](\w+)["']/);
@@ -259,6 +306,17 @@ function toMarkdown(file, options, depth = 0) {
       // Text after the tag on the same line is kept: "<Tag>text</Tag>".
       const text = trimmed.replace(/<\/?[A-Z][A-Za-z0-9]*\b[^>]*>/g, "").trim();
       if (text && !inJsxTag) emit(inline(text));
+      continue;
+    }
+    // an HTML element whose opening tag spans lines
+    if (
+      tag &&
+      !tag[1] &&
+      /^(div|section|article|iframe|img|video)$/.test(tag[2]) &&
+      /^<[a-z]+(\s[^>]*)?$/.test(trimmed.replace(/\{\{[^]*?\}\}/g, ""))
+    ) {
+      inHtmlTag = tag[2];
+      htmlDepth = bracketDelta(line);
       continue;
     }
     if (
@@ -280,6 +338,16 @@ function toMarkdown(file, options, depth = 0) {
     if (layoutDepth > 0 && trimmed) {
       layoutIndent ??= line.length - line.trimStart().length;
       line = line.replace(new RegExp(`^ {0,${layoutIndent}}`), "");
+    }
+
+    // reference-style link definition: "[name]: /articles/page"
+    const definition = line.match(/^(\s{0,3}\[[^\]]+\]:\s+)(\S+)(.*)$/);
+    if (definition) {
+      const [, start, href, rest] = definition;
+      emit(
+        `${start}${options.resolveLink(href.replace(/^<|>$/g, ""), file)}${rest}`
+      );
+      continue;
     }
 
     const heading = line.match(/^(#{1,6}\s+.*?)\s*\{#[^}]*\}\s*$/);
