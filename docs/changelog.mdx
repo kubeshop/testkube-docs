@@ -8,6 +8,33 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Patch Release v2.15.1 (2026-11-12)
+
+Control Plane is available in Helm chart `v2.338.1` and the Runner is available in Helm chart `v2.15.2`.
+
+### Upgrade notes
+
+- Self-hosted with the AI service enabled: the internal AI credential secret is now generated automatically. No action is needed. Upgrading creates the secret once and keeps it across later upgrades, and installs that already supply their own secret keep using it. The AI service and the Control Plane API restart as part of the upgrade.
+
+### Security
+
+- Hardened access controls on internal AI credential endpoints for self-managed installs.
+- Improved authorization checks for public status pages.
+- Upgraded bundled components and dependencies to address known CVEs, including NATS and kubectl `1.37.2`.
+
+### Improvements
+
+- Pending invites can now be applied automatically when a user signs in, assigning the invited team and environment on first login without an email or an accept click. Opt-in, so nothing changes unless it is enabled.
+
+### Fixes
+
+- Executions finalised by the Control Plane cleanup now close out their step statuses, instead of leaving steps reported as running on an execution that had already ended.
+- Runs whose steps all passed are no longer reported as aborted.
+- SCIM filtered user lookups now report the matched count rather than the organization-wide total, restoring Microsoft Entra provisioning, which rejected the previous response.
+- Execution log uploads now rewind the request body before each retry, so a transient first failure can recover instead of retrying with an empty body.
+- Artifact uploads now keep the file open across retry attempts, so a failure such as a TLS handshake timeout can recover on a later retry.
+- Now it's possible to apply TLS log retry for parallel workers.
+
 ## Release v2.15.0 (2026-10-29)
 
 > AI Governance with access, model and token limits, GitLab support and a new Test Bundle layout for AI Test Creation, an executions timeline, and HTTP Event Triggers.
