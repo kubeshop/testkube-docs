@@ -70,6 +70,11 @@ A new member will not have access to any resources or environments and will init
 member (see above) unless default permissions have been assigned via [SCIM](/articles/scim)
 or [bootstrap member mapping](/articles/install/advanced-install#bootstrap-member-mapping).
 
+The Teams and Environments chosen here are stored on the invitation and are applied when it is
+accepted. On a self-hosted installation without SMTP, where invitation emails are never delivered,
+you can have them applied when the invited person signs in instead - see
+[applying invites at sign-in](/articles/install/advanced-install#applying-invites-at-sign-in).
+
 See [Resource Access Management](/articles/resource-access-management) to learn how to give members access to
 environments and resources.
 ::::
