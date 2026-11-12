@@ -33,7 +33,7 @@ Control Plane is available in Helm chart `v2.338.1` and the Runner is available 
 - SCIM filtered user lookups now report the matched count rather than the organization-wide total, restoring Microsoft Entra provisioning, which rejected the previous response.
 - Execution log uploads now rewind the request body before each retry, so a transient first failure can recover instead of retrying with an empty body.
 - Artifact uploads now keep the file open across retry attempts, so a failure such as a TLS handshake timeout can recover on a later retry.
-- Parallel workers now use the configured TLS log retry settings, instead of falling back to the built-in defaults.
+- Now it's possible to apply TLS log retry for parallel workers.
 
 ## Release v2.15.0 (2026-10-29)
 
