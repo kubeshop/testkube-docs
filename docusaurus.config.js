@@ -9,6 +9,10 @@ const redirects = require("./redirects");
 const agentRedocSpecs = require("./src/openapi/agent/redoc-specs");
 const cloudRedocSpecs = require("./src/openapi/cloud/redoc-specs");
 
+// Pages that get no Markdown version: they are rendered by Redoc from the
+// OpenAPI specs.
+const markdownExcludePrefixes = ["/openapi/agent/", "/openapi/cloud/"];
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Testkube Documentation",
@@ -32,6 +36,11 @@ const config = {
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "kubeshop", // Usually your GitHub org/user name.
   projectName: "testkube", // Usually your repo name.
+
+  customFields: {
+    // Read by src/components/PageActions
+    markdownExcludePrefixes,
+  },
 
   headTags: [
     {
@@ -277,7 +286,7 @@ const config = {
         // Generated reference pages, linked from the "Optional" section instead
         excludePrefixes: ["/cli/", "/openapi/", "/articles/crds/"],
         // Rendered by Redoc from the OpenAPI specs, which are linked below
-        markdownExcludePrefixes: ["/openapi/agent/", "/openapi/cloud/"],
+        markdownExcludePrefixes,
         optional: [
           {
             title: "CLI Commands Reference",
