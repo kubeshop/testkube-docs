@@ -81,14 +81,40 @@ export default function PageActions() {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(null);
   const container = useRef(null);
+  const toggle = useRef(null);
+  const menu = useRef(null);
 
+  // Keyboard handling of a menu button: focus moves into the menu when it
+  // opens, the arrow keys, Home and End move between items, and Escape closes
+  // the menu and returns focus to the button.
   useEffect(() => {
     if (!open) return undefined;
+    const items = () => [
+      ...(menu.current?.querySelectorAll('[role="menuitem"]') ?? []),
+    ];
+    items()[0]?.focus();
+
     const onPointerDown = (event) => {
       if (!container.current?.contains(event.target)) setOpen(false);
     };
     const onKeyDown = (event) => {
-      if (event.key === "Escape") setOpen(false);
+      const all = items();
+      const index = all.indexOf(document.activeElement);
+      const moves = {
+        ArrowDown: (index + 1) % all.length,
+        ArrowUp: (index - 1 + all.length) % all.length,
+        Home: 0,
+        End: all.length - 1,
+      };
+      if (event.key in moves) {
+        event.preventDefault();
+        all[moves[event.key]]?.focus();
+      } else if (event.key === "Escape") {
+        setOpen(false);
+        toggle.current?.focus();
+      } else if (event.key === "Tab") {
+        setOpen(false);
+      }
     };
     document.addEventListener("pointerdown", onPointerDown);
     document.addEventListener("keydown", onKeyDown);
@@ -173,16 +199,27 @@ export default function PageActions() {
           aria-haspopup="menu"
           aria-expanded={open}
           aria-label="More page actions"
+          ref={toggle}
           onClick={() => setOpen(!open)}
+          onKeyDown={(event) => {
+            if (event.key === "ArrowDown" && !open) {
+              // Stopped here, or the menu's own handler would also see this
+              // key press and move past the first item.
+              event.stopPropagation();
+              event.preventDefault();
+              setOpen(true);
+            }
+          }}
         >
           <ChevronIcon />
         </button>
       </div>
       {open && (
-        <div className={styles.menu} role="menu">
+        <div className={styles.menu} role="menu" ref={menu}>
           <button
             type="button"
             role="menuitem"
+            tabIndex={-1}
             className={styles.item}
             onClick={copyLink}
           >
@@ -191,6 +228,7 @@ export default function PageActions() {
           </button>
           <a
             role="menuitem"
+            tabIndex={-1}
             className={styles.item}
             href={markdownPath}
             target="_blank"
@@ -204,6 +242,7 @@ export default function PageActions() {
             <a
               key={tool.name}
               role="menuitem"
+              tabIndex={-1}
               className={styles.item}
               href={tool.url + encodeURIComponent(prompt)}
               target="_blank"
