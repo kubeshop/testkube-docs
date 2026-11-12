@@ -73,9 +73,12 @@ refuses every exchange.
 
 ## How your provider recognises the person
 
-Testkube sends a token whose subject is the person's identity as your provider originally issued
-it. Your provider then has to turn that subject into one of its own users, and there are two ways
-it does that. The difference decides whether this is setup work or permanent work.
+Testkube sends the OIDC ID token its own issuer minted for the person. **Match them on that
+token's `email` claim.** Its subject is an identifier internal to that issuer and names nobody in
+your directory, so a rule keyed on the subject matches nobody.
+
+Your provider then has to turn that email address into one of its own users, and there are two
+ways it does that. The difference decides whether this is setup work or permanent work.
 
 - **Attribute mapping**, a rule configured once, which looks the person up by an attribute such
   as their email address. PingFederate works this way. Nothing is created per person and nothing
@@ -84,6 +87,10 @@ it does that. The difference decides whether this is setup work or permanent wor
   works this way. Somebody has to create a link for every person who will use an AI Agent, and
   keep it in step with joiners and leavers. **That is standing work in your estate**, not part of
   the setup, and it is worth knowing before you commit.
+
+Testkube refuses the exchange before it calls your provider when the token it holds for the person
+carries no email address, rather than presenting one that names nobody. Your provider is never
+asked to map an empty subject, which matters for the trap in the next section.
 
 ## Validate against a real directory, not an empty realm
 
@@ -137,12 +144,13 @@ needs permission to request a token for each of those audiences.
 A server reached this way reports why rather than disappearing from the conversation, and the
 reasons are fixed in different places:
 
-| What the AI Agent reports                     | What it means                                                                                                                                          |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| No identity provider is set up                | Nothing is declared for this organization. An organization admin declares one.                                                                         |
-| Your provider refused the sign-in itself      | The relationship is wrong: the client, the secret or the audience. An organization admin or your identity admin checks it.                             |
-| Your provider would not issue a token for you | Your provider does not recognise this person, or will not give them that audience. This is normal and personal, and it is your directory that decides. |
-| Your provider could not be reached            | A network or availability problem. Nothing is misconfigured.                                                                                           |
+| What the AI Agent reports                     | What it means                                                                                                                                                                                                |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| No identity provider is set up                | Nothing is declared for this organization. An organization admin declares one.                                                                                                                               |
+| Your provider refused the sign-in itself      | The relationship is wrong: the client, the secret or the audience. An organization admin or your identity admin checks it.                                                                                   |
+| Your provider would not issue a token for you | Your provider does not recognise this person, or will not give them that audience. This is normal and personal, and it is your directory that decides.                                                       |
+| Your provider could not be reached            | A network or availability problem. Nothing is misconfigured.                                                                                                                                                 |
+| Testkube holds no email address for you       | The token Testkube holds for you carries none, so there is nobody to exchange. Sign in again, and if that does not help, whoever operates the installation checks that its sign-in asks for the email scope. |
 
 The provider's own wording is kept out of the chat, because it names internal configuration.
 It is written to the Control Plane log for whoever operates the installation, and the
