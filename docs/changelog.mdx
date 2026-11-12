@@ -10,17 +10,17 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 
 ## Patch Release v2.15.1 (2026-11-12)
 
-Control Plane is available in Helm chart `v2.338.1` and the Runner is available in Helm chart `v2.15.1`.
+Control Plane is available in Helm chart `v2.338.1` and the Runner is available in Helm chart `v2.15.2`.
 
 ### Upgrade notes
 
-- Self-hosted with the AI service enabled: the internal AI credential secret is now generated and enforced by default. No action is needed. Upgrading creates the secret once and keeps it across later upgrades, and installs that already supply their own secret keep using it. The AI service and the Control Plane API restart as part of the upgrade.
+- Self-hosted with the AI service enabled: the internal AI credential secret is now generated automatically. No action is needed. Upgrading creates the secret once and keeps it across later upgrades, and installs that already supply their own secret keep using it. The AI service and the Control Plane API restart as part of the upgrade.
 
 ### Security
 
-- Internal AI credential endpoints are now protected by default on self-managed installs, so decrypted LLM and MCP credentials are no longer readable by every environment member.
-- Public status page reads are now authorized against the page that is actually returned, so a private page cannot be reached through an identifier collision or with a token from another organization.
-- CVE cleanup: upgraded bundled components and dependencies, including NATS and kubectl `1.37.2`.
+- Hardened access controls on internal AI credential endpoints for self-managed installs.
+- Improved authorization checks for public status pages.
+- Upgraded bundled components and dependencies to address known CVEs, including NATS and kubectl `1.37.2`.
 
 ### Improvements
 
