@@ -131,10 +131,13 @@ Records/second:       592.10
 
 ## Step 4: Stop the agent and migrate the delta
 
-Executions created while step 3 was running are not in PostgreSQL yet. Scale the agent down,
-then run the job once more to pick up the difference. This is the only part of the cutover
-that needs downtime, and it is short because the second pass resumes where the first stopped
-rather than starting over.
+Executions created while step 3 was running are not in PostgreSQL yet, and executions that
+were still in progress when step 3 copied them hold an unfinished result there. Scale the
+agent down, then run the job once more. It copies the new executions and copies again every
+execution that has finished since, so each one carries its final status, steps and reports.
+Executions still running when you scale the agent down stay unfinished in PostgreSQL, and the
+agent picks them up again when it starts on PostgreSQL in step 5. This is the only part of the cutover that needs downtime, and it is short because the second
+pass resumes where the first stopped rather than starting over.
 
 ```sh
 kubectl scale deployment testkube-api -n testkube --replicas=0
@@ -240,8 +243,11 @@ The tool is built to be run more than once.
 - **Interrupted runs resume.** Each batch commits its data and its progress in the same
   transaction, so a job that is killed mid-run continues from the last committed batch instead
   of starting over or writing anything twice. The job's `backoffLimit` exists for this reason.
-- **Finished runs are cheap to repeat.** A second run finds nothing new and exits without
-  writing, which is what makes the two-pass cutover above work.
+- **Finished runs are cheap to repeat.** A second run copies only two kinds of executions: those
+  created since the last run, and those that were unfinished when copied and have
+  finished in MongoDB since. That is what makes the two-pass cutover above work. An execution
+  still unfinished in MongoDB is left alone, so after a cutover that followed step 4, a run
+  does not overwrite what the agent has written to PostgreSQL.
 - **Execution numbering never moves backwards.** Counters are merged, not overwritten, so
   re-running cannot hand an old number to a new execution.
 - **Starting over is explicit.** `--reset` discards everything already migrated and runs from
@@ -312,6 +318,9 @@ still prints. Read the `VERIFY:` lines at the end of the log.
 migrate, so you never end up with a partial migration you believe is complete. The log names
 the document and the reason. Once you have decided those executions are expendable,
 `skipErrors` continues past them; they are counted, reported, and stepped over on later runs.
+The exception is an execution that was copied unfinished and cannot be copied again once it
+finishes: its earlier copy stays in PostgreSQL, the summary reports `Recopy failed`, and the
+job exits non-zero on every run until the document is fixed.
 
 **The job runs again after the cutover.** The job is not a Helm hook, so it only runs when
 `convert.enabled` is `true`. Set it back to `false` once the migration is done.
