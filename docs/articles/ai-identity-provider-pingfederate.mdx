@@ -1,0 +1,216 @@
+# PingFederate recipe
+
+What an identity admin builds in PingFederate so an AI Agent can reach your MCP Servers as the
+person asking. It is the provider half of
+[Reaching MCP Servers as the person asking](./ai-identity-provider-sign-in.mdx), which explains
+what this is for and who does what.
+
+The exchange itself is [RFC 8693](https://datatracker.ietf.org/doc/html/rfc8693) and is the same
+for every provider. The objects below are PingFederate's own model, and none of their names come
+from the specification.
+
+:::note Validated
+Measured end to end against PingFederate 13.1.4.1. The behaviour called out under
+[Calls between MCP Servers](#calls-between-mcp-servers) was measured rather than read, because it
+decides how many objects a multi-server installation needs.
+:::
+
+## What you build
+
+Six kinds of object. The order is forced: each one points at something created before it.
+
+| Order | Object                               | Where in the console                             | What it is for                                         |
+| ----- | ------------------------------------ | ------------------------------------------------ | ------------------------------------------------------ |
+| 1     | Token processor, JWT                 | Authentication, Token Exchange, Token Processors | Reads the token Testkube sends and takes the email out |
+| 2     | Token processor, OAuth bearer        | Authentication, Token Exchange, Token Processors | Reads a token PingFederate itself issued, for hops     |
+| 3     | Token exchange processor policy      | Applications, Token Exchange, Processor Policies | Decides who the subject is                             |
+| 4     | Access token manager, one per server | Applications, OAuth, Access Token Management     | Issues the token, one per MCP Server                   |
+| 5     | Access token mappings                | Applications, OAuth, Access Token Mappings       | Fills the claims, one per grant and manager            |
+| 6     | OAuth client                         | Applications, OAuth, Clients                     | Authenticates Testkube and ties the rest together      |
+
+:::warning Two menus named Token Exchange
+Token processors live under **Authentication**, because they are incoming credentials. Processor
+policies live under **Applications**, because they belong to the grant. There is no Token
+Processors entry under Applications.
+:::
+
+Object 4 usually exists already. An MCP Server that accepts PingFederate tokens today has an
+access token manager, because that is how everything else reaches it. What that server adds is one
+entry in **Resource URIs**.
+
+:::tip Instance IDs are alphanumeric
+Token processors, policies and access token managers reject an id containing a hyphen or a space.
+Client IDs accept them.
+:::
+
+## The values
+
+### 1. Token processor for Testkube's token
+
+Type **JWT Token Processor 2.0**. The list also offers a 1.2, which is a different plugin with a
+different form.
+
+| Field                                | Value                                       |
+| ------------------------------------ | ------------------------------------------- |
+| Allowed Issuers, Issuer              | `https://<your Testkube API host>/idp`      |
+| Allowed Issuers, JWKS URL            | `https://<your Testkube API host>/idp/keys` |
+| Allowed Audiences, Audience          | your installation's Dex client id           |
+| Require Audience, Require Expiration | both on                                     |
+| Extended Contract                    | add `email`                                 |
+
+`email` on the extended contract is not optional. It is the claim the whole exchange carries, and
+the generic page explains why the subject of a Testkube token names nobody.
+
+:::warning Allowed Issuers and Allowed Audiences are tables
+Add a row, then select **Update** in its Action column. A row left unconfirmed is discarded when
+you leave the tab.
+:::
+
+### 2. Token processor for PingFederate's own token
+
+Type **OAuth Bearer Access Token Token Processor**. Needed only when one MCP Server calls another.
+
+| Field                | Value                                             |
+| -------------------- | ------------------------------------------------- |
+| Access Token Manager | the manager that issued the token being presented |
+| Extended Contract    | add `subject` and `email`                         |
+
+That one field decides more than it looks. See
+[Calls between MCP Servers](#calls-between-mcp-servers).
+
+### 3. Processor policy
+
+| Tab                     | Value                          |
+| ----------------------- | ------------------------------ |
+| Attribute Contract      | `subject` is core; add `email` |
+| Token Processor Mapping | one row per subject token type |
+
+| Subject Token Type                              | Token Processor | Contract Fulfillment                                                   |
+| ----------------------------------------------- | --------------- | ---------------------------------------------------------------------- |
+| `urn:ietf:params:oauth:token-type:jwt`          | object 1        | `subject` and `email` both from the subject token's `email`            |
+| `urn:ietf:params:oauth:token-type:access_token` | object 2        | `subject` from the subject token's `subject`, `email` from its `email` |
+
+Leave **Attribute Sources** and **Issuance Criteria** empty on both. That empty box is the feature:
+resolution is a mapping rule, so nothing is stored per person, nobody is provisioned when somebody
+joins and nothing is left behind when they leave.
+
+### 4. Access token manager, one per MCP Server
+
+Type **JSON Web Tokens**. The other type issues an opaque token, which an MCP Server cannot
+validate on its own.
+
+| Field                                          | Value                                            |
+| ---------------------------------------------- | ------------------------------------------------ |
+| Certificates                                   | a key id you choose, and the signing certificate |
+| JWS Algorithm                                  | `RS256`                                          |
+| Active Signing Certificate Key ID              | the key id from the row above                    |
+| Issuer Claim Value                             | what that MCP Server expects as the issuer       |
+| Audience Claim Value                           | what that MCP Server expects as its audience     |
+| Publish Keys to the PingFederate JWKS Endpoint | on                                               |
+| Access Token Attribute Contract                | add `subject` and `email`                        |
+| Resource URIs                                  | the audience Testkube is configured to ask for   |
+
+Three of those fail in different ways. A wrong issuer or audience is refused by the MCP Server
+after a perfectly valid token is issued. Keys not published mean the server cannot find the
+signing key at all. A missing **Resource URIs** entry makes the exchange answer `invalid_target`
+before any person is looked at, because that entry is what makes Testkube's request select this
+manager.
+
+### 5. Access token mappings
+
+Two per manager, chosen from the two lists at the bottom of the page.
+
+| Context                         | Access token manager | Contract Fulfillment                                 |
+| ------------------------------- | -------------------- | ---------------------------------------------------- |
+| Token exchange processor policy | each manager         | `subject` and `email` from the policy                |
+| Client Credentials              | each manager         | `subject` and `email` from Context, value `ClientId` |
+
+The first pair carries the person. The second pair is what runs with nobody present use: with no
+person to name, the subject becomes the calling client's own id. Without it the provider still
+issues a signed token, one that names nobody, and the MCP Server is what refuses it.
+
+### 6. OAuth client
+
+The client page is long and its fields are spread over three sections.
+
+| Section                                          | Field                                   | Value                                 |
+| ------------------------------------------------ | --------------------------------------- | ------------------------------------- |
+| Configuration                                    | Client ID and Name                      | yours                                 |
+| Configuration                                    | Client Authentication                   | Client Secret                         |
+| Configuration                                    | Grant Type                              | Client Credentials and Token Exchange |
+| OAuth Token Manager, Grant, and Session Settings | Default Access Token Manager            | any of them, or none                  |
+| OAuth Token Manager, Grant, and Session Settings | Restrict to Selected ATM                | off                                   |
+| OAuth Token Manager, Grant, and Session Settings | Ignore Resource and Audience Parameters | off                                   |
+
+The client id and secret are what the Testkube organization admin enters under **Organization, AI
+Governance, Identity provider**.
+
+The policy is not named on this page. PingFederate keeps one default processor policy, and a
+single policy becomes it. With more than one, choose which is the default from the Processor
+Policies table.
+
+:::warning Two settings that break the audience
+**Restrict to Selected ATM** pins the client to one manager, and every other MCP Server then
+answers `invalid_target`. **Ignore Resource and Audience Parameters** makes every exchange use the
+default manager, so every MCP Server receives a token addressed to one of them. Both are off by
+default and should stay off.
+:::
+
+The **Default Access Token Manager** is only a tiebreaker for a request that names no target.
+Testkube always names one, so in normal operation it is never read. With it empty and no target
+named, PingFederate picks a manager on its own and issues a token addressed to the wrong server,
+so filling it in makes that case predictable rather than arbitrary.
+
+## What Testkube sends
+
+Testkube asks for the target with the **`resource`** parameter, an absolute URI, which is what
+PingFederate registers in **Resource URIs**. Providers that expect a bare name in `audience` are
+handled by writing the audience as a bare name instead, and one installation can hold servers of
+both kinds.
+
+So the audience an organization admin types for an MCP Server has to be the same string as that
+manager's **Resource URIs** entry, character for character.
+
+## Calls between MCP Servers
+
+When one MCP Server calls another, what it presents to PingFederate is not Testkube's token. It is
+the access token PingFederate issued minutes earlier. A different kind of token needs a different
+reader, which is object 2.
+
+Two measured facts decide the shape of this.
+
+**A bearer token processor only accepts tokens from the manager it names.** A reader bound to the
+build service's manager was given a token issued by the deployment service's manager and refused
+it with `invalid_request`, `token not found, expired or invalid`. The signature is never reached:
+PingFederate records the issuing manager inside the token's header and compares it first.
+
+**A policy holds one mapping per subject token type.** A second mapping for the same type is
+rejected:
+
+```text
+A mapping with the same Subject Token Type and Actor Token Type already exists.
+```
+
+Together those mean two MCP Servers that call **each other** do not fit in one policy. The shape
+that does fit follows from who performs that exchange: it is the calling MCP Server, with its own
+credential, not Testkube with its own.
+
+```text
+build service calls out    ->  its own client  ->  its own policy  ->  reader bound to its manager
+deploy service calls out   ->  its own client  ->  its own policy  ->  reader bound to its manager
+```
+
+A server that only answers needs none of this. Only a server that starts a call needs its own
+client, policy and reader, so the cost follows the call graph rather than the number of servers.
+
+## Validated
+
+| What                                              | Result                                                            |
+| ------------------------------------------------- | ----------------------------------------------------------------- |
+| Three people, same agent, same question           | each received only their own rows                                 |
+| One service calling another on a person's behalf  | the second service recorded the work against that person          |
+| Testkube's own token presented to an MCP Server   | refused, the server has never heard of Testkube's issuer          |
+| A run with nobody present                         | authorized as the client's own principal, not as anybody's        |
+| That run with the Client Credentials mapping gone | the provider issued a token naming nobody; the MCP Server refused |
+
+PingFederate 13.1.4.1.
