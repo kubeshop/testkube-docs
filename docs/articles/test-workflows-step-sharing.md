@@ -91,7 +91,7 @@ steps:
 
 Two events end the whole execution, so no later step runs and no step can read their result: a signal that kills the process of a step, and Kubernetes that kills the container, for example when it uses more memory than its limit. Testkube then records the cause in the result of the execution, as the reason code `process-killed` or `oom-killed`. A cause that Kubernetes reports before the pod starts, for example a pod that no node can run, is also in the result of the execution. See [Failure Reasons](/articles/test-workflows-failure-reasons).
 
-The function `execution()` reads another execution. It resolves in a `shell`, in a command, and in a `retry` condition, but not in the `condition` of a step. To branch on the result of another execution, read it in a `shell` step, write the answer to `/testkube/outputs`, and use that output in the condition of the next step. A suite uses this to run one Workflow or another from an earlier result, and to take its own result from the branch that ran. See [Branching on an earlier Workflow](/articles/test-workflows-test-suites#branching-on-an-earlier-workflow).
+The function `execution()` reads another execution. It resolves in a `shell`, in a command, and in a `retry` condition, but not in the `condition` of a step. The function `parallel()`, which reads the workers of an earlier parallel step, also resolves in the `condition` of a step (see [Reading values from parallel steps](/articles/test-workflows-parallel#reading-values-from-parallel-steps)). To branch on the result of another execution, read it in a `shell` step, write the answer to `/testkube/outputs`, and use that output in the condition of the next step. A suite uses this to run one Workflow or another from an earlier result, and to take its own result from the branch that ran. See [Branching on an earlier Workflow](/articles/test-workflows-test-suites#branching-on-an-earlier-workflow).
 
 ## Full Example
 
@@ -125,4 +125,5 @@ steps:
 - Output values are strings. Write JSON if you need structured data and parse it in the consuming step.
 - `{{step.<id>.exitCode}}` is a number. The other step expressions are strings.
 - Step results directories work within a single pod. They are not available across parallel workers in separate pods — use the `transfer` property for that (see [Parallelization](/articles/test-workflows-parallel)).
+- A worker of a parallel step publishes output values the same way, and the steps after the parallel step read them with `parallel("<id>", <index>).outputs.<key>` (see [Reading values from parallel steps](/articles/test-workflows-parallel#reading-values-from-parallel-steps)).
 - An output value holding a secret stays inside the Workflow that produced it. Later steps read it in full; a Workflow that ran this one cannot — see [Sensitive Values](/articles/test-workflows-execution-sharing#sensitive-values).
