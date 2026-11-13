@@ -37,20 +37,19 @@ will usually have both, and the sign-in is chosen per AI Agent and per MCP Serve
 
 ## What your identity provider has to support
 
-The exchange is [RFC 8693 token exchange](https://datatracker.ietf.org/doc/html/rfc8693). Support
-is uneven, and it is worth checking before planning the work:
+The exchange is [RFC 8693 token exchange](https://datatracker.ietf.org/doc/html/rfc8693), and
+support for it is uneven, so it is worth settling before planning the work. The question to put to
+your provider is narrow: can it exchange a token issued by an **external** issuer for one of its
+own? A provider that only exchanges tokens it minted itself cannot do this, however complete its
+token exchange support looks otherwise.
 
-| Provider                     | Can it do this                                                                  |
-| ---------------------------- | ------------------------------------------------------------------------------- |
-| **PingFederate**             | Yes. Documented, and the mapping is configured once rather than per person.     |
-| **Keycloak**                 | Only on its legacy preview path, and it needs a stored account link per person. |
-| **Microsoft Entra ID**       | No. It has no token exchange grant for an external issuer.                      |
-| **Okta**                     | No.                                                                             |
-| **OpenShift built-in OAuth** | No.                                                                             |
-| **Google Workspace**         | Only into Google Cloud, not into your own services.                             |
+Two more things decide whether it is practical. The mapping from a Testkube subject to one of your
+users should be a rule rather than a record stored per person, or somebody has to be enrolled
+before they can ask anything. And the provider has to be able to issue a token for each MCP
+Server's own audience, so one server's token is not accepted by another.
 
-If yours is not here, ask whether it can exchange a token from an **external** issuer for one of
-its own. A provider that only exchanges its own tokens cannot do this.
+PingFederate does all three. [Its recipe](./ai-identity-provider-pingfederate.mdx) is the worked
+example, and the shape it follows is a fair guide to what any provider will ask for.
 
 ## The trust direction that is easy to confuse
 
