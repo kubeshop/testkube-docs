@@ -915,6 +915,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "PingFederate Recipe",
+                  id: "articles/ai-identity-provider-pingfederate",
+                },
+                {
+                  type: "doc",
                   label: "Configuring AI Models",
                   id: "articles/ai-models",
                 },
