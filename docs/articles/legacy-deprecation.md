@@ -1,3 +1,7 @@
+---
+description: List of the legacy functionality removed in Testkube v1.21.1, including Tests, Test Suites, Executors and Sources, and what the removal means for CLI commands, APIs and CRDs.
+---
+
 # Legacy Deprecations
 
 As of the [December 2025 Testkube Release (v1.21.1)](/changelog#monthly-release-v1211-2025-12-10), legacy functionality

@@ -1,3 +1,7 @@
+---
+description: Answers to installation questions about OpenShift, joining a Control Plane from OSS, required infrastructure, air-gapped environments, exposing Testkube and reaching the system under test.
+---
+
 # Installation FAQ
 
 ## Can Testkube be deployed on OpenShift?

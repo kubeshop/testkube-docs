@@ -1,3 +1,7 @@
+---
+description: Answers on how the open source Testkube Runner is licensed under the MIT license and the Testkube Community License (TCL), including which features fall under each.
+---
+
 # Open Source Licensing FAQ
 
 This FAQ explains how Testkube Open Source is licensed, including the MIT license and the Testkube Community License (TCL) for open source Runner functionality. For the commercial model based on users, seats, and runners, see [Commercial Licensing](/articles/licensing).

@@ -1,3 +1,7 @@
+---
+description: Add custom OpenAI, Anthropic or OpenAI-compatible models in the Models tab alongside read-only platform models, set extra headers and query parameters, and pick a model per AI Chat.
+---
+
 # Configuring AI Models
 
 Testkube AI uses Large Language Models (LLMs) to power the [AI Assistant](/articles/ai-assistant-overview) and

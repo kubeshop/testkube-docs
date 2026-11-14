@@ -1,3 +1,7 @@
+---
+description: Example Test Workflow that uses a service running the Testkube CLI in a loop to trigger another Workflow repeatedly as Silent Executions until it ends.
+---
+
 # Looping Test Workflow Executions from Workflows
 
 For certain testing scenarios, teams may desire a workflow to run continuously, looped, until some timeout condition occurs (the workflow is manually ended, or a time limit is reached). This continuously looping workflow can be useful for driving specific activity against a system under test while a second Test Workflow performs the actual tests.

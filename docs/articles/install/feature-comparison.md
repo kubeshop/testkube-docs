@@ -1,3 +1,7 @@
+---
+description: Table of which features work with the Runner in Standalone Mode and which need a Control Plane, such as the Dashboard, SSO, RBAC, Insights, AI Agents and the MCP Server.
+---
+
 # Testkube Runner Feature Comparison {#testkube-agent-feature-comparison}
 
 The below table shows a feature comparison between deploying the Testkube Runner in Standalone Mode vs when it is connected to the

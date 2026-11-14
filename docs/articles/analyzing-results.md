@@ -1,3 +1,7 @@
+---
+description: Tactical versus strategic test reporting, and how the Test Insights module in Testkube answers questions about test duration, resource use, pass/fail trends and flakiness.
+---
+
 # Analyzing Results
 
 ## Reporting Overview

@@ -1,3 +1,7 @@
+---
+description: Cache dependency directories between Test Workflow executions with a step cache block, covering keys and restore keys, scope, pull request isolation, performance, expiration settings and limits.
+---
+
 # Dependency Caching
 
 A step can cache directories between executions with a `cache` block. The cache is restored before the step runs and saved again once the step passes, so a dependency install that would otherwise hit the network on every run reuses what an earlier run already fetched.

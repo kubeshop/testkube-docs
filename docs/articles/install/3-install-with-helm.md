@@ -1,3 +1,7 @@
+---
+description: Install Testkube On-Prem for production with Helm, covering resource requirements, license, domain exposure through Ingress or Gateway API, Dex auth, metrics and shared secrets.
+---
+
 # Testkube Production Install with Helm
 
 The main Testkube Helm Charts includes both the Testkube Control Plane and Testkube Runner charts and

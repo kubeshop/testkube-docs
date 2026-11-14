@@ -1,3 +1,7 @@
+---
+description: Overview of the Testkube Custom Resource groups used by Standalone Runner and GitOps deployments, with links to each CRD reference and kubectl commands to check the installed CRDs.
+---
+
 # Testkube Custom Resources
 
 :::info

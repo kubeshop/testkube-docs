@@ -1,3 +1,7 @@
+---
+description: How Testkube collects logs per container and uploaded artifacts for a Workflow execution, and how to view them, compare logs between steps and retrieve them with the CLI.
+---
+
 # Logs & Artifacts
 
 ## Log Collection

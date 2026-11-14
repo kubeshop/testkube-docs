@@ -1,3 +1,7 @@
+---
+description: Tour of the Integrations section of the Dashboard and its Kubernetes Event Triggers, Webhooks, CI/CD Tools and Integration Examples tabs.
+---
+
 # Integrations Overview
 
 The **Integrations Overview** provides insight into how Testkube connects with tools you already use, such as

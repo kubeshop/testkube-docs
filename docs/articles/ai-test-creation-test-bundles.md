@@ -1,5 +1,6 @@
 ---
 title: Work with Test Bundles and multiple chats
+description: Organize AI Test Creation work in a Test Bundle by starting and switching between chats, sharing guidance through Attached Context, and knowing what the bundle and each chat own.
 slug: /articles/ai-test-creation-test-bundles
 ---
 

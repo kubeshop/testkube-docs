@@ -1,3 +1,7 @@
+---
+description: Bring the Control Plane and Runner into compliance with the Kubernetes restricted Pod Security Standard by fixing NATS volume ownership and setting non-root security contexts.
+---
+
 # Pod Security Standards
 
 Kubernetes allows one to apply security policies to pods and enforce them with

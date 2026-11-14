@@ -1,3 +1,7 @@
+---
+description: How Testkube resolves access to Resources from Organization, Environment and Resource Group roles, including which role wins when they overlap, with recommendations.
+---
+
 # Resource Access Management
 
 Testkube provides a flexible access-control mechanism to help you enforce how members of an Organization have

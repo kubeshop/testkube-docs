@@ -1,3 +1,7 @@
+---
+description: Expose the On-Prem Control Plane on OpenShift with Routes and custom certificates, and let OpenShift assign `fsGroup` for Test Workflow pods.
+---
+
 # Deploying on OpenShift
 
 When deploying Testkube in an OpenShift cluster, you can expose its public endpoints using OpenShift Routes while securing them with custom certificates.

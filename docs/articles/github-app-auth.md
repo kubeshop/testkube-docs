@@ -1,3 +1,7 @@
+---
+description: Connect GitHub organizations to a Testkube Organization through the shared Testkube GitHub App so Test Workflows clone private repositories with short-lived tokens, plus self-hosted setup and IP allow lists.
+---
+
 # Centralized GitHub App
 
 The centralized GitHub App lets a single Testkube organization authenticate to GitHub

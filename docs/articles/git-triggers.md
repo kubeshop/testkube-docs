@@ -1,3 +1,7 @@
+---
+description: Run Test Workflows when a Git repository changes using TestTriggers with git-push, git-tag-push and git-pull-request events, branch, tag and path filters, and the exported Git variables.
+---
+
 # Git Event Triggers
 
 Git Event Triggers let you run Test Workflows when files in a Git repository change. They are useful when your test inputs live in Git and you want Testkube to react automatically without depending on an external CI system.

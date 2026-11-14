@@ -1,3 +1,7 @@
+---
+description: What the open source Standalone Runner does without a Control Plane, with links to getting started, the feature comparison, migrating to Commercial and MIT/TCL licensing.
+---
+
 # Testkube Open Source
 
 The Testkube Runner is 100% Open Source and can be [deployed in standalone mode](install/standalone-agent) without being connected

@@ -1,3 +1,7 @@
+---
+description: How Testkube stores Test Workflows, Webhooks and Triggers in the Control Plane instead of Runner CRDs as of v2.7, and what the automatic migration changes for users.
+---
+
 # Testkube Resource Management
 
 Testkube defines a number of Resources for its core functionality:

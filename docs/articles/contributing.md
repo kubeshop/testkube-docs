@@ -1,3 +1,7 @@
+---
+description: How to contribute to the open source Testkube Runner repository, with the contribution workflow, local setup with Tilt, verification commands, coding standards and where to get help.
+---
+
 # Contributing to Testkube Open Source
 
 Testkube is open source and we welcome contributions of all kinds — code, documentation, bug reports, feature requests, and ideas. Whether you're fixing a typo or building a new feature, we'd love to have you involved!

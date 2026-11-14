@@ -1,3 +1,7 @@
+---
+description: How the Testkube MCP Server authenticates with OAuth, API tokens or user JWTs, respects RBAC and audit logging, and what to consider for data flow, token permissions, firewalls and proxies.
+---
+
 # Testkube MCP Server Security & Compliance
 
 The **Testkube MCP Server** integrates with your existing Testkube security infrastructure, ensuring all operations are authenticated, authorized, and auditable.

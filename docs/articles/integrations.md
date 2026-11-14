@@ -1,3 +1,7 @@
+---
+description: Index of Testkube integrations by category, linking to the CI/CD, GitOps, progressive delivery, event-driven automation, alerting, observability and SCIM pages.
+---
+
 # Testkube Integrations Overview
 
 Testkube can be integrated into existing workflows and infrastructure in several ways, including

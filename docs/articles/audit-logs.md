@@ -1,3 +1,7 @@
+---
+description: View, filter and export the Organization Audit Log, see how AI and MCP tool calls are recorded, and set retention and console logging for Testkube On-Prem.
+---
+
 # Testkube Audit Logs
 
 **Testkube** records significant events in its internal **Audit Log**,

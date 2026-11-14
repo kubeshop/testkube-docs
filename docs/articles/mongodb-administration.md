@@ -1,3 +1,7 @@
+---
+description: Connect a legacy MongoDB-based Testkube deployment to an external MongoDB instance, configure SSL connections and purge old data with TTL indexes.
+---
+
 # MongoDB administration
 
 :::note

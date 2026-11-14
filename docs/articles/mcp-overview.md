@@ -1,3 +1,7 @@
+---
+description: What the Testkube MCP Server lets AI tools do, the hosted, CLI and Docker setup options, and the full list of MCP tools for workflows, executions, artifacts, queries and Insights boards.
+---
+
 # Testkube MCP Server
 
 :::tip

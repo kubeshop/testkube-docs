@@ -1,3 +1,7 @@
+---
+description: Use Testkube CLI commands to create, install, update, list, disable, delete and uninstall Runners, rotate their secret keys, assign Floating licenses and update labels.
+---
+
 # Testkube Runner CLI Commands {#testkube-agent-cli-commands}
 
 The Testkube CLI provides a number of commands to work with Runners - [Read More](/articles/agents-overview).

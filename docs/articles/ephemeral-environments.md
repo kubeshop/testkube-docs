@@ -1,3 +1,7 @@
+---
+description: Run Test Workflows in short-lived namespaces or clusters, either with a dedicated runner per ephemeral environment or with a Standalone Runner and a runtime `executionNamespace` parameter.
+---
+
 # Ephemeral Environments
 
 While application namespaces/clusters are often long-lived (dev, staging, prod, etc.), it is equally common to provision short-lived

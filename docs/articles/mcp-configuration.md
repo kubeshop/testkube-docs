@@ -1,3 +1,7 @@
+---
+description: Configuration snippets for connecting GitHub Copilot in VS Code, Cursor, Claude Desktop and Claude Code to the Testkube MCP Server through the hosted endpoint, CLI or Docker, with example prompts.
+---
+
 # Testkube MCP Server Configuration Examples
 
 This guide provides configuration examples for integrating the Testkube MCP Server with various AI tools and development environments.

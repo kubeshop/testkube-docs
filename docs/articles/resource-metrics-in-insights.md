@@ -1,3 +1,7 @@
+---
+description: Reference for the CPU, memory, network and disk usage metrics and the min, max, average and sum aggregates you can chart across executions in Insights.
+---
+
 # Resource Metrics in Insights
 
 The [Resource Usage](/articles/resource-metrics) collected for each Workflow execution is available for trend and aggregate analysis in Test Insights:
