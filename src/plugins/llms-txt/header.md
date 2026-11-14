@@ -15,3 +15,5 @@ If you are an AI agent working with Testkube, two tools give you more than these
 - Install the [Testkube Agent Skills](https://docs.testkube.io/articles/testkube-skills) for guidance on creating, running and debugging tests with Testkube.
 
 Some features are available only in Testkube Commercial. The [Feature Comparison](https://docs.testkube.io/articles/install/feature-comparison) lists the differences between Testkube Commercial and Testkube Open Source.
+
+Every page below is linked as Markdown. Each section ends with a link to one file that holds the full text of all its pages, for when you need a whole topic; [llms-full.txt](https://docs.testkube.io/llms-full.txt) lists those files with their sizes.
