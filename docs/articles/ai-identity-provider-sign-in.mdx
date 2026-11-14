@@ -1,0 +1,156 @@
+# Reaching MCP Servers as the person asking
+
+An AI Agent normally reaches an MCP Server as itself, with one key for everybody. The
+**Through the identity provider** sign-in changes who the server sees: your own identity
+provider turns whoever is asking into a token of its own, and the MCP Server authorizes that
+person rather than Testkube.
+
+Two people asking the same AI Agent the same question then get different answers, because the
+server behind it already knows who may see what. Nobody enrols, and Testkube stores no key for
+that server.
+
+:::note Self-hosted only for now
+This sign-in is available on self-hosted installations. The exchange requires your identity
+provider to reach your Testkube installation's Dex on every call, which a Testkube Cloud
+installation cannot offer across a customer boundary.
+:::
+
+## Who does what
+
+Setting this up takes two different people, and the split is the point of this page.
+
+| Who                             | What they do                                                                                                                                                                                 |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Identity admin**              | Registers Testkube at your identity provider, trusts Testkube's Dex as a token issuer, decides how a Testkube subject maps to one of your users, and gives the agent a principal of its own. |
+| **Testkube organization admin** | Enters the relationship under **Organization, AI Governance, Identity provider**, and sets one audience per MCP Server.                                                                      |
+| **Platform or QA engineer**     | Picks this sign-in on the AI Agent's MCP Server, once the two above are done.                                                                                                                |
+
+## Which MCP Servers this is for
+
+Use it for **your own services**: an internal build system, a deployment service, a data
+catalogue. They already validate tokens from your identity provider, so they can authorize the
+person the token names.
+
+Keep **third-party SaaS** on **Each person signs in**. A service like Jira or GitHub trusts its
+own accounts, not your provider, so there is nothing for an exchange to produce. One installation
+will usually have both, and the sign-in is chosen per AI Agent and per MCP Server.
+
+## What your identity provider has to support
+
+The exchange is [RFC 8693 token exchange](https://datatracker.ietf.org/doc/html/rfc8693), and
+support for it is uneven, so it is worth settling before planning the work. The question to put to
+your provider is narrow: can it exchange a token issued by an **external** issuer for one of its
+own? A provider that only exchanges tokens it minted itself cannot do this, however complete its
+token exchange support looks otherwise.
+
+Two more things decide whether it is practical. The mapping from a Testkube subject to one of your
+users should be a rule rather than a record stored per person, or somebody has to be enrolled
+before they can ask anything. And the provider has to be able to issue a token for each MCP
+Server's own audience, so one server's token is not accepted by another.
+
+PingFederate does all three. [Its recipe](./ai-identity-provider-pingfederate.mdx) is the worked
+example, and the shape it follows is a fair guide to what any provider will ask for.
+
+## The trust direction that is easy to confuse
+
+Your installation may already use your identity provider for signing in to Testkube. That is the
+**opposite** direction from what this needs, and having one does not give you the other.
+
+- **Signing in to Testkube**: Testkube trusts your provider to say who a person is.
+- **This sign-in**: your provider trusts **Testkube's Dex** to say who a person is, so it can
+  convert Testkube's token into one of its own.
+
+So an identity admin registers Testkube's Dex as a trusted token issuer at the provider, with
+Dex's JWKS URL, and allows the registered client to exchange tokens from that issuer.
+
+:::warning The JWKS URL is fetched on every exchange
+Your provider reads Dex's signing keys over the network each time it converts a token, not once
+at setup. The provider must be able to reach your installation's Dex **continuously**, over
+HTTPS, and must trust the certificate authority that signed it. A provider that cannot reach Dex
+refuses every exchange.
+:::
+
+## How your provider recognises the person
+
+Testkube sends the OIDC ID token its own issuer minted for the person. **Match them on that
+token's `email` claim.** Its subject is an identifier internal to that issuer and names nobody in
+your directory, so a rule keyed on the subject matches nobody.
+
+Your provider then has to turn that email address into one of its own users, and there are two
+ways it does that. The difference decides whether this is setup work or permanent work.
+
+- **Attribute mapping**, a rule configured once, which looks the person up by an attribute such
+  as their email address. PingFederate works this way. Nothing is created per person and nothing
+  has to be maintained as people join and leave.
+- **A stored account link per person**, a row the provider keeps for each individual. Keycloak
+  works this way. Somebody has to create a link for every person who will use an AI Agent, and
+  keep it in step with joiners and leavers. **That is standing work in your estate**, not part of
+  the setup, and it is worth knowing before you commit.
+
+Testkube refuses the exchange before it calls your provider when the token it holds for the person
+carries no email address, rather than presenting one that names nobody. Your provider is never
+asked to map an empty subject, which matters for the trap in the next section.
+
+## Validate against a real directory, not an empty realm
+
+:::danger A pilot on a test realm can pass while the real thing fails
+Some providers silently create a **shadow user** for a subject they do not recognise, instead of
+refusing. On an empty test realm every exchange then succeeds, because every person is new, and
+the configuration looks correct.
+
+Against your real directory the same configuration fails, because those people already exist and
+the provider has to match them rather than create them. Any validation has to run against a
+directory where the people are already there.
+:::
+
+## Runs with nobody present
+
+AI Triggers, pull request analysis and scheduled runs have no person to act for. They sign in as
+the AI Agent's **own principal** at your provider, not as the last person who used the agent.
+
+This is the service account of the **same client** the exchange already requires, so your
+identity admin registers one thing rather than two. Give it only what those runs need: it is the
+identity your MCP Servers will see for everything nobody started.
+
+If the client has no service account, those runs are refused and say so, rather than borrowing
+somebody's identity.
+
+## One audience per MCP Server
+
+Each MCP Server expects its token to name it as the audience, so your provider issues a token for
+that server and that server alone. A token minted for your build service is not accepted by your
+deployment service.
+
+In Testkube, the organization admin lists the audience each MCP Server expects, by MCP Server id,
+under **Organization, AI Governance, Identity provider**. At the provider, the registered client
+needs permission to request a token for each of those audiences.
+
+## Setting it up
+
+1. **At your identity provider**, register a client for Testkube with a client id and secret,
+   trust your installation's Dex as a token issuer with its JWKS URL, allow that client to
+   exchange tokens from it, decide how a subject maps to one of your users, give the client a
+   service account for unattended runs, and allow it to request a token for each MCP Server's
+   audience.
+2. **In Testkube**, open **Organization, AI Governance, Identity provider**, and enter the token
+   endpoint, client id and client secret. Add an audience for each MCP Server. Select **Test
+   connection**: it asks your provider for a token as Testkube's own account, so a wrong secret
+   or an unreachable endpoint shows up here rather than in somebody's chat.
+3. **On the AI Agent**, set the MCP Server's **Sign-in** to **Through the identity provider**.
+
+## When it does not work
+
+A server reached this way reports why rather than disappearing from the conversation, and the
+reasons are fixed in different places:
+
+| What the AI Agent reports                     | What it means                                                                                                                                                                                                |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| No identity provider is set up                | Nothing is declared for this organization. An organization admin declares one.                                                                                                                               |
+| Your provider refused the sign-in itself      | The relationship is wrong: the client, the secret or the audience. An organization admin or your identity admin checks it.                                                                                   |
+| Your provider would not issue a token for you | Your provider does not recognise this person, or will not give them that audience. This is normal and personal, and it is your directory that decides.                                                       |
+| Your provider could not be reached            | A network or availability problem. Nothing is misconfigured.                                                                                                                                                 |
+| Testkube holds no email address for you       | The token Testkube holds for you carries none, so there is nobody to exchange. Sign in again, and if that does not help, whoever operates the installation checks that its sign-in asks for the email scope. |
+
+The provider's own wording is kept out of the chat, because it names internal configuration.
+It is written to the Control Plane log for whoever operates the installation, and the
+**Test connection** button shows it to the organization admin who can act on it.
