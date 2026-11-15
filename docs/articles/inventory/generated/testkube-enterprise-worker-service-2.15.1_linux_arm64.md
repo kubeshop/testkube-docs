@@ -241,7 +241,7 @@ Mountpoint creation is now scoped to the container root using `os.Root` (Go 1.24
 <tr><td>Affected range</td><td><code>>=19.03.0+incompatible</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.549%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -254,22 +254,20 @@ Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Es
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>stdlib</strong> <code>1.26.10</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>github.com/mark3labs/mcp-go</strong> <code>1.1.1</code> (golang)</summary>
 
-<small><code>pkg:golang/stdlib@1.26.10</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-97054?s=golang&n=stdlib&t=golang&vr=%3C1.26.11"><img alt="unspecified : CVE--2026--97054" src="https://img.shields.io/badge/CVE--2026--97054-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+<small><code>pkg:golang/github.com/mark3labs/mcp-go@1.1.1</code></small><br/>
+<a href="https://scout.docker.com/v/GO-2026-6911?s=golang&n=mcp-go&ns=github.com%2Fmark3labs&t=golang&vr=%3E%3D0"><img alt="unspecified : GO--2026--6911" src="https://img.shields.io/badge/GO--2026--6911-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;1.26.11</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.26.11</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.171%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>>=0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-For HTTP/1 servers, when MaxBytesReader's limit is exceeded, "Connection: close" header is automatically set without synchronization, which might race with another header being set explicitly in the server handler. As a result, an HTTP/1 server that utilizes MaxBytesReader or MaxBytesHandler can crash due to runtime panic if its handler reads the request body concurrently with writing the response header.
+In github.com/mark3labs/mcp-go/client/transport, NewStreamableHTTP constructs an http.Client with a nil CheckRedirect policy when no custom WithHTTPBasicClient is supplied, and attaches static custom headers and OAuth bearer tokens inside a RoundTripper layer. If an MCP server responds with a 3xx redirect, the client follows the Location header to arbitrary hosts and schemes and attaches configured WithHeaders and OAuth Authorization headers to the redirected request, enabling server-side request forgery (SSRF) and credential disclosure.
 
 </blockquote>
 </details>
@@ -298,6 +296,28 @@ If you are required to interoperate with OpenPGP systems and need a maintained p
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>stdlib</strong> <code>1.26.10</code> (golang)</summary>
+
+<small><code>pkg:golang/stdlib@1.26.10</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-97054?s=golang&n=stdlib&t=golang&vr=%3C1.26.11"><img alt="unspecified : CVE--2026--97054" src="https://img.shields.io/badge/CVE--2026--97054-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.26.11</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.26.11</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.171%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+For HTTP/1 servers, when MaxBytesReader's limit is exceeded, "Connection: close" header is automatically set without synchronization, which might race with another header being set explicitly in the server handler. As a result, an HTTP/1 server that utilizes MaxBytesReader or MaxBytesHandler can crash due to runtime panic if its handler reads the request body concurrently with writing the response header.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>github.com/chrismellard/docker-credential-acr-env</strong> <code>0.0.0-20230304212654-82a0ddb27589</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/chrismellard/docker-credential-acr-env@0.0.0-20230304212654-82a0ddb27589</code></small><br/>
@@ -312,26 +332,6 @@ If you are required to interoperate with OpenPGP systems and need a maintained p
 <blockquote>
 
 In github.com/chrismellard/docker-credential-acr-env/pkg/credhelper, the regular expression used by isACRRegistry to validate Azure Container Registry hostnames is unanchored. As a result, arbitrary hostnames containing the substring ".azurecr.io" (such as evil.azurecr.io.attacker.com) are treated as valid ACR registries, causing ACRCredHelper.Get to send the Azure Active Directory (AAD) access token to attacker-controlled hosts.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>github.com/mark3labs/mcp-go</strong> <code>1.1.1</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/mark3labs/mcp-go@1.1.1</code></small><br/>
-<a href="https://scout.docker.com/v/GO-2026-6911?s=golang&n=mcp-go&ns=github.com%2Fmark3labs&t=golang&vr=%3E%3D0"><img alt="unspecified : GO--2026--6911" src="https://img.shields.io/badge/GO--2026--6911-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-In github.com/mark3labs/mcp-go/client/transport, NewStreamableHTTP constructs an http.Client with a nil CheckRedirect policy when no custom WithHTTPBasicClient is supplied, and attaches static custom headers and OAuth bearer tokens inside a RoundTripper layer. If an MCP server responds with a 3xx redirect, the client follows the Location header to arbitrary hosts and schemes and attaches configured WithHeaders and OAuth Authorization headers to the redirected request, enabling server-side request forgery (SSRF) and credential disclosure.
 
 </blockquote>
 </details>

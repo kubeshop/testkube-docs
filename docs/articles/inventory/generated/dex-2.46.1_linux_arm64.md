@@ -175,7 +175,7 @@ Thanks to Dohyun Kim (@<!-- -->azza999), Joshua Rogers of AISLE Research, and Su
 <tr><td>CVSS Score</td><td><code>6.9</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.264%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -433,9 +433,9 @@ A vulnerability in the in-band key negotiation exists in the AWS S3 Crypto SDK f
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 5" src="https://img.shields.io/badge/U-5-lightgrey"/><strong>libssl3</strong> <code>3.5.9-r0</code> (apk)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 5" src="https://img.shields.io/badge/U-5-lightgrey"/><strong>libcrypto3</strong> <code>3.5.9-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/libssl3@3.5.9-r0?arch=aarch64&distro=alpine-3.24.3&upstream=openssl</code></small><br/>
+<small><code>pkg:apk/alpine/libcrypto3@3.5.9-r0?arch=aarch64&distro=alpine-3.24.3&upstream=openssl</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2026-95692?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C3.5.9-r1"><img alt="unspecified : CVE--2026--95692" src="https://img.shields.io/badge/CVE--2026--95692-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
@@ -523,9 +523,9 @@ A vulnerability in the in-band key negotiation exists in the AWS S3 Crypto SDK f
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 5" src="https://img.shields.io/badge/U-5-lightgrey"/><strong>libcrypto3</strong> <code>3.5.9-r0</code> (apk)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 5" src="https://img.shields.io/badge/U-5-lightgrey"/><strong>libssl3</strong> <code>3.5.9-r0</code> (apk)</summary>
 
-<small><code>pkg:apk/alpine/libcrypto3@3.5.9-r0?arch=aarch64&distro=alpine-3.24.3&upstream=openssl</code></small><br/>
+<small><code>pkg:apk/alpine/libssl3@3.5.9-r0?arch=aarch64&distro=alpine-3.24.3&upstream=openssl</code></small><br/>
 <a href="https://scout.docker.com/v/CVE-2026-95692?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C3.5.9-r1"><img alt="unspecified : CVE--2026--95692" src="https://img.shields.io/badge/CVE--2026--95692-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
