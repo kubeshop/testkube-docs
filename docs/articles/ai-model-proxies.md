@@ -1,3 +1,7 @@
+---
+description: Connect Testkube AI to Claude through a LiteLLM proxy or to locally served models through vLLM using the OpenAI Compatible provider, with Kubernetes manifests, a smoke test and production notes.
+---
+
 # Use Alternative Models with Testkube AI
 
 Testkube's **OpenAI Compatible** provider can connect to models beyond OpenAI when a gateway or model server exposes the expected API. Choose the service according to where inference runs:

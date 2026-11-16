@@ -1,3 +1,7 @@
+---
+description: Run the Testkube MCP Server from the `kubeshop/testkube-mcp-server` Docker image with an API token, and configure VS Code, Cursor, Claude Desktop and Claude Code to use it over stdio or shttp.
+---
+
 # Testkube MCP Server with Docker
 
 The Testkube MCP Server is available on [DockerHub](https://hub.docker.com/repository/docker/kubeshop/testkube-mcp-server) and can

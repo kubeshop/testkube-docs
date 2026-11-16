@@ -1,3 +1,7 @@
+---
+description: Inspect a Workflow execution in the Dashboard through its Log Output, Artifacts, Resource Usage, Flowchart, CLI Commands, Events and Workflow Definition tabs, and search or compare logs.
+---
+
 # Workflow Execution Details
 
 **Workflow Execution Details** provides a comprehensive view of a Workflow execution to include the steps, logs, artifacts, and configuration – helping you understand

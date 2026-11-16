@@ -1,5 +1,6 @@
 ---
 title: AI Test Creation
+description: How AI Test Creation sessions run in isolated Sandboxes, and how to install and secure it on Testkube On-Prem with Helm, covering models, PostgreSQL, network egress, keys and image registries.
 slug: /articles/ai-test-creation
 ---
 

@@ -1,3 +1,7 @@
+---
+description: Example Test Workflow step that copies artifacts to your own S3 or MinIO bucket with the `mc` client, retrying on failure and running even when earlier steps fail.
+---
+
 # Custom Artifact Upload
 
 If you need to upload Test Artifacts to a custom S3/Minio location for audit or access reasons, you can easily add

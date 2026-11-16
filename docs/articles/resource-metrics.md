@@ -1,3 +1,7 @@
+---
+description: CPU, memory, network and disk metrics Testkube collects for each Workflow execution, how to read the Resource Usage charts for multi-step and parallel runs, and the aggregates available in Insights.
+---
+
 # Resource Metrics
 
 Testkube automatically collects resource metrics for your workflow executions to help you understand their

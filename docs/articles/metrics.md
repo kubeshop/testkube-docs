@@ -1,3 +1,7 @@
+---
+description: Reference for the Prometheus metrics the Testkube Runner API Server exposes at /metrics, with the Runner capabilities each one needs, a ServiceMonitor for scraping and a Grafana dashboard.
+---
+
 # Testkube Runner Metrics {#testkube-agent-metrics}
 
 The Testkube Runner API Server exposes a `/metrics` endpoint that can be consumed by Prometheus, Grafana, etc.

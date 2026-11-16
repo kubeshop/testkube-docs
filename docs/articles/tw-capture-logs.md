@@ -1,3 +1,7 @@
+---
+description: Collect logs from the pods of the application under test in a Test Workflow with kubectl logs, packaged as a reusable Test Workflow Template that takes a label selector.
+---
+
 # Capturing Logs from your Application
 
 When troubleshooting your (failed) tests, it can be helpful to have access to the logs of the components

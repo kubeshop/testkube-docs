@@ -1,3 +1,7 @@
+---
+description: Where to find the Organization and Environment settings in the Dashboard, and which roles are allowed to change each.
+---
+
 # Global Settings
 
 The Testkube Dashboard provides a central location for you to configure your **Organization** and **Environment** settings.

@@ -1,5 +1,6 @@
 ---
 title: Create your first test with AI
+description: Describe a test in the Test Catalog, follow the AI in chat, review the generated files and execution results, and add another test case, using a Playwright TodoMVC example.
 slug: /articles/ai-test-creation-getting-started
 ---
 

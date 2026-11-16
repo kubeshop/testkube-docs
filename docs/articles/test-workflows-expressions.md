@@ -1,3 +1,7 @@
+---
+description: Reference for the Test Workflow expression language, with its operators, built-in variables such as config, execution and step, and functions for casting, JSON, shell quoting, files and execution data.
+---
+
 # Test Workflows – Expressions
 
 Our Test Workflows system uses a simple, yet powerful, expressions language to dynamically evaluate and transform values at runtime. This language is built on JSON and supports basic arithmetic, logical operations, and many useful built-in functions, enabling you to customize your workflows flexibly.

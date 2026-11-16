@@ -1,3 +1,7 @@
+---
+description: Trigger a Workflow in another Environment from a Test Workflow with the Testkube CLI, collect its logs and artifacts, and coordinate executions across Environments with execute.
+---
+
 # Remote Workflow Execution
 
 In a complex Testkube installation it might be desirable to schedule and synchronize the execution

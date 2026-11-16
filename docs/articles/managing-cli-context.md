@@ -1,3 +1,7 @@
+---
+description: Connect the Testkube CLI to a Standalone Runner with `testkube set context`, or to a Control Plane with `testkube login`, including self-hosted instances, SSO and API Tokens.
+---
+
 # Managing CLI Context
 
 The Testkube CLI can be configured to connect to either a Standalone OSS Testkube Runner or

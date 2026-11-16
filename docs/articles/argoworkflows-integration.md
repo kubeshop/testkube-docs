@@ -1,3 +1,7 @@
+---
+description: Run Testkube CLI commands from Argo Workflows with a reusable WorkflowTemplate that sets the Testkube context, runs a Test Workflow and waits for its result.
+---
+
 # Using Testkube with Argo Workflows
 
 This document describes how you can use Testkube with [Argo Workflows](https://argo-workflows.readthedocs.io/). As a prerequisite, you should have a good understanding

@@ -1,3 +1,7 @@
+---
+description: Analyze a failed or aborted Workflow Execution with the AI Assistant, using the AI Analyze button in the Dashboard or a prompt in a chat.
+---
+
 # AI Analysis for Failed Workflows
 
 The [AI Assistant](/articles/ai-assistant-overview) available in Testkube can be used to analyse failed Workflow Executions,

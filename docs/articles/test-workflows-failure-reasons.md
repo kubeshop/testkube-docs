@@ -1,3 +1,7 @@
+---
+description: Reference for the messages, reason codes and status details types Testkube records when an execution does not pass, and how to filter lists and call webhooks by failure type.
+---
+
 # Failure Reasons
 
 When an execution does not pass, Testkube records two things: a message for you and a reason code for your tools. The message says in words what happened. The code is short and does not change between versions, so a workflow, a webhook, or a dashboard filter can act on it.

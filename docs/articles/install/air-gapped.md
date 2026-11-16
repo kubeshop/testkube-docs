@@ -1,3 +1,7 @@
+---
+description: Install the On-Prem Control Plane and Runners in a fully disconnected network by mirroring every image to an internal registry, overriding the registry in Helm and using an offline license.
+---
+
 # Air-Gapped and Offline Installation
 
 Testkube On-Prem runs entirely in your infrastructure, including in networks with no path to the public internet. This guide gives fully-disconnected environments a self-serve install path: mirror every required image into an internal registry, point Testkube at that registry, and install without ever reaching `docker.io`.

@@ -1,3 +1,7 @@
+---
+description: Pass data between steps of one Test Workflow with output values in `/testkube/outputs` and step results directories, and read an earlier step's status and exit code.
+---
+
 # Sharing Data Between Steps
 
 Workflow steps run sequentially in the same pod, so they share a filesystem (see [Content](/articles/test-workflows-content) for volume-based sharing). But when you want to explicitly pass a value or a file from one step to another, Testkube provides two dedicated mechanisms: **output values** and **step results directories**. A later step can also read how an earlier step ended.

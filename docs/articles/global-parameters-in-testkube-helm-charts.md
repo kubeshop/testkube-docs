@@ -1,3 +1,7 @@
+---
+description: Set global Helm values such as `imageRegistry`, `imagePullSecrets`, labels and security contexts across the Control Plane and Runner charts, and see how they override per-service values.
+---
+
 # Using Global Parameters in Testkube Helm Charts
 
 Currently it is possible to use `global` setting for `imageRegistry`, `imagePullSecrets`, `labels`, `containerSecurityContext`, `podSecurityContext` and `features.gitIntegration` for both Control Plane and Runner charts. The list may extend so please check `global` section of `values.yaml` file in the charts.

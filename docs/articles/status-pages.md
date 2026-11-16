@@ -1,3 +1,7 @@
+---
+description: Create a Status Page for an Environment by grouping scheduled tests into services, and understand service statuses, operability, incidents and their severity levels, and public or private visibility.
+---
+
 # Status Pages
 
 The Testkube status pages are designed to help both technical and non-technical users understand and utilize the results of tests run on Testkube effectively. Whether you're a developer, project manager, or simply a stakeholder interested in monitoring software project status via running tests, Testkube has you covered.

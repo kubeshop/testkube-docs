@@ -1,3 +1,7 @@
+---
+description: Configure Dex in Testkube On-Prem to authenticate users with static users or an OIDC identity provider such as Google, Okta or Azure AD.
+---
+
 # Configuring SSO / Identity Providers
 
 You can configure Testkube On-Prem to authenticate users for SSO using different identity providers.

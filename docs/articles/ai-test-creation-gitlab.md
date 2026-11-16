@@ -1,5 +1,6 @@
 ---
 title: Work with a GitLab repository
+description: Connect GitLab to AI Test Creation with OAuth or an access token, enable repositories, import one into a Test Bundle, push changes for a merge request, and manage the connection.
 slug: /articles/ai-test-creation-gitlab
 ---
 

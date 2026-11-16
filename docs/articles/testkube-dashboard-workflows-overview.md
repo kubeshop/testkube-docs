@@ -1,3 +1,7 @@
+---
+description: How the Workflows Overview in the Dashboard lists the Workflows in an Environment, with Grid and Table views, search, filters and saved Custom Views.
+---
+
 # Workflows Overview
 
 The **Workflows Overview** displays all Workflows (automated tests) in the **Environment** you selected. You can **Add a new Test Workflow**

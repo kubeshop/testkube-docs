@@ -1,5 +1,6 @@
 ---
 title: Work with a GitHub repository
+description: Import a GitHub repository into an AI Test Creation Test Bundle, ask the AI for a focused test change, review the diff and run it, then push to a branch and open a pull request.
 slug: /articles/ai-test-creation-github
 ---
 

@@ -1,3 +1,7 @@
+---
+description: Upgrade Testkube with Helm or `testkube upgrade` and uninstall it with `testkube purge` or `helm uninstall`, for both Open Source and Commercial installations.
+---
+
 # Upgrade & Uninstall
 
 For production and enterprise rollout validation after each upgrade, use the [Post-Upgrade Runbook](./post-upgrade-runbook).

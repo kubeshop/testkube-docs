@@ -1,3 +1,7 @@
+---
+description: Group Workflows, Workflow Templates, Triggers and Webhooks across Environments into Resource Groups, and assign Members or Teams a Role as collaborators.
+---
+
 # Resource Groups
 
 Resource Groups allow you to group resources across all your Environments, by whatever criteria meets your needs

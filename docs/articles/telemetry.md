@@ -1,3 +1,7 @@
+---
+description: What telemetry the local trial installer, the Dashboard and the API server collect, and how to opt out in the CLI, the Runner and the Control Plane API.
+---
+
 # Telemetry
 
 To improve Testkube, we collect telemetry about how it is used. Most of it is anonymous. The local trial installer is the

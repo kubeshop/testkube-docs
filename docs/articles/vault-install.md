@@ -1,3 +1,7 @@
+---
+description: Inject the Dex config, MinIO credentials, license key and private CA certificate into the Control Plane and Runner with the HashiCorp Vault sidecar injector, with Istio troubleshooting.
+---
+
 # Installation Using Vault
 
 This guide covers an installation of Testkube utilizing [Vault's sidecar

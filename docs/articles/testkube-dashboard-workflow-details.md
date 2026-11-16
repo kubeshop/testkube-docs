@@ -1,3 +1,7 @@
+---
+description: Run, monitor and configure a Workflow in the Dashboard through its Overview, Executions, CLI Commands, CI/CD Integration and Settings tabs, including scheduling and silent executions.
+---
+
 # Workflow Details
 
 **Workflow Details** provides a central location to run, monitor, and configure the Workflows in your **Environment**.

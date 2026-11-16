@@ -1,3 +1,7 @@
+---
+description: How the Testkube Control Plane and Runners fit together, with Runner capabilities, the on-prem components and their dependencies, the ports each integration uses and S3 access.
+---
+
 # Testkube Architecture
 
 Testkube contains two sub-systems:

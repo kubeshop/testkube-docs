@@ -1,3 +1,7 @@
+---
+description: Patterns for structuring Environments, Teams and Resource Groups, from one project-centric Environment to hard isolation with separate Environments, plus SSO and SCIM user provisioning.
+---
+
 # Environments and Access Control Best Practices
 
 As organizations scale their Kubernetes adoption, the need for robust and efficient testing becomes paramount. Testkube provides a powerful, Kubernetes-native solution for test orchestration, but unlocking its full potential often comes down to how effectively you manage your environments, users, and permissions.

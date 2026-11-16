@@ -8,6 +8,7 @@
 // pull request on text it did not touch. The diff is taken from the merge base to the working
 // tree, so uncommitted edits count too. Exits 1 when an added line has an error-level alert.
 import { execFileSync, spawnSync } from "node:child_process";
+import { readFileSync } from "node:fs";
 
 // Generated pages, the same list as _typos.toml. Only inventory/generated/ is generated;
 // the hand-written inventory pages beside it are checked.
@@ -84,12 +85,29 @@ if (vale.error || vale.status === null || vale.status > 1) {
   process.exit(2);
 }
 
+// Vale skips inline code in the body of a page, but Vale.Terms still reports a term inside
+// backticks in the frontmatter, such as the command in "description: Run `testkube upgrade`".
+// True when the alert starts inside a backtick pair on a frontmatter line.
+const sources = new Map();
+const inFrontmatterCode = (path, alert) => {
+  if (!sources.has(path)) {
+    const lines = readFileSync(path, "utf8").split("\n");
+    const end = lines[0] === "---" ? lines.indexOf("---", 1) : -1;
+    sources.set(path, { lines, end });
+  }
+  const { lines, end } = sources.get(path);
+  if (alert.Line > end) return false;
+  const before = lines[alert.Line - 1].slice(0, alert.Span[0] - 1);
+  return (before.match(/`/g) ?? []).length % 2 === 1;
+};
+
 let errors = 0;
 let shown = 0;
 for (const [path, alerts] of Object.entries(JSON.parse(vale.stdout || "{}"))) {
   const lines = added.get(path.split("\\").join("/"));
   for (const a of alerts) {
     if (!lines?.has(a.Line) || a.Severity === "suggestion") continue;
+    if (inFrontmatterCode(path, a)) continue;
     if (a.Severity === "error") errors++;
     shown++;
     console.log(

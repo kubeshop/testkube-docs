@@ -1,3 +1,7 @@
+---
+description: Invite and manage Organization members, covering full and read-only seats, roles, invitations, bulk actions, display names, the Org-wide Read role for API tokens and the read-only cap.
+---
+
 # Member Management
 
 Manage your organization members from the [Members] option in the Organization management panel:

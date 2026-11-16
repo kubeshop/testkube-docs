@@ -1,3 +1,7 @@
+---
+description: Configure replicas, topology spread constraints, priority classes and dedicated nodes for a highly available Control Plane and Runner, with example Helm values and caveats.
+---
+
 # High Availability Configuration
 
 Follow this guide to ensure the highest availability possible for a Testkube

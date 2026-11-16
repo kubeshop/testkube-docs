@@ -33,6 +33,18 @@ const config = {
   organizationName: "kubeshop", // Usually your GitHub org/user name.
   projectName: "testkube", // Usually your repo name.
 
+  headTags: [
+    {
+      tagName: "link",
+      attributes: {
+        rel: "alternate",
+        type: "text/plain",
+        title: "llms.txt",
+        href: "/llms.txt",
+      },
+    },
+  ],
+
   scripts: [
     {
       src: "https://app.usercentrics.eu/browser-ui/latest/loader.js",
@@ -186,6 +198,10 @@ const config = {
             label: "GitHub",
             href: "https://github.com/kubeshop/testkube",
           },
+          {
+            label: "llms.txt",
+            href: "https://docs.testkube.io/llms.txt",
+          },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Kubeshop.`,
       },
@@ -246,6 +262,40 @@ const config = {
 
           return undefined; // Return a falsy value: no redirect created
         },
+      },
+    ],
+    [
+      // Generated reference pages: fetchable, so that agents can read them,
+      // but kept out of search results. See static/robots.txt.
+      require.resolve("./src/plugins/noindex"),
+      { prefixes: ["/cli/", "/articles/crds/"] },
+    ],
+    [
+      require.resolve("./src/plugins/llms-txt"),
+      {
+        sidebar: "main",
+        // Generated reference pages, linked from the "Optional" section instead
+        excludePrefixes: ["/cli/", "/openapi/", "/articles/crds/"],
+        optional: [
+          {
+            title: "CLI Commands Reference",
+            path: "/cli/testkube",
+            description: "Every `testkube` CLI command and its flags.",
+          },
+          {
+            title: "OpenAPI Definitions",
+            path: "/openapi/overview",
+            description: "The Runner API and the Control Plane API.",
+          },
+          {
+            title: "Runner API OpenAPI specification",
+            path: "/openapi/testkube-agent-openapi.yaml",
+          },
+          {
+            title: "Control Plane API OpenAPI specification",
+            path: "/openapi/testkube-control-plane-openapi.yaml",
+          },
+        ],
       },
     ],
   ],

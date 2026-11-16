@@ -1,3 +1,7 @@
+---
+description: Configure the Kubernetes Job and Pod of a Test Workflow, including labels, namespace, `activeDeadlineSeconds`, security context and `fsGroup` defaulting, service account, affinity and volumes.
+---
+
 # Test Workflows - Job and Pod Configuration
 
 You may need to configure the Job and Pod used for execution. It can be also used for [**parallel workers**](./test-workflows-parallel.mdx) and [**services**](./test-workflows-services.mdx).

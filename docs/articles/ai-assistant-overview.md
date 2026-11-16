@@ -1,3 +1,7 @@
+---
+description: Open the AI Assistant from the Dashboard in overlay or docked mode, switch between chats, and select the AI Agent and model for a conversation.
+---
+
 # AI Assistant
 
 The **Testkube AI Assistant** gives you quick access to Testkube AI Agents from anywhere in the Dashboard,

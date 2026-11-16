@@ -1,3 +1,7 @@
+---
+description: Parameterize Test Workflows with config parameters and environment variables, source values from config maps, Secrets and Credentials, and set them from the Dashboard, the CLI or an execute step.
+---
+
 # Test Workflows Parameterization
 
 Test Workflows parameterization allows you to supply runtime **parameters** that make your workflows flexible and reusable. You can provide these parameters in two primary ways:

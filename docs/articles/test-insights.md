@@ -1,3 +1,7 @@
+---
+description: Analyze execution results in Insights with boards and analyses, covering granular metrics, time series measures, aggregates, segments, chart types, drilling into executions, and efficiency and pass/fail charts.
+---
+
 # Test Insights
 
 Insights turns your Testkube executions into a real-time dataset you can analyze to better understand how you work.

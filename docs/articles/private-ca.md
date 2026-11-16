@@ -1,3 +1,7 @@
+---
+description: Make the Control Plane, Runner, Test Workflows, Git checkouts and Connected MCP Servers trust certificates signed by a private certificate authority through a CA bundle secret.
+---
+
 # Using a private certificate authority (CA)
 
 Installations which must serve Testkube endpoints or Git repositories using

@@ -1,3 +1,7 @@
+---
+description: Create Teams of Organization members, edit Team settings and add or remove Team Members, so a Team can be given a Role in Environments or Resource Groups.
+---
+
 # Testkube Teams
 
 Testkube Teams allow you to group Organization members into Teams that can then be assigned to either

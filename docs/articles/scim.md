@@ -1,3 +1,7 @@
+---
+description: Provision users and teams from Okta or Microsoft Entra ID with SCIM, covering role and entitlement URNs, the response format setting, on-prem enablement and troubleshooting.
+---
+
 # SCIM Integration Guide
 
 ## Overview

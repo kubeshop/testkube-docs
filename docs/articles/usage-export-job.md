@@ -1,3 +1,7 @@
+---
+description: Generate an encrypted usage report for license reporting from an on-prem Control Plane with `testkube pro export usage` or Helm, with flags, values and troubleshooting.
+---
+
 # Offline Usage Export
 
 Generate an encrypted usage report from your on-prem Testkube Enterprise control plane when the online licensing path is not available. The export runs as a one-shot Kubernetes Job, reads your Enterprise database (MongoDB or PostgreSQL), and produces a `.zip` file containing encrypted usage data for license reporting.

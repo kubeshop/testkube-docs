@@ -1,3 +1,7 @@
+---
+description: Manage Testkube resources and Runners with ArgoCD and run Test Workflows after a sync with a PostSync resource hook or a Kubernetes Event Trigger, without ArgoCD pruning execution pods.
+---
+
 # Using Testkube with ArgoCD
 
 This document describes how you can use Testkube with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/). As a prerequisite, you should have good understanding

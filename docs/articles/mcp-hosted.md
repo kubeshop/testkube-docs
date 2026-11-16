@@ -1,3 +1,7 @@
+---
+description: Connect AI tools to the Control Plane MCP endpoint with OAuth or an API token, find the endpoint URL, and enable the endpoint for self-hosted installations through Helm and Dex.
+---
+
 # Testkube Control Plane MCP Endpoint
 
 The Testkube Control Plane provides an MCP endpoint that allows you to connect directly to Testkube without running a local MCP server. This is the recommended approach for most users.

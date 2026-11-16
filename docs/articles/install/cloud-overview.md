@@ -1,3 +1,7 @@
+---
+description: How the Cloud Control Plane hosted by Testkube works with Runners in your infrastructure, how to get started, and which egress and ingress traffic to allow.
+---
+
 # Testkube Cloud Control Plane
 
 If you don't want to host the Testkube Control Plane in your infrastructure, you can use the Cloud Control Plane provided

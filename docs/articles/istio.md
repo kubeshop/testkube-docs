@@ -1,3 +1,7 @@
+---
+description: Testkube compatibility with Istio, and the Helm values needed without native sidecars, such as disabling sidecar injection for executions and holding pods until the proxy is ready.
+---
+
 # Using Istio
 
 An Istio mesh can be configured in several ways.

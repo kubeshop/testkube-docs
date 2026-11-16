@@ -1,3 +1,7 @@
+---
+description: Use a Test Workflow as the Kargo verification of a Stage, with an AnalysisTemplate that runs it on a named Runner so that only verified Freight is promoted to the next Stage.
+---
+
 # Using Testkube with Kargo
 
 This document describes how you can use Testkube with [Kargo](https://docs.kargo.io/) to verify a new version of your application in one Stage before Kargo lets it move on to the next. As a prerequisite, you should have a good understanding

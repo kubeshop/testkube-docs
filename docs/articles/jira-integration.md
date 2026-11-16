@@ -1,3 +1,7 @@
+---
+description: Create Atlassian Jira issues for failed Test Workflow executions with a reusable WebhookTemplate, a Secret for the Jira API token and label selectors that limit which Workflows create issues.
+---
+
 # Atlassian Jira
 
 You can use Webhooks to create issues in Atlassian JIRA projects, but you will first need to use the [JIRA REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v3/)

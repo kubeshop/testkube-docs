@@ -1,3 +1,7 @@
+---
+description: Create and manage Kubernetes Triggers in the Dashboard, from the trigger condition and action wizard to the Settings, Resource Group and YAML Definition tabs.
+---
+
 # Kubernetes Triggers
 
 The Testkube Dashboard allows you to create and manage the Kubernetes Triggers available in your

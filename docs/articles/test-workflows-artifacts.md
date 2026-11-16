@@ -1,3 +1,7 @@
+---
+description: Collect files from Test Workflow steps with the artifacts property, compress them, gather them from parallel steps, and see which JUnit, performance and Influx reports Testkube extracts.
+---
+
 # Test Workflows Artifacts
 
 Testkube can be configured to retrieve any file artifacts that are produced by tools and scripts executed in

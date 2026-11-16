@@ -1,3 +1,7 @@
+---
+description: How Testkube helps troubleshoot failed tests by collecting logs, artifacts and JUnit reports, with log highlighting, log comparison and AI Insights in the Dashboard.
+---
+
 # Troubleshooting Tests
 
 ## Introduction

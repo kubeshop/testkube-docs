@@ -1,3 +1,7 @@
+---
+description: Login options for the Cloud Control Plane and how to set up IdP-initiated login from Okta with an OIDC application.
+---
+
 # Custom SSO
 
 The [Testkube Cloud Control Plane](/articles/install/cloud-overview) supports login via GitHub, GitLab and email magic links.

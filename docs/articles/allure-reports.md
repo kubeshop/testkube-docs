@@ -1,3 +1,7 @@
+---
+description: Example Test Workflow that runs Pytest tests and then generates an Allure report, which is saved as an artifact and opened from the Artifacts tab in the Dashboard.
+---
+
 # Using Allure Reports in your Workflows
 
 Allure Reports is a popular [open-source tool](https://github.com/allure-framework/allure2) for generating reports for individual test results, and

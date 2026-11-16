@@ -1,3 +1,7 @@
+---
+description: How Testkube turns a Test Workflow into Kubernetes Jobs and Pods, covering container merging, pure steps, the init process, image metadata from private registries and deleting a Workflow mid-run.
+---
+
 # Test Workflows - High-Level Architecture
 
 Test Workflows analyze the expected operations and images, and build all the required native Kubernetes resources,

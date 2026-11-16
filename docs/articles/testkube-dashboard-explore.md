@@ -1,3 +1,7 @@
+---
+description: Tour of the Testkube Dashboard home page, covering the Organization and Environment selectors, the left navigation pane, Workflow Insights and Recent Executions.
+---
+
 # Testkube Dashboard
 
 The **Testkube** dashboard offers a centralized user interface for managing Testkube deployments. The dashboard is part of the

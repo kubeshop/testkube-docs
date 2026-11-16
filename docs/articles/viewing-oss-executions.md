@@ -1,3 +1,7 @@
+---
+description: View an Open Source Workflow execution's steps, logs, artifacts and JUnit reports in a hosted read-only viewer with the `testkube view` command, including its flags, limits and privacy.
+---
+
 # Viewing Open Source Executions
 
 Open Source user can view Workflow execution details (step tree, log output, AI analysis, artifacts, and JUnit reports) in a lightweight dashboard hosted by Testkube, no login or Testkube account required.

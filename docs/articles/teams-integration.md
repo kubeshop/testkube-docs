@@ -1,3 +1,7 @@
+---
+description: Send a message to a Microsoft Teams channel when a Test Workflow execution finishes, using a Teams incoming webhook and a Testkube Webhook with a payload template.
+---
+
 # Microsoft Teams
 
 Webhooks can also be used to send messages to Microsoft Teams channels.

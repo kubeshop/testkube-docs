@@ -1,3 +1,7 @@
+---
+description: Checklist to validate an on-premises Testkube Enterprise upgrade, covering workloads, migrations, license, SSO, storage, execution, ingress, Runners, integrations and rollback readiness.
+---
+
 # Testkube Enterprise Post-Upgrade Runbook
 
 Use this runbook immediately after a Testkube Enterprise upgrade.
